@@ -11,7 +11,7 @@ The markup is reStructuredText_ with Sphinx_ extensions.
 
 .. _Nordion: http://www.nordion.com/
 .. _Dr. Susan Allen: http://www.eos.ubc.ca/~sallen/
-.. _Department of Earth, Ocean and Atmospheric Scienses: http://www.eos.ubc.ca/
+.. _Department of Earth, Ocean and Atmospheric Sciences: http://www.eos.ubc.ca/
 .. _University of British Columbia: http://www.ubc.ca/
 .. _open-source activities: http://douglatornell.ca/projects/
 .. _reStructuredText: http://docutils.sf.net/rst.html
