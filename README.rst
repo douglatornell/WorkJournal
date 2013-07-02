@@ -8,3 +8,11 @@ This journal is about my work as a Research Associate with `Dr. Susan Allen`_ in
 It is also about my `open-source activities`_.
 
 The markup is reStructuredText_ with Sphinx_ extensions.
+
+.. _Nordion: http://www.nordion.com/
+.. _Dr. Susan Allen: http://www.eos.ubc.ca/~sallen/
+.. _Department of Earth, Ocean and Atmospheric Scienses: http://www.eos.ubc.ca/
+.. _University of British Columbia: http://www.ubc.ca/
+.._ open-source activities: http://douglatornell.ca/projects/
+.. _reStructuredText: http://docutils.sf.net/rst.html
+.. _Sphinx: http://sphinx-doc.org/
