@@ -13,6 +13,6 @@ The markup is reStructuredText_ with Sphinx_ extensions.
 .. _Dr. Susan Allen: http://www.eos.ubc.ca/~sallen/
 .. _Department of Earth, Ocean and Atmospheric Scienses: http://www.eos.ubc.ca/
 .. _University of British Columbia: http://www.ubc.ca/
-.._ open-source activities: http://douglatornell.ca/projects/
+.. _open-source activities: http://douglatornell.ca/projects/
 .. _reStructuredText: http://docutils.sf.net/rst.html
 .. _Sphinx: http://sphinx-doc.org/
