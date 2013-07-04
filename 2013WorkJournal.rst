@@ -67,3 +67,6 @@ Neither have done releases yet that include :program:`setuptools-0.7`.
 
 Set up :file:`~/.bash_profile` and :file:`~/.bashrc` files for Susan, and updated her :file:`~/.hgrc` file.
 Talked her through setup of :kbd:`py27-SOG virtualenv`.
+
+Worked on https://bitbucket.org/douglatornell/randopony-tetra/issue/17/.
+3 out of 4 tests completed along with corresponding :meth:`BrevetViews.rider_emails` implemenation.
