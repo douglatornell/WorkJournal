@@ -60,6 +60,8 @@ Restarted them.
 Forced all builds re: Susan's reversion of the mesozooplankton fit;
 see http://bjossa.eos.ubc.ca:9000/SOG/changeset/1c1c453e6b29/SOG-code
 
+Attended Physical Ocgy seminar where Jessica Spurgin talked about her research: "A numerical study of downwelling submarine canyons: The results are in!".
+
 Investigated implications of Python :program:`setuptools`/:program:`distribute` merge for :program:`pip` and :program:`virtualenv`.
 Neither have done releases yet that include :program:`setuptools-0.7`.
 
