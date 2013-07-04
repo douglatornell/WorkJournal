@@ -40,3 +40,28 @@ Moved into office 3053.
 
 Toured ESB 5th floor rooms re: location for SWC bootcamp in Sep.
 Tentatively settled on boardroom on 26 & 27 Sep.
+
+
+Wed 03-Jul-2013
+~~~~~~~~~~~~~~~
+
+Got wired IP address assigned for :kbd:`tom`.
+
+Tested Sublime Text 3 InsertDate package but it doesn't seem to work, so removed it again.
+
+Investigated changes in EC online data.
+It appears that the YVR sensors and reporting tools were changed from old EC to new NAV Canada on about 11-Jun.
+The new YVR station number is 51442 in contrast to 889 that was used in :program:`bloomcast`.
+Started writing email to Pat Wong @ EC re: station id discontinuity and availability of near-real-time hourly cloud fraction data from YVR but climate.weatheroffice.gc.ca site went down.
+To be continued...
+
+Buildbot slaves on :kbd:`cod`, :kbd:`nerka`, and :kbd:`snapper` all went down due to network/workstation issues.
+Restarted them.
+Forced all builds re: Susan's reversion of the mesozooplankton fit;
+see http://bjossa.eos.ubc.ca:9000/SOG/changeset/1c1c453e6b29/SOG-code
+
+Investigated implications of Python :program:`setuptools`/:program:`distribute` merge for :program:`pip` and :program:`virtualenv`.
+Neither have done releases yet that include :program:`setuptools-0.7`.
+
+Set up :file:`~/.bash_profile` and :file:`~/.bashrc` files for Susan, and updated her :file:`~/.hgrc` file.
+Talked her through setup of :kbd:`py27-SOG virtualenv`.
