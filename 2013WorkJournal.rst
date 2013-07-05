@@ -104,3 +104,32 @@ Accepted "invited" lightening talk slot for my bloomcast talk at PyCon.ca.
 Registered for conference, and book accommodation at the Chestnut residence for Fri 9-Aug through Tue 13-Aug.
 Signed up to sprint on something; need to decide between Pyramid and CPython.
 (pycon)
+
+
+Fri 05-Jul-2013
+~~~~~~~~~~~~~~~
+
+Helped Tara sort out a segmentation fault in her working copy of SOG.
+It was caused by some pretty messed up twisted merges that resulted in the :file:`chemistry_model.f90` memory allocation subroutines being missing.
+(SOG)
+
+EOAS Software Carpentry bootcamp is confirmed for 26 & 27 September.
+(SWC)
+
+Started reading Sublime Text plugin docs and tutorials with an eye toward creating a snippets package for Sphinx roles etc., and perhaps porting some of my favourite packages to 3.
+Turns out that Sphinx snippets were as simple as creating :file:`Packages/User/Sphinx.sublime-completions` and defining the completions I wanted based on what's done in :file:`Packages/sublime-rst-completion/RestructuredText.sublime-completions`.
+Sent a pull request to https://github.com/dbousamra/sublime-rst-completion re: changing the OS/X key mapping to avoid shadowing :kbd:`super+[bik]`.
+
+Worked on assessing EC datamart service wrt bloomcast.
+Datamart top level README is at http://dd.weatheroffice.gc.ca/about_dd_apropos.txt.
+The near-real-time XML data (aka SWOB) are at http://dd.weatheroffice.ec.gc.ca/observations/swob-ml/.
+They are organized by day, station, and hour and the file naming convention is documents at http://dd.weatheroffice.ec.gc.ca/observations/swob-ml/.
+The SWOB-ML schema is documented at http://dd.weatheroffice.ec.gc.ca/observations/doc/SWOB-ML_Product_User_Guide_v5.2_e.pdf.
+
+Things to be aware of:
+
+  * The SWOB data are purged on a rolling 30-day basis.
+  * The way in which YVR cloud fraction is reported changed on about 2013-06-13 when the YVR station sensors changed from EC to Nav Canada
+
+Subscribed to :kbd:`dd_info` email list (powered by Mailman and Python :-)
+(bloomcast)
