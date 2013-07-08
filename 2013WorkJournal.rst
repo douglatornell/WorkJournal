@@ -133,3 +133,10 @@ Things to be aware of:
 
 Subscribed to :kbd:`dd_info` email list (powered by Mailman and Python :-)
 (bloomcast)
+
+
+Sun 07-Jul-2013
+~~~~~~~~~~~~~~~
+
+Experimented with moving :file:`Packages/User/Sphinx.sublime-completions` to :file:`Packages/sublime-sphinx-completion/` with an eye toward releasing it as a package on Github.
+Confirmed that :file:`Packages/User/Sphinx.sublime-completions` can augment completions defined in :file:`Packages/sublime-sphinx-completion/Sphinx.sublime-completions`, which provides an extension mechanism for user-defined Sphinx roles.
