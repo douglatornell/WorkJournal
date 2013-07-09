@@ -140,3 +140,39 @@ Sun 07-Jul-2013
 
 Experimented with moving :file:`Packages/User/Sphinx.sublime-completions` to :file:`Packages/sublime-sphinx-completion/` with an eye toward releasing it as a package on Github.
 Confirmed that :file:`Packages/User/Sphinx.sublime-completions` can augment completions defined in :file:`Packages/sublime-sphinx-completion/Sphinx.sublime-completions`, which provides an extension mechanism for user-defined Sphinx roles.
+
+
+Week 28
+-------
+
+Mon 08-Jul-2013
+~~~~~~~~~~~~~~~~~
+
+Updated work plan with my goals for this week and next.
+
+Tagged the :program:`SOG`, :program:`SOG-code`, and :program:`SoG-bloomcast` repos at the revisions that were used for the 2013 spring bloomcast runs.
+(bloomcast)
+
+Cloned my https://github.com/douglatornell/sublime-rst-completion fork into my :file:`Packages` directory so that I can add the requested :file:`README.rst` docs to my pull request, and get Julython points for the commit (I hope).
+Updated :file:`README.rst` with OS/X key bindings and another minor consistency edit and added it to the pull request.
+
+Read Mark Halverson's "A Strait of Georgia Primer" (28-Feb-2013).
+(MEOPAR)
+
+Weekly mtg w/ Susan:
+
+  * Discussed SoG Primer; Work w/ Mark to get it on the web
+  * Susan and Rich will discuss & decide on SSMEP-ish web presence on 16-Jul
+  * Discussed SOG-forcing data from EC datamart & climate.weatheroffice.gc.ca
+  * Use isiknowledge.com to scope out background for bloomcast paper
+
+Emailed Tim Morgan about status of my office key.
+Delay is apparently not abnormal if a new key has to be cut.
+Sigh.
+
+Sent email to info@swc re: making EOAS bootcamp in Sep official.
+
+Tara reported that the only substantive difference between her working :program:`SOG-code` repo and the reference repo on :kbd:`ocean` is the missing memory allocation code that we identified last week.
+Bisected :program:`SOG-code` repo to figure out when :file:`chemistry_model.f90` memory allocation code got dropped, and the answer is in Ben's merge from :kbd:`changeset:1702:77d52eb0cf83` to :kbd:`changeset:1703:1b8cb697c7b7`.
+Need to talk to Ben about what's in his working copy, and how the chemistry and carbonate modules are used.
+(SOG)
