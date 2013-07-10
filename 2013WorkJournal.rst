@@ -175,4 +175,46 @@ Sent email to info@swc re: making EOAS bootcamp in Sep official.
 Tara reported that the only substantive difference between her working :program:`SOG-code` repo and the reference repo on :kbd:`ocean` is the missing memory allocation code that we identified last week.
 Bisected :program:`SOG-code` repo to figure out when :file:`chemistry_model.f90` memory allocation code got dropped, and the answer is in Ben's merge from :kbd:`changeset:1702:77d52eb0cf83` to :kbd:`changeset:1703:1b8cb697c7b7`.
 Need to talk to Ben about what's in his working copy, and how the chemistry and carbonate modules are used.
+Subsequent discussion with Susan lead to the hypothesis that Ben deliberately deleted the memory allocation code in :file:`chemistry_model.f90` when he was finished development because the quantities that he was allocating memory for are actually derived quantities.
+Need to confirm that idea with Ben.
 (SOG)
+
+
+Tue 09-Jul-2013
+~~~~~~~~~~~~~~~
+
+Picked up keys to my office and the GFD lab.
+Had to pay $20 deposit because I didn't pay one for my TRIUMF keys, or that payment is lost in the mists of time, or something.
+Won't get $20 back until I return both TRIUMF and ESB keys; IOW it not really a deposit...
+
+Confirmed with Ben that memory allocation in :file:`chemistry_model.f90` was indeed only used for development and was deliberately deleted before he pushed code to :kbd:`ocean` repo.
+Helped Tara prepare her oxygen model changes to be push to the :kbd:`ocean` repo.
+They caused new build failures for:
+
+* R3 baseline regression
+* YAML infile
+* R3 microzoo regression
+* R3 no remin regression
+
+Those are expected failures due to the change in the dissolved oxygen boundary condition values.
+Diffs are in run stdout file, standard chemistry timeseries file, profile file, and Hoffmueller file.
+(SOG)
+
+:kbd:`sublime-rst-completions` pull request was merged.
+Cleaned up my fork, flipped my working copy back to the :kbd:`master` branch, and synced it with upstream.
+
+Created :kbd:`sublime-sphinx-completions` repo.
+
+Got 24" 1920 x 1080 monitor - yahoo!
+
+Drafted email to pat.wong@ec.gc.ca re: QA for datamart vs. climate.weatheroffice, and requesting algorithm for cf octas to tenths.
+
+Afternoon coffee with Valentina.
+
+Updated :program:`python2.7` :program:`virtualenvwrapper` on :kbd:`tom` to 4.0.
+Updated :program:`pip-3.2` and :program:`virtualenv-3.2` to 1.3.1 and 1.9.1, repectively.
+
+Started porting :program:`bloomcast` to :program:`python3.2`.
+Chose 3.2 because that is the version of :program:`python3` that ships with Ubuntu 12.04 LTS, the target environment on the :kbd:`ocean` machines.
+Ran into my chronic compilation issues on :kbd:`tom` during installation of :program:`MarkupSafe` and :program:`numpy` in a clean virtualenv; :program:`numpy` installation failed.
+Time to reload :program:`Xcode` and :program:`python3.2`, and perhaps try :program:`homebrew` for the latter.
