@@ -198,6 +198,7 @@ They caused new build failures for:
 
 Those are expected failures due to the change in the dissolved oxygen boundary condition values.
 Diffs are in run stdout file, standard chemistry timeseries file, profile file, and Hoffmueller file.
+Built new refs for R3 baseline regression build.
 (SOG)
 
 :kbd:`sublime-rst-completions` pull request was merged.
@@ -218,3 +219,33 @@ Started porting :program:`bloomcast` to :program:`python3.2`.
 Chose 3.2 because that is the version of :program:`python3` that ships with Ubuntu 12.04 LTS, the target environment on the :kbd:`ocean` machines.
 Ran into my chronic compilation issues on :kbd:`tom` during installation of :program:`MarkupSafe` and :program:`numpy` in a clean virtualenv; :program:`numpy` installation failed.
 Time to reload :program:`Xcode` and :program:`python3.2`, and perhaps try :program:`homebrew` for the latter.
+(bloomcast)
+
+
+Wed 10-Jul-2013
+~~~~~~~~~~~~~~~
+
+Installed :program:`Xcode` on :kbd:`tom`.
+Used :program:`homebrew` to install :program:`python2.7.5` and :program:`python3.3.2`, both with the :kbd:`--with-brewed-openssl` option, as :program:`python` and :program:`python3` repsectively.
+Tweaked :file:`.bash_profile` to add :file:`/usr/local/share/python` to :envvar:`PATH` and put :file:`~/bin` and :file:`~/Documents/scripts` at the front of :envvar:`PATH`.
+Also adjusted path to source :file:`virtualenvwrapper.sh` from.
+Used :program:`pip` installed with :program:`homebrew` :program:`python2.7.5` (now the default) to install :program:`virtualenv` and :program:`virtualenvwrapper`.
+Used :program:`homebrew` to install :program:`python3.2.3` with the :kbd:`--with-brewed=openssl` option so that I have a comparable version to the :kbd:`ocean` machines.
+
+Created at new :kbd:`bloomcast-3.2` virtualenv and tried installing :program:`bloomcast` dependencies again:
+
+* :program:`MarkupSafe` speedups extension compiled successfully
+* :program:`PyYAML` extension compiled successfully after doing :kbd:`brew install libyaml`
+* :program:`numpy` compiled and installed successfully, though with plenty of compiler warnings
+* :program:`matplotlib` compiled and installed successfully, though with plenty of compiler warnings
+
+Tagged beginning of :program:`bloomcast` port to Python 3.
+Got test suite running under Python 3 with the exception of 4 tests that I marked as expected failures because they test SOG infile reading implementation details that no were changed in the Python 2.6 version without updating the tests.
+:program:`MarkupSafe` is presently incompatible with Python 3.2 so removed it from dependencies as :program:`Mako` has been modified to not try to use it under 3.2.
+Main :program:`bloomcast` script can only be run if I remove the relative import changes that I made to get the test suite to run under :command:`unitest discover` and :program:`pytest`; need to fix that.
+Even when it does run, it fails during infile editing.
+To be continued...
+(bloomcast)
+
+Checked YAML infile build results; they show the same failure pattern as the R3 baseline regression build.
+Built new refs for YAML infile build.
