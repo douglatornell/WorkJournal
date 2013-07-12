@@ -249,3 +249,28 @@ To be continued...
 
 Checked YAML infile build results; they show the same failure pattern as the R3 baseline regression build.
 Built new refs for YAML infile build.
+(SOG)
+
+
+Thu 11-Jul-2013
+~~~~~~~~~~~~~~~
+
+Finished and sent email to pat.wong@ec.gc.ca re: QA for datamart vs. climate.weatheroffice, and requesting algorithm for cf octas to tenths.
+(bloomcast)
+
+Explored :command:`hg rebase` re: improving Mercurial workflow for SOG.
+(SOG)
+
+Long bike ride with Susan to Iona then around UBC: 49.2 km; then worked at home.
+
+Did more research on whether or not we should to license SOG docs under a Creative Commons license in constrast the the Apache 2.0 license that we've settled on for the code.
+Coming to the conclusion that one license is sufficient.
+(SOG)
+
+Decided on public domain release with emphsis via unlicense.org for :kbd:`sublime-sphinx-completions` project.
+Wrote :file:`README.rst`.
+
+Checked R3 microzoo regression and R3 no remin regression build results; they show the same failure pattern as the R3 baseline regression build.
+Susan checked the graphs.
+Built new refs for those builds.
+(SOG)
