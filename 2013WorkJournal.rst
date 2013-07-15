@@ -274,3 +274,29 @@ Checked R3 microzoo regression and R3 no remin regression build results; they sh
 Susan checked the graphs.
 Built new refs for those builds.
 (SOG)
+
+
+Fri 12-Jul-2013
+~~~~~~~~~~~~~~~
+
+Worked on setup of EOAS SWC bootcamp.
+(SWC)
+
+Built a Python 2.7 virutalenv for :program:`bloomcast` and tried to run the test suite via :program:`nose`; hit the same relative import issue as under Python 3.2.
+Running the script hit the same infile editing issue in :program:`colander` as under Python 3.2.
+Based on the decision to build the new :kbd:`salish` compute machine with Ubuntu 13.04, and the likelihood that :program:`bloomcast` will run there, changed port traget to Python 3.3.
+Added :command:`bloomcast` entry point to resolve relative import issue.
+Finished porting :program:`bloomcast` to Python 3.3.
+Had to do a provisional port of :program:`SOGcommand` to Python 3 too because :program:`bloomcast` uses its API.
+:program:`SOG-code` runs fail due to :program:`bloomcast` infiles not having been kept up to date with changes in the repo.
+Updated :file:`2013_bloomcast_infile.yaml` to match :program:`SOG-code` repo.
+(bloomcast)
+
+Read MEOPAR stakeholders workshop report.
+(MEOPAR)
+
+Tweaked :file:`rdiff_backup.backup.py` script to use :command:`ssh matisse true` to wake :kbd:`matisse` after remote connection to :kbd:`sada.home` network via :kbd:`wall`.
+However, it seems that :command:`ssh` from :kbd:`wall` cannot consistently wake :kbd:`matisse` (though it worked in a test yesterday).
+
+Helped Susan update an old SciPy/NumPy script for the SOG freshwater parameterization fit that had rotted out due to API changes.
+(SOG)
