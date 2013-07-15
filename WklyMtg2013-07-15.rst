@@ -1,0 +1,120 @@
+***********************
+Weekly Research Meeting
+***********************
+
+2013-07-15
+==========
+
+
+Miscellaneous
+-------------
+
+Last Week
+~~~~~~~~~
+
+* Got office and lab keys
+* Got 24" monitor
+
+
+This Week
+~~~~~~~~~
+
+* ``salish`` should come online
+* Get DisplayPort to DVI-D adapter and cable for tom/monitor
+
+
+bloomcast
+---------
+
+Last Week
+~~~~~~~~~
+
+* tagged 2013 code in repos
+* Emailed Pat Wong re: QA for datamart vs. climate.weatheroffice and requested algorithm for cloud fraction octas to tenths
+* Ported SoG-bloomcast to Python 3.3
+
+
+This Week
+~~~~~~~~~
+
+* Get bloomcast runs working re: infile issue
+* Confirm infile values re: mesozoo-picophyto interaction
+* Research publication context for operational ocgy models
+* Design code to pull VENUS ferry data into bloomcast for plotting
+* Design code to automatically maintain SOG-forcing data repo from climate.weatheroffice and datamart
+* Come up with a name for the primary productivity operational deployment of SOG; SoG-prodprobe?
+
+
+SOG
+---
+
+Last Week
+~~~~~~~~~
+
+* Helped Tara get her code merged into upstream SOG-code repo
+* Rebuilt a bunch of refs re: Tara's DOxy BC changes and freshwater model changes
+* Provisionally ported SOGcommand to Python 3.3
+* Explored hg rebase re: improving SOG version control workflow
+* Decided that SOG can be released under just the Apache 2.0 license as there is no good reason to release the docs under a separate Creative Commons license
+
+
+This Week
+~~~~~~~~~
+
+* Change spring diatom bloom build slave to use SoG-bloomcast YAML infile edits
+* Make SOGcommand operational under both Python 2.7 and 3.3 because SCons hasn't been ported to Python 3 yet
+
+
+MEOPAR/SSMEP
+------------
+
+Last Week
+~~~~~~~~~
+
+* Read Mark's "A Strait of Georgia Primer"
+
+  * Would be good to make links to data sources live
+  * Could do with a few typo corrections and clarifications
+  * Could be published to web as either PDF or converted to RST
+
+* Read stakeholder's workshop report
+
+  * Post PDF to web as static asset
+
+
+This Week
+~~~~~~~~~
+
+* Susan and Rich will decide on web presence for MEOPAR/SSMEP
+
+
+GEOTRACES
+---------
+
+Last Week
+~~~~~~~~~
+
+* Nothing
+
+
+This Week
+~~~~~~~~~
+
+* Copy and run Paul Meyers NEMO code on westgrid
+
+
+SWC
+---
+
+Last Week
+~~~~~~~~~
+
+* Email to Admin@swc got the ball rolling officially for Sep Bootcamp
+* Coffee with Julia to discuss plans for Sep bootcamp
+
+
+This Week
+~~~~~~~~~
+
+* Draft schedule for Sep bootcamp
+* Start work on github page for Sep bootcamp
