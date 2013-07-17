@@ -247,6 +247,9 @@ Even when it does run, it fails during infile editing.
 To be continued...
 (bloomcast)
 
+Had coffee with Julia to start planning for Sep EOAS SWC bootcamp.
+(SWC)
+
 Checked YAML infile build results; they show the same failure pattern as the R3 baseline regression build.
 Built new refs for YAML infile build.
 (SOG)
@@ -300,3 +303,66 @@ However, it seems that :command:`ssh` from :kbd:`wall` cannot consistently wake 
 
 Helped Susan update an old SciPy/NumPy script for the SOG freshwater parameterization fit that had rotted out due to API changes.
 (SOG)
+
+
+Week 29
+-------
+
+Mon 15-Jul-2013
+~~~~~~~~~~~~~~~~~
+
+Debugged :kbd:`SOG-code-bloomcast` runtime failure due to bad infile structure; I had done an :command:`hg update` in my :file:`SOG_2and3` repo to an earlier version that I forgot to undo before I created the Python 3.3 port patch.
+Mixing layer depth graph generation fails with a :py:exc:`IndexError` if the wind data date is outside the range of the run dates.
+:program:`Mako` is raising a :py:exc:`TypeError` during the results template rendering.
+(bloomcast)
+
+Prepared for weekly mtg w/ Susan.
+
+* Susan and Rich have decided on a single web domain/site with Susan and I taking the lead, but we need a new name that includes "observation"
+* Discussed SWC bootcamp outline:
+
+  * Day 1: minimal sh intro, git intro, python intro; use YVR air temperature and precipitation data as basis for examples, do data read, plots, histograms, distruibution fitting, and export code from ipynb to source file(s); us git as we go along to track the project
+
+  * Day 2: base examples on plotting data on maps, use git collaboratively, need to work in testing, wrap up with python, sh & cron automation
+
+  * Postpone opening of registration until 30-Jul
+  * Riff on SWC pre-assessment questionaire
+
+
+Tue 16-Jul-2013
+~~~~~~~~~~~~~~~
+
+Opened ticket for Charles to install buildbot package on ocean machines.
+Re-enabled buildbot on-push hooks in :program:`SOG`, :program:`SOG-code`, :program:`SOG-forcing`, and :program:`SOG-initial` repos, and sent email to SOG users reminding them how the hooks work, and telling them to get rid of the :kbd:`remote_cmd` section of their :file:`.hg/hgrc` files in their clones of those repos.
+
+Helped Tara get new Fraser and Englishman river files added to the :program:`SGO-forcing` repo so that :kbd:`YAML infile` buildbot case could run to completion.
+(SOG)
+
+Built a Python 3 :program:`bloomcast` virtualenv on :kbd:`salish`.
+After Charles changed :file:`/data` so that it was writable, I created :file:`/data/dlatorne/.virtualenvs/` and used :command:`pyvenv-3.3` to create a :file:`bloomcast` virtualenv within it.
+With the virtualenv activated I installed :program:`setuptools` via::
+
+  wget https://bitbucket.org/pypa/setuptools/downloads/ez_setup.py -O - | python
+
+and then used :command:`easy_install` to install :program:`pip`.
+I installed the required packages manually with reference to :file:`SOG-bloomcast/requirements.txt`.
+To compile C extensions I opened at ticket for Charles to install the :program:`phthon-dev` and :program:`python3-dev` packages.
+Also opened a ticket to get the :program:`libyaml-dev` and :program:`python3-matplotlib` packages installed; when that was done I symlinked :program:`matplotlib`, :program:`dateutil`, and :program:`pytz` from :file:`/usr/lib/python3/dist-packages/`.
+I was able to use :program:`pip` to installed the rest of the packages, although :program:`numpy` did warn about the lack of :program:`atlas`, :program:`blas`, and :program:`lapack` packages.
+(bloomcast)
+
+Cloned the :program:`SOG-code` repo to :kbd:`salish` and confirmed that :kbd:`salish` is *fast*; :command:`make clean && time make` reports about 5 seconds, and :command:`make clean && time make -j2` reports about 2.5 seconds.
+Letting :command:`make` use more than 2 processes tends to result in failures, and event :kbd:`-j2` failed at least once.
+Created a Python 2.7 virtualenv for :program:`scons` and installed it from the source tarball.
+Playing with :command:`scons --clean && time scons -j` I found that 8 processes gives the minimum compile/link time of about 3 seconds.
+
+Cloned the :program:`SOG`, :program:`SOG-forcing`, and :program:`SOG-initial` repos.
+Tried to install :program:`SOG` under Python 2.7 and it failed because :file:`Python.h` was missing, so I re-opened the :program:`python-dev` request ticket.
+Applied the work-in-progress Python 3 patch to :program:`SOG` and was able to install it.
+Ran the :file:`infile.yaml` case and it completed in 6 minutes 4.028 seconds, in contrast to a :program:`buildbot` of the same case that happened this afternoon on :kbd:`herring` that took 20 minutes 43 seconds.
+(SOG)
+
+Researched papers on operational ocean models on Web of Science: 2 journals look promising; Journal of Operational Oceanography, and Environmental Modelling and Software.
+
+Continued working on tracking down the :program:`Mako` :py:exc:`TypeError` issue in the Python 3.3 port.
+(bloomcast)
