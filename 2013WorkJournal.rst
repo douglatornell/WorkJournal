@@ -391,3 +391,19 @@ New files are formatted differently, and include data for 2011 and part of 2012.
 Attended physical ocgy seminar on SoG pH and aragonite saturation given by Ben M-M.
 
 Finally got DVI working on BenQ monitor with a MiniDisplayPort to HDMI cable.
+
+
+Thu 18-Jul-2013
+~~~~~~~~~~~~~~~
+
+Created https://github.com/douglatornell/sublime-sphinx-completion and pushed intial work on the package to it.
+
+Long bike ride with Susan to Iona then around UBC: 49.7 km; then worked at home.
+
+Restarted :kbd:`herring` and :kbd:`sable` build slaves.
+:kbd:`cod` and :kbd:`nerka` are down due to disk failure and configuration issues after the :kbd:`ocean` upgrade.
+(SOG)
+
+Worked with Susan and Charles to resolve Tara's and Susan's inability to push commits to the :kbd:`ocean` hg repos; :kbd:`sallen` group on :kbd:`ocean` was missing.
+
+Wrote G+ post about porting Mako templates to Python 3 and the need for manual checking for deprecated syntax.
