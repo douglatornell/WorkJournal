@@ -366,3 +366,28 @@ Researched papers on operational ocean models on Web of Science: 2 journals look
 
 Continued working on tracking down the :program:`Mako` :py:exc:`TypeError` issue in the Python 3.3 port.
 (bloomcast)
+
+
+Wed 17-Jul-2013
+~~~~~~~~~~~~~~~
+
+Tried to restart :program:`buidbot` slaves after last night's :kbd:`ocean` upgrade.
+:kbd:`bjossa` reports a stale NFS handle for :file:`/ocean`, :kbd:`nerka` says that :file:`ocean` is not mounted, and :kbd:`cod` and :kbd:`coho` are down.
+(SOG Buildbot)
+
+Continued email conversation with Amy@swc re: preparations for SWC bootcamp.
+(SWC)
+
+Resolved :program:`Mako` :py:exc:`TypeError` issue in the Python 3.3 port; it was caused by the use of :py:builtin:`xrange` in the template.
+Started working on confirming that current :program:`SOG-code` produces the same :program:`bloomcast` results as the 2013 production version did.
+(bloomcast)
+
+Created a new :kbd:`SOG-2.7` virutalenv and used it to update Python package dependencies for :program:`SOGcommand`.
+Determined that :command:`scons -j2` is optimal for full compilation of :program:`SOG` on :kbd:`tom.`
+Worked on understanding the differences between the new river flow files that Tara pushed to :program:`SOG-forcing` yesterday and the :file:`*_hostirc.dat` files that we have been using.
+New files are formatted differently, and include data for 2011 and part of 2012.
+(SOG)
+
+Attended physical ocgy seminar on SoG pH and aragonite saturation given by Ben M-M.
+
+Finally got DVI working on BenQ monitor with a MiniDisplayPort to HDMI cable.
