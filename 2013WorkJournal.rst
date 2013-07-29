@@ -383,7 +383,7 @@ Started working on confirming that current :program:`SOG-code` produces the same
 (bloomcast)
 
 Created a new :kbd:`SOG-2.7` virutalenv and used it to update Python package dependencies for :program:`SOGcommand`.
-Determined that :command:`scons -j2` is optimal for full compilation of :program:`SOG` on :kbd:`tom.`
+Determined that :command:`scons -j2` is optimal for full compilation of :program:`SOG` on :kbd:`tom`.
 Worked on understanding the differences between the new river flow files that Tara pushed to :program:`SOG-forcing` yesterday and the :file:`*_hostirc.dat` files that we have been using.
 New files are formatted differently, and include data for 2011 and part of 2012.
 (SOG)
@@ -407,3 +407,24 @@ Restarted :kbd:`herring` and :kbd:`sable` build slaves.
 Worked with Susan and Charles to resolve Tara's and Susan's inability to push commits to the :kbd:`ocean` hg repos; :kbd:`sallen` group on :kbd:`ocean` was missing.
 
 Wrote G+ post about porting Mako templates to Python 3 and the need for manual checking for deprecated syntax.
+
+
+Fri 19-Jul-2013
+~~~~~~~~~~~~~~~
+
+Manually updated :program:`sublime-rst-completion` package via git fetch/merge since automatic updating doesn't seem to work.
+Determined that :program:`SublimeLinter` packages gets messed every time that it auto-updates because the unpatched Sublime 2 version gets dropped in the :file:`Installed Packages/` directory; added a comment to https://github.com/SublimeLinter/SublimeLinter/issues/479.
+
+Tagged v3.0b1 of :program:`SoG-bloomcast` re: completion of port to Python 3.3.
+Started evaluation vs. results of 2013 production deployment; running on :kbd:`salish`.
+Determined that :command:`scons -j16` is optimal for full compilation of :program:`SOG` on :kbd:`sable`.
+Had to add a symlink to :file:`/usr/lib/python3/dist-packages/matplotlib-1.2.1.egg-info` to the :program:`bloomcast` virtualenv on :kbd:`salish` to get :program:`bloomcast` to install with :command:`pip install -e .`.
+Had to add the :kbd:`northern_water_power_riverflow_influence` and :kbd:`northern_water_normalization_riverflow_influence` parameters that Susan added yesterday to :file:`2013_bloomcast_infile.yaml`.
+Had to tweak path to :program:`SOG` executable in :py:mod:`bloomcast.py`; it should probably be read from :file:`config.yaml`.
+Susan figured out that differences vs. results of 2013 production deployment are probably due to the river flow forcing data files starting on 19-Jan-2012 instead of 1-Jan-2012; bug in :program:`bloomcast` or glitch at wateroffice.ec.gc.ca?
+(bloomcast)
+
+Mtg w/ Susan, Ben M-M, and Tara to discuss tuning dissolved oxygen results to STRATEGEM data via northern return flow parameters (power and normaliztion factor) that Susan added yesterday.
+Restarted :kbd:`nerka` build slave.
+Got Tara set up to run :program:`SOG` on :kbd:`salish`.
+(SOG)
