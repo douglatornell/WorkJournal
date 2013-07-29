@@ -428,3 +428,9 @@ Mtg w/ Susan, Ben M-M, and Tara to discuss tuning dissolved oxygen results to ST
 Restarted :kbd:`nerka` build slave.
 Got Tara set up to run :program:`SOG` on :kbd:`salish`.
 (SOG)
+
+
+Week 29
+-------
+
+**Vacation** - Washington Coast Cycletour
