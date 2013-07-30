@@ -434,3 +434,38 @@ Week 29
 -------
 
 **Vacation** - Washington Coast Cycletour
+
+
+Week 30
+-------
+
+Mon 29-Jul-2013
+~~~~~~~~~~~~~~~
+
+Restarted :kbd:`snapper` build slave.
+Updated :file:`.local/python2.7/` packages on :kbd:`ocean` because sessions on :kbd:`cod` were throwing errors about :program:`stevedore` and :program:`distribute`.
+All of the :kbd:`ocean` workstations that run build slaves are now on Ubuntu 12.04 LTS and thus Python 2.7, so support for Python 2.6 can be dropped from :program:`SOG` tools and projects.
+Restarted :kbd:`cod` build slave.
+Finished porting :program:`SOGcommand` to run under Python 2.7 and 3.3.
+Added error handling for the case of elements that are present in the YAML schema but missing from the YAML infile.
+Added licensing files and header blocks to :program:`SOGcommand` to relicense it under the Apache License, Version 2.0 in preparation for release to a public repo on Bitbucket.
+(SOG)
+
+Commented out code in :file:`.bashrc` on :kbd:`ocean` that forces :program:`virtualenv` to use :program:`distribute`, selects Python version based on OS ditribution release, and sets up PGF90 environment variable.
+
+Weekly research meeting with Susan:
+
+* Tried to test hypotheses about why the river flow data doesn't start on 1-Jan-2012 and discovered that the climate.weatheroffice URL structure has changed
+* Discussed J. Operational Ocgy and Env Modeling & Software as target journals for bloomcast paper; Douw may be an editor of the latter - check
+* Discussed design of :program:`sog-forcing` update automation that we came up with last week.
+* Agreed on :kbd:`salishsea-meopar.eos.ubc.ca` as domain for EOAS MEOPAR work
+* Discussed :kbd:`SoG-P` as name for :program:`SOG` operational productivity calculation project, but hoping that we can do better
+* Need to write and release the SWC bootcamp announcement email, and move forward with the outline of the bootcamp
+* Need to get serious about bloomcast lightening talk for PyCon.ca
+* Need to run GEOTRACES NEMO on Westgrid
+
+Discovered that climate.weatheroffice has changed their URL structure so that :program:`bloomcast` now fails when it tries to request the Sandheads wind data.
+(bloomcast)
+
+Discussed with Susan and Charles the idea of moving :program:`SOG-buildbot` master and :program:`trac` server from :kbd:`bjossa` to :kbd:`coho` so that the former can be retired, and the latter can serve a useful role despite its Athlon processor.
+(buildbot)
