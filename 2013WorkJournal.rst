@@ -469,3 +469,21 @@ Discovered that climate.weatheroffice has changed their URL structure so that :p
 
 Discussed with Susan and Charles the idea of moving :program:`SOG-buildbot` master and :program:`trac` server from :kbd:`bjossa` to :kbd:`coho` so that the former can be retired, and the latter can serve a useful role despite its Athlon processor.
 (buildbot)
+
+
+Tue 30-Jul-2013
+~~~~~~~~~~~~~~~
+
+It appears that wateroffice.ec.gc.ca is clipping Fraser and Englishman river flow data at an 18 months in the past threshold.
+Today the earliest available data are for 30-Jan-2012.
+Thanksfully that means the problem is not a :program:`bloomcast` bug, but it does mean that the data request strategy will have to change for the SoG operational producivity project.
+(bloomcast)
+
+Released v1.2.1 of SOG repo (:program:`SOGcommand` and docs) and created public mirror repo at https://bitbucket.org/douglatornell/sog/.
+Buildbot shows that v1.2.1 is a brownbag due to basestring -> str change in YAML schema.
+(SOG)
+
+Drafted EOAS bootcamp invitation email and Susan sent it.
+Created pull request to update EOAS bootcamp page with Susan as contact, and remove the statement about registration not yet being open (since it is).
+Started work on bootcamp content in :kbd:`2013-09-ubc branch` of :file:`swc/boot-camps`.
+(SWC)
