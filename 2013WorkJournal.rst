@@ -487,3 +487,38 @@ Drafted EOAS bootcamp invitation email and Susan sent it.
 Created pull request to update EOAS bootcamp page with Susan as contact, and remove the statement about registration not yet being open (since it is).
 Started work on bootcamp content in :kbd:`2013-09-ubc branch` of :file:`swc/boot-camps`.
 (SWC)
+
+
+Wed 31-Jul-2013
+~~~~~~~~~~~~~~~
+
+Email with Amy and Greg @swc re: pre-assessment questionnaire, removal of unqualified bootcamp registratants, and new site and bc github repos.
+(SWC)
+
+With wateroffice clipping data more than 18 months old, and climate.weatheroffice URL changes, decided that the only way to evaluate the :program:`bloomcast` Python 3.3 port on :kbd:`salish` against the results of the 2013 production deployment is to copy the last used forcing data files from the production deployment and use them for the :kbd:`salish` test.
+The results of that evaluation show identical bloom dates for the 2013-04-07 wind data date, and differences in the 4th sig fig for phytoplankton biomass at the bloom peak.
+Based on that, Susan agrees that the results are computationally equivalent, so that aspect of the :program:`bloomcast` port is done.
+(bloomcast)
+
+Fixed string type checking issue in :py:mod:`SOG_infile_schema` that brown-bagged the v1.2.1 release of :program:`SOGcommand` by adding :program:`six` library as a project dependency.
+Confirmed that test suite also suceeds under Python 3.2 and added that to :file:`tox.ini` and as a support version for the package.
+Buildbot testing will use :command:`tox -r -e py27,py32` because the slave workstations have 3.2 installed, not 3.3.
+Added new :file:`infile_bloomcast.yaml` infile based on :program:`bloomcast` average forcing infile, and deleted old generic legacy :file:`infile`, both as part of build slave changes below.
+(SOG)
+
+Discussed build slave changes with Susan:
+
+* SoG spring diatom bloom - no change
+* SoG chemistry infile - change to gfortran, then change to use bloomcast.yaml infile, and rename to Bloomcast.yaml
+* Rivers Inlet - no change
+* YAML infile - rename to Full SOG
+* SOGcommand - change to run tox -r -e py27,py33
+* R3 baseline regression - no change
+* R3 flagellates regeression - change to gfortran
+* R3 no remin regression - no change
+* R3 microzoo regression - no change
+
+Implemented changes.
+(buildbot)
+
+Attended phys ocgy seminar where Tara Howatt talked about Oxygen in SOG.
