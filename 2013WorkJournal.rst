@@ -522,3 +522,37 @@ Implemented changes.
 (buildbot)
 
 Attended phys ocgy seminar where Tara Howatt talked about Oxygen in SOG.
+
+
+Thu 1-Aug-2013
+~~~~~~~~~~~~~~
+
+Home maintenance day.
+
+Helped Susan remotely with :command:`hg rebase` issues, and Tara with :program:`SOG` installation update issue.
+
+
+Fri 2-Aug-2013
+~~~~~~~~~~~~~~
+
+**Shifted Long Weekend** - Semaphore Lakes backpacking trip
+
+
+August
+======
+
+Week 31
+-------
+
+Mon 5-Aug-2013
+~~~~~~~~~~~~~~
+
+Late start after returning rental packs to MEC and selecting a new tent (MEC Volt A/C 3) to replace our 2007 MSR Hubba Hubba with failed waterproofing.
+MEC astonished us by giving us a full value exchange on the MSR.
+
+Settled on Ocean Sciences with Susan as target journal for bloomcast paper.
+Started work on bloomcast lightening talk for PyCon.ca using Google Drive Presentation.
+(bloomcast)
+
+Help Susan unscramble commits from a SOG project directory that accidentally got committed in the :program:`SOG` repo.
+Learned about :command:`hg graft`, :command:`hg export`, :command:`hg patch`, and :command:`hg strip`.
