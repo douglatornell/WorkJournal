@@ -321,7 +321,7 @@ Prepared for weekly mtg w/ Susan.
 * Susan and Rich have decided on a single web domain/site with Susan and I taking the lead, but we need a new name that includes "observation"
 * Discussed SWC bootcamp outline:
 
-  * Day 1: minimal sh intro, git intro, python intro; use YVR air temperature and precipitation data as basis for examples, do data read, plots, histograms, distruibution fitting, and export code from ipynb to source file(s); us git as we go along to track the project
+  * Day 1: minimal sh intro, git intro, python intro; use YVR air temperature and precipitation data as basis for examples, do data read, plots, histograms, distribution fitting, and export code from ipynb to source file(s); us git as we go along to track the project
 
   * Day 2: base examples on plotting data on maps, use git collaboratively, need to work in testing, wrap up with python, sh & cron automation
 
@@ -556,3 +556,21 @@ Started work on bloomcast lightening talk for PyCon.ca using Google Drive Presen
 
 Help Susan unscramble commits from a SOG project directory that accidentally got committed in the :program:`SOG` repo.
 Learned about :command:`hg graft`, :command:`hg export`, :command:`hg patch`, and :command:`hg strip`.
+
+
+Tue 6-Aug-2013
+~~~~~~~~~~~~~~
+
+Finished draft of bloomcast lightening talk for PyCon.ca.
+Checked pyvideo.com metadata.
+Updated speaker bio, and talk abstract.
+(bloomcast)
+
+Weekly research mtg w/ Susan:
+
+* Discussed status of :program:`bloomcast`, :program:`SOG-code`, :program:`SOG-docs`, prep for SWC bootcamp, :program:`NEMO`, :program:`SOG-forcing` update automation, and moving :program:`buildbot` master to :kbd:`coho`.
+* Priorities for this week: Prep for PyCon.ca, NEMO run on jasper, SWC bootcamp outline to Julia, SWC questionnaire mtg w/ Susan
+* Got Susan set up with a Python 3.3 SOG environment on :kbd:`salish`
+
+Started working on trying to run Paul Myers' NEMO configuration on :kbd:`jasper.westgrid.ca`.
+(GEOTRACES)
