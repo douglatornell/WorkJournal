@@ -574,3 +574,18 @@ Weekly research mtg w/ Susan:
 
 Started working on trying to run Paul Myers' NEMO configuration on :kbd:`jasper.westgrid.ca`.
 (GEOTRACES)
+
+
+Wed 7-Aug-2013
+~~~~~~~~~~~~~~
+
+Wrote initial outline of SWC bootcamp for discussion with Susan and Julia.
+Revised bootcamp participants questionnaire, reviewed it with Susan, and sent it to Julia for comments.
+Created https://github.com/douglatornell/2013-09-26-ubc repo for bootcamp.
+Installed RVM and Ruby-2.0.0-p247 (apparently the current stable release).
+:command:`source ~/.rvm/scripts/rvm` is the incantation to activate RVM.
+Installed Jekyll via RVM to allow preview building of bootcamp site.
+Started customization work on bootcamp site.
+(SWC)
+
+Attended phys ocgy seminar: Kate Le Souef, Characterising tidal resonance in the Gully: lessons learned from dark and spooky laboratory experiments
