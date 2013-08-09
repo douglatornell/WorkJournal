@@ -572,6 +572,8 @@ Weekly research mtg w/ Susan:
 * Priorities for this week: Prep for PyCon.ca, NEMO run on jasper, SWC bootcamp outline to Julia, SWC questionnaire mtg w/ Susan
 * Got Susan set up with a Python 3.3 SOG environment on :kbd:`salish`
 
+Reorganized SOG workspace on :kbd:`tom` so that repo clones are all under :file:`SGO-projects` instead of nested under :file:`SOG`.
+
 Started working on trying to run Paul Myers' NEMO configuration on :kbd:`jasper.westgrid.ca`.
 (GEOTRACES)
 
@@ -589,3 +591,25 @@ Started customization work on bootcamp site.
 (SWC)
 
 Attended phys ocgy seminar: Kate Le Souef, Characterising tidal resonance in the Gully: lessons learned from dark and spooky laboratory experiments
+
+
+Thu 8-Aug-2013
+~~~~~~~~~~~~~~
+
+Late start after some prep for trip to Ontario at home in the morning.
+
+Continued work on bootcamp site: topics and schedule grid.
+Figured out how top level files, and files in the :file:`_includes/` directory interact to produce the site, and how to use Markdown instead of HTML.
+Started work on learning goals.
+(SWC)
+
+Updated :program:`SOG-code` and :program:`SOG-forcingcd` repos with Susan's recent changes.
+Discovered that hook that mirrors :program:`SOG` repo commits to Bitbucket only works for me, not for Susan.
+Renamed my :program:`SOG-code-dev` clone to :program:`SOG-code`; :program:`SOG-code-ocean` repo is no longer part of my dev workflow.
+Created :file:`SOG-projects/sublime/` repo and :file:`SOG-code.sublime-project` and set up file exclusions and build systems.
+Cleaned up Makefile to reflect use of only :program:`gfortran` and deleted unused :kbd:`changelog` target.
+(SOG)
+
+Continued working on trying to run Paul Myers' NEMO configuration on :kbd:`jasper.westgrid.ca`.
+It uses the DRAKKAR config mgmt system layered on top of NEMO and that will not likely be applicable to MEOPAR NEMO but, after discussion with Susan, decided taht it's worth continuing to learn and document the NEMODRAK build and run process.
+(GEOTRACES)
