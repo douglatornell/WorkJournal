@@ -613,3 +613,25 @@ Cleaned up Makefile to reflect use of only :program:`gfortran` and deleted unuse
 Continued working on trying to run Paul Myers' NEMO configuration on :kbd:`jasper.westgrid.ca`.
 It uses the DRAKKAR config mgmt system layered on top of NEMO and that will not likely be applicable to MEOPAR NEMO but, after discussion with Susan, decided taht it's worth continuing to learn and document the NEMODRAK build and run process.
 (GEOTRACES)
+
+
+Fri 9-Aug-2013
+~~~~~~~~~~~~~~
+
+Travel to Toronto to PyCon.ca and to visit M&D in Barrie.
+
+In-flight entertainment was working on design and implementation of :command:`SOG batch`.
+(SOG)
+
+
+Sat 10-Aug-2013
+~~~~~~~~~~~~~~~
+
+PyCon.ca: Gave bloomcast lightening talk:
+https://speakerdeck.com/pyconca/bloomcast-python-facilitating-operational-oceanography-doug-latornell
+
+
+Sun 11-Aug-2013
+~~~~~~~~~~~~~~~
+
+PyCon.ca
