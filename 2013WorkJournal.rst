@@ -635,3 +635,110 @@ Sun 11-Aug-2013
 ~~~~~~~~~~~~~~~
 
 PyCon.ca
+
+
+Week 32
+-------
+
+Mon 12-Aug-2013
+~~~~~~~~~~~~~~~
+
+PyCon.ca sprints
+
+Submitted a Gtihub pull request to fix a couple of typos in the openstack-dev/pbr project README and it got bounced because they want me to use Gerritt - that seems like a whole lot of setup work to do for 2 single letter changes to a file.
+
+Had planned to sprint on core Python until Brett suggested that there's more bang for the buck to be gained from sprinting on projects that haven't yet been ported to Python 3, so considering (again) trying to help :kbd:`SCons` Python 3 port.
+
+Updated douglatornell.ca to add :kbd:`sublime-rst-completion` to list of projects I've contrinuted to
+Also added :kbd:`sublime-sphinx-completion`, and :kbd:`SOG` to the released projects section.
+
+Discussed Software Carpentry with Greg Wilson:
+
+* Greg is looking for more "capstone" lessons like the Invasion-Percolation (bc/lessons/guide-invperc) one.
+  He has an idea for a 4-body problem one.
+  I talked about our plan to do map plotting of data on day 2 of the EOAS bootcamp and he suggested that spatial correlation in that context might make a good "capstone" lesson.
+
+* We also talked about bootcamp setup and he confirmed that Anaconda is the way to go, although Canopy may work slightly better on Windows, but it's unclear whether or not it is work the effort to support both in one bootcamp.
+  I asked about the installation test scripts in boot-camps/setup and he said that they are ready for use and he would like to see them added to the bc repo.
+
+* Finally, we talked about a maintenance script to pull bootcamp metadata from a list of yyyy-mm-dd-site bootcamp repos to compare against and/or update the metadata used in the new site repo to build software-carpentry.org.
+
+Spent most of the rest of the day researching libraries for plotting maps in matplotlib, and handling geo-data.
+Found matplotlib.org/basemap and cartopy; the former looks easier to install, but the latter may be more modern/powerful.
+The GeoJSON standard and the Python reference implementation may also be useful.
+
+Updated Anaconda and discovered that basemap could be installed via conda.
+Created a conda environment and installed basemap, ipython, tornado, and pyzmq to get notebook running.
+
+
+Tue 13-Aug-2013
+~~~~~~~~~~~~~~~
+
+PyCon.ca sprints
+
+Had morning coffee and a long talk with Brandon Rhodes.
+
+Explored basemap in Anaconda ipython notebook; initial success followed by much thrashing to figure out how to change the size of the generated plot.
+My usual pattern of::
+
+  import matplotlib.pyplot as plt
+  fig = plt.Figure(figsize=(width, height))
+  ax = fig.subplot(trc)
+  ax.plot(...)
+
+doesn't seem to work reliably.
+Instead::
+
+  plt.figsize(width, height)
+
+at the beginning of the cell seems to work.
+Also learned that::
+
+  plt.savefig(...)
+
+before :kbd:`plt.show()` works, and that finishing the cell with :kbd:`plt.show()` suppresses the list of plot objects that usually appears above the plot as a result.
+
+
+Wed 14-Aug-2013
+~~~~~~~~~~~~~~~
+
+Visiting parents in Barrie.
+
+Worked on deisng and implementation of :command:`SOG batch`.
+
+
+Thu 15-Aug-2013
+~~~~~~~~~~~~~~~
+
+Visiting parents in Barrie.
+
+
+Fri 16-Aug-2013
+~~~~~~~~~~~~~~~
+
+Visiting parents in Barrie.
+
+
+Week 33
+-------
+
+Mon 19-Aug-2013
+~~~~~~~~~~~~~~~
+
+Visiting parents in Barrie.
+
+
+Tue 20-Aug-2013
+~~~~~~~~~~~~~~~
+
+Visiting parents in Barrie.
+
+Worked on deisng and implementation of :command:`SOG batch`.
+
+
+Wed 21-Aug-2013
+~~~~~~~~~~~~~~~
+
+Visiting parents in Barrie.
+
+Worked on deisng and implementation of :command:`SOG batch`.
