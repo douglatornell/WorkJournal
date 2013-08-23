@@ -742,3 +742,10 @@ Wed 21-Aug-2013
 Visiting parents in Barrie.
 
 Worked on deisng and implementation of :command:`SOG batch`.
+
+
+Thu 22-Aug-2013
+~~~~~~~~~~~~~~~
+
+Finished implementation of :command:`SOG batch`
+(SOG)
