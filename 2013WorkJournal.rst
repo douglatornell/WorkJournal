@@ -749,3 +749,19 @@ Thu 22-Aug-2013
 
 Finished implementation of :command:`SOG batch`
 (SOG)
+
+
+Fri 23-Aug-2013
+~~~~~~~~~~~~~~~
+
+Polished :command:`SOG batch` in preparation for release.
+Tested :command:`SOG batch` on :kbd:`salish` and :kbd:`tyee`.
+Added code to :program:`SOG-code` to create :file:`timeseries` and :file:`profiles` directories via :command:`mkdir -p` so that users don't have to deal with that detail.
+(SOG)
+
+Opened tickets re: :kbd:`ocean` mount failure on :kbd:`cod`, and :command:`ssh` failure on :kbd:`sable`.
+Charles easily fixed :kbd:`ocean` mount on :kbd:`cod`, and I restarted its build slave.
+:kbd:`sable` is more of a problem.
+It is not starting :command:`autofs` or :command:`ypbind` on reboot; Charles is working on it.
+The new hardware that was to become :kbd:`halibut` is temporarily using :kbd:`coho` name and IP address; Charles will re-assign that when John gets back from vacation.
+Also discussed :kbd:`bjossa` and Charles proposed building up a spare P4 motherboard that he has to be a new :kbd:`bjossa`.
