@@ -765,3 +765,19 @@ Charles easily fixed :kbd:`ocean` mount on :kbd:`cod`, and I restarted its build
 It is not starting :command:`autofs` or :command:`ypbind` on reboot; Charles is working on it.
 The new hardware that was to become :kbd:`halibut` is temporarily using :kbd:`coho` name and IP address; Charles will re-assign that when John gets back from vacation.
 Also discussed :kbd:`bjossa` and Charles proposed building up a spare P4 motherboard that he has to be a new :kbd:`bjossa`.
+
+
+Sat 24-Aug-2013
+~~~~~~~~~~~~~~~
+
+Tested :command:`SOG batch` on :kbd:`cod`.
+Deleted Tara Howatt from SOG notification email lists.
+(SOG)
+
+Sun 25-Aug-2013
+~~~~~~~~~~~~~~~
+
+Added docs re: :command:`SOG batch` performance testing.
+Released :kbd:`SOGcommand` v1.3.
+Sent email to Susan and Ben M-M announcing and describing :command:`SOG batch`.
+(SOG)
