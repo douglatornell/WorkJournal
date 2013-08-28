@@ -805,3 +805,13 @@ Replaced :kbd:`nerka` buildslave with a newly created on on :kbd:`tyee` and forc
 Replied to Mark Halverson's email aboutgetting EC data in the wake of the changes to climate.weather, and the availability of dd.weatheroffice.
 Outlined my plan for automating the ongoing population of the :file:`SOG-forcing` repo.
 (SOG)
+
+
+Tue 27-Aug-2013
+~~~~~~~~~~~~~~~
+
+Finished fleshing out the bootcamp topics and schedule and found that there doesn't seem to be room for the plotting data on maps lesson idea.
+Started creating directory and file frameworks for lessons.
+(SWC)
+
+Found and read Falkor cruise blogs on http://www.oceannetworks.ca/cruise13/stories.dot
