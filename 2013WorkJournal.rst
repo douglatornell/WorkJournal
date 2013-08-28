@@ -781,3 +781,27 @@ Added docs re: :command:`SOG batch` performance testing.
 Released :kbd:`SOGcommand` v1.3.
 Sent email to Susan and Ben M-M announcing and describing :command:`SOG batch`.
 (SOG)
+
+
+Week 34
+-------
+
+Mon 26-Aug-2013
+~~~~~~~~~~~~~~~
+
+Caught up on the posts from the last month or so on the swc site.
+Sent pre-assessment survey email to the last 3 people who signed up after
+14-Sep.
+Worked on fleshing out the bootcamp topics and schedule.
+(SWC)
+
+Susan's new grad student Karina arrived.
+
+Discussed waterhole machines w/ Charles.
+:kbd:`nerka` is slowly dying; agreed to move its buildbot slave duties to :kbd:`tyee`.
+Told him about the slow downs I observed in the :command:`SGO batch` testing on :kbd:`salish` and he thinks that they are probably due to BIOS power management; a combination of a BIOS upgrade and/or tuning of the C3 and C6 power management features should improve things.
+
+Replaced :kbd:`nerka` buildslave with a newly created on on :kbd:`tyee` and forced the :kbd:`SOGcommand` build that was failing last week - all green now :-)
+Replied to Mark Halverson's email aboutgetting EC data in the wake of the changes to climate.weather, and the availability of dd.weatheroffice.
+Outlined my plan for automating the ongoing population of the :file:`SOG-forcing` repo.
+(SOG)
