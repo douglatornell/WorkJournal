@@ -815,3 +815,13 @@ Started creating directory and file frameworks for lessons.
 (SWC)
 
 Found and read Falkor cruise blogs on http://www.oceannetworks.ca/cruise13/stories.dot
+
+
+Wed 28-Aug-2013
+~~~~~~~~~~~~~~~
+
+Wrote a script to generate diretory and file frameworks for bootcamp lessons.
+Finished generating lesson frameworks and linking them to the topics list.
+Started exploring Python lesson material that uses :kbd:`ipythonblocks` and discovered that it first uses the :kbd:`scikit-images` library, and more annoyingly still, an as yet unreleased :kbd:`skimage.novice` module.
+Email exchange with Greg Wilson and Michael Hansen (Indiana Univeristy) confirmed that :kbd:`skimage.novice` has not yet need merge, released or packaged, but that it is a single module (like :kbd:`ipythonblocks`), so that gives me a way forward.
+(SWC)
