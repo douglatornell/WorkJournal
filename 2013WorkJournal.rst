@@ -825,3 +825,13 @@ Finished generating lesson frameworks and linking them to the topics list.
 Started exploring Python lesson material that uses :kbd:`ipythonblocks` and discovered that it first uses the :kbd:`scikit-images` library, and more annoyingly still, an as yet unreleased :kbd:`skimage.novice` module.
 Email exchange with Greg Wilson and Michael Hansen (Indiana Univeristy) confirmed that :kbd:`skimage.novice` has not yet need merge, released or packaged, but that it is a single module (like :kbd:`ipythonblocks`), so that gives me a way forward.
 (SWC)
+
+
+Thu 29-Aug-2013
+~~~~~~~~~~~~~~~
+
+Dentist appointment to prepare for crown on top left front molar.
+
+Continued working on trying to run Paul Myers' NEMO configuration on :kbd:`jasper.westgrid.ca`; notes on the process are in :file:`ssmep/docs/nemo_notes/GEOTRACES_NEMODRAK.rst`.
+Sent email to Paul re: missing :file:`BB_make.ldef` file.
+(GEOTRACES)
