@@ -835,3 +835,11 @@ Dentist appointment to prepare for crown on top left front molar.
 Continued working on trying to run Paul Myers' NEMO configuration on :kbd:`jasper.westgrid.ca`; notes on the process are in :file:`ssmep/docs/nemo_notes/GEOTRACES_NEMODRAK.rst`.
 Sent email to Paul re: missing :file:`BB_make.ldef` file.
 (GEOTRACES)
+
+
+Fri 30-Aug-2013
+~~~~~~~~~~~~~~~
+
+Continued working on Python lesson material for bootcamp.
+Met with Julia to discuss bootcamp content, division of labour, etc.
+(SWC)
