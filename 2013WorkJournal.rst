@@ -843,3 +843,10 @@ Fri 30-Aug-2013
 Continued working on Python lesson material for bootcamp.
 Met with Julia to discuss bootcamp content, division of labour, etc.
 (SWC)
+
+
+Sat 1-Sep-2013
+~~~~~~~~~~~~~~
+
+Worked on bootcamp setup instructions while traveling to Victoria to meet Susan.
+(SWC)
