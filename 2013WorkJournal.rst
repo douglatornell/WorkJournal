@@ -845,8 +845,42 @@ Met with Julia to discuss bootcamp content, division of labour, etc.
 (SWC)
 
 
-Sat 1-Sep-2013
-~~~~~~~~~~~~~~
+Sat 31-Aug-2013
+~~~~~~~~~~~~~~~
 
 Worked on bootcamp setup instructions while traveling to Victoria to meet Susan.
 (SWC)
+
+
+September
+=========
+
+Week 35
+-------
+
+Mon 02-Sep-2013
+~~~~~~~~~~~~~~~
+
+Labour Day - Picked James up at Horseshoe Bay and hiked to Eagle Bluffs from Cyress Bowl.
+
+
+Tue 03-Sep-2013
+~~~~~~~~~~~~~~~
+
+Finally figured out what changed in the climate.weather.gc.ca URL schema to cause bloomcast to fail during forcing data acquisition.
+The main breaking change is that the query string keys and values are case sensitive and :kbd:`StationID` has been changed to :kbd:`stationID`.
+Other changes: domain changed from :kbd:`climate.weatheroffice...` to :kbd:`climate.weather...`, and :kbd:`Prov` key is no longer required (but ignored is present).
+Sent email to Mark explaining the changes.
+Updated :kbd:`SoG-bloomcast` to handle the changes.
+Once bloomcast was again able to acquire forcing data from EC it raised a :py:exc:`ValueError` when the wind speed was zero because the corresponding direction was a string consisting of a space character.
+Added code to handle that new wrinkle.
+Commited base infile changes related to Susan's recent work on SOG river nutrients.
+(bloomcast)
+
+Finished 1st draft of setup instructions for all 3 OSs.
+Imported setup check scripts from :kbd:`swcarpentry/boot-camps` repo.
+Asked Julia to test Windows setup instructions.
+Sent pull requests to :kbd:`swcarpentry/bc` re: setup check scripts, and typoes I fixed.
+(SWC)
+
+Took James to MOA where he spent most of the day.
