@@ -884,3 +884,17 @@ Sent pull requests to :kbd:`swcarpentry/bc` re: setup check scripts, and typoes 
 (SWC)
 
 Took James to MOA where he spent most of the day.
+
+
+Wed 04-Sep-2013
+~~~~~~~~~~~~~~~
+
+Updated douglatornell.ca home page to reflect what I'm presently doing.
+Added links to slide deck and video of PyCon.ca bloomcast talk to talks page.
+
+Continued work on setup instructions.
+Susan tested Anaconda installation on OS/X and found the 2 installer issue for me.
+Julia reported on shell, git and make not found on Windows; resolved the latter.
+(SWC)
+
+Took James to YVR for his next step toward undergrad at Stanford.
