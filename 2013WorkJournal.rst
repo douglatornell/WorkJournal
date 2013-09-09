@@ -892,9 +892,25 @@ Wed 04-Sep-2013
 Updated douglatornell.ca home page to reflect what I'm presently doing.
 Added links to slide deck and video of PyCon.ca bloomcast talk to talks page.
 
-Continued work on setup instructions.
+Continued work on UBC-EOAS bootcamp setup instructions.
 Susan tested Anaconda installation on OS/X and found the 2 installer issue for me.
 Julia reported on shell, git and make not found on Windows; resolved the latter.
 (SWC)
 
 Took James to YVR for his next step toward undergrad at Stanford.
+
+
+Thu 05-Sep-2013
+~~~~~~~~~~~~~~~
+
+Continued work on UBC-EOAS bootcamp setup instructions.
+Checked out projector and table arrangements in ESB-5108 and sent email to Julia about what we found and decided.
+Started a TODO list for the bootcamp.
+Created the bootcamp etherpad: https://etherpad.mozilla.org/7B5jDDjHHO
+Struggled through a branch merge hell in git when I tried to rebase changeds from :kbd:`swcarpentry/bc` onto my repo; try cherry picking next time.
+(SWC)
+
+Helped Susan set up an IPython Notebook virtualenv with NumPy and Matplotlib on :kbd:`sable` so that she can use it to process CTD data from the Falkor cruise.
+
+Attended EOAS dept colloquium.
+This week was the "research carnival" to kick off the new term.
