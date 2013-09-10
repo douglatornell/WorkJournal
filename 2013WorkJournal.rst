@@ -914,3 +914,31 @@ Helped Susan set up an IPython Notebook virtualenv with NumPy and Matplotlib on 
 
 Attended EOAS dept colloquium.
 This week was the "research carnival" to kick off the new term.
+
+
+Fri 06-Sep-2013
+~~~~~~~~~~~~~~~
+
+Hiking at Elfin Lakes.
+
+
+Week 36
+-------
+
+Mon 09-Sep-2013
+~~~~~~~~~~~~~~~
+
+Investigated buildbot failures on R3 weekly runs.
+Input processor display of parameter descriptions now ends with :kbd:`[None]` on every line causing diff failure on stdout.
+Tracked the problem down to a change in :kbd:`collander==1.0b1`.
+(SOG)
+
+Tweaked :file:`python-0-resize-image.ipynb` for use in EOAS bootcamp; mostly changing :kbd:`skimage.novice` to standalone :kbd:`novice` module.
+Found bug in :kbd:`Picture.size` property in :kbd:`novice`, and reported it on github.
+Rehearsed the lesson and it took 35 minutes.
+Tweaked :file:`python-1-functions.ipynb` for use in EOAS bootcamp.
+The major change was addition of a collection of images to illustrate the Python call stack and how variables and values move among stack frames as functions are called.
+Sent email to Ned Batchelder requesting his permission to use a similar "visual vocabulary" in those images to the one he used in his http://nedbatchelder.com/text/names.html post.
+Added those images and a few typos fixes in the :kbd:`py-func-call-stack-diagrams` branch to generate a pull request for :kbd:`swcarpentry/bc`, pending Ned's consent.
+Read through :file:`python-2-loops-indexing.ipynb` in preparation for buffing.
+(SWC)
