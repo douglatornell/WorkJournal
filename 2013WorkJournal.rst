@@ -942,3 +942,22 @@ Sent email to Ned Batchelder requesting his permission to use a similar "visual 
 Added those images and a few typos fixes in the :kbd:`py-func-call-stack-diagrams` branch to generate a pull request for :kbd:`swcarpentry/bc`, pending Ned's consent.
 Read through :file:`python-2-loops-indexing.ipynb` in preparation for buffing.
 (SWC)
+
+
+Tue 10-Sep-2013
+~~~~~~~~~~~~~~~
+
+Got reply from Ned Batchelder welcoming my use of the visual vocabulary from his names and values blog post in my call stack images, and requesting to see the results.
+Created https://github.com/swcarpentry/bc/pull/31 and Greg merged it immediately.
+Discussed Intro to Python lesson learning goals and module goals with Susan and made them more concise at both the section and module levels.
+Added reference links list for Intro to Python lesson.
+Buffed :file:`python-2-loops-indexing.ipynb` for use in EOAS bootcamp; introduced standard colours module earlier.
+Started reading through :file:`python-3-conditionals-defensive.ipynb` in preparation for buffing.
+(SWC)
+
+Helped Karina get Anaconda and IPython set up on tyee.
+
+Research mtg w/ Susan.
+Prioritized SWC, NEMO, SOG-forcing, and fixing the colander issue in SOGcommand.
+
+Helped Jessica get set up to run her model on salish.
