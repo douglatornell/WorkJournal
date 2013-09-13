@@ -977,3 +977,18 @@ Cleaned up bootcamp home page in preparation for public release.
 (SWC)
 
 Helped Jessica sort out linking to a local build of the NetCDF library on :kbd:`salish`.
+
+
+Thu 12-Sep-2013
+~~~~~~~~~~~~~~~
+
+Dentist appointment to have molar crown installed.
+
+Continued working toward running Paul Myers' NAA-EPM035 NEMO configuration on :kbd:`jasper.westgrid.ca`; notes on the process are in :file:`ssmep/docs/nemo_notes/GEOTRACES_NEMODRAK.rst`.
+Code compiles in both the default configuration version, and with the source level configuration changes that Paul has in his NAA-EPM035 config.
+Copied :file:`NAA-I/` tree data files for initial conditions, bathymetry, forcing, etc. from Paul's workspace to mine on :kbd:`jasper`.
+(GEOTRACES)
+
+Partook of PME and ESB building tour as part of EOAS Welcome Back day.
+
+Attended Ben S's M.Sc. defense presentation.
