@@ -960,4 +960,20 @@ Helped Karina get Anaconda and IPython set up on tyee.
 Research mtg w/ Susan.
 Prioritized SWC, NEMO, SOG-forcing, and fixing the colander issue in SOGcommand.
 
-Helped Jessica get set up to run her model on salish.
+Helped Jessica get set up to run her model on :kbd:`salish`.
+
+
+Wed 11-Sep-2013
+~~~~~~~~~~~~~~~
+
+Julia recruited Jessica Spurgin and Caroline Chenard.
+Wrote a long email Julia about organizational details.
+Buffed :file:`python-3-conditionals-defensive.ipynb` for use in EOAS bootcamp.
+Rewrote :file:`python-3-conditionals-defensive.ipynb` defensive programming section to include :kbd:`try/except` blocks.
+Make function docstrings content more prominent.
+Buffed :file:`python-4-files-lists.ipynb` for use in EOAS bootcamp.
+Created, committed and linked ziparchive of Intro to Python notebooks and files for participants to download.
+Cleaned up bootcamp home page in preparation for public release.
+(SWC)
+
+Helped Jessica sort out linking to a local build of the NetCDF library on :kbd:`salish`.
