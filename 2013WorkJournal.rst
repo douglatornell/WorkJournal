@@ -1008,3 +1008,10 @@ Researched NetCDF and MPI for use on :kbd:`salish`.
 See http://stackoverflow.com/questions/147784/mpi-for-multicore re: MPI on multi-core processors.
 Opened tickets requesting that :kbd:`NetCDF` and MPI libraries be installed on :kbd:`salish`.
 (GEOTRACES)
+
+
+Sat 14-Sep-2013
+~~~~~~~~~~~~~~~
+
+Created :file:`data-explore-1-csv.ipynb` notebook.
+(SWC)
