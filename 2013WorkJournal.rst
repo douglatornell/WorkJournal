@@ -992,3 +992,19 @@ Copied :file:`NAA-I/` tree data files for initial conditions, bathymetry, forcin
 Partook of PME and ESB building tour as part of EOAS Welcome Back day.
 
 Attended Ben S's M.Sc. defense presentation.
+
+
+Fri 13-Sep-2013
+~~~~~~~~~~~~~~~
+
+Created Python? What? Why? How? page for Intro to Python lesson.
+Opened ticket requesting :command:`git` be installed on :kbd:`ocean` workstations and :kbd:`salish`.
+Got 5 more responses to pre-assessment survey.
+Sent email to participants revealing the bootcamp home page and directing them to the setup instructions.
+Created :file:`data-explore-0-numpy.ipynb` notebook based largely on the one I used for the UW bootcamp in Feb-2013.
+(SWC)
+
+Researched NetCDF and MPI for use on :kbd:`salish`.
+See http://stackoverflow.com/questions/147784/mpi-for-multicore re: MPI on multi-core processors.
+Opened tickets requesting that :kbd:`NetCDF` and MPI libraries be installed on :kbd:`salish`.
+(GEOTRACES)
