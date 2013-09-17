@@ -1022,3 +1022,15 @@ Sun 15-Sep-2013
 
 Ported :kbd:`portfolio` project to Python 3 and replaced dependence on OOoPy
 (which must be installed from a SourceForge tarball because it's not hosted on PyPI) with direct use of standard library :kbd:`zipfile.ZipFile` and :kbd:`xml.etree.ElementTree` to read transactions ODS file.
+
+
+Week 37
+-------
+
+Mon 16-Sep-2013
+~~~~~~~~~~~~~~~
+
+Created :file:`data-explore-2-matplotlib.ipynb` notebook.
+Added references section to data exploration lesson.
+Fixed some minor issues in the :file:`data-explore-1-csv.ipynb` notebook.
+(SWC)
