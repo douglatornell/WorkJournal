@@ -1034,3 +1034,76 @@ Created :file:`data-explore-2-matplotlib.ipynb` notebook.
 Added references section to data exploration lesson.
 Fixed some minor issues in the :file:`data-explore-1-csv.ipynb` notebook.
 (SWC)
+
+
+Tue 17-Sep-2013
+~~~~~~~~~~~~~~~
+
+Read Anthony Scopatz's account of teaching Python at AIMS based on SWC material.
+
+Started work on bootcamp intro page.
+Added acknowledgements for :kbd:`novice.py` module and images, and :kbd:`ipythonblocks.py` module to Intro to Python notebooks.
+Emailed Julia about shift of timeframe in climate data timeseries files that the participants will download in the data exploration lesson.
+(SWC)
+
+Appointment with Dr. Applegarth to get annual physical exam rolling.
+
+
+Rest of the Week
+~~~~~~~~~~~~~~~~
+
+Worked on content for UBC-EOAS SWC bootcamp.
+See commit log at https://github.com/douglatornell/2013-09-26-ubc
+(SWC)
+
+
+Week 38
+-------
+
+Mon 23-Sep-2013 through Wed 25-Sep-2013
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Worked on content for UBC-EOAS SWC bootcamp.
+See commit log at https://github.com/douglatornell/2013-09-26-ubc
+(SWC)
+
+
+Thu 26-Sep -2013 and Fri 27-Sep-2013
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Taught UBC-EOAS Software Carpentry Bootcamp with Julia Gustavsen.
+http://douglatornell.github.io/2013-09-26-ubc/
+(SWC)
+
+
+Sun-28-Sep-2013
+~~~~~~~~~~~~~~~
+
+Resolved profiles graph layout issue in bloomcast.
+When axes are overlaid in matplolib it is necessary (as of v1.2, anyway) to explicitly set the positions of both axes if the position differs from the default.
+Previously the position of overlaid axes seems to have been updated when the :py:meth:`twin[xy]` method was called.
+(bloomcast)
+
+
+October
+=======
+
+Week 39
+-------
+
+Mon 29-Sep-2013
+~~~~~~~~~~~~~~~
+
+Physio appointment re: shoulder rotator cuff strain.
+
+Coffee with Susan, Julie, and Kristin.
+Julie formalized her invitation for us to go to Delft to work for a month or so.
+
+Continued working toward running Paul Myers' NAA-EPM035 NEMO configuration on :kbd:`jasper.westgrid.ca`; notes on the process are in :file:`ssmep/docs/nemo_notes/GEOTRACES_NEMODRAK.rst`.
+Code compiles in both the default configuration version, and with the source level configuration changes that Paul has in his NAA-EPM035 config.
+Copied :file:`namelist*`, :file:`*.db`, and :file:`NAA-EPM035.ksh` files from :file:`RUN_NAA/NAA-EPM035/CTL/ in `Paul's workspace to mine on :kbd:`jasper`.
+Copied :file:`nemo_jasper*.ksh` files from :file:`RUN_TOOLS/` in Paul's workspace to mine on :kbd:`jasper`.
+Started to decipher how a run is configured via the namelists and .db file and submitted to the queue on :kbd:`jasper` via :file:`NAA-EPM035.ksh` (180 lines of ksh script) when calls :file:`nemo_jasper_v3.4_interannual.ksh` (800 lines of ksh).
+(GEOTRACES)
+
+Attended Kate LeSouf's M.Sc. defense, then went to Mahoney's to celebrate her success.
