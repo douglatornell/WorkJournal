@@ -1076,7 +1076,7 @@ http://douglatornell.github.io/2013-09-26-ubc/
 (SWC)
 
 
-Sun-28-Sep-2013
+Sun-29-Sep-2013
 ~~~~~~~~~~~~~~~
 
 Resolved profiles graph layout issue in bloomcast.
@@ -1091,7 +1091,7 @@ October
 Week 39
 -------
 
-Mon 29-Sep-2013
+Mon 30-Sep-2013
 ~~~~~~~~~~~~~~~
 
 Physio appointment re: shoulder rotator cuff strain.
@@ -1100,10 +1100,44 @@ Coffee with Susan, Julie, and Kristin.
 Julie formalized her invitation for us to go to Delft to work for a month or so.
 
 Continued working toward running Paul Myers' NAA-EPM035 NEMO configuration on :kbd:`jasper.westgrid.ca`; notes on the process are in :file:`ssmep/docs/nemo_notes/GEOTRACES_NEMODRAK.rst`.
-Code compiles in both the default configuration version, and with the source level configuration changes that Paul has in his NAA-EPM035 config.
 Copied :file:`namelist*`, :file:`*.db`, and :file:`NAA-EPM035.ksh` files from :file:`RUN_NAA/NAA-EPM035/CTL/ in `Paul's workspace to mine on :kbd:`jasper`.
 Copied :file:`nemo_jasper*.ksh` files from :file:`RUN_TOOLS/` in Paul's workspace to mine on :kbd:`jasper`.
 Started to decipher how a run is configured via the namelists and .db file and submitted to the queue on :kbd:`jasper` via :file:`NAA-EPM035.ksh` (180 lines of ksh script) when calls :file:`nemo_jasper_v3.4_interannual.ksh` (800 lines of ksh).
 (GEOTRACES)
 
 Attended Kate LeSouf's M.Sc. defense, then went to Mahoney's to celebrate her success.
+
+
+Tue 1-Oct-2013
+~~~~~~~~~~~~~~
+
+Sent email to Westgrid Support requesting installation of Mercurial module on :kbd:`jasper`, and they did it in less than 1 hr.
+
+Continued working toward running Paul Myers' NAA-EPM035 NEMO configuration on :kbd:`jasper.westgrid.ca`; notes on the process are in :file:`ssmep/docs/nemo_notes/GEOTRACES_NEMODRAK.rst`.
+Created hg repo in :file:`/home/dlatorne/GEOTRACES`.
+Committed my environment setup script and baseline NAA-EPM035 experiment files copied from Paul Myers.
+Started modifying scripts, etc., working toward a 200 x 1200s time step run with output every 50 time steps.
+(GEOTRACES)
+
+Research mtg w/ Susan; notes in https://docs.google.com/document/d/1GkiXPDaw9LkGdcKKe05f68T-WvLiknMbp4sLmCcHhec
+
+Joined AGU for 2 years.
+
+Talked to Charles about outstanding issues:
+
+* New :kbd:`bjossa` hardware - he says it should be ready before Friday
+* MPI on :kbd:`salish` - he will set up OpenMPI and TORQUE based on Phil Austin's config and we can refine from there
+* BIOS update on :kbd:`salish` to improve processor and core power management for large numbers of concurrent jobs - installed and ready for testing
+
+Picked up key for ESB-2019.
+
+Created https://bitbucket.org/salishsea team account with my :kbd:`@eos` email address and it automatically qualified for the unlimited private collaboration academic license.
+Added Susan as co-administrator.
+Created https://bitbucket.org/salishsea/tools repo in preparation for Kate LeSouf to start work on tide gauge data.
+(MEOPAR)
+
+Wrote summary email to Greg Wilson about SWC bootcamp.
+(SWC)
+
+Refactored bloomcast test suite to use pytest fixtures as a learning exercise.
+(bloomcast)
