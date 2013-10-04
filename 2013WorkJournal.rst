@@ -1156,7 +1156,7 @@ Downloaded and unpacked tarballs in :file:`/ocean/dlatorne/MEOPAR/NEMO/`.
 
 Continued working toward running Paul Myers' NAA-EPM035 NEMO configuration on :kbd:`jasper.westgrid.ca`.
 Submitted a job on :kbd:`jasper`:
-200 x 1200s time step job starting 2002-01-01 with output every 50 time steps and a restart point at the end; requested 64 processors with 16 Gb of memory each.
+200 x 1200s time step job starting 2002-01-01 with output every 50 time steps and a restart point at the end; requested 64 processors with 16 Gb of memory each, and 24 hours of run time.
 (GEOTRACES)
 
 Started to re-run SOG concurrent jobs benchmark on :kbd:`salish` but stopped because Ben is planning to do a bunch of runs.
@@ -1165,3 +1165,24 @@ Found no significant change from previous benchmark times.
 (SOG)
 
 Attended phys ocgy seminar presented by Artem Zaloga.
+
+
+Thu 3-Oct-2013
+~~~~~~~~~~~~~~
+
+Yesterday's :kbd:`jasper` job seems to be languishing on the queue, perhaps due to its resource requirements.
+Submitted another requesting 64 processors, 16 Gb of *total* memory, and 1 hour of run time.
+It ran within 1 hour, produced results, but seems to be marked as aborted by something in the post-processing section of :file:`nemo_jasper_v3.4_interannual.ksh`.
+Need to investigate.
+(GEOTRACES)
+
+Physio appointment re: shoulder rotator cuff strain.
+
+Wrote and submitted poster proposal re: bloomcast for OSM 2014 meeting in Hawaii in Feb.
+
+Asked Charles to confirm that my wired network connection will continue to work when I move to ESB-2019.
+He said that he would ensure that ESB-3053 and ESB-2019 were on the same VLAN.
+
+Started exploring tarballs from J-P and writing a plan for the repos layout for the Bitbucket SalishSea-MEOPAR team.
+Determined that NEMO checkout in the CODE tarball is something like the 3.1 version, but the :kbd:`.svn` directory is missing from the :kbd:`modeles/` directory so it cannot be diff-ed against the server.
+(MEOPAR)
