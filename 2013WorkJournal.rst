@@ -1141,3 +1141,27 @@ Wrote summary email to Greg Wilson about SWC bootcamp.
 
 Refactored bloomcast test suite to use pytest fixtures as a learning exercise.
 (bloomcast)
+
+
+Wed 2-Oct-2013
+~~~~~~~~~~~~~~
+
+Reviewed Susan's beginning of a tutorial proposal re: webification of ocean models for the Feb AGU meeting in Hawaii.
+Add draft 2nd paragraph about procurement of forcing data, running models from code, and use of templates to post results to web.
+Finalized proposal with Susan and she submitted it.
+
+Got notification from J-P Paquin of availability of MEOPAR-NEMO code and docs tarballs for us to start work with.
+Downloaded and unpacked tarballs in :file:`/ocean/dlatorne/MEOPAR/NEMO/`.
+(MEOPAR)
+
+Continued working toward running Paul Myers' NAA-EPM035 NEMO configuration on :kbd:`jasper.westgrid.ca`.
+Submitted a job on :kbd:`jasper`:
+200 x 1200s time step job starting 2002-01-01 with output every 50 time steps and a restart point at the end; requested 64 processors with 16 Gb of memory each.
+(GEOTRACES)
+
+Started to re-run SOG concurrent jobs benchmark on :kbd:`salish` but stopped because Ben is planning to do a bunch of runs.
+Continued in the evening after Ben's jobs finished.
+Found no significant change from previous benchmark times.
+(SOG)
+
+Attended phys ocgy seminar presented by Artem Zaloga.
