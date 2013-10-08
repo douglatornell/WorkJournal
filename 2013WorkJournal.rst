@@ -1186,3 +1186,54 @@ He said that he would ensure that ESB-3053 and ESB-2019 were on the same VLAN.
 Started exploring tarballs from J-P and writing a plan for the repos layout for the Bitbucket SalishSea-MEOPAR team.
 Determined that NEMO checkout in the CODE tarball is something like the 3.1 version, but the :kbd:`.svn` directory is missing from the :kbd:`modeles/` directory so it cannot be diff-ed against the server.
 (MEOPAR)
+
+
+Fri 4-Oct-2013
+~~~~~~~~~~~~~~
+
+Read info about CONCEPTS (integration of Canadian weather model and ocean/ice model) that Susan found; no evidence that the intent is to freeze on NEMO 3.1.
+Emailed John Amor to request salishsea.eos.ubc.ca sub-domain.
+Explored NEMO source.
+Concluded that version from J-P is based on v3.1.
+Replicated modipsl setup and obtained trunk code.
+Tried to :command:`svn update` to rev nemo_v3_1 and that failed due to tree changes, I think.
+Started work on docs repo.
+(MEOPAR)
+
+Moved office from ESB-3053 to ESB-2019.
+
+Attended Stats seminar given by Tim Hesterberg of Google in Kirkland, WA.
+
+
+Sat 5-Oct-2013
+~~~~~~~~~~~~~~
+
+Continued work on setup of docs repo.
+Transcribed repos layout plan from Google Drive doc into docs repo.
+Discussed idea with Susan of just using :command:`hg` manage NEMO source;
+i.e. create NEMO-code repo with a checkout of modipsl and NEMO 3.1,
+use that to detect and analyze CONCEPTS differences from J-P's CODE tarball and commit the mods with explanation of their significance, then port the code to NEMO 3.4 or later to get important shelf modeling features.
+(MEOPAR)
+
+Read netcdf4-python docs and played with to explore results of GEOTRACES-NEMO-test run on :kbd:`jasper`.
+(GEOTRACES)
+
+
+Sun 6-Oct-2013
+~~~~~~~~~~~~~~
+
+Created SalishSea-MEOPAR/docs repo on Bitbucket and pushed my initial work to it.
+Set up salishsea account on readthedocs.org and linked it to Bitbucket docs repo to render docs when changes are pushed.
+(MEOPAR)
+
+
+Week 40
+-------
+
+Mon 7-Oct-2013
+~~~~~~~~~~~~~~
+
+Dr. appointment re: results of blood work, ECG, etc.
+
+Worked through build process for CODE tarball and documented it in :file:`code-notes/oct2013_tarball.rst` but was unable to get NEMO to compile.
+(MEOPAR)
