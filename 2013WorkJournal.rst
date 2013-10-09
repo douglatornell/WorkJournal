@@ -1235,5 +1235,32 @@ Mon 7-Oct-2013
 
 Dr. appointment re: results of blood work, ECG, etc.
 
-Worked through build process for CODE tarball and documented it in :file:`code-notes/oct2013_tarball.rst` but was unable to get NEMO to compile.
+Worked through build process for CODE tarball and documented it in :file:`code-notes/oct2013_tarball.rst` but was unable to get NEMO to compile; got farthest on :kbd:`jasper`.
 (MEOPAR)
+
+
+Tue 8-Oct-2013
+~~~~~~~~~~~~~~
+
+Physio appointment re: shoulder rotator cuff strain.
+
+Tried Oct-2013 tarball compilation on :kbd:`salish` again now that :command:`ksh` is installed but it is still failing.
+Got Susan set up with a clone of the docs repo.
+Sent email to Kate to start the ball rolling for her to work on the project, and invited her to the project team on Bitbucket.
+Sent email to John Amor requesting a salishsea-issues@eos.ubc.ca email list.
+Sent email to Charles re: installation of OpenMPI, etc. on salish.
+Did a checkout of modispl and NEMO v3.1 from central repos and worked on building NEMO and documenting the process in :file:`code-notes/nemo31.rst`.
+Build was successful and gave me the clue to successfully build NEMO in the CODE tarball.
+Updated the docs for that build process.
+Started looking at how to run the CODE tarball NEMO WC3 case on :kbd:`jasper`.
+(MEOPAR)
+
+Wrote expense claim for OSM-2014 registration and abstract fee.
+
+Research mtg w/ Susan; notes in https://docs.google.com/document/d/1SHhctqWmRkigapAj_XjD_5Ftk2Bv1OtoBN6ZIbPDo5E/
+
+Transcribed the last of the post-it note feedback into the bootcamp Etherpad.
+(SWC)
+
+Sent email to Charles re: availability of new bjossa hardware for buildbot master migration.
+(SOG)
