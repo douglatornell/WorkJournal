@@ -1264,3 +1264,17 @@ Transcribed the last of the post-it note feedback into the bootcamp Etherpad.
 
 Sent email to Charles re: availability of new bjossa hardware for buildbot master migration.
 (SOG)
+
+
+Wed 9-Oct-2013
+~~~~~~~~~~~~~~
+
+Worked on Mercurial and Sphinx docs.
+Met w/ Kate to get her started with Mercurial, Sphinx and Bitbucket for her tides work.
+Continued email negotiation with John Amor re: salishsea.eos.ubc.ca domain for static content.
+Ran the WCSD case on :kbd:`jasper` for 12 hrs (720 time steps); used 64 processors with 2 Gb of memory each and 1 hr time limit; run took just over 2 minutes.
+Ran the WCSD case again for 72 hours (4320 time steps) with same resources requested and the run took 17 minutes.
+Run result are in per-processor files that need to be combined.
+(MEOPAR)
+
+Attended Phys Ocgy seminar by Mark Halverson on CODAR surface currents measurement array.
