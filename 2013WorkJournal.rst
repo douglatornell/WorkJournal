@@ -1278,3 +1278,13 @@ Run result are in per-processor files that need to be combined.
 (MEOPAR)
 
 Attended Phys Ocgy seminar by Mark Halverson on CODAR surface currents measurement array.
+
+
+Thu 10-Oct-2013
+~~~~~~~~~~~~~~~
+
+Received confirmation that NEMO-CONCEPTS is based on NEMO v3.1 but it is not under version control and that diffs and docs re: it vs. NEMO v3.1 are not available.
+Explored how to combine NEMO output files from MPI runs and found NOCSCOMBINE tool.
+(MEOPAR)
+
+Travelled to Berkeley.
