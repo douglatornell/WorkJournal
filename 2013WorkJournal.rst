@@ -1288,3 +1288,20 @@ Explored how to combine NEMO output files from MPI runs and found NOCSCOMBINE to
 (MEOPAR)
 
 Travelled to Berkeley.
+
+
+Fri 11-Oct-2013
+~~~~~~~~~~~~~~~
+
+Got settled in Zack Powell's lab at UC Berkeley.
+
+Helped Ben resolve SOG installation issue on :kbd:`salish`.
+Worked with Charles on getting new :kbd:`bjossa` machine (tenatively known as :kbd:`bjossa2`) configured as buildbot master; see ticket 12585.
+Successfully installed buildbot-0.8.8 and trac-1.0 in Python 2.7 virtualenvs on :kbd:`bjossa2`.
+(SOG)
+
+Wrote docs about running the CODE tarball case on :kbd:`jasper`.
+Helped Susan work through getting NEMO v3.4 compiled and the GYRE case running on :kbd:`sable`.
+Built NOCSCOMBINE on :kbd:`jasper`, used it to post-process the netcdf results files from the 12 and 72 hr WCSD test runs, and wrote docs about that.
+Not sure what the bottleneck is but combining those files is slow: 10-11 minutes each for 72 hr u and v results, ~30 minutes for w results, and ~15 minutes for traceer results.
+(MEOPAR)
