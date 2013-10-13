@@ -1305,3 +1305,17 @@ Helped Susan work through getting NEMO v3.4 compiled and the GYRE case running o
 Built NOCSCOMBINE on :kbd:`jasper`, used it to post-process the netcdf results files from the 12 and 72 hr WCSD test runs, and wrote docs about that.
 Not sure what the bottleneck is but combining those files is slow: 10-11 minutes each for 72 hr u and v results, ~30 minutes for w results, and ~15 minutes for traceer results.
 (MEOPAR)
+
+
+Sat 12-Oct-2013
+~~~~~~~~~~~~~~~
+
+Created NEMO-code private repo on Bitbucket.
+Committed and tagged modipsl trunk checkout in NEMO-code.
+Created private-tools repo on Bitbucket.
+Set up :file:`docs/` directory in private-tools.
+Set up :file:`docs/` directory in tools repo and added docs about Susan's :file:`NetCDF_Plot/GYRE_openNC_plot.ipynb` notebook.
+Set up rendering for tools repo docs on readthedocs.org.
+Helped Susan with initial analysis of 72 hr WCSD run tide results, including a crude animation.
+Added NOCSCOMBINE package and my documentation of it to the tools repo.
+(MEOPAR)
