@@ -1319,3 +1319,10 @@ Set up rendering for tools repo docs on readthedocs.org.
 Helped Susan with initial analysis of 72 hr WCSD run tide results, including a crude animation.
 Added NOCSCOMBINE package and my documentation of it to the tools repo.
 (MEOPAR)
+
+
+Sun 13-Oct-2013
+~~~~~~~~~~~~~~~
+
+Worked on evolving NEMO-code repo to NEMO-3.1 that will build and run the GYRE config on :kbd:`jasper`.
+(MEOPAR)
