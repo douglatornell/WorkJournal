@@ -1325,4 +1325,18 @@ Sun 13-Oct-2013
 ~~~~~~~~~~~~~~~
 
 Worked on evolving NEMO-code repo to NEMO-3.1 that will build and run the GYRE config on :kbd:`jasper`.
+(MEOPAR))
+
+
+Week 41
+-------
+
+Mon 14-Oct-2013
+~~~~~~~~~~~~~~~
+
+Finished evolving NEMO-code repo to NEMO-3.1 that will build and run the GYRE config on :kbd:`jasper` and passed it to Susan for testing.
+Wrote docs about :command:`bash` configuration.
+Tagged NEMO-3.1 in NEMO-code repo.
+Wrote docs about Mercurial configuration and global ignore files.
+Started analysis of differences between CONCEPTS-110 code in the CODE tarball and NEMO-3.1.
 (MEOPAR)
