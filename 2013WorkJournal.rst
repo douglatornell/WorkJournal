@@ -1340,3 +1340,12 @@ Tagged NEMO-3.1 in NEMO-code repo.
 Wrote docs about Mercurial configuration and global ignore files.
 Started analysis of differences between CONCEPTS-110 code in the CODE tarball and NEMO-3.1.
 (MEOPAR)
+
+
+Tue 15-Oct-2013
+~~~~~~~~~~~~~~~
+
+Researched workflows that would allow us to sync NEMO repo changes into NEMO-code via a svn/hg mirror repo.
+Tested my findings and concluded that the differences in NEMO between 3.1 and 3.4.1 are so huge that merging CONCEPTS-110 into 3.1 will be of little help in reaching 3.4 and onward.
+After discussion with Susan we decided to document the yesterday's findings about the diffs between the CODE tarball CONCEPTS-110 code and NEMO-3.1 and then move forward to base the Salish Sea project on >=NEMO-3.4.1, porting in code from CONCEPTS-110 as we need it.
+(MEOPAR)
