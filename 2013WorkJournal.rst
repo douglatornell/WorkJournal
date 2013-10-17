@@ -1349,3 +1349,15 @@ Researched workflows that would allow us to sync NEMO repo changes into NEMO-cod
 Tested my findings and concluded that the differences in NEMO between 3.1 and 3.4.1 are so huge that merging CONCEPTS-110 into 3.1 will be of little help in reaching 3.4 and onward.
 After discussion with Susan we decided to document the yesterday's findings about the diffs between the CODE tarball CONCEPTS-110 code and NEMO-3.1 and then move forward to base the Salish Sea project on >=NEMO-3.4.1, porting in code from CONCEPTS-110 as we need it.
 (MEOPAR)
+
+
+Wed 16-Oct-2013
+~~~~~~~~~~~~~~~
+
+Pinged Charles about MPI on :kbd:`salish` and he installed necessary packages.
+Renamed NEMO-code repo to NEMO-3.1 as it is now our reference hg repo for that version.
+Created CONCEPTS-110 repo on Bitbucket as reference repo containing the CODE tarball from J-P.
+Tested MPI on :kbd:`salish` with NEMO-3.4.1 GYRE and AMM12 runs.
+:kbd:`salish` clocks in at about half the speed of :kbd:`jasper` for a 1 day AMM12 run with both 4x4 and 4x8 distributions of the domain over cores.
+Cleaned up :file:`tools/Run_Tools` docs.
+(MEOPAR)
