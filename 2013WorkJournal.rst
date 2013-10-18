@@ -1361,3 +1361,17 @@ Tested MPI on :kbd:`salish` with NEMO-3.4.1 GYRE and AMM12 runs.
 :kbd:`salish` clocks in at about half the speed of :kbd:`jasper` for a 1 day AMM12 run with both 4x4 and 4x8 distributions of the domain over cores.
 Cleaned up :file:`tools/Run_Tools` docs.
 (MEOPAR)
+
+
+Thu 17-Oct-2013
+~~~~~~~~~~~~~~~
+
+Wrote docs about NEMO-3.1 and CONCEPTS-110 repos and the diffs analysis I did on Monday.
+Created :file:`/ocean/sallen/hg_repos/NEMO-hg-mirror` via an svn checkout of trunk of the NEMO repo in France, and initialized it as an hg repo so that we can use it as an svn-hg bridge.
+Wrote docs about management of NEMO-hg-mirror and NEMO-code repos.
+Discovered that doing an :command:`svn up -r3819` on trunk is not the same as doing a checkout at r3819 of ^/branches/2012/dev_v3_4_STABLE_2012.
+(MEOPAR)
+
+Toured Evan Variano's environmental fluid mechanics lab.
+
+Submitted talk proposal for Vnacouver Python Day on 16-Nov; "Python Doing Ocean Science".
