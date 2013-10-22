@@ -1375,3 +1375,46 @@ Discovered that doing an :command:`svn up -r3819` on trunk is not the same as do
 Toured Evan Variano's environmental fluid mechanics lab.
 
 Submitted talk proposal for Vnacouver Python Day on 16-Nov; "Python Doing Ocean Science".
+
+
+Fri 18-Oct-2013
+~~~~~~~~~~~~~~~
+
+Rebuilt :file:`/ocean/sallen/hg_repos/NEMO-hg-mirror` as an svn checkout of ^/branches/2012/dev_v3_4_STABLE_2012 of the NEMO repo in France at r3819, and initialized it as an hg repo so that we can use it as an svn-hg bridge.
+Rebuilt NEMO-code repo on Bitbucket and linked it with NEMO-mirror-merge repo on :kbd:`tom` which is also linked to NEMO-he-mirror on :kbd:`ocean`.
+Updated NEMO-code docs and added sections on cloning the repo, managing configurations, and running the model.
+Created SS-run-sets and NEMO-forcing repos on Bitbucket.
+(MEOPAR)
+
+
+Sat 19-Oct-2013
+~~~~~~~~~~~~~~~
+
+Explored :file:`NEMO-code/NEMOGCM/TOOLS/` directory.
+Built :command:`rebuild_nemo` tool and tested it on :kbd:`salish` and :kbd:`jasper`; it is much faster than :command:`nocscombine`.
+Consolidated 72 hr WCSD run tidal harmonics diagnostic results files.
+(MEOPAR)
+
+
+Sat 19-Oct-2013
+~~~~~~~~~~~~~~~
+
+Worked on design of :command:`salishsea` command processor.
+(MEOPAR)
+
+Attended East Bay Maker Fair.
+
+
+Week 42
+-------
+
+Mon 21-Oct-2013
+~~~~~~~~~~~~~~~
+
+Sent email to Kate re: the location of the M2 tide results from the CONCEPTS-110 JPP test case.
+Added JPP case sub-domain coordinates and bathymetry files to NEMO-forcing repo and added docs for that repo to docs repo.
+Added docs to tools repo for NEMOGCM/TOOLS/rebuild_nemo Fortran/ksh tool.
+Implemented :command:`salishsea rebuild` command to consolidate the pre-processor results files for from a run in the current directory.
+Explored NEMO BDY code re: unstructured boundary conditions and specifying them in a namelist vs. in a :file:`coordinates.bdy.nc` file.
+Explored the NEMO docs and code re: optimization of domain decomposition over multiple processors.
+(MEOPAR)
