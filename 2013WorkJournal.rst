@@ -1414,7 +1414,20 @@ Mon 21-Oct-2013
 Sent email to Kate re: the location of the M2 tide results from the CONCEPTS-110 JPP test case.
 Added JPP case sub-domain coordinates and bathymetry files to NEMO-forcing repo and added docs for that repo to docs repo.
 Added docs to tools repo for NEMOGCM/TOOLS/rebuild_nemo Fortran/ksh tool.
-Implemented :command:`salishsea rebuild` command to consolidate the pre-processor results files for from a run in the current directory.
+Implemented :command:`salishsea combine` command to consolidate the pre-processor results files for from a run in the current directory.
 Explored NEMO BDY code re: unstructured boundary conditions and specifying them in a namelist vs. in a :file:`coordinates.bdy.nc` file.
 Explored the NEMO docs and code re: optimization of domain decomposition over multiple processors.
+(MEOPAR)
+
+
+Tue 22-Oct-2013
+~~~~~~~~~~~~~~~
+
+Buffed up :command:`salishsea` command processor including renaming rebuild sub-command to combine.
+Tested our theory about specifying unstructured boundaries via :kbd:`nambdy_index` namelist in AMM12 config.
+After some initially confusing results, Susan realized that the boundary coordinate calcuation code in :file:`bdyini.F90` uses east, west, north, south ordering but the AMM12 tide forcing files use east, north, south, west.
+Temporarily modifying :file:`bdyini.F90` for testing resulted in good, but not perfect agreement between AMM12 runs using :file:`coordinates.bdy.nc` and using boundary calculations activated by :kbd:`ln_coords_file = .false.`.
+The analysis is documented in the AMM12-BDY-analysis notebook.
+Re-organized docs to put more focus on Salish Sea NEMO model, separate from the stuff we learned about NEMO on our way to it.
+Started adding functionality to :command:`salishsea combine` to move its results to a directory given on the command line.
 (MEOPAR)
