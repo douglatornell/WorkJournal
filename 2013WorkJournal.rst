@@ -1431,3 +1431,85 @@ The analysis is documented in the AMM12-BDY-analysis notebook.
 Re-organized docs to put more focus on Salish Sea NEMO model, separate from the stuff we learned about NEMO on our way to it.
 Started adding functionality to :command:`salishsea combine` to move its results to a directory given on the command line.
 (MEOPAR)
+
+
+Wed 23-Oct-2013
+~~~~~~~~~~~~~~~
+
+Helped Kate by email with automating retrieval of tide data from DFO site.
+Started working on getting JPP (aka sub-domain) running on :kbd:`salish`.
+It turned out that the weird memory use we were seeing was an aberration of running with closed boundaries.
+Once the west and north boundaries were opened and tidal forcing applied the runs had normal looking memory consumption.
+Finished adding functionality to :command:`salishsea combine` to move its results to a directory given on the command line.
+Added session cookie handling to Kate's tidal data retrieval notebook.
+(MEOPAR)
+
+Lunch with Zack's student Liz and her Eugene artist friend Mer at a great Indian place on Solano.
+
+
+Thu 24-Oct-2013
+~~~~~~~~~~~~~~~
+
+Changed :file:`par_JPP.h90` back to 40 vertical levels for JPP case.
+Added :kbd:`key_tide` to JPP configuration to enable tidal harmonics diagnostic analysis.
+Started running JPP case toward a 72 hour run.
+Tried to figure out how to control output of tidal harmonics diagnostic analysis, but there is still something about :kbd:`iom_put` that I'm missing.
+Added docs about SS-run-sets repo.
+Moved Anaconda Python setup into is own docs section.
+Added docs for :command:`salishsea` command processor.
+(MEOPAR)
+
+Dinner with Liz and Mer at Cugini's on Solano.
+
+
+Fri 25-Oct-2013
+~~~~~~~~~~~~~~~
+
+Worked on getting the JPP case running in NEMO-3.4.
+Manually smoothed the bathymetry at 1 point in the channel between Victoria and the Chatham Islands to mitigate yesterday's excessive u-velocity.
+That got us to the next failure: negative sea surface salinity at an adjacent grid point.
+Changed vertical diffusion scheme from from TKE to GLS which got us to 480 time steps before failing with an excessive u-velocity off the Sannich Peninsula.
+Changed the bottom friction factor to 1e-2 which caused failure at 335 time steps.
+Reverted bottom friction change.
+Fixed issue #4 in :program:`salishsea`; cleanup of :file:`nam_rebuild`.
+Manually smoothed bathymetry at 1 point in Poulier Pass (between Galiano and Valdez Islands).
+Resulted in negative surface salinity failure in Chatham Pass at 420 time steps.
+Manually smoothed another point in Chatham Pass.
+Several more cycles of manual smoothing in Chatham Pass and test runs that ran for generally increasing number of time steps; see NEMO-forcing repo log.
+Added compression of combined results files to :program:`salishsea` re: issue #3.
+Final run of the day got to 1217 time steps (12m:17s of model time).
+It failed with high u-velocity at (218,75,1).
+(MEOPAR)
+
+
+Sat 26-Oct-2013
+~~~~~~~~~~~~~~~
+
+Increased horizontal laplacian eddy viscosity from 100 to 200 and re-ran yesterday's last run; the run completed!!
+Started cleaning up SalishSeaSubdomainBathy notebook and moving reusable functions into :py:mod:`bathy_tools` module.
+(MEOPAR)
+
+Walked the the Gourmet Ghetto, had lunch at The Cheese Board, and shopped at Andronico's.
+Dinner at Inez and John's house.
+
+
+Sun 27-Oct-2013
+~~~~~~~~~~~~~~~
+
+Hiked up Strawberry Canyon fire road and back down Panorama Steps.
+
+Finished cleaning up SalishSeaSubdomainBathy notebook and :py:mod:`bathy_tools` module.
+Discussed smoothing algorithm with Susan.
+(MEOPAR)
+
+
+Week 43
+-------
+
+Mon 28-Oct-2013
+~~~~~~~~~~~~~~~
+
+Tagged NEMO-code, NEMO-forcing, and SS-run-sets repos with :kbd:`subdomain-3.4-M2` to make their state associated with successful run of JPP case on Saturday.
+Confirmed that full domain coordinates and bathymetry files from JP's WC3-PREP tarball are viable and added them to the NEMO-forcing repo.
+Worked on refactoring Susan's smoothing algorithm functions, moving them into :py:mod:`bathy_tools`, documenting them, and testing them on sub-domain bathymetry.
+(MEOPAR)
