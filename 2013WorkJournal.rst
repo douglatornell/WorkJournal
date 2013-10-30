@@ -1511,5 +1511,22 @@ Mon 28-Oct-2013
 
 Tagged NEMO-code, NEMO-forcing, and SS-run-sets repos with :kbd:`subdomain-3.4-M2` to make their state associated with successful run of JPP case on Saturday.
 Confirmed that full domain coordinates and bathymetry files from JP's WC3-PREP tarball are viable and added them to the NEMO-forcing repo.
-Worked on refactoring Susan's smoothing algorithm functions, moving them into :py:mod:`bathy_tools`, documenting them, and testing them on sub-domain bathymetry.
+Worked on refactoring Susan's smoothing algorithm functions, moving them into :py:mod:`bathy_tools`, documenting them, writing unit tests, and testing them on sub-domain bathymetry.
+(MEOPAR)
+
+
+Tue 29-Oct-2013
+~~~~~~~~~~~~~~~
+
+Did catch-up in this log.
+
+Confirmed that depths are included in NEMO results files; e.g. :kbd:`deptht` in :file:`*_grid_T.nc`.
+Finished refactoring Susan's smoothing algorithm functions, moving them into :py:mod:`bathy_tools`, documenting them, and testing them on sub-domain bathymetry.
+Built and tested IPSL XIOS server.
+It appears that there is no parallel output netCDF package for Ubuntu, so XIOS cannot be used to produce combined output files directly.
+The NEMO docs on how to use XIOS don't match up with the files in NEMO-3.4, and the XIOS page on the NEMO site is dated Jul-2013, so use of XIOS server may not be available yet for NEMO-3.4.
+Ran smoothing algorithm or original sub-domain bathymetry from JP.
+Ran JPP case with smoothed bathymetry and is completed in approximately the same time as did the run with the manually smoothed bathymetry.
+Started work to confirm that NEMO-3.4 will accept netCDF4 files with compression of variables enabled.
+Also started looking at netCDF conventions specs.
 (MEOPAR)
