@@ -1521,6 +1521,8 @@ Tue 29-Oct-2013
 Did catch-up in this log.
 
 Confirmed that depths are included in NEMO results files; e.g. :kbd:`deptht` in :file:`*_grid_T.nc`.
+Added docs re: links and cross-refs in Sphinx.
+Re-built packages in Sublime Text because Package Control would not update; can't get a lint package to work.
 Finished refactoring Susan's smoothing algorithm functions, moving them into :py:mod:`bathy_tools`, documenting them, and testing them on sub-domain bathymetry.
 Built and tested IPSL XIOS server.
 It appears that there is no parallel output netCDF package for Ubuntu, so XIOS cannot be used to produce combined output files directly.
@@ -1530,3 +1532,20 @@ Ran JPP case with smoothed bathymetry and is completed in approximately the same
 Started work to confirm that NEMO-3.4 will accept netCDF4 files with compression of variables enabled.
 Also started looking at netCDF conventions specs.
 (MEOPAR)
+
+
+Wed 30-Oct-2013
+~~~~~~~~~~~~~~~
+
+Finshed creating a netCDF4 version of the smoothed bathymetry with compression of variables enabled, and lsd=1 for depths; ran a JPP case test on :kbd:`salish` which completed successfully, and produced acceptable results
+Created a netCDF4, zlib=True, lsd=1 for depths dataset for the full Salish Sea bathymetry.
+Clipped the depths in the full bathy dataset such that 0-4m == 4m and >428m == 428m.
+428m is the deepest value in the Strait of Georgia and limiting the depth to that avoids excessive time step reduction to resolve deep regions of the coastal inlets that we are not interested in.
+Smoothing of full domain bathymetry does not appear to have worked correctly.
+Figured out how to build and control (via :file:`iodef.xml`) the output server in NEMO-3.4.
+Successfully ran JPP case with attached output server producing 1h and 1d files that were successfully combined from per-processor files; 1d output included tidal harmonic analysis quantities.
+Ran JPP case with tidal harmonic analysis output at 3d instead of 1d.
+Added some unit tests for functions in the :py:mod:`bathy_tools` module.
+(MEOPAR)
+
+Lunch with Jeff at Le Petit Cheval Vietnamese restaurant.
