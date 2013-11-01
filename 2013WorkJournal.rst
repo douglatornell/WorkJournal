@@ -1549,3 +1549,19 @@ Added some unit tests for functions in the :py:mod:`bathy_tools` module.
 (MEOPAR)
 
 Lunch with Jeff at Le Petit Cheval Vietnamese restaurant.
+
+
+Thu 31-Oct-2013
+~~~~~~~~~~~~~~~
+
+Explored yesterday's sub-domain M2 tidal harmonic analysis results and Susan confirmed that they are qualitatively as expected and the sea surface heights even look quantitatively close to the images in Thompson's book.
+Helped Kate sort out a merge conflict issue in her working copy that arose due to a fire alarm on Tuesday afternoon causing her to unintentionally createa a branch.
+The short resolution was to rebase that branch, but I only arrived at that after a bunch of other thrashing around.
+After a bunch of investigation, realized that full domain bathymetry smoothing had been successful yesterday, it was just that the way I was verifying the differences was wrong.
+Finalized smoothing of full domain bathymetry.
+Created new SalishSea NEMO configuration in NEMO-code repo for full domain runs.
+Created SalishSea directory in SS-run-sets repo.
+Tried 1st run of full Salish Sea domain.
+(MEOPAR)
+
+Dinner with Zack and Mimi at Julias.
