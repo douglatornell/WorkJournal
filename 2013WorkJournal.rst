@@ -1564,4 +1564,69 @@ Created SalishSea directory in SS-run-sets repo.
 Tried 1st run of full Salish Sea domain.
 (MEOPAR)
 
-Dinner with Zack and Mimi at Julias.
+Dinner with Zack and Mimi at Julia's.
+
+
+Fri 1-Nov-2013
+~~~~~~~~~~~~~~
+
+Fixed some minor errors in the setup and configuration of the full Salish Sea domain and attempted a run with an open western boundary, M2 tidal forcing, and initial temperature and salinity based on a STRATOGEM S4-1 profile; failed after 3719 time steps due to misconfigured boundary indices.
+Opened tickets for installation of TORQUE on salish and libav-tools (to get ffmpeg) on sable; latter is so that we can save matplolib animations.
+Did a series of 30 minute test runs, gradually fixing issues and adding functionality.
+Culminated with open boundary just across the mouth of the Strait of Juan de Fuca, M2 tidal forcing and Susan simulated temperature and salinity open boundary conditions on that boundary, uniform initial temperature and salinity based on a STRATOGEM S4-1 profile, and freshwater input from Susan initial Fraser River forcing file.
+Did a 24 hr run with 1 hr output but couldn't look at the results because we left the lab and the hotel wifi isn't up to results downloads that big.
+Did a 24 hr run with 3 hr output based on the previous run's restart file but the output files are empty; output server defs issue??
+(MEOPAR)
+
+Dinner at Cancun Taqueria.
+
+
+Sat 2-Nov-2013
+~~~~~~~~~~~~~~
+
+Did more experimentation with output server definitions on 4h and 8h runs; Susan used results to confirm that river run-off and open boundary forcing were working as expected.
+Did 16h and 24h runs.
+Started deleting unused parameters, and those with sensible defaults in the code from the namelist.
+Added special handling for restart files to :command:`salishsea combine`; see tools repo issue #6.
+Experimented with tidal harmonic output definitions enabled in 1h output group and other outputs disabled.
+Worked on per-processor results files clean-up in :command:`salishsea combine`; see tools repo issue #2.
+24h failed to produce output.
+Re-ran a 4h run to confirm that namelist and iodef changes were not responsible for 24h run issue and confirmed that default action of :command:`salishsea combine` now deletes per-processor results files.
+(MEOPAR)
+
+Lunch at Angeline's Louisiana Café.
+
+
+Sun 3-Nov-2013
+~~~~~~~~~~~~~~
+
+Traveled from Berkeley to Vancouver.
+
+Ran 4h case again to test :command:`salishsea combine --keep` option and it produced no output! :-(
+Re-organized NEMO-forcing repo docs section to separate material about the repo from new material about netCDF4 files.
+Started writing netCDF4 files and conventions material.
+(MEOPAR)
+
+
+November
+========
+
+Week 44
+-------
+
+Mon 4-Nov-2013
+~~~~~~~~~~~~~~
+
+Re-ran 4h run and it worked this time.
+Confirmed that :command:`salishsea combine --keep` works as expected; pushed changes and closed tools repo issue #2.
+Re-ran 24h run and confirmed that it really produces no output in the 4h files, though it did produce tidal harmonics output.
+Finished netCDF4 conventions docs.
+Did some web reading about the NCO library.
+Set up NEMO SalishSea environment on :kbd:`jasper` despite its glacially slow performance on the login node.
+24h, 16 core, 2Gb/core run on :kbd:`jasper` produced not results time steps, but errored out due to misnamed river forcing file; queued to run again
+Re-ran 16h job and this time it produces no results time steps.
+Re-built SalishSea config without :kbd:`key_iomput` and ran 24h job with hourly output.
+Started work on :command:`salishsea prepare` command processor.
+Re-ran :kbd:`jasper` run and it timed out after 771 time steps, but I think that was a :kbd:`jasper` performance issue.
+Re-built SalishSea config with :kbd:`key_dmigout` and ran 6d overnight.
+(MEOPAR)
