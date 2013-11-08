@@ -1663,9 +1663,26 @@ Got NCO package installed on sable, salish and Waterhole machines.
 Finalized :command:`salishsea prepare` sub-command and wrote docs for it.
 Started reading about surface boundary conditions re: using CGRF model products for forcing.
 Did a 1h test run with a small, uniform northward wind stress.
-Started 7d overnight run from last night restart file with horizontal laplacian eddy viscosity reduced from 200 to 100 m^2/s
+Started 7d overnight run from last night's restart file with horizontal laplacian eddy viscosity reduced from 200 to 100 m^2/s.
 (MEOPAR)
 
 Attended phys ocgy seminar on Powell Lake Double Diffusion by Ben Scheifele.
 
 
+Thu 7-Nov-2013
+~~~~~~~~~~~~~~
+
+Re-discovered the argcomplete package for adding bash completion to argparse-based scripts.
+Discovered that tools-repo docs were not building on readthe docs.org; wiped the build.
+Overnight 7d run went to completion in 6.5 hr.
+Confirmed that Bitbucket renders READMEs in project sub-directories, so I can use Fernando's trick of putting links to nbviewer renderings of notebooks in directory READMEs.
+Added required config to docs repo so that LaTex rendering will build and closed issue #2.
+Did a bunch of docs maintenance on the way to documenting the process of building weights files for atmospheric forcing.
+Created a SalishSea_no_IOM configuration and corresponding run-set files so that we don't have to keep recompiling to go back and forth on using key_iomput.
+Ran a 24h IOM server test with the server's MPI buffer size increased from 512Mb to 1024Mb and it worked!
+Started testing Kate's 8 tidal forcing components.
+Eventually got to a 24h run with hourly output that failed with a velocity blow-up at 419 time steps.
+Removed all but the new M2 tide and started another 24h run.
+Worked through adding atmospheric forcing to the model using the CGRF model products and weighting factors from JP; got a 1 hr run to complete.
+Started 7d overnight run from last night's restart file with Kate's M2 tidal forcing.
+(MEOPAR)
