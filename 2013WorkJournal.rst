@@ -1686,3 +1686,25 @@ Removed all but the new M2 tide and started another 24h run.
 Worked through adding atmospheric forcing to the model using the CGRF model products and weighting factors from JP; got a 1 hr run to complete.
 Started 7d overnight run from last night's restart file with Kate's M2 tidal forcing.
 (MEOPAR)
+
+
+Fri 8-Nov-2013
+~~~~~~~~~~~~~~
+
+Overnight 7d run went to completion in 8 hr.
+Discuss parameters for weekend run with Susan; as many forcing elements as possible, start 15-Sep-2002, K1 and M2 tidal harmonics for days 6 & 7 and 8 & 9 (after restart).
+Did a 24h run with tidal forcing from only Kate's K1 file.
+Started documenting atmospheric forcing.
+Came up with a file management strategy for a partial rsync mirror of the CGRF dataset and a directory of symbolic links of file names of the form that NEMO requires.
+Susan decided that the time step needed to be reduced to 50s; did a 24h run with 8 tide components that ran to completion.
+Created initial implementation of Python functions to automate populating the CGRF rsync mirror on :kbd:`ocean` and creating the symlinks for NEMO.
+Added atmospheric forcing weighting factors to the NEMO-forcing repo :file:`grid/` directory; they interpolate CGRF grid values on to Salish Sea grid.
+Created :file:`no_snow.nc`, a CGRF-like file that enforces a constraint of zero solid phase precipitation at all times and locations.
+Tested the CGRF NEMO symlinks and :file:`no_snow.nc` as annual climatology in a run starting on 15-Sep-2002.
+Susan's analysis of the 50s time step run lead her to conclude that a further reduction was required.
+Tried to use a 45s time step but it turns out that NEMO requires the time step to be an even number.
+Changed time step to 40s and started a 24h, 8 tide component run with the start date moved to 15-Sep-2002.
+Prepared namelists for weekend run: start 15-Sep-2002, 40s time step, uniform S4-1 temperature and salinity initial stratification, atmospheric forcing, 8 tidal components, major rivers, preliminary JdF boundary temperature and salinity forcing, K1 and M2 tidal harmonics for days 6 & 7 and 8 & 9 (after restart).
+(MEOPAR)
+
+Dinner at the Wolf and Hound with Deirdre and Bob.
