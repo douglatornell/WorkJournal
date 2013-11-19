@@ -1788,4 +1788,44 @@ Fri 15-Nov-2013
 
 Created the :py:mod:`SalishSeaTools` package.
 Added docs re: creation of a MEOPAR work space, cloning the Salish Sea MEOPAR repos, and installing the :py:mod:`SalishSeaTools` and :py:mod:`SalishSeaCmd` packages.
+Worked on splitting namelist into several files that will be listed in the run description file and concatenated to produce the namelist in the run directory.
 (MEOPAR)
+
+
+Sat 16-Nov-2013
+~~~~~~~~~~~~~~~
+
+Attended VanPyDay conference.
+
+Worked on documenting namelist assembly driven by run description file.
+(MEOPAR)
+
+Took MacBook to Pacific Centre Apple Store for help with the fact that it couldn't install the OS/X 10.8.5 Supplement 1 update.
+Investigation of the issue lead to the drive failing.
+Bought a 500 Gb portable drive to salvage data that I thought had not been backed up since our return from Berkeley (turns out there was a successful backup to :kbd:`matisse` at 08:00 in the morning).
+Left the MacBook for an attempt to re-partition the drive and re-install the OS, or replace the drive with a 500 Gb unit.
+
+
+Sun 17-Nov-2013
+~~~~~~~~~~~~~~~
+
+Picked up MacBook from Apple Store.
+New 500 Gb drive installed and OS/X 10.8.5 installed.
+Re-built my working environment (described in document on Google Drive).
+Re-purposed 500 Gb portable drive as Time Machine volume for use when I am traveling.
+
+
+Week 46
+-------
+
+Mon 18-Nov-2013
+~~~~~~~~~~~~~~~
+
+Continued re-building working environment on MacBook.
+
+Went to Nordion to diagnose problems with email not being delivered from Minerva, I-123 Datalogs, beaver, and Sr-82 Spallation monitoring, and failure of forecasts for Sr-82 spallation.
+Traced the email issue to mis-configured MX DNS records for :kbd:`nordion.com` and :kbd:`mdsinc.com` domains.
+Surmised that the forecasts failure is due to TRIUMF changing the format of the schedule spreadsheet again so that it didn't load into the database.
+
+Did a session on testing and code design for the 1st EOAS Software Workout session.
+(SWC)
