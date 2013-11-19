@@ -1708,3 +1708,84 @@ Prepared namelists for weekend run: start 15-Sep-2002, 40s time step, uniform S4
 (MEOPAR)
 
 Dinner at the Wolf and Hound with Deirdre and Bob.
+
+
+Sat 9-Nov-2013
+~~~~~~~~~~~~~~
+
+24h run with 40s time step ran to completion.
+Started 1st stage of weekend run; Susan was running tests most of the day too, the run duration will be long-ish.
+Worked on adding atmospheric forcing to :command:`salishsea prepare`; need to commit and push atmospheric forcing docs to provide cross-ref targets.
+(MEOPAR)
+
+
+Sun 10-Nov-2013
+~~~~~~~~~~~~~~~
+
+1st stage of weekend run went to completion; 7d in 16.5 hr.
+Started 2nd stage of weekend run.
+Wrote atmospheric forcing docs.
+2nd stage of weekend run completed successfully in just under 4 hr with no other jobs running, indicating a compute time of 2 hr per model day.
+Figured out what the :kbd:`time_counter_bnds` dimension of NEMO results files is about: it refers to the start and end time, in seconds since the run start, of each of the results time steps.
+Added atmospheric forcing handling to :command:`salishsea prepare` re: tools repo issue #8.
+Committed and pushed the no-snow constraint forcing file and the notebook that created it.
+(MEOPAR)
+
+Traveled to Parksville.
+
+
+Week 45
+-------
+
+Mon 11-Nov-2013
+~~~~~~~~~~~~~~~
+
+Investigated shallow areas in the original bathymetry from JP, espcially Toba Inlet.
+Investigated instantaneous vs. averaged field operations in output server.
+Worked on clean up of :file:`iodef.xml`.
+Researched use of atmospheric pressure in NEMO as inverse sea surface height.
+Thought about design of :command:`salishsea get_cgrf` sub-command.
+(MEOPAR)
+
+Traveled to Vancouver
+
+
+Tue 12-Nov-2013
+~~~~~~~~~~~~~~~
+
+Added atmospheric pressure forcing to namelist and ran 1h and 24h tests.
+Project meeting w/ Susan and Kate, and research meeting with Susan.
+Wrote blurb for Fernando Perez about how we use IPython Notebook.
+Implemented the trick that Fernando showed me using a Python script to generate a :file:`README.md` in :file:`tools/I_ForcingFiles/` that contains links to nbviewer renderings of all of the notebooks.
+Started implementation of :command:`salishsea get_cgrf` sub-command.
+(MEOPAR)
+
+
+Wed 13-Nov-2013
+~~~~~~~~~~~~~~~
+
+Finished initial implementation and documentation of :command:`salishsea get_cgrf` sub-command.
+Worked on a 4d run with a 50s time step initialized from weekend's 23-Sep restart file going to calculated tidal harmonics over 4d at 9 time step intervals.
+Updated repo namelist with atmospheric forcing.
+Had several false starts apparently due to the inclusion of atmospheric pressure as surface forcing; tried 40s time step, and eventually disabled atmospheric pressure forcing.
+Started converting atmospheric forcing weights file to netCDF4 zlib=True file and concurrent development of :py:mod:`nc_tools` module.
+(MEOPAR)
+
+
+Thu 14-Nov-2013
+~~~~~~~~~~~~~~~
+
+Finished converting atmospheric forcing weights file to netCDF4 zlib=True file and development of :py:mod:`nc_tools` module; also created :py:mod:`hg_commands` module to hold Mercurial command interface functions for cross-module and cross-package use.
+Discovered that duration of "4d" runs is actually 75.94h, perhaps due to NEMO not allowing time step size to be changed when using a restart file.
+Ran 2nd "4d" run to calculate tidal harmonics.
+Realized that imports and dependencies among :py:mod:`nc_tools`, :py:mod:`bathy_tools`, :py:mod:`hg_commands`, and :py:mod:`SalishSeaCmd` are complicated and brittle.
+Decided to collect :py:mod:`nc_tools`, :py:mod:`bathy_tools`, and :py:mod:`hg_commands` into a new :py:mod:`SalishSeaTools` package.
+(MEOPAR)
+
+
+Fri 15-Nov-2013
+~~~~~~~~~~~~~~~
+
+Created the :py:mod:`SalishSeaTools` package.
+Added docs re: creation of a MEOPAR work space, cloning the Salish Sea MEOPAR repos, and installing the :py:mod:`SalishSeaTools` and :py:mod:`SalishSeaCmd` packages.
+(MEOPAR)
