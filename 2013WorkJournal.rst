@@ -1814,6 +1814,9 @@ New 500 Gb drive installed and OS/X 10.8.5 installed.
 Re-built my working environment (described in document on Google Drive).
 Re-purposed 500 Gb portable drive as Time Machine volume for use when I am traveling.
 
+Started a new "weekend" run cycle with a 7d, 50s time step run with tidal harmonics calculated at 9 time step intervals for the final 2 days; atmospheric pressure forcing is turned off because it seems to trigger instability.
+(MEOPAR)
+
 
 Week 46
 -------
@@ -1823,9 +1826,40 @@ Mon 18-Nov-2013
 
 Continued re-building working environment on MacBook.
 
+Continued new "weekend" run cycle with a 4d restart continuation run with tidal harmonics calculated for all 4 days.
+(MEOPAR)
+
 Went to Nordion to diagnose problems with email not being delivered from Minerva, I-123 Datalogs, beaver, and Sr-82 Spallation monitoring, and failure of forecasts for Sr-82 spallation.
 Traced the email issue to mis-configured MX DNS records for :kbd:`nordion.com` and :kbd:`mdsinc.com` domains.
 Surmised that the forecasts failure is due to TRIUMF changing the format of the schedule spreadsheet again so that it didn't load into the database.
 
 Did a session on testing and code design for the 1st EOAS Software Workout session.
 (SWC)
+
+
+Tue 19-Nov-2013
+~~~~~~~~~~~~~~~
+
+Kate reported that tidal harmonics from the 7d and 4d runs differ significantly; probably not surprising.
+Did another 4d restart continuation run with harmonics calculated for all 4 days.
+Susan's suggestion for the next run is 7d with harmonics calculated for all 7 days.
+Pushed for testing the changes re: assembling namelist from segments listed in run description file.
+4d run stopped for no apparent reason; started over.
+Ran 1h instantaneous (i.e. every time step) output run to generate files for atmospheric forcing verification; confirms that namelist assembly works.
+Noted that default namelists now exclude generation of :file:`timing.output` profiling results; probably not a bad thing.
+Did initial exploration of atmospheric forcing results; no precipitation values, but reasonable looking wind.
+4d run finished in ~6hr in contrast to the expected 8hr, but files look okay.
+(MEOPAR)
+
+Got flu shot.
+
+
+Wed 20-Nov-2013
+~~~~~~~~~~~~~~~
+
+Traveled to Barrie.
+
+Downloaded 5 more days of CGRF results.
+Started 7d restart continuation run with harmonics calculated for all 7d.
+Wrote unit tests for :py:mod:`nc_tools`.
+(MEOPAR)
