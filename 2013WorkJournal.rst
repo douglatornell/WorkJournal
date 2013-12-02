@@ -1863,3 +1863,75 @@ Downloaded 5 more days of CGRF results.
 Started 7d restart continuation run with harmonics calculated for all 7d.
 Wrote unit tests for :py:mod:`nc_tools`.
 (MEOPAR)
+
+
+Thu 21-Nov-2013
+~~~~~~~~~~~~~~~
+
+Assembled results of 7d tidal harmonics run.
+Removed east end of Jervis Inlet & Toba Inlet region from bathymetry because source Cascadia bathymetry data are incorrect in those areas.
+Cleaned up and pushed atmospheric forcing verification notebook.
+(MEOPAR)
+
+
+Fri 22-Nov-2013
+~~~~~~~~~~~~~~~
+
+Added wind speed calculations to atmospheric forcing verification notebook.
+(MEOPAR)
+
+
+Sat 23-Nov-2013
+~~~~~~~~~~~~~~~
+
+Added calculation of CGRF to NEMO comparison grid points to atmospheric forcing verification notebook.
+(MEOPAR)
+
+
+Sun 24-Nov-2013
+~~~~~~~~~~~~~~~
+
+Added more unit tests for nc_tools module; 100% coverage.
+(MEOPAR)
+
+
+Week 47
+-------
+
+Mon 25-Nov-2013
+~~~~~~~~~~~~~~~
+
+Added README with links to rendered notebooks, and the script to create/update it to all tools repo directories containing notebooks that didn't already have notebook rendering.
+Changed docs repo README from RST to Markdown to get rid of consistency warning when docs are built.
+(MEOPAR)
+
+
+Fri 29-Nov-2013
+~~~~~~~~~~~~~~~
+
+Traveled to Vancouver.
+
+Wrote quick-start docs describing how to setup and run Salish Sea NEMO model.
+Wrote unit tests for :py:mod:`hg_commands`.
+(MEOPAR)
+
+
+Sat 30-Nov-2013
+~~~~~~~~~~~~~~~
+
+Fixed the issue whereby the sample :file:`SalishSea.yaml` run description file was not being included in the tools repo docs rendering on readthedocs.org.
+Started writing Mercurial workflows docs.
+(MEOPAR)
+
+
+Sun 1-Dec-2013
+~~~~~~~~~~~~~~
+
+Lots of documentation updates.
+Deleted consolidated namelist in favour of segment files that are concatenated by :command:`salishsea prepare`.
+Deleted no longer used no_IOM configuration files.
+Experimented with keeping run-set files in a personal subdirectory.
+Fixed a bug in :command:`salishsea prepare` re: relative paths handling.
+Ran 1 time step with max depths set to 428m to generate layer depths for initial and boundary conditions files.
+Created tools repo issue #9 re: bad assumption about relative path to NEMO-code before and after runs.
+(MEOPAR)
