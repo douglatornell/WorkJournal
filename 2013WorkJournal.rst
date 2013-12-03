@@ -1935,3 +1935,26 @@ Fixed a bug in :command:`salishsea prepare` re: relative paths handling.
 Ran 1 time step with max depths set to 428m to generate layer depths for initial and boundary conditions files.
 Created tools repo issue #9 re: bad assumption about relative path to NEMO-code before and after runs.
 (MEOPAR)
+
+December
+========
+
+Week 48
+-------
+
+Mon 2-Dec-2013
+~~~~~~~~~~~~~~
+
+Nancy's first day as post-doc with Susan, Salish Sea MEOPAR team member, and my office-mate.
+
+Used :command:`ncks` on :kbd:`salish` to extract layer depths from yesterday's 428m max depth run into :file:`deptht_428m.nc` for initial and boundary conditions calculations and committed it in :file:`NEMO-corcing/grid/`.
+Helped Nancy get up and running on the project.
+Updated :file:`NEMO-forcing/open_boundaries/west/SalishSea_bdyT_tra.nc` to 428m max depth, netCDF4 w/ compression, and CF-1.6 conventions.
+Updated :file:`NEMO-forcing/initial_strat/SS_SoG0318_1y_*_nomask.nc` to 428m max depth, netCDF4 w/ compression, and CF-1.6 conventions.
+Confirmed that code runs with for 1h with bathymetry that excludes the problem areas in Jervis and Toba Inlets, and the 428m initial and boundary conditions.
+Learned that :kbd:`namdom.rn_hmin` cannot be >3 or NEMO will decide that the minimum depth is ~5m instead of ~4m.
+Discovered that :kbd:`namdom.rn_hmin = 0` results in a min depth of ~2m; investigation showed that there are no depths >0 and <4 metres in our bathymetry, so ~2m must be a NEMO calculation artifact.
+Started to set up 40d run on :kbd:`jasper`.
+(MEOPAR)
+
+Susan forwarded email from Pierre Clement at BIO re: downloading meteo data from EC.
