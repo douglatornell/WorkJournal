@@ -1958,3 +1958,23 @@ Started to set up 40d run on :kbd:`jasper`.
 (MEOPAR)
 
 Susan forwarded email from Pierre Clement at BIO re: downloading meteo data from EC.
+
+
+Tue 3-Dec-2013
+~~~~~~~~~~~~~~
+
+Wrote quick-start section about building the :program:`rebuild_nemo` tool.
+Participated in EOAS MEOPAR mtg.
+Invited Rich, Mark & Chuning to Bitbucket and got the latter 2 set up as SalishSea-MEOPAR team members.
+Started writing quick-start section about running on :kbd:`jasper` and discovered that it is down for upgrading until ~17:00 MST on 5-Dec.
+(MEOPAR)
+
+Research mtg w/ Susan.
+Agreed that I should start spending a day or so a week on projects other than MEOPAR, starting with finishing up moving SOG-buildbot to the new :kbd:`bjossa` hardware.
+
+Went as far as I could toward deploying SOG trac instance on new :kbd:`bjossa` hardware, but got stopped because Mercurial is not installed.
+Re-opened ticket #12585 with a request to install it.
+Wrote trac deployment docs.
+(SOG)
+
+Attended reception to celebrate 50th anniversary of the UBC Faculty of Science, the re-opening of the Pacific Museum of the Earth, and the addition of the Danner collection to the PME.
