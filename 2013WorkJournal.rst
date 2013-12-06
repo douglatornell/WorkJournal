@@ -1975,6 +1975,30 @@ Agreed that I should start spending a day or so a week on projects other than ME
 Went as far as I could toward deploying SOG trac instance on new :kbd:`bjossa` hardware, but got stopped because Mercurial is not installed.
 Re-opened ticket #12585 with a request to install it.
 Wrote trac deployment docs.
+SOGCommand build on :kbd:`tyee` failed when the docs updates were pushed.
 (SOG)
 
 Attended reception to celebrate 50th anniversary of the UBC Faculty of Science, the re-opening of the Pacific Museum of the Earth, and the addition of the Danner collection to the PME.
+
+
+Wed 4-Dec-2013
+~~~~~~~~~~~~~~
+
+Sick day; tired, head and body aches.
+
+
+Thu 5-Dec-2013
+~~~~~~~~~~~~~~
+
+Fixed SOGCommand build slave failure on :kbd:`tyee`; it was caused by a subtle Python version conflict issue that arises due to having Anaconda in my default :envvar:`PATH`.
+(SOG)
+
+Got bloomcast running again on :kbd:`tom`.
+Fixed a bug in the use of datetime objects that resulted from import changes.
+Change location of HTML results directory from a hard-coded value in the code to a config file value.
+Moved config and infiles into a :file:`run/` sub-directory to make the top level directory look more like a normal Python package.file
+(bloomcast)
+
+Set up 40d run on :kbd:`jasper` but had a lot of trouble getting it to start; suspect that :kbd:`jasper` is not trully operational yet after this week's upgrade.
+The one attempt that did seem to be running (4x14 domain decomposition w/ 512Mb per processor) was taking ~1 minute per time step so it was terminated.
+(MEOPAR)
