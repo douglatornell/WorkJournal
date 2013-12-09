@@ -2002,3 +2002,25 @@ Moved config and infiles into a :file:`run/` sub-directory to make the top level
 Set up 40d run on :kbd:`jasper` but had a lot of trouble getting it to start; suspect that :kbd:`jasper` is not trully operational yet after this week's upgrade.
 The one attempt that did seem to be running (4x14 domain decomposition w/ 512Mb per processor) was taking ~1 minute per time step so it was terminated.
 (MEOPAR)
+
+
+Fri 6-Dec-2013
+~~~~~~~~~~~~~~
+
+Continued trying to get 40d run going on :kbd:`jasper`; it appears to be working better, but still taking much longer per time step than :kbd:`salish`.
+Did some 72 time step profiling runs with different domain decomposition and memory configurations:
+
+* 4x4x2Gb ran in 226s and later in 114s
+* 4x9x512Mb was running at ~1 minute per time step and was terminated
+* 4x9x1Gb run in 1230s though 1 processor took only 105s
+* 3x5x2Gb never did run
+
+The :kbd:`jasper` tests were very unsatisfactory owing to node failure issues, parallel read issues, etc.
+It's not clear whether this is situation normal on :kbd:`jasper` or just a bad, post-upgrade day.
+
+Ran 72 time step domain decomposition tests on :kbd:`salish`:
+
+* 4x8 ran in 248s
+* 4x4 ran in 255s
+* 3x7 ran in 284s
+(MEOPAR)
