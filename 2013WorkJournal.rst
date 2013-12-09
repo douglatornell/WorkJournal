@@ -2024,3 +2024,18 @@ Ran 72 time step domain decomposition tests on :kbd:`salish`:
 * 4x4 ran in 255s
 * 3x7 ran in 284s
 (MEOPAR)
+
+
+Sat 7-Dec-2013
+~~~~~~~~~~~~~~
+
+Got a Raspberry Pi set up and connected to the CM11A X10 home automation controller.
+Created https://bitbucket.org/douglatornell/raspi_x10 project to document what I'm doing and the re-implementation of my old, 2006 Python code to manage heyu schedules uploaded to the CM11A.
+(raspi_x10)
+
+
+Sun 8-Dec-2013
+~~~~~~~~~~~~~~
+
+Started re-implementation of my old, 2006 Python code to manage heyu schedules uploaded to the CM11A.
+(raspi_x10)
