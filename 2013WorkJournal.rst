@@ -1947,6 +1947,7 @@ Mon 2-Dec-2013
 
 Nancy's first day as post-doc with Susan, Salish Sea MEOPAR team member, and my office-mate.
 
+Salish Sea project mtg; see Google Drive whiteboard image file.
 Used :command:`ncks` on :kbd:`salish` to extract layer depths from yesterday's 428m max depth run into :file:`deptht_428m.nc` for initial and boundary conditions calculations and committed it in :file:`NEMO-corcing/grid/`.
 Helped Nancy get up and running on the project.
 Updated :file:`NEMO-forcing/open_boundaries/west/SalishSea_bdyT_tra.nc` to 428m max depth, netCDF4 w/ compression, and CF-1.6 conventions.
@@ -2039,3 +2040,17 @@ Sun 8-Dec-2013
 
 Started re-implementation of my old, 2006 Python code to manage heyu schedules uploaded to the CM11A.
 (raspi_x10)
+
+
+Week 49
+-------
+
+Mon 9-Dec-2013
+~~~~~~~~~~~~~~
+
+Salish Sea project mtg; see Google Drive whiteboard image file.
+Helped Nancy (and later, Susan) with Mercurial merge and update issues.
+Added docs about aborting uncommitted Mercurial merges.
+Met with Rich, Mark & Chuning re: adding SoG observations repo(s) to SalishSea-MEOPAR team collection.
+Finished implementation of :command:`salishsea gather` sub-command.
+(MEOPAR)
