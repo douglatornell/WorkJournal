@@ -2054,3 +2054,19 @@ Added docs about aborting uncommitted Mercurial merges.
 Met with Rich, Mark & Chuning re: adding SoG observations repo(s) to SalishSea-MEOPAR team collection.
 Finished implementation of :command:`salishsea gather` sub-command.
 (MEOPAR)
+
+
+Tue 10-Dec-2013
+~~~~~~~~~~~~~~~
+
+Fixed tools repo docs config, modules x-refs, and import in :py:mod:`salishsea_cmd.api` to that docs build correctly on readthedocs.org.
+Docs maintenance.
+Resumed work on atmospheric forcing verification, changing the approach to using custom debugging output from NEMO instead of model output because of Susan discovery that the calculated wind components are subject to atmospheric stability criteria manipulations and are rescaled to be in a neutral atmosphere, so they do not directly reflect the applied forcing values.
+Realized that I had incorrectly transformed CGRF 0-360 longitudes to NEMO -180/180 ones, so previous wind comparisons were incorrect.
+Comparing calculated winds to the SoG forcing instead of Siberia looks better but is still subject to the calculation issue above.
+(MEOPAR)
+
+Research mtg w/ Susan.
+
+Finished deployment of trac on new :kbd:`bjossa` hardware.
+(SOG)
