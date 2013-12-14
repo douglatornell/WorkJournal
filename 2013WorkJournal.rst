@@ -2070,3 +2070,62 @@ Research mtg w/ Susan.
 
 Finished deployment of trac on new :kbd:`bjossa` hardware.
 (SOG)
+
+
+Wed 11-Dec-2013
+~~~~~~~~~~~~~~~
+
+Updated repos on :kbd:`jasper` and discovered that that Friday's crash issues were probably due to not having run :command:`hg update`; queued a new 4x4x1h profiling run.
+After more queued run failures and a hint from Susan's excellent Google-foo, realized that the failures were due to conflicting MPI libraries; I was explicitly loading Intel MPI and Python was loading OpenMPI as a side-effect.
+Removal of OpenMPI resulted in an executable that failed with a different error regarding being unable to ping a node; sent email to westgrid support.
+Continued work on atmospheric forcing verification.
+After sorting out coordinate order (it's i,j internally in NEMO but j,i in the results files) and disabling rotation and time interpolation of the forcing values, I finally got babypoo output that confirms that the wind component values read by NEMO at the grid points closest to 2 CGRF grid points are very close to the CGRF values.
+(MEOPAR)
+
+
+Thu 12-Dec-2013
+~~~~~~~~~~~~~~~
+
+Westgrid support told me to switch to OpenMPI because Intel MPI is being phased out due to incompatibility with the scheduler.
+Created a new :kbd:`jasper` architecture file based on :program:`mpif90`.
+Ran a new series of 1h, no atmospheric forcing, profiling runs on :kbd:`jasper`:
+
+* 4x4 2Gb processors: 151s
+* 3x7 2Gb processors: 152s
+* 6x14 1Gb processors: failed due to insufficient memory
+* 6x14 1536Mb processors: failed due to insufficient memory
+* 6x14 2Gb processors: failed due to insufficient memory
+* 4x6 2Gb nodes:2:ppn:12: queued
+* 3x4 2Gb nodes=1:ppn=12: queued
+
+Helped Nancy get started with Sphinx and writing docs.
+Continued work on atmospheric forcing verification.
+Figured out that the parameters controlling forcing wind vector rotation in the :file:`namelist.surface` were incorrect; correcting them resulted in different wind component values in the babypoo output.
+Received email from JP re: the CGRF files.
+(MEOPAR)
+
+Dentist appt.
+
+
+Fri 13-Dec-2013
+~~~~~~~~~~~~~~~
+
+Continued 1h, no atmospheric forcing, profiling runs on :kbd:`jasper`:
+
+* 3x4 2Gb nodes=1:ppn=2: Failed with invalid MPI rank
+* 8x8 2Gb processors: 134s
+* 10x10 2Gb processors: 2377s
+* 8x8 1Gb processors: timed out after 1h of walltime
+* 8x8 2Gb processors: 58s (after processor affinity was re-enabled)
+* 8x8 2Gb processors: 47s (after processor affinity was re-enabled)
+* 6x14 2Gb processors: 38s (after processor affinity was re-enabled)
+
+A 2nd 8x8x2Gb run took nearly 600s, so sent email to support@westgrid re: inconsistent run times; 1st response suggested requesting whole nodes, and running on :kbd:`lattice` or :kbd:`parallel`.
+Subsequently, Masao@ualberta replied to say that he had enabled default processor affinity that had accidentally been disabled and requested that I try the 64 processor run again; it completed in 58s!!
+Started writing emacs configuration docs.
+Continued work on atmospheric forcing verification.
+Confirmed that forcing wind vector magnitude is invariant when rotation is applied, and that the rotation direction is in the correct direction.
+(MEOPAR)
+
+Worked on migrating buildbot to new :kbd:`bjossa` hardware and upgrading it to 0.8.8.
+(SOG)
