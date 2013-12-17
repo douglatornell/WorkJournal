@@ -2129,3 +2129,32 @@ Confirmed that forcing wind vector magnitude is invariant when rotation is appli
 
 Worked on migrating buildbot to new :kbd:`bjossa` hardware and upgrading it to 0.8.8.
 (SOG)
+
+
+Sat 14-Dec-2013
+~~~~~~~~~~~~~~~
+
+Continued 1h, no atmospheric forcing, profiling runs on :kbd:`jasper` now that default processor affinity has been re-enabled:
+
+* 7x16 2Gb processors: 72s
+* 8x18 2Gb processors: 44s
+
+Finished, committed, and pushed emacs configuration docs.
+Debugged :file:`arch-mpif90_jasper.fcm` when it failed to build NEMO.
+Updated docs re: change from Intel MPI (mpiifort) to OpenMPI (mpif90) on :kbd:`jasper`.
+Queued 40d tidal harmonics run on :kbd:`jasper`; it ran to ~9.5d in ~2.5h before blowing up at depth level 12 on the open boundary.
+Reverted the open boundary conditions namelist to remove zero-gradient and soft-start and re-queued the run.
+(MEOPAR)
+
+Worked on enabling the schedule object to read configuration files written in Python.
+(raspi_x10)
+
+
+Sun 15-Dec-2013
+~~~~~~~~~~~~~~~
+
+40d tidal harmonics run without zero-gradient boundary conditions, etc. ran to completion in ~12.25 hr, but inspection of the results show that the maximum u-velocity and the minimum sea surface salinity did a step change to 0 and 100 respectively at around time step 4900.
+(MEOPAR)
+
+Worked on implementation of methods required to build the Heyu schedule.
+(raspi_x10)
