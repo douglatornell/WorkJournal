@@ -2158,3 +2158,61 @@ Sun 15-Dec-2013
 
 Worked on implementation of methods required to build the Heyu schedule.
 (raspi_x10)
+
+
+Week 50
+-------
+
+Mon 16-Dec-2013
+~~~~~~~~~~~~~~~
+
+Salish Sea project mtg; see Google Drive whiteboard image file.
+Replied to JP's email re: CGRF files and invited him to join the SalishSea-MEOPAR team on Bitbucket.
+(MEOPAR)
+
+Helped Mike Johnson with using requests library to download reviews from Rotten Tomatoes site.
+(SWC)
+
+Continued working on migrating buildbot to new :kbd:`bjossa` hardware and upgrading it to 0.8.8.
+(SOG)
+
+
+Week 52
+-------
+
+Mon 30-Dec-2013
+~~~~~~~~~~~~~~~
+
+Checked results of some 1h, no atmospheric forcing, profiling runs on :kbd:`jasper` that languished on the queue:
+
+* 3x4 2Gb nodes=1:ppn=12: 333s after queuing for 8 days
+* 4x6 2Gb nodes:2:ppn:12: 160s after queuing for 8 days
+
+Susan determined that maximum u-velocity and the minimum sea surface salinity values 0 and 100 respectively are what happens when the fields values are all NaNs.
+(MEOPAR)
+
+Implemented web app view to toggle away mode state and upload a new schedule to the CM11A when that happens.
+Away mode can now be controlled from my phone :-)
+(raspi_x10)
+
+Investigated failure of randonneurs.bc.ca web site; caused by catastrophic hardware failure on Webfaction server.
+(randos)
+
+
+Tue 31-Dec-2013
+~~~~~~~~~~~~~~~
+
+Worked on diagnosis of failed 40d run.
+Re-ran 40d tidal harmonics without zero-gradient boundary conditions, etc. configuration on :kbd:`jasper` to investigate what is happening just prior to fields going to NaNs; ran to 4891 time steps with 6h output, then restarted for 30 time steps with instantaneous output.
+(MEOPAR)
+
+Started tracd on the new bjossa hardware.
+Started buildbot on the new bjossa hardware.
+Worked through an upgrade issue in the localized root.html template.
+Added force scheduler to buildbot configuration re: 0.8.8 upgrade feature change.
+Ran into problems pushing docs to buildbot deployment, and sending on-push email notifications.
+(SOG)
+
+Confirmed that webapp files appear to have been fully restored.
+Worked with Webfaction support to restore static site files and get permissions set correctly so that the randonneurs.bc.ca site could be brought back online.
+(randos)
