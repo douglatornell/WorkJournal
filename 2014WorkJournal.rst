@@ -14,15 +14,15 @@ January
 Week 1
 ------
 
-Wed 01-Jan-2014
-~~~~~~~~~~~~~~~
+Wed 1-Jan-2014
+~~~~~~~~~~~~~~
 
 Changed web remote app to by run via Pyramid pserve utility but stummbled on entry point issue when I deployed it to the RaspPi.
 (raspi_x10)
 
 
-Thu 02-Jan-2014
-~~~~~~~~~~~~~~~
+Thu 2-Jan-2014
+~~~~~~~~~~~~~~
 
 Dentist appt.
 Created 2014 work journal file.
@@ -35,22 +35,22 @@ Worked with Charles on tick re: connection failure from hg notify hook on bjossa
 (SOG)
 
 
-Fri 03-Jan-2014
-~~~~~~~~~~~~~~~
+Fri 3-Jan-2014
+~~~~~~~~~~~~~~
 
 Hiking at Buntzen Lake with Susan and James.
 
 
-Sat 04-Jan-2014
-~~~~~~~~~~~~~~~
+Sat 4-Jan-2014
+~~~~~~~~~~~~~~
 
 Fixed bug in and improved usability of nc_tools module.
 Continued work on changing :command:`salishsea get_cgrf` to transform CGRF files from 0600Z to day+1 0700Z to 0000Z to 2300Z and verifying that the CGRF dataset has some resemblance to EC observations at YVR and Sandheads.
 (MEOPAR)
 
 
-Sun 05-Jan-2014
-~~~~~~~~~~~~~~~
+Sun 5-Jan-2014
+~~~~~~~~~~~~~~
 
 Continued work on changing :command:`salishsea get_cgrf` to transform CGRF files from 0600Z to day+1 0700Z to 0000Z to 2300Z and verifying that the CGRF dataset has some resemblance to EC observations at YVR and Sandheads.
 (MEOPAR)
@@ -59,8 +59,8 @@ Continued work on changing :command:`salishsea get_cgrf` to transform CGRF files
 Week 2
 ------
 
-Mon 06-Jan-2014
-~~~~~~~~~~~~~~~
+Mon 6-Jan-2014
+~~~~~~~~~~~~~~
 
 Created Storm-Surge repo on Bitbucket for work on 1st paper.
 Salish Sea project mtg; see Google Drive whiteboard image file.
@@ -83,4 +83,22 @@ Worked on updating buildbot configuration:
 
 * changed default arg values in :py:func:`extensions.config_builder` to reflect present workflow
 * started to change builds to flatter directory structure but the 4 repo clones get jumbled
+(SOG)
+
+
+Tue 7-Jan-2014
+~~~~~~~~~~~~~~
+
+40d jasper run completed successfully; downloaded results files to /ocean.
+Helped Nancy get up and running on jasper.
+Finished quick-start docs re running on jasper.
+Consolidated :file:`namelist.compute.*` run-set files.
+Changed CGRF rebasing notebook to show u & v wind components instead of wind direction due to uncertainty about the CGRF wind compass.
+Continued implementation of CGRF file rebasing into :command:`salishsea get_cgrf`; got working code, needs tests and cleanup.
+(MEOPAR)
+
+Research meeting w/ Susan.
+Agreed to focus on MEOPAR until we go to Berkely, then shift to SOG.
+
+Replied to Pierre Clement @BIO re: his query to Susan about code to download EC historical weather observations.
 (SOG)
