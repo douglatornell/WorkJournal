@@ -102,3 +102,17 @@ Agreed to focus on MEOPAR until we go to Berkely, then shift to SOG.
 
 Replied to Pierre Clement @BIO re: his query to Susan about code to download EC historical weather observations.
 (SOG)
+
+
+Wed 8-Jan-2014
+~~~~~~~~~~~~~~
+
+Finished implementation of CGRF file rebasing into :command:`salishsea get_cgrf`.
+Updated verification of CGRF vs. Sandheads and YVR observations and added 10 comparison which looks acceptable enough to proceed with.
+Created and populated :file:`CGRF/NEMO-atmos/` directory on jasper for NAncy to test; had to copy files from salish because NCO is not available on jasper, but put in a request for it to be installed.
+Changed salish :file:`CGRF/NEMO-atmos` to rebased files.
+Created private-docs repo.
+Added README to Storm-Surge repo.
+(MEOPAR)
+
+Participated in Phys Ocgy seminar about Salish Sea MEOPAR project that Kate lead.
