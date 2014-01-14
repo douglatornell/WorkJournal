@@ -153,3 +153,18 @@ Restarted RandoPony app after randonneurs.bc.ca site down time.
 Found and reported SSL config issue whereby the default Webfaction cert was being used rather than our domain cert.
 Rider sign-up test failed due to a connection error from the membership status database query.
 (RandoPony)
+
+
+Week 3
+------
+
+Mon 13-Jan-2014
+~~~~~~~~~~~~~~~
+
+Salish Sea project mtg; see Google Drive whiteboard image file.
+Continued work on getting output of actual level depths at each grid point.
+(MEOPAR)
+
+Spent most of the afternoon at Nordion working on re-configuring apps to use the new SMTP relay server that is not identified in the domain MX record.
+Figured out why BL1A schedule 125 failed to load into Sr-82 app; there were no currents scheduled.
+(Nordion)
