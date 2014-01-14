@@ -116,3 +116,40 @@ Added README to Storm-Surge repo.
 (MEOPAR)
 
 Participated in Phys Ocgy seminar about Salish Sea MEOPAR project that Kate lead.
+
+
+Thu 9-Jan-2014
+~~~~~~~~~~~~~~
+
+Continued work on updating buildbot configuration.
+Got repo cloning sorted out so that the 4 necessary clones are present in the necessary directories.
+Got paths sorted out so that all builds are green again.
+(SOG)
+
+Ran tutorial for Susan, Kate & Nancy re: migrating Python functions from notebooks into SalishSeaTools package for sharing, re-usability, and automated docs generation.
+Set up a jasper run to restart from the end of the 40d run for another 30d; horizontal turbulent viscosity is reduced from 60 to 50 m^2/s thanks to the full development of the dense water flow in from the JdF.
+Did atmospheric forcing time interpolation verification.
+Started work on getting output of actual level depths at each grid point.
+(MEOPAR)
+
+
+Fri 10-Jan-2014
+~~~~~~~~~~~~~~~
+
+Continued work on getting output of actual level depths at each grid point.
+(MEOPAR)
+
+
+Sat 11-Jan-2014
+~~~~~~~~~~~~~~~
+
+Restarted hourly rdiff-backup backups from tom to matisse after moving backup directory on matisse aside as a snapshot.
+
+
+Sun 12-Jan-2014
+~~~~~~~~~~~~~~~
+
+Restarted RandoPony app after randonneurs.bc.ca site down time.
+Found and reported SSL config issue whereby the default Webfaction cert was being used rather than our domain cert.
+Rider sign-up test failed due to a connection error from the membership status database query.
+(RandoPony)
