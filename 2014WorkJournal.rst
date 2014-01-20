@@ -162,9 +162,86 @@ Mon 13-Jan-2014
 ~~~~~~~~~~~~~~~
 
 Salish Sea project mtg; see Google Drive whiteboard image file.
+Queued jasper job to extend tidal harmonics analysis run from day 71 to day 100 with bottom friction value reduced from 5e-3 to 3e-3.
 Continued work on getting output of actual level depths at each grid point.
 (MEOPAR)
 
 Spent most of the afternoon at Nordion working on re-configuring apps to use the new SMTP relay server that is not identified in the domain MX record.
 Figured out why BL1A schedule 125 failed to load into Sr-82 app; there were no currents scheduled.
 (Nordion)
+
+
+Tue 14-Jan-2014
+~~~~~~~~~~~~~~~
+
+d71d100_bfri3e-3 run on jasper failed after 626 time steps with -ve sea surface salinity at 149, 13 (down near the bottom of Puget Sound).
+Queued another jasper run with bottom friction set to 4e-3.
+Finished getting output of actual level depths at each grid point and created notebook to document the process and produce :file:`NEMO-forcing/grid/grid_bathy.nc`.
+Started working on cleanup of code in stpctl.F90:stp_ctl() to check for NaN in u-velocity and salinity fields and abort cleanly with messages indicating where in the grid the NaNs occurred.
+Got sidetracked into profiling u-velocity and salinity limit checking code because source has vectorized versions of the checks commented out in favour of triply-nested loop versions that are indicated to be faster on NEC SX5; the vectorized code is faster on salish, so changed to that.
+(MEOPAR)
+
+Attended SCIAM seminary by Lars Ruthotto (postdoc with Eldad Haber) on scientific programming languages: matlab, python, julia.
+
+
+Wed 15-Jan-2014
+~~~~~~~~~~~~~~~
+
+Participated in ONC/UBC/MEOPAR SoG workshop.
+d71d100_bfri4e-3 run on jasper failed identically to bfri3e-3 run after 626 time steps with -ve sea surface salinity at 149, 13 (down near the bottom of Puget Sound).
+Queued another jasper run with bottom friction set to 5e-3 (the same as we have run since day 0, to prove that failure of lower bottom friction runs).
+(MEOPAR)
+
+
+Thu 16-Jan-2014
+~~~~~~~~~~~~~~~
+
+Participated in ONC/UBC/MEOPAR SoG workshop.
+d71d100_bfri5e-3 run on jasper succeeded.
+Queued another jasper run with horizontal turbulent eddy viscosity nu=200 to see if making things dramatically stickier has a significant affect on tidal harmonic amplitudes.
+Started exploratory work on automation of updating NEMO-code repo from Frensh SVN repo; got python-svn package installed on salish and confirmed that I can access the local working copy and remote repos with it.
+(MEOPAR)
+
+
+Fri 17-Jan-2014
+~~~~~~~~~~~~~~~
+
+Dentist appt for right molar fillings and bit adjustment.
+
+Finished (for now) cleanup of code in stpctl.F90:stp_ctl() to check for NaN in u-velocity and salinity fields and abort cleanly with messages indicating where in the grid the NaNs occurred.
+It does the checks for NaNs, high u-velocity, and -ve surface salinity efficiently with vectorized code.
+However, the output of NaN locations goes to stdout instead of ocean.output and the message that appears in ocean.output is uniformative.
+Furthermore, output.abort files are only produced from the MPI-subdomain processors in which NaNs occur.
+(MEOPAR)
+
+
+Sat 18-Jan-2014
+~~~~~~~~~~~~~~~
+
+Travel day to Berkeley.
+
+Discussed next steps for bloomcast and design of new SOG-forcing automated data collection app with Susan.
+Reviewed worklog notes re: bloomcast development since July.
+(bloomcast)
+
+
+Sun 19-Jan-2014
+~~~~~~~~~~~~~~~
+
+First day back in Zack's lab at UCB.
+
+Started a 10d run on jasper with nu=50 to try to confirm if slowness of nu=200 runs is due to nu=200 or jasper having lost its processor affinity config setting again.
+10d run with nu=50 completed with an average compute time of 39.4s/model-hr which is very close to typical values.
+Started another 10d run on jasper with nu=200 and it appears to be a ready-to-run but on-hold state.
+(MEOPAR)
+
+Confirmed that bjossa ports 8010 and 9000 are blocking connections from the Internet and opened a ticket requesting that they be opened.
+Charles resolved the issue within an hour :-)
+(SOG)
+
+Fixed failing unit tests re: making HTML results directory a config file value.
+Updated development environment packages and :file:`requirements.txt`.
+Discussed with Susan the idea of a separate, open-source app, provisionally named :program:`ecget` to get EC weather and river data from web services and write the data to files in the format expected by SOG.
+Also discussed designing the app to be extensible so that it could be readily used by other groups who need EC data.
+Read the Python stevedore package docs and thought about design.
+(bloomcast)
