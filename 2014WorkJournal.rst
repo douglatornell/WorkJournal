@@ -245,3 +245,21 @@ Discussed with Susan the idea of a separate, open-source app, provisionally name
 Also discussed designing the app to be extensible so that it could be readily used by other groups who need EC data.
 Read the Python stevedore package docs and thought about design.
 (bloomcast)
+
+
+Week 4
+------
+
+Mon 20-Jan-2014
+~~~~~~~~~~~~~~~
+
+Salish Sea project mtg; see Google Drive whiteboard image file.
+10d run on jasper with nu=200 remained queued but ready to run due to jasper scheduler shutdown.
+Created a diagram of the NEMO code repos from the SVN repo in France, through our mirror and merge repos, to our Bitbucket and user repos, and diagrammed the workflow to update from France and merge with project revisions.
+Tested and refined the workflow by updating to svn r3822; wrote docs about the workflow.
+Ran 1h tests on salish starting on day 41 with nu=50 and nu=200; the latter takes 357s vs. 238s for the former, but Susan was doing development runs at the same time.
+10d run on jasper with nu=200 finally ran and did so in 39.3s/model-hr; i.e. typical.
+(MEOPAR)
+
+Created ECget project on tom, Bitbucket, and readthedocs.
+(ECget)
