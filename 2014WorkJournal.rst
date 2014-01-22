@@ -198,7 +198,7 @@ Thu 16-Jan-2014
 
 Participated in ONC/UBC/MEOPAR SoG workshop.
 d71d100_bfri5e-3 run on jasper succeeded.
-Queued another jasper run with horizontal turbulent eddy viscosity nu=200 to see if making things dramatically stickier has a significant affect on tidal harmonic amplitudes.
+Queued a 41-70d jasper run with horizontal turbulent eddy viscosity nu=200 to see if making things dramatically stickier has a significant affect on tidal harmonic amplitudes.
 Started exploratory work on automation of updating NEMO-code repo from Frensh SVN repo; got python-svn package installed on salish and confirmed that I can access the local working copy and remote repos with it.
 (MEOPAR)
 
@@ -208,6 +208,8 @@ Fri 17-Jan-2014
 
 Dentist appt for right molar fillings and bit adjustment.
 
+41-70d jasper run with nu=200 timed out after 16h of run time.
+Coincidentally jasper's status was changed to orange due to scheduler issues.
 Finished (for now) cleanup of code in stpctl.F90:stp_ctl() to check for NaN in u-velocity and salinity fields and abort cleanly with messages indicating where in the grid the NaNs occurred.
 It does the checks for NaNs, high u-velocity, and -ve surface salinity efficiently with vectorized code.
 However, the output of NaN locations goes to stdout instead of ocean.output and the message that appears in ocean.output is uniformative.
@@ -259,7 +261,18 @@ Created a diagram of the NEMO code repos from the SVN repo in France, through ou
 Tested and refined the workflow by updating to svn r3822; wrote docs about the workflow.
 Ran 1h tests on salish starting on day 41 with nu=50 and nu=200; the latter takes 357s vs. 238s for the former, but Susan was doing development runs at the same time.
 10d run on jasper with nu=200 finally ran and did so in 39.3s/model-hr; i.e. typical.
+Coincidentally jasper's status returned to green with a message that the scheduler issue had been resolved.
 (MEOPAR)
 
 Created ECget project on tom, Bitbucket, and readthedocs.
+(ECget)
+
+
+Tue 21-Jan-2014
+~~~~~~~~~~~~~~~
+
+Started another 41-70d nu=200 run on jasper.
+(MEOPAR)
+
+Started development of ECget based on cliff and stevedore and it works out nicely. Implemented a daily average river flow command plug-in that uses driver plug-ins to get data from the EC wateroffice real-time site and to format the output for a SOG-forcing river file.
 (ECget)
