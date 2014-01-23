@@ -276,3 +276,21 @@ Started another 41-70d nu=200 run on jasper.
 
 Started development of ECget based on cliff and stevedore and it works out nicely. Implemented a daily average river flow command plug-in that uses driver plug-ins to get data from the EC wateroffice real-time site and to format the output for a SOG-forcing river file.
 (ECget)
+
+
+Wed 22-Jan-2014
+~~~~~~~~~~~~~~~
+
+41-70d nu=200 run on jasper timed out at 88654 time steps after 16h of run time.
+Started a 51-60d nu=200 run.
+Downloaded 41d50d (nu=50) and 41d50d_nu200 results to ocean and wrote a Python script to automate jasper to ocean transfers.
+Closed loop in email thread w/ JP re: rebasing of CGRF dataset.
+Changed :command:`salishsea get_cgrf` to use level 4 compression like the default in the python-netCDF4 library.
+51-60d nu=200 run on jasper completed in about 110% of the time of 41-50d nu=200; transferred results to ocean.
+61-70d nu=200 run on jasper completed in about the same time as the 51-60d run; transferred results to ocean.
+(MEOPAR)
+
+Cleaned up some details in ECget river flow sub-command; better logging, interpolation of values for missing days, unit tests.
+Set up test environment based on pytest, coverage, and tox, and added dev docs about them.
+Wrote a bunch of unit tests; got coverage over 80%.
+(ECget)
