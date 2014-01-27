@@ -317,3 +317,24 @@ Explored the XML schema of the datamart files and found that the ElementTree.fin
 
 Helped Kate with advice on how to get the time intervals over which tidal harmonics are calculated in various runs in an automated way.
 (MEOPAR)
+
+
+Sat 25-Jan-2014
+~~~~~~~~~~~~~~~
+
+Updated SublimeLinter extension to new v3 release and installed flake8 and corresponding linter plug-in.
+
+Realized that the dev instance failure that I saw on 15-Jan was due to not having a dev SMTP service running (nor celery workers, or that matter).
+Decided that the deployment on Webfaction should be okay and did setup for Chili 200, but it failed to create the event spreadsheet on Google Drive with an authenitcation error.
+Was unable to log into pony google account due to new location detection security; need to acknowledge access via text to my Wind mobile account.
+(RandoPony)
+
+
+Sun 16-Jan-2014
+~~~~~~~~~~~~~~~
+
+Modified kombu-based client to shut itself down after a specified lifetime with the idea being that the client will be run periodically by a cron job instead of running all the time as a daemon.
+Implemented wind command plug-in based on kombu client experiment.
+Crappy network at BCC enabled tests to confirm that the plug-in handles dropped connections smoothly, anthough the lifetime clock gets reset on re-connection so the client tends toward running forever.
+Wrote unit tests for wind plug-in and the kombu consumer class that it is based on.
+(ECget)
