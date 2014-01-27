@@ -294,3 +294,26 @@ Cleaned up some details in ECget river flow sub-command; better logging, interpo
 Set up test environment based on pytest, coverage, and tox, and added dev docs about them.
 Wrote a bunch of unit tests; got coverage over 80%.
 (ECget)
+
+
+Thu 23-Jan-2014
+~~~~~~~~~~~~~~~
+
+Wrote more unit tests for the river module.
+Started exploring the new MSC Datamart AMPQ service for real-time weather data; demo app is http://sourceforge.net/p/metpx/code/HEAD/tree/trunk/sarracenia/.
+Got the dd_subscribe script from the sarracenia package running; it is based on the Python 2.7 pika library.
+Replicated the core functionality of dd_subscribe in Python 3.3 using the kombu library, but it only works for the alphanumeric bulletins feed that is used as the basic example for dd_subscribe; fails for swob-ml feeds.
+(ECget)
+
+
+Fri 24-Jan-2014
+~~~~~~~~~~~~~~~
+
+Implemented a new prototype client experiment based on kombu.mixins.Consumer and eventually got it producing the same CYVR feed as the pika-based client.
+I think the tricky bit is ensuring that the name and the routing key of the queue are the same on client and the server.
+The pika-based client seems to ignore a routing key different to the one on the server while the kombu-based client tries to use it and then gets no messages because of the mismatch.
+Explored the XML schema of the datamart files and found that the ElementTree.find*() method don't work, perhaps due to namespacing (?), use iter() instead.
+(ECget)
+
+Helped Kate with advice on how to get the time intervals over which tidal harmonics are calculated in various runs in an automated way.
+(MEOPAR)
