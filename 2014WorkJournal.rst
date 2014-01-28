@@ -197,7 +197,7 @@ Thu 16-Jan-2014
 ~~~~~~~~~~~~~~~
 
 Participated in ONC/UBC/MEOPAR SoG workshop.
-d71d100_bfri5e-3 run on jasper succeeded.
+d71d100_bfri5e-3 run on jasper failed with -ve sea surface salinity at 149, 13 (down near the bottom of Puget Sound).
 Queued a 41-70d jasper run with horizontal turbulent eddy viscosity nu=200 to see if making things dramatically stickier has a significant affect on tidal harmonic amplitudes.
 Started exploratory work on automation of updating NEMO-code repo from Frensh SVN repo; got python-svn package installed on salish and confirmed that I can access the local working copy and remote repos with it.
 (MEOPAR)
@@ -330,7 +330,7 @@ Was unable to log into pony google account due to new location detection securit
 (RandoPony)
 
 
-Sun 16-Jan-2014
+Sun 26-Jan-2014
 ~~~~~~~~~~~~~~~
 
 Modified kombu-based client to shut itself down after a specified lifetime with the idea being that the client will be run periodically by a cron job instead of running all the time as a daemon.
@@ -338,3 +338,29 @@ Implemented wind command plug-in based on kombu client experiment.
 Crappy network at BCC enabled tests to confirm that the plug-in handles dropped connections smoothly, anthough the lifetime clock gets reset on re-connection so the client tends toward running forever.
 Wrote unit tests for wind plug-in and the kombu consumer class that it is based on.
 (ECget)
+
+
+Week 5
+------
+
+Mon 27-Jan-2014
+~~~~~~~~~~~~~~~
+
+Used stable network connection in Zack's lab to confirm that wind plug-in terminates itself cleanly after its default lifetime of 900s has expired.
+However, starting the client after a period of not running does not result in the receipt of the messages that should have been queued during that period.
+Started work on driver plug-in to process Datamart URLs.
+Read http://blogs.digitar.com/jjww/2009/01/rabbits-and-warrens/ and clarified some of my knowledge of AMQP.
+Added auto_delete=False flag to queue declaration to try to get it to persist between consumer runs, but that didn't seem to work.
+(ECget)
+
+Salish Sea project mtg; see Google Drive whiteboard image file.
+Investigated source of differences between the 41d70 and *_nu200 runs that are indicated by Kate's finding of tidal phase differences, and the 1d offset that Nancy noted.
+Noticed that nn_date0 was truncated to 200209 (instead of 20020915) in the 41d70d namelist; Susan thinks that might affect tide calculations even though the actual start date should be coming from the restart file.
+Queued up a new 41d70d run on jasper.
+Created /ocean/dlatorne/MEOPAR/SalishSea/results/spin-up/ and .../repo-tests/ directories.
+Moved results of Susan's 1st 7 days of spin-up runs into the former.
+Plan to use the latter for results of 1d runs to be done after merges from NEMO SVN repo.
+Cloned NEMO-code repo to NEMO-code-spin-up on jasper so that spin-up runs can proceed with a version of the code that is independent of other work.
+Worked on setting up 23sep2oct 10d spin-up run.
+Learned a lot about output for grid zooms in iodef.xml, none of which made me happy - each zoom has to go to a separate file.
+(MEOPAR)
