@@ -364,3 +364,18 @@ Cloned NEMO-code repo to NEMO-code-spin-up on jasper so that spin-up runs can pr
 Worked on setting up 23sep2oct 10d spin-up run.
 Learned a lot about output for grid zooms in iodef.xml, none of which made me happy - each zoom has to go to a separate file.
 (MEOPAR)
+
+
+Tue 28-Jan-2014
+~~~~~~~~~~~~~~~
+
+Checked results of 41d70d re-run and found that it crashed on day 65 because enhanced vertical turbulent diffusion was left at 10 instead of 100.
+Queued another re-run.
+Finished set-up for 23sep2oct 10d spin-up run and queued it.
+Got update from Westgrid support on NCO and netCDF4 on jasper; maybe ready next week.
+Started writing docs about spin-up runs.
+Investigated what role the nn_date0 value in the namelist plays.
+It is mentioned in connection with date correction of tides in ocean.output, but it is not yet clear whether that correction takes into account the elapsed time from the restart file.
+What is for certain is that the 41d70d in which it was truncated to 200209 is different to the 10 day runs spanning that period, and the correction date in the ocean output file from 41d70d is 9-Feb-20!!!
+Eventually sorted out that nn_date0 *is* used to adjust the tides to match the run date, so it is important that it be set to the date when nn_it000 = 1.
+(MEOPAR)
