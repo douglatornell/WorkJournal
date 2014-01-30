@@ -379,3 +379,25 @@ It is mentioned in connection with date correction of tides in ocean.output, but
 What is for certain is that the 41d70d in which it was truncated to 200209 is different to the 10 day runs spanning that period, and the correction date in the ocean output file from 41d70d is 9-Feb-20!!!
 Eventually sorted out that nn_date0 *is* used to adjust the tides to match the run date, so it is important that it be set to the date when nn_it000 = 1.
 (MEOPAR)
+
+
+Wed 29-Jan-2014
+~~~~~~~~~~~~~~~
+
+23sep2oct 10d spin-up run failed overnight by exceeding its requested memory limit; re-queued it with 3Gb/processor.
+3Gb/processor attempt at 23sep2oct 10d spin-up run also failed; re-queued it with 4Gb/processor and started worrying about a memory leak in NEMO.
+41d70d tide analysis run succeeded; transferred the results to ocean.
+Updated comments in all SS-run-sets namelist.time files to correctly say what value nn_date0 should be set to, and what it is used for.
+Added note to NEMO quirks docs about nn_date0 value.
+4Gb/processor attempt at 23sep2oct 10d spin-up run also failed.
+Re-queued 23sep2oct 10d spin-up run with 2Gb/processor and external barotropic boundary condition forcing disabled to try to isolate the possibility of a memory leak in NEMO.
+No-barotropic BCs 23sep2oct 10d spin-up run also failed on memory; requeued it with barotropic BCs restored and atmospheric forcing disabled.
+23sep2oct 10d spin-up run without atmospheric forcing also failed on memory.
+(MEOPAR)
+
+Sent email to Datamart AMQP trial support email list re: expected queue lifetime but it is being held for moderation.
+Experimented with Sand Heads wind queue in IPython and found that it persists and accumulates messages.
+Continued work on driver plug-in to process Datamart URLs.
+Added hook to Datamart consumer to explicitly close the connection when the consumer times out.
+After a false start with the connection repeatedly connection and dropping, got the same behaviour from my ECget plug-in by changing to passive=True in the queue_declare() call.
+(ECget)
