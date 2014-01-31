@@ -401,3 +401,30 @@ Continued work on driver plug-in to process Datamart URLs.
 Added hook to Datamart consumer to explicitly close the connection when the consumer times out.
 After a false start with the connection repeatedly connection and dropping, got the same behaviour from my ECget plug-in by changing to passive=True in the queue_declare() call.
 (ECget)
+
+
+Thu 30-Jan-2014
+~~~~~~~~~~~~~~~
+
+Confirmed that Sand Heads queue peristed overnight on CMC server in the absence of connections from my clients.
+Confirmed that driver plug-in for Datamart URLs can extract Sand Heads wind speed and direction values.
+Removed method that explicitly closes the connection when the consumer times out.
+Changed the consumer to intially declare the queue on the server with passive=True to connect to an existing queue, but with passive=False if a ChannelException (indicating that the queue does not exist on the server) is raised.
+Noticed by checking from IPython that, though the consumer created a queue as expected, and that the queue persists after the consumer times out, the queue shows that it still have 1 consumer; that may be leading to a time-out and queu destruction on the server.
+(ECget)
+
+23sep2oct 10d spin-up run with :file:`jasper/iodef.3d.xml` also failed on memory.
+23sep2oct 10d spin-up run with NEMO-code-spin-up updated to rev:67:8c4a24ba49df (used for 41d70d tides run that worked) and a clean rebuild also failed on memory.
+Added function to run :command:`hg parents` command to hg_commands module.
+Change :command:`salishsea prepare` command to record working directory rev of NEMO-code and NEMO-forcing repos via :command:`hg parents` instead of :command:`hg heads` which reports the last pulled rev.
+Switched to trying to get a 2d version of 41d70d tides run to fail with a memory limit on jasper.
+Ran successfully at rev:98:84b90cd75601.
+Ran successfully with :file:`spin-up/iodef.1d.xml`.
+Ran successfully with atmospheric forcing.
+Ran successfully with Masson results baroclinic boundary forcing and Tofino sea surface height barotropic boundary forcing; lateral turbulent viscosity was increased to 80 to compensate for high salinity input from Masson results; memory use increased from ~15.2Gb to ~20.2Gb.
+Ran  with start date set to 23-Sep-2002 and restart control set to 1 (in contrast to 15-Sep and 2); testing the idea that the calendar timeframe is the problem.
+(MEOPAR)
+
+Set up 2014 bloomcast SOG YAML infiles.
+Started investigating the a work-around for the YVR station id change that happened in Jun-2013.
+(bloomcast)
