@@ -422,9 +422,38 @@ Ran successfully at rev:98:84b90cd75601.
 Ran successfully with :file:`spin-up/iodef.1d.xml`.
 Ran successfully with atmospheric forcing.
 Ran successfully with Masson results baroclinic boundary forcing and Tofino sea surface height barotropic boundary forcing; lateral turbulent viscosity was increased to 80 to compensate for high salinity input from Masson results; memory use increased from ~15.2Gb to ~20.2Gb.
-Ran  with start date set to 23-Sep-2002 and restart control set to 1 (in contrast to 15-Sep and 2); testing the idea that the calendar timeframe is the problem.
+Queue run with start date set to 23-Sep-2002 and restart control set to 1 (in contrast to 15-Sep and 2); testing the idea that the calendar timeframe is the problem.
 (MEOPAR)
 
 Set up 2014 bloomcast SOG YAML infiles.
 Started investigating the a work-around for the YVR station id change that happened in Jun-2013.
 (bloomcast)
+
+
+Fri 31-Jan-2014
+~~~~~~~~~~~~~~~
+
+Got response to email re: queue lifetime; CMC are running tests to provide an answer.
+IPython confirmed that yesterday's queue that had a hanging consumer disappeared overnight.
+Restored the method that explicitly closes the connection when the consumer times out and the queue behaves as required.
+(ECget)
+
+41d70d 2d run with start date set to 23-Sep-2002 and restart control set to 1 ran successfully.
+Ran that config successfully with bottom friction set to 1e-4.
+Ran that config successfully with start date set to 16-Sep-2002, restart control set to 0, and 22-Sep-2002 spin-up restart file from salish; restults/41d70d.2d.sr/.
+u-velocity blew up in Haro Strait area after 2107 time steps on run with start date set to 23-Sep-2002, nn_it000 set to 1, restart control set to 0, and 22-Sep-2002 spin-up restart file from salish; restults/41d70d.2d.sr2/.
+Queued a 2h run with start date set to 23-Sep-2002, nn_it000 set to 1, restart control set to 0, and 22-Sep-2002 spin-up restart file from salish.
+(MEOPAR)
+
+Hacked ClimateDataProcessor.process_data() method to insert zeros into the data record for YVR data prior to 2013-06-13 because the YVR station id changed on 2013-06-12 but bloomcast doesn't need the data prior to 2013-09-19 to be accurate and SOG just needs there to be some values from 2013-01-01 onward.
+Added error condition to abort bloomcast if the runs start date is such that river flow data from more than 18 months in the past are required because EC only maintains river data for a rolling 18-month time window.
+Installed gfortran on tom via homebrew and built SOG.
+Got a complete bloomcast run on tom.
+Deployed bloomcast to salish for 2014 forecasts.
+Tagged repo with bloomcast2014.
+(bloomcast)
+
+Added 2016 through 2024 leap years to forcing.f90.
+Tagged repo with bloomcast2014.
+Started work on cleaning up fatal error exits; add ERROR prefix to messages, exit with return code 1, and flush stdout and stderr (in that order) before exiting.
+(SOG)
