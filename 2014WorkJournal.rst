@@ -457,3 +457,26 @@ Added 2016 through 2024 leap years to forcing.f90.
 Tagged repo with bloomcast2014.
 Started work on cleaning up fatal error exits; add ERROR prefix to messages, exit with return code 1, and flush stdout and stderr (in that order) before exiting.
 (SOG)
+
+
+Sat 1-Feb-2014
+~~~~~~~~~~~~~~
+
+Cron job failed with path and email address issues; fixed, and ran bloomcast manually via new cronjob script and not in virtualenv.
+(bloomcast)
+
+Sand Heads wind queue did not survive overnight; wondering if CMC queue sweepers are unpredictable in how long the let queues without consumers live.
+(ECget)
+
+2h run with start date set to 23-Sep-2002, nn_it000 set to 1, restart control set to 0, and 22-Sep-2002 spin-up restart file from salish failed with u-velocity blow-up after 2107 time steps, like previous run.
+Started a 23sep2oct spin-up run using NEMO-code executable but killed it when we realized that the run above had failed due to high u-velocity; noted, however, that that its memory use was 67Gb after only 14m of run time.
+Successfully ran 23sep2oct spin-up run using NEMO-code executable with nu=80 (to address high u-velocity thought to be due to tide date mismatch between run and restart file) and profiling disabled (because it is one of the few remaining differences that could account for the memory leak).
+It appears that profiling may be the source of the memory leak.
+Queued 71d100d tides run.
+Changed :command:`salishsea prepare` and :command:`salishsea gather` so that YAML run description, iodef.xml, and xmlio_server.def files are now copied to run directory instead of being symlinked.
+Queued 23sep2oct spin-up run using NEMO-code executable and a new, nu=55 22sep restart file from salish with correctly adjsuted tides; used nu=55 and no profiling.
+Started work on Marlin app to manage SVN updates of NEMO-hg-mirror repo.
+(MEOPAR)
+
+Continued work on cleaning up fatal error exits; add ERROR prefix to messages, exit with return code 1, and flush stdout and stderr (in that order) before exiting.
+(SOG)
