@@ -480,3 +480,133 @@ Started work on Marlin app to manage SVN updates of NEMO-hg-mirror repo.
 
 Continued work on cleaning up fatal error exits; add ERROR prefix to messages, exit with return code 1, and flush stdout and stderr (in that order) before exiting.
 (SOG)
+
+
+Sun 2-Feb-2014
+~~~~~~~~~~~~~~
+
+71d100d tides run failed with -ve sea surface salinity at 264,347 (tip of South Pender Is) at time step 164432 (~0400UTC on 19Dec2002).
+23sep2oct spin-up run with nu=55, no profiling, and well adjusted restart file from salish finished successfully.
+Added CGRF files for 4Oct2002 through 13Oct2002 to collection on jasper.
+Updated spin-up runs docs.
+Queued 23sep24sep spin-up run with nu=55 because Susan thinks that the 10d run let too much JdF deep water into the SoG.
+(MEOPAR)
+
+
+February
+========
+
+Week 6
+------
+
+Mon 3-Feb-2014
+~~~~~~~~~~~~~~
+
+Finished implementation of Marlin.
+Used Marline to merge r3828:3843 from NEMO upstream repo; pushed the merge to NEMO-code for Nancy to test.
+Susan took over running spin-up day by day to tune horizontal turbulent viscosity run by run; I continue to manage results in /ocean/dlatorne/MEOPAR/SalishSea/results/spin-up/.
+(MEOPAR)
+
+
+Tue 4-Feb-2014
+~~~~~~~~~~~~~~
+
+Started work on OSM poster.
+(bloomcast)
+
+
+Wed 5-Feb-2014
+~~~~~~~~~~~~~~
+
+Noticed that there are literally hundreds of hours when weather description is N/A and cloud fraction value has to be interpolated; it make the log almost unusable.
+Also noted that the entire day of 4-Feb has N/A for its weather description on climate.ec.gc.ca; in other words that has become an unreliable data element.
+(bloomcast)
+
+Thrashed around trying to figure out how to use OAuth2 to do RandoPony Google Drive spreadsheet operations from Webfaction deployment since the ClientLogin() call was getting an authentication failure.
+Discovered that ClientLogin() works just fine from tom, only failing from Webfaction.
+Eventually concluded that OAuth2 is not the correct paradigm because it is based on 3-legged auth and the pony is just a web app and data stored o Drive.
+Succeeded in getting ClientLogin() to work by enabling 2-factor auth on pony account and setting up an application-specific password.
+(Randopony)
+
+Changed exchange name from :kbd:`cmc` to :kbd:`xpublic` as the email on dd-info said needed to happen at 08:00 today.
+Finished implementation of message handling and output formatting for Sand Heads winds consumer.
+(ECget)
+
+Reviewed results of Nancy's 1st merge-test results and analysis notebook.
+Merged r3846:3847 from NEMO upstream repo and pushed the merge for NEMO-code for Nancy to test.
+(MEOPAR)
+
+
+Thu 6-Feb-2014
+~~~~~~~~~~~~~~
+
+Worked on unit tests for Sand Heads wind consumer.
+Created a quick command plug-in to investigate the :kbd:`tot_cld_amt` field in the SWOB-ML files.
+Learned that :kbd:`tot_cld_amt` is reported every 3 hours (for the most part).
+(ECget)
+
+Investigated N/A weather descriptions at YVR; they appear to result from a present_weather code of 125: "Manned Observation: No present or recent weather".
+Filtered logging so that interpolation counts are logged to the console and individual interpolation messages are logged to disk.
+Learned that 2909 cloud fraction value are being interpolated due to the N/A weather description.
+Added a note to the results page indicating that we believe the results to be inaccuracte due to the cloud fraction interpolation issue.
+Tagged bloomcast2014r2 in the repo.
+(bloomcast)
+
+Merged r3852:3892 from NEMO upstream repo and pushed the merge for NEMO-code for Nancy to test.
+Reviewed upstream changes from r3908 to r4391 for their impact on our codebase and drafted a merge-steps plan.
+Merged r3908 (1st of the changes necessary for us to open our Johnstone Strait boundary) from NEMO upstream repo and pushed the merge for NEMO-code for Nancy to test.
+(MEOPAR)
+
+
+Fri 7-Deb-2014
+~~~~~~~~~~~~~~
+
+Added CSS class to highlight note that was added to results page yesterday; missed it in yesterday's commits.
+Fixed the fact that unknow weather description log messsges are not being emailed to Susan by increasing the timeout on the logging SMTP handler.
+Worked on understanding the relationship between :kbd:`cld_amt_code_*` values and :kbd:`tot_cld_amt` in SWOB-ML files.
+Did several count stats analyses on the available YVR SWOB-ML files using a mapping from :kbd:`cld_amt_code_*` to CF and summing the mapped CF values to get effective :kbd:`tot_cld_amt` values:
+
+* of 744 hourly YVR SWOB-ML files, 55 contain no :kbd:`*cld_amt*` values, 231 contain :kbd:`tot_cld_amt` values, and 65 of those have disagreement between the summation CF value and the reported :kbd:`tot_cld_amt` value
+
+* After UTC midnight roll-over, of 721 hourly YVR SWOB-ML files, 55 contain no :kbd:`*cld_amt*` values, 224 contain :kbd:`tot_cld_amt` values, 59 of those have disagreement between the summation CF value and the reported :kbd:`tot_cld_amt` value, 14 of those have an absolute difference of >0.5, but none have an absolute difference of >1
+(bloomcast)
+
+Fixed and added unit tests.
+Moved YVR CF check plug-ins to their own package and started documenting the ways in which ECget can be extended and reused.
+(ECget)
+
+Merged r3911:3919 from NEMO upstream repo and pushed the merge for NEMO-code for Nancy to test; upstream repo was very balky.
+(MEOPAR)
+
+
+Sat 8-Feb-2014
+~~~~~~~~~~~~~~
+
+Drained the Sand Heads wind queue which had not been connected to by a consumer since mid-afternoon on 6-Feb; queue had persisted on server and all expected messages were present.
+Discussed next step of YVR cloud fraction analysis with Susan; calculate cummulative error.
+(ECget)
+
+Booked travel for PyCon and visit to parents in April.
+
+Created a proof-of-concept for the salishsea.eos.ubc.ca site based on Sphinx, sphinx_bootstrap_theme, and the bootswatch Superhero theme.
+(salishsea-site)
+
+Added 4-Oct-2002 through 23-Oct-2002 CGRF files to collection on jasper.
+(MEOPAR)
+
+
+Sun 9-Feb-2014
+~~~~~~~~~~~~~~
+
+Added hourly value formmatter.
+Separated SOG weather command plug-ins and Datamart AMQP consumer into different modules.
+Changed river flow command and daily value formatter to use arrow instead of datetime.
+(ECget)
+
+Tried a run on jasper with 6x14-22 = 62 processors based on Susan’s by-eye analysis that found that 22 processors in the 6x14 domain decomposition have grid points that are exclusively on land.
+The run failed during start-up with a segmentation fault before the IOM server completed parsing the iodef.xml file.
+Speculation is that while NEMO may be capable of running with land processors excluded, the IOM server may not be.
+(MEOPAR)
+
+Added cloud fraction mappings for 3 previously unseen weather descriptions.
+(bloomcast)
