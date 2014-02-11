@@ -610,3 +610,25 @@ Speculation is that while NEMO may be capable of running with land processors ex
 
 Added cloud fraction mappings for 3 previously unseen weather descriptions.
 (bloomcast)
+
+
+Week 7
+------
+
+Mon 10-Feb-2014
+~~~~~~~~~~~~~~~
+
+Updated spin-up runs collection on :kbd:`salish` with Susan's recent results from :kbd:`jasper`.
+(MEOPAR)
+
+Attended Jeff Dorman's EcoLunch seminar.
+
+Added queue name management to ensure unique per-deployment queue names.
+Downloaded the last 18 months of Fraser and Englishman River flow data in SOG-florcing/ECget and started work toward cron jobs that will do that monthly so we don't loose continuity in our dataset due to the wateroffice.ec.gc.ca rolling 18-month window on real-time data.
+Bumped ECget version to 0.2 and development status to beta to coincide with 1st deployment on salish.
+Started implementing YVR cloud fraction command plug-in.
+Refactored SOG weather command plug-ins to use a command base class.
+(ECget)
+
+Got YVR station 889 weather data for 2013 < 12-Jun and 2012 for Susan by tweaking and faking out bloomcast.
+(bloomcast)
