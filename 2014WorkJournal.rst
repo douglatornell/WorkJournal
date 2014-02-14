@@ -632,3 +632,24 @@ Refactored SOG weather command plug-ins to use a command base class.
 
 Got YVR station 889 weather data for 2013 < 12-Jun and 2012 for Susan by tweaking and faking out bloomcast.
 (bloomcast)
+
+
+Tue 11-Feb-2014
+~~~~~~~~~~~~~~~
+
+Copied 18oct25oct spin-up run results from jasper to ocean.
+Added CGRF files for 2002-10-28 through 2002-11-06 to collection on jasper.
+(MEOPAR)
+
+Finished unit tests for YVR cloud fraction command plug-in.
+Set up hourly cron job on salish to run YVR cloud fraction consumer and append results to SOG-forcing/ECget/YVR_cloud_fraction.
+Implemented YVR air temperature and relative humidity command plug-ins and set them up in hourly cron jobs on salish.
+Figured out how to plug into ECget from another package via entry-point namespaces - no changes to any ECget files required.
+Added command plug-in to backfill YVR data values from past 30 days SWOB-ML files.
+Replaced files that cron jobs are appending to with ones that contain past 30 days of data.
+(ECget)
+
+Repeated Friday's count stats analyses on the available YVR SWOB-ML files using a mapping from :kbd:`cld_amt_code_*` to CF and summing the mapped CF values to get effective :kbd:`tot_cld_amt` values:
+
+* of 734 hourly YVR SWOB-ML files, 55 contain no :kbd:`*cld_amt*` values, 231 contain :kbd:`tot_cld_amt` values, and 60 of those have disagreement between the summation CF value and the reported :kbd:`tot_cld_amt` value, 54 of those have an absolute difference of >0.5, but none have an absolute difference of >1, and the cummulative difference is 0
+(bloomcast)
