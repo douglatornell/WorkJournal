@@ -653,3 +653,12 @@ Repeated Friday's count stats analyses on the available YVR SWOB-ML files using 
 
 * of 734 hourly YVR SWOB-ML files, 55 contain no :kbd:`*cld_amt*` values, 231 contain :kbd:`tot_cld_amt` values, and 60 of those have disagreement between the summation CF value and the reported :kbd:`tot_cld_amt` value, 54 of those have an absolute difference of >0.5, but none have an absolute difference of >1, and the cummulative difference is 0
 (bloomcast)
+
+
+Wed 12-Feb-2014
+~~~~~~~~~~~~~~~
+
+Travel Vancouver; 2.5 hr flight delay, so lots of time at SFO.
+
+Worked on docs re: API, built-in plug-ins, and extending ECget.
+(ECget)
