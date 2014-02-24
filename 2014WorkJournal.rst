@@ -502,6 +502,7 @@ Week 6
 Mon 3-Feb-2014
 ~~~~~~~~~~~~~~
 
+Salish Sea project mtg; see Google Drive whiteboard image file.
 Finished implementation of Marlin.
 Used Marline to merge r3828:3843 from NEMO upstream repo; pushed the merge to NEMO-code for Nancy to test.
 Susan took over running spin-up day by day to tune horizontal turbulent viscosity run by run; I continue to manage results in /ocean/dlatorne/MEOPAR/SalishSea/results/spin-up/.
@@ -519,7 +520,6 @@ Wed 5-Feb-2014
 ~~~~~~~~~~~~~~
 
 Noticed that there are literally hundreds of hours when weather description is N/A and cloud fraction value has to be interpolated; it make the log almost unusable.
-Also noted that the entire day of 4-Feb has N/A for its weather description on climate.ec.gc.ca; in other words that has become an unreliable data element.
 (bloomcast)
 
 Thrashed around trying to figure out how to use OAuth2 to do RandoPony Google Drive spreadsheet operations from Webfaction deployment since the ClientLogin() call was getting an authentication failure.
@@ -558,7 +558,7 @@ Merged r3908 (1st of the changes necessary for us to open our Johnstone Strait b
 (MEOPAR)
 
 
-Fri 7-Deb-2014
+Fri 7-Feb-2014
 ~~~~~~~~~~~~~~
 
 Added CSS class to highlight note that was added to results page yesterday; missed it in yesterday's commits.
@@ -658,7 +658,118 @@ Repeated Friday's count stats analyses on the available YVR SWOB-ML files using 
 Wed 12-Feb-2014
 ~~~~~~~~~~~~~~~
 
-Travel Vancouver; 2.5 hr flight delay, so lots of time at SFO.
+Travel to Vancouver; 2.5 hr flight delay, so lots of time at SFO.
 
 Worked on docs re: API, built-in plug-ins, and extending ECget.
 (ECget)
+
+
+Thu 13-Feb-2014
+~~~~~~~~~~~~~~~
+
+Salish Sea project mtg; see Google Drive whiteboard image file.
+(MEOPAR)
+
+Continnued work on OSM poster; much easier on a desktop workstation that is running Inkscape directly compared to using it via X11 forwarding on a MacBook.
+(bloomcast)
+
+
+Fri 14-Feb-2014
+~~~~~~~~~~~~~~~
+
+Sent email to Luc outlining the quantities and frequency we need from the GEM-2.5 products to use in NEMO.
+Wrote talk abstract on collaboration tools for CMOS meeting in Rimouski.
+(MEOPAR)
+
+Continued work on OSM poster.
+(bloomcast)
+
+
+Sat 15-Feb-2014
+~~~~~~~~~~~~~~~
+
+Continued work on OSM poster.
+(bloomcast)
+
+Submitted CMOS talk abstract.
+(MEOPAR)
+
+
+Week 8
+------
+
+Mon 17-Feb-2014
+~~~~~~~~~~~~~~~
+
+Enabled debugging in YVR weather consumer cron job scripts to try to capture the source of the intermittent "unknown entity" messages.
+(ECget)
+
+Updated link to SOG buildbot page on buildbot.net success stories page.
+(SOG)
+
+Finished OSM poster layout and content template; need to update content with bloomcast results on Friday before printing.
+Removed warning note re: YVR weather description and cloud fraction values from bloomcast results page.
+Re-organized results page to put profiles below time series plots.
+Added a line to the mixing layer depth plot to show the time at which the profiles are plotted.
+(bloomcast)
+
+
+Tue 18-Feb-2014
+~~~~~~~~~~~~~~~
+
+Travel to Vancouver Island for State of the Ocean meeting at PBS.
+
+Buffed SoG-bloomcast repo for release on Bitbucket.
+(bloomcast)
+
+Investigated `xml.etree.ElementTree.ParseError: undefined entity: line 5, column 64` error that occurs sporadically.
+It seems to be of no consequence as the value recorded when it arises is always in agreement with the Firefox rendering of the XML file.
+Changed from parsing `response.content` to `response.text` to see if that will quiet things down.
+(ECget)
+
+
+Wed 19-Feb-2014
+~~~~~~~~~~~~~~~
+
+State of the Ocean meeting at PBS.
+
+Added clearfix class to profile plots container so that the following container renders below.
+Fixed size of title on x-axis of mixing layer depth graph.
+(bloomcast)
+
+
+Thu 20-Feb-2014
+~~~~~~~~~~~~~~~
+
+Travel to Vancouver.
+
+Bloomcast cron job and manual re-try failed due to time-outs on wateroffice site.
+Created SoG-bloomcast repo on Bitbucket and pushed project to it.
+(bloomcast)
+
+Worked on adding filter method to Datamart driver so that, for example, only hourly data and correction messages will be processed.
+(ECget)
+
+
+Fri 21-Feb-2014
+~~~~~~~~~~~~~~~
+
+Finalized OSM poster and got it printed.
+(bloomcast)
+
+Salish Sea project mtg; see Google Drive whiteboard image file.
+(MEOPAR)
+
+Finished adding filter method to Datamart driver so that, for example, only hourly data and correction messages will be processed.
+Cleaned repeated hours out of YVR data files on salish.
+Discovered that YVR data files on salish have not had data added since 08:00 on 19-Feb; not sure why.
+Dug into tox failures under 2.7 and 3.2.
+Fixed 2.7 issue by refactoring SWOB-ML get_data driver method.
+Traced 3.2 issue to a bug in pbr which is used in cliff's packaging tool chain; nothing for me to do until there is a new release of cliff.
+(ECget)
+
+
+Sun 23-Feb-2014
+~~~~~~~~~~~~~~~
+
+Travel to Honolulu for OSM 2014.
