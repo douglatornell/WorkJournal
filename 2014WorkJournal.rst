@@ -504,7 +504,7 @@ Mon 3-Feb-2014
 
 Salish Sea project mtg; see Google Drive whiteboard image file.
 Finished implementation of Marlin.
-Used Marline to merge r3828:3843 from NEMO upstream repo; pushed the merge to NEMO-code for Nancy to test.
+Used Marlin to merge r3828:3843 from NEMO upstream repo; pushed the merge to NEMO-code for Nancy to test.
 Susan took over running spin-up day by day to tune horizontal turbulent viscosity run by run; I continue to manage results in /ocean/dlatorne/MEOPAR/SalishSea/results/spin-up/.
 (MEOPAR)
 
@@ -624,7 +624,7 @@ Updated spin-up runs collection on :kbd:`salish` with Susan's recent results fro
 Attended Jeff Dorman's EcoLunch seminar.
 
 Added queue name management to ensure unique per-deployment queue names.
-Downloaded the last 18 months of Fraser and Englishman River flow data in SOG-florcing/ECget and started work toward cron jobs that will do that monthly so we don't loose continuity in our dataset due to the wateroffice.ec.gc.ca rolling 18-month window on real-time data.
+Downloaded the last 18 months of Fraser and Englishman River flow data in SOG-forcing/ECget and started work toward cron jobs that will do that monthly so we don't loose continuity in our dataset due to the wateroffice.ec.gc.ca rolling 18-month window on real-time data.
 Bumped ECget version to 0.2 and development status to beta to coincide with 1st deployment on salish.
 Started implementing YVR cloud fraction command plug-in.
 Refactored SOG weather command plug-ins to use a command base class.
@@ -773,3 +773,102 @@ Sun 23-Feb-2014
 ~~~~~~~~~~~~~~~
 
 Travel to Honolulu for OSM 2014.
+
+
+Week 9
+------
+
+Mon 24-Feb-2014
+~~~~~~~~~~~~~~~
+
+Put posters up; sweet corner lot for mine, though the surrounding posters make it look like it is in an uncategorizable ghetto.
+Tutorials on 5th IPCC report; see meeting notes file.
+(OSM)
+
+Merged r3941 from NEMO upstream repo and pushed the merge for NEMO-code for Nancy to test.
+Updated merge workflow docs to clarify that a merge is alway required when changes are pulled from NEMO-hg-mirror repo.
+(MEOPAR)
+
+Created salishsea-site repo and pushed it to Bitbucket.
+Started building site framework based on Sphinx, sphinx-bootstrap-theme, and Bootswatch superhero theme.
+(salishsea-site)
+
+
+Tue 25-Feb-2014
+~~~~~~~~~~~~~~~
+
+Arctic in rapid transition session.
+Plenary session about Pacific coral reefs, river outflows, and working with local cultures and leaders.
+Plenary panel about communicating science; started okay, but devolved into being very USA-centric.
+Tutorials re: biology and marine ecosystem modeling; see meeting notes file:
+
+* bacterial degradation of oil from Deep Sea Horizon on a Gulf of Mexico beach
+* Georgina Gibson: how to build a PNZ model
+* John Cullen: Charles Yentsch, ocean colour, and phytoplankton
+* ocean viruses and bacteria
+
+Poster session conversations with Jeff Dorman, Doug Wallace, and Mark Halverson.
+(OSM)
+
+Worked on site makefile and deployed site to shelob server for the first time.
+Apparently shelob does not accept ssh connections from outside eos domain so had to do a 2-step deployment via rsync from tom to sable, then from sable to shelob.
+(salishsea-site)
+
+Nancy reported that r3941 tested clean on jasper.
+(MEOPAR)
+
+
+Wed 26-Feb-2014
+~~~~~~~~~~~~~~~
+
+Awards lectures.
+Tutorials on bio-Argo, wavelet transforms, and turbulent diffusion/dispersion.
+Poster session conversation with Rich, and a great presentation on turbulence by Stephanie.
+(OSM)
+
+Merged r3942:4510 from NEMO upstream repo and pushed the merge to NEMO-code for Nancy to test.
+Created Nov 2006 CGRF files on salish for Nancy to use for initial storm surge hindcast test runs.
+(MEOPAR)
+
+
+Thu 27-Feb-2014
+~~~~~~~~~~~~~~~
+
+Plenary
+Tutorials on US state department, superstorm Sandy and storm surge, and geo-engineering based on growing ocean algae in dessert regions.
+Presented my poster and talked to at least 2 or 3 people I didn't already know.
+(OSM)
+
+Created Dec 2006 CGRF files on salish for Nancy to use for initial storm surge hindcast test runs.
+(MEOPAR)
+
+Added "Freezing Rain,Snow Showers" to cloud fraction mapping.
+(bloomcast)
+
+
+Fri 28-Feb-2014
+~~~~~~~~~~~~~~~
+
+River plumes session for talks by Mark, Julie, and Sarah Godding.
+Tutorials on global water cycle, carbon in the southern ocean, arctic ice algae, and climate chsnge adaptation in the Gulf of Maine.
+(OSM)
+
+Investigated the inclusion of arbitrary passive traces in NEMO and concluded that it is done using TOP.
+(GEOTRACES)
+
+
+Sat 1-Mar-2014
+~~~~~~~~~~~~~~
+
+Discussed with Susan the idea of running an ensemble of bloomcast future weathers instead of the contrived average weather, and the early and late weathers from the hindcast.
+Started to investigate creating a collection of annual, 2-year long forcing files to drive ensemble bloomcasts.
+(bloomcast)
+
+
+Sun 2-Mar-2014
+~~~~~~~~~~~~~~
+
+Talked with Susan about statistical processing of ensemble bloomcasts.
+(bloomcast)
+
+Travel to Vancouver.
