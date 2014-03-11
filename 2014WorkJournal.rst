@@ -872,3 +872,94 @@ Talked with Susan about statistical processing of ensemble bloomcasts.
 (bloomcast)
 
 Travel to Vancouver.
+
+
+March
+=====
+
+Week 10
+-------
+
+Mon 3-Mar-2014
+~~~~~~~~~~~~~~
+
+Recovery from delayed overnight flight home from Honolulu.
+
+Replied to email from Alex at EC datamart re: ECget leaking over 250 active connections.
+(ECget)
+
+Started creating Mako template of RST file for results so that they can be incorporated into the salishsea-site build process.
+(bloomcast)
+
+Resolve <no title> issue in HTML title tag.
+(salishsea-site)
+
+
+Tue 4-Mar-2014
+~~~~~~~~~~~~~~
+
+Attended Jessica's master's defense.
+
+Reviewed Nancy's initial storm surge run results.
+(MEOPAR)
+
+Set up meeting w/ Ben & Susan re: adding aragonite saturation to bloomcast.
+Started work on extracting 2 year long chunks from SOG-forcing data files to support running bloomcast as an ensemble forecast.
+(bloomcast)
+
+Sent email to John re: ssh access to shelob from outside eos domain.
+(salishsea-site)
+
+Investigated what is going on with ECget queues; it seems that the queues I created around 10-Feb are no longer receiving messages, however, newly created queues receive messages as expected.
+(ECget)
+
+
+Wed 5-Mar-2014
+~~~~~~~~~~~~~~
+
+Prepared for code review of bdy_dyn3d_zgd() :file:`MY_SRC/bdydyn3d.F90`.
+Salish Sea project mtg; see Google Drive whiteboard image file.
+Committed and pushed the results of the :file:`MY_SRC/bdydyn3d.F90` code review.
+Cleaned up file organization in NEMO-forcing/open_boundaries/.
+(MEOPAR)
+
+Finished implementation of tool to extracting 2 year long chunks from SOG-forcing data files to support running bloomcast as an ensemble forecast.
+Used it to process air temperature, relative humidity, cloud fraction, and wind files.
+Met with Susan and Ben to discuss adding a page to bloomcast to show pH, alkalinity, DIC, and aragonite saturation.
+(bloomcast)
+
+Checked the new YVR air temperature queue created yesterday from salish and found that it continues to receive messages.
+(ECget)
+
+Attended David Archer's public lecture on the role of CO2 and CH4 in climate change.
+
+
+Thu 6-Mar-2014
+~~~~~~~~~~~~~~
+
+Realized that 2yr chunk tool will produce incomplete or empty files.
+Figured out how to run matlab via the Python subprocess module; see ~/add.py on sable.
+Continued working on 2-yr chunk forcing files; added fixes so that incomplete or empty files are not created; added logging; fixed code so that files contain 732 days of data, and updated the meteo and wind files that were shorter than that.
+(bloomcast)
+
+Wrote a lengthy email about the scientific Python stack to Francis at Waterloo.
+Worked on OSM expense claim with Susan.
+
+Attended David Archer's department seminar on modelling methane hydrates in ocean sediments over geological time scales.
+
+
+Fri 7-Mar-2014
+~~~~~~~~~~~~~~
+
+Created a proof of concept SVG image for the landing page of salishsea.eos.ubc.ca.
+It has embedded PNG images that link to pages for NEMO model, bloomcast, and SOG model.
+The file needs to be placed in the _static/ directory so that Sphinx copies it to _build/html/ during the build process.
+The links hrefs need to take that location into account.
+The links also need to use target="_top" so that they open in the full browser window rather than the SVG object frame.
+Text must be created in Inkscape as plain text (click and type) rather than flowed text (click-drag-type) because flowed text is incompatible with browser SVG engines.
+The font-family of text objects has to be edited manually because Inkscape fonts are named differently to browser fonts and the result is a plain, serif font.
+(salishsea-site)
+
+Created 2 year long chunks from SOG-forcing river flow files.
+Created SoG-bloomcast-ensemble development branch.
+(bloomcast)
