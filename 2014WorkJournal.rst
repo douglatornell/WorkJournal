@@ -963,3 +963,66 @@ The font-family of text objects has to be edited manually because Inkscape fonts
 Created 2 year long chunks from SOG-forcing river flow files.
 Created SoG-bloomcast-ensemble development branch.
 (bloomcast)
+
+
+Week 11
+-------
+
+Mon 10-Mar-2014
+~~~~~~~~~~~~~~~
+
+Arrived in Delft.
+
+
+Tue 11-Mar-2014
+~~~~~~~~~~~~~~~
+
+Set up build slaves on coho and nerka running the SOGcommand build as regression tests (nightly when changesets have been pushed, and always weekly); done as a monitoring mechanism to confirm that those machines are up and running a viable configuration.
+(SOG)
+
+Checked NEMO SVN repo for updates: none.
+Experimented with adding Markdown descriptions from 1st cell of notebooks to nbviewer links lists in tools repo directory READMEs.
+(MEOPAR)
+
+
+Wed 12-Mar-2014
+~~~~~~~~~~~~~~~
+
+Finished work on new make_readme.py scripts in tools repo that add descriptions from notebook 1st cells to the list of nbviewer links.
+Descriptions may be either in Markdown or raw text cells.
+(MEOPAR)
+
+Continued work on ensemble branch.
+(bloomcast)
+
+Moved into office at TU Delft.
+
+
+Thu 13-Mar-2014
+~~~~~~~~~~~~~~~
+
+Improved logging re: cliff implementation of bloomcast command.
+Started implementation of method to generate infile edit files for each member run of the ensemble.
+(bloomcast)
+
+Created results repo; first contents are tidal current predictions for Baynes Sounds that Susan prduced for Debbie.
+Created Salish Sea MEOPAR project contributors file re: docs repo issue #1 and linked it into README files in all other repos where it was appropriate to do so.
+Salish Sea project mtg; see Google Drive whiteboard image file.
+(MEOPAR)
+
+
+Fri 14-Mar-2014
+~~~~~~~~~~~~~~~
+
+Finished implementation of method to generate infile edit files for each member run of the ensemble.
+(bloomcast)
+
+Started exploring the Wind-Driven Reduced Gravity 1.5 Layer Rotating Shallow Water Model code that Francis sent.
+Instrumented it to measure execution time.
+
+
+Sun 16-Mar-2014
+~~~~~~~~~~~~~~~
+
+Added method to generate ensemble jobs batch description file.
+(bloomcast)
