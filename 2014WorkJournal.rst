@@ -1026,3 +1026,94 @@ Sun 16-Mar-2014
 
 Added method to generate ensemble jobs batch description file.
 (bloomcast)
+
+
+Week 12
+-------
+
+Mon 17-Mar-2014
+~~~~~~~~~~~~~~~
+
+Chunning reported that the ferry data chlorophyl level is rising steadily which agrees with the bloomcast calculations both qualitatively and, apparently, quantitatively.
+Added method to run ensemble forecast via new SOG command processor batch API.
+(bloomcast)
+
+Added an API for the :command:`SOG batch` command.
+Bumped SOGcommand package version to 1.3.3.
+Ran a 30 member forecast based on weather from 1980 through 2010 and analyzed the results in an IPython notebook; median bloom date agrees with present method (26-Mar based on actual weather to 15-Mar).
+(SOG)
+
+
+Tue 18-Mar-2014
+~~~~~~~~~~~~~~~
+
+Continued analysis of initial 30 member ensemble forecast.
+Discussed selection of members to plot when year-day stats yield zero or multiple members.
+Started implementation of calculation of ensemble forecast results methods and functions in ensemble.py and bloomcast.py modules.
+Moved existing bloomcast unit tests into test modules that reflect code modules.
+(bloomcast)
+
+
+Wed 19-Mar-2014
+~~~~~~~~~~~~~~~
+
+Finished implementation of calculation of ensemble forecast results methods and functions.
+Started implementation of new time series plotting functions in a new visualization.py module.
+(bloomcast)
+
+
+Thu 20-Mar-2014
+~~~~~~~~~~~~~~~
+
+Continued implementation of new time series plotting functions; finished nitrate/diatoms plot.
+(bloomcast)
+
+Started work on clean-up of netCDF_Plots directory in tools repo, and creation of example notebooks.
+Salish Sea project mtg; see Google Drive whiteboard image file.
+(MEOPAR)
+
+
+Fri 21-Mar-2014
+~~~~~~~~~~~~~~~
+
+Continued implementation of new time series plotting functions; temperature/salinity plot.
+(bloomcast)
+
+Pushed example notebook re: working with netCDF files in Python.
+Started development of salishsea_tools.viz_tools.py module.
+Started work on example notebook re: plotting bathymetry data.
+(MEOPAR)
+
+
+Sat 22-Mar-2014
+~~~~~~~~~~~~~~~
+
+Added cloud fraction mappings for "Rain,Fog,Blowing Dust" weather description.
+Continued implementation of new time series plotting functions.
+(bloomcast)
+
+
+Sun 23-Mar-2014
+~~~~~~~~~~~~~~~
+
+Continued implementation of new time series plotting functions.
+(bloomcast)
+
+
+Week 13
+-------
+
+Mon 24-Mar-2014
+~~~~~~~~~~~~~~~
+
+Did catch-up in this log.
+
+Finished implementation of function to plot mixing layer depth and wind speed time series.
+Changed forcing data transition date (config.data_date) to be an arrow object throughout the codebase.
+(bloomcast)
+
+Added CGRF files for 2002-11-07 through 2002-11-16 to collection on jasper.
+Copied 26oct spin-up run results from Susan's workspace salish to ocean.
+Copied 27oct30oct, 31oct, and 1nov4nov spin-up run results from jasper to ocean.
+Continued work on example notebook re: plotting bathymetry data.
+(MEOPAR)
