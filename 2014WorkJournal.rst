@@ -1117,3 +1117,220 @@ Copied 26oct spin-up run results from Susan's workspace salish to ocean.
 Copied 27oct30oct, 31oct, and 1nov4nov spin-up run results from jasper to ocean.
 Continued work on example notebook re: plotting bathymetry data.
 (MEOPAR)
+
+
+Tue 25-Mar-2014
+~~~~~~~~~~~~~~~
+
+Added CGRF files for 2002-11-17 through 2002-11-26 to collection on jasper.
+Copied 5nov14nov spin-up run results from Susan's workspace salish to ocean.
+Finished example notebook re: plotting bathymetry data.
+Extended salishsea_tools.viz_tools.set_aspect() to calculate map coordinates aspect ratio from latitudes array.
+Sent email to Ashley and Shona re: getting NEMO netCDF data and results into a GIS shapefile format that they can use.
+(MEOPAR)
+
+Started implementation of functions to render ensemble bloomcast results into
+new salishsea domain website framework.
+(bloomcast)
+
+Attended Susan's TU Delft seminar on SOG and blomcast.
+
+
+Wed 26-Mar-2014
+~~~~~~~~~~~~~~~
+
+Added CGRF files for 2002-11-17 through 2002-11-26 to collection on jasper.
+Copied 15nov19nov spin-up run results from Susan's workspace salish to ocean.
+Salish Sea project mtg; see Google Drive whiteboard image file.
+Added CGRF files for 2006-12-09 through 2006-12-21 to collection on jasper.
+(MEOPAR)
+
+Finished implementation of framework functions to render ensemble bloomcast results into new salishsea domain website framework.
+(bloomcast)
+
+Set up pony for 5-Apr VI200.
+(RandoPony)
+
+Wrote outline for lunch seminar at TU Delft CITG on 31-Mar.
+
+
+Thu 27-Mar-2014
+~~~~~~~~~~~~~~~
+
+Investigated storage options and limits on jasper.
+Only filesystem accessible storage is lustre (which is what we are using) with a quota of 1 Tb per user (1.25 Tb grace).
+Silo is available for archival storage.
+Restart files are 2.3 Gb each and CGRF files are 146 Mb per day, so there should be room for ~50 spin-up restart files (12 mo * 3/mo + buffer) and a few thousand days of CGRF files in my user space.
+Started creation of MEOPAR/SalishSea/spin-up/ collection of restart files on jasper as project resource; rsync-ed spin-up restart files to date from salish with::
+
+  cd MEOPAR/SalishSea/results/spin-up
+  rsync -ptRz --progress */SalishSea_*_restart.nc jasper:MEOPAR/SalishSea/spin-up/
+
+Transfer takes ~4 min per file.
+Updated repos on jasper and did a clean build of NEMO-code.
+Continued spin-up runs on jasper:
+
+* 15nov19nov re-run to generate tidal harmonics files
+* 30nov9dec queued
+
+Added CGRF files for 2002-12-07 through 2002-12-10 to collection on jasper.
+(MEOPAR)
+
+Started development of spring diatom bloom prediction results web page template.
+Started implementation of function to push results page and plots to web server.
+(bloomcast)
+
+
+Fri 28-Mar-2014
+~~~~~~~~~~~~~~~
+
+Finished implementation of function to push results page and plots to web server.
+Ensemble forecast says that today is bloom day.
+(bloomcast)
+
+Improved rsync targets in Makefile.
+(salishsea-site)
+
+Checked 15nov19nov tidal harmonics file were sane and downloaded reslts to ocean.
+Re-ran 30nov9dec run because its results were mixed with 15nov19nov and tidal harmonics files, etc. were therefore lost.
+Re-wrote from_jasper.py script with argparer interface and put it under Mercurial.
+(MEOPAR)
+
+Started creating slide deck for lunch seminar at TU Delft CITG on 31-Mar.
+
+
+Sat 29-Mar-2014
+~~~~~~~~~~~~~~~
+
+Updated spin-up page in docs.
+Linked contributors file into docs.
+Updated links in docs CC-By license.
+Added CGRF files for 2002-12-11 through 2002-12-21 to collection on jasper.
+Started 10dec19dec spin-up run; timed out.
+(MEOPAR)
+
+Worked on slide deck for lunch seminar at TU Delft CITG on 31-Mar.
+
+
+Sun 30-Mar-2014
+~~~~~~~~~~~~~~~
+
+Started trying to implement bloom date evolution table in RST.
+(bloomcast)
+
+Worked on slide deck for lunch seminar at TU Delft CITG on 31-Mar.
+
+
+April
+=====
+
+Week 14
+-------
+
+Mon 31-Mar-2014
+~~~~~~~~~~~~~~~
+
+After repeated failures of RST table layout, switched bloom date evolution table to Mako-generated raw html.
+(bloomcast)
+
+Determined that 10dec19dec spin-up run timed out because its end time step was accidentally set to 90 days instead of 10 days; re-queued the run.
+Added CGRF files for 2002-12-12 through 2002-12-31 to collection on jasper.
+Transferred results of 20nov29nov and 30nov9dec spin-up runs to ocean, and copied restart files to collection on jasper.
+Tested, debugged, and improved from_jasper.py script.
+(MEOPAR)
+
+Finshed slide deck for, and gave lunch seminar on version control and software automation at TU Delft CITG.
+Built a new blogofile virtualenv for working on douglatornell.ca, and added a blurb ans links to the slide deck from today's talk to my talks page.
+Noted that blogofile can only be sucessfully installed from the dev repo, not from the released 0.8b1 package on PyPI.
+Also, for Python 3, textiles-2.1.4-py3k has to be installed explicitly from the GitHub tarball because pip will no longer automatically download packages from external links.
+
+Met with Marcel Zijlema (maintainer of SWAN and SWASH codes) to talk about VCSs.
+
+Added project-specific layout template to facilitate addition of custom CSS, and added styles to control column widths and padding in bloom date evolution table of spring diatoms page from ensemble version of SoG-bloomcast.
+(salishsea-site)
+
+
+Tue 1-Apr-2014
+~~~~~~~~~~~~~~
+
+Tried to run ensemble bloomcast as cron job; works except for pushing results to shelob, which fails because cron is unable to use my ssh key for authentication.
+(bloomcast)
+
+Added CGRF files for 2003-01-01 to collection on jasper.
+Transferred results of 10dec19dec spin-up run to ocean, and copied restart files to collection on jasper.
+Started 20dec31dec spin-up run on jasper.
+Added code to salishsea prepare sub-command to confirm that symlink targets exist before linking to them.
+Simplified logging handler configuration in salishsea_cmd.
+Started work on example notebook re: plotting tracer results on surface and depth slices.
+(MEOPAR)
+
+Set up pony for 19-Apr SI200.
+(RandoPony)
+
+
+Wed 2-Apr-2014
+~~~~~~~~~~~~~~
+
+Continued work on example notebook re: plotting tracer results on surface and depth slices.
+20dec31dec spin-up run on jasper timed out after 18 hours with 1586 time steps to go.
+Analysis shows that it took ~91.5 min per model day compared to the ~67 min that was typical of 10d runs; this is probably just due to filesystem or processor selection issues on jasper.
+Re-queued 20dec31dec spin-up run on jasper with walltime increased to 20h.
+Updated spin-up docs to recommend walltimes of 16.75h for 10d runs and 20h for 12d runs.
+Created tools/storm_surges/SandHeadsWinds.ipynb to demonstrate how to read SOG-forcing repo historical wind data files from Sand Heads station.
+(MEOPAR)
+
+Ran ensemble bloomcast manually on salish.
+(bloomcast)
+
+
+Thu 3-Apr-2014
+~~~~~~~~~~~~~~
+
+20dec31dec spin-up run on jasper timed out again after 20 hours.
+Queued 20dec25dec spin-up run on jasper with 12h walltime.
+Continued work on example notebook re: plotting tracer results on surface and depth slices.
+Added viz_tools.plot_coastline() function and refactored tidetools module to use it, deprecating tidetools.plot_coastline().
+(MEOPAR)
+
+
+Fri 4-Apr-2014
+~~~~~~~~~~~~~~
+
+Transferred results of 20dec25dec spin-up run to ocean, and copied restart files to collection on jasper.
+Queued 26dec31dec spin-up run on jasper with 12h walltime.
+Finished example notebook re: plotting tracer results on surface and depth slices.
+Added viz_tools.calc_abs_max() function.
+Refactored netCDF.Dataset pytest fixture into salishsea_tools/tests/conftest.py for shared use.
+(MEOPAR)
+
+Ran ensemble bloomcast manually on salish.
+(bloomcast)
+
+
+Sat 5-Apr-2014
+~~~~~~~~~~~~~~
+
+Added CGRF files for 2003-01-02 to 2003-02-11 to collection on jasper.
+Queued 1jan10jan spin-up run on jasper with 18h walltime.
+Refactored netCDF.Dataset pytest fixture into salishsea_tools/tests/conftest.py for shared use.
+Checked progress of 1jan10jan spin-up run and found that it was running at 140-180 min per modle day; stopped the run and re-queued it with the walltime reduced to 15h in the hope that that would force it to use only fast x5675 nodes.
+(MEOPAR)
+
+Ran ensemble bloomcast manually on salish.
+Re-enabled ensemble cron job to run daily at 22:00 even though it will fail to push the results to shelob; at least I won't have to remember to run the job.
+(bloomcast)
+
+Sun 6-Apr-2014
+~~~~~~~~~~~~~~
+
+Travel from Delft to Vancouver.
+
+Modified namelist.py from https://gist.github.com/krischer/4943658 to handle Salish Sea NEMO namelists:
+
+  1. Handle double quoted strings
+  2. Handle empty string as values
+  3. Handle &end as group ending token
+  4. Add array element assignments
+  5. Relax restriction that all elements of a list assignment must be of the same type; Python lista are hetrogenous
+  6. Ignore empty groups
+(MEOPAR)
