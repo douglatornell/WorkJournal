@@ -670,7 +670,7 @@ Thu 13-Feb-2014
 Salish Sea project mtg; see Google Drive whiteboard image file.
 (MEOPAR)
 
-Continnued work on OSM poster; much easier on a desktop workstation that is running Inkscape directly compared to using it via X11 forwarding on a MacBook.
+Continued work on OSM poster; much easier on a desktop workstation that is running Inkscape directly compared to using it via X11 forwarding on a MacBook.
 (bloomcast)
 
 
@@ -1290,6 +1290,7 @@ Thu 3-Apr-2014
 Queued 20dec25dec spin-up run on jasper with 12h walltime.
 Continued work on example notebook re: plotting tracer results on surface and depth slices.
 Added viz_tools.plot_coastline() function and refactored tidetools module to use it, deprecating tidetools.plot_coastline().
+Salish Sea project mtg; see Google Drive whiteboard image file.
 (MEOPAR)
 
 
@@ -1310,10 +1311,11 @@ Ran ensemble bloomcast manually on salish.
 Sat 5-Apr-2014
 ~~~~~~~~~~~~~~
 
-Added CGRF files for 2003-01-02 to 2003-02-11 to collection on jasper.
+Added CGRF files for 2003-01-02 to 2003-01-11 to collection on jasper.
 Queued 1jan10jan spin-up run on jasper with 18h walltime.
 Refactored netCDF.Dataset pytest fixture into salishsea_tools/tests/conftest.py for shared use.
 Checked progress of 1jan10jan spin-up run and found that it was running at 140-180 min per modle day; stopped the run and re-queued it with the walltime reduced to 15h in the hope that that would force it to use only fast x5675 nodes.
+Re-run of 1jan10jan spin-up run also timed out.
 (MEOPAR)
 
 Ran ensemble bloomcast manually on salish.
@@ -1334,3 +1336,662 @@ Modified namelist.py from https://gist.github.com/krischer/4943658 to handle Sal
   5. Relax restriction that all elements of a list assignment must be of the same type; Python lista are hetrogenous
   6. Ignore empty groups
 (MEOPAR)
+
+
+Week 15
+-------
+
+Mon 7-Apr-2014
+~~~~~~~~~~~~~~
+
+Forked namelist.py from https://gist.github.com/krischer/4943658 to https://gist.github.com/douglatornell/10020346 and pushed my changes to the fork.
+Added CGRF files for 2006-01-31 to 2006-02-11 to collection on jasper.
+Queued 1jan5jan spin-up run on jasper with 10h walltime.
+Transferred results of 26dec31dec spin-up run to ocean, and copied restart files to collection on jasper.
+Added comment to namelist.py gist (https://gist.github.com/krischer/4943658) with link to my fork and description/rationale re: my mods.
+Added namelist module and mods to tools repo.
+Started work on making `salishsea prepare` confirm that correct atmospheric forcing files exist.
+(MEOPAR)
+
+Disabled automatic push of results to shelob until rsync auth issue can be resolved.
+Manually pushed results, and created shell script to do so with fewer keystrokes.
+Fixed the bug whereby the production version of mixing layer depth and wind speed plot is shifted 1 day too far right.
+(bloomcast)
+
+Helped Susan get up and running on salish with a conda environment to work on tuning of summer bloomcast.
+(SOG)
+
+Updated to Python 3.4 via homebrew, but lost Python 3.3 in the process.
+
+
+Tue 8-Apr-2014
+~~~~~~~~~~~~~~
+
+Transferred results of 1jan5jan spin-up run to ocean, and copied restart files to collection on jasper.
+Updated default namelist.domeain, namelist.lateral, and namelist.dynamics files to contain the present spin-up run values; dt=10s, 5 barotropic time steps per dt, open Johnstone Strait boundary, and lateral eddy diffusion & evd = 20 m2/s.
+Queued 6jan10jan spin-up run on jasper with 10h walltime.
+Added CGRF files for 2003-01-12 to 2003-01-21 to collection on jasper.
+Added function to `salishsea preparecd` to confirm that correct atmospheric forcing files exist.
+Salish Sea project mtg; see Google Drive whiteboard image file.
+An email discussion with Masao@westgrid has cleared up what's going on with job run time; L5420 nodes run at about half the speed of X5675 nodes, and our jobs appear to the allocated either all L5420 or all X5675 nodes.
+If we specify X5675 nodes only we'll likely wait longer in the queue than if we specify enough walltime for the job to finish on L5420 nodes.
+Sent email to Ashley with bathymetry netCDF file attached.
+Fixed axes labels in bathymetry plotting example notebook.
+Queued 11jan20jan spin-up run on jasper with 30h walltime; it started on X5675 nodes at 20:45.
+(MEOPAR)
+
+Restarted buildbot master and trac server on bjossa after today's openssl patch reboot.
+Restarted buildbot slaves on cod, herring, snapper, and tyee; coho and sable were not rebooted, so no slave restart necessary; nerka's ocean mount is bad, so no slave restart possible.
+(SOG)
+
+Installed Python 3.3.5 framework from python.org; plan going forward is to have python2 and python3 from homebrew which should be latest versions (presently 2.7.6 and 3.4.0) and use framework installs or conda installs for other versions.
+
+
+Wed 9-Apr-2014
+~~~~~~~~~~~~~~
+
+Transferred results of 6jan10jan spin-up run to ocean, and copied restart files to collection on jasper.
+Added CGRF files for 2003-01-22 to 2003-01-31 to collection on jasper.
+Queued 21jan30jan spin-up run on jasper with 30h walltime.
+Updated spin-up docs page with recent runs status and notes about jasper X5675 and L5420 nodes and new recommended walltimes.
+Add test to confirm that namelist groups with the same name are append to the list under the group name key in the Python dict.
+Added CGRF files for 2003-01-22 to 2003-01-31 to collection on jasper.
+Prepared for 31jan9feb spin-up run on jasper with 30h walltime.
+(MEOPAR)
+
+Research meeting w/ Susan.
+
+Updated conda on tom re: heartbleed bug.
+Created a conda Python 3.4 environment containing IPython and the notebook dependencies.
+Sent email to Susan's group re: heartbleed and updating Anaconda Python distro.
+
+
+Thu 10-Apr-2014
+~~~~~~~~~~~~~~~
+
+Travel to PyCon 2014 in Montréal.
+Dinner with Brett, Andrea, and Guido.
+(PyCon)
+
+
+Fri 11-Apr-2014
+~~~~~~~~~~~~~~~
+
+PyCon 2014 talks; see :file:`PyCon2014/notes.rst`.
+PyCon dinner hosted by Brandon.
+(PyCon)
+
+
+Sat 12-Apr-2014
+~~~~~~~~~~~~~~~
+
+PyCon 2014 talks; see :file:`PyCon2014/notes.rst`.
+(PyCon)
+
+
+Sun 13-Apr-2014
+~~~~~~~~~~~~~~~
+
+PyCon 2014 talks; see :file:`PyCon2014/notes.rst`.
+Dinner with Software Carpentry crew.
+(PyCon)
+
+
+Week 16
+-------
+
+Mon 14-Apr-2014
+~~~~~~~~~~~~~~~
+
+PyCon 2014 development sprints; worked on porting SWC version control lesson to Mercurial.
+Dinner with Software Carpentry crew.
+(PyCon) (SWC)
+
+
+Tue 15-Apr-2014
+~~~~~~~~~~~~~~~
+
+Travel to Barrie to visit parents.
+
+Continued work on porting SWC version control lesson to Mercurial.
+(SWC)
+
+Updated weekly project mtg whiteboard page.
+Reviewed SVN updated that we haven't yet pulled from the upstream NEMO code repo.
+(MEOPAR)
+
+
+Wed 16-Apr-2014
+~~~~~~~~~~~~~~~
+
+Salish Sea project mtg; see Google Drive whiteboard file.
+Found gfortran array bounds checking option flag for Nancy to try; -fbounds-check.
+Prepared 26oct 1-core run on salish to check run rate of 1 core with lots of memoery vs. multiple cores/nodes.
+(MEOPAR)
+
+
+Thu 17-Apr-2014
+~~~~~~~~~~~~~~~
+
+Ran 26oct 1-core run on salish for 3.8 hours and it completed 541 time steps for a run rate of 60.7h per model day; i.e. much slower than multi-core/node runs.
+Dug into array bounds error that Nancy found and concluded with Susan that it is a code smell, but not relevant to the boundary condition v-eta mixup issue.
+(MEOPAR)
+
+
+Fri 18-Apr-2014
+~~~~~~~~~~~~~~~
+
+Branched tools repo to work on changing SalishSeaCmd to a cliff cli app and set up a conda environment in which to work on it.
+(MEOPAR)
+
+
+Sat 19-Apr-2014
+~~~~~~~~~~~~~~~
+
+Travel from Barrie to Vancouver.
+
+Changed SalishSeaCmd `prepare` and `gather` sub-commands to cliff command plug-ins.
+Transferred results of 10feb19feb spin-up run to ocean, and copied restart files to collection on jasper.
+Added CGRF files for 2003-03-03 to 2003-03-12 to collection on jasper.
+Queued 2mar11mar spin-up run on jasper X5675 nodes with 16h walltime; experiment to see how queue time when fast nodes are requested compares to run time when we end up on slow nodes; queue time was a little over 1h, so a win.
+(MEOPAR)
+
+
+Sun 20-Apr-2014
+~~~~~~~~~~~~~~~
+
+Transferred results of 20feb1mar spin-up run to ocean, and copied restart files to collection on jasper.
+Added CGRF files for 2003-03-13 to 2003-03-22 to collection on jasper.
+Queued 2mar11mar spin-up run on jasper X5675 nodes with 16h walltime.
+Updated spin-up docs page with recent runs status.
+Changed SalishSeaCmd `combine` sub-command to cliff command plug-in.
+(MEOPAR)
+
+
+Week 17
+-------
+
+Mon 21-Apr-2014
+~~~~~~~~~~~~~~~
+
+Transferred results of 2mar11mar spin-up run to ocean, and copied restart files to collection on jasper.
+Added CGRF files for 2003-03-23 to 2003-04-01 to collection on jasper.
+Queued 12mar21mar spin-up run on jasper X5675 nodes with 16h walltime.
+Changed SalishSeaCmd `get_cgrf` sub-command to cliff command plug-in.
+Updated SalishSeaCmd docs.
+Transferred results of 12mar21mar spin-up run to ocean, and copied restart files to collection on jasper.
+Added CGRF files for 2003-04-02 to 2003-04-11 to collection on jasper.
+Queued 22mar31mar spin-up run on jasper X5675 nodes with 16h walltime.
+(MEOPAR)
+
+
+Tue 22-Apr-2014
+~~~~~~~~~~~~~~~
+
+Added code to script that transfers results from jasper runs to ocean and spin-up collection on jasper so that ocean files and directories are group read/write-able.
+Transferred results of 22mar31mar spin-up run to ocean, and copied restart files to collection on jasper.
+Queued 1apr10apr spin-up run on jasper X5675 nodes with 16h walltime.
+Added CGRF files for 2003-04-12 to 2003-04-21 to collection on jasper.
+Tested and debugged tools-cliff branch on salish in a Python 3.4 conda environment.
+Merged, tagged and released tools-cliff branch.
+Started changing tidetools.get_run_length() to use namelist module.
+(MEOPAR)
+
+
+Wed 23-Apr-2014
+~~~~~~~~~~~~~~~
+
+Transferred results of 1apr10apr spin-up run to ocean, and copied restart files to collection on jasper.
+Queued 11apr20apr spin-up run on jasper X5675 nodes with 16h walltime.
+Added CGRF files for 2003-04-22 to 2003-05-01 to collection on jasper.
+Salish Sea project mtg; see Google Drive whiteboard file.
+Finished changing tidetools.get_run_length() to use namelist module, and fixed 2 bugs in it; run lengths could be off by orders of magnitude depending on spaces in namelist file, and run length was 1 time step less than the actual run duration.
+Added CGRF files for 2009-11-13 to 2009-11-25 to collection on jasper.
+Started work on example notebook re: plotting velocity field results on depth slices.
+Transferred results of 11apr20apr spin-up run to ocean, and copied restart files to collection on jasper.
+Queued 21apr30apr spin-up run on jasper X5675 nodes with 16h walltime.
+Added CGRF files for 2003-05-02 to 2003-05-11 to collection on jasper.
+(MEOPAR)
+
+Attended Phys Ocgy seminar - Susan talking about our trip to Holland.
+
+Surveyed tech specs of westrgid machines and concluded that the QDR nodes of orcinus are probably the next fastest to jasper's X5675 nodes.
+(GEOTRACES)
+
+
+Thu 24-Apr-2014
+~~~~~~~~~~~~~~~
+
+Participated in online SWC monthly lab meeting.
+
+Continued email conversation with Diego re: open-sourcing and collaborating on oceanviewer.
+Continued work on example notebook re: plotting velocity field results on depth slices.
+Transferred results of 21apr30apr spin-up run to ocean, and copied restart files to collection on jasper.
+Queued 1may10may spin-up run on jasper X5675 nodes with 16h walltime.
+Added CGRF files for 2003-05-12 to 2003-05-21 to collection on jasper.
+(MEOPAR)
+
+Logged into orcinus, installed public ssh key, and sent email to support@westgrid requesting installation of Mercurial.
+(GEOTRACES)
+
+
+Fri 25-Apr-2014
+~~~~~~~~~~~~~~~
+
+Participated in CCAR-Modeling meeting w/ Susan, Paul, Xianmin, Nadja, and Tessa.
+(GEOTRACES)
+
+Transferred results of 1may10may spin-up run to ocean, and copied restart files to collection on jasper.
+Queued 11may20may spin-up run on jasper X5675 nodes with 16h walltime.
+Added CGRF files for 2003-05-22 to 2003-05-31 to collection on jasper.
+(MEOPAR)
+
+
+Sat 26-Apr-2014
+~~~~~~~~~~~~~~~
+
+Transferred results of 11may20may spin-up run to ocean, and copied restart files to collection on jasper.
+Queued 21may30may spin-up run on jasper X5675 nodes with 16h walltime.
+Added CGRF files for 2003-06-01 to 2003-06-10 to collection on jasper.
+Investigated data storage on silo.
+Discussed discrepany in the unstagger algorithm between Susan and Nancy & my implementations and Susan agreed that hers is incorrect.
+(MEOPAR)
+
+
+Sun 27-Apr-2014
+~~~~~~~~~~~~~~~
+
+Transferred results of 21may30may spin-up run to ocean, and copied restart files to collection on jasper.
+Queued 31may9jun spin-up run on jasper X5675 nodes with 18h walltime.
+Added CGRF files for 2003-06-11 to 2003-06-20 to collection on jasper.
+(MEOPAR)
+
+
+Week 18
+-------
+
+Mon 28-Apr-2014
+~~~~~~~~~~~~~~~
+
+31may9jun spin-up run on jasper failed due to time-out, probably related to system-wide filesystem issue that took jasper offline early this morning.
+Continued work on example notebook re: plotting velocity field results on depth slices, and adding new functions to viz_tools module.
+Re-queued 31may9jun spin-up run on jasper X5675 nodes with 18h walltime.
+(MEOPAR)
+
+
+Tue 29-Apr-2014
+~~~~~~~~~~~~~~~
+
+Continued work on example notebook re: plotting velocity field results on depth slices, and adding new functions to viz_tools module.
+Changed docs repo to use sphinx-rtd-theme for local builds.
+Started work on docs improvements.
+Explored widgets and plots of NEMO results in IPython Notebook 2.0.
+Transferred results of 10jun19jun spin-up run to ocean, and copied restart files to collection on jasper.
+Queued 20jun29jun spin-up run on jasper X5675 nodes with 18h walltime.
+Added CGRF files for 2003-07-01 to 2003-07-10 to collection on jasper.
+(MEOPAR)
+
+
+Wed 30-Apr-2014
+~~~~~~~~~~~~~~~
+
+Salish Sea project mtg; see Google Drive whiteboard file.
+20jun29jun spin-up run on jasper X5675 nodes timed out with 18h walltime.
+Re-queued 20jun29jun spin-up run on jasper X5675 nodes with 24h walltime.
+(MEOPAR)
+
+Attended Phys Ocgy seminar - Nancy talking about open boundary conditions.
+
+Created CCAR-Modeling discussion group on Google Groups with Paul, Xianmin and I as owners.
+Created ccar-modeling team account on Bitbucket with Paul, Xianmin and I as administrators, and Susan as a developer; sent email to Nadja and Tessa for them to create user accounts and send me their ids.
+Created ccarmodeling account on readthedocs.org.
+Started trying to build NEMO 3.4 on orcinus.
+(GEOTRACES)
+
+
+Thu 1-May-2014
+~~~~~~~~~~~~~~
+
+Transferred results of 20jun29jun spin-up run to ocean, and copied restart files to collection on jasper.
+Queued 30jun9jul spin-up run on jasper X5675 nodes with 24h walltime.
+Added CGRF files for 2003-07-11 to 2003-07-20 to collection on jasper.
+Updated PBS files for jasper to include directive to run only on X5675 nodes.
+Discussed API for viz_tools plot_coastline and plot_land_mask functions with Susan re: addition of z, x_slice, and y_slice arguments.
+Decided to revert the addition of the plot_coastline call to plot_land_mask.
+Added CGRF files for 2009-11-13 to 2003-11-25 to collection on ocean.
+Updated all tracked PBS scripts re: permissions, reduced repetition of run id, and use of X5675 nodes on jasper.
+Discussed failure of sphinxcontrib-programoutput on RTD w/ Eric on IRC; he thinks it should work.
+Changed tools/docs to use sphinx-rtd-theme for local builds.
+Started adding isobath, xslice & yslice args to plot_coastline and plot_land_mask viz_tools functions.
+(MEOPAR)
+
+Added Nadja and Tessa to the ccar-modeling team account on Bitbucket as a developers.
+Continued trying to build NEMO 3.4 on orcinus.
+Sent email to support@westgrid re: szip library and my build problems on orcinus compared to jasper.
+(GEOTRACES)
+
+Sent link to PDF copy of Linux command line book to Waterhole users.
+
+
+Fri 2-May-2014
+~~~~~~~~~~~~~~
+
+Stayed home sick with body aches and fatigue.
+
+Transferred results of 30jun9jul spin-up run to ocean, and copied restart files to collection on jasper.
+Queued 10jul19jul spin-up run on jasper X5675 nodes with 24h walltime.
+Added CGRF files for 2003-07-21 to 2003-07-30 to collection on jasper.
+(MEOPAR)
+
+
+Sun 3-May-2014
+~~~~~~~~~~~~~~
+
+Transferred results of 10jul19jul spin-up run to ocean, and copied restart files to collection on jasper.
+Queued 20jul29jul spin-up run on jasper X5675 nodes with 24h walltime.
+Added CGRF files for 2003-07-31 to 2003-08-09 to collection on jasper.
+(MEOPAR)
+
+
+May
+===
+
+Week 19
+-------
+
+Mon 5-May-2014
+~~~~~~~~~~~~~~
+
+Still home sick.
+
+Finished adding isobath arg to plot_coastline and plot_land_mask viz_tools functions.
+Transferred results of 20jul29jul spin-up run to ocean, and copied restart files to collection on jasper.
+Queued 30jul8aug spin-up run on jasper X5675 nodes with 24h walltime.
+Added CGRF files for 2003-08-10 to 2003-08-19 to collection on jasper.
+Finished adding xslice & yslice args to plot_coastline and plot_land_mask viz_tools functions () harder than expected.
+Updated example notebook re: plotting velocity field results on depth slices to use slices for land mask; much faster.
+Confirmed that readthedocs build virtualenv bin/ dir is not on path, so program-output extension cannot work for salishsea command help docs generation.
+(MEOPAR)
+
+
+Tue 6-May-2014
+~~~~~~~~~~~~~~
+
+Still home sick.
+
+Transferred results of 30jul8aug spin-up run to ocean, and copied restart files to collection on jasper.
+Queued 9aug18aug spin-up run on jasper X5675 nodes with 24h walltime.
+Added CGRF files for 2003-08-20 to 2003-08-29 to collection on jasper.
+Helped Susan thrash through out of date SalishSeaTools installation on salish that caused SalishSeaCmd to fail.
+Reverted salishsea command docs to pasted output from shell because program-output extension does not work on readthedocs.org; opened issue#814 in rtfd/readthedocs.org GitHub repo explaining the issue.
+(MEOPAR)
+
+
+Wed 7-May-2014
+~~~~~~~~~~~~~~
+
+Salish Sea project mtg; see Google Drive whiteboard file.
+Copied Apr spin-up restart files and 15apr-15may-2003 atmospheric forcing files from jasper to orcinus in hopes of continuing Susan and Nancy's tide test runs there next week while jasper is down.
+Reviewed report from Jun-2013 stakeholder's workshop.
+(MEOPAR)
+
+Restarted build slaves on cod and tyee after recent reboots; the latter highlighted a DNS issue for Charles.
+Also finally got nerka slave working again - another configuration issue, not an autofs issue as I thought.
+(SOG)
+
+
+Thu 8-May-2014
+~~~~~~~~~~~~~~
+
+Created tools repo issue#11 re: :command:`salishsea prepare` cleanup failing when restart file is not found; reported by Nancy.
+Created tools repo issued #12 re: :command:`salishsea prepare` atmospheric forcing files checking being too sensitive (fails if atmos files are missing even if atmospheric forcing it disabled for run); reported by Susan.
+Marked tools repo issue#13 reported by Susan as a duplicate of issue#12.
+Continued work on improving working environment section of docs.
+(MEOPAR)
+
+Attended 3 Minute Postdoc Slam; Nancy won a runner-up prize and I got a coffee card for live-tweeting :-)
+
+
+Fri 9-May-2014
+~~~~~~~~~~~~~~
+
+9aug18aug spin-up run that has been queued since 6-May finally started running.
+Continued work on improving working environment section of docs.
+Participated in mtg of UBC MEOPAR collaborators to plan June stakeholders workshop.
+Transferred results of 9aug18aug spin-up run to ocean, and copied restart file to collection on jasper.
+Queued 19aug28aug spin-up run on jasper X5675 nodes with 24h walltime.
+Added CGRF files for 2003-08-30 to 2003-09-08 to collection on jasper.
+(MEOPAR)
+
+Helped Ashley get started on Linux, hg, and nerka.
+(GEOTRACES)
+
+
+Sat 10-May-2014
+~~~~~~~~~~~~~~~
+
+Transferred results of 19aug28aug spin-up run to ocean, and copied restart file to collection on jasper.
+Queued 29aug7sep spin-up run on jasper X5675 nodes with 24h walltime.
+Added CGRF files for 2003-09-09 to 2003-09-18 to collection on jasper.
+Copied CGRF files for 2003-09-01 to 2003-09-18 to collection on orcinus.
+(MEOPAR)
+
+
+Sun 11-May-2014
+~~~~~~~~~~~~~~~
+
+Transferred results of 29aug7sep spin-up run to ocean, and copied restart files to collection on jasper.
+Queued 8sep17sep spin-up run on jasper X5675 nodes with 24h walltime.
+Added CGRF files for 2003-09-19 to 2003-09-28 to collection on jasper.
+Copied CGRF files for 2003-09-19 to 2003-09-18 to collection on orcinus.
+Investigated splitting a Mercurial repo; hg convert and a file/directory mapping is the key.
+Started work on :command:`salishsea run` sub-command.
+Transferred results of 8sep17sep spin-up run to ocean, and copied restart file to collections on jasper and orcinus.
+(MEOPAR)
+
+
+Week 20
+-------
+
+Mon 12-May-2014
+~~~~~~~~~~~~~~~
+
+jasper.westgrid.ca down for 5 days maintenance.
+
+Helped Nancy resolve a bad :command:`salishsea gather` on salish.
+Helped Nancy sort out .bashrc and .bash_profile issued on salish; the latter file was missing.
+Worked on salishsea site index page image; figured out how to do circular clips of plot images and adjust their alpha transparency so that site section titles can be overlaid.
+(MEOPAR)
+
+Helped Ashley get set up to work through MEOPAR example notebooks.
+(GEOTRACES)
+
+
+Tue 13-May-2014
+~~~~~~~~~~~~~~~
+
+Finished salishsea site index page image sufficiently for it to launch on the site.
+Thought about splitting analysis work out of tools repo into a new analysis repo and discussed the logistics with Susan; outlined plan in weekly Google Doc.
+Worked on content for salishsea site.
+(MEOPAR)
+
+
+Wed 14-May-2014
+~~~~~~~~~~~~~~~
+
+Attended EOAS dept forum re: Roger Beckie's headship candidacy.
+
+Salish Sea project mtg; see Google Drive whiteboard file.
+Continued working on content for salishsea site; particularly NEMO model section landing page.
+(MEOPAR)
+
+
+Thu 15-May-2014
+~~~~~~~~~~~~~~~
+
+Worked at home so that I could do some bike maintenance.
+
+Committed to having Mercurial lesson pull request ready for vote at 22-May SWC lab meeting.
+Cherry-picked revs from @jdcorless into Mercurial lesson pull request.
+Updated PR todo list.
+(SWC)
+
+Added notes about Linux Command Line book and SWC shell quick ref to bash section of docs.
+Added Jackie Yip to SCARP collaborators team list on salishsea site NEMO model page.
+Queued 18sep27sep spin-up run on jasper X5675 nodes with 24h walltime, and on slow nodes with 36h walltime..
+Added CGRF files for 2003-09-29 to 2003-10-08 to collection on jasper.
+(MEOPAR)
+
+
+Fri 16-May-2014
+~~~~~~~~~~~~~~~
+
+Helped Nancy with recurring bug in :command:`salishsea gather` on salish; see tools repo issue#15; os.rename[s]() fails if source and destination are on different filesystems, replaced with shutil.move().
+Reviewed questionnaire for stakeholders workshop and discussed it with Nancy.
+Split the tools repo to separate analysis directories into a new analysis repo, and updated docs and notebooks to reflect the change.
+Started work on storm surge portal page on salishsea site.
+(MEOPAR)
+
+
+Sat 17-May-2014
+~~~~~~~~~~~~~~~
+
+Transferred results of 18sep27sep spin-up run to ocean, and copied restart files to collection on jasper.
+Changed domain namelist to use flux-corrected northern boundary tide files.
+Queued 28sep7oct spin-up run on jasper X5675 nodes with 24h walltime.
+Added CGRF files for 2003-10-09 to 2003-10-18 to collection on jasper.
+(MEOPAR)
+
+
+Sun 18-May-2014
+~~~~~~~~~~~~~~~
+
+:file:`/ocean/` mount not accessible on salish or sable.
+
+Hard linked restart file from 28sep7oct spin-up run to spin-up collection on jasper.
+Queued 8oct17oct spin-up run on jasper X5675 nodes with 24h walltime.
+Added CGRF files for 2003-10-19 to 2003-10-28 to collection on jasper.
+(MEOPAR)
+
+
+Week 21
+-------
+
+Mon 19-May-2014
+~~~~~~~~~~~~~~~
+
+:file:`/ocean/` mount was inaccessible on salish and sable in the morning but came back online sometime before mid-afternoon.
+
+Hard linked restart file from 8oct17oct spin-up run to spin-up collection on jasper.
+Queued 18oct27oct spin-up run on jasper X5675 nodes with 24h walltime.
+Added CGRF files for 2003-10-29 to 2003-11-07 to collection on jasper.
+Finished storm surge portal page on salishsea site and pushed it to shelob.
+(MEOPAR)
+
+Moved non-regressable emily backup directory aside on matisse so that a new one will start.
+
+Sent email to try to push Mercurial lesson review to closure.
+(SWC)
+
+
+Tue 20-May-2014
+~~~~~~~~~~~~~~~
+
+Worked on getting Mercurial lesson pull request ready for vote at Thursday's SWC lab mtg.
+Cherry-picked Jordi's work on 03-conflict.md.
+Built lesson and uploaded it to http://eos.ubc.ca/~dlatorne/swc/novice/hg/.
+Resolved issue re: screen shot width attributes.
+Added discussion of :command:`hg revert` and :file:`*.orig` files.
+Merged PR re: GitHub -> Bitbucket in SVGs in 03-conflict.md, but images have excess whitespace below them.
+(SWC)
+
+Participated in UBC collaborators meeting and learned lots about indicators and risk work that SCARP team are doing.
+Changed :file:`from_jasper.py` script to hard link restart file on jasper instead of copying.
+Transferred results of 28sep7oct, 8oct17oct, and 18oct27oct spin-up runs to ocean, and hard linked restart files to collection on jasper.
+Queued 28oct6nov spin-up run on jasper X5675 nodes with 24h walltime.
+Added CGRF files for 2003-11-08 to 2003-11-17 to collection on jasper.
+(MEOPAR)
+
+
+Wed 21-May-2014
+~~~~~~~~~~~~~~~
+
+Salish Sea project mtg; see Google Drive whiteboard file.
+Worked on :command:`salishsea run`.
+Transferred results of 28oct6nov spin-up run to ocean, and hard linked restart files to collection on jasper.
+Queued 7nov16nov spin-up run on jasper X5675 nodes with 24h walltime.
+Added CGRF files for 2003-11-18 to 2004-01-01 to collection on jasper.
+(MEOPAR)
+
+
+Continued getting Mercurial lesson pull request ready for vote at Thursday's SWC lab mtg.
+Stalled out on merge conflict handling because Jordi wants to include GUI tools but doesn't want to deal with :kbd:`[merge-tools]` config on OS/X; waiting for email thread input from other hg-list members.
+Confirmed that file annoation is the default on OS/X and Ubuntu, provided that the user does not have a merge tools specified in their config; Jordi sees different on Debian and Windows/TortoiseHg.
+(SWC)
+
+Attended Phys Ocgy seminar: Mark & Nancy presented trial runs of one of their CMOS talks.
+
+
+Thu 22-May-2014
+~~~~~~~~~~~~~~~
+
+Participated monthly SWC lab meeting; sufficient support for Mercurial lesson that it will be merged, but no further input yet on merge conflicts & GUI tools issue.
+(SWC)
+
+Continued work on :command:`salishsea run`.
+(MEOPAR)
+
+Experimented with ipdb in ipython notebook - useable.
+Helped Ashley debug her initial 2D advection/diffusion model.
+(GEOTRACES)
+
+
+Fri 23-May-2014
+~~~~~~~~~~~~~~~
+
+Transferred results of 7nov16nov spin-up run to ocean, and hard linked restart files to collection on jasper.
+Queued 17nov26nov spin-up run on jasper X5675 nodes with 24h walltime.
+Added CGRF files for 2003-09-16 to 2003-09-19 to collection on salish.
+Started work on slides for CMOS talk on collaboration tools.
+(MEOPAR)
+
+Researched Mercurial default merge behaviour further and found that it depends on both the presence and location of :file:`mergetools.rc` and the presence of a tool mentioned in that file on :envvar:`$PATH`. OS/X lacks :file:`mergetools.rc`, salish lacks all of the mentioned tools, but jasper has vimdiff.
+Added my findings to the email thread.
+(SWC)
+
+Helped Ashley locate the source of a divide by zero runtime error, and learned about toggling line numbers in ipynb, and controlling warnings via envar in Python.
+(GEOTRACES)
+
+
+Sun 25-May-2014
+~~~~~~~~~~~~~~~
+
+Transferred results of 17nov26nov spin-up run to ocean, and hard linked restart files to collection on jasper.
+Queued 27nov6dec spin-up run on jasper X5675 nodes with 24h walltime.
+(MEOPAR)
+
+
+Week 22
+-------
+
+Mon 26-May-2014
+~~~~~~~~~~~~~~~
+
+Created local Pa-Th repo for Ashley's work; waiting for copyright holder info from Nadja before creating repo on Bitbucket.
+(GEOTRACES)
+
+Continued work on slides for CMOS talk on collaboration tools.
+(MEOPAR)
+
+
+Tue 27-May-2014
+~~~~~~~~~~~~~~~
+
+Started testing batch runs of NEMO on salish via :command:`at`.
+Added CGRF files for 2006-01-31 to 2006-02-09 to collection on salish.
+Finished 1st draft of slides for CMOS talk on collaboration tools.
+Transferred results of 27nov6dec spin-up run to ocean, and hard linked restart files to collection on jasper.
+Queued 7dec16dec spin-up run on jasper X5675 nodes with 24h walltime.
+(MEOPAR)
+
+Wrote APEGBC registration reference for Jeff Wood.
