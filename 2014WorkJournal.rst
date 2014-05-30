@@ -1995,3 +1995,29 @@ Queued 7dec16dec spin-up run on jasper X5675 nodes with 24h walltime.
 (MEOPAR)
 
 Wrote APEGBC registration reference for Jeff Wood.
+
+
+Wed 28-May-2014
+~~~~~~~~~~~~~~~
+
+Worked on inbox 0-ish.
+
+Started work on example notebook re: plotting on vertical planes; especially thalweg plot, working toward animation of annual salinity cycle.
+Salish Sea project mtg; see Google Drive whiteboard file.
+Prepared for and gave CMOS practice test run in Phys Ocgy seminar.
+Improved CMOS talk slide deck based on feedback from practice talk.
+Started work on cleaning up analysis/compare_tides/comp_wlev_harm-wNorth.ipynb notebook and improving tidetools.plot_scatter_pha_amp() function.
+(MEOPAR)
+
+
+Thu 29-May-2014
+~~~~~~~~~~~~~~~
+
+Finished improving tidetools.plot_scatter_pha_amp() function and cleanup of  analysis/compare_tides/comp_wlev_harm-wNorth.ipynb.
+Helped Susan sort out her very messed up PYTHONPATH.
+(MEOPAR)
+
+Pa-Th model team meeting; see Google Drive whiteboard file.
+Created Pa-Th repo on Bitbucket.
+Helped Ashley get up to speed with hg and Bitbucket, and moving code from IPython Notebook to importable modules.
+(GEOTRACES)
