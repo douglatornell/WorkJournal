@@ -2021,3 +2021,41 @@ Pa-Th model team meeting; see Google Drive whiteboard file.
 Created Pa-Th repo on Bitbucket.
 Helped Ashley get up to speed with hg and Bitbucket, and moving code from IPython Notebook to importable modules.
 (GEOTRACES)
+
+
+Fri 30-May-2014
+~~~~~~~~~~~~~~~
+
+Transferred results of 7dec16dec spin-up run to ocean, and hard linked restart files to collection on jasper.
+Queued 17dec26dec spin-up run on jasper X5675 nodes with 24h walltime.
+Discussed terrible scheduling of Nancy's CMOS talk and how I can advertise it in my talk.
+Worked on building NEMO on orcinus now that Roman has built netcdf libraries for us.
+(MEOPAR)
+
+Sent email to Neil with suggestions for talk topics for 23-Jun at CCCma.
+Closed the loop on Will's email re: talking about Cython.
+
+Changed Government of Canada copyright holder to Fisheries and Oceans Canada per email from Nadja.
+Set up Pa-Th repo docs on readthe docs.org.
+Assed Ashley to CCAR-Modeling Google group.
+Changed CCAR-Modeling Google group to default to reply-to-group.
+Posted to CCAR-Modeling group about creation of Pa-Th repo and readthedocs site.
+(GEOTRACES)
+
+
+Sat 31-May-2014
+~~~~~~~~~~~~~~~
+
+Travel to Rimouski for CMOS congress.
+
+Worked on flake8 cleanup of SalishSeaTools.tidetools module.
+(MEOPAR)
+
+
+Sun 1-Jun-2014
+~~~~~~~~~~~~~~
+
+Transferred results of 17dec26dec spin-up run to ocean, and hard linked restart files to collection on jasper.
+Queued 27dec31dec spin-up run on jasper X5675 nodes with 12h walltime.
+Annotated runs with 5-day restart files in spin-up docs, and noted on the whiteboard the 7 runs that would have to be repeated to give us 5-day restart from 28Oct through 1Mar.
+(MEOPAR)
