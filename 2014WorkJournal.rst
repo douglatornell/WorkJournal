@@ -4,7 +4,7 @@
 
 This is my public work journal.
 It is patterned after one that I have kept for several years for my work at Nordion_.
-This journal is about my work as a Research Associate with `Dr. Susan Allen`_ in the `Department of Earth, Ocean and Atmospheric Sciences`_ at the `University of British Columbia`_ during our sabbatical which started on 1 July 2013.
+This journal is about my work as a Research Software Engineer with `Dr. Susan Allen`_ in the `Department of Earth, Ocean and Atmospheric Sciences`_ at the `University of British Columbia`_ during our sabbatical which started on 1 July 2013.
 It is also about my `open-source activities`_.
 
 
@@ -17,7 +17,7 @@ Week 1
 Wed 1-Jan-2014
 ~~~~~~~~~~~~~~
 
-Changed web remote app to by run via Pyramid pserve utility but stummbled on entry point issue when I deployed it to the RaspPi.
+Changed web remote app to by run via Pyramid pserve utility but stumbled on entry point issue when I deployed it to the RaspPi.
 (raspi_x10)
 
 
@@ -1371,7 +1371,7 @@ Transferred results of 1jan5jan spin-up run to ocean, and copied restart files t
 Updated default namelist.domeain, namelist.lateral, and namelist.dynamics files to contain the present spin-up run values; dt=10s, 5 barotropic time steps per dt, open Johnstone Strait boundary, and lateral eddy diffusion & evd = 20 m2/s.
 Queued 6jan10jan spin-up run on jasper with 10h walltime.
 Added CGRF files for 2003-01-12 to 2003-01-21 to collection on jasper.
-Added function to `salishsea preparecd` to confirm that correct atmospheric forcing files exist.
+Added function to `salishsea prepare` to confirm that correct atmospheric forcing files exist.
 Salish Sea project mtg; see Google Drive whiteboard image file.
 An email discussion with Masao@westgrid has cleared up what's going on with job run time; L5420 nodes run at about half the speed of X5675 nodes, and our jobs appear to the allocated either all L5420 or all X5675 nodes.
 If we specify X5675 nodes only we'll likely wait longer in the queue than if we specify enough walltime for the job to finish on L5420 nodes.
@@ -1475,6 +1475,7 @@ Thu 17-Apr-2014
 
 Ran 26oct 1-core run on salish for 3.8 hours and it completed 541 time steps for a run rate of 60.7h per model day; i.e. much slower than multi-core/node runs.
 Dug into array bounds error that Nancy found and concluded with Susan that it is a code smell, but not relevant to the boundary condition v-eta mixup issue.
+Created notebook to check 2.5km GEM atmospheric forcing intial test dataset from EC; found that lats/lons do not correspond to our domain location and informed Kao-Shen and Luc of the problem.
 (MEOPAR)
 
 
@@ -1926,7 +1927,7 @@ Added CGRF files for 2003-11-18 to 2004-01-01 to collection on jasper.
 
 Continued getting Mercurial lesson pull request ready for vote at Thursday's SWC lab mtg.
 Stalled out on merge conflict handling because Jordi wants to include GUI tools but doesn't want to deal with :kbd:`[merge-tools]` config on OS/X; waiting for email thread input from other hg-list members.
-Confirmed that file annoation is the default on OS/X and Ubuntu, provided that the user does not have a merge tools specified in their config; Jordi sees different on Debian and Windows/TortoiseHg.
+Confirmed that file annotation is the default on OS/X and Ubuntu, provided that the user does not have a merge tools specified in their config; Jordi sees different on Debian and Windows/TortoiseHg.
 (SWC)
 
 Attended Phys Ocgy seminar: Mark & Nancy presented trial runs of one of their CMOS talks.
@@ -2030,6 +2031,7 @@ Transferred results of 7dec16dec spin-up run to ocean, and hard linked restart f
 Queued 17dec26dec spin-up run on jasper X5675 nodes with 24h walltime.
 Discussed terrible scheduling of Nancy's CMOS talk and how I can advertise it in my talk.
 Worked on building NEMO on orcinus now that Roman has built netcdf libraries for us.
+Resumed checking 2.5km GEM atmospheric forcing intial test dataset from EC; now with correct lats/lons.
 (MEOPAR)
 
 Sent email to Neil with suggestions for talk topics for 23-Jun at CCCma.
@@ -2058,4 +2060,274 @@ Sun 1-Jun-2014
 Transferred results of 17dec26dec spin-up run to ocean, and hard linked restart files to collection on jasper.
 Queued 27dec31dec spin-up run on jasper X5675 nodes with 12h walltime.
 Annotated runs with 5-day restart files in spin-up docs, and noted on the whiteboard the 7 runs that would have to be repeated to give us 5-day restart from 28Oct through 1Mar.
+(MEOPAR)
+
+
+June
+====
+
+Week 23
+-------
+
+Mon 2-Jun-2014
+~~~~~~~~~~~~~~
+
+Attended CMOS conference in Rimouski.
+Participated in GEOTRACES lunch meeting w/ Susan, Paul, Nadja, and Xianmin.
+Presented "Software Collaboration Tools and the Salish Sea MEOPAR Project" and it was well received.
+
+Transferred results of 27dec31dec spin-up run to ocean, and hard linked restart files to collection on jasper.
+(MEOPAR)
+
+Tue 3-Jan-2014
+~~~~~~~~~~~~~~
+
+Attended CMOS conference in Rimouski.
+William Hsieh was awarded the EC Patterson medal, and Paul Harrison wond the DFO Parsons medal.
+
+
+Wed 4-Jan-2014
+~~~~~~~~~~~~~~
+
+Attended CMOS conference in Rimouski.
+Nancy won the Tertia Hughes prize for best thesis.
+
+
+Thu 5-Jan-2014
+~~~~~~~~~~~~~~
+
+Attended CMOS conference in Rimouski.
+Participated in MEOPAR breakfast meeting w/ Susan, Nancy, Keith, Youyu, Hal, J-P, and Fatemeh.
+
+Hiked in Bic provincial part in the afternoon with Susan, Nancy, Mark & Ben.
+
+
+Fri 6-Jun-2014
+~~~~~~~~~~~~~~
+
+Travel to Québec City.
+
+
+Sat 7-Jun-2014
+~~~~~~~~~~~~~~
+
+Toured Québec.
+
+
+Sun 8-Jun-2014
+~~~~~~~~~~~~~~
+
+Toured Québec in the morning.
+
+Traveled to Vancouver.
+
+Worked on flake8 cleanup of SalishSeaTools.tidetools module, and refactoring plotting functions to return figure objects instead of saving figure image files to disk.
+(MEOPAR)
+
+
+Week 24
+-------
+
+Mon 9-Jun-2014
+~~~~~~~~~~~~~~
+
+
+(MEOPAR)
+
+
+Tue 10-Jun-2014
+~~~~~~~~~~~~~~~
+
+Met w/ Roman re: undefined references linking failure on orcinus; concluded that it is an FCM issue whereby the object library files is not created, or deleted before linking.
+Did 6h 21apr evd=3 profiling runs on orcinus:
+
+* 6x14 2Gb QDR: 21:36
+* 7x16 2Gb QDR: 17:46
+* 8x18 2Gb QDR: 11:27
+* 9x20 2Gb QDR: 9:21
+* 10x22 2Gb QDR: 8:20
+
+Continued checking 2.5km GEM atmospheric forcing initial test dataset from EC; atmospheric pressure values are surface rather than sea level that NEMO expects.
+(MEOPAR)
+
+Studied Ashley's Pa-Th code to develop ideas for refactoring and speed ups.
+(GEOTRACES)
+
+
+Wed 11-Jun-2014
+~~~~~~~~~~~~~~~
+
+Discussed Pa-Th code refactoring ideas with Ashley.
+(GEOTRACES)
+
+Attended Phys Ocgy seminar where Susan did an extended presentation of her CMOS talk on downwelling canyons.
+
+Continued 6h 21apr evd=3 profiling runs on orcinus:
+
+* 11x25 2Gb QDR: 7:19
+* 12x27 2Gb QDR: 5:55
+* 13x29 2Gb QDR: 6:34
+* 14x32 2Gb QDR: 5:30
+* 15x34 2Gb QDR: 4:38
+* 16x36 2Gb QDR: 4:30
+
+See plots at http://nbviewer.ipython.org/gist/douglatornell/9e140cb555c07344b2e4
+Total CPU hrs jumps up at 13x29, so 12x27 appears to be the sweet spot.
+
+Struggled to figure out how to repeatably build NEMO on orcinus.
+Apparently link steps can only be run at SHLVL=1.
+(MEOPAR)
+
+
+Thu 12-Jun-2014
+~~~~~~~~~~~~~~~
+
+Finished an initial implementation of `salishsea run` that works on jasper and orcinus.
+Started 6h 21apr evd=3 profiling runs on jasper:
+
+* 6x14 2Gb X5675: 19:34
+* 7x16 2Gb X5675: 14:16
+* 8x18 2Gb X5675: 12:40
+* 9x20 2Gb X5675: 9:08
+* 10x22 2Gb X5675: 8:06
+
+See plots at http://nbviewer.ipython.org/gist/douglatornell/9e140cb555c07344b2e4
+(MEOPAR)
+
+
+Fri 13-Jun-2014
+~~~~~~~~~~~~~~~
+
+Continued 6h 21apr evd=3 profiling runs on orcinus:
+
+* 11x25 2Gb X5675: 6:05
+* 12x27 2Gb X5675: 6:04
+* 13x29 2Gb X5675: 5:25
+
+See plots at http://nbviewer.ipython.org/gist/douglatornell/9e140cb555c07344b2e4
+
+Finally succeeded in creating a brittle but repeatable build script for orcinus; how intel and netcdf_hdf5 modules are loaded turns out to matter too.
+Queued 5d 12x27 evd=4 tide run on orcinus.
+(MEOPAR)
+
+
+Week 25
+-------
+
+Mon 16-Jun-2014
+~~~~~~~~~~~~~~~
+
+Charles told me that when he updated salish to Ubuntu 14.04 a bug that was preventing TORQUE from working was resolved.
+Worked on testing qsub execution of NEMO on salish.
+Found that executable needs to be re-built because the version of gfortran and some other libraries has been bumped.
+The -cpp compiler flag is now required to successfully build the IO server, but that causes a failure in a comment in NEMOGCM/EXTERNAL/XMLF90/src/xpath/m_path.f90.
+Eventually got runs working via qsub; issues:
+
+* PBS procs, pmem, and walltime directives are probably all irrelevant
+* PBS -o and -e directives do not work; hoping Charles can fix that
+* PBS -m and -M directives do not work; hoping Charles can fix that
+* mpirun need its -n option flag
+
+Got a 5d run on orcinus initiated by :command:`salishsea run` that included gathering of results and deletion of temporary run directory; at job is not required for run directory deletion.
+(MEOPAR)
+
+Worked with Ashley on the next step of refactoring here Pa-Th model: isolation and vectorization of the advection scheme function.
+Introduced her to unit testing and pytest.
+(GEOTRACES)
+
+
+Tue 17-Jun-2014
+~~~~~~~~~~~~~~~
+
+Added Hal Ritchie's CMOS slide deck, my CMOS slide deck and source files, and a collection of logo image files to private-docs repo.
+(MEOPAR)
+
+Started work on talk for CCCma using IPython Notebook reveal.js slide conversion as a test.
+
+Worked with Ashley on isolation and vectorization of the advection scheme function.
+(GEOTRACES)
+
+
+Wed 18-Jun-2014
+~~~~~~~~~~~~~~~
+
+Travel to Halifax for MEOPAR Scientific Mtg; 2 hr flight delay in Montréal.
+
+Continued work on talk for CCCma using IPython Notebook reveal.js slide conversion as a test.
+
+Continued checking 2.5km GEM atmospheric forcing initial test dataset from EC; added air temperature and specific humidity.
+(MEOPAR)
+
+
+Thu 19-Jun-2014
+~~~~~~~~~~~~~~~
+
+Continued checking 2.5km GEM atmospheric forcing initial test dataset from EC; refactored plots to be 2-up, and added precipitation, and thermal & solar radiation.
+Participated in NEMO modeling meeting at Dalhousie.
+Attended MEOPAR/Industry luncheon.
+Met with Diego & Susan re: OceanViewer development and possible use on the west coast.
+Attended MEOPAR boat cruise around Halifax harbour; talked to Rich about Python implementation or wrapper for the new sea water equation of state utilities.
+(MEOPAR)
+
+
+Fri 20-Jun-2014
+~~~~~~~~~~~~~~~
+
+Attended MEOPAR Scientific Mtg.
+Lobster dinner with Susan and Ken Denman.
+(MEOPAR)
+
+
+Sat 21-Jun-2014
+~~~~~~~~~~~~~~~
+
+Travel from Halifax to Vancouver.
+
+Continued work on talk for CCCma.
+
+
+Sun 22-Jun-2014
+~~~~~~~~~~~~~~~
+
+Finished slide deck for CCCma talk.
+
+Travel to Sidney for talk at CCCma.
+
+
+Week 26
+-------
+
+Mon 23-Jun-2014
+~~~~~~~~~~~~~~~
+
+Gave talk to CCCma Python user's group about version control and Python as a tools and glue language.
+Met with Neil Swart, Colin Goldblatt, and CCCma model runtime diagnostics developers group.
+
+Travel home from CCCma.
+
+
+Tue 24-Jun-2014
+~~~~~~~~~~~~~~~
+
+Added section about netCDF & visualization notebooks to working environment section of docs.
+Continued work on analysis_tools notebooks; added section on streamline plots; created new notebook re: plotting velocities and tracers on vertical planes.
+Prepared for Phys Ocgy seminar.
+(MEOPAR)
+
+
+Wed 25-Jun-2014
+~~~~~~~~~~~~~~~
+
+Salish Sea project mtg; see Google Drive whiteboard file.
+Reviewed 2.5km GEM atmospheric forcing initial test dataset analysis notebook w/ Susan and Nancy and updated comments and actions.
+Worked on thalweg section salinity plot example.
+Gave Phys Ocgy seminar entitle "Snake Eyes: Using Python to Visualize netCDF Model Results".
+(MEOPAR)
+
+
+Thu 26-Jun-2014
+~~~~~~~~~~~~~~~
+
+Participated in Salish Sea MEOPAR stakeholders workshop at Green College.
+Added time_origin and timestamp functions to nc_tools module.
 (MEOPAR)
