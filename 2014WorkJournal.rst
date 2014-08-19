@@ -2331,3 +2331,18 @@ Thu 26-Jun-2014
 Participated in Salish Sea MEOPAR stakeholders workshop at Green College.
 Added time_origin and timestamp functions to nc_tools module.
 (MEOPAR)
+
+
+Week 34
+-------
+
+Mon 18-Aug-2014
+^^^^^^^^^^^^^^^
+
+Cloned NEMO-code, tools, docs, NEMO_EastCoast, SS-run-sets, NEMO-forcing, private-docs, Storm-Surge, and salishsea-stie repos and updated analysis repo on Ubuntu machine.
+NEMO-code repo raised an "abort: revlog decompress error: Error -3 while decompressing data: incorrect data check!" error during the updating to branch default part of the operation on the first clone attempt; deleted clone and tried again with success.
+Sent email to Kao-Shen et al re: next step of getting 2.5km atmospheric forcing files for 13-21 Dec-2012 for Nancy to use to run that storm surge case.
+Added success messages to the orcinus_build.sh scripts and examples of their expected output to the orcinus quick-start docs; all to add clarity to the fact that those scripts throw failure messages as part of their normal operation.
+Fixed build issue on salish wherein C pre-processor had to be enabled in arch-salish.fcm, but that caused comments in EXTERNAL/XMLF90/src/xpath/m_path.f90 to be interpreted as cpp directives; resolved by enclosing offending comments in quotes.
+Created NEMO online interpolation weights file for 2.5km GEM atmospheric forcing dataset.
+(MEOPAR)
