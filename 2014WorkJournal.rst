@@ -2346,3 +2346,12 @@ Added success messages to the orcinus_build.sh scripts and examples of their exp
 Fixed build issue on salish wherein C pre-processor had to be enabled in arch-salish.fcm, but that caused comments in EXTERNAL/XMLF90/src/xpath/m_path.f90 to be interpreted as cpp directives; resolved by enclosing offending comments in quotes.
 Created NEMO online interpolation weights file for 2.5km GEM atmospheric forcing dataset.
 (MEOPAR)
+
+Tue 19-Aug-2014
+^^^^^^^^^^^^^^^
+
+Hacked up a test run for 2.5km atmospheric forcing in SalishSea/c896af70-27cd-11e4-b336-0025909a8461/; it ran but produced lots of u-velocity and ssh NaN errors.
+SalishSeaCmd needs to be modified to allow other than daily atmospheric forcing, especially climatology.
+Salish Sea project mtg; see Google Drive whiteboard file.
+Drinks and dinner with Diego; discussed OceanViewer, etc.
+(MEOPAR)
