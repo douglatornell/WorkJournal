@@ -2355,3 +2355,20 @@ SalishSeaCmd needs to be modified to allow other than daily atmospheric forcing,
 Salish Sea project mtg; see Google Drive whiteboard file.
 Drinks and dinner with Diego; discussed OceanViewer, etc.
 (MEOPAR)
+
+
+Week 35
+-------
+
+Tue 26-Aug-2014
+^^^^^^^^^^^^^^^
+
+Salish Sea project mtg; see Google Drive whiteboard file; welcomed Ben and Jie to the team.
+
+
+Wed 27-Aug-2014
+^^^^^^^^^^^^^^^
+
+Set up a Python 2.7 conda environment on Ubuntu to work on SalishSeaCmd package.
+Changed SalishSeaCmd to add #PBS -l nodes:x:ppn:y for runs on jasper with x and y being specified via nodes and processors_per_node in the YAML run description file.
+(MEOPAR)
