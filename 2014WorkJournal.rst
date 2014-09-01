@@ -2333,6 +2333,47 @@ Added time_origin and timestamp functions to nc_tools module.
 (MEOPAR)
 
 
+Fri 27-Jun-2014
+~~~~~~~~~~~~~~~
+
+Added Roger to CCAR-modeling group.
+(GEOTRACES)
+
+Participated in Canadian NEMO users telcon.
+Set up 2d benchmark run on salish; extrapolation suggests that it will take about 19.5 hr.
+Fixed `salishsea run` command so that it works on salish, and added handling to user-specified email address for notifications to deal with Nancy having different user ids on westgrid and ocean.
+Reviewed Susan's expense claim for MEOPAR Halifax meeting.
+(MEOPAR)
+
+
+July
+====
+
+Week 27
+-------
+
+Week 28
+-------
+
+Tue 8-Jul-2014
+~~~~~~~~~~~~~~
+
+Shut down all home system in preparation for street-wide power outage.
+Restarted home network with Airport Extreme as DHCP/NAT router.
+
+
+Sat 12-Jul-2014
+~~~~~~~~~~~~~~~
+
+Fixed home backup system issue in rsync to EOAS; deleted tom/Users/doug/Documents/talks/logos/ in offsite repo so that it could be replaced symlink.
+Changed rsync to EOAS script to exclude snapshot & borked backup repos to happen on matisse.
+Updated Mercurial on matisse to v3.0.1.
+Updated Python on matisse to v2.7.8.
+Update Mercurial via homebrew on tom to v3.0.2.
+Update Python 2 via homebrew on tom to 2.7.8.
+Update Python 3 via homebrew on tom to 3.4.1.
+
+
 Week 34
 -------
 
