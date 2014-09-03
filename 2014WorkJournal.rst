@@ -2413,3 +2413,14 @@ Wed 27-Aug-2014
 Set up a Python 2.7 conda environment on Ubuntu to work on SalishSeaCmd package.
 Changed SalishSeaCmd to add #PBS -l nodes:x:ppn:y for runs on jasper with x and y being specified via nodes and processors_per_node in the YAML run description file.
 (MEOPAR)
+
+
+Fri 29-Aug-2014
+^^^^^^^^^^^^^^^
+
+Created 2014-09-25-ubc Github project for EOAS SWC bootcamp and send calendar request email to Arliss@swc.
+(SWC)
+
+Fixed a bug in SalishSeaCmd that prevented atmospheric forcing directory called anything other than NEMO-atmos/ from being used.
+Re-ran 2.5km GEM forcing test case with time interpolation turned off (not applicable for climatological forcing).
+(SalishSea)
