@@ -2424,3 +2424,15 @@ Created 2014-09-25-ubc Github project for EOAS SWC bootcamp and send calendar re
 Fixed a bug in SalishSeaCmd that prevented atmospheric forcing directory called anything other than NEMO-atmos/ from being used.
 Re-ran 2.5km GEM forcing test case with time interpolation turned off (not applicable for climatological forcing).
 (SalishSea)
+
+
+September
+=========
+
+Week 36
+-------
+
+Tue 2-Sep-2014
+^^^^^^^^^^^^^^
+
+Salish Sea project mtg; see Google Drive whiteboard file.
