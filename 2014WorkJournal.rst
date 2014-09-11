@@ -2432,7 +2432,17 @@ September
 Week 36
 -------
 
+Mon 1-Sep-2014
+^^^^^^^^^^^^^^
+
+Discovered that matisse was not being backed up, so set up rdiff_backup from main and RAID disks to backup drive.
+
+Worked on getting emily setup to build SWC bootcamp site.
+Worked on bootcamp material for 2014-09-25 UBC EOAS bootcamp.
+(SWC)
+
 Tue 2-Sep-2014
 ^^^^^^^^^^^^^^
 
 Salish Sea project mtg; see Google Drive whiteboard file.
+
