@@ -2446,3 +2446,49 @@ Tue 2-Sep-2014
 
 Salish Sea project mtg; see Google Drive whiteboard file.
 
+
+Fri 5-Sep-2014
+^^^^^^^^^^^^^^
+
+Email conversation with Kamil@westgrid about PBS directives to run on full nodes on jasper; need to request 2000mb instead of 2gb.
+(MEOPAR)
+
+
+Week 37
+-------
+
+Mon 8-Sep-2014
+^^^^^^^^^^^^^^
+
+Added Kyle Sha to CCAR-modeling Bitbucket team and Google groups mailing list.
+(GEOTRACES)
+
+Nancy's debugging on orcinus lead to the realization that `salishsea get_cgrf` was failing because the NCO library was not install; requested its installation.
+
+Re-submitted 1h test job on jasper with pmem=2000mb and nodes=27:ppn=12 as per Kamil's recommendation.
+Investigated automation of links to play Idalia's animations.
+Investigated 2.5km atmospheric forcing datasets available from EC Datamart.
+(MEOPAR)
+
+
+Tue 9-Sep-2014
+^^^^^^^^^^^^^^
+
+Agreed to take on maintainer role for SWC Mercurial lesson.
+(SWC)
+
+Salish Sea project mtg; see Google Drive whiteboard file.
+
+
+Thu 11-Sep.2014
+^^^^^^^^^^^^^^^
+
+Continued work on EOAS SWC bootcamp site and lessons.
+(SWC)
+
+
+Fri 12-Sep-2014
+^^^^^^^^^^^^^^^
+
+Created first draft of software collaboration poster.
+(EPOC)
