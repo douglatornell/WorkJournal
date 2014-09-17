@@ -2444,8 +2444,14 @@ Worked on bootcamp material for 2014-09-25 UBC EOAS bootcamp.
 Tue 2-Sep-2014
 ^^^^^^^^^^^^^^
 
-Salish Sea project mtg; see Google Drive whiteboard file.
+Salish Sea project mtg; see Google Drive whiteboard file; missed most of it due to FDA audit at Nordion.
 
+
+Sat 6-Sep-2014
+^^^^^^^^^^^^^^
+
+Worked on bootcamp material for 2014-09-25 UBC EOAS bootcamp.
+(SWC)
 
 Fri 5-Sep-2014
 ^^^^^^^^^^^^^^
