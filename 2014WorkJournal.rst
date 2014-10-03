@@ -2596,6 +2596,7 @@ Thu 2-Oct-2014
 
 Re-ran 16sep14 run on salish with unflipped wind components.
 Took a preliminary look at GEM 2.5km operational model files from Pramod; see 30Sep2014 whiteboard file for notes.
+Created SalishSeaTools ticket#17 re: retrieving stdout & stderr files for TORQUE runs on salish.
 (MEOPAR)
 
 
