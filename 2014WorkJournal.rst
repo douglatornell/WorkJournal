@@ -2492,3 +2492,118 @@ Fri 12-Sep-2014
 
 Created first draft of software collaboration poster.
 (EPOC)
+
+
+Week 38
+-------
+
+Mon 15-Sep-2014
+^^^^^^^^^^^^^^^
+
+Finalized software collaboration poster.
+(EPOC)
+
+Continued work on EOAS SWC bootcamp site and lessons.
+(SWC)
+
+
+Tue 16-Sep-2014
+^^^^^^^^^^^^^^^
+
+Salish Sea project mtg; see Google Drive whiteboard file.
+(MEOPAR)
+
+
+Week 39
+-------
+
+Mon 22-Sep-2014
+^^^^^^^^^^^^^^^
+
+Continued work on EOAS SWC bootcamp site and lessons.
+(SWC)
+
+Tue 23-Sep-2014
+^^^^^^^^^^^^^^^
+
+Gathered 13sep14 run on salish.
+Downloaded 17-22 Sep 2.5km GEM research model datasets from Kao-Shen's collaboration.cmc.ec.gc.ca space.
+Started 14sep14 run on salish.
+Salish Sea project mtg; see Google Drive whiteboard file.
+(MEOPAR)
+
+Continued work on EOAS SWC bootcamp site and lessons.
+(SWC)
+
+
+Wed 24-Sep-2014
+^^^^^^^^^^^^^^^
+
+Continued work on EOAS SWC bootcamp site and lessons.
+(SWC)
+
+
+Thu 25-Sep-2014
+^^^^^^^^^^^^^^^
+
+UBC EOAS SWC Bootcamp
+
+Fri 26-Sep-2014
+^^^^^^^^^^^^^^^
+
+UBC EOAS SWC Bootcamp
+
+
+October
+=======
+
+Week 40
+-------
+
+Mon 29-Sep-2014
+^^^^^^^^^^^^^^^
+
+Flipped sign on wind component values in all previously downloaded GEM 2.5km research model files (10-22 Sep 2014).
+Changed download script to do the sign flip as part of its processing.
+Downloaded 23-26 Sep GEM 2.5km research model datasets.
+Gathered results of 14-Sep-14 run.
+Started 15sep14 run on salish.
+(MEOPAR)
+
+
+Tue 30-Sep-2014
+^^^^^^^^^^^^^^^
+
+Gathered results of 15-Sep-14 run.
+Started 16sep14 run on salish.
+Salish Sea project mtg; see Google Drive whiteboard file.
+Opened EOAS ticket re: TORQUE queue on salish not starting jobs.
+(MEOPAR)
+
+
+Wed 1-Oct-2014
+^^^^^^^^^^^^^^
+
+Reverted flipping of wind component value signs in all previously downloaded GEM 2.5km research model files (10-26 Sep 2014).
+Reverted download script to not do the sign flip as part of its processing.
+Downloaded 27-30 Sep and 1-Oct GEM 2.5km research model datasets.
+Re-ran 15sep14 run on salish with unflipped wind components.
+(MEOPAR)
+
+
+Thu 2-Oct-2014
+^^^^^^^^^^^^^^
+
+Re-ran 16sep14 run on salish with unflipped wind components.
+Took a preliminary look at GEM 2.5km operational model files from Pramod; see 30Sep2014 whiteboard file for notes.
+(MEOPAR)
+
+
+Fri 3-Oct-2014
+^^^^^^^^^^^^^^
+
+Started 17-18sep14 run on salish.
+Pointed Nancy toward BeautifulSoup package to parse Neah Bay storm surge forecast page.
+Closed EOAS ticket re: TORQUE queue on salish not starting jobs - resolved.
+Downloaded 2-3 Oct GEM 2.5km research model datasets.
+(MEOPAR)
