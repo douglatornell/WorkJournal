@@ -2607,4 +2607,78 @@ Started 17-18sep14 run on salish.
 Pointed Nancy toward BeautifulSoup package to parse Neah Bay storm surge forecast page.
 Closed EOAS ticket re: TORQUE queue on salish not starting jobs - resolved.
 Downloaded 2-3 Oct GEM 2.5km research model datasets.
+Discoverd that EC has changed the wateroffice.ec.gc.ca page so that ECget fails when it tried to get Fraser River daily average flow values.
+(MEOPAR)
+
+
+Sat 4-Oct-2014
+^^^^^^^^^^^^^^
+
+Installed new Samsung EVO 840 250Gb SSD in Susan's MacBook and did a clean install of OS/X 10.9.5 (Mavericks).
+
+Started 17-18sep14 run again on salish, this time with correct river file names.
+Downloaded 4 Oct GEM 2.5km research model datasets.
+(MEOPAR)
+
+
+Sun 5-Oct-2014
+^^^^^^^^^^^^^^
+
+Started 19-20sep14 run again on salish.
+Downloaded 5oct GEM 2.5km research model datasets.
+Started work on fixing ECget interface to EC wateroffice site.
+(MEOPAR)
+
+Week 41
+-------
+
+Mon 6-Oct-2014
+^^^^^^^^^^^^^^
+
+Started 21-23sep14 run again on salish.
+Downloaded 6oct GEM 2.5km research model datasets.
+Finished fixing ECget interface to EC wateroffice site; bumped it to v0.3, and added user installation docs.
+(MEOPAR)
+
+Set up cron jobs to get daily average flows for Fraser and Englishman rivers in SOG-forcing/ECget/.
+(bloomcast)
+
+Tue 7-Oct-2014
+^^^^^^^^^^^^^^
+
+Started 21-23sep14 run again on salish.
+Downloaded 7oct GEM 2.5km research model datasets and enabled cron job to do downloads in the future.
+Thought about module of functions and their interfaces for plots to be generated daily for each nowcast/forecast run.
+Salish Sea project mtg; see Google Drive whiteboard file.
+Pair programmed with Susan to finish notebook to tranform GEM 2.5km operational datasets from grib2 to netCDF4.
+(MEOPAR)
+
+Played with nbflatten.py script and extdiff interface in Mercurial to try to get a basis diff tool for IPython Notebooks setup; needs more work.
+
+
+Wed 8-Oct-2014
+^^^^^^^^^^^^^^
+
+Started 24-26sep14 run again on salish.
+Cron job to download GEM 2.5km research model dataset failed; manually dowwnloaded 8oct datasets.
+Got notice from ONC that their new nefos OpenStack cloud (nefos) is ready for us to homestead; my auth fails, but Susan's work. Started setting up a local OpenStack working environment, and thinking about writing docs.
+(MEOPAR)
+
+Thu 9-Oct-2014
+^^^^^^^^^^^^^^
+
+Sent email to Martin@uvic re: nefos auth issue.
+
+
+Sat 11-Oct-2014
+^^^^^^^^^^^^^^^
+
+Started blog post about 25-26 Sep UBC EOAS SWC bootcamp.
+(SWC)
+
+
+Sun 12-Oct-2014
+^^^^^^^^^^^^^^^
+
+Started writing docs about setting up Salish Sea NEMO on ONC nefos OpenStack cloud.
 (MEOPAR)
