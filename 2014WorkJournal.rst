@@ -2629,6 +2629,7 @@ Downloaded 5oct GEM 2.5km research model datasets.
 Started work on fixing ECget interface to EC wateroffice site.
 (MEOPAR)
 
+
 Week 41
 -------
 
@@ -2682,3 +2683,43 @@ Sun 12-Oct-2014
 
 Started writing docs about setting up Salish Sea NEMO on ONC nefos OpenStack cloud.
 (MEOPAR)
+
+
+Week 42
+-------
+
+Tue 14-Oct-2014
+^^^^^^^^^^^^^^^
+
+Worked on docs; clean-up and moved netwCDF4 files creation and conventions section to a high visibility location in the tools repo docs.
+Started work on :file:`salishsea_tools.nowcast.figures` module and notebook to document development for it.
+Got an Ubuntu 14.04 server image loaded and booted as `manage` on nefos and logged into it via ssh from tom.
+Salish Sea project mtg; see Google Drive whiteboard file.
+(MEOPAR)
+
+
+Wed 15-Oct-2014
+^^^^^^^^^^^^^^^
+
+Installed Mercurial on manage@nefos.
+Reviewed Westgrid RAC proposal and discussed it with Susan.
+(MEOPAR)
+
+
+Thu 16-Oct-2014
+^^^^^^^^^^^^^^^
+
+Experimented with multiple ssh keys loaded on nefos and found that only 1 key will be loaded into a new instance, and the key to load needs to be chosen at instance creation time.
+Added docs sections about working in the OpenStack web interface on nefos and about ssh access to the publicly addressed instance.
+(MEOPAR)
+
+
+Fri 17-Oct-2014
+^^^^^^^^^^^^^^^
+
+Wrote Salish Sea NEMO code performance and resource utilization section of Westgrid RAC proposal.
+Watched Idalia's 2003 thalweg salinity movie over and over again.
+(MEOPAR)
+
+Restarted build slaves on coho, herring, and tyee.
+(SOG)
