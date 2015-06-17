@@ -2453,6 +2453,61 @@ Sat 6-Sep-2014
 Worked on bootcamp material for 2014-09-25 UBC EOAS bootcamp.
 (SWC)
 
+
+Wed 17-Sep-2014
+^^^^^^^^^^^^^^^
+
+Travel to Portland by train then Timberline Lodge by car for EPOC.
+
+Created swc-nelle-files repo of files for Unix shell lessons.
+Buffed shell and hg teaching notes.
+(SWC)
+
+Received Datamart HRDPS (operational 2.5km GEM) processing scripts from Pramod.
+Also received 10-Sep-2014 research 2.5km GEM model dataset from Kao-Shen, and transferred those files to ocean.
+Prepared 10Sep2014 GEM files and run-set files for test run on salish.
+(MEOPAR)
+
+
+Thu 18-Sep-2014
+^^^^^^^^^^^^^^^
+
+At EPOC.
+
+Debugged run-set files for 10sep14 run w/ 2.5km GEM research model products forcing and day average Fraser River flow from Hope gauge.
+Run completed in 7.5 hr.
+Realized that NEMO output files can be transformed to netCDF4 and compressed with :kbd:`ncks -4 -L4 ...`; space saving is on the order of 85%!
+Sent email to Kao-Shen requesting that he upload additional days of forcing that he has prepared for us.
+(MEOPAR)
+
+
+Fri 19-Sep-2014
+^^^^^^^^^^^^^^^
+
+At EOPC.
+
+Improved :kbd:`salishsea combine` to do netCDF4 LZ deflation automatically.
+Started 11sep14 2.5km GEM research forcing test run.
+(MEOPAR)
+
+
+Sat 20-Sep-2014
+^^^^^^^^^^^^^^^
+
+At EPOC, then travel to Portland.
+
+11sep14 2.5km GEM research forcing run finished in 6:20.
+Started 12sep14 run.
+(MEOPAR)
+
+
+Sun 21-Sep-2014
+^^^^^^^^^^^^^^^
+
+12sep14 2.5km GEM research forcing run finished in 8:54.
+Fixed bug in netCDF4 LZ deflation of results in :kbd:`salishsea combine`.
+Started 13sep14 run.
+
 Fri 5-Sep-2014
 ^^^^^^^^^^^^^^
 
