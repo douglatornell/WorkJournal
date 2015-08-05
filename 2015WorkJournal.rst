@@ -106,3 +106,30 @@ Mon 29-Jun-2015
 Started recovery from 24-Jun nowcast failure with Susan's help preparing runs on orcinus.
 Telcon w/ Youyu re: DFO/CONCEPTS collaboration.
 (MEOPAR)
+
+
+August
+======
+
+Week 32
+-------
+
+Tue 3-Aug-2015
+^^^^^^^^^^^^^^
+
+First day as paid UBC staff.
+
+Delivered benefits forms to Cary.
+Requested furniture for office I'm sharing with Melanie Grenier.
+
+Worked on getting NEMO-3.6 running on jasper.
+Opened ticket INC0507507 on westgrid re: very outdated Mercurial version (1.4 vs 3.5 present).
+Reviewed ~90 NEMO-3.6-stable changesets from r5258 to present (r5628) (see NEMO changesets spreadsheet on Google Drive).
+Started work on changing svn base of NEMO-3.6-hg-mirror repo from http://forge.ipsl.jussieu.fr/nemo/svn/trunk to http:////forge.ipsl.jussieu.fr/nemo/svn/branches/2015/nemo_v3_6_STABLE
+
+Participated in weekly Salish Sea team meeting; todos:
+* tag change to iso-neutral mixing
+* sort out NEMO-3.6 build & run MPI issues viz-a-viz anaconda
+
+
+
