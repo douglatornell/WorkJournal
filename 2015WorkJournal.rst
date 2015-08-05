@@ -33,12 +33,50 @@ Week 23
 Mon 1-Jun-2015
 ^^^^^^^^^^^^^^
 
+CMOS conference in Whistler.
+
+Tue 2-Jun-2015
+^^^^^^^^^^^^^^
+
+CMOS conference in Whistler.
+Presented "Automation Framework for a Regional Ocean Forecast Model" talk.
+
+
+Wed 3-Jun-2015
+^^^^^^^^^^^^^^
+
+CMOS conference in Whistler.
+
+
+Thu 4-Jun-2015
+^^^^^^^^^^^^^^
+
+CMOS conference in Whistler.
+
 
 Week 24
 -------
 
 Mon 8-Jun-2015
 ^^^^^^^^^^^^^^
+
+Visiting Oslo for Susan to participate in a PhD exam.
+
+Started preparation for version control workshop for MEOPAR 2015 ASM MEOPeers training program.
+Re-mixed content, layout, and workflow from SWC hg-novice lesson.
+
+
+Tue 9-Jun-2015
+^^^^^^^^^^^^^^
+
+Visiting Oslo for Susan to participate in a PhD exam.
+
+Continued preparation for version control workshop for MEOPAR 2015 ASM MEOPeers training program.
+
+
+Sun 14-Jun-2015
+^^^^^^^^^^^^^^^
+Finished preparation for version control workshop for MEOPAR 2015 ASM MEOPeers training program.
 
 
 Week 25
@@ -54,19 +92,19 @@ Delivered version control workshop for MEOPeers as part of MEOPAR 2015 ASM train
 Tue 16-Jun-2015
 ^^^^^^^^^^^^^^^
 
-MEOPAR 2015 ASM.
+MEOPAR 2015 ASM in Vancouver.
 
 
 Wed 17-Jun-2015
 ^^^^^^^^^^^^^^^
 
-MEOPAR 2015 ASM.
+MEOPAR 2015 ASM in Vancouver.
 
 
 Thu 18-Jun-2015
 ^^^^^^^^^^^^^^^
 
-MEOPAR 2015 ASM.
+MEOPAR 2015 ASM in Vancouver.
 
 
 Week 26
@@ -97,6 +135,9 @@ Tried to get 2015r1 release running on webfaction but encountered issues with pe
 (RandoPony)
 
 
+July
+====
+
 Week 27
 -------
 
@@ -105,6 +146,61 @@ Mon 29-Jun-2015
 
 Started recovery from 24-Jun nowcast failure with Susan's help preparing runs on orcinus.
 Telcon w/ Youyu re: DFO/CONCEPTS collaboration.
+Helped Jie get her salishsea environment set up on orcinus.
+(MEOPAR)
+
+
+Tue 30-Jun-2015
+^^^^^^^^^^^^^^^
+
+Completed recovery from 24-Jun nowcast failure with Susan's help preparing runs on orcinus.
+(MEOPAR)
+
+
+Wed 1-Jul-2015
+^^^^^^^^^^^^^^
+
+Added SMTP logging handler to nowcast to send email to all group members when a CRITICAL level message is logged.
+(MEOPAR)
+
+Pushed SoG-bloomcast intro page to salishsea site.
+(Bloomcast)
+
+
+Thu 2-Jul-2015
+^^^^^^^^^^^^^^
+
+Worked on cleanup of SalishSeaTools nowcast package in preparation for moving it to SalishSeaNowcast.
+Started refreshing Salish Sea nowcast development, deployment & testing docs.
+(MEOPAR)
+
+
+Fri 3-Jul-2015
+^^^^^^^^^^^^^^
+
+Continued refreshing Salish Sea nowcast development, deployment & testing docs.
+(MEOPAR)
+
+Week 27
+-------
+
+Mon 6-Jul-2015
+^^^^^^^^^^^^^^
+
+Continued refreshing Salish Sea nowcast development, deployment & testing docs.
+(MEOPAR)
+
+Tue 7-Jul-2015
+^^^^^^^^^^^^^^
+
+Salish Sea team meeting; see Google Drive Drawing.
+(MEOPAR)
+
+Wed 8-Jul-2015
+^^^^^^^^^^^^^^
+
+Finished refreshing Salish Sea nowcast development, deployment & testing docs.
+Fixed several autodoc issues, especially mocking a value for numpy.pi for nowcast.figures module.
 (MEOPAR)
 
 
