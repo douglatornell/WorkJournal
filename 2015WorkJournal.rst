@@ -258,6 +258,15 @@ Got ocean mount on bjossa reset, restarted buildbot master, and all slaves.
 Fri 7-Aug-2015
 ^^^^^^^^^^^^^^
 
+Continued working on getting NEMO-3.6 running on jasper:
+* Tried 6x14 run with attached XIOS; failed due to memory limits
+* Did a series of walltime=00:05:00 test:
+    * From 1x7+1 test run, learned that XIOS buffer must be >= 48906418, so set it to 50000000
+    * 1x7+1 test with and procs=7 ran 10+ time steps
+    * 1x7+1 test with nodes=1:ppn=12 ran 27+ time steps
+    * 2x5+1 test with nodes=1:ppn=12 ran 35+ time steps
+    * 4x9+3 test with nodes=13:ppn=12 ran 215+ time steps (28m40s model/min)
+    * 8x18+12 test with nodes=13:ppn=12 ran 805+ time steps (107m20s model/min)
 * Increased walltime to 30m hoping to complete the 1 model day:
     * 8x18+12 test with nodes=13:ppn=12 ran + time steps (107m42s model/min)
 * Optimized number of XIOS servers:
