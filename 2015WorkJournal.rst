@@ -269,11 +269,11 @@ Continued working on getting NEMO-3.6 running on jasper:
     * 8x18+12 test with nodes=13:ppn=12 ran 805+ time steps (107m20s model/min)
 * Increased walltime to 30m hoping to complete the 1 model day:
     * 8x18+12 test with nodes=13:ppn=12 ran + time steps (107m42s model/min)
-* Optimized number of XIOS servers:
+* Experimented on number of XIOS servers:
     * 8x18+6 test with nodes=13:ppn=12
     * 8x18+3 test with nodes=13:ppn=12
-    * 8x18+4 test with nodes=13:ppn=12 had some 30% buffer ratios and lots of 8% ones
-    * 8x18+1 test with nodes=13:ppn=12 took 48m52
+    * 8x18+4 test with nodes=13:ppn=12 had some 30% performance ratios and lots of 8% ones
+    * 8x18+1 test with nodes=13:ppn=12 took 48m52, or which 35m was output file writing, and XIOS performance ratio was >98% (very bad) for all opa processors
 Updated docs re: Mercurial 3.5 on jasper.
 (MEOPAR)
 
