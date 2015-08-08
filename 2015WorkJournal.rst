@@ -132,4 +132,31 @@ Participated in weekly Salish Sea team meeting; todos:
 * sort out NEMO-3.6 build & run MPI issues viz-a-viz anaconda
 
 
+Fri 7-Aug-2015
+^^^^^^^^^^^^^^
 
+Continued working on getting NEMO-3.6 running on jasper:
+* Tried 6x14 run with attached XIOS; failed due to memory limits
+* Did a series of walltime=00:05:00 test:
+    * From 1x7+1 test run, learned that XIOS buffer must be >= 48906418, so set it to 50000000
+    * 1x7+1 test with and procs=7 ran 10+ time steps
+    * 1x7+1 test with nodes=1:ppn=12 ran 27+ time steps
+    * 2x5+1 test with nodes=1:ppn=12 ran 35+ time steps
+    * 4x9+3 test with nodes=13:ppn=12 ran 215+ time steps (28m40s model/min)
+    * 8x18+12 test with nodes=13:ppn=12 ran 805+ time steps (107m20s model/min)
+* Increased walltime to 30m hoping to complete the 1 model day:
+    * 8x18+12 test with nodes=13:ppn=12 ran + time steps (107m42s model/min)
+* Optimized number of XIOS servers:
+    * 8x18+6 test with nodes=13:ppn=12
+    * 8x18+3 test with nodes=13:ppn=12
+    * 8x18+4 test with nodes=13:ppn=12 had some 30% buffer ratios and lots of 8% ones
+    * 8x18+1 test with nodes=13:ppn=12 took 48m52
+Updated docs re: Mercurial 3.5 on jasper.
+(MEOPAR)
+
+Participated in canyons group mtg; todos:
+* help Karina get ssh keys setup for all the things
+* build MITgcm on orcinus and test it with its repo rotating table test case; write docs
+* develop a canyon command processor for MITgcm similar to the salishsea command processor for NEMO
+Started setting up canyons workspace on tom and orcinus; did CVS checkout of MITgcm HEAD on both.
+(Canyons)
