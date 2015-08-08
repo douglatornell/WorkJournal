@@ -222,24 +222,42 @@ Worked on getting NEMO-3.6 running on jasper.
 Opened ticket INC0507507 on westgrid re: very outdated Mercurial version (1.4 vs 3.5 present).
 Reviewed ~90 NEMO-3.6-stable changesets from r5258 to present (r5628) (see NEMO changesets spreadsheet on Google Drive).
 Started work on changing svn base of NEMO-3.6-hg-mirror repo from http://forge.ipsl.jussieu.fr/nemo/svn/trunk to http:////forge.ipsl.jussieu.fr/nemo/svn/branches/2015/nemo_v3_6_STABLE
+(MEOPAR)
 
-Participated in weekly Salish Sea team meeting; todos:
+Salish Sea team meeting; see Google Drive Drawing. Todos:
 * tag change to iso-neutral mixing
 * sort out NEMO-3.6 build & run MPI issues viz-a-viz anaconda
+
+
+Wed 4-Aug-2015
+^^^^^^^^^^^^^^
+
+Helped Susan try to understand how NEMO-3.6 and XIOS are using cores on salish re: why 7+1 and 15+1 runs have almost the same duration.
+Confirmed that newly installed Mercurial v3.5 on jasper works by updating all MEOPAR repos there.
+Updated build of NEMO-3.6 on jasper, and added docs section describing arch file and build command.
+(MEOPAR)
+
+Started writing proposal for UBC SCARP SeaLink'd web app project.
+(sealinkd)
+
+
+Thu 6-Aug-2015
+^^^^^^^^^^^^^^
+
+Started running NEMO-3.6 tests on jasper; missing input files seem to result in segfaults - hostile!
+After getting the input file issues sorted out, the run failed with an integer division error that leave no trace in ocean.output; Susan took over debugging that.
+(MEOPAR)
+
+Lat/lon and timecounter bug fixes in GEM2.5 research model output took effect today.
+(MEOPAR)
+
+Got ocean mount on bjossa reset, restarted buildbot master, and all slaves.
+(SOG)
 
 
 Fri 7-Aug-2015
 ^^^^^^^^^^^^^^
 
-Continued working on getting NEMO-3.6 running on jasper:
-* Tried 6x14 run with attached XIOS; failed due to memory limits
-* Did a series of walltime=00:05:00 test:
-    * From 1x7+1 test run, learned that XIOS buffer must be >= 48906418, so set it to 50000000
-    * 1x7+1 test with and procs=7 ran 10+ time steps
-    * 1x7+1 test with nodes=1:ppn=12 ran 27+ time steps
-    * 2x5+1 test with nodes=1:ppn=12 ran 35+ time steps
-    * 4x9+3 test with nodes=13:ppn=12 ran 215+ time steps (28m40s model/min)
-    * 8x18+12 test with nodes=13:ppn=12 ran 805+ time steps (107m20s model/min)
 * Increased walltime to 30m hoping to complete the 1 model day:
     * 8x18+12 test with nodes=13:ppn=12 ran + time steps (107m42s model/min)
 * Optimized number of XIOS servers:
