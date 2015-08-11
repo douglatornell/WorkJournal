@@ -283,3 +283,24 @@ Participated in canyons group mtg; todos:
 * develop a canyon command processor for MITgcm similar to the salishsea command processor for NEMO
 Started setting up canyons workspace on tom and orcinus; did CVS checkout of MITgcm HEAD on both.
 (Canyons)
+
+
+Week 33
+-------
+
+Mon 10-Aug-20156
+^^^^^^^^^^^^^^^^
+
+Continued refining NEMO-3.6 run environment on jasper:
+* Tested mpirun -np 144 ./nemo.exe : -np 6 ./xios_server.exe syntax; worked
+* Repeated 8x18p1 1d w/ 6h output in non-EXP00 directory
+(MEOPAR)
+
+Susan confirmed 22-25 Sep, 9-12 each day as dates for EOAS SWC workshop.
+Invited Julia to join the teaching team, but she declined, though offered to come as a helper on day 1.
+(SWC)
+
+Attended Phys Ocgy seminar by Mark Halverson about surface tides.
+
+Finished writing 1st draft of proposal for UBC SCARP SeaLink'd web app project.
+(sealinkd)
