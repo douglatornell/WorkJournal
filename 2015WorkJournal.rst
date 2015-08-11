@@ -284,6 +284,27 @@ Participated in canyons group mtg; todos:
 Started setting up canyons workspace on tom and orcinus; did CVS checkout of MITgcm HEAD on both.
 (Canyons)
 
+Got UBC staff card :-)
+
+
+Sat 8-Aug-2015
+^^^^^^^^^^^^^^
+
+Continued NEMO-3.6 tests on jasper:
+* 8x18p1 w/ 6h output ran in 13m39s
+Wrote docs re: run setup outside of NEMOGCM/CONFIG/SalishSea/EXP00/ and tested them with 8x18p6 w/ 6h output, but had lots of fails in run.
+(MEOPAR)
+
+Re-implemented eFunds.py in Python 3 and created private Bitbucket repo for the project.
+Continued NEMO-3.6 tests on jasper:
+
+
+Sun 9-Aug-2015
+^^^^^^^^^^^^^^
+
+Continued NEMO-3.6 tests on jasper:
+* 8x18p6 w/ 6h output
+
 
 Week 33
 -------
@@ -304,3 +325,4 @@ Attended Phys Ocgy seminar by Mark Halverson about surface tides.
 
 Finished writing 1st draft of proposal for UBC SCARP SeaLink'd web app project.
 (sealinkd)
+(MEOPAR)
