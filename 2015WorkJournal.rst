@@ -296,7 +296,6 @@ Wrote docs re: run setup outside of NEMOGCM/CONFIG/SalishSea/EXP00/ and tested t
 (MEOPAR)
 
 Re-implemented eFunds.py in Python 3 and created private Bitbucket repo for the project.
-Continued NEMO-3.6 tests on jasper:
 
 
 Sun 9-Aug-2015
@@ -314,7 +313,7 @@ Mon 10-Aug-20156
 
 Continued refining NEMO-3.6 run environment on jasper:
 * Tested mpirun -np 144 ./nemo.exe : -np 6 ./xios_server.exe syntax; worked
-* Repeated 8x18p1 1d w/ 6h output in non-EXP00 directory
+* Repeated 8x18p1 1d w/ 6h output in non-EXP00 directory; timed out at 20m on 1st try, but ran in 13m16s on wnd try w/ PBS feature=X5675
 (MEOPAR)
 
 Susan confirmed 22-25 Sep, 9-12 each day as dates for EOAS SWC workshop.
@@ -325,4 +324,19 @@ Attended Phys Ocgy seminar by Mark Halverson about surface tides.
 
 Finished writing 1st draft of proposal for UBC SCARP SeaLink'd web app project.
 (sealinkd)
+
+
+Tue 11-Aug-2015
+^^^^^^^^^^^^^^^
+
+Updated jasper NEMO-3.6 and SS-run-sets to Susan's most recent near-production configuration, re-built NEMO, and tested 8x18p1-1d-6h
+Resumed trying to build XIOS and NEMO on orcinus.
+Met w/ Nancy & Muriel re: transition of ONC ADCP data gathering code at end of Muriel's term.
+Tried to help Elise with borked NEMO-code dir; no go.
+Worked on getting XIOS to build on orcnius; down to 1 undefined symbol; need to ping Roman again.
+Started pulling upstream changesets in to NEMO-3.6.
+Salish Sea team meeting; see Google Drive Drawing.
+Helped Jie figure out an approach to rebuilding per-processor files from zoomed sub-domains.
 (MEOPAR)
+
+Attended special Phys Ocgy seminar by Julio Sheinbaum (Karina's "father-in-law") on Gulf of Mexico.
