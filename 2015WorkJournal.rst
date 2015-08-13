@@ -329,7 +329,10 @@ Finished writing 1st draft of proposal for UBC SCARP SeaLink'd web app project.
 Tue 11-Aug-2015
 ^^^^^^^^^^^^^^^
 
-Updated jasper NEMO-3.6 and SS-run-sets to Susan's most recent near-production configuration, re-built NEMO, and tested 8x18p1-1d-6h
+Updated jasper NEMO-3.6 and SS-run-sets to Susan's most recent near-production configuration, re-built NEMO, and tested:
+* 8x18p1-1d-6h: completed NEMO in 19m, but timed out at 1h on XIOS
+* 8x18p1-1d-6h again: queued ETS 23:00
+* 8x18p2-1d-6h again: queued ETS 23:30
 Resumed trying to build XIOS and NEMO on orcinus.
 Met w/ Nancy & Muriel re: transition of ONC ADCP data gathering code at end of Muriel's term.
 Tried to help Elise with borked NEMO-code dir; no go.
@@ -340,3 +343,27 @@ Helped Jie figure out an approach to rebuilding per-processor files from zoomed 
 (MEOPAR)
 
 Attended special Phys Ocgy seminar by Julio Sheinbaum (Karina's "father-in-law") on Gulf of Mexico.
+
+
+Wed 12-Aug-2015
+^^^^^^^^^^^^^^^
+
+Discovered that sloppy, subtle use of tag closings in iodef.xml resulted in all test jobs to date on jasper doing 1h output.
+Overnight:
+* 8x18p1-1d-6h again: actually 8x18p1-1d-1h took 19m22s
+* 8x18p2-1d-6h again: actually 8x18p2-1d-1h took 28m28s
+Fixed tag closing issue.
+* 8x18p2-1d-6h: 17m32s
+Continued pulling upstream changesets in to NEMO-3.6.
+(MEOPAR)
+
+Investigated randopony persona.org sign-in issue discovered on 28Jun and found that it is not a problem today - wierd.
+Investigated deform widgets issue discovered on 28Jun; on kudu it is resolved by downgrading to deform==0.9.9.
+Updated deployment to 2015r1 release; lots of manual work because of fabric security issue that seems to be about my local userid not matching the bcrandonneur userid on webfaction.
+Explored Unicode handling issue in brevet pre-registration and discovered that it is in the email generation functions, not the form handers.
+(RandoPony)
+
+Finalized proposal for UBC SCARP SeaLink'd web app project and emailed it to Stephanie.
+(sealinkd)
+
+After a  lot of mucking about to figure out which packages I had't yet installed, got enough TeX and LaTeX packages and fonts installed to render sealinkd proposal from rst to pdf via both rst2latex and pandoc; former produces nicer output, presumably due to deficiencies in pandoc's rst parser; e.g. no generic role (:data:) handling.
