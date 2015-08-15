@@ -367,3 +367,27 @@ Finalized proposal for UBC SCARP SeaLink'd web app project and emailed it to Ste
 (sealinkd)
 
 After a  lot of mucking about to figure out which packages I had't yet installed, got enough TeX and LaTeX packages and fonts installed to render sealinkd proposal from rst to pdf via both rst2latex and pandoc; former produces nicer output, presumably due to deficiencies in pandoc's rst parser; e.g. no generic role (:data:) handling.
+
+
+Thu 13-Aug-2015
+^^^^^^^^^^^^^^^
+
+Worked on migrating Muriel's ONC ADPC processing to group operability.
+(MEOPAR)
+
+Attended SWC workout session on Pandas lead by Nancy.
+(SWC)
+
+Met w/ Susan and Charles re: setting up a server for OPeNDAP and dynamic web sites and arrived at a provisional plan for a new 6 core, 6Tb storage machine to be located in the UBC data centre.
+
+Got key to my EOSM office and discovered that furniture has been moved in for me.
+
+
+Fri 14-Aug-2015
+^^^^^^^^^^^^^^^
+
+Finished migrating Muriel's ONC ADPC processing to group operability in /ocean/dlatorne/MEOPAR/ONC_ADCP/; discussed future use and coordination w/ Rich.
+Emailed Diego re: OceanViewer and planned OPeNDAP server for Salish Sea NEMO model results.
+(MEOPAR)
+
+Moved into office in EOS Main.
