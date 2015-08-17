@@ -391,3 +391,14 @@ Emailed Diego re: OceanViewer and planned OPeNDAP server for Salish Sea NEMO mod
 (MEOPAR)
 
 Moved into office in EOS Main.
+
+
+Sun 16-Aug-2015
+^^^^^^^^^^^^^^^
+
+Nowcast automation failed due to west.cloud sshfs storage quota being exceeded.
+Manually deleted enough files to get things running again, and manually re-started via the upload_forcing worker.
+Worked on cron job to automatically delete run results more than 30 days old, but struggled with getting the script to run from cron - perhaps because it is stored in the tools repo which is on the sshfs mount?
+(MEOPAR)
+
+Experimented with Mercurial bookmarks and named branches in a toy repo and on Bitbucket.
