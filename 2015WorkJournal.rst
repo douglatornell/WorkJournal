@@ -354,7 +354,7 @@ Overnight:
 * 8x18p2-1d-6h again: actually 8x18p2-1d-1h took 28m28s
 Fixed tag closing issue.
 * 8x18p2-1d-6h: 17m32s
-Continued pulling upstream changesets in to NEMO-3.6.
+Continued pulling upstream changesets in to NEMO-3.6; up to r5518.
 (MEOPAR)
 
 Investigated randopony persona.org sign-in issue discovered on 28Jun and found that it is not a problem today - wierd.
@@ -402,3 +402,29 @@ Worked on cron job to automatically delete run results more than 30 days old, bu
 (MEOPAR)
 
 Experimented with Mercurial bookmarks and named branches in a toy repo and on Bitbucket.
+
+
+Week 34
+-------
+
+Mon 17-Aug-2015
+^^^^^^^^^^^^^^^
+
+Worked on setting smelt up as a daily use machine.
+
+NEMOGCM/NEMO/OFF_SRC/domain.F90 conflict remains
+Nowcast automation failed again due to west.cloud sshfs storage quota being exceeded.
+Finally got cron job to automatically delete run results working; set it to delete results directories more than 20 days old every day at midnight.
+The trick to getting it working is that the script from /MEOPAR/tools/... had to be symlinked into $HOME - weird.
+Switched NEMO-3.6-hg-mirror svn URL to ^/branches/2015/nemo_v3_6_STABLE; svn r5519 is the creations of that branch and produces no changeset in Mercurial.
+svn revisions 5531, 5533, 5540, 5546, and 5550 seem to be from another branch and it is not clear how/if they enter the 3.6-stable branch.
+Finished pulling upstream changesets in to NEMO-3.6-hg-mirror; it is now at svn r5628.
+Merged NEMO-3.6-hg-mirror and NEMO-3.6-code, then tagged the latter at NEMO-3.6r5628 and pushed so that the update to 3.6-stable is finished.
+Fixed bugs in the /ocean/dlatorne/MEOAPR/ONC_ADCP/east/ setup with help from Nancy and Muriel.
+(MEOPAR)
+
+Continued experiment with Mercurial named branches by confirming that when Susan cloned the test repo she got both branches; also updating to a branch tip by rev number puts you on the branch.
+
+Confirmed that bugaboo is up, so MITgcm build can wait for a day or 2.
+(canyons)
+
