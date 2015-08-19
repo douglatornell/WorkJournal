@@ -428,3 +428,19 @@ Continued experiment with Mercurial named branches by confirming that when Susan
 Confirmed that bugaboo is up, so MITgcm build can wait for a day or 2.
 (canyons)
 
+Tue 18-Aug-2015
+^^^^^^^^^^^^^^^
+
+Stephanie accepted my SeaLink'd web app proposal and is proceeding with a Supply Agreement.
+(sealinkd)
+
+Pinged Youyu re: travel funding for MEOPAR-CONCEPTS workshop & visit to Halifax; deadline for decision is tomorrow.
+Bedford contract folks have confirmed that 43ravens is set up on the standing offer list in a way that they can work with.
+(CONCEPTS)
+
+Updated salishsea-site to include Elise as a Salish Sea NEMO model team member, and Jie as a site content contributor.
+Investigated compilation error that Susan is seeing in NEMO-3.6-stable; looks ugly.
+Started work on SalishSeaCmd package update to Python 3 and NEMO-3.6 in tools/SalishSeaCmd-3.6 named branch.
+Started backing out object-based Nowcast commits in tools repo in preparation for re-doing them in a named branch.
+Salish Sea team meeting; see Google Drive Drawing.
+(MEOPAR)
