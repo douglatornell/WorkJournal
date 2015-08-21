@@ -444,3 +444,25 @@ Started work on SalishSeaCmd package update to Python 3 and NEMO-3.6 in tools/Sa
 Started backing out object-based Nowcast commits in tools repo in preparation for re-doing them in a named branch.
 Salish Sea team meeting; see Google Drive Drawing.
 (MEOPAR)
+
+Thu 20-Aug-2015
+^^^^^^^^^^^^^^^
+
+Confirmed to Hal, Youyu, et al that I will not be attending the MEOPAR-CONCEPTS collaboration workshop at Dorval next week.
+Worked on NEMO-3.6 and XIOS build issues.
+Grabbed up-to-date (svn r648) version of XIOS-1.0 branch and successfully compiled it on salish; compile fails on smelt due to lack of OpenMPI library - a watchout for people with anaconda in their path (I think).
+Update XIOS repo to svn r648, merged our arch files, etc., and tagged it as XIOS-1.0r648.
+Updated docs re: NEMO-3.6 and XIOS build issues.
+Finished backing out NowcastWorker worker & unit test module commits in tools repo in preparation for re-doing them in the nowcast-obj named branch.
+Explored ONC data web app; ADCP data appears to be available in real-time.
+Did Python 3.4 porting & cleanup on SalishSeaCmd package, and added `--nemo3.4` command line option to `salishsea prepare` parser.
+(MEOPAR)
+
+Sent email to Ben re: problems getting builbot running on bjossa salvage hardware; included path to most recently created comparison plots PDFs.
+(SOG buildbot)
+
+Sent kick-off email w/ copy of Sealinkd app proposal to Stephanie group.
+1st review/feedback mtg scheduled for 1-Sep.
+(sealinkd)
+
+Did a tour of waterhole/ocean machines and found that all but salish and snapper are running 12.04; no ssh key access to fraser, and no access at all to glider.
