@@ -428,6 +428,7 @@ Continued experiment with Mercurial named branches by confirming that when Susan
 Confirmed that bugaboo is up, so MITgcm build can wait for a day or 2.
 (canyons)
 
+
 Tue 18-Aug-2015
 ^^^^^^^^^^^^^^^
 
@@ -444,6 +445,22 @@ Started work on SalishSeaCmd package update to Python 3 and NEMO-3.6 in tools/Sa
 Started backing out object-based Nowcast commits in tools repo in preparation for re-doing them in a named branch.
 Salish Sea team meeting; see Google Drive Drawing.
 (MEOPAR)
+
+
+Wed 19-Aug-2015
+^^^^^^^^^^^^^^^
+
+More investigation of NEMO-3.6-stable compilation error in light of Fatemeh's 31Jul message to the NEMO list suggests that we need to update our XIOS-1.0 checkout (because the developers have committed ~37 changesets since our checkout - is it too much trouble for them to create releases and coordinate with NEMO?)
+Created tools repo issues for several todos that I had set up reminders for in my Inbox.
+(MEOPAR)
+
+Updated CHANGES.txt file that I forgot to do prior to the 2015r1 release.
+Changed version number scheme to be PEP-440 compliant.
+Bumped version to 2015.2.dev0.
+Worked on mods to properly handle Unicode characters in brevet riders' names.
+Created new 2015.2 staging deployment on webfaction (manually due to fabric userid/ssh-key issue) to test Unicode mods through real email servers and agents.
+(RandoPony)
+
 
 Thu 20-Aug-2015
 ^^^^^^^^^^^^^^^
