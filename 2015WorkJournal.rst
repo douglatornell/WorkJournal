@@ -483,3 +483,14 @@ Sent kick-off email w/ copy of Sealinkd app proposal to Stephanie group.
 (sealinkd)
 
 Did a tour of waterhole/ocean machines and found that all but salish and snapper are running 12.04; no ssh key access to fraser, and no access at all to glider.
+
+
+Fri 21-Aug-2015
+^^^^^^^^^^^^^^^
+
+Started work on Sealinkd web app project.
+Created Sealinkd team and sealinkd repo on Bitbucket.
+Set up sealinkd repo issue tracker milestones & components, and translated stage 1 section of proposal into task issues.
+Set up docs framework, and wrote initial developer information section.
+Started setup of back-end framework.
+(sealinkd)
