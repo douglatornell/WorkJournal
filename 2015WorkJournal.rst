@@ -494,3 +494,21 @@ Set up sealinkd repo issue tracker milestones & components, and translated stage
 Set up docs framework, and wrote initial developer information section.
 Started setup of back-end framework.
 (sealinkd)
+
+
+Sat 22-Aug-2015
+^^^^^^^^^^^^^^^
+
+Tried to set up remote desktop access on kudu to waterhole/ocean machines; missing something.
+
+Experimented with a bcrandonneur account on kudu and a doug account on web faction, but didn't find a satisfactory resolution for the fabric auth issue.
+bcrandonneur account can auth, but lacks access to desktop on kudu.
+Finished writing unit tests for mods to properly handle Unicode characters in brevet riders' names; next up, populaire riders.
+(RandoPony)
+
+
+Sat 22-Aug-2015
+^^^^^^^^^^^^^^^
+
+Continued work on SalishSeaCmd-3.6 branch; added lots of unit tests, the --nemo3.4 command-line option, and started propagating it through the prepare module.
+(MEOPAR)
