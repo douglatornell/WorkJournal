@@ -512,3 +512,22 @@ Sat 22-Aug-2015
 
 Continued work on SalishSeaCmd-3.6 branch; added lots of unit tests, the --nemo3.4 command-line option, and started propagating it through the prepare module.
 (MEOPAR)
+
+
+Week 35
+-------
+
+Mon 24-Aug-2015
+^^^^^^^^^^^^^^^
+
+Worked on sprint planning.
+(MEOPAR)
+
+Added skeleton implementations of site-wide page banner, navbar, nav tabs for maps/charts/profiles pages, and Javascript functions to manage highlighting of nav elements.
+(sealinkd)
+
+Tue 25-Aug-2015
+^^^^^^^^^^^^^^^
+
+Participated in spring re: Salish Sea NEMO model stakeholder issues.
+(MEOPAR)
