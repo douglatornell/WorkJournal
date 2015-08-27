@@ -357,16 +357,16 @@ Fixed tag closing issue.
 Continued pulling upstream changesets in to NEMO-3.6; up to r5518.
 (MEOPAR)
 
-Investigated randopony persona.org sign-in issue discovered on 28Jun and found that it is not a problem today - wierd.
+Investigated randopony persona.org sign-in issue discovered on 28Jun and found that it is not a problem today - weird.
 Investigated deform widgets issue discovered on 28Jun; on kudu it is resolved by downgrading to deform==0.9.9.
 Updated deployment to 2015r1 release; lots of manual work because of fabric security issue that seems to be about my local userid not matching the bcrandonneur userid on webfaction.
-Explored Unicode handling issue in brevet pre-registration and discovered that it is in the email generation functions, not the form handers.
+Explored Unicode handling issue in brevet pre-registration and discovered that it is in the email generation functions, not the form handlers.
 (RandoPony)
 
 Finalized proposal for UBC SCARP SeaLink'd web app project and emailed it to Stephanie.
 (sealinkd)
 
-After a  lot of mucking about to figure out which packages I had't yet installed, got enough TeX and LaTeX packages and fonts installed to render sealinkd proposal from rst to pdf via both rst2latex and pandoc; former produces nicer output, presumably due to deficiencies in pandoc's rst parser; e.g. no generic role (:data:) handling.
+After a  lot of mucking about to figure out which packages I hadn't yet installed, got enough TeX and LaTeX packages and fonts installed to render sealinkd proposal from rst to pdf via both rst2latex and pandoc; former produces nicer output, presumably due to deficiencies in pandoc's rst parser; e.g. no generic role (:data:) handling.
 
 
 Thu 13-Aug-2015
@@ -529,5 +529,23 @@ Added skeleton implementations of site-wide page banner, navbar, nav tabs for ma
 Tue 25-Aug-2015
 ^^^^^^^^^^^^^^^
 
-Participated in spring re: Salish Sea NEMO model stakeholder issues.
+Participated in sprint re: Salish Sea NEMO model stakeholder issues.
 (MEOPAR)
+
+
+Wed 26-Aug-2015
+^^^^^^^^^^^^^^^
+
+Shadowed by Katie.
+
+Reviewed yesterday's sprint commits in tools repo and decided to pull them into nowcast production; need to talk to Jie (for sure), Ben & Elise (both maybe) about PEP8.
+Investigated west.cloud disk quota failure in 24aug15 forecast run; rebuild failed during 1d/restart files, but 1h files appear to be good (though maybe not LZ-compressed), so web page figures are okay.
+get_NeahBay_ssh worker failed due to permissions because I accidentally committed nowcast.yaml w/ a path that we used for testing Elise's worker mods during the sprint.
+make_plots worker failed because I forgot to install scikit-learn package that got introduced as a dependency in the research_ferries.py module from yesterday' sprint; ran make_plots nowcast research and make_plots forecast publish manually late in the afternoon to get things back on the rails.
+Wrote ToDo lists into sprint tasks doc on Google Drive re: task required to move sprint work into nowcast system.
+(MEOPAR)
+
+Added fly-make/flake8 config to emacs on ocean/waterhole machines; need to get ~/.local/bin/ on to path at desktop login.
+
+Participated in GEOTRACES team mtg.
+(GEOTRACES)
