@@ -539,6 +539,7 @@ Wed 26-Aug-2015
 Shadowed by Katie.
 
 Reviewed yesterday's sprint commits in tools repo and decided to pull them into nowcast production; need to talk to Jie (for sure), Ben & Elise (both maybe) about PEP8.
+Received email from Marlene@OCN re: search failure in ADCP cron job saying that script access to the data was not supported.
 Investigated west.cloud disk quota failure in 24aug15 forecast run; rebuild failed during 1d/restart files, but 1h files appear to be good (though maybe not LZ-compressed), so web page figures are okay.
 get_NeahBay_ssh worker failed due to permissions because I accidentally committed nowcast.yaml w/ a path that we used for testing Elise's worker mods during the sprint.
 make_plots worker failed because I forgot to install scikit-learn package that got introduced as a dependency in the research_ferries.py module from yesterday' sprint; ran make_plots nowcast research and make_plots forecast publish manually late in the afternoon to get things back on the rails.
@@ -547,5 +548,35 @@ Wrote ToDo lists into sprint tasks doc on Google Drive re: task required to move
 
 Added fly-make/flake8 config to emacs on ocean/waterhole machines; need to get ~/.local/bin/ on to path at desktop login.
 
+Received email from Jerry@Nordion re: boot failure on production server.
+(Nordion)
+
 Participated in GEOTRACES team mtg.
 (GEOTRACES)
+
+
+Thu 27-Aug-2015
+^^^^^^^^^^^^^^^
+
+Replied to Marlene's email re: script access to ADCP data and sparked a discussion among EOAS & ONC re: availability of data via web service.
+Updated contributors lists in docs repo and on salishsea site w/ names from this week's sprint.
+Updated XIOS repo on orcinus and tried a build; fails with 1 unresolved symbol:
+/global/software/lib64/intel/ncsa-tools/mpi/lib/libnetcdf.so: undefined reference to `H5Pset_fapl_mpiposix'
+(MEOPAR)
+
+Offerred Nordion site visit next week to try to resolve production server /backup partition issue.
+(Nordion)
+
+Received provisional approval of SealinkD proposal from UBC Procurement via Penny@SCARP; Procurement wants the finished app to be hosted on the UBC VM service, and webfaction deleted from the proposal.
+(Sealinkd)
+
+Sent email to Cary for help w/ CWL sign-up PIN.
+
+Started moving ocean machine configuration files in my dotfiles repo.
+
+Participated in SWC workout session on make lead by Susan.
+
+Sent email to Cindy & Kyle re using REBUILD_NEMO.
+(GEOTRACES)
+
+
