@@ -564,7 +564,7 @@ Updated XIOS repo on orcinus and tried a build; fails with 1 unresolved symbol:
 /global/software/lib64/intel/ncsa-tools/mpi/lib/libnetcdf.so: undefined reference to `H5Pset_fapl_mpiposix'
 (MEOPAR)
 
-Offerred Nordion site visit next week to try to resolve production server /backup partition issue.
+Offered Nordion site visit next week to try to resolve production server /backup partition issue.
 (Nordion)
 
 Received provisional approval of SealinkD proposal from UBC Procurement via Penny@SCARP; Procurement wants the finished app to be hosted on the UBC VM service, and webfaction deleted from the proposal.
@@ -580,3 +580,47 @@ Sent email to Cindy & Kyle re using REBUILD_NEMO.
 (GEOTRACES)
 
 
+Fri 28-Aug-2015
+^^^^^^^^^^^^^^^
+
+Email w/ Stephanie re: proposal amendments, Bitbucket account for her, and in-progress deployment on webfaction.
+Experimented with static page content on About page.
+Emailed team re: setting up Bitbucket accounts and sending me their userids so that I can added them to the SealinkD team.
+Did skeleton implementation of sign-in re: visibility of maps/charts/profiles nav tabs.
+Implemented alternative nav layout w/ About drop-down & maps/charts/profiles as navbar items instead of nav tabs.
+Implemented alternative layout of About items as a single page.
+Added CJ to SealinkD team on Bitbucket.
+(sealinkd)
+
+getNeahBay_ssh worker failed to produce an observations file for forecast2 and for nowcast; let the former pass, but symlinked forecast file as observations for nowcast and restarted automation via upload_forcing worker.
+(MEOPAR)
+
+
+Sat 29-Aug-2015
+^^^^^^^^^^^^^^^
+
+Added placeholder content to Research, People, Contact & Privacy Policy pages & sections of alternative About page.
+(sealinkd)
+
+Researched WorkSafeBC coverage; not required for 43ravens as sole-proprietorship, but eligible for voluntary POP.
+
+getNeahBay_ssh worker failed to produce an observations file for forecast2 and for nowcast; let the former pass, but symlinked forecast file as observations for nowcast and restarted automation via upload_forcing worker.
+Resolved issue #22 re: handling missing ssh obs files; upload_forcing and upload_all_files workers create symlinks to corresponding fcst/ file if obs is missing, and get_NeahBay_ssh worker deletes obs/ file before writing in order to avoid overwriting fcst/ file if observations become available.
+(MEOPAR)
+
+Telcon w/ Jerry re: resolving production server /backup partition issue, and him contracting work to 43ravens.
+(Nordion)
+
+
+Sun 30-Aug-2015
+^^^^^^^^^^^^^^^
+
+Added Tugce to SealinkD team on Bitbucket.
+Revised proposal re: using UBC IT VM Service as final hosting service and sent it to Stephanie for approval.
+(sealinkd)
+
+Sent email to westgrid support requesting Python 3.4 be installed on jasper.
+Sent email to Roman re: libnetcdf.so undefined symbol in XIOS build on orcinus.
+Started work on creating an arch file and building NEMO-3.6 on orcinus.
+Continued work on SalishSeaCmd-3.6 branch; added more unit tests & docstrings, and continued propagating the --nemo3.4 command-line option through the prepare module.
+(MEOPAR)
