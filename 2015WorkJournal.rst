@@ -626,14 +626,23 @@ Continued work on SalishSeaCmd-3.6 branch; added more unit tests & docstrings, a
 (MEOPAR)
 
 
-Thu 3-Sep-2015
-^^^^^^^^^^^^^^
+September
+=========
 
-Started setting up web site for EOAS workshop and sent email to admin to get it listed on the swc site.
-10:00 to 12:30
+Week 36
+-------
+
+Mon 31-Aug-2015
+^^^^^^^^^^^^^^^
+
+Email from Stephanie confirmed her acceptance of the revised proposal, and my plan to do an initial deployment on webfaction.
+Set up sealinkd.43ravens.ca on webfaction, thrashed through getting the app deployed in a Python 3.4 and mod_wsgi environment.
+Wrote email re: tomorrow's mtg w/ the SCARP team.
+(sealinkd)
+
+Met w/ Nancy & Karina to plan the EOAS workshop.
 (SWC)
 
-Continued work on SalishSeaCmd-3.6 branch; added more unit tests & docstrings, and continued propagating the --nemo3.4 command-line option through the prepare module.
-Tested Python 3.4 on jasper; successfully installed SalishSeaCmd v2.0dev0.
-13:00 to
-(MEOPAR)
+Attended seminar by Aranildo Lima about art, science, and the prog rock album that he is developing based on the climate change literature.
+
+Melanie returned to EOAS after the GEOTRACES cruise.
