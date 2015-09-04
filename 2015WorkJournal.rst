@@ -624,3 +624,16 @@ Sent email to Roman re: libnetcdf.so undefined symbol in XIOS build on orcinus.
 Started work on creating an arch file and building NEMO-3.6 on orcinus.
 Continued work on SalishSeaCmd-3.6 branch; added more unit tests & docstrings, and continued propagating the --nemo3.4 command-line option through the prepare module.
 (MEOPAR)
+
+
+Thu 3-Sep-2015
+^^^^^^^^^^^^^^
+
+Started setting up web site for EOAS workshop and sent email to admin to get it listed on the swc site.
+10:00 to 12:30
+(SWC)
+
+Continued work on SalishSeaCmd-3.6 branch; added more unit tests & docstrings, and continued propagating the --nemo3.4 command-line option through the prepare module.
+Tested Python 3.4 on jasper; successfully installed SalishSeaCmd v2.0dev0.
+13:00 to
+(MEOPAR)
