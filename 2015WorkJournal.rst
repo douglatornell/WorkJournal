@@ -646,3 +646,31 @@ Met w/ Nancy & Karina to plan the EOAS workshop.
 Attended seminar by Aranildo Lima about art, science, and the prog rock album that he is developing based on the climate change literature.
 
 Melanie returned to EOAS after the GEOTRACES cruise.
+
+Tue 1-Sep-2015
+^^^^^^^^^^^^^^
+
+Prep for mtg w/ SCARP group.
+Met w/ UBC SCARP team (Jackie, CJ, Tugce & Michelle); finalized navigation & page layouts, and made decisions about user mgmt data model and sign-up process.
+(sealinkd)
+
+Worked on MITgcm build process on orcinus, and docs for it.
+(Canyons)
+
+Salish Sea team meeting; see Google Drive Drawing.
+(MEOPAR)
+
+
+Wed 2-Sep-2015
+^^^^^^^^^^^^^^
+
+Buffed MITgcm on orcinus build docs, and passed the process over to Karina for testing.
+(canyons)
+
+Site visit to Nordion to recover from isoinfo production server boot failure due to corruption of the /backup filesystem.
+Discussed possible service contract arrangement between 43ravens and Nordion with Jerry.
+(Nordion)
+
+Refactored navigation and page layouts to reflect decisions taken at 1-Sep meeting with UBC SCARP team.
+Implemented skeleton of Start page that initializes the maps/charts/profiles flow for signed in users.
+(sealinkd)
