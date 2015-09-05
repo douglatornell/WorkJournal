@@ -690,3 +690,9 @@ Continued work on SalishSeaCmd-3.6 branch; added more unit tests & docstrings, a
 Tested Python 3.4 on jasper; successfully installed SalishSeaCmd v2.0dev0.
 13:00 to
 (MEOPAR)
+
+
+Fri 4-Sep-2015
+^^^^^^^^^^^^^^
+
+Kayaking at Deep River.
