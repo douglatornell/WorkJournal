@@ -674,3 +674,19 @@ Discussed possible service contract arrangement between 43ravens and Nordion wit
 Refactored navigation and page layouts to reflect decisions taken at 1-Sep meeting with UBC SCARP team.
 Implemented skeleton of Start page that initializes the maps/charts/profiles flow for signed in users.
 (sealinkd)
+
+
+Thu 3-Sep-2015
+^^^^^^^^^^^^^^
+
+Created invoice for 2-Sep site visit to Nordion and emailed it to Jerry.
+(Nordion)
+
+Started setting up web site for EOAS workshop and sent email to admin to get it listed on the swc site.
+10:00 to 12:30
+(SWC)
+
+Continued work on SalishSeaCmd-3.6 branch; added more unit tests & docstrings, and continued propagating the --nemo3.4 command-line option through the prepare module.
+Tested Python 3.4 on jasper; successfully installed SalishSeaCmd v2.0dev0.
+13:00 to
+(MEOPAR)
