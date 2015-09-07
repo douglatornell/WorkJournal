@@ -695,4 +695,21 @@ Tested Python 3.4 on jasper; successfully installed SalishSeaCmd v2.0dev0.
 Fri 4-Sep-2015
 ^^^^^^^^^^^^^^
 
-Kayaking at Deep River.
+Kayaking at Deep Cove.
+
+
+Sat 5-Sep-2015
+^^^^^^^^^^^^^^
+
+Pulled in Jackie's Research page content, cleaned it up, added images that she provided, and deployed to demo site.
+Updated issues on Bitbucket re: 1-Sep mtg decision to put About, Research, Contact, and Privacy Policy content on separate pages.
+(sealinkd)
+
+Disabled ONC ADCP observation download cron job pending testing and installation of matlab script from Marlene for new deployments.
+Continued work on SalishSeaCmd-3.6 branch; added more unit tests & docstrings, and continued propagating the --nemo3.4 command-line option through the prepare module.(MEOPAR)
+
+
+Sun 6-Sep-2015
+^^^^^^^^^^^^^^
+
+Hiking in Golden Ears Park - Allouette Mtn trail.
