@@ -713,3 +713,18 @@ Sun 6-Sep-2015
 ^^^^^^^^^^^^^^
 
 Hiking in Golden Ears Park - Allouette Mtn trail.
+
+Week 37
+-------
+
+Mon 7-Sep-2015
+^^^^^^^^^^^^^^
+
+Labour Day
+
+Learned more about Darktable imports by playing with images from Sylus 6020 camera; seems best to copy them from SD to disk via SD reader on kudu rather than importing from camera.
+
+Learned of Hai Yun's lost prop; worked on logistics of getting a new prop to them.
+
+Did iniital implementations of skeletons of Maps and Analysis pages.
+(sealinkd)
