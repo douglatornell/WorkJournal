@@ -657,6 +657,9 @@ Met w/ UBC SCARP team (Jackie, CJ, Tugce & Michelle); finalized navigation & pag
 Worked on MITgcm build process on orcinus, and docs for it.
 (Canyons)
 
+Met w/ Nancy & Karina to plan 22-25 Sep EOAS workshop.
+(SWC)
+
 Salish Sea team meeting; see Google Drive Drawing.
 (MEOPAR)
 
@@ -683,7 +686,6 @@ Created invoice for 2-Sep site visit to Nordion and emailed it to Jerry.
 (Nordion)
 
 Started setting up web site for EOAS workshop and sent email to admin to get it listed on the swc site.
-10:00 to 12:30
 (SWC)
 
 Continued work on SalishSeaCmd-3.6 branch; added more unit tests & docstrings, and continued propagating the --nemo3.4 command-line option through the prepare module.
@@ -706,7 +708,8 @@ Updated issues on Bitbucket re: 1-Sep mtg decision to put About, Research, Conta
 (sealinkd)
 
 Disabled ONC ADCP observation download cron job pending testing and installation of matlab script from Marlene for new deployments.
-Continued work on SalishSeaCmd-3.6 branch; added more unit tests & docstrings, and continued propagating the --nemo3.4 command-line option through the prepare module.(MEOPAR)
+Continued work on SalishSeaCmd-3.6 branch; added more unit tests & docstrings, and continued propagating the --nemo3.4 command-line option through the prepare module.
+(MEOPAR)
 
 
 Sun 6-Sep-2015
@@ -728,3 +731,17 @@ Learned of Hai Yun's lost prop; worked on logistics of getting a new prop to the
 
 Did iniital implementations of skeletons of Maps and Analysis pages.
 (sealinkd)
+
+
+Tue 8-Sep-2015
+^^^^^^^^^^^^^^
+
+Did code and docstring gardening on research_ferries.py module; started with autopep8 and docformatter, then did manual tweaks; halted when I realized that the functions contain hard-coded paths that need to be changed to args.
+(MEOPAR)
+
+Continued tuning up the workshop site.
+Met w/ Nancy & Karina to continute workshop. Observed by Katie.
+(SWC)
+
+Salish Sea team meeting; see Google Drive Drawing. Observed by Katie.
+(MEOPAR)
