@@ -745,3 +745,21 @@ Met w/ Nancy & Karina to continute workshop. Observed by Katie.
 
 Salish Sea team meeting; see Google Drive Drawing. Observed by Katie.
 (MEOPAR)
+
+
+Thu 10-Sep-2015
+^^^^^^^^^^^^^^^
+
+Finished prep for workout session about pdb, and delivered it with lots of crappy bugs :-(
+(SWC)
+
+forecast2 result download failed due to disk quota exceeded on ocean/sallen/;
+restarted manually mid-afternoon after Susan and Nancy freed up some space.
+Manually rebuilt results files from botched forecast/24aug15/ run, then manually re-ran the rest of the post-processing steps on smelt.
+Manually ran make_plots and make_site_page workers for nowcast/23jul15 and nowcast/15jun15 results because the plots and pages somehow didn't get made.
+(MEOPAR)
+
+Got buildbot and tracd running again on new bjossa hardware.
+(SOG)
+
+Created slides for next week's Phys Ocgy Research Carnival.
