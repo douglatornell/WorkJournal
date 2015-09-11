@@ -774,3 +774,21 @@ Got buildbot and tracd running again on new bjossa hardware.
 (SOG)
 
 Created slides for next week's Phys Ocgy Research Carnival.
+
+
+Fri 11-Sep-2015
+^^^^^^^^^^^^^^^
+
+Sent slides for next week's Phys Ocgy Research Carnival to Jie.
+
+Investigated forecast2/10sep15 run failure this morning; appears to have been caused by in appropriate clearing of the nowcast_mgr checklist when I downloaded the forecast2/09sep15 results "live" yesterday.
+Looked at research_ferries module wrt refactoring hard-coded paths out to arguments and realized that deeper refactoring is necessary; bounced to Susan the decision about whether I should do it, or work w/ Jie to get it done.
+Continued work on SalishSeaCmd-3.6 branch; added more unit tests & docstrings, and continued propagating the --nemo3.4 command-line option through the prepare module; salishsea prepare command is ready for testing by Susan and Nancy.
+(MEOPAR)
+
+Investigated buildbot failures since re-start of bjossa; R3 baseline regression case is failing due to a dependency issue for matplotlib (presumably due to snapper's upgrade to Ubuntu 14.04 LTS), and SOGCommand-coho is failing due to package installation issues.
+Sent email to Susan and Ben to determine priority for fixing those issues.
+(SOG)
+
+Sent email re: resolution of mess between ipdb install and ipython-notebook package for yesterday's workout.
+(SWC)
