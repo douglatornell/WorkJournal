@@ -747,6 +747,17 @@ Salish Sea team meeting; see Google Drive Drawing. Observed by Katie.
 (MEOPAR)
 
 
+Wed 9-Sep-2015
+^^^^^^^^^^^^^^
+
+Implemented swapping of maps between main panel and sidebar on Maps page skeleton.
+Added comparison community links to Analysis page skeleton.
+Did initial implementation of Compare and Profiles page skeletons.
+(sealinkd)
+
+Telcon w/ Nathan re: coastal flooding web app proposal.
+
+
 Thu 10-Sep-2015
 ^^^^^^^^^^^^^^^
 
