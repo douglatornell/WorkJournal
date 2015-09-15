@@ -795,6 +795,20 @@ Sent email re: resolution of mess between ipdb install and ipython-notebook pack
 (SWC)
 
 
+Sat 12-Sep-2015
+^^^^^^^^^^^^^^^
+
+Fixed specificity of jQuery selectors for navbar items re: enabling maps/analysis/compare/profiles items and updating their anchor hrefs.
+(sealinkd)
+
+Attended VanPyDay; talked w/ Jordan Dawe, Michelle Bannister, Brett & Andrea Cannon, Damien from Centre for Disease Control, Russell Keith-Magee, and other.
+
+Tested use of conda environments on jasper and orcinus.
+SalishSeaCmd-3.6 is usable on jasper via conda environment, the the hg interface a little fragile.
+Started updating SalishSeaCmd docs, and started writing a Bitbucket snippet about conda environment setup for testing on jasper.
+(MEOPAR)
+
+
 Week 38
 -------
 
