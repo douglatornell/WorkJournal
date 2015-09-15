@@ -717,6 +717,7 @@ Sun 6-Sep-2015
 
 Hiking in Golden Ears Park - Allouette Mtn trail.
 
+
 Week 37
 -------
 
@@ -792,3 +793,24 @@ Sent email to Susan and Ben to determine priority for fixing those issues.
 
 Sent email re: resolution of mess between ipdb install and ipython-notebook package for yesterday's workout.
 (SWC)
+
+
+Week 38
+-------
+
+Mon 14-Sep-2015
+^^^^^^^^^^^^^^^
+
+ESB power outage.
+
+Pinged Stephanie & Penny about atatus of SealinkD project agreement and got reply that UBC Procurement are working on it.
+(sealinkd)
+
+Mostly finished tuning up the workshop site, and the setup check scripts.
+(SWC)
+
+Participated in Phys Ocgy Reseach Carnival to kick off this term's seminars.
+
+Backfilled 11Sep GEM2.5 research forecast download.
+Added functionality to salishsea prepare command to update namelist with MPI decomposition specified in the YAML run description file.
+(MEOPAR)
