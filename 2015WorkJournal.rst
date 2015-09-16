@@ -741,7 +741,7 @@ Did code and docstring gardening on research_ferries.py module; started with aut
 (MEOPAR)
 
 Continued tuning up the workshop site.
-Met w/ Nancy & Karina to continute workshop. Observed by Katie.
+Met w/ Nancy & Karina to continue planning workshop. Observed by Katie.
 (SWC)
 
 Salish Sea team meeting; see Google Drive Drawing. Observed by Katie.
@@ -809,6 +809,12 @@ Started updating SalishSeaCmd docs, and started writing a Bitbucket snippet abou
 (MEOPAR)
 
 
+Sun 13-Sep-2015
+^^^^^^^^^^^^^^^
+
+Walked in Serpentine River wildlife area, and Burns Bog nature preserve.
+
+
 Week 38
 -------
 
@@ -827,4 +833,21 @@ Participated in Phys Ocgy Reseach Carnival to kick off this term's seminars.
 
 Backfilled 11Sep GEM2.5 research forecast download.
 Added functionality to salishsea prepare command to update namelist with MPI decomposition specified in the YAML run description file.
+(MEOPAR)
+
+
+Tue 15-Sep-2015
+^^^^^^^^^^^^^^^
+
+Prep for mtg w/ SCARP group.
+Met w/ UBC SCARP team (Jackie, Tugce & Michelle); reviewed and refined navigation & page layouts.
+(sealinkd)
+
+Met w/ Nancy & Karina to continue planning workshop.
+(SWC)
+
+Explored DFO water level web service to get real-time tide gauge data for various Salish Sea sites; SOAP.
+Started to look at adding --nemo3.4 command-line option to salishsea run and make it work for NEMO-3.6.
+Salish Sea team meeting; see Google Drive Drawing.
+Helped Jie get new make_readme.py instances working, and helped her get ssh keys set up properly.
 (MEOPAR)
