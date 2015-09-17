@@ -851,3 +851,20 @@ Started to look at adding --nemo3.4 command-line option to salishsea run and mak
 Salish Sea team meeting; see Google Drive Drawing.
 Helped Jie get new make_readme.py instances working, and helped her get ssh keys set up properly.
 (MEOPAR)
+
+
+Wed 16-Sep-2015
+^^^^^^^^^^^^^^^
+
+Continued work on SalishSeaCmd-3.6 branch:
+Fixed failing unit tests for salishsea prepare re: addition of MPI decomposition handling.
+Added unit tests & docstrings, started propagating the --nemo3.4 command-line option through the run module, and worked toward a better API structure for the run module.
+(MEOPAR)
+
+Booked mtg rm for final workshop prep mtg, and projector/MacBook for workshop.
+Closed 2 open pull requests in SWC hg-novice repo and pulled those changes into my working fork, and the EOAS workshop copy.
+Refactored 01-backup section of hg-novice lesson into 8 sections based on content from the git-novice lesson and my MEOPAR ASM workshop; create PR #22 in swcarpentry/hg-novice for v5.4 w/ the result of that work.
+Started refactoring the 02-collab section.
+(SWC)
+
+Got email from MEOPeer Patrick Duplessis @dal re: using MEOPAR ASM version control workshop site as basis for a tutorial that he is creating.
