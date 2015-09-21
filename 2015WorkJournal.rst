@@ -858,7 +858,7 @@ Wed 16-Sep-2015
 
 Continued work on SalishSeaCmd-3.6 branch:
 Fixed failing unit tests for salishsea prepare re: addition of MPI decomposition handling.
-Added unit tests & docstrings, started propagating the --nemo3.4 command-line option through the run module, and worked toward a better API structure for the run module.
+Added unit tests & docstrings, started propagating the --nemo3.4 command-line option through the run plug-in module, and worked toward a better API structure for the run module.
 (MEOPAR)
 
 Booked mtg rm for final workshop prep mtg, and projector/MacBook for workshop.
@@ -868,3 +868,35 @@ Started refactoring the 02-collab section.
 (SWC)
 
 Got email from MEOPeer Patrick Duplessis @dal re: using MEOPAR ASM version control workshop site as basis for a tutorial that he is creating.
+
+
+Thu 17-Sep-2015
+^^^^^^^^^^^^^^^
+
+Tried to add Stephanie to Bitbucket Sealinkd team and discovered that it is limited to 5 collaborators, probably because it was created from my non-academic account.
+(sealinkd)
+
+
+Sat 19-Sep-2015
+^^^^^^^^^^^^^^^
+
+Continued work on SalishSeaCmd-3.6 branch:
+Improved docstrings in the run plug-in module.
+Wrote unit tests for run plug-in and got number of processors from run description file instead of from namelist.
+(MEOPAR)
+
+
+Sun 20-Sep-2015
+^^^^^^^^^^^^^^^
+
+Continued work on SalishSeaCmd-3.6 branch:
+Changed nodes & ppn calculation for jasper to be based on number of processors instead of being read from run description.
+Started testing run plug-in on jasper.
+(MEOPAR)
+
+Helped Nancy try to debug a Unicode issue in the shell lesson build process.
+Created slide deck for workshop introductory remarks.
+Had productive discussion in hg-novice PR #22 w/ John Corless re: adding reference links to lesson index page.
+(SWC)
+
+Discovered that tom lacks a TeX installation; downloaded MacTeX-2015, and installed it.
