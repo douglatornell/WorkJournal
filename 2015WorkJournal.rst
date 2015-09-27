@@ -870,6 +870,14 @@ Started refactoring the 02-collab section.
 Got email from MEOPeer Patrick Duplessis @dal re: using MEOPAR ASM version control workshop site as basis for a tutorial that he is creating.
 
 
+Fri 18-Sep-2015
+^^^^^^^^^^^^^^^
+
+Finished refactoring the 02-collab section of the hg-novice lesson to the extent that needs to be done for next week's workshop; same for 03-confict, and 04-open sections.
+Created PR in Python lesson repo to add command reminders page & docs links.
+(SWC)
+
+
 Thu 17-Sep-2015
 ^^^^^^^^^^^^^^^
 
