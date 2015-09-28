@@ -908,3 +908,34 @@ Had productive discussion in hg-novice PR #22 w/ John Corless re: adding referen
 (SWC)
 
 Discovered that tom lacks a TeX installation; downloaded MacTeX-2015, and installed it.
+
+
+Week 39
+-------
+
+Mon 21-Sep-2015
+^^^^^^^^^^^^^^^
+
+Re-organized office furniture to make way for locking 2-drawer cabinet.
+
+Continued testing salishsea run plug-in on jasper.
+Tried to sort out module load commands on jasper for Python 3; PYTHONPATH seems to consistently end up with a bogus 3.4/2.7/site-packages path, but it is unclear if that is a problem.
+(MEOPAR)
+
+Added prompts & exits page to shell lesson.
+Buffed hg slides for remote repos, collaboration, merging & conflicts.
+Met w/ helpers for briefing, Nancy & Karina for final prep.
+(SWC)
+
+
+Fri 25-Sep-2015
+^^^^^^^^^^^^^^^
+
+Day 4 of EOAS workshop; Nancy taught Python functions, I taught tracebacks and exceptions, and Karina taught Python command-line scripts.
+(SWC)
+
+nowcast results download failed due to full /data/ partition on salish; got some space cleared and nowcast back in operation later in the afternoon.
+Met w/ Roman re: building XIOS on orcinus; convinced him that libnetcdf.so needs to be re-built to deal with a symbol that was removed from the HDF5 lirbary.
+(MEOPAR)
+
+Last Friday of the Month Club :-)
