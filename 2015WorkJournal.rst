@@ -873,7 +873,7 @@ Got email from MEOPeer Patrick Duplessis @dal re: using MEOPAR ASM version contr
 Fri 18-Sep-2015
 ^^^^^^^^^^^^^^^
 
-Finished refactoring the 02-collab section of the hg-novice lesson to the extent that needs to be done for next week's workshop; same for 03-confict, and 04-open sections.
+Finished refactoring the 02-collab section of the hg-novice lesson to the extent that needs to be done for next week's workshop; same for 03-conflict, and 04-open sections.
 Created PR in Python lesson repo to add command reminders page & docs links.
 (SWC)
 
