@@ -928,6 +928,13 @@ Met w/ helpers for briefing, Nancy & Karina for final prep.
 (SWC)
 
 
+Thu 24-Sep-2015
+^^^^^^^^^^^^^^^
+
+Received PO from UBC for SealinkD app project.
+(sealinkd)
+
+
 Fri 25-Sep-2015
 ^^^^^^^^^^^^^^^
 
@@ -939,3 +946,42 @@ Met w/ Roman re: building XIOS on orcinus; convinced him that libnetcdf.so needs
 (MEOPAR)
 
 Last Friday of the Month Club :-)
+
+
+Sat 26-Sep-2015
+^^^^^^^^^^^^^^^
+
+Craft brewery bike crawl for Keith's 60th birthday.
+
+
+Sun 27-Sep-2015
+^^^^^^^^^^^^^^^
+
+Continued working getting salishsea run to work for NEMO-3.6 runs on salish and jasper; successful to the combine stage where we now have to deal with single tile sub-domain files that have _0000.nc endings.
+(MEOPAR)
+
+
+Week 40
+-------
+
+Mon 28-Sep-2015
+^^^^^^^^^^^^^^^
+
+Worked on items that arose from 15Sep2015 mtg w/ UBC SCARP group:
+* buffed Research page layout
+* added Help page to app & nav, and created skeleton content & layout
+* started implementation of flow links on HSVI pages to guide users through basic flow
+Received HVSI data spreadsheet from Jackie.
+Agreed with Jackie to postpone the next review/feedback mtg until next week.
+(sealinkd)
+
+Phys Ocgy seminar by Ben S on his glider adventures and micro-scale turbulence in the Arctic.
+
+Ordered Lemur from System 76.
+
+Drafted response to Nathan's inundation proposal & estimate request for a web app.
+
+Researched whether or not NCO could be used to combine per-processor NEMO output files into whole domain results files; not easily.
+Wrote new tools docs about `ncks -4 -L4` command to apply variable -level LZ compression to NEMO output files.
+Discussed setup of skookum server w/ Charles; decided to use virtual hosts for DAP service and salishsea site rather than VMs so that resources are used more flexibly.
+(MEOPAR)
