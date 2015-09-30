@@ -984,4 +984,24 @@ Drafted response to Nathan's inundation proposal & estimate request for a web ap
 Researched whether or not NCO could be used to combine per-processor NEMO output files into whole domain results files; not easily.
 Wrote new tools docs about `ncks -4 -L4` command to apply variable -level LZ compression to NEMO output files.
 Discussed setup of skookum server w/ Charles; decided to use virtual hosts for DAP service and salishsea site rather than VMs so that resources are used more flexibly.
+Discussed nowcast run times on west.cloud and Susan's idea to make calculation of run times less labourious.
 (MEOPAR)
+
+
+Tue 29-Sep-2015
+^^^^^^^^^^^^^^^
+
+Pulled updates on to west.cloud that change namelist.dynamics rn_avm0 value to 1e-5; tagged SS-run-sets repo to make the change.
+Explored logging strategy for nowcast run time monitoring.
+Introduced Nancy to py.test in the context of her nowcast.analyze.depth_average() function.
+Salish Sea team meeting; see Google Drive Drawing.
+ocean downtime caused nowcast 18 weather download to fail; subsequent issues with ocean mount on salish caused 00 and 06 downloads to also fail.
+(MEOPAR)
+
+Sent response to Nathan's inundation proposal & estimate request for a web app.
+
+Prepared for and participated in post-workshop debrief.
+(SWC)
+
+Next review/feedback mtg tentatively set for Fri 9-Oct.
+(sealinkd)
