@@ -1005,3 +1005,45 @@ Prepared for and participated in post-workshop debrief.
 
 Next review/feedback mtg tentatively set for Fri 9-Oct.
 (sealinkd)
+
+
+Wed 30-Sep-2015
+^^^^^^^^^^^^^^^
+
+Got nowcast system running again after yesterday's ocean mount issues on salish.
+Researched machine readable logging & pandas for nowcast performance monitoring.
+(MEOPAR)
+
+Emailed Lazy Gourmet to request that they put their own phone number on their Facebook page instead of ours.
+
+Noticed that Digital Ocean has added a cloud data centre in Toronto.
+
+Worked on items that arose from 15Sep2015 mtg w/ UBC SCARP group:
+* finished implementation of flow links on HSVI pages to guide users through basic flow
+* added command to update deployment on webfaction to Makefile
+* refactored routes map into 3 functions for readability
+* refactored views into separate modules for info pages and HVSI pages
+* refactored Analysis page to use sidebar layout similar to Maps page
+* changed Anaysis page to use selector instead of links for comparison community choice
+* improved handling of reference & comparison communities in select elements on Compare page
+* created pre-compare page that is enabled when reference community is selected and allows user to choose comparison community
+Changed generation of comparison community select options to use XHR so that selected reference community is always excluded from choices for comparison community.
+(sealinkd)
+
+Cleaned up Sublime Text settings files for Ubuntu systems in dotfiles repo; made them strictly machine specific.
+
+
+Thu 1-Oct-2015
+^^^^^^^^^^^^^^
+
+Moved NEMO results other than nowcast from /data/ to /ocean/.
+Confirmed that pandas.read_json() exists.
+(MEOPAR)
+
+Investigated UBC IT virtual server setup request form.
+Added UBC and MEOPAR logos; way too much messing around with responsive CSS.
+Added page footer; more CSS thrashing.
+Sent email to UBC SCARP team re: completion of app skeleton.
+Started playing with Postgres; created db and admin use for sealinkd on webfaction, and installed pgadmin on kudu.
+Downloaded ubuntu/trusty64 box for vagrant and started experimenting with vagrant.
+(sealinkd)
