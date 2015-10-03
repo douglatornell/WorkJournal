@@ -1047,3 +1047,22 @@ Sent email to UBC SCARP team re: completion of app skeleton.
 Started playing with Postgres; created db and admin use for sealinkd on webfaction, and installed pgadmin on kudu.
 Downloaded ubuntu/trusty64 box for vagrant and started experimenting with vagrant.
 (sealinkd)
+
+
+Fri 2-Oct-2015
+^^^^^^^^^^^^^^
+
+Picked up key for EOSM door from loading dock, and returned Rob's Waterhole office key.
+
+Met w/ Klara to help her dort out Bitbucket auth issues.
+
+Prepared to get automated ONC ADCP data downloads working again.
+Put 15May_mod and new 2Sep scripts under version control on tom.
+Manually merged Muriel's and Rich's changes, and my email address and ONC user id into 2-Sep getSogAdcpData.m script from Marlene@ONC.
+Discussed w/ Rich next steps to get ADCP download automation working again; need to append latest deployment data to histories in GETDATA_fun.m and GETDEPL_fun.m, and use the former to download all of the raw data since the deployments.
+Sent email to Miguel Castrillo at the Barcelona Supercomputing Centre re: getting their NEMO code improvements re: message packing.
+Updated nowcast dev pkg list & docs.
+Worked on nowcast run time monitoring via JSON logging; have to back-port 2 modules in the driftwood package from Python 3 to be able to use it.
+Figured out how to read JSON log records into a pandas dataframe.
+Changed nowcast mgr so that checklist is no longer logged each time that it is updated; also added a link to the checklist YAML dump to the monitoring page.
+(MEOPAR)
