@@ -1102,3 +1102,18 @@ Started downloading backlog of VENUS ADCP data since instrument maintenance at e
 Salish Sea team meeting; see Google Drive Drawing.
 Confirmed that message packing improvements in NEMO-3.6 are present in our codebase.
 (MEOPAR)
+
+
+Sat 3-OCt-2015
+^^^^^^^^^^^^^^
+
+Added daily logging of nowcast mgr checklist just before it is cleared; log files are retained for 7 days.
+Succeeded (with much hacking) in building XIOS and NEMO-3.6 on orcinus with new netCDF and HDF5 libraries that Roman built.
+Created orcnius_build.sh scripts for NEMO-3.6 code and REBUILD_NEMO tool to deal with intel module shell level issue.
+(MEOPAR)
+
+
+Sun 4-Oct-2015
+^^^^^^^^^^^^^^
+
+Rando AGM; rode to/from w/ Susan B and Keith.
