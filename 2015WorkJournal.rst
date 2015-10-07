@@ -1054,7 +1054,7 @@ Fri 2-Oct-2015
 
 Picked up key for EOSM door from loading dock, and returned Rob's Waterhole office key.
 
-Met w/ Klara to help her dort out Bitbucket auth issues.
+Met w/ Klara to help her sort out Bitbucket auth issues.
 
 Prepared to get automated ONC ADCP data downloads working again.
 Put 15May_mod and new 2Sep scripts under version control on tom.
@@ -1065,4 +1065,40 @@ Updated nowcast dev pkg list & docs.
 Worked on nowcast run time monitoring via JSON logging; have to back-port 2 modules in the driftwood package from Python 3 to be able to use it.
 Figured out how to read JSON log records into a pandas dataframe.
 Changed nowcast mgr so that checklist is no longer logged each time that it is updated; also added a link to the checklist YAML dump to the monitoring page.
+(MEOPAR)
+
+Lemur shipped.
+
+
+October
+=======
+
+Week 41
+-------
+
+Mon 5-Oct-2015
+^^^^^^^^^^^^^^
+
+Lemur is in customs hold.
+
+Updated NEMO-3.6 migration docs with notes about building XIOS and NEMO-3.6 on orcinus.
+Worked on hacking envvars to be able to run NEMO-3.6 on orcinus and update Roman on our status.
+Continued email conversation w/ Miguel@Barcelona re: NEMO-3.6 message packing.
+Implemented JSON logging in nowcast, but it failed when the 00 weather forecast started, so rolled it back.
+Ported SalishSeaTools package (including nowcast) to Python 3 in tools repo nowcast-py3 branch.
+(MEOPAR)
+
+Attended Phys Ocgy seminar about Burns Bog carbon cycle measurements.
+
+
+Tue 6-OCt-2015
+^^^^^^^^^^^^^^
+
+Attended AAPS orientation session.
+
+Ported SalishSeaTools package test suite to Python 3 and wrote docs about the minimal changes that the porting effort required.
+Fixed the bug that caused JSON nowcast logging to fail, and redeployed it.
+Started downloading backlog of VENUS ADCP data since instrument maintenance at end of Aug.
+Salish Sea team meeting; see Google Drive Drawing.
+Confirmed that message packing improvements in NEMO-3.6 are present in our codebase.
 (MEOPAR)
