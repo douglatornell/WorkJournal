@@ -1118,6 +1118,38 @@ Salish Sea team meeting; see Google Drive Drawing.
 Confirmed that message packing improvements in NEMO-3.6 are present in our codebase.
 (MEOPAR)
 
+Missed UPS's 1st delivery attempt of Lemur.
+
+
+Wed 7-Oct-2015
+^^^^^^^^^^^^^^
+
+Fixed bug in grib_to_netcdf worker that stopped automation between 06 weather download and forecast2 run.
+(MEOPAR)
+
+Sent email to it@ubc with questions about virtual server service request form.
+Updated docs about initial temporary deployment on webfaction.
+Started adding vagrant to dev environment to mirror UBC virtual server environment.
+Got app running on vagrant VM proxied by nginx.
+Started adding unit test suite.
+(sealinkd)
+
+UPS claimed a 2nd delivery attempt of Lemur that didn't happen; called and complained.
+
+Thu 8-Oct-2015
+^^^^^^^^^^^^^^
+
+Continued downloading backlog of VENUS ADCP data since instrument maintenance at end of Aug; each 6 day download takes about 1 hr; finished east & central nodes.
+Wrote email re: moving tools repo to Python 3.
+(MEOPAR)
+
+Did first iteration on data model for HVSI and user mgmt; see sealinkdERD.svg.
+Figured out postgresql password auth and remote access.
+(sealinkd)
+
+Lemur delivered.
+Started setting it up; see Google Drive doc.
+
 
 Fri 9-Oct-2015
 ^^^^^^^^^^^^^^
