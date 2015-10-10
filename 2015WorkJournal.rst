@@ -1070,6 +1070,21 @@ Changed nowcast mgr so that checklist is no longer logged each time that it is u
 Lemur shipped.
 
 
+Sat 3-Oct-2015
+^^^^^^^^^^^^^^
+
+Added daily logging of nowcast mgr checklist just before it is cleared; log files are retained for 7 days.
+Succeeded (with much hacking) in building XIOS and NEMO-3.6 on orcinus with new netCDF and HDF5 libraries that Roman built.
+Created orcnius_build.sh scripts for NEMO-3.6 code and REBUILD_NEMO tool to deal with intel module shell level issue.
+(MEOPAR)
+
+
+Sun 4-Oct-2015
+^^^^^^^^^^^^^^
+
+Rando AGM; rode to/from w/ Susan B and Keith.
+
+
 October
 =======
 
@@ -1091,7 +1106,7 @@ Ported SalishSeaTools package (including nowcast) to Python 3 in tools repo nowc
 Attended Phys Ocgy seminar about Burns Bog carbon cycle measurements.
 
 
-Tue 6-OCt-2015
+Tue 6-Oct-2015
 ^^^^^^^^^^^^^^
 
 Attended AAPS orientation session.
@@ -1104,16 +1119,13 @@ Confirmed that message packing improvements in NEMO-3.6 are present in our codeb
 (MEOPAR)
 
 
-Sat 3-OCt-2015
+Fri 9-Oct-2015
 ^^^^^^^^^^^^^^
 
-Added daily logging of nowcast mgr checklist just before it is cleared; log files are retained for 7 days.
-Succeeded (with much hacking) in building XIOS and NEMO-3.6 on orcinus with new netCDF and HDF5 libraries that Roman built.
-Created orcnius_build.sh scripts for NEMO-3.6 code and REBUILD_NEMO tool to deal with intel module shell level issue.
+Worked through ONC ADCP new deployment bootstrap snd tuning process with Rich.
+Closed and merged nowcast-py3 branch in tools repo to move us to Python 3.
+Helped Elise with mysteriously failing runs on salish; probaby a memory leak.
 (MEOPAR)
 
-
-Sun 4-Oct-2015
-^^^^^^^^^^^^^^
-
-Rando AGM; rode to/from w/ Susan B and Keith.
+Met w/ SCARP group; discussed app skeleton, hazard & action filtering, and data model.
+(sealinkd)
