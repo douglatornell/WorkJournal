@@ -823,7 +823,7 @@ Mon 14-Sep-2015
 
 ESB power outage.
 
-Pinged Stephanie & Penny about atatus of SealinkD project agreement and got reply that UBC Procurement are working on it.
+Pinged Stephanie & Penny about status of SealinkD project agreement and got reply that UBC Procurement are working on it.
 (sealinkd)
 
 Mostly finished tuning up the workshop site, and the setup check scripts.
@@ -870,6 +870,13 @@ Started refactoring the 02-collab section.
 Got email from MEOPeer Patrick Duplessis @dal re: using MEOPAR ASM version control workshop site as basis for a tutorial that he is creating.
 
 
+Thu 17-Sep-2015
+^^^^^^^^^^^^^^^
+
+Tried to add Stephanie to Bitbucket Sealinkd team and discovered that it is limited to 5 collaborators, probably because it was created from my non-academic account.
+(sealinkd)
+
+
 Fri 18-Sep-2015
 ^^^^^^^^^^^^^^^
 
@@ -877,11 +884,7 @@ Finished refactoring the 02-collab section of the hg-novice lesson to the extent
 Created PR in Python lesson repo to add command reminders page & docs links.
 (SWC)
 
-
-Thu 17-Sep-2015
-^^^^^^^^^^^^^^^
-
-Tried to add Stephanie to Bitbucket Sealinkd team and discovered that it is limited to 5 collaborators, probably because it was created from my non-academic account.
+Upgraded SealinkD Bitbucket team account to 10 private collaborators.
 (sealinkd)
 
 
@@ -1161,3 +1164,51 @@ Helped Elise with mysteriously failing runs on salish; probaby a memory leak.
 
 Met w/ SCARP group; discussed app skeleton, hazard & action filtering, and data model.
 (sealinkd)
+
+Continued setting up Lemur, now named niko.
+
+
+Sat 10-Oct-2015
+^^^^^^^^^^^^^^^
+
+Cycled to Parksville for Thanksgiving.
+
+Built dotfiles/ubuntu/niko/ based on kudu/ and symlinked files into place.
+
+Started development of 43ravens.ca web page.
+(43ravens)
+
+
+Sun 11-Oct-2015
+^^^^^^^^^^^^^^^
+
+Merged tools repo default branch into SalishSeaCmd-3.6 dev branch.
+Changed conda environment description for SalishSeaNowcast package to use Python 3.
+Changed salishsea combine sub-command to get number of MPI processors from run description file.
+Changed salishsea combine sub-command to handle NEMO-3.6 single tile results files that end in _0000.nc by renaming them without _0000, multi-tile results files that don't cover the entire domain (e.g. CODAR region) by not processing them, and full domain sets of tiles by processing them with REBUILD_NEMO.
+SalishSeaCmd-3.6 is ready for merge/release once I write some docs, but the beginnings of that work is on tom.
+Tried to merge tools repo default branch into nowcast-obj dev branch, but they have diverged too much.
+Ported nowcast-py3 changes into nowcast-obj branch.
+Changed zmq send/receive methods to work with Unicode strings for Python 3.
+Fixed unit tests that failed when test_nowcat_worker module was not tested in isolation.
+(MEOPAR)
+
+
+Week 42
+-------
+
+Mon 12-Oct-2015
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Thanksgiving
+
+Fixed nowcast mgr bug whereby JSON log files are being rotated every day instead of every 30 days.
+Consolidated JSON log files that have been generated to date.
+Tagged SalishSeaTools-2.0 re: port to Python 3.
+Dealt with nowcast failure in which west.cloud head node had lost some of its locale settings, causing salishsea gather to fail.
+Explored using cdo to combine NEMO output files; not much success.
+Discovered that results files from NEMO-3.6 run on salish with 3x5 MPI decomposition appear to be full width band across the domain (398 x ~60) rather than per-processor tiles as expected.
+(MEOPAR)
+
+Buffed 43ravens.ca web page and deployed it to webfaction.
+(43ravens)
