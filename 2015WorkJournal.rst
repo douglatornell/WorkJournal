@@ -1212,3 +1212,18 @@ Discovered that results files from NEMO-3.6 run on salish with 3x5 MPI decomposi
 
 Buffed 43ravens.ca web page and deployed it to webfaction.
 (43ravens)
+
+
+Wed 14-Oct-2015
+^^^^^^^^^^^^^^^
+
+Read 2015-2016 storm surge almanac published last night by Scott Tinis.
+(MEOPAR)
+
+Resubmitted questions re: UBC IT virtual server service via general IT support request form.
+Refactored vagrant provisioning script to make step modular, and to run app under sealinkd user; hoping that the new scripts will be close to usable for provisioning UBC VM.
+Improved Postgres provisioning automation & docs.
+Added connection to Postgress for app data persistence, including private credentials dance.
+(sealinkd)
+
+Updated vagrant package to 1.7.4 by installing from deb downloaded from launchpad (wily werewolf).
