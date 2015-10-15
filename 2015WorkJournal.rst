@@ -1214,6 +1214,18 @@ Buffed 43ravens.ca web page and deployed it to webfaction.
 (43ravens)
 
 
+Tue 13-Oct-2015
+^^^^^^^^^^^^^^^
+
+Cleaned up tools docs so that they build cleanly in a Python 3 environment.
+Added display of relative path to temporary run directory to salishsea run sub-command.
+Changed salishsea gather & combine sub-commands to not compress results files, making them consistent with salishsea run.
+Worked on refactoring and updating SalishSeaCmd package docs for v2.0.
+Switched readthedocs virtualenv for tools docs to Python 3.
+Salish Sea team meeting; see Google Drive Drawing.
+(MEOPAR)
+
+
 Wed 14-Oct-2015
 ^^^^^^^^^^^^^^^
 
