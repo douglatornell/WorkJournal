@@ -1239,3 +1239,18 @@ Added connection to Postgress for app data persistence, including private creden
 (sealinkd)
 
 Updated vagrant package to 1.7.4 by installing from deb downloaded from launchpad (wily werewolf).
+
+
+Thu 15-Oct-2015
+^^^^^^^^^^^^^^^
+
+Emailed UBC HR re: access to M&P PD fund for PyCon.ca expenses.
+Paid AGU membership for 2016.
+
+Answered question from Nancy about .items() vs. .iteritems() for dicts and OrderedDicts in Python 2 and 3.
+Pinged Roman re: libraries for NEMO-3.6 on orcinus.
+Fixed Python 2 to 3 issues in nowcast.figures.plot_map() and stormtools.get_EC_observations(); first was zip() returning an iterator where a list was expected, 2nd was use of response.content (bytes) attr where response.text (str) should have been used.
+Continued working on SalishSeaCmd v2.0 docs.
+(MEOPAR)
+
+Participated in kick-off mtg for next series of software-workouts.
