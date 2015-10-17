@@ -1254,3 +1254,22 @@ Continued working on SalishSeaCmd v2.0 docs.
 (MEOPAR)
 
 Participated in kick-off mtg for next series of software-workouts.
+
+
+Fri 16-Oct-2015
+^^^^^^^^^^^^^^^
+
+Sent email to Stephanie re: EduCloud setup.
+Continued work on data model:
+* Added create_tables script
+* Read alembic docs and confirmed that it is aimed at schemas evolution, not creation, and that it does not include data migration
+* Added Community object to data model with only a name attribute
+* Added load_communities script to initialize community names into database
+* Hooked HVSI views for Compare and PRofiles pages to database to provide community names for drop-down selectors
+Updated my local sealinkd environment to be based on Python 3.5 so that it and the installed packages are the same as in the vagrant VM.
+(sealinkd)
+
+Re-built XIOS on orcinus with module libraries for netcdf and hdf5 that Roman set up yesterday.
+Scheduled salishse command processor tutorial for Tue 20-OCt at 10:00.
+Continued work on SalishSeaCmd package docs.
+(MEOPAR)
