@@ -1270,6 +1270,37 @@ Updated my local sealinkd environment to be based on Python 3.5 so that it and t
 (sealinkd)
 
 Re-built XIOS on orcinus with module libraries for netcdf and hdf5 that Roman set up yesterday.
-Scheduled salishse command processor tutorial for Tue 20-OCt at 10:00.
+Scheduled salishse command processor tutorial for Tue 20-Oct at 10:00.
 Continued work on SalishSeaCmd package docs.
 (MEOPAR)
+
+
+Sat 17-Oct-2015
+^^^^^^^^^^^^^^^
+
+Added Mako text filters for title case, spaces-to-underscores, and underscores-to-spaces to templates.
+(sealinkd)
+
+
+Re-built NEMO-3.6 on orcinus with module libraries for netcdf and hdf5 that Roman set up on Thursday.
+Committed and pushed cleaned up build files for XIOS and NEMO-3.6 on orcinus that use new netCDF and HDF5 modules.
+Continued work on SalishSeaCmd package docs.
+(MEOPAR)
+
+Built new front wheel for Emma.
+
+
+Sun 18-Oct-2015
+^^^^^^^^^^^^^^^
+
+Finished SalishSeaCmd package docs to the point where I am ready to merge the SalishSeaCmd-3.6 branch into default.
+Set up nowcast-ish run on orcinus and mostly succeeded in using salishsea run to execute it:
+* Had to hack run module to convert batch script to Unicode for writing
+* nco is no longer installed, so deflation fails
+Confirmed that output files are in full domain width strips.
+Discovered that Python 3.5 is installed on orcinus.
+(MEOPAR)
+
+Added Community.count() class method.
+Refactored Start page view to show all community names.
+(sealinkd)
