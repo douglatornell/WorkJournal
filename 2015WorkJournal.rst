@@ -1304,3 +1304,23 @@ Discovered that Python 3.5 is installed on orcinus.
 Added Community.count() class method.
 Refactored Start page view to show all community names.
 (sealinkd)
+
+
+Week 43
+-------
+
+Mon 19-Oct-2015
+^^^^^^^^^^^^^^^
+
+Prepared for salishsea command processor tutorial tomorrow.
+Made some minor backward changes in the SalishSeaCmd package so that it will run under Python 2.7 on orcinus and jasper, thereby avoiding the messiness that happens on those platforms when we try to use Mercurial rebase an Python 3.
+Confirmed to Roman that new netCDF4 and HDF5 modules on orcinus work for us.
+Requested that Roman build us a new NCO module to replace the one that got deleted when the new netCDF4 and HDF5 modules came into effect; later discovered that NCO library is still there, just not included in a module anymore.
+Cleaned up NEMO-3.6 reference namelist section files, and added a reference iodef.xml file with proper file group closing tags.
+Re-build XIOS and NEMO-3.6 on orcinus with the _mpi version of the netCDF & HDF5 modules/libraries; test run with just XIOS rebuilt took 28 minutes; _mpi != parallel output.
+Investigated Nancy's discovery that python-netCDF4 Dataset.close() method crashes jupyter notebook under Python 3 but not under Python 2.7.
+(MEOPAR)
+
+Attended Phys Ocgy seminar about canyon upwelling by Karina.
+
+Liberals won a 184 seat majority in parliament, ending the Harper era.
