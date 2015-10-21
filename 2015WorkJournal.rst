@@ -1324,3 +1324,21 @@ Investigated Nancy's discovery that python-netCDF4 Dataset.close() method crashe
 Attended Phys Ocgy seminar about canyon upwelling by Karina.
 
 Liberals won a 184 seat majority in parliament, ending the Harper era.
+
+
+Tue 20-Oct-2015
+^^^^^^^^^^^^^^^
+
+Ran tutorial about SalishSeaCmd package.
+Merged SalishSeaCmd-3.6 branch into tools default branch, and tagged repo with SalishSeaCmd-2.0.
+Roman built nco-4.5.2 module for us on orcinus.
+Salish Sea team meeting; see Google Drive Drawing.
+Helped Jie figure out why salishsea run was failing on salish; her SalishSeaCmd package was installed in anaconda3/ not $HOME/.local/.
+(MEOPAR)
+
+Set up smelt as build slave to take over R3_baseline_regression from snapper; created ticket #15022 to get port 9989 opened between bjossa and smelt.
+(SOG)
+
+Katie shadowed me for the afternoon.
+
+Got wired connection for niko.
