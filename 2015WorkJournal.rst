@@ -1264,7 +1264,7 @@ Continued work on data model:
 * Added create_tables script
 * Read alembic docs and confirmed that it is aimed at schemas evolution, not creation, and that it does not include data migration
 * Added Community object to data model with only a name attribute
-* Added load_communities script to initialize community names into database
+* Added init_communities script to initialize community names into database
 * Hooked HVSI views for Compare and PRofiles pages to database to provide community names for drop-down selectors
 Updated my local sealinkd environment to be based on Python 3.5 so that it and the installed packages are the same as in the vagrant VM.
 (sealinkd)
@@ -1342,3 +1342,26 @@ Set up smelt as build slave to take over R3_baseline_regression from snapper; cr
 Katie shadowed me for the afternoon.
 
 Got wired connection for niko.
+
+
+Wed 21-Oct-2015
+^^^^^^^^^^^^^^^
+
+Submitted request for EduCloud service;
+Sent email to help.desk@it.ubc for help with the EAD admin account authorization.
+Updated the 2 North Vancouvers to City & District per email from Jackie.
+Continued work on data model:
+* Added Capital object to data model to persist HVSI capital names
+* Added init_capitals script to initialize HVSI capital names into database
+* Populated comparison community drop-down on Analysis page with community names from database and random HVSI values
+* Tried unsuccessfully to format comparison community drop-down option text strings so that HVSI values are right justified
+* Add Asset object to data model to persist data about digital assets managed by the UBC SCARP team
+* Changed vagrant setup to sync SealinkD-assets/ to VM
+* Changed nginx config to serve assets from Sealinkd-assets/
+* Changed app setup to get static & asset server URLs from config file
+* Moved Research page images out of app repo and into SealinkD-assets/ and used Asset object to hook them into the app
+Added issues for data model components.
+(sealinkd)
+
+Marlene@ONC says that Muriel's ADCP cron job is still firing; bumped ticket #14984 for Charles to kill it.
+(MEOPAR)
