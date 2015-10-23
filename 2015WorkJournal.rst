@@ -1365,3 +1365,26 @@ Added issues for data model components.
 
 Marlene@ONC says that Muriel's ADCP cron job is still firing; bumped ticket #14984 for Charles to kill it.
 (MEOPAR)
+
+
+Thu 22-Oct-2015
+^^^^^^^^^^^^^^^
+
+Booked travel for trip to PyCon.ca and Barrie.
+
+Continued struggle with CWL EAD admin account.
+Continued work on data model:
+* Changed init_assets script to load_assets and make it update as well as add new
+* Added aerial photos from CJ to assets and randomly choose one for each load of landing page
+* Changed footer to be sticky at bottom of viewport
+* Added UserRole and HVSI Dimension object to data model
+* Started adding HVSI Indicator object to data model
+(sealinkd)
+
+Restarted buildbot slaves on coho, herring & snapper.
+Restarted buildbot master on bjossa to allow smelt to join the party.
+Started buildbot slave on smelt, and forced an R3_baseline_regression run to test it.
+(SOG)
+
+Muriel's ADCP cron job is still firing and annoying ONC.
+(MEOPAR)
