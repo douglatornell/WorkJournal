@@ -1388,3 +1388,20 @@ Started buildbot slave on smelt, and forced an R3_baseline_regression run to tes
 
 Muriel's ADCP cron job is still firing and annoying ONC.
 (MEOPAR)
+
+
+Fri 23-Oct-2015
+^^^^^^^^^^^^^^^
+
+* reply to UBC IT ticket
+* work on ADCP automation
+
+Installed vagrant, virtualbox, and ubuntu/trusty64 imaage on niko; image download took ~2min on EOAS wire in contrast to ~2hr at home :-)
+
+Reviewed and edited RAC application.
+Sent email Muriel re: killing her ADCP cron job.
+Added XIOS attached/detached support to `salishsea run` and `salishsea prepare`.
+(MEOPAR)
+
+Sent email to Jackie re: getting indicators and community data spreadsheets.
+(sealinkd)
