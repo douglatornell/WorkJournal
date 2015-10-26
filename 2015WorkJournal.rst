@@ -1405,3 +1405,22 @@ Added XIOS attached/detached support to `salishsea run` and `salishsea prepare`.
 
 Sent email to Jackie re: getting indicators and community data spreadsheets.
 (sealinkd)
+
+
+Sat 24-Oct-2015
+^^^^^^^^^^^^^^^
+
+Fixed typo in file_definition closing tag in SS-run-sets/SalishSea/nemo-3.6/ iodef.xml files.
+Fixed missing intel module load on orcinus and re-submitted separate-XIOS test run.
+Started to play with creation of a thalweg salinity contours video that can be updated daily.
+(MEOPAR)
+
+Worked on trying to get offsite backups to sable working again.
+Decided to delete the badly named and bloated /mnt/data1/picassoBackup/ on sable and start a new matisseBackup/.
+Stopped and unloaded backup and rsync daemons on matisse.
+Started manually rsync-ing contents of matisse /Volumes/Backup/ to sable matisseBackup/: ESB_2/, kudu/
+
+Crazy-glued 3 Fitbit bracelets and one of Susan's winter cycling boots.
+
+Got vagrant dev env running on niko for Monday's meeting.
+(sealinkd)
