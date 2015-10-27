@@ -1393,9 +1393,6 @@ Muriel's ADCP cron job is still firing and annoying ONC.
 Fri 23-Oct-2015
 ^^^^^^^^^^^^^^^
 
-* reply to UBC IT ticket
-* work on ADCP automation
-
 Installed vagrant, virtualbox, and ubuntu/trusty64 imaage on niko; image download took ~2min on EOAS wire in contrast to ~2hr at home :-)
 
 Reviewed and edited RAC application.
@@ -1424,3 +1421,34 @@ Crazy-glued 3 Fitbit bracelets and one of Susan's winter cycling boots.
 
 Got vagrant dev env running on niko for Monday's meeting.
 (sealinkd)
+
+
+Sun 25-Oct-2015
+^^^^^^^^^^^^^^^
+
+Continued playing toward thalweg salinity video.
+Muriel replied that she had deleted her cron jobs.
+(MEOPAR)
+
+
+Week 44
+-------
+
+Mon 26-Oct-2015
+^^^^^^^^^^^^^^^
+
+* work on ADCP automation
+* characterize data available from DFO water level web service
+
+Prepared for and participated in mtg w/ UBC SCARP group; demo-ed app from vagrant VM on niko.
+* new app name: Resilient-C
+* new layout and content ideas for community profiles page
+(sealinkd)
+
+Sent email to ONC  to get confirmation that Muriel's ADCP cron job search failures have stopped; apparently not...
+Updated ADCP data downloads, and started writing docs re: the process of restarting the ADCP automation after new sensor deployments.
+(MEOPAR)
+
+Attended Phys Ocgy seminary by Drew Snauffer about machine learning prediction of snow-water equivalent values for BC.
+
+Reviewed and commented on Susan's NSERC Discovery grant proposal.
