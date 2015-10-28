@@ -1437,9 +1437,6 @@ Week 44
 Mon 26-Oct-2015
 ^^^^^^^^^^^^^^^
 
-* work on ADCP automation
-* characterize data available from DFO water level web service
-
 Prepared for and participated in mtg w/ UBC SCARP group; demo-ed app from vagrant VM on niko.
 * new app name: Resilient-C
 * new layout and content ideas for community profiles page
@@ -1452,3 +1449,19 @@ Updated ADCP data downloads, and started writing docs re: the process of restart
 Attended Phys Ocgy seminary by Drew Snauffer about machine learning prediction of snow-water equivalent values for BC.
 
 Reviewed and commented on Susan's NSERC Discovery grant proposal.
+
+
+Tue 27-Oct-2015
+^^^^^^^^^^^^^^^
+
+* work on ADCP automation
+* characterize data available from DFO water level web service
+
+Finished ADCP raw data downloads to catch up to calendar, and created a cron job to do the downloads daily until the full automation can be restarted.
+Changed symlinks to an ocean clone of private-tools so that the code is easier for Rich to access, and there is a separation between the code used for dev and that used for the automation.
+Struggled to get compare_daily.m automation restarted; finally reproduced what Rich & did on 9-Oct for east node.
+Salish Sea team meeting; see Google Drive Drawing.
+(MEOPAR)
+
+Solicited people to answer the questions posed for this week's workout.
+(SWC)
