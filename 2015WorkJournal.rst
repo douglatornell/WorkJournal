@@ -1454,8 +1454,7 @@ Reviewed and commented on Susan's NSERC Discovery grant proposal.
 Tue 27-Oct-2015
 ^^^^^^^^^^^^^^^
 
-* work on ADCP automation
-* characterize data available from DFO water level web service
+Copied kudu backup repo from home Backup drive to data1 mount on sable via EOAS wired network.
 
 Finished ADCP raw data downloads to catch up to calendar, and created a cron job to do the downloads daily until the full automation can be restarted.
 Changed symlinks to an ocean clone of private-tools so that the code is easier for Rich to access, and there is a separation between the code used for dev and that used for the automation.
@@ -1465,3 +1464,24 @@ Salish Sea team meeting; see Google Drive Drawing.
 
 Solicited people to answer the questions posed for this week's workout.
 (SWC)
+
+
+Wed 28-Oct-2015
+^^^^^^^^^^^^^^^
+
+* work on ADCP automation
+* characterize data available from DFO water level web service
+
+Switched on compare_daily.m automation for east node ADCP data; continued trying to get central & ddl nodes rebooted.
+Investigated why analysis repo is so large; no conclusion.
+(MEOPAR)
+
+Moved emily and matisse backups to _snapshot_* directories.
+Re-enabled matisse backup to start a new rdiff_backup repo.
+
+Emailed Maria@it.ubc re: EduCloud setup; VM was ready around midday, but my only access is via a web console.
+Wrote a ticket requesting ssh port be opened, but got no response.
+Refactored Indicator data model to handle HVSI indicators metadata and loaded those into the dev database.
+Implemented IndicatorValue data model and started loading those data into the database.
+Michelle committed the About page content.
+(sealinkd)
