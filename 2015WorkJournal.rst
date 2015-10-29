@@ -1469,9 +1469,6 @@ Solicited people to answer the questions posed for this week's workout.
 Wed 28-Oct-2015
 ^^^^^^^^^^^^^^^
 
-* work on ADCP automation
-* characterize data available from DFO water level web service
-
 Switched on compare_daily.m automation for east node ADCP data; continued trying to get central & ddl nodes rebooted.
 Investigated why analysis repo is so large; no conclusion.
 (MEOPAR)
@@ -1484,4 +1481,15 @@ Wrote a ticket requesting ssh port be opened, but got no response.
 Refactored Indicator data model to handle HVSI indicators metadata and loaded those into the dev database.
 Implemented IndicatorValue data model and started loading those data into the database.
 Michelle committed the About page content.
+(sealinkd)
+
+
+Thu 29-Oct-2015
+^^^^^^^^^^^^^^^
+
+* prep for software workout
+* work on ADCP automation
+* characterize data available from DFO water level web service
+
+Finished loading indicator values to dev database.
 (sealinkd)
