@@ -1487,9 +1487,17 @@ Michelle committed the About page content.
 Thu 29-Oct-2015
 ^^^^^^^^^^^^^^^
 
-* prep for software workout
-* work on ADCP automation
-* characterize data available from DFO water level web service
-
 Finished loading indicator values to dev database.
+Installed nginx on prod VM so that there is something listening on port 80.
+Fiddled with hosts.allow and hosts.deny but VM remains inaccessible from anywhere other than VMware web console.
+Sent another service request to UBC IT and again got no ticket notification in response.
 (sealinkd)
+
+Explored NumPy masked array creation techniques re: Karina's question; broadcasting does not appear to be an option.
+Participated in workout Q&A session.
+(SWC)
+
+Started investigating NEMO TOP BDY branch that Elise wants to use.
+Continued working on ONC ADCP automation.
+Charles made skookum available to us.
+(MEOPAR)
