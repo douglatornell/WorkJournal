@@ -1501,3 +1501,27 @@ Started investigating NEMO TOP BDY branch that Elise wants to use.
 Continued working on ONC ADCP automation.
 Charles made skookum available to us.
 (MEOPAR)
+
+
+Fri 30-Oct-2015
+^^^^^^^^^^^^^^^
+
+* work on ADCP automation
+* explore skookum
+* characterize data available from DFO water level web service
+
+Email to Charles to hold off on opendap config on skookum pending eval of erddap vs. opendap/hyrax.
+Wrote blurbs to MEOPAR report re: storm surge portal and OceanViewer objectives to year 4.
+Talked to Rich about progress on ADCP automation.
+Finally got central node automation restarted.
+(MEOPAR)
+
+Emailed Tereza with suggestions about using lvdiff for hg diff on Labview VIs.
+(SWC)
+
+Reviewed and commented on Susan's letter for Nancy.
+
+Figured out that I needed to open port 80 on the VM for HTTP access from Internet.
+UBC IT finally added firewall rule to allow ssh access from smelt; requested another rule for salish for redundancy and got it quickly.
+Started deployment.
+(sealinkd)
