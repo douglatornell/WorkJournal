@@ -1506,10 +1506,6 @@ Charles made skookum available to us.
 Fri 30-Oct-2015
 ^^^^^^^^^^^^^^^
 
-* work on ADCP automation
-* explore skookum
-* characterize data available from DFO water level web service
-
 Email to Charles to hold off on opendap config on skookum pending eval of erddap vs. opendap/hyrax.
 Wrote blurbs to MEOPAR report re: storm surge portal and OceanViewer objectives to year 4.
 Talked to Rich about progress on ADCP automation.
@@ -1525,3 +1521,25 @@ Figured out that I needed to open port 80 on the VM for HTTP access from Interne
 UBC IT finally added firewall rule to allow ssh access from smelt; requested another rule for salish for redundancy and got it quickly.
 Started deployment.
 (sealinkd)
+
+
+Sat 31-Oct-2014
+^^^^^^^^^^^^^^^
+
+More farting around with port forwarding for access to production VM; finally got it working.
+Finished initial deployment, though there are a few loose ends to clean up, and docs to write.
+(sealinkd)
+
+Restarted automation for ddl ADCP node; the key to bootstrapping the automation for a new deployment is to run GETDEPL_fun.m to create a DEPL* file in a day directory, then copy that DEPL* file as the current DEPL* file before running compare_daily.m.
+(MEOPAR)
+
+
+Sun 1-Nov-2014
+^^^^^^^^^^^^^^
+
+* explore skookum
+* characterize data available from DFO water level web service
+* finish ONC ADCP deployment bootstrapping docs
+
+Re-initialized Darktable database because I don't like how it manages copying images from SD to disk.
+Finally transferred Norway, Skookumchuk & Alaska images from SD to dated dirs on kudu for import to Darktable.
