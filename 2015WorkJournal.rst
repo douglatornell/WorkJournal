@@ -1537,9 +1537,43 @@ Restarted automation for ddl ADCP node; the key to bootstrapping the automation 
 Sun 1-Nov-2014
 ^^^^^^^^^^^^^^
 
-* explore skookum
-* characterize data available from DFO water level web service
-* finish ONC ADCP deployment bootstrapping docs
-
 Re-initialized Darktable database because I don't like how it manages copying images from SD to disk.
 Finally transferred Norway, Skookumchuk & Alaska images from SD to dated dirs on kudu for import to Darktable.
+
+
+October
+=======
+
+Week 45
+-------
+
+Mon 2-Nov-2015
+^^^^^^^^^^^^^^
+
+* figure out AAPS pro-dev claim
+* do AGU abstract claim
+* finish ONC ADCP deployment bootstrapping docs
+* continue XIOS testing on orcinus
+* explore skookum
+* characterize data available from DFO water level web service
+
+Did email intro between Neil Swart and Roland Schigas.
+
+Told Marlene@ONC that there is nothing more we can do about the bogus search requests from Muriel's account unless she can tell us what IP address they originate from; proposed deletion of Muriel's dmas account.
+Started working on skookum
+* worked through a bunch of setup issues w/ Charles via tickets
+* created /results/MEOPAR/nowcast-prod and cloned tools repo
+* created nowcast-prod conda env
+Got NEMO-3.6 w/ separate XIOS running on orcinus; tested 3x5+1, 4x9+1, 8x18+1, 6x14+1.
+Looked deeper at NEMO-3.6 TOP BDY branch and discussed it with Susan and Elise.
+(MEOPAR)
+
+Attended Phys Ocgy seminary by Stephanie Waterman about turbulence in the Antarctic Counter Current ?? (ACC)
+
+
+ToDO
+====
+
+* update storm surge paper refs w/ doi link
+* make storm-surge paper repo public
+* research_ferries module
