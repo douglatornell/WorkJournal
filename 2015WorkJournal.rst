@@ -1550,13 +1550,6 @@ Week 45
 Mon 2-Nov-2015
 ^^^^^^^^^^^^^^
 
-* figure out AAPS pro-dev claim
-* do AGU abstract claim
-* finish ONC ADCP deployment bootstrapping docs
-* continue XIOS testing on orcinus
-* explore skookum
-* characterize data available from DFO water level web service
-
 Did email intro between Neil Swart and Roland Schigas.
 
 Told Marlene@ONC that there is nothing more we can do about the bogus search requests from Muriel's account unless she can tell us what IP address they originate from; proposed deletion of Muriel's dmas account.
@@ -1571,9 +1564,30 @@ Looked deeper at NEMO-3.6 TOP BDY branch and discussed it with Susan and Elise.
 Attended Phys Ocgy seminary by Stephanie Waterman about turbulence in the Antarctic Counter Current ?? (ACC)
 
 
-ToDO
+Tue 3-Nov-2015
+^^^^^^^^^^^^^^
+
+* do AGU abstract claim
+* finish ONC ADCP deployment bootstrapping docs
+* explore skookum
+* characterize data available from DFO water level web service
+
+Pulled Nancy's western boundary condition salinity changes on to salish & west.cloud for nowcast; then recovered form nowcast system crash caused by not creating a symlink for the new BCs file.
+Worked w/ Susan & Charles to get halibut shutdown before 10:00 to establish whether or not it is really the source of the daily bad requests from Muriel's account that are hitting ONC.
+Added ubuntu@compute deployment key to NEMO-forcing repo on bitbucket.
+Salish Sea team meeting; see Google Drive Drawing.
+After multiple tries, got a 1d, 8x18+1 nowcast run on orcinus to complete in 21m14s of walltime.
+Started creating a notebook that explores the DFO water levels web service uisng the suds-jurko library to deal with the service's SOAP interface.
+(MEOPAR)
+
+Attended dept. colloquium by Paul Hoffman about snowball earth
+
+
+ToDo
 ====
 
 * update storm surge paper refs w/ doi link
 * make storm-surge paper repo public
 * research_ferries module
+* JSON logging use example notebook
+* numpy.testing assert weirdness
