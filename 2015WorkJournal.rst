@@ -1583,6 +1583,29 @@ Started creating a notebook that explores the DFO water levels web service uisng
 Attended dept. colloquium by Paul Hoffman about snowball earth
 
 
+Wed 4-Nov-2015
+^^^^^^^^^^^^^^
+
+* set up Paypal business account
+
+Phone call from Jerry re: problems w/ Minerva; replied w/ offer of site visit tomorrow, pricing for on-site and remote pre-incident responses, and an offer of a proposal for a monitoring and response service.
+(Nordion)
+
+Site app was detached from stie on webfaction, so restored it.
+(43ravens.ca)
+
+Queued nowcast 3d 8x18+1 run w/ 5e6 XIOS buffer (reduced from 5e7) on orcinus to compare to Susan's jasper experience with end of run XIOS lag; initially a 5m test to check XIOS config, then 1h30m walltime.
+Explored min XIOS buffer size vs. MPI decomposition.
+(MEOPAR)
+
+Sent email to Maria re: DNS & TLS certs but she is away on sick leave; opened a new systems service request per instructions in her auto-reply.
+Created invoice for stage 1 and wrote progress report to Stephanie.
+Rebranded app from Sea-link'D to Resilient-C.
+Cleaned up About page content.
+Worked on production deployment management automation.
+(sealind)
+
+
 ToDo
 ====
 
