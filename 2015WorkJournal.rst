@@ -1586,8 +1586,6 @@ Attended dept. colloquium by Paul Hoffman about snowball earth
 Wed 4-Nov-2015
 ^^^^^^^^^^^^^^
 
-* set up Paypal business account
-
 Phone call from Jerry re: problems w/ Minerva; replied w/ offer of site visit tomorrow, pricing for on-site and remote pre-incident responses, and an offer of a proposal for a monitoring and response service.
 (Nordion)
 
@@ -1606,11 +1604,37 @@ Worked on production deployment management automation.
 (sealind)
 
 
+Thu 5-Nov-2015
+^^^^^^^^^^^^^^
+
+* set up Paypal business account
+* invoice Nordion
+* make storm-surge paper repo public
+
+Emailed status report & invoice to Stephanie & Jackie.
+(sealinkd)
+
+Queued nowcast 1d 12x27+1 run on orcinus w/ 2.5e6 XIOS buffer size.
+Talked with Nancy about masked arrays, broadcasting, and DFO water level web service.
+Continued working on notebook re: DFO water level web service.
+(MEOPAR)
+
+Got flu shot at ESB clinic.
+
+Site visit investigate Minerva issues.
+/var filesystem was corrupted; had to re-install mako & formencode pkgs to get Minerva app to start.
+Minerva app is slow, won't render PDFs.
+Beaver app not running.
+Noticed mfi0 errors in log and on console screen; RAID issues.
+Agreed to provide proposal for a return visit to dig deeper and identify longer term solutions.
+(Nordion)
+
+
 ToDo
 ====
 
+* fix Resilient-C CSS issue
 * update storm surge paper refs w/ doi link
-* make storm-surge paper repo public
 * research_ferries module
 * JSON logging use example notebook
 * numpy.testing assert weirdness
