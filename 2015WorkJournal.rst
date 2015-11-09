@@ -1607,10 +1607,6 @@ Worked on production deployment management automation.
 Thu 5-Nov-2015
 ^^^^^^^^^^^^^^
 
-* set up Paypal business account
-* invoice Nordion
-* make storm-surge paper repo public
-
 Emailed status report & invoice to Stephanie & Jackie.
 (sealinkd)
 
@@ -1630,10 +1626,51 @@ Agreed to provide proposal for a return visit to dig deeper and identify longer 
 (Nordion)
 
 
+Fri 6-Nov-2015
+^^^^^^^^^^^^^^
+
+Travel to Toronto for PyCon.ca 2015
+
+Analyzed results of 3d 8x18+1 and 1d 12x27+1 nowcast runs on orcinus.
+(MEOPAR)
+
+Fix permissions on site CSS and JS file in production deployment so that they serve properly as static data.
+(sealinkd)
+
+Attended PyCon.ca social at The Prenup Pub.
+
+
+Sat 7-Nov-2015
+^^^^^^^^^^^^^^
+
+PyCon.ca day 1
+* Opening keynote by Brett Canon; benchmarking implementations, CPython 3.5 w/ PGO optimization trained against test suite is slightly faster than 2.7
+* Good web app security talk by Frederic Harper; OWASP top 10, outofcomfortzone.com
+* Good Django GeoJSON talk by Tyler Savory; PyProj4, Kmeans, gdal (.shp -> GeoJSON), slippy tiles, AnyCluster
+* Good Jupyter cell magics extensions talk by Nicolas Kruchten; _repr_html_, DIY cell magics
+* Met Pierre-Yves David, Mercurial core dev employed by Facebook to work on community (i.e. not Facebook-specific) development
+
+
+Sun 8-Nov-2015
+^^^^^^^^^^^^^^
+
+Created Freshbooks account.
+(43ravens)
+
+PyCon.ca day 2
+* Data mining Python code & metadata keynote by Cameron Davidson-Pilon
+* "tutorial" about exponentiation and numbers in Python by En_zyme; math.expm1, math.hypot
+* Legacy codebase talk by Scott Triglia; functional/acceptance tests facilitate legacy refactoring better than unit tests
+* Good Python in Mercurial talk by Pierre-Yves David; storage model combines diffs & full copies to optimize length of diff chain, extensions are easy & faster than revsets (which are awesome)
+* Fabric -> Ansible talk by Dorian Pula
+
+
 ToDo
 ====
 
-* fix Resilient-C CSS issue
+
+* invoice Nordion
+* make storm-surge paper repo public
 * update storm surge paper refs w/ doi link
 * research_ferries module
 * JSON logging use example notebook
