@@ -1541,8 +1541,8 @@ Re-initialized Darktable database because I don't like how it manages copying im
 Finally transferred Norway, Skookumchuk & Alaska images from SD to dated dirs on kudu for import to Darktable.
 
 
-October
-=======
+November
+========
 
 Week 45
 -------
@@ -1665,10 +1665,33 @@ PyCon.ca day 2
 * Fabric -> Ansible talk by Dorian Pula
 
 
+Week 46
+-------
+
+Mon 9-Nov-2015
+^^^^^^^^^^^^^^
+
+PyCon.ca sprints
+
+The nosy codebase is more mature than I recalled, including a bunch of unit tests.
+Researched nosier; it works on Linux only because it uses inotify instead of polling.
+Stefan Wiechula joined my sprint and did most of the heavy lifting to test and finalize the Python 3 port.
+After initially deciding to drop Python 2.5 support due to the lack of the "as" keyword, a discussion with Brandon Rhodes lead to parsing exception messages out of sys.exc_info() so that Python 2.5 support can be retained.
+Tried unsuccessfully to get tox and conda to work together, but Stefan drew my attention to pyenv that enabled him to tox the nosy tests under 2.6, 2.7, and 3.5.
+(nosy)
+
+
 ToDo
 ====
 
+* setup pyenv and tox for nosy
+* fix nosy exceptions re: 2.5, as, sys.exc_info()
+* Link @-mentions in nosy docs
+* review remaining nosy PRs
+* release nosy 1.2
+* push nosy 1.2 page to douglatornell.ca
 
+* check waveapps.com as an alternative to freshbooks.com; free invoicing
 * invoice Nordion
 * make storm-surge paper repo public
 * update storm surge paper refs w/ doi link
