@@ -1680,6 +1680,54 @@ After initially deciding to drop Python 2.5 support due to the lack of the "as" 
 Tried unsuccessfully to get tox and conda to work together, but Stefan drew my attention to pyenv that enabled him to tox the nosy tests under 2.6, 2.7, and 3.5.
 (nosy)
 
+Scheduled 26-Nov w/ Youyu and Susan when Youyu will be in BC.
+(43ravens)
+
+
+Tue 10-Nov-2015
+^^^^^^^^^^^^^^^
+
+Travel from Toronto to Barrie.
+
+Reviewed Nancy's recent nowcast improvements and wrote explanatory email about transition from salish/Py2.7 to skookum/Py3.5.
+Pulled SS-run-sets changes on to west.cloud to include output from tide gauge stations that Nancy added
+Answered questions on Google whiteboard for team mtg.
+(MEOPAR)
+
+
+Wed 11-Nov-2015
+^^^^^^^^^^^^^^^
+
+(MEOPAR)
+
+
+Fri 13-Nov-2015
+^^^^^^^^^^^^^^^
+
+Set up PayPal business account and used it to invoice Nordion for 5-Nov site visit.
+(43ravens)
+
+Worked on deployment of nowcast system on skookum and wrote docs re: skookum /results/ storage organization.
+(MEOPAR)
+
+
+Sat 14-Nov-2015
+^^^^^^^^^^^^^^^
+
+Continued working on nowcast deployment on skookum; got broker & object implementation of mgr operational under Python 3.5; started working through _launch_worker() issues from download_weather worker onward; object impl of get_NeahBay_ssh worker appears to work.
+Realized that nowcast-obj branch is badly out of sync with default.
+(MEOPAR)
+
+
+Sun 15-Nov-2015
+^^^^^^^^^^^^^^^
+
+Travel home from Barrie.
+
+Continued working on nowcast deployment on skookum.
+Started new SalishSeaNowcast branch to keep dev in sync w/ default and move nowcast to its own package.
+(MEOPAR)
+
 
 ToDo
 ====
@@ -1692,7 +1740,6 @@ ToDo
 * push nosy 1.2 page to douglatornell.ca
 
 * check waveapps.com as an alternative to freshbooks.com; free invoicing
-* invoice Nordion
 * make storm-surge paper repo public
 * update storm surge paper refs w/ doi link
 * research_ferries module
