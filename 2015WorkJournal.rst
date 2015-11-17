@@ -1729,6 +1729,23 @@ Started new SalishSeaNowcast branch to keep dev in sync w/ default and move nowc
 (MEOPAR)
 
 
+Week 47
+-------
+
+Mon 16-Nov-2015
+^^^^^^^^^^^^^^^
+
+* nowcast_mgr checklist logging
+
+Continued work on SalishSeaNowcast package:
+* cleaned up test suite
+* ported in object-based nowcast_mgr and grib_to_netcdf worker
+* changed JSON logging to use driftwood package
+(MEOPAR)
+
+Attended Phys Ocgy seminar by Sophie Clayton about modeling phytoplankton diversity in a global MITgcm configuration.
+
+
 ToDo
 ====
 
