@@ -1746,6 +1746,27 @@ Continued work on SalishSeaNowcast package:
 Attended Phys Ocgy seminar by Sophie Clayton about modeling phytoplankton diversity in a global MITgcm configuration.
 
 
+Tue 17-Nov-2015
+^^^^^^^^^^^^^^^
+
+Updated niko to Ubuntu 15.10 "Wily Werewolf".
+
+Completed M&P ProDev fund claim re: Pycon.ca.
+Completed EOAS claim re: Ocean Sciences abstract.
+
+Finally got active response re: DNS and SSL certs from Brian Wu.
+(sealinkd)
+
+Continued work on SalishSeaNowcast package:
+* added checklist logging setup to manager
+* added after_grib_to_netcdf method to mgr
+* ported in NowcastWorker-based get_NeahBay_ssh worker
+* updated and deployed weather download cron scripts on skookum
+Salish Sea team meeting; see Google Drive Drawing.
+Fixed bug that Nancy reported whereby salishsea run was producing "nodes=7.0:ppn=12" on jasper; it was a 2vs3 issue involving integer division and the type returned by math.ceil().
+(MEOPAR)
+
+
 ToDo
 ====
 
