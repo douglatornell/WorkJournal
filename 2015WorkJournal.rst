@@ -1767,6 +1767,41 @@ Fixed bug that Nancy reported whereby salishsea run was producing "nodes=7.0:ppn
 (MEOPAR)
 
 
+Wed 18-Nov-2015
+^^^^^^^^^^^^^^^
+
+Downloaded, printed, read, and annotated Chang, et al (2015), Using vulnerability indicators to develop resilience networks: a similarity approach - the HVSI paper.
+Started development of sealinkd.hvsi module of functions to do HVSI calculations in a way that is independent of the app.
+(sealinkd)
+
+Confirmed that the part of nowcat that is running on skookum is doing so smoothly.
+Opened ticket to request skookum /results file system be exported to salish, sable, tyee, char, cod & snapper.
+Helped Susan recover from accidentally merging SalishSeaNowcast branch into default.
+(MEOPAR)
+
+Full SOG build on herring was failing because gfortran wasn't installed; opened a ticket to remedy that, then forced build, which completed with dirty diffs.
+(SOG)
+
+Ken reported more isoinfo server trouble; requested Del service tag so that I can spec disks.
+(Nordion)
+
+
+Thu 19-Nov-2015
+^^^^^^^^^^^^^^^
+
+Continued work on SalishSeaNowcast package:
+* ported in NowcastWorker-based make_runoff_file & download_results workers
+* added after_make_runoff_file & after_download_results methods to mgr
+Opened ticket to have netcdf-bin package installed on skookum; done.
+Charles set up /results exports & mounts.
+Helped Nancy with fallout of yesterday tools branch merge issue.
+(MEOPAR)
+
+Finished initial implementation of sealinkd.hvsi module of functions to do HVSI calculations; no dependencies!
+Updated database and app on production server; database updates were due to change in schema of IndicatorValues, and lower-casing of indicator type values.
+(sealinkd)
+
+
 ToDo
 ====
 
@@ -1777,8 +1812,6 @@ ToDo
 * release nosy 1.2
 * push nosy 1.2 page to douglatornell.ca
 
-* check waveapps.com as an alternative to freshbooks.com; free invoicing
-* make storm-surge paper repo public
 * update storm surge paper refs w/ doi link
 * research_ferries module
 * JSON logging use example notebook
