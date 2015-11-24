@@ -1735,8 +1735,6 @@ Week 47
 Mon 16-Nov-2015
 ^^^^^^^^^^^^^^^
 
-* nowcast_mgr checklist logging
-
 Continued work on SalishSeaNowcast package:
 * cleaned up test suite
 * ported in object-based nowcast_mgr and grib_to_netcdf worker
@@ -1795,11 +1793,47 @@ Continued work on SalishSeaNowcast package:
 Opened ticket to have netcdf-bin package installed on skookum; done.
 Charles set up /results exports & mounts.
 Helped Nancy with fallout of yesterday tools branch merge issue.
+Moved /ocean/sallen/allen/research/MEOPAR/GRIB/ to /results/forcing/atmospheric/GEM2.5/GRIB/.
 (MEOPAR)
 
 Finished initial implementation of sealinkd.hvsi module of functions to do HVSI calculations; no dependencies!
 Updated database and app on production server; database updates were due to change in schema of IndicatorValues, and lower-casing of indicator type values.
 (sealinkd)
+
+
+Fri 20-Nov-2015
+^^^^^^^^^^^^^^^
+
+Continued work on SalishSeaNowcast package:
+* fixed bugs in download_results worker
+Moved /ocean/sallen/allen/research/MEOPAR/SalishSea/forecast2 to /results/SalishSea/forecast2.
+Moved /ocean/sallen/allen/research/MEOPAR/SalishSea/forecast to /results/SalishSea/forecast.
+Change nowcast config on salish to use /results file system:
+* bathymetry, rivers, forecast & forecast2 results
+Got ports 5555 and 5556 on skookum opened for traffic from salish and west.cloud.
+Disabled make_runoff_file worker in salish nowcast system in favour of the one in on skookum.
+Youyu launched conversation between Susan and Danny re: repos, docs, etc. (aka NEMO Sandbox).
+(MEOPAR)
+
+Attended special Phys Ocgy seminar by Kjetil Vage of Bergen about change in Nordic seas deep water formation.
+
+
+Week 47
+-------
+
+Mon 23-Nov-2015
+^^^^^^^^^^^^^^^
+
+Pulled and updated NEMO-forcing repo on west.cloud.
+Nowcast failed due to missing Content-Length header on some GRIB files; temporarily removed our code that uses that header to get the system restarted; later testing on skookum showed that the header was back.
+Continued work on SalishSeaNowcast package:
+* worked on porting make_plots worker to NowcastWorker basis
+(MEOPAR)
+
+Generated CSRs for 3 resilient-c app domains and sent them to Karen @ UBC IT.
+(sealinkd)
+
+Attended Phys Ocgy seminar.
 
 
 ToDo
