@@ -1790,6 +1790,7 @@ Thu 19-Nov-2015
 Continued work on SalishSeaNowcast package:
 * ported in NowcastWorker-based make_runoff_file & download_results workers
 * added after_make_runoff_file & after_download_results methods to mgr
+* started porting in NowcastWorker-based upload_forcing worker
 Opened ticket to have netcdf-bin package installed on skookum; done.
 Charles set up /results exports & mounts.
 Helped Nancy with fallout of yesterday tools branch merge issue.
@@ -1816,6 +1817,31 @@ Youyu launched conversation between Susan and Danny re: repos, docs, etc. (aka N
 (MEOPAR)
 
 Attended special Phys Ocgy seminar by Kjetil Vage of Bergen about change in Nordic seas deep water formation.
+
+
+Sat 21-Nov-2015
+^^^^^^^^^^^^^^^
+
+Confirmed that yesterday's path changes for the nowcast system were effective.
+Restarted nowcast mgr to shift make_run_off worker to skookum deployment.
+Discussed with Susan the make_run_off worker changes to add Jie's Fraser River bathymetry to produce new run-off file for nowcast-2.0.
+Moved /data/dlatorne/MEOPAR/SalishSea/nowcast to /results/SalishSea/nowcast.
+
+Continued work on SalishSeaNowcast package:
+* continued porting in NowcastWorker-based upload_forcing worker
+(MEOPAR)
+
+Sent email to Stephanie for decision on 1yr or 3yr TLS certs.
+(sealinkd)
+
+
+Sun 22-Nov-2015
+^^^^^^^^^^^^^^^
+
+Continued work on SalishSeaNowcast package:
+* finally finished porting in NowcastWorker-based upload_forcing worker
+* ported NowcastWorker-based make_forcing_links worker and added _after_make_forcing_links method to mgr
+(MEOPAR)
 
 
 Week 47
