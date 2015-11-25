@@ -1840,7 +1840,7 @@ Sun 22-Nov-2015
 
 Continued work on SalishSeaNowcast package:
 * finally finished porting in NowcastWorker-based upload_forcing worker
-* ported NowcastWorker-based make_forcing_links worker and added _after_make_forcing_links method to mgr
+* started porting NowcastWorker-based make_forcing_links worker and adding _after_make_forcing_links method to mgr
 (MEOPAR)
 
 
@@ -1860,6 +1860,18 @@ Generated CSRs for 3 resilient-c app domains and sent them to Karen @ UBC IT.
 (sealinkd)
 
 Attended Phys Ocgy seminar.
+
+
+Tue 24-Nov-2015
+^^^^^^^^^^^^^^^
+
+Continued work on SalishSeaNowcast package:
+* continued porting NowcastWorker-based make_plots worker and adding _after_make_plots method to mgr; works except ferries comparison plots
+* refactored nowcast_mgr
+* added run_NEMO worker launching to _after_make_forcing_links method
+Telcon w/ Dany Dumont re: Canada-wide NEMO collaboration
+Salish Sea team meeting; see Google Drive Drawing.
+(MEOPAR)
 
 
 ToDo
