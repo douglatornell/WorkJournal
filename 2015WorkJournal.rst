@@ -1874,6 +1874,17 @@ Salish Sea team meeting; see Google Drive Drawing.
 (MEOPAR)
 
 
+Wed 25-Nov-2015
+^^^^^^^^^^^^^^^
+
+Continued work on SalishSeaNowcast package:
+* finished NowcastManager implementation sufficient to run the system (I think) but couldn't test it on skookum because weather download didn't finish until 14:35
+* added nowcast_mgr module to API docs
+(MEOPAR)
+
+Attended special seminar by Katie Kuksenok about her observational research of oceanography groups' software practices.
+
+
 ToDo
 ====
 
