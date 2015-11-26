@@ -1884,6 +1884,16 @@ Continued work on SalishSeaNowcast package:
 
 Attended special seminar by Katie Kuksenok about her observational research of oceanography groups' software practices.
 
+Received certs for resilient-c app domains from Karen @ UBC IT.
+(sealinkd)
+
+
+Thu 26-Nov-2015
+^^^^^^^^^^^^^^^
+
+Generated certificate chains for resilient-c app domains by following instructions at https://confluence.id.ubc.ca:8443/x/0pxvB.
+(sealinkd)
+
 
 ToDo
 ====
