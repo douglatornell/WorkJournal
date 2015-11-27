@@ -1895,6 +1895,14 @@ Generated certificate chains for resilient-c app domains by following instructio
 (sealinkd)
 
 
+Fri 27-Nov-2015
+^^^^^^^^^^^^^^^
+
+push_to_web worker failed for forecast2 on salish due to DNS failure for shelob; re-ran manually.
+Stopped nowcast mgr on salish, copied nowcast.yaml config from skookum test dir, and started mgr on skookum.
+(MEOPAR)
+
+
 ToDo
 ====
 
