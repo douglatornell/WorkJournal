@@ -1892,7 +1892,16 @@ Thu 26-Nov-2015
 ^^^^^^^^^^^^^^^
 
 Generated certificate chains for resilient-c app domains by following instructions at https://confluence.id.ubc.ca:8443/x/0pxvB.
+Started work on a Jupyter Notebook to demo hvsi calcs module.
 (sealinkd)
+
+Prep for and attended workout session on R lead by Laura:
+* installed r-base 3.2.2-1 package on niko via software centre
+* installed RStudio 0.99.489 package on niko via download from RStduio site
+(swc)
+
+Met w/ Youyu & JP re: NEMO models.
+(MEOPAR)
 
 
 Fri 27-Nov-2015
