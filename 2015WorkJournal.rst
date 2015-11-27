@@ -1900,6 +1900,15 @@ Fri 27-Nov-2015
 
 push_to_web worker failed for forecast2 on salish due to DNS failure for shelob; re-ran manually.
 Stopped nowcast mgr on salish, copied nowcast.yaml config from skookum test dir, and started mgr on skookum.
+Fixed logic bugs in _after_download_weather and _after_get_NeahBay_ssh.
+Updated west.cloud to SalishSeaNowcast branch.
+Installed Python 3 packages that nowcast needs on west.cloud: python3-pip, python3-dev, python3-matplotlib, python3-pandas, python3-cliff, python3-zmq.
+Installed SalidhSeaTools, SalishSeaCmd, and SalishSeaNowcast for Python 3 on west.cloud using --user.
+Added nemo34=True flag to salishsea_cmd.api.prepare() call in runNEMO worker.
+
+Hacked _launch_worker to use python3
+Hacked salishsea_cmd.api on west.cloud to include MPI decomposition key in run description
+Hacked run_NEMO worker on west.cloud to run correct watch_NEMO with Python 3
 (MEOPAR)
 
 
