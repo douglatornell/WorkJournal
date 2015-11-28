@@ -1914,10 +1914,12 @@ Updated west.cloud to SalishSeaNowcast branch.
 Installed Python 3 packages that nowcast needs on west.cloud: python3-pip, python3-dev, python3-matplotlib, python3-pandas, python3-cliff, python3-zmq.
 Installed SalidhSeaTools, SalishSeaCmd, and SalishSeaNowcast for Python 3 on west.cloud using --user.
 Added nemo34=True flag to salishsea_cmd.api.prepare() call in runNEMO worker.
+Removed --no-compress from salishsea gather options in run_NEMO worker.
+Changed checklist run date key used by run_NEMO and watch_NEMO workers from "run_date" to "run date".
+Changed _launch_worker method to get remote host Python interpreter and config file from nowcast system config.
+Changed run_NEMO worker to use config on remote host to find Python interpreter and config file to run watch_NEMO worker with.
 
-Hacked _launch_worker to use python3
 Hacked salishsea_cmd.api on west.cloud to include MPI decomposition key in run description
-Hacked run_NEMO worker on west.cloud to run correct watch_NEMO with Python 3
 (MEOPAR)
 
 
