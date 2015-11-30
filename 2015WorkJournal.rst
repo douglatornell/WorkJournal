@@ -1923,6 +1923,31 @@ Hacked salishsea_cmd.api on west.cloud to include MPI decomposition key in run d
 (MEOPAR)
 
 
+Sat 28-Nov-2015
+^^^^^^^^^^^^^^^
+
+skookum nowcast system ran forecast2 without manual intervention, but make_plots worker failed with a KeyError.
+Fixed bug in make_plots worker and re-ran it for forecast/28nov15, forecast2/27nov15, and forecast/27nov15.
+Merged tools default branch into SalishSeaNowcast branch.
+(MEOPAR)
+
+Finished Python lists section of Jupyter Notebook to demo hvsi calcs module, and added it to docs with an nbviewer link.
+Added notebook section re: using data from spreadsheet to calculate HVSI values.
+(sealinkd)
+
+
+Sun 29-Nov-2015
+^^^^^^^^^^^^^^^
+
+Got sealinkd VM up and running on niko after thrash due to mistyped postgres app password.
+Got access to the app database in the dev VM working in a Jupyter notebook.
+Added Indicator.types_for_capital() class method that returns indicator types iterable for use in hvsi.hvsi().
+Added IndicatorValue.for_community_capital() class method that returns indicator values iterable for use in hvsi.hvsi().
+Added IndicatorValue.ranges_for_capital() class method that is a indicator value ranges generator for use in hvsi.hvsi().
+Added section to hvsi calcs notebook about using app database data in hvsi.hvsi().
+(sealinkd)
+
+
 ToDo
 ====
 
