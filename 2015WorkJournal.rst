@@ -1947,6 +1947,40 @@ Added IndicatorValue.ranges_for_capital() class method that is a indicator value
 Added section to hvsi calcs notebook about using app database data in hvsi.hvsi().
 (sealinkd)
 
+Discovered that nowcast mgr had crashed on Sat evening so none of forecast2/28nov15, nowcast/29nov15, or forecast/29nov15 ran; re-started mgr and got nowcast/29nov15 running.
+(MEOPAR)
+
+
+Week 47
+-------
+
+Mon 23-Nov-2015
+^^^^^^^^^^^^^^^
+
+* work on SalishSeaCmd API
+* finish skookum files migration: spin-up, sshNeahBay, NEMO-atmos/ops
+* talk to Charles about ERDDAP installation
+
+* finish SalishSeaNowcast files migration
+  * talk to Susan
+    * are wgrib2 and grid_defn.pl links needed?
+
+Continued cleaning up from yesterday's nowcast mgr downtime mess.
+Met w/ Elise and Muriel re: tasks for Muriel.
+Stripped 349dd1cc8d64 based branch (Susan's mistake) from tools repo, but I suspect that it is only a local effect, and that those commits will come back when next I pull.
+Enabled commit notification emails for tools repo so that I can review Muriel's commits.
+Decided on salishsea.eos.ubc.ca/erddap/ as mount point for ERDDAP app; emailed Charles to meet re: install & config.
+Met w/ Muriel re: onboarding.
+Discussed remaining salishsea_tools/nowcast/ file moves w/ Susan and Nancy.
+Moved notebooks to nowcast/notebooks/ and buffed make_readme.py there.
+Moved tidal_predictions/ to nowcast/ and fixed paths for it there, including adding it to nowcast.yaml for get_NEahBay_ssh worker.
+(MEOPAR)
+
+Cleaned up, committed and pushed the weekend's work.
+(sealinkd)
+
+Attended Phsy Ocgy seminary by Nancy on mixing in ocean models & Salish Sea NEMO in particular.
+
 
 ToDo
 ====
