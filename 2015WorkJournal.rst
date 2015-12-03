@@ -1951,19 +1951,14 @@ Discovered that nowcast mgr had crashed on Sat evening so none of forecast2/28no
 (MEOPAR)
 
 
+December
+========
+
 Week 47
 -------
 
-Mon 23-Nov-2015
+Mon 30-Nov-2015
 ^^^^^^^^^^^^^^^
-
-* work on SalishSeaCmd API
-* finish skookum files migration: spin-up, sshNeahBay, NEMO-atmos/ops
-* talk to Charles about ERDDAP installation
-
-* finish SalishSeaNowcast files migration
-  * talk to Susan
-    * are wgrib2 and grid_defn.pl links needed?
 
 Continued cleaning up from yesterday's nowcast mgr downtime mess.
 Met w/ Elise and Muriel re: tasks for Muriel.
@@ -1982,8 +1977,50 @@ Cleaned up, committed and pushed the weekend's work.
 Attended Phsy Ocgy seminary by Nancy on mixing in ocean models & Salish Sea NEMO in particular.
 
 
+Tue 1-Dec-2015
+^^^^^^^^^^^^^^
+
+Moved the rest of the spin-up run results from /ocean/dlatorne/MEOPAR/SalishSea/results/spin-up/ to /results/SalishSea/spin-up/.
+Hacked around a path bug in the make_plots worker that I introduced yesterday when I moved the tidal_predictions/ files.
+Moved the NeahBay ssh forcing history from /ocean/nsoontie/MEOPAR/sshNeahBay/ to /results/forcing/sshNeahBay/.
+Moved /ocean/sallen/allen/research/MEOPAR/Operational/ to /results/forcing/atmospheric/GEM2.5/operational/.
+Deleted SalishSeaTools/salishsea_tools/nowcast/ in SalishSeaNowcat branch.
+Investigated Atom vs. RSS feed format for Port Metro Vancouver; still no clear winner, so ask what they prefer.
+ONC-ADCP data download for east node failed.
+Met w/ Charles re: ERDDAP on skookum.
+Merged, closed, tagged & pushed SalishSeaNowcast branch.
+Salish Sea team group meeting; see Google Drive whiteboard.
+(MEOPAR)
+
+Figured out how to determine what repo revision was used to build SOG buildbot ref files byt digging in build history & ref files dirs; see whiteboard.
+(SOG)
+
+Updated SCARP team on progress and plans, in response to Jackie's update yesterday re: profiles page layout.
+Copied ssl certs to my sysadmin space on the app vm.
+Installed resilient-c.ubc.ca cert & key but can't connect from Internet, only locally; sent email to Karen re: possible firewall rule tweak, and she passed the ticket to NMC where Nathan did the necessary firewall change.
+(sealinkd)
+
+
+Wed 2-Dec-2015
+^^^^^^^^^^^^^^
+
+Site visit re: isoinfo server failure; see notes in 2dec15-isoinfo-maint.rst file in client file.
+(Nordion)
+
+Investigated and resolved issue of why download_weather workers are not logging into ~/public_html/MEOPAR/nowcast/; path issues in cron scripts.
+Pulled merged code into skookum nowcast-sys deployment and flipped branch there to default.
+(MEOPAR)
+
+
 ToDo
 ====
+
+* fix make_plots & figures.get_tides issue
+
+* work on SalishSeaCmd API
+* talk to Charles about ERDDAP installation
+
+* change sealinkd static routes to use HTTPS
 
 * setup pyenv and tox for nosy
 * fix nosy exceptions re: 2.5, as, sys.exc_info()
