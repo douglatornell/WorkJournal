@@ -2012,15 +2012,28 @@ Pulled merged code into skookum nowcast-sys deployment and flipped branch there 
 (MEOPAR)
 
 
-ToDo
-====
+Thu 3-Dec-2015
+^^^^^^^^^^^^^^
 
 * fix make_plots & figures.get_tides issue
 
 * work on SalishSeaCmd API
-* talk to Charles about ERDDAP installation
 
 * change sealinkd static routes to use HTTPS
+
+Invoiced Nordion for 1/3 of present project.
+(Nordion)
+
+Noticed dramatic speed-up in nowcast weather downloads and sent thankyou email to Pat@EC; she was surprised by the speed-up.
+Worked on figures.get_tides() path issue and SalishSeaCmd API changes that nowcast needs.
+Discussed use of SalishSeaNowcast package w/ Nancy.
+Helped Nancy get NEMO-3.6 running or orcinus, and Elise get set up on orcinus.
+Discussed SalishSeaCmd features required for green model w/ Elise.
+(MEOPAR)
+
+
+ToDo
+====
 
 * setup pyenv and tox for nosy
 * fix nosy exceptions re: 2.5, as, sys.exc_info()
