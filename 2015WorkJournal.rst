@@ -2015,12 +2015,6 @@ Pulled merged code into skookum nowcast-sys deployment and flipped branch there 
 Thu 3-Dec-2015
 ^^^^^^^^^^^^^^
 
-* fix make_plots & figures.get_tides issue
-
-* work on SalishSeaCmd API
-
-* change sealinkd static routes to use HTTPS
-
 Invoiced Nordion for 1/3 of present project.
 (Nordion)
 
@@ -2032,8 +2026,29 @@ Discussed SalishSeaCmd features required for green model w/ Elise.
 (MEOPAR)
 
 
+Fri 4-Dec-2015
+^^^^^^^^^^^^^^
+
+* get HTTPS working for alternate sealinkd app domain names
+* reduce resolution of landing page images for faster load times
+* add docs re: sealinkd server-side app framework
+* add EduCloud deployment docs
+* deploy Piwik
+* implement user mgmt
+
+Reviewed project progress & status, and updated issue tracker.
+Tagged 1.0.dev0 re: start of implementation of HVSI into app page skeletons.
+Changed community selector on Analysis page to use HVSI values calculated from the database.
+Updated conda and sealinkd envs on kudu, dev VM, and sealinkd-vm, and installed matplotlib in all 3 envs.
+Started work on bar charts for analysis page, and got an initial implementation of the main panel chart that looks and works okay.
+(sealinkd)
+
+
 ToDo
 ====
+
+* fix make_plots & figures.get_tides issue
+* work on SalishSeaCmd API
 
 * setup pyenv and tox for nosy
 * fix nosy exceptions re: 2.5, as, sys.exc_info()
