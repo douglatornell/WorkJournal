@@ -2029,13 +2029,6 @@ Discussed SalishSeaCmd features required for green model w/ Elise.
 Fri 4-Dec-2015
 ^^^^^^^^^^^^^^
 
-* get HTTPS working for alternate sealinkd app domain names
-* reduce resolution of landing page images for faster load times
-* add docs re: sealinkd server-side app framework
-* add EduCloud deployment docs
-* deploy Piwik
-* implement user mgmt
-
 Reviewed project progress & status, and updated issue tracker.
 Tagged 1.0.dev0 re: start of implementation of HVSI into app page skeletons.
 Changed community selector on Analysis page to use HVSI values calculated from the database.
@@ -2044,20 +2037,56 @@ Started work on bar charts for analysis page, and got an initial implementation 
 (sealinkd)
 
 
+Sat 5-Dec-2015
+^^^^^^^^^^^^^^
+
+* get HTTPS working for alternate sealinkd app domain names
+* reduce resolution of landing page images for faster load times
+* add docs re: sealinkd server-side app framework
+* add EduCloud deployment docs
+* deploy Piwik
+* implement user mgmt
+
+* add open_boundaries symlinks to nowcast deployment docs:
+    512  ln -s /data/dlatorne/MEOPAR/NEMO-forcing/open_boundaries/north
+    515  ln -s /data/dlatorne/MEOPAR/NEMO-forcing/open_boundaries/west/SalishSea2_Masson_corrected.nc
+    517  ln -s /data/dlatorne/MEOPAR/NEMO-forcing/open_boundaries/west/tides
+* add nowcast deployment docs to repo
+
+Cleaned up, committed, and pushed to production yesterday's Analysis page HVSI bar chart work.
+Fixed site.css permissions on production server; changes due to hg update?
+(sealinkd)
+
+Started adding nowcast-green to nowcast system by adding nowcast-green run type to make_forcing_links worker and launching make_forcing_links nowcast-green from after_grib_to_netcdf message handler.
+Bumped SalishSeaCmd version to 2.1.dev0.
+Added nemo34 arg to SalishSeaCmd API run_description() and run_in_subprocess() functions.
+Changed salishsea prepare to be able to create multiple namelist files for NEMO-3.6 from section file lists in YAML run description file; lists are keyed by the namelist file name they are concatenated into.
+(MEOPAR)
+
+
+Sun 6-Dec-2015
+^^^^^^^^^^^^^^
+
+Set up vagrant VM for tox testing; got test suite passing under 3.5, 3.4, 3.3, 3.2, 2.7, 2.6, and 2.5.
+Released nosy v1.2 on PyPI.
+(nosy)
+
+Discussed Salish Sea NEMO 2.0 docs organization w/ Susan.
+Manually ran make_forcing_links nowcast-green because I messed up pulling it into the automation.
+Re-organized Python packaging docs to make room for library code section and started writing it.
+Re-named and re-labeled SalishSeaTools package docs section.
+(MEOPAR)
+
+
 ToDo
 ====
 
 * fix make_plots & figures.get_tides issue
 * work on SalishSeaCmd API
 
-* setup pyenv and tox for nosy
-* fix nosy exceptions re: 2.5, as, sys.exc_info()
-* Link @-mentions in nosy docs
-* review remaining nosy PRs
-* release nosy 1.2
-* push nosy 1.2 page to douglatornell.ca
-
 * update storm surge paper refs w/ doi link
 * research_ferries module
 * JSON logging use example notebook
 * numpy.testing assert weirdness
+
+* review remaining nosy PRs
