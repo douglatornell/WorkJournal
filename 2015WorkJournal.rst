@@ -2081,8 +2081,16 @@ Add notes on installation of SalishSeaNowcast package as a library to docs, and 
 Fixed docs config so that API sections build again on readthedocs.
 (MEOPAR)
 
+
+Tue 8-Dec-2015
+^^^^^^^^^^^^^^
+
 * fix make_plots & figures.get_tides issue
 * work on SalishSeaCmd API
+
+Changed relative imports to absolute in SalishSeaNowcast and SalishSeaCmd packages.
+Added teos_tools module to SalishSeaTools package w/ unit tests & API docs.
+(MEOPAR)
 
 
 ToDo
