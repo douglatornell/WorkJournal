@@ -2040,19 +2040,6 @@ Started work on bar charts for analysis page, and got an initial implementation 
 Sat 5-Dec-2015
 ^^^^^^^^^^^^^^
 
-* get HTTPS working for alternate sealinkd app domain names
-* reduce resolution of landing page images for faster load times
-* add docs re: sealinkd server-side app framework
-* add EduCloud deployment docs
-* deploy Piwik
-* implement user mgmt
-
-* add open_boundaries symlinks to nowcast deployment docs:
-    512  ln -s /data/dlatorne/MEOPAR/NEMO-forcing/open_boundaries/north
-    515  ln -s /data/dlatorne/MEOPAR/NEMO-forcing/open_boundaries/west/SalishSea2_Masson_corrected.nc
-    517  ln -s /data/dlatorne/MEOPAR/NEMO-forcing/open_boundaries/west/tides
-* add nowcast deployment docs to repo
-
 Cleaned up, committed, and pushed to production yesterday's Analysis page HVSI bar chart work.
 Fixed site.css permissions on production server; changes due to hg update?
 (sealinkd)
@@ -2078,11 +2065,35 @@ Re-named and re-labeled SalishSeaTools package docs section.
 (MEOPAR)
 
 
-ToDo
-====
+Week 48
+-------
+
+Mon 7-Dec-2015
+^^^^^^^^^^^^^^
+
+Discussed nowcast system and research_ferries module w/ Muriel.
+Attended Phys Ocgy seminar by Idalia about her submarine canyons research.
+Fixed path errors in nowcast.yaml so that nowcast-green could finally start.
+Discussed new SalishSeaTools sea surface height anomaly module w/ Nancy.
+Added initial version of nowcast system production deployment docs to SalishSeaNowcast package docs.
+Fixed bug in _after_grib_to_netcdf() that it to try to launch upload_forcing worker for nowcast-green; deployed bug fix.
+Add notes on installation of SalishSeaNowcast package as a library to docs, and moved worker failure mitigation docs into a separate section.
+Fixed docs config so that API sections build again on readthedocs.
+(MEOPAR)
 
 * fix make_plots & figures.get_tides issue
 * work on SalishSeaCmd API
+
+
+ToDo
+====
+
+* get HTTPS working for alternate sealinkd app domain names
+* reduce resolution of landing page images for faster load times
+* add docs re: sealinkd server-side app framework
+* add EduCloud deployment docs
+* deploy Piwik
+* implement user mgmt
 
 * update storm surge paper refs w/ doi link
 * research_ferries module
