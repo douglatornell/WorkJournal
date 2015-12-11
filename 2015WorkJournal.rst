@@ -2090,11 +2090,26 @@ Tue 8-Dec-2015
 
 Changed relative imports to absolute in SalishSeaNowcast and SalishSeaCmd packages.
 Added teos_tools module to SalishSeaTools package w/ unit tests & API docs.
+Wrote draft email to Cindy Jeromin @PMV re: storm surge forecast feed.
+Discussed research_ferries progress w/ Muriel.
+Discussed nowcast-green & database for nutrient data w/ Elise.
+Started working on forcing links changes for NEMO-3.6 in SalishSeaCmd package.
+Salish Sea team mtg; see Google Drive whiteboard.
 (MEOPAR)
 
 
-ToDo
-====
+Wed 9-Dec-2015
+^^^^^^^^^^^^^^
+
+* fix make_plots & figures.get_tides issue
+* fix run_NEMO re: nemo34 & mpi_decomposition in SalishSeaCmd API
+* add forcing links checking for NEMO-3.6
+
+Finished implementation of flexible naming for forcing links for NEMO-3.6 in SalishSeaCmd package.
+Reviewed Nancy's changes to the get_NeahBay_ssh worker.
+Started work on fixing make_plots worker and figures.get_tides() issue re: tidal predictions path.
+Tested and debugged flexible naming for forcing links for NEMO-3.6 in SalishSeaCmd package in nowcast-green context.
+(MEOPAR)
 
 * get HTTPS working for alternate sealinkd app domain names
 * reduce resolution of landing page images for faster load times
@@ -2102,6 +2117,46 @@ ToDo
 * add EduCloud deployment docs
 * deploy Piwik
 * implement user mgmt
+
+Fixed project name in package metadata file - it must be the package name (SealinkD) in order for the package to install properly.
+Moved auth ticket signing secret to private credentials file.
+Fix default umask on EduCloud VM and documented that in the deployment notes.
+Fixed the Analysis page main panel chart spill-over issue that Jackie reported; incorrectly spelled class in the img tag.
+Added HVSI bar charts to capital sidebars on the Analysis page.
+(sealinkd)
+
+
+Thu 10-Dec-2015
+^^^^^^^^^^^^^^^
+
+Discussed w/ Susan provision of data to Yongsheng@DFO for FVCOM model of harbour & Fraser.
+Pushed flexible naming for forcing links for NEMO-3.6 in SalishSeaCmd package in nowcast-green context.
+Investigated missing nowcast/early-days/ 1d_grid_T file that Nancy spotted; no explanation, lost from /data/dlatorne/MEOPAR/SalishSea/nowcast/early-days/.
+Pulled Nancy's get_NeahBay_ssh worker and nowcast.residuals changes into production nowcast.
+Finished fixing make_plots worker and figures.get_tides() issue re: tidal predictions path; pulled into production.
+Wrote draft email to Cindy Jeromin @PMV re: storm surge forecast feed, and got an enthusiastic reponse.
+Worked on results server docs, especially model changes for nowcast runs.
+Helped Nancy w/ NEMO-3.4 on orcinus libnetcdff.so not found issue.
+(MEOPAR)
+
+Start work on HVSI bar charts for Compare page.
+Re-organized panels on Compare page to accommodate addition of Institutional capital.
+(sealinkd)
+
+* fix SalishSeaCmd API re: namelists & forcing links
+* fix run_NEMO re: nemo34 & mpi_decomposition in SalishSeaCmd API
+* add forcing links checking for NEMO-3.6
+
+* get HTTPS working for alternate sealinkd app domain names
+* reduce resolution of landing page images for faster load times
+* add docs re: sealinkd server-side app framework
+* add EduCloud deployment docs
+* deploy Piwik
+* implement user mgmt
+
+
+ToDo
+====
 
 * update storm surge paper refs w/ doi link
 * research_ferries module
