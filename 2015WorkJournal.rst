@@ -2085,9 +2085,6 @@ Fixed docs config so that API sections build again on readthedocs.
 Tue 8-Dec-2015
 ^^^^^^^^^^^^^^
 
-* fix make_plots & figures.get_tides issue
-* work on SalishSeaCmd API
-
 Changed relative imports to absolute in SalishSeaNowcast and SalishSeaCmd packages.
 Added teos_tools module to SalishSeaTools package w/ unit tests & API docs.
 Wrote draft email to Cindy Jeromin @PMV re: storm surge forecast feed.
@@ -2101,22 +2098,11 @@ Salish Sea team mtg; see Google Drive whiteboard.
 Wed 9-Dec-2015
 ^^^^^^^^^^^^^^
 
-* fix make_plots & figures.get_tides issue
-* fix run_NEMO re: nemo34 & mpi_decomposition in SalishSeaCmd API
-* add forcing links checking for NEMO-3.6
-
 Finished implementation of flexible naming for forcing links for NEMO-3.6 in SalishSeaCmd package.
 Reviewed Nancy's changes to the get_NeahBay_ssh worker.
 Started work on fixing make_plots worker and figures.get_tides() issue re: tidal predictions path.
 Tested and debugged flexible naming for forcing links for NEMO-3.6 in SalishSeaCmd package in nowcast-green context.
 (MEOPAR)
-
-* get HTTPS working for alternate sealinkd app domain names
-* reduce resolution of landing page images for faster load times
-* add docs re: sealinkd server-side app framework
-* add EduCloud deployment docs
-* deploy Piwik
-* implement user mgmt
 
 Fixed project name in package metadata file - it must be the package name (SealinkD) in order for the package to install properly.
 Moved auth ticket signing secret to private credentials file.
@@ -2143,9 +2129,22 @@ Start work on HVSI bar charts for Compare page.
 Re-organized panels on Compare page to accommodate addition of Institutional capital.
 (sealinkd)
 
-* fix SalishSeaCmd API re: namelists & forcing links
-* fix run_NEMO re: nemo34 & mpi_decomposition in SalishSeaCmd API
-* add forcing links checking for NEMO-3.6
+
+Fri 11-Dec-2015
+^^^^^^^^^^^^^^^
+
+Added dimension HVSI bar charts for each capital to the Compare page, however, there is an unresolved ZeroDivisionError issue in many renderings, and the charts that do render show almost uniform 1.0 values - suspicious.
+(sealinkd)
+
+Dealt with overnight download failures from EC web services.
+Manually ran ECget river flow cron jobs, make_runoff_file worker, download_weather workers for 00, 06, and 12 forecasts, upload_forcing worker against west.cloud to get nowcast run started, and make_forcing_links worker against salish to prepare for nowcast-green run.
+Thought about ATOM feed for storm surge notifications and realized how it can probably be implemented as a nowcast worker.
+make_plots nowcast research worker failed due to ConnectionError getting VENUS data; research_VENUS.load_VENUS() does not use nowcast.lib.get_web_data() techniques (but it rarely fails); created tools repo issue #25.
+Cleaned up and committed my notebook re: DFO water levels web service.
+Fixed run_NEMO worker re MPI decomposition addition to salishsea_cmd.api.run_description().
+Worked on nemo34 bug in salishsea run re: orcinus modules; waiting for confirmation from Nancy.
+Stopped nowcast test suite from writing nowcast_checklist.log file, and fixed test_analyze.py so that it had a non-uniform depths array in code instead of reading it from a run results file.
+(MEOPAR)
 
 * get HTTPS working for alternate sealinkd app domain names
 * reduce resolution of landing page images for faster load times
@@ -2153,6 +2152,10 @@ Re-organized panels on Compare page to accommodate addition of Institutional cap
 * add EduCloud deployment docs
 * deploy Piwik
 * implement user mgmt
+
+* fix SalishSeaCmd API re: namelists & forcing links
+* add forcing links checking for NEMO-3.6
+* fix nemo34 bug in salishsea run re: orcinus modules
 
 
 ToDo
