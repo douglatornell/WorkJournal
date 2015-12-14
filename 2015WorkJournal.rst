@@ -2146,12 +2146,20 @@ Worked on nemo34 bug in salishsea run re: orcinus modules; waiting for confirmat
 Stopped nowcast test suite from writing nowcast_checklist.log file, and fixed test_analyze.py so that it had a non-uniform depths array in code instead of reading it from a run results file.
 (MEOPAR)
 
-* get HTTPS working for alternate sealinkd app domain names
-* reduce resolution of landing page images for faster load times
-* add docs re: sealinkd server-side app framework
-* add EduCloud deployment docs
-* deploy Piwik
-* implement user mgmt
+
+Sat 12-Dec-2015
+^^^^^^^^^^^^^^^
+
+Started work on nowcast ATOM feeds.
+(MEOPAR)
+
+
+Sun 13-Dec-2015
+^^^^^^^^^^^^^^^
+
+Continued work on nowcast ATOM feeds in analysis/Doug/ notebook.
+Did some refactoring in nowcast.figures.
+(MEOPAR)
 
 * fix SalishSeaCmd API re: namelists & forcing links
 * add forcing links checking for NEMO-3.6
@@ -2160,6 +2168,13 @@ Stopped nowcast test suite from writing nowcast_checklist.log file, and fixed te
 
 ToDo
 ====
+
+* get HTTPS working for alternate sealinkd app domain names
+* reduce resolution of landing page images for faster load times
+* add docs re: sealinkd server-side app framework
+* add EduCloud deployment docs
+* deploy Piwik
+* implement user mgmt
 
 * update storm surge paper refs w/ doi link
 * research_ferries module
