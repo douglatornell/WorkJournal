@@ -2161,9 +2161,47 @@ Continued work on nowcast ATOM feeds in analysis/Doug/ notebook.
 Did some refactoring in nowcast.figures.
 (MEOPAR)
 
+
+Week 49
+-------
+
+Mon 14-Dec-2015
+^^^^^^^^^^^^^^^
+
+Congratulated Nancy on the accuracy of the model residuals in her Dec analysis notebook, and discussed nowcast.figures refactoring.
+Discussed forcing for 8-Dec nowcast-green run w/ Elise to help her reproduce the exploding nutrients; also talked about her run failures on orcinus that I offered to investigate.
+Checked in with Muriel and briefly discussed nowcast.figures refactoring, and extraction of code into salishsea_tools modules.
+Investigate nowcast 12 forecast download_weather worker failure: same Content-Length header issue as on 23-Nov; looks like EC server is sending text/plain; send email to Sandarine@EC.
+Continued work on nowcast ATOM feeds in notebook.
+Hacked around EC issue to get 12 and 18 weather downloads and get nowcast/forecast runs happening in the evening.
+(MEOPAR)
+
+Attended Phys Ocgy seminar by Lian Kwong on micronekton ecosystem modeling.
+
+Christmas lunch w/ MOAD group.
+
+Headache and fatigue in the late afternoon and evening.
+
+
+Tue 15-Dec-2015
+^^^^^^^^^^^^^^^
+
+Fatigue and body aches.
+
+Nowcast 06 weather download got 2 zero length files that caused grib_to_netcdf worker to fail; Susan manually re-downloaded the files and I manually re-ran grib_to_netcdf worker to restart automation and get forecast2 run going at 08:15.
+12 weather forecast was still MIA at 11:00.
+Continued work on nowcast ATOM feeds in notebook.
+Downloaded missing 11dec15 HRDPS research forecast.
+Salish Sea team meeting; see Google Drive whiteboard.
+(MEOPAR)
+
+Restarted build slaves on smelt and snapper.
+(SOG)
+
+* fix nemo34 bug in salishsea run re: orcinus modules
+* investigate Elise's orcinus run issues
 * fix SalishSeaCmd API re: namelists & forcing links
 * add forcing links checking for NEMO-3.6
-* fix nemo34 bug in salishsea run re: orcinus modules
 
 
 ToDo
