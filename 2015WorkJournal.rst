@@ -2198,6 +2198,20 @@ Salish Sea team meeting; see Google Drive whiteboard.
 Restarted build slaves on smelt and snapper.
 (SOG)
 
+
+Wed 16-Dec-2015
+^^^^^^^^^^^^^^^
+
+Worked on recovering nowcast system; 15dec15 12 and 18 HRDPS weather forecasts never appeared on EC site.
+Via various hacks and weather file symlink patches got 15dec15 nowcast and forecast runs, then moved on to 16dec15.
+Reviewed Muriel's refactoring of the nowcast.research_ferries module.
+(MEOPAR)
+
+Investigated ZeroDivisionError exceptions in Compare page view; e.g. Squamish-Richmond is for Institutional size 0 and None values; added some logging and tested some other cases and it looks like the exception occurs capital by dimension HVSIs whenever there is missing data for one of the communities, so it is a 0/0 situation.
+(sealinkd)
+
+Christmas shopping
+
 * fix nemo34 bug in salishsea run re: orcinus modules
 * investigate Elise's orcinus run issues
 * fix SalishSeaCmd API re: namelists & forcing links
