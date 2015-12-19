@@ -2212,10 +2212,35 @@ Investigated ZeroDivisionError exceptions in Compare page view; e.g. Squamish-Ri
 
 Christmas shopping
 
+
+Thu 17-Dec-2015
+^^^^^^^^^^^^^^^
+
+Several 06 forecast weather files downloaded as zero length; Susan manually re-downloaded them and I ran grib-to_netcdf manually to restart the automation for the forecast2 run.
+EC emailed about grid changes for the forecast models that were rolled out on 15Dec but made no mention of missing forecasts, etc.
+Continued work on nowcast ATOM feeds in notebook; realized that wind reported in feed should be average for 4 hrs before max water level to provide information about wave setup.
+(MEOPAR)
+
+Site visit re: isoinfo server RAID rebuild & Minerva maintenance; see notes in 17dec15-isoinfo-maint.rst file in client file.
+(Nordion)
+
+
+Fri 18-Dec-2015
+^^^^^^^^^^^^^^^
+
+Site visit re: Minerva maintenance; see notes in 17dec15-isoinfo-maint.rst file in client file.
+(Nordion)
+
+* fix use of FileNotFoundError for Python 2.7 in prepare.py
 * fix nemo34 bug in salishsea run re: orcinus modules
 * investigate Elise's orcinus run issues
 * fix SalishSeaCmd API re: namelists & forcing links
 * add forcing links checking for NEMO-3.6
+
+One 06 forecast weather file downloaded as zero length; Susan manually re-downloaded it and I ran grib-to_netcdf manually to restart the automation for the forecast2 run.
+Two 06 forecast weather files downloaded as zero length; Susan manually re-downloaded them and I ran grib-to_netcdf manually to restart the automation for the nowcast run.
+Continued work on nowcast ATOM feeds in notebook; finished 4 hr average wind calculations, and made a lot of progress on the template and rendering it to RST then HTML.
+(MEOPAR)
 
 
 ToDo
