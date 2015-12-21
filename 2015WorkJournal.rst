@@ -1912,7 +1912,7 @@ Stopped nowcast mgr on salish, copied nowcast.yaml config from skookum test dir,
 Fixed logic bugs in _after_download_weather and _after_get_NeahBay_ssh.
 Updated west.cloud to SalishSeaNowcast branch.
 Installed Python 3 packages that nowcast needs on west.cloud: python3-pip, python3-dev, python3-matplotlib, python3-pandas, python3-cliff, python3-zmq.
-Installed SalidhSeaTools, SalishSeaCmd, and SalishSeaNowcast for Python 3 on west.cloud using --user.
+Installed SalishSeaTools, SalishSeaCmd, and SalishSeaNowcast for Python 3 on west.cloud using --user.
 Added nemo34=True flag to salishsea_cmd.api.prepare() call in runNEMO worker.
 Removed --no-compress from salishsea gather options in run_NEMO worker.
 Changed checklist run date key used by run_NEMO and watch_NEMO workers from "run_date" to "run date".
@@ -2231,16 +2231,46 @@ Fri 18-Dec-2015
 Site visit re: Minerva maintenance; see notes in 17dec15-isoinfo-maint.rst file in client file.
 (Nordion)
 
-* fix use of FileNotFoundError for Python 2.7 in prepare.py
-* fix nemo34 bug in salishsea run re: orcinus modules
-* investigate Elise's orcinus run issues
-* fix SalishSeaCmd API re: namelists & forcing links
-* add forcing links checking for NEMO-3.6
-
 One 06 forecast weather file downloaded as zero length; Susan manually re-downloaded it and I ran grib-to_netcdf manually to restart the automation for the forecast2 run.
 Two 06 forecast weather files downloaded as zero length; Susan manually re-downloaded them and I ran grib-to_netcdf manually to restart the automation for the nowcast run.
 Continued work on nowcast ATOM feeds in notebook; finished 4 hr average wind calculations, and made a lot of progress on the template and rendering it to RST then HTML.
 (MEOPAR)
+
+
+Sat 19-Dec-2015
+^^^^^^^^^^^^^^^
+
+Upgraded kudu to Ubuntu 15.10 "Wily Werewolf".
+
+One 06 forecast weather file downloaded as zero length; Susan manually re-downloaded it and I ran grib-to_netcdf manually to restart the automation for the forecast2 run.
+Helped Susan refactor map generation to reduce bloat that started when we moved to Python 3.5 and matplotlib 1.5.
+Fixed use of FileNotFoundError in prepare.py so that it works for Python 2.7 and 3.5.
+Fixed nemo34 bug in salishsea run re: orcinus modules.
+Started work on adding forcing link checks to NEMO-3.6 to salishsea prepare.
+(MEOPAR)
+
+
+Sun 20-Dec-2015
+^^^^^^^^^^^^^^^
+
+* fix SalishSeaCmd API re: namelists & forcing links
+* refactor, unit tests & docs for forcing links checking for NEMO-3.6
+
+One 06 forecast weather file downloaded as zero length; Susan manually re-downloaded it and *she* ran grib-to_netcdf manually to restart the automation for the forecast2 run.
+One 12 forecast weather file downloaded as zero length; Susan manually re-downloaded it and *she* ran grib-to_netcdf manually to restart the automation for the nowcast run.
+Did code review on Susan's figures.py refactoring.
+Committed and pushed 1st draft of adding forcing link checks to NEMO-3.6 to salishsea prepare for Susan to test on nowcast-green.
+Fixed wind calculation bugs in nowcast ATOM feeds in notebook, and added humanized time of day calculation.
+Produced a feed that I could read on feedly!
+(MEOPAR)
+
+Did year-end database rollover on randopony.
+Fixed a membership link bug in populaires entry form view.
+Updated membership link to 2016.
+Set up New Year's Pop event.
+(RandoPony)
+
+* write email report for Nordion
 
 
 ToDo
