@@ -1844,7 +1844,7 @@ Continued work on SalishSeaNowcast package:
 (MEOPAR)
 
 
-Week 47
+Week 48
 -------
 
 Mon 23-Nov-2015
@@ -1954,7 +1954,7 @@ Discovered that nowcast mgr had crashed on Sat evening so none of forecast2/28no
 December
 ========
 
-Week 47
+Week 49
 -------
 
 Mon 30-Nov-2015
@@ -2065,7 +2065,7 @@ Re-named and re-labeled SalishSeaTools package docs section.
 (MEOPAR)
 
 
-Week 48
+Week 50
 -------
 
 Mon 7-Dec-2015
@@ -2162,7 +2162,7 @@ Did some refactoring in nowcast.figures.
 (MEOPAR)
 
 
-Week 49
+Week 51
 -------
 
 Mon 14-Dec-2015
@@ -2253,9 +2253,6 @@ Started work on adding forcing link checks to NEMO-3.6 to salishsea prepare.
 Sun 20-Dec-2015
 ^^^^^^^^^^^^^^^
 
-* fix SalishSeaCmd API re: namelists & forcing links
-* refactor, unit tests & docs for forcing links checking for NEMO-3.6
-
 One 06 forecast weather file downloaded as zero length; Susan manually re-downloaded it and *she* ran grib-to_netcdf manually to restart the automation for the forecast2 run.
 One 12 forecast weather file downloaded as zero length; Susan manually re-downloaded it and *she* ran grib-to_netcdf manually to restart the automation for the nowcast run.
 Did code review on Susan's figures.py refactoring.
@@ -2270,7 +2267,31 @@ Updated membership link to 2016.
 Set up New Year's Pop event.
 (RandoPony)
 
-* write email report for Nordion
+
+Week 51
+-------
+
+Mon 21-Dec-2015
+^^^^^^^^^^^^^^^
+
+Updated Sublime Text 3 theme on kudu to SoDaReloaded.
+
+EC wateroffice site is down so ECget failed to collect daily average flows for Fraser and Englishman; Susan patched Fraser flow for nowcast w/ yesterday's file.
+One 06 forecast weather file downloaded as zero length; Susan manually re-downloaded it ran grib-to_netcdf manually to restart the automation for the forecast2 run.
+Started development of nowcast make_feeds worker.
+Dealt with mysterious permission error during forecast2 sphinx build.
+Generated feeds for forecast2 and forecast from notebook and manually uploaded them to site.
+(MEOPAR)
+
+* re-fix FileNotFoundError for Python 2.7 in prepare
+* fix SalishSeaCmd API re: namelists & forcing links
+* refactor, unit tests & docs for forcing links checking for NEMO-3.6
+
+Separated project files from client files on kudu and set up client files repo for Nordion w/ cloud storage on Bitbucket.
+(43ravens)
+
+Wrote draft of report to Nordion re: state of isoinfo server and future options.
+(Nordion)
 
 
 ToDo
