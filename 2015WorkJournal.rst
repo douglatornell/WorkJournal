@@ -11,7 +11,7 @@ This journal is about:
   `43ravens`_
 * my `open-source activities`_
 
-There was a hiatus in my journalling between Fri 17-Oct-2014 and Wed 27-May-2015 - sorry!
+There was a hiatus in my journaling between Fri 17-Oct-2014 and Wed 27-May-2015 - sorry!
 
 
 May
@@ -2283,10 +2283,6 @@ Dealt with mysterious permission error during forecast2 sphinx build.
 Generated feeds for forecast2 and forecast from notebook and manually uploaded them to site.
 (MEOPAR)
 
-* re-fix FileNotFoundError for Python 2.7 in prepare
-* fix SalishSeaCmd API re: namelists & forcing links
-* refactor, unit tests & docs for forcing links checking for NEMO-3.6
-
 Separated project files from client files on kudu and set up client files repo for Nordion w/ cloud storage on Bitbucket.
 (43ravens)
 
@@ -2294,19 +2290,12 @@ Wrote draft of report to Nordion re: state of isoinfo server and future options.
 (Nordion)
 
 
-ToDo
-====
+Tue 22-Dec-2015
+^^^^^^^^^^^^^^^
 
-* get HTTPS working for alternate sealinkd app domain names
-* reduce resolution of landing page images for faster load times
-* add docs re: sealinkd server-side app framework
-* add EduCloud deployment docs
-* deploy Piwik
-* implement user mgmt
-
-* update storm surge paper refs w/ doi link
-* research_ferries module
-* JSON logging use example notebook
-* numpy.testing assert weirdness
-
-* review remaining nosy PRs
+Nowcast make_run_off worker failed due to cruft from yesterday's patching of the Fraser flow file; fixed that, downloaded Fraser and Englishman flows for yesterday, re-ran make_run_off worker, then ran upload_forcing worker to restart automation.
+The run_NEMO worker crashed for forecast2 because there was no nowcast item in the checklist; edited the checklist and restarted the mgr, then ran make_forcing_links worker to restart automation.
+Sent email to Cin@PMV announcing availability of their feed, thereby putting myself on the treadmill.
+Started development of nowcast make_feeds worker.
+Salish Sea team meeting; see Google Drive whiteboard.
+(MEOPAR)
