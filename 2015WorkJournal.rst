@@ -2268,7 +2268,7 @@ Set up New Year's Pop event.
 (RandoPony)
 
 
-Week 51
+Week 52
 -------
 
 Mon 21-Dec-2015
@@ -2298,4 +2298,103 @@ The run_NEMO worker crashed for forecast2 because there was no nowcast item in t
 Sent email to Cin@PMV announcing availability of their feed, thereby putting myself on the treadmill.
 Started development of nowcast make_feeds worker.
 Salish Sea team meeting; see Google Drive whiteboard.
+(MEOPAR)
+
+
+Wed 23-Dec-2015
+^^^^^^^^^^^^^^^
+
+Traveled to Parksville for Christmas holidays.
+
+Continued development of nowcast make_feeds worker.
+(MEOPAR)
+
+
+Thu 24-Dec-2015
+^^^^^^^^^^^^^^^
+
+Continued development of nowcast make_feeds worker.
+(MEOPAR)
+
+
+Fri 25-Dec-2015
+^^^^^^^^^^^^^^^
+
+Christmas Day
+
+
+Sat 26-Dec-2015
+^^^^^^^^^^^^^^^
+
+Continued development of nowcast make_feeds worker.
+Created salishsea_tools.unit_conversions module.
+Added ssh_timeseries_at_point() and uv_wind_timeseries_at_point() functions to salishsea_tools.nc_tools module.
+(MEOPAR)
+
+
+Sun 27-Dec-2015
+^^^^^^^^^^^^^^^
+
+Continued development of nowcast make_feeds worker.
+Added ssh_timeseries_at_point() and uv_wind_timeseries_at_point() functions to salishsea_tools.nc_tools module.
+Created salishsea_tools.wind_tools module.
+(MEOPAR)
+
+
+Week 53
+-------
+
+Mon 28-Dec-2015
+^^^^^^^^^^^^^^^
+
+Worked on salishsea_tools modules and unit tests.
+(MEOPAR)
+
+
+Tue 29-Dec-2015
+^^^^^^^^^^^^^^^
+
+Finished nowcast make_feeds worker to the point where it can be run manually to produce feed files.
+(MEOPAR)
+
+
+Wed 30-Dec-2015
+^^^^^^^^^^^^^^^
+
+Started development of nowcast run_NEMO36 worker, initially for nowcast-green.
+Started improvement of salishsea_cmd.api.run_description() function for NEMO-3.6 runs.
+(MEOPAR)
+
+
+Thu 31-Dec-2015
+^^^^^^^^^^^^^^^
+
+Continued development of nowcast run_NEMO36 worker.
+Continued improvement of salishsea_cmd.api.run_description() function for NEMO-3.6 runs.
+(MEOPAR)
+
+
+Fri 1-Jan-2016
+^^^^^^^^^^^^^^
+
+Continued development of nowcast run_NEMO36 worker.
+Refactored tell_manager() function from nowcast.lib as a NowcastWorker method.
+(MEOPAR)
+
+
+Sat 2-Jan-2016
+^^^^^^^^^^^^^^
+
+Continued development of nowcast run_NEMO36 worker.
+Refactored zmq initialiation function from nowcast.lib as a NowcastWorker method, and put WorkerError definition in nowcast_worker module.
+Changed NowcastWorker so that it does note connect to the messaging system when a worker is run with the --debug flag.
+(MEOPAR)
+
+
+Sun 3-Jan-2016
+^^^^^^^^^^^^^^
+
+Continued development of nowcast run_NEMO36 worker.
+Hooked nowcast make_feeds worker in to nowcast_mgr so that feeds generation is fully automated.
+Removed clean build of salishsea site from push_to_web worker.
 (MEOPAR)
