@@ -2289,6 +2289,9 @@ Separated project files from client files on kudu and set up client files repo f
 Wrote draft of report to Nordion re: state of isoinfo server and future options.
 (Nordion)
 
+Sent email to Jackie re: ZeroDivisionError exceptions in Compare page view.
+(sealinkd)
+
 
 Tue 22-Dec-2015
 ^^^^^^^^^^^^^^^
@@ -2339,6 +2342,10 @@ Continued development of nowcast make_feeds worker.
 Added ssh_timeseries_at_point() and uv_wind_timeseries_at_point() functions to salishsea_tools.nc_tools module.
 Created salishsea_tools.wind_tools module.
 (MEOPAR)
+
+Jackie replied re: ZeroDivisionError exceptions in Compare page view; HVSI for those cases is defined to be "NA", and she would like "NA" to appear in place of the bar in the charts.
+Email also had notes about other layout tweaks for Compare page.
+(sealinkd)
 
 
 Week 53
