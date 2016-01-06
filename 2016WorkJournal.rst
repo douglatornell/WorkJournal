@@ -34,6 +34,17 @@ Created 2016 journal file and did catch-up summary of holidays work to end 2015 
 Attended Phys Ocgy seminar by Susan on barotropic tides in the Salish Sea NEMO model.
 
 
+Tue 5-Jan-2015
+^^^^^^^^^^^^^^
+
+Started work on operational nowcast talk for 11-Jan Phys Ocgy seminar.
+
+Automated feed generation worked for forecast/04jan16 and forecast2/04jan15 runs.
+Tested run_NEMO36 worker in collaborations with Susan to launch nowcast-green run.; not yet ready for integration w/ mgr.
+Salish Sea team group meeting; see Google Drive whiteboard.
+(MEOPAR)
+
+
 ToDo
 ====
 
