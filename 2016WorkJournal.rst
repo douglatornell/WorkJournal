@@ -21,10 +21,6 @@ Week 1
 Mon 4-Jan-2016
 ^^^^^^^^^^^^^^
 
-* refactor, unit tests & docs for forcing links checking for NEMO-3.6
-* update quick-start docs re: NEMO-3.6 - Elise???
-* finish run_NEMO36 unit tests
-
 Restarted nowcast mgr after end-of-day to enable automation of PMV feed.
 Finished enough implementation of run_NEMO36 worker that it should be able to run nowcast-green on salish; figured out how to paraeterize unit tests re: absolute paths in run description; lots of other unit tests need to be written.
 (MEOPAR)
@@ -45,8 +41,25 @@ Salish Sea team group meeting; see Google Drive whiteboard.
 (MEOPAR)
 
 
-ToDo
-====
+Wed 6-Jan-2015
+^^^^^^^^^^^^^^
+
+Salvaged files off flaky ONC flash drive.
+Explored Google drive pull/push utility for Linux: https://github.com/odeke-em/drive
+Wrote docs re: Insurgency server: personal/insserver.rst
+
+Pinged Ken re: overdue Nordion invoices.
+Pinged Kevin re: overdue UBC SCARP invoice.
+(43ravens)
+
+Handled ZeroDivisionError exceptions on Compare page as NA HVSI values per 27Dec15 email from Jackie; also changed layout of map and bar graph panels as she requested.
+Delayed rounding of HVSI values until they are displayed as numbers on Analysis page.
+Started exploring Bootstrap popovers for Compare page; probably not a good idea because there is too much data per panel to display well in a popover, perhaps a table below the bar chart panels.
+Started exploring mapbox.com to generate map images.
+(sealinkd)
+
+
+* Ping Youyu re: NEMO nowcast project.
 
 * get HTTPS working for alternate sealinkd app domain names
 * reduce resolution of landing page images for faster load times
@@ -54,6 +67,13 @@ ToDo
 * add EduCloud deployment docs
 * deploy Piwik
 * implement user mgmt
+
+ToDo
+====
+
+* refactor, unit tests & docs for forcing links checking for NEMO-3.6
+* update quick-start docs re: NEMO-3.6 - Elise???
+* finish run_NEMO36 unit tests
 
 * update storm surge paper refs w/ doi link
 * research_ferries module
