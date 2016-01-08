@@ -59,6 +59,25 @@ Started exploring mapbox.com to generate map images.
 (sealinkd)
 
 
+Thu 7-Jan-2016
+^^^^^^^^^^^^^^
+
+* refactor, unit tests & docs for forcing links checking for NEMO-3.6
+* update quick-start docs re: NEMO-3.6 - Elise???
+* finish run_NEMO36 unit tests
+
+Continued work on operational nowcast talk for 11-Jan Phys Ocgy seminar.
+(MEOPAR)
+
+Mtg w/ Jackie re: new HVSI indicator data, app progress, and design details.
+(sealinkd)
+
+Attended Dept Colloquium on clay sedimentation in salt water by Bruce Sutherland.
+
+
+ToDo
+
+====
 * Ping Youyu re: NEMO nowcast project.
 
 * get HTTPS working for alternate sealinkd app domain names
@@ -67,13 +86,6 @@ Started exploring mapbox.com to generate map images.
 * add EduCloud deployment docs
 * deploy Piwik
 * implement user mgmt
-
-ToDo
-====
-
-* refactor, unit tests & docs for forcing links checking for NEMO-3.6
-* update quick-start docs re: NEMO-3.6 - Elise???
-* finish run_NEMO36 unit tests
 
 * update storm surge paper refs w/ doi link
 * research_ferries module
