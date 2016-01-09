@@ -62,22 +62,43 @@ Started exploring mapbox.com to generate map images.
 Thu 7-Jan-2016
 ^^^^^^^^^^^^^^
 
-* refactor, unit tests & docs for forcing links checking for NEMO-3.6
-* update quick-start docs re: NEMO-3.6 - Elise???
-* finish run_NEMO36 unit tests
-
 Continued work on operational nowcast talk for 11-Jan Phys Ocgy seminar.
 (MEOPAR)
 
 Mtg w/ Jackie re: new HVSI indicator data, app progress, and design details.
+Got latest update of data spreadsheet for app.
 (sealinkd)
 
 Attended Dept Colloquium on clay sedimentation in salt water by Bruce Sutherland.
 
 
+Fri 8-Jan-2016
+^^^^^^^^^^^^^^
+
+Struggled to install Mapbox Studio Classic on kudu due to node.js and npm issues; ultimately gave up.
+Installed Mapbox Studio Classic on tom and created & uploaded a label-less map that I can access via the static API.
+Mapbox Studio Classic and static API were a bust; switched to Mapbox.js and made lots of progress on Compare page map.
+Corrected mix-up of Squamish and Sooke coordinates in HVSI data spreadsheet.
+Corrected spelling mismatches between Communitites and Data sheets in HVSU data spreadsheet for City & District of North Van, and Comox C (Puntledge - Black Creek).
+Added marker lat & lon attrs to Community data model object.
+Re-created dev database and loaded it from the 6Jan HVSI data spreadsheet.
+(sealinkd)
+
+Discussed with Susan slides for operational nowcast talk for 11-Jan Phys Ocgy seminar, and continued to work on them.
+Helped Susan launch nowcast-green worker on salish.
+Help Susan get Jie's mess sorted out on orcinus.
+Helped Kyle get Anaconda usable on jasper.
+(MEOPAR)
+
+
 ToDo
 
 ====
+
+* refactor, unit tests & docs for forcing links checking for NEMO-3.6
+* update quick-start docs re: NEMO-3.6 - Elise???
+* finish run_NEMO36 unit tests
+
 * Ping Youyu re: NEMO nowcast project.
 
 * get HTTPS working for alternate sealinkd app domain names
