@@ -91,15 +91,38 @@ Helped Kyle get Anaconda usable on jasper.
 (MEOPAR)
 
 
+Sat 9-Jan-2016
+^^^^^^^^^^^^^^
+
+Nowcast critical error: make_plots worker failed at 04:13, but that was because the forecast2 run didn't produce results. That was due to 5 of the nodes having dropped their sshfs connections to the shared storage.
+(MEOPAR)
+
+Finished implementation of map on Compare page that shows communities that are being compared; marker coordinates come from database, and marker on-click events load the community's Profile page.
+Re-created prod database and loaded it from the 6Jan HVSI data spreadsheet.
+Deployed Compare page map feature to production, after a minor thrash due to section names in production.ini; model scripts now need to be run with `production.ini#sealinkd`.
+(sealinkd)
+
+
+Sun 10-Jan-2016
+^^^^^^^^^^^^^^^
+
+Worked on tools repo docs; got nowcast model changes docs up to date.
+Worked w/ Susan on refactoring nowcast.figures.website_thumbnail().
+(MEOPAR)
+
+Week 2
+------
+
+Mon 11-Jan-2016
+^^^^^^^^^^^^^^^
+
+Tidied, stored & committed work on kudu in preparation for working at UBC for a few days.
+Finished slides for operational nowcast talk and delivered it at the Phys Ocgy seminar.
+(MEOPAR)
+
+
 ToDo
-
 ====
-
-* refactor, unit tests & docs for forcing links checking for NEMO-3.6
-* update quick-start docs re: NEMO-3.6 - Elise???
-* finish run_NEMO36 unit tests
-
-* Ping Youyu re: NEMO nowcast project.
 
 * get HTTPS working for alternate sealinkd app domain names
 * reduce resolution of landing page images for faster load times
@@ -107,6 +130,12 @@ ToDo
 * add EduCloud deployment docs
 * deploy Piwik
 * implement user mgmt
+
+* refactor, unit tests & docs for forcing links checking for NEMO-3.6
+* update quick-start docs re: NEMO-3.6 - Elise???
+* finish run_NEMO36 unit tests
+
+* Ping Youyu re: NEMO nowcast project.
 
 * update storm surge paper refs w/ doi link
 * research_ferries module
