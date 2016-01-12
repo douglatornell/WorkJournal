@@ -120,6 +120,20 @@ Tidied, stored & committed work on kudu in preparation for working at UBC for a 
 Finished slides for operational nowcast talk and delivered it at the Phys Ocgy seminar.
 (MEOPAR)
 
+Tue 12-Jan-2016
+^^^^^^^^^^^^^^^
+
+* refactor, unit tests & docs for forcing links checking for NEMO-3.6
+* update quick-start docs re: NEMO-3.6 - Elise???
+* finish run_NEMO36 unit tests
+
+* Ping Youyu re: NEMO nowcast project.
+
+Fixed bugs in make_feeds worker that showed up the 1st time that a feed entry was generated under automation.
+Fixed circular import bug in SalishSeaCmd package by moving pbs_common() and td2hms() functions from run to api module.
+Re-closed tools repo SalishSeaNowcat branch that Muriel accidentally re-opened a while ago.
+(MEOPAR)
+
 
 ToDo
 ====
@@ -130,12 +144,6 @@ ToDo
 * add EduCloud deployment docs
 * deploy Piwik
 * implement user mgmt
-
-* refactor, unit tests & docs for forcing links checking for NEMO-3.6
-* update quick-start docs re: NEMO-3.6 - Elise???
-* finish run_NEMO36 unit tests
-
-* Ping Youyu re: NEMO nowcast project.
 
 * update storm surge paper refs w/ doi link
 * research_ferries module
