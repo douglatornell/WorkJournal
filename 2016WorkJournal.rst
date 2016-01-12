@@ -110,15 +110,19 @@ Worked on tools repo docs; got nowcast model changes docs up to date.
 Worked w/ Susan on refactoring nowcast.figures.website_thumbnail().
 (MEOPAR)
 
+
 Week 2
 ------
 
 Mon 11-Jan-2016
 ^^^^^^^^^^^^^^^
 
+
 Tidied, stored & committed work on kudu in preparation for working at UBC for a few days.
 Finished slides for operational nowcast talk and delivered it at the Phys Ocgy seminar.
+Sorted out Jie's salishsea gather problem; circular import issue between run and api modules; my bad.
 (MEOPAR)
+
 
 Tue 12-Jan-2016
 ^^^^^^^^^^^^^^^
