@@ -135,14 +135,28 @@ Salish Sea team group meeting; see Google Drive whiteboard.
 (MEOPAR)
 
 
-ToDo
-====
+Wed 13-Jan-2016
+^^^^^^^^^^^^^^^
 
 * refactor, unit tests & docs for forcing links checking for NEMO-3.6
 * update quick-start docs re: NEMO-3.6 - Elise???
 * finish run_NEMO36 unit tests
 
-* Ping Youyu re: NEMO nowcast project.
+Attended Compute Canada SPARC2 consultation session; see notebook.
+
+Pinged Youyu re: NEMO nowcast project and got a positive response.
+
+Authorized Charles to buy 2x8Tb archive drives to enlarge backup on salish & skookum; salish storage will be reconfigured from 2x3Tb RAID 1 to 3x3Tb RAID 5.
+Continued work on refactoring website_thumbnail() function in nowcast.figures.
+Continued work on generating datasets.xml file for skookum ERDDAP server, and actually landed a test version of the CampbellRiver.nc dataset.
+(MEOPAR)
+
+Worked on notebook to validate HVSI calcs module against Jackie's spreadsheet calcs; v1 doesn't agree :-(
+(sealinkd)
+
+
+ToDo
+====
 
 * get HTTPS working for alternate sealinkd app domain names
 * reduce resolution of landing page images for faster load times
