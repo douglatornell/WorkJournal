@@ -138,10 +138,6 @@ Salish Sea team group meeting; see Google Drive whiteboard.
 Wed 13-Jan-2016
 ^^^^^^^^^^^^^^^
 
-* refactor, unit tests & docs for forcing links checking for NEMO-3.6
-* update quick-start docs re: NEMO-3.6 - Elise???
-* finish run_NEMO36 unit tests
-
 Attended Compute Canada SPARC2 consultation session; see notebook.
 
 Pinged Youyu re: NEMO nowcast project and got a positive response.
@@ -155,8 +151,24 @@ Worked on notebook to validate HVSI calcs module against Jackie's spreadsheet ca
 (sealinkd)
 
 
+Thu 14-Jan-2016
+^^^^^^^^^^^^^^^
+
+Prepared for and helped Elise lead workout session code review/refactoring of nowcast-green plotting notebook that Susan claims is slow.
+(swc)
+
+Continued work on generating datasets.xml file for skookum ERDDAP server, and landed the real nowcast PointAtkinson.nc dataset.
+Attended dept colloquium by Julie Laroche from Dal re: T. oceania and iron limitation; mostly omics.
+(MEOPAR)
+
+
+
 ToDo
 ====
+
+* refactor, unit tests & docs for forcing links checking for NEMO-3.6
+* update quick-start docs re: NEMO-3.6 - Elise???
+* finish run_NEMO36 unit tests
 
 * get HTTPS working for alternate sealinkd app domain names
 * reduce resolution of landing page images for faster load times
