@@ -159,8 +159,26 @@ Prepared for and helped Elise lead workout session code review/refactoring of no
 
 Continued work on generating datasets.xml file for skookum ERDDAP server, and landed the real nowcast PointAtkinson.nc dataset.
 Attended dept colloquium by Julie Laroche from Dal re: T. oceania and iron limitation; mostly omics.
+Discussed priorities
 (MEOPAR)
 
+
+Fri 15-Jan-2015
+^^^^^^^^^^^^^^^
+
+Dentist appt.
+
+Tweaked admin permissions for new paper repos.
+Added ERDDAP as component in tools repo issue tracker.
+Created tools repo issue #27 re: inconsistent time interval in tide gauge station ERDDAP results datasets.
+Created tools repo issue #28 re: inclusion of run type in ERDDAP dataset ids.
+Refined ERDDAP dataset setup docs, and discussed metadata w/ Susan.
+(MEOPAR)
+
+Continued work on notebook to validate HVSI calcs module againse Jackie's spreadsheet to the point where I am convinced that I am correct; pushed the notebook to the app site so that Jackie can use nbviewer to look at it.
+Added map to Start page.
+Started adding maps to Maps page; got markers that are colour-coded by HVSI range implemented for main map panel.
+(sealinkd)
 
 
 ToDo
