@@ -176,8 +176,18 @@ Refined ERDDAP dataset setup docs, and discussed metadata w/ Susan.
 (MEOPAR)
 
 Continued work on notebook to validate HVSI calcs module againse Jackie's spreadsheet to the point where I am convinced that I am correct; pushed the notebook to the app site so that Jackie can use nbviewer to look at it.
-Added map to Start page.
-Started adding maps to Maps page; got markers that are colour-coded by HVSI range implemented for main map panel.
+Added map to Start page and pushed to production.
+(sealinkd)
+
+
+Sat 16-Jan-2016
+^^^^^^^^^^^^^^^
+
+Finished initial work on adding maps to Maps page; with main map markers that are colour-coded by HVSI range, and page guidance in a legend panel on the main map; pushed to production.
+Finally resolved too-persistent CSS caching issue; nginx sendfile setting interactions with Vagrant & virtualbox.
+Added HVSI values colour-bar to title legend of Maps page main map.
+Added colour-coded community markers to Maps page sidebar maps.
+Worked on adding HVSI values to marker popups on Maps page main map.
 (sealinkd)
 
 
