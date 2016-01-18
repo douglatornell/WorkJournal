@@ -191,6 +191,22 @@ Worked on adding HVSI values to marker popups on Maps page main map.
 (sealinkd)
 
 
+Sun 17-Jan-2016
+^^^^^^^^^^^^^^^
+
+Confirmed that skookum ERDDAP server is automatically extending nowcast Point Atkinson sea surface height dataset based on :kbd:`reloadEveryNMinutes` dataset value.
+Looked at the numpy.testing.assert_array_equal() weirdness that Nancy reported months ago; no real resolution other than calling the function w/ an int and and array is using it wrong even though it doesn't complain.
+(MEOPAR)
+
+Restarted build slaves on cod, coho, herring, sable, and snapper.
+(SOG)
+
+Re-ran HVSI validation notebook w/ Jan9 spreadsheet from Jackie; no useful difference, but lots more "no data" situations to deal with.
+Finished on adding HVSI values to marker popups on Maps page main map.
+Found and corrected bug in how joins were specified in Indicator and IndicatorValue data model object.
+(sealinkd)
+
+
 ToDo
 ====
 
@@ -208,6 +224,5 @@ ToDo
 * update storm surge paper refs w/ doi link
 * research_ferries module
 * JSON logging use example notebook
-* numpy.testing assert weirdness
 
 * review remaining nosy PRs
