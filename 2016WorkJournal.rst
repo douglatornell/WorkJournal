@@ -219,6 +219,7 @@ Jakie is happy with the maps on the Start and Maps pages, but requested a monoch
 
 Investigated stoppage of ONC-ADCP data downloads on 31-Dec-2015; probably happened due to 2016 not being included in years arrays in case statement in GETDEPL.m script.
 Continued working on ERDDAP server setup & docs; got Charles to restart server w/ corrected config to put files in /results/erddap/, but it is still also looking at /results/erddap*/ dirs.
+Discovered that ERDDAP will not present our model results on lat/lon grid because it is not rectilinear; also discovered that memory and file size limit in the app are easily exceeded by our datasets.
 (MEOPAR)
 
 Attended Phys Ocgy seminar by Noel Fitzpatrick about glacier surface energy balance measurement & modeling.
