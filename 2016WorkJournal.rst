@@ -207,6 +207,23 @@ Found and corrected bug in how joins were specified in Indicator and IndicatorVa
 (sealinkd)
 
 
+Week 3
+------
+
+Mon 18-Jan-2016
+^^^^^^^^^^^^^^^
+
+Jackie confirmed that there were errors in her HVSI calc validation spreadsheet; her revisions and my fix of the join bug result in agreement for the validation cases.
+Jakie is happy with the maps on the Start and Maps pages, but requested a monochrome colour-bar palette so I told her to provide the palette and it can be so.
+(sealinkd)
+
+Investigated stoppage of ONC-ADCP data downloads on 31-Dec-2015; probably happened due to 2016 not being included in years arrays in case statement in GETDEPL.m script.
+Continued working on ERDDAP server setup & docs; got Charles to restart server w/ corrected config to put files in /results/erddap/, but it is still also looking at /results/erddap*/ dirs.
+(MEOPAR)
+
+Attended Phys Ocgy seminar by Noel Fitzpatrick about glacier surface energy balance measurement & modeling.
+
+
 ToDo
 ====
 
