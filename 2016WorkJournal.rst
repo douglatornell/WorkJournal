@@ -225,11 +225,23 @@ Discovered that ERDDAP will not present our model results on lat/lon grid becaus
 Attended Phys Ocgy seminar by Noel Fitzpatrick about glacier surface energy balance measurement & modeling.
 
 
+Tue 19-Jan-16
+^^^^^^^^^^^^^
+
+Gave Jackie a preliminary opinion on why I think that a Feb launch data is too ambitious.
+(sealinkd)
+
+Continued working on ERDDAP server setup; got nowcast 3d tracers and u-velocity datasets in place; requested another restart from Charles to better tune our setup.
+Salish Sea team group meeting; see Google Drive whiteboard.
+Participated in undergrad research fair w/ Elise.
+(MEOPAR)
+
 Wed 20-Jan-2016
 ^^^^^^^^^^^^^^^
 
 Located for Susan the notebook in tools/bathymetry/ used to create the file containing the actual (partial step) bathymetry that NEMO uses for calculations.
 (MEOPAR)
+
 
 Confirmed that RandoPony uses smtp.webfaction.com for outbound email so it will be unaffected by their upcoming spam prevention port changes.
 (RandoPony)
