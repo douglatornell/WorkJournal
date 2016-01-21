@@ -225,6 +225,33 @@ Discovered that ERDDAP will not present our model results on lat/lon grid becaus
 Attended Phys Ocgy seminar by Noel Fitzpatrick about glacier surface energy balance measurement & modeling.
 
 
+Wed 20-Jan-2016
+^^^^^^^^^^^^^^^
+
+Located for Susan the notebook in tools/bathymetry/ used to create the file containing the actual (partial step) bathymetry that NEMO uses for calculations.
+(MEOPAR)
+
+Confirmed that RandoPony uses smtp.webfaction.com for outbound email so it will be unaffected by their upcoming spam prevention port changes.
+(RandoPony)
+
+Sent another reminder email to UBC AP re: still unpaid 4-Nov-2015 invoice.
+Fixed an issue in the hvsi module validation notebook re: ending row iteration for data reading at end of communities rows now that additional calculation rows have been added to the sheet.
+Published a new version of the notebook based on the V2HVSIIndicatorData_Final.xlsx spreadsheet.
+Created a notebook that uses Pandas to generate Excel worksheet renderings of matrices of HVSIs for all communities for a capital.
+Worked on setting up Piwik analytics; devolved into a thrash about getting PHP files process by FastCGI but static files not being served.
+(sealinkd)
+
+
+Thu 21-Jan-2016
+^^^^^^^^^^^^^^^
+
+Downloaded missing HRDPS research forecast files for 16-19-Jan.
+(MEOPAR)
+
+Finally got PHP vs. static files sorted out enough that Piwik runs as well as can be expected in Vagrant dev environment.
+(sealinkd)
+
+
 ToDo
 ====
 
