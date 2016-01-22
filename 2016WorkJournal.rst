@@ -258,10 +258,21 @@ Thu 21-Jan-2016
 ^^^^^^^^^^^^^^^
 
 Downloaded missing HRDPS research forecast files for 16-19-Jan.
+upload_forcing worker failed for nowcast+ run; no apparent reason; manual re-run got automation restarted.
+Fixed the hard-coded date bug that Rich found in LTIM_fun.m and manually ran that script for the 3 nodes; seems to have gotten that ONC-ADCP data downloads back in operation.
+Continued work on ERDDAP datasets with a notebook to start automating the editing of generated XML fragments.
 (MEOPAR)
 
 Finally got PHP vs. static files sorted out enough that Piwik runs as well as can be expected in Vagrant dev environment.
+Helped Jacki try to figure out why her matrix spreadsheets differ from my example; perhaps Python 3 division.
 (sealinkd)
+
+Received proposed contract from Youyu.
+(nemo-nowcast)
+
+Attended Civl Engrg hydrology seminar by Christian Schoof about glacier base water flow.
+
+Met w/ Susan & Elise re: screening of students we interviewed at research fair.
 
 
 ToDo
