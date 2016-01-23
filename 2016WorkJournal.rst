@@ -275,6 +275,16 @@ Attended Civl Engrg hydrology seminar by Christian Schoof about glacier base wat
 Met w/ Susan & Elise re: screening of students we interviewed at research fair.
 
 
+Fri 22-Jan-2016
+^^^^^^^^^^^^^^^
+
+Telus contractor visit to install fibre Internet connection.
+
+Deployed Piwik for prod on EduCloud instance and added notes about the setup to deployment docs.
+Helped Jackie get her Python 3 Anaconda environment set up so that she can generate HVSI matrix spreadsheet for the UBC SCARP team to work with.
+(sealinkd)
+
+
 ToDo
 ====
 
@@ -286,7 +296,6 @@ ToDo
 * reduce resolution of landing page images for faster load times
 * add docs re: sealinkd server-side app framework
 * add EduCloud deployment docs
-* deploy Piwik
 * implement user mgmt
 
 * update storm surge paper refs w/ doi link
