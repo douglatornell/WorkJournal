@@ -285,6 +285,34 @@ Helped Jackie get her Python 3 Anaconda environment set up so that she can gener
 (sealinkd)
 
 
+Sat 23-Jan-2016
+^^^^^^^^^^^^^^^
+
+Created Bitbucket Resliient-C project and added sealinkd repo to it.
+(sealinkd)
+
+Tried to finalize storm surge paper citation in all the places but stalled out because it hasn't yet been assigned to an issue.
+Created Bitbucket Publications project for SalishSea-MEOPAR team and added 4 paper repos to it.
+Continued work on refactoring figures.py.
+Created nc_tools.dataset_from_path() function to facilitate loading netCDF datasets from files given by pathlib objects; also RuntimeError to IOError for file not found.
+Started work on wind_tools.calc_wind_avg_at_point() function with code that Susan had extracted from nowcast.worker.make_feeds module.
+
+
+Sun 24-Jan-2016
+^^^^^^^^^^^^^^^
+
+Finished implementatio of wind_tools.calc_wind_avg_at_point() function.
+Passed the figures.py patch to Susan to check the timing of the Campbell River max ssh on 10Jan16, and for her to continue refactoring.
+(MEOPAR)
+
+Set up 2016 deployment of SoG bloomcast system.
+Had to add work-around for very 1st cloud fraction value being None and causing interpolation to fail.
+(bloomcast)
+
+Set up BIO client repo.
+(43ravens)
+
+
 ToDo
 ====
 
@@ -298,7 +326,7 @@ ToDo
 * add EduCloud deployment docs
 * implement user mgmt
 
-* update storm surge paper refs w/ doi link
+* update storm surge paper refs w/ doi link - need issue details
 * research_ferries module
 * JSON logging use example notebook
 
