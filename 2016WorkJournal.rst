@@ -313,6 +313,27 @@ Set up BIO client repo.
 (43ravens)
 
 
+Week 4
+------
+
+Mon 25-Jan-2016
+^^^^^^^^^^^^^^^
+
+Accepted contract from Youyu for Scotia Shelf nowcast system development.
+(43ravens)
+
+Set up SOG-projects work area on niko.
+Fixed off-by-1 error in profile number for plots.
+Added Smoke,Haze to cloud fraction mapping.
+(bloomcast)
+
+Wrote with Susan MEOPAR renewal proposal section re: code repo.
+Continued work on ERDDAP datasets XML fragments generation automation notebook.
+(MEOPAR)
+
+Attended Phys Ocgy seminary by Romain Di Constanzo about measurement of the Fraser River plume via satellite imagery.
+
+
 ToDo
 ====
 
