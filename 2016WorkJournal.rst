@@ -334,6 +334,26 @@ Continued work on ERDDAP datasets XML fragments generation automation notebook.
 Attended Phys Ocgy seminary by Romain Di Constanzo about measurement of the Fraser River plume via satellite imagery.
 
 
+Tue 26-Jan-2015
+^^^^^^^^^^^^^^^
+
+Preserved results of today's runs that used last year's SOG-code-bloomcast executable for Susan to compare to.
+Updated SOG-code-bloomcast clone to rev c5d167d58046 and did a clean build.
+Re-ran bloomcast and got apparently the same results.
+(bloomcast)
+
+Finished 1st draft of ERDDAP datasets automation notebook and used it to generate XML fragment for grid_W v1 dataset.
+Salish Sea team group meeting; see Google Drive whiteboard.
+(MEOPAR)
+
+Restarted buildbot slave on smelt.
+(SOG)
+
+Discussed plans for bash & editor workout on Thu w/ Cindy & Ben.
+Researched Atom editor.
+(swc)
+
+
 ToDo
 ====
 
