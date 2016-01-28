@@ -354,6 +354,22 @@ Researched Atom editor.
 (swc)
 
 
+Wed 27-Jan-2016
+^^^^^^^^^^^^^^^
+
+Installed Atom on kudu and confirmed its striking similarity to Sublime Text.
+Prep for bash & editors customization workout.
+(swc)
+
+Pulled refactored figures.py into nowcast production; changes affect website_thumbnail & website_thresholds figures.
+(MEOPAR)
+
+Loaded data from V2HVSIIndicatorData_Final.xlsx data spreadsheet into dev and production databases.
+Wrote deployment docs re: setup of app database and loading data.
+Reworked Profiles page skeleton to match latest mock-up from Jackie; skeletons for several tables, and implementation for HVSI Indicators tables.
+(sealinkd)
+
+
 ToDo
 ====
 
