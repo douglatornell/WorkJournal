@@ -370,6 +370,23 @@ Reworked Profiles page skeleton to match latest mock-up from Jackie; skeletons f
 (sealinkd)
 
 
+Thu 28-Jan-2016
+^^^^^^^^^^^^^^^
+
+Continued Atom research.
+Installed Atom on niko.
+Finished :file:`public_html/swc/2016-01-28-bash-editors/BashEditorsCustomization-DJL.ipynb` notebook for workout.
+Participated in workout session about bash & editor customization.
+(swc)
+
+Did some more polishing on the Profiles page HVSI tables.
+(sealinkd)
+
+Improved time zone rendering in figures.website_thumbnail() and added that function to the refactoring testing notebook.
+Continued work on ERDDAP datasets automation notebook re: using it to generate tide gauge station datasets.
+(MEOPAR)
+
+
 ToDo
 ====
 
