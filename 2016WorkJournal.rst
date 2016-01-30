@@ -387,6 +387,24 @@ Continued work on ERDDAP datasets automation notebook re: using it to generate t
 (MEOPAR)
 
 
+Fri 29-Jan-2016
+^^^^^^^^^^^^^^^
+
+Fiddled around with Atom; rst support sucks, no auto-complete in text grammar.
+
+Pushed reworked Profiles page to production.
+Renamed Indicator data model object units column to metric to be consistent with SCARP team terminology.
+Started adding data columns for Profiles page to Community model and hooking them into the page; profile_description, contact_person, contact_email, contact_phone.
+Added community profile photo to Profiles page via asset info from database; load_communities now loads asset information into the database when it is available in the spreadsheet.
+Tried to start adding hazard exposure and mitigation activities data to app, but it is still too poorly defined.
+Updated data model entity relationship diagram and linked it into the data model docs.
+Started implementation of users data model and user management features.
+(sealinkd)
+
+Replied to latest /var fiesystem corruption report w/ offer of a site visit on 5-Feb; accepted.
+(Nordion)
+
+
 ToDo
 ====
 
