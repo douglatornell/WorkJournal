@@ -405,6 +405,24 @@ Replied to latest /var fiesystem corruption report w/ offer of a site visit on 5
 (Nordion)
 
 
+Sat 30-Jan-2016
+^^^^^^^^^^^^^^^
+
+Wrote status email re: Profiles page to Jackie.
+Added indicator value tables below bar charts on Compare page.
+Improved app banner styling & merged UBC & MEOPAR logos into single image for better flow.
+Worked on sign-up and sign-in pages.
+(sealinkd)
+
+
+Sun 31-Jan-2016
+^^^^^^^^^^^^^^^
+
+Finished user sign-up processing.
+Added sign-in authentication processing and page level security permissions.
+(sealinkd)
+
+
 ToDo
 ====
 
