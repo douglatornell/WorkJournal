@@ -423,6 +423,26 @@ Added sign-in authentication processing and page level security permissions.
 (sealinkd)
 
 
+February
+========
+
+Week 5
+------
+
+Mon 1-Feb-2016
+^^^^^^^^^^^^^^
+
+Moved SalishSeaNowcat/nowcast/notebooks/ to SalishSeaNowcat/notebooks/.
+Moved SalishSeaNowcat/nowcast/tidal_predications/ to SalishSeaNowcat/tidal_predications/.
+Closed dangling nowcast-obj branch in tools repo.
+Continued work on generating ERDDAP dataset via notebook; success for hourly v1 of u, v, and w velocities, and tracers; v2 w not working.
+Requested ERDDAP server reboot & re-config by Charles.
+Set up /results/nowcast-sys/figures/ and requested Charles set up static server to serve it at https://salishsea.eos.ubc.ca/nowcast-sys/figures/.
+Refactored Mercurial update of nowcast salishsea-site repo into separate worker.
+Investigated alternative DAP servers, especially PyDAP.
+(MEOPAR)
+
+
 ToDo
 ====
 
