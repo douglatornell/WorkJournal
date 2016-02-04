@@ -296,6 +296,7 @@ Created Bitbucket Publications project for SalishSea-MEOPAR team and added 4 pap
 Continued work on refactoring figures.py.
 Created nc_tools.dataset_from_path() function to facilitate loading netCDF datasets from files given by pathlib objects; also RuntimeError to IOError for file not found.
 Started work on wind_tools.calc_wind_avg_at_point() function with code that Susan had extracted from nowcast.worker.make_feeds module.
+(MEOPAR)
 
 
 Sun 24-Jan-2016
@@ -441,6 +442,41 @@ Set up /results/nowcast-sys/figures/ and requested Charles set up static server 
 Refactored Mercurial update of nowcast salishsea-site repo into separate worker.
 Investigated alternative DAP servers, especially PyDAP.
 (MEOPAR)
+
+
+Tue 2-Feb-2016
+^^^^^^^^^^^^^^
+
+Debugged why hg_update_site worker didn't run; I think it was because I had restarted nowcast_mgr in the wrong conda env.
+Fixed bug in hg_update_site worker whereby a Path object was sent to the manager as a message payload; added unit tests that would have caught the bug if I had been stricter with myself.
+Refactored make_feeds worker to use wind_tools.calc_wind_avg_at_point().
+Started work on unit test for wind_tools.calc_wind_avg_at_point() and found possible off-by-1 bug.
+(MEOPAR)
+
+Worked on contract details for Youyu; proposed alternate justification wording; completed ABACUS form; wrote contractor proposal; wrote draft of company profile.
+(nemo-nowcast)
+
+Wrote draft of app dev progress report for Stephanie and Jackie.
+(sealinkd)
+
+
+Wed 3-Feb-2016
+^^^^^^^^^^^^^^
+
+Confirmed and fixed off-by-1 bug in wind_tools.calc_wind_avg_at_point() and added unit tests for it to give 100% coverage.
+Charles restarted eddy and (after a minor issue with its Bitstream Vera Sans font getting blown away by a Java JRE update) it is now running from /results/erddap/ without 500 errors.
+Wrote a post on the ERDDAP Google group re: generation of grid_W v2 dataset.
+(MEOPAR)
+
+Fixed location of profile time line and label in mixing layer depth & wind speed plot re: matplotlib.date.date2num() issue w/ arrow object.
+(bloomcast)
+
+Did final revision on company profile and sent documents to Youyu.
+(nemo-nowcast)
+
+Added Piwik custom variables containing community name and role of authenticated users.
+Add change password form.
+(sealinkd)
 
 
 ToDo
