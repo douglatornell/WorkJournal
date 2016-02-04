@@ -440,6 +440,25 @@ Wrote draft of app dev progress report for Stephanie and Jackie.
 (sealinkd)
 
 
+Wed 3-Feb-2016
+^^^^^^^^^^^^^^
+
+Confirmed and fixed off-by-1 bug in wind_tools.calc_wind_avg_at_point() and added unit tests for it to give 100% coverage.
+Charles restarted eddy and (after a minor issue with its Bitstream Vera Sans font getting blown away by a Java JRE update) it is now running from /results/erddap/ without 500 errors.
+Wrote a post on the ERDDAP Google group re: generation of grid_W v2 dataset.
+(MEOPAR)
+
+Fixed location of profile time line and label in mixing layer depth & wind speed plot re: matplotlib.date.date2num() issue w/ arrow object.
+(bloomcast)
+
+Did final revision on company profile and sent documents to Youyu.
+(nemo-nowcast)
+
+Added Piwik custom variables containing community name and role of authenticated users.
+Add change password form.
+(sealinkd)
+
+
 ToDo
 ====
 
