@@ -466,6 +466,7 @@ Wed 3-Feb-2016
 Confirmed and fixed off-by-1 bug in wind_tools.calc_wind_avg_at_point() and added unit tests for it to give 100% coverage.
 Charles restarted eddy and (after a minor issue with its Bitstream Vera Sans font getting blown away by a Java JRE update) it is now running from /results/erddap/ without 500 errors.
 Wrote a post on the ERDDAP Google group re: generation of grid_W v2 dataset.
+Got responses form Bob Simmons that point at using NCO to add variables to old results files when we add new variables (like w-eddy visocity & diffusivity) to model output; other options re: file regexs and results directory tree segmentation don't feel like they will scale.
 (MEOPAR)
 
 Fixed location of profile time line and label in mixing layer depth & wind speed plot re: matplotlib.date.date2num() issue w/ arrow object.
@@ -477,6 +478,18 @@ Did final revision on company profile and sent documents to Youyu.
 Added Piwik custom variables containing community name and role of authenticated users.
 Add change password form.
 (sealinkd)
+
+
+Thu 4-Feb-2016
+^^^^^^^^^^^^^^
+
+Felt like crap; nagging headache thing of the past couple of days spread to my ear, throat and neck, then most of my joints.
+
+Explored NCO re: creation of new, empty variables in old nowcast system results files so that ERDDAP will accept new variables into a dataset.
+Spurred by a subsequent response from Bob Simmons, I tried just loading the Grid_W v2 dataset via a flag file instead of running DasDdl.sh first, and it worked!
+Added surface tracer fields dataset.
+Explored PyDAP package; useful, but Python 3 port not yet released.
+(MEOPAR)
 
 
 ToDo
