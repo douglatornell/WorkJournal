@@ -492,6 +492,18 @@ Explored PyDAP package; useful, but Python 3 port not yet released.
 (MEOPAR)
 
 
+Fri 5-Feb-2016
+^^^^^^^^^^^^^^
+
+Nordion site visit re: isoinfo server boot failure; RAID degraded by 1 drive but suspected controller or cabling issue; see work notes.
+(nordion)
+
+Investigated Nancy's contourf images AttributeError: 'QuadContourSet' object has no attribute 'set_animated' issue;
+Added ping_erddap worker to nowcast system.
+Continued working on xfail tests for run_NEMO36 worker.
+(MEOPAR)
+
+
 ToDo
 ====
 
