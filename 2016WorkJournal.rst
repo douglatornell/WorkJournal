@@ -504,6 +504,38 @@ Continued working on xfail tests for run_NEMO36 worker.
 (MEOPAR)
 
 
+Sat 6-Feb-2016
+^^^^^^^^^^^^^^
+
+Fixed bug in ping_erddap re: handling run types w/ no datasetIDs.
+Started refactoring make_site_page worker and page templates to use static figures server, and to add titles and link anchors to figure images.
+(MEOPAR)
+
+
+Sun 7-Feb-2016
+^^^^^^^^^^^^^^
+
+Finished refactoring make_site_page worker and page templates to use static figures server, and to add titles and link anchors to figure images.
+Changed run_NEMO36 worker to get run timestep from the previous run's namelist_cfg instead of from the default namelist.domain file.
+Hard-linked results figures on skookum from /results/SalishSea/*cast/*/figures/ to /results/nowcast-sys/figures/*cast/*/.
+Started rebuilding all past pulish & research pages to use statically served figures.
+(MEOPAR)
+
+
+Week 6
+------
+
+Mon 8-Feb-2016
+^^^^^^^^^^^^^^
+
+**Satuatory Holiday** - BC Family Day
+
+Debugged intro of static image pages into production; sphinx build time reduced from 19:45 to 01:39, and rsync time reduced from 00:20 to 00:05.
+Refactored make_site_page worker to use NowcastWorker.
+Fixed bug in make_plots worker re: FileExistsError on attempt to link a file created by an earlier run of the worker (nowcast research).
+(MEOPAR)
+
+
 ToDo
 ====
 
