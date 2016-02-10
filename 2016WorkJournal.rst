@@ -560,6 +560,24 @@ Prep for continuation of editors session.
 (swc)
 
 
+Tue 9-Feb-2016
+^^^^^^^^^^^^^^
+
+Researched xarray package - Pandas for geoscience data; e.g. 4d NEMO results.
+Confirmed that netCDF4 conda package included the ability to open datasets via OPeNDAP.
+Tracked down log messages associated with sporadic null pointer errors.
+Continued rebuilding nowcast system results pages to use figures from static server.
+Salish Sea team group meeting; see Google Drive whiteboard.
+(MEOPAR)
+
+Restarted build slaves on smelt and sable.
+(SOG)
+
+Met w/ Tom Yerex (new EOAS IT mgr).
+
+Attended Phys Ocgy seminar by Nancy re: mixing & prep for McGill.
+
+
 ToDo
 ====
 
