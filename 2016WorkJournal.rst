@@ -518,7 +518,7 @@ Sun 7-Feb-2016
 Finished refactoring make_site_page worker and page templates to use static figures server, and to add titles and link anchors to figure images.
 Changed run_NEMO36 worker to get run timestep from the previous run's namelist_cfg instead of from the default namelist.domain file.
 Hard-linked results figures on skookum from /results/SalishSea/*cast/*/figures/ to /results/nowcast-sys/figures/*cast/*/.
-Started rebuilding all past pulish & research pages to use statically served figures.
+Started rebuilding all past publish & research pages to use statically served figures.
 (MEOPAR)
 
 
@@ -548,6 +548,16 @@ Reviewed and updated status report.
 Implemented app admin auth principal and added user management item to user menu for users with that authorization.
 Added users list page, and edit user form.
 (sealinkd)
+
+
+Thu 11-Feb-2016
+^^^^^^^^^^^^^^^
+
+Finalized and sent status report to Stephanie and Jackie.
+(sealinkd)
+
+Prep for continuation of editors session.
+(swc)
 
 
 ToDo
