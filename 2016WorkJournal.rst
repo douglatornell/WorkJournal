@@ -536,6 +536,20 @@ Fixed bug in make_plots worker re: FileExistsError on attempt to link a file cre
 (MEOPAR)
 
 
+Wed 10-Feb-2016
+^^^^^^^^^^^^^^^
+
+Fixed title for run duration average winds figure on nowcast publish pages.
+Fix orphan file Sphinx warning from README in nowcast ATOM feeds directory.
+Ran update_copyright script over repos; tools, analysis, salishsea-site, SS-run-sets.
+(MEOPAR)
+
+Reviewed and updated status report.
+Implemented app admin auth principal and added user management item to user menu for users with that authorization.
+Added users list page, and edit user form.
+(sealinkd)
+
+
 ToDo
 ====
 
