@@ -587,6 +587,14 @@ Started planning poster for OSM.
 (osm)
 
 
+Thu 11-Feb-2016
+^^^^^^^^^^^^^^^
+
+Propagated newly generated ssh key to nemo nodes.
+Got Mercurial installed on nemo nodes; installed miniconda3.
+(nemo-nowcast)
+
+
 ToDo
 ====
 
