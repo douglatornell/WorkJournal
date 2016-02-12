@@ -536,6 +536,24 @@ Fixed bug in make_plots worker re: FileExistsError on attempt to link a file cre
 (MEOPAR)
 
 
+Tue 9-Feb-2016
+^^^^^^^^^^^^^^
+
+Researched xarray package - Pandas for geoscience data; e.g. 4d NEMO results.
+Confirmed that netCDF4 conda package included the ability to open datasets via OPeNDAP.
+Tracked down log messages associated with sporadic null pointer errors.
+Continued rebuilding nowcast system results pages to use figures from static server.
+Salish Sea team group meeting; see Google Drive whiteboard.
+(MEOPAR)
+
+Restarted build slaves on smelt and sable.
+(SOG)
+
+Met w/ Tom Yerex (new EOAS IT mgr).
+
+Attended Phys Ocgy seminar by Nancy re: mixing & prep for McGill.
+
+
 Wed 10-Feb-2016
 ^^^^^^^^^^^^^^^
 
@@ -557,25 +575,16 @@ Finalized and sent status report to Stephanie and Jackie.
 (sealinkd)
 
 Prep for continuation of editors session.
+Participated in workout session about bash & editor customization.
 (swc)
 
+Youyu says project is a go.
+Got credentials for Dal cluster account.
+Installed a newly generated ssh key on Dal cluster login node.
+(nemo-nowcast)
 
-Tue 9-Feb-2016
-^^^^^^^^^^^^^^
-
-Researched xarray package - Pandas for geoscience data; e.g. 4d NEMO results.
-Confirmed that netCDF4 conda package included the ability to open datasets via OPeNDAP.
-Tracked down log messages associated with sporadic null pointer errors.
-Continued rebuilding nowcast system results pages to use figures from static server.
-Salish Sea team group meeting; see Google Drive whiteboard.
-(MEOPAR)
-
-Restarted build slaves on smelt and sable.
-(SOG)
-
-Met w/ Tom Yerex (new EOAS IT mgr).
-
-Attended Phys Ocgy seminar by Nancy re: mixing & prep for McGill.
+Started planning poster for OSM.
+(osm)
 
 
 ToDo
