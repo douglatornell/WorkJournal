@@ -586,6 +586,9 @@ Installed a newly generated ssh key on Dal cluster login node.
 Started planning poster for OSM.
 (osm)
 
+nowcast research plots failed due to DNS error, then malformed data from ONC VENUS nodes; re-ran worker with those figures commented out
+Continued rebuilding nowcast system results pages to use figures from static server.
+(MEOPAR)
 
 Thu 11-Feb-2016
 ^^^^^^^^^^^^^^^
@@ -593,6 +596,15 @@ Thu 11-Feb-2016
 Propagated newly generated ssh key to nemo nodes.
 Got Mercurial installed on nemo nodes; installed miniconda3.
 (nemo-nowcast)
+
+nowcast research plots failed due to malformed data from ONC VENUS nodes; re-ran worker with those figures commented out
+Finished rebuilding nowcast system results pages to use figures from static server.
+Created ticket 15399 re: proxying ERDDAP to salishsea.eos.ubc.ca/erddap/.
+Created ticket 15400 re: installation of SSL/TLS certs & auto-redirection to make salishsea.eos.ubc.ca HTTPS only.
+(MEOPAR)
+
+Worked on nowcast system poster for OSM.
+(osm)
 
 
 ToDo
