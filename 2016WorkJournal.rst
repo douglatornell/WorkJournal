@@ -590,7 +590,7 @@ nowcast research plots failed due to DNS error, then malformed data from ONC VEN
 Continued rebuilding nowcast system results pages to use figures from static server.
 (MEOPAR)
 
-Thu 11-Feb-2016
+Fri 12-Feb-2016
 ^^^^^^^^^^^^^^^
 
 Propagated newly generated ssh key to nemo nodes.
@@ -605,6 +605,21 @@ Created ticket 15400 re: installation of SSL/TLS certs & auto-redirection to mak
 
 Worked on nowcast system poster for OSM.
 (osm)
+
+
+Sat 13-Feb-2016
+^^^^^^^^^^^^^^^
+
+Deleted _static/nemo/results_figures/ tree on shelob, freeing 14 Gb of storage.
+(MEOPAR)
+
+
+Sun 14-Feb-2016
+^^^^^^^^^^^^^^^
+
+Worked on nowcast system poster for OSM.
+Emailed Youyu & Dany w/ idea for CMOS talk re: MERCAD.
+(MEOPAR)
 
 
 ToDo
