@@ -622,6 +622,20 @@ Emailed Youyu & Dany w/ idea for CMOS talk re: MERCAD.
 (MEOPAR)
 
 
+Week 7
+------
+
+Mon 15-Feb-2016
+^^^^^^^^^^^^^^^
+
+Worked on nowcast system poster for OSM.
+Participated in Phys Ocgy seminar where Elise practiced her talk and some of the rest os us previewed our posters.
+Explored xarray package (pandas concept for N-dimensional data, especially climate & ocean model results).
+Created NEMO-forcing repo ticket #4 re: missing FillValue & least_significant_digit attributes in SalishSea2_NEMO_bathy.nc file.
+Worked with Charles on the transition to HTTPS for salishsea.eos.ubc.ca.
+(MEOPAR)
+
+
 ToDo
 ====
 
