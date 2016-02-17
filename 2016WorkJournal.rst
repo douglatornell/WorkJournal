@@ -633,6 +633,21 @@ Participated in Phys Ocgy seminar where Elise practiced her talk and some of the
 Explored xarray package (pandas concept for N-dimensional data, especially climate & ocean model results).
 Created NEMO-forcing repo ticket #4 re: missing FillValue & least_significant_digit attributes in SalishSea2_NEMO_bathy.nc file.
 Worked with Charles on the transition to HTTPS for salishsea.eos.ubc.ca.
+Got favourable responses from both Youyu and Dany re: CMOS talk about MERCAD.
+(MEOPAR)
+
+
+Tue 16-Feb-2016
+^^^^^^^^^^^^^^^
+
+Created project-specific work journal for GOMSS nowcast system project/contract; that project will no longer be tracked in detail here.
+(nemo-nowcast)
+
+Prep for mtg w/ Jackie; updated sealinkd/vagrant dev environment on niko; scrubbed and re-built database.
+Mtg w/ Jackie re: filters data and design, and data for community profiles page.
+(sealinkd)
+
+Salish Sea team group meeting; see Google Drive whiteboard.
 (MEOPAR)
 
 
