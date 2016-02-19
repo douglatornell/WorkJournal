@@ -268,7 +268,7 @@ Helped Jacki try to figure out why her matrix spreadsheets differ from my exampl
 (sealinkd)
 
 Received proposed contract from Youyu.
-(nemo-nowcast)
+(GOMSS)
 
 Attended Civl Engrg hydrology seminar by Christian Schoof about glacier base water flow.
 
@@ -454,7 +454,7 @@ Started work on unit test for wind_tools.calc_wind_avg_at_point() and found poss
 (MEOPAR)
 
 Worked on contract details for Youyu; proposed alternate justification wording; completed ABACUS form; wrote contractor proposal; wrote draft of company profile.
-(nemo-nowcast)
+(GOMSS)
 
 Wrote draft of app dev progress report for Stephanie and Jackie.
 (sealinkd)
@@ -473,7 +473,7 @@ Fixed location of profile time line and label in mixing layer depth & wind speed
 (bloomcast)
 
 Did final revision on company profile and sent documents to Youyu.
-(nemo-nowcast)
+(GOMSS)
 
 Added Piwik custom variables containing community name and role of authenticated users.
 Add change password form.
@@ -581,7 +581,7 @@ Participated in workout session about bash & editor customization.
 Youyu says project is a go.
 Got credentials for Dal cluster account.
 Installed a newly generated ssh key on Dal cluster login node.
-(nemo-nowcast)
+(GOMSS)
 
 Started planning poster for OSM.
 (osm)
@@ -595,7 +595,7 @@ Fri 12-Feb-2016
 
 Propagated newly generated ssh key to nemo nodes.
 Got Mercurial installed on nemo nodes; installed miniconda3.
-(nemo-nowcast)
+(GOMSS)
 
 nowcast research plots failed due to malformed data from ONC VENUS nodes; re-ran worker with those figures commented out
 Finished rebuilding nowcast system results pages to use figures from static server.
@@ -634,6 +634,25 @@ Explored xarray package (pandas concept for N-dimensional data, especially clima
 Created NEMO-forcing repo ticket #4 re: missing FillValue & least_significant_digit attributes in SalishSea2_NEMO_bathy.nc file.
 Worked with Charles on the transition to HTTPS for salishsea.eos.ubc.ca.
 (MEOPAR)
+
+
+Wed 17-Feb-2016
+^^^^^^^^^^^^^^^
+
+Telcon w/ Youyu; see GOMSS work journal.
+(GOMSS)
+
+Replied to Stephanie's email re: tracking Resilient-C app users.
+(sealinkd)
+
+
+Thu 18-Deb-2016
+^^^^^^^^^^^^^^^
+
+Finished OSM poster.
+(MEOPAR)
+
+Created UptimeRobot account and setup up monitoring for Resilient-C and RandoPony apps, and salishsea site.
 
 
 ToDo
