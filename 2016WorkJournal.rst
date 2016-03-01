@@ -23,7 +23,7 @@ Mon 4-Jan-2016
 
 Restarted nowcast mgr after end-of-day to enable automation of PMV feed.
 Finished enough implementation of run_NEMO36 worker that it should be able to run nowcast-green on salish; figured out how to paraeterize unit tests re: absolute paths in run description; lots of other unit tests need to be written.
-(MEOPAR)
+(SalishSea)
 
 Created 2016 journal file and did catch-up summary of holidays work to end 2015 journal.
 
@@ -38,7 +38,7 @@ Started work on operational nowcast talk for 11-Jan Phys Ocgy seminar.
 Automated feed generation worked for forecast/04jan16 and forecast2/04jan15 runs.
 Tested run_NEMO36 worker in collaborations with Susan to launch nowcast-green run.; not yet ready for integration w/ mgr.
 Salish Sea team group meeting; see Google Drive whiteboard.
-(MEOPAR)
+(SalishSea)
 
 
 Wed 6-Jan-2015
@@ -63,7 +63,7 @@ Thu 7-Jan-2016
 ^^^^^^^^^^^^^^
 
 Continued work on operational nowcast talk for 11-Jan Phys Ocgy seminar.
-(MEOPAR)
+(SalishSea)
 
 Mtg w/ Jackie re: new HVSI indicator data, app progress, and design details.
 Got latest update of data spreadsheet for app.
@@ -88,14 +88,14 @@ Discussed with Susan slides for operational nowcast talk for 11-Jan Phys Ocgy se
 Helped Susan launch nowcast-green worker on salish.
 Help Susan get Jie's mess sorted out on orcinus.
 Helped Kyle get Anaconda usable on jasper.
-(MEOPAR)
+(SalishSea)
 
 
 Sat 9-Jan-2016
 ^^^^^^^^^^^^^^
 
 Nowcast critical error: make_plots worker failed at 04:13, but that was because the forecast2 run didn't produce results. That was due to 5 of the nodes having dropped their sshfs connections to the shared storage.
-(MEOPAR)
+(SalishSea)
 
 Finished implementation of map on Compare page that shows communities that are being compared; marker coordinates come from database, and marker on-click events load the community's Profile page.
 Re-created prod database and loaded it from the 6Jan HVSI data spreadsheet.
@@ -108,7 +108,7 @@ Sun 10-Jan-2016
 
 Worked on tools repo docs; got nowcast model changes docs up to date.
 Worked w/ Susan on refactoring nowcast.figures.website_thumbnail().
-(MEOPAR)
+(SalishSea)
 
 
 Week 2
@@ -120,7 +120,7 @@ Mon 11-Jan-2016
 Tidied, stored & committed work on kudu in preparation for working at UBC for a few days.
 Finished slides for operational nowcast talk and delivered it at the Phys Ocgy seminar.
 Sorted out Jie's salishsea gather problem; circular import issue between run and api modules; my bad.
-(MEOPAR)
+(SalishSea)
 
 
 Tue 12-Jan-2016
@@ -132,7 +132,7 @@ Re-closed tools repo SalishSeaNowcat branch that Muriel accidentally re-opened a
 Created mixing-paper and internal-tides-paper groups in team account on Bitbucket and changed access to the corresponding repos so that only those groups & admins have write access.
 Started work on generating datasets.xml file for skookum ERDDAP server.
 Salish Sea team group meeting; see Google Drive whiteboard.
-(MEOPAR)
+(SalishSea)
 
 
 Wed 13-Jan-2016
@@ -145,7 +145,7 @@ Pinged Youyu re: NEMO nowcast project and got a positive response.
 Authorized Charles to buy 2x8Tb archive drives to enlarge backup on salish & skookum; salish storage will be reconfigured from 2x3Tb RAID 1 to 3x3Tb RAID 5.
 Continued work on refactoring website_thumbnail() function in nowcast.figures.
 Continued work on generating datasets.xml file for skookum ERDDAP server, and actually landed a test version of the CampbellRiver.nc dataset.
-(MEOPAR)
+(SalishSea)
 
 Worked on notebook to validate HVSI calcs module against Jackie's spreadsheet calcs; v1 doesn't agree :-(
 (sealinkd)
@@ -160,7 +160,7 @@ Prepared for and helped Elise lead workout session code review/refactoring of no
 Continued work on generating datasets.xml file for skookum ERDDAP server, and landed the real nowcast PointAtkinson.nc dataset.
 Attended dept colloquium by Julie Laroche from Dal re: T. oceania and iron limitation; mostly omics.
 Discussed priorities
-(MEOPAR)
+(SalishSea)
 
 
 Fri 15-Jan-2015
@@ -173,7 +173,7 @@ Added ERDDAP as component in tools repo issue tracker.
 Created tools repo issue #27 re: inconsistent time interval in tide gauge station ERDDAP results datasets.
 Created tools repo issue #28 re: inclusion of run type in ERDDAP dataset ids.
 Refined ERDDAP dataset setup docs, and discussed metadata w/ Susan.
-(MEOPAR)
+(SalishSea)
 
 Continued work on notebook to validate HVSI calcs module againse Jackie's spreadsheet to the point where I am convinced that I am correct; pushed the notebook to the app site so that Jackie can use nbviewer to look at it.
 Added map to Start page and pushed to production.
@@ -196,7 +196,7 @@ Sun 17-Jan-2016
 
 Confirmed that skookum ERDDAP server is automatically extending nowcast Point Atkinson sea surface height dataset based on :kbd:`reloadEveryNMinutes` dataset value.
 Looked at the numpy.testing.assert_array_equal() weirdness that Nancy reported months ago; no real resolution other than calling the function w/ an int and and array is using it wrong even though it doesn't complain.
-(MEOPAR)
+(SalishSea)
 
 Restarted build slaves on cod, coho, herring, sable, and snapper.
 (SOG)
@@ -220,7 +220,7 @@ Jakie is happy with the maps on the Start and Maps pages, but requested a monoch
 Investigated stoppage of ONC-ADCP data downloads on 31-Dec-2015; probably happened due to 2016 not being included in years arrays in case statement in GETDEPL.m script.
 Continued working on ERDDAP server setup & docs; got Charles to restart server w/ corrected config to put files in /results/erddap/, but it is still also looking at /results/erddap*/ dirs.
 Discovered that ERDDAP will not present our model results on lat/lon grid because it is not rectilinear; also discovered that memory and file size limit in the app are easily exceeded by our datasets.
-(MEOPAR)
+(SalishSea)
 
 Attended Phys Ocgy seminar by Noel Fitzpatrick about glacier surface energy balance measurement & modeling.
 
@@ -234,13 +234,13 @@ Gave Jackie a preliminary opinion on why I think that a Feb launch data is too a
 Continued working on ERDDAP server setup; got nowcast 3d tracers and u-velocity datasets in place; requested another restart from Charles to better tune our setup.
 Salish Sea team group meeting; see Google Drive whiteboard.
 Participated in undergrad research fair w/ Elise.
-(MEOPAR)
+(SalishSea)
 
 Wed 20-Jan-2016
 ^^^^^^^^^^^^^^^
 
 Located for Susan the notebook in tools/bathymetry/ used to create the file containing the actual (partial step) bathymetry that NEMO uses for calculations.
-(MEOPAR)
+(SalishSea)
 
 
 Confirmed that RandoPony uses smtp.webfaction.com for outbound email so it will be unaffected by their upcoming spam prevention port changes.
@@ -261,7 +261,7 @@ Downloaded missing HRDPS research forecast files for 16-19-Jan.
 upload_forcing worker failed for nowcast+ run; no apparent reason; manual re-run got automation restarted.
 Fixed the hard-coded date bug that Rich found in LTIM_fun.m and manually ran that script for the 3 nodes; seems to have gotten that ONC-ADCP data downloads back in operation.
 Continued work on ERDDAP datasets with a notebook to start automating the editing of generated XML fragments.
-(MEOPAR)
+(SalishSea)
 
 Finally got PHP vs. static files sorted out enough that Piwik runs as well as can be expected in Vagrant dev environment.
 Helped Jacki try to figure out why her matrix spreadsheets differ from my example; perhaps Python 3 division.
@@ -296,7 +296,7 @@ Created Bitbucket Publications project for SalishSea-MEOPAR team and added 4 pap
 Continued work on refactoring figures.py.
 Created nc_tools.dataset_from_path() function to facilitate loading netCDF datasets from files given by pathlib objects; also RuntimeError to IOError for file not found.
 Started work on wind_tools.calc_wind_avg_at_point() function with code that Susan had extracted from nowcast.worker.make_feeds module.
-(MEOPAR)
+(SalishSea)
 
 
 Sun 24-Jan-2016
@@ -304,7 +304,7 @@ Sun 24-Jan-2016
 
 Finished implementatio of wind_tools.calc_wind_avg_at_point() function.
 Passed the figures.py patch to Susan to check the timing of the Campbell River max ssh on 10Jan16, and for her to continue refactoring.
-(MEOPAR)
+(SalishSea)
 
 Set up 2016 deployment of SoG bloomcast system.
 Had to add work-around for very 1st cloud fraction value being None and causing interpolation to fail.
@@ -330,7 +330,7 @@ Added Smoke,Haze to cloud fraction mapping.
 
 Wrote with Susan MEOPAR renewal proposal section re: code repo.
 Continued work on ERDDAP datasets XML fragments generation automation notebook.
-(MEOPAR)
+(SalishSea)
 
 Attended Phys Ocgy seminary by Romain Di Constanzo about measurement of the Fraser River plume via satellite imagery.
 
@@ -345,7 +345,7 @@ Re-ran bloomcast and got apparently the same results.
 
 Finished 1st draft of ERDDAP datasets automation notebook and used it to generate XML fragment for grid_W v1 dataset.
 Salish Sea team group meeting; see Google Drive whiteboard.
-(MEOPAR)
+(SalishSea)
 
 Restarted buildbot slave on smelt.
 (SOG)
@@ -363,7 +363,7 @@ Prep for bash & editors customization workout.
 (swc)
 
 Pulled refactored figures.py into nowcast production; changes affect website_thumbnail & website_thresholds figures.
-(MEOPAR)
+(SalishSea)
 
 Loaded data from V2HVSIIndicatorData_Final.xlsx data spreadsheet into dev and production databases.
 Wrote deployment docs re: setup of app database and loading data.
@@ -385,7 +385,7 @@ Did some more polishing on the Profiles page HVSI tables.
 
 Improved time zone rendering in figures.website_thumbnail() and added that function to the refactoring testing notebook.
 Continued work on ERDDAP datasets automation notebook re: using it to generate tide gauge station datasets.
-(MEOPAR)
+(SalishSea)
 
 
 Fri 29-Jan-2016
@@ -441,7 +441,7 @@ Requested ERDDAP server reboot & re-config by Charles.
 Set up /results/nowcast-sys/figures/ and requested Charles set up static server to serve it at https://salishsea.eos.ubc.ca/nowcast-sys/figures/.
 Refactored Mercurial update of nowcast salishsea-site repo into separate worker.
 Investigated alternative DAP servers, especially PyDAP.
-(MEOPAR)
+(SalishSea)
 
 
 Tue 2-Feb-2016
@@ -451,7 +451,7 @@ Debugged why hg_update_site worker didn't run; I think it was because I had rest
 Fixed bug in hg_update_site worker whereby a Path object was sent to the manager as a message payload; added unit tests that would have caught the bug if I had been stricter with myself.
 Refactored make_feeds worker to use wind_tools.calc_wind_avg_at_point().
 Started work on unit test for wind_tools.calc_wind_avg_at_point() and found possible off-by-1 bug.
-(MEOPAR)
+(SalishSea)
 
 Worked on contract details for Youyu; proposed alternate justification wording; completed ABACUS form; wrote contractor proposal; wrote draft of company profile.
 (GOMSS)
@@ -467,7 +467,7 @@ Confirmed and fixed off-by-1 bug in wind_tools.calc_wind_avg_at_point() and adde
 Charles restarted eddy and (after a minor issue with its Bitstream Vera Sans font getting blown away by a Java JRE update) it is now running from /results/erddap/ without 500 errors.
 Wrote a post on the ERDDAP Google group re: generation of grid_W v2 dataset.
 Got responses form Bob Simmons that point at using NCO to add variables to old results files when we add new variables (like w-eddy visocity & diffusivity) to model output; other options re: file regexs and results directory tree segmentation don't feel like they will scale.
-(MEOPAR)
+(SalishSea)
 
 Fixed location of profile time line and label in mixing layer depth & wind speed plot re: matplotlib.date.date2num() issue w/ arrow object.
 (bloomcast)
@@ -489,7 +489,7 @@ Explored NCO re: creation of new, empty variables in old nowcast system results 
 Spurred by a subsequent response from Bob Simmons, I tried just loading the Grid_W v2 dataset via a flag file instead of running DasDdl.sh first, and it worked!
 Added surface tracer fields dataset.
 Explored PyDAP package; useful, but Python 3 port not yet released.
-(MEOPAR)
+(SalishSea)
 
 
 Fri 5-Feb-2016
@@ -501,7 +501,7 @@ Nordion site visit re: isoinfo server boot failure; RAID degraded by 1 drive but
 Investigated Nancy's contourf images AttributeError: 'QuadContourSet' object has no attribute 'set_animated' issue;
 Added ping_erddap worker to nowcast system.
 Continued working on xfail tests for run_NEMO36 worker.
-(MEOPAR)
+(SalishSea)
 
 
 Sat 6-Feb-2016
@@ -509,7 +509,7 @@ Sat 6-Feb-2016
 
 Fixed bug in ping_erddap re: handling run types w/ no datasetIDs.
 Started refactoring make_site_page worker and page templates to use static figures server, and to add titles and link anchors to figure images.
-(MEOPAR)
+(SalishSea)
 
 
 Sun 7-Feb-2016
@@ -519,7 +519,7 @@ Finished refactoring make_site_page worker and page templates to use static figu
 Changed run_NEMO36 worker to get run timestep from the previous run's namelist_cfg instead of from the default namelist.domain file.
 Hard-linked results figures on skookum from /results/SalishSea/*cast/*/figures/ to /results/nowcast-sys/figures/*cast/*/.
 Started rebuilding all past publish & research pages to use statically served figures.
-(MEOPAR)
+(SalishSea)
 
 
 Week 6
@@ -533,7 +533,7 @@ Mon 8-Feb-2016
 Debugged intro of static image pages into production; sphinx build time reduced from 19:45 to 01:39, and rsync time reduced from 00:20 to 00:05.
 Refactored make_site_page worker to use NowcastWorker.
 Fixed bug in make_plots worker re: FileExistsError on attempt to link a file created by an earlier run of the worker (nowcast research).
-(MEOPAR)
+(SalishSea)
 
 
 Tue 9-Feb-2016
@@ -544,7 +544,7 @@ Confirmed that netCDF4 conda package included the ability to open datasets via O
 Tracked down log messages associated with sporadic null pointer errors.
 Continued rebuilding nowcast system results pages to use figures from static server.
 Salish Sea team group meeting; see Google Drive whiteboard.
-(MEOPAR)
+(SalishSea)
 
 Restarted build slaves on smelt and sable.
 (SOG)
@@ -560,7 +560,7 @@ Wed 10-Feb-2016
 Fixed title for run duration average winds figure on nowcast publish pages.
 Fix orphan file Sphinx warning from README in nowcast ATOM feeds directory.
 Ran update_copyright script over repos; tools, analysis, salishsea-site, SS-run-sets.
-(MEOPAR)
+(SalishSea)
 
 Reviewed and updated status report.
 Implemented app admin auth principal and added user management item to user menu for users with that authorization.
@@ -588,7 +588,7 @@ Started planning poster for OSM.
 
 nowcast research plots failed due to DNS error, then malformed data from ONC VENUS nodes; re-ran worker with those figures commented out
 Continued rebuilding nowcast system results pages to use figures from static server.
-(MEOPAR)
+(SalishSea)
 
 Fri 12-Feb-2016
 ^^^^^^^^^^^^^^^
@@ -601,7 +601,7 @@ nowcast research plots failed due to malformed data from ONC VENUS nodes; re-ran
 Finished rebuilding nowcast system results pages to use figures from static server.
 Created ticket 15399 re: proxying ERDDAP to salishsea.eos.ubc.ca/erddap/.
 Created ticket 15400 re: installation of SSL/TLS certs & auto-redirection to make salishsea.eos.ubc.ca HTTPS only.
-(MEOPAR)
+(SalishSea)
 
 Worked on nowcast system poster for OSM.
 (osm)
@@ -611,7 +611,7 @@ Sat 13-Feb-2016
 ^^^^^^^^^^^^^^^
 
 Deleted _static/nemo/results_figures/ tree on shelob, freeing 14 Gb of storage.
-(MEOPAR)
+(SalishSea)
 
 
 Sun 14-Feb-2016
@@ -619,7 +619,7 @@ Sun 14-Feb-2016
 
 Worked on nowcast system poster for OSM.
 Emailed Youyu & Dany w/ idea for CMOS talk re: MERCAD.
-(MEOPAR)
+(SalishSea)
 
 
 Week 7
@@ -634,7 +634,7 @@ Explored xarray package (pandas concept for N-dimensional data, especially clima
 Created NEMO-forcing repo ticket #4 re: missing FillValue & least_significant_digit attributes in SalishSea2_NEMO_bathy.nc file.
 Worked with Charles on the transition to HTTPS for salishsea.eos.ubc.ca.
 Got favourable responses from both Youyu and Dany re: CMOS talk about MERCAD.
-(MEOPAR)
+(SalishSea)
 
 
 Tue 16-Feb-2016
@@ -648,7 +648,7 @@ Mtg w/ Jackie re: filters data and design, and data for community profiles page.
 (sealinkd)
 
 Salish Sea team group meeting; see Google Drive whiteboard.
-(MEOPAR)
+(SalishSea)
 
 
 Wed 17-Feb-2016
@@ -665,9 +665,131 @@ Thu 18-Deb-2016
 ^^^^^^^^^^^^^^^
 
 Finished OSM poster.
-(MEOPAR)
+(SalishSea)
 
 Created UptimeRobot account and setup up monitoring for Resilient-C and RandoPony apps, and salishsea site.
+
+
+Fri 19-Feb-2016
+^^^^^^^^^^^^^^^
+
+Traveled to New Orleans for OSM 2016.
+
+
+Sat 20-Feb-2016
+^^^^^^^^^^^^^^^
+
+Added copyright year range to nowcast feed generator.
+Work on integrating run_NEMO36 worker for nowcast-green into automation framework.
+(SalishSea)
+
+Sightseeing in New Orleans; French Quarter and River walk
+
+
+Sun 21-Feb-2016
+^^^^^^^^^^^^^^^
+
+Finished integrating run_NEMO36 worker for nowcast-green into automation but can't test it because 20feb16 run timed out, so we are running a day behind; was able to launch run via ssh from skookum as manager process would do.
+(SalishSea)
+
+Sightseeing in New Orleans; Garden District and Lafayette No. 1 cemetary
+
+OSM opening, keynote, and mixer reception
+(OSM)
+
+
+Week 8
+------
+
+Mon 22-Feb-2016
+^^^^^^^^^^^^^^^
+
+Operational Ocgy and Ocean modeling sessions; my Salish Sea Nowcast system poster.
+(OSM)
+
+
+Tue 23-Feb-2016
+^^^^^^^^^^^^^^^
+
+Excellent Susan Lozier plenary about MOC variability.
+A few bio-physical modeling presentations.
+(OSM)
+
+Worked on porting watch_NEMO worker to NowcastWorker basis and enabling it to work in the shared storage context used for the nowcast-green runs on salish.
+(SalishSea)
+
+Big storm blew through New Orleans.
+Dinner w/ Zack & Mimi at Herbsaint.
+
+
+Wed 24-Feb-2016
+^^^^^^^^^^^^^^^
+
+Amy Waterhouse's talk on internal tide beam in the Tasman Sea.
+Awards lectures
+Tutorials on ensemble data assimilation, Unidata DMRC curated data mgmt tools portal, and R for ocgy.
+Mimi Koehl's talk on swimming in turbulence.
+(OSM)
+
+Continued work on watch_NEMO worker.
+(SalishSea)
+
+Dinner w/ Rich, Nicole, Paul, Sophie & Caroline at Murate's.
+
+
+Thu 25-Feb-2016
+^^^^^^^^^^^^^^^
+
+Fixed leap-year handling bug in residuals._to_datetime() re: conversion of Neah Bay ssh scraped data dates to datetime objects; strptime() assumes non-leap-year unless date string includes the year.
+Continued work on watch_NEMO worker.
+Fixed bug in NowcastWorker that was preventing run_NEMO36 worker on salish from communicating with manager on skookum.
+forecast run was killed by a network switch failure on west.cloud; re-ran.
+(SalishSea)
+
+Nick Bond's talk on the NE Pacific blob.
+Plenaries
+Tutorials on turbulence.
+Elise's talk on modeling primary production controls in the SoG.
+(OSM)
+
+Dinner at Cochon w/ Ben, Nancy & Elise.
+
+
+Fri 26-Feb-2016
+^^^^^^^^^^^^^^^
+
+David Smeed's talk about AMOC measurements at 26°N
+Ivo Pasmans' talk about data assimilation in the OSU OR/WA coast ops model.
+More data assimilation talks.
+(OSM)
+
+Finished NowcastWorker implementation of watch_NEMO worker w/ salish runs & NEMO-3.6 capabilities.
+(SalishSea)
+
+
+Sat 27-Feb-2016
+^^^^^^^^^^^^^^^
+
+Started work on nowcast data comparison page automation.
+(SalishSea)
+
+
+March
+=====
+
+Week 9
+------
+
+Mon 29-Feb-2016
+^^^^^^^^^^^^^^^
+
+Submitted CMOS abstract re: MERCAD framework.
+
+Finished initial implementation of nowcast data comparison page automation.
+Refatored run_NEMO36 unit tests to eliminate remaining xfails.
+(SalishSea)
+
+Traveled home from New Orleans after OSM 2016.
 
 
 ToDo
@@ -675,7 +797,6 @@ ToDo
 
 * refactor, unit tests & docs for forcing links checking for NEMO-3.6
 * update quick-start docs re: NEMO-3.6 - Elise???
-* finish run_NEMO36 unit tests
 
 * get HTTPS working for alternate sealinkd app domain names
 * reduce resolution of landing page images for faster load times
