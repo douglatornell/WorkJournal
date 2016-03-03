@@ -792,6 +792,33 @@ Refatored run_NEMO36 unit tests to eliminate remaining xfails.
 Traveled home from New Orleans after OSM 2016.
 
 
+Tue 1-Mar-2016
+^^^^^^^^^^^^^^
+
+Tested and fixed bugs in new watch_NEMO worker and got it running for nowcast-green via manual launch; hoping that automation will work tomorrow.
+Tested make_plots and make_site_page workers comparison option via manual launch; hoping that it will work via automation tomorrow after manager restart.
+Buffed work env docs re: Jupyter Notebook & nbviewer URLS.
+Worked on notebook re: exploring netCDF datasets from ERDDAP servers.
+Restarted nowcast mgr after nowcast-green run finished to enable automation for nowcast-green watch_NEMO and comparison plots and page.
+(SalishSea)
+
+
+Wed 2-Mar-2016
+^^^^^^^^^^^^^^
+
+Worked on work plan for project.
+(GOMSS)
+
+Fixed watch_NEMO worker PID cal bug that prevented nowcast-green watcher from starting, and manually started watcher.
+Investigated Ben's report of trouble reading ONC central node ADCP dataset on Monday; couldn't reproduce the issue; concluded that it was other a transient glitch that was fixed by Tuesday's cron script run, or that he was unluckily reading the dataset while it was being written by the cron job.
+Investigated why nowcast 01mar16 comparison page was not built; _after_make_plots function was launching make_site_page worker with present day's date instead of previous day's; fixed.
+Tried to add lon & lat as variables to ubcSSn3DTracerFields1hV1 dataset but ERDDAP is acting up because the Bitdstream Vera Sans font has gone MIA again; created ticket for Charles.
+Fixed fill value and precision in ubcSSnBathymetry2V1 dataset re: NEMO-forcing issue #4.
+(SalishSea)
+
+Did no-Flash speed tests at TestMy.com and concluded that kudu is faster on a wired connection than on wifi.
+
+
 ToDo
 ====
 
