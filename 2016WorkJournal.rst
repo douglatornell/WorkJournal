@@ -819,9 +819,23 @@ Fixed fill value and precision in ubcSSnBathymetry2V1 dataset re: NEMO-forcing i
 Did no-Flash speed tests at TestMy.com and concluded that kudu is faster on a wired connection than on wifi.
 
 
+Thu 3-Mar-2016
+^^^^^^^^^^^^^^
+
+nowcast-green and its watcher launched without manual intervention, though logging from watcher is messed up (I think due to buffer).
+Including lon/lat at variables in 3d field erddap datasets doesn't work.
+Added valid_range attributed to ubcSSnBathymetry2V1 dataset.
+Explored erddap dataset access via xarray and found that it solves the time slicing issue very neatly.
+Finished notebook re: exploring netCDF datasets from ERDDAP servers.
+Worked on bringing ferry track salinity plots into comparison page.
+Attended dept coloquium by Paul Snellgrove about biodiveristy - SCOR west speaker.
+(SalishSea)
+
+
 ToDo
 ====
 
+* Fix nowcast-green watch_NEMO logging
 * refactor, unit tests & docs for forcing links checking for NEMO-3.6
 * update quick-start docs re: NEMO-3.6 - Elise???
 
