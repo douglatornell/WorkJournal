@@ -832,6 +832,26 @@ Attended dept coloquium by Paul Snellgrove about biodiveristy - SCOR west speake
 (SalishSea)
 
 
+Fri 4-Mar-2016
+^^^^^^^^^^^^^^
+
+Confirmed w/ Dominik@EC that we can handle compression and directory change for GEM2.5 research model results effective 8-Mar.
+Prep for salishsea site move from shelob to skookum and HTTPS:
+* changed paths in nowcast.yaml
+* changed make_plots worker to copy figure files instead of hard-linking them
+* changed URL to use HTTPS
+Continued work on bringing ferry track salinity plots into comparison page; completed TW-DP figure.
+Met w/ Ben to teach him about ERDDAP server.
+Met w/ Charles to finalize salishsea site move from shelob to skookum and HTTPS.
+(SalishSea)
+
+Changed publication server path from shelob to skookum and set up ssh key in preparation for salishsea site move.
+(bloomcast)
+
+Investigate Englishman River failure in ECget (also affected bloomcast); no data on site after 23:50 on 2-Mar.
+(ecget)
+
+
 ToDo
 ====
 
