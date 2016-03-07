@@ -852,6 +852,29 @@ Investigate Englishman River failure in ECget (also affected bloomcast); no data
 (ecget)
 
 
+Sat 5-Mar-2016
+^^^^^^^^^^^^^^
+
+Removed rsync -t option from push_to_web worker because we can't update time stamps due to permissions in /var/www/html/ tree.
+Also changed path to exclude host prefix because we can rsync directly to /var/www/html/; realized that we could sphinx-build to there directly.
+(SalishSea)
+
+
+Sun 6-Mar-2016
+^^^^^^^^^^^^^^
+
+Removed rsync -t option from push_to_web function because we can't update time stamps due to permissions in /var/www/html/ tree.
+(bloomcast)
+
+Checked on wateroffice Englishman river data; an hour or two's worth appeared for yesterday.
+(ecget)
+
+Figured out how to configure reverse proxy for ERDDAP and added notes to ticket 15400 for Charles; unfortunately, the config, when applied, does not work properly.
+Investigated EC license and redistribution terms for HDRPS model products and concluded that we are clear to distribute our ops dataset on ERDDAP.
+Started work on adding atmospheric forcing datasets to ERDDAP
+(SalishSea)
+
+
 ToDo
 ====
 
