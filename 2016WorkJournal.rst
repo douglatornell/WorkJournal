@@ -875,6 +875,25 @@ Started work on adding atmospheric forcing datasets to ERDDAP
 (SalishSea)
 
 
+Week 10
+-------
+
+Mon 7-Mar-2016
+^^^^^^^^^^^^^^
+
+Shut down Google Cloud Platform nowcast account.
+
+Renewed Compute Canada account.
+
+Changed baseURL setting in ERDDAP setup.xml file to resolve the remaining issue with the reverse proxy to SSL setup.
+Modified ERDDAP setup.xml to change as much as possible of page template from NOAA to UBC Salish Sea NEMO identity.
+Added HRDPS atmospheric forcing grid dataset to ERDDAP.
+(SalishSea)
+
+Implemented user password reseet feature.
+(sealinkd)
+
+
 ToDo
 ====
 
