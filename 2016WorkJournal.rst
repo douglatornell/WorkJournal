@@ -894,6 +894,18 @@ Implemented user password reseet feature.
 (sealinkd)
 
 
+Tue 8-Mar-2016
+^^^^^^^^^^^^^^
+
+Slow start to the morning because I think I'm coming down with a version of Susan's virus.
+
+Finished dev docs for SalishSeaCmd package.
+Refactored SalishSeaTools packaging, and wrote dev docs.
+Team meeting - see whiteboard.
+Discussed summer co-op student interviews w/ Susan and Elise.
+(SalishSea)
+
+
 ToDo
 ====
 
