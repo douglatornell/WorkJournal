@@ -906,6 +906,45 @@ Discussed summer co-op student interviews w/ Susan and Elise.
 (SalishSea)
 
 
+Wed 9-Mar-2016
+^^^^^^^^^^^^^^
+
+
+Started work on integrating Elise's river run-off tracer climatology into nowcast-green.
+Checked on PMV storm surge alerts feed and found that I needed to update the URL to HTTPS in feedly; sent email about that to Cindy@PMV.
+(SalishSea)
+
+Updated production deployment to enable user management system and bootstrapped myself with the app admin role.
+Changed banner to use logo & tagline image that Jackie provided.
+Added favicon from logo image that Jackie provided.
+Uppercased and left justified HVSI indicator table headings on Profiles page per Jackie's request in 16-Feb mtg.
+Changed indicator metric display on Profiles and Compare pages to use | character as line break indicator; reloaded inidicators data from 19Feb spreadsheet in both dev and production to get |-separated metrics data into databases.
+Updated layout of Profiles page Hazard-at-a-Glance and Hazard Exposure tables per Jackie's request in 16-Feb mtg.
+Reloaded communities data from 19Feb spreadsheet in both dev and production to get community descriptions into databases.
+Started adding data for Profiles page Hazard-at-a-Glance table to community data model.
+(sealinkd)
+
+
+kudu crashed hard (spontaneous power off) at about 13:45
+
+I crashed mid-afternoon with headache and increasingly productive cough.
+
+
+Thu 10-Mar-2016
+^^^^^^^^^^^^^^^
+
+Stayed home due to productive cough and headache.
+
+Patched around failing NOAA water levels data download to get make_plots forecast publish to stop failing; re-ran worker for 9Feb forecast and forecast2 runs.
+Added nowcast Campbell River sea surface height dataset to ERDDAP.
+Added ops atmospheric forcing dataset to ERDDAP; including download_weather option to ping_erddap worker so that dataset gets updated after grib_to_netcdf worker finishes nowcast+ work.
+(SalishSea)
+
+Finished adding data for Profiles page Hazard-at-a-Glance table to community data model; loaded data from spreadsheet into both dev and productions databases.
+Created app admin user sign-in for Jackie because she was stuck in a state due to having been signed in with fake credentials when I enabled user management.
+(sealinkd)
+
+
 Fri 11-Mar-2016
 ^^^^^^^^^^^^^^^
 
@@ -933,7 +972,6 @@ ToDo
 * reduce resolution of landing page images for faster load times
 * add docs re: sealinkd server-side app framework
 * add EduCloud deployment docs
-* implement user mgmt
 
 * update storm surge paper refs w/ doi link - need issue details
 * research_ferries module
