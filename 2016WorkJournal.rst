@@ -906,6 +906,22 @@ Discussed summer co-op student interviews w/ Susan and Elise.
 (SalishSea)
 
 
+Fri 11-Mar-2016
+^^^^^^^^^^^^^^^
+
+Still suffering with cough, headache, and, new for today, sinus congestion.
+
+Reviewed and commented on Elise's NEMO-3.6 on orcinus quick start docs, and their punting of the 3.4 version.
+Brought rivers run-off climatology and open boundary conditions for green ocean model into nowcast system.
+Added nowcast Cherry Point sea surface height to ERDDAP.
+(SalishSea)
+
+Created issue #50 typography of table headings on Profiles page.
+(sealinkd)
+
+Participated w/ Susan & Elise in summer student RA interview.
+
+
 ToDo
 ====
 
