@@ -960,6 +960,44 @@ Created issue #50 typography of table headings on Profiles page.
 
 Participated w/ Susan & Elise in summer student RA interview.
 
+Experimented with Wingware and was under-impressed.
+
+
+Sat 12-Mar-2016
+^^^^^^^^^^^^^^^
+
+Still coughing and snotting.
+
+Experimented with PyCharm and found it much more to my liking than Wingware.
+
+Started work on sphinx_build worker to replace push_to_web worker.
+Fixed worker failure log messages to that they are all at the critical level and will therefore generate email notifications.
+Changed storm surge alerts ATOM feed entries to use storm-surge/forecast.html page instead of (incorrect) dated publish pages.
+Added nowcast Friday Harbor sea surface height to ERDDAP.
+(SalishSea)
+
+
+Sun 13-Mar-2016
+^^^^^^^^^^^^^^^
+
+Still coughing and snotting.
+
+Continued experimented with PyCharm.
+
+Added nowcast Nanaimo sea surface height to ERDDAP.
+(SalishSea)
+
+
+Week 11
+-------
+
+Mon 14-Mar-2016
+^^^^^^^^^^^^^^^
+
+make_runoff_files worker failed because ECget produced duplicated 12mar Fraser River flow instead of 13mar; re-ran ECget, make_runoff_files, and upload_forcing to start forecast2 run ~4h late
+Noted that weather downloaded are back to taking >1h, so our runs are starting >1h later than last week - thank you DST.
+(SalishSea)
+
 
 ToDo
 ====
