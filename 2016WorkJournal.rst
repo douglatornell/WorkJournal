@@ -996,7 +996,15 @@ Mon 14-Mar-2016
 
 make_runoff_files worker failed because ECget produced duplicated 12mar Fraser River flow instead of 13mar; re-ran ECget, make_runoff_files, and upload_forcing to start forecast2 run ~4h late
 Noted that weather downloaded are back to taking >1h, so our runs are starting >1h later than last week - thank you DST.
+Added nowcast Neah Bay & Victorai sea surface heights to ERDDAP.
+Emailed Diego about getting nowcast results from ERDDAP on to OceanViewer; and he produced a preliminary demo in a few hours!
+Participated in Phys Ocgy seminar discussion of February conferences.
+Worked on NEMO quick-start and Python/netCDF intro docs.
 (SalishSea)
+
+Submitted expense claim for CMOS abstract.
+
+Set up PyCharm on niko.
 
 
 ToDo
