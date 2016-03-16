@@ -996,7 +996,7 @@ Mon 14-Mar-2016
 
 make_runoff_files worker failed because ECget produced duplicated 12mar Fraser River flow instead of 13mar; re-ran ECget, make_runoff_files, and upload_forcing to start forecast2 run ~4h late
 Noted that weather downloaded are back to taking >1h, so our runs are starting >1h later than last week - thank you DST.
-Added nowcast Neah Bay & Victorai sea surface heights to ERDDAP.
+Added nowcast Neah Bay & Victori asea surface heights to ERDDAP.
 Emailed Diego about getting nowcast results from ERDDAP on to OceanViewer; and he produced a preliminary demo in a few hours!
 Participated in Phys Ocgy seminar discussion of February conferences.
 Worked on NEMO quick-start and Python/netCDF intro docs.
@@ -1005,6 +1005,19 @@ Worked on NEMO quick-start and Python/netCDF intro docs.
 Submitted expense claim for CMOS abstract.
 
 Set up PyCharm on niko.
+
+
+Tue 15-Mar-2016
+^^^^^^^^^^^^^^^
+
+Investigated salishsea.eos.ubc.ca SSL issues reported by Nancy in Firefox on tyee, and Diego in Python 2.7.10 PyDAP & urllib2; concluded that it is an incomplete certificate chain issue in the configuration of apache on skookum, and opened ticket 15506.
+Added nowcast Sand Heads sea surface heights to ERDDAP.
+Salish Sea team mtg; see whiteboard.
+Added source encoding indicator comment to unit_conversions module so that Jie can used it with some Python 2.7 code that Rob wrote.
+Started work on handling missing ferry data in comparison plots.
+(SalishSea)
+
+Participated w/ Susan & Elise in summer student RA interview.
 
 
 ToDo
