@@ -1015,9 +1015,34 @@ Added nowcast Sand Heads sea surface heights to ERDDAP.
 Salish Sea team mtg; see whiteboard.
 Added source encoding indicator comment to unit_conversions module so that Jie can used it with some Python 2.7 code that Rob wrote.
 Started work on handling missing ferry data in comparison plots.
+The 00 weather downloaded failed, but I didn't investigate.
 (SalishSea)
 
-Participated w/ Susan & Elise in summer student RA interview.
+Participated w/ Susan & Elise in summer student RA interviews.
+
+
+Wed 16-Mar-2016
+^^^^^^^^^^^^^^^
+
+Discovered that the /results filesystem on skookum was full, in large part, due to nowcast-green result files not being LZ compressed; realized that that was due to a bug in salishsea-cmd.combine whereby no NEMO-3.6 run results (other than restart files) are being compressed.
+Got thing back on the rails by moving and starting LZ compression on results, and manually running 00 and 06 weather download workers, and make_runoff_file worker; forecast2/15mar16 skipped, and nowcast-green in is catch-up.
+Emailed Dominik re: rotation of GEM2.5 winds to north-south grid, saying that we prefer him to do the rotation, and asking for the transformation so that we can back-apply it as necessary.
+(SalishSea)
+
+Replaced brake blocks on Red and prepped spkokes for Emma's new rear wheel.
+
+Set up SealinkD project in PyCharm.
+Updated app logo in banner with new version from Tugce.
+Changed more Profiles page column headings to uppercase per Jackie's request.
+Started adding data for Profiles page Flood Planning Data Availability table to community data model.
+(sealinkd)
+
+
+Thu 17-Mar-2016
+^^^^^^^^^^^^^^^
+
+Continued adding data for Profiles page Flood Planning Data Availability table to community data model.
+(sealinkd)
 
 
 ToDo
