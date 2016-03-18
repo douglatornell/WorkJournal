@@ -1044,6 +1044,21 @@ Thu 17-Mar-2016
 Continued adding data for Profiles page Flood Planning Data Availability table to community data model.
 (sealinkd)
 
+Worked on handling no observations data issues in research_ferries figures.
+Fixed bug in SalishSeaCmd combine where by results from NEMO-3.6 runs w/ 1 XIOS processor are not LZ-compressed.
+(SalishSea)
+
+Met w/ Chris Edwards of UC Santa Cruz and discussed quasi-real-time models automation.
+
+Attended dept colloquium by Chris Edwards.
+
+
+Fri 18-Mar-2016
+^^^^^^^^^^^^^^^
+
+Nordion site visit re: isoinfo server boot failure; replaced failed drive in RAID array and left it rebuilding; see work notes and expected follow-up visit next week.
+(Nordion)
+
 
 ToDo
 ====
