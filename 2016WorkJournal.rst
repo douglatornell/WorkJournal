@@ -1042,6 +1042,7 @@ Thu 17-Mar-2016
 ^^^^^^^^^^^^^^^
 
 Continued adding data for Profiles page Flood Planning Data Availability table to community data model.
+Emailed w/ Jackie to try to debug inability of SCARP team users to create sign-ups.
 (sealinkd)
 
 Worked on handling no observations data issues in research_ferries figures.
@@ -1058,6 +1059,35 @@ Fri 18-Mar-2016
 
 Nordion site visit re: isoinfo server boot failure; replaced failed drive in RAID array and left it rebuilding; see work notes and expected follow-up visit next week.
 (Nordion)
+
+Jackie told me that she and other SCARP team members did sign-ups with community name Other selected; turns out I had not implemented handling for that; see issue #51.
+Jackie requested addition of UBC Research Team community and role; see issue #52; implemented and pushed to production.
+(sealinkd)
+
+
+Sat 19-Mar-2016
+^^^^^^^^^^^^^^^
+
+Snowshoeing at Callahan.
+
+
+Sun 20-Mar-2016
+^^^^^^^^^^^^^^^
+
+Set up randopony project in PyCharm.
+Changed development environment files & docs to use conda.
+Started refactoring populaire tests to pytest and adding Unicode handling for rider names.
+(RandoPony)
+
+
+Week 12
+-------
+
+Mon 21-Mar-2016
+^^^^^^^^^^^^^^^
+
+Continued refactoring populaire tests to pytest and adding Unicode handling for rider names.
+(RandoPony)
 
 
 Week 12
