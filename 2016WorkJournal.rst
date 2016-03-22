@@ -1060,6 +1060,21 @@ Nordion site visit re: isoinfo server boot failure; replaced failed drive in RAI
 (Nordion)
 
 
+Week 12
+-------
+
+Mon 21-Mar-2016
+^^^^^^^^^^^^^^^
+
+Nancy reported bug in SalishSeaCmd API due to removal of name_roots arg from _netcdf4_deflate_results() function; fixed.
+Updated EC GEM2.5 research forecast download cron scripts to handle gzip compressed files from EC.
+(SalishSea)
+
+Attended Phys Ocgy seminar by Jenna about tracking water masses via Nd in sediment cores.
+
+Tried to help Karina w/ hg SSL issue, and gvfs firefox issue.
+
+
 ToDo
 ====
 
