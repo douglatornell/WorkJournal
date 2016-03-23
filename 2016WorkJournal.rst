@@ -1075,6 +1075,24 @@ Attended Phys Ocgy seminar by Jenna about tracking water masses via Nd in sedime
 Tried to help Karina w/ hg SSL issue, and gvfs firefox issue.
 
 
+Tue 22-Mar-2016
+^^^^^^^^^^^^^^^
+
+Continued catch-up on nowcast-green run results compression, and GEM2.5 research forecast downloads.
+Replied to Elise's email re: anonymous branch management in the NEMO-3.6-code repo.
+Worked on research_ferries figures; Jupytper notebook in PyCharm is too buggy/laggy to use in that application.
+Confirmed that make_site_page bug fix to prevent calendar truncation and missing forecast row works.
+Salish Sea team meeting - see whiteboard.
+Worked with Charles to resolve the SSL intermediate certs issue (and other vulnerabilities) on salishsea.eos.ubc.ca; emailed Diego to let him know that urlopen() should now work properly, and that current vectors needs to be rotated.
+Added Horseshoe Bay-Departure Bay and Tsawwassen-Schwartz Bay ferry route figures to nowcast model vs. observations comparison page.
+(SalishSea)
+
+Email re: 18-Mar visit, plan for 23-Mar visit, IBM xSeries server research, and reiteration of proposal for off-site hosted Minerva.
+(Nordion)
+
+Attended CMOS annual lecture by Ron Stewart of U Manitoba about hazardous precipitation near 0°C.
+
+
 ToDo
 ====
 
