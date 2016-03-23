@@ -1108,12 +1108,20 @@ Confirmed that make_site_page bug fix to prevent calendar truncation and missing
 Salish Sea team meeting - see whiteboard.
 Worked with Charles to resolve the SSL intermediate certs issue (and other vulnerabilities) on salishsea.eos.ubc.ca; emailed Diego to let him know that urlopen() should now work properly, and that current vectors needs to be rotated.
 Added Horseshoe Bay-Departure Bay and Tsawwassen-Schwartz Bay ferry route figures to nowcast model vs. observations comparison page.
+Discussed ferry salinity comparison figures w/ Susan; agreed to attempt another refactoring of the module, and the nowcast site figures architecture in general.
 (SalishSea)
 
 Email re: 18-Mar visit, plan for 23-Mar visit, IBM xSeries server research, and reiteration of proposal for off-site hosted Minerva.
 (Nordion)
 
 Attended CMOS annual lecture by Ron Stewart of U Manitoba about hazardous precipitation near 0°C.
+
+
+Wed 23-Mar-206
+^^^^^^^^^^^^^^
+
+Nordion site visit re: isoinfo server boot failure; RAID array rebuild succeeded and server rebooted successfully; see work notes.
+(Nordion)
 
 
 ToDo
