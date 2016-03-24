@@ -1123,6 +1123,14 @@ Wed 23-Mar-206
 Nordion site visit re: isoinfo server boot failure; RAID array rebuild succeeded and server rebooted successfully; see work notes.
 (Nordion)
 
+Updated PyCharm on kudu to new 2016.1 release.
+
+Added data for Profiles page Hazard Exposure table to community data model, and reworked the table to include a metric column so that the data integers make sense.
+Started development of RsikReductionAction data model to hold data to populate Profiles page Activities table (and maybe Actions filter?).
+(sealinkd)
+
+Attended Python meetup hosted by ContinuumIO; Spiro Sideris talked about pdb, Casey Clements talked about Anaconda, JupyterLab & Dask, Brett Canon talked about async/await.
+
 
 ToDo
 ====
