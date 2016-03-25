@@ -1132,6 +1132,20 @@ Started development of RsikReductionAction data model to hold data to populate P
 Attended Python meetup hosted by ContinuumIO; Spiro Sideris talked about pdb, Casey Clements talked about Anaconda, JupyterLab & Dask, Brett Canon talked about async/await.
 
 
+Thu 24-Mar-2016
+^^^^^^^^^^^^^^^
+
+Upgraded to PyCharm 2016.1 on niko.
+
+Continued work on ferry salinity comparison figures.
+Created refactor-nowcast-figures branch in tools repo; discussed refactoring ideas w Susan and Ben.
+Fixed bug in file names for ferry route salinity comparison plots.
+Enabled building of docs for refactor-nowcast-figures on readthe docs.
+(SalishSea)
+
+Participated in software workout about datetimes lead by Ben.
+
+
 ToDo
 ====
 
