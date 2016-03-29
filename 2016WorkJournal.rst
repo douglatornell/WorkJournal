@@ -1126,7 +1126,7 @@ Nordion site visit re: isoinfo server boot failure; RAID array rebuild succeeded
 Updated PyCharm on kudu to new 2016.1 release.
 
 Added data for Profiles page Hazard Exposure table to community data model, and reworked the table to include a metric column so that the data integers make sense.
-Started development of RsikReductionAction data model to hold data to populate Profiles page Activities table (and maybe Actions filter?).
+Started development of RiskReductionAction data model to hold data to populate Profiles page Activities table (and maybe Actions filter?).
 (sealinkd)
 
 Attended Python meetup hosted by ContinuumIO; Spiro Sideris talked about pdb, Casey Clements talked about Anaconda, JupyterLab & Dask, Brett Canon talked about async/await.
@@ -1138,12 +1138,47 @@ Thu 24-Mar-2016
 Upgraded to PyCharm 2016.1 on niko.
 
 Continued work on ferry salinity comparison figures.
-Created refactor-nowcast-figures branch in tools repo; discussed refactoring ideas w Susan and Ben.
+Created refactor-nowcast-figures branch in tools repo; discussed refactoring ideas w/ Susan and Ben.
 Fixed bug in file names for ferry route salinity comparison plots.
 Enabled building of docs for refactor-nowcast-figures on readthe docs.
 (SalishSea)
 
 Participated in software workout about datetimes lead by Ben.
+
+
+Fri 25-Mar-2016
+^^^^^^^^^^^^^^^
+
+Continued development of RiskReductionAction data model.
+(sealinkd)
+
+
+Sat 26-Mar-2015
+^^^^^^^^^^^^^^^
+
+Finished development of RiskReductionAction data model and implementation of its data into the Profiles page Activities table.
+That completes Stage 2 of the Sea-link'D app contract!!!
+(sealinkd)
+
+
+Sun 27-Mar-2015
+^^^^^^^^^^^^^^^
+
+Removed nowcast index page surface salinity row.
+Moved PyCharm .idea dir for tools repo on kudu into dotfiles repo and symlinked it into tools clone.
+Discussed nowcast figures architecture ideas in refactor-nowcast-figures branch with Susan and continued developing them by prototyping a salinity_ferry_track module to refactor research_ferries.
+(SalishSea)
+
+
+Week 13
+-------
+
+Mon 28-Mar-2016
+^^^^^^^^^^^^^^^
+
+Wrote docs about Mercurial named branches.
+Developed and tested plan for splitting analysis repo.
+(SalishSea)
 
 
 ToDo
