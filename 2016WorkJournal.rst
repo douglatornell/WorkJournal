@@ -1205,6 +1205,15 @@ Reviewed Ben's new salishsea_tools.data_tools module.
 (SalishSea)
 
 
+Tue 29-Mar-2016
+^^^^^^^^^^^^^^^
+
+Wrote nowcast figures architecture docs.
+Wrote library code docs.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+
 ToDo
 ====
 
