@@ -1149,6 +1149,8 @@ Participated in software workout about datetimes lead by Ben.
 Fri 25-Mar-2016
 ^^^^^^^^^^^^^^^
 
+Good Friday
+
 Continued development of RiskReductionAction data model.
 (sealinkd)
 
@@ -1164,6 +1166,8 @@ That completes Stage 2 of the Sea-link'D app contract!!!
 Sun 27-Mar-2015
 ^^^^^^^^^^^^^^^
 
+Easter
+
 Removed nowcast index page surface salinity row.
 Moved PyCharm .idea dir for tools repo on kudu into dotfiles repo and symlinked it into tools clone.
 Discussed nowcast figures architecture ideas in refactor-nowcast-figures branch with Susan and continued developing them by prototyping a salinity_ferry_track module to refactor research_ferries.
@@ -1176,8 +1180,28 @@ Week 13
 Mon 28-Mar-2016
 ^^^^^^^^^^^^^^^
 
+Easter Monday
+
 Wrote docs about Mercurial named branches.
 Developed and tested plan for splitting analysis repo.
+(SalishSea)
+
+
+Wed 30-Mar-2016
+^^^^^^^^^^^^^^^
+
+Did dist-upgrade on sealinkd-vm to apply security updates, etc.
+Deleted test Tom Dickson user from production instance.
+Set up automatic redirect from HTTP to HTTPS on resilient-c.ubc.ca.
+Set up nginx configs for 3 domains to all use SSL via SNI; set up automatic HTTP-> HTTPS redirection on all 3 domains.
+Added deployment docs re: nginx setup.
+Tweaked Profiles page Flood Planning data table layout per Jackie's request.
+Loaded updated version of Profiles page Activities table data from Jackie.
+Started development of hazard exposure filter for Maps and Analysis pages.
+(sealinkd)
+
+Email discussion w/ Nancy about a new thalweg section viz function.
+Reviewed Ben's new salishsea_tools.data_tools module.
 (SalishSea)
 
 
