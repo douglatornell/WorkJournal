@@ -1186,6 +1186,14 @@ Wrote docs about Mercurial named branches.
 Developed and tested plan for splitting analysis repo.
 (SalishSea)
 
+Tue 29-Mar-2016
+^^^^^^^^^^^^^^^
+
+Wrote nowcast figures architecture docs.
+Wrote library code docs.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
 
 Wed 30-Mar-2016
 ^^^^^^^^^^^^^^^
@@ -1205,12 +1213,25 @@ Reviewed Ben's new salishsea_tools.data_tools module.
 (SalishSea)
 
 
-Tue 29-Mar-2016
+Thu 31-Mar-2016
 ^^^^^^^^^^^^^^^
 
-Wrote nowcast figures architecture docs.
-Wrote library code docs.
-Salish Sea team mtg; see whiteboard.
+Added Sphinx autodoc section to library code docs.
+Worked on analysis repo split; completed analysis-jie, analysis-elise, and analysis-ben splits.
+Started work on nowcast.figures.publish.storm_surge_alerts module from figures.plot_threshold_website().
+(SalishSea)
+
+EOAS Poster Corral
+
+
+Fri 1-Apr-2016
+^^^^^^^^^^^^^^
+
+Participated in annual-ish GEOTRACES research mtg w/ groups from UofA and UVic.
+(GEOTRACES)
+
+Continued work on nowcast.figures.publish.storm_surge_alerts module from figures.plot_threshold_website().
+Mostly refactored nowcast.figures.plot_map & dependencies into nowcast.figures.shared module.
 (SalishSea)
 
 
@@ -1221,7 +1242,6 @@ ToDo
 * refactor, unit tests & docs for forcing links checking for NEMO-3.6
 * update quick-start docs re: NEMO-3.6 - Elise???
 
-* get HTTPS working for alternate sealinkd app domain names
 * reduce resolution of landing page images for faster load times
 * add docs re: sealinkd server-side app framework
 * add EduCloud deployment docs
