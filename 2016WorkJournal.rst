@@ -1235,6 +1235,27 @@ Mostly refactored nowcast.figures.plot_map & dependencies into nowcast.figures.s
 (SalishSea)
 
 
+April
+=====
+
+Week 14
+-------
+
+Mon 4-Apr-2016
+^^^^^^^^^^^^^^
+
+Sent reminder re: invoice for 18 and 23 Mar site visits.
+(Nordion)
+
+Finished refactoring nowcast.figures.plot_map & dependencies into nowcast.figures.shared module.
+Continued work on nowcast.figures.publish.storm_surge_alerts module from figures.plot_threshold_website().
+Reviewed Nancy's new salishsea_tools.visualizations module that holds contour_thalweg().
+Moved nowcast.figures.get_tides() into nowcast.figures.shared module.
+(SalishSea)
+
+Attended Phys Ocgy seminar by Hakase Hayashida of UVic GEOTRACES about arctic ice algae biogeochemistry model.
+
+
 ToDo
 ====
 
