@@ -1235,6 +1235,19 @@ Mostly refactored nowcast.figures.plot_map & dependencies into nowcast.figures.s
 (SalishSea)
 
 
+Sat 2-Apr-2016
+^^^^^^^^^^^^^^
+
+Spent the day at Langara College first in a session about the continuing studies photography program, and later in a DLSR seminar lead by Kurt Stewart, a Basic Digital instructor in the program.
+
+
+Sun 3-Apr-2016
+^^^^^^^^^^^^^^
+
+Continued refactoring populaire unit tests.
+(RandoPony)
+
+
 April
 =====
 
