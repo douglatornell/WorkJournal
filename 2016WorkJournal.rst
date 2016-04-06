@@ -1256,6 +1256,26 @@ Moved nowcast.figures.get_tides() into nowcast.figures.shared module.
 Attended Phys Ocgy seminar by Hakase Hayashida of UVic GEOTRACES about arctic ice algae biogeochemistry model.
 
 
+Tue 5-Apr-2016
+^^^^^^^^^^^^^^
+
+Reviewed and commented on Susan's piece of the 2016 State of the Pacific Ocean report.
+(bloomcast)
+
+Continued work on nowcast.figures.publish.storm_surge_alerts module from figures.plot_threshold_website().
+Salish Sea team mtg; see Google whiteboard; discussed creation of salishsea_tools.geo_tools module.
+(SalishSea)
+
+Voted in favour of 6 month release schedule and suggested Ubuntu-like, date-based release identifiers.
+(SWC)
+
+Met w/ Tamsin Lyle & Samaneh ?? of Ebbwater re: using Salish Sea NEMO model results as part of sea level rise plus storm surge visualization for Sechelt.
+
+Attended GEOTRACES mtg.
+
+
+
+
 ToDo
 ====
 
