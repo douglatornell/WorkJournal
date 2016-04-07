@@ -1257,7 +1257,7 @@ Week 14
 Mon 4-Apr-2016
 ^^^^^^^^^^^^^^
 
-Sent reminder re: invoice for 18 and 23 Mar site visits.
+Sent reminder re: invoice for 18 and 23 Mar site visits; got paid almost immediately.
 (Nordion)
 
 Finished refactoring nowcast.figures.plot_map & dependencies into nowcast.figures.shared module.
@@ -1286,7 +1286,20 @@ Met w/ Tamsin Lyle & Samaneh ?? of Ebbwater re: using Salish Sea NEMO model resu
 
 Attended GEOTRACES mtg.
 
+Updated niko to PyCharm 2016.1.1.
 
+
+Wed 6-Apr-2016
+^^^^^^^^^^^^^^
+
+Feeling achy and discombobulated.
+
+Updated kudu to PyCharm 2016.1.1.
+
+Moved SealinkD repo .idea/ directory into dotfiles repo.
+Wrote end of stage 2 status report and created invoice.
+Developed design and implementation of hazards & actions filters to the extent of a demo of the flooding filter on the Maps page.
+(sealinkd)
 
 
 ToDo
