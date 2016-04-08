@@ -1302,9 +1302,30 @@ Developed design and implementation of hazards & actions filters to the extent o
 (sealinkd)
 
 
+Thu 7-Apr-2016
+^^^^^^^^^^^^^^
+
+Created client repo for UBC-SCARP.
+(43ravens)
+
+Email from Dominik@EC confirming that today is the first day for which the GEM2.5 research forecast winds are rotated to zonal/meridional.
+Continued work on nowcast.figures.publish.storm_surge_alerts module from figures.plot_threshold_website().
+(SalishSea)
+
+Helped Karina w/ ariane installation issued on coho??
+(canyons)
+
+Sent status report and stage 2 invice to Stephanie, Jackie & Penny.
+(sealinkd)
+
+Participated in workout led by Elise about sqlalchemy.
+(swc)
+
+
 ToDo
 ====
 
+* Rotate winds in research forecasts prior to 7apr16
 * Fix nowcast-green watch_NEMO logging
 * refactor, unit tests & docs for forcing links checking for NEMO-3.6
 * update quick-start docs re: NEMO-3.6 - Elise???
