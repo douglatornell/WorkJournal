@@ -1322,6 +1322,54 @@ Participated in workout led by Elise about sqlalchemy.
 (swc)
 
 
+Fri 8-Apr-2016
+^^^^^^^^^^^^^^
+
+Travel to Barrie to visit parents
+
+Continued work on nowcast.figures.publish.storm_surge_alerts module from figures.plot_threshold_website().
+(SalishSea)
+
+
+Sat 9-Apr-2016
+^^^^^^^^^^^^^^
+
+Attended memorial gathering in Stayner for Bernard Chalmers.
+
+
+Sun 10-Apr-2016
+^^^^^^^^^^^^^^^
+
+Visiting parents in Barrie
+
+
+Week 15
+-------
+
+Mon 11-Apr-2016
+^^^^^^^^^^^^^^^
+
+Visiting parents in Barrie; met Maria, their accountant.
+
+Continued work on nowcast.figures.publish.storm_surge_alerts module from figures.plot_threshold_website().
+(SalishSea)
+
+
+Tue 12-Apr-2016
+^^^^^^^^^^^^^^^
+
+Visiting parents in Barrie.
+
+Continued work on nowcast.figures.publish.storm_surge_alerts module from figures.plot_threshold_website().
+(SalishSea)
+
+
+Wed 13-Apr-2016
+^^^^^^^^^^^^^^^
+
+Travel home from Barrie.
+
+
 ToDo
 ====
 
