@@ -1370,6 +1370,20 @@ Wed 13-Apr-2016
 Travel home from Barrie.
 
 
+Thu 14-Apr-2016
+^^^^^^^^^^^^^^^
+
+Brought dev env up to date on niko.
+Set up PyCharm to run app from Vagrant VM in hopes of enabling debugging in PyCharm on both niko and kudu; still some wrinkles to sort out.
+(sealinkd)
+
+Successfully tested nbsphinx extension that allows Jupyter notebooks to be incorporated into Sphinx docs.
+Changed readthedocs config for tools repo to use conda environment so that mocks in conf.py are no longer required.
+Changed tools and docs repos on Bitbucket to use webhooks instead of service hooks to send signals to readthedocs.org.
+Added docs and a demo notebook re: using xarray.
+(SalishSea)
+
+
 ToDo
 ====
 
