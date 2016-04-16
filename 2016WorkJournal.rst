@@ -1384,6 +1384,19 @@ Added docs and a demo notebook re: using xarray.
 (SalishSea)
 
 
+Fri 15-Apr-2016
+^^^^^^^^^^^^^^^
+
+Did more exploration of remote debugging of Vagrant apps in PyCharm; got the flask example to work, and made progress on sealinkd, but frames are still not visible and breakpoints are ignored.
+
+Added section re: public & private object names to library code docs.
+Changed handling of storm surge alerts thumbnail image so that it is provided by the figures server instead of coming from the site _static/ directory.
+Updated salishsea-site rsync deployment target re: move of server to skookum.
+Finished sphinx_build worker to replace sphinx build section of push_to_web worker.
+Started work on rsync_to_web worker to complete refactoring of push_to_web worker into 3 NowcastWorker-based workers.
+(SalishSea)
+
+
 ToDo
 ====
 
