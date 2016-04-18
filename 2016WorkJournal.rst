@@ -1397,6 +1397,22 @@ Started work on rsync_to_web worker to complete refactoring of push_to_web worke
 (SalishSea)
 
 
+Sat 16-Apr-2016
+^^^^^^^^^^^^^^^
+
+Finished rsync_to_web worker.
+Replaced push_to_web worker with sphinx_build and rsync_to_web workers.
+Dealt with loss of sshfs connection on west.cloud node 13; no forecast2/15/apr16 run.
+(SalishSea)
+
+
+Sun 17-Apr-2016
+^^^^^^^^^^^^^^^
+
+Deployed sphinx_build and push_to_web workers and dealt with the inevitable bugs; also recovered from failed make_plots worker runs yesterday, and fixed a bug whereby make_plots worker would overwrite the storm surge alerts thumbnail with an incorrect one when the worker is run on a date other than the one of the present forecast run's.
+(SalishSea)
+
+
 ToDo
 ====
 
