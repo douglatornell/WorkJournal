@@ -1413,6 +1413,25 @@ Deployed sphinx_build and push_to_web workers and dealt with the inevitable bugs
 (SalishSea)
 
 
+Week 16
+-------
+
+Mon 18-Apr-2016
+^^^^^^^^^^^^^^^
+
+Added earthquake to hazards exposure filter on Maps page; need to confirm how Jackie wants criteria from different hazards combined: or or and?
+(sealinkd)
+
+Fixed bug that caused nowcast results index page to exclude right-most date after nowcast comparison page build.
+Helped Elise get ready to use salishsea command processor on orcinus.
+Buffed docs in anticipation of James starting on 2-May.
+(SalishSea)
+
+Attended Phys Ocgy seminar re: magnetic fields on Mars.
+
+Bought PyCharm annual license.
+
+
 ToDo
 ====
 
