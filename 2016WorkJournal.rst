@@ -1432,6 +1432,20 @@ Attended Phys Ocgy seminar re: magnetic fields on Mars.
 Bought PyCharm annual license.
 
 
+Tue 19-Apr-2016
+^^^^^^^^^^^^^^^
+
+Worked w/ Susan on metadata for SalishSea2 bathymetry mesk mash dataset for ERDDAP.
+Planned Friday IOS ERDDAP workshop w/ Susan.
+Checked status of OceanViewer and it appears to be picking up our daily nowcast results in its test instance (but not in production), and the currents have not yet been rotated.
+Started development of a notebook to explore a nowcast sea surface temperature and associated atmospheric forcing via ERDDAP and xarray; for IO workshop on Friday and our analysis_tools notebooks collection.
+Salish Sea team meeting; see whiteboard.
+(SalishSea)
+
+Met w/ Jackie to discuss preliminary design & implementation of hazards and actions filters, and her plans for beta testing the app.
+(sealinkd)
+
+
 ToDo
 ====
 
