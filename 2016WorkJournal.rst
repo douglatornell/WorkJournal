@@ -1402,7 +1402,7 @@ Sat 16-Apr-2016
 
 Finished rsync_to_web worker.
 Replaced push_to_web worker with sphinx_build and rsync_to_web workers.
-Dealt with loss of sshfs connection on west.cloud node 13; no forecast2/15/apr16 run.
+Dealt with loss of sshfs connection on west.cloud node 13; no forecast2/15apr16 run.
 (SalishSea)
 
 
@@ -1438,12 +1438,26 @@ Tue 19-Apr-2016
 Worked w/ Susan on metadata for SalishSea2 bathymetry mesk mash dataset for ERDDAP.
 Planned Friday IOS ERDDAP workshop w/ Susan.
 Checked status of OceanViewer and it appears to be picking up our daily nowcast results in its test instance (but not in production), and the currents have not yet been rotated.
-Started development of a notebook to explore a nowcast sea surface temperature and associated atmospheric forcing via ERDDAP and xarray; for IO workshop on Friday and our analysis_tools notebooks collection.
+Started development of a notebook to explore a nowcast sea surface temperature and associated atmospheric forcing via ERDDAP and xarray; for IOS workshop on Friday and our analysis_tools notebooks collection.
 Salish Sea team meeting; see whiteboard.
 (SalishSea)
 
 Met w/ Jackie to discuss preliminary design & implementation of hazards and actions filters, and her plans for beta testing the app.
 (sealinkd)
+
+Party to celebrate Julia Gustanson's successful PhD defense.
+
+
+Wed 20-Apr-2016
+^^^^^^^^^^^^^^^
+
+Researched current state of github.io pages for tomorrow's workout.
+(swc)
+
+Finished adding metadata to SalishSea2 mesh mask file in preparation for creation of ERDDAP datasets.
+Added ubcSSn2DMeshMask2V1 and ubcSSn3DMeshMask2V1 datasets to ERDDAP.
+Continued development of a notebook to explore a nowcast sea surface temperature and associated atmospheric forcing via ERDDAP and xarray; for IOS workshop on Friday and our analysis_tools notebooks collection.
+(SalishSea)
 
 
 ToDo
