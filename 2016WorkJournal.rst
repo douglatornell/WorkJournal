@@ -1460,6 +1460,37 @@ Continued development of a notebook to explore a nowcast sea surface temperature
 (SalishSea)
 
 
+Thu 21-Apr-2016
+^^^^^^^^^^^^^^^
+
+Prep for and delivered workout about GitHub Pages.
+(swc)
+
+Continued development of a notebook to explore a nowcast sea surface temperature and associated atmospheric forcing via ERDDAP and xarray; for IOS workshop on Friday and our analysis_tools notebooks collection.
+Created no-web version of above notebook and downloaded dataset slabs to niko in anticipation of having limited network access at IOS.
+(SalishSea)
+
+Traveled to Sydney for IOS workshop.
+
+
+Fri 22-Apr-2016
+^^^^^^^^^^^^^^^
+
+Attended Susan's seminar at IOS, then presented ERDDAP workshop with her.
+Discussed publication of value-added product of real-time data from automated tide gauge stations with Charles.
+Discussed boundary condition coupling of our NEMO model to DFO FVCOM model of Vancouver Harbour and Lower Fraser River.
+Created salishsea_tools.geo_tools module and started moving distance_along_curve() into it from visualizations module.
+(SalishSea)
+
+
+Sat 23-Apr-2016
+^^^^^^^^^^^^^^^
+
+Finished moving distance_along_curve() from visualizations module into geo_tools.
+Switched nowcast production to refactor-nowcast-figures branch and restarted manager.
+(SalishSea)
+
+
 ToDo
 ====
 
