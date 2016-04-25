@@ -1487,8 +1487,15 @@ Sat 23-Apr-2016
 ^^^^^^^^^^^^^^^
 
 Finished moving distance_along_curve() from visualizations module into geo_tools.
-Switched nowcast production to refactor-nowcast-figures branch and restarted manager.
+Switched nowcast production to refactor-nowcast-figures branch and restarted manager; had to fix some minor bugs, mostly re: imports, but after that things were good.
 (SalishSea)
+
+
+Sun 24-Apr-2016
+^^^^^^^^^^^^^^^
+
+Finished implementation of hazard exposure filter for Maps page w/ "or" within hazard columns and "and" between them; pushed it to production for Jackie to use during her user observation beta tests.
+(sealinkd)
 
 
 ToDo
