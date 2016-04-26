@@ -1498,6 +1498,29 @@ Finished implementation of hazard exposure filter for Maps page w/ "or" within h
 (sealinkd)
 
 
+Week 17
+-------
+
+Mon 25-Apr-2016
+^^^^^^^^^^^^^^^
+
+Completed and submitted EOSM office safety self-inspection.
+
+Continued review & cleanup of docs in preparation for James onboarding.
+Created analysis-james repo.
+Moved results server docs from tools/docs to docs repo.
+Re-ran make_plots nowcast comparison w/o funky Tw-DP ferry data.
+Worked on moving haversine() from tidetools module to geo_tools.
+(SalishSea)
+
+Attended Phys Ocgy seminar by Richard Dewey about the blob, El Nino & oscillations.
+
+Met w/ Richard, Susan & Nancy re: nowcast, MEOPAR, ONC sensors & data, etc.
+
+Helped Karina sort out how to use ncks to shape her MITgcm results files so that Ariane will accept them.
+(canyons)
+
+
 ToDo
 ====
 
