@@ -1521,6 +1521,25 @@ Helped Karina sort out how to use ncks to shape her MITgcm results files so that
 (canyons)
 
 
+Tue 26-Apr-2016
+^^^^^^^^^^^^^^^
+
+Finished moving haversine() into geo_tools module, changed it to use NumPy ufuncs so that it becomes polymorphic, and refactored distance_along_curve() to be vectorized by passing arrays to haversine().
+Merged tools repo refactor-nowcast-figures branch into default.
+Added nbsphinx extension to tools repo docs.
+Added ERDDAP datasets notebook to tools docs via nbsphinx.
+Started writing nowcast system framework docs.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+Shut down bloomcast cron job for the year.
+(bloomcast)
+
+Investigated last week's buildbot failures; appears to have been a hack attempt or a wandering bot.
+Also found a bunch of long-standing build failures.
+(SOG)
+
+
 ToDo
 ====
 
