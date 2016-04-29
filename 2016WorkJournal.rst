@@ -1520,6 +1520,9 @@ Met w/ Richard, Susan & Nancy re: nowcast, MEOPAR, ONC sensors & data, etc.
 Helped Karina sort out how to use ncks to shape her MITgcm results files so that Ariane will accept them.
 (canyons)
 
+Added explanatory text for filters to Maps page per Jackie's request in issue #57.
+(sealinkd)
+
 
 Tue 26-Apr-2016
 ^^^^^^^^^^^^^^^
@@ -1540,8 +1543,51 @@ Also found a bunch of long-standing build failures.
 (SOG)
 
 
+Wed 27-Apr-2016
+^^^^^^^^^^^^^^^
+
+Copied backlog of photos from Inbox to iPhoto on matisse.
+
+Updated kudu to 16.04; didn't end smoothly, perhaps due to outdate SHA1 hash issue on Google hangouts plugin?
+Had to pip3 install flake8 to get SublimeLinter for Python 3 happy again, perhaps due to system Python 3 being updated from 3.4 to 3.5.
+
+Updated firmware on OM-D camera.
+
+See project journal.
+(GOMSS)
+
+Explored configs & options in my pycharm-pyramid-test project until I figured out that the :kbd:`--reload` option has to be added to the :guilabel:`Additional options:` section of the PyCharm run config to get :command:`pserve --reload` functionality.
+Also succeeded in getting pycharm-pyramid-test remote debugging on a Vagrant VM to work with an in-place deployment with the app installed in a conda-env.
+
+Increased dev VM memory from default 512 kB to 1024 kB in hopes of resolving period app crashes.
+Enabled :command:`pserve --reload` functionality in PyCharm SealinkD project.
+Experimented in sealinkd_test clone with new dev VM that puts app in /home/vagrant/ to try to get PyCharm remote debugging to work.
+(sealinkd)
+
+
+Thu 28-Apr-2016
+^^^^^^^^^^^^^^^
+
+Failed to get PyCharm remote debugging to work in sealinkd_test clone with new dev VM that puts app in /home/vagrant/.
+Email from Stephanie re: stage 3; did preliminary estimate to finish filters implementation.
+Updated data model initialization docs.
+Triaged issues created by Jackie after last mtg.
+(sealinkd)
+
+See project journal.
+(GOMSS)
+
+Tracked down origin of comment describing `wind grid ji` items in PLACES dict and concluded that it had lon and lat flipped.
+(SalishSea)
+
+Finished refactoring populaire tests to use pytest and handle unicode characters in names.
+(RandoPony)
+
+
 ToDo
 ====
+
+* update darktable and zeal for 16.04
 
 * Rotate winds in research forecasts prior to 7apr16
 * Fix nowcast-green watch_NEMO logging
