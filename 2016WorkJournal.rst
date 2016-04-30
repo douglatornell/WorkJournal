@@ -1583,6 +1583,23 @@ Tracked down origin of comment describing `wind grid ji` items in PLACES dict an
 Finished refactoring populaire tests to use pytest and handle unicode characters in names.
 (RandoPony)
 
+Registered for WestGrid advanced scheduler workshop on 17-19 May.
+
+
+Fri 29-Apr-2016
+^^^^^^^^^^^^^^^
+
+Canyons team mtg
+(canyons)
+
+Upgraded niko to Ubuntu 16.04 Xenial; not the smoothest trip ever...
+
+Met w/ Elise to plan on-boarding for James.
+
+Refactored nowcast.figures.website_thumbnail() into nowcast.figures.publish.storm_surge_alerts_thumbnail module.
+Toured Romain & Rich's drifter project web site.
+(SalishSea)
+
 
 ToDo
 ====
