@@ -1601,6 +1601,23 @@ Toured Romain & Rich's drifter project web site.
 (SalishSea)
 
 
+Sat 30-Apr-2016
+^^^^^^^^^^^^^^^
+
+Refactored Elise's extractThalweg.py script to try to understand where it is spending its time, and to make the code more Pythonic.
+(SalishSea)
+
+
+Sun 1-May-2016
+^^^^^^^^^^^^^^
+
+Changed nowcast production back to default branch, pulled in Friday's storm surge thumbnail image changes, and restarted the manager; lost the make_plots worker patch that was in effect in production.
+Continued refactoring Elise's extractThalweg.py script to try to understand where it is spending its time, and to make the code more Pythonic.
+(SalishSea)
+
+Decluttered some of my Firefox tab groups thanks to "Bookmark all tabs".
+
+
 ToDo
 ====
 
