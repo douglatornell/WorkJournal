@@ -629,7 +629,7 @@ Mon 15-Feb-2016
 ^^^^^^^^^^^^^^^
 
 Worked on nowcast system poster for OSM.
-Participated in Phys Ocgy seminar where Elise practiced her talk and some of the rest os us previewed our posters.
+Participated in Phys Ocgy seminar where Elise practiced her talk and some of the rest of us previewed our posters.
 Explored xarray package (pandas concept for N-dimensional data, especially climate & ocean model results).
 Created NEMO-forcing repo ticket #4 re: missing FillValue & least_significant_digit attributes in SalishSea2_NEMO_bathy.nc file.
 Worked with Charles on the transition to HTTPS for salishsea.eos.ubc.ca.
@@ -1616,6 +1616,27 @@ Continued refactoring Elise's extractThalweg.py script to try to understand wher
 (SalishSea)
 
 Decluttered some of my Firefox tab groups thanks to "Bookmark all tabs".
+
+
+May
+===
+
+Week 18
+-------
+
+Mon 2-May-2016
+^^^^^^^^^^^^^^
+
+James Petrie first day on the Salish Sea team; met w/ he and Elise re: on-boarding.
+
+Responded to Tom's plan to lock down the 142.103.250.0/24 subnet; port 22 will remain open, but some form of desktop sharing will be required to reach http://bjossa.eos.ubc.ca:8010/.
+
+Attended Phys Ocgy seminary by Cindy on Pa/Th parameterizations in the Arctic.
+
+Finished analysis repo splitting except analysis-nancy.
+Finished refactoring Elise's extractThalweg.py script to try to understand where it is spending its time, and to make the code more Pythonic.
+Explored visualisations.contour_thalweg() function.
+(SalishSea)
 
 
 ToDo
