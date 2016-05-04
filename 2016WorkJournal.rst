@@ -1639,6 +1639,19 @@ Explored visualisations.contour_thalweg() function.
 (SalishSea)
 
 
+Tue 3-May-2016
+^^^^^^^^^^^^^^
+
+sealinkd mtg
+
+Worked w/ James & Idalia re: on-boarding.
+
+GEOTRACES mtg
+
+nowcast failed at 82% due to west.cloud maintenance; restarted at about 17:45.
+SalishSea team mtg.
+
+
 ToDo
 ====
 
