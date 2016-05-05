@@ -1642,32 +1642,59 @@ Explored visualisations.contour_thalweg() function.
 Tue 3-May-2016
 ^^^^^^^^^^^^^^
 
-sealinkd mtg
+Met w/ Jackie to discuss feedback from last week's end-user beta tests.
+(sealinkd)
 
 Worked w/ James & Idalia re: on-boarding.
 
-GEOTRACES mtg
+GEOTRACES mtg; participated in review of Cindy's Pa/Th tracer code to try to find speed-ups.
+(GEOTRACES)
 
 nowcast failed at 82% due to west.cloud maintenance; restarted at about 17:45.
 SalishSea team mtg.
+(SalishSea)
+
+
+Wed 4-May-2016
+^^^^^^^^^^^^^^
+
+Reconnected sshfs shared storage to nodes 10, 11 & 14 on west.cloud.
+Experimented with elimination of module-under-test fixture in test_geo_tools and decided to make that standard practice because it makes tests easier to understand and PyCharm introspection more functional.
+(SalishSea)
+
+Experimented with new network wiring and confirmed that LAN port of Telus router needs to be connected to LAN port of Airport Extreme in order for AE to act as DHCP server; so 4 drops are required on dining room north wall.
+
+Finished travel arrangements for Fredericton & Barrie.
+Eye exam.
+
+Wrote draft of stage 3 estimate email to Stephanie.
+Updated project time tracking spreadsheet with stage 3 tasks.
+Continued work on hazard exposure filter; applied it to sidebar panels on Maps page, and transferred filter criteria via query string when a sidebar panel is selected.
+(sealinkd)
+
+
+Thu 5-May-2016
+^^^^^^^^^^^^^^
+
+Reviewed and integrated Jackie's changes to the Help, Contact, and Privacy Policy page; CJ's how-to video looks really good!
+(sealinkd)
 
 
 ToDo
 ====
 
-* update darktable and zeal for 16.04
-
+* update storm surge paper refs w/ doi link - need issue details
 * Rotate winds in research forecasts prior to 7apr16
 * Fix nowcast-green watch_NEMO logging
 * refactor, unit tests & docs for forcing links checking for NEMO-3.6
-* update quick-start docs re: NEMO-3.6 - Elise???
 
 * reduce resolution of landing page images for faster load times
 * add docs re: sealinkd server-side app framework
 * add EduCloud deployment docs
 
-* update storm surge paper refs w/ doi link - need issue details
 * research_ferries module
 * JSON logging use example notebook
 
 * review remaining nosy PRs
+
+* update darktable and zeal for 16.04
