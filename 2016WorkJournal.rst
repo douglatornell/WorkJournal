@@ -1679,6 +1679,18 @@ Thu 5-May-2016
 Reviewed and integrated Jackie's changes to the Help, Contact, and Privacy Policy page; CJ's how-to video looks really good!
 (sealinkd)
 
+Met w/ Elise & James to discuss running NEMO.
+Software workouts planning session that merges w/ MOAD software session because only MOAD people showed up for the workout.
+Worked with Susan on trying to get 04may16 nowcast run to work on orcinus.
+Reconnected west.cloud instances to shared storage.
+Worked on pulling svn updates from NEMO-3.6 upstream repo; got NEMO-3.6-hg-mirror to r5890, but messed up NEMO-3.6-mirror-merge step.
+(SalishSea)
+
+11:00 12:45 Elise & James
+13:00 15:00 Workout & MOAD software
+15:00 16:15 nowcast on orcinus & fix cloud
+16:15 18:00 NEMO-3.6 svn update & merge
+
 
 ToDo
 ====
