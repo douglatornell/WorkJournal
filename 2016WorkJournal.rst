@@ -1686,16 +1686,35 @@ Reconnected west.cloud instances to shared storage.
 Worked on pulling svn updates from NEMO-3.6 upstream repo; got NEMO-3.6-hg-mirror to r5890, but messed up NEMO-3.6-mirror-merge step.
 (SalishSea)
 
-11:00 12:45 Elise & James
-13:00 15:00 Workout & MOAD software
-15:00 16:15 nowcast on orcinus & fix cloud
-16:15 18:00 NEMO-3.6 svn update & merge
+
+Fri 6-May-2016
+^^^^^^^^^^^^^^
+
+Worked on moving nowcast back to west.cloud after 2 days runs on orcinus.
+Finished pulling svn updates from NEMO-3.6 upstream repo; got NEMO-3.6-hg-mirror to r5890, yesterday's NEMO-3.6-mirror-merge step was okay after all.
+Committed re-enabling of VENUS central and east node T&S comparison plots.
+Added handling for missing ferry salinity data that aborts comparison plot creation.
+Back-filled figures and results pages for nowcast runs that were missing them due to cloud maintenance, etc.
+Tested creation of a west.cloud nemo-c8-15gb-90 flavour instance from our nowcast-head-node-v4 image snapshot.
+Did more elimination of module-under-test fixtures in test modules.
+(SalishSea)
+
+Finalized stage 3 estimates and send them to Stephanie.
+Received payment for stage 2.
+Refactor Maps page view function to encapsulate map marker attribute calculations.
+Added Hazard Exposure filter to Analysis page, and implemented transfer of filter criteria between Maps and ANalysis pages.
+(sealinkd)
+
+Successfully restored timesheet spreadsheet from kudu backup to mostly recover from yesterday brainfart of copying the wrong way between kudu & USB.
+
+Received email request from Ken for site-visit due to another Minerva server boot failure; site visit set for 11-May.
+(Nordion)
 
 
 ToDo
 ====
 
-* update storm surge paper refs w/ doi link - need issue details
+* update storm surge paper refs w/ doi link
 * Rotate winds in research forecasts prior to 7apr16
 * Fix nowcast-green watch_NEMO logging
 * refactor, unit tests & docs for forcing links checking for NEMO-3.6
