@@ -1711,6 +1711,25 @@ Received email request from Ken for site-visit due to another Minerva server boo
 (Nordion)
 
 
+Sat 7-May-2016
+^^^^^^^^^^^^^^
+
+Traveled to Parksville.
+
+Continued elimination of module-under-test fixtures in test modules.
+Explored scipy.io.loadmat() re: ONC ferry data.
+(SalishSea)
+
+
+Sun 8-May-2016
+^^^^^^^^^^^^^^
+
+Explored oauth2 to access Google Drive spreadsheets; made some progress with a new service account for the pony (see notes in Documents/RandoPony/test-oauth2/)
+(randopony)
+
+Returned to Vancouver.
+
+
 ToDo
 ====
 
