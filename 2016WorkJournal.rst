@@ -1730,9 +1730,29 @@ Explored oauth2 to access Google Drive spreadsheets; made some progress with a n
 Returned to Vancouver.
 
 
+Week 19
+-------
+
+Mon 9-May-2016
+^^^^^^^^^^^^^^
+
+Experimented with X2Go on niko but it acts like the X2Go server is not installed on smelt, sable, or cod.
+Explored DFO 500m bathymetry .bag file with help from Kurt Schwehr video on YouTube; started compiling what I learned into a notebook.
+Helped Elise debug `salishsea gather` failure on salish; due to missing --user flag for pip install in docs; fixed docs & corrected James' installation.
+Located stdout & stderr for salish runs and wrote email to Elise & James.
+Elise uncovered a bug in `salishsea combine` whereby it fails if there are no `*_0000.nc` files; resolved by changing that condition from a fatal error to an info log message.
+(SalishSea)
+
+Attended Phys Ocgy seminary by Karina about upwelling dynamics of tracers in canyons.
+
+Helped Idalia get SaishSeaTools package installed.
+(canyons)
+
+
 ToDo
 ====
 
+* docs re: stdout & stderr on salish
 * update storm surge paper refs w/ doi link
 * Rotate winds in research forecasts prior to 7apr16
 * Fix nowcast-green watch_NEMO logging
