@@ -1749,6 +1749,23 @@ Helped Idalia get SaishSeaTools package installed.
 (canyons)
 
 
+Tue 10-May-2016
+^^^^^^^^^^^^^^^
+
+Listened to SWC lab mtg.
+(swc)
+
+west.cloud nodes went unreachable overnight; sent support request and Eric Kolb resolved the issue.
+Started discussion with Eric about moving instances to new nemo- flavour so that hypervisors can be upgraded; request another segregated hypervisor to test on, and an additional temporary floating IP.
+Finished BAG datasets notebook.
+Talked to James about local Sphinx builds, configuring emacs, and automating SMELT parameter sensitivity runs.
+Discussed consolidation of find_*_model_point() functions w/ Susan.
+Salish Sea team mtg; see whiteboard.
+Fixed some SalishSeaCmd package tests that were failing under Python 2.7.
+Removed nowcast.lib module fixture from SalishSeaNowcast test suite; more de-boilerplating.
+(SalishSea)
+
+
 ToDo
 ====
 
