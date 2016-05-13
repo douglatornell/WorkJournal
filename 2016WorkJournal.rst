@@ -1763,7 +1763,40 @@ Discussed consolidation of find_*_model_point() functions w/ Susan.
 Salish Sea team mtg; see whiteboard.
 Fixed some SalishSeaCmd package tests that were failing under Python 2.7.
 Removed nowcast.lib module fixture from SalishSeaNowcast test suite; more de-boilerplating.
+nowcast and forecast run plots failed due to parsing error in XML observation data from EC for Sandheads; re-ran the worker with the troublesome plots temporarily commented out.
 (SalishSea)
+
+
+Wed 11-May-2016
+^^^^^^^^^^^^^^^
+
+Site visit to resolve isoinfo server boot problem; see client notes file.
+(Nordion)
+
+Sandheads wind data parsing error recurred for forecast2 and nowcast runs, so I suspect that it is due to a change that EC has made; pushed code to disable troublesome plots, and re-ran worker for failed cases.
+(SalishSea)
+
+Released v2016.1 with Unicode handling for names & comments in brevet and populaire entry forms.
+(randopony)
+
+
+Thu 12-May-2016
+^^^^^^^^^^^^^^^
+
+Improved packaging; especially got reid of duplicated pkg metadata.
+Added PayPal button integration with button from PayPal sandbox for testing.
+(randopony)
+
+Ran make_plots & make_site_page workers for nowcast 09may16 comparison.
+Planned refactoring of figures.find_model_point() and stormtools.find_closest_model_point() into geo_tools.find_closest_model_point() for James to work on.
+(SalishSea)
+
+Set up swc-lesson conda environment on kudu.
+Reviewed state of hg-novice lesson; pulled in changes by meta-maintainers from upstream.
+Merged PR#24 re: v5.3 lesson, mostly exposition touch-ups.
+Incorporated review items into refactor-01-backup branch PR#22, along with a bit of PR#24.
+Started trying to figure out workflow to cherry-pcik the rest of the refactoring from the UBC 2015 workshop repo, and make it all useful for the bug bbq.
+(swc)
 
 
 ToDo
