@@ -1799,11 +1799,22 @@ Started trying to figure out workflow to cherry-pcik the rest of the refactoring
 (swc)
 
 
+Fri 13-May-2016
+^^^^^^^^^^^^^^^
+
+Created tools repo issue #35 re: adding geo_tools.find_closest_model_point().
+Finally fixed date range bug in grid on nowcast results index page after nowcast comparison page generation.
+Added A-O vol & iss to storm surge paper citations on nowcast results pages.
+Merged NEMO-3.6r5890 repo into NEMO-3.6-code and deleted the former.
+Pulled svn r5912 (re: tides) from upstream and created NEMO-3.6r5912 repo for Susan to test.
+Fixed Sandheads wind observations data issue that was breaking figures; EC added 2 underscores to the bulk climate data service URL.
+(SalishSea)
+
+
 ToDo
 ====
 
 * docs re: stdout & stderr on salish
-* update storm surge paper refs w/ doi link
 * Rotate winds in research forecasts prior to 7apr16
 * Fix nowcast-green watch_NEMO logging
 * refactor, unit tests & docs for forcing links checking for NEMO-3.6
