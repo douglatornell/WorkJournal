@@ -1810,6 +1810,28 @@ Pulled svn r5912 (re: tides) from upstream and created NEMO-3.6r5912 repo for Su
 Fixed Sandheads wind observations data issue that was breaking figures; EC added 2 underscores to the bulk climate data service URL.
 (SalishSea)
 
+Participated in MOAD software session; topics: waterhole OS upgrade & editors, PEP8, `if __name__ == '__main__':`, PBS scripts
+
+
+Sat 14-May-2016
+^^^^^^^^^^^^^^^
+
+Worked on network cabling at home; making Cat 6 patch cables is harder than it looks :-(
+
+Discussed new SalishSeaCmd features w/ Susan and decided that moving iodef.xml into YAML file has priority over making rebuild_nemo explicit in YAML file.
+(SalishSea)
+
+
+Sun 15-May-2016
+^^^^^^^^^^^^^^^
+
+Tagged SalishSeaCmd v2.1 re: start of v2.2 dev and bumperd version to 2.2.dev0.
+Changed salishsea run and salishsea prepare so that iodef.xml comes from YAML file instead of command-line; applies to 3.4 and 3.6.
+Continued elimination of module-under-test fixtures in test modules.
+Reviewed and helped Susan merge her SalishSeaCmd job chaining changes.
+Started changing patch.object() to patch() in light of elimination of module-under-test fixtures.
+(SalishSea)
+
 
 ToDo
 ====
