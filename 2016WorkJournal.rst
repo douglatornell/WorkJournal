@@ -1825,12 +1825,35 @@ Discussed new SalishSeaCmd features w/ Susan and decided that moving iodef.xml i
 Sun 15-May-2016
 ^^^^^^^^^^^^^^^
 
+Installed Vidyo in preparation for Westgrid advanced scheduling session this week.
+
 Tagged SalishSeaCmd v2.1 re: start of v2.2 dev and bumperd version to 2.2.dev0.
 Changed salishsea run and salishsea prepare so that iodef.xml comes from YAML file instead of command-line; applies to 3.4 and 3.6.
 Continued elimination of module-under-test fixtures in test modules.
 Reviewed and helped Susan merge her SalishSeaCmd job chaining changes.
 Started changing patch.object() to patch() in light of elimination of module-under-test fixtures.
 (SalishSea)
+
+
+Week 20
+-------
+
+Mon 16-May-2016
+^^^^^^^^^^^^^^^
+
+Installed Vidyo in preparation for Westgrid advanced scheduling session this week.
+
+Disabled ONC-ADCP data download cron job until old data feed is fixed and new deployment configuration is set up.
+Data download failed on 4-Apr due to full disk on /ocean; processing has failed since 5-Apr due to unexpected EOF, presumably due to 4-Apr download failure.
+Introduced James to tools repo, and the work I want him to do in geo_tools (issue #35); also discussed his bio model parameter study code with him.
+Redundancy actually saved the day in the central/raw/ data tree; deleting an incomplete 2-Apr file and an empty 3-Apr one got us back on track for that node until the end of the deployment on 30-Apr.
+East and DDL node downloads end with 2-Apr; started downloads to backfill; abject failure.
+Started work on extracting all actual ferry crossings for a given NEMO results day from ONC ferry data.
+Discovered and fixed bug whereby all of the ferry route surface salinity comparison figures since 3-May were using the HB_DB route; re-build figures and pages.
+Did more exploring of the ferry data and found that the "day" TSG files vary in time span, and are only about 17 hours long.
+(SalishSea)
+
+Attended Phys Ocgy seminary by Ben Moore-Malley about winds and current in the Salish Sea model.
 
 
 ToDo
