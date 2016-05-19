@@ -1856,6 +1856,29 @@ Did more exploring of the ferry data and found that the "day" TSG files vary in 
 Attended Phys Ocgy seminary by Ben Moore-Malley about winds and current in the Salish Sea model.
 
 
+Wed 18-May-2016
+^^^^^^^^^^^^^^^
+
+Discussed CMOS talk & eastern-MEOPAR collaboration activities w/ Susan.
+Worked through Python 3.4/3.5 tuple unpacking issue with Nancy.
+(SalishSea)
+
+Moved timesheet to Google Sheets because USB stick transfers are getting old.
+
+Started work on docs & web services setup; see project work journal.
+(GOMSS)
+
+Participated in day 2 of Westgrid scheduling & job mgmt online workshop; memory, job features, queue & job info.
+Resulted in discovery that nowcast-green runs on orcinus seem to use 332mb per processor when run on 145 processors, so Susan is testing runs with 500mb memory request instead of 2000mb, based on advice from Roman.
+
+
+Thu 19-May-2016
+^^^^^^^^^^^^^^^
+
+Discovered that west.cloud shared storage connection failed on all but head node, so 18-May runs all failed, but the failure message was way too innocuous.
+(SalishSea)
+
+
 ToDo
 ====
 
