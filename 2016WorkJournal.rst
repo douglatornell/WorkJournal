@@ -1856,6 +1856,18 @@ Did more exploring of the ferry data and found that the "day" TSG files vary in 
 Attended Phys Ocgy seminary by Ben Moore-Malley about winds and current in the Salish Sea model.
 
 
+Tue 17-May-2016
+^^^^^^^^^^^^^^^
+
+Worked on salishsea_tools.data_tools.
+Fixed nowcast run_NEMO & run_NEMO36 workers re: moving iodef.xml into YAML file.
+Salish Sea team mtg; see whiteboard.
+Helped James get flake8 and python-mode working emacs23.
+(SalishSea)
+
+Participated in day 2 of Westgrid scheduling & job mgmt online workshop; basic scheduling.
+
+
 Wed 18-May-2016
 ^^^^^^^^^^^^^^^
 
@@ -1876,7 +1888,17 @@ Thu 19-May-2016
 ^^^^^^^^^^^^^^^
 
 Discovered that west.cloud shared storage connection failed on all but head node, so 18-May runs all failed, but the failure message was way too innocuous.
+Helped Nancy get conda environments working for her.
+Discussed conda-forge and gsw package w/ Elise.
+Started testing nemo-c8-15gb-90 flavour on west.cloud; spotted 0Gb root disk issue, and Eric fixed that.
+Got nowcast run started on west.cloud after Susan ran 18-May run on orcinus.
+Discussed j,i indexing and find_closest_model_point() refactoring w/ James.
+Wrote library code docs section re: returning namedtuples.
+Added James to project contributors lists & nowcast critical messages list.
+Diagnosed 18 weather download failure caused by IMAP server maintenance.
 (SalishSea)
+
+Participated in day 3 of Westgrid scheduling & job mgmt online workshop; priority, fairshare, cluster operations.
 
 
 ToDo
