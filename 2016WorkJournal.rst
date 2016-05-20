@@ -1896,6 +1896,8 @@ Discussed j,i indexing and find_closest_model_point() refactoring w/ James.
 Wrote library code docs section re: returning namedtuples.
 Added James to project contributors lists & nowcast critical messages list.
 Diagnosed 18 weather download failure caused by IMAP server maintenance.
+Manually ran 18 weather download at ~19:45 and it took ~2m!!
+Advanced times of all weather downloads by 1h to see if we can win vs. our present 1h40h typical download times.
 (SalishSea)
 
 Participated in day 3 of Westgrid scheduling & job mgmt online workshop; priority, fairshare, cluster operations.
