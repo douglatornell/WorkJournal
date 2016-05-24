@@ -1903,6 +1903,52 @@ Advanced times of all weather downloads by 1h to see if we can win vs. our prese
 Participated in day 3 of Westgrid scheduling & job mgmt online workshop; priority, fairshare, cluster operations.
 
 
+Fri 20-May-2016
+^^^^^^^^^^^^^^^
+
+Physio appt re: left shoulder.
+
+Continued work on docs & web services setup; see project work journal.
+(GOMSS)
+
+
+Sat 21-May-2016
+^^^^^^^^^^^^^^^
+
+Explored circus process manager for Pyramid apps (and perhaps for nowcast).
+circus-web fails under Python 3.5, so no web interface to stats; use circus-top instead.
+Installation of dependencies:
+  conda create -n circus libevent pyzmq tornado psutil six
+  pip install circus chaussette
+chaussette is a WSGI server front-end that works well with circus; it uses wsgiref by default, but can use waitress as a backend, or lots of other Py2 backends.
+
+Confirmed that west.cloud compute and head node images can be launched on new nemo-c8-15gb-90 flavour VM, and that shard storage can be mounted; emailed Eric re: plan for transition.
+Worked on nowcast system software framework docs.
+(SalishSea)
+
+
+Sun 22-May-2016
+^^^^^^^^^^^^^^^
+
+Hiked to 1st Summit of the Stawamus Chief.
+
+
+Week 21
+-------
+
+Mon 23-May-2016
+^^^^^^^^^^^^^^^
+
+**Victoria Day**
+
+Worked on nowcast messaging system docs.
+Discussed nowcast biogeochemistry figures w/ Susan and work for James while we are at CMOS.
+Created tools repo issue #36 re: nowcast.figures.tracer_thalweg_and_surface module for James to work on during CMOS, but Elise says that he is well into the SMELT parameters study.
+(SalishSea)
+
+Experimented with vagrant VMs and docker containers for development of nowcast system and, once again, concluded that, cool as it is, docker isn't the right tool for the job.
+
+
 ToDo
 ====
 
