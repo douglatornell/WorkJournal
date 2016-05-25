@@ -1949,6 +1949,19 @@ Created tools repo issue #36 re: nowcast.figures.tracer_thalweg_and_surface modu
 Experimented with vagrant VMs and docker containers for development of nowcast system and, once again, concluded that, cool as it is, docker isn't the right tool for the job.
 
 
+Tue 24-May-2016
+^^^^^^^^^^^^^^^
+
+Worked on CMOS talk outline.
+
+Agreed w/ Eric@uvic to bring west.cloud instances down by 09:30 on Thu for shift to segregated nodes.
+Reviewed James' geo_tools.find_closest_model_point() code.
+Experimented with building XIOS with .hg/ and README.md in arch/ directory, and it went fine.
+Emailed Dany re: content for my CMOS talk.
+(SalishSea)
+
+matlab central works
+
 ToDo
 ====
 
