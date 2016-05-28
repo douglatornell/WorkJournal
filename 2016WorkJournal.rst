@@ -1962,17 +1962,6 @@ Emailed Dany re: content for my CMOS talk.
 (SalishSea)
 
 
-Fri 27-May-2016
-^^^^^^^^^^^^^^^
-
-Prepared for and participated in MOAD software session; topics: figures.py & SalishSeaNowcast conda env; westgrid scheduling, priority & job mgmt.
-
-Created slides for CMOS talk and reviewed them with Susan.
-Read abstracts and planned my conference.
-(CMOS)
-
-
-
 Wed 25-May-2016
 ^^^^^^^^^^^^^^^
 
@@ -2009,6 +1998,16 @@ Nowcast run failed due to Python 3 environment issue; after much thrashing with 
 
 Continued development of NEMO_Nowcast framework package; see project work journal.
 (GOMSS)
+
+
+Fri 27-May-2016
+^^^^^^^^^^^^^^^
+
+Prepared for and participated in MOAD software session; topics: figures.py & SalishSeaNowcast conda env; westgrid scheduling, priority & job mgmt.
+
+Created slides for CMOS talk and reviewed them with Susan.
+Read abstracts and planned my conference.
+(CMOS)
 
 
 ToDo
