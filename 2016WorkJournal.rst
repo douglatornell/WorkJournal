@@ -1953,12 +1953,24 @@ Tue 24-May-2016
 ^^^^^^^^^^^^^^^
 
 Worked on CMOS talk outline.
+(CMOS)
 
 Agreed w/ Eric@uvic to bring west.cloud instances down by 09:30 on Thu for shift to segregated nodes.
 Reviewed James' geo_tools.find_closest_model_point() code.
 Experimented with building XIOS with .hg/ and README.md in arch/ directory, and it went fine.
 Emailed Dany re: content for my CMOS talk.
 (SalishSea)
+
+
+Fri 27-May-2016
+^^^^^^^^^^^^^^^
+
+Prepared for and participated in MOAD software session; topics: figures.py & SalishSeaNowcast conda env; westgrid scheduling, priority & job mgmt.
+
+Created slides for CMOS talk and reviewed them with Susan.
+Read abstracts and planned my conference.
+(CMOS)
+
 
 matlab central works
 
