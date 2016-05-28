@@ -1906,7 +1906,7 @@ Participated in day 3 of Westgrid scheduling & job mgmt online workshop; priorit
 Fri 20-May-2016
 ^^^^^^^^^^^^^^^
 
-Physio appt re: left shoulder.
+Physio appt re: left shoulder; stretches: broomstick, towel, and shoulders back on bike at stops.
 
 Continued work on docs & web services setup; see project work journal.
 (GOMSS)
@@ -1972,7 +1972,44 @@ Read abstracts and planned my conference.
 (CMOS)
 
 
-matlab central works
+
+Wed 25-May-2016
+^^^^^^^^^^^^^^^
+
+Added my support to a nomination of Andrew Pollard for a Queen's grad supervision award.
+
+forecast2 run failed due to missing Fraser River flow data; manually downloaded Fraser & Englishman River flows, and ran make_runoff_file worker.
+06 weather download took almost 3h.
+Skipped forecast2/24may16 run.
+Experimented with building XIOS w/ arch files in an arrch/ sub-directory; no go, so XIOS-arch repo has to manage arch names in a single directory.
+Started development of NEMO_Nowcast framework package with a new version of the message broker that uses dict logging configuration from the YAML config file.
+(SalishSea)
+
+Physio appt re: left shoulder; stretches: broomstick or wall crawl, towel, hands behind head, doorway chest stretch, and hunch to flatten blades, then shoulders back on bike at stops.
+
+Triaged issues created by Jackie from beta test observations.
+Wrote proposal for stage 3 and sent it to Penny.
+(sealinkd)
+
+Pinged Ken at Nordion re: overdue invoice.
+(43ravens)
+
+Started development of NEMO_Nowcast framework package; see project work journal.
+(GOMSS)
+
+
+Thu 26-May-2016
+---------------
+
+Got NEMO_Nowcast message broker working under the supervision of circus process manager so that it is properly daemonized rather than a background process with a disconnected tty.
+Shut down west.cloud instances for migration to segregated VMMs.
+Started re-building west.cloud instances on nemo-c8-15gb-90 flavours at 10:42; finished by 11:40.
+Nowcast run failed due to Python 3 environment issue; after much thrashing with system packages, ended up installed in miniconda3 and a nowcast-prod conda env.
+(SalishSea)
+
+Continued development of NEMO_Nowcast framework package; see project work journal.
+(GOMSS)
+
 
 ToDo
 ====
