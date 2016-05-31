@@ -2010,6 +2010,14 @@ Read abstracts and planned my conference.
 (CMOS)
 
 
+Sat 28-May=2016
+^^^^^^^^^^^^^^^
+
+Travel to Fredericton for CMOS conference
+
+Continued work on NEMO_NOwcat package; see project work journal.
+(GOMSS)
+
 ToDo
 ====
 
