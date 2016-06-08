@@ -2015,8 +2015,125 @@ Sat 28-May=2016
 
 Travel to Fredericton for CMOS conference
 
-Continued work on NEMO_NOwcat package; see project work journal.
+Continued work on NEMO_Nowcast package; see project work journal.
 (GOMSS)
+
+
+Sun 29-May-2016
+^^^^^^^^^^^^^^^
+
+CMOS conference
+
+Created on GOMSS_Nowcast package; see project work journal.
+(GOMSS)
+
+
+June
+====
+
+Week 22
+-------
+
+Mon 30-May-2016
+^^^^^^^^^^^^^^^
+
+CMOS conference
+
+Participated in collaboration session I presented my "Towards a National Repository..." talk to good reception.
+
+
+Tue 31-May-2016
+^^^^^^^^^^^^^^^
+
+CMOS Conference
+
+Participated in parts 3 & 4 of coastal ocgy session.
+Stephanie Waterman won inaugural early career CNC-SCOR award.
+Roger François won the Tim Parsons medal.
+
+Continued buffing notebook about nowcast time series via ERDDAP & xarray.
+(SalishSea)
+
+
+Wed 1-Jun-2016
+^^^^^^^^^^^^^^
+
+CMOS Conference
+
+Skipped plenaries.
+Attended Phys Ocgy Atlantic & Arctic session.
+Susan won CMOS President's Prize for Allen & Hickey (2010).
+
+Finished buffing notebook about nowcast time series via ERDDAP & xarray.
+Worked through ADCP download scripts updated for May-2016, but downloads still fail, so sent email to Marlene for advice.
+(SalishSea)
+
+Continued work on NEMO_Nowcast package; see project work journal.
+(GOMSS)
+
+
+Thu 2-Jun-2016
+^^^^^^^^^^^^^^
+
+CMOS Conference
+
+Travel to Barrie to visit parents.
+
+
+Fri 3-Jun-2016
+^^^^^^^^^^^^^^
+
+Visiting parents in Barrie.
+
+Started refactoring figures.PA_tidal_predictions() to publish.pt_atkinson_tide module.
+(SalishSea)
+
+
+Sat 4-Jun-2016
+^^^^^^^^^^^^^^
+
+Visiting parents in Barrie.
+
+Continued refactoring figures.PA_tidal_predictions() to publish.pt_atkinson_tide module.
+(SalishSea)
+
+
+Sun 5-Jun-2016
+^^^^^^^^^^^^^^
+
+Visiting parents in Barrie.
+
+Finished refactoring figures.PA_tidal_predictions() to publish.pt_atkinson_tide module.
+Investigated error from geo_tools.finde_closest_model_point() in figures.research_ferries(); probably due to overly aggressive vectorization that I suggested to James.
+(SalishSea)
+
+Continued work on NEMO_Nowcast package; see project work journal.
+(GOMSS)
+
+
+Week 23
+-------
+
+Mon 6-Jun-2016
+^^^^^^^^^^^^^^
+
+Visiting parents in Barrie.
+
+Continued work on NEMO_Nowcast package; see project work journal.
+(GOMSS)
+
+Experimented successfully with serving salishsea static site from a Pyramid app so that it can be incrementally converted to a dynamic site.
+(SalishSea)
+
+
+Tue 7-Jun-2016
+^^^^^^^^^^^^^^
+
+Travel from Barrie to Vancouver
+
+Continued removal of module-under-test boilerpate code from SalishSeaNowcast workers test suite.
+(SalishSea)
+
 
 ToDo
 ====
