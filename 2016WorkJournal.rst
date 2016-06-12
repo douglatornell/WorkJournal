@@ -2119,7 +2119,7 @@ Mon 6-Jun-2016
 
 Visiting parents in Barrie.
 
-Continued work on NEMO_Nowcast package; see project work journal.
+Worked on building conda packages; see project work journal.
 (GOMSS)
 
 Experimented successfully with serving salishsea static site from a Pyramid app so that it can be incrementally converted to a dynamic site.
@@ -2133,6 +2133,69 @@ Travel from Barrie to Vancouver
 
 Continued removal of module-under-test boilerpate code from SalishSeaNowcast workers test suite.
 (SalishSea)
+
+
+Wed 8-Jun-2016
+^^^^^^^^^^^^^^
+
+Physio appt; continue stretches: broomstick or wall crawl, towel, hands behind head, doorway chest stretch, and hunch to flatten blades, then shoulders back on bike at stops; add new stretches: tubing arm pull in front of mirror, arm push lying on side.
+Reconfigures my desk per Stephanie's recommendations.
+
+Reviewed James' fix for find_closest_model_point() issue in research_ferries module and pulled it into production.
+Dealt with nowcast launch failure due to full disk on west.cloud; cron job that deletes old run results got lost when cloud was rebuilt.
+(SalishSea)
+
+Uploaded initial packages to GoMSS-Nowcast org on Anaconda.org; see project work journal.
+(GOMSS)
+
+Got PO for stage 3 work.
+(sealinkd)
+
+Set up Sentry service trial account and tested raven client against GoMSS Nowcast project there.
+
+
+Thu 9-Jun-2016
+^^^^^^^^^^^^^^
+
+Reviewed slides for Westgrid townhall tomorrow; orcinus, jasper & bugaboo all scheduled for decommissioning in 2017!!
+
+Worked on hg-novice lesson for v5.4 release.
+Merged refactor-01-backup pull request (#22).
+Cherry-picked refactor-02-collab branch from UBC 22Sep2015 workshop repo, buffed it, and created PR#25.
+Cherry-picked refactor-03-conflict branch from UBC 22Sep2015 workshop repo and created PR#26.
+Cherry-picked refactor-04-conflict branch from UBC 22Sep2015 workshop repo, buffed it, and created PR#27.
+Reviewed and updated open issues.
+(swc 3.5 hr)
+
+Started refactoring figures.compare_tidalpredictions_maxSSH() to publish.compare_tide_prediction_max_ssh module.
+(SalishSea)
+
+
+Fri 10-Jun-2016
+^^^^^^^^^^^^^^^
+
+Sent invitations to bitbucket team, and worked on project docs; see project work journal.
+(GoMSS)
+
+Continued refactoring figures.compare_tidalpredictions_maxSSH() to publish.compare_tide_prediction_max_ssh module.
+Reviewed James' progress on tracer_thalweg_and_surface().
+(SalishSea)
+
+Watched Westgrid townhall mtg re: future direction:
+* 200k old cores -> 126k new cores -> 300k new cores in 2018
+* 27 data centres -> 5-10 data centres in 2018
+* 2 Pflops -> 12 Pflops in 2018
+* 20 Pb -> 50 Pb storage in 2018
+* 4 sites: Victoria, SFU, Waterloo, Toronto
+* GP1: Vic cloud
+* GP2 & GP3:SFU & Waterloo general compute - take over orcinus, etc.
+* LP1: Toronto large parallel jobs (>1000 cores)
+* national storage infrastructure:
+  * silo -> sfu
+  * new distributed object store
+  * dCache at sfu for ATLAS, SNO, etc.
+* RAC 2017 will start in Aug, and it will be tight
+* very little compute available, no storage available, minimal support for existing software
 
 
 ToDo
