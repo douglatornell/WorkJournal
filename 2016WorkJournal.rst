@@ -2198,6 +2198,27 @@ Watched Westgrid townhall mtg re: future direction:
 * very little compute available, no storage available, minimal support for existing software
 
 
+Sun 12-Jun-2016
+^^^^^^^^^^^^^^^
+
+Travel fro Vancouver to Portland
+
+Continued work on NEMO_Nowcast package; see project work journal.
+(GOMSS)
+
+
+Week 24
+-------
+
+Mon 13-Jun-2016
+^^^^^^^^^^^^^^^
+
+Travel from Portland to Corvallis
+
+Continued work on NEMO_Nowcast package; see project work journal.
+(GOMSS)
+
+
 ToDo
 ====
 
