@@ -2219,6 +2219,56 @@ Continued work on NEMO_Nowcast package; see project work journal.
 (GOMSS)
 
 
+Tue 14-Jun-2016
+^^^^^^^^^^^^^^^
+
+Visiting OSU College of Earth, Ocean & Atmospheric Sciences; hosted by Ted Strub.
+
+Discussion of operational ocean models and working with stakeholders w/ Ted, Craig Risien (OOI & NANOOS), Lana Erofeeva (runs OSU op model), Anthony (CS student on seacast.org team). Looked at:
+* salishsea.eos.ubc.ca
+* http://ingria.coas.oregonstate.edu/rtdavow/
+* http://seacast.org/
+* oceanviewer.org/
+* http://nvs.nanoos.org/Explorer
+
+Changed make_site_page worker so that only available figures are rendered, and page is note rendered if there are no figures to show.
+(SalishSea)
+
+Attended Susan's seminar at OSU about what the model tells us about deep water renewal and vice versa.
+
+
+Wed 15-Jun-2016
+^^^^^^^^^^^^^^^
+
+Visiting OSU College of Earth, Ocean & Atmospheric Sciences; hosted by Ted Strub.
+
+Started serious work on creating a Vagrant VM that emulates the nowcast system deployment on skookum; repo is nowcast-vm.
+forecast2 run failed because EC had issues that meant that the 06 weather was incomplete.
+nowcast and nowcast-green runs failed to launch; probably due to make_runoff_file worker not having been run because it is triggered by the completion of download_weather 06.
+nowcast was also impacted by all 18 nodes on west.cloud having lost their connection to shared storage.
+Answered Paul's email about NEMO results metadata.
+(SalishSea)
+
+Lost eduroam access to Internet at 14:15.
+
+Continued work on NEMO_Nowcast package; see project work journal.
+(GOMSS)
+
+Toured OOI Ocean Observing Initiative operations.
+
+
+Thu 16-Jun-2016
+^^^^^^^^^^^^^^^
+
+Travel from Corvallis to Vancouver
+
+Continued work on NEMO_Nowcast package; see project work journal.
+(GOMSS)
+
+Worked on stage 3 issues; completed #64, #65, #67, #68 & #69; did #63 for Maps page (also need to do Analysis page).
+(sealinkd)
+
+
 ToDo
 ====
 
