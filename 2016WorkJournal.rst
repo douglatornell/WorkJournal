@@ -2139,7 +2139,7 @@ Wed 8-Jun-2016
 ^^^^^^^^^^^^^^
 
 Physio appt; continue stretches: broomstick or wall crawl, towel, hands behind head, doorway chest stretch, and hunch to flatten blades, then shoulders back on bike at stops; add new stretches: tubing arm pull in front of mirror, arm push lying on side.
-Reconfigures my desk per Stephanie's recommendations.
+Reconfigures my home desk per Stephanie's recommendations, and ordered laptop roost.
 
 Reviewed James' fix for find_closest_model_point() issue in research_ferries module and pulled it into production.
 Dealt with nowcast launch failure due to full disk on west.cloud; cron job that deletes old run results got lost when cloud was rebuilt.
@@ -2267,6 +2267,20 @@ Continued work on NEMO_Nowcast package; see project work journal.
 
 Worked on stage 3 issues; completed #64, #65, #67, #68 & #69; did #63 for Maps page (also need to do Analysis page).
 (sealinkd)
+
+
+Fri 17-Jun-2016
+^^^^^^^^^^^^^^^
+
+Pushed yesterday's closed issued to production.
+(sealinkd)
+
+Physio appt; continue stretches: broomstick or wall crawl, towel, hands behind head, doorway chest stretch, and hunch to flatten blades, then shoulders back on bike at stops, tubing arm pull in front of mirror, arm push lying on side; add new stretch: spread arms against tubing, working subscapular not trapezius.
+Reconfigures my EOAS desk per Stephanie's recommendations, and ordered laptop roost; need higher desk & monitor lift.
+
+Discussed progress w/ James.
+Continued work on nowcast-vm; added miniconda installation, and nowcast-env setup.
+(SalishSea)
 
 
 ToDo
