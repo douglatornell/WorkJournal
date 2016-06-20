@@ -2283,6 +2283,48 @@ Continued work on nowcast-vm; added miniconda installation, and nowcast-env setu
 (SalishSea)
 
 
+Sat 18-Jun-2016
+^^^^^^^^^^^^^^^
+
+Email discussion w/ Elise about incorporating latest SMELT changes into nowcast-green production.
+Finished refactoring figures.compare_tidalpredictions_maxSSH() to publish.compare_tide_prediction_max_ssh module; need Nancy to confirm whether the residual calculation is correct.
+(SalishSea)
+
+Worked on hg-novice lesson for v5.4 release.
+Merged refactor-02-collab PR#25.
+Merged refactor-03-conflict PR#26.
+Merged refactor-04-conflict PR#27.
+Pinged the pong to Greg for conversion to new lesson layout/style.
+(swc 1 hr)
+
+See project work journal.
+(GOMSS)
+
+
+Sun 19-Jun-2016
+^^^^^^^^^^^^^^^
+
+Investigated time series axis tick labels offset in production deployment of compare_tide_prediction_max_ssh compared to test notebook; suspect different matplotlib package difference (1.5.0 vs 1.5.1), so updated that and dependencies on both skookum and kudu.
+Pullled Elise's nowcast-green changes in SS-run-sets and NEMO-3.6-code into nowcast-sys and rebuilt NEMO-3.6 on salish.
+Changed `salishsea combine` to find rebuild_nemo on NEMO-code path instead of from nemo executable.
+Fixed failing unit tests due to introduction of run chaining changes.
+(SalishSea)
+
+Discovered forgotten hazard filter refactoring work on kudu that wasn't pushed to Bitbucket; merged it with recent work from niko, and landed in a horror show.
+VM on kudu was corrupted, so had to rebuild it from scratch:
+* sudo -i -u postgres to create dlatornell & sealinkd users & sealinkd database
+* sudo -i -u sealinkd
+* source /home/sealind/miniconda/bin/activate sealinkd to activate conda env
+* load database using model.scripts
+* didn't set up Piwik
+Recovered rebase merge horror show.
+Pushed Analysis page hazard filter work from kudu to production and closed issue #63.
+Decided to not try to propagate filter criteria from Maps page through map marker clicks to Profiles page then back to Analysis/Maps pages.
+(sealinkd)
+
+Experimented with pyramid_crow package in sealinkd dev context and found possible bug in over-long request body handling; created issue #1 on github.
+
+
 ToDo
 ====
 
