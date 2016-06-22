@@ -2325,6 +2325,31 @@ Decided to not try to propagate filter criteria from Maps page through map marke
 Experimented with pyramid_crow package in sealinkd dev context and found possible bug in over-long request body handling; created issue #1 on github.
 
 
+Week 25
+-------
+
+Mon 20-Jun-2016
+^^^^^^^^^^^^^^^
+
+Continued work on nowcast-vm; got /results/nowcast-sys/nowcast-env conda environment setup, and successfully launched message broker and manager processes.
+Explored ONC data web services API.
+Dicsused ONC data access w/ Rich.
+(SalishSea)
+
+Attended Susan's Phys Ocgy version of the seminar she gave at OSU last week.
+
+
+Tue 21-Jun-2016
+^^^^^^^^^^^^^^^
+
+Continued Exploring ONC data web services API; see analysis-doug ONC-DataWebServices notebook.
+Prepared for and executed splitting analysis/Nancy into analysis-nancy repo.
+Changed analysis repo to be read-only for everyone but admins.
+Explained nowcast system to James.
+Participated in Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+
 ToDo
 ====
 
