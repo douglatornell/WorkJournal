@@ -2349,6 +2349,29 @@ Explained nowcast system to James.
 Participated in Salish Sea team mtg; see whiteboard.
 (SalishSea)
 
+Received email request from Ken for site-visit due to another Minerva server boot failure.
+(Nordion)
+
+
+Wed 22-Jun-2016
+^^^^^^^^^^^^^^^
+
+Scheduled Nordion site visit for 30-Jun.
+(Nordion)
+
+See project work journal.
+(GOMSS)
+
+
+Thu 23-Jun-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Helped James with full disk issues in /data partition.
+(SalishSea)
+
 
 ToDo
 ====
