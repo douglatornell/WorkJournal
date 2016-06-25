@@ -2373,6 +2373,22 @@ Helped James with full disk issues in /data partition.
 (SalishSea)
 
 
+Fri 24-Jun-2016
+^^^^^^^^^^^^^^^
+
+Fixed storm surge residual calculation for nowcast publish pages re: corrected ssh per Nancy's email.
+Moved compute_residual from figures to nowcast.residuals module.
+Prototyped GEM2.5 wind rotation correction in notebook and sent results to Ben for checking.
+Started work on VENUS nodes CTD observations cs. model results comparison figure.
+(SalishSea)
+
+MOAD software session re: SalishSeaTools.
+(MOAD)
+
+Reproduced IE11 sing-up button issue #72 on EOAS Win7 IE11 laptop and tracked it down to lack of support for the form attribute in button elements in all Microsoft browsers.
+(sealinkd)
+
+
 ToDo
 ====
 
