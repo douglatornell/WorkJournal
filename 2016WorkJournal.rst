@@ -2389,6 +2389,16 @@ Reproduced IE11 sing-up button issue #72 on EOAS Win7 IE11 laptop and tracked it
 (sealinkd)
 
 
+Sat 25-Jun-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Inspected result of setting ln_cfmeta flag to true in NEMO-3.6; more CF-1.5 metadata, but nothing dramatic.
+(SalishSea)
+
+
 ToDo
 ====
 
