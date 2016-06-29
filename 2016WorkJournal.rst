@@ -2379,7 +2379,7 @@ Fri 24-Jun-2016
 Fixed storm surge residual calculation for nowcast publish pages re: corrected ssh per Nancy's email.
 Moved compute_residual from figures to nowcast.residuals module.
 Prototyped GEM2.5 wind rotation correction in notebook and sent results to Ben for checking.
-Started work on VENUS nodes CTD observations cs. model results comparison figure.
+Started work on VENUS nodes CTD observations vs. model results comparison figure.
 (SalishSea)
 
 MOAD software session re: SalishSeaTools.
@@ -2397,6 +2397,33 @@ See project work journal.
 
 Inspected result of setting ln_cfmeta flag to true in NEMO-3.6; more CF-1.5 metadata, but nothing dramatic.
 (SalishSea)
+
+
+Week 26
+-------
+
+Mon 27-Jun-2016
+^^^^^^^^^^^^^^^
+
+Continue work on VENUS nodes CTD observations vs. model results comparison figure.
+Started working on parsing ONC web service data into something more Pythonic.
+(SalishSea)
+
+Phys Ocgy seminars by 2 visiting MIT/WHOI PhD students; one on linearized ssh modeling, the other on turbulence microstructure in the Drake Passage.
+
+
+Tue 28-Jun-2016
+^^^^^^^^^^^^^^^
+
+Settled on xarray.Dataset object to parse ONC web service data into.
+Continue work on VENUS nodes CTD observations vs. model results comparison figure.
+Salish Sea team mtg; see whiteboard; Serena, visiting from Hong Kong, joined the group for a month.
+(SalishSea)
+
+Farewell party for John Amor.
+
+Helped Karina setup up CanyonTools repo and package.
+(canyons)
 
 
 ToDo
