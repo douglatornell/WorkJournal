@@ -2426,6 +2426,21 @@ Helped Karina setup up CanyonTools repo and package.
 (canyons)
 
 
+Wed 29-Jun-2016
+^^^^^^^^^^^^^^^
+
+Physio appt; continue stretches: broomstick or wall crawl, towel, hands behind head, doorway chest stretch, flatten blades, then shoulders back on bike at stops, tubing arm pull in front of mirror, arm push lying on side, spread arms against tubing, working subscapular not trapezius; add new stretches: free the bird every 90 minutes at desk, and forearm raise against tubing under foot.
+
+Discussed next stage of NEMO-3.6 updates from upstream w/ Susan.
+(SalishSea)
+
+Implemented possible fix for IE forms button issue #72.
+Explored Compare page community selectors updating bug reported as issue #77 but can't reproduce it.
+Implemented Actions of Interest filter on Maps and Analysis pages (closed issue #78); also updated explanatory text about filters (closed issue #57).
+I think I convinced myself that the sentry raven client picks up its DSN from the environment if it is not defined in the app's .ini file.
+(sealinkd)
+
+
 ToDo
 ====
 
