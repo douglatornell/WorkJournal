@@ -2458,14 +2458,26 @@ See project work journal.
 (GOMSS)
 
 Helped Susan change nowcast-green to use bathymetry that facilitates use of Orlanski boundary conditions; 1st stage is a clean start initialized with restart T&S and a 20s time step.
-(sealinkd)
+(SalishSea)
 
 
 Sun 3-Jul-2016
 ^^^^^^^^^^^^^^
 
 Helped Susan change nowcast-green to use bathymetry that facilitates use of Orlanski boundary conditions; 2nd stage is a restart with a 30s time step.
-(sealinkd)
+(SalishSea)
+
+
+July
+====
+
+Mon 4-Jul-2016
+^^^^^^^^^^^^^^
+
+Helped Susan change nowcast-green to use bathymetry that facilitates use of Orlanski boundary conditions; 3rd stage is a restart with a 40s time step.
+Changed runNEMO36 worker to enable group write permission on run results directories.
+Discussed interpolation to VENUS node depths for CTD comparison figure w/ Susan.
+(SalishSea)
 
 
 ToDo
