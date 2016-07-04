@@ -2441,6 +2441,23 @@ I think I convinced myself that the sentry raven client picks up its DSN from th
 (sealinkd)
 
 
+Thu 30-Jun-2016
+^^^^^^^^^^^^^^^
+
+Nordion site visit re: isoinfo server boot failure; see work notes.
+(nordion)
+
+Prep for and attended workout by Ben & Jie re: animation.
+(swc)
+
+Continue work on VENUS nodes CTD observations vs. model results comparison figure.
+(SalishSea)
+
+Tested sign-in and sign-up on Win 7 Pro IE 11 and confirmed that new code works; closed issue #72.
+Re-opened issue #65 re: target of map marker clicks on Maps page; s/b Compare page, not Profiles page.
+(sealinkd)
+
+
 Fri 1-Jul-2016
 ^^^^^^^^^^^^^^
 
