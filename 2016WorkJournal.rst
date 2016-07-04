@@ -2441,6 +2441,33 @@ I think I convinced myself that the sentry raven client picks up its DSN from th
 (sealinkd)
 
 
+Fri 1-Jul-2016
+^^^^^^^^^^^^^^
+
+**Canada Day**
+
+Enabled Sentry exception logging for production deployment.
+Cleaned up Jackie's HTML edits on the About page.
+(sealinkd)
+
+
+Sat 2-Jul-2016
+^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Helped Susan change nowcast-green to use bathymetry that facilitates use of Orlanski boundary conditions; 1st stage is a clean start initialized with restart T&S and a 20s time step.
+(sealinkd)
+
+
+Sun 3-Jul-2016
+^^^^^^^^^^^^^^
+
+Helped Susan change nowcast-green to use bathymetry that facilitates use of Orlanski boundary conditions; 2nd stage is a restart with a 30s time step.
+(sealinkd)
+
+
 ToDo
 ====
 
