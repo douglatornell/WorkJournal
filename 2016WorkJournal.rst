@@ -2494,7 +2494,11 @@ Mon 4-Jul-2016
 Helped Susan change nowcast-green to use bathymetry that facilitates use of Orlanski boundary conditions; 3rd stage is a restart with a 40s time step.
 Changed runNEMO36 worker to enable group write permission on run results directories.
 Discussed interpolation to VENUS node depths for CTD comparison figure w/ Susan.
+Continue work on VENUS nodes CTD observations vs. model results comparison figure; added T&S time series from nowcast-green results.
+Worked on testing CTD comparison figures in nowcast-vm and improved it in it's first real use test.
 (SalishSea)
+
+Attended Phys Ocgy seminar by Serena McDonnell about shelf slope modeling in the South China Sea around Hong Kong.
 
 
 ToDo
