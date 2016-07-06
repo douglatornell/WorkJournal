@@ -2501,6 +2501,21 @@ Worked on testing CTD comparison figures in nowcast-vm and improved it in it's f
 Attended Phys Ocgy seminar by Serena McDonnell about shelf slope modeling in the South China Sea around Hong Kong.
 
 
+Tue 5-Jul-2016
+^^^^^^^^^^^^^^
+
+Restarted nowcast manager from an environment that exported ONC_USER_TOKEN envvar in preparation for release to production of CTD comparison figures code.
+Added VENUS upper slope Delta node to places module.
+Pushed CTD comparison figures code to production.
+Merged NEMO-3.6-code into NEMO-3.6-mirror-merge at  NEMO-3.6r5912 tag on niko and pushed to NEMO-3.6-code on Bitbucket; deleted NEMO-3.6-r5912 repo from Bitbucket.
+Pulled changesets 5918 through 6036 into NEMO-3.6-hg-mirror on salish.
+Merged NEMO-3.6-hg-mirror into NEMO-3.6-mirror-merge on niko.
+Tagged NEMO-3.6-r6036 in NEMO-3.6-mirror-merge and pushed to new NEMO-3.6-r6036 repo on Bitbucket for Susan to use for merge-comparison test.
+Set up Apache2 and a salishsea.eos.ubc.ca virtual host in the nowcast-vm so that I can start developing and testing Pyramid-based implementation of the site.
+Worked through critical errors due to pushing CTD comparison figures to production.
+(SalishSea)
+
+
 ToDo
 ====
 
