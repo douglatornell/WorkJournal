@@ -2516,6 +2516,44 @@ Worked through critical errors due to pushing CTD comparison figures to producti
 (SalishSea)
 
 
+Wed 6-Jul-2016
+^^^^^^^^^^^^^^
+
+Triaged issues that have been added since Stage 3 PO.
+Reviewed and buffed Jackie & Michelle's changes to the help & about pages; adding team member images to bios will be a bit of work.
+Fixed and re-closed issue #65 re: Maps markers linking to Compare page, not Profiles page.
+Added "work-in-progress" banner to landing page at Stephanie's request.
+Resolved issue #71 pending approval from Jackie.
+Closed issues: #62, #59, #66, #80, #81.
+Restructured Compare page to move panel header & communities selectors into left column.
+(sealinkd)
+
+Updated nowcast-green NEMO code to NEMO-3.6r5912+ (specifically, changeset 421738d4896d).
+Discussed ONC data row limit w/ Nancy.
+Discussed ONC ADCP data w/ Rich.
+(SalishSea)
+
+
+Thu 7-Jul-2016
+^^^^^^^^^^^^^^
+
+Updated deployment docs re: loading data from CommunityProfileTableData spreadsheet.
+Added team member photos to bios on About page via Assets.
+Added new contact info fields to Community data model & Profiles page; issue #82.
+Updated communities table from HVSIIndicatorData_Jun30.xlsx spreadsheet.
+Updated deployment docs re: loading data from HVSIIndicatorData spreadsheet.
+Added new fields to Indicator data model; issue #83.
+Updated indicators & indicator_values tables from HVSIIndicatorData_Jun30.xlsx spreadsheet.
+Reviewed and buffed Jackie's addition of the new Youtube URL to About page.
+Closed issue #75 re: addition of indicator short names to Maps page community marker popups.
+Closed issue #76 re: revised Compare page capital HVSI details tables.
+Sent email to Jackie declaring v1.1 finished and asking for her confirmation of that and outstanding issues; she closed issue #71.
+Jackie reported various features and data not working properly and I eventually realized that I had not correctly run all of the data loading scripts upon completion of issue #82.
+Explored page loading indications re: issue #56; CSS/js techniques trigger once the page starts to load in the browser so okay for xhr but useless for initial server-side processing. Changing mouse cursor to wait icon is doable but couldn't figure out how to reset it if the user does a browser back function.
+Experimented with memoization caching of sqlalchemy query functions and found that I can generally reduce page load times to <100ms on dev vm.
+(sealinkd)
+
+
 ToDo
 ====
 
