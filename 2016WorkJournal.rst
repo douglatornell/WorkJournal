@@ -2554,6 +2554,20 @@ Experimented with memoization caching of sqlalchemy query functions and found th
 (sealinkd)
 
 
+Fri 8-Jul-2016
+^^^^^^^^^^^^^^
+
+MOAD software session where we discussed Ariane and other Lagrangian particle tracking tools.
+
+Discussed nowcast CTD comparison figures and adding ONC CTD data to our ERDDAP server w/ Nancy and later w/ Susan.
+Discussed profiling NEMO and code vectorization w/ Elise.
+Worked on notebook to explore getting ADCP data from ONC using Python instead of Matlab.
+Add 2.5 hr to timesheet
+(SalishSea)
+
+EOAS network suffered major failure due to a disk crash on anu server; lost DNS, DHCP, and /home partition.
+
+
 ToDo
 ====
 
