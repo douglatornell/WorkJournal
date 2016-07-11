@@ -2562,10 +2562,33 @@ MOAD software session where we discussed Ariane and other Lagrangian particle tr
 Discussed nowcast CTD comparison figures and adding ONC CTD data to our ERDDAP server w/ Nancy and later w/ Susan.
 Discussed profiling NEMO and code vectorization w/ Elise.
 Worked on notebook to explore getting ADCP data from ONC using Python instead of Matlab.
-Add 2.5 hr to timesheet
 (SalishSea)
 
 EOAS network suffered major failure due to a disk crash on anu server; lost DNS, DHCP, and /home partition.
+
+
+Sat 9-Jul-2016
+^^^^^^^^^^^^^^
+
+Early morning thrash before ferry to Nanaimo to try to recover nowcaast system from anu failure. skookum's /home mount point is stale and needs to be reset by Charles before I can access it; Susan can access it, but it can't find libpython35 due to stale mount handle.
+Changed nowcast worker sequencing to laumch hg_update_site worker after make_site_page completes for comparison figures page instead of publish figures page because comparison plots now takes longer to generate than publish plots.
+Pulled NEMO-3.6 code updates to fix light extinction coefficients calculation into nowcast env on salish and re-built.
+Ran a bunch of workers manually to eventually get automation running again.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Sat 9-Jul-2016
+^^^^^^^^^^^^^^
+
+Manually downloaded nowcast results for 9jul2016 and ran make-plots research worker; necessary because I had to kill the watch_NEMO workers yesterday in order to get logging from manager working again after anu crash.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
 
 
 ToDo
