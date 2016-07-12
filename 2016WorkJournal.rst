@@ -2488,6 +2488,9 @@ Helped Susan change nowcast-green to use bathymetry that facilitates use of Orla
 July
 ====
 
+Week 27
+-------
+
 Mon 4-Jul-2016
 ^^^^^^^^^^^^^^
 
@@ -2580,14 +2583,36 @@ See project work journal.
 (GOMSS)
 
 
-Sat 9-Jul-2016
-^^^^^^^^^^^^^^
+Sun 10-Jul-2016
+^^^^^^^^^^^^^^^
 
 Manually downloaded nowcast results for 9jul2016 and ran make-plots research worker; necessary because I had to kill the watch_NEMO workers yesterday in order to get logging from manager working again after anu crash.
 (SalishSea)
 
 See project work journal.
 (GOMSS)
+
+
+Week 27
+-------
+
+Mon 11-Jul-2016
+^^^^^^^^^^^^^^^
+
+Added handling for FileNotFoundError to make_plots comparison worker so that it doesn't crash when the ferry data files are missing.
+Made teos_tools functions more polymorphic.
+Changed VENUS nodes CTD comparison figures to use reference salinity.
+Added attribution to ONC for data on VENUS nodes CTD comparison figures.
+Changed VENUS nodes CTD comparison figures to include only observations with qaqcFlag==1.
+Continued work on getting ONC ADCP data; debugged matlab script to the point that I understand that it times out because the search status reporting is broken on the ONC server end.
+Generated enough error messages that Marlene inadvertently gave me the hint that my Python requests were using the wrong deployment location; fixed that and now my notebook works as well as the matlab script.
+Reported progress to Rich.
+Added debug logging of figure files as they are saved to make_plots worker to facilitate progress monitoring.
+Manually ran make_plots and make_site_page workers for comparison plots for 3jul16 through 10jul16 runs.
+Updated nowcast deployment docs re: crating conda environment and adding activate/deactivate hook scripts to export/unset environment variables.
+(SalishSea)
+
+Attended Phys Ocgy seminar by Yulia Egorova about analysis of young salmon in Rivers Inlet.
 
 
 
