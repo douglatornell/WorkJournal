@@ -2615,6 +2615,22 @@ Updated nowcast deployment docs re: crating conda environment and adding activat
 Attended Phys Ocgy seminar by Yulia Egorova about analysis of young salmon in Rivers Inlet.
 
 
+Tue 12-Jul-2016
+^^^^^^^^^^^^^^^
+
+More EOAS network chaos.
+Continued email discussion w/ Marlene@ONC re: ADCP data; polling ftp directly, other API?, netCDF format?
+Fixed a bunch of warnings in tools docs.
+Ran download_results & make_plots workers manually for forecast2 run; site build didn't happen because of recent change to build after comparison plots (non-existent for forecast runs).
+Fixed nowcast flow so that publish plots & pages always happen last so that site gets built and updated regardless of run type.
+Added -q flag to sphinx_build worker to reduce volume of debug log output.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+Started work on html-css-js presentation for Thu workout.
+(swc)
+
+
 
 ToDo
 ====
