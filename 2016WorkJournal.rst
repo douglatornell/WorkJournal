@@ -2631,6 +2631,25 @@ Started work on html-css-js presentation for Thu workout.
 (swc)
 
 
+Wed 13-Jul-2016
+^^^^^^^^^^^^^^^
+
+
+Physio appt; continue stretches: broomstick or wall crawl, towel, hands behind head, doorway chest stretch, flatten blades, then shoulders back on bike at stops, tubing arm pull in front of mirror, arm push lying on side, spread arms against tubing, working subscapular not trapezius, free the bird every 90 minutes at desk, and forearm raise against tubing under foot; add rows against tubing with focus on using subscapulars not neck, switch to rows when other resistance exercises fatigue me to to point of shoulder hunching.
+
+Replied to query from Mitchell@DFO re: accessing our NEMO model results & docs.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Thu 14-Jul-2016
+^^^^^^^^^^^^^^^
+
+Finished and presented SWC workout on HTML, CSS, and JavaScript.
+(swc)
+
 
 ToDo
 ====
