@@ -2650,6 +2650,11 @@ Thu 14-Jul-2016
 Finished and presented SWC workout on HTML, CSS, and JavaScript.
 (swc)
 
+Got invitation from Dwight@ONC to discuss ONC API design.
+Discussed API requirements idea w/ Susan, Kong & Drew.
+Worked on polling ONC FTP server to get ADCP results; works so long as their backend doesn't fall over; retrying library is awesome!
+(SalishSea)
+
 
 ToDo
 ====
