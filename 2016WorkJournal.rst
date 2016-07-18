@@ -2656,6 +2656,49 @@ Worked on polling ONC FTP server to get ADCP results; works so long as their bac
 (SalishSea)
 
 
+Fri 15-Jul-2016
+^^^^^^^^^^^^^^^
+
+Nowcast system collapsed again overnight due to failure of communication re: timing of restoration of anu server home.
+* touched NBssh.png & wg.png to refresh file handles
+* killed and restarted message broker and manager to reconnect them to log files
+* manually ran get_NeahBay_ssh forecast2 worker
+* manually ran make_runoff_file worker
+* manually ran dowonload_weather 00 worker
+Discussed ERDDAP & xarray issue on 2d mesh mask dataset w/ Nancy; perhaps relatedly got >25% request failure alert from ERDDAP.
+ubcSSn2DMeshMask2V1 dataset is missing variables glamf and gphif, but more importantly it is malformed, probably because the time_counter variable in the source file has no units; ubcSSn3DMeshMask2V1 probably only works by accident.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+MOAD bbq at Locarno Beach.
+
+
+Sat 16-Jul-2016
+^^^^^^^^^^^^^^^
+
+Triaged issues in Jackie's 8-Jul pre-release review email.
+Re-opened issue #76, moved icons, and re-closed.
+Created and addressed new issues #84 through #88.
+Added extraction of URLs from spreadsheet HYPERLINK functions to load_flood_planning_data & load_risk_reduction_actions scripts.
+Handled empty category cells in load_risk_reduction_actions script.
+Added changing mouse cursor to wait style prior to loading slow pages, though I hated doing so.
+Rationalized community names in URLs to always use spaces, not underscores, and trashed my way through the mess that made of js updating of the compare page selectors.
+Started hacking a way of serving PoCo emergency recover doc from assets; re: issue #79.
+
+
+Sun 17-Jul-2016
+^^^^^^^^^^^^^^^
+Finished hacking a way of serving PoCo emergency recover doc from assets; re: issue #79.
+Strongly suggested to Jackie that stage 3 is done.
+(sealinkd)
+
+Fixed permissions on pre-jul16 nowcast-green results directories so that Susan can delete outdated restart files.
+Added KeyError handling to ferry salinity plots section of make_plots worker; another way that ferry data can fail.
+(SalishSea)
+
+
 ToDo
 ====
 
