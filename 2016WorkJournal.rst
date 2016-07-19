@@ -2593,7 +2593,7 @@ See project work journal.
 (GOMSS)
 
 
-Week 27
+Week 28
 -------
 
 Mon 11-Jul-2016
@@ -2696,6 +2696,17 @@ Strongly suggested to Jackie that stage 3 is done.
 
 Fixed permissions on pre-jul16 nowcast-green results directories so that Susan can delete outdated restart files.
 Added KeyError handling to ferry salinity plots section of make_plots worker; another way that ferry data can fail.
+(SalishSea)
+
+
+Week 29
+-------
+
+Mon 18-Jul-2016
+^^^^^^^^^^^^^^^
+
+Fixed time_counter metadata in mesh_mask_SalishSea2.nc to make ERDDAP happy; re: issue that Nancy raised on Friday.
+Finished notebook re: getting ONC ADCP data; started work on implementation in data_tools.
 (SalishSea)
 
 
