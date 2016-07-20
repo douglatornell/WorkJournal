@@ -2710,6 +2710,15 @@ Finished notebook re: getting ONC ADCP data; started work on implementation in d
 (SalishSea)
 
 
+Tue 19-Jul-2016
+^^^^^^^^^^^^^^^
+
+Video conference w/ ONC re: web service APIs for data; Dwight, Ryan & Christine.
+Finished initial implementation of functions to get ONC ADCP data in data_tools.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+
 ToDo
 ====
 
