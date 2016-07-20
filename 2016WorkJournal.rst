@@ -2713,6 +2713,11 @@ Finished notebook re: getting ONC ADCP data; started work on implementation in d
 Tue 19-Jul-2016
 ^^^^^^^^^^^^^^^
 
+Deleted Profile page template code for community image because it was prducing spurious text on some pages, and the feature is not presently wanted; issue #89.
+Removed work-in-progress banner from landing page.
+Bumped version to 1.1, tagged it, and declared it released.
+(sealinkd)
+
 Video conference w/ ONC re: web service APIs for data; Dwight, Ryan & Christine.
 Finished initial implementation of functions to get ONC ADCP data in data_tools.
 Salish Sea team mtg; see whiteboard.
