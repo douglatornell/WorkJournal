@@ -2751,6 +2751,21 @@ Investigated lack of log messages from west.cloud that magically resolved itself
 (SalishSea)
 
 
+Fri 22-Jul-2016
+^^^^^^^^^^^^^^^
+
+Dentist appt.
+
+MOAD software session where we worked on porting Rob Irwin's CTD database code to Python 3.
+
+Mtg w/ Elise & James re: next steps for James running on jasper and tuning bio parameters.
+Mtg w/ Nancy re: script to get boundary conditions from LiveOcean model, and xarray.
+Fixed date parsing bug in ONC ADCP search & download code.
+(SalishSea)
+
+Updated OS on niko to 16.04.2 and PyCharm to 2016.2.
+
+
 ToDo
 ====
 
