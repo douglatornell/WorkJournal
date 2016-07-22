@@ -2724,6 +2724,33 @@ Salish Sea team mtg; see whiteboard.
 (SalishSea)
 
 
+Wed 20-Jul-2016
+^^^^^^^^^^^^^^^
+
+Wrote report on stage 3 work and submitted invoice.
+Emailed Stephanie re: ending or transferring monthly Bitbucket charge; she elected to remove CJ from the account, so I did so and downgraded to the free tier.
+(sealinkd)
+
+Nowcast forecast2 hg_update, sphinx_build & rsync_to_web workers all failed weirdly, and logs seem to be stuck.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Thu 21-Jul-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Stopped and re-started message broker and manager to try to resolve what looks like a stale NFS handle issue.
+Fielded question from Marlene about EC HRDPS dataset on our ERDDAP server.
+Built a salishsea-tools conda env on ocean for ONC ADCP file processing; downloaded 2 central node files, but am puzzled that the file names imply that they are for the day before the date requested.
+Investigated lack of log messages from west.cloud that magically resolved itself.
+(SalishSea)
+
+
 ToDo
 ====
 
