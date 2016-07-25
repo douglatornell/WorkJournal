@@ -2758,12 +2758,45 @@ Dentist appt.
 
 MOAD software session where we worked on porting Rob Irwin's CTD database code to Python 3.
 
+Reviewed Nancy's module for extraction of Salish Sea NEMO model western boundary conditions from UW Live Ocean model product.
 Mtg w/ Elise & James re: next steps for James running on jasper and tuning bio parameters.
 Mtg w/ Nancy re: script to get boundary conditions from LiveOcean model, and xarray.
 Fixed date parsing bug in ONC ADCP search & download code.
 (SalishSea)
 
-Updated OS on niko to 16.04.2 and PyCharm to 2016.2.
+Updated Ubuntu to 16.04.1 and PyCharm to 2016.2 on niko.
+
+
+Sat 23-Jul-2016
+^^^^^^^^^^^^^^^
+
+Updated PyCharm to 2016.2 and Ubuntu to 16.04.1 on kudu.
+
+Worked on backfilling ONC ADCP data, but central node May 1 & 2 are troublesome.
+(SalishSea)
+
+
+Sun 24-Jul-2016
+^^^^^^^^^^^^^^^
+
+Ordered portable backup drive for niko.
+
+Got backfilling of ONC ADCP data flowing by skipping central node May 1 & 2; completed the rest of May.
+Started backfilling of ONC ADCP data for east node but it stalled on April 9 & 10.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Week 29
+-------
+
+Mon 25-Jul-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
 
 
 ToDo
