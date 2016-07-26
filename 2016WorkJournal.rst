@@ -2789,7 +2789,7 @@ See project work journal.
 (GOMSS)
 
 
-Week 29
+Week 30
 -------
 
 Mon 25-Jul-2016
@@ -2797,6 +2797,13 @@ Mon 25-Jul-2016
 
 See project work journal.
 (GOMSS)
+
+Refactored data_tools functions to get ONC ADCP data to separate request for data that launches search on ONC backend, and polling FTP server to find and download .mat file that results from search; doh! because I forgot to create the destination directory :-(
+Backfilled model results pages re: last week's network issues.
+Started backfilling of ONC ADCP data for east node from May 3 onward.
+Started working on production of ERDDAP dataset from ONC CTD data.
+Found and fixed bug whereby ONC CTD data wasn't actually being converted to TEOS-10 reference salinity.
+(SalishSea)
 
 
 ToDo
