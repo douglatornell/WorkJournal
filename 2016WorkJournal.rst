@@ -2806,6 +2806,16 @@ Found and fixed bug whereby ONC CTD data wasn't actually being converted to TEOS
 (SalishSea)
 
 
+Tue 26-Jul-2016
+^^^^^^^^^^^^^^^
+
+Figured out via Oceans2.0 that ONC East node ADCP was out of commission from 9apr through 30apr, explaining why download requests fail for that period.
+Traced failure of Delta BBL node downloads to incorrect siteId values in matlab script from ONC; got 3 or 4 days of Apr data from that node before ONC service fell over, again.
+Continued working on production of ERDDAP dataset from ONC CTD data.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+
 ToDo
 ====
 
