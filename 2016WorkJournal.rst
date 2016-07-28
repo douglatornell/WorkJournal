@@ -2634,7 +2634,6 @@ Started work on html-css-js presentation for Thu workout.
 Wed 13-Jul-2016
 ^^^^^^^^^^^^^^^
 
-
 Physio appt; continue stretches: broomstick or wall crawl, towel, hands behind head, doorway chest stretch, flatten blades, then shoulders back on bike at stops, tubing arm pull in front of mirror, arm push lying on side, spread arms against tubing, working subscapular not trapezius, free the bird every 90 minutes at desk, and forearm raise against tubing under foot; add rows against tubing with focus on using subscapulars not neck, switch to rows when other resistance exercises fatigue me to to point of shoulder hunching.
 
 Replied to query from Mitchell@DFO re: accessing our NEMO model results & docs.
@@ -2800,7 +2799,7 @@ See project work journal.
 
 Refactored data_tools functions to get ONC ADCP data to separate request for data that launches search on ONC backend, and polling FTP server to find and download .mat file that results from search; doh! because I forgot to create the destination directory :-(
 Backfilled model results pages re: last week's network issues.
-Started backfilling of ONC ADCP data for east node from May 3 onward.
+Backfilled ONC ADCP data for east node from May 3-31.
 Started working on production of ERDDAP dataset from ONC CTD data.
 Found and fixed bug whereby ONC CTD data wasn't actually being converted to TEOS-10 reference salinity.
 (SalishSea)
@@ -2809,11 +2808,47 @@ Found and fixed bug whereby ONC CTD data wasn't actually being converted to TEOS
 Tue 26-Jul-2016
 ^^^^^^^^^^^^^^^
 
+Started backfilling ONC ADCP data for east node from April 15-30.
 Figured out via Oceans2.0 that ONC East node ADCP was out of commission from 9apr through 30apr, explaining why download requests fail for that period.
 Traced failure of Delta BBL node downloads to incorrect siteId values in matlab script from ONC; got 3 or 4 days of Apr data from that node before ONC service fell over, again.
 Continued working on production of ERDDAP dataset from ONC CTD data.
 Salish Sea team mtg; see whiteboard.
 (SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Wed 27-Jul-2016
+^^^^^^^^^^^^^^^
+
+Physio appt; continue stretches: broomstick or wall crawl, towel, hands behind head, doorway chest stretch, flatten blades, then shoulders back on bike at stops, tubing arm pull in front of mirror, arm push lying on side, spread arms against tubing, working subscapular not trapezius, free the bird every 90 minutes at desk, and forearm raise against tubing under foot; add rows against tubing with focus on using subscapulars not neck, switch to rows when other resistance exercises fatigue me to to point of shoulder hunching. Focus on towel & hands behind head.
+
+Discussed skookum RAID expansion with Charles and worked out plan to run parts of nowcast on salish today before data dump back to /results tomorrow.
+Set up a nowcast environment on salish, edited nowcast.yaml to look at temporary /results mount at /skookum, and successfully ran get_NeahBay_ssh and grib_to_netcdf workers, but launch of upload_forcing for nowcast, ping_erddap, and make_forcing_links for nowcast-green failed.
+Finished ONC ADCP Delta BBL April downloads; started May downloads by they time out on 1-May.
+Manually ran download_weather worker for 18 forecast.
+Sent email to Charles telling him to start data transfer to new RAID asap.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+Received email from Jackie with HVSI data changes to be loaded.
+(sealinkd)
+
+
+Thu 28-Jul-2016
+^^^^^^^^^^^^^^^
+
+Found that ONC ADCP Delta BBL 1-May download is failing due to search request error.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+Decided that I don't have time this week to confidently load HVSI data changes; emailed Jackie to say I will do it after 15-Aug.
+(sealinkd)
 
 
 ToDo
