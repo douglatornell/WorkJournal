@@ -2841,7 +2841,9 @@ Received email from Jackie with HVSI data changes to be loaded.
 Thu 28-Jul-2016
 ^^^^^^^^^^^^^^^
 
-Found that ONC ADCP Delta BBL 1-May download is failing due to search request error.
+Found that ONC ADCP Delta BBL 1-May download is failing due to search request error; that's due to no instrument deployed.
+Started downloading ONC ADCP Delts BBL data for 2-31 May.
+Got nowcast system back up and running on skookum and new 11Tb RAID 5 /results filesystem; hacked runNEMO worker on west.cloud to run 27jul16 nowcast.
 (SalishSea)
 
 See project work journal.
@@ -2849,6 +2851,94 @@ See project work journal.
 
 Decided that I don't have time this week to confidently load HVSI data changes; emailed Jackie to say I will do it after 15-Aug.
 (sealinkd)
+
+Attended SWC workout session by Susan on xarray and ERDDAP.
+
+Registered for Basic Digital Photography Workflow course at Langara in Sep.
+
+
+Fri 29-Jul-2016 & Sat 30-Jul-2016
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Vacation** - Travelled to Beaune; what a story!
+
+Rebuild of 29-Jul nowcast-green results failed due to a weird version conflict issue for SalishSeaCmd pkg; 30-Jul run couldn't start and comparison & publish plots failed.
+(SalishSea)
+
+
+
+Sun 31-Jul-2016 through Thu 4-Aug-2016
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Vacation** - Cycletouring in Burgundy
+
+Settled into apartment in Beaune.
+
+
+Fri 5-Aug-2016
+^^^^^^^^^^^^^^
+
+**Vacation** - Beaune
+
+Fixed bug in salishsea combine whereby per-processor results files, and lots of other netcdf4 files were being unnecessarily deflated.
+Susan ran nowcast-green catch-up runs on orcinus.
+(SalishSea)
+
+
+Sat 6-Aug-2016
+^^^^^^^^^^^^^^
+
+**Vacation** - Beaune
+
+Manually ran make_plots, make_pages, sphinx_build & rsync_to_web workers to catch up figures and pages that were missed due to 30-Jul nowcast-green failure.
+Opened ticket to restart ERDDAP to resolve 500/javascript errors reported by Ben.
+(SalishSea)
+
+
+Sun 7-Aug-2016
+^^^^^^^^^^^^^^
+
+**Vacation** - Beaune
+
+Charles restarted ERDDAP.
+(SalishSea)
+
+
+Week 32
+-------
+
+Mon 9-Aug-2016
+^^^^^^^^^^^^^^
+
+**Vacation** - Beaune
+
+Started dev of Pyramid app for salishsea_site.
+(SalishSea)
+
+
+Thu 11-Aug-2016
+^^^^^^^^^^^^^^
+
+**Vacation** - Beaune to Paris
+
+Continued dev of Pyramid app for salishsea_site.
+(SalishSea)
+
+
+Sat 13-Aug-2016
+^^^^^^^^^^^^^^
+
+**Vacation** - Paris to Vancouver
+
+Continued dev of Pyramid app for salishsea_site; finally figured out that reverse proxy was being blocked by Apache detault site still enabled.
+(SalishSea)
+
+
+Sun 14-Aug-2016
+^^^^^^^^^^^^^^
+
+Created salishsea_site Pyramid app in pyramid branch of salishsea_site repo.
+(SalishSea)
 
 
 ToDo
