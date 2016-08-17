@@ -2950,7 +2950,7 @@ Mon 15-Aug-2016
 ECget had timeouts trying to get 14Aug river flow data; faked values assuming persistence, ran make_runoff_file manually, and upload_forcing to restart automation for forecast2.
 Set up Sentry project for Salish Sea Nowcast system and site web app.
 Prepared salishsea-site-env conda environment on skookum; need to set up circus to run the app before opening the ticket to add the reverse proxy.
-Started downloading ONC ADCP central node data for 1-30 May; timeout on 21; restarted.
+Started downloading ONC ADCP central node data for 1-30 June; timeout on 21; restarted.
 Continued work on production of 15min averaged ONC CTD datasets for ERDDAP.
 Discussed ADCP & other ONC data w/ Rich.
 (SalishSea)
@@ -2958,6 +2958,16 @@ Discussed ADCP & other ONC data w/ Rich.
 Summer student seminars including James at Phys Ocgy seminar.
 
 Coffee w/ Julie.
+
+
+Tue 16-Aug-2016
+^^^^^^^^^^^^^^^
+
+Finished downloading ONC ADCP east node data for 1-30 June; started downloading Delta BBL node (aka ddl) June data.
+Continued work on production of 15min averaged ONC CTD datasets for ERDDAP; succeeded in publishing proof of concept dataset.
+(SalishSea)
+
+Salish Sea team mtg; see whiteboard.
 
 
 ToDo
