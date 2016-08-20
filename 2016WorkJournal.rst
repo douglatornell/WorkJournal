@@ -2950,7 +2950,7 @@ Mon 15-Aug-2016
 ECget had timeouts trying to get 14Aug river flow data; faked values assuming persistence, ran make_runoff_file manually, and upload_forcing to restart automation for forecast2.
 Set up Sentry project for Salish Sea Nowcast system and site web app.
 Prepared salishsea-site-env conda environment on skookum; need to set up circus to run the app before opening the ticket to add the reverse proxy.
-Started downloading ONC ADCP central node data for 1-30 June; timeout on 21; restarted.
+Started downloading ONC ADCP central node data for 1-30 June; timeout on 21; restarted and finished; started east node.
 Continued work on production of 15min averaged ONC CTD datasets for ERDDAP.
 Discussed ADCP & other ONC data w/ Rich.
 (SalishSea)
@@ -2963,6 +2963,7 @@ Coffee w/ Julie.
 Tue 16-Aug-2016
 ^^^^^^^^^^^^^^^
 
+Restarted downloading ONC ADCP east node data for 1-30 June after overnight timeout on 11.
 Finished downloading ONC ADCP east node data for 1-30 June; started downloading Delta BBL node (aka ddl) June data.
 Continued work on production of 15min averaged ONC CTD datasets for ERDDAP; succeeded in publishing proof of concept dataset.
 (SalishSea)
@@ -2970,10 +2971,29 @@ Continued work on production of 15min averaged ONC CTD datasets for ERDDAP; succ
 Salish Sea team mtg; see whiteboard.
 
 
+Wed 17-Aug-2016
+^^^^^^^^^^^^^^^
+
+Physio appt. Need to relearn the skill of keeping my shoulder down and back. Focus on band resistance exercises, to the side, then up when skill returns.
+
+Took Gunnars to Speed Theory for right shifter G-strings replacement.
+
+Dentist appt to fill small cavity between lower right molars.
+
+Started downloading ONC ADCP central node data for 1-31 July.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
 Thu 18-Aug-2016
 ^^^^^^^^^^^^^^^
 
 Discovered that EC research forecast model product has not been updated since 9-Aug.
+ONC ADCP download failed for 28-Jul onward, reporting no deployment.
+Started downloading east node July data; like central, it failed for 28-Jul onward, reporting no deployment.
+Started downloading Delta BBL (aka ddl) node July data.
 (SalishSea)
 
 
@@ -2993,6 +3013,9 @@ Traced the ERDDAP issue that Nancy, Ben and I have been discussing down to a tim
 Helped James get output set up for short test runs on jasper.
 Skimmed XIOS2 docs PDF.
 (SalishSea)
+
+See project work journal.
+(GOMSS)
 
 
 ToDo
