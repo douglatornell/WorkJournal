@@ -2510,7 +2510,7 @@ Tue 5-Jul-2016
 Restarted nowcast manager from an environment that exported ONC_USER_TOKEN envvar in preparation for release to production of CTD comparison figures code.
 Added VENUS upper slope Delta node to places module.
 Pushed CTD comparison figures code to production.
-Merged NEMO-3.6-code into NEMO-3.6-mirror-merge at  NEMO-3.6r5912 tag on niko and pushed to NEMO-3.6-code on Bitbucket; deleted NEMO-3.6-r5912 repo from Bitbucket.
+Merged NEMO-3.6-code into NEMO-3.6-mirror-merge at NEMO-3.6r5912 tag on niko and pushed to NEMO-3.6-code on Bitbucket; deleted NEMO-3.6-r5912 repo from Bitbucket.
 Pulled changesets 5918 through 6036 into NEMO-3.6-hg-mirror on salish.
 Merged NEMO-3.6-hg-mirror into NEMO-3.6-mirror-merge on niko.
 Tagged NEMO-3.6-r6036 in NEMO-3.6-mirror-merge and pushed to new NEMO-3.6-r6036 repo on Bitbucket for Susan to use for merge-comparison test.
@@ -2968,6 +2968,31 @@ Continued work on production of 15min averaged ONC CTD datasets for ERDDAP; succ
 (SalishSea)
 
 Salish Sea team mtg; see whiteboard.
+
+
+Thu 18-Aug-2016
+^^^^^^^^^^^^^^^
+
+Discovered that EC research forecast model product has not been updated since 9-Aug.
+(SalishSea)
+
+
+Fri 19-Aug-2016
+^^^^^^^^^^^^^^^
+
+Reviewed Ben's nc_tools & viz_tools and James's geo_tools code to prep for today's MOAD software session on library code.
+(MOAD)
+
+Pulled and updated NEMO-3.6-code on niko.
+Merged NEMO-3.6-code into NEMO-3.6-mirror-merge at NEMO-3.6r6036 tag on niko and pushed to NEMO-3.6-code on Bitbucket; emailed group and updated whiteboard re: merge.
+Deleted NEMO-3.6-r6036 repo from Bitbucket.
+Pulled changesets 6039 through 6204 into NEMO-3.6-hg-mirror on salish.
+Merged NEMO-3.6-hg-mirror into NEMO-3.6-mirror-merge on niko.
+Tagged NEMO-3.6-r6204 in NEMO-3.6-mirror-merge and pushed to new NEMO-3.6-r6204 repo on Bitbucket for Susan & Elise to use for merge-comparison test.
+Traced the ERDDAP issue that Nancy, Ben and I have been discussing down to a timeout on the Apache proxy in front of ERDDAP; opened a ticket for Charles to double ProxyPass timeout value to 600s.
+Helped James get output set up for short test runs on jasper.
+Skimmed XIOS2 docs PDF.
+(SalishSea)
 
 
 ToDo
