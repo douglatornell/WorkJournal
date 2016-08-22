@@ -2996,6 +2996,9 @@ Started downloading east node July data; like central, it failed for 28-Jul onwa
 Started downloading Delta BBL (aka ddl) node July data.
 (SalishSea)
 
+See project work journal.
+(GOMSS)
+
 
 Fri 19-Aug-2016
 ^^^^^^^^^^^^^^^
@@ -3012,10 +3015,34 @@ Tagged NEMO-3.6-r6204 in NEMO-3.6-mirror-merge and pushed to new NEMO-3.6-r6204 
 Traced the ERDDAP issue that Nancy, Ben and I have been discussing down to a timeout on the Apache proxy in front of ERDDAP; opened a ticket for Charles to double ProxyPass timeout value to 600s.
 Helped James get output set up for short test runs on jasper.
 Skimmed XIOS2 docs PDF.
+Downloaded ONC-ADCP central and east node data for Aug to the 18th.
 (SalishSea)
 
-See project work journal.
-(GOMSS)
+
+Sat 20-Aug-2016
+^^^^^^^^^^^^^^^
+
+Reviewed and improved .condarc file on kudu.
+
+Added pynco to sphinx-build environment for readthedocs and cleaned up docstring issued to get salishsea_tools API docs building again.
+Pulled NEMO-3.6-code svn r6036 into nowcast-sys/ on salish and did a clean build.
+Downloaded ONC-ADCP Delta BBL node data for Aug to the 18th; almost "real-time" now!
+(SalishSea)
+
+Watched Gord Downie's final concert with The Tragically Hip broadcast on the CBC.
+
+
+Sun 21-Aug-2016
+^^^^^^^^^^^^^^^
+
+Add 2000 km brevet distance.
+Added pyramid-crow to monitor exceptions on Sentry and integrated Sentry project with Bitbucket repo to enable issue creation; tested with manual replication of ppopulaires/VicPop AttributeError from log; see issue #22.
+Changed deployment on Webfaction to randopony_prod with Pyramid 1.7.3 and Mercurial clone from Bitbucket.
+Had to downgrade colander to 1.2; see issue #21.
+(RandoPony)
+
+Loaded 27-Jul indicator list version of spreadsheet from Jackie.
+(sealinkd)
 
 
 ToDo
