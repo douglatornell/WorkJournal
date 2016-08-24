@@ -3036,13 +3036,48 @@ Sun 21-Aug-2016
 ^^^^^^^^^^^^^^^
 
 Add 2000 km brevet distance.
-Added pyramid-crow to monitor exceptions on Sentry and integrated Sentry project with Bitbucket repo to enable issue creation; tested with manual replication of ppopulaires/VicPop AttributeError from log; see issue #22.
+Added pyramid-crow to monitor exceptions on Sentry and integrated Sentry project with Bitbucket repo to enable issue creation; tested with manual replication of populaires/VicPop AttributeError from log; see issue #22.
 Changed deployment on Webfaction to randopony_prod with Pyramid 1.7.3 and Mercurial clone from Bitbucket.
 Had to downgrade colander to 1.2; see issue #21.
 (RandoPony)
 
 Loaded 27-Jul indicator list version of spreadsheet from Jackie.
 (sealinkd)
+
+
+Week 34
+-------
+
+Mon 22-Aug-2016
+^^^^^^^^^^^^^^^
+
+Reviewed changes in 2016.06 shell & Python lessons release.
+Met w/ Nancy & Karina to plan 20/21-Sep EOAS workshop.
+(SWC)
+
+Morphed ADCP data download code into daily per node form to move it toward a cron job.
+Ran GETDEPL on central node data to 19-Aug; had forgotten how horribly slow it is, loading each day's raw data file (partly because there at least 2 files per day from Muriel's automation).
+Fixed a typo in GETDEPL_fun re: deployment dates.
+GETDEPL reported corrupted files for 2016-05-07, 2016-05-13; re-downloaded
+Started work on raw ADCP data download script in Python.
+(SalishSea)
+
+Phys Ocgy seminars by summer student Vahid Dehghanniri re: gravity currents in the bottom of the SoG, and Idalia about her research plan for upwelling in Mackenzie Canyon.
+
+
+Tue 23-Aug-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Terminated west.cloud instances 14, 16 & 17 at Eric Kolb's request due to memory issues on the hypervisor that they were running on; launched new instances and got nowcast started at about 14:05.
+Continued running GETDEPL for central node ADCP data; 2016-05-07 again reported corrupt (after re-download & acceptance yesterday) so deleted the file.
+Lots more corrupted central node ADCP files (see notebook); deleted them.
+Deleted all duplicate central node raw ADCP files to try to speed up GETDEPL.
+(SalishSea)
+
+Salish Sea team mtg; see whiteboard.
 
 
 ToDo
