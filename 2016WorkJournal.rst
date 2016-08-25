@@ -3075,9 +3075,22 @@ Terminated west.cloud instances 14, 16 & 17 at Eric Kolb's request due to memory
 Continued running GETDEPL for central node ADCP data; 2016-05-07 again reported corrupt (after re-download & acceptance yesterday) so deleted the file.
 Lots more corrupted central node ADCP files (see notebook); deleted them.
 Deleted all duplicate central node raw ADCP files to try to speed up GETDEPL.
+Got GETDEPL to complete on central node ADCP data, tuned rotation angle via LTIM, and released data to 22-Aug.
 (SalishSea)
 
 Salish Sea team mtg; see whiteboard.
+
+
+Wed 24-Aug-2016
+^^^^^^^^^^^^^^^
+
+Debugged ONC ADCP data download cron job.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+Got new Rancilio Sylvia M espresso machine :-)
 
 
 ToDo
