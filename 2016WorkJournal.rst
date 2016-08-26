@@ -3093,6 +3093,21 @@ See project work journal.
 Got new Rancilio Sylvia M espresso machine :-)
 
 
+Thu 25-Aug-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Got salishsea-site pyramid branch running under circus process mgr and chaussette WSGI server on VM.
+Confirmed that reverse proxies to site app and erddap can be used together; put erddap proxy (longest root URL) first.
+Helped Elise get anaconda on char updated to Python 3.5.
+Read Drakkar slidedeck on TEOS-10 and NEMO.
+(SalishSea)
+
+Participated in SWC workout lead by Susan on matlab from python.
+
+
 ToDo
 ====
 
