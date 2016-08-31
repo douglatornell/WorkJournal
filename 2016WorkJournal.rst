@@ -3108,6 +3108,26 @@ Read Drakkar slidedeck on TEOS-10 and NEMO.
 Participated in SWC workout lead by Susan on matlab from python.
 
 
+Tue 30-Aug-2016
+^^^^^^^^^^^^^^^
+
+River discharge downloads failed due to timeout on wateroffice site; patched files with persistence values from 29-Aug.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Wed 31-Aug-2016
+^^^^^^^^^^^^^^^
+
+River discharge downloads failed due to timeout on wateroffice site; patched files with persistence values from 29-Aug.
+(SalishSea)
+
+Scheduled site visit for server boot failure for Thu 8-Sep.
+(Nordion)
+
+
 ToDo
 ====
 
