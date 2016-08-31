@@ -3108,6 +3108,48 @@ Read Drakkar slidedeck on TEOS-10 and NEMO.
 Participated in SWC workout lead by Susan on matlab from python.
 
 
+Fri 26-Aug-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Traveled from home to Heriot Bay Inn for JRA's 90th bday wknd.
+
+
+Sat 27-Aug-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Manually started nowcast run after west.cloud network maintenance.
+(SalishSea)
+
+
+Sun 28-Aug-2016
+^^^^^^^^^^^^^^^
+
+Traveled home from Heriot Bay Inn after JRA's 90th bday wknd.
+
+See project work journal.
+(GOMSS)
+
+
+Week 35
+-------
+
+Mon 29-Aug-2016
+^^^^^^^^^^^^^^^
+
+Worked w/ Dominik@EC to backfill GEM 2.5km research model products for day missed when his automation failed on 10-Aug.
+(SalishSea)
+
+Reviewed changes in 2016.06 shell & Python lessons release.
+Met w/ Nancy & Karina to plan 20/21-Sep EOAS workshop.
+(SWC)
+
+
 Tue 30-Aug-2016
 ^^^^^^^^^^^^^^^
 
