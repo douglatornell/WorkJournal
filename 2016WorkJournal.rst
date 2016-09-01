@@ -3145,7 +3145,7 @@ Mon 29-Aug-2016
 Worked w/ Dominik@EC to backfill GEM 2.5km research model products for day missed when his automation failed on 10-Aug.
 (SalishSea)
 
-Reviewed changes in 2016.06 shell & Python lessons release.
+Created 2016-09-20-ubc workshop repo and site.
 Met w/ Nancy & Karina to plan 20/21-Sep EOAS workshop.
 (SWC)
 
@@ -3164,10 +3164,17 @@ Wed 31-Aug-2016
 ^^^^^^^^^^^^^^^
 
 River discharge downloads failed due to timeout on wateroffice site; patched files with persistence values from 29-Aug.
+Salish Sea team mtg; see whiteboard.
+Continued dev of ONC CTD data ERDDAP dataset XML description.
 (SalishSea)
 
 Scheduled site visit for server boot failure for Thu 8-Sep.
 (Nordion)
+
+Used apt to install jekyll on niko (ruby & gem were already installed as part of base OS packages).
+Buffed 2016-09-20-ubc workshop repo and site.
+Created hg-novice-2016-09-20-ubc lesson repo & site.
+(SWC)
 
 
 ToDo
