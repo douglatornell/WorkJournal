@@ -3177,6 +3177,15 @@ Created hg-novice-2016-09-20-ubc lesson repo & site.
 (SWC)
 
 
+Thu 1-Sep-2016
+^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Wrote spec for new drivetrain for Shadowfax and discussed it with Ed@Mighty.
+
+
 ToDo
 ====
 
