@@ -3186,6 +3186,24 @@ See project work journal.
 Wrote spec for new drivetrain for Shadowfax and discussed it with Ed@Mighty.
 
 
+September
+=========
+
+Week 36
+-------
+
+Mon 5-Sep-2016
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Labour Day
+
+EC GEM2.5 research products missing from FTP site since 4sep.
+Created XIOS-ARCH repo to hold XIOS arch files publicly and separately from XIOS code.
+Added xios-2.0 branch to XIOS-ARCH repo with mods for building XIOS-2.0 on orcinus.
+Updated salish & orcinus quick-start docs re: use of XIOS-ARCH files.
+(SalishSea)
+
+
 ToDo
 ====
 
