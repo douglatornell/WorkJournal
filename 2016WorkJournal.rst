@@ -3186,6 +3186,18 @@ See project work journal.
 Wrote spec for new drivetrain for Shadowfax and discussed it with Ed@Mighty.
 
 
+Fri 2-Sep-2016
+^^^^^^^^^^^^^^
+
+Code review of canyon_tools.readout_tools.py.
+(MOAD)
+
+Continued dev of ONC CTD data ERDDAP dataset XML description.
+Helped James make storage decisions about his auto-generated notebooks from the SMELT sensitivity analysis.
+Wrap up mtg w/ James & Elise, then drinks at The Point.
+(SalishSea)
+
+
 September
 =========
 
@@ -3201,6 +3213,14 @@ EC GEM2.5 research products missing from FTP site since 4sep.
 Created XIOS-ARCH repo to hold XIOS arch files publicly and separately from XIOS code.
 Added xios-2.0 branch to XIOS-ARCH repo with mods for building XIOS-2.0 on orcinus.
 Updated salish & orcinus quick-start docs re: use of XIOS-ARCH files.
+(SalishSea)
+
+
+Tue 6-Sep-2016
+^^^^^^^^^^^^^^
+
+Salish Sea team mtg; see whiteboard.
+Continued dev of ONC CTD data ERDDAP dataset XML description.
 (SalishSea)
 
 
