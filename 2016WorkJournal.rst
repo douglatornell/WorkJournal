@@ -3224,6 +3224,25 @@ Continued dev of ONC CTD data ERDDAP dataset XML description.
 (SalishSea)
 
 
+Thu 8-Sep-2016
+^^^^^^^^^^^^^^
+
+Nordion site visit re: isoinfo server boot failure; see work notes.
+(Nordion)
+
+Continued dev of ONC CTD data ERDDAP dataset XML description.
+(SalishSea)
+
+Code review of Nancy's grid_tools module & notebook re: time-varying water column factors in NEMO.
+(MOAD)
+
+Helped Melanie upgrade to Anaconda 3 on smelt & her laptop.
+Split Cindy's analysis notebooks out of the 2Gb limited analysis repo into a new analysis-cindy repo.
+(GEOTRACES)
+
+Attended the dept. colloquium research carnival, including watching the launch of the OSIRIS-REX mission to Bennu on which Catherine Johnson is an instrument PI.
+
+
 ToDo
 ====
 
