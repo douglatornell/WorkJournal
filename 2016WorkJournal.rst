@@ -3219,9 +3219,27 @@ Updated salish & orcinus quick-start docs re: use of XIOS-ARCH files.
 Tue 6-Sep-2016
 ^^^^^^^^^^^^^^
 
+See project work journal.
+(GOMSS)
+
 Salish Sea team mtg; see whiteboard.
+Backfilled res_y2016m09d04.nc & res_y2016m09d05.nc.
 Continued dev of ONC CTD data ERDDAP dataset XML description.
 (SalishSea)
+
+
+Wed 7-Sep-2016
+^^^^^^^^^^^^^^
+
+Physio appt; continue towel stretches for range of motion & arm spread against resistance.
+
+Pulled conservative temperature and reference salinity boundary condition files into nowcast-sys/NEMO-forcing for nowcast-green to use & updated nowcast-green events table.
+Backfilled res_y2016m09d06.nc.
+Changed get_res.sh script to include 024 file that Dominik added on 05sep16.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
 
 
 Thu 8-Sep-2016
