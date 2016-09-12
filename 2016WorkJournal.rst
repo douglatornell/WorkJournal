@@ -3261,6 +3261,47 @@ Split Cindy's analysis notebooks out of the 2Gb limited analysis repo into a new
 Attended the dept. colloquium research carnival, including watching the launch of the OSIRIS-REX mission to Bennu on which Catherine Johnson is an instrument PI.
 
 
+Fri 9-Sep-2016
+^^^^^^^^^^^^^^
+
+Notified Dominik@EC that GEM2.5 research products failed on 8sep; he fixed the issue.
+Backfilled res_y2016m09d08.nc and res_y2016m09d09.nc.
+Finalized ONC CTD data notebook w/ working ERDDAP XML fragment generation code.
+Started development of get_onc_ctd worker.
+Updated salishsea-site-env on skookum.
+Cloned salishsea-site repo into /results/nowcast-sys/ on skookum.
+Tried to get salishsea-site pyramid app running on skookum but got hung up on an invalid host/port issue.
+Worked on testing get_onc_ctd worker in nowcast-vm.
+(SalishSea)
+
+Helped Melanie get SalishSeaTools package installed in her anaconda env.
+(GEOTRACES)
+
+See project work journal.
+(GOMSS)
+
+
+Sat 10-Sep-2016
+^^^^^^^^^^^^^^^
+
+Discovered that ERDAP requires a consistent time-base among all files in a dataset; so ONC CTD data files must be rebased; turns out to be easily done via the encoding arg of Dataset.to_netcdf().
+Ran get_onc_ctd SCVIP worker for all of 2016 to date.
+Integrated get_onc_ctd worker into automation to run after 06 weather download.
+Added SEVIP to get_onc_ctd and started backfill running it.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Sun 11-Sep-2016
+^^^^^^^^^^^^^^^
+
+get_onc_ctd worker ran in automation without problems!
+Continued backfill runs of get_onc_ctd SEVIP.
+(SalishSea)
+
+
 ToDo
 ====
 
