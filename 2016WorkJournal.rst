@@ -22,7 +22,7 @@ Mon 4-Jan-2016
 ^^^^^^^^^^^^^^
 
 Restarted nowcast mgr after end-of-day to enable automation of PMV feed.
-Finished enough implementation of run_NEMO36 worker that it should be able to run nowcast-green on salish; figured out how to paraeterize unit tests re: absolute paths in run description; lots of other unit tests need to be written.
+Finished enough implementation of run_NEMO36 worker that it should be able to run nowcast-green on salish; figured out how to parameterize unit tests re: absolute paths in run description; lots of other unit tests need to be written.
 (SalishSea)
 
 Created 2016 journal file and did catch-up summary of holidays work to end 2015 journal.
@@ -3298,8 +3298,11 @@ Sun 11-Sep-2016
 ^^^^^^^^^^^^^^^
 
 get_onc_ctd worker ran in automation without problems!
-Continued backfill runs of get_onc_ctd SEVIP.
+Continued backfill runs of get_onc_ctd SEVIP but things went wrong in May w/ >>900 samples per aggregation period
 (SalishSea)
+
+See project work journal.
+(GOMSS)
 
 
 ToDo
