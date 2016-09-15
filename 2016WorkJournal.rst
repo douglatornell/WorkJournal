@@ -3305,6 +3305,73 @@ See project work journal.
 (GOMSS)
 
 
+Week 37
+-------
+
+Mon 12-Sep-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Helped Melanie get seawater package installed in her anaconda env.
+Created file maps to migrate Melanie, Susan and Kyle to separate analysis repos.
+(GEOTRACES)
+
+Got salishsea-site pyramid app running on skookum; Friday's invalid host/port issue seems to have just disappeared.
+Created ticket requesting Charles add reverse proxy to apache config on skookum.
+Proxy works when I run app via pserve, but not when I run it via circus.
+Charles gave me sudo on skookum so that I can continue testing.
+On the bus in the evening learned of the change in config that waitress 1.0 brought.
+Started creating file map to move SalishSeaNowcast package from tools repo into its own repo.
+(SalishSea)
+
+Phys Ocgy seminar research carnival.
+
+Zack Powell visiting.
+
+Week 1 of Digital Photography Workflow course at Langara; intro and greyscale histograms.
+
+
+Tue 13-Sep-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Tried new waitress listen directive for salishsea-site app on skookum but no magic; need to experiment more in VM env.
+Worked on ONC CTD data; discovered NaN T&S produce NaN sample counts and that semi-borks ERDDAP; also discovered that xarray can't load tables - use pandas.read_csv() with crafted URL.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+Created file maps for analysis-melanie, analysis-kyle & analysis-susan.
+Helped Melanie start cloning analysis repo - hours!
+Split Kyle's analysis notebooks out of the 2Gb limited analysis repo into a new analysis-kyle repo.
+(GEOTRACES)
+
+Got quoted in ONC press release about new CANARIE funding: http://www.oceannetworks.ca/canarie-funding-supports-new-tools-big-data
+
+
+Wed 14-Sep-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Staff welcome back bbq.
+
+Code review session on Cindy's Hovmeuller diagram transect code.
+(MOAD)
+
+Split Melanie's analysis notebooks out of the 2Gb limited analysis repo into a new analysis-melanie repo.
+Helped Melanie w/ Python data structures.
+(GEOTRACES)
+
+Added workshop intro slides; helped Kelly get kDiff3 installed on Mac.
+Prepped etherpad.
+(swc)
+
+
 ToDo
 ====
 
