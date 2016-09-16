@@ -3372,6 +3372,26 @@ Prepped etherpad.
 (swc)
 
 
+Thu 15-Sep-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+EOAS colloquium by Chuck Kosman & Tom Yrex re: new EOAS web site, email system, and move to Active Directory auth for new services.
+
+
+Fri 16-Sep-2016
+^^^^^^^^^^^^^^^
+
+forecast2/15sep16 failed due to loss of shared storage connection on 17 or 18 VMs; reconnected in time for nowcast/16sep16.
+Removed James of nowcast email notifications list and restarted manager.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
 ToDo
 ====
 
