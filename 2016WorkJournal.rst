@@ -3328,6 +3328,8 @@ Started creating file map to move SalishSeaNowcast package from tools repo into 
 
 Phys Ocgy seminar research carnival.
 
+Started creation of spreadsheet version of EOAS timesheet.
+
 Zack Powell visiting.
 
 Week 1 of Digital Photography Workflow course at Langara; intro and greyscale histograms.
@@ -3390,6 +3392,53 @@ Removed James of nowcast email notifications list and restarted manager.
 
 See project work journal.
 (GOMSS)
+
+
+Sat 17-Sep-2016
+^^^^^^^^^^^^^^^
+
+Travel to Parksville to move Forth.
+
+Finished creation of spreadsheet version of EOAS timesheet.
+
+
+Sun 18-Sep-2016
+^^^^^^^^^^^^^^^
+
+Added extra content (especially workshop slide decks) to shell and hg lessons.
+Had to re-generate lots of PNG images (for hg lesson in particular) to use in slide decks.
+(swc)
+
+
+Week 38
+-------
+
+Mon 19-Sep-2016
+^^^^^^^^^^^^^^^
+
+Continued prep for workshop.
+Met w/ helpers and co-instructors.
+(swc)
+
+Restarted ERDDAP server with my new sudo powers when Nancy reported it was returning null pointer errors.
+Investigated ONC CTD datasets sample count NaNs and prototyped a solution.
+(SalishSea)
+
+Presented myself and ERDDAP at week 2 of Phys Ocgy research carnival.
+
+
+Tue 20-Sep-2016
+^^^^^^^^^^^^^^^
+
+EOAS 4th annual SWC workshop
+(swc)
+
+
+Wed 21-Sep-2016
+^^^^^^^^^^^^^^^
+
+EOAS 4th annual SWC workshop - best ever!
+(swc)
 
 
 ToDo
