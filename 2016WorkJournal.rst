@@ -3390,8 +3390,13 @@ forecast2/15sep16 failed due to loss of shared storage connection on 17 or 18 VM
 Removed James of nowcast email notifications list and restarted manager.
 (SalishSea)
 
+Registered HST/GST account with CRA.
+Invoiced Nordion for 8-Sep site visit.
+
 See project work journal.
 (GOMSS)
+
+Shadowfax to Mighty for new drivetrain.
 
 
 Sat 17-Sep-2016
@@ -3441,6 +3446,52 @@ EOAS 4th annual SWC workshop - best ever!
 (swc)
 
 
+Thu 22-Sep-2016
+^^^^^^^^^^^^^^^
+
+Emailed Greg re: workshop & Idalia's app for instructor training.
+Added my notes to attendees list.
+(swc)
+
+See project work journal.
+(GOMSS)
+
+
+Fri 23-Sep-2016
+^^^^^^^^^^^^^^^
+
+Sent invoice reminder.
+(Nordion)
+
+See project work journal.
+(GOMSS)
+
+
+Sat 24-Sep-2016
+^^^^^^^^^^^^^^^
+
+River discharge downloads failed on salish, so forecast2 run failed; salish and /data/ are unreachable.
+Finished file map to move SalishSeaNowcast package from tools repo into its own repo, and created the repo.
+Set up SalishSea-Nowcast project on readthedocs for SalishSeaNowcast package.
+Got nowcast system running again after loss of access to /data and salish restart; re-ran nowcast-green/23sep16 that was incomplete due to salish failure.
+Cleaned up SalishSeaNowcast README, hg tags, package names, namespace names, etc.
+Got salishsea-site pyramid app working in skookum by downgrading waitress to 0.9.0 from 1.0 because chassette doesn't support the changes in 1.0.
+(SalishSea)
+
+
+Sun 25-Sep-2016
+^^^^^^^^^^^^^^^
+
+Ran nowcast-green/24sep16 that was delayed due to recent salish failure.
+Re-ran 23sep16 comparison plots that couldn't run until nowcast-green/23sep16 finiished.
+Started migrating SalishSeaNowcast issues from tools repo tracker to SalishSeaNowcast tracker.
+Added nowcast3-env provisioning to nowcast-vm.
+Got docs to build in SalishSeaNowcast NEMO_Nowacst branch.
+Added enough config and an empty next_workers module so that system could be launched via circus in the VM.
+Started updating docs in NEMO_Nowcast branch.
+(SalishSea)
+
+
 ToDo
 ====
 
@@ -3457,5 +3508,3 @@ ToDo
 * JSON logging use example notebook
 
 * review remaining nosy PRs
-
-* update darktable and zeal for 16.04
