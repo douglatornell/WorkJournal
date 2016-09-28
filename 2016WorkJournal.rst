@@ -3492,6 +3492,34 @@ Started updating docs in NEMO_Nowcast branch.
 (SalishSea)
 
 
+Week 39
+-------
+
+Mon 26-Sep-2016
+^^^^^^^^^^^^^^^
+Backfilled 16-20 & 25-26 Sep GEM2.5km research forecast downloads.
+Set up SalishSeaNowcast NEMO_Nowcast dev env on niko.
+Started downloading ONC-CTD data again in a tmux session on skookum (working backward in time) to deal with the NaN sample count issue.
+(SalishSea)
+
+Migrated EOAS email to Exchange and set up Gmail client on my phone to access it.
+Set up Thunderbird on niko to access Exchange.
+
+
+Tue 27-Sep-2016
+^^^^^^^^^^^^^^^
+
+Enable folder syncing between Exchange server and Thunderbird on niko.
+Started folderizing EOAS email via Thunderbird on niko.
+
+Created analysis-tereza repo.
+Continued updating docs in NEMO_Nowcast branch.
+Set up PyCharm project & VM for SalishSeaNowcast on niko.
+Salish Sea team mtg; see whiteboard; Tereza joined the team.
+(SalishSea)
+
+
+
 ToDo
 ====
 
