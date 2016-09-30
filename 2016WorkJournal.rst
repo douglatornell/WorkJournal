@@ -3516,8 +3516,80 @@ Created analysis-tereza repo.
 Continued updating docs in NEMO_Nowcast branch.
 Set up PyCharm project & VM for SalishSeaNowcast on niko.
 Salish Sea team mtg; see whiteboard; Tereza joined the team.
+Continued downloading ONC-CTD data again in a tmux session on skookum (working backward in time) to deal with the NaN sample count issue.
 (SalishSea)
 
+
+Wed 28-Sep-2016
+^^^^^^^^^^^^^^^
+
+Some EAOS machines and sites disappeared for several hours due to an DNS issue.
+
+Discussed approach to ONC re: west.cloud resources w/ Susan and helped her write the email.
+Continued downloading ONC-CTD data again in a tmux session on skookum (working backward in time) to deal with the NaN sample count issue.
+Manually re-ran forecast2 publish plots that failed (perhaps due to DNS issue?).
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Thu 29-Sep-2016
+^^^^^^^^^^^^^^^
+
+Set up Thunderbird for EOAS mail on kudu.
+Emailed Chuck@EOAS about learning Git.
+
+Reviewed ONC-CTD central node data back to 2014-09-01; the feed transitions from per-minute to per-second on 2015-09-01.
+Continued downloading ONC-CTD east node data; big gap for most of Apr-2016, and feed transitions from per-minute to per-second on 2016-05-04.
+Started porting download_weather worker into NEMO_Nowcast framework; profiling revealed that it is >3x faster than old worker (for off-peak downloads).
+(SalishSea)
+
+Used Firefox dev tools to profile Maps page loading to investigate Jackie's report of times as long as 10 minutes (!!):
+Production server:
+  * 1st load: 43 requests, 1249.31 kb, 71.71 s
+    * all_capitals: 17.37 kb transferred = 251.04 kb uncompressed, 68542 ms
+    * css & js assets all cached
+    * a few mapbox tiles cached, the rest ranged from 41 ms to 519 ms, mostly 100-200 ms
+  * awesome bar refresh: 51 requests, 1104.83 kb, 74.91 s
+    * all_capitals: 17.57 kb transferred = 251.04 kb uncompressed, 71155 ms
+    * css & js assets requested; all returned 304
+Dev VM:
+  * 1st load: 37 requests, 1272.57 kb, 6.83 s
+    * all_capitals: 17.66 kb transferred = 250.05 kb uncompressed, 3804 ms
+    * css & js assets partially cached
+    * a few mapbox tiles cached, the rest ranged from 58 ms to 212 ms, mostly <100 ms
+  * awesome bar refresh: 53 requests, 870.56 kb, 6.84 s
+    * all_capitals: 17.59 kb transferred = 250.05 kb uncompressed, 3822 ms
+    * css & js assets requested; all returned 304
+Production server:
+  * Start -> Maps:
+    * restarted postgres, nginx, and app
+    * 16 requests, 752.22 kb 72.41 s
+    * all_capitals: 17.38 kb transferred = 251.04 kb uncompressed, 70184 ms
+    * everything else was cached
+  * reload Maps via awesome bar refresh while watching top:
+    * lots of time in pserve, some in postgres
+    * 51 requests, 1570.07 kb, 76.86 s
+    * all_capitals: 17.51 kb transferred = 251.04 kb uncompressed, 73690 ms
+    * css & js assets requested; all returned 304
+Queries:
+  * Start 10
+  * Maps 970
+  * Analysis 374
+  * Compare 222
+  * Profile 88
+(SealinkD)
+
+See project work journal.
+(GOMSS)
+
+
+Fri 30-Sep-2016
+^^^^^^^^^^^^^^^
+
+Continued profiling new download_weather worker; speed-up is mostly due to session reuse..
+(SalishSea)
 
 
 ToDo
