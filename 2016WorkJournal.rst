@@ -3588,8 +3588,12 @@ See project work journal.
 Fri 30-Sep-2016
 ^^^^^^^^^^^^^^^
 
-Continued profiling new download_weather worker; speed-up is mostly due to session reuse..
+Continued profiling new download_weather worker; speed-up is mostly due to session reuse.
+Tested new download_weather worker in combat for 12 forecast; scheduled launch failed, manual run gets stuck in back-off and retry loop after awaited download succeeds; found and fixed the bug.
 (SalishSea)
+
+Helped Elise sort out how to use f2py3 to build Pyton 3 wrappers for fortran modules.
+Tried to help Tereza build XIOS, but there is somthing wrong re: tools/archive.
 
 
 ToDo
