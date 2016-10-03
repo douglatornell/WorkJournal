@@ -3431,6 +3431,8 @@ Investigated ONC CTD datasets sample count NaNs and prototyped a solution.
 
 Presented myself and ERDDAP at week 2 of Phys Ocgy research carnival.
 
+Week 2 of Digital Photography Workflow course at Langara.
+
 
 Tue 20-Sep-2016
 ^^^^^^^^^^^^^^^
@@ -3504,6 +3506,8 @@ Started downloading ONC-CTD data again in a tmux session on skookum (working bac
 
 Migrated EOAS email to Exchange and set up Gmail client on my phone to access it.
 Set up Thunderbird on niko to access Exchange.
+
+Week 3 of Digital Photography Workflow course at Langara; ISO noise, JPEG compression, sorting, technical adjustments, cropping.
 
 
 Tue 27-Sep-2016
@@ -3589,11 +3593,82 @@ Fri 30-Sep-2016
 ^^^^^^^^^^^^^^^
 
 Continued profiling new download_weather worker; speed-up is mostly due to session reuse.
-Tested new download_weather worker in combat for 12 forecast; scheduled launch failed, manual run gets stuck in back-off and retry loop after awaited download succeeds; found and fixed the bug.
+Tested new download_weather worker in combat for 12 forecast; scheduled launch failed, manual run gets stuck in back-off and retry loop after awaited download succeeds; found and fixed the bug during 18 forecast download, which was successfully launched by scheduler.
 (SalishSea)
 
 Helped Elise sort out how to use f2py3 to build Pyton 3 wrappers for fortran modules.
 Tried to help Tereza build XIOS, but there is somthing wrong re: tools/archive.
+
+
+Sat 1-Oct-2016
+^^^^^^^^^^^^^^
+
+Set up unit test environment on nowcast-vm for SalishSeaNowcast dev.
+Manually re-ran make_plots comparison for 29sep nowcast & publish for 30sep nowcast;
+Susan started to investigate Sandheads wind observations XML parsing issue and confirmed that obs are available.
+Susan ran 30sep NEMO-3.6 nowcast blue (physics only; rc1 for nowcast production upgrade) on salish using 3x5+1 MPI decomposition; 2h1m for computations, 4m for restart rebuild, netcdf4 deflation, and results clean-up.
+Started trying to test NEMO-3.6 nowcast blue on west.cloud:
+* struggled with clone repos on to sshfs-mounted MEOPAR filesystem; way too slow
+* cloned repos into /mnt/MEOPAR, then stopped until tomorrow morning
+* built XIOS-1.0r
+* built NEMO-3.6r
+* used 8x17+1 MPI decomposition
+*
+Tried to replicate Tereza's problems w/ building XIOS, but can't; okay on salish, no mpicc on oven
+Fixed paths in working on salish XIOS build docs.
+Did lots of maintenance on salishsea static site; added Tereza, fixed broken & redirect links, added citation for Soontiens & Allen mixing paper.
+Cherry-picked changesets from tools repo into SalishSeaNowcast repo with `hg export -R ../tools -r | hg import -p2 -e -` to minimize transcription and preserve commit metadata.
+Updated unit tests for download_weather worker in NEMO_Nowcast branch
+Added unit tests for next_workers module.
+Started documenting and building nemo_nowcast-env on skookum and conda went weird with installation problems.
+download_weather 00 worker failed due to messed up nowcast-env; 1st clue that everything had come crashing down.
+Deleted anaconda and miniconda3 from $HOME, and all envs in /results/nowcast-sys.
+Re-installed minconda3, recreated /results/nowcast-sys/nowacst-env, started message broker and manager, and manually launched download_weather 00 worker.
+(SalishSea)
+
+
+Sun 2-Oct-2016
+^^^^^^^^^^^^^^
+
+Continued trying to test NEMO-3.6 nowcast blue on west.cloud:
+* built XIOS-1.0 at svn r648 in /mnt/MEOPAR/
+* built NEMO-3.6 at svn r6036 in /mnt/MEOPAR/
+* copied XIOS-1.0 and NEMO-3.6 dirs to sshfs-mounted $HOME/MEOPAR
+* un-mounted and re-mounted $HOME/MEOPAR sshfs on all nodes
+* used 8x17+1 MPI decomposition
+* after lots of namelist and run script thrashing, got the run going, ETA 1h
+* xios server runs on node 0 along with 8 nemo processes
+* got xios to run by itself on node 17 with: ${MPIRUN} -np 136 ./nemo.exe : -host 192.168.1.79 -np 1 xios_server.exe
+* other things to try:
+  * --bind-to-core
+Discovered how many conda envs were in use as things failed through the night and this morning:
+* ecget
+* onc_adcp
+Created new ecget conda env for salish cron jobs to use and confirmed that it works by manually running Fraser and Englishman cron scripts to get 1oct discharges.
+Manually re-ran workers:
+* make_runoff_file
+* get_onc_ctd for SCVIP & SEVIP nodes
+* corrected spelling of ONC_USER_TOKEN envvar and restarted manager
+* salishsea gather for nowcast-green/01oct16
+* download_results for forecast/01oct16
+Finished SalishSeaNowcast environment set-up on skookum and wrote deployment docs.
+Started porting grib_to_netcdf worker into NEMO_Nowcast framework.
+(SalishSea)
+
+
+October
+=======
+
+Week 40
+-------
+
+Mon 3-Oct-2016
+^^^^^^^^^^^^^^
+
+Continued porting grib_to_netcdf worker into NEMO_Nowcast framework.
+(SalishSea)
+
+Week 4 of Digital Photography Workflow course at Langara; still-life studio shoot.
 
 
 ToDo
