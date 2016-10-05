@@ -3665,10 +3665,33 @@ Week 40
 Mon 3-Oct-2016
 ^^^^^^^^^^^^^^
 
+Applied network interface setting recommended by Eric@uvic in Apr-2015 to west.cloud nowcast VMs:
+/sbin/ethtool -K eth0 tso on ufo on gso on gro on sg on
 Continued porting grib_to_netcdf worker into NEMO_Nowcast framework.
+Got 12h nowacst-blue run to complete on west.cloud; 7*18+1, 5e6 XIOS buffer, no gather, 27m13s.
+Helped Susan get nowcast-green running after change to conservative temperature for rivers runoff.
 (SalishSea)
 
+Participated in workouts planning mtg.
+(swc)
+
+Phys ocgy seminar by Dan Robb on meshless Lagrangian modeling for ice jams & debris flows.
+
+Mtg w/ Stephanie & Jackie.
+(sealinkd)
+
 Week 4 of Digital Photography Workflow course at Langara; still-life studio shoot.
+
+
+Tue 4-Oct-2016
+^^^^^^^^^^^^^^
+
+
+Continued porting grib_to_netcdf worker into NEMO_Nowcast framework.
+Got 24h nowacst-blue run to complete on west.cloud; 7*18+1, 2.5e7 XIOS buffer, no gather, 51m56s.
+Helped Terza get NEMO-3.4 GYRE running on halibut.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
 
 
 ToDo
