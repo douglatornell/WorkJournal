@@ -3677,7 +3677,8 @@ Participated in workouts planning mtg.
 
 Phys ocgy seminar by Dan Robb on meshless Lagrangian modeling for ice jams & debris flows.
 
-Mtg w/ Stephanie & Jackie.
+Mtg w/ Stephanie & Jackie; discussed  data updates, Maps page load time variations, scaling, future development.
+Agreed to data update in January, data gathering by SCARP for me to email UBC with re: loading time.
 (sealinkd)
 
 Week 4 of Digital Photography Workflow course at Langara; still-life studio shoot.
@@ -3686,11 +3687,56 @@ Week 4 of Digital Photography Workflow course at Langara; still-life studio shoo
 Tue 4-Oct-2016
 ^^^^^^^^^^^^^^
 
-
 Continued porting grib_to_netcdf worker into NEMO_Nowcast framework.
-Got 24h nowacst-blue run to complete on west.cloud; 7*18+1, 2.5e7 XIOS buffer, no gather, 51m56s.
+Got 24h nowcast-blue run to complete on west.cloud; 7*18+1, 2.5e7 XIOS buffer, no gather, 51m56s, ~8Gb memory.
 Helped Terza get NEMO-3.4 GYRE running on halibut.
 Salish Sea team mtg; see whiteboard.
+Started 24h nowcast-blue run; 7*18+1, 3.75e7 XIOS buffer; memory looks like ~10Gb.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Wed 5-Oct-2016
+^^^^^^^^^^^^^^
+
+Analyzed 24h nowcast-blue run; 7*18+1, 3.75e7 XIOS buffer; no gather; 49m25s, no improvement in XIOS performance ratio vs. 2.5e7 buffer.
+Accept system config dict as argument to ``next_workers.after_*()`` functions.
+Started benchmarking rebuild_nemo for restart files, and ``ncks -4 -L4`` w/ copy to another directory for results and restart files on west.cloud; see notebook & Google spreadsheet.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Thu 6-Oct-2016
+^^^^^^^^^^^^^^
+
+Added "slow loading time" notice banner to site.
+Set up UptimeRobot monitor for Maps page every 15 minutes, and created public monitoring page (new feature today) that I shared with Jackie & Stephanie.
+(sealinkd)
+
+See project work journal.
+(GOMSS)
+
+Finished benchmarking ``ncks -4 -L4`` in-place for results and restart files on west.cloud; see notebook & Google spreadsheet.
+(SalishSea)
+
+
+Fri 7-Oct-2016
+^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Researched how to get time-stamped log message out of salishsea command processor; --log-file should do it.
+Re-ran nowcast-blue/01oct16 on west.cloud to get a new set of raw results & restart files to use for profiling salishsea gather/combine.
+Running salishsea gather with --log-file allowed me to confirm that it rebuilds and deflates with timings similar to my benchmark measurements; so either it behaves differently when run in a subprocess, or the holdup happens after deflation, in deletion of symlinks, or deletion of temporary working directory (which is not happening).
+Finished porting grib_to_netcdf worker into NEMO_Nowcast framework; got logging sorted out, got wgrib2 executable from skookum to work on dev VM, and used a logging handler config to define the storage location for the weather forecast checking image.
+Started creating a new process flow diagram and linked it into the docs.
+Moved old unit test module to v2_tests so that NEMO_Nowcast-based system can be tested as a package.
+Ported make_runoff_file worker into NEMO_Nowcast framework.
 (SalishSea)
 
 
