@@ -3740,6 +3740,46 @@ Ported make_runoff_file worker into NEMO_Nowcast framework.
 (SalishSea)
 
 
+Sat 8-Oct-2016
+^^^^^^^^^^^^^^
+
+Travel to Parksville for Thanksgiving and to empty Forth
+
+
+Sun 9-Oct-2016
+^^^^^^^^^^^^^^
+
+In Parksville for Thanksgiving and to empty Forth
+
+Ported get_NeahBay_ssh worker into NEMO_Nowcast framework.
+(SalishSea)
+
+
+Week 41
+-------
+
+Mon 10-Oct-2016
+^^^^^^^^^^^^^^^
+
+**Thanksgiving Day** - traveled home form Parksville
+
+Expanded nowcast process flow docs.
+Started porting upload_forcing and make_forcing_links workers to NEMO_Nowcast framework.
+(SalishSea)
+
+
+Tue 11-Oct-2016
+^^^^^^^^^^^^^^^
+
+Participated in Westgrid townhall mtg; news about object storage, new systems, decommissioning, and RAC process; overall rather unsatisfying.
+Finished porting upload_forcing and make_forcing_links workers to NEMO_Nowcast framework.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+Listened to SWC lesson maintainers video call.
+(swc)
+
+
 ToDo
 ====
 
