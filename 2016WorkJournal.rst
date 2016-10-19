@@ -3780,6 +3780,48 @@ Listened to SWC lesson maintainers video call.
 (swc)
 
 
+Week 42
+-------
+
+Mon 17-Oct-2016
+^^^^^^^^^^^^^^^
+
+Woke up to find that overnight nowcast automation **all just worked** :-)
+Michael Dunphy joined MOAD.
+Fixed calculation of restart timestep for forecast runs prep in nowcast.
+Manually ran v2 make_plots publish worker for forecast & forecast2 15 & 16 oct, and research for nowcast for same days.
+Manually ran v2 make_site_page worker for nowcast, forecast & forecast2, publish, research & comparison pages for 15 & 16 oct.
+Manually ran sphinx_build & rsync_to_web workers to push 15 & 16 oct figures pages to web.
+Manually ran post-processing workers for 17oct runs.
+Update nowcast results page with notes about move to NEMO-3.6.
+Moved NEMO-3.6-code repo forward to r6204:
+* Pulled changesets to 395:7914a357d7b3 from NEMO-3.6-r6204 on Bitbucket; that left behind Susan XIOS2 changes because we found that XIOS2 is slower than XIOS1
+* Merged NEMO-3.6-code changes since NEMO-3.6-r6204 tag into NEMO-3.6-mirror-merge at on niko, tagged it as NEMO-3.6r6204-ubc, and pushed to NEMO-3.6-code on Bitbucket
+Started moving NEMO-3.6-code repo forward to r6459
+* Pulled changesets 6205 through 6287 into NEMO-3.6-hg-mirror on salish.
+(SalishSea)
+
+Workout session on publication figures by Ben & Nancy.
+(swc)
+
+Phys ocgy seminar by Melanie about Arctic circulation from Th-230 isotope sampling.
+
+
+Tue 18-Oct-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Continued moving NEMO-3.6-code repo forward to r6459
+* Pulled changesets 6303 through 6459 into NEMO-3.6-hg-mirror on salish.
+* Merged NEMO-3.6-hg-mirror into NEMO-3.6-mirror-merge on niko.
+* Tagged NEMO-3.6-r6459 in NEMO-3.6-mirror-merge and pushed to new NEMO-3.6-r6459 repo on Bitbucket for Elise to use for merge-comparison test.
+Got salishsea site Pyramid app running again, and added a quickly hacked view to it to render files from the /results/nowcast-sys/logs/nowcast/ directory.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+
 ToDo
 ====
 
