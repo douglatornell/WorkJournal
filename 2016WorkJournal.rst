@@ -3774,10 +3774,81 @@ Tue 11-Oct-2016
 Participated in Westgrid townhall mtg; news about object storage, new systems, decommissioning, and RAC process; overall rather unsatisfying.
 Finished porting upload_forcing and make_forcing_links workers to NEMO_Nowcast framework.
 Salish Sea team mtg; see whiteboard.
+Draft response to Ryan@ONC re: Empower project user stories, and sent it to Susan for buffing.
 (SalishSea)
 
 Listened to SWC lesson maintainers video call.
 (swc)
+
+
+Wed 12-Oct-2016
+^^^^^^^^^^^^^^^
+
+Physio appt.
+Replaced Keen boots with broken sole.
+Shadowfax is still not ready.
+
+Handled off-line ONC SCVIP node in nowcast automation.
+Sent response to Ryan@ONC re: Empower project user stories.
+Manually ran make_plots and make_stie_page workers to catch-up nowcast comparison and publish pages due to SCVIP node issue; Sandheads winds issue appears to have been resolved.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Thu 13-Oct-2016
+^^^^^^^^^^^^^^^
+
+Added launch of make_forcing_links for nowcast-green from grib_to_netcdf to next_workers.
+Started porting run_NEMO36 worker to NEMO_Nowcast framework as run_NEMO.
+Set up /results/nowcast-sys/runs dir on skookum for shift to NEMO_Nowcast framework.
+Started setting up MEOPAR/nowcast-sys/runs dir on west.cloud for shift to NEMO_Nowcast framework.
+(SalishSea)
+
+
+Fri 14-Oct-2016
+^^^^^^^^^^^^^^^
+
+Finished porting run_NEMO36 worker to NEMO_Nowcast framework as run_NEMO for nowcast-green runs.
+Modified run_NEMO for nowcast & forecast runs on west.cloud.
+Finished setting up MEOPAR/nowcast-sys/runs dir and nemo_nowcast-env on west.cloud for shift to NEMO_Nowcast framework.
+Ported watch_NEMO worker to NEMO_Nowcast framework.
+**1st storm surge alert of the season**
+Fixed bug in make_feeds worker re: too many args in _generate_feed_entry() call.
+Re-ran nowcast-green run that failed due to salish loosing network connectivity again.
+(SalishSea)
+
+
+Sat 15-Oct-2016
+^^^^^^^^^^^^^^^
+
+Started porting download_results worker to NEMO_Nowcast framework.
+Disabled GEM2.5/research/get_res.cron.sh job.
+1st production test of SalishSeaNowcast package:
+* Disabled weather download cron jobs
+* Stopped v2 manager & message broker processes on skookum
+* Changed v3 config on skookum and west.cloud to use skookum.eos.ubc.ca as zmq server
+* Changed v3 config on skookum and west.cloud to use zmq ports 5554 (manager) and 5555 (workers)
+* Restarted message_broker, manager, and scheduler on skookum
+* Uploaded nowcast-green/14oct16/namelist_cfg to nowcast/14oct16/ on west.cloud
+* Uplodaed nowcast-green/14oct16/restart to nowcast/14oct16/ on west.cloud
+* scheduler failed to launch download_weather worker; ran in manually
+* config key spelling bug in get_NeahBay_ssh worker; fixed and re-ran manually
+* config lookup missing forcing level in upload_forcing worker; fixed and re-ran manually
+* ssh launch of run_NEMO worker on west.cloud lacks NOWACST_LOGS and NOWCAST_ENV envvars
+* NEMO_Nowcast manager didn't know how to handle log and need messages; hacked it in
+* getting coordinates from config instead of implicitly from forcing config in run description doesn't work across hosts
+* getting bathymetry from "run types" config might not be appropriate for multi-host ops
+(SalishSea)
+
+
+Sun 16-Oct-2016
+^^^^^^^^^^^^^^^
+
+Finished porting download_results worker to NEMO_Nowcast framework.
+Worked on resolving issues identified during yesterday's production testing, and getting automation fully operational.
+(SalishSea)
 
 
 Week 42
