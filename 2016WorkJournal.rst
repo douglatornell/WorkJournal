@@ -3859,7 +3859,7 @@ Mon 17-Oct-2016
 
 Woke up to find that overnight nowcast automation **all just worked** :-)
 Michael Dunphy joined MOAD.
-Fixed calculation of restart timestep for forecast runs prep in nowcast.
+Fixed calculation of restart timestep for forecast2 runs prep in nowcast.
 Manually ran v2 make_plots publish worker for forecast & forecast2 15 & 16 oct, and research for nowcast for same days.
 Manually ran v2 make_site_page worker for nowcast, forecast & forecast2, publish, research & comparison pages for 15 & 16 oct.
 Manually ran sphinx_build & rsync_to_web workers to push 15 & 16 oct figures pages to web.
@@ -3890,7 +3890,20 @@ Continued moving NEMO-3.6-code repo forward to r6459
 * Tagged NEMO-3.6-r6459 in NEMO-3.6-mirror-merge and pushed to new NEMO-3.6-r6459 repo on Bitbucket for Elise to use for merge-comparison test.
 Got salishsea site Pyramid app running again, and added a quickly hacked view to it to render files from the /results/nowcast-sys/logs/nowcast/ directory.
 Salish Sea team mtg; see whiteboard.
+Paired with Susan on another try to resolve the run_NEMO worker restart timestep calculation bug for forecast2 runs.
 (SalishSea)
+
+
+Wed 19-Oct-2016
+^^^^^^^^^^^^^^^
+
+Pulled the run_NEMO worker restart timestep calculation bug for forecast2 runs bug-fixes onto west.cloud and re-ran the forecast2/18oct16 run.
+Experimented with stdout/stderr redirection in qsub-ed SalishSeaNEMO.sh script on salish for nowcat-green; seems to work well.
+Updated NEMO_Nowcast pkg on skookum to v1.2 re: manager need & log message handling.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
 
 
 ToDo
