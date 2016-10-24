@@ -3906,6 +3906,73 @@ See project work journal.
 (GOMSS)
 
 
+Thu 20-Oct-2016
+^^^^^^^^^^^^^^^
+
+Ordered 24" BenQ monitor for home desk and 1Tb portable drive for photography from NCIX.
+
+Discussed LiveOcean boundary conditions code w/ Nancy.
+Cleaned up vestigial u prefixes on string literals in SalishSeaNowcast.
+Added stdout/stderr rediection to nowcast SalishSeaNEMO.sh script regardless of compute host.
+Added clear_checklist and rotate_logs logs workers to nowcast automation.
+Started porting make_plots worker in SalishSeaNowcast.
+Attended Tetiyana Ross's EOAS colloquium about broadband acoustic measurements in the ocean.
+Helped Tereza with ssh config.
+Did a config reload on the manager to inform it of the clear_checklist and rotate_logs workers.
+(SalishSea)
+
+Helped Melanie restructure her code for reading profiles from WOD into a list of panadas dataframes so that she can concatenate them.
+(GEOTRACES)
+
+
+Fri 21-Oct-2016
+^^^^^^^^^^^^^^^
+
+get_NeahBay_ssh worker had issues getting data from NOAA site that caused it to finish after grib_to_netcdf, so upload_forcing had to patch the ssh obs file. But then make_forcing lists for forecast2 didn't launch. Re-ran get_NeahBay_ssh manually and it hung waiting for an acknowledgment from the manager. Restarted the manager, ran upload_forcing forecast2 manually, and the automation resumed, starting forecast2 run at 08:30.
+clear_checklist worker failed with a KeyError.
+Restarted ERDDAP server due to lots of errors reported.
+Various failures in make_plot, presumably due to global DNS DDOS.
+Started porting make_plots worker to NEMO_Nowcast framework.
+(SalishSea)
+
+Helped Karina sort out her messed up Anaconda env; ended up re-installing.
+
+See project work journal.
+(GOMSS)
+
+Re-organized my desk at home to add 24" monitor to my setup.
+
+Helped Saurav get SalishSeaTools installed.
+
+
+Sat 22-Oct-2016
+^^^^^^^^^^^^^^^
+
+Fraser river discharge download failed due to DNS DDOS; re-ran download, make_runoff_file worker, and upload_forcing worker to restart automation for forecast2 run.
+Fixed indentation error in config file that was causing clear_checklist worker to fail.
+Worked with Susan to test her operating the nowcast system as proof of anyone in the sallen group being able to; almost there - see issue #17.
+Continued porting make_plots worker to NEMO_Nowcast framework.
+(SalishSea)
+
+Silenced HTML parser warning from BeautifulSoup in ECget.
+(SOG)
+
+
+Sat 22-Oct-2016
+^^^^^^^^^^^^^^^
+
+Fraser river discharge download failed due to DNS DDOS; re-ran download, make_runoff_file worker, and upload_forcing worker to restart automation for forecast2 run.
+Network connections to west.cloud failed; no obvious reason, so sent email to support@westgrid.
+Continued porting make_plots worker to NEMO_Nowcast framework.
+Changed NEMO_Nowcast manager to pass system state checklist to next_workers.after_*() functions.
+Deployed make_plots worker for publish figures.
+Added passing of run date from make_forcing_links worker to run_NEMO worker to facilitate back-fill runs and recovery for other automation failures.
+(SalishSea)
+
+Picked up Shadowfax from Mighty (finally!) and the chain broke on the way home.
+
+
+
 ToDo
 ====
 
