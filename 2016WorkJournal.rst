@@ -3958,7 +3958,7 @@ Silenced HTML parser warning from BeautifulSoup in ECget.
 (SOG)
 
 
-Sat 22-Oct-2016
+Sun 23-Oct-2016
 ^^^^^^^^^^^^^^^
 
 Fraser river discharge download failed due to DNS DDOS; re-ran download, make_runoff_file worker, and upload_forcing worker to restart automation for forecast2 run.
@@ -3970,6 +3970,15 @@ Added passing of run date from make_forcing_links worker to run_NEMO worker to f
 (SalishSea)
 
 Picked up Shadowfax from Mighty (finally!) and the chain broke on the way home.
+
+
+Tue 25-Oct-2016
+^^^^^^^^^^^^^^^
+
+Fraser river discharge download failed due to DNS DDOS; re-ran download, make_runoff_file worker, and upload_forcing worker to restart automation for forecast2 run.
+Found and fixed bug in stderr/stdout redirection in NEMO run script that was causing nowcast-green runs to fail during restart rebuilds; manually launched nowcast-green/24oct16.
+DNS DDOS finally let me get make_plots publish runs up to 24oct16.
+(SalishSea)
 
 
 
