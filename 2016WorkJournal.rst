@@ -3981,6 +3981,22 @@ DNS DDOS finally let me get make_plots publish runs up to 24oct16.
 (SalishSea)
 
 
+Week 43
+-------
+
+Mon 24-Oct-2016
+^^^^^^^^^^^^^^^
+
+Forgot to update NEMO_Nowcast package on salish, so after_download_weather() failed due to lack of checklist; manually re-ran make_runoff_file, get_NeahBay_ssh, and grib_to_netcdf workers for 23oct16.
+Network connections to west.cloud restored; manually re-ran upload_forcing and make_forcing_links workers for nowcast/23oct16 run to get automation restarted; forecast/23oct16 followed it automatically, make_plots worker launched for publish plots but is failing with a DNS error (presumably due to ongoing DNS DDOS).
+Met w/ Susan & Nancy to discuss details of how we will use LiveOcean model product to produce boundary conditions for nowcast and research runs.
+Worked on cleaning up logs/nowcast/ view in salishsea-site.
+(SalishSea)
+
+Phys Ocgy seminary by Tereza about DMS in the Arctic on the 2015 GEOTRACES cruise.
+
+Whiteboard session with Saurav, Birgit & Terza about storage and ssh.
+
 
 ToDo
 ====
