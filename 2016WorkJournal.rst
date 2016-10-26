@@ -3972,15 +3972,6 @@ Added passing of run date from make_forcing_links worker to run_NEMO worker to f
 Picked up Shadowfax from Mighty (finally!) and the chain broke on the way home.
 
 
-Tue 25-Oct-2016
-^^^^^^^^^^^^^^^
-
-Fraser river discharge download failed due to DNS DDOS; re-ran download, make_runoff_file worker, and upload_forcing worker to restart automation for forecast2 run.
-Found and fixed bug in stderr/stdout redirection in NEMO run script that was causing nowcast-green runs to fail during restart rebuilds; manually launched nowcast-green/24oct16.
-DNS DDOS finally let me get make_plots publish runs up to 24oct16.
-(SalishSea)
-
-
 Week 43
 -------
 
@@ -3996,6 +3987,19 @@ Worked on cleaning up logs/nowcast/ view in salishsea-site.
 Phys Ocgy seminary by Tereza about DMS in the Arctic on the 2015 GEOTRACES cruise.
 
 Whiteboard session with Saurav, Birgit & Terza about storage and ssh.
+
+
+Tue 25-Oct-2016
+^^^^^^^^^^^^^^^
+
+Fraser river discharge download failed due to DNS DDOS; re-ran download, make_runoff_file worker, and upload_forcing worker to restart automation for forecast2 run.
+Found and fixed bug in stderr/stdout redirection in NEMO run script that was causing nowcast-green runs to fail during restart rebuilds; manually launched nowcast-green/24oct16.
+DNS DDOS finally let me get make_plots publish runs up to 24oct16.
+Finished cleaning up logs/nowcast/ view in salishsea-site, and set up unit test framework for views.
+Started development of nowcast publish figures page view.
+(SalishSea)
+
+Installed new chain on Shadowfax and tweaked derailleur alignment, then rode it to UBC :-)
 
 
 ToDo
