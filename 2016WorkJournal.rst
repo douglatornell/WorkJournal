@@ -3997,9 +3997,50 @@ Found and fixed bug in stderr/stdout redirection in NEMO run script that was cau
 DNS DDOS finally let me get make_plots publish runs up to 24oct16.
 Finished cleaning up logs/nowcast/ view in salishsea-site, and set up unit test framework for views.
 Started development of nowcast publish figures page view.
+Salish Sea team mtg; see whiteboard.
+Charles changed upstream DNS server for skookum & salish from UBC to EOAS, and overnight automation (including figures) completed smoothly :-)
 (SalishSea)
 
 Installed new chain on Shadowfax and tweaked derailleur alignment, then rode it to UBC :-)
+
+
+Wed 26-Oct-2016
+^^^^^^^^^^^^^^^
+
+Reviewed ERDDAP daily report; atmospheric forcing dataset is up to date, but not model results.
+Emailed Dominik about duplication of effort between he and us if his files are from same source as EC datamart.
+Suppressed key_vectopt_loop cpp key in SOG(SMELT) config as Michael did for SalishSea config.
+Pulled NEMO-3.6-code r6204+ on salish and did a clean build of the SOG(SMELT) config.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+Restarted app, postgres, mysql & nginx and saw a Maps page load time improvement from ~65s to ~10s, but that later degraded to ~60s again, though Stephanie reported ~60s intially and ~5s on subsequent requests.
+(sealinkd)
+
+
+Thu 27-Oct-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Maps page load time at 08:30 ~60s intially and ~5s on subsequent requests (like Stephanie's report from yesterday). Also noted a cluster of alternating POST/GET hits from 74.142.146.84 with agent "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko"; address geolocates to Hamilton, OH.
+(sealinkd)
+
+Results directories disappeared from west.cloud :-(
+Discussed tide file changes w/ Nancy.
+Created NEMO-Cmd repo by extracting SalishSeaCmd package from tools repo (see GoMSS project work journal).
+(SalishSea)
+
+
+Fri 28-Oct-2016
+^^^^^^^^^^^^^^^
+
+Improved handling of deployment ssh key in SalishSeaNowcast to move closer to anyone-runnability re: issue #17.
+Closed issue #15 re: PSU/TEOS-10 conversions in figures; Susan fixed it last weekend.
+(SalishSea)
 
 
 ToDo
