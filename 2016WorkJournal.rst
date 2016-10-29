@@ -4040,7 +4040,11 @@ Fri 28-Oct-2016
 
 Improved handling of deployment ssh key in SalishSeaNowcast to move closer to anyone-runnability re: issue #17.
 Closed issue #15 re: PSU/TEOS-10 conversions in figures; Susan fixed it last weekend.
+Continued work on salishsea-site nowcast publish figures page view; site is now styled with Bootswatch-3.3.7 Superhero theme, like Sphinx generated pages.
+Discussed salishsea prepare changes for directory flexibility & exclusion of land processors w/ Michael.
 (SalishSea)
+
+Helped Mesdes with her WRF build and running it on orcinus.
 
 
 ToDo
