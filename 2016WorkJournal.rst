@@ -4047,6 +4047,30 @@ Discussed salishsea prepare changes for directory flexibility & exclusion of lan
 Helped Mesdes with her WRF build and running it on orcinus.
 
 
+Sat 29-Oct-2016
+^^^^^^^^^^^^^^^
+
+Experimented with WatchedFileHandlers to try to make manager, etc. notice log file rotations; re: NEMO_Nowcast issue #8.
+Added `make_plots nowcast research` and `make_plots nowcast comparison` to automation.
+Discussed results archive directory names and ERDDAP dataset id versioning w/ Susan re: 15oct16 move to NEMO-3.6 and planned hindcast of nowcast-green.
+Discussed nav bar for salishsea-site app w/ Susan and implemented it.
+Worked on salishsea combine rebuild_nemo path bug reported by Michael.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Sun 30-Oct-2016
+^^^^^^^^^^^^^^^
+
+Worked on salishsea-site app layout and backend processing.
+(SalishSea)
+
+Photo-walk through Arbutus valley; leaves and a big, red mushroom.
+
+
+
 ToDo
 ====
 
