@@ -3877,6 +3877,8 @@ Workout session on publication figures by Ben & Nancy.
 
 Phys ocgy seminar by Melanie about Arctic circulation from Th-230 isotope sampling.
 
+Week 5 of Digital Photography Workflow course at Langara; processing images from week 4 still-life studio shoot; sync-ing settings acrosss groups of images.
+
 
 Tue 18-Oct-2016
 ^^^^^^^^^^^^^^^
@@ -3988,6 +3990,8 @@ Phys Ocgy seminary by Tereza about DMS in the Arctic on the 2015 GEOTRACES cruis
 
 Whiteboard session with Saurav, Birgit & Terza about storage and ssh.
 
+Week 6 of Digital Photography Workflow course at Langara; tethered shooting, digital assets management & backup; midterm.
+
 
 Tue 25-Oct-2016
 ^^^^^^^^^^^^^^^
@@ -4069,6 +4073,42 @@ Worked on salishsea-site app layout and backend processing.
 
 Photo-walk through Arbutus valley; leaves and a big, red mushroom.
 
+
+November
+========
+
+Week 44
+-------
+
+Mon 31-Oct-2016
+^^^^^^^^^^^^^^^
+
+Continued email conversation w/ Dominik@EC re: HRDPS model products.
+Resolved salishsea combine rebuild_nemo path bug reported by Michael.
+Added forecast and forecast2 publish figure routes & views to salishsea-site app.
+(SalishSea)
+
+Workout lead by Elise re: pandas and sqlalchemy.
+(swc)
+
+Phys Ocgy seminar by Lan Li about internal waves in the South China Sea near Qingdao.
+
+Week 7 of Digital Photography Workflow course at Langara; panorama & HDR shoot at Granville Island.
+
+
+Tue 1-Nov-2016
+^^^^^^^^^^^^^^
+
+Continued development of salishseacast publish figures template and views.
+Moved NEMO-3.6-code repo forward to r6459:
+* Pulled changesets from NEMO-3.6-r6459 on Bitbucket into NEMO-3.6-mirror-merge at on niko
+* Merged NEMO-3.6-code changes since NEMO-3.6r6204-ubc tag into NEMO-3.6-mirror-merge at on niko, tagged it as NEMO-3.6r6459-ubc, and pushed to NEMO-3.6-code on Bitbucket
+Started moving NEMO-3.6-code repo forward to r6770
+* Pulled changesets 6467 through 6770 into NEMO-3.6-hg-mirror on salish.
+* Merged NEMO-3.6-hg-mirror into NEMO-3.6-mirror-merge on niko.
+* Tagged NEMO-3.6-r6770 in NEMO-3.6-mirror-merge  and pushed to new NEMO-3.6-r6770 repo on Bitbucket for Elise to use for merge-comparison test.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
 
 
 ToDo
