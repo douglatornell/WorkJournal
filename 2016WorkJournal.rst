@@ -4111,6 +4111,34 @@ Salish Sea team mtg; see whiteboard.
 (SalishSea)
 
 
+Wed 2-Nov-2016
+^^^^^^^^^^^^^^
+
+Headache and sinus congestion.
+
+See project work journal.
+(GOMSS)
+
+Finally re-found the utilities Python package that I have been searching for for over a year - boltons.
+Discovered that nowcast-sys/logs/nowcast/ dir was g-w but sticky, so set g+w there; hoping to resolve the next roadblock in the multi-person ops story.
+Worked on porting creating worker docs from SalishSeaNowcast docs to NEMO_Nowcast docs.
+(SalishSea)
+
+
+Thu 3-Nov-2016
+^^^^^^^^^^^^^^
+
+Tired, but felling healthier than yesterday.
+
+See project work journal.
+(GOMSS)
+
+Setting g+w on nowcast-sys/logs/nowcast/ did not resolve the permissions issue on logs created by the rotate_logs worker, so applied the patch that uses the boltons FilePerms so that it will get tested tomorrow morning.
+Finished porting creating worker docs from SalishSeaNowcast docs to NEMO_Nowcast docs.
+Reviewed Michael's changes to add land processor elimination to salishsea prepare.
+(SalishSea)
+
+
 ToDo
 ====
 
