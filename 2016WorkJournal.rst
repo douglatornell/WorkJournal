@@ -4139,6 +4139,16 @@ Reviewed Michael's changes to add land processor elimination to salishsea prepar
 (SalishSea)
 
 
+Fri 4-Nov-2016
+^^^^^^^^^^^^^^
+
+Shot panoramas from roof of ESB and on east side of Main Mall (featuring biodiversity whale).
+
+Got salishseacast publish figures template and views to the point where the pages include all figures, and the code is mostly well-factored and covered by unit tests.
+Started writing NEMO cloud description for ONC; discussed IO w/ Michael.
+(SalishSea)
+
+
 ToDo
 ====
 
