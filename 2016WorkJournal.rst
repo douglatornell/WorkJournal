@@ -4144,9 +4144,60 @@ Fri 4-Nov-2016
 
 Shot panoramas from roof of ESB and on east side of Main Mall (featuring biodiversity whale).
 
+Debugged rotate_logs worker permissions setting.
 Got salishseacast publish figures template and views to the point where the pages include all figures, and the code is mostly well-factored and covered by unit tests.
 Started writing NEMO cloud description for ONC; discussed IO w/ Michael.
 (SalishSea)
+
+
+Sat 5-Nov-2016
+^^^^^^^^^^^^^^
+
+Confirmed that rotate_logs worker permissions setting works.
+Released salishseacast publish figures template and views as the code that produces the pages for the site; added route to intercept requests for publish_ddmmmyy.html requests.
+Started work on salishseacast research figures template and view; refactored lots of template markup out of publish template so that it can be re-used.
+(SalishSea)
+
+
+Sun 6-Nov-2016
+^^^^^^^^^^^^^^
+
+Time change from PDT to PST.
+
+forecast2 run and post-processing were completed by 06:40.
+Released salishseacast research figures template and views as the code that produces the pages for the site; added route to intercept requests for research_ddmmmyy.html requests.
+Released salishseacast results index calendar grid template and view.
+Released salishseacast storm surge forecast view; off the results page production treadmill!!
+(SalishSea)
+
+
+Week 44
+-------
+
+Mon 7-Nov-2016
+^^^^^^^^^^^^^^^
+
+NEMO Telcon
+* BIO: Youyu, JP, Shiliang, M Casey, S Higginson
+  * JP working on N Pacific 1/36
+  * GoMSS 1/36
+  * SW Nova Scotia 500m
+  * Areas of work:
+    * short term forecasting, evaluation
+    * decade/multi-decade hindcasts
+    * seasonal/sub-seasonal prediction
+    * biogeochemistry
+* UA: Paul Xiamin
+* UBC: Susan, Michael, Doug
+  * Salish Sea
+    * storm surge
+    * daily biology
+    * deep water renewal
+    * wind driven surface currents
+    * open boundaries from LiveOcean
+    * AGRIF for Baynes Sound
+    * carbon chemistry
+* EC: Fred, Fraser, Greg
 
 
 ToDo
