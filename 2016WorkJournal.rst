@@ -4199,13 +4199,46 @@ NEMO Telcon
     * carbon chemistry
 * EC: Fred, Fraser, Greg
 
+Phys Ocgy seminar by Birgit about her M.Sc. work on the CHIME radio telescope.
+
+Discussed failed status of ONC ADCP data downloads with Rich.
+Finished writing draft of NEMO cloud description for ONC; sent to Susan & Michael for review.
+Started porting ping_erddap worker to SalishSeaNowcast.
+(SalishSea)
+
+
+Tue 8-Nov-2016
+^^^^^^^^^^^^^^
+
+Contributed to the discussion about ONC DACP data that Rich resurrected.
+Reviewed and commented on RAC application.
+Discussed roll-out of modified rebuild_nemo tool w/ Michael.
+Finished porting ping_erddap worker.SalishSeaNowcast.
+Asked Jie for ONC ferry data download cron job details.
+Sent NEMO cloud description to ONC.
+Started working on v16.10 ERDDAP datasets; first stop - fixing metadata in mesh_mask_SalishSea2.nc.
+Salish Sea team mtg w/ Ellie from SFU as guest; see whiteboard.
+(SalishSea)
+
+Discussed Jupyter Notebook w/ Matlab kernel & Google Drive for collaborations w/ Roger & Dan.
+
+
+Wed 9-Nov-2016
+^^^^^^^^^^^^^^
+
+Physio appt; more chest stretches to work on shoulder range of motion.
+
+Restarted manager because yesterday's config reload messed it up to the point that it didn't launch the grib_to_netcdf forecast2, make_runoff_file, or forecast2 runs; manually ran  grib_to_netcdf forecast2, & make_runoff_file before nowcast.
+Corrected long_name attribute values for e1t e2t, e1u, e2u, e1v, e2v, e1f, and e2f variables in mesh_mask_SalishSea2.nc.
+(SalishSea)
+
+Tried to access EduCloud web interface to explore adding VCPUs to Resilient-C VM but auth failed; opened UBC IT ticket for help; resolved after 14 email exchanges; can't alter VM resources from web console.
+(sealinkd)
 
 ToDo
 ====
 
 * docs re: stdout & stderr on salish
-* Rotate winds in research forecasts prior to 7apr16
-* Fix nowcast-green watch_NEMO logging
 * refactor, unit tests & docs for forcing links checking for NEMO-3.6
 
 * reduce resolution of landing page images for faster load times
