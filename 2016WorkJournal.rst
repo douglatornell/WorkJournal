@@ -4239,6 +4239,15 @@ See project work journal.
 (GOMSS)
 
 
+Thu 10-Nov-2016
+^^^^^^^^^^^^^^^
+
+Prep for workout session on Sphinx, Readthedocs & autodoc.
+(swc)
+
+EOAS seminar.
+
+
 Fri 11-Nov-2016
 ^^^^^^^^^^^^^^^
 
