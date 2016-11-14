@@ -4235,6 +4235,38 @@ Corrected long_name attribute values for e1t e2t, e1u, e2u, e1v, e2v, e1f, and e
 Tried to access EduCloud web interface to explore adding VCPUs to Resilient-C VM but auth failed; opened UBC IT ticket for help; resolved after 14 email exchanges; can't alter VM resources from web console.
 (sealinkd)
 
+See project work journal.
+(GOMSS)
+
+
+Fri 11-Nov-2016
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Remembrance Day
+
+Finished development of workbook & zip archive for 14nov16 workout about Sphinx, Readthedocs, autodoc & nbsphinx.
+(swc)
+
+Started porting make_feeds worker into SalishSeaNowcast framework.
+(SalishSea)
+
+
+Sat 12-Nov-2016
+^^^^^^^^^^^^^^^
+
+Finished porting make_feeds worker into SalishSeaNowcast framework.
+Merged SalishSeaCmd land-processor-elimination branch.
+Added route & view for storm surge alert feeds to salishsea-site app.
+(SalishSea)
+
+
+Sun 13-Nov-2016
+^^^^^^^^^^^^^^^
+
+Changed auth from persona.org to Stormpath.
+(randopony)
+
+
 ToDo
 ====
 
