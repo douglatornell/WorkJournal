@@ -4206,6 +4206,8 @@ Finished writing draft of NEMO cloud description for ONC; sent to Susan & Michae
 Started porting ping_erddap worker to SalishSeaNowcast.
 (SalishSea)
 
+Week 8 of Digital Photography Workflow course at Langara; processing panorama & HDR images.
+
 
 Tue 8-Nov-2016
 ^^^^^^^^^^^^^^
@@ -4274,6 +4276,35 @@ Sun 13-Nov-2016
 
 Changed auth from persona.org to Stormpath.
 (randopony)
+
+
+Week 46
+-------
+
+Mon 14-Nov-2016
+^^^^^^^^^^^^^^^
+
+Continued working on nowcast-green/blue mesh mask metadata.
+Discussed ONC ADCP and ferry data w/ Rich & Mark.
+(SalishSea)
+
+Delivered workout about Sphinx, Readthedocs, autodoc & nbsphinx.
+(swc)
+
+Phys Ocgy seminar by Saurav on his M.Sc. research on dry-line thunderstorms in eastern India.
+
+Week  of Digital Photography Workflow course at Langara; studio shoot with models.
+
+Tue 15-Nov-2016
+^^^^^^^^^^^^^^^
+
+Helped Susan build vagrant config for EOSC-471 and test it on EOSM lab PC.
+(EOAS teaching)
+
+Continued working on nowcast-green/blue mesh mask metadata; published bathymetry & @D mesh mask datasets.
+(SalishSea)
+
+Salish Sea team mtg; see whiteboard.
 
 
 ToDo
