@@ -4301,10 +4301,26 @@ Tue 15-Nov-2016
 Helped Susan build vagrant config for EOSC-471 and test it on EOSM lab PC.
 (EOAS teaching)
 
-Continued working on nowcast-green/blue mesh mask metadata; published bathymetry & @D mesh mask datasets.
+Continued working on nowcast-green/blue mesh mask metadata; published bathymetry & 2D mesh mask datasets.
 (SalishSea)
 
 Salish Sea team mtg; see whiteboard.
+
+
+Fri 18-Nov-2016
+^^^^^^^^^^^^^^^
+
+Emails to ONC about nowcast performance and results on web.
+Explored early history of nowcast system to help Susan find initial conditions for hindcast runs.
+Emailed ONC to confirm that ADCP profile data will appear on their ERDDAP.
+finished nowcast-green/blue mesh mask metadata; published 3D mesh mask dataset.
+Started porting get_onc_ctd worker to SalishSeaNowcast framework.
+(SalishSea)
+
+Took photo of MOAD group on ESB staircase.
+
+Helped Susan w/ tech support for EOSC-471 mini-project 3 (Ariene on vagrant).
+(EOAS teaching)
 
 
 ToDo
