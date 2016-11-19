@@ -4295,6 +4295,7 @@ Phys Ocgy seminar by Saurav on his M.Sc. research on dry-line thunderstorms in e
 
 Week  of Digital Photography Workflow course at Langara; studio shoot with models.
 
+
 Tue 15-Nov-2016
 ^^^^^^^^^^^^^^^
 
@@ -4305,6 +4306,28 @@ Continued working on nowcast-green/blue mesh mask metadata; published bathymetry
 (SalishSea)
 
 Salish Sea team mtg; see whiteboard.
+
+
+Wed 16-Nov-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Continued email conversation w/ Belaid about optimizing west.cloud; changes on his side resulted in ~30% deacrease in MPI run times:
+* nowcast/16nov16 - 37m vs 47m for 15nov16
+* forecast/16nov16 - 42m34s vs 60m for 15nov16
+No change, or slight increase in rebuild/deflate times.
+forecast runs produce completely useless restart files at 30h that could be eliminated.
+Michael's rebuild_nemo improvements and LPE have not yet been applied.
+(SalishSea)
+
+
+Thu 17-Nov-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
 
 
 ToDo
