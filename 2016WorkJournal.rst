@@ -4293,7 +4293,8 @@ Delivered workout about Sphinx, Readthedocs, autodoc & nbsphinx.
 
 Phys Ocgy seminar by Saurav on his M.Sc. research on dry-line thunderstorms in eastern India.
 
-Week  of Digital Photography Workflow course at Langara; studio shoot with models.
+Week 9 of Digital Photography Workflow course at Langara; studio shoot with models.
+
 
 Tue 15-Nov-2016
 ^^^^^^^^^^^^^^^
@@ -4305,6 +4306,28 @@ Continued working on nowcast-green/blue mesh mask metadata; published bathymetry
 (SalishSea)
 
 Salish Sea team mtg; see whiteboard.
+
+
+Wed 16-Nov-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Continued email conversation w/ Belaid about optimizing west.cloud; changes on his side resulted in ~30% deacrease in MPI run times:
+* nowcast/16nov16 - 37m vs 47m for 15nov16
+* forecast/16nov16 - 42m34s vs 60m for 15nov16
+No change, or slight increase in rebuild/deflate times.
+forecast runs produce completely useless restart files at 30h that could be eliminated.
+Michael's rebuild_nemo improvements and LPE have not yet been applied.
+(SalishSea)
+
+
+Thu 17-Nov-2016
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
 
 
 Fri 18-Nov-2016
@@ -4321,6 +4344,53 @@ Took photo of MOAD group on ESB staircase.
 
 Helped Susan w/ tech support for EOSC-471 mini-project 3 (Ariene on vagrant).
 (EOAS teaching)
+
+
+Sat 19-Nov-2016
+^^^^^^^^^^^^^^^
+
+Wrote inventory/state report email to Rich about ONC ADCP, ferry & CTD data downloads.
+(SalishSea)
+
+Worked on NEMO-Cmd package; see project work journal.
+(GOMSS)
+
+
+Sun 20-Nov-2016
+^^^^^^^^^^^^^^^
+
+Updated tools & NEMO-3.6-code in nowcast system to bring in NEMO r6459, land processor elimination, and rebuild_nemo level 4 deflation to speed up restart file processing.
+Rebuilt rebuild_nemo, SalishSea & SOG configs on salish.
+Update nowcast-green model changes table.
+Updated nowcast-sys/SS-run-set after nowcast-green launch failed due to out of date namelist.compute.
+nowcast-blue on west.cloud failed with non-obvious error during upload_forcing because shared storage was full;
+re-enabled cron jobs to clear old results.
+Looked at Belaid's test run results; his 128-core 16nov16 run took 31m compared to our 37m production run on 136 cores; guessing that the trade-off of 1 less VM's network overhead for MPI is worth it for slightly less square MPI sub-domains.
+Thought some more about leaving 1 core/VM free for network overhead, and land processor elimination; we should try a 7x17+1 run and a 9x21+1 LPE run on 17+1 VMs w/ host slots set to 7, and a 10x22+1 LPE run on 16+1 VMs.
+Plan:
+* 8x16+1 for 21nov16 runs
+* 7x17+1 w/ max-slots=7
+* 9x21+1 w/ LPE & max-slots=7
+* 10x22+1 w/ LPE & max-slots=8
+nowcast-blue/20nov16 didn't finished rebuild & gather due to full disk, so forecast failed; did gather on salish and scp-ed restart file to west.cloud to get run started.
+(SalishSea)
+
+Worked on NEMO-Cmd package; see project work journal.
+(GOMSS)
+
+
+Week 47
+-------
+
+Mon 21-Nov-2016
+^^^^^^^^^^^^^^^
+
+Changed config on west.cloud to use 8x16+1 MPI decomposition based on Belaid's test run results.
+(SalishSea)
+
+Phys Ocgy seminar by Rich & Roger about GVRD-funded SoG monitoring program
+
+Week 10 of Digital Photography Workflow course at Langara; process last week's studio shoot with models images.
 
 
 ToDo
