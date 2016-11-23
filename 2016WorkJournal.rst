@@ -4386,11 +4386,29 @@ Mon 21-Nov-2016
 ^^^^^^^^^^^^^^^
 
 Changed config on west.cloud to use 8x16+1 MPI decomposition based on Belaid's test run results.
+Finished porting get_onc_ctd worker to SalishSeaNowcast framework; backfilled 20-Nov to 15-Oct data.
+Ran GETDEPL on central node ADCP data to 31-Aug, and released data to 22-Aug.
+Started working through repeated runs of GETDEPL on east node ADCP data to 31-Aug, eliminating data files that matlab says it can't read one run at a time :-(
+Deleted unused modules from SalishSeaNowcast NEMO_Nowcast branch in preparation for merging into default.
+Started cleaning up SalishSeaNowcast docs in preparation for merge and release.
 (SalishSea)
 
 Phys Ocgy seminar by Rich & Roger about GVRD-funded SoG monitoring program
 
-Week 10 of Digital Photography Workflow course at Langara; process last week's studio shoot with models images.
+Week 10 of Digital Photography Workflow course at Langara; process last week's studio shoot with models images; B&W, split-tone, HSL adjustments & brushing adjustments.
+
+
+Tue 22-Nov-2016
+^^^^^^^^^^^^^^^
+
+nowcast system blew up after download_weather 06 because I forgot to restart manager to load config for get_onc_ctd worker; manually ran get_onc_ctd, make_runoff_file, get_NeahBay_ssh & grib_to_netcdf workers to get automation restarted and run forecast2 late.
+Continued working through repeated runs of GETDEPL on east node ADCP data to 31-Aug, eliminating data files that matlab says it can't read one run at a time :-(
+Added Fraser delta lower slope BBL and upper slope DDL nodes CTD stations to get_onc_ctd & ping_erddap workers, and started backward downloading of datasets.
+Analyzed timing of 8x16+1 west.cloud runs: nowcast: 31m+22m, forecast: 40m+35m.
+Change west.cloud config to max-slots=7 and 7x17+1.
+Found bug in get_onc_ctd worker whereby both alinity and temperature data were salinity; fixed it and started re-generating all 4 datasets.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
 
 
 ToDo
