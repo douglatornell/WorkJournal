@@ -4369,9 +4369,9 @@ Looked at Belaid's test run results; his 128-core 16nov16 run took 31m compared 
 Thought some more about leaving 1 core/VM free for network overhead, and land processor elimination; we should try a 7x17+1 run and a 9x21+1 LPE run on 17+1 VMs w/ host slots set to 7, and a 10x22+1 LPE run on 16+1 VMs.
 Plan:
 * 8x16+1 for 21nov16 runs
-* 7x17+1 w/ max-slots=7
-* 9x21+1 w/ LPE & max-slots=7
-* 10x22+1 w/ LPE & max-slots=8
+* 7x17+1 w/ slots=7
+* 9x21+1 w/ LPE & slots=7
+* 10x22+1 w/ LPE & slots=8
 nowcast-blue/20nov16 didn't finished rebuild & gather due to full disk, so forecast failed; did gather on salish and scp-ed restart file to west.cloud to get run started.
 (SalishSea)
 
@@ -4409,6 +4409,24 @@ Change west.cloud config to max-slots=7 and 7x17+1.
 Found bug in get_onc_ctd worker whereby both alinity and temperature data were salinity; fixed it and started re-generating all 4 datasets.
 Salish Sea team mtg; see whiteboard.
 (SalishSea)
+
+
+Wed 23-Nov-2016
+^^^^^^^^^^^^^^^
+
+Fixed west.cloud config brainfart: max-slots=7 s/b slots=7; run times:
+* forecast2: 35m+29m.
+* nowcast: 27m+19m.
+* forecast: 34m+29m.
+East node ADCP GETDEPL finally finished. After fumbling around because I forgot that you have to copy a DEPL* file into the east/, finally got a deployment rotation angle set for LTIM.
+Started working through repeated runs of GETDEPL on DDL node ADCP data to 31-Aug, eliminating data files that matlab says it can't read one run at a time :-(
+(SalishSea)
+
+Profiled Start->Maps page load: ranged from 4.5s to 20s. Did apt-get update, upgrade & autoremove. Rebooted VM. Load times unchanged, and erratic. Opened ticket #INC0729450 w/ UBC IT (email thread in @eoas email).
+(sealinkd)
+
+See project work journal.
+(GOMSS)
 
 
 ToDo
