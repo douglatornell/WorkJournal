@@ -4429,6 +4429,55 @@ See project work journal.
 (GOMSS)
 
 
+Thu 24-Nov-2016
+^^^^^^^^^^^^^^^
+
+Continued working through repeated runs of GETDEPL on DDL node ADCP data to 31-Aug, eliminating data files that matlab says it can't read one run at a time :-(
+Reviewed Nancy's Live Ocean docs and dealt with docs & dependency changes of adding her modules to SalishSeaTools.
+Set up cron job to download Live Ocean 72h forecast product daily and extract salish Sea western boundary sub-domain from it.
+West.cloud lost network connectivity at about 11:12; after 2 emails to support@westgrid it was restored at about 14:45; had to re-mount sshfs on most VMs, then ran make_forcing_links manually to restart automation.
+Started creating download_live_ocean worker.
+Investigated Jie's ferry data download scripts; they use the ONC scalar data API.
+(SalishSea)
+
+Westgrid townhall:
+* big news: migration off jasper delayed to 31-Mar-2017
+* https://docs.computecanada.ca/wiki/Migration2016
+* GP1 == Arbutus, uVic, operational
+* GP2 == Cedar, SFU
+  * PO soon, sched Apr, hope Feb/Mar
+* GP3 == Graham, Waterloo
+  * sched Apr
+LP1 == Niagra, late 2017, Toronto
+NDC == Silo replacement, Nat'l Data Cyberinfrastructure
+  * NDC-1 at SFU,
+  * NDC-2 at Waterloo, migration in progress
+  * NDC-Object, hope Apr, likely mid-2017
+* orcinus will continue beyond Mar-2018 but not on support contract, needed until Niagra comes online, important data should go to NDC
+* Ryan Enge, uVic site lead
+  * 7640 cores
+  * 200 Tb ceph storage, increasing to 600-700 Tb
+  * serious allocation by RAC/RPP
+  * Hermes has been virtualized into the new cloud; optimized for serial jobs
+* Kamil, UofA
+  * jasper available until 31-Mar, will shrink as pieces die
+  * recommending move to orcinus or parallel, bugaboo seems to have storage issues
+* GP2 & GP3 are Omni-Path (100Gb), not InfiniBand (10Gb if QDR)
+* Sergy @UofS, Silo migration
+  * future storage:
+    * scratch on clusters
+    * NDC:
+      * project (10Pb per site)
+      * nearline (15Pb per site automated move from disk to tape, request required for retrieval to online)
+      * object (all sites, special projects, RAC-allocated)
+* RAC allocation: reviews Dec/Jan, decisions 6-7-Feb-2016, notifications 9-Mar-2017
+* defunded == off nat'l funded infra, institutions own systems and will decide what to do with them
+* bugaboo has huge (2928h) max walltime, lowest on list of recommended migration destinations
+* next townhall in January
+
+Upgraded niko to PyCharm 2016.3/
+
+
 ToDo
 ====
 
