@@ -4441,19 +4441,20 @@ Investigated Jie's ferry data download scripts; they use the ONC scalar data API
 (SalishSea)
 
 Westgrid townhall:
-* big news: migration off jasper delayed to 31-Mar-2017
-* https://docs.computecanada.ca/wiki/Migration2016
-* GP1 == Arbutus, uVic, operational
-* GP2 == Cedar, SFU
-  * PO soon, sched Apr, hope Feb/Mar
-* GP3 == Graham, Waterloo
-  * sched Apr
-LP1 == Niagra, late 2017, Toronto
-NDC == Silo replacement, Nat'l Data Cyberinfrastructure
-  * NDC-1 at SFU,
-  * NDC-2 at Waterloo, migration in progress
-  * NDC-Object, hope Apr, likely mid-2017
-* orcinus will continue beyond Mar-2018 but not on support contract, needed until Niagra comes online, important data should go to NDC
+* Patrick Mann, Director of Operations
+  * big news: migration off jasper delayed to 31-Mar-2017
+  * https://docs.computecanada.ca/wiki/Migration2016
+  * GP1 == Arbutus, uVic, operational
+  * GP2 == Cedar, SFU
+    * PO soon, sched Apr, hope Feb/Mar
+  * GP3 == Graham, Waterloo
+    * sched Apr
+  LP1 == Niagra, late 2017, Toronto
+  NDC == Silo replacement, Nat'l Data Cyberinfrastructure
+    * NDC-1 at SFU,
+    * NDC-2 at Waterloo, migration in progress
+    * NDC-Object, hope Apr, likely mid-2017
+  * orcinus will continue beyond Mar-2018 but not on support contract, needed until Niagra comes online, important data should go to NDC
 * Ryan Enge, uVic site lead
   * 7640 cores
   * 200 Tb ceph storage, increasing to 600-700 Tb
@@ -4475,7 +4476,48 @@ NDC == Silo replacement, Nat'l Data Cyberinfrastructure
 * bugaboo has huge (2928h) max walltime, lowest on list of recommended migration destinations
 * next townhall in January
 
-Upgraded niko to PyCharm 2016.3/
+Upgraded niko to PyCharm 2016.3.
+
+
+Fri 25-Nov-2016
+^^^^^^^^^^^^^^^
+
+Upgraded kudu to PyCharm 2016.3.
+
+forecast2 failed due to 3 sshfs mount disconnects; remounted and restarted via make_forcing_links worker.
+Continued working through repeated runs of GETDEPL on DDL node ADCP data to 31-Aug, eliminating data files that matlab says it can't read one run at a time :-(
+Changed download_weather 12 launch time from 11:00 to 10:45 based on yesterday's un-delayed weather downloads.
+After review of EC datamart file availability times, changed download_weather 06 launch time from 05:00 to 04:15, and 12 launch time from 10:45 to 10:30.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Sat 26-Nov-2016
+^^^^^^^^^^^^^^^
+
+Forgot to restart scheduler, so download_waether adjustments only applied to 12 weather; it was ready at 10:59, but we went into a 512s wait at 10:58:30.
+Continued working through repeated runs of GETDEPL on DDL node ADCP data to 31-Aug, eliminating data files that matlab says it can't read one run at a time :-(
+(SalishSea)
+
+Fiddled with new Telus router and Airport Extreme to try to optimize home network.
+
+See project work journal.
+(GOMSS)
+
+
+Sun 27-Nov-2016
+^^^^^^^^^^^^^^^
+
+Fixed SalishSeaNowcast.next_workers bug that was causing ERDDAP falg files for CTD datasets to be ineffective.
+forecast2 run started at 04:36 and logs rolled at 05:51
+nowcast run started at 11:03.
+Continued working through repeated runs of GETDEPL on DDL node ADCP data to 31-Aug, eliminating data files that matlab says it can't read one run at a time :-(
+(SalishSea)
+
+See project work journal.
+(GOMSS)
 
 
 ToDo
