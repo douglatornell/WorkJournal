@@ -4520,6 +4520,27 @@ See project work journal.
 (GOMSS)
 
 
+Week 48
+-------
+
+Mon 28-Nov-2016
+^^^^^^^^^^^^^^^
+
+Explored Bitbucket pipelines for pytest & yapf.
+
+Continued working through repeated runs of GETDEPL on DDL node ADCP data to 31-Aug, eliminating data files that matlab says it can't read one run at a time :-( (25Jul was a really weird error)
+Updated tools, NEMO-3.6-code & SS-run-sets repos on west.cloud to bring in NEMO r6459, land processor elimination, and rebuild_nemo level 4 deflation to speed up restart file processing.
+Rebuilt rebuild_nemo, SalishSea config on west.cloud.
+Changed nowcast MPI decommissioning to 10x20+1 w/ LPE & slots=7 (116 of 119 available cores).
+Update nowcast model changes table.
+Continued cleaning up SalishSeaNowcast docs in preparation for merge and release.
+(SalishSea)
+
+Phys Ocgy seminar by Kyle about Ba & del O-18 tracer modeling in the Arctic
+
+Week 11 of Digital Photography Workflow course at Langara; processing HDR & panorama images.
+
+
 ToDo
 ====
 
