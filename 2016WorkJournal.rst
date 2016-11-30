@@ -4538,7 +4538,27 @@ Continued cleaning up SalishSeaNowcast docs in preparation for merge and release
 
 Phys Ocgy seminar by Kyle about Ba & del O-18 tracer modeling in the Arctic
 
-Week 11 of Digital Photography Workflow course at Langara; processing HDR & panorama images.
+Ticket #INC0729450 re: erratic Maps page load times got picked up by
+(sealinkd)
+
+Week 11 of Digital Photography Workflow course at Langara; processing copies of 4 HDR & panorama images w/ sharpening, transformations, spot removal, and brush/filter adjustments.
+
+
+Tue 29-Nov-2016
+^^^^^^^^^^^^^^^
+
+Fixed bug in run_NEMO worker whereby number of processors was not correctly calculated for LPE runs;
+* forecast2/28nov16 took 24m37s (30% faster) for MPI + 18m28s (36% faster)
+* nowcast/29nov16: 23m39s (13% faster ???) + 14m12s (24% faster)
+* forecast/29nov16: 23m49s + 17m6s; alert feed published at 12:24
+Added page footer to salishsea-site app.
+Worked on poster for stakeholders workshop.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
 
 
 ToDo
