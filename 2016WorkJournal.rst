@@ -4538,7 +4538,8 @@ Continued cleaning up SalishSeaNowcast docs in preparation for merge and release
 
 Phys Ocgy seminar by Kyle about Ba & del O-18 tracer modeling in the Arctic
 
-Ticket #INC0729450 re: erratic Maps page load times got picked up by
+Ticket #INC0729450 re: erratic Maps page load times got picked up by Dave@ubcit.
+Sent Jackie's spreadsheet and a screenshot; Dave reported no obvious correlation w/ cloud ops.
 (sealinkd)
 
 Week 11 of Digital Photography Workflow course at Langara; processing copies of 4 HDR & panorama images w/ sharpening, transformations, spot removal, and brush/filter adjustments.
@@ -4551,6 +4552,7 @@ Fixed bug in run_NEMO worker whereby number of processors was not correctly calc
 * forecast2/28nov16 took 24m37s (30% faster) for MPI + 18m28s (36% faster)
 * nowcast/29nov16: 23m39s (13% faster ???) + 14m12s (24% faster)
 * forecast/29nov16: 23m49s + 17m6s; alert feed published at 12:24
+Continued working through repeated runs of GETDEPL on DDL node ADCP data to 31-Aug, eliminating data files that matlab says it can't read one run at a time :-(
 Added page footer to salishsea-site app.
 Worked on poster for stakeholders workshop.
 Salish Sea team mtg; see whiteboard.
@@ -4559,6 +4561,59 @@ Salish Sea team mtg; see whiteboard.
 See project work journal.
 (GOMSS)
 
+Continued ticket #INC0729450 conversation re: erratic Maps page load times; agreed to test app w/ VM memory increased to 2Gb.
+(sealinkd)
+
+
+Wed 30-Nov-2016
+^^^^^^^^^^^^^^^
+
+Tested app w/ 2Gb VM; not consistently faster; maybe we need another vCPU?
+Emailed Stephanie & Jackie who agreed to collect more data.
+Fixed minor issues in nginx configs that were causing spew in the error log; localhost in server_name list & proxy_pass directive.
+(sealinkd)
+
+Continued working through repeated runs of GETDEPL on DDL node ADCP data to 31-Aug, eliminating data files that matlab says it can't read one run at a time :-( (was weird like 25Jul)
+Fixed broken links that Michael found in ERDDAP dataset metadata.
+* forecast2/29no16: 24:24 + 19:23
+* nowcast/30nov16: 21:35 + 13:31
+* forecast/30nov16: 25:58 + 17:23
+ONC ERDDAP dataset for present ADCP deployments at east & DDL nodes appeared on their server; tabledap datasets, but 80% cassandra database failure rate.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Thu 1-Dec-2016
+^^^^^^^^^^^^^^
+
+Forced reload of all ERDDAP datasets via flag files to apply yesterday's metadata URL fixes.
+East node ADCP GETDEPL finally finished. After fumbling around because I forgot that you have to copy a DEPL* file into the east/, finally got a deployment rotation angle set for LTIM.
+DDL node ADCP data GETDEPL to 31-Aug finally finished; LTIM shows 2 data clusters for most recent deployment; corrected angle for one and sent email to Rich for advice.
+ONC ERDDAP dataset for present ADCP deployments at east & DDL nodes appears to be working; tabledap datasets.
+* forecast2/30no16: 24:34 + 19:32
+* nowcast/01dec16: 19:24 + 13:34
+* forecast/01dec16:
+Updated storm surge figure in SalishSeaCast brochure for stakeholders mtg.
+(SalishSea)
+
+Maps page loading time was back to ~15s; noticed that memory use was up to 1.8Gb.
+Rebooted VM and response came back to ~5s.
+(sealinkd)
+
+See project work journal.
+(GOMSS)
+
+
+Fri 2-Dec-2016
+^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Added storm surge text & figure to SalishSeaCast poster for stakeholders mtg.
+(SalishSea)
 
 
 ToDo
