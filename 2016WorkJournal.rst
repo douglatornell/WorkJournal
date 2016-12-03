@@ -4613,7 +4613,13 @@ See project work journal.
 (GOMSS)
 
 Added storm surge text & figure to SalishSeaCast poster for stakeholders mtg.
+Updated ONC on status of west.cloud nowcast runs.
+Changed west.cloud MPI decomposition to 9x20 for 109 of 112 cores on 16 VMs with slots=7.
+Added CITATION.rst file to docs repo so that I could deploy the salishsea-site page footer mods.
+Started porting storm surge portal page into Pyramid app.
 (SalishSea)
+
+Staff and faculty end of year lunch & farewell for Paul Smith.
 
 
 ToDo
