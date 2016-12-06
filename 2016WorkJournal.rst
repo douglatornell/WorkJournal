@@ -4622,6 +4622,57 @@ Started porting storm surge portal page into Pyramid app.
 Staff and faculty end of year lunch & farewell for Paul Smith.
 
 
+Sat 3-Dec-2016
+^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+nowcast results w/ MPI decomposition to 9x20 for 109 of 112 cores on 16 VMs with slots=7:
+* forecast2/02dec16: 23:44 + 17:12
+* nowcast/03dec16: 20:54 + 13:33
+* forecast/03dec16: 23:58 + 16:59
+Finished porting storm surge portal page into Pyramid app.
+Added salishsea gather option to run_NEMO worker to delete restart files for forecast2 runs because we never use them, and they cost about 10 minutes of post-processing time.
+Pulled a lot of changes into west.cloud SalishSeaNowncast.
+(SalishSea)
+
+Renewed APEGBC membership; 80h cpd
+
+
+Sun 4-Dec-2016
+^^^^^^^^^^^^^^
+
+nowcast results w/ MPI decomposition to 9x20 for 109 of 112 cores on 16 VMs with slots=7, no more restart files for forecast2 runs:
+* forecast2/03dec16: 23:03 + 13:17
+* nowcast/03dec16: 20:07 + 12:26
+* forecast/04dec16: 23:44 + 16:33
+Added west.cloud specific elements to run_NEMO worker: mpi_hosts file, --bind-to-core, and XIOS host ip address.
+Explored how restart files are produced by NEMO; did a test forecast run on west.cloud with ln_rst_list = .true. and the end-of-day time step as the first element in nn_stocklist; experiment worked, so incorporated it into run_NEMO worker.
+Added option to set max retry waiting time to NEMO_Nowcast worker.get_web_data(); re: issue #3.
+Ported SalishSeaCast about page (aka nemo index) into Pyramid app.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+December
+========
+
+Week 49
+-------
+
+Mon 5-Dec-2016
+^^^^^^^^^^^^^^
+
+Started snowing at about 04:00; about 4cm on the ground by 08:00 when it changed to snain.
+
+Fixed a bug in run_NEMO setting of restart file output times.
+Worked through other transition issues related to setting restart file output times.
+(SalishSea)
+
+
 ToDo
 ====
 
