@@ -4670,7 +4670,35 @@ Started snowing at about 04:00; about 4cm on the ground by 08:00 when it changed
 
 Fixed a bug in run_NEMO setting of restart file output times.
 Worked through other transition issues related to setting restart file output times.
+Started work on adding nowcast-blue datasets to ERDDAP; metadata issues in grid_T.
 (SalishSea)
+
+Worked on bio for UQAR winter modeling school.
+
+
+Tue 6-Dec-2016
+^^^^^^^^^^^^^^
+
+Finished on bio for UQAR winter modeling school; emailed it and PyCon headshot to Marion.
+
+Met w/ Daphne@eoas re: vacation pay.
+
+Upgraded niko to Ubuntu 16.10 (yakety yak); updated ppas:
+* Google talk plugin
+* System76 drivers (took a couple of tries)
+* Git
+* Zeal
+* Mercurial (no yakkety build yet, so disabled)
+* deleted bluejeans deb that always reports weakness
+
+Continued work on adding nowcast-blue datasets to ERDDAP; gave up on grid_T for now, succeeded on grid_U and grid_V.
+Confirmed that ERDDAP will happily work with a symlinked /opt/tomcat/content/erddap/datasets.xml file, so started setting up a Mercurial repo to hold that file and related stuff.
+Added grid_W dataset inthe course of testing workflow with repo.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+Tried to disable sslv3 on resilient-c.
+(sealinkd)
 
 
 ToDo
