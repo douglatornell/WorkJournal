@@ -4701,6 +4701,42 @@ Tried to disable sslv3 on resilient-c.
 (sealinkd)
 
 
+Week 50
+-------
+
+Mon 12-Dec-2016
+^^^^^^^^^^^^^^^
+
+Started NEMO-3.6-code repo forward to r6770:
+* Pulled changesets from NEMO-3.6-r6459 on Bitbucket into NEMO-3.6-mirror-merge at on niko, stripped nestingtools-cleanups branch that Michael confirmed should not be merged.
+* Pulled NEMO-3.6-code changes since NEMO-3.6r6459-ubc tag into NEMO-3.6-mirror-merge at on niko, stalled on merge conflicts in SMELT code.
+Continued adding nowcast-blue datasets to ERDDAP: single point sea surface heights, all except Boundary Bay.
+Changed nowcast MPI decomposition to 9x19 for 104 of 105 cores on 15 VMs with slots=7.
+Did code cleanup in SalishSeaNowcast; introduced a few instances of FilePerms().
+(SalishSea)
+
+Workout about Python modules lead by Susan.
+(swc)
+
+
+Tue 13-Dec-2016
+^^^^^^^^^^^^^^^
+
+nowcast results w/ MPI decomposition to 9x20 for 109 of 112 cores on 16 VMs with slots=7, no more restart files for forecast2 runs:
+* forecast2/12dec16: 26:12 + 13:40 = 39:52
+* nowcast/13dec16: 19:56 + 13:42 = 33:38
+* forecast/13dec16: 24:41 + 16:48 = 41:29
+Explored NEMO-3.6-mirror-merge merge conflict further, and worked through it with Elise.
+* Merged NEMO-3.6-code changes since NEMO-3.6r6770 tag into NEMO-3.6-mirror-merge at on niko, tagged it as NEMO-3.6r6770-ubc, and pushed to NEMO-3.6-code on Bitbucket
+* Changed NEMO-3.6r6770, NEMO-3.6r6459, and NEMO-3.6r6204 repos on Bitbucket to read-only.
+Started work on get Tb of NFS storage that Belaid arranged into production on west.cloud.
+Worked on adding forecast datasets to ERDDAP.
+Met w/ Rich re: ONC DDL ADCP data; also discussed ferry data into ERDDAP, agreed on 20s aggregation interval.
+Salish Sea team mtg; see whiteboard.
+Moved runoff forcing filename templates from make_runoff_file worker to config file to close issue #8.
+(SalishSea)
+
+
 ToDo
 ====
 
