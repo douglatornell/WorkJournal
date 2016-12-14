@@ -4734,6 +4734,10 @@ Worked on adding forecast datasets to ERDDAP.
 Met w/ Rich re: ONC DDL ADCP data; also discussed ferry data into ERDDAP, agreed on 20s aggregation interval.
 Salish Sea team mtg; see whiteboard.
 Moved runoff forcing filename templates from make_runoff_file worker to config file to close issue #8.
+Did apt-get update/upgrade on nowcast0.
+Intalled nfs-kernel-server on nowcast0 and set it up to export /nemoShare/MEOPAR as /export/MEOPAR.
+Did apt-get update/upgrade on nowast1.
+Installed nfs-common on nowcast1 and NFS-mounted /export/MEOPAR from nowast0 as /home/ubuntu/MEOPAR-nfs.
 (SalishSea)
 
 
