@@ -4621,6 +4621,9 @@ Started porting storm surge portal page into Pyramid app.
 
 Staff and faculty end of year lunch & farewell for Paul Smith.
 
+Dave@UBCIT added a 2nd vCPU to sealinkd-vm; rebooted.
+(sealinkd)
+
 
 Sat 3-Dec-2016
 ^^^^^^^^^^^^^^
@@ -4699,6 +4702,67 @@ Salish Sea team mtg; see whiteboard.
 
 Tried to disable sslv3 on resilient-c.
 (sealinkd)
+
+
+Wed 7-Dec-2016
+^^^^^^^^^^^^^^
+
+Described software on sealinkd-vm to Dave@UBCIT.
+Proposed ongoing maintenance fee to Stephanie to cover erratic loading time issue work, and planned January data update, and she accepted it.
+Dave@UBC reported that they had made backend changes and have identified CPU spiking; they are working on it and I am monitoring the app; load times vary from <5s to >40s/
+(sealinkd)
+
+Tried to deploy stormpath auth upgrade but it fails with:
+python2.7/site-packages/requests/packages/urllib3/util/ssl_.py:334: SNIMissingWarning: An HTTPS request has been made, but the SNI (Subject Name Indication) extension to TLS is not available on this platform. This may cause the server to present an incorrect TLS certificate, which can cause validation failures. You can upgrade to a newer version of Python to solve this. For more information, see https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  SNIMissingWarning
+Tried various fixes with no luck; this could be the push to Python 3...
+(randopony)
+
+See project work journal.
+(GOMSS)
+
+
+Thu 8-Dec-2016
+^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+
+Fri 9-Dec-2016
+^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+MEPAR Stakeholders workshop at SFU downtown.
+* Talked at length with Johannes about moving Salish Sea wave model to production
+
+
+Sat 10-Dec-2016
+^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Helped Nancy with NEMO build/run issues on orcinus; learned that module commands in .bashrc are compulsory, not optional, and that the generated SalishSeaNEMO.sh script has module load mismatches in it.
+(SalishSea)
+
+Upgraded kudu to Ubuntu 16.10 (yakety yak); updated ppas:
+* Google talk plugin
+* System76 drivers (took a couple of tries)
+* Git
+* Mercurial (no yakkety build yet, so disabled)
+* deleted bluejeans deb that always reports weakness
+* deleted darktable ppa because it is now in system packages
+
+
+Sun 11-Dec-2016
+^^^^^^^^^^^^^^^
+
+Hacked through migrating randopony to Python 3.5 in hopes of mitigating openssl sni issue on webfaction; warning still occurs, but it is not fatal; opened a community support request about it on webfaction.
+(RandoPony)
+
 
 
 Week 50
