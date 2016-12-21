@@ -4801,6 +4801,82 @@ Did apt-get update/upgrade on nowcast0.
 Intalled nfs-kernel-server on nowcast0 and set it up to export /nemoShare/MEOPAR as /export/MEOPAR.
 Did apt-get update/upgrade on nowast1.
 Installed nfs-common on nowcast1 and NFS-mounted /export/MEOPAR from nowast0 as /home/ubuntu/MEOPAR-nfs.
+Refactored make_runoff_file worker to move file name templates into config file.
+(SalishSea)
+
+
+Fri 16-Dec-2016
+^^^^^^^^^^^^^^^
+
+Installed Chromium on niko so that I can use my Google Drive timesheet spreadsheet again :-(
+
+Changed nowcast config on west.cloud to use nowcast0 as XIOS server.
+Cloned repos into /nemoShare/MEOPAR/ on west.cloud.
+Updated SalishSeaNowcast deployment docs.
+Tried to use the ADCP data that Lan downloaded but it has a completely different data structure to the automated download data.
+Helped Tereza with her data analysis project file generation script.
+Merged SalishSeaNowcast NEMO_Nowcast branch into default and closed former.
+Fought with readthedocs to get a complete build.
+(SalishSea)
+
+Helped Idalia with her NEMO-3.6 update mess and files organization for running NEMO.
+(canyons)
+
+
+Sat 17-Dec-2016
+^^^^^^^^^^^^^^^
+
+Refactored get_NeahBay_ssh worker to move file name template into config file.
+Investigated forecast run failure on west.cloud; watch_nemo worker reported that it couldn't find the run pid, but the run completed; manually ran download_results worker to restart automation.
+Updated west.cloud SalishSeaNowcast package to default branch.
+Got committed nowcast config file closer to the in-production one on west.cloud, and opened issues #31 and #32 re: remaining differences.
+Refactored grib_to_netcdf worker to move file name template into config file.
+Refactored download_results worker to use pathlib.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Sun 18-Dec-2016
+^^^^^^^^^^^^^^^
+
+Investigated forecast2 run failure; cause was NEMO_Nowcast repo not having been updated on west.cloud to correspond to latest SalishSeaNowcast revisions.
+(SalishSea)
+
+Fixed sing-up failure issue in Python 3 deployment; had to remove utf-8 encode/decode code that was added to make accented names work in Python 2.7 (kind of ironic...)
+Lots of other code cleanups to modernize codebase and embrace Python 3 only.
+(randopony)
+
+
+Week 51
+-------
+
+Mon 19-Dec-2016
+^^^^^^^^^^^^^^^
+
+Work-at-home day due to overnight snow/rain that produced transit chaos.
+
+Updated SalishSeaNowcast on skookum to default branch.
+Created nowcast-compute-node-v5 snapshot image on west.cloud of nowcast1 with MEOPAR-nfs mounted, and tested launching a new instance from it; that worked, but subsequent instance launches failed; sent email to Belaid.
+Used ssh in a bash loop to install nfs-common on remaining compute nodes, and mount NFS shared storage from nowcast0.
+Continued work on SalishSeaNowcast deployment docs, and on cleaning up readthedocs build issues re: imported environment and modules.
+Fixed an args bug in make_forcing_links worker that crept in during weekend work on issue #9, and re-ran it manually to restart automation.
+Did initial tests on NFS shared storage on west.cloud:
+* ~/MEOPAR-nfs/ mount point is a no-go because path.resolve() spells it as /nemoShare/MEOPAR/, so just use that
+* nowcast/19dec16 run time w/ 9x19+1 for 104 of 105 cores on 7x15+1 VMs was ~24m vs. ~20m w/ sshfs shared storage
+* nowcast/19dec16 gather was 8m20s vs. 12m-14m w/ sshfs storage
+* nowcast/19dec16 run time w/ 9x20+1 for 109 of 112 cores on 7x16+1 VMs was ~22m vs. 20m-21m w/ sshfs shared storage
+(SalishSea)
+
+
+Tue 20-Dec-2016
+^^^^^^^^^^^^^^^
+
+forecast2 failed due to me not pulling in Susan's rivers changes, and her not changing namelist.surface; got things fixed in time for nowcast/forecast runs.
+Worked w/ Rich to make GETDEPL work w/ ADCP data from both automated downloads, and Lan's web portal downloads.
+Discussed salishsea site design w/ Ben.
+Salish Sea team mtg; see whiteboard.
 (SalishSea)
 
 
