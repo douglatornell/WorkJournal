@@ -4805,6 +4805,36 @@ Refactored make_runoff_file worker to move file name templates into config file.
 (SalishSea)
 
 
+Wed 14-Dec-2016
+^^^^^^^^^^^^^^^
+
+Cleared 2016 events & riders data from RandoPony database by swapping copy of production database in as dev database for PyCharm project and using the new multi-row features of the database editor.
+Created NewYearsPop event.
+Improved and cleaned up pony deployment.
+(RandoPony)
+
+Created and submitted invoice for ongoing maintenance of app and Salish Sea communities data update planned for January.
+(sealinkd)
+
+See project work journal.
+(GOMSS)
+
+Started re-organizing image storage and workflow.
+Imported images and sidecars from Langara workflow course into Darktable; sidecar data imported is pretty basic.
+
+
+Thu 15-Dec-2016
+^^^^^^^^^^^^^^^
+
+Re-formatted 1Tb Adata removable drive as Photos01Backup, and loaded photos & darktable config on to it.
+
+See project work journal.
+(GOMSS)
+
+Did some edits (marked red) in the 150719-Gustavsen-ReidInlet collection; mostly pulling people out of the background with drawn and parametric masks.
+Came up with rsync commands that work better than GUI to keep external backup drive in sync with Pictures/ dir.
+
+
 Fri 16-Dec-2016
 ^^^^^^^^^^^^^^^
 
@@ -4879,34 +4909,21 @@ Discussed salishsea site design w/ Ben.
 Salish Sea team mtg; see whiteboard.
 (SalishSea)
 
+Continued re-organizing image storage and workflow.
 
-Wed 14-Dec-2016
+
+Wed 21-Dec-2016
 ^^^^^^^^^^^^^^^
 
-Cleared 2016 events & riders data from RandoPony database by swapping copy of production database in as dev database for PyCharm project and using the new multi-row features of the database editor.
-Created NewYearsPop event.
-Improved and cleaned up pony deployment.
-(RandoPony)
-
-Created and submitted invoice for ongoing maintenance of app and Salish Sea communities data update planned for January.
-(sealinkd)
+Finished re-organizing image storage of all RAW images on kudu.
+Created shell script to do rsync to backup drive.
 
 See project work journal.
 (GOMSS)
 
-Started re-organizing image storage and workflow.
-Imported images and sidecars from Langara workflow course into Darktable; sidecar data imported is pretty basic.
-
-
-Thu 15-Dec-2016
-^^^^^^^^^^^^^^^
-
-Re-formatted 1Tb Adata removable drive as Photos01Backup, and loaded photos & darktable config on to it.
-
-See project work journal.
-(GOMSS)
-
-Did some edits (marked red) in the 150719-Gustavsen-ReidInlet collection; mostly pulling people out of the background with drawn and parametric masks.
+Copied Lan's DDL ADCP dataset files for 2016 into ONC_ACDP/ file space.
+Ran GETDEPL for DDL ADCP datasets, fixed a bug, and ran it again to completion.
+(SalishSea)
 
 
 ToDo
