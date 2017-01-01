@@ -4926,6 +4926,49 @@ Ran GETDEPL for DDL ADCP datasets, fixed a bug, and ran it again to completion.
 (SalishSea)
 
 
+Thu 22-Dec-2016
+^^^^^^^^^^^^^^^
+
+Travel from home to Barrie or Christmas holiday.
+
+See project work journal.
+(GOMSS)
+
+
+Sat 24-Dec-2016
+^^^^^^^^^^^^^^^
+
+Started work on salishsea site nowcast automation monitoring page.
+(SalishSea)
+
+
+Week 52
+-------
+
+Mon 26-Dec-2016
+^^^^^^^^^^^^^^^
+
+Finished salishsea site nowcast automation monitoring page.
+(SalishSea)
+
+
+Wed 28-Dec-2016
+^^^^^^^^^^^^^^^
+
+Changed ERDDAP server URL to be a request attribute in salishsea site app.
+Continued work on download_live_ocean worker.
+(SalishSea)
+
+
+Thu 29-Dec-2016
+^^^^^^^^^^^^^^^
+
+Travel home from Barrie.
+
+Continued work on download_live_ocean worker.
+(SalishSea)
+
+
 ToDo
 ====
 
