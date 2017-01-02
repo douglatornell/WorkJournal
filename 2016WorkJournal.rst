@@ -4969,6 +4969,42 @@ Continued work on download_live_ocean worker.
 (SalishSea)
 
 
+Fri 30-Dec-2016
+^^^^^^^^^^^^^^^
+
+Added deflate plug-in to NEMO-Cmd for Susan to use in hindcast runs.
+Extracted tools/SalishSeaCmd into a new SalishSeaCmd repo.
+(SalishSea)
+
+
+Sat 31-Dec-2016
+^^^^^^^^^^^^^^^
+
+Created SalishSeaCmd repo on Bitbucket.
+Enabled download_results worker to handle hindcast results from jasper.
+Added `deflate` sub-command to SalishSeaCmd via plug-in from NEMO-Cmd.
+Added SalishSeaNowcast split_results worker to split results files from multi-day hindcast runs into daily run directories as ERDDAP and users expect them to be organized.
+After discussion with Susan, decided to make SalishSeaCmd combine, deflate, and gather sub-commands independent rather than nested as they are in tools version of the package.
+(SalishSea)
+
+
+Sun 1-Jan-2017
+^^^^^^^^^^^^^^
+
+Discussed concurrency strategy for deflate sub-command w/ Susan.
+Fixed bugs in split_results and download_results workers.
+Manually downloaded forecast2/31dec16 results that failed due to Path() -> str bug introduced yesterday in download_results worker.
+Fixed download_results worker bug introduced yesterday re: generator -> list in checklist.
+Manually ran make_plots forecast2 to restart automation.
+Manually ran make_plots forecast/31dec16 and forecast2/30dec16 to generate figures that failed yesterday due to XML parse error in EC data.
+Added descriptions of SalishSeaCmd, NEMO-Cmd, and SalishSeaNowcast repos to project docs, and fixed other build errors.
+Changed nowcast system deployments on skookum and west.cloud to use NEMO-Cmd and SalishSeaCmd packages, and updated deployment docs.
+Finished implementation of download_live_ocean worker and replaced cron job on skookum with it.
+Enabled concurrent netCDF file deflation in NEMO-Cmd.
+Started refactoring combine plug-in in NEMO-Cmd.
+(SalishSea)
+
+
 ToDo
 ====
 
