@@ -103,6 +103,42 @@ Re-ran forecast/08jan17 in /nemoShare/MEOPAR/nowcast-sys via automation.
 (SalishSea)
 
 
+Week 2
+------
+
+Mon 9-Jan-2017
+^^^^^^^^^^^^^^
+
+forecast2 ran successfully under automation in /nemoShare/ shared storage.
+Fixed bug in NEMO-Cmd deflate() API so that it handles file paths as sequences of either Path objects or strings.
+Unmounted ~/MEOPAR/ sshfs shared storage on west.cloud.
+nowcast ran successfully under automation in /nemoShare/ shared storage:
+* 9x19+1 LPE 104 of 105 on 15 VMs w/ 7 slots/VM
+* nowcast: 24:51 + 4:20 = 29:19
+* forecast: 30:37 + 7:26 = 38:03
+Live ocean download failed twice, 1st in automation, 2nd in manual re-run at 16:00.
+Phys Ocgy seminar about bio-optical measurements at an aqauculture site by  Justin Belluz (Hakaii Institute).
+Helped Giorgio get Ariane running consistently on halibu (atlantis gives weird netcdf errors), and get his analysis repo set up.
+Tried to change NEMO-code key in SalishSeaCmd run description to "NEMO code config" but can't happen because the former is required for hg parents.
+(SalishSea)
+
+
+Tue 10-Jan-2017
+^^^^^^^^^^^^^^^
+
+Updated nowcast & nowcast-green config record in docs re: move to r6770 and Ceph/NFS shared storage.
+Had to build a new salishsea-docs env to get docs to build.
+Added `NEMO code config` key to breaking changes docs.
+Started changing SalishSeaNowcast to use SalishSeaCmd & NEMO-Cmd.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+Telcon w/ Charles Hannah at IOS re: contract to add SoG wave model to nowcast system
+
+Discussed code organization and MPI runs w/ Idalia.
+(Canyons)
+
+
 ToDo
 ====
 
