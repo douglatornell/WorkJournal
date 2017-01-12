@@ -139,6 +139,28 @@ Discussed code organization and MPI runs w/ Idalia.
 (Canyons)
 
 
+Wed 11-Jan-2017
+^^^^^^^^^^^^^^^
+
+ECget failed to get 2017-01-10 river flow data overnight; patched Fraser & Englishman river flow files w/ persistence values from 2017-01-09, manually ran make_runoff_file worker, manually ran upload_forcing to restart automation for forecast2 run; NEMo run pid detection failed in watch_NEMO.
+Investigated mechanism of pid detection failures; might be mitigated by adding some sleep time before line 500 of run_NEMO worker.
+(SalishSea)
+
+See project work journal.
+(SoG waves)
+
+Tried to follow request of Dave@ubcit to un-install and re-install vmware tools on the VM, but couldn't figure out how to do it, so asked for more help.
+(sealinkd)
+
+
+Thu 12-Jan-2017
+^^^^^^^^^^^^^^^
+
+ECget failed to get 2017-01-11 river flow data overnight; patched Fraser & Englishman river flow files w/ persistence values from 2017-01-09, manually ran make_runoff_file worker, manually ran upload_forcing to restart automation for forecast2 run.
+Susan thinks that river flow failures are due to outflow wind events causing the gauges to freeze up.
+(SalishSea)
+
+
 ToDo
 ====
 
