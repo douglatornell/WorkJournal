@@ -55,6 +55,7 @@ See project work journal.
 (GOMSS)
 
 Continued refactoring combine plug-in in NEMO-Cmd.
+Re-booted ERDDAP server in response to an email from Marlene@ONC about Java thread errors.
 (SalishSea)
 
 
@@ -158,6 +159,14 @@ Thu 12-Jan-2017
 
 ECget failed to get 2017-01-11 river flow data overnight; patched Fraser & Englishman river flow files w/ persistence values from 2017-01-09, manually ran make_runoff_file worker, manually ran upload_forcing to restart automation for forecast2 run.
 Susan thinks that river flow failures are due to outflow wind events causing the gauges to freeze up.
+Ran LTIM for DDL node and it worked despite the lack of a deployment separation in early Oct-2016. Reviewed ONC online record for device to determine end of BBL-SG-05 deployment and beginning of BBL-SG-06 and added those data to GETDEPL, then re-ran it and LTIM.
+Re-booted ERDDAP server in response to an email from Marlene@ONC about Java thread errors.
+Sent email to Reyna@ONC re: status of ADCP data on their ERDDAP; reply is that they are working through an issue w/ ERDDAP devs.
+Copied central node data that Lan downloaded into /ocean/dlatorne/MEOPAR/ONC_ADCP/ tree. Ran GETDEPL, updated VIP-14-13 deployment parameters, and ran LTIM.
+Successfully tested run_NEMO worker modified to use SalishSeaCmd API on west.cloud; committed and pushed the change, and applied it on west.cloud.
+Copied east node data that Lan downloaded into /ocean/dlatorne/MEOPAR/ONC_ADCP/ tree. Added VIP-15-14 deployment parameters, and started running GETDEPL.
+Started work on make_live_ocean_files worker.
+Attended dept. colloquium: term 2 research carnival.
 (SalishSea)
 
 
