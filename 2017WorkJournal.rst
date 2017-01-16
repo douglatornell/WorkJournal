@@ -170,6 +170,66 @@ Attended dept. colloquium: term 2 research carnival.
 (SalishSea)
 
 
+Fri 13-Jan-2017
+^^^^^^^^^^^^^^^
+
+ECget failed to get 2017-01-12 river flow data overnight; patched Fraser & Englishman river flow files w/ persistence values from 2017-01-09, manually ran make_runoff_file worker, manually ran upload_forcing to restart automation for forecast2 run.
+East node LTIM produced results w/ no date for final 2 deployments; fixed a possible bug in GETDEPL and re-ran it; no difference.
+run_NEMO worker that uses SalishSeaCmd API running in production on west.cloud and sailish; recorded rebuild & deflate metrics on whiteboard.
+Tested SalishSeaCmd w/ concurrent deflation on orcinus.
+Added logging message to NEMO-Cmd deflate sub-command re: max number of concurrent subprocesses.
+Added --max-deflate-jobs command-line option to SalishSeaCmd run sub-command.
+(SalishSea)
+
+Un-installed and re-install vmware tools (open-vm-tools package) on the VM via apt-get.
+Dave@ubcit says that issue is resovled with a work-around, and asked permission to clone VM for further testing.
+(sealinkd)
+
+Set up repo on Bitbucket & Sublime Text project on kudu.
+Write 2 sentence topic description and emailed it to Marion.
+(Winter School)
+
+See project work journal.
+(SoG waves)
+
+Started implementation of salishsea-site app bloomcast pages.
+(salishsea-site)
+
+
+Sat 14-Jan-2017
+^^^^^^^^^^^^^^^
+
+ECget failed to get 2017-01-13 river flow data overnight; patched Fraser & Englishman river flow files w/ persistence values from 2017-01-09, manually ran make_runoff_file worker, manually ran upload_forcing to restart automation for forecast2 run.
+Finished implementation of salishsea-site app bloomcast about page and deployed it.
+(salishsea-site)
+
+
+Sun 15-Jan-2017
+^^^^^^^^^^^^^^^
+
+ECget failed to get 2017-01-14 river flow data overnight; patched Fraser & Englishman river flow files w/ persistence values from 2017-01-09, manually ran make_runoff_file worker, but missed time window for forecast2 run.
+Organized salissea-site app templates to reflect nav bar.
+Started implementation of salishsea-site app bloomcast spring_diatoms page.
+(salishsea-site)
+
+See project work journal.
+(SoG waves)
+
+Set up PyCharm bloomcast project on kudu and updated dev env packages and versions.
+(bloomcast)
+
+
+Week 3
+------
+
+Mon 16-Jan-2017
+^^^^^^^^^^^^^^^
+
+ECget failed to get 2017-01-15 river flow data overnight; patched Fraser & Englishman river flow files w/ persistence values from 2017-01-09, manually ran make_runoff_file worker, manually ran upload_forcing to restart automation for forecast2 run.
+(SalishSea)
+
+
+
 ToDo
 ====
 
