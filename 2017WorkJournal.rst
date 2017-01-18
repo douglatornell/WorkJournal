@@ -203,6 +203,9 @@ ECget failed to get 2017-01-13 river flow data overnight; patched Fraser & Engli
 Finished implementation of salishsea-site app bloomcast about page and deployed it.
 (salishsea-site)
 
+Discovered that EC wateroffice web site is showing up to date data, so suspect that the problem is another format change in the HTML table that we scrape.
+(ECget)
+
 
 Sun 15-Jan-2017
 ^^^^^^^^^^^^^^^
@@ -226,8 +229,28 @@ Mon 16-Jan-2017
 ^^^^^^^^^^^^^^^
 
 ECget failed to get 2017-01-15 river flow data overnight; patched Fraser & Englishman river flow files w/ persistence values from 2017-01-09, manually ran make_runoff_file worker, manually ran upload_forcing to restart automation for forecast2 run.
+Continued work on make_live_ocean_files worker.
 (SalishSea)
 
+Explored real-time river data on EC datamart; CSV files, files updated contain most recent data and back to beginning of day-2, files updated daily containing last 30 days and part of day-1.
+Set up ecget dev env on niko.
+Stepped through ecget river flow and discovered that the http://wateroffice.ec.gc.ca/report/report_e.html URL is returning 404; fixed it, tagged v0.5, and backfilled Fraser and Englishman files in SOG-Forcing/ECget/ on salish.
+(Ecget)
+
+Phys Ocgy seminar by Cindy on Arctic circulation changes.
+
+Discused web frameworks with Cindy and sent her a bunch of links.
+
+
+Tue 17-Jan-2017
+^^^^^^^^^^^^^^^
+
+Prep for mtg w/ Idalia about organizing her NEMO workspace, and using NEMO-Cmd.
+(canyons)
+
+Continued work on make_live_ocean_files worker.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
 
 
 ToDo
