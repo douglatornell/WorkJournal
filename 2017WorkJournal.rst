@@ -241,6 +241,8 @@ Phys Ocgy seminar by Cindy on Arctic circulation changes.
 
 Discused web frameworks with Cindy and sent her a bunch of links.
 
+Physio appt; arrange next appt if necessary after 6-Mar.
+
 
 Tue 17-Jan-2017
 ^^^^^^^^^^^^^^^
@@ -251,6 +253,23 @@ Prep for mtg w/ Idalia about organizing her NEMO workspace, and using NEMO-Cmd.
 Continued work on make_live_ocean_files worker.
 Salish Sea team mtg; see whiteboard.
 (SalishSea)
+
+
+Wed 18-Jan-2017
+^^^^^^^^^^^^^^^
+
+Explored rescuetime; tuned categories; figured out how to set up Mercurial hooks to log highlights to rescuetime (see dotfiles/*/hghooks/ directories).
+Added rescuetime hg hooks to dotfiles repo and several project repos: conda-recipes, NEMO-Cmd, SalishSeaCmd, GoMSS-NEMO-config
+
+Created issues in NEMO-Cmd and SalishSeaCmd repos to capture outstanding tasks:
+* possible --delete-restart option for gather plug-in
+* possible --ignore-restart option for combine plug-in
+* more flexible namelist_ref linking in prepare plug-ins
+Applied Elise's patch to enable more flexible namelist_ref linking in prepare plug-ins to NEMO-Cmd and SalishSeaCmd repos.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
 
 
 Thu 19-Jan-2017
