@@ -253,6 +253,19 @@ Salish Sea team mtg; see whiteboard.
 (SalishSea)
 
 
+Thu 19-Jan-2017
+^^^^^^^^^^^^^^^
+
+Set up hg commit and tag hooks to log to rescuetime from niko for SalishSeaCmd, NEMO-Cmd, SalishSeaNowcast, tools.
+Set up pycharm hg pre-commit hooks to run yapf on niko for SalishSeaCmd and NEMO-Cmd.
+
+Continued work on make_live_ocean_files worker.
+Added logging and did refactoring in salishsea_tools LiveOcean_BCs.py and gsw_calls.py modules.
+(SalishSea)
+
+Dept colloquium by William Hseih on data science in environmental sciences.
+
+
 ToDo
 ====
 
