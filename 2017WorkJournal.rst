@@ -282,7 +282,46 @@ Continued work on make_live_ocean_files worker.
 Added logging and did refactoring in salishsea_tools LiveOcean_BCs.py and gsw_calls.py modules.
 (SalishSea)
 
-Dept colloquium by William Hseih on data science in environmental sciences.
+Dept colloquium by William Hsieh on data science in environmental sciences.
+
+
+Fri 20-Jan-2017
+^^^^^^^^^^^^^^^
+
+Reviewed backlog of EC datamart email and forwarded CANSIP indices one to Susan.
+Explained ONC east node ADCP data gap in Apr-2016 to Rich.
+Created a timeline diagram of nowcast and forecast runs to help visualize what parts of the products of each run will be included in the rolling forecast datasets.
+Pointed Michael at XIOS arch file for parallel netcdf build on orcinus.
+Explored using python-hglib package in NEMO-Cmd to record repo revs.
+Buffed NEMO-cmd dev and run description file docs re: tools.SalishSeaCmd origins.
+Worked on adding hglib-based vcs revision recording feature to NEMO-Cmd.
+(SalishSea)
+
+Filed more of my email backlog in Thunderbird.
+
+Received payment for maintenance invoice.
+Updated Stephanie & Jackie on status of Maps page performance issue; UBC IT says it is resolved and has closed the ticket.
+(sealinkd)
+
+
+Sat 21-Jan-2017
+^^^^^^^^^^^^^^^
+
+Continued work on adding hglib-based vcs revision recording feature to NEMO-Cmd; expanded it to include notification and recording of untracked changes in repos.
+Investigated Python libraries for svn and git revision recording; svn and gitpyhton appear to be the best choices.
+Discussed rolling forecast dataset with Susan.
+EC was late with 00 weather, so grib_to_netcdf failed; manually re-ran download_weather 00 and grib_to_netcdf nowcast+ to restart automation.
+Investigated ONC DDL CTD data failures; salinity appears to have gone bad in Oct and ONC seems to have retroactively expunged it.
+(SalishSea)
+
+
+Sun 22-Jan-2017
+^^^^^^^^^^^^^^^
+
+Created SalishSeaNowcast issues #33 and #34 re: get_onc_ctd worker handling of full day of missing data, and need to process temperature before salinity.
+Finished NEMO-Cmd hglib-based vcs revision & status recording feature, except for unit tests.
+Updated Salish Sea nowcast-vm to eliminate nowcast-v2 (tools repo) environment and fix other provisioning issues; mercurial installation from ppa fails due to upstream packaging issue.
+(SalishSea)
 
 
 ToDo
