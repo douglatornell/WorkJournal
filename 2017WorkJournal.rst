@@ -314,6 +314,9 @@ EC was late with 00 weather, so grib_to_netcdf failed; manually re-ran download_
 Investigated ONC DDL CTD data failures; salinity appears to have gone bad in Oct and ONC seems to have retroactively expunged it.
 (SalishSea)
 
+See project work journal.
+(GOMSS)
+
 
 Sun 22-Jan-2017
 ^^^^^^^^^^^^^^^
@@ -322,6 +325,60 @@ Created SalishSeaNowcast issues #33 and #34 re: get_onc_ctd worker handling of f
 Finished NEMO-Cmd hglib-based vcs revision & status recording feature, except for unit tests.
 Updated Salish Sea nowcast-vm to eliminate nowcast-v2 (tools repo) environment and fix other provisioning issues; mercurial installation from ppa fails due to upstream packaging issue.
 (SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Week 4
+------
+
+Mon 23-Jan-2017
+^^^^^^^^^^^^^^^
+
+watch_NEMO worker unable to find run pid issue happened again; manually ran download_results worker to restart automation.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+Set up dev env on niko.
+Debugged changes in EC climate data download site.
+changed URL for EC wateroffice data downloads.
+Set up SOG-code, SOG-forcing, and SOG-initial on niko.
+Got bloomcast running on niko.
+  INFO:bloomcast.ensemble:Predicted earliest bloom date is 2017-02-25
+  INFO:bloomcast.ensemble:Earliest bloom date is based on forcing from 1999/2000
+  INFO:bloomcast.ensemble:Predicted early bound bloom date is 2017-03-03
+  INFO:bloomcast.ensemble:Early bound bloom date is based on forcing from 2004/2005
+  INFO:bloomcast.ensemble:Predicted median bloom date is 2017-03-21
+  INFO:bloomcast.ensemble:Median bloom date is based on forcing from 2003/2004
+  INFO:bloomcast.ensemble:Predicted late bound bloom date is 2017-04-08
+  INFO:bloomcast.ensemble:Late bound bloom date is based on forcing from 1987/1988
+  INFO:bloomcast.ensemble:Predicted latest bloom date is 2017-04-13
+  INFO:bloomcast.ensemble:Latest bloom date is based on forcing from 1998/1999
+Created new bloomcast env on salish.
+(bloomcast)
+
+Matplotlib 2.0 landed in conda defaults.
+
+
+Tue 24-Jan-2017
+^^^^^^^^^^^^^^^
+
+Finished bloomcast setup on salish, ran it for today w/o result publication, and enabled cron job.
+Start work on modifying bloomcast to integrate its results publication into salishsea-site app.
+(bloomcast)
+
+Dentist appt.
+
+Final 6h of 12 weather failed to download, so nowcast/forecast & nowcast-green runs delayed; appeared at 13:04; ran download_weather manually to restart automation.
+Worked w/ Rich on ONC ADCP data; more tweaks to GETDEPL and LTIM for east & ddl nodes.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
 
 
 ToDo
