@@ -381,6 +381,23 @@ See project work journal.
 (GOMSS)
 
 
+Wed 25-Jan-2017
+^^^^^^^^^^^^^^^
+
+Finished modifying bloomcast to integrate its results publication into salishsea-site app.
+Released bloomcast-3.1 for 2017 daily forecasts.
+Set up rescuetime commit & tag hooks on kudu for SoG-bloomcast-ensemble project.
+(bloomcast)
+
+Set up rescuetime commit & tag hooks on kudu for salishsea-site project.
+Finished implementation of spring_diatoms view in app.
+(salishsea-site)
+
+Google Drive spreadsheets stopped working again in Firefox.
+
+Morphed hg hooks commit & tag hooks that push highlights to rescuetime so that they don't have to be repo specific by getting the repo name of the label from `basename $PWD`.
+
+
 ToDo
 ====
 
