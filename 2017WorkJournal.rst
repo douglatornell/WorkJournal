@@ -395,7 +395,27 @@ Finished implementation of spring_diatoms view in app.
 
 Google Drive spreadsheets stopped working again in Firefox.
 
-Morphed hg hooks commit & tag hooks that push highlights to rescuetime so that they don't have to be repo specific by getting the repo name of the label from `basename $PWD`.
+Morphed hg commit & tag hooks that push highlights to rescuetime so that they don't have to be repo specific by getting the repo name of the label from `basename $PWD`.
+
+
+Thu 26-Jan-2017
+^^^^^^^^^^^^^^^
+
+First fully automated run of the year :-)
+(bloomcast)
+
+Pulled updates for templates re-organization and bloomcast results view into production.
+Ported license page to Pyramid app.
+(salissea-site)
+
+Changed to use generic hg commit & tag hooks that push highlights to rescuetime on niko.
+
+Reviewed and commented on Idalia's diagram that maps repos and NEMO run descriptions.
+(canyons)
+
+Wrote down the iteration on the run description YAML file that Susan and I came up with to handle AGRIF and a few other warts, and emailed Michael to arrange time to discuss it.
+Finished east & DDL node ADCP processing from mtg w/ Rich on Tue.
+(SalishSea)
 
 
 ToDo
