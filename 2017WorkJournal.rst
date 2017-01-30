@@ -417,6 +417,52 @@ Wrote down the iteration on the run description YAML file that Susan and I came 
 Finished east & DDL node ADCP processing from mtg w/ Rich on Tue.
 (SalishSea)
 
+See project work journal.
+(SoG waves)
+
+
+Fri 27-Jan-2017
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(SoG waves)
+
+Westgrid townhall:
+* had lots of trouble connecting; eventually got on via Chrome to Vidyo; Firefox to Vidyo didn't work
+
+* bugaboo is having file system problem; 3000 corrupted files will be lost
+
+Cedar
+* 100 Gb/s; 2:1 between islands
+* home 50Gb/user
+* scratch 20Tb, 1M files/user; 100Tb, 10M files/group
+* run on scratch, then move files at end of job to project (preferred) or home
+
+Graham
+* very similar to Cedar; should be able to move easily between the 2, but allocations are to specific systems
+* fewer GPU nodes
+* 50 Gb/s infiniband; 8:1 between islands
+* poorer interconnect between islands (1024 cores/island)
+
+Migration
+* must move off: jasper
+* wait for contact from support
+* virtualized user test system available in mid-March
+* expect very limited resources in April
+
+* 2017 RAC award letters will be sent in early March
+* 2017 RAC allocations take effect in mid-April; may slip
+* 2017 CC account renewals delayed to May
+* 2017 success rate expected to be similar to 2016; 54% of compute
+
+Built custom vidyodesktop pkg via instructions at https://support.vidyocloud.com/hc/en-us/articles/226103528-VidyoDesktop-3-6-3-for-Linux-and-Ubuntu-15-04-and-higher
+
+Pointed Rich at our Fraser & Englishman River daily discharge data streams.
+(SalishSea)
+
+Ported site index page to Pyramid app.
+(salishsea-site)
+
 
 ToDo
 ====
