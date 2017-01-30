@@ -464,6 +464,20 @@ Ported site index page to Pyramid app.
 (salishsea-site)
 
 
+Sat 28-Jan-2017
+^^^^^^^^^^^^^^^
+
+Started moving nowcast-green runs to west.cloud; successfully completed a manual test run.
+(SalishSea)
+
+
+Sun 29-Jan-2017
+^^^^^^^^^^^^^^^
+
+Continued work on moving nowcast-green runs to west.cloud; launched run va manual make_forcing_links after automation crapped out due to a bug; run failed with an io memory allocation error.
+(SalishSea)
+
+
 ToDo
 ====
 
