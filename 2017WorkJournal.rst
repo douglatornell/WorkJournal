@@ -475,7 +475,45 @@ Sun 29-Jan-2017
 ^^^^^^^^^^^^^^^
 
 Continued work on moving nowcast-green runs to west.cloud; launched run va manual make_forcing_links after automation crapped out due to a bug; run failed with an io memory allocation error.
+download_live_ocean worker failed due to no files available.
 (SalishSea)
+
+February
+========
+
+Week 4
+------
+
+Mon 30-Jan-2017
+^^^^^^^^^^^^^^^
+
+Merged pyramid branch into default and tagged v2.0.
+Replaced catch-all static page view with similar figure server static view.
+(salishsea-site)
+
+Changed dates in titles on bloomcast results page to be day after run data date; i.e. so that results from today's run have today's date.
+(bloomcast)
+
+Reduced XIOS buffer size for nowcast-green runs on west.cloud and started a new test.
+Backfilled 19jan Live Ocean files that were unavailable yesterday.
+Re-ran 30jan17 nowcast-green on west.cloud with reduced XIOS buffer size so that run output is complete; downloaded for Susan to compare to salish run results.
+(SalishSea)
+
+
+Tue 31-Jan-2017
+^^^^^^^^^^^^^^^
+
+Added `NEMO code config` key to selected run description YAML files.
+Updated working env setup docs re: NEMO-Cmd and SalishSeaCmd repos.
+Deleted SalishSeaCmd package from tools repo.
+Changed tools repo docs to use autodoc mocks for most packages.
+Added --no-submit option to salishsea run sub-command.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+Reviewed and commented on Idalia's latest iteration of NEMO repos org & YAML file.
+Help Idalia try to sort out inability to run commands on salish - very weird; punted to Charles.
+(Canyons)
 
 
 ToDo
