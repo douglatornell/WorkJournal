@@ -516,6 +516,18 @@ Help Idalia try to sort out inability to run commands on salish - very weird; pu
 (Canyons)
 
 
+Wed 1-Feb-2017
+^^^^^^^^^^^^^^
+
+Susan says that there are significant differences in nowcast-green results between salish and west.cloud, so copied nowcast-green/31jan17 restart files from salish to west.cloud to restart testing.
+Diffed namelists, domain, fields & iodef, and everything else I could think of, and summarized in email to Susan.
+Emailed Belaid to give back sshfs shared storage.
+(SalishSea)
+
+Explored and started implementation of 0mq-based distributed logging.
+(NEMO_Nowcast)
+
+
 ToDo
 ====
 
