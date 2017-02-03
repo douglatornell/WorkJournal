@@ -528,6 +528,23 @@ Explored and started implementation of 0mq-based distributed logging.
 (NEMO_Nowcast)
 
 
+Thu 2-Feb-2017
+^^^^^^^^^^^^^^
+
+Dentist appt: upper right molar filling, lower right molar contact repair.
+
+Bloomcast failed in cloud fraction data processing.
+Rebuilt bloomcast env & pycharm project on niko to try to get debugging working no go :-(
+Cloud fraction bug was extension of an edge case we already handle due to Nav Can not reporting weather descriptions at 23:00 when there is no precipitation; problem on 1-Feb was that there was also no observation recorded at 22:00.
+(bloomcast)
+
+Added fspath module to SalishSeaCmd to unify interface for Path objects across Python 2.7 to 3.6+.
+Explored latest comparison of nowcast-green results from west.cloud and salish w/ Susan, and she gave her blessing for production to switch to west.cloud; committed, pushed and deployed the changes to make it so.
+Figured out how to get torque on salish to deliver stdout & stderr files from spool to result directories; wrote docs about it.
+Finished and deployed make_live_ocean_files worker.
+(SalishSea)
+
+
 ToDo
 ====
 
