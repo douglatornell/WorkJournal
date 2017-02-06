@@ -545,6 +545,49 @@ Finished and deployed make_live_ocean_files worker.
 (SalishSea)
 
 
+Fri 3-Feb-2017
+^^^^^^^^^^^^^^
+
+download_weather failed for 00 forecast overnight; re-ran manually at ~08:00.
+Restarted manager to ensure proper loading of next_workers module with make_live_ocean_files worker.
+1st nowcast-green production run on west.cloud instead of salish; fixed bug re: missing message types for download_results worker.
+1st automated run of make_live_ocean_files worker, after a couple of minor bug fixes.
+(SalishSea)
+
+Attended Small Business Info Expo by gov't of Canada to try to learn about setting up a standing offer for DFO clients.
+
+See project work journal.
+(SoG waves)
+
+Continued work on 0mq-based distributed logging.
+(NEMO_Nowcast)
+
+
+Sat 4-Feb-2017
+^^^^^^^^^^^^^^
+
+Continued work on 0mq-based distributed logging.
+(NEMO_Nowcast)
+
+Added nowcast-dev run on salish to automation; initially to test addition of UW Live Ocean T&S boundary conditions for western boundary.
+(SalishSea)
+
+
+Sun 5-Feb-2017
+^^^^^^^^^^^^^^
+
+make_runoff_file worker failed due to a config key that Susan added to the worker but not to the production config file.
+Tracked down debugging writes that are bloating nowcast-green stdout from 89kb to 51Mb and asked Elise if they can be deleted, or wrapped in a namelist-controlled if-block.
+Continued work on 0mq-based distributed logging.
+Tested nowcast distributed logging between west.cloud and kudu and skookum; opened ticket to get ports opened between salish and skookum.
+Dealt with chaos caused by a config error that made upload_forcing run with salish as a destination; caused forcing files to be overwritten with zero-length versions of themselves.
+Checked status of ONC ferry instruments: HB-DB is the only one that has been working since Christmas.
+(SalishSea)
+
+Merged open pull requests in hg-novice lesson in prep for next release.
+(swc)
+
+
 ToDo
 ====
 
