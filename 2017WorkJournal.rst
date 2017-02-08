@@ -587,6 +587,37 @@ Checked status of ONC ferry instruments: HB-DB is the only one that has been wor
 Merged open pull requests in hg-novice lesson in prep for next release.
 (swc)
 
+Week 4
+------
+
+Mon 6-Feb-2017
+^^^^^^^^^^^^^^
+
+nowcast-dev/04feb17 ran for only 12h due to a bad assumption in run_NEMO; changed run_NEMO worker to try to get time step from namelist.domain in run prep dir, then fall back to getting it from previous run's namelist_cfg.
+Power outage disrupted download_weather 12 run because group sallen couldn't be resolved.
+Discussed model results at ONC central node and Boundary Pass monitoring site w/ Rich & Susan.
+Got nowcast system running again after power outage ripples; had to rename restart file for nowcast-dev initiation so that it had the spected restart timestep for a 20s timestep run, and change namelist-time so that NEMO ignores the restart file date/time.
+(SalishSea)
+
+Upgraded conda root env on niko to Python 3.6.
+Built and uploaded Python 3.6 versions of gomss-nowcast channel packages.
+
+Campus-wide(?) power outage from 11:15 to 11:45
+
+Applied yapf to code-base.
+Started work on docs.
+(salishsea-site)
+
+Attended inaugural Salish Sea Network monthly seminar.
+
+
+Tue 7-Feb-2017
+^^^^^^^^^^^^^^
+
+Worked on generating model results time series at ONC central node and Boundary Pass mooring site for Rich; found that xarray.open_mfdataset() is ~65 times slower than xarray.open_dataset().
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
 
 ToDo
 ====
