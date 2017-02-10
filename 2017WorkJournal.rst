@@ -616,7 +616,34 @@ Tue 7-Feb-2017
 
 Worked on generating model results time series at ONC central node and Boundary Pass mooring site for Rich; found that xarray.open_mfdataset() is ~65 times slower than xarray.open_dataset().
 Salish Sea team mtg; see whiteboard.
+nowcast-dev run w/o Orlanski boundary conditions and 20s time step was successful.
 (SalishSea)
+
+Bloomcast run failed, not sure why.
+(bloomcast)
+
+
+Wed 8-Feb-2017
+^^^^^^^^^^^^^^
+
+Finished generating model results time series at ONC central node and Boundary Pass mooring site for Rich.
+Tweaked nowcast-dev config to run at 40s time step.
+Michael profiled the Boundary Pass code and found that the .values attr access in the loop that build the csv lines was a big culprit; chunking x and y also improved things, but not to better than 20% slower than looping over datasets.
+Continued work on 0mq-based distributed logging; did some functional tests, started writing unit tests.
+Tried to switch nowacst-dev run to 40s timestep, but it ran for 2 days instead of 1.
+(SalishSea)
+
+
+Thu 9-Feb-2017
+^^^^^^^^^^^^^^
+
+Continued work on 0mq-based distributed logging; finished writing unit tests, started writing docs.
+Michael and Susan discovered that e1t and e2t are flipped in the Salish Sea coordinates, so the domain aspect ratio has been wrong from that start :-(
+Got nowcast-dev back to running w/ 40s timestep for 1 day duration.
+(SalishSea)
+
+Helped Idalia get running with nemo prepare.
+(Canyons)
 
 
 ToDo
