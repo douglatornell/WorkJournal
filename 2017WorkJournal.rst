@@ -633,6 +633,8 @@ Continued work on 0mq-based distributed logging; did some functional tests, star
 Tried to switch nowacst-dev run to 40s timestep, but it ran for 2 days instead of 1.
 (SalishSea)
 
+Photographed American Robin the in snow in the front yard bushes.
+
 
 Thu 9-Feb-2017
 ^^^^^^^^^^^^^^
@@ -644,6 +646,8 @@ Got nowcast-dev back to running w/ 40s timestep for 1 day duration.
 
 Helped Idalia get running with nemo prepare.
 (Canyons)
+
+Processed photograph of American Robin the in snow in the front yard bushes; got locked out of Flickr account when I tried to upload it.
 
 
 Fri 10-Feb-2017
