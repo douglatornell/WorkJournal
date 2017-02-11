@@ -646,6 +646,21 @@ Helped Idalia get running with nemo prepare.
 (Canyons)
 
 
+Fri 10-Feb-2017
+^^^^^^^^^^^^^^^
+
+Wrote intro and dev docs, and got them to build on readthedocs.
+(salissea-site)
+
+Attended canyons group mtg.
+Helped Idalia with nemo combine.
+(Canyons)
+
+Met w/ Susan, Michael & Elise to discuss our way forward in light of the SalishSea NEMO coordinates file issue.
+Replied to email question from Nancy about what GEM forecasts the nowcast system uses.
+(SalishSea)
+
+
 ToDo
 ====
 
