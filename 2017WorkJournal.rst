@@ -478,10 +478,11 @@ Continued work on moving nowcast-green runs to west.cloud; launched run va manua
 download_live_ocean worker failed due to no files available.
 (SalishSea)
 
+
 February
 ========
 
-Week 4
+Week 5
 ------
 
 Mon 30-Jan-2017
@@ -587,7 +588,8 @@ Checked status of ONC ferry instruments: HB-DB is the only one that has been wor
 Merged open pull requests in hg-novice lesson in prep for next release.
 (swc)
 
-Week 4
+
+Week 6
 ------
 
 Mon 6-Feb-2017
@@ -663,6 +665,76 @@ Helped Idalia with nemo combine.
 Met w/ Susan, Michael & Elise to discuss our way forward in light of the SalishSea NEMO coordinates file issue.
 Replied to email question from Nancy about what GEM forecasts the nowcast system uses.
 (SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Sat 11-Feb-2017
+^^^^^^^^^^^^^^^
+
+Acted on Susan's discovery that nowcast-blue and nowcast-green can use the same iodef.xml file; rolled back iodef-blue.xml and iodef-green.xml links in run_NEMO to test on nowacst-dev run.
+Added closing tags and whitespace to nemo3.6/nowcast/iodef.xml, and created a copy of it as iodef_cloud.xml with the XIOS buffer size set for runs on west.cloud.
+Continued work on 0mq-based distributed logging in NEMO_Nowcast.
+Discussed w/ Susan how to provide platform-specific PBS directives to planned nemo run sub-command; agreed on YAML file stanza.
+Changed SalishSeaNowcast to use distributed logging; not deployed yet.
+(SalishSea)
+
+
+Sun 12-Feb-2017
+^^^^^^^^^^^^^^^
+
+Deployed nowcast distributed logging to skookum and west.cloud.
+After a minor bump re: config keys for the location of the grib_to_netcdf and get_NeahBay_ssh diagnostic figure image files, it worked well for logs from west.cloud, but not from salish.
+A bonus is that the diagnostic figure images are being produced again (see issues #28 and #29); now the salishsea-site app needs to be able to render them.
+Also, the wgrib2 debug log messages have started appearing again (see issue #28), but in the nowcast.debug.log rather than in the wgrib2.log file.
+Changed west.cloud to use unified iodef_cloud.xml for blue and green runs.
+(SalishSea)
+
+Cleaned espresso machine.
+
+Started adding run sub-command to NEMO_Cmd.
+Started working through Melanie's new NEMO GYRE proto-docs.
+(Canyons)
+
+
+Week 7
+------
+
+Mon 13-Feb-2017
+^^^^^^^^^^^^^^^
+
+06 weather download failed; re-ran download_weather 06 manually to restart automation.
+forecast2 watch_NEMO worker failed to bind to logging port; had to run download_resutls worker manually to restart automation.
+Added SMTP logging handler to log_aggregator config.
+Worked on debugging why remote workers are inconsistent in connecting to the PUB ports.
+changed SalishSeaCmd prepare to link to ref namelists in CONFIG/config_name/EXP00/ instead of CONFIG/SHARED/.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+Finished adding run sub-command to NEMO_Cmd.
+Continued working through Melanie's new NEMO GYRE proto-docs.
+(Canyons)
+
+
+Wed 15-Feb-2017
+^^^^^^^^^^^^^^^
+
+forecast2 failed because upload_forcing couldn't find LiveOcean files for 15/16feb; turns out that's because download_lilve_ocean failed yesterday because python-hglib wasn't installed in nemo-nowcast-env; created symlinks for LiveOcean files and re-ran upload_forcing to get forecast2 run to go; re-ran download_live_ocean to backfill.
+I think I got the remote workers distributed logging issues sorted out by changing to use the same port number regardless of the worker's host, and setting an ingress firewall rule on west.cloud.
+Changed next_workers so that download_live_ocean worker passes run-date arg value on to make_live_ocean_files worker, otherwise the latter craps out when the former is run to backfill a prior date.
+Helped Giorgio with ideas on how to manage stuck ariane jobs from Python.
+(SalishSea)
+
+Saw Dr. Dodek at Cityview who diagnosed the lump on my right arm as an actinic keratosis and treated it with cryosurgery.
+
+See project work journal.
+(SoG waves)
+
+Helped Idalia straighten out a repo branch, and diagnose 1st use of nemo run.
+(Canyons)
 
 
 ToDo
