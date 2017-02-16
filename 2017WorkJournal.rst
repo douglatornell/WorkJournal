@@ -737,6 +737,21 @@ Helped Idalia straighten out a repo branch, and diagnose 1st use of nemo run.
 (Canyons)
 
 
+Tue 14-Feb-2017
+^^^^^^^^^^^^^^^
+
+Forgot to take niko's power adapter to UBC w/ me, so worked on discovery for most of the day.
+
+Updated copyright year range in packages:
+* NEMO-Cmd
+* SalishSeaCmd
+* analysis-doug
+Debugged watch_NEMO distributed logging failures and found that they are due to prior watch_NEMO instances that don't terminate.
+Started work on collecting ONC ferry data for ERDDAP datasets.
+SalishSea team mtg; see whiteboard.
+(SalishSea)
+
+
 ToDo
 ====
 
