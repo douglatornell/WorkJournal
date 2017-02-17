@@ -719,6 +719,21 @@ Continued working through Melanie's new NEMO GYRE proto-docs.
 (Canyons)
 
 
+Tue 14-Feb-2017
+^^^^^^^^^^^^^^^
+
+Forgot to take niko's power adapter to UBC w/ me, so worked on discovery for most of the day.
+
+Updated copyright year range in packages:
+* NEMO-Cmd
+* SalishSeaCmd
+* analysis-doug
+Debugged watch_NEMO distributed logging failures and found that they are due to prior watch_NEMO instances that don't terminate.
+Started work on collecting ONC ferry data for ERDDAP datasets.
+SalishSea team mtg; see whiteboard.
+(SalishSea)
+
+
 Wed 15-Feb-2017
 ^^^^^^^^^^^^^^^
 
@@ -737,19 +752,23 @@ Helped Idalia straighten out a repo branch, and diagnose 1st use of nemo run.
 (Canyons)
 
 
-Tue 14-Feb-2017
+Thu 16-Feb-2017
 ^^^^^^^^^^^^^^^
 
-Forgot to take niko's power adapter to UBC w/ me, so worked on discovery for most of the day.
+Wrote CMOS talk idea email to Youyu, Susan, Shilliang & Keith.
+(CMOS)
 
-Updated copyright year range in packages:
-* NEMO-Cmd
-* SalishSeaCmd
-* analysis-doug
-Debugged watch_NEMO distributed logging failures and found that they are due to prior watch_NEMO instances that don't terminate.
-Started work on collecting ONC ferry data for ERDDAP datasets.
-SalishSea team mtg; see whiteboard.
+Continued helping Idalia w/ nemo run.
+(Canyons)
+
+Changed location of grib_to_netcdf worker monitoring image storage to figures/ and moved it in config so that it doesn't get deleted when log_aggregator is restarted.
+Added grib_to_netcdf worker plots image to salishsea-site automation monitoring page.
+Explored why watch_NEMO worker for nowcast-green doesn't get an ack from manager; inconclusive.
+Helped Giorgio with detecting stuck ariane runs, and cleaning up hg in his analysis repo.
+Worked on adding resolved_path() to NEMO-Cmd.
 (SalishSea)
+
+Attended CMEM seminar by Peter Ross on microplastics pollution.
 
 
 ToDo
