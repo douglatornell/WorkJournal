@@ -771,6 +771,68 @@ Worked on adding resolved_path() to NEMO-Cmd.
 Attended CMEM seminar by Peter Ross on microplastics pollution.
 
 
+Fri 17-Feb-2017
+^^^^^^^^^^^^^^^
+
+Bug in Wednesday's change to make next_workers so that download_live_ocean worker passes run-date arg value on to make_live_ocean_files worker, caused the latter to not run yesterday, so upload_forcing for forecast2 failed this morning. Fixed the bug, re-ran make_live_ocean_files, then re-ran upload_forcing to restart automation.
+Confirmed that yesterday's change in location of grib_to_netcdf worker monitoring image storage to figures/ works as expected in production.
+Changed location of get_NeahBay_ssh worker monitoring image storage to figures/ and moved it in config so that it doesn't get deleted when log_aggregator is restarted.
+Added get_NeahBay_ssh worker plots image to salishsea-site automation monitoring page.
+download_live_ocean failed with a 0-length file for hour 29; re-ran manually.
+Re-organized SalishSeaNowcast deployment docs to make a place for west.cloud deployment, and worked on porting in docs from west.cloud quick-start in docs repo.
+(SalishSea)
+
+See project work journal.
+(SoG waves)
+
+
+Sat 18-Feb-2017
+^^^^^^^^^^^^^^^
+
+Log aggregator was not receiving messages from watch_NEMO workers on west.cloud, perhaps due to killing of stuck nowcast-green watcher yesterday; restarted log aggregator and messages started flowing.
+Added debug logging to manager to show raw message received via broker to try to track down why manager doesn't acknowledge watch_NEMO nowcast-green success message.
+download_live_ocean failed with a 0-length file for hour 32; re-ran manually several time to no avail.
+Fixed get_onc_ctd worker handling of empty data; see issue #33.
+Moved wgrib2.log handler from aggregator to publisher config section; see issue #28
+Fixed dev run results archive config key for comparison plots; nowcast-green -> nowcast-dev; backfilled make_plots comparison runs for 12 and 14-17 Fed.
+Experimented with adding a TCP_KEEPALIVE_IDLE=900 option value to the worker -> message broker socket setup in nemo_nowcast.worker; comes from the theory that watch_NEMO nowcast-green can't talk to manager at end of run because the network connection has been idle too long.
+(SalishSea)
+
+
+Sun 19-Feb-2017
+^^^^^^^^^^^^^^^
+
+Forgot to create LiveOcean symlinks to persist 17feb files to compensate for missing 18feb ones; did so and re-ran upload_forcing worker manually to restart automation; upload_forcing workers should do symlinking; see issue #36.
+Decided to leave wgrib2.log handler as it, closing issue #28, because the log should be available if grib_to_netcdf fails, or if it is run with --debug.
+Fixed DataArray objects in  get_onc_ctd worker handling of empty salinity data; closed issue #33.
+Backfilled get_onc_ctd USDDL runs to 28oct16.
+Worked through updating salishsea-nowcast dev env on kudu to Python 3.6; see notebook.
+Worked through updating nemo-nowcast-env on kudu VM to Python 3.6; see notebook.
+nowcast-green watch_NEMO worker still failed to get ack from manager, so added TCP_KEEPALIVE=1 option value to the worker -> message broker socket setup in nemo_nowcast.worker; also changed net.ipv4.tcp_keepalive_time to 900 on nowcast0 and skookum to try to get watch_NEMO nowcast-green success message to be heard by manager; it worked, but now I don't know which change(s) made the difference.
+Reverted net.ipv4.tcp_keepalive_time to 7200 on skookum and re-ran nowcast-green; it worked.
+Reverted net.ipv4.tcp_keepalive_time to 7200 on nowcast0 and re-ran nowcast-green; it worked.
+Committed and pushed worker socket options TCP_KEEPALIVE=1 and TCP_KEEPALIVE_IDLE=900 that ensure that watch_NEMO nowcast-green get ack from manager.
+Got checklist log being written and rotated; see SalishSeaNowcast issue #27, but all the work was in NEMO_Nowcast.
+(SalishSea)
+
+Wrote abstract for CMOS talk.
+
+See project work journal.
+(SoG waves)
+
+
+Week 8
+------
+
+Mon 20-Feb-2017
+^^^^^^^^^^^^^^^
+
+Updated nemo-nowcast-env on west.cloud to Python 3.6.
+Updated nemo-nowcast-env on skookum to Python 3.6.
+Continued work on NEMO_Nowcast checklist logging bug fix.
+(SalishSea)
+
+
 ToDo
 ====
 
