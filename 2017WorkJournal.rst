@@ -810,6 +810,7 @@ Worked through updating salishsea-nowcast dev env on kudu to Python 3.6; see not
 Worked through updating nemo-nowcast-env on kudu VM to Python 3.6; see notebook.
 nowcast-green watch_NEMO worker still failed to get ack from manager, so added TCP_KEEPALIVE=1 option value to the worker -> message broker socket setup in nemo_nowcast.worker; also changed net.ipv4.tcp_keepalive_time to 900 on nowcast0 and skookum to try to get watch_NEMO nowcast-green success message to be heard by manager; it worked, but now I don't know which change(s) made the difference.
 Reverted net.ipv4.tcp_keepalive_time to 7200 on skookum and re-ran nowcast-green; it worked.
+Removed --shared-storage flag from run_NEMO & watch_NEMO; unneeded with distributed logging.
 Reverted net.ipv4.tcp_keepalive_time to 7200 on nowcast0 and re-ran nowcast-green; it worked.
 Committed and pushed worker socket options TCP_KEEPALIVE=1 and TCP_KEEPALIVE_IDLE=900 that ensure that watch_NEMO nowcast-green get ack from manager.
 Got checklist log being written and rotated; see SalishSeaNowcast issue #27, but all the work was in NEMO_Nowcast.
@@ -830,7 +831,16 @@ Mon 20-Feb-2017
 Updated nemo-nowcast-env on west.cloud to Python 3.6.
 Updated nemo-nowcast-env on skookum to Python 3.6.
 Continued work on NEMO_Nowcast checklist logging bug fix.
+Fix bug & unit tests re: removal of --shared-storage flag from watch_NEMO.
+Updated niko salishsea-nowcast dev env to Python 3.6.
+Rebuild NEMO-3.6 SalishSea and SOG configs on west.cloud with boundary sponge layer code.
+Updated niko nemo-cmd dev env to Python 3.6.
+Added fspath() and resolved_path() to NEMO-Cmd API.
+Worked on ERDDAP datasets from hindcast run results; decided with Susan to designate them g for green and V17.03.
+Creatd fspath branch in SalishSeaCmd and started using fspath functions and thinking about YAML file refactoring that Michael and I designed.
 (SalishSea)
+
+Phys Ocgy seminar by Jacquie-Lee re: vertical dissipation parameterizations and internal tide breaking in the Arctic.
 
 
 ToDo
