@@ -842,6 +842,52 @@ Creatd fspath branch in SalishSeaCmd and started using fspath functions and thin
 
 Phys Ocgy seminar by Jacquie-Lee re: vertical dissipation parameterizations and internal tide breaking in the Arctic.
 
+See project work journal.
+(GOMSS)
+
+
+Tue 21-Feb-2017
+^^^^^^^^^^^^^^^
+
+Started materials prep.
+Emailed Marion re: student backgrounds and computer lab facilities.
+(UQAR Winter School)
+
+See project work journal.
+(SoG waves)
+
+Reviewed and refactored Michael's scDataset module.
+(SalishSea)
+
+
+Wed 22-Feb-2017
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(SoG waves)
+
+Reviewed session outline w/ Susan.
+(UQAR Winter School)
+
+
+Thu 23-Feb-2017
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(SoG waves)
+
+See project work journal.
+(GOMSS)
+
+ONC Tsawwassen - Duke Point ferry data came back online starting 16feb; Jie's download cron doesn't appear to be working though; no sign of Tsawwassen - Swatrz Bay data.
+Updated kudu nemo-cmd dev env to Python 3.6.
+Transcribed notes from NEMO=Cmd run porting from handwritten into Bitbucket issues.
+Resurrected nowcast, salishsea-site, and ERDDAP after skookum reboot associated with ocean being moved to data centre.
+(SalishSea)
+
+Went looking for sunset light at Kits Beach, but the sun sets too far to the south this time of year and there wasn't as much alpenglow as I hoped.
+Got an dusk image of KYC dock, downtown, mountains, and interesting clouds.
+
 
 ToDo
 ====
