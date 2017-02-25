@@ -889,6 +889,25 @@ Went looking for sunset light at Kits Beach, but the sun sets too far to the sou
 Got an dusk image of KYC dock, downtown, mountains, and interesting clouds.
 
 
+Fri 24-Feb-2017
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+nowcast run on west.cloud failed because nowcast10 and nowcast12 nodes had shutdown for some reason after the forecast2 run completed; shutdown meant that they lost their /nemoShare/MEOPAR mounts; remounted and re-ran make_forcing_links nowcast+ to restart automation.
+watch_NEMO nowcast-green failed w/ the bad pid error; re-launched it manually with the correct pid.
+Discussed scDataset refactoring w/ Michael.
+download_live_ocean failed due to 0-length file for hour 59.
+Helped Susan update her salishsea-nowcast dev env.
+(SalishSea)
+
+Got gitlasso.uqar.ca account set up.
+Continued work on materials prep.
+Discussed material and pedagogy w/ Idalia.
+(UQAR Winter School)
+
+
 ToDo
 ====
 
