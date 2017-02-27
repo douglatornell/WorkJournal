@@ -908,6 +908,33 @@ Discussed material and pedagogy w/ Idalia.
 (UQAR Winter School)
 
 
+Sat 25-Feb-2017
+^^^^^^^^^^^^^^^
+
+Forgot to persist 23feb LiveOcean boundary conditions files, so upload_forcing for forecast2/24feb failed; confirmed that hour 59 was still 0-length; symlinked for persistence:
+* ln -s fcst/LO_y2017m02d25.nc
+* cd fcst
+* ln -s LO_y2017m02d25.nc LO_y2017m02d26.nc
+ran upload_forcing forecast2 to restart annimation.
+(SalishSea)
+
+Continued work on materials prep.
+Started work on slide deck.
+(UQAR Winter School)
+
+
+Sun 26-Feb-2017
+^^^^^^^^^^^^^^^
+
+Continued work on materials prep.
+Started work on slide deck and directories and repository figures.
+Reviewed slide deck and teaching outline w/ Susan re: content and pedagogy.
+(UQAR Winter School)
+
+download_live_ocean worker stalled on hour 42 file, but resumed work when I sent it an INT signal; also had to run make_live_ocean_files worker manually.
+(SalishSea)
+
+
 ToDo
 ====
 
