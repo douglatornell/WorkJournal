@@ -1068,8 +1068,8 @@ Sea Ice Modeling by Jean-Francois Lemieux (UQAR?)
 Data Assimilation by Andrea Scot (Waterloo)
 (UQAR Winter School)
 
-Investigated docs repo build error on readthedocs.
-(SalishSea)
+Investigated SalishSea docs repo build error on readthedocs re: SMELT docs for Youyu's group.
+(prediction core)
 
 
 Fri 10-Mar-2017
@@ -1118,13 +1118,45 @@ Tue 14-Mar-2017
 ^^^^^^^^^^^^^^^
 
 Continued work on Path and YAML file refactoring in SalishSeaCmd (fspath branch).
-Extracted nowcast-green temperature and salinity fields for Boundary Pass and ONC Central Node region for Rich & Kevin.
 (SalishSea)
+
+Extracted nowcast-green temperature and salinity fields for Boundary Pass and ONC Central Node region for Rich & Kevin.
+(prediction core)
 
 Run failed with an ElementTree parse error during meteo processing; failed again in a different month on 1st manual re-run, then succeeded on a 2nd try.
 (bloomcast)
 
 Salish Sea team mtg - see whiteboard.
+
+
+Wed 15-Mar-2017
+^^^^^^^^^^^^^^^
+
+Outlined steps for Idalia to run on orcinus in prep for mtg next Monday.
+(canyons)
+
+Refactored worklog to capture MEOPAR prediction core activities.
+
+See project work journal.
+(SoG waves)
+
+Thrashed most of the afternoon on skookum nemo_nowcast-env; started with a silly error re: cricusctl, but uncovered that Matplotlib imports were messed up.
+Built new nowcast-env production environment.
+(SalishSea)
+
+
+Thu 16-Mar-2017
+^^^^^^^^^^^^^^^
+
+Recovering from yesterday's nowcast system meltdown:
+* download_weather 18
+* make_live_ocean_files --run-date 2017-03-15 (on salish)
+* make_plots forecast publish --run-date 2017-03-15
+EC GEM2.5 06 forecast was late, causing download_weather 06 to fail; recovery:
+* download_weather 06
+* upload_forcing forecast2 (due to missing LiveOcean files)
+Added Susan to critical error email logger address list and restarted log_aggregator to make that effective.
+(SalishSea)
 
 
 ToDo
