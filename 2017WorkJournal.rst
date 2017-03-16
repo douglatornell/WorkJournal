@@ -1156,6 +1156,22 @@ EC GEM2.5 06 forecast was late, causing download_weather 06 to fail; recovery:
 * download_weather 06
 * upload_forcing forecast2 (due to missing LiveOcean files)
 Added Susan to critical error email logger address list and restarted log_aggregator to make that effective.
+Started work on hindcast metadata for ERDDAP but stalled when I couldn't ssh into skookum.
+skookum had to be rebooted at about 13:00 because it somehow got fail2ban-ed by the owncloud server, thereby loosing access to its /home partition; recover:
+*
+Warnings from make_plots worker:
+  $ python -m nowcast.workers.make_plots $NOWCAST_YAML nowcast publish --run-date 2017-03-16
+/results/nowcast-sys/tools/SalishSeaTools/salishsea_tools/stormtools.py:403: RuntimeWarning: invalid value encountered in less
+  wind_dir = wind_dir + 360 * (wind_dir < 0)
+/results/nowcast-sys/SalishSeaNowcast/nowcast/figures/figures.py:840: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  if inds == 'all':
+
+  $ python -m nowcast.workers.make_plots $NOWCAST_YAML nowcast comparison --run-date 2017-03-16
+/results/nowcast-sys/tools/SalishSeaTools/salishsea_tools/stormtools.py:403: RuntimeWarning: invalid value encountered in less
+  wind_dir = wind_dir + 360 * (wind_dir < 0)
+/results/nowcast-sys/tools/SalishSeaTools/salishsea_tools/data_tools.py:358: FutureWarning: inferring DataArray dimensions from dictionary like ``coords`` has been deprecated. Use an explicit list of ``dims`` instead.
+  'actualSamples': sensor['actualSamples'],
+
 (SalishSea)
 
 
