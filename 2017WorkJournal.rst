@@ -1158,7 +1158,14 @@ EC GEM2.5 06 forecast was late, causing download_weather 06 to fail; recovery:
 Added Susan to critical error email logger address list and restarted log_aggregator to make that effective.
 Started work on hindcast metadata for ERDDAP but stalled when I couldn't ssh into skookum.
 skookum had to be rebooted at about 13:00 because it somehow got fail2ban-ed by the owncloud server, thereby loosing access to its /home partition; recover:
-*
+* download_results $NOWCAST_YAML west.cloud-nowcast nowcast
+* get_NeahBay_ssh $NOWCAST_YAML forecast
+* make_plots $NOWCAST_YAML nowcast publish --run-date 2017-03-16
+* upload_forcing $NOWCAST_YAML west.cloud-nowcast ssh
+* make_plots $NOWCAST_YAML nowcast research --run-date 2017-03-16
+* make_plots $NOWCAST_YAML nowcast comparison --run-date 2017-03-16
+* ping_erddap $NOWCAST_YAML nowcast
+* download_live_ocean $NOWCAST_YAML
 Warnings from make_plots worker:
   $ python -m nowcast.workers.make_plots $NOWCAST_YAML nowcast publish --run-date 2017-03-16
 /results/nowcast-sys/tools/SalishSeaTools/salishsea_tools/stormtools.py:403: RuntimeWarning: invalid value encountered in less
@@ -1171,7 +1178,84 @@ Warnings from make_plots worker:
   wind_dir = wind_dir + 360 * (wind_dir < 0)
 /results/nowcast-sys/tools/SalishSeaTools/salishsea_tools/data_tools.py:358: FutureWarning: inferring DataArray dimensions from dictionary like ``coords`` has been deprecated. Use an explicit list of ``dims`` instead.
   'actualSamples': sensor['actualSamples'],
+(SalishSea)
 
+Mtg w/ Jackie; see project work journal.
+(Resilient-C)
+
+
+  Fri 17-Mar-2017
+  ^^^^^^^^^^^^^^^
+
+download_live_ocean failed during yesterday's recover, perhaps due to being left to run in background of closed terminal session; recovery:
+* download_live_ocean $NOWCAST_YAML --run-date 2017-03-16
+* make_live_ocean_files $NOWCAST_YAML --run-date 2017-03-16
+* upload_forcing west.cloud-nowcast forecast2
+(SalishSea)
+
+See project work journal.
+(SoG waves)
+
+Westgrid townhall:
+* https://www.westgrid.ca/files/WG%20Town%20Hall%20March%2017%202017.pdf
+* new systems updates
+  * Patrick Mann, ops dir of westgrid
+  * arbutus 7600 cores running, ceph expansion in progress, Ryan Enge UVic is team lead
+  * storage is biggest issue in RAC, not enough
+  * Cedar racks & servers installed, cabling in progress, still on target for mid-April, pessimistic end of April or early May
+  * Graham ~2wks behind Cedar
+  * Network agreements are delaying national object storage service
+  * Lustre FS is done
+  * Scheduler changed to Slurm (open source w/ commercial support), docs soon on docs wiki
+  * Niagara RFP issued, ~60k cores, late 2017
+  * NDC (National Data Cyberinfrastructure) 13Pb delivered to Waterloo available early-Apr, 10Pb at SFU in mid-April
+  * Object storage in summer, lots of demand
+  * Jasper defunding delayed to 1Oct, all other system defunding dates also extended
+  * **data will be deleted after defunding dates - no backups**
+  * orcinus & bugaboo (and others) defunded 13-Mar-2018
+* migration
+  * Patrick Mann, ops dir of westgrid
+  * westgrid.ca/migration_process docs
+  * move data in advance to avoid network bottlenecks
+  * jasper will be available to UofA researchers for 1-3 years (but not computecanada users)
+  * delete, archive, compress
+  * use globus for file transfers (high speed)
+  * docs.computecanada.ca
+* silo decommisioning
+  * Sergiy Stepanenko USask site lead
+  * 1st stage migration from Silo to SFU & Waterloo completed
+  * 2nd stage will be to NDC sometime in summer 2017
+* national updates
+  * Erin Trifunov
+  * account renewals by 13Apr or deleted; no CCV
+  * email notifications going out in batches
+  * 2017 RAC award letters going out next week; date of effect TBD based on Cedar and Graham availability
+  * scaling:
+    * 54% of compute requests
+    * 90% of storage requests
+  * HPCS 6-9Jun in Kingston
+* westgrid updates
+  * training:
+    * 29mar paraviewweb
+    * 19-22 jun ubc summer school
+
+
+Sat 18-Mar-2017
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(SoG waves)
+
+
+Sun 19-Mar-2017
+^^^^^^^^^^^^^^^
+
+12 weather download failed due to unavailability of EC files, ran download_weather 12 to recover at 14:05.
+watch_NEMO failed to find nowcast run PID; recover:
+* get_NeahBay_ssh forecast
+* download_results nowcast
+make_plots nowcast research failed
+Started changing SalishSeaCmd package to use f-strings.
 (SalishSea)
 
 
