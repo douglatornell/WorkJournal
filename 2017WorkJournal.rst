@@ -1259,6 +1259,23 @@ Started changing SalishSeaCmd package to use f-strings.
 (SalishSea)
 
 
+Week 11
+-------
+
+Mon 20-Mar-2017
+^^^^^^^^^^^^^^^
+
+Created provisional ubcSSnBathymetryV17-02 ERDDAP dataset.
+Continued changing SalishSeaCmd package to use f-strings.
+Requested access to Python 3.6 beta on readthedocs for SalishSeaCmd project.
+(SalishSea)
+
+Seminar by SCOR tour speaker CJ Mundy of UManitoba on under-ice spring algae blooms in the Arctic.
+
+Helped Idalia get set up and running on orcinus.
+(Canyons)
+
+
 ToDo
 ====
 
