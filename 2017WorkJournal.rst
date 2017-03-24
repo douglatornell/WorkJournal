@@ -1276,6 +1276,34 @@ Helped Idalia get set up and running on orcinus.
 (Canyons)
 
 
+Tue 21-Mar-2017
+^^^^^^^^^^^^^^^
+
+Created provisional ubcSSg3DuVelocity1hV17-02, ubcSSg3DvVelocity1hV17-02, ubcSSg3DwVelocity1hV17-02 ERDDAP datasets.
+Worked on generating ERDDAP datasets from ONC ferry data.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+
+Wed 22-Mar-2017
+^^^^^^^^^^^^^^^
+
+State of the PAcific Ocean (SOPO) meeting in Sydney.
+
+See project work journal.
+(SoG waves)
+
+
+Thu 23-Mar-2017
+^^^^^^^^^^^^^^^
+
+State of the PAcific Ocean (SOPO) meeting in Sydney.
+
+Extracted nowcast-green temperature and salinity fields for Boundary Pass and ONC Central Node region *for correct date range* for Rich & Kevin.
+(prediction core)
+
+
+
 ToDo
 ====
 
