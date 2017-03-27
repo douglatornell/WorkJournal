@@ -1184,8 +1184,8 @@ Mtg w/ Jackie; see project work journal.
 (Resilient-C)
 
 
-  Fri 17-Mar-2017
-  ^^^^^^^^^^^^^^^
+Fri 17-Mar-2017
+^^^^^^^^^^^^^^^
 
 download_live_ocean failed during yesterday's recover, perhaps due to being left to run in background of closed terminal session; recovery:
 * download_live_ocean $NOWCAST_YAML --run-date 2017-03-16
@@ -1303,11 +1303,33 @@ Extracted nowcast-green temperature and salinity fields for Boundary Pass and ON
 (prediction core)
 
 
+Fri 24-Mar-2017
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(SoG waves)
+
+
+Sat 25-Mar-2017
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(SoG waves)
+
+
+Sun 26-Mar-2017
+^^^^^^^^^^^^^^^
+
+forecast2 watch_NEMO worker failed due to bad run_NEMO pid; ran download_results manually to restart automation.
+
+See project work journal.
+(SoG waves)
+
+
 
 ToDo
 ====
 
-* docs re: stdout & stderr on salish
 * refactor, unit tests & docs for forcing links checking for NEMO-3.6
 
 * reduce resolution of landing page images for faster load times
