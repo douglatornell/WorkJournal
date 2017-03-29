@@ -1259,7 +1259,7 @@ Started changing SalishSeaCmd package to use f-strings.
 (SalishSea)
 
 
-Week 11
+Week 12
 -------
 
 Mon 20-Mar-2017
@@ -1321,10 +1321,45 @@ Sun 26-Mar-2017
 ^^^^^^^^^^^^^^^
 
 forecast2 watch_NEMO worker failed due to bad run_NEMO pid; ran download_results manually to restart automation.
+download_live_ocean worker failed with 404 error on hour 26; created symlinks to presist the previous day's files.
 
 See project work journal.
 (SoG waves)
 
+
+Week 13
+-------
+
+Mon 27-Mar-2017
+^^^^^^^^^^^^^^^
+Debugged conservative temperature fields def issue in Susan's hindcast runs.
+Added colour bar range attribute values setting feature to ERDDAP dataset notebook.
+Worked toward provisional ubcSSg3DTracerFields1hV17-02 ERDDAP dataset.
+Continued work on generating ERDDAP datasets from ONC ferry data.
+Helped Tereza w/ hg heads, rebasing, merging, ssh keys, and NEMO namelists.
+(SalishSea)
+
+Phys Ocgy seminars by Rob Izett (net community production in subarctic Pacific based on dO2/Ar observations with NO2-based corrections for vertical mixing) and Phillipe Tortell (vertical mixing and net community production in Arctic based on observations and modeling - MEOPAR proposal)
+
+
+Tue 28-Mar-2017
+^^^^^^^^^^^^^^^
+
+Got close to provisional ubcSSg3DTracerFields1hV17-02 ERDDAP dataset; incorrect salinity standard_name value, need to repeat all hindcast runs; conflicting salinity units in run results, need to repeat all hindcast runs.
+Created provisional ubcSSgSurfaceTracerFields1hV17-02 ERDDAP dataset.
+Explored ptrc_T files, working toward ubcSSg3DBiologyTracerFields1hV17-02 ERDDAP dataset; need to buff variables names, standard_name attributes, and units in field_def.xml and iodef.xml.
+Tide gauge station datasets fail to load due to dimension issues.
+Helped Tereza more with ssh keys.
+Talked to Susan about biology tracers metadata edits.
+Continued work on generating ERDDAP datasets from ONC ferry data.
+(SalishSea)
+
+Discussed Kevin's Boundary Pass to Central Node analysis w/ he, Rich & Susan.
+Generated 3 velocity component field datasets for Kevin.
+(prediction core)
+
+Discussed model runs progress w/ Idalia.
+(Canyons)
 
 
 ToDo
