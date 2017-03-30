@@ -1321,7 +1321,7 @@ Sun 26-Mar-2017
 ^^^^^^^^^^^^^^^
 
 forecast2 watch_NEMO worker failed due to bad run_NEMO pid; ran download_results manually to restart automation.
-download_live_ocean worker failed with 404 error on hour 26; created symlinks to presist the previous day's files.
+download_live_ocean worker failed with 404 error on hour 26; created symlinks to persist the previous day's files.
 
 See project work journal.
 (SoG waves)
@@ -1360,6 +1360,27 @@ Generated 3 velocity component field datasets for Kevin.
 
 Discussed model runs progress w/ Idalia.
 (Canyons)
+
+
+wed 29-Mar-2017
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(SoG waves)
+
+Created a visualization notebook in analysis-doug/SoG-waves/ to explore ww3 results.
+(SalishSea)
+
+
+Thu 30-Mar-2017
+^^^^^^^^^^^^^^^
+
+Tried test of 36h forecast2 run by changing run duration in config file from 1.25 to 1.5 days; failed 46 timesteps after 30h 'cuz that's beyond the end of weather forcing; looks like only forecast can be extended to 36h.
+Restarted erddap.
+(SalishSea)
+
+See project work journal.
+(SoG waves)
 
 
 ToDo
