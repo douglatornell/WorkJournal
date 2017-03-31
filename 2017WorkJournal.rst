@@ -1355,7 +1355,7 @@ Continued work on generating ERDDAP datasets from ONC ferry data.
 (SalishSea)
 
 Discussed Kevin's Boundary Pass to Central Node analysis w/ he, Rich & Susan.
-Generated 3 velocity component field datasets for Kevin.
+Started generation of 3 velocity component field datasets for Kevin.
 (prediction core)
 
 Discussed model runs progress w/ Idalia.
@@ -1377,10 +1377,23 @@ Thu 30-Mar-2017
 
 Tried test of 36h forecast2 run by changing run duration in config file from 1.25 to 1.5 days; failed 46 timesteps after 30h 'cuz that's beyond the end of weather forcing; looks like only forecast can be extended to 36h.
 Restarted erddap.
+Started work on XIOS2 repo for group and production:
+* NEMO docs recommend trunk r819, but that is from 1feb16
+* after consultation w/ Susan and Michael, created repo from tip of trunk
+* set up XIOS-2-hg-mirror, XIOS-2-mirror-merge, Bitbucket XIOS-2, and working XIOS-2 repos
+* wrote docs for repo mgmt in re-organized NEMO code docs section
+* worked on building XIOS-2 on orcinus, but it is failing with a duplicate main() error
 (SalishSea)
 
 See project work journal.
 (SoG waves)
+
+Started generation of 3 velocity component field datasets for Kevin's Boundary Pass to Central Node analysis.
+(prediction core)
+
+Attended EOAS colloquium by John Thompson (ex-EOAS, now Cornell) re: future of mineral exploration and mining.
+
+Attended poster corral.
 
 
 ToDo
