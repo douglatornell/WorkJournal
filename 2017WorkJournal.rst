@@ -1396,6 +1396,21 @@ Attended EOAS colloquium by John Thompson (ex-EOAS, now Cornell) re: future of m
 Attended poster corral.
 
 
+Fri 31-Mar-2017
+^^^^^^^^^^^^^^^
+
+Did a successful 36h forecast run test; agreed with Susan to make that the default from here forward.
+Modernized run_NEMO worker _launch_run_script().
+(SalishSea)
+
+See project work journal.
+(SoG waves)
+
+See project work journal.
+(GOMSS)
+
+
+
 ToDo
 ====
 
