@@ -1401,6 +1401,7 @@ Fri 31-Mar-2017
 
 Did a successful 36h forecast run test; agreed with Susan to make that the default from here forward.
 Modernized run_NEMO worker _launch_run_script().
+Tracked XIOS-2 build issue down to an upstream bug; svn r1066 that Michael is using builds fine.
 (SalishSea)
 
 See project work journal.
@@ -1409,6 +1410,58 @@ See project work journal.
 See project work journal.
 (GOMSS)
 
+
+Sat 1-Apr-2017
+^^^^^^^^^^^^^^
+
+Changed YAML file `output: files:` key to `iodefs` (breaking change), and `output: domain:` key to `domains` with fall-back to `domain`.
+Added processing for optional YAML file `output: files:` key for the XIOS-2 file_def.xml file to SalishSeaCmd.
+watch_NEMO failed to find run_NEMO process; idea let watch_NEMO do pgrep instead of run_NEMO because pgrep in run_NEMO sometimes returns multiple pids, and the most recent is not the correct one.
+(SalishSea)
+
+
+Sun 2-Apr-2017
+^^^^^^^^^^^^^^
+
+Resolved NEMO-Cmd issue #16 re: Python 2.7 unicode/str error in vcs revision file writing.
+Ported YAML file output section key spelling changes & addition of filedefs item to NEMO-Cmd.
+Started adding path existence check to nemo_cmd.utils.get_run_desc_value().
+(SalishSea)
+
+ssh keys thrash on west.cloud because my west.cloud_id_rsa somehow got deleted from nowcast1; default key available on all VMs is the nefos sshfs one.
+
+See project work journal.
+(SoG waves)
+
+
+April
+=====
+
+Week 14
+-------
+
+Mon 3-Apr-2017
+^^^^^^^^^^^^^^
+
+Finished adding path existence check to nemo_cmd.utils.get_run_desc_value().
+Integrated path existence check into SalishSeaCmd.
+Expanded use of get_run_desc_value() in SalishSeaCmd.
+(SalishSea)
+
+SoG Networks seminars by Kevin Fan re: deep gravity currents, and Giorgio Sgarbi re: Iona outfall particle tracking.
+
+Late lunchtime conversation w/ Yoshi of Mark J's group re: NEMO model & explosive volcanoes.
+
+
+Tue 4-Apr-2017
+^^^^^^^^^^^^^^
+
+Continued work on NEMO-Cmd and SalishSeaCmd improvements.
+NEMO-Cmd VCS recording now ignores CONFIG/cfg.txt and TOOLS/COMPILE/full_key_list.txt files.
+Fixed bug re: VCS recording file name for NEMO code repo in SalishSeaCmd.
+Started refactoring forcing paths in SalishSeaCmd to use get_run_desc_value().
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
 
 
 ToDo
