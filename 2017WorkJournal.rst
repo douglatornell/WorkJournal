@@ -1464,6 +1464,77 @@ Salish Sea team mtg; see whiteboard.
 (SalishSea)
 
 
+Wed 5-Apr-2017
+^^^^^^^^^^^^^^
+
+ECget river flow failed for Fraser; wateroffice site has added commas to discharge values in HTML table; hacked code to make it work.
+Manually re-ran make_runoff_file and upload_forcing to restart automation for forecast2 run.
+Tried to help Susan switch to running hindcast on orcinus; environment mess, then config file mess.
+(SalishSea)
+
+See project work journal.
+(SoG waves)
+
+
+Thu 6-Apr-2017
+^^^^^^^^^^^^^^
+
+See project work journal.
+(SoG waves)
+
+EOAS colloquium by Nicolas Cassar re: remote sensing of net community production
+
+Started refactoring forcing paths in SalishSeaCmd to use get_run_desc_value().
+(SalishSea)
+
+
+Fri 7-Apr-2017
+^^^^^^^^^^^^^^
+
+Submitted renewal request for Compute Canada account.
+
+See project work journal.
+(GOMSS)
+
+Updated bloomcast dev env on kudu to Python 3.6.
+Fixed rivers discharge commas issue in bloomcast and manually ran for today.
+(SalishSea)
+
+See project work journal.
+(SoG waves)
+
+
+Sat 8-Apr-2017
+^^^^^^^^^^^^^^
+
+Finished refactoring forcing paths in SalishSeaCmd to use get_run_desc_value().
+Split SalishSeaCmd run description file docs to improve TOC visibility.
+(SalishSea)
+
+
+Sun 9-Apr-2017
+^^^^^^^^^^^^^^
+
+Continued work on metadata for v17-02 ERDDAP datasets.
+Added restart section handling to SalishSeaCmd.prepare for NEMO-3.6 runs.
+(SalishSea)
+
+
+Week 15
+-------
+
+Mon 10-Apr-2017
+^^^^^^^^^^^^^^^
+
+Changed SalishSeaNEMO.sh script generation to return exit code of mprirun command; re: SalishSeaCmd issue #3.
+Got SalishSeaCmd docs to build on readthedocs re: Python 3.6.
+Continued work on metadata for v17-02 ERDDAP datasets.
+(SalishSea)
+
+See project work journal.
+(SoG waves)
+
+
 ToDo
 ====
 
