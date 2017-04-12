@@ -1535,6 +1535,21 @@ See project work journal.
 (SoG waves)
 
 
+Tue 11-Apr-2017
+^^^^^^^^^^^^^^^
+
+Worked on expense claim for SoPO trip.
+
+Salish Sea team mtg; see whiteboard.
+Re-created XIOS-2 maint repos based on r1066 checkout.
+Continued work on ERDDAP metadata via email discussions w/ group.
+(SalishSea)
+
+EOAS retreat lunch; long chat w/ Phil.
+
+Drinks at The Point to celebrate Cindy & Jie's thesis submissions.
+
+
 ToDo
 ====
 
