@@ -1068,8 +1068,8 @@ Sea Ice Modeling by Jean-Francois Lemieux (UQAR?)
 Data Assimilation by Andrea Scot (Waterloo)
 (UQAR Winter School)
 
-Investigated SalishSea docs repo build error on readthedocs re: SMELT docs for Youyu's group.
-(prediction core)
+Investigated SalishSea docs repo build error on readthedocs re: SMELT docs for Youyu's g-oup.
+(prediction-core)
 
 
 Fri 10-Mar-2017
@@ -1121,7 +1121,7 @@ Continued work on Path and YAML file refactoring in SalishSeaCmd (fspath branch)
 (SalishSea)
 
 Extracted nowcast-green temperature and salinity fields for Boundary Pass and ONC Central Node region for Rich & Kevin.
-(prediction core)
+(prediction-core)
 
 Run failed with an ElementTree parse error during meteo processing; failed again in a different month on 1st manual re-run, then succeeded on a 2nd try.
 (bloomcast)
@@ -1300,7 +1300,7 @@ Thu 23-Mar-2017
 State of the PAcific Ocean (SOPO) meeting in Sydney.
 
 Extracted nowcast-green temperature and salinity fields for Boundary Pass and ONC Central Node region *for correct date range* for Rich & Kevin.
-(prediction core)
+(prediction-core)
 
 
 Fri 24-Mar-2017
@@ -1356,7 +1356,7 @@ Continued work on generating ERDDAP datasets from ONC ferry data.
 
 Discussed Kevin's Boundary Pass to Central Node analysis w/ he, Rich & Susan.
 Started generation of 3 velocity component field datasets for Kevin.
-(prediction core)
+(prediction-core)
 
 Discussed model runs progress w/ Idalia.
 (Canyons)
@@ -1389,7 +1389,7 @@ See project work journal.
 (SoG waves)
 
 Started generation of 3 velocity component field datasets for Kevin's Boundary Pass to Central Node analysis.
-(prediction core)
+(prediction-core)
 
 Attended EOAS colloquium by John Thompson (ex-EOAS, now Cornell) re: future of mineral exploration and mining.
 
@@ -1531,9 +1531,6 @@ Got SalishSeaCmd docs to build on readthedocs re: Python 3.6.
 Continued work on metadata for v17-02 ERDDAP datasets.
 (SalishSea)
 
-See project work journal.
-(SoG waves)
-
 
 Tue 11-Apr-2017
 ^^^^^^^^^^^^^^^
@@ -1548,6 +1545,27 @@ Continued work on ERDDAP metadata via email discussions w/ group.
 EOAS retreat lunch; long chat w/ Phil.
 
 Drinks at The Point to celebrate Cindy & Jie's thesis submissions.
+
+
+Wed 12-Apr-2017
+^^^^^^^^^^^^^^^
+
+Off-kilter morning; hard to settle down to work.
+
+Resolved PyCharm issue of test runner using elements from 2016.3.2 by downloading and installing 2017.1.1 tarball; looks like I was seeing 2016.3.2 because I did an in-place upgrade from 2016.3.2 to 2017.1.1.
+
+Added Amber Holdsworth to SealishSea-MEOPAR and CCAR-modeling teams on Bitbucket.
+(prediction-core)
+
+See project work journal.
+(SoG waves)
+
+
+Thu 13-Apr-2017
+^^^^^^^^^^^^^^^
+
+forecast2 watch_NEMO failed w/ bad pid error; manually re-ran download_results to restart automation.
+(SalishSea)
 
 
 ToDo
