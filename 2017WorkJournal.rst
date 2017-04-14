@@ -1538,7 +1538,7 @@ Tue 11-Apr-2017
 Worked on expense claim for SoPO trip.
 
 Salish Sea team mtg; see whiteboard.
-Re-created XIOS-2 maint repos based on r1066 checkout.
+Re-created XIOS-2 maint repos based on r1066 checkout; unable to build on salish because netcdf.mod is not found.
 Continued work on ERDDAP metadata via email discussions w/ group.
 (SalishSea)
 
@@ -1565,7 +1565,19 @@ Thu 13-Apr-2017
 ^^^^^^^^^^^^^^^
 
 forecast2 watch_NEMO failed w/ bad pid error; manually re-ran download_results to restart automation.
+Continued work on XIOS-2 repo; got a successful build on salish by adding -I/user/include.
+Sent email to Roman@westgrid re: updating Mercurial on orcinus and suggested building module from Centos RPM to perhaps avoid Python 2.7/3 conflict.
+Added NEMO-3.6 repos maint section to docs.
+Ported get_run_desc_value() refactoring from SalishSeaCmd to NEMO-Cmd.
+Helped Susan get her salishsea-nowcast dev env sorted out so that she can do rivers files updates.
 (SalishSea)
+
+Sumitted expense claim for SoPO meeting trip.
+
+See project work journal.
+(SoG waves)
+
+Attended final EOAS colloquium re: 65Mya extinction event crater off Yucatan.
 
 
 ToDo
