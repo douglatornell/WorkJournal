@@ -1580,6 +1580,23 @@ See project work journal.
 Attended final EOAS colloquium re: 65Mya extinction event crater off Yucatan.
 
 
+Tue 18-Apr-2017
+^^^^^^^^^^^^^^^
+
+Salish Sea team mtg; see whiteboard.
+Continued work on ERDDAP metadata until I realized that there is un-pushed work at home on kudu.
+Finished deleting SalishSeaNowcat pkg from tools repo.
+Started work on revising web site figures docs.
+Fixed import issues in tools docs so that they build without error again.
+(SalishSea)
+
+Checked Kevin's report that the Aug-2016 Boundary Pass to Central Node results slabs contain incorrect variables; unable to reproduce.
+(prediction-core)
+
+Mtg w/ Saurav re: workspace organization.
+(Canyons)
+
+
 ToDo
 ====
 
