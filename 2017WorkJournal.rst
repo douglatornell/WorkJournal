@@ -1580,9 +1580,82 @@ See project work journal.
 Attended final EOAS colloquium re: 65Mya extinction event crater off Yucatan.
 
 
+Fri 14-Apr-2017
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Good Friday
+
+Extracted nowcast-green temperature, salinity and 3 velocity components fields for Boundary Pass and ONC Central Node region for 9-22-Aug-2016 for Rich & Kevin.
+(prediction-core)
+
+Split NEMO-Cmd run description file docs to improve TOC visibility.
+Worked on SalishSeaCmd issue #2 re: making land processor elimination MPI-LPE mapping file configurable in YAML file.
+(SalishSea)
+
+See project work journal.
+(SoG waves)
+
+
+Sat 15-Apr-2017
+^^^^^^^^^^^^^^^
+
+Restarted ERDDAP after overnight email reports of excessive failure rates.
+Added west.cloud rule to allow ingress on port 5570 for make_ww3_wind_file worker.
+Updated SalishSeaNowcast on skookum and west.cloud to enable make_ww3_wind_file in automation.
+Resolved SalishSeaCmd issue #2 re: making land processor elimination MPI-LPE mapping file configurable in YAML file.
+Buffed NEMO-Cmd example YAML files and docs.
+Ported separate YAML restart section from SalishSeaCmd to NEMO-Cmd.
+Changed NEMO-Cmd generated NEMO.sh script to return exit code of mpirun command.
+Refactored SalishSeaCmd to make temporary run directory a Path object throughout.
+(SalishSea)
+
+See project work journal.
+(SoG waves)
+
+
+Sun 16-Apr-2017
+^^^^^^^^^^^^^^^
+
+Added west.cloud rule to allow ingress on ports 5571-5572 for make_ww3_current_file and run_ww3 workers.
+Updated SalishSeaNowcast on skookum and west.cloud to enable make_ww3_current_file and run_ww3 in automation.
+Started refactoring NEMO-Cmd to make temporary run directory a Path object throughout.
+(SalishSea)
+
+Replied to Étienne's eamil about submitting patches.
+Updated club membership link and emailed Mark Ford thanks for the heads-up.
+(randopony)
+
+See project work journal.
+(SoG waves)
+
+
+Week 15
+-------
+
+Mon 17-Apr-2017
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Easter Monday
+
+See project work journal.
+(SoG waves)
+
+download_live_ocean failed silently yesterday at hour 49, causing forecast2 to fail this morning; a check upstream shows that hour 49 is now available, so manually re-ran download_live_ocean.
+Finished refactoring NEMO-Cmd to make temporary run directory a Path object throughout.
+download_live_ocean for 16apr stalled again at hour 51; manually added symlinks to persist previous day's product, and launched nowcast and nowcast-dev late.
+Resumed work on clearing old SalishSeaNowcast pkg out of tools repo.
+Discussed nowcast figures dev/test workflow and docs w/ Susan.
+(SalishSea)
+
+Resolved insecure content issue on site index page by symlinking circle image into /results/nowcast-sys/figures/ tree so that it can be served via apache2 figures static content server.
+Confirmed that today's resolution of chaussette github issue #82 allows us to unpin waitress from 0.9.0; decided to wait a couple of weeks to see if there is a new release of chaussette.
+(salishsea-site)
+
+
 Tue 18-Apr-2017
 ^^^^^^^^^^^^^^^
 
+HRDPS 06 forecast was late so download_weather worker failed; re-ran manually to restart automation.
 Salish Sea team mtg; see whiteboard.
 Continued work on ERDDAP metadata until I realized that there is un-pushed work at home on kudu.
 Finished deleting SalishSeaNowcat pkg from tools repo.
@@ -1595,6 +1668,46 @@ Checked Kevin's report that the Aug-2016 Boundary Pass to Central Node results s
 
 Mtg w/ Saurav re: workspace organization.
 (Canyons)
+
+
+Wed 19-Apr-2017
+^^^^^^^^^^^^^^^
+
+watch_NEMO forecast2 reported bad pid; manually ran download_results, but accidentally overwrote 17apr17.
+Explored tracer figures code from Muriel and Elise and thought about how to integrate it into research figures.
+Changed plot_dir to Path object in make_plots worker.
+(SalishSea)
+
+See project work journal.
+(SoG waves)
+
+See project work journal.
+(GOMSS)
+
+See project work journal.
+(Resilient-C)
+
+
+Thu 20-Apr-2017
+^^^^^^^^^^^^^^^
+
+get_NeahBay_ssh failed due to missing Mercurial on skookum, but forecast2 run proceeded thanks to persistence symlinking in upload_forcing.
+Opened ticket UDSE-5732-LXGF re: missing Mercurial on skookum & salish, and downgrade to 3.3.2 on other machines.
+run_ww3 forecast2 didn't launch because I forgot to pull, update & restart manager on skookum.
+Buffed SalishSeaNowcast deployment docs.
+Added provision 17-02 biology tracers dataset to ERDDAP.
+Sorted out value of _FillValue and missing_value variable attrs in ERDDAP; keeping both.
+Renamed 3D[uvw]Velocity datasets to 3D[uvw]Variables.
+(SalishSea)
+
+See project work journal.
+(SoG waves)
+
+See project work journal.
+(GOMSS)
+
+See project work journal.
+(Resilient-C)
 
 
 ToDo
