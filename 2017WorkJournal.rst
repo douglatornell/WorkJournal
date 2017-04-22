@@ -1710,6 +1710,20 @@ See project work journal.
 (Resilient-C)
 
 
+Fri 21-Apr-2017
+^^^^^^^^^^^^^^^
+
+Continued work on ERDDAP datasets metadata; lots more buffing.
+Struggled with extra dimension in single point ssh files; ERDDAP doesn't like dimensions of ssosheig.
+(SalishSea)
+
+Attended canyons team mtg; did refresher on hg rebase.
+Met w/ Saurav to continue towards NEMO-Cmd.
+(Canyons)
+
+EOAS dept. computer committee issues.
+
+
 ToDo
 ====
 
