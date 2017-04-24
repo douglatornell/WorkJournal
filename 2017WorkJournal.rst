@@ -1723,6 +1723,31 @@ Met w/ Saurav to continue towards NEMO-Cmd.
 
 EOAS dept. computer committee issues.
 
+Saw Vertical Influences at Britannia Arena.
+
+
+Sat 22-Apr-2017
+^^^^^^^^^^^^^^^
+
+Confirmed that run_ww3 worker is cleaning up wind and current files after itself, and deleted all the old ones from test runs and pre-production.
+Tagged several significant points in SalishSeaNowcast repo; NEMO_Nowcast, distributed logging, Python 3.6, wave forecasts; now on v3.3.dev0 for dev edge.
+Continued work on revising web site figures docs.
+(SalishSea)
+
+Took lots of old electronics/appliances to recycling drop-off at Dunbar Community Centre.
+
+
+Sun 23-Apr-2017
+^^^^^^^^^^^^^^^
+
+Continued work on revising web site figures docs.
+Restarted ERDDAP server due to high error rate reports overnight.
+Exposed nemo_cmd.combine.find_rebuild_nemo_script() in nemo_cmd.api; re: NEMO-Cmd issue #20.
+Added confirmation of existence of rebuild_nemo script to nemo_cmd.prepare; re: NEMO-Cmd issue #19.
+Added confirmation of existence of rebuild_nemo script to salishsea_cmd.prepare; re: SalishSeaCmd issue #4.
+Finally succeeded in creating and XIOS-2 repo on Bitbucket that builds on salish and orcinus.
+(SalishSea)
+
 
 ToDo
 ====
