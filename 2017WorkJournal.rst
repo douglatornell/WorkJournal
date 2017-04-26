@@ -1629,7 +1629,7 @@ See project work journal.
 (SoG waves)
 
 
-Week 15
+Week 16
 -------
 
 Mon 17-Apr-2017
@@ -1736,6 +1736,9 @@ Continued work on revising web site figures docs.
 
 Took lots of old electronics/appliances to recycling drop-off at Dunbar Community Centre.
 
+See project work journal.
+(GOMSS)
+
 
 Sun 23-Apr-2017
 ^^^^^^^^^^^^^^^
@@ -1746,6 +1749,33 @@ Exposed nemo_cmd.combine.find_rebuild_nemo_script() in nemo_cmd.api; re: NEMO-Cm
 Added confirmation of existence of rebuild_nemo script to nemo_cmd.prepare; re: NEMO-Cmd issue #19.
 Added confirmation of existence of rebuild_nemo script to salishsea_cmd.prepare; re: SalishSeaCmd issue #4.
 Finally succeeded in creating and XIOS-2 repo on Bitbucket that builds on salish and orcinus.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Week 17
+-------
+
+Mon 24-Apr-2017
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Merged Michael's NEMO-Cmd pr#1 re: undotted booleans in fortran namelists but it breaks 2 units tests.
+Continued work on revising web site figures docs.
+(SalishSea)
+
+
+Tue 25-Apr-2017
+^^^^^^^^^^^^^^^
+
+Salish Sea team mtg; see whiteboard.
+Continued work on revising web site figures docs.
+Tracked down code literal line number alignment issue down to sphinx_rtd_theme; broken in 0.1.7, fixed in 0.1.9, broken again in 0.2.4, fixed 0.2.5b1; removed line numbers until readthedocs updates or allows choice of theme version.
+Continued development of research.tracer_thalweg_and_surface website figure.
 (SalishSea)
 
 
