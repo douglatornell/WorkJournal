@@ -1772,11 +1772,34 @@ Continued work on revising web site figures docs.
 Tue 25-Apr-2017
 ^^^^^^^^^^^^^^^
 
+See project work journal.
+(GOMSS)
+
 Salish Sea team mtg; see whiteboard.
 Continued work on revising web site figures docs.
 Tracked down code literal line number alignment issue down to sphinx_rtd_theme; broken in 0.1.7, fixed in 0.1.9, broken again in 0.2.4, fixed 0.2.5b1; removed line numbers until readthedocs updates or allows choice of theme version.
 Continued development of research.tracer_thalweg_and_surface website figure.
+Fixed unit test failures that resulted from Michael's NEMO-Cmd pr#1.
 (SalishSea)
+
+
+Wed 26-Apr-2017
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Filed and paid 2016 GST return; see biz journal.
+
+Aded deflation of *_dia[12]_T*.nc files to SalishSeaCmd generated SalishSeaNEMO.sh scripts.
+Discovered that 25apr nowcast-green run failed with high velocity; Susan increased viscosities, and I relaunched the run via make_forcing_links.
+Closed NEMO-Cmd issue #15 re: minimizing environment-rtd.yaml.
+(SalishSea)
+
+Watched recording of webinar on PyCharm debugger; learned that breakpoints can be added/removed while process is running, about watches, moving up and down the frame stack, attaching the debugger to running processes, setting breakpoints in web app templates, and debugging JavaScript.
+
+See project work journal.
+(SoG waves)
 
 
 ToDo
