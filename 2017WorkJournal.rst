@@ -1802,6 +1802,24 @@ See project work journal.
 (SoG waves)
 
 
+Thu 27-Apr-2017
+^^^^^^^^^^^^^^^
+
+Signed off MEOPAR cycle 2 NCE and disclosure agreements.
+(prediction-core)
+
+Updated Soontiens-Allen-2017 citation in docs and salissea-site.
+Added publications page to salishsea-site.
+Bumped NEMO-Cmd to v1.0.
+Created conda package recipe for python-hglib-2.4, built it, and uploaded it to gomss-nowcast channel to support nemo-cmd-1.0 package.
+Bumped SalishSeaCmd to v3.1.
+make_ww3_current_file failed with a dask memory error; re-ran it mannually and successfully restarted automation.
+Continued development of research.tracer_thalweg_and_surface website figure.
+(SalishSea)
+
+Attended AAPS spring general meeting.
+
+
 ToDo
 ====
 
