@@ -1815,9 +1815,40 @@ Created conda package recipe for python-hglib-2.4, built it, and uploaded it to 
 Bumped SalishSeaCmd to v3.1.
 make_ww3_current_file failed with a dask memory error; re-ran it mannually and successfully restarted automation.
 Continued development of research.tracer_thalweg_and_surface website figure.
+Discussed a scheme with Susan to run NEO results file deflation as 3 (possibly concurrent) serial jobs chained to the NEMO run, but held until its execution completes successfully.
 (SalishSea)
 
 Attended AAPS spring general meeting.
+
+
+Fri 28-Apr-2017
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(SoG waves)
+
+Worked w/ Michael on docs cleanup in preparation for Vicky joining the group on 1-May.
+Started adding --separate-deflate feature to salishsea run.
+download_live_ocean worker apparently just stopped during hour 12 file download or processing; re-ran manually, and it failed later, causing forecast2 to fail.
+Helped Susan test SalishSeaCmd WIP on orcinus.
+(SalishSea)
+
+
+Sat 29-Apr-2017
+^^^^^^^^^^^^^^^
+
+Helped Susan get SalishSeaCmd WIP operational on jasper.
+Added LiveOcean persistence symlinks for yesterday and manually re-ran upload_forcing forecast2 to restart automation.
+Finalized v17-02 biology dataset on ERDDAP.
+(SalishSea)
+
+
+Sun 30-Apr-2017
+^^^^^^^^^^^^^^^
+
+Fraser River flow cron job failed; manual re-run worked fine; ran make_runoff_file and upload_forcing workers to restart automation.
+Finalized v17-02 datsets: 3d physics tracers, surface physics tracers, u grid, v grid, w grid.
+(SalishSea)
 
 
 May
