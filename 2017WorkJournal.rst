@@ -1820,6 +1820,32 @@ Continued development of research.tracer_thalweg_and_surface website figure.
 Attended AAPS spring general meeting.
 
 
+May
+===
+
+Week 17
+-------
+
+Mon 1-May-2017
+^^^^^^^^^^^^^^
+
+Vicky Do joined the team.
+Finalized 17-02 bathymetry dataset.
+Continued work on revising web site figures docs.
+(SalishSea)
+
+SoG network seminar by Elise on light attenutation.
+
+
+Tue 2-May-2017
+^^^^^^^^^^^^^^
+
+Salish Sea team mtg; see whiteboard.
+Continued work on revising web site figures docs.
+Started refactoring make_plots worker to make it more researcher-friendly for declaration of figures, and more efficiently abstracted for their production; code reviewed by Susan.
+(SalishSea)
+
+
 ToDo
 ====
 
