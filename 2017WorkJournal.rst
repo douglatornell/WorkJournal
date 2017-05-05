@@ -1813,7 +1813,7 @@ Added publications page to salishsea-site.
 Bumped NEMO-Cmd to v1.0.
 Created conda package recipe for python-hglib-2.4, built it, and uploaded it to gomss-nowcast channel to support nemo-cmd-1.0 package.
 Bumped SalishSeaCmd to v3.1.
-make_ww3_current_file failed with a dask memory error; re-ran it mannually and successfully restarted automation.
+make_ww3_current_file failed with a dask memory error; re-ran it manually and successfully restarted automation.
 Continued development of research.tracer_thalweg_and_surface website figure.
 Discussed a scheme with Susan to run NEO results file deflation as 3 (possibly concurrent) serial jobs chained to the NEMO run, but held until its execution completes successfully.
 (SalishSea)
@@ -1873,7 +1873,39 @@ Tue 2-May-2017
 
 Salish Sea team mtg; see whiteboard.
 Continued work on revising web site figures docs.
+Updated nowcast-vm to current production configuration.
 Started refactoring make_plots worker to make it more researcher-friendly for declaration of figures, and more efficiently abstracted for their production; code reviewed by Susan.
+(SalishSea)
+
+Deleted all stored vagrant VMs, recovering ~30% of /home storage.
+
+
+Wed 3-May-2017
+^^^^^^^^^^^^^^
+
+Deleted all stored vagrant VMs.
+Moved VirtualBox VM storage from /home/doug to warehouse/, recovering ~50% of /home storage.
+
+Continued refactoring make_plots worker.
+Updated NEMO-3.6-code on west.cloud and salish, and did clean builds of SalishSea, SOG and SMELT configurations.
+Updated clones on west.cloud: NEMO-forcing, SalishSeaNowcast, SalishSeaWaves, SS-run-sets.
+Cloned XIOS-2 and built on west.cloud and salish.
+(SalishSea)
+
+
+Thu 4-May-2017
+^^^^^^^^^^^^^^
+
+Continued refactoring make_plots worker.
+Discovered that biology tracers (and maybe some physics too?) blew up in nowcast-green/29apr17 run.
+Discovered that James colour bar levels calculation code is not robust to spring conditions.
+(SalishSea)
+
+
+Fri 5-May-2017
+^^^^^^^^^^^^^^
+
+Continued work on revising web site figures docs.
 (SalishSea)
 
 
