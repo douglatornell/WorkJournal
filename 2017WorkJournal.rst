@@ -1854,7 +1854,7 @@ Finalized v17-02 datsets: 3d physics tracers, surface physics tracers, u grid, v
 May
 ===
 
-Week 17
+Week 18
 -------
 
 Mon 1-May-2017
@@ -1906,6 +1906,41 @@ Fri 5-May-2017
 ^^^^^^^^^^^^^^
 
 Continued work on revising web site figures docs.
+Sprint planning mtg.
+With Susan's help, figures out why tracer_thalweg_and_surface contour levels calculation function was flaky in the spring; numpy.percentile() doesn't play well with masked arrays.
+(SalishSea)
+
+
+Sat 6-May-2017
+^^^^^^^^^^^^^^
+
+Refactored upload_forcing worker to use f-strings.
+Refactored upload_forcing worker to use pathlib; re: issue #24.
+Added IOError handling to upload_forcing worker to handle missing LiveOcean boundary conditions files by creating symlinks to persist previous day's files; re: issue #36.
+(SalishSea)
+
+
+Sun 7-May-2017
+^^^^^^^^^^^^^^
+
+Added make_plots nowcast-green to automation.
+Refactored make_forcing_links worker to use pathlib; re: issue #26.
+Refactored salishsea-site to change research figures page to currents and physics tracers page.
+Added biology tracers figures page to salishsea-site with nitrate thalweg and surface figure on it.
+(SalishSea)
+
+
+Week 19
+-------
+
+Mon 8-May-2017
+^^^^^^^^^^^^^^
+
+Frequent Firefox crashes since upgrading niko to Ubuntu1 7.04 prompted me to blow away my old tabs collection and start over in a new window; it made no difference - crashed on naming of new tab group.
+
+Email cleanup.
+Continued work on revising web site figures docs.
+Tested nowcast-fig-dev environment on herring; sent email to Susan, Elise, Michael & Ben requesting them to test it for themselves and provide docs feedback.
 (SalishSea)
 
 
