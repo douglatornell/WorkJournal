@@ -1943,6 +1943,23 @@ Continued work on revising web site figures docs.
 Tested nowcast-fig-dev environment on herring; sent email to Susan, Elise, Michael & Ben requesting them to test it for themselves and provide docs feedback.
 (SalishSea)
 
+Phys Ocgy seminar on Baltic Sea mixing by Hans Burchard.
+
+
+Tue 9-May-2017
+^^^^^^^^^^^^^^
+
+Fixed bugs in upload_forcing and make_forcing_links so that missing LiveOcean files handling actually works.
+Created a separate Sentry project for salishsea-site, changed the envvar value in the salishsea-site-env, and restarted circusd to make it effective.
+Fixed SalishSeaNowcast repo "path" on Sentry so that issue tracker integration should work now.
+upload_forcing nowcast+ to west.cloud timed out for no apparent reason; re-ran manually to restart automation.
+Added note to nowcast-green docs re: restoration of missing light attenuation w/ depth term, effective 29apr17.
+Finished revising web site figures docs.
+Fixed atmospheric link checking function call bug in NEMO-Cmd reported by Saurav.
+(SalishSea)
+
+Started creating EOAS TODOs list re: discussion of priorities w/ Susan on Saturday.
+
 
 ToDo
 ====
