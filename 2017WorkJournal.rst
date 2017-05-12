@@ -1914,6 +1914,8 @@ With Susan's help, figures out why tracer_thalweg_and_surface contour levels cal
 Sat 6-May-2017
 ^^^^^^^^^^^^^^
 
+Cycled to Craig Bay
+
 Refactored upload_forcing worker to use f-strings.
 Refactored upload_forcing worker to use pathlib; re: issue #24.
 Added IOError handling to upload_forcing worker to handle missing LiveOcean boundary conditions files by creating symlinks to persist previous day's files; re: issue #36.
@@ -1928,6 +1930,8 @@ Refactored make_forcing_links worker to use pathlib; re: issue #26.
 Refactored salishsea-site to change research figures page to currents and physics tracers page.
 Added biology tracers figures page to salishsea-site with nitrate thalweg and surface figure on it.
 (SalishSea)
+
+Returned to Vancouver
 
 
 Week 19
@@ -1959,6 +1963,52 @@ Fixed atmospheric link checking function call bug in NEMO-Cmd reported by Saurav
 (SalishSea)
 
 Started creating EOAS TODOs list re: discussion of priorities w/ Susan on Saturday.
+
+
+Wed 10-May-2017
+^^^^^^^^^^^^^^^
+
+Deleted NEMO-3.6r6204, NEMO-3.6r6459, and NEMO-3.6r6770 repos from Bitbucket.
+Tested single point, single variable time series request to ERDDAP; ~35s for 30 days, ~70s for 2mo.
+Located https://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/tools/raw/tip/bathymetry/mesh_mask_SalishSea2_metadata.ipynb to help with adding metadata to v17-02 mesh mask.
+Resumed work on checklist.log file writing and rotation bug in NEMO_Nowcast; see SalishSeaMowcast issue #27 and NEMO_Nowcast issue #9.
+(SalishSea)
+
+Worked on 43ravens business development; see biz journal.
+
+See project work journal.
+(Resilient-C)
+
+System76 Meerkat for M&D was delivered.
+
+
+Thu 11-May-2017
+^^^^^^^^^^^^^^^
+
+Finished fixing NEMO_Nowcast bug whereby checklist.log file was being neither written nor rotated; see SalishSeaMowcast issue #27 and NEMO_Nowcast issue #9.
+Fixed NEMO_Nowcast readthedocs environment re: Python 3.6.
+Changed NEMO_NOwcast docs diagrams to PNG renderings due to docutils 0.13.1 bug on readthedocs.
+Tagged NEMO_Nowacst v1.4, build conda package, and uploaded it to gomss-nowcast channel.
+download_results nowcast-green failed for no obvious reason other than /results being 98% full; re-ran manually.
+Worked on 17-02 mesh mask ERDDAP datasets.
+(SalishSea)
+
+Reviewed and refined T2125 business income tax form and spreadsheet.
+
+Discovered that portable TimeMachine backup drive for tom won't boot.
+
+See project work journal.
+(Resilient-C)
+
+Did initial setup of System76 Meerkat for M&D; see google doc.
+
+
+Fri 12-May-2017
+^^^^^^^^^^^^^^^
+
+Stopped scheduler, manager, message_broker, and log_aggregator on skookum.
+Updated skookum and west.cloud to NEMO_Nowcast-1.4.
+Started scheduler, manager, message_broker, and log_aggregator on skookum.
 
 
 ToDo
