@@ -2009,6 +2009,14 @@ Fri 12-May-2017
 Stopped scheduler, manager, message_broker, and log_aggregator on skookum.
 Updated skookum and west.cloud to NEMO_Nowcast-1.4.
 Started scheduler, manager, message_broker, and log_aggregator on skookum.
+Finished parts of hindcast-*/ cleanup and spin-up/ move to /ocean that Susan couldn't do due to permissions; /results now at 90% w/ 1.2Tb free.
+Worked on 17-02 mesh mask ERDDAP datasets.
+Worked on refactoring SalishSeaNowcast run config section; issue #12.
+(SalishSea)
+
+Did research file space organization session with Birgit and Melanie.
+Helped Brigit try to debug why GYRE with TOP blows up with an MPI-ish error almost immediately.
+(GEOTRACES)
 
 
 ToDo
