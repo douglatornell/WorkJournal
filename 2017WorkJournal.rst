@@ -1929,6 +1929,7 @@ Added make_plots nowcast-green to automation.
 Refactored make_forcing_links worker to use pathlib; re: issue #26.
 Refactored salishsea-site to change research figures page to currents and physics tracers page.
 Added biology tracers figures page to salishsea-site with nitrate thalweg and surface figure on it.
+Started refactoring run_NEMO worker to be compatible with SalishSeaCmd-3.1; issue #40.
 (SalishSea)
 
 Returned to Vancouver
@@ -2017,6 +2018,36 @@ Worked on refactoring SalishSeaNowcast run config section; issue #12.
 Did research file space organization session with Birgit and Melanie.
 Helped Brigit try to debug why GYRE with TOP blows up with an MPI-ish error almost immediately.
 (GEOTRACES)
+
+
+Sat 13-May-2017
+^^^^^^^^^^^^^^^
+
+Worked on refactoring SalishSeaNowcast run config section; issue #12; further work on hold until issue #40 is completed.
+Discussed make_runoff_file worker use of coordinates w/ Susan; re: issues #21 and #31.
+Continued refactoring run_NEMO worker to be compatible with SalishSeaCmd-3.1; issue #40.
+(SalishSea)
+
+
+Sun 14-May-2017
+^^^^^^^^^^^^^^^
+
+Worked on 17-02 mesh mask ERDDAP datasets.
+Pulled and updated on skookum: tools, NEMO-forcing, SalishSeaNowcast, NEMO-Cmd, SalishSeaCmd; installed NEMO-Cmd-1.0 and SalishSeaCmd-3.1; re-ran nowcast-dev as a test of 3.1 integration and Susan's improvements to make_runoff_file worker.
+(SalishSea)
+
+
+Week 20
+-------
+
+Mon 15-May-2017
+^^^^^^^^^^^^^^^
+
+EC Fraser River flow data unavailable; recover:
+* persisted 13may value
+* ran make_runoff_file
+* ran upload_forcing forecast2 to restart aoutmation
+(SalishSea)
 
 
 ToDo
