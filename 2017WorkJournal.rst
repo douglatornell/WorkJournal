@@ -2050,6 +2050,65 @@ EC Fraser River flow data unavailable; recover:
 (SalishSea)
 
 
+Tue 16-May-2017
+^^^^^^^^^^^^^^^
+
+SalishSeaCast sprint.
+Started work on ECget plug-in to scrape Fraser River water quality buoy data web page.
+(SalishSea)
+
+
+Wed 17-May-2017
+^^^^^^^^^^^^^^^
+
+After trashing around trying to add a 2nd organizer email to the LM400, improved the data mgmt docs to remind myself how to launch pshell and do the 2nd email task.
+(randopony)
+
+Susan discovered that the tools repo blew up with a merge of old SalishSeaNowcast and salishsea-site commits from TJ.
+(SalishSea)
+
+Helped Birgit sort out her YAML file for initial use of NEMO-Cmd; highlighted issue #12 re: need to gracefully handle empty YAML stanzas.
+(GEOTRACES)
+
+See project work journal.
+(GOMSS)
+
+See project work journal.
+(Resilient-C)
+
+
+Thu 18-May-2017
+^^^^^^^^^^^^^^^
+
+watch_NEMO forecast2 failed due to 2 pids issue; recover:
+* manually ran download_results to restart automation
+* manually ran make_ww3_wind_file, make_ww3_current_file, run_ww3
+Backed out tools repo changeset b726e031970d, a 3357 file pkg build/ directory that TJ probably accidentally committed in Feb and merged on Tue.
+Triaged sprint contributions.
+Reworked SealishSea-MEOPAR team permissions on Bitbucket to add Guests (read-only) and Guest Contributors (read/write) groups so that Developers (read/write/create) contains only MOAD members and alumni.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+See project work journal.
+(Resilient-C)
+
+
+Fri 19-May-2017
+^^^^^^^^^^^^^^^
+
+download_weather 06 timed out on hour 37; re-ran manually to restart automation.
+(SalishSea)
+
+
+* Reply to Peg
+* Process some images
+* Test attrs-17.1
+* Take knives for sharpening
+* Check out Herman Miller chairs at EQ3
+
+
 ToDo
 ====
 
