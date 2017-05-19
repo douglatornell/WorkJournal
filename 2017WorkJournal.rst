@@ -2047,7 +2047,18 @@ EC Fraser River flow data unavailable; recover:
 * persisted 13may value
 * ran make_runoff_file
 * ran upload_forcing forecast2 to restart aoutmation
+Finished 17-02 mesh mask ERDDAP datasets.
+Disovered that GenerateDatasetXml.sh reports the same "error" for 16-10 single point sea surface height as it does for 17-02, yet 16-10 ERDDAP dataset works; decided to ignore error and hack a 17-02 XML fragment from the 16-10 one, and it works, ffs.
 (SalishSea)
+
+Susan floated the idea of MOAD team on Bitbucket w/ docs and MOAD-tools repo.
+Michael raised issue of discoverability in SalishSeaTools:
+* split API docs by module
+* ensure that indices are working
+(MOAD software)
+
+Got Idalia and Georgio set up for tomorrow's sprint.
+(SalishSeaCast sprint)
 
 
 Tue 16-May-2017
