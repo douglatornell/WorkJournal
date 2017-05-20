@@ -2110,10 +2110,22 @@ Fri 19-May-2017
 ^^^^^^^^^^^^^^^
 
 download_weather 06 timed out on hour 37; re-ran manually to restart automation.
+download_weather 12 timed out on hour 1; re-ran manually to restart automation.
+download_results forecast seems to have launched before results files were moved from tmp run dir on west.cloud; I think this happened once before recently; re-ran manually to restart automation.
+Continued work on 17-02 tide gauge station ERDDAP datasets; 06jun15 Pt Atkinson file may be bad.
+Finished refactoring run_NEMO worker so that it is compatible with SalishSeaCmd-3.1 and XIOS-2.
+download_weather 18 timed out on hour 31; re-ran manually to restart automation.
 (SalishSea)
 
+Canyons team mtg.
+(Canyons)
 
-* Reply to Peg
+GEOTRACES team mtg.
+(GEOTRACES)
+
+Mtg w/ Youyu and Fan from BIO.
+
+
 * Process some images
 * Test attrs-17.1
 * Take knives for sharpening
