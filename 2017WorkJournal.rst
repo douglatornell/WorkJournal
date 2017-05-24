@@ -2126,6 +2126,18 @@ GEOTRACES team mtg.
 Mtg w/ Youyu and Fan from BIO.
 
 
+Tue 23-May-2017
+^^^^^^^^^^^^^^^
+
+Salish Sea tam mtg; see whiteboard.
+changed SalishSeaCmd so that ref namelists are copied to tmp run dir instead of symlinking; Michael's request.
+(SalishSea)
+
+Messed around with yapf in salishsea-site repo and decided that I prefer <0.16.2 re: line breaks at ends of function definitions and brackets coallescing.
+Reviewed and buffed Idalia's sprint changes until bootstrap.min.js started failing with an SRI hash mismatch error.
+(salissea-site)
+
+
 * Process some images
 * Test attrs-17.1
 * Take knives for sharpening
