@@ -2126,6 +2126,58 @@ GEOTRACES team mtg.
 Mtg w/ Youyu and Fan from BIO.
 
 
+Sat 20-May-2017
+^^^^^^^^^^^^^^^
+
+make_runoff_file failed due to patlib refactoring bug; fixed and re-ran it and upload_forcing forecast2 manually to restart automation.
+download_weather 12 failed; re-ran manually quite late in the day to restart automation.
+run_NEMO nowcast-dev failed due to typo in private-tools repo path; fixed and re-ran make_forcing links manually to restart automation late in the day.
+(SalishSea)
+
+
+Sun 21-May-2017
+^^^^^^^^^^^^^^^
+
+download_weather 06 failed due to EOAS network issues; re-ran manually in debug mode quite late in the day; also manually ran make_runoff_file and grib_to_netcdf in debug mode to prep for day's runs.
+download_weather 12 failed due to EOAS network issues; re-ran manually quite late in the day to restart automation.
+(SalishSea)
+
+
+Week 21
+-------
+
+Mon 22-May-2017
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Victoria Day
+
+Yesterday's forecast run got stuck at 84.7%; unclear why, but it complained about 23may weather file; recover:
+* kill watch_NEMO
+* kill mpirun
+* kill bash SalishSeaNEMO.sh
+* kill rebuild_nemo
+* delete tmp run dir
+* delete forecast/21may17
+* cp ww3_foreacst/20may17/restart into ww3_foreacst/21may17/ to provide good as possible initial conditions for next wave forecast
+Deleted results from west.cloud:
+* forecast2 > 15d old
+* forecast > 20d old
+* nowcast > 30d old
+* nowcast-green > 30d old
+* enabled cron jobs to maintain the above
+Manually ran clear_checklist worker.
+Tested nowcast-dev running with XIOS-2:
+* ./makenemo -n SalishSea clean
+* ./makenemo -n SalishSea add_key "key_xios2"
+* XIOS_HOME=/results/nowcast-sys/XIOS-2 ./makenemo -n SalishSea -m GCC_SALISH_MOAD -j8
+* made XIOS-2 xml file symlinks in /results/nowcast-sys/runs/
+Tested XIOS-2 netcdf4 deflation at level 4 instead of NEMO-Cmd deflate in nowcast-dev.
+Major thrash to get nowcast-dev running w/ XIOS-2 on salish due to trying to use XIOS-1 executable.
+Set up emergency nowcast-sys on orcinus and successfully tested download_weather 12 in it.
+(SalishSea)
+
+
+
 Tue 23-May-2017
 ^^^^^^^^^^^^^^^
 
@@ -2136,7 +2188,6 @@ changed SalishSeaCmd so that ref namelists are copied to tmp run dir instead of 
 Messed around with yapf in salishsea-site repo and decided that I prefer <0.16.2 re: line breaks at ends of function definitions and brackets coallescing.
 Reviewed and buffed Idalia's sprint changes until bootstrap.min.js started failing with an SRI hash mismatch error.
 (salissea-site)
-
 
 * Process some images
 * Test attrs-17.1
