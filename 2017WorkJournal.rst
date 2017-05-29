@@ -2177,17 +2177,137 @@ Set up emergency nowcast-sys on orcinus and successfully tested download_weather
 (SalishSea)
 
 
-
 Tue 23-May-2017
 ^^^^^^^^^^^^^^^
 
 Salish Sea tam mtg; see whiteboard.
-changed SalishSeaCmd so that ref namelists are copied to tmp run dir instead of symlinking; Michael's request.
+Changed SalishSeaCmd so that ref namelists are copied to tmp run dir instead of symlinking; Michael's request.
 (SalishSea)
 
 Messed around with yapf in salishsea-site repo and decided that I prefer <0.16.2 re: line breaks at ends of function definitions and brackets coallescing.
 Reviewed and buffed Idalia's sprint changes until bootstrap.min.js started failing with an SRI hash mismatch error.
-(salissea-site)
+(salishsea-site)
+
+
+Wed 24-May-2017
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+See project work journal.
+(Resilient-C)
+
+Finished migration to new CentOS7 server web532 (207.38.92.57):
+* copied apache2 bin/ and modules/ from a new mod_wsgi-4.5.15/Python-3.5 app
+* fixed paths in bin/ restart/start/stop files
+* updated ~/bin/hg
+(randopony)
+
+Changed 43ravens.ca to use PNG log image instead of SVG to improve anti-aliasing.
+(43ravens.ca)
+
+
+Thu 25-May-2017
+^^^^^^^^^^^^^^^
+
+Ported change from SalishSeaCmd to NEMO-Cmd re: ref namelists copied to tmp run dir instead of symlinking.
+(NEMO-Cmd)
+
+Banter w/ Michael re: rtd duplicate builds; changed tools repo hook url on bitbucket to new rtd api, but no effect.
+watch_NEMO forecast failed due to bad pid; re-ran make_forcing_links and download_results manually to restart automation.
+make_plots forecast publish and make_feeds generated bogus storm surge alerts due to NaN sea surface height values.
+Continued work on NEMO_Nowcast toy example docs:
+* discovered that nemo_nowcast/workers/__init__.py was missing so workers are not installed via conda install.
+* also discovered that toy example can't be run from a directory; need a ToyNowcast package
+(SalishSea)
+
+Added source images for 43ravens logo to 43ravens.ca repo.
+Changed logo to use raven image without shadow.
+Designed and ordered card from moo.com.
+(43ravens.ca)
+
+
+Fri 26-May-2017
+^^^^^^^^^^^^^^^
+
+Built and uploaded to gommss-nowcast anaconda.org channel build 3 of NEMO_Nowcast-1.4 re: overlooked workers/__init__.py.
+Investigated make_plots forecast2 publish failure and found NaN sea surface height values.
+Changed iodef.xml for nowcast-dev to use XIOS-2 "performance" buffer size.
+Use resolved repo path in VCS revisions recording message about uncommitted changes in NEMO-Cmd; suggested by Michael.
+Ran f2py for a case that Kyle was having trouble with, and got an importable shared library as is supposed to happen.
+Worked on SalishSeaNowcast issue #38 re: changing watch_NEMO to be remotely launched instead of being launched by run_NEMO.
+(SalishSea)
+
+Biz dev re: GoMSS nowcast maintenance contract.
+(43ravens)
+
+Finished review and buffing of Idalia's sprint work and pulled it into production.
+(salishsea-site)
+
+
+Sat 27-May-2017
+^^^^^^^^^^^^^^^
+
+Hacked SalishSeaNowcast issue #38 changes to work only for nowcast-dev, scp-ed them to skookum, and restarted manager to load next_workers changes; it worked!!
+Re-reviewed sprint commits that might impact nowcast production operations:
+* addition of hourly nitrate thalweg & surface figures to make_plots
+* addition of svg figures scouring to make_plots
+All runs went NaN.
+Migrated west.cloud runs to XIOS-2:
+* update NEMO-3.6-code, XIOS-2
+* clean SalishSea config, add key_xios2, build against XIOS-2
+* clean SOG config, add key_xios2, build against XIOS-2
+* clean SMELT config, add key_xios2, build against XIOS-2
+* upadte NEMO-Cmd and pip install -e to move to v1.0
+* update NEMO-forcing, NEMO_Nowcast
+* upadte SalishSeaCmd and pip install -e to move to v3.1
+* upadte SalishSeaNowcast, pip install -e to move to v3.3.dev0, manually apply bathy & coords patch that broke due to addition of lpe path
+* update SS-run-sets, tools
+nowcast, nowcast-dev, forecast & forecast2 runs work, but not nowcast-green (SOG)
+Large sea surface height oscillations in nowcast, forecast, forecast2.
+(SalishSea)
+
+
+Sun 28-May-2017
+^^^^^^^^^^^^^^^
+
+Unsuccessful trash to try to get nowcast-green (SOG) working again.
+Fixed SalishSeaCmd issue #5 re: expansion of envvars in namelist file paths.
+(SalishSea)
+
+
+Week 22
+-------
+
+Mon 29-May-2017
+^^^^^^^^^^^^^^^
+
+Continued unsuccessful trash to try to get nowcast-green (SOG) working again.
+Ported SalishSeaCmd issue #5 re: expansion of envvars in namelist file paths to NEMO-Cmd.
+Reviewed skookum:/results/ storage:
+  df -h
+  Filesystem                       Size  Used Avail Use% Mounted on
+  /dev/md127p1                      11T   10T  306G  98% /results
+
+  cd /results/
+  ls
+  erddap/  erddap-datasets/  forcing/  lost+found/  nowcast-sys/  observations/  SalishSea/
+  skookum:results$ du -sh erddap
+  1.4G  erddap
+  skookum:results$ du -sh erddap-datasets/
+  1.9M  erddap-datasets/
+  skookum:results$ du -sh forcing/
+  329G  forcing/
+  skookum:results$ du -sh nowcast-sys/
+  79G nowcast-sys/
+  skookum:results$ sudo du -sh lost+found/
+  [sudo] password for dlatorne:
+  16K lost+found/
+  skookum:results$ du -sh observations/
+  103M  observations/
+(SalishSea)
+
 
 * Process some images
 * Test attrs-17.1
