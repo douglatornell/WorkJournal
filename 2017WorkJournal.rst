@@ -2306,7 +2306,61 @@ Reviewed skookum:/results/ storage:
   16K lost+found/
   skookum:results$ du -sh observations/
   103M  observations/
+Started adding AGRIF support to SalishSeaCmd; completed w/ incremental functional testing by Michael:
+* AGRIF section
+* grid section
+* restart section w/ an outstanding bug
+* output section; pushed but untested
 (SalishSea)
+
+Discussed status of ONC observations collection and wave forecast publication w/ Rich.
+(prediction-core)
+
+Checked my /ocean mount (nfs3/userdict8/) in response to Michael's alert that it was full:
+  ls
+  buildbot/       ebooks/   hg_seminar/  notify/         SoG/           SOG-test/     trac/                YVR_relative_humidity
+  buildbot-test/  f90play/  Jessica/     presentations/  SOG-buildbot/  SSMEP/        YVR_air_temperature
+  CANYONS/        GYRE/     MEOPAR/      RiverDataDocs/  SOG-projects/  test_notify/  YVR_cloud_fraction
+  skookum:dlatorne$ du -sh buildbot
+  16G buildbot
+  skookum:dlatorne$ du -sh buildbot-test/
+  308K  buildbot-test/
+  skookum:dlatorne$ du -sh CANYONS/
+  1.3G  CANYONS/
+  skookum:dlatorne$ du -sh ebooks/
+  6.3M  ebooks/
+  skookum:dlatorne$ du -sh f90play/
+  392K  f90play/
+  skookum:dlatorne$ du -sh GYRE/
+  501M  GYRE/
+  skookum:dlatorne$ du -sh hg_seminar/
+  79M hg_seminar/
+  skookum:dlatorne$ du -sh Jessica/
+  64K Jessica/
+  skookum:dlatorne$ du -sh MEOPAR/
+  348G  MEOPAR/
+  skookum:dlatorne$ du -sh notify/
+  88K notify/
+  skookum:dlatorne$ du -sh presentations/
+  11M presentations/
+  skookum:dlatorne$ du -sh RiverDataDocs/
+  396K  RiverDataDocs/
+  skookum:dlatorne$ du -sh SoG/
+  2.0G  SoG/
+  skookum:dlatorne$ du -sh SOG-buildbot/
+  11G SOG-buildbot/
+  skookum:dlatorne$ du -sh SOG-projects/
+  726M  SOG-projects/
+  skookum:dlatorne$ du -sh SOG-test/
+  976K  SOG-test/
+  skookum:dlatorne$ du -sh SSMEP/
+  208K  SSMEP/
+  skookum:dlatorne$ du -sh test_notify/
+  92K test_notify/
+  skookum:dlatorne$ du -sh trac/
+  3.2M  trac/
+
+Attended EOAS graduation lunch for Cindy, Kyle and Jie.
 
 
 * Process some images
