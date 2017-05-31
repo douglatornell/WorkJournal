@@ -2363,6 +2363,22 @@ Checked my /ocean mount (nfs3/userdict8/) in response to Michael's alert that it
 Attended EOAS graduation lunch for Cindy, Kyle and Jie.
 
 
+Tue 30-May-2017
+^^^^^^^^^^^^^^^
+
+Salish Sea team mtg; see whiteboard.
+Discussed wind-driven surface currents w/ Ben re: my CMOs talk.
+Continued adding AGRIF support to SalishSeaCmd; completed w/ incremental functional testing by Michael:
+* AGRIF section
+* grid section
+* restart section
+* output section
+* namelists section
+* docs
+Worked w/ Susan to finally get nowcast-green running again on west.cloud; it was an XIOS-2 file_def.xml and field_def.xml mess, as well as needing the vertical advection sub-stepping mods to be added to SOG.
+(SalishSea)
+
+
 * Process some images
 * Test attrs-17.1
 * Take knives for sharpening
