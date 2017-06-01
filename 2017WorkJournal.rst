@@ -151,7 +151,7 @@ See project work journal.
 (SoG waves)
 
 Tried to follow request of Dave@ubcit to un-install and re-install vmware tools on the VM, but couldn't figure out how to do it, so asked for more help.
-(sealinkd)
+(Resilient-C)
 
 
 Thu 12-Jan-2017
@@ -183,7 +183,7 @@ Added --max-deflate-jobs command-line option to SalishSeaCmd run sub-command.
 
 Un-installed and re-install vmware tools (open-vm-tools package) on the VM via apt-get.
 Dave@ubcit says that issue is resovled with a work-around, and asked permission to clone VM for further testing.
-(sealinkd)
+(Resilient-C)
 
 Set up repo on Bitbucket & Sublime Text project on kudu.
 Write 2 sentence topic description and emailed it to Marion.
@@ -301,7 +301,7 @@ Filed more of my email backlog in Thunderbird.
 
 Received payment for maintenance invoice.
 Updated Stephanie & Jackie on status of Maps page performance issue; UBC IT says it is resolved and has closed the ticket.
-(sealinkd)
+(Resilient-C)
 
 
 Sat 21-Jan-2017
@@ -2307,10 +2307,10 @@ Reviewed skookum:/results/ storage:
   skookum:results$ du -sh observations/
   103M  observations/
 Started adding AGRIF support to SalishSeaCmd; completed w/ incremental functional testing by Michael:
-* AGRIF section
-* grid section
-* restart section w/ an outstanding bug
-* output section; pushed but untested
+  * AGRIF section
+  * grid section
+  * restart section w/ an outstanding bug
+  * output section; pushed but untested
 (SalishSea)
 
 Discussed status of ONC observations collection and wave forecast publication w/ Rich.
@@ -2369,15 +2369,46 @@ Tue 30-May-2017
 Salish Sea team mtg; see whiteboard.
 Discussed wind-driven surface currents w/ Ben re: my CMOs talk.
 Continued adding AGRIF support to SalishSeaCmd; completed w/ incremental functional testing by Michael:
-* AGRIF section
-* grid section
-* restart section
-* output section
-* namelists section
-* docs
+  * AGRIF section
+  * grid section
+  * restart section
+  * output section
+  * namelists section
+  * docs
 Worked w/ Susan to finally get nowcast-green running again on west.cloud; it was an XIOS-2 file_def.xml and field_def.xml mess, as well as needing the vertical advection sub-stepping mods to be added to SOG.
+2 nowcast-green/26may17 attempts failed with errors at the end of the run.
 (SalishSea)
 
+
+Wed 31-May-2017
+^^^^^^^^^^^^^^^
+
+More attempts to get nowcast-green running on west.cloud:
+  * Removed deflation from XIOS-2; ~7%/5min, saw memory spike to 14.5Gb virtual in final few seconds of run, and it failed to complete properly
+  * Restored netcdf4 deflation and changed XIOS-2 from performance to memory mode for buffer optimization; 6.2Gb of virtual memory during run, ~6%/5min, finished in 1h24m compared to 1h25m for 15may17, weird black glitch in nitrate thalweg/salinity figure
+  * Launched 27may17
+Hacked next_workers on skookum to prevent launch of nowcast-dev; plan is to run it manually late in the day to make salish available for research runs, then automatically launch it after nowcast-green once it returns to stability.
+Discovered that nowcast-dev has been Nan since 25may17; need to re-run w/ vertical advection sub-stepping that was introduced on 27may17.
+Hacked make_plots to avoid missing and renamed files so that we get some figures for evaluation.
+Started developing CMOS talk.
+(SalishSea)
+
+See project journal.
+(gomss-nowcast)
+
+
+Thu 1-Jun-2017
+^^^^^^^^^^^^^^
+
+forecast2/31may17 ran w/ ConnectionError from NOAA tides and currents site in make_plots.
+Launched nowcast-green/26may17 yet again after Susan's file_def.xml debugging session last night.
+(SalishSea)
+
+See project journal.
+(Resilient-C)
+
+
+* tune XIOS-2 buffer size on west.cloud
 
 * Process some images
 * Test attrs-17.1
@@ -2391,7 +2422,7 @@ ToDo
 * refactor, unit tests & docs for forcing links checking for NEMO-3.6
 
 * reduce resolution of landing page images for faster load times
-* add docs re: sealinkd server-side app framework
+* add docs re: Resilient-C server-side app framework
 * add EduCloud deployment docs
 
 * research_ferries module
