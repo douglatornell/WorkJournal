@@ -2400,12 +2400,20 @@ See project journal.
 Thu 1-Jun-2017
 ^^^^^^^^^^^^^^
 
-forecast2/31may17 ran w/ ConnectionError from NOAA tides and currents site in make_plots.
-Launched nowcast-green/26may17 yet again after Susan's file_def.xml debugging session last night.
-(SalishSea)
-
 See project journal.
 (Resilient-C)
+
+forecast2/31may17 ran w/ ConnectionError from NOAA tides and currents site in make_plots.
+Launched nowcast-green/26may17 yet again after Susan's file_def.xml debugging session last night; it worked.
+Removed most of the make_plots hacks re: missing files.
+Symlinked /results/nowcast-green/ into /results/hindcast/ in hopes of adding >26may17 results to ubcSSg ERDDAP datasets; stopped and restarted ERDDAP; only works if the results file are hard linked.
+Installed and activated ntpd west.cloud to keep time in sync, after manually updating time to remove accumulated drift.
+Started nowcast-green catch-up:
+* 27may17, 28may17
+Started nowcast-dev catch-up:
+* 25may17
+Continued work on CMOS talk.
+(SalishSea)
 
 
 * tune XIOS-2 buffer size on west.cloud
