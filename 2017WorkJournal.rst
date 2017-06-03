@@ -2409,10 +2409,22 @@ Removed most of the make_plots hacks re: missing files.
 Symlinked /results/nowcast-green/ into /results/hindcast/ in hopes of adding >26may17 results to ubcSSg ERDDAP datasets; stopped and restarted ERDDAP; only works if the results file are hard linked.
 Installed and activated ntpd west.cloud to keep time in sync, after manually updating time to remove accumulated drift.
 Started nowcast-green catch-up:
-* 27may17, 28may17
+* 27may17, 28may17, 29may17
 Started nowcast-dev catch-up:
 * 25may17
 Continued work on CMOS talk.
+(SalishSea)
+
+
+Fri 2-Jun-2017
+^^^^^^^^^^^^^^
+
+Continued nowcast-green catch-up:
+* 30may17 through 02jun17
+Continued nowcast-dev catch-up:
+* 26may17
+Continued work on CMOS talk.
+Finished ECget plug-in to scrape Fraser River water quality buoy data web page; deployed it as a cron job on salish that writes to /results/observations/ECCC/fraser_buoy.csv.
 (SalishSea)
 
 
