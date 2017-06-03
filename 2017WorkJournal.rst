@@ -2416,6 +2416,52 @@ Continued work on CMOS talk.
 (SalishSea)
 
 
+Fri 2-Jun-2017
+^^^^^^^^^^^^^^
+
+Westgrid townhall:
+  Patrick Mann:
+    * new systems are still in install stage; westgrid analysts haven't got logins yet
+    * arbutus at UVic:
+      * 100 Gb network upgrade in progress
+    * cedar at SFU:
+      * running Linpack benchmarks
+    * graham at Waterloo:
+      * same state as cedar
+    * niagara at UofT:
+      * still in RFP stage; delayed for new Intel processors
+      * last and best offer phase
+      * early 2018; 60k-70k cores
+    * alpha access: next week for 1-2 wks; analysts and select users
+    * beta-access:
+      * all users
+      * flat priority
+      * system unstable; no uptime guarantees
+      * scale-out, diverse usage, docs testing
+      * report issues to support@computecanada.ca
+      * http://status.computecanada.ca
+    * RAC priorities effective in early July (production access)
+    * storage:
+      * silo interim operational
+      * NDC:
+        * PROJECT space
+        * SFU 10 Pb, Waterloo 13 Pb
+        * Object storage, geo-replicated, later in summer; large datasets
+    * software stack
+      * identical on cedar and graham via CVMFS; great for open-source, not so much for commercial
+      * module (LMod) for env config
+      * software list on docs wiki: https://docs.computecanada.ca/wiki/Available_software
+    * new scheduler on cedar and graham: slurm
+      * #SBATCH instead #PBS and new syntax for options
+      * srun instead of mpirun
+      * legacy systems will continue to use torque/moab
+  Alex Razoumov, visualization and training coordinator
+    * UBC summer school; 19-22 Jun
+    * USask 24-27 Jul; full day on Chapel language (replacement for MPI)
+    * both are in-person only
+
+
+
 * tune XIOS-2 buffer size on west.cloud
 
 * Process some images
