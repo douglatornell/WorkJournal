@@ -2427,10 +2427,6 @@ Continued work on CMOS talk.
 Finished ECget plug-in to scrape Fraser River water quality buoy data web page; deployed it as a cron job on salish that writes to /results/observations/ECCC/fraser_buoy.csv.
 (SalishSea)
 
-
-Fri 2-Jun-2017
-^^^^^^^^^^^^^^
-
 Westgrid townhall:
   Patrick Mann:
     * new systems are still in install stage; westgrid analysts haven't got logins yet
@@ -2472,6 +2468,16 @@ Westgrid townhall:
     * USask 24-27 Jul; full day on Chapel language (replacement for MPI)
     * both are in-person only
 
+
+Sat 3-Jun-2017
+^^^^^^^^^^^^^^
+
+Set up Aquamacs w/ Flycheck, and MacTeX-2016 on hedi for Susan.
+
+Continued nowcast-dev catch-up:
+* 27may17, 28may-17
+Finished on CMOS talk slides.
+(SalishSea)
 
 
 * tune XIOS-2 buffer size on west.cloud
