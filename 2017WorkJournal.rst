@@ -2480,6 +2480,165 @@ Finished on CMOS talk slides.
 (SalishSea)
 
 
+Sun 4-Jun-2017
+^^^^^^^^^^^^^^
+
+Travel to Toronto for CMOS conference.
+
+get_NeahBay_ssh for forecast2 took long enough that it violated the concurrency assumptions and caused upload_forcing to fail; re-ran upload_forcing manually to restart automation.
+Buffed Vicky and Michael's make_plots SVG scour code.
+Continued nowcast-dev catch-up:
+* 29may17
+(SalishSea)
+
+CMOS icebreaker; conversations w/
+* Muriel Dunn
+* Francis Poulin
+* Dave Greenberg
+* Paul Meyers
+* CMOS podcast producer
+* Elise Olson
+* Blair Greenham
+* Nancy Soontiens
+* Shilliang Shan
+* Doug ??? of RBR, ex-Neptune
+
+
+June
+====
+
+Week 23
+-------
+
+Mon 5-jun-2017
+^^^^^^^^^^^^^^
+
+Continued nowcast-dev catch-up:
+* 30may17
+Buffed Birgit and Michael's make_plots hourly PNG figures for animations.
+Discovered that yapf can't handle f-strings; fix will probably land w/ Python 3.6.2 in late June.
+Caught Fraser buoy IndexError when it happened; due to empty wind direction table cell; added and deployed exception handling.
+Started moving SS-run-sets dir from run_NEMO hard-code to config file.
+(SalishSea)
+
+CMOS:
+  Plenaries
+  Phys Ocgy 1
+  Phys Ocgy 2
+  Posters
+
+
+Tue 6-jun-2017
+^^^^^^^^^^^^^^
+
+Continued nowcast-dev catch-up:
+* 01jun17
+Landed changesets since 16-May sprint into production.
+(SalishSea)
+
+CMOS:
+  Plenaries
+  Patterson Lunch
+
+
+Wed 7-jun-2017
+^^^^^^^^^^^^^^
+
+Continued nowcast-dev catch-up:
+* 02jun17, 03jun17
+Landed changesets since 16-May sprint into production.
+(SalishSea)
+
+CMOS:
+  Plenaries
+  Collaboration, incl my talk
+  Long convo w/ Neil Swart & Fred Dupont
+  Posters
+  AI Analysis of Climate Model Results
+  Coastal Ocgy
+  Banquet
+
+
+Thu 8-jun-2017
+^^^^^^^^^^^^^^
+
+Continued nowcast-dev catch-up:
+* 04jun17, 05jun17
+(SalishSea)
+
+Lunch w/ Muriel Dunn to duscuss code testing, documentation, and release mgmt for the RBR Matlab toolkit she is developing.
+NEMO Community of Practice meeting.
+(prediction-core)
+
+CMOS:
+  Plenaries
+  Numerical Methods
+  NEMO Community of Practice
+
+Travelled to Barrie
+
+
+Fri 9-Jun-17
+^^^^^^^^^^^^
+
+Visiting M&D in Barrie
+
+Continued nowcast-dev catch-up:
+* 06jun17, 07jun17
+(SalishSea)
+
+
+Sat 10-Jun-17
+^^^^^^^^^^^^^
+
+McMichael Collection and KCVI reunion in Markham
+
+Continued nowcast-dev catch-up:
+* 08jun17, 09jun17
+(SalishSea)
+
+
+Sun 11-Jun-2017
+^^^^^^^^^^^^^^^
+
+Visiting M&D in Barrie
+
+EOAS network went down due to flood from ESB 4th floor pipe break; nowcast system was stopped dead due to lack of access to auth system; recover:
+* Confirmed fallback of running download_weather on orcinus for 06 and 12
+* network came back by 17:00
+* download_weather 06 to restart automation for very late forecast2 run
+* upload_forcing forecast2 failed due to missing 10jun17 obs; symlinked fcst/10jun17 as obs/
+* upload_forcing forecast2 restarted automation
+* 90 minutes later... download_weather 12 to trigger nowcast, etc. for the day
+Continued nowcast-dev catch-up:
+* 10jun17
+(SalishSea)
+
+
+Week 24
+-------
+
+Mon 12-Jun-2017
+^^^^^^^^^^^^^^^
+
+Visiting M&D in Barrie
+
+Continued nowcast-dev catch-up:
+* 11jun17, 12jun17
+Restarted erddap after overnight failure of nowcast-green time series figures; re-ran make_plots nowcast-green research manually.
+(SalishSea)
+
+
+Tue 13-Jun-2017
+^^^^^^^^^^^^^^^
+
+Travel from Barrie to Vancouver
+
+Started moving SS-run-sets dir from run_NEMO hard-code to config file.
+Finished nowcast-dev catch-up w/ manual 13jun17 run, then re-enabled automation to launch run after nowcast-green.
+(SalishSea)
+
+
 * tune XIOS-2 buffer size on west.cloud
 
 * Process some images
