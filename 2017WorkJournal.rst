@@ -1068,7 +1068,7 @@ Sea Ice Modeling by Jean-Francois Lemieux (UQAR?)
 Data Assimilation by Andrea Scot (Waterloo)
 (UQAR Winter School)
 
-Investigated SalishSea docs repo build error on readthedocs re: SMELT docs for Youyu's g-oup.
+Investigated SalishSea docs repo build error on readthedocs re: SMELT docs for Youyu's group.
 (prediction-core)
 
 
@@ -2577,6 +2577,8 @@ CMOS:
 
 Travelled to Barrie
 
+wefaction server was migrated to web621; cyclelog, douglatornell.ca, and phpgedview are temporarily broken.
+
 
 Fri 9-Jun-17
 ^^^^^^^^^^^^
@@ -2634,9 +2636,95 @@ Tue 13-Jun-2017
 
 Travel from Barrie to Vancouver
 
-Started moving SS-run-sets dir from run_NEMO hard-code to config file.
+Finished moving SS-run-sets dir from run_NEMO hard-code to config file.
 Finished nowcast-dev catch-up w/ manual 13jun17 run, then re-enabled automation to launch run after nowcast-green.
 (SalishSea)
+
+
+Wed 14-Jun-2017
+^^^^^^^^^^^^^^^
+
+Took Allens to YVR
+
+Fixed bug in unexpected exception handling in make_plots figure rendering so that figure module issues don't pass silently.
+Cleaned up a bunch of other figure issues introduced by pulling sprint code into production.
+Continued rework of run section of nowcast config re: issue #12.
+(SalishSea)
+
+
+Thu 15-Jun-2017
+^^^^^^^^^^^^^^^
+
+Fixed bugs introduced yesterday by moving run prep dir path into enabled hosts section of nowcast config; manually re-ran make_forcing_links forecast2 to retart automation.
+Finished rework of run section of nowcast config re: issue #12.
+Changed nowcast-dev back to use XIOS-2 performance mode for buffer size.
+Enabled bathymetry, mesh mask & LPE files to be host-specific; re: issue #32.
+Enabled coordinates file path to be host-specific; re: issue #31.
+Reviewed sprint commits in SalishSeaTools and did some buffing; also thrashed unsuccessfully on getting module and function indices to work.
+Pulled tools changes since sprint into production.
+Experimented w/ closing figure objects to avoid matplotlib.pyplot memory use warning; root cause is that we are using matplotlib.pyplot.figure to create Figure objects.
+(SalishSea)
+
+
+Fri 16-Jun-2017
+^^^^^^^^^^^^^^^
+
+Discovered that cedar and graham now ping, but auth fails.
+
+Fixed ww3 prep bugs introduced yesterday in nowcast run config restructuring; manually re-ran make_ww3_wind_file and make_ww3_current_file forecast2 to retart automation.
+Started work on grouping figures in salishsea-site app.
+(SalishSea)
+
+Email conversation w/ Marlene@ONC about her move to CHS.
+
+See project journal.
+(gomss-nowcast)
+
+See project journal.
+(Resilient-C)
+
+Reviewed agenda for MEOPAR ASM next week.
+Skimmed MEOPAR prediction core mission and reporting document on Google Drive.
+(prediction-core)
+
+
+Sat 17-Jun-2017
+^^^^^^^^^^^^^^^
+
+Deployed prototype of grouped figures for ONC VENUS node T&S figures on comparison pate.
+(SalishSea)
+
+Worked on contributions to the MEOPAR prediction core mission and reporting document:
+* Added research support activities
+* Started adding code repos, docs sites, and release channels
+(prediction-core)
+
+
+Sun 18-Jun-2017
+^^^^^^^^^^^^^^^
+
+Finalized expenses for CMOS trip.
+Hard-linked nowcast-green/27may17 results files into hindcast/ to test if time series figures are failing because of gap, or because of only 1 day in past 30; make_plots still fails, so the problem is likely the gap; re-ran make_plots for 2016-09-23 and the failure was still there, so it is not the gap either.
+Ran time series figures test notebook; failed.
+Ran time series figures dev notebook; failed untile I poed at it for a while, then it worked w/ no evident change (Heisenbug?); did identify off-by-one error in time series end date.
+Refactored time_series_plots module, and cleaned up corresponding code in make_plots worker.
+Created hard links in hindcast for nowcast-green/28may17 through 18jun17 and ran make_plots nowcast-green research against them.
+(SalishSea)
+
+Worked on contributions to the MEOPAR prediction core mission and reporting document:
+* Continued adding code repos, docs sites, and release channels
+(prediction-core)
+
+See project journal.
+(gomss-nowcast)
+
+Worked on post-migration of apps on webfaction (now on centOS 7.3):
+* got douglatornell.ca functional again by creating a new static douglatornell_blogofile app and rsync-ing files from djl_static/ into it; deleted djl_static app
+* used easy_install-2.7 to install pip-2.7
+* used pip-2.7 to update mercurial to 4.2.1
+* created a Django 1.11.2 mod_wsgi 4.5.15 Python 2.7 tempalte app to get new apache2 files for cyclelog from
+* hacked on cyclelog httpd.conf with comparison to django template until I got cyclelog running
+* followed migration docs to remove php53 lines from .htaccess and deleted php53.cgi symlink to get phpgedview working
 
 
 * tune XIOS-2 buffer size on west.cloud
