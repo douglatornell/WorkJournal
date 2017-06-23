@@ -2727,12 +2727,110 @@ Worked on post-migration of apps on webfaction (now on centOS 7.3):
 * followed migration docs to remove php53 lines from .htaccess and deleted php53.cgi symlink to get phpgedview working
 
 
+Week 25
+-------
+
+Mon 19-Jun-2017
+^^^^^^^^^^^^^^^
+
+Travel to Montréal for MEOPAR ASM
+
+Added handling for missing Fraser River water quality buoy values or units to ECget re: a series of missing relative humidity values.
+make_plots nowcast-green failed due to ERDDAP issue; restarted ERDDAP and re-ran worker manually.
+Charles started storage upgrade on skookum & salish.
+(SalishSea)
+
+
+Tue 20-Jun-2017
+^^^^^^^^^^^^^^^
+
+Work day at Le Westin Montréal
+
+Updated EOAS TODOs spreadsheet.
+(SalishSea)
+
+See project journal.
+(Resilient-C)
+
+MEOPAR ASM reception and HQP Posters
+(prediction-core)
+
+nowcast system failed at ~13:00 PDT due to full /results; recover:
+* circusctl quit
+* circus --daemon $NOWCAST_CONFIG/circus.ini
+* make_forcing_links nowcast-green; nowcast-green run on west.cloud launched, but watch_NEMO launch got stuck
+* make_forcing_links salish-nowcast nowcast+; nowcast-dev run on salish launched, and watch_NEMO for it also launched
+* download_weather 18
+* watch_NEMO for nowcast-green was blocked by a zombie watch_NEMO for the forecast run; killed that violently and manually launched watch_NEMO for nowcast-green to get automation fully back in operation
+(SalishSea)
+
+
+Wed 21-Jun-2017
+^^^^^^^^^^^^^^^
+
+MEOPAR ASM
+
+Sessions.
+Conversations w/ Bernard Denis (Chief of ECCC Numerical Weather Modeling section) about HRDPS; need to send email to him re: datamart bandwidth.
+Lunch w/ Will Perry and Johannes Gimmerich and got them talking about Salish Sea Wave model.
+(prediction-core)
+
+Discussed mock-up of resource library pages w/ Jackie.
+(Resilient-C)
+
+Worked w/ Charles on skookum issues after he shifted us to the new 19Tb /results storage mount.
+Recovery:
+* download_weather 12
+* download_results forecast --run-date 2017-06-20 --debug
+* make_plots forecast publish --run-date 2017-06-20 --debug
+
+https://salishsea.eos.ubc.ca/storm-surge/forecast goes 404 when there is no recent forecast or forecast2 figures.
+(SalishSea)
+
+
+Thu 22-Jun-2017
+^^^^^^^^^^^^^^^
+
+MEOPAR ASM
+
+(prediction-core)
+
+See project journal.
+(Resilient-C)
+
+Continued backfilling after /results storage upgrade:
+* download_results nowcast --run-date 2017-06-20 --debug
+Added ping_erddap worker to handle v17-02 datasets after nowcast-green runs.
+Added temporary code to download_results worker to hard link nowcast-green files for datasets into hindcast/ results dir.
+(SalishSea)
+
+Travel to Vancouver from MEOPAR ASM
+
+
+Fri 23-Jun-2017
+^^^^^^^^^^^^^^^
+
+Emailed Ryan re: app shutdown due to continued memory usage beyond account limit.
+(randopony)
+
+Continued backfilling after /results storage upgrade:
+* make_plots nowcast publish --run-date 2017-06-20 --debug
+* make_plots nowcast comparison --run-date 2017-06-20 --debug
+* make_plots nowcast research --run-date 2017-06-20 --debug
+Worked on cleaning up file and directory permissions that got corrupted during /results storage upgrade; lots of files that shouldn't be are executable w/ sticky bit set, and lots of directories are not group writable and don't have sticky bit set.
+
+Tested temporary download_results worker hard link nowcast-green files for datasets into hindcast/ results dir feature in production.
+(SalishSea)
+
+See project journal.
+(Resilient-C)
+
+
 * tune XIOS-2 buffer size on west.cloud
 
 * Process some images
 * Test attrs-17.1
 * Take knives for sharpening
-* Check out Herman Miller chairs at EQ3
 
 
 ToDo
