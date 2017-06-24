@@ -2810,7 +2810,8 @@ Travel to Vancouver from MEOPAR ASM
 Fri 23-Jun-2017
 ^^^^^^^^^^^^^^^
 
-Emailed Ryan re: app shutdown due to continued memory usage beyond account limit.
+Emailed Ryan re: app shutdown due to continued memory usage beyond account limit;
+deeper investigation showed that database app had done a memory run-away; restarted pony app.
 (randopony)
 
 Continued backfilling after /results storage upgrade:
@@ -2818,12 +2819,43 @@ Continued backfilling after /results storage upgrade:
 * make_plots nowcast comparison --run-date 2017-06-20 --debug
 * make_plots nowcast research --run-date 2017-06-20 --debug
 Worked on cleaning up file and directory permissions that got corrupted during /results storage upgrade; lots of files that shouldn't be are executable w/ sticky bit set, and lots of directories are not group writable and don't have sticky bit set.
-
-Tested temporary download_results worker hard link nowcast-green files for datasets into hindcast/ results dir feature in production.
+Added temporary download_results worker hard link nowcast-green files for datasets into hindcast/ results dir feature in production.
+Worked on setup of environments on graham and cedar:
+* add cacerts = /etc/pki/tls/certs/ca-bundle.crt to [web] section of .hgrc
+* clone repos
+* load python27-scipy-stack/2017a module
+* load netcdf/4.4.1.1 module
+* pip install SalishSeaTools, NEMO-Cmd, SalishSeaCmd
+* can use completion for nemo and salishsea command processors
+* load perl/5.22.2 module before building XIOS-2; shouw be added to .env
+* built XIOS-2
 (SalishSea)
 
-See project journal.
-(Resilient-C)
+Moved 2fa for google, github, bitbucket and slack to authy, and added 2fa to twitter.
+
+
+Sat 24-Jun-2017
+^^^^^^^^^^^^^^^
+
+Continued work on setup of environments on graham and cedar:
+* module loads required to build NEMO: perl/5.22.2 netcdf-mpi/4.4.1.1 netcdf-fortran-mpi/4.4.4
+* built NEMO
+* built REBUILD_NEMO
+Ran hindcast/29aug16 set up by Susan w/ slurm directives:
+  #SBATCH --job-name=29aug16_hindcast
+  #SBATCH --ntasks=156
+  #SBATCH --mem-per-cpu=2000M
+  #SBATCH --time=02:00:00
+  #SBATCH --mail-type=ALL
+  #SBATCH --mail-user=dlatornell@eoas.ubc.ca
+  #SBATCH --ignore-pbs
+Run took ~25min w/o post-processing; Susan says ~2x jasper speed.
+Need to figure out:
+* how to get email from slurm
+* how to direct stdout and stderr to results dir
+(SalishSea)
+
+Picked Allens up at YVR and took them to Parksville.
 
 
 * tune XIOS-2 buffer size on west.cloud
