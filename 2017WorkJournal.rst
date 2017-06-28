@@ -2849,13 +2849,61 @@ Ran hindcast/29aug16 set up by Susan w/ slurm directives:
   #SBATCH --mail-type=ALL
   #SBATCH --mail-user=dlatornell@eoas.ubc.ca
   #SBATCH --ignore-pbs
-Run took ~25min w/o post-processing; Susan says ~2x jasper speed.
+Run w/ 1 xios processor took ~25min w/o post-processing; Susan says ~2x jasper speed; performance ratio was 35-40%.
 Need to figure out:
 * how to get email from slurm
 * how to direct stdout and stderr to results dir
+Need to load nco/4.6.6 module before running salishsea deflate, but note that it replaces netcdf-*-mpi modules with sequential output variants.
+Run w/ 3 xios processors wasn't noticeably faster, but the reported performance ratio was 15-20%
+Run w/ 10 xios processors wasn't noticeably faster, but the reported performance ratio was 10-20%.
+Run w/ 1 xios processor, 0.18 buffer size factor, and 4000M memory per cpu timed out after 40min.
+Started adding code to SalishSeaCmd to enable it to be used on cedar/graham.
 (SalishSea)
 
 Picked Allens up at YVR and took them to Parksville.
+
+
+Sun 25-Jun-2017
+^^^^^^^^^^^^^^^
+
+Continued adding code to SalishSeaCmd to enable it to be used on cedar/graham.
+Run w/ 1 xios processor, 0.18 buffer size factor, and 4000M memory per cpu took 32min, and reported xios performance ratio of 15-30%.
+Re-ran w/ 1 xios processor, 0.12 buffer size factor, and 2000M memory per cpu; but run failed on launch due to a node issue.
+Added 2 straits (JdF and SoG) 20min avg surface (top 5 layers) slab for Hauke@UVic to nowcast-dev as of 26jun17.
+Restored ONC Central node CTD data downloads to automation and backfilled; node came back online on 23jun17.
+(SalishSea)
+
+Travel home from Parksville.
+
+
+Week 26
+-------
+
+Mon 26-Jun-2017
+^^^^^^^^^^^^^^^
+
+Re-ran w/ 1 xios processor, 0.12 buffer size factor, and 2000M memory per cpu; timed out after 2h :-(
+Resumed work on getting ONC ferry data into ERDDAP; got on-crossing boolean mask, and crossing number assignment worked out, then collided with a 404 from the ONC stations web service.
+(SalishSea)
+
+Gave Phys Ocgy seminar based on CMOS NEMO_Nowcast talk.
+
+
+Tue 27-Jun-2017
+^^^^^^^^^^^^^^^
+
+Salish Sea team mtg; see whiteboard.
+Sat in on CONCEPTS monthly science call; Susan presented.
+Continues work on getting ONC ferry data into ERDDAP; sent email to Mike@ONC re: stations API 404; accidental blocking by ONC dev of new API.
+Restarted ERDDAP to make make_plots nowcast-green time series happy.
+(SalishSea)
+
+Added time series figures page to salishsea-site.
+Worked on backfilling nowcast-green research figures.
+(salishsea-site)
+
+Attended GEOTRACES team mtg.
+(GEOTRACES)
 
 
 * tune XIOS-2 buffer size on west.cloud
