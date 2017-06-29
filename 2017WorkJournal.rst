@@ -2775,7 +2775,7 @@ Conversations w/ Bernard Denis (Chief of ECCC Numerical Weather Modeling section
 Lunch w/ Will Perry and Johannes Gimmerich and got them talking about Salish Sea Wave model.
 (prediction-core)
 
-Discussed mock-up of resource library pages w/ Jackie.
+See project journal.
 (Resilient-C)
 
 Worked w/ Charles on skookum issues after he shifted us to the new 19Tb /results storage mount.
@@ -2904,6 +2904,32 @@ Worked on backfilling nowcast-green research figures.
 
 Attended GEOTRACES team mtg.
 (GEOTRACES)
+
+
+Wed 28-Jun-2017
+^^^^^^^^^^^^^^^
+
+Cycled to UBC w/ Susan and home again for training.
+
+Helped Elise w/ mercurial branch issue.
+
+Updated pyramid-crow and raven versions in salishsea-site env.
+Created issue #5 from sentry re: no ONC VENUS figures on current date breaking comparison page.
+(salishsea-site)
+
+See project journal.
+(Resilient-C)
+
+Set up a douglatornell.ca conda env with blogofile and blogofile_blog installed from git clones in warehouse/python/; pleased that it all still works 3yrs after my last commit to the site. Started updating site.
+
+Farewell dinner at Bridges for Melanie and Romain.
+
+
+Thu 29-Jun-2017
+^^^^^^^^^^^^^^^
+
+See project journal.
+(Resilient-C)
 
 
 * tune XIOS-2 buffer size on west.cloud
