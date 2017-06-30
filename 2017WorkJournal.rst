@@ -211,7 +211,7 @@ Sun 15-Jan-2017
 ^^^^^^^^^^^^^^^
 
 ECget failed to get 2017-01-14 river flow data overnight; patched Fraser & Englishman river flow files w/ persistence values from 2017-01-09, manually ran make_runoff_file worker, but missed time window for forecast2 run.
-Organized salissea-site app templates to reflect nav bar.
+Organized salishsea-site app templates to reflect nav bar.
 Started implementation of salishsea-site app bloomcast spring_diatoms page.
 (salishsea-site)
 
@@ -406,7 +406,7 @@ First fully automated run of the year :-)
 
 Pulled updates for templates re-organization and bloomcast results view into production.
 Ported license page to Pyramid app.
-(salissea-site)
+(salishsea-site)
 
 Changed to use generic hg commit & tag hooks that push highlights to rescuetime on niko.
 
@@ -656,7 +656,7 @@ Fri 10-Feb-2017
 ^^^^^^^^^^^^^^^
 
 Wrote intro and dev docs, and got them to build on readthedocs.
-(salissea-site)
+(salishsea-site)
 
 Attended canyons group mtg.
 Helped Idalia with nemo combine.
@@ -1808,7 +1808,7 @@ Thu 27-Apr-2017
 Signed off MEOPAR cycle 2 NCE and disclosure agreements.
 (prediction-core)
 
-Updated Soontiens-Allen-2017 citation in docs and salissea-site.
+Updated Soontiens-Allen-2017 citation in docs and salishsea-site.
 Added publications page to salishsea-site.
 Bumped NEMO-Cmd to v1.0.
 Created conda package recipe for python-hglib-2.4, built it, and uploaded it to gomss-nowcast channel to support nemo-cmd-1.0 package.
@@ -2893,8 +2893,10 @@ Tue 27-Jun-2017
 ^^^^^^^^^^^^^^^
 
 Salish Sea team mtg; see whiteboard.
-Sat in on CONCEPTS monthly science call; Susan presented.
-Continues work on getting ONC ferry data into ERDDAP; sent email to Mike@ONC re: stations API 404; accidental blocking by ONC dev of new API.
+Sat in on CONCEPTS monthly science call; Susan presented.\
+Re-ran w/ 1 xios processor, 0.12 buffer size factor, and 2000M memory per cpu; got 25m502s MPI and 32m03s total.
+Tried 5 xios processors, 0.12 buffer size factor, and 2000M memory per cpu; got immediate fail.
+Continued work on getting ONC ferry data into ERDDAP; sent email to Mike@ONC re: stations API 404; accidental blocking by ONC dev of new API.
 Restarted ERDDAP to make make_plots nowcast-green time series happy.
 (SalishSea)
 
@@ -2930,6 +2932,15 @@ Thu 29-Jun-2017
 
 See project journal.
 (Resilient-C)
+
+Swapped desks at UBC.
+
+Re-tried 5 xios processors, 0.12 buffer size factor, and 2000M memory per cpu; got .
+(SalishSea)
+
+Refactored figure grouping Mako code.
+Started trying to integrate EC ImageLoop JavaScript module into app.
+(salishsea-site)
 
 
 * tune XIOS-2 buffer size on west.cloud
