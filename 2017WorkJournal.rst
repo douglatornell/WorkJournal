@@ -2943,6 +2943,17 @@ Started trying to integrate EC ImageLoop JavaScript module into app.
 (salishsea-site)
 
 
+Tue 4-Jul-2017
+^^^^^^^^^^^^^^
+
+Continued integration of EC ImageLoop JavaScript module into app.
+(salishsea-site)
+
+Salish Sea team mtg; see whiteboard.
+Ordered 8Tb drive for ECCC to put GEM2.5 archive on for us.
+(SalishSea)
+
+
 * tune XIOS-2 buffer size on west.cloud
 
 * Process some images
