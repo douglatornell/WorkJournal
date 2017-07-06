@@ -2923,6 +2923,7 @@ See project journal.
 (Resilient-C)
 
 Set up a douglatornell.ca conda env with blogofile and blogofile_blog installed from git clones in warehouse/python/; pleased that it all still works 3yrs after my last commit to the site. Started updating site.
+(douglatornell.ca)
 
 Farewell dinner at Bridges for Melanie and Romain.
 
@@ -2941,6 +2942,35 @@ Re-tried 5 xios processors, 0.12 buffer size factor, and 2000M memory per cpu; g
 Refactored figure grouping Mako code.
 Started trying to integrate EC ImageLoop JavaScript module into app.
 (salishsea-site)
+
+
+Fri 30-Jun-2017
+^^^^^^^^^^^^^^^
+
+See project journal.
+(Resilient-C)
+
+See project journal.
+(gomss-nowcast)
+
+Started work on changing from Stormpath auth to in-app; migration steps required on production:
+* pip install pathlib
+* rename admins column persona_email to email:
+    BEGIN TRANSACTION;
+    DROP INDEX ix_admins_persona_email;
+    CREATE TABLE adminsb531
+    (
+        id INTEGER PRIMARY KEY NOT NULL,
+        email TEXT UNIQUE NOT NULL
+    );
+    INSERT INTO adminsb531(id, email) SELECT id, persona_email FROM admins;
+    DROP TABLE admins;
+    ALTER TABLE adminsb531 RENAME TO admins;
+    COMMIT;
+* add indexed admins column password_hash:
+    ALTER TABLE admins ADD password_hash TEXT DEFAULT '' NOT NULL;
+    CREATE INDEX admins_password_hash_index ON admins (password_hash);
+(randopony)
 
 
 Tue 4-Jul-2017
