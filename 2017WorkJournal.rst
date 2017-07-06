@@ -2973,6 +2973,22 @@ Started work on changing from Stormpath auth to in-app; migration steps required
 (randopony)
 
 
+July
+====
+
+Week 27
+-------
+
+Mon 3-Jul-2016
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Canada Day lieu day
+
+Moved weather download constants from download_weather to config file.
+Changed weather downloads server from dd.weather to dd.beta.weather.
+(SalishSea)
+
+
 Tue 4-Jul-2017
 ^^^^^^^^^^^^^^
 
@@ -2980,8 +2996,18 @@ Continued integration of EC ImageLoop JavaScript module into app.
 (salishsea-site)
 
 Salish Sea team mtg; see whiteboard.
-Ordered 8Tb drive for ECCC to put GEM2.5 archive on for us.
+Ordered 8Tb drive from Amazon for ECCC to put GEM2.5 archive on for us.
 (SalishSea)
+
+
+Wed 5-Jul-2017
+^^^^^^^^^^^^^^
+
+Received 8Tb drive and delivered it to Robert Nissen at ECCC downtown.
+(SalishSea)
+
+Finished changing admin auth to in-app implementation re: Stormpath acquisition by Okta and no good migration path from Stormpath to Okta SDK.
+(randopony)
 
 
 * tune XIOS-2 buffer size on west.cloud
