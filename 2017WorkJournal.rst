@@ -3010,6 +3010,13 @@ Finished changing admin auth to in-app implementation re: Stormpath acquisition 
 (randopony)
 
 
+Thu 6-Jul-2017
+^^^^^^^^^^^^^^
+
+Finished and released initial integration of EC ImageLoop JavaScript module into app.
+(salishsea-site)
+
+
 * tune XIOS-2 buffer size on west.cloud
 
 * Process some images
