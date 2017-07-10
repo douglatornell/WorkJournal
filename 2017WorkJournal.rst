@@ -2954,7 +2954,7 @@ See project journal.
 (gomss-nowcast)
 
 Started work on changing from Stormpath auth to in-app; migration steps required on production:
-* pip install pathlib
+* pip install passqlib
 * rename admins column persona_email to email:
     BEGIN TRANSACTION;
     DROP INDEX ix_admins_persona_email;
@@ -3015,6 +3015,76 @@ Thu 6-Jul-2017
 
 Finished and released initial integration of EC ImageLoop JavaScript module into app.
 (salishsea-site)
+
+
+Fri 7-Jul-2017
+^^^^^^^^^^^^^^
+
+Reviewed Michael's ncks -> ncopy pull request for NEMO-Cmd deflate plug-in.
+Did log analysis to compare weather download times among forecasts, and between dd.weather and dd.beta.weather:
+dd.weather 2-3 Jul:
+* 12: 10:39:40 to 12:11:15 = 1:31:35
+* 18: 17:01:01 to 18:03:29 = 1:02:28
+* 00: 23:00:16 to 00:16:48 = 1:16:32
+* 06: 04:15:30 to 05:39:14 = 1:23:44
+dd.beta.weather 6-7 Jul:
+* 12: 10:43:50 to 12:21:08 = 1:37:18
+* 18: 17:00:24 to 18:13:10 = 1:12:46
+* 00: 23:00:32 to 00:23:08 = 1:22:36
+* 06: 04:15:46 to 05:49:58 = 1:34:12
+Concluded that the dramatic difference I thought existed for 12 comared to other forecasts is not there, and ss.beta is perhaps slightly slower than dd.
+Did log analysis to compare results downloads from west.cloud before and after change to arbutus 100Gb switch:
+before, foreacst2/05jul17:
+* 06:29:42 to 06:31:57 = 02:15
+after, foreacst2/06jul17:
+* 06:31:26 to 06:34:11 = 02:45
+Concluded no difference, or slower :-(
+Improved make_plots worker to generate image files for image loop figures, and deleted rendering of hr=19 snapshot of nitrate on thalweg and surface in favour of image loop.
+Pulled into production Susan's changes to add total cloud GRIB variable to download_weather and grib_to_netcdf workers; should be effective for 08jul17/00 forecast.
+(SalishSea)
+
+Pushed 2017.1 to production re: change to in-app admin auth.
+Deleted app from Stormpath API dashboard.
+(randopony)
+
+Added robots.txt route, view, and template to try to reduce search engine bot traffic to ERDDAP; template is based on https://coastwatch.pfeg.noaa.gov/erddap/download/setup.html#organizations
+(salishsea-site)
+
+Added ERDDAP near-surface u&v velocity slab datasets from nowcast-dev for Hauke@UVic.
+Added nowcast-dev option to ping_erddap re: near-surface slab, and hooked it into after_watch_NEMO().
+(prediction-core)
+
+
+Sat 8-Jul-2017
+^^^^^^^^^^^^^^
+
+Confirmed that total cloud GRIB files are being downloaded, and that percentcloud variable is now present in ops*.nc files.
+Restarted manager to ensure that after_watch_NEMO nowcast-dev will launch ping_erddap.
+Checked ERDDAP traffic sources with the handy one-linner:
+  nslookup $IP |awk -F"= " '/name/{print $2}'
+Changed run_ww3 worker to return run exec command to checklist instead of trying to look up run pid; re: issue #38.
+Started development of make_turbidity_file worker.
+(SalishSea)
+
+
+Sun 9-Jul-2017
+^^^^^^^^^^^^^^
+
+Continued development of make_turbidity_file worker.
+(SalishSea)
+
+
+Week 28
+-------
+
+Mon 10-jul-2017
+^^^^^^^^^^^^^^^
+
+Continued development of make_turbidity_file worker.
+(SalishSea)
+
+Telcon w/ Jackie Dawson @UO (see biz journal)
+
 
 
 * tune XIOS-2 buffer size on west.cloud
