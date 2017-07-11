@@ -3077,13 +3077,18 @@ Continued development of make_turbidity_file worker.
 Week 28
 -------
 
-Mon 10-jul-2017
+Mon 10-Jul-2017
 ^^^^^^^^^^^^^^^
 
 Continued development of make_turbidity_file worker.
 (SalishSea)
 
-Telcon w/ Jackie Dawson @UO (see biz journal)
+Telcon w/ Jackie Dawson @UOttawa (see biz journal).
+
+Added aria labels to image loop controls, and make image loop elements responsive instead of fixed width and height.
+Refactored FigureMetadata to provide a separate FigureGroup object that is a collection of FigureMetadata instances with a group description; FigureGroup is an iterator to eliminate frivolous zero-indexes.
+Made ImageLoop a trivial iterator to eliminate frivolous zero-indexes.
+(salishsea-site)
 
 
 
