@@ -3091,6 +3091,64 @@ Made ImageLoop a trivial iterator to eliminate frivolous zero-indexes.
 (salishsea-site)
 
 
+Tue 11-Jul-2017
+^^^^^^^^^^^^^^^
+
+Attended in Google Cloud Onboard training day at Sheraton Wall Centre.
+
+
+Wed 12-Jul-2017
+^^^^^^^^^^^^^^^
+
+Westgrid townhall and cedar demo:
+Patrick Mann:
+* introduced lots of analysts
+* email questions to info@westgrid.ca
+* cedar/graham known issues:
+  * page on wiki
+  * nearline not yet operational
+  * /project/<userid> available (1Tb) but no allocations effective
+  * email notifications working in cedar but soon on graham
+  * slurm fully operational
+  * scheduling is leaving unused nodes (due to options people are using - better below):
+    * whole nodes preferred: --nodes=4 --ntasks-per-node=32
+    * partitions: by-core, by-node (latter is much bigger)
+    * short run times preferred: --time=DD-HH:MM or HH:MM:SS
+    * partitions: 3, 12, 24, 72, 168, 672 hrs
+  * --account becomes a required option if you have an allocation on cedar/graham because default is also an account
+  * srun (preferred) knows more about node groupings than mpirun
+* jasper will be defunded on 1-Oct-2017
+* bugaboo storage is full
+* 19-Jul webinar on cedar/graham scheduling (Kamil)
+Alex Razoumov:
+* cedar will be expanded to 66k CPUs (132k cores) in 2018
+* storage:
+  * /home: 50Gb, nightly backup, medium performance, mounted on compute
+  * /scratch: no quota, no backup, purged, high performance, mounted on compute
+  * /project: (1Tb w/o RAC), *not mounted on compute*
+  * /local-scratch (will become /tmpdir): no quota, ~1Tb(?) capacity, very high performance, available for job duration only
+* modules:
+  * module spider
+  * module show
+* use gridftp for large (size/number) file transfers
+* globus web gui does background transfers
+* compilers:
+  * mpifort, mpicc, mpiCC
+* slurm:
+  * sbatch, squeue, sacct
+  * array jobs: collections of serial jobs; easier for scheduler
+* sacct:
+  * MaxRSS not guaranteed to catch spikes
+* interactive jobs:
+  * salloc --time --ntasks
+* slurm memory:
+  * use sacct to get info
+* use -O2 or -O3 optimization
+* avoid large ascii files
+* Kamil is developing a slurm version of his 9h scheduling webinar
+* /scratch purge schedule is not well defined yet; clean up after use
+
+
 
 * tune XIOS-2 buffer size on west.cloud
 
