@@ -3149,6 +3149,30 @@ Alex Razoumov:
 * /scratch purge schedule is not well defined yet; clean up after use
 
 
+Thu 13-Jul-2017
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+Started work on expense claim for CMOS trip.
+
+Met w/ Elise re: make_turbidity_file worker.
+Discussed EPOC mtg w/ Susan.
+Advised Elise on how to integrate LiveOcean nutrient boundary conditions file calculations into make_live_ocean_files worker.
+Emailed UBC_subdomain module to Parker@UW.
+Tried to set up SalishSea AGRIF on cedar, but its login nodes are down due to a router issue; got some setup done when cedar came back online:
+* NEMO-forcing-BS2
+* NEMO-forcing-HS1
+Started porting AGRIF handling code from SalishSeaCmd to NEMO-Cmd re: issue #23; also started identifying functions that could be refactored into a public prepare plug-in library module in NEMO-Cmd for use by SalishSeaCmd.
+(SalishSea)
+
+Attended part of canyons group mtg.
+(canyons)
+
+Emailed links to grib_to_netcdf and our results and ERDDAP surface forcing datasets to Robert@ECCC.
+(prediction-core)
+
 
 * tune XIOS-2 buffer size on west.cloud
 
