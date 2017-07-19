@@ -3125,7 +3125,7 @@ Alex Razoumov:
 * storage:
   * /home: 50Gb, nightly backup, medium performance, mounted on compute
   * /scratch: no quota, no backup, purged, high performance, mounted on compute
-  * /project: (1Tb w/o RAC), *not mounted on compute*
+  * /project: (1Tb w/o RAC), mounted on compute
   * /local-scratch (will become /tmpdir): no quota, ~1Tb(?) capacity, very high performance, available for job duration only
 * modules:
   * module spider
@@ -3172,6 +3172,74 @@ Attended part of canyons group mtg.
 
 Emailed links to grib_to_netcdf and our results and ERDDAP surface forcing datasets to Robert@ECCC.
 (prediction-core)
+
+
+Fri 14-Jul-2017
+^^^^^^^^^^^^^^^
+
+**Vacation** - Cycletour to Tsawwassen, Saltspring Is, Cheamainus, Parksville, Nanaimo
+
+
+Sat 15-Jul-2017
+^^^^^^^^^^^^^^^
+
+**Vacation** - Cycletour to Tsawwassen, Saltspring Is, Cheamainus, Parksville, Nanaimo
+
+
+Sun 16-Jul-2017
+^^^^^^^^^^^^^^^
+
+**Vacation** - Cycletour to Tsawwassen, Saltspring Is, Cheamainus, Parksville, Nanaimo
+
+Helped Susan test Michael's NEMO-Cmd ncks -> nccopy change on bugaboo and found inconsistency in nccopy UI re: netcdf format selection.
+(SalishSea)
+
+
+Week 29
+-------
+
+Mon 17-Jul-2017
+^^^^^^^^^^^^^^^
+
+Registered an orchid.org id so SWC can use it for lesson contribution attribution.
+
+Restarted ERDDAP to make make_plots nowcast-green time series happy.
+Continued to set up SalishSea AGRIF on cedar:
+* rsync NEMO-forcing-MD
+* makenemo -n SalishSeaAGRIF
+* Ran several 10min test runs:
+  * need to use --account because Susan seems to have a non-default allocation on cedar
+  * confirmed that --output and --error now work and added them to SalishSeaCmd run
+  * experimented with directives to use full nodes, all memory per node
+  * email to support re: how to write srun commands
+Started work on SalishSeaForcing repo, a slimmed, public version of NEMO-forcing;
+discussed how w/ Susan.
+(SalishSea)
+
+Started work on private AGRIF repo.
+(MOAD)
+
+See project work journal.
+(GOMSS)
+
+Tue 18-Jul-2017
+^^^^^^^^^^^^^^^
+
+Email discussion of distribution of deflation process4es to cores w/ Michael.
+Emailed Parker re: him running UBC_subdomain.py for us; he agrees he will.
+SalishSea team mtg; see whiteboard.
+download_weather 12 timed out; re-ran manually to restart automation.
+Continued working w/ SalishSeaAGRIF on cedar:
+* Set up SS-run-sets/SalishSea/djl/SalishSeaAGRIF/
+* lots of namelist sections that should(?) be standard are different:
+  * namelist.domain
+  * namelist.dynamics
+  * namelist.lateral
+  * namelist.surface
+  * namelist.bottom
+* got run to work from a single atmospheric forcing tree instead of 3; it would be good to automate the creation of the sub-grid number prefixed weights file symlink.
+* submitted 4d run from my setup to compare w/ Michael/Vicky's results
+(SalishSea)
 
 
 * tune XIOS-2 buffer size on west.cloud
