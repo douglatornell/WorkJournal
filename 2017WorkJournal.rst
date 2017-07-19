@@ -3239,6 +3239,7 @@ Continued working w/ SalishSeaAGRIF on cedar:
   * namelist.bottom
 * got run to work from a single atmospheric forcing tree instead of 3; it would be good to automate the creation of the sub-grid number prefixed weights file symlink.
 * submitted 4d run from my setup to compare w/ Michael/Vicky's results
+Noted that 50Gb of /home storage is not much (a core dump run failure consumes >25Gb); it turns out that /project (1Tb default) is mounted on the compute nodes, so we should make more use of it.
 (SalishSea)
 
 
