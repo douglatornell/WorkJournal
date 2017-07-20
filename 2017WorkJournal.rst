@@ -3148,6 +3148,9 @@ Alex Razoumov:
 * Kamil is developing a slurm version of his 9h scheduling webinar
 * /scratch purge schedule is not well defined yet; clean up after use
 
+Restarted ERDDAP to make make_plots nowcast-green time series happy.
+(SalishSea)
+
 
 Thu 13-Jul-2017
 ^^^^^^^^^^^^^^^
@@ -3240,6 +3243,55 @@ Continued working w/ SalishSeaAGRIF on cedar:
 * got run to work from a single atmospheric forcing tree instead of 3; it would be good to automate the creation of the sub-grid number prefixed weights file symlink.
 * submitted 4d run from my setup to compare w/ Michael/Vicky's results
 Noted that 50Gb of /home storage is not much (a core dump run failure consumes >25Gb); it turns out that /project (1Tb default) is mounted on the compute nodes, so we should make more use of it.
+(SalishSea)
+
+
+Wed 19-Jul-2017
+^^^^^^^^^^^^^^^
+
+SHARCNET web seminar "How jobs are scheduled to run on Graham and Cedar":
+James Desjardin, Brock:
+* compute canada intro playlist at youtube
+* scheduler plays "world's most complex game of tetris"
+* allocation is by core-years; billing is by core & memory e.g. 1 core but full node mem == full node cost
+* queue priority: job size/shape, age, fair-share, partitions
+* fair-share:
+  * based on usage share target
+  * fair-share ranges between 0 and 1
+  * 0.5 == on par w/ target
+  * toward 0 == usage ahead of target
+  * toward 1 == usage behind target
+  * RACs and RRGs get specified share targets, residual is divided equally for RASs
+  * design is for 80% RAC/RRG utilization
+  * fair-share usage impact decay rate is presently 50% in 14d
+* partitions:
+  * allow for job shapes to interact w/ priority on subsets of nodes
+  * runtime: 3h, 12h, 1d, 3d, 7d, 28d
+  * backfilling: run low priority jobs than can finish before any higher priority job can begin
+  * by-node/by-core:
+    * by-node jobs can perform better
+    * by-core jobs have more opportunity to run
+* job monitoring:
+  * squeue -u userid
+  * squeue -j jobid
+  * sstat jobid
+    * utilization during job execution
+  * sacct jobid
+    * utilization after job completion
+  * squeue -P --sort=-p,i --states=PD | less
+  * scontrol show partition | less
+  * sinfo | less
+  * sshare
+* scheduling configuration policies are being adjusted to maximize utiliztion and performance of clusters
+* job profiling tools like Remoria
+* optimze your job shapes by profiling, scaling tests, etc.
+
+Continued working w/ SalishSeaAGRIF on cedar:
+* set up /project/$USER/MEOPAR/ storage
+* confirmed that /project/$USER/ is *not* mirrored between cedar and graham
+* successfully ran 10m job from /project
+Worked out a useful squeue format:
+  squeue -o "%.18i %.8u %.7a %.20j %.2t %.9r %.19S %.10M %.10L %.6D %.5C"
 (SalishSea)
 
 
