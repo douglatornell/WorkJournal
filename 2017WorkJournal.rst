@@ -3250,7 +3250,7 @@ Wed 19-Jul-2017
 ^^^^^^^^^^^^^^^
 
 SHARCNET web seminar "How jobs are scheduled to run on Graham and Cedar":
-James Desjardin, Brock:
+James Desjardin, BrockU:
 * compute canada intro playlist at youtube
 * scheduler plays "world's most complex game of tetris"
 * allocation is by core-years; billing is by core & memory e.g. 1 core but full node mem == full node cost
@@ -3282,9 +3282,9 @@ James Desjardin, Brock:
   * scontrol show partition | less
   * sinfo | less
   * sshare
-* scheduling configuration policies are being adjusted to maximize utiliztion and performance of clusters
-* job profiling tools like Remoria
-* optimze your job shapes by profiling, scaling tests, etc.
+* scheduling configuration policies are being adjusted to maximize utilization and performance of clusters
+* job profiling tools like Remora
+* optimize your job shapes by profiling, scaling tests, etc.
 
 Continued working w/ SalishSeaAGRIF on cedar:
 * set up /project/$USER/MEOPAR/ storage
@@ -3292,7 +3292,46 @@ Continued working w/ SalishSeaAGRIF on cedar:
 * successfully ran 10m job from /project
 Worked out a useful squeue format:
   squeue -o "%.18i %.8u %.7a %.20j %.2t %.9r %.19S %.10M %.10L %.6D %.5C"
+Email from Parker says that LiveOcean daily avg files for our domain boundary (low_passed_UBC.nc) will be available by about 07:20 starting tomorrow.
 (SalishSea)
+
+
+Thu 20-Jul-2017
+^^^^^^^^^^^^^^^
+
+Downloaded LiveOcean low_passed_UBC.nc files for 19 & 20 Jul.
+Created task lists for:
+* Change LiveOcean to daily avg & add nutrient BCs
+* Add Fraser River turbidity forcing
+* Deploy SalishSeaAGRIF for Baynes Sound and Haro Strait sub-grid to nowcast production
+Updated arch file and built SalishSeaAGRIF on west.cloud.
+skookum bounced re: new RAID installation; thrash when it came back re: .ssh/old_keys/nefos-sshfs_id_rsa and too many auth failure between nowcast0 and compute nodes.
+Added low_passed_UBC.nc to download_live_ocean worker and tested it on skookum.
+Started work on watch_ww3 worker.
+Created grid, rivers, tides & tracers repos to receive parts of the bloated NEMO-forcing repo.
+(SalishSea)
+
+
+LiveOcean:
+* SEA change make_live_ocean_files worker and/or create_LiveOcean_TS_BCs() function to handle daily avg instead of hourly
+* SEA change namelist for nowcast-dev
+* DJL test LiveOcean daily TS BCs in nowcast-dev
+* EO change make_live_ocean_files worker and/or create_LiveOcean_nutrient_BCs() function to handle daily avg instead of hourly
+* EO? add LiveOcean nutrient BCs to namelist for nowcast-dev
+* DJL add LiveOcean nutrient BC files to upload_forcing worker
+* DJL test LiveOcean nutrient BCs in nowcast-dev
+
+Fraser River turbidity forcing:
+* EO finish make_turbidity_file worker
+* DJL add make_turbidity_file worker to next_workers module
+* DJL add turbidity file to upload_forcing and make_forcing_links workers for nowcast-dev
+* EO add turbidity to namelist for nowcast-dev
+* DJL test turbidity in nowcast-dev
+
+SalishSeaAGRIF production:
+* create and deploy watch_ww3 worker
+* add AGRIF option to run_NEMO worker:
+  * sub-grid runoff namelists use sub-grid climatologies
 
 
 * tune XIOS-2 buffer size on west.cloud
