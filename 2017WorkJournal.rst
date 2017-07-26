@@ -3312,12 +3312,54 @@ Created grid, rivers, tides & tracers repos to receive parts of the bloated NEMO
 (SalishSea)
 
 
+Week 30
+-------
+
+Mon 24-Jul-2017
+^^^^^^^^^^^^^^^
+
+Got cedar /project storage quota issue sorted out; caused by confusing symlinks.
+Merged Michael's NEMO-Cmd PR#2 re: changing from ncks to nccopy in deflate plugin.
+Helped Elise w/ LiveOcean biology boundary conditions and turbidity forcing nowcast workers.
+Submitted expense claim for 3x8Tb external backup drives.
+Set up new ~/project/dlatorne/MEOPAR/ and ~/project/SalishSea/forcing/ trees on cedar.
+Helped Susan start /results archiving to external backup drives.
+Built prototype SalishSeaAGRIF namelists and XML files tree.
+(SalishSea)
+
+Set up UBC_MOAD/ariane-2.2.6_00 repo on bitbucket.
+(MOAD)
+
+Attended Phys Ocgy seminar by Birgit on MN, Ga & Pb tracer modeling in the CAA.
+
+Worked w/ Susan on expense claims.
+
+Merged pull requests in hg lesson re: template updates and mercurial link URLs.
+(swc)
+
+See project work journal.
+(SoG-waves)
+
+
+Tue 25-Jul-2017
+^^^^^^^^^^^^^^^
+
+Restored column headings line to fraser_buoy.csv file.
+Salish Sea team mtg; see whiteboard.
+Backed out commit that temporarily hard linked nowcast-green results into hindcast results directory because of time series figures ERDDAP issues, and hindcast almost caught up to real time.
+Temporarily disabled time series figures due to ERDDAP issues.
+Deleted hard linked nowcast-green results from hindcast results directory to make way for hindcast approach to real time.
+Prepared for 1d SalishSeaAGRIF 2 sub-grid test on west.cloud.
+Worked on setting up nowcast/24jul17 run on cedar to test --multi-prog, etc.
+(SalishSea)
+
+Submitted expense claim for CMOS trip.
+
+Worked on expense claim for MEOPAR ASM trip.
+
+
 LiveOcean:
-* SEA change make_live_ocean_files worker and/or create_LiveOcean_TS_BCs() function to handle daily avg instead of hourly
-* SEA change namelist for nowcast-dev
-* DJL test LiveOcean daily TS BCs in nowcast-dev
 * EO change make_live_ocean_files worker and/or create_LiveOcean_nutrient_BCs() function to handle daily avg instead of hourly
-* EO? add LiveOcean nutrient BCs to namelist for nowcast-dev
 * DJL add LiveOcean nutrient BC files to upload_forcing worker
 * DJL test LiveOcean nutrient BCs in nowcast-dev
 
