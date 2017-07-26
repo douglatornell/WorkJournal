@@ -3312,6 +3312,51 @@ Created grid, rivers, tides & tracers repos to receive parts of the bloated NEMO
 (SalishSea)
 
 
+Fri 21-Jul-2017
+^^^^^^^^^^^^^^^
+
+root filesystem on skookum is full; opened ticket
+Worked w/ Susan on testing daily avg LiveOcean TS boundary conditions.
+Opened port for watch_ww3 worker on west.cloud.
+Was able to launch the long-missing nowcast3 instance on west.cloud; refreshed my memory about MPI decomposition and VM count profiling on west.cloud and the fact that fewer VMs turned out to be faster, so didn't put nowcast3 into service.
+Prepared west.cloud to test watch_ww3 worker.
+Restarted nowcast and salishsea-site app after Charles killed them to resolve full root filesystem issue; also had to manually re-run download_weather 12.
+Ordered 2x8Tb drive to archive old stuff from /results.
+Experimented with srun --multi-prog on cedar; 3 nodes, all memory, 30 nemo tasks and 2 xios tasks per node;
+Elise discovered that fraser_buoy.csv file is empty; uniq over-wrote it :-( removed uniq from cron script and requested backup recovery from Charles.
+Tested and debugged watch_ww3 worker.
+Worked on production SalishSeaAGRIF configuration on salish.
+(SalishSea)
+
+
+Sat 22-Jul-2017
+^^^^^^^^^^^^^^^
+
+Got --multi-prog test cases working on cedar but couldnt' work on nemo.xios due to disk quota issue; opened ticket.
+Removed LiveOcean hourly downloads from download_live_ocean, and changed it to be launched after download_weather.
+Helped Susan test make_live_ocean_files worker operating on daily files instead of hourly.
+(SalishSea)
+
+Prep for trip to Norway.
+
+
+Sun 23-Jul-2017
+^^^^^^^^^^^^^^^
+
+2x8Tb drives for /results archive delivered; formatted them via instructions from Robert@ECCC:
+  dmesg | grep sd[a-z]1 told me that the drive was mounted as sdc
+  # unmount the drive
+  sudo parted /dev/sdc
+  (parted) mklabel gpt
+  (parted) unit Tb
+  (parted) mkpart primary 0.00TB 8.00TB
+  (parted) print
+  (parted) quit
+  sudo mkfs.ext4 /dev/sdc1
+Discovered that 2nd drive was 4Tb; initiated return/replacement process.
+(SalishSea)
+
+
 Week 30
 -------
 
@@ -3371,7 +3416,6 @@ Fraser River turbidity forcing:
 * DJL test turbidity in nowcast-dev
 
 SalishSeaAGRIF production:
-* create and deploy watch_ww3 worker
 * add AGRIF option to run_NEMO worker:
   * sub-grid runoff namelists use sub-grid climatologies
 
