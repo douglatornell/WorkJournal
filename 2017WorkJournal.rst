@@ -3395,12 +3395,31 @@ Backed out commit that temporarily hard linked nowcast-green results into hindca
 Temporarily disabled time series figures due to ERDDAP issues.
 Deleted hard linked nowcast-green results from hindcast results directory to make way for hindcast approach to real time.
 Prepared for 1d SalishSeaAGRIF 2 sub-grid test on west.cloud.
-Worked on setting up nowcast/24jul17 run on cedar to test --multi-prog, etc.
+Worked on setting up nowcast/24jul17 run on cedar to test --multi-prog, etc; salishsea prepare was incredibly slow.
+download_weather18 failed twice due to lack of files on ECCC server.
+Continued porting AGRIF handling code from SalishSeaCmd to NEMO-Cmd re: issue #23.
 (SalishSea)
 
 Submitted expense claim for CMOS trip.
 
 Worked on expense claim for MEOPAR ASM trip.
+
+See project work journal.
+(SoG-waves)
+
+
+Wed 26-Jul-2017
+^^^^^^^^^^^^^^^
+
+Dentist appt and haircut.
+
+Overnight SalishSeaAGRIF run on west.cloud completed 257 time steps in ~30min before (probably) running out of memory on the XIOS-2 server.
+Set up another SalishSeaAGRIF run on west.cloud with 2 xios servers.
+salishsea prepare issue on cedar was due to a non-existent repo path; fixed bug.
+(SalishSea)
+
+See project work journal.
+(SoG-waves)
 
 
 LiveOcean:
