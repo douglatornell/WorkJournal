@@ -3416,10 +3416,30 @@ Dentist appt and haircut.
 Overnight SalishSeaAGRIF run on west.cloud completed 257 time steps in ~30min before (probably) running out of memory on the XIOS-2 server.
 Set up another SalishSeaAGRIF run on west.cloud with 2 xios servers.
 salishsea prepare issue on cedar was due to a non-existent repo path; fixed bug.
+No successful srun nowcast runs on cedar; tried an mpirun on 1 full node.
 (SalishSea)
 
-See project work journal.
-(SoG-waves)
+
+Thu 27-Jul-2017
+^^^^^^^^^^^^^^^
+
+Overnight SalishSeaAGRIF run on west.cloud completed 261 time steps, unclear why it stopped; tried another run w/ 3 xios servers and it stopped after 222 time steps.
+1d nowcast mpirun on 1 full node on cedar aborted after 53min; worked on analysis w/ Susan.
+Deleted /results/SalishSea/forecast2-3.4/ after Susan finished archiving it to an 8Tb external drive and /ocean/sallen/...
+Discussed AGRIF w/ Michael, and bid him farewell.
+Populated new tracers repo w/ initialization and boundary conditions fields files from bloated NEMO-forcing repo.
+Populated new tides repo w/ boundary conditions fields files from bloated NEMO-forcing repo.
+SalishSeaAGRIF run on west.cloud w/ xios buffer factor reduced to 0.125 completed 331 time steps, then zonal velocity in Baynes Sound sub-grid blew up.
+(SalishSea)
+
+Helped Birgit sort out her NEMO-3.6-code merge and rebase issue.
+(GEOTRACES)
+
+Attended canyons group mtg.
+(Canyons)
+
+See biz journal.
+(Arctic Corridors)
 
 
 LiveOcean:
