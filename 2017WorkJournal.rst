@@ -1791,7 +1791,7 @@ See project work journal.
 
 Filed and paid 2016 GST return; see biz journal.
 
-Aded deflation of *_dia[12]_T*.nc files to SalishSeaCmd generated SalishSeaNEMO.sh scripts.
+Added deflation of *_dia[12]_T*.nc files to SalishSeaCmd generated SalishSeaNEMO.sh scripts.
 Discovered that 25apr nowcast-green run failed with high velocity; Susan increased viscosities, and I relaunched the run via make_forcing_links.
 Closed NEMO-Cmd issue #15 re: minimizing environment-rtd.yaml.
 (SalishSea)
@@ -3442,21 +3442,218 @@ See biz journal.
 (Arctic Corridors)
 
 
-LiveOcean:
-* EO change make_live_ocean_files worker and/or create_LiveOcean_nutrient_BCs() function to handle daily avg instead of hourly
-* DJL add LiveOcean nutrient BC files to upload_forcing worker
-* DJL test LiveOcean nutrient BCs in nowcast-dev
+Fri 28-Jul-2017
+^^^^^^^^^^^^^^^
 
-Fraser River turbidity forcing:
-* EO finish make_turbidity_file worker
-* DJL add make_turbidity_file worker to next_workers module
-* DJL add turbidity file to upload_forcing and make_forcing_links workers for nowcast-dev
-* EO add turbidity to namelist for nowcast-dev
-* DJL test turbidity in nowcast-dev
+Travel to Tromsø
+
+Sat 29-Jul-2017
+^^^^^^^^^^^^^^^
+
+Travel to Tromsø
+
+Sun 30-Jul-2017
+^^^^^^^^^^^^^^^
+
+Tromsø
+
+August
+======
+
+Week 31
+-------
+
+Mon 31-Jul-2017
+^^^^^^^^^^^^^^^
+
+Cycled from Tromsø to Sommarøy
+
+Tue 1-Aug-2017
+^^^^^^^^^^^^^^
+
+Cycled from Sommarøy to Mefjordvær
+
+Wed 2-Aug-2017
+^^^^^^^^^^^^^^
+
+Cycled from Mefjordvær to Hamn
+
+Thu 3-Aug-2017
+^^^^^^^^^^^^^^
+
+Cycled from Hamn to Andenes
+
+Fri 4-Aug-2017
+^^^^^^^^^^^^^^
+
+Cycled from Andenes to Bø
+
+Sat 5-Aug-2017
+^^^^^^^^^^^^^^
+
+Cycled from Bø to Sortland
+
+Sun 6-Aug-2017
+^^^^^^^^^^^^^^
+
+Cycled from Sortland to Svolvær
+
+
+Week 32
+-------
+
+Mon 7-Aug-2017
+^^^^^^^^^^^^^^
+
+Travel to Oslo
+
+
+Tue 8-Aug-2017
+^^^^^^^^^^^^^^
+
+Edited photos from Sommarøy to Mefjordvær day of tour and them uploaded to Flickr album.
+
+Restarted ERDDAP.
+Reviewed whiteboard.
+Pulled make_live_ocean_files worker and related tools repo module w/ Elise's nutrient BCs additions into production, fixed minor bugs and tested it with a manual run for 7aug; did some refactoring and automation test for 8aug revealed a bug in my refactoring; fixed.
+(SalishSea)
+
+Photo-walk to Chirstiania trov square.
+
+Dinner w/ Pål, Eli, ???, and Susan at Palestinian restaurant.
+
+
+Wed 9-Aug-2017
+^^^^^^^^^^^^^^
+
+Fixed namelist.surface copy/paste errors that Michael found in AGRIF subgrid files.
+Launched 7x15+1 w/ buffer=0.25 SalishSeaAGRIF test on west.cloud; completed 360 time steps before it failed; xios memory was ~13Gb just before failure.
+Launched 7x15+1 w/ buffer=0.125 SalishSeaAGRIF test on west.cloud; finished in 4h20m.
+Improved make_live_ocean_files logging, checklist, and unit tests.
+Added LiveOcean nutrients boundary conditions files to upload_forcing and make_forcing_links workers.
+Tested and buffed make_turbidity_file worker.
+(SalishSea)
+
+Answered email from Marc Delêtre at National Botanic Gardens of Ireland re: accessing and using salishsea_tools package for Ariane analysis.
+(prediction-core)
+
+Went to the Edvard Munch museum on a very rainy afternoon.
+
+
+Thu 10-Aug-2017
+^^^^^^^^^^^^^^^
+
+Puzzled w/ Susan about how deflation of production runs is happening: it's via xios-2 and the compression_level=4 attribute in the file_def.xml file_group elements. Note that xios-2 compression is not available in one_file mode when using multiple xios servers; see http://forge.ipsl.jussieu.fr/ioserver/raw-attachment/wiki/WikiStart/XIOS-practical_english.pdf, which also says:
+  « memory » : memory optimization : buffers are able to treat one field at once.
+  « performance » : performance optimization (reduce elapsed time of the run) : buffers are able to treat all of fields at a writing timestep.
+SalishSeaAGRIF results from west.cloud differ from Michael's reference results.
+Added make_turbidity_file worker to automation.
+Added Fraser River turbidity file to upload_forcing worker.
+(SalishSea)
+
+Went exploring Oslo Fjord island via public transit ferries; walked on Bliekøya.
+
+
+Fri 11-Aug-2017
+^^^^^^^^^^^^^^^
+
+Long conversation w/ Anne Claire Fouilloux, research software engineer in Pål's dept at Oslo U.
+
+Discussed west.cloud vs. Michael's SalishSeaAGRIF results comparison w/ Susan; need to find difference.
+Fixed bug in make_turbidity_file worker that I introduced when I refactored the code that converts from str date/time to panadas datetime; pandas seems to insist on ugly str concatenation.
+Traced SalishSeaAGRIF discrepancy to having left the west boundary SSH disabled from an earlier test.
+Realized that SalishSeaAGRIF file consolidation was because I ran with 1 xios server, not 2.
+Prepared a new SalishSeaAGRIF run on west.cloud but it will have to wait until tomorrow due to 06 weather issue delaying forecast2 runs.
+download_weather 06 failed due to slow uploads by EC; re-ran manually about 3h late to restart automation.
+(SalishSea)
+
+Dinner at Ian's apt.
+
+
+Sat 12-Aug-2017
+^^^^^^^^^^^^^^^
+
+Traveled from Oslo to Bergen on a flight full of American cruise tourists.
+
+Frommer's walking tour of Bergen neighbourhoods south of Brygge.
+
+Launched 7x15+1 w/ buffer=0.125 SalishSeaAGRIF test on west.cloud w/ west sea surface height boundary condition activated, and LZ compression by xios-2 enabled; finished successfully in 4h10m
+Added Fraser River turbidity file handling to make_forcing_links worker.
+(SalishSea)
+
+Sent PDFs of CMOS abstract and conference fee receipt emails to Kirsch in EOAS office.
+
+Sunset photography around Brygge.
+
+
+Sun 13-Aug-2017
+^^^^^^^^^^^^^^^
+
+Reviewed results of west.cloud SalishSeaAGRIF run against Michael's reference run results; still significantly different in sea surface height; tracked that to me using obs/ file and Michael using hindcast/ one (latter is improved).
+Launched 7x15+1 w/ buffer=0.125 SalishSeaAGRIF test on west.cloud w/ hindcast/ssh_ file; crashed w/ ~500 time steps to go, probably due to collision w/ forecast2 run.
+(SalishSea)
+
+Hiked on Fløyen to the summit of Blåmanen.
+
+
+Week 33
+-------
+
+Mon 14-Aug-2017
+---------------
+
+Launched 7x15+1 w/ buffer=0.125 SalishSeaAGRIF test on west.cloud w/ hindcast/ssh_ file; finished successfully in 4h15m
+Confirmed that Fraser River turbidity file symlinks are being created on west.cloud.
+Started populating new rivers repo w/ runoff fields climatology files from bloated NEMO-forcing repo.
+Retried 1d nowcast mpirun on 1 full node on cedar that aborted after 53min on 27Jul; failed w/ high zonal velocity again.
+Started work on transforming run_NEMO worker to use new grid, rivers, tracers, and tides repos instead of bloated NEMO-forcing repo.
+Discussed plan to move production to v201702 w/ Susan; agreed on a new v201702 tree in SS-run-sets repo.
+Susan reviewed and accepted comparison of west.cloud SalishSeaAGRIF with Michael's ref run; differences appear to be due to 1 day different river file (hindcast vs. nowcast), and corrected boundary widths.
+Started populating new grid repo w/ coordinates, bathymetry, mesh mask, weights, etc. files from bloated NEMO-forcing repo.
+Susan suggested changing cedar nowcast test run to 20Mar17 to reduce tidal currents because the 24Jul17 run blows up in Hood Canal; started prep.
+make_turbidity_file failed due to insufficient data, though there was <4h gap.
+(SalishSea)
+
+
+Tue 15-Aug-2017
+---------------
+
+Ran 1d nowcast mpirun for 20mar17 on 1 full node on cedar; 1h7m
+Manually ran upload_forcing turbidity --run-date 2017-08-14 --debug to persist turbidity forcing file; manually ran make_forcing_links nowcast-green --run-date 2017-08-14 to restart automation.
+Continued populating new grid repo w/ coordinates, bathymetry, mesh mask, weights, etc. files from bloated NEMO-forcing repo.
+Manually ran make_ww3_wind_file and make_ww3_current_file forecast --run-date 2017-08-14 to launch wave forecast.
+Updated SalishSea/nemo3.6/nowcast/nowcast-dev and nowcast namelist.lateral to use tides and tracers repos, and runs/ssh/ directory.
+Finished populating new rivers repo w/ runoff fields climatology files from bloated NEMO-forcing repo.
+Updated SalishSea/nemo3.6/nowcast/nowcast-green namelist_pisces_cfg and namelist_smelt_cfg to use rivers repo directories and file names.
+(SalishSea)
+
+Bought ticket for PyCascades.
+
+
+Wed 16-Aug-2017
+---------------
+
+
+(SalishSea)
+
+
+Thu 17-Aug-2017
+---------------
+
+nowcast-dev/16aug17 failed due to missing 15aug17 restart file; investigation showed that 15aug17 failed due to not being able to find ssh file, not sure why; re-ran 15aug17.
+1d nowcast mpirun for 20mar17 on 2 full nodes on cedar; completed in 1h21m w/ excellent xios performance stats, but it was 14m slower?? repeat of the run took 1h37m w/ gather, but not all files disappeared from tmp run dir before its removal attempt; cedar file system performance is very slow.
+(SalishSea)
+
 
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
   * sub-grid runoff namelists use sub-grid climatologies
+
+Move production to 201702:
+* Move LiveOcean files for runs from open_boundaries/west/LiveOcean/ to runs/LiveOCean/
+* Move LiveOcean BC files from modified/ to boundary_conditions/
+* Rename LiveOcean BC files from single_LO*.nc and single_bio_LO*.nc to LO_TS_*.nc and LO_bio*.nc
+* Rename riverTurbDaily2_*.nc to (at least) exclude the 2
 
 
 * tune XIOS-2 buffer size on west.cloud
