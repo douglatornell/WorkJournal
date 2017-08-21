@@ -3645,6 +3645,46 @@ nowcast-dev/16aug17 failed due to missing 15aug17 restart file; investigation sh
 (SalishSea)
 
 
+Fri 18-Aug-2017
+---------------
+
+Catch-up of nowcast-dev:
+  * make_forcing_links --run-date 2017-08-16
+  * make_forcing_links --run-date 2017-08-17
+
+  * make_forcing_links --run-date 2017-08-18
+Ordered 8Tb drive from Amazon for off-line results backup; delivery on 25aug.
+Changed run_NEMO and config to use new grid repo and finished elimination of NEMO-forcing repo from SalishSeaNowcast.
+get_NeahBay_ssh failed due to grid path issue; updated nowcast.yaml
+make_live_ocean_files failed because low_passed_UBC.nc that we downloaded was yesterday's.
+(SalishSea)
+
+See project journal
+(Resilient-C)
+
+
+Sat 19-Aug-2017
+---------------
+
+Catch-up of nowcast-dev:
+  * make_forcing_links --run-date 2017-08-18
+Restarted ERDDAP.
+(SalishSea)
+
+See project journal
+(Resilient-C)
+
+
+Sun 20-Aug-2017
+---------------
+
+See project journal
+(Resilient-C)
+
+Updated docs re: grid, rivers, tides & tracers repos replacing NEMO-forcing.
+(SalishSea)
+
+
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
   * sub-grid runoff namelists use sub-grid climatologies
@@ -3654,6 +3694,7 @@ Move production to 201702:
 * Move LiveOcean BC files from modified/ to boundary_conditions/
 * Rename LiveOcean BC files from single_LO*.nc and single_bio_LO*.nc to LO_TS_*.nc and LO_bio*.nc
 * Rename riverTurbDaily2_*.nc to (at least) exclude the 2
+* Update dir tree in docs/results_server/index.rst
 
 
 * tune XIOS-2 buffer size on west.cloud
