@@ -3685,12 +3685,39 @@ Updated docs re: grid, rivers, tides & tracers repos replacing NEMO-forcing.
 (SalishSea)
 
 
+Week 34
+-------
+
+Mon 21-Aug-2017
+^^^^^^^^^^^^^^^
+
+Observed partial (85%) solar eclipse at UBC alumni centre.
+
+Installed PyCharm 2017.2.1 in /opt/ on niko.
+
+Updated docs and arch files to use XIOS-2.
+Updated SalishSeaCmd to not record forcing path VCS revision and status, and use grid, rivers, tides and tracers repos in example YAML file instead of NEMO-forcing and forcing path.
+Started adding AGRIF sub-grid files to grid repo, then discovered that they aren't deflated.
+(SalishSea)
+
+Phys Ocgy seminar by Pedro Odon about Vancouver fall & winter 2016/17 - how miserable was it?
+
+Tue 22-Aug-2017
+^^^^^^^^^^^^^^^
+
+Changed coordinates in SalishSeaNowcast config to by run-typ specific, and moved top level coordinates config item into ssh section 'cuz that's where it is used.
+Salish Sea team mtg; see whiteboard.
+make_turbidity_file failed because buoy data has been repeating since 03:00; manually ran upload_forcing turbidity to restart automation.
+Worked on ONC ferry data; struggled w/ API bug that re: conductivity from TWDP TSG device, but eventually got close to a useful dataset; still an issue with the crossing number variable not being associated with the time coordinate.
+Changed nowcast-dev to use 201702 bathymetry and hindcast run parameters w/ restart from hindcast/21aug17.
+(SalishSea)
+
+
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
   * sub-grid runoff namelists use sub-grid climatologies
 
 Move production to 201702:
-* Move LiveOcean files for runs from open_boundaries/west/LiveOcean/ to runs/LiveOCean/
 * Move LiveOcean BC files from modified/ to boundary_conditions/
 * Rename LiveOcean BC files from single_LO*.nc and single_bio_LO*.nc to LO_TS_*.nc and LO_bio*.nc
 * Rename riverTurbDaily2_*.nc to (at least) exclude the 2
