@@ -3674,6 +3674,8 @@ Restarted ERDDAP.
 See project journal
 (Resilient-C)
 
+Julie and Nicoli arrived.
+
 
 Sun 20-Aug-2017
 ---------------
@@ -3702,14 +3704,25 @@ Started adding AGRIF sub-grid files to grid repo, then discovered that they aren
 
 Phys Ocgy seminar by Pedro Odon about Vancouver fall & winter 2016/17 - how miserable was it?
 
+
 Tue 22-Aug-2017
 ^^^^^^^^^^^^^^^
 
 Changed coordinates in SalishSeaNowcast config to by run-typ specific, and moved top level coordinates config item into ssh section 'cuz that's where it is used.
 Salish Sea team mtg; see whiteboard.
-make_turbidity_file failed because buoy data has been repeating since 03:00; manually ran upload_forcing turbidity to restart automation.
+make_turbidity_file failed because buoy data has been repeating since 03:10; manually ran upload_forcing turbidity to restart automation.
 Worked on ONC ferry data; struggled w/ API bug that re: conductivity from TWDP TSG device, but eventually got close to a useful dataset; still an issue with the crossing number variable not being associated with the time coordinate.
-Changed nowcast-dev to use 201702 bathymetry and hindcast run parameters w/ restart from hindcast/21aug17.
+Changed nowcast-dev to use 201702 bathymetry and hindcast run parameters w/ restart from hindcast/21aug17; run completed, Susan will verify results.
+(SalishSea)
+
+
+Wed 23-Aug-2017
+^^^^^^^^^^^^^^^
+
+See project journal.
+(Arctic Corridors)
+
+make_turbidity_file failed because buoy data has been repeating since 03:10; manually ran upload_forcing turbidity to restart automation.
 (SalishSea)
 
 
