@@ -3708,7 +3708,7 @@ Phys Ocgy seminar by Pedro Odon about Vancouver fall & winter 2016/17 - how mise
 Tue 22-Aug-2017
 ^^^^^^^^^^^^^^^
 
-Changed coordinates in SalishSeaNowcast config to by run-typ specific, and moved top level coordinates config item into ssh section 'cuz that's where it is used.
+Changed coordinates in SalishSeaNowcast config to by run-type specific, and moved top level coordinates config item into ssh section 'cuz that's where it is used.
 Salish Sea team mtg; see whiteboard.
 make_turbidity_file failed because buoy data has been repeating since 03:10; manually ran upload_forcing turbidity to restart automation.
 Worked on ONC ferry data; struggled w/ API bug that re: conductivity from TWDP TSG device, but eventually got close to a useful dataset; still an issue with the crossing number variable not being associated with the time coordinate.
@@ -3724,6 +3724,37 @@ See project journal.
 
 make_turbidity_file failed because buoy data has been repeating since 03:10; manually ran upload_forcing turbidity to restart automation.
 (SalishSea)
+
+
+Thu 24-Aug-2017
+^^^^^^^^^^^^^^^
+
+Restarted ERDDAP server.
+Update comment on https://bitbucket.org/salishsea/nemo-3.6-code/commits/223d8e2f re: successful nowcast-dev/23aug17 run.
+Continued working on ONC ferry data; solved the crossing number variable issue by making it an xarray.DataArray; produced an ERDDAP dataset of 25jun17 TSG observations.
+make_turbidity_file failed because buoy data has been repeating since 03:10; manually ran upload_forcing turbidity to restart automation.
+Discussed ADCP data w/ Lan, but her questions were about 2012 data which is before we started processing it.
+(SalishSea)
+
+
+Sat 26-Aug-2017
+^^^^^^^^^^^^^^^
+
+Cycled to Craig Bay for J 91st bday & J&M 59th anniversary.
+
+Changed make_turbidity_file to not raise WorkerError because there is no need for it to stop the automation; also changed error condition print()s to logger.error()s.
+Changed run_NEMO to get run type to restart from from config file.
+Changed nowcast-dev to restart from nowcast-green.
+(SalishSea)
+
+
+Sun 27-Aug-2017
+^^^^^^^^^^^^^^^
+
+Changed nowcast-blue/forecast/forecast2 to use 201702 bathymetry and nowcast-dev run parameters w/ restart from nowcast-green/26aug17.
+(SalishSea)
+
+Cycled home.
 
 
 SalishSeaAGRIF production:
