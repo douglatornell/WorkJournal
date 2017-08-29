@@ -3757,6 +3757,21 @@ Changed nowcast-blue/forecast/forecast2 to use 201702 bathymetry and nowcast-dev
 Cycled home.
 
 
+Week 35
+-------
+
+Mon 28-Aug-2017
+^^^^^^^^^^^^^^^
+
+Clean build of SalishSea config on west.cloud at changeset 223d8e2f8cb6.
+Fixed make_turbidity_file error handling so that it doesn't stop automation.
+Investigated make_plots errors arising since change to 201702.
+Continued working on ONC ferry data; added fluorometer and CO2 sensor devices, oxygen sensor device requests fail.
+(SalishSea)
+
+Phys Ocgy seminar by Wilken-Jon von Appen re: hgObservations of Atlantic Water subduction below Polar Water at a submesoscale front in Fram Strait
+
+
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
   * sub-grid runoff namelists use sub-grid climatologies
