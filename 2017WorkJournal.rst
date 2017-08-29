@@ -3737,6 +3737,16 @@ Discussed ADCP data w/ Lan, but her questions were about 2012 data which is befo
 (SalishSea)
 
 
+Fri 25-Aug-2017
+^^^^^^^^^^^^^^^
+Changed nowcast-green to use 201702 bathymetry and hindcast run parameters w/ restart from hindcast/24aug17; run completed, Susan will verify results.
+Helped Tereza sort out massive permissions change on orcinus.
+(SalishSea)
+
+See project journal.
+(Arctic Corridors)
+
+
 Sat 26-Aug-2017
 ^^^^^^^^^^^^^^^
 
