@@ -3782,6 +3782,26 @@ Continued working on ONC ferry data; added fluorometer and CO2 sensor devices, o
 Phys Ocgy seminar by Wilken-Jon von Appen re: hgObservations of Atlantic Water subduction below Polar Water at a submesoscale front in Fram Strait
 
 
+Tue 29-Aug-2017
+^^^^^^^^^^^^^^^
+
+See project journal.
+(Arctic Corridors)
+
+See project journal
+(Resilient-C)
+
+Worked w/ Susan to try to debug nowcast-green/25aug17 ssh nan failure.
+(SalishSea)
+
+
+Wed 30-Aug-2017
+^^^^^^^^^^^^^^^
+
+Re-ran nowcast-green/25aug17 w/ LiveOcean symlinks hacked to use 24aug17 throughout.
+(SalishSea)
+
+
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
   * sub-grid runoff namelists use sub-grid climatologies
