@@ -3798,7 +3798,14 @@ Worked w/ Susan to try to debug nowcast-green/25aug17 ssh nan failure.
 Wed 30-Aug-2017
 ^^^^^^^^^^^^^^^
 
-Re-ran nowcast-green/25aug17 w/ LiveOcean symlinks hacked to use 24aug17 throughout.
+Continued debugging nowcast-green/25aug17 ssh nan failure w/ Susan:
+  * re-ran w/ LiveOcean symlinks hacked to use 24aug17 throughout; failed on time step 2; 25aug17.fail1
+  * re-ran w/ output every time step; failed on time step 2, complaining about buoy_n2; 25aug17.1ts/
+  * re-ran w/ timestep = 30s and output every time step; 25aug17.dt30.1ts/
+  * Susan tracked the problem down to a mismatch in width between namelist.lateral and the north boundary climatology files in the tracers repo; testd by reducing sponge layer width; fixed by changing north boundary indices in namelist.lateral.
+Helped Elise w/ Mercurial merge, and talked about SMELT failures.
+Continued working on ONC ferry data; added O2 sensor device, works for 27-Aug but not for 25-Jun.
+Salish Sea team mtg; see whiteboard.
 (SalishSea)
 
 
