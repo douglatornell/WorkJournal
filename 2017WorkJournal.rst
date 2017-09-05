@@ -3781,6 +3781,8 @@ Continued working on ONC ferry data; added fluorometer and CO2 sensor devices, o
 
 Phys Ocgy seminar by Wilken-Jon von Appen re: hgObservations of Atlantic Water subduction below Polar Water at a submesoscale front in Fram Strait
 
+Julie and Nicoli left for Stanford
+
 
 Tue 29-Aug-2017
 ^^^^^^^^^^^^^^^
@@ -3806,6 +3808,173 @@ Continued debugging nowcast-green/25aug17 ssh nan failure w/ Susan:
 Helped Elise w/ Mercurial merge, and talked about SMELT failures.
 Continued working on ONC ferry data; added O2 sensor device, works for 27-Aug but not for 25-Jun.
 Salish Sea team mtg; see whiteboard.
+Backfilled nowcast-green runs w/ Susan's help overnight.
+(SalishSea)
+
+
+Thu 31-Aug-2017
+^^^^^^^^^^^^^^^
+
+Backfill nowcast-green:
+* download results
+* make_plots nowcast-grren research
+* deleted figures/ dirs from bad nowcast/forecast/forecast2 runs
+Automation ran cleanly (except for continuing lack of Fraser River turbidity data).
+(SalishSea)
+
+See project journal
+(Resilient-C)
+
+ESIP Interoperability and Technology tech dive webinar re: ERDDAP:
+* http://wiki.esipfed.org/index.php/Interoperability_and_Technology/Tech_Dive_Webinar_Series#.5BBONUS.5D_31_August_2017:_.22ERDDAP_5_min_Lightning_Talks.22.2C_Jenn_Sevadjian.2C_Jim_Potemra.2C_Conor_Delaney.2C_Kevin_O.27Brien.2C_John_Kerfoot.2C_Stephanie_Petillo.2C_Charles_Carleton.2C_Eli_Hunter
+* follow-up to Bob Simons's ERDDAP talk 2 wks ago
+* Jen Patterson, CeNCOOS
+  * Humboldt oyster farming dashboard
+  * dashboards built in javascript; js fiddles
+  * polarwatch.noaa.gov; github
+* Jim Potemra, U Hawaii
+  * PacIOOS
+  * ACO cabled observatory
+  * highchart ?? js library ??
+  * hydrpohone audio files
+* Connor Delaney, Ireland & Euro Commission
+  * AIS and maritime situational awareness re: Somalia coast piracy
+* Kevin O'Brien, WMO-IOC, PMEL
+  * tide gauge data
+* John Kerfoot, IOOS
+  * glider data; transform simple format data to CF-compliance, provide profiles for assimilation into models
+* Stephanie Petillo, Woods Hole
+  * dashboard for moorings; aggregation of daily files, Django app
+* Charles Carleton, NCEI NOAA
+  * climate model data; hoffmeuller diagrams
+* Eli Hunter, Rutgers ocean modeling
+  * ROMS mid-Atlantic Bight espresso domain
+  * ERDDAP slide sorter to display daily model system monitoring plots, especially forcing and assimilation inputs
+* Bob Simons:
+  * next version, new response type that will report on long gaps in gridded time series
+
+
+Fri 1-Sep-2017
+^^^^^^^^^^^^^^
+
+Watched recording of Bob Simons' ERDDAP top on wiki.esipfed.org.
+
+Worked on results archive and ERDDAP migration re: 201702:
+* forecast2 -> forecast2.16-10
+* forecast -> forecast.16-10
+* nowcast-dev -> nowcast-dev.16-10
+* nowcast-blue -> nowcast-blue.16-10
+  * changed datasets.xml to point to nowcast-blue.16-10 and restarted ERDDAP server to reload 14 datasets from new dir
+Updated nowcast-env raven package to 6.10.
+(SalishSea)
+
+Tried to install mailpile-0.99.1 but it failed due to a series of missing python dependencies:
+  Unpacking mailpile (0.99.1~1.0201708040145-1) ...
+  dpkg: dependency problems prevent configuration of mailpile:
+   mailpile depends on python-appdirs; however:
+    Package python-appdirs is not installed.
+   mailpile depends on python-dns; however:
+    Package python-dns is not installed.
+   mailpile depends on python-jinja2; however:
+    Package python-jinja2 is not installed.
+   mailpile depends on python-markupsafe; however:
+    Package python-markupsafe is not installed.
+   mailpile depends on python-pbr; however:
+    Package python-pbr is not installed.
+   mailpile depends on python-pgpdump; however:
+    Package python-pgpdump is not installed.
+   mailpile depends on spambayes; however:
+    Package spambayes is not installed.
+   mailpile depends on python-socksipychain; however:
+    Package python-socksipychain is not installed.
+Decided to try again later in a VM.
+
+See project journal.
+(Arctic Corridors)
+
+See project journal
+(Resilient-C)
+
+Julie and Nicoli returned from Stanford
+
+
+Sat 2-Sep-2017
+^^^^^^^^^^^^^^
+
+Got mailpile dependencies sorted out and started testing it with gmail account.
+
+Worked on results archive and ERDDAP migration re: 201702:
+* nowcast-green -> nowcast-green.16-10
+* hindcast -> nowcast-green
+  * changed datasets.xml to point to nowcast-green
+  * traced w-grid dataset no loading issue to 30jul17 file in 31jul17; Susan fixed
+(SalishSea)
+
+BBQ at Kristin & Kirk's
+
+
+Sun 3-Sep-2017
+^^^^^^^^^^^^^^
+
+Fraser and Englishman River cron jobs failed; no data on wateroffice.gc.ca since 04:10 1sep; recovery:
+* persisted 1sep flow values in Fraser and Englishman files on salish
+* make_runoff_file
+* upload_forcing forecast2
+Improved logging messages re: persistence of missing LiveOcean files; info for forecast2, critical otherwise.
+Helped Susan buff example YAML files in SS-run-sets/v201702/.
+Disabled ERDDAP 16-10 results and 16-07 bathymetry and mesh mask datasets.
+Restarted ERDDAP because it was throwing Java exceptions.
+(SalishSea)
+
+Julie and Nicoli returned to Holland
+
+Cycled to Steeveston for anniversary dinner at the Hog Shack.
+
+
+September
+=========
+
+Week 36
+-------
+
+Mon 4-Sep-2017
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Labour Day
+
+Fraser and Englishman River cron jobs failed; no data on wateroffice.gc.ca since 04:10 1sep; recovery:
+* persisted 1sep flow values in Fraser and Englishman files on salish
+* make_runoff_file
+* upload_forcing forecast2
+Replaced production namelist.surface w/ namelist.atmos_rivers and namelist.light or namelist.light_blue.
+Finished ONC ferry data sample dataset for 27-Aug; passed to Rich, Susan and Katia for review.
+Started looking at web site figures improvements:
+* Restored biology time series figure to see if ERDDAP behaves better now
+* Questions for Susan:
+  * Replace temperature and salinity figures w/ truncated domain animations like nitrate?
+  * Change tide and max ssh prediction figures (compare_tide_prediction_max_ssh) into a figure group like ctd comparisons?
+  * Are these figures still relevant?
+    * NOAA compare water levels
+    * Canadian tide stations consolidated thresholds
+    * average wind vectors
+    * wind vectors at max ssh (maybe combine with above in a figure group?)
+* Next candidates for refactoring to figure modules:
+  * figures.SandHeads_winds
+(SalishSea)
+
+Investigated updating RaspPI to run mailpile; need 16Gb USB stick for parents' data stored on red 1Tb external drive, and 8Gb SD card to latest Raspbian OS. However, decided that mailpile is not sufficiently ready for me to use seriously so shelved the project.
+
+Watched Destroy All Software Shell from Scratch video.
+
+
+Tue 5-Sep-2017
+^^^^^^^^^^^^^^
+
+Fraser and Englishman River cron jobs failed; no data on wateroffice.gc.ca since 04:10 1sep; recovery:
+* persisted 1sep flow values in Fraser and Englishman files on salish
+* make_runoff_file
+* upload_forcing forecast2
+/data is full; pinged Charles about moving data to new RAID.
 (SalishSea)
 
 
@@ -3819,8 +3988,6 @@ Move production to 201702:
 * Rename riverTurbDaily2_*.nc to (at least) exclude the 2
 * Update dir tree in docs/results_server/index.rst
 
-
-* tune XIOS-2 buffer size on west.cloud
 
 * Process some images
 * Test attrs-17.1
