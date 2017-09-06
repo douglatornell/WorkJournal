@@ -3777,6 +3777,7 @@ Clean build of SalishSea config on west.cloud at changeset 223d8e2f8cb6.
 Fixed make_turbidity_file error handling so that it doesn't stop automation.
 Investigated make_plots errors arising since change to 201702.
 Continued working on ONC ferry data; added fluorometer and CO2 sensor devices, oxygen sensor device requests fail.
+Started writing get_onc_ferry worker.
 (SalishSea)
 
 Phys Ocgy seminar by Wilken-Jon von Appen re: hgObservations of Atlantic Water subduction below Polar Water at a submesoscale front in Fram Strait
@@ -3950,14 +3951,14 @@ Replaced production namelist.surface w/ namelist.atmos_rivers and namelist.light
 Finished ONC ferry data sample dataset for 27-Aug; passed to Rich, Susan and Katia for review.
 Started looking at web site figures improvements:
 * Restored biology time series figure to see if ERDDAP behaves better now
-* Questions for Susan:
-  * Replace temperature and salinity figures w/ truncated domain animations like nitrate?
-  * Change tide and max ssh prediction figures (compare_tide_prediction_max_ssh) into a figure group like ctd comparisons?
+* Questions for Susan, answered by group in 5Sep17 Salish Sea team mtg:
+  * Replace temperature and salinity figures w/ truncated domain animations like nitrate? yes, but expand east to include Squamish River mouth and north to north end of Semour Narrow sill
+  * Change tide and max ssh prediction figures (compare_tide_prediction_max_ssh) into a figure group like ctd comparisons? yes
   * Are these figures still relevant?
-    * NOAA compare water levels
-    * Canadian tide stations consolidated thresholds
-    * average wind vectors
-    * wind vectors at max ssh (maybe combine with above in a figure group?)
+    * NOAA compare water levels; add stations to ride & max ssh figures, then kill
+    * Canadian tide stations consolidated thresholds; superseded by tide & max ssh figures
+    * average wind vectors; leave for now
+    * wind vectors at max ssh (maybe combine with above in a figure group?); leave for now
 * Next candidates for refactoring to figure modules:
   * figures.SandHeads_winds
 (SalishSea)
@@ -3975,7 +3976,11 @@ Fraser and Englishman River cron jobs failed; no data on wateroffice.gc.ca since
 * make_runoff_file
 * upload_forcing forecast2
 /data is full; pinged Charles about moving data to new RAID.
+Salish Sea team mtg; see whiteboard; also discussed website figures; see above.
+Continued working on get_onc_ferry worker.
 (SalishSea)
+
+Jennifer moved into the EOAS office.
 
 
 SalishSeaAGRIF production:
