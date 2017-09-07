@@ -3978,9 +3978,36 @@ Fraser and Englishman River cron jobs failed; no data on wateroffice.gc.ca since
 /data is full; pinged Charles about moving data to new RAID.
 Salish Sea team mtg; see whiteboard; also discussed website figures; see above.
 Continued working on get_onc_ferry worker.
+Charles started rsync of /results from RAID on salish to new RAID on skookum.
 (SalishSea)
 
 Jennifer moved into the EOAS office.
+
+
+Wed 6-Sep-2017
+^^^^^^^^^^^^^^
+
+/results rsync to skookum continued
+Fraser and Englishman River cron jobs succeeded; replaced persisted discharges with observations for 2-4sep.
+download_weather 06 failed perhaps because today is ECCC's change-over day to production on their new HPC cluster; recovery:
+* download_weather 06
+* upload_forcing failed re: get_NeahBay_ssh, maybe due to rsync impact of file system performance
+* get_NeahBay_ssh forecast2
+* upload_forcing forecast2
+Changed time_series_plots from 2mo to 10d to see if that works better w/ ERDDAP.
+Pinged Robert Nissen re: status of HRDPS 2007-2014 archive copy to our 8Tb drive; he replied that he has successfully copied 2009-2013 but can't retrieve 2007-2008; he will loan us a 2007-2008 drive to see if we can recover it.
+12 weather started appearing on datamart at 09:53 PDT and finished downloading at 10:56, so nowcast-blue run started ~1h earlier than yesterday :-)
+Noticed that 201702 runs on west.cloud with 9x19 MPI decomposition use 111 cores instead of 104 that downbyonegrid2 used; doesn't seem to negatively impact run time, but added nowcast17 and nowcast3 IPs to end of mpi_hosts file so that we should expand on to 16 VMs for nemo; nowcast-green used 16 VMs and run time was about the same as with 15... hmmm....
+Noticed that jasper is defunded and wiped on 30sep!!
+Fraser River water quality buoy came back online at 12:00 5sep, so we are back to real-time daily average turbidity for nowcast-green/6sep17.
+(SalishSea)
+
+See project journal.
+(Arctic Corridors)
+
+See project journal
+(Resilient-C)
+
 
 
 SalishSeaAGRIF production:
