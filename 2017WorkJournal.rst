@@ -4009,6 +4009,14 @@ See project journal
 (Resilient-C)
 
 
+Thu 7-Sep-2017
+^^^^^^^^^^^^^^
+
+Continued working on get_onc_ferry worker.
+Met w/ Marlene & Neil from CHS re: SalishSeaCast and ERDDAP results and services that we can provide for their OPP project.
+(SalishSea)
+
+
 
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
