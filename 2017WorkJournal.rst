@@ -2048,7 +2048,7 @@ EC Fraser River flow data unavailable; recover:
 * ran make_runoff_file
 * ran upload_forcing forecast2 to restart aoutmation
 Finished 17-02 mesh mask ERDDAP datasets.
-Disovered that GenerateDatasetXml.sh reports the same "error" for 16-10 single point sea surface height as it does for 17-02, yet 16-10 ERDDAP dataset works; decided to ignore error and hack a 17-02 XML fragment from the 16-10 one, and it works, ffs.
+Discovered that GenerateDatasetXml.sh reports the same "error" for 16-10 single point sea surface height as it does for 17-02, yet 16-10 ERDDAP dataset works; decided to ignore error and hack a 17-02 XML fragment from the 16-10 one, and it works, ffs.
 (SalishSea)
 
 Susan floated the idea of MOAD team on Bitbucket w/ docs and MOAD-tools repo.
@@ -2129,7 +2129,7 @@ Mtg w/ Youyu and Fan from BIO.
 Sat 20-May-2017
 ^^^^^^^^^^^^^^^
 
-make_runoff_file failed due to patlib refactoring bug; fixed and re-ran it and upload_forcing forecast2 manually to restart automation.
+make_runoff_file failed due to pathlib refactoring bug; fixed and re-ran it and upload_forcing forecast2 manually to restart automation.
 download_weather 12 failed; re-ran manually quite late in the day to restart automation.
 run_NEMO nowcast-dev failed due to typo in private-tools repo path; fixed and re-ran make_forcing links manually to restart automation late in the day.
 (SalishSea)
@@ -2184,7 +2184,7 @@ Salish Sea tam mtg; see whiteboard.
 Changed SalishSeaCmd so that ref namelists are copied to tmp run dir instead of symlinking; Michael's request.
 (SalishSea)
 
-Messed around with yapf in salishsea-site repo and decided that I prefer <0.16.2 re: line breaks at ends of function definitions and brackets coallescing.
+Messed around with yapf in salishsea-site repo and decided that I prefer <0.16.2 re: line breaks at ends of function definitions and brackets coalescing.
 Reviewed and buffed Idalia's sprint changes until bootstrap.min.js started failing with an SRI hash mismatch error.
 (salishsea-site)
 
@@ -4014,6 +4014,41 @@ Thu 7-Sep-2017
 
 Continued working on get_onc_ferry worker.
 Met w/ Marlene & Neil from CHS re: SalishSeaCast and ERDDAP results and services that we can provide for their OPP project.
+(SalishSea)
+
+
+Fri 8-Sep-2017
+^^^^^^^^^^^^^^
+
+Charles flipped the /results RAIDs; now on disk installed in skookum.
+Shutdown ERDDAP, web app, and nowcast system for drive mount changes.
+Built new nowcast-sys/, nowcast-env/, and salishsea-site-env/ to fix S permissions and clean away cruft.
+grib_to_netcdf failed due to missing wgrib2 symlink; changed config to use wgrib2 directly from /data/sallen/...
+Resolved various other issues with new nowcast-sys setup and new /results.
+Discovered bug in make_live_ocean_files whereby bio file is made for day in August, not present month.
+Worked on figures improvements: thalweg and surface figure overall shape to 16:9, panels to 1:1.618, thalweg length increased and surface upper bound increased to show more of Johnstone Strait, surface width increased to show Squamish River estuary.
+(SalishSea)
+
+
+Sat 9-Sep-2017
+^^^^^^^^^^^^^^
+
+Overnight nowcast ops were smooth, apart from time series figure exceptions; 06 weather on datamart uploaded between 03:58 and 04:47, so our schedule of starting the download at 04:15 is well aligned; 08sep weather was gone from datamart by 08:30, so timeliness of downloads may be tighter than previously (24h instead of ~30h ?).
+Finalized thalweg and surface figure improvements w/ Susan's help and approval.
+Changed ERDDAP names and dataset ids of near surface velocity component datasets to Green, ... and ubcSSg...
+Changed figure group layout of salishsea-site pages to put figure selector in a drop-down above image and made images full width.
+(SalishSea)
+
+See project journal
+(Resilient-C)
+
+
+Sun 10-Sep-2017
+^^^^^^^^^^^^^^^
+
+Added image loop figure generation for temperature, salinity, and the rest of the green ocean tracers.
+Fixed file overwrite permissions issue in LiveOcean_BCs bio code.
+Started refactoring image loop markup to work for arbitrary image collections, and to allow multiple image loops on a page.
 (SalishSea)
 
 
