@@ -4052,6 +4052,36 @@ Started refactoring image loop markup to work for arbitrary image collections, a
 (SalishSea)
 
 
+Week 37
+-------
+
+Mon 11-Sep-2017
+^^^^^^^^^^^^^^^
+
+Met w/ Tereza and Susan re: mercurial workflow.
+Added handling for missing days of sensor data to get_onc_ferry worker and debugged other issues to get it close to production-ready.
+Ran get_onc_ferry in bash loop to backfill to 1aug17; revealed another error conditions that needs to be handled.
+(SalishSea)
+
+Prepared and delivered 1-slide introduction of myself at Phys Ocgy seminar.
+
+
+Tue 12-Sep-2017
+^^^^^^^^^^^^^^^
+
+Tested nbdime for notebooks diff/merge; cool, but only git integration, not mercurial - sigh...
+Salish Sea team mtg; see whiteboard.
+Refactored hourly thalweg & surface figures to use independent colour bars.
+Formatted hourly thalweg & surface figure module with yapf.
+Tuned hourly thalweg & surface figure axes widths for web site; couldn't reproduce y-axis label overlaps in notebook.
+Started work on generating max SSH and tide comparsion figures for Friday Harbour and Neah Bay, but need tide gauge station data for them in places.PLACES.
+Added temperature & salinity image loop figs to nowcast-green research figs.
+Stopped generating WaterLevel_Thresholds figure & deleted it from figures.py.
+Updated tide & max SSH comparison test notebook to v201702.
+Removed WaterLevel_Thresholds figure from salishsea-site publish pages.
+Changed publish pages tides/max_ssh & winds figures to figure groups.
+(SalishSea)
+
 
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
