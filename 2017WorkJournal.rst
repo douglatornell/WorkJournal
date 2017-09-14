@@ -4005,7 +4005,7 @@ Fraser River water quality buoy came back online at 12:00 5sep, so we are back t
 See project journal.
 (Arctic Corridors)
 
-See project journal
+See project journal.
 (Resilient-C)
 
 
@@ -4081,6 +4081,23 @@ Updated tide & max SSH comparison test notebook to v201702.
 Removed WaterLevel_Thresholds figure from salishsea-site publish pages.
 Changed publish pages tides/max_ssh & winds figures to figure groups.
 (SalishSea)
+
+
+Wed 13-Sep-2017
+^^^^^^^^^^^^^^^
+
+download_weather 06 failed due to ECCC late uploads; re-ran manually to restart automation; full download took only 58s!!
+Formatted red 1Tb portable drive to take to Robert @ECCC.
+Picked up 8Tb drive with 2009 to 28mar2014 GEM2.5 forecast files and 3Tb loaner w/ 2007-2009 files from Robert @ECCC.
+(salishsea)
+
+Installed Sublime Text 3.0 via apt on kudu; paid for license upgrade.
+
+See project journal.
+(GOMSS)
+
+See project journal
+(Resilient-C)
 
 
 SalishSeaAGRIF production:
