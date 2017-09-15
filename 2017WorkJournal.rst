@@ -4016,6 +4016,8 @@ Continued working on get_onc_ferry worker.
 Met w/ Marlene & Neil from CHS re: SalishSeaCast and ERDDAP results and services that we can provide for their OPP project.
 (SalishSea)
 
+Paul arrived to spend the night in advance of an OPP mtg.
+
 
 Fri 8-Sep-2017
 ^^^^^^^^^^^^^^
@@ -4098,6 +4100,24 @@ See project journal.
 
 See project journal
 (Resilient-C)
+
+Debi arrived to spend the night in advance of Ben's comp exam.
+
+
+Thu 14-Sep-2017
+^^^^^^^^^^^^^^^
+
+Installed Sublime Text 3.0 via apt on niko.
+
+Disabled ferry comparison figures because they are raising weird errors, and they will never work as written again.
+(SalishSea)
+
+Started work on adding slurm support to NEO-Cmd via --queue-job-cmd command-line option; supporting Birgit's migration from jasper to graham.
+(GEOTRACES)
+
+Attended over-hyped EOAS colloquium about carbon-14 dating.
+
+Celebrated Ben's successful comp exam at The Pointe.
 
 
 SalishSeaAGRIF production:
