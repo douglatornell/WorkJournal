@@ -4112,12 +4112,40 @@ Installed Sublime Text 3.0 via apt on niko.
 Disabled ferry comparison figures because they are raising weird errors, and they will never work as written again.
 (SalishSea)
 
+Emailed Andy Mackay for opinions and ideas about replacement for Tab Groups extension in Firefox 57
+
 Started work on adding slurm support to NEO-Cmd via --queue-job-cmd command-line option; supporting Birgit's migration from jasper to graham.
 (GEOTRACES)
 
 Attended over-hyped EOAS colloquium about carbon-14 dating.
 
 Celebrated Ben's successful comp exam at The Pointe.
+
+
+Fri 15-Sep-2017
+^^^^^^^^^^^^^^^
+
+Experimented with a Trello board on the SalishSeaNowcast bitbucket site; translation of Susan's results archiving spreadsheet.
+upload_forcing turbidity failed for no apparent reason (network glitch?); re-ran manually to restart automation.
+(SalishSea)
+
+Experimented with Firefox Tab Centre Redux (recommended by Andy), and Tree Tabs extensions.
+
+
+Sat 16-Sep-2017
+^^^^^^^^^^^^^^^
+
+Not happy with UI/UX of Tree Tabs, decided to experiment with separate Firefox windows to provide context and sidebar tabs.
+
+See project journal
+(Resilient-C)
+
+Continued work on refactoring image loop javascript module.
+Replaced daily average salinity along thalweg with hourly thalweg and surface salinity image loop.
+Continued work on adding slurm support to NEO-Cmd via --queue-job-cmd command-line option; supporting Birgit's migration from jasper to graham; got her GYRE_OFF test case to run.
+(SalishSea)
+
+
 
 
 SalishSeaAGRIF production:
