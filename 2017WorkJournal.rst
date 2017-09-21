@@ -4142,9 +4142,43 @@ See project journal
 
 Continued work on refactoring image loop javascript module.
 Replaced daily average salinity along thalweg with hourly thalweg and surface salinity image loop.
-Continued work on adding slurm support to NEO-Cmd via --queue-job-cmd command-line option; supporting Birgit's migration from jasper to graham; got her GYRE_OFF test case to run.
+Continued work on adding slurm support to NEMO-Cmd via --queue-job-cmd command-line option; supporting Birgit's migration from jasper to graham; got her GYRE_OFF test case to run.
 (SalishSea)
 
+
+Sun 17-Sep-2017
+^^^^^^^^^^^^^^^
+
+Travel to Fallen Leaf Camp for EPOC.
+
+Continued work on adding slurm support to NEMO-Cmd via --queue-job-cmd command-line option.
+(SalishSea)
+
+
+Week 38
+-------
+
+Mon 18-Sep-2017
+^^^^^^^^^^^^^^^
+
+EPOC
+
+Finished initial implementation of slurm support in NEMO-Cmd; emailed instructions and examples in lieu of docs to Birgit.
+(SalishSea)
+
+
+Tue 19-Sep-2017
+^^^^^^^^^^^^^^^
+
+EPOC
+
+
+Wed 20-Sep-2017
+^^^^^^^^^^^^^^^
+
+EPOC
+
+Travel from EPOC at Fallen Leaf for Vancouver.
 
 Thu 21-Sep-2017
 ^^^^^^^^^^^^^^^
