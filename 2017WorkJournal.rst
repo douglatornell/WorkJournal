@@ -4146,6 +4146,25 @@ Continued work on adding slurm support to NEO-Cmd via --queue-job-cmd command-li
 (SalishSea)
 
 
+Thu 21-Sep-2017
+^^^^^^^^^^^^^^^
+
+salish and skookum were restarted at about 20:00 on Wed re: moving /data into larger RAID, so nowcast, salishsea-site and ERDDAP all stopped; recover:
+* emailed Charles re: 100% usage of / on salish and skookum
+* restart salishsea-site
+* restart ERDDAP
+* restart nowcast
+* download_weather 00
+* download_weather 06 to restart automation
+(SalishSea)
+
+Emailed Birgit re: anha12 ofline memory blowout on graham.
+(GEOTRACES)
+
+See project journal.
+(GOMSS)
+
+
 
 
 SalishSeaAGRIF production:
