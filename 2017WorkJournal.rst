@@ -4189,7 +4189,8 @@ salish and skookum were restarted at about 20:00 on Wed re: moving /data into la
 * restart ERDDAP
 * restart nowcast
 * download_weather 00
-* download_weather 06 to restart automation
+* download_weather 06 to restart automation; grib_to_netcdf took almost 2h to complete
+* download_weather 12 failed; re-ran manually to restart automation
 (SalishSea)
 
 Emailed Birgit re: anha12 ofline memory blowout on graham.
@@ -4197,6 +4198,8 @@ Emailed Birgit re: anha12 ofline memory blowout on graham.
 
 See project journal.
 (GOMSS)
+
+EOAS dept bbq.
 
 
 
