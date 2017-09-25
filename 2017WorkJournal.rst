@@ -4180,6 +4180,7 @@ EPOC
 
 Travel from EPOC at Fallen Leaf for Vancouver.
 
+
 Thu 21-Sep-2017
 ^^^^^^^^^^^^^^^
 
@@ -4190,7 +4191,8 @@ salish and skookum were restarted at about 20:00 on Wed re: moving /data into la
 * restart nowcast
 * download_weather 00
 * download_weather 06 to restart automation; grib_to_netcdf took almost 2h to complete
-* download_weather 12 failed; re-ran manually to restart automation
+* download_weather 12 failed; re-ran manually to restart automation.
+Continued working on refactoring ImageLoop javascript module to enable more than one image loop per page.
 (SalishSea)
 
 Emailed Birgit re: anha12 ofline memory blowout on graham.
@@ -4200,6 +4202,52 @@ See project journal.
 (GOMSS)
 
 EOAS dept bbq.
+
+EOAS colloquium - research carnival; good spread of PhD and post-doc talks.
+
+
+Fri 22-Sep-2017
+^^^^^^^^^^^^^^^
+
+See project journal.
+(GOMSS)
+
+See project journal.
+(Arctic Corridors)
+
+Helped Vicky debug run issues.
+Telcon w/ Emilio Mayorga re: SalishSeaCast on NANOOS NVS.
+Formatted 8Tb external drive to hold copy ECCC GEM2.5km 2007-2009 archive.
+Time series figures for meso/micro-zoo and mesodinium/flagelates failed at 55d duration; re-ran manually for 50d and still failed
+Susan discovered that nowcast runs have been using rivers climatology instead of Fraser daily average discharge since 4sep17 due an accidental namelist change she introduced.
+(SalishSea)
+
+
+Sat 23-Sep-2017
+^^^^^^^^^^^^^^^
+
+Deleted unused river mouths treatment file name from namelist.atmos_rivers.
+Pulled Susan's and my namelist.atmos_rivers into production skookum and west.cloud.
+Produced an annotated times and events version of the 22sep nowcast.log file to help plan for OPP project runs.
+(SalishSea)
+
+
+Sun 24-Sep-2017
+^^^^^^^^^^^^^^^
+
+Finished refactoring ImageLoop javascript module to enable more than one image loop per page; replaced temperature thalweg figure on currents and physics page w/ thalweg & surface figure.
+(SalishSea)
+
+
+Week 39
+-------
+
+Mon 25-Sep-2017
+^^^^^^^^^^^^^^^
+
+download_weather 00 failed; re-ran manually.
+Mtg w/ DFO re: OPP projects and FVCOM into nowcast system; see IOS client file.
+(SalishSea)
 
 
 
