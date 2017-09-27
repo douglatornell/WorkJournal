@@ -4229,12 +4229,17 @@ Sat 23-Sep-2017
 Deleted unused river mouths treatment file name from namelist.atmos_rivers.
 Pulled Susan's and my namelist.atmos_rivers into production skookum and west.cloud.
 Produced an annotated times and events version of the 22sep nowcast.log file to help plan for OPP project runs.
+make_turbidity_file failed due to insufficient data.
 (SalishSea)
+
+See project journal.
+(Resilient-C)
 
 
 Sun 24-Sep-2017
 ^^^^^^^^^^^^^^^
 
+make_turbidity_file failed due to insufficient data.
 Finished refactoring ImageLoop javascript module to enable more than one image loop per page; replaced temperature thalweg figure on currents and physics page w/ thalweg & surface figure.
 (SalishSea)
 
@@ -4246,8 +4251,21 @@ Mon 25-Sep-2017
 ^^^^^^^^^^^^^^^
 
 download_weather 00 failed; re-ran manually.
+make_turbidity_file failed due to insufficient data.
 Mtg w/ DFO re: OPP projects and FVCOM into nowcast system; see IOS client file.
 (SalishSea)
+
+
+Tue 26-Sep-2017
+^^^^^^^^^^^^^^^
+
+make_turbidity_file failed due to insufficient data.
+Mtg w/ DFO re: OPP projects and FVCOM into nowcast system; see IOS client file.
+Improve account handling for slurm jobs in SalishSeaCmd.
+(SalishSea)
+
+Met w/ Birgit to talk about running ANHA12 on graham.
+(GEOTRACES)
 
 
 
