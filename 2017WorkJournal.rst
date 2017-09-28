@@ -4262,10 +4262,38 @@ Tue 26-Sep-2017
 make_turbidity_file failed due to insufficient data.
 Mtg w/ DFO re: OPP projects and FVCOM into nowcast system; see IOS client file.
 Improve account handling for slurm jobs in SalishSeaCmd.
+Ran 20mar17 nowcast on 2 nodes: 52m32s (uses NEO-forcing repo, includes double deflation)
 (SalishSea)
 
 Met w/ Birgit to talk about running ANHA12 on graham.
 (GEOTRACES)
+
+
+Wed 27-Sep-2017
+^^^^^^^^^^^^^^^
+
+See project journal.
+(GoMSS)
+
+Did more buffing on Results Archive Trello board and got Susan signed upon Tello; also moved deleted 2 more archived trees from /results.
+Ran 20mar17 nowcast on 3 nodes: 37m39s (uses NEO-forcing repo, includes double deflation)
+download_weather 12 failed; re-ran manually to restart automation.
+Queued 20mar17 nowcast on 4 nodes:  (uses NEO-forcing repo, includes double deflation)
+Reviewed and commented on Marlene's notes from 7sep mtg w/ CHS.
+(SalishSea)
+
+See project journal.
+(Arctic Corridors)
+
+See project journal.
+(Resilient-C)
+
+
+Thu 28-Sep-2017
+^^^^^^^^^^^^^^^
+
+See project journal.
+(Arctic Corridors)
 
 
 
