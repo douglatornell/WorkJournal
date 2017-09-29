@@ -4278,7 +4278,7 @@ See project journal.
 Did more buffing on Results Archive Trello board and got Susan signed upon Tello; also moved deleted 2 more archived trees from /results.
 Ran 20mar17 nowcast on 3 nodes: 37m39s (uses NEO-forcing repo, includes double deflation)
 download_weather 12 failed; re-ran manually to restart automation.
-Queued 20mar17 nowcast on 4 nodes:  (uses NEO-forcing repo, includes double deflation)
+Ran 20mar17 nowcast on 4 nodes: 38m52s (uses NEO-forcing repo, includes double deflation)
 Reviewed and commented on Marlene's notes from 7sep mtg w/ CHS.
 (SalishSea)
 
@@ -4295,6 +4295,15 @@ Thu 28-Sep-2017
 See project journal.
 (Arctic Corridors)
 
+See project journal.
+(Resilient-C)
+
+Helped Vicky by email sort out the promiscuous permissions she applied to NEMO-3.6-code.
+Talked to Vicky about file permissions.
+Tried to help Vicky and Ben debug the SalishSeaWind passive tracer tvd-zts segfault on orcinus.
+Queued 20mar17 nowcast on 5 nodes: 33m10s (uses NEO-forcing repo, includes double deflation); noted that cpu0 on all nodes is running at <25% w/ lots os sys: networking overhead?
+Tweaked colour map to YLOrRd for max ssh vs. tide figures on publish pages.
+(SalishSea)
 
 
 
