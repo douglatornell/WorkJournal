@@ -4301,8 +4301,45 @@ See project journal.
 Helped Vicky by email sort out the promiscuous permissions she applied to NEMO-3.6-code.
 Talked to Vicky about file permissions.
 Tried to help Vicky and Ben debug the SalishSeaWind passive tracer tvd-zts segfault on orcinus.
-Queued 20mar17 nowcast on 5 nodes: 33m10s (uses NEO-forcing repo, includes double deflation); noted that cpu0 on all nodes is running at <25% w/ lots os sys: networking overhead?
+Ran 20mar17 nowcast on 5 nodes: 33m10s (uses NEO-forcing repo, includes double deflation); noted that cpu0 on all nodes is running at <25% w/ lots os sys: networking overhead?
 Tweaked colour map to YLOrRd for max ssh vs. tide figures on publish pages.
+Ran 20mar17 nowcast on 6 nodes w/ 31 cpus/node: 37m14s (uses NEO-forcing repo, includes double deflation); noted that cpu0 on all nodes is still running at <25% w/ lots os sys, and cpu31 is idle.
+(SalishSea)
+
+
+Fri 29-Sep-2017
+^^^^^^^^^^^^^^^
+
+Woke up feeling really crappy w/ congestion and sore throat.
+
+Finalized figures tweaks w/ commits and pull into production:
+* colour map to YLOrRd for max ssh vs. tide figures on publish pages
+* time series duration to 49d
+Reviewed Nathan@UofA notes re: running on graham; they are using --ntasks, not full nodes
+(SalishSea)
+
+
+Sat 30-Sep-2017
+^^^^^^^^^^^^^^^
+
+Deleted jasper runs configuration from SalishSeaCmd because it is defuned as of tomorrow.
+Added --no-deflate option to SalishSeaCmd for running w/ on-the-fly deflation in XIOS-2 via compression_level="4" attribute in file_def.xml file_group definitions.
+Helped Susan get set up to run on cedar:
+* much weirdness getting NEMO-Cmd and SalishSeaCmd installed re missing testpath pkg file in python-scipy module.
+* came up with my_atmos/ and my_rivers/ dirs to use shared forcing and repo climatologies
+Added AGRIF docs to NEMO-Cmd default branch, tagged it as v1.1, and merged it into slurm branch.
+(SalishSea)
+
+
+Sun 1-Oct-2017
+^^^^^^^^^^^^^^
+
+Helped Susan get set up to run on cedar:
+* Same weirdness as on cedar getting NEMO-Cmd and SalishSeaCmd installed
+Deleted DEFLATE command definition from SalishSeasNEMO.sh for --no-default runs.
+Pulled SS-run-sets on skookum to enable test of FVCOM boundary slab output files in nowcast-dev.
+Continued work on ONC ferry data worker; maybe fixed sample count type mismatch issues (NaNs to zeros); added O2 sensor temperature that Rich requested; added colour bar ranges recommended by Rich; changed O2 saturation CF standard name from fractional_* to percent_* as requested by Susan.
+Changed temporary run dir name from UUID to run id + date/time stamp in SalishSeaCmd.
 (SalishSea)
 
 
