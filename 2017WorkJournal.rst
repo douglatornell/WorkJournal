@@ -4340,8 +4340,46 @@ Deleted DEFLATE command definition from SalishSeasNEMO.sh for --no-default runs.
 Pulled SS-run-sets on skookum to enable test of FVCOM boundary slab output files in nowcast-dev.
 Continued work on ONC ferry data worker; maybe fixed sample count type mismatch issues (NaNs to zeros); added O2 sensor temperature that Rich requested; added colour bar ranges recommended by Rich; changed O2 saturation CF standard name from fractional_* to percent_* as requested by Susan.
 Changed temporary run dir name from UUID to run id + date/time stamp in SalishSeaCmd.
+Ran 20mar17 nowcast on 7 nodes: 26m40s (uses NEO-forcing repo, includes double deflation)
 (SalishSea)
 
+
+October
+=======
+
+Week 40
+-------
+
+Mon 2-Oct-2017
+^^^^^^^^^^^^^^
+
+Email from Johannes re: ww3 evaluation; looked okay to end of Jul, but sea state was boring; will look at Aug & Sep this week.
+Check nowcast-dev 01oct17 FVCOM_*.nc files w/ ncdump.
+Pulled SS-run-sets on west.cloud to enable test of FVCOM boundary slab output files in [now|fore]cast* runs.
+Added O2 sensor temperature to ERDDAP datasets.xml.
+Charles mounted EC GEM2.5 2007-2008 drive on smelt via a toaster and set up mount points for it and 8Tb external drive; started copying 2007 files after confirming that an un-compressed file was "data" to file(1).
+Ran get_onc_ferry in bash loop for Aug-2017, but there is still a sample count data type conflict issue.
+Met w/ Rich, Katia & Mark to discuss get_onc_ferry worker and ERDDAP access for them to data.
+Isolated sample count data type conflict to an occurrence for a dataset composed of 1aug and 2aug (but each day is fine alone); ran get_onc_ferry in debugger and dicovered that sample counts are sometimes floats and sometimes ints; fixed by forcing dtype to numpy.int32 (cuz netcdf3) and tested for 1-2 aug; works, now need to fix ERDDAP metadata.
+(SalishSea)
+
+Phys Ocgy seminar about coral bleaching.
+
+
+Tue 3-Oct-2017
+^^^^^^^^^^^^^^
+
+Started copying 2008 GEM2.5 to 8Tb external drive; emailed Robert w/ status update; did a quick search for Python RPN file software and found some promise on Github.
+Resolved sample count as int issue in get_onc_ferry worker.
+Salish Sea team mtg; see whiteboard.
+grib_to_netcdf failed because 02oct17 18 weather files were missing; turns out that download_weather 18 failed *silently* yesterday; ran download_weather 18 --yesterday, then grib_to_netcdf to restart automation.
+Tried to start a new bulk run of get_onc_ferry but ONC API server was down.
+Wrote NEMO-Cmd docs re: slurm, merged slurm branch into default, and released v1.2.
+download_weather 18 failed again today, but we got notification; re-ran manually.
+ONC API service came back online so resumed downloading TWDP:
+* 4-10Aug17, but there were failures due to unhandled exceptions: 5-7aug
+* apr17
+(SalishSea)
 
 
 SalishSeaAGRIF production:
