@@ -4381,6 +4381,115 @@ ONC API service came back online so resumed downloading TWDP:
 * apr17
 (SalishSea)
 
+Wed 4-Oct-2017
+^^^^^^^^^^^^^^
+
+Pinged ERDDAP to load apr17 TWDP data and scanned salinity time series; started may17 download; emailed Vicky and Rich et al about availability and backfill plan; backfill downloads:
+* apr17
+* may17: 27 failed due O2 sensor 504 error (issue #44)
+* jun17: 25 failed due O2 sensor 504 error
+* mar17:
+  * 01 & 23-28 failed due to no nav data
+  * 02 failed due to conflicting time values in from CO2 sensor
+* jul17:
+  * ONC server fell over (404) after 2jul
+* aug17:
+  * 05-07 failed due to no turbchlfl data
+  * 19-20 failed due O2 sensor 504 error
+* Added issue #44 re: handling 504 error failures
+Helped Ben with hg convert and strip on analysis=-ben.
+Helped Susan with benchmarking SMELT on cedar.
+(SalishSea)
+
+See project journal.
+(GOMSS)
+
+See project journal.
+(Arctic Corridors)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project journal.
+(Resilient-C)
+
+
+Thu 5-Oct-2017
+^^^^^^^^^^^^^^
+
+Merged typo PR in hg-novice repo.
+Accepted call invitation w/ Eric Becker re: hg-novice lesson maintenance.
+(swc)
+
+Continued get_onc_ferry backfilling:
+* sep17:
+  * 04-11 failed due to no sensor data, and triggers salinity sample count type mismatch errors in ERDDAP
+  * 30 failed due to no CO2 data
+* feb17:
+  * 24-28 failed due to no nav data
+  * 17 failed due to conflicting time values in from CO2 sensor
+  * 01-16 failed due to no nav data
+* jan17: no nav data for the entire month
+* oct17: 01-03 failed due to no CO2 data
+* Added issue #45 re: handling empty json object errors
+upload_forcing turbidity failed; network glitch? re-ran manually to restart automation.
+(SalishSea)
+
+See project journal.
+(GOMSS)
+
+See project journal.
+(Arctic Corridors)
+
+See project journal.
+(Resilient-C)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Helped Birgit to work around the missing top_level.txt file bug on orcinus that Susan and I encountered on cedar/graham on last weekend; turns out it comes from cliff-2.9.0 (see https://bugs.launchpad.net/python-cliff/+bug/1719465); added cliff~=2.9.0 exclusion to NEMO-Cmd and SalishSeaCmd.
+Build and uploaded conda packages for NEMO-Cmd v1.1 and v1.2.
+Removed get_cgrf plug-in from SalishSeaCmd.
+(GEOTRACES)
+
+
+Fri 6-Oct-2017
+^^^^^^^^^^^^^^
+
+See project journal.
+(GOMSS)
+
+Released SalishSeaCmd v3.3 re: slurm support and removal of get_cgrf plug-in.
+Lots of docs updates; fixed readthedocs/Bitbucket integration.
+Ran 20mar17 nowcast on 8 nodes (16x34): 6m3s (uses NEO-forcing repo, includes double deflation); no more network overhead on cpu0 :-) NEMO 3m52s, combine 44s, deflate 1m17s, gather 6s.
+Updated SalishSeaNowcast dev env on kudu; applied yapf to a bunch more files.
+(SalishSea)
+
+
+Sat 7-Oct-2017
+^^^^^^^^^^^^^^
+
+forecast run produced NaN values for sea surface height and we published a NaN storm surge alert feed; added code to detect NaN sea surface height in make_feeds worker so that we can error out on it; added code to storm surge alerts figures to make risk level markers fully transparent (i.e. invisible) when max ssh is NaN at location.
+Susan committed update v201702 bathymetry with corrected smoothing in Puget Sound, etc; pull it into production.
+
+**TODO** confirm metadata in new mesh mask file.
+
+Replaced nowcast-green/06oct17/ restart files with ones from backfill run that Susan did on cedar w/ updated bathymetry; uploaded them to west.cloud.
+Re-ran upload_forcing nowcast+ to reset automation to repeat nowcast-blue, forecast, and nowcast-green runs.
+(SalishSea)
+
+
+Sun 8-Oct-2017
+^^^^^^^^^^^^^^
+
+Updated configuration changes tables re: change to v201702, and yesterday's bathymetry update.
+Replaced 04sep17 through 22sep17 nowcast-green results from hindcast re: backfill due to accidents reversion to rivers climatology; deleted nowcast-blue, forecast, forecast2 05sep17 through 23sep17 results.
+(SalishSea)
+
+
+
+
+
 
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
