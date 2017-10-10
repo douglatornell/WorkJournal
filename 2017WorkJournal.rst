@@ -4487,6 +4487,20 @@ Replaced 04sep17 through 22sep17 nowcast-green results from hindcast re: backfil
 (SalishSea)
 
 
+Week 41
+-------
+
+Mon 9-Oct-2017
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Thanksgiving Day
+
+See project journal.
+(Resilient-C)
+
+See project journal.
+(GOMSS)
+
 
 
 
