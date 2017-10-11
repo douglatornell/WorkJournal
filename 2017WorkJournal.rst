@@ -4502,6 +4502,47 @@ See project journal.
 (GOMSS)
 
 
+Tue 10-Oct-2017
+^^^^^^^^^^^^^^^
+
+Salish Sea team mtg; see whiteboard; TODOs:
+* Change NEMO arch files to use XIOS_HOME and update docs
+Resolved SalishSeaNowcast issue #45 re: no sensor data; backfill downloads:
+* sep17:
+  * 30
+  * 04-11 failed due to no sensor data, and triggers salinity sample count type mismatch errors in ERDDAP
+* oct17:
+  * 01-08
+  * 09 failed due to no nav data
+* aug17:
+  * 05-07 chl sample count type mismatch
+* mar17:
+  * 02 failed due to conflicting time values in from CO2 sensor
+Added metadata to updated 201702 mesh mask and pinged ERDDAP.
+Got messages several times from ERDDAP about unusually high request levels; they appear to be coming from salish.
+Emailed Neil Swart about Python RPN libraries.
+Reviewed ERDDAP changelog re: updating from 1.64 to 1.80:
+* 1.76:
+  * slow first startup
+  * requires Java 1.8.0_21 or higher
+  * possible datetime issues
+  * download from GitHub
+  * changes in GenerateDatasetsXml tool
+* 1.74:
+  * new hardFlag/ directory; deletes cached dataset info
+* 1.70:
+  * GenerateDatasetsXml tool accepts default and nothing as cmd-line args
+  * change permissions to improve security
+  * highly recommended edits to setup.xml
+* new features:
+  * colorBarNSections attribute
+  * internally unicode, nc _Encoding attr both in and out
+  * .nccsv, .jsonlcsv, .jsonlkvp output files
+  * colorBarPalette TopographyDepth recommended instead of OceanDepth
+  * support for local times
+(SalishSea)
+
+
 
 
 
