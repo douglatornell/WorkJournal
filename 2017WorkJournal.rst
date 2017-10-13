@@ -4543,6 +4543,115 @@ Reviewed ERDDAP changelog re: updating from 1.64 to 1.80:
 (SalishSea)
 
 
+Wed 11-Oct-2017
+^^^^^^^^^^^^^^^
+
+TODO:
+* Book Nov trip: flights, hotel in Montréal, train, car, hotel in Barrie
+
+Worked on GEM2.5 archive drives:
+* Copied 2009 from 2010-2014 drive to 2007-2009
+* Returned 3Tb 2007-2008 drive to Robert and picked up 1Tb mid-2014 drive
+* Deleted 2009 from 2010-2014 drive
+* Copied mid-2014 from 1Tb drive to 2010-2014
+Got code and recommendations from Neil Swart for working with RPN files (some via François Roy); also emailed Nancy when it first appeared that Neil couldn't help.
+Discussed sample count type conflict issue w/ Rich & Katia.
+(SalishSea)
+
+See project journal.
+(Resilient-C)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Booked trip to Montréal and Barrie except accommodation.
+
+
+Thu 12-Oct-2017
+^^^^^^^^^^^^^^^
+
+Booked accommodation for trip to Montréal and Barrie.
+
+forecast2 produced NaN sea surface heights, but nowcast & foreacst were okay
+(SalishSea)
+
+See project journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Fri 13-Oct-2017
+^^^^^^^^^^^^^^^
+
+make_plots forecast2 failed due to bad Sand Heads wind data from EC;
+Westgrid townhall:
+Patrick Mann:
+* New systems status
+  * cedar storage and compute expansion (double) $12M
+  * graham storage expansion $1M
+  * niagra, 60k cores, final negotiations
+  * arbutus storage and compute expansion
+  * cedar & graham getting cloud partitions
+  * NDC object storage ongoing delay
+* Known issues
+  * nearline storage (tape system) not yet available; more complicated than expected
+  * scheduling
+    * large job default users squeezed out by small short jobs; update coming soon to resolve (downtime)
+    * not enough small short jobs to backfill nodes being accumulated for larger full-node jobs
+  * some CVMFS vs. system conflicts can cause user build conflicts
+  * interactive viz nodes not available yet
+* Legacy system migration
+  * bugaboo 31dec
+    * reason for cedar ~100 node expansion
+    * allocations will move to cedar
+  * orcinus, grex, parallel 31mar
+* rac 2018
+  * fast track due 2nov
+  * RRG & RPP full proposal due 16nov
+  * steady year over year increase in apps
+  * 2017 factor was 58% of request
+  * fast track has 296 PIs eligible
+  * no CCV reqd for fast track, but keep update anyway
+    * tech issues - have to delete and re-upload instead of update
+  * mention cloud use
+  * include scaling and performance tests
+  * competitive! see cc docs, evaluation criteria, proposal templates
+    * science score -> scaling: 2.2 == 0, 5 == 98%
+    * science nature and justification, significance, impact
+    * use tables
+    * focus on required resources, not funding
+    * avoid jargon
+    * hqp impact (table of # at levels)
+    * citation stats
+* upcoming training
+  * scheduling 24oct
+  * containerization 21nov
+* visualization challenge
+  * make a provided dataset look pretty; see website
+  * prizes
+* future systems
+  * niagra: ~60k cores, no GPUs, for large parallel jobs (>1000 cores)
+* gp4 - Greg Newby (CC CTO)
+  * plan for op in early 2019
+  * $17M for compute, $7M for storage
+  * mix of CPUs, GPUs, fat nodes (similar to cedar/graham)
+  * new province site (known, but can't announce)
+  * questions:
+    * mix of node types?
+    * what has been learned from cedar/graham?
+    * local node storage, need, amount?
+    * GPUs are expensive, what mix?
+    * interconnect: infiniband, omnipath
+* questions, comments:
+  * no usage of fat nodes on cedar/graham
+(SalishSea)
+
+See project journal.
+(GOMSS)
+
+
 
 
 
