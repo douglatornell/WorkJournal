@@ -4397,7 +4397,7 @@ Pinged ERDDAP to load apr17 TWDP data and scanned salinity time series; started 
   * 05-07 failed due to no turbchlfl data
   * 19-20 failed due O2 sensor 504 error
 * Added issue #44 re: handling 504 error failures
-Helped Ben with hg convert and strip on analysis=-ben.
+Helped Ben with hg convert and strip on analysis-ben.
 Helped Susan with benchmarking SMELT on cedar.
 (SalishSea)
 
@@ -4646,6 +4646,24 @@ Patrick Mann:
     * interconnect: infiniband, omnipath
 * questions, comments:
   * no usage of fat nodes on cedar/graham
+Restarted ERDDAP server for the 1st time since 21sep.
+Worked on ONC ferry data sample count type mismatch issue:
+* Simplifed conversion of sample count NaNs to zeros, and ensuring that sample count variables are int32 via Dataset.to_netcdf(encoding).
+* Found double for corrected O2 concentration on 18feb; re-ran worker to fix
+* Found double for CO2 partial pressure & linearized CO2 concentration on 22feb; re-ran worker to fix
+* Found double for linearized CO2 concentration on 03mar; re-ran worker to fix
+* Found lots of doubles on 13-14mar; re-ran worker to fix
+* Found doubles for CO2 variables on 22mar; re-ran worker to fix
+* Re-ran worker for 07,08,14,15,24, 25 apr
+* Re-ran worker for 01,03,04 may
+* Re-ran worker for 04,08,18 aug
+* Re-ran worker for 03,11-14,30 sep
+* Re-ran worker for 08-12 oct
+* Emailed Katia & Rich re: latest status.
+Tried to work on AGRIF on cedar, but its login node hangs when I do ls.
+Integrated get_onc_ferry worker into nowcast automation.
+Started work on SalishSeaNowcast issue #54 re: 504 timeout errors on O2 sensor.
+Added SalishSeaNowcast issue #46 re: get_onc_ferry failure due to conflicting CO2 sensor time values.
 (SalishSea)
 
 See project journal.
