@@ -4652,6 +4652,44 @@ See project journal.
 (GOMSS)
 
 
+Sat 14-Oct-2017
+^^^^^^^^^^^^^^^
+
+get_onc_ferry worker ran in automation for the first time (despite me not having restarted manager); ping_erddap doesn't seem to have been effective, so pinged erddap manually and all is good.
+get_NeahBay_ssh didn't launch, so upload_forcing failed with FileNotFoundError on obs/ssh file, then FileExistsError on fcst to obs symlink; get_NeahBay_ssh failure was probably due to note enough worker pub/sub ports for logging (addition of get_onc_ferry brought the number of concurrently running early morning workers to 8 and there were only 7 worker ports in the config file); manually re-ran get_NeahBay_ssh forecast2, then upload_forcing forecast2 to restart automation.
+Deleted nowcast-dev.16-10 from /results/SalishSea/.
+Ordered 2 more 8Tb archive drives from Amazon.
+(SalishSea)
+
+Started work on MOAD docs.
+(MOAD)
+
+
+Sun 15-Oct-2017
+^^^^^^^^^^^^^^^
+
+Pushed MOAD docs README, license, and contributors list.
+(MOAD)
+
+Started backfilling ONC TWDP ferry data; got no nav data; discovered that one of the nav devices (GNSS) goes no earlier than 16feb17, the other (Thrane and Thrane) goes back to 9may12, but has a gap from 18feb17 to 1mar17; need to handle multiple nav data devices... sigh...
+Started setting up run dirs on cedar to use repos climatologies and $PROJECT/SalishSea daily forcing:
+* nowcast-blue
+Worked on docs re: how to run NEMO.
+2 x 8Tb SalishSeaCast archive drives arrived.
+(SalishSea)
+
+ECget failed for Englishman River; re-tried manually and it failed with divide by zero; persisted 13oct17 value.
+
+
+Week 42
+-------
+
+Mon 16-Oct-2017
+^^^^^^^^^^^^^^^
+
+Formatted SalishSeaCast archive drive #3.
+(SalishSea)
+
 
 
 
