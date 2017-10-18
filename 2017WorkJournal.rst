@@ -4706,6 +4706,22 @@ Mon 16-Oct-2017
 ^^^^^^^^^^^^^^^
 
 Formatted SalishSeaCast archive drive #3.
+Realized the ping_erddap TWDP-ferry wasn't working because I never added TWDP-ferry set of dataset args; fixed.
+Explored nav data issue: N1 is only available in 2017, N2 goes back to 2012; N2 must have sensors='' in API URL; N2 sensor names are capitalized.
+Worked on setting up blue AGRIF run on cedar w/ namelists that merge those from west.cloud tests, and climatology/daily forcing separation.
+(SalishSea)
+
+Phys Ocgy seminar by Idalia about Mackenzie Canyon
+
+Tue 17-Oct-2017
+^^^^^^^^^^^^^^^
+
+Continued setting up blue AGRIF run on cedar w/ namelists that merge those from west.cloud tests, and climatology/daily forcing separation.
+Salish Sea team mtg; see whiteboard.
+Worked w/ Charles on ERDDAP stack update.
+cedar project file system went slow.
+Added Har Strait and Baynes Sound sub-grid coordinates, bathymetry, and atmospheric forcing weights files to grid repo.
+Worked on docs re: forcing climatology and daily files.
 (SalishSea)
 
 
