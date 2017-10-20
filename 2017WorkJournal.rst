@@ -3332,7 +3332,7 @@ Worked on production SalishSeaAGRIF configuration on salish.
 Sat 22-Jul-2017
 ^^^^^^^^^^^^^^^
 
-Got --multi-prog test cases working on cedar but couldnt' work on nemo.xios due to disk quota issue; opened ticket.
+Got --multi-prog test cases working on cedar but couldn't' work on nemo.xios due to disk quota issue; opened ticket.
 Removed LiveOcean hourly downloads from download_live_ocean, and changed it to be launched after download_weather.
 Helped Susan test make_live_ocean_files worker operating on daily files instead of hourly.
 (SalishSea)
@@ -4713,16 +4713,46 @@ Worked on setting up blue AGRIF run on cedar w/ namelists that merge those from 
 
 Phys Ocgy seminar by Idalia about Mackenzie Canyon
 
+
 Tue 17-Oct-2017
 ^^^^^^^^^^^^^^^
 
 Continued setting up blue AGRIF run on cedar w/ namelists that merge those from west.cloud tests, and climatology/daily forcing separation.
 Salish Sea team mtg; see whiteboard.
-Worked w/ Charles on ERDDAP stack update.
+Worked w/ Charles on ERDDAP stack update; he things that Java null pointer errors are a tomcat/java interaction, not an ERDDAP issue.
 cedar project file system went slow.
 Added Har Strait and Baynes Sound sub-grid coordinates, bathymetry, and atmospheric forcing weights files to grid repo.
 Worked on docs re: forcing climatology and daily files.
 (SalishSea)
+
+
+Wed 18-Oct-2017
+^^^^^^^^^^^^^^^
+
+Continued working through setup issues for blue AGRIF run on cedar.
+Emailed Paul Covert re: ONC ferry data on ERDDAP and via Python.
+Video interview w/ Erin Becker of Data Carpentry re: lessons maintenance.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Thu 19-Oct-2017
+^^^^^^^^^^^^^^^
+
+Formatted a new 8Tb drive to ext4 for GEM2.5-2010-2014 files because the one from Robert is formatted to ntfs; copied files from ntfs disk to ext4; formatted ntfs to ext4 as SalishSeaCast archive4.
+ERDDAP was throwing Java null pointer errors, so restarted it.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project journal.
+(Resilient-C)
+
+See project journal.
+(GOMSS)
 
 
 
