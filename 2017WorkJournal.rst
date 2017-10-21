@@ -4741,7 +4741,7 @@ See project journal.
 Thu 19-Oct-2017
 ^^^^^^^^^^^^^^^
 
-Formatted a new 8Tb drive to ext4 for GEM2.5-2010-2014 files because the one from Robert is formatted to ntfs; copied files from ntfs disk to ext4; formatted ntfs to ext4 as SalishSeaCast archive4.
+Formatted a new 8Tb drive to ext4 for GEM2.5-2010-2014 files because the one from Robert is formatted to ntfs.
 ERDDAP was throwing Java null pointer errors, so restarted it.
 (SalishSea)
 
@@ -4754,6 +4754,23 @@ See project journal.
 See project journal.
 (GOMSS)
 
+
+Fri 20-Oct-2017
+^^^^^^^^^^^^^^^
+
+Continued  coping files from ntfs disk to ext4; formatted ntfs to ext4 as SalishSeaCast archive4.
+Telcon w/ ECCC EER group (Guilliame, Yves & Amina); they want to use our NEMO via tech transfer to their ops group :-)
+Talked to Roman about orcinus after 1apr18; it will continue to operate for UBC researchers.
+Continued work on 2016 TWDP ferry data; found bug in sensor data handling when difference sensors on the same device provide different numbers of samples.
+(SalishSea)
+
+Canyons and Arctic mtg; see whiteboard.
+Changed NEMO-Cmd to name tmp run dirs as run id + microsecond date/time.
+Got agreement to drop support for NEMO-3.4.
+(Canyons GEOTRACES)
+
+Wrote PD fund app to refund part of EPOC fee.
+Learned how my vacation pay works.
 
 
 
