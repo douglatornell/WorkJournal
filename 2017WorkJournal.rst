@@ -4758,7 +4758,7 @@ See project journal.
 Fri 20-Oct-2017
 ^^^^^^^^^^^^^^^
 
-Continued  coping files from ntfs disk to ext4; formatted ntfs to ext4 as SalishSeaCast archive4.
+Continued  coping files from ntfs disk to ext4; last files are for 03nov2014.
 Telcon w/ ECCC EER group (Guilliame, Yves & Amina); they want to use our NEMO via tech transfer to their ops group :-)
 Talked to Roman about orcinus after 1apr18; it will continue to operate for UBC researchers.
 Continued work on 2016 TWDP ferry data; found bug in sensor data handling when difference sensors on the same device provide different numbers of samples.
@@ -4772,6 +4772,31 @@ Got agreement to drop support for NEMO-3.4.
 Wrote PD fund app to refund part of EPOC fee.
 Learned how my vacation pay works.
 
+
+Sat 21-Oct-2017
+^^^^^^^^^^^^^^^
+
+Auth issues on ocean cluster:
+* salishsea-site down; resolved by restarting apache2 and pyramid (ponly the latter was probably necessary)
+* ERDDAP running
+* forecast2 20oct17 or ww3-forecast2 runs launched when auth came back
+Formatted ntfs 8Tb drive to ext4 as SalishSeaCast archive4.
+nowcast calculated NaNs:
+* Susan traced it back to NaNs in nowcast-green/20oct17
+* Susan added NaN detection to stp_ctl
+* re-ran nowcast-green/20oct17
+(SalishSea)
+
+
+Sun 22-Oct-2017
+^^^^^^^^^^^^^^^
+
+Ported --no-deflate option from SalishSeaCmd to NEMO-Cmd.
+Susan isolated nowcast-green instability to unstable salinity profile coming from LiveOcean; she corrected the salishsea_tools function used by make_live_ocean_files to ensure stable boundary conditions; re-ran nowcast-green/20oct17 and nowcast-green/2oct17,
+Characterized ONC TWDP scalardata API nav data failures in 2016 and sent email about it to Akash.
+Added Neah Bay to tide gauge stations collection in PLACES.
+Re-ran nowcast/22oct17 onward.
+(SalishSea)
 
 
 SalishSeaAGRIF production:
