@@ -4777,7 +4777,7 @@ Sat 21-Oct-2017
 ^^^^^^^^^^^^^^^
 
 Auth issues on ocean cluster:
-* salishsea-site down; resolved by restarting apache2 and pyramid (ponly the latter was probably necessary)
+* salishsea-site down; resolved by restarting apache2 and pyramid (only the latter was probably necessary)
 * ERDDAP running
 * forecast2 20oct17 or ww3-forecast2 runs launched when auth came back
 Formatted ntfs 8Tb drive to ext4 as SalishSeaCast archive4.
@@ -4785,6 +4785,7 @@ nowcast calculated NaNs:
 * Susan traced it back to NaNs in nowcast-green/20oct17
 * Susan added NaN detection to stp_ctl
 * re-ran nowcast-green/20oct17
+Continued working through setup issues for blue AGRIF run on cedar.
 (SalishSea)
 
 
@@ -4796,7 +4797,39 @@ Susan isolated nowcast-green instability to unstable salinity profile coming fro
 Characterized ONC TWDP scalardata API nav data failures in 2016 and sent email about it to Akash.
 Added Neah Bay to tide gauge stations collection in PLACES.
 Re-ran nowcast/22oct17 onward.
+Continued backfilling ONC TWDP ferry data: reached oct15
 (SalishSea)
+
+
+Week 43
+-------
+
+Mon 23-Oct-2017
+^^^^^^^^^^^^^^^
+
+Continued backfilling ONC TWDP ferry data: reached jan13.
+Added Neah Bay max ssh vs. tidal prediction to production publish figures, and tides/max_ssh figures group on publish pages; nuked some more code out of figures.py; added Neah Bay label to storm surge alert figures; re-ran make_plots publish for nowcast, forecast & forecast2.
+News report of a 120l hydraulic fluid spill at the Duke Pt ferry terminal.
+Restarted ERDDAP server due to Java null pointer errors; noted tomcat is version 8.0.28, could be upgraded to 8.5.23.
+Started reviewing Vicky's figures.research.velocity_section_and_surface module.
+(SalishSea)
+
+Helped Idalia sort through NEMO-Cmd AGRIF issues.
+(Canyons)
+
+Tue 24-Oct-2017
+^^^^^^^^^^^^^^^
+
+Finished reviewing Vicky's figures.research.velocity_section_and_surface module.
+Salish Sea team mtg; see whiteboard.
+Added surface currents and cross-sections to salishsea-site; deleted a bunch more unused code from figures.py.
+Got agrif running on cedar; issues seemed to be mem=0, and general perversity, then I started getting what looks like a node network issue on node 631; sent email to support.
+(SalishSea)
+
+Helped Idalia sort through NEMO-Cmd AGRIF issues.
+(Canyons)
+
+
 
 
 SalishSeaAGRIF production:
