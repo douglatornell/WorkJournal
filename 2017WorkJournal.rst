@@ -4817,6 +4817,7 @@ Started reviewing Vicky's figures.research.velocity_section_and_surface module.
 Helped Idalia sort through NEMO-Cmd AGRIF issues.
 (Canyons)
 
+
 Tue 24-Oct-2017
 ^^^^^^^^^^^^^^^
 
@@ -4829,6 +4830,24 @@ Got agrif running on cedar; issues seemed to be mem=0, and general perversity, t
 Helped Idalia sort through NEMO-Cmd AGRIF issues.
 (Canyons)
 
+
+Wed 25-Oct-2017
+^^^^^^^^^^^^^^^
+
+Email from Doug Phillips @ computecanada says that there are nemo.exe processes left on cdr631 from 21oct; neither he nor I can kill them.
+Did another 4-node test that hung and left nemo.exe processes on cdr604.
+Did a 1-node test w/ mpirun tweaked to list xios_servier first; ran fine to 20m timeout; 113 steps.
+Twice tried a 2-node test w/ mpirun tweaked to list xios_servier first; 1st had insta-fail due to node network; 2nd started xios and 31 nemo on 1 node, but 2nd node nemo processes were started but asleep.
+Investigated get_onc_ctd sensorData==None errors; need to check whether they are due to no data, or sensor name API issue.
+(SalishSea)
+
+Fixed AGRIF no-restart bug in NEMO-Cmd that Idalia found.
+(Canyons)
+
+See project journal.
+(GOMSS)
+
+Produced https://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-doug/raw/tip/notebooks/SalishSea2017SpillForMichael.ipynb in response to an email from Michael because his network connection at IOS is too slow to enable him to do it.
 
 
 
