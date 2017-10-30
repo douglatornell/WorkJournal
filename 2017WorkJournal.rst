@@ -4850,6 +4850,23 @@ See project journal.
 Produced https://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-doug/raw/tip/notebooks/SalishSea2017SpillForMichael.ipynb in response to an email from Michael because his network connection at IOS is too slow to enable him to do it.
 
 
+Thu 26-Oct-2017
+^^^^^^^^^^^^^^^
+
+See project journal.
+(GOMSS)
+
+Worked w/ Susan to debug the MPI build and libraries cross-up that has crept back into anaconda.
+Charles informed me that the new storage components for skookum have been ordered and now paid for by Jon@IOS; ~4wks away; NCIX is falling apart, so the order went to AE.
+(SalishSea)
+
+See project journal.
+(Resilient-C)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
 Fri 27-Oct-2017
 ^^^^^^^^^^^^^^^
 
