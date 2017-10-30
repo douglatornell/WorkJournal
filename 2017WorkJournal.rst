@@ -4850,6 +4850,62 @@ See project journal.
 Produced https://nbviewer.jupyter.org/urls/bitbucket.org/salishsea/analysis-doug/raw/tip/notebooks/SalishSea2017SpillForMichael.ipynb in response to an email from Michael because his network connection at IOS is too slow to enable him to do it.
 
 
+Fri 27-Oct-2017
+^^^^^^^^^^^^^^^
+
+Bumped SalishSeaCmd to 3.4.dev0; changed its run plug-in so that /usr/bin/mpirun is used explicitly on salish to avoid using an mpirun installed by anaconda.
+Added XIOS-2 clean command to docs.
+Set up a nowcast-ish run in /data/ on salish for Tereza to use as a working example.
+(SalishSea)
+
+See project journal.
+(GOMSS)
+
+Set up my netid at Dal so that I can access their payroll info system.
+
+Updated docker on kudu and started working through it getting started tutorial.
+
+
+Sat 28-Oct-2017
+^^^^^^^^^^^^^^^
+
+Continued working through docker getting started tutorial.
+Played with docker in PyCharm.
+
+download_weather timed out; noticed that forecast2 runs didn't fire this morning.
+Manually re-ran download_weather 12.
+download_live_ocean and grib_to_netcdf failed on launch; running them with --debug showed the same weird argparse error about CommandLineInterface not being hashable that I saw on gomss system; it seems to have been triggered on skookum by the fact that I did pip install --user *in another conda env* yesterday and that created ~/.local/lib/python3.6/site-packages/ with cli packages in it; deleted that and workers w/ date args launch properly.
+Recovery:
+* make_runoff_file
+* download_live_ocean
+* get_NeahBay_ssh nowcast+
+* grib_to_netcdf nowcast+
+* get_onc_ctd SCVIP SEVIP LSBBL USDDL
+* get_onc_ferry TWDP
+Discovered that the date arg issue also prevented most everything after yesterday's nowcast-green run fail to launch; recover:
+* download_results nowcast-green 2017-10-27
+* make_forcing_links salish-nowcast nowcast+ --shared-storage 2017-10-27
+Dropped support for NEMO-3.4 from NEMO-Cmd.
+(SalishSea)
+
+
+Sun 29-Oct-2017
+^^^^^^^^^^^^^^^
+
+Updated dev env docs and fixed broken readthedocs web hook.
+Replied to Étienne's email re: mtg to help w/ dev env setup.
+(randopony)
+
+Continued recovery from 27oct17 failures:
+* make_forcing_links salish-nowcast nowcast+ --shared-storage 2017-10-28
+* make_forcing_links salish-nowcast nowcast+ --shared-storage 2017-10-28
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+
 
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
