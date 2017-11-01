@@ -4922,6 +4922,32 @@ See project journal.
 (SalishSeaCast-FVCOM)
 
 
+November
+========
+
+Week 44
+-------
+
+Mon 30-Oct-2017
+^^^^^^^^^^^^^^^
+
+Phys Ocgy seminar by Rhy MacMillan on archeology and trace element analysis.
+
+Continued paring down figures.py by deleting wind arrow figures that Susan wants to replace w/ an image loop of Ben's HRDPS wind figure.
+Helped Tereza get SalishSea running on salish and told her how to do SMELT next.
+Started looking at how to add image loop group feature to salishsea-site.
+(SalishSea)
+
+Went through the dance of changing my cwl password and how that breaks all of my wireless settings.
+
+
+Tue 31-Oct-2017
+^^^^^^^^^^^^^^^
+
+Fixed ERDDAP breakage of HRDPS dataset that Susan induced by symlinking 12sep14 as 11sep14.
+(SalishSea)
+
+
 
 
 SalishSeaAGRIF production:
