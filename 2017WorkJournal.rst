@@ -4940,12 +4940,78 @@ Started looking at how to add image loop group feature to salishsea-site.
 
 Went through the dance of changing my cwl password and how that breaks all of my wireless settings.
 
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project journal.
+(GOMSS)
+
 
 Tue 31-Oct-2017
 ^^^^^^^^^^^^^^^
 
 Fixed ERDDAP breakage of HRDPS dataset that Susan induced by symlinking 12sep14 as 11sep14.
+Salish Sea team mtg; see whiteboard.
+Continued looking at how to add image loop group feature to salishsea-site.
+Helped Tereza get closer to running SMELT_c4; got stumped by NEMO looking for restart file; Susan tracked that to a namelist typo (missing & on namelist id).
 (SalishSea)
+
+Helped Karina toward running her glue and deflate jobs as concurrent, dependent jobs to launch after ther MITgcm runs; also introduced her to cedar & graham.
+Helped Idalia get Mackenzie Canyon AGRIF running on salish.
+(Canyons)
+
+Met w/ Étienne to help him get a randopony dev env up and running.
+
+
+Wed 1-Nov-2017
+^^^^^^^^^^^^^^
+
+cedar is still very slow to launch runs, and agrif processes launch then sleep when I use more than 1 node.
+Emails w/ Rich about TWDP dataset metadata and matlab's issues with it.
+(SalishSea)
+
+Helped Karina w/ MITgcm build on graham.
+(Canyons)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project journal.
+(GOMSS)
+
+See project journal.
+(Resilient-C)
+
+Experimented w/ docker for NEMO-Cmd in PyCharm; miniconda3 base image; docker-compose as Python interpreter is annoyingly slow to lauch tests.
+
+
+Thu 2-Nov-2017
+^^^^^^^^^^^^^^
+
+Concluded experiment w/ docker for NEMO-Cmd in PyCharm; no advantage over local env, test failures don't link to source, and debugger doesn't launch (although that might be a NEMO-Cmd project issue).
+
+See project journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Investigated ssh NaN error; discovered that I hadn't built SalishSea config on west.cloud w/ Susan's NaN detection and abort code, so did so.
+(SalishSea)
+
+See project journal.
+(Resilient-C)
+
+
+Thu 2-Nov-2017
+^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Suggested that Tereza continue debugging her existing SMELT_c4 instead of starting over.
+(SalishSea)
+
 
 
 
