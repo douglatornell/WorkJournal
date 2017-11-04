@@ -5010,7 +5010,20 @@ See project journal.
 (SalishSeaCast-FVCOM)
 
 Suggested that Tereza continue debugging her existing SMELT_c4 instead of starting over.
+Added 2 more files to the yapf processed collection in SalishSeaNowcast.
+Susan fixed convection instability in LiveOcean boundary conditions generation code in SalishSeaTools; recover from yesterday's failure:
+* make_live_ocean_files on salish
+* upload_forcing 2017-11-02 --debug
+* make_forcing_links nowcast-green 2017-11-02
+* make_forcing_links nowcast-green 2017-11-03
+Set up pre-commit hook for yapf on niko.
+make_plots nowcast-green research failed w/ malformed or inaccessible DAP DDS error; ERDDAP was throwing null pointer errors, so restarted it; then:
+* make_plots nowcast-green research 2017-11-02
+Worked on refactoring Sand Heads winds obs comparison figure.
 (SalishSea)
+
+See project journal.
+(Resilient-C)
 
 
 
