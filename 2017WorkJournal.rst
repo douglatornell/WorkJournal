@@ -5003,7 +5003,7 @@ See project journal.
 (Resilient-C)
 
 
-Thu 2-Nov-2017
+Fri 3-Nov-2017
 ^^^^^^^^^^^^^^
 
 See project journal.
@@ -5025,6 +5025,46 @@ Worked on refactoring Sand Heads winds obs comparison figure.
 See project journal.
 (Resilient-C)
 
+
+Sat 4-Nov-2017
+^^^^^^^^^^^^^^
+
+Investigated lots of errors since yesterday's recovery; nowcast-green failed because I forgot to make and upload Fraser turbidity file; recovery:
+* make_turbidity_file 2017-11-03 --debug
+* upload_forcing turbidity 2017-11-03 --debug
+* make_forcing_links nowcast-green 2017-11-03
+03nov nowcast-green stalled when make_forcing_links for 04nov nowcast pulled the rug out from under it; recovery:
+* rm -rf nowcast-green/03nov17
+* make_forcing_links nowcast-green 2017-11-03
+Reviewed and expanded data mgmt section of MIDOSS proposal.
+More 03nov nowcast-green fails; finally had success using symlinked 31oct17 LiveOcean bcs.
+(SalishSea)
+
+See project journal.
+(GOMSS)
+
+See project journal.
+(Resilient-C)
+
+
+Sun 5-Nov-2017
+^^^^^^^^^^^^^^
+
+Hacked next_workers to disable automatic run launches so that we can get nowcast-green caught up without interference:
+* cleared checklist and rotated logs
+* symlinked LiveOcean 31oct as 04nov
+* upload_forcing nowcast+ 2017-11-04
+* upload_forcing ssh 2017-11-04
+* upload_forcing turbidity 2017-11-04
+* make_forcing_links nowcast-green 2017-11-04
+Restored next_workers except make_live_ocean_files and launched 05nov automation:
+* ln -s nowcast-green/04nov17/namelist_cfg nowcast-blue/04nov17/
+* re-ran grib_to_netcdf to restart automation for nowcast cycle
+Started work on making watch_NEMO detect successful completion of run; see issue #14.
+nowcast-dev failed due to missing namelist_cfg from previous run; recover:
+* ln -s nowcast-green/04nov17/namelist_cfg nowcast-ddevblue/04nov17/
+* make_forcing_links nowcast+ --shared-storage
+(SalishSea)
 
 
 
