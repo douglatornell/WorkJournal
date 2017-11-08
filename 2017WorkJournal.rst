@@ -5067,6 +5067,29 @@ nowcast-dev failed due to missing namelist_cfg from previous run; recover:
 (SalishSea)
 
 
+Week 45
+-------
+
+Mon 6-Nov-2017
+^^^^^^^^^^^^^^
+
+Moved from EOSM-326c  to ESB-3043.
+
+Phys Ocgy seminar by Nari on Mn and Fe along line P.
+
+Continued refactoring Sand Heads winds obs comparison figure.
+(SalishSea)
+
+
+Tue 7-Nov-2017
+^^^^^^^^^^^^^^
+
+Salish Sea team mtg; see whiteboard.
+Reviewed MIDOSS proposal.
+Finished refactoring Sand Heads winds obs comparison figure; deleted figures.py.
+(SalishSea)
+
+
 
 
 SalishSeaAGRIF production:
