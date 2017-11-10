@@ -5090,6 +5090,38 @@ Finished refactoring Sand Heads winds obs comparison figure; deleted figures.py.
 (SalishSea)
 
 
+Wed 8-Nov-2017
+^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Susan submitted MIDOSS proposal to MEOPAR :-)
+download_weather 12 failed due to time-out; re-ran manually at 12:00.
+(SalishSea)
+
+See project journal.
+(GOMSS)
+
+See project journal.
+
+See project journal.
+(Resilient-C)
+
+
+Thu 9-Nov-2017
+^^^^^^^^^^^^^^
+
+See project journal.
+(Arctic Corridors)
+
+See project journal.
+(Resilient-C)
+
+See project journal.
+(GOMSS)
+
+
 
 
 SalishSeaAGRIF production:
