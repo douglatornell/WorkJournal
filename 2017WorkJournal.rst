@@ -5122,6 +5122,21 @@ See project journal.
 (GOMSS)
 
 
+Fri 10-Nov-2017
+^^^^^^^^^^^^^^^
+
+Deleted archived /results/nowcast-green.16.10/.
+Fixed SalishSeaNowcast issue #49 re: FutureWarning in get_onc_ctd worker.
+Simplify get_onc_ctd sample count NaNs & int64 type via dataset encoding.
+Handle no sensor data in ONC API response in get_onc_ctd; issue #48.
+Started development of update _forecast_datasets worker.
+(SalishSea)
+
+Canyons and Arctic mtg; see whiteboard.
+Helped Susan and Karina get rotating table in lab turning.
+(Canyons)
+
+
 
 
 SalishSeaAGRIF production:
