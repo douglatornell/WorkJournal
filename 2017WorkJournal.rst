@@ -5129,12 +5129,54 @@ Deleted archived /results/nowcast-green.16.10/.
 Fixed SalishSeaNowcast issue #49 re: FutureWarning in get_onc_ctd worker.
 Simplify get_onc_ctd sample count NaNs & int64 type via dataset encoding.
 Handle no sensor data in ONC API response in get_onc_ctd; issue #48.
-Started development of update _forecast_datasets worker.
+Started development of update_forecast_datasets worker.
 (SalishSea)
 
 Canyons and Arctic mtg; see whiteboard.
 Helped Susan and Karina get rotating table in lab turning.
 (Canyons)
+
+
+Sat 11-Nov-2017
+^^^^^^^^^^^^^^^
+
+Finished development of update_forecast_datasets worker, tested it in production, and hooked it into automation.
+(SalishSea)
+
+
+Sun 12-Nov-2017
+^^^^^^^^^^^^^^^
+
+update_forecast_datasets worker ran successfully in automation, but ping_erddap didn't launch because manager needs to be restarted to register update_forecast_datasets.
+(SalishSea)
+
+See project journal.
+(Resilient-C)
+
+See project journal.
+(GOMSS)
+
+
+Week 46
+-------
+
+Mon 13-Nov-2017
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Remembrance Day lieu day
+
+Restarted SalishSeaNowcast manager on skookum to make it aware of update_forecast_datasets worker.
+No data from any of the ONC devices.
+Improved watch_NEMO test coverage based on yesterday's work on GoMMS_Nowcast.
+Noticed that LiveOcean boundary conditions accidentally got switched back from 31oct17 to present day on 11nov17.
+Worked on Sand Heads winds figure:
+* added dates to direction axes tick labels
+* restored visibility of map longitude axes tick labels
+* fixed wrong sign bug in localize_time()
+* suppressed wind observations plotting for forecast* runs
+* Fixed bug in salishsea-site generation of list of plots links on publish pages whereby Sand Heads figure was listed even though it wasn't available
+Worked on image loop group feature in salishsea-site app.
+(SalishSea)
 
 
 
