@@ -5179,6 +5179,18 @@ Worked on image loop group feature in salishsea-site app.
 (SalishSea)
 
 
+Tue 14-Nov-2017
+^^^^^^^^^^^^^^^
+
+Salish Sea team mtg; see whiteboard.
+Landed image loop groups in production, and they are retroactive :-)
+Added image loops for all SMELT tracers to salishsea-site app.
+(SalishSea)
+
+Talked to Tereza about her web scraping, social justice side-project.
+
+MOAD safety training mtg.
+
 
 
 SalishSeaAGRIF production:
