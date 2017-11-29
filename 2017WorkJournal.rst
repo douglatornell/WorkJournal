@@ -5224,6 +5224,76 @@ See project journal.
 (GOMSS)
 
 
+Week 47
+-------
+
+Mon 20-Nov-2017
+^^^^^^^^^^^^^^^
+
+PyCon Canada sprints; ipython docs
+* git clone ipython repo
+* conda create ipython-dev python=3.6
+* pip install -e .[test]
+* iptest
+* conda install sphinx sphinx_rtd_theme
+* make html
+* github fork
+* git remote rename origin upstream
+* git remote add upstream git@github.com:douglatornell/ipython.git
+Submitted 2 pull requests.
+
+Fixed off-by-1 bug in calculation of restart file names for forecast runs in watch_NEMO run success confirmations; uploaded changes for another test cycle.
+(SalishSea)
+
+
+Tue 21-Nov-2017
+^^^^^^^^^^^^^^^
+
+Train from Montréal to Toronto, then rental car to Barrie.
+
+Finalized run success confirmation feature in watch_NEMO.
+Tried to figure out bloated and corrupted repos on cedar for Vicky and Susan.
+(SalishSea)
+
+
+(SalishSeaCast-FVCOM)
+
+Did another pull request to further improve docs for building the docs.
+(ipython)
+
+
+Week 48
+-------
+
+Mon 27-Nov-2017
+^^^^^^^^^^^^^^^
+
+Charles took salish down to install new RAID controller for OPP storage expansion.
+
+Finished converting SalishSeaNowcast to yapf.
+Added salishsea run --waitjob support for slurm systems.
+Discovered that Pt. Atkinson forecast dataset won't open in xarray.
+Email Rich & Chuning to confirm what solar radiation sensors they want added to the TWDP dataset.
+(SalishSea)
+
+Phys Ocgy seminar by Jacquie-Lee re: internal tides parameterizations in ANHA4 model.
+
+
+Tue 28-Nov-2017
+^^^^^^^^^^^^^^^
+
+Salish Sea team mtg; see whiteboard.
+Worked on debugging xarray/netcdf4 failure to load data from Pt Atkinson forecast dataset via HTTPS.
+Pulled Susan's XML changes for new tide gauge stations for testing in nowcast-dev; run failed w/ no time steps; she fixed some issues in the new XML, and I was able to launch the run.
+Handle non-existence of files like time.step in watch_NEMO run success confirmation.
+Grabbed this:
+  /Ocean Networks Canada/Mobile Platforms/British Columbia Ferries/Tsawwassen - Duke Point  TWDP  BARPRESS, CO2SENSOR, FLUOROMETER, METSTN, ORIENTATION, OXYSENSOR, PYRANOMETER, PYRGEOMETER, RADIOMETER, TEMPHUMID, TEMPSENSOR, TSG, TURBCHLFL, WINDMONITOR
+from the page that is produced via the JavaScript link at the bottom of https://wiki.oceannetworks.ca/display/help/stations because it is so dame difficult to find.
+More ONC scalardata API bugs; nothing other than housing temperature from pyr*meter devices.
+(SalishSea)
+
+
+
 
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
