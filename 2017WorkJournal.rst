@@ -5262,6 +5262,15 @@ Did another pull request to further improve docs for building the docs.
 (ipython)
 
 
+Sun 26-Nov-2017
+^^^^^^^^^^^^^^^
+
+Installed Python version of oplop on kudu after researching Chrome/Firefox extension versions.
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
 Week 48
 -------
 
@@ -5291,6 +5300,30 @@ Grabbed this:
 from the page that is produced via the JavaScript link at the bottom of https://wiki.oceannetworks.ca/display/help/stations because it is so dame difficult to find.
 More ONC scalardata API bugs; nothing other than housing temperature from pyr*meter devices.
 (SalishSea)
+
+
+Wed 29-Nov-2017
+---------------
+
+salishsea-site went down; seems like it was a fail in the reverse proxy link to apache; had to stop and restart the pyramid process to get things back.
+Worked on adding Friday Harbor tide & max ssh figure generation and web display.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Thu 30-Nov-2017
+---------------
+
+See project journal.
+(Resilient-C)
+
+nowcast-green run failed; guessed it was a network glitch and re-ran; failed again; checked and found that v201702/iodef.xml to which nowcast-green symlinks was changed from buffer size factor of 0.12 to 1.0,
+(SalishSea)
+
+See project work journal.
+(GOMSS)
 
 
 Fri 1-Dec-2017
