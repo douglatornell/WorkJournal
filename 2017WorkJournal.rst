@@ -5293,6 +5293,23 @@ More ONC scalardata API bugs; nothing other than housing temperature from pyr*me
 (SalishSea)
 
 
+Fri 1-Dec-2017
+^^^^^^^^^^^^^^
+
+Updated niko PyCharm to 2017.3
+
+Email from Marlene re: status of WW3 eval & ssh forecast datasets; sent Tuesday's drafted email re: forecast dataset prototype.
+Worked on adding air temperature, relative humidity, barometric pressure, solar radiation, and longwave radiation to get_onc_ferry worker.
+(SalishSea)
+
+Tried to reproduce NEMO-Cmd 1 char/line in NEMO.sh issue on graham and failed.
+Canyons/Arctic mtg; see whiteboard.
+Discussion in mtg clued me to loop at _pbs_directives(), add a unit test, and fix the bug.
+(Canyons)
+
+EOAS end of term 1 party.
+
+
 
 
 SalishSeaAGRIF production:
