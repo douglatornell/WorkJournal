@@ -5256,6 +5256,7 @@ Tried to figure out bloated and corrupted repos on cedar for Vicky and Susan.
 (SalishSea)
 
 
+See project journal.
 (SalishSeaCast-FVCOM)
 
 Did another pull request to further improve docs for building the docs.
@@ -5343,7 +5344,30 @@ Discussion in mtg clued me to loop at _pbs_directives(), add a unit test, and fi
 EOAS end of term 1 party.
 
 
+Sat 2-Dec-2017
+^^^^^^^^^^^^^^
 
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Dropped support for NEMO-3.4 support from SalishSeaCmd.
+(SalishSea)
+
+
+Sun 3-Dec-2017
+^^^^^^^^^^^^^^
+
+forecast2 aborted; Susan determined that it was due to a spot bathymetry issue near the northern bounday, and did a spot fix, but was unable to relaunch the run.
+Updated nowcast-sys/SalishSeaCmd on skookum from r557 to r577 (NEMO-3.4 dropped) for testing w/ nowcast-dev.
+nowcast-dev crashed due to refactoring bug in SalishSeaCmd; fixed and re-ran.
+forecast aborted; Susan determined that it was near area in Puget Sound where Vicky had land crashes; updated NEMO-3.6-code on west.cloud from r1059 to r1083 (land mask multiplications in vvl module); did a clean build of SalishSea config, and re-ran forecast via make_forcing_links ssh.
+(SalishSea)
+
+
+
+
+Transform Susan's particle tracking notebook into a module/tool/package that can be used for production and ad hoc tracking; may need to be made faster via numba or something
 
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
