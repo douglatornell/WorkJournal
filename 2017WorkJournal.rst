@@ -5393,6 +5393,15 @@ Fri 15-Dec-2017
 Traveled to Vancouver.
 
 
+Sun 17-Dec-2017
+^^^^^^^^^^^^^^^
+
+Renewed APEGBC membership; 85 hr PD.
+
+Added sea surface height forecast datasets for all tide guage stations that we calculate to ERDDAP.
+(SalishSea)
+
+
 Week 51
 -------
 
