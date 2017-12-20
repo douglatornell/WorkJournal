@@ -5365,6 +5365,55 @@ forecast aborted; Susan determined that it was near area in Puget Sound where Vi
 (SalishSea)
 
 
+December
+========
+
+Week 49
+-------
+
+Mon 4-Dec-2017
+^^^^^^^^^^^^^^
+
+Traveled to Barrie.
+
+
+Sat 9-Dec-2017
+^^^^^^^^^^^^^^
+
+Finalized and pushed salishsea_tools.data_tools.get_chs_tides(); docs are broken due to need for new mocks.
+(SalishSea)
+
+
+Week 50
+-------
+
+Fri 15-Dec-2017
+^^^^^^^^^^^^^^^
+
+Traveled to Vancouver.
+
+
+Week 51
+-------
+
+Mon 18-Dec-2017
+^^^^^^^^^^^^^^^
+
+Discussed ADCP and ferry radiation data w/ Rich; provide ONC w/ issues re: ADCP in January; need solar and downward longwave radiation in ferry dataset.
+Updated ARCH files and docs to use XIOS_HOME environment variable.
+Started changing ssh vs. tide prediction figure to use forecast datasets.
+Showed Elise how to use requests to get ERDDAP datasets in 2 steps.
+Fixed missing Campbell River XML dataset description bug.
+(SalishSea)
+
+
+Tue 19-Dec-2017
+^^^^^^^^^^^^^^^
+
+Continued changing ssh vs. tide prediction figure to use forecast datasets.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
 
 
 Transform Susan's particle tracking notebook into a module/tool/package that can be used for production and ad hoc tracking; may need to be made faster via numba or something
