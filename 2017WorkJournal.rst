@@ -5396,9 +5396,9 @@ Traveled to Vancouver.
 Sun 17-Dec-2017
 ^^^^^^^^^^^^^^^
 
-Renewed APEGBC membership; 85 hr PD.
+Renewed APEGBC membership; 85 hr CPD.
 
-Added sea surface height forecast datasets for all tide guage stations that we calculate to ERDDAP.
+Added sea surface height forecast datasets for all tide gauge stations that we calculate to ERDDAP.
 (SalishSea)
 
 
@@ -5422,6 +5422,49 @@ Tue 19-Dec-2017
 Continued changing ssh vs. tide prediction figure to use forecast datasets.
 Salish Sea team mtg; see whiteboard.
 (SalishSea)
+
+
+Wed 20-Dec-2017
+^^^^^^^^^^^^^^^
+
+make_runoff_file failed; no ECCC data; re-ran ECget manually, then make_runoff_file, then upload_forcing to restart automation for forecast2 run.
+(SalishSea)
+
+Started passport renewal.
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Thu 21-Dec-2017
+^^^^^^^^^^^^^^^
+
+Updated NEMO-3.6-code on salish from rev 77a19b95f5863 to rev 4e7e6a13f8bf; did a clean build of SalishSea config for nowcast-dev
+(SalishSea)
+
+Submitted passport renewal.
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+
+Fri 22-Dec-2017
+^^^^^^^^^^^^^^^
+
+forecast2 run failed again; Susan re-ran w/ 18dec17 LiveOcean file.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
 
 
 
