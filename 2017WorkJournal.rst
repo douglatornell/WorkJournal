@@ -5421,6 +5421,7 @@ Tue 19-Dec-2017
 
 Continued changing ssh vs. tide prediction figure to use forecast datasets.
 Salish Sea team mtg; see whiteboard.
+Charles updated ERDDAP to v1.80.
 (SalishSea)
 
 
@@ -5458,6 +5459,9 @@ Fri 22-Dec-2017
 ^^^^^^^^^^^^^^^
 
 forecast2 run failed again; Susan re-ran w/ 18dec17 LiveOcean file.
+Reviewed ERDDAP changed from 1.64 to 1.80:
+* EDDGridLonPM180 dataset type would allow us to convert HRDPS from 0-360 to -180-180
+* Minimal changes to setup.xml and datasets.xml.
 (SalishSea)
 
 See project journal.
@@ -5465,6 +5469,22 @@ See project journal.
 
 See project work journal.
 (GOMSS)
+
+
+Sat 23-Dec-2017
+^^^^^^^^^^^^^^^
+
+Added ERDDAP dataset XML fragment for surface tracers forecast dataset, and added it to ping_erddap nemo-forecast dataset id list; xarray can open dataset without problem, but need to check again after update_forecast_datasets runs later today; still works.
+Helped Susan with update LiveOcean boundary files code via xarray.
+Setup /opp/ storage directories.
+Started rsync-ing ww3_foreacst results from west.cloud to /opp/
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
 
 
 
