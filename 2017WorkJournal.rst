@@ -5487,8 +5487,62 @@ See project journal.
 (SalishSeaCast-FVCOM)
 
 
+Sat 23-Dec-2017
+^^^^^^^^^^^^^^^
 
-Transform Susan's particle tracking notebook into a module/tool/package that can be used for production and ad hoc tracking; may need to be made faster via numba or something
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+
+Sun 24-Dec-2017
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+
+Week 52
+-------
+
+Mon 25-Dec-2017
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Christmas
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Tue 26-Dec-2017
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Boxing Day
+
+upload_forcing forecast2 failed due to bug in upload_forcing workers re: FilerPerms(); fixed and re-ran upload_forcing manually to restart automation.
+(SalishSea)
+
+
+Started work to transform Susan's SeaTracker particle tracking notebook into a module/tool/package that can be used for production and ad hoc tracking; may need to be made faster via numba or something
+(MOAD)
+
+
+705 739 5666 x33852
+
+
+Sun 31-Dec-2017
+^^^^^^^^^^^^^^^
+
+Reviewed Susan's LiveOcean boundary conditions code changes in tools and make_live_ocean_files and pulled them into production.
+(SalishSea)
+
+
+
 
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
