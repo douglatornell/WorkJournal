@@ -45,6 +45,115 @@ See project journal.
 (SalishSeaCast-FVCOM)
 
 
+Wed 3-Jan-2018
+^^^^^^^^^^^^^^
+
+Discussed ONC ADCP data trials and tribulations w/ Rich.
+Worked on get_onc_ferry worker, and updating ERDDAP dataset XML fragment; TWDP files aside; started backfill downloading in tmux bash loop.
+(SalishSea)
+
+
+Thu 4-Jan-2018
+^^^^^^^^^^^^^^
+
+Travel from home to Barrie.
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Fri 5-Jan-2018
+^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Sat 6-Jan-2018
+^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Sun 7-Jan-2018
+^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Started work on well-documented dev of class-based SeaTracker module.
+(SalishSea)
+
+
+Week 2
+------
+
+Mon 8-Jan-2018
+^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+SalishSeaCast salinity and temperature fields went live on nvs.nanoos.org!
+(SalishSea)
+
+
+Tue 9-Jan-2018
+^^^^^^^^^^^^^^
+
+Continued work on well-documented dev of class-based SeaTracker module.
+(SalishSea)
+
+
+Wed 10-Jan-2018
+^^^^^^^^^^^^^^^
+
+
+Thu 11-Jan-2018
+^^^^^^^^^^^^^^^
+
+Continued work on well-documented dev of class-based SeaTracker module.
+(SalishSea)
+
+
+Fri 12-Jan-2018
+^^^^^^^^^^^^^^^
+
+Continued work on well-documented dev of class-based SeaTracker module.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Sat 13-Jan-2018
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Week 3
+------
+
+Mon 15-Jan-2018
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Travelled home crom Barrie
+
+
+Tue 16-Jan-2018
+^^^^^^^^^^^^^^^
+
+Salish Sea team mtg; see whiteboard.
+Continued changing ssh vs. tide prediction figure to use forecast datasets.
+(SalishSea)
+
+
 
 
 SalishSeaAGRIF production:
