@@ -5487,16 +5487,6 @@ See project journal.
 (SalishSeaCast-FVCOM)
 
 
-Sat 23-Dec-2017
-^^^^^^^^^^^^^^^
-
-See project journal.
-(SalishSeaCast-FVCOM)
-
-See project work journal.
-(GOMSS)
-
-
 Sun 24-Dec-2017
 ^^^^^^^^^^^^^^^
 
@@ -5526,7 +5516,6 @@ Tue 26-Dec-2017
 
 upload_forcing forecast2 failed due to bug in upload_forcing workers re: FilerPerms(); fixed and re-ran upload_forcing manually to restart automation.
 (SalishSea)
-
 
 Started work to transform Susan's SeaTracker particle tracking notebook into a module/tool/package that can be used for production and ad hoc tracking; may need to be made faster via numba or something
 (MOAD)
