@@ -154,6 +154,33 @@ Continued changing ssh vs. tide prediction figure to use forecast datasets.
 (SalishSea)
 
 
+Wed 17-Jan-2018
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+
+Thu 18-Jan-2018
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+
+Fri 19-Jan-2018
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
 
 
 SalishSeaAGRIF production:
