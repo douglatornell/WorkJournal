@@ -180,6 +180,14 @@ Fri 19-Jan-2018
 See project journal.
 (SalishSeaCast-FVCOM)
 
+Canyons/Arctic group mtg; see whiteboard.
+(Canyons/Arctic)
+
+Continued changing ssh vs. tide prediction figure to use forecast datasets.
+(SalishSea)
+
+See project journal.
+(Resilient-C)
 
 
 
