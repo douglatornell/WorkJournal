@@ -190,6 +190,32 @@ See project journal.
 (Resilient-C)
 
 
+Week 4
+------
+
+Mon 22-Jan-2018
+^^^^^^^^^^^^^^^
+
+PyCascades conference.
+
+
+Tue 23-Jan-2018
+^^^^^^^^^^^^^^^
+
+PyCascades conference.
+
+
+Wed 24-Jan-2018
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Helped Tereza sort out her NEMO build issues.
+Added processing for forecast2 runs to update_forecast_datasets worker.
+(SalishSea)
+
+
 
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
