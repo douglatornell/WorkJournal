@@ -183,11 +183,37 @@ See project journal.
 Canyons/Arctic group mtg; see whiteboard.
 (Canyons/Arctic)
 
-Continued changing ssh vs. tide prediction figure to use forecast datasets.
+Continued changing ssh vs. tide prediction figure to use xarray.
 (SalishSea)
 
 See project journal.
 (Resilient-C)
+
+
+Sat 20-Jan-2018
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Uploaded gemlam/2014[10|11]*.bz2 from 1Tb drive to /data/dlatorne/MEOPAR/GEMLAM/2014/.
+(SalishSea)
+
+
+Sun 21-Jan-2018
+^^^^^^^^^^^^^^^
+
+Walked down to Kits Beach to observe morning high tide and storm surge.
+
+Formatted red 1Tb portable drive to use as backup for kudu in preparation for change to PoP_OS!.
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Finished changing ssh vs. tide prediction figure to use xarray for forecast runs; still need to do forecast2.
+(SalishSea)
+
 
 
 Week 4
