@@ -242,6 +242,29 @@ Added processing for forecast2 runs to update_forecast_datasets worker.
 (SalishSea)
 
 
+Thu 25-Jan-2018
+^^^^^^^^^^^^^^^
+
+
+Fri 26-Jan-2018
+^^^^^^^^^^^^^^^
+
+Opened ports on west.cloud for make_fvcom_boundary and run_fvcom worker logging; restart log_aggregator on skookum so that it knows about new ports.
+Enabled compare_tide_prediction_max_ssh fig module to handle forecast2 runs.
+Changed make_plots forecast* publish to launch after update_forecast_datasets worker.
+Eliminated production of publish figures for nowcast runs because the information is contained in the new, long forecast* runs publish figures.
+Updated SalishSeaNowcast on skookum from rev da6f17bda01b to rev 5fd55a7e6a65.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Attended AAPS "Focus in the Age of distraction" training session; mediation, but I'm pretty good a focus already, it seems.
+
+Built a new salishsea-site Vagrant VM on niko, but couldn't get it to sshfs mount /results/ for testing.
+(salishsea-site)
+
+
 
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
