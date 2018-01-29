@@ -245,6 +245,14 @@ Added processing for forecast2 runs to update_forecast_datasets worker.
 Thu 25-Jan-2018
 ^^^^^^^^^^^^^^^
 
+Fixed bugs in update_forecast_datasets worker re: forecast2 runs.
+(SalishSea)
+
+Continued getting kudu set up under PoP_OS!.
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
 
 Fri 26-Jan-2018
 ^^^^^^^^^^^^^^^
@@ -263,6 +271,38 @@ Attended AAPS "Focus in the Age of distraction" training session; mediation, but
 
 Built a new salishsea-site Vagrant VM on niko, but couldn't get it to sshfs mount /results/ for testing.
 (salishsea-site)
+
+
+Sat 27-Jan-2018
+^^^^^^^^^^^^^^^
+
+get_NeahBay_ssh for forecast2 run failed due to change in tidal prediction file to 10min; recovery:
+* hg revert -r 677 tidal_predictions/Neah\ Bay_tidal_prediction_01-Jan-2013_31-Dec-2020.csv
+* get_NeahBay_ssh forecast2
+* upload_forcing west.cloud-nowcast forecast2
+* hg revert -C tidal_predictions/Neah\ Bay_tidal_prediction_01-Jan-2013_31-Dec-2020.csv
+Same failure happened before nowcast run, but upload_forcing or make_forcing_links papered things over for us.
+Failure happened again before forecast; worked w/ Susan to fix it by giving get_NeahBay_ssh an hourly tide prediction file to work with, independent of the new 10min files we use for figures.
+Susan reproduced the make_plots nowcast-green research Python core dump issue in a notebook; found that it is not an issue in a newly constructed env with conda-forge as priority channel.
+(SalishSea)
+
+Continued getting kudu set up under PoP_OS!.
+
+Emailed Sean Farley to offer to help maintain the Mercurial PPA.
+
+Updated nowcast-vm Vagrant description.
+Struggled with inability to sshfs mount /results in Vagrant VM.
+(salishsea-site)
+
+
+Sun 28-Jan-2018
+^^^^^^^^^^^^^^^
+
+Ordered new 275Gb SSD for niko.
+
+
+(salishsea-site)
+
 
 
 
