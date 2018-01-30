@@ -215,7 +215,6 @@ Finished changing ssh vs. tide prediction figure to use xarray for forecast runs
 (SalishSea)
 
 
-
 Week 4
 ------
 
@@ -298,9 +297,58 @@ Struggled with inability to sshfs mount /results in Vagrant VM.
 Sun 28-Jan-2018
 ^^^^^^^^^^^^^^^
 
-Ordered new 275Gb SSD for niko.
+Ordered and received new 275Gb SSD for niko.
+
+Started removing nowcast row from storm surge & tides section of results index and improving table layout.
+(salishsea-site)
 
 
+Week 5
+------
+
+Mon 29-Jan-2018
+^^^^^^^^^^^^^^^
+
+Replaced /results/nowcast-sys/nowcast-env/ on skookum with a new one built with conda-forge channel prioritized to try to resolve make_plot issues and provide pygrib for coming make_fvcom_wind worker:
+* circusctl stop scheduler
+* circusctl stop manager
+* circusctl stop message_broker
+* circusctl stop log_aggregator
+* circusctl stop quit
+* conda env remove --prefix /results/nowcast-sys/nowcast-env/
+* conda create ... (see deployment docs)
+* source activate
+* pip install ... (see deployment docs)
+* git clone OPPTools
+* updated repos
+* pip install -e ...
+* created etc/conda/activated.d/envvars.sh
+* created etc/conda/deactivated.d/envvars.sh
+* deactivate and reactivate env to set envvars
+* circusd --daemon $NOWCAST_CONFIG/circus.ini
+Ran make_plots forecast2 2018-01-28 to test new env (was failing on NewWest max ssh figure);
+Noted that sotrm_surge_alerts figure takes ~4min to run.
+Warnings from make_plots:
+* xarray/plot/utils.py:51: FutureWarning: 'pandas.tseries.converter.register' has been moved and renamed to 'pandas.plotting.register_matplotlib_converters'.converter.register()
+* /results/nowcast-sys/nowcast-env/lib/python3.6/site-packages/numpy/ma/core.py:6385: MaskedArrayFutureWarning: In the future the default for ma.minimum.reduce will be axis=0, not the current None, to match np.minimum.reduce. Explicitly pass 0 or None to silence this warning.
+  return self.reduce(a)
+* /results/nowcast-sys/nowcast-env/lib/python3.6/site-packages/numpy/ma/core.py:6385: MaskedArrayFutureWarning: In the future the default for ma.maximum.reduce will be axis=0, not the current None, to match np.maximum.reduce. Explicitly pass 0 or None to silence this warning.
+  return self.reduce(a)
+Emailed stakeholders re: ERDDAP sea surface height ERDDAP datasets and forecast figures.
+make_turbidity_file failed; fixed bug in numpy array copying.
+Updated copyright year range in:
+* SalishSeaNowcast
+* salishsea-site
+(SalishSea)
+
+Did a pull request to the ropensci/rerddap project on github to add our ERDDAP server.
+(prediction-core)
+
+Phys Ocgy seminar by Ben S re: turbulence measurement in the Arctic.
+
+Finished removing nowcast row from storm surge & tides section of results index and improved table layout.
+Worked on cleanup in salishseacast views module.
+Ensured that only available figures appear in figure group selectors.
 (salishsea-site)
 
 
