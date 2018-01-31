@@ -351,6 +351,25 @@ Worked on cleanup in salishseacast views module.
 Ensured that only available figures appear in figure group selectors.
 (salishsea-site)
 
+Installed 275Gb drive in niko.
+
+
+Tue 30-Jan-2018
+---------------
+
+Started preparing niko for clean install of PoP_OS!:
+* installed miniconda warehouse drive
+* started cloning MEOPAR repos on to warehouse drive
+* started creating conda envs on warehous drive
+
+Worked on improving speed of results index page.
+(salishsea-site)
+
+Salish Sea team mtg; see whiteboard.
+Helped Susan set up archival storage of nowcast-green Aug-2015 to Aug-2017 section with bad rivers.
+Started refactoring ssh forecast dataset URL out of compare_tide_prediction_max_ssh module to config.
+(SalishSea)
+
 
 
 
