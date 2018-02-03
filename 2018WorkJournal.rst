@@ -370,6 +370,41 @@ Helped Susan set up archival storage of nowcast-green Aug-2015 to Aug-2017 secti
 Started refactoring ssh forecast dataset URL out of compare_tide_prediction_max_ssh module to config.
 (SalishSea)
 
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Wed 31-Jan-2018
+---------------
+
+Dentist Appt
+
+Continued getting kudu set up under PoP_OS!.
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Email convo w/ Rich & Katia about averaging of Fraser River flow.
+(SalishSea)
+
+See project journal.
+(Resilient-C)
+
+
+Thu 1-Feb-2018
+--------------
+
+Telcon from Kathlean Knapp @ Homecare.
+
+Consultation at Body & Soul.
+
+See project journal.
+(Resilient-C)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
 
 Fri 2-Feb-2018
 ^^^^^^^^^^^^^^
