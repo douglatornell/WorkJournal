@@ -355,7 +355,7 @@ Installed 275Gb drive in niko.
 
 
 Tue 30-Jan-2018
----------------
+^^^^^^^^^^^^^^^
 
 Started preparing niko for clean install of PoP_OS!:
 * installed miniconda warehouse drive
@@ -370,6 +370,21 @@ Helped Susan set up archival storage of nowcast-green Aug-2015 to Aug-2017 secti
 Started refactoring ssh forecast dataset URL out of compare_tide_prediction_max_ssh module to config.
 (SalishSea)
 
+
+Fri 2-Feb-2018
+^^^^^^^^^^^^^^
+
+Continued preparing niko for clean install of PoP_OS!:
+* continued cloning MEOPAR repos on to warehouse drive
+* cloned MOAD repos on to warehouse drive
+
+SalishSeaCast results index page sped up to 3.25s now that 16-28 Jan time series and biology image loop figures are available.
+Refactored ssh forecast dataset URL out of compare_tide_prediction_max_ssh module to config.
+Added CHS water level observations to compare_tide_prediction_max_ssh figure.
+(SalishSea)
+
+Canyons/Arctic team mtg; see whiteboard.
+(Canyons/Arctic)
 
 
 
