@@ -375,7 +375,7 @@ See project journal.
 
 
 Wed 31-Jan-2018
----------------
+^^^^^^^^^^^^^^^
 
 Dentist Appt
 
@@ -391,8 +391,11 @@ See project journal.
 (Resilient-C)
 
 
+February
+--------
+
 Thu 1-Feb-2018
---------------
+^^^^^^^^^^^^^^
 
 Telcon from Kathlean Knapp @ Homecare.
 
@@ -403,7 +406,6 @@ See project journal.
 
 See project journal.
 (SalishSeaCast-FVCOM)
-
 
 
 Fri 2-Feb-2018
@@ -420,6 +422,47 @@ Added CHS water level observations to compare_tide_prediction_max_ssh figure.
 
 Canyons/Arctic team mtg; see whiteboard.
 (Canyons/Arctic)
+
+
+Sat 3-Feb-2018
+^^^^^^^^^^^^^^
+
+Continued getting kudu set up under PoP_OS!.
+
+Did the year-end randopony database rollover via the database interface in PyCharm.
+Set up Chili 200 and emailed Mike.
+(randopony)
+
+Helped Elise sort out missing arrow dependency on bugaboo.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Sun 4-Feb-2018
+^^^^^^^^^^^^^^
+
+Cleared backlog of issues in Sentry.
+(SalishSea)
+
+Finished preparing niko for upgrade to PoP_OS! and installed it (had to physically remove 275Gb drive so that grub could install on internal drive).
+Started setting niko up under PoP_OS!
+
+February
+========
+
+Week 6
+------
+
+Mon 5-Feb-2018
+^^^^^^^^^^^^^^
+
+Continued getting niko set up under PoP_OS!.
+
+
+
+Need to suppress zeep output in debug log.
 
 
 
