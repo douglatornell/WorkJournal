@@ -460,7 +460,38 @@ Mon 5-Feb-2018
 
 Continued getting niko set up under PoP_OS!.
 
+Discussed automation of hindcast runs on cedar w/ Susan; see whiteboard photo.
+Discussed Fraser flow values w/ Rich & Katia.
+Started setting up projects/SalishSea/hindcast-sys/ tree on cedar:
+* cloned repos
+* built XIOS-2
+* built NEMO-3.6-code SMELT config
+* built NEMO-3.6-code REBUILD_NEMO
+Set up hindcast-sys/17nov14/ where we will initialize from, but discussion w/ Susan revealed that we can't run there yet to to bathymetry issues; run from neap in mid-Nov 2017 for testing.
+(SalishSea)
 
+Started exploring new ONC data API docs: https://wiki.oceannetworks.ca/display/O2A/Oceans+2.0+API+Home
+(ONC API)
+
+
+Tue 6-Feb-2018
+^^^^^^^^^^^^^^
+
+Continued getting niko set up under PoP_OS!.
+
+Continued setting up projects/SalishSea/hindcast-sys/ tree on cedar:
+* Deleted hindcast-sys/17nov14/ because we're not ready for it, and we decided to keeo the results on $SCRATCH
+* Created $SCRATCH/hindcast/
+* Installed miniconda3 in $PROJECT/SalishSea/hindcast-sys/
+* set aside system PYTHONPATH with `export OLD_PYTHONPATH=$PYTHONPATH; unset PYTHONPATH`
+* created $PROJECT/SalishSea/hindcast-sys/hindcast-env conda env
+* installed Python packages
+* Set up 16nov17 run in hindcast-sys/runs
+* squeue -u $USER -o"%i %j %t %r %S" provides:
+    JOBID NAME ST REASON START_TIME
+    4747883 16nov17hindcast PD Priority N/A
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
 
 Need to suppress zeep output in debug log.
 
