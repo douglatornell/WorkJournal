@@ -493,6 +493,45 @@ Continued setting up projects/SalishSea/hindcast-sys/ tree on cedar:
 Salish Sea team mtg; see whiteboard.
 (SalishSea)
 
+
+Wed 7-Feb-2018
+^^^^^^^^^^^^^^
+
+Dentist appt re: lr molars contact.
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Replied to email from Neeraj Kashyap @google re: getting started running NEMO on GCP; contact from PyCascades.
+(SalishSea)
+
+
+Thu 8-Feb-2018
+^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+download_weather 12 failed; re-ran manually at 17:00 when final files appeared on datamart.
+download_weather 18 failed; re-ran manually at 23:00
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Fri 9-Feb-2018
+^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
 Need to suppress zeep output in debug log.
 
 
