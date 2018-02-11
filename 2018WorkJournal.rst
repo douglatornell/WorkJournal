@@ -490,6 +490,14 @@ Continued setting up projects/SalishSea/hindcast-sys/ tree on cedar:
 * squeue -u $USER -o"%i %j %t %r %S" provides:
     JOBID NAME ST REASON START_TIME
     4747883 16nov17hindcast PD Priority N/A
+  before job is scheduled, and:
+    JOBID NAME ST REASON START_TIME
+    4749279 16nov17hindcast PD Priority 2018-02-06T19:10:22
+  once it has an allocation, and:
+    JOBID NAME ST REASON START_TIME
+    4749279 16nov17hindcast R None 2018-02-06T18:16:26
+  when the job is running.
+* 16nov17 run failed due to river turbidity file path issue.
 Salish Sea team mtg; see whiteboard.
 (SalishSea)
 
@@ -531,6 +539,20 @@ Fri 9-Feb-2018
 
 See project journal.
 (SalishSeaCast-FVCOM)
+
+Continued setting up hindcast automation on cedar:
+* fixed river turbidity forcing path issue
+* fixed LiveOcean forcing path issue
+* had to change tracers/west/bioOBC_const.nc to make time_counter a record dimension
+* had to update LiveOcean file to wide western boundary (Susan's dec18 refactoring)
+Started dev of watch_NEMO_hindcast worker.
+(SalishSea)
+
+Canyons/Arctic group mtg; see whiteboard.
+(Canyons/Arctic)
+
+See project work journal.
+(GOMSS)
 
 Need to suppress zeep output in debug log.
 
