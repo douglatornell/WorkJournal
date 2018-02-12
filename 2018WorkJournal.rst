@@ -533,6 +533,11 @@ download_weather 18 failed; re-ran manually at 23:00
 See project journal.
 (SalishSeaCast-FVCOM)
 
+Fitness assessment at Body & Soul.
+
+See project journal.
+(Resilient-C)
+
 
 Fri 9-Feb-2018
 ^^^^^^^^^^^^^^
@@ -553,6 +558,30 @@ Canyons/Arctic group mtg; see whiteboard.
 
 See project work journal.
 (GOMSS)
+
+
+Sat 10-Feb-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(Resilient-C)
+
+
+Sun 11-Feb-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(Resilient-C)
+
+Investigated TWDP ferry data failures since 7feb; TWDP.N2 nav sensors appear to have stopped working, but TWDP.N1 are working again; refactored get_onc_ferry to enable it to work with a list of nav sensor station identifiers.
+Updated get_onc_ferry and get_onc_ctd to use xarray>=0.10.0 resampling API.
+(SalishSea)
 
 Need to suppress zeep output in debug log.
 
