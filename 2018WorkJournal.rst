@@ -583,7 +583,68 @@ Investigated TWDP ferry data failures since 7feb; TWDP.N2 nav sensors appear to 
 Updated get_onc_ferry and get_onc_ctd to use xarray>=0.10.0 resampling API.
 (SalishSea)
 
-Need to suppress zeep output in debug log.
+Week 6
+------
+
+Mon 12-Feb-2018
+^^^^^^^^^^^^^^^
+
+Travel to Barrie.
+
+
+Web 14-Feb-2018
+^^^^^^^^^^^^^^^
+
+nowcast-green failed due to a west boundary condition issue; Susan symlinked 13feb LiveOcean files at 14feb and re-ran; run succeeded, but launched another nowcast-dev run that I had to kill.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(Resilient-C)
+
+
+Thu 15-Feb-2018
+^^^^^^^^^^^^^^^
+
+download_weather 06 failed; re-ran manually.
+Tried a logging config edit to suppress zeep output from debug log; partially successful.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Fri 16-Feb-2018
+~~~~~~~~~~~~~~~
+
+download_weather 06 failed; re-ran manually.
+Widened zeep logging config from zeep.transport to zeep to try to suppress more zeep output from debug log.
+(SalishSea)
+
+Travelled home from Barrie.
+
+
+Sat 17-Feb-2018
+~~~~~~~~~~~~~~~
+
+upload_forcing forecast2 failed due to connection timeout on west.cloud; ssh to west.cloud initially failed, but started to work after some poking around in the west.cloud web control panel; re-ran upload_forcing manually to restart automation.
+Intermittent network access to west.cloud continued; ticket to support yielded response that it is a known issue that they are working on.
+Started tmux session calculating LiveOcean boundary files from 2013-01-02 from archive that Parker provided.
+Worked with Susan on hindcast test run on cedar to develop watch_NEMO_hindcast worker against.
+(SalishSea)
+
+
+Sun 18-Feb-2018
+~~~~~~~~~~~~~~~
+
+Finished initial implementation of watch_NEMO_hindcast.
+Started dev of run_hindcast.
+(SalishSea)
 
 
 
