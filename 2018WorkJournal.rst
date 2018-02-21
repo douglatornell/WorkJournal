@@ -647,6 +647,15 @@ Started dev of run_hindcast.
 (SalishSea)
 
 
+Tue 20-Feb-2018
+~~~~~~~~~~~~~~~
+
+Finished initial implementation of run_hindcast.
+Salish Sea team mtg; see whiteboard.
+Explored ONC Oceans 2.0 API Python client library in notebook in analysis-doug/onc-api.
+(SalishSea)
+
+
 
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
