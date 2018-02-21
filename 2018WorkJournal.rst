@@ -583,7 +583,8 @@ Investigated TWDP ferry data failures since 7feb; TWDP.N2 nav sensors appear to 
 Updated get_onc_ferry and get_onc_ctd to use xarray>=0.10.0 resampling API.
 (SalishSea)
 
-Week 6
+
+Week 7
 ------
 
 Mon 12-Feb-2018
@@ -643,8 +644,32 @@ Sun 18-Feb-2018
 ~~~~~~~~~~~~~~~
 
 Finished initial implementation of watch_NEMO_hindcast.
+Continued tmux session calculating LiveOcean boundary files from 2013-01-02 from archive that Parker provided.
 Started dev of run_hindcast.
 (SalishSea)
+
+
+Week 8
+------
+
+Mon 19-Feb-2018
+^^^^^^^^^^^^^^^
+
+Body & Soul session w/ Stephen.
+
+upload_forcing forecast2 failed due to network connectivity issue.
+nowcast run went unstable.
+Restarted log_aggregator to try to restore progress log messages from watch_NEMO.
+Continued tmux session calculating LiveOcean boundary files from 2013-01-02 from archive that Parker provided.
+Committed change from 10min avg to instantaneous values in VHFR FVCOM boundary files and updated SS-run-sets on west.cloud with changesets 703f5f930807:9da857a8ccee.
+Susan cleaned up tracers/west/bioOBC_const.nc in repo and pulled it on to west.cloud.
+Susan confirmed that domvvl ...
+Restarted nowcast circus daemon after a thrash due to a bad edit in the logging config to minimize zeep log messages.
+Continued dev of run_hindcast.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
 
 
 Tue 20-Feb-2018
