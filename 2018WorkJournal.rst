@@ -681,6 +681,38 @@ Explored ONC Oceans 2.0 API Python client library in notebook in analysis-doug/o
 (SalishSea)
 
 
+Wed 21-Feb-2018
+~~~~~~~~~~~~~~~
+
+get_NeahBay_ssh failed because it couldn't find a port to log to; Susan re-ran manually to restart automation.
+dowload_results forecast2 failed because it couldn't fix perms on the Neah Bay ssh txt file that was owned by Susan for some reason; files were okay, used sudo to fix perms; re-ran update_forecast_datasets to restart automation.
+Created new nowcast-fig-dev conda env on kudu to use aconda-forge priority and h5netcdf.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Body & Soul session w/ Yusuke.
+
+
+Thu 22-Feb-2018
+~~~~~~~~~~~~~~~
+
+upload_forcing forecast2 failed due to network issue on west.cloud;
+get_onc_ferry failed because it couldn't find a port to log to; added more ports to config, and restarted log log_aggregator.
+make_live_ocean_files ran for 21feb instead of 22feb; re-ran manually
+Ran make_forcing_links salish --shared-storage to launch nowcast-dev run.
+(SalishSea)
+
+
+Fri 23-Feb-2018
+~~~~~~~~~~~~~~~
+
+west.cloud network issue resolved overnight.
+forecast2 failed due to missing 22feb atmospheric forcing file; Susan launched workers manually to start catch-up.
+(SalishSea)
+
+
 
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
