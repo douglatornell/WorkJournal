@@ -704,14 +704,43 @@ make_live_ocean_files ran for 21feb instead of 22feb; re-ran manually
 Ran make_forcing_links salish --shared-storage to launch nowcast-dev run.
 (SalishSea)
 
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
 
 Fri 23-Feb-2018
 ~~~~~~~~~~~~~~~
 
 west.cloud network issue resolved overnight.
 forecast2 failed due to missing 22feb atmospheric forcing file; Susan launched workers manually to start catch-up.
+Continued exploration of ONC Python client library in JupyterLab; couldn't get a successful 2h dataset from SCVIP ADCP :-(
 (SalishSea)
 
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+Started work on setting up 2018 bloomcast:
+* archived 2012-2017 files into directories
+* cp 2017_bloomcast_inifile.yaml 2018_bloomcast_infile.yaml
+* edit 2018_bloomcast_infile.yaml
+* edit config.yaml
+* disable push to web for test run
+* test run succeeded: 14mar 16mar 27mar 10apr 15apr
+* enabled push to web
+* deleted wind_data_date to allow repeat run for today
+* run manual production run; success! :-)
+* checked bloomcast page on salishsea-site
+* edit new weather descriptions into cloud fraction file and commit
+* commit 2018 config file
+* tag for 2018
+* enable cron job on salish
+(bloomcast)
 
 
 SalishSeaAGRIF production:
