@@ -743,6 +743,35 @@ Started work on setting up 2018 bloomcast:
 (bloomcast)
 
 
+Sat 24-Feb-2018
+~~~~~~~~~~~~~~~
+
+Walked to Granville Island and back along the shoreline, in the snow.
+Haircut to a shorter me.
+
+See project work journal.
+(GOMSS)
+
+Experimented with Python asyncio for ECCC datamart file downloads; implementation was not difficult for the basics; async was generatlly faster for 1 or 2 hours of files, but less conclusively so for 6 hours.
+
+
+Sun 25-Feb-2018
+~~~~~~~~~~~~~~~
+
+See project work journal.
+(GOMSS)
+
+Changed bloomcast view so that bloom date log shows most recent predictions at the top.
+(salishsea-site)
+
+Helped Susan with debugging 2016 bloomcast date fail.
+(bloomcast)
+
+Worked on migrating sqlalchemyorg to blogofile 0.8.3 under Python 3.s
+
+
+
+
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
   * sub-grid runoff namelists use sub-grid climatologies
