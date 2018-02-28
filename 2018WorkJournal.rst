@@ -769,6 +769,42 @@ Helped Susan with debugging 2016 bloomcast date fail.
 
 Worked on migrating sqlalchemyorg to blogofile 0.8.3 under Python 3.s
 
+Week 9
+------
+
+Mon 26-Feb-2018
+^^^^^^^^^^^^^^^
+
+Body & Soul session with Theresa.
+
+Added Heavy Snow to cloud fraction mapping.
+(bloomcast)
+
+upload_forcing nowcast failed due to west.cloud network connection issue.
+Added u&v velocity fields rolling forecast datasets to ERDDAP.
+Started work on adding seasonal average tracer fields dataset to ERDDAP.
+(SalishSea)
+
+Phys Ocgy seminar about Raman spectra temperature measurement in water w/ lasers.
+
+
+Tue 27-Feb-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+
+Finished adding seasonal average tracer fields dataset to ERDDAP.
+Salish Sea team mtg; see whiteboard.
+nowcast stalled in download_weather, and again in upload_forcing
+ERDDAP failed to restart after Charles increased JVM memory to 8Gb; I figured out how to bump limits to 3000mb, got another dataset memory warning, so bumped to 4500mb; continnued to get dataset memory warning, and continued to increase JVM memory in 1500mb steps to 12000mb.
+Refactored make_plots to accept model CLI arg, and tested it on missing make_plots nemo nowcast research 2017-02-17 figures.
+Added fvcom nowcast publish workflow to make_plots.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
 
 
 
