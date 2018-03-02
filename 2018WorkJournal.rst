@@ -807,6 +807,38 @@ See project journal.
 (SalishSeaCast-FVCOM)
 
 
+Wed 28-Feb-2018
+^^^^^^^^^^^^^^^
+
+Decreased wwatch3 results retention on west.cloud from 30 to 15 days.
+Added cron jobs on west.cloud to delete wwatch3 wind and current forcing files older than 15 days.
+rsynced wwatch3/forecast/11apr17 to 30nov17 from skookum to west.cloud SoG_ww3_share/forecast/ for Johannes to grab; took ~xx per month
+Added cron job on west.cloud to delete fvcom-nowcast results directories older than 15 days.
+(SalishSea)
+
+See project journal.
+(Resilient-C)
+
+Body & Soul session w/ Stephen.
+
+
+Thu 1-Mar-2018
+^^^^^^^^^^^^^^
+
+See project journal.
+(Resilient-C)
+
+Deleted west.cloud:SoG_ww3_share/forecast directory after email from Johannes that he is done with it.
+(SalishSea)
+
+Mucked around with nowcast-vm Vagrantfile, trying to get sshfs to skoookum working again inside VM; works in simple test VM and several more complete iterations.
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Worked on bikes: Shadowfax, Emma, Red.
+
+
 
 SalishSeaAGRIF production:
 * add AGRIF option to run_NEMO worker:
