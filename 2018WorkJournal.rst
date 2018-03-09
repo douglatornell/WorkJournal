@@ -677,8 +677,10 @@ Tue 20-Feb-2018
 
 Finished initial implementation of run_hindcast.
 Salish Sea team mtg; see whiteboard.
-Explored ONC Oceans 2.0 API Python client library in notebook in analysis-doug/onc-api.
 (SalishSea)
+
+Explored ONC Oceans 2.0 API Python client library in notebook in analysis-doug/onc-api.
+(ONC API)
 
 
 Wed 21-Feb-2018
@@ -716,8 +718,10 @@ Fri 23-Feb-2018
 
 west.cloud network issue resolved overnight.
 forecast2 failed due to missing 22feb atmospheric forcing file; Susan launched workers manually to start catch-up.
-Continued exploration of ONC Python client library in JupyterLab; couldn't get a successful 2h dataset from SCVIP ADCP :-(
 (SalishSea)
+
+Continued exploration of ONC Python client library in JupyterLab; couldn't get a successful 2h dataset from SCVIP ADCP :-(
+(ONC-API)
 
 See project journal.
 (SalishSeaCast-FVCOM)
@@ -798,13 +802,115 @@ See project work journal.
 Finished adding seasonal average tracer fields dataset to ERDDAP.
 Salish Sea team mtg; see whiteboard.
 nowcast stalled in download_weather, and again in upload_forcing
-ERDDAP failed to restart after Charles increased JVM memory to 8Gb; I figured out how to bump limits to 3000mb, got another dataset memory warning, so bumped to 4500mb; continnued to get dataset memory warning, and continued to increase JVM memory in 1500mb steps to 12000mb.
+ERDDAP failed to restart after Charles increased JVM memory to 8Gb; I figured out how to bump limits to 3000mb, got dataset memory warnings, so bumped to 4500mb; continued to get dataset memory warnings, and continued to increase JVM memory in 1500mb steps to 12000mb; continued to get dataset memory warnings, so reset JVM memory to 6000mb.
 Refactored make_plots to accept model CLI arg, and tested it on missing make_plots nemo nowcast research 2017-02-17 figures.
 Added fvcom nowcast publish workflow to make_plots.
 (SalishSea)
 
 See project journal.
 (SalishSeaCast-FVCOM)
+
+
+Fri 2-Mar-2018
+^^^^^^^^^^^^^^^
+
+Canyons/Arctic team mtg; see whiteboard.
+Sarauv asked how to combine NEMO results files from XIOS-1; Idalia reported that she was running nemo combine manually; looking at her stderr revealed a NEMO-Cmd bug whereby the COMBINE, GATHER, and DEFLATE shell vars in NEMO.sh had double {} around them.
+Fixed the bug in NEMO-Cmd, but had to hack it with a "module load nco" command to that it will work for Birgit on graham; that module load should be in the YAML file.
+(Canyons/Arctic)
+
+Discussed ONC API w/ Rich.
+(ONC-API)
+
+Started work on changing SalishSeaCmd to use account rrg-allen for runs on cedar because bugaboo is gone and our allocation has been moved to cedar.
+(SalishSea)
+
+
+Sat 3-Mar-2018
+^^^^^^^^^^^^^^
+
+Travel to Parksville by bike.
+
+Continued work on changing SalishSeaCmd to use account rrg-allen for runs on cedar.
+Removed bugaboo from working environment docs because it has been decommissioned.
+(SalishSea)
+
+
+Sun 4-Mar-2018
+^^^^^^^^^^^^^^
+
+Finished changing SalishSeaCmd to use account rrg-allen for runs on cedar, and removed handling for bugaboo.
+(SalishSea)
+
+Forked sqlalchemyorg on Bitbucket and started serious work on migrating it to blogofile 0.8 and Python 3.
+
+Travel home from Parksville by bike.
+
+
+March
+=====
+
+Week 10
+-------
+
+Mon 5-Mar-2018
+^^^^^^^^^^^^^^
+
+Body & Soul session w/ Theresa.
+
+Cédric Chavanne from Rimouski give SCOR west tour seminar on his method for verification of mesoscale heat flux parameterizations for the winter mixing layer in global climate models.
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Renewed CMOS membership.
+Submitted CMOS abstract.
+
+
+Tue 6-Mar-2018
+^^^^^^^^^^^^^^
+
+Salish Sea team mtg; see whiteboard.
+Added account key for sbatch machines to SalishSeaCmd example YAML files.
+(SalishSea)
+
+Continued exploration of ONC API for ADCP data products; it works.
+Discussed ONC API w/ Rich.
+(ONC-API)
+
+Set up ubc-moad account on readthedocs.org, imported MOAD/docs repo as ubc-moad-docs, added me as an admin, enabled webhook on Bitbucket for on-push builds, initialized Sphinx docs framework.
+(MOAD)
+
+Travel to Nanaimo for SoPO meeting.
+
+Verified bug report from Golnaz re: image.path() call model arg, and applied her fix.
+(salishsea-site)
+
+
+Wed 7-Mar-2018
+^^^^^^^^^^^^^^
+
+Repeated tmux session calculating LiveOcean boundary files from 2013-01-02 from archive that Parker provided; using Susan's most recent stabilization code in tools repo.
+(SalishSea)
+
+SoPO meeting in Nanaimo; see notebook.
+
+
+Thu 8-Mar-2018
+^^^^^^^^^^^^^^
+
+SoPO meeting in Nanaimo; see notebook.
+
+Added 4d fields for baroclinic VHFR FVCOM boundary conditions.
+(SalishSea)
+
+
+
+* Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
+* Stephanie would like web access to prior year's bloomcasts
+* Ask Michael for access to 2nd Narrows ADCP for VHFR currents evaluation figure
+* Charles says wwatch3 results can go public; ask Marlene for a visualization contract
+
 
 
 Wed 28-Feb-2018
