@@ -923,9 +923,13 @@ Wed 7-Mar-2018
 ^^^^^^^^^^^^^^
 
 Repeated tmux session calculating LiveOcean boundary files from 2013-01-02 from archive that Parker provided; using Susan's most recent stabilization code in tools repo.
+Replaced 25aug15 through 31dec15 nowcast-green files w/ bad rivers w/ same period hindcast files.
 (SalishSea)
 
 SoPO meeting in Nanaimo; see notebook.
+
+See project journal.
+(SalishSeaCast-FVCOM)
 
 
 Thu 8-Mar-2018
@@ -934,8 +938,64 @@ Thu 8-Mar-2018
 SoPO meeting in Nanaimo; see notebook.
 
 Added 4d fields for baroclinic VHFR FVCOM boundary conditions.
+Continued repeating tmux session calculating LiveOcean boundary files from 2013-01-02 from archive that Parker provided; using Susan's most recent stabilization code in tools repo.
 (SalishSea)
 
+
+Fri 9-Mar-2018
+^^^^^^^^^^^^^^
+
+Body & Soul session w/ Theresa.
+
+download_weather 12 failed; re-ran manually to restart automation.
+Confirmed that FVCOM boundary files were correctly generated and that make_fvcom_boundary was able to use them successfully.
+Continued repeating tmux session calculating LiveOcean boundary files from 2013-01-02 from archive that Parker provided; using Susan's most recent stabilization code in tools repo.
+Update west.cloud SalishSeaNowcast from 1454:2e8b0ecdcb17 to 1479:d3f054ab58bb.
+Changed SalishSeaNowcast docs to use Python 3.6 on readthedocs, but need to handle a bunch of import errors.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Sat 10-Mar-2018
+^^^^^^^^^^^^^^^
+
+Finished repeating tmux session calculating LiveOcean boundary files from 2013-01-02 from archive that Parker provided; using Susan's most recent stabilization code in tools repo; cleaned up /results/forcing/LiveOcean/; rsynced files to cedar.
+Replaced 01jan16 through 23aug17 nowcast-green files w/ bad rivers w/ same period hindcast files.
+Added salishsea-nowcast key to cedar in preparation for production hindcast operations.
+Hooked download_results into automation after watch_NEMO_hindcast.
+Got Python3.6 builds working on readthedocs for SalishSeaNowcast.
+(SalishSea)
+
+
+Sun 11-Mar-2018
+^^^^^^^^^^^^^^^
+
+Modified Richmond loop in the sunshine.
+
+Hooked split_results into automation after successful download_results hindcast.
+Helped Susan re-process Neah Bay ssh files to extend the west boundary to match the 201702v2 bathymetry.
+(SalishSea)
+
+
+Week 11
+-------
+
+Mon 12-Mar-2018
+^^^^^^^^^^^^^^^
+
+upload_forcing failed due to missing runoff file:
+* make_runoff_file failed due to no Fraser observation; ECget had retrieved values, but they were dated 10-Mar instead of 11-Mar; PST->PDT issue??
+* re-ran ECget manually for Fraser and Englishman
+* deleted bad lines from Fraser_flow and Englishman_flow files
+* re-ran make_runoff_file manually
+* re-ran upload_forcing to restart automation
+Updated NEMO-3.6-code on west.cloud from 1133:a4ce977666d6 to 1188:e18a429921aa; did a clean build of SMELT to bring in corrected zooplankton grazing.
+Updated SS-run-sets on west.cloud with changesets af97a587ca14:2bb75c3357a1.
+Worked with Susan to get 201702v2 hindcast working under automation.
+Automated launch of watch_NEMO_hindcast for next queued run.
+(SalishSea)
 
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
