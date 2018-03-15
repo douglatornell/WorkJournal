@@ -995,7 +995,49 @@ Updated NEMO-3.6-code on west.cloud from 1133:a4ce977666d6 to 1188:e18a429921aa;
 Updated SS-run-sets on west.cloud with changesets af97a587ca14:2bb75c3357a1.
 Worked with Susan to get 201702v2 hindcast working under automation.
 Automated launch of watch_NEMO_hindcast for next queued run.
+Coddled 201702v2 hindcast; after Susan's 19-31aug17 runs, got sep17 done more or less under automation; oct17 run stalled on 6oct for no obvious reason.
 (SalishSea)
+
+Started writing XIOS-2 section of MOAD docs.
+(MOAD)
+
+
+Tue 13-Mar-2018
+^^^^^^^^^^^^^^^
+
+Body & Soul session w/ Theresa
+
+Launched oct17 hindcast 201702v2 run via worker and it progressed past 6oct.
+Salish Sea team mtg; see whiteboard.
+Launched nov17 hindcast 201702v2 run via worker
+oct17 hindcast run completed and nov17 run started immediately.
+Launched dec17 hindcast 201702v2 run via worker
+Launched jan17 hindcast 201702v2 run via worker
+Observed bug in launch of split_results; wrong date.
+Observed bug in run_NEMO_hindcast; YAML file is not deleted from run prep directory.
+(SalishSea)
+
+Continued writing XIOS-2 section of MOAD docs.
+(MOAD)
+
+Met w/ Birgit re: migration to XIOS-2.
+(Canyons/Artic)
+
+
+Wed 14-Mar-2018
+^^^^^^^^^^^^^^^
+
+Launched jan17 hindcast 201702v2 run via worker, but it NaN-ed out; Susan found that was due to 3-19feb LiveOcean files not having been updated to most recent stabilization.
+Ran make_live_ocean_files for feb18 to apply Susan's most recent stabilization and uploaded files to cedar; discovered that downloaded files have been replaced with symlinks into uzipped archive that Parker sent; transformed them into files.
+(SalishSea)
+
+Online intro to MOHID oil spill model by Shihan Li from Haibo's group at Dal.
+(MIDOSS)
+
+CMOS speaker tour and chapter AGM.
+
+Continued helping Birgit re: migration to XIOS-2.
+(Canyons/Artic)
 
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
