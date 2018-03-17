@@ -1027,9 +1027,13 @@ Met w/ Birgit re: migration to XIOS-2.
 Wed 14-Mar-2018
 ^^^^^^^^^^^^^^^
 
-Launched jan17 hindcast 201702v2 run via worker, but it NaN-ed out; Susan found that was due to 3-19feb LiveOcean files not having been updated to most recent stabilization.
+Launched feb17 hindcast 201702v2 run via worker, but it NaN-ed out; Susan found that was due to 3-19feb LiveOcean files not having been updated to most recent stabilization.
 Ran make_live_ocean_files for feb18 to apply Susan's most recent stabilization and uploaded files to cedar; discovered that downloaded files have been replaced with symlinks into uzipped archive that Parker sent; transformed them into files.
+Launched feb17 hindcast 201702v2 run via worker again.
 (SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
 
 Online intro to MOHID oil spill model by Shihan Li from Haibo's group at Dal.
 (MIDOSS)
@@ -1037,7 +1041,41 @@ Online intro to MOHID oil spill model by Shihan Li from Haibo's group at Dal.
 CMOS speaker tour and chapter AGM.
 
 Continued helping Birgit re: migration to XIOS-2.
-(Canyons/Artic)
+(Canyons/Arctic)
+
+
+Thu 15-Mar-2018
+^^^^^^^^^^^^^^^
+
+feb17 hindcast 201702v2 run failed due to missing runoff forcing; Susan uploaded all necessary forcing files to cedar; launched feb17 hindcast 201702v2 run via worker again.
+Built new nowcast-env on west.cloud with conda-forge priority and all new dependencies from OPP and surface current tiles projects.
+Fixed production glitches that arose because SalishSeaCmd was not installed in new nowcast-env on west.cloud.
+Copied hindcast/14mar18 restart files from cedar to west.cloud; re-ran nowcast-green/15mar18 with new restart to repair diatom bloom (among other things)
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Checked out Method cycling studio.
+
+Continued helping Birgit re: migration to XIOS-2.
+(Canyons/Arctic)
+
+
+Fri 16-Mar-2018
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Downloaded and split mar18 hindcast run results.
+Resurrected nowcast-green datasets that got bombed because I created 15mar18.aside/
+(SalishSea)
+
+Reviewed and improved data mgmt plan on portagenetwork.ca.
+(MIDOSS)
+
+
 
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
