@@ -1076,6 +1076,24 @@ Reviewed and improved data mgmt plan on portagenetwork.ca.
 (MIDOSS)
 
 
+Sat 17-Mar-2018
+^^^^^^^^^^^^^^^
+
+Cycled to Sidney.
+
+Wwatch3 failed due to lon/lat issue; need to investigate.
+(SalishSeaWaves)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Sun 18-Mar-2018
+^^^^^^^^^^^^^^^
+
+Cycled on Saanich Peninsula in the morning, attended Bea's memorial in the afternoon, and cycled home to Vancouver in the evening.
+
+
 Week 12
 -------
 
@@ -1089,7 +1107,6 @@ Continued work on setting up SalishSeaAGRIF runs on orcinus.
 Reviewed and fixed RST in Birgit's XIOS-1 to XIOS-2 docs.
 Wrote docs section about local build and preview of MOAD docs re: contributing to them.
 (MOAD)
-
 
 
 
