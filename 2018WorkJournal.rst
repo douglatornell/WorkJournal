@@ -1076,6 +1076,21 @@ Reviewed and improved data mgmt plan on portagenetwork.ca.
 (MIDOSS)
 
 
+Week 12
+-------
+
+Mon 19-Mar-2018
+^^^^^^^^^^^^^^^
+
+Fixed bug in make_ww3_current_file re: coordinates deletion and update to xarray 0.10.2.
+Continued work on setting up SalishSeaAGRIF runs on orcinus.
+(SalishSea)
+
+Reviewed and fixed RST in Birgit's XIOS-1 to XIOS-2 docs.
+Wrote docs section about local build and preview of MOAD docs re: contributing to them.
+(MOAD)
+
+
 
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
