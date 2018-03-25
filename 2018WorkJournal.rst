@@ -1119,11 +1119,39 @@ Continued work on setting up SalishSeaAGRIF runs on orcinus.
 (SalishSea)
 
 
+Wed 21-Mar-2018
+^^^^^^^^^^^^^^^
+
+Pulled NEMO-3.6-code changesets c226b7b85520:b525795a2ddd on to west.cloud to correct BSi bug; did clean build of SMELT.
+Replaced nowcast-green/19aug17/ through 14mar18/ with results from mesozoo correction hindcast/; bug in split_results means that restart files are all in the last day of the month.
+Restarted log_aggregator to try to get make_fvcom_boundary messages back into log.
+(SalishSea)
+
+Updated to raven-6.6.0.
+(salishsea-site)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Thu 22-Mar-2018
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+Body & Soul session w/ Theresa
+
+download_weather 18 failed; re-ran manually at ~18:45.
+(SalishSea)
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
 * Ask Michael for access to 2nd Narrows ADCP for VHFR currents evaluation figure
-* Charles says wwatch3 results can go public; ask Marlene for a visualization contract
 
 
 
