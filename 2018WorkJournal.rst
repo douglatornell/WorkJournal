@@ -1149,6 +1149,29 @@ download_weather 18 failed; re-ran manually at ~18:45.
 (SalishSea)
 
 
+Fri 23-Mar-2018
+^^^^^^^^^^^^^^^
+
+Did ONC annual survey.
+
+Canyons/Arctic team mtg; see whiteboard.
+(Canyons/Arctic)
+
+Discussed SMELT-AGRIF nowcast runs on orcinus w/ Susan; see office whiteboard photo.
+make_plots comparison nowcast 2018-03-22 failed due ONC site down; re-ran manually.
+Continued work on setting up SalishSeaAGRIF runs on orcinus; TODO:
+* generate HaroStrait_init_conditions.nc
+* generate BaynesSound_init_conditions.nc
+* hg add namelist.time.init.*.template files
+* maybe add YAML template for cold start run
+Reviewed Elise's make_turbidity_file worker log message fixes; need code style cleanup.
+Met w/ Roman re: orcinus fat runs:
+* he can reserve a chassis (32 x 12 core nodes, 24 Gb/node) to us for a job to start in a time window and can adjust the time window on an emergency basis; reservation can be by user or group
+* he can also make more storage quota available on home if we need it
+(SalishSea)
+
+
+
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
 * Ask Michael for access to 2nd Narrows ADCP for VHFR currents evaluation figure
