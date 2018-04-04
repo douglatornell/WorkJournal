@@ -1171,6 +1171,59 @@ Met w/ Roman re: orcinus fat runs:
 (SalishSea)
 
 
+Week 13
+-------
+
+Sat 31-Mar-2018
+^^^^^^^^^^^^^^^
+
+Travel to Parksville.
+
+Started writing field_def.xml file docs.
+(MOAD)
+
+Continued work on upload_forcing for nowcast-agrif runs on orcinus.
+(SalishSea)
+
+
+Sun 1-Apr-2018
+^^^^^^^^^^^^^^
+
+Finished upload_forcing mods for nowcast-agrif on orcinus; worked w/ Susan to get permission correct in forcing trees in /home/sallen/.
+Modified make_forcing_links for nowcast-agrif runs on orcinus.
+Worked on nowcast-agrif config and got to the point of failing due to not having real initial conditions files for sub-grids.
+Cloned bitbucket.org/mdunphy/nestingtools as /data/dlatorne/MEOPAR/NEMO-nesting-tools/ and built nesting tools on salish; nesting tools operate on restart files, not initial conditions files.
+After discussion w/ Susan, decided to transform 19aug17 restart files to enable 1st nowcast-agrif run to be 20aug17.
+(SalishSea)
+
+
+April
+=====
+
+Week 14
+-------
+
+Mon 2-Apr-2018
+^^^^^^^^^^^^^^
+
+Travel home from Parksville.
+
+Refactor ssh & sftp functions in SalishSeaNowcast.
+Fix orcinus-agrif config so that upload_forcing stops failing.
+(SalishSea)
+
+
+Tue 3-Apr-2018
+^^^^^^^^^^^^^^
+
+Body & Soul session w/ Theresa.
+
+Salish Sea team mtg; see whiteboard.
+Pulled recent SalishSeaCmd and SalishSeaNowcast changes into production envs on skookum and west.cloud.
+Worked on generation of sub-grid restart files; nesting tools are a pita.
+(SalishSea)
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
