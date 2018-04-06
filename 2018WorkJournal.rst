@@ -1224,6 +1224,35 @@ Worked on generation of sub-grid restart files; nesting tools are a pita.
 (SalishSea)
 
 
+Wed 4-Apr-2018
+^^^^^^^^^^^^^^
+
+make_forcing_links forecast2 failed because I forgot to restart manager after adding make forcing links config item; re-ran manually.
+Updated mean sea level values from Marlene via 20mar18 email from Micahel for VHFR tide gauge stations into PLACES.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+
+Thu 5-Apr-2018
+^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+See project work journal.
+(Resilient-C)
+
+Spinning at Method w/ Dervia.
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
