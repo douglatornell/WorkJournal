@@ -1253,10 +1253,26 @@ See project work journal.
 Spinning at Method w/ Dervia.
 
 
+Fri 6-Apr-2018
+^^^^^^^^^^^^^^
+
+Finished writing XIO-2 field_def.xml file docs.
+(MOAD)
+
+Canyons/Arctic group mtg; see whiteboard.
+(Canyons/Arctic)
+
+download_weather 12 failed; re-ran manually at ~12:26 to restart automation.
+Discussed runoff files and AGRIF w/ Vicky; they are required.
+Continued working on nowcast-agrif setup and testing on orcinus; email to Roman re: running on full nodes.
+Changed SalishSeaCmd to use Python 3.6 for docs builds on readthedocs.
+Experimented with black code formatter on SalishSeaCmd package.
+(SalishSea)
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
-* Ask Michael for access to 2nd Narrows ADCP for VHFR currents evaluation figure
 
 
 
