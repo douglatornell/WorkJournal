@@ -1270,6 +1270,17 @@ Experimented with black code formatter on SalishSeaCmd package.
 (SalishSea)
 
 
+Sat 7-Apr-2018
+^^^^^^^^^^^^^^
+
+Worked on income tax returns.
+
+
+Sun 8-Apr-2018
+^^^^^^^^^^^^^^
+
+Volunteered at Woodwards control of PacPop.
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
