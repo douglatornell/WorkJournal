@@ -1264,7 +1264,9 @@ Canyons/Arctic group mtg; see whiteboard.
 
 download_weather 12 failed; re-ran manually at ~12:26 to restart automation.
 Discussed runoff files and AGRIF w/ Vicky; they are required.
-Continued working on nowcast-agrif setup and testing on orcinus; email to Roman re: running on full nodes.
+Continued working on nowcast-agrif setup and testing on orcinus:
+* email to Roman re: running on full nodes
+* run and re-run restart nesting files creation in tmux on salish; runs that failed due to excluded variables previous work sometimes on re-runs.
 Changed SalishSeaCmd to use Python 3.6 for docs builds on readthedocs.
 Experimented with black code formatter on SalishSeaCmd package.
 (SalishSea)
@@ -1280,6 +1282,45 @@ Sun 8-Apr-2018
 ^^^^^^^^^^^^^^
 
 Volunteered at Woodwards control of PacPop.
+
+
+Week 15
+-------
+
+Mon 9-Apr-2018
+^^^^^^^^^^^^^^
+
+Continued working on nowcast-agrif setup and testing on orcinus:
+* analyzed errors in 6apr18 attempt at 20aug17 run from restart that produced 2_ocean_output for the 1st time
+* queued 2 test runs that use 5 nodes
+* email to Roman re: pmem vs. mem directives
+* Vicky says that neither she nor Idalia know how Michael did the AGRIF transformation of the NEMO configs; Idalia confirmed
+* sent email to Michael about TRBTRA variable fail in Haro restart_trc generations, and how to generate AGRIFLIB/
+(SalishSea)
+
+Tue 10-Apr-2018
+^^^^^^^^^^^^^^^
+
+Updated file name for ERDDAP ubcSSg2DTracerFieldsSeasonalV17-02 dataset.
+Continued working on nowcast-agrif setup and testing on orcinus:
+* nn_date0 nn_it000 mismatch error in 1_oceean_output might be due to sub-grid time step factor; tested with nn_rstctl=0 for sub-grid namelist.time files
+* set ln_turb to false in sub-grid namelist_smelt_cfg files as test
+* the above 2 changes got me 2x5+1 run with 22 errors re: rivers bio tracers climatology files for sub-grids, and 1 error due to Haro sub-grid TRBTRA variable missing from restart
+* Used nesting tools to create sub-grids rivers_bio_tracers_* files for 19-21aug17 and uploaded them to orcinus
+* with the above a 2x5+1 run had 1 error due to Haro sub-grid TRBTRA variable missing from restart
+* Hacked TRATRB variable into Haro restart_trc.nc by using ncks & ncrename to clone TRNTRA; had to convert files to netCDF4 due to error:
+  ERROR NC_EVARSIZE One or more variable sizes violate format constraints
+  HINT: NC_EVARSIZE errors can occur when attempting to aggregate netCDF3 classic files together into outputs that exceed the capacity of the netCDF3 classic file format, e.$
+  ., a variable with size in excess of 2^31 bytes. In this case, try altering the output file type to netCDF3 classic with 64-bit offsets (with --64) or to netCDF4 (with -4).
+   For more details, see http://nco.sf.net/nco.html#fl_fmt
+* with the above a 2x5+1 run completed several steps in Haro, 1 in Baynes, and part of 1 in the full domain
+* queued 5x11+1 and 5-node runs w/ 1h walltime
+* 5x11+1 blew up with high velocity
+* Refactored iodef, file_def & domain_def files; tested them on another 5x11+1 run
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+Spinning at Method w/ Lauren
 
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
