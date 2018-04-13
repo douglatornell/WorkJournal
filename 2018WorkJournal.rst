@@ -1323,6 +1323,35 @@ Salish Sea team mtg; see whiteboard.
 Spinning at Method w/ Lauren
 
 
+Wed 11-Apr-2018
+^^^^^^^^^^^^^^^
+
+Paid 2017 GST filing amount.
+
+See project work journal.
+(GOMSS)
+
+See project work journal.
+(Resilient-C)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Thu 12-Apr-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+See project work journal.
+(Resilient-C)
+
+Deleted and re-created erddap-datasets conda env on kudu because of failures when I tried to update it.
+
+Body & Soul session w/ Theresa
+
+
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
 
