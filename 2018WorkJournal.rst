@@ -1352,6 +1352,30 @@ Deleted and re-created erddap-datasets conda env on kudu because of failures whe
 Body & Soul session w/ Theresa
 
 
+Fri 13-Apr-2018
+^^^^^^^^^^^^^^^
+
+make_plots nemo forecast2 failed due to network glitch at UBC that disconnected everything from Internet for 6-8 minute at ~05:30; re-ran manually to restart automation.
+Started looking at NOAA Nat'l Data Buoy Center (NDBC) re: real-time buoy data for Sentry Shoal, Halibut Bank, New Dungeness, and Neah Bay; discussed how we will use those observations w/ Susan and agreed that we will not accumulate them at this time, and that I will create a function in a new MOAD-tools repo that will return the real-time (last 45 days) as a pandas dataframe.
+Continued working on nowcast-agrif setup and testing on orcinus:
+* Susan could find no obvious cause for failure of the 20aug17-boom run
+* pulled, updated, and did a clean build of SMELTAGRIF on orcinus
+* 5x11+1 test run failed w/ a bus error
+* hg up -r 1203 to get back to code running on 10apr
+* 5x11+1 test run failed w/ XIOS-2 out of memory
+* experimented with various PBS directives for 5 node job; still unclear if we can avoid per-processor memory limit of 2000mb
+* queued 5x11+3 job; blew up on western boundary same as 10apr
+* hg up to tip, and clean build
+* another 5x11+3 run blew up on western boundary, same as 10apr
+(SalishSea)
+
+Canyons/Arctic group mtg; see whiteboard.
+(Canyons/Arctic)
+
+Created moad_tools package complete w/ docs on readthedocs.
+(MOAD)
+
+
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
 
