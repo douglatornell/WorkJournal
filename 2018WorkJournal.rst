@@ -1367,6 +1367,7 @@ Continued working on nowcast-agrif setup and testing on orcinus:
 * queued 5x11+3 job; blew up on western boundary same as 10apr
 * hg up to tip, and clean build
 * another 5x11+3 run blew up on western boundary, same as 10apr
+* 55+1 run on 5 nodes failed w/ XIOS-2 out of memory
 (SalishSea)
 
 Canyons/Arctic group mtg; see whiteboard.
@@ -1374,6 +1375,49 @@ Canyons/Arctic group mtg; see whiteboard.
 
 Created moad_tools package complete w/ docs on readthedocs.
 (MOAD)
+
+
+Sat 14-Apr-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+
+Continued working on nowcast-agrif setup and testing on orcinus with Susan's help:
+* 20aug17 SMELTAGRIF w/o agrif won't start
+* 20aug17 SMELT blows up
+(SalishSea)
+
+See project work journal.
+(Resilient-C)
+
+
+Sun 15-Apr-2018
+^^^^^^^^^^^^^^^
+
+Continued working on nowcast-agrif setup and testing on orcinus with Susan's help:
+* 19aug17 SMELT init run ended at walltime
+* Fixed some namelist issues by changing symlinks in smelt-agrif/ to point to nowcast-green/ instead of v201702/
+* another 20aug17 5x11+3 SMELT run blew up on western boundary, same as 10apr
+(SalishSea)
+
+See project work journal.
+(Resilient-C)
+
+
+Week 15
+-------
+
+Mon 16-Apr-2018
+^^^^^^^^^^^^^^^
+
+Continued working on nowcast-agrif setup and testing on orcinus:
+* Susan figured out that sshNeahBay/fsct/ files from aug17 have short western boundary; replaced fcst/ symlinks with obs/ ones
+* 20aug17 5x11+3 SMELT run got past time step 4...
+* 20aug17 5x11+3 SMELTAGRIF run started...
+*
+
 
 
 Week 16
