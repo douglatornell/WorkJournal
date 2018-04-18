@@ -1376,6 +1376,39 @@ Created moad_tools package complete w/ docs on readthedocs.
 (MOAD)
 
 
+Week 16
+-------
+
+Mon 16-Apr-2018
+^^^^^^^^^^^^^^^
+
+Continued working on nowcast-agrif setup and testing on orcinus:
+* email to Roman requesting a week of dedicated chassis runs
+* queued a 5 node run to see if we get insta-run like for 5x11 runs; reservation is for 2h20 in the future; failed w/ insufficient virutal memory error
+* 5x11+3 run w/ 1ts output
+* email from Roman confirming that we have an exclusive reservation on a full chassis (pod29?)
+(SalishSea)
+
+
+Tue 17-Apr-2018
+^^^^^^^^^^^^^^^
+
+Continued working on nowcast-agrif setup and testing on orcinus:
+* 5 node run did insta-run on pod29, but failed again w/ insufficient virtual memory
+* 5x11+3, 30 time step = 20min run w/ 10min output timed out, maybe due to bad XIOS file_def attr values
+* tweaked file_def attrs 5x11+3, 30 time steps = 20min run w/ 10min output ran to successful completion!!! on pod28 in 27m37s, including deflation, says it needs more XIOS servers
+* 5x11+4-90ts@10min failed w/ insufficient virtual memory error
+* 8x18+3-90ts@10min blew up w/ ssh NaN in Haro after 72/144/290 time steps
+* discovered that I can ssh to pod nodes and found xios for above run using 3x5.8g on a node where there were also 3 nemo processes using 3x700m
+* 12x27+3-90ts@10min had processes on several nodes, blew up same way in Haro
+* 8x18+3mem-60ts@10min XIOS memory mode 1.0 factor uses 4.1g per xios, nemo uses 765m each
+Salish Sea team mtg; see whiteboard.
+Updated SS-run-sets on west.cloud with changesets 0cc9bde28b75:e9a5bc834f46 to bring in reduced bSi and PON sinking rates.
+(SalishSea)
+
+AAPS Spring General mtg
+
+
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
 
