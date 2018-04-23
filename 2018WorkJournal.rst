@@ -1478,6 +1478,24 @@ See project journal.
 See project work journal.
 (Resilient-C)
 
+Body & Soul session w/ Theresa
+
+
+Fri 20-Apr-2018
+^^^^^^^^^^^^^^^
+
+Fix bug in update_forecast_datasets whereby wwatch3 rolling forecast dataset starts 1 day too late.
+Worked on debugging zeros in sub-grid restart files; Baynes Sound looks okay after re-running w/ complete nesting namelist; Haro Strait physics looks okay after namelist fix and symlinking in the coordinates and bathymetry from grid/sub-grids/.
+Ran 8x18+3mem SalishSeaAGRIF case; 1/4 day in 40m
+Re-built and visualized sub-grid restart files; commands to fix TRBTRA variable issue in Haro Strait:
+  ncks -4 -O -v TRNTRA 1_SalishSea_02360880_restart_trc.nc TRNTRA.nc
+  ncks -4 -O 1_SalishSea_02360880_restart_trc.nc 1_SalishSea_02360880_restart_trc.nc
+  ncrename -4 -O -v TRNTRA,TRBTRA TRNTRA.nc TRBTRA.nc
+  ncrename -O -v TRNTRA,TRBTRA TRNTRA.nc TRBTRA.nc
+  ncks -4 -A TRBTRA.nc 1_SalishSea_02360880_restart_trc.nc
+(SalishSea)
+
+Farewell party for Vicky.
 
 Sat 21-Apr-2018
 ~~~~~~~~~~~~~~~
