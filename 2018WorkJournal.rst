@@ -1479,6 +1479,49 @@ See project work journal.
 (Resilient-C)
 
 
+Sat 21-Apr-2018
+~~~~~~~~~~~~~~~
+
+Started SMELT-AGRIF scaling tests on orcinus:
+* See Google Drive spreadsheet https://docs.google.com/spreadsheets/d/12IW0zzyKuZXFl45brVa2aEq5VkFPzmEVI9M25NP1yPk/edit?usp=sharing
+* 8x18p+3m; stopped at 1675 time steps because 10h walltime was going to be exceeded
+* 9x20p+3m; 8h54m
+(SalishSea)
+
+Added observations.get_ndbc.buoy() and places.PLACES to moad_tools.
+(MOAD)
+
+
+Sun 22-Apr-2018
+~~~~~~~~~~~~~~~
+
+download_weather 00 failed; re-ran manually to restart automation
+Continued SMELT-AGRIF scaling tests on orcinus:
+* See Google Drive spreadsheet https://docs.google.com/spreadsheets/d/12IW0zzyKuZXFl45brVa2aEq5VkFPzmEVI9M25NP1yPk/edit?usp=sharing
+* 10x23p+3m; 6h40m
+* 11x25p+3m; 5h31m
+(SalishSea)
+
+
+Week 17
+-------
+
+
+Mon 23-Apr-2018
+~~~~~~~~~~~~~~~
+
+download_weather 06 failed; re-ran manually to restart automation
+Continued SMELT-AGRIF scaling tests on orcinus:
+* See Google Drive spreadsheet https://docs.google.com/spreadsheets/d/12IW0zzyKuZXFl45brVa2aEq5VkFPzmEVI9M25NP1yPk/edit?usp=sharing
+* 12x27p+3m; 4h18m
+* 13x29p+3m;
+Confirmed that combine and deflate jobs run on a compute node:
+* should be able to increase concurrent deflates to 12
+* should be possible to run nemo_rebuild concurrently
+* defkate seems to the constrained by embedded nccopy that is slow for big files (e.g. 1_*_ptrc_T.nc)
+(SalishSea)
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
