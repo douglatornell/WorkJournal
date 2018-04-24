@@ -1524,7 +1524,6 @@ Continued SMELT-AGRIF scaling tests on orcinus:
 Week 17
 -------
 
-
 Mon 23-Apr-2018
 ~~~~~~~~~~~~~~~
 
@@ -1532,11 +1531,22 @@ download_weather 06 failed; re-ran manually to restart automation
 Continued SMELT-AGRIF scaling tests on orcinus:
 * See Google Drive spreadsheet https://docs.google.com/spreadsheets/d/12IW0zzyKuZXFl45brVa2aEq5VkFPzmEVI9M25NP1yPk/edit?usp=sharing
 * 12x27p+3m; 4h18m
-* 13x29p+3m;
+* 13x29p+3m; 3h42m
+* 13x29p+4m; 3h45m
+* 13x29p+5m12d; 3h46m
 Confirmed that combine and deflate jobs run on a compute node:
 * should be able to increase concurrent deflates to 12
 * should be possible to run nemo_rebuild concurrently
 * defkate seems to the constrained by embedded nccopy that is slow for big files (e.g. 1_*_ptrc_T.nc)
+(SalishSea)
+
+
+Tue 24-Apr-2018
+~~~~~~~~~~~~~~~
+
+Continued SMELT-AGRIF scaling tests on orcinus:
+* See Google Drive spreadsheet https://docs.google.com/spreadsheets/d/12IW0zzyKuZXFl45brVa2aEq5VkFPzmEVI9M25NP1yPk/edit?usp=sharing
+* 13x29p+1m12d;
 (SalishSea)
 
 
