@@ -1493,6 +1493,7 @@ Re-built and visualized sub-grid restart files; commands to fix TRBTRA variable 
   ncrename -4 -O -v TRNTRA,TRBTRA TRNTRA.nc TRBTRA.nc
   ncrename -O -v TRNTRA,TRBTRA TRNTRA.nc TRBTRA.nc
   ncks -4 -A TRBTRA.nc 1_SalishSea_02360880_restart_trc.nc
+Started development of watch_NEMO_agrif.
 (SalishSea)
 
 Farewell party for Vicky.
@@ -1537,8 +1538,11 @@ Continued SMELT-AGRIF scaling tests on orcinus:
 Confirmed that combine and deflate jobs run on a compute node:
 * should be able to increase concurrent deflates to 12
 * should be possible to run nemo_rebuild concurrently
-* defkate seems to the constrained by embedded nccopy that is slow for big files (e.g. 1_*_ptrc_T.nc)
+* deflate seems to the constrained by embedded nccopy that is slow for big files (e.g. 1_*_ptrc_T.nc)
+Continued development of watch_NEMO_agrif.
 (SalishSea)
+
+Phys Ocgy seminars by Rich's co-op students Forbes (detection of sewage effluent for GVRD via CTD casts) and Rhys (PSF citizen science dataset climatologies)
 
 
 Tue 24-Apr-2018
