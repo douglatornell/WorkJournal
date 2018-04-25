@@ -1550,8 +1550,20 @@ Tue 24-Apr-2018
 
 Continued SMELT-AGRIF scaling tests on orcinus:
 * See Google Drive spreadsheet https://docs.google.com/spreadsheets/d/12IW0zzyKuZXFl45brVa2aEq5VkFPzmEVI9M25NP1yPk/edit?usp=sharing
-* 13x29p+1m12d;
+* 13x29p+1m12d; 3h37m
+* 13x29p+1m-xd; 3h37m
+* 13x29p+1m-xd-r2;
+Salish Sea team mtg; see whiteboard.
+Discussed environments and multi-process Python on cedar w/ Elise & Ben.
+Finished development of watch_NEMO_agrif.
+make_turbidity_file ValueError caused automation to stop before upload_forcing turbidity; re-ran upload_forcing turbidity manually to restart automation for nowcast-green
+Updated tracers on west.cloud from 57c3f17aa17a with 3aae9bae4eef:c9808b098359 re: Elise's PON and DON based on model-derived profiles,
+Updated tracers on skookum from b8f0f2dd2425 with xxx re: Elise's PON and DON based on model-derived profiles,
+Updated project/SalishSea/hindcast-sys/tracers on cedar from 57c3f17aa17a with 3aae9bae4eef:c9808b098359 re: Elise's PON and DON based on model-derived profiles,
+Updated nowcast-agrif-sys/tracers on orcinus from 57c3f17aa17a with 3aae9bae4eef:c9808b098359 re: Elise's PON and DON based on model-derived profiles,
 (SalishSea)
+
+Attended Digital Tech Supercluster info mtg lead by Gail Murphy.
 
 
 
