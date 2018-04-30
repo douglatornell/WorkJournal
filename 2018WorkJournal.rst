@@ -1619,6 +1619,27 @@ See project work journal.
 
 
 
+Fri 27-Apr-2018
+~~~~~~~~~~~~~~~
+
+1st monthly project mtg.
+(MIDOSS)
+
+Group mtg; see whiteboard.
+(Canyons/Arctic)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Wrote email to Tom Prime at UK NOC Liverpool comparing and contrasting the GoMSS and SalishSea system.
+Updated skookum:SS-run-sets from 9961fd75186d with e52638f8b65c:815d84f23428 to bring in Elise's plankton growth temperature dependence parameter changes.
+Updated west.cloud:SS-run-sets from 67b1a35765a0 with 27bc9c4c0c86:815d84f23428 to bring in Elise's plankton growth temperature dependence parameter changes.
+Updated cedar:SS-run-sets from 0cc9bde28b75 to 815d84f23428.
+Updated orcinus:SS-run-sets from 3e64fad9e3bb with 937ff95ba1e7:815d84f23428 to bring in Elise's plankton growth temperature dependence parameter changes.
+Started development of run_NEMO_agrif worker.
+(SalishSea)
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
