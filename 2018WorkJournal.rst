@@ -1498,6 +1498,7 @@ Started development of watch_NEMO_agrif.
 
 Farewell party for Vicky.
 
+
 Sat 21-Apr-2018
 ~~~~~~~~~~~~~~~
 
@@ -1552,7 +1553,7 @@ Continued SMELT-AGRIF scaling tests on orcinus:
 * See Google Drive spreadsheet https://docs.google.com/spreadsheets/d/12IW0zzyKuZXFl45brVa2aEq5VkFPzmEVI9M25NP1yPk/edit?usp=sharing
 * 13x29p+1m12d; 3h37m
 * 13x29p+1m-xd; 3h37m
-* 13x29p+1m-xd-r2;
+* 13x29p+1m-xd-r2; 3h36m
 Salish Sea team mtg; see whiteboard.
 Discussed environments and multi-process Python on cedar w/ Elise & Ben.
 Finished development of watch_NEMO_agrif.
@@ -1564,6 +1565,58 @@ Updated nowcast-agrif-sys/tracers on orcinus from 57c3f17aa17a with 3aae9bae4eef
 (SalishSea)
 
 Attended Digital Tech Supercluster info mtg lead by Gail Murphy.
+
+
+Wed 25-Apr-2018
+~~~~~~~~~~~~~~~
+
+get_onc_ferry failed w/ UnboundLocalError on nav_data
+Continued SMELT-AGRIF scaling tests on orcinus:
+* See Google Drive spreadsheet https://docs.google.com/spreadsheets/d/12IW0zzyKuZXFl45brVa2aEq5VkFPzmEVI9M25NP1yPk/edit?usp=sharing
+* 13x29p+1.475m-xd; 3h37m
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+
+Thu 26-Apr-2018
+~~~~~~~~~~~~~~~
+
+Network issues caused early morning nowcast trouble:
+* no nav data from TWDP ferry raised UnboundLocalError again; fixed bug via issue#52
+* connection failures to water levels service; manually re-ran make_plots forecast2 to restart automation
+(SalishSea)
+
+Worked on parents' taxes and mail redirection.
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Saw World Without Us at The Cultch.
+
+
+Sat 28-Apr-2018
+~~~~~~~~~~~~~~~
+
+Resolved manager crash after download_fvcom_results and added a temporary hack to prevent make_plot fvcom forecast publish from launching.
+(SalishSea)
+
+Completed income taxes to the review stage.
+
+Saw Circa: Opus at the Chan.
+
+
+Sun 29-Apr-2018
+~~~~~~~~~~~~~~~
+
+See project work journal.
+(GOMSS)
+
+
 
 
 
