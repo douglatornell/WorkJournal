@@ -1599,26 +1599,6 @@ See project journal.
 Saw World Without Us at The Cultch.
 
 
-Sat 28-Apr-2018
-~~~~~~~~~~~~~~~
-
-Resolved manager crash after download_fvcom_results and added a temporary hack to prevent make_plot fvcom forecast publish from launching.
-(SalishSea)
-
-Completed income taxes to the review stage.
-
-Saw Circa: Opus at the Chan.
-
-
-Sun 29-Apr-2018
-~~~~~~~~~~~~~~~
-
-See project work journal.
-(GOMSS)
-
-
-
-
 Fri 27-Apr-2018
 ~~~~~~~~~~~~~~~
 
@@ -1639,6 +1619,51 @@ Updated orcinus:SS-run-sets from 3e64fad9e3bb with 937ff95ba1e7:815d84f23428 to 
 Started development of run_NEMO_agrif worker.
 (SalishSea)
 
+
+Sat 28-Apr-2018
+~~~~~~~~~~~~~~~
+
+Resolved manager crash after download_fvcom_results and added a temporary hack to prevent make_plot fvcom forecast publish from launching.
+(SalishSea)
+
+Completed income taxes to the review stage.
+
+Saw Circa: Opus at the Chan.
+
+
+Sun 29-Apr-2018
+~~~~~~~~~~~~~~~
+
+See project work journal.
+(GOMSS)
+
+
+May
+===
+
+Week 18
+-------
+
+Mon 30-Apr-2018
+^^^^^^^^^^^^^^^
+
+Continued development of run_NEMO_agrif worker.
+Helped Tereza get sorted out on cedar.
+(SalishSea)
+
+
+Tue 1-May-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Salish Sea group mtg; see whiteboard.
+Continued development of run_NEMO_agrif worker; successfully launched a run (that failed due to lack of forcing...)
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
 
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
