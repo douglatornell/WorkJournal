@@ -1662,8 +1662,19 @@ Salish Sea group mtg; see whiteboard.
 Continued development of run_NEMO_agrif worker; successfully launched a run (that failed due to lack of forcing...)
 (SalishSea)
 
+
+Wed 2-May-2018
+^^^^^^^^^^^^^^
+
+Deployed make_plots wwatch3 to skookum.
+(SalishSea)
+
 See project journal.
 (SalishSeaCast-FVCOM)
+
+See project journal.
+(Resilient-C)
+
 
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
