@@ -1676,6 +1676,54 @@ See project journal.
 (Resilient-C)
 
 
+Thu 3-May-2018
+^^^^^^^^^^^^^^
+
+Vancouver to Barrie
+
+Worked on refactoring [run|watch]_NEMO_agrif workers to use paramiko.ssh_client.exec_command().
+(SalishSea)
+
+
+Fri 4-May-2018
+^^^^^^^^^^^^^^
+
+Visiting parents and business w/ Kate and Horst in Barrie; Susan arrived in evening after exciting landing and shuttle trip thanks to wind storm.
+
+
+Sat 5-May-2018
+^^^^^^^^^^^^^^
+
+upload_forcing forecast2 to orcinus failed due(?) to grib2netcdf/LiveOcean race condition; no consequences.
+(SalishSea)
+
+Visiting parents and business w/ Rebecca in Barrie.
+
+
+Sun 6-May-2018
+^^^^^^^^^^^^^^
+
+upload_forcing forecast2 to west.cloud failed due(?) to grib2netcdf/LiveOcean race condition; re-ran manually to restart automation.
+Created nowcast.ssh_sftp.ssh_exec_command() to do in-process remote commands via paramiko connection w/ subprocess.run()-like API.
+Worked on refactoring [run|watch]_NEMO_[agrif|hindcast] workers to use ssh_exec_command().
+(SalishSea)
+
+Visiting parents in Barrie.
+
+
+Week 19
+-------
+
+Mon 7-May-2018
+^^^^^^^^^^^^^^
+
+upload_forcing forecast2 to west.cloud failed due(?) to grib2netcdf/LiveOcean race condition; re-ran manually to restart automation.
+download_weather 12 failed; re-ran manually to restart automation at ~12:30.
+(SalishSea)
+
+Barrie to Vancouver
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
