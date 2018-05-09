@@ -1719,9 +1719,24 @@ Mon 7-May-2018
 
 upload_forcing forecast2 to west.cloud failed due(?) to grib2netcdf/LiveOcean race condition; re-ran manually to restart automation.
 download_weather 12 failed; re-ran manually to restart automation at ~12:30.
+Worked on refactoring [run|watch]_NEMO_[agrif|hindcast] workers to use ssh_exec_command().
 (SalishSea)
 
 Barrie to Vancouver
+
+
+Tue 8-May-2018
+^^^^^^^^^^^^^^
+
+Finished refactoring [run|watch]_NEMO_[agrif|hindcast] workers to use ssh_exec_command().
+Salish Sea group mtg; see whiteboard.
+Helped Elise understand big nco ops on cedar node.
+After a lot of thrashing, got 21aug17 nowcast-agrif run going via run_NEMO_agrif worker; **have to remember that old sshNeahBay/fcst/ files do not have long enough western boundary arrays**.
+Started writing orcinus deployment docs.
+(SalishSea)
+
+Helped Saurav with conda env for mayavi.
+(Canyons)
 
 
 
