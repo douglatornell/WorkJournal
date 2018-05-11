@@ -1728,6 +1728,9 @@ Barrie to Vancouver
 Tue 8-May-2018
 ^^^^^^^^^^^^^^
 
+See project work journal.
+(GOMSS)
+
 Finished refactoring [run|watch]_NEMO_[agrif|hindcast] workers to use ssh_exec_command().
 Salish Sea group mtg; see whiteboard.
 Helped Elise understand big nco ops on cedar node.
@@ -1737,6 +1740,38 @@ Started writing orcinus deployment docs.
 
 Helped Saurav with conda env for mayavi.
 (Canyons)
+
+
+Wed 9-May-2018
+^^^^^^^^^^^^^^
+
+Discovered that salishsea combine failed for nowcast-agrif/21aug17, but gather worked; manually ran salishsea combine in results directory; no phsyics restarts for sub-grids, tracer restarts fail due to netCDF attr error; sigh...
+Tried to run nowcast-agrif automation:
+* upload_forcing turbidity to orcinus didn't happen; ran manually
+* run_NEMO launch failed due to missing host_config['envvars']
+Created issue #53 re: apparent race condition between ping_erddap and make_plots wwatch3 forecast*; the possible fix of launching make_plots after ping_erddap doesn't work because ping_erddap doesn't provide the run type.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project journal.
+(Resilient-C)
+
+
+Thu 10-May-2018
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+
 
 
 
