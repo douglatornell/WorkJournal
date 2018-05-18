@@ -1838,7 +1838,7 @@ make_live_ocean_files failed due to Matlab license server down
 run_NEMO_agrif ran for the 1st time in automation; failed due to no 14aug18 run dir.
 SalishSeaCast team mtg w/ visitor from UofA; see whiteboard.
 Queued nowcast-agrif/13may18 21h run on orcinus; finished successfully.
-Pushed and deployed code that should run make_plots wwatch3 after ping_erddap instead of concurrently.
+Pushed and deployed code that should run make_plots wwatch3 after ping_erddap instead of concurrently; fixes issue #53.
 Ordered 2x8Tb desktop drives for Elise.
 (SalishSea)
 
@@ -1863,7 +1863,8 @@ Thu 17-May-2018
 Decide to skip day 2 of MEOPAR forum.
 
 Continued work on trying to get nowcast-agrif productions started:
-* Susan realized that AGRIF.in time step factor needs to be changed too for 5s Haro sub-grid
+* Susan realized that AGRIF.in time step factor needs to be changed too for 5s Haro sub-grid; 5s won't work because NEMO time step must be an even integer; 13may18 run w/ 8s time step failed in 22nd hour, same as 10s time step; Susan send email to Michael asking for ideas.
+Charles updated ERDDAP to v1.82.
 (SalishSea)
 
 
