@@ -1868,6 +1868,21 @@ Charles updated ERDDAP to v1.82.
 (SalishSea)
 
 
+Fri 18-May-2018
+^^^^^^^^^^^^^^^
+
+Ran make_plots nemo forecast publish that failed yesterday due to ERDDAP down for upgrade.
+Launch nowcast-agrif/13may18 w/ 4s time step in Haro to reduce vertical advection per Michael's recommendation; failed w/ -ve SSS.
+Reviewed Susan's sample near surface velocity dataset; very sad panda.
+Worked on ERDDAP:
+* Updated and buffed /opt/tomcat/content/erddap/setup.xml.
+* Experimented with adding testOutOfDate dataset attributes.
+* Experimented with files dataset interface for VHFR FVCOM results:
+  * /opt/tomcat/webapps/erddap/WEB-INF/GenerateDatasetsXml.sh EDDTableFromFileNames /opp/fvcom/ .*vhfr_low_v2_[0s].*\.nc$ true 10080 "" "" "" ""
+(SalishSea)
+
+
+
   510  cp 1_coordinates_seagrid_SalishSea201702.nc ../../grid/subgrids/BaynesSound/coordinates_seagrid_SalishSea201702_BS.nc
   511  cd ../HaroStrait/
   512  cp 1_coordinates_seagrid_SalishSea201702.nc ../../grid/subgrids/HaroStrait/coordinates_seagrid_SalishSea201702_HS.nc
