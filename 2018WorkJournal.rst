@@ -1873,13 +1873,78 @@ Fri 18-May-2018
 
 Ran make_plots nemo forecast publish that failed yesterday due to ERDDAP down for upgrade.
 Launch nowcast-agrif/13may18 w/ 4s time step in Haro to reduce vertical advection per Michael's recommendation; failed w/ -ve SSS.
-Reviewed Susan's sample near surface velocity dataset; very sad panda.
+Reviewed Susan's sample near surface velocity dataset; very sad panda, but she is working on it.
 Worked on ERDDAP:
 * Updated and buffed /opt/tomcat/content/erddap/setup.xml.
 * Experimented with adding testOutOfDate dataset attributes.
 * Experimented with files dataset interface for VHFR FVCOM results:
   * /opt/tomcat/webapps/erddap/WEB-INF/GenerateDatasetsXml.sh EDDTableFromFileNames /opp/fvcom/ .*vhfr_low_v2_[0s].*\.nc$ true 10080 "" "" "" ""
+Susan decided that we should remove the Haro Strait sub-grid from nowcast-agrif and hope to get production running with just Baynes Sound.
 (SalishSea)
+
+
+Sat 19-May-2018
+^^^^^^^^^^^^^^^
+
+orcinus had lustre file system issue all day long, so upload_forcing for nowcast-agrif failed twice.
+(SalishSea)
+
+Removed clematis, honey suckle & chocolate vine from fences, as well as their trellises. Cut down cedar shrub near house. Met new neighbour Shan and told her to go ahead with limbing cedars over fence at back of yard.
+
+
+Sun 20-May-2018
+^^^^^^^^^^^^^^^
+
+make_plots wwatch3 forecast2 failed due to no dataset; so the race condition with ping_erddap is unresolved; re-opened issue#53.
+(SalishSea)
+
+See work journal.
+(GOMSS)
+
+
+Week 21
+-------
+
+Mon 21-May-2018
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Victoria Day
+
+Formatted 2x8Tb drives for Elise /data near-line storage as elise1 and elise2 via gparted.
+Started trying to run nowcast-agrif on orcinus w/ only Baynes Sound sub-grid:
+* disabled automation make_forcing_links
+* created AGRIF.in file w/ 1 sub-grid
+* created iodef.xml file w/ 1 sub-grid
+* created YAMl file w/ 1 sub-grid
+* 9387484.orca2.ibb succeeded
+Updated run_NEMO_agrif worker to handle only Baynes Sound sub-grid.
+Updated SS-run-sets re: nowcast-agrif with only Baynes Sound sub-grid.
+Updated namelist.atmos_rivers to eliminate need for no_snow and weights file links in NEMO_atmos/ forcing dir.
+Fixed bug in run_NEMO_agrif re: putting tmp run dir and job id in checklist when there are uncommitted files messages.
+Ran nowcast-agrif:
+* 13may18
+* 14may18
+* 15may18
+* 16may18
+Changed subgrids/*/namelist_smelt_cfg.* to use rivers-climatology/bio/rivers_bio_tracers_mean.nc.
+Continued running nowcast-agrif:
+* 17may18
+* 18may18
+* 19may18
+* 20may18
+(SalishSea)
+
+See work journal.
+(GOMSS)
+
+
+Tue 22-May-2018
+^^^^^^^^^^^^^^^
+
+Continued running nowcast-agrif:
+* 21may18
+Changed config so that today's nowcast-agrif should launch automatically.
+Updated namelist.atmos_rivers to eliminate need for rivers climatology file links in rivers/ forcing dir.
 
 
 
