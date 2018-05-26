@@ -1816,7 +1816,8 @@ Continued working on nowcast-agrif production:
   * restsrt files
   * river bio tracer daily files
 * launched 13may18 run and it is working; failed w/ -ve SSS in Haro on timestep 1925
-* used ncra to produce river bio tracer mean file
+* used ncra to produce river bio tracer mean file:
+    /bin/ls | grep rivers_bio_tracers_'m..d..'.nc | ncra -4 -o rivers_bio_tracers_mean.nc
 Phys Ocgy seminary by Sam re: his work on Atlantic mode water, and on Arduino-based LIAM wave measurement device that rides ODL drifter.
 (SalishSea)
 
@@ -1849,7 +1850,7 @@ Wed 16-May-2018
 Attended day 1 of MEOPAR Climate Change and Marine Transportation expert forum.
 
 Continued work on trying to get nowcast-agrif productions started:
-* Decided to try 16may18 because it is present, and NW wind blowing fresh water south into HAro Strait sub-grid has abated compared to 13may18
+* Decided to try 16may18 because it is present, and NW wind blowing fresh water south into Haro Strait sub-grid has abated compared to 13may18
 * created restart etc. files for 15may18 and tried run for 16may18; failed after 10 time steps with NaN ssh
 * rolled back to trying 13may18 after Susan pointed out that 16may18 is approaching peak of spring/neap tide cycle
 * tried to run 13may18 w/ 5s time step for Haro Strait, but forgot to change time step factor in AGRIF file
@@ -1945,36 +1946,27 @@ Continued running nowcast-agrif:
 * 21may18
 Changed config so that today's nowcast-agrif should launch automatically.
 Updated namelist.atmos_rivers to eliminate need for rivers climatology file links in rivers/ forcing dir.
+(SalishSea)
+
+Installed Signal desktop on niko.
 
 
+Fri 25-May-2018
+^^^^^^^^^^^^^^^
 
-  510  cp 1_coordinates_seagrid_SalishSea201702.nc ../../grid/subgrids/BaynesSound/coordinates_seagrid_SalishSea201702_BS.nc
-  511  cd ../HaroStrait/
-  512  cp 1_coordinates_seagrid_SalishSea201702.nc ../../grid/subgrids/HaroStrait/coordinates_seagrid_SalishSea201702_HS.nc
-  513  cd ../BaynesSound/
-  514  scp 1_rivers_bio_tracers_m05d12.nc orcinus:/home/dlatorne/nowcast-agrif-sys/rivers-climatology/subgrids/BaynesSound/bio/rivers_bio_tracers_m05d12.nc
-  515  scp 1_rivers_bio_tracers_m05d13.nc orcinus:/home/dlatorne/nowcast-agrif-sys/rivers-climatology/subgrids/BaynesSound/bio/rivers_bio_tracers_m05d13.nc
-  516  scp 1_rivers_bio_tracers_m05d14\.nc orcinus:/home/dlatorne/nowcast-agrif-sys/rivers-climatology/subgrids/BaynesSound/bio/rivers_bio_tracers_m05d14.nc
-  517  cd ../HaroStrait/
-  518  scp 1_rivers_bio_tracers_m05d12.nc orcinus:/home/dlatorne/nowcast-agrif-sys/rivers-climatology/subgrids/HaroStrait/bio/rivers_bio_tracers_m05d12.nc
-  519  scp 1_rivers_bio_tracers_m05d13.nc orcinus:/home/dlatorne/nowcast-agrif-sys/rivers-climatology/subgrids/HaroStrait/bio/rivers_bio_tracers_m05d13.nc
-  520  scp 1_rivers_bio_tracers_m05d14.nc orcinus:/home/dlatorne/nowcast-agrif-sys/rivers-climatology/subgrids/HaroStrait/bio/rivers_bio_tracers_m05d14.nc
-  521  scp 1_SalishSea_02935440_restart.nc orcinus:/global/scratch/dlatorne/nowcast-agrif/12may18/1_SalishSea_11741760_restart.nc
-  522  scp 1_SalishSea_02935440_restart_trc.nc orcinus:/global/scratch/dlatorne/nowcast-agrif/12may18/1_SalishSea_11741760_restart_trc.nc
-  523  cd ../BaynesSound/
-  524  ls -tr
-  525  ll -tr
-  526  scp 1_SalishSea_02935440_restart.nc orcinus:/global/scratch/dlatorne/nowcast-agrif/12may18/2_SalishSea_05870880_restart.nc
-  527  scp 1_SalishSea_02935440_restart_trc.nc orcinus:/global/scratch/dlatorne/nowcast-agrif/12may18/2_SalishSea_05870880_restart_trc.nc
-  528  pushd /results/nowcast-sys/rivers-climatology/bio/
-  529  ls
-  530  /bin/ls | grep rivers_bio_tracers_*.nc
-  531  /bin/ls | grep 'rivers_bio_tracers_*.nc'
-  532  /bin/ls | grep rivers_bio_tracers_'m..d..'.nc
-  533  /bin/ls | grep rivers_bio_tracers_'m..d..'.nc | ncra -4 -o rivers_bio_tracers_mean.nc
-  534  ll -h rivers_bio_tracers_mean.nc
-  535  ncdump -cst rivers_bio_tracers_mean.nc
+Monthly project mtg.
+* Set up contact between Leni and Matthias Herborg via Micahel; sent email
+* get MOHID running on salish
+(MIDOSS)
 
+Canyons/Arctic mtg; see whiteboard.
+Helped Idalia get a gsw conda env set up.
+(Canyons/Arctic)
+
+Post-agrif launch cleanup.
+make_plots wwatch3 failed for both runs; re-ran forecast manually; made another try at fixing issue #53 by adding retry decorator to fig module _get_wwatch3_fields() that downloads fields from ERDDAP.
+Started playing with visualization of Baynes Sound AGRIF results.
+(SalishSea)
 
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
@@ -1984,12 +1976,11 @@ Updated namelist.atmos_rivers to eliminate need for rivers climatology file link
 
 
 SalishSeaAGRIF production:
-* add AGRIF option to run_NEMO worker:
-  * sub-grid runoff namelists use sub-grid climatologies
+* generate sub-grids mapping dict for rivers so that sub-grid runoff files can be worker-generated instead of interpolated from full domain runoff file by nesting tools
+* get Haro Strait sub-grid working
+* enable turbidity, if possible
 
 Move production to 201702:
-* Move LiveOcean BC files from modified/ to boundary_conditions/
-* Rename LiveOcean BC files from single_LO*.nc and single_bio_LO*.nc to LO_TS_*.nc and LO_bio*.nc
 * Rename riverTurbDaily2_*.nc to (at least) exclude the 2
 * Update dir tree in docs/results_server/index.rst
 
