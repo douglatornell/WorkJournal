@@ -1946,14 +1946,49 @@ Continued running nowcast-agrif:
 * 21may18
 Changed config so that today's nowcast-agrif should launch automatically.
 Updated namelist.atmos_rivers to eliminate need for rivers climatology file links in rivers/ forcing dir.
+nowcast-agrif/22may18 almost ran fully automated.
+Salish Sea team mtg; see whiteboard.
+Talked to Elise about confusing motd on cedar re: 48-core nodes and whole-node jobs.
 (SalishSea)
 
 Installed Signal desktop on niko.
 
+Wed 23-May-2018
+^^^^^^^^^^^^^^^
+
+Investigated 48-core nodes and whole-node jobs on cedar based on email that Elise got form support@; replied to Elise.
+Helped Tereza w/ her plotting from script issue.
+make_plots wwatch3 failed for both runs; manual re-runs also failed due to SSL error.
+(SalishSea)
+
+
+See work journal.
+(GOMSS)
+
+See work journal.
+(Resilient-C)
+
+
+Thu 24-May-2018
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+See work journal.
+(GOMSS)
+
+See work journal.
+(SalishSeaCast-FVCOM)
+
+make_plots wwatch3 forecast2 failed again due to SSL error.
+Emailed Idalia re: re-installing anaconda, and using a conda env for gsw.
+Diagnosed make_plots wwatch3 SSL issue as being due to an SSL config issue on ndbc.noaa.gov; added work-around to moad_tools.observations.
+(SalishSea)
+
 
 Fri 25-May-2018
 ^^^^^^^^^^^^^^^
-
 Monthly project mtg.
 * Set up contact between Leni and Matthias Herborg via Micahel; sent email
 * get MOHID running on salish
