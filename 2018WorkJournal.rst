@@ -1953,6 +1953,7 @@ Talked to Elise about confusing motd on cedar re: 48-core nodes and whole-node j
 
 Installed Signal desktop on niko.
 
+
 Wed 23-May-2018
 ^^^^^^^^^^^^^^^
 
@@ -1989,6 +1990,7 @@ Diagnosed make_plots wwatch3 SSL issue as being due to an SSL config issue on nd
 
 Fri 25-May-2018
 ^^^^^^^^^^^^^^^
+
 Monthly project mtg.
 * Set up contact between Leni and Matthias Herborg via Micahel; sent email
 * get MOHID running on salish
@@ -2002,6 +2004,34 @@ Post-agrif launch cleanup.
 make_plots wwatch3 failed for both runs; re-ran forecast manually; made another try at fixing issue #53 by adding retry decorator to fig module _get_wwatch3_fields() that downloads fields from ERDDAP.
 Started playing with visualization of Baynes Sound AGRIF results.
 (SalishSea)
+
+
+Sat 26-May-2018
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+
+Sun 27-May-2018
+^^^^^^^^^^^^^^^
+
+See work journal.
+(GOMSS)
+
+Started outlining CMOS talk.
+(SalishSea)
+
+
+Week 22
+-------
+
+Mon 28-May-2018
+^^^^^^^^^^^^^^^
+
+See work journal.
+(GOMSS)
+
 
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
