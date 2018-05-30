@@ -2032,6 +2032,27 @@ Mon 28-May-2018
 See work journal.
 (GOMSS)
 
+Got Elise set up with 2x*Tb drives.
+Discussed use of orcinus reservation w/ Roman and Elise.
+Added provisional VHFR FVCOM files dataset to ERDDAP.
+Continued working on visualization of Baynes Sound AGRIF results.
+(SalishSea)
+
+See work journal.
+(SalishSeaCast-FVCOM)
+
+
+Tue 29-May-2018
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+Continued working on visualization of Baynes Sound AGRIF results.
+Salish Sea team mtg; see whiteboard.
+Discussed XIOS on-the-fly deflation w/ Tereza; need to change salishsea run to default to deflation.
+Worked w/ Susan to develop outline of CMOS talk and started creating slides.
+(SalishSea)
 
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
