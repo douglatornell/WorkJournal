@@ -1596,6 +1596,8 @@ Worked on parents' taxes and mail redirection.
 See project journal.
 (SalishSeaCast-FVCOM)
 
+Body & Soul session w/ Theresa.
+
 Saw World Without Us at The Cultch.
 
 
@@ -1771,6 +1773,8 @@ See project journal.
 See project work journal.
 (GOMSS)
 
+Body & Soul session w/ Theresa.
+
 
 Fri 11-May-2018
 ^^^^^^^^^^^^^^^
@@ -1868,6 +1872,8 @@ Continued work on trying to get nowcast-agrif productions started:
 Charles updated ERDDAP to v1.82.
 (SalishSea)
 
+Body & Soul session w/ Theresa.
+
 
 Fri 18-May-2018
 ^^^^^^^^^^^^^^^
@@ -1953,6 +1959,8 @@ Talked to Elise about confusing motd on cedar re: 48-core nodes and whole-node j
 
 Installed Signal desktop on niko.
 
+Spinning at Method w/ Lauren
+
 
 Wed 23-May-2018
 ^^^^^^^^^^^^^^^
@@ -1987,6 +1995,8 @@ Emailed Idalia re: re-installing anaconda, and using a conda env for gsw.
 Diagnosed make_plots wwatch3 SSL issue as being due to an SSL config issue on ndbc.noaa.gov; added work-around to moad_tools.observations.
 (SalishSea)
 
+Body & Soul session w/ Theresa.
+
 
 Fri 25-May-2018
 ^^^^^^^^^^^^^^^
@@ -2012,15 +2022,15 @@ Sat 26-May-2018
 See work journal.
 (Resilient-C)
 
+Started outlining CMOS talk.
+(SalishSea)
+
 
 Sun 27-May-2018
 ^^^^^^^^^^^^^^^
 
 See work journal.
 (GOMSS)
-
-Started outlining CMOS talk.
-(SalishSea)
 
 
 Week 22
@@ -2053,6 +2063,56 @@ Salish Sea team mtg; see whiteboard.
 Discussed XIOS on-the-fly deflation w/ Tereza; need to change salishsea run to default to deflation.
 Worked w/ Susan to develop outline of CMOS talk and started creating slides.
 (SalishSea)
+
+Wed 30-May-2018
+^^^^^^^^^^^^^^^
+
+Talked to Aunt Elinor and Isobel.
+
+See work journal.
+(GOMSS)
+
+See work journal.
+(Resilient-C)
+
+
+Thu 31-May-2018
+~~~~~~~~~~~~~~~
+
+See work journal.
+(Resilient-C)
+
+Body & Soul session w/ Theresa.
+
+See work journal.
+(GOMSS)
+
+
+Fri 1-Jun-2018
+~~~~~~~~~~~~~~
+
+See work journal.
+(Resilient-C)
+
+Continued work on slides for CMOS talk.
+nowcast-agrif run failed due to a power bump; re-ran manually.
+(SalishSea)
+
+See work journal.
+(GOMSS)
+
+
+Sat 2-Jun-2018
+~~~~~~~~~~~~~~
+
+Got Carib ready for Nova Scotia tour.
+
+
+Sun 3-Jun-2018
+~~~~~~~~~~~~~~
+
+Worked on prep for Nova Scotia trip.
+
 
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
