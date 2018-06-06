@@ -2115,6 +2115,42 @@ Worked on prep for Nova Scotia trip.
 
 
 
+June
+====
+
+Week 23
+-------
+
+Mon 4-Jun-2018
+~~~~~~~~~~~~~~
+
+Early morning phone call from Uncle John.
+Email to Jamie.
+Long conversation w/ Mom's doctor of the week, Kevin Ali.
+Telcon w/ Aunt Elinor.
+
+Timesheets for June.
+
+Released SalishSeaCmd v3.4 re: --deflate, no more bugaboo, no more NEMO-3.4, and rrg-allen default account on cedar.
+Continued work on slides for CMOS talk.
+(SalishSea)
+
+
+Tue 5-Jun-2018
+~~~~~~~~~~~~~~
+
+See work journal.
+(GOMSS)
+
+Continued work on slides for CMOS talk.
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+See work journal.
+(Resilient-C)
+
+
+
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
 
