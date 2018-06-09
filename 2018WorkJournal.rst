@@ -2114,7 +2114,6 @@ Sun 3-Jun-2018
 Worked on prep for Nova Scotia trip.
 
 
-
 June
 ====
 
@@ -2148,6 +2147,34 @@ Salish Sea team mtg; see whiteboard.
 
 See work journal.
 (Resilient-C)
+
+
+Thu 7-Jun-2018
+~~~~~~~~~~~~~~
+
+Vancouver to Barrie
+
+Fixed issue#54 bug in watch_NEMO_agrif so that end-of-run disappearance of job from queue on orcinus does not generate a bogus ERROR level logging message.
+Started exposing functions in nemo_cmd.prepare for use by SalishSeaCmd and other packages that may extend NEMO_Cmd.
+(SalishSea)
+
+
+Fri 8-Jun-2018
+~~~~~~~~~~~~~~
+
+Discovered that nowcast-green/06jun18 failed; helped Susan through getting it re-running.
+Removed --no-deflate command-line option from salishsea run command in watch_NEMO_agrif and watch_NEMO_hindcast.
+(SalishSea)
+
+See work journal.
+(GOMSS)
+
+
+Sat 9-Jun-2018
+~~~~~~~~~~~~~~
+
+Disabled orcinus-nowcast-agrif host re: orcinus maintenance downtime.
+(SalishSea)
 
 
 
