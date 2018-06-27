@@ -2064,6 +2064,7 @@ Discussed XIOS on-the-fly deflation w/ Tereza; need to change salishsea run to d
 Worked w/ Susan to develop outline of CMOS talk and started creating slides.
 (SalishSea)
 
+
 Wed 30-May-2018
 ^^^^^^^^^^^^^^^
 
@@ -2155,7 +2156,7 @@ Thu 7-Jun-2018
 Vancouver to Barrie
 
 Fixed issue#54 bug in watch_NEMO_agrif so that end-of-run disappearance of job from queue on orcinus does not generate a bogus ERROR level logging message.
-Started exposing functions in nemo_cmd.prepare for use by SalishSeaCmd and other packages that may extend NEMO_Cmd.
+Started exposing functions in nemo-cmd.prepare for use by SalishSeaCmd and other packages that may extend NEMO-Cmd.
 (SalishSea)
 
 
@@ -2174,7 +2175,214 @@ Sat 9-Jun-2018
 ~~~~~~~~~~~~~~
 
 Disabled orcinus-nowcast-agrif host re: orcinus maintenance downtime.
+nowcast run failed due to no 08jun18/namelist_cfg
 (SalishSea)
+
+Barrie to Halifax
+
+
+Sun 10-Jun-2018
+~~~~~~~~~~~~~~~
+
+Peggy's Cove photo tour
+
+CMOS Congress
+
+Ocean modeling community of practice meeting.
+CMOS ice breaker
+Dinner w/ Mitchell, Susan Haig, Dave Greenberg
+
+
+Week 24
+-------
+
+Mon 11-Jun-2018
+~~~~~~~~~~~~~~~
+
+CMOS Congress
+
+Breakfast w/ Neil Swart
+
+Backfilling nowcast & forecast runs to generate FVCOM_*.nc files:
+* make_forcing_links nowcast+ 2018-06-07 to launch nowcast/07jun18
+* upload_forcing nowcast+ 2018-06-07 --debug
+* make_forcing_links nowcast+ 2018-06-07 --debug
+* make_forcing_links ssh 2018-06-07 to launch forecast/07jun18
+* make_forcing_links nowcast+ 2018-06-08 to launch nowcast/08jun18
+* upload_forcing nowcast+ 2018-06-08 --debug
+* make_forcing_links nowcast+ 2018-06-08 --debug
+* make_forcing_links ssh 2018-06-08 to launch forecast/08jun18
+Added Halfmoon Bay and Squamish tide gauge stations to default v201702 file_def.xml.
+Added VHFR FVCOM boundary regions to new dedicated v201702 file_def_green.xml.
+Continued work on slides for CMOS talk.
+(SalishSea)
+
+See work journal.
+(SalishSeaCast-FVCOM)
+
+
+Tue 12-Jun-2018
+~~~~~~~~~~~~~~~
+
+CMOS Congress
+
+See work journal.
+(SalishSeaCast-FVCOM)
+
+forecast2 failed due to bad run date from backfilling in checklist:
+* edited nowcast_checklist.yaml
+* restarted manager
+* re-ran make_forcing_links forecast2 to restart automation
+Finished backfilling nowcast & forecast runs to generate FVCOM_*.nc files:
+* edited nowcast_checklist.yaml
+* restarted manager
+* upload_forcing nowcast+ 2018-06-10 --debug
+* make_forcing_links nowcast+ 2018-06-10 --debug
+* make_forcing_links ssh 2018-06-10 to launch forecast/10jun18
+(SalishSea)
+
+Mom passed away.
+
+
+Wed 13-Jun-2018
+~~~~~~~~~~~~~~~
+
+CMOS Congress
+
+See work journal.
+(GOMSS)
+
+Finished slides for CMOS talk.
+(SalishSea)
+
+
+Thu 14-Jun-2018
+~~~~~~~~~~~~~~~
+
+CMOS Congress
+Presented SalishSeaCast in coupled models session.
+
+See work journal.
+(GOMSS)
+
+Halifax to Toronto
+
+Continued exposing functions in nemo_cmd.prepare for use by SalishSeaCmd and other packages that may extend NEMO-Cmd.
+(SalishSea)
+
+Added VHFR FVCOM results page to nav.
+Updated SS-run-sets on skookum to pull in Susan's change to use west boundary sea surface height at north boundary too, initially in nowcast-dev.
+(salishsea-site)
+
+
+Fri 15-Jun-2018
+~~~~~~~~~~~~~~~
+
+Toronto to Barrie
+
+orcinus came back into operation
+(SalishSea)
+
+
+Sat 16-Jun-2018
+~~~~~~~~~~~~~~~
+
+make_runoff_file failed because downloads from wateroffice on salish failed:
+* re-tried ecget river flow and it is still failing
+* manually persisted 14jun values to 15jun for Fraser and Englishman
+* manually re-ran make_runoff_file to restart automation
+Backfilling nowcast-agrif on orcinus:
+* 07jun18 got hammered by automation make_forcing_links
+(SalishSea)
+
+
+Sun 17-Jun-2018
+~~~~~~~~~~~~~~~
+
+Backfilling nowcast-agrif on orcinus:
+* 07jun18
+* 08jun18
+* 09jun18
+* 10jun18
+* 11jun18
+Simplified nowcast run dirs symlinks (similar to what we have for hindcast and nowcast-agrif) by:
+* adding links to grid and rivers-climatology repo clones
+* changing nowcast-green/namelist.atmos_rivers and namelist_smelt_cfg
+* changing smelt-agrif/namelist_smelt_cfg
+* removing from make_forcing_links creation of no_snow.nc, weights, rivers constant temperature, rivers monthly climatology, river bio-tracers dir
+Discovered that ECget scraping of Fraser River water quality buoy is broken due to a pointless span element id attribute change on the web page; fixed.
+(SalishSea)
+
+
+Week 25
+-------
+
+Mon 18-Jun-2018
+~~~~~~~~~~~~~~~
+
+Backfilling nowcast-agrif on orcinus:
+* 12jun18
+* 13jun18
+* 14jun18
+* 15jun18
+make_forcing_links turbidity failed again with a FileNotFoundError, then a FileExistsError, and that scuttles nowcast-green and nowcast-dev (didn't notice dev yesterday); recovery:
+* upload_forcing turbidity west.cloud
+* mkdir nowcast-dev/17jun18
+* cp nowcast-green/17jun18 nowcast-dev/17jun18
+* make_forcing_links nowcast+ salish --shared-storage
+Pulled Susan's nowcast namelist changeset 6b89d1af1aec to use western boundary ssh at norther boundary in production on skookum/salish, west.cloud, orcinus, and cedar.
+(SalishSea)
+
+
+Tue 19-Jun-2018
+~~~~~~~~~~~~~~~
+
+Backfilling nowcast-agrif on orcinus:
+* 16jun18
+* 17jun18
+* 18jun18
+Restored automation in time for nowcast-agrif/19jun18 to run normally.
+Explored ideas for enabling run_hindcast to operate for an arbitrary number of days <1 month.
+(SalishSea)
+
+
+Wed 20-Jun-2018
+~~~~~~~~~~~~~~~
+
+watch_ww3 forecast2 failed due to unavailable port; restart automation with download_wwatch3_results.
+(SalishSea)
+
+
+Sun 24-Jun-2018
+~~~~~~~~~~~~~~~
+
+Discovered that watch_ww3 has been failing due to no port available on west.cloud since 20-Jun:
+* download_wwatch3_results forecast 18-23
+* download_wwatch3_results forecast2 19-24
+(SalishSea)
+
+
+Week 26
+-------
+
+Mon 25-Jun-2018
+~~~~~~~~~~~~~~~
+
+Changed download_weather 12 schedule from 10:30 to 11:30 in anticipation of 26jun west.cloud network maintenance that may disrupt active use of shared storage.
+(SalishSea)
+
+
+Tue 26-Jun-2018
+~~~~~~~~~~~~~~~
+
+Barrie to Vancouver
+
+Finished exposing functions in nemo_cmd.prepare for use by SalishSeaCmd and other packages that may extend NEMO-Cmd.
+(SalishSea)
+
+
+
+
 
 
 
