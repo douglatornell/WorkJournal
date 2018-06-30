@@ -2381,6 +2381,40 @@ Finished exposing functions in nemo_cmd.prepare for use by SalishSeaCmd and othe
 (SalishSea)
 
 
+Wed 27-Jun-2018
+~~~~~~~~~~~~~~~
+
+Changed download_weather 12 schedule back to 10:30.
+Answered email from Sandrine Edouard @MSC re: our use of HRDPS.
+Pulled NEMO-Cmd and SalishSeaCmd refactoring on to oricnus to test via nowcast-agrif.
+Explored cartopy; can use RotatedPole project to get a map of SoG with vertical "axis" and lat/lon grid lines, but no labels.
+(SalishSea)
+
+See work journal.
+(GOMSS)
+
+
+Thu 28-Jun-2018
+~~~~~~~~~~~~~~~
+
+More messing w/ cartopy using the land and coast from bathymetry technique that Ben uses with basemap, but can't get rotation and would still have to add a bunch of gist code to get lat/lon labels.
+(SalishSea)
+
+See work journal.
+(GOMSS)
+
+
+Fri 29-Jun-2018
+~~~~~~~~~~~~~~~
+
+See work journal.
+(GOMSS)
+
+Continued development of Baynes Sound AGRIF surface fields figure module.
+Fixed bug in NEMO-Cmd re: land processor elimination that crept in during refactoring.
+(SalishSea)
+
+Planned 7-12 July trip to move Dad into Amica.
 
 
 
