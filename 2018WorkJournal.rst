@@ -2417,6 +2417,46 @@ Fixed bug in NEMO-Cmd re: land processor elimination that crept in during refact
 Planned 7-12 July trip to move Dad into Amica.
 
 
+Sat 30-Jun-2018
+~~~~~~~~~~~~~~~
+
+Vancouver to Parksville
+
+(SalishSea)
+
+
+Sun 1-Jul-2018
+~~~~~~~~~~~~~~
+
+Built and installed Mercurial from clone of hg-stable repo.
+
+(SalishSea)
+
+
+Week 27
+-------
+
+Mon 2-Jul-2018
+~~~~~~~~~~~~~~~
+
+Started changing Arrow.replace() to Arrow.shift() where appropriate; improved semantics.
+(SalishSea)
+
+Parksville to Vancouver
+
+
+Tue 3-Jul-2018
+~~~~~~~~~~~~~~~
+
+Finished changing Arrow.replace() to Arrow.shift() where appropriate; improved semantics.
+Salish Sea team mtg; see whiteboard.
+Fixed failing unit tests in SalishSeaNowcast re: out of date OPPTools and NEMO-Cmd/SalishSeaCmd refactoring.
+Started generating /opp/wwatch3/nowcast/ddmmmyy/ directories from forecast/ dirs.
+Added ubcSSWaveWatch3-SoGFilesV17-02 files dataset to ERDDAP.
+Updated NEMO-Cmd, SalishSeaCmd, and SalishSeaNowcast on cedar, skookum, and west.cloud re: NEMO-Cmd and SalishSeaCmd refactoring.
+(SalishSea)
+
+
 
 
 
