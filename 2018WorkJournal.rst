@@ -2428,7 +2428,7 @@ Vancouver to Parksville
 Sun 1-Jul-2018
 ~~~~~~~~~~~~~~
 
-Built and installed Mercurial from clone of hg-stable repo.
+Built and installed Mercurial from clone of hg-stable repo on niko.
 
 (SalishSea)
 
@@ -2451,11 +2451,47 @@ Tue 3-Jul-2018
 Finished changing Arrow.replace() to Arrow.shift() where appropriate; improved semantics.
 Salish Sea team mtg; see whiteboard.
 Fixed failing unit tests in SalishSeaNowcast re: out of date OPPTools and NEMO-Cmd/SalishSeaCmd refactoring.
-Started generating /opp/wwatch3/nowcast/ddmmmyy/ directories from forecast/ dirs.
-Added ubcSSWaveWatch3-SoGFilesV17-02 files dataset to ERDDAP.
 Updated NEMO-Cmd, SalishSeaCmd, and SalishSeaNowcast on cedar, skookum, and west.cloud re: NEMO-Cmd and SalishSeaCmd refactoring.
 (SalishSea)
 
+Started generating /opp/wwatch3/nowcast/ddmmmyy/ directories from forecast/ dirs.
+Added ubcSSWaveWatch3-SoGFilesV17-02 files dataset to ERDDAP.
+(SoG waves)
+
+Upgraded kudu to Pop!_OS 18.04.
+
+Built and installed Mercurial from clone of hg-stable repo on kudu.
+
+
+Wed 4-Jul-2018
+~~~~~~~~~~~~~~~
+
+Researched, installed and tested borgbackup package:
+* borg init --encryption=repokey-blake2 /media/doug/kudu_backup/borg-kudu
+* export BORG_PASSPHRASE
+* export BORG_REPO=/media/doug/kudu_backup/borg-kudu
+* borg create --list --stats --compression=lz4 ::kudu-{now} $HOME --exclude '/home/doug/.dbus' --exclude 'home/doug/Downloads/' --exclude '/home/doug/.vagrant.d/' --exclude '/home/doug/.cache/' --exclude '/home/doug/snap/' --exclude '/home/doug/.PyCharm*/system/'
+* borg create --list --stats --compression=lz4 ::kudu-{now} $HOME /media/doug/warehouse --exclude '/home/doug/.dbus' --exclude 'home/doug/Downloads/' --exclude '/home/doug/.vagrant.d/' --exclude '/home/doug/.cache/' --exclude '/home/doug/snap/' --exclude '/home/doug/.PyCharm*/system/' --exclude '/media/doug/warehouse/Downloads/'  --exclude '/media/doug/warehouse/conda_envs/'  --exclude '/media/doug/warehouse/VirtualBoxVMs/'  --exclude '/media/doug/warehouse/Mailpile/'  --exclude '/media/doug/warehouse/vidyo'  --exclude '/media/doug/warehouse/.Trash-1000'  --exclude '/media/doug/warehouse/lost+found'  --exclude '/media/doug/warehouse/minconda3/'
+
+Continued generating /opp/wwatch3/nowcast/ddmmmyy/ directories from forecast/ dirs.
+(SoG waves)
+
+
+Thu 5-Jul-2018
+~~~~~~~~~~~~~~~
+
+Body & Soul session w/ Theresa
+
+Sent email to Rich re: availability of ubcSSWaveWatch3-SoGFilesV17-02 files dataset on ERDDAP.
+Continued generating /opp/wwatch3/nowcast/ddmmmyy/ directories from forecast/ dirs.
+(SoG waves)
+
+
+Fri 6-Jul-2018
+~~~~~~~~~~~~~~~
+
+Finished generating /opp/wwatch3/nowcast/ddmmmyy/ directories from forecast/ dirs.
+(SoG waves)
 
 
 
