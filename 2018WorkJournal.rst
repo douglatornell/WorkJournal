@@ -2493,6 +2493,18 @@ Fri 6-Jul-2018
 Finished generating /opp/wwatch3/nowcast/ddmmmyy/ directories from forecast/ dirs.
 (SoG waves)
 
+Worked w/ Susan on getting next iteration of hindcast running on cedar, and testing watch_NEMO_hindcast run success checking code.
+Susan found issues w/ running on skylake nodes; if 32 cores, jobs run slow due to competition; if 48 cores jobs fail to start.
+Updates on cedar:
+* grid from 2298a95bf000 to 77e9cce1dcd6
+* NEMO-3.6-code from c8684a10b28e to 5d5d5c95cd8b
+* SS-run-sets from f7eb987b308b to a86be84a6915
+* tracers from c9808b098359 to 3c6019a2e7ea
+Clean build of NEMO SMELT config on cedar.
+Added run id option to watch_NEMO_hindcast worker.
+Improved unit test coverage of watch_NEMO_hindcast.
+(SalishSea)
+
 
 
 
