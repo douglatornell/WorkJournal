@@ -2506,6 +2506,134 @@ Improved unit test coverage of watch_NEMO_hindcast.
 (SalishSea)
 
 
+Sat 7-Jul-2018
+~~~~~~~~~~~~~~~
+
+Updated SS-run-sets on cedar from a86be84a6915 to e3f898810547.
+Worked on adding --cedar-broadwell option to SalishSeaCmd:
+* default cedar to 48 tasks per node with skylake constraint
+* option make cedar use 32 tasks per node w/ broadwell constraint
+Fixed bugs in watch_NEMO_hindcast and hindcast YAML template file while working with Susan to get hindcast running.
+(SalishSea)
+
+Vancouver to Toronto
+
+
+Sun 8-Jul-2018
+~~~~~~~~~~~~~~~
+
+Continued work on adding --cedar-broadwell option to SalishSeaCmd.
+Investigated Susan's results directory not created issue on cedar; probably out of sync installation of SalishSeaCmd.
+(SalishSea)
+
+
+Week 28
+-------
+
+Mon 9-Jul-2018
+^^^^^^^^^^^^^^
+
+Worked w/ Scott to move Dad's furniture to Amica.
+
+
+Tue 10-Jul-2018
+^^^^^^^^^^^^^^^
+
+Dad moved to Amica via RNR transport.
+Finished unpacking boxes for Dad.
+
+
+Wed 11-Jul-2018
+^^^^^^^^^^^^^^^
+
+Helped Dad settle in.
+
+Manually ran run_NEMO_hindcast to queue sep15-dec15 runs.
+(SalishSea)
+
+
+Thu 12-Jul-2018
+^^^^^^^^^^^^^^^
+
+01sep15 hindcasst run failed during combine due to a bad local installation of SalishSeaCmd on cedar; fix installation and manually ran combine and gather.
+Cleaned up failed oct15-dec15 run dirs.
+Manually ran run_NEMO_hindcast to queue oct15-dec15 runs, and watch_NEMO_hindcast to start watching.
+Manually ran download_results for sep15 run to restart download/split automation.
+Added launch of run_NEMO_hindcast after successful completion of watch_NEMO_hindcast so that hindcast runs queue is kept loaded until month-just-finished is queued.
+(SalishSea)
+
+
+Fri 13-Jul-2018
+^^^^^^^^^^^^^^^
+Westgrid townhall:
+* Federated Research Data Repository Project (FRDR):
+  * Lee Wilson
+  * https://www.frdr.ca/repo/
+  * Uses Globus file transfer
+  * alternative to institution or domain-specific archive platforms
+  * Archivematica
+* RAC 2019 Updates and Preparation:
+  * Guides late-Aug
+  * Fast Track 25-Oct
+  * RRG & RPP 8-Nov
+  * RPP Progress Reports 10-Jan
+  * expect similar success rates as past few years
+    * performance estimates
+    * storage usage & estimates
+    * cloud usage & estimates
+    * nearline storage estimates (not available yet, still)
+  * GP4 (Béluga) ordered; ~30k cores +GPUs (similar to Graham)
+  * Orcinus to be defunded 31-Mar-2019
+* A look at the new Arbutus and Cedar expansion:
+  * cedar is now 60656 cores (640 skylake 48 core nodes w/ 187G/node), 5.2Pflops peak compute
+  * cedar GPU usage is increasing; expansion didn't include new GPUs
+  * outages
+    * arbutus 22-Jul network 10-30 minutes between 06:00 and 10:00
+    * graham 21-24-Aug
+    * cedar 4 days late-Aug; OS update to CentOS-7.5; related Lustre & Omnipath upgrades
+    * orcinus 2 days on 25-Aug
+    * arbutus September for expansion
+  * Arbutus expansion (Ryan Enge):
+    * moving to OpenStack Queens release w/ CI
+    * adding ~1400 skylake compute cores & ~3.5PB storage
+    * high availability for clients
+    * improved monitoring & alerting
+    * improved HPC performance
+    * https://arbutus.cloud.computecanada.ca
+    * migration will be required; wiki docs Arbutus_West_Cloud_Migration
+    * cloud user survey coming soon
+* Results & feedback from recent user surveys:
+  * Erin Trifunov
+  * see slides: https://www.westgrid.ca/files/July%202018%20WG%20Town%20Hall%20.pdf
+  * westgrid users w/ RAC allocations are least satisfied with computecanada
+  * UBC has highest lab to market collaboration level
+* summer school materials are now online: https://westgrid.github.io/trainingMaterials/
+* Masao has retired; got career achievement award
+* Kamil got team choice award
+
+Discussed hindcast issues w/ Susan:
+* running 31 day months; fix and restart from 01sep15; fixed
+* split_results is fragile:
+  * using wrong date; maybe from checklist?; fixed
+  * dies if there are unexpected file patterns; e.g. output.abort.nc
+hindcast:
+* tested salishsea run mods for skylake on cedar
+* queued 01sep15 via PyCharm debugger run
+* queued 01oct15 via skookum
+* download_results 01sep15 launched via automation
+* run_NEMO_hindcast ran via automation, but queued another 01oct15 run instead of 01nov15, probably because 01sep15 was still on queue in completed state
+Improved download_results message payload to include run date so that follow-on workers (especially split_results) are correctly chained.
+Changed split_results to use f-strings.
+Fixed bug in run_NEMO_hindcast re: finding previous run queue info when a run as just finished and is still on the queue in COMPLET* state.
+(SalishSea)
+
+Worked with Ben & Elise to delete Vicky's files that we don't need any longer to free up space on /data/.
+
+Emailed Charles about borg vs. rdiff-backup.
+
+Canyons/Arctic mtg; see whiteboard.
+(Canyons/Arctic)
+
 
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
