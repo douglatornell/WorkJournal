@@ -2429,7 +2429,6 @@ Sun 1-Jul-2018
 ~~~~~~~~~~~~~~
 
 Built and installed Mercurial from clone of hg-stable repo on niko.
-
 (SalishSea)
 
 
@@ -2458,7 +2457,7 @@ Started generating /opp/wwatch3/nowcast/ddmmmyy/ directories from forecast/ dirs
 Added ubcSSWaveWatch3-SoGFilesV17-02 files dataset to ERDDAP.
 (SoG waves)
 
-Upgraded kudu to Pop!_OS 18.04.
+Upgraded kudu to Pop!_OS 18.04 via `sudo do-release-upgrade`.
 
 Built and installed Mercurial from clone of hg-stable repo on kudu.
 
@@ -2633,6 +2632,49 @@ Emailed Charles about borg vs. rdiff-backup.
 
 Canyons/Arctic mtg; see whiteboard.
 (Canyons/Arctic)
+
+
+Sat 14-Jul-2018
+~~~~~~~~~~~~~~~
+
+Lower back pain that started Friday was much worse, though lying on my front on the floor seemed to relieve it by evening.
+
+Upgraded niko to Pop!_OS 18.04 via `sudo do-release-upgrade`.
+
+Finished hindcast runs to end of jan16.
+(SalishSea)
+
+See work journal.
+(GOMSS)
+
+
+Sun 15-Jul-2018
+~~~~~~~~~~~~~~~
+
+Really bad lower back pain in the night, more time on the floor in the morning relieved it for a while.
+
+Updated repos in nowcast-sys on skookum:
+* moad_tools: a80c338e7956 to 577b16c939fc
+* SalishSeaNowcast: d14aa61e677e to 44bda01719fe
+* SS-run-sets: e3f898810547 to de290c84ebc1
+* tides: cce641a99390 to 9e87d9f7087a
+* tools: d0a1d289ff62 to e7646d07561c
+Started tmux session on salish calculating LiveOcean boundary files from 2013-01-02 re: Susan's addition of O2, DIC & TAlk, and update of NO3-Si correlation coefficients from Elise.
+* started 2013 at 10:51, finished at 14:05
+* started 2014-2017 at 15:15, finished at 05:10
+Started work on enabling upload_forcing to keep cedar forcing files collections updated daily.
+(SalishSea)
+
+
+Week 29
+-------
+
+Mon 16-Jul-2018
+^^^^^^^^^^^^^^^
+
+Continued tmux session on salish calculating LiveOcean boundary files from 2013-01-02 re: Susan's addition of O2, DIC & TAlk, and update of NO3-Si correlation coefficients from Elise.
+* started 2018 jan-jun at 08:00, ETA at 10:00
+(SalishSea)
 
 
 
