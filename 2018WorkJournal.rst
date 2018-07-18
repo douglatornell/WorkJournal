@@ -2672,9 +2672,45 @@ Week 29
 Mon 16-Jul-2018
 ^^^^^^^^^^^^^^^
 
-Continued tmux session on salish calculating LiveOcean boundary files from 2013-01-02 re: Susan's addition of O2, DIC & TAlk, and update of NO3-Si correlation coefficients from Elise.
-* started 2018 jan-jun at 08:00, ETA at 10:00
+Finished tmux session on salish calculating LiveOcean boundary files from 2013-01-02 re: Susan's addition of O2, DIC & TAlk, and update of NO3-Si correlation coefficients from Elise.
+* started 2018 jan-jun at 08:00, finished at 09:40
+* started 2018 jul 1-15 at 10:20, finished at 10:35
+* rsync-ed updated collection to cedar:/project/6001313/SalishSea/forcing/LiveOcean/ and orcinus:/home/sallen/MEOPAR/LiveOcean/
+Tested upload_forcing cedar-hindcast via scp to skookum.
 (SalishSea)
+
+Created https://bitbucket.org/midoss/ team on bitbucket.
+Created midoss account on readthedocs.org with email dlatorne@eoas.ubc.ca.
+Created midoss/docs repo and started writing docs.
+(MIDOSS)
+
+
+Tue 17-Jul-2018
+^^^^^^^^^^^^^^^
+
+Traced recent Fraser River water quality buoy data scraping issue to the fact that a 404 page is being sent with a 200 status code :-()
+(ECget)
+
+Added link checking section to MODA docs.
+(MOAD)
+
+Salish Sea team mtg; see whiteboard.
+Confirmed that upload_forcing cedar-hindcast works.
+Continued working on baynes_sound_agrif figure module dev notebook.
+(SalishSea)
+
+Worked w/ Ben to build MOHID on salish:
+* project site: http://www.mohid.com/
+* GitHub repo: https://github.com/Mohid-Water-Modelling-System/Mohid
+* Linux build instructions: https://github.com/Mohid-Water-Modelling-System/Mohid/tree/master/Solutions/mohid-in-linux
+Linux build instructions use Intel compilers (C and Fortran)
+* mkdir cedar:project/MIDOSS/
+* git clone git@github.com:Mohid-Water-Modelling-System/Mohid.git MOHID
+* 1st build attempt failed on `use proj4`
+* Sent email to support@computecanada re: proj4 and proj4fortran modules
+(MIDOSS)
+
+Met w/ Charles re: changing backup for /data and /results to borg.
 
 
 
