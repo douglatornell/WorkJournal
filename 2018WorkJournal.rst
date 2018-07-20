@@ -2713,6 +2713,40 @@ Linux build instructions use Intel compilers (C and Fortran)
 Met w/ Charles re: changing backup for /data and /results to borg.
 
 
+Wed 18-Jul-2018
+^^^^^^^^^^^^^^^
+
+Discussed Baynes Sound figure w/ Susan.
+Formulated borg backup and pruning policies for /results and /opp and emailed them to Charles.
+(SalishSea)
+
+Email reply from Ali@computecanada who will look into adding proj4 and proj4fortran to cvmfs.
+(MIDOSS)
+
+See work journal.
+(GOMSS)
+
+Received Spark cardboard monitor/keyboard/mouse stands and set one up in 43ravens HQ.
+
+
+Thu 19-Jul-2018
+---------------
+
+Started setting up meerkat as media and backup machine.
+
+Cancelled this afternoon's Body & Soul session with Theresa due to back pain.
+
+Email to Peg re: https://science.ubc.ca/teaching
+
+Ali@computecanada has aded proj4 to cvmfs; tested MOHID build and it failed the same; replied to email with failure transcript and more details about building proj4fortran bindings.
+(MIDOSS)
+
+See work journal.
+(GOMSS)
+
+Worked on borg backup scripts (/etc/cron.daily/daily-*-backup.sh) on salish at Charles' request. May have accidentally scrapped part of /data/dlatorne/ :-(
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
