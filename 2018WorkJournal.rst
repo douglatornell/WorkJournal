@@ -2747,6 +2747,31 @@ See work journal.
 Worked on borg backup scripts (/etc/cron.daily/daily-*-backup.sh) on salish at Charles' request. May have accidentally scrapped part of /data/dlatorne/ :-(
 
 
+Fri 20-Jul-2018
+---------------
+
+Prep for next hindcast runs series:
+* Susan ran 13nov14
+* Susan queued 14nov14 to runs to 30nov14
+* Susan queued 01dec14
+* started watch_NEMO_hindcast to watch 14nov14
+* updated clones on cedar:
+  * grid: 77e9cce1dcd6 to 4c269545a0c0
+  * NEMO-3.6-code: 5d5d5c95cd8b to 15d3162f0b92
+  * SS-run-sets: b7558ecdea3c to a2b0fc96c2f3
+  * tools: 9e72ef37f952 to e7646d07561c
+  * tracers: c9808b098359 to a5ed7d8b98a3
+* built SalishSeaCast config on cedar
+* symlinked SS-run-sets/v201702/hindcast/cedar_hindcast_template.yaml into runs/ so that I can stop remembering to copy it
+download_weather 12 failed; launched manually at ~13:25 to restart automation.
+Fixed bug in download_results that crept in when upload_forcing was enabled for cedar.
+Deleted old nowcast-agrif results from orcinus scratch with find ... -type d -mtime +20 | xargs rm -rf
+Continued working on baynes_sound_agrif figure module dev notebook.
+(SalishSea)
+
+Continued work on borg backup scripts and checked in with Charles on progress.
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
