@@ -2730,7 +2730,7 @@ Received Spark cardboard monitor/keyboard/mouse stands and set one up in 43raven
 
 
 Thu 19-Jul-2018
----------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Started setting up meerkat as media and backup machine.
 
@@ -2748,7 +2748,7 @@ Worked on borg backup scripts (/etc/cron.daily/daily-*-backup.sh) on salish at C
 
 
 Fri 20-Jul-2018
----------------
+^^^^^^^^^^^^^^^
 
 Prep for next hindcast runs series:
 * Susan ran 13nov14
@@ -2770,6 +2770,91 @@ Continued working on baynes_sound_agrif figure module dev notebook.
 (SalishSea)
 
 Continued work on borg backup scripts and checked in with Charles on progress.
+
+
+Sat 21-Jul-2018
+^^^^^^^^^^^^^^^
+
+download_weather 06 failed; re-ran manually at ~09:30 to restart automation.
+ecget river flow failed due to accidental deletion of /data/dlatorne (see below)
+Recovery:
+* download_weather 06
+* make_runoff_file
+* upload_forcing west.cloud-nowcast nowcast+
+* upload_forcing orcinus-nowcast-agrif nowcast+
+* upload_forcing cedar-hindcast nowcast+
+(SalishSea)
+
+Got to do an unplanned recovery test on the /data/dlatorne borg backup:
+* I accidentally deleted /data/dlatorne yesterday
+* restored with:
+  * cd /
+  * sudo borg extract --list /backup/borg/data::data-2018-07-20T15:47:43 data/dlatorne
+  * sudo chown dlatorne:sallen /data/dlatorne
+  * chmod 755 /data/dlatorne
+
+
+Sun 22-Jul-2018
+^^^^^^^^^^^^^^^
+
+01jun15 hindcast run stalled; Susan suspects the pattern indicates a node network glitch:
+* killed 01jun15 and 01jul15
+* cleaned up scratch dirs
+* run_NEMO_hindcast 2015-05-01
+* watch_NEMO_hindcast
+* run_NEMO_hindcast
+(SalishSea)
+
+borg backup production tests:
+* results for initial nowcast-green: ~25.5h
+* opp update: ~12s (but there is no wwatch3 nowcast)
+* results update: ~4h, but that included some several months of hindcast
+* data update/add nsoontie ~2h, but that also included touching all of the dlatorne/ files that were restored yesterday
+* launched data update/add jpetrie at ~17:30
+
+Worked on switching to HTTPS on Webfaction via LetsEncrypt using 43ravens.ca as the test case:
+* refs:
+  * https://wesort.co.uk/blog/writing/switching-to-https-on-webfaction
+  * https://github.com/Neilpang/acme.sh
+  * https://github.com/gregplaysguitar/acme-webfaction
+* in webfaction control panel:
+  * create new 43ravens_dev website
+  * create new 43ravens_dev static only (no .htaccess) application
+  * copy files from webapps/43ravens_site/ to webapps/43ravens_dev
+  * add 43ravens_dev app to 43ravens_dev website
+* installed acme.sh and acme_webfaction.py:
+  * cd ~
+  * curl https://get.acme.sh | sh
+  * wget https://raw.githubusercontent.com/gregplaysguitar/acme-webfaction/master/acme_webfaction.py
+  * mv acme_webfaction.py ~/bin/
+  * chmod +x ~/bin/acme_webfaction.py
+* start a new shell session to enable acme.sh alias
+* test certificate generation:
+  * acme.sh --issue --test -d dev.43ravens.ca -w ~/webapps/43ravens_dev
+* issue certificate
+  * acme.sh --issue -d dev.43ravens.ca -w ~/webapps/43ravens_dev --force
+* in webfaction control panel use Domains/Websites > SSl Certificates > Add SSL certificate > Copy & Paste:
+  * name 43ravens_dev
+  * certificate: contents of ~/.acme.sh/dev.43ravens.ca/dev.43ravens.ca.cer
+  * private key: contents of ~/.acme.sh/dev.43ravens.ca/dev.43ravens.ca.key
+  * intermediates/bundle: contents of ~/.acme.sh/dev.43ravens.ca/ca.cer
+  * enable HTTPS and select 43ravens_dev cert in 43ravens_dev website
+* install certificate to enable automatic renewal via cron job:
+  * acme.sh --install-cert -d dev.43ravens.ca \
+ --reloadcmd "WF_SERVER=WebxXx WF_USER=xXxXxXxX WF_PASSWORD=XxXxXxXx WF_CERT_NAME=43ravens_dev acme_webfaction.py"
+* tighten permissions on cert files:
+  * chmod o-r .acme.sh/dev.43ravens.ca/dev.43ravens.ca*
+* tested renewal check and renewal:
+  * acme.sh --cron --home "/home/dlatornell/.acme.sh"
+  * acme.sh --cron --home "/home/dlatornell/.acme.sh" --force
+**Because the app is static-only there is no way of setting up a HTTP->HTTPS redirect.**
+* Enabled HTTPS for susanallen.ca:
+  * acme.sh --issue --test -d susanallen.ca -w ~/webapps/sea_static
+  * acme.sh --issue -d susanallen.ca -w ~/webapps/sea_static --force
+  * tighten cert file permissions
+  * add cert, key & bundle to webfaction control panel
+  * enable HTTPS for sea_static website
+  * install cert for automatic renewal
 
 
 
