@@ -2857,6 +2857,38 @@ Worked on switching to HTTPS on Webfaction via LetsEncrypt using 43ravens.ca as 
   * install cert for automatic renewal
 
 
+Week 30
+-------
+
+Mon 23-Jul-2018
+^^^^^^^^^^^^^^^
+
+get_NeahBay_ssh failed due to worker publish ports pool exhaustion; that cascaded to 3 upload_forcing failures:
+* Susan manually re-ran get_NeahBay_ssh and it worked
+download_results forecast2 failed due to sallen ownership of results dir:
+* used sudo to change ownership of forecast2/22jul18/ and sshNB_2018-07-23_15.txt in it
+* ran update_forecast_datasets manually to restart automation
+* investigated adding ownership setting to lib.fix_perms, but (of course) that won't work without sudo
+* investigated worker publish ports pool exhaustion and found lots of stale workers; killed them
+download_results hindcast 2015-08-01 failed due to /scratch/dlatorne/hindcast/01aug15/SandyCove_20150827-20150827.nc: Input/output error'; confirmed that was the only file to fail and downloaded it manually; ran split_results manually.
+Deleted /results/SalishSea/nowcast-green.19aug17.14mar18.bad_mesozoo/ to recover 1.2T of space on /results which is now at 2.3T (88%).
+watch_NEMO_hindcast failed due to: slurm_load_jobs error: Socket timed out on send/recv operation; killed the failed one and launched a new one.
+hindcast/01sep15 failed with what looks like a write failure due to disk quota; did some clean-up, then re-queued 01sep15 and 01oct15.
+Continued working on baynes_sound_agrif figure module dev notebook.
+(SalishSea)
+
+borg data update and add jpetrie took ~2h
+borg data update and add mdunphy took ~1h10m
+confirmed that /data/$USER/results/ exclusion was not working properly; iterated
+borg data update and add sallen retry took ~40m
+borg opp update took 33s
+borg results update started at ~15:45
+
+Phys Ocgy seminar by Susan on estuarian fluxes in the SoG.
+
+Worked on CMOS expenses.
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
