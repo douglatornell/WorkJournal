@@ -2882,9 +2882,34 @@ borg data update and add mdunphy took ~1h10m
 confirmed that /data/$USER/results/ exclusion was not working properly; iterated
 borg data update and add sallen retry took ~40m
 borg opp update took 33s
-borg results update started at ~15:45
+borg results update started took ~3.5h, but that included a bunch of new hindcast/ results
 
 Phys Ocgy seminar by Susan on estuarian fluxes in the SoG.
+
+Worked on CMOS expenses.
+
+Tue 24-Jul-2018
+^^^^^^^^^^^^^^^
+
+watch_NEMO_hindcast failed due to: slurm_load_jobs error: Socket timed out on send/recv operation; killed the failed one and launched a new one.
+Salish Sea team mtg; see whiteboard.
+Talked to Tereza about conda packages and environments, and helped her get mocsy built on her Mac.
+Continued working on baynes_sound_agrif figure module dev notebook.
+(SalishSea)
+
+Deleted /backup/skookum/ to free as much space as possible for borg backups; got to:
+  Filesystem        Size  Used Avail Use% Mounted on
+  /dev/sda1          17T   11T  5.3T  67% /backup
+borg data update and add kramosmu took ~5m
+borg data update and add tjarniko took ~20m
+Moved /data/vdo/MEOPAR/completed_runs to /data/vdo/results/ and symlinked it into /data/vdo/MEOPAR to avoid notebooks breakage.
+borg data update and add gsalidas took ~5m
+borg data update and add vdo took ~26m
+borg data update and add eolson took ~1h20m
+borg opp update was fast
+borg results update...
+
+Moved /results/SalishSea/forecast/ to /opp/SalishSea/forecast/ for temporary archival storage.
 
 Worked on CMOS expenses.
 
