@@ -688,7 +688,7 @@ Wed 21-Feb-2018
 
 get_NeahBay_ssh failed because it couldn't find a port to log to; Susan re-ran manually to restart automation.
 dowload_results forecast2 failed because it couldn't fix perms on the Neah Bay ssh txt file that was owned by Susan for some reason; files were okay, used sudo to fix perms; re-ran update_forecast_datasets to restart automation.
-Created new nowcast-fig-dev conda env on kudu to use aconda-forge priority and h5netcdf.
+Created new nowcast-fig-dev conda env on kudu to use conda-forge priority and h5netcdf.
 (SalishSea)
 
 See project journal.
@@ -2942,9 +2942,19 @@ Thu 26-Jul-2018
 See project journal.
 (Resilient-C)
 
-Body & Soul session with Theresa.
+Body & Soul session w/ Theresa.
 
-Special Atmos Sci seminar by Rachel White.
+Atmos Sci seminar by Rachel White of UW.
+
+Answered Elise's question about getting log output of salishsea run from stderr in a bash script.
+Set up another hindcast/01jan16 tmp run dir for Susan on cedar.
+(SalishSea)
+
+Got a totally useless message from Ali@computecanada re: proj4 & proj4-fortran libraries on cedar for MOHID.
+Started trying to build MODHID on salish:
+* mkdir /data/dlatorne/MIDOSS
+* cd /data/dlatorne/MIDOSS
+* git clone git@github.com:Mohid-Water-Modelling-System/Mohid.git MOHID
 
 Created and tested /etc/cron.daily/daily-backup.sh script to sequentially run borg for opp, data, and results.
 
@@ -2972,6 +2982,82 @@ Updated generation of /opp/wwatch3/nowcast/ddmmmyy/ directories from forecast/ d
 
 See project journal.
 (SalishSeaCast-FVCOM)
+
+
+Sat 28-Jul-2018
+^^^^^^^^^^^^^^^
+
+Vancouver to Brampton
+
+Started work on separating WWatch3 forecast runs into nowcast + forecast.
+NEMO forecast run failed w/ high velocity on western boundary after 1st time step; Susan can't figure out why; decided to leave things and see what happens tomorrow.
+(SalishSea)
+
+
+Sun 29-Jul-2018
+^^^^^^^^^^^^^^^
+
+Brampton to Barrie
+
+Sorted through Mom's clothes, etc and took some to Value Village.
+
+Realized that nowcast-agrif/28jul18 didn't run due to symlink race condition in upload_forcing turbidity; recovery:
+* upload_forcing turbidity 2018-07-28 --debug
+* make_forcing_links nowcast-agrif 2018-07-28
+Susan diagnosed that fvcom-nowcast/28jul18 got cobbered by upload of forcing files for fvcom-forecast when NEMO forecast aborted; recovery:
+* ssh west.cloud-nowcast make_fvcom_boundary nowcast 2018-07-28
+Catch-up runs:
+* ssh west.cloud-nowcast make_fvcom_boundary nowcast 2018-07-29
+* upload_forcing turbidity 2018-07-29 --debug
+* make_forcing_links nowcast-agrif 2018-07-29
+* ssh west.cloud-nowcast make_fvcom_boundary forecast 2018-07-29
+(SalishSea)
+
+
+August
+======
+
+Week 31
+-----------
+
+Mon 30-Jul-2018
+^^^^^^^^^^^^^^^
+
+borg backup cron job didn't run last night; launched manually.
+
+Sorted through Mom's clothes, etc and took some to Value Village; consolidated lockers into one; got SDB for jewellery.
+
+Barrie to Brampton
+
+nowcast-agrif/30jul18 didn't run due to symlink race condition in upload_forcing turbidity; recovery:
+* upload_forcing turbidity 2018-07-28 --debug
+* make_forcing_links nowcast-agrif 2018-07-28
+nowcast-dev/30jul18 failed on qsub due to full / partition on salish:
+* eventually figured out that /root/.cache/borg/ was to blame
+* deleted chunk archives and prevented their creation with steps in https://borgbackup.readthedocs.io/en/stable/faq.html#the-borg-cache-eats-way-too-much-disk-space-what-can-i-do
+(SalishSea)
+
+
+Tue 31-Jul-2018
+^^^^^^^^^^^^^^^
+
+borg backup cron still not running; changed to sequencing commands with &&; launched manually.
+
+Brampton to Waterloo
+
+
+Wed 1-Aug-2018
+^^^^^^^^^^^^^^
+
+borg backup cron still not running; changed script name back to daily-backup.sh; launched manually.
+
+Worked in Marek's lab at Waterloo while Susan attended & spoke at Frontiers in Applied Math symposium.
+
+Susan noted that nowcast-dev/31jul18 failed because there was no 30jul18/namelist_cfg; created nowcast-dev/31jul18/ and copied nowcast-blue/31jul18/namelist_cfg into it.
+(SalishSea)
+
+
+* write launch_remote_worker worker!!!
 
 
 
