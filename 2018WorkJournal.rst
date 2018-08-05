@@ -3054,7 +3054,45 @@ borg backup cron still not running; changed script name back to daily-backup.sh;
 Worked in Marek's lab at Waterloo while Susan attended & spoke at Frontiers in Applied Math symposium.
 
 Susan noted that nowcast-dev/31jul18 failed because there was no 30jul18/namelist_cfg; created nowcast-dev/31jul18/ and copied nowcast-blue/31jul18/namelist_cfg into it.
+Investigated 1h time shift of water level predictions in compare_tide_prediction_max_ssh figure module.
 (SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Dinner w/ Frontiers in Applied Math Symposium speakers.
+
+
+Thu 2-Aug-2018
+^^^^^^^^^^^^^^
+
+Nexus 5X went brick in the night.
+
+Emailed Elise to ask her to investigate Fraser River water quality buoy data page 404; Jennifer MacDonald from ECCC replied with almost instant restoration of page, and request to talk to us about how they can better provide the observations to us.
+Set up uptimerobot monitoring on Fraser River water quality buoy data page.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Listened to Susan's talk in Frontiers in Applied Math Symposium.
+
+
+Fri 3-Aug-2018
+^^^^^^^^^^^^^^
+
+See project journal.
+(Resilient-C)
+
+Cleaned up sentry issues.
+Created issue #57 re: upload_forcing turbidity file symlink race condition.
+Moved nemo_cmd.lib.load_run_desc() into prepare module & deleted lib module.
+Updated copyright year range in SalishSeaCmd.
+Refactored SalishSeaCmd to use prepare.load_run_desc() from NEMO-Cmd pkg.
+(SalishSea)
+
+Waterloo to Vancouver
+
 
 
 * write launch_remote_worker worker!!!
