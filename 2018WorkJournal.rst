@@ -3094,6 +3094,41 @@ Refactored SalishSeaCmd to use prepare.load_run_desc() from NEMO-Cmd pkg.
 Waterloo to Vancouver
 
 
+Tue 7-Aug-2018
+^^^^^^^^^^^^^^
+
+Finished adding support for `nemo run --waitjob command-line option on systems that use slurm resource manager.
+Salish Sea team mtg; see whiteboard.
+Discovered that there are no run results for 6Aug18 onward; debugging and recover:
+* confirmed that all nowcast VMs are up and have /nemoShare/MEOPAR mounted with:
+  * for n in {0..16}; do echo nowcast$n; ssh nowcast$n mountpoint /nemoShare/MEOPAR/; done
+* discovered that I forgot to update SalishSeaNowcast re: load_run_desc() refactoring in NEMO-Cmd and SalishSeaCmd; fixed that bug and updated west.cloud SalishSeaNowcast from e0345389e816 to ca34c765ed58.
+* backfilling:
+  * make_forcing_links nowcast+ 2018-08-06
+  * on west.cloud: make_fvcom_boundary nowcast 2018-08-06
+  * upload_forcing west.cloud turbidity 2018-08-06
+  * upload_forcing orcinus turbidity 2018-08-06
+  * make_forcing_links nowcast-green 2018-08-06
+  * make_forcing_links nowcast-agrif 2018-08-06
+  * make_forcing_links nowcast+ 2018-08-07
+
+  * fvcom nowcast 2018-08-06
+  * nemo forecast 2018-08-06
+  * nowcast-green 2018-08-06
+  * nowcast-agrif 2018-08-06
+  * fvcom forecast 2018-08-06
+
+  * fvcom nowcast 2018-08-07
+  * nemo forecast 2018-08-07
+  * nowcast-green 2018-08-07
+  * nowcast-agrif 2018-08-07
+  * fvcom forecast 2018-08-07
+
+  * make_forcing_links nowcast+ 2018-08-06
+Susan discovered that as of 01aug18 all hourly files contain 23 instead of 24 hours; it appears that XIOS is spiking to exceed available memory at the end of the run; reduced iodef.xml buffer size factor value from 0.12 to 0.1 for 07aug18 run.
+(SalishSea)
+
+
 
 * write launch_remote_worker worker!!!
 
