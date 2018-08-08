@@ -3018,7 +3018,7 @@ August
 ======
 
 Week 31
------------
+-------
 
 Mon 30-Jul-2018
 ^^^^^^^^^^^^^^^
@@ -3085,7 +3085,7 @@ See project journal.
 (Resilient-C)
 
 Cleaned up sentry issues.
-Created issue #57 re: upload_forcing turbidity file symlink race condition.
+Created issue #57 re: upload_forcing turbidity file symlink race condition; created a fix and pushed it to skookum for testing.
 Moved nemo_cmd.lib.load_run_desc() into prepare module & deleted lib module.
 Updated copyright year range in SalishSeaCmd.
 Refactored SalishSeaCmd to use prepare.load_run_desc() from NEMO-Cmd pkg.
@@ -3093,6 +3093,96 @@ Refactored SalishSeaCmd to use prepare.load_run_desc() from NEMO-Cmd pkg.
 
 Waterloo to Vancouver
 
+
+Sun 5-Aug-2018
+^^^^^^^^^^^^^^
+
+Discovered that issue #57 re: upload_forcing race condition also can occur for LiveOcean files; added a fix similar to what I did for turbidity and pushed it to skookum for testing.
+Updated NEMO-Cmd and SalishSeaCmd clones on production systems:
+* skookum:
+  * NEMO-Cmd from 00934d451842 to 7c4c47e63ff3
+  * SalishSeaCmd from e603ea746db1 to d365dffaec8a
+* orcinus:
+  * NEMO-Cmd from 00934d451842 to 7c4c47e63ff3
+  * SalishSeaCmd from 34a4d4dc4625 to d365dffaec8a
+* cedar:
+  * NEMO-Cmd from 00934d451842 to 7c4c47e63ff3
+  * SalishSeaCmd from e603ea746db1 to d365dffaec8a
+* west.cloud:
+  * NEMO-Cmd from 00934d451842 to 7c4c47e63ff3
+  * SalishSeaCmd from 34a4d4dc4625 to d365dffaec8a
+(SalishSea)
+
+Continued work on switching to HTTPS on Webfaction via LetsEncrypt using susanallen.ca as the test case (see Sun 22-Jul-2018 for initial work):
+* created sea_http_redirect Static/CGI/PHP-7.2 app to put .htaccess for redirection rules in
+* created susanallen_http_redirect website *w/o* HTTPS, connected to susanallen.ca and www.susanallen.ca, w/ the sea_http_redirect app mounted
+* created sea_http_redirect/.htaccess containing::
+
+    RewriteEngine On
+    #
+    # Redirect all http and www traffic to https non-www URL
+    # Ref for all but first line: https://simonecarletti.com/blog/2016/08/redirect-domain-http-https-www-apache/
+    # Ref to correct for Webfaction using nginx ssl proxy: cpbotha.net... https://goo.gl/Vnbdw9
+    #
+    RewriteCond %{HTTP:X-Forwarded-SSL} !on [OR]
+    RewriteCond %{HTTP_HOST} ^www\. [NC]
+    RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+    RewriteRule ^ https://%1%{REQUEST_URI} [L,NE,R=301]
+* tested with https://www.whynopadlock.com/
+
+
+Week 32
+-------
+
+Mon 6-Aug-2018
+^^^^^^^^^^^^^^
+
+Continued work on switching to HTTPS on Webfaction via LetsEncrypt (see Sun 22-Jul-2018 for initial work, and Sun 5-Aug-2018 for HTTP redirection):
+* 43ravens.ca:
+  * couldn't get acme.sh --isue --test to work in static-only app (despite it working 2wks ago for 43ravens_dev)
+  * changed 43ravens_site app to Static/CGI/PHP-7.2
+  * test certificate generation:
+    * acme.sh --issue --test -d 43ravens.ca -w ~/webapps/43ravens_site
+  * issue certificate
+    * acme.sh --issue -d 43ravens.ca -w ~/webapps/43ravens_site --force
+  * in webfaction control panel use Domains/Websites > SSl Certificates > Add SSL certificate > Copy & Paste:
+    * name 43ravens_dev
+    * certificate: contents of ~/.acme.sh/43ravens.ca/43ravens.ca.cer
+    * private key: contents of ~/.acme.sh/43ravens.ca/43ravens.ca.key
+    * intermediates/bundle: contents of ~/.acme.sh/43ravens.ca/ca.cer
+    * enable HTTPS and select 43ravens cert in 43ravens_site website
+  * install certificate to enable automatic renewal via cron job:
+    * acme.sh --install-cert -d 43ravens.ca \
+   --reloadcmd "WF_SERVER=WebxXx WF_USER=xXxXxXxX WF_PASSWORD=XxXxXxXx WF_CERT_NAME=43ravens acme_webfaction.py"
+  * tighten permissions on cert files:
+    * chmod o-r .acme.sh/43ravens.ca/43ravens.ca*
+  * tested renewal check:
+    * acme.sh --cron --home "/home/dlatornell/.acme.sh"
+  * created 43ravens_http_redirect Static/CGI/PHP-7.2 app to put .htaccess for redirection rules in
+  * created 43ravens_http_redirect website *w/o* HTTPS, connected to 43ravens.ca and www.43ravens.ca, w/ the 43ravens_http_redirect app mounted
+  * created 43ravens_site/.htaccess containing::
+
+      RewriteEngine On
+      #
+      # Redirect all http and www traffic to https non-www URL
+      # Ref for all but first line: https://simonecarletti.com/blog/2016/08/redirect-domain-http-https-www-apache/
+      # Ref to correct for Webfaction using nginx ssl proxy: cpbotha.net... https://goo.gl/Vnbdw9
+      #
+      RewriteCond %{HTTP:X-Forwarded-SSL} !on [OR]
+      RewriteCond %{HTTP_HOST} ^www\. [NC]
+      RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+      RewriteRule ^ https://%1%{REQUEST_URI} [L,NE,R=301]
+
+  * symlinked 43ravens_site/.htaccess into 43ravens_http_redirect/
+  * tested with https://www.whynopadlock.com/
+Cleared away 43ravens_dev elements:
+* acme.sh --revoke -d dev.43ravens.ca -w ~/webapps/43ravens_dev
+* acme.sh --remove -d dev.43ravens.ca -w ~/webapps/43ravens_dev
+* rm -rf /home/dlatornell/.acme.sh/dev.43ravens.ca
+* in control panel:
+  * deleted 43ravens_dev website
+  * deleted 43ravens_dev certificate
+  * deleted 43ravens_dev app
 
 Tue 7-Aug-2018
 ^^^^^^^^^^^^^^
