@@ -3084,6 +3084,9 @@ Fri 3-Aug-2018
 See project journal.
 (Resilient-C)
 
+See project work journal.
+(GOMSS)
+
 Cleaned up sentry issues.
 Created issue #57 re: upload_forcing turbidity file symlink race condition; created a fix and pushed it to skookum for testing.
 Moved nemo_cmd.lib.load_run_desc() into prepare module & deleted lib module.
@@ -3139,7 +3142,7 @@ Mon 6-Aug-2018
 
 Continued work on switching to HTTPS on Webfaction via LetsEncrypt (see Sun 22-Jul-2018 for initial work, and Sun 5-Aug-2018 for HTTP redirection):
 * 43ravens.ca:
-  * couldn't get acme.sh --isue --test to work in static-only app (despite it working 2wks ago for 43ravens_dev)
+  * couldn't get acme.sh --issue --test to work in static-only app (despite it working 2wks ago for 43ravens_dev)
   * changed 43ravens_site app to Static/CGI/PHP-7.2
   * test certificate generation:
     * acme.sh --issue --test -d 43ravens.ca -w ~/webapps/43ravens_site
@@ -3184,6 +3187,7 @@ Cleared away 43ravens_dev elements:
   * deleted 43ravens_dev certificate
   * deleted 43ravens_dev app
 
+
 Tue 7-Aug-2018
 ^^^^^^^^^^^^^^
 
@@ -3201,22 +3205,67 @@ Discovered that there are no run results for 6Aug18 onward; debugging and recove
   * make_forcing_links nowcast-green 2018-08-06
   * make_forcing_links nowcast-agrif 2018-08-06
   * make_forcing_links nowcast+ 2018-08-07
-
-  * fvcom nowcast 2018-08-06
-  * nemo forecast 2018-08-06
-  * nowcast-green 2018-08-06
-  * nowcast-agrif 2018-08-06
-  * fvcom forecast 2018-08-06
-
-  * fvcom nowcast 2018-08-07
-  * nemo forecast 2018-08-07
-  * nowcast-green 2018-08-07
-  * nowcast-agrif 2018-08-07
-  * fvcom forecast 2018-08-07
-
-  * make_forcing_links nowcast+ 2018-08-06
-Susan discovered that as of 01aug18 all hourly files contain 23 instead of 24 hours; it appears that XIOS is spiking to exceed available memory at the end of the run; reduced iodef.xml buffer size factor value from 0.12 to 0.1 for 07aug18 run.
+  * make_turbidity_file failed due to inconsistent output hour
+  * upload_forcing west.cloud turbidity 2018-08-07
+  * upload_forcing orcinus turbidity 2018-08-07
+  * cp nowcast-green/07aug18/namelist_cfg nowcast-dev/07aug18/
+Susan discovered that as of 01aug18 all hourly files contain 23 instead of 24 hours; it appears that XIOS is spiking to exceed available memory at the end of the run; reduced iodef.xml buffer size factor value from 0.12 to 0.1 for 07aug18 run; it worked.
 (SalishSea)
+
+
+Wed 8-Aug-2018
+^^^^^^^^^^^^^^
+
+Dentist appt.
+
+make_turbidity_file failed due to inconsistent output hour:
+* upload_forcing west.cloud turbidity
+* upload_forcing orcinus turbidity
+* upload_forcing cedar turbidity
+Started backfilling nowcast-green for 01-06aug18 re: XIOS buffer size factor issue:
+* make_forcing_links nowcast-green 2018-08-01
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(Resilient-C)
+
+
+Thu 9-Aug-2018
+^^^^^^^^^^^^^^
+
+download_weather 00 timed out; re-ran manually and it failed due to missing VGRD file; email to Sandrine@ECCC; reply says it is known and file will appear soon; finally able to complete at ~15:45.
+Continued backfilling nowcast-green for 01-06aug18 re: XIOS buffer size factor issue:
+* make_forcing_links nowcast-green 2018-08-02
+* make_forcing_links nowcast-green 2018-08-03
+
+* make_forcing_links nowcast-green 2018-08-04
+* make_forcing_links nowcast-green 2018-08-05
+* make_forcing_links nowcast-green 2018-08-06
+grib_to_netcdf failed due to missing 00/VGRD file; re-ran manually to restart automation
+(SalishSea)
+
+Email from Ali asking if we still want MOHID installed on cedar; he can build mb1 and mb2; I tried that, but don't know where proj4-fortran bindings are.
+(MIDOSS)
+
+Email from Tom Prime asking about how to trigger download_weather.failure().
+
+
+Fro 10-Aug-2018
+^^^^^^^^^^^^^^^
+
+Continued backfilling nowcast-green for 01-06aug18 re: XIOS buffer size factor issue:
+* make_forcing_links nowcast-green 2018-08-04
+
+* make_forcing_links nowcast-green 2018-08-05
+* make_forcing_links nowcast-green 2018-08-06
+Closed the email loop w/ Sandrine re: yesterday HRDPS 00 issues.
+(SalishSea)
+
+Email from Tom Prime asking about checklist updating and dumping to YAML.
+
 
 
 
