@@ -3245,6 +3245,7 @@ Continued backfilling nowcast-green for 01-06aug18 re: XIOS buffer size factor i
 * make_forcing_links nowcast-green 2018-08-05
 * make_forcing_links nowcast-green 2018-08-06
 grib_to_netcdf failed due to missing 00/VGRD file; re-ran manually to restart automation
+Update SS-run-sets on west.cloud from f7eb987b30 to 2994df2b01.
 (SalishSea)
 
 Email from Ali asking if we still want MOHID installed on cedar; he can build mb1 and mb2; I tried that, but don't know where proj4-fortran bindings are.
@@ -3253,7 +3254,7 @@ Email from Ali asking if we still want MOHID installed on cedar; he can build mb
 Email from Tom Prime asking about how to trigger download_weather.failure().
 
 
-Fro 10-Aug-2018
+Fri 10-Aug-2018
 ^^^^^^^^^^^^^^^
 
 Continued backfilling nowcast-green for 01-06aug18 re: XIOS buffer size factor issue:
@@ -3262,9 +3263,60 @@ Continued backfilling nowcast-green for 01-06aug18 re: XIOS buffer size factor i
 * make_forcing_links nowcast-green 2018-08-05
 * make_forcing_links nowcast-green 2018-08-06
 Closed the email loop w/ Sandrine re: yesterday HRDPS 00 issues.
+nowcast/aug18 failed due to segfault; traced that to yesterday's SS-run-sets update that introduced the use of tracers/north/Dosser_north_TEOS10.nc; ran make_forcing_links manually to restart automation after Susan fixed namelist.
+Backed out Vicky's rivers-climatology sub-grid files renaming changeset.
+Continued work on Baynes Sound figure module.
+Update repos on cedar:
+* grid from 4c269545a0c0 to a835327433ca
+* NEMO-3.6-code from f8c04b0e8294 to 703f974565e7
+* NEMO-Cmd from 7c4c47e63ff3 to 0ac681fbb2d1
+* rivers-climatology from 8a4711873c44 to 32e744fbf004
+* SS-run-sets from a2b0fc96c2f3 to 5e132065a71f
+* tools from e7646d07561c to d05d961b0863
+* tracers from a5ed7d8b98a3 to b7c4bd23c455
+* XIOS-ARCH from 71122bbcddfe to 967b77939c6e
+Did a clean build of NEMO SalishSeaCast config.
 (SalishSea)
 
 Email from Tom Prime asking about checklist updating and dumping to YAML.
+
+Canyons/Arctic mtg; see whiteboard.
+(Canyons/Arctic)
+
+Worked on building MOHID on salish; got proj4 built, but stopped in proj4-fortran build because autoconf and automake are required and I want to consult with Charles before I install those system packages.
+Worked on building MOHID on cedar:
+* cd /home/dlatorne/project/MIDOSS/
+* mkdir mohid_deps tmp_install_dir
+* export DIRINSTALL=#$(pwd)/mohid_deps
+* export CC=gcc
+* export FC=gfortran
+
+* cd tmp_install_dir
+* wget http://download.osgeo.org/proj/proj-4.9.3.tar.gz
+* tar -xf proj-4.9.3.tar.gz
+* cd proj-4.9.3
+* ./configure --prefix=$DIRINSTALL/$proj CC=$CC FC=$FC
+* ln -sf $DIRINSTALL/$proj/lib/libproj.so $DIRINSTALL/$proj/lib/libproj4.so
+
+* cd tmp_install_dir
+* git clone https://github.com/mhagdorn/proj4-fortran.git
+* cd proj4-fortran/
+* ./bootstrap
+* ./configure --with-proj4=$DIRINSTALL/$proj --prefix=$DIRINSTALL/$proj4fortran CC=$CC FC=$FC
+* PROJ4FORTRAN=$DIRINSTALL/$proj4fortran
+* export PATH=$PATH:$PROJ4FORTRAN/lib:$PROJ4FORTRAN/include
+* export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PROJ4FORTRAN/lib
+* make
+* icc -DIFORT -DPACKAGE_NAME=\"libfproj4\" -DPACKAGE_TARNAME=\"libfproj4\" -DPACKAGE_VERSION=\"1.0\" -DPACKAGE_STRING=\"libfproj4\ 1.0\" -DPACKAGE_BUGREPORT=\"Magnus.Hagdorn@ed.ac.uk\" -DPACKAGE_URL=\"\" -DPACKAGE=\"libfproj4\" -DVERSION=\"1.0\" -DHAVE_LIBM=1 -DHAVE_LIBPROJ=1 -I.   -I/home/dlatorne/project/MIDOSS/mohid_deps//include  -g -O2 -MT fort-proj.o -MD -MP -MF .deps/fort-proj.Tpo -c -o fort-proj.o fort-proj.c
+* make install
+
+* cd /home/dlatorne/project/MIDOSS/MOHID/Solutions/mohid-in-linux
+* edit compile_mohid.sh:
+  * DIR_REQ=/home/dlatorne/project/MIDOSS/mohid_deps
+  * PROJ4=$DIR_REQ
+  * PROJ4F=$DIR_REQ
+* ./compile_mohid.sh -mb1 -mb2 -mw
+(MIDOSS)
 
 
 
