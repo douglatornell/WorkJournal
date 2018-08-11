@@ -3319,6 +3319,16 @@ Worked on building MOHID on cedar:
 (MIDOSS)
 
 
+Sat 11-Aug-2018
+^^^^^^^^^^^^^^^
+
+Continued backfilling nowcast-green for 01-06aug18 re: XIOS buffer size factor issue:
+* make_forcing_links nowcast-green 2018-08-05
+
+* make_forcing_links nowcast-green 2018-08-06
+(SalishSea)
+
+
 
 
 * write launch_remote_worker worker!!!
