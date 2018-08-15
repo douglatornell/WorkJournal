@@ -3322,10 +3322,46 @@ Worked on building MOHID on cedar:
 Sat 11-Aug-2018
 ^^^^^^^^^^^^^^^
 
+Vancouver to Parksville
+
 Continued backfilling nowcast-green for 01-06aug18 re: XIOS buffer size factor issue:
 * make_forcing_links nowcast-green 2018-08-05
-
 * make_forcing_links nowcast-green 2018-08-06
+(SalishSea)
+
+
+Sun 12-Aug-2018
+^^^^^^^^^^^^^^^
+
+Parksville to Vancouver
+
+
+Week 33
+-------
+
+Mon 13-Aug-2018
+^^^^^^^^^^^^^^^
+
+Finished implementation of Baynes Sound figure module.
+Susan launched latest hindcast iteration 01jan16 run; I launched watcher for it and manually queued 01feb16 to start automation.
+Helped Tereza design her CO2 results analysis pipeline.
+Started adding Baynes Sound surface fields figure to NEMO biology results page.
+(SalishSea)
+
+Attended phys ocgy seminar about nighttime turbulent and heat transfer in vineyards.
+
+
+Tue 14-Aug-2018
+^^^^^^^^^^^^^^^
+
+Picked up replacement Nexus 5X at Purolator.
+
+Salish Sea team mtg; see whiteboard.
+Finished adding Baynes Sound surface fields figure to NEMO biology results page and deployed it.
+Telcon w/ Jennifer MacDonald @EC Water Quality re: alternate web data formats for Fraser River buoy data.
+Restarted SalishSeaNowcast manager to add add make_plots nemo nowcast-agrif research messages to registry.
+Changed make_plots nemo nowcast-agrif research to run after nowcast-green pings ERDDAP so that all of the results fields are ready for use.
+Added badges to SalishSeaNowcast docs and worked on updating pkg dev docs.
 (SalishSea)
 
 
