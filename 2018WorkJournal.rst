@@ -3365,6 +3365,32 @@ Added badges to SalishSeaNowcast docs and worked on updating pkg dev docs.
 (SalishSea)
 
 
+Wed 15-Aug-2018
+^^^^^^^^^^^^^^^
+
+Created SalishSeaNowcast issue#58 re: hindcast slurm_load_jobs error: Socket timed out on send/recv operation.
+rsync-ed all forcing useful for hindcast & research runs from skookum to cedar to backfill what is missing between manual uploads and start of upload_forcing cedar.
+Queued 01jun16 and 01jul16 hindcast runs that launched watch_NEMO_hindcast 01jun16 to restart automation; 01jun16 failed in the node loss of connection to file system pattern.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+Updated Mercurial on kudu to 4.7:
+* conda activate hg-dev
+* cd hg-stable
+* hg pull -u
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
+
+Thu 16-Aug-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+
 
 
 * write launch_remote_worker worker!!!
