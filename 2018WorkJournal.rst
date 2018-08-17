@@ -3390,6 +3390,57 @@ Thu 16-Aug-2018
 See project work journal.
 (GOMSS)
 
+nowcast-blue blew up on 1st time step at south point of west boundary; Susan suspects bug in Orlanski boundary conditions code, which she fixed, and deployed on west.cloud.
+Updated NEMO-3.6-code in /results/nowcast-sys/ from 4e7e6a13f8bf to 42097d159d19 and did a clean build of SalishSea config for nowcast-dev; manually ran make_forcing_links salish --shared-storage to restart nowcast-dev automation.
+Update NEMO-3.6-code on orcinus from 15480482073d to 42097d159d19; did a clean build of SalishSeaAGRIF config.
+Susan ran hindcast/21jun16, and queued 01jul16, but it failed; I requeued 01jul16, launched watcher, then queued 01aug16.
+(SalishSea)
+
+JupyterDay 2018 PIMS:
+* "computational narratives"
+* syzygy.ca
+* Ian Allison - PIMS
+  * syzygy is institutional JupyterHubs across Canada
+  * hardware agnostic
+  * github
+  * partitioned resources
+  * how:
+    * terraform (hashicorp like vagrant)
+    * ansible
+    * JupyterHub
+    * shibboleth - auth
+    * docker - each notebook server is a container
+    * zfs
+    * prometheus
+    * grafana
+  * lots of inspiration from UC Berkley
+  * lab available via url
+  * git in container, so clone, etc.
+
+* Meghan Allen CS 103
+  * Intro to Systematic Program Design
+  * non-majors course cuz 110 doesn't work (2 yrs old)
+  * Python & notebooks
+  * just-in-time teaching
+  * in Jan 103 + 107 will equal 110 (Phil asked
+
+* Sam Hinshaw Data Science 100:
+  * integrating Jupyter into Canvas
+  * canvas
+  * JupyterHub
+  * nbgrader
+  * canvas has robust API
+
+* Phil Austen EOAS
+  * 1995 origin of numerical course to today
+
+* Kim Dill-MacFarland Eco-Scope
+  * Experiential Data Science - microbio
+  * EDUCE
+
+* Patrick Walls Math 210:
+
+
 
 
 
