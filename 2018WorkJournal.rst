@@ -3394,6 +3394,7 @@ nowcast-blue blew up on 1st time step at south point of west boundary; Susan sus
 Updated NEMO-3.6-code in /results/nowcast-sys/ from 4e7e6a13f8bf to 42097d159d19 and did a clean build of SalishSea config for nowcast-dev; manually ran make_forcing_links salish --shared-storage to restart nowcast-dev automation.
 Update NEMO-3.6-code on orcinus from 15480482073d to 42097d159d19; did a clean build of SalishSeaAGRIF config.
 Susan ran hindcast/21jun16, and queued 01jul16, but it failed; I requeued 01jul16, launched watcher, then queued 01aug16.
+hindcast/01jul16 failed in the node loss of connection to file system pattern; Susan re-queued it manually from the tmp run dir, and requeued 01aug16 too, but that left a zombie watcher on 01jul16.
 (SalishSea)
 
 JupyterDay 2018 PIMS:
@@ -3440,6 +3441,77 @@ JupyterDay 2018 PIMS:
 
 * Patrick Walls Math 210:
 
+
+Fri 17-Aug-2018
+^^^^^^^^^^^^^^^
+
+Installed openssh-server on lizzy and got ssh working between kudu and it.
+
+Killed hindcast watcher zombies on skookum, launched watcher for 01aug16, queued 01sep16.
+Manually ran make_plots nowcast-agrif research.
+Updated hindcast-sys repos on cedar:
+* NEMO-Cmd
+* rivers-climatology
+* SS-run-sets
+* tools
+* tracers
+* NEMO-3.6-code
+Did a clean build of NEMO SalishSeaCast config on cedar.
+Re-queued 01sep16 to use updated rivers, tracers, and SalishSeaCast build; after a big thrash due to a typo in the hindcast YAML file that caused silent failures.
+Purged old nowcast-agrif results dirs on orcinus.
+nowcast-agrif failed due to unmerged changes from SMELT; updated NEMO-3.6-code back to changeset 1548048207 that worked for 16aug18 run, and re-launched.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project journal.
+(Resilient-C)
+
+
+Sat 18-Aug-2018
+^^^^^^^^^^^^^^^
+
+Moved watch_NEMO_hindcast month at a time to --full-month option and made default 3 runs per month (2x10 days, then the rest of the days).
+hindcast/11nov16 failed.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Sun 19-Aug-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Updated SS-run-sets on cedar; queued hindcast 11nov16 and 21nov16; started watcher for 11nov16.
+Confirmed that nowcast-agrif/17aug18 finished last night; ran make_plots.
+Added run_NEMO_hindcast --walltime option.
+
+Need to backfill nowcast-agrif/18aug18 and 19aug18
+(SalishSea)
+
+Installed borg v1.1.6 on lizzy via PPA:
+* sudo add-apt-repository ppa:costamagnagianfranco/borgbackup
+* sudo apt update
+* sudo apt install borgbackup
+Changed kudu borg to PPA and upgraded to v1.1.6:
+* sudo add-apt-repository ppa:costamagnagianfranco/borgbackup
+* sudo apt update
+* sudo apt install borgbackup
+Set up borg repos tree on lizzy:
+* sudo mkdir /media/doug/backup/borg
+* sudo chown doug:doug /media/doug/backup/borg
+Initialized borg repo for kudu on lizzy from kudu:
+* export BORG_PASSCOMMAND="cat ${HOME}/.borg-passphrase"
+* borg init --encryption=repokey-blake2 lizzy:/media/doug/backup/borg/kudu
+Created borg-bkup/kudu-lizzy.sh and ran initial backup of kudu to lizzy:backup.
+Installed anacron on kudu and set it up in ~/.anacron/ to run kudu-lizzy backup daily.
 
 
 
