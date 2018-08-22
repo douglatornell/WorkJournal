@@ -34,7 +34,7 @@ After a long thrash, got to the bottom of make_live_ocean_files seemingly creati
 Tue 2-Jan-2018
 ^^^^^^^^^^^^^^
 
-upload_forcing make symlink to 01jan18 LiveOcean files, as expected; moved it aside, but need to figure out how to force make_live_ocean_files to overwite it with a file instead of writing to it.
+upload_forcing made symlink to 01jan18 LiveOcean files, as expected; moved it aside, but need to figure out how to force make_live_ocean_files to overwite it with a file instead of writing to it.
 Changed make_live_ocean_files to delete any existing symlink with the name of the file to be generated for the present day.
 (SalishSea)
 
@@ -143,7 +143,7 @@ Mon 15-Jan-2018
 See project journal.
 (SalishSeaCast-FVCOM)
 
-Travelled home crom Barrie
+Travelled home from Barrie
 
 
 Tue 16-Jan-2018
@@ -207,9 +207,10 @@ Walked down to Kits Beach to observe morning high tide and storm surge.
 
 Formatted red 1Tb portable drive to use as backup for kudu in preparation for change to PoP_OS!.
 
+Did clean install of Pop!_OS 17.10 on 120Gb SSD OS drive.
+
 See project journal.
 (SalishSeaCast-FVCOM)
-
 
 Finished changing ssh vs. tide prediction figure to use xarray for forecast runs; still need to do forecast2.
 (SalishSea)
@@ -327,7 +328,7 @@ Replaced /results/nowcast-sys/nowcast-env/ on skookum with a new one built with 
 * deactivate and reactivate env to set envvars
 * circusd --daemon $NOWCAST_CONFIG/circus.ini
 Ran make_plots forecast2 2018-01-28 to test new env (was failing on NewWest max ssh figure);
-Noted that sotrm_surge_alerts figure takes ~4min to run.
+Noted that storm_surge_alerts figure takes ~4min to run.
 Warnings from make_plots:
 * xarray/plot/utils.py:51: FutureWarning: 'pandas.tseries.converter.register' has been moved and renamed to 'pandas.plotting.register_matplotlib_converters'.converter.register()
 * /results/nowcast-sys/nowcast-env/lib/python3.6/site-packages/numpy/ma/core.py:6385: MaskedArrayFutureWarning: In the future the default for ma.minimum.reduce will be axis=0, not the current None, to match np.minimum.reduce. Explicitly pass 0 or None to silence this warning.
@@ -360,7 +361,7 @@ Tue 30-Jan-2018
 Started preparing niko for clean install of PoP_OS!:
 * installed miniconda warehouse drive
 * started cloning MEOPAR repos on to warehouse drive
-* started creating conda envs on warehous drive
+* started creating conda envs on warehouse drive
 
 Worked on improving speed of results index page.
 (salishsea-site)
@@ -449,6 +450,7 @@ Cleared backlog of issues in Sentry.
 Finished preparing niko for upgrade to PoP_OS! and installed it (had to physically remove 275Gb drive so that grub could install on internal drive).
 Started setting niko up under PoP_OS!
 
+
 February
 ========
 
@@ -467,7 +469,7 @@ Started setting up projects/SalishSea/hindcast-sys/ tree on cedar:
 * built XIOS-2
 * built NEMO-3.6-code SMELT config
 * built NEMO-3.6-code REBUILD_NEMO
-Set up hindcast-sys/17nov14/ where we will initialize from, but discussion w/ Susan revealed that we can't run there yet to to bathymetry issues; run from neap in mid-Nov 2017 for testing.
+Set up hindcast-sys/17nov14/ where we will initialize from, but discussion w/ Susan revealed that we can't run there yet due to bathymetry issues; run from neap in mid-Nov 2017 for testing.
 (SalishSea)
 
 Started exploring new ONC data API docs: https://wiki.oceannetworks.ca/display/O2A/Oceans+2.0+API+Home
@@ -480,7 +482,7 @@ Tue 6-Feb-2018
 Continued getting niko set up under PoP_OS!.
 
 Continued setting up projects/SalishSea/hindcast-sys/ tree on cedar:
-* Deleted hindcast-sys/17nov14/ because we're not ready for it, and we decided to keeo the results on $SCRATCH
+* Deleted hindcast-sys/17nov14/ because we're not ready for it, and we decided to keep the results on $SCRATCH
 * Created $SCRATCH/hindcast/
 * Installed miniconda3 in $PROJECT/SalishSea/hindcast-sys/
 * set aside system PYTHONPATH with `export OLD_PYTHONPATH=$PYTHONPATH; unset PYTHONPATH`
@@ -756,7 +758,7 @@ Haircut to a shorter me.
 See project work journal.
 (GOMSS)
 
-Experimented with Python asyncio for ECCC datamart file downloads; implementation was not difficult for the basics; async was generatlly faster for 1 or 2 hours of files, but less conclusively so for 6 hours.
+Experimented with Python asyncio for ECCC datamart file downloads; implementation was not difficult for the basics; async was generally faster for 1 or 2 hours of files, but less conclusively so for 6 hours.
 
 
 Sun 25-Feb-2018
@@ -771,7 +773,7 @@ Changed bloomcast view so that bloom date log shows most recent predictions at t
 Helped Susan with debugging 2016 bloomcast date fail.
 (bloomcast)
 
-Worked on migrating sqlalchemyorg to blogofile 0.8.3 under Python 3.s
+Worked on migrating sqlalchemyorg to blogofile 0.8.3 under Python 3.
 
 Week 9
 ------
@@ -890,7 +892,7 @@ Mon 5-Mar-2018
 
 Body & Soul session w/ Theresa.
 
-Cédric Chavanne from Rimouski give SCOR west tour seminar on his method for verification of mesoscale heat flux parameterizations for the winter mixing layer in global climate models.
+Cédric Chavanne from Rimouski give SCOR west tour seminar on his method for verification of mesoscale heat flux parametrizations for the winter mixing layer in global climate models.
 
 See project journal.
 (SalishSeaCast-FVCOM)
@@ -1256,7 +1258,7 @@ Spinning at Method w/ Dervia.
 Fri 6-Apr-2018
 ^^^^^^^^^^^^^^
 
-Finished writing XIO-2 field_def.xml file docs.
+Finished writing XIOS-2 field_def.xml file docs.
 (MOAD)
 
 Canyons/Arctic group mtg; see whiteboard.
@@ -1297,6 +1299,7 @@ Continued working on nowcast-agrif setup and testing on orcinus:
 * Vicky says that neither she nor Idalia know how Michael did the AGRIF transformation of the NEMO configs; Idalia confirmed
 * sent email to Michael about TRBTRA variable fail in Haro restart_trc generations, and how to generate AGRIFLIB/
 (SalishSea)
+
 
 Tue 10-Apr-2018
 ^^^^^^^^^^^^^^^
@@ -1822,7 +1825,7 @@ Continued working on nowcast-agrif production:
 * launched 13may18 run and it is working; failed w/ -ve SSS in Haro on timestep 1925
 * used ncra to produce river bio tracer mean file:
     /bin/ls | grep rivers_bio_tracers_'m..d..'.nc | ncra -4 -o rivers_bio_tracers_mean.nc
-Phys Ocgy seminary by Sam re: his work on Atlantic mode water, and on Arduino-based LIAM wave measurement device that rides ODL drifter.
+Phys Ocgy seminar by Sam re: his work on Atlantic mode water, and on Arduino-based LIAM wave measurement device that rides ODL drifter.
 (SalishSea)
 
 See work journal.
@@ -3513,6 +3516,30 @@ Initialized borg repo for kudu on lizzy from kudu:
 Created borg-bkup/kudu-lizzy.sh and ran initial backup of kudu to lizzy:backup.
 Installed anacron on kudu and set it up in ~/.anacron/ to run kudu-lizzy backup daily.
 
+
+Week 34
+-------
+
+Mon 20-Aug-2018
+^^^^^^^^^^^^^^^
+
+Fixed outdated and broken links in SalishSeaNowcast docs.
+Started work on fixing Baynes Sound AGRIF surface fields figure so that full-domain fringe is from nowcast-agrif run too, but found that we only store daily averages for full-domain.
+Resumed work on changing wwatch3 from forecast to nowcast+forecast.
+(SalishSea)
+
+Started work on merit review.
+
+
+Tue 21-Aug-2018
+^^^^^^^^^^^^^^^
+
+Continued work on merit review.
+
+Salish Sea team mtg; see whiteboard.
+Resumed work on changing wwatch3 from forecast to nowcast+forecast.
+Noticed that Slab[UV].nc datssets on ERDDAP hadn't been updated since 17Aug; Susan investigated and said files there the, so I manually pinged ERDDAP with touches in flags/ dir, and everything is good now.
+(SalishSea)
 
 
 
