@@ -3523,23 +3523,50 @@ Week 34
 Mon 20-Aug-2018
 ^^^^^^^^^^^^^^^
 
+See project work journal.
+(GOMSS)
+
 Fixed outdated and broken links in SalishSeaNowcast docs.
 Started work on fixing Baynes Sound AGRIF surface fields figure so that full-domain fringe is from nowcast-agrif run too, but found that we only store daily averages for full-domain.
 Resumed work on changing wwatch3 from forecast to nowcast+forecast.
 (SalishSea)
 
-Started work on merit review.
+Started work on EOAS merit review.
 
 
 Tue 21-Aug-2018
 ^^^^^^^^^^^^^^^
 
-Continued work on merit review.
+See project work journal.
+(GOMSS)
 
+Continued work on EOAS merit review.
+
+Ordered 2x8Tb drive for archival results storage (#5 & #6).
 Salish Sea team mtg; see whiteboard.
 Resumed work on changing wwatch3 from forecast to nowcast+forecast.
 Noticed that Slab[UV].nc datssets on ERDDAP hadn't been updated since 17Aug; Susan investigated and said files there the, so I manually pinged ERDDAP with touches in flags/ dir, and everything is good now.
 (SalishSea)
+
+
+Wed 22-Aug-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+2x8Tb drives for archival storage were delivered and formatted as archive5 and archive6 via gparted.
+orcinus was offline around the time of nowcast-agrif setup, but came back at ~14:00; re-ran make_forcing_links turbidity to restart automation.
+(SalishSea)
+
+Finished EOAS merit review; sent it to Roger, Susan & Dafna; scheduled mtg w/ Roger who will review on Susan's behalf.
+
+
+Thu 23-Aug-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
 
 
 
