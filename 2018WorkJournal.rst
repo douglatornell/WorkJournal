@@ -3569,6 +3569,58 @@ See project work journal.
 (GOMSS)
 
 
+Fri 24-Aug-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Submitted expense claim for 2x8Tb archival results storage drives.
+Susan finished archiving nowcast-dev to external drives; I deleted 22au17 through 19aug18 with:
+* find /results/SalishSea/nowcast-dev/* -type d -mtime +3 | xargs rm -rf
+Worked on updating trello board.
+Fixed salishsea-site bug reported and diagnoses by Michael re: show_figure() js function that I accidentally deleted from FVCOM publish template.
+(SalishSea)
+
+Canyons/Arctic mtg; see whiteboard.
+(Canyons/Arctic)
+
+Vancouver to Victoria
+
+
+Sat 25-Aug-2018
+^^^^^^^^^^^^^^^
+
+Victoria to Sooke
+
+See project work journal.
+(GOMSS)
+
+
+Sun 26-Aug-2018
+^^^^^^^^^^^^^^^
+
+Sooke
+
+
+Week 35
+-------
+
+Mon 27-Aug-2018
+^^^^^^^^^^^^^^^
+
+Sooke
+
+See project work journal.
+(GOMSS)
+
+
+Tue 28-Aug-2018
+^^^^^^^^^^^^^^^
+
+Sooke to Vancouver, via Parksville
+
+
 
 * write launch_remote_worker worker!!!
 
