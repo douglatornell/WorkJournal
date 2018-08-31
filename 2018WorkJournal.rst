@@ -3621,6 +3621,28 @@ Tue 28-Aug-2018
 Sooke to Vancouver, via Parksville
 
 
+Wed 29-Aug-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Researched Bitbucket pipelines and deployments.
+
+Pulled and updated NEMO-3.6-code for Susan on cedar re: hindcast.
+(SalishSea)
+
+
+Thu 30-Aug-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Restarted log_aggregator on skookum because progress messages from watch_NEMO workers on west.cloud weren't appearing.
+(SalishSea)
+
+
 
 * write launch_remote_worker worker!!!
 
