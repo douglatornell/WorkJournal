@@ -3643,6 +3643,29 @@ Restarted log_aggregator on skookum because progress messages from watch_NEMO wo
 (SalishSea)
 
 
+Fri 31-Aug-2018
+^^^^^^^^^^^^^^^
+
+download_weather 06 failed; re-ran manually to restart automation.
+Worked w/ Susan on archival storage:
+* nowcast-blue 31aug17 to 19aug18 archived on archive drives #1 & #2 and deleted from /results/
+* nowcast-agrif 21may18 to 19aug18 archived on archive drives #3 & #4 and deleted from /results/
+* forecast 31aug17 to 24jul18 moved from /opp/ back to /results/ in preparation for archiving
+Added BaynesSoundAGRIF zoom sub-domain, axis, grid, and file definitions to do hourly average output of temperature, salinity, nitrate, and diatoms on full-domain grid for fringe of BaynesSoundAGRIF surface tracers figure.
+(SalishSea)
+
+Canyons/Arctic mtg; see whiteboard.
+(Canyons/Arctic)
+
+Wrote domain_def.xml section of moad docs.
+Added badges to MOAD docs.
+Added dev docs and badges to moad_tools docs; also added general and Python modules indices to docs sidebar.
+(MOAD)
+
+Updated generation of /opp/wwatch3/nowcast/ddmmmyy/ directories from forecast/ dirs.
+(SoG waves)
+
+
 
 * write launch_remote_worker worker!!!
 
