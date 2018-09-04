@@ -3666,6 +3666,65 @@ Updated generation of /opp/wwatch3/nowcast/ddmmmyy/ directories from forecast/ d
 (SoG waves)
 
 
+Sat 1-Sep-2018
+^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Moved portfolio pkg from ~/.local/ on kudu to portfolio conda env.
+Did 2017-Q4 and 2018-Q1 ROIs.
+
+Advised Susan on dev of make_CHS_currents_file worker.
+(SalishSea)
+
+
+Sun 2-Sep-2018
+^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Reduced watch_NEMO_hindcast is-queued polling interval from 1 minute to 5 minutes; re: issue #58, but not a complete solution, just a mitigation.
+Added unit tests for make_CHS_currents_file worker, and did some refactoring on it.
+Network switch failure at UDC disconnected salish and skookum from network.
+(SalishSea)
+
+Put Carib back together from Halifax trip.
+Gunnar maintenance issues:
+* computer transmitter battery is probably dead
+* front wheel (that was on Carib for the trip) needs a bearing overhaul
+* bottom bracket bearing cups have 16 indentations, so BBT-9 should work
+
+
+September
+=========
+
+Week 36
+-------
+
+Mon 3-Sep-2018
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Labour Day
+
+See project work journal.
+(GOMSS)
+
+Thrashed around getting salishsea-site running after network disconnection; stopping and re-starting circus daemon was probably the solution, but only after failing by bouncing the web via circusctl and bouncing apache2.
+(SalishSea)
+
+Installed Rapid Photo Downloader on kudu and got image transfers from SD cards and imports to Darktable back under control.
+
+
+Tue 4-Sep-2018
+^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+
+
 
 * write launch_remote_worker worker!!!
 
