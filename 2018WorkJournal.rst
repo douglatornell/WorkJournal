@@ -3723,6 +3723,14 @@ Tue 4-Sep-2018
 See project work journal.
 (GOMSS)
 
+Email from Charles at ~09:00 saying that skookum has an NFS lock on /data and needs a reboot to resolve; many more things were clearly wrong, but skookum came back online at ~12:00:
+* restarted nowcast-sys circus
+* restarted salishsea-site circus
+* download_weather 12 to restart automation
+Sent email to Charles asking if I can add circus launches to /etc/rc.local on skookum.
+Refactored Baynes Sound AGRIF figure to use new near-surface fields sub-grid plus fringe hourly average output file from nowcast-agrif runs instead of nowcast-green fields.
+(SalishSea)
+
 
 
 
