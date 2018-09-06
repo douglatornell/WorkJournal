@@ -3732,6 +3732,31 @@ Refactored Baynes Sound AGRIF figure to use new near-surface fields sub-grid plu
 (SalishSea)
 
 
+Wed 5-Sep-2018
+^^^^^^^^^^^^^^
+
+root file system on skookum is full:
+* checked to see if borg was to blame, then realized that it runs on salish
+* opened ticket; Charles fixed it; problem was that when NFS locks the systems write to local storage, so salish was affected too.
+(SalishSea)
+
+Finished arrangements for 8-11 Sep trip to Ontario.
+
+See project work journal.
+(GOMSS)
+
+
+Thu 6-Sep-2018
+^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Emailed Jennifer@ECCC re: Fraser buoy web page down.
+Worked w/ Susan on archival storage:
+* forecast2 31aug17 to 19aug18 archived on archive drives #5 & #6 and deleted from /results/
+(SalishSea)
+
 
 
 * write launch_remote_worker worker!!!
