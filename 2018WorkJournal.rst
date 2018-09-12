@@ -3290,15 +3290,16 @@ Worked on building MOHID on salish; got proj4 built, but stopped in proj4-fortra
 Worked on building MOHID on cedar:
 * cd /home/dlatorne/project/MIDOSS/
 * mkdir mohid_deps tmp_install_dir
-* export DIRINSTALL=#$(pwd)/mohid_deps
-* export CC=gcc
-* export FC=gfortran
+* export DIRINSTALL=$(pwd)/mohid_deps
+* export CC=icc
+* export FC=ifort
 
 * cd tmp_install_dir
 * wget http://download.osgeo.org/proj/proj-4.9.3.tar.gz
 * tar -xf proj-4.9.3.tar.gz
 * cd proj-4.9.3
 * ./configure --prefix=$DIRINSTALL/$proj CC=$CC FC=$FC
+* make install
 * ln -sf $DIRINSTALL/$proj/lib/libproj.so $DIRINSTALL/$proj/lib/libproj4.so
 
 * cd tmp_install_dir
@@ -3755,7 +3756,146 @@ See project work journal.
 Emailed Jennifer@ECCC re: Fraser buoy web page down.
 Worked w/ Susan on archival storage:
 * forecast2 31aug17 to 19aug18 archived on archive drives #5 & #6 and deleted from /results/
+Added launch envvars and commands for SalishSeaCast, salishsea-site, and ERDDAP to skookum:/etc/rc.local.
+Created 2G emergency reserved space on /backup/borg/ so that we can delete it if necessary when something else fills /backup:
+* sudo fallocate -l 2G /backup/borg/emergency_reserved_space
+Continued work on splitting ww3 runs into nowcast+forecast.
 (SalishSea)
+
+EOAS Symposium: Faculty Research Carnival
+
+
+Fri 7-Sep-2018
+^^^^^^^^^^^^^^
+
+Email from Tom@NOC re: nowcast in containers, especially access to config, and launching workers.
+
+Continued work on splitting ww3 runs into nowcast+forecast.
+Discussed storage expansion with Charles and then with Susan:
+* backup/borg/results: 13T
+* backup/borg/data: 1.2T
+* backup/borg/opp: 336G
+* du -sh /results/forcing /results/observations /results/SalishSea/climatology /results/nowcast-sys/figures /results/SalishSea/nowcast-agrif /results/SalishSea/hindcast /results/SalishSea/nowcast-green:
+  465G  /results/forcing
+  1.7G  /results/observations
+  1.3G  /results/SalishSea/climatology
+  81G /results/nowcast-sys/figures
+  42G /results/SalishSea/nowcast-agrif
+  6.3T  /results/SalishSea/hindcast
+  7.7T  /results/SalishSea/nowcast-green
+  = ~14.6T
+* so, for /results, backup == storage
+* /results/hincast stands at ~3yrs (2015-2017), or ~2.1T/yr
+* 12yr hindcast (2007-2018) will require 25.2T storage
+(SalishSea)
+
+Canyons/Arctic mtg; see whiteboard.
+(Canyons/Arctic)
+
+Installed autoconf and automake on salish.
+Worked on building MOHID on salish:
+* cd /home/dlatorne/project/MIDOSS/
+* mkdir mohid_deps tmp_install_dir
+* export DIRINSTALL=$(pwd)/mohid_deps
+* export CC=gcc
+* export FC=gfortran
+
+* cd tmp_install_dir
+* wget http://download.osgeo.org/proj/proj-4.9.3.tar.gz
+* tar -xf proj-4.9.3.tar.gz
+* cd proj-4.9.3
+* ./configure --prefix=$DIRINSTALL/$proj CC=$CC FC=$FC
+* make install
+* ln -sf $DIRINSTALL/$proj/lib/libproj.so $DIRINSTALL/$proj/lib/libproj4.so
+
+* cd tmp_install_dir
+* git clone https://github.com/mhagdorn/proj4-fortran.git
+* cd proj4-fortran/
+* ./bootstrap
+* ./configure --with-proj4=$DIRINSTALL/$proj --prefix=$DIRINSTALL/$proj4fortran CC=$CC FC=$FC
+* PROJ4FORTRAN=$DIRINSTALL/$proj4fortran
+* export PATH=$PATH:$PROJ4FORTRAN/lib:$PROJ4FORTRAN/include
+* export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PROJ4FORTRAN/lib
+* gcc -Df2cFortran -DPACKAGE_NAME=\"libfproj4\" -DPACKAGE_TARNAME=\"libfproj4\" -DPACKAGE_VERSION=\"1.0\" -DPACKAGE_STRING=\"libfproj4\ 1.0\" -DPACKAGE_BUGREPORT=\"Magnus.Hagdorn@ed.ac.uk\" -DPACKAGE_URL=\"\" -DPACKAGE=\"libfproj4\" -DVERSION=\"1.0\" -DHAVE_LIBM=1 -DHAVE_LIBPROJ=1 -I.   -I/data/dlatorne/MIDOSS/tmp_install_dir/proj-4.9.3/mohid_deps//include  -g -O2 -MT fort-proj.o -MD -MP -MF .deps/fort-proj.Tpo -c -o fort-proj.o fort-proj.c
+* make install
+
+* cd MOHID/Solutions/mohid-in-linux
+* edit compile_mohid.sh:
+  * change she-bang to #!/bin/bash
+  * FC=gfortran
+  * DIR_REQ=/data/dlatorne/MIDOSS/mohid_deps
+  * PROJ4=$DIR_REQ
+  * PROJ4F=$DIR_REQ
+* ./compile_mohid.sh -mb1 -mb2 -mw
+Compile mb1 fails due to incorrect include paths for zlib, hdf5, and netcdf4.
+Monthly mtg; see notebook.
+(MIDOSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Sat 8-Sep-2018
+^^^^^^^^^^^^^^
+
+Vancouver to Brampton
+
+
+Sun 9-Sep-2018
+^^^^^^^^^^^^^^
+
+Brampton-Barrie-Brampton
+
+Email reply to Tom@NOC re: running remote workers, and thoughts on how to do it in containerized nowcast system.
+(Prediction Core)
+
+See project work journal.
+(GOMSS)
+
+Week 37
+-------
+
+Mon 10-Sep-2018
+^^^^^^^^^^^^^^^
+
+Brampton
+
+See project work journal.
+(GOMSS)
+
+Sent emails to Susan re: tests for her to try re: new Python & SciPy modules on cedar; added notes to whiteboards.
+Continued work on splitting ww3 runs into nowcast+forecast, but got very confused about restart dates in ww3_shel file for different run types.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+
+Tue 11-Sep-2018
+^^^^^^^^^^^^^^^
+
+Changed SalishSeaCmd and NEMO-Cmd to use/recommend python/3.7.0 module on cedar and graham re: deprecation of python27-scipy-stack module; also updated onboarding docs re: setup on cedar and graham.
+Experimented with Mercurial on orcinus re: outdated Python 2.7.3 SSL:
+* can't pip install --user hg due to SSL
+* hg won't work with both python/2.7.3 and python/3.5.0 modules loaded
+* Tried build from source and $HOME install:
+  * hg clone
+  * cd hg-stable
+  * make local PYTHON=/global/software/python-3.5.0/bin/python3
+  * edit hg-stable/hg to change she-bang to python3
+  * did a sucessful pull and update on NEMO-3.6-code
+  * make install-home failed
+Restarted log_aggregator because there have been no messages from watch_NEMO on west.cloud since middle of forecast run yesterday.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+Brampton to Vancouver
 
 
 
