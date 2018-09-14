@@ -3897,6 +3897,25 @@ See project work journal.
 Brampton to Vancouver
 
 
+Wed 12-Sep-2018
+^^^^^^^^^^^^^^^
+
+Worked w/ Rachael re: on-boarding.
+Added Python code guidelines sections to docs.
+Initialized rachael-analysis repo w/ README and LICENSE.
+(MIDOSS)
+
+See project work journal.
+(GOMSS)
+
+Discovered that download_weather 12 was frozen in hour 24; killed it and downloads finished, but message exchange with manager failed; manually ran:
+* get_NeahBay_ssh nowcast
+* download_live_ocean
+* grib_to_netcdf nowcast+
+to restart automation at ~16:55
+(SalishSea)
+
+
 Thu 12-Sep-2018
 ^^^^^^^^^^^^^^^
 
