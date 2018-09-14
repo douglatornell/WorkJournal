@@ -3871,7 +3871,6 @@ See project journal.
 (SalishSeaCast-FVCOM)
 
 
-
 Tue 11-Sep-2018
 ^^^^^^^^^^^^^^^
 
@@ -3896,6 +3895,39 @@ See project work journal.
 (GOMSS)
 
 Brampton to Vancouver
+
+
+Thu 12-Sep-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+EOAS Welcome Back BBQ
+
+Updated hindcast-sys on cedar in preparation for next cycle of hindcast runs:
+* change ~/.bashrc to load python/3.7.0 module
+* pull, update & pip install --user -e NEMO-Cmd
+* pull, update & pip install --user -e SalishSeaCmd
+* pull & update rivers-climatology
+* pull & update SS-run-sets
+* pull & update NEMO-3.6-code
+Worked w/ Susan on archival storage:
+* forecast 31aug17 to 19aug18 archived on archive drives #5 & #6 and deleted from /results/
+Deleted 2018-07-22 borg results archive to try to make space to complete a new results backup.
+Deleted /opp/SalishSea tempoary storage.
+Started work on adding ubcSSfDepthAveragedCurrents1hV17-02 dataset to ERDDAP based on CHS_currents.nc files in rolling-forecasts/nemo/:
+* GenerateDatasetsXml.sh failed complaining about long data type of time variable; fixed by adding dtype item to encoding
+* generated and edited XML fragment
+* worked on changing automation flow so that CHS_currents files get included in rolling forecasts
+* need to change time variable to be called time_counter to keep update_forecast_datasets worker happy
+(SalishSea)
+
+Updated generation of /opp/wwatch3/nowcast/ddmmmyy/ directories from forecast/ dirs:
+* y=18; m=sep; for d in {04..12}; do dmy=${d}${m}${y}; ymd=$(date '+%C%y%m%d' -d ${dmy}); ymdp2=$(date '+%C%y%m%d' -d "${dmy}+2 days"); echo ${dmy}; mkdir -p -m775 /opp/wwatch3/nowcast/${dmy}; cp -p /opp/wwatch3/forecast/${dmy}/std* /opp/wwatch3/forecast/${dmy}/*.inp /opp/wwatch3/forecast/${dmy}/SoGWW3.sh /opp/wwatch3/forecast/${dmy}/restart001.ww3 /opp/wwatch3/forecast/${dmy}/ww3_shel.log /opp/wwatch3/nowcast/${dmy}/; /usr/bin/ncks -d time,0,47 /opp/wwatch3/forecast/${dmy}/SoG_ww3_fields_${ymd}_${ymdp2}.nc /opp/wwatch3/nowcast/${dmy}/SoG_ww3_fields_${ymd}_${ymd}.nc; /usr/bin/ncks -d time,0,143 /opp/wwatch3/forecast/${dmy}/SoG_ww3_points_${ymd}_${ymdp2}.nc /opp/wwatch3/nowcast/${dmy}/SoG_ww3_points_${ymd}_${ymd}.nc; done
+(SoG waves)
+
+MOAD picnic
 
 
 
