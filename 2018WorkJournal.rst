@@ -3916,7 +3916,7 @@ to restart automation at ~16:55
 (SalishSea)
 
 
-Thu 12-Sep-2018
+Thu 13-Sep-2018
 ^^^^^^^^^^^^^^^
 
 See project work journal.
@@ -3947,6 +3947,104 @@ Updated generation of /opp/wwatch3/nowcast/ddmmmyy/ directories from forecast/ d
 (SoG waves)
 
 MOAD picnic
+
+
+Fri 14-Sep-2018
+^^^^^^^^^^^^^^^
+
+Increased inotify watches limit because PyCharm complained; see https://confluence.jetbrains.com/display/IDEADEV/Inotify+Watches+Limit; setting is in /etc/sysctl.d/30-pycharm.conf
+
+See project work journal.
+(GOMSS)
+
+Westgrid townhall:
+* slides: https://drive.google.com/file/d/16kyvwKwBfFVGyVKVUeMIo6dlAd8M3O3V/view
+* Patrick Mann, Westgrid ops director:
+  * RAC 2019
+    * UBC site visit by Patrick on Fri 12-Oct afternoon; RAC best practices
+    * online 4-Oct
+    * informal mtg w/ researchers during site visits:
+      * RAC 2018 issues, feedback?
+      * new systems feedback
+      * survey; what should they ask?
+      * future focus?
+      * what to tell gov't? how to spend $572M over 5 yrs announced by cabinet in Mar-18?
+      * anything else?
+      * beer!?
+    * RAC schedule
+      * Fast track: invitations 11-sep, due 27-sep to 25-oct
+      * RRG & RPP: 27-sep to 8-nov
+      * reviews: feb-2019
+      * awards: late mar-2019
+      * implementation: early apr-2019
+      * RPP will be subject to progress review
+    * RAC resources:
+      * cedar, graham, beluga, niagara, arbutus, maybe orcinus
+      * expect <50% of CPU ask
+      * expect nearline tape storage to be available
+    * Westgrid update:
+      * graham recovery from 3wk outage continuing; 2% corruption of /project
+      * cedar network is now 100 GBit
+      * orcinus 2d power system maintenance in October
+      * cedar 4d outage for os updates in mid-late Oct
+      * arbutus 3cloud expansion:
+        * new cloud, migrate VMs, then add old cloud hardware to new cloud
+        * 20-sep webinar
+        * new platform available 3-oct; migration over several months
+      * orcinus defunded Mar-2019, but UBC may continue operation; need to talk to Roman
+      * niagara:
+        * dragonfly+ inifiband topology is unique; no central switch, edge nodes keep track of routing, very complex cabling
+        * 256Tb burst buffer, NVMe SSDs; useful for checkpoint/restart for very large node-count jobs
+* Jamie Rosner, UBC ARC
+  * Bioinformatics help desk
+    * bioinformatics.computecanada.ca
+    * bilingual service
+    * forum and knowledge-base
+    * dedicated panel of ComputeCanada experts will answer questions, in addition to community discussion
+    * one-on-one support
+* Alex Razoumov, training coordinator
+  * training:
+    * bi-weekly webinars 10:00 Wednesdays starting 19-sep; https://bit.ly/wgFallTraining
+    * in-person:
+      * UofA Research Computing Bootcamp 24-28-Sep
+      * SFU intro to Python & ArcGIS 25-27-Sep
+  * visualization competition:
+    * 1-oct to 30-nov
+    * datasets provided
+    * https://westgrid.github.io/visualizeThis
+  * Materials from past training events: https://westgrid.github.io/trainingMaterials
+
+Helped Rachael by email with Mercurial learning curve.
+(MIDOSS)
+
+See project work journal.
+(Resilient-C)
+
+
+Sat 15-Sep-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+See project work journal.
+(Resilient-C)
+
+Discussed storage expansion plans w/ Susan:
+* decided to exclude hindcast from /results backup
+* initial expansion will be 3x12Tb drives in a RAID5 in the storage chassis
+  * need to confirm with Charles that we can expand RAID5 in place by installing additional 12Tb drives
+* plan to automate storage of production results from cedar and west.cloud (and maybe orcinus) into ComputeCanada nearline storage
+Helped Susan set up sshfs mount of cedar hindcast results on sable so that she can test performance in analysis notebooks; for simple contourf plots the performance is marginally slower than when using the files from /results, but not enough slower that downloading the files from cedar is worth it.
+Started dev of tag_release script.
+(SalishSea)
+
+
+Sun 16-Sep-2018
+^^^^^^^^^^^^^^^
+
+Continued dev of tag_release script.
+(SalishSea)
 
 
 
