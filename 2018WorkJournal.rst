@@ -4047,6 +4047,27 @@ Continued dev of tag_release script.
 (SalishSea)
 
 
+Week 38
+-------
+
+Mon 17-Sep-2018
+^^^^^^^^^^^^^^^
+
+Pushed initial version of tag_release script.
+Finished adding ubcSSfDepthAveragedCurrents1hV17-02 dataset to ERDDAP based on CHS_currents.nc files in rolling-forecasts/nemo/:
+* changed time variable to be called time_counter to keep update_forecast_datasets worker happy, and changed datasets.xml to match
+* added ubcSSfDepthAvgdCurrents1hV17-02 to list of ERDDAP datasets that get pinged after NEMO forecast runs
+* changed automation to run update_forecast_datasets after make_CHS_currents_file
+Changed from yapf to black for formatting SalishSeaNowcast:
+* black forces attrs>=17.4.0 (18.2.0 got installed) and that breaks 85 unit tests that have a spec on the nemo_nowcast.NowcastWorker patch; the problem can be resolved by adding m_worker().cli = Mock(name='cli') to the TestMain methods.
+* initial run of black took 19s; no additional unit test failures; subsequent run of black that didn't have to do any conversion too 0.3s
+* do-nothing run of yapf took 23s
+Fixed unit tests that were failing as a result of update of attrs from 16.3.0 to 18.2.0.
+Started deleting borg backups of /results to make room for new archives that exclude /results/hindcast.
+Added handling of duplicate tag error to tag_release script.
+(SalishSea)
+
+
 
 * write launch_remote_worker worker!!!
 
