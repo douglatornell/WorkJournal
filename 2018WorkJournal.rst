@@ -3864,8 +3864,10 @@ See project work journal.
 (GOMSS)
 
 Sent emails to Susan re: tests for her to try re: new Python & SciPy modules on cedar; added notes to whiteboards.
-Continued work on splitting ww3 runs into nowcast+forecast, but got very confused about restart dates in ww3_shel file for different run types.
 (SalishSea)
+
+Continued work on splitting ww3 runs into nowcast+forecast, but got very confused about restart dates in ww3_shel file for different run types.
+(SoG waves)
 
 See project journal.
 (SalishSeaCast-FVCOM)
@@ -4067,6 +4069,27 @@ Started deleting borg backups of /results to make room for new archives that exc
 Added handling of duplicate tag error to tag_release script.
 (SalishSea)
 
+
+Tue 18-Sep-2018
+^^^^^^^^^^^^^^^
+
+update_forecast_datasets forecast2 failed, maybe due to time instead of time_counter variable in older forecast/forecast2 files?
+SalishSeaCast logs did not roll.
+Continued deleting borg backups of /results to make room for new archives that exclude /results/hindcast.
+Added coloured log messages and more verbose logging levels (especially success) to tag_release script.
+Figured out that near-surface velocity fields slab datasets were not being updated on ERDDAP due to typos in dataset ids in nowcast.yaml; fixed.
+Investigated recent get_onc_ferry failures; ferry out of service part of 15sep, all of 16sep, and a bit of 17sep; 17sep data has time mismatch issue; email to Rich and Katia.
+Tested tag_release script on cedar:
+* pip install --user coloredlogs verboselogs
+* yaml and hglib are already install thanks to NEMO-Cmd/SalishSeaCmd
+* hg clone SalishSeaNowcast; no need to pip install
+* have to run from SalishSeaNowcast/release_mgmt/, but that will make Susan happy...
+(SalishSea)
+
+SalishSeaCast mtg; see whiteboard.
+
+Resumed work on changing wwatch3 from forecast to nowcast+forecast.
+(SoG Waves)
 
 
 * write launch_remote_worker worker!!!
