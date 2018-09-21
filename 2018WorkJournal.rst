@@ -4092,6 +4092,118 @@ Resumed work on changing wwatch3 from forecast to nowcast+forecast.
 (SoG Waves)
 
 
+Wed 19-Sep-2018
+^^^^^^^^^^^^^^^
+
+Declined Roger's request to co-instruct EOSC-213 with him.
+
+Worked on debugging update_forecast_datasets forecast2 failure:
+* stopped and restarted circusd
+* found ncks errors for SlabU, SlabV, and CHS_current and sent them to Susan
+* successfully ran update_forecast_datasets foreecast2 manually
+* manually ran clear_checklist
+Clearance of borg backups of /results finished; 14T free:
+* manually ran daily-opp-backup.sh 375G
+* manually ran daily-data-backup.sh 1.25T
+* manually ran daily-results-backup.sh
+Updated SalishSeaNowcast dev env on kudu:
+* conda uninstall attrs=16.3.0
+* conda install coloredlogs verboselogs
+* pip install -U python-hglib
+* pip install black
+* pip uninstall yapf
+* updated pre-commit-hook.sh to use black instead of yapf
+(SalishSea)
+
+Updated generation of /opp/wwatch3/nowcast/ddmmmyy/ directories from forecast/ dirs.
+(SoG waves)
+
+See project work journal.
+(Resilient-C)
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Updated Mercurial on kudu to 4.7.1+10-41ac8ea1bdd7:
+* conda activate hg-dev
+* cd hg-stable
+* hg pull -u
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
+
+Thu 20-Sep-2018
+^^^^^^^^^^^^^^^
+
+west.cloud/arbutus upgrade webinar:
+Venkat Mahadevan, UBC ARC
+* 3 clouds: west.cloud -> arbutus, east.cloud, graham.cloud
+* wiki/Cloug_resources
+* arbutus present:
+  * 7640 cores on 290 nodes
+  * 500 TB ceph storage
+  * 78 RAM
+  * 10 GigE network to nodes and storage
+  * 320 projects
+* hardware upgrade:
+  * 9048 cores on 334 nodes, 56 core machines
+  * 5.3 PB storage
+  * 91 TB RAM
+  * hyperthreading enabled
+  * C flavour == 1:1 vCPU to physical CPU, otherwise 10:1
+  * C nodes 256 GB RAM and SAS drives
+* software upgrade:
+  * OpenStack Queens
+  * much improved web portal & instance creation wizard (horizon)
+  * NUMA aware compute flavours (C), schedules VMs for optimal memory access
+  * hypervisor & scheduler improvements
+  * attach volumes to multiple instances (instead of NFS)
+  * volume stability improved
+  * continuous improvement facilitated via dev env
+  * better monitoring and alerting
+  * new availability zones:
+    * compute (C flavours) - assumed to be ephemeral
+    * persistent (P flavours)
+    * nova (general)
+* migration details:
+  * arbutus.cloud.computecanada.ca
+  * supports firefox & chrome, not safari
+  * migration steps:
+    * migration to avoid downtime and data safety
+    * period of simultaneous arbutus and west.cloud
+    * copy images from west.cloud to arbutus
+    * can use ansible
+    * migrate data
+    * update DNS
+    * decommission old instances & delete old volumes
+    * migration wiki
+* RAC tenants will be pre-created
+* Keystone identity API v3
+* migration:
+  * download image via glance from old cloud to local storage
+  * upload image via glance to new cloud from local storage
+  * can be done via web dashboard GUI or API scripts
+* timeline:
+  * arbutus available starting in early Oct18
+  * tenants will be notified as the system is ready for them to start migration
+  * west.cloud logins shutdown Jan19
+  * west.cloud storage deletion Feb19
+* wiki/Arbutus_West_Cloud_upgrade
+* support requests cloud@computecanada.ca
+
+PMEL Salish Sea model webcast
+Khangaonkar, et al (2017) Ocean Modelling
+Khangaonkar, et al (2018) JGR Oceans
+(SalishSea)
+
+Sent email to team about ERDDAP datasets.
+(MIDOSS)
+
+
+
 * write launch_remote_worker worker!!!
 
 
