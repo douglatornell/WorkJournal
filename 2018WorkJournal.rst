@@ -3804,6 +3804,7 @@ Worked on building MOHID on salish:
 * wget http://download.osgeo.org/proj/proj-4.9.3.tar.gz
 * tar -xf proj-4.9.3.tar.gz
 * cd proj-4.9.3
+* proj='proj-4.9.3'
 * ./configure --prefix=$DIRINSTALL/$proj CC=$CC FC=$FC
 * make install
 * ln -sf $DIRINSTALL/$proj/lib/libproj.so $DIRINSTALL/$proj/lib/libproj4.so
@@ -3811,6 +3812,7 @@ Worked on building MOHID on salish:
 * cd tmp_install_dir
 * git clone https://github.com/mhagdorn/proj4-fortran.git
 * cd proj4-fortran/
+* proj4fortran='proj4-fortran'
 * ./bootstrap
 * ./configure --with-proj4=$DIRINSTALL/$proj --prefix=$DIRINSTALL/$proj4fortran CC=$CC FC=$FC
 * PROJ4FORTRAN=$DIRINSTALL/$proj4fortran
@@ -4194,12 +4196,254 @@ Venkat Mahadevan, UBC ARC
 * wiki/Arbutus_West_Cloud_upgrade
 * support requests cloud@computecanada.ca
 
-PMEL Salish Sea model webcast
-Khangaonkar, et al (2017) Ocean Modelling
-Khangaonkar, et al (2018) JGR Oceans
+PMEL Salish Sea model webcast:
+*  Khangaonkar, et al (2017) Ocean Modelling
+*  Khangaonkar, et al (2018) JGR Oceans
 (SalishSea)
 
 Sent email to team about ERDDAP datasets.
+(MIDOSS)
+
+
+Fri 21-Sep-2018
+^^^^^^^^^^^^^^^
+
+MIDOSS team mtg.
+Starred, watched, and forked MOHID on GitHub.
+Continued trying to build MOHID on salish:
+* edit compile_mohid.sh:
+  * ZLIBINC=/usr/include
+  * ZLIBLIB=/lib/x86_64-linux-gnu
+  * Z_LIB="-lz -lm"
+  * HDF5INC=/usr/include
+  * HDF5LIB=/lib/x86_64-linux-gnu
+  * NETCDFINC=/usr/include
+  * NETCDFLIB=/usr/lib
+  * LIBS="$LIBS -I${ZLIBINC} -L${ZLIBLIB} $Z_LIB"
+  * USE_IEEE_ARITHMETIC=false
+That allows mb1 and mb2 to build successfully.
+* edit mohid-in-linux/src/MohidWater/src/ModuleConsolidation.F90:
+  * comment output private statement on line 250
+That results in mw link failure:
+  * /data/dlatorne/MIDOSS/mohid_deps/lib/libfproj4.a(fort-proj.o): In function `prjf_strerrno_':
+  * /data/dlatorne/MIDOSS/tmp_install_dir/proj4-fortran/fort-proj.c:27: undefined reference to `pj_strerrno'
+  * /data/dlatorne/MIDOSS/mohid_deps/lib/libfproj4.a(fort-proj.o): In function `cfort_pj_init':
+  * /data/dlatorne/MIDOSS/tmp_install_dir/proj4-fortran/fort-proj.c:43: undefined reference to `pj_init'
+  * /data/dlatorne/MIDOSS/tmp_install_dir/proj4-fortran/fort-proj.c:48: undefined reference to `pj_errno'
+  * /data/dlatorne/MIDOSS/mohid_deps/lib/libfproj4.a(fort-proj.o): In function `cfort_pj_free':
+  * /data/dlatorne/MIDOSS/tmp_install_dir/proj4-fortran/fort-proj.c:57: undefined reference to `pj_free'
+  * /data/dlatorne/MIDOSS/tmp_install_dir/proj4-fortran/fort-proj.c:57: undefined reference to `pj_free'
+  * /data/dlatorne/MIDOSS/mohid_deps/lib/libfproj4.a(fort-proj.o): In function `cfort_pj_fwd':
+  * /data/dlatorne/MIDOSS/tmp_install_dir/proj4-fortran/fort-proj.c:72: undefined reference to `pj_fwd'
+  * /data/dlatorne/MIDOSS/tmp_install_dir/proj4-fortran/fort-proj.c:80: undefined reference to `pj_errno'
+  * /data/dlatorne/MIDOSS/mohid_deps/lib/libfproj4.a(fort-proj.o): In function `cfort_pj_inv':
+  * /data/dlatorne/MIDOSS/tmp_install_dir/proj4-fortran/fort-proj.c:94: undefined reference to `pj_inv'
+  * /data/dlatorne/MIDOSS/tmp_install_dir/proj4-fortran/fort-proj.c:102: undefined reference to `pj_errno'
+  * collect2: error: ld returned 1 exit status
+Tried:
+* ./configure --with-proj4=$DIRINSTALL/$proj --prefix=$DIRINSTALL/$proj4fortran CC=$CC FC=$FC CFLAGS="-g -O2 -Df2cFortran"
+but still no joy.
+Tried to test MohidWater on cedar:
+  * mohid-in-linux/test/mohidwater/25m_deep/exe/MohidWater.exe
+  * symbol lookup error: test/mohidwater/25m_deep/exe/MohidWater.exe: undefined symbol: __libm_exp_table_128
+  * unloaded mpi versions of netcdf, netcdf-fortran, and hdf5 modules and replaced them with non-mpi versions; also unloaded python and perl modules; all because Google suggested that undefined symbol could arise due to module conflicts; no difference...
+(MIDOSS)
+
+Discussed ONC API interface for ADCP observations w/ Ben; pushed my uncommitted version of my exploration notebook, and send link to Ben.
+Helped Susan setup SalishSeaNowcast tag_release script on cedar.
+Manually prototyped flow for SalishSeaNowcast deploy_release script on cedar:
+* cd NEMO-3.6-code
+* hg pull
+* hg update --rev PROD-hindcast-201806-v3
+* cd SS-run-sets
+* hg pull
+* hg update --rev PROD-hindcast-201806-v3
+* cd rivers-climatology
+* hg pull
+* hg update --rev PROD-hindcast-201806-v3
+* cd grid
+* hg pull
+* hg update --rev PROD-hindcast-201806-v3
+* cd tides
+* hg pull
+* hg update --rev PROD-hindcast-201806-v3
+* cd tracers
+* hg pull
+* hg update --rev PROD-hindcast-201806-v3
+* cd XIOS-ARCH
+* hg pull
+* hg update --rev PROD-hindcast-201806-v3
+* cd XIOS-2
+* hg pull
+* hg update --rev PROD-hindcast-201806-v3
+* cd NEMO-3.6-code/NEMOGCM/CONFIG/
+* ./makenemo -n SalishSeaCast -m X64_CEDAR clean
+* XIOS_HOME=/home/dlatorne/project/SalishSea/hindcast-sys/XIOS-2 ./makenemo -n SalishSeaCast -m X64_CEDAR -j 4
+After Susan had to edit and re-tag SS-run-sets, I landed in a merge conflict on cedar when I tried to update to new tag rev, so flow should probably be:
+* hg update --rev tip
+* hg pull
+* hg update --rev tag
+(SalishSea)
+
+
+Sat 22-Sep-2018
+^^^^^^^^^^^^^^^
+
+nowcast-agrif run failed due to a daemon launch error on pod28b16:
+* moved borked results aside on orcinus and skookum
+* re-ran run_NEMO_agrif manually to restart automation
+(SalishSea)
+
+Started researching automatic deployment on push via Bitbucket pipelines.
+(salishsea-site)
+
+
+Sun 23-Sep-2018
+^^^^^^^^^^^^^^^
+
+Set up automatic deployment on push via Bitbucket pipelines.
+(salishsea-site)
+
+
+Week 39
+-------
+
+Mon 24-Sep-2018
+^^^^^^^^^^^^^^^
+
+Delete Jie's crontab that Susan had noticed was still trying to run ferry data download jobs.
+Investigated make_turbidity_file worker errors; buoy web page has not been updated since 2018-09-20 13:10.
+Started watch_NEMO_hindcast for 11jun15.
+Ran run_NEMO_hindcast for 21jun15.
+Add blurb to ERDDAP front page about coming transition from v17-02 to v18-06.
+(SalishSea)
+
+Continued trying to build MOHID on salish:
+* cleaned up /data/dlatorne/MIDOSS/mohid_deps/
+* proj-4.9.3:
+  * make clean
+  * proj='proj-4.9.3'
+  * ./configure --prefix=$DIRINSTALL/$proj CC=$CC FC=$FC
+  * make
+  * make install
+  * ln -sf $DIRINSTALL/$proj/lib/libproj.so $DIRINSTALL/$proj/lib/libproj4.so
+  * PROJ4=$DIRINSTALL/$proj
+  * export LD_LIBRARY_PATH=$PROJ4/lib
+  * export PATH=$PATH:$PROJ4/bin:$PROJ4/lib:$PROJ4/include
+  * export PROJ_PREFIX=$PROJ4/lib
+* proj4-fortran make clean doesn't delete proj4.mod, and maybe not libfproj4.a, so did manual deletion of everything that git status said was untracked
+* did proj4-fortran clean build with:
+  * ./configure --with-proj4=$DIRINSTALL/$proj --prefix=$DIRINSTALL/$proj4fortran CC=$CC FC=$FC CFLAGS="-g -O2 -Df2cFortran"
+  * make
+  * make check
+  * ./test_proj worked
+  * PROJ4FORTRAN=$DIRINSTALL/$proj4fortran
+  * export PATH=$PATH:$PROJ4FORTRAN/lib:$PROJ4FORTRAN/include
+  * export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PROJ4FORTRAN/lib
+  * make install
+* ./compile_modid.sh -c
+* ./compile_modid.sh -mb1 -mb2 -mw
+Test MohidWater on salish:
+  * mohid-in-linux/test/mohidwater/25m_deep/exe/MohidWater.exe
+
+Add email about ERDDAP datasets to Google Drive.
+(MIDOSS)
+
+Phys Ocgy seminar on Mode 2 internal waves by David Deepwell (Waterloo, no UofA)
+
+
+Tue 25-Sep-2018
+^^^^^^^^^^^^^^^
+
+Reviewed conduino docs and paper for Karina/Susan.
+Canyons/Arctic mtg; see whiteboard.
+(Canyons/Arctic)
+
+Reviewed matplotlib 3.0 changes.
+Salish Sea mtg; see whiteboard.
+(SalishSea)
+
+Continued trying to build MOHID on salish:
+* export CC=gcc
+* export FC=gfortran
+* export DIRINSTALL=/data/dlatorne/MIDOSS/mohid_deps
+* clean build of proj-4.9.3:
+  * proj='proj-4.9.3'
+  * make clean
+  * ./configure --prefix=$DIRINSTALL/$proj CC=$CC FC=$FC
+  * make
+  * make check
+  * make install
+  * ln -sf $DIRINSTALL/$proj/lib/libproj.so $DIRINSTALL/$proj/lib/libproj4.so
+  * PROJ4=$DIRINSTALL/$proj
+  * export LD_LIBRARY_PATH=$PROJ4/lib
+  * export PATH=$PATH:$PROJ4/bin:$PROJ4/lib:$PROJ4/include
+  * export PROJ_PREFIX=$PROJ4/lib
+* clean build of proj4-fortran:
+  * proj4fortran='proj4-fortran'
+  * ./bootstrap
+  * ./configure --with-proj4=$DIRINSTALL/$proj --prefix=$DIRINSTALL/$proj4fortran CC=$CC FC=$FC CFLAGS="-g -O2 -Df2cFortran"
+  * PROJ4FORTRAN=$DIRINSTALL/$proj4fortran
+  * export PATH=$PATH:$PROJ4FORTRAN/lib:$PROJ4FORTRAN/include
+  * export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PROJ4FORTRAN/lib
+  * make
+  * make check
+  * make install
+* clean build of mohid:
+  * ./compile_mohid --clean
+  * ./compile_mohid -mb1 -mb2 -mw
+  * same mw link failure as 21sep
+* clean build of mohid w/o proj4 and with debugging:
+  * edit compile_mohid:
+    * IS_DEBUG=true
+    * USE_PROJ4=false
+  * ./compile_mohid --clean
+  * ./compile_mohid -mb1 -mb2 -mw
+  * build succeeded!!! but with a major crap-load of warnings
+  * cd test/mohidwater/25m_deep/exe
+  * ./MohidWater.exe
+    * failed quickly:
+      Program received signal SIGSEGV: Segmentation fault - invalid memory reference.
+
+      Backtrace for this error:
+      #0  0x7F1A43070777
+      #1  0x7F1A43070D7E
+      #2  0x7F1A42599CAF
+      #3  0xC6B87C in __modulefillmatrix_MOD_killfillmatrix at ModuleFillMatrix.F90:11773
+      #4  0x673F54 in constructrugosity at ModuleInterfaceSedimentWater.F90:1794
+      #5  0x67A9AE in __moduleinterfacesedimentwater_MOD_startinterfacesedimentwater at ModuleInterfaceSedimentWater.F90:913
+      #6  0x7C9471 in __modulemodel_MOD_constructmodel at ModuleModel.F90:982
+      #7  0xD78349 in constructmohidwater at Main.F90:293
+      #8  0x4106C8 in mohidwater at Main.F90:227
+      #9  0x7F1A42584F44
+      Segmentation fault (core dumped)
+Switched to  try building mohid on cedar:
+* clean build of mohid w/o proj4 and with debugging:
+  * edit compile_mohid:
+    * IS_DEBUG=true
+    * USE_PROJ4=false
+  * ./compile_mohid --clean
+  * ./compile_mohid -mb1 -mb2 -mw
+  * build succeeded!!! with absolutely no warnings
+  * cd test/mohidwater/25m_deep/exe
+  * ./MohidWater.exe
+    * worked!!
+    * output in:
+      * Error_and_Messages_1.log
+      * ../res/Outwatch_1.txt
+      * ../res/Hydrodynamic_1.hdf5
+* clean build of mohid w/ proj4 and with debugging:
+  * module load proj4-fortran/1.0
+  * edit compile_mohid:
+    * IS_DEBUG=true
+    * USE_PROJ4=true
+  * ./compile_mohid --clean
+  * ./compile_mohid -mb1 -mb2 -mw
+  * cd test/mohidwater/25m_deep/exe
+  * ./MohidWater.exe
+    * worked!!
+* I'm really puzzled about how linker is finding netCDF, hdf5, proj4 etc. libraries because the paths in compile_mohid are bogus
+* build w/ USER_MPI failed
 (MIDOSS)
 
 
