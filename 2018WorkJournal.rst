@@ -4447,6 +4447,22 @@ Switched to  try building mohid on cedar:
 (MIDOSS)
 
 
+Wed 26-Sep-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Started trying to debug NEMO_Nowcast.cli.CommandLineInterface unhashable object issue that arises w/ attrs-18.2.0.
+(SalishSea)
+
+Helped Rachael w/ bash setup on tyee.
+(MIDOSS)
+
+
 
 * write launch_remote_worker worker!!!
 
