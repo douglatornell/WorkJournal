@@ -4463,6 +4463,94 @@ Helped Rachael w/ bash setup on tyee.
 (MIDOSS)
 
 
+Thu 27-Sep-2018
+^^^^^^^^^^^^^^^
+
+Power outage in EOS Main at ~09:00 disrupted network access, so I worked at home.
+
+Researched mohid Convert2netcdf tool; discovered that it was "under development" in 2009 and nohting since, apparently.
+Continued scoping mohid on cedar:
+* reverted compile_mohid to repo head
+* module load proj4-fortran
+* clean build of mb1, mb2 & mw and 25m_deep test worked, so LIBRARY_PATH envvar must override paths in compile_mohid
+* attempt to build mohid_tools fails due to missing ModuleNOAA_ShoreLine.F90 file
+Added content to MIDOSS docs index page.
+Wrote docs section about running on cedar.
+Experimented with running on cedar in interactive allocation; 1 process is optimal for tank_25m test case, and with alternative files layout.
+(MIDOSS)
+
+salishsea-site went down late in the evening.
+(SalishSea)
+
+
+Fri 28-Sep-2018
+^^^^^^^^^^^^^^^
+
+Killed and re-launched salishsea-site circus to get site operational again.
+nowcast-agrif/27sep18 spent all night on the queue on orcinus, then failed because turbidity file was missing; recovery at 10:45:
+* upload_forcing turbidity 2018-09-27 --debug
+* make_forcing_links nowcast-agrif 2018-09-27
+* email to Roman
+Created skookum:/opp/observations/AISDATA/ and rsync-ed contents of /home/mdunphy/AISDATA/ into it.
+Started work on notebook exploring creating netCDF files from AIS data to feed ERDDAP dataset.
+(SalishSea)
+
+Email to team about docs site and MOHID on cedar.
+(MIDOSS)
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Sat 29-Sep-2018
+^^^^^^^^^^^^^^^
+
+download_weather 12 froze in hour 41; killed it and downloads finished, but message exchange with manager failed; manually ran:
+* get_NeahBay_ssh nowcast
+* download_live_ocean
+* grib_to_netcdf nowcast+
+to restart automation at ~14:00
+That caused nowcast-agrif run to be queued, and it didn't start until 04:25 on Sunday.
+Debugged NEMO_Nowcast.cli.CommandLineInterface unhashable object issue that arises w/ attrs-18.2.0; problem is cli._arrow_date() method: a bound method is unhashable; changed it to a function defined within cli.add_date_option() or a static method of CommandLineInterface.
+(SalishSea)
+
+
+Sun 30-Sep-2018
+^^^^^^^^^^^^^^^
+
+Watched EuroPycon 2018 talk about VS Code & Python Extension: https://www.youtube.com/watch?v=6YLMWU-5H9o then send email about it to MOAD group.
+
+nowcast-agrif/29sep18 failed when early morning make_forcing_links pulled the turbidity file out from under it; recover at ~10:20:
+* upload_forcing turbidity 2018-09-29 --debug
+* make_forcing_links nowcast-agrif 2018-09-29
+* clobbered by nowcast turbidity file upload/linking
+* tried make_forcing_links again at ~11:05
+Enabled watch_NEMO_hindcast worker to cancel stuck jobs.
+(SalishSea)
+
+Monitored ONC dive to deploy new SCVIP node.
+
+
+October
+=======
+
+Week 40
+-------
+
+Mon 1-Oct-2018
+^^^^^^^^^^^^^^
+
+Investigated stalling watch_NEMO_hindcast; looks like cat ocean.output is the problem.
+Reverted watch_NEMO_hindcast in production; started a new one for 01jun176, queued 11jun16.
+(SalishSea)
+
+ONC replaced SEVIP node.
+
+
+
 
 * write launch_remote_worker worker!!!
 
