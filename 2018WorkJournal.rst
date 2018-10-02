@@ -4545,9 +4545,29 @@ Mon 1-Oct-2018
 
 Investigated stalling watch_NEMO_hindcast; looks like cat ocean.output is the problem.
 Reverted watch_NEMO_hindcast in production; started a new one for 01jun176, queued 11jun16.
+Continued work on watch_NEMO_hindcast; change cat ocean.output to grep ocean.output for better performance over ssh.
+Flipped mdunphy cron job from salish to skookum to download VFPA AIS data to skookum:/opp/observations/AISDATA/ instead of /home/mdunphy/AISDATA/ into it (after final rsync from the latter location).
+Found email thread with Neil Swart from 11oct17 in which he provided me with CMC cstintrp package code that includes cstrpn2cdf; now I just have to remember where I downloaded that code to...
+hindcast/21jun16 started but didn't write any files, and ls freezes.
 (SalishSea)
 
+uptimerobot reported site down at ~10:00; stopped and restarted circus daemon at 11:45; need to add logging to figure out how/why app is locking up now more than it used to.
+(salishsea-site)
+
 ONC replaced SEVIP node.
+
+Phys Ocgy seminar by Melanie Chinoan about internal wave energy in the Arctic.
+
+Resumed work on changing wwatch3 from forecast to nowcast+forecast:
+* ran wwatch3-nowcast/01oct18 successfully
+* ran wwatch3-forecast/01oct18 successfully
+* deployed changed to west.cloud and skookum
+* restart manager on skookum
+(SoG Waves)
+
+Tried building mohid on salish with -finit-local-zero; still segfaults.
+Helped Rachael understand sys.path via email.
+(MIDOSS)
 
 
 
