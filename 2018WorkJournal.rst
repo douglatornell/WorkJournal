@@ -4547,8 +4547,8 @@ Investigated stalling watch_NEMO_hindcast; looks like cat ocean.output is the pr
 Reverted watch_NEMO_hindcast in production; started a new one for 01jun176, queued 11jun16.
 Continued work on watch_NEMO_hindcast; change cat ocean.output to grep ocean.output for better performance over ssh.
 Flipped mdunphy cron job from salish to skookum to download VFPA AIS data to skookum:/opp/observations/AISDATA/ instead of /home/mdunphy/AISDATA/ into it (after final rsync from the latter location).
-Found email thread with Neil Swart from 11oct17 in which he provided me with CMC cstintrp package code that includes cstrpn2cdf; now I just have to remember where I downloaded that code to...
-hindcast/21jun16 started but didn't write any files, and ls freezes.
+Found email thread with Neil Swart from 11oct17 in which he provided me with CMC cstintrp package code that includes cstrpn2cdf; now I just have to remember where I downloaded that code to; re-downloaded code to /data/dlatorne/MEOPAR/cstintrp_3.0.4/ on salish and warehouse/MEOPAR/cstintrp_3.0.4/ on kudu and niko.
+hindcast/21jun16 started but didn't write any files, and ls freezes; decar recovered later in the evening.
 (SalishSea)
 
 uptimerobot reported site down at ~10:00; stopped and restarted circus daemon at 11:45; need to add logging to figure out how/why app is locking up now more than it used to.
@@ -4569,6 +4569,39 @@ Tried building mohid on salish with -finit-local-zero; still segfaults.
 Helped Rachael understand sys.path via email.
 (MIDOSS)
 
+
+Tue 2-Oct-2018
+^^^^^^^^^^^^^^
+
+Killed wwatch3 processes left over from yesterday's testing that caused NEMO forecast2 to take ~4h.
+SalishSeaCast mtg; see whiteboard.
+01oct18 comparison figures show amazing agreement between model and observations at ONC central and east nodes.
+Started work on GEMLAM RPN to NEMO netCDF input file conversion:
+* cstrpn2cdf executable in pkg from CMC failed w/ undefined symbol netcdf_mp_nf90_create_
+* built cstrpn2cdf on salish:
+  * cd /data/dlatorne/MEOPAR/cstintrp_3.0.4/tools/src/csttools
+  * gfortran -fno-range-check -I/usr/include -c std.f90 cdf.f90 cdf_std.f90 cstrpn2cdf.F90
+  * linking fails; looks like we need librmn
+Fixed next_workers bug re: running wwatch3 as nowcast+forecast.
+Adapted update_forecast_datasets re: running wwatch3 as nowcast+forecast.
+Updated nowcast-fig-dev env on niko to matplotlib-3.0.0 and it brought a lot of stuff with it; also updated xarray, and jupyterlab; prep for SalishSeaCast figures breakage assessment:
+* nowcast/figures/comparison/compare_venus_ctd.py
+* nowcast/figures/comparison/salinity_ferry_track.py
+* nowcast/figures/comparison/sandheads_winds.py
+* nowcast/figures/fvcom/second_narrows_current.py
+* nowcast/figures/fvcom/tide_stn_water_level.py
+* nowcast/figures/publish/compare_tide_prediction_max_ssh.py
+* nowcast/figures/publish/pt_atkinson_tide.py
+* nowcast/figures/publish/storm_surge_alerts.py
+* nowcast/figures/publish/storm_surge_alerts_thumbnail.py
+* nowcast/figures/research/baynes_sound_agrif.py
+* nowcast/figures/research/time_series_plots.py
+* nowcast/figures/research/tracer_thalweg_and_surface_hourly.py
+* nowcast/figures/research/tracer_thalweg_and_surface.py
+* nowcast/figures/research/velocity_section_and_surface.py
+* nowcast/figures/wwatch3/wave_height_period.py
+
+(SalishSea)
 
 
 
