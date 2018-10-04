@@ -4600,8 +4600,49 @@ Updated nowcast-fig-dev env on niko to matplotlib-3.0.0 and it brought a lot of 
 * nowcast/figures/research/tracer_thalweg_and_surface.py
 * nowcast/figures/research/velocity_section_and_surface.py
 * nowcast/figures/wwatch3/wave_height_period.py
-
 (SalishSea)
+
+
+Wed 3-Oct-2018
+^^^^^^^^^^^^^^
+
+wwatch3-forecast2/03oct18 run succeeded, and logs rolled, but rolling forecast update and wave figures failed.
+Deployed watch_NEMO_hindcast that detects and cancels stuck runs; detection worked well later in the day, but had to fix a bug in job cancellation command.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+Updated Mercurial on kudu to 4.7.2+2-3e61146d7b24:
+* conda activate hg-dev
+* cd hg-stable
+* hg pull -u
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
+Updated 43ravens biz journal.
+
+Spent the afternoon feeling really unmotivated, and worrying about onset of back pain episode.
+
+
+Thu 4-Oct-2018
+^^^^^^^^^^^^^^
+
+Woke with very stiff, sore back.
+
+See project work journal.
+(GOMSS)
+
+Deployed watch_NEMO_hindcast that detect stuck runs via exactly-one E R R O R signature and re-queues them.
+(SalishSea)
+
+
+
+For Rachael:
+
+remote has heads on branch 'default' that are not known locally: f65d39f36468
+abort: push creates new remote head 940c09211b41!
+(pull and merge or see 'hg help push' for details about pushing new heads)
 
 
 
