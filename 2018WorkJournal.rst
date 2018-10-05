@@ -4634,7 +4634,21 @@ See project work journal.
 (GOMSS)
 
 Deployed watch_NEMO_hindcast that detect stuck runs via exactly-one E R R O R signature and re-queues them.
+Worked on 2nd Narrows AIS HADCP feed to ERDDAP dataset notebook, and found jupyter lab black extension along the way.
 (SalishSea)
+
+Updated Mercurial on niko to 4.7.2+2-3e61146d7b24:
+* conda activate hg-dev
+* cd hg-stable
+* hg pull -u
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
+EOAS Colloquium: Valentina - Modeling Glacier Contributions to Streamflow and Sea Level Rise
+
+Add handling of missing stream velocity data from Fraser River water quality buoy.
+Set aside some uncommitted code in production that preventing warning level log messages when relative humidity
+(ECget)
 
 
 
