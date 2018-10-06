@@ -4651,6 +4651,21 @@ Set aside some uncommitted code in production that preventing warning level log 
 (ECget)
 
 
+Fri 5-Oct-2018
+^^^^^^^^^^^^^^
+
+hindcast/21sep16 run got stuck and watch_NEMO_hindcast successfully cancelled and re-queued it.
+download_weather 06 failed; re-ran to restart automation at ~07:50.
+Changed wave buoy obs from line to points in wwatch3 figures.
+Change VENUS node comparison figures to plot obs behind models and added alpha transparency to model lines.
+(SalishSea)
+
+Sent email to Susan, Elise, Ben, Birgit & Tereza about using interactive sessions on cedar for compiling NEMO, running salishsea run, and executing test runs. Tried salishsea prepare in an interactive session and it has the same behaviour as on the login node: 7+ minutes on first execution, 17 seconds subsequently, so my file system caching hypothesis holds :-(
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
 
 For Rachael:
 
