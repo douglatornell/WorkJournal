@@ -4584,22 +4584,7 @@ Started work on GEMLAM RPN to NEMO netCDF input file conversion:
   * linking fails; looks like we need librmn
 Fixed next_workers bug re: running wwatch3 as nowcast+forecast.
 Adapted update_forecast_datasets re: running wwatch3 as nowcast+forecast.
-Updated nowcast-fig-dev env on niko to matplotlib-3.0.0 and it brought a lot of stuff with it; also updated xarray, and jupyterlab; prep for SalishSeaCast figures breakage assessment:
-* nowcast/figures/comparison/compare_venus_ctd.py
-* nowcast/figures/comparison/salinity_ferry_track.py
-* nowcast/figures/comparison/sandheads_winds.py
-* nowcast/figures/fvcom/second_narrows_current.py
-* nowcast/figures/fvcom/tide_stn_water_level.py
-* nowcast/figures/publish/compare_tide_prediction_max_ssh.py
-* nowcast/figures/publish/pt_atkinson_tide.py
-* nowcast/figures/publish/storm_surge_alerts.py
-* nowcast/figures/publish/storm_surge_alerts_thumbnail.py
-* nowcast/figures/research/baynes_sound_agrif.py
-* nowcast/figures/research/time_series_plots.py
-* nowcast/figures/research/tracer_thalweg_and_surface_hourly.py
-* nowcast/figures/research/tracer_thalweg_and_surface.py
-* nowcast/figures/research/velocity_section_and_surface.py
-* nowcast/figures/wwatch3/wave_height_period.py
+Updated nowcast-fig-dev env on niko to matplotlib-3.0.0 and it brought a lot of stuff with it; also updated xarray, and jupyterlab; prep for SalishSeaCast figures breakage assessment.
 (SalishSea)
 
 
@@ -4664,6 +4649,77 @@ Sent email to Susan, Elise, Ben, Birgit & Tereza about using interactive session
 
 See project journal.
 (SalishSeaCast-FVCOM)
+
+
+Sat 6-Oct-2018
+^^^^^^^^^^^^^^
+
+Vancouver to Parksville
+
+Started refactoring watch_NEMO_hindcast to move interaction with cedar to  _HindcastJob class so that watcher can re-queue dependent jobs, and change the cedar job that it is watching when it recovers from a stuck job error condition.
+(SalishSea)
+
+
+Sun 7-Oct-2018
+^^^^^^^^^^^^^^
+
+Continued refactoring watch_NEMO_hindcast:
+* finished _HindcastJob class
+* changed unit tests to use a YAML config fixture that provided nemo_nowcast.Config instances instead of dicts
+* started adding unit tests for _HindcastJob
+* added ability to re-queue dependent runs after a stuck run failure
+Updated attrs form 16.3.0 to 18.2.0 on skookum so that refactored watch_NEMO_hindcast would work.
+(SalishSea)
+
+
+Week 41
+-------
+
+Mon 8-Oct-2018
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Thanksgiving
+
+Last night's attrs update on skookum caused multiple early morning worker failures because I didn't update NEMO_Nowcast at the same time; fixed, and restarted forecast2 automation at ~09:40.
+Helped Susan w/ nowcast-fig-dev package version issues.
+Continued refactoring watch_NEMO_hindcast:
+* continued adding unit tests for _HindcastJob
+* fixed bug in re-queuing dependent runs after a stuck run failure
+(SalishSea)
+
+Parksville to Vancouver
+
+
+Tue 9-Oct-2018
+^^^^^^^^^^^^^^
+
+MOAD group mtg /w Youyu Lu & Hao Wei (Tainjin Univ) visiting.
+
+Continued refactoring watch_NEMO_hindcast:
+* added monitoring of re-queued stuck run until it starts running so that watcher switches to monitoring new run
+* continued adding unit tests for _HindcastJob
+Tested pytest-xdist on SalishSeaNowcast; tests run faster, but setup takes longer than to run 1-core tests.
+Figured out the package version pins necessary to create a new nowcast-fig-dev environment that is both compatible with production, and with as many recent package updates as possible; emailed diff to Susan.
+Built nowcast-fig-dev-mpl-3 env for migration to matplotlib-3.0.0; figures that need to be assessed/ported:
+* nowcast/figures/comparison/compare_venus_ctd.py
+* nowcast/figures/comparison/salinity_ferry_track.py
+* nowcast/figures/comparison/sandheads_winds.py
+* nowcast/figures/fvcom/second_narrows_current.py
+* nowcast/figures/fvcom/tide_stn_water_level.py
+* nowcast/figures/publish/compare_tide_prediction_max_ssh.py
+* nowcast/figures/publish/pt_atkinson_tide.py
+* nowcast/figures/publish/storm_surge_alerts.py
+* nowcast/figures/publish/storm_surge_alerts_thumbnail.py
+* nowcast/figures/research/baynes_sound_agrif.py
+* nowcast/figures/research/time_series_plots.py
+* nowcast/figures/research/tracer_thalweg_and_surface_hourly.py
+* nowcast/figures/research/tracer_thalweg_and_surface.py
+* nowcast/figures/research/velocity_section_and_surface.py
+* nowcast/figures/wwatch3/wave_height_period.py
+(SalishSea)
+
+See project work journal.
+(GOMSS)
 
 
 
