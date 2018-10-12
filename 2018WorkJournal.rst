@@ -4698,7 +4698,7 @@ MOAD group mtg /w Youyu Lu & Hao Wei (Tainjin Univ) visiting.
 Continued refactoring watch_NEMO_hindcast:
 * added monitoring of re-queued stuck run until it starts running so that watcher switches to monitoring new run
 * continued adding unit tests for _HindcastJob
-Tested pytest-xdist on SalishSeaNowcast; tests run faster, but setup takes longer than to run 1-core tests.
+Tested pytest-xdist on niko for SalishSeaNowcast; tests run faster, but setup takes longer than to run 1-core tests.
 Figured out the package version pins necessary to create a new nowcast-fig-dev environment that is both compatible with production, and with as many recent package updates as possible; emailed diff to Susan.
 Built nowcast-fig-dev-mpl-3 env for migration to matplotlib-3.0.0; figures that need to be assessed/ported:
 * nowcast/figures/comparison/compare_venus_ctd.py
@@ -4720,6 +4720,32 @@ Built nowcast-fig-dev-mpl-3 env for migration to matplotlib-3.0.0; figures that 
 
 See project work journal.
 (GOMSS)
+
+
+Wed 10-Oct-2018
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+nowcast-green failed at end of run due to XIOS process dying; re-run had the same fate; reduced XIOS buffer size factor from 0.1 to 0.08 for a 3rd try.
+Reviewed and buffed Susan's email to Richard@ONC re: nowcast and fvcom VMs on arbutus.cloud.
+(SalishSea)
+
+
+Thu 11-Oct-2018
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Continued work on notebook exploring creating netCDF files from AIS data to feed ERDDAP dataset.
+Tested pytest-xdist on kudu for SalishSeaNowcast; nice speedup at -n4; also tested pytest-randomly, and it randomizes test order (duh!)
+(SalishSea)
+
 
 
 
