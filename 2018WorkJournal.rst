@@ -4747,6 +4747,25 @@ Tested pytest-xdist on kudu for SalishSeaNowcast; nice speedup at -n4; also test
 (SalishSea)
 
 
+Fri 12-Oct-2018
+^^^^^^^^^^^^^^^
+
+Project mtg.
+Python model viz session w/ Rachael.
+Teid to load mohid hdf5 output in python; no luck.
+(MIDOSS)
+
+Charles mounted /results2/ on skookum:
+* created /results2/SalishSea/hindcast/
+* changed nowcast.yaml to make /results2/SalishSea/hindcast/ the hindcast results archive
+* started rsync of /results/SalishSea/hindcast to /results2/SalishSea/hindcast/
+Got 14Tb cold spare drive from Charles for safekeeping in my office.
+Deployed watch_NEMO_hindcast to skookum w/ monitoring of re-queued stuck run until it starts running so that watcher switches to monitoring new run.
+(SalishSea)
+
+UBC ARC session about RAC.
+
+
 
 
 For Rachael:
