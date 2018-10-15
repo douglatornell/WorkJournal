@@ -3194,7 +3194,7 @@ Cleared away 43ravens_dev elements:
 Tue 7-Aug-2018
 ^^^^^^^^^^^^^^
 
-Finished adding support for `nemo run --waitjob command-line option on systems that use slurm resource manager.
+Finished adding support for `nemo run --waitjob command-line` option on systems that use slurm resource manager.
 Salish Sea team mtg; see whiteboard.
 Discovered that there are no run results for 6Aug18 onward; debugging and recover:
 * confirmed that all nowcast VMs are up and have /nemoShare/MEOPAR mounted with:
@@ -4224,7 +4224,7 @@ Continued trying to build MOHID on salish:
 That allows mb1 and mb2 to build successfully.
 * edit mohid-in-linux/src/MohidWater/src/ModuleConsolidation.F90:
   * comment output private statement on line 250
-That results in mw link failure:
+That results in mw link failure::
   * /data/dlatorne/MIDOSS/mohid_deps/lib/libfproj4.a(fort-proj.o): In function `prjf_strerrno_':
   * /data/dlatorne/MIDOSS/tmp_install_dir/proj4-fortran/fort-proj.c:27: undefined reference to `pj_strerrno'
   * /data/dlatorne/MIDOSS/mohid_deps/lib/libfproj4.a(fort-proj.o): In function `cfort_pj_init':
@@ -4765,6 +4765,18 @@ Deployed watch_NEMO_hindcast to skookum w/ monitoring of re-queued stuck run unt
 
 UBC ARC session about RAC.
 
+
+Sat 13-Oct-2018
+^^^^^^^^^^^^^^^
+
+Installed VS Code on kudu with Python, Mercurial, reStructuredText, Sublime, and code spell extensions; not thrilled enough yet to switch from Sublime (at least for rst).
+
+
+Sun 14-Oct-2018
+^^^^^^^^^^^^^^^
+
+Started adding narrative to model results viz notebook from Friday's session w/ Rachael.
+(MIDOSS)
 
 
 
