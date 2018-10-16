@@ -4779,6 +4779,46 @@ Started adding narrative to model results viz notebook from Friday's session w/ 
 (MIDOSS)
 
 
+Week 42
+-------
+
+Mon 15-Oct-2018
+^^^^^^^^^^^^^^^
+
+Started adding narrative to model results viz notebook from Friday's session w/ Rachael.
+(MIDOSS)
+
+hindcast stopped on 10feb18 due to cedar maintenance downtime.
+Lots of unsuccessful farting around trying to get PyCharm debugger working with a notebook by attaching to the kernel process.
+Deployed temporary nowcast config with cedar-hindcast commented out of enabled hosts until cedar returns to service.
+Continued work on migration of figure modules to matplotlib-3.0.0:
+* Fixed bug in salishsea_tools.nc_tools.timestamp() re: MaskedArrays and netCDF4>-1.4.0.
+* Created SalishSeaNowcast issue #62 re: changing Axes.set_axes_bgcolor() calls to Axes.set_facecolor() in figure modules, and resolved it.
+* Ported:
+  * nowcast/figures/comparison/compare_venus_ctd.py
+  * nowcast/figures/comparison/sandheads_winds.py
+* TODO:
+  * nowcast/figures/fvcom/second_narrows_current.py
+  * nowcast/figures/fvcom/tide_stn_water_level.py
+  * nowcast/figures/publish/compare_tide_prediction_max_ssh.py
+  * nowcast/figures/publish/pt_atkinson_tide.py
+  * nowcast/figures/publish/storm_surge_alerts.py
+  * nowcast/figures/publish/storm_surge_alerts_thumbnail.py
+  * nowcast/figures/research/baynes_sound_agrif.py
+  * nowcast/figures/research/time_series_plots.py
+  * nowcast/figures/research/tracer_thalweg_and_surface_hourly.py
+  * nowcast/figures/research/tracer_thalweg_and_surface.py
+  * nowcast/figures/research/velocity_section_and_surface.py
+  * nowcast/figures/wwatch3/wave_height_period.py
+  * nowcast/figures/comparison/salinity_ferry_track.py
+download_weather 18 failed
+(SalishSea)
+
+See project work journal.
+(Resilient-C)
+
+
+
 
 For Rachael:
 
