@@ -4794,13 +4794,37 @@ Deployed temporary nowcast config with cedar-hindcast commented out of enabled h
 Continued work on migration of figure modules to matplotlib-3.0.0:
 * Fixed bug in salishsea_tools.nc_tools.timestamp() re: MaskedArrays and netCDF4>-1.4.0.
 * Created SalishSeaNowcast issue #62 re: changing Axes.set_axes_bgcolor() calls to Axes.set_facecolor() in figure modules, and resolved it.
+* Created SalishSeaNowcast issue #63 re: replacing marker color with markerfacecolor and markeredgecolor in figure modules, and resolved it.
 * Ported:
   * nowcast/figures/comparison/compare_venus_ctd.py
   * nowcast/figures/comparison/sandheads_winds.py
-* TODO:
+download_weather 18 failed
+download_weather 00 failed
+(SalishSea)
+
+See project work journal.
+(Resilient-C)
+
+
+Tue 16-Oct-2018
+^^^^^^^^^^^^^^^
+
+download_weather 06 failed
+Email from Sandrine re: major issues at ECCC delaying HRPDS to datamart; expecting at least 4h delay of 12 weather.
+Ran download_weather 18 at ~09:15.
+download_weather 06 failed
+SalishSeaCast mtg; see whiteboard.
+Ran download_weather 00 at ~13:00.
+Ran download_weather 06 at ~14:00.
+Continued work on migration of figure modules to matplotlib-3.0.0:
+* Created SalishSeaNowcast issue #64 re: setting time series x-axis limits explicitly in figure modules.
+* Set axes facecolor in several figure modules where it was not done.
+* Ported:
   * nowcast/figures/fvcom/second_narrows_current.py
   * nowcast/figures/fvcom/tide_stn_water_level.py
   * nowcast/figures/publish/compare_tide_prediction_max_ssh.py
+  * nowcast/figures/wwatch3/wave_height_period.py
+* TODO:
   * nowcast/figures/publish/pt_atkinson_tide.py
   * nowcast/figures/publish/storm_surge_alerts.py
   * nowcast/figures/publish/storm_surge_alerts_thumbnail.py
@@ -4809,14 +4833,13 @@ Continued work on migration of figure modules to matplotlib-3.0.0:
   * nowcast/figures/research/tracer_thalweg_and_surface_hourly.py
   * nowcast/figures/research/tracer_thalweg_and_surface.py
   * nowcast/figures/research/velocity_section_and_surface.py
-  * nowcast/figures/wwatch3/wave_height_period.py
   * nowcast/figures/comparison/salinity_ferry_track.py
-download_weather 18 failed
+Deleted /results/SalishSea/hindcast/ now that it is on /results2/ and that is mounted on fish machines.
+Ran download_weather 12 at ~15:40.
 (SalishSea)
 
 See project work journal.
-(Resilient-C)
-
+(GOMSS)
 
 
 
