@@ -4842,6 +4842,39 @@ See project work journal.
 (GOMSS)
 
 
+Wed 17-Oct-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Listened to Vancouver mayoral debate on CBC Radio 1.
+
+Worked w/ Rachael on conda env issue related to https://github.com/Unidata/netcdf-c/issues/657
+(MIDOSS)
+
+Eye exam by Dr. Rupnow.
+
+
+Thu 18-Oct-2018
+^^^^^^^^^^^^^^^
+
+Despaired of resolving Rachael's conda env issue until I can lay hands on her Mac; recommended x2go or headless jupyter from tyee.
+Prep for stakeholder's workshop.
+(MIDOSS)
+
+Investigated yesterday's turbidity file failure; Fraser buoy web page is unchanged since 2018-10-16 15:10.
+(SalishSea)
+
+Investigated duplicated lines in Fraser turbidity feed only to discover "that how it's supposed to work".
+(ECget)
+
+See project work journal.
+(GOMSS)
+
+
+
+
 
 For Rachael:
 
