@@ -4873,6 +4873,30 @@ See project work journal.
 (GOMSS)
 
 
+Fri 19-Oct-2018
+^^^^^^^^^^^^^^^
+
+Local stakeholders workshop @ Robson Square.
+(MIDOSS)
+
+Ordered new daily glasses and new lens for cycling.
+
+Continued work on migration of figure modules to matplotlib-3.0.0:
+* Moved Axes.set_facecolor() into _prep_fig_axes() functions; re: issue #62.
+* TODO:
+  * nowcast/figures/publish/pt_atkinson_tide.py
+  * nowcast/figures/publish/storm_surge_alerts.py
+  * nowcast/figures/publish/storm_surge_alerts_thumbnail.py
+  * nowcast/figures/research/baynes_sound_agrif.py
+  * nowcast/figures/research/time_series_plots.py
+  * nowcast/figures/research/tracer_thalweg_and_surface_hourly.py
+  * nowcast/figures/research/tracer_thalweg_and_surface.py
+  * nowcast/figures/research/velocity_section_and_surface.py
+  * nowcast/figures/comparison/salinity_ferry_track.py
+Continued work on notebook exploring creating netCDF files from AIS data to feed ERDDAP dataset; got all the way to a tableDAP dataset on ERDDAP.
+(SalishSea)
+
+
 
 
 
