@@ -4897,6 +4897,38 @@ Continued work on notebook exploring creating netCDF files from AIS data to feed
 (SalishSea)
 
 
+Sat 20-Oct-2018
+^^^^^^^^^^^^^^^
+
+orcinus went down for building power maintenance
+cedar resumed hindcast runs at ~02:00, but 11feb18 failed due to bad LiveOcean file:
+* make_live_ocean_files 2018-02-18
+* make_live_ocean_files 2018-02-19
+Re-enabled cedar-hindcast in config on skookum, and backfilled uploads for the week:
+* for d in {15..20}; upload_forcing nowcast+ 2018-10-$d
+* for d in {15..20}; upload_forcing turbidity 2018-10-$d
+* for d in {15..20}; upload_forcing forecast2 2018-10-$d
+Started dev of get_vfpa_hadcp worker.
+(SalishSea)
+
+
+Sun 21-Oct-2018
+^^^^^^^^^^^^^^^
+
+Continued dev of get_vfpa_hadcp worker.
+(SalishSea)
+
+
+Week 43
+-------
+
+Mon 22-Oct-2018
+^^^^^^^^^^^^^^^
+
+Replaced symlinked LiveOcean files for 20, 21, 23 & 29 jul18 on skookum with newly generated real files so that Susan can upload them to cedar to continue hindcast.
+Pushed get_vfpa_hadcp worker w/ minimal test suite.
+(SalishSea)
+
 
 
 
