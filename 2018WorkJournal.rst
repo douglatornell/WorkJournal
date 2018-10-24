@@ -4961,6 +4961,7 @@ Tested MOHID compilation on cedar:
 * salloc --cpus-per-task=2 --mem-per-cpu=4000m: 5m46.079s
 * salloc --cpus-per-task=1 --mem-per-cpu=512m: 6m0.658s
 * salloc --cpus-per-task=1 --mem-per-cpu=1024m: 5m47.186s
+Figured out how to read MOHID HDF5 files; funky nested group structure that xarray can't handle, byt h5netcdf can.
 Updated MOHID to rev 24d9c4061751 and fixed missing line continuation bug that Rachael found at Software/MOHIDWater/ModuleHydrodynamic.F90:29905; compile time in interactive job dropped to 3m17.187s,
 Started pull request re missing continuation.
 (MIDOSS)
