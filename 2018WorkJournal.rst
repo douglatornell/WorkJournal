@@ -4927,6 +4927,46 @@ Mon 22-Oct-2018
 
 Replaced symlinked LiveOcean files for 20, 21, 23 & 29 jul18 on skookum with newly generated real files so that Susan can upload them to cedar to continue hindcast.
 Pushed get_vfpa_hadcp worker w/ minimal test suite.
+backfill nowcast-agrif runs on orcinus after weekend power outage downtime:
+* for d in {20..22} upload_forcing forecast2 --debug --run-date 2018-10-$d
+* for d in {20..22} upload_forcing nowcast+ --debug --run-date 2018-10-$d
+* for d in {20..22} upload_forcing turbidity --debug --run-date 2018-10-$d
+* make_forcing_links nowcast-agrif --run-date 2018-10-20
+
+* make_forcing_links nowcast-agrif --run-date 2018-10-21
+* make_forcing_links nowcast-agrif --run-date 2018-10-22
+(SalishSea)
+
+Explored Salish Sea test case that Shihan sent us:
+* ~7d run 2015-04-08 00:30 to 2015-04-14 22:30
+* 1200 s time step
+* SalishSea/Model_7.dat file says 12 thread for OpenMP; VancouverHarbour/Model_1.dat has OPENMP_NUM_THREADS commented out
+* results:
+  * Lagrangian*.hdf5; 200M and 335M
+  * OilOutput.sro; 991K; seems to be csv-ish
+Continued exploration in larger context of Rachael's sensitivity/montecarlo runs work w/ her.
+(MIDOSS)
+
+
+Tue 23-Oct-2018
+^^^^^^^^^^^^^^^
+
+Canyons/Arctic team mtg; see whiteboard.
+(Canyons/Arctic)
+
+Built MIDOSS/SalishSeaShihan repo of test case files.
+Tested MOHID compilation on cedar:
+* login node: 6m44.762s
+* salloc --ntasks=1 failes w/ out of memory
+* salloc --cpus-per-task=2 --mem-per-cpu=4000m: 5m46.079s
+* salloc --cpus-per-task=1 --mem-per-cpu=512m: 6m0.658s
+* salloc --cpus-per-task=1 --mem-per-cpu=1024m: 5m47.186s
+Updated MOHID to rev 24d9c4061751 and fixed missing line continuation bug that Rachael found at Software/MOHIDWater/ModuleHydrodynamic.F90:29905; compile time in interactive job dropped to 3m17.187s,
+Started pull request re missing continuation.
+(MIDOSS)
+
+SalishSeaCast team mtg; see whiteboard.
+Fixed mysteriously symlinked LiveOcean files on salish: 6-7aug18, 18sep18, 08oct18.
 (SalishSea)
 
 
