@@ -4785,7 +4785,7 @@ Week 42
 Mon 15-Oct-2018
 ^^^^^^^^^^^^^^^
 
-Started adding narrative to model results viz notebook from Friday's session w/ Rachael.
+Continued adding narrative to model results viz notebook from Friday's session w/ Rachael.
 (MIDOSS)
 
 hindcast stopped on 10feb18 due to cedar maintenance downtime.
@@ -4879,6 +4879,9 @@ Fri 19-Oct-2018
 Local stakeholders workshop @ Robson Square.
 (MIDOSS)
 
+See project journal.
+(SalishSeaCast-FVCOM)
+
 Ordered new daily glasses and new lens for cycling.
 
 Continued work on migration of figure modules to matplotlib-3.0.0:
@@ -4969,6 +4972,37 @@ Started pull request re missing continuation.
 SalishSeaCast team mtg; see whiteboard.
 Fixed mysteriously symlinked LiveOcean files on salish: 6-7aug18, 18sep18, 08oct18.
 (SalishSea)
+
+
+Wed 24-Oct-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Sent email to Bob Simons @ NOAA re: pathRegex tag issue that is preventing use from having most_recent_forecast datasets on ERDDAP; got a reply that resolved the issue (regex syntax is hard :-).
+Changed ww3 and fvcom ERDDAP files datasets to show only nowcast/ and most_recent_forecast/.
+Started refactoring update_forecast_datasets to symlink most recent forecast results from vhfr and wwatch3 into most_recent_forecast/ dirs.
+(SalishSea)
+
+
+Thu 25-Oct-2018
+^^^^^^^^^^^^^^^
+
+download_weather 06 failed; re-ran manually at ~09:20 to restart automation.
+Finished refactoring update_forecast_datasets to symlink most recent forecast results from vhfr and wwatch3 into most_recent_forecast/ dirs; deployed and tested it with manual runs.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
 
 
 
