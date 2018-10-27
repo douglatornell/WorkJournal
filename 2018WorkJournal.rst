@@ -5003,6 +5003,43 @@ See project journal.
 (SalishSeaCast-FVCOM)
 
 
+Fri 26-Oct-2018
+^^^^^^^^^^^^^^^
+
+MIDOSS project mtg; debrief from stakeholders workshop.
+Worked w/ Rachael on Mercurial and MOHID.
+Reproduced MOHID 25m_deep tank run in project/MIDOSS/runs/:
+* rsync -rv ../MOHID/Solutions/mohid-in-linux/test/mohidwater/25m_deep ./
+* cd 25m_deep
+* rm -rf res
+* cd exe
+* ln -s ../../../MOHID/Solutions/mohid-in-linux/bin/MohidWater.exe
+* ./MohidWater.exe
+None of the keywords in nomfich.dat have definitions in the keyword dict wiki :-(
+Successfully commented out the LIFE_DATA keyword in nomfich.dat.
+Successfully commented out the ROOT_SRT keyword in nomfich.dat.
+Successfully commented out the AIRW_FIN keyword in nomfich.dat.
+Successfully commented out the BOT_HDF keyword in nomfich.dat.
+Successfully commented out the BOT_FIN keyword in nomfich.dat.
+Successfully commented out the OUT_DESF keyword in nomfich.dat, but got no Hydrodynamic.hdf file.
+Successfully commented out the OUT_FIN keyword in nomfich.dat.
+Successfully commented out the EUL_HDF keyword in nomfich.dat.
+Successfully commented out the EUL_FIN keyword in nomfich.dat.
+Run seems unaffected by removal of data/Nomfich.dat.
+Following data/ files are empty:
+* Atmosphere_1.dat
+* FreeVerticalMovement_1.dat
+* WaterProperties_1.dat
+but the only one whose keyword can successfully commented out of nomfish.dat is FREE_DAT.
+Edited nomfich.dat to set IN_BATIM value to ../grid/Tanque_25m.dat, moved files from GeneralData/geometry/ to new grid/, and ran successfully.
+Commenting SURF_HDF, or AIRW_HDF out of nomfich.dat causes segfault.
+(MIDOSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Email from Michael Thorne at ONC requesting that we change our API requests from dmas.uvic.ca to data.oceannetworks.ca; discovered that the latter supports HTTPS :-); updated salishsea_tools.data_tools accordingly.
+(SalishSea)
 
 
 
