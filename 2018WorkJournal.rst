@@ -5042,13 +5042,140 @@ Email from Michael Thorne at ONC requesting that we change our API requests from
 (SalishSea)
 
 
+Sat 27-Oct-2018
+^^^^^^^^^^^^^^^
+
+Vancouver to Yokohama
 
 
-For Rachael:
+Sun 28-Oct-2018
+^^^^^^^^^^^^^^^
 
-remote has heads on branch 'default' that are not known locally: f65d39f36468
-abort: push creates new remote head 940c09211b41!
-(pull and merge or see 'hg help push' for details about pushing new heads)
+Vancouver to Yokohama
+
+
+Week 44
+-------
+
+Mon 29-Oct-2018
+^^^^^^^^^^^^^^^
+
+Yokohama
+
+Reviewed 2019 RAC application; worked on storage request.
+(MOAD)
+
+
+Tue 30-Oct-2018
+^^^^^^^^^^^^^^^
+
+Yokohama
+
+Email from Michael@ONC re: dmas domain, my Fri change doesn't appear to have taken effect; updated tools on skookum from e7646d07561c to 2dd9855e4568 to resolve (doh!).
+Refactored SalishSeaNowcast prod_config test fixture into tests/conftest.py module.
+(SalishSea)
+
+Continued work on RAC storage:
+* nowcast-green/SalishSea_1h_*_grid_[TUVW].nc and Slab_*.nc are 1.7Gb/day;
+  ww3 is 420Mb/day; vhfr is 805Mb/day; those should be what are needed to force MOHID
+(MOAD)
+
+Attended Susan's plenary on SOG-bloomcast at PICES meeting.
+
+Set up MIDOSS/analysis-doug repo.
+Started MOHID-hdf5Files notebook to explore Lagrangian files from Shihan, and PyNIO, h5netcdf, and h5py libraries.
+(MIDOSS)
+
+
+Wed 31-Oct-2018
+^^^^^^^^^^^^^^^
+
+Yokohama
+
+Discussed 2019 RAC application w/ Susan; continued work on storage request.
+(MOAD)
+
+Finished MOHID-hdf5Files notebook exploring Lagrangian files from Shihan; added PyTables library; it provides a Pythonic object interface.
+Discussed Lagrangian file structure w/ Susan; Eulerian snapshots by particle, and by 2D and 3D model grid cell.
+Next step is transformation into xarray dataset; worked out most of the details in MOHID-HDF5-to-xarray notebook.
+(MIDOSS)
+
+
+Thu 1-Nov-2018
+^^^^^^^^^^^^^^
+
+Yokohama
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Fri 2-Nov-2018
+^^^^^^^^^^^^^^
+
+Yokohama
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Steered Rachael toward numpy ufuncs instead of looping over arrays.
+Finished MOHID-HDF5-to-xarray notebook.
+Started dev of moad_tools.midoss.hdf5_to_xarray().
+(MIDOSS)
+
+See project work journal.
+(Resilient-C)
+
+Discovered that make_plots fvcom publish is inifini-looping; updated skookum back to 6661ed2e2d20.
+download_weather 18 failed; re-ran manually at ~19:15.
+(SalishSea)
+
+
+Sat 3-Nov-2018
+^^^^^^^^^^^^^^
+
+Yokohama
+
+Continued dev of moad_tools.midoss.hdf5_to_xarray(); realized that it will have to be hdf5_to_netcdf() because (168, 40, 898, 398) arrays consume a lot of memory...
+(MIDOSS)
+
+make_forcing_links orcinus nowcast+ failed due to ssh-agent issue, causing nowcast-agrif run to not run
+(SalishSea)
+
+
+Sun 4-Nov-2018
+^^^^^^^^^^^^^^
+
+Yokohama to Vancouver
+
+Ran nowcast-agrif 2018-11-03 manually.
+(SalishSea)
+
+
+Week 45
+-------
+
+Mon 5-Nov-2018
+^^^^^^^^^^^^^^
+
+Wrote storage section of RAC proposal.
+(MOAD)
+
+Backfilled nowcast-agrif:
+* make_forcing_links nowcast-agrif 2018-11-04
+* make_forcing_links nowcast-agrif 2018-11-05
+(SalishSea)
+
+
+Tue 6-Nov-2018
+^^^^^^^^^^^^^^
+Continued dev of moad_tools.midoss.hdf5_to_netcdf4().
+(MIDOSS)
+
+SalishSeaCast mtg; see whiteboard.
+(SalishSea)
+
+
 
 
 
