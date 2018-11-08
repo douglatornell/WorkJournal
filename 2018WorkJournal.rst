@@ -5130,6 +5130,9 @@ Discovered that make_plots fvcom publish is inifini-looping; updated skookum bac
 download_weather 18 failed; re-ran manually at ~19:15.
 (SalishSea)
 
+See project work journal.
+(GOMSS)
+
 
 Sat 3-Nov-2018
 ^^^^^^^^^^^^^^
@@ -5186,6 +5189,49 @@ Reviewed and revised RAC proposal.
 Added exception handling so that get_vfpa_hadcp can ping ERDDAP without launching make_plots fvcom before there are run results to plot.
 Added launch of get_vfpa_hadcp for previous UTC day after download_weather 06 to ensure that dataset is complete for previous UTC day.
 (SalishSea)
+
+
+Wed 7-Nov-2018
+^^^^^^^^^^^^^^
+
+Updated conda base env on kudu to Python 3.7; still can't create Python 3.7 conda envs in PyCharm.
+
+Updated Mercurial on kudu to 4.8rc0+2-7b48c616431d:
+* conda activate hg-dev
+* cd hg-stable
+* hg pull -u
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
+Pulled VHFR water levels figure residuals panel patch from niko backup drive via borg mount because I forgot to upload it to skookum yesterday.
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+Worked on revising technical section of RAC proposal to reduce it to 4 pages.
+(MOAD)
+
+Updated skookum back to tip, and tested next_workers that launches previous day's make_plots fvcom workers after ping_erddap.
+Fielded emails from Johannes about wwatch3 change to nowcast + forecast.
+Helped elise w/ setgid bit issue on cedar; pretty sure now that it's new file system behaviour, not my stupidity as Ali implied.
+(SalishSea)
+
+
+Thu 8-Nov-2018
+^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Manually ran get_vfpa_hadcp 2018-11-07 at ~09:00 to test the idea of running it early in the morning to avoid gaps; solves gap issue, but after_ping_erddap blew up because there is not FVCOM run in the checklist to use to launch make_plots... sigh...
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
 
 
 
