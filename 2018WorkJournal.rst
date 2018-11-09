@@ -5169,10 +5169,22 @@ Backfilled nowcast-agrif:
 
 Tue 6-Nov-2018
 ^^^^^^^^^^^^^^
+
 Continued dev of moad_tools.midoss.hdf5_to_netcdf4().
 (MIDOSS)
 
 SalishSeaCast mtg; see whiteboard.
+(SalishSea)
+
+
+Thu 8-Nov-2018
+^^^^^^^^^^^^^^
+
+Reviewed and revised RAC proposal.
+(MOAD)
+
+Added exception handling so that get_vfpa_hadcp can ping ERDDAP without launching make_plots fvcom before there are run results to plot.
+Added launch of get_vfpa_hadcp for previous UTC day after download_weather 06 to ensure that dataset is complete for previous UTC day.
 (SalishSea)
 
 
