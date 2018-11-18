@@ -5180,17 +5180,6 @@ SalishSeaCast mtg; see whiteboard.
 (SalishSea)
 
 
-Thu 8-Nov-2018
-^^^^^^^^^^^^^^
-
-Reviewed and revised RAC proposal.
-(MOAD)
-
-Added exception handling so that get_vfpa_hadcp can ping ERDDAP without launching make_plots fvcom before there are run results to plot.
-Added launch of get_vfpa_hadcp for previous UTC day after download_weather 06 to ensure that dataset is complete for previous UTC day.
-(SalishSea)
-
-
 Wed 7-Nov-2018
 ^^^^^^^^^^^^^^
 
@@ -5232,8 +5221,166 @@ Manually ran get_vfpa_hadcp 2018-11-07 at ~09:00 to test the idea of running it 
 See project journal.
 (SalishSeaCast-FVCOM)
 
+Reviewed and revised RAC proposal.
+(MOAD)
+
+Added exception handling so that get_vfpa_hadcp can ping ERDDAP without launching make_plots fvcom before there are run results to plot.
+Added launch of get_vfpa_hadcp for previous UTC day after download_weather 06 to ensure that dataset is complete for previous UTC day.
+(SalishSea)
 
 
+Fri 9-Nov-2018
+^^^^^^^^^^^^^^
+
+Vancouver to Toronto.
+
+Worked on refactoring unit tests to use YAML-based nowcast.Config objects.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Sat 10-Nov-2018
+^^^^^^^^^^^^^^^
+
+PyCon Canada
+
+
+Sun 11-Nov-2018
+^^^^^^^^^^^^^^^
+
+PyCon Canada
+
+Change sequencing so that upload_forcing is launched after make_live_ocean_files instead of grib_to_netcdf because the LiveOcen grid is finer now, and we are using gsw in Python instead of spawning matlab processes.
+(SalishSea)
+
+
+Week 46
+-------
+
+Mon 12-Nov-2018
+^^^^^^^^^^^^^^^
+
+PyCon Canada Sprints
+
+Worked on pandas docs:
+* pull request to fix dev env setup instructions in python-sprints repo; merged
+* pull request to improve message for double line breaks in pandas validate_docstrings.py script; awaiting merge
+* pull request to fix double line break occurrences flagged by validate_docstrings script; reviewed and approved, told to put additional work in a new PR
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(Resilient-C)
+
+
+Tue 13-Nov-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+PyCon Canada Sprints
+
+Worked on pandas docs:
+* added unit tests to PR improve message for double line breaks in pandas validate_docstrings.py script; review asked for changes in tests
+* branch for pull request to fix more double line break occurrences flagged by validate_docstrings script; got all but 2 fixed, and reviewer says that's fine because the 2 are deprecated methods that will soon disappear
+
+
+Wed 14-Nov-2018
+^^^^^^^^^^^^^^^
+
+Brampton
+
+PyCon Canada Sprints
+
+Worked on pandas docs:
+* 1st pull request to fix double line break occurrences flagged by validate_docstrings script; merged
+* 2nd pull request to fix the rest of the double line break occurrences flagged by validate_docstrings script; approved, resolved a merge conflict, merged
+
+Answered Rachael's questions about wave fields, whitecap coverage, and accessing NEMO fields via ERDDAP.
+(MIDOSS)
+
+Started refactoring units tests YAML-based nowcast.Config object elements required by all unit tests into a conftest.py fixture and making unit test config fixtures either provide or augment the base config.
+Commented out re-generation of day-1 VHFR figures after ping_erddap to see if that resolves the weird KeyError or MissingDimensionsError exceptions.
+More email with Johannes about wwatch3 change to nowcast + forecast.
+(SalishSea)
+
+
+Thu 15-Nov-2018
+^^^^^^^^^^^^^^^
+
+Brampton-Barrie-Brampton
+
+ecget river flow failed w/ SSL verification error:
+* manually persisted 13nov18 values for Fraser and Englishman
+* make_runoff_file --debug
+* upload_forcing west.cloud-nowcast
+* upload_forcing orcinus-nowcast-agrif
+* upload_forcing cedar-hindcast
+(SalishSea)
+
+
+Fri 16-Nov-2018
+^^^^^^^^^^^^^^^
+
+Brampton to Vancouver
+
+ecget river flow failed w/ SSL verification error:
+* replaced ecget env:
+  * conda env remove -n ecget
+  * conda create -p /home/dlatorne/miniconda3/envs/ecget -c conda-forge -c defaults arrow beautifulsoup4 cliff kombu python=3.7 requests
+* ecget river flow still fails, but the error message is more informative:
+  * HTTPSConnectionPool(host='wateroffice.ec.gc.ca', port=443): Max retries exceeded with url: /report/real_time_e.html?mode=Table&type=realTime&prm1=47&prm2=-1&stn=08MF005&startDate=2018-11-15&endDate=2018-11-16 (Caused by SSLError(SSLError("bad handshake: Error([('SSL routines', 'ssl3_get_server_certificate', 'certificate verify failed')])")))
+* which lead me to suspect that this was triggered by wateroffice forcing HTPP to HTTPS redirect and a certificate chain issue, based on discussion in https://github.com/requests/requests/issues/3212
+* re-produced the issue on niko
+* manually persisted 13nov18 values for Fraser and Englishman
+* make_runoff_file --debug
+* upload_forcing west.cloud-nowcast
+* upload_forcing orcinus-nowcast-agrif
+* upload_forcing cedar-hindcast
+Continued refactoring unit tests to use YAML-based nowcast.Config objects.
+(SalishSea)
+
+
+Sat 17-Nov-2018
+^^^^^^^^^^^^^^^
+
+Susan handled make_runoff_file failure by patching Fraser and Englishman files w/ values eyeballed from wateroffice web site plots.
+Continued refactoring unit tests to use YAML-based nowcast.Config objects.
+watch_ww3 failed w/ unable to logging pub port error:
+* found and killed zombie watch_ww3 worker on west.cloud from 08nov18
+* for d in {08..16}; download_wwatch3_results nowcast 2018-11-$d --debug
+* discovered that there were no forecast runs for 08..16nov
+* for d in {09..16}; download_wwatch3_results forecast2 2018-11-$d --debug
+
+Discussed design for workers concurrency that can handle race conditions w/ Susan:
+* implementation in nemo_nowcast
+* add --concurrent flag to NowcastWorker
+  * workers that are being executed concurrently include concurrent=True in their completion message
+* add ConcurrentWorkers class
+  * accept list of NextWorker instances
+  * workers are launched with --concurrent option
+  * polls worker pids until all have finished; implies that NextWorker.launch returns pid, and that workers can only run on same host as ConcurrentWorkers instance
+  * has a message type for each possible collection of concurrent workers; implies a run_type-like command-line arg
+* after_* functions for possibly concurrent workers short-circuit out with empty next_workers list if concurrent==True in message payload
+* after_concurrent_workers produces list of NextWorker instances; after_* functions for possibly concurrent workers can still produce NextWorker lists so that they can be run independently to deal with automation failures
+* also need a SequencedWorkers worker that can be used to run a sequence of workers (e.g. download_live_ocean, then make_live_ocean_files) within a concurrent workers collection
+  * workers are launched with --concurrent option
+(SalishSea)
+
+Discussed way forward on MOHID w/ Susan and Rachael re: Rachael's visit to Dal:
+* get a usable hdf5_to_netcdf4 tool working
+* switch to using MOHID version that Rachael brought back with her; put it in a private hg repo on Bitbucket
+(MIDOSS)
+
+
+Sun 18-Nov-2018
+^^^^^^^^^^^^^^^
+
+Finished pandas PR #23649 by moving extra linebreak tests into test_bad_examples() per review; appear to have inherited a broken test from upstream, but assuming that's and env issue or SEP.
 
 
 
