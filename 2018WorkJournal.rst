@@ -5382,6 +5382,21 @@ Sun 18-Nov-2018
 
 Finished pandas PR #23649 by moving extra linebreak tests into test_bad_examples() per review; appear to have inherited a broken test from upstream, but assuming that's and env issue or SEP.
 
+SalishSeaCast was delayed due to power outage in EOSM that took away auth service from ~04:15 to ~16:00; Susan had to manually hack get_NeahBay_ssh and the text file that it generated from the web in order to get forecast2 to launch; in response I formalized her get_NeahBay_ssh hack by adding a --text-file command-line option to easy handling of this situation in the future.
+(SalishSea)
+
+
+Week 47
+-------
+
+Mon 19-Nov-2018
+^^^^^^^^^^^^^^^
+
+Reverted yesterday commit in pandas PR #23649 because review says that test_bad_examples() is for testing the Examples section of docstring (as I thought when I first started work on this). Renamed test_bad_examples() to test_bad_docstrings() and moved extra linebreaks tests back into test_bad_docstrings() parametrize decorator.
+
+Tried to figure out Susan's Jupyter kernel crash from xarray.open_dataset() issue.
+(SalishSea)
+
 
 
 * write launch_remote_worker worker!!!
