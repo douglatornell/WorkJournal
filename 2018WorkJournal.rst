@@ -5395,7 +5395,28 @@ Mon 19-Nov-2018
 Reverted yesterday commit in pandas PR #23649 because review says that test_bad_examples() is for testing the Examples section of docstring (as I thought when I first started work on this). Renamed test_bad_examples() to test_bad_docstrings() and moved extra linebreaks tests back into test_bad_docstrings() parametrize decorator.
 
 Tried to figure out Susan's Jupyter kernel crash from xarray.open_dataset() issue.
+Worked on debugging ecget river flow issue on salish. Discussed it with Charles who thinks its a wateroffice server config issue. Discovered that it workds on niko with a wired connection, but not wifi. Hacked ecget.river on salish to skip certs verification.
+Investigated EC datamart hydrometric files; csv files containig day-1 and day, Fraser is 5min frequency and lags real-time by at least 90min.
 (SalishSea)
+
+Instrumented hdf5_to_netcdf4 and found that it takes ~40s per model hr at hr 8, and ~60s at hr 14, so expect >=30min for 24 model hrs.
+Changed to int32 storage with 1e-4 scale factor and got ~x2 speed up.
+(MIDOSS)
+
+
+Tue 20-Nov-2018
+^^^^^^^^^^^^^^^
+
+SalishSeaCast team mtg; see whiteboard.
+Read anaconda blog post about Python visualization and explored PyViz, HoloViews, GeoViews.
+Skimmed StromSurgeBC almanac and tried to print calendar pages.
+Added with suppress(urllib3.exception.InsecureRequestWarning) to ecget.river to silence cron job email messages.
+Email to Parker about SSL issue in ecget river flow; he's not having trouble!
+(SalishSea)
+
+Changed hdf5_to_netcdf4 to store time step files that get concatenated using ncrcat; sped up to ~3.5s/hr; conversion of 7d file with deflation took 532s; send file to Rachael for testing.
+Changed instrumentation to decorators; too cool for school!!!
+(MIDOSS)
 
 
 
