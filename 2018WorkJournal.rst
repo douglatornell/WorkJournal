@@ -5419,8 +5419,59 @@ Changed instrumentation to decorators; too cool for school!!!
 (MIDOSS)
 
 
+Wed 21-Nov-2018
+^^^^^^^^^^^^^^^
 
-* write launch_remote_worker worker!!!
+suppress(urllib3.exception.InsecureRequestWarning) in ecget.river doesn't silence cron job email messages.
+Changed tide prediction vs. max ssh figure to use best location for legend in residuals panel.
+Changed SalishSeaNowcast to use black-18.9b0 from conda-forge.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Thu 22-Nov-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Added __contains__() method to nemo_nowcast.Config object so that membership tests work at top level.
+Added production config YAML unit tests to grib_to_netcdf.
+Reviewed and merged SalishSeaNowcast PR#2 from Michael.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Fri 23-Nov-2018
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+nowcast-dev/22nov18 got stuck at 35.4% complete; only xios left running, killed it at ~08:45.
+ecget river flow failed with parsing issue; it appears that the site has change to now force a secondary y-axis variable which defaults to water temperature; added handling to ecget.river; also changed wateroffice URL there to HTTPS.
+Too late to run foreacst2/22nov18.
+Manually ran clear_checklist.
+Changed next_workers to run make_live_ocean_files on skookum instead of salish because it no longer required Matlab.
+(SalishSea)
+
+
+Sat 24-Nov-2018
+^^^^^^^^^^^^^^^
+
+Vancouver to Parksville
+
+ecget river flow Fraser failed w/ string parsing error, so upload_forcing forecast2 failed; recovery:
+* ecget river flow Fraser worked fine when I ran it manually at ~07:00
+* make_runoff_file
+* upload_forcing west.cloud
+* upload_forcing orcinus
+* upload_forcing cedar failed due to connection reset
+(SalishSea)
 
 
 
