@@ -1820,7 +1820,7 @@ Continued working on nowcast-agrif production:
 * did clean build of nesting tools on salish
 * ran nesting tools to generate (for both sub-grids):
   * coordinates
-  * restsrt files
+  * restart files
   * river bio tracer daily files
 * launched 13may18 run and it is working; failed w/ -ve SSS in Haro on timestep 1925
 * used ncra to produce river bio tracer mean file:
@@ -5434,6 +5434,7 @@ See project work journal.
 Thu 22-Nov-2018
 ^^^^^^^^^^^^^^^
 
+
 See project work journal.
 (GOMSS)
 
@@ -5471,7 +5472,49 @@ ecget river flow Fraser failed w/ string parsing error, so upload_forcing foreca
 * upload_forcing west.cloud
 * upload_forcing orcinus
 * upload_forcing cedar failed due to connection reset
+Made spec-ed mock of NowcastWorker consistent in SalishSeaNowcast unit tests.
+Added blacken file external command to niko PyCharm with Ctrl+Alt+L keyboard mapping.
 (SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Sun 25-Nov-2018
+^^^^^^^^^^^^^^^
+
+Parksville to North Saanich
+
+Continued dev of hdf5_to_netcdf4 module.
+(MIDOSS)
+
+
+Week 48
+-------
+
+Mon 26-Nov-2018
+^^^^^^^^^^^^^^^
+
+Debby & Paul's
+
+Finished initial dev of hdf5_to_netcdf4 module.
+(MIDOSS)
+
+
+Tue 27-Nov-2018
+^^^^^^^^^^^^^^^
+
+IOS
+
+CIOPS-W (NEP36) preview mtg; see notebook.
+
+
+Wed 28-Nov-2018
+^^^^^^^^^^^^^^^
+
+IOS, then North Saanich to home
+
+CIOPS-W (NEP36) preview mtg; see notebook.
 
 
 
@@ -5492,7 +5535,6 @@ Move production to 201702:
 
 
 * Process some images
-* Test attrs-17.1
 * Take knives for sharpening
 
 
