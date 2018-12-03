@@ -5515,6 +5515,62 @@ Wed 28-Nov-2018
 IOS, then North Saanich to home
 
 CIOPS-W (NEP36) preview mtg; see notebook.
+Sent email to J-P re: access to SalishSeaCast fields for re-initialization of Salish Sea region of CIOPS-W to remove deep salinity bias.
+
+Added autospec (and in a few cases, spec) args to patch decorators in SalishSeaNowcast unit tests.
+(SalishSea)
+
+
+Thu 29-Nov-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+make_plots nemo forecast failed due to network error from WSDL service; re-ran manually.
+(SalishSea)
+
+
+Fri 30-Nov-2018
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+
+Sat 1-Dec-2018
+^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Shopped for ingredients for fruit cake and mincemeat, and prepped them.
+
+
+Sun 2-Dec-2018
+^^^^^^^^^^^^^^
+
+ecget river flow for Fraser failed with ValueError on str to float conversion; didn't get it resolved in time for preliminary forecast runs; that meant that the checklist didn't get cleared, which caused make_live_ocean_files to run for 2018-12-01 instead of today because it gets it run date from the 0th item in the download_live_ocean checklist; recovery:
+* debugged and improved ECget (see below)
+* ecget river flow >> Fraser_flow
+* make_runoff_file
+* upload_forcing to restart automation
+Fixed make_live_ocean_files run date bug by changing to last item in download_live_ocean checklist.
+Installed poppler from conda-forge into SSN production env to provide pdftocairo for make_surface_current_tiles worker.
+(SalishSea)
+
+Forced river data table to include water level as 2nd data column so that datetimes for which there is no water level (from which discharge is calculated) will not appear in table.
+(ECget)
+
+Researched pip-tools to automate maintenance of requirements.txt files; I would need to add a tool to generate a requirements.in file from environment-dev.yaml; started playing with the idea in the gomss-site repo.
+
+
 
 
 
