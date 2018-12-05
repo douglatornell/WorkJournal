@@ -5571,6 +5571,39 @@ Forced river data table to include water level as 2nd data column so that dateti
 Researched pip-tools to automate maintenance of requirements.txt files; I would need to add a tool to generate a requirements.in file from environment-dev.yaml; started playing with the idea in the gomss-site repo.
 
 
+December
+========
+
+Week 49
+-------
+
+Mon 3-Dec-2018
+^^^^^^^^^^^^^^
+
+make_surface_current_tiles forecast2 ran successfully in automation; restarted manager to update it's message registry entry.
+(SalishSea)
+
+Tried to set up my own copy of Dal version of MOHID sources tree from what Rachael uploaded after he trip last month, but most of the directories are empty :-( Sent email to Rachael.
+Resumed experiments from 26-Oct-2018 re: MOHID 25m_deep test run directory structure:
+* MohidWater.exe and nomfich.dat *must* be in the same dir, but don't have to be in exe/; ran successfully with them in 25m_deep/
+* successfully used an absolute path for IN_BATIM in nomfich.dat
+* ROOT must be present and have a value, but no matter what it is the Hydrodynamic_1.hdf5 file goes into res/
+* successfully used an absolute path for IN_MODEL in nomfich.dat, and moved the Model_1.dat file from 25m_deep/data/ to 25m_deep/
+* successfully ran with IN_BATIM path set to a symlink
+Started dev of MOHID-Cmd package.
+(MIDOSS)
+
+
+Tue 4-Dec-2018
+^^^^^^^^^^^^^^
+
+ecget Fraser did the Heisen-bug thing again; ran it, make_runoff_file, and upload_forcing forecast2 x3 to restart automation.
+SalishSeaCast team mtg; see whiteboard
+(SalishSea)
+
+Got MIDOSS-MOHID from Shihan via Rachael built on cedar by hacking on compile_mohid.sh pulled in from Github version.
+Got Shihan's constant temperature & salinity, no w velocity, etc. test case from Oct running on cedar; looks like it will take ~40min on 12 cores.
+(MIDOSS)
 
 
 
