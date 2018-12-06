@@ -5598,12 +5598,36 @@ Tue 4-Dec-2018
 ^^^^^^^^^^^^^^
 
 ecget Fraser did the Heisen-bug thing again; ran it, make_runoff_file, and upload_forcing forecast2 x3 to restart automation.
-SalishSeaCast team mtg; see whiteboard
+SalishSeaCast team mtg; see whiteboard.
+Committed nowcast-green XIOS buffer size factor change that has been in effect for weeks on west.cloud.
 (SalishSea)
 
+Helped Saurav resolve TLS deprecation issue on Bitucket; he needs to use ssh keys.
+
 Got MIDOSS-MOHID from Shihan via Rachael built on cedar by hacking on compile_mohid.sh pulled in from Github version.
-Got Shihan's constant temperature & salinity, no w velocity, etc. test case from Oct running on cedar; looks like it will take ~40min on 12 cores.
+Got Shihan's constant temperature & salinity, no w velocity, etc. test case from Oct running on cedar; took 35m28s on 12 cores in an interactive session with slow-ish file system.
 (MIDOSS)
+
+
+Wed 5-Dec-2018
+^^^^^^^^^^^^^^
+
+Coached Rachael on setup of MOAD repo for bibtex file(s).
+
+Updated west.cloud SS-run-sets from 2017:213385520eef with changesets 1dd628ea1d28:73e283f98c61.
+Wrote background email to Susan about rpn to netcdf conversion for 2007-2014 GEMLAM files; dug around in browser history to find http://collaboration.cmc.ec.gc.ca/science/rpn.comm/wiki/doku.php?id=virtual_machine:how_it_was_done (science, science)
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Thu 6-Dec-2018
+^^^^^^^^^^^^^^
+
+Added checklist to make_surface_current_tiles.
+Improved download_results handling of FVCOM boundary slab files; added unlinking of FVCOM_W.nc file, and suppressed unlinking of all from hindcast runs so that we have them available for VHFR hindcast.
+(SalishSea)
 
 
 
