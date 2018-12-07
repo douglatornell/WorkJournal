@@ -5629,6 +5629,22 @@ Added checklist to make_surface_current_tiles.
 Improved download_results handling of FVCOM boundary slab files; added unlinking of FVCOM_W.nc file, and suppressed unlinking of all from hindcast runs so that we have them available for VHFR hindcast.
 (SalishSea)
 
+Started experimenting with sbatch runs of MOHID on cedar:
+* created mohid.sh script
+* removed OPENMP_NUM_THREADS from Model.dat in favour of:
+  * #SBATCH --cpus-per-task=32
+  * export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+  so that mohid.sh cpus-per-task directive controls run
+* with 32 cores, default 256M mem-per-cpu is too small; 512M allows execution, and seff says that it used 10.69G and has 66.82% memory efficiency
+* 8 cores w/ 512M failed
+* 8 cores w/ 1500M (based on 12G / 8) works w/ 91.17% memory efficiency
+* 16 cores w/ 750M works with 90.33% memory efficiency
+Continued dev of MOHID-Cmd package.
+(MIDOSS)
+
+Completed PD expense claim for PyCon Canada trip.
+Opened ticket to request monitors, keyboard & mouse for smelt for Rachael in January.
+
 
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
