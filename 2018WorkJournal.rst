@@ -5646,6 +5646,92 @@ Completed PD expense claim for PyCon Canada trip.
 Opened ticket to request monitors, keyboard & mouse for smelt for Rachael in January.
 
 
+Fri 7-Dec-2018
+^^^^^^^^^^^^^^
+
+Email from Ali suggests that cedar file system has returned to stability for now, so more experimenting with sbatch runs of MOHID on cedar:
+* 16 cores w/ 750M works, seff report for 5min run makes no sense; full run 35m12s, 93.01% memory efficiency, 54.00% cpu efficiency
+* 32 cores w/ 750M, 35m13s, 46.64% memory efficiency, 53.18% cpu efficiency
+* 12 cores w/ 1000M, 40m7s, 92.32% memory efficiency, 53.32% cpu efficiency
+* 8 cores w/ 1500M, 43m58s, 92.23% memory efficiency, 55.41% cpu efficiency
+* 4 cores w/ 3000M, 44m4s, 92.02% memory efficiency, 64.80% cpu efficiency
+(MIDOSS)
+
+Updated Mercurial on kudu to 4.8.1+2-47719d7c581f:
+* conda activate hg-dev
+* cd hg-stable
+* hg pull -u
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Updated repos on skookum and west.cloud:
+* FVCOM-VHFR-config
+* OPPTools
+(SalishSea)
+
+
+Sat 8-Dec-2018
+^^^^^^^^^^^^^^
+
+Renewed EGBC membership; declared 100 hr of PD:
+* 50h professional practice
+* 30h informal
+* 20h presentations
+
+Created 2019 gnucash file via export accts to sqlite3 that made empty file, then exported accounts to csv and imported them, then transcribed jan/feb transactions to initialize accounts and set up scheduled transactions.
+
+Continued MOHID scaling tests on cedar:
+* 2 cores w/ 6000M, 53m41s, 93.20% memory efficiency, 76.33% cpu efficiency
+(MIDOSS)
+
+
+Sun 9-Dec-2018
+^^^^^^^^^^^^^^
+
+ecget river flow Fraser failed w/ ValueError on empty string to float in automation at ~03:06:
+* ecget river flow Fraser ran fine manually at ~10:00
+* make_runoff_file
+* upload_forcing west.cloud --debug to avoid triggering forecast2 runs
+* upload_forcing orcinus-nowcast-agrif
+* upload_forcing cedar-hindcast
+* clean_checklist
+Researched AMQP file access from datamart:
+* recommended tool is https://github.com/MetPX/sarracenia
+* dependencies from setup.py:
+  * amqplib pypi
+  * appdirs conda
+  * watchdog conda
+  * netifaces conda
+  * humanize conda
+  * psutil conda
+* conda create -n sarracenia python=3 appdirs watchdog netifaces humanize psutil
+* pip install amqplib metpx-sarracenia
+* failed due to missing paramiko dependency; created https://github.com/MetPX/sarracenia/issues/123
+* several working experiments in kudu:/media/doug/warehouse/MEOPAR/sarracenia-test/
+* note that amqp fork of amqplib probably won't work because sarracenia uses import amqplib.client_0_8 as amqp
+(SalishSea)
+
+Continued MOHID scaling tests on cedar:
+* 1 core w/ 12000M, 1h3m55s, 93.03% memory efficiency, 94.24% cpu efficiency
+* 1 core w/ 11800M, 1h4m20s, 94.59% memory efficiency, 98.91% cpu efficiency
+(MIDOSS)
+
+Worked on copying shared storage from matisse RAID to lizzy:
+* confirmed that all of finances/ has been copied
+* created matisse:moved_to_lizzy/
+* moved matisse:finances to moved_to_lizzy/
+* copied matisse:manuals to lizzy; moved matisse:manuals to moved_to_lizzy/
+* copied matisse:lulu_www to lizzy; moved matisse:lulu_www to moved_to_lizzy/
+* copied matisse:CT_Data to lizzy; moved matisse:CT_Data to moved_to_lizzy/
+* copied matisse:ebooks to lizzy; moved matisse:ebooks to moved_to_lizzy/
+* copied matisse:lists to lizzy; moved matisse:lists to moved_to_lizzy/
+* copied matisse:hg to lizzy; moved matisse:hg to moved_to_lizzy/
+* copied matisse:cycling to lizzy; moved matisse:cycling to moved_to_lizzy/
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
