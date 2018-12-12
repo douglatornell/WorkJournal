@@ -5732,6 +5732,51 @@ Worked on copying shared storage from matisse RAID to lizzy:
 * copied matisse:cycling to lizzy; moved matisse:cycling to moved_to_lizzy/
 
 
+Week 50
+-------
+
+Mon 10-Dec-2018
+^^^^^^^^^^^^^^^
+
+Continued dev of MOHID-Cmd package; started prepare sub-command.
+(MIDOSS)
+
+Nick of Rich gave Phys Ocgy seminar about electrical potential effects in double diffusion and pH meter liquid junctions.
+
+nowcast-agrif failed due to missing time step in 09dec18/restart_trc file; suspect disk quota issue on orcinus; cleared out runs and YAML files >15d old and set up crontab to do that daily; backfilling:
+* make_forcing_links nowcast-agrif 2018-12-09
+
+* make_forcing_links nowcast-agrif 2018-12-10
+(SalishSea)
+
+
+Tue 11-Dec-2018
+^^^^^^^^^^^^^^^
+
+Updated Mercurial on kudu to 44.8.1+3-4265bfb53dd3:
+* conda activate hg-dev
+* cd hg-stable
+* hg pull -u
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
+Continued dev of MOHID-Cmd package.
+(MIDOSS)
+
+SalishSeaCast team mtg; see whiteboard.
+download_live_ocean failed:
+* used symlink created during forecast2 to presist 10dec18 as 11dec18
+* upload_forcing west.cloud-nowcast nowcast+
+* upload_forcing orcinus-nowcast-agrif nowcast+
+* upload_forcing cedar-hindcast nowcast+
+Sent email to Roman about memmory allocation issue on orcinus re: nowcast-agrif.
+Worked on improving SalishSeaNowcast release_mgmt.tag_release to avoid tagging commits from hg tag operations and instead tag the last substantive changeset.
+Helped Susan with build issues on cedar, mostly caused by admins messing with the module system.
+(SalishSea)
+
+
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
