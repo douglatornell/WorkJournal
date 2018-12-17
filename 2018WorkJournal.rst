@@ -5453,6 +5453,9 @@ Fri 23-Nov-2018
 See project journal.
 (SalishSeaCast-FVCOM)
 
+See project journal.
+(Resilient-C)
+
 nowcast-dev/22nov18 got stuck at 35.4% complete; only xios left running, killed it at ~08:45.
 ecget river flow failed with parsing issue; it appears that the site has change to now force a secondary y-axis variable which defaults to water temperature; added handling to ecget.river; also changed wateroffice URL there to HTTPS.
 Too late to run foreacst2/22nov18.
@@ -5507,6 +5510,9 @@ Tue 27-Nov-2018
 IOS
 
 CIOPS-W (NEP36) preview mtg; see notebook.
+
+See project journal.
+(Resilient-C)
 
 
 Wed 28-Nov-2018
@@ -5745,8 +5751,9 @@ Nick of Rich gave Phys Ocgy seminar about electrical potential effects in double
 
 nowcast-agrif failed due to missing time step in 09dec18/restart_trc file; suspect disk quota issue on orcinus; cleared out runs and YAML files >15d old and set up crontab to do that daily; backfilling:
 * make_forcing_links nowcast-agrif 2018-12-09
-
 * make_forcing_links nowcast-agrif 2018-12-10
+* make_forcing_links nowcast-agrif 2018-12-11
+* make_forcing_links nowcast-agrif 2018-12-12
 (SalishSea)
 
 
@@ -5775,6 +5782,113 @@ Helped Susan with build issues on cedar, mostly caused by admins messing with th
 (SalishSea)
 
 
+Wed 12-Dec-2018
+^^^^^^^^^^^^^^^
+
+Email w/ Rachael re: loading netCDF files locally vs. from OPenDAP services.
+(MIDOSS)
+
+See project journal.
+(Resilient-C)
+
+Did nowcast-agrif recovery w/ Roman's help.
+(SalishSea)
+
+
+Thu 13-Dec-2018
+^^^^^^^^^^^^^^^
+
+Email to CIRA re: separate registration of randonneurs.ca domain.
+
+See project journal.
+(Resilient-C)
+
+Noticed that log did not roll; investigation showed that watch_NEMO nowcast-green 12dec18 on west.cloud went catatonic; recovery:
+* kill catatonic watch_NEMO on west.cloud
+* restarted log_aggregator on skookum
+* used launch_remote_worker to launch watch_NEMO nowcast 13dec18 on west.cloud
+* discovered that I forgot to add nest_workers.after_launch_remote_worker
+* download_results nowcast-green 2018-12-12 --debug
+* make_plots nemo nowcast-green research 2018-12-12
+* launch_remote_worker "make_ww3_wind_file --run-date 2018-12-12 --debug"
+* launch_remote_worker "make_ww3_current_file --run-date 2018-12-12 --debug"
+* launch_remote_worker "run_ww3 nowcast --run-date 2018-12-12"
+* launch_remote_worker "make_ww3_wind_file --run-date 2018-12-13"
+* launch_remote_worker "make_ww3_current_file --run-date 2018-12-13"
+* mkdir nowcast-dev/12dev18
+* cp nowcast-blue/12dec18/namelist_cfg nowcast-dev/12dec18/
+* make_forcing_links salishsea-nowcast nowcast+ --shared-storage
+Updated SalishSeaNowcast on west.cloud from 1679:2a87e4b1e1d1 to 1789:edb54837c379 to facilitate testing vhfr_x2 baroclinic branch.
+Updated OPPTools on west.cloud.
+(SalishSea)
+
+Added --no-verify-ssl-certs option to RiverFlow plug-in:
+* Don't verify SSL certificates chain for requests to https://wateroffice.ec.gc.ca/.
+* Also suppress InsecureRequestWarning warnings from urllib3 vendored in the requests package.
+* This is a hack to reduce the noise from cron jobs on some systems that have problems with the Nov-2018 forced redirection to https://wateroffice.ec.gc.ca/.
+* Defaults to False.
+(ECget)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+salishsea-site went down at ~14:46
+Restarted web app but it made no difference, as ususal; killed and relaunched circus daemon and site came back at ~17:00.
+(salishsea-site)
+
+Discussed MOHID results viz from Shihan's Oct case w/ Rachael and Susan.
+Sent email to Shihan re: VCS for MIDOSS-MOHID code.
+Continued MOHID scaling tests on cedar:
+* 1 core w/ 11800M, 52m40s, 94.58% memory efficiency, 98.86% cpu efficiency
+(MIDOSS)
+
+
+Fri 14-Dec-2018
+^^^^^^^^^^^^^^^
+
+Email w/ Shihan about Mercurial; added him to MOAD team.
+Email to Bitbucket requesting academic license for MIDOSS team.
+Tried to run hdf5-to-netcdf4 on salish to convert Oct Lagrangian file and it fails w/ out of disk space error on /tmp/; switched to smelt and got success, but it took ~30min and produced at 110M file instead of 26M from niko.
+Experimented with hdf5-to-netcdf4 set to not use scaled int storage for field values; no difference to plots in Susan's notebook.
+Added hdf5-to-netcdf4 --verbose option to control logging output from CLI.
+(MIDOSS)
+
+west.cloud sufferred a network connectivity issue, but automation handled it more or less cleanly.
+nowcast-green output files were 1h short; suspect ongoing memory leak on VMs, reduced XIOS buffer size factor from 0.08 to 0.75 and successfully repeated run.
+(SalishSea)
+
+Change from HTTP HEAD to Path.exists() to detect figure availability; big speed-up for calendar grids and figure pages.
+(salishsea-site)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Sat 15-Dec-2018
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Finished improving SalishSeaNowcast release_mgmt.tag_release to avoid tagging commits from hg tag operations and instead tag the last substantive changeset.
+Helped Susan with alternate combine/deflate strategies for hindcast runs on cedar.
+Updated OPPTools on skookum to enable vh_x2_baroclinic branch make_fvcom_atmos_forcing to work:
+* got 1ca87ca..6c784a4
+* did make_fvcom_atmos_forcing
+* git checkout 1ca87ca to get back to production state; detached HEAD
+* git checkout master should get me back
+(SalishSea)
+
+
+Sun 16-Dec-2018
+^^^^^^^^^^^^^^^
+
+Forwarded CIRA response re: randonneurs.ca to Cheryl with my opinion that that domain is lost to time.
+
+Helped Susan sort through tagging PROD-nowcast-dev-201806.
+forecast/16dec18 got stuck at 84.7% due to a file length issue in atmos forcing; upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race conditions between grib_to_netcdf and make_live_ocean_files.
+(SalishSea)
 
 
 
