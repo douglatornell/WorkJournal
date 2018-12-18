@@ -5891,6 +5891,18 @@ forecast/16dec18 got stuck at 84.7% due to a file length issue in atmos forcing;
 (SalishSea)
 
 
+Tue 18-Dec-2018
+^^^^^^^^^^^^^^^
+
+ecget river flow Fraser and Englishman failed w/ ValueError on empty string to float in automation at ~03:06 and ~03:12:
+* ecget river flow Fraser ran fine manually at ~07:20
+* ecget river flow FraserEnglishman ran fine manually at ~07:20
+* make_runoff_file
+* upload_forcing west.cloud
+* upload_forcing orcinus-nowcast-agrif
+* upload_forcing cedar-hindcast
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
