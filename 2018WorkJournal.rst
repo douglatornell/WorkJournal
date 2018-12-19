@@ -5776,7 +5776,7 @@ download_live_ocean failed:
 * upload_forcing west.cloud-nowcast nowcast+
 * upload_forcing orcinus-nowcast-agrif nowcast+
 * upload_forcing cedar-hindcast nowcast+
-Sent email to Roman about memmory allocation issue on orcinus re: nowcast-agrif.
+Sent email to Roman about memory allocation issue on orcinus re: nowcast-agrif.
 Worked on improving SalishSeaNowcast release_mgmt.tag_release to avoid tagging commits from hg tag operations and instead tag the last substantive changeset.
 Helped Susan with build issues on cedar, mostly caused by admins messing with the module system.
 (SalishSea)
@@ -5891,6 +5891,28 @@ forecast/16dec18 got stuck at 84.7% due to a file length issue in atmos forcing;
 (SalishSea)
 
 
+Week 51
+-------
+
+Mon 17-Dec-2018
+^^^^^^^^^^^^^^^
+
+Added installation of moad_tools and MOHID-Cmd to MOHID on cedar docs.
+Installed moad_tools and MOHID-Cmd in my --user space on cedar.
+Tested hdf5-to-netcdf4 on cedar in salloc interactive sessions:
+* salloc w/ default 256m memory failed
+* salloc w/ 4000m memory failed
+* salloc w/ 8000m memory failed
+* salloc w/ 12000m memory failed
+* salloc w/ 16000m memory failed
+* salloc w/ 20000m memory with default TMPDIR (/tmp/) succeeded 6m20.766s
+* salloc w/ 20000m memory with TMPDIR=$SLURM_TMPDIR (/localscratch/) succeeded 6m26.409s
+Need to add module load nco/4.6.6 to docs.
+Need to figure out how to make hdf5-to-netcdf4 use less memory; maybe don't hold hdf5 file open via context manager
+Created MIDOSS-MOHID code repo and populated it with code from Shihan; worked on streamlining compile_mohid.sh script to include only what we need.
+(MIDOSS)
+
+
 Tue 18-Dec-2018
 ^^^^^^^^^^^^^^^
 
@@ -5901,6 +5923,25 @@ ecget river flow Fraser and Englishman failed w/ ValueError on empty string to f
 * upload_forcing west.cloud
 * upload_forcing orcinus-nowcast-agrif
 * upload_forcing cedar-hindcast
+SalishSeaCast team mtg; see whiteboard
+download_live_ocean failed:
+* used symlink created during forecast2 to presist 17dec18 as 18dec18
+* upload_forcing west.cloud-nowcast nowcast+
+* upload_forcing orcinus-nowcast-agrif nowcast+
+* upload_forcing cedar-hindcast nowcast+
+(SalishSea)
+
+Finished streamlining compile_mohid.sh script to include only what we need; MIDOSS-MOHID repo is ready for use.
+Continued dev of MOHID-Cmd package.
+(MIDOSS)
+
+Westgrid townhall:
+* cyber-security presentation by Jonathan Ferland, Compute Canada Director of Information Security
+* discussed cedar problems, but say that system is stable this week
+* Webinars:
+  * feb 20 memory debugging w/ valgrind
+  * may 15 julia
+
 
 
 
