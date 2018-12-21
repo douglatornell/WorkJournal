@@ -5880,6 +5880,9 @@ Updated OPPTools on skookum to enable vh_x2_baroclinic branch make_fvcom_atmos_f
 * git checkout master should get me back
 (SalishSea)
 
+See project journal.
+(SalishSeaCast-FVCOM)
+
 
 Sun 16-Dec-2018
 ^^^^^^^^^^^^^^^
@@ -5929,6 +5932,7 @@ download_live_ocean failed:
 * upload_forcing west.cloud-nowcast nowcast+
 * upload_forcing orcinus-nowcast-agrif nowcast+
 * upload_forcing cedar-hindcast nowcast+
+Forgot that orcinus was down for cooling system maintenance, but Roman managed the nowcast-agrif run for us :-)
 (SalishSea)
 
 Finished streamlining compile_mohid.sh script to include only what we need; MIDOSS-MOHID repo is ready for use.
@@ -5942,6 +5946,114 @@ Westgrid townhall:
   * feb 20 memory debugging w/ valgrind
   * may 15 julia
 
+
+Wed 19-Dec-2018
+^^^^^^^^^^^^^^^
+
+ecget river flow Fraser and Englishman failed w/ ValueError on empty string to float in automation at ~03:06 and ~03:12:
+* ecget river flow Fraser ran fine manually at ~08:30
+* ecget river flow FraserEnglishman ran fine manually at ~08:30
+* make_runoff_file
+* upload_forcing west.cloud
+* upload_forcing orcinus-nowcast-agrif
+* upload_forcing cedar-hindcast
+Backfilled LiveOcean from 11dec18 and 18dec18:
+* download_live_ocean 2018-12-11 --debug
+* rm LiveOcean_v201712_y2018m12d11.nc symlink
+* make_live_ocean_files 2018-12-11 --debug
+* scp LiveOcean_v201712_y2018m12d11.nc west.cloud:/nemoShare/MEOPAR/LiveOcean/
+* scp LiveOcean_v201712_y2018m12d11.nc cedar:project/SalishSea/forcing/LiveOcean/
+* scp LiveOcean_v201712_y2018m12d11.nc graham:project/SalishSea/forcing/LiveOcean/
+* scp LiveOcean_v201712_y2018m12d11.nc orcinus:/home/sallen/MEOPAR/LiveOcean/
+* download_live_ocean 2018-12-18
+* rm LiveOcean_v201712_y2018m12d18.nc symlink
+* make_live_ocean_files 2018-12-18 --debug
+* scp LiveOcean_v201712_y2018m12d18.nc west.cloud:/nemoShare/MEOPAR/LiveOcean/
+* scp LiveOcean_v201712_y2018m12d18.nc cedar:project/SalishSea/forcing/LiveOcean/
+* scp LiveOcean_v201712_y2018m12d18.nc graham:project/SalishSea/forcing/LiveOcean/
+* scp LiveOcean_v201712_y2018m12d18.nc orcinus:/home/sallen/MEOPAR/LiveOcean/
+Created sarracenia-env on skookum:
+* conda create -c conda-forge -p /results/nowcast-sys/sarracenia-env python=3 appdirs watchdog netifaces humanize psutil paramiko
+* source activate /results/nowcast-sys/sarracenia-env
+* pip install amqplib metpx-sarracenia
+* sr_subscribe edit credentials.conf  # initialize datamart credentials
+* created /results/nowcast-sys/hydrometric.conf:  # temporary location
+    broker amqps://anonymous@dd.weather.gc.ca
+    subtopic hydrometric.csv.BC.hourly
+    directory /results/forcing/rivers/datamart
+    overwrite true
+    # Englishman River at Parksville
+    accept .*08HB002.*
+    # Fraser River at Hope
+    accept .*08MF005.*
+* sr_subscribe start /results/nowcast-sys/hydrometric.conf  # initiate subscription
+* sr_subscribe log /results/nowcast-sys/hydrometric.conf  # monitor for activity
+* created /results/nowcast-sys/hrdps-west.conf:  # temporary location
+    broker amqps://anonymous@dd.weather.gc.ca
+    subtopic model_hrdps.west.grib2.#
+    directory /results/forcing/atmospheric/GEM2.5/GRIB/datamart
+    mirror true
+    strip 4
+    # u component of wind velocity at 10m elevation
+    accept .*UGRD_TGL_10.*
+    # v component of wind velocity at 10m elevation
+    accept .*VGRD_TGL_10.*
+    # accumulated downward shortwave (solar) radiation at ground level
+    accept .*DSWRF_SFC_0.*
+    # accumulated downward longwave (thermal) radiation at ground level
+    accept .*DLWRF_SFC_0.*
+    # upward surface latent heat flux (for VHFR FVCOM)
+    accept .*LHTFL_SFC_0.*
+    # air temperature at 2m elevation
+    accept .*TMP_TGL_2.*
+    # specific humidity at 2m elevation
+    accept .*SPFH_TGL_2.*
+    # relative humidity at 2m elevation (for VHFR FVCOM)
+    accept .*RH_TGL_2.*
+    # accumulated precipitation at ground level
+    accept .*APCP_SFC_0.*
+    # precipitation rate at ground level (for VHFR FVCOM)
+    accept .*PRATE_SFC_0.*
+    # atmospheric pressure at mean sea level
+    accept .*PRMSL_MSL_0.*
+    # total cloud in percent (for parametrization of radiation missing from 2007-2014 GRMLAM)
+    accept .*TCDC_SFC_0.*
+  would be nice to figure out how to reject 000/ directory
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Thu 20-Dec-2018
+^^^^^^^^^^^^^^^
+
+ecget river flow Fraser and Englishman failed w/ ValueError on empty string to float in automation at ~03:06 and ~03:12:
+* ecget river flow Fraser ran fine manually at ~08:00
+* ecget river flow FraserEnglishman ran fine manually at ~08:00
+* make_runoff_file
+* upload_forcing west.cloud
+* upload_forcing orcinus-nowcast-agrif
+* upload_forcing cedar-hindcast
+Checked sarracenia mirror of HRDPS GRIB files; working as expected; added a directive to reject 000/ directory.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Fri 21-Dec-2018
+^^^^^^^^^^^^^^^
+
+ecget river flow Fraser and Englishman failed w/ ValueError on empty string to float in automation at ~03:06 and ~03:12:
+* ecget river flow Fraser ran fine manually at ~07:35
+* ecget river flow FraserEnglishman ran fine manually at ~07:35
+* make_runoff_file
+* upload_forcing west.cloud
+* upload_forcing orcinus-nowcast-agrif
+* upload_forcing cedar-hindcast
+Checked sarracenia mirror of HRDPS GRIB files; working as expected.
+(SalishSea)
 
 
 
