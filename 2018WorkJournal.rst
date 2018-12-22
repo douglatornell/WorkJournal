@@ -6053,7 +6053,36 @@ ecget river flow Fraser and Englishman failed w/ ValueError on empty string to f
 * upload_forcing orcinus-nowcast-agrif
 * upload_forcing cedar-hindcast
 Checked sarracenia mirror of HRDPS GRIB files; working as expected.
+Worked w/ Susan on trying to get XIOS/NEMO working well again on cedar in light of mtg w/ Roman and 4dec18 mpi lib changes:
+* XIOS-2 build fails with errors about ambiguity of shared_ptr in client.cpp
+Updated salish:/results/nowcast-sys/ clones for PROD-nowcast-dev-201806:
+********note: clones are updated to PROD-nowcast-dev-201806 tag*********
+* grid
+* NEMO-3.6-code
+* rivers-climatology
+* SS-run-sets      ******no PROD-nowcast-dev-201806 tag, so at 2209:54a56985baa0
+* tides
+* tracers
+* XIOS-2
+* XIOS-ARCH
+Killed nowcast-dev/21dec18, and deleted /results/SalishSea/nowcast-dev/21dec18/.
+Built SalishSeaCast_Blue configuration on salish:
+* XIOS_HOME=/results/nowcast-sys/XIOS-2/ ./makenemo -n SalishSea -m GCC_SALISH -j8
+Use restart file from 201806 hindcast/20dec18 to initialize nowcast-dev/21dec18:
+* cd /results/SalishSea/nowcast-dev/20dec18/
+* mv SalishSea_03414960_restart.nc SalishSea_03414960_restart.nc.aside
+* cp /results2/SalishSea/hindcast/20dec18/SalishSea_03235680_restart.nc ./
+Relaunch nowcast-dev/21dec18:
+* launch_remote_worker $NOWCAST_YAML salish-nowcast run_NEMO "salish-nowcast nowcast-dev --run-date 2018-12-21"
+Merged SalishSeaNowcast SurfaceCurrents branch into default and closed it re: full deployment of feature.
 (SalishSea)
+
+Moved smelt into ESB-2049 and set up its new monitors, keyboard & mouse; need compstaff to set up network, and need dvi or hdmi cable for 2nd monitor.
+(MIDOSS)
+
+Mtg w/ Roman at UBC ARC re: cedar, etc.
+* cedar got MPI networks comms libraries on 4dec18
+* test XIOS and XIOS builds w/ Intel 2018.3
 
 
 
