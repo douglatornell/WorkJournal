@@ -5876,7 +5876,7 @@ Helped Susan with alternate combine/deflate strategies for hindcast runs on ceda
 Updated OPPTools on skookum to enable vh_x2_baroclinic branch make_fvcom_atmos_forcing to work:
 * got 1ca87ca..6c784a4
 * did make_fvcom_atmos_forcing
-* git checkout 1ca87ca to get back to production state; detached HEAD
+* git checkout 1ca87ca  # to get back to production state; detached HEAD
 * git checkout master should get me back
 (SalishSea)
 
@@ -6200,7 +6200,6 @@ Mon 31-Dec-2018
 Finished dev of collect_weather worker; activated in production on skookum for 18 forecast.
 Worked with Susan to change SalishSeaCast runs from V17-02 to V18-06 configuation:
 * see https://docs.google.com/drawings/d/1DnQtKXCzkMT2rTMC970E2HliisgG9W2sTk7u2NrldFA/edit
-
 * tagged SalishSeaNowcast with PROD-nowcast-green-201806
 forecast/31dec18 got stuck at 84.7% due to a file length issue in atmos forcing; upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race conditions between grib_to_netcdf and make_live_ocean_files; recovery:
 * kill watch_NEMO on west.cloud
