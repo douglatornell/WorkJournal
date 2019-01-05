@@ -71,6 +71,24 @@ See project journal.
 (Resilient-C)
 
 
+Fri 4-Jan-2018
+^^^^^^^^^^^^^^
+
+Team mtg; see whiteboard.
+Started dev of mohid run subcomaand.
+(MIDOSS)
+
+Worked w/ Ben to get SalishSeaCmd and Mercurial working under Python 3.5 on orcinus:
+* see hg build notes from Tue 11-Sep-2018, but load gcc and do make install-home
+* change PATH to put $HOME/bin near the front
+* hg version is stuck at 4.8rc0
+download_live_ocean worked on 1st try at 08:26; forecast finished at 09:48; nowcast-agrif was queued at 09:49; nowcast-green finished at 11:39.
+Disabled ECget river flow crob jobs on sallish in favour of collect_river_data worker.
+Worked with Susan to sort why 18-06 ERDDAP datasets suddenly disappeared; nowcast-green/31dec18 files downloaded from ceder were 30dec18 by accident; Susan fixed that.
+Email to Emilio re: availability of new datsets for NANOOS and change in dataset id version.
+(SalishSea)
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
