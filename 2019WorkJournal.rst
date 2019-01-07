@@ -89,6 +89,28 @@ Email to Emilio re: availability of new datsets for NANOOS and change in dataset
 (SalishSea)
 
 
+Sat 5-Jan-2018
+^^^^^^^^^^^^^^
+
+2018-2019 financial roll-over
+
+
+Sun 6-Jan-2018
+^^^^^^^^^^^^^^
+
+upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race conditions between grib_to_netcdf and make_live_ocean_files, but no runs got launched; recovery:
+* upload_forcing west.cloud nowcast+
+* upload_forcing orcinus nowcast+
+* upload_forcing cedar nowcast+
+(SalishSea)
+
+Demoted Fraser water quality buoy wind speed from warning level notification because sensor is out of commission and we don't care.
+(ECget)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
