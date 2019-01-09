@@ -111,6 +111,37 @@ See project journal.
 (SalishSeaCast-FVCOM)
 
 
+Week 2
+------
+
+Mon 7-Jan-2018
+^^^^^^^^^^^^^^
+
+Sent email to Roman requesting chang nowcast-agrif reservation window to 10:00 to 13:00, and asking if he will consider building a Python 3.7 module on orcinus.
+Sent email to Michael & Maxim re: change to 2018-06 config and sarracenia-based HRDPS file management.
+Updated ERDDAP index page re: dates of V17-02 to V18-06 change-over and planned removal dates for V17-02 datasets.
+Started updating tide gauge station water level datasets from V17-02 to V18-06.
+(SalishSea)
+
+Phys Ocgy seminar by Hayley Dosser.
+
+Scary experience with Mercurial and SalishSeaNowcast: niko was left with tip on branch closure commit and when I pulled in work since 23-Dec hg update failed with a traceback about a node with no descendents.
+
+Continued dev of mohid run sub-command.
+(MIDOSS)
+
+
+Tue 8-Jan-2018
+^^^^^^^^^^^^^^
+
+Investigated figure failures due to ERDDAP dataset id changes and found that accommodating mix of 17-02 and 18-06 is very troublesome.
+Continued updating tide gauge station water level datasets from V17-02 to V18-06.
+(SalishSea)
+
+Continued dev of mohid run sub-command.
+(MIDOSS)
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
