@@ -70,6 +70,9 @@ See project journal.
 See project journal.
 (Resilient-C)
 
+See project work journal.
+(GOMSS)
+
 
 Fri 4-Jan-2018
 ^^^^^^^^^^^^^^
@@ -135,11 +138,30 @@ Tue 8-Jan-2018
 ^^^^^^^^^^^^^^
 
 Investigated figure failures due to ERDDAP dataset id changes and found that accommodating mix of 17-02 and 18-06 is very troublesome.
-Continued updating tide gauge station water level datasets from V17-02 to V18-06.
+Continued updating tide gauge station water level datasets from V17-02 to V18-06, but then reverted them all due to make_plots issue.
+hindcast-201812 filled /results/ and crashed the automation; big thrash to get it re-started.
+SalishSeasCast team mtg; see whiteboard.
 (SalishSea)
 
 Continued dev of mohid run sub-command.
 (MIDOSS)
+
+Spin class.
+
+
+Wed 9-Jan-2018
+^^^^^^^^^^^^^^
+
+Started learning rust.
+
+forecast finished at 08:53; agrif finished at 10:23
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
 
 
 
