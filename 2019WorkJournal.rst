@@ -164,6 +164,23 @@ See project work journal.
 (GOMSS)
 
 
+Thu 10-Jan-2018
+^^^^^^^^^^^^^^^
+
+Confirmed that hindcast-201812 is indeed archiving VHFR FVCOM boundary slab files.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Continued dev of mohid run sub-command.
+Created MIDOSS-MOHID-config repo.
+Set up $PROJECT/$USER/MIDOSS/ work space on cedar to test research runs setup.
+(MIDOSS)
+
+AtSci candidate seminar by Kate Marvel.
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
