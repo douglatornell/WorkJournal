@@ -181,6 +181,40 @@ Set up $PROJECT/$USER/MIDOSS/ work space on cedar to test research runs setup.
 AtSci candidate seminar by Kate Marvel.
 
 
+Fri 11-Jan-2018
+^^^^^^^^^^^^^^^
+
+Continued learning rust:
+* need to export BROWSER=firefox for rustup doc to work
+
+See project work journal.
+(GOMSS)
+
+
+Sat 12-Jan-2018
+^^^^^^^^^^^^^^^
+
+Did more research on converting EC RPN files to netCDF and found http://collaboration.cmc.ec.gc.ca/science/rpn.comm/wiki/doku.php?id=armnlib which looks like it will give us librmn to enable getting farther in compilation of code from Francois Roy; review of ARMNLIB installation script tells me I want to run it in a VM.
+Updated cedar:hindcast-sys/ repo clones to PROD-hindcast_201812-v2 tag
+(SalishSea)
+
+Discovered that TLS certs for susanallen.ca and 43ravens.ca have expired; opened support ticket on webfaction after a bunch of digging showed that something there changed between 21sep18 when susanallen.ca auto-renewed and 6oct18 when 43ravens.ca failed to auto-renew.
+Webfaction now has control panel support for HTTPS via Let's Encrypt.
+
+
+Sun 13-Jan-2018
+^^^^^^^^^^^^^^^
+
+Enabled HTTPS via control panel for susanallen.ca and 43ravens.ca; still unclear whether or not redirect sites & apps are still required.
+Tested control panel HTTPS on other domains:
+* cyclelog looses style presumably due to how /static is being accessed
+* douglatornell.ca shows mixed content warning due to how flickr images are accessed
+* phpgedview has insecure content warnings on some pages
+* sadahome.ca looses style presumably due to how /static is being accessed
+
+Continued learning rust.
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
