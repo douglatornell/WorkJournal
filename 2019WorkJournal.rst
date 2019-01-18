@@ -36,7 +36,7 @@ Felt progressively crappier as the day went on; headache, body aches, fatigue.
 Wed 2-Jan-2018
 ^^^^^^^^^^^^^^
 
-Work with headache, body aches, sore throat, and lethargy.
+Worked with headache, body aches, sore throat, and lethargy.
 
 Upgraded kudu and niko to Pop!_OS 18.10:
 * followed https://support.system76.com/articles/upgrade-pop/
@@ -211,8 +211,51 @@ Tested control panel HTTPS on other domains:
 * douglatornell.ca shows mixed content warning due to how flickr images are accessed
 * phpgedview has insecure content warnings on some pages
 * sadahome.ca looses style presumably due to how /static is being accessed
+Set up Pyramid app at test_pyramid_https, mounted at test-pyramid-http.douglatornell.ca.
 
 Continued learning rust.
+
+
+Week 3
+------
+
+Mon 14-Jan-2018
+^^^^^^^^^^^^^^^
+
+Got test_pyramid_https app working with HTTPS by adding url_scheme = https to server:main section of config file.
+
+See work journal.
+(Resilient-C)
+
+Replied to email from Michael asking for sample GEMLAM RPN file with path on /data/, notes about building cstrpn2cdf, and my progress re: ARMNLIB on the weekend. He replied with libs and a binary that I successfully tested on salish and niko.
+(SalishSea)
+
+Phys Ocgy seminar by Rachael on MIDOSS project.
+
+Continued dev of mohid run sub-command.
+(MIDOSS)
+
+
+Tue 15-Jan-2018
+^^^^^^^^^^^^^^^
+
+MOHID-Cmd intro session w/ Rachael and Ashu.
+(MIDOSS)
+
+Submitted expense claim for 2x8Tb external drives.
+
+Worked on SalishSeasCast test case with Intel MPI libraries on cedar for Martin re: ticket:
+* updated repos in /home/dlatorne/project/dlatorne/MEOPAR/
+* cleaned all NEMO configs
+* built XIOS-2 with:
+  * module load intel/2018.3 impi/2018.3.222
+  * module load hdf5-mpi/1.8.18
+  * module load netcdf-c++-mpi/4.2 netcdf-fortran-mpi/4.4.4 netcdf-mpi/4.4.1.1
+  The last module load results in:
+  * The following have been reloaded with a version change:
+  1) hdf5-mpi/1.8.18 => hdf5-mpi/1.10.3
+
+(SalishSea)
 
 
 
