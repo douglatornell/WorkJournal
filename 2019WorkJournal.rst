@@ -258,6 +258,92 @@ Worked on SalishSeasCast test case with Intel MPI libraries on cedar for Martin 
 (SalishSea)
 
 
+Wed 16-Jan-2018
+^^^^^^^^^^^^^^^
+
+Continued learning rust.
+
+Another attempt to build XIOS-2 with Intel 2018 modules requested by Martin:
+  module load python/3.7
+  module load netcdf-fortran-mpi/4.4.4
+  module load intel/2018.3 impi/2018.3.222
+  module unload openmpi/2.1.1
+  module load netcdf-c++-mpi/4.2
+  module load perl/5.22.2
+but that changes the MPI compilers to gcc and gfortran; sent email to Martin for clarification; replied that the  compiler change is a bug that can be worked around with:
+  export I_MPI_CC=icc
+  export I_MPI_CXX=icpc
+  export I_MPI_F90=ifort
+  export I_MPI_F77=ifort
+netcdf*-mpi module loads fail in interactive session on compute node for build because there are no modules there build against impi, only openmpi; sent email to to Martin.
+Released NEMO_Nowcast-19.1 and bumped dev to 19.2.dev0.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+
+Thu 17-Jan-2018
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Tried building XIOS-2 on login node with env from Martin; failed w/ c++ compile error:
+  mpicc -o client.o -DUSING_NETCDF_PAR -I/home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/inc -diag-disable 1125 -diag-disable 279 -D_GLIBCXX_USE_CXX11_ABI=0 -O3 -D BOOST_DISABLE_ASSERTS  -I/home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/extern/src_netcdf -I/home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/extern/boost/include -I/home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/extern/rapidxml/include -I/home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/extern/blitz/include -c /home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/src/client.cpp
+  In file included from /home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/inc/calendar_wrapper.hpp(10),
+                   from /home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/inc/context.hpp(7),
+                   from /home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/src/client.cpp(7):
+  /home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/inc/object_template.hpp(76): error: "shared_ptr" is ambiguous
+             shared_ptr<T> getShared(void) ;
+             ^
+
+  In file included from /home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/inc/calendar_wrapper.hpp(10),
+                   from /home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/inc/context.hpp(7),
+                   from /home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/src/client.cpp(7):
+  /home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/inc/object_template.hpp(77): error: "shared_ptr" is ambiguous
+             static shared_ptr<T> getShared(const T* ptr) ;
+                    ^
+
+  In file included from /home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/inc/context.hpp(12),
+                   from /home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/src/client.cpp(7):
+  /home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/inc/data_output.hpp(60): error: "xios::shared_ptr" is ambiguous
+                                             const shared_ptr<CCalendar> cal) = 0;
+                                                   ^
+
+  In file included from /home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/src/client.cpp(7):
+  /home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/inc/context.hpp(208): error: "xios::shared_ptr" is ambiguous
+             static shared_ptr<CContextGroup> root;
+                    ^
+
+  /home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/src/client.cpp(284): error: no operator "<<" matches these operands
+              operand types are: std::basic_ostream<char, std::char_traits<char>> << StdStringStream
+            ERROR("void CClient::openStream(const StdString& fileName, const StdString& ext, std::filebuf* fb)",
+            ^
+  /home/dlatorne/project/dlatorne/MEOPAR/XIOS-2/inc/date.hpp(34): note: this candidate was rejected because function is not visible
+                friend StdOStream& operator<<(StdOStream& out, const CDate& date);
+  ...
+Sent email to ticket 042269.
+Martin replied with suggestion to add -std=c++11 compile flag; didn't help.
+Did svn checkout of xios-2.0 trunk and got r1637; it built on login node, but took nearly 1 hour.
+Built NEMO SalishSeasCast w/ Intel 2018.3 module loads.
+Tried 21nov14_oneday tests
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Updated Mercurial on kudu to 4.8.2+3-fbd168455b26:
+* conda activate hg-dev
+* cd hg-stable
+* hg pull -u
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
+
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
