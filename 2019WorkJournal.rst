@@ -254,8 +254,28 @@ Worked on SalishSeasCast test case with Intel MPI libraries on cedar for Martin 
   The last module load results in:
   * The following have been reloaded with a version change:
   1) hdf5-mpi/1.8.18 => hdf5-mpi/1.10.3
-
 (SalishSea)
+
+
+Fri 18-Jan-2018
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+Sorted out mess from transition to production yesterday of FVCOM VHFR x2 baroclinic config:
+* nowcast-x2/18jan19 is incomplete
+* forecast-x2/18jan19 is MIA
+* 11jan18-10feb18 hindcast results are going into hindcast.201812/ instead of hindcast.201812_annex/; moved them
+* manually re-ran nowcast/18jan19
+* changed next_workers to launch make_fvcom_boundary after watch_fvcom forecast, and forecast/18jan19 launched via automation
+* fixed x2 baroclinic stations file name to that make plots fvcom works
+* manual ran makeplots for *cast/17jan19 and nowcast/18jan19
+(SalishSea)
+
+Installed skype on niko via snap and resurrected my skype account with is now a Microsoft Live account.
+
+AtSci candidate seminar by Pengfei Liu (aerosol chemistry and climate change)
 
 
 Wed 16-Jan-2018
