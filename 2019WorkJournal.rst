@@ -257,27 +257,6 @@ Worked on SalishSeasCast test case with Intel MPI libraries on cedar for Martin 
 (SalishSea)
 
 
-Fri 18-Jan-2018
-^^^^^^^^^^^^^^^
-
-See work journal.
-(Resilient-C)
-
-Sorted out mess from transition to production yesterday of FVCOM VHFR x2 baroclinic config:
-* nowcast-x2/18jan19 is incomplete
-* forecast-x2/18jan19 is MIA
-* 11jan18-10feb18 hindcast results are going into hindcast.201812/ instead of hindcast.201812_annex/; moved them
-* manually re-ran nowcast/18jan19
-* changed next_workers to launch make_fvcom_boundary after watch_fvcom forecast, and forecast/18jan19 launched via automation
-* fixed x2 baroclinic stations file name to that make plots fvcom works
-* manual ran makeplots for *cast/17jan19 and nowcast/18jan19
-(SalishSea)
-
-Installed skype on niko via snap and resurrected my skype account with is now a Microsoft Live account.
-
-AtSci candidate seminar by Pengfei Liu (aerosol chemistry and climate change)
-
-
 Wed 16-Jan-2018
 ^^^^^^^^^^^^^^^
 
@@ -362,6 +341,93 @@ Updated Mercurial on kudu to 4.8.2+3-fbd168455b26:
 * hg pull -u
 * make clean all
 * sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
+
+Fri 18-Jan-2018
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+Sorted out mess from transition to production yesterday of FVCOM VHFR x2 baroclinic config:
+* nowcast-x2/18jan19 is incomplete
+* forecast-x2/18jan19 is MIA
+* 11jan18-10feb18 hindcast results are going into hindcast.201812/ instead of hindcast.201812_annex/; moved them
+* manually re-ran nowcast/18jan19
+* changed next_workers to launch make_fvcom_boundary after watch_fvcom forecast, and forecast/18jan19 launched via automation
+* fixed x2 baroclinic stations file name to that make plots fvcom works
+* manual ran makeplots for *cast/17jan19 and nowcast/18jan19
+(SalishSea)
+
+Installed skype on niko via snap and resurrected my skype account with is now a Microsoft Live account.
+
+AtSci candidate seminar by Pengfei Liu (aerosol chemistry and climate change)
+
+
+Sat 19-Jan-2018
+^^^^^^^^^^^^^^^
+
+Vancouver to Brampton
+
+Forced readthedocs build of SalishSea-MEOPAR docs for Birgit and explained by email to her the issues with webhooks triggering.
+(SalishSea)
+
+
+Sun 20-Jan-2018
+^^^^^^^^^^^^^^^
+
+Brampton
+
+Confirmed that all webhooks between Bitbucket and readthedocs are using the rtd v2 API.
+
+Updated Mercurial on niko to 4.8.2+810-593f6359681d:
+* conda activate hg-dev
+* cd hg-stable
+* hg pull -u
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
+Updated conda on niko and installed conda-build and anaconda-client pkgs into base env.
+
+Started modernizing NEMO-Cmd.
+
+See project work journal.
+(GOMSS)
+
+
+Week 4
+------
+
+Mon 21-Jan-2018
+^^^^^^^^^^^^^^^
+
+Brampton
+
+Continued modernizing NEMO-Cmd.
+
+See project work journal.
+(GOMSS)
+
+
+Tue 22-Jan-2018
+^^^^^^^^^^^^^^^
+
+Replied to automated email from arbutus.cloud re: migration, and Venkat is on ensuring our migration happens.
+collect_weather 00 stalled, unsure why; recovery:
+* download_weather 00
+* download_weather 06
+* collect_river_data Fraser --data-date 2019-01-21
+* collect_river_data Englishman --data-date 2019-01-21
+* download_weather 12
+* get_NeahBay_ssh nowcast
+* grib_to_netcdf nowcast+
+* collect_weather 18
+* download_live_ocean
+* get_onc_ctd x3
+* get_onc_ferry
+(SalishSea)
+
+Brampton to Vancouver
 
 
 
