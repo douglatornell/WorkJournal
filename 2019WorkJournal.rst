@@ -414,8 +414,8 @@ Tue 22-Jan-2018
 
 Replied to automated email from arbutus.cloud re: migration, and Venkat is on ensuring our migration happens.
 collect_weather 00 stalled, unsure why; recovery:
-* download_weather 00
-* download_weather 06
+* download_weather 00 --debug
+* download_weather 06 --debug
 * collect_river_data Fraser --data-date 2019-01-21
 * collect_river_data Englishman --data-date 2019-01-21
 * download_weather 12
@@ -429,6 +429,46 @@ collect_weather 00 stalled, unsure why; recovery:
 
 Brampton to Vancouver
 
+
+Wed 23-Jan-2018
+^^^^^^^^^^^^^^^
+
+collect_weather 18 stalled; recovery:
+* download_weather 18 --debug
+* download_weather 00 --debug
+* download_weather 06 --debug
+* collect_river_data Fraser --data-date 2019-01-22
+* collect_river_data Englishman --data-date 2019-01-22
+* download_weather 12
+* collect_weather 18
+* get_onc_ferry
+* get_onc_ctd x3
+Merged SalishSeaNowcast vhfr_x2_baroclinic branch into default re: successful deployment.
+Helped Tereza getting a test of SKOG for integration into SalishSeasCast running on salish.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Thu 24-Jan-2018
+^^^^^^^^^^^^^^^
+
+collect_weather 00 stalled; recovery:
+* download_weather 00
+* download_weather 06 to launch forecast2 runs
+* download_weather 12 to launch nowcast runs
+* collect_weather 18
+Tried to figure out why collect_weather is stalling; 00 had not seen all expected files, but sarracenia log had rolled so I couldn't tell if all were downloaded; restarted sr_subscribe for hrdps-west in case it is the culprit.
+Helped Tereza getting a test of SKOG for integration into SalishSeasCast running on salish.
+Added produciton config YAML unit tests to make_runoff_files, and removed daily creation of `RLonFraCElse_{:y%Ym%md%d}.nc` files.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Updated repo clones on kudu.
+(MIDOSS)
 
 
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
