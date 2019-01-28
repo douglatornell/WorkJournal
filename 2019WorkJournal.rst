@@ -357,6 +357,10 @@ Sorted out mess from transition to production yesterday of FVCOM VHFR x2 barocli
 * changed next_workers to launch make_fvcom_boundary after watch_fvcom forecast, and forecast/18jan19 launched via automation
 * fixed x2 baroclinic stations file name to that make plots fvcom works
 * manual ran makeplots for *cast/17jan19 and nowcast/18jan19
+More cedar ticket#042269 work:
+* grabbed xio-2 trunk and built it with Intel 2018.3 compilers and MPI lib
+* built NEMO against that XIOS-2
+* 2 test runs failed w/ module availability errors on compute notes
 (SalishSea)
 
 Installed skype on niko via snap and resurrected my skype account with is now a Microsoft Live account.
@@ -402,6 +406,10 @@ Mon 21-Jan-2018
 ^^^^^^^^^^^^^^^
 
 Brampton
+
+More cedar ticket#042269 work:
+* test run 15869965 loaded modules but failed due to missing libnetcdf.so.11
+* emailed Martin
 
 Continued modernizing NEMO-Cmd.
 
@@ -462,6 +470,8 @@ collect_weather 00 stalled; recovery:
 Tried to figure out why collect_weather is stalling; 00 had not seen all expected files, but sarracenia log had rolled so I couldn't tell if all were downloaded; restarted sr_subscribe for hrdps-west in case it is the culprit.
 Helped Tereza getting a test of SKOG for integration into SalishSeasCast running on salish.
 Added produciton config YAML unit tests to make_runoff_files, and removed daily creation of `RLonFraCElse_{:y%Ym%md%d}.nc` files.
+More cedar ticket#042269 work:
+* reply from Martin says that missing libnetcdf.so.11 was similar to module load failure; should be fixed now
 (SalishSea)
 
 See project journal.
@@ -469,6 +479,39 @@ See project journal.
 
 Updated repo clones on kudu.
 (MIDOSS)
+
+
+Fri 25-Jan-2018
+^^^^^^^^^^^^^^^
+
+collect_weather workers have been reliable since yesterday's sr_subscribe restart.
+Updated cedar:hindcast-sys/ repo clones to PROD-hindcast_201812-v3 tag:
+* in each repo clone: hg pull; hg up -r PROD-hindcast_201812-v3
+* ./makenemo -n SalishSeaCast clean
+* salloc --time=0:30:0 --cpus-per-task=8 --mem-per-cpu=1000m --account=rrg-allen
+* XIOS_HOME=$PROJECT/SalishSea/hindcast-sys/XIOS-2 ./makenemo -n SalishSeaCast -m X64_CEDAR -j8
+Susan handled getting hindcast runs restarted with these changes for 01oct18.
+More cedar ticket#042269 work:
+* cd project/dlatorne/MEOPAR/SS-run-sets/v201812/hindcast/runfiles/spin_up/
+* salishsea run 21nov14_oneday.yaml $PROJECT/$USER/MEOPAR/results/21nov14_oneday --debug --no-submit
+* emacs SalishSeaNEMO.sh:
+  * module load intel/2018.3 impi/2018.3.222
+  * module load hdf5-mpi/1.10.3
+  * module load netcdf-c++-mpi/4.2 netcdf-fortran-mpi/4.4.4 netcdf-mpi/4.4.1.1
+  * module load python/3.7.0
+* sbatch SalishSeaNEMO.sh
+(SalishSea)
+
+Project mtg; see whiteboard.
+(MIDOSS)
+
+Group mtg; see whiteboard.
+(Canyons/Arctic)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+AtSci candidate seminar by Oliver Watt-Meyer.
 
 
 Sat 26-Jan-2018
