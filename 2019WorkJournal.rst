@@ -471,6 +471,66 @@ Updated repo clones on kudu.
 (MIDOSS)
 
 
+Sat 26-Jan-2018
+^^^^^^^^^^^^^^^
+
+forecast/26jan18 got stuck at 84.7% due to a file length issue in atmos forcing; upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race conditions between grib_to_netcdf and make_live_ocean_files; recovery:
+* kill watch_NEMO on west.cloud
+* kill xios_server.exe on west.cloud
+* circusctl message_broker restart
+* circusctl log_aggregator restart
+* circusctl manager restart
+* wait for SalishSeaNEMO.sh script to finish on west.cloud
+* upload_forcing west.cloud nowcast+ --debug
+* upload_forcing orcinus nowcast+ --debug
+* upload_forcing cedar nowcast+ --debug
+* make_forcing_links west.cloud nowcast+ --debug
+* make_forcing_links orcinus nowcast+ --debug
+* make_forcing_links west.cloud ssh
+* wait for NEMO forecast runs to finish
+* launch_remote_worker west.cloud make_fvcom_boundary "west.cloud-nowcast forecast"
+Closed SalishSeaNowcast fix_velocity_rotation and vhfr_x2_baroclinic branches.
+Started implementing concurrent worker feature in NEMO_Nowcast; see Sat 17-Nov-2018 design notes.
+(SalishSea)
+
+
+Sun 27-Jan-2018
+^^^^^^^^^^^^^^^
+
+forecast/26jan18 got stuck at 84.7% due to a file length issue in atmos forcing; upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race conditions between grib_to_netcdf and make_live_ocean_files; recovery:
+* kill watch_NEMO on west.cloud
+* kill xios_server.exe on west.cloud
+* wait for SalishSeaNEMO.sh script to finish on west.cloud
+* upload_forcing cedar nowcast+ --debug
+* upload_forcing orcinus nowcast+ --debug
+* make_forcing_links orcinus nowcast+ --debug
+* upload_forcing west.cloud nowcast+ --debug
+* make_forcing_links west.cloud nowcast+ --debug
+* make_forcing_links west.cloud ssh
+(SalishSea)
+
+
+Week 5
+------
+
+Mon 28-Jan-2019
+^^^^^^^^^^^^^^^
+
+No log from nowcast after 17:38:18 Sunday; lots of hung worker processes; recovery:
+* kill hung processes
+* rm -rf GRIB/20190128/00/
+* download_weather 00
+* rm -rf GRIB/20190128/00/
+* download_weather 06 to launch forecast2 runs
+
+* download_weather 12 to launch nowcast runs
+* collect_weather 18
+
+(SalishSea)
+
+
+
+
 * Replace old 2014 bloomcast page on ~sallen w/ redirect to present page
 * Stephanie would like web access to prior year's bloomcasts
 
