@@ -550,6 +550,7 @@ forecast/26jan18 got stuck at 84.7% due to a file length issue in atmos forcing;
 * upload_forcing west.cloud nowcast+ --debug
 * make_forcing_links west.cloud nowcast+ --debug
 * make_forcing_links west.cloud ssh
+Continued implementing concurrent worker feature in NEMO_Nowcast; see Sat 17-Nov-2018 design notes.
 (SalishSea)
 
 
@@ -564,12 +565,41 @@ No log from nowcast after 17:38:18 Sunday; lots of hung worker processes; recove
 * rm -rf GRIB/20190128/00/
 * download_weather 00
 * rm -rf GRIB/20190128/00/
-
 * download_weather 06 to launch forecast2 runs
 * download_weather 12 to launch nowcast runs
 * collect_weather 18
-
+Updated salishsea-site copyright year range, and many http to https, especially stormsurge.bc.ca to eliminate mixed content warning.
+Continued implementing concurrent worker feature in NEMO_Nowcast; see Sat 17-Nov-2018 design notes.
+Updated cedar-hindcast to PROD-hindcast_201812-v4.
+Removed schedule from SalishSeaNEMO configuration & docs.
+Added sarracenia client to circus control.
 (SalishSea)
+
+Set up sada-network.slack.com workspace for Susan and I; still no go on Bitbucket/Slack integration.
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Phys Ocgy seminar by Rich re: drifters and surface currents.
+
+Reproduced hg close-head bug in minimal repo.
+
+
+Tue 29-Jan-2019
+^^^^^^^^^^^^^^^
+
+collect_weather 00 stalled; recovery:
+* download_weather 00
+* download_weather 06 to launch forecast2 runs
+* download_weather 12 to launch nowcast runs
+* collect_weather 18
+Explored slack, especially incoming webhook internal integration for SalishSeaNowcast to post run status messages; got Bitbucket and Sentry notifications working.
+Email request from Ian Charlton @coroner for surface current tiles spanning 17-Apr-2016.
+Charles bounced salish & skookum to resolve filesystem issue re: mounting /SalishSeaCast, though the issue turned out to be a typo in salish:/etc/exports; provided a good test of code I added to /etc/rc.local
+SalishSeaCast mtg; see whiteboard.
+(SalishSea)
+
+Dr. Yuan Wang AtSci candidate seminar
 
 
 Wed 30-Jan-2019
@@ -591,6 +621,59 @@ See project work journal.
 
 See project journal.
 (SalishSeaCast-FVCOM)
+
+
+
+
+ 2004  hg init close-heads-bug
+ 2005  echo "Do some work on default." > foo
+ 2006  cat foo
+ 2007  hg add foo
+ 2008  cd close-heads-bug/
+ 2009  mv ../foo ./
+ 2010  hg add foo
+ 2011  hg ci -m"Do some work on default."
+ 2012  hg glog
+ 2013  echo "Do some more work on default." >> foo
+ 2014  hg ci -m"Do some more work on default."
+ 2015  hg glog
+ 2016  hg branch feature
+ 2017  echo "Do some work on feature." >> foo
+ 2018  hg ci -m"Do some work on feature."
+ 2019  hg glog
+ 2020  hg branches
+ 2021  hg up -r default
+ 2022  hg branches
+ 2023  hg glog
+ 2024  hg ci -m"Do more work on default after work on feature."
+ 2025  echo "Do more work on default after work on feature." >> foo
+ 2026  hg ci -m"Do more work on default after work on feature."
+ 2027  hg glog
+ 2028  hg merge -h
+ 2029  hg merge -r feature
+ 2030  hg glog
+ 2031  hg ci -m"Merge feature branch into default."
+ 2032  hg glog
+ 2033  echo "Do work on default after merging in feature." >> foo
+ 2034  hg ci -m "Do work on default after merging in feature."
+ 2035  hg glog
+ 2036  hg close-head -h
+ 2037  hg close-head feature -m"Close feature branch."
+ 2038  hg glog
+ 2039  hg up -r default
+ 2040  hg status
+ 2041  hg up --clean
+ 2042  history
+close-heads-bug$ hg up default
+abort: uncommitted changes
+(commit or update --clean to discard changes)
+close-heads-bug$ hg summary
+parent: 6:7975eae997b7 tip
+ Close feature branch.
+branch: default
+commit: (new branch)
+update: 3 new changesets (update)
+phases: 7 draft
 
 
 
