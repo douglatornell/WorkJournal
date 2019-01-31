@@ -521,12 +521,33 @@ No log from nowcast after 17:38:18 Sunday; lots of hung worker processes; recove
 * rm -rf GRIB/20190128/00/
 * download_weather 00
 * rm -rf GRIB/20190128/00/
-* download_weather 06 to launch forecast2 runs
 
+* download_weather 06 to launch forecast2 runs
 * download_weather 12 to launch nowcast runs
 * collect_weather 18
 
 (SalishSea)
+
+
+Wed 30-Jan-2019
+^^^^^^^^^^^^^^^
+
+Changed sentry notifications to new SADA:#ssc-exceptions channel.
+collect_weather 12 stalled with 525 files collected:
+* confirmed that sarracenia also only downloaded 525 files
+* download_weather 12 to get automation started
+Started building new prod env in skookum:/SalishSeaCast/.
+Ran nowcast-dev/29jan19 manually because it got interupted yesterday by salish reboot.
+Made paths for scour and pdftocairo in SalishSeaNowcast explicitly use $NOWCAST_ENV/bin/; something changed across skookum reboot that caused them not to be found.
+(SalishSea)
+
+Deleted kudu nemo-cmd-2.7 env; updated kudu nemo-cmd env to Python 3.7.
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
 
 
 
