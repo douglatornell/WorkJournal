@@ -623,6 +623,111 @@ See project journal.
 (SalishSeaCast-FVCOM)
 
 
+Thu 31-Jan-2019
+^^^^^^^^^^^^^^^
+
+Set up tmp run dir for ticket#042269 test case and replied to Martin.
+download_live_ocean timed out; ran upload_forcing nowcast+ x3 manually to restart automation.
+Met w/ Venkat @UBC-ARC re: migration to arbutus.cloud:
+* he will try for c-flavours with more CPUs bound to physical nodes
+* he will get us a c8 or c8 -32g or 64g flavour for xios
+* I will switch to 18.04 LTS
+* 1Tb persistent storage will be new on arbutus; rsync across from west.cloud
+* agreed to target completion of migration for end of Feb
+(SalishSea)
+
+MOHID test run submitted under rrg-allen finally ran; debugged and finished dev of `mohid gather` sub-command.
+Integrated `mohid gather` into MOHID.sh script generation in `mohid run` and submitted a test run under def-allen.; success!
+Updated MOHID-Cmd and MIDOSS docs re: `mohid gather` and finalized `mohid run`.
+(MIDOSS)
+
+EOAS colloquium by Evgeny re: Southern Ocean salps and krill
+
+Continued formulating hg close-heads bug report:
+
+hg init close-heads-bug
+cd close-heads-bug/
+echo "Do some work on default." > foo
+hg add foo
+hg ci -m"Do some work on default."
+echo "Do some more work on default." >> foo
+hg ci -m"Do some more work on default."
+hg branch feature
+echo "Do some work on feature." >> foo
+hg ci -m"Do some work on feature."
+hg up default
+echo "Do more work on default after work on feature." >> foo
+hg ci -m"Do more work on default after work on feature."
+hg merge feature
+hg ci -m"Merge feature branch into default."
+echo "Do work on default after merging in feature." >> foo
+hg ci -m "Do work on default after merging in feature."
+hg close-head feature -m"Close feature branch."
+hg log --graph
+# tip is at changeset 6
+# any attempt to update now fails
+hg up -r default
+abort: uncommitted changes
+(commit or update --clean to discard changes)
+hg status
+# but status shows no uncommitted changes
+hg up --clean
+** unknown exception encountered, please report by visiting
+** https://mercurial-scm.org/wiki/BugTracker
+** Python 2.7.15 |Anaconda, Inc.| (default, Sep 27 2018, 20:19:23) [GCC 4.8.2 20140120 (Red Hat 4.8.2-15)]
+** Mercurial Distributed SCM (version 4.8.2+810-593f6359681d)
+** Extensions loaded: closehead, graphlog, convert, strip, mq, pager, rebase
+Traceback (most recent call last):
+  File "/usr/local/bin/hg", line 43, in <module>
+    dispatch.run()
+  File "/usr/local/lib/python2.7/site-packages/mercurial/dispatch.py", line 99, in run
+    status = dispatch(req)
+  File "/usr/local/lib/python2.7/site-packages/mercurial/dispatch.py", line 225, in dispatch
+    ret = _runcatch(req) or 0
+  File "/usr/local/lib/python2.7/site-packages/mercurial/dispatch.py", line 376, in _runcatch
+    return _callcatch(ui, _runcatchfunc)
+  File "/usr/local/lib/python2.7/site-packages/mercurial/dispatch.py", line 384, in _callcatch
+    return scmutil.callcatch(ui, func)
+  File "/usr/local/lib/python2.7/site-packages/mercurial/scmutil.py", line 165, in callcatch
+    return func()
+  File "/usr/local/lib/python2.7/site-packages/mercurial/dispatch.py", line 367, in _runcatchfunc
+    return _dispatch(req)
+  File "/usr/local/lib/python2.7/site-packages/mercurial/dispatch.py", line 1021, in _dispatch
+    cmdpats, cmdoptions)
+  File "/usr/local/lib/python2.7/site-packages/mercurial/dispatch.py", line 756, in runcommand
+    ret = _runcommand(ui, options, cmd, d)
+  File "/usr/local/lib/python2.7/site-packages/hgext/pager.py", line 77, in pagecmd
+    return orig(ui, options, cmd, cmdfunc)
+  File "/usr/local/lib/python2.7/site-packages/mercurial/dispatch.py", line 1030, in _runcommand
+    return cmdfunc()
+  File "/usr/local/lib/python2.7/site-packages/mercurial/dispatch.py", line 1018, in <lambda>
+    d = lambda: util.checksignature(func)(ui, *args, **strcmdopt)
+  File "/usr/local/lib/python2.7/site-packages/mercurial/util.py", line 1670, in check
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python2.7/site-packages/mercurial/util.py", line 1670, in check
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python2.7/site-packages/hgext/mq.py", line 3633, in mqcommand
+    return orig(ui, repo, *args, **kwargs)
+  File "/usr/local/lib/python2.7/site-packages/mercurial/util.py", line 1670, in check
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python2.7/site-packages/mercurial/commands.py", line 6110, in update
+    updatecheck=updatecheck)
+  File "/usr/local/lib/python2.7/site-packages/mercurial/hg.py", line 912, in updatetotally
+    updata = destutil.destupdate(repo, clean=clean)
+  File "/usr/local/lib/python2.7/site-packages/mercurial/destutil.py", line 166, in destupdate
+    node, movemark, activemark = destupdatestepmap[step](repo, clean)
+  File "/usr/local/lib/python2.7/site-packages/mercurial/destutil.py", line 133, in _destupdatebranchfallback
+    assert node is not None, ("any revision has at least "
+AssertionError: any revision has at least one descendant branch head
+
+hg summary
+parent: 6:7975eae997b7 tip
+ Close feature branch.
+branch: default
+commit: (new branch)
+update: 3 new changesets (update)
+phases: 7 draft
+
 
 
  2004  hg init close-heads-bug
