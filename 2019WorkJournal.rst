@@ -729,6 +729,22 @@ update: 3 new changesets (update)
 phases: 7 draft
 
 
+Fri 1-Feb-2019
+^^^^^^^^^^^^^^
+
+nowcast-agrif/31jan19 failed when it tried to run at ~03:46, probably due to forcing links getting stomped by forecast2; recovery:
+* make_forcing_links nowcast-agrif --run-date 2019-01-31
+* but run_NEMO_agrif was extremely slow
+Continued implementing concurrent worker feature in NEMO_Nowcast; see Sat 17-Nov-2018 design notes.
+(SalishSea)
+
+Helped Rachael & Ashu w/ initial work on .nc to .hdf5 forcing files for MOHID.
+(MIDOSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
 
  2004  hg init close-heads-bug
  2005  echo "Do some work on default." > foo
