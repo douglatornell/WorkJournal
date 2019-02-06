@@ -540,7 +540,7 @@ Started implementing concurrent worker feature in NEMO_Nowcast; see Sat 17-Nov-2
 Sun 27-Jan-2018
 ^^^^^^^^^^^^^^^
 
-forecast/26jan18 got stuck at 84.7% due to a file length issue in atmos forcing; upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race conditions between grib_to_netcdf and make_live_ocean_files; recovery:
+forecast/26jan19 got stuck at 84.7% due to a file length issue in atmos forcing; upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race conditions between grib_to_netcdf and make_live_ocean_files; recovery:
 * kill watch_NEMO on west.cloud
 * kill xios_server.exe on west.cloud
 * wait for SalishSeaNEMO.sh script to finish on west.cloud
@@ -744,6 +744,73 @@ Helped Rachael & Ashu w/ initial work on .nc to .hdf5 forcing files for MOHID.
 See project journal.
 (SalishSeaCast-FVCOM)
 
+
+Sat 2-Feb-2019
+^^^^^^^^^^^^^^
+
+Vancouver to Parksville
+
+Added slack notifications for worker completion in NEMO_Nowcast and deployed to production; restarted circusd from command-line in place of version that was running from /etc/rc.local after 29jan19 reboot.
+forecast/02feb19 got stuck at 84.7% due to a file length issue in atmos forcing; upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race conditions between grib_to_netcdf and make_live_ocean_files; recovery:
+* kill xios_server.exe on west.cloud
+* kill watch_NEMO on west.cloud
+* wait for SalishSeaNEMO.sh script to finish on west.cloud
+* upload_forcing cedar nowcast+ --debug
+* upload_forcing orcinus nowcast+ --debug
+* make_forcing_links orcinus nowcast+ --debug
+* upload_forcing west.cloud nowcast+ --debug
+* make_forcing_links west.cloud nowcast+ --debug
+* make_forcing_links west.cloud ssh
+download_wwatch3_results failed due to network disconnection.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Sun 3-Feb-2019
+^^^^^^^^^^^^^^
+
+upload_forcing nowcast+ failed due to grib_to_netcdf/make_live_ocean_files race condition; reran manually to resolve.
+Started keeping more notes about resolution of issues in slack threads associated with Sentry notifications, and probably less here.
+Figured out that wrong version of nccopy issue that started on 30jan19 was due to circusd start from /etc/rc.local because it disappeared after yesterday restart from command-line.
+Started adding nowcast-green run type to make_surface_current_tiles for command-line use to generate tile from archival runs.
+Added unit tests for production YAML config for elements unlikely to be tested by workers; e.g. slack notifications, 0mq message system, manager message registry, etc.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+February
+========
+
+Week 6
+------
+
+Mon 4-Feb-2019
+^^^^^^^^^^^^^^
+
+Developed a bash process for generation of 1d netCDF4 files containing 8 hourly variables from GEMLAM archive files; generated 2-3-Nov-2014 for Susan to work with for next step of calculating the other 4 variables that we need; see notes in slack SADA#hrdps-archive channel.
+Talked to Ben about getting ONC scalar data.
+(SalishSea)
+
+Helped Ashu sort out unstaggering of NEMO velocities, and talked to him about how to write hdf5 files.
+(MIDOSS)
+
+
+Tue 5-Feb-2019
+^^^^^^^^^^^^^^
+
+Discussed design of extension of `nemo/salishsea run` sub-commands to do dependent-link segmented runs on HPC for sensitivity studies; see design notes at https://sada-network.slack.com/archives/DFSK9ESUW/p1549387959002800\
+download_live_ocean slow: finally finished at 11:35.
+Started rsync-ing GEMLAM 2010-2014 files from external drive to /opp/GEMLAM/.
+Deleted /results/nowcast-dev/ and /results/nowcast-blue (201702).
+Updated trello board re: /results2/ and discovered that hindcast.201812/11jan19-20jan19 have not been downloaded from cedar.
+(SalishSea)
+
+Delivered 2x8Tb external drives to Gonzalo; need Charles to fix permissions on automounts from root:root 755. Submitted expense claim.
+(Canyons)
 
 
  2004  hg init close-heads-bug
