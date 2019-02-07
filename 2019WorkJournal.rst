@@ -813,6 +813,32 @@ Delivered 2x8Tb external drives to Gonzalo; need Charles to fix permissions on a
 (Canyons)
 
 
+Wed 6-Feb-2019
+^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Sent link to nowcast-green/19feb18 surface current tiles to Ian@coroner.
+Email thread w/ Susan & Elise about segmented NEMO runs automation.
+Updated FVCOM worker ports list on west.cloud to 5580-5583 to accommodate make_fvcom_rivers_forcing.
+(SalishSea)
+
+Lots of email w/ Rachael & Ashu about generating forcing files.
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Re-enabled http-redirect websites on webfaction for 43ravens.ca and susanallen.ca.
+Set up http-redirect apps and site on webfaction for cyclelog, douglatornell.ca, phpgedview.
+Disabled jjem, mock_sc, and sealinkd sites.
+
+
+
  2004  hg init close-heads-bug
  2005  echo "Do some work on default." > foo
  2006  cat foo
