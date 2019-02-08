@@ -837,6 +837,31 @@ Re-enabled http-redirect websites on webfaction for 43ravens.ca and susanallen.c
 Set up http-redirect apps and site on webfaction for cyclelog, douglatornell.ca, phpgedview.
 Disabled jjem, mock_sc, and sealinkd sites.
 
+Discovered that waitress has restored support for host/port in config (in addition to listen). chaussette requires the former in its most recent release and only supports the latter in unreleased code on github. But waitress change means that we can unpin from waitress==0.9.0! Tested and confirmed in vagrant VM.
+(salishsea-site)
+
+
+Thu 7-Feb-2019
+^^^^^^^^^^^^^^
+
+Finalized unpinning waitress.
+Built /SalishSeaCast/salishsea-site-env; had to edit setup.py re:unpinning waitress.
+Flipped salishsea.eos.ubc.ca from /results/nowcast-sys/salishsea-site to /SalishSeaCast/salishsea-site:
+* Change value of Bitbucket pipelines PROD_DEPLOY_REPO repository variable
+* scp modified circus_logger.yaml and deploy.sh production.ini
+* circusctl --endpoint tcp://127.0.0.1:7777 quit in /results/nowcast-sys
+* rsync -av /results/nowcast-sys/logs/ /SalishSeaCast/logs/
+* circusd in /SalishSeaCast
+Couldn't get waitress==1.2.1 to work in production, so reverted to pin at 0.9.0.
+Removed circusd-status from configuration.
+Tried to move sarracenia storage to /SalishSeaCast/, but it didn't work, so updated nowcast-sys SalishSeaNowcast back to a6e5d0dff964
+(salishsea-site)
+
+Suggested running ncrcat in subprocesses to Ashu, and discussed Python and SalishSeaCast system with him.
+(MIDOSS)
+
+EOAS symposium: Sun Kwak re: organics in space and origins of life on Earth
+
 
 
  2004  hg init close-heads-bug
