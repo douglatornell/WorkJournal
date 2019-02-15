@@ -863,6 +863,153 @@ Suggested running ncrcat in subprocesses to Ashu, and discussed Python and Salis
 EOAS symposium: Sun Kwak re: organics in space and origins of life on Earth
 
 
+Fri 8-Feb-2019
+^^^^^^^^^^^^^^
+
+The change I put in yesterday afternoon to direct the datamart files that the `sarracenia` client saves to `/SalishSeaCast/datamart/` did in fact take effect; but I thought it hadn't so I reverted the config changes and didn't restart `collect_weather` to make it look there. Consequently, the automation stalled because, as far as `collect_weather` was concerned the `00` forecast never appeared. But it, and the `06`, and the `12`,  and the updates to the rivers `.csv` files are all safe and sound in `/SalishSeaCast/datamart/`; recovery (skipping forecast2 runs):
+* kill collect_weather 00
+* download_weather 00 --debug
+* download_weather 06 --debug
+* collect_river_data Capilano --data-date 2019-02-07 --debug
+* collect_river_data Englishman --data-date 2019-02-07 --debug
+* collect_river_data Fraser --data-date 2019-02-07 --debug
+* make_runoff_file --debug
+* clear_checklist
+* download_weather 12
+* collect_weather 18 &
+* get_onc_ctd SCVIP --debug
+* get_onc_ctd SEVIP --debug
+* get_onc_ctd USDDL --debug
+* get_onc_ferry --debug
+* ping_erddap SCVIP-CTD --debug
+* ping_erddap SEVIP-CTD --debug
+* ping_erddap USDDL-CTD --debug
+* ping_erddap TWDP-ferry --debug
+sudo apt-get install pngquant on skookum to support Michael's SalishSeaNowcast PR#6 that compresses surface surrent tile PNGs lossily via pngquant.
+Created SalishSeaNowcast issue #65  re: using pngquant on other other image loop PNGs.
+(SalishSea)
+
+
+Sat 9-Feb-2019
+^^^^^^^^^^^^^^
+
+get_NeahBay_ssh failed due to NOAA web site down; when it came back there was a new version of the slosh web site.
+Started refactoring get_NeahBay_ssh to use new site.
+
+
+Sat 9-Feb-2019
+^^^^^^^^^^^^^^
+
+Deleted /results/forcing/rivers/datamart.aside
+Deleted /results/forcing/atmospheric/GEM2.5/GRIB/datamart.aside
+nowcast-agrif/09feb19 failed due to missing turbidity file that was there, so maybe an orcinus file syste issue?; recovery:
+* make_forcing_links orcinus nowcast-agrif --run-date 2019-02-09
+Started planning to move automation to /SalishSeaCast file system Monday afternoon.
+Continued dev of NEMO_Nowcast concurrent worker feature.
+(SalishSea)
+
+
+Week 7
+------
+
+Mon 11-Feb-2019
+^^^^^^^^^^^^^^^
+
+Snowy day after overnight storm; worked at home.
+Lunch w/ Max, Sylvia & Lucy.
+
+See work journal.
+(Resilient-C)
+
+Continued dev of NEMO_Nowcast concurrent worker feature; started test deployment into GoMSS_Nowcast.
+Moved automation to run from /SalishSeaCast/:
+* update repos in /SalishSeaCast/
+* rsync -av /results/nowcast-sys/logs/ /SalishSeaCast/logs/
+* conda install "pyzmq<17" "tornado<5" in nowcast-env
+* circusctl quit in old env
+* kill running watch_NEMO nowcast-dev
+* kill running collect_weather 00
+* circusd --daemon in new env
+* restart web app in env w/ NOWCAST_LOGS=/SalishSeaCast/nowcast-sys/logs
+* watch_NEMO nowcast-dev
+* collect_weather 00
+Discovered that I built the wrong NEMO config on salish; built SalishSeaCast_Blue, cleaned SalishSeaCast.
+Recovered from paths for combine and gather that got messed for nowcast-dev during transition.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+
+Tue 12-Feb-2019
+^^^^^^^^^^^^^^^
+
+Snowy day after another overnight and continuing snowfall; UBC closed, worked at home.
+
+Fixed ERDDAP dataset paths for bathymetry & mesh mask re: change form /results/nowcast-sys/ to /SalishSeaCast/.
+Finished updating tide gauge station water level datasets from V17-02 to V18-06.
+Disabled ERDDAP V17-02 forecast datasets.
+Enabled ERDDAP V18-06 forecast datasets and updated nowcast.yaml to use them.
+Updated ERDDAP index page re: V17-02 to V18-06 datasets.
+Bounced ERDDAP to load new index page.
+(ERDDAP)
+
+Updated Mercurial on kudu to 4.9+5-f2f538725d07:
+* conda activate hg-dev
+* cd hg-stable
+* hg pull
+* hg update -r tip
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
+Continued dev of NEMO_Nowcast concurrent worker feature; using test deployment into GoMSS_Nowcast.
+Started modernizing SalishSeaCmd package in preparation for addition of segmented runs feature:
+* create new Python 3.7 dev env on kudu
+* added badges to README and dev docs
+* added license section to dev docs
+* changed to use black for code style management
+* modernized docs build configuration and makefile
+* dropped support for Python 2.7, minimum is now 3.5
+
+* fix broken and redirected URLs in docs
+* add linkcheck section to dev docs
+(SalishSea)
+
+
+Wed 13-Feb-2019
+^^^^^^^^^^^^^^^
+
+Dentist appt.
+
+Ticket #042269 update from Martin:
+* He got Intel MPI version of NEMO + recent svn XIOS running in /scratch/siegert/dlatorne/oneday_21nov14_2019-01-31T103135.621285-0800 and it produced the same "caller of events ... are not coherent" error as we were getting at the start of the ticket
+* He also asked if we had contacted the XIOS list and I sent him our exchange there that points to MPI library.
+make_plots nemo forecast* publish failed due to me forgetting to change V17-02 to v18-06 in nowcast.yaml ERDDAP URL template; re-ran manually
+Discovered that NEMO_Nowcast concurrent workers feature has a design flaw: ConcurrentWorkers blocks manager :-(
+(SalishSea)
+
+Sent Susan info about MOHID grid, and Ashu nextcloud link to MOHID results from Shihan.
+(MIDOSS)
+
+See project work journal.
+(GOMSS)
+
+
+Thu 14-Feb-2019
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Backed out --concurrent worker cli option, ConcurrentWorkers, and SequencedWorkers, etc. changes in NEMO_Nowcast.
+Lack of support for matplotlib=1.5.3 in modern jupyter bit so hard on kudu that I am blocked on figures work.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+
 
  2004  hg init close-heads-bug
  2005  echo "Do some work on default." > foo
