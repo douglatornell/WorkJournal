@@ -1009,6 +1009,32 @@ See project journal.
 (SalishSeaCast-FVCOM)
 
 
+Fri 15-Feb-2019
+^^^^^^^^^^^^^^^
+
+Project mtg; see whiteboard.
+(MIDOSS)
+
+GEM2.5-2010-2014 drive refused to mount on niko.
+Resumed work on migration of figure modules to matplotlib-3.0.0:
+* merged default branch into matplotlib3_figures
+* Ported:
+  * nowcast/figures/publish/pt_atkinson_tide.py
+  * nowcast/figures/publish/compare_tide_prediction_max_ssh.py
+  * nowcast/figures/publish/storm_surge_alerts.py
+  * nowcast/figures/publish/storm_surge_alerts_thumbnail.py
+* WIP on niko:
+  * nowcast/figures/research/velocity_section_and_surface.py
+* TODO:
+  * nowcast/figures/research/baynes_sound_agrif.py
+  * nowcast/figures/research/time_series_plots.py
+  * nowcast/figures/research/tracer_thalweg_and_surface_hourly.py
+  * nowcast/figures/research/tracer_thalweg_and_surface.py
+  * nowcast/figures/comparison/salinity_ferry_track.py
+  * nowcast/figures/publish/surface_current_tiles.py
+(SalishSea)
+
+
 
 
  2004  hg init close-heads-bug
