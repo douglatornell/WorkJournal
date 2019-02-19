@@ -1035,6 +1035,89 @@ Resumed work on migration of figure modules to matplotlib-3.0.0:
 (SalishSea)
 
 
+Sat 16-Feb-2019
+^^^^^^^^^^^^^^^
+
+Another dance with docker; this time the objective is to use it for testing pipelines for Bitbucket, and perhaps for providing dev envs:
+* https://medium.com/@chadlagore/conda-environments-with-docker-82cdc9d25754
+* https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+* tried docker snap package but it has weird issue about permissions when I tried docker build, so ditched it
+* sudo apt update
+* sudo apt install apt-transport-https ca-certificates curl software-properties-common
+* curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+* sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu cosmic stable"
+* sudo apt update
+* apt-cache policy docker-ce
+* sudo apt install docker-ce
+* sudo systemctl status docker
+* sudo usermod -aG docker ${USER}
+* su - ${USER}
+* id -nG
+Worked through details of Bitbucket pipeline to run pytest and show coverage report for NEMO-Cmd in douglatornell/nemo-cmd-piplines-test repo.
+Dockerfile w/ NEMO-Cmd installed for interactive use:
+  FROM continuumio/miniconda3
+
+  RUN mkdir /home/NEMO-Cmd
+  WORKDIR /home/NEMO-Cmd
+  COPY . .
+  RUN conda env create -f ./environment-test.yaml
+  ENV CONDA_PREFIX /opt/conda/envs/nemo-cmd-test
+  ENV PATH $CONDA_PREFIX/bin:$PATH
+  RUN echo "source activate nemo-cmd-test" > ~/.bashrc
+  RUN $CONDA_PREFIX/bin/python3.7 -m pip install -e .
+Docker container for pipeline:
+* docker build -t nemo-cmd-test pipelines-test-env/
+* docker tag nemo-cmd-test:latest douglatornell/salishsea:nemo-cmd-test
+* docker push douglatornell/salishsea:nemo-cmd-test
+
+Pulled and updated to PROD-hindcast_201812-v5 in hindcast-sys on cedar; did a clean build of NEMO SalishSeaCast config for 01feb19 hindcast run.
+Added Bitbucket pipeline for coverage run -m pytest and coverage report to NEMO-Cmd.
+Added Bitbucket pipeline for coverage run -m pytest and coverage report to SalishSeaCmd.
+(SalishSea)
+
+
+Week 8
+------
+
+Mon 18-Feb-2019
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Family Day
+
+Repleid to Martin's ticket #042269 email w/ instructions on how to build NEMO/SalishSeaCast.
+Finished setup graham:project/dlatorne/MEOPAR/.
+Got access to EOAS optimum cluster and started exploring:
+* module load Miniconda/3
+* conda create -n py27 -c conda-forge python=2.7 mercurial
+* conda activate py27
+* hg clone https://www.mercurial-scm.org/repo/hg-stable
+* conda create -n salishseacast -c conda-forge python=3.7 pyyaml arrow attrs cliff
+* conda activate salishseacast
+* pip install python-hglib
+* module load GCC/8.2/0
+* cd hg-stable
+* make clean install-home PYTHON=$CONDA_PREFIX/bin/python3.7
+(SalishSea)
+
+
+
+If I am correctly understanding what you want to do, you need to build both xios and nemo with the new compilers and libraries. xios has to be built first because it provides a lib that nemo links to. The xios I used in /scratch/dlatorne/oneday_21nov14_2019-01-31T103135.621285-0800/ is built from an svn checkout of rev 1637. If you want to replicate exactly you need to grab that rev from http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk, or you can just grab whatever rev the present trunk is at - one of the xios devs asserted on the xios list this morning that trunk is stable.
+
+Once you have an xios checkout, copy these 3 files into its arch/ directory:
+/home/dlatorne/project/dlatorne/MEOPAR/xios-2.0/arch/arch-X64_CEDAR.env
+/home/dlatorne/project/dlatorne/MEOPAR/xios-2.0/arch/arch-X64_CEDAR.fcm
+/home/dlatorne/project/dlatorne/MEOPAR/xios-2.0/arch/arch-X64_CEDAR.path
+
+and edit them as you wish to point to the libs you want to use, etc. Then built xios with:
+cd /home/dlatorne/project/dlatorne/MEOPAR/xios-2.0/
+./make_xios --arch X64_CEDAR
+
+I often do that build in an 8-core interactive session with the --job 8 option added to speed it up. If you need to do a clean build of xios, the command to clean the tree is:
+
+./tools/FCM/bin/fcm build --clean
+
+
+
 
 
  2004  hg init close-heads-bug
