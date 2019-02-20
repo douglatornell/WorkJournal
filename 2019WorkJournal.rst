@@ -1100,6 +1100,34 @@ Got access to EOAS optimum cluster and started exploring:
 (SalishSea)
 
 
+Tue 19-Feb-2019
+^^^^^^^^^^^^^^^
+
+Confirmed that niko portable backup drive mounts fine after cold boot.
+Installed docker on niko.
+Tried GEM2.5-2010-2014 drive again on niko; still refused to mount.
+Resumed work on migration of figure modules to matplotlib-3.0.0:
+* created issue #66 re: use of "on/off" instead of "True/False" in matplotlib calls like tick_params().
+* explored "box-forced" deprecation warning and traced it to salishsea_tools.viz_tools.set_aspect() default arg adjustable="box-forced"; changing to adjustable="box" made no difference to velocity_section_and_surface.py; see issue #67
+* Ported:
+  * nowcast/figures/research/velocity_section_and_surface.py
+  * nowcast/figures/research/baynes_sound_agrif.py
+  * nowcast/figures/research/time_series_plots.py
+* WIP on niko:
+* TODO:
+  * nowcast/figures/research/tracer_thalweg_and_surface_hourly.py
+  * nowcast/figures/research/tracer_thalweg_and_surface.py
+  * nowcast/figures/comparison/salinity_ferry_track.py
+  * nowcast/figures/publish/surface_current_tiles.py
+Salish Sea team mtg; see whiteboard.
+Fixed image symlinks for salishsea.eos.ubc.ca site index page.
+(SalishSea)
+
+Discussed runs configuration and mercurial workflows w/ Ashu.
+(MIDOSS)
+
+
+
 
 If I am correctly understanding what you want to do, you need to build both xios and nemo with the new compilers and libraries. xios has to be built first because it provides a lib that nemo links to. The xios I used in /scratch/dlatorne/oneday_21nov14_2019-01-31T103135.621285-0800/ is built from an svn checkout of rev 1637. If you want to replicate exactly you need to grab that rev from http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk, or you can just grab whatever rev the present trunk is at - one of the xios devs asserted on the xios list this morning that trunk is stable.
 
