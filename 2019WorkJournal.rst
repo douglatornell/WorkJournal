@@ -1127,6 +1127,120 @@ Discussed runs configuration and mercurial workflows w/ Ashu.
 (MIDOSS)
 
 
+Wed 20-Feb-2019
+^^^^^^^^^^^^^^^
+
+Did initial check on Ashu's failed run trying to duplicate Shihan's NextCloud files.
+Helped Ashu get his Mercurial configuration right, and MOHID-Cmd updated to dev tip.
+(MIDOSS)
+
+Sent gemlam2netcdf.sh script to Fred Dupont for assistance.
+Added Bitbucket pipeline for coverage run -m pytest and coverage report to NEMO_Nowcast.
+Updated gemlam-netcdf.sh script w/ -ip1 option values from Fred.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Watched Westgrid/Sharcnet webcast about valgrind:
+* Tyson Whitehead, sharcnet
+* valgrind: memory analysis and debugging
+* computers are vonNuemman machines
+* physical memory is a large dense 1D array; divided into 4k byte pages; 0 to 2^64
+* physical memory is abstracted to a sparse virtual address space per program, also 4k byte pages; segfaults from virtual addresses that have not been mapped to physical addresses
+* program memory layout on Linux is ELF standard (early Unix, Sun, etc.)
+  * null catch area (unmapped); to catch null pointer errors to generate segfaults
+  * code (read/execute)
+  * constant data (read); declared in code
+  * mutable data (read/write); declared in code
+  * heap (read/write); allocated memory pages; grows downward in memory
+  * code, constant data & mutable data for libraries; allocations by library code are in program context, so they get allocated from heap
+  * stack (read/write); memory version of cpu stack beyond available number of cpu registers; grows upward in memory
+  * kernel interface (read/execute)
+  * unmapped area to catch -ve addresses and segfault
+* many ways that code can be wrong that don't generate segfaults
+* readelf -t executable show memory layout
+* cat /proc/PID/???
+* heap:
+  * dlmalloc algorithm; modified version is what is in glibc
+    * allocated chunk:
+      * chunk size & status flags
+      * user data
+      * chunk size
+    * unallocated chunk:
+      * chunk size & status flags
+      * double linked list:
+        * next free chunk size
+        * previous free chunk size
+      * unused memory
+      * chunk size
+    * duplication of chunk size at top and bottom is a speed optimization
+  * heap includes records for tracking allocations
+  * allocating and releasing leaves holes in heap
+  * what can go wrong:
+    * allocating without releasing eventually exhausts memory (memory leak?)
+    * releasing non-allocated memory or incorrect chunk address messes up glibc
+    * invalid read address returns unexpected data unless outside the address space
+    * invalid write address overwrites other data unless outside the address space
+* stack frame:
+  * function args in reverse order (re: variable arg handling)
+  * return address
+  * local variables
+  * scratch space
+  * what can go wrong:
+    * invalid reads return unexpected data
+    * invalid writes overwrite other functions local variables
+* so many things that can go wrong (it's a wonder that computers even work)
+* valgrind:
+  * binary instrumentation framework; dynamically transforms executables to add instrumentation
+  * tracks memory and register usages
+  * memcheck
+  * cachegrind
+  * callgrind
+  * massif: heap profiler
+  * helgrind
+  * DRD
+  * DHAT
+* can be run on any executable thanks to dynamic transformation
+* 5-100x slow-down
+* 12-18x size increase of executable
+* corner cases have failure for high optimization, new features
+* use small test cases
+* memcheck:
+  * over/under-run heap blocks
+  * overrun top of stack
+  * accessing released memory
+* module load valgrind
+  * works against gcc and openmpi
+  * default tool is memcheck
+  * compile w/ -g option to add debugging info to executable
+  * demo of array overrun in c
+  * demo of array underrun in c
+  * demo of accessing freed memory in c
+  * demo of double freed memory in c
+  * demo of memory leadk due to missing free() in c
+  * demo of memory overlap in c (via strcpy())
+  * demo of uninitialized variable in c
+  * demo of c++ mismatch of array new/delete
+  * demo of stack overwrite in c
+* running working code under valgrind/memcheck can/will find subtle or non-fatal bugs, but there are still classes of bug it doesn't catch; e.g. stack overwrite
+* sharcnet valgrind page about valgrind has some info about using valgrind w/ mpi; need extra stuff to suppress some useless output
+
+
+Thu 21-Feb-2019
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Sent email to Ashu re: changing ownership & permissions on cedar so that def-allen group can see his files.
+(MIDOSS)
+
+
+
 
 
 If I am correctly understanding what you want to do, you need to build both xios and nemo with the new compilers and libraries. xios has to be built first because it provides a lib that nemo links to. The xios I used in /scratch/dlatorne/oneday_21nov14_2019-01-31T103135.621285-0800/ is built from an svn checkout of rev 1637. If you want to replicate exactly you need to grab that rev from http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk, or you can just grab whatever rev the present trunk is at - one of the xios devs asserted on the xios list this morning that trunk is stable.
