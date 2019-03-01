@@ -1240,6 +1240,72 @@ Sent email to Ashu re: changing ownership & permissions on cedar so that def-all
 (MIDOSS)
 
 
+Fri 22-Feb-2019
+^^^^^^^^^^^^^^^
+
+Tracked down paramiko deprecatsion warning re: cryptography; see #salishseacast.
+Finished migration of figure modules to matplotlib-3.0.0:
+* Ported:
+  * nowcast/figures/research/tracer_thalweg_and_surface_hourly.py
+  * nowcast/figures/research/tracer_thalweg_and_surface.py
+  * nowcast/figures/comparison/salinity_ferry_track.py
+  * nowcast/figures/surface_current_domain.py
+  * nowcast/figures/publish/surface_current_tiles.py
+(SalishSea)
+
+Helped Ashu sort out his cedar file space and find the next bug in his MOHID replications of Shihan's NextCloud case.
+(MIDOSS)
+
+Paper acceptance party at The Gallery re: Allen, Barth, et al.
+
+
+Sat 23-Feb-2019
+^^^^^^^^^^^^^^^
+
+Vancouver to Parksville
+
+Deleted unused/unmaintained custom log msg attrs (`extra` dicts), dependency on driftwood pkg, and JSON log file configuration from SalishSeaNowcast.
+Improved SalishSeaNowcast worker success(0 and failure() unit tests.
+Continued dev of SalishSeaCmd towards segmented runs; built new Python 3.7.1 conda env on niko.
+(SalishSea)
+
+
+Sun 24-Feb-2019
+^^^^^^^^^^^^^^^
+
+Parksville to Vancouver
+
+Continued dev of SalishSeaCmd towards segmented runs; built new Python 3.7.1 conda env on niko.
+(SalishSea)
+
+
+Week 9
+------
+
+Mon 25-Feb-2019
+^^^^^^^^^^^^^^^
+
+Home sick with probably food poisoning from egg salad sandwich on the ferry.
+
+Continued dev of SalishSeaCmd towards segmented runs
+(SalishSea)
+
+
+Tue 26-Feb-2019
+^^^^^^^^^^^^^^^
+
+Tagged SalishSeaNowcast v3.3 prior to update to matplotlib-3; bumped version to 19.1.dev0.
+Built new salishsea-nowcast-3.7 deve env on niko w/ Python 3.7 and matplotlib 3.0.2; updated envs & docs prior to merging matpltlib3_figures branch into default.
+Salish Sea team mtg; see whiteboard.
+Merged SalishSeaNowcast matplotlib3_figures branch into default.
+Installed latest version of miniconda3 in $HOME on skookum.
+Built new /SalishSeaCast/nowcast-env with Python 3.7.1 and matplotlib 3.0.2; lots of mucking around with version and pip vs. conda install due to circus incompatibility with pyzmq>17 and tornado>5
+(SalishSea)
+
+Discussed cedar run issue w/ Ashu.
+(MIDOSS)
+
+
 Wed 27-Feb-2019
 ^^^^^^^^^^^^^^^
 
