@@ -1240,6 +1240,85 @@ Sent email to Ashu re: changing ownership & permissions on cedar so that def-all
 (MIDOSS)
 
 
+Wed 27-Feb-2019
+^^^^^^^^^^^^^^^
+
+Installed skype via snap on kudu.
+
+Updated SalishSeaNowcast to a rev that is really pre-matplotlib-3 to fix issue I created with update at the end of yesterday's thrash.
+Changed .condarc on skookum et al to store envs in ~/conda_envs/
+Built a new ecget conda env in ~/conda_envs/ to replace the one in miniconda3.aside/envs/; changed fraser_buoy.cron.sh to point to new env.
+Merged default from niko and vhfr r12 work on kudu.
+Created new SalishSeaNowcast Python 3.7 and matplotlib-3 dev env on kudu.
+Created new SalishSeaNowcast Python 3.7 and matplotlib-3 fig dev env on kudu.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Thu 28-Feb-2019
+^^^^^^^^^^^^^^^
+
+Created salishsea-site specific Vagrant file.
+Started integration of VHFR FVCOM surface currents and thalweg transect image loops.
+(salishsea-site)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Fri 1-Mar-2019
+^^^^^^^^^^^^^^
+
+Westgrid townhall; see below.
+(SalishSea)
+
+Created salishsea-site specific Vagrant file.
+(salishsea-site)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Westgrid townhall:
+* Patrick Mann; ops director:
+  * /project issue ongoing
+    * moving metadata from old SAS drives to new SSDs
+    * updating luster, centos, and **OPA drivers**
+    * re-mount /project on Wed 6-Mar
+  * arbutus update almost complete
+  * oricnus defunded 31-Mar; best efforts until Jun/Jul; no backups after 31-Mar
+  * beluga
+    * power supply issued during acceptance tests; handed over to CalcQuebec on 12-Feb; unlikely to be available for RAC allocation in Apr
+  * RAC deliveration complete
+    * notifications 15-Mar
+    * storage 1.65x; covered by new 10Pb coming to cedar
+    * cpu 2.6x
+    * gpu 5.25x
+    * cloud cpu 1.16x
+    * cloud storage 0.84x
+  * annual account renewals 8-Apr to 6-May; PIs please update CCVs
+  * cedar nearline; still WIP due to network issues for replication across SFU, Waterloo & Toronto; maybe Apr
+  * new FPGAs on graham
+* Alex Razoumov, training:
+  * biweekly webinars, alternate w/ scharcnet
+  * in-person workshops in Mar (SFU), Aor (SFU), May (Calgary), Jun (UBC)
+  * archived slides & videos on westgrid training page
+* Lance SFU cedar senior sys admin:
+  * system instabilities background
+  * lots of excuses
+  * Alex:
+    * 60 slurm partitions; 3h, 12h, 1d, 3d, 7d, 28d, size, etc.
+    * only 48-core nodes available for whole node jobs now (maybe)
+    * 26-Feb /project ~3h down was due to user hammering io
+    * slurm gets overwhelmed w/ requests
+    * default gids on /home and /scratch are user, but def- on /project, so mv messes things up; use cp then rm instead **wtf?**
+
+
+
+TODO: Move SalishSeaNowcast v3.3 tag to default branch.
+
+
 
 
 
