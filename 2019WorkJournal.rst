@@ -1287,7 +1287,7 @@ Mon 25-Feb-2019
 
 Home sick with probably food poisoning from egg salad sandwich on the ferry.
 
-Continued dev of SalishSeaCmd towards segmented runs
+Continued dev of SalishSeaCmd towards segmented runs.
 (SalishSea)
 
 
@@ -1299,7 +1299,7 @@ Built new salishsea-nowcast-3.7 deve env on niko w/ Python 3.7 and matplotlib 3.
 Salish Sea team mtg; see whiteboard.
 Merged SalishSeaNowcast matplotlib3_figures branch into default.
 Installed latest version of miniconda3 in $HOME on skookum.
-Built new /SalishSeaCast/nowcast-env with Python 3.7.1 and matplotlib 3.0.2; lots of mucking around with version and pip vs. conda install due to circus incompatibility with pyzmq>17 and tornado>5
+Built new /SalishSeaCast/nowcast-env with Python 3.7.1 and matplotlib 3.0.2; lots of mucking around with version and pip vs. conda install due to circus incompatibility with pyzmq>17 and tornado>5; ultimately aborted.
 (SalishSea)
 
 Discussed cedar run issue w/ Ashu.
@@ -1337,48 +1337,22 @@ See project journal.
 Fri 1-Mar-2019
 ^^^^^^^^^^^^^^
 
-Westgrid townhall; see below.
+Westgrid townhall; #compute-canada channel.
+Started rsync of GEMLAM-2007-2009 external drive on to /opp/GEMLAM/ with drive mounted on sable.
+Built new /SalishSeaCast/nowcast-env with Python 3.7.1 and matplotlib 3.0.3 and flipped production to it.
+Created #compute-canada slack channel and moved status feeds to it.
+Continued dev of SalishSeaCmd towards segmented runs.
 (SalishSea)
 
-Created salishsea-site specific Vagrant file.
+Continued integration of VHFR FVCOM surface currents and thalweg transect image loops.
 (salishsea-site)
 
 See project journal.
 (SalishSeaCast-FVCOM)
 
-Westgrid townhall:
-* Patrick Mann; ops director:
-  * /project issue ongoing
-    * moving metadata from old SAS drives to new SSDs
-    * updating luster, centos, and **OPA drivers**
-    * re-mount /project on Wed 6-Mar
-  * arbutus update almost complete
-  * oricnus defunded 31-Mar; best efforts until Jun/Jul; no backups after 31-Mar
-  * beluga
-    * power supply issued during acceptance tests; handed over to CalcQuebec on 12-Feb; unlikely to be available for RAC allocation in Apr
-  * RAC deliveration complete
-    * notifications 15-Mar
-    * storage 1.65x; covered by new 10Pb coming to cedar
-    * cpu 2.6x
-    * gpu 5.25x
-    * cloud cpu 1.16x
-    * cloud storage 0.84x
-  * annual account renewals 8-Apr to 6-May; PIs please update CCVs
-  * cedar nearline; still WIP due to network issues for replication across SFU, Waterloo & Toronto; maybe Apr
-  * new FPGAs on graham
-* Alex Razoumov, training:
-  * biweekly webinars, alternate w/ scharcnet
-  * in-person workshops in Mar (SFU), Aor (SFU), May (Calgary), Jun (UBC)
-  * archived slides & videos on westgrid training page
-* Lance SFU cedar senior sys admin:
-  * system instabilities background
-  * lots of excuses
-  * Alex:
-    * 60 slurm partitions; 3h, 12h, 1d, 3d, 7d, 28d, size, etc.
-    * only 48-core nodes available for whole node jobs now (maybe)
-    * 26-Feb /project ~3h down was due to user hammering io
-    * slurm gets overwhelmed w/ requests
-    * default gids on /home and /scratch are user, but def- on /project, so mv messes things up; use cp then rm instead **wtf?**
+Participated in collaboration workshop for SalishSeaCast and Beth Fulton's Atlantis ecosystem model of the Salish Sea.
+(MIDOSS)
+
 
 
 
