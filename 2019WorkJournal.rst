@@ -1354,9 +1354,88 @@ Participated in collaboration workshop for SalishSeaCast and Beth Fulton's Atlan
 (MIDOSS)
 
 
+Sat 2-Mar-2019
+^^^^^^^^^^^^^^
+
+Fallout from yesterday's nowcast-env update on skookum:
+* Fixed bug in wave_height_period fig module from matplotlib-3 update
+* Fixed bug in make_plots re: VHFR x2/r12 model config keys in results archive
+* make_plots fvcom forecast publish 2019-03-01
+* make_plots fvcom nowcast publish 2019-03-01
+(SalishSea)
+
+Worked on hdf5-to-netcdf failure issues w/ Susan:
+* works for her on graham
+* fails for her on salish due to filling /tmp/; resolved by using TMP=/data/$USER/tmp/
+(MIDOSS)
+
+Fixed deprecation warning issue in moad_tools.observations.get_ndbc_buoy() re: pandas.read_table().
+Added scipy as dependency re: geo_tools module that Susan added.
+(moad_tools)
+
+
+Sun 3-Mar-2019
+^^^^^^^^^^^^^^
+
+UptimeRobot reported that salishsea-site went down at ~01:16.
+skookum and salish won't accept ssh connections at ~10:00.
+UptimeRobot reported that salishsea-site came up at ~15:03, but file systems are still wonky; back in business at ~17:00; recovery:
+* download_weather 06 --debug
+* collect_river_data Capilano --data-date 2019-03-02 --debug
+* collect_river_data Englishman --data-date 2019-03-02 --debug
+* collect_river_data Fraser --data-date 2019-03-02 --debug
+* make_runoff_file
+* get_NeahBay_ssh forecast2 --debug
+* grib_to_netcdf forecast2 --debug
+* download_weather 12
+* get_onc_ctd SCVIP --debug
+* get_onc_ctd SEVIP --debug
+* get_onc_ctd USDDL --debug
+* get_onc_ferry TWDP --debug
+* get_vfpa_hadcp --data-date 2019-03-02 --debug
+* download_weather 18
+* collect_weather 00
+Neah Bay ssh ops data had rolled away by the time I was able to run get_NeahBay_ssh; recover:
+* Susan crafted an ssh txt file
+* get_NeahBay_ssh $NOWCAST_YAML nowcast --text-file sshNB_2019-03-04_sea.txt --debug
+(SalishSea)
+
+Explored docker for pyramid app dev:
+* https://medium.freecodecamp.org/docker-development-workflow-a-guide-with-flask-and-postgres-db1a1843044a
+* conda create -n pyramid-docker python=3.7 pip
+* pip install pyramid
+* conda env export -n pyramid-docker -f environment.yaml
+* https://medium.com/backticks-tildes/how-to-dockerize-a-django-application-a42df0cb0a99
+* The key to getting an reloading dev env working is to use docker-compose
+
+Helped Susan get salishsea-site vagrant VM up and running so that she could improve acknowledgements on the site.
+(salishsea-site)
+
+
+March
+=====
+
+Week 10
+-------
+
 Mon 4-Mar-2019
 ^^^^^^^^^^^^^^
 
+Added instructions for vagrant as pinned msg in #attribution-for-onc channel.
+(salishsea-site)
+
+Pulled SalishSeaNowcast rev 391a85754d8c into production re: x2/r12 in download_fvcom_results.
+forecast/04mar19 got stuck at 84.7% due to a file length issue in atmos forcing; upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race conditions between grib_to_netcdf and make_live_ocean_files; recovery:
+* kill xios_server.exe on west.cloud
+* kill watch_NEMO on west.cloud
+* wait for SalishSeaNEMO.sh script to finish on west.cloud
+* upload_forcing west.cloud nowcast+ --debug
+* make_forcing_links west.cloud nowcast+ --debug
+* make_forcing_links west.cloud ssh
+* upload_forcing cedar nowcast+ --debug
+* upload_forcing orcinus nowcast+ --debug
+* make_forcing_links orcinus nowcast+ --debug
+Queued a detached XIOS run on cedar to test new OPA version.
 Started working on profiling make_plots.
 (SalishSea)
 
@@ -1367,6 +1446,7 @@ EOAS seminar about coastal trapped waves in the south Caspian Sea by Mina Masoud
 
 Talked to Ashu about interpolation weights for wwatch3 to MOHID.
 (MIDOSS)
+
 
 
 
