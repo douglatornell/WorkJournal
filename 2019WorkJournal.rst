@@ -1354,6 +1354,20 @@ Participated in collaboration workshop for SalishSeaCast and Beth Fulton's Atlan
 (MIDOSS)
 
 
+Mon 4-Mar-2019
+^^^^^^^^^^^^^^
+
+Started working on profiling make_plots.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+EOAS seminar about coastal trapped waves in the south Caspian Sea by Mina Masoud.
+
+Talked to Ashu about interpolation weights for wwatch3 to MOHID.
+(MIDOSS)
+
 
 
 TODO: Move SalishSeaNowcast v3.3 tag to default branch.
