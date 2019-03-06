@@ -1448,6 +1448,23 @@ Talked to Ashu about interpolation weights for wwatch3 to MOHID.
 (MIDOSS)
 
 
+Tue 5-Mar-2019
+^^^^^^^^^^^^^^
+
+Confirmed the numpy boolean indexing that Susan and I discussed last night over dinner; see #random channel.
+Helped Ashu re-install moad_tools, NEMO-Cmd & MOHID-Cmd and confirm that he has a working env on cedar.
+Email discussion w/ Krista about AIS data mgmt and export from ArcMap.
+(MIDOSS)
+
+Salish Sea team mtg; see whiteboard.
+
+Refactored figures mgmt classes into separate module.
+(salishsea-site)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
 
 
 TODO: Move SalishSeaNowcast v3.3 tag to default branch.
