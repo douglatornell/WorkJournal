@@ -1465,6 +1465,60 @@ See project journal.
 (SalishSeaCast-FVCOM)
 
 
+Wed 6-Mar-2019
+^^^^^^^^^^^^^^
+
+Backfilled upload_forcing to cedar for 1-5-Mar re: downtime.
+Deployed VHFR make_plots split into publish & research.
+(SalishSea)
+
+Answered Ashu's questions about why he got waves.hdf5 output file from MOHID.
+(MIDOSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
+
+
+Thu 7-Mar-2019
+^^^^^^^^^^^^^^
+
+upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race conditions between grib_to_netcdf and make_live_ocean_files; recovery:
+* tried upload_forcing west.cloud nowcast+ --debug before forecast run got stuck, but it errored out
+* upload_forcing cedar nowcast+ --debug
+* upload_forcing orcinus nowcast+ --debug
+
+* kill xios_server.exe on west.cloud
+* kill watch_NEMO on west.cloud
+* wait for SalishSeaNEMO.sh script to finish on west.cloud
+* upload_forcing west.cloud nowcast+ --debug
+* make_forcing_links west.cloud nowcast+ --debug
+* make_forcing_links west.cloud ssh
+* make_forcing_links orcinus nowcast+ --debug
+Sent email to Venkat re: arbutus.cloud migration and my schedule until after SoPO.
+(SalishSea)
+
+Changed randopony.randonneurs.bc.ca to HTTPS and added HTTP->HTTPS redirection via .htaccess.
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Fri 8-Mar-2019
+^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
 
 
 TODO: Move SalishSeaNowcast v3.3 tag to default branch.
