@@ -1518,6 +1518,45 @@ See project work journal.
 See project journal.
 (SalishSeaCast-FVCOM)
 
+Advised Hayley Dawson @Hakai on how to get T&S fields from SalishSeaCast ERDDAP to produce boundary conditions for Discovery Islands FVCOM model.
+(SalishSea)
+
+Started work on setting up 2019 bloomcast:
+* runs dir: /data/dlatorne/SOG-projects/SoG-bloomcast-ensemble/run/
+* cp 2018_bloomcast_inifile.yaml 2019_bloomcast_infile.yaml
+* archived 2018* files in run/2018/
+* archived bloomcast.log and bloom_date_evolution.log files into run/2018/
+* edit 2019_bloomcast_infile.yaml
+* edit config.yaml
+* disable push to web for test run
+* build /data/dlatorne/SOG-projects/bloomcast-env-mpl-1.5.3 conda env
+* pip install -e /data/dlatorne/SOG-projects/SOG
+* pip install -e /data/dlatorne/SOG-projects/SoG-bloomcast-ensemble
+* test run: cd run && bloomcast ensemble -v config.yaml
+* test run succeeded: 13mar 14mar 24mar 14apr 14apr
+* enabled push to web
+* deleted wind_data_date to allow repeat run for today
+* changed cronjob.sh to use new env
+* ran manual production run w/ bash ./cronjob.sh; success! :-)
+* checked bloomcast page on salishsea-site
+* emailed Jim Gower
+* posted link to SalishSeaCast whiteboard
+* enable cron job on salish
+* commit 2018 config files
+* edit new weather descriptions into cloud fraction file and commit
+
+* tag for 2018
+(bloomcast)
+
+Explored trying to speed up hdf5-to-netcdf on cedar by setting TMPDIR to $SLURM_TMPDIR to node-local SSD storage:
+* cdr783 20000m TMPDIR=/tmp: 14m11s 4m45s for ncrcat (timed out of 10min interactive session)
+* cdr783 20000m TMPDIR=$SLURM_TMPDIR: 14m21s
+* cdr648 1000m TMPDIR=$SLURM_TMPDIR: 17m18s
+* cdr648 800m TMPDIR=$SLURM_TMPDIR cp to $SLURM_TMPDIR: 11m23s
+* cdr612 800m TMPDIR=$SLURM_TMPDIR cp to $SLURM_TMPDIR: 17m11s
+* changed hdf5-to-netcdf to use $SLURM_TMPDIR by default if it exists
+(MIDOSS)
+
 
 
 
