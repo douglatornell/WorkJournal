@@ -1558,6 +1558,49 @@ Explored trying to speed up hdf5-to-netcdf on cedar by setting TMPDIR to $SLURM_
 (MIDOSS)
 
 
+Sat 9-Mar-2019
+^^^^^^^^^^^^^^
+
+1st cut on 2018 income tax returns.
+
+More testing of hdf5-to-netcdf using $SLURM_TMPDIR:
+* cdr767 all by myself :-) cp hdf5 to $SLURM_TMPDIR/; hdf5-to-netcdf using new default: 9m50s
+
+(MIDOSS)
+
+
+Sun 10-Mar-2019
+^^^^^^^^^^^^^^^
+
+collect_weather 06 stalled with 489 of 576 file collected; recovery:
+* kill collect_weather 06
+* rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20190310/06
+* download_weather 06 --debug
+* collect_river_data Capilano 2019-03-09
+* collect_river_data Englishman 2019-03-09
+* collect_river_data Fraser 2019-03-09
+* get_onc_ctd SCVIP
+* get_onc_ctd SEVIP
+* get_onc_ctd USDDL
+* get_onc_ferry TWDP
+* get_vfpa_hadcp 2019-03-09
+* get_NeahBay_ssh forecast2 --debug
+* grib_to_netcdf --debug
+* upload_forcing west.cloud-nowcast forecast2 --debug
+* upload_forcing orinus-nowcast-agrif forecast2 --debug
+* upload_forcing cedar-hindcast forecast2 --debug
+* download_weather 12
+* collect_weather 18
+(SalishSea)
+
+
+From get_onc_ctd:
+  /SalishSeaCast/nowcast-env/lib/python3.7/site-packages/xarray/core/variable.py:134: FutureWarning: Converting timezone-aware DatetimeArray to timezone-naive ndarray with 'datetime64[ns]' dtype. In the future, this will return an ndarray with 'object' dtype where each element is a 'pandas.Timestamp' with the correct 'tz'.
+    To accept the future behavior, pass 'dtype=object'.
+    To keep the old behavior, pass 'dtype="datetime64[ns]"'.
+    return np.asarray(pd.Series(values.ravel())).reshape(values.shape)
+
+
 
 
 TODO: Move SalishSeaNowcast v3.3 tag to default branch.
