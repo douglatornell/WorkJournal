@@ -1084,7 +1084,7 @@ Mon 18-Feb-2019
 
 **Statutory Holiday** - Family Day
 
-Repleid to Martin's ticket #042269 email w/ instructions on how to build NEMO/SalishSeaCast.
+Replied to Martin's ticket #042269 email w/ instructions on how to build NEMO/SalishSeaCast.
 Finished setup graham:project/dlatorne/MEOPAR/.
 Got access to EOAS optimum cluster and started exploring:
 * module load Miniconda/3
@@ -1592,6 +1592,64 @@ collect_weather 06 stalled with 489 of 576 file collected; recovery:
 * download_weather 12
 * collect_weather 18
 (SalishSea)
+
+
+Week 11
+-------
+
+Mon 11-Mar-2019
+^^^^^^^^^^^^^^^
+
+Shihan Li & Xiaomei Zhong visiting from Dal re: MIDOSS
+
+Introduced Shihan and Xiaomei to version control, Bitbucket, and Mercurial.
+Shihan presented MOHID model.
+Worked w/ Shihan, Rachael & Xiaomei to create new MIDOSS-MOHID-CODE repo from Shihan's Visual Studio "UBC new" project on his Dal workstation.
+Dinner w/ part of MIDOSS team at Mahoney's.
+(MIDOSS)
+
+
+Tue 12-Mar-2019
+^^^^^^^^^^^^^^^
+
+Shihan Li & Xiaomei Zhong visiting from Dal re: MIDOSS
+
+Susan presented NEMO grid and VVL
+Got MIDOSS-MOHID-CODE repo to build and run some time steps on cedar, todos & things to know to change from MIDOSS-MOHID to new repo:
+* clone MIDOSS-MOHID-CODE repo
+* build MOHID
+* update paths: mohid repo: value in YAML files
+* Waves.dat must include whitecap coverage WAVE_WCC = 1 and a wavewcc block
+* MIDOSS-MOHID-config/SalishSea/Waves.dat has those for simple case of constant zero whitecap coverage
+Xiaomei presented plans for her PhD work on modeling dilbit and synbit.
+Tried to re-run ww3-nowcast/16nov17 but failed because NEMO forecast/16nov17 grid_U and grid_V are needed by make_ww3_current_file and they are archived; sent email to Rachael & Ashu.
+(MIDOSS)
+
+Salish Sea team mtg; see whiteboard.
+(SalishSea)
+
+
+Wed 13-Mar-2019
+^^^^^^^^^^^^^^^
+
+(MIDOSS)
+
+Met w/ Henryk re: working on optimum cluster & learned about ndf5 & netcdf4 libs; cloned repos similar to orcinus & cedar for runs automated via ssh.
+(SalishSea)
+
+
+Thu 14-Mar-2019
+^^^^^^^^^^^^^^^
+
+(MIDOSS)
+
+Created #ww3-handcast slack channel.
+Started trying to build XIOS-2 on optimum:
+* arch-GCC_OPTIMUM.*
+* ./make-xios --arch GCC_OPTIMUM --netcdf_lib netcdf4_seq
+(SalishSea)
+
+
 
 
 From get_onc_ctd:
