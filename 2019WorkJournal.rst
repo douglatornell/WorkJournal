@@ -1489,7 +1489,6 @@ upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race
 * tried upload_forcing west.cloud nowcast+ --debug before forecast run got stuck, but it errored out
 * upload_forcing cedar nowcast+ --debug
 * upload_forcing orcinus nowcast+ --debug
-
 * kill xios_server.exe on west.cloud
 * kill watch_NEMO on west.cloud
 * wait for SalishSeaNEMO.sh script to finish on west.cloud
@@ -1608,6 +1607,9 @@ Worked w/ Shihan, Rachael & Xiaomei to create new MIDOSS-MOHID-CODE repo from Sh
 Dinner w/ part of MIDOSS team at Mahoney's.
 (MIDOSS)
 
+collect_weather 12 stalled; investigation showed that it was due to hours 25 and 26 files apparently not being uploaded; emailed Sandrine who got files uploaded, and automation took it from there.
+(SalishSea)
+
 
 Tue 12-Mar-2019
 ^^^^^^^^^^^^^^^
@@ -1632,7 +1634,14 @@ Salish Sea team mtg; see whiteboard.
 Wed 13-Mar-2019
 ^^^^^^^^^^^^^^^
 
+Shihan Li & Xiaomei Zhong visiting from Dal re: MIDOSS
+
+Supported sprint.
+Created rpn-to-gemlam project & repo.
 (MIDOSS)
+
+See project work journal.
+(GOMSS)
 
 Met w/ Henryk re: working on optimum cluster & learned about ndf5 & netcdf4 libs; cloned repos similar to orcinus & cedar for runs automated via ssh.
 (SalishSea)
@@ -1641,14 +1650,81 @@ Met w/ Henryk re: working on optimum cluster & learned about ndf5 & netcdf4 libs
 Thu 14-Mar-2019
 ^^^^^^^^^^^^^^^
 
+4 chain-drops on Shadowfax on the ride in to UBC :-(
+
+Shihan Li & Xiaomei Zhong visiting from Dal re: MIDOSS
+
+Discussed combined SalishSeaCast and VHFR FVCOM runs in MOHID.
 (MIDOSS)
 
 Created #ww3-handcast slack channel.
-Started trying to build XIOS-2 on optimum:
+Continued work on rpn-to-gemlam.
+Built XIOS-2 on optimum:
 * arch-GCC_OPTIMUM.*
 * ./make-xios --arch GCC_OPTIMUM --netcdf_lib netcdf4_seq
 (SalishSea)
 
+
+Fri 15-Mar-2019
+^^^^^^^^^^^^^^^
+
+Monthly project mtg by skype.
+(MIDOSS)
+
+Started work on building NEMO SalishSeaCast config on optimum; stalled by compile error in trcbc & trc (see #salishseacast channel).
+Re-created SalishSeaNowcast rtd-Bitbucket webhook to try to get rid of warning on rtd.
+(SalishSea)
+
+See project work journal.
+(GOMSS)
+
+Made Birgit a maintainer on ubc-moad-docs rtd project so that she can trigger builds when Bitbucket webhook fails to.
+(MOAD)
+
+Bought an 8Tb external drive to replace the failed GEMLAM 2010-2014 drive.
+
+Tried to set up .htaccess redirect for https://salishsea.eos.ubc.ca/bloomcast/spring_diatoms to  https://salishsea.eos.ubc.ca/bloomcast/spring_diatoms
+(bloomcast)
+
+
+Sat 16-Mar-2019
+^^^^^^^^^^^^^^^
+
+Woke up very depressed.
+
+upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race conditions between grib_to_netcdf and make_live_ocean_files; recovery:
+* upload_forcing cedar nowcast+ --debug
+* upload_forcing orcinus nowcast+ --debug
+* kill xios_server.exe on west.cloud
+* kill watch_NEMO on west.cloud
+* wait for SalishSeaNEMO.sh script to finish on west.cloud
+* upload_forcing west.cloud nowcast+ --debug
+* make_forcing_links west.cloud nowcast+ --debug
+* make_forcing_links west.cloud ssh
+* make_forcing_links orcinus nowcast+ --debug
+Got NEMO SalishSeaCast config built on optimum after a code patch by Susan to work around gcc 4.4.7 issue re: allocation of namelist elements that disappears in gcc 4.8.4 on salish & west.cloud.
+Set up forcing, scratch & results areas on optimum.
+Got tmp run dir created on optimum; hacked SalishSeaNEMO.sh enough to get it on the queue and started but get an "insufficient slots" error; I think it is due to mpirun -np ...
+(SalishSea)
+
+Added missing pkgs to autodocs mocks for moad-tools docs and improves  hdf5_to_netcdf4.cli() docstring.
+(MOAD)
+
+
+Sun 17-Mar-2019
+^^^^^^^^^^^^^^^
+
+upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race conditions between grib_to_netcdf and make_live_ocean_files; recovery:
+* upload_forcing cedar nowcast+ --debug
+* upload_forcing orcinus nowcast+ --debug
+* kill xios_server.exe on west.cloud
+* kill watch_NEMO on west.cloud
+* wait for SalishSeaNEMO.sh script to finish on west.cloud
+* upload_forcing west.cloud nowcast+ --debug
+* make_forcing_links west.cloud nowcast+ --debug
+* make_forcing_links west.cloud ssh
+* make_forcing_links orcinus nowcast+ --debug
+(SalishSea)
 
 
 
