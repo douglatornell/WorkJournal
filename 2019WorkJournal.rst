@@ -1724,6 +1724,137 @@ upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race
 * make_forcing_links west.cloud nowcast+ --debug
 * make_forcing_links west.cloud ssh
 * make_forcing_links orcinus nowcast+ --debug
+Resumed work on race condition mgmt in NEMO_Nowcast.
+(SalishSea)
+
+
+Week 12
+-------
+
+Mon 18-Mar-2019
+^^^^^^^^^^^^^^^
+
+SoPO Mtg - Mary Windpear Centre, Sidney
+
+Faron Anslow: Land temperature and hydrological conditions in 2018
+* La Nina now == previous normal
+* May 18 floods almost all freshet
+* fall is meh! in terms of climate change
+* winter djf 18/19 normal as a whole despite cold dry Feb
+
+Tetjana Ross: Temperature, salinity and density of the NEP using Argo, satellite and Line P data
+* 2018 was 4th warmest year globally
+* 2018 weak La Niña, 2019 weak El Niño
+* warm indicators for 2019 despite cold Feb
+
+Charles Hannah: Ocean Surface Temperatures in 2018 – another marine heat wave?
+* classification of marine heat waves
+* weather in BC isn't caused by El Niño
+
+Roy Hourston: Wind-driven upwelling along the Northwest coast of North America: timing and magnitude
+
+Peter Chandler: Sea surface temperature and salinity at BC lighthouses
+* lighthouse observations have been moved from DFO to public data portal
+* broad freshening trend due to increased precipitation
+
+Bill Crawford: Changes in Oxygen Concentration in BC shelf and deep-sea waters
+* shift to lower O2 at LB08 since 2006; 2015 is anomalous
+
+Jim Gower: Satellite observations of BC waters
+* 29-May-2018 ESA satellite show Fraser River plume bloom; heterosigma; also 9-Jun-2018; 16-Jun Barkely Sound; 709 nm band
+
+Anne Ballantyne: Water level observations on the BC coast
+
+Jennifer Jackson: Interdecadal oceanographic trends in Rivers Inlet, BC
+* peak freshet delayed into Aug for 4th yr in a row; glacial melt
+* first time hypoxic water upwelled in has been observerd; probablly due to prolonged upwelling on the shelf
+* warmer due to persistence into 2018 of sub-surface marine heat wave
+
+Angelica Pena: Results from phytoplankton monitoring at Line P and the west coast of Vancouver Island
+
+Moira Galbraith: West coast zooplankton: annual anomaly time series
+* 2018 pretty much the same as 2017
+
+Sonia Batten: An update on oceanic and west coast shelf/slope plankton populations from the CPR survey
+
+Ian Perry: West Coast of Vancouver Island small mesh multispecies bottom trawl survey (target species: smooth pink shrimp) – 2018 update
+* cluster analysis shows 2018 similar to 2017 but different from 2016
+
+Jennifer Boldt and Jaclyn Cleary: Pelagic fish: an update on Pacific Herring status and trends
+
+Jennifer Boldt: Eulachon update: Fraser River Egg and Larval Survey and West Coast of Vancouver Island Small Mesh Bottom Trawl survey
+* cool Eulachon research
+
+Greg Workman: A review of groundfish surveys in 2018 and an introduction to the groundfish data synopsis report
+* github!
+
+Wiley Evans: 2018 Coastal Ocean Conditions Revealed by the Hakai Institute’s Continuous CO2 Datasets
+* https://hecate.hakai.org data portal
+
+Mark Hipfner: Seabird observations on the BC Coast
+
+Jessica Heke: Canadian Hydrographic Service Pacific: activities and results
+
+Matthais Herborg: Oil spills in BC waters
+* diesel, gasoline, uncategorized hydrocarbon (in order) most common
+* HMCS Calgary fuel transfer incident; 20k l naval diesel over 5 hours; 20 kn wind spread it
+* Lina Island lodge grounding grounding; 33k l onboard; very little spilled in the end; sponge-bob deployment
+
+Hauke Blanken: A snapshot of 2018 NE Pacific conditions from ECCC’s new CIOPS-W forecasting system
+* public results in summer
+* daily average whole water column
+* hourly average surface
+
+Continued work on race condition mgmt in NEMO_Nowcast.
+(SalishSea)
+
+
+Tue 19-Mar-2019
+^^^^^^^^^^^^^^^
+
+**Bloom Day**
+
+SoPO Mtg - Mary Windpear Centre, Sidney
+
+Reflections and highlights on day 1
+* 2015-2016 marine heat wave affects are working their way through trophic levels
+* marine heat waves may become a new (regular or not) recurring pattern
+* flooding has produced massive geomorphic changes in rivers and stream that will feed back to salmon
+
+Peter Chandler: The 2018 Strait of Georgia Water Properties Surveys
+* 4 SoG cruises per year; spring bloom, peak freshet, fall quiet, winter storms
+* low O2 signal
+* early, rapid, high Fraser freshet, then below average until fall rain storms brought is above normal again
+
+Akash Sastri: Deep water and sea surface properties in the Strait of Georgia during 2018: Cabled instruments and ferries
+* SoG is warm since 2014; winter cooling has resumed in 2017 & 2018 but temperature is still above normal
+* 2018 bloom early
+* 2019 bloom started 9-Mar; maybe peak on 17-Mar
+
+Susan Allen: Spring bloom and interannual variations in primary productivity in the SoG
+
+Nina Nemcek: Seasonal dynamics of the phytoplankton community in the Strait of Georgia
+* HPLC ground truthed by microscopy
+* centric diatoms dominate in spring bloom
+* massive June bloom in JdF; heterosigma (HAB); likely triggered by Fraser freshet
+* low diatoms in Jun in all areas
+* very diverse community of flagellates in northern SoG
+* large fall bloom in northern SoG; pennate diatom pseudo-nitzschia (HAB)
+* fall is most generally diverse
+* diatoms are replaced by flagellates when nitrate is depleted, and diatoms don't return when nitrate is replenished
+
+Kelly Young: Zooplankton status and trends in the central Strait of Georgia, 2018
+* copepods dominate zooplankton community; especially little ones
+
+(not) Svetlana Esenkulova: The phytoplankton community and harmful algae in the Salish Sea
+
+Sue Grant: The State of the Salmon initiative
+
+Sue Grant Fraser River Sockeye: abundance and productivity trends
+
+
+nowcast/19ma19 delayed due to connection refused errors for downloads by `sarracenia` client during 1st 12 hours of 12 forecast. Recovered by running `download_weather` worker manually. It stalled in hour 31 on the first attempt, but succeeded on a 2nd attempt.
+Resumed work on race condition mgmt in NEMO_Nowcast and SalishSeaNowcast.
 (SalishSea)
 
 
