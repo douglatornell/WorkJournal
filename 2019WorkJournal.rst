@@ -1727,6 +1727,8 @@ upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race
 Resumed work on race condition mgmt in NEMO_Nowcast.
 (SalishSea)
 
+Vancouver to Ardmore for SoPO meeting.
+
 
 Week 12
 -------
@@ -1857,18 +1859,37 @@ nowcast/19ma19 delayed due to connection refused errors for downloads by `sarrac
 Resumed work on race condition mgmt in NEMO_Nowcast and SalishSeaNowcast.
 (SalishSea)
 
+Sidney to Vancouver after SoPO mtg.
 
 
-From get_onc_ctd:
-  /SalishSeaCast/nowcast-env/lib/python3.7/site-packages/xarray/core/variable.py:134: FutureWarning: Converting timezone-aware DatetimeArray to timezone-naive ndarray with 'datetime64[ns]' dtype. In the future, this will return an ndarray with 'object' dtype where each element is a 'pandas.Timestamp' with the correct 'tz'.
-    To accept the future behavior, pass 'dtype=object'.
-    To keep the old behavior, pass 'dtype="datetime64[ns]"'.
-    return np.asarray(pd.Series(values.ravel())).reshape(values.shape)
+Wed 20-Mar-2019
+^^^^^^^^^^^^^^^
+
+Deployed NEMO_Nowcast race condition management and SalishSeaNowcast grib_to_netcdf/make_live_ocean_files race condition identification to skookum; mostly worked.
+`sarracenia` glitched again today during `collect_weather 12`, but I caught it earlier and manually ran `dowload_weather 12`. Before doing so I patched production with race condition management and it mostly behaved as expected (although the bad result of the `grib_to_netcdf`/`make_live_ocean_files` race conditions didn't happen today).
+Recovered manually from a but in NEMO_Nowcast race condition mgmt that caused manager restart on execution of after_*() that returns 2 or more NextWorker instances.
+Slack discussion w/ Henryk re: slots issue on optimum.
+Finished NEMO_Nowcast race condition management feature and wrote docs for it.
+Moved SalishSeaNowcast v3.3 tag to default branch.
+Changed salishsea_tools.data_tools.onc_json_to_dataset() to use timezone-naive datetimes; avoids warnings like:
+  /SalishSeaCast/nowcast-env/lib/python3.7/site-packages/xarray/core/variable.py:134:
+  FutureWarning: Converting timezone-aware DatetimeArray to timezone-naive
+  ndarray with 'datetime64[ns]' dtype. In the future, this will return
+  an ndarray with 'object' dtype where each element is a
+  'pandas.Timestamp' with the correct 'tz'.
+    To accept the future behavior, pass 'dtype=object'.
+    To keep the old behavior, pass 'dtype="datetime64[ns]"'.
+    return np.asarray(pd.Series(values.ravel())).reshape(values.shape)
+that get_onc_ctd was raising.
+Updated /SalishSeaCast/grid/mesh_mask201702.nc with Susan's new version and pinged ERDDAP.
+(SalishSea)
+
+Got RAC allocation; much less than requested due to lack of publications.
+
+See project work journal.
+(GOMSS)
 
 
-
-
-TODO: Move SalishSeaNowcast v3.3 tag to default branch.
 
 
 
