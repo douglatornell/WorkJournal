@@ -1890,6 +1890,26 @@ See project work journal.
 (GOMSS)
 
 
+Thu 21-Mar-2019
+^^^^^^^^^^^^^^^
+
+Woke up with upset, gassy guts.
+
+`sarracenia` glitched again today several times during `collect_weather 12` while I watched it; manually ran `dowload_weather 12` at ~10:00 to recover. It stalled in hour 25 on the first attempt, but succeeded on a 2nd attempt. Sadly, I had messed up NEMO_Nowcast deployment by reverting test patches and not pulling in committed work; re-ran download_weather 12 again to confirm that race condition management works, and it got stuck at hour 29, and again, and worked on 3rd try.
+Race condition mgmt worked, and averted hung forecast because make_live_ocean_files finished before grib_to_netcdf.
+Met w/ Henryk re: NEMO on optimum:
+* I will test w/ mpich
+* he will hack qsub to add slots to nodelist file
+mpich scaling runs on optimum:
+* 2nodes-4x9+1 timed out on track for ~5h
+* 5nodes-11x14 running; eta 72mh18m11s
+* 10nodes-11x33
+* 14nodes-16x34 running; eta 68m
+(SalishSea)
+
+EOAS colloquium by Julie Keister of UW re: climate effects on Puget Sound zooplankton
+
+
 
 
 
