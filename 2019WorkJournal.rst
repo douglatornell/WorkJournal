@@ -1900,17 +1900,79 @@ Race condition mgmt worked, and averted hung forecast because make_live_ocean_fi
 Met w/ Henryk re: NEMO on optimum:
 * I will test w/ mpich
 * he will hack qsub to add slots to nodelist file
-mpich scaling runs on optimum:
+Started mpich scaling runs on optimum:
 * 2nodes-4x9+1 timed out on track for ~5h
-* 5nodes-11x14 running; eta 72mh18m11s
+* 5nodes-11x14 1h18m11s
 * 10nodes-11x33
-* 14nodes-16x34 running; eta 68m
+* 14nodes-16x34 timed out at 1h
 (SalishSea)
 
 EOAS colloquium by Julie Keister of UW re: climate effects on Puget Sound zooplankton
 
 
+Fri 22-Mar-2019
+^^^^^^^^^^^^^^^
 
+See project work journal.
+(GOMSS)
+
+`sarracenia` glitched again today several times during `collect_weather 12` while I watched it; manually ran `dowload_weather 12` at ~09:20 to recover; stalled at hour 36; retry succeeded.
+Continued mpich scaling runs on optimum:
+* 14nodes-16x34 49m47s
+* 10nodes-11x33 55m38s
+* REBUILD_NEMO fails w/ exit code 9
+Formatted new 8Tb GEMLAM-2012-2014 drive and delivered it to Robert@ECCC.
+Continued dev of rpn-to-gemlam.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Sat 23-Mar-2019
+^^^^^^^^^^^^^^^
+
+Continued dev of rpn-to-gemlam.
+I must have forgotten to start collect_weather 18 after yesterday's recovery:
+* download_weather 18 --yesterday --debug
+* download_weather 00 --debug
+* download_weather 06
+* collect_weather 18
+* download_weather 12
+orcinus lustre file system failed at ~14:00
+Built XIOS-2 and NEMO/SalishSeaCast on optimum against new OpenMPI/4.0.0/GCC/SYSTEM module that Henryk built.
+OpenMPI scaling runs on optimum:
+* 14nodes-16x34 17m11s
+* REBUILD_NEMO fails w/ exit code 9
+Built XIOS-2 and NEMO/SalishSeaCast on optimum against new OpenMPI/2.1.6/GCC/SYSTEM module that Henryk built.
+OpenMPI scaling runs on optimum:
+* 14nodes-16x34 32m16s
+(SalishSea)
+
+Worked with Susan on wwatch3 hindcast.
+(MIDOSS)
+
+
+Sun 24-Mar-2019
+^^^^^^^^^^^^^^^
+
+Create PR#2849 in xarray re: fixing 1 more collections.abc deprecation warning.
+
+Continued working with Susan on wwatch3 hindcast.
+Added nowcast run type to make_ww3_wind_file.
+grib_to_netcdf failed for 06 and 12 forecasts due to /data file system issue:
+* /data came back at ~11:45
+* grib_to_netcdf nowcast+
+* upload_forcing west.cloud nowcast+
+* upload_forcing cedar nowcast+
+(MIDOSS)
+
+Susan confirmed that optimum runs produce readable results files that don't differ significantly from archived results.
+Repeat optimum OpenMPI/2.1.6/GCC/SYSTEM test run:
+* 14nodes-16x34 --bind-to core: time stepping finished in <14m but completion took 18m57s
+* 12nodes-15x30 --bind-to core 36m52s
+* 12nodes-15x30 --bind-to core repeat #1
+(SalishSea)
 
 
 
