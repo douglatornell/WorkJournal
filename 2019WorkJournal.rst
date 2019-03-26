@@ -1975,6 +1975,31 @@ Repeat optimum OpenMPI/2.1.6/GCC/SYSTEM test run:
 (SalishSea)
 
 
+Week 13
+-------
+
+Mon 25-Mar-2019
+^^^^^^^^^^^^^^^
+
+See project journal.
+(Resilient-C)
+
+`sarracenia` glitched again today during `collect_weather 12`; manually ran `dowload_weather 12` at ~13:15 to recover.
+Started backfilling nowcast-agrif runs after orcinus lustre filesystem issue over the weekend:
+* upload_forcing orcinus nowcast+ 2019-03-23 --debug
+* make_forcing_links orcinus nowcast+ 2019-03-23 --debug
+* make_forcing_links orcinus turbidity 2019-03-23 --debug
+* upload_forcing orcinus nowcast+ 2019-03-24 --debug
+* make_forcing_links orcinus nowcast+ 2019-03-24--debug
+* make_forcing_links orcinus turbidity 2019-03-24 --debug
+* make_forcing_links nowcast-agrif 2019-03-23
+* make_forcing_links nowcast-agrif 2019-03-24
+* make_forcing_links nowcast-agrif 2019-03-25
+(SalishSea)
+
+Phys Ocgy seminar by Ben S
+
+
 Wed 27-Mar-2019
 ^^^^^^^^^^^^^^^
 
