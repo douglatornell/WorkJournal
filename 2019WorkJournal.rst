@@ -1981,6 +1981,9 @@ Week 13
 Mon 25-Mar-2019
 ^^^^^^^^^^^^^^^
 
+See project work journal.
+(GOMSS)
+
 See project journal.
 (Resilient-C)
 
@@ -1995,9 +1998,20 @@ Started backfilling nowcast-agrif runs after orcinus lustre filesystem issue ove
 * make_forcing_links nowcast-agrif 2019-03-23
 * make_forcing_links nowcast-agrif 2019-03-24
 * make_forcing_links nowcast-agrif 2019-03-25
+Started adding nowcast run type to make_ww3_current_file
 (SalishSea)
 
 Phys Ocgy seminar by Ben S
+
+
+Tue 26-Mar-2019
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project work journal.
+(GOMSS)
 
 
 Wed 27-Mar-2019
