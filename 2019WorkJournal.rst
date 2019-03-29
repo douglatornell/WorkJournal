@@ -1998,7 +1998,7 @@ Started backfilling nowcast-agrif runs after orcinus lustre filesystem issue ove
 * make_forcing_links nowcast-agrif 2019-03-23
 * make_forcing_links nowcast-agrif 2019-03-24
 * make_forcing_links nowcast-agrif 2019-03-25
-Started adding nowcast run type to make_ww3_current_file
+Started adding nowcast run type to make_ww3_current_file.
 (SalishSea)
 
 Phys Ocgy seminar by Ben S
@@ -2012,6 +2012,10 @@ See project journal.
 
 See project work journal.
 (GOMSS)
+
+Finished adding nowcast run type to make_ww3_current_file.
+SalishSea team mtg; see whiteboard.
+(SalishSea)
 
 
 Wed 27-Mar-2019
@@ -2032,6 +2036,11 @@ See project journal.
 
 See project work journal.
 (GOMSS)
+
+Started adding support for optimum cluster to SalishSeaCmd.
+(SalishSea)
+
+Attended EOAS poster corral; Vicky won people's choice.
 
 
 
