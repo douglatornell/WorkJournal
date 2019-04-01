@@ -2043,6 +2043,40 @@ Started adding support for optimum cluster to SalishSeaCmd.
 Attended EOAS poster corral; Vicky won people's choice.
 
 
+Fri 29-Mar-2019
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+PyCharm updated to PyCharm 2019.1 Build #PY-191.6183.50 that includes task name underscore big fix, and activation of conda env in terminal; also some interesting looking changes to how notebooks work within PyCharm.
+
+See project journal.
+(Resilient-C)
+
+
+Sat 30-Mar-2019
+^^^^^^^^^^^^^^^
+
+See project journal.
+(Resilient-C)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Sun 31-Mar-2019
+^^^^^^^^^^^^^^^
+
+See project journal.
+(Resilient-C)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Did Iona ride solo with 20.6 avg; 1st time over 20 in a while :-)
+
+
 
 
 If I am correctly understanding what you want to do, you need to build both xios and nemo with the new compilers and libraries. xios has to be built first because it provides a lib that nemo links to. The xios I used in /scratch/dlatorne/oneday_21nov14_2019-01-31T103135.621285-0800/ is built from an svn checkout of rev 1637. If you want to replicate exactly you need to grab that rev from http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk, or you can just grab whatever rev the present trunk is at - one of the xios devs asserted on the xios list this morning that trunk is stable.
