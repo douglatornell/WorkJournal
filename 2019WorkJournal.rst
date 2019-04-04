@@ -2077,6 +2077,34 @@ See project journal.
 Did Iona ride solo with 20.6 avg; 1st time over 20 in a while :-)
 
 
+Wed 3-Apr-2019
+^^^^^^^^^^^^^^
+
+LiveOcean product was not available for download until ~11:20, but automation and patience handled it.
+Started setup of beluga:
+  ssh-copy-id
+  maybe different project file spaces for def-allen and rrg-allen ???
+  no nco module
+Started writing docs for working on beluga in MOAD/docs/.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Thu 4-Apr-2019
+^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+LiveOcean product was slow again...
+(SalishSea)
+
+See project journal.
+(Resilient-C)
+
+
 
 
 If I am correctly understanding what you want to do, you need to build both xios and nemo with the new compilers and libraries. xios has to be built first because it provides a lib that nemo links to. The xios I used in /scratch/dlatorne/oneday_21nov14_2019-01-31T103135.621285-0800/ is built from an svn checkout of rev 1637. If you want to replicate exactly you need to grab that rev from http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk, or you can just grab whatever rev the present trunk is at - one of the xios devs asserted on the xios list this morning that trunk is stable.
