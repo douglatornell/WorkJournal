@@ -2077,6 +2077,44 @@ See project journal.
 Did Iona ride solo with 20.6 avg; 1st time over 20 in a while :-)
 
 
+April
+=====
+
+Week 14
+-------
+
+Mon 1-Apr-2019
+^^^^^^^^^^^^^^
+
+Created #beluga-into-herd channel; started todo post
+Finished adding support for optimum cluster to SalishSeaCmd.
+Got serious about scaling study on optimum; see Google spreadsheet.
+Resumed work on SalishSeaCmd segmented runs.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+Tue 2-Apr-2019
+^^^^^^^^^^^^^^
+
+Telcon w/ Kate re: Dad's accounts.
+
+Continued scaling study on optimum; see Google spreadsheet.
+Continued work on SalishSeaCmd segmented runs:
+* mostly finished OpenMPI 2.1.6 tests
+* 8 node job failed due to core binding issue; reported to Henryk
+* built XIOS-2 and NEMO SalishSeaCast against OpenMPI 3.1.3
+  * 14 node tests were slightly slower than 2.1.6
+* built XIOS-2 and NEMO SalishSeaCast against OpenMPI 4.0.0
+  * 14 node tests
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
 Wed 3-Apr-2019
 ^^^^^^^^^^^^^^
 
