@@ -2136,11 +2136,15 @@ Thu 4-Apr-2019
 See project journal.
 (SalishSeaCast-FVCOM)
 
-LiveOcean product was slow again...
+LiveOcean product was slow again, and timed out; re-ran manually twice before it succeeded at ~16:00.
+Ran 8 node test on optimum thanks to -map-by core in mpiexec command.
+Continued working on beluga setup; discussed and sigured out storage trees w/ Susan; discussed move to newer xios-2 that will compile with Intel 2018.3.
 (SalishSea)
 
 See project journal.
 (Resilient-C)
+
+EOAS colloquium on phytoplankton proteomics by Erin Bertrand from Dalhousie
 
 
 
