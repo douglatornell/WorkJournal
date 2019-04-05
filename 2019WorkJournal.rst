@@ -2147,6 +2147,18 @@ See project journal.
 EOAS colloquium on phytoplankton proteomics by Erin Bertrand from Dalhousie
 
 
+Fri 5-Apr-2019
+^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Changed config to specify 2 ports for fvcom workers on west.cloud to facilitate concurrency for x2 and r12 nowcast runs prep, execution, and watching; changed firewall rules on west.cloud nowcast0 VM to open new ports; updated west.cloud deployment docs re: new rules.
+(SalishSea)
+
+Attended Idalia's M.Sc. defense.
+
+
 
 
 If I am correctly understanding what you want to do, you need to build both xios and nemo with the new compilers and libraries. xios has to be built first because it provides a lib that nemo links to. The xios I used in /scratch/dlatorne/oneday_21nov14_2019-01-31T103135.621285-0800/ is built from an svn checkout of rev 1637. If you want to replicate exactly you need to grab that rev from http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk, or you can just grab whatever rev the present trunk is at - one of the xios devs asserted on the xios list this morning that trunk is stable.
