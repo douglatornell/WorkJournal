@@ -2101,8 +2101,8 @@ Tue 2-Apr-2019
 
 Telcon w/ Kate re: Dad's accounts.
 
-Continued scaling study on optimum; see Google spreadsheet.
-Continued work on SalishSeaCmd segmented runs:
+Continued work on SalishSeaCmd segmented runs.
+Continued scaling study on optimum; see Google spreadsheet:
 * mostly finished OpenMPI 2.1.6 tests
 * 8 node job failed due to core binding issue; reported to Henryk
 * built XIOS-2 and NEMO SalishSeaCast against OpenMPI 3.1.3
@@ -2138,7 +2138,7 @@ See project journal.
 
 LiveOcean product was slow again, and timed out; re-ran manually twice before it succeeded at ~16:00.
 Ran 8 node test on optimum thanks to -map-by core in mpiexec command.
-Continued working on beluga setup; discussed and sigured out storage trees w/ Susan; discussed move to newer xios-2 that will compile with Intel 2018.3.
+Continued working on beluga setup; discussed and figured out storage trees w/ Susan; discussed move to newer xios-2 that will compile with Intel 2018.3.
 (SalishSea)
 
 See project journal.
@@ -2154,10 +2154,28 @@ See project journal.
 (SalishSeaCast-FVCOM)
 
 Changed config to specify 2 ports for fvcom workers on west.cloud to facilitate concurrency for x2 and r12 nowcast runs prep, execution, and watching; changed firewall rules on west.cloud nowcast0 VM to open new ports; updated west.cloud deployment docs re: new rules.
+LiveOcean product was slow again, and timed out; re-ran manually twice before it succeeded at ~16:40; fvcom workers failed to launch.
+Continued work on SalishSeaCmd segmented runs.
 (SalishSea)
 
 Attended Idalia's M.Sc. defense.
 
+
+Sat 6-Apr-2019
+^^^^^^^^^^^^^^
+
+LiveOcean product was slow again...
+Added NEMO_Nowcast feature to allow multiple logging ports for remote workers to facilitate concurrent VHFR nowcast x2 & r12 runs.
+Discussed with Susan adding collection of more real-time river discharges to the system.
+(SalishSea)
+
+
+Sun 7-Apr-2019
+^^^^^^^^^^^^^^
+
+LiveOcean product was ready shortly after collect_weather 00 finished!!
+collect_river_data didn't run for the rivers that Susan added yesterday because I didn't think to restart the manager to make them available to after_collect_weather().
+(SalishSea)
 
 
 
