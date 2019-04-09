@@ -2178,6 +2178,29 @@ collect_river_data didn't run for the rivers that Susan added yesterday because 
 (SalishSea)
 
 
+Week 15
+-------
+
+Mon 8-Apr-2019
+^^^^^^^^^^^^^^
+
+SalishSeaCast blew up before forecast2 runs due to more workers than logging ports on skookum thanks to 9 new collect_river_data instances; Susan got things resolved enough to get the forecast2 runs launched at ~07:30; rest of recovery:
+* collect_river_data TheodosiaScotty 2019-04-07
+* get_onc_ctd SCVIP
+* get_onc_ctd SEVIP
+* get_onc_ctd USDDL
+* get_onc_ferry TWDP
+* get_vfpa_hadcp 2019-04-07
+* Added 6 new worker logging .pub/sub ports to skookum list
+Backfilled get_onc_ferry TWDP for 21Mar-25Mar to update O2 observations due to ONC software update issue that Rich alerted me to in 1Apr email.
+Set up $PROJECT/SalishSea/forcing/ tree on beluga and added it to nowcast.yaml so that it is updated daily.
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+
+
 
 If I am correctly understanding what you want to do, you need to build both xios and nemo with the new compilers and libraries. xios has to be built first because it provides a lib that nemo links to. The xios I used in /scratch/dlatorne/oneday_21nov14_2019-01-31T103135.621285-0800/ is built from an svn checkout of rev 1637. If you want to replicate exactly you need to grab that rev from http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk, or you can just grab whatever rev the present trunk is at - one of the xios devs asserted on the xios list this morning that trunk is stable.
 
