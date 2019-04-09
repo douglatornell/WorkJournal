@@ -2199,6 +2199,23 @@ Set up $PROJECT/SalishSea/forcing/ tree on beluga and added it to nowcast.yaml s
 See project journal.
 (SalishSeaCast-FVCOM)
 
+See project journal.
+(Resilient-C)
+
+
+Tue 9-Apr-2019
+^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+See project journal.
+(Resilient-C)
+
+All early morning workers launched and completed successfully.
+LiveOcean product was slow again...
+(SalishSea)
+
 
 
 
