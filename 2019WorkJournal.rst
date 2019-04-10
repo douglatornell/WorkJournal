@@ -2213,8 +2213,42 @@ See project journal.
 (Resilient-C)
 
 All early morning workers launched and completed successfully.
-LiveOcean product was slow again...
+LiveOcean product was slow again; timed out at 12:11; re-launched manually at ~12:30; product available at ~13:30.
+Concurrent VHFR x2 and r12 nowcast runs launched successfully under automation.
+Continued work on beluga setup:
+* successfully built xios-2 svn rev 1600 on beluga
+* cloning repos from Bitbucket kept timing out, but got:
+  * XIOS-ARCH
+  * grid
+  * tides
+  * tracers
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * NEMO-3.6-code
+
+  * SS-run-sets
+  * rivers-climatology
+* Installed NEMO-Cmd and SalishSeaCmd w/ python3.7 -m pip install --user -e
+* NEMO SalishSeaCast build failed with multiple instances of::
+
+    /cvmfs/soft.computecanada.ca/easybuild/software/2017/avx512/Compiler/intel2018.3/openmpi/3.1.2/include/mpif-sizeof.h(213): error #5286: Ambiguous generic interface MPI_SIZEOF: previously declared specific procedure MPI_SIZEOF_COMPLEX32_R12 is not distinguishable from this declaration. [MPI_SIZEOF_COMPLEX32_R12]
+
+  which I traced to https://forge.ipsl.jussieu.fr/nemo/ticket/1799 and its fix at https://forge.ipsl.jussieu.fr/nemo/changeset/8537
+  So, I copied NEMO/OPA_SRC/LBC/lib_mpp.F90 into MY_SRC/ and hacked out 2 instances of::
+
+    USE lbcnfd          ! north fold
+
+    INCLUDE 'mpif.h'
+
+  and tried the build again, and was successful.
+
+Set up /data/sallen/shared/SalishSeaCast/forcing/ tree on optimum
 (SalishSea)
+
+
+/home/dlatorne/projects/def-allen/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast/BLD/ppsrc/nemo/p4zflx.f90(395): warning #6178: The return value of this FUNCTION has not been defined.   [P4Z_FLX_ALLOC]
+   INTEGER FUNCTION p4z_flx_alloc()
+--------------------^
 
 
 
