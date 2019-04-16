@@ -86,7 +86,7 @@ Worked w/ Ben to get SalishSeaCmd and Mercurial working under Python 3.5 on orci
 * change PATH to put $HOME/bin near the front
 * hg version is stuck at 4.8rc0
 download_live_ocean worked on 1st try at 08:26; forecast finished at 09:48; nowcast-agrif was queued at 09:49; nowcast-green finished at 11:39.
-Disabled ECget river flow crob jobs on sallish in favour of collect_river_data worker.
+Disabled ECget river flow crob jobs on salish in favour of collect_river_data worker.
 Worked with Susan to sort why 18-06 ERDDAP datasets suddenly disappeared; nowcast-green/31dec18 files downloaded from ceder were 30dec18 by accident; Susan fixed that.
 Email to Emilio re: availability of new datsets for NANOOS and change in dataset id version.
 (SalishSea)
@@ -120,7 +120,7 @@ Week 2
 Mon 7-Jan-2018
 ^^^^^^^^^^^^^^
 
-Sent email to Roman requesting chang nowcast-agrif reservation window to 10:00 to 13:00, and asking if he will consider building a Python 3.7 module on orcinus.
+Sent email to Roman requesting change nowcast-agrif reservation window to 10:00 to 13:00, and asking if he will consider building a Python 3.7 module on orcinus.
 Sent email to Michael & Maxim re: change to 2018-06 config and sarracenia-based HRDPS file management.
 Updated ERDDAP index page re: dates of V17-02 to V18-06 change-over and planned removal dates for V17-02 datasets.
 Started updating tide gauge station water level datasets from V17-02 to V18-06.
@@ -610,7 +610,7 @@ collect_weather 12 stalled with 525 files collected:
 * confirmed that sarracenia also only downloaded 525 files
 * download_weather 12 to get automation started
 Started building new prod env in skookum:/SalishSeaCast/.
-Ran nowcast-dev/29jan19 manually because it got interupted yesterday by salish reboot.
+Ran nowcast-dev/29jan19 manually because it got interrupted yesterday by salish reboot.
 Made paths for scour and pdftocairo in SalishSeaNowcast explicitly use $NOWCAST_ENV/bin/; something changed across skookum reboot that caused them not to be found.
 (SalishSea)
 
@@ -1243,7 +1243,7 @@ Sent email to Ashu re: changing ownership & permissions on cedar so that def-all
 Fri 22-Feb-2019
 ^^^^^^^^^^^^^^^
 
-Tracked down paramiko deprecatsion warning re: cryptography; see #salishseacast.
+Tracked down paramiko deprecation warning re: cryptography; see #salishseacast.
 Finished migration of figure modules to matplotlib-3.0.0:
 * Ported:
   * nowcast/figures/research/tracer_thalweg_and_surface_hourly.py
@@ -1517,7 +1517,7 @@ See project work journal.
 See project journal.
 (SalishSeaCast-FVCOM)
 
-Advised Hayley Dawson @Hakai on how to get T&S fields from SalishSeaCast ERDDAP to produce boundary conditions for Discovery Islands FVCOM model.
+Advised Hayley Dosser @Hakai on how to get T&S fields from SalishSeaCast ERDDAP to produce boundary conditions for Discovery Islands FVCOM model.
 (SalishSea)
 
 Started work on setting up 2019 bloomcast:
@@ -1867,7 +1867,7 @@ Wed 20-Mar-2019
 
 Deployed NEMO_Nowcast race condition management and SalishSeaNowcast grib_to_netcdf/make_live_ocean_files race condition identification to skookum; mostly worked.
 `sarracenia` glitched again today during `collect_weather 12`, but I caught it earlier and manually ran `dowload_weather 12`. Before doing so I patched production with race condition management and it mostly behaved as expected (although the bad result of the `grib_to_netcdf`/`make_live_ocean_files` race conditions didn't happen today).
-Recovered manually from a but in NEMO_Nowcast race condition mgmt that caused manager restart on execution of after_*() that returns 2 or more NextWorker instances.
+Recovered manually from a bug in NEMO_Nowcast race condition mgmt that caused manager restart on execution of after_*() that returns 2 or more NextWorker instances.
 Slack discussion w/ Henryk re: slots issue on optimum.
 Finished NEMO_Nowcast race condition management feature and wrote docs for it.
 Moved SalishSeaNowcast v3.3 tag to default branch.
@@ -2169,6 +2169,8 @@ Added NEMO_Nowcast feature to allow multiple logging ports for remote workers to
 Discussed with Susan adding collection of more real-time river discharges to the system.
 (SalishSea)
 
+Worked on income tax returns.
+
 
 Sun 7-Apr-2019
 ^^^^^^^^^^^^^^
@@ -2176,6 +2178,8 @@ Sun 7-Apr-2019
 LiveOcean product was ready shortly after collect_weather 00 finished!!
 collect_river_data didn't run for the rivers that Susan added yesterday because I didn't think to restart the manager to make them available to after_collect_weather().
 (SalishSea)
+
+Finalized and files 43ravens GST return, and income tax returns.
 
 
 Week 15
@@ -2225,9 +2229,6 @@ Continued work on beluga setup:
   * NEMO-Cmd
   * SalishSeaCmd
   * NEMO-3.6-code
-
-  * SS-run-sets
-  * rivers-climatology
 * Installed NEMO-Cmd and SalishSeaCmd w/ python3.7 -m pip install --user -e
 * NEMO SalishSeaCast build failed with multiple instances of::
 
@@ -2241,14 +2242,70 @@ Continued work on beluga setup:
     INCLUDE 'mpif.h'
 
   and tried the build again, and was successful.
-
 Set up /data/sallen/shared/SalishSeaCast/forcing/ tree on optimum
+make_turbidity_file failed due to inconsistent time stamp issue; recovery:
+* ln -s riverTurbDaily2_y2019m04d08.nc riverTurbDaily2_y2019m04d09.nc
+* upload_forcing west.cloud turbidity
+* upload_forcing orcinus turbidity
+* upload_forcing cedar turbidity
+* upload_forcing beluga turbidity
+* upload_forcing optimum turbidity
 (SalishSea)
 
 
-/home/dlatorne/projects/def-allen/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast/BLD/ppsrc/nemo/p4zflx.f90(395): warning #6178: The return value of this FUNCTION has not been defined.   [P4Z_FLX_ALLOC]
-   INTEGER FUNCTION p4z_flx_alloc()
---------------------^
+Wed 10-Apr-2019
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Emailed Tereza re:
+
+  /home/dlatorne/projects/def-allen/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast/BLD/ppsrc/nemo/p4zflx.f90(395): warning #6178: The return value of this FUNCTION has not been defined.   [P4Z_FLX_ALLOC]
+     INTEGER FUNCTION p4z_flx_alloc()
+  --------------------^
+
+warning I noticed in beluga build yesterday - bad code smell.
+Got SS-run-sets & rivers-climatology repos on to beluga by rsync-ing them from salish after a bunch more tries that timed out.
+Picked up GEMLAM disk from Rovert@ECCC.
+(SalishSea)
+
+
+Thu 11-Apr-2019
+^^^^^^^^^^^^^^^
+
+Worked on Mom and Dad's 2018 income tax returns.
+
+Helped Tereza diagnose and report cedar file system issue.
+(SalishSea)
+
+
+Fri 12-Apr-2019
+^^^^^^^^^^^^^^^
+
+Wrote report on 2018-2019 MEOPAR Prediction Core work.
+
+
+Sat 13-Apr-2019
+---------------
+
+Vancouver to Parksville
+
+
+Sun 14-Apr-2019
+---------------
+
+make_turbidity_file failed due to inconsistent time stamp issue; recovery:
+* ln -s riverTurbDaily2_y2019m04d13.nc riverTurbDaily2_y2019m04d14.nc
+* upload_forcing west.cloud turbidity
+* upload_forcing orcinus turbidity
+* upload_forcing cedar turbidity
+* upload_forcing beluga turbidity
+* upload_forcing optimum turbidity
+(SalishSea)
+
+Parksville to Vancouver
+
 
 
 
