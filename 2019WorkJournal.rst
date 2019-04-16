@@ -2261,6 +2261,17 @@ See project journal.
 
 Emailed Tereza re:
 
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Email w/ Tereza re: working on graham & beluga, and SalishSeaCmd segmented runs.
+Set up $PROJECT/SalishSea/forcing/ tree on graham` and added it to nowcast.yaml so that it is updated daily.
+(SalishSea)
+
+Phys Ocgy seminars by Ashu & Iris (co-op students)
+
+
+
   /home/dlatorne/projects/def-allen/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast/BLD/ppsrc/nemo/p4zflx.f90(395): warning #6178: The return value of this FUNCTION has not been defined.   [P4Z_FLX_ALLOC]
      INTEGER FUNCTION p4z_flx_alloc()
   --------------------^
@@ -2306,6 +2317,23 @@ make_turbidity_file failed due to inconsistent time stamp issue; recovery:
 
 Parksville to Vancouver
 
+
+Week 16
+-------
+
+Mon 15-Apr-2019
+^^^^^^^^^^^^^^^
+
+Wooke up with low energy, slight headache, sinus congestion, and pain the centre of my chest.
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Email w/ Tereza re: working on graham & beluga, and SalishSeaCmd segmented runs.
+Set up $PROJECT/SalishSea/forcing/ tree on graham` and added it to nowcast.yaml so that it is updated daily.
+(SalishSea)
+
+Phys Ocgy seminars by Ashu & Iris (co-op students)
 
 
 
