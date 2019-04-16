@@ -2298,13 +2298,13 @@ Wrote report on 2018-2019 MEOPAR Prediction Core work.
 
 
 Sat 13-Apr-2019
----------------
+^^^^^^^^^^^^^^^
 
 Vancouver to Parksville
 
 
 Sun 14-Apr-2019
----------------
+^^^^^^^^^^^^^^^
 
 make_turbidity_file failed due to inconsistent time stamp issue; recovery:
 * ln -s riverTurbDaily2_y2019m04d13.nc riverTurbDaily2_y2019m04d14.nc
@@ -2324,7 +2324,7 @@ Week 16
 Mon 15-Apr-2019
 ^^^^^^^^^^^^^^^
 
-Wooke up with low energy, slight headache, sinus congestion, and pain the centre of my chest.
+Woke up with low energy, slight headache, sinus congestion, and pain the centre of my chest.
 
 See project journal.
 (SalishSeaCast-FVCOM)
@@ -2334,6 +2334,27 @@ Set up $PROJECT/SalishSea/forcing/ tree on graham` and added it to nowcast.yaml 
 (SalishSea)
 
 Phys Ocgy seminars by Ashu & Iris (co-op students)
+
+
+Tue 16-Apr-2019
+^^^^^^^^^^^^^^^
+
+Copied SalishSeaNEMO-nowcast key to graham and re-ran upload_forcing forecast2.
+Charles started Ububtu 16.04 LTS upgrades:
+* salish done
+* ocean done
+* skookum done
+16.04 upgrade interrupted:
+* collect_weather 12; launched download_weather 12 manually to recover
+* ERDDAP; restarted automatically from /etc/rc.local
+* salishsea-site; restarted manually
+* SalishSeaNowcast; restarted manually
+* watch_NEMO_agrif; restarted manually
+* collect_weather 18; launched download_weather 18 and collect_weather 00 instead
+Continued work on SalishSeaCmd segmented runs .
+(SalishSea)
+
+Dr. appt at 16:20.
 
 
 
