@@ -2351,10 +2351,115 @@ Charles started Ububtu 16.04 LTS upgrades:
 * SalishSeaNowcast; restarted manually
 * watch_NEMO_agrif; restarted manually
 * collect_weather 18; launched download_weather 18 and collect_weather 00 instead
-Continued work on SalishSeaCmd segmented runs .
+Continued work on SalishSeaCmd segmented runs.
+nowcast-dev failed on launch; traced to change in libmpi.so version; XIOS-2 and SalishSeaCast_Blue NEMO config on salish need to be rebuilt; XIOS-2 build attempt failed, traced to http://forge.ipsl.jussieu.fr/nemo/discussion/topic/28
 (SalishSea)
 
 Dr. appt at 16:20.
+
+
+Wed 17-Apr-2019
+^^^^^^^^^^^^^^^
+
+Started migration to arbutus.cloud:
+* researched ed25519 keys, but openstack doesn't support as of queens release that is on arbutus.cloud
+* generated new arbutus.cloud_id_rsa key pair on kudu and uploaded public key via web console
+* launched an Ubuntu 18.04 LTS minimal VM with the nemo-c8-60gb-90 flavour as nowcast0
+* associated public ip address w/ nowcast0
+* added ssh access rule to security group
+* ssh-ed in from kudu
+* created #arbutus-into-herd channel
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Investigated FutureWarning re: matplotlib datetime converter registration; best explanation is https://pandas.pydata.org/pandas-docs/stable/whatsnew/v0.21.1.html#whatsnew-0211-converters
+
+
+Thu 18-Apr-2019
+^^^^^^^^^^^^^^^
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Worked on XIOS-2 and NEMO build issues on 16.04 salish:
+* adding -D_GLIBCXX_USE_CXX11_ABI=0 to %BASE_CFLAGS in arch-GCC_SALISH.fcm as recommended in http://forge.ipsl.jussieu.fr/nemo/discussion/topic/28 gets farther; now the problem is that there is now netcdf.mod file
+* looks like we need to update to libnetcdff6 and libnetcdff-dev which will move use from netcdf-4.1.3 to 4.4.3; opened ticket for Charles opinion, and he installed libnetcdff-dev-4.4.0 and libnetcdff-4.4.3
+* successfully built XIOS-2
+* successfully built NEMO SalishSeaCast_Blue config
+* successfully run nowcast-dev/16apr19 and 17apr19
+Continued migration to arbutus.cloud:
+* started writing SalishSeaNowcast arbutus_cloud deployment docs
+(SalishSea)
+
+Publication party for Idalia's M.Sc. thesis.
+
+
+Fri 19-Apr-2019
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Good Friday
+
+Launched nowcast-dev/18apr19 and it finished in time for automation to handle nowcast-dev/19apr19.
+(SalishSea)
+
+
+Sat 20-Apr-2019
+^^^^^^^^^^^^^^^
+
+Easter Saturday
+
+Hiking in Golden Ears park; Lower Fall and North Beach trails, and parts of West Canyon and Menzies trails.
+
+
+Sat 21-Apr-2019
+^^^^^^^^^^^^^^^
+
+Easter Sunday
+
+grib_to_netcdf failed before forecast2 runs due to a mount issue with /ocean:
+* changed wgrib2 path in config to use executable that is committed in private-tools repo
+* manually ran grib_to_netcdf forecast2 to backfill
+* manually ran grib_to_netcdf nowcast+
+* manually ran make_live_ocean_files to restart automation at ~11:30
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+Walked along the False Creek Seawall to Columbia St, then to MEC, Dunbar & Bicicletta to look at bikes; Cannondale Topstone & MEC Provincial 222 ot Trail look promising.
+
+
+Week 17
+-------
+
+Mon 22-Apr-2019
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Easter Monday
+
+Continued migration to arbutus.cloud:
+* continued writing SalishSeaNowcast arbutus_cloud deployment docs
+* can't use 18.04 LTS minimal, have to use full to get NFS support
+* had to mount export shared storage from /share instead of /export/MEOPAR because I couldn't get the export settings to work
+* head node is working, but not snapshotted yet
+* made v0 of compute node template
+* accidentally detached west.cloud shared storage; got it back but then had a thrash mounting it on nowcast1; ended up doing the same as on arbutus.cloud, i.e. /share/
+(SalishSea)
+
+
+Tue 23-Apr-2019
+^^^^^^^^^^^^^^^
+
+Continued migration to arbutus.cloud:
+* continued writing SalishSeaNowcast arbutus_cloud deployment docs; pushed WIP
+* cloned repos into shares storage
+* worked out loop commands to rename and mount shares storage on compute nodes
+(SalishSea)
+
+See project journal.
+(SalishSeaCast-FVCOM)
 
 
 
