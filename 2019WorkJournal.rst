@@ -2384,7 +2384,7 @@ See project journal.
 (SalishSeaCast-FVCOM)
 
 Worked on XIOS-2 and NEMO build issues on 16.04 salish:
-* adding -D_GLIBCXX_USE_CXX11_ABI=0 to %BASE_CFLAGS in arch-GCC_SALISH.fcm as recommended in http://forge.ipsl.jussieu.fr/nemo/discussion/topic/28 gets farther; now the problem is that there is now netcdf.mod file
+* adding -D_GLIBCXX_USE_CXX11_ABI=0 to %BASE_CFLAGS in arch-GCC_SALISH.fcm as recommended in http://forge.ipsl.jussieu.fr/nemo/discussion/topic/28 gets farther; now the problem is that there is no netcdf.mod file
 * looks like we need to update to libnetcdff6 and libnetcdff-dev which will move use from netcdf-4.1.3 to 4.4.3; opened ticket for Charles opinion, and he installed libnetcdff-dev-4.4.0 and libnetcdff-4.4.3
 * successfully built XIOS-2
 * successfully built NEMO SalishSeaCast_Blue config
@@ -2456,10 +2456,34 @@ Continued migration to arbutus.cloud:
 * continued writing SalishSeaNowcast arbutus_cloud deployment docs; pushed WIP
 * cloned repos into shares storage
 * worked out loop commands to rename and mount shares storage on compute nodes
+* started rsync of forcing dirs from west.cloud to arbutus.cloud:
+  * GEM2.5
+  * LiveOcean
+  * rivers
+  * sshNeahBay
+* XIOS build
+  * added -D_GLIBCXX_USE_CXX11_ABI=0 to %BASE_CFLAGS in arch-GCC_ARBUTUS.fcm as recommended in http://forge.ipsl.jussieu.fr/nemo/discussion/topic/28
+  * installed svn
+  * svn co http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk XIOS-2-svn; got r1660 (same as on beluga)
+  * added -std=c++11 to %BASE_CFLAGS in arch-GCC_ARBUTUS.fcm after an error message told me to
+  * successful build
+* NEMO build
+  * hg up -r PROD-nowcast-green-201806
+  * cp ARCH/UBC-EOAS/arch-GCC_SALISH.fcm ARCH/UBC-EOAS/arch-GCC_ARBUTUS.fcm
+  scp lib_MPP.F90 from beluga into SalishSeaCast/MY_SRC/
+  * SalishSeaCast_Blue built successfully
+  * SalishSeaCast built successfully
+* launched nowcast5 through 17 VMs
+* discovered the / is almost full
+* installed miniconda and created nowcast-env
+SalishSeaCast mtg; see whiteboard.
 (SalishSea)
 
 See project journal.
 (SalishSeaCast-FVCOM)
+
+-std=c++11 or -std=gnu++11
+
 
 
 
