@@ -2482,7 +2482,47 @@ SalishSeaCast mtg; see whiteboard.
 See project journal.
 (SalishSeaCast-FVCOM)
 
--std=c++11 or -std=gnu++11
+
+Wed 24-Apr-2019
+^^^^^^^^^^^^^^^
+
+Answered Rebecca's questions about M&D tax.
+
+Continued migration to arbutus.cloud:
+* updated repos to PROD-nowcast-green-201806:
+  * grid
+  * rivers-climatology
+  * tides
+  * tracers
+* update SS-run-sets to 5090b620bf9c
+*
+(SalishSea)
+
+
+Thu 25-Apr-2019
+^^^^^^^^^^^^^^^
+
+Got Mom's OAS tax amounts from Service Canada & sent themto Rebecca.
+
+Continued migration to arbutus.cloud:
+* Dug into openmpi errors more
+* Venkat recommended spack:
+  * git cloned it into /nemoShare/MEOPAR/nowcast-sys
+  * copied config to .spack/config.yaml
+  * edit config to use /mnt as temp storage
+  * . spack/share/spack/setup-env.sh
+  * spack bootstrap
+  * . spack/share/spack/setup-env.sh
+  * spack install openmpi@1.6.5
+  * module avail/load etc to manage openmpi
+* added XIOS-ARCH/COMPUTECANADA/arch-GCC_ARBUTUS.env to load openmpi, libiconv, numactl
+* successfully built XIOS-2-svn r1660
+* successfully built NEMO SalishSeaCast_Blue config
+* got time steps w/ NEMO on big mem VM
+* changed back to openmpi-2.1.2 and got time steps on big mem VM
+* NEMO on small mem VMs goes very slow or freezes
+* tried to shut down and restart all VMs and arbutus file system crashed
+(SalishSea)
 
 
 
