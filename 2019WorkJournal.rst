@@ -2278,7 +2278,7 @@ Phys Ocgy seminars by Ashu & Iris (co-op students)
 
 warning I noticed in beluga build yesterday - bad code smell.
 Got SS-run-sets & rivers-climatology repos on to beluga by rsync-ing them from salish after a bunch more tries that timed out.
-Picked up GEMLAM disk from Rovert@ECCC.
+Picked up GEMLAM disk from Robert@ECCC.
 (SalishSea)
 
 
@@ -2524,6 +2524,49 @@ Continued migration to arbutus.cloud:
 * tried to shut down and restart all VMs and arbutus file system crashed
 (SalishSea)
 
+
+Fri 26-Apr-2019
+^^^^^^^^^^^^^^^
+
+Monthly project mtg:
+(MIDOSS)
+
+Continued setup on beluga:
+* rsync-ed XIOS-2 (svn r1066) from niko to beluga as XIOS-2-hg because cloning times out
+* deleted extern/, inputs/, src/, and tools/ dirs from XIOS-2-hg
+* rsync-ed extern/, inputs/, src/, and tools/ dirs from XIOS-2 (svn r1660) into XIOS-2-hg
+* copied bld.cfg and bld_dir.cdf from XIOS-2 to XIOS-2-hg
+* discovered that build in XIOS-2-hg was going into XIOS-2
+* Try again:
+  * svn checkout XIOS-2-svn-pristine
+  * rsync XIOS-2-hg-fresh
+  * deleted extern/, inputs/, src/, and tools/ dirs from XIOS-2-hg-fresh
+  * rsync-ed extern/, inputs/, src/, and tools/ dirs from XIOS-2 (svn r1660) into XIOS-2-hg-fresh
+  * copied bld.cfg and make_xios into XIOS-2-hg-fresh
+  * successful build
+  * symlinked XIOS-2-hg-fresh as XIOS-2
+  * built NEMO SalishSeaCast against new XIOS-2
+  * submitted 21nov-11x33-xios-patch, and it worked
+  * reconciled files in XIOS-2-hg-fresh and create $PROJECT/datorne/MEOPAR/xios-2-r1660.patch
+  * rsync XIOS-2-hg from niko
+  * apply patch
+  * build failed
+* Re-confirmed that XIOS-2-hg-fresh builds
+* committed patch in XIOS-2-hg-fresh
+* built successfully after commit
+* cloned XIOS-2-hg-fresh to XIOS-2-hg locally on beluga
+* built after clone
+* Test on salish:
+  * rsync clean clone of XIOS-2-hg-fresh to /data/dlatornel/MEOPAR/XIOS-2-hg
+  * had to add -std=c++11 to %BASE_CFLAGS in arch-GCC_ARBUTUS.fcm after an error message told me to
+  * successful build
+* Test on graham:
+  * rsync clean clone of XIOS-2-hg-fresh to /data/dlatornel/MEOPAR/XIOS-2-hg
+  * had to add -std=c++11 to %BASE_CFLAGS in arch-X64_GRAHAM.fcm after an error message told me to
+  * build timed out
+(SalishSea)
+
+Lunch w/ Al and Christina Spence.
 
 
 
