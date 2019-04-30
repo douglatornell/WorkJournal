@@ -2528,7 +2528,7 @@ Continued migration to arbutus.cloud:
 Fri 26-Apr-2019
 ^^^^^^^^^^^^^^^
 
-Monthly project mtg:
+Monthly project mtg.
 (MIDOSS)
 
 Continued setup on beluga:
@@ -2568,6 +2568,62 @@ Continued setup on beluga:
 
 Lunch w/ Al and Christina Spence.
 
+
+Sat 27-Apr-2019
+^^^^^^^^^^^^^^^
+
+Vancouver to Parksville; very windy, but sunny, ride and ferry crossing due to passing front
+
+Pushed XIOS-2 update to svn r1660 from beluga.
+Added lib_mpp.F90 from svn r8537 to NEMO SalishSeaCast and pushed from beluga.
+Added NEMO ARCH file for beluga, and pushed.
+Pulled into XIOS-2 on graham, built successfully, pulled lib_mpp.F90 into NEMO-3.6.code, built successfully against XIOS-2.
+21nov14_onehour test ran successfully.
+(SalishSea)
+
+
+Sun 28-Apr-2019
+^^^^^^^^^^^^^^^
+
+Worked with Susan to get hindcast automation transferred from cedar to optimum; need to refactor watch_NEMO_hindcast to work with qstat as well as squeue.
+Resumed work on docs for beluga:
+* updated hg docs re: glog alias
+* added section to hg docs re: work-around for hg clone timeouts
+Figured out mount options for nfsvers=4 on west.cloud: -t nfs -o proto=tcp:port=2049
+(SalishSea)
+
+Parksville to Vancouver
+
+
+May
+===
+
+Week 18
+-------
+
+Mon 29-Apr-2019
+^^^^^^^^^^^^^^^
+
+Removed /share export on west.cloud to go back to /export/MEOPAR on nowcast1 now that I know how to make nfsvers=4 work; mounts on all compute VMs went stale; thrashed with Venkat on slack and eventually recovered by re-doing bind mount of /nemoShare/MEOPAR on /export/MEOPAR; run performance is still 25% of before I accidentally detached shared volume.
+Finished docs for MOEPAR on beluga.
+Continued migration to arbutus.cloud:
+* set up 3 60g VMs, one as head, 2 as compute
+* got time steps with nemo on nowcast0 and xios on nowcast1
+* got time steps with xios on nowcast0 and nemo on nowcast1
+* ran test on 3x7=20 cores for 411 time steps
+* ran 4x8=28 cores to completion in 1h28m
+(SalishSea)
+
+
+Stack:
+* docs for working on beluga
+* respond to software req for sockeye
+* migration to arbutus.cloud
+* rpn_to_gemlam
+* segmented runs
+* refactor watch_NEMO_hindcast to work with qstat
+* hdf5 prep into MOHID-cmd
+* change compute-canada HPC setup to put repos on $HOME to speed up deep dir traversals and nemo/salishsea run ops
 
 
 
