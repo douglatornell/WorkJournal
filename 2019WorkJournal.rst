@@ -2259,11 +2259,6 @@ Wed 10-Apr-2019
 See project journal.
 (SalishSeaCast-FVCOM)
 
-Emailed Tereza re:
-
-See project journal.
-(SalishSeaCast-FVCOM)
-
 Email w/ Tereza re: working on graham & beluga, and SalishSeaCmd segmented runs.
 Set up $PROJECT/SalishSea/forcing/ tree on graham` and added it to nowcast.yaml so that it is updated daily.
 (SalishSea)
@@ -2612,12 +2607,197 @@ Continued migration to arbutus.cloud:
 * got time steps with xios on nowcast0 and nemo on nowcast1
 * ran test on 3x7=20 cores for 411 time steps
 * ran 4x8=28 cores to completion in 1h28m
+* see slack for rest of scaling runs
 (SalishSea)
 
 
+Tue 30-Apr-2019
+^^^^^^^^^^^^^^^
+
+See project work journal.
+(GOMSS)
+
+Continued migration to arbutus.cloud:
+* created new 15g compute node image (v1)
+* see slack for scaling runs
+SalishSeaCast mtg; see whiteboard.
+(SalishSea)
+
+Finalized M&D tax returns w/ Rebecca.
+
+Telcon w/ Max about 43ravens intern possibility
+
+
+Wed 1-May-2019
+^^^^^^^^^^^^^^
+
+Vancouver to New York
+
+See project work journal.
+(GOMSS)
+
+Continued work on SalishSeaCmd segmented runs.
+collect_weather 12 failed:
+* ran download_weather 12 to restart automation
+* ran download_weather 18 because it was partially downloaded by sarracenia, but collect_weather 18 wasn't running
+* launched collect_weather 00
+* accidentally deleted:
+  * /results/forcing/atmospheric/GEM2.5/GRIB/20190105/12
+  * /results/forcing/atmospheric/GEM2.5/GRIB/20190105/18
+Continued migration to arbutus.cloud:
+* see slack for scaling runs
+(SalishSea)
+
+
+Thu 2-May-2019
+^^^^^^^^^^^^^^
+
+New York
+
+SSC recovery:
+* launched nowcast-dev/01may19 via make_forcing_links --shared-storage
+* launched nowcast-agrif/28apr19
+* launched nowcast-agrif/29apr19
+* launched nowcast-agrif/30apr19
+
+* nowcast-agrif/01may19
+
+* too fiddly to recover:
+  * ww3 forecast 01may19
+  * fvcom forecast 01may19
+* Susan will backfill via hindcasting:
+  * ww3 nowcast 01may19
+  * ww3 nowcast 02may19
+Continued work on SalishSeaCmd segmented runs.
+Continued migration to arbutus.cloud:
+* see slack for scaling runs
+(SalishSea)
+
+
+Fri 3-May-2019
+^^^^^^^^^^^^^^
+
+New York
+
+SSC recovery (cont'd):
+* launched nowcast-agrif/30apr19
+
+* nowcast-agrif/01may19
+Continued migration to arbutus.cloud:
+* see slack for scaling runs
+(SalishSea)
+
+
+Sat 4-May-2019
+^^^^^^^^^^^^^^
+
+New York
+
+SSC recovery (cont'd):
+* launched nowcast-agrif/02may19
+Continued migration to arbutus.cloud:
+* see slack for scaling runs
+(SalishSea)
+
+
+Sun 5-May-2019
+^^^^^^^^^^^^^^
+
+New York to Brampton
+
+See project journal.
+(SalishSeaCast-FVCOM)
+
+fvcom-nowcast-x2/05may19 failed because input.x2/ directory was empty; restarted automation manually via make_fvcom_boundary.
+Tried to reset shared storage mounts on r12 VMs and discovered that there were orphan and zombie fvcom processes holding files open; killed them all, remounted shared storage, manually launched nowcast-r12/22apr19 and it compute time was normal.
+Checked x2 VMs for same problem, but they were okay.
+Check nemo VMs and found orphan and zombie wwatch3 processes; nowcast-green in progress immediately sped up when I started killing them.
+SSC recovery (cont'd):
+* launched nowcast-agrif/03may19
+* launched nowcast-agrif/04may19
+(SalishSea)
+
+
+Week 19
+-------
+
+
+Mon 6-May-2019
+^^^^^^^^^^^^^^
+
+Brampton
+
+SSC recovery (cont'd):
+* launched nowcast-agrif/05may19
+Investigated get_vfpa_hadcp failure; netcdf file for May is empty, which causes an error when trying to append data; deleted empty file and re-ran 2019-05-{01..05} manually.
+Continued migration to arbutus.cloud:
+* see slack for scaling runs; ran 9x19 on 111 cores (same as west.cloud production); 49m16s (compared to 27m16s on west.cloud)
+* built wwatch3
+* set up wwatch3-runs/ directory
+* set up logs/nowcast directory
+* successfully ran make_ww3_wind_file
+* successfully ran make_ww3_current_file
+* successfully ran scaling test runs for 05may19 on 44, 85, and 119 cores; 85 cores is same as west.cloud production, and has similar run time
+Continued work on segmented runs.
+ECCC reported problems that delayed 18Z forecast products until early Tue morning.
+(SalishSea)
+
+
+Tue 7-May-2019
+^^^^^^^^^^^^^^
+
+Brampton
+
+Continued work on segmented runs; successfully queued 2 chained runs from a single YAML file on optimum; after a few bug fixes, they would run but for optimum's inability to run REBUILD_NEMO.
+Backfilled fvcom-nowcast-r12 for 25 & 26 Apr.
+(SalishSea)
+
+See work journal.
+(Resilient-C)
+
+
+Wed 8-May-2019
+^^^^^^^^^^^^^^
+
+Brampton
+
+Continued migration to arbutus.cloud:
+* built fvcom
+Backfilled fvcom-nowcast-r12 for 27 & 28 Apr.
+Resumed work on rpn-to-gemlam.
+(SalishSea)
+
+Dinner w/ Linda & Steve.
+
+
+Thu 9-May-2019
+^^^^^^^^^^^^^^
+
+Continued migration to arbutus.cloud:
+* set up fvcom-runs/ directory
+* make_fvcom_boundary failed on import of ttide module; compared git repo hash to west.cloud and found that arbutus is at 2c58c1f24, but west is at 4af96c4; checked out 4af96c4
+* successfully ran make_fvcom_boundary 2019-04-22
+* successfully ran make_fvcom_rivers_forcing 2019-04-22
+* launched nowcast-x2/22apr19
+* see slack for scaling tests details
+Continued work on rpn-to-gemlam.
+Backfilled fvcom-nowcast-r12 for 29 & 30 Apr.
+(SalishSea)
+
+Brampton to Vancouver
+
+
+
+>10-May-2019:
+* talk to Charles about borg on salish (re-install?)
+* recover from borg:
+  * /results/forcing/atmospheric/GEM2.5/GRIB/20190105/12
+  * /results/forcing/atmospheric/GEM2.5/GRIB/20190105/18
+* get daily borg restarted
+
+
+
 Stack:
-* docs for working on beluga
-* respond to software req for sockeye
 * migration to arbutus.cloud
 * rpn_to_gemlam
 * segmented runs
@@ -2625,23 +2805,7 @@ Stack:
 * hdf5 prep into MOHID-cmd
 * change compute-canada HPC setup to put repos on $HOME to speed up deep dir traversals and nemo/salishsea run ops
 
-
-
-If I am correctly understanding what you want to do, you need to build both xios and nemo with the new compilers and libraries. xios has to be built first because it provides a lib that nemo links to. The xios I used in /scratch/dlatorne/oneday_21nov14_2019-01-31T103135.621285-0800/ is built from an svn checkout of rev 1637. If you want to replicate exactly you need to grab that rev from http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/trunk, or you can just grab whatever rev the present trunk is at - one of the xios devs asserted on the xios list this morning that trunk is stable.
-
-Once you have an xios checkout, copy these 3 files into its arch/ directory:
-/home/dlatorne/project/dlatorne/MEOPAR/xios-2.0/arch/arch-X64_CEDAR.env
-/home/dlatorne/project/dlatorne/MEOPAR/xios-2.0/arch/arch-X64_CEDAR.fcm
-/home/dlatorne/project/dlatorne/MEOPAR/xios-2.0/arch/arch-X64_CEDAR.path
-
-and edit them as you wish to point to the libs you want to use, etc. Then built xios with:
-cd /home/dlatorne/project/dlatorne/MEOPAR/xios-2.0/
-./make_xios --arch X64_CEDAR
-
-I often do that build in an 8-core interactive session with the --job 8 option added to speed it up. If you need to do a clean build of xios, the command to clean the tree is:
-
-./tools/FCM/bin/fcm build --clean
-
+* docs for working on beluga
 
 
 
