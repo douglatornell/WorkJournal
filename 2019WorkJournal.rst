@@ -2721,7 +2721,6 @@ SSC recovery (cont'd):
 Week 19
 -------
 
-
 Mon 6-May-2019
 ^^^^^^^^^^^^^^
 
@@ -2780,11 +2779,93 @@ Continued migration to arbutus.cloud:
 * successfully ran make_fvcom_rivers_forcing 2019-04-22
 * launched nowcast-x2/22apr19
 * see slack for scaling tests details
+* recommendation from arbutus  team via Venkay to use 60g flavours to force 1:1 vcpu:cpu mapping; replaced 15g nowcast5&6 w/ 60g instances
 Continued work on rpn-to-gemlam.
+forecast failed w/ high velocity errors on deep western boundary.
 Backfilled fvcom-nowcast-r12 for 29 & 30 Apr.
 (SalishSea)
 
 Brampton to Vancouver
+
+
+Fri 10-May-2019
+^^^^^^^^^^^^^^^
+
+Continued migration to arbutus.cloud:
+* fvcom nowcast-x2/22apr19 on 7 cores on 4x15g VMs
+* nowcast-blue/23apr19 on 41 cores on 6x60g VMs; 62m, so no improvement w/ 60g VMs
+* Venkat confirmed w/ UVic that hyper-threading is indeed disabled on the hardware that our instances run on
+* Venkat is working on creating a c16 flavor that will guarantee full node occupation
+nowcast failed w/ same high velocity errors on deep western boundary as yesterday's forecast.
+Continued work on rpn-to-gemlam; it now writes almost NEMO/FVCOM compatible hour forecast files; over to Susan.
+Backfilled fvcom-nowcast-r12 for 1-May.
+(SalishSea)
+
+
+Sat 11-May-2019
+^^^^^^^^^^^^^^^
+
+Continued migration to arbutus.cloud:
+* created fvcom0 15g instance to allow nowcast-r12 backfilling to run on arbutus
+* added arbutus.cloug-prep to upload_forcing
+* rsync-ed forcing up to date
+* ran nowcast-green.201812/21mar19 from hindcast.201812/20mar19 to test XIOS on 60g nowcast0 instance
+Discussed west boundary high velocity failures w/ Susan:
+* she thinks that it is due to sea surface height discontinuity due to forcing shift from obs to fcst combined with seasonal large tidal currents occurring at day roll-over; she has a plan to produce a ssh forcing file that smooths the transition based on output of instantaneous ssh forcing values from NEMO at grid point near Neah Bay; she will manually construct the smoothed ssh forcing file for 10may19 so that we can test hypothesis when we backfill; didn't work - ended up re-running nowcast-green/09may19 with updated ssh forcing to get automation running again and backfilling started
+Backfilled fvcom-nowcast-r12 on arbutus.cloud for 2 & 3 May.
+(SalishSea)
+
+
+Sun 12-May-2019
+^^^^^^^^^^^^^^^
+
+Created SalishSeaNowcast patches for ``--bind-to core`` and ``--mca btl ^openib`` for transition to arbutus.cloud.
+Backfilled fvcom-nowcast-r12 on arbutus.cloud for 4 & 5 May.
+(SalishSea)
+
+
+Week 20
+-------
+
+Mon 13-May-2019
+^^^^^^^^^^^^^^^
+
+Continued migration to arbutus.cloud:
+* Venkat suggested file io test with dd if=/dev/zero of=testfile bs=1M oflag=direct; showed that arbutus is, if anything, slightly faster than west
+Investigated IndexError and missing r12 lines in vhfr water level figures; cause is the use of the rolling forecast datasets as the source for NEMO results; i.e. can't backfill VHFR figures more than ~5d in the past.
+Answered questions from Tereza re: deflation via ncks, and Rachael re: GUI merge tools on cedar.
+Looked a building XIOS & NEMO on optimum against Loren Oh's GCC-8.3.0 netcdf/hdf5 libs, but don't have read access; sent email; Phil replied re: "offical builds":
+  module load GCC/8.3
+  module load OpenMPI/4.0.0/GCC/8.3
+  module load ZLIB/1.2/11
+  module load use.paustin
+  module load HDF5/1.08/20
+  module load NETCDF/4.6/1
+XIOS on optimum builds, but finishes w/ warning:
+ /usr/bin/ld: warning: libgfortran.so.3, needed by /usr/lib/../lib64/libnetcdff.so, may conflict with libgfortran.so.5
+
+ /usr/bin/ld: warning: libgfortran.so.3, needed by /home/Software/system/OpenMPI/4.0.0/lib/libmpi_usempi.so, may conflict with libgfortran.so.5
+Experimented with MEOPAR/ in $HOME on beluga to speed up deep dir traversals:
+* mkdir $HOME/MEOPAR
+* chgrp def-allen $HOME/MEOPAR
+* chmod g+rwsx $HOME/MEOPAR
+* clone repos
+* stopped when I discovered that $PROJECT file system response has improved dramatically
+Started work on refactoring watch_NEMO_hindcast to work with qstat as well as squeue; stopped when I got GCC-8.3.0 libs info from Phil
+Backfilled fvcom-nowcast-r12 on arbutus.cloud for 6 & 7 May.
+(SalishSea)
+
+Updated Mercurial on kudu to Python 3 build of 5.0+5-ce5f1232631f:
+* conda activate hg-dev-py3
+* updated hg-dev-py3 env
+* cd hg-stable
+* hg pull
+* hg update -r tip
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev-py3/bin/python3.7
+It's noticibally slower than 2.7 version :-(
+
+
 
 
 
