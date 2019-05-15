@@ -2830,6 +2830,8 @@ Week 20
 Mon 13-May-2019
 ^^^^^^^^^^^^^^^
 
+My back pranged out while I was in the shower :-( worked at home
+
 Continued migration to arbutus.cloud:
 * Venkat suggested file io test with dd if=/dev/zero of=testfile bs=1M oflag=direct; showed that arbutus is, if anything, slightly faster than west
 Investigated IndexError and missing r12 lines in vhfr water level figures; cause is the use of the rolling forecast datasets as the source for NEMO results; i.e. can't backfill VHFR figures more than ~5d in the past.
@@ -2843,8 +2845,7 @@ Looked a building XIOS & NEMO on optimum against Loren Oh's GCC-8.3.0 netcdf/hdf
   module load NETCDF/4.6/1
 XIOS on optimum builds, but finishes w/ warning:
  /usr/bin/ld: warning: libgfortran.so.3, needed by /usr/lib/../lib64/libnetcdff.so, may conflict with libgfortran.so.5
-
- /usr/bin/ld: warning: libgfortran.so.3, needed by /home/Software/system/OpenMPI/4.0.0/lib/libmpi_usempi.so, may conflict with libgfortran.so.5
+resolved by adding explicit -L directives to .fcm
 Experimented with MEOPAR/ in $HOME on beluga to speed up deep dir traversals:
 * mkdir $HOME/MEOPAR
 * chgrp def-allen $HOME/MEOPAR
@@ -2864,6 +2865,58 @@ Updated Mercurial on kudu to Python 3 build of 5.0+5-ce5f1232631f:
 * make clean all
 * sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev-py3/bin/python3.7
 It's noticibally slower than 2.7 version :-(
+Enabled uncommit extension, and ui tweakdefaults.
+hg commit -i fails with traceback; py3 issue?
+
+
+Tue 14-May-2019
+^^^^^^^^^^^^^^^
+
+Back is more stiff than acutely sore; went to UBC.
+
+Updated Mercurial on niko to 5.0+5-ce5f1232631f:
+* conda activate hg-dev
+* updated hg-dev env
+* cd hg-stable
+* hg pull
+* hg update -r tip
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+Enabled uncommit extension, and ui tweakdefaults.
+hg commit -i works!
+
+LiveOcean delayed; failed at ~12:05; re-launched for another try...
+Resumed with MEOPAR/ in $HOME on beluga to speed up deep dir traversals because Tereza reported that beluga is still slow for her:
+* mkdir $HOME/MEOPAR
+* chgrp def-allen $HOME/MEOPAR
+* chmod g+rwsx $HOME/MEOPAR
+* clone repos
+* time salishsea run 21nov14_oneday.yaml $SCRATCH/21nov14-home --debug
+    real  2m37.135s
+    user  0m2.322s
+    sys 0m4.453s
+  repeat took 7.72s
+* time salishsea run 21nov14_oneday.yaml $SCRATCH/21nov14-project --debug
+    real  8m33.917s
+    user  0m1.452s
+    sys 0m3.534s
+  repeat took 8.26s
+Resumed work on building XIOS & NEMO on optimum against GCC-8.3.0 netcdf/hdf5 libs:
+  module load GCC/8.3
+  module load OpenMPI/4.0.0/GCC/8.3
+  module load ZLIB/1.2/11
+  module load use.paustin
+  module load HDF5/1.08/20
+  module load NETCDF/4.6/1
+NEMO on optimum builds, but finishes w/ warning:
+ /usr/bin/ld: warning: libgfortran.so.3, needed by /home/Software/system/OpenMPI/4.0.0/lib/libmpi_usempi.so, may conflict with libgfortran.so.5
+resolved by adding explicit -L directive to .fcm
+Worked w/ Henryk to sort out a queuing issue; must include module loads in .bashrc
+Queued job fails immediately; both nemo and xios executables segfault.
+
+Backfilled fvcom-nowcast-r12 on arbutus.cloud for 8 & 9 May.
+(SalishSea)
+
 
 
 
