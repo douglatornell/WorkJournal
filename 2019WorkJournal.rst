@@ -2885,7 +2885,7 @@ Updated Mercurial on niko to 5.0+5-ce5f1232631f:
 Enabled uncommit extension, and ui tweakdefaults.
 hg commit -i works!
 
-LiveOcean delayed; failed at ~12:05; re-launched for another try...
+LiveOcean delayed; failed at ~12:05; re-launched for 2 more tries, then ran with 14may values persisted via symlink, starting daily runs at ~19:15.
 Resumed with MEOPAR/ in $HOME on beluga to speed up deep dir traversals because Tereza reported that beluga is still slow for her:
 * mkdir $HOME/MEOPAR
 * chgrp def-allen $HOME/MEOPAR
@@ -2913,10 +2913,69 @@ NEMO on optimum builds, but finishes w/ warning:
 resolved by adding explicit -L directive to .fcm
 Worked w/ Henryk to sort out a queuing issue; must include module loads in .bashrc
 Queued job fails immediately; both nemo and xios executables segfault.
-
 Backfilled fvcom-nowcast-r12 on arbutus.cloud for 8 & 9 May.
 (SalishSea)
 
+
+Wed 15-May-2019
+^^^^^^^^^^^^^^^
+
+Back was stiff, but not painful to walk; worked at home standing all day.
+
+download_live_ocean backfill for 14may was still 404 at ~08:45 and ~12:30
+download_live_ocean failed at 12:24; re-launched for another try, and emailed Parker; he fixed a netcdf4 issue in the low-pass file generation code; download_live_ocean succeeded at ~13:54.
+nowcast-r12/10may19 failed to start due to in sufficient space for shared-memory backing file on nowcast11 (and maybe nowcast13); work-around:
+* sudo mkdir -p /mnt/openmpi_tmp
+* sudo chmod 777 /mnt/openmpi_tmp
+* add --mca orte_tmpdir_base /mnt/openmpi_tmp to mpirun command
+Discovered that nowcast-x2/14may19 failed silently
+Backfilled fvcom-nowcast-r12 on arbutus.cloud for 10 & 11 May.
+2nd Narrows HADCP observations file for May was corrupted; re-built from AIS files.
+(SalishSea)
+
+Re-built Mercurial w/ Python 2.7 because the speed hit of Python 3 was too much to take.
+
+Upgraded kudu to Pop OS 19.04.
+
+Haircut
+
+Email convo w/ Rachael about mohid run tmp work dir lifespan.
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
+
+
+Thu 16-May-2019
+^^^^^^^^^^^^^^^
+
+Back was improved; worked at home, sitting w/ 30 minute stretch breaks.
+
+nowcast-x2 stumbled; re-launched manually
+2nd Narrows HADCP observations file for May was corrupted again; suspect that is due to 2 instances for get_vfpa_hadcp running concurrently; re-built from AIS files.
+Disabled r12 runs on west.cloud.
+Added code to run_fvcom generated bash script to delete useless .fvcomtestfile and output/ directory, the latter should make run_fvcom idempotent.
+Changed make_plots to store VHFR r12 and x2 figures separate so that the former for image loops don't overwrite the latter.
+Backfilled fvcom-nowcast-r12 on arbutus.cloud for 12 & 13 May.
+(SalishSea)
+
+Helped Rachael add Markdown syntax to her MOHID error-log file.
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
+
+See work journal.
+(SalishSeaCast-FVCOM)
+
+
+Fri 17-May-2019
+^^^^^^^^^^^^^^^
+
+Back regressed some, back to standing; was especially bad when I got up in the night, and I fainted.
+
+Backfilled fvcom-nowcast-r12 on arbutus.cloud for 14 & 15 May.
+(SalishSea)
 
 
 
