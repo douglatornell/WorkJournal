@@ -2886,7 +2886,7 @@ Enabled uncommit extension, and ui tweakdefaults.
 hg commit -i works!
 
 LiveOcean delayed; failed at ~12:05; re-launched for 2 more tries, then ran with 14may values persisted via symlink, starting daily runs at ~19:15.
-Resumed with MEOPAR/ in $HOME on beluga to speed up deep dir traversals because Tereza reported that beluga is still slow for her:
+Resumed experiments with MEOPAR/ in $HOME on beluga to speed up deep dir traversals because Tereza reported that beluga is still slow for her:
 * mkdir $HOME/MEOPAR
 * chgrp def-allen $HOME/MEOPAR
 * chmod g+rwsx $HOME/MEOPAR
@@ -2901,6 +2901,7 @@ Resumed with MEOPAR/ in $HOME on beluga to speed up deep dir traversals because 
     user  0m1.452s
     sys 0m3.534s
   repeat took 8.26s
+Tried experiments with MEOPAR/ in $HOME on cedar; clones worked, XIOS-2 build timed-out in 20 minute interactive session.
 Resumed work on building XIOS & NEMO on optimum against GCC-8.3.0 netcdf/hdf5 libs:
   module load GCC/8.3
   module load OpenMPI/4.0.0/GCC/8.3
@@ -2973,6 +2974,24 @@ Fri 17-May-2019
 ^^^^^^^^^^^^^^^
 
 Back regressed some, back to standing; was especially bad when I got up in the night, and I fainted.
+
+Resumed experiments with MEOPAR/ in $HOME on cedar:
+* XIOS-2 build on login node; took 489s
+* NEMO SalishSeaCast build on login node; took 646s
+* have to be on $SCRATCH or $PROJECT to use salishsea run
+* time salishsea run $HOME/MEOPAR-home/SS-run-sets/v201812/hindcast/cedar-test/21nov14_oneday.yaml $SCRATCH/21nov14-home --debug
+  real  3m44.110s
+  user  0m2.125s
+  sys 0m5.505s
+  repeat took 3m13s
+Continued migration to arbutus.cloud:
+* new flavours: c16-60g, c16-12g, c8-120g
+* deleted nowcast1 & nowcast2 (c8-60g)
+* created new nowcast1 c16-120g compute node and snapshotted it as nowcast-c16-120g-compute-v0
+* deleted nowcast3 & nowcast4 (c8-60g)
+* launched new nowcast2 c16-120g from nowcast-c16-120g-compute-v0
+* run nowcast-blue/xxx 4x9 on 30 cores w/ xios on nowcast0
+Paired w/ Susan on rpn-to-gemlam.
 
 Backfilled fvcom-nowcast-r12 on arbutus.cloud for 14 & 15 May.
 (SalishSea)
