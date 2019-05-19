@@ -2985,14 +2985,15 @@ Resumed experiments with MEOPAR/ in $HOME on cedar:
   sys 0m5.505s
   repeat took 3m13s
 Continued migration to arbutus.cloud:
-* new flavours: c16-60g, c16-12g, c8-120g
+* new flavours: c16-60g, c16-120g, c8-120g
 * deleted nowcast1 & nowcast2 (c8-60g)
 * created new nowcast1 c16-120g compute node and snapshotted it as nowcast-c16-120g-compute-v0
 * deleted nowcast3 & nowcast4 (c8-60g)
 * launched new nowcast2 c16-120g from nowcast-c16-120g-compute-v0
 * run nowcast-blue/xxx 4x9 on 30 cores w/ xios on nowcast0
+* deleted nowcast5 & nowcast6 (c8-60g)
+* created new head-build c16-120g head node and snapshotted it as nowcast-c16-120g-head-v0
 Paired w/ Susan on rpn-to-gemlam.
-
 Backfilled fvcom-nowcast-r12 on arbutus.cloud for 14 & 15 May.
 (SalishSea)
 
