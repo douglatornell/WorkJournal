@@ -2998,6 +2998,46 @@ Backfilled fvcom-nowcast-r12 on arbutus.cloud for 14 & 15 May.
 (SalishSea)
 
 
+Sat 18-May-2019
+^^^^^^^^^^^^^^^
+
+Back was stiff, right hip joint felt very constricted; worked standing all day; sat to watch movie in the evening.
+
+Continued migration to arbutus.cloud:
+* 4x9 decomp, 30 c16-120g VM cores, 2.5-2.5h/24h w/ 3 different values for orte_tmpdir_base
+* messed around with network parameters tuning to no avail
+Backfilled fvcom-nowcast-r12 on arbutus.cloud for 16 & 17 May.
+(SalishSea)
+
+
+Sun 19-May-2019
+^^^^^^^^^^^^^^^
+
+Back was stiff, but less restrictive of movement when I got up
+
+Paired w/ Susan on rpn-to-gemlam.
+Got NEMO built w/ GCC-4.4.7 and system netCDF/HDF5 libraries running again on optimum; put GCC-8.3 executables aside in $HOME for forensics.
+Continued migration to arbutus.cloud:
+* 7x9 decomp, 48 c8-15g VM cores, 75m/24h, ran to completion (compared to 51m on 30-Apr)
+Backfilled fvcom-nowcast-r12 on west.cloud for 18 & 19 May.
+(SalishSea)
+
+
+Week 21
+-------
+
+Mon 20-May-2019
+^^^^^^^^^^^^^^^
+
+Back was still a little stiff, but better, except when I sat too long; no drugs; walked to Cambie St.
+
+Wrote email to Javier re: NEMO fields for Atlantis model.
+Figured out that rebuild_nemo on optimum was failing due to netCDF3/4 issues; came up with kludgy work-around of using rebuild_nemo built w/ GCC-8.3; need to add module loads to run_NEMO_hindcast-generated run script.
+Paired w/ Susan on rpn-to-gemlam; it is production-ready!
+fvcom-nowcast-r12/20may19 ran via automation!!
+(SalishSea)
+
+
 
 
 
