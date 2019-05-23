@@ -3038,6 +3038,38 @@ fvcom-nowcast-r12/20may19 ran via automation!!
 (SalishSea)
 
 
+Wed 22-May-2019
+^^^^^^^^^^^^^^^
+
+Back seems to be back to normal; stood for part of the day, then sat in the afternoon.
+
+Caught up on Dad-work; arranged H&B Disher Courier pickup/delivery of his hearing aids.
+
+Helped Susan w/ hindcast tests on optimum and nowcast-dev catch-up.
+(SalishSea)
+
+Updated process flow figure re: make_plots worker, web site, where processing happends, and colours for stages of processing.
+(GoMSS_Nowcast)
+
+See work journal.
+(Resilient-C)
+
+
+Thu 23-May-2019
+^^^^^^^^^^^^^^^
+
+Pulled salishsea_cmd/run.py WIP from niko backup drive:
+* borg list to find archive date/time
+* borg mount path::archive /mnt/borg-niko
+* cp /mnt/borg-niko/...
+* borg umount /mnt/borg-niko
+Investigated why borg backups on salish stopped:
+* scripts are in /etc/cron.daily/daily-*-backup.sh
+* borg was not installed after upgrade to 16.04
+Finalized loading of GCC-8.3 modules just before `salishssea combine` on optimum in `salishsea run` because rebuild_nemo on optimum is built with them, in contrast to XIOS and NEMO which are built with the system GCC-4.4.7; this was tested in the hindcast runs that Susan did on optimum yesterday.
+(SalishSea)
+
+
 
 
 
@@ -3052,13 +3084,13 @@ fvcom-nowcast-r12/20may19 ran via automation!!
 
 Stack:
 * migration to arbutus.cloud
-* rpn_to_gemlam
 * segmented runs
 * refactor watch_NEMO_hindcast to work with qstat
 * hdf5 prep into MOHID-cmd
-* change compute-canada HPC setup to put repos on $HOME to speed up deep dir traversals and nemo/salishsea run ops
 
 * docs for working on beluga
+* rpn_to_gemlam
+* change compute-canada HPC setup to put repos on $HOME to speed up deep dir traversals and nemo/salishsea run ops
 
 
 
