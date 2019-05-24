@@ -3029,12 +3029,39 @@ Week 21
 Mon 20-May-2019
 ^^^^^^^^^^^^^^^
 
+**Statutory Holiday** - Victoria Day
+
 Back was still a little stiff, but better, except when I sat too long; no drugs; walked to Cambie St.
 
 Wrote email to Javier re: NEMO fields for Atlantis model.
 Figured out that rebuild_nemo on optimum was failing due to netCDF3/4 issues; came up with kludgy work-around of using rebuild_nemo built w/ GCC-8.3; need to add module loads to run_NEMO_hindcast-generated run script.
 Paired w/ Susan on rpn-to-gemlam; it is production-ready!
 fvcom-nowcast-r12/20may19 ran via automation!!
+(SalishSea)
+
+
+Tue 21-May-2019
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Victoria Day
+
+Back was still a little stiff, but better, cycled to UBC until Red's threadbare rear tire punctured at the top of the hill, then walked from there; no drugs.
+
+Spent some time reading Ansible docs.
+
+Agreed to meet w/ Venkat ton Fri to pair on arbutus issues; installed his public key on nowcast0.
+Wifi on niko doesn't connect in my EOAS office, but works in CompStaff office.
+SalishSeaCast team mtg; welcomed May for the summer; see whiteboard.
+Updated cedar hindcast-sys repos to PROD-hindcast_201812-v6:
+  in each repo:
+    hg pull
+    hg update PROD-hindcast_201812-v6
+  clean build of SalishSeaCast config
+Updated optimum hindcast-sys repos to PROD-hindcast_201812-v6:
+  in each repo:
+    hg pull
+    hg update PROD-hindcast_201812-v6
+  clean build of SalishSeaCast config
 (SalishSea)
 
 
