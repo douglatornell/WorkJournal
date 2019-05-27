@@ -3130,6 +3130,20 @@ Started work on preventing SalishSeaCmd segmented runs feature from writing resu
 Parksville to Vancouver
 
 
+Week 22
+-------
+
+Mon 27-May-2019
+^^^^^^^^^^^^^^^
+
+Finished re-enabling packages in /etc/apt/sourcelist.d/ re: update to 19.04
+
+More Gmail clean-up; inbox down to ~1630.
+
+Started work on materials for MEOPAR ATM Mercurial session; ssh://hg@bitbucket.org/43ravens/meopar-atm-2019-06-11
+(MEOPAR - 30min)
+
+
 
 
 
