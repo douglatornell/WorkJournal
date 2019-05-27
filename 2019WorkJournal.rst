@@ -3097,6 +3097,39 @@ Finalized loading of GCC-8.3 modules just before `salishssea combine` on optimum
 (SalishSea)
 
 
+Fri 24-May-2019
+^^^^^^^^^^^^^^^
+
+Monthly team mtg; see whiteboard.
+(MIDOSS)
+
+Debugged run_NEMO_hindcast targeting optimum; found that `salishsea run` is failing due to undefined PATH, FORCING, and PROJECT envvars; implemented a work-around.
+Started work on enabling run_NEMO_hindcast to chain runs on torque systems as well as on slurm systems.
+(SalishSea)
+
+
+Sat 25-May-2019
+^^^^^^^^^^^^^^^
+
+Vancouver to Parksville in fairly epic North Shore rainfall
+
+Finished enabling run_NEMO_hindcast to chain runs on torque systems as well as on slurm systems.
+Built SKOG  on optimum after Susan patched namelist allocation issue that she previously patched in SalishSeaCast config.
+Susan launched first test of segmented runs on optimum for Mar-Dec 2016 of SKOG; failed after 1st segment due to restart file names starting with SKOG, not SalishSeaCmd.
+(SalishSea)
+
+
+Sun 26-May-2019
+^^^^^^^^^^^^^^^
+
+Fixed bug in SalishSeaCmd segmented runs re: restart file names that don't start with SalishSea.
+Susan launched continuation of segmented runs on optimum for Apr-Dec 2016 of SKOG; discovered possible mess mode of overwriting restart dir with results.
+Started work on preventing SalishSeaCmd segmented runs feature from writing results of first segment to the same directory it restarted from; that is a possibility if a series of segmented runs are launched to continue after a failed segmented series.
+(SalishSea)
+
+Parksville to Vancouver
+
+
 
 
 
