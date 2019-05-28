@@ -3143,6 +3143,15 @@ More Gmail clean-up; inbox down to ~1630.
 Started work on materials for MEOPAR ATM Mercurial session; ssh://hg@bitbucket.org/43ravens/meopar-atm-2019-06-11
 (MEOPAR - 30min)
 
+HRDPS 12 forecast was ~2h late; emailed Sandrine and she recommended switching to http://hpfx.collab.science.gc.ca/ although inspection shows that the files were delayed there too.
+Finalized grid/weights-gem2.5-gemlam_201702.nc with CF-conventions metadata; deployed on optimum.
+Emailed Steve@ONC re: recovery date for DDL node.
+Discovered that ONC has a node in Burrard Inlet off Brockton Point.
+Continued trying to prevent SalishSeaCmd segmented runs feature from writing results of first segment to the same directory it restarted from; that is a possibility if a series of segmented runs are launched to continue after a failed segmented series.
+(SalishSea)
+
+Phys Ocgy seminar by Ben M-M re: wind-driven upwelling in the SoG
+
 
 
 
