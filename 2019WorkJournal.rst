@@ -3153,6 +3153,67 @@ Continued trying to prevent SalishSeaCmd segmented runs feature from writing res
 Phys Ocgy seminar by Ben M-M re: wind-driven upwelling in the SoG
 
 
+Tue 28-May-2019
+^^^^^^^^^^^^^^^
+
+Steve@ONC replied that DDL node will likely be out of commission until mid-Sep;
+Added Lu Guan (who has taken Akash's place) to the list of ONC contacts on the web site.
+upload_forcing to cedar failed due to cedar down; re-ran manually at ~12:30
+SalishSeaCast mtg; see whiteboard
+(SalishSea)
+
+Installed VSCode on niko via snap.
+
+Continued work on materials for MEOPAR ATM Mercurial session.
+(MEOPAR - 1h45m)
+
+
+Wed 29-May-2019
+^^^^^^^^^^^^^^^
+
+Mtg w/ Venkat re: arbutus; new numa-enabled flavours w/ 30g root file system and no quota limits:
+* killed nowcast14-17
+* created nowcast3 from 18.04 image in new c16-60g-numa flavor; snapshot
+* killed fvcom0 and nowcast11-13
+* launched nowcast4 from c16-60g-numa snapshot
+* created ArbutusCloudTests spreadsheet on Google Drive
+* broke <51min on 5x16->59 cores
+* got faster still on 73 and 90 cores
+(SalishSea)
+
+CMOS tour seminar on O2 in the ocean by Roberta Hamme.
+
+
+Thu 30-May-2019
+^^^^^^^^^^^^^^^
+
+Continued migration to arbutus.cloud:
+* replaced nowcast0 with a c16-60g-numa instance; thrashed getting shared storage re-mounted to compute nodes due to docs typo :-(
+* big speed jump on 90 cores
+* faster on 101 and 119 cores
+* explored --bind-to and orte_tmpdir_base on 119 cores
+* sent Venkat rationale for 17 c16-60g-numa instances and 1020g RAM for our tenant
+(SalishSea)
+
+Seminar on modeling rock weathering in the carbon cycle by Larry Mysak.
+
+Continued work on materials for MEOPAR ATM Mercurial session.
+(MEOPAR - 1h45m to 16:45)
+
+
+Fri 31-May-2019
+^^^^^^^^^^^^^^^
+
+Fixed off-by-1 bug in calc of no. of segment days at end of segmented run; deployed to optimum for Susan to test.
+Continued migration to arbutus.cloud:
+* wwatch3/nowcast/05may19 test and spreadsheet
+* fvcom/nowcast-x2/22apr19 test and spreadsheet
+Reviewed MEOPAR ASM program.
+(SalishSea)
+
+Continued work on materials for MEOPAR ATM Mercurial session.
+(MEOPAR - 1h15m to 16:45)
+
 
 
 
