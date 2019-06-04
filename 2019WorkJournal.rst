@@ -3254,6 +3254,28 @@ Started rpn-to-gemlam for feb13.
 Committed removal of get_vfpa_hadcp worker launch from after_download_weather for 06 forecast because it is no longer be necessary to update figures to get all of UTC day observations now that nowcast-r12 finishes after the end  of the UTC day.
 (SalishSea)
 
+June
+====
+
+Week 23
+-------
+
+Mon 3-Jun-2019
+^^^^^^^^^^^^^^
+
+NEMO orientation w/ William Xu.
+(Prediction Core)
+
+Set up Ubuntu 18.04 VM w/ TortoiseHg on niko for MEOPAR ATM Mercurial session; had guest additions in dir beside ISO image of OS and didn't have to install it to get full screen.
+(MEOPAR - 45m to 14:00)
+
+Continued migration to arbutus.cloud:
+* created c16-60g-nonuma compute and head instance images
+* set up 6+1 no-numa instances and ran nowcast-blue/23apr19 test cast; ~45m
+Susan started rsync-ing early 2013 GEMLAM files on to salish for external drive; started processing them through rpn-to-gemlam in tmux session.
+(SalishSea)
+
+
 
 Wed 5-Jun-2019
 ^^^^^^^^^^^^^^
