@@ -3204,16 +3204,55 @@ Continued work on materials for MEOPAR ATM Mercurial session.
 Fri 31-May-2019
 ^^^^^^^^^^^^^^^
 
+See work journal.
+(Resilient-C)
+
 Fixed off-by-1 bug in calc of no. of segment days at end of segmented run; deployed to optimum for Susan to test.
 Continued migration to arbutus.cloud:
 * wwatch3/nowcast/05may19 test and spreadsheet
-* fvcom/nowcast-x2/22apr19 test and spreadsheet
+* fvcom/nowcast-x2/22apr19 tests and spreadsheet
 Reviewed MEOPAR ASM program.
 (SalishSea)
 
 Continued work on materials for MEOPAR ATM Mercurial session.
-(MEOPAR - 1h15m to 16:45)
+(MEOPAR - 2h15m to 18:00)
 
+
+Sat 1-Jun-2019
+^^^^^^^^^^^^^^
+
+Continued migration to arbutus.cloud:
+* more fvcom/nowcast-x2/22apr19 tests
+(SalishSea)
+
+Hiked Capilano River Trail & Coho Loop.
+
+
+Sun 2-Jun-2019
+^^^^^^^^^^^^^^
+
+Continued migration to arbutus.cloud:
+* more wwatch3/nowcast/05may19 tests; ~25% slower than yesterday
+* NEMO nowcast-blue/23apr19 reproducibility test; within 15s of previous tests
+Started running rpn-to-gemlam for 2013 in gemlam tmux session:
+* immediately found missing hour; hacked code back to dev mode to store intermediate results in /data/dlatorne/tmp-rpn-to-gem-lam/ for Susan to work on.
+* changed rpn_netcdf.sh to use /dev/shm when possible
+* discovered that there are no /opp/GEMLAM/2013/ files prior to 16-Jul
+Disabled processing of ONC CTD observations from DDL nodes pending repairs expected in mid-Sep.
+Removed get_vfpa_hadcp worker launch from after_download_weather for 06 forecast because it should no longer be necessary to update figures to get all of UTC day observations now that nowcast-r12 finishes after the end  of the UTC day; need to commit after functional confirmation.
+(SalishSea)
+
+Continued work on materials for MEOPAR ATM Mercurial session.
+Installed Ubuntu 18.04 in VM on kudu to get TortoiseHg
+(MEOPAR - 30m to 13:00)
+
+
+Tue 4-Jun-2019
+^^^^^^^^^^^^^^
+
+Started rpn-to-gemlam for feb13.
+Committed removal of get_vfpa_hadcp worker launch from after_download_weather for 06 forecast because it is no longer be necessary to update figures to get all of UTC day observations now that nowcast-r12 finishes after the end  of the UTC day.
+(SalishSea)
 
 
 
