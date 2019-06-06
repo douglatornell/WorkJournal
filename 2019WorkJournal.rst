@@ -3255,6 +3255,87 @@ Committed removal of get_vfpa_hadcp worker launch from after_download_weather fo
 (SalishSea)
 
 
+Wed 5-Jun-2019
+^^^^^^^^^^^^^^
+
+Sharcnet Julia Seminar:
+* Edward Armstrong; C, Java, Jacvascript background
+* high level, dynamic, mathematical, minimalistic core (mostly written in Julia)
+* dev started in 2007, 1.0 in 2018, May-2019 1.2, 1.3 in Jul-2019
+* MIT design
+* hype
+* juno plugin for Atom
+* plugin for Jupyter
+* PyCall pkg to call Python
+* call C/Fortran natively
+* compilable and JIT
+* optional typing, multiple dispatch
+* utf-8 support; greek characters in variable names
+* variables:
+  * a = 6
+  * println(), show()
+  * typeof()
+  * parse(Int8, "18")
+* types:
+  * usual int & float
+  * a = Int16(15)
+  * int defaults to int16
+  * 1-based indexing
+  * strings are indexable
+  * \-escaping in stings
+  * python-like """ strings
+  * "" for strings
+  * '' for characters; a separate type
+  * s[end] is s[-1] in Python
+  * string() constructor for concatenation
+  * * is string concat operator!  b = "red" * " " * b
+  * string interpolation via $; like bash
+  * regex: r"cd|de"
+* "not an object oriented language"
+* functions:
+  * function f(value)
+      return value=='g'
+    end
+  * last evaluation is returned by default
+  * ordered args separated by comma
+  * args... is unlimited collection of args assigned to args
+  * kwargs are separated from args by ;
+  * functions are first-class objects
+  * anonymous functions:
+    * c->c == 'b'
+    * map(round, A)  # round used as anon
+* flow control:
+  * significant whitespace
+  * block; end
+  * if; then; elseif; else; end
+  * blocks are leaky - don't have local scope
+  * boolean ops; and &&, or ||
+  * while; end
+  * break, continue
+  * for; end
+  * for i = 1:2:10, j = 1:10 - instead of nexted
+  * struct; end
+* arrays:
+  * []
+  * mixed types results in type(Any)
+  * Int8[] forces all Int8
+  * [1 2 3; 4 5 6] is sugar for 2-row matrix
+  * collect() makes array from range
+  * undef keyword
+  * reshape() and lots of other array functions
+* convention: splice!(A, rnage); ! indicates that A will be changed, not required syntax, just convention
+
+collect_weather 12 got stuck; another sarracenia client freak out?; ran download_weather 12 manually at ~~11:35 to start automation
+download_results nowcast failed, probably due to files that Susan put in the dir with incorrect group.
+Continued rpn-to-gemlam for 2013 and rsync-ing results to optimum.
+Started make_runoff_file for 2013 and rsync-ing results to optimum.
+(SalishSea)
+
+Continued work on materials for MEOPAR ATM Mercurial session.
+Installed Ubuntu 18.04 in VM on kudu to get TortoiseHg
+(MEOPAR - 2h15m to 17:30)
+
+
 
 >10-May-2019:
 * talk to Charles about borg on salish (re-install?)
@@ -3267,13 +3348,14 @@ Committed removal of get_vfpa_hadcp worker launch from after_download_weather fo
 
 Stack:
 * migration to arbutus.cloud
-* segmented runs
+* segmented runs docs
 * refactor watch_NEMO_hindcast to work with qstat
 * hdf5 prep into MOHID-cmd
 
 * docs for working on beluga
 * rpn_to_gemlam
 * change compute-canada HPC setup to put repos on $HOME to speed up deep dir traversals and nemo/salishsea run ops
+* segmented runs code
 
 
 
