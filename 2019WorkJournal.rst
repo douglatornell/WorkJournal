@@ -3247,13 +3247,6 @@ Installed Ubuntu 18.04 in VM on kudu to get TortoiseHg
 (MEOPAR - 30m to 13:00)
 
 
-Tue 4-Jun-2019
-^^^^^^^^^^^^^^
-
-Started rpn-to-gemlam for feb13.
-Committed removal of get_vfpa_hadcp worker launch from after_download_weather for 06 forecast because it is no longer be necessary to update figures to get all of UTC day observations now that nowcast-r12 finishes after the end  of the UTC day.
-(SalishSea)
-
 June
 ====
 
@@ -3273,6 +3266,15 @@ Continued migration to arbutus.cloud:
 * created c16-60g-nonuma compute and head instance images
 * set up 6+1 no-numa instances and ran nowcast-blue/23apr19 test cast; ~45m
 Susan started rsync-ing early 2013 GEMLAM files on to salish for external drive; started processing them through rpn-to-gemlam in tmux session.
+(SalishSea)
+
+
+Tue 4-Jun-2019
+^^^^^^^^^^^^^^
+
+Started rpn-to-gemlam for feb13.
+Committed removal of get_vfpa_hadcp worker launch from after_download_weather for 06 forecast because it is no longer be necessary to update figures to get all of UTC day observations now that nowcast-r12 finishes after the end  of the UTC day.
+nowcast delayed due to sarracenia client connection errors; ran download_weather 12 manually to start automation; killed collect_weather 12; launched collect_weather 18; watching sarracenia log
 (SalishSea)
 
 
