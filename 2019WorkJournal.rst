@@ -3272,11 +3272,14 @@ Susan started rsync-ing early 2013 GEMLAM files on to salish for external drive;
 Tue 4-Jun-2019
 ^^^^^^^^^^^^^^
 
-Started rpn-to-gemlam for feb13.
+Ran rpn-to-gemlam for feb-mar13.
 Committed removal of get_vfpa_hadcp worker launch from after_download_weather for 06 forecast because it is no longer be necessary to update figures to get all of UTC day observations now that nowcast-r12 finishes after the end  of the UTC day.
 nowcast delayed due to sarracenia client connection errors; ran download_weather 12 manually to start automation; killed collect_weather 12; launched collect_weather 18; watching sarracenia log
 (SalishSea)
 
+Mercurial in depth session w/ William.
+
+Walked home with Susan; dinner at Hitoe Sushi on 4th.
 
 
 Wed 5-Jun-2019
@@ -3351,13 +3354,28 @@ Sharcnet Julia Seminar:
 
 collect_weather 12 got stuck; another sarracenia client freak out?; ran download_weather 12 manually at ~~11:35 to start automation
 download_results nowcast failed, probably due to files that Susan put in the dir with incorrect group.
-Continued rpn-to-gemlam for 2013 and rsync-ing results to optimum.
-Started make_runoff_file for 2013 and rsync-ing results to optimum.
+Built SalishSeaCast on optimum for next section of 201812 hindcast.
+Continued rpn-to-gemlam for apr-jun2013 and rsync-ing results to optimum.
+Tried to run rpn-to-gemlam for jul-sep13, but it failed on 16sep13.
 (SalishSea)
 
 Continued work on materials for MEOPAR ATM Mercurial session.
 Installed Ubuntu 18.04 in VM on kudu to get TortoiseHg
 (MEOPAR - 2h15m to 17:30)
+
+Pulled Phil BB out of Gunnar and confirmed that drive side bearing is toast.
+Started prepping Carib for Parksville/Victoria ride next week.
+
+
+Thu 6-Jun-2019
+^^^^^^^^^^^^^^
+
+Ran rpn-to-gemlam for jul13.
+Started make_runoff_file for 2013 and rsync-ing results to optimum; see slack #salishseacast for notes on merging data from /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow_2014-02-09.
+Got 256 cores, 1000Gb RAM quota on arbutus; spun up FVCOM instances.
+Worked w/ Susan, Ben Birgit & William on Dease Strait lake configuration.
+(SalishSea)
+
 
 
 
