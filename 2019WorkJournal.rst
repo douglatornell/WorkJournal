@@ -3278,6 +3278,7 @@ nowcast delayed due to sarracenia client connection errors; ran download_weather
 (SalishSea)
 
 Mercurial in depth session w/ William.
+(Prediction Core)
 
 Walked home with Susan; dinner at Hitoe Sushi on 4th.
 
@@ -3360,7 +3361,6 @@ Tried to run rpn-to-gemlam for jul-sep13, but it failed on 16sep13.
 (SalishSea)
 
 Continued work on materials for MEOPAR ATM Mercurial session.
-Installed Ubuntu 18.04 in VM on kudu to get TortoiseHg
 (MEOPAR - 2h15m to 17:30)
 
 Pulled Phil BB out of Gunnar and confirmed that drive side bearing is toast.
@@ -3370,12 +3370,33 @@ Started prepping Carib for Parksville/Victoria ride next week.
 Thu 6-Jun-2019
 ^^^^^^^^^^^^^^
 
-Ran rpn-to-gemlam for jul13.
-Started make_runoff_file for 2013 and rsync-ing results to optimum; see slack #salishseacast for notes on merging data from /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow_2014-02-09.
+Ran rpn-to-gemlam for jul13 & aug13; found missing hour on 29aug13.
+Ran make_runoff_file for 2013 and rsync-ing results to optimum; see slack #salishseacast for notes on merging data from /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow_2014-02-09.
 Got 256 cores, 1000Gb RAM quota on arbutus; spun up FVCOM instances.
-Worked w/ Susan, Ben Birgit & William on Dease Strait lake configuration.
 (SalishSea)
 
+Worked w/ Susan, Ben Birgit & William on Dease Strait lake configuration.
+(Prediction Core)
+
+
+Fri 7-Jun-2019
+^^^^^^^^^^^^^^
+
+Sent NEMO-Cmd and SalishSeaCmd docs links to William.
+(Prediction Core)
+
+Called Phil Wood re: BB overhaul and followed up with email request to Mark@sales.
+Finished prepping Carib for Parksville/Victoria ride.
+
+Emailed Johannes re: migration to arbutus.cloud, suggesting that he download anything he needs from west.cloud before 14-Jun.
+Isolated missing gemlam hour in 29aug13 in tmp-rpn-to-gem-lam/
+Backfilled VHFR figures for 4-Jun.
+(SalishSea)
+
+Continued work on materials for MEOPAR ATM Mercurial session.
+(MEOPAR - 2h15m to 17:30)
+
+MOAD at the Gallery re: end of William's visit.
 
 
 
