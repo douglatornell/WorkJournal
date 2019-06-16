@@ -2779,7 +2779,7 @@ Continued migration to arbutus.cloud:
 * successfully ran make_fvcom_rivers_forcing 2019-04-22
 * launched nowcast-x2/22apr19
 * see slack for scaling tests details
-* recommendation from arbutus  team via Venkay to use 60g flavours to force 1:1 vcpu:cpu mapping; replaced 15g nowcast5&6 w/ 60g instances
+* recommendation from arbutus  team via Venkat to use 60g flavours to force 1:1 vcpu:cpu mapping; replaced 15g nowcast5&6 w/ 60g instances
 Continued work on rpn-to-gemlam.
 forecast failed w/ high velocity errors on deep western boundary.
 Backfilled fvcom-nowcast-r12 for 29 & 30 Apr.
@@ -3397,6 +3397,114 @@ Continued work on materials for MEOPAR ATM Mercurial session.
 (MEOPAR - 2h15m to 17:30)
 
 MOAD at the Gallery re: end of William's visit.
+
+
+Sat 8-Jun-2019
+^^^^^^^^^^^^^^
+
+Vancouver to Parksville
+
+Discussed w/ Susan interpolation of missing hours ≤4 in rpn-to-gemlam; started implementation.
+(SalishSea)
+
+
+Sun 9-Jun-2019
+^^^^^^^^^^^^^^
+
+download_weather 00 failed; recovery:
+* kill collect_weather 00
+* download_weather 00 at ~11:40
+* download_weather 06 at ~11:52
+* wait for forecast2 runs to complete
+* download_weather 12
+* collect_weather 18 failed; ran download_weather 18
+* collect_weather 00 was never launched; need to run download_weather 00 tomorrow
+(SalishSea)
+
+Continued work on materials for MEOPAR ATM Mercurial session.
+(MEOPAR - 2h to 11:30)
+
+Udpated prod from 673:ae681cdc3b05 to 689:375ed4babcfa; reapplied lru cache disabling patch; restarted app; notified Ryan.
+(Resilient-C)
+
+Parksville to Chemainus
+
+
+Week 24
+-------
+
+Mon 10-Jun-2019
+^^^^^^^^^^^^^^^
+
+Ran download_weather 00 to backfill.
+download_live_ocean failed; Susan launched manually to start automation.
+VHFR runs failed; discovered it was due to the model going unstable on 09jun19.
+(SalishSea)
+
+Continued work on materials for MEOPAR ATM Mercurial session.
+(MEOPAR - 1h15m to 10:15)
+
+Chemainus to Victoria
+
+
+Tue 11-Jun-2019
+^^^^^^^^^^^^^^^
+MEOPAR ATM
+
+Finished materials for MEOPAR ATM Mercurial session; presented it.
+(MEOPAR - 5h to 16:30)
+
+
+Wed 12-Jun-2019
+^^^^^^^^^^^^^^^
+
+download_weather 12 missed some files; re-ran manually and discovered that there are files missing from datamart; confirmed that files are missing from xxx too; emailed Sandrine; issue fixed; ran download_weather 12 at ~12:30 to start automation.
+Emailed Michael and Maxim about VHFR 9jun19 aborts.
+Replied to Johannes about migration to arbutus re: cronjobs.
+Resumed work on migration to arbutus:
+* mounted shared storage on fvcom instances
+* ran nowcast-blue via run_NEMO
+* ran vhfr nowcast-x2 via run_fvcom
+* ran vhfr nowcast-r12 via run_fvcom
+* couldn't run forecast due to request to mgr for nowcast run-info
+* couldn't run nowcast-green due to:
+    E R R O R :   misspelled variable in namelist nampissink in configuration namelist iostat = 5010
+* hacked run_NEMO to enable forecast to be launched for present date when there is no run-info payload from mgr
+* updated NEMO-3.6-code to PROD-nowcast-green-201806 branch
+* clean built SalishSeaCast config
+(SalishSea)
+
+Telcon w/ Kate re: IPC to APC move by Horst.
+
+
+Thu 13-Jun-2019
+^^^^^^^^^^^^^^^
+
+MEOPAR ASM
+
+
+Got nowcast-green v201812 running on arbutus.cloud with Susan's help in setting up SS-run-sets/v201812/nowcast-green/ dir.
+(SalishSea)
+
+
+Fri 14-Jun-2019
+^^^^^^^^^^^^^^^
+
+MEOPAR ASM
+
+Successfully completed manually managed functional test of arbutus.cloud ops; see Google Drive spreadsheet & #arbutus-into-herd channel.
+(SalishSea)
+
+
+Sat 15-Jun-2019
+^^^^^^^^^^^^^^^
+
+Hike to Cabin Point in East Sooke Regional Park lead by Kim of MEOPAR RMC and WWF.
+
+Victoria to Vancouver
+
+
+
 
 
 
