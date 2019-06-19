@@ -3504,6 +3504,67 @@ Hike to Cabin Point in East Sooke Regional Park lead by Kim of MEOPAR RMC and WW
 Victoria to Vancouver
 
 
+Week 25
+-------
+
+Mon 17-Jun-2019
+^^^^^^^^^^^^^^^
+
+
+Tue 18-Jun-2019
+^^^^^^^^^^^^^^^
+
+Monthly mtg; see whiteboard.
+(MIDOSS)
+
+Added comparative analysis from 08jun19 on west.cloud to arbutus.cloud functional test on #arbutus-into-herd
+Prep for flipping SalishSeaCast to arbutus.cloud tomorrow:
+* rsync nowcast-blue/18jun19
+* rsync forecast/18jun19
+* create SS-run-sets/v201812/nowcast-blue/
+* create SS-run-sets/v201812/forecast/
+* create SS-run-sets/v201812/forecast2/
+* rsync nowcast-green/18jun19
+* rsync wwatch3 nowcast/18jun19
+* rsync wwatch3 forecast/18jun19
+* updated repos to PROD-hindcast_201812-v6:
+  * grid
+  * rivers-climatology
+  * tides
+  * tracers
+* update config/nowcast.yaml
+* update run_ww3
+* update run_fvcom
+* update run_NEMO
+* pull SalishSeaNowcast to update arbutus.cloud
+(SalishSea)
+
+
+TODO:
+Prep for flipping SalishSeaCast to arbutus.cloud:
+* rsync forecast2/18jun19
+* rsync wwatch3 forecast2/18jun19
+
+
+* get firewall rule for zmq traffic in place
+* pull SalishSeaNowcast to update skookum
+* restart manager
+* restart log_aggregator
+
+* commit NEMO-3.6 arch file
+* commit XIOS arch files
+* tag repos
+  * NEMO-3.6-code
+  * SS-run-sets
+  * XIOS-ARCH
+  * XIOS-2
+* set up cron jobs to auto-clean old results
+
+
+
+
+
+
 
 
 
