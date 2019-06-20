@@ -3504,8 +3504,8 @@ Hike to Cabin Point in East Sooke Regional Park lead by Kim of MEOPAR RMC and WW
 Victoria to Vancouver
 
 
-Week 25
--------
+Sun 16-Jun-2019
+^^^^^^^^^^^^^^^
 
 Mon 17-Jun-2019
 ^^^^^^^^^^^^^^^
