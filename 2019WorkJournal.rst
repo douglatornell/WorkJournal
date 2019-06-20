@@ -3507,6 +3507,10 @@ Victoria to Vancouver
 Sun 16-Jun-2019
 ^^^^^^^^^^^^^^^
 
+
+Week 25
+-------
+
 Mon 17-Jun-2019
 ^^^^^^^^^^^^^^^
 
@@ -3540,17 +3544,49 @@ Prep for flipping SalishSeaCast to arbutus.cloud tomorrow:
 (SalishSea)
 
 
+Wed 19-Jun-2019
+^^^^^^^^^^^^^^^
+
+Re-installed Rapid Photo Downloader v0.9.14 on kudu in virtualenv:
+* Downloaded install.py from https://www.damonlynch.net/rapid/download.html to /home/doug/Pictures/RapidPhotoDownloader-0.9.14/
+* python3  -m venv RapidPhotoDownloader
+* source RapidPhotoDownloader/bin/activate
+* python3 install.py --virtual-env
+* installation failed on PyGObject, but I was able to recover with:
+  * python3 -m pip install -U PyGObject
+  * python3 install.py --virtual-env
+* launch with /media/doug/warehouse/Pictures/RapidPhotoDownloader-0.9.14/RapidPhotoDownloader/bin/rapid-photo-downloader
+Downloaded all images from OM-D card; imported them into Darktable; updated backup drive.
+
+Mailed Gunnar BB to Phil Wood; tracking #
+MEC shopping & old tyres drop-off
+Bathroom LEDs from Home Depot
+Picked up Dyson AM09 from Canadian Tire
+
+Flip SalishSeaCast compute from west.cloud to arbutus.cloud after day's NEMO & wwatch3 runs completed on west.cloud:
+* skookum:
+  * local tag west.cloud-pre-migration in SalishSeaNowcast
+  * update SalishSeaNowcast
+  * clear_checklist
+  * restart manager
+  * restart log_aggregator
+  * make_forcing_links arbutus nowcast+
+* arbutus:
+  * issue w/ namelist_light_blue symlink name
+  * issue w/ file_def_blue.xml symlink name
+  * issue w/ ssh keys for mpirun to use to connect to compute instances
+  * run_NEMO worker wasn't getting any reply from manager
+* skookum
+  * reverted to west.cloud-pre-migration
+  * edit checklist re: nowcast run date so that forecast2 works, I hope
+  * restart manager
+  * restart log_aggregator
+(SalishSea)
+
+
+
 TODO:
 Prep for flipping SalishSeaCast to arbutus.cloud:
-* rsync forecast2/18jun19
-* rsync wwatch3 forecast2/18jun19
-
-
-* get firewall rule for zmq traffic in place
-* pull SalishSeaNowcast to update skookum
-* restart manager
-* restart log_aggregator
-
 * commit NEMO-3.6 arch file
 * commit XIOS arch files
 * tag repos
