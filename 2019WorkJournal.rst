@@ -3563,7 +3563,7 @@ MEC shopping & old tyres drop-off
 Bathroom LEDs from Home Depot
 Picked up Dyson AM09 from Canadian Tire
 
-Flip SalishSeaCast compute from west.cloud to arbutus.cloud after day's NEMO & wwatch3 runs completed on west.cloud:
+Flipped SalishSeaCast compute from west.cloud to arbutus.cloud after day's NEMO & wwatch3 runs completed on west.cloud:
 * skookum:
   * local tag west.cloud-pre-migration in SalishSeaNowcast
   * update SalishSeaNowcast
@@ -3584,18 +3584,33 @@ Flip SalishSeaCast compute from west.cloud to arbutus.cloud after day's NEMO & w
 (SalishSea)
 
 
+Thu 20-Jun-2019
+^^^^^^^^^^^^^^^
+
+NEMO & wwatch3 runs are nominal on arbutus.
+Susan is running hindcast.201812 to 20-Jun to provide restarts for officially changing production to 201812 tomorrow.
+Finishing migration to arbutus.cloud:
+* set up cron jobs to auto-clean old results
+VHFR FVCOM backfilling on west.cloud:
+* nowcast-x2/18jun19 done
+* nowcast-x2/19jun19 running
+
+* nowcast-r12/18jun19 todo
+VHFR FVCOM backfilling on arbutus.cloud:
+* nowcast-x2/20jun19 todo
+(SalishSea)
+
+Farewell party for Roger Beckie's headship.
+
 
 TODO:
-Prep for flipping SalishSeaCast to arbutus.cloud:
-* commit NEMO-3.6 arch file
-* commit XIOS arch files
+Post flipping SalishSeaCast to arbutus.cloud:
 * tag repos
   * NEMO-3.6-code
   * SS-run-sets
   * XIOS-ARCH
   * XIOS-2
-* set up cron jobs to auto-clean old results
-
+* fix make_plots nemo nowcast-green research re: location of Fraser_tracer variable
 
 
 
