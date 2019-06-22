@@ -3558,7 +3558,7 @@ Re-installed Rapid Photo Downloader v0.9.14 on kudu in virtualenv:
 * launch with /media/doug/warehouse/Pictures/RapidPhotoDownloader-0.9.14/RapidPhotoDownloader/bin/rapid-photo-downloader
 Downloaded all images from OM-D card; imported them into Darktable; updated backup drive.
 
-Mailed Gunnar BB to Phil Wood; tracking #
+Mailed Gunnar BB to Phil Wood; tracking # LM119345536CA
 MEC shopping & old tyres drop-off
 Bathroom LEDs from Home Depot
 Picked up Dyson AM09 from Canadian Tire
@@ -3591,16 +3591,58 @@ NEMO & wwatch3 runs are nominal on arbutus.
 Susan is running hindcast.201812 to 20-Jun to provide restarts for officially changing production to 201812 tomorrow.
 Finishing migration to arbutus.cloud:
 * set up cron jobs to auto-clean old results
+* committed arbutus arch files for NEMO & XIOS-2
 VHFR FVCOM backfilling on west.cloud:
 * nowcast-x2/18jun19 done
-* nowcast-x2/19jun19 running
-
-* nowcast-r12/18jun19 todo
+* nowcast-x2/19jun19 done
+* nowcast-r12/18jun19 done
 VHFR FVCOM backfilling on arbutus.cloud:
-* nowcast-x2/20jun19 todo
+* nowcast-x2/20jun19 done
+Figured out how to generate (365, 40, 898, 398) array populated w/ depth on axis 1 for Tereza using numpy methods instead of loop assignments.
+Started working on Tereza's mocsy pipeline, but stalled on mocsy AttributeError.
 (SalishSea)
 
 Farewell party for Roger Beckie's headship.
+
+
+Fri 21-Jun-2019
+^^^^^^^^^^^^^^^
+
+VHFR FVCOM backfilling on west.cloud:
+* nowcast-r12/19jun19 done
+* nowcast-r12/20jun19 running; eta 03:30
+Investigated get_vfpa_hadcp failure; netcdf file for June is empty, which causes an error when trying to append data; deleted empty file and re-ran 2019-06-{01..21} manually.
+rysnc-ed LiveOcean_v201905* (2013-2018) files to optimum.
+rysnc-ed ssh_y* (2007 to 2019-06-20) files to optimum.
+rysnc-ed riverTurbDaily201906* (2010 to 2019-06-15) files to optimum.
+Copied Michael, Maxim & Johannes ssh keys from west.cloud to arbutus.cloud.
+Brain-fart last night meant that vhfr nowcat-x2 didn't launch after nowcast-blue; used launch_remote_worker to start it.
+Discovered that wwatch3/18jun19 files were not in the correct directory; recovery:
+* make_ww3_wind_file forecast 2019-06-19 --debug
+* make_ww3_current_file forecast 2019-06-19 --debug
+* run_ww3 nowcast 2019-06-19 --debug
+* make_ww3_wind_file forecast 2019-06-20 --debug
+* make_ww3_current_file forecast 2019-06-20 --debug
+* run_ww3 nowcast 2019-06-20 --debug
+* make_ww3_wind_file forecast 2019-06-21 --debug
+*  launch_remote_worker make_ww3_current_file forecast 2019-06-21
+(SalishSea)
+
+Emailed invoice 20190621-01 to Laura Avery re: MEOPAR ATM Mercurial workshop.
+(MEOPAR)
+
+Re-installed Rapid Photo Downloader v0.9.14 on niko in virtualenv:
+* Downloaded install.py from https://www.damonlynch.net/rapid/download.html to /home/doug/Pictures/RapidPhotoDownloader-0.9.14/
+* python3  -m venv RapidPhotoDownloader
+* source RapidPhotoDownloader/bin/activate
+* python3 install.py --virtual-env
+* launch with /media/doug/warehouse/Pictures/RapidPhotoDownloader-0.9.14/RapidPhotoDownloader/bin/rapid-photo-downloader
+
+
+VHFR FVCOM backfilling on west.cloud:
+* nowcast-r12/21jun19 todo
+VHFR FVCOM backfilling on arbutus.cloud:
+* nowcast-r12/22jun19 todo
 
 
 TODO:
