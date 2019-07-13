@@ -3639,27 +3639,253 @@ Re-installed Rapid Photo Downloader v0.9.14 on niko in virtualenv:
 * launch with /media/doug/warehouse/Pictures/RapidPhotoDownloader-0.9.14/RapidPhotoDownloader/bin/rapid-photo-downloader
 
 
+Sat 22-Jun-2019
+^^^^^^^^^^^^^^^
+
+Vancouver to St John's
+Dinner at Get Stuffed
+
 VHFR FVCOM backfilling on west.cloud:
-* nowcast-r12/21jun19 todo
+* nowcast-r12/21jun19 done
 VHFR FVCOM backfilling on arbutus.cloud:
-* nowcast-r12/22jun19 todo
+* nowcast-r12/22jun19 done
+(SalishSea)
 
 
-TODO:
-Post flipping SalishSeaCast to arbutus.cloud:
-* tag repos
-  * NEMO-3.6-code
-  * SS-run-sets
-  * XIOS-ARCH
-  * XIOS-2
-* fix make_plots nemo nowcast-green research re: location of Fraser_tracer variable
+Sun 23-Jun-2019
+^^^^^^^^^^^^^^^
+
+St John's
+
+Planned transition of hindcast.201812 into nowcast-green production w/ Susan; see #hindcast1812-nowcast channel.
+First day of full automation on arbutus.cloud.
+Started adding V18-12 datasets to ERDDAP:
+* deleted inactive V17-02 dataset stanzas from datasets.xml:
+  * ubcSSg3DuGridFields1hV17-02
+  * ubcSSg3DvGridFields1hV17-02
+  * ubcSSg3DwGridFields1hV17-02
+  * ubcSSg3DTracerFields1hV17-02
+  * ubcSSgSurfaceTracerFields1hV17-02
+  * ubcSSfSurfaceTracerFields1hV17-02
+  * ubcSSg3DBiologyFields1hV17-02
+  * ubcSSgNearSurfaceUVelocity20mV17-02
+  * ubcSSgNearSurfaceVVelocity20mV17-02
+  * ubcSSfBoundaryBaySSH10mV17-02
+  * ubcSSfCampbellRiverSSH10mV17-02
+  * ubcSSfCherryPointSSH10mV17-02
+  * ubcSSfFridayHarborSSH10mV17-02
+  * ubcSSfHalfmoonBaySSH10mV17-02
+  * ubcSSfNanaimoSSH10mV17-02
+  * ubcSSfNeahBaySSH10mV17-02
+  * ubcSSfNewWestminsterSSH10mV17-02
+  * ubcSSfPatriciaBaySSH10mV17-02
+  * ubcSSfPointAtkinsonSSH10mV17-02
+  * ubcSSfPortRenfrewSSH10mV17-02
+  * ubcSSfSandHeadsSSH10mV17-02
+  * ubcSSfSandyCoveSSH10mV17-02
+  * ubcSSfSquamishSSH10mV17-02
+  * ubcSSfVictoriaSSH10mV17-02
+  * ubcSSfWoodwardsLandingSSH10mV17-02
+  * ubcSSf3DuGridFields1hV17-02
+  * ubcSSf3DvGridFields1hV17-02
+  * ubcSSfDepthAvgdCurrents1hV17-02
+* updated ERDDAP index page re: change from V18-06 to V18-12
+* copied setup.xml file into /opt/tomcat/content/erddap/ and bounced ERDDAP
+* added ubcSSg3DBiologyFields1hV18-12 dataset
+* emailed Emilio about change to V18-12
+(SalishSea)
+
+Walking in downtown St. John's on a very windy day.
+Bought East Coast Trail Maps at Outfitters.
+Lunch at Rocket Bakery.
+Afternoon at The Rooms.
+Dinner at Bannermans Brewery w/ dessrt at Coffee Matters.
 
 
+Week 26
+-------
+
+Mon 24-Jun-2019
+^^^^^^^^^^^^^^^
+
+St. John's
+
+Continued adding V18-12 datasets to ERDDAP:
+* did a bunch of metadata correction and cleanup
+* added ubcSSg3DTracerFields1hV18-12 dataset
+(SalishSea)
+
+Hike to Signal Hill via Battery St and North Head trail, then down via Lady's Lookout trail, Burma Rd, and Signal Hill Rd.
+Lunch at Battery Café
+
+Gunnar BB overhaul completed at Phil Woods.
+Ordered new right hearing aid for Dad.
 
 
+Tue 25-Jun-2019
+^^^^^^^^^^^^^^^
+
+St. John's to Port Kirwan
 
 
+Wed 26-Jun-2019
+^^^^^^^^^^^^^^^
 
+Port Kirwan
+
+
+Thu 27-Jun-2019
+^^^^^^^^^^^^^^^
+
+Port Kirwan
+
+
+Fri 28-Jun-2019
+^^^^^^^^^^^^^^^
+
+Port Kirwan to Pouch Cove
+
+
+Sat 29-Jun-2019
+^^^^^^^^^^^^^^^
+
+Pouch Cove
+
+
+Sun 30-Jun-2019
+^^^^^^^^^^^^^^^
+
+Pouch Cove
+
+
+July
+====
+
+Week 27
+-------
+
+Mon 1-Jul-2019
+^^^^^^^^^^^^^^
+
+Short walk on Pouch Cove to Cape St. Francis section to find pitcher plants; also saw minke whale.
+
+Pouch Cove to St. John's
+
+
+Tue 2-Jul-2019
+^^^^^^^^^^^^^^
+
+Changed ERDDAP forecast datasets to unversioned.
+Big thrash re: ncks number of time steps in CHS_currents.nc file for forecast day; unresolved.
+(SalishSea)
+
+
+Wed 3-Jul-2019
+^^^^^^^^^^^^^^
+
+
+Thu 4-Jul-2019
+^^^^^^^^^^^^^^
+
+Visit to DFO Northwest Atlantic Fisheries Centre hosted by Nancy; Susan gave seminar on Olson, et al 2019; talked with Fraser and his software team re: Ocean Navigator.
+
+Susan hindcast-201812 on optimum to backfill re: my mistake of running with the wrong tag in NEMO.
+Finished implementation of watch_NEMO_hindcast qstat capability.
+forecast-x2 stopped working for no apparent reason.
+(SalishSea)
+
+
+Fri 5-Jul-2019
+^^^^^^^^^^^^^^
+
+Rented truck, drove to Cape Spear, hiked south to North Head on bay that has Petty Harbour at its head.
+Stopped at Blackhead village.
+Walked to Fort Amherst lighthouse.
+
+
+Sat 6-Jul-2019
+^^^^^^^^^^^^^^
+
+Walked North Head trail to Signal Hill, then down the hill to Bannerman's Brewing with Nancy, Will, and Carter.
+Dinner at Granite where The Old Contemporaries were playing.
+
+Updated optimum hindcast deployment to PROD-hindcast_201905-v1.
+Susan started running 2013 as spin-up year of hindcast-201905.
+Started working on unit tests for watch_NEMO_hindcast qstat capability.
+(SalishSea)
+
+
+Sun 7-Jul-2019
+^^^^^^^^^^^^^^
+
+Finished unit tests for watch_NEMO_hindcast qstat capability.
+Deployed watch_NEMO_hindcast to skookum and started watching hindcast-201905 spin-up runs.
+(SalishSea)
+
+Taxi to MUN Ocean Research Centre at Logy Bay; walked ECT to Qidi Vidi, then back to Elizabeth Manor after a stop at the brewery tap room.
+
+
+Week 28
+-------
+
+Mon 8-Jul-2019
+^^^^^^^^^^^^^^
+
+St. John's to Brampton
+
+Worked on rpn-to-gemlam interpolation for ≤4 misssing hours.
+(SalishSea)
+
+
+Tue 9-Jul-2019
+^^^^^^^^^^^^^^
+
+Brampton
+
+Discovered that nowcast-x2/07jul19 failed; started backfilling.
+Discovered that forecast-x2 spontaneously started working again on 06jul19!
+download_fvcom_results nowcast-r12/08jul19 didn't run; stuck watcher?; re-ran manually.
+Finished rpn-to-gemlam interpolation for ≤4 misssing hours; tested on 29-31aug13; continued processing of sep13.
+(SalishSea)
+
+
+Wed 10-Jul-2019
+^^^^^^^^^^^^^^^
+
+Brampton
+
+Committed and deployed rpn-to-gemlam interpolation for ≤4 misssing hours; continued processing of oct-nov13.
+nowcast-x2/08jul19 got stomped on by 09jul19 launched by automation so both failed; backfilling 08jul19
+download_fvcom_results nowcast-r12/09jul19 didn't run; don't know why; re-ran manually.
+Helped Susan get hindcast-201905 sorted out on optimum; her SalishSeaNEMO_finish.sh script was the cause of $HOME directory getting moved into results dir; fortunately today it only moved part of .conda/ unlike last time when it moved everything and killed access due to missing .ssh/authorized_keys file.
+backfilled nowcast-x2/09jul19
+hindcast-201905/11mar19 and 21mar19 ran
+watch_NEMO_hindcast tried to watch completed job on optimum; modified it to ignore completed jobs in qstat output.
+got watcher running again against hindcast-201905/01apr19 and queued 11apr19
+(SalishSea)
+
+
+Thu 11-Jul-2019
+^^^^^^^^^^^^^^^
+
+Brampton
+
+Continued rpn-to-gemlam processing of dec13-feb14.
+backfilled nowcast-x2/10jul19
+hindcast-201905 automation worked fine for flow from 01apr19 to 11apr19 and then to 21apr19, and onward.
+Committed fix for bug in SalishSeaCmd restart dirs calculation for segmented runs that Susan identified weeks ago, including unit test.
+Resumed work on SalishSeaCmd segmented runs docs.
+(SalishSea)
+
+
+Fri 12-Jul-2019
+^^^^^^^^^^^^^^^
+
+Brampton to Vancouver
+
+Continued rpn-to-gemlam processing of mar14.
+Resumed work on SalishSeaCmd segmented runs docs.
+(SalishSea)
 
 
 >10-May-2019:
@@ -3672,15 +3898,15 @@ Post flipping SalishSeaCast to arbutus.cloud:
 
 
 Stack:
-* migration to arbutus.cloud
 * segmented runs docs
-* refactor watch_NEMO_hindcast to work with qstat
 * hdf5 prep into MOHID-cmd
 
 * docs for working on beluga
 * rpn_to_gemlam
 * change compute-canada HPC setup to put repos on $HOME to speed up deep dir traversals and nemo/salishsea run ops
 * segmented runs code
+* migration to arbutus.cloud
+* refactor watch_NEMO_hindcast to work with qstat
 
 
 
