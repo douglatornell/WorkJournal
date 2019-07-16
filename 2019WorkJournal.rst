@@ -3896,9 +3896,34 @@ Resumed work on SalishSeaCmd segmented runs docs.
 * get daily borg restarted
 
 
+Week 29
+-------
+
+Mon 15-Jul-2019
+^^^^^^^^^^^^^^^
+
+Worked on Dad's 2018 CRA medical expenses review w/ Rebecca; emailed Dr. Shilash to request letter supporting care needs.
+
+HRDPS 12/048 files were >2h late; appeared almost immediately after I emailed Sandrine.
+Continued work on SalishSeaCmd segmented runs docs.
+Started work on creating updated nowcast-env conda env on skookum by creating nowcast-env-15jun19 from environment-prod.yaml; confirmed that YAML warnings from dask are gone with make_plots.
+Confirmed that Sentry Shoal wave buoy data has been unavailable since 29-Jun; need to fix wave_height_period figure module to handle missing obs; also 2 other FutureWarnings:
+  * /SalishSeaCast/moad_tools/moad_tools/observations.py:83: FutureWarning: read_table is deprecated, use read_csv instead, passing sep='\t'.
+    date_parser=datetime_parser,
+  * /SalishSeaCast/nowcast-env-15jul19/lib/python3.7/site-packages/pandas/plotting/_converter.py:129: FutureWarning: Using an implicitly registered datetime converter for a matplotlib plotting method. The converter was registered by pandas on import. Future versions of pandas will require you to explicitly register matplotlib converters.
+
+  To register the converters:
+    >>> from pandas.plotting import register_matplotlib_converters
+    >>> register_matplotlib_converters()
+    warnings.warn(msg, FutureWarning)
+(SalishSea)
+
+Read an commented on Rachel's version tracking documents and protocol proposal.
+(MIDOSS)
+
+
 
 Stack:
-* segmented runs docs
 * hdf5 prep into MOHID-cmd
 
 * docs for working on beluga
@@ -3907,6 +3932,7 @@ Stack:
 * segmented runs code
 * migration to arbutus.cloud
 * refactor watch_NEMO_hindcast to work with qstat
+* segmented runs docs
 
 
 
