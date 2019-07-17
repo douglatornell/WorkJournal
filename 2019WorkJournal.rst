@@ -3922,6 +3922,23 @@ Read an commented on Rachel's version tracking documents and protocol proposal.
 (MIDOSS)
 
 
+Tue 16-Jul-2019
+^^^^^^^^^^^^^^^
+
+Monthly project mtg.
+Met w/ Rachael & Shihan re: repo tagging, milestone documentation, etc.
+Set up MIDOSS slack workspace with #soiled channel, subscribed it to Bitbucket repos and Compute Canada status feed.
+(MIDOSS)
+
+SalishSeaCast team mtg.
+Exercised external archive drive #2.
+Worked on handling missing wave buoy obs in wave_height_period figure module; fix doesn't cover all the bases due to confusing nowcast-fig-dev envs on niko.
+Tried to update niko conda and base env got corrupted; re-installed miniconda3 from download.
+Built new nowcast-fig-dev env.
+Neither jupyter lab nor notebook work in new env; downgraded jupyterlab from 1.0.2 to 0.35.6; that forced tornado to update from 4.5.3 to 6.0.3, and lab worked; updated lab again to 1.0.2 and it started working there too; so circus and its out of date tornado and pyzmq dependencies are the problem, I think.
+(SalishSea)
+
+
 
 Stack:
 * hdf5 prep into MOHID-cmd
