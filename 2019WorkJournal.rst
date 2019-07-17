@@ -3883,9 +3883,29 @@ Fri 12-Jul-2019
 
 Brampton to Vancouver
 
-Continued rpn-to-gemlam processing of mar14.
+Spasm in middle right back started at YYZ and didn't get any better on flight, very painful by the time I got home.
+
+Continued rpn-to-gemlam processing of mar-may14.
 Resumed work on SalishSeaCmd segmented runs docs.
 (SalishSea)
+
+
+Sat 13-Jul-2019
+^^^^^^^^^^^^^^^
+
+Continued rpn-to-gemlam processing of jun-jul14.
+Refactored make_plots to make INFO level logging less noisy.
+Changed paramiko and matplotlib logging thresholds to WARNING to reduce INFO level noise.
+(SalishSea)
+
+
+Sun 14-Jul-2019
+^^^^^^^^^^^^^^^
+
+Refactored make_surface_current_tiles to make INFO level logging less noisy.
+(SalishSea)
+
+
 
 
 >10-May-2019:
