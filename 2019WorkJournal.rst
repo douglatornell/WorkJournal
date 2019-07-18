@@ -3959,6 +3959,22 @@ Neither jupyter lab nor notebook work in new env; downgraded jupyterlab from 1.0
 (SalishSea)
 
 
+Wed 17-Jul-2019
+^^^^^^^^^^^^^^^
+
+Worked on setting up new nowcast-env on skookum:
+* confirmed circus deps restrictions and no movement to resolving them:
+  * tornado<5.0,>=3.0
+  * pyzmq<17.0,>=13.1.0
+* those restrictions limit conda to Python 3.6
+* explored https://pypi.org/project/python-daemon/ but realized that it is just a daemon-izer, not a process manager (with e.g. monitoring and restart)
+* explored http://supervisord.org/; Python≥3.4; sole dep is meld3 templating lib from supervisor project that has no deps; available on conda-forge
+* updated conda env descriptions w/ python=3.6 and circus=0.15 to ensure consistency
+Installed new salishsea-nowcast dev env on kudu.
+Installed new nowcast-env prod env on skookum.
+(SalishSea)
+
+
 
 Stack:
 * hdf5 prep into MOHID-cmd
