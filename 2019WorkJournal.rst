@@ -3974,6 +3974,26 @@ Installed new salishsea-nowcast dev env on kudu.
 Installed new nowcast-env prod env on skookum.
 (SalishSea)
 
+Physio appt w/ Ehren; diagnosed mid-back issue as slightly dislocated ribs.
+
+
+Thu 18-Jul-2019
+^^^^^^^^^^^^^^^
+
+Continued struggle to tame Gmail inbox.
+
+Installed new salishsea-nowcast dev env on niko.
+Started to look at rpn-to-gemlam for 2007; need to enable processing of 12Z forecast files.
+Exercised external archive drive #4; had to fix superblock with fsck due to improper previous umount.
+Fixed wwatch3 Sentry Shoal missing obs figure issue for real.
+Started work on fixing figures re: pandas FutureWarning: Using an implicitly registered datetime converter (issue#69):
+* wave_height_period - done
+* compare_tide_prediction_max_ssh - done
+Also encountered pandas/xarray FutureWarning: Converting timezone-aware DatetimeArray to timezone-naive ndarray with 'datetime64[ns]' dtype.
+(SalishSea)
+
+ATSC seminary by Amanda Giang on atmospheric pollution policy modeling
+
 
 
 Stack:
