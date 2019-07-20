@@ -3995,6 +3995,17 @@ Also encountered pandas/xarray FutureWarning: Converting timezone-aware Datetime
 ATSC seminary by Amanda Giang on atmospheric pollution policy modeling
 
 
+Fri 19-Jul-2019
+^^^^^^^^^^^^^^^
+
+Pinged Henryk on slack re: uneven hindcast execution rate; he gave me access to optimum node metrics web app.
+(SalishSea)
+
+Upgraded niko to 16Gb RAM.
+
+Installed overhauled bottom bracket in Gunnar & prepped it for ride to Parksville.
+
+
 
 Stack:
 * hdf5 prep into MOHID-cmd
