@@ -4006,6 +4006,59 @@ Upgraded niko to 16Gb RAM.
 Installed overhauled bottom bracket in Gunnar & prepped it for ride to Parksville.
 
 
+Sat 20-Jul-2019
+^^^^^^^^^^^^^^^
+
+Vancouver to Parksville
+Met Keith & Trish at Horseshoe Bay; invited them for dinner at Saturna Dr.
+
+
+Sun 21-Jul-2019
+^^^^^^^^^^^^^^^
+
+Worked on adding forecast hour to rpn-to-gemlam; test for 2007-01-03 failed, but not sure why.
+collect_weather 00 failed; manually ran download_weather 00, 06, 12, and 18 over the course of the day to get automation back on track.
+(SalishSea)
+
+Parksville to Vancouver
+
+
+Week 30
+-------
+
+Mon 22-Jul-2019
+^^^^^^^^^^^^^^^
+
+Finished expense claim for MEOPAR ATM.
+
+See new 2019 project work log.
+(Resilient-C)
+
+Exercised external archive drive #6.
+cedar came back online; tried to backfil upload_forcing for 15-21: nowcast+ & turbidity; disk quota exceeded.
+Started work on changing SalishSeaNowcast to use supervisor instead of circus.
+(SalishSea)
+
+
+Tue 23-Jul-2019
+^^^^^^^^^^^^^^^
+
+Continued work on changing SalishSeaNowcast to use supervisor instead of circus.
+SalishSeaCast team mtg; see whiteboard.
+Continued work on fixing figures re: pandas FutureWarning: Using an implicitly registered datetime converter (issue#69):
+* wwatch3.wave_height_period - done
+* publish.compare_tide_prediction_max_ssh - done
+* fvcom.publish.tide_stn_water_level
+* fvcom.publish.second_narrows_current
+* comparison.sandheads_winds
+* research.tracer_thalweg_and_surface
+* research.velocity_section_and_surface
+Built new nowcast-env on skookum with supervisor instead of circus.
+Exercised external archive drive #8.
+Started work on changing salishsea-site to use supervisor instead of circus.
+(SalishSea)
+
+
 
 Stack:
 * hdf5 prep into MOHID-cmd
