@@ -3924,6 +3924,8 @@ Mon 15-Jul-2019
 
 Worked on Dad's 2018 CRA medical expenses review w/ Rebecca; emailed Dr. Shilash to request letter supporting care needs.
 
+Received payment of invoice 20190621-01 re: MEOPAR ATM Mercurial workshop.
+
 HRDPS 12/048 files were >2h late; appeared almost immediately after I emailed Sandrine.
 Continued work on SalishSeaCmd segmented runs docs.
 Started work on creating updated nowcast-env conda env on skookum by creating nowcast-env-15jun19 from environment-prod.yaml; confirmed that YAML warnings from dask are gone with make_plots.
@@ -4035,7 +4037,7 @@ See new 2019 project work log.
 (Resilient-C)
 
 Exercised external archive drive #6.
-cedar came back online; tried to backfil upload_forcing for 15-21: nowcast+ & turbidity; disk quota exceeded.
+cedar came back online; tried to backfill upload_forcing for 15-21: nowcast+ & turbidity; disk quota exceeded.
 Started work on changing SalishSeaNowcast to use supervisor instead of circus.
 (SalishSea)
 
@@ -4057,6 +4059,32 @@ Built new nowcast-env on skookum with supervisor instead of circus.
 Exercised external archive drive #8.
 Started work on changing salishsea-site to use supervisor instead of circus.
 (SalishSea)
+
+
+Wed 24-Jul-2019
+^^^^^^^^^^^^^^^
+
+Updated Mercurial on kudu to 5.1rc0+6-ce52377102db:
+* conda activate hg-dev
+* updated hg-dev env
+* cd hg-stable
+* hg pull
+* hg update -r tip
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
+backfilled cedar upload_forcing for 15-21 & 23: nowcast+ & turbidity
+(SalishSea)
+
+See new 2019 project work log.
+(Resilient-C)
+
+
+Thu 25-Jul-2019
+^^^^^^^^^^^^^^^
+
+Researched bikes, especially comparing frame geometries to Gunnar.
+Test rode Kona Rove NRB DL and Libre DL.
 
 
 
