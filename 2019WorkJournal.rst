@@ -4087,8 +4087,26 @@ Researched bikes, especially comparing frame geometries to Gunnar.
 Test rode Kona Rove NRB DL and Libre DL.
 
 
+Fri 16-Jul-2019
+^^^^^^^^^^^^^^^
+
+Helped Ben apply patch to ariane so that it can build against libnetcdf.so instead of libnetcdf.a.
+Finished changing salishsea-site to use supervisor instead of circus.
+Worked on SalishSeaNowcast docs re: change to supervisor.
+(SalishSea)
+
+Updated Mercurial on niko to 5.1rc0+12-7fae3b0bd893:
+* conda activate hg-dev
+* updated hg-dev env
+* cd hg-stable
+* hg pull
+* hg update -r tip
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
 
 Stack:
+* build mohid on beluga
 * hdf5 prep into MOHID-cmd
 
 * docs for working on beluga
