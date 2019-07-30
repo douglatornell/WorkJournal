@@ -4087,7 +4087,7 @@ Researched bikes, especially comparing frame geometries to Gunnar.
 Test rode Kona Rove NRB DL and Libre DL.
 
 
-Fri 16-Jul-2019
+Fri 26-Jul-2019
 ^^^^^^^^^^^^^^^
 
 Helped Ben apply patch to ariane so that it can build against libnetcdf.so instead of libnetcdf.a.
@@ -4103,6 +4103,48 @@ Updated Mercurial on niko to 5.1rc0+12-7fae3b0bd893:
 * hg update -r tip
 * make clean all
 * sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
+
+Sat 27-Jul-2019
+^^^^^^^^^^^^^^^
+
+Bike shopping; test rode Cannondale Synpase, Trek Checkpoint, and Cannondale Topstone; bought Topstone.
+
+
+Sun 28-Jul-2019
+^^^^^^^^^^^^^^^
+
+Explored hindcast performance issues on optimum:
+* confirmed Henryk's report that XIOS and all NEMO processes are using 3 threads each; compared to arbutus where they only use 1 each
+* confirmed that arbutus is using OpenMPI-2.1.1, compared to
+(SalishSea)
+
+Picked up Tina from Mighty, and Topstones from BSP; installed computer, mirror, etc. on Susan's Topstone.
+
+
+Week 31
+-------
+
+Mon 29-Jul-2019
+^^^^^^^^^^^^^^^
+
+Removed Miniconda/3 module load from run bash scripts generated for optimum.
+Corrected SalishSeaCmd version to 19.2.dev0.
+Built XIOS-2 and NEMO/SalishSeaCast on optimum with OpenMPI-2.1.6; got messages at end of NEMO build:
+  /usr/bin/ld: skipping incompatible /usr/lib/libm.so when searching for -lm
+  /usr/bin/ld: skipping incompatible /usr/lib/libpthread.so when searching for -lpthread
+  /usr/bin/ld: skipping incompatible /usr/lib/libc.so when searching for -lc
+don't recall if they appeared at end of XIOS-2 build.
+(SalishSea)
+
+
+Tue 30-Jul-2019
+^^^^^^^^^^^^^^^
+
+Email reply to Mike@Bedford re: GoMSS offline since 21-Jul power outage.
+
+
+
 
 
 Stack:
