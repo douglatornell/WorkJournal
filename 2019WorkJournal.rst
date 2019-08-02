@@ -4142,6 +4142,57 @@ Tue 30-Jul-2019
 ^^^^^^^^^^^^^^^
 
 Email reply to Mike@Bedford re: GoMSS offline since 21-Jul power outage.
+Commute took just over 29min for the first time in ages :-)
+
+upload_forcing orcinus nowcast+ failed; re-ran manually.
+Reviewed storage: 1.6T free on /results2; nowcast-green.201806/ needs to be archived.
+Reviewed and analyzed ComputeCanada ssh keys changes for group.
+SalishSeaCast team mtg; see whiteboard.
+Released SalishSeaNowcast-19.1.
+Cloned Elise's tuningRunsArchive; 761 files took >20 minutes.
+Investigated get_vfpa_hadcp AttributeError issue and found that csv files contain data from Port aux Basque since sometime on 24Jul; emailed Michael & Maxim.
+Discussed deletion of files from nowcast-green.201806 w/ Susan.
+Continued work on fixing figures re: pandas FutureWarning: Using an implicitly registered datetime converter (issue#69); added warning suppression to test notebooks re: arrow.get() parser ch
+anges coming in v0.15.0
+(SalishSea)
+
+
+Wed 31-Jul-2019
+^^^^^^^^^^^^^^^
+
+Cycled a 25 km loop to UBC, then through Pacific Spirit, to Kerrisdale, and home on the Arbutus greenway.
+
+Telcon w/ Kate.
+
+Pulled NEMO-3.6-code on optimum to 1656:ea9eba6f8a91 and did a clean build of SalishSeaCast.
+Pulled and rebased SS-run-sets on optimum to 2467:b62960a6d316.
+Reverted rpn-to-gemlam forecast arg changes on salish and re-tried 2012-11-11 to 201-11-12 to confirm whether issue is really >4hr interpolation, or a new bug; it's a new bug; ran 2012-11-01 to 201-11-10
+Updated SalishSeaNowcast and salishsea-site dev envs on kudu.
+(SalishSea)
+
+
+Thu 1-Aug-2019
+^^^^^^^^^^^^^^
+
+Ordered Alex Boondocks 650b wheels & RT56 brake rotors to test on Topstones.
+
+See new 2019 project work log.
+(Resilient-C)
+
+Started experiment to move salishsea-site from pyramid-crow and raven to sentry-sdk.
+Continued email thread re: 2nd Narrows HADCP w/ ONC people; got some observations early this morning, but no files since 08:03.
+rpn-to-gemlam 2012-11-13 2012-11-30 completed
+(SalishSea)
+
+
+Fri 2-Aug-2019
+^^^^^^^^^^^^^^
+
+See new 2019 project work log.
+(Resilient-C)
+
+rpn-to-gemlam 2012-10-01 2012-10-31 failed due to file issue
+(SalishSea)
 
 
 
