@@ -4135,7 +4135,12 @@ Built XIOS-2 and NEMO/SalishSeaCast on optimum with OpenMPI-2.1.6; got messages 
   /usr/bin/ld: skipping incompatible /usr/lib/libpthread.so when searching for -lpthread
   /usr/bin/ld: skipping incompatible /usr/lib/libc.so when searching for -lc
 don't recall if they appeared at end of XIOS-2 build.
+Continued updating SalishSeaNowcast docs re: change to supervisor, move to arbutus, etc.
+Continued work on fixing figures re: pandas FutureWarning: Using an implicitly registered datetime converter (issue#69).
+ocean mount went unavailable in the later afternoon.
 (SalishSea)
+
+Installed computer & mirror on my Topstone.
 
 
 Tue 30-Jul-2019
@@ -4194,12 +4199,55 @@ See new 2019 project work log.
 rpn-to-gemlam 2012-10-01 2012-10-31 failed due to file issue
 (SalishSea)
 
+Commute took just over 29min for the first time in ages :-)
+
+upload_forcing orcinus nowcast+ failed; re-ran manually.
+Reviewed storage: 1.6T free on /results2; nowcast-green.201806/ needs to be archived.
+Reviewed and analyzed ComputeCanada ssh keys changes for group.
+SalishSeaCast team mtg; see whiteboard.
+Released SalishSeaNowcast-19.1.
+Cloned Elise's tuningRunsArchive; 761 files took >20 minutes.
+Investigated get_vfpa_hadcp AttributeError issue and found that csv files contain data from Port aux Basque since sometime on 24Jul; emailed Michael & Maxim.
+Discussed deletion of files from nowcast-green.201806 w/ Susan.
+Continued work on fixing figures re: pandas FutureWarning: Using an implicitly registered datetime converter (issue#69); added warning suppression to test notebooks re: arrow.get() parser changes coming in v0.15.0
+(SalishSea)
+
+
+Fri 2-Aug-2019
+^^^^^^^^^^^^^^
+
+Deleted unneeded files from /results2/SalishSea/nowcast-green.201806/ to free ~1.3Tb:
+* find /results2/SalishSea/nowcast-green.201806/ -name "SalishSea_1?_*_dia?_?.nc" -delete
+* find /results2/SalishSea/nowcast-green.201806/ -name "SalishSea_1h_*_VT?.nc" -delete
+* find /results2/SalishSea/nowcast-green.201806/ -name "SalishSea_1h_*_prod_T.nc" -delete
+Ran make_runoff_file for 10Aug12 to 31Dec12 and rsynced to optimum
+Hacked up a Sphinx site demo from Elise's tuningrunarchive repo and asked for her feedback on it.
+Closed issue #69 re: figure modules re: pandas FutureWarning: Using an implicitly registered datetime converter.
+Merged a bunch of Fraser river daily avg discharge files into /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow, then ran make_runoff_file for finish 2007-2012; rsynced files top optimum.
+Fixed bug in SalishSeaCmd unearthed by William@UCalgary re: checking default waitjob value; result of bug was jobs not being queued on beluga/cedar/graham, and being queued but held on optimum.
+(SalishSea)
+
+Canyons/Arctic; see whiteboard.
+(Canyons/Arctic)
+
+Discovered that proj4-fortran is now available on beluga, so building MOHID there should be the same as building it on cedar; started the process.
+(MIDOSS)
 
 
 
 
 Stack:
+* fix get_vfpa_hadcp MMSI AttributeError issue
+* debug gemlam interpolation
+* Elise's notebooks into Sphinx
+* change SADA workspace to SalishSeaCast; create new SADA workspace
 * build mohid on beluga
+* fix warnings in figure modules
+* modernize salishsea-site repo; release 19.1
+* release NEMO_Nowcast 19.2; change from circus to supervisor
+* add hindcast deployment to SalishSeaNowcast docs
+* close inactive branches in SalishSeaNowcast
+
 * hdf5 prep into MOHID-cmd
 
 * docs for working on beluga
