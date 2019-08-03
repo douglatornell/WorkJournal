@@ -4147,6 +4147,7 @@ Tue 30-Jul-2019
 ^^^^^^^^^^^^^^^
 
 Email reply to Mike@Bedford re: GoMSS offline since 21-Jul power outage.
+
 Commute took just over 29min for the first time in ages :-)
 
 upload_forcing orcinus nowcast+ failed; re-ran manually.
@@ -4197,25 +4198,6 @@ See new 2019 project work log.
 (Resilient-C)
 
 rpn-to-gemlam 2012-10-01 2012-10-31 failed due to file issue
-(SalishSea)
-
-Commute took just over 29min for the first time in ages :-)
-
-upload_forcing orcinus nowcast+ failed; re-ran manually.
-Reviewed storage: 1.6T free on /results2; nowcast-green.201806/ needs to be archived.
-Reviewed and analyzed ComputeCanada ssh keys changes for group.
-SalishSeaCast team mtg; see whiteboard.
-Released SalishSeaNowcast-19.1.
-Cloned Elise's tuningRunsArchive; 761 files took >20 minutes.
-Investigated get_vfpa_hadcp AttributeError issue and found that csv files contain data from Port aux Basque since sometime on 24Jul; emailed Michael & Maxim.
-Discussed deletion of files from nowcast-green.201806 w/ Susan.
-Continued work on fixing figures re: pandas FutureWarning: Using an implicitly registered datetime converter (issue#69); added warning suppression to test notebooks re: arrow.get() parser changes coming in v0.15.0
-(SalishSea)
-
-
-Fri 2-Aug-2019
-^^^^^^^^^^^^^^
-
 Deleted unneeded files from /results2/SalishSea/nowcast-green.201806/ to free ~1.3Tb:
 * find /results2/SalishSea/nowcast-green.201806/ -name "SalishSea_1?_*_dia?_?.nc" -delete
 * find /results2/SalishSea/nowcast-green.201806/ -name "SalishSea_1h_*_VT?.nc" -delete
