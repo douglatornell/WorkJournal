@@ -4216,6 +4216,14 @@ Discovered that proj4-fortran is now available on beluga, so building MOHID ther
 (MIDOSS)
 
 
+Wed 14-Aug-2019
+^^^^^^^^^^^^^^^
+
+Dentist appt.
+
+Built 650B wheels for Tommy Topstone; Alex Boondocks 3 wheelset, Shimano RT56 rotors, Conti tubes, René Herse Loup Loup 38mm tires.
+
+
 
 
 Stack:
