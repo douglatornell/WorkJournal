@@ -4216,27 +4216,191 @@ Discovered that proj4-fortran is now available on beluga, so building MOHID ther
 (MIDOSS)
 
 
-Wed 14-Aug-2019
+Sat 3-Aug-2019
+^^^^^^^^^^^^^^
+
+Prep for Friday Harbor trip.
+
+
+Sun 4-Aug-2019
+^^^^^^^^^^^^^^
+
+Vancouver to Friday Harbor; cycled to Tsawwassen via Alex Fraser Bridge, ferry to Swartz Bay, cycled to Sidney; ferry to Friday Harbor, cycled to lab
+
+
+August
+======
+
+Week 32
+-------
+
+Mon 5-Aug-2019
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - BC Day
+
+Friday Harbor
+
+Refactored run_NEMO_hindcast to default to 5d runs insted of 10d to try to get more efficient operations on optimum.
+nowcast-blue got stuck on launch; killed, cleaned up, and re-launched manually via make_forcing_links.
+Added code to run_NEMO_hindcast to avoid logging errors for "qstat: Unknown Job Id" at end of hindcast runs when job has disappeared from qstat's awareness.
+Discussed Python packaging re: LiveOcean w/ Parker.
+Discovered that wwatch3 has not run properly since 01aug19; made worse by the fact that the run date is not propagated among the ww3 workers; backfilling:
+* make_ww3_wind_file --debug forecast 2019-08-01
+* make_ww3_current_file --debug forecast 2019-08-01
+* run_ww3 nowcast 2019-08-01
+* make_ww3_wind_file --debug forecast 2019-08-02
+* make_ww3_current_file --debug forecast 2019-08-02
+* run_ww3 nowcast 2019-08-02
+Added run date propagation from make_ww3_current_file to run_ww3
+* make_ww3_wind_file --debug forecast 2019-08-03
+* make_ww3_current_file --debug forecast 2019-08-03
+* make_ww3_wind_file --debug forecast 2019-08-04
+* make_ww3_current_file --debug forecast 2019-08-04
+* make_ww3_wind_file --debug forecast 2019-08-05
+* make_ww3_current_file --debug forecast 2019-08-05
+Investigated why observations have disappeared from sandheads_winds figure; after way to much digging in the weeds, discovered that ECCC have recorded no observations from Sandheads since 20Jul :-(
+(SalishSea)
+
+
+Tue 6-Aug-2019
+^^^^^^^^^^^^^^
+
+Friday Harbor
+Attended Susan's lecture on spring bloom modeling.
+
+Replied to William's email suggesting that he roll back to XIOS-2 r1066 on cedar.
+(Prediction Core)
+
+
+Wed 7-Aug-2019
+^^^^^^^^^^^^^^
+
+Friday Harbor
+Attended Susan's lecture on canyons.
+
+Re-read blog posts by Henyk and others about using src/ directory in Python packages.
+Also learned about how much of setup.py can be made declarative in setup.cfg.
+Figures out how I can make definition of package version in __init__.py the single definition.
+Tested above ideas in restructured rpn-to-gemlam package.
+
+Debugged foreacst hour issue in rpn-to-gemlam and started processing 2007 files.
+(SalishSea)
+
+
+Thu 8-Aug-2019
+^^^^^^^^^^^^^^
+
+Friday Harbor
+
+More research on packaging; tested flit and pyproject.toml but that doesn't support pip install -e; decided against src/-layout for now pending developments by PyPA and flit.
+
+gemlam failed on 14jan07 due to solar radiation missing from hourly file:
+  * hour 005 is missing FB variable
+  * tried to restart processing on 16jan07; found that 14jan07 hour 012 is also missing FB
+  * tried to restart processing on 17jan07;
+Changed rpn-to-gemlam to use setup.cfg for package configuration, __version__ in __init__.py for version identifier, and env/ directory for environment description files.
+Susan filled /results with hindcast spin-up results; then did some cleanup to get things back in business.
+(SalishSea)
+
+Started writing Python packaging section in ubc-moad-docs.
+(MOAD)
+
+
+Fri 9-Aug-2019
+^^^^^^^^^^^^^^
+
+Friday Harbor to Chemainus
+
+collect_weather 18 failed yesterday due to full /results; recovery (all --debug):
+* download_weather 18
+* download_weather 00
+* download_weather 06
+* collect_river_data Capilano 2019-08-08
+* collect_river_data ChilliwackVedder 2019-08-08
+* collect_river_data ClowhomClowhomLake 2019-08-08
+* collect_river_data Englishman 2019-08-08
+* collect_river_data Fraser 2019-08-08
+* collect_river_data HomathkoMouth 2019-08-08
+* collect_river_data SalmonSayward 2019-08-08
+* collect_river_data SanJuanPortRenfrew 2019-08-08
+* collect_river_data SquamishBrackendale 2019-08-08
+* collect_river_data TheodosiaScotty 2019-08-08
+* collect_river_data TheodosiaBypass 2019-08-08
+* collect_river_data TheodosiaBypass 2019-08-08
+* make_runoff_file
+* get_NeahBay_ssh forecast2
+* grib_to_netcdf forecast2
+* get_onc_ctd SCVIP
+* get_onc_ctd SEVIP
+* get_onc_ferry TWDP
+* upload_forcing arbutus.cloud-nowcast forecast2 --debug
+Warnings:
+* 2019-08-09 08:07:37,680 DEBUG [get_NeahBay_ssh] observations & predictions table saved to /results/forcing/sshNeahBay/txt/sshNB_2019-08-09_15.txt
+/SalishSeaCast/SalishSeaNowcast/nowcast/residuals.py:767: FutureWarning: `item` has been deprecated and will be removed in a future version
+  tide = ttide.pred_all[ttide.time == d].item()
+(SalishSea)
+
+
+Sat 10-Aug-2019
 ^^^^^^^^^^^^^^^
 
-Dentist appt.
+Chemainus to Parksville
 
-Built 650B wheels for Tommy Topstone; Alex Boondocks 3 wheelset, Shimano RT56 rotors, Conti tubes, René Herse Loup Loup 38mm tires.
+
+Sun 11-Aug-2019
+^^^^^^^^^^^^^^^
+
+Parksville
+
+
+Week 33
+-------
+
+Mon 12-Aug-2019
+^^^^^^^^^^^^^^^
+
+Continued writing Python packaging section in ubc-moad-docs.
+(MOAD)
+
+Worked with Susan on our application for the sockeye.arc.ubc.ca beta.
+(SalishSea)
+
+Parksville to Vancouver
+
+
+Tue 13-Aug-2019
+^^^^^^^^^^^^^^^
+
+download_live_ocean timed out in automation; re-launched manually; success at 16:27.
+Helped Susan finalize our application for the sockeye.arc.ubc.ca beta.
+SalishSeaCast team mtg; see whiteboard.
+Confirmed that Sand Heads and Sntry Shoal obs are still offline, and that Halibut Bank has decreased from 45d to 24h.
+Confirmed that orcinus returned to service at ~13:30 on 12-Aug after a weekend power outage: backfilled:
+* upload_forcing nowcast+ 2019-08-{09..12} --debug
+* upload_forcing turbidity 2019-08-{09..12} --debug
+* make_forcing_links nowcast-agrif 2019-08-10
+
+* make_forcing_links nowcast-agrif 2019-08-11
+* make_forcing_links nowcast-agrif 2019-08-12
+* make_forcing_links nowcast-agrif 2019-08-13
+(SalishSea)
+
+
+
 
 
 
 
 Stack:
-* fix get_vfpa_hadcp MMSI AttributeError issue
-* debug gemlam interpolation
-* Elise's notebooks into Sphinx
 * change SADA workspace to SalishSeaCast; create new SADA workspace
-* build mohid on beluga
 * fix warnings in figure modules
 * modernize salishsea-site repo; release 19.1
 * release NEMO_Nowcast 19.2; change from circus to supervisor
 * add hindcast deployment to SalishSeaNowcast docs
 * close inactive branches in SalishSeaNowcast
+* Elise's notebooks into Sphinx
+* fix get_vfpa_hadcp MMSI AttributeError issue
 
 * hdf5 prep into MOHID-cmd
 
@@ -4247,6 +4411,8 @@ Stack:
 * migration to arbutus.cloud
 * refactor watch_NEMO_hindcast to work with qstat
 * segmented runs docs
+* build mohid on beluga
+* debug gemlam interpolation
 
 
 
