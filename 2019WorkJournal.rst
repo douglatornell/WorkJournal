@@ -4375,16 +4375,51 @@ Tue 13-Aug-2019
 download_live_ocean timed out in automation; re-launched manually; success at 16:27.
 Helped Susan finalize our application for the sockeye.arc.ubc.ca beta.
 SalishSeaCast team mtg; see whiteboard.
-Confirmed that Sand Heads and Sntry Shoal obs are still offline, and that Halibut Bank has decreased from 45d to 24h.
+Confirmed that Sand Heads and Sentry Shoal obs are still offline, and that Halibut Bank has decreased from 45d to 24h.
 Confirmed that orcinus returned to service at ~13:30 on 12-Aug after a weekend power outage: backfilled:
 * upload_forcing nowcast+ 2019-08-{09..12} --debug
 * upload_forcing turbidity 2019-08-{09..12} --debug
 * make_forcing_links nowcast-agrif 2019-08-10
-
 * make_forcing_links nowcast-agrif 2019-08-11
 * make_forcing_links nowcast-agrif 2019-08-12
+(SalishSea)
+
+
+Wed 14-Aug-2019
+^^^^^^^^^^^^^^^
+
+Finished backfilling nowcast-agrif:
 * make_forcing_links nowcast-agrif 2019-08-13
 (SalishSea)
+
+Dentist appt.
+
+Built 650B wheels for Tommy Topstone; Alex Boondocks 3 wheelset, Shimano RT56 rotors, Conti tubes, René Herse Loup Loup 38mm tires.
+
+
+Thu 15-Aug-2019
+^^^^^^^^^^^^^^^
+
+Signed forms for Dad's IPC to TD xfer; dropped them off at TD.
+
+upload_forcing to orcinus failing again, but ssh is okay...
+Renamed sada-network slack workspace to salishseacast; created new sada-network workspace; exported old sada; imported #random & #world-domination from export; deleted old #world-domination and #random; re-created empty #random in SalishSeaCast workspace; added pinned explanation of bot channels to #general in SalishSeaCast; disconnected Bitbucket from #midoss-repos channel and archived it.
+Susan got confirmation from ECCC that Sentry Shoal buoy has a hardware failure.
+Discovered that wwatch3 nowcast has been failing since 12aug19 due to stuck make_ww3_wind_file; backfilling:
+* make_ww3_wind_file forecast 2019-08-12
+* make_ww3_current_file forecast 2019-08-12
+* make_ww3_wind_file forecast 2019-08-13
+* make_ww3_current_file forecast 2019-08-13
+
+* make_ww3_wind_file forecast 2019-08-14
+* make_ww3_current_file forecast 2019-08-14
+* make_ww3_wind_file forecast 2019-08-15
+* make_ww3_current_file forecast 2019-08-15
+Added code to wave_height_period fig module to handle 404 error from buoy data service; there is still an Error level exception that bubbles up  from moad_tools.observations.get_ndbc_buoy()
+(SalishSea)
+
+Invited Vicky to slack workspace.
+(MIDOSS)
 
 
 
