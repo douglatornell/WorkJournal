@@ -4410,11 +4410,8 @@ Discovered that wwatch3 nowcast has been failing since 12aug19 due to stuck make
 * make_ww3_current_file forecast 2019-08-12
 * make_ww3_wind_file forecast 2019-08-13
 * make_ww3_current_file forecast 2019-08-13
-
 * make_ww3_wind_file forecast 2019-08-14
 * make_ww3_current_file forecast 2019-08-14
-* make_ww3_wind_file forecast 2019-08-15
-* make_ww3_current_file forecast 2019-08-15
 Added code to wave_height_period fig module to handle 404 error from buoy data service; there is still an Error level exception that bubbles up  from moad_tools.observations.get_ndbc_buoy()
 (SalishSea)
 
@@ -4422,13 +4419,33 @@ Invited Vicky to slack workspace.
 (MIDOSS)
 
 
+Fri 16-Aug-2019
+^^^^^^^^^^^^^^^
+
+Finished backfilling wwatch3:
+* make_ww3_wind_file forecast 2019-08-15
+* make_ww3_current_file forecast 2019-08-15
+(SalishSea)
+
+Updated Mercurial on kudu to 5.1+12-f59f8a5e9096:
+* conda activate hg-dev
+* updated hg-dev env
+* cd hg-stable
+* hg pull
+* hg update -r tip
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
+See work journal.
+(Resilient-C)
+
 
 
 
 
 
 Stack:
-* change SADA workspace to SalishSeaCast; create new SADA workspace
+* debug gemlam interpolation
 * fix warnings in figure modules
 * modernize salishsea-site repo; release 19.1
 * release NEMO_Nowcast 19.2; change from circus to supervisor
@@ -4447,7 +4464,7 @@ Stack:
 * refactor watch_NEMO_hindcast to work with qstat
 * segmented runs docs
 * build mohid on beluga
-* debug gemlam interpolation
+* change SADA workspace to SalishSeaCast; create new SADA workspace
 
 
 
