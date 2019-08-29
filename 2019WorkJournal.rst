@@ -4440,12 +4440,204 @@ See work journal.
 (Resilient-C)
 
 
+Sat 17-Aug-2019
+^^^^^^^^^^^^^^^
+
+Vancouver to Bowen Island
+
+
+Sun 18-Aug-2019
+^^^^^^^^^^^^^^^
+
+Bowen Island
+
+Deleted spinup.201812/, forecast.201806/, forecast2.201806/ & nowcast-blue.201806 from /results/SalishSea/ to free up space for hindcast.201905 spinup files.
+(SalishSea)
+
+Continued writing Python packaging section in ubc-moad-docs.
+(MOAD)
+
+
+Week 34
+-------
+
+Mon 19-Aug-2019
+^^^^^^^^^^^^^^^
+
+Bowen Island
+
+Finished writing Python packaging section in ubc-moad-docs.
+(MOAD)
+
+Resumed work on 2007 GEMLAM processing; worked on flagging missing RPN variables (i.e. FB == solar radiation); started work on interpolation code to fill them in.
+(SalishSea)
+
+
+Tue 20-Aug-2019
+^^^^^^^^^^^^^^^
+
+Bowen Island
+
+Bitbucket announced sunsetting of their support for Mercurial.
+Tried to create WorkJournal git repo on Bitbucket and can't because an hg repo of that name exists; so all repos will have to got through a name change if we convert to git on Bitbucket.
+
+Monthly team mtg; see whiteboard.
+(MIDOSS)
+
+Continued work on 2007 GEMLAM processing; worked on flagging missing RPN variables (i.e. FB == solar radiation); finished work on interpolation code to fill them in; started testing it on salish.
+Got access to sockeye for beta testing.
+(SalishSea)
+
+
+Wed 21-Aug-2019
+^^^^^^^^^^^^^^^
+
+Bowen Island
+
+Worked on sockeye for beta testing:
+* pip and setuptools installation issues; resolved
+* XIOS-ARCH files; created
+* perl URI.pm module required; resolved
+* XIOS-2 build; succeeded
+* NEMO build; succeeded
+* Susan got successful run, but ~25m for 1d, so slower than optiumum, et all
+* requested ennvar to identify sockeye to code and Venkat set up UBC_CLUSTER
+* started adding sockeye to SalishSeaCmd
+(SalishSea)
+
+See work journal.
+(Resilient-C)
+
+
+Thu 22-Aug-2019
+^^^^^^^^^^^^^^^
+
+Bowen Island
+
+Continued work on sockeye beta test:
+* added most of the necessary features for sockeye to SalishSeaCmd, except calc of #PBS -l select=...
+* did some exploration of binding options, but stopped due to chaotic changes by support.arc in netcdf and hdf5 libs
+(SalishSea)
+
+See work journal.
+(Resilient-C)
+
+
+Fri 23-Aug-2019
+^^^^^^^^^^^^^^^
+
+Bowen Island
+
+Manager failed w/ ZMQError due to timing collision between ping_erddap and clear_checklist; exit code was 0, so supervisor didn't try to restart manager; options for resolution:
+* add SystemExit(2) to nemo_nowcast._process_messages() ZMQError and Exception stanzas; probably sensible to do regardless
+* change supervisor config program:manager.autorestart from unexpected to true; this replicates the behaviour of circus, and is semantically what we want, so do it
+Continued work on 2007 GEMLAM processing; finished inter-day interpolation for missing solar variable values; successfully processed 13-16jan07; started feb07 but it looks like all of the frist 5 days have missing solar.
+Continued work on sockeye beta test:
+* finished adding sockeye to SalishSeaCmd
+* helped Susan run about 25 1d tests; --bind-to core is best, 11 nodes is fastest, 8 nodes is most efficient
+orinus came back online after storage controller failure; Susan backfilled upload_forcing; I queued 20aug19 run.
+(SalishSea)
+
+
+Sat 24-Aug-2019
+^^^^^^^^^^^^^^^
+
+Bowen Island
+
+Discovered that the reread function in supervisorctl was all that was required to apply autostart changes to all programs.
+Continued working on nowcast-agrif backfilling:
+* lots of clobbering by automation; waiting until after today's run attempt
+* make_forcing_links nowcast+ 2019-08-20
+* make_forcing_links nowcast-agrif 2019-08-20
+* make_forcing_links nowcast+ 2019-08-21
+* make_forcing_links nowcast-agrif 2019-08-21
+* make_forcing_links nowcast+ 2019-08-22
+* make_forcing_links nowcast-agrif 2019-08-22
+* make_forcing_links nowcast+ 2019-08-23
+* make_forcing_links nowcast-agrif 2019-08-23
+* make_forcing_links nowcast+ 2019-08-24
+* make_forcing_links nowcast-agrif 2019-08-24
+Continued work on 2007 GEMLAM processing:
+* discovered that there are no 01feb07 RPN files in /opp/GEMLAM/2007/; confirmed in PDF from Robert
+* added exception for edge case of missing forecast hour files at end of date range
+* worked on adding inter-day interpolation for >4 missing hours
+* Robert's PDF also confirms that 2-23feb07 are lacking solar variable; Susan will write code to calculate it from sun angle and cloud fraction
+* processed at 26-28feb07 and mar07
+* started processing apr07; failed on 11apr due to <4hr missing hour interpolation w/ missing solar variable
+(SalishSea)
+
+See work journal.
+(Resilient-C)
+
+
+Sun 25-Aug-2019
+^^^^^^^^^^^^^^^
+
+Bowen Island
+
+See work journal.
+(Resilient-C)
+
+Explored Cape Roger Curtis, Tunsall Bay, and Dorman Point by bike; lots of steep hills...
+
+
+Week 35
+-------
+
+Mon 26-Aug-2019
+^^^^^^^^^^^^^^^
+
+Bowen Island
+
+See work journal.
+(Resilient-C)
+
+Helped Susan set up conda-forge, etc. defaults via ~/.condarc, and env mgmt via env.yaml files.
+Continued 2007 GEMLAM processing:
+* re-ran 01-10apr to get close to 11apr interpolation issue
+Worked on NEMO-Cmd:
+* released v19.1; bumped version to v19.2.dev0
+* changed to new MOAD package layout (1hr)
+* replaced nemo_cmd.namelist module with f90nml; turns out nemo_cmd.namelist is used more outside NEMO-Cmd than inside it (SalishSeaNowcast, GoMSS_Nowcast, FVCOM-Cmd but only because it copies most of NEMO-Cmd instead of extending it)
+* started refactoring run_NEMO and watch_NEMO to use f90nml instead of nemo_cmd.namelist
+* fixed failing unit tests in SalishSeaNowcast
+(SalishSea)
+
+
+Tue 27-Aug-2019
+^^^^^^^^^^^^^^^
+
+Bowen Island
+
+Fixed bugs in namelist.py to f90nml change in NEMO-Cmd re: strs instead of ints written to patched namelist, comments and formatting not preserved in patched namelist, and original namelist file permissions not preserved on patched namelist file.
+Finished refactoring run_NEMO and watch_NEMO to use f90nml instead of nemo_cmd.namelist; added a TODO re: refactoring namelist writing code to use f90nml.patch().
+SalishSeaCast team mtg; see whiteboard.
+(SalishSea)
+
+See work journal.
+(Resilient-C)
+
+Investigated bad surface currents forecast URL exception; someone typing bad URL?
+Replaced raven & pyramid-crow packages w/ sentry-sdk.
+(salishsea-site)
+
+
+Wed 28-Aug-2019
+^^^^^^^^^^^^^^^
+
+Bowen Island
+
+Continued work on 2007 GEMLAM processing:
+* implemented calculation of solar radiation from cloud fraction and sun angle for gaps of >24h using code that Susan extracted from SOG
+(SalishSea)
 
 
 
 
 Stack:
 * debug gemlam interpolation
+* wwatch3 hindcast automation
+* wwatch3 run success confirmation
 * fix warnings in figure modules
 * modernize salishsea-site repo; release 19.1
 * release NEMO_Nowcast 19.2; change from circus to supervisor
