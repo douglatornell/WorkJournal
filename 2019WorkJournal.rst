@@ -4535,7 +4535,7 @@ Continued work on 2007 GEMLAM processing; finished inter-day interpolation for m
 Continued work on sockeye beta test:
 * finished adding sockeye to SalishSeaCmd
 * helped Susan run about 25 1d tests; --bind-to core is best, 11 nodes is fastest, 8 nodes is most efficient
-orinus came back online after storage controller failure; Susan backfilled upload_forcing; I queued 20aug19 run.
+orcinus came back online after storage controller failure; Susan backfilled upload_forcing; I queued 20aug19 run.
 (SalishSea)
 
 
@@ -4632,6 +4632,34 @@ Continued work on 2007 GEMLAM processing:
 (SalishSea)
 
 
+Thu 29-Aug-2019
+^^^^^^^^^^^^^^^
+
+Bowen Island to Vancouver
+
+Continued work on 2007 GEMLAM processing:
+* debugged implementation of calculation of solar radiation from cloud fraction and sun angle for gaps of >24h using code that Susan extracted from SOG
+(SalishSea)
+
+
+Fri 30-Aug-2019
+^^^^^^^^^^^^^^^
+
+Canyons/Arctic group mtg; see whiteboard.
+(Canyons/Arctic)
+
+* changed to new MOAD package layout (1,5h)
+* released v19.1; bumped version to v19.2.dev0
+(salishsea-site)
+
+Continued work on 2007 GEMLAM processing:
+* 16-25feb07 failed with various interpolation errors at ends
+* 1-25feb07 failing on handling emptied missing_var_hrs["saolar"] dict item
+Helped Susan w/ sockeye module system issue on compute nodes, and 2015 bio-tuning on optimum.
+Changed SalishSeaNowcast to new MOAD package layout
+(SalishSea)
+
+
 
 
 Stack:
@@ -4639,10 +4667,8 @@ Stack:
 * wwatch3 hindcast automation
 * wwatch3 run success confirmation
 * fix warnings in figure modules
-* modernize salishsea-site repo; release 19.1
 * release NEMO_Nowcast 19.2; change from circus to supervisor
 * add hindcast deployment to SalishSeaNowcast docs
-* close inactive branches in SalishSeaNowcast
 * Elise's notebooks into Sphinx
 * fix get_vfpa_hadcp MMSI AttributeError issue
 
@@ -4657,6 +4683,8 @@ Stack:
 * segmented runs docs
 * build mohid on beluga
 * change SADA workspace to SalishSeaCast; create new SADA workspace
+* modernize salishsea-site repo; release 19.1
+* close inactive branches in SalishSeaNowcast
 
 
 
