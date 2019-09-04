@@ -4660,6 +4660,21 @@ Changed SalishSeaNowcast to new MOAD package layout
 (SalishSea)
 
 
+Tue 3-Sep-2019
+^^^^^^^^^^^^^^
+
+Added Sphinx autodoc import mocks for watchdog & PyPDF2 pkgs to SalishSeaNowcast docs.
+Added index & module index to SalishSeaNowcast docs w/ links in sidebar menu.
+Started adding destination host option to download_results worker.
+SalishSeaCast team mtg; see whiteboard.
+Invited Elise, Rachael, Ben, Tereza & Vicky to SalishSeaCast workspace.
+(SalishSea)
+
+Helped Vicky w/ HPC issues, and Rachael w/ Mercurial issues.
+Had a visit from Ashu.
+(MIDOSS)
+
+
 
 
 Stack:
