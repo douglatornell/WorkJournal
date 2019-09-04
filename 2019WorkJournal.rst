@@ -4654,10 +4654,41 @@ Canyons/Arctic group mtg; see whiteboard.
 
 Continued work on 2007 GEMLAM processing:
 * 16-25feb07 failed with various interpolation errors at ends
-* 1-25feb07 failing on handling emptied missing_var_hrs["saolar"] dict item
+* 1-25feb07 failing on handling emptied missing_var_hrs["solar"] dict item
 Helped Susan w/ sockeye module system issue on compute nodes, and 2015 bio-tuning on optimum.
 Changed SalishSeaNowcast to new MOAD package layout
 (SalishSea)
+
+
+Sat 31-Aug-2019
+^^^^^^^^^^^^^^^
+
+
+Sun 1-Sep-2019
+^^^^^^^^^^^^^^
+
+Continued work on 2007 GEMLAM processing:
+* added intra-day interpolation for ≤4 hr missing variable gaps
+* ran 11-30apr07
+(SalishSea)
+
+
+September
+=========
+
+Week 36
+-------
+
+Mon 2-Sep-2019
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Labour Day
+
+Added production config YAML unit tests for download_results worker.
+(SalishSea)
+
+
+
 
 
 Tue 3-Sep-2019
