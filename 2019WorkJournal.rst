@@ -4685,10 +4685,8 @@ Mon 2-Sep-2019
 **Statutory Holiday** - Labour Day
 
 Added production config YAML unit tests for download_results worker.
+Continued GEMLAM 2007 processing.
 (SalishSea)
-
-
-
 
 
 Tue 3-Sep-2019
@@ -4699,11 +4697,23 @@ Added index & module index to SalishSeaNowcast docs w/ links in sidebar menu.
 Started adding destination host option to download_results worker.
 SalishSeaCast team mtg; see whiteboard.
 Invited Elise, Rachael, Ben, Tereza & Vicky to SalishSeaCast workspace.
+Continued GEMLAM 2007 processing.
 (SalishSea)
 
 Helped Vicky w/ HPC issues, and Rachael w/ Mercurial issues.
 Had a visit from Ashu.
 (MIDOSS)
+
+
+Wed 4-Sep-2019
+^^^^^^^^^^^^^^
+
+Continued GEMLAM processing: finished 2007.
+(SalishSea)
+
+Updated kudu to Vagrant-2.2.5
+
+
 
 
 
