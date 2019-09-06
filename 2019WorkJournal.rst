@@ -4714,6 +4714,29 @@ Continued GEMLAM processing: finished 2007.
 Updated kudu to Vagrant-2.2.5
 
 
+Thu 5-Sep-2019
+^^^^^^^^^^^^^^
+
+HRDPS 12Z forecast had many missing files at 11:xx; send email to Sandrine at 11:45; she replied that it is a known issue; files landed at 12:54.
+Helped Tereza w/ salish sea deflate on cedar; bug in --separate-deflate: it uses $PBS_O_HOME
+(SalishSea)
+
+Worked w/ Racahel & Vicky:
+* cloned repos into $HOME/MIDOSS; 3 tries for MIDOSS-MOHID-CODE; beluga $HOME is now a lustre file system :-(
+* had to explicitly install deps of moad_tools one by one to get them to install so that they made proper use of wheelhouse:
+  * numpy
+  * matplotlib
+  * xarray
+  * tables
+  * netCDF4
+  * scipy
+* catastrophic build failure on beluga in mb1 due to too many errors
+* created cedar:/scratch/dlatorne/MIDOSS/forcing/ for shared forcing files
+* cloned repos into graham:$HOME/MIDOSS/
+  * successfully built mb1, mb2 & mw
+(MIDOSS)
+
+
 
 
 
