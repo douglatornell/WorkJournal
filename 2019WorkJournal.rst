@@ -4737,6 +4737,64 @@ Worked w/ Racahel & Vicky:
 (MIDOSS)
 
 
+Sat 7-Sep-2019
+^^^^^^^^^^^^^^
+
+Vancouver to Parksville
+
+collect_weather 00 never finished; it saw no files in hours 001 though 011 except 7 in hour 004, and there were errors in the sarracenia log about hour 004; recovery starting at ~15:45:
+* kill collect_weather 00
+* remove /results/forcing/atmospheric/GEM2.5/GRIB/20190907/00/
+* download_weather 00
+* download_weather 06 and wait for forecast runs to complete
+* upload_forcing forecast2 failed because we are so late in the day that sshNeahBay/obs/ssh_y2019m09d06.nc doesn't exist
+  * Susan patched ssh.txt file and ran get_NeahBay_ssh w/ --text-file to fix
+* upload_forcing arbutus.cloud-nowcast forecast2
+* upload_forcing orcinus-nowcast-agrif forecast2
+* upload_forcing beluga-hindcast forecast2
+* upload_forcing cedar-hindcast forecast2
+* upload_forcing graham-hindcast forecast2
+* upload_forcing optimum-hindcast forecast2
+* wait for forecast runs to complete
+* download_weather 18
+* collect_weather 00
+* download_weather 12
+(SalishSea)
+
+
+Sun 8-Sep-2019
+^^^^^^^^^^^^^^
+
+Backfilling nowcast-agrif:
+* upload_forcing nowcast+ 2019-08-{30..31} --debug
+* upload_forcing nowcast+ 2019-09-{01..03} --debug
+* upload_forcing turbidity 2019-08-{30..31} --debug
+* upload_forcing turbidity 2019-09-{01..03} --debug
+Attempt at 29aug19 run failed due to /scratch file system issues; fix expected on Wed 11-Sep-2019.
+Tested download_results --dest-host.
+Researched compression re: putting tarballs in nearline storage on beluga; gzip wins; need to figure out if compressing already compressed netCDF files is worthwhile.
+(SalishSea)
+
+Parksville to Vancouver
+
+
+
+
+* make_forcing_links nowcast-agrif 2019-08-29
+* make_forcing_links nowcast-agrif 2019-08-30
+* make_forcing_links nowcast-agrif 2019-08-31
+* make_forcing_links nowcast-agrif 2019-09-01
+* make_forcing_links nowcast-agrif 2019-09-02
+* make_forcing_links nowcast-agrif 2019-09-03
+* make_forcing_links nowcast-agrif 2019-09-04
+* make_forcing_links nowcast-agrif 2019-09-05
+* make_forcing_links nowcast-agrif 2019-09-06
+* make_forcing_links nowcast-agrif 2019-09-07
+* make_forcing_links nowcast-agrif 2019-09-08
+* make_forcing_links nowcast-agrif 2019-09-09
+* make_forcing_links nowcast-agrif 2019-09-10
+* make_forcing_links nowcast-agrif 2019-09-11
+
 
 
 
