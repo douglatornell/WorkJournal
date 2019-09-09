@@ -4717,8 +4717,9 @@ Updated kudu to Vagrant-2.2.5
 Thu 5-Sep-2019
 ^^^^^^^^^^^^^^
 
-HRDPS 12Z forecast had many missing files at 11:xx; send email to Sandrine at 11:45; she replied that it is a known issue; files landed at 12:54.
+HRDPS 12Z forecast had many missing files at 11:15; send email to Sandrine at 11:45; she replied that it is a known issue; files landed at 12:54.
 Helped Tereza w/ salish sea deflate on cedar; bug in --separate-deflate: it uses $PBS_O_HOME
+Continued GEMLAM processing: Jan-Feb 2008.
 (SalishSea)
 
 Worked w/ Racahel & Vicky:
@@ -4737,29 +4738,30 @@ Worked w/ Racahel & Vicky:
 (MIDOSS)
 
 
-Sat 7-Sep-2019
+Fri 6-Sep-2019
 ^^^^^^^^^^^^^^
 
-Vancouver to Parksville
+Updated email thread re: beluga compiler issue and $HOME file systems on beluga (lustre) and graham (NFS).
+(MIDOSS)
 
-collect_weather 00 never finished; it saw no files in hours 001 though 011 except 7 in hour 004, and there were errors in the sarracenia log about hour 004; recovery starting at ~15:45:
-* kill collect_weather 00
-* remove /results/forcing/atmospheric/GEM2.5/GRIB/20190907/00/
-* download_weather 00
-* download_weather 06 and wait for forecast runs to complete
-* upload_forcing forecast2 failed because we are so late in the day that sshNeahBay/obs/ssh_y2019m09d06.nc doesn't exist
-  * Susan patched ssh.txt file and ran get_NeahBay_ssh w/ --text-file to fix
-* upload_forcing arbutus.cloud-nowcast forecast2
-* upload_forcing orcinus-nowcast-agrif forecast2
-* upload_forcing beluga-hindcast forecast2
-* upload_forcing cedar-hindcast forecast2
-* upload_forcing graham-hindcast forecast2
-* upload_forcing optimum-hindcast forecast2
-* wait for forecast runs to complete
-* download_weather 18
-* collect_weather 00
-* download_weather 12
+
+Continued GEMLAM processing: Mar 2008.
+Fixed bug in rpn-to-gemlam that was leaving solar.nc file behind in destination directory.
+Tried to start backfilling nowcast-agrif from 29aug, but orcinus /global/scratch file system is too sluggish.
 (SalishSea)
+
+Updated Mercurial on kudu to 5.1.1+2-b22a8dadc6f5:
+* conda activate hg-dev
+* updated hg-dev env
+* cd hg-stable
+* hg pull
+* hg update -r tip
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
+See work journal.
+(Resilient-C)
+
 
 
 Sun 8-Sep-2019
@@ -4800,7 +4802,6 @@ Parksville to Vancouver
 
 
 Stack:
-* debug gemlam interpolation
 * wwatch3 hindcast automation
 * wwatch3 run success confirmation
 * fix warnings in figure modules
@@ -4808,6 +4809,7 @@ Stack:
 * add hindcast deployment to SalishSeaNowcast docs
 * Elise's notebooks into Sphinx
 * fix get_vfpa_hadcp MMSI AttributeError issue
+* debug gemlam interpolation
 
 * hdf5 prep into MOHID-cmd
 
