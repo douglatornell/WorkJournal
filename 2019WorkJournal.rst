@@ -4763,6 +4763,30 @@ See work journal.
 (Resilient-C)
 
 
+Sat 7-Sep-2019
+^^^^^^^^^^^^^^
+
+Vancouver to Parksville
+
+collect_weather 00 never finished; it saw no files in hours 001 though 011 except 7 in hour 004, and there were errors in the sarracenia log about hour 004; recovery starting at ~15:45:
+* kill collect_weather 00
+* remove /results/forcing/atmospheric/GEM2.5/GRIB/20190907/00/
+* download_weather 00
+* download_weather 06 and wait for forecast runs to complete
+* upload_forcing forecast2 failed because we are so late in the day that sshNeahBay/obs/ssh_y2019m09d06.nc doesn't exist
+  * Susan patched ssh.txt file and ran get_NeahBay_ssh w/ --text-file to fix
+* upload_forcing arbutus.cloud-nowcast forecast2
+* upload_forcing orcinus-nowcast-agrif forecast2
+* upload_forcing beluga-hindcast forecast2
+* upload_forcing cedar-hindcast forecast2
+* upload_forcing graham-hindcast forecast2
+* upload_forcing optimum-hindcast forecast2
+* wait for forecast runs to complete
+* download_weather 18
+* collect_weather 00
+* download_weather 12
+(SalishSea)
+
 
 Sun 8-Sep-2019
 ^^^^^^^^^^^^^^
