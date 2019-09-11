@@ -4804,6 +4804,42 @@ Researched compression re: putting tarballs in nearline storage on beluga; gzip 
 Parksville to Vancouver
 
 
+Week 37
+-------
+
+Mon 9-Sep-2019
+^^^^^^^^^^^^^^
+
+Worked on debugging incorrect solar coordinates that Susan found in gemlam_y2007m01d015.nc; Susan solved it by deletion of solar with ncks -O -x -v solar before appending interpolated field.
+Created slide for Phys Ocgy seminar carnival.
+Discussed optimum performance w/ Henryk; there is mpirun option that will force xios on to a separate node.
+Email from Sandrine announcing that HTTP requests to datamart will redirecto to HTTPS staring 15Oct19; linked GoC doc says that all services should be HTTPS by 31Dec19.
+Experimented with removal of lib.fix_perms() calls in download_results because what they do should be handled by setguid bits in results archives trees; doesn't work that way on skookum.
+Tested making tarballs of hindcast results:
+* 01jan13, no compression, 46s, 1.0000061822465531 expansion
+* 01jan13, default gzip compression, 3m48s, 0.958404918639645 compression
+* 01jan13, GZIP=-9 compression, 4m2s, 0.9583921727605043 compression
+* 02jan13, no compression, 38s, 1.0000014637092518 expansion
+(SalishSea)
+
+Phys Ocgy seminar carnival.
+
+
+Tue-Sep-2019
+^^^^^^^^^^^^^^
+
+Atlantis project mtg w/ Javier and Heidi:
+* CONNIE3 particle tracking tool (web app)
+download_live_ocean timed out at 13:23; re-launched at 13:45; finished successfully at 16:06.
+Finished a good-enough implementation of download_results to remote host for sockeye to beluga:/nearline/
+Started work on remote host split_results.
+(SalishSea)
+
+Mtg and lunch w/ Heidi & Javier of CSIRO Atlantis project team.
+
+Helped Vicky & Rachael get Ashu's MOHID forcing scripts running for Vicky.
+(MIDOSS)
+
 
 
 * make_forcing_links nowcast-agrif 2019-08-29
@@ -4830,6 +4866,7 @@ Stack:
 * wwatch3 run success confirmation
 * fix warnings in figure modules
 * release NEMO_Nowcast 19.2; change from circus to supervisor
+* make nemo_nowcast.cli._arrow_date() public because it is used in split_results worker
 * add hindcast deployment to SalishSeaNowcast docs
 * Elise's notebooks into Sphinx
 * fix get_vfpa_hadcp MMSI AttributeError issue
