@@ -4825,8 +4825,8 @@ Tested making tarballs of hindcast results:
 Phys Ocgy seminar carnival.
 
 
-Tue-Sep-2019
-^^^^^^^^^^^^^^
+Tue 10-Sep-2019
+^^^^^^^^^^^^^^^
 
 Atlantis project mtg w/ Javier and Heidi:
 * CONNIE3 particle tracking tool (web app)
@@ -4841,13 +4841,66 @@ Helped Vicky & Rachael get Ashu's MOHID forcing scripts running for Vicky.
 (MIDOSS)
 
 
+Wed 11-Sep-2019
+^^^^^^^^^^^^^^^
 
+Worked on debugging Rachael's hdf5-to-netcdf4 failure:
+* mismatch between res/Lagrangian_${RUN_ID}.hdf5 and file name in res/
+* prepare accepts arbitrary Lagrangian*.dat file name for PARTIC_DATA and sets PARTIC_HDF to Lagrangian*_{run_id}.hdf5 but run assumes that PARTIC_HDF is Lagrangian_{run_id}.hdf5
+* pushed fix for Rachael or Vicky to test
+(MIDOSS)
+
+Resumed nowcast-agrif backfilling after orcinus:/glocbal/scratch/ quota issue resolution:
 * make_forcing_links nowcast-agrif 2019-08-29
 * make_forcing_links nowcast-agrif 2019-08-30
 * make_forcing_links nowcast-agrif 2019-08-31
+* make_forcing_links nowcast-agrif 2019-09-01 - failed, probably because make_forcing_ links forecas2 tropped on it
+(SalishSea)
+
+See work journal.
+(Resilient-C)
+
+
+Thu 12-Sep-2019
+^^^^^^^^^^^^^^^
+
+Discussed shared grid repo, hg trust, and Stokes drift test run w/ Rachael.
+(MIDOSS)
+
+SalishSeaCast stopped because /results is full; recovery:
+* freed up space on Susan' instructions to delete:
+  * spinup.201905-yr2/*
+  * spinup.201905/*1[4-6]
+* manually ran dowload_weather 12 to restart automation
+* manually ran download_results optimum hindcast:
+  * 2013-08-01
+  * 2013-08-06
+  * 2013-08-11
+  * 2013-08-16
+Stopped and restarted SalishSeaCast supervisord to load SLACK_SSC_HINDCAST_PROGRESS into manager's environment.
+Continued nowcast-agrif backfilling after orcinus:/glocbal/scratch/ quota issue resolution:
 * make_forcing_links nowcast-agrif 2019-09-01
 * make_forcing_links nowcast-agrif 2019-09-02
 * make_forcing_links nowcast-agrif 2019-09-03
+Confirmed that nowcast-r12 still appears to be running daily; figures don't get generated most days though:
+* make_plots fvcom nowcast-r12 publish 2019-09-11
+* make_plots fvcom nowcast-r12 publish 2019-09-10
+(SalishSea)
+
+See work journal.
+(Resilient-C)
+
+Created account at https://developers.meethue.com/ to get access to Hue API docs: https://developers.meethue.com/develop/hue-api/
+Pretty sure that W[bbb] in date/times is based on:
+  Monday = 64, Tuesday = 32, Wednesday = 16, Thursday = 8, Friday = 4, Saturday = 2, Sunday = 1
+so, W124 means weekdays (127-2-1), W64 means Mondays, etc.
+https://github.com/quentinsf/qhue/ looks like a good candidate for a Python interface; it's a thin wrapper that just constructs URLs and HTTP requests, rather than a Python API for Hue.
+
+
+Fri 13-Sep-2019
+^^^^^^^^^^^^^^^
+
+Continued nowcast-agrif backfilling after orcinus:/glocbal/scratch/ quota issue resolution:
 * make_forcing_links nowcast-agrif 2019-09-04
 * make_forcing_links nowcast-agrif 2019-09-05
 * make_forcing_links nowcast-agrif 2019-09-06
@@ -4856,6 +4909,45 @@ Helped Vicky & Rachael get Ashu's MOHID forcing scripts running for Vicky.
 * make_forcing_links nowcast-agrif 2019-09-09
 * make_forcing_links nowcast-agrif 2019-09-10
 * make_forcing_links nowcast-agrif 2019-09-11
+* make_forcing_links nowcast-agrif 2019-09-12
+* make_forcing_links nowcast-agrif 2019-09-13
+Worked on gcc-5.4.0 to gcc-9.1.0 module changes on sockeye:
+* discovered hg trust glitches in repos:
+  * XIOS-2, XIOS-ARCH
+* committed XIOS-ARCH files for sockeye; updated re: change to perl-uri module
+* modules not yet available w/ gcc-9.1.0:
+  * mercurial
+  * perl-uri
+Added automation todos for long hindcast to whiteboard.
+Worked on 01-24feb07 gemlam solar NaNs issue:
+* 01feb07:13 to 02feb07:13 are NaN because they contain solar full of NaNs, so they are not patched as having a missing variable, but rot is limited to that time interval, unlike the files I generated on 10-Sep, so we should be able to interpolate to get values to repalce NaNs
+* ran rpn-to-gemlam -v info 2007-02-04 2007-02-07 to see if NaN-rot remains contained
+(SalishSea)
+
+Experimented with debugging code in PyCharm that runs via deployment on salish.
+
+Created .cookiecutterrc on kudu to store cookiecutter clones in /media/doug/warehouse/cookiecutters/.
+Created a cookiecutter conda env on kudu with:
+  conda create -n cookiecutter python=3.7 pip cookiecutter
+Started creating cookiecutter-djl-pypkg project in a git repo.
+
+
+Sat 14-Sep-2019
+^^^^^^^^^^^^^^^
+
+Worked on gcc-5.4.0 to gcc-9.1.0 module changes on sockeye:
+* Email on ticket w/ Ken re: modules not yet available w/ gcc-9.1.0:
+  * perl-uri is okay now
+  * mercurial build is against Python 3.7; referred him back to earlier ticket
+Updated optimum:SalishSeaCast/hindcast-sys/ repo clones to PROD-hindcast_201905-v2 tag:
+* in each repo clone: hg pull; hg up PROD-hindcast_201905-v2
+
+* TODO: fix tag in XIOS-2 re: optimum using svn r1066
+
+
+
+
+
 
 
 
