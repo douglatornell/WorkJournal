@@ -3906,16 +3906,6 @@ Refactored make_surface_current_tiles to make INFO level logging less noisy.
 (SalishSea)
 
 
-
-
->10-May-2019:
-* talk to Charles about borg on salish (re-install?)
-* recover from borg:
-  * /results/forcing/atmospheric/GEM2.5/GRIB/20190105/12
-  * /results/forcing/atmospheric/GEM2.5/GRIB/20190105/18
-* get daily borg restarted
-
-
 Week 29
 -------
 
@@ -4942,12 +4932,21 @@ Worked on gcc-5.4.0 to gcc-9.1.0 module changes on sockeye:
 Updated optimum:SalishSeaCast/hindcast-sys/ repo clones to PROD-hindcast_201905-v2 tag:
 * in each repo clone: hg pull; hg up PROD-hindcast_201905-v2
 
-* TODO: fix tag in XIOS-2 re: optimum using svn r1066
 
-
+Week 38
+-------
 
 Mon 16-Sep-2019
 ^^^^^^^^^^^^^^^
+
+Worked on getting daily borg backups restarted on salish:
+* move /etc/cron-daily/daily*backup.sh* to ~/cron-daily-backup/ so that they don't run when borg is re-installed
+* opened ticket to get borgbackup re-installed on salish from PPA
+
+* TODO: fix tag in XIOS-2 re: optimum using svn r1066
+(SalishSea)
+
+Physio appt re: right QL? spasm
 
 Email to arc.support re: py-setuptools and py-pip modules for 3.7.3 and gcc-9.1.0
 Worked on gemlam 15jul08 missing TD variable issue:
@@ -4955,6 +4954,12 @@ Worked on gemlam 15jul08 missing TD variable issue:
 * 15jul08 001-024 and 16jul08 01-011 hourly RPN files are missing variables UU VV TT TD
 (SalishSea)
 
+>10-May-2019:
+* talk to Charles about borg on salish (re-install?)
+* recover from borg:
+  * /results/forcing/atmospheric/GEM2.5/GRIB/20190105/12
+  * /results/forcing/atmospheric/GEM2.5/GRIB/20190105/18
+* get daily borg restarted
 
 
 
