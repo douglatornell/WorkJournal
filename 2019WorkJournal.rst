@@ -4946,7 +4946,14 @@ Updated optimum:SalishSeaCast/hindcast-sys/ repo clones to PROD-hindcast_201905-
 
 
 
+Mon 16-Sep-2019
+^^^^^^^^^^^^^^^
 
+Email to arc.support re: py-setuptools and py-pip modules for 3.7.3 and gcc-9.1.0
+Worked on gemlam 15jul08 missing TD variable issue:
+* got remote debugging on salish working from kudu :-)
+* 15jul08 001-024 and 16jul08 01-011 hourly RPN files are missing variables UU VV TT TD
+(SalishSea)
 
 
 
