@@ -4942,26 +4942,44 @@ Mon 16-Sep-2019
 Worked on getting daily borg backups restarted on salish:
 * move /etc/cron-daily/daily*backup.sh* to ~/cron-daily-backup/ so that they don't run when borg is re-installed
 * opened ticket to get borgbackup re-installed on salish from PPA
-
-* TODO: fix tag in XIOS-2 re: optimum using svn r1066
-(SalishSea)
-
-Physio appt re: right QL? spasm
-
 Email to arc.support re: py-setuptools and py-pip modules for 3.7.3 and gcc-9.1.0
 Worked on gemlam 15jul08 missing TD variable issue:
 * got remote debugging on salish working from kudu :-)
 * 15jul08 001-024 and 16jul08 01-011 hourly RPN files are missing variables UU VV TT TD
 (SalishSea)
 
->10-May-2019:
-* talk to Charles about borg on salish (re-install?)
-* recover from borg:
-  * /results/forcing/atmospheric/GEM2.5/GRIB/20190105/12
-  * /results/forcing/atmospheric/GEM2.5/GRIB/20190105/18
+Physio appt re: right QL? spasm
+
+
+Tue 17-Sep-2019
+^^^^^^^^^^^^^^^
+
+Monthly project mtg; see whiteboard.
+Discussed wwatch3 hindcast and MOHID forcing code extraction from analysis-ashu w/ Rachael and Vicky.
+Updated MOHID-Cmd docs re: MIDOSS-MOHID-CODE repo in paths and MIDOSS-MOHID-grid repo in vcs revisions.
+Started looking at how to extract MOHID forcing files creation code from analysis-ashutosh repo
+(MIDOSS)
+
+Worked on gemlam 15jul08 missing TD, TT, UU & VV variables issue:
+* cstrpn2cdf is complaining that it can't find calendars for those vars
+Fixed tags in XIOS-2 repo re: XIOS-2r1066 processed after svn checkout, and PROD-hindcast_201905-v2 at r1066 on optimum.
+Recovered accidentally deleted GRIB/20190105/12/ and GRIB/20190105/18/ from salish:/backup/borg/results::results-2019-04-15T20:35:47:
+* mkdir /tmp/borg
+* sudo borg mount /backup/borg/results::results-2019-04-15T20:35:47 /tmp/borg/
+* # sudo cp to /results isn't allowed on salish, so created /data/dlatorne/GRIB/20190105/ as a stepping stone
+* sudo cp -pr /tmp/borg/results/forcing/atmospheric/GEM2.5/GRIB/20190105/12/ /data/dlatorne/GRIB/20190105/
+* sudo cp -pr /tmp/borg/results/forcing/atmospheric/GEM2.5/GRIB/20190105/18/ /data/dlatorne/GRIB/20190105/
+* sudo umount /tmp/borg
+* # on skookum:
+* cp -pr /data/dlatorne/GRIB/20190105/12 /results/forcing/atmospheric/GEM2.5/GRIB/20190105/
+* cp -pr /data/dlatorne/GRIB/20190105/18 /results/forcing/atmospheric/GEM2.5/GRIB/20190105/
+Started getting daily borg backups restarted:
+* cron-daily-backup/ramp-up/daily-opp-backup.sh:
+  * /opp/wwatch3/nowcast
+  * /opp/wwatch3/hindcast
+(SalishSea)
+
 * get daily borg restarted
-
-
 
 
 
