@@ -4977,6 +4977,62 @@ Started getting daily borg backups restarted:
 * cron-daily-backup/ramp-up/daily-opp-backup.sh:
   * /opp/wwatch3/nowcast
   * /opp/wwatch3/hindcast
+  * /opp/fvcom/nowcast
+(SalishSea)
+
+
+Wed 18-Sep-2019
+^^^^^^^^^^^^^^^
+
+Helped Susan get XIOS-2 and NEMO SalishSeaCast re-built on sockeye under gcc-9.1.0.
+Continued getting daily borg backups restarted:
+* cron-daily-backup/ramp-up/daily-opp-backup.sh:
+  * /opp/fvcom/nowcast-x2
+  * /opp/fvcom/nowcast-r12
+* cron-daily-backup/ramp-up/daily-backup.sh:
+  * daily-opp-backup.sh
+
+* cron-daily-backup/ramp-up/daily-results-backup.sh:
+(SalishSea)
+
+EOAS machines were inaccessible for most of the morning, apparently due to access-race on /home
+
+Continued dec of cookiecutter-djl-pypkg project; uploaded it to Bitbucket.
+
+
+
+Thu 19-Sep-2019
+^^^^^^^^^^^^^^^
+
+collect_weather 18 never finished; it stored no files in hours 001 though 021, probably due to EOAS /home file system issues; recovery starting at ~08:45:
+* kill collect_weather 18
+* remove /results/forcing/atmospheric/GEM2.5/GRIB/20190918/18
+* download_weather 18
+* download_weather 00
+* download_weather 06 and wait for forecast runs to complete
+
+* upload_forcing forecast2 failed because we are so late in the day that sshNeahBay/obs/ssh_y2019m09d06.nc doesn't exist
+  * Susan patched ssh.txt file and ran get_NeahBay_ssh w/ --text-file to fix
+* upload_forcing arbutus.cloud-nowcast forecast2
+* upload_forcing orcinus-nowcast-agrif forecast2
+* upload_forcing beluga-hindcast forecast2
+* upload_forcing cedar-hindcast forecast2
+* upload_forcing graham-hindcast forecast2
+* upload_forcing optimum-hindcast forecast2
+* wait for forecast runs to complete
+* download_weather 18
+* collect_weather 00
+* download_weather 12
+Continued getting daily borg backups restarted:
+* cron-daily-backup/ramp-up/daily-results-backup.sh:
+  * /results/SalishSea/climatology
+  * /results/forcing
+
+  * /results/observations
+  * /results/SalishSea/climatology
+  * /results/nowcast-sys/figures
+  * /results/SalishSea/nowcast-agrif
+ONC USDDL CTD returned to service on 16Sep19.
 (SalishSea)
 
 * get daily borg restarted
