@@ -5010,30 +5010,82 @@ collect_weather 18 never finished; it stored no files in hours 001 though 021, p
 * download_weather 18
 * download_weather 00
 * download_weather 06 and wait for forecast runs to complete
-
-* upload_forcing forecast2 failed because we are so late in the day that sshNeahBay/obs/ssh_y2019m09d06.nc doesn't exist
-  * Susan patched ssh.txt file and ran get_NeahBay_ssh w/ --text-file to fix
-* upload_forcing arbutus.cloud-nowcast forecast2
-* upload_forcing orcinus-nowcast-agrif forecast2
-* upload_forcing beluga-hindcast forecast2
-* upload_forcing cedar-hindcast forecast2
-* upload_forcing graham-hindcast forecast2
-* upload_forcing optimum-hindcast forecast2
-* wait for forecast runs to complete
-* download_weather 18
-* collect_weather 00
+  * wwatch3/forecast2/18sep19 failed due to stuck make_ww3_wind_file worker
+* collect_weather 18
 * download_weather 12
 Continued getting daily borg backups restarted:
 * cron-daily-backup/ramp-up/daily-results-backup.sh:
-  * /results/SalishSea/climatology
   * /results/forcing
-
   * /results/observations
   * /results/SalishSea/climatology
   * /results/nowcast-sys/figures
+
   * /results/SalishSea/nowcast-agrif
+* Added /opp/observations to daily-opp-backup.sh.
 ONC USDDL CTD returned to service on 16Sep19.
+Worked on characterizing gcc-9.1.0 fail on sockeye and submitted support request.
 (SalishSea)
+
+Birgit
+
+Started working on getting wwatch3 running on cedar:
+* Build:
+  * ref: https://salishsea-nowcast.readthedocs.io/en/latest/deployment/arbutus_cloud.html#build-wavewatch-iii
+  * cd /project/def-allen/dlatorne/MIDOSS/
+  * hg clone ssh://hg@bitbucket.org/salishsea/salishseawaves SalishSeaWaves
+  * module load netcdf-fortran-mpi/4.4.4
+  * mkdir wwatch3-5.16
+  * cd wwatch3-5.16
+  * tar -xvzf /home/dlatorne/wwatch3.v5.16.tar.gz
+  * ./install_ww3_tar
+    * local install
+    * update settings:
+      * printer
+      * mpif90
+      * mpicc
+      * tmp
+      * save sources
+      * save listings
+  * export PATH=$PATH:/project/def-allen/dlatorne/MIDOSS/wwatch3-5.16/bin:/project/def-allen/dlatorne/MIDOSS/wwatch3-5.16/exe
+  * cd bin
+  * ln -sf comp.Intel comp && chmod +x comp.Intel
+  * ln -sf link.Intel link
+  * ln -sf /project/def-allen/dlatorne/MIDOSS/SalishSeaWaves/switch switch
+  * export WWATCH3_NETCDF=NC4
+  * export NETCDF_CONFIG=$(which nc-config)
+  * cd ../work
+  * w3_make
+    * Failed::
+        Processing ww3_grid
+        ---------------------
+        ad3 : processing constants
+        ad3 : processing w3servmd
+        ad3 : processing w3gsrumd
+        ad3 : processing w3gdatmd
+        ad3 : processing w3odatmd
+        ad3 : processing w3idatmd
+        ad3 : processing w3adatmd
+        ad3 : processing w3dispmd
+        ad3 : processing w3src4md
+        ad3 : processing w3snl1md
+        ad3 : processing w3iogrmd
+        ad3 : processing w3arrymd
+        ad3 : processing w3triamd
+        ad3 : processing ww3_grid
+        ad3 : processing w3timemd
+        ad3 : processing w3wdatmd
+              Linking ww3_grid
+              *** error in linking ***
+
+
+        w3servmd.o: In function `w3servmd_mp_extcde_':
+        w3servmd.F90:(.text+0x6ef): undefined reference to `mpi_initialized_'
+        w3servmd.F90:(.text+0x70c): undefined reference to `mpi_barrier_'
+        w3servmd.F90:(.text+0x717): undefined reference to `mpi_finalize_'
+        w3servmd.F90:(.text+0x746): undefined reference to `mpi_abort_'
+
+        make: *** [makefile:22: /project/def-allen/dlatorne/MIDOSS/wwatch3-5.16/exe/ww3_grid] Error 1
+(MIDOSS)
 
 * get daily borg restarted
 
