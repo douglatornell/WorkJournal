@@ -5000,7 +5000,6 @@ EOAS machines were inaccessible for most of the morning, apparently due to acces
 Continued dec of cookiecutter-djl-pypkg project; uploaded it to Bitbucket.
 
 
-
 Thu 19-Sep-2019
 ^^^^^^^^^^^^^^^
 
@@ -5087,7 +5086,48 @@ Started working on getting wwatch3 running on cedar:
         make: *** [makefile:22: /project/def-allen/dlatorne/MIDOSS/wwatch3-5.16/exe/ww3_grid] Error 1
 (MIDOSS)
 
+
+Fri 20-Sep-2019
+^^^^^^^^^^^^^^^
+
+Continued getting daily borg backups restarted:
+* cron-daily-backup/ramp-up/daily-results-backup.sh:
+  * /results/SalishSea/nowcast-agrif
+(SalishSea)
+
 * get daily borg restarted
+
+Continued working on getting wwatch3 running on cedar:
+* Build:
+  * resolved link failure:
+    * change wwatch3.env to use mpifort and mpicc
+    * hack bin/comp.Intel and bin/link.Intel to change mpiifort to mpifort
+  * w3_clean only clean executables, not .o and .mod files
+  * w3_new cleans .o and .mod filesls
+(MIDOSS)
+
+Westgrid townhall:
+* Patrick Mann
+  * Digital Research Infrastructure (DRI)
+    * administers $572M federal money ($375M approved) announced in Spring 2018
+  * CEO Lindsay Sill is leaving
+  * WG & CC AGMs next week
+  * RAC will be over-subscribed
+    * open 24-Sep
+    * closes 7-Nov
+    * 5-point scoring
+    * mgmt plan required; HQP section integrated into mgmt plan
+    * 10 pg limit, down from 12 pgs
+  * $50M expansion investment installed in next 6 months
+* Ikenna Okpala - dev team
+  *
+* Alex Razoumov
+  * https://bit.ly/wg2019b
+
+Physio appt.
+
+See work journal.
+(Resilient-C)
 
 
 
