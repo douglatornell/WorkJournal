@@ -4997,7 +4997,7 @@ Continued getting daily borg backups restarted:
 
 EOAS machines were inaccessible for most of the morning, apparently due to access-race on /home
 
-Continued dec of cookiecutter-djl-pypkg project; uploaded it to Bitbucket.
+Continued dev of cookiecutter-djl-pypkg project; uploaded it to Bitbucket.
 
 
 Thu 19-Sep-2019
@@ -5128,6 +5128,68 @@ Physio appt.
 
 See work journal.
 (Resilient-C)
+
+
+Sat 21-Sep-2019
+^^^^^^^^^^^^^^^
+
+Vancouver to Parksville
+
+Refactored SalishSeaCmd to use new MOAD packaging layout.
+(MEOPAR)
+
+Continued working on getting wwatch3 running on cedar:
+Runs prep:
+* ref: https://salishsea-nowcast.readthedocs.io/en/latest/deployment/arbutus_cloud.html#wavewatch-runs-directories
+* mkdir /project/dlatorne/MIDOSS/wwatch3-runs
+* ln -s /project/def-allen/dlatorne/MIDOSS/SalishSeaWaves/ww3_grid_SoG.inp ww3_grid.inp
+* mkdir /project/dlatorne/MIDOSS/wwatch3-runs/grid
+* cd /project/dlatorne/MIDOSS/wwatch3-runs/grid
+* ln -s /project/def-allen/dlatorne/MIDOSS/SalishSeaWaves/SoG_BCgrid_00500m.bot
+* ln -s /project/def-allen/dlatorne/MIDOSS/SalishSeaWaves/SoG_BCgrid_00500m.msk
+* ww3_grid | tee ww3_grid.out
+* cp /scratch/allen/ww3/16nov17_tmp/*.inp /project/dlatorne/MIDOSS/wwatch3-runs/
+* cp /scratch/allen/ww3/16nov17_tmp/SoGWW3.sh /project/dlatorne/MIDOSS/wwatch3-runs/SoGWW3_template.sh
+* mkdir -p /scratch/dlatorne/MIDOSS/forcing/wwatch3/wind
+* mkdir -p /scratch/dlatorne/MIDOSS/forcing/wwatch3/current
+Tmp run dir from forcing that Susan built in Mar19:
+* mkdir /scratch/dlatorne/MIDOSS/wwatch3-runs/SoGww3_16nov17
+* ln -s /project/def-allen/SalishSea/forcing/wwatch3/current /scratch/dlatorne/MIDOSS/wwatch3-runs/SoGww3_16nov17
+* ln -s /project/def-allen/SalishSea/forcing/wwatch3/wind /scratch/dlatorne/MIDOSS/wwatch3-runs/SoGww3_16nov17
+* ln -s /home/dlatorne/project/dlatorne/MIDOSS/wwatch3-runs/mod_def.ww3 /scratch/dlatorne/MIDOSS/wwatch3-runs/SoGww3_16nov17
+* cp /home/dlatorne/project/dlatorne/MIDOSS/wwatch3-runs/*.inp /scratch/dlatorne/MIDOSS/wwatch3-runs/SoGww3_16nov17/
+* cp /home/dlatorne/project/dlatorne/MIDOSS/wwatch3-runs/SoGWW3_template.sh /scratch/dlatorne/MIDOSS/wwatch3-runs/SoGww3_16nov17/SoGWW3.sh
+* edit /scratch/dlatorne/MIDOSS/wwatch3-runs/SoGww3_16nov17/SoGWW3.sh
+
+* mychg='s/20171116/'$3'/g'
+* sed -i $mychg *.inp
+* mychg='s/20171117/'$4'/g'
+* sed -i $mychg *.inp
+* ln -s ../$1/restart001.ww3 restart.ww3
+
+(MIDOSS)
+
+
+Sun 22-Sep-2019
+^^^^^^^^^^^^^^^
+
+Continued working on getting wwatch3 running on cedar:
+* Finally figured out that no stderr/stdout in cedar tests was because $RESULTS_DIR needs to be created before job is sbatch-ed
+* Successfully ran 16no17 in <20min several times
+* Wrote MIDOSS docs for building wwatch3 on cedar.
+In discussion w/ Susan decided that we need a `WWatch3-Cmd` package extended from NEMO-Cmd that can:
+* prepare
+* run
+* both for date ranges so that we can make efficient use of 6hr-by-node queue
+* make ww3 wind forcing
+* make ww3 current forcing
+* all on cedar
+(MIDOSS)
+
+Continued dev of pkg dev docs template in cookiecutter-djl-pypkg project.
+
+
+Parksville to Vancouver
 
 
 
