@@ -5192,6 +5192,21 @@ Continued dev of pkg dev docs template in cookiecutter-djl-pypkg project.
 Parksville to Vancouver
 
 
+Tue 24-Sep-2019
+^^^^^^^^^^^^^^^
+
+Mtg w/ Rachael & Vicky re: wwatch3 pipeline.
+(MIDOSS)
+
+Updated host keys for graham; re-ran upload_forcing nowcast+ & turbidity manaully.
+(SalishSea)
+
+See work journal.
+(Resilient-C)
+
+
+
+
 
 Stack:
 * wwatch3 hindcast automation
