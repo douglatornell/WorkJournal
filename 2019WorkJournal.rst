@@ -5192,19 +5192,27 @@ Continued dev of pkg dev docs template in cookiecutter-djl-pypkg project.
 Parksville to Vancouver
 
 
-Tue 24-Sep-2019
+Week 39
+-------
+
+Mon 23-Sep-2019
 ^^^^^^^^^^^^^^^
 
-Mtg w/ Rachael & Vicky re: wwatch3 pipeline.
+Tested and wrote docs re: production of wwatch3 wind & current forcing files on salish for upload to cedar.
+* Set up SalishSeaNowcast dev env on salish as wwatch3-forcing:
+  * conda env create -f SalishSeaNowcast/env/environment-dev.yaml
+  * Added SalishSeaNowcast/config/wwatch3-forcing.yaml
+  * Tested make_ww3_wind_file and make_ww3_current_file for 2015-01-01
+  * Write MIDOSS docs for Vicky to generate 2015-2019 wwatch3 wind & current forcing files on salish to rsync to cedar
+* Created WWatch3-Cmd project from cookiecutter-djl-pypkg
 (MIDOSS)
 
-Updated host keys for graham; re-ran upload_forcing nowcast+ & turbidity manaully.
+SalishSeaCast team mtg; see whiteboard.
+Re-enabled ONC USDDL in SalishSeaNowcast config.
+Backfilled get_onc_ctd USDDL for 2019-09-{16..22}.
 (SalishSea)
 
-See work journal.
-(Resilient-C)
-
-
+Phys Ocgy seminar by Phil Austin re: Bayesian statistics and data science
 
 
 
