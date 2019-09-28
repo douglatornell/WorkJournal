@@ -5242,16 +5242,6 @@ See work journal.
 (Resilient-C)
 
 
-Wed 25-Sep-2019
-^^^^^^^^^^^^^^^
-
-Attended sockeye HPC allocation info mtg w/ Susan
-(SalishSea)
-
-See work journal.
-(Resilient-C)
-
-
 Thu 26-Sep-2019
 ^^^^^^^^^^^^^^^
 
