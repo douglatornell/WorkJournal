@@ -5242,6 +5242,41 @@ See work journal.
 (Resilient-C)
 
 
+Wed 25-Sep-2019
+^^^^^^^^^^^^^^^
+
+Attended sockeye HPC allocation info mtg w/ Susan
+(SalishSea)
+
+See work journal.
+(Resilient-C)
+
+
+Thu 26-Sep-2019
+^^^^^^^^^^^^^^^
+
+Physio appt.
+
+Bought a colour Hue build and hacked on colour/saturation/brightness transition for wake-up.
+
+See work journal.
+(Resilient-C)
+
+
+Fri 27-Sep-2019
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+Continued work on initialization of WWatch3-Cmd project.
+(MIDOSS)
+
+Climate strike rally at UBC, march from Broadway & Cambie to Georgia & Hamilton, rally at Georgia & Hamilton in front of CBC.
+
+
+
+
 
 
 
