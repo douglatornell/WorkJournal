@@ -5215,6 +5215,35 @@ Backfilled get_onc_ctd USDDL for 2019-09-{16..22}.
 Phys Ocgy seminar by Phil Austin re: Bayesian statistics and data science
 
 
+Tue 24-Sep-2019
+^^^^^^^^^^^^^^^
+
+Mtg w/ Rachael & Vicky re: wwatch3 pipeline.
+(MIDOSS)
+
+Updated host keys for graham; re-ran upload_forcing nowcast+ & turbidity manaully.
+(SalishSea)
+
+See work journal.
+(Resilient-C)
+
+
+Wed 25-Sep-2019
+^^^^^^^^^^^^^^^
+
+Uploaded patch of WWatch3-Cmd WIP to skookum.
+Diagnosed Racheal's latest MOHID run failure issue on cedar; walltime expired.
+(MIDOSS)
+
+Attended sockeye resource allocation mtg; see notebook.
+(SalishSea)
+
+See work journal.
+(Resilient-C)
+
+
+
+
 
 Stack:
 * wwatch3 hindcast automation
