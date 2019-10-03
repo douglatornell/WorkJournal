@@ -5018,8 +5018,6 @@ Continued getting daily borg backups restarted:
   * /results/observations
   * /results/SalishSea/climatology
   * /results/nowcast-sys/figures
-
-  * /results/SalishSea/nowcast-agrif
 * Added /opp/observations to daily-opp-backup.sh.
 ONC USDDL CTD returned to service on 16Sep19.
 Worked on characterizing gcc-9.1.0 fail on sockeye and submitted support request.
@@ -5221,7 +5219,7 @@ Tue 24-Sep-2019
 Mtg w/ Rachael & Vicky re: wwatch3 pipeline.
 (MIDOSS)
 
-Updated host keys for graham; re-ran upload_forcing nowcast+ & turbidity manaully.
+Updated host keys for graham; re-ran upload_forcing nowcast+ & turbidity manually.
 (SalishSea)
 
 See work journal.
@@ -5249,6 +5247,10 @@ Physio appt.
 
 Bought a colour Hue build and hacked on colour/saturation/brightness transition for wake-up.
 
+Worked on gemlam 15jul08 missing TD, TT, UU & VV variables:
+* figures out that the issue exists from 15-24jul08 (maybe really 15-22, because 25jul08 works)
+(SalishSea)
+
 See work journal.
 (Resilient-C)
 
@@ -5265,8 +5267,94 @@ Continued work on initialization of WWatch3-Cmd project.
 Climate strike rally at UBC, march from Broadway & Cambie to Georgia & Hamilton, rally at Georgia & Hamilton in front of CBC.
 
 
+Sat 28-Sep-2019
+^^^^^^^^^^^^^^^
+
+Vancouver to Brampton
+
+Continued dev of WWatch3-Cmd project.
+(MIDOSS)
 
 
+Sun 29-Sep-2019
+^^^^^^^^^^^^^^^
+
+Brampton
+
+Continued dev of WWatch3-Cmd project.
+(MIDOSS)
+
+Dinner w/ Jamie & Lin, Scott & Marie, Linda & Steve, John & Gwenyth
+
+
+October
+=======
+
+Week 40
+-------
+
+Mon 30-Sep-2019
+^^^^^^^^^^^^^^^
+
+Brampton
+
+Continued dev of WWatch3-Cmd project.
+Set up https://wwatch3-cmd.readthedocs.io/en/latest/
+(MIDOSS)
+
+Started nowcast-agrif recovery from 25sep19 storage/network failure on orcinus:
+* upload_forcing nowcast+ 2019-09-25
+* upload_forcing turbidity 2019-09-25 --debug
+* make_forcing_links nowcast-agrif 2019-09-25
+* make_forcing_links nowcast-agrif 2019-09-26
+* make_forcing_links nowcast-agrif 2019-09-27
+* make_forcing_links nowcast-agrif 2019-09-28
+
+* make_forcing_links nowcast-agrif 2019-09-29
+* make_forcing_links nowcast-agrif 2019-09-30
+(SalishSea)
+
+
+Tue 1-Oct-2019
+^^^^^^^^^^^^^^
+
+Brampton to Vancouver
+
+Continued dev of WWatch3-Cmd project.
+(MIDOSS)
+
+collect_weather 18 never finished; it stored no files in hours 013 though 018, 021, 022 & 024, and 6 files in hour 019, probably due to EOAS /home file system issues; recovery starting at ~07:30:
+* kill collect_weather 18
+* remove /results/forcing/atmospheric/GEM2.5/GRIB/20190930/18
+* download_weather 18
+* download_weather 00
+* download_weather 06 and wait for forecast runs to complete
+* collect_weather 18
+* download_weather 12
+Updated host key for cedar; re-ran upload_forcing forecast2 manually.
+(SalishSea)
+
+
+Wed 2-Oct-2019
+^^^^^^^^^^^^^^
+
+
+Resumed gemlam file generation:
+* 25jul08 to 31jul08
+Worked on gemlam 15jul08 to 24jul08 missing TD, TT, UU & VV variables issue w/ Susan:
+* cstrpn2cdf is complaining that it can't find calendars for those vars
+* after more characterization of the problem, Susan sent email to Fred Dupont for help
+Updated host key for cedar; re-ran upload_forcing manually for missed uploads.
+Finished nowcast-agrif recovery from 25sep19 storage/network failure on orcinus:
+* make_forcing_links nowcast-agrif 2019-09-29
+* make_forcing_links nowcast-agrif 2019-09-30
+* make_forcing_links nowcast-agrif 2019-10-01
+* make_forcing_links nowcast-agrif 2019-10-02
+(SalishSea)
+
+Resolved Vicky's problem with make_ww3_*_file workers trying to use nowcast-green.201806; it's due to required nowcast symlink; changed symlink to point to 201812.
+Continued dev of WWatch3-Cmd project; started run sub-command.
+(MIDOSS)
 
 
 
