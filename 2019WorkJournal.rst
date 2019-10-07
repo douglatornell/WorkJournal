@@ -5338,7 +5338,6 @@ Updated host key for cedar; re-ran upload_forcing forecast2 manually.
 Wed 2-Oct-2019
 ^^^^^^^^^^^^^^
 
-
 Resumed gemlam file generation:
 * 25jul08 to 31jul08
 Worked on gemlam 15jul08 to 24jul08 missing TD, TT, UU & VV variables issue w/ Susan:
@@ -5355,6 +5354,68 @@ Finished nowcast-agrif recovery from 25sep19 storage/network failure on orcinus:
 Resolved Vicky's problem with make_ww3_*_file workers trying to use nowcast-green.201806; it's due to required nowcast symlink; changed symlink to point to 201812.
 Continued dev of WWatch3-Cmd project; started run sub-command.
 (MIDOSS)
+
+
+Thu 3-Oct-2019
+^^^^^^^^^^^^^^
+
+Physio appt.
+
+Continued gemlam file generation:
+* 01aug08 to 30sep08
+(SalishSea)
+
+See work journal.
+(Resilient-C)
+
+
+Fri 4-Oct-2019
+^^^^^^^^^^^^^^
+
+Worked on gemlam 15jul08 to 24jul08 missing TD, TT, UU & VV variables issue:
+* confirmed that rot is 15jul08 through 22jul08; moved those bz2 files to corrupt/
+* ran rpn-to-gemlam 2008-07-14 2008-07-23 to try to interpolate all vars; failed
+* modified code to handle >1 missing day
+* success!!
+Continued gemlam file generation:
+* 01oct08 to 30nov08
+Resumed work on getting borg backups restarted; looks like to only way to delete nowcast-green/ and nowcast-agrif/ from backups is to delete results/ archives prior to backups resumption on 22sep19; discuss w/ Susan
+(SalishSea)
+
+See work journal.
+(Resilient-C)
+
+
+Sat 5-Oct-2019
+^^^^^^^^^^^^^^
+
+Continued gemlam file generation:
+* 01dec08 to 28feb09
+(SalishSea)
+
+Email to Nathan Grivault at ONC re: FUNWAVE-TVD tsunami model on arbutus (send on Monday).
+(Prediction Core)
+
+Installed front PDW mudguard on Tommy; need longer stay for rear.
+
+Created HueBot project on Bitbucket.
+
+Mari Boine concert at Chan
+
+
+Sun 6-Oct-2019
+^^^^^^^^^^^^^^
+
+Continued gemlam file generation:
+* 01mar09 to 31mar09
+(SalishSea)
+
+Hacked on HueBot with qhue pkg and got requests for wake-up transition from dim blue to moderate brightness daylight white sorted out; also figures out how to load schedules into bridge.
+
+See work journal.
+(Resilient-C)
+
+
 
 
 
