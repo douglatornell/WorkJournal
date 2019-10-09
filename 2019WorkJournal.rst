@@ -5407,14 +5407,62 @@ Sun 6-Oct-2019
 ^^^^^^^^^^^^^^
 
 Continued gemlam file generation:
-* 01mar09 to 31mar09
+* 01mar09 to 30apr09
 (SalishSea)
 
 Hacked on HueBot with qhue pkg and got requests for wake-up transition from dim blue to moderate brightness daylight white sorted out; also figures out how to load schedules into bridge.
 
-See work journal.
-(Resilient-C)
 
+Week 41
+-------
+
+Mon 7-Oct-2019
+^^^^^^^^^^^^^^
+
+Continued gemlam file generation:
+* 01may09 to 30jun09
+Started updating ERDDAP index pg re: upcoming change to V19-05.
+SalishSeaCast team mtg; see whiteboard.
+Disabled download_results for hindcast runs due to space crunch on /results.
+Ordered 2x8Tb archive drives (#9 & #10),
+(SalishSea)
+
+Continued dev of WWatch3-Cmd run sub-command.
+(MIDOSS)
+
+Phys Ocgy seminar by Saurav.
+
+
+Tue 8-Oct-2019
+^^^^^^^^^^^^^^
+
+Continued gemlam file generation:
+* 01jul09 to 30sep09
+Discussed expansion of /results2 RAID w/ Charles, and gave him 14Tb drive to do it with.
+Discovered that wwatch3 nowcast has been failing since 04oct19 due to stuck make_ww3_wind_file; backfilling:
+* restart log_aggregator
+* make_ww3_wind_file forecast 2019-10-04
+* make_ww3_current_file forecast 2019-10-04
+* make_ww3_wind_file forecast 2019-10-05
+* make_ww3_current_file forecast 2019-10-05
+* make_ww3_wind_file forecast 2019-10-06
+* make_ww3_current_file forecast 2019-10-06
+* make_ww3_wind_file forecast 2019-10-07
+* make_ww3_current_file forecast 2019-10-07
+
+* make_ww3_wind_file forecast 2019-10-08
+* make_ww3_current_file forecast 2019-10-08
+Fixed bug in watch_ww3 progress reporting re: expected numbers of time steps for different run types used to calculate completion fraction.
+Started deleting borg /results archives that contain nowcast-green to make room for nowcast-green.201812 backups.
+(SalishSea)
+
+Met w/ Vicky re: things to do:
+* MC files via Pandas
+* scaling study on wwatch3 on cedar/graham
+* docs for VVL test run
+* model evaluation of hindcast.201905
+Continued dev of WWatch3-Cmd run sub-command; tested on cedar for 01jan15 run.
+(MIDOSS)
 
 
 
