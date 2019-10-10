@@ -5449,7 +5449,6 @@ Discovered that wwatch3 nowcast has been failing since 04oct19 due to stuck make
 * make_ww3_current_file forecast 2019-10-06
 * make_ww3_wind_file forecast 2019-10-07
 * make_ww3_current_file forecast 2019-10-07
-
 * make_ww3_wind_file forecast 2019-10-08
 * make_ww3_current_file forecast 2019-10-08
 Fixed bug in watch_ww3 progress reporting re: expected numbers of time steps for different run types used to calculate completion fraction.
@@ -5461,9 +5460,63 @@ Met w/ Vicky re: things to do:
 * scaling study on wwatch3 on cedar/graham
 * docs for VVL test run
 * model evaluation of hindcast.201905
-Continued dev of WWatch3-Cmd run sub-command; tested on cedar for 01jan15 run.
+Continued dev of WWatch3-Cmd run sub-command; tested on cedar for 01-03jan15 runs.
 (MIDOSS)
 
+
+Wed 9-Oct-2019
+^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+Messed around with dask.delayed and dask.distributed.Client re: bunzip2 on GEMLAM files; client.map() and client.gather() seem to show gains over sequential ops at >=4 files concurrently; unclear whether thread or process pool is best.
+Continued gemlam file generation:
+* 01oct09 to 31dec09
+(SalishSea)
+
+Got wwatch3 run to the point where Vicky should be able to use it for single day runs and scaling test.
+(MIDOSS)
+
+Sharcnet Webinar: Intro to Scalable Computing w/ Dask in Python:
+* Jinhui Qin, HPC Analyst, Western
+* task-graph framework for parallel operations
+* ComputeCanada now recommends usinjg venv
+* parallelize w/ dask.delayed:
+  * delayed_func = dask.delayed(func)(args)
+  * dalayed_func.compute()
+  * graphviz pkg provides viz via delayed_func.visualize(); need both base lib & Python wrappers
+* choosing schedulers:
+  * threaded, multiproc, single thread, distributed
+  * default is threaded; like .compute(scheduler="threads")
+    * works well for code that spends a lot of time not executing Python due to GIL; e.g. io, compiled C like NumPy etal
+  * proceses; child processes; .compute(scheduler="processes")
+    * good for Python code, but incurs interp proc startup
+  * single thread; sequential for debugging
+  * distributed; pool of worker processes; prior setup required
+    * dask.distributed
+    * deploy dask cluster
+      * launch dask-scheduler
+      * dask-worker
+      * manual example:
+        * dask-scheduler; returns tcp://ip:port
+        * dask-worker tcp://ip:port
+    * dask-mpi package for MPI deployment on CC clusters:
+      * srun dask-mpi scheduler_file.json --local-directory $SLURM_TEMPDIR
+      * dask.distributed.Client
+      * client.submit(), client.map(), client.compute(); return future objects; result = client.gather(future)
+* dask APIs:
+  * NumPy, Pandas Dataframe
+  * dask arrays for scaling NumPy array ops:
+    * parallel (all cores), larger than memory, blocked algorithms
+    * processing HDF5 w/ h5py
+    * dask.array provides subset of numpy.array
+      * dask.array.from_array(numpy.array, chunks=(,))
+      * dask.array operations are lazy; add to graph
+      * .compute() to calc result
+      * chunking is key to managing memory use!!
+      * dask.array best-practices web page
+* examples are from dask tutorials
 
 
 
