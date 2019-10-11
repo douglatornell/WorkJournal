@@ -5519,6 +5519,24 @@ Sharcnet Webinar: Intro to Scalable Computing w/ Dask in Python:
 * examples are from dask tutorials
 
 
+Thu 10-Oct-2019
+^^^^^^^^^^^^^^^
+
+Continued gemlam file generation:
+* 01jan10 to 28feb10
+Released SalishSeaCmd-19.2 before starting work on new split-results sub-command.
+Created /backup/borg/results2 repository with:
+  sudo borg init --encryption=none /backup/borg/results2
+Started backup of /results2/SalishSea/nowcast-green.201812/ via new daily-results2-backup.sh script.
+Helped Susan w/ sockeye allocation application.
+(SalishSea)
+
+EOAS colloquium re: metamorphism & plate tectonics
+
+TODO:
+SalishSeaCmd: hg backout --edit -r a142274116d123e3c80655ef5acfd19029c0267c re: gcc-9.1.0 and gcc-5.4.0 on sockeye
+
+
 
 Stack:
 * wwatch3 hindcast automation
