@@ -5533,17 +5533,90 @@ Helped Susan w/ sockeye allocation application.
 
 EOAS colloquium re: metamorphism & plate tectonics
 
-TODO:
-SalishSeaCmd: hg backout --edit -r a142274116d123e3c80655ef5acfd19029c0267c re: gcc-9.1.0 and gcc-5.4.0 on sockeye
+
+Fri 11-Oct-2019
+^^^^^^^^^^^^^^^
+
+Continued gemlam file generation:
+* 01mar10 to 24mar10
+* Interpolation of missing FB variable for 25-30mar10 failed because 01apr10 hourly files were unavailable; ran 01-24mar10
+(SalishSea)
+
+
+Sat 12-Oct-2019
+^^^^^^^^^^^^^^^
+
+Vancouver to Parksville
+
+Read about pytest.monkeypatch on the ferry.
+
+Continued gemlam file generation:
+* worked on 25-30mar10 missing FB variable issue in tmp-rpn-to-gem-lam/ space; ran 23mar10-02apr10 in debug mode and got sucessful interpolation
+SalishSeaCmd: hg backout --edit -r a142274116 re: gcc-9.1.0 and gcc-5.4.0 on sockeye
+Successfully tested `salishsea split-results` on optimum:06jun19/.
+(SalishSea)
+
+
+Sun 13-Oct-2019
+^^^^^^^^^^^^^^^
+
+Cooked Thanksgiving dinner w/ Susan & Syliva in Parksville
+
+Refactored WWatch3-Cmd package to use pytest.monkeypatch instead of unittest.mock; also added integration tests to confirm structure and content of cookiecutter-generated tmp run dir.
+(MIDOSS)
+
+
+Week 42
+-------
+
+Mon 14-Oct-2019
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Thanksgiving
+
+Continued dev of WWatch3-Cmd:
+* Fixed bug in integration tests re: start date and arrow.now().
+* Moved walltime from YAML file to command-line arg
+* Started dev of multi-day batch runs
+(MIDOSS)
+
+nowcast-agrif timeed out on orcinus
+(SalishSea)
+
+Parksville to Vancouver
+
+
+Tue 15-Oct-2019
+^^^^^^^^^^^^^^^
+
+nowcast-green stalled on launch; recovery:
+* killed XIOS
+* killed watch_NEM
+* re-ran make_forcing_links manually
+Backfilled nowcast-agrif:
+* make_forcing_links nowcast-agrif 2019-10-14
+
+* make_forcing_links nowcast-agrif 2019-10-15
+* turns out that failure was due to missing 14oct19 atmospheric forcing file
+Confirmed that data flow from ONC USDDL CTD stopped again on 10Oct19.
+Charles unexpectedly rebooted salish as part of /results2 RAID & partition expansion; I was only expecting /results2 to be un-moutned for a few hours.
+(SalishSea)
+
+Email discussion w/ Michael about surface currents image loops not working; turns out it is due to the change in Arrow.range() from returneind a list to returning a generator. He also found a bug in the rtd environment description file name.
+That led to another build bug due to an ImportError on sentry_sdk; fixed.
+(salishsea-site)
+
+Contineud dev of wwatch3 run sub-command for multi-day batch runs.
+(MIDOSS)
 
 
 
 Stack:
+* release NEMO_Nowcast 19.2; change from circus to supervisor
+* make nemo_nowcast.cli._arrow_date() public because it is used in split_results worker
 * wwatch3 hindcast automation
 * wwatch3 run success confirmation
 * fix warnings in figure modules
-* release NEMO_Nowcast 19.2; change from circus to supervisor
-* make nemo_nowcast.cli._arrow_date() public because it is used in split_results worker
 * add hindcast deployment to SalishSeaNowcast docs
 * Elise's notebooks into Sphinx
 * fix get_vfpa_hadcp MMSI AttributeError issue
