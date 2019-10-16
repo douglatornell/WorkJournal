@@ -5542,6 +5542,9 @@ Continued gemlam file generation:
 * Interpolation of missing FB variable for 25-30mar10 failed because 01apr10 hourly files were unavailable; ran 01-24mar10
 (SalishSea)
 
+* missing solar (FB) from 25mar10 through 30mar10 requires special handling
+Finished dev and pushed `salishsea split-results` sub-command; needs a real world test.
+(SalishSea)
 
 Sat 12-Oct-2019
 ^^^^^^^^^^^^^^^
