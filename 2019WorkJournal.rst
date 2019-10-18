@@ -5539,9 +5539,6 @@ Fri 11-Oct-2019
 
 Continued gemlam file generation:
 * 01mar10 to 24mar10
-* Interpolation of missing FB variable for 25-30mar10 failed because 01apr10 hourly files were unavailable; ran 01-24mar10
-(SalishSea)
-
 * missing solar (FB) from 25mar10 through 30mar10 requires special handling
 Finished dev and pushed `salishsea split-results` sub-command; needs a real world test.
 (SalishSea)
@@ -5611,6 +5608,70 @@ That led to another build bug due to an ImportError on sentry_sdk; fixed.
 
 Contineud dev of wwatch3 run sub-command for multi-day batch runs.
 (MIDOSS)
+
+
+Wed 16-Oct-2019
+^^^^^^^^^^^^^^^
+
+Updated Mercurial on kudu to 5.1.2+2-c5dc122fdc2b:
+* conda activate hg-dev
+* updated hg-dev env
+* cd hg-stable
+* hg pull
+* hg update -r tip
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
+Learned about and experimented with heptapod on kudu:
+* initial container run attempt with ssh service on port 2222:
+    sudo docker run --detach \
+      --hostname kudu \
+      --publish 80:80 --publish 2222:22 \
+      --name heptapod \
+      --volume /media/doug/warehouse/srv/gitlab/config:/etc/gitlab \
+      --volume /media/doug/warehouse/srv/gitlab/logs:/var/log/gitlab \
+      --volume /media/doug/warehouse/srv/gitlab/data:/var/opt/gitlab \
+      octobus/heptapod:latest
+* couldn't get http to run on anything other than port 80 (unicorn port already in use msgs in log)
+* edit config in container to set ports with:
+    sudo docker exec -it heptapod editor /etc/gitlab/gitlab.rb
+* get root shell in container with:
+    sudo docker exec -it heptapod /bin/bash
+
+Physio appt; Erin says I'm done unless I regress or plateau.
+
+Picked up 2x8Tb archive drives (#9 & #10),
+(SalishSea)
+
+Explored conversion/migration to git:
+* https://github.com/frej/fast-export
+* https://github.com/jeffwidman/bitbucket-issue-migration
+
+
+Thu 17-Oct-2019
+^^^^^^^^^^^^^^^
+
+collect_river_data for Fraser failed due to no 2019-10-16 observations in datamart csv file; recovery:
+* edited /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow to persist 2019-10-15 value to today
+* make_runoff_file
+upload_forcing orcinus nowcast+ failed; orcinus is not accepting network connections; recovered by 10:15.
+(SalishSea)
+
+Replied to email from Johannes about running wwatch3 on compute canada.
+(Prediction Core)
+
+See work journal.
+(Resilient-C)
+
+Reviewed Étienne's randopony theme update pull request (2.5h)
+
+
+Fri 18-Oct-2019
+^^^^^^^^^^^^^^^
+
+Formatted 2x8Tb archive drives (#9 & #10),
+(SalishSea)
+
 
 
 
