@@ -5543,6 +5543,7 @@ Continued gemlam file generation:
 Finished dev and pushed `salishsea split-results` sub-command; needs a real world test.
 (SalishSea)
 
+
 Sat 12-Oct-2019
 ^^^^^^^^^^^^^^^
 
@@ -5559,6 +5560,10 @@ Successfully tested `salishsea split-results` on optimum:06jun19/.
 
 Sun 13-Oct-2019
 ^^^^^^^^^^^^^^^
+
+Continued gemlam file generation:
+* 03apr10 to 30apr10
+(SalishSea)
 
 Cooked Thanksgiving dinner w/ Susan & Syliva in Parksville
 
@@ -5580,7 +5585,9 @@ Continued dev of WWatch3-Cmd:
 * Started dev of multi-day batch runs
 (MIDOSS)
 
-nowcast-agrif timeed out on orcinus
+Continued gemlam file generation:
+* 01may10 to 30jun10
+nowcast-agrif timed out on orcinus
 (SalishSea)
 
 Parksville to Vancouver
@@ -5595,7 +5602,6 @@ nowcast-green stalled on launch; recovery:
 * re-ran make_forcing_links manually
 Backfilled nowcast-agrif:
 * make_forcing_links nowcast-agrif 2019-10-14
-
 * make_forcing_links nowcast-agrif 2019-10-15
 * turns out that failure was due to missing 14oct19 atmospheric forcing file
 Confirmed that data flow from ONC USDDL CTD stopped again on 10Oct19.
@@ -5606,7 +5612,7 @@ Email discussion w/ Michael about surface currents image loops not working; turn
 That led to another build bug due to an ImportError on sentry_sdk; fixed.
 (salishsea-site)
 
-Contineud dev of wwatch3 run sub-command for multi-day batch runs.
+Continued dev of wwatch3 run sub-command for multi-day batch runs.
 (MIDOSS)
 
 
@@ -5669,9 +5675,41 @@ Reviewed Étienne's randopony theme update pull request (2.5h)
 Fri 18-Oct-2019
 ^^^^^^^^^^^^^^^
 
-Formatted 2x8Tb archive drives (#9 & #10),
+Formatted 2x8Tb archive drives (#9 & #10).
+2nd reboot of salish re: expansion of /results2 RAID.
+The whole process to expand a RAID with a new 14Tb drive requires 2 reboots and about 6 days:
+* install physical drive
+* wait ~3 days for RAID controller to assimilate physical drive
+* reboot to allow OS to recognize logical storage
+* wait ~3 days for consistency check of expansion
+* reboot with file system unmounted
+* wait ~1 hour with no users for partition expansion
+* mount expanded file system
+Resumed gemlam file generation:
+* 01jul10 to 31jul10
 (SalishSea)
 
+Continued dev of wwatch3 run sub-command for multi-day batch runs.
+(MIDOSS)
+
+Started new tmux gemlam session on salish:
+  tmux  new -s gemlam
+  tmux attach -t gemlam
+
+Got Charles to order 1x16Tb drive to add to storage chassis as /backup2.
+Warranty replacement 14Tb drive will become my new cold spare.
+/backup is presently 3x6Tb drives in a RAID0 in the salish chassis
+/SalishSeaCast is a 110Gb SSD in the storage chassis; plan to use 100Gb of /backup2 for /SalishSeaCast2 to free up bay that SSD is in, leaving 4 free bays in storage chassis.
+Deleted incomplete archive from /backup/borg/results2.
+
+Updated Mercurial on kudu to 5.1.2+2-c5dc122fdc2b:
+* conda activate hg-dev
+* updated hg-dev env
+* cd hg-stable
+* hg pull
+* hg update -r tip
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
 
 
 
