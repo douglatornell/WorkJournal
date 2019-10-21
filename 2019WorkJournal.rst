@@ -5712,17 +5712,52 @@ Updated Mercurial on kudu to 5.1.2+2-c5dc122fdc2b:
 * sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
 
 
+Sat 19-Oct-2019
+^^^^^^^^^^^^^^^
+
+Posted squeue aliases on #computecanada channel.
+Found https://coderwall.com/p/_s_xda/fix-ssh-agent-in-reattached-tmux-session-shells and added fixtmuxssh() to my salish:.bashrc
+
+Continued gemlam file generation:
+* 01aug10 to 31oct10
+Added daily job to salish crontab to delete empty stderr & stdout files from nowcast-dev jobs:
+  43 0   *  *   *     find /home/dlatorne -maxdepth 1 -name "*nowcast-dev.[eo]*" -delete
+(SalishSea)
+
+Continued getting daily borg backups restarted:
+* updated and ran cron-daily-backup/ramp-up/daily-data-backup.sh
+
+Continued dev of wwatch3 run sub-command for multi-day batch runs.
+(MIDOSS)
+
+
+Sun 20-Oct-2019
+^^^^^^^^^^^^^^^
+
+Discussed model results and backup storage re-organization w/ Susan.
+Continued gemlam file generation:
+* 01nov10 to 31dec10
+(SalishSea)
+
+Continued dev of wwatch3 run sub-command for multi-day batch runs:
+* ran 07-08jan15 as a 2 day run
+* queued 09-12jan15
+(MIDOSS)
+
+
+
 
 Stack:
+* add git repo revision recording to NEMO-Cmd
 * release NEMO_Nowcast 19.2; change from circus to supervisor
 * make nemo_nowcast.cli._arrow_date() public because it is used in split_results worker
-* wwatch3 hindcast automation
+* create NEMO_Nowcast.workers.spotter to monitor and optionally kill workers that tend to get stuck; initial use cases: collect_weather, make_ww3_wind_file
 * wwatch3 run success confirmation
 * fix warnings in figure modules
 * add hindcast deployment to SalishSeaNowcast docs
-* Elise's notebooks into Sphinx
 * fix get_vfpa_hadcp MMSI AttributeError issue
 * debug gemlam interpolation
+* Elise's notebooks into Sphinx
 
 * hdf5 prep into MOHID-cmd
 
@@ -5737,6 +5772,7 @@ Stack:
 * change SADA workspace to SalishSeaCast; create new SADA workspace
 * modernize salishsea-site repo; release 19.1
 * close inactive branches in SalishSeaNowcast
+* wwatch3 hindcast automation
 
 
 
