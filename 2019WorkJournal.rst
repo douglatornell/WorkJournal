@@ -5739,9 +5739,9 @@ Continued gemlam file generation:
 * 01nov10 to 31dec10
 (SalishSea)
 
-Continued dev of wwatch3 run sub-command for multi-day batch runs:
+Finished dev of wwatch3 run sub-command for multi-day batch runs:
 * ran 07-08jan15 as a 2 day run
-* queued 09-12jan15
+* ran 08-12jan15 as a 5 day run
 (MIDOSS)
 
 
