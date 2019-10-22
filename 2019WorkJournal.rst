@@ -5736,13 +5736,31 @@ Sun 20-Oct-2019
 
 Discussed model results and backup storage re-organization w/ Susan.
 Continued gemlam file generation:
-* 01nov10 to 31dec10
+* 01nov10 to 31jan11
 (SalishSea)
 
 Finished dev of wwatch3 run sub-command for multi-day batch runs:
 * ran 07-08jan15 as a 2 day run
 * ran 08-12jan15 as a 5 day run
 (MIDOSS)
+
+
+Week 43
+~~~~~~~
+
+Mon 21-Oct-2019
+^^^^^^^^^^^^^^^
+
+manager got killed and restarted several times around 04:14; something to do with wwatch3/forecast2.
+HRDPS didn't start appearing until ~09:51
+Continued gemlam file generation:
+* 01feb11 to 28feb11
+SalishSeaCast team mtg; see whiteboard.
+(SalishSea)
+
+Updated index page re: coming change to V19-05; asked Susan, Elise & Tereza for review.
+Tested V19-05 dataset with a huge (5 year) gap in it; ERDDAP doesn't choke.
+(ERDDAP)
 
 
 
