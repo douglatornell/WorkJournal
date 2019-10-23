@@ -5763,6 +5763,24 @@ Tested V19-05 dataset with a huge (5 year) gap in it; ERDDAP doesn't choke.
 (ERDDAP)
 
 
+Tue 22-Oct-2019
+^^^^^^^^^^^^^^^
+
+Discovered that make_ww3_current_file 2019-10-21 got stuck, so no wwatch3/21oct19 runs; recovery:
+* kill make_ww3_current_file
+* restart log_aggregator
+* let automation run [now|fore]cast/22oct19 from calm initial state
+* delete [now|fore]cast/22oct19
+* make_ww3_wind_file forecast 2019-10-21
+* make_ww3_current_file forecast 2019-10-21
+* make_ww3_wind_file forecast 2019-10-22
+* make_ww3_current_file forecast 2019-10-22
+Explored gitpython pkg re: adding git repo revision recording to NEMO-Cmd; see paper notes.
+(SalishSea)
+
+borg backup on niko failed in prune stage due to missing object; need to run borg check -v, and probably borg check --repair -v.
+
+
 
 
 Stack:
