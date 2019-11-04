@@ -5766,6 +5766,7 @@ Tested V19-05 dataset with a huge (5 year) gap in it; ERDDAP doesn't choke.
 Tue 22-Oct-2019
 ^^^^^^^^^^^^^^^
 
+Continued gemlam file generation.
 Discovered that make_ww3_current_file 2019-10-21 got stuck, so no wwatch3/21oct19 runs; recovery:
 * kill make_ww3_current_file
 * restart log_aggregator
@@ -5781,10 +5782,126 @@ Explored gitpython pkg re: adding git repo revision recording to NEMO-Cmd; see p
 borg backup on niko failed in prune stage due to missing object; need to run borg check -v, and probably borg check --repair -v.
 
 
+Wed 23-Oct-2019
+^^^^^^^^^^^^^^^
+
+Vancouver to Brampton
+
+Continued gemlam file generation.
+Started adding git repo revision recording to NEMO-Cmd via gitpython.
+(SalishSea)
+
+
+Thu 24-Oct-2019
+^^^^^^^^^^^^^^^
+
+Brampton
+
+Continued gemlam file generation.
+Continued adding git repo revision recording to NEMO-Cmd via gitpython.
+(SalishSea)
+
+
+Fri 25-Oct-2019
+^^^^^^^^^^^^^^^
+
+Brampton
+
+Continued gemlam file generation.
+Finished adding git repo revision recording to NEMO-Cmd via gitpython.
+Started adding unit tests for nemo_cmd.get_hg_revisions() via pytest.monkeypatch.
+(SalishSea)
+
+Explored the idea of pulling code from analysis-ashutosh/scripts/make-hdf5/ into a new package, maybe MOHID_HDF5_Forcing.
+(MIDOSS)
+
+
+Sat 26-Oct-2019
+^^^^^^^^^^^^^^^
+
+Brampton
+
+Continued gemlam file generation.
+06 weather was slow to download, but patience and collect_weather did their jobs; 12 weather was also slow.
+Finished adding unit tests for nemo_cmd.get_hg_revisions() via pytest.monkeypatch.
+Updated SalishSeaCmd re: gitpython as a dependency.
+Discovered that wwatch3 figures were showing only 22oc19; pretty sure I messed things up by leaving 22oct19.aside/ directories in nowcast/ and forecast/ trees when I last backfilled; hoping that things will sort out after today's [now|fore]cast runs; later discovered that wwatch3 had been failing since 23oct19 due to stuck make_ww3_wind_file; started backfilling.
+Updated SalishSeaNowcast re: gitpython as a dependency.
+Worked on cleaning up uncommitted hacks in SalishSeaNowcast: hindcast storage location, update split_results to handle multiple host locations for hindcast downloads.
+Re-enabled downloading and splitting of hindcast run results from optimum.
+(SalishSea)
+
+
+Sun 27-Oct-2019
+^^^^^^^^^^^^^^^
+
+Brampton
+
+Continued gemlam file generation.
+Figured out how to replace unittest.mock.Mock for NEMO_Nowcast.NowcastWorker with a pytest monkeypatch mock class.
+(SalishSea)
+
+
+Week 44
+-------
+
+Mon 28-Oct-2019
+^^^^^^^^^^^^^^^
+
+Brampton
+
+
+Tue 29-Oct-2019
+^^^^^^^^^^^^^^^
+
+Brampton
+
+
+Wed 30-Oct-2019
+^^^^^^^^^^^^^^^
+
+Brampton
+
+Refined nowcast worker monkeypatch mock into a generic fixture and a small, worker-specific part.
+(SalishSea)
+
+
+Thu 31-Oct-2019
+^^^^^^^^^^^^^^^
+
+Brampton
+
+
+Fri 1-Nov-2019
+^^^^^^^^^^^^^^
+
+Brampton to Vancouver
+
+Created cookiecutter-moad-pypkg from cookiecutter-djl-pypkg; MOAD cookiecutter has choices for copyright holder and Bitbucket team; repo is only on niko.
+Refactored SalishSeaNowcast next_workers unit tests to use pytest caplog & monkeypatch fixtures; started refactoring worker unit tests.
+(SalishSea)
+
+
+Sat 2-Nov-2019
+^^^^^^^^^^^^^^
+
+Successfully did `borg check --repair` on niko backup drive to recover from bad archive index error on purge.
+
+Continued refactoring SalishSeaNowcast unit tests to use pytest caplog and monkeypatch fixtures, and test suite mock_nowcast_worker fixture.
+(SalishSea)
+
+
+Sun 3-Nov-2019
+^^^^^^^^^^^^^^
+
+Installed rear mudguard on Tommy.
+
+Thanks to a tip about pipx in a blog post by Brett (https://snarky.ca/why-you-should-use-python-m-pip/), I installed black in a way in which it is isolated in a venv, but on my PATH by being in ~/.local/bin/black; that means I can make my pre-commit-hook.sh generic and get rid of all of my conda env specific .hghooks/ directories in my dotfiles/ repo.
+
+
 
 
 Stack:
-* add git repo revision recording to NEMO-Cmd
 * release NEMO_Nowcast 19.2; change from circus to supervisor
 * make nemo_nowcast.cli._arrow_date() public because it is used in split_results worker
 * create NEMO_Nowcast.workers.spotter to monitor and optionally kill workers that tend to get stuck; initial use cases: collect_weather, make_ww3_wind_file
@@ -5809,6 +5926,7 @@ Stack:
 * modernize salishsea-site repo; release 19.1
 * close inactive branches in SalishSeaNowcast
 * wwatch3 hindcast automation
+* add git repo revision recording to NEMO-Cmd
 
 
 
