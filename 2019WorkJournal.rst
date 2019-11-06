@@ -5899,6 +5899,59 @@ Installed rear mudguard on Tommy.
 Thanks to a tip about pipx in a blog post by Brett (https://snarky.ca/why-you-should-use-python-m-pip/), I installed black in a way in which it is isolated in a venv, but on my PATH by being in ~/.local/bin/black; that means I can make my pre-commit-hook.sh generic and get rid of all of my conda env specific .hghooks/ directories in my dotfiles/ repo.
 
 
+November
+========
+
+Week 45
+-------
+
+Mon 4-Nov-2019
+^^^^^^^^^^^^^^
+
+Installed cookiecutter via pipx on niko.
+
+Started adding unstagger() function to make-hdf5.py to avoid dependence on salishsea_tools; need to confirm why coordinates Ashu used are x & y instead of gridX & gridY.
+Learned how to run MOHID from Vicky; running on graham:
+* ran 01jun17-07-jun17 w/ 1200s time step in 2:18:43
+* changed to 1 thread, 3600s time step, 14000M memory & no waves output; eliminated threads msg in stdout, and waves output file; 2:33:13
+(MIDOSS)
+
+Investigated XMLSyntaxError from data_tools.get_chs_tides() that is killing make_plots publish forecast during data prep for Campbell River figure.
+(SalishSea)
+
+
+Tue 5-Nov-2019
+^^^^^^^^^^^^^^
+
+Continued MOHID tests on graham:
+* 1200s particle time step, fix echo of cleanup msgs; 2:13:15
+* 3600s particle time step, fix echo of cleanup msgs, only launch hdf5-to-netcdf4 if Lagrangian.hdf5 exists, don't preserve Lagrangian.hdf5 file; 00:57:01
+* 3600s particle time step, fix echo of cleanup msgs, don't preserve Lagrangian.hdf5 file, 14000M memory;
+Added notes to thread in #monte_carlo channel.
+Worked on setting up sokeye to run wwatch3 and MOHID:
+* add to .bash_profile:
+    PROJECT=/project/st-sallen1-1
+    SCRATCH=/scratch/st-sallen1-1
+* hack comp file:
+    -I$NETCDF_FORTRAN_ROOT/include
+* export LIBRARY_PATH=$LIBRARY_PATH:/arc/software/spack/opt/spack/linux-centos7-x86_64/gcc-5.4.0/libszip-2.1.1-wfoph2aumjxtmgvhwig33anzy3epyr2r/lib/
+* may need to add to LD_LIBRARY_PATH for runtime
+* module load py-pip/19.0.3-py3.7.3
+(MIDOSS)
+
+Confirmed that generic pre-commit hook that uses pipx installation of black works :-)
+
+Got new 16Tb drive mounted at /backup2 and /scratch2 (for new /SalishSeaCast).
+Charles gave me warranty replacement 14Tb drive to hold as cold spare.
+Created /backup2/borg/results2 repository with:
+  sudo borg init --encryption=none /backup2/borg/results2
+Created 2G emergency reserved space on /backup2/ so that we can delete it if necessary when something else fills /backup2:
+* sudo fallocate -l 2G /backup2/emergency_reserved_space
+(SalishSea)
+
+Charles says that Henryk is running a GitLab instance, and that UBC has a GitHub Enterprise license; Henryk may be able to run a Heptapod instance for us.
+
+
 
 
 Stack:
