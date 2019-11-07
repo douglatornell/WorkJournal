@@ -5926,7 +5926,7 @@ Tue 5-Nov-2019
 Continued MOHID tests on graham:
 * 1200s particle time step, fix echo of cleanup msgs; 2:13:15
 * 3600s particle time step, fix echo of cleanup msgs, only launch hdf5-to-netcdf4 if Lagrangian.hdf5 exists, don't preserve Lagrangian.hdf5 file; 00:57:01
-* 3600s particle time step, fix echo of cleanup msgs, don't preserve Lagrangian.hdf5 file, 14000M memory;
+* 3600s particle time step, fix echo of cleanup msgs, don't preserve Lagrangian.hdf5 file, 14000M memory; 1:06:36
 Added notes to thread in #monte_carlo channel.
 Worked on setting up sokeye to run wwatch3 and MOHID:
 * add to .bash_profile:
@@ -5945,11 +5945,27 @@ Got new 16Tb drive mounted at /backup2 and /scratch2 (for new /SalishSeaCast).
 Charles gave me warranty replacement 14Tb drive to hold as cold spare.
 Created /backup2/borg/results2 repository with:
   sudo borg init --encryption=none /backup2/borg/results2
-Created 2G emergency reserved space on /backup2/ so that we can delete it if necessary when something else fills /backup2:
-* sudo fallocate -l 2G /backup2/emergency_reserved_space
+Created 2G emergency reserved space on /backup2/borg/ so that we can delete it if necessary when something else fills /backup2:
+* sudo fallocate -l 2G /backup2/borg/emergency_reserved_space
+Observed that XMLSyntaxError from data_tools.get_chs_tides() that is killing `make_plots nemo forecast publish` is an intermittent server respoonse issue :-( Need to add retry feature to data_tools.get_chs_tides().
 (SalishSea)
 
 Charles says that Henryk is running a GitLab instance, and that UBC has a GitHub Enterprise license; Henryk may be able to run a Heptapod instance for us.
+
+
+Wed 6-Nov-2019
+^^^^^^^^^^^^^^
+
+Discussed Make-MIDOSS-Forcing pkg dev w/ Vicky.
+Copied wwatch3 wind and current forcing files for Jan15 from cedar to sockeye.
+Continued dev of Make-MIDOSS-Forcing; set up readthedocs.
+(MIDOSS)
+
+Started initial borg backup of nowcast-green.201812 to /backup2,
+Manually re-ran `make_plots nemo forecast publish` due to XMLSyntaxError.
+Manually re-ran `make_plots fvcom nowcast-x2 publish` due to XMLSyntaxError.
+Added time-limited exponential back-off and retry functionality to data_tools.get_chs_tides(); of course the first test ran with out triggering an XMLSyntaxError...
+(SalishSea)
 
 
 
