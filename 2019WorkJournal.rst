@@ -5898,6 +5898,8 @@ Installed rear mudguard on Tommy.
 
 Thanks to a tip about pipx in a blog post by Brett (https://snarky.ca/why-you-should-use-python-m-pip/), I installed black in a way in which it is isolated in a venv, but on my PATH by being in ~/.local/bin/black; that means I can make my pre-commit-hook.sh generic and get rid of all of my conda env specific .hghooks/ directories in my dotfiles/ repo.
 
+Changed default search engine in kudu Firefox to DuckDuckGo.
+
 
 November
 ========
@@ -5966,6 +5968,35 @@ Manually re-ran `make_plots nemo forecast publish` due to XMLSyntaxError.
 Manually re-ran `make_plots fvcom nowcast-x2 publish` due to XMLSyntaxError.
 Added time-limited exponential back-off and retry functionality to data_tools.get_chs_tides(); of course the first test ran with out triggering an XMLSyntaxError...
 (SalishSea)
+
+Phil Austin says that the GitHub Enterprise license is related to Computer Science teaching; while it may be accessible campus wide for research, it will be firewalled, so of no value for open work.
+
+Updated kudu top PopOS 19.10.
+
+
+Thu 7-Nov-2019
+^^^^^^^^^^^^^^
+
+Changed default search engine in kudu Firefox to DuckDuckGo.
+
+Installed pipx on kudu, then used it to install black and cookiecutter as system tools.
+
+Set up client repo for NAFC.
+See work journal.
+(Ocean Navigator)
+
+data_tools.get_chs_tides() sprouted a new server-side error:
+  requests.exceptions.HTTPError: 500 Server Error: ( The message or signature supplied for verification has been altered  ) for url: https://ws-shc.qc.dfo-mpo.gc.ca/predictions?WSDL
+on zeep.Client instantiation; added time-limited exponential back-off and retry around it.
+(SalishSea)
+
+Continued dev of Make-MIDOSS-Forcing; reviewed bug fixes from Vicky.
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
+
+
 
 
 
