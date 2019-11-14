@@ -5997,6 +5997,78 @@ See work journal.
 (Resilient-C)
 
 
+Sat 9-Nov-2019
+^^^^^^^^^^^^^^
+
+Continued experimenting with dask, xarray & SalishSeaCast results; moved to remote notebook on salish.
+(SalishSea)
+
+
+Sun 10-Nov-2019
+^^^^^^^^^^^^^^^
+
+Explored dask.distributed.LocalCuster defaults; 8 cores w/ 4 threads each on salish, so I guess 1/2 of physical cores with enough threads to equal number of logical cores.
+Discovered that arbuts VMs nowcast3 and nowcast4 became unreachable overnight, presumably due to arbutus maintenance; dashboard is down due to maint, so can't re-launch them; recovery:
+* stole 2 VMs from FVCOM R12 to enable NEMO to run
+* make_forcing_links nowcast; watch_NEMO didn't launch
+* get_NeahBay_ssh forecast; watch_NEMO couldn't communicate w/ manger
+* restarted message_broker, manager, log_aggregator
+* make_turbidity_file to start nowcast-green sequence; watch_NEMO working :-)
+Manually ran borg backup of nowcast-green.201812 to /backup2; added daily-results2-backup.sh to cron job script; backup process is fully back to normal.
+(SalishSea)
+
+Olympus OM-D EM5 Mk III launch event at Henry's on Broadway.
+
+
+Week 46
+-------
+
+Mon 11-Nov-2019
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Remembrance Day
+
+Checked arbutus.cloud and discovered that nowcast3 and nowcast4 are reachable again; reset mpi_hosts files after yesterday's hack, but did it while nowcast-blue was running.
+Gathered times for 6, 9, 10 & 11 nove runs of all models; got a scare that performance had slowed down, but it recovered after today's nowcast-blue.
+Added race condition mgmt for make_ww3_wind_file & make_ww3_current_file to prevent wwatch3 runs from being launched when make_ww3_wind_file intermittently gets stuck and doesn't end.
+Backfilled fvcom-nowcast-r12/10nov19.
+(SalishSea)
+
+Changed significant wave height long_name on ERDDAP to drop swell as requested by Johannes.
+Changed swh colour bar max from 10m to 2m to make default fields images on ERDDAP more interesting.
+(SalishSeaWaves)
+
+Released NEMO_Nowcast v19.2:
+* Pin Python version at 3.6 and `circus`_ package version at 0.15 to ensure consistent
+  conda environments due to dependency version pins in `circus`_.
+* Allow remote workers to have a list of logging ports on each host to facilitate
+  concurrent remote worker instances.
+* Drop support for Python 3.5.
+* Add worker race condition management.
+  See https://nemo-nowcast.readthedocs.io/en/latest/nowcast_system/elements.html#handling-worker-race-conditions
+* Add general and module indices to docs sidebar.
+* Add Bitbucket continuous integration pipeline to run unit tests and generate unit
+  tests coverage report; https://bitbucket.org/43ravens/nemo_nowcast/addon/pipelines/home.
+* Add ability to send worker completion messages to a Slack channel via the
+  `Slack incoming webhooks API`_.
+(NEMO_Nowcast)
+
+Dad passed away.
+
+
+Tue 12-Nov-2019
+^^^^^^^^^^^^^^^
+
+Backfilled fvcom-nowcast-r12/11nov19; tested 105 cores (all VMs) instead of 75 that we have been using for concurrent runs.
+Changed arbutus config so that [now|fore]cast-x2 runs will use 105 cores tomorrow to see if sequential runs will beat concurrent.
+(SalishSea)
+
+Built and uploaded NEMO_Nowcast-19.2 conda package to gomss-nowcast channel.
+Added methods to Config class to facilitate unit tests that use pytest.monkeypatch; added __getitem__(), __setitem__(), and get() to more fully
+implement Config classes behaviour as a dict.
+(NEMO_Nowcast)
+
+
 
 
 
