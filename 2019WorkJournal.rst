@@ -6071,6 +6071,15 @@ implement Config classes behaviour as a dict.
 
 
 
+Fri 8-Nov-2019
+^^^^^^^^^^^^^^
+
+See work journal.
+(OceanNavigator)
+
+
+
+
 
 
 Stack:
