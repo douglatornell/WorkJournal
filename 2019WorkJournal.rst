@@ -6103,7 +6103,33 @@ Wed 20-Nov-2019
 
 Finished clearing Dad's room at Amica
 
+Launched nowcast-r12/17nov19 at YYZ; no log msgs.
+(SalishSea)
+
+
 Toronto to Vancouver
+
+
+Thu 21-Nov-2019
+^^^^^^^^^^^^^^^
+
+Discovered that nowcast log ended at 19:18:15 last night; also collect_weather 00 stalled with 571 files downloaded; hour 038 is missing 5 files; recovery:
+* restart message_broker
+* restart log_aggregator
+* restart manager
+* clear_checklist
+* moved GRIB2/20191121/00 aside
+* download_weather 00
+* rm GRIB2/20191121/00.aside
+* collect_weather 18
+* download_weather 06
+* download_fvcom_results r12 nowcast
+* forecast2 runs faield because I cleared the checklist
+* download_weather 12
+(SalishSea)
+
+See work journal.
+(Ocean Navigator)
 
 
 
