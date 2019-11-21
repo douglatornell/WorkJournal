@@ -5997,6 +5997,13 @@ See work journal.
 (Resilient-C)
 
 
+Fri 8-Nov-2019
+^^^^^^^^^^^^^^
+
+See work journal.
+(OceanNavigator)
+
+
 Sat 9-Nov-2019
 ^^^^^^^^^^^^^^
 
@@ -6059,6 +6066,8 @@ Dad passed away.
 Tue 12-Nov-2019
 ^^^^^^^^^^^^^^^
 
+Worked on funeral arrangements, etc. for Dad.
+
 Backfilled fvcom-nowcast-r12/11nov19; tested 105 cores (all VMs) instead of 75 that we have been using for concurrent runs.
 Changed arbutus config so that [now|fore]cast-x2 runs will use 105 cores tomorrow to see if sequential runs will beat concurrent.
 (SalishSea)
@@ -6069,13 +6078,34 @@ implement Config classes behaviour as a dict.
 (NEMO_Nowcast)
 
 
+Wed 13-Nov-2019
+^^^^^^^^^^^^^^^
+
+Worked on funeral arrangements, etc. for Dad.
+
+Discussed Make-MIDOSS-Forcing pkg weirdness w/ Vicky.
+(MIDOSS)
 
 
-Fri 8-Nov-2019
-^^^^^^^^^^^^^^
+Thu 14-Nov-2019
+^^^^^^^^^^^^^^^
 
-See work journal.
-(OceanNavigator)
+Vancouver to Toronto
+
+Worked on funeral arrangements, etc. for Dad.
+
+
+Week 47
+-------
+
+Wed 20-Nov-2019
+^^^^^^^^^^^^^^^
+
+Finished clearing Dad's room at Amica
+
+Toronto to Vancouver
+
+
 
 
 
