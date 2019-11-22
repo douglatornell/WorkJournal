@@ -6131,6 +6131,22 @@ Discovered that nowcast log ended at 19:18:15 last night; also collect_weather 0
 See work journal.
 (Ocean Navigator)
 
+See work journal.
+(Resilient-C)
+
+EOAS colloquium by Laura Bianucci of IOS re: coastal ocean models
+
+Earthquake and tsunami aftermath discussion hosted by Anthropology Dept.
+
+Marjorie broke her right wrist.
+
+
+Fri 22-Nov-2019
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
 
 
 
