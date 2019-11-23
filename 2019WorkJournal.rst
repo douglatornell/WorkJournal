@@ -5971,7 +5971,7 @@ Added time-limited exponential back-off and retry functionality to data_tools.ge
 
 Phil Austin says that the GitHub Enterprise license is related to Computer Science teaching; while it may be accessible campus wide for research, it will be firewalled, so of no value for open work.
 
-Updated kudu top PopOS 19.10.
+Updated kudu to PopOS 19.10.
 
 
 Thu 7-Nov-2019
@@ -6147,6 +6147,32 @@ Fri 22-Nov-2019
 See work journal.
 (Resilient-C)
 
+Talked to Vicky about Monte Carlo automation.
+Started design of Monte Carlo runner:
+* new mohid monte-carlo sub-command
+  * args: yaml csv
+  * --no-submit option
+  * outputs:
+    * directory of yaml files for make_hdf5
+    * directory of yaml files for mohid run
+    * glost file containing:
+      * make_hdf5 yaml start end && mohid run yaml results/ --no-submit && bash tmp_run_dir/MOHID.sh
+(MIDOSS)
+
+ERDDAP went berserk; email from Charles said that Java was over 100% CPU; skookum crashed or Charles rebooted it; recovery:
+* started ERDDAP
+* started salishsea-site app
+* started nowcast system
+* collect_weather 18
+* discovered that nowcast-dev didn't run yesterday
+* make_forcing_links salish-nowcast nowcast+ --shared-storage --run-date 2019-11-21
+
+* make_forcing_links salish-nowcast nowcast+ --shared-storage --run-date 2019-11-22
+Fixed bugs re: unnecessary $PYTHON and supervisord for salishsea-site in /etc/rc.local.
+Helped Evie get a conda env to run Tereza's notebooks.
+(SalishSea)
+
+Updated niko to PopOS 19.10.
 
 
 
@@ -6155,7 +6181,7 @@ See work journal.
 
 
 Stack:
-* release NEMO_Nowcast 19.2; change from circus to supervisor
+* build Python 3.7 & 3.8 conda pkgs for schedule
 * make nemo_nowcast.cli._arrow_date() public because it is used in split_results worker
 * create NEMO_Nowcast.workers.spotter to monitor and optionally kill workers that tend to get stuck; initial use cases: collect_weather, make_ww3_wind_file
 * wwatch3 run success confirmation
@@ -6180,6 +6206,7 @@ Stack:
 * close inactive branches in SalishSeaNowcast
 * wwatch3 hindcast automation
 * add git repo revision recording to NEMO-Cmd
+* release NEMO_Nowcast 19.2; change from circus to supervisor
 
 
 
