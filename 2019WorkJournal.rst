@@ -6126,6 +6126,7 @@ Discovered that nowcast log ended at 19:18:15 last night; also collect_weather 0
 * download_fvcom_results r12 nowcast
 * forecast2 runs faield because I cleared the checklist
 * download_weather 12
+Backfilled nowcast-r12/18nov19.
 (SalishSea)
 
 See work journal.
@@ -6159,6 +6160,7 @@ Started design of Monte Carlo runner:
       * make_hdf5 yaml start end && mohid run yaml results/ --no-submit && bash tmp_run_dir/MOHID.sh
 (MIDOSS)
 
+Backfilled nowcast-r12/19nov19.
 ERDDAP went berserk; email from Charles said that Java was over 100% CPU; skookum crashed or Charles rebooted it; recovery:
 * started ERDDAP
 * started salishsea-site app
@@ -6175,6 +6177,61 @@ Helped Evie get a conda env to run Tereza's notebooks.
 Updated niko to PopOS 19.10.
 
 
+Sat 23-Nov-2019
+^^^^^^^^^^^^^^^
+
+Vancouver to Parksville
+
+Backfilled nowcast-r12/20nov19.
+Backfilled nowcast-r12/21nov19.
+(SalishSea)
+
+Started refactoring MOHID-Cmd.run unit tests to use pytest caplog & monkeypatch fixtures.
+Started adding --tmp-run-dir option to mohid.run and mohid.prepare for Monte Carlo runs generation.
+(MIDOSS)
+
+
+Sun 24-Nov-2019
+^^^^^^^^^^^^^^^
+Parksville
+
+Finished adding --tmp-run-dir option to mohid.run and mohid.prepare for Monte Carlo runs generation.
+Started dev of mohid monte-carlo sub-command.
+Started testing glost for multiple run collections on graham; need 4 cpus to get 2 concurrent runs.
+(MIDOSS)
+
+download_live_ocean was slow; timed out at ~11:05; re-launched at ~11:10; succeeded at ~13:08.
+Backfilled nowcast-r12/22nov19.
+(SalishSea)
+
+
+Week 48
+-------
+
+Mon 25-Nov-2019
+^^^^^^^^^^^^^^^
+
+wwatch3/24nov19 runs didn't happen due to stuck make_ww3_wind_file; recovery after today's runs:
+* arbutus make_ww3_wind_file 2019-11-24
+* arbutus make_ww3_current_file 2019-11-24
+* arbutus make_ww3_wind_file 2019-11-25
+* arbutus make_ww3_current_file 2019-11-25
+Backfilled nowcast-r12/23nov19.
+Backfilled nowcast-r12/24nov19.
+(SalishSea)
+
+Continued dev of mohid monte-carlo sub-command.
+Emailed support@ re: glost for multiple run collections on graham; need 4 cpus to get 2 concurrent runs.
+(MIDOSS)
+
+Parksville to Vancouver
+
+
+Tue 26-Nov-2019
+^^^^^^^^^^^^^^^
+
+Backfilled nowcast-r12/25nov19.
+(SalishSea)
 
 
 
