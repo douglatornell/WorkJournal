@@ -6233,6 +6233,13 @@ Tue 26-Nov-2019
 Backfilled nowcast-r12/25nov19.
 (SalishSea)
 
+Continued dev of mohid monte-carlo sub-command.
+suport@ explained that glost uses 1 core for a master process that coordinates the workers for the tasks.
+(MIDOSS)
+
+See work journal.
+(Ocean Navigator)
+
 
 
 
