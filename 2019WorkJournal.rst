@@ -6231,6 +6231,7 @@ Tue 26-Nov-2019
 ^^^^^^^^^^^^^^^
 
 Backfilled nowcast-r12/25nov19.
+Backfilled nowcast-r12/26nov19.
 (SalishSea)
 
 Continued dev of mohid monte-carlo sub-command.
@@ -6239,6 +6240,18 @@ suport@ explained that glost uses 1 core for a master process that coordinates t
 
 See work journal.
 (Ocean Navigator)
+
+
+Wed 27-Nov-2019
+^^^^^^^^^^^^^^^
+
+Continued dev of mohid monte-carlo sub-command.
+Mtg w/ Susan, Rachael, Vicky, Krista & Cam to discuss Monte Carlo setup:
+* from ship tracks:
+  * 7 vessel type grids
+  * 5 oil type grids
+  * need vessel length to get to spill volume
+(MIDOSS)
 
 
 
