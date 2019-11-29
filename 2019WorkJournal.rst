@@ -6254,6 +6254,40 @@ Mtg w/ Susan, Rachael, Vicky, Krista & Cam to discuss Monte Carlo setup:
 (MIDOSS)
 
 
+Thu 28-Nov-2019
+^^^^^^^^^^^^^^^
+
+Worked on Dad's estate; see notes ion Google Drive.
+
+Reminded myself how remote debugging from kudu to salish for rpn-to-gemlam works:
+* sftp deployment to /tmp/pycharm_project_nnn
+* project interpreter from sftp://salish/~/conda-envs/...
+* add stanza to rpn_to_gemlam.py:
+    if __name__ == '__main__':
+      rpn_to_gemlam(
+          arrow.get("2008-07-14"),
+          arrow.get("2008-07-23"),
+          "12",
+          Path("/opp/GEMLAM"),
+          Path("/data/dlatorne/gemlam"),
+          "/data/dlatorne/tmp-rpn-to-gem-lam/",
+          True, False,
+      )
+* ensure that rpn_to_gemlam.py and rpn_netcdf.sh are both uploaded to /tmp/pycharm_project_nnn/rpn_to_gemlam/
+(SalishSea)
+
+See work journal.
+(Ocean Navigator)
+
+
+Fri 29-Nov-2019
+^^^^^^^^^^^^^^^
+
+Telcon w/ Kate re: Dad's estate.
+
+
+
+
 
 
 
