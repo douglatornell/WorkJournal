@@ -6283,7 +6283,32 @@ See work journal.
 Fri 29-Nov-2019
 ^^^^^^^^^^^^^^^
 
-Telcon w/ Kate re: Dad's estate.
+Telcon w/ Kate and other work re: Dad's estate; see notes ion Google Drive.
+
+Added VCS revision recording feature to mohid monte-carlo sub-command.
+(MIDOSS)
+
+Discussed storage layout w/ Charles, and sketched basis of picture.
+Discussed storage expansion w/ Elise.
+Exposed nemo_cmd.prepare.record_vcs_revisions() so that MOHID-Cmd can use it.
+(SalishSea)
+
+
+Sat 30-Nov-2019
+^^^^^^^^^^^^^^^
+
+Created empty 2020 gnucash sqlite3 file, then exported accounts from 2019 to csv and imported them, tnen started edited accounts for 2020.
+
+Visited Amica Whiterock for Marjorie.
+
+
+Sun 1-Dec-2019
+^^^^^^^^^^^^^^
+
+Continued editing gnucash accounts for 2020, then transcribed jan/feb transactions to initialize accounts and set up scheduled transactions.
+
+Installed rear mudguard and monkey light on Susan's Topstone.
+
 
 
 
