@@ -6310,6 +6310,28 @@ Continued editing gnucash accounts for 2020, then transcribed jan/feb transactio
 Installed rear mudguard and monkey light on Susan's Topstone.
 
 
+December
+========
+
+Week 49
+-------
+
+Mon 2-Dec-2019
+^^^^^^^^^^^^^^
+
+MOAD team mtg; see whiteboard
+(MOAD)
+
+Started trying to improve Elise's plankton depth averaging workflow with xarray and dask.
+(SalishSea)
+
+Phys Ocgy seminar by Ana Franco.
+
+TODO: deal with graham scratch expiry for MIDOSS/forcing/ ~500G
+
+add to salishsea_tools:
+gsw
+cmocean
 
 
 
