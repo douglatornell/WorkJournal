@@ -6327,6 +6327,23 @@ Started trying to improve Elise's plankton depth averaging workflow with xarray 
 
 Phys Ocgy seminar by Ana Franco.
 
+
+Tue 3-Dec-2019
+^^^^^^^^^^^^^^
+
+Finished improving Elise's plankton depth averaging workflow with xarray and dask; elise_dask_expts.ipynb.
+(SalishSea)
+
+
+Wed 4-Dec-2019
+^^^^^^^^^^^^^^
+
+See work journal.
+(OceanNavigatorn Navigator)
+
+Added ~3 mo averaging and visualizations to elise_dask_expts.ipynb.
+(SalishSea)
+
 TODO: deal with graham scratch expiry for MIDOSS/forcing/ ~500G
 
 add to salishsea_tools:
