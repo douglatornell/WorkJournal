@@ -6344,6 +6344,11 @@ See work journal.
 Added ~3 mo averaging and visualizations to elise_dask_expts.ipynb.
 (SalishSea)
 
+Started adding mohid-run.yaml template rendering to mohid monte-carlo.
+(MIDOSS)
+
+Submitted expense claim for 2x8Tb archive drives.
+
 TODO: deal with graham scratch expiry for MIDOSS/forcing/ ~500G
 
 add to salishsea_tools:
