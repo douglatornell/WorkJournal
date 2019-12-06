@@ -6342,12 +6342,30 @@ See work journal.
 (OceanNavigatorn Navigator)
 
 Added ~3 mo averaging and visualizations to elise_dask_expts.ipynb.
+EOAS OwnCloud server upgrade caused collect_weather 18 to stall; cleaned up and ran download_weather 18 manually, then launched collect_weather 00.
 (SalishSea)
 
 Started adding mohid-run.yaml template rendering to mohid monte-carlo.
 (MIDOSS)
 
 Submitted expense claim for 2x8Tb archive drives.
+
+
+Thu 5-Dec-2019
+^^^^^^^^^^^^^^
+
+make_ww3_wind_file forecast2 got stuck; killed it; no forecast2/04dec19.
+Found a stuck watch_fvcom x2 forecast; killed it.
+(SalishSea)
+
+See work journal.
+(OceanNavigatorn Navigator)
+
+Slack discussion w/ Rachael about updating NEMO-Cmd and MOHID-Cmd, and Vicky using mohid monte-carlo for sensitivity studies.
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
 
 TODO: deal with graham scratch expiry for MIDOSS/forcing/ ~500G
 
