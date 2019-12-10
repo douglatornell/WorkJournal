@@ -6367,7 +6367,55 @@ Slack discussion w/ Rachael about updating NEMO-Cmd and MOHID-Cmd, and Vicky usi
 See work journal.
 (Resilient-C)
 
-TODO: deal with graham scratch expiry for MIDOSS/forcing/ ~500G
+
+Sat 7-Dec-2019
+^^^^^^^^^^^^^^
+
+Vancouver to Parksville
+
+Did furniture layouts of Allens Amica suites in Google dwgs.
+
+Continued dev of mohid monte-carlo sub-command.
+(MIDOSS)
+
+
+Sun 8-Dec-2019
+^^^^^^^^^^^^^^
+
+Parksville to Vancouver
+
+Continued dev of mohid monte-carlo sub-command.
+(MIDOSS)
+
+
+Week 50
+-------
+
+Mon 9-Dec-2019
+^^^^^^^^^^^^^^
+
+1st DFO-UBC model collab mtg:
+* agreed to have 1 or more focus/presentation for each mtg, then round-table
+* agenda published week before mtg
+* SalishSeaCast to EC:
+  * Fraser River temperature from Hope station
+  * Non-tidal sea surface height at boundaries
+  * JP did new CIOPS-W run boundary boxes in Nov; 2015-2019; Michael can put on salish
+* Mike is thinking about river mouth salinity
+* Susan share list of changes in 2019-05
+* CIOPS-W is in experimental production; Michael may be able to automate putting boundary fields on our storage for us to run in nowcast-dev
+(Prediction Core)
+
+MOAD group mtg; see whiteboard
+(MOAD)
+
+Continued dev of mohid monte-carlo sub-command.
+Discussed bathymetry/geometry & particle time step issues w/ Rachael, then Susan.
+Added pkg dev docs.
+Started adding monte-carlo sub-command docs.
+Discussed sensitivity studies and monte-carlo sub-command w/ Vicky.
+(MIDOSS)
+
 
 add to salishsea_tools:
 gsw
