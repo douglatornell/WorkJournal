@@ -6368,6 +6368,20 @@ See work journal.
 (Resilient-C)
 
 
+Fri 6-Dec-2019
+^^^^^^^^^^^^^^
+
+Renewed EGBC membership; declared 85 hr of PD:
+* 50h professional practice
+* 30h informal
+* 5h reviewing articles for publication
+
+Estate work.
+
+Continued dev of mohid monte-carlo sub-command.
+(MIDOSS)
+
+
 Sat 7-Dec-2019
 ^^^^^^^^^^^^^^
 
@@ -6415,6 +6429,33 @@ Added pkg dev docs.
 Started adding monte-carlo sub-command docs.
 Discussed sensitivity studies and monte-carlo sub-command w/ Vicky.
 (MIDOSS)
+
+
+Tue 10-Dec-2019
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+Updated Mercurial on kudu to 5.2.1+2-743c69b39332:
+* conda activate hg-dev
+* updated hg-dev env
+* cd hg-stable
+* hg pull
+* hg update -r tip
+* make clean all
+* sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
+
+wwatch3/07-10dec19 runs didn't happen due to stuck make_ww3_wind_file; recovery:
+* arbutus make_ww3_wind_file 2019-12-07
+* arbutus make_ww3_current_file 2019-12-07
+* arbutus make_ww3_wind_file 2019-12-08
+* arbutus make_ww3_current_file 2019-12-08
+* arbutus make_ww3_wind_file 2019-12-09
+* arbutus make_ww3_current_file 2019-12-09
+* arbutus make_ww3_wind_file 2019-12-10
+* arbutus make_ww3_current_file 2019-12-10
+(SalishSea)
 
 
 add to salishsea_tools:
