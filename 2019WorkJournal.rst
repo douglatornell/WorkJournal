@@ -6458,10 +6458,18 @@ wwatch3/07-10dec19 runs didn't happen due to stuck make_ww3_wind_file; recovery:
 (SalishSea)
 
 
-add to salishsea_tools:
-gsw
-cmocean
+Wed 11-Dec-2019
+^^^^^^^^^^^^^^^
 
+Continued dev of mohid monte-carlo sub-command; fixed bugs that Vicky has found.
+Monthly project mtg; see whiteboard.
+Update MIDOSS-MOHID-config back to --rev af533996dd to try to get an actual working config compatible with my mohid.exe to test with.
+(MIDOSS)
+
+Some network issue (unauthorized hard-coded IP address??) killed the salishsea-site app, and parts of the nowcast system.
+(SalishSea)
+
+Celebrated at Gallery re: acceptance of Grenier, et al and Jurlyse's stint
 
 
 
