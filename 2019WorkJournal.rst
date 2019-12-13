@@ -6467,9 +6467,27 @@ Update MIDOSS-MOHID-config back to --rev af533996dd to try to get an actual work
 (MIDOSS)
 
 Some network issue (unauthorized hard-coded IP address??) killed the salishsea-site app, and parts of the nowcast system.
+https://ws-shc.qc.dfo-mpo.gc.ca/predictions?WSDL returned to service, so VHFR figures stopped raising exceptions.
 (SalishSea)
 
 Celebrated at Gallery re: acceptance of Grenier, et al and Jurlyse's stint
+
+
+Thu 12-Dec-2019
+^^^^^^^^^^^^^^^
+
+Did a chat session with customer support on rescuetime and got the issue of sign-in not persisting resolved by disabling all other add-ons, then re-enabling them one at a time.
+
+orcinus refused inbound network connections; resolved by ~10:05
+Changed run_ww3 on arbutus to use 60 cores instead of 120.
+(SalishSea)
+
+Added gitpython as a dependency for WWatch3-Cmd.
+Changes WWatch3-Cmd to use 20 cores instead of 48; re: results of scaling tests that Vicky did on cedar.
+(MIDOSS)
+
+
+Check ww3 run times w/ 60 cores on 13-Dec
 
 
 
