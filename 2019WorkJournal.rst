@@ -6463,6 +6463,7 @@ Wed 11-Dec-2019
 
 Continued dev of mohid monte-carlo sub-command; fixed bugs that Vicky has found.
 Monthly project mtg; see whiteboard.
+Changed mohid run to explicitly redirect stdout & stderr to files on results dir so that Monte Carlo experiments output from MOHID and hdf5-to-netcdf4 won't all go to co-mingled stdout of GLOST job.
 Update MIDOSS-MOHID-config back to --rev af533996dd to try to get an actual working config compatible with my mohid.exe to test with.
 (MIDOSS)
 
@@ -6487,7 +6488,24 @@ Changes WWatch3-Cmd to use 20 cores instead of 48; re: results of scaling tests 
 (MIDOSS)
 
 
-Check ww3 run times w/ 60 cores on 13-Dec
+Fri 13-Dec-2019
+^^^^^^^^^^^^^^^
+
+Debugged mohid run stdout & stderr redirection.
+Repo revs that work:
+* code: 45:e39f780c308801e251903132b94b99768222be8c
+* grid: 9:13531a76b8a67621c09247398de4d39b4cb53528
+* config:  231:af533996dd24dde90e8cbab1a5271a0d5a10dbc0
+Traced through make_hdf5 module to learn how it works, adn added CLI to it.
+(MIDOSS)
+
+beluga refused inbound connections
+Confirmed that wwatch3 is faster on 60 arbutus cores than 120.
+Changed run_ww3 on arbutus to use 30 cores.
+(SalishSea)
+
+
+Check ww3 run times w/ 30 cores on 14-Dec
 
 
 
