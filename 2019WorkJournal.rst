@@ -6496,7 +6496,7 @@ Repo revs that work:
 * code: 45:e39f780c308801e251903132b94b99768222be8c
 * grid: 9:13531a76b8a67621c09247398de4d39b4cb53528
 * config:  231:af533996dd24dde90e8cbab1a5271a0d5a10dbc0
-Traced through make_hdf5 module to learn how it works, adn added CLI to it.
+Traced through make_hdf5 module to learn how it works, and added CLI to it.
 (MIDOSS)
 
 beluga refused inbound connections
@@ -6504,8 +6504,84 @@ Confirmed that wwatch3 is faster on 60 arbutus cores than 120.
 Changed run_ww3 on arbutus to use 30 cores.
 (SalishSea)
 
+Dinner w/ Brett & Andrea at Ugly Dumpling.
 
-Check ww3 run times w/ 30 cores on 14-Dec
+
+Sat 14-Dec-2019
+^^^^^^^^^^^^^^^
+
+Vancouver to Parksville
+
+Started improving and profiling make_hdf5:
+* it casts float32 to float64
+* it stores int time components at float64
+* profiling u current:
+  * baseline:
+    * produce_datearray(): neglegible
+    * unstagger_dataarray(): 15s
+    * mung_array(): 3s
+    * write_grid(): 26s
+    * total: 45s
+  * no compression:
+    * produce_datearray(): neglegible
+    * unstagger_dataarray(): 15s
+    * mung_array(): 3s
+    * write_grid(): 8s
+    * total: 26s
+  * no compression, no chunking:
+    * produce_datearray(): neglegible
+    * unstagger_dataarray(): 15s
+    * mung_array(): 3s
+    * write_grid(): 6s
+    * total: 24s
+(MIDOSS)
+
+Confirmed that wwatch3 is slower on 30 arbutus cores than 60 or 120.
+Changed run_ww3 on arbutus to use 90 cores.
+(SalishSea)
+
+
+Sun 15-Dec-2019
+^^^^^^^^^^^^^^^
+
+Confirmed that wwatch3 is about the same speed on 90 arbutus cores as on 60 and faster than on 30 or 120.
+(SalishSea)
+
+Created notebook for comparison of Lagrangian fields between 2 runs.
+Got make-hdf5 to run on graham: ~3m40s for 1 day.
+(MIDOSS)
+
+
+Week 51
+-------
+
+Mon 16-Dec-2019
+^^^^^^^^^^^^^^^
+
+Ran make-hdf5 2019-06-01 7 on graham: 27m18s for no-compression, no-chunking
+Tested 01jun17-08jun17 MOHID run w/ no-compressions, no-chunking forcing files; crashed w/:
+  forrtl: error (65): floating invalid
+  ...
+  core dumped
+Ran make-hdf5 2019-06-01 7 on graham: 40m56s float32 fields w/ compression & chunking.
+Tested 01jun17-08jun17 MOHID run w/ float32 fields w/ compression & chunking forcing files; crashed w/:
+  forrtl: error (65): floating invalid
+  ...
+  core dumped
+Tried to re-run w/ salish-generated forcing and got a core dump.
+Forced Turbulence.dat back to rev 234, and re-ran w/ salish-generated forcing to try to replicate successful run on 13-Dec; success, and diffs clean.
+Re-ran 01jun17-08jun17 MOHID run w/ float32 fields w/ compression & chunking forcing files; success, but didn't diff clean (zero oil concentration)
+Re-ran 01jun17-08jun17 MOHID run w/ float64, no-compressions, no-chunking forcing files;
+
+WHAT A FUCKING MESS!!!!
+(MIDOSS)
+
+Changed run_ww3 on arbutus to use 45 cores.
+(SalishSea)
+
+
+
+Check ww3 run times w/ 45 cores on 16-Dec
 
 
 
