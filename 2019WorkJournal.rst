@@ -6571,7 +6571,8 @@ Tested 01jun17-08jun17 MOHID run w/ float32 fields w/ compression & chunking for
 Tried to re-run w/ salish-generated forcing and got a core dump.
 Forced Turbulence.dat back to rev 234, and re-ran w/ salish-generated forcing to try to replicate successful run on 13-Dec; success, and diffs clean.
 Re-ran 01jun17-08jun17 MOHID run w/ float32 fields w/ compression & chunking forcing files; success, but didn't diff clean (zero oil concentration)
-Re-ran 01jun17-08jun17 MOHID run w/ float64, no-compressions, no-chunking forcing files;
+Re-ran 01jun17-08jun17 MOHID run w/ float64, no-compressions, no-chunking forcing files; success, but didn't diff clean (zero oil concentration)
+Re-ran 01jun17-08jun17 MOHID run w/ baseline forcing files; success, but didn't diff clean (zero oil concentration)
 
 WHAT A FUCKING MESS!!!!
 (MIDOSS)
@@ -6580,8 +6581,24 @@ Changed run_ww3 on arbutus to use 45 cores.
 (SalishSea)
 
 
+Tue 17-Dec-2019
+^^^^^^^^^^^^^^^
 
-Check ww3 run times w/ 45 cores on 16-Dec
+Confirmed that wwatch3 is fastest (so far) on 90 arbutus.
+Changed run_ww3 on arbutus to use 105 cores.
+orcinus refused connections for upload_forcing forecast2 and nowcast+, but accepted turbidity, then nowcast-agrif failed due to incomplete forcing; recovered.
+(SalishSea)
+
+Finally got a 01jun17-08jun17 MOHID run w/ baseline forcing files that replicated.
+Re-ran 01jun17-08jun17 MOHID run w/ float32 fields w/ compression & chunking forcing files; success, some differences.
+Re-ran 01jun17-08jun17 MOHID run w/ float64, no-compressions, no-chunking forcing files; success, some differences.
+Ran make-hdf5 2019-06-01 7 on graham: 23m40s for float32, no-compression, no-chunking
+Tested 01jun17-08jun17 MOHID run w/ float32, no-compressions, no-chunking forcing files; success, some differences.
+(MIDOSS)
+
+
+
+Check ww3 run times w/ 75 cores on 18-Dec
 
 
 
