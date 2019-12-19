@@ -6584,6 +6584,8 @@ Changed run_ww3 on arbutus to use 45 cores.
 Tue 17-Dec-2019
 ^^^^^^^^^^^^^^^
 
+Worked on Dad's estate; see notes ion Google Drive.
+
 Confirmed that wwatch3 is fastest (so far) on 90 arbutus.
 Changed run_ww3 on arbutus to use 105 cores.
 orcinus refused connections for upload_forcing forecast2 and nowcast+, but accepted turbidity, then nowcast-agrif failed due to incomplete forcing; recovered.
@@ -6591,11 +6593,34 @@ orcinus refused connections for upload_forcing forecast2 and nowcast+, but accep
 
 Finally got a 01jun17-08jun17 MOHID run w/ baseline forcing files that replicated.
 Re-ran 01jun17-08jun17 MOHID run w/ float32 fields w/ compression & chunking forcing files; success, some differences.
-Re-ran 01jun17-08jun17 MOHID run w/ float64, no-compressions, no-chunking forcing files; success, some differences.
+Re-ran 01jun17-08jun17 MOHID run w/ float64, no-compression, no-chunking forcing files; success, some differences.
 Ran make-hdf5 2019-06-01 7 on graham: 23m40s for float32, no-compression, no-chunking
-Tested 01jun17-08jun17 MOHID run w/ float32, no-compressions, no-chunking forcing files; success, some differences.
+Tested 01jun17-08jun17 MOHID run w/ float32, no-compression, no-chunking forcing files; success, some differences.
 (MIDOSS)
 
+
+Wed 18-Dec-2019
+^^^^^^^^^^^^^^^
+
+Went to McDonalds Home Health to check out scooters for Jim.
+
+Confirmed that all forcing variations generated on graham produce results that diff clean; realized that I don't know the provenience of the salish-generated forcing.
+Tried to sort out Rachael's branch pruning issues in config repo.
+Ran make-hdf5 2019-06-01 7 on graham: 38m10s for baseline.
+Tested 01jun17-08jun17 MOHID run w/ graham-generated forcing files; success, diffs clean.
+Re-ran 01jun17-08jun17 MOHID run w/ float32, no-compression, no-chunking forcing files; ran in 58m58s in contrast to yesterday's >1h15m.
+Set up config dirs for AKNS-spatial sensitivity test, and my personal tests.
+Started uploading models output to graham for 15jun17-22jun17 forcing.
+Ran a test that ends at 23:30 instead of 22:30 to give 168h of output.
+(MIDOSS)
+
+Experimented with migration from Bitbucket to GitHub:
+* used GitHub importer to migrate and convert https://bitbucket.org/43ravens/nemo_nowcast
+* used https://github.com/jeffwidman/bitbucket-issue-migration to migrate NEMO_nowcast project issues
+  * installed in conda env w/ python=3.8 pip & requests
+  * had to set up a personal access token at https://github.com/settings/tokens with repo and write:discussion permissions and use that token instead of my GitHub password
+  * python3 -m migrate 43ravens/nemo_nowcast douglatornell/nemo_nowcast douglatornell
+(SalishSea)
 
 
 Check ww3 run times w/ 75 cores on 18-Dec
