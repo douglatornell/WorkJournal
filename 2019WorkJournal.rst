@@ -6623,14 +6623,32 @@ Experimented with migration from Bitbucket to GitHub:
 (SalishSea)
 
 
-Check ww3 run times w/ 75 cores on 18-Dec
+Thu 19-Dec-2019
+^^^^^^^^^^^^^^^
 
+Estate and backing work.
+
+Changed run_ww3 to use 75 cores instead of 120 so that we get faster runs.
+Answered question from Michael about river discharge forcing.
+(SalishSea)
+
+Built and uploaded conda packages for schedule-0.6.0 for Python 3.7 and 3.8.
+Failed to build conda package for NEMO-Cmd-19.1, maybe due to version of stevedore on PyPI that is not on conda-forge.
+
+Removed MF0/ from make-hdf5 output path, and make path creation cleaner and more robust.
+Ran 15jun17-21jun17 with r231 config and code but tip grid.
+Updated config from r231 to r271.
+Updated code from r45 to r60 and re-built.
+15jun17-21jun17 AKNS test run failed w/ core dump.
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
 
 
 
 
 Stack:
-* build Python 3.7 & 3.8 conda pkgs for schedule
 * make nemo_nowcast.cli._arrow_date() public because it is used in split_results worker
 * create NEMO_Nowcast.workers.spotter to monitor and optionally kill workers that tend to get stuck; initial use cases: collect_weather, make_ww3_wind_file
 * wwatch3 run success confirmation
@@ -6656,6 +6674,7 @@ Stack:
 * wwatch3 hindcast automation
 * add git repo revision recording to NEMO-Cmd
 * release NEMO_Nowcast 19.2; change from circus to supervisor
+* build Python 3.7 & 3.8 conda pkgs for schedule
 
 
 
