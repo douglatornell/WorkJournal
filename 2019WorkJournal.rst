@@ -6646,10 +6646,105 @@ See work journal.
 (Resilient-C)
 
 
+Fri 20-Dec-2019
+^^^^^^^^^^^^^^^
+
+Downloaded Nfld photos from camera to kudu and backups.
+
+Met Jim at Tsawwassen ferry for tour of Amica Whiterock, bed shopping, etc.
+
+nowcast-agrif job was killed due to a compute node kernel panic; re-queued at ~20:00
+fvcom/forecast-x2 failed at about 06:00 of model time.
+(SalishSea)
+
+
+Sat 21-Dec-2019
+^^^^^^^^^^^^^^^
+
+collect_weather 06 didn't finish; 8 missing files; recovery:
+* sent email to DPS-Client
+* ran download_weather 12 --debug
+* hours of chaos...
+Exposed nemo_nowcast.worker.cli.arrow_date() and updated SalishSeaNowcast to match.
+(SalishSea)
+
+Hit PyCharm crash (https://youtrack.jetbrains.com/issue/PY-39738) on kudu; disabled .ignore, pre-commit & key reminder plugins.
+
+Vancouver to Parksville
+
+
+Sun 22-Dec-2019
+^^^^^^^^^^^^^^^
+
+Parksville
+
+Did estimates for Allen's contents insurance.
+
+Did the year-end randopony database rollover via the database interface in PyCharm.
+Set up Victoria New Years Pop 200 and emailed Mike.
+(randopony)
+
+Worked on gemlam 2012-10-04 that needs to be interpolated across 12Z/6Z transition.
+(SalishSea)
+
+
+Week 52
+-------
+
+Mon 23-Dec-2019
+^^^^^^^^^^^^^^^
+
+Parksville
+
+Came down with flu.
+
+
+Tue 24-Dec-2019
+^^^^^^^^^^^^^^^
+
+Parksville
+
+Flu.
+
+
+Wed 25-Dec-2019
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Christmas Day
+
+Parksville
+
+Flu.
+
+
+Thu 26-Dec-2019
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Boxing Day
+
+Parksville
+
+Recovering from flu.
+
+
+Fri 27-Dec-2019
+^^^^^^^^^^^^^^^
+
+Parksville
+
+Prep for Allens move to Amica:
+* booked truck & did loading layout
+* got insurance happening
+
+Re-enabled pre-commit plugin in PyCharm on kudu.
+
+Tried to understand Rachael's bug report of missing Lagrangian.hdf5 file in timed-out run; added questions for her on Slack for clarification.
+(MIDOSS)
+
+
 
 
 Stack:
-* make nemo_nowcast.cli._arrow_date() public because it is used in split_results worker
 * create NEMO_Nowcast.workers.spotter to monitor and optionally kill workers that tend to get stuck; initial use cases: collect_weather, make_ww3_wind_file
 * wwatch3 run success confirmation
 * fix warnings in figure modules
@@ -6675,6 +6770,7 @@ Stack:
 * add git repo revision recording to NEMO-Cmd
 * release NEMO_Nowcast 19.2; change from circus to supervisor
 * build Python 3.7 & 3.8 conda pkgs for schedule
+* make nemo_nowcast.cli._arrow_date() public because it is used in split_results worker
 
 
 
