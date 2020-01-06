@@ -55,6 +55,9 @@ Set kudu git config to always pull --rebase; git config --global pull.rebase tru
 * https://coderwall.com/p/tnoiug/rebase-by-default-when-doing-git-pull
 * https://mislav.uniqpath.com/2013/02/merge-vs-rebase/
 
+See work journal.
+(Ocean Navigator)
+
 Changed NEMO_Nowcast readthedocs webhook to GitHub.
 Updated NEMO_Nowcast copyright year range and bumped version to 20.1.dev0
 Set up CI workflow for NEMO_Nowcast via GitHub Actions.
@@ -62,4 +65,26 @@ Changed to launch clear_checklist after wwatch3 forecast2 pings ERDDAP instead o
 (SalishSeaCast)
 
 Started writing https://docs.google.com/document/d/1Gex3JdO8GpMdp0vxCPR05KOw5YFyg7mRV35j5gGJ8V8/edit?folder=0AMzQNtq8h6DpUk9PVA re: MOAD version control migration.
+(MOAD)
+
+
+Sun 5-Jan-2018
+^^^^^^^^^^^^^^
+
+Experimented with `git config --global user.useConfigOnly true` on kudu and niko to ensure that I set per-repo email addresses for commits.
+Deleted bitbucket.org/douglatornell/dotfiles with redirect to github.com/douglatornell/dotfiles.
+`git config --global core.excludesfile ~/.gitignore_global` is the way to set up a cross-repo .gitignore file.
+
+Replaced NEMO_Nowcast hg clone w/ git clone on arbutus.cloud.
+Backfilled nowcast-agrif runs:
+* upload_forcing nowcast+ 2020-01-02 --debug
+* upload_forcing turbidity 2020-01-02 --debug
+* make_forcing_links nowcast-agrif 2020-01-02
+* make_forcing_links nowcast-agrif 2020-01-03
+* make_forcing_links nowcast-agrif 2020-01-04
+* make_forcing_links nowcast-agrif 2020-01-05
+Started building new nowcast-sys and salishsea-site deployments on salish:/scratch2 partition of 16Tb drive that also holds /hackup2.
+(SalishSeaCast)
+
+Continued writing https://docs.google.com/document/d/1Gex3JdO8GpMdp0vxCPR05KOw5YFyg7mRV35j5gGJ8V8/edit?folder=0AMzQNtq8h6DpUk9PVA re: MOAD version control migration.
 (MOAD)
