@@ -106,3 +106,15 @@ Group mtg; see whiteboard.
 
 Discussed sensitivity studies progress and term work schedule w/ Vicky.
 (MIDOSS)
+
+
+Tue 7-Jan-2018
+^^^^^^^^^^^^^^
+
+Discussed Git & GitHub w/ Roger.
+
+Added GitHub status atom feed to #general channel of SalishSeaCast workspace.
+Explored educational pricing for Slack and sent to Susan via DM for consideration.
+Finished building new nowcast-sys and salishsea-site deployments on salish:/scratch2 partition of 16Tb drive that also holds /backup2.
+Added Slack incoming webhook for GitHub actions to SalishSeaCast workspace; added notification step to NEMO_Nowcast CI workflow.
+(SalishSeaCast)
