@@ -83,7 +83,7 @@ Backfilled nowcast-agrif runs:
 * make_forcing_links nowcast-agrif 2020-01-03
 * make_forcing_links nowcast-agrif 2020-01-04
 * make_forcing_links nowcast-agrif 2020-01-05
-Started building new nowcast-sys and salishsea-site deployments on salish:/scratch2 partition of 16Tb drive that also holds /hackup2.
+Started building new nowcast-sys and salishsea-site deployments on salish:/scratch2 partition of 16Tb drive that also holds /backup2.
 (SalishSeaCast)
 
 Continued writing https://docs.google.com/document/d/1Gex3JdO8GpMdp0vxCPR05KOw5YFyg7mRV35j5gGJ8V8/edit?folder=0AMzQNtq8h6DpUk9PVA re: MOAD version control migration.
@@ -97,4 +97,12 @@ Mon 6-Jan-2018
 ^^^^^^^^^^^^^^
 
 Fixed fallout from changing to Git clone of NEMO_Nowcast on arbutus.cloud; SalishSeaCmd was not ready to handle git repos.
+Continued building new nowcast-sys and salishsea-site deployments on salish:/scratch2 partition of 16Tb drive that also holds /backup2; next step is building sarracenia-env.
+Explored getting notifications from GitHub CI workflow into slack.
 (SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Discussed sensitivity studies progress and term work schedule w/ Vicky.
+(MIDOSS)
