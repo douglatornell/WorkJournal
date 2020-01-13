@@ -111,6 +111,8 @@ Discussed sensitivity studies progress and term work schedule w/ Vicky.
 Tue 7-Jan-2018
 ^^^^^^^^^^^^^^
 
+Woke up feeling pretty exhausted.
+
 Discussed Git & GitHub w/ Roger.
 
 Added GitHub status atom feed to #general channel of SalishSeaCast workspace.
@@ -118,3 +120,104 @@ Explored educational pricing for Slack and sent to Susan via DM for consideratio
 Finished building new nowcast-sys and salishsea-site deployments on salish:/scratch2 partition of 16Tb drive that also holds /backup2.
 Added Slack incoming webhook for GitHub actions to SalishSeaCast workspace; added notification step to NEMO_Nowcast CI workflow.
 (SalishSeaCast)
+
+Lay down for a nap in the early afternoon and didn't get up until dinner time.
+
+
+Wed 8-Jan-2018
+^^^^^^^^^^^^^^
+
+clear_checklist sequencing change from 4-Jan seems to have caused a manager crash and automation freeze this morning; resolution:
+* backed out changeset de273bd2f867 re: clear_checklist launch
+collect_weather 12 didn't finish; 8 files missing log shows 8 "expired message skipped" messages:
+* killed collect_weather 12
+* moved 20200108/12 aside
+* ran download_weather 12
+* started collect_weather 18
+* deleted 20200108/12.aside
+Updated copyright year range and versions in:
+* SalishSeaNowcast
+* NEMO-Cmd
+* SalishSeaCmd
+(SalishSeaCast)
+
+Tried to help Rachael with her plan to change MIDOSS results files from x/y grid index dimensions to lon/lat dimensions.
+Rachael pushed sensitivity_tests tag in CODE repo at r59
+Updated code from r60 to r59 and re-built.
+15jun17-21jun17 AKNS test run at code:r59 & config:r271; core dump
+(MIDOSS)
+
+Restarted VHFR FVCOM runs for 07jan20 from 06jan20 23:30 restart files that Maxim provided:
+* on arbutus.cloud:
+  * hacked make_fvcom_boundary, make_fvcom_rivers_forcing & run_fvcom for -30 offset of start_time
+  * stored hack in 30m-restart.patch
+* on skookum:
+  * hacked make_fvcom_atmos_forcingfor -30 offset of start_time
+  * stored hack in 30m-restart.patch
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-01-07"
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-01-07"
+* reverted hacks
+(VHFR)
+
+
+Thu 9-Jan-2018
+^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Continued backfilling VHFR:
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-01-08"
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-01-09"
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-01-08"
+
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-01-09"
+1st attempt failed because I forgot that I was unable to revert 30-miinnute offset hacks on arbutus.cloud last night; that left zombie watch_fvcom processes; killed them but also had to restart leg_aggregator on skookum to get messages flowing (restarted message_broker first, but that didn't make any difference, I don't think).
+(VHFR)
+
+Need to fix problem of `make_plots wwatch3 forecast*` launch after ping_erddap; decision whether we are plotting for forecast or forecast2 is flaky.
+(SalishSeaCast)
+
+Created make_readme.py (in 43ravens/on-notebooks) for GtiHub and recent notebook and Markdown.
+(MOAD)
+
+Fianlly got a successful AKNS run with relatively up to date repo revs; see https://midoss.slack.com/archives/CQXKS2CD8/p1578679712010700
+(MIDOSS)
+
+
+Fri 10-Jan-2018
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Helped Rachael with her quest for lon/lat output.
+Experimented with reducing size of Turbulence.hdf5 results file by changing it to daily output after confirming that is apparently can't be completely suppressed; failed due to out of memory.
+Discussed management of to-be-deleted /scratch files graham & cedar w/ Susan; decided to move just wwatch3/*/SoG_ww3_fields*.nc files to $PROJECT/
+Got AKNS-spatial monte-carlo run going :-) timed out during hdf5-to-netcdf4 on 2h walltime; re-ran w/ 3h walltime;
+(MIDOSS)
+
+
+nowcast-x2 and forecast-x2 ran under automation.
+Continued backfilling VHFR:
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-01-09"
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-01-10"
+(VHFR)
+
+wwatch3/forecast2 run didn't happen due to stuck make_ww3_wind_file; recovery:
+* killed stuck worker
+* launch_remote_worker arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2020-01-10"
+* nowcast run started! I guess because I caught it soon enough that race conditions managment with make_ww3_current_file was still waiting; that adds credence to the idea that a workers.spotter that kills make_ww3_wind_file if it hasn't finished after several minutes *and re-runs it* could resolve this issue.
+(SalishSeaCast)
+
+Race conditions between make_feeds and ping_erddap after NEMO and wwatch3 forecast2 runs struck again, causing no wwatch3 forecast2 plots, and a manager restart.
+wwatch3 forecast2 plots are missing a section (straight line); issue might be in update_forecast_datasets.
+(SalishSeaCast)
+
+
+Sun 12-Jan-2018
+^^^^^^^^^^^^^^^
+
+wwatch3/nowcast run didn't happen due to stuck make_ww3_wind_file; recovery:
+* killed stuck worker
+* launch_remote_worker arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2020-01-12"
