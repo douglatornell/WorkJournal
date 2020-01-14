@@ -221,3 +221,37 @@ Sun 12-Jan-2018
 wwatch3/nowcast run didn't happen due to stuck make_ww3_wind_file; recovery:
 * killed stuck worker
 * launch_remote_worker arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2020-01-12"
+
+
+Week 3
+------
+
+Mon 13-Jan-2018
+^^^^^^^^^^^^^^^
+
+Monthly IOS-UBC modeling collaboration mtg.
+orcinus returned to operation; started backfilling nowcast-agrif:
+* for d in {08..13}; upload_forcing orcinus-nowcast-agrif nowcast+ --run-date 2020-01-$d --debug
+* for d in {08..13}; upload_forcing orcinus-nowcast-agrif turbidity  --run-date 2020-01-$d --debug
+* make_forcing_link orcinus-nowcast-agrif nowcast-agrif --run-date 2020-01-08
+* make_forcing_link orcinus-nowcast-agrif nowcast-agrif --run-date 2020-01-09
+
+* make_forcing_link orcinus-nowcast-agrif nowcast-agrif --run-date 2020-01-10
+* make_forcing_link orcinus-nowcast-agrif nowcast-agrif --run-date 2020-01-11
+* make_forcing_link orcinus-nowcast-agrif nowcast-agrif --run-date 2020-01-12
+* make_forcing_link orcinus-nowcast-agrif nowcast-agrif --run-date 2020-01-13
+Added race condition mgmt after make_plots nemo forecast2 to ensure that boht make_feeds and ping_erddap have finished so that clear_checklist isnt launched until after ping_erddap has collected the information it needs to launch make_plots wwatch3 forecast2.
+Changed run type detection in ping_erddap after wwatch3 runs to account for faster wwatch3 forecast2 runs that mean that both forecast and forecast2 are in the checklist.
+(SalishSeaCast)
+
+MOAD group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar by Phillipe Tortel re: flow through fluorescence measurements and phytoplankton production.
+
+rsynced graham:wwatch3/*/SoG_ww3_fields_*.nc tree from $SCRATCH/MIDOSS/ to $PROJECT/MIDOSS/ to protect them from scratch deletion policy:
+  rsync -rtv --include='SoG_ww3_fields_*.nc' --include='*/' --exclude='*' *1[5-9] ~/project/MIDOSS/forcing/wwatch3/
+(MIDOSS)
+
+See work journal.
+(Ocean Navigator)
