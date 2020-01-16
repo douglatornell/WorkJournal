@@ -145,6 +145,7 @@ Tried to help Rachael with her plan to change MIDOSS results files from x/y grid
 Rachael pushed sensitivity_tests tag in CODE repo at r59
 Updated code from r60 to r59 and re-built.
 15jun17-21jun17 AKNS test run at code:r59 & config:r271; core dump
+Created MOHID-Cmd issue#1 re: copying *.date files into temp run dir so that they are preserved with results of run for better reproducibility and easier run configuration archaeology.
 (MIDOSS)
 
 Restarted VHFR FVCOM runs for 07jan20 from 06jan20 23:30 restart files that Maxim provided:
@@ -255,3 +256,52 @@ rsynced graham:wwatch3/*/SoG_ww3_fields_*.nc tree from $SCRATCH/MIDOSS/ to $PROJ
 
 See work journal.
 (Ocean Navigator)
+
+
+Tue 14-Jan-2018
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Finished backfilling nowcast-agrif:
+* make_forcing_link orcinus-nowcast-agrif nowcast-agrif --run-date 2020-01-11
+* make_forcing_link orcinus-nowcast-agrif nowcast-agrif --run-date 2020-01-12
+* make_forcing_link orcinus-nowcast-agrif nowcast-agrif --run-date 2020-01-13
+* make_forcing_link orcinus-nowcast-agrif nowcast-agrif --run-date 2020-01-14
+(SalishSeaCast)
+
+
+Wed 15-Jan-2018
+^^^^^^^^^^^^^^^
+
+Helped Susan set up snapd and skype on greta.
+
+Discovered that Monday's power outage in the office due to heater and vacuum cleaner upstairs appears to have fried the D-Link Gigabit switch on my desk.
+Cleaned up network gear in pantry.
+
+FAL estate work.
+
+Cherry-picked 2 commits from NEMO_Nowcast hg repo that I somehow pushed to Bitbucket after I migrated the repo to Git & GitHub :-( Discovered because split_results was raising an exception re: worker.cli.arrow_date() when Susan ran it manually (though it works fine in automation??)
+(SalishSeaCast)
+
+Updated MOHID-Cmd for 2020.
+Resolved MOHID-Cmd issue#1 re: copying *.date files into temp run dir so that they are preserved with results of run for better reproducibility and easier run configuration archaeology.
+(MIDOSS)
+
+
+TODO:
+* Fix:
+    /media/doug/warehouse/conda_envs/nemo-nowcast/lib/python3.8/pathlib.py:1299: DeprecationWarning: an integer is required (got type FilePerms).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
+      self._accessor.chmod(self, mode)
+
+
+
+Stack:
+* create NEMO_Nowcast.workers.spotter to monitor and optionally kill workers that tend to get stuck; initial use cases: collect_weather, make_ww3_wind_file
+* wwatch3 run success confirmation
+* fix warnings in figure modules
+* add hindcast deployment to SalishSeaNowcast docs
+* fix get_vfpa_hadcp MMSI AttributeError issue
+* debug gemlam interpolation
+* Elise's notebooks into Sphinx
