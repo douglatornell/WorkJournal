@@ -290,6 +290,14 @@ Resolved MOHID-Cmd issue#1 re: copying *.date files into temp run dir so that th
 (MIDOSS)
 
 
+Thu 16-Jan-2018
+^^^^^^^^^^^^^^^
+
+Post-foreacst2 race condition mgmt failed to launch clear_checklist because ping_erddap wwatch3-forecast completed before make_plots nemo forecast2 initiated race condition mgmt.
+(SalishSeaCast)
+
+
+
 TODO:
 * Fix:
     /media/doug/warehouse/conda_envs/nemo-nowcast/lib/python3.8/pathlib.py:1299: DeprecationWarning: an integer is required (got type FilePerms).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
