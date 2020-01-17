@@ -294,7 +294,23 @@ Thu 16-Jan-2018
 ^^^^^^^^^^^^^^^
 
 Post-foreacst2 race condition mgmt failed to launch clear_checklist because ping_erddap wwatch3-forecast completed before make_plots nemo forecast2 initiated race condition mgmt.
+Updated repos on salish:/scratch2/ in preparation for flip to /SalishSeaCast/; possible issues:
+* OPPTools skookum:dc2323443abd2ca 19-Feb-19, salish:d33c4e9cdda8 6-Dec-19
+* rivers-climatology skookum:31:45390bf38bd3 16feb19, salish:41:7d55df52a239 23nov19
+Renamed /results2/SalishSea/hindcast.201905/ to nowcast-green.201905/ and created symlink for old name.
 (SalishSeaCast)
+
+Started adding V19-05 datasets:
+* ubcSSg3DuGridFields1hV19-05
+Added info to front page re: V19-05 datasets with gap due to server storage mgmt, and not yet real-time.
+Copied setup.xml file into /opt/tomcat/content/erddap/ and bounced ERDDAP with:
+* sudo /opt/tomcat/bin/shutdown.sh
+* sudo /opt/tomcat/bin/startup.sh
+(ERDDAP)
+
+Monthly mtg; see whiteboard.
+Helped Rachael sort out a merge issue in MIDOSS-MOHID-config.
+(MIDOSS)
 
 
 
