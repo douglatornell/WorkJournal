@@ -336,6 +336,46 @@ Started rsync-ing SalishSeaCast files for MOHID forcing from skookum to graham:
 (MIDOSS)
 
 
+Fri 17-Jan-2018
+^^^^^^^^^^^^^^^
+
+FAL estate work.
+
+Karina's PhD defense and celebration.
+
+
+Sat 18-Jan-2018
+^^^^^^^^^^^^^^^
+
+White Rock; drove Modo Kona EV for the first time.
+
+Test ran import of SSC/analysis-shared from Bitbucket to GitHub re: next week's MOAD mtg.
+(SalishSeaCast)
+
+Continued migrating personal & 43ravens repos from Bitbucket to GitHub:
+* cookiecutter-djl-pypkg
+* 43ravens:biz-journal to 43ravens-biz-journal
+Added post-commit hooks to post highlights to rescuetime:
+* ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/rescuetime_commit_highlight.sh .git/post-commit
+Added local user.email config settings:
+* git config --local user.email "doug.latornell@43ravens.ca"
+
+
+Sun 19-Jan-2018
+^^^^^^^^^^^^^^^
+
+Booked flights & hotel for Yellowknife trip.
+
+Continued migrating MOAD repos from Bitbucket to GitHub:
+* cookiecutter-moad-pypkg - cookiecutter-MOAD-pypkg
+(MOAD)
+
+Continued migrating personal & 43ravens repos from Bitbucket to GitHub:
+* huebot -> HueBot
+Added black pre-commit hook:
+* ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/pre-commit-hook.sh
+
+
 
 TODO:
 * Fix:
