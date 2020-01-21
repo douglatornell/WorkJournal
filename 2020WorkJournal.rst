@@ -313,6 +313,29 @@ Helped Rachael sort out a merge issue in MIDOSS-MOHID-config.
 (MIDOSS)
 
 
+Week 4
+------
+
+Mon 20-Jan-2020
+^^^^^^^^^^^^^^^
+
+MOAD group mtg; see whiteboard.
+Demo-ed Bitbucket salishsea:analysis-shared to GitHub salishseacast:analysis-shared migration.
+Investigated git merge tools.
+(MOAD)
+
+Phys Ocgy seminar by Tereza on SalishSeaCast carbon model.
+
+Started updating NEMO_Nowcast dev docs re: migration to GitHub.
+Discussed hindcast monthly avgs w/ Susan.
+(SalishSeaCast)
+
+Discussed sensitivity test runs and `mohid monte-carlo` w/ Vicky.
+Started rsync-ing SalishSeaCast files for MOHID forcing from skookum to graham:
+* rsync -rtv --include='SalishSea_1h_*_grid_*.nc' --include='SalishSea_1h_*_carp_T.nc' --include='*/' --exclude='*' 0[12]jan17 graham:project/MIDOSS/forcing/nowcast-green.201905/
+(MIDOSS)
+
+
 
 TODO:
 * Fix:
