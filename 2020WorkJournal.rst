@@ -376,6 +376,18 @@ Started rsync-ing SalishSeaCast files for MOHID forcing from skookum to graham:
 (MIDOSS)
 
 
+Tue 21-Jan-2020
+^^^^^^^^^^^^^^^
+
+FAL estate work.
+
+See work joural.
+(Resilient-C)
+
+See work journal.
+(Ocean Navigator)
+
+
 Wed 22-Jan-2020
 ^^^^^^^^^^^^^^^
 
