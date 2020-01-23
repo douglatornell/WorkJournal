@@ -313,29 +313,6 @@ Helped Rachael sort out a merge issue in MIDOSS-MOHID-config.
 (MIDOSS)
 
 
-Week 4
-------
-
-Mon 20-Jan-2020
-^^^^^^^^^^^^^^^
-
-MOAD group mtg; see whiteboard.
-Demo-ed Bitbucket salishsea:analysis-shared to GitHub salishseacast:analysis-shared migration.
-Investigated git merge tools.
-(MOAD)
-
-Phys Ocgy seminar by Tereza on SalishSeaCast carbon model.
-
-Started updating NEMO_Nowcast dev docs re: migration to GitHub.
-Discussed hindcast monthly avgs w/ Susan.
-(SalishSeaCast)
-
-Discussed sensitivity test runs and `mohid monte-carlo` w/ Vicky.
-Started rsync-ing SalishSeaCast files for MOHID forcing from skookum to graham:
-* rsync -rtv --include='SalishSea_1h_*_grid_*.nc' --include='SalishSea_1h_*_carp_T.nc' --include='*/' --exclude='*' 0[12]jan17 graham:project/MIDOSS/forcing/nowcast-green.201905/
-(MIDOSS)
-
-
 Fri 17-Jan-2018
 ^^^^^^^^^^^^^^^
 
@@ -374,6 +351,65 @@ Continued migrating personal & 43ravens repos from Bitbucket to GitHub:
 * huebot -> HueBot
 Added black pre-commit hook:
 * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/pre-commit-hook.sh
+
+
+Week 4
+------
+
+Mon 20-Jan-2020
+^^^^^^^^^^^^^^^
+
+MOAD group mtg; see whiteboard.
+Demo-ed Bitbucket salishsea:analysis-shared to GitHub salishseacast:analysis-shared migration.
+Investigated git merge tools.
+(MOAD)
+
+Phys Ocgy seminar by Tereza on SalishSeaCast carbon model.
+
+Started updating NEMO_Nowcast dev docs re: migration to GitHub.
+Discussed hindcast monthly avgs w/ Susan.
+(SalishSeaCast)
+
+Discussed sensitivity test runs and `mohid monte-carlo` w/ Vicky.
+Started rsync-ing SalishSeaCast files for MOHID forcing from skookum to graham:
+* rsync -rtv --include='SalishSea_1h_*_grid_*.nc' --include='SalishSea_1h_*_carp_T.nc' --include='*/' --exclude='*' 0[12]jan17 graham:project/MIDOSS/forcing/nowcast-green.201905/
+(MIDOSS)
+
+
+Wed 22-Jan-2020
+^^^^^^^^^^^^^^^
+
+Continued rsync-ing SalishSeaCast files for MOHID forcing from skookum to graham;
+~1h per month upload time; estimate storage at ~900Gb per year.
+Turns out that Vicky already did that upload, and found the files.
+(MIDOSS)
+
+Answered question from Johannes about building wwatch3 v6.07 on cedar.
+
+Added and updated dataset citation comment attrs:
+* Add citation comment attributes to several datasets that were lacking
+them.
+* Update other citation comment attributes to include
+Soontiens and Allen, 2017.
+Not citations for:
+* ubcSSaAtmosphereGridV1
+* ubcSSaSurfaceAtmosphereFieldsV1
+* ubcONCSCVIPCTD15mV1
+* ubcONCSEVIPCTD15mV1
+* ubcONCLSBBLCTD15mV1
+* ubcONCUSDDLCTD15mV1
+* ubcSSnBathymetryV17-02
+* ubcSSn3DMeshMaskV17-02
+* ubcSSn2DMeshMaskV17-02
+* ubcONCTWDP1mV18-01
+* ubcSSf2DWaveFields30mV17-02
+* ubcSSWaveWatch3-SoGFilesV17-02
+* ubcSSFVCOM-VHFRLowFilesV2
+* ubcSSFVCOM-VHFR-BaroclinicX2
+* ubcSSFVCOM-VHFR-BaroclinicR12
+* ubcVFPA2ndNarrowsCurrent2sV1
+* YuEtAlV1911
+(ERDDAP)
 
 
 
