@@ -424,6 +424,33 @@ Not citations for:
 (ERDDAP)
 
 
+Thu 23-Jan-2020
+^^^^^^^^^^^^^^^
+
+Broke corner off lower right rear molar during breakfast :-(
+
+Pycharm Advanced Debugging Webinar:
+Liza Shashkova and Andrey Lisin
+  * Liza Debugger Features:
+    * JetBrains Mono font (new)
+    * can add breakpoints while debugger is running and they will take effect; also enable/disable on the fly
+    * use suspend and logging expression on breakpoint to produce logging output
+    * breakpoint conditions
+    * any exceptions: activation policy (defaults to on termination; i.e. post-mortem debug)
+    * cell debugging in Jupyter notebooks
+  * Andrey Remote Debugging:
+    * ssh interpreter
+      * set Python interpreter (probably way into conda env)
+      * choose sync folder on remote
+    * remote debug run config
+      * when you can't control how app runs from PyCharm?
+
+Disabled forecst2 race condition mgmt because wwatch3 has finished before NEMO make_plots 2 days in a row (since ECCC compute upgrade shifted everything earlier).
+(SalishSeaCmd)
+
+See work journal.
+(Navigator)
+
 
 TODO:
 * Fix:
