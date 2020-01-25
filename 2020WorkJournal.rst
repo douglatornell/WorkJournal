@@ -421,6 +421,8 @@ Not citations for:
 * ubcSSFVCOM-VHFR-BaroclinicR12
 * ubcVFPA2ndNarrowsCurrent2sV1
 * YuEtAlV1911
+Continued adding V19-05 datasets:
+* ubcSSg3DvGridFields1hV19-05
 (ERDDAP)
 
 
@@ -451,8 +453,46 @@ Disabled forecst2 race condition mgmt because wwatch3 has finished before NEMO m
 See work journal.
 (Navigator)
 
+FAL estate work.
+
+Email w/ Johannes about files he left on west.cloud that are long gone.
+
+
+Fri 24-Jan-2020
+^^^^^^^^^^^^^^^
+
+Dentist appt to patch broken tooth and start process of getting a cap.
+
+arbutus refused connection for upload_forcing nowcast+; re-ran manually at ~09:20 to restart automation.
+Investigated how to better use race condition mgmt to ensure that clear_checklist is not launched so early that it disrupts wwatch3 post-forecast2 processing:
+* need to ensure that both `make_plots nemo foreacst2 publish` and `make_plots wwatch3 foreacst2 publish` finish before make_feeds is launched
+* that poses to problems:
+  1. race condition mgmt doesn't know about worker args
+  2. wwatch3 forecast2 doesn't run reliably due to make_ww3_wind_file occasionally getting stuck
+(SalishSeaCast)
+
+Email w/ Johannes about script to run wwatch3.
+
+Wrote abstract for COSS-TT meeting.
+
+Continued adding V19-05 datasets:
+* ubcSSg3DwGridFields1hV19-05
+* ubcSSgSurfaceTracerFields1hV19-05
+* ubcSSg3DBiologyFields1hV19-05
+* ubcSSg3DTracerFields1hV19-05
+Datasets that have 18-12 versions but will not get 19-05 versions (and so will disappear):
+* ubcSSgNearSurfaceUVelocity20mV18-12
+* ubcSSgNearSurfaceVVelocity20mV18-12
+Emailed Marlene to notify her of EOL of the ubcSSfDepthAvgdCurrents1hV18-06 dataset on 31-Jan-2020.
+(ERDDAP)
+
+
+
+
+
 
 TODO:
+* Delete ubcSSfDepthAvgdCurrents1hV18-06 from ERDDAP on Fri 31-Jan-2020
 * Fix:
     /media/doug/warehouse/conda_envs/nemo-nowcast/lib/python3.8/pathlib.py:1299: DeprecationWarning: an integer is required (got type FilePerms).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
       self._accessor.chmod(self, mode)
