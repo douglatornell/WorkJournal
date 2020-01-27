@@ -484,7 +484,25 @@ Datasets that have 18-12 versions but will not get 19-05 versions (and so will d
 * ubcSSgNearSurfaceUVelocity20mV18-12
 * ubcSSgNearSurfaceVVelocity20mV18-12
 Emailed Marlene to notify her of EOL of the ubcSSfDepthAvgdCurrents1hV18-06 dataset on 31-Jan-2020.
+Started migrating erddap-datasets repo from Bitbuket to GitHub.
 (ERDDAP)
+
+
+Sat 25-Jan-2020
+^^^^^^^^^^^^^^^
+
+Finished migrating erddap-datasets repo from Bitbuket to GitHub.
+(ERDDAP)
+
+See work journal.
+(Navigator)
+
+
+Sun 26-Jan-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
 
 
 
