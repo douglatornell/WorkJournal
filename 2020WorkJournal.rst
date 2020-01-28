@@ -505,6 +505,23 @@ See work journal.
 (Navigator)
 
 
+Week 5
+------
+
+Mon 27-Jan-2020
+^^^^^^^^^^^^^^^
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar by Johannes Gemmrich on SoG wave model.
+
+Timesheet. Staff conflict of interest declaration.
+
+Started exploring if/how NEMO_Nowcast race conditions mgmt can be made to handle different invocations of the same worker.
+(SalishSeaCast)
+
+Farewell drinks for Gonzalo.
 
 
 
