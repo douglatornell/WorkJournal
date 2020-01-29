@@ -524,6 +524,70 @@ Started exploring if/how NEMO_Nowcast race conditions mgmt can be made to handle
 Farewell drinks for Gonzalo.
 
 
+Tue 28-Jan-2020
+^^^^^^^^^^^^^^^
+
+collect_weather 06 had not completed at 10:00; investigation:
+* 06 forecast: 109 files accumlated in /results/forcing/; 458 files downloaded byt sarracenia, but not moved to /results/forcing/
+* sarracenia log:
+  * a bunch of:
+      2020-01-28 01:17:47,441 [ERROR] Download failed https://dd5.weather.gc.ca/model_hrdps/west/grib2/06/011/CMC_hrdps_west_LHTFL_SFC_0_ps2.5km_2020012806_P011-00.grib2
+      2020-01-28 01:17:47,442 [ERROR] Failed to reach server. Reason: [Errno -3] Temporary failure in name resolution
+      2020-01-28 01:17:47,442 [ERROR] Download failed https://dd5.weather.gc.ca//model_hrdps/west/grib2/06/011/CMC_hrdps_west_LHTFL_SFC_0_ps2.5km_2020012806_P011-00.grib2. Type: <class 'urllib.error.URLError'>, Value: <urlopen error [Errno -3] Temporary failure in name resolution>
+  * then, later:
+      2020-01-28 01:26:03,798 [INFO] expired message skipped 20200128091041.641 https://dd5.weather.gc.ca /model_hrdps/west/grib2/06/011/CMC_hrdps_west_LHTFL_SFC_0_ps2.5km_2020012806_P011-00.grib2
+      2020-01-28 01:26:03,799 [INFO] expired message skipped 20200128091041.489 https://dd5.weather.gc.ca /model_hrdps/west/grib2/06/010/CMC_hrdps_west_UGRD_TGL_10_ps2.5km_2020012806_P010-00.grib2
+      2020-01-28 01:26:03,799 [INFO] expired message skipped 20200128091043.610 https://dd5.weather.gc.ca /model_hrdps/west/grib2/06/011/CMC_hrdps_west_UGRD_TGL_10_ps2.5km_2020012806_P011-00.grib2
+      2020-01-28 01:26:03,799 [INFO] expired message skipped 20200128091043.872 https://dd5.weather.gc.ca /model_hrdps/west/grib2/06/011/CMC_hrdps_west_PRATE_SFC_0_ps2.5km_2020012806_P011-00.grib2
+      2020-01-28 01:26:03,799 [INFO] expired message skipped 20200128091044.935 https://dd5.weather.gc.ca /model_hrdps/west/grib2/06/011/CMC_hrdps_west_RH_TGL_2_ps2.5km_2020012806_P011-00.grib2
+* all 12 forecast files appear to have been downloaded by sarracenia
+* recovery:
+    kill collect_weather 06
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20200128/06
+    download_weather 06
+    upload_forcing forecast2 failed because we were too late requesting Neah Bay ssh; Susan did recovery
+    upload_forcing forecast2 for 6 clusters
+    collect_weather 18
+    wait for forecast2 completion
+    download_weather 12
+(SalishSeaCast)
+
+See work journal.
+(Navigator)
+
+See work journal.
+(Resilient-C)
+
+Birthday dinner for Rachael.
+
+
+Wed 29-Jan-2020
+^^^^^^^^^^^^^^^
+
+collect_weather 06 had not completed at 07:00; investigation:
+* 06 forecast: 20 files accumlated in /results/forcing/; 546 files downloaded byt sarracenia, but not moved to /results/forcing/
+* similar pattern of name resolution errors in sarracenia log between 01:09:07 through 01:13:56, and again between 01:19:07 through 01:23:54.
+* 12 forecast files download by sarracenia in progress
+* recovery:
+    kill collect_weather 06
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20200129/06
+    download_weather 06
+    upload_forcing forecast2 failed because we are using an outdated Neah Bay ssh URL re: 2019 Trump US gov't shutdown; Susan did recovery
+    upload_forcing forecast2 for 6 clusters
+    wait for 12 weather sarracenia downloads to finish
+    collect_weather 18
+    wait for forecast2 completion
+    download_weather 12
+
+    clear /SalishSeaCast/datamart/hrdps-west/ directories
+    pull Susan's get_NeahBay_ssh fix on skookum
+Network glitched at 09:00 taking both salishsea-site and Resilient-C offline momentarily; also seemed to stall download_weather 12; deleted tree and re-ran to restart automation.
+(SalishSeaCast)
+
+See work journal.
+(Navigator)
+
+
 
 
 TODO:
