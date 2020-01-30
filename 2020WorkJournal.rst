@@ -565,7 +565,7 @@ Wed 29-Jan-2020
 ^^^^^^^^^^^^^^^
 
 collect_weather 06 had not completed at 07:00; investigation:
-* 06 forecast: 20 files accumlated in /results/forcing/; 546 files downloaded byt sarracenia, but not moved to /results/forcing/
+* 06 forecast: 20 files accumulated in /results/forcing/; 546 files downloaded by sarracenia, but not moved to /results/forcing/
 * similar pattern of name resolution errors in sarracenia log between 01:09:07 through 01:13:56, and again between 01:19:07 through 01:23:54.
 * 12 forecast files download by sarracenia in progress
 * recovery:
@@ -578,14 +578,24 @@ collect_weather 06 had not completed at 07:00; investigation:
     collect_weather 18
     wait for forecast2 completion
     download_weather 12
-
     clear /SalishSeaCast/datamart/hrdps-west/ directories
+
     pull Susan's get_NeahBay_ssh fix on skookum
 Network glitched at 09:00 taking both salishsea-site and Resilient-C offline momentarily; also seemed to stall download_weather 12; deleted tree and re-ran to restart automation.
+Helped Tereza set up conda env for mocsy and sort through import path issue; puzzled that path to .so has to be added explicitly.
+nowcast-green got stuck on launch, and I didn't notice until ~17:30; cleaned up and re-ran make_forcing_links to get it going.
 (SalishSeaCast)
 
 See work journal.
 (Navigator)
+
+Git refresher session lead by Karina:
+* why staging?
+* git rm seem hyper aggressive
+(MOAD)
+
+Taught Vicky how to migrate repo from hg on Bitbucket to git on GitHub.
+(MIDOSS)
 
 
 
