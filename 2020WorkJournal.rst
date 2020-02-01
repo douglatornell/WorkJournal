@@ -598,10 +598,39 @@ Taught Vicky how to migrate repo from hg on Bitbucket to git on GitHub.
 (MIDOSS)
 
 
+Fri 31-Jan-2020
+^^^^^^^^^^^^^^^
+
+Dentist appt to prep for crown and get temporary.
+
+Researched Tereza's mocsy import issue and learned more; see https://salishseacast.slack.com/archives/CFR6VU70S/p1580501579016600
+Added codecov.io unittest coverage reporting to NEMO_Nowcast:
+* added repo on codecode.io
+* stored upload token as CODECOV_TOKEN secret on GitHub
+* added pytest-cov to environment-test.yaml
+* changed coverage report step of workflow to use codecov/codecov-action@v1 action
+Started migration of SalishSeaNowcast repo to GitHub:
+* import as public SalishSeaNowcast repo
+* add repo to codecov
+
+* migrate issues
+* change readthedocs webhook
+* change Bitbucket pipeline to GH Actions CI workflow
+  * stored upload token as CODECOV_TOKEN secret on GitHub
+  * added pytest-cov to environment-test.yaml
+  * changed coverage report step of workflow to use codecov/codecov-action@v1 action
+* delete Bitbucket salishseanowcast repo w/ redirect
+(SalishSeaCast)
+
+Understood:
+  git log --pretty=oneline --abbrev-commit --graph @{u}..
+as quasi-equivalent of `hg outgoing`; added `git out` alias on niko; can be used with or without --stat flag.
+
+
 
 
 TODO:
-* Delete ubcSSfDepthAvgdCurrents1hV18-06 from ERDDAP on Fri 31-Jan-2020
+* Delete ubcSSfDepthAvgdCurrents1hV18-06 from ERDDAP on Fri 7-Feb-2020
 * Fix:
     /media/doug/warehouse/conda_envs/nemo-nowcast/lib/python3.8/pathlib.py:1299: DeprecationWarning: an integer is required (got type FilePerms).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
       self._accessor.chmod(self, mode)
@@ -616,3 +645,6 @@ Stack:
 * fix get_vfpa_hadcp MMSI AttributeError issue
 * debug gemlam interpolation
 * Elise's notebooks into Sphinx
+
+Done:
+* Disable ubcSSfDepthAvgdCurrents1hV18-06 on ERDDAP on Fri 31-Jan-2020
