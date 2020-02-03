@@ -612,7 +612,6 @@ collect_weather 06 had not completed at 07:00; investigation:
     NEMO forecast2 failed due to nowcast8 VM network connection issue; retry failed due to nowcast2 connection issue; retry at ~10:35 succeeded
     download_weather 12
     clear /SalishSeaCast/datamart/hrdps-west/ directories
-
     pull Susan's get_NeahBay_ssh fix on salish:/scratch2
 (SalishSeaCast)
 
@@ -633,21 +632,78 @@ Added codecov.io unittest coverage reporting to NEMO_Nowcast:
 * changed coverage report step of workflow to use codecov/codecov-action@v1 action
 Started migration of SalishSeaNowcast repo to GitHub:
 * import as public SalishSeaNowcast repo
-* add repo to codecov
-
-* migrate issues
-* change readthedocs webhook
-* change Bitbucket pipeline to GH Actions CI workflow
-  * stored upload token as CODECOV_TOKEN secret on GitHub
-  * added pytest-cov to environment-test.yaml
-  * changed coverage report step of workflow to use codecov/codecov-action@v1 action
-* delete Bitbucket salishseanowcast repo w/ redirect
 (SalishSeaCast)
 
 Understood:
   git log --pretty=oneline --abbrev-commit --graph @{u}..
 as quasi-equivalent of `hg outgoing`; added `git out` alias on niko; can be used with or without --stat flag.
 
+Disabled ubcSSfDepthAvgdCurrents1hV18-06.
+(ERDDAP)
+
+
+Sat 1-Feb-2020
+^^^^^^^^^^^^^^
+
+Worked through my typical "forgot to commit/push my worklog" pull/rebase/merge-conflict-resolution in git:
+* git pull  # resulted in merge conflict
+* git rebase --abort  # return to state before rebase to research how to proceed
+* # decided to try explcity merge tool
+* git pull
+* git mergetool --tool kdiff3
+* # resovled conflicts, saved, and exited kdiff3
+* git rebase --continue
+* git push
+Added `git out` alias on kudu.
+Understood:
+  git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}
+as quasi-equivalent of `hg incoming`; added `git in` alias on kudu; can be used with or without --stat flag.
+
+Continued migration of SalishSeaNowcast repo to GitHub:
+* add repo description, link, and topics
+* add repo to codecov
+* store codecov upload token as CODECOV_TOKEN secret on GitHub
+* add notifications to #ssc-repos channel; /github subscribe SalishSeaCast/SalishSeaNowcast
+* migrate issues:
+  * use kudu /media/doug/warehouse/bitbucket-issue-migration clone https://github.com/jeffwidman/bitbucket-issue-migration and bitbucket-issue-migration conda env
+    * python3 -m migrate SalishSeaCast/SalishSeaNowcast salishsea/salishseanowcast douglatornell
+      * use GitHub personal access token instead of GitHub password
+* change readthedocs webhook
+* replace .hgignore with .gitignore
+
+* renamed env/ to envs/
+* change Bitbucket pipeline to GH Actions CI workflow
+  * add #ssc-repos webhook url as SLACK_WEBHOOK_URL secret on GitHub
+  * added pytest-cov to environment-test.yaml
+  * changed coverage report step of workflow to use codecov/codecov-action@v1 action
+* update dev docs:
+  *
+* delete Bitbucket salishseanowcast repo w/ redirect
+* Update clones:
+  * kudu
+    * mv SalishSeaNowcast hg/SalishSeaNowcast.hg
+    * git clone git@github.com:SalishSeaCast/SalishSeaNowcast.git
+    * rsync -rltv hg/SalishSeaNowcast.hg/.idea SalishSeaNowcast/
+    * rm SalishSeaNowcast/.idea/vcs.xml
+    * git config --local user.email "dlatornell@eoas.ubc.ca"
+    * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/pre-commit-hook.sh
+    * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/rescuetime_commit_highlight.sh .git/hooks/post-commit
+
+  * niko
+    * git config --local user.email "dlatornell@eoas.ubc.ca"
+    * ln -s ~/dotfiles/ubuntu/niko/githooks/generic/pre-commit-hook.sh
+    * ln -s ~/dotfiles/ubuntu/niko/githooks/generic/rescuetime_commit_highlight.sh .git/hooks/post-commit
+  * skookum
+  * salish
+  * arbutus.cloud
+(SalishSeaCast)
+
+
+Sun 2-Feb-2020
+^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
 
 
 
