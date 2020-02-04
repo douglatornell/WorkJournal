@@ -678,6 +678,7 @@ Continued migration of SalishSeaNowcast repo to GitHub:
   * changed coverage report step of workflow to use codecov/codecov-action@v1 action
 * update dev docs:
   *
+* change run_NEMO, test_run_NEMO & deployment docs re: install from GH
 * delete Bitbucket salishseanowcast repo w/ redirect
 * Update clones:
   * kudu
@@ -690,9 +691,6 @@ Continued migration of SalishSeaNowcast repo to GitHub:
     * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/rescuetime_commit_highlight.sh .git/hooks/post-commit
 
   * niko
-    * git config --local user.email "dlatornell@eoas.ubc.ca"
-    * ln -s ~/dotfiles/ubuntu/niko/githooks/generic/pre-commit-hook.sh
-    * ln -s ~/dotfiles/ubuntu/niko/githooks/generic/rescuetime_commit_highlight.sh .git/hooks/post-commit
   * skookum
   * salish
   * arbutus.cloud
@@ -704,6 +702,47 @@ Sun 2-Feb-2020
 
 See work journal.
 (Navigator)
+
+
+February
+========
+
+Week 6
+------
+
+Mon 3-Feb-2020
+^^^^^^^^^^^^^^
+
+MOAD group mtg; see whiteboard.
+(MOAD)
+
+See work journal.
+(Navigator)
+
+Answered email from Mike re: updating gomss-site.
+(GoMSS)
+
+Invited Ben to GitHub orgs.
+Continued migration of SalishSeaNowcast repo to GitHub:
+* Update clones:
+  * niko
+    * mv SalishSeaNowcast hg/SalishSeaNowcast.hg
+    * git clone git@github.com:SalishSeaCast/SalishSeaNowcast.git
+    * rsync -rltv hg/SalishSeaNowcast.hg/.idea SalishSeaNowcast/
+    * rm SalishSeaNowcast/.idea/vcs.xml
+    * git config --local user.email "dlatornell@eoas.ubc.ca"
+    * ln -s ~/dotfiles/ubuntu/niko/githooks/generic/pre-commit-hook.sh
+    * ln -s ~/dotfiles/ubuntu/niko/githooks/generic/rescuetime_commit_highlight.sh .git/hooks/post-commit
+  * salish
+    * rm -rf SalishSeaNowcast
+    * git clone git@github.com:SalishSeaCast/SalishSeaNowcast.git
+Migrated repos to GitHub:
+* SalishSeaCast/analysis-doug
+  * update copyright year range
+  * update make_readme.py modules
+  * fix Markdown headings in notebooks
+* SalishSeaCast/nowcast-vm
+(SalishSeaCast)
 
 
 
