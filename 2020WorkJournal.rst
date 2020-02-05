@@ -745,6 +745,21 @@ Migrated repos to GitHub:
 (SalishSeaCast)
 
 
+Tue 4-Feb-2020
+^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+
+Wed 5-Feb-2020
+^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+
+
 
 TODO:
 * Delete ubcSSfDepthAvgdCurrents1hV18-06 from ERDDAP on Fri 7-Feb-2020
