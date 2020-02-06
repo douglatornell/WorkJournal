@@ -651,14 +651,13 @@ Worked through my typical "forgot to commit/push my worklog" pull/rebase/merge-c
 * # decided to try explcity merge tool
 * git pull
 * git mergetool --tool kdiff3
-* # resovled conflicts, saved, and exited kdiff3
+* # resolved conflicts, saved, and exited kdiff3
 * git rebase --continue
 * git push
 Added `git out` alias on kudu.
 Understood:
   git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}
 as quasi-equivalent of `hg incoming`; added `git in` alias on kudu; can be used with or without --stat flag.
-
 Continued migration of SalishSeaNowcast repo to GitHub:
 * add repo description, link, and topics
 * add repo to codecov
@@ -757,6 +756,23 @@ Wed 5-Feb-2020
 
 See work journal.
 (Navigator)
+
+Email to Emilio re: no SSC datasets on NVS since 30-Sep.
+Continued migration of SalishSeaNowcast repo to GitHub:
+* renamed env/ to envs/
+* moved requirements.txt to top level dir to take advantage of Insights Dependency Graph and Dependabot Security alerts
+* added GH Actions CI workflow
+  * added #ssc-repos webhook url as SLACK_WEBHOOK_URL secret on GitHub
+
+* update dev docs:
+  *
+* change run_NEMO, test_run_NEMO & deployment docs re: install from GH
+* delete Bitbucket salishseanowcast repo w/ redirect
+
+* Update clones:
+  * skookum
+  * arbutus.cloud
+(SalishSeaCast)
 
 
 
