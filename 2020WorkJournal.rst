@@ -775,6 +775,15 @@ Continued migration of SalishSeaNowcast repo to GitHub:
 (SalishSeaCast)
 
 
+Thu 6-Feb-2020
+^^^^^^^^^^^^^^
+
+FAL estate work.
+
+See work journal.
+(Navigator)
+
+
 
 
 TODO:
