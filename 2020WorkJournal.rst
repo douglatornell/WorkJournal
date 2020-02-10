@@ -783,11 +783,72 @@ FAL estate work.
 See work journal.
 (Navigator)
 
+Migrated Bitbucket douglatornell/aims-workshop to GitHub douglatornell/AIMS-Workshop for one of Susan's classes assignment.
+(MOAD)
+
+
+Sat 8-Feb-2020
+^^^^^^^^^^^^^^
+
+Cleaned up after failed forecast2 launch due to startup without checklist after yesterday's /SalishSeaCast flip; skipped forecast2 runs; started nowcast automation manually about 1hr late.
+nowcast-dev failed because I followed the docs that told me to build SalishSeaCast on salish instead of SalishSeaCast_Blue; fixed docs; did build; manually re-launched nowcast-dev via make_forcing_links.
+make_fvcom_atmos_forcing failed on skookum due to missing dependencies for OPPTools; did git checkout 4af96c499cdc49e96a87f999870be1560807d925 to get same working version as on arbutus; and launched nowcast-x2 and nowcast-r12 manually.
+(SalishSeaCast)
+
+Transferred GitHub douglatornell/AIMS-Workshop to UBC-MOAD/AIMS-Workshop where it really belongs; replaced .hgignore with .gitignore.
+(MOAD)
+
+See work journal.
+(Navigator)
+
+Migrated repos to GitHub:
+* SalishSeaCast/SOG-Bloomcast-Ensemble
+
+  * update copyright year range
+  * update make_readme.py modules
+  * fix Markdown headings in notebooks
+(bloomcast)
+
+
+Sun 9-Feb-2020
+^^^^^^^^^^^^^^
+
+Updated SOG-Bloomcast-Ensemble:
+  * post-commit hook
+  * user.email
+  * no pre-commit hook for black
+
+  * update dev env pkgs re: security alerts
+  * update copyright year range
+(bloomcast)
+
+FAL estate work.
+
+make_plots nemo forecast publish failing due to numpy errors:
+* figures/publish/pt_atkinson_tide.py", line 95, in _plot_tide_cycle
+    TypeError: float() argument must be a string or a number, not 'Timestamp'
+* figures/publish/compare_tide_prediction_max_ssh.py", line 184, in _prep_plot_data
+    numpy.core._exceptions.UFuncTypeError: ufunc 'add' cannot use operands with types dtype('O') and dtype('<m8[s]')
+* changed nowcast-fig-dev.yaml from python=3.7 to python>=3.6
+* built nowcast-fig-dev-feb20 env
+* TypeError: float()... is the new manifestation of issue#69
+* Hacked around numpy.core._exceptions.UFuncTypeError: ufunc 'add'... with an astype() in figures.shared, but need to understand the deeper issue.
+Explored HRDPS 1km experimental forecast; decided to try to get a sarracenia client running to capture it for now and worry about extending collect_weather later:
+* created SalishSeaNowcast/sarracenia/hrdps-west-1km.conf
+* added [program:sr_subscribe-hrdps-west-1km] section to SalishSeaNowcast/config/supervisord.ini
+* added
+    amqps://anonymous:anonymous@dd.alpha.weather.gc.ca
+  to skookum:.config/sarra//credentials.conf
+* supervisorctl reload added and startd sr_subscribe-hrdps-west-1km
+(SalishSeaCast)
+
+
 
 
 
 TODO:
 * Delete ubcSSfDepthAvgdCurrents1hV18-06 from ERDDAP on Fri 7-Feb-2020
+* Sort out OPPTools dependencies so that we can run w/ origin/master:HEAD again
 * Fix:
     /media/doug/warehouse/conda_envs/nemo-nowcast/lib/python3.8/pathlib.py:1299: DeprecationWarning: an integer is required (got type FilePerms).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
       self._accessor.chmod(self, mode)
