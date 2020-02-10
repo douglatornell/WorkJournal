@@ -761,7 +761,7 @@ Email to Emilio re: no SSC datasets on NVS since 30-Sep.
 Continued migration of SalishSeaNowcast repo to GitHub:
 * renamed env/ to envs/
 * moved requirements.txt to top level dir to take advantage of Insights Dependency Graph and Dependabot Security alerts
-* added GH Actions CI workflow
+* starting adding GH Actions CI workflow
   * added #ssc-repos webhook url as SLACK_WEBHOOK_URL secret on GitHub
 
 * update dev docs:
@@ -775,6 +775,7 @@ Continued migration of SalishSeaNowcast repo to GitHub:
 (SalishSeaCast)
 
 
+<<<<<<< HEAD
 Thu 6-Feb-2020
 ^^^^^^^^^^^^^^
 
@@ -785,6 +786,49 @@ See work journal.
 
 Migrated Bitbucket douglatornell/aims-workshop to GitHub douglatornell/AIMS-Workshop for one of Susan's classes assignment.
 (MOAD)
+
+
+Fri 7-Feb-2020
+^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+Monthly project mtg; see whiteboard.
+(MIDOSS)
+
+Continued migration of SalishSeaNowcast repo to GitHub:
+* continued adding GH Actions CI workflow
+
+* update dev docs:
+  *
+* delete Bitbucket salishseanowcast repo w/ redirect
+
+* Update clones:
+  * arbutus.cloud
+
+Worked w/ Charles to flip salish:/scratch2 to become skookum:/SalishSeaCast:
+* updated NEMO_Nowcast and SalishSeaNowcast git clones
+* create /scratch2/datamart/hrdps-west/[00|06|12|18] directories
+* committed removal of forecast2 race condition mgmt
+* changed run_NEMO, test_run_NEMO & deployment docs re: install from GH
+* kill collect_weather 00
+* kill watch_fvcom nowcast-x2
+* kill watch_fvcom nowcast-r12
+* kill forecast-x2 run
+* kill nowcast-r12 run
+* stop supervisord
+* stop salishsea-site
+* flip
+* had to build new conda envs :-(
+* start salishsea-site
+* update arbutus.cloud clone
+* start supervisord
+* re-start collect_weather 00
+* re-start nowcast-x2 run
+* re-start nowcast-r12 run
+There may be chaos for the forecast2 runs because I did not copy the checklist into the new /SalishSeaCast.
+(SalishSeaCast)
 
 
 Sat 8-Feb-2020
