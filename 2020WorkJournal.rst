@@ -887,6 +887,32 @@ Explored HRDPS 1km experimental forecast; decided to try to get a sarracenia cli
 (SalishSeaCast)
 
 
+Week 7
+------
+
+Mon 10-Feb-2020
+^^^^^^^^^^^^^^^
+
+UBC/DFO model collab mtg:
+* SSMS presentation by Elise
+* discussed Laura's initial analysis of dissolved O2 from hindcast; model seems low
+* talked about 1km HRDPS
+* I emailed link to Susan's 2019-05 hindcast viz book to Laura & Michael
+* forwarded 1km HRDPS email to Laura and Michael
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Phys ocgy seminar; Ocean Sciences practice talks by Elise & Anna
+
+Emailed Sandrine re: my failure to get sarracenia working for 1 km HRDPS; solution: amqp instead of amqps because dd.alpha is not yet HTTPS.
+Started work on adapting download_weather and collect_weather to operate on either 2.5km or 1km HRDPS product streams.
+Hacked download_weather enough to get all files available on server.
+(SalishSeaCast)
+
+Deleted ubcSSfDepthAvgdCurrents1hV18-06 from ERDDAP.
+(ERDDAP)
+
 
 
 
