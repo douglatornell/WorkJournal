@@ -907,12 +907,35 @@ Phys ocgy seminar; Ocean Sciences practice talks by Elise & Anna
 
 Emailed Sandrine re: my failure to get sarracenia working for 1 km HRDPS; solution: amqp instead of amqps because dd.alpha is not yet HTTPS.
 Started work on adapting download_weather and collect_weather to operate on either 2.5km or 1km HRDPS product streams.
-Hacked download_weather enough to get all files available on server.
+Hacked download_weather enough to get files from dd.alpha server.
 (SalishSeaCast)
 
 Deleted ubcSSfDepthAvgdCurrents1hV18-06 from ERDDAP.
 (ERDDAP)
 
+
+Tue 11-Feb-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+FAL estate work.
+
+
+Wed 12-Feb-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+Finished backlog downloads of 1km HRDPS files from dd.alpha server using hacked download_weather.
+Continued hacking on SalishSeaNowcast CI workflow:
+* used pip install --src to try to get dependencies pkgs source checkouts out of pkg envs/ dir
+Continued work on adapting download_weather and collect_weather to operate on either 2.5km or 1km HRDPS product streams.
+(SalishSeaCast)
+
+Completed UBC staff conflict of interest declaration.
 
 
 
