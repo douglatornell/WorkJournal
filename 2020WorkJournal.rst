@@ -938,6 +938,33 @@ Continued work on adapting download_weather and collect_weather to operate on ei
 Completed UBC staff conflict of interest declaration.
 
 
+Thu 13-Feb-2020
+^^^^^^^^^^^^^^^
+
+Dentist appt for final lower right molar cap.
+
+See work journal.
+(Navigator)
+
+See work journal.
+(Resilient-C)
+
+Helped Rachael via slack to try to get started using mohid monte-carlo.
+(MIDOSS)
+
+Downloaded today's 1km HRDPS files from dd.alpha server using hacked download_weather.
+(SalishSeaCast)
+
+
+Fri 14-Feb-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+
+
+
 
 TODO:
 * Delete ubcSSfDepthAvgdCurrents1hV18-06 from ERDDAP on Fri 7-Feb-2020
