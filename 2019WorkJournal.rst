@@ -18,7 +18,7 @@ January
 Week 1
 ------
 
-Tue 1-Jan-2018
+Tue 1-Jan-2019
 ^^^^^^^^^^^^^^
 
 **Statutory Holiday** - New Year's Day
@@ -33,7 +33,7 @@ Continued dev of MOHID-Cmd package.
 Felt progressively crappier as the day went on; headache, body aches, fatigue.
 
 
-Wed 2-Jan-2018
+Wed 2-Jan-2019
 ^^^^^^^^^^^^^^
 
 Worked with headache, body aches, sore throat, and lethargy.
@@ -57,7 +57,7 @@ See project journal.
 (SalishSeaCast-FVCOM)
 
 
-Thu 3-Jan-2018
+Thu 3-Jan-2019
 ^^^^^^^^^^^^^^
 
 Monitored download_live_ocean; new timeout calc in get_web_data() worked as expected, but 7200s wasn't long enough; collect_weather finished at ~08:40 and LiveOcean file wasn't ready until ~11:20; increased wait_exponential_max=10800.
@@ -74,7 +74,7 @@ See project work journal.
 (GOMSS)
 
 
-Fri 4-Jan-2018
+Fri 4-Jan-2019
 ^^^^^^^^^^^^^^
 
 Team mtg; see whiteboard.
@@ -92,13 +92,13 @@ Email to Emilio re: availability of new datsets for NANOOS and change in dataset
 (SalishSea)
 
 
-Sat 5-Jan-2018
+Sat 5-Jan-2019
 ^^^^^^^^^^^^^^
 
 2018-2019 financial roll-over
 
 
-Sun 6-Jan-2018
+Sun 6-Jan-2019
 ^^^^^^^^^^^^^^
 
 upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race conditions between grib_to_netcdf and make_live_ocean_files, but no runs got launched; recovery:
@@ -117,7 +117,7 @@ See project journal.
 Week 2
 ------
 
-Mon 7-Jan-2018
+Mon 7-Jan-2019
 ^^^^^^^^^^^^^^
 
 Sent email to Roman requesting change nowcast-agrif reservation window to 10:00 to 13:00, and asking if he will consider building a Python 3.7 module on orcinus.
@@ -134,7 +134,7 @@ Continued dev of mohid run sub-command.
 (MIDOSS)
 
 
-Tue 8-Jan-2018
+Tue 8-Jan-2019
 ^^^^^^^^^^^^^^
 
 Investigated figure failures due to ERDDAP dataset id changes and found that accommodating mix of 17-02 and 18-06 is very troublesome.
@@ -149,7 +149,7 @@ Continued dev of mohid run sub-command.
 Spin class.
 
 
-Wed 9-Jan-2018
+Wed 9-Jan-2019
 ^^^^^^^^^^^^^^
 
 Started learning rust.
@@ -164,7 +164,7 @@ See project work journal.
 (GOMSS)
 
 
-Thu 10-Jan-2018
+Thu 10-Jan-2019
 ^^^^^^^^^^^^^^^
 
 Confirmed that hindcast-201812 is indeed archiving VHFR FVCOM boundary slab files.
@@ -181,7 +181,7 @@ Set up $PROJECT/$USER/MIDOSS/ work space on cedar to test research runs setup.
 AtSci candidate seminar by Kate Marvel.
 
 
-Fri 11-Jan-2018
+Fri 11-Jan-2019
 ^^^^^^^^^^^^^^^
 
 Continued learning rust:
@@ -191,7 +191,7 @@ See project work journal.
 (GOMSS)
 
 
-Sat 12-Jan-2018
+Sat 12-Jan-2019
 ^^^^^^^^^^^^^^^
 
 Did more research on converting EC RPN files to netCDF and found http://collaboration.cmc.ec.gc.ca/science/rpn.comm/wiki/doku.php?id=armnlib which looks like it will give us librmn to enable getting farther in compilation of code from Francois Roy; review of ARMNLIB installation script tells me I want to run it in a VM.
@@ -202,7 +202,7 @@ Discovered that TLS certs for susanallen.ca and 43ravens.ca have expired; opened
 Webfaction now has control panel support for HTTPS via Let's Encrypt.
 
 
-Sun 13-Jan-2018
+Sun 13-Jan-2019
 ^^^^^^^^^^^^^^^
 
 Enabled HTTPS via control panel for susanallen.ca and 43ravens.ca; still unclear whether or not redirect sites & apps are still required.
@@ -219,7 +219,7 @@ Continued learning rust.
 Week 3
 ------
 
-Mon 14-Jan-2018
+Mon 14-Jan-2019
 ^^^^^^^^^^^^^^^
 
 Got test_pyramid_https app working with HTTPS by adding url_scheme = https to server:main section of config file.
@@ -236,7 +236,7 @@ Continued dev of mohid run sub-command.
 (MIDOSS)
 
 
-Tue 15-Jan-2018
+Tue 15-Jan-2019
 ^^^^^^^^^^^^^^^
 
 MOHID-Cmd intro session w/ Rachael and Ashu.
@@ -257,7 +257,7 @@ Worked on SalishSeasCast test case with Intel MPI libraries on cedar for Martin 
 (SalishSea)
 
 
-Wed 16-Jan-2018
+Wed 16-Jan-2019
 ^^^^^^^^^^^^^^^
 
 Continued learning rust.
@@ -285,7 +285,7 @@ See project work journal.
 (GOMSS)
 
 
-Thu 17-Jan-2018
+Thu 17-Jan-2019
 ^^^^^^^^^^^^^^^
 
 See project work journal.
@@ -343,7 +343,7 @@ Updated Mercurial on kudu to 4.8.2+3-fbd168455b26:
 * sudo make install PYTHON=/media/doug/warehouse/conda_envs/hg-dev/bin/python2.7
 
 
-Fri 18-Jan-2018
+Fri 18-Jan-2019
 ^^^^^^^^^^^^^^^
 
 See work journal.
@@ -368,7 +368,7 @@ Installed skype on niko via snap and resurrected my skype account with is now a 
 AtSci candidate seminar by Pengfei Liu (aerosol chemistry and climate change)
 
 
-Sat 19-Jan-2018
+Sat 19-Jan-2019
 ^^^^^^^^^^^^^^^
 
 Vancouver to Brampton
@@ -377,7 +377,7 @@ Forced readthedocs build of SalishSea-MEOPAR docs for Birgit and explained by em
 (SalishSea)
 
 
-Sun 20-Jan-2018
+Sun 20-Jan-2019
 ^^^^^^^^^^^^^^^
 
 Brampton
@@ -402,7 +402,7 @@ See project work journal.
 Week 4
 ------
 
-Mon 21-Jan-2018
+Mon 21-Jan-2019
 ^^^^^^^^^^^^^^^
 
 Brampton
@@ -417,7 +417,7 @@ See project work journal.
 (GOMSS)
 
 
-Tue 22-Jan-2018
+Tue 22-Jan-2019
 ^^^^^^^^^^^^^^^
 
 Replied to automated email from arbutus.cloud re: migration, and Venkat is on ensuring our migration happens.
@@ -438,7 +438,7 @@ collect_weather 00 stalled, unsure why; recovery:
 Brampton to Vancouver
 
 
-Wed 23-Jan-2018
+Wed 23-Jan-2019
 ^^^^^^^^^^^^^^^
 
 collect_weather 18 stalled; recovery:
@@ -459,7 +459,7 @@ See project journal.
 (SalishSeaCast-FVCOM)
 
 
-Thu 24-Jan-2018
+Thu 24-Jan-2019
 ^^^^^^^^^^^^^^^
 
 collect_weather 00 stalled; recovery:
@@ -481,7 +481,7 @@ Updated repo clones on kudu.
 (MIDOSS)
 
 
-Fri 25-Jan-2018
+Fri 25-Jan-2019
 ^^^^^^^^^^^^^^^
 
 collect_weather workers have been reliable since yesterday's sr_subscribe restart.
@@ -514,7 +514,7 @@ See project journal.
 AtSci candidate seminar by Oliver Watt-Meyer.
 
 
-Sat 26-Jan-2018
+Sat 26-Jan-2019
 ^^^^^^^^^^^^^^^
 
 forecast/26jan18 got stuck at 84.7% due to a file length issue in atmos forcing; upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race conditions between grib_to_netcdf and make_live_ocean_files; recovery:
@@ -537,7 +537,7 @@ Started implementing concurrent worker feature in NEMO_Nowcast; see Sat 17-Nov-2
 (SalishSea)
 
 
-Sun 27-Jan-2018
+Sun 27-Jan-2019
 ^^^^^^^^^^^^^^^
 
 forecast/26jan19 got stuck at 84.7% due to a file length issue in atmos forcing; upload_forcing nowcast+ got triggered before grib_to_netcdf finished due to race conditions between grib_to_netcdf and make_live_ocean_files; recovery:
