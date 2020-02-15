@@ -910,9 +910,6 @@ Started work on adapting download_weather and collect_weather to operate on eith
 Hacked download_weather enough to get files from dd.alpha server.
 (SalishSeaCast)
 
-Deleted ubcSSfDepthAvgdCurrents1hV18-06 from ERDDAP.
-(ERDDAP)
-
 
 Tue 11-Feb-2020
 ^^^^^^^^^^^^^^^
@@ -962,12 +959,27 @@ Fri 14-Feb-2020
 See work journal.
 (Navigator)
 
+Fixed bugs reported by Vicky in Make-MIDOSS-Forcing re: MF0 in output path, and output directories creation in /scratch/dlatorne/MIDOSS/forcing/.
+(MIDOSS)
+
+Continued hacking on SalishSeaNowcast CI workflow:
+* used Bitbucket password passed as secret to do pip VCS install of private FVCOM-Cmd pkg
+* used GitLab personal access token passed as secret to do pip VCS install of private OPPTools pkg
+Downloaded today's 1km HRDPS files from dd.alpha server using hacked download_weather.
+Continued work on adapting download_weather and collect_weather to operate on either 2.5km or 1km HRDPS product streams.
+Updated skookum OPPTools checkout to detached HEAD 6c784a4d to get get_cmap_speed() that was causing `make_plots fvcom * research` to fail.
+(SalishSeaCast)
+
+Attended CMOS annual tour lecture about 2020 Canadian Climate Change Assessment Report by NAthan Gillet of CCCma.
+
+Deleted ubcSSfDepthAvgdCurrents1hV18-06 from ERDDAP.
+(ERDDAP)
+
 
 
 
 
 TODO:
-* Delete ubcSSfDepthAvgdCurrents1hV18-06 from ERDDAP on Fri 7-Feb-2020
 * Sort out OPPTools dependencies so that we can run w/ origin/master:HEAD again
 * Fix:
     /media/doug/warehouse/conda_envs/nemo-nowcast/lib/python3.8/pathlib.py:1299: DeprecationWarning: an integer is required (got type FilePerms).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
@@ -985,4 +997,5 @@ Stack:
 * Elise's notebooks into Sphinx
 
 Done:
+* Delete ubcSSfDepthAvgdCurrents1hV18-06 from ERDDAP on Fri 7-Feb-2020
 * Disable ubcSSfDepthAvgdCurrents1hV18-06 on ERDDAP on Fri 31-Jan-2020
