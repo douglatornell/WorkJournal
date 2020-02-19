@@ -976,6 +976,159 @@ Deleted ubcSSfDepthAvgdCurrents1hV18-06 from ERDDAP.
 (ERDDAP)
 
 
+Sat 15-Feb-2020
+^^^^^^^^^^^^^^^
+
+Created navigator conda env on kudu so that I can run unit tests there rather than in container to avoid PyCharm remote interpreter file sync hitches; had to remove strict version pinning on gdal and libgdal from config/conda/environment.yml
+
+Worked with Susan to migrate production from 2018-12 to 2019-05:
+* Susan crafted SS-run-sets/v201915/nowcast-[blue|green] dirs and symlinked forecast and forecast2 from the nowcast-blue dir
+* uploaded to arbutus.cloud:
+  * recent LiveOcean_v201905_*.nc files
+  * hindcast.201905/14feb20 restart files
+  * symlinked hindcast.201905/14feb20 as nowcast-green/14feb20
+* update nowcast.yaml:
+  * "temperature salinity"."file template"
+  * "temperature salinity".parameter_set
+  * "run types":"run sets dir"
+  * "results archive"
+  * run."enabled hosts".salish-nowcast."run types".nowcast-green.results
+* tag repos with PROD-nowcast-green-201905 at PROD-hindcast_201905-v3
+  * grid
+  * NEMO-3.6-code
+  * rivers-climatology
+  * tides
+  * tracers
+  * XIOS-ARCH
+* tag repo with PROD-nowcast-green-201905 at PROD-nowcast-green-201812
+  * XIOS-2
+* pulled and update SalishSeaNowcast repo on skookum
+* pulled and updated repos on arbutus.cloud:
+  * updated to PROD-nowcast-green-201905:
+    * NEMO-3.6-code
+    * XIOS-2
+    * XIOS-ARCH
+    * grid
+    * rivers-climatology
+    * tides
+    * tracers
+  * updated to tip:
+    * NEMO-Cmd
+    * NEMO_Nowcast
+    * SS-run-sets
+    * SalishSeaCmd
+    * SalishSeaNowcast
+    * moad_tools
+* update NEMO-3.6-code:
+  * arbutus.cloud SalishSeaCast and SalishSeaCast_Blue
+  * salish for nowcast-dev SalishSeaCast_Blue
+* Susan edited nowcast-green/14feb20/namelist_cfg on arbutus to make its nn_it000 value consistent with the uploaded restart files
+* launched nowcast-green test via make_forcing_links
+  * nowcast-green and wwatch3 nowcast ran successfully
+  * wwatch3 forecast failed
+* created results dirs:
+  * /results/SalishSea/nowcast-blue.201905
+  * /results/SalishSea/forecast.201905
+  * /results/SalishSea/forecast2.201905
+* symlinked 10-15feb20 into above results dirs so that rolling forecasts will be smooth
+Downloaded today's 1km HRDPS files from dd.alpha server using hacked download_weather.
+(SalishSeaCast)
+
+See work journal.
+(Navigator)
+
+
+Sun 16-Feb-2020
+^^^^^^^^^^^^^^^
+
+Continued work w/ Susan to migrate production from 2018-12 to 2019-05:
+* nowcast/16feb20 failed due to incorrect nn_it000 value in nowcast/15feb20/namelist_cfg; the value on arbutus needed to be changed to be compatible with the nowcast-green/15feb20 restart file that we produced last night
+* nowcast/16feb20 failed again due to a missed closing tag in file_def.xml; Susan fixed
+* nowcast-agrif failed due to outdated LiveOcean file names:
+  * uploaded recent LiveOcean_v201905_*.nc files to orcinus
+  * Susan updated namelist.lateral to refer to them
+  * pulled SS-run-sets on orcinus
+  * re-launched with make_forcing_links orcinus nowcast-agrif
+* nowcast-agrif failed due to broken symlink for namelist_top_cfg after updating SS-runsets re: above failure:
+  * breakage due to splitting of namelist_top_cfg into several files
+  * Susan replaced broken symlink with appropriate concatenated namelist_top_cfg file for agrif only
+  * pulled SS-run-sets on orcinus
+  * re-launched with make_forcing_links orcinus nowcast-agrif
+* updated nowcast-green ERDDAP dataset ids to V19-05 in config for ping_erddap
+* modernized ping_erddap unit tests
+* nowcast-agrif failed due to too agreesive updating of namelist.lateral:
+  * Susan fixed namelist.lateral
+  * pulled SS-run-sets on orcinus
+  * re-launched with make_forcing_links orcinus nowcast-agrif
+* nowcast-dev failed because it was looking for 201712 LiveOcean files:
+  * Susan added nowcast-dev/ dir to SS-run-sets/v201915/
+  * Susan changed nowcast-dev in nowcast.yaml config from running v201702 to v201905
+  * pulled SS-run-sets on skookum
+  * pulled SalishSeaNowcast on skookum
+  * re-launched with make_forcing_links salish nowcast+ --shared-storage
+* changed nowcast-dev results storage to new nowcast-dev.201905/ directory
+* emailed Emilio re: change from V18-12 to V19-05
+* updated ERDDAP front page
+Downloaded today's 1km HRDPS files from dd.alpha server using hacked download_weather.
+(SalishSeaCast)
+
+See work journal.
+(Navigator)
+
+
+Week 8
+------
+
+Mon 17-Feb-2020
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - BC Family Day
+
+See work journal.
+(Navigator)
+
+Continued work w/ Susan to migrate production from 2018-12 to 2019-05:
+* nowcast-dev failed because 16feb20 restart and namelist_cfg weren't in nowcast-dev.201905 ???:
+  * created appropriate symlinks
+  * re-launched with make_forcing_links salish nowcast+ --shared-storage
+Downloaded today's 1km HRDPS files from dd.alpha server using hacked download_weather.
+(SalishSeaCast)
+
+
+Tue 18-Feb-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+
+Wed 19-Feb-2020
+^^^^^^^^^^^^^^^
+
+collect_weather 06 failed due to network issues; recovery started at 07:30:
+  kill collect_weather 06
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20200219/06
+  download_weather 06
+  wait for 12 weather sarracenia downloads to finish
+  collect_weather 18
+  wait for forecast2 completion
+  download_weather 12
+
+  clear /SalishSeaCast/datamart/hrdps-west/ directories
+(SalishSeaCast)
+
+
+
+
+
+
+
+* Fix tags on tags in rivers-climatology
+
+tag repo with PROD-nowcast-green-201905 once we are running
+  * SS-run-sets
+
+* delete /results/SalishSea/*.201905/10-15feb20 dirs symlinks made for rolling forecasts transition
 
 
 
