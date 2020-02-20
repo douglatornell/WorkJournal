@@ -1133,7 +1133,7 @@ See work journal.
 
 Dental hygiene appt.
 
-Sent DFO security  screening package to Wanda@NAFC.
+Sent DFO security screening package to Wanda@NAFC.
 
 Started work on setting up 2020 bloomcast:
 * runs dir: /data/dlatorne/SOG-projects/SoG-bloomcast-ensemble/run/
@@ -1166,6 +1166,18 @@ Started work on setting up 2020 bloomcast:
 
 Talked to Vicky about oil movement wind sensitivity experiment pipeline.
 (MIDOSS)
+
+
+Thu 20-Feb-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+make_forcing_links orcinus nowcast-agrif glitched on auth; re-ran manually with success at ~10:40.
+(SalishSeaCast)
+
+Vancouver to Yellowknife
 
 
 
