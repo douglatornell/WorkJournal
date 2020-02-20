@@ -231,6 +231,8 @@ Mon 13-Jan-2018
 ^^^^^^^^^^^^^^^
 
 Monthly IOS-UBC modeling collaboration mtg.
+(Prediction Core)
+
 orcinus returned to operation; started backfilling nowcast-agrif:
 * for d in {08..13}; upload_forcing orcinus-nowcast-agrif nowcast+ --run-date 2020-01-$d --debug
 * for d in {08..13}; upload_forcing orcinus-nowcast-agrif turbidity  --run-date 2020-01-$d --debug
@@ -899,6 +901,7 @@ UBC/DFO model collab mtg:
 * talked about 1km HRDPS
 * I emailed link to Susan's 2019-05 hindcast viz book to Laura & Michael
 * forwarded 1km HRDPS email to Laura and Michael
+(Prediction Core)
 
 Weekly group mtg; see whiteboard.
 (MOAD)
@@ -1101,6 +1104,11 @@ Tue 18-Feb-2020
 See work journal.
 (Navigator)
 
+Got fingerprints done for DFO security screening.
+
+Downloaded today's 1km HRDPS 00 files from dd.alpha server using hacked download_weather.
+(SalishSeaCast)
+
 
 Wed 19-Feb-2020
 ^^^^^^^^^^^^^^^
@@ -1115,8 +1123,49 @@ collect_weather 06 failed due to network issues; recovery started at 07:30:
   download_weather 12
 
   clear /SalishSeaCast/datamart/hrdps-west/ directories
+make_ww3_wind_file for forecast2 got stuck; killed it and re-ran manually for forecast.
+
+Downloaded today's 1km HRDPS files from dd.alpha server using hacked download_weather.
 (SalishSeaCast)
 
+See work journal.
+(Navigator)
+
+Dental hygiene appt.
+
+Sent DFO security  screening package to Wanda@NAFC.
+
+Started work on setting up 2020 bloomcast:
+* runs dir: /data/dlatorne/SOG-projects/SoG-bloomcast-ensemble/run/
+* created /data/dlatorne/SOG-projects/hg/
+* moved SoG-bloomcast-ensemble/ to hg/SoG-bloomcast-ensemble.hg/
+* cloned SOG-Bloomcast-Ensemble from GitHub
+* replaced .hgignore with .gitignore
+* cp run/2019_bloomcast_inifile.yaml run/2020_bloomcast_infile.yaml
+* archived 2019_bloomcast* files in run/2019/
+* archived bloomcast.log and bloom_date_evolution.log files into run/2019/
+* edit 2020_bloomcast_infile.yaml
+* edit config.yaml
+* disable push to web for test run
+* source activate /data/dlatorne/SOG-projects/blomcast-env-mpl-1.5.3 # note misspelling
+* pip install -e /data/dlatorne/SOG-projects/SoG-Bloomcast-Ensemble
+* test run: cd run && bloomcast ensemble -v config.yaml
+* test run succeeded: 10mar 12mar 20mar 07apr 13apr
+* enabled push to web
+* deleted wind_data_date to allow repeat run for today
+* updated repo clone spelling in cronjob.sh
+* ran manual production run w/ bash ./cronjob.sh; success! :-)
+* checked bloomcast page on salishsea-site
+* posted link to SalishSeaCast whiteboard
+* enable cron job on salish
+* commit 2020 config files
+
+* edit new weather descriptions into cloud fraction file and commit
+* tag for 2020
+(bloomcast)
+
+Talked to Vicky about oil movement wind sensitivity experiment pipeline.
+(MIDOSS)
 
 
 
@@ -1133,6 +1182,7 @@ tag repo with PROD-nowcast-green-201905 once we are running
 
 
 TODO:
+* Update bloomcast plots so that we are not tied to matplotlib-1.5.3
 * Sort out OPPTools dependencies so that we can run w/ origin/master:HEAD again
 * Fix:
     /media/doug/warehouse/conda_envs/nemo-nowcast/lib/python3.8/pathlib.py:1299: DeprecationWarning: an integer is required (got type FilePerms).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
