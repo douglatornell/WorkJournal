@@ -1168,6 +1168,65 @@ Talked to Vicky about oil movement wind sensitivity experiment pipeline.
 (MIDOSS)
 
 
+Week 9
+------
+
+Mon 24-Feb-2020
+^^^^^^^^^^^^^^^
+
+Deleted YuEtAlV1911 dataset that is now on UBC Dataverse at https://doi.org/10.5683/SP2/ZM89PF
+(ERDDAP)
+
+(SalishSeaCast)
+
+Started migration of UBC_MOAD group repos:
+* ariane-2.2.6_00
+(MOAD)
+
+Phys Ocgy seminar by Tetyana Ross re: O2 min zone and seamount marine protected areas.
+
+Earth Data Science candidate seminar by Alison Malcolm re: data science for geophysics
+
+Helped Vicky run split_results on her wind effect investigation.
+(MIDOSS)
+
+
+Tue 25-Feb-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+Continued migration of UBC_MOAD group repos:
+* seatracker-matlab
+* SeaTracker-Python
+(MOAD)
+
+
+Wed 26-Feb-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+Continued migration of UBC_MOAD group repos:
+* ariane-2.2.8-code
+* docs
+  * change readthedocs webhook
+    * application/json
+    * Leave the Secrets field blank
+    * select individual events: Branch or tag creation, Branch or tag deletion, and Pushes
+  * update copyright year range
+  * update badges in README and contributing
+  * resolve security alerts re: jinja2, requests, urllib3, cryptography
+  * update readthedoc.yml file to schema 2.0
+  * subscribe to notifications in #ssc-repos channel
+(MOAD)
+
+Emailed Michael about 1km HRDPS archive from 2019-10-24 onward saying that we don't have storage for full RPNs, just 11 surface-ish variables (~75G).
+Updated SalishSeaNowcast dev docs & README re: Bitbucket to GitHub migration.
+Fixed bugs in NEMO_Nowcast docs re: Bitbucket to GitHub migration.
+(SalishSeaCast)
 
 
 
