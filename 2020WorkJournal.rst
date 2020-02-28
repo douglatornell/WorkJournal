@@ -1175,9 +1175,53 @@ See work journal.
 (Navigator)
 
 make_forcing_links orcinus nowcast-agrif glitched on auth; re-ran manually with success at ~10:40.
+Downloaded today's 1km HRDPS files from dd.alpha server using hacked download_weather.
+Continued work on adapting download_weather and collect_weather to operate on either 2.5km or 1km HRDPS product streams.
 (SalishSeaCast)
 
 Vancouver to Yellowknife
+
+
+Fri 21-Feb-2020
+^^^^^^^^^^^^^^^
+
+Yellowknife.
+Walked part way around Niven Lake near hotel. Went to Aurora Village.
+
+See work journal.
+(Navigator)
+
+Downloaded today's 1km HRDPS files from dd.alpha server using hacked download_weather.
+Continued work on adapting download_weather and collect_weather to operate on either 2.5km or 1km HRDPS product streams.
+(SalishSeaCast)
+
+
+Sat 22-Feb-2020
+^^^^^^^^^^^^^^^
+
+Yellowknife.
+Dog sled tour from Grace Lake with Becks Kennels guide Elizabeth.
+Walked to Old Town and Snow Castle on Yellowknife Bay of Great Slave Lake, via NWT Brewing tap room.
+Midnight stroll to try to view aurora to the hill behind the hotel above Niven Lake.
+
+See work journal.
+(Navigator)
+
+Downloaded today's 1km HRDPS files from dd.alpha server using hacked download_weather.
+Finished work on adapting download_weather and collect_weather to operate on either 2.5km or 1km HRDPS product streams.
+Finally solved CI workflow VCS install for SalishSeaTools; needed quotes in workflow YAML to protect &subdirectory=.
+(SalishSeaCast)
+
+
+Sun 23-Feb-2020
+^^^^^^^^^^^^^^^
+
+Long walk part way around Frame Lake.
+
+Yellowknife to Vancouver
+
+Figured out how to suppress TLS certs verification via requests.Session in download_weather instead of having to hack the option all the way into request.get().
+(SalishSeaCast)
 
 
 Week 9
@@ -1239,6 +1283,16 @@ Emailed Michael about 1km HRDPS archive from 2019-10-24 onward saying that we do
 Updated SalishSeaNowcast dev docs & README re: Bitbucket to GitHub migration.
 Fixed bugs in NEMO_Nowcast docs re: Bitbucket to GitHub migration.
 (SalishSeaCast)
+
+
+Thu 27-Feb-2020
+^^^^^^^^^^^^^^^
+
+Emailed Rachael & Vicky re: deleting /results2/MIDOSS/; got approval and did the deletion.
+(MIDOSS)
+
+See work journal.
+(Navigator)
 
 
 
