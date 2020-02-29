@@ -1295,6 +1295,35 @@ See work journal.
 (Navigator)
 
 
+Fri 28-Feb-2020
+^^^^^^^^^^^^^^^
+
+Mtg w/ Richard Dewey & Gordon Rees of ONC re: modelling support:
+* Susan, Doug, Ben
+* ONC has lots of new funding for operational support
+Discussed new workstations spec and chopstick, and load on skookum with Charles.
+Discussed dask and chunking with Ben.
+(SalishSeaCast)
+
+Finished migration of UBC_MOAD group repos:
+* moad_tools
+  * subscribe to notifications in #ssc-repos channel
+  * change readthedocs webhook
+    * application/json
+    * Leave the Secrets field blank
+    * select individual events: Branch or tag creation, Branch or tag deletion, and Pushes
+  * add .gitignore
+  * update copyright year range
+  * update readthedoc.yml file to schema 2.0
+  * bump version to 20.1.dev0
+  * update dev env and requirements.txt
+  * update badges in README and contributing
+(MOAD)
+
+
+(MIDOSS)
+
+
 
 
 * Fix tags on tags in rivers-climatology
