@@ -1320,9 +1320,37 @@ Finished migration of UBC_MOAD group repos:
   * update badges in README and contributing
 (MOAD)
 
-
+Created repos migration plan for next week and emailed it.
+Discussed proscribed wind runs with Vicky.
 (MIDOSS)
 
+
+Sat 29-Feb-2020
+^^^^^^^^^^^^^^^
+
+White Rock
+
+Changed skookum and arbutus installs of moad_tools to be git clones.
+Updated deployment docs re: moad_tools clone, and python3 -m pip install.
+(SalishSeaCast)
+
+We Shall Overcome MLK concert lead by Damien Sneed at Chan Centre
+
+
+Sun 1-Mar-2020
+^^^^^^^^^^^^^^
+
+Started processing of Yellowknife photos:
+* launch RPD with /media/doug/warehouse/Pictures/RapidPhotoDownloader-0.9.14/RapidPhotoDownloader/bin/rapid-photo-downloader
+* Downloaded all images from OM-D card
+* discovered that camera clock had reset to 2012-01-01 00:00 for all images; fixed file names via Python in /media/doug/warehouse/Pictures/ and on backup drive
+* imported them into Darktable
+* updated backup drive
+* ran borg backup to lizzy
+
+Preliminary 2019 income tax work.
+
+FAL estate work.
 
 
 
