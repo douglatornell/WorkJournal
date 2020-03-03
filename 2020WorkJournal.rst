@@ -1353,6 +1353,48 @@ Preliminary 2019 income tax work.
 FAL estate work.
 
 
+Week 10
+-------
+
+Mon 1-Mar-2020
+^^^^^^^^^^^^^^
+
+Returned JRA's rental scooter to McDonald Home Healthcare.
+
+Moad team mtg; see whiteboard.
+Emailed Karina re: her trick for cloning git repo into existing hg clone.
+(MOAD)
+
+Started migration of MIDOSS repos:
+* Vicky migrated:
+  * sensitivity-tests-log
+  * docs
+  * analysis-ashutosh
+* analysis-doug
+* analysis-xaoimei
+Emailed Shihan and Xaoimei for their GitHub ids
+* docs TODO:
+  * subscribe to notifications in #soiled channel
+  * change readthedocs webhook
+    * application/json
+    * Leave the Secrets field blank
+    * select individual events: Branch or tag creation, Branch or tag deletion, and Pushes
+  * update copyright year range
+  * resolve security alerts re: jinja2, requests, urllib3, cryptography
+  * update badges in README and contributing
+  * update readthedoc.yml file to schema 2.0
+(MIDOSS)
+
+readthedocs doesn't like to use conda-forge channel because repodata.json file is too big.
+
+Invited Elise to GitHub orgs.
+Backfilled fvcom nowcast-r12 publish figures for 13-19 and 22-29 Feb
+(SalishSeaCast)
+
+Did ONC annual survey and compiled list of talks, posters, etc. I was named on in 2019.
+
+
+
 
 * Fix tags on tags in rivers-climatology
 
