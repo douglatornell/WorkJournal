@@ -1394,6 +1394,35 @@ Backfilled fvcom nowcast-r12 publish figures for 13-19 and 22-29 Feb
 Did ONC annual survey and compiled list of talks, posters, etc. I was named on in 2019.
 
 
+Fri 6-Mar-2020
+^^^^^^^^^^^^^^
+
+Continued migration of MIDOSS repos:
+* MIDOSS-MOHID-grid
+  * subscribe to notifications in #soiled channel
+* MIDOSS-MOHID-CODE
+  * subscribe to notifications in #soiled channel
+  * replace .hgignore with .gitignore
+* Make-MIDOSS-Forcing
+  * subscribe to notifications in #soiled channel
+  * replace .hgignore with .gitignore
+  * change readthedocs webhook
+    * application/json
+    * Leave the Secrets field blank
+    * select individual events: Branch or tag creation, Branch or tag deletion, and Pushes
+  * rename env/ to envs/
+  * change pip install to python3 -m pip install
+  * update pkgs & versions in recent dev env
+  * move requirements.txt to top level dir
+  * update README and dev docs re: migration to GitHub
+(MIDOSS)
+
+Zoom mtg w/ Yvonne Coady & Derek Jacoby at uVic re: 3D viz of SalishSeaCast.
+(Prediction Core)
+
+Mtg w/ Tiffany re: pytest.
+
+
 
 
 * Fix tags on tags in rivers-climatology
