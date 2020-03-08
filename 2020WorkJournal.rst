@@ -468,7 +468,7 @@ Dentist appt to patch broken tooth and start process of getting a cap.
 arbutus refused connection for upload_forcing nowcast+; re-ran manually at ~09:20 to restart automation.
 Investigated how to better use race condition mgmt to ensure that clear_checklist is not launched so early that it disrupts wwatch3 post-forecast2 processing:
 * need to ensure that both `make_plots nemo foreacst2 publish` and `make_plots wwatch3 foreacst2 publish` finish before make_feeds is launched
-* that poses to problems:
+* that poses 2 problems:
   1. race condition mgmt doesn't know about worker args
   2. wwatch3 forecast2 doesn't run reliably due to make_ww3_wind_file occasionally getting stuck
 (SalishSeaCast)
@@ -1121,8 +1121,6 @@ collect_weather 06 failed due to network issues; recovery started at 07:30:
   collect_weather 18
   wait for forecast2 completion
   download_weather 12
-
-  clear /SalishSeaCast/datamart/hrdps-west/ directories
 make_ww3_wind_file for forecast2 got stuck; killed it and re-ran manually for forecast.
 
 Downloaded today's 1km HRDPS files from dd.alpha server using hacked download_weather.
@@ -1356,7 +1354,7 @@ FAL estate work.
 Week 10
 -------
 
-Mon 1-Mar-2020
+Mon 2-Mar-2020
 ^^^^^^^^^^^^^^
 
 Returned JRA's rental scooter to McDonald Home Healthcare.
@@ -1373,7 +1371,7 @@ Started migration of MIDOSS repos:
 * analysis-doug
 * analysis-xaoimei
 Emailed Shihan and Xaoimei for their GitHub ids
-* docs TODO:
+* docs:
   * subscribe to notifications in #soiled channel
   * change readthedocs webhook
     * application/json
@@ -1393,6 +1391,104 @@ Backfilled fvcom nowcast-r12 publish figures for 13-19 and 22-29 Feb
 
 Did ONC annual survey and compiled list of talks, posters, etc. I was named on in 2019.
 
+
+Tue 3-Mar-2020
+^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+FAL estate work.
+
+
+Wed 4-Mar-2020
+^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+Continued migration of MIDOSS repos:
+* salishseashihan
+* midoss-mohid
+* ubc-week-mar19
+* wwatch3-cmd:
+  * subscribe to notifications in #ssc-repos channel
+  * change readthedocs webhook
+    * application/json
+    * Leave the Secrets field blank
+    * select individual events: Branch or tag creation, Branch or tag deletion, and Pushes
+  * replace .hgignore with .gitignore
+  * change env/ to envs/
+  * change `pip install` to `python3 -m pip install`
+  * move requirements.txt from envs/ to top level; remember to change in comments
+  * update copyright year range
+  * bump version to 20.1.dev0
+  * **failed to update dev env to Python 3.8 due to conda pkg conflicts**
+  * add github-actions incoming webhook app to MIDOSS #soiled channel
+  * add SLACK_WEBHOOK_URL secret to repo on GitHub
+  * add CODECOV_TOKEN secret to repo on GitHub
+  * add CI workflow; remember to delete Python from environment-test.yaml
+  * update badges and text in README and contributing
+(MIDOSS)
+
+Discovered that wwatch3 runs failed in forecast2 on 3-Mar.
+(SalishSeaCast)
+
+
+Thu 5-Mar-2020
+^^^^^^^^^^^^^^
+
+wwatch3/forecast2/03mar20 failure is due to stuck make_ww3_wind_file worker.
+Discovered automation mess:
+* ValueError due to time dimension values from make_plots fvcom that had been running all night
+* collect_weather 00 never finished
+    2020-03-04 19:55:41,980 [ERROR] Unexpected error: [Errno 110] Connection timed out
+    2020-03-04 19:55:52,149 [ERROR] Unexpected error: [Errno 32] Broken pipe
+    ...
+    2020-03-04 20:57:40,286 [INFO] heartbeat. Sarracenia version is: 2.20.02b1
+
+    2020-03-04 20:57:40,286 [INFO] hb_memory cpu_times user=2334.92 system=254.64 elapse=26111210.2
+    2020-03-04 20:57:40,286 [INFO] hb_memory, current usage: 52.3 MiB trigger restart if increases past: 154.1 MiB
+    2020-03-04 20:57:40,286 [INFO] hb_pulse message_count 1774786 publish_count 0
+    2020-03-04 20:57:40,291 [WARNING] hb_pulse no pulse, and no connection... reconnecting
+    2020-03-04 20:57:40,291 [ERROR] Unexpected error: [SSL: BAD_LENGTH] bad length (_ssl.c:2457)
+    2020-03-04 20:57:40,291 [ERROR] Unexpected error: [SSL: BAD_LENGTH] bad length (_ssl.c:2457)
+    2020-03-04 20:57:40,291 [ERROR] Unexpected error: [SSL: BAD_LENGTH] bad length (_ssl.c:2457)
+    2020-03-04 20:57:40,292 [ERROR] Unexpected error: [SSL: BAD_LENGTH] bad length (_ssl.c:2457)
+    2020-03-04 20:57:40,292 [ERROR] Unexpected error: [SSL: BAD_LENGTH] bad length (_ssl.c:2457)
+    2020-03-04 20:57:40,292 [INFO] AMQP  broker(dd.weather.gc.ca) user(anonymous) vhost()
+    2020-03-04 20:57:40,292 [INFO] Using amqp module (AMQP 0-9-1)
+    2020-03-04 20:57:40,932 [INFO] Binding queue q_anonymous.sr_subscribe.hrdps-west.74434425.78671301 with key v02.post.model_hrdps.west.grib2.# from exchange xpublic on broker amqps://anonymous@dd.weather.gc.ca
+    2020-03-04 20:57:41,234 [INFO] reading from to anonymous@dd.weather.gc.ca, exchange: xpublic
+    2020-03-04 20:57:41,367 [INFO] report_back to anonymous@dd.weather.gc.ca, exchange: xs_anonymous
+    2020-03-04 20:57:41,367 [INFO] hb_retry on_heartbeat
+    2020-03-04 20:57:41,367 [INFO] sr_retry on_heartbeat
+    2020-03-04 20:57:41,379 [INFO] No retry in list
+    2020-03-04 20:57:41,382 [INFO] sr_retry on_heartbeat elapse 0.014716
+  recovery:
+    mv /results/forcing/atmospheric/GEM2.5/GRIB/20200305/00 /results/forcing/atmospheric/GEM2.5/GRIB/20200305/00.aside
+    pkill -f collect_weather
+    download_weather 00 2.5km
+    download_weather 06 2.5km
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20200305/00.aside
+    rm -rf /SalishSeaCast/datamart/hrdps-west/06/*
+    rm -rf /SalishSeaCast/datamart/hrdps-west/12/*
+    wait for forecast2 runs to complete
+    download_weather 12 2.5km
+    collect_weather 18 2.5km
+* wwatch3 recovery:
+    arbutus: pkill -f make_ww3_wind_file
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2020-03-03"
+    had some trouble with left over race condition management
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2020-03-03"
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2020-03-04"
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2020-03-04"
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2020-03-05"
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2020-03-05"
+(SalishSeaCast)
+
+See work journal.
+(Navigator)
 
 Fri 6-Mar-2020
 ^^^^^^^^^^^^^^
