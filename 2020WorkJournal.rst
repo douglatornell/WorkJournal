@@ -1490,6 +1490,7 @@ Discovered automation mess:
 See work journal.
 (Navigator)
 
+
 Fri 6-Mar-2020
 ^^^^^^^^^^^^^^
 
@@ -1517,6 +1518,34 @@ Zoom mtg w/ Yvonne Coady & Derek Jacoby at uVic re: 3D viz of SalishSeaCast.
 (Prediction Core)
 
 Mtg w/ Tiffany re: pytest.
+
+
+Sat 7-Mar-2020
+^^^^^^^^^^^^^^
+
+Continued migration of MIDOSS repos:
+* MIDOSS-MOHID-config failed; sent support request msg to GitHub; response was that it is unclear from logs what the problem is
+Updated MOHID-Cmd code & docs re: repos migrated to GitHub.
+(MIDOSS)
+
+Explored merge conflict resolution in `git pull --rebase` context in work journal:
+  git pull --rebase
+  # merge conflict
+  git mergetool --tool kdiff3
+  # resolve conflicts
+  git rebase --continue
+Can set kdiff3 as default merge tool on kudu with:
+  git config --global merge.tools kdiff3
+Added section to MOAD VCS migration doc.
+
+
+Sun 8-Mar-2020
+^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+
 
 
 
