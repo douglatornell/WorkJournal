@@ -1546,6 +1546,72 @@ See work journal.
 (Navigator)
 
 
+Week 11
+-------
+
+Mon 9-Mar-2020
+^^^^^^^^^^^^^^
+
+Re-familiarized myself with `mohid monte-carlo` sub-command in prep for session this afternoon w/ Rachael & Vicky.
+Continued migration of MIDOSS repos:
+* mohid-cmd:
+  * subscribe to notifications in #ssc-repos channel
+  * change readthedocs webhook
+    * application/json
+    * Leave the Secrets field blank
+    * select individual events: Branch or tag creation, Branch or tag deletion, and Pushes
+  * add SLACK_WEBHOOK_URL secret to repo on GitHub
+  * add CODECOV_TOKEN secret to repo on GitHub
+  * replace .hgignore with .gitignore
+  * move requirements.txt from envs/ to top level; remember to change in comments
+  * **failed to update dev env to Python 3.8 due to conda pkg conflicts**
+  * add CI workflow; remember to delete Python from environment-test.yaml
+  * update badges and text in README and contributing
+(MIDOSS)
+
+UBC-IOS modelling collaboration mtg:
+* UBC: Susan, Elise, Doug
+* IOS: Laura, Maxim
+* Elise presented her Ocean Sciences talk
+(Prediction Core)
+
+MOAD team mtg; see whiteboard.
+(MOAD)
+
+Vancouver to Nanaimo
+
+
+Tue 10-Mar-2020
+^^^^^^^^^^^^^^^
+
+Nanaimo
+
+SoPO mtg:
+* pull temperature and salinty time series for Departure Bay and Chrome Island lighthouse locations to compare w/ Peter Chandler time series
+(SalishSeaCast)
+
+
+Wed 11-Mar-2020
+^^^^^^^^^^^^^^^
+
+Nanaimo
+
+Started migration of SalishSeaCast repos:
+* SalishSeaWaves
+* NEMO-3.1
+* CONCEPTS-110
+* NEMO-EastCoast
+* SoG-Obs
+* NEMO-3.4-Code
+
+* NEMO-Forcing; has 13 large files (1 mesh mask, 12 initial T&S) that we have to decide how to handle
+SoPO mtg; see hand-written notes.
+(SalishSeaCast)
+
+Finished MOHID-Cmd docs updates re: VCS migration.
+(MIDOSS)
+
+
 
 
 
