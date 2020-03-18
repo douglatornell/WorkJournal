@@ -1586,6 +1586,9 @@ Tue 10-Mar-2020
 
 Nanaimo
 
+See work journal.
+(Navigator)
+
 SoPO mtg:
 * pull temperature and salinty time series for Departure Bay and Chrome Island lighthouse locations to compare w/ Peter Chandler time series
 (SalishSeaCast)
@@ -1603,7 +1606,6 @@ Started migration of SalishSeaCast repos:
 * NEMO-EastCoast
 * SoG-Obs
 * NEMO-3.4-Code
-
 * NEMO-Forcing; has 13 large files (1 mesh mask, 12 initial T&S) that we have to decide how to handle
 SoPO mtg; see hand-written notes.
 (SalishSeaCast)
@@ -1611,6 +1613,221 @@ SoPO mtg; see hand-written notes.
 Finished MOHID-Cmd docs updates re: VCS migration.
 (MIDOSS)
 
+Vancouver to Nanaimo
+
+
+Thu 12-Mar-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+Built new Python 3.8 dev env for SalishSeaNowcast on kudu.
+Updated psutil version on skookum and arbutus re: dependabot security alert; conda says that arbutus env is inconsistent.
+(SalishSeaCast)
+
+Conjunctivitis
+
+
+Fri 13-Mar-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+Continued migration of SalishSeaCast repos:
+* XIOS-1.0
+download_live_ocean failed with an import error; presumed due to psutil update yesterday making env unstable; built a new nowcast-env on skookum:
+  cp nowcast-env/etc/conda/activate.d/envvars.sh nowcast-env-envvars.sh
+  conda update -n base -c defaults conda
+  conda env remove --prefix /SalishSeaCast/nowcast-env
+    lots of stale NFS handles messages
+  mv nowcast-env nowcast-env-borked
+  conda env create \
+    --prefix /SalishSeaCast/nowcast-env \
+    -f SalishSeaNowcast/envs/environment-prod.yaml
+  resulted in a Python 3.8.2 env
+  python3 -m pip install -e packages
+  cp nowcast-env-envvars.sh nowcast-env/etc/conda/activate.d/envvars.sh
+  create nowcast-env/etc/conda/deactivate.d/envars.sh
+  deactivate, re-activate & check env
+  supervisord --configuration $NOWCAST_CONFIG/supervisord.ini
+  download_live_ocean -h is very slow
+Built new nowcast-env on arbutus:
+  sudo apt update
+  sudo apt upgrade
+  update clones
+  git clone SalishSeaWaves
+  cp nowcast-env/etc/conda/activate.d/envvars.sh nowcast-env-envvars.sh
+  conda update -n base -c defaults conda
+  conda env remove --prefix /nemoShare/MEOPAR/nowcast-sys/nowcast-env
+  resulted in a Python 3.8.2 env
+  cp nowcast-env-envvars.sh nowcast-env/etc/conda/activate.d/envvars.sh
+  create nowcast-env/etc/conda/deactivate.d/envars.sh
+  python3 -m pip install -e packages
+Restarted automation at ~12:00:
+  collect_weather 18 2.5km &
+  download_live_ocean
+  make_live_ocean_files was very slow
+  had to launch run_NEMO and watch_NEMO mnaually on arbutus
+  restarted log_aggregator
+(SalishSeaCast)
+
+
+Sat 14-Mar-2020
+^^^^^^^^^^^^^^^
+
+Lots of fail at ~09:45; investigation:
+* make_plots comparison failed
+  * nowcast-dev/13mar20 did not have complete
+    * envvars not being set for run_NEMO because I messed up the cp of nowcast-env-envvars, just like I did on arbutus :-(
+  * make_forcing_links salish nowcast+ --shared-storage --run-date 2020-03-13
+  * make_plots nemo nowcast comparison 2020-03-13
+  * make_forcing_links salish-nowcast nowcast+ --shared-storage 2020-03-14
+* nowcast-r12 finished too fast
+  * because there were no 13mar20 runs, maybe due to envvars.sh file name issue
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-03-13"
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-03-13"
+make_fvcom_boundary issued FutureWarning twice:
+  /nemoShare/MEOPAR/nowcast-sys/nowcast-env/lib/python3.8/site-packages/pyproj/crs/crs.py:279: FutureWarning: '+init=<authority>:<code>' syntax is deprecated. '<authority>:<code>' is the preferred initialization method. When making the change, be mindful of axis order changes: https://pyproj4.github.io/pyproj/stable/gotchas.html#axis-order-changes-in-proj-6
+    projstring = _prepare_from_string(projparams)
+Started planning week of 16-Mar (and beyond) VCS migrations:
+  salishsea-site
+  analysis
+  docs
+  analysis-nancy
+  analysis-sprints
+  analysis-michael
+  rpn-to-gemlam
+  fvcom-cmd
+  mestingtools
+  sog
+  sog-forcing
+  sog-initial
+  sog-runsets
+
+  analysis-idalia
+  analysis-muriel
+
+  private-tools
+  xios-arch
+  xios-2
+  nemo-cmd
+  salishseacmd
+  grid
+  rivers-climatology
+  tides
+  tracers
+  nemo-3.6-code
+  tools
+  ss-run-sets
+(SalishSeaCast)
+
+
+Sun 15-Mar-2020
+^^^^^^^^^^^^^^^
+
+fvcom backfilling:
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-03-14"
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-03-14"
+(SalishSeaCast)
+
+
+Week 12
+-------
+
+Mon 16-Mar-2020
+^^^^^^^^^^^^^^^
+
+First day of official UBC work-from-home due to COVID-19
+
+See work journal.
+(Navigator)
+
+MOAD team mtg; see whiteboard.
+(MOAD)
+
+fvcom backfilling:
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-03-15"
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-03-15"
+  * nowcast to forecast chaining fails because run-date is not passed from watch_fvcom to make_fvcom_boundary
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 forecast --run-date 2020-03-15"
+
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-03-16"
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-03-16"
+Sent email re: this week's SalishSeaCast VCS migration plan.
+nowcast-agrif backfilling:
+* 10mar20 run completed successfully, but wasn't downloaded
+* 11mar20 upload_forcing failed
+* download_results orcinus nowcast-agrif 2020-03-10
+* upload_forcing orcinus nowcast+ 2020-03-11
+* upload_forcing orcinus turbidity 2020-03-11 --debug
+* make_forcing_links orcinus nowcast-agrif 2020-03-11
+* make_forcing_links orcinus nowcast-agrif 2020-03-12
+
+* make_forcing_links orcinus nowcast-agrif 2020-03-13
+* make_forcing_links orcinus nowcast-agrif 2020-03-14
+* make_forcing_links orcinus nowcast-agrif 2020-03-15
+* make_forcing_links orcinus nowcast-agrif 2020-03-16
+(SalishSeaCast)
+
+
+Tue 17-Mar-2020
+^^^^^^^^^^^^^^^
+
+fvcom backfilling:
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-03-16"
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-03-16"
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-03-16"
+
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-03-16"
+nowcast-agrif backfilling:
+* 12mar20 run failed due to InfiniBand issue; retried:
+* make_forcing_links orcinus nowcast-agrif 2020-03-12
+* make_forcing_links orcinus nowcast-agrif 2020-03-13
+* make_forcing_links orcinus nowcast-agrif 2020-03-14
+* make_forcing_links orcinus nowcast-agrif 2020-03-15
+* make_forcing_links orcinus nowcast-agrif 2020-03-16
+* make_forcing_links orcinus nowcast-agrif 2020-03-17
+Continued migration of SalishSeaCast repos:
+* tides:
+  * clone to skookum, arbutus, orcinus, optimum
+  * arbutus: checkout PROD-nowcast-green-201905
+  * optimum: checkout PROD-hindcast_201905-v3
+  * update run_NEMO
+  * update docs/repos_organization
+  * update SalishSeaNowcast/docs
+  * update SS-run-sets/v201905/hindcast/optimum_hindcast_template.yaml
+  * deploy SalishSeaNowcast to skookum, arbutus
+(SalishSeaCast)
+
+See work journal.
+(Navigator)
+
+
+
+Advise Michael & Maxim of:
+  make_fvcom_boundary issued FutureWarning twice:
+    /nemoShare/MEOPAR/nowcast-sys/nowcast-env/lib/python3.8/site-packages/pyproj/crs/crs.py:279: FutureWarning: '+init=<authority>:<code>' syntax is deprecated. '<authority>:<code>' is the preferred initialization method. When making the change, be mindful of axis order changes: https://pyproj4.github.io/pyproj/stable/gotchas.html#axis-order-changes-in-proj-6
+      projstring = _prepare_from_string(projparams)
+
+
+SalishSeaCast repos still to be migrated:
+  analysis
+  analysis-nancy
+  analysis-sprints
+  analysis-michael
+  sog
+  sog-forcing
+  sog-initial
+  sog-runsets
+
+  analysis-idalia
+  analysis-muriel
+
+  nemo-3.6-code
+  tools
+  ss-run-sets
 
 
 
