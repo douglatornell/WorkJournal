@@ -1752,9 +1752,6 @@ fvcom backfilling:
   * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-03-15"
   * nowcast to forecast chaining fails because run-date is not passed from watch_fvcom to make_fvcom_boundary
   * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 forecast --run-date 2020-03-15"
-
-  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-03-16"
-  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-03-16"
 Sent email re: this week's SalishSeaCast VCS migration plan.
 nowcast-agrif backfilling:
 * 10mar20 run completed successfully, but wasn't downloaded
@@ -1763,12 +1760,6 @@ nowcast-agrif backfilling:
 * upload_forcing orcinus nowcast+ 2020-03-11
 * upload_forcing orcinus turbidity 2020-03-11 --debug
 * make_forcing_links orcinus nowcast-agrif 2020-03-11
-* make_forcing_links orcinus nowcast-agrif 2020-03-12
-
-* make_forcing_links orcinus nowcast-agrif 2020-03-13
-* make_forcing_links orcinus nowcast-agrif 2020-03-14
-* make_forcing_links orcinus nowcast-agrif 2020-03-15
-* make_forcing_links orcinus nowcast-agrif 2020-03-16
 (SalishSeaCast)
 
 
@@ -1778,9 +1769,8 @@ Tue 17-Mar-2020
 fvcom backfilling:
   * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-03-16"
   * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-03-16"
-  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-03-16"
-
-  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-03-16"
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-03-17"
+  * r12 caught up
 nowcast-agrif backfilling:
 * 12mar20 run failed due to InfiniBand issue; retried:
 * make_forcing_links orcinus nowcast-agrif 2020-03-12
@@ -1791,9 +1781,10 @@ nowcast-agrif backfilling:
 * make_forcing_links orcinus nowcast-agrif 2020-03-17
 Continued migration of SalishSeaCast repos:
 * tides:
+  * subscribe in #ssc-repos
   * clone to skookum, arbutus, orcinus, optimum
-  * arbutus: checkout PROD-nowcast-green-201905
-  * optimum: checkout PROD-hindcast_201905-v3
+  * arbutus: checkout -b PROD-nowcast-green-201905
+  * optimum: checkout -b PROD-hindcast_201905-v3
   * update run_NEMO
   * update docs/repos_organization
   * update SalishSeaNowcast/docs
@@ -1803,6 +1794,169 @@ Continued migration of SalishSeaCast repos:
 
 See work journal.
 (Navigator)
+
+
+Wed 18-Mar-2020
+^^^^^^^^^^^^^^^
+
+collect_weather 00 didn't finish:
+* investigation:
+    2020-03-17 20:18:19,156 [ERROR] Unexpected error: [Errno 110] Connection timed out
+    2020-03-17 20:18:19,168 [ERROR] Unexpected error: [Errno 32] Broken pipe
+    ...
+    2020-03-17 20:26:29,853 [ERROR] Unexpected error: [Errno 32] Broken pipe
+    2020-03-17 20:26:39,863 [INFO] heartbeat. Sarracenia version is: 2.20.02b1
+    2020-03-17 20:26:39,863 [INFO] hb_memory cpu_times user=372.85 system=40.37 elapse=27228949.78
+    2020-03-17 20:26:39,863 [INFO] hb_memory, current usage: 51.8 MiB trigger restart if increases past: 148.5 MiB
+    2020-03-17 20:26:39,863 [INFO] hb_pulse message_count 284284 publish_count 0
+    2020-03-17 20:26:39,900 [WARNING] hb_pulse no pulse, and no connection... reconnecting
+    2020-03-17 20:26:39,900 [ERROR] Unexpected error: [SSL: BAD_LENGTH] bad length (_ssl.c:2457)
+    2020-03-17 20:26:39,900 [ERROR] Unexpected error: [SSL: BAD_LENGTH] bad length (_ssl.c:2457)
+    2020-03-17 20:26:39,900 [ERROR] Unexpected error: [SSL: BAD_LENGTH] bad length (_ssl.c:2457)
+    2020-03-17 20:26:39,900 [ERROR] Unexpected error: [SSL: BAD_LENGTH] bad length (_ssl.c:2457)
+    2020-03-17 20:26:39,901 [ERROR] Unexpected error: [SSL: BAD_LENGTH] bad length (_ssl.c:2457)
+    2020-03-17 20:26:39,905 [INFO] AMQP  broker(dd.weather.gc.ca) user(anonymous) vhost()
+    2020-03-17 20:26:39,905 [INFO] Using amqp module (AMQP 0-9-1)
+    2020-03-17 20:26:40,782 [INFO] Binding queue q_anonymous.sr_subscribe.hrdps-west.74434425.78671301 with key v02.post.model_hrdps.west.grib2.# from exchange xpublic on broker amqps://anonymous@dd.weather.gc.ca
+    2020-03-17 20:26:41,172 [INFO] reading from to anonymous@dd.weather.gc.ca, exchange: xpublic
+    2020-03-17 20:26:41,356 [INFO] report_back to anonymous@dd.weather.gc.ca, exchange: xs_anonymous
+    2020-03-17 20:26:41,356 [INFO] hb_retry on_heartbeat
+    2020-03-17 20:26:41,356 [INFO] sr_retry on_heartbeat
+    2020-03-17 20:26:41,363 [INFO] No retry in list
+    2020-03-17 20:26:41,366 [INFO] sr_retry on_heartbeat elapse 0.009733
+    2020-03-17 20:30:16,889 [INFO] file_log downloaded to: /SalishSeaCast/datamart/hrdps-west/00/022/CMC_hrdps_west_TCDC_SFC_0_ps2.5km_2020031800_P022-00.grib2
+* recovery:
+    mv /results/forcing/atmospheric/GEM2.5/GRIB/20200318/00 /results/forcing/atmospheric/GEM2.5/GRIB/20200318/00.aside
+    pkill -f collect_weather
+    download_weather 00 2.5km
+    download_weather 06 2.5km
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20200318/00.aside
+    rm -rf /SalishSeaCast/datamart/hrdps-west/06/*
+    wait for forecast2 runs to complete
+    download_weather 12 2.5km
+    rm -rf /SalishSeaCast/datamart/hrdps-west/12/*
+    collect_weather 18 2.5km
+fvcom backfilling:
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-03-17"
+
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-03-18"
+Discovered that NEMO-Cmd Git VCS recording feature does not handle detached HEAD state that results from checking out a tag; solution is to create a branch when checking out the tag; e.g.
+  git checkout -b PROD-nowcast-green-201905 PROD-nowcast-green-201905
+(SalishSeaCast)
+
+
+Thu 19-Mar-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+fvcom backfilling:
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-03-18"
+  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-03-19"
+(SalishSeaCast)
+
+
+Fri 20-Mar-2020
+^^^^^^^^^^^^^^^
+
+Continued migration of SalishSeaCast repos:
+* XIOS-ARCH:
+  * subscribe in #ssc-repos
+  * update run_NEMO
+  * update SalishSeaNowcast/docs
+  * update UBC-MOAD/docs
+  * update SalishSeaCast/docs/repos_organization & quickstart
+  * skookum:
+    * git clone
+    * git pull SalishSeaNowcast
+  * arbutus:
+    * git clone
+    * checkout -b PROD-nowcast-green-201905 PROD-nowcast-green-201905
+    * git pull SalishSeaNowcast
+  * orcinus:
+    * git clone
+  * update SS-run-sets/v201905/hindcast/optimum_hindcast_template.yaml
+  * optimum:
+    * git clone
+    * checkout -b PROD-hindcast_201905-v3 PROD-hindcast_201905-v3
+nowcast-agrif backfilling:
+* 19mar20 didn't time step due to missing forcing
+* upload_forcing orcinus nowcast+ 2020-03-19
+* upload_forcing orcinus turbidity 2020-03-19 --debug
+* fix orcinus:~/nowcast-agrif-sys/runs/nowcast-agrif_template.yaml re: tides and XIOS-ARCH from GitHub
+* fix orcinus env:
+  * module load python/3.5.0
+  * module unload python/2.7.3
+  * ~/hg-stable/hg
+  * update and re-install NEMO-Cmd from:
+      changeset:   575:7c4c47e63ff3
+      tag:         tip
+      user:        Doug Latornell <dlatornell@eoas.ubc.ca>
+      date:        Fri Aug 03 22:01:43 2018 -0400
+      summary:     Move lib.load_run_desc() into prepare module & delete lib module.
+    to:
+      changeset:   626:1e9cdfbbe270
+      tag:         tip
+      user:        Doug Latornell <djl@douglatornell.ca>
+      date:        Wed Jan 08 15:23:42 2020 -0800
+      summary:     Rename env/ to envs/
+  * python3 -m pip install --user -e NEMO-Cmd
+  * update and re-install SalishSeaCmd from:
+      changeset:   614:d365dffaec8a
+      tag:         tip
+      user:        Doug Latornell <dlatornell@eoas.ubc.ca>
+      date:        Fri Aug 03 22:08:10 2018 -0400
+      summary:     Refactor to use prepare.load_run_desc() from NEMO-Cmd pkg.
+    to:
+      changeset:   724:3b45c2c9435a
+      tag:         tip
+      user:        Doug Latornell <dlatornell@eoas.ubc.ca>
+      date:        Wed Jan 08 15:32:04 2020 -0800
+      summary:     Rename env/ to envs/
+  * python3 -m pip install --user -e SalishSeaCmd
+  * hacked /home/dlatorne/.local/lib/python3.5/site-packages/hglib/__init__.py to set HGPATH = '/home/dlatorne/hg-stable/hg'
+* make_forcing_links orcinus nowcast-agrif 2020-03-19
+* make_forcing_links orcinus nowcast-agrif 2020-03-20
+(SalishSeaCast)
+
+
+Sat 21-Mar-2020
+^^^^^^^^^^^^^^^
+
+collect_weather 12 didn't finish due to broken pipe and bad SSL length errors:
+* recovery:
+    pkill -f collect_weather
+    collect_weather 18 2.5km
+    mv /results/forcing/atmospheric/GEM2.5/GRIB/20200321/12 /results/forcing/atmospheric/GEM2.5/GRIB/20200321/12.aside
+    download_weather 12 2.5km
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20200321/12.aside
+    rm -rf /SalishSeaCast/datamart/hrdps-west/12/*
+(SalishSeaCast)
+
+
+Sun 22-Mar-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+
+Add outOfDate attr to ERDDAP rolling wave forecast
+
+
+* NEMO-Cmd:
+  * subscribe in #ssc-repos
+  * subscribe in #soiled
+  * subscribe in 43ravens#gomss
+
+
+
+Delete and forward Bitbucket repos:
+* tides
+* xios-arch
+
+Update XIOS-ARCH and MOAD/docs to move graham and cedar arch files to COMPUTECANADA/
 
 
 
