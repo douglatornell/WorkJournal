@@ -1838,8 +1838,6 @@ collect_weather 00 didn't finish:
     collect_weather 18 2.5km
 fvcom backfilling:
   * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-03-17"
-
-  * launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-03-18"
 Discovered that NEMO-Cmd Git VCS recording feature does not handle detached HEAD state that results from checking out a tag; solution is to create a branch when checking out the tag; e.g.
   git checkout -b PROD-nowcast-green-201905 PROD-nowcast-green-201905
 (SalishSeaCast)
@@ -1942,22 +1940,118 @@ See work journal.
 (Navigator)
 
 
-Add outOfDate attr to ERDDAP rolling wave forecast
+Week 13
+-------
 
+Mon 23-Mar-2020
+^^^^^^^^^^^^^^^
 
-* NEMO-Cmd:
+Week 2 of UBC work-from-home due to COVID-19
+
+Sent email re: VCS migration plan for week of 23-Mar; continue SalishSeaCast migrations that didn't get finished last week.
+Continued migration of SalishSeaCast repos:
+* analysis-jie
+* NEMO-Cmd
   * subscribe in #ssc-repos
   * subscribe in #soiled
   * subscribe in 43ravens#gomss
+* migrate issues:
+  * use kudu /media/doug/warehouse/bitbucket-issue-migration clone of https://github.com/jeffwidman/bitbucket-issue-migration and bitbucket-issue-migration conda env
+    * python3 -m migrate salishsea/nemo-cmd SalishSeaCast/NEMO-Cmd douglatornell
+      * use GitHub personal access token instead of GitHub password
+  * failed on issue #22 of #25; manually migrated issues 22-25
+(SalishSeaCast)
 
+MOAD group skype mtg; see whiteboard.
+(MOAD)
+
+See work journal.
+(Navigator)
+
+
+Tue 24-Mar-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+Slack product demo webinar; waste of time sales pitch.
+
+Monthly team mtg on Skype.
+Helped Rachael w/ Python package installation issues on graham after migration to Git clones.
+(MIDOSS)
+
+Continued migration of SalishSeaCast repos:
+* NEMO-Cmd
+  * change readthedocs webhook
+    * application/json
+    * Leave the Secrets field blank
+    * select individual events: Branch or tag creation, Branch or tag deletion, and Pushes
+(SalishSeaCast)
+
+
+Wed 25-Mar-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+Email discussion about multiple NEMO configs and NEMO-Cmd option for executable mgmt w/ Birgit.
+(Arctic)
+
+Continued migration of SalishSeaCast repos:
+* NEMO-Cmd
+  * update run_NEMO
+  * update SalishSeaNowcast/docs
+  * update salishsea/docs/repos_organization & quickstarts
+  * update MIDOSS/docs
+  * add SLACK_SALISHSEACAST_WEBHOOK_URL secret to repo on GitHub
+  * add SLACK_MIDOSS_WEBHOOK_URL secret to repo on GitHub
+  * add CODECOV_TOKEN secret to repo on GitHub
+  * replace .hgignore with .gitignore
+  * update dev env and requirements.txt
+  * move requirements.txt from envs/ to top level; remember to change in comments
+  * add CI workflow; remember to delete Python from environment-test.yaml
+  * update badges and text in README and contributing
+  * update CHANGES.rst issue URLs
+  * skookum:
+    * git clone
+    * git pull SalishSeaNowcast
+  * arbutus:
+    * git clone
+    * git pull SalishSeaNowcast
+  * orcinus:
+    * git clone
+    * update runs/nowcast-agrif_template.yaml
+  * update SS-run-sets/v201905/hindcast_long/optimum_hindcast_template.yaml
+  * optimum:
+    * git clone
+    * git pull SS-run-sets
+(SalishSeaCast)
+
+
+
+
+
+
+Add outOfDate attr to ERDDAP rolling wave forecast
 
 
 Delete and forward Bitbucket repos:
 * tides
 * xios-arch
+* NEMO-Cmd
+* analysis-jie
+* analysis-muriel
 
 Update XIOS-ARCH and MOAD/docs to move graham and cedar arch files to COMPUTECANADA/
 
+Update authors:
+* Muriel Dunn: mbdunn
+* Jie Liu: jieliuHeart
+  *
+
+Add CI workflows to run linkcheck on docs
 
 
 Advise Michael & Maxim of:
