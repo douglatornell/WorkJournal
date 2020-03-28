@@ -1918,6 +1918,8 @@ nowcast-agrif backfilling:
 * make_forcing_links orcinus nowcast-agrif 2020-03-20
 (SalishSeaCast)
 
+1st MOAD pub-on-Skype
+
 
 Sat 21-Mar-2020
 ^^^^^^^^^^^^^^^
@@ -1930,6 +1932,7 @@ collect_weather 12 didn't finish due to broken pipe and bad SSL length errors:
     download_weather 12 2.5km
     rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20200321/12.aside
     rm -rf /SalishSeaCast/datamart/hrdps-west/12/*
+Fixed Path to str conversion issues in NEMO-Cmd that cropped up in yesterday's orcinus thrash.
 (SalishSeaCast)
 
 
@@ -2030,6 +2033,65 @@ Continued migration of SalishSeaCast repos:
 (SalishSeaCast)
 
 
+Thu 26-Mar-2020
+^^^^^^^^^^^^^^^
+
+Emails to Johannes and Mike C re: repos migrated to GitHub.
+(43ravens)
+
+Email to Ben and discussion w/ Susan of consolidation of 201905 files on /results2.
+(ERDDAP)
+
+See work journal.
+(Navigator)
+
+Continued migration of SalishSeaCast repos:
+* grid
+  * ncks -4 -L4 deflate 2 large files
+  * subscribe in #ssc-repos
+  * update copyright year range
+  * add license badge
+  * update run_NEMO
+  * update SalishSeaNowcast/docs
+  * update salishsea/docs/repos_organization & quickstarts
+  * skookum:
+    * git clone
+    * git pull SalishSeaNowcast
+  * arbutus:
+    * git clone
+    * checkout -b PROD-nowcast-green-201905 PROD-nowcast-green-201905
+    * git pull SalishSeaNowcast
+  * orcinus:
+    * git clone
+    * update runs/nowcast-agrif_template.yaml
+  * update SS-run-sets/v201905/hindcast/optimum_hindcast_template.yaml
+  * optimum:
+    * git clone
+    * checkout -b PROD-hindcast_201905-v3 PROD-hindcast_201905-v3
+    * git pull SS-run-sets
+Dropped Python 3.5 from CI for NEMO-Cmd because I used a lot of pathlib fixtures in the test suite.
+Fixed issues in SalishSeaCmd that cropped up in 20-Mar-2020 orcinus thrash:
+* module load git
+* module load python/3.5.0
+* change to use 12 processors/node
+Gave up on FileNotFoundError that gets raised by pathlib.resolve; seems to be either a bug in pathlib, or a bug in orcinus file system.
+Researched adding python-hglib to conda-forge.
+(SalishSeaCast)
+
+
+Fri 27-Mar-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+Helped Rachael sort out NEMO-Cmd VCS recording issue.
+(MIDOSS)
+
+MOAD pub-on-Skype
+
+
+
 
 
 
@@ -2040,9 +2102,10 @@ Add outOfDate attr to ERDDAP rolling wave forecast
 Delete and forward Bitbucket repos:
 * tides
 * xios-arch
-* NEMO-Cmd
+* NEMO-Cmd - wait for Michael
 * analysis-jie
 * analysis-muriel
+* grid
 
 Update XIOS-ARCH and MOAD/docs to move graham and cedar arch files to COMPUTECANADA/
 
