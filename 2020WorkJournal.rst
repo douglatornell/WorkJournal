@@ -2091,6 +2091,67 @@ Helped Rachael sort out NEMO-Cmd VCS recording issue.
 MOAD pub-on-Skype
 
 
+Sat 28-Mar-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+Did 1st pass on income tax returns.
+
+Received news of Amica White Rock overnight staff member who tested positive for COVID-19.
+
+
+Sun 29-Mar-2020
+^^^^^^^^^^^^^^^
+
+Continued migration of SalishSeaCast repos:
+* docs
+  * subscribe to notifications in #ssc-repos channel
+  * change readthedocs webhook
+    * application/json
+    * Leave the Secrets field blank
+    * select individual events: Branch or tag creation, Branch or tag deletion, and Pushes
+  * update environment-rtd.yaml
+  * update readthedoc.yml file to schema 2.0
+  * update SalishSeaNowcast/docs
+  * update salishsea/docs/repos_organization
+  * update contributors list URL:
+    * SalishSeaNowcast
+    * FVCOM-Cmd
+    * NEMO-Cmd
+    * rpn-to-gemlam
+    * SalishSeaCmd
+    * tools
+* rivers-climatology
+  * subscribe in #ssc-repos
+  * update copyright year range
+  * add license badge
+  * update SalishSeaCast contributors list URL
+  * update run_NEMO
+  * update SalishSeaNowcast/docs
+  * update salishsea/docs/repos_organization & quickstarts
+  * skookum:
+    * git clone
+    * git pull SalishSeaNowcast
+  * arbutus:
+    * git clone
+    * checkout -b PROD-nowcast-green-201905 PROD-nowcast-green-201905
+    * git pull SalishSeaNowcast
+  * orcinus:
+    * git clone
+    * update runs/nowcast-agrif_template.yaml
+  * update SS-run-sets/v201905/hindcast/optimum_hindcast_template.yaml
+  * optimum:
+    * git clone
+    * checkout -b PROD-hindcast_201905-v3 PROD-hindcast_201905-v3
+    * hg pull SS-run-sets
+Fixed contributors list URLs in:
+* MOHID-Cmd
+* moad_tools
+
+
+https://github.com/SalishSeaCast/docs/blob/master/CONTRIBUTORS.rst
 
 
 
@@ -2106,13 +2167,23 @@ Delete and forward Bitbucket repos:
 * analysis-jie
 * analysis-muriel
 * grid
+* docs
+* fivers-climatology
 
 Update XIOS-ARCH and MOAD/docs to move graham and cedar arch files to COMPUTECANADA/
 
 Update authors:
 * Muriel Dunn: mbdunn
 * Jie Liu: jieliuHeart
-  *
+* Idalia Machuca:
+  * docs
+* James Petrie:
+  * docs
+* Kate Le Souef:
+  * docs
+  * NEMO-Forciong
+* Rob Irwin
+  * docs
 
 Add CI workflows to run linkcheck on docs
 
