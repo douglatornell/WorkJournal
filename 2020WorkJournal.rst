@@ -2151,13 +2151,177 @@ Fixed contributors list URLs in:
 * moad_tools
 
 
-https://github.com/SalishSeaCast/docs/blob/master/CONTRIBUTORS.rst
+April
+=====
+
+Week 13
+-------
+
+Mon 30-Mar-2020
+^^^^^^^^^^^^^^^
+
+Week 3 of UBC work-from-home due to COVID-19
+
+Discovered that nowcast-agrif failed due to problem finding 1_BS_rivers-climatology/bio/rivers_bio_tracers_mean.nc; I guess the rivers_bio_tracers_mean.nc files were never committed; found notes about their creation on 14-May-2018; re-created them with:
+  cd rivers-climatology/bio
+  /bin/ls | grep rivers_bio_tracers_'m..d..'.nc | ncra -4 -o ../subgrids/BaynesSound/bio/rivers_bio_tracers_mean.nc
+Changed orcinus deployment to make runs/nowcast-agrif_template.yaml a symlink to SS-run-sets/v201702/smelt-agrif/orcinus_nowcast_template.yaml
+Launched nowcast-agrif/30mar20 with:
+  make_forcing_links orcinus-nowcast-agrif nowcast-agrif --run-date 2020-03-30
+Cleaned up leftovers that caused the mess:
+* update SS-run-sets/v201702/smelt-agrif/orcinus_nowcast_template.yaml re: repos from GitHub
+* add symlinking runs/nowcast-agrif_template.yaml from SS-run-sets/v201702/smelt-agrif/orcinus_nowcast_template.yaml to deplyment docs
+* add creation of rivers-climatology/subgrids/BaynesSound/bio/rivers_bio_tracers_mean.nc to deployment docs
+* commit rivers-climatology/subgrids/BaynesSound/bio/rivers_bio_tracers_mean.nc
+(SalishSeaCast)
+
+See work journal.
+(Navigator)
+
+MOAD group mtg; see whiteboard.
+(MOAD)
+
+
+Tue 31-Mar-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+Telcon re: coastal flooding and wwatch3:
+* Devon Telford, others
+* Will provide link for data stream from OPP buoys in SoG & English Bay
+Telcon w/ Doug Hrynyk at Cdn Wildlife Service re: GIS injest from ERDDAP.
+(Prediction Core)
+
+FAL estate work.
+
+Disabled v18-12 datasets.
+Added testOutOfDate=now+24hours attr to a rolling forecast datasets.
+Updated index page re: removal of 18-05 datasets.
+Copied setup.xml file into /opt/tomcat/content/erddap/ and bounced ERDDAP with:
+* sudo /opt/tomcat/bin/shutdown.sh
+* sudo /opt/tomcat/bin/startup.sh
+Added ubcSSg3DAuxiliaryFields1hV19-05 dataset.
+(ERDDAP)
+
+
+Wed 1-Apr-2020
+^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+See work journal.
+(Navigator)
+
+Emailed Jamie McLean @ECCC re: RSS feed & out-of-date page for monitoring wwatch3 runs completion.
+(SalishSeaCast)
+
+
+Thu 2-Apr-2020
+^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+See work journal.
+(Navigator)
+
+(SalishSeaCast)
+
+
+Fri 3-Apr-2020
+^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+See work journal.
+(Navigator)
+
+Continued migration of SalishSeaCast repos:
+* tracers
+  * decided with Susan what to do about large files in initial/
+    * deflated and committed initial/winter2017_201702.nc and initial/summer2016_201702.nc
+    * cloned from Bitbucket to /ocean/sallen/hg_repos/SalishSeaCast-tracers to preserve initial/201905/ restart files that are already deflated and still too large
+    * Added initial/201905/README to explain where large restart files are preserved
+  * subscribe in #ssc-repos
+  * update copyright year range
+  * add license badge
+  * update SalishSeaCast contributors list URL
+  * change to SalishSeaCast branding
+  * update run_NEMO
+  * update salishsea/docs/repos_organization & quickstarts
+  * update SalishSeaNowcast/docs
+  * skookum:
+    * git clone
+    * git pull SalishSeaNowcast
+  * arbutus:
+    * git clone
+    * checkout -b PROD-nowcast-green-201905 PROD-nowcast-green-201905
+    * git pull SalishSeaNowcast
+  * update SS-run-sets/v201702/smelt-agrif/orcinus_nowcast_template.yaml
+  * update SS-run-sets/v201905/hindcast/optimum_hindcast_template.yaml
+  * orcinus:
+    * git clone
+    * hg pull SS-run-sets
+  * optimum:
+    * git clone
+    * checkout -b PROD-hindcast_201905-v3 PROD-hindcast_201905-v3
+    * hg pull SS-run-sets
+Maintenance on SalishSeaNowcast:
+* add --debug flag to run_nemo_agrif `salishsea run` command
+* stop collecting obs from ONC USDDL CTD; node went out of service again on 22-Dec-2019; ETA for return to service is unknown
+* started work on update to use sentry-sdk instead of raven
+  * installed sentry-sdk=0.14.3 skookum:nowcast-env
+(SalishSeaCast)
+
+
+Sat 4-Apr-2020
+^^^^^^^^^^^^^^
+
+Played Minecraft w/ Susan **all day** :-)
+
+
+Sun 5-Apr-2020
+^^^^^^^^^^^^^^
+
+collect_weather 06 didn't finish:
+* investigation:
+  2020-04-05 02:23:58,313 [INFO] file_log downloaded to: /SalishSeaCast/datamart/hrdps-west/06/010/CMC_hrdps_west_PRATE_SFC_0_ps2.5km_2020040506_P010-00.grib2
+  2020-04-05 02:28:59,590 [ERROR] Download failed https://dd4.weather.gc.ca//model_hrdps/west/grib2/06/010/CMC_hrdps_west_APCP_SFC_0_ps2.5km_2020040506_P010-00.grib2
+  2020-04-05 02:28:59,671 [WARNING] downloading again, attempt 2
+  2020-04-05 02:29:00,669 [INFO] file_log downloaded to: /SalishSeaCast/datamart/hrdps-west/06/010/CMC_hrdps_west_APCP_SFC_0_ps2.5km_2020040506_P010-00.grib2
+  2020-04-05 02:29:00,670 [INFO] heartbeat. Sarracenia version is: 2.20.02b1
+  2020-04-05 02:29:00,670 [INFO] hb_memory cpu_times user=1958.48 system=220.96 elapse=28805890.59
+  2020-04-05 02:29:00,670 [INFO] hb_memory, current usage: 53.4 MiB trigger restart if increases past: 148.5 MiB
+  2020-04-05 02:29:00,670 [INFO] hb_pulse message_count 1486002 publish_count 0
+  2020-04-05 02:29:00,670 [INFO] hb_retry on_heartbeat
+  2020-04-05 02:29:00,670 [INFO] sr_retry on_heartbeat
+  2020-04-05 02:29:00,681 [INFO] No retry in list
+  2020-04-05 02:29:00,685 [INFO] sr_retry on_heartbeat elapse 0.013830
+  2020-04-05 02:29:00,819 [ERROR] sr_amqp/consume: could not consume in queue q_anonymous.sr_subscribe.hrdps-west.74434425.78671301: Basic.get: (404) NOT_FOUND - no queue 'q_anonymous.sr_subscribe.hrdps-west.74434425.78671301' in vhost '/'
+  2020-04-05 02:29:01,422 [INFO] Using amqp module (AMQP 0-9-1)
+  2020-04-05 02:29:15,190 [INFO] file_log downloaded to: /SalishSeaCast/datamart/hrdps-west/06/018/CMC_hrdps_west_APCP_SFC_0_ps2.5km_2020040506_P018-00.grib2
+* recovery:
+    mv /results/forcing/atmospheric/GEM2.5/GRIB/20200405/06 /results/forcing/atmospheric/GEM2.5/GRIB/20200405/06.aside
+    pkill -f collect_weather
+    download_weather 06 2.5km
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/202000405/06.aside
+    rm -rf /SalishSeaCast/datamart/hrdps-west/06/*
+    wait for forecast2 runs to complete
+    collect_weather 18 2.5km
+    download_weather 12 2.5km
+    rm -rf /SalishSeaCast/datamart/hrdps-west/12/*
+Deployed Friday's SalishSeaNowcast maint changes to skookum (because I forgot to do so on Friday).
+nowcast-x2 failed on launch; recover:
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-04-05"
+(SalishSeaCast)
 
 
 
 
-
-Add outOfDate attr to ERDDAP rolling wave forecast
 
 
 Delete and forward Bitbucket repos:
@@ -2169,6 +2333,7 @@ Delete and forward Bitbucket repos:
 * grid
 * docs
 * fivers-climatology
+* tracers
 
 Update XIOS-ARCH and MOAD/docs to move graham and cedar arch files to COMPUTECANADA/
 
@@ -2205,7 +2370,6 @@ SalishSeaCast repos still to be migrated:
   sog-runsets
 
   analysis-idalia
-  analysis-muriel
 
   nemo-3.6-code
   tools
@@ -2219,8 +2383,6 @@ SalishSeaCast repos still to be migrated:
 
 tag repo with PROD-nowcast-green-201905 once we are running
   * SS-run-sets
-
-* delete /results/SalishSea/*.201905/10-15feb20 dirs symlinks made for rolling forecasts transition
 
 
 
