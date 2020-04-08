@@ -2320,6 +2320,113 @@ nowcast-x2 failed on launch; recover:
 (SalishSeaCast)
 
 
+Week 13
+-------
+
+Mon 6-Apr-2020
+^^^^^^^^^^^^^^
+
+Week 4 of UBC work-from-home due to COVID-19
+
+See work journal.
+(Navigator)
+
+Wrote 6-Apr VCS migration email to group.
+Continued migration of SalishSeaCast repos:
+* SalishSeaCmd
+  * subscribe in #ssc-repos
+  * change readthedocs webhook
+    * application/json
+    * Leave the Secrets field blank
+    * select individual events: Branch or tag creation, Branch or tag deletion, and Pushes
+  * add SLACK_SALISHSEACAST_WEBHOOK_URL secret to repo on GitHub
+  * add CODECOV_TOKEN secret to repo on GitHub
+  * migrate issues:
+    * use kudu /media/doug/warehouse/bitbucket-issue-migration clone of https://github.com/jeffwidman/bitbucket-issue-migration and bitbucket-issue-migration conda env
+      * python3 -m migrate salishsea/salishseacmd SalishSeaCast/SalishSeaCmd douglatornell
+        * use GitHub personal access token instead of GitHub password
+  * update run_NEMO
+  * update SalishSeaNowcast/.github/workflows/pytest-coverage.yaml
+  * update SalishSeaNowcast/docs
+  * update salishsea/docs/repos_organization & quickstarts
+  * kudu:
+    * mv SalishSeaCmd hg/SalishSeaCmd.hg
+    * git clone SalishSeaCmd
+    * rsync -rltv ../hg/SalishSeaCmd.hg/.idea ./
+    * rm .idea/vcs.xml
+    * git config --local user.email "dlatornell@eoas.ubc.ca"
+    * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/rescuetime_commit_highlight.sh .git/hooks/post-commit
+    * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/pre-commit-hook.sh
+    * tweak PyCharm commit dialog settings
+  * replace .hgignore with .gitignore
+  * git push to confirm that slack and readthedocs webhooks are working
+  * update dev env and requirements.txt
+  * move requirements.txt from envs/ to top level; remember to change in comments
+  * add CI workflow; remember to delete Python from environment-test.yaml
+  * delete Bitbucket pipelines CI configuration
+  * update badges and text in README and development
+  * run linkcheck and fix broken links in docs
+  * skookum:
+    * git clone
+    * pip install -e SalishSeaNowcast
+    * git pull SalishSeaNowcast
+  * arbutus:
+    * git clone
+    * pip install -e SalishSeaNowcast
+    * git pull SalishSeaNowcast
+  * update SS-run-sets/201702/smelt-agrif/orcinus_nowcast_template.yaml
+  * update SS-run-sets/v201905/hindcast_long/optimum_hindcast_template.yaml
+  * orcinus:
+    * git clone
+    * pip install -e SalishSeaNowcast
+    * hg pull SS-run-sets
+  * optimum:
+    * git clone
+    * pip install -e SalishSeaNowcast
+    * hg pull SS-run-sets
+(SalishSeaCast)
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Vicky Do & Trent Suzuki gave phys ocgy seminars on their term's work on MIDOSS and SoG climatology.
+
+
+Tue 7-Apr-2020
+^^^^^^^^^^^^^^
+
+See work journal.
+(Navigator)
+
+forecast2 failed to rebuild its restart file
+nowcast failed to rebuild its restart file; investigation
+* I forgot to pip install after cloning SalishSeaNowcast from GitHub
+* recover:
+  * pip install -e SalishSeaNowcast on all platforms
+  * arbutus:
+    * cd runs/06apr20forecast2_2020-04-07T025754.995579-0700
+    * salishsea combine 06apr20forecast2.yaml
+    * salishsea gather /nemoShare/MEOPAR/SalishSea/forecast2/06apr20/
+    * cd runs/07apr20nowcast_2020-04-07T090321.278406-0700
+    * salishsea combine 07apr20nowcast.yaml
+    * salishsea gather /nemoShare/MEOPAR/SalishSea/nowcast/07apr20/
+  * skookum:
+    * download_results arbutus nowcast 2020-04-07
+    * launch_remote_worker arbutus run_NEMO "arbutus forecast 2020-04-07"
+    * launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2020-04-07"
+    * launch_remote_worker arbutus make_fvcom_boundary "arbutus 12 nowcast 2020-04-07"
+Stopped forcing uploads to beluga & cedar, and cleaned up unit test references to them.
+Restart manager to get  drop of USDDL CTD, and uploads to beluga and cedar to take affect.
+Continued migration of SalishSeaCast repos:
+* mdunphy/nestingtools
+  * subscribe in #ssc-repos
+  * update SalishSeaNowcast/docs
+(SalishSeaCast)
+^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
 
 
 
@@ -2327,13 +2434,15 @@ nowcast-x2 failed on launch; recover:
 Delete and forward Bitbucket repos:
 * tides
 * xios-arch
-* NEMO-Cmd - wait for Michael
+* NEMO-Cmd
 * analysis-jie
 * analysis-muriel
 * grid
 * docs
 * fivers-climatology
 * tracers
+* salishseacmd
+* mdunphy/mestingtools
 
 Update XIOS-ARCH and MOAD/docs to move graham and cedar arch files to COMPUTECANADA/
 
