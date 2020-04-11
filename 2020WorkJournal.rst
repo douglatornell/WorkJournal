@@ -2428,6 +2428,101 @@ See work journal.
 (Resilient-C)
 
 
+Wed 8-Apr-2020
+^^^^^^^^^^^^^^
+
+Re-pro photoed on my phone prints from Aunt Grace of Jenna & Gareth.
+Processed photo of Susan & Jenna on Highline waslk in NYC from May-2019.
+Sent photos to Jenna for her 21st bday.
+
+Migrated douglatornell/borg-bkup repo to GitHub.
+
+See work journal.
+(Resilient-C)
+
+Continued work on update to use sentry-sdk instead of raven.
+(SalishSeaCast)
+
+Video chat w/ NZ Latornells for Jenna's 21st bday.
+
+
+Thu 9-Apr-2020
+^^^^^^^^^^^^^^
+
+Updated to PyCharm 2020.1; learned of Ctrl-Shft-i for quick file view.
+
+Reviewed Make-MIDOSS-Forcing code in prep for working with Vicky to integrate her stats module into it, and integrate both into `mohid monte-carlo`.
+MOHID-Cmd code maintenance.
+Updated MIDOSS working env on graham re: git clones:
+* clones are in ~/project/dlatorne/MIDOSS
+* clones state:
+    * MIDOSS-MOHID-CODE:
+        changeset:   59:f5b4515eed53
+        tag:         sensitivity_tests
+        user:        Shihan
+        date:        Sun Dec 01 23:00:22 2019 -0400
+        summary:     Fixed bug in oil dissolution when component percentage is zero
+    * MIDOSS-MOHID-config:
+        changeset:   275:42c21b1655c4
+        tag:         tip
+        user:        Doug Latornell <dlatornell@eoas.ubc.ca>
+        date:        Mon Jan 20 17:21:55 2020 -0800
+        summary:     Increase limits for AKNS_spatial sensitivity runs
+    * moved MIDOSS-MOHID-grid, moad_tools, MOHID-Cmd, NEMO-Cmd to hg/
+* git cloned Make-MIDOSS-Forcing, MIDOSS-MOHID-grid, moad_tools, MOHID-Cmd, NEMO-Cmd
+* pip install --user -e Make-MIDOSS-Forcing, moad_tools, MOHID-Cmd, NEMO-Cmd
+Started adding make-hdf5 to mohid monte-carlo in add-make-hdf5 branch.
+Skype w/ Vicky & Rachael re: adding make-hdf5-stats and make-mohid-stats commands to Make-MIDOSS-Forcing repo.
+Write docs for make-hdf5 and its YAML file.
+(MIDOSS)
+
+
+Fri 10-Apr-2020
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Good Friday
+
+Worked on local conversion of MIDOSS-MOHID-config to Git:
+  * get the tool
+    git clone git@github.com:frej/fast-export.git as /media/doug/waterhouse/hg-fast-export/
+  * build conda env to use it in
+    conda create -n hg-fast-export python=3 mercurial
+    conda activate hg-fast-export
+  * local conversion
+    cd /tmp
+    git init MIDOSS-MOHID-config
+    cd MIDOSS-MOHID-config
+    /media/doug/waterhouse/hg-fast-export/hg-fast-export.sh -r /media/doug/waterhouse/MIDISS/MIDOSS-MOHID-config
+  * prep for push to GitHub (using my user token to authenticate)
+    cd /tmp
+    git clone --bare MIDOSS-MOHID-config MIDOSS-MOHID-config.bare
+    cd MIDOSS-MOHID-config.bare
+    git push https://github.com/MIDOSS/MIDOSS-MOHID-config
+  * GitHub rejected the push due to large files:
+      remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.
+      remote: error: Trace: 7ac327bed05c2ef5b3c5b9f3dd2e75f8
+      remote: error: See http://git.io/iEPt8g for more information.
+      remote: error: File test_vvl/currents_west_above2_north_below2.hdf5 is 273.84 MB; this exceeds GitHub's file size limit of 100.00 MB
+      remote: error: File test_vvl/constant_waves.hdf5 is 1366.37 MB; this exceeds GitHub's file size limit of 100.00 MB
+      remote: error: File test_vvl/e3t.hdf5 is 1352.95 MB; this exceeds GitHub's file size limit of 100.00 MB
+  * used git filter-branch to remove 3 large files
+      git filter-branch --force --index-filter   "git rm --cached --ignore-unmatch test_vvl/currents_west_above2_north_below2.hdf5"   --prune-empty --tag-name-filter cat -- --all
+      git filter-branch --force --index-filter   "git rm --cached --ignore-unmatch test_vvl/constant_waves.hdf5"   --prune-empty --tag-name-filter cat -- --all
+      git filter-branch --force --index-filter   "git rm --cached --ignore-unmatch test_vvl/e3t.hdf5"   --prune-empty --tag-name-filter cat -- --all
+  * successful push to GitHub
+      git push https://github.com/MIDOSS/MIDOSS-MOHID-config
+Continued work on update to use sentry-sdk instead of raven.
+(MIDOSS)
+
+make_turbidity_file failed due to inconsistent time stamps:
+  ValueError: Anticipated and output hour were consistent: iout=20 ind=20 43929.416666666664 43929.381944444445
+recovery:
+  symlink 2020-04-09 river_turb forcing file as 2020-04-10
+  upload_forcing arbutus turbidity
+  upload_forcing orcinus turbidity
+  upload_forcing graham turbidity
+  upload_forcing optimum turbidity
+(SalishSeaCast)
 
 
 
