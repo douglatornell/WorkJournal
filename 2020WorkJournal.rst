@@ -2154,7 +2154,7 @@ Fixed contributors list URLs in:
 April
 =====
 
-Week 13
+Week 14
 -------
 
 Mon 30-Mar-2020
@@ -2320,7 +2320,7 @@ nowcast-x2 failed on launch; recover:
 (SalishSeaCast)
 
 
-Week 13
+Week 15
 -------
 
 Mon 6-Apr-2020
@@ -2339,7 +2339,7 @@ Continued migration of SalishSeaCast repos:
     * application/json
     * Leave the Secrets field blank
     * select individual events: Branch or tag creation, Branch or tag deletion, and Pushes
-  * add SLACK_SALISHSEACAST_WEBHOOK_URL secret to repo on GitHub
+  * add SLACK_WEBHOOK_URL secret to repo on GitHub
   * add CODECOV_TOKEN secret to repo on GitHub
   * migrate issues:
     * use kudu /media/doug/warehouse/bitbucket-issue-migration clone of https://github.com/jeffwidman/bitbucket-issue-migration and bitbucket-issue-migration conda env
@@ -2482,6 +2482,8 @@ Fri 10-Apr-2020
 
 **Statutory Holiday** - Good Friday
 
+Bike ride around UBC via SW Marine.
+
 Worked on local conversion of MIDOSS-MOHID-config to Git:
   * get the tool
     git clone git@github.com:frej/fast-export.git as /media/doug/waterhouse/hg-fast-export/
@@ -2511,7 +2513,7 @@ Worked on local conversion of MIDOSS-MOHID-config to Git:
       git filter-branch --force --index-filter   "git rm --cached --ignore-unmatch test_vvl/e3t.hdf5"   --prune-empty --tag-name-filter cat -- --all
   * successful push to GitHub
       git push https://github.com/MIDOSS/MIDOSS-MOHID-config
-Continued work on update to use sentry-sdk instead of raven.
+Rachael and Vicky agreed that they have nothing else that needed to be pushed to MIDOSS-MOHID-config on Bitbucket, so the version I migrated to GitHub is official.
 (MIDOSS)
 
 make_turbidity_file failed due to inconsistent time stamps:
@@ -2522,7 +2524,122 @@ recovery:
   upload_forcing orcinus turbidity
   upload_forcing graham turbidity
   upload_forcing optimum turbidity
+Continued work on update to use sentry-sdk in SalishSeaNowcast instead of raven.
 (SalishSeaCast)
+
+
+Sat 11-Apr-2020
+^^^^^^^^^^^^^^^
+
+**Easter Saturday**
+
+nowcast-blue blew up on launch:
+  zonal velocity is larger than 20 m/s
+  kt=****** max abs(U):   24.77    , i j k:    46  897    7
+investigation & recovery:
+  * Susan traced cause to large discrepancy between Neah Bay ssh forecast and observations. Fix is to use forecast ssh for all days instead of obs for present day and forecast thereafter. Done by manual adjustment of symlink for this run.
+  * same issue occurred for nowcast-green; same resolution
+Updated make_forcing_links unit tests re: production config testing, some changes to use monkeypathc & cap log.
+Uploaded to skookum hacked change to use all fcst ssh instead of obs for 1st day then fcst thereafter; started work on unit tests for make_forcing_links._make_NeahBay_ssh_links().
+(SalishSeaCast)
+
+
+Sun 12-Apr-2020
+^^^^^^^^^^^^^^^
+
+**Easter Sunday**
+
+Bike ride along River Rd to 8 Rd.
+
+Finished adding unit tests for make_forcing_links._make_NeahBay_ssh_links().
+Finalized change to use all fcst ssh instead of obs for 1st day then fcst thereafter.
+Rebased feature branch on to clean, up to date master, then pushed.
+Helped Susan sort out divergence in SS-run-sets on optimum.
+(SalishSeaCast)
+
+
+Week 16
+-------
+
+Mon 13-Apr-2020
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Easter Monday
+
+Week 5 of UBC work-from-home due to COVID-19
+
+Rebased and pushed orcinus:SS-run-sets for Susan to get changesets 2649-2655 from a local anonymous branch on to default; prep for her to run 201812 research runs for Elise & Tereza.
+Helped Susan change next_workers to suppress download_results after automated runs on optimum.
+Continued migration of SalishSeaCast repos:
+* salishsea-site
+  * subscribe in #ssc-repos
+  * change readthedocs webhook
+    * application/json
+    * Leave the Secrets field blank
+    * select individual events: Branch or tag creation, Branch or tag deletion, and Pushes
+  * add SLACK_WEBHOOK_URL secret to repo on GitHub
+  * add CODECOV_TOKEN secret to repo on GitHub
+  * migrate issues:
+    * use kudu /media/doug/warehouse/bitbucket-issue-migration clone of https://github.com/jeffwidman/bitbucket-issue-migration and bitbucket-issue-migration conda env
+      * python3 -m migrate salishsea/salishsea-site SalishSeaCast/salishsea-site douglatornell
+        * use GitHub personal access token instead of GitHub password
+  * update SalishSeaNowcast/docs
+  * update salishsea/docs/repos_organization & quickstarts
+  * kudu:
+    * mv salishsea-site hg/salishsea-site.hg
+    * git clone salishsea-site
+    * rsync -rltv ../hg/salishsea-site.hg/.idea ./
+    * rm .idea/vcs.xml
+    * git config --local user.email "dlatornell@eoas.ubc.ca"
+    * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/rescuetime_commit_highlight.sh .git/hooks/post-commit
+    * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/pre-commit-hook.sh
+    * tweak PyCharm commit dialog settings
+  * replace .hgignore with .gitignore
+  * git push to confirm that slack and readthedocs webhooks are working
+  * update dev env and requirements.txt
+  * change env/ to envs/
+  * change `pip install` to `python3 -m pip install`
+  * move requirements.txt from envs/ to top level; remember to change in comments
+  * update copyright year range
+  * bump version to 20.1.dev0
+  * remove Python version from readthedocs build config
+  * add CI workflow; remember to delete Python from environment-test.yaml
+(SalishSeaCast)
+
+Finish migration of MIDOSS-MOHID-config:
+  * subscribe in #soiled
+  * update MIDOSS/docs
+  * update MOHID-Cmd
+  * clone on kudu
+  * clone on graham
+(MIDOSS)
+
+MCL & FAL tax court estate work.
+
+
+Tue 14-Apr-2020
+^^^^^^^^^^^^^^^
+
+Sorted out building REBUILD_NEMO on orcinus w/ GCC-8.3 by creating NEMOGCM/ARCH/UBC_EOAS/arch-GCC_OPTIMUM_REBUILD_NEMO.fcm from gcc-8.3.patch file that I had created on 20-May-2019; committed new ARCH file.
+Continued migration of SalishSeaCast repos:
+* salishsea-site
+  * Change to Python 3.8 for dev, prod & test envs
+  * update badges and text in README and pkg dev docs
+  * run linkcheck and fix broken links in docs
+  * skookum:
+    * git clone
+    * supervisorctl shutdown
+    * pip install -e salishsea-site
+    * supervisord
+(SalishSeaCast)
+
+Continued adding make-hdf5 to mohid monte-carlo in add-make-hdf5 branches in MOHID-Cmd and MIDOSS-MOHID-config.
+(MIDOSS)
+
+
+Delete
+  replace :kbd:`you_userid` with you GitHub userid,
+in pkg docs
 
 
 
@@ -2538,6 +2655,7 @@ Delete and forward Bitbucket repos:
 * tracers
 * salishseacmd
 * mdunphy/mestingtools
+* MIDOSS/MIDOSS-MOHID-config
 
 Update XIOS-ARCH and MOAD/docs to move graham and cedar arch files to COMPUTECANADA/
 
@@ -2546,6 +2664,7 @@ Update authors:
 * Jie Liu: jieliuHeart
 * Idalia Machuca:
   * docs
+  * salishsea-site
 * James Petrie:
   * docs
 * Kate Le Souef:
@@ -2553,6 +2672,10 @@ Update authors:
   * NEMO-Forciong
 * Rob Irwin
   * docs
+* Golnaz
+  * salishsea-site
+
+Add auto-deploy workflow to salishsea-site to replace bitbucket pipeline
 
 Add CI workflows to run linkcheck on docs
 
