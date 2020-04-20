@@ -2368,21 +2368,21 @@ Continued migration of SalishSeaCast repos:
   * run linkcheck and fix broken links in docs
   * skookum:
     * git clone
-    * pip install -e SalishSeaNowcast
+    * pip install -e SalishSeaCmd
     * git pull SalishSeaNowcast
   * arbutus:
     * git clone
-    * pip install -e SalishSeaNowcast
+    * pip install -e SalishSeaCmd
     * git pull SalishSeaNowcast
   * update SS-run-sets/201702/smelt-agrif/orcinus_nowcast_template.yaml
   * update SS-run-sets/v201905/hindcast_long/optimum_hindcast_template.yaml
   * orcinus:
     * git clone
-    * pip install -e SalishSeaNowcast
+    * pip install -e SalishSeaCmd
     * hg pull SS-run-sets
   * optimum:
     * git clone
-    * pip install -e SalishSeaNowcast
+    * pip install -e SalishSeaCmd
     * hg pull SS-run-sets
 (SalishSeaCast)
 
@@ -2637,9 +2637,161 @@ Continued adding make-hdf5 to mohid monte-carlo in add-make-hdf5 branches in MOH
 (MIDOSS)
 
 
-Delete
+Wed 15-Apr-2020
+^^^^^^^^^^^^^^^
+
+Asked Vicky for csv file to use for functional testing of adding make-hdf5 to mohid monte-carlo.
+Cleaned up left over
   replace :kbd:`you_userid` with you GitHub userid,
-in pkg docs
+in docs: Make-MIDOSS-Forcing, MOHID-Cmd, docs & WWatch3-Cmd
+(MIDOSS)
+
+Cleaned up left over
+  replace :kbd:`you_userid` with you GitHub userid,
+in SalishSeaNowcast docs.
+Continued migration of SalishSeaCast repos:
+* analysis-michael
+* analysis-sprints
+Worked on fixing update_forecast_datasets re: missing day after wwatch3 forecast3 run; scp-ed fix to production for overnight testing.
+(SalishSeaCast)
+
+Cleaned up left over
+  replace :kbd:`you_userid` with you GitHub userid,
+in docs: cookiecutter-MOAD-pypkg, moad_tools, docs
+(MOAD)
+
+
+Thu 16-Apr-2020
+^^^^^^^^^^^^^^^
+
+Confirmed that update_forecast_datasets fix re: missing day after wwatch3 forecast3 run worked in production; emailed Jamie@ECCC; finalized fix.
+Changed SalishSeaNowcast package to use and test under only Python 3.8.
+Continued migration of SalishSeaCast repos:
+* mdunphy/fvcom-cmd
+  * subscribe in #ssc-repos
+  * update SalishSeaNowcast/.github/workflows/pytest-coverage.yaml
+  * update SalishSeaNowcast/docs
+  * kudu:
+    * mv FVCOM-Cmd hg/FVCOM-Cmd.hg
+    * git clone FVCOM-Cmd
+    * git config --local user.email "dlatornell@eoas.ubc.ca"
+    * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/rescuetime_commit_highlight.sh .git/hooks/post-commit
+  * arbutus:
+    * git clone
+    * pip install -e FVCOM-Cmd
+Tested and updated SalishSeaNowcast dev env instructions re: running test suite.
+Removed my Bitbucket password from GitHub secrets for SalishSeaNowcast repo because it is no longer needed to clone FVCOM-Cmd for CI workflow.
+Tagged SS-run-sets rev 657cd75d5d95 as PROD-nowcast-green-201905; clean up from 16-Feb transition to 201905 productions, and a bit of a thrash because of crazy long out of sequence merges in the repo from other folks in the group.
+Explored cleaning up tags on tags in rivers-climatology, but decided it is best to leave well enough be because Git makes a HUGE deal about how wrong it is to change release (annotated) tags that have been pushed.
+Explored changing NEMO_Nowcast to use slotted classes:
+* mocks in test suite prevent use for:
+  * NowcastManager
+  * NextWorker
+  * NowcastWorker
+* @staticmethod prevents use for Config
+Worked on modernizing test_update_forecast_datasets.
+(SalishSeaCast)
+
+
+Fri 17-Apr-2020
+^^^^^^^^^^^^^^^
+
+Westgrid Townhall:
+* John Longbottom, CEO
+  * intro
+* Jay Black, NDRIO (digital research infra)
+  * another umbrella? ~6mo old
+    * ARC
+    * data mgmt
+    * research software
+    * CANARI network
+    * supported by cybersecurity & HQP
+  * interface to gov of Canada
+  * Gail Murphy is on board
+  * engagedri.ca
+* Patrick Mann, Dir. Ops
+  * COVID-19 resource support
+    * increase priority (any analyst can do)
+    * special allocations (3mo initial via RAC admin)
+    * dedicated reservations
+  * 2020 RAC
+    * 40% compute ask
+    * 26% GPU ask
+    * 86% storage ask
+    * 99% cloud ask
+    * almost 50% UBC in west
+    * graham is 72% allocated; aim for 80%
+    * most GPUs on cedar; > graham and beluga combined
+    * 72% project awarded; 103% nearline awarded
+  * one 1 person allowed in a data centre at a time
+  * cedar upgraded; 37k cores, 192 GPUs
+* Alex Razoumov, Training
+  * 25-May to 10-Jul summer school (7 wks)
+    * single stream
+    * 2-3 day parse learning courses
+    * pre-recorded and zoom
+    * registration in early May
+
+Grocery shopping.
+
+Rescheduled ECCC MSC datamart user seminary to 15-Sep.
+
+See work journal; repo clean-up.
+(Ocean Navigator)
+
+Continued adding make-hdf5 to mohid monte-carlo in add-make-hdf5 branches in MOHID-Cmd and MIDOSS-MOHID-config.
+(MIDOSS)
+
+
+Sat 18-Apr-2020
+^^^^^^^^^^^^^^^
+
+
+Sun 19-Apr-2020
+^^^^^^^^^^^^^^^
+
+Continued migration of SalishSeaCast repos:
+* private-tools
+  * subscribe in #ssc-repos
+  * update SalishSeaNowcast/docs
+  * update salishsea/docs/repos_organization & quickstarts
+  * kudu:
+    * mv private-tools hg/private-tools.hg
+    * git clone private-tools
+    * git config --local user.email "dlatornell@eoas.ubc.ca"
+    * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/rescuetime_commit_highlight.sh .git/hooks/post-commit
+  * skookum:
+    * git clone
+    * mkdir -p /SalishSeaCast/private-tools/grib2/wgrib2/
+    * cp --preserve=timestamps \
+        /ocean/sallen/allen/research/MEOPAR/private-tools/grib2/wgrib2/wgrib2 \
+        /SalishSeaCast/private-tools/grib2/wgrib2/
+Update XIOS-ARCH and MOAD/docs to move graham and cedar arch files to COMPUTECANADA/.
+Analyzed SS-run-sets, tools & NEMO-3.6-code for migration:
+  NEMO-3.6-code hg default has 3 heads; can I strip:
+    both are single commits:
+      changeset:   297:116f03a9dad8
+      user:        Elise Olson <eolson@eos.ubc.ca>
+      date:        Mon Mar 14 20:51:17 2016 -0700
+      summary:     testing
+    (hg glog -r290:300)
+
+      changeset:   625:167addfc9729
+      parent:      564:482d695638f7
+      user:        Your Name <your_email_address>
+      date:        Fri Feb 24 09:49:06 2017 -0800
+      summary:     copy SMELT2 to SMELT_carbon
+    (hg glog -r560:630)
+(SalishSeaCast)
+
+
+
+
+
+Add VCS revision recording to run_fvcom
+
+Update SalishSeaNowcast fig-dev docs
+
 
 
 
@@ -2656,8 +2808,10 @@ Delete and forward Bitbucket repos:
 * salishseacmd
 * mdunphy/mestingtools
 * MIDOSS/MIDOSS-MOHID-config
+* analysis-michael
+* analysis-sprints
+* mdunphy/fvcom-cmd
 
-Update XIOS-ARCH and MOAD/docs to move graham and cedar arch files to COMPUTECANADA/
 
 Update authors:
 * Muriel Dunn: mbdunn
@@ -2673,11 +2827,13 @@ Update authors:
 * Rob Irwin
   * docs
 * Golnaz
-  * salishsea-site
+* Xiaoxin Yu (Cindy)
+
+Fix Pillow security issue in analysis-doug
 
 Add auto-deploy workflow to salishsea-site to replace bitbucket pipeline
 
-Add CI workflows to run linkcheck on docs
+Add CI workflows to run linkcheck on docs; need to wait for Sphinx 3.1 and resolution of Accept header issue re: GitHub Actions badges
 
 
 Advise Michael & Maxim of:
@@ -2687,10 +2843,8 @@ Advise Michael & Maxim of:
 
 
 SalishSeaCast repos still to be migrated:
-  analysis
-  analysis-nancy
-  analysis-sprints
-  analysis-michael
+  analysis - default branch has multiple heads & 1.7Gb
+  analysis-nancy - default branch has multiple heads
   sog
   sog-forcing
   sog-initial
@@ -2701,16 +2855,6 @@ SalishSeaCast repos still to be migrated:
   nemo-3.6-code
   tools
   ss-run-sets
-
-
-
-
-
-* Fix tags on tags in rivers-climatology
-
-tag repo with PROD-nowcast-green-201905 once we are running
-  * SS-run-sets
-
 
 
 TODO:
