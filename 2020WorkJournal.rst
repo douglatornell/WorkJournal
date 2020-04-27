@@ -2400,7 +2400,7 @@ See work journal.
 
 forecast2 failed to rebuild its restart file
 nowcast failed to rebuild its restart file; investigation
-* I forgot to pip install after cloning SalishSeaNowcast from GitHub
+* I forgot to pip install after cloning SalishSeaCmd from GitHub
 * recover:
   * pip install -e SalishSeaNowcast on all platforms
   * arbutus:
@@ -2746,6 +2746,8 @@ Continued adding make-hdf5 to mohid monte-carlo in add-make-hdf5 branches in MOH
 Sat 18-Apr-2020
 ^^^^^^^^^^^^^^^
 
+Grumpy.
+
 
 Sun 19-Apr-2020
 ^^^^^^^^^^^^^^^
@@ -2785,6 +2787,320 @@ Analyzed SS-run-sets, tools & NEMO-3.6-code for migration:
 (SalishSeaCast)
 
 
+Week 17
+-------
+
+Mon 20-Apr-2020
+^^^^^^^^^^^^^^^
+
+Week 6 of UBC work-from-home due to COVID-19
+
+See work journal.
+(Ocean Navigator)
+
+upload_forcing to orcinus failed due to login node connection issue.
+Continued migration of SalishSeaCast repos:
+* nemo-forcing
+  * resolving large files issue by deflating with ncks -4 -L4 -O:
+      grid/mesh_mask_downbyone.nc
+      initial_strat/TS_01dec2002.nc
+      initial_strat/TS01jul2016DeepSmooth.nc
+      initial_strat/TS06jan2016Deep.nc
+      initial_strat/TS20mar2016DeepSmooth.nc
+      initial_strat/TSApri.nc
+      initial_strat/TSforBlastFraser.nc
+      initial_strat/TSforDeepenByGridThickness.nc
+      initial_strat/TSforDeepenByGridThicknessDec.nc
+      initial_strat/TSforDeepHaroBoundary.nc
+      initial_strat/TSforextendedFraserRiver.nc
+      initial_strat/TSfornorthextendedFraserRiver.nc
+      initial_strat/TSforsmoothto033.nc
+* rpn-to-gemlam
+  * subscribe in #ssc-repos
+  * change readthedocs webhook
+    * application/json
+    * Leave the Secrets field blank
+    * select individual events: Branch or tag creation, Branch or tag deletion, and Pushes
+  * add SLACK_WEBHOOK_URL secret to repo on GitHub
+  * add CODECOV_TOKEN secret to repo on GitHub
+  * kudu:
+    * mv rpn-to-gemlam hg/rpn-to-gemlam.hg
+    * git clone rpn-to-gemlam
+    * rsync -rltv ../hg/rpn-to-gemlam.hg/.idea ./
+    * rm .idea/vcs.xml
+    * git config --local user.email "dlatornell@eoas.ubc.ca"
+    * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/rescuetime_commit_highlight.sh .git/hooks/post-commit
+    * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/pre-commit-hook.sh
+    * tweak PyCharm commit dialog settings
+  * replace .hgignore with .gitignore
+  * git push to confirm that slack and readthedocs webhooks are working
+  * update dev env and requirements.txt
+  * change env/ to envs/
+  * change `pip install` to `python3 -m pip install`
+  * move requirements.txt from envs/ to top level; remember to change in comments
+  * update copyright year range
+  * bump version to 20.1.dev0
+  * remove Python version from readthedocs build config
+  * salish:
+    * git clone
+    * pip install
+(SalishSeaCast)
+
+
+Tue 21-Apr-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Continued migration of SalishSeaCast repos:
+* SS-run-sets
+  * subscribe in #ssc-repos
+  * kudu:
+    * mv SS-run-sets hg/SS-run-sets.hg
+    * git clone SS-run-sets
+    * git config --local user.email "dlatornell@eoas.ubc.ca"
+    * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/rescuetime_commit_highlight.sh .git/hooks/post-commit
+  * update copyright year range
+  * add license badge
+  * update SalishSeaCast contributors list URL
+  * change to SalishSeaCast branding
+  * git push to confirm that slack notification works
+  * update run_NEMO
+  * update SalishSeaNowcast/docs
+  * update other docs refs:
+      find . -name "*.rst" -not -path "./hg/*" | xargs grep -n "salishsea/ss-run-sets"
+      * MOAD/docs
+      * docs
+      * SalishSeaCmd
+  * skookum:
+    * git clone
+    * git pull SalishSeaNowcast
+  * arbutus:
+    * git clone
+    * checkout -b PROD-nowcast-green-201905 PROD-nowcast-green-201905
+    * git pull SalishSeaNowcast
+  * update SS-run-sets/v201702/smelt-agrif/orcinus_nowcast_template.yaml
+  * update SS-run-sets/v201905/hindcast/optimum_hindcast_template.yaml
+  * orcinus:
+    * git clone
+  * optimum:
+    * git clone
+Upgraded OS pkgs on arbutus.cloud.
+Changed to git from PPA on arbutus.cloud:
+  sudo add-apt-repository ppa:git-core/ppa
+  sudo apt update
+  sudo apt install git
+Backfilled nowcast-agrif runs:
+* upload_forcing nowcast+ 2020-04-20 --debug
+* upload_forcing turbidity 2020-04-20 --debug
+* make_forcing_links nowcast-agrif 2020-04-20
+* make_forcing_links nowcast-agrif 2020-04-21
+(SalishSeaCast)
+
+Risk of Oil Exposure to Marine Birds in the SoG:
+* ECCC: Patrick O'hara, Doug Bertram, Ally (Alexandra) King
+* birds are extremely sensitive to oil; essentially lethal; so focus on vulnerability (risk of exposure to oil)
+* sand lance also matters; important prey for birds
+* Rhino Auklet big colony (world's 2nd largest) on Protection Is., WA; feed on sand lance
+* Marbled Murrelets nest in old growth forest up to 50 km from ocean
+* KDE == Kernel Density ???; sums of rasters divided by areas ??
+(MIDOSS)
+
+See biz journal.
+(GoMSS Nowcast)
+
+Continued adding make-hdf5 to mohid monte-carlo in add-make-hdf5 branches in MOHID-Cmd and MIDOSS-MOHID-config.
+(MIDOSS)
+
+
+Wed 22-Apr-2020
+^^^^^^^^^^^^^^^
+
+**Earth Day**
+
+NEMO forecast2 run failed to launch; I didn't push the SalishSeaNowcast change re: SS-run-sets moving to Git, so it didn't get deployed to arbutus.cloud and skookum; decided w/ Susan to skip forecast2 runs.
+Continued migration of SalishSeaCast repos:
+* analysis-idalia
+* tools
+
+  * subscribe in #ssc-repos
+  * change readthedocs webhook
+    * application/json
+    * Leave the Secrets field blank
+    * select individual events: Branch or tag creation, Branch or tag deletion, and Pushes
+  * add SLACK_WEBHOOK_URL secret to repo on GitHub
+  * add CODECOV_TOKEN secret to repo on GitHub
+  * migrate issues:
+    * use kudu /media/doug/warehouse/bitbucket-issue-migration clone of https://github.com/jeffwidman/bitbucket-issue-migration and bitbucket-issue-migration conda env
+      * python3 -m migrate salishsea/tools SalishSeaCast/tools douglatornell
+        * use GitHub personal access token instead of GitHub password
+  * update run_NEMO
+  * update SalishSeaNowcast/.github/workflows/pytest-coverage.yaml
+  * update SalishSeaNowcast/docs
+  * update salishsea/docs/repos_organization & quickstarts
+  * kudu:
+    * mv tools hg/tools.hg
+    * git clone tools
+    * rsync -rltv ../hg/tools.hg/.idea ./
+    * rm .idea/vcs.xml
+    * git config --local user.email "dlatornell@eoas.ubc.ca"
+    * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/rescuetime_commit_highlight.sh .git/hooks/post-commit
+    * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/pre-commit-hook.sh
+    * tweak PyCharm commit dialog settings
+  * replace .hgignore with .gitignore
+  * git push to confirm that slack and readthedocs webhooks are working
+  * update dev env and requirements.txt
+  * move requirements.txt from envs/ to top level; remember to change in comments
+  * add CI workflow; remember to delete Python from environment-test.yaml
+  * delete Bitbucket pipelines CI configuration
+  * update badges and text in README and development
+  * run linkcheck and fix broken links in docs
+  * skookum:
+    * git clone
+    * pip install -e tools/SalishSeaTools
+    * git pull SalishSeaNowcast
+  * arbutus:
+    * git clone
+    * pip install -e tools/SalishSeaTools
+    * git pull SalishSeaNowcast
+  * update SS-run-sets/201702/smelt-agrif/orcinus_nowcast_template.yaml ???
+  * update SS-run-sets/v201905/hindcast_long/optimum_hindcast_template.yaml
+  * optimum: ???
+    * git clone
+    * pip install -e tools/SalishSeaTools
+    * hg pull SS-run-sets
+(SalishSeaCast)
+
+Continued adding make-hdf5 to mohid monte-carlo in add-make-hdf5 branches in MOHID-Cmd and MIDOSS-MOHID-config:
+* make-hdf5 fails on compute node when it tries to open https://salishsea.eos.ubc.ca/erddap/griddap/ubcSSn3DMeshMaskV17-02
+(MIDOSS)
+
+
+Thu 23-Apr-2020
+^^^^^^^^^^^^^^^
+
+See biz journal.
+(Ocean Navigator)
+
+Continued migration of SalishSeaCast repos:
+* tools
+  * subscribe in #ssc-repos
+  * change readthedocs webhook
+    * application/json
+    * Leave the Secrets field blank
+    * select individual events: Branch or tag creation, Branch or tag deletion, and Pushes
+  * add SLACK_WEBHOOK_URL secret to repo on GitHub
+  * add CODECOV_TOKEN secret to repo on GitHub
+  * migrate issues:
+    * use kudu /media/doug/warehouse/bitbucket-issue-migration clone of https://github.com/jeffwidman/bitbucket-issue-migration and bitbucket-issue-migration conda env
+      * python3 -m migrate salishsea/tools SalishSeaCast/tools douglatornell
+        * use GitHub personal access token instead of GitHub password
+  * update run_NEMO
+  * update SalishSeaNowcast/.github/workflows/pytest-coverage.yaml
+  * update SalishSeaNowcast/docs
+  * update salishsea/docs/repos_organization & quickstarts
+  * update rpn-to-gemlam/docs
+  * kudu:
+    * mv tools hg/tools.hg
+    * git clone tools
+    * rsync -rltv ../hg/tools.hg/.idea ./
+    * rm .idea/vcs.xml
+    * git config --local user.email "dlatornell@eoas.ubc.ca"
+    * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/rescuetime_commit_highlight.sh .git/hooks/post-commit
+    * tweak PyCharm commit dialog settings
+  * replace .hgignore with .gitignore
+  * git push to confirm that slack and readthedocs webhooks are working
+  * to be continued...
+* NEMO-3.6-code
+  * subscribe in #ssc-repos
+  * to be continued...
+
+
+Fri 24-Apr-2020
+^^^^^^^^^^^^^^^
+
+See biz journal.
+(Ocean Navigator)
+
+Ocean Navigator team zoom to say farewell to Nabil, James R & Samuel.
+
+Grocery shopping.
+
+Kate called w/ good news re: probate and Dad's estate.
+
+Updated SalishSeaCmd re: NEMO-3.6-code as git clone; thanks to Tereza live-testing
+Continued migration of SalishSeaCast repos:
+* tools
+  * fix readthedocs build
+  * update dev env and requirements.txt
+  * skookum:
+    * git clone
+    * pip install -e tools/SalishSeaTools
+    * git pull SalishSeaNowcast
+    * git pull SalishSeaCmd
+  * arbutus:
+    * git clone
+    * pip install -e tools/SalishSeaTools
+    * git pull SalishSeaNowcast
+    * git pull SalishSeaCmd
+  * optimum:
+    * rm -rf ~/SalishSeaCast/hindcast-sys/tools  # unneeded
+(SalishSeaCast)
+
+
+Sat 25-Apr-2020
+^^^^^^^^^^^^^^^
+
+Finances, cleaning, walking, minecraft.
+
+
+Sun 26-Apr-2020
+^^^^^^^^^^^^^^^
+
+Discovered that NEMO runs failed yesterday due to premature deployment of SalishSeaCmd with NEMO as git clone; recovery;
+* arbutus:
+  git checkout -b 9d3aabd back-to-NEMO-hg
+* skookum:
+  git checkout 9d3aabd  ## detached HEAD state
+  make_forcing_links arbutus nowcast+ 2020-04-25
+  wait for nowcast-blue to finish
+  make_forcing_links arbutus ssh 2020-04-25
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-04-25"
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-04-25"
+  wait for forecast to finish
+  download_results forecast --run-date 2020-04-25
+  make_forcing_links salish nowcast+ --shared-storage 2020-04-25
+  make_turbidity_file --run-date 2020-04-25 --debug
+  upload_forcing arbutus turbidity 2020-04-25 --debug
+  upload_forcing orcinus turbidity 2020-04-25 --debug
+  upload_forcing graham turbidity 2020-04-25 --debug
+  upload_forcing optimum turbidity 2020-04-25 --debug
+  make_forcing_links orcinus nowcast-agrif 2020-04-25
+  make_forcing_links arbutus nowcast-green 2020-04-25
+  wait for nowcast-green to finish
+  make_forcing_links arbutus nowcast+ 2020-04-26
+*  26arp20 fvcom runs tromped on 25apr20, so re-launched the latter
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-04-25"
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-04-25"
+Discovered that most events in Sentry are now attributed to log_aggregator, and a rule I had on the Sentry/Slack integration suppresses those events from being forwarded to Slack, so removed the rule.
+Fixed in SalishSeaTools several instances of deprecated Arrow.replace() by repalceing them with Arrow.shift().
+
+Continued migration of SalishSeaCast repos:
+* NEMO-3.6-code
+  * update SalishSeaNowcast/docs
+  * update SalishSeaCmd/docs
+  * kudu:
+    * mv NEMO-3.6-code hg/NEMO-3.6-code.hg
+    * git clone NEMO-3.6-code
+    * git config --local user.email "dlatornell@eoas.ubc.ca"
+    * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/rescuetime_commit_highlight.sh .git/hooks/post-commit
+  * replace .hgignore with .gitignore
+  * git push to confirm that slack webhook is working
+  * update NEMO-Cmd/docs
+  * update salishsea/docs/repos_organization & quickstarts
+(SalishSeaCast)
+
 
 
 
@@ -2792,6 +3108,7 @@ Add VCS revision recording to run_fvcom
 
 Update SalishSeaNowcast fig-dev docs
 
+fix SalishSeaTools unit tests
 
 
 
@@ -2811,23 +3128,33 @@ Delete and forward Bitbucket repos:
 * analysis-michael
 * analysis-sprints
 * mdunphy/fvcom-cmd
+* analysis-idalia
+* tools
+* nemo-3.6-code
 
 
 Update authors:
 * Muriel Dunn: mbdunn
 * Jie Liu: jieliuHeart
 * Idalia Machuca:
-  * docs
-  * salishsea-site
 * James Petrie:
   * docs
+  * SS-run-sets
+  * tools
 * Kate Le Souef:
   * docs
   * NEMO-Forciong
+  * tools
 * Rob Irwin
   * docs
 * Golnaz
 * Xiaoxin Yu (Cindy)
+* Georgio Sgarbi
+  * tools
+* Saurav Sahu
+  * tools
+* Yingkai Sha
+  * tools
 
 Fix Pillow security issue in analysis-doug
 
