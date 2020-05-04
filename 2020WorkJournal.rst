@@ -3015,6 +3015,7 @@ Continued migration of SalishSeaCast repos:
 * NEMO-3.6-code
   * subscribe in #ssc-repos
   * to be continued...
+(SalishSeaCast)
 
 
 Fri 24-Apr-2020
@@ -3084,8 +3085,7 @@ Discovered that NEMO runs failed yesterday due to premature deployment of Salish
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-04-25"
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-04-25"
 Discovered that most events in Sentry are now attributed to log_aggregator, and a rule I had on the Sentry/Slack integration suppresses those events from being forwarded to Slack, so removed the rule.
-Fixed in SalishSeaTools several instances of deprecated Arrow.replace() by repalceing them with Arrow.shift().
-
+Fixed in SalishSeaTools several instances of deprecated Arrow.replace() by replacing them with Arrow.shift().
 Continued migration of SalishSeaCast repos:
 * NEMO-3.6-code
   * update SalishSeaNowcast/docs
@@ -3102,7 +3102,167 @@ Continued migration of SalishSeaCast repos:
 (SalishSeaCast)
 
 
+Week 18
+-------
 
+Mon 27-Apr-2020
+^^^^^^^^^^^^^^^
+
+Week 7 of UBC work-from-home due to COVID-19
+
+See biz journal.
+(Ocean Navigator)
+
+MOAD group mtg; see whiteboard.
+(MOAD)
+
+Continued recovery from Sat SalishSeaCast pause:
+* backfill fvcom:
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-04-26"
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-04-26"
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-04-27"
+* backfill wwatch3
+    delete bogus results dirs
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2020-04-25"
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2020-04-25"
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2020-04-26"
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2020-04-26"
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2020-04-27"
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2020-04-27"
+make_turbidity_file failed due to inconsistent time stamps:
+  ValueError: Anticipated and output hour were consistent: iout=12 ind=12 43946.08333333333 43946.04861111111
+recovery:
+  symlink 2020-04-26 river_turb forcing file as 2020-04-27
+  upload_forcing arbutus turbidity
+  upload_forcing orcinus turbidity
+  upload_forcing graham turbidity
+  upload_forcing optimum turbidity
+Continued migration of SalishSeaCast repos:
+* NEMO-3.6-code
+  * arbutus:
+    * git clone
+    * git checkout -b PROD-nowcast-green-201905 PROD-nowcast-green-201905
+    * build SalishSeaCast
+    * build SalishSeaCast_blue
+    * build REBUILD_NEMO
+    * SalishSeaCmd:
+      * git checkout master
+      * git pull
+  * optimum:
+    * git clone
+    * git checkout fluxes
+    * build SalishSeaCast
+    * git checkout master
+    * build REBUILD_NEMO
+        module unload OpenMPI/2.1.6/GCC/SYSTEM
+        module load GCC/8.3
+        module load OpenMPI/2.1.6/GCC/8.3
+        module load ZLIB/1.2/11
+        module load use.paustin
+        module load HDF5/1.08/20
+        module load NETCDF/4.6/1
+    * git checkout fluxes
+    * SalishSeaCmd:
+      * git checkout master
+      * git pull
+  * orcinus
+    * git clone
+    * find revision:
+        @ | |  changeset:   1243:15480482073d
+        | | |  user:        Doug Latornell <djl@douglatornell.ca>
+        | | |  date:        Sun Apr 15 10:38:21 2018 -0700
+        | | |  summary:     Correct SMELTAGRIF namelist_ref symlink from SHARED to SMELT.
+    * git checkout -b PROD-nowcast-agrif-201702 10878811fdfeac8957d638
+    * build SMELTAGRIF
+    * build REBUILD_NEMO
+    * SalishSeaCmd:
+      * git checkout master
+      * git pull
+(SalishSeaCast)
+
+
+Tue 28-Apr-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+See biz journal.
+(Ocean Navigator)
+
+Email conversation w/ Birgit about git rm and some NEMO configs she wants to archive.
+(MOAD)
+
+Continued recovery from Sat SalishSeaCast pause:
+* backfill fvcom:
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-04-27"
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-04-28"
+Continued migration of SalishSeaCast repos:
+* NEMO-3.6-code
+  * skookum:
+    * git clone
+    * SalishSeaCmd:
+      * git checkout master
+      * git pull
+  * salish
+    * build SalishSeaCast_blue
+    * build REBUILD_NEMO
+(SalishSeaCast)
+
+Risk of Oil Exposure to Marine Birds in the SoG:
+* ECCC: Patrick O'hara, Doug Bertram, Ally (Alexandra) King
+* Rachael, Vicky, Cam & Ben presented
+* metric of interest for sea birds is presence or absence of oil because they are so sensitive; volume is less important
+(MIDOSS)
+
+
+Wed 29-Apr-2020
+^^^^^^^^^^^^^^^
+
+Continued email conversation w/ Birgit about git rm and some NEMO configs she wants to archive.
+(MOAD)
+
+See biz journal.
+(Ocean Navigator)
+
+Continued adding make-hdf5 to mohid monte-carlo in add-make-hdf5 branches in MOHID-Cmd and MIDOSS-MOHID-config:
+(MIDOSS)
+
+
+Thu 30-Apr-2020
+^^^^^^^^^^^^^^^
+
+Worked w/ Susan on trying to get optimum into a state where she can do research runs; stopped when she got blocked nu read-only file system errors.
+(SalishSeaCast)
+
+Continued adding make-hdf5 to mohid monte-carlo in add-make-hdf5 branches in MOHID-Cmd and MIDOSS-MOHID-config, and monte-carlo branch in Make-MIDOSS-Forcing;
+traced MOHID segfault issue to using wrong version of bathymetry in mohid-run.yaml; got successful Monte Carlo run; started writing docs about mohid monte-carlo operation, and decided to abbreviate them to be of primary use to me rather than more narrative.
+(MIDOSS)
+
+
+Fri 1-May-2020
+^^^^^^^^^^^^^^
+
+Finished work on mohid monte-carlo docs.
+(MIDOSS)
+
+
+Sat 2-May-2020
+^^^^^^^^^^^^^^
+
+Replaced up some unnecessary Monte Carlo config items with calculations.
+(MIDOSS)
+
+
+Sun 3-May-2020
+^^^^^^^^^^^^^^
+
+Goofed off. Video call w/ Julie & Cor. Went for a walk.
+
+
+
+
+Fix xarray.open_mfdataset() re: combine FutureWarning in make_ww3_wind_file
 
 Add VCS revision recording to run_fvcom
 
@@ -3176,12 +3336,6 @@ SalishSeaCast repos still to be migrated:
   sog-forcing
   sog-initial
   sog-runsets
-
-  analysis-idalia
-
-  nemo-3.6-code
-  tools
-  ss-run-sets
 
 
 TODO:
