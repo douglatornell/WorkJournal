@@ -3180,6 +3180,8 @@ Continued migration of SalishSeaCast repos:
       * git pull
 (SalishSeaCast)
 
+Phys Ocgy seminary by Haley Dosser.
+
 
 Tue 28-Apr-2020
 ^^^^^^^^^^^^^^^
@@ -3258,6 +3260,256 @@ Sun 3-May-2020
 ^^^^^^^^^^^^^^
 
 Goofed off. Video call w/ Julie & Cor. Went for a walk.
+
+
+May
+===
+
+Week 19
+-------
+
+Mon 4-May-2020
+^^^^^^^^^^^^^^
+
+Week 8 of UBC work-from-home due to COVID-19
+
+Disabled bloomcast cron job for the year.
+
+Started trying to update bloomcast figs to modern matplotlib; discovered that the production conda env is irreproducible now.
+(bloomcast)
+
+MOAD group mtg; see whiteboard.
+Created UBC-MOAD/PythonNotes repo and SalishSeaCast#moad-python-notes channel; added notebook about f-strings.
+(MOAD)
+
+Phys Ocgy seminar by Alexis Kaminski of UW on N. Pacific transition layer
+
+
+Tue 5-May-2020
+^^^^^^^^^^^^^^
+
+Emailed Cameron at DeViser-Grey re: Dad's tax return.
+
+Discovered at ~11:15 that download_weather 12 for 04may failed; investigation:
+* hours 001 through 012 seem to have never appeared in the AMQP stream
+* 04may 12 and earlier files are gone from datamart
+recovery:
+* download_weather 18 2.5km --yesterday --debug
+* Susan contacted Pramod and learned that he has files
+* killed collect_weather 12
+* started collect_weather 18
+* download_live_ocean 2020-05-04 --debug
+* download_live_ocean 2020-05-05 --debug
+* Susan arranged to get 04may 001..012 files from Pramod
+* Pramod discovered that he didn't have the files either, so it looks like the problem was at MSC
+* Susan hacked grib_to_netcdf and created symlinks in /results/forcing/ so that we will use 12 hours from 20200504/06 gribs
+* skookum:
+    grib_to_netcdf nowcast+ 2020-05-04 --debug
+    get_NeahBay_ssh forecast --debug
+    make_live_ocean_files 2020-05-04 --debug
+    make_live_ocean_files 2020-05-05 --debug
+    upload_forcing arbutus nowcast+ 2020-05-04 --debug
+    make_forcing_links arbutus nowcast+ 2020-05-04
+    upload_forcing orcinus-nowcast-agrif nowcast+ 2020-05-04 --debug
+    upload_forcing graham-hindcast nowcast+ 2020-05-04 --debug
+    upload_forcing optimum-hindcast nowcast+ 2020-05-04 --debug
+    wait for nowcast-blue to finish
+    make_forcing_links arbutus ssh 2020-05-04
+    wait for forecast to finish
+    collect_weather 00 2.5km --backfill --backfill-date 2020-05-05 --debug (as a test)
+    make_turbidity_file --run-date 2020-05-04 --debug
+    upload_forcing arbutus turbidity 2020-05-04 --debug
+    make_forcing_links arbutus nowcast-green 2020-05-04
+    upload_forcing orcinus turbidity 2020-05-04 --debug
+    make_forcing_links orcinus nowcast-agrif 2020-05-04
+    upload_forcing graham turbidity 2020-05-04 --debug
+    upload_forcing optimum turbidity 2020-05-04 --debug
+    wait for nowcast-green to finish
+    wait for ww3 forcing to fail
+    wait for nowcast-dev to fail
+    collect_weather 06 2.5km --backfill --backfill-date 2020-05-05
+    kill collect_weather 12
+    wait for forecast2 to finish
+    wait for ww3 forcing to finish running from bogus initial conditions
+    collect_weather 00 2.5km --backfill --backfill-date 2020-05-05
+    kill collect_weather 18
+    wait for nowcast-agrif to fail
+    upload_forcing orcinus turbidity 2020-05-04 --debug
+    make_forcing_links orcinus nowcast-agrif 2020-05-04
+    wait for nowcast-agrif to finish
+    upload_forcing orcinus turbidity 2020-05-05 --debug
+    make_forcing_links orcinus nowcast-agrif 2020-05-05
+    wait for nowcast-dev to fail
+    make_forcing_links salish nowcast+ --shared-storage 2020-05-04
+    wait for nowcast-dev to finish
+    make_forcing_links salish nowcast+ --shared-storage 2020-05-05
+  * backfill fvcom:
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-05-04"
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-05-04"
+To be continued...
+(SalishSeaCast)
+
+
+Wed 6-May-2020
+^^^^^^^^^^^^^^
+
+GitHub Satellite virtual conference
+* 09:00 Keynote - Nat Freidman, CEO
+  * 50 million users as of 16-Apr
+  * +25% issues
+  * -4hr time to merge open source PRs
+  * +1hr/day on GitHub
+  * news:
+    * communities:
+      * Discussions product
+        * community home
+        * per-repo forum
+        * interconversion w/ issues
+        * included in contributions graph
+      * code:
+        * Code Spaces - Allison Macmillan
+          * containerized cloud dev env and VSCode editor in browser
+          * includes connection to dotfile repo
+          * includes debugger
+          * pay-as-you-go
+        * security:
+          * vulnerabilities increase linerarly w/ LOC
+          * need a community powered solution to scale
+          * Code Scanning
+            * powered by CodeQL semantic analysis tool
+            * actions-based
+            * free for open source
+* 09:40 Stopping vulnerabilities at source - Grey Baker
+* 10:10 Saving time w/ GitHub Actions - Tobias Gabriel (CIO Arduino)
+  * self-hosted runner on RaspPi and Arduino in factory
+* 11:40 Dependency hell - Ivan Pashchenko
+* 13:20 Idea to contribution - Sasha Rosenbaum
+* 13:50 Ship it w/ GitHub Actions & Pkgs - Chris Patterson
+* 14:20 Scaling remote teams - Aditya Mukerjee (Stripe)
+* 14:50 Cloud native deployment w/ GitHub Actions & AWS - Christian Weber (AWS)
+* 15:50 GitHub at your fingertips - Neha Batra
+* 16:50 GitHub & VSCode - Sana Ajani & Burke Holland (Microsoft)
+  * GitHub PRs & Issues extension
+  * GitHub theme
+  * sidebar on right prevents code from jumping when sidebar collapse is toggled
+  * theurlist.com/vscode-github
+Continue recovery from Monday's SalishSeaCast pause:
+* backfill fvcom:
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-05-05"
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-05-05"
+* backfill wwatch3
+    wait for ww3 to start/fail
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2020-05-04"
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2020-05-04"
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2020-05-05"
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2020-05-05"
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2020-05-06"
+    launch_remote_worker arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2020-05-06"
+* backfill nowcast-dev:
+    wait for nowcast-dev to fail
+    make_forcing_links salish nowcast+ --shared-storage 2020-05-05
+    make_forcing_links salish nowcast+ --shared-storage 2020-05-06
+To be continued...
+(SalishSeaCast)
+
+pip 20.1 changes how pip freeze reports some conda installed packages to local file:/// URLS; change to pip list --format=freeze for my requirements.txt maintenance workflow.
+
+Explored Mélanie's geoTIFF issue with a CAA bathymetry file; basemap fails on ortho projection; cartopy suggests a problem in the geoTIFF file structure; did work in notebook in analysis-doug.
+
+
+Thu 7-May-2020
+^^^^^^^^^^^^^^
+
+FAL estate work; telcon w/ Cameron re: taxes:
+* copy and drop off T-slips, 2018 return & TD date-of-death valuation
+* plan on income flowing to estate trust, not beneficiaries
+* CRA certificate of completion?? is optional
+
+Continue recovery from Monday's SalishSeaCast pause:
+* backfill fvcom:
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-05-06"
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-05-06"
+    wait for forecast-x2 to finish
+
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-05-07"
+
+    wait for nowcast-r12 to finish
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-05-07"
+(SalishSeaCast)
+
+See biz journal.
+(Ocean Navigator)
+
+Continued trying to update bloomcast figs to modern matplotlib; discovered that the production conda env is irreproducible now:
+* colander=1.5.1 is incompatible with Python 3.8
+* fixed unit test re: calling pytest fixtures
+* fixed Arrow.replace -> Arrow.shift
+* fixed yaml.load & .dump to safe_load & safe.dump
+* fixed matplotlib.Axes.set_axis_bgcolor to set_facecolor
+(bloomcast)
+
+
+Fri 8-May-2020
+^^^^^^^^^^^^^^
+
+wwatch3/forecast2 results didn't download because worker wasn't communicating w/ manager; manually ruan download_wwatch3_results.
+Continue recovery from Monday's SalishSeaCast pause:
+* backfill fvcom:
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-05-07"
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-05-07"
+    wait for forecast-x2 to finish
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-05-08"
+
+    wait for nowcast-r12 to finish
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-05-08"
+(SalishSeaCast)
+
+IOS seminar - CHS Transformation - Michel Breton
+* ENC - Electronic Nav Chart
+  * S-57 current standard
+  * S-101 future standard
+  * S-102 bathymetry
+  * S-111 surface currents overlay
+  * S-104 water levels overlay
+* PPU -  Portable Pilot Unit
+* Usage = scale band of products
+* automate production of paper charts from ENCs; paper charts are still required as backup to ENCs for mariners; not a mimic of traditional paper chart
+* gridded products driven by S-100 implementation
+* 6 usages in Canada moving to 3; 0.1°, 1°, 4°
+* 5 key areas:
+  * Kitimat
+  * Vancouver Harbour & Fraser River
+  * St. Lawerence River Quebec-Montreal
+  * St. John NB
+  * Port Hawkesbury, Canso Strait
+* S-100 sea trials in Korea in Aug-2019; commercial ECDIS
+* soft launch of S-102 and S-111 on 21-Jun in Canada
+* Fraser Davidson project mgr for dynamic products
+* PPUs mfd by SEAiq
+  * heat map to show data stream changes in real time
+
+See work journal.
+(Resilient-C)
+
+See biz journal.
+(Ocean Navigator)
+
+Finished updating bloomcast figs to modern matplotlib:
+* set explicit linestyle for axes grid lines; linestyle=(0, (1, 3)), alpha=0.5 to match matplotlib=1.5.3
+(bloomcast)
+
+
+Sat 9-May-2020
+^^^^^^^^^^^^^^
+
+Continue recovery from Monday's SalishSeaCast pause:
+* backfill fvcom:
+
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-05-08"
+    wait for forecast-x2 to finish
+    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-05-09"
+(SalishSeaCast)
+
 
 
 
