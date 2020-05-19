@@ -3459,9 +3459,6 @@ Continue recovery from Monday's SalishSeaCast pause:
     launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-05-07"
     wait for forecast-x2 to finish
     launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-05-08"
-
-    wait for nowcast-r12 to finish
-    launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-05-08"
 (SalishSeaCast)
 
 IOS seminar - CHS Transformation - Michel Breton
@@ -3504,14 +3501,196 @@ Sat 9-May-2020
 
 Continue recovery from Monday's SalishSeaCast pause:
 * backfill fvcom:
-
     launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-05-08"
     wait for forecast-x2 to finish
     launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-05-09"
 (SalishSeaCast)
 
+50km ride to east end of River Rd and back, then toast on the couch.
 
 
+Sun 10-May-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+Continued work on 2019 income tax returns.
+
+Explored latest state of pyproject.toml, setup.cfg, setup.py and pip re: editable installs and entry points.
+
+Walk around the neighbourhood with sore legs.
+
+
+Week 20
+-------
+
+Mon 11-May-2020
+^^^^^^^^^^^^^^^
+
+Week 9 of UBC work-from-home due to COVID-19
+
+FAL estate work: copied documents for Cameron; called AST re: acquisition dates for BCE & MFC; need to send requiest w/ death certs & will.
+
+Weekely MOAD mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar by Robert Izet re: estimating net community productivity while underway using del O2/N2 ratio via optode & cas tension device instead of del O2/Ar via mass spec.
+
+Finished and filed 2019 income tax returns.
+
+Answered email from Maxim re: where to find SalishSeaCast results to drive IOS south Salish Sea Model for Apr-2020.
+(SalishSeaCast)
+
+Started to experiment w/ Python packaging re: pip, setup.py, setup.cfg, pyproject.toml, etc., but ended up updating cookiecutter-djl-pypkg re: hg on Bitbucket to Git on GitHub.
+
+
+Tue 12-May-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+FAL estate work:
+* telcon w/ Kate re: letters of direction to start distribution
+* created assets, liabilities & distribution plan spreadsheet
+* delivered papers for final tax return to De Viser Gray office for Cameron and emailed him
+* emailed spreadsheet to Jamie
+
+
+Wed 13-May-2020
+^^^^^^^^^^^^^^^
+
+Email to Rachael about repo names and issue labels for Monte Carlo.
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
+
+Continued migration of SalishSeaCast repos:
+* XIOS-2
+  * subscribe in #ssc-repos
+  * kudu:
+    * git clone XIOS-2
+    * git config --local user.email "dlatornell@eoas.ubc.ca"
+    * ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/rescuetime_commit_highlight.sh .git/hooks/post-commit
+  * replace .hgignore with .gitignore
+  * git push to confirm that slack webhook is working
+  * update SalishSeaNowcast/docs
+  * update SalishSeaCmd/prepare
+  * update salishsea/docs/repos_organization & quickstarts
+  * update MOAD docs
+  * graham:
+    * git clone
+    * build XIOS-2
+    * build SalishSeaCast
+    * SalishSeaCmd:
+      * git checkout master
+      * git pull
+  * arbutus:
+    * git clone
+    * git checkout -b PROD-nowcast-green-201905 PROD-nowcast-green-201905
+    * build XIOS-2
+    * clean SalishSeaCast
+    * build SalishSeaCast
+    * clean SalishSeaCast_blue
+    * build SalishSeaCast_blue
+    * SalishSeaCmd:
+      * git checkout master
+      * git pull
+(SalishSeaCast)
+
+FAL estate work: video call w/ Jamie re: distribution and liquidation.
+
+
+Thu 14-May-2020
+^^^^^^^^^^^^^^^
+
+Helped Elise w/ git archeology on NEMOGCM/CONFIG/TRACE2/MY_SRC/traadv_tvd.F90.
+nowcast-agrif failed with:
+  =>> PBS: job killed: node 32 (pod23b4) requested job terminate, 'EOF' (code 1099) - received SISTER_EOF attempting to communicate with sister MOM's
+  mpirun: killing job...
+re-ran make_forcing_links orcinus nowcast-agrif to try again; emailed Mark; orcinus had failing nodes due to a chiller failure; re-ran after the cluster stabilized
+Tried to resolve "index exceeds dimension bounds" IndexError in make_plots fvcom forecast-x2 research by adding delay after ncrcat.
+Worked on changing to sentry-sdk; need to init in NEMO_Nowcast modules and manage log message propagation in config, I think; tested by patches on skookum.
+(SalishSeaCast)
+
+
+Fri 15-May-2020
+^^^^^^^^^^^^^^^
+
+sentry-sdk test seems to be working
+Cleaned up setnry report to get rid of log_aggregator events.
+delay after ncrcat does not seem help with "index exceeds dimension bounds" IndexError in make_plots fvcom forecast-x2 research; removed.
+Looking at manager stderr log that supervisord maintains lead me to long-standing bug in ping_erddap worker re: weather dataset name; fixed and deployed.
+Updated NEMO_Nowcast docs re: change from circus to supervisor for process mgmt.
+Continued migration of SalishSeaCast repos:
+* XIOS-2
+  * orcinus
+    * git clone
+    * git checkout -b XIOS-2r1066 XIOS-2r1066
+    * build XIOS-2
+    * clean SMELTAGRIF
+    * build SMELTAGRIF
+    * SalishSeaCmd:
+      * git checkout master
+      * git pull
+
+  * skookum:
+    * git clone
+    * SalishSeaCmd:
+      * git checkout master
+      * git pull
+  * salish
+    * git checkout -b ??? ???
+    * build XIOS-2
+    * clean SalishSeaCast_blue
+    * build SalishSeaCast_blue
+  * optimum:
+    * git clone
+    * git checkout -b ??? ???
+    * build XIOS-2
+    * clean SalishSeaCast
+    * build SalishSeaCast
+    * git checkout master
+    * SalishSeaCmd:
+      * git checkout master
+      * git pull
+(SalishSeaCast)
+
+FAL estate work: telcon w/ Kate to start distribution process. April statement for non-reg acct arrived; updated spreadsheet, did 3 mo trend, and let Jamie know.
+
+
+Sat 16-May-2020
+^^^^^^^^^^^^^^^
+
+Goofed off.
+Walked 6th, Pine, 14th, Balsam loop.
+
+
+Sun 17-May-2020
+^^^^^^^^^^^^^^^
+
+Goofed off.
+Walked around The Crescent.
+
+
+Week 21
+-------
+
+Mon 18-May-2020
+^^^^^^^^^^^^^^^
+
+Week 10 of UBC work-from-home due to COVID-19
+
+**Statutory Holiday** - Victoria Day
+
+Rode to east end of River Rd on north side of Richmond and back; less shattering than last week's ride.
+
+
+
+
+15jun20: check mitigation of "index exceeds dimension bounds" IndexError in make_plots fvcom forecast-x2 research
 
 
 Fix xarray.open_mfdataset() re: combine FutureWarning in make_ww3_wind_file
@@ -3521,6 +3700,8 @@ Add VCS revision recording to run_fvcom
 Update SalishSeaNowcast fig-dev docs
 
 fix SalishSeaTools unit tests
+
+fix old colander dependency in SOG
 
 
 
@@ -3543,6 +3724,7 @@ Delete and forward Bitbucket repos:
 * analysis-idalia
 * tools
 * nemo-3.6-code
+* xios-2
 
 
 Update authors:
@@ -3584,14 +3766,9 @@ Advise Michael & Maxim of:
 SalishSeaCast repos still to be migrated:
   analysis - default branch has multiple heads & 1.7Gb
   analysis-nancy - default branch has multiple heads
-  sog
-  sog-forcing
-  sog-initial
-  sog-runsets
 
 
 TODO:
-* Update bloomcast plots so that we are not tied to matplotlib-1.5.3
 * Sort out OPPTools dependencies so that we can run w/ origin/master:HEAD again
 * Fix:
     /media/doug/warehouse/conda_envs/nemo-nowcast/lib/python3.8/pathlib.py:1299: DeprecationWarning: an integer is required (got type FilePerms).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
@@ -3611,3 +3788,4 @@ Stack:
 Done:
 * Delete ubcSSfDepthAvgdCurrents1hV18-06 from ERDDAP on Fri 7-Feb-2020
 * Disable ubcSSfDepthAvgdCurrents1hV18-06 on ERDDAP on Fri 31-Jan-2020
+* Update bloomcast plots so that we are not tied to matplotlib-1.5.3
