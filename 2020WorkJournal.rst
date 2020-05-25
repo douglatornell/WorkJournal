@@ -3664,12 +3664,16 @@ FAL estate work: telcon w/ Kate to start distribution process. April statement f
 Sat 16-May-2020
 ^^^^^^^^^^^^^^^
 
+FAL estate work: Susan and I arrived at tax strategy for inheritance account and overall assest allocation strategy.
+
 Goofed off.
 Walked 6th, Pine, 14th, Balsam loop.
 
 
 Sun 17-May-2020
 ^^^^^^^^^^^^^^^
+
+Upgraded niko to Pop_OS! 20.04.
 
 Goofed off.
 Walked around The Crescent.
@@ -3685,13 +3689,104 @@ Week 10 of UBC work-from-home due to COVID-19
 
 **Statutory Holiday** - Victoria Day
 
-Rode to east end of River Rd on north side of Richmond and back; less shattering than last week's ride.
+50 km rode to east end of River Rd on north side of Richmond and back; less shattering than last week's ride.
+
+
+Tue 19-May-2020
+^^^^^^^^^^^^^^^
+
+Emailed Sandrine re: zero length files in HRDPS 1km 00 forecast yesterday and today.
+Fixed bad key in ping_erddap msg registry config.
+Continued migration of SalishSeaCast repos:
+* XIOS-2
+  * optimum:
+    * git clone
+    * git checkout -b PROD-hindcast_201905-v3 PROD-hindcast_201905-v3
+    * build XIOS-2
+    * clean SalishSeaCast
+    * build SalishSeaCast
+    * SalishSeaCmd:
+      * git checkout master
+      * git pull
+Wrote SalishSeaNowcast optimum deployment docs.
+(SalishSeaCast)
+
+Weekly MOAD group mtg; see whiteboard.
+(MOAD)
+
+FAL estate work: Apr TFSA statement arrived; started work on unified asset allocation calculation
+
+
+Wed 20-May-2020
+^^^^^^^^^^^^^^^
+
+Fixed more bad keys re: ping_erddap in next_workers module; sigh.
+Worked on finalizing sentry-sdk support in NEMO_Nowcast.
+(SalishSeaCast)
+
+Monthly project mtg; see whiteboard.
+(MIDOSS)
+
+FAL estate work: finished v1 of unified asset allocation calculation
+
+
+Thu 21-May-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+FAL estate work:
+* found TD tax pkg and scanned it to Lucy @ De Viser Gray
+* email for BCE & MFC ACB to AST
+
+Upgraded kudu to Pop_OS! 20.04; played with tiling window mgr.
+
+Finalized sentry-sdk support in NEMO_Nowcast; committed config file changes for sentry-sdk use in SalishSeaNowcast; uninstalled raven pkg from skookum and arbutus nowcast-env conda envs.
+Continued migration of SalishSeaCast repos:
+* XIOS-2
+  * skookum:
+    * git clone
+    * SalishSeaCmd:
+      * git checkout master
+      * git pull
+  * salish
+    * build XIOS-2
+    * clean SalishSeaCast_blue
+    * build SalishSeaCast_blue
+Started work on updating nowcast-fig-dev docs and fixing more fig issues.
+(SalishSeaCast)
+
+
+Fri 22-May-2020
+^^^^^^^^^^^^^^^
+
+orcinus refused ssh connection for upload_forcing nowcast+; re-ran manually.
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+
+Sat 23-May-2020
+^^^^^^^^^^^^^^^
+
+Bike ride to UBC (via Bridgeport) to pick up things from ESB.
+
+
+Sun 24-May-2020
+^^^^^^^^^^^^^^^
+
+House cleaning.
+
+
 
 
 
 
 15jun20: check mitigation of "index exceeds dimension bounds" IndexError in make_plots fvcom forecast-x2 research
 
+8-Jun: talk to Rachael and merge add-make-hdf5 branchs into master x3 repos
 
 Fix xarray.open_mfdataset() re: combine FutureWarning in make_ww3_wind_file
 
