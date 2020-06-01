@@ -3780,8 +3780,210 @@ Sun 24-May-2020
 House cleaning.
 
 
+Week 22
+-------
+
+Mon 25-May-2020
+^^^^^^^^^^^^^^^
+
+Week 11 of UBC work-from-home due to COVID-19
+
+Replied to Racheal's email about code org for stats & CSV generation, and Monte Carlo MOHID post-processing.
+Monte Carlo storage is presently 82 M per MOHID run (excluding Tutbulence.hdf5 file); that means that ~1250 runs (uncompressed) will make a 100 GB nearline chunk; however, that also means that 10,000 MOHID runs will occuupy <1TB of storage, so we should be able to download them to /data and not need to use nearline :-)
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
+
+Phys Ocgy seminar re: coral reefs & internal waves by Scott Bachman of NCAR
+
+Reviewed nearline storage guidelines: target size for chunks is 100 GB.
+
+Started re-write of MEOPAR-docs on-boarding docs as MOAD docs.
+(MOAD)
 
 
+Tue 26-May-2020
+^^^^^^^^^^^^^^^
+
+ESB 2nd floor network switch freaked out, killing connection to smelt, char, tyee.
+
+See work journal.
+(Resilient-C)
+
+Email from ProServices re: supply arrangement response; see biz journal.
+(43ravens)
+
+Continued re-write of MEOPAR-docs on-boarding docs as MOAD docs.
+(MOAD)
+
+Continued migrating personal repos from Bitbucket to GitHub:
+ * cyclelog, including issues
+ * efunds
+ * portfolio
+ * fun
+ * douglatornell.ca
+
+ Decided that make-monte-carlo-csv belongs in moad_tools.midoss namespace.
+ (MIDOSS)
+
+
+Wed 27-May-2020
+^^^^^^^^^^^^^^^
+
+Email from PWGSC security re: DOS clearance; see biz journal.
+(43ravens)
+
+Changed kudu ssh config to proxy through salish to optimum.
+Worked w/ Elise to get SMELT built in NEMO-3.6-code fluxes1812 branch on optimum; GCC-4.4.7 compiler issue re: "NAMELIST attribute conflicts with ALLOCATABLE attribute"; found history of that error in Slack, pointed Elise at it, she ported in Susan's fix, and I got a clean build.
+Investigated make_turbidity_file failures: several hours of duplicated observations on 26may, normal flow restored at 17:10; probably an update-Tuesday issue
+(SalishSeaCast)
+
+Skype and email w/ Becca to start her on-boarding.
+
+See work journal.
+(Resilient-C)
+
+Continued migrating personal repos from Bitbucket to GitHub:
+* meopar2017winterschool
+* uqar-winter-school
+
+Bike ride to UBC and back.
+
+
+Thu 28-May-2020
+^^^^^^^^^^^^^^^
+
+Pulled SS-run-sets on optimum for Susan & Elise's fluxes1812 runs.
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+Sentry webinar:
+* Will Capazolli, Sol'n Engr
+* in-app filtering via beforeSend() callback or beforeBreadcrumb
+* data flow:
+  * rate limiting: set to capture spikes from graphs in app
+  * filtering: inbnound or delete & discard
+  * data scrubbing:
+  * aggregation (fingerprinting):
+    * in-app via beforeSend() callback
+    * in-app via Sentry.scope
+    * sentry.io: merge button, rules (server-side fingerprinting)
+* config:
+  * project per code-base
+  * teams have multiple projects; projects can be shared among teams
+  * releases
+  * environments; multiple per project
+  * deployments
+* integrations
+* adding custom metadata:
+  * tags - transaction id passed from frontend to backend and tagged
+  * breadcrumbs
+  * extra aka additional data
+* discover reports - visualizations across projects
+
+
+Fri 29-May-2020
+^^^^^^^^^^^^^^^
+
+Deleted archived and non-archive results from /results; see Trello board.
+Explored footprint of GEMLAM re: putting a copy on graham:/nearline; month-sized tarbals are ~80G; close to the 100G target size.
+(SalishSeaCast)
+
+Explored numpy random choices methods.
+(MIDOSS)
+
+Updated moad_tools package structure.
+Added GitHub Actions CI worflow to moad_tools pkg.
+(MOAD)
+
+Started designing script to generate oil spills csv file to drive Monte Carlo; Susan decided that the command name will be random-oil-spills; it will live in moad_tools.midoss.
+(MIDOSS)
+
+
+Sat 30-May-2020
+^^^^^^^^^^^^^^^
+
+Started implementation of moad_tools.midoss.random_oil_spills.py.
+(MIDOSS)
+
+
+Sun 31-May-2020
+^^^^^^^^^^^^^^^
+
+Continued implementation of moad_tools.midoss.random_oil_spills.py.
+(MIDOSS)
+
+
+
+
+personal repos to migrate:
+  ecget
+  randopony-tetra
+  nosy
+  private-journal
+  talks
+  cv
+
+  asyncio-tutorial
+  workout-sphinx
+  swc-workout-sphinx-rtd-autodoc
+  rdiff_backup
+  refactor-extractthalweg
+  pdb-workout
+  randopony
+  rm1200
+  sadahome.ca
+  meopar2019-atm-asm-notes
+  markdown-error-log
+  nemo-cmd-pipelines-test
+  test_tag_release
+  sqlalchemyorg
+  pipeline-test
+  forecast
+  jasper-rebase-test
+  swc-nelle-files
+  swc-hbridge-files
+  sog
+  sog-sublime
+  sog-bloomcast
+  raspi_x10
+  raspi_x10_config
+  geotraces-nemo-test
+  sublimetext3-settings
+  sublimetext2-settings
+  pyramid_persona_group_auth_demo
+  wake.py
+  contextlib2
+  webtest
+  virtualenvwrapper-ksh
+to delete:
+  workjournal.hg
+  huebot
+  douglatornell.ca
+  gentlerust
+  meopar2017winterschool
+  uqar-winter-school
+private:
+  cyclelog
+  efunds
+  portfolio
+  fun
+
+
+43ravens repos to migrate:
+  meopar-atm-2019-06-11
+  meopeers-2015-06-15
+  client-bio
+  client-ios
+  client-uottawa-espg
+  client-nordion
+  private repos from douglatornell
+to delete:
+  43ravens.ca
+  nemo_nowcast
 
 
 15jun20: check mitigation of "index exceeds dimension bounds" IndexError in make_plots fvcom forecast-x2 research
@@ -3850,6 +4052,8 @@ Fix Pillow security issue in analysis-doug
 Add auto-deploy workflow to salishsea-site to replace bitbucket pipeline
 
 Add CI workflows to run linkcheck on docs; need to wait for Sphinx 3.1 and resolution of Accept header issue re: GitHub Actions badges
+
+Migrate Baynes Sound fig to cartopy
 
 
 Advise Michael & Maxim of:
