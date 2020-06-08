@@ -3909,12 +3909,97 @@ Sat 30-May-2020
 Started implementation of moad_tools.midoss.random_oil_spills.py.
 (MIDOSS)
 
+50km ride to east end of River Rd and back.
+
 
 Sun 31-May-2020
 ^^^^^^^^^^^^^^^
 
 Continued implementation of moad_tools.midoss.random_oil_spills.py.
 (MIDOSS)
+
+
+June
+====
+
+
+Week 22
+-------
+
+Mon 1-Jun-2020
+^^^^^^^^^^^^^^
+
+Week 12 of UBC work-from-home due to COVID-19
+
+Continued implementation of moad_tools.midoss.random_oil_spills.py:
+* finished get_date(), n_spills loop, and csv file generation
+* wrote docs
+(MIDOSS)
+
+
+Tue 2-Jun-2020
+^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+Worked on ProServices and security screening forms.
+(see biz journal)
+
+
+Wed 3-Jun-2020
+^^^^^^^^^^^^^^
+
+Continued implementation of moad_tools.midoss.random_oil_spills.py:
+* started get_lat_lon_indieces()
+* discussed sub-sampling and GeoTIFF points in SalishSeaCast domain issues w/ Susan, then helped her get set up to test/dev moad_tools.midoss.random_oil_spills
+(MIDOSS)
+
+Zoom w/ Venessa & Nancy; see biz-journal.
+(Ocean Navigator)
+
+
+Thu 4-Jun-2020
+^^^^^^^^^^^^^^
+
+Worked on Pythonification of Rachael's make_cargo_type_dictionary notebook.
+(MIDOSS)
+
+See work journal.
+(Ocean Navigator)
+
+Worked on security screening forms.
+(see biz journal)
+
+
+Fri 5-Jun-2020
+^^^^^^^^^^^^^^
+
+Discussed geotiff water mask algorithm w/ Susan; calculate a boolean mask that can be applied to AIS ship tracks geotiffs to focus selections from them to be from cells that have surface level water in the SalishSeaCast domain.
+(MIDOSS)
+
+Worked on FAL estate; answered Cameron's question about BCE ACB.
+
+
+Sat 6-Jun-2020
+^^^^^^^^^^^^^^
+
+Walked to Prince of Wales school, Quilchena Park, and East Blvd.
+
+
+Sun 7-Jun-2020
+^^^^^^^^^^^^^^
+
+collect_weather 12 didn't finish due to broken pipe and bad SSL length errors:
+* recovery:
+    pkill -f collect_weather
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20200507/12
+    download_weather 12 2.5km
+    rm -rf /SalishSeaCast/datamart/hrdps-west/12/*
+(SalishSeaCast)
+
+Cycled Spanish Banks, UBC, SWM Dr, Fraser River Park, and to the east end of River Rd. (65 km)
+
 
 
 
