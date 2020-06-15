@@ -3922,8 +3922,7 @@ Continued implementation of moad_tools.midoss.random_oil_spills.py.
 June
 ====
 
-
-Week 22
+Week 23
 -------
 
 Mon 1-Jun-2020
@@ -4000,6 +3999,117 @@ collect_weather 12 didn't finish due to broken pipe and bad SSL length errors:
 
 Cycled Spanish Banks, UBC, SWM Dr, Fraser River Park, and to the east end of River Rd. (65 km)
 
+
+Week 24
+-------
+
+Mon 8-Jun-2020
+^^^^^^^^^^^^^^
+
+Week 13 of UBC work-from-home due to COVID-19
+
+Realized that I forgot to start collect_weather 18 after yesterday's recovery :-(
+  download_weather 18 2.5km --debug
+  download_weather 00 2.5km --debug
+  download_weather 06 2.5km
+  collect_weather 18 2.5km
+  wait for forecast2 to finish
+  download_weather 12 2.5km
+Backfilled VHFR figures; figured out that IndexError exceptions when I do that are due to dates/times before the beginning of the NEMO sea surface height rolling forecast dataset on ERDDAP, so suppressed that exception and updated TestTideStnWaterLevel notebook.
+Added nc-time-axis as dependency for SalishSeaNowcast; installed it in nowcast-sys env on skookum.
+Tried to update sentry-sdk in nowcast-sys env on skookum, but the ripples are huge.
+(SalishSeaCast)
+
+Added geotiff-watermask tool.
+Worked on cleanup and integration of Susan's changes to random-oil-spills re: using geotiff water mask for get_lat_lon_indieces(), and calculating fraction of vessel capacity that is spilled.
+(MIDOSS)
+
+
+Tue 9-Jun-2020
+^^^^^^^^^^^^^^
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+collect_weather 00 failed last night due to network issues; recover:
+  rm -rf /SalishSeaCast/datamart/hrdps-west/00/*
+  rm -rf /SalishSeaCast/datamart/hrdps-west/06/*
+  rm -rf /SalishSeaCast/datamart/hrdps-west/12/*
+  rm -rf /SalishSeaCast/datamart/hrdps-west/18/*
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20200609/00
+  download_weather 00 2.5km
+  download_weather 06 2.5km
+  wait for forecast2 to finish
+  download_weather 12 2.5km
+Had to try download_live_ocean twice before success late in the afternoo.
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+Continued work on cleanup and integration of Susan's changes to random-oil-spills re: using geotiff water mask for get_lat_lon_indieces(), and calculating fraction of vessel capacity that is spilled.
+(MIDOSS)
+
+
+Wed 10-Jun-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+Forgot to launch collect_weather 18 yesterday; recover:
+  collect_weather 18 2.5km
+  rm -rf /SalishSeaCast/datamart/hrdps-west/18/*
+  rm -rf /SalishSeaCast/datamart/hrdps-west/00/*
+  rm -rf /SalishSeaCast/datamart/hrdps-west/06/*
+  download_weather 18 2.5km
+  download_weather 00 2.5km
+  download_weather 06 2.5km
+  wait for forecast2 to finish
+  rm -rf /SalishSeaCast/datamart/hrdps-west/12/*
+  download_weather 12 2.5km
+forecast run blew up on western boundary; re-tried using restart from nowcast-green and it failed the same way; Susan smoothed nowcast-green restart velocities in the problem region, and runs were successful.
+nowcast-dev blew up; Susan smoothed restart as above, and success.
+(SalishSeaCast)
+
+Worked on security screening forms.
+(see biz journal)
+
+Monthly project mtg; see whiteboard.
+(MIDOSS)
+
+
+Thu 11-Jun-2020
+^^^^^^^^^^^^^^^
+
+Backfilled VHFR figures.
+HRDPS 12Z forecast is missing 64 files; emailed Sandrine; she replied to thank me for flagging the issue, then to say that file were being re-uploaded at ~14:50; collect_weather 12 started to see them at ~15:20, and got the last of them at
+Deleted many Bitbucket repos to set up redirect messages to GitHub repos.
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+
+Fri 12-Jun-2020
+^^^^^^^^^^^^^^^
+
+FAL estate work; check-in email to Kate re: TD RSP acct form, non-reg acct fees, tax return, and LoDs prompt.
+
+See biz journal.
+(Ocean Navigator)
+
+
+Sat 13-Jun-2020
+^^^^^^^^^^^^^^^
+
+Minecraft
+
+
+Sun 14-Jun-2020
+^^^^^^^^^^^^^^^
+
+Minecraft
 
 
 
@@ -4087,28 +4197,6 @@ fix old colander dependency in SOG
 
 
 
-Delete and forward Bitbucket repos:
-* tides
-* xios-arch
-* NEMO-Cmd
-* analysis-jie
-* analysis-muriel
-* grid
-* docs
-* fivers-climatology
-* tracers
-* salishseacmd
-* mdunphy/mestingtools
-* MIDOSS/MIDOSS-MOHID-config
-* analysis-michael
-* analysis-sprints
-* mdunphy/fvcom-cmd
-* analysis-idalia
-* tools
-* nemo-3.6-code
-* xios-2
-
-
 Update authors:
 * Muriel Dunn: mbdunn
 * Jie Liu: jieliuHeart
@@ -4128,9 +4216,7 @@ Update authors:
 * Georgio Sgarbi
   * tools
 * Saurav Sahu
-  * tools
 * Yingkai Sha
-  * tools
 
 Fix Pillow security issue in analysis-doug
 
