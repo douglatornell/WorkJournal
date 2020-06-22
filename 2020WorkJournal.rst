@@ -2734,7 +2734,7 @@ Westgrid Townhall:
 
 Grocery shopping.
 
-Rescheduled ECCC MSC datamart user seminary to 15-Sep.
+Rescheduled ECCC MSC datamart user seminar to 15-Sep.
 
 See work journal; repo clean-up.
 (Ocean Navigator)
@@ -4112,74 +4112,159 @@ Sun 14-Jun-2020
 Minecraft
 
 
+Week 25
+-------
+
+Mon 15-Jun-2020
+^^^^^^^^^^^^^^^
+
+Week 14 of UBC work-from-home due to COVID-19
+
+Updated Sentry-Slack integration.
+(SalishSeaCast)
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar by Stephanie Waterman on her group's Arctic turbulence measurement work.
+
+Finally finished refactoring get_lat_lon_indieces().
+(MIDOSS)
+
+UBC network went down for about 1 hr late in the afternoon.
 
 
-personal repos to migrate:
-  ecget
-  randopony-tetra
+Tue 16-Jun-2020
+^^^^^^^^^^^^^^^
+
+Added Rachael's get_vessel_type() to random-oil-spills, and refactored it.
+(MIDOSS)
+
+FAL estate work: reviewed final income tax return.
+
+
+Wed 17-Jun-2020
+^^^^^^^^^^^^^^^
+
+FAL estate work: Emailed Cameron w/ questions about return.
+
+Restarted log aggregator due to missing watch_fvcom messages since UBC network downtime on Monday.
+Backfilled VHFR figures; discovered that forecast-x2/10jun20 apparently never happened.
+Tweaked new Sentry-Slack integration.
+(SalishSeaCast)
+
+Continued migrating personal repos from Bitbucket to GitHub:
+  ecget -> 43ravens/ECget
   nosy
-  private-journal
-  talks
-  cv
 
-  asyncio-tutorial
-  workout-sphinx
-  swc-workout-sphinx-rtd-autodoc
-  rdiff_backup
-  refactor-extractthalweg
-  pdb-workout
-  randopony
-  rm1200
+
+Thu 18-Jun-2020
+^^^^^^^^^^^^^^^
+
+Continued migrating personal repos from Bitbucket to GitHub:
+  nosy
+    migrated issues
+    archived
+  sog-bloomcast
+  talks
+  cv -> CVs
   sadahome.ca
-  meopar2019-atm-asm-notes
-  markdown-error-log
-  nemo-cmd-pipelines-test
-  test_tag_release
-  sqlalchemyorg
-  pipeline-test
-  forecast
-  jasper-rebase-test
+  rdiff_backup
+  asyncio-tutorial
+  refactor-extractthalweg
+  swc-workout-sphinx-rtd-autodoc
+  pdb-workout
   swc-nelle-files
   swc-hbridge-files
-  sog
-  sog-sublime
-  sog-bloomcast
   raspi_x10
   raspi_x10_config
-  geotraces-nemo-test
-  sublimetext3-settings
-  sublimetext2-settings
+  randopony
   pyramid_persona_group_auth_demo
   wake.py
-  contextlib2
-  webtest
-  virtualenvwrapper-ksh
-to delete:
-  workjournal.hg
-  huebot
-  douglatornell.ca
-  gentlerust
-  meopar2017winterschool
-  uqar-winter-school
-private:
-  cyclelog
-  efunds
-  portfolio
-  fun
-
-
-43ravens repos to migrate:
+  rm1200
+Continued migrating 43ravens repos from Bitbucket to GitHub:
   meopar-atm-2019-06-11
   meopeers-2015-06-15
   client-bio
   client-ios
   client-uottawa-espg
   client-nordion
-  private repos from douglatornell
-to delete:
+Moved previously migrated private repos from douglatornell to 43ravens:
   43ravens.ca
+  client-UBC-SCARP
+  biz-journal
+  client-NAFC
+
+Helped Rachael understand get_vessel_type() refactoring.
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
+
+
+Fri 19-Jun-2020
+^^^^^^^^^^^^^^^
+
+kudu app maint:
+* removed Zoom deb; installed Zoom flatpack
+* removed Skype snap; installed Skype flatpack
+
+See work journal.
+(Resilient-C)
+
+Skype w/ Rachael about Python code style and techniques.
+(MIDOSS)
+
+
+Sat 20-Jun-2020
+^^^^^^^^^^^^^^^
+
+collect_weather 12 failed last night due to network issues; recover:
+  pkill -f collect_weather
+  collect_weather 18 2.5km &
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20200620/12
+  download_weather 12 2.5km
+(SalishSeaCast)
+
+
+Sun 21-Jun-2020
+^^^^^^^^^^^^^^^
+
+nowcast-agrif failed due to infiniband error; re-tried, and re-failed.
+(SalishSeaCast)
+
+
+
+personal repos to migrate:
+
+  randopony-tetra
+to delete:
+  ecget
+don't migrate:
+  markdown-error-log
+  meopar2019-atm-asm-notes
+  nemo-cmd-pipelines-test
+  test_tag_release
+  sqlalchemyorg
+  pipeline-test
+  workout-sphinx
+  forecast
+  jasper-rebase-test
+  contextlib2
+  webtest
+  virtualenvwrapper-ksh
+  sog
+  geotraces-nemo-test
+  sog-sublime
+  sublimetext3-settings
+  sublimetext2-settings
+
+
+43ravens repos to delete:
   nemo_nowcast
 
+
+Add CI workflows to run linkcheck on docs; need to wait for Sphinx 3.1 and resolution of Accept header issue re: GitHub Actions badges; see issue https://github.com/sphinx-doc/sphinx/issues/7247
 
 15jun20: check mitigation of "index exceeds dimension bounds" IndexError in make_plots fvcom forecast-x2 research
 
@@ -4221,8 +4306,6 @@ Update authors:
 Fix Pillow security issue in analysis-doug
 
 Add auto-deploy workflow to salishsea-site to replace bitbucket pipeline
-
-Add CI workflows to run linkcheck on docs; need to wait for Sphinx 3.1 and resolution of Accept header issue re: GitHub Actions badges
 
 Migrate Baynes Sound fig to cartopy
 
