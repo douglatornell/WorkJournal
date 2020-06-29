@@ -2923,7 +2923,6 @@ NEMO forecast2 run failed to launch; I didn't push the SalishSeaNowcast change r
 Continued migration of SalishSeaCast repos:
 * analysis-idalia
 * tools
-
   * subscribe in #ssc-repos
   * change readthedocs webhook
     * application/json
@@ -4201,6 +4200,8 @@ Helped Rachael understand get_vessel_type() refactoring.
 See work journal.
 (Resilient-C)
 
+FAL estate work: Email answers & revised return from Cameron.
+
 
 Fri 19-Jun-2020
 ^^^^^^^^^^^^^^^
@@ -4234,12 +4235,167 @@ nowcast-agrif failed due to infiniband error; re-tried, and re-failed.
 (SalishSeaCast)
 
 
+Week 26
+-------
+
+Mon 22-Jun-2020
+^^^^^^^^^^^^^^^
+
+Week 15 of UBC work-from-home due to COVID-19
+
+Removed forecast.201812 from /results re: Susan's request on Trello.
+Removed nowcast-agrif.201702/21aug18 through 31may20 after Susan copied them to archive #9 and #10.
+Updated storage use deatils card on Trello.
+Continued migrating SalishSeaCast repos from Bitbucket to GitHub:
+  private-docs
+  analysis
+    Decided that 2 old unnamed branches on default can be dropped
+Added GitHub Actions workflow to run sphinx linkcheck for salishsea-site repo on every push to GitHub; also did NEMO-Cmd.
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar by Sam Anderson on deep machine learning and hydrology modeling.
+
+
+Tue 23-Jun-2020
+^^^^^^^^^^^^^^^
+
+Continued migrating SalishSeaCast repos from Bitbucket to GitHub:
+  analysis-nancy
+    Extra head is a very old commit involved in a merge-boggle. The commit does not appear to have gotten abandoned, so I decided to let the GitHub importer prune it.
+Started work on adding docs-linkcheck Action to moad/docs repo; need to handle links to private GitHub repos, either by auth or by exclusion.
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+Email with Cam about getting origin-destination analysis data and script on to storage accessible by salish.
+(MIDOSS)
+
+
+Wed 24-Jun-2020
+^^^^^^^^^^^^^^^
+
+Email with Cam about getting origin-destination analysis data and script on to storage accessible by salish.
+(MIDOSS)
+
+FAL estate work: re-reviewed final income tax return; emailed Cameron re: flipped proceeds & ACB for FID M/I transactions in Sep & Oct, and sent him signed engagement agreement. Mtg w/ Monica @TD to sign LoDs for liquidation & distribution of TD wealth accounts; got declaration of transmission for retail accounts that requires notarization.
+
+Created electronic signature PNG w/ transparent background. Installed Xjournal++ so that I could use it to apply signature PNG to documents; a lot of hoops to avoid print/sign/photo-scan.
+
+Added GitHub Actions workflow to UBC-MOAD/docs to run Sphinx linkcheck after every push; messed around trying to find a way to handle private repos URLs via GitHub personal access token, but failed and settled for putting them in an ignore-list in conf.py.
+(MOAD)
+
+
+Thu 25-Jun-2020
+^^^^^^^^^^^^^^^
+
+FAL estate work:
+
+UBC-DFO modelling collab mtg: Mike Foreman, WCVI circulation model
+(SalishSeaCast)
+
+Started work on origin/destination processing using sciprt & CSV from Casey@MEOPAR via Cam; now stored in /data/MIDOSS/origin_destination_analysis/
+* read code
+* built py27gdal conda env
+  * must use defaults channel only
+  * poppler<0.62 has to be installed after env build
+* script ran for ~2h but I don't know if it finished or got killed by network hangup
+(MIDOSS)
+
+
+Fri 26-Jun-2020
+^^^^^^^^^^^^^^^
+
+Re-launched origin-destination analysis
+(MIDOSS)
+
+Westgrid townhall:
+* cedar April incident - Martin Siegert SFU site lead
+  * compromised ~23-Mar early morning
+  * crypto-currency mining
+  * compromise came on the heels of system upgrade, so upgrade was blamed for reduced performance
+  * 00:00 to 06:00 time window of slowdowns detection by a research group was clue that lead to discovery
+    * access via compromised user account, probably via password sniffer on desktop/laptop; unknown if
+    * battery check cronjob used to start alternate process
+    * kernel mod installed by intruder
+    * account had elevated privileges on ATLAS servers that export filesystem to all compute nodes
+    * gained root by inserting suid-root shell in exported file system
+    * apparently a new compromise technique, though crypto-miners are very secretive
+    * head nodes were not compromised, but all authorized_keys files were removed as a precaution, and revoked keys of users who had private keys stored on cedar
+  * MFA coming
+* there was also a security incident on graham - no details
+* system access best practices - Scott Baker, UBC
+  * unique passwords/secrets
+  * generated passwords, not memorized
+  * size matters - passphrases
+  * only change when necessary, not scheduled
+  * haveibeenpwned.com
+  * password/secret vault; keypass, but any is better than none
+  * private key should never leave system it is generated on
+  * Mozilla infosec key mgmt page
+  * don't copy/paste code into command-line
+  * sign-out
+  * encryption at rest, especially on laptops, USB keys
+  * proper file permissions
+  * delete unnecessary information
+  * software updates; vulnerabilities exploited w/i 36h
+  * backup & restore proof
+  * VPNs
+  * MFA
+* westgrid associates
+* training
+  * UBC ARC summer school in August
+  * UBC Research Commons in fall workshops
+
+See work journal.
+(Resilient-C)
+
+Started adding ubcSSg3DCarbonFields1hV19-05 ERDDAP dataset; confirm:
+  variable names
+  colour bar ranges
+Stopped because Susan wants to wait until Tereza, et al paper is submitted.
+Michael started copying 1km HRDPS for May19-May20 to /data.
+Delved into ImportError exceptions in OPPTools that have us pinned at 4af96c499cdc49e96a87f999870be1560807d925; missing numpy-indexed package could be added to env, but missing ttide package has to be installed from GitHub clone, and I don't want to go there; hacked a solution by commenting out contents of OPPTools/__init__.py; works because my code imports explicitly to the module level. Updated arbutus & skookum to present master at e87f5e7c77fa05876c6286a4b8c53879dbcd9543.
+**This didn't work! See Sat 27-Jun-2020 for the solution that does work.**
+(SalishSeaCast)
+
+
+Sat 27-Jun-2020
+^^^^^^^^^^^^^^^
+
+Yesterday's OPPTools work just made a mess of fail by breaking imports within the package - what was I thinking...; recovery (on skookum & arbutus, unless otherwise noted):
+  restored commented out imports in OPPTools/__init__.py
+  Installed numpy-indexed
+  Commented out import of utils.transit_window_analysis in OPPTools/utils/__init__.py to avoid import ttide (that is not packaged and has to be installed from GitHub clone)
+(SalishSeaCast)
+
+
+Sun 28-Jun-2020
+^^^^^^^^^^^^^^^
+
+Virtual Robinson Reunion on Zoom.
+
+Power failure affecting ESB at ~14:40 Sat messed things up but good; recovery:
+  pkill collect_weather 18
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20200627/18
+  download_weather 18 2.5km
+  download_weather 00 2.5km
+  download_weather 06 2.5km
+  collect_weather 18 2.5km
+  wait for forecast2 to finish
+  download_weather 12 2.5km
+(SalishSeaCast)
+
+Cycled River Rd, through cranberry bogs east of CNR, south dyke to east end of Queensborough, and home via River Rd (60km)
+
+
 
 personal repos to migrate:
 
   randopony-tetra
-to delete:
-  ecget
 don't migrate:
   markdown-error-log
   meopar2019-atm-asm-notes
@@ -4260,11 +4416,28 @@ don't migrate:
   sublimetext2-settings
 
 
-43ravens repos to delete:
-  nemo_nowcast
+Add CI workflows to run linkcheck on docs:
+  need sphinx>3.1 in env
+  example workflow in salishsea-site repo
+  don't forget to add sphinx & sphinx_rtd_theme to environment-test.yaml
+  repos todo:
+    UBC-MOAD
+      moad_tools
+      cookiecutter-MOAD-pypkg
+    MIDOSS
+      MOHID-Cmd
+      docs
+      WWatch3-Cmd
+      Make-MIDOSS-Forcing
+    SalishSeaCast
+      SalishSeaNowcast
+      docs
+      tools
+      SalishSeaCmd
+    43ravens
+      NEMO_Nowcast
+      ECget
 
-
-Add CI workflows to run linkcheck on docs; need to wait for Sphinx 3.1 and resolution of Accept header issue re: GitHub Actions badges; see issue https://github.com/sphinx-doc/sphinx/issues/7247
 
 15jun20: check mitigation of "index exceeds dimension bounds" IndexError in make_plots fvcom forecast-x2 research
 
@@ -4282,27 +4455,6 @@ fix old colander dependency in SOG
 
 
 
-Update authors:
-* Muriel Dunn: mbdunn
-* Jie Liu: jieliuHeart
-* Idalia Machuca:
-* James Petrie:
-  * docs
-  * SS-run-sets
-  * tools
-* Kate Le Souef:
-  * docs
-  * NEMO-Forciong
-  * tools
-* Rob Irwin
-  * docs
-* Golnaz
-* Xiaoxin Yu (Cindy)
-* Georgio Sgarbi
-  * tools
-* Saurav Sahu
-* Yingkai Sha
-
 Fix Pillow security issue in analysis-doug
 
 Add auto-deploy workflow to salishsea-site to replace bitbucket pipeline
@@ -4316,13 +4468,7 @@ Advise Michael & Maxim of:
       projstring = _prepare_from_string(projparams)
 
 
-SalishSeaCast repos still to be migrated:
-  analysis - default branch has multiple heads & 1.7Gb
-  analysis-nancy - default branch has multiple heads
-
-
 TODO:
-* Sort out OPPTools dependencies so that we can run w/ origin/master:HEAD again
 * Fix:
     /media/doug/warehouse/conda_envs/nemo-nowcast/lib/python3.8/pathlib.py:1299: DeprecationWarning: an integer is required (got type FilePerms).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
       self._accessor.chmod(self, mode)
@@ -4342,3 +4488,4 @@ Done:
 * Delete ubcSSfDepthAvgdCurrents1hV18-06 from ERDDAP on Fri 7-Feb-2020
 * Disable ubcSSfDepthAvgdCurrents1hV18-06 on ERDDAP on Fri 31-Jan-2020
 * Update bloomcast plots so that we are not tied to matplotlib-1.5.3
+* Sort out OPPTools dependencies so that we can run w/ origin/master:HEAD again
