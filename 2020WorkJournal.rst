@@ -4392,28 +4392,156 @@ Power failure affecting ESB at ~14:40 Sat messed things up but good; recovery:
 Cycled River Rd, through cranberry bogs east of CNR, south dyke to east end of Queensborough, and home via River Rd (60km)
 
 
+July
+====
 
-personal repos to migrate:
+Week 27
+-------
 
-  randopony-tetra
-don't migrate:
-  markdown-error-log
-  meopar2019-atm-asm-notes
-  nemo-cmd-pipelines-test
-  test_tag_release
-  sqlalchemyorg
-  pipeline-test
-  workout-sphinx
-  forecast
-  jasper-rebase-test
-  contextlib2
-  webtest
-  virtualenvwrapper-ksh
-  sog
-  geotraces-nemo-test
-  sog-sublime
-  sublimetext3-settings
-  sublimetext2-settings
+Mon 29-Jun-2020
+^^^^^^^^^^^^^^^
+
+Week 16 of UBC work-from-home due to COVID-19
+
+Tracked down 2x FutureWarning from make_fvcom_boundary:
+  /nemoShare/MEOPAR/nowcast-sys/nowcast-env/lib/python3.8/site-packages/pyproj/crs/crs.py:279: FutureWarning: '+init=<authority>:<code>' syntax is deprecated. '<authority>:<code>' is the preferred initialization method. When making the change, be mindful of axis order changes: https://pyproj4.github.io/pyproj/stable/gotchas.html#axis-order-changes-in-proj-6
+    projstring = _prepare_from_string(projparams)
+Caused by outdated syntax in lines 25 & 26 in OPPTools/fvcomToolbox/fvcomToolbox.py; applied fixes on arbutus & skookum.
+Backfill nowcast-agrif:
+  upload_forcing nowcast+ 2020-06-21 --debug
+  upload_forcing turbidity 2020-06-21 --debug
+  make_forcing_links nowcast-agrif 2020-06-21
+  upload_forcing nowcast+ 2020-06-22 --debug
+  upload_forcing turbidity 2020-06-22
+  make_forcing_links nowcast-agrif 2020-06-21
+  upload_forcing nowcast+ 2020-06-23 --debug
+  upload_forcing turbidity 2020-06-23 --debug
+  make_forcing_links nowcast-agrif 2020-06-23
+  upload_forcing nowcast+ 2020-06-24 --debug
+  upload_forcing turbidity 2020-06-24 --debug
+  make_forcing_links nowcast-agrif 2020-06-24
+  upload_forcing nowcast+ 2020-06-25 --debug
+  upload_forcing turbidity 2020-06-25 --debug
+  make_forcing_links nowcast-agrif 2020-06-25
+  upload_forcing nowcast+ 2020-06-26
+  upload_forcing turbidity 2020-06-26
+Changed upload_forcing checklist entry to be structured so that run_date can be passed from upload_forcing to make_forcing_links; refactored after_upload_forcing() to use that capability.
+(SalishSeaCast)
+
+
+Tue 30-Jun-2020
+^^^^^^^^^^^^^^^
+
+Check manager-stderr log re: FutureWarning from make_fvcom_boundary.
+Continued backfilling nowcast-agrif:
+  upload_forcing nowcast+ 2020-06-27
+  upload_forcing turbidity 2020-06-27
+  upload_forcing nowcast+ 2020-06-28
+  upload_forcing turbidity 2020-06-28
+  upload_forcing nowcast+ 2020-06-29
+  upload_forcing turbidity 2020-06-29
+  upload_forcing nowcast+ 2020-06-30
+  upload_forcing turbidity 2020-06-30
+(SalishSeaCast)
+
+Tried to pull in Étienne's theming branch pull request #2 for randopony before it disappears from Bitbucket. Deployment is at changeset:   315:58c43b96ae2a. Étienne's code is still broken re: displaying the registration confirmation msg on the rider list pages for brevets & populaires; also he didn't fix the --no-interact arg issue in initializedb.py; not sure what he actually did do in response to my PR feedback.
+Imported repo to GitHub; that looses PR history, byt I have PR commits in theming hg branch on kudu.
+
+AAPS tentative agreement mtg
+
+
+Wed 1-Jul-2020
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Canada Day
+
+Susan's admin leave from EOAS started; still Assoc. Dean.
+
+Rode to Cates Park in the rain (43km)
+
+
+Thu 2-Jul-2020
+^^^^^^^^^^^^^^
+
+Received notice from ProServices of pre-qualification status, pending security screening.
+(see biz journal)
+
+collect_weather 12 stalled due to 503 errors from ECCC servers; recovery:
+  pkill collect_weather 12
+  collect_weather 18 2.5km &
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20200702/12
+  download_weather 12 2.5km
+Answered email from Sam re: sea surface height values.
+Fixed missing downloads and plots for VHFR 27jun20; probably due to 28jun20 ESB power failure.
+Killed nowcast-dev watcher on salish that was left over from 27jun, and launcheed today's manually.
+Dug into VHFR make_plots error:
+    File "/SalishSeaCast/SalishSeaNowcast/nowcast/figures/fvcom/research/thalweg_transect.py", line 80, in _prep_plot_data
+      date_bytes = fvcom_results_dataset.variables["Times"][time_index, :]
+    File "netCDF4/_netCDF4.pyx", line 4384, in netCDF4._netCDF4.Variable.__getitem__
+    File "netCDF4/_netCDF4.pyx", line 4072, in netCDF4._netCDF4.Variable.shape.__get__
+    File "netCDF4/_netCDF4.pyx", line 4020, in netCDF4._netCDF4.Variable._getdims
+    File "netCDF4/_netCDF4.pyx", line 1887, in netCDF4._netCDF4._ensure_nc_success
+  RuntimeError: NetCDF: Not a valid ID
+  It's due to the addition of a close() on the dataset that Maxim made in Apr-2019 in rev aafb917b3bd9; make_plots relies on datasets remaining open; asked Maxim about the change in the commit on GitLab.
+(SalishSeaCast)
+
+Answered a ton of emails from Rachael about conda envs, Pythonic code, and random-oil-spills progress.
+(MIDOSS)
+
+
+Fri 3-Jul-2020
+^^^^^^^^^^^^^^
+
+
+Received notice from Contract Security Program (CSP) that Designated Organization Screening (DOS) has been approved.
+(see biz journal)
+
+Maxim reverted the OPPTools f.close() commit in ev aafb917b3bd9.
+Updated skookum and continued backfilling VHFR figures:
+  download_fvcom_results r12 nowcast2020-06-28
+  for 28 29 make_plots nowcast-r12 publish 2020-06-$d
+  for 28 30 make_plots nowcast-x2 research 2020-06-$d
+  for 1 2 make_plots nowcast-x2 research 2020-07-$d
+  for 26 30 make_plots nowcast-r12 research 2020-06-$d
+
+  make_plots nowcast-r12 research 2020-07-01
+  for 26 30 make_plots forecast-x2 research 2020-06-$d
+  make_plots forecast-x2 research 2020-07-01
+nowcast-agrif failed due to a power bump affecting orcinus; ran make_forcing_links to re-try; failed again with infiniband error.
+(SalishSeaCast)
+
+Updated moad_tools docs:
+  Updated broken & redirected links
+  Added unit tests & CI section
+  Added GitHub Action to run linkcheck
+  Added caching of conda pkgs to linkcheck & CI workflows
+  Added monthly scheduled run of linkcheck workflow
+Not convinced that caching actually sped up workflow runs.
+Added conda pkgs caching and monthly schedule to to UBC-MOAD/docs linkcheck workflow.
+Added conda pkgs caching and monthly schedule to to NEMO-Cmd linkcheck & CI workflows.
+(MOAD)
+
+
+Sat 4-Jul-2020
+^^^^^^^^^^^^^^
+
+Cycled to Colony Farm and back, mostly along Valley Greenway (67km)
+
+
+Sun 5-Jul-2020
+^^^^^^^^^^^^^^
+
+Cycled 8th, Chancellor, UBC, SWM, Camosun, 29th, Valley (21km)
+
+
+
+
+
+OPPTools PRs:
+  add numpy-indexed dependency
+  fix pyproj.Proj() initializations
+
+
 
 
 Add CI workflows to run linkcheck on docs:
@@ -4422,7 +4550,6 @@ Add CI workflows to run linkcheck on docs:
   don't forget to add sphinx & sphinx_rtd_theme to environment-test.yaml
   repos todo:
     UBC-MOAD
-      moad_tools
       cookiecutter-MOAD-pypkg
     MIDOSS
       MOHID-Cmd
@@ -4460,12 +4587,6 @@ Fix Pillow security issue in analysis-doug
 Add auto-deploy workflow to salishsea-site to replace bitbucket pipeline
 
 Migrate Baynes Sound fig to cartopy
-
-
-Advise Michael & Maxim of:
-  make_fvcom_boundary issued FutureWarning twice:
-    /nemoShare/MEOPAR/nowcast-sys/nowcast-env/lib/python3.8/site-packages/pyproj/crs/crs.py:279: FutureWarning: '+init=<authority>:<code>' syntax is deprecated. '<authority>:<code>' is the preferred initialization method. When making the change, be mindful of axis order changes: https://pyproj4.github.io/pyproj/stable/gotchas.html#axis-order-changes-in-proj-6
-      projstring = _prepare_from_string(projparams)
 
 
 TODO:
