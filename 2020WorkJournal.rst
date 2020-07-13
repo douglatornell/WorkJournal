@@ -4492,21 +4492,15 @@ Answered a ton of emails from Rachael about conda envs, Pythonic code, and rando
 Fri 3-Jul-2020
 ^^^^^^^^^^^^^^
 
-
 Received notice from Contract Security Program (CSP) that Designated Organization Screening (DOS) has been approved.
 (see biz journal)
 
-Maxim reverted the OPPTools f.close() commit in ev aafb917b3bd9.
+Maxim reverted the OPPTools f.close() commit in rev aafb917b3bd9.
 Updated skookum and continued backfilling VHFR figures:
   download_fvcom_results r12 nowcast2020-06-28
   for 28 29 make_plots nowcast-r12 publish 2020-06-$d
   for 28 30 make_plots nowcast-x2 research 2020-06-$d
   for 1 2 make_plots nowcast-x2 research 2020-07-$d
-  for 26 30 make_plots nowcast-r12 research 2020-06-$d
-
-  make_plots nowcast-r12 research 2020-07-01
-  for 26 30 make_plots forecast-x2 research 2020-06-$d
-  make_plots forecast-x2 research 2020-07-01
 nowcast-agrif failed due to a power bump affecting orcinus; ran make_forcing_links to re-try; failed again with infiniband error.
 (SalishSeaCast)
 
@@ -4534,12 +4528,145 @@ Sun 5-Jul-2020
 Cycled 8th, Chancellor, UBC, SWM, Camosun, 29th, Valley (21km)
 
 
+Week 28
+-------
+
+Mon 6-Jul-2020
+^^^^^^^^^^^^^^
+
+Week 17 of UBC work-from-home due to COVID-19
+
+Backfilling VHFR figures:
+  for 28 30 make_plots nowcast-r12 research 2020-06-$d
+  for 01 03 make_plots nowcast-r12 research 2020-07-$d
+Backfilling nowcast-agrif:
+  make_forcing_links nowcast-agrif 2020-07-03
+  make_forcing_links nowcast-agrif 2020-07-04
+  make_forcing_links nowcast-agrif 2020-07-05
+  make_forcing_links nowcast-agrif 2020-07-06
+(SalishSeaCast)
+
+Created https://github.community/t/scheduled-workflow-cant-access-secrets/121520 re: scheduled linkcheck workflow failures; reason is not access to secrets, but that Slack notifications action is trying to use GITHUB_EVENT.head_commit which doesn't exist for schedule events.
+Resumed work on MOAD Getting Started docs: Linux Working Environment
+(MOAD)
+
+Phys Ocgy seminar by Sam Brenner (UW-APL) about ocean-ice drag in the Beaufort.
+
+
+Tue 7-Jul-2020
+^^^^^^^^^^^^^^
+
+Updated sentry-sdk to v0.16.0 on skookum, arbutus.
+Backfilling VHFR figures:
+  for 26 30 make_plots forecast-x2 research 2020-06-$d
+    got lots of ctime-related errors; tracked to a cftime API issue that I thought disappeared in my work last week; updated cftime, and hacked line 843 of OPPTools/utils/fvcom_postprocess.py
+  for 26 make_plots forecast-x2 research 2020-06-$d
+Discussed an algorithm with Susan for interpolating monthly river discharges to daily in such a way that monthly averages are preserved.
+Changed next_workers to launch only `make_plots nowcast-r12 research` after r12 finishes; this is to avoid IndexError exceptions due to 3 instances accessing results files concurrently; uploaded to skookum to test because this is an intermittent issue.
+(SalishSeaCast)
+
+Helped Susan get MOHID running on graham.
+Helped Rachael with her ongoing oil attribution monster.
+(MIDOSS)
+
+Received confirmation from ProServices that 43ravens has been granted a Supply Arrangement.
+(see biz journal)
+
+
+Wed 8-Jul-2020
+^^^^^^^^^^^^^^
+
+Sharcnet seminar about Cython by Tyler Collins.
+
+Monthly project mtg; see whiteboard.
+(MIDOSS)
+
+Backfilling VHFR figures:
+  make_plots forecast-x2 publish 2020-07-07
+  for 28..30 make_plots forecast-x2 research 2020-06-$d
+  make_plots forecast-x2 research 2020-07-01
+  make_plots nowcast-x2 research 2020-07-07
+(SalishSeaCast)
+
+
+Thu 9-Jul-2020
+^^^^^^^^^^^^^^
+
+Investigated FileNotFoundError from upload_forcing to orcinus that has been cropping up lately: maybe race condition, but also a connection time-out this morning; worked on manual re-run.
+Investigated IndexError from `make_plots fvcom nowcast-r12 publish`:
+* missing 2nd Narrows HADCP observations
+* last update of /opp/observations/AISDATA/netcdf/VFPA_2ND_NARROWS_HADCP_2s_202007.nc was 7jul20-13:49
+* caused by breaking change re: assignment to Dataset coords in update to xarray=0.15.1; failure was masked because it raised a ValueError, the same as occurs for no data
+* pushed fix
+* re-ran get_vfpa_hadcp since 01jul20
+* re-ran:
+    make_plots fvcom nowcast-x2 publish 2020-07-08
+    make_plots fvcom forecast-x2 publish 2020-07-08
+    make_plots fvcom nowcast-r12 publish 2020-07-08
+make_forcing_links orcinus is raising time-outs; seems like a login node is down; emailed Mark for support; he reset the network on seawolf1 and make_forcing_links worked.
+Investigated Katia's report of zero fields in ww3 prelim forecasts at 16:00 PST.
+(SalishSeaCast)
+
+See work journal.
+(Ocean Navigator)
+
+Uninstalled kudu snap versions of Slack and PyCharm and replaced them with flatpak installs.
+
+
+Fri 10-Jul-2020
+^^^^^^^^^^^^^^^
+
+Change kudu installation of Signal from deb to flatpak due to software update notification.
+Removed snap from kudu
+  rm -rf /var/cache/snapd
+  sudo apt autoremove --purge snapd
+  rm -rf ~/snap
+Set up new install of Slack.
+Setup up new install of PyCharm; it uses KDE Wallet for license credentials which sent me on an abortive search for GPG setup; credentials are securied by blowfish via oplop password.
+
+Investigated FileNotFound/FileExistsError coming from upload_forcing orcinus recently; may be related to https://github.com/paramiko/paramiko/issues/149; added @retry to upload_forcing._upload_ssh_files(); uploaded to skookum to test.
+Investigated missing surface current tiles figures since forecast/07jul20: another issue attributable to updating cftime; netCDF4.num2date() now returns cftime.DatetimeGregorian objects that lack some datetime.datetime API; solved by adding netCDF4.num2date(..., only_use_cftime_datetimes=False) to force datetime.datetime objects; backfilling:
+  make_surface_current_tiles forecast 2020-07-07 --debug
+  make_surface_current_tiles forecast 2020-07-08 --debug
+  make_surface_current_tiles forecast2 2020-07-08 --debug
+Also seeing:
+  /SalishSeaCast/tools/SalishSeaTools/salishsea_tools/viz_tools.py:123: UserWarning: No contour levels were found within the data range.
+    contour_lines = axes.contour(
+  /SalishSeaCast/nowcast-env/lib/python3.8/site-packages/numpy/core/fromnumeric.py:746: UserWarning: Warning: 'partition' will ignore the 'mask' of the MaskedArray.
+    a.partition(kth, axis=axis, kind=kind, order=order)
+    (SalishSeaCast)
+
+
+Sat 11-Jul-2020
+^^^^^^^^^^^^^^^
+
+nowcast-agrif run timed out.
+(SalishSeaCast)
+
+Cycled to Whiterock (55km); picked up Prius.
+
+
+Sun 12-Jul-2020
+^^^^^^^^^^^^^^^
+
+Backfilling surface current tiles:
+  make_surface_current_tiles forecast2 2020-07-09 --debug
+  make_surface_current_tiles forecast 2020-07-09 --debug
+
+Cleared parking space in garage for Prius - first time since early 2005 that we've had a car parked there.
+
+
+
+
+Figure out how to disconnect NEMO_Nowcast.Worker instances from sentry-sdk logging when we are running in --debug mode;
+  posted question on Sentry support forum on 08jul20
 
 
 
 OPPTools PRs:
   add numpy-indexed dependency
   fix pyproj.Proj() initializations
+  fix nctime().strftime in OPPTools.utils.fvcom_postprocess.vertical_transect_snap()
 
 
 
