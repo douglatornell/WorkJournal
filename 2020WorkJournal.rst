@@ -4656,6 +4656,142 @@ Backfilling surface current tiles:
 Cleared parking space in garage for Prius - first time since early 2005 that we've had a car parked there.
 
 
+Week 29
+-------
+
+Mon 13-Jul-2020
+^^^^^^^^^^^^^^^
+
+Week 18 of UBC work-from-home due to COVID-19
+
+Investigated 11jul nowcast-agrif failure:
+  1st time step
+  weather not found
+  backfilling:
+    upload_forcing orcinus nowcast+ 2020-07-11
+    upload_forcing orcinus turbidity 2020-07-11 --debug
+    wait for 13jul20 run to fail
+    make_forcing_links orcinus nowcast-agrif 2020-07-11
+    make_forcing_links orcinus nowcast-agrif 2020-07-12
+    make_forcing_links orcinus nowcast-agrif 2020-07-13
+@retry fix for FileNotFound/FileExistsError coming from upload_forcing orcinus didn't help; removed.
+Commited, pushed & deployed netCDF4.num2date(..., only_use_cftime_datetimes=False) fix to force datetime.datetime objects in surface current figures code.
+Debugged pre-commit hook failure; probably due to PyCharm change to flatpak; needed explicit path for black; changed to consume file paths passed by plugin instead of running over whole codebase.
+(SalishSeaCast)
+
+Phys Ocgy seminar by Adam Yang (civil engrg) re: Holmboe instabilities.
+
+See work journal.
+(Resilient-C)
+
+Sent Slack request to Elise & Susan for words to add Olson, et al 2020 to publications page.
+(salishsea-site)
+
+Updated Olson, et al 2020 citation on front page and in dataset metadata re: publication, title change & DOI.
+Deleted deactivated V18-12 dataset descriptions.
+Copied setup.xml file into /opt/tomcat/content/erddap/ and bounced ERDDAP with:
+* sudo /opt/tomcat/bin/shutdown.sh
+* sudo /opt/tomcat/bin/startup.sh
+(ERDDAP)
+
+
+Tue 14-Jul-2020
+^^^^^^^^^^^^^^^
+
+Went cycling while Rita came to clean: Spanish Banks, SWM, Fraser Park, Iona including out to the end of the spit (1st time since 1992!), Burkeville, Canada Line Bridge Heather (~60km).
+
+collect_weather 12 didn't finish due to connection timeouts that started at 08:36; recovery started at ~16:00:
+  kill collect_weather 12
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20200714/12
+  download_weather 12 2.5km
+  download_weather 18 2.5km
+  rm -rf /SalishSeaCast/datamart/hrdps-west/12
+  rm -rf /SalishSeaCast/datamart/hrdps-west/18
+  collect_weather 00
+  download_weather 00 1km
+  download_weather 12 1km
+(SalishSeaCast)
+
+
+Wed 15-Jul-2020
+^^^^^^^^^^^^^^^
+
+Change to next_workers to launch only `make_plots nowcast-r12 research` after r12 finishes to avoid IndexError exceptions due to 3 instances accessing results files concurrently has worked well since I deployed test of it on 7-Jul; committed and finalized deployment.
+Took another run at FileNotFound/FileExistsError coming from upload_forcing orcinus recently; related to https://github.com/paramiko/paramiko/issues/149; added new @retry strategy to upload_forcing._upload_ssh_files(); uploaded to skookum to test.
+(SalishSeaCast)
+
+Explored patching pioug/le-slack-message@v1.0.0 to work for schedule events but couldn't find an obvious way; changed UBC-MOAD/docs linkcheck workflow to use 8398a7/action-slack@v3 after testing proved that it will work for both push and schedule events; make similar change in:
+  NEMO-Cmd
+  moad_tools
+  salishsea-site
+(MOAD)
+
+Added Olson, et al (2020) to publications page.
+Worked on automatic deployment from GitHub; updated and tested deploy.sh to work with git;
+  installed repo deployment key on GitHub
+  GitHub secrets:
+    deployment host
+    deployment host ecdsa key sha256 fingerprint
+    deployment user
+    deployment key
+    deployment path
+(salishsea-site)
+
+
+Thu 16-Jul-2020
+^^^^^^^^^^^^^^^
+
+collect_weather 00 didn't finish (528 files were collected) due to 404 from queue server at 20:54; recoery started at 09:15:
+  pkill collect_weather 00
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20200716/00
+  download_weather 00 2.5km
+  download_weather 06 2.5km
+  wait for forecast2 to finish
+  download_weather 12 2.5km
+  collect_weather 18 2.5km
+(SalishSeaCast)
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Finished auto-deploy workflow; struggled with host key fingerprint test: ecdsa, rsa, and ed25519 fingerprints failed; dropped host key fingerprint checking.
+(salishsea-site)
+
+Email w/ Rachael about floating point arithmetic issues, and using functions from salishsea_tools pkg.
+(MIDOSS)
+
+
+Fri 17-Jul-2020
+^^^^^^^^^^^^^^^
+
+Email from Rachael re: updates in analysis-rachael so that get_length() integration can move ahead.
+Started work on integrating get_length_origin_destination() into random-oil-spills module:
+  added geopandas as dep
+  copied in salishsea_tools.geo_tools.haversine()
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
+
+FAL estate work: rec'd & recorded monthly RIF & non-registered acct statements.
+
+
+Sat 18-Jul-2020
+^^^^^^^^^^^^^^^
+
+Drove to Fort Langley. Cycled in Glen Valley and up decommissioned Bradner Rd hill onto flank of Mt. Lehman (~40km). Broke spoke on rear wheel.
+
+
+Sun 19-Jul-2020
+^^^^^^^^^^^^^^^
+
+Goofed off.
+
+
+
+
+update unpublished status of Olson, et al (2020)
+
 
 
 Figure out how to disconnect NEMO_Nowcast.Worker instances from sentry-sdk logging when we are running in --debug mode;
