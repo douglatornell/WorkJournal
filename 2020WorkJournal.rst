@@ -18,7 +18,7 @@ January
 Week 1
 ------
 
-Wed 1-Jan-2018
+Wed 1-Jan-2020
 ^^^^^^^^^^^^^^
 
 **Statutory Holiday** - New Year's Day
@@ -26,13 +26,13 @@ Wed 1-Jan-2018
 Helped Allens settle in at Amica White Rock.
 
 
-Thu 2-Jan-2018
+Thu 2-Jan-2020
 ^^^^^^^^^^^^^^
 
 Helped Allens settle in at Amica White Rock.
 
 
-Fri 3-Jan-2018
+Fri 3-Jan-2020
 ^^^^^^^^^^^^^^
 
 Finished initialization of 2020 GnuCash SADA books.
@@ -47,7 +47,7 @@ Imported this repo to GitHub.
 Imported dotfiles repo to GitHub. Added githooks/generic/ pre-commit.sh and rescuetime commit highlight post-commit hooks; there is no post-tag hook in git.
 
 
-Sat 4-Jan-2018
+Sat 4-Jan-2020
 ^^^^^^^^^^^^^^
 
 Set local git repo email with: git config user.email "name@example.com"
@@ -68,7 +68,7 @@ Started writing https://docs.google.com/document/d/1Gex3JdO8GpMdp0vxCPR05KOw5YFy
 (MOAD)
 
 
-Sun 5-Jan-2018
+Sun 5-Jan-2020
 ^^^^^^^^^^^^^^
 
 Experimented with `git config --global user.useConfigOnly true` on kudu and niko to ensure that I set per-repo email addresses for commits.
@@ -93,7 +93,7 @@ Continued writing https://docs.google.com/document/d/1Gex3JdO8GpMdp0vxCPR05KOw5Y
 Week 2
 ------
 
-Mon 6-Jan-2018
+Mon 6-Jan-2020
 ^^^^^^^^^^^^^^
 
 Fixed fallout from changing to Git clone of NEMO_Nowcast on arbutus.cloud; SalishSeaCmd was not ready to handle git repos.
@@ -108,7 +108,7 @@ Discussed sensitivity studies progress and term work schedule w/ Vicky.
 (MIDOSS)
 
 
-Tue 7-Jan-2018
+Tue 7-Jan-2020
 ^^^^^^^^^^^^^^
 
 Woke up feeling pretty exhausted.
@@ -124,7 +124,7 @@ Added Slack incoming webhook for GitHub actions to SalishSeaCast workspace; adde
 Lay down for a nap in the early afternoon and didn't get up until dinner time.
 
 
-Wed 8-Jan-2018
+Wed 8-Jan-2020
 ^^^^^^^^^^^^^^
 
 clear_checklist sequencing change from 4-Jan seems to have caused a manager crash and automation freeze this morning; resolution:
@@ -161,7 +161,7 @@ Restarted VHFR FVCOM runs for 07jan20 from 06jan20 23:30 restart files that Maxi
 (VHFR)
 
 
-Thu 9-Jan-2018
+Thu 9-Jan-2020
 ^^^^^^^^^^^^^^
 
 See work journal.
@@ -186,7 +186,7 @@ Fianlly got a successful AKNS run with relatively up to date repo revs; see http
 (MIDOSS)
 
 
-Fri 10-Jan-2018
+Fri 10-Jan-2020
 ^^^^^^^^^^^^^^^
 
 See work journal.
@@ -216,7 +216,7 @@ wwatch3 forecast2 plots are missing a section (straight line); issue might be in
 (SalishSeaCast)
 
 
-Sun 12-Jan-2018
+Sun 12-Jan-2020
 ^^^^^^^^^^^^^^^
 
 wwatch3/nowcast run didn't happen due to stuck make_ww3_wind_file; recovery:
@@ -227,7 +227,7 @@ wwatch3/nowcast run didn't happen due to stuck make_ww3_wind_file; recovery:
 Week 3
 ------
 
-Mon 13-Jan-2018
+Mon 13-Jan-2020
 ^^^^^^^^^^^^^^^
 
 Monthly IOS-UBC modeling collaboration mtg.
@@ -260,7 +260,7 @@ See work journal.
 (Ocean Navigator)
 
 
-Tue 14-Jan-2018
+Tue 14-Jan-2020
 ^^^^^^^^^^^^^^^
 
 See work journal.
@@ -274,7 +274,7 @@ Finished backfilling nowcast-agrif:
 (SalishSeaCast)
 
 
-Wed 15-Jan-2018
+Wed 15-Jan-2020
 ^^^^^^^^^^^^^^^
 
 Helped Susan set up snapd and skype on greta.
@@ -292,7 +292,7 @@ Resolved MOHID-Cmd issue#1 re: copying *.date files into temp run dir so that th
 (MIDOSS)
 
 
-Thu 16-Jan-2018
+Thu 16-Jan-2020
 ^^^^^^^^^^^^^^^
 
 Post-foreacst2 race condition mgmt failed to launch clear_checklist because ping_erddap wwatch3-forecast completed before make_plots nemo forecast2 initiated race condition mgmt.
@@ -315,7 +315,7 @@ Helped Rachael sort out a merge issue in MIDOSS-MOHID-config.
 (MIDOSS)
 
 
-Fri 17-Jan-2018
+Fri 17-Jan-2020
 ^^^^^^^^^^^^^^^
 
 FAL estate work.
@@ -323,7 +323,7 @@ FAL estate work.
 Karina's PhD defense and celebration.
 
 
-Sat 18-Jan-2018
+Sat 18-Jan-2020
 ^^^^^^^^^^^^^^^
 
 White Rock; drove Modo Kona EV for the first time.
@@ -340,7 +340,7 @@ Added local user.email config settings:
 * git config --local user.email "doug.latornell@43ravens.ca"
 
 
-Sun 19-Jan-2018
+Sun 19-Jan-2020
 ^^^^^^^^^^^^^^^
 
 Booked flights & hotel for Yellowknife trip.
@@ -4785,7 +4785,354 @@ Drove to Fort Langley. Cycled in Glen Valley and up decommissioned Bradner Rd hi
 Sun 19-Jul-2020
 ^^^^^^^^^^^^^^^
 
+make_forcing_links nowcast-agrif failed w/ ssh timoeut.
+(SalishSeaCast)
+
 Goofed off.
+
+
+Week 30
+-------
+
+Mon 20-Jul-2020
+^^^^^^^^^^^^^^^
+
+Week 19 of UBC work-from-home due to COVID-19
+
+See work journal.
+(Resilient-C)
+
+Phys Ocgy seminar.
+
+Thrashed w/ PyCharm unable to find vagrant executable, even after re-install of deb pkg. Created https://youtrack.jetbrains.com/issue/PY-43546
+
+orcinus didn't raise FileNotFoundError from upload_forcing today, but run_nemo_agrif failed w/ a timeout; suspect seawolf2 network; emailed Mark and he refreshed sealwolf2 network connection; he thinks the problem is upstream on the Westgrid routers; backfilling:
+  make_forcing_links nowcast-agrif 2020-07-19
+  make_forcing_links nowcast-agrif 2020-07-20
+watch_NEMO_agrif failed due to connection timeout; confirmed that run completed, then ran download_results manually
+(SalishSeaCast)
+
+
+Tue 21-Jul-2020
+^^^^^^^^^^^^^^^
+
+Ticket response from PyCharm says that flatpak distribution is not supported.
+Opened support ticket at Wywtem76 to inform them. Uninstalled flatpak. Installed JetBrains Toolbox and used it to install PyCharm.
+
+collect_weather 18 didn't finish (240 files were collected) due to connection time-outs, broken pipes, and SSL bad length errors; recovery:
+  pkill collect_weather 18
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20200720/18
+  download_weather 18 2.5km
+  download_weather 00 1km --yesterday --no-verify-certs --debug  # failed
+  download_weather 12 1km --yesterday --no-verify-certs --debug
+  download_weather 00 2.5km
+  download_weather 06 2.5km
+  wait for forecast2 to finish
+  download_weather 12 2.5km
+  collect_weather 18 2.5km
+(SalishSeaCast)
+
+Unzipped full domain GeoTIFFS in /data/MIDOSS/geotiffs/; moved the no-Puget-Sound geotiffs on kudu in sub dir; downloaded full domain geotiffs.
+Set up moad_tools conda env on salish.
+Ran on salish:
+  geotiff-watermask /data/MIDOSS/geotiffs/atb_2018_01.tif /data/dlatornell/MEOPAR/grid/mesh_mask201702.nc /data/MIDOSS/geotiffs/geotiff-watermask.npy
+  execution time:
+    real    56m7.010s
+    user    56m4.480s
+    sys     0m2.764s
+Stepped through get_length_origin_destination(); algorithm looks wrong, and fails with a ValueError; eventually got a committable test case using exact lon/lat from dev notebook, but algorithm needs lots of work; discussed evolution and geopandas masking w/ Susan.
+(MIDOSS)
+
+
+Wed 22-Jul-2020
+^^^^^^^^^^^^^^^
+
+orcinus refused connection for upload_forcing forecast2.
+(SalishSeaCast)
+
+Committed original get_length_origin_destination() code; refactored it to use GeoPandas and shapely based algorithm that Susan developed.
+(MIDOSS)
+
+
+Thu 23-Jul-2020
+^^^^^^^^^^^^^^^
+
+Tuned borg-bkup script for kudu to lizzy.
+
+See project work journal.
+(Resilient-C)
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+
+Backfilling nowcast-agrif:
+  upload_forcing orcinus nowcast+ 2020-07-22
+  upload_forcing orcinus turbidity 2020-07-22 --debug
+  make_forcing_links orcinus nowcast-agrif 2020-07-22
+  upload_forcing orcinus nowcast+ 2020-07-23 --debug
+  upload_forcing orcinus turbidity 2020-07-23
+Helped Susan get set up to resume running on optimum.
+Removed upload_forcing @retry work-around for orcinus because it never worked, and orcinus has stopped generating the error; more evidence that it is a file system  read-after-write consistency issue that we can't do anything about.
+Worked on debugging Katia's report of ww3 zeros at 16:00 PST in forecast2 results:
+* stdout shows no restart field found so run starts from calm; also true for 23jul19, so longstanding bug, I guess
+* restart file path and date for forecast2 were both wrong
+* hacked run_ww3 and got a forecast2/23jul20 run to start from forecast/22jul20 restart
+Started modernizing run_ww3 unit tests.
+(SalishSeaCast)
+
+
+Fri 24-Jul-2020
+^^^^^^^^^^^^^^^
+
+upload_forcing forecast2 failed for arbutus, graham, optimum & orcinus w/ FileNotFoundError symlink race condition, stopping automation; investigation:
+* Neah Bay obs has not been updated, so obs/23jul really didn't exist, but Neah Bay forecast was okay, so fcst/23jul really did exist; not race condition, actual error, but crappy handling :-()
+recovery:
+  get_NeahBay_ssh forecast2 --debug  # avoid launching forecast2 runs because nowcast are imminent
+  upload_forcing forecast2 arbutus --debug
+  upload_forcing forecast2 orcinus --debug
+  upload_forcing forecast2 optimum --debug
+  upload_forcing forecast2 graham --debug
+Email update to Katia re: ww3 forecast2.
+Explored xarray/netCDF4 opening ERDDAP ssh datasets re: https://salishseacast.slack.com/archives/DFSK9ESUW/p1595549877000100
+* Hoping the libnetcdf update might get rid of hacks like fvcom.publish.tide_stn_water_level._get_nemo_ssh()
+* test w/ recent dev env (xarray=0.15.1, netCDF4=1.5.3) showed that netCDF4.Dataset() works(!), but xarrayopen_dataset() fails with:
+  oc_open: server error retrieving url: code=3 message="Query error: A griddap axis variable query can't include a data variable (ssh)."oc_open: server error retrieving url: code=3 message="Query error: A griddap axis variable query can't include a data variable (ssh)."oc_open: server error retrieving url: code=3 message="Query error: A griddap axis variable query can't include a data variable (ssh)."oc_open: server error retrieving url: code=3 message="Query error: A griddap axis variable query can't include a data variable (ssh)."oc_open: server error retrieving url: code=3 message="Query error: A griddap axis variable query can't include a data variable (ssh)."oc_open: server error retrieving url: code=3 message="Query error: A griddap axis variable query can't include a data variable (ssh)."oc_open: server error retrieving url: code=3 message="Query error: A griddap axis variable query can't include a data variable (ssh)."Traceback (most recent call last):
+    File "<input>", line 1, in <module>
+    File "/media/doug/warehouse/conda_envs/salishsea-nowcast/lib/python3.8/site-packages/xarray/backends/api.py", line 538, in open_dataset
+      ds = maybe_decode_store(store)
+    File "/media/doug/warehouse/conda_envs/salishsea-nowcast/lib/python3.8/site-packages/xarray/backends/api.py", line 446, in maybe_decode_store
+      ds = conventions.decode_cf(
+    File "/media/doug/warehouse/conda_envs/salishsea-nowcast/lib/python3.8/site-packages/xarray/conventions.py", line 577, in decode_cf
+      vars, attrs, coord_names = decode_cf_variables(
+    File "/media/doug/warehouse/conda_envs/salishsea-nowcast/lib/python3.8/site-packages/xarray/conventions.py", line 487, in decode_cf_variables
+      new_vars[k] = decode_cf_variable(
+    File "/media/doug/warehouse/conda_envs/salishsea-nowcast/lib/python3.8/site-packages/xarray/conventions.py", line 336, in decode_cf_variable
+      var = coder.decode(var, name=name)
+    File "/media/doug/warehouse/conda_envs/salishsea-nowcast/lib/python3.8/site-packages/xarray/coding/times.py", line 426, in decode
+      dtype = _decode_cf_datetime_dtype(data, units, calendar, self.use_cftime)
+    File "/media/doug/warehouse/conda_envs/salishsea-nowcast/lib/python3.8/site-packages/xarray/coding/times.py", line 73, in _decode_cf_datetime_dtype
+      [first_n_items(values, 1) or [0], last_item(values) or [0]]
+    File "/media/doug/warehouse/conda_envs/salishsea-nowcast/lib/python3.8/site-packages/xarray/core/formatting.py", line 69, in first_n_items
+      return np.asarray(array).flat[:n_desired]
+    File "/media/doug/warehouse/conda_envs/salishsea-nowcast/lib/python3.8/site-packages/numpy/core/_asarray.py", line 85, in asarray
+      return array(a, dtype, copy=False, order=order)
+    File "/media/doug/warehouse/conda_envs/salishsea-nowcast/lib/python3.8/site-packages/xarray/core/indexing.py", line 491, in __array__
+      return np.asarray(self.array, dtype=dtype)
+    File "/media/doug/warehouse/conda_envs/salishsea-nowcast/lib/python3.8/site-packages/numpy/core/_asarray.py", line 85, in asarray
+      return array(a, dtype, copy=False, order=order)
+    File "/media/doug/warehouse/conda_envs/salishsea-nowcast/lib/python3.8/site-packages/xarray/core/indexing.py", line 557, in __array__
+      return np.asarray(array[self.key], dtype=None)
+    File "/media/doug/warehouse/conda_envs/salishsea-nowcast/lib/python3.8/site-packages/xarray/backends/netCDF4_.py", line 72, in __getitem__
+      return indexing.explicit_indexing_adapter(
+    File "/media/doug/warehouse/conda_envs/salishsea-nowcast/lib/python3.8/site-packages/xarray/core/indexing.py", line 837, in explicit_indexing_adapter
+      result = raw_indexing_method(raw_key.tuple)
+    File "/media/doug/warehouse/conda_envs/salishsea-nowcast/lib/python3.8/site-packages/xarray/backends/netCDF4_.py", line 85, in _getitem
+      array = getitem(original_array, key)
+    File "/media/doug/warehouse/conda_envs/salishsea-nowcast/lib/python3.8/site-packages/xarray/backends/common.py", line 54, in robust_getitem
+      return array[key]
+    File "netCDF4/_netCDF4.pyx", line 4408, in netCDF4._netCDF4.Variable.__getitem__
+    File "netCDF4/_netCDF4.pyx", line 5352, in netCDF4._netCDF4.Variable._get
+    File "netCDF4/_netCDF4.pyx", line 1887, in netCDF4._netCDF4._ensure_nc_success
+  RuntimeError: NetCDF: DAP server error
+  That may be different to previously seen error...
+* created new env with xarray=0.16.0, netCDF4=1.5.4, libnetcdf=4.7.4; got same result as above (w/ some line number differences)
+* Did some digging, but didn't find root cause :-(
+Explored xarray.open_mfdataset() combine FutureWarning in make_ww3_wind_file; confirmed that no change is necessary for us to move to xarray=0.16.0 where `combine="by_coords`` becomes the default.
+(SalishSeaCast)
+
+
+Sat 25-Jul-2020
+^^^^^^^^^^^^^^^
+
+Confirmed that ww3 forecast2 from restart & nowcast/forecast works correctly
+(SalishSeaCast)
+
+See project work journal.
+(Resilient-C)
+
+Vancouver to Craig Bay
+
+
+Sun 26-Jul-2020
+^^^^^^^^^^^^^^^
+
+Craig Bay
+
+Mtgs w/ Susan Forrest & Jeannie of Catalyst Staging.
+Bought boxes.
+Start de-cluttering.
+
+
+Week 31
+-------
+
+Mon 27-Jul-2020
+^^^^^^^^^^^^^^^
+
+Week 20 of UBC work-from-home due to COVID-19
+
+Craig Bay
+
+Continued de-cluttering.
+Windows cleaned.
+
+Set up Minecraft Java on kudu & Susan's MacBook Air; set up SADA Java realm; started Craig Bay survival world w/ Susan.
+
+
+Tue 28-Jul-2020
+^^^^^^^^^^^^^^^
+
+Craig Bay
+
+Continued de-cluttering.
+
+
+Wed 29-Jul-2020
+^^^^^^^^^^^^^^^
+
+Craig Bay
+
+collect_weather 00 completed downloads, but manager crashed during termination, so collect_weather 06 never launched; found hung upload_forcing graham workers, killed them; recovery:
+  pkill collect_weather 00
+  download_weather 06 2.5km
+  wait for forecast2 to finish
+  collect_weather 18 2.5km
+  download_weather 12 2.5km
+(SalishSeaCast)
+
+Reserved 10x20 storage locker.
+Reserved cube van.
+Bought more boxes & tape.
+Continued de-cluttering.
+Jeannie checked in on progress and palettes for staging.
+
+
+Thu 30-Jul-2020
+^^^^^^^^^^^^^^^
+
+Craig Bay
+
+Handiman Scott came to fix powder-room door frame warp, kitchen sink window mechanism, and living room stereo cupboard door hinge.
+Continued de-cluttering.
+
+Reviewed Python packaging docs re: recent developments in PyPA world; not changes required.
+Deleted a leftover metnion of requirements.txt from the envs/ directory section of the pkging docs.
+(MOAD)
+
+Committed ww3 forecast2 from restart & nowcast/forecast correction w/ unit tests.
+(SalishSeaCast)
+
+
+Fri 31-Jul-2020
+^^^^^^^^^^^^^^^
+
+Craig Bay
+
+Continued de-cluttering.
+
+See project work journal.
+(Resilient-C)
+
+
+Sat 1-Aug-2020
+~~~~~~~~~~~~~~
+
+Craig Bay
+
+See project work journal.
+(Resilient-C)
+
+Continued de-cluttering.
+
+
+Sun 2-Aug-2020
+~~~~~~~~~~~~~~
+
+Craig Bay
+
+Bike ride: across Top Bridge, explored Matheson Rd trail that has been taken over by private land development. (18km)
+
+Continued de-cluttering.
+
+
+August
+======
+
+Week 32
+-------
+
+Mon 3-Aug-2020
+^^^^^^^^^^^^^^
+
+Week 21 of UBC work-from-home due to COVID-19
+
+Craig Bay
+
+Continued de-cluttering.
+
+
+Tue 4-Aug-2020
+^^^^^^^^^^^^^^
+
+Craig Bay
+
+Rented truck from Budget to move ~70 boxes and a few pieces of furniture to 10x20 locker at Arbutus Storage. Pranged back hauling boxes up stairs on handcart :-(
+
+
+Wed 5-Aug-2020
+^^^^^^^^^^^^^^
+
+Craig Bay
+
+House cleaners.
+Grocery & beer shopping; dropped meds at Pharmasave for disposal.
+Junk & recycling removal by Anything Junk & Waste Removal.
+
+
+Thu 6-Aug-2020
+^^^^^^^^^^^^^^
+
+Craig Bay
+
+Staging by Jeannie.
+
+Scheduled Telus email migration to Gmail for 18-Aug.
+Upgraded home fibre bandwidth to 300/300.
+
+Tried to test new pip resolver coming in 20.3 by adding:
+  - pip:
+    - --use-feature=2020-resolver
+option to SalishSeaNowcast conda env description, but conda didn't seem to use the option in its pip subprocess; went ahead and installed our pkgs using 2020-resolver option; verified using `pip check`.
+(SalishSeaCast)
+
+Completed UBC return to campus COVID-19 training.
+
+
+Fri 7-Aug-2020
+^^^^^^^^^^^^^^
+
+Craig Bay
+
+Photos, maybe video walk-through, 360° imagery.
+
+
+Sat 8-Aug-2020
+^^^^^^^^^^^^^^
+
+Craig Bay
+
+Finished 360° imagery (due to rain on Friday)
+De-cluttered garage.
+
+
+Sun 9-Aug-2020
+^^^^^^^^^^^^^^
+
+Craig Bay to Vancouver
+
+
+
 
 
 
@@ -4831,10 +5178,6 @@ Add CI workflows to run linkcheck on docs:
 
 15jun20: check mitigation of "index exceeds dimension bounds" IndexError in make_plots fvcom forecast-x2 research
 
-8-Jun: talk to Rachael and merge add-make-hdf5 branchs into master x3 repos
-
-Fix xarray.open_mfdataset() re: combine FutureWarning in make_ww3_wind_file
-
 Add VCS revision recording to run_fvcom
 
 Update SalishSeaNowcast fig-dev docs
@@ -4846,8 +5189,6 @@ fix old colander dependency in SOG
 
 
 Fix Pillow security issue in analysis-doug
-
-Add auto-deploy workflow to salishsea-site to replace bitbucket pipeline
 
 Migrate Baynes Sound fig to cartopy
 
@@ -4863,7 +5204,6 @@ Stack:
 * create NEMO_Nowcast.workers.spotter to monitor and optionally kill workers that tend to get stuck; initial use cases: collect_weather, make_ww3_wind_file
 * wwatch3 run success confirmation
 * fix warnings in figure modules
-* add hindcast deployment to SalishSeaNowcast docs
 * fix get_vfpa_hadcp MMSI AttributeError issue
 * debug gemlam interpolation
 * Elise's notebooks into Sphinx
@@ -4873,3 +5213,4 @@ Done:
 * Disable ubcSSfDepthAvgdCurrents1hV18-06 on ERDDAP on Fri 31-Jan-2020
 * Update bloomcast plots so that we are not tied to matplotlib-1.5.3
 * Sort out OPPTools dependencies so that we can run w/ origin/master:HEAD again
+* add hindcast deployment to SalishSeaNowcast docs
