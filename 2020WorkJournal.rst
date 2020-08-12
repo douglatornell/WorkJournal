@@ -4207,8 +4207,8 @@ Fri 19-Jun-2020
 ^^^^^^^^^^^^^^^
 
 kudu app maint:
-* removed Zoom deb; installed Zoom flatpack
-* removed Skype snap; installed Skype flatpack
+* removed Zoom deb; installed Zoom flatpak
+* removed Skype snap; installed Skype flatpak
 
 See work journal.
 (Resilient-C)
@@ -5147,6 +5147,37 @@ Investigated nowcast-dev/03aug20 crash: zonal velocity >20 m/s; see slack.
 
 FAL estate work: recorded liquidation transactions.
 
+
+Tue 11-Aug-2020
+^^^^^^^^^^^^^^^
+
+1st day back in ESB office as part of Stage 2, every 2nd Tue, half day plan while Rita cleans house.
+
+Cycled to UBC; 1st use of new Garmin 1030.
+
+1st OS update on niko since early March.
+
+niko app maint:
+* removed Skype snap; installed Skype flatpak
+* removed Slack snap; installed Slack flatpak
+* removed PyCharm snap; installed JetBrains Toolbox and used it to install PyCharm.
+Removed snap from kudu
+  rm -rf /var/cache/snapd
+  sudo apt autoremove --purge snapd
+  rm -rf ~/snap
+
+Started backfilling nowcast-dev:
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-03"
+
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-04"
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-05"
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-06"
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-07"
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-08"
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-09"
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-10"
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-11"
+(SalishSeaCast)
 
 
 
