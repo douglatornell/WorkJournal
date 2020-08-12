@@ -5132,6 +5132,22 @@ Sun 9-Aug-2020
 Craig Bay to Vancouver
 
 
+Week 33
+-------
+
+Mon 10-Aug-2020
+^^^^^^^^^^^^^^^
+
+Week 22 of UBC work-from-home due to COVID-19
+
+Phys Ocgy seminar by Susan on ocean models & HPC.
+
+Investigated nowcast-dev/03aug20 crash: zonal velocity >20 m/s; see slack.
+(SalishSeaCast)
+
+FAL estate work: recorded liquidation transactions.
+
+
 
 
 
