@@ -5168,18 +5168,114 @@ Removed snap from kudu
 
 Started backfilling nowcast-dev:
   launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-03"
-
   launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-04"
+(SalishSeaCast)
+
+Dropped Boondoocks wheel off at MEC for spoke replacement and re-tension
+
+
+Wed 12-Aug-2020
+^^^^^^^^^^^^^^^
+
+Email w/ Rachael re: pandas.read_excel() weirdness.
+(MIDOSS)
+
+Continued backfilling nowcast-dev:
   launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-05"
+
   launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-06"
   launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-07"
   launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-08"
   launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-09"
   launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-10"
   launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-11"
+* Fixed NEMO_Nowcast and SalishSeaNowcast re:
+    /media/doug/warehouse/conda_envs/nemo-nowcast/lib/python3.8/pathlib.py:1299: DeprecationWarning: an integer is required (got type FilePerms).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
+      self._accessor.chmod(self, mode)
+(SalishSeaCast)
+
+Jupyter Days session:
+  * https://www.google.com/url?q=https://ubc-dsci.github.io/jupyterdays/sessions/beuzen/jupyter_book_tutorial.html&sa=D&source=calendar&usd=2&usg=AOvVaw35TniegrY_-UGwls6-2PDx
+  * Tomas Beuzen; Masters of Data Science postdoc
+  * Jupyter book used to build site for Jupyter Days
+  * combine notebooks and markdown docs into a whole that can be deployed as a website
+  * Executable Book Project
+  * uses Sphinx
+  * supportive community including some UBC people
+  * worked through live-coding session in URL above
+  * MyST - Markedly Structure Text
+  * can be hosted on GitHub; will demo later
+  * NOTE: notebook doesn't parse MyST
+  * demo uses plotly for interactive plots in notebook/jbook
+  * use notebook/lab cell tag `hide-input` to cause jbook to hide code w/ toggle
+  * quickest option to pblish is to use GitHub Pages (Tomas contributed to jbook docs on this topic)
+  * ghp-import tool to build gh-pages branch; can be automated via GitHub Actions
+  * interactivity via Binder, JupyterHub, Google Colab services; or ThebeLab coding in browser (new-ish, experimental)
+
+  Picked up Boondocks wheel.
+
+  Various ocean machines (skookum, salish, char) started behaving badly at ~16:53; created ticket; Charles had a cascade of disk failure problems while replacing a failing 14Tb drive in one of the RAID arrays; salish was rebooted at ~19:00
+
+
+Thu 13-Aug-2020
+^^^^^^^^^^^^^^^
+
+Fixed docs build failure in NEMO_Nowcast re: sentry-sdk pkg.
+Susan refactored salishsea_tools/LiveOcean_BCs.py to replace Basemap.interp() with scipy.interpolate.griddata() to remove 1 user of Basemap from SalishSeaNowcast.
+Continued backfilling nowcast-dev:
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-06"
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-07"
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-08"
+Started refactoring nowcast/figures/research/baynes_sound_agrif.py to replace Basemap with CartoPy.
 (SalishSeaCast)
 
 
+Fri 14-Aug-2020
+^^^^^^^^^^^^^^^
+
+Continued backfilling nowcast-dev:
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-09"
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-10"
+Continued refactoring nowcast/figures/research/baynes_sound_agrif.py to replace Basemap with CartoPy.
+(SalishSeaCast)
+
+UBC/DFO modeling collab zoom; Elise talked about bio time-step bug & coupling O2 model in SalishSeaCast.
+
+Jupyter Days session:
+  * Julia kernel for Jupyter Lab; Marie H. Burke, Westgrid
+  * https://westgrid-slides.netlify.app/jupyterdays2020/#/
+  * Julia has built-in pkg mgr (] in repl)
+  * IJulia is kernel pkg
+  * launch in repl:
+      using IJulia
+      notebook() or jupyterlab()
+  * julia Plots pkg is frontend for various plotting pkgs; e.g. plotly
+  * julia's take on literate programming is the Literate pkg; can export to notebook, binder, or code
+    * ipynb2LiterateJulia converts from notebook to Literate script
+
+(MIDOSS)
+
+
+Sat 15-Aug-2020
+^^^^^^^^^^^^^^^
+
+Switched Tommy back to Boondoocks wheels; had to do a lot of adjustment of the rear deraillier.
+Cycled to the east end of River Rd and back (49km)
+
+Continued backfilling nowcast-dev:
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-11"
+(SalishSeaCast)
+
+
+Sun 16-Aug-2020
+^^^^^^^^^^^^^^^
+
+Continued backfilling nowcast-dev:
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-12"
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-13"
+Started backfilling nowcast comparison figures:
+  make_plots nemo nowcast comparison --debug --run-date
+(SalishSeaCast)
 
 
 
@@ -5221,6 +5317,7 @@ Add CI workflows to run linkcheck on docs:
     43ravens
       NEMO_Nowcast
       ECget
+**next scheduled action will be for 7th of month**
 
 
 15jun20: check mitigation of "index exceeds dimension bounds" IndexError in make_plots fvcom forecast-x2 research
@@ -5241,9 +5338,6 @@ Migrate Baynes Sound fig to cartopy
 
 
 TODO:
-* Fix:
-    /media/doug/warehouse/conda_envs/nemo-nowcast/lib/python3.8/pathlib.py:1299: DeprecationWarning: an integer is required (got type FilePerms).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
-      self._accessor.chmod(self, mode)
 
 
 
@@ -5256,6 +5350,9 @@ Stack:
 * Elise's notebooks into Sphinx
 
 Done:
+* Fix:
+    /media/doug/warehouse/conda_envs/nemo-nowcast/lib/python3.8/pathlib.py:1299: DeprecationWarning: an integer is required (got type FilePerms).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
+      self._accessor.chmod(self, mode)
 * Delete ubcSSfDepthAvgdCurrents1hV18-06 from ERDDAP on Fri 7-Feb-2020
 * Disable ubcSSfDepthAvgdCurrents1hV18-06 on ERDDAP on Fri 31-Jan-2020
 * Update bloomcast plots so that we are not tied to matplotlib-1.5.3
