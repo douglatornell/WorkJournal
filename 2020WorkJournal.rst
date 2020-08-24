@@ -4283,7 +4283,7 @@ Email with Cam about getting origin-destination analysis data and script on to s
 
 FAL estate work: re-reviewed final income tax return; emailed Cameron re: flipped proceeds & ACB for FID M/I transactions in Sep & Oct, and sent him signed engagement agreement. Mtg w/ Monica @TD to sign LoDs for liquidation & distribution of TD wealth accounts; got declaration of transmission for retail accounts that requires notarization.
 
-Created electronic signature PNG w/ transparent background. Installed Xjournal++ so that I could use it to apply signature PNG to documents; a lot of hoops to avoid print/sign/photo-scan.
+Created electronic signature PNG w/ transparent background. Installed Xournal++ so that I could use it to apply signature PNG to documents; a lot of hoops to avoid print/sign/photo-scan.
 
 Added GitHub Actions workflow to UBC-MOAD/docs to run Sphinx linkcheck after every push; messed around trying to find a way to handle private repos URLs via GitHub personal access token, but failed and settled for putting them in an ignore-list in conf.py.
 (MOAD)
@@ -5236,8 +5236,9 @@ Fri 14-Aug-2020
 Continued backfilling nowcast-dev:
   launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-09"
   launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-10"
-Continued refactoring nowcast/figures/research/baynes_sound_agrif.py to replace Basemap with CartoPy.
 (SalishSeaCast)
+
+Started work on presenter's guide form for ECCC Datamart talk.
 
 UBC/DFO modeling collab zoom; Elise talked about bio time-step bug & coupling O2 model in SalishSeaCast.
 
@@ -5253,7 +5254,10 @@ Jupyter Days session:
   * julia's take on literate programming is the Literate pkg; can export to notebook, binder, or code
     * ipynb2LiterateJulia converts from notebook to Literate script
 
-(MIDOSS)
+Started creating PythonNotes notebook about lon/lat grid plots of model fields using cartopy.
+(MOAD)
+
+FAL estate work: went to bank to deposit BCE cheque, get draft for tax accountant, and get balances.
 
 
 Sat 15-Aug-2020
@@ -5278,6 +5282,172 @@ Started backfilling nowcast comparison figures:
 (SalishSeaCast)
 
 
+Week 34
+-------
+
+Mon 17-Aug-2020
+^^^^^^^^^^^^^^^
+
+Week 23 of UBC work-from-home due to COVID-19
+
+FAL estate work: telcon & email w/ Kate re: getting xfers to estate account happening; asked her to monitor account for me so I don't have to repeatedly visit branch.
+
+Emailed Sandrine to confirm that PDF of slides will be okay, I will have control of slides via screen sharing in Teams, and the the presentation should be about 20 minutes.
+
+Continued backfilling nowcast-dev:
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-14"
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-15"
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-16"
+Continued backfilling nowcast comparison figures:
+  make_plots nemo nowcast comparison --debug --run-date
+(SalishSeaCast)
+
+Created PR for Susan to review re: PythonNotes notebook about lon/lat grid plots of model fields using cartopy.
+(MOAD)
+
+Phys Ocgy seminar by David Bailey (NCAR, M.Sc. EOAS): Implications of Changing Sea Ice for Shipping Routes in the Arctic
+
+Zoom w/ Susan, Ruth Joy & Marine Randon (SFU), and Mike Dowd (Dal) re: using SalishSeaCast fields in Southern Resident Killer Whales project.
+
+Completed work on presenter's guide form for ECCC Datamart talk and sent Sandrine.
+
+  2- Presentation title
+      • French:
+
+      • English: SalishSeaCast – UBC’s Real-time Ocean Modelling System
+
+  4- Main objective
+  In one sentence, specify the main objective of your presentation.
+
+  This presentation will describe the UBC SalishSeaCast system that does daily nowcasts and forecasts of the physics, biology, carbon chemistry, and waves in the Salish Sea using NEMO, FVCOM and WaveWatchIII.
+
+
+
+  6- Audience
+  Identify your audience:
+
+
+      • Main audience: Operational forecast modellers
+
+      • Secondary audience: Ocean modellers
+
+
+      • Others: will they benefit from this presentation? Yes – the presentation is intended for a general audience, in particular anyone interested in software automation and/or the oceanography of the BC South Coast region
+
+
+
+  7- Summary
+  The summary must clearly indicate the objective of the presentation in four lines or less. In reviewing the summary, the participant should be able to decide whether it is pertinent to attend.
+
+  UBC's SalishSeaCast ocean modelling system is developed and operated by Dr. Susan Allen's Mesoscale Ocean & Atmospheric Dynamics group to produce high-resolution, near-real-time ocean 3D model fields for the coastal waters of the BC South Coast between the mainland and Vancouver Island.
+  It relies on the HRDPS West product for surface forcing as well as other models for boundary conditions.
+  The sequencer that manages setup, execution of the NEMO, FVCOM and WaveWatchIII model runs is a collection of open-source Python packages developed at UBC.
+  We will present information about the history and workings of the system,
+  comparisons between model results and observations,
+  and some model results that provide insight into upwelling dynamics in the Strait of Georgia.
+
+
+  8- Short biography
+  The WebEx host will present this short, four lines or less biography to introduce the presenter to the audience.
+
+  Doug Latornell is a professional engineer with post-graduate degrees in experimental and computational fluid mechanics, and modelling and control of robotic manipulators.
+  He has had a variety of career adventures in manufacturing of marine navigation equipment, port crane equipment, and radioisotopes for medical imaging and drug labelling.
+  Presently he divides his time between working as a Research Software Engineer in the Dept. of Earth, Ocean, and Atmospheric Sciences at UBC, and doing freelance software development and training as the proprietor of 43ravens.
+  Much of that work focuses on a software automation framework that enables research groups to run ocean models daily in near-real-time.
+
+
+Tue 18-Aug-2020
+^^^^^^^^^^^^^^^
+
+Updated PythonNotes notebook about lon/lat grid plots of model fields using cartopy re: Susan's PR review; merged PR.
+(MOAD)
+
+Finished backfilling nowcast-dev:
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-17"
+  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-18"
+Finished backfilling nowcast comparison figures:
+  make_plots nemo nowcast comparison --debug --run-date
+(SalishSeaCast)
+
+Tried to complete telus.net email migration to gmail, but login fails :-(
+
+FAL estate work; data entry from July statements.
+
+
+Wed 19-Aug-2020
+^^^^^^^^^^^^^^^
+
+Cypress-Iona out & back ride (35 km)
+
+nowacst-dev launched automatically!
+Continued refactoring nowcast/figures/research/baynes_sound_agrif.py to replace Basemap with CartoPy.
+(SalishSeaCast)
+
+Reviewed progress for integration into moad_tools/random_oil_spills module.
+(MIDOSS)
+
+
+Thu 20-Aug-2020
+^^^^^^^^^^^^^^^
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Finished refactoring nowcast/figures/research/baynes_sound_agrif.py to replace Basemap with CartoPy.
+Updated skookum nowcast-sys env:
+  uninstall basemap
+  update conda to 4.8.4
+  install cartopy
+test_run_ww3.TestMakeRunDir.test_make_run_dir() failed on GitHub, probably due to umask restriction; added pytest.mark.skipif() decorator.
+(SalishSeaCast)
+
+
+Fri 21-Aug-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Baynes Sound figure failed w/
+  ImportError: libproj.so.19: cannot open shared object file: No such file or directory
+confirmed that libproj.so.15 is installed in nowcast-env.
+Tried to resolve with conda env update; that updated a bunch of pkgs, but didn't update libproj; successfullyr esolved with conda update proj, which updated more pkgs (some repeats), but got us to libproj.so.19.
+As a result of the above, all of today's make_plots runs appear to have failed; recovery:
+  make_plots nemo forecast2 publish 2020-08-20
+  make_plots wwatch3 forecast2 publish 2020-08-21
+  make_plots nemo nowcast research 2020-08-21
+  make_plots nemo nowcast comparison 2020-08-20
+  make_plots nemo forecast publish 2020-08-21
+  make_plots nemo nowcast-green research 2020-08-21
+Discovered that fig.canvas.draw() is essential for AGG renderer that make_plots worker uses, so fixed that bug...; ran
+  make_plots nemo nowcast-agrif research 2020-08-21
+on kudu with sshfs mounts for skookum file systems.
+(SalishSeaCast)
+
+
+Sat 22-Aug-2020
+^^^^^^^^^^^^^^^
+
+Finished backfilling figures missed yesterday:
+  make_plots wwatch3 forecast publish 2020-08-21
+  make_plots fvcom forecast-x2 publish 2020-08-20
+  make_plots fvcom nowcast-r12 publish 2020-08-20
+(SalishSeaCast)
+
+Susan visited her parents and we cycled in White Rock area.
+
+
+Sun 23-Aug-2020
+^^^^^^^^^^^^^^^
+
+Pulled fig.canvas.draw() bug fix for nowcast-agrif figure on to skookum and backfilled 22aug & 23aug figures.
+(SalishSeaCast)
+
+
+
+Investigate
+  make_plots wwatch3 forecast2 publish 2020-08-21
+after forecast run
 
 
 update unpublished status of Olson, et al (2020)
