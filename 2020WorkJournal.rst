@@ -5434,7 +5434,7 @@ Finished backfilling figures missed yesterday:
   make_plots fvcom nowcast-r12 publish 2020-08-20
 (SalishSeaCast)
 
-Susan visited her parents and we cycled in White Rock area.
+Susan visited her parents and we cycled in White Rock area (40 km).
 
 
 Sun 23-Aug-2020
@@ -5443,11 +5443,103 @@ Sun 23-Aug-2020
 Pulled fig.canvas.draw() bug fix for nowcast-agrif figure on to skookum and backfilled 22aug & 23aug figures.
 (SalishSeaCast)
 
+See work journal.
+(Ocean Navigator)
 
 
-Investigate
-  make_plots wwatch3 forecast2 publish 2020-08-21
-after forecast run
+Week 35
+-------
+
+Mon 24-Aug-2020
+^^^^^^^^^^^^^^^
+
+Week 24 of UBC work-from-home due to COVID-19
+
+See work journal.
+(Ocean Navigator)
+
+Phys Ocgy seminar by Bill Large @NCAR
+
+
+Tue 25-Aug-2020
+^^^^^^^^^^^^^^^
+
+Cycled to UBC to work while Rita cleans house
+
+Got kudu set up on ubcsecure wifi; opened ticket to get it enabled on wired network and Arooj got that done.
+
+See work journal.
+(Ocean Navigator)
+
+Drive to UBC in late afternoon to pick up forgotten kudu power adapter.
+
+Celebrated wedding anniversary w/ take-out from La Quercia.
+
+
+Wed 26-Aug-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+collect_weather 12 had not completed at noon; investigation:
+  520 of 576 files downloaded
+  503 errors from dd5.weather.gc.ca prevent rest of file downloads
+recovery starting at ~12:10:
+  kill collect_weather 12
+  collect_weather 18 2.5km
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20200826/12
+  download_weather 12 2.5km
+Killed stuck upload_forcing graham processes from 8 & 11 Aug.
+Pulled NEMO-3.6-code and SS-run-sets updates on to optimum for Susan.
+Dropped basemap from salishsea_tools list of dependencies.
+(SalishSeaCast)
+
+Reviewed Rachael's make_master notebook and provided feedback to Susan.
+Started adding GitHub action to run monthly scheduled linkcheck on docs repo on 7th day of month; set to test on 27th.
+(MIDOSS)
+
+
+Thu 27-Aug-2020
+^^^^^^^^^^^^^^^
+
+Finished adding GitHub action to run monthly scheduled linkcheck on docs repo on 7th day of month.
+(MIDOSS)
+
+Learned about GitHub yesterday enabling the ability to choose the default branch name for new repos in user and org settings; proposed in MOAD mtg that we change to main immediately.
+Weekly mtg; see whiteboard. Welcomed Becca.
+(MOAD)
+
+Started work on slides for ECCC Datamart talk on 15-Sep.
+
+Discovered 777 permission on /opp (recursed), /SalishSeaCast, and /results2; opened ticket https://helpdesk.eoas.ubc.ca/tickets/HHCU-5978-UARK
+
+
+Fri 28-Aug-2020
+^^^^^^^^^^^^^^^
+
+FAL estate work: called Desjardins re: draw notice for life policy.
+
+Continued work on slides for ECCC Datamart talk on 15-Sep.
+
+Restored 755 permission on /opp, /SalishSeaCast, and /results2 after Henryk responded to ticket https://helpdesk.eoas.ubc.ca/tickets/HHCU-5978-UARK that the change had to be deliberate or accidental sudo; also resstored /opp/ next level dirs to 775 with guid set.
+(SalishSeaCast)
+
+
+Sat 29-Aug-2020
+^^^^^^^^^^^^^^^
+
+Continued work on slides for ECCC Datamart talk on 15-Sep.
+(SalishSeaCast)
+
+
+Sun 30-Aug-2020
+^^^^^^^^^^^^^^^
+
+Cycled Central Valley Greenway to King Edward, then back along Burnaby Mtn trail, Trans-Canada Trail, Portside & Lakewood. (60 km)
+
+
+Fix permissions in /opp dirs
 
 
 update unpublished status of Olson, et al (2020)
@@ -5472,12 +5564,9 @@ Add CI workflows to run linkcheck on docs:
   example workflow in salishsea-site repo
   don't forget to add sphinx & sphinx_rtd_theme to environment-test.yaml
   repos todo:
-    UBC-MOAD
-      cookiecutter-MOAD-pypkg
     MIDOSS
-      MOHID-Cmd
-      docs
       WWatch3-Cmd
+      MOHID-Cmd (need to merge add-make-hdf5 branch first)
       Make-MIDOSS-Forcing
     SalishSeaCast
       SalishSeaNowcast
@@ -5487,7 +5576,10 @@ Add CI workflows to run linkcheck on docs:
     43ravens
       NEMO_Nowcast
       ECget
-**next scheduled action will be for 7th of month**
+**next scheduled action will be for 8th of month**
+
+
+Update cookiecutter-MOAD-pypkg re: migration from hg to git, and requirements.txt in top level directory; probably more issues too.
 
 
 15jun20: check mitigation of "index exceeds dimension bounds" IndexError in make_plots fvcom forecast-x2 research
@@ -5504,7 +5596,6 @@ fix old colander dependency in SOG
 
 Fix Pillow security issue in analysis-doug
 
-Migrate Baynes Sound fig to cartopy
 
 
 TODO:
@@ -5520,6 +5611,7 @@ Stack:
 * Elise's notebooks into Sphinx
 
 Done:
+* Migrate Baynes Sound fig to cartopy
 * Fix:
     /media/doug/warehouse/conda_envs/nemo-nowcast/lib/python3.8/pathlib.py:1299: DeprecationWarning: an integer is required (got type FilePerms).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
       self._accessor.chmod(self, mode)
