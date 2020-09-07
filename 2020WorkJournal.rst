@@ -5539,6 +5539,199 @@ Sun 30-Aug-2020
 Cycled Central Valley Greenway to King Edward, then back along Burnaby Mtn trail, Trans-Canada Trail, Portside & Lakewood. (60 km)
 
 
+September
+=========
+
+Week 36
+-------
+
+Mon 31-Aug-2020
+^^^^^^^^^^^^^^^
+
+Week 25 of UBC work-from-home due to COVID-19
+
+forecast2 failed overnight w/ no time.step file; traced to nowcast2 VM having lost network connection; email to cloud support; Erming replied that hypervisor has a problem and cloud admins are working on it.
+Charles replied that he set perms on /opp, /results2 & /SalishSeaCast to 777 because of so many requests for access.
+Finished work on slides for ECCC Datamart talk on 15-Sep.
+(SalishSeaCast)
+
+See work journal.
+(Ocean Navigator)
+
+Phys Ocgy seminar by Justin Small of NCAR re: Southern Ocean mixed layer formation.
+
+Analyzed how to incorporate Rachael's oil type and capacity code into random-oil-spills; decided to start with get_oil_capacity().
+(MIDOSS)
+
+
+Tue 1-Sep-2020
+^^^^^^^^^^^^^^
+
+Pinged Erming re: stuck nowcast2 VM on arbutus.
+Proofread slides for ECCC Datamart talk on 15-Sep; emailed PDF to Sndrive for translation to French.
+Pinged Venkat for help re: stuck nowcast2 VM on arbutus.
+Asked Erming to increase quotas so I can launch a new VM.
+(SalishSeaCast)
+
+Invited Becca into SalishSeaCast Slack workspace; proposed topics for video mtg re: ssh, compute resources & git; Slack call re: ssh & compute resources.
+(MOAD)
+
+Start pulling Rachael's get_oil_capacity() code into random-oil-spills.
+Expanded most recent VesselTrackShapefiles.zip in /data/MIDOSS/shapefiles/ and most recent VesselTimeExposureGeoTIFFs.zip in /data/MIDOSS/geotiffs/.
+Downloaded and expanded VesselTimeExposureGeoTIFFs.zip and VesselTrackShapefiles.zip on kudu.
+Test of random-oil-spills failed w/ no locations available to select for spill.
+(MIDOSS)
+
+
+Wed 2-Sep-2020
+^^^^^^^^^^^^^^
+
+Worked w/ Susan to debug random-oil-spills no location issue; new shapefiles are not using lon/lat coordinates.
+(MIDOSS)
+
+Listened to CIOPS-W v2 presentations re: SSC500 nesting in CIOPS-W; JP, Michael, & Youyu presented.
+Erming emailed to say that quotas had been increased;
+* launched nowcast9
+* added nowcast9 to .ssh/config on nowcast0
+* added nowcast9 ip to ~/mpi_hosts
+* ssh-copy-id -f -i $HOME/.ssh/id_rsa nowcast9
+Recovery:
+  launch_remote_worker "make_forcing_links nowcast+ 2020-08-31"
+  wait for forecast run to finish
+  upload_forcing arbutus turbidity 2020-08-31
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-08-31"
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-08-31"
+  upload_forcing orcinus turbidity 2020-08-31
+  launch_remote_worker salish "salish make_forcing_links nowcast+ --shared-storage 2020-08-31"
+  launch_remote_worker arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2020-08-31"
+  launch_remote_worker arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2020-08-31"
+  upload_forcing arbutus turbidity 2020-09-01
+  upload_forcing orcinus turbidity 2020-09-01
+  launch_remote_worker salish "salish make_forcing_links nowcast+ --shared-storage 2020-09-01"
+(SalishSeaCast)
+
+
+Thu 3-Sep-2020
+^^^^^^^^^^^^^^
+
+Monthly linkcheck on moad_tools docs failed.
+(MOAD)
+
+See work journal.
+(Ocean Navigator)
+
+Continued backfilling after nowcast2 VM failure:
+  launch_remote_worker "make_forcing_links nowcast+ 2020-09-01"
+  wait for forecast run to finish
+  upload_forcing arbutus turbidity 2020-09-02
+  upload_forcing orcinus turbidity 2020-09-02
+  launch_remote_worker salish "salish make_forcing_links nowcast+ --shared-storage 2020-09-02"
+  launch_remote_worker arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2020-09-01"
+  launch_remote_worker arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2020-09-01"
+  launch_remote_worker "make_forcing_links nowcast+ 2020-09-02"
+  wait for green to finish
+  launch_remote_worker "make_forcing_links nowcast+ 2020-09-03"
+(SalishSeaCast)
+
+
+Fri 4-Sep-2020
+^^^^^^^^^^^^^^
+
+NEMO forecast2 failed, but nowcast is running well; continued backfilling:
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-09-02"
+* discovered that r12/01sep20 didn't finish, so bad restart file
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-09-01"
+  wait for wwatch3 forecast to finish
+  launch_remote_worker arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2020-09-02"
+  launch_remote_worker arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2020-09-02"
+  launch_remote_worker arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2020-09-03"
+  launch_remote_worker arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2020-09-03"
+  launch_remote_worker arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2020-09-04"
+  launch_remote_worker arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2020-09-04"
+(SalishSeaCast)
+
+Cam provided new shapefiles w/ lon/lat geometry coordinates; waiting for Rachael to xfer from Z drive to /data.
+Started to write somewhat comprehensive unit tests for get_oil_capacity() and discovered that it is very brittle.
+(MIDOSS)
+
+
+Sat 5-Sep-2020
+^^^^^^^^^^^^^^
+
+Continued fvcom backfilling:
+  wait for nowcast-x2/05sep20 to fail
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-09-03"
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-09-02"
+  wait for forecast-x2/03sep20 to finish
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-09-04"
+  wait for nowcast-r12/02sep20 to finish
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-09-03"
+(SalishSeaCast)
+
+
+Sun 6-Sep-2020
+^^^^^^^^^^^^^^
+
+Continued fvcom backfilling:
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-09-05"
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-09-04"
+  wait for forecast-x2/05sep20 to finish
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-09-06"
+  wait for nowcast-r12/04sep20 to finish
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-09-05"
+
+  wait for nowcast-r12/05sep20 to finish
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-09-06"
+(SalishSeaCast)
+
+Monthly linkcheck on NEMO-Cmd docs failed; due to request timeouts from codecov.io, but investigation revealed rtd-env, Actions workflow issues, and redirected links that I fixed.
+(MOAD)
+
+Committed and pushed an acceptable initial version of get_oil_capacity() with a carefully crafted unit test; started draft PR #1 in moad_tools.
+Unpacked Cam's updated shapefiles in /data/MIDOSS/shapefiles/ and on kudu.
+Discovered that newest shapefiles are now missing ST_DATE, EN_DATE, TO & FROM_ columns, and MMSI column as changed name to MMSI_NUM.
+(MIDOSS)
+
+
+
+
+
+update deployment docs re: spinning up a new compute node
+
+Fix:
+  /nemoShare/MEOPAR/nowcast-sys/SalishSeaNowcast/nowcast/workers/make_ww3_wind_file.py:117: FutureWarning: In xarray version 0.15 the default behaviour of `open_mfdataset`
+  will change. To retain the existing behavior, pass
+  combine='nested'. To use future default behavior, pass
+  combine='by_coords'. See
+  http://xarray.pydata.org/en/stable/combining.html#combining-multi
+
+    with xarray.open_mfdataset(datasets) as hrdps:
+  /nemoShare/MEOPAR/nowcast-sys/nowcast-env/lib/python3.8/site-packages/xarray/backends/api.py:934: FutureWarning: The datasets supplied have global dimension coordinates. You may want
+  to use the new `combine_by_coords` function (or the
+  `combine='by_coords'` option to `open_mfdataset`) to order the datasets
+  before concatenation. Alternatively, to continue concatenating based
+  on the order the datasets are supplied in future, please use the new
+  `combine_nested` function (or the `combine='nested'` option to
+  open_mfdataset).
+    combined = auto_combine(
+  (/SalishSeaCast/nowcast-env) skookum:~$ /nemoShare/MEOPAR/nowcast-sys/SalishSeaNowcast/nowcast/workers/make_ww3_current_file.py:111: FutureWarning: In xarray version 0.15 the default behaviour of `open_mfdataset`
+  will change. To retain the existing behavior, pass
+  combine='nested'. To use future default behavior, pass
+  combine='by_coords'. See
+  http://xarray.pydata.org/en/stable/combining.html#combining-multi
+
+    with xarray.open_mfdataset(datasets["u"]) as u_nemo:
+  /nemoShare/MEOPAR/nowcast-sys/nowcast-env/lib/python3.8/site-packages/xarray/backends/api.py:934: FutureWarning: The datasets supplied have global dimension coordinates. You may want
+  to use the new `combine_by_coords` function (or the
+  `combine='by_coords'` option to `open_mfdataset`) to order the datasets
+  before concatenation. Alternatively, to continue concatenating based
+  on the order the datasets are supplied in future, please use the new
+  `combine_nested` function (or the `combine='nested'` option to
+  open_mfdataset).
+    combined = auto_combine(
+
+
+
 Fix permissions in /opp dirs
 
 
