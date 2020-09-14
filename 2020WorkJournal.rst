@@ -3619,8 +3619,8 @@ Fri 15-May-2020
 ^^^^^^^^^^^^^^^
 
 sentry-sdk test seems to be working
-Cleaned up setnry report to get rid of log_aggregator events.
-delay after ncrcat does not seem help with "index exceeds dimension bounds" IndexError in make_plots fvcom forecast-x2 research; removed.
+Cleaned up sentry report to get rid of log_aggregator events.
+Delay after ncrcat does not seem help with "index exceeds dimension bounds" IndexError in make_plots fvcom forecast-x2 research; removed.
 Looking at manager stderr log that supervisord maintains lead me to long-standing bug in ping_erddap worker re: weather dataset name; fixed and deployed.
 Updated NEMO_Nowcast docs re: change from circus to supervisor for process mgmt.
 Continued migration of SalishSeaCast repos:
@@ -5610,9 +5610,13 @@ Recovery:
   launch_remote_worker salish "salish make_forcing_links nowcast+ --shared-storage 2020-09-01"
 (SalishSeaCast)
 
+Vancouver to Craig Bay
+
 
 Thu 3-Sep-2020
 ^^^^^^^^^^^^^^
+
+Craig Bay
 
 Monthly linkcheck on moad_tools docs failed.
 (MOAD)
@@ -5637,6 +5641,8 @@ Continued backfilling after nowcast2 VM failure:
 Fri 4-Sep-2020
 ^^^^^^^^^^^^^^
 
+Craig Bay
+
 NEMO forecast2 failed, but nowcast is running well; continued backfilling:
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-09-02"
 * discovered that r12/01sep20 didn't finish, so bad restart file
@@ -5658,6 +5664,8 @@ Started to write somewhat comprehensive unit tests for get_oil_capacity() and di
 Sat 5-Sep-2020
 ^^^^^^^^^^^^^^
 
+Craig Bay
+
 Continued fvcom backfilling:
   wait for nowcast-x2/05sep20 to fail
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-09-03"
@@ -5672,6 +5680,8 @@ Continued fvcom backfilling:
 Sun 6-Sep-2020
 ^^^^^^^^^^^^^^
 
+Craig Bay
+
 Continued fvcom backfilling:
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-09-05"
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-09-04"
@@ -5679,9 +5689,6 @@ Continued fvcom backfilling:
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-09-06"
   wait for nowcast-r12/04sep20 to finish
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-09-05"
-
-  wait for nowcast-r12/05sep20 to finish
-  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-09-06"
 (SalishSeaCast)
 
 Monthly linkcheck on NEMO-Cmd docs failed; due to request timeouts from codecov.io, but investigation revealed rtd-env, Actions workflow issues, and redirected links that I fixed.
@@ -5693,42 +5700,132 @@ Discovered that newest shapefiles are now missing ST_DATE, EN_DATE, TO & FROM_ c
 (MIDOSS)
 
 
+Week 37
+-------
+
+Mon 7-Sep-2020
+^^^^^^^^^^^^^^
+
+Week 26 of UBC work-from-home due to COVID-19
+
+**Statutory Holiday** - Labour Day
+
+Craig Bay
+
+Continued fvcom backfilling:
+x2/06sep20 and r12/05sep20 runs I started last night were slow; nowcast finished, but forecast got stomped when nowcast-x2/07sep20 started; nowcast-r12/05sep20 seems to have survived and is continuing; it failed to :-(
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-09-05"
+  wait for nowcast-r12/05sep20 to finish
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-09-06"
+(SalishSeaCast)
+
+Email w/ Rachael about fields in shapefiles.
+(MIDOSS)
+
+
+Tue 8-Sep-2020
+^^^^^^^^^^^^^^
+
+Craig Bay
+
+Email w/ Rachael about fields in shapefiles.
+(MIDOSS)
+
+Slack w/ Becca about ssh access to chum.
+Email w/ Bergit about ssh forwarding while she is on Arctic cruise.
+Wrote ssh keys, config & ssh-copy-id docs.
+(MOAD)
+
+collect_weather 12 didn't finish due to SSL bad length errors around ~08:45; investigation:
+  only 186 of 576 files downloaded
+  broken pip errors prevented rest of file downloads
+recovery starting at ~09:40:
+  kill collect_weather 12
+  collect_weather 18 2.5km
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20200908/12
+  download_weather 12 2.5km
+Continued fvcom backfilling:
+  wait for nowcast-r12/08sep20 to fail
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-09-07"
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-09-08"
+Tech test mtg on MS Teams w/ André, Sandrine & Nacéra re: 15-Sep MSC Datamart talk.
+(SalishSeaCast)
+
+
+Wed 9-Sep-2020
+^^^^^^^^^^^^^^
+
+Craig Bay
+
+See work journal.
+(Ocean Navigator)
+
+Email w/ Bergit about ssh forwarding while she is on Arctic cruise.
+Wrote docs section about ssh, scp, sftp.
+(MOAD)
+
+Smooth automation :-)
+(SalishSeaCast)
+
+Craig Bay to Vancovuer
+
+
+Thu 10-Sep-2020
+^^^^^^^^^^^^^^^
+
+FAL estate work: EFT details from Jamie; email to Monica re: execution for CRA payment and EFT to Jamie; worked on setting up new direct investing cash acct
+
+Group mtg; see whiteboard
+(MOAD)
+
+EOAS Colloquium kick-off on Zoom - faculty research carnival
+
+See work journal.
+(Ocean Navigator)
+
+
+Fri 11-Sep-2020
+^^^^^^^^^^^^^^^
+
+FAL estate work: researched savings accounts for long-term holding of estate holdback funds; went to bank to get acct transactions since 14-Aug, and pay CRA owing.
+
+Added notes on -v options for ssh, scp & sftp.
+(MOAD)
+
+IOS seminar by  Matthias Herborg on oil spill response plan
+
+Created Zoom account under @43ravens.ca to that I can have a profile picture.
+
+Updated conda to 4.8.4 on arbutus:
+  conda update -n base -c defaults conda
+Removed and replaced nowcast-env conda env on arbutus to update to cartopy, latest sentry-sdk, and latest xarray; need latest xarray to get rid of:
+  FutureWarning: In xarray version 0.15 the default behaviour of `open_mfdataset`
+  will change...
+Added value for SENTRY_DSN that was inexplicably missing from activate.d/envvars.sh template.
+(SalishSeaCast)
+
+
+Sat 12-Sep-2020
+^^^^^^^^^^^^^^^
+
+See biz journal.
+
+See work journal.
+(Ocean Navigator)
+
+
+Sun 13-Sep-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Added more notes to Datamart talk slide-deck; rehearsed talk
+(SalishSeaCast)
 
 
 
 update deployment docs re: spinning up a new compute node
-
-Fix:
-  /nemoShare/MEOPAR/nowcast-sys/SalishSeaNowcast/nowcast/workers/make_ww3_wind_file.py:117: FutureWarning: In xarray version 0.15 the default behaviour of `open_mfdataset`
-  will change. To retain the existing behavior, pass
-  combine='nested'. To use future default behavior, pass
-  combine='by_coords'. See
-  http://xarray.pydata.org/en/stable/combining.html#combining-multi
-
-    with xarray.open_mfdataset(datasets) as hrdps:
-  /nemoShare/MEOPAR/nowcast-sys/nowcast-env/lib/python3.8/site-packages/xarray/backends/api.py:934: FutureWarning: The datasets supplied have global dimension coordinates. You may want
-  to use the new `combine_by_coords` function (or the
-  `combine='by_coords'` option to `open_mfdataset`) to order the datasets
-  before concatenation. Alternatively, to continue concatenating based
-  on the order the datasets are supplied in future, please use the new
-  `combine_nested` function (or the `combine='nested'` option to
-  open_mfdataset).
-    combined = auto_combine(
-  (/SalishSeaCast/nowcast-env) skookum:~$ /nemoShare/MEOPAR/nowcast-sys/SalishSeaNowcast/nowcast/workers/make_ww3_current_file.py:111: FutureWarning: In xarray version 0.15 the default behaviour of `open_mfdataset`
-  will change. To retain the existing behavior, pass
-  combine='nested'. To use future default behavior, pass
-  combine='by_coords'. See
-  http://xarray.pydata.org/en/stable/combining.html#combining-multi
-
-    with xarray.open_mfdataset(datasets["u"]) as u_nemo:
-  /nemoShare/MEOPAR/nowcast-sys/nowcast-env/lib/python3.8/site-packages/xarray/backends/api.py:934: FutureWarning: The datasets supplied have global dimension coordinates. You may want
-  to use the new `combine_by_coords` function (or the
-  `combine='by_coords'` option to `open_mfdataset`) to order the datasets
-  before concatenation. Alternatively, to continue concatenating based
-  on the order the datasets are supplied in future, please use the new
-  `combine_nested` function (or the `combine='nested'` option to
-  open_mfdataset).
-    combined = auto_combine(
 
 
 
