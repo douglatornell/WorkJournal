@@ -5824,16 +5824,96 @@ Added more notes to Datamart talk slide-deck; rehearsed talk
 (SalishSeaCast)
 
 
+Week 38
+-------
 
-update deployment docs re: spinning up a new compute node
+Mon 14-Sep-2020
+^^^^^^^^^^^^^^^
+
+Week 27 of UBC work-from-home due to COVID-19
+
+See work journal.
+(Ocean Navigator)
+
+Added docs section about X2Go.
+Group mtg; see whiteboard.
+(MOAD)
+
+Confirmed w/ André and Sandrive that 23 minutes is okay for my talk.
+Created supplementary slide about HRDPS processing flow.
+Created zoomable, white background version of SalishSeaCast process flow for Q&A.
+(SalishSeaCast)
+
+Pointed Rachael at moad_tools PR#1 for details of bad fuel capacity calcs for very short and very long vessels.
+(MIDOSS)
 
 
+Tue 15-Sep-2020
+^^^^^^^^^^^^^^^
 
-Fix permissions in /opp dirs
+Delivered talk to MSC Datamart.
+(SalishSeaCast)
+
+FAL estate work:
+* appt w/ Monica @ TD to set up new direct investing cash acct for me to hold bequests in
+* learned from Monica that it was up to me to transfer funds and close Plan 60 & Everyday Savings accts; did so
+* sent 1st distribution wire xfer to Jamie's C$ FX acct
+
+Vancouver to Craig Bay
+
+
+Wed 16-Sep-2020
+^^^^^^^^^^^^^^^
+
+Craig Bay
+
+See work journal.
+(Ocean Navigator)
+
+
+Thu 17-Sep-2020
+^^^^^^^^^^^^^^^
+
+Craig Bay
+
+Research whether GitHub deprecation of password auth will affect git pull/push; looks like it may.
+Worked on GitHub public key docs.
+(MOAD)
+
+
+Fri 18-Sep-2020
+^^^^^^^^^^^^^^^
+
+Craig Bay
+
+Emailed Elise about her problem getting archived water level obs for Campbell River.
+get_NeahBay_ssh failed overnight and in morning due to slosh service not connections; Susan changed to and older, non-HTTPS nws service, and it worked for nowcast onward.
+upload_forcing graham stalling in morning
+(SalishSeaCast)
+
+Craig Bay to Vancouver
+
+
+Sat 19-Sep-2020
+^^^^^^^^^^^^^^^
+
+FAL estate work.
+
+
+Sun 20-Sep-2020
+^^^^^^^^^^^^^^^
+
+Added GitHub public key section to secure access docs, and notes to whiteboard for 21Sep mtg.
+(MOAD)
 
 
 update unpublished status of Olson, et al (2020)
 
+
+update deployment docs re: spinning up a new compute node
+
+
+Fix permissions in /opp dirs
 
 
 Figure out how to disconnect NEMO_Nowcast.Worker instances from sentry-sdk logging when we are running in --debug mode;
