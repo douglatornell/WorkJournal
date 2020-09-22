@@ -5907,6 +5907,28 @@ Added GitHub public key section to secure access docs, and notes to whiteboard f
 (MOAD)
 
 
+Week 39
+-------
+
+Mon 21-Sep-2020
+^^^^^^^^^^^^^^^
+
+Week 28 of UBC work-from-home due to COVID-19
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar; new students/post-docs: Becca, Ben O, Mina.
+
+Updated Olson, et al 2020 citation on front page and in dataset metadata re: volume & issue.
+Copied setup.xml file into /opt/tomcat/content/erddap/ and bounced ERDDAP with:
+* sudo /opt/tomcat/bin/shutdown.sh
+* sudo /opt/tomcat/bin/startup.sh
+(ERDDAP)
+
+FAL estate work; bank visit re: wire xfer fail, xfer to TDDI cash acct, and estate expenses xfer.
+
+
 update unpublished status of Olson, et al (2020)
 
 
