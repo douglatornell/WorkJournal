@@ -5171,6 +5171,11 @@ Started backfilling nowcast-dev:
   launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-04"
 (SalishSeaCast)
 
+Zoom re: Killer Whales w/ Ruth Joy @ SFU
+* Mike Dowd (Dal)
+* Marine Randon (SFU)
+*
+
 Dropped Boondoocks wheel off at MEC for spoke replacement and re-tension
 
 
@@ -5928,6 +5933,24 @@ Copied setup.xml file into /opt/tomcat/content/erddap/ and bounced ERDDAP with:
 
 FAL estate work; bank visit re: wire xfer fail, xfer to TDDI cash acct, and estate expenses xfer.
 
+
+Tue 22-Sep-2020
+^^^^^^^^^^^^^^^
+
+UBC while Rita was at home.
+
+Blurb for MEOPAR ATM session:
+  Python: f-String & Q&A
+
+  Doug will start off with a discussion of Python "formatted string literals", better known as "f-strings". F-strings are the modern, fast, Python 3 way to combine variables and words in highly readable code. Among the tips he will provide is a very new feature of f-strings that makes debugging Python code with print() functions easier than ever before. Doug will be "live coding" for part of this session, so you can follow along and learn by doing in Python on your own computer if you want to.
+
+  In the second part of the session, Doug will answer (or point you in the direction of an answer to) your Python questions. Since the best answers come with thought included, please consider submitting your questions in advance using the discussion forum in the Whova conference app. Doug will answer Python questions submitted to the Whova forum all week during the ATM.
+(MEOPAR ATM: 0.75 hr)
+
+Added spill volume calculation to random-oil-spills.
+Discovered randomly occurring bug whereby set of AIS tracks to choose spill location from is empty.
+Did timing tests on random-oil-spills; 10 spills in 10-30s; 100 spills in 3.5m.
+(MIDOSS)
 
 update unpublished status of Olson, et al (2020)
 
