@@ -5952,6 +5952,97 @@ Discovered randomly occurring bug whereby set of AIS tracks to choose spill loca
 Did timing tests on random-oil-spills; 10 spills in 10-30s; 100 spills in 3.5m.
 (MIDOSS)
 
+
+Wed 23-Sep-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Wrote and emailed MEOPAR ATM session proposal.
+(MEOPAR: 1.25 hr)
+
+Uploaded Rachael's new icon image to Salck & GitHub.
+Monthly project mtg; see whiteboard.
+Started to pull in Rachael's fix re: vessel length and oil capacity, but new YAML file isn't safe_load()-able; messaged her in #soiled channel to fix.
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
+
+download_live_ocean timed out at ~12:00; re-ran and it timed out again at ~15:15; recovery:
+  * sent email to Katia & Ruping re: delayed runs
+  * used LiveOcean boundary conditions symlink to yesterday created at 02:55
+  * upload_forcing arbutus nowcast+
+  * upload_forcing orcinus nowcast+
+  * upload_forcing graham nowcast+
+  * upload_forcing optimum nowcast+
+(SalishSeaCast)
+
+Installed GitHub CLI tool (gh) on kudu; set up auth via web
+
+
+Thu 24-Sep-2020
+^^^^^^^^^^^^^^^
+
+Downloaded 23sep LiveOcean to backfill yesterday's missing files, but forgot to use --debug; seem to have gotten away with it :-)
+Monthly UBC-DFO modeling collab mtg: Laura talked about Discovery Passage FVCOM model, mostly physics
+(SalishSeaCast)
+
+See work journal.
+(Ocean Navigator)
+
+FAL estate work: wire xfer to Jamie (again) & deposit MFC chq
+
+
+Fri 25-Sep-2020
+^^^^^^^^^^^^^^^
+
+Worked on new version control with Git docs.
+Slack session w/ Becca re: Git and GitHub.
+(MOAD)
+
+
+Helped Rachael get random-oil-spills running on salish.
+Finished pulling in Rachael's fix re: vessel length and oil capacity.
+(MIDOSS)
+
+
+Sat 26-Sep-2020
+^^^^^^^^^^^^^^^
+
+Visited J&M; took boxes from locker that J requested.
+
+collect_weather 00 didn't finished because 030/UGRD_TGL_10 file didn't appear on the datamart; recovery starting at ~16:45:
+  kill collect_weather 00 2.5km
+  collect_weather 00 2.5km  # for today
+  download_weather 06 2.5km
+  download_weather 00 1km --no-verify-certs
+  download_weather 12 1km --no-verify-certs
+  upload_forcing forecast2 failed on ssh due to being to late in the day; recovery
+    upload_forcing arbutus forecst2
+    upload_forcing orcinus forecst2
+    upload_forcing graham forecst2
+    upload_forcing optimum forecst2
+  download_weather 18 2.5km
+  wait for forecast2 runs to finish
+  download_weather 12 2.5km
+(SalishSeaCast)
+
+
+Sun 27-Sep-2020
+^^^^^^^^^^^^^^^
+
+upload_forcing orcinus turbidity failed due to SSH protocol banner error; recovery:
+  * re-ran manually at ~11:37; failed again; looks like a bad head node because some terminal ssh logins work; re-ran again with --debug and it worked
+  * make_forcing_links orcinus nowcast-agrif
+(SalishSeaCast)
+
+See work journal.
+(Ocean Navigator)
+
+
+
 update unpublished status of Olson, et al (2020)
 
 
