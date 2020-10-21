@@ -6042,6 +6042,345 @@ See work journal.
 (Ocean Navigator)
 
 
+October
+=======
+
+Week 40
+-------
+
+Mon 28-Sep-2020
+^^^^^^^^^^^^^^^
+
+Week 29 of UBC work-from-home due to COVID-19
+
+Continued work on integrating Rachael's code:
+* added vessel type to spill params; added fuel or argo spill to spill params, including refactoring code to make that selection code testable
+* added oil type for fuel spills
+* started pulling in get_oil_type_*() for cargo spills
+(MIDOSS)
+
+Listened to Susan seminar to the McGill OAS dept.
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Phys ocgy seminar: Elise on her recent work.
+
+
+Tue 29-Sep-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Continued work on integrating Rachael's code:
+* Handled user/machine-specific paths in oil_attribution.yaml file.
+* Finished pulling in get_oil_type_atb().
+(MIDOSS)
+
+
+Wed 30-Sep-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Westgrid webinar; xarray, Alex Razoumov
+* https://bit.ly/389acaU
+* review of pros/cons of dynamic types in Python
+* numpy provides fixed type/size collections (aka arrays); universal (vectorized) functions; broadcasting; linear algebra, solvers, decompositions
+* yt - volumetric multi-resolution data; https://bit.ly/vispages
+* xarray:
+  * Dataset.interp(x=10.5, y=15, method=...)
+  * DataArray.groupby()
+  * plot(..., col="z")  # plot slices of 3d in subplots
+I wish he hadn't used lambdas :-(
+* paraview
+* numpy & xarray default to float64 (double precision); cast float32 for single precision
+* units of degrees_east and degrees_north trigger CF conventions
+
+Helped Becca sort out ~/.bash_profile permissions and CLICOLOR envvar on her Mac.
+Helped Elise with some nested regex code.
+(MOAD)
+
+
+Thu 1-Oct-2020
+^^^^^^^^^^^^^^^
+
+FAL estate work: email to Cesia Green re: file closure.
+
+Started work on PWGSC quarterly usage report for ProServices; see biz journal.
+
+See work journal.
+(Ocean Navigator)
+
+
+Fri 2-Oct-2020
+^^^^^^^^^^^^^^^
+
+Submitted work on PWGSC quarterly usage report for ProServices; see biz journal.
+
+See work journal.
+(Ocean Navigator)
+
+Continued work on integrating Rachael's code:
+* Pulled in get_oil_type_tanker()
+* Pulled in get_oil_type_barge()
+Worked Susan to characterize no AIS tracks issue; shapefiles/geotiff mismatch
+Found errors due to all zero oil volumes, and missing keys in some YAML files.
+(MIDOSS)
+
+download_live_ocean failed at ~12:00; re-ran manually at ~12:05.
+(SalishSeaCast)
+
+
+Sat 3-Oct-2020
+^^^^^^^^^^^^^^^
+
+Vancouver to Raven Ridge
+
+
+Sun 4-Oct-2020
+^^^^^^^^^^^^^^^
+
+Raven Ridge
+
+Walking:
+* Hillkeep regional park loop and lookout
+* Island 22 regional park dyke trail and brambles exploration
+
+
+Mon 5-Oct-2020
+^^^^^^^^^^^^^^^
+
+Week 30 of UBC work-from-home due to COVID-19
+
+Raven Ridge
+
+Cycling:
+* Veddar Canal east dyke (Dyke Crest Rd); Rotary trail along Chilliwack River to Lickman Rd; Lickman, Progress, Old Orchard
+
+See work journal.
+(Ocean Navigator)
+
+
+Tue 6-Oct-2020
+^^^^^^^^^^^^^^^
+
+Raven Ridge
+
+Walking:
+* Teapot Hill and Horse Loop in Cultus Lake Park.
+
+See work journal.
+(Ocean Navigator)
+
+
+Wed 7-Oct-2020
+^^^^^^^^^^^^^^^
+
+Raven Ridge
+
+Cycling:
+* Chilliwack River valley, hatchery east along TCT to steep climb on south side of road, road to Tamihi bridge, TCT to Little Tamihi FRS climb, and retrace back to hatchery.
+
+
+Thu 8-Oct-2020
+^^^^^^^^^^^^^^^
+
+Raven Ridge
+
+Walking:
+* Great Blue Heron Nature Preserve
+
+download_live_ocean timed out at ~12:00; re-ran and it timed out again at ~15:00; Re-ran it again at ~16:10 and it was still retrying, so Susan decided to kill it and to perist yesterday's boundary conditions; recovery:
+  * used LiveOcean boundary conditions symlink to yesterday created at 02:48
+  * upload_forcing arbutus nowcast+
+  * upload_forcing orcinus nowcast+
+  * upload_forcing graham nowcast+
+  * upload_forcing optimum nowcast+
+(SalishSeaCast)
+
+See work journal.
+(Ocean Navigator)
+
+
+Fri 9-Oct-2020
+^^^^^^^^^^^^^^^
+
+Raven Ridge
+
+Cycling:
+* Bellam Rd & dyke trail to Rosedale, return on Camp River/Hope River Rds.
+
+download_live_ocean timed out at ~11:55; email from Parker says that failures yesterday and today are due to UW cluster issues; peristed yesterday's boundary conditions; recovery at ~14:25:
+  * used LiveOcean boundary conditions symlink to yesterday created at 02:54
+  * upload_forcing arbutus nowcast+
+  * upload_forcing orcinus nowcast+
+  * upload_forcing graham nowcast+
+  * upload_forcing optimum nowcast+
+(SalishSeaCast)
+
+
+Sat 10-Oct-2020
+^^^^^^^^^^^^^^^
+
+Raven Ridge
+
+Power outage at ~09:30; due to tree down on wires on south side of Chilliwack Mtn; restored while we were out walking.
+
+Walking:
+* South Rotary Trail from Vedder Park on north side of river; met and chatted with Karen & Michel near start of hike
+
+download_results for forecast failed
+(SalishSeaCast)
+
+
+Sun 11-Oct-2020
+^^^^^^^^^^^^^^^
+
+Raven Ridge
+
+Manually ran download_results for 10oct20/forecast
+(SalishSeaCast)
+
+Confirmed vacation time in 2020 for Kimberley re: transition to Workday.
+
+Investigated MOAD/docs linkcheck failure; mostly due to setuptools docs overhaul that removed docs for setup.cfg and entry points; fixed as best I can.
+(MOAD)
+
+Investigated MOAD/moad_tools linkcheck failure; due to private repos and Google docs that can be ignored; fixes blocked until get_oil_type branch can be merged into master branch.
+(MIDOSS)
+
+Power outage at ~18:00; due to tree down on wires; restored ~21:30.
+
+
+Week 42
+-------
+
+Mon 12-Oct-2020
+^^^^^^^^^^^^^^^
+
+Week 31 of UBC work-from-home due to COVID-19
+
+**Statutory Holiday** - Thanksgiving Day
+
+Raven Ridge
+
+Invited Gonzalo to UBC-MOAD GitHub org.
+Confirmed that graham has module for python>=3.8, so can drop support for <3.8 in moad_tools; other production environments where moad_tools is used are all >=3.8.
+(MOAD)
+
+Started work on "Python: f-strings and Q&A" session for MEOPAR ATM.
+
+Cycling:
+* west down Chilliwack Mtn, Chadsey Rd, Keith Wilson, Veddar Canal west dyke to Barrowtown, Quadling Rd to 2 dead ends, return
+
+
+Tue 13-Oct-2020
+^^^^^^^^^^^^^^^
+
+Raven Ridge
+
+Continued work on "Python: f-strings and Q&A" session for MEOPAR ATM.
+Decided to use rise pkg (notebook only, not lab) for session slides.
+Tech test mtg on Zoom w/ Laura and Laila.
+
+See work journal.
+(Ocean Navigator)
+
+
+Wed 14-Oct-2020
+^^^^^^^^^^^^^^^
+
+Raven Ridge
+
+See work journal.
+(Ocean Navigator)
+
+Walking:
+* Tried to do Elk Mtn, but power lines down across road caused us to have to turn back near the trailhead.
+* Mt Thom Park; all around the top from the Churchill Pkwy trailhead, and down and back to the Karver trailhead on Ross Rd
+
+
+Thu 15-Oct-2020
+^^^^^^^^^^^^^^^
+
+Raven Ridge
+
+Set up account on Parker's boiler machine re: LiveOcean leaving Azure cloud.
+(SalishSeaCast)
+
+Cycling:
+* Vedder canal, Rotary Trail, Vedder Crossing loop
+
+
+Fri 16-Oct-2020
+^^^^^^^^^^^^^^^
+
+Raven Ridge
+
+Continued work on random-oil-spills; worked with Susan to resolve "No AIS tracks" issue due to GeoTIFF smearing by expanding bounding box when necessary.
+Added logging messages.
+(MIDOSS)
+
+
+Sat 17-Oct-2020
+^^^^^^^^^^^^^^^
+
+Raven Ridge to Vancouver
+
+
+Sun 18-Oct-2020
+^^^^^^^^^^^^^^^
+
+Continued work on "Python: f-strings and Q&A" session for MEOPAR ATM.
+
+
+Week 43
+-------
+
+Mon 19-Oct-2020
+^^^^^^^^^^^^^^^
+
+Week 32 of UBC work-from-home due to COVID-19
+
+MEOPAR ATM "Python: f-strings and Q&A" session.
+Answered questions about dask and chunking.
+Polished session repo on GitHub.
+
+Caught tail end of group mtg.
+(MOAD)
+
+Chatted with Connor & Elise in Phys Ocgy seminar lunch slot.
+
+Zoom w/ Susan, Pramod & Nate re: SalishSeaCast and CIOOS.
+upload_forcing orcinus nowcast+ failed, probably due to network stack issues on one of the seawolf login nodes; recovery:
+  qdel on orcinus
+  kill watch_NEMO_agrif
+  upload_forcing orcinus nowcast+
+  make_forcing_links orcinus nowcast-agrif
+(SalishSeaCast)
+
+
+Tue 20-Oct-2020
+^^^^^^^^^^^^^^^
+
+UBC while Rita was at home.
+
+Started refactoring download_live_ocean to use scp from boiler instead of https from azure cloud:
+* added ssh config for boiler on niko and skookum
+* updated niko os pkgs & PyCharm
+* changed to git repos on niko for several internal dep pkgs
+* updated niko SalishSeaNowcast dev env to Python 3.8 and current pkg releases on conda-forge
+* updated test_download_live_ocean to use pytest caplog & monkeypatch
+* added production config unit tests to test_download_live_ocean
+(SalishSeaCast)
+
+
+
+
+Add `export CLICOLOR=auto` to bash setup docs for Mac.
+
 
 update unpublished status of Olson, et al (2020)
 
