@@ -6377,6 +6377,69 @@ Started refactoring download_live_ocean to use scp from boiler instead of https 
 (SalishSeaCast)
 
 
+Wed 21-Oct-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Monthly project mtg; see whiteboard.
+(MIDOSS)
+
+upload_forcing orcinus nowcast+ failed, probably due to network stack issues on one of the seawolf login nodes; recovery:
+  qdel on orcinus
+  kill watch_NEMO_agrif
+  upload_forcing orcinus nowcast+
+  make_forcing_links orcinus nowcast-agrif
+Continued refactoring download_live_ocean to use scp from boiler instead of https from azure cloud:
+* added download and parsing of process_status.csv file
+(SalishSeaCast)
+
+
+Thu 22-Oct-2020
+^^^^^^^^^^^^^^^
+
+New washer/dryer delivery & installation
+
+Continue discussion in MEOPAS ATM Whova thread w/ Sofia Darmarkaki re: dask.
+
+Continued refactoring download_live_ocean to use scp from boiler instead of https from azure cloud:
+* added retry decorator to download of process_status.csv file
+* added download of low_passed_UBC.nc file
+* deployed provisional code to skookum for live test tomorrow
+* emailed Parker to let him know that I am testing
+(SalishSeaCast)
+
+
+Fri 23-Oct-2020
+^^^^^^^^^^^^^^^
+
+Fibre bandwidth upgraded to 1 Gbps.
+
+Refactored download_live_ocean ran successfully in production; emailed Parker to let him know we no longer need the files on Azure.
+Planned MEOPAR ASM sessions for next week.
+(SalishSeaCast)
+
+Continue discussion in MEOPAS ATM Whova thread w/ Sofia Darmarkaki re: dask; offered her zoom at 10:30 Wed.
+
+
+Sat 24-Oct-2020
+^^^^^^^^^^^^^^^
+
+Cycled Semiahmoo Trail while Susan visited J&M, then Mud Bay Dyke w/ Susan.
+
+
+Sun 25-Oct-2020
+^^^^^^^^^^^^^^^
+
+Researched DigitalOcean & OpalStack as alternatives to Webfaction.
+
+Cycled to Richmond cranberry fields near 7&8 Rds and Cambie Rd.
+
+
+
+
+
 
 
 Add `export CLICOLOR=auto` to bash setup docs for Mac.
