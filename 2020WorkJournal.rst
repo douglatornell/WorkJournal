@@ -6349,6 +6349,7 @@ Answered questions about dask and chunking.
 Polished session repo on GitHub.
 
 Caught tail end of group mtg.
+Started writing docs section about Jupyter.
 (MOAD)
 
 Chatted with Connor & Elise in Phys Ocgy seminar lunch slot.
@@ -6422,6 +6423,9 @@ Planned MEOPAR ASM sessions for next week.
 
 Continue discussion in MEOPAS ATM Whova thread w/ Sofia Darmarkaki re: dask; offered her zoom at 10:30 Wed.
 
+See work journal.
+(Ocean Navigator)
+
 
 Sat 24-Oct-2020
 ^^^^^^^^^^^^^^^
@@ -6436,6 +6440,203 @@ Researched DigitalOcean & OpalStack as alternatives to Webfaction.
 
 Cycled to Richmond cranberry fields near 7&8 Rds and Cambie Rd.
 
+
+Week 44
+-------
+
+Mon 26-Oct-2020
+^^^^^^^^^^^^^^^
+
+Week 33 of UBC work-from-home due to COVID-19
+
+MEOPAR ASM opening panel:
+* Doug Wallace:
+  * Bernadette Jordan DFO Minister recorded msg
+  * intro Jan Newton; host of session
+  * overview of MEOPAR history & context
+* Jan Newton
+  * panelist questions
+    * how did their role evolve
+    * how did MEOPAR help them professionally
+    * how do they envision NEOPAR evolving
+  * Karen Dodds, BoD chair
+    * recently retired ADM from ECCC
+  * Andrew Stewart
+    * mgr at DFO
+    * CIOOS
+  * Susan Allen
+    * 6 points
+  * Dany Dumont
+  * Fanny Noisette
+    * joined MEOPAR as post-doc
+    * early career grant holder
+  * panel questions
+    * what advise for MEOPAR redefining itself?
+      * training
+    * what is special about ocgy training that needs something like MEOPAR?
+      * broadly cross-disciplinary
+      * ocgy community is small
+      * cross natural/social science span
+MEOPAR Marine Operations and Transportation presentations
+* URIAS: Arctic seabirds
+  * trackers on murs: small wings, large body, 31x basal metabolism when flying; highest wing loading of any bird (fighter jet, not glider)
+* Arctic shipping noise impacts on marine mammals
+* Whale watching impacts
+* WHaLE: right whales
+(SalishSeaCast)
+
+Continued writing docs section about Jupyter; remote server sub-section.
+(MOAD)
+
+See work journal.
+(Ocean Navigator)
+
+
+Tue 27-Oct-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Opened ticket to get sshfs installed on salish.
+
+Merged 5 PRs from dependabot to update cryptography pkg to v3.2; MIDOSS/docs, UBC-MOAD/docs, bloomscst-ensemble & analysis-doug x 2.
+
+
+Wed 28-Oct-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+collect_weather 00 didn't finish due to SSL bad length errors around ~21:00; investigation:
+  543 of 576 files downloaded
+  broken pip errors prevented rest of file downloads
+  no 06 or 12 downloads, and lots of broken pipe and bad ssl length errors for them too
+recovery starting at ~10:15:
+  kill collect_weather 00
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20201028/00/
+  download_weather 00 2.5km
+  collect_weather 18 2.5km
+  download_weather 06 2.5km
+    stuck at 556 files
+  wait for forecast2 runs to finish
+  download_weather 12 2.5km
+Helped Elise w/ installing salishsea_tools in virtual env on beluga.
+Worked on installing salishsea_tools on beluga in ~/venvs/salishsea-tools virtual environment:
+  mkdir -p venvs/salishsea-tools
+  module load python/3.8.2
+  python3 -m virtualenv --no-download ~/venvs/salishsea-tools/
+  source ~/venvs/salishsea-tools/bin/activate
+  python3 -m pip install --no-index -e tools/SalishSeaTools
+    fails due to no angles wheel in CC wheelhouse
+  python3 -m pip install -e tools/SalishSeaTools  # worked
+Helped Elise w/ getting subprocess on beluga to use multiple cores; --ntasks=1 --cpus-per-task=n
+Worked on installing jupyter lab on beluga:
+  python3 -m virtualenv --no-download ~/venvs/jupyter/
+  source ~/venvs/jupyter/bin/activate
+  # --no-index install failed on argon2-cffi; I guess CC wheelhouse is out of date?
+  python3 -m pip install jupyterlab
+  # did a nice job of installing wheels from XX wheelhouse when available (mostly) and installing from PyPI when not
+  jupyter lab --no-browser --ip $(hostname -f)  # server
+  ssh -N -L 4343:beluga1.int.ets1.calculquebec.ca:8888 beluga  # port forwarding on kudu
+  http:localhost:4343?token=...
+(SalishSeaCast)
+
+Zoom w/ Sofia Darmaraki @Dal re: dask for analysis of GLORYS dataset.
+(Prediction Core)
+
+MEOPAR CIOSS session:
+* Martin Taylor - ED
+* Lydia - overview video
+  * regional associations
+* Jonathan Kellog - Hakai - video
+  * Jan Newton has joined advisory board
+* Shayla Fitzsimmons - East Coast
+  * consortium
+* Anne-Sophie Ste-Marie - SLGO
+* Ray Brunsting - Hakai
+  * data stewardship node
+
+
+Thu 29-Oct-2020
+^^^^^^^^^^^^^^^
+
+Wrote email to Elise about installing SalishSeaTools on beluga.
+Scheduled Slack mtg w/ Becca re: working with .nc and .grib2 files in Python.
+(SalishSeaCast)
+
+See work journal.
+(Ocean Navigator)
+
+Estate work: signed and returned Minutes of Settle docs re: Banyan Tree to CRA/Justice.
+
+
+Fri 30-Oct-2020
+^^^^^^^^^^^^^^^
+
+Email w/ Elise about CPUs, cores, etc.
+Slack w/ Becca re: .nc & .grib2 access for ML course project on climate forecast down-scaling:
+*
+
+* GitHub repo
+* conda env YAML
+(SalishSeaCast)
+
+Workday demo:
+* email at 09:30 Monday
+* CWL login
+* mobile app
+* review profile
+* org chart == supervisory organization
+  * sup orgs are part of sub-orgs
+  * matrix reporting structure
+* inbox item are actionable
+* notifications are FYIs
+* completed tasks go to archive for 30 days
+* expenses
+  * digital receipt become official upon approval, so no need to keep paper receipts
+  * dept id is now cost centre
+  * worktags
+* check carry-over
+* vacation time into workday after 15-Nov
+
+
+Sat 31-Oct-2020
+^^^^^^^^^^^^^^^
+
+Improved docs section about Jupyter on remote MOAD server sub-section.
+Learned more about use of --ip option for starting remote Jupyter lab server, and it relationship to ssh -N -L.
+Successfully run Jupyter lab in an interactive session on a compute node on beluga.
+(MOAD)
+
+Confirmed that fvcom/nowcast-x2/28oct20 and all subsequent runs failed; started backfilling:
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-10-28"
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-10-28"
+  wait for forecast-x2/28oct20 to finish
+(SalishSeaCast)
+
+Time change from PDT to PST.
+
+
+Sun 1-Nov-2020
+^^^^^^^^^^^^^^
+
+Restarted log_aggregator because nowcast-r12 wasn't logging messages yesterday.
+Investigated why nowcast-green had not started; caused by make_turbidity_file glitching out due to time change; recvovery:
+  persist 31oct turbidity as 1nov via symlink
+  upload_forcing arbutus turbidity
+  upload_forcing orcinus turbidity
+  upload_forcing graham turbidity
+  upload_forcing optimum turbidity
+Continued fvcom backfilling:
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-10-29"
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-10-29"
+  wait for forecast-x2/29oct20 to finish
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-10-30"
+(SalishSeaCast)
+
+Cycling: UBC, Musqueam, Southlands, Adera, Quilchena, Valley Dr. loop (31 km)
 
 
 
