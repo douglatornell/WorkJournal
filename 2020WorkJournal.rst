@@ -6672,6 +6672,8 @@ See work journal.
 Tue 3-Nov-2020
 ^^^^^^^^^^^^^^
 
+UBC while Rita was at home.
+
 Continued fvcom backfilling:
   after nowcast-x2/03nov20 failed:
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-11-02"
@@ -6688,8 +6690,17 @@ Continued fvcom backfilling:
 
   wait for nowcast-r12/02nov20 to finish
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-03"
+Added download_weather to list of workers that trigger Slack notifications; may ned to restart manager for this to take effect.
+Tweaked sarracenia config for 1km HRDPS to try to get files flowing; restarted sarracenia client.
+Experimented with --no-index and requirements files on beluga; found ComputeCanada default wheelhouse paths coming from PIP_CONFIG_FILE environment variable that appears to be set on login; can't control where pkgs are installed from in requirements file, but can list only top level reqs, and reqs w/o version pins.
 (SalishSeaCast)
 
+Did the stupid half hourS dance to get my phone reconnected to ubcsecure & eduroam after having to change my CWL password.
+
+Did Workday intro & hourly employee training training; submitted 1-8 Nov time on Workday and as PDF via email.
+
+Started writing doc about running jupyterlab in vnenv on graham et al.
+(MOAD)
 
 
 
