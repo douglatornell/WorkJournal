@@ -6639,6 +6639,58 @@ Continued fvcom backfilling:
 Cycling: UBC, Musqueam, Southlands, Adera, Quilchena, Valley Dr. loop (31 km)
 
 
+November
+========
+
+Week 45
+-------
+
+Mon 2-Nov-2020
+^^^^^^^^^^^^^^
+
+Week 34 of UBC work-from-home due to COVID-19
+
+Continued fvcom backfilling:
+  after nowcast-x2/02nov20 failed:
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-10-31"
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-10-30"
+  wait for forecast-x2/31oct20 to finish
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-11-01"
+(SalishSeaCast)
+
+UBC Workday go-live.
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar: Nancy Soontiens re: drift evaluation of models
+
+See work journal.
+(Ocean Navigator)
+
+
+Tue 3-Nov-2020
+^^^^^^^^^^^^^^
+
+Continued fvcom backfilling:
+  after nowcast-x2/03nov20 failed:
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-11-02"
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-10-31"
+  wait for forecast-x2/02nov20 to finish
+
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-11-03"
+
+  wait for nowcast-r12/31oct20 to finish
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-01"
+
+  wait for nowcast-r12/01nov20 to finish
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-02"
+
+  wait for nowcast-r12/02nov20 to finish
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-03"
+(SalishSeaCast)
+
+
 
 
 
