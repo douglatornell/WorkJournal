@@ -6679,17 +6679,9 @@ Continued fvcom backfilling:
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-11-02"
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-10-31"
   wait for forecast-x2/02nov20 to finish
-
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-11-03"
-
   wait for nowcast-r12/31oct20 to finish
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-01"
-
-  wait for nowcast-r12/01nov20 to finish
-  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-02"
-
-  wait for nowcast-r12/02nov20 to finish
-  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-03"
 Added download_weather to list of workers that trigger Slack notifications; may ned to restart manager for this to take effect.
 Tweaked sarracenia config for 1km HRDPS to try to get files flowing; restarted sarracenia client.
 Experimented with --no-index and requirements files on beluga; found ComputeCanada default wheelhouse paths coming from PIP_CONFIG_FILE environment variable that appears to be set on login; can't control where pkgs are installed from in requirements file, but can list only top level reqs, and reqs w/o version pins.
@@ -6702,7 +6694,127 @@ Did Workday intro & hourly employee training training; submitted 1-8 Nov time on
 Started writing doc about running jupyterlab in vnenv on graham et al.
 (MOAD)
 
+See work journal.
+(Ocean Navigator)
 
+
+Wed 4-Nov-2020
+^^^^^^^^^^^^^^
+
+Continued fvcom backfilling:
+  forecast-x2/03nov20 and nowcast-r12/01nov20 got stomped by 04nov20 runs setup :-(
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-11-03"
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-01"
+  wait for forecast-x2/03nov20 to finish
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-11-04"
+
+
+  wait for nowcast-r12/01nov20 to finish
+
+See work journal.
+(Ocean Navigator)
+
+
+Thu 5-Nov-2020
+^^^^^^^^^^^^^^
+
+Neah Bay ssh obs are slow; recovery at ~09:05:
+  * no forecast2 runs, so log didn't roll over
+  * ln -s fcst/ssh_y2020m11d04.nc obs/ssh_y2020m11d04.nc
+  * upload_forcing arbutus nowcast+
+  * upload_forcing orcinus nowcast+
+  * upload_forcing graham nowcast+
+  * upload_forcing optimum nowcast+
+  * Neah Bay ssh still slow at forecast time
+  * upload_forcing arbutus ssh
+Continued fvcom backfilling:
+  after nowcast-r12/05nov20 failed:
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-02"
+UBC-DFO modelling mtg; Ben presented; Michael is planning to run 1yr of SalishSeaCast w/ HRDPS 1km to compare skill to 2.5km.
+(SalishSeaCast)
+
+EOAS colloquium: Nancy Williams, U South Florida, CO2 obs via autonomous platforms.
+
+Updated black pipx installation on kudu so that it will work on code with f-string = syntax:
+  pipx uninstall black
+  conda create -n py39 python=3.9
+  pipx install --python /media/doug/warehouse/conda_envs/py39/bin/python3 black
+  black --version
+    black, version 20.8b1
+
+Investigated and fixed linkcheck failures from monthly GitHub Actions sphinx linkcheck:
+  Google spreadsheet w/ bad anchor in random_oil_spills.py docstring
+  private marine-transport-data GitHub repo in in random_oil_spills.py docstrings
+Continued cleaning up and refactoring get_oil_type code.
+(MIDOSS)
+
+Answered email from Rich & Tara about ERDDAP performance for 471 mini-project.
+(ERDDAP)
+
+
+Fri 6-Nov-2020
+^^^^^^^^^^^^^^
+
+collect_weather 00 didn't complete due to broken pipe & bad SSL; fixed in the middle of the night so that forecast2 runs were completed a couple of hours late.
+Continued fvcom backfilling:
+  after nowcast-r12/06nov20 failed:
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-03"
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-04"
+(SalishSeaCast)
+
+Continued cleaning up and refactoring get_oil_type code:
+* 1000 spills test: 6 bad spills due to zeros in cargo oil type attribution YAML files
+* added debug log msg w/ spill details
+* 1000 spills test: 2 bad spills due to zeros in cargo oil type attribution YAML files
+* changed log msg to warning so it stands out better
+* 1000 spills test: 1 bad spill due to unknown issue
+* added warning log msg at top level
+* 1000 spills test: 1 bad spill due to zeros in cargo oil type attribution YAML files
+(MIDOSS)
+
+Changed to conda-incubator/setup-miniconda@v2 in docs repo linkcheck action re: deprecation warnings in action log, and change in proprietorship of setup-miniconda action.
+Confirmed that docs env can be built w/ Python 3.9.
+Tried to build Python 3.9 env for moad_tools, but conda create is still finding conflicts.
+Fixed broken link in NEMO-Cmd docs; updated it to use Python 3.9 for dev.
+(MOAD)
+
+
+Sat 7-Nov-2020
+^^^^^^^^^^^^^^
+
+Continued fvcom backfilling:
+  after nowcast-r12/07nov20 failed:
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-05"
+  wait for nowcast-r12/05nov20 to finish
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-06"
+(SalishSeaCast)
+
+
+
+Sun 8-Nov-2020
+^^^^^^^^^^^^^^
+
+Continued fvcom backfilling:
+  after nowcast-r12/08nov20 failed:
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-07"
+  wait for nowcast-r12/07nov20 to finish
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-08"
+(SalishSeaCast)
+
+Did more research on OpalStack as replacement for Webfaction; look like a go.
+Created domains-maint repo on GitHub for notes about domains I manage; stared wefaction-opalstack-migration file in it:
+  cd /media/doug/warehouse/43ravens/
+  gh repo create 43ravens/domains-maint --private --enable-wiki=false
+  cd domains-maint
+  git config --local user.email "doug.latornell@43ravens.ca"
+  ln -s ~/dotfiles/ubuntu/kudu/githooks/generic/rescuetime_commit_highlight.sh .git/hooks/post-commit
+Had to do:
+  git config --global init.defaultBranch main
+to ensure that repo got created with its default branch called "main" not "master".
+Had to do:
+  git push --set-upstream origin main
+to make it so that `git push` in Sublime was able to push to GitHub.
+Wondering if using gh CLI tool is really much of a win...
 
 
 
