@@ -6707,9 +6707,7 @@ Continued fvcom backfilling:
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-01"
   wait for forecast-x2/03nov20 to finish
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-11-04"
-
-
-  wait for nowcast-r12/01nov20 to finish
+(SalishSeaCast)
 
 See work journal.
 (Ocean Navigator)
@@ -6778,6 +6776,9 @@ Tried to build Python 3.9 env for moad_tools, but conda create is still finding 
 Fixed broken link in NEMO-Cmd docs; updated it to use Python 3.9 for dev.
 (MOAD)
 
+See work journal.
+(Resilient-C)
+
 
 Sat 7-Nov-2020
 ^^^^^^^^^^^^^^
@@ -6788,7 +6789,6 @@ Continued fvcom backfilling:
   wait for nowcast-r12/05nov20 to finish
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-06"
 (SalishSeaCast)
-
 
 
 Sun 8-Nov-2020
@@ -6815,6 +6815,109 @@ Had to do:
   git push --set-upstream origin main
 to make it so that `git push` in Sublime was able to push to GitHub.
 Wondering if using gh CLI tool is really much of a win...
+
+
+Week 46
+-------
+
+Mon 9-Nov-2020
+^^^^^^^^^^^^^^
+
+Week 35 of UBC work-from-home due to COVID-19
+
+Backfilling fvcom figures:
+  make_plots fvcom nowcast-x2 publish 2020-11-08 --debug
+  make_plots fvcom forecast-x2 publish 2020-11-08 --debug
+forecast-x2 stopped for no apparent reason; manually re-ran make_fvcom_boundary to run again:
+  launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 forecast --run-date 2020-11-09"
+  (SalishSeaCast)
+
+Continued writing doc about running jupyterlab in vnenv on graham et al.
+Started work on slides for discussion about Python pkgs & envs in PythonNotes repo.
+Group mtg; see whiteboard.
+(MOAD)
+
+conda-incubator/setup-miniconda@v2 released; update to it in linkcheck workflows in:
+* UBC-MOAD/moad_tools - done
+* MIDOSS/docs - done
+* SalishSeaCast/NEMO-Cmd - done
+* SalishSeaCast/salishsea-site -done
+
+Used grep to track down what repos have scheduled GitHub Actions workflows in them; trying to solve the mystery of why I have scheduled linkchecks upto 7th day of month, but I can only find 5 repos; finally realized that it is because the first scheduled linkcheck I set up was on 3-Jul - doh!
+
+
+Tue 10-Nov-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+FAL estate work:
+* cancel BMo mastercard (again?)
+
+
+Wed 11-Nov-2020
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Remembrance Day
+
+Washed Topstone bikes; broken spoke and sidewall cut on my rear wheel
+
+
+Thu 12-Nov-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Worked w/ Susan to resolve no oil type issue in random-oil-spills; added temporary output of AIS track origin & destination; ran 100, 1000, and 10_000 spill cases; 10k spills took 3h40m.
+(MIDOSS)
+
+Continued work on slides for discussion about Python pkgs & envs.
+(MOAD)
+
+
+Fri 13-Nov-2020
+^^^^^^^^^^^^^^^
+
+Created and emailed invoice to MEOPAR for ATM Python session.
+
+See work journal.
+(Ocean Navigator)
+
+See work journal.
+(Resilient-C)
+
+Continued work w/ Susan to resolve no oil type issue in random-oil-spills; implemented her idea to filter out Washington facilities with no transfers to that oil type selection logic continues to use more general criteria.
+Ran another 10_000 spill case overnight for Susan to analyze; no missing oil types.
+(MIDOSS)
+
+See biz journal.
+(MEOPAR)
+
+Initiated domain transfer process for Étienne to take over registration of randonneurs.bc.ca.
+
+
+Sat 14-Nov-2020
+^^^^^^^^^^^^^^^
+
+Sent Étienne domain xfer code.
+Changed randonneurs.bc.ca domain DNS pointers on rebel from webfaction to cloudflare DNS servers that Étienne gave me.
+
+Continued learning about OpalStack.
+* Created OpalStack account.
+* see domains-maint notes.
+
+Worked with Susan to debug random-oil-spills based on her analysis of latest 10k spills file.
+(MIDOSS)
+
+
+Sun 15-Nov-2020
+^^^^^^^^^^^^^^^
+
+Continued migration of domains to Opalstack; see domains-maint notes.
+9-Dec is death date for webfaction
+
 
 
 
@@ -6860,7 +6963,7 @@ Add CI workflows to run linkcheck on docs:
     43ravens
       NEMO_Nowcast
       ECget
-**next scheduled action will be for 8th of month**
+**next scheduled action will be for1st, 2nd, then 8th of month**
 
 
 Update cookiecutter-MOAD-pypkg re: migration from hg to git, and requirements.txt in top level directory; probably more issues too.
