@@ -6909,14 +6909,51 @@ Continued learning about OpalStack.
 * see domains-maint notes.
 
 Worked with Susan to debug random-oil-spills based on her analysis of latest 10k spills file.
+Fixed bug re: spill volume when a barge is processed for a cargo spill but is discovered to be carrying a cargo other than oil, so it is changed to a fuel spill.
+Ran a 500 spill case for Susan to check the above bug fix in.
 (MIDOSS)
+
+nowcast-agrif failed
+(SalishSeaCast)
 
 
 Sun 15-Nov-2020
 ^^^^^^^^^^^^^^^
 
+nowcast-agrif failed
+(SalishSeaCast)
+
 Continued migration of domains to Opalstack; see domains-maint notes.
 9-Dec is death date for webfaction
+
+
+Week 47
+-------
+
+Mon 16-Nov-2020
+^^^^^^^^^^^^^^^
+
+Week 36 of UBC work-from-home due to COVID-19
+
+First storm surge alert of the year generated from forecast2 run this morning.
+Deleted Bitbucket Cloud app from SalishSeaCast Slack workspace.
+Investigated nowcast-agrif run failure on 14Nov; u velocity blowup on western boundary; Susan generated new 13nov restart file from which to try starting the run:
+  make_forcing_links orcinus nowncast-agrif 2020-11-14
+  make_forcing_links orcinus nowncast-agrif 2020-11-15
+  make_forcing_links orcinus nowncast-agrif 2020-11-16
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar by Anna Franco re: carbon on line P
+
+Ran another 10_000 spill case overnight for Susan to analyze.
+Deleted Bitbucket Cloud app from MIDOSS Slack workspace.
+(MIDOSS)
+
+See work journal.
+(Ocean Navigator)
 
 
 
@@ -6963,7 +7000,7 @@ Add CI workflows to run linkcheck on docs:
     43ravens
       NEMO_Nowcast
       ECget
-**next scheduled action will be for1st, 2nd, then 8th of month**
+**next scheduled action will be for 1st, 2nd, then 8th of month**
 
 
 Update cookiecutter-MOAD-pypkg re: migration from hg to git, and requirements.txt in top level directory; probably more issues too.
