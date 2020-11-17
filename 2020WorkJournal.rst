@@ -6956,6 +6956,15 @@ See work journal.
 (Ocean Navigator)
 
 
+Tue 17-Nov-2020
+^^^^^^^^^^^^^^^
+
+Work at UBC while Rita is at home; rode in via Kits pool to observe storm surge high water, not very dramatic because storm shifted to lag high tide.
+
+Continued work on slides for discussion about Python pkgs & envs.
+(MOAD)
+
+
 
 
 Add `export CLICOLOR=auto` to bash setup docs for Mac.
