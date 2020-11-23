@@ -6964,6 +6964,121 @@ Work at UBC while Rita is at home; rode in via Kits pool to observe storm surge 
 Continued work on slides for discussion about Python pkgs & envs.
 (MOAD)
 
+CMOS public lecture by David Phillips.
+
+
+Wed 18-Nov-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Neah Bay ssh obs are slow; recovery at ~08:55:
+  * no forecast2 runs, so log didn't roll over
+  * Susan patched together files using obs from
+While doing that recovery, discovered that collect_weather 12 was stalled:
+  * lots of connection refused errors from dd*.weather.gc.ca servers; only got 141 files
+  * note that today is the day ECCC shut down obsolete URLs
+  * recovery started at ~10:15
+      kill collect_weather 12
+      collect_weather 18
+      rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20201118/12/
+      download_weather 12
+Investigated https://slosh.nws.noaa.gov/etsurge2.0/index.php?stid=9443090&datum=MLLW&show=1-1-0-1-1 no API :-( CSV download is generated on the fly in js, I think.
+Slack w/ Becca re: xarray and transforming CanRCM4 datasets from rotated polar coordinates to lon/lat.
+* tricks:
+  * nbviewer to view notebooks
+(SalishSeaCast)
+
+
+Thu 19-Nov-2020
+^^^^^^^^^^^^^^^
+
+collect_weather 06 didn't complete; 156 of 576 files; lots of broken pipe and bad SSL length errors; recover started at ~09:45:
+  kill collect_weather 06
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20201119/06/
+  download_weather 06
+  collect_weather 18
+  wait for forecast2 runs to finish
+  download_weather 12
+DFO-UBC modeling collab mtg:
+* climate model downscaling to Salish Sea
+* RCP2.6 is unobtainable
+* RCP4.5 is lower bound
+* BGC model choice
+(SalishSeaCast)
+
+Continued work on random-oil-spills:
+* Caught up on unit tests and commits to get_oil_type branch
+* Changed AIS track selection bbox expansion from 1 step to 2 to handle extreme case of cruise ship near Victoria terminal the needs ~65% expansion
+* Handled corner case of zero VTE barge track after bbox expansion by dropping VTE weighting from random selection of track(s)
+* Ran another 10k spills test; success :-)
+(MIDOSS)
+
+
+Fri 20-Nov-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Neah Bay ssh obs are slow; recovery at ~10:34:
+  * no forecast2 runs, so log didn't roll over
+  * Susan manually built ssh obs file from etsurge2.0 page
+  * upload_forcing arbutus nowcast+
+  * upload_forcing orcinus nowcast+
+  * upload_forcing graham nowcast+
+  * upload_forcing optimum nowcast+
+nowcast-agrif failed due to missing forcing files; re-ran upload_forcing nowcast+ to fix, then make_forcing_links nowcast-agrif to re-queue run
+Created pinned search on Sentry to better see issues other than those due to ONC data streams offline.
+(SalishSeaCast)
+
+Committed zero-VTE tracks corner case mitigation.
+Backed out Rachael's master branch work-arounds to get results for MEOPAR ASM (after a long git thrash).
+Created PR#2 got integration of get_oil_type() function.
+(MIDOSS)
+
+
+Sat 21-Nov-2020
+^^^^^^^^^^^^^^^
+
+Restarted manager to make notifications from download_weather 1km take effect.
+Neah Bay ssh obs are slow; recovery at ~09:25:
+  * no forecast2 runs, so log didn't roll over
+  * Susan manually built ssh obs file from etsurge2.0 page
+  * upload_forcing arbutus nowcast+
+  * upload_forcing orcinus nowcast+
+  * upload_forcing graham nowcast+
+  * upload_forcing optimum nowcast+
+nowcast-agrif failed due to node communication issue.
+(SalishSeaCast)
+
+Susan visited J&M in White Rock; walked in Bakerview Park, then through Ruth Johnson Park, along beach and back up Fir St.
+
+
+Sun 22-Nov-2020
+^^^^^^^^^^^^^^^
+
+Neah Bay ssh obs are slow; recovery at ~10:45:
+  * no forecast2 runs, so log didn't roll over
+  * Susan manually built ssh obs file from etsurge2.0 page
+  * upload_forcing arbutus nowcast+
+  * upload_forcing graham nowcast+
+  * upload_forcing optimum nowcast+
+  * upload_forcing orcinus nowcast+
+Backfilling nowcast-agrif:
+  wait for 22nov20 to fail
+  make_forcing_links orcinus nowncast-agrif 2020-11-21
+  make_forcing_links orcinus nowncast-agrif 2020-11-22
+(SalishSeaCast)
+
+Continued migration of domains to Opalstack; see domains-maint notes.
+* finished susanallen.ca
+* did database dumps and downloads to local backups on kudu
+
+
+
+
 
 
 
