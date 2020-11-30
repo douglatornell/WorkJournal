@@ -7077,6 +7077,120 @@ Continued migration of domains to Opalstack; see domains-maint notes.
 * did database dumps and downloads to local backups on kudu
 
 
+Week 48
+-------
+
+Mon 23-Nov-2020
+^^^^^^^^^^^^^^^
+
+Week 37 of UBC work-from-home due to COVID-19
+
+Aeron chairs delivered.
+
+Worked on cleaning up uncommitted changes and other stuff in SalishSeaNowcast:
+* add download_weather to slack notification
+* code gardening due to black 19.10b -> 20.8b1, trailing whitespace, imports optimization, etc.
+* update setup-miniconda action in GHA CI workflow re: add-path and set-env command errors
+* Fix unit test missed in earlier commits
+* finished unit tests for download_live_ocean change to use boiler@UW
+* GHA CI workflow confirmed that SalishSeaNowcast env can now be built under Python 3.9 and test suite passes
+Pulled updates on to skookum.
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Phys ocgy seminar by Meredith White of Mook Oysters in Maine.
+
+
+Tue 24-Nov-2020
+^^^^^^^^^^^^^^^
+
+Had trouble doing software updates on kudu due to Canada Ubuntu mirror unreachable; changed to main Ubuntu server; updated and rebooted.
+
+See work journal.
+(Resilient-C)
+
+See work journal.
+(Ocean Navigator)
+
+
+Wed 25-Nov-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+See work journal.
+(Resilient-C)
+
+Upgraded borgbackup on kudu; re-installed it on lizzy.
+
+
+Thu 26-Nov-2020
+^^^^^^^^^^^^^^^
+
+Continued migration of domains to Opalstack; see domains-maint notes.
+* deleted susanallen.ca site on webfaction to stop SSL cert problems notifications
+* migrated douglatornell.ca by rsync-ing content; need to figure out real deployment strategy
+* started migration of sadahome.ca php/static site
+
+Got flu shot at Shoppers on Broadway.
+
+Continued work on slides for discussion about Python pkgs & envs.
+(MOAD)
+
+See work journal.
+(Resilient-C)
+
+Found Mike's email asking for help getting his key into my account on new tikoraluk cluster.
+(GoMSS)
+
+
+Fri 27-Nov-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+collect_weather 00 didn't complete; 144 of 576 files; connection timeout, then lots of broken pipe and bad SSL length errors; recover started at ~09:00:
+  kill collect_weather 00
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20201127/00/
+  download_weather 00
+  collect_weather 18
+  download_weather 06
+  wait for forecast2 runs to finish
+  download_weather 12
+(SalishSeaCast)
+
+Logged into tikoraluk and uploaded my GoMSS public key; sent email to Mike asking for the public key(s) he wants to use there.
+(GoMSS)
+
+Emailed Inform re: exchanging size B Aeron for size C; arranging for swap next week.
+
+See work journal.
+(Ocean Navigator)
+
+Planned merge of get_oil_type() PR and release of moad_tools=20.1; wrote draft update email to Rachael.
+(MIDOSS)
+
+
+Sat 28-Nov-2020
+^^^^^^^^^^^^^^^
+
+Tried to go cycling, but discovered that Garmin wasn't working, and Tommy wouldn't shift to big ring; adjusted front shifter cable tension and tuned front derailleur; got Garmin working with a 10s reset push on the power button.
+
+Confirmed that version bump on moad_tools requires pip install to be effective in random-oil-spills; updated draft email to Rachael re: release.
+(MIDOSS)
+
+Continued migration of domains to Opalstack; see domains-maint notes.
+* researched phpgedview and php supported versions
+
+
+Sun 29-Nov-2020
+^^^^^^^^^^^^^^^
+
+Cycling: River Rd Out & Back (47km)
 
 
 
@@ -7084,6 +7198,7 @@ Continued migration of domains to Opalstack; see domains-maint notes.
 
 Add `export CLICOLOR=auto` to bash setup docs for Mac.
 
+https://linuxize.com/post/getting-started-with-tmux/
 
 update unpublished status of Olson, et al (2020)
 
