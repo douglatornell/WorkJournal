@@ -7193,6 +7193,44 @@ Sun 29-Nov-2020
 Cycling: River Rd Out & Back (47km)
 
 
+December
+========
+
+Week 49
+-------
+
+Mon 30-Nov-2020
+^^^^^^^^^^^^^^^
+
+Week 38 of UBC work-from-home due to COVID-19
+
+See work journal.
+(Ocean Navigator)
+
+Group mtg; see whiteboard.
+Karyn Suchy joined the group.
+(MOAD)
+
+Phys Ocgy seminar by Dan Rob re: Carpenter Lake reservoir turbidity measurements and modeling.
+
+Aeron size C chair swapped in for original size B.
+
+
+Tue 1-Dec-2020
+^^^^^^^^^^^^^^
+
+collect_weather 00 didn't complete; 453 of 576 files; file download failure w/ 404; recover started at ~07:50:
+  kill collect_weather 00
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20201127/00/
+  download_weather 00
+  collect_weather 18
+  download_weather 06
+  wait for forecast2 runs to finish
+
+  download_weather 12
+(SalishSeaCast)
+
+Work at UBC while Rita is at home; drove in to return EOAS office chairs.
 
 
 
