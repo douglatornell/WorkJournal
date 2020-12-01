@@ -7226,11 +7226,29 @@ collect_weather 00 didn't complete; 453 of 576 files; file download failure w/ 4
   collect_weather 18
   download_weather 06
   wait for forecast2 runs to finish
-
   download_weather 12
+SalishSeaCmd maintenance:
+* built new Python 3.9 env on niko
+* changed to 3.9 for dev
+* fixed docs issues
+* updated GHA CI workflow
+* added GHA docs linkcheck workflow w/ schedule to run on 2nd of month
+Worked on arranging on-boarding mtgs w/ Karyn.
 (SalishSeaCast)
 
 Work at UBC while Rita is at home; drove in to return EOAS office chairs.
+
+Merged dependabot PRs re: update requirements to notebook=6.15 in analysis-doug, SoG-Bloomcast-Ensemble, ECget, and cookiecutter-MOAD-pypkg.
+
+Updated conda on niko to 4.9.2.
+
+Upgraded pipx installation of black on niko from 19.10b0 to 20.8b1.
+Upgraded pip installion on niko; it then complained about its black and cookiecutter installation lacking metadata; fixed with pipx reinstall-all.
+
+Started creating MOAD cookiecutter-analysis-repo.
+(MOAD)
+
+
 
 
 
@@ -7273,11 +7291,10 @@ Add CI workflows to run linkcheck on docs:
       SalishSeaNowcast
       docs
       tools
-      SalishSeaCmd
     43ravens
       NEMO_Nowcast
       ECget
-**next scheduled action will be for 1st, 2nd, then 8th of month**
+**next scheduled action will be for 1st, then 8th of month**
 
 
 Update cookiecutter-MOAD-pypkg re: migration from hg to git, and requirements.txt in top level directory; probably more issues too.
