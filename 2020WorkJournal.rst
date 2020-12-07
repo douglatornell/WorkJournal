@@ -7215,6 +7215,9 @@ Phys Ocgy seminar by Dan Rob re: Carpenter Lake reservoir turbidity measurements
 
 Aeron size C chair swapped in for original size B.
 
+See work journal.
+(Ocean Navigator)
+
 
 Tue 1-Dec-2020
 ^^^^^^^^^^^^^^
@@ -7247,6 +7250,80 @@ Upgraded pip installion on niko; it then complained about its black and cookiecu
 
 Started creating MOAD cookiecutter-analysis-repo.
 (MOAD)
+
+Merged PR#2 re: get_oil_type().
+Sent email to Rachael re: updating her repo and env.
+Tagged moad_tools at v20.1 and did a GitHub release on it.
+(MIDOSS)
+
+
+Wed 2-Dec-2020
+^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Monthly project mtg; see whiteboard. Elise presented on Fraser River turbidity measurements and modelling.
+(MIDOSS)
+
+On-boarding mtg w/ Karyn
+(SalishSeaCast)
+
+
+Thu 3-Dec-2020
+^^^^^^^^^^^^^^
+
+collect_weather 00 didn't complete; 144 of 576 files; lots of connection time out, broken pipe & bad SSL length errors; recover started at ~09:15:
+  kill collect_weather 00
+  collect_weather 18
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20201203/00/
+  download_weather 00
+  download_weather 06
+  wait for forecast2 runs to finish
+  download_weather 12
+On-boarding mtg w/ Karyn.
+Investigated daily KeyError exceptions from collect_river_data since late Sep:
+* Sentry issue id SALISHSEA-NOWCAST-5PG
+* Englishman River gauge appears to have failed on 26-Sep
+(SalishSeaCast)
+
+Continued work on MOAD cookiecutter-analysis-repo.
+Started GitHub notebooks README page in MOAD docs.
+(MOAD)
+
+
+Fri 4-Dec-2020
+^^^^^^^^^^^^^^
+
+Finished GitHub notebooks README page in MOAD docs.
+Sent scheduling doodle for pkgs & envs sessions.
+(MOAD)
+
+Read EOAS strategic plan executive summary.
+Read grad students survey results.
+
+Updated Pycharm on kudu to 2020.3.
+
+See work journal.
+(Ocean Navigator)
+
+
+Sat 5-Dec-2020
+^^^^^^^^^^^^^^
+
+Migrated sadahome.ca email addresses; dropped many; see domains-maint notes.
+
+Took photo w/ Susan overlooking English Bay for Christmas greetings.
+
+
+Sun 6-Dec-2020
+^^^^^^^^^^^^^^
+
+Processed Christmas greetings photo to send to Aunt Grace.
+
+Continued migration of domains to Opalstack; see domains-maint notes.
+* finished migration of sadahome php/static site
+
 
 
 
