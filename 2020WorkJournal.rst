@@ -7325,6 +7325,123 @@ Continued migration of domains to Opalstack; see domains-maint notes.
 * finished migration of sadahome php/static site
 
 
+Week 50
+-------
+
+Mon 7-Dec-2020
+^^^^^^^^^^^^^^
+
+Week 39 of UBC work-from-home due to COVID-19
+
+Neah Bay ssh obs are slow; recovery at ~08:00:
+  * no forecast2 runs, so log didn't roll over
+  * Susan manually built ssh obs file from etsurge2.0 page
+  * upload_forcing arbutus nowcast+
+  * upload_forcing graham nowcast+
+  * upload_forcing optimum nowcast+
+  * upload_forcing orcinus nowcast+
+  * collided with automation start of nowcast runs so ended up with 2 nowcasts running; killed both and stared everything fresh with new upload_forcing arbutus nowcast+
+Helped Becca w/ her downscaling project access to 2016 year of HRDPS.
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+Buffed Git configuration section, and added it to Getting Started section.
+Continued work on cookiecutter-analysis-repo, and started writing docs for it.
+(MOAD)
+
+Phys Ocgy seminar by Jen Jackson: A Tale of 4 Fjords
+
+
+Tue 8-Dec-2020
+^^^^^^^^^^^^^^
+
+collect_weather 18 yesterday didn't complete; 432 of 576 files; lots of connection time out, broken pipe & bad SSL length errors; recover started at ~08:05:
+  pkill collect_weather 18
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20201207/18/
+  download_weather 18 2.5km
+  collect_weather 18 2.5km
+  download_weather 00 2.5km
+  download_weather 06 2.5km
+  wait for forecast2 to finish
+  download_weather 12 2.5km
+(SalishSeaCast)
+
+Pandas=1.2.0rc0 notes that xlrd & xlwt are no longer maintained and breaking slowly; use openpyxl instead; relatedly support for pre-2020 .xls files is fading away
+
+Compute Canada announced availability of StdEnv/2020 software stack that will become standard by Apr-2021; new compiler versions and OpenMPI version; need to test builds of XIOS & NEMO as well as Python pkgs & envs
+
+GitHub Universe keynote:
+* Discussions in public beta
+* Auto-merge PRs
+* Worflow actions visualizer
+* Dark mode
+
+See work journal.
+(Ocean Navigator)
+
+
+Wed 9-Dec-2020
+^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+GitHub Universe:
+Getting Traction with GitHub Actions, Brian Douglas, dev advocate:
+* workflow automation
+* lighthouse scores: performance + accessibility; jakejarvis/lighthouse-action
+* sdras/awesome-actions
+Observability: superpowers for developers:
+* honecomb.io
+* o11y == Observability
+
+
+Thu 10-Dec-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Continued work on docs for using cookiecutter-analysis-repo.
+(MOAD)
+
+DFO-UBC modeling mtg:
+* Dustin showed FVCOM hydrid generalized coords for  steep topo in Bute Inlet
+* Haley showed HRDPS 1km vs. obs in Discovery Islands; still biased, but winds maybe too strong instead of too weak
+* Laura showed FVCOM Discovery Is model w/ HRPDS 1km vs 2.5km, and SSC boundary water levels vs. tide harmonics; little difference due to 1km!; SSC levels are better, but blending de-tided SSC w/ harmonics will probably be better still
+On-boarding mtg w/ Karyn: git & Slack.
+(SalishSeaCast)
+
+
+Fri 11-Dec-2020
+^^^^^^^^^^^^^^^
+
+Pulled in Susan's addition of SUSANPROJECT envvar for optimum research runs under automation; helped her fix unit test failures that flowed from that change.
+On-boarding mtg w/ Karyn: analysis repo & Jupyter.
+(SalishSeaCast)
+
+
+Sat 12-Dec-2020
+^^^^^^^^^^^^^^^
+
+Drove Susan to White Rock to visit M; walked in Ruth Johnston Park.
+
+
+Sun 13-Dec-2020
+^^^^^^^^^^^^^^^
+
+Learned of Dan McQuire's death due to COVID-19.
+
+Created empty 2021 gnucash sqlite3 file, exported accounts from 2020 to csv and imported them, tnen started edited accounts for 2021:
+* added stocks, ETFs & funds to securities database
+* created non-registered stock, ETF & fund accounts
+
+Renewed EGBC membership; declared 97 hr of PD:
+* 50h professional practice
+* 30h informal
+* 2h mentoring Becca
+* 15h presentations (MSC datamart invited)
+
 
 
 
