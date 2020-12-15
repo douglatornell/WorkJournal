@@ -7420,6 +7420,9 @@ Pulled in Susan's addition of SUSANPROJECT envvar for optimum research runs unde
 On-boarding mtg w/ Karyn: analysis repo & Jupyter.
 (SalishSeaCast)
 
+Continued work on slides for discussion about Python pkgs & envs.
+(MOAD)
+
 
 Sat 12-Dec-2020
 ^^^^^^^^^^^^^^^
@@ -7481,6 +7484,20 @@ PyCharm FastAPI webinar:
 * heavily leverages type hints
 * uses PyDantic for data models; PyCharm has optional PyDantic plugin
 * arg in favour of chameleon; value HTML
+
+Work at UBC while Rita is at home.
+
+Investigated HDF5 file locking issue on lox more deeply and can't figure out why lox is different; agreed with Elise's plan to add::
+  if [ "$HOSTNAME" = lox ]; then
+      export HDF5_USE_FILE_LOCKING=FALSE
+  fi
+to Karyn's .bashrc.
+Continued work on slides for discussion about Python pkgs & envs.
+(MOAD)
+
+Reviewed intro notebooks; discussed dropping netCDF4 use w/ Susan - agreed.
+Discussed w/ Susan restructuring of tools repo, or moving SalishSeaTools to its own repo.
+(SalishSeaCast)
 
 
 Executing transaction: / Enabling notebook extension jupyter-js-widgets/extension...
