@@ -7443,6 +7443,122 @@ Renewed EGBC membership; declared 97 hr of PD:
 * 15h presentations (MSC datamart invited)
 
 
+Week 51
+-------
+
+Mon 14-Dec-2020
+^^^^^^^^^^^^^^^
+
+Week 40 of UBC work-from-home due to COVID-19
+
+See work journal.
+(Ocean Navigator)
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Helped Elise & Karyn get their collab envs set up on lox; Elise reported a problem w/ netCDF4.dataset() on lox: OSError: [Errno -101] NetCDF: HDF error; investigation:
+* conda env create -f  /ocean/ksuchy/MOAD/analysis-karyn/notebooks/environment.yaml
+(SalishSeaCast)
+
+
+Tue 15-Dec-2020
+^^^^^^^^^^^^^^^
+
+PyCharm FastAPI webinar:
+* Michael Kennedy
+* on par w/ Flask, Django, Pyramid re: tech & docs
+* Features:
+  * async/await
+  * Sebastian Ramerez
+  * ASGI servers in place of WSGI
+  * OpenAPI docs generation
+  * type hints -> PyCharm plugin integration
+  * pytest
+* uvicorn == fast ASGI server?
+* see awesome-asgi page
+* Marc Anderssen It's Time to Build article
+* heavily leverages type hints
+* uses PyDantic for data models; PyCharm has optional PyDantic plugin
+* arg in favour of chameleon; value HTML
+
+
+Executing transaction: / Enabling notebook extension jupyter-js-widgets/extension...
+      - Validating: OK
+
+done
+Installing pip dependencies: failed
+
+# >>>>>>>>>>>>>>>>>>>>>> ERROR REPORT <<<<<<<<<<<<<<<<<<<<<<
+
+    Traceback (most recent call last):
+      File "/home/dlatorne/miniconda3/lib/python3.7/site-packages/conda/exceptions.py", line 1079, in __call__
+        return func(*args, **kwargs)
+      File "/home/dlatorne/miniconda3/lib/python3.7/site-packages/conda_env/cli/main.py", line 80, in do_call
+        exit_code = getattr(module, func_name)(args, parser)
+      File "/home/dlatorne/miniconda3/lib/python3.7/site-packages/conda_env/cli/main_create.py", line 118, in execute
+        result[installer_type] = installer.install(prefix, pkg_specs, args, env)
+      File "/home/dlatorne/miniconda3/lib/python3.7/site-packages/conda_env/installers/pip.py", line 70, in install
+        return _pip_install_via_requirements(*args, **kwargs)
+      File "/home/dlatorne/miniconda3/lib/python3.7/site-packages/conda_env/installers/pip.py", line 48, in _pip_install_via_requirements
+        delete=False)
+      File "/home/dlatorne/miniconda3/lib/python3.7/site-packages/conda/_vendor/auxlib/compat.py", line 83, in Utf8NamedTemporaryFile
+        dir=dir, delete=delete)
+      File "/home/dlatorne/miniconda3/lib/python3.7/tempfile.py", line 547, in NamedTemporaryFile
+        (fd, name) = _mkstemp_inner(dir, prefix, suffix, flags, output_type)
+      File "/home/dlatorne/miniconda3/lib/python3.7/tempfile.py", line 258, in _mkstemp_inner
+        fd = _os.open(file, flags, 0o600)
+    PermissionError: [Errno 13] Permission denied: '/home/eolson/pyCode/EnvironmentsDoc/condaenv.ns0_4eju.requirements.txt'
+
+`$ /home/dlatorne/miniconda3/bin/conda-env create -f /home/eolson/pyCode/EnvironmentsDoc/py39.yml`
+
+  environment variables:
+                 CIO_TEST=<not set>
+  CONDA_AUTO_UPDATE_CONDA=false
+                CONDA_EXE=/home/dlatorne/miniconda3/bin/conda
+         CONDA_PYTHON_EXE=/home/dlatorne/miniconda3/bin/python
+               CONDA_ROOT=/home/dlatorne/miniconda3
+              CONDA_SHLVL=0
+           CURL_CA_BUNDLE=<not set>
+                     PATH=/home/dlatorne/miniconda3/bin:/home/dlatorne/miniconda3/condabin:/home
+                          /dlatorne/miniconda3/bin:/home/dlatorne/bin:/home/dlatorne/.local/bin:
+                          /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/game
+                          s:/usr/local/games:/snap/bin:/usr/bin/X11
+       REQUESTS_CA_BUNDLE=<not set>
+            SSL_CERT_FILE=<not set>
+
+     active environment : None
+            shell level : 0
+       user config file : /home/dlatorne/.condarc
+ populated config files : /home/dlatorne/.condarc
+          conda version : 4.9.1
+    conda-build version : not installed
+         python version : 3.7.3.final.0
+       virtual packages : __cuda=6.5=0
+                          __glibc=2.23=0
+                          __unix=0=0
+                          __archspec=1=x86_64
+       base environment : /home/dlatorne/miniconda3  (writable)
+           channel URLs : https://conda.anaconda.org/conda-forge/linux-64
+                          https://conda.anaconda.org/conda-forge/noarch
+                          https://repo.anaconda.com/pkgs/main/linux-64
+                          https://repo.anaconda.com/pkgs/main/noarch
+                          https://repo.anaconda.com/pkgs/r/linux-64
+                          https://repo.anaconda.com/pkgs/r/noarch
+          package cache : /home/dlatorne/miniconda3/pkgs
+                          /home/dlatorne/.conda/pkgs
+       envs directories : /home/dlatorne/conda_envs
+                          /home/dlatorne/miniconda3/envs
+                          /home/dlatorne/.conda/envs
+               platform : linux-64
+             user-agent : conda/4.9.1 requests/2.24.0 CPython/3.7.3 Linux/4.4.0-174-generic ubuntu/16.04.6 glibc/2.23
+                UID:GID : 1557:210
+             netrc file : None
+           offline mode : False
+
+
+An unexpected error has occurred. Conda has prepared the above report.
+
 
 
 
