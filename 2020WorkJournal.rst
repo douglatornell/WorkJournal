@@ -7492,7 +7492,7 @@ Investigated HDF5 file locking issue on lox more deeply and can't figure out why
       export HDF5_USE_FILE_LOCKING=FALSE
   fi
 to Karyn's .bashrc.
-Continued work on slides for discussion about Python pkgs & envs.
+Continued work on slides for discussion about Python pkgs & envs; reviewed and finalized w/ Susan.
 (MOAD)
 
 Reviewed intro notebooks; discussed dropping netCDF4 use w/ Susan - agreed.
@@ -7500,81 +7500,85 @@ Discussed w/ Susan restructuring of tools repo, or moving SalishSeaTools to its 
 (SalishSeaCast)
 
 
-Executing transaction: / Enabling notebook extension jupyter-js-widgets/extension...
-      - Validating: OK
+Wed 16-Dec-2020
+^^^^^^^^^^^^^^^
 
-done
-Installing pip dependencies: failed
+See work journal.
+(Ocean Navigator)
 
-# >>>>>>>>>>>>>>>>>>>>>> ERROR REPORT <<<<<<<<<<<<<<<<<<<<<<
-
-    Traceback (most recent call last):
-      File "/home/dlatorne/miniconda3/lib/python3.7/site-packages/conda/exceptions.py", line 1079, in __call__
-        return func(*args, **kwargs)
-      File "/home/dlatorne/miniconda3/lib/python3.7/site-packages/conda_env/cli/main.py", line 80, in do_call
-        exit_code = getattr(module, func_name)(args, parser)
-      File "/home/dlatorne/miniconda3/lib/python3.7/site-packages/conda_env/cli/main_create.py", line 118, in execute
-        result[installer_type] = installer.install(prefix, pkg_specs, args, env)
-      File "/home/dlatorne/miniconda3/lib/python3.7/site-packages/conda_env/installers/pip.py", line 70, in install
-        return _pip_install_via_requirements(*args, **kwargs)
-      File "/home/dlatorne/miniconda3/lib/python3.7/site-packages/conda_env/installers/pip.py", line 48, in _pip_install_via_requirements
-        delete=False)
-      File "/home/dlatorne/miniconda3/lib/python3.7/site-packages/conda/_vendor/auxlib/compat.py", line 83, in Utf8NamedTemporaryFile
-        dir=dir, delete=delete)
-      File "/home/dlatorne/miniconda3/lib/python3.7/tempfile.py", line 547, in NamedTemporaryFile
-        (fd, name) = _mkstemp_inner(dir, prefix, suffix, flags, output_type)
-      File "/home/dlatorne/miniconda3/lib/python3.7/tempfile.py", line 258, in _mkstemp_inner
-        fd = _os.open(file, flags, 0o600)
-    PermissionError: [Errno 13] Permission denied: '/home/eolson/pyCode/EnvironmentsDoc/condaenv.ns0_4eju.requirements.txt'
-
-`$ /home/dlatorne/miniconda3/bin/conda-env create -f /home/eolson/pyCode/EnvironmentsDoc/py39.yml`
-
-  environment variables:
-                 CIO_TEST=<not set>
-  CONDA_AUTO_UPDATE_CONDA=false
-                CONDA_EXE=/home/dlatorne/miniconda3/bin/conda
-         CONDA_PYTHON_EXE=/home/dlatorne/miniconda3/bin/python
-               CONDA_ROOT=/home/dlatorne/miniconda3
-              CONDA_SHLVL=0
-           CURL_CA_BUNDLE=<not set>
-                     PATH=/home/dlatorne/miniconda3/bin:/home/dlatorne/miniconda3/condabin:/home
-                          /dlatorne/miniconda3/bin:/home/dlatorne/bin:/home/dlatorne/.local/bin:
-                          /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/game
-                          s:/usr/local/games:/snap/bin:/usr/bin/X11
-       REQUESTS_CA_BUNDLE=<not set>
-            SSL_CERT_FILE=<not set>
-
-     active environment : None
-            shell level : 0
-       user config file : /home/dlatorne/.condarc
- populated config files : /home/dlatorne/.condarc
-          conda version : 4.9.1
-    conda-build version : not installed
-         python version : 3.7.3.final.0
-       virtual packages : __cuda=6.5=0
-                          __glibc=2.23=0
-                          __unix=0=0
-                          __archspec=1=x86_64
-       base environment : /home/dlatorne/miniconda3  (writable)
-           channel URLs : https://conda.anaconda.org/conda-forge/linux-64
-                          https://conda.anaconda.org/conda-forge/noarch
-                          https://repo.anaconda.com/pkgs/main/linux-64
-                          https://repo.anaconda.com/pkgs/main/noarch
-                          https://repo.anaconda.com/pkgs/r/linux-64
-                          https://repo.anaconda.com/pkgs/r/noarch
-          package cache : /home/dlatorne/miniconda3/pkgs
-                          /home/dlatorne/.conda/pkgs
-       envs directories : /home/dlatorne/conda_envs
-                          /home/dlatorne/miniconda3/envs
-                          /home/dlatorne/.conda/envs
-               platform : linux-64
-             user-agent : conda/4.9.1 requests/2.24.0 CPython/3.7.3 Linux/4.4.0-174-generic ubuntu/16.04.6 glibc/2.23
-                UID:GID : 1557:210
-             netrc file : None
-           offline mode : False
+Part 1 of Python pkgs & envs session:
+* Elise showed how to add Python from a conda env to the list of kernels that Jupyter shows:
+    python -m ipykernel install --user --name env-name --display-name "Python (env-name)"
+* Rachael & Karyn wanted a way to activate an env other than base when new terminal session start:
+    conda config --set auto_activate_base false <--- once
+    add `conda activate env-name` to .bashrc after conda initialization block
+(MOAD)
 
 
-An unexpected error has occurred. Conda has prepared the above report.
+Thu 17-Dec-2020
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Added notes discussions during from part 1 of  Python pkgs & envs session to slides notebook.
+Part 2 of Python pkgs & envs session:
+(MOAD)
+
+collect_weather 12 didn't complete; 575 of 576 files; 1 connection time out, then lots of broken pipe & bad SSL length errors; recover started at ~11:40:
+* CMC_hrdps_west_UGRD_TGL_10_ps2.5km_2020121712_P048-00.grib2 is missing
+  pkill collect_weather 12
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20201217/12/
+  collect_weather 18 2.5km
+  download_weather 12 2.5km
+Checked GitHub for sarracenia issues/updates and found issues related to connections and broken pipes, and new releases:
+* TODO: update sarracenia-env
+collect_weather 18 didn't complete; 527 of 576 files; 1 connection time out, then lots of broken pipe & bad SSL length errors; recover started at ~15:15:
+
+  pkill collect_weather 18
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20201217/18/
+  collect_weather 00 2.5km
+(SalishSeaCast)
+
+
+Fri 18-Dec-2020
+^^^^^^^^^^^^^^^
+
+Updated sarracenia env and client on skookum in hopes of improving reliability and connection timeout recovery:
+* researched envvars in conda env description files
+* created environment-sarracenia.yaml that includes envvars except SENTRY_DSN
+* test build of new env on kudu gave Python 3.9.1 and sarracenia 2.20.8.post1
+* skookum:
+  * updated conda to 4.9.2 on skookum
+  * did conda export of present sarracenia-env
+  * stopped sr_subscribe processes via supervisorctl
+  * removed sarracenia env
+  * created new sarracenia env
+  * started sr_subscribe processes via supervisorctl
+  * confirmed that HRDPS 2.5km 18Z forecast downloaded properly
+Updated SalishSeaNowcast dev env on kudu to Python 3.9 and almost all pkgs from conda-forge; only pkgs from PyPI are: python-hglib, pytest-randomly, angles.
+Fixed broken and redirected links in SalishSeaNowcast docs; added docs-linkcheck GHA workflow w/ scheduled run on 1st day of the month.
+(SalishSeaCast)
+
+
+Sat 19-Dec-2020
+^^^^^^^^^^^^^^^
+
+Started updating make_readme scripts and READMEs in SalishSeaNowcast notebooks directories.
+(SalishSeaCast)
+
+
+Sun 20-Dec-2020
+^^^^^^^^^^^^^^^
+
+Cycling: River Rd out and back mid-afternoon to past solstice sunset (48km)
+
+
+
+jupyter kernelspec uninstall unwanted-kernel
+
+
+
 
 
 
@@ -7615,13 +7619,12 @@ Add CI workflows to run linkcheck on docs:
       MOHID-Cmd (need to merge add-make-hdf5 branch first)
       Make-MIDOSS-Forcing
     SalishSeaCast
-      SalishSeaNowcast
       docs
       tools
     43ravens
       NEMO_Nowcast
       ECget
-**next scheduled action will be for 1st, then 8th of month**
+**next scheduled action will be for 8th of month**
 
 
 Update cookiecutter-MOAD-pypkg re: migration from hg to git, and requirements.txt in top level directory; probably more issues too.
