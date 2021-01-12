@@ -15,7 +15,7 @@ This journal is about:
 January
 =======
 
-Week 1
+Week 0
 ------
 
 Fri 1-Jan-2021
@@ -24,11 +24,7 @@ Fri 1-Jan-2021
 Week 42 of UBC work-from-home due to COVID-19
 
 
-Sat 2-Jan-2021
-^^^^^^^^^^^^^^
-
-
-Week 2
+Week 1
 ------
 
 Mon 4-Jan-2021
@@ -126,6 +122,23 @@ Sun 10-Jan-2021
 ^^^^^^^^^^^^^^^
 
 Finances and Minecraft :-)
+
+
+Week 2
+------
+
+Mon 11-Jan-2021
+^^^^^^^^^^^^^^^
+
+Finished work on a module to calc day averages of phytos for 6 mo periods for Tereza; PythonNotes/xarray-dayavg/ but decided to push it quietly.
+Continued computing on-boarding w/ Keegan & Aline; still auth problems on hake/halibut/salish.
+nowcast-agrif run failed due to orted issue; recovery at ~17:30:
+  make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-01-11
+    job started, but now output; more orted issues?
+(SalishSeaCast)
+
+
+
 
 
 
