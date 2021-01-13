@@ -138,6 +138,22 @@ nowcast-agrif run failed due to orted issue; recovery at ~17:30:
 (SalishSeaCast)
 
 
+Tue 12-Jan-2021
+^^^^^^^^^^^^^^^
+
+Work at UBC while Rita is at home.
+
+
+nowcast-agrif backfilling:
+  make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-01-11
+  make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-01-12
+    failed; retried
+
+Finished computing on-boarding w/ Keegan & Aline; they have to use VPN to access hake/halibut/salish.
+(SalishSeaCast)
+
+
+Add Git editor commands link to docs.
 
 
 
