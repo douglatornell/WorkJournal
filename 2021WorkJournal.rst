@@ -143,17 +143,89 @@ Tue 12-Jan-2021
 
 Work at UBC while Rita is at home.
 
-
 nowcast-agrif backfilling:
   make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-01-11
   make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-01-12
-    failed; retried
-
+    failed; retried; failed
 Finished computing on-boarding w/ Keegan & Aline; they have to use VPN to access hake/halibut/salish.
 (SalishSeaCast)
 
 
+Wed 13-Jan-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Helped Karyn & Elise sort out ssh key issue re: cloning analysis-karyn to /data; due to ssh from lox to lox; also helped Elise craft email re: Karyn's loss of access to /ocean/ksuchy/.
+Discovered that forecast got stuck; recovery:
+  killed xios; nowcast-green started
+nowcast-agrif backfilling:
+  make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-01-12
+    failed
+  emailed Mark
+(SalishSeaCast)
+
+
+Thu 14-Jan-2021
+^^^^^^^^^^^^^^^
+
+No NEMO or wwatch3 forecast2 runs due to forecast failure yesterday
+DFO-IOS modeling collab mtg; Becca presented CANRMC4 downscaling work; discussion of Ambers's proposal.
+(SalishSeaCast)
+
+See work journal.
+(Ocean Navigator)
+
+
+Fri 15-Jan-2021
+^^^^^^^^^^^^^^^
+
+Helped Birgit w/ GitHub personal access token vs. ssh key question.
+Pinged Elise re: discussion classes, inheritance & dependency injection.
+Continued 2021 year rollover updates on repos; see https://salishseacast.slack.com/files/TFR25L4LU/F01HTF1MCBD
+(MOAD)
+
+See work journal.
+(Ocean Navigator)
+
+Emailed Mark@orciunus re: pod29 reservation; his reply explains how reservation interacts with scheduler; need to add QDR partition directive for best performance; resumed backfilling:
+  make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-01-12
+  make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-01-13
+Started 2021 year rollover updates on repos; see https://salishseacast.slack.com/files/TFR25L4LU/F01HTF1MCBD:
+  * skipped docs due to WIP re: linkcheck (I think)
+  * deleted >2.1M lines in >400 files of run results that had been committed to SS-run-sets, reducing working files storage by >50% to 112M
+Updated salishsea-site env on kudu and requirements.txt to address crytography pkg security warning; dropped -e pkgs from requirements.txt so that Dependabot can generate PRs for future updates.
+(SalishSeaCast)
+
+Started 2021 year rollover updates on repos; see https://salishseacast.slack.com/files/TFR25L4LU/F01HTF1MCBD
+(MOAD)
+
+Susan's parents received 1st doses Pfizer/BioNGen vaccine.
+
+
+Sat 16-Jan-2021
+^^^^^^^^^^^^^^^
+
+Continued nowncast-agrif backfilling:
+  make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-01-14
+  make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-01-15
+  make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-01-16
+(SalishSeaCast)
+
+Drove to White Rock for Susan to visit J&M; walked in Ruth Johnson Park.
+
+
+Sun 17-Jan-2021
+^^^^^^^^^^^^^^^
+
+FAL estate work: start prep for estate trust 19/20 income tax
+
+
+
 Add Git editor commands link to docs.
+
+Update cookiecutter-MOAD-pypkg re: hg -> git
 
 
 
