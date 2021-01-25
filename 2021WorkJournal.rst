@@ -130,6 +130,8 @@ Week 2
 Mon 11-Jan-2021
 ^^^^^^^^^^^^^^^
 
+Week 44 of UBC work-from-home due to COVID-19
+
 Finished work on a module to calc day averages of phytos for 6 mo periods for Tereza; PythonNotes/xarray-dayavg/ but decided to push it quietly.
 Continued computing on-boarding w/ Keegan & Aline; still auth problems on hake/halibut/salish.
 nowcast-agrif run failed due to orted issue; recovery at ~17:30:
@@ -221,13 +223,140 @@ Sun 17-Jan-2021
 
 FAL estate work: start prep for estate trust 19/20 income tax
 
+nowcast-agrif run stopped
+(SalishSeaCast)
 
 
-Add Git editor commands link to docs.
+Week 3
+------
+
+Mon 18-Jan-2021
+^^^^^^^^^^^^^^^
+
+Week 45 of UBC work-from-home due to COVID-19
+
+FAL estate work: continued prep for estate trust 19/20 income tax
+
+Helped Susan update OS on Glago Pro from 19.10 to 20.10 via 20.04.
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Investigated 17jan nowncast-agrif failure; nothing obvious, so re-ran:
+  make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-01-17
+(SalishSeaCast)
+
+
+Tue 19-Jan-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Emailed System76 re: support for custom install location for flatpak pkgs re: recent filling of $HOME.
+
+
+Wed 20-Jan-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Investigated upload_forcing to graham failures for forecast2 and turbidity; also reproduced for nowcast+; decided the errors are probably transient graham file system issues
+(SalishSeaCast)
+
+Researched removal of accidentally committed large files from git repos: 2 options: immediate and commit history:
+  1) git rm --cached gitand_file; git commit --amend -CHEAD
+  2) git filter-branch ...
+see https://docs.github.com/en/github/managing-large-files/removing-files-from-a-repositorys-history
+Fixed linkcheck failure and a couple of minor TODOs in MOAD docs.
+(MOAD)
+
+D&D w/ Allens.
+
+
+Thu 21-Jan-2021
+^^^^^^^^^^^^^^^
+
+nowncast-agrif stopped 11 minutes into run; nothing obvious in *ocean.output; "SISTER_EOF attempting to communicate with sister MOM's" in stderr; re-ran
+Started work on generating day-average files for nowcast-green.201905 results:
+* profiled ncra on skookum:
+    naive:
+      skookum:01jan14$ time ncra -4 -L4 -O SalishSea_1h_20140101_20140101_grid_T.nc /tmp/SalishSea_1d_20140101_20140101_grid_T.nc
+      real  0m29.276s
+      user  0m13.576s
+      sys 0m4.188s
+    select variables (but all extra vars linke bounds_lon remain in output)
+      skookum:01jan14$ time ncra -4 -L4 -O -v sossheig,votemper,vosaline SalishSea_1h_20140101_20140101_grid_T.nc /tmp/SalishSea_1d_20140101_20140101_grid_T.nc
+      real  0m16.570s
+      user  0m12.132s
+      sys 0m3.892s
+    carp_T:
+      skookum:01jan14$ time ncra -4 -L4 -O -v PAR,sigma_theta,e3t,Fraser_tracer,dissolved_inorganic_carbon,total_alkalinity,dissolved_oxygen SalishSea_1h_20140101_20140101_carp_T.nc /tmp/SalishSea_1d_20140101_20140101_carp_T.nc
+      real  1m1.229s
+      user  0m41.204s
+      sys 0m13.372s
+    ptrc_T w/o variable selection:
+      skookum:01jan14$ time ncra -4 -L4 -O SalishSea_1h_20140101_20140101_ptrc_T.nc /tmp/SalishSea_1d_20140101_20140101_ptrc_T.nc
+      real  1m28.905s
+      user  1m6.196s
+      sys 0m21.536s
+    ptrc_T w/ variable selection:
+      skookum:01jan14$ time ncra -4 -L4 -O -v nitrate,ammonium,silicon,diatoms,flagellates,ciliates,microzooplankton,dissolved_organic_nitrogen,particulate_organic_nitrogen,biogenic_silicon,mesozooplankton SalishSea_1h_20140101_20140101_ptrc_T.nc /tmp/SalishSea_1d_20140101_20140101_ptrc_T.nc
+      real  1m32.693s
+      user  1m8.700s
+      sys 0m22.724s
+* profiled on salish:
+    salish:01jan14$ time ncra -4 -L4 -O SalishSea_1h_20140101_20140101_grid_T.nc SalishSea_1d_20140102_20140102_grid_T.nc
+    real  0m20.159s
+    user  0m12.960s
+    sys 0m7.188s
+* Variables to day average:
+  * grid_T:
+      sossheig,votemper,vosaline
+  * carp_T:
+      AR,sigma_theta,e3t,Fraser_tracer,dissolved_inorganic_carbon,total_alkalinity,dissolved_oxygen
+  * ptrc_T:
+      nitrate,ammonium,silicon,diatoms,flagellates,ciliates,microzooplankton,dissolved_organic_nitrogen,particulate_organic_nitrogen,biogenic_silicon,mesozooplankton
+* worked out most details and did some timing of xarray/dask implementation in an untitled notebook in PythonNotes; xarray/dask is faster than ncra: ~60s/day for 3 files
+(SalishSeaCast)
+
+See work journal.
+(Ocean Navigator)
+
+Helped Tereza diagnose Jupyter client drops; recommended ServerAliveInterval in .ssh/config.
+(MOAD)
+
+
+Fri 22-Jan-2021
+^^^^^^^^^^^^^^^
+Continued work on generating day-average files for nowcast-green.201905 results:
+* moved work to analysis-doug/notebooks/hindcast-dayavgs
+* added lots of narrative and more performance measurements to notebook
+(SalishSeaCast)
+
+See work journal.
+(Ocean Navigator)
+
+
+Sat 23-Jan-2021
+^^^^^^^^^^^^^^^
+
+Walked in Pacific Spirit Park from SWM & Camosun: Salish, Imperial, Hemlock, St. Georges trails
+
+Read Django tutorial with the idea of re-implementing cyclelog instead of migrating it through many Django releases.
+
+
+Sun 24-Jan-2021
+^^^^^^^^^^^^^^^
+
+Started working through Django tutorial.
+Experimented with pre-commit hook tool because PyCharm pre-commit hook plugin appears to be un-maintained.
+
+
+
 
 Update cookiecutter-MOAD-pypkg re: hg -> git
-
-
 
 
 jupyter kernelspec uninstall unwanted-kernel
@@ -235,8 +364,6 @@ jupyter kernelspec uninstall unwanted-kernel
 
 
 TODO:
-
-Add `export CLICOLOR=auto` to bash setup docs for Mac.
 
 https://linuxize.com/post/getting-started-with-tmux/
 
