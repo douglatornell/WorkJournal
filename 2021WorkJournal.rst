@@ -354,6 +354,14 @@ Started working through Django tutorial.
 Experimented with pre-commit hook tool because PyCharm pre-commit hook plugin appears to be un-maintained.
 
 
+Tue 26-Jan-2021
+^^^^^^^^^^^^^^^
+
+Work at UBC while Rita is at home.
+
+Implemented CLI version of hindcast_dayavgs and started running it for 2014 in tmux session on salish.
+(SalishSeaCast)
+
 
 
 Update cookiecutter-MOAD-pypkg re: hg -> git
