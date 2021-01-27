@@ -354,6 +354,59 @@ Started working through Django tutorial.
 Experimented with pre-commit hook tool because PyCharm pre-commit hook plugin appears to be un-maintained.
 
 
+Week 4
+------
+
+Mon 25-Jan-2021
+^^^^^^^^^^^^^^^
+
+Week 46 of UBC work-from-home due to COVID-19
+
+Re-ran a selection of the timing tests in the hindcast-dayavgs-dev notebook with engine="h5netcdf" and found (as usual) that it is *not* faster than netcdf4 (despite the assertion in the xarray docs).
+Investigated yesterday's nowcast-agrif failure: inifiband error; re-ran 24jan & 25jan.
+Added narrative re: writing netCDF4 files, and buffed sketch of stand-alone script.
+(SalishSeaCast)
+
+Collected OS & git version info from machines with:
+  for host in char chum cod coho hake halibut herring lox sable salish skookum smelt tyee; \
+    do echo -n "$host: "; \
+    ssh $host "tail -1 /etc/lsb-release"; \
+    ssh $host "git --version"; \
+  done
+Result:
+  char: DISTRIB_DESCRIPTION="Ubuntu 16.04.7 LTS"
+    bash: git: command not found
+  chum: DISTRIB_DESCRIPTION="Ubuntu 16.04.6 LTS"
+    git version 2.7.4
+  cod: ssh: connect to host cod.eos.ubc.ca port 22: Connection timed out
+  ssh: connect to host cod.eos.ubc.ca port 22: Connection timed out
+  coho: DISTRIB_DESCRIPTION="Ubuntu 14.04.5 LTS"
+    git version 1.9.1
+  hake: DISTRIB_DESCRIPTION="Ubuntu 16.04.7 LTS"
+    git version 2.7.4
+  halibut: DISTRIB_DESCRIPTION="Ubuntu 14.04.6 LTS"
+    git version 1.9.1
+  herring: ssh: connect to host herring.eos.ubc.ca port 22: Connection timed out
+  ssh: connect to host herring.eos.ubc.ca port 22: Connection timed out
+  lox: DISTRIB_DESCRIPTION="Ubuntu 16.04.6 LTS"
+    git version 2.7.4
+  sable: DISTRIB_DESCRIPTION="Ubuntu 14.04.5 LTS"
+    git version 1.9.1
+  salish: DISTRIB_DESCRIPTION="Ubuntu 16.04.7 LTS"
+    git version 2.7.4
+  skookum: DISTRIB_DESCRIPTION="Ubuntu 16.04.7 LTS"
+    git version 2.21.0
+  smelt: DISTRIB_DESCRIPTION="Ubuntu 14.04.6 LTS"
+    git version 1.9.1
+  tyee: DISTRIB_DESCRIPTION="Ubuntu 16.04.6 LTS"
+    bash: git: command not found
+Created ticket requesting git>=2.28 be installed on tyee done.
+(MOAD)
+
+See work journal.
+(Ocean Navigator)
+
+
 
 
 Update cookiecutter-MOAD-pypkg re: hg -> git
