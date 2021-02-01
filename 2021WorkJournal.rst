@@ -416,6 +416,108 @@ Implemented CLI version of hindcast_dayavgs and started running it for 2014 in t
 (SalishSeaCast)
 
 
+Wed 27-Jan-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Ran hindcast_dayavgs for 2015-2016: 13.25 hrs
+(SalishSeaCast)
+
+
+Thu 28-Jan-2021
+^^^^^^^^^^^^^^^
+
+Sentry webinar: 3 Ways to Group Similar Issues:
+* Armin Ronacher, Director of Engrg
+* aka Grouping & Fingerprinting Errors
+* sentry-cli send-event -m "Hello World"
+* server-side:
+  * Event grouping at bottom of event page
+  * Merge button
+  * Settings: Issue Grouping: Stack Trace Rules, Fingerprint Rules
+    * hide flask frames, for example
+* sdk-side:
+  * before_send
+  * scope
+
+Continued 2021 year rollover updates on repos; see https://salishseacast.slack.com/files/TFR25L4LU/F01HTF1MCBD
+(MOAD)
+
+Ran hindcast_dayavgs for 2017-2018.
+Cleaned up group rrg-allen -> def-allen and permissionss in project/SalishSea/forcing on graham
+(SalishSeaCast)
+
+
+Fri 29-Jan-2021
+^^^^^^^^^^^^^^^
+
+collect_weather 06 didn't complete;
+* investigation: 487 of 576 files downloaded, new message in log:
+  2021-01-28 20:46:14,553 [ERROR] sr_amqp/publish: Sleeping 4 seconds ... and reconnecting
+  2021-01-28 20:46:18,557 [ERROR] sr_amqp/close 2: [Errno 32] Broken pipe
+  2021-01-28 20:46:18,562 [INFO] Using amqp module (AMQP 0-9-1)
+  2021-01-28 20:46:20,617 [INFO] declared queue q_anonymous.sr_subscribe.hrdps-west.74434425.78671301 (anonymous@dd.weather.gc.ca)
+  2021-01-28 20:46:20,953 [INFO] file_log downloaded to: /SalishSeaCast/datamart/hrdps-west/00/043/CMC_hrdps_west_DLWRF_SFC_0_ps2.5km_2021012900_P043-00.grib2
+  2021-01-28 20:46:20,954 [INFO] heartbeat. Sarracenia version is: 2.20.08post1
+
+  2021-01-28 20:46:20,954 [INFO] hb_memory cpu_times user=3731.62 system=420.24 elapse=54622530.87
+  2021-01-28 20:46:20,954 [INFO] hb_memory, current usage: 58.2 MiB trigger restart if increases past: 165.0 MiB
+  2021-01-28 20:46:20,954 [INFO] hb_retry on_heartbeat
+  2021-01-28 20:46:20,954 [INFO] sr_retry on_heartbeat
+  2021-01-28 20:46:20,964 [INFO] No retry in list
+  2021-01-28 20:46:20,968 [INFO] sr_retry on_heartbeat elapse 0.012886
+  2021-01-28 20:46:21,123 [WARNING] sr_amqp/consume: could not consume in queue q_anonymous.sr_subscribe.hrdps-west.74434425.78671301: Basic.ack: (406) PRECONDITION_FAILED - unknown delivery tag 193452
+  2021-01-28 20:46:21,246 [INFO] Using amqp module (AMQP 0-9-1)
+  2021-01-28 20:46:22,005 [INFO] declared queue q_anonymous.sr_subscribe.hrdps-west.74434425.78671301 (anonymous@dd.weather.gc.ca)
+* recovery, started at 09:55:
+    rm /results/forcing/atmospheric/GEM2.5/GRIB/20210129/00
+    pkill -f collect_weather
+    download_weather 00 2.5km
+    rm -rf /SalishSeaCast/datamart/hrdps-west/00/*
+    rm -rf /SalishSeaCast/datamart/hrdps-west/18/*
+    collect_weather 18 2.5km
+    download_weather 06 2.5km
+    rm -rf /SalishSeaCast/datamart/hrdps-west/06/*
+    wait for forecast2 runs to complete
+    download_weather 12 2.5km
+    rm -rf /SalishSeaCast/datamart/hrdps-west/12/*
+Backfilled upload_forcing graham nowcast+ and turbidity for 20-28 Jan.
+Answered question from Guoqi about relative run time of wwatch3 and NEMO:
+* 19jan21 SSC/nowcast:
+  * start run: 07:47:03
+  * end results gathering: 08:12:33
+  * elapsed: 25m30s
+* 19jan21 wwatch3/nowcast:
+  * start wind.nc creation: 10:53:42
+  * end results gathering: 11:15:59
+  * elapsed: 22m17s
+Upgraded grouping algorithm on Sentry.
+(SalishSeaCast)
+
+Cleaned up group rrg-allen -> def-allen in project/MIDOSS on graham; lots of files owned by Vicky though
+(MIDOSS)
+
+
+Sat 30-Jan-2021
+^^^^^^^^^^^^^^^
+
+Drove to White Rock for Susan to visit M&J; walked in Ruth Johnson Park.
+
+upload_forcing graham nowcast+ and turbidity failed again
+(SalishSeaCast)
+
+
+Sun 31-Jan-2021
+^^^^^^^^^^^^^^^
+
+upload_forcing graham nowcast+ and turbidity failed again; also failed opn manual re-try
+
+Ran hindcast_dayavgs for 2019-2020.
+(SalishSeaCast)
+
+
 
 Update cookiecutter-MOAD-pypkg re: hg -> git
 
