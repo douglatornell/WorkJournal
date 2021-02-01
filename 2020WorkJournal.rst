@@ -7574,6 +7574,138 @@ Sun 20-Dec-2020
 Cycling: River Rd out and back mid-afternoon to past solstice sunset (48km)
 
 
+Week 52
+-------
+
+Mon 21-Dec-2020
+^^^^^^^^^^^^^^^
+
+Week 41 of UBC work-from-home due to COVID-19
+
+Created Slack #repos-maint channel; added notes about sphinx-linkcheck workflows.
+Worked w/ Susan to understand memory use and not release by xarray processes in Jupyter on salish.
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+
+Tue 22-Dec-2020
+^^^^^^^^^^^^^^^
+
+Worked w/ Susan to understand memory use and not release by xarray processes in Jupyter on salish;
+solution based on open_mfdataset() and load(scheduler="processes", num_workers=) method call(s).
+(SalishSeaCast)
+
+Wine shopping.
+
+See work journal.
+(Ocean Navigator)
+
+
+Wed 23-Dec-2020
+^^^^^^^^^^^^^^^
+
+Slack discussion w/ Becca about her downscaling code re: loading HRDPS & storing intermediate results.
+(SalishSeaCast)
+
+Walked w/ Susan to English Bay overlook.
+
+See work journal.
+(Ocean Navigator)
+
+
+Thu 24-Dec-2020
+^^^^^^^^^^^^^^^
+
+Reviewed Tom Beuzen's Python for data science Jupyter book that he created for the UBC MDS program and wrote about it in #moad-python-notes.
+(MOAD)
+
+Started refactoring get_NeahBay_ssh worker.
+(SalishSeaCast)
+
+Waited ~1hr in line in mid-afternoon to pick up turkey from Jackson's; line was much shorter than when I first checked at about 11:45.
+
+
+Fri 25-Dec-2020
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Christmas Day
+
+
+Sat 26-Dec-2020
+^^^^^^^^^^^^^^^
+
+Boxing Day
+
+Drove to White Rock for Susan to visit J&M; walked in east ravine of Rusth Johnson Park.
+
+Set up CubedHost minecraft server and played in a new normal difficulty survival vanilla-ish world w/ Susan Sylvia & James; installed 5 VanillaTweaks datapacks: multiplayer sleep, graves, coordinates HUD, workstation highlights & track stats.
+
+
+Sun 27-Dec-2020
+^^^^^^^^^^^^^^^
+
+Goofed off :-)
+
+
+Week 53
+-------
+
+Mon 28-Dec-2020
+^^^^^^^^^^^^^^^
+
+Week 42 of UBC work-from-home due to COVID-19
+
+Goofed off :-)
+
+Cycled to Iona and Richmond goose parks (42km)
+
+
+Tue 29-Dec-2020
+^^^^^^^^^^^^^^^
+
+FAL estate work: CRA statement for MCL w/ final amount payable.
+
+Worked w/ Susan on tidal predictions files update to 2030; need to decide how to handle >10 ~65Mb files in SalishSeaNowcast repo; git submodule ???
+Discussed writing in-progress results to netCDF w/ Becca.
+(SalishSeaCast)
+
+Made notes year rollover repo updates.
+Set up eosc510 env from Becca's rbeutel/eosc510 repo
+(MOAD)
+
+Zoom w/ JRA re: finances
+
+Slack conversation w/ Rachael re: her problems w/ pip install of Make-MIDOSS-Forcing package on graham.
+(MIDOSS)
+
+
+Wed 30-Dec-2020
+^^^^^^^^^^^^^^^
+
+Continued Slack conversation w/ Rachael re: her problems w/ pip install of Make-MIDOSS-Forcing package on graham.
+(MIDOSS)
+
+Created checklist post in Slack  #repos-maint channel re: year rollover updates.
+(MOAD)
+
+Pulled Susan's update re: tidal predictions file name template for figures into production
+Tried to re-run make_feeds worker, but it failed again w/:
+  CRITICAL [make_feeds] no Point Atkinson feed generated: max sea surface height is NaN at 2020-12-31 08:05:00+00:00
+Worked on code review of Becca's LoadFiles notebook and fell into rabbit holes re: dask.
+(SalishSeaCast)
+
+
+Thu 31-Dec-2020
+^^^^^^^^^^^^^^^
+
+Susan fixed issue in config for make_feeds worker update re: tidal predictions file name; pulled into production
+Finished and pushed part 1 of code review of Becca's LoadFiles notebook; did part 2 as a re-implementation to explain dask; pushed.
+(SalishSeaCast)
+
+Played Minecraft late into the night in our AllensYule2020 world w/ Susan & Sylvia.
+
 
 jupyter kernelspec uninstall unwanted-kernel
 
@@ -7594,11 +7726,6 @@ update deployment docs re: spinning up a new compute node
 
 
 Fix permissions in /opp dirs
-
-
-Figure out how to disconnect NEMO_Nowcast.Worker instances from sentry-sdk logging when we are running in --debug mode;
-  posted question on Sentry support forum on 08jul20
-
 
 
 OPPTools PRs:
