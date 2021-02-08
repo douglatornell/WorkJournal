@@ -449,11 +449,14 @@ Ran hindcast_dayavgs for 2017-2018.
 Cleaned up group rrg-allen -> def-allen and permissionss in project/SalishSea/forcing on graham
 (SalishSeaCast)
 
+See work journal.
+(Ocean Navigator)
+
 
 Fri 29-Jan-2021
 ^^^^^^^^^^^^^^^
 
-collect_weather 06 didn't complete;
+collect_weather 00 didn't complete;
 * investigation: 487 of 576 files downloaded, new message in log:
   2021-01-28 20:46:14,553 [ERROR] sr_amqp/publish: Sleeping 4 seconds ... and reconnecting
   2021-01-28 20:46:18,557 [ERROR] sr_amqp/close 2: [Errno 32] Broken pipe
@@ -496,6 +499,9 @@ Answered question from Guoqi about relative run time of wwatch3 and NEMO:
 Upgraded grouping algorithm on Sentry.
 (SalishSeaCast)
 
+See work journal.
+(Ocean Navigator)
+
 Cleaned up group rrg-allen -> def-allen in project/MIDOSS on graham; lots of files owned by Vicky though
 (MIDOSS)
 
@@ -512,10 +518,203 @@ upload_forcing graham nowcast+ and turbidity failed again
 Sun 31-Jan-2021
 ^^^^^^^^^^^^^^^
 
-upload_forcing graham nowcast+ and turbidity failed again; also failed opn manual re-try
+See work journal.
+(Ocean Navigator)
 
+upload_forcing graham nowcast+ and turbidity failed again; also failed on manual re-try
 Ran hindcast_dayavgs for 2019-2020.
 (SalishSeaCast)
+
+
+February
+========
+
+Week 5
+------
+
+Mon 1-Feb-2021
+^^^^^^^^^^^^^^
+
+Week 47 of UBC work-from-home due to COVID-19
+
+collect_weather 06 didn't complete;
+* investigation: 574 of 576 files downloaded, new messages in log:
+  lots of:
+    2021-02-01 01:17:12,136 [ERROR] Download failed 5 https://dd5.weather.gc.ca/model_hrdps/west/grib2/06/012/CMC_hrdps_west_DSWRF_SFC_0_ps2.5km_2021020106_P012-00.grib2
+    2021-02-01 01:17:12,136 [ERROR] Failed to reach server. Reason: [Errno 111] Connection refused
+  and a few:
+    2021-02-01 01:25:16,478 [INFO] expired message skipped 20210201091710.806 https://dd5.weather.gc.ca /model_hrdps/west/grib2/06/012/CMC_hrdps_west_APCP_SFC_0_ps2.5km_2021020106_P012-00.grib2
+* recovery, started at ~09:40:
+    pkill -f collect_weather
+    collect_weather 18 2.5km
+    rm /results/forcing/atmospheric/GEM2.5/GRIB/20210201/06
+    download_weather 06 2.5km
+    wait for forecast2 runs to complete
+    download_weather 12 2.5km
+    rm -rf /SalishSeaCast/datamart/hrdps-west/12/*
+* log_aggregator was not getting messages from watch_ww3, so restarted it as preliminary forecast run finished
+Experimented with issue grouping on Sentry to consolidate ONC SCVIP data fail messages across dates.
+Discovered something funky about 201905/15feb20 that prevents dayavgs metadata cleanup.
+Ran hindcast_dayavgs for 2012-2013.
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy Seminar: Karyn re: zooplankton
+
+See work journal.
+(Ocean Navigator)
+
+
+Tue 2-Feb-2021
+^^^^^^^^^^^^^^
+
+Added more Sentry fingerprint rules to group issues for ONC data fails.
+Continued 2021 year rollover updates on repos; see https://salishseacast.slack.com/files/TFR25L4LU/F01HTF1MCBD
+Updated pkgs & versions in salishsea-nowcast env on kudu.
+Investigated SalishSeaNowcast CI failures:
+* comma accidentally dropped in Ben's commit yesterday
+* change ProgressBar dep to tqdm
+support@graham adjusted rrg-allen -> def-allen and vdo -> sallen; finished backfilling upload_forcing
+Contributed to Ubuntu 20.04 packages list for new image for waterhole workstations.
+Ran hindcast_dayavgs for 2010-20111.
+Experimented with adding river-name & stn-id tags to sentry context in collect_river_data to make exceptions captured by Sentry more easily understood.
+(SalishSeaCast)
+
+Contributed to system pkgs list for Ubuntu 20.04 image to upgrade waterhole workstations.
+(MOAD)
+
+Telcon w/ Connor @ Buntain re: strata insurance; need to confirm:
+* year of roof replacement
+* no polybutyl plumbing
+* no use of in-ceiling radiant head panels
+* >100 amp electical service
+* gathered all info and emailed it to him
+
+Replaced failed lights in garage and utility room.
+
+
+Wed 3-Feb-2021
+^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+upload_forcing failed because I inadvertently pulled tools updates with a missing comma in places.PLACES; recovered by pulling in fixed tools and re-running 4x upload_forcing nowcast+ manually.
+Started looking at splitting tools repo via git filter-branch:
+* I_ForcingFiles: new repo, new name
+* Marlin: new repo/pkg
+* NetCDF_Plot: placeholder; no action required
+* Run_files: old/ancient ???
+* SOGTools: new repo/pkg ???
+* SalishSeaCmd: placeholder; no action required
+* SalishSeaNowcast: placeholder; no action required
+* SalishSeaTools: new repo/pkg
+* analysis_tools: notebooks only; new repo, new name?
+* bathymetry: almost all notebooks; combine w/ I_ForcingFiles in new repo w/ new name
+* docs: mix of old stuff, and stuff that needs to be moved somewhere
+  * I_ForcingFiles: index describing notebooks
+  * LiveOcean: legacy?
+  * bathymetry: index describing notebooks, also notebook about BAG files
+  * erddap: outdated; see erddap-datasets repo
+  * legacy_docs: old/ancient ???
+  * nemo-tools: build instructions for rebuild_nemo
+  * netCDF4: KEEP! creation & conventions docs; need update?
+  * python_packaging: ???
+* nocscombine: old/ancient ???
+* random files:
+  * ariane_memory.log: empty
+  * namelist: empty
+  * update_copyright.py: move into SalishSeaTools?
+(SalishSeaCast)
+
+
+Thu 4-Feb-2021
+^^^^^^^^^^^^^^^
+
+Experimented w/ renaming default branch name from master to main on GitHub in analysis-doug repo:
+* ref: https://docs.github.com/en/github/administering-a-repository/renaming-a-branch
+* rename master to main in web UI on GitHub
+* in each clone:
+  * git branch -m master main
+  * git fetch origin
+  * git branch -u origin/main main
+* updated make_readme.py scripts and README.md files
+Tried to run hindcast_dayavgs for 2008-20109; failed with "KeyError: 'online_operation'" on 2008-01-01 grid_T; re-tried for 2009, same issue.
+(SalishSeaCast)
+
+Updated example make_readme.py script to put creator name and repo's default branch name in constants at the top; updated make_readme.py in cookiecutter-analysis-repo similarly.
+(MOAD)
+
+See work journal.
+(Resilient-C)
+
+See work journal.
+(Ocean Navigator)
+
+
+Fri 5-Feb-2021
+^^^^^^^^^^^^^^
+
+arbutus OS updates plan re: CVE-2021-3156:
+* after ww3-forecast finishes:
+  * nowcast1 - nowcast9
+* after fvcom-x2 finishes:
+  * fvcom0 - fvcom1
+* after fvcom-r12 finishes:
+  * fvcom2 - fvcom6
+  * nowcast0
+* After doing sudo apt update; sudo apt upgrade on nowcast1 noticed that sudo was not in upgraded packages; checked version and found that installed version (1.8.21p2-3ubuntu1.4) is the one that is patched for CVE-2021-3156; assuming that auto-updates for security issues handled the issue. However, checking MOD and
+  cat /var/run/reboot-required
+shows that the VMs require reboots, so updated and rebooted them; after reboot on each VM:
+  sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR
+remounted
+  nowcast1
+  nowcast3
+  nowcast4
+  nowcast5
+  nowcast6
+  nowcast7
+  nowcast8
+  nowcast9
+  nowcast2
+rebooted
+upgraded
+todo
+  fvcom0
+  fvcom1
+  fvcom2
+  fvcom3
+  fvcom4
+  fvcom5
+  fvcom6
+  nowcast0
+Successfully booted nowcast2 and updated it as an extra VM.
+(SalishSeaCast)
+
+Coffee w/ Ben
+
+Slack w/ Birgit about ANHA34 to ANHA12 interpolation.
+
+See work journal.
+(Ocean Navigator)
+
+FAL estate work: delivered estate T3 return & draft to Cameron's office.
+
+
+Sat 6-Feb-2021
+^^^^^^^^^^^^^^
+
+Set up Wahoo trainers, Emma & Red, and started riding Zwift.
+
+
+Sun 7-Feb-2021
+^^^^^^^^^^^^^^
+
+Walked to English Bay overlook @ Stephen St.
+
+Investment statements & transaction records catch-up.
 
 
 
