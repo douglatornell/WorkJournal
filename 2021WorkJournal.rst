@@ -657,7 +657,7 @@ See work journal.
 Fri 5-Feb-2021
 ^^^^^^^^^^^^^^
 
-arbutus OS updates plan re: CVE-2021-3156:
+Started arbutus OS updates plan re: CVE-2021-3156:
 * after ww3-forecast finishes:
   * nowcast1 - nowcast9
 * after fvcom-x2 finishes:
@@ -715,6 +715,45 @@ Sun 7-Feb-2021
 Walked to English Bay overlook @ Stephen St.
 
 Investment statements & transaction records catch-up.
+
+
+Week 6
+------
+
+Mon 8-Feb-2021
+^^^^^^^^^^^^^^
+
+Week 48 of UBC work-from-home due to COVID-19
+
+See work journal.
+(Ocean Navigator)
+
+Continued arbutus OS updates plan re: CVE-2021-3156:
+* after fvcom-x2 finishes:
+  * fvcom0 - fvcom1
+* after fvcom-r12 finishes:
+  * fvcom2 - fvcom6
+  * nowcast0
+* after reboot on each VM:
+    sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR
+remounted
+rebooted
+upgraded
+todo
+  fvcom0
+  fvcom1
+  fvcom2
+  fvcom3
+  fvcom4
+  fvcom5
+  fvcom6
+  nowcast0
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Headache in the afternoon.
 
 
 
