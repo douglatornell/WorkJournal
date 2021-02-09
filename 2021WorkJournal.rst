@@ -756,6 +756,28 @@ Group mtg; see whiteboard.
 Headache in the afternoon.
 
 
+Tue 9-Feb-2021
+^^^^^^^^^^^^^^
+
+Work at UBC while Rita is at home.
+
+Updating niko caused /boot to fill; deleted a bunch of old kernels with guidance from askubuntu (https://askubuntu.com/questions/345588/what-is-the-safest-way-to-clean-up-boot-partition).
+
+Tried to review new 20.04 LTS image on waterhole.eoas.ubc.ca and stopped after 5 pkgs from list not installed.
+
+Cleaned up conda envs on waterhole machines; deleted lots that I haven't used recently.
+
+Looked at https://jupyterlab-code-formatter.readthedocs.io/ and found that the JupoyterLab extensions story is much better now; no explicit nodejs or extension manager installation; no need to enable extensions from command-line
+
+Worked on analyzing/refactoring code that Alline & Elise are using for bloom timing time series extraction:
+* /ocean/aisabell/MEOPAR/Analysis-Aline/notebooks/Bloom_Timing/201812EnvironmentalDrivers.ipynb
+* /ocean/aisabell/MEOPAR/Analysis-Aline/notebooks/Bloom_Timing/extractloc.py
+(SalishSeaCast)
+* see analysis-doug/notebooks/aline-bloomtiming-extract/
+
+add openpyxl as dep in SalishSeaTools
+
+Verify NEMO & MOHID builds w/ new default env on graham
 
 Update cookiecutter-MOAD-pypkg re: hg -> git
 
