@@ -728,28 +728,6 @@ Week 48 of UBC work-from-home due to COVID-19
 See work journal.
 (Ocean Navigator)
 
-Continued arbutus OS updates plan re: CVE-2021-3156:
-* after fvcom-x2 finishes:
-  * fvcom0 - fvcom1
-* after fvcom-r12 finishes:
-  * fvcom2 - fvcom6
-  * nowcast0
-* after reboot on each VM:
-    sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR
-remounted
-rebooted
-upgraded
-todo
-  fvcom0
-  fvcom1
-  fvcom2
-  fvcom3
-  fvcom4
-  fvcom5
-  fvcom6
-  nowcast0
-(SalishSeaCast)
-
 Group mtg; see whiteboard.
 (MOAD)
 
@@ -774,6 +752,105 @@ Worked on analyzing/refactoring code that Alline & Elise are using for bloom tim
 * /ocean/aisabell/MEOPAR/Analysis-Aline/notebooks/Bloom_Timing/extractloc.py
 (SalishSeaCast)
 * see analysis-doug/notebooks/aline-bloomtiming-extract/
+* wrote Slack post about philospohpy of open_mfdataset/dask for Elise
+
+
+Wed 10-Feb-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Finalized Slack post about philospohpy of open_mfdataset/dask for Elise.
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+
+Thu 11-Feb-2021
+^^^^^^^^^^^^^^^
+
+collect_weather 06 didn't complete;
+* investigation: 254 of 576 files downloaded, new messages in log:
+    2021-02-11 07:31:01,654 [WARNING] sr_amqp/consume: could not consume in queue q_anonymous.sr_subscribe.hrdps-west.74434425.78671301: [Errno 110] Connection timed out
+  lots of:
+    2021-02-11 07:31:07,923 [ERROR] sr_amqp/build could not declare queue q_anonymous.sr_subscribe.hrdps-west.74434425.78671301 (anonymous@dd.weather.gc.ca) with [Errno 32] Broken pipe
+* recovery, started at ~11:00:
+    pkill -f collect_weather
+    collect_weather 18 2.5km
+    rm /results/forcing/atmospheric/GEM2.5/GRIB/20210211/12
+    download_weather 12 2.5km
+    supervisorctl restart sr_subscribe-hrdps-west
+skookum rebooted at ~11:30; Charles reported accidental power cycle; recovery at ~13:00:
+* started nowcast system via supervisord
+* started salishsea-site via supervisord
+* started ERDDAP via sudo /opt/tomcat/bin/startup.sh
+automation restart:
+* interruption occurred while nowcast-blue run was in progress
+* download_results arbutus nowcast
+* get_NeahBay_ssh forecast
+* watch_NEMO foreacst failed to launch due to orphaned watch_NEMO nowcast:
+  * killed orphan
+  * launch_remote_worker arbutus watch_NEMO "arbutus forecast"
+Took the opportunity to continue arbutus OS updates plan re: CVE-2021-3156:
+* after reboot on each VM:
+    sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR
+remounted
+  fvcom0
+  fvcom1
+  fvcom2
+  fvcom3
+  fvcom4
+  fvcom5
+  fvcom6
+rebooted
+upgraded
+todo
+  nowcast0
+Continued automation restart:
+* launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast"
+* launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast"
+Merged Dependabot PRs re: crytography 3.2.1 -> 3.2.2.
+Continued 2021 year rollover updates on repos; see https://salishseacast.slack.com/files/TFR25L4LU/F01HTF1MCBD; started SalishSeaCmd
+(SalishSeaCast)
+
+Worked w/ Birgit on parallelizing her ANHA4 to ANHA12 interpolation via GLOST.
+Merged Dependabot PRs re: crytography 3.2.1 -> 3.2.2.
+(MOAD)
+
+
+Fri 12-Feb-2021
+^^^^^^^^^^^^^^^
+
+Continued 2021 year rollover updates on repos; see https://salishseacast.slack.com/files/TFR25L4LU/F01HTF1MCBD; finished SalishSeaCmd.
+Changed SalishSeaNowcast repo default branch name from master to main.
+Worked on fixing broken links in docs repo.
+(SalishSeaCast)
+
+Coffee w/ Aline.
+
+See work journal.
+(Resilient-C)
+
+Racahel changes MIDOSS-MOHID-config repo default branch name from master to main; updated my clones on kudu and graham.
+(MIDOSS)
+
+
+Sat 13-Feb-2021
+^^^^^^^^^^^^^^^
+
+Goofed off.
+
+
+Sun 14-Feb-2021
+^^^^^^^^^^^^^^^
+
+Finished fixing broken links in docs repo w/ help from Susan.
+(SalishSeaCast)
+
+
+
 
 add openpyxl as dep in SalishSeaTools
 
