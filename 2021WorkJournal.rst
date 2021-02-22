@@ -578,7 +578,7 @@ Investigated SalishSeaNowcast CI failures:
 * change ProgressBar dep to tqdm
 support@graham adjusted rrg-allen -> def-allen and vdo -> sallen; finished backfilling upload_forcing
 Contributed to Ubuntu 20.04 packages list for new image for waterhole workstations.
-Ran hindcast_dayavgs for 2010-20111.
+Ran hindcast_dayavgs for 2010-2011.
 Experimented with adding river-name & stn-id tags to sentry context in collect_river_data to make exceptions captured by Sentry more easily understood.
 (SalishSeaCast)
 
@@ -641,7 +641,7 @@ Experimented w/ renaming default branch name from master to main on GitHub in an
   * git fetch origin
   * git branch -u origin/main main
 * updated make_readme.py scripts and README.md files
-Tried to run hindcast_dayavgs for 2008-20109; failed with "KeyError: 'online_operation'" on 2008-01-01 grid_T; re-tried for 2009, same issue.
+Tried to run hindcast_dayavgs for 2008-2009; failed with "KeyError: 'online_operation'" on 2008-01-01 grid_T; re-tried for 2009, same issue.
 (SalishSeaCast)
 
 Updated example make_readme.py script to put creator name and repo's default branch name in constants at the top; updated make_readme.py in cookiecutter-analysis-repo similarly.
@@ -833,7 +833,7 @@ Coffee w/ Aline.
 See work journal.
 (Resilient-C)
 
-Racahel changes MIDOSS-MOHID-config repo default branch name from master to main; updated my clones on kudu and graham.
+Rachael changes MIDOSS-MOHID-config repo default branch name from master to main; updated my clones on kudu and graham.
 (MIDOSS)
 
 
@@ -849,6 +849,137 @@ Sun 14-Feb-2021
 Finished fixing broken links in docs repo w/ help from Susan.
 (SalishSeaCast)
 
+
+Week 7
+------
+
+Mon 15-Feb-2021
+^^^^^^^^^^^^^^^
+
+Week 48 of UBC work-from-home due to COVID-19
+
+**Statutory Holiday** - Family day
+
+Added GHA sphinx linkcheck workflow to SalishSeaCast/docs repo; scheduled for 8th day of month.
+Discovered th at docs repo has not copyright notices, only CC-By license.
+Updated Olson, et al citation from unpublished.
+(SalishSeaCast)
+
+
+Tue 16-Feb-2021
+^^^^^^^^^^^^^^^
+
+Finalized docs repo GHA linkcheck workflow monthly schedule after successful scheduled test overnight.
+Checked on ONC ferry and SCVIP data flows; both still down; looked at their new forum and status sites.
+Investigated hindcast_dayavgs metadata problem; resolved by dropping bounds_nav_[lat|lon] variables present in some NEMO results files; ran hindcast_dayavgs for 2020-02-15 to 2020-12-31.
+(SalishSeaCast)
+
+Brought Makd-MIDOS-Forcing repo up to date; merged monte-carlo branch that adds "salishseacast grid" item to YAML config instead of hard-coded ERDDAP URL so that it can work on graham compute nodes w/o network access by using a path to a clone of the SalishSeaCast/grid repo.
+(MIDOSS)
+
+
+Wed 17-Feb-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+download_live_ocean failed w/ a connection timeout error; re-tried at 10:20, failed again; recovery:
+* ssh to boiler works
+* neither status nor product file are present at 11:50
+* use LiveOcean boundary conditions file symlink created for forecast2 run to persist 16feb to 17feb
+* upload_forcing arbutus nowcast+
+* upload_forcing orcinus nowcast+
+* upload_forcing graham nowcast+
+* upload_forcing optimum nowcast+
+Helped Susan with her high resolution lon/lat to SSC j/i mapping.
+(SalishSeaCast)
+
+
+Thu 18-Feb-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Zoom coffee w/ Debby & Paul.
+
+Reviewed changes in add-make-hdf5 branch of MIDOSS-MOHID-config in preparation for merge.
+Reviewed changes in add-make-hdf5 branch of MOHID-Cmd in preparation for merge.
+Reviewed clones on graham:
+* Make-MIDOS-Forcing: up to date
+* MIDOSS-MOHID-CODE: pulled to bring up to date
+* MIDOSS-MOHID-config: up to date on main; WIP on add-make-hdf5
+* MIDOSS-MOHID-grid: up to date
+* moad_tools: pulled to bring up to date
+* MOHID-Cmd: up to date enough; WIP on add-make-hdf5
+* NEMO-Cmd: up to date
+* SalishSeaCast-grid: up to date
+Did a new build of MOHID; updated docs along the way; did a successful test of a 5 run Monte Carlo GLOST job.
+(MIDOSS)
+
+Generated MIDOSS Monte Carlo GLOST job for Birgit to look at in graham:/scratch/dlatorne/MIDOSS/runs/monte-carlo/InOneSSGrid_2021-02-18T194507/
+(MOAD)
+
+
+Fri 19-Feb-2021
+^^^^^^^^^^^^^^^
+
+Merged add-make-hdf5 branch in MIDOSS-MOHID-config into main.
+Queued 3 diesel spills (w/o volume) test from 10k csv; running
+Merged add-make-hdf5 branch in MOHID-Cmd into master.
+Did year roll-over updates on MOHID-Cmd; did tech debt maintenance too
+Fixed SyntaxWarnings re: string equality test in Make-MIDOS-Forcing; restricted pkg to Python 3.8.
+Added spill volume to templates and _render...() function.
+Ran the nearest thing yet to real Monte Carlo for 3 diesel spills.
+(MIDOSS)
+
+Ran hindcast_dayavgs for 2008-2009.
+(SalishSeaCast)
+
+
+Sat 20-Feb-2021
+^^^^^^^^^^^^^^^
+
+Goofed off :-)
+
+
+Sun 21-Feb-2021
+^^^^^^^^^^^^^^^
+
+Started work on setting up 2020 bloomcast:
+* Changed SOG-Bloomcast-Ensemble repo default git branch name from master to main.
+* Built new bloomcast-2021 env on kudu from conda-forge only; got Python 3.7
+* runs dir on salish: /data/dlatorne/SOG-projects/SOG-Bloomcast-Ensemble/run
+* cp run/2019_bloomcast_inifile.yaml run/2020_bloomcast_infile.yaml; commit
+* archived 2020_bloomcast* files in run/2020/
+* archived bloomcast.log and bloom_date_evolution.log files into run/2020/
+* edit 2021_bloomcast_infile.yaml
+* edit config.yaml
+* disable push to web for test run
+* source activate /data/dlatorne/SOG-projects/bloomcast
+* pip install -e /data/dlatorne/SOG-projects/SoG-Bloomcast-Ensemble
+  * ensemble plug-in not installed - WTF???
+
+* test run: cd run && bloomcast ensemble -v config.yaml
+* test run succeeded: 10mar 12mar 20mar 07apr 13apr
+* enabled push to web
+* deleted wind_data_date to allow repeat run for today
+* updated repo clone spelling in cronjob.sh
+* ran manual production run w/ bash ./cronjob.sh; success! :-)
+* checked bloomcast page on salishsea-site
+* posted link to SalishSeaCast whiteboard
+* enable cron job on salish
+* commit 2020 config files
+(bloomcast)
+
+
+
+delete Make-MIDOS-Forcing monte-carlo branch
+delete MIDOSS-MOHID-config add-make-hdf5 branch
+delete MOHID-Cmd add-make-hdf5 branch
+
+Ran hindcast_dayavgs for 2007.
 
 
 
@@ -867,8 +998,6 @@ TODO:
 
 https://linuxize.com/post/getting-started-with-tmux/
 
-update unpublished status of Olson, et al (2020)
-
 update deployment docs re: spinning up a new compute node
 
 Fix permissions in /opp dirs
@@ -883,6 +1012,7 @@ Add CI workflows to run linkcheck on docs; see SalishSeaCast#repos-maint channel
   need sphinx>3.1 in env
   example workflow in salishsea-site repo
   don't forget to add sphinx & sphinx_rtd_theme to environment-test.yaml
+  See: https://salishseacast.slack.com/archives/C01GYJBSF0X/p1608574921004500
 
 
 Update cookiecutter-MOAD-pypkg re: migration from hg to git, and requirements.txt in top level directory; probably more issues too.
