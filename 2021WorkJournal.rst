@@ -974,6 +974,25 @@ Started work on setting up 2020 bloomcast:
 (bloomcast)
 
 
+Week 8
+------
+
+Mon 22-Feb-2021
+^^^^^^^^^^^^^^^
+
+Week 49 of UBC work-from-home due to COVID-19
+
+Changed WorkJournal and dotfiles repos default branch name from master to main.
+
+nowcast-agrif failure: inifiband error; re-ran;
+(SalishSeaCast)
+
+Phys Ocgy seminar by Marek Stasna; modeling sub-grid internal waves
+
+See work journal.
+(Ocean Navigator)
+
+
 
 delete Make-MIDOS-Forcing monte-carlo branch
 delete MIDOSS-MOHID-config add-make-hdf5 branch
