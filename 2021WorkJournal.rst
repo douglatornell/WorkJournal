@@ -987,10 +987,23 @@ Changed WorkJournal and dotfiles repos default branch name from master to main.
 nowcast-agrif failure: inifiband error; re-ran;
 (SalishSeaCast)
 
-Phys Ocgy seminar by Marek Stasna; modeling sub-grid internal waves
+Phys Ocgy seminar by Marek Stastna; modeling sub-grid internal waves
 
 See work journal.
 (Ocean Navigator)
+
+Tue 23-Feb-2021
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Failed to get bloomcast running:
+* pip install -e in new env doesn't find ensemble plug-in
+* attempt to run in last year's matplotlib-1.5.3 env on salish revealed that ECCC has changed the climate data interface to stream files for download
+* tried to figure out ensemble plug-in failure:
+  * created new nemo-cmd-test23feb env on niko, and ti worked fine
+  * started modernize branch in SoG-Bloomcast-Ensemble to modernize packaging in hopes that will resolve unofund ensemble plug-in issue
+(bloomcast)
 
 
 
