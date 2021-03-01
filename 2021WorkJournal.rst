@@ -992,6 +992,7 @@ Phys Ocgy seminar by Marek Stastna; modeling sub-grid internal waves
 See work journal.
 (Ocean Navigator)
 
+
 Tue 23-Feb-2021
 ^^^^^^^^^^^^^^^
 
@@ -1003,7 +1004,97 @@ Failed to get bloomcast running:
 * tried to figure out ensemble plug-in failure:
   * created new nemo-cmd-test23feb env on niko, and ti worked fine
   * started modernize branch in SoG-Bloomcast-Ensemble to modernize packaging in hopes that will resolve unofund ensemble plug-in issue
+* discovered that ensemble plug-in failure was a registration failure because SOGCommand that it depends on was not installed first - silent failure :-(
+* discovered that code added in 2017 to skip 3 BOM characters in text response from ECCC climate requests now clips off 3 real characters at the start of the XML blobs
+* remembered the need to start a dummy smtpd
+* successfully ran bloomcast, but with Englishman River record ending on 25-Sep-2020
+* profile plots failed:
+    Traceback (most recent call last):
+      File "/home/dlatorne/conda_envs/bloomcast/lib/python3.7/site-packages/cliff/app.py", line 401, in run_subcommand
+        result = cmd.run(parsed_args)
+      File "/home/dlatorne/conda_envs/bloomcast/lib/python3.7/site-packages/cliff/command.py", line 185, in run
+        return_code = self.take_action(parsed_args) or 0
+      File "/data/dlatorne/SOG-projects/SOG-Bloomcast-Ensemble/bloomcast/ensemble.py", line 135, in take_action
+        profile_plots = self._create_profile_graphs(COLORS)
+      File "/data/dlatorne/SOG-projects/SOG-Bloomcast-Ensemble/bloomcast/ensemble.py", line 473, in _create_profile_graphs
+        colors=colors,
+      File "/data/dlatorne/SOG-projects/SOG-Bloomcast-Ensemble/bloomcast/visualization.py", line 314, in profiles
+        axs[0].set_ylim((profiles[0].indep_data[0], profiles[0].indep_data[-1]))
+    IndexError: index 0 is out of bounds for axis 0 with size 0
 (bloomcast)
+
+See work journal.
+(Ocean Navigator)
+
+
+Wed 24-Feb-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Mtg w/ Susan about priorities:
+* get bloomcast working w/ Nanaimo River
+* do rST/Sphinx tutorial for Aline, Keegan & Becca
+* re-run ONC ferry data collection - wait for Susan to provide NEMO grid j/i to lon/lat mapping and include j/i values in new datasets
+* migrate water levels to new Swagger API
+* learn how to build XIOS & NEMO in new graham default env
+* discussed master -> main migration
+* discussed adding pre-commit to our repos
+(MOAD)
+
+Worked on bloomcast to get scaled Nanaimo River at Cassidy flow in as replacement for Englishman at Parksville (latter's gauge data stream stopped on 25-Sep-2020); got first successful run, still with profile plots failure above.
+(bloomcast)
+
+
+Thu 25-Feb-2021
+^^^^^^^^^^^^^^^
+
+Learned about myst-parser for Sphinx docs
+(MOAD)
+
+EOAS Colloquium re: carbon capture & storage
+
+Added pre-commit framework to SalishSeaNowcast.
+(SalishSeaCast)
+
+
+Fri 26-Feb-2021
+^^^^^^^^^^^^^^^
+
+Teams social w/ NAFC group and Nancy & Riley.
+
+download_results arbutus forecast failed w/ error code 1 in scp; re-ran successfully.
+Investigated 25feb nowncast-agrif failure; auth problem during 25feb upload_forcing nowcast+; backfilled:
+  upload_forcing orcinus-nowcast-agrif nowncast+ 2021-02-25
+  make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-02-25
+    Failed w/ inifiband error; re-ran successfully
+  make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-02-26
+(SalishSeaCast)
+
+Ran bloomcast manually to investigate profiles plotting error; profiles/hoff_2021_bloomcast.out_* files are empty
+Pushed changes to use scalled flow from Nanaaimo River at Cassidy gauge as replacement for Englishman.
+Updated cloud fraction mapping re: new weather descriptions in 2020.
+Activated daily cron run of bloomcast on salish despite plots not working.
+(bloomcast)
+
+Coffee w/ Racahel.
+
+Worked on MOAD docs; added missing TOC entry for bash config; changed default branch name from master to main
+(MOAD)
+
+
+Sat 27-Feb-2021
+^^^^^^^^^^^^^^^
+
+Fixed cronjob.sh so that it uses up to date conda env and shows tracebacks on failure
+(bloomcast)
+
+nowcast-agrif failed ~14% into run; inifiband error; re-ran successfully
+(SalishSeaCast)
+
+
+commit bloomcast cronjob.sh
 
 
 
