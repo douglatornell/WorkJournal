@@ -1094,13 +1094,127 @@ nowcast-agrif failed ~14% into run; inifiband error; re-ran successfully
 (SalishSeaCast)
 
 
-commit bloomcast cronjob.sh
+Sun 28-Feb-2021
+^^^^^^^^^^^^^^^
+
+Fixed bug in accessing minor river scale factor from config.
+(bloomcast)
+
+Drove to White Rock for Susan to visit J&M; walked in Ruth Johnson Park.
+
+
+March
+=====
+
+Week 9
+------
+
+Mon 1-Mar-2021
+^^^^^^^^^^^^^^
+
+Week 50 of UBC work-from-home due to COVID-19
+
+Susan reviewed results of yeaterday's bloomcast run w/ correctly scaled Nanaimo River and accepted them for SoPO presentation.
+Committed cronjob.sh updates; env path & --debug flag.
+(bloomcast)
+
+nowcast-agrif failed very early run; inifiband error; re-ran successfully
+Deleted stale branches in NEMO-Cnd abd SalishSeaCmd repos on GitHub
+(SalishSeaCast)
+
+Finalized Lagrangian.dat file tempaltes for Monte Carlo runs:
+* mv Lagrangian_BunkerC_crude.dat Lagrangian_bunker.dat
+* mv Lagrangian_CLB_crude.dat Lagrangian_dilbit.dat
+* ln -s Lagrangian_diesel.dat Lagrangian_gas.dat
+* ln -s Lagrangian_diesel.dat Lagrangian_jet.dat
+* ln -s Lagrangian_diesel.dat Lagrangian_other.dat
+Replied to Rachael's request for terminal in random spills CSV with suggestion to use MMSI and date/time.
+Deleted MIDOSS-MOHID-config add-make-hdf5 branch.
+Deleted Make-MIDOS-Forcing monte-carlo branch.
+Deleted MOHID-Cmd add-make-hdf5 branch.
+Changed MOHID-Cmd default branch name from master to main.
+Committed change to NEMO_Nowcast to disable Sentry init when worker runs in debug mode; its been uncommitted in production for months.
+(MIDOSS)
+
+Worked w/ Susan on mechanics of how to move master->main process forward.
+Team mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar: Racahel White; role of orography in ocean overturning circulation.
+
+
+Tue 2-Mar-2021
+^^^^^^^^^^^^^^
+
+download_results forecast2 failed due to broken pipe; re-ran in debug mode at ~09:30.
+make_plots nemo forecast publish failed () not the first time:
+  requests.exceptions.HTTPError: 500 Server Error: ( The buffers supplied to a function was too small.  ) for url: https://ws-shc.qc.dfo-mpo.gc.ca/observations?WSDL
+Updated setup-miniconda & action-slack in NEMO_Nowcast GHA CI workflow.
+Investigated 2 unit test failures in NEMO_Nowcast associated with schedule pkg; it went from 0.6.0 to 1.0.0 on 20Jan.
+Tried to build new conda pkgs for gomms-nowcast Anaconda channel; conda-build won't install from pip; time for a new approach...
+(SalishSeaCast)
+
+SoPO mtg day 1.
+
+Discovered that GoMSS project conda-recipes repo never got migrated from Bitbucket to GitHub.
+
+
+Wed 3-Mar-2021
+^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Updated SalishSeaNowcast conda env for readthedocs to install NEMO_Nowcast from GH instead of gomms-nowcast Anaconda channel; decided to stop maintenance of that channel.
+Changed NEMO_Nowcast repo default branch name from master to main.
+Released NEMO_Nowcast v21.1.
+(SalishSeaCast)
+
+SoPO mtg day 2.
+
+
+Thu 4-Mar-2021
+^^^^^^^^^^^^^^
+
+Advised Rachael on how to add terminal to random oil spills CSV code.
+(MIDOSS)
+
+See work journal.
+(Ocean Navigator)
+
+SoPO mtg day 3.
+
+
+Fri 5-Mar-2021
+^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+FAL estate work: delivered docs to Scotia branch to get funds from chequing account.
+
+Coffe w/ Karyn
+
+Started planning changes to get_onc_ferry worker to add nearest NEMO grid ji indices to datasets.
+(SalishSeaCast)
+
+
+Sat 6-Mar-2021
+^^^^^^^^^^^^^^
+
+Worked changes to get_onc_ferry worker to add nearest NEMO grid ji indices to datasets; refactoed unit tests.
+(SalishSeaCast)
+
+
+Sun 7-Mar-2021
+^^^^^^^^^^^^^^
+
+Worked changes to get_onc_ferry worker to add nearest NEMO grid ji indices to datasets; refactored nav coord resampling; generated sample file for Susan to check.
+(SalishSeaCast)
 
 
 
-delete Make-MIDOS-Forcing monte-carlo branch
-delete MIDOSS-MOHID-config add-make-hdf5 branch
-delete MOHID-Cmd add-make-hdf5 branch
+
 
 Ran hindcast_dayavgs for 2007.
 
