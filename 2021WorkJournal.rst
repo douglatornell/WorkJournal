@@ -1213,6 +1213,13 @@ Worked changes to get_onc_ferry worker to add nearest NEMO grid ji indices to da
 (SalishSeaCast)
 
 
+Tue 9-Mar-2021
+^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Migrated Sphinx docs from SalishSeaCast docs to MOAD docs and updated them.
+(MOAD)
 
 
 
