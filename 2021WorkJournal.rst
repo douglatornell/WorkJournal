@@ -984,7 +984,8 @@ Week 49 of UBC work-from-home due to COVID-19
 
 Changed WorkJournal and dotfiles repos default branch name from master to main.
 
-nowcast-agrif failure: inifiband error; re-ran;
+nowcast-agrif failure: inifiband error; re-ran successfully.
+Ran hindcast_dayavgs for 2007.
 (SalishSeaCast)
 
 Phys Ocgy seminar by Marek Stastna; modeling sub-grid internal waves
@@ -1193,7 +1194,7 @@ See work journal.
 
 FAL estate work: delivered docs to Scotia branch to get funds from chequing account.
 
-Coffe w/ Karyn
+Coffee w/ Karyn
 
 Started planning changes to get_onc_ferry worker to add nearest NEMO grid ji indices to datasets.
 (SalishSeaCast)
@@ -1209,8 +1210,28 @@ Worked changes to get_onc_ferry worker to add nearest NEMO grid ji indices to da
 Sun 7-Mar-2021
 ^^^^^^^^^^^^^^
 
-Worked changes to get_onc_ferry worker to add nearest NEMO grid ji indices to datasets; refactored nav coord resampling; generated sample file for Susan to check.
+Worked on changes to get_onc_ferry worker to add nearest NEMO grid ji indices to datasets; refactored nav coord resampling; generated sample file for Susan to check.
 (SalishSeaCast)
+
+
+Week 10
+------
+
+Mon 8-Mar-2021
+^^^^^^^^^^^^^^
+
+Week 51 of UBC work-from-home due to COVID-19
+
+docs repo scheduled linkcheck on GHA failed; fixed http://www.meds-sdmm.dfo-mpo.gc.ca to https://meds-sdmm.dfo-mpo.gc.ca
+upload_forcing orcinus nowcast+ failed; auth glitch; re-ran successfully, but was too late to provide forcing to run, so it got stuck on 1st time step; killed stuck run; re-ran make_forcing_links to restart;
+Continued work on changes to get_onc_ferry worker to add nearest NEMO grid ji indices to datasets;
+Changed grid repo default branch name from master to main; updated on kudu, skookum, arbutus, optimum, orcinus.
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar: Kevin Lamb, Waterloo, Internal Waves at low & high lats.
 
 
 Tue 9-Mar-2021
@@ -1223,7 +1244,6 @@ Migrated Sphinx docs from SalishSeaCast docs to MOAD docs and updated them.
 
 
 
-Ran hindcast_dayavgs for 2007.
 
 
 
