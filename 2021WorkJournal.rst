@@ -1224,7 +1224,7 @@ Week 51 of UBC work-from-home due to COVID-19
 
 docs repo scheduled linkcheck on GHA failed; fixed http://www.meds-sdmm.dfo-mpo.gc.ca to https://meds-sdmm.dfo-mpo.gc.ca
 upload_forcing orcinus nowcast+ failed; auth glitch; re-ran successfully, but was too late to provide forcing to run, so it got stuck on 1st time step; killed stuck run; re-ran make_forcing_links to restart;
-Continued work on changes to get_onc_ferry worker to add nearest NEMO grid ji indices to datasets;
+Continued work on changes to get_onc_ferry worker to add nearest NEMO grid ji indices to datasets.
 Changed grid repo default branch name from master to main; updated on kudu, skookum, arbutus, optimum, orcinus.
 (SalishSeaCast)
 
@@ -1242,6 +1242,89 @@ Worked at ESB while Rita was at home.
 Migrated Sphinx docs from SalishSeaCast docs to MOAD docs and updated them.
 (MOAD)
 
+
+Wed 10-Mar-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+get_NeahBay_ssh failed overnight; investigation:
+  * sites we scrape txt files from (main and alternate) are offline
+* recovery starting at ~11:30:
+  * symlink fcst/ssh_y2021m03d09.nc as obs/ssh_y2021m03d09.nc
+  * skip forecast2 runs
+  * upload_forcing arbutus nowcast+
+  * upload_forcing orcinus nowcast+
+  * upload_forcing graham nowcast+
+  * upload_forcing optimum nowcast+
+  * after nowcast-blue completion:
+      upload_forcing arbutus ssh
+(SalishSeaCast)
+
+
+Thu 11-Mar-2021
+^^^^^^^^^^^^^^^
+
+Sphinx docs tutorial.
+(MOAD)
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+Finished changes to get_onc_ferry worker to add nearest NEMO grid ji indices to datasets.
+Started updating /results/observations/ONC/ferries/TWDP/ datasets from 2012-05-10 start of records on ONC server in tmux session on skookum:
+  2012-05-10
+(SalishSeaCast)
+
+
+Fri 12-Mar-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+(SalishSeaCast)
+
+
+Sat 13-Mar-2021
+^^^^^^^^^^^^^^^
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+(SalishSeaCast)
+
+Drove to White Rock for Susan to visit M&J; walked along Nikelmikel River.
+
+
+Sun 14-Mar-2021
+^^^^^^^^^^^^^^^
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+Started work on migrating water level obs & prediction collection from zeep to REST API.
+(SalishSeaCast)
+
+
+
+set NUMEXPR_MAX_THREADS=6 in SSC envs on skookum & arbutus; update docs
 
 
 
