@@ -1215,7 +1215,7 @@ Worked on changes to get_onc_ferry worker to add nearest NEMO grid ji indices to
 
 
 Week 10
-------
+-------
 
 Mon 8-Mar-2021
 ^^^^^^^^^^^^^^
@@ -1319,18 +1319,150 @@ Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   upload_forcing orcinus nowcast+
   upload_forcing graham nowcast+
   upload_forcing optimum nowcast+
+Retarted manager re: get_onc_ferry failure message change.
 Started work on migrating water level obs & prediction collection from zeep to REST API.
 (SalishSeaCast)
 
 
+Week 11
+-------
 
-set NUMEXPR_MAX_THREADS=6 in SSC envs on skookum & arbutus; update docs
+Mon 15-Mar-2021
+^^^^^^^^^^^^^^^
+
+Week 52 of UBC work-from-home due to COVID-19
+
+Fixed bug, pushed & deployed re: get_onc_ferry failure message change.
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+Set NUMEXPR_MAX_THREADS=6 in SSC envs on skookum & arbutus; updated docs.
+Added openpyxl as dep in SalishSeaTools.
+Started experiments on splitting SalishSeaCast/tools repo; test of git filter-branch on Marlin pkg lead me to git-filter-repo that is the recommended alternative for (almost?) anything that git filter-branch can do; e.g.
+  * created new Marlin repo from tools repo:
+      git clone tools Marlin
+      cd Marlin
+      git filter-repo --subdirectory-filter Marlin/
+Continued work on migrating water level obs & prediction collection from zeep to REST API.
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Received and set up Acer Nitro GTX 1050 PC for Zwift.
 
 
+Tue 16-Mar-2021
+^^^^^^^^^^^^^^^
+
+Fixed docs linkcheck issues in Make-MIDOS-Forcing.
+(MIDOSS)
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+(SalishSeaCast)
+
+See work journal.
+(Ocean Navigator)
 
 
+Wed 17-Mar-2021
+^^^^^^^^^^^^^^^
 
-add openpyxl as dep in SalishSeaTools
+See work journal.
+(Ocean Navigator)
+
+Killed stale get_onc_ferry worker from 15-Mar that caused port error this morning.
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+(SalishSeaCast)
+
+Tried to answer Rachael's #moad-python-notesdas.read_excel() and openpyxl.
+(MOAD)
+
+
+Thu 18-Mar-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+
+Replied to Keegan's #pugeteval request for examples of Hovmoller diagrams.
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+Continued work on migrating water level obs & prediction collection from zeep to REST API.
+(SalishSeaCast)
+
+
+Fri 19-Mar-2021
+^^^^^^^^^^^^^^^
+
+Mmerged PRs from Dependabot re: bump Pillow to 8.1.1 to address memory exhaustion DOS security vulnerability:
+* SalishSeaCast/SOG-Bloomcast-Ensemble (rebase-merge: commit authored by Dependabot & me; no ref to PR in commit msg)
+* analysis-doug/notebooks/melanie-geotiff (squash-merge: commit authored by Dependabot; commit msg links to PR)
+* analysis-doug/notebooks/dask-expts (plain-merge: commit authored by me; commit msg is "Merge pull request #...")
+* SalishSeaCast/SalishSeaNowcast (squash-merge)
+* UBC-MOAD/moad_tools (squash-merge)
+
+Concluded that I prefer squash-merge for dependabot PRs.
+
+action-slack step in GHA workflows fails when workflows run from PR forks because SLACK_WEBHOOK_URL secret is not passed to forks
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+Continued work on migrating water level obs & prediction collection from zeep to REST API;
+(SalishSeaCast)
+
+
+Sat 20-Mar-2021
+^^^^^^^^^^^^^^^
+
+Zwift Fondo Bambino
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+(SalishSeaCast)
+
+
+Sun 21-Mar-2021
+^^^^^^^^^^^^^^^
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+(SalishSeaCast)
+
+
+TODO: Confirm that get_chs_tides() is working for figures.
+
+
 
 Verify NEMO & MOHID builds w/ new default env on graham
 
