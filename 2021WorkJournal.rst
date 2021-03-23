@@ -1498,6 +1498,84 @@ See work journal.
 (Ocean Navigator)
 
 
+Tue 23-Mar-2021
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+Changed repo default branch names from master to main; updated on niko, skookum, arbutus, optimum, orcinus (old git; requires --set-upstream instead of -u), graham:
+* SalishSeaCast/tracers
+* SalishSeaCast/tides
+* SalishSeaCast/rivers-climatology
+* SalishSeaCast/XIOS-ARCH
+
+TODO: do updates on kudu
+
+Started work on building XIOS, NEMO & REBUILD_NEMO w/ new 2020 default compilers & libraries on graham:
+* https://docs.computecanada.ca/wiki/Standard_software_environments
+* present env will remain via ``module load StdEnv/2016.4``
+  * Intel 2016.4, GCC 5.4.0, OpemMPI 2.1.1
+* StdEnv/2020 will be default on 1-Apr-2020
+  * Intel 2020.1, GCC 9.3.0, OpemMPI 4.0.3
+  * AVX2 and AVX512 instruction sets -> fat binaries -> better skylake node support
+  * compatibility changed from Nix to Gentoo Prefix
+  * Linux kernel >=3.10, so CentOS 7
+  * more Python extensions installed in their corresponding core modules; e.g. PyQt5 now inside qt/5.12.8, so it support mulitple versions of Python; `` module spider ...`` tells the stories of what modules to load
+* experimented by creating ~/.modulerc via:
+    echo "module-version StdEnv/2020 default" >> $HOME/.modulerc
+* no change to Python versions; 3.8.2 is still most recent
+* XIOS-ARCH:
+    module load hdf5-mpi/1.8.18 - available, also 1.10.3, 1.10.6
+    module load netcdf-c++4-mpi/4.3.0 - available, also 4.3.1
+    module load netcdf-fortran-mpi/4.4.4 - available, also 4.5.1, 4.5.2
+    module load netcdf-mpi/4.4.1.1 - available, also 4.1.3, 4.6.1, 4.7.4
+    module load intel/2016.4 - now 2020.1.217
+    module load perl/5.22.2 - available, also 5.16.3, 5.22.4, 5.30.2
+* NEMO-3.6:
+    module load netcdf-fortran-mpi/4.4.4
+      in new env this implies:
+        netcdf-fortran-mpi/4.5.2
+        hdf5-mpi/1.10.6
+        netcdf-mpi/4.7.4
+        mpi4py/3.0.3
+    module load perl/5.22.4 - available, also 5.16.3, 5.22.4, 5.30.2
+    module load python/3.8.2 - available, also older versions
+* XIOS-ARCH test:
+    module load hdf5-mpi/1.10.6
+    module load netcdf-c++4-mpi/4.3.1
+    module load netcdf-fortran-mpi/4.5.2
+    module load netcdf-mpi/4.7.4
+    module load intel/2020.1.217
+    module load perl/5.30.2
+      implies: expat/2.2.9
+  * ./make_xios --arch X64_GRAHAM  # no --job so I can clearly see warnings/errors
+  * bunch of perl warnings at start
+  * 1 warning re: \ in template
+  * so slooooow...   2097 seconds = 35 minutes
+  * success!
+* NEMO-3.6 test, SalishSeaCast config
+    module load netcdf-fortran-mpi/4.5.2
+    module load perl/5.30.2
+    module load python/3.8.2
+  * XIOS_HOME=$HOME/MEOPAR/XIOS-2 ./makenemo -n SalishSeaCast -m X64_GRAHAM  # no -j so I can clearly see warnings/errors
+  * 1 perl warning at start
+  * 5 format statement warnings in stpctl.f90
+      /home/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast/BLD/ppsrc/nemo/stpctl.f90(194): remark #8291: Recommended relationship between field width 'W' and the number of fractional digits 'D' in this edit descriptor is 'W>=D+7'.
+      9300  FORMAT(' it :', i8, ' ssh2: ', e16.10, ' Umax: ',e16.10,' Smin: ',e16.10)
+  * success!  891 seconds = 15 minutes
+* REBUILD_NEMO test
+  * XIOS_HOME=$HOME/MEOPAR/XIOS-2 ./maketools -n REBUILD_NEMO -m X64_GRAHAM
+  * success!
+* nco versions 4.6.6 (presently used for deflate) and 4.9.5
+(SalishSeaCast)
+
+
 
 TODO: Confirm that get_chs_tides() is working for figures.
 
