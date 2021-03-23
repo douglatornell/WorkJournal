@@ -1388,7 +1388,7 @@ Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   upload_forcing optimum nowcast+
 (SalishSeaCast)
 
-Tried to answer Rachael's #moad-python-notesdas.read_excel() and openpyxl.
+Tried to answer Rachael's #moad-python-notes pandas.read_excel() and openpyxl.
 (MOAD)
 
 
@@ -1458,6 +1458,45 @@ Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   upload_forcing graham nowcast+
   upload_forcing optimum nowcast+
 (SalishSeaCast)
+
+
+Week 12
+-------
+
+Mon 22-Mar-2021
+^^^^^^^^^^^^^^^
+
+Week 53 of UBC work-from-home due to COVID-19
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+jinja to 2.11.3:
+* SOG-Bloomcast
+* NEMO-Cmd
+* salishsea-site
+* FVCOM-Cmd
+* analysis-doug x2
+* SOG
+* ECget
+* MIDOSS/docs
+* cookiecutter-MOAD-pypkg
+* moad_tools
+* cookiecutter-analysis-repo
+urllib3 to 1.26.3
+* salishsea-site
+
+See work journal.
+(Ocean Navigator)
+
 
 
 TODO: Confirm that get_chs_tides() is working for figures.
