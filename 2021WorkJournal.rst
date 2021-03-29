@@ -1430,7 +1430,7 @@ Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   upload_forcing orcinus nowcast+
   upload_forcing graham nowcast+
   upload_forcing optimum nowcast+
-Continued work on migrating water level obs & prediction collection from zeep to REST API;
+Continued work on migrating water level obs & prediction collection from zeep to REST API; Thrash until I finally figured out that UTC aware timestamps in pandas Series index don't convert to numpy datetime64.
 (SalishSeaCast)
 
 
@@ -1509,14 +1509,11 @@ Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   upload_forcing orcinus nowcast+
   upload_forcing graham nowcast+
   upload_forcing optimum nowcast+
-Changed repo default branch names from master to main; updated on niko, skookum, arbutus, optimum, orcinus (old git; requires --set-upstream instead of -u), graham:
+Changed repo default branch names from master to main; updated on niko, skookum, arbutus, optimum, orcinus (old git; requires --set-upstream instead of -u), graham, kudu:
 * SalishSeaCast/tracers
 * SalishSeaCast/tides
 * SalishSeaCast/rivers-climatology
 * SalishSeaCast/XIOS-ARCH
-
-TODO: do updates on kudu
-
 Started work on building XIOS, NEMO & REBUILD_NEMO w/ new 2020 default compilers & libraries on graham:
 * https://docs.computecanada.ca/wiki/Standard_software_environments
 * present env will remain via ``module load StdEnv/2016.4``
@@ -1573,8 +1570,120 @@ Started work on building XIOS, NEMO & REBUILD_NEMO w/ new 2020 default compilers
   * XIOS_HOME=$HOME/MEOPAR/XIOS-2 ./maketools -n REBUILD_NEMO -m X64_GRAHAM
   * success!
 * nco versions 4.6.6 (presently used for deflate) and 4.9.5
+Continued work on migrating water level obs & prediction collection from zeep to REST API; test nowcast/figures/publish/compare_tide_prediction_max_ssh.py; more datetime index issues in using tidal predictions; suspect issue related to changes in xarray 0.17 re: datetime64 and int64.
 (SalishSeaCast)
 
+
+Wed 24-Mar-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+(SalishSeaCast)
+
+
+Thu 25-Mar-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+Discussed priorities w/ Susan:
+1. ONC ferry dataset description update to add NEMO gird indices on ERDDAP
+2. Continue sorting out pandas/xarray datetime type issue re: CHS water levels, and other things?
+3. Continue graham migration to StdEnv2020:
+   * test run SalishSeaCast on graham
+   * Birgit & Ben will likely stay on StdEnv2016 for present work; change by summer
+   * change NEMO-Cmd & SalishSeaCmd from master to main
+   * update NEMO-Cmd: docs only?
+   * update SalishSeaCmd: code & docs
+   * release NEMO-Cmd & SalishSeaCmd as 21.1
+   * tag XIOS-ARCH
+   * sort out MOHID build; update MIDOSS docs
+   * update MOHID-Cmd: code & docs
+   * release MOHID-Cmd as 21.1
+Changed SalishSeaCast/erddap-datasets repo default branch name from master to main; updated on kudu, skookum.
+Started updating ERDDAP dataset description for ubcONCTWDP1mV18-01 to add nemo_grid_[ji] variables; stopped and restarted ERDDAP w/ sudo /opt/tomcat/bin/shutdown.sh; sudo /opt/tomcat/bin/startup.sh
+(SalishSeaCast)
+
+Monthly project mtg.
+(MIDOSS)
+
+Squash/merged dependabot PR in several repos re: PyYAML security vulnerability fixed in v5.4.
+
+
+Fri 26-Mar-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+Changed GHA workflows to use org level SLACK_SALISHSEACAST_WEBHOOK_URL secret and set that up as a Dependabot secret too so that Dependabot PRs don't fail in their Slack notification step:
+* SalishSeaNowcast
+* NEMO-Cmd
+* SalishSeaCmd
+* salishsea-site
+Continued work on migrating water level obs & prediction collection from zeep to REST API; test nowcast/figures/publish/compare_tide_prediction_max_ssh.py; more datetime index issues in using tidal predictions; root cause is combination of (mostly) pandas=1.1.0 change to produce timezone-aware indices when tz info is present in parsed data, and (maybe) xarray=0.16.1 change to int64 internal representation of datetime-like values and its increasing focus on CFTime; finally got a working figures/publish/compare_tide_prediction_max_ssh.py
+(SalishSeaCast)
+
+Added org-level Dependabot secrets on GitHub for MIDOSS and SalishSeaCast Slack notifications so that Dependabot PRs don't fail in their Slack notification step.
+(MOAD)
+
+Added org-level Dependabot secret on GitHub for MIDOSS Slack notifications so that Dependabot PRs don't fail in their Slack notification step.
+(MIDOSS)
+
+
+Sat 27-Mar-2021
+^^^^^^^^^^^^^^^
+
+rsync-ed SalishSeaTools and nowcast/figures/publish/compare_tide_prediction_max_ssh.py to skookum for testing.
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+(SalishSeaCast)
+
+Drove to White Rock for Susan to visit J&M; walked in Ruth Johnson Park and along beach.
+
+
+Sun 28-Mar-2021
+^^^^^^^^^^^^^^^
+
+rsync-ed SalishSeaTools and nowcast/figures/publish/compare_tide_prediction_max_ssh.py to skookum for testing.
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+(SalishSeaCast)
+
+
+
+
+TODO:
+* change http://dmas.uvic.ca/ to https://data.oceannetworks.ca/ in datasets.xml
 
 
 TODO: Confirm that get_chs_tides() is working for figures.
