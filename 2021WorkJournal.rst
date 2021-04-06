@@ -1616,8 +1616,10 @@ Discussed priorities w/ Susan:
    * update MOHID-Cmd: code & docs
    * release MOHID-Cmd as 21.1
 Changed SalishSeaCast/erddap-datasets repo default branch name from master to main; updated on kudu, skookum.
-Started updating ERDDAP dataset description for ubcONCTWDP1mV18-01 to add nemo_grid_[ji] variables; stopped and restarted ERDDAP w/ sudo /opt/tomcat/bin/shutdown.sh; sudo /opt/tomcat/bin/startup.sh
 (SalishSeaCast)
+
+Started updating ERDDAP dataset description for ubcONCTWDP1mV18-01 to add nemo_grid_[ji] variables; stopped and restarted ERDDAP w/ sudo /opt/tomcat/bin/shutdown.sh; sudo /opt/tomcat/bin/startup.sh
+(ERDDAP)
 
 Monthly project mtg.
 (MIDOSS)
@@ -1680,10 +1682,252 @@ Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
 (SalishSeaCast)
 
 
+Week 13
+-------
+
+Mon 29-Mar-2021
+^^^^^^^^^^^^^^^
+
+Week 54 of UBC work-from-home due to COVID-19
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+(SalishSeaCast)
+
+Started watching Atlantis session #1.
+Atlantis session #1 Q&A:
+* who, where, interest
+(Atlantis)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Updating ERDDAP dataset descriptions:
+* chg ubcONCTWDP1mV18-01 temperature vars long name to "potential temperature"
+* add addAttributes tags to change ONC URLs from dmas.uvic.ca to data.oceannetworks.ca
+Stopped and restarted ERDDAP w/ sudo /opt/tomcat/bin/shutdown.sh; sudo /opt/tomcat/bin/startup.sh
+(ERDDAP)
+
+
+Tue 30-Mar-2021
+^^^^^^^^^^^^^^^
+
+Committed, pushed & deployed fixes to addAttributes tag typos that I forgot to do yesterday.
+Stopped and restarted ERDDAP w/ sudo /opt/tomcat/bin/shutdown.sh; sudo /opt/tomcat/bin/startup.sh
+(ERDDAP)
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+Test run of SalishSeaCast nowcast-green on graham in StdEnv2020:
+* used builds from 23-Mar; XIOS-ARCH cc-stdenv-2020 branch
+* pulled in changes:
+  * grid
+  * NEMO-3.6
+  * NEMO-Cmd
+  * rivers-climatology
+  * SalishSeaCmd
+  * tides
+  * tracers
+  * XIOS-2
+* crafted YAML run description from nowcast-green/30mar21 run
+* test failed due to namtrc misspelled variable
+Changed default branch name in NEMO-Cmd repo to main.
+(SalishSeaCast)
+
+Squash-merged Dependabot PRs re: bump pygments to 2.7.4:
+* SalishSeaCast/SOG-Bloomcast
+* SalishSeaCast/analysis-doug x2
+* SalishSeaCast/SOG
+* SalishSeaCast/FVCOM-Cmd
+* SalishSeaCast/NEMO-Cmd
+* 43ravens/ECget
+* MIDOSS/docs
+Ignored PR in:
+* douglatornell/asyncio-tutorial
+* douglatornell/randopony
+(MOAD)
+
+See work journal.
+(Ocean Navigator)
+
+
+Wed 31-Mar-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+Learned of missing HRDPS files in Navigator call, then email, then found that yesterday's 18 forecast contains only 525 of 576 files, and collect_weather 18 never finished; recovery started at ~10:35:
+  pkill collect_weather
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210330/18
+  download_weather 18 2.5km --debug  # beause I wasn't sure if I needed --yesterday; turns out no
+  download_weather 00 2.5km
+  download_weather 06 2.5km
+  collect_weather 18 2.5km
+  wait for forecast2 runs to finish
+  download_weather 12 2.5km
+  wait for nowcast-blue run to finish
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+Continued testing run of SalishSeaCast nowcast-green on graham in StdEnv2020:
+* Susan identified namtrc issue as being due to removal of MYTRC1 variable from newer-than-production SalishSeaCast config
+* sorted out Fraser turbidity forcing file location
+* Discovered that XIOS-2 is throwing runtime errors and causing core dump
+Changed default branch name in SalisheSeaCmd repo to main; updated clones of it and NEMO-Cmd on kudu, graham, skookum, arbutus, optimum & orcinus.
+(SalishSeaCast)
+
+Wrote slack msg to Birgit re: staying on StdEnv/2016.4 and how to change to StdEnv/2020 when she is ready.
+(Arctic)
+
+Updated SalishSeaCast/docs re: module load versions to build and run NEMO w/ Compute Canada StdEnv/2020.
+(MOAD)
+
+Coffee w/ Tereza.
+
+
+Thu 1-Apr-2021
+^^^^^^^^^^^^^^
+
+Compute Canada changed graham env from StdEnv/2016.4 to StndEnv/2020.
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+Continued testing run of SalishSeaCast nowcast-green on graham in StdEnv2020:
+* repeated yesterday's last run w/ XIOS-2 core dump in case I misinterpreted module load default on compute nodes and StdEnv/2020 wasn't there for yesterday's test; more fail
+(SalishSeaCast)
+
+Squash-merged Dependabot PRs re: bump lxml to 4.6.3:
+SalishSeaCast/SalishSeaNowcast
+SalishSeaCast/tools
+(MOAD)
+
+Finished watching Atlantis session #1.
+Started watching Atlantis session #2.
+Atlantis session #2 Q&A:
+* physical env:
+  * currents, temperature, salinity, total_alkalinity, pCO2
+  * bacteria, phytos, zoops, corals
+(Atlantis)
+
+
+Fri 2-Apr-2021
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Good Friday
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+Fixed broken links in SalishSeaCmd docs.
+(SalishSeaCast)
+
+Evaluated linux photo mgmt app; shotwell, digikam.
+Got matisse set up and running w/ its external drives on my desk.
+
+
+Sat 3-Apr-2021
+^^^^^^^^^^^^^^
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+Was so late starting NEMO forecast run that make_fvcom_boundary forecast failed; recovery:
+  wait for NEMO forecast run to finish
+  launch_remote_worker make_fvcom_boundary "x2 forecast"
+(SalishSeaCast)
+
+rsync-ed iPhoto Originals/ from matisse to lizzy warehouse/shared/photos/.
+
+
+Sun 4-Apr-2021
+^^^^^^^^^^^^^^
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+(SalishSeaCast)
+
+Read digikam docs.
+Set up remote desktop access to lizzy from kudu.
+
+
+April
+=====
+
+Week 14
+-------
+
+Mon 5-Apr-2021
+^^^^^^^^^^^^^^
+
+Week 55 of UBC work-from-home due to COVID-19
+
+Fixed broken link to pytest docs in UBC-MOAD/docs; found by monthly scheduled linkcheck.
+(MOAD)
+
+LiveOcean was slow; failed at 11:54; re-ran successfully at 13:41.
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+(SalishSeaCast)
+
+Used `sudo setfacl -m g:sada:rx /media/doug/`` after `sudo chgrp`, etc. to make warehouse/shared/ accessible.
+Decided to try digikam; installed it on lizzy; initialized a collection from the iPhoto Originals/ directory in warehouse/shared/photos.
+
+
+
+
+TODO: when we can change to CC StdEnv/2020:
+* XIOS-ARCH:
+  * merge cc-stdenv-2020 branch
+* NEMO-Cmd:
+  * merge cc-stdenv-2020 branch
+  * release v21.1
+  * bump to v21.2.dev0
+* SalishSeaCmd:
+  * merge cc-stdenv-2020 branch
+  * release v21.1
+  * bump to v21.2.dev0
+* finalize message in #general channel
+  * mention new module load versions re: .bashrc
+
+
 
 
 TODO:
 * change http://dmas.uvic.ca/ to https://data.oceannetworks.ca/ in datasets.xml
+
+Update ONC URLs to https://data.oceannetworks.ca/
+
 
 
 TODO: Confirm that get_chs_tides() is working for figures.
