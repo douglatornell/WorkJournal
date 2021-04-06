@@ -1885,6 +1885,8 @@ Week 14
 Mon 5-Apr-2021
 ^^^^^^^^^^^^^^
 
+**Statutory Holiday** - Easter Monday
+
 Week 55 of UBC work-from-home due to COVID-19
 
 Fixed broken link to pytest docs in UBC-MOAD/docs; found by monthly scheduled linkcheck.
@@ -1903,6 +1905,109 @@ Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
 Used `sudo setfacl -m g:sada:rx /media/doug/`` after `sudo chgrp`, etc. to make warehouse/shared/ accessible.
 Decided to try digikam; installed it on lizzy; initialized a collection from the iPhoto Originals/ directory in warehouse/shared/photos.
 
+
+Tue 6-Apr-2021
+^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Skimmed Greg Szorc's fascinating https://gregoryszorc.com/blog/2021/04/06/surprisingly-slow/ post; made me think about all the ways I/we use zlib compression that may actually be bottle necks; also interesting to see all the things that affect CPU core operations.
+
+Updated and rebooted niko.
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+Fixed broken link to AGRIF site in NEMO-Cmd changelog; found by monthly scheduled linkcheck.
+Discovered that yesterday's nowcast-dev went MIA on launch; recovery:
+  make_forcing_links salish nowcast+ --shared-storage --run-date 2021-04-05
+  wait for run to complete
+
+  make_forcing_links salish nowcast+ --shared-storage --run-date 2021-04-06
+(SalishSeaCast)
+
+Watched Atlantis session #3 video.
+* autoconf-based build system
+* docker for Windows
+* executable: atlantisMerged
+* model config:
+  * .bgm file to define polygons (boxes); can be generated from shape file via utility
+  * species groups files: .csv or .xml
+    * detritus groups must be last
+  * initial conditions in netCDF
+    * layers number from 0 upward through water column, then downward through sediments
+  * parameter files are:
+      scalars: `key value  # comment` text files
+      arrays:
+        name size
+         value value value ...
+        * truncated if number of values > size
+        * last value repeated if number of values < size
+        * warning issued
+    * biology parameter file is 14640 lines !!!
+    * files:
+      * biology
+      * harvest
+      * physics
+      * forcing; different format; mostly pointing to other files
+        * catch time series files; .ts
+        * homebrewed format
+          * # comments
+          * schema in ## magic comments !!!
+          * tab/space delimited data
+    * output file:
+      * flat text; post-process w/ R scripts; shiny, Rstudio
+      * spatial; Olive old Python viz app; R scripts
+Build atlantis on salish:
+  mkdir /ocean/dlatorne/Atlantis
+  chmod g+ws /ocean/dlatorne/Atlantis/
+  cd /ocean/dlatorne/Atlantis/
+  svn co --username ... ,,,/svn/ext/atlantis/Atlantis/trunk/ atlantis-trunk
+  # declined encrypted password storage
+  # autoconf already installed
+  # automake already installed
+  aclocal
+  autoheader
+  autoconf
+  automake -a
+  ./configure
+  # failed with:
+      Proj4 library is required for Atlantis. Install package proj
+  sudo apt install libproj-dev
+  ./configure
+  make clean
+  make
+  # failed with:
+      salish:atlantis$ make
+      make  all-recursive
+      make[1]: Entering directory '/ocean/dlatorne/Atlantis/atlantis-trunk/atlantis'
+      Making all in ConvertAtlantis
+      make[2]: Entering directory '/ocean/dlatorne/Atlantis/atlantis-trunk/atlantis/ConvertAtlantis'
+      gcc -DHAVE_CONFIG_H -I. -I.. -I/usr/include/libxml2 -I../atassess/include -I../atecology/include -I../ateconomic/include -I../atlantisUtil/include -I../atlantismain/include -I../atharvest/include -I../atimplementation/include -I../atmanage/include -I../atphysics/include -I../atFileConvert/include -I../sjwlib/include  -I../ConvertAtlantis/include -I../atSS3Link/include -I. -I../atlantismain     -D PROJ4 -D REPLICATE_OLD_RESULTS -D BETH_LOG_FILE_SIZE  -g -msse2 -mfpmath=sse   -Wall -Wextra -Wno-unused-parameter -Wuninitialized -Warray-bounds -Wunused-but-set-variable -Wno-error=unused-but-set-variable  -Wformat-overflow -Werror  -pedantic  -std=c99    -MT atBioltoXML.o -MD -MP -MF .deps/atBioltoXML.Tpo -c -o atBioltoXML.o atBioltoXML.c
+      gcc: error: unrecognized command line option ‘-Wformat-overflow’
+      Makefile:453: recipe for target 'atBioltoXML.o' failed
+      make[2]: *** [atBioltoXML.o] Error 1
+      make[2]: Leaving directory '/ocean/dlatorne/Atlantis/atlantis-trunk/atlantis/ConvertAtlantis'
+      Makefile:373: recipe for target 'all-recursive' failed
+      make[1]: *** [all-recursive] Error 1
+      make[1]: Leaving directory '/ocean/dlatorne/Atlantis/atlantis-trunk/atlantis'
+      Makefile:314: recipe for target 'all' failed
+      make: *** [all] Error 2
+  Sent email to Bec.
+  Hacked PreRules.am to remove -Wformat-overflow
+  Build success!!
+  Skipped `sudo make install`; executable is atlantis-trunk/atlantis/atlantismain/atlantisMerged
+Atlantis session #3 Q&A:
+* learned about PreRules.am
+* learned where executable lives
+* Javier uses bash, emacs org-mode, and GitHub to do the equivalent of NEMO-Cmd
+* Thoughts:
+  * probably need AtlantisCmd
+  * probably need equivalent of SS-run-sets
+(Atlantis)
 
 
 
