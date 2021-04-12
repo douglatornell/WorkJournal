@@ -1672,7 +1672,6 @@ Drove to White Rock for Susan to visit J&M; walked in Ruth Johnson Park and alon
 Sun 28-Mar-2021
 ^^^^^^^^^^^^^^^
 
-rsync-ed SalishSeaTools and nowcast/figures/publish/compare_tide_prediction_max_ssh.py to skookum for testing.
 Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
   upload_forcing arbutus ssh
@@ -1924,9 +1923,6 @@ Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
 Fixed broken link to AGRIF site in NEMO-Cmd changelog; found by monthly scheduled linkcheck.
 Discovered that yesterday's nowcast-dev went MIA on launch; recovery:
   make_forcing_links salish nowcast+ --shared-storage --run-date 2021-04-05
-  wait for run to complete
-
-  make_forcing_links salish nowcast+ --shared-storage --run-date 2021-04-06
 (SalishSeaCast)
 
 Watched Atlantis session #3 video.
@@ -2010,6 +2006,171 @@ Atlantis session #3 Q&A:
 (Atlantis)
 
 
+Wed 7-Apr-2021
+^^^^^^^^^^^^^^
+
+PyCharm 2021.1 released; watched summary video; updated kudu.
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  upload_forcing orcinus nowcast+
+  upload_forcing graham nowcast+
+  upload_forcing optimum nowcast+
+Backfilling nowcast-dev:
+  wait for today's run to fail
+  make_forcing_links salish nowcast+ --shared-storage --run-date 2021-04-06
+  wait for run to complete
+  make_forcing_links salish nowcast+ --shared-storage --run-date 2021-04-07
+Built new nowcast-env on skookum:
+  * killed stale workers:
+      ps faux | grep nowcast
+      pkill -9 -f make_surface_current_tiles
+      pkill -f nowcast.workers.upload_forcing
+      pkill -f nowcast.workers.make_runoff_file
+      pkill -9 -f nowcast.workers.make_plot
+  * killed workers associated with tasks in progress; 3 are note yet timed out ssh connections:
+      pkill -f collect_weather
+      pkill -f watch_NEMO
+      pkill -f run_fvcom
+      pkill -f watch_fvcom
+  * stopped long-running processes via supervisorctl, then shit down supervisord:
+      supervisorctl stop log_aggregator
+      supervisorctl stop manager
+      supervisorctl stop message_broker
+      supervisorctl stop sr_subscribe-hrdps-west
+      supervisorctl stop sr_subscribe-hrdps-west-1km
+      supervisorctl stop sr_subscribe-hydrometric
+      supervisorctl shutdown
+  * deactivated and removed nowcast-env
+      conda deactivate
+      conda env remove --prefix /SalishSeaCast/nowcast-env
+  * updated conda
+      conda update -n base -c defaults conda
+  * updated git clones ** except OPPTools**
+      NEMO_Nowcast
+      moad_tools
+      SalishSeaTools  # git stash; git pull; git stash pop
+      NEMO-Cmd
+      SalishSeaCmd
+      SalishSeaNowcast  # git stash; git pull; git stash pop
+  * create new nowcast-env
+      conda env create --prefix /SalishSeaCast/nowcast-env -f envs/environment-prod.yaml
+  * set up envvars:
+      added export NUMEXPR_MAX_THREADS=6 to /SalishSeaCast/nowcast-env-envvars.sh
+      cp nowcast-env-envvars.sh nowcast-env/etc/conda/activate.d/envvars.sh
+      constructed nowcast-env/etc/conda/deactivate.d/envvars.sh from /SalishSeaCast/nowcast-env-envvars.sh
+  * install our pkgs:
+      NEMO_Nowcast
+      moad_tools
+      SalishSeaTools
+      OPPTools
+      NEMO-Cmd
+      SalishSeaCmd
+      SalishSeaNowcast
+Updated OS pkgs on arbutus nowcast0; TODO reboot nowcast0 when cluster is quiet
+  sudo apt update
+  sudo apt upgrade
+  sudo apt autoremove
+Restarted nowcast-env automation on skookum:
+  * start supervisord
+  * restart workers associated with tasks in progress:
+      collect_weather 00 2.5km
+Tested water level figs in new env:
+  make_plots nemo forecast publish
+    failed on CherryPoint, FridayHarbor due to bad id
+    failed on HalfmoonBay dur to: AttributeError: 'Float64Index' object has no attribute 'tz_convert'
+  make_plots fvcom nowcast publish
+(SalishSeaCast)
+
+Squash-merged Dependabot PRs re: bump urllib3 to 1.26.4:
+* UBC-MOAD/docs
+* UBC-MOAD/moad_tools
+* 43ravens/NEMO_Nowcast
+* MIDOSS/MOHID-Cmd
+* MIDOSS/Make-MIDOS-Forcing
+* SalishSeaCast/tools
+* SalishSeaCast/SalishSeaNowcast
+* SalishSeaCast/SOG-Bloomcast-Ensemble
+* SalishSeaCast/salishsea-site
+(MOAD)
+
+
+Thu 8-Apr-2021
+^^^^^^^^^^^^^^
+
+Rebooted nowcast0 at ~08:30 and it failed with:
+  Error: Failed to perform requested operation on instance "nowcast0", the instance has an error status: Please try again later [Error: libvirtError].
+Did a shutdown on the instance and tried to restart it, but it kept erroring out; send email to cloud@. Response at ~10:30 from Jeff Albert; problem was related to persistent volume attachement; he manually re-attached the volume and the instance booted. Recovery:
+* Re-mount persistent storage volume:
+    sudo mount /dev/vdc /nemoShare  # took several seconds of nervousness
+* Re-bind /nemoShare/MEOPAR to /export/MEOPAR
+    sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+* Fix /etc/fstab and restart NFS service:
+    # add to /etc/fstab; why was it missing?
+    /nemoShare/MEOPAR   /export/MEOPAR  none  bind  0  0
+    sudo systemctl start nfs-kernel-server.service
+* Fix stale NFS handles on compute nodes:
+    sudo exportfs -f  # on nowcast0
+* Launched nowcast-blue via make_forcing_links
+    make_forcing_links arbutus nowcast+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+  # realized that there is no need to do upload_forcing nowcast+ for orcinus, optimum & optimum because they succeed after grib_to_netcdf, and there is no new ssh data after than
+Helped Aline get her SalishSeaCast/docs env sorted out re: pandoc.
+(SalishSeaCast)
+
+FAL estate work:
+* confirmed info w/ Scotia for closure of account
+* authorized and paid for headstone cleaning and engraving
+
+Worked on strata building insurance.
+
+Filed ProServices quarterly usage report.
+
+Atlantis session #4 Calibration & R tools:
+* https://seaview.csiro.au/index.html
+* RStudio and Shiny
+
+
+Fri 9-Apr-2021
+^^^^^^^^^^^^^^
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  upload_forcing arbutus ssh
+Discussed updating get_NeahBay_ssh w/ Susan.
+Resumed work on getting NEMO and FVCOM water level figures to work w/ new CHS IWLS API obs and predicions; figures all working now, I think; uncommitted code on skookum to test in automation.
+(SalishSeaCast)
+
+FAL estate work: signed letter of transmission for chequing acct at Scotia; deposited Manulife chq at TD
+
+
+Sat 10-Apr-2021
+^^^^^^^^^^^^^^^
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  upload_forcing arbutus ssh
+(SalishSeaCast)
+
+Drove to white Rock to visit M&J; first time since Mar-2020 that we have been able to go to J's suite; 1st time since Mar-2020 that I have seen them in person.
+Walked in Mud Bay Park on the way home; very windy.
+
+
+Sun 11-Apr-2021
+^^^^^^^^^^^^^^^
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  upload_forcing arbutus ssh
+Committed, merged, and pushed SalishSeaTools.data_tools.get_chs_tides() changes re: 7 day water level request limit, pandas datetimes timezone handling, and edge cases of station codes.
+Committed, merged, and pushed SalishSeaNowcast CHS-water-levels branch
+(SalishSeaCast)
+
+Cycled to east end of River Rd and back; 1st outdoor training ride of the year; pleased with how well Zwift fitness transferred to riding on the road.
+
+
+
+
 
 TODO: when we can change to CC StdEnv/2020:
 * XIOS-ARCH:
@@ -2028,18 +2189,10 @@ TODO: when we can change to CC StdEnv/2020:
 
 
 
-TODO:
-* change http://dmas.uvic.ca/ to https://data.oceannetworks.ca/ in datasets.xml
 
 Update ONC URLs to https://data.oceannetworks.ca/
 
 
-
-TODO: Confirm that get_chs_tides() is working for figures.
-
-
-
-Verify NEMO & MOHID builds w/ new default env on graham
 
 Update cookiecutter-MOAD-pypkg re: hg -> git
 
