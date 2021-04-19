@@ -1961,8 +1961,8 @@ Build atlantis on salish:
   mkdir /ocean/dlatorne/Atlantis
   chmod g+ws /ocean/dlatorne/Atlantis/
   cd /ocean/dlatorne/Atlantis/
-  svn co --username ... ,,,/svn/ext/atlantis/Atlantis/trunk/ atlantis-trunk
-  # declined encrypted password storage
+  svn co --username ... .../svn/ext/atlantis/Atlantis/trunk/ atlantis-trunk
+  # declined unencrypted password storage
   # autoconf already installed
   # automake already installed
   aclocal
@@ -2167,6 +2167,208 @@ Committed, merged, and pushed SalishSeaNowcast CHS-water-levels branch
 (SalishSeaCast)
 
 Cycled to east end of River Rd and back; 1st outdoor training ride of the year; pleased with how well Zwift fitness transferred to riding on the road.
+
+
+Week 15
+-------
+
+Mon 12-Apr-2021
+^^^^^^^^^^^^^^^
+
+Week 56 of UBC work-from-home due to COVID-19
+
+See work journal.
+(Ocean Navigator)
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar: Andrew Shao
+
+No email from outside EOAS is reaching me.
+
+FAL estate: received 2020 trust tax assessment notice & trust number
+
+
+Tue 13-Apr-2021
+^^^^^^^^^^^^^^^
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+(SalishSeaCast)
+
+Helped Raisha with Atlantis build system on her Mac.
+Watched video #5.
+Used VSCode for Atlantis work:
+* updated c/c++ extension
+* installed autoconf extension for syntax highlighting
+Build atlantis on kudu:
+  mkdir /media/doug/warehouse/Atlantis
+  cd /media/doug/warehouse/Atlantis
+  # created enviornment-dev.yaml
+  conda env create -f enviornment-dev.yaml
+  svn co --username ... ,,,/svn/ext/atlantis/Atlantis/trunk/ atlantis-trunk
+  aclocal
+  autoheader
+  autoconf
+  automake -a
+  ./configure
+  # failed to detect libproj
+  # hacked configure.ac to look for proj_context_create() instead of pj_init()
+  autoconf
+  automake -a
+  ./configure
+  make
+  # problems with with proj function calls
+  # rolled env back to proj4
+  aclocal
+  autoheader
+  autoconf
+  automake -a
+  ./configure
+  make
+  # bunch of wraning to error conversions; hacked around them in configure.ca:
+    WARN += -Wno-unused-result
+    WARN += -Wno-format-overflow
+    WARN += -Wno-stringop-truncation
+    WARN += -Wno-stringop-overflow
+  automake -a
+  ./configure
+  # successful build
+    executable: /media/doug/warehouse/Atlantis/atlantis-trunk/atlantis/atlantismain/atlantisMerged
+  # successful run of example
+Add R to env:
+  # add r and r-devtools to conda env
+  # from https://github.com/Atlantis-Ecosystem-Model/ReactiveAtlantis README
+  R
+  > library("devtools")
+  > install_github('Atlantis-Ecosystem-Model/ReactiveAtlantis', force=TRUE, dependencies=TRUE)
+  # skip updates
+  # lots of compilation
+  > library("ReactiveAtlantis")
+  > biom <- 'atlantis-trunk/example/outputFolder/outputSETASBiomIndx.txt'
+  > diet.file <- "atlantis-trunk/example/outputFolder/outputSETASDietCheck.txt"
+  > bio.age <- "atlantis-trunk/example/outputFolder/outputSETASAgeBiomIndx.txt"
+  > grp.csv <- "atlantis-trunk/example/SETasGroupsDem.csv"
+  > predation(biom, grp.csv, diet.file, bio.age)
+  Loading required package: shiny
+
+  Listening on http://127.0.0.1:6811
+  Error in utils::browseURL(appUrl) :
+    'browser' must be a non-empty character string
+Emailed Javier for help.
+(Atlantis)
+
+Updated conda on kudu from 4.9.2 to 4.10.0.
+
+Some ex-EOAS messages arrived over night
+Sent sample of delayed to Charles in EOAS #general.
+
+
+Wed 14-Apr-2021
+^^^^^^^^^^^^^^^
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+Continued work on new collect_NeahBay_ssh worker; deployed for testing to skookum; Susan successfully tested it in the evening for the 15Apr 00Z data.
+(SalishSeaCast)
+
+Watched video #6.
+More work on trying to get ReactiveAtlantis to work:
+* got a minimal demo shiny app to run; key was:
+    > options(browser = 'firefox')
+    # before
+    > runApp("app.R")  # or mybe just runApp()
+* and for clone of ReactiveAtlantis:
+    > options(browser = 'firefox')
+    > library("devtools")
+    > install_local("/media/doug/warehouse/Atlantis/ReactiveAtlantis")
+    > library("ReactiveAtlantis")
+    # in example/outputFolder/
+    > biom <- "outputSETASBiomIndx.txt"
+    > diet.file <- "outputSETASDietCheck.txt"
+    > bio.age <- "outputSETASAgeBiomIndx.txt"
+    > grp.csv <- "../SETasGroupsDem.csv"
+    > predation(biom, grp.csv, diet.file, bio.age)
+(Atlantis)
+
+
+Thu 15-Apr-2021
+^^^^^^^^^^^^^^^
+
+FAL estate: emailed PDF of 2020 trust tax assessment notice & trust number to Cameron
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+Added step to GHA CI workflow for SalishSeaNowcast to run `env` in shell so that I could audit for secrets in the env that might have been exposed due to https://about.codecov.io/security-update/; found none :-)
+Started re-run in tmux on salish of get_onc_ctd for SCVIP for 2015-2018 for Susan's flux paper.
+(SalishSeaCast)
+
+See work journal.
+(Ocean Navigator)
+
+
+Fri 16-Apr-2021
+^^^^^^^^^^^^^^^
+
+EOAS Linux /home unavailable from 09:00 to ??? due to NextCloud server OS update;
+
+Scanned time tracking spreadsheet and work logs to compile list of MEOPAR Prediction Core activities during Apr-20 through Mar-21 for Susan to report on.
+(Prediction Core)
+
+Got reconnected to skookum at ~17:15; collect_weather 12 still waiting to complete w/ 72 of 576 files downloaded; recovery:
+  pkill collect_weather 12
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210416/12
+  download_weather 12 2.5km
+  download_weather 18 2.5km
+  download_weather 00 1km  # 404 errors
+  download_weather 12 1km
+  collect_weather 00 2.5km
+  wait for nowcast-blue run to finish
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+(SalishSeaCast)
+
+Filed 43ravens GST/HST return for 2020.
+
+Updated lots of 43ravens repos to change default branch name from main to master.
+
+Noticed that GitHubhave added:
+  git remote set-head origin -a
+to the post-default-branch rename commands list.
+
+Did 1st pass on income tax returns.
+
+
+Sat 17-Apr-2021
+^^^^^^^^^^^^^^^
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+(SalishSeaCast)
+
+Cycled reverse Richmond loop, minus Iona, and River Rd east of No. 7 Road; used No. 7 Rd instead of No. 6 Rd to get north - less traffic. 60 km
+
+
+Sun 18-Apr-2021
+^^^^^^^^^^^^^^^
+
+* patch for PreRules.am ??
+* silence PIL.PngImagePlugin logging
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+(SalishSeaCast)
 
 
 
