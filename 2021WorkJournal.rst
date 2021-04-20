@@ -2376,9 +2376,6 @@ Mon 19-Apr-2021
 
 Week 57 of UBC work-from-home due to COVID-19
 
-* silence PIL.PngImagePlugin logging
-* patch for PreRules.am ??
-
 Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
   upload_forcing arbutus ssh
@@ -2389,6 +2386,23 @@ Group mtg; see whiteboard.
 (MOAD)
 
 Phys Ocgy seminar.
+
+
+Tue 20-Apr-2021
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+* silence PIL.PngImagePlugin logging
+* patch for PreRules.am ??
+
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+Continued dev of make_ssh_file worker to replace 2nd step of get_NeahBay_ssh.
+(SalishSeaCast)
+
+
 
 
 
