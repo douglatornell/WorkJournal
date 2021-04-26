@@ -2393,14 +2393,130 @@ Tue 20-Apr-2021
 
 Worked at ESB while Rita was at home.
 
-* silence PIL.PngImagePlugin logging
-* patch for PreRules.am ??
-
 Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
   upload_forcing arbutus ssh
 Continued dev of make_ssh_file worker to replace 2nd step of get_NeahBay_ssh.
 (SalishSeaCast)
+
+Squash-merged a bunch of dependabot PRs re: regex DoS vulnerability in py pkg.
+
+
+Wed 21-Apr-2021
+^^^^^^^^^^^^^^^
+
+upload_forcing orcinus foreast2 failed due to network connection time-out; still can't connect to orcinus at 09:08.
+Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  upload_forcing arbutus ssh
+Did SalishSeaCast results archives maintenance flowing from Susan's recent work to copy results to archive drives:
+* deleted /results/SalishSeaCast/nowcast-blue.201905/*20/ and /results/SalishSeaCast/nowcast-blue.201905/*[jan|feb|mar]21/ to free up ~1Tb
+* deleted /results/SalishSeaCast/nowcast-agrif.201702/*20/ and /results/SalishSeaCast/nowcast-agrif.201702/*[jan|feb|mar]21/ to free up ~0.6Tb
+(SalishSeaCast)
+
+Monthly project mtg.
+Updated repos on graham.
+Tried to build MOHID in StdEnv2020 on graham:
+  module load nco/4.9.5
+  module load netcdf-fortran/4.5.2
+  module load python/3.8.2
+  module load proj4-fortran -- FAILED!
+(MIDOSS)
+
+
+Thu 22-Apr-2021
+^^^^^^^^^^^^^^^
+
+ocean OS upgraded to 18.04 LTS
+
+Managed get_NeahBay_ssh issue in automation; tested new workers; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  collect_NeahBay_ssh 06
+  make_ssh_file nowcast
+  upload_forcing arbutus ssh
+Surprised that Neah Bay 12Z file was not available at ~09:30.
+Backfilling nowcast-agrif:
+  upload_forcing forecast2 2021-04-21
+  upload_forcing nowcast+ 2021-04-21
+  upload_forcing turbidity 2021-04-21
+  make_forcing_links nowcast-agrif 2021-04-21
+  wait for run to finish
+  make_forcing_links nowcast-agrif 2021-04-22
+Manager crashed and was restarted when collect_weather 18 tried to finish; recovery:
+  pkill -f collect_weather
+  collect_weather 00 2.5km &
+  download_weather 00 1km &
+  download_weather 12 1km &
+Managed get_NeahBay_ssh issue in automation; tested new workers; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  collect_NeahBay_ssh 06
+  make_ssh_file nowcast
+  upload_forcing arbutus ssh
+(SalishSeaCast)
+
+Discussed skookum & salish OS upgrades w/ Charles on Slack; agreed on after 13:00 Fri afternoon.
+
+Practice talks by Keegan & Aline; also Birgit, Elise & Tereza EGU pico-talks.
+
+Zoom-coffee w/ Debby & Paul.
+
+See work journal.
+(Ocean Navigator)
+
+
+Fri 23-Apr-2021
+^^^^^^^^^^^^^^^
+
+Booked COVID-19 vaccine appointment!
+
+Morning mgmt of get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  collect_NeahBay_ssh 06
+  make_ssh_file nowcast
+  upload_forcing arbutus ssh
+salish & skookum OS upgrades to 18.04 LTS.
+Evening mgmt of get_NeahBay_ssh issue in automation; after 22:00:
+  collect_NeahBay_ssh 00 2021-04-24
+  make_ssh_file forecast2 2021-04-24
+(SalishSeaCast)
+
+Farewell MOAD social Zoom for Keegan & Aline.
+
+Susan started shifting to CET for EGU conference.
+
+
+Sat 24-Apr-2021
+^^^^^^^^^^^^^^^
+
+Morning mgmt of get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  collect_NeahBay_ssh 06
+  make_ssh_file nowcast
+  upload_forcing arbutus ssh
+Evening mgmt of get_NeahBay_ssh issue in automation; after 22:00:
+  collect_NeahBay_ssh 00 2021-04-25
+  make_ssh_file forecast2 2021-04-25
+(SalishSeaCast)
+
+Drove to White Rock to visit M&J.
+
+
+Sun 25-Apr-2021
+^^^^^^^^^^^^^^^
+
+* silence PIL.PngImagePlugin logging
+* patch for PreRules.am ??
+
+Morning mgmt of get_NeahBay_ssh issue in automation; after nowcast-blue completion:
+  pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
+  collect_NeahBay_ssh 06
+  make_ssh_file nowcast
+  upload_forcing arbutus ssh
+Tried to backfill nowcast-dev; failed due to XIOS mofinding libmpihf; need to build new executables for new OS, I guess.
+(SalishSeaCast)
+
+Strained back after TOoW stage 3 make-up Out & Back ride on Zwift.
+
 
 
 
