@@ -1872,7 +1872,7 @@ Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
 (SalishSeaCast)
 
 Read digikam docs.
-Set up remote desktop access to lizzy from kudu.
+Set up remote desktop access to lizzy from kudu via Remmina client on kudu and VNC enabled w/ password on lizzy.
 
 
 April
@@ -2504,9 +2504,6 @@ Drove to White Rock to visit M&J.
 Sun 25-Apr-2021
 ^^^^^^^^^^^^^^^
 
-* silence PIL.PngImagePlugin logging
-* patch for PreRules.am ??
-
 Morning mgmt of get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
   collect_NeahBay_ssh 06
@@ -2515,11 +2512,153 @@ Morning mgmt of get_NeahBay_ssh issue in automation; after nowcast-blue completi
 Tried to backfill nowcast-dev; failed due to XIOS mofinding libmpihf; need to build new executables for new OS, I guess.
 (SalishSeaCast)
 
-Strained back after TOoW stage 3 make-up Out & Back ride on Zwift.
+Strained back after ToW stage 3 make-up Out & Back ride on Zwift.
+
+
+Week 16
+-------
+
+Mon 26-Apr-2021
+^^^^^^^^^^^^^^^
+
+Week 58 of UBC work-from-home due to COVID-19
+
+Deployed collect_NeahBay_ssh and make_ssh_file automation for testing before nowcast; failed; fixed lots of bugs; updated docs & process flow fig.
+Added .gitattributes to SalishSeaNowcast to tell GitHub linguist tool to classify .ipynb files as Python to make repo landing page language statistics more accurate.
+(SalishSeaCast)
+
+Phys Ocgy seminars by co-op students.
+
+
+Tue 27-Apr-2021
+^^^^^^^^^^^^^^^
+
+download_results forecast2 failed due to broken pipe; re-ran successfully at ~08:40.
+collect_NeahBay_ssh and make_ssh_file worked successfully in automation for forecast2, nowcast, and forecast runs.
+
+Worked on nowcast-dev:
+  built new XIOS-2 executable:
+    cd /SalishSeaCast/XIOS-2
+    ./tools/FCM/bin/fcm build --clean
+    ./make_xios --arch GCC_SALISH --netcdf_lib netcdf4_seq --job 8
+  built new NEMO SalishSeaCast_Blue executable:
+    cd /SalishSeaCast/NEMO-3.6-code/NEMOGCM/CONFIG
+    XIOS_HOME=/SalishSeaCast/XIOS-2 ./makenemo -m GCC_SALISH -n SalishSeaCast_Blue clean
+    XIOS_HOME=/SalishSeaCast/XIOS-2 ./makenemo -m GCC_SALISH -n SalishSeaCast_Blue -j8
+  built new REBUILD_NEMO executable:
+    cd /SalishSeaCast/NEMO-3.6-code/NEMOGCM/TOOLS/
+    XIOS_HOME=/SalishSeaCast/XIOS-2 ./maketools -m GCC_SALISH -n REBUILD_NEMO clean
+    XIOS_HOME=/SalishSeaCast/XIOS-2 ./maketools -m GCC_SALISH -n REBUILD_NEMO
+      successful, but with warning:
+        /usr/bin/ld: warning: libgfortran.so.3, needed by /usr/lib/libnetcdff.so, may conflict with libgfortran.so.4
+  1st attempted run failed re: missing libmpi* that were present
+  subsequenst attempts failed in xios:
+    In file "memory.cpp", function "void xios::noMemory()",  line 9 -> Out of memory
+(SalishSeaCast)
+
+Filed tax returns.
+
+
+Wed 28-Apr-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+
+Thu 29-Apr-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Ocean Navigator)
+
+FAL estate work: picked up draft from Scotia.
+
+Charles shutdown skookum at 13:00 to replace failed drive in /opp array; restarted at ~14:55:
+  sudo /opt/tomcat/bin/startup.sh
+  source activate /SalishSeaCast/salishsea-site-env/
+  supervisord -c /SalishSeaCast/salishsea-site/supervisord-prod.ini
+  conda deactivate
+  source activate /SalishSeaCast/nowcast-env
+  supervisord -c $NOWCAST_CONFIG/supervisord.ini
+  download_weather 18 2.5km
+  download_weather 00 1km
+  download_weather 12 1km
+  collect_weather 00 2.5km
+Started work on removing get_NeahBay_ssh worker; need to discuss failure recovery docs w/ Susan.
+Noticed taht download_weather xx 1km worked without --no-verify-certs flag; checked https://dd.alpha.meteo.gc.ca on https://entrust.ssllabs.com/analyze.html and found that it appears to now support TLS 1.1; hacked next_workers.py on skookum to remove --no-verify-certs arg; restarted manager.
+Charles rebooted skookum again at ~19:30; it failed to come up properly.
+(SalishSeaCast)
+
+
+Fri 30-Apr-2021
+^^^^^^^^^^^^^^^
+
+* silence PIL.PngImagePlugin logging
+* patch for PreRules.am ??
+
+See work journal.
+(Ocean Navigator)
+
+skookum had failed boot SSD and failed drive in /results that Charles replaced; back in operation at ~10:45; started recovery at ~11:05:
+  sudo /opt/tomcat/bin/startup.sh
+  source activate /SalishSeaCast/salishsea-site-env/
+  supervisord -c /SalishSeaCast/salishsea-site/supervisord-prod.ini
+  conda deactivate
+  source activate /SalishSeaCast/nowcast-env
+  supervisord -c $NOWCAST_CONFIG/supervisord.ini
+  download_weather 00 2.5km
+  collect_weather 18 2.5km
+  download_weather 06 2.5km
+  wait for forecast2 runs to finish
+  download_weather 12 2.5km
+download_weather hh 1km works in automation w/o --no-verify-certs flag; push change
+download_results nowcast-green failed due to connection closed by arbutus; re-ran manually.
+Fixed permissions in /opp where x bit got set for everything.
+(SalishSeaCast)
+
+Disabled cron job for daily runs.
+(Bloomcast)
+
+
+May
+===
+
+Sat 1-May-2021
+^^^^^^^^^^^^^^
+
+Cycled to convention centre to get 1st dose of Moderna COVID-19 vaccine.
+
+
+Sun 2-May-2021
+^^^^^^^^^^^^^^
+
+Another drive failure in one of the RAID arrays on salish.
+
+
+* silence PIL.PngImagePlugin logging
+* patch for PreRules.am ??
 
 
 
 
+
+
+
+
+Backfill nowcast-dev:
+
+  make_forcing_links salish nowcast+ --shared-storage 2021-04-23
+  make_forcing_links salish nowcast+ --shared-storage 2021-04-24
+  make_forcing_links salish nowcast+ --shared-storage 2021-04-25
+  make_forcing_links salish nowcast+ --shared-storage 2021-04-26
+  make_forcing_links salish nowcast+ --shared-storage 2021-04-27
+  make_forcing_links salish nowcast+ --shared-storage 2021-04-28
+  make_forcing_links salish nowcast+ --shared-storage 2021-04-29
+  make_forcing_links salish nowcast+ --shared-storage 2021-04-30
+  make_forcing_links salish nowcast+ --shared-storage 2021-05-01
+  make_forcing_links salish nowcast+ --shared-storage 2021-05-02
+  make_forcing_links salish nowcast+ --shared-storage 2021-05-03
 
 
 
@@ -2559,7 +2698,6 @@ https://linuxize.com/post/getting-started-with-tmux/
 
 update deployment docs re: spinning up a new compute node
 
-Fix permissions in /opp dirs
 
 OPPTools PRs:
   add numpy-indexed dependency
