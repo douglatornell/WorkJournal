@@ -2636,13 +2636,134 @@ Sun 2-May-2021
 Another drive failure in one of the RAID arrays on salish.
 
 
+Week 16
+-------
+
+Mon 3-May-2021
+^^^^^^^^^^^^^^
+
+Week 59 of UBC work-from-home due to COVID-19
+
+Changed docs repo default branch from master to main.
+Email from Ali says that proj4-fortran pkg is now available in StdEnv/2020 on graham.
+MOHID build mb1 build now fails w/ lots of errors in h5*() calls like:
+  #### Mohid Base 1 ####
+  src/ModuleHDF5.F90(494): error #6633: The type of the actual argument differs from the type of the dummy argument.   [STAT_CALL]
+          call h5screate_f (H5S_SCALAR_F, space_id, STAT_CALL)
+  --------------------------------------------------^
+They appear to be due to STAT_CALL being declared as integer(HID_T) when HDF5 library signature says that it should be integer, and the 2020 compiler is pickier than the 2016 one was. After a bunch of editing to resolve this for STAT_CALL, rank & class_id variables, found that some code internal to MOHID is producing similar errors and, in consultation with Susan, decided to belay using StdEnv/2020 until we are forced to.
+(MIDOSS)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar.
+
+
+Tue 4-May-2021
+^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Created https://github.com/MIDOSS/MIDOSS-MOHID-CODE/issues/9 re: MOHID build problems in graham StdEnv/2020.
+Updated docs & Make-MIDOS-Forcing and started MOHID-Cmd re: using StdEnv/2016.4.
+(MIDOSS)
+
+
+Wed 5-May-2021
+^^^^^^^^^^^^^^
+
+Raisha officially joined the group; invited her to GitHub orgs.
+
+Fixed broken link re: pip -e in docs; found by monthly linkcheck.
+Added GitHub Actions shpinx-linkcheck workflow to MOHID-Cmd to run on 10th of the month.
+(MOAD)
+
+nowcast run got stuck at 32.6% complete; no obvious reason; stopped run, killed watch_NEMO, and restarted via make_forcing_links; restart took ~6 minutes for run_NEMO to execute.
+(SalishSeaCast)
+
+
+Thu 6-May-2021
+^^^^^^^^^^^^^^
+
+Arranged 1st on-boarding mtg w/ Raisha.
+(Atlantis)
+
+arbutus file system issues got resolved overnight with no explanation other than "closed" on status pages.
+Backfilling:
+  make_turbidity_file 2021-05-05 --debug
+  upload_forcing arbutus turbidity --run-date 2021-05-05
+  upload_forcing orcinus turbidity --run-date 2021-05-05
+  upload_forcing graham turbidity --run-date 2021-05-05
+  upload_forcing optimum turbidity --run-date 2021-05-05
+  wait for nowcast-green run to finish
+  upload_forcing arbutus nowcast+ --run-date 2021-05-06
+  upload_forcing orcinus nowcast+ --run-date 2021-05-06
+  upload_forcing graham nowcast+ --run-date 2021-05-06
+  upload_forcing optimum nowcast+ --run-date 2021-05-06
+  wait for nowcast, forecast, nowcast-green & wwatch3 runs to finish; wwatch3 nowcast will be from quiescent state
+  make_forcing_links arbutus ssh 2021-05-05
+  kill watch_Nemo forecast
+  download_results arbutus forecast 2021-05-05
+  launch_remote_worker arbutus make_ww3_wind_file arbutus forecast 2021-05-05
+  launch_remote_worker arbutus make_ww3_current_file arbutus forecast 2021-05-05
+  launch_remote_worker arbutus make_ww3_wind_file arbutus forecast 2021-05-06
+  launch_remote_worker arbutus make_ww3_current_file arbutus forecast 2021-05-06
+Lots of trouble getting fvcom to run; eventually figured out that at least one of the namelist files was truncated, probably during yesterday's write failures, I guess.
+(SalishSeaCast)
+
+Susan got her 1st dose of Pfizer COVID-19 vaccine.
+
+
+Fri 7-May-2021
+^^^^^^^^^^^^^^
+
+Backfill fvcom runs:
+  wait for today's runs to fail
+  launch_remote_worker arbutus make_fvcom_boundary arbutus r12 nowcast 2021-05-06
+  launch_remote_worker arbutus make_fvcom_boundary arbutus x2 nowcast 2021-05-06
+  wait for forecast run to finish
+  launch_remote_worker arbutus make_fvcom_boundary arbutus x2 nowcast 2021-05-07
+Noticed that ONC SoG central node data stream resumed on 26-Mar.
+Created UBC-MOAD/ariane-2.3.0_03 while helping Becca sort out Ariane build issues; started updating MOAD docs re: Ariane.
+(SalishSeaCast)
+
+Coffee w/ Becca.
+
+
+Sat 8-May-2021
+^^^^^^^^^^^^^^
+
+Backfill fvcom runs:
+  launch_remote_worker arbutus make_fvcom_boundary arbutus r12 nowcast 2021-05-07
+(SalishSeaCast)
+
+Drove to White Rock to visit M&J.
+
+
+Sun 9-May-2021
+^^^^^^^^^^^^^^
+
+Woke up feeling like I had been hit by a truck; aches in neck, jaw, shoulder and legs; especially on left side; vaccine after-effects?
+
+Backfill fvcom runs:
+  decided to try letting x2 runs complete without competing w/ r12; nowcast took ~2h; forecast tool ~3h
+  launch_remote_worker arbutus make_fvcom_boundary arbutus r12 nowcast 2021-05-08
+  wait for r12 nowcast run to finish
+  launch_remote_worker arbutus make_fvcom_boundary arbutus r12 nowcast 2021-05-09
+(SalishSeaCast)
+
+Fixed docs repo linkcheck failure due to ariane-2.3.0_03 being a private repo.
+(MOAD)
+
+Enabled VNC desktop sharing on matisse so that kudu can be my kvm between matisse and lizzy for photos work.
+
+
+
+
+
 * silence PIL.PngImagePlugin logging
 * patch for PreRules.am ??
-
-
-
-
-
 
 
 
