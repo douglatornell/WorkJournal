@@ -1901,7 +1901,7 @@ Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   upload_forcing optimum nowcast+
 (SalishSeaCast)
 
-Used `sudo setfacl -m g:sada:rx /media/doug/`` after `sudo chgrp`, etc. to make warehouse/shared/ accessible.
+Used `sudo setfacl -m g:sada:rx /media/doug/` after `sudo chgrp`, etc. to make warehouse/shared/ accessible.
 Decided to try digikam; installed it on lizzy; initialized a collection from the iPhoto Originals/ directory in warehouse/shared/photos.
 
 
@@ -2759,11 +2759,119 @@ Fixed docs repo linkcheck failure due to ariane-2.3.0_03 being a private repo.
 Enabled VNC desktop sharing on matisse so that kudu can be my kvm between matisse and lizzy for photos work.
 
 
+Week 17
+-------
 
+Mon 10-May-2021
+^^^^^^^^^^^^^^^
+
+Week 60 of UBC work-from-home due to COVID-19
+
+Started work on proposal to DFO for funding to replace MEOPAR Prediction Core.
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar
+
+1st on-boarding session w/ Raisha:
+* compute resources and model runs
+* ssh intro; homework to do ssh setup
+(Atlantis)
+
+
+Tue 11-May-2021
+^^^^^^^^^^^^^^^
+
+Helped Charles test & debug workstation OS upgrades and slow connection issue.
+
+Experimented with VS-Code remote ssh extension on tyee and graham.
+
+Updated base conda env on kudu to Python=3.9.4.
+
+Experimented with VS-Code as my general purpose editor instead of Sublime Text.
+* restructuredtext extension now supports code completions and Sphinx preview
+
+Continued work on proposal to DFO for funding to replace MEOPAR Prediction Core.
+(SalishSeaCast)
+
+
+Wed 12-May-2021
+^^^^^^^^^^^^^^^
+
+Added long missing fvcom-forecast option to ping_erddap worker.
+Continued work on proposal to DFO for funding to replace MEOPAR Prediction Core.
+Used https://vrlatech.com/raid-calculator/ to back out present disk sizes:
+* /backup: 3x6Tb RAID0 =  17Tb
+* /backup2: 1x16Tb no RAID = 15Tb + 100Gb partitioned as /SalishSeaCast
+* /results: 3x10Tb RAID5 = 19Tb
+* /results2: 4x14Tb RAID5 = 39Tb
+* /data: 4x14Tb RAID5 = 37Tb (not sure why it is 1Tb smaller than /results2)
+* /opp: 3x10Tb RAID5 = 19Tb
+My notes from 18-Oct-2019 imply that all bays on salish and skookum are full, and that storage chassis has 4 free bays, but we could free 2 bays by replacing /backup with 1 large drive.
+So, we have 18 drives across the 3 chassis:
+* 3 x 6Tb
+* 6 x 10 Tb
+* 8 x 14 Tb
+* 1 x 16Tb
+Largest available drives presently on Memory Express site are 18Tb for $760 + taxes = $850.
+3x18Tb RAID5 = 33Tb
+4x18Tb RAID5 = 49Tb
+Plan for 18 x 18Tb = $15,300 + 2 x 18Tb cold spares = $17,000:
+* /backup: 2x18Tb RAID0 =  33Tb
+* /backup2: 2x18Tb RAID0 = 33Tb + 100Gb partitioned as /SalishSeaCast
+* /results: 3x18Tb RAID5 = 33Tb
+* /results2: 4x18Tb RAID5 = 49Tb
+* /data: 4x18Tb RAID5 = 49Tb
+* /opp: 3x18Tb RAID5 = 33Tb
+This consumes the 2 bays freed by replacing 3x6Tb /backup to expand /backup & /backup2 but preserves 4 bays in storage chassis for data shuffles (build new array in empty bays, rsync data to it, free bays used by old array)
+(SalishSeaCast)
+
+
+Thu 13-May-2021
+^^^^^^^^^^^^^^^
+
+Added long missing fvcom-x2-nowcast & fvcom-r12-nowcast options to ping_erddap worker and next_workers module.
+nowcast-agrif failed due to inifiband issue; re-tried successfully.
+Continued work on proposal to DFO for funding to replace MEOPAR Prediction Core.
+(SalishSeaCast)
+
+2nd on-boarding session w/ Raisha:
+* GitHub orgs and automation
+* Git configuration
+* bash configuration
+* miniconda and conda envs
+(Atlantis)
+
+
+Fri 14-May-2021
+^^^^^^^^^^^^^^^
+
+Continued work on proposal to DFO for funding to replace MEOPAR Prediction Core.
+(SalishSeaCast)
+
+
+Sat 15-May-2021
+^^^^^^^^^^^^^^^
+
+Goofed off.
+
+
+Sun 16-May-2021
+^^^^^^^^^^^^^^^
+
+nowcast-agrif failed twice due to inifiband issue.
+Continued work on proposal to DFO for funding to replace MEOPAR Prediction Core.
+(SalishSeaCast)
+
+Cycled to Fraser River Park and back (16km)
 
 
 * silence PIL.PngImagePlugin logging
 * patch for PreRules.am ??
+
+
 
 
 
