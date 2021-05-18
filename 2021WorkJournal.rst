@@ -2868,8 +2868,32 @@ Continued work on proposal to DFO for funding to replace MEOPAR Prediction Core.
 Cycled to Fraser River Park and back (16km)
 
 
+Week 18
+-------
+
+Mon 17-May-2021
+^^^^^^^^^^^^^^^
+
+Week 61 of UBC work-from-home due to COVID-19
+
 * silence PIL.PngImagePlugin logging
 * patch for PreRules.am ??
+
+Continued work on proposal to DFO for funding to replace MEOPAR Prediction Core; sent draft to Richard @ONC re: letter of support; he asked for words; Susan and I drafted & sent them
+nowcast-agrif failed due to no run yesterday; recovery:
+  make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-05-16
+    failed again w/ Infiniband errors; hacked PBS script to add `#PBS -l partition=QDR` as recommended by Mark Thachuk; Used VSCode remotely on skookum to hack on run_NEMO_agrif.
+  make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-05-17
+Did svn checkout of https://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/branchs/xios-2.5 to salish:/ocean/dlatorne/MEOPAR/xios-2.5/; tweaked arch files to get successful build; build NEMO and REBUILD_NEMO against xios-2.5; 23apr21 run failed with:
+  > Error [void noMemory(void)] : In file '/ocean/dlatorne/MEOPAR/xios-2.5/src/memory.cpp', line 9 -> Out of memory
+like XIOS-2 version did.
+fvcom-nowcast-r12 failed at ~12:00, apparentaly due to fvcom2 VM crashing; restarted VM at ~20:45; re-launched run
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar by Ken Ashley re: Fraser River Estuary.
 
 
 
