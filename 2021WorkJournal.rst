@@ -2803,29 +2803,35 @@ Wed 12-May-2021
 Added long missing fvcom-forecast option to ping_erddap worker.
 Continued work on proposal to DFO for funding to replace MEOPAR Prediction Core.
 Used https://vrlatech.com/raid-calculator/ to back out present disk sizes:
-* /backup: 3x6Tb RAID0 =  17Tb
-* /backup2: 1x16Tb no RAID = 15Tb + 100Gb partitioned as /SalishSeaCast
-* /results: 3x10Tb RAID5 = 19Tb
-* /results2: 4x14Tb RAID5 = 39Tb
-* /data: 4x14Tb RAID5 = 37Tb (not sure why it is 1Tb smaller than /results2)
-* /opp: 3x10Tb RAID5 = 19Tb
-My notes from 18-Oct-2019 imply that all bays on salish and skookum are full, and that storage chassis has 4 free bays, but we could free 2 bays by replacing /backup with 1 large drive.
-So, we have 18 drives across the 3 chassis:
+* salish (full), hardware RAID controllers for salish & storage chassis
+  * /backup: 3x6Tb RAID0 =  17Tb
+  * /data: 5x10Tb RAID5 = 37Tb
+* skookum (full), software RAID
+  * /results: 3x10Tb RAID5 = 19Tb
+* storage chassis (8 bays free), RAID controller in salish
+  * /opp: 3x10Tb RAID5 = 19Tb
+  * /backup2: 1x16Tb no RAID = 15Tb + 100Gb partitioned as /SalishSeaCast
+  * /results2: 4x14Tb RAID5 = 39Tb
+My notes from 18-Oct-2019 imply that all bays on salish and skookum are full, and that storage chassis has 4 free bays (corrected when I found paper that says 8), but we could free 2 bays by replacing /backup with 1 large drive.
+So, we have 19 drives across the 3 chassis:
 * 3 x 6Tb
-* 6 x 10 Tb
-* 8 x 14 Tb
+* 11 x 10 Tb
+* 4 x 14 Tb
 * 1 x 16Tb
 Largest available drives presently on Memory Express site are 18Tb for $760 + taxes = $850.
 3x18Tb RAID5 = 33Tb
 4x18Tb RAID5 = 49Tb
-Plan for 18 x 18Tb = $15,300 + 2 x 18Tb cold spares = $17,000:
-* /backup: 2x18Tb RAID0 =  33Tb
-* /backup2: 2x18Tb RAID0 = 33Tb + 100Gb partitioned as /SalishSeaCast
-* /results: 3x18Tb RAID5 = 33Tb
-* /results2: 4x18Tb RAID5 = 49Tb
-* /data: 4x18Tb RAID5 = 49Tb
-* /opp: 3x18Tb RAID5 = 33Tb
-This consumes the 2 bays freed by replacing 3x6Tb /backup to expand /backup & /backup2 but preserves 4 bays in storage chassis for data shuffles (build new array in empty bays, rsync data to it, free bays used by old array)
+Plan for 19 x 18Tb = $15,300 + 1 x 18Tb cold spares = $17,000:
+* salish (2 free bays), 2 hardware RAID controllers:
+  * /backup: 2x18Tb RAID0 =  33Tb
+  * /data: 4x18Tb RAID5 = 49Tb
+* skookum (full), software RAID
+  * /results: 3x18Tb RAID5 = 33Tb
+* storage chassis (7 free bays)
+  * /backup2: 2x18Tb RAID0 = 33Tb + 100Gb partitioned as /SalishSeaCast
+  * /results2: 4x18Tb RAID5 = 49Tb
+  * /opp: 3x18Tb RAID5 = 33Tb
+This preserves at least 4 bays in storage chassis for data shuffles (build new array in empty bays, rsync data to it, free bays used by old array)
 (SalishSeaCast)
 
 
@@ -2876,9 +2882,6 @@ Mon 17-May-2021
 
 Week 61 of UBC work-from-home due to COVID-19
 
-* silence PIL.PngImagePlugin logging
-* patch for PreRules.am ??
-
 Continued work on proposal to DFO for funding to replace MEOPAR Prediction Core; sent draft to Richard @ONC re: letter of support; he asked for words; Susan and I drafted & sent them
 nowcast-agrif failed due to no run yesterday; recovery:
   make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-05-16
@@ -2887,6 +2890,7 @@ nowcast-agrif failed due to no run yesterday; recovery:
 Did svn checkout of https://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/branchs/xios-2.5 to salish:/ocean/dlatorne/MEOPAR/xios-2.5/; tweaked arch files to get successful build; build NEMO and REBUILD_NEMO against xios-2.5; 23apr21 run failed with:
   > Error [void noMemory(void)] : In file '/ocean/dlatorne/MEOPAR/xios-2.5/src/memory.cpp', line 9 -> Out of memory
 like XIOS-2 version did.
+Realized that arbutus VMs are 18.04 and gcc-7.5 (same as salish is now), so NEMO/XIOS issue shouldn't be compiler-related.
 fvcom-nowcast-r12 failed at ~12:00, apparentaly due to fvcom2 VM crashing; restarted VM at ~20:45; re-launched run
 (SalishSeaCast)
 
@@ -2896,7 +2900,109 @@ Group mtg; see whiteboard.
 Phys Ocgy seminar by Ken Ashley re: Fraser River Estuary.
 
 
+Tue 18-May-2021
+^^^^^^^^^^^^^^^
 
+Worked at ESB while Rita was at home.
+
+Found paper notes about storage drives; photo in Slack #proposal channel; updated 12-May-2021  notes re: DFO proposal planning; assuming that price drop by early 2022 will let us buy 19x18Tb drive instead of 18 in proposal budget.
+Realized that yesterday's test of nowcast-dev didn't use xios-2.5; copied executable into /SalishSeaCast/XIOS-2/bin/; same out of memory failure; played w/ XIOS config in iodef.xml; always same out of memory failure.
+NEMO forecast and nowcast-green runs were very slow.
+(SalishSeaCast)
+
+Susan set up SS-Atlantis GitHub org and made me a co-owner.
+(Atlantis)
+
+
+Wed 19-May-2021
+^^^^^^^^^^^^^^^
+
+Wrote paragraph about SalishSeaCast storage arrays expansion for proposal.
+NEMO forecast and nowcast-green runs were very slow again.
+(SalishSeaCast)
+
+FAL estate work: death claim form to Desjardins.
+
+Coffee with Karyn.
+
+Squash-merged dependabot PRs in douglatornell/async-tutorial and douglatornell/randopony repos.
+Disabled dependabot alerts & PRs in douglatornell/async-tutorial repo.
+Archived douglatornell/randopony repo.
+
+
+Thu 20-May-2021
+^^^^^^^^^^^^^^^
+
+NEMO forecast and nowcast-green runs were very slow again.
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+1st Salish Sea Atlantis project mtg:
+* Susan, me, Raisha, Sara, Natalie, Javier, Beth, Jess
+* Discussion points
+- Welcome and intros, including how members of the team fit together
+- Overview of the model code, including workflow, what's been done so far, technical considerations and plans for tech transfer/code sharing between CISRO/UBC
+- Model updates - particularly in terms of the contaminants module, how it is running and next steps
+- Expectations for the coming months - particularly in the context of Raisha's role, but also for the project as a whole.
+- Q&A on all things relating to running the model 
+- Anything else you would like to discuss 
+* Intros
+* Model state:
+  * running
+  * salmon life cycle is still problematic
+  * presently running scenarios
+    * Johnstone Strait
+    * Vancouver Harbour Dilbit
+    * ferries
+    * Turn Point
+  * using OceanParcels
+  * config is on Bitbucket
+  * planning weekly mtgs initially
+* Raisha's role
+  * scenario dev
+* SS-Atlantis run time is ~1 core-hr per model year
+* OceanParcels on HPC it much more intensive: 2 days of HPC walltime wasn't enough for a recent Javier project
+(Atlantis)
+
+Worked through more ariane build issues w/ Susan; adding a bin-like directory to prefix gets rid of errors from doc/ and examples/ that confused Becca.
+(SalishSeaCast)
+
+
+Fri 21-May-2021
+^^^^^^^^^^^^^^^
+
+NEMO forecast and nowcast-green runs were very slow again.
+(SalishSeaCast)
+
+Explored SS-Atlantis config repo (https://bitbucket.csiro.au/users/por07g/repos/salish-sea-atlantis-model/) on CSIRO Bitbucekt server.
+(Atlantis)
+
+See work journal.
+(Resilient-C)
+
+
+Sat 22-May-2021
+^^^^^^^^^^^^^^^
+
+Drove to White Rock to visit M&J.
+
+Goofed off.
+
+
+Sun 23-May-2021
+^^^^^^^^^^^^^^^
+
+Cycled River Rd out & back w/ explorations on Queens Canal trail and 8 Rd (50 km)
+
+Started planning Minecraft 1.17 base w/ Susan.
+
+
+Fix ariane docs.
+
+* silence PIL.PngImagePlugin logging
+* patch for PreRules.am ??
 
 
 Backfill nowcast-dev:
@@ -2913,7 +3019,7 @@ Backfill nowcast-dev:
   make_forcing_links salish nowcast+ --shared-storage 2021-05-02
   make_forcing_links salish nowcast+ --shared-storage 2021-05-03
 
-
+8SwmFikL
 
 
 TODO: when we can change to CC StdEnv/2020:
