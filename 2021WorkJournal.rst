@@ -2999,6 +2999,114 @@ Cycled River Rd out & back w/ explorations on Queens Canal trail and 8 Rd (50 km
 Started planning Minecraft 1.17 base w/ Susan.
 
 
+Week 19
+-------
+
+Mon 24-May-2021
+^^^^^^^^^^^^^^^
+
+Week 62 of UBC work-from-home due to COVID-19
+
+**Statutory Holiday** - Victoria Day
+
+Tried to resume work on getting phpgedview running on Opalstack; not much progress.
+
+Set up new SADA-dev server on CubedHost w/ deep flat creative world for planning 1.17 base.
+
+
+Tue 25-May-2021
+^^^^^^^^^^^^^^^
+
+Set up new runs timing sheet on kudu desktop to track mitigation of recent slow run time after NEMO nowcast:
+    NEMO nowcast-blue took expected ~24min
+    Killed VHFR nowcast-x2 and nowcast-r12 runs after NEMO forecast started to test io contention hypothesis; NEMO NEMO forecast run sped up from <3%/5min to ~15%/5min
+    NEMO forecast took ~41min, slightly longer than the expected ~36min, presumably due to contention w/ VHFR runs for first ~5min
+    NEMO nowcast-green took 1h7min, slightly shorter than the expected 1h15min
+    wwatch3 nowcast took ~22min, almost exactly the same as yesterday, and almost exactly as expected
+    wwatch3 forecast took ~33min, almost exactly the same as yesterday, and almost exactly as expected
+    ran VHFR runs sequentially after NEMO & wwatch3 runs finished
+    VHFR nowcast-x2 took ~2h, similar to 2019 concurrent w/ nowcast-green, but w/o r12
+    VHFR forecast-x2 took ~3h, similar to 2019 concurrent w/ nowcast-green, but w/o r12, and as expected
+    VHFR nowcast-r12 took ~7h21nin, similar to 2019 backfill run after forecast-x2
+(SalishSeaCast)
+
+Tried to help Birgit with her uninitialized variable issue.
+(Arctic)
+
+Updated cookiecutter-analysis-repo re: SS-Atlantis GitHub org.
+Worked on MOAD docs re: installation of Miniconda.
+(MOAD)
+    
+    
+Wed 26-May-2021
+^^^^^^^^^^^^^^^
+    
+Continued experiments on runs concurrency re: recent slow run times (see timeing sheet):
+    NEMO nowcast-blue took expected ~24min
+    Killed VHFR nowcast-r12 ~5min after it started, leaving nowcast-x2 concurrnt w/ NEMO forecast
+    NEMO forecast took ~42min, slightly longer than the expected ~36min, presumably due to contention w/ VHFR r12 for first ~5min
+    NEMO nowcast-green took 1h7min, same as yesterday, slightly shorter than the expected 1h15min
+    VHFR nowcast-x2 concurrent w/ NEMO runs took ~2h, very slightly longer than yesterday, not sure if that is due to contention w/ r12 for first ~5min or w/ NEMO & wwatch3 runs, similar to 2019 concurrent w/ nowcast-green, but w/o r12
+    wwatch3 nowcast took ~22min, almost exactly the same as yesterday, and almost exactly as expected
+    wwatch3 forecast took ~34min, almost exactly the same as yesterday, and almost exactly as expected
+    VHFR forecast-x2 took ~3h, almost exactly the same as yesterday, and almost exactly as expected
+    VHFR nowcast-r12 took ~7h18nin, almost exactly the same as yesterday, and almost exactly as expected
+(SalishSeaCast)
+
+Slack mtg w/ Rasisha re: workflow for Atlantis:
+* Discussed workflow for using BitBucket repo; need to discuss w/ Javier
+* attempt to run SS model is failing on open SS_init.nc due to invalid netCDF format; rabbit hole about libnetcdf version options on Raisha's Mac
+Question for Javier/Beth:
+* Does Atlantis have restart
+Investigated warnings that I had to suppress to get build to work with gcc-9.3.0:
+    -WARN += -Wformat-overflow
+    +WARN += -Wno-format-overflow
+    +WARN += -Wno-unused-result
+    +WARN += -Wno-stringop-truncation
+    +WARN += -Wno-stringop-overflow
+Set up atlantis-dev env on tyee and experimented with VSCode tasks etc.
+(Atlantis)
+
+
+Thu 27-May-2021
+^^^^^^^^^^^^^^^
+
+Dentist hygene appt (first since Feb-2020).
+
+Repeated yesterday's pattern for runs, pushing VHFR nowcast-r12 to after forecast-x2.
+Changed next_workers to launch VHFR nowcast-r12 after forecast-x2 instead of concurrently with nowcast-x2; deployed to skookum.
+(SalishSeaCast)
+
+Worked through miniconda installation, VSCode remote-ssh setup, and atlantis-dev env build w/ Raisha.
+(Atlantis)
+
+
+Fri 28-May-2021
+^^^^^^^^^^^^^^^
+
+Changed MPI hosts files and nowcast config on arbutus to run forecast-x2 on 45 cores and nowcast-r12 on 90 cores; forecast-x2 was ~15min slower than the past 3 days; nowcast-r12 is trending towrds ~75min faster than the past 3 days
+(SalishSeaCast)
+
+
+Sat 29-May-2021
+^^^^^^^^^^^^^^^
+
+nowcast-blue ran at normal speed, or slightly faster.
+forecast concurrent with nowcast-x2 on 45 cores both ran slow.
+Changed MPI hosts files and on arbutus to run to remove fvcom2 VM from hosts in use because adding it to x2 hosts coincided with slow-down of forecast-x2 yesterday and today's slowness; maybe it root cause of all recent slowness.
+(SalishSeaCast)
+
+
+Sun 30-May-2021
+^^^^^^^^^^^^^^^
+
+Cycled to Colony Farm; discovered that much of its west side is closed for equipment staging for the TMX Fraser River crossing :-(   (64km)
+
+VHFR runs were a complete mess; yesterday's r12 didn't finish before nowcast-x2 tried to run on 2 of the same VMs; killed them at ~18:15 and started over w/ config from 27may21.
+(SalishSeaCast)
+
+
+
 Fix ariane docs.
 
 * silence PIL.PngImagePlugin logging
@@ -3019,7 +3127,6 @@ Backfill nowcast-dev:
   make_forcing_links salish nowcast+ --shared-storage 2021-05-02
   make_forcing_links salish nowcast+ --shared-storage 2021-05-03
 
-8SwmFikL
 
 
 TODO: when we can change to CC StdEnv/2020:
