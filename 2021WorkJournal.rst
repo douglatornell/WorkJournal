@@ -3057,13 +3057,17 @@ Slack mtg w/ Rasisha re: workflow for Atlantis:
 * Discussed workflow for using BitBucket repo; need to discuss w/ Javier
 * attempt to run SS model is failing on open SS_init.nc due to invalid netCDF format; rabbit hole about libnetcdf version options on Raisha's Mac
 Question for Javier/Beth:
-* Does Atlantis have restart
+* Does Atlantis have restart? possible, but not fully implemented; lots of manual work.
 Investigated warnings that I had to suppress to get build to work with gcc-9.3.0:
     -WARN += -Wformat-overflow
     +WARN += -Wno-format-overflow
+        re: buffer overflow avoidance?
     +WARN += -Wno-unused-result
+        re: maybe buffer overflow avoidance?
     +WARN += -Wno-stringop-truncation
+        re: buffer overflow avoidance?
     +WARN += -Wno-stringop-overflow
+        re: buffer overflow avoidance?
 Set up atlantis-dev env on tyee and experimented with VSCode tasks etc.
 (Atlantis)
 
@@ -3104,6 +3108,145 @@ Cycled to Colony Farm; discovered that much of its west side is closed for equip
 
 VHFR runs were a complete mess; yesterday's r12 didn't finish before nowcast-x2 tried to run on 2 of the same VMs; killed them at ~18:15 and started over w/ config from 27may21.
 (SalishSeaCast)
+
+
+Week 20
+-------
+
+Mon 31-May-2021
+^^^^^^^^^^^^^^^
+
+Week 63 of UBC work-from-home due to COVID-19
+
+After yesterday's VHFR disaster, returned config & mpihosts.fvcom.x2 to 30 cores on fvcom[01] because 45 cores seems slightly slower; returned mpihosts.fvcom.r12 to 90 cores including fvcom2 and fvcom0 as extra; backfilled 29-30may:
+    wait for 31may r12 run to fail at ~14:45
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast --run-date 2021-05-29"
+    wait for run to finish
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast --run-date 2021-05-30"
+(SalishSeaCast)
+
+Tried to understand why atlantis code would call fgets() w/o using result, necessitating use of -Wno-unused-result.
+(Atlantis)
+
+Worked on borg backup scripts on salish.
+Disabled cron scripts that are throwing error emails at root.
+Re-created /backup/borg/ that Charles wiped during updates.
+Created emergency reserved space for use in the event that borg fills drive:
+  sudo fallocate -l 2G /backup/borg/emergency_reserved_space
+Initialized /backup/borg/opp:
+  sudo borg init --encryption=none /backup/borg/opp
+Changed /etc/cron.daily/daily-opp-backup.sh to use --compression auto,zstd instead of lz4.
+Ran initial backup of /opp/observations/; ran again to add /opp/wwatch3/nowcast to test exclusion of --list option;
+
+
+June
+====
+
+Tue 1-Jun-2021
+^^^^^^^^^^^^^^
+
+Work at ESB while Rita is at home.
+
+Slack call w/ Raisha:
+* build and run atlantis on tyee
+* discussed branch workflow for Bitbucket config repo
+* gave her docs to create SS-Atlantis/analysis-raisha
+* next step: R notebook kernel - low priority
+(Atlantis)
+
+Backfilling nowcast-r12:
+    wait for 1jun21 run to fail
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast --run-date 2021-05-31"
+    wait for run to finish
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast --run-date 2021-06-01"
+Worked on nowcast-dev on salish:
+    * compared ldd of xios to arbutus and found that salish has and earlier version libnetcdf and libhdf5 instead of libhdf5_serial; discovered that salish has libnetcdf in /usr/lib/ and /usr/lib/x86_64-linux-gnu/; libhdf5 and libhdf5_serial are in the latter
+    * started a slack thread to ask Charles about lib cross-ups on salish
+(SalishSeaCast)
+
+
+Wed 2-Jun-2021
+^^^^^^^^^^^^^^
+
+Charles things that salish libnetcdf issue could be due to PPA install of libs in 2014.
+Backfilling nowcast-r12:
+wait for 1jun21 run to fail
+launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast --run-date 2021-06-01"
+wait for run to finish
+launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast --run-date 2021-06-02"
+(SalishSeaCast)
+
+Squash-merged dependabot PRs re: urllib3 in UBC-MOAD/cookiecutter-analysis-repo, UBC-MOAD/moad_tools, UBC-MOAD/docs, UBC-MOAD/cookiecutter-MOAD-pypkg, MIDOSS/MOHID-Cmd, MIDOSS/Make-MIDOSS-Forcing, MIDOSS/docs
+(MOAD)
+
+Debrief from Sara about mtg w/ First Nations Fisheries Council (FNFC):
+* response exercise in 2022; Sooke FN; planning starting in mid-Jun
+* Nuchalnuth interest in model because they were caught off guard by leak; Susan talked about Michael saying that DFO is looking at relocatable model for deployment over wrecks
+* ITAN knowledge sharing platform
+(Atlantis)
+
+Finally went to LifeLabs for tests requisitioned by Dr. Tim in mid-Feb.
+
+
+Thu 3-Jun-2021
+^^^^^^^^^^^^^^
+
+nowcast-r12 backfilling finished overnight; now running on 90 cores (6 VMs, added fvcom0), starting after forecast-x2; ~6h run time, so total run time ~11h is consistent with concurrent configuration before slowdown on 18May21 but nowcast-x2 and forecast-x2 now finish earlier.
+Committed change from 75 to 90 cores for nowcast-r12 and deployed it to arbutus.
+Started work on ERDDAP dataset of month-averaged tracers for stakeholders:
+* ncra calculates the month-averaged fields; Susan has this worked out in /data/sallen/results/MEOPAR/averages/
+* tracers are spread across 5 files:
+SalishSea_1m_200701_200701_carp_T.nc
+SalishSea_1m_200701_200701_dia2_T.nc
+SalishSea_1m_200701_200701_grid_T.nc - done
+SalishSea_1m_200701_200701_prod_T.nc
+SalishSea_1m_200701_200701_ptrc_T.nc - done
+* lots of mucking around with ncks, ncrcat & necat lead me to conclude that NCO can't merge selected variables from collections of files like those
+* crafted ubcSSg3DTracerFields1moV19-05 dataset XML from ubcSSg3DTracerFields1hV19-05 but it failes to load due to:
+java.lang.RuntimeException: datasets.xml error on or before line #10012: AxisVariable=time has tied values; fixed by Susan; issue was ERDDAP recursing into sub-dirs
+Squash-merged dependabot PRs re: urllib3 in SalishSeaCast/ docs, tools, SOG-Bloomcast-Ensemble, analysis-doug, salishsea-site, SalishSeaCmd, NEMO-Cmd, SalishSeaNowcast.
+(SalishSeaCast)
+
+Coffee w/ Elise.
+
+Dentist appt to get gum patch replaced.
+
+Deleted /project/def-allen/dlatorne/GEOTRACES/ and MEOPAR/hg/ on graham to back away from group file count quota.
+(MOAD)
+
+
+Fri 4-Jun-2021
+^^^^^^^^^^^^^^
+
+Continued work on ERDDAP dataset of month-averaged tracers for stakeholders:
+* decided to store month-averaged files in /results/SalishSea/month-avg.201905/; Susan moved files
+* finalized release of ubcSSg3DTracerFields1moV19-05 dataset
+* crafted ubcSSg3DBiologyFields1moV19-05 dataset XML from ubcSSg3DBiologyFields1hV19-05 and released it on ERDDAP
+(SalishSeaCast)
+
+Estate work:
+* confirmed w/ AST that Jamie has to provide notarized signature on waiver
+* BCE can only be transferred, even in my DRIP account they would not be DRIP shares, DRS (Direct Registration System) statement will allow me to move them to a brokerage account for action
+
+Discussed midoss-app-dev deployment w/ Ben on Slack.
+(MIDOSS)
+
+
+Sat 5-Jun-2021
+^^^^^^^^^^^^^^
+
+upload_forcing to orcinus failed for nowcast+ and turbidity; orcinus was still unresponsive at 15:35
+(SalishSeaCast)
+
+Drove to White Rock to visit M&J; spent most of the visit on the roof decks.
+
+
+Sun 6-Jun-2021
+^^^^^^^^^^^^^^
+
+upload_forcing to orcinus failed for nowcast+ and turbidity
+(SalishSeaCast)
+
 
 
 
