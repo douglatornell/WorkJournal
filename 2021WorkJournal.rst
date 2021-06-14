@@ -3248,10 +3248,237 @@ upload_forcing to orcinus failed for nowcast+ and turbidity
 (SalishSeaCast)
 
 
+Week 21
+-------
+
+Mon 7-Jun-2021
+^^^^^^^^^^^^^^
+
+Week 64 of UBC work-from-home due to COVID-19
+
+orcinus is accepting connections again; backfilled nowcast-agrif:
+* wait for 7jun21 run to fail
+* upload_forcing orcinus nowcast+ --run-date 2021-06-05
+* upload_forcing orcinus turbidity --run-date 2021-06-05
+* wait for run to finish
+* upload_forcing orcinus nowcast+ --run-date 2021-06-06
+* upload_forcing orcinus turbidity --run-date 2021-06-06
+* wait for run to finish
+* upload_forcing orcinus turbidity --run-date 2021-06-07
+Removed option to clone via HTTPS from a couple of repo's docs:
+SalishSeaCast/rpn-to-gemlam
+SalishSeaCast/FVCOM-Cmd
+Did git archeology to try to figure out if it is safe to pull SS-run-sets HEAD on arbutus to get rev 656d78d:
+| Author: Susan Allen <sallen@eoas.ubc.ca>
+| Date:   Thu Mar 11 11:10:01 2021 -0800
+| 
+|     New file def for production including daily files
+very confusing.
+
+** Discuss w/ Susan how to get nowcast-green day-avg files output into production:
+* cherrypick commit on to PROD-nowcast-green-201905 branch on arbutus
+* pull everything and add new PROD-nowcast-green-201905-v2 tag
+* pull everything and move tag (may not be advisable ???)
+(SalishSeaCast)
+
+Removed option to clone via HTTPS from a couple of repo's docs:
+MIDOSS/docs
+MIDOSS/WWatch3-Cmd
+(MIDOSS)
+
+Group mtg; see whiteboard.
+Updated cookiecutter-MOAD-pkg repo re: hg-git, etc.
+(MOAD)
+
+Phys Ocgy seminar by Parker McCready re: estuarine circulation in Salish Sea.
+
+Dropped of FIT sample at LifeLabs.
 
 
-Fix ariane docs.
+Tue 8-Jun-2021
+^^^^^^^^^^^^^^
 
+docs scheduled linkcheck job failed overnight due to 504 errors from westgrid.ca; checked links and re-ran manually at ~10:00 with success.
+upload_forcing nowcast+ to arbutus failed due to connection error; investigation:
+* ssh attempt at ~10:30 failed
+* action log in web dashboard says nowcast0 was stopped at 11:47 UTC == 04:47 Pacific
+* started nowcast0 via dashboard
+* took the opportunity to die apt update && apt upgrade and rebooted
+* /nemoShare did not automatically remount
+* sudo mount /dev/vdc /nemoShare  # quite slow
+* /nemoShare/MEOPAR was not mounted at /export/MEOPAR for NFS
+* sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+* ll /export/MEOPAR  # to confirm mount
+* sudo systemctl start nfs-kernel-server.service
+* sudo exportfs -f  # to reset NFS handles for compute nodes
+* confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+* for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+* for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+* restarted automation at ~11:00:
+* upload_forcing arbutus nowcast+
+
+(SalishSeaCast)
+
+Investigated CI failure in WWatch3-Cmd; outdated GHA workflow.
+(MIDOSS)
+
+Minecraft 1.17 released.
+Made backup of Allenton world (aka SADAYule2020) on SADA server (archive-1623194729058.zip) and downloaded to kudu as Allenton1-64Backup8Jun21.zip.
+Updated CubedHost SADA and SADA-dev servers to 1.17.
+Created 1-17OceanTaiga world on SADA server, and a creative branch of it (1-17OceanTaigaCreative).
+
+
+Wed 9-Jun-2021
+^^^^^^^^^^^^^^
+
+Pulled updates of SS-run-sets on arbutus and moved head to:
+    commit 656d78d717629426fea4c1c4d6e9a9f23fd7ca64 (HEAD -> PROD-nowcast-green-201905-v2)
+    Author: Susan Allen <sallen@eoas.ubc.ca>
+    Date:   Thu Mar 11 11:10:01 2021 -0800
+        New file def for production including daily files
+on a new PROD-nowcast-green-201905-v2 branch; that should give us day-avg output files in nowcast-green production
+nowcast-green stalled at 30% completion; investigation:
+* ORT error message in stdout re: nowcast6 compute node
+* ssh nowcast6 failed: no route to host
+* dashboard shows nowcast6 stopped by no user at 10:27 Pacific
+recovery:
+* restarted nowcast6
+* mounted /nemoShare/MEOPAR/ w/ sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR
+* killed watch_NEMO
+* deleted tmp run & results dirs
+* make_forcing_links arbutus nowcast-green
+(SalishSeaCast)
+
+Changed default branch name of WWatch3-Cmd repo from master to main.
+Did lots of pkg maintenance on WWatch3-Cmd to bring it up to date w/ more used pkgs; added docs-linkcheck GHA workflow with scheduled runs on 11th of month.
+(MIDOSS)
+
+Squash-merged dependabot PRs re: pillow in SalishSeaCast/ SOG-Bloomcast-Ensemble, tools & SalishSeaNowcast, and MOAD/moad_tools.
+Squash-merged dependabot PRs re: urllib3 in 43ravens/NEMO_Nowcast.
+(MOAD)
+
+Regenerated PyCharm Github Integration Plugin access token for kudu on GitHub and updated it in PyCharm.
+
+
+Thu 10-Jun-2021
+^^^^^^^^^^^^^^^
+
+Tried to help Rhian@DFO via email w/ permission error they get when opening month-avg netCDF file from ERDDAP with R nc_open() function.
+(Prediction Core)
+
+Set up tmux session on salish to run analysis-doug/notebooks/hindcast-dayavgs/hindcast_dayavgs.py for 2021-01- through 2021-06-08.
+(SalishSeaCast)
+
+Tried to help Rachael via slack DM w/ logging.debug() messages not appearing when she runs random-oil-spills on salish.
+(MIDOSS)
+
+
+Fri 11-Jun-2021
+^^^^^^^^^^^^^^^
+
+Confirmed that tmux session on salish running analysis-doug/notebooks/hindcast-dayavgs/hindcast_dayavgs.py for 2021-01-02 through 2021-06-08 finished successfully.
+(SalishSeaCast)
+
+Reviewed https://linuxize.com/post/getting-started-with-tmux/; goodbase intro to tmux, but no serious details on command mode.
+
+Prepared to run random-oil-spills w/ Rachael's recent changes on salish:
+* Reviewed Rachael's changes in add-terminal branch of moad_tools re: random-oil-spills; set up moad-tools conda env on salish.
+* Cloned into /data/dlatorne/MEOPAR/:
+  * MIDOSS/MIDOSS-MOHID-config
+* Data for random-oil-spills are in /data/MIDOSS/:
+  * marine_transport_data/ repo clone contains oil_attribution.yaml file
+  * geotiffs/ contains VTE GeoTIFFs and geotiff-watermask.npy calculated from them
+  * shapefiles/ contains AIS vessel track shapefiles
+* Rachael ran random-oil-spills on 10jun to produce /ocean/rmueller/MIDOSS/SalishSeaOilSpills_fixbarge_10000.csv; decided with Susan to use that to test on graham instead of me generating a different one
+Prepared to test `mohid monte-carlo` on graham with spills from SalishSeaOilSpills_fixbarge_10000.csv:
+* module load StdEnv/2016.4
+* module load python/3.8.2
+* updated repo clones:
+  * Make-MIDOSS-Forcing/
+  * MIDOSS-MOHID-CODE/  # up to date
+  * MIDOSS-MOHID-config/  # up to date
+  * MIDOSS-MOHID-grid/  # up to date
+  * moad_tools/
+  * MOHID-Cmd/
+  * NEMO-Cmd/
+  * SalishSeaCast-grid/  # up to date
+* set up $SCRATCH space because it got wiped during upgrade in the spring:
+  * mkdir -p $SCRATCH/MIDOSS/forcing/
+  * mkdir -p $SCRATCH/MIDOSS/runs/monte-carlo/
+  * chmod -R g+w $SCRATCH/MIDOSS  # because the sticky bit is being ignored
+* installed pkgs via --user -e:
+  * NEMO-Cmd  # already installed
+  * MOHID-Cmd
+  * Make-MIDOSS-Forcing
+  * moad_tools  # forgot this one at first; required for hdf5-to-netcdf4
+* set up run area and test run:
+  * mkdir $PROJECT/$USER/MIDOSS/monte-carlo/
+  * uploaded SalishSeaOilSpills_fixbarge_10000.csv from salish:
+    * rsync -tlv SalishSeaOilSpills_fixbarge_10000.csv graham:project/dlatorne/MIDOSS/monte-carlo/
+  * created glost job description YAML file & csv fragment file to run 1st 3 spills; submitted as /scratch/dlatorne/MIDOSS/runs/monte-carlo/first3_2021-06-11T174451/
+    * run 1 failed in MOHID start-up due to line-ending : in comment in Lagrangian_bunker.dat template file
+    * run 2 finished MOHID, but failed to convert hdf5 output to netcdf4 because moad_tools pkg wasn't installed
+    * run 3 timed out during hdf5-to-netcdf4 processing
+    * crap-ton of debug output in stdout
+* discovered that moad_tools must have cliff<8.0 pin due to pins in fiona and rasterio
+* repeated 1st 3 spills run with:
+  * corrected Lagrangian_bunker.dat template file
+  * per run walltime increased to 3hr
+  * hdf5-to-netcdf4 installed
+  * MOHID debug output removed by Susan
+* submitted 30 spill run for northern SoG spill chosen by Susan and with glost_job.sh hacked to set ntask-per-node to 32 so we get on the large-by-node queue
+  (MIDOSS)
+  
+  Slack w/ Raisha:
+  * introduced her to tmux
+  * TODO:
+    * headless shiny ?
+    * R kernel for Jupyter
+    * design AtlantisCmd
+    * think about runs diary feature
+  (Atlantis)
+  
+
+Sat 12-Jun-2021
+^^^^^^^^^^^^^^^
+
+skookum connections failed from 09:25 to 10:04; nowcast-blue appears stuck in log; investigation & recovery:
+* on skookum:
+* restarted log aggregator to no avail
+* restarted message broker to no avail
+* on arbutus:
+* nowcast-blue run finished, but watcher is stuck
+* pkill -f watch_NEMO
+* restart automation on skookum:
+* download_results arbutus nowcast
+* make_forcing_links arbutus ssh
+* launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast"
+(SalishSeaCast)
+
+Confirmed that monte-carlo sets ntasks-per-node to 32 so we get on the by-node queue when we are running >30 spills.
+Ran 60 more northern SoG spills that Susan chose as north_strait_2nd60.
+Susan plotted first aggregated Monte-Carlo results :-)
+Changed MOHID run script to:
+* rename resOilOuput.sro file to MassBalance_${RUN_ID}.sro; more descriptive and eliminates ambiguity in Monte-Carlo results collections
+* delete big, unused Turbulence*.hdf5, res*.elf5, and res*.ptf output file s
+Helped Ben sort out jupyter venv issues on graham.
+Ran 150 more northern SoG spills that Susan chose as north_strait_3rd150.
+(MIDOSS)
+
+
+Sun 13-Jun-2021
+^^^^^^^^^^^^^^^
+
+Ran 122 more northern SoG spills that Susan chose as north_strait_4th122 to complete 1/2 of the north strait spills in Rachael's 10k file.
+(MIDOSS)
+
+  
+  
+  TODO:
+  * figure out how to merge/cherrypick relevant changes from Rachael's add_terminal branch in moad_tools
+  
+  Fix ariane docs.
+  
 * silence PIL.PngImagePlugin logging
 * patch for PreRules.am ??
 
@@ -3333,8 +3560,6 @@ Update SalishSeaNowcast fig-dev docs
 fix SalishSeaTools unit tests
 
 fix old colander dependency in SOG
-
-Fix Pillow security issue in analysis-doug
 
 
 Stack:
