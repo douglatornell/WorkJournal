@@ -3432,8 +3432,8 @@ Prepared to test `mohid monte-carlo` on graham with spills from SalishSeaOilSpil
   Slack w/ Raisha:
   * introduced her to tmux
   * TODO:
-    * headless shiny ?
-    * R kernel for Jupyter
+    * headless shiny ? - done 14-Jun
+    * R kernel for Jupyter - done 16-Jun
     * design AtlantisCmd
     * think about runs diary feature
   (Atlantis)
@@ -3472,12 +3472,319 @@ Sun 13-Jun-2021
 Ran 122 more northern SoG spills that Susan chose as north_strait_4th122 to complete 1/2 of the north strait spills in Rachael's 10k file.
 (MIDOSS)
 
-  
-  
-  TODO:
+
+Week 22
+-------
+
+Mon 14-Jun-2021
+^^^^^^^^^^^^^^^
+
+Week 65 of UBC work-from-home due to COVID-19
+
+Deleted Turbulence*.hdf5, res*.elf5 & res*.ptf from monte-carlo results/ dirs of runs that happened before change to MOHID-Cmd landed on Saturday; space for 362 runs before cleanup: 1.2T; space after: 25G
+Ran 362 more northern SoG spills that Susan chose as north_strait_5th362 to complete 2nd 1/2 of the north strait spills in Rachael's 10k file.
+(MIDOSS)
+
+upload_forcing orcinus nowcast+ failed w/ "private key encrypted" error; that's usually a login node network stack problem; re-tried manually at ~10:06; success
+(SalishSeaCast)
+
+Experimented to try to get shiny ReactiveAtlantis app to run headless on tyee:
+    cd /ocean/dlatorne/Atlantis/
+    git clone git@github.com:Atlantis-Ecosystem-Model/ReactiveAtlantis.git
+    cd /ocean/dlatorne/Atlantis/atlantis-trunk/example/outputFolder/
+    conda activate atlantis-dev
+    R
+    > options(browser = "false")
+    > library("devtools")
+    > install_local("/ocean/dlatorne/Atlantis/ReactiveAtlantis")
+    # lots of compulation; hopefully only required once
+    > library("ReactiveAtlantis")
+    # in example/outputFolder/
+    > biom <- "outputSETASBiomIndx.txt"
+    > diet.file <- "outputSETASDietCheck.txt"
+    > bio.age <- "outputSETASAgeBiomIndx.txt"
+    > grp.csv <- "../SETasGroupsDem.csv"
+    > predation(biom, grp.csv, diet.file, bio.age)
+    Loading required package: shiny
+    
+    Listening on http://127.0.0.1:6155
+    Winning!!! :-)
+    ssh tunnel on kudu between tyee port 6155 and kudu port 4343:
+        ssh -N -L 4343:127.0.0.1:6155 tyee
+Refining:
+  * control port shiny uses to prevent random selection
+  * handle brawser launch in shiny context instead of R-wide
+  * combine option settings in 1 call
+  * use pathed files
+    > options(shiny.port=6155, shiny.launch.browser = "false")
+    > biom <- "atlantis-trunk/example/outputFolder/outputSETASBiomIndx.txt"
+    > diet.file <- "atlantis-trunk/example/outputFolder/outputSETASDietCheck.txt"
+    > bio.age <- "atlantis-trunk/example/outputFolder/outputSETASAgeBiomIndx.txt"
+    > grp.csv <- "atlantis-trunk/example/SETasGroupsDem.csv"
+    > predation(biom, grp.csv, diet.file, bio.age)
+Wrote preliminary docs in #atlantis channel at https://salishseacast.slack.com/archives/C01TE50SZ8E/p1623702157000700
+Tried to help Raisha debug compare() app.
+(Atlantis)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+
+Tue 15-Jun-2021
+^^^^^^^^^^^^^^^
+
+Work at ESB while Rita is at home.
+
+forecast2 failed; investigation:
+* fvcom2 node stopped at 2:34 UTC, no user or explanation
+* nowcast8 node stopped at 2:34 UTC, no user or explanation
+Restarted fvcom & nowcast8 from arbutus dashboard; re-mounted /nemoShare/MEOPAR on them.
+VHFR nowcast-r12 failed due to no restart file; 14jun21 run stopped at 19:34 (i.e. 02:34 UTC) when fvcom2 node stopped; recovery started at ~16:30:
+* launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-14"
+(SalishSeaCast)
+
+Coffee (in person!) with Birgit outside ESB.
+
+Worked on updating cookiecutter-MOAD-pypkg:
+* changed git default branch name from master to main
+* updated dev env to Python 3.9
+* add intersphinx mapping for MOAD docs
+* update re: migration from Mercurial on Bitbucket to Git on GitHub
+* add SS-Atlantis gitHub org and copyright holders
+(MOAD)
+
+
+Wed 16-Jun-2021
+^^^^^^^^^^^^^^^
+
+collect_weather 12 still running at 09:30; no 12Z files have appeared yet in sarracenia log, byt 06Z forecast appears to have been re-broadcast between 04:20 and 06:14; 12Z files started to arrive at ~10:00; finished at 10:34.
+Backfilling VHFR nowcast-r12:
+* wait for run to fail
+* launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-15"
+    * started at ~17:00
+(SalishSeaCast)
+
+Started exploring R kernel for Jupyter.
+Updated /media/doug/warehouse/Atlantis/environment-dev.yaml:
+* re-organized dependencies w/ comments about what they are for
+* added IRKernel and its deps
+* added jupyterlab
+and it just works! :-)
+(Atlantis)
+
+Stakeholder workshop 1st day 12-Jul (tentative?)
+* data collection
+* test hypotheses that arose from analysis of data from 1st workshop
+* 2nd day is about model products
+(MIDOSS)
+
+
+Thu 17-Jun-2021
+^^^^^^^^^^^^^^^
+
+collect_weather 06 didn't complete so no forecast2 runs; investigation:
+* no error messages in sarracenia log
+* 531 of 576 files downloaded; files missing from hours 017, 018, 020, 022, 023
+* spot check of files in 017 and 018 on datamart web site show they are there
+* recovery:
+    pkill -f collect_weather
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210617/06/
+    download_weather 06 2.5km
+    collect_weather 18 2.5km
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+collect_weather 18 appears to have stalled; investigation:
+* no error messages in sarracenia log
+* 558 of 576 files downloaded; files missing from hours 019, 020, 021, 024
+* spot check of files in 019 and 024 on datamart web site show they are there
+* recovery:
+    pkill -f collect_weather
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210617/18/
+    download_weather 18 2.5km
+    download_weather 00 1km
+    download_weather 12 1km
+    collect_weather 00 2.5km
+Didn't get a VHFR nowcast-r12 no restart file run failure, and forgot to start 16jun backfill run
+(SalishSeaCast)
+
+Weekly project mtg.
+(Atlantis)
+
+
+Fri 18-Jun-2021
+^^^^^^^^^^^^^^^
+
+collect_weather 06 didn't complete so no forecast2 runs; investigation:
+* no error messages in sarracenia log
+* 554 of 576 files downloaded; files missing from hours 014, 016, 022, 023, 024
+* spot check of files in 014 on datamart web site show they are there with same time stamp as other files
+* recovery:
+    pkill -f collect_weather
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210618/06/
+    download_weather 06 2.5km
+    wait for 12Z forecast files to finsih in sarracenia log
+    clean up /SalishSeaCast/datamart
+      find /SalishSeaCast/datamart/hrdps-west/ -type f -delete
+    restart sarracenia processes
+      supervisorctl -c $NOWCAST_CONFIG/supervisord.ini restart sr_subscribe-hrdps-west
+      supervisorctl -c $NOWCAST_CONFIG/supervisord.ini restart sr_subscribe-hrdps-west-1km
+      supervisorctl -c $NOWCAST_CONFIG/supervisord.ini restart sr_subscribe-hydrometric
+    collect_weather 18 2.5km
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+VHFR nowcast-x2 not reporting progress to log; confirmed that it is running; restarted log aggregator; resolved.
+nowcast-agrif run failed during prep; investigation:
+* 17jun21 run stopped for no evident reason
+* recovery:
+    upload_forcing orcinus nowcast+ --run-date 2021-06-17
+    upload_forcing orcinus turbidity --run-date 2021-06-17
+    wait for run to finish
+    upload_forcing orcinus nowcast+ --run-date 2021-06-18
+    upload_forcing orcinus turbidity --run-date 2021-06-18
+collect_weather 18 stalled; investigation:
+* no error messages in sarracenia log
+* 539 of 576 files downloaded; files missing from hours 015, 016, 017, 019, 020, 022, 023, 024
+* recovery:
+    pkill -f collect_weather
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/2021061/18/
+    download_weather 18 2.5km
+    download_weather 00 1km
+    download_weather 12 1km
+    collect_weather 00 2.5km
+Backfilling VHFR nowcast-r12:
+* wait for run to fail
+* launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-16"
+* wait for run to finish
+
+* launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-17"
+* wait for run to finish
+* launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-18"
+(SalishSeaCast)
+
+Started thinking about design of AtlantisCmd, a Atlantis model run command processor based on NEMO-Cmd:
+* example model run command from Raisha:
+    /ocean/rlovindeer/Atlantis/atlantis-trunk/atlantis/atlantismain/atlantisMerged -i SS_init.nc 0 -o outputSalishSea.nc -r SS_run.prm -f SS_forcing.prm -p SS_physics.prm -b 02SS_biology.prm -s SS_grps.csv -d /ocean/rlovindeer/MOAD/analysis-raisha/SSmodel_outputs/output-25yr
+* goal is a command like:
+    atlantis run run_description.yaml output_directory/
+    e.g. atlantis run 25yr.yaml /ocean/rlovindeer/MOAD/analysis-raisha/SSmodel_outputs/output-25yr/
+* run description YAML file structure:
+    run id: 25yr
+
+    paths:
+      Atlantis code: /ocean/rlovindeer/Atlantis/atlantis-trunk/
+      runs directory: /ocean/rlovindeer/Atlantis/runs/
+
+    forcing:
+      # keys are the file/directory names that are used for the
+      # symlinks created to the values of the `link to:` items
+      SS_init.nc:
+        link to: /ocean/rlovindeer/Atlantis/salish-sea-atlantis-model/SS_init.nc
+      
+      # important design questions here!!!
+
+      # This approach links an entire directory of forcing files into tmp run dir
+      # and leaves the specification of which files from there are used to lines in forcing.prm
+      inputs:
+        link to: /ocean/rlovindeer/Atlantis/salish-sea-atlantis-model/inputs
+
+      # This approach identifies the forcing files explicitly here
+      # and potentially lets forcing.prm be generic;
+      # i.e. no inputs/... just file names that match keys here.
+      # This also keeps tmp run dir flat.
+      SS_hydro.nc:
+        link to: /ocean/rlovindeer/Atlantis/salish-sea-atlantis-model/inputs/SS_hydro.nc
+      SS_temp.nc:
+        link to: /ocean/rlovindeer/Atlantis/salish-sea-atlantis-model/inputs/SS_temp.nc
+      SS_salt.nc:
+        link to: /ocean/rlovindeer/Atlantis/salish-sea-atlantis-model/inputs/SS_salt.nc
+
+    parameters:
+      groups: /ocean/rlovindeer/Atlantis/salish-sea-atlantis-model/SS_grps.csv
+      run: /ocean/rlovindeer/Atlantis/salish-sea-atlantis-model/SS_run.prm
+      forcing: /ocean/rlovindeer/Atlantis/salish-sea-atlantis-model/SS_forcing.prm   
+      physics: /ocean/rlovindeer/Atlantis/salish-sea-atlantis-model/SS_physics.prm   
+      biology: /ocean/rlovindeer/Atlantis/salish-sea-atlantis-model/SS_biology.prm   
+
+      # Another design question!!
+
+      # Alternative is to make these lists of files that are concatenated 
+      # to create the filename that is the key.
+      # This is a little cumbersome because we still need to know what kind of 
+      # parameter file each is
+      groups:
+        # example of single file list
+        SS_grps.csv:
+          - /ocean/rlovindeer/Atlantis/salish-sea-atlantis-model/SS_grps.csv
+
+
+    output filename base: outputSalishSea
+
+    vcs revisions:
+      svn:
+        # can probably make this automatic because we have it already in `paths: Atlantis code:`
+        - /ocean/rlovindeer/Atlantis/atlantis-trunk/
+      git:
+        - /ocean/rlovindeer/Atlantis/salish-sea-atlantis-model/
+(Atlantis)
+
+
+Sat 19-Jun-2021
+^^^^^^^^^^^^^^^
+
+Drove to White Rock to visit J&M; took them to Bayview Park.
+
+Backfilling VHFR nowcast-r12:
+* wait for run to fail
+* launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-17"
+* wait for run to finish
+* launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-18"
+collect_weather 18 stalled; investigation:
+* no error messages in sarracenia log
+* 543 of 576 files downloaded; files missing from hours 014, 015, 017, 018, 020, 021, 022
+* recovery:
+    pkill -f collect_weather
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210619/18/
+    download_weather 18 2.5km
+    download_weather 00 1km - failed due to 404s
+    download_weather 12 1km
+    collect_weather 00 2.5km
+(SalishSeaCast)
+
+
+Sun 20-Jun-2021
+^^^^^^^^^^^^^^^
+
+collect_weather 06 stalled; investigation:
+* no error messages in sarracenia log
+* 565 of 576 files downloaded; files missing from hours 013, 019
+* recovery:
+    pkill -f collect_weather
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210620/06
+    download_weather 06 2.5km
+    collect_weather 18 2.5km
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+collect_weather 18 stalled; investigation:
+* no error messages in sarracenia log
+* 534 of 576 files downloaded; files missing from hours 015-018, 021, 022, 024
+* recovery:
+    pkill -f collect_weather
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210620/18/
+    download_weather 18 2.5km
+    download_weather 00 1km - failed due to 404s
+    download_weather 12 1km
+    collect_weather 00 2.5km
+Backfilling VHFR nowcast-r12:
+* wait for run to finish
+* launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-19"
+(SalishSeaCast)
+
+
+
+TODO:
   * figure out how to merge/cherrypick relevant changes from Rachael's add_terminal branch in moad_tools
   
-  Fix ariane docs.
+Fix ariane docs.
   
 * silence PIL.PngImagePlugin logging
 * patch for PreRules.am ??
