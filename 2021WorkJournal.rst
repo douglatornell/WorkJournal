@@ -874,7 +874,7 @@ Checked on ONC ferry and SCVIP data flows; both still down; looked at their new 
 Investigated hindcast_dayavgs metadata problem; resolved by dropping bounds_nav_[lat|lon] variables present in some NEMO results files; ran hindcast_dayavgs for 2020-02-15 to 2020-12-31.
 (SalishSeaCast)
 
-Brought Makd-MIDOS-Forcing repo up to date; merged monte-carlo branch that adds "salishseacast grid" item to YAML config instead of hard-coded ERDDAP URL so that it can work on graham compute nodes w/o network access by using a path to a clone of the SalishSeaCast/grid repo.
+Brought Makd-MIDOSS-Forcing repo up to date; merged monte-carlo branch that adds "salishseacast grid" item to YAML config instead of hard-coded ERDDAP URL so that it can work on graham compute nodes w/o network access by using a path to a clone of the SalishSeaCast/grid repo.
 (MIDOSS)
 
 
@@ -907,7 +907,7 @@ Zoom coffee w/ Debby & Paul.
 Reviewed changes in add-make-hdf5 branch of MIDOSS-MOHID-config in preparation for merge.
 Reviewed changes in add-make-hdf5 branch of MOHID-Cmd in preparation for merge.
 Reviewed clones on graham:
-* Make-MIDOS-Forcing: up to date
+* Make-MIDOSS-Forcing: up to date
 * MIDOSS-MOHID-CODE: pulled to bring up to date
 * MIDOSS-MOHID-config: up to date on main; WIP on add-make-hdf5
 * MIDOSS-MOHID-grid: up to date
@@ -929,7 +929,7 @@ Merged add-make-hdf5 branch in MIDOSS-MOHID-config into main.
 Queued 3 diesel spills (w/o volume) test from 10k csv; running
 Merged add-make-hdf5 branch in MOHID-Cmd into master.
 Did year roll-over updates on MOHID-Cmd; did tech debt maintenance too
-Fixed SyntaxWarnings re: string equality test in Make-MIDOS-Forcing; restricted pkg to Python 3.8.
+Fixed SyntaxWarnings re: string equality test in Make-MIDOSS-Forcing; restricted pkg to Python 3.8.
 Added spill volume to templates and _render...() function.
 Ran the nearest thing yet to real Monte Carlo for 3 diesel spills.
 (MIDOSS)
@@ -1131,7 +1131,7 @@ Finalized Lagrangian.dat file tempaltes for Monte Carlo runs:
 * ln -s Lagrangian_diesel.dat Lagrangian_other.dat
 Replied to Rachael's request for terminal in random spills CSV with suggestion to use MMSI and date/time.
 Deleted MIDOSS-MOHID-config add-make-hdf5 branch.
-Deleted Make-MIDOS-Forcing monte-carlo branch.
+Deleted Make-MIDOSS-Forcing monte-carlo branch.
 Deleted MOHID-Cmd add-make-hdf5 branch.
 Changed MOHID-Cmd default branch name from master to main.
 Committed change to NEMO_Nowcast to disable Sentry init when worker runs in debug mode; its been uncommitted in production for months.
@@ -1358,7 +1358,7 @@ Received and set up Acer Nitro GTX 1050 PC for Zwift.
 Tue 16-Mar-2021
 ^^^^^^^^^^^^^^^
 
-Fixed docs linkcheck issues in Make-MIDOS-Forcing.
+Fixed docs linkcheck issues in Make-MIDOSS-Forcing.
 (MIDOSS)
 
 Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
@@ -2088,7 +2088,7 @@ Squash-merged Dependabot PRs re: bump urllib3 to 1.26.4:
 * UBC-MOAD/moad_tools
 * 43ravens/NEMO_Nowcast
 * MIDOSS/MOHID-Cmd
-* MIDOSS/Make-MIDOS-Forcing
+* MIDOSS/Make-MIDOSS-Forcing
 * SalishSeaCast/tools
 * SalishSeaCast/SalishSeaNowcast
 * SalishSeaCast/SOG-Bloomcast-Ensemble
@@ -2666,7 +2666,7 @@ Tue 4-May-2021
 Worked at ESB while Rita was at home.
 
 Created https://github.com/MIDOSS/MIDOSS-MOHID-CODE/issues/9 re: MOHID build problems in graham StdEnv/2020.
-Updated docs & Make-MIDOS-Forcing and started MOHID-Cmd re: using StdEnv/2016.4.
+Updated docs & Make-MIDOSS-Forcing and started MOHID-Cmd re: using StdEnv/2016.4.
 (MIDOSS)
 
 
@@ -3557,7 +3557,7 @@ Worked on updating cookiecutter-MOAD-pypkg:
 Wed 16-Jun-2021
 ^^^^^^^^^^^^^^^
 
-collect_weather 12 still running at 09:30; no 12Z files have appeared yet in sarracenia log, byt 06Z forecast appears to have been re-broadcast between 04:20 and 06:14; 12Z files started to arrive at ~10:00; finished at 10:34.
+collect_weather 12 still running at 09:30; no 12Z files have appeared yet in sarracenia log, but 06Z forecast appears to have been re-broadcast between 04:20 and 06:14; 12Z files started to arrive at ~10:00; finished at 10:34.
 Backfilling VHFR nowcast-r12:
 * wait for run to fail
 * launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-15"
@@ -3780,10 +3780,245 @@ Backfilling VHFR nowcast-r12:
 (SalishSeaCast)
 
 
+Week 23
+-------
+
+Mon 21-Jun-2021
+^^^^^^^^^^^^^^^
+
+Week 66 of UBC work-from-home due to COVID-19
+
+collect_weather 00, 06, 12 successful
+Backfilling VHFR nowcast-r12:
+* wait for run to finish
+* launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-20"
+* wait for run to finish
+* launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-21"
+collect_weather 18 stalled; investigation:
+* no error messages in sarracenia log
+* 566 of 576 files downloaded; files missing from hours 016, 019 022, 023
+* recovery:
+    pkill -f collect_weather
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210621/18/
+    download_weather 18 2.5km
+    download_weather 00 1km - failed due to 404s
+    download_weather 12 1km
+    collect_weather 00 2.5km
+(SalishSeaCast)
+
+Installed Litematica & MiniHUD client mods via Fabric:
+* Stored files in ~/Minecraft/mods/1.17/
+* Downloaded fabric-installer-0.7.4.jar from fabricmc.net, made it executable, and ran it to create new profile
+* Launch minecraft in fabric-1.17 profile; crash complaining about 1.16 mods
+* Moved 1.16 mods from ~/.minecraft/mods/ to ~/Minecraft/mods/1.16/
+* Launch minecraft in fabric-1,17 profile; success; shutdown
+* Downloaded from curseforge.com:
+  * malilib-fabric-1.17.0-0.10.0-dev.22+beta.1.jar
+  * minihud-fabric-1.17.0-0.19.0-dev.20210609.185508.jar
+  * litematica-fabric-1.17.0-0.0.0-dev.20210616.033538.jar
+* Copied 3 mods into ~/.minecraft/mods/
+* Launch minecraft in fabric-1.17 profile
+(Minecraft)
+
+Worked on running hdf5-to-netcdf4 on files in $SCRATCH/MIDOSS/runs/monte-carlo/north_strait_5th362_2021-06-14T150753/results/ that didn't get processesed due to filling node-local scratch storage:
+* all spills <=219 were processesed
+* hit an missing for spills 220 through 306
+* no spills >=306 were processesed
+* processing spill 220 on login node took 9m37s
+* need to load python/3.8.2 and nco/4.9.5
+* processing spill 221 in interactive session on gra800 using node-local scratch ($SLURM_TMPDIR) took 10m35s
+    salloc --time=0:30:0 --cpus-per-task=1 --mem-per-cpu=1024m --account=def-allen
+    export RESULTS_FILE=Lagrangian_diesel-221_north_strait_5th362-221
+    cp -v /scratch/dlatorne/MIDOSS/runs/monte-carlo/north_strait_5th362_2021-06-14T150753/results/north_strait_5th362-221/${RESULTS_FILE}.hdf5 $SLURM_TMPDIR/
+    time hdf5-to-netcdf4 -v debug $SLURM_TMPDIR/${RESULTS_FILE}.hdf5 $SLURM_TMPDIR/${RESULTS_FILE}.nc
+Developed a script to process results dirs one at a time; ran for several in sacct sessions.
+(MIDOSS)
+
+
+Tue 22-Jun-2021
+^^^^^^^^^^^^^^^
+
+collect_weather 06 stalled; investigation:
+* no error messages in sarracenia log
+* 525 of 576 files downloaded; files missing from hours 013-019, 021, 022
+* recovery:
+    pkill -f collect_weather
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210622/06
+    download_weather 06 2.5km
+    collect_weather 18 2.5km
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+Emailed Sandrine; she's on leave, so resent to DPS-Client address.
+Tempoary failuer of /ocean, but resolved itself.
+Discovered that log aggregator stopped around 11:16; maybe connected with other transient network issues this morning; restarted at ~16:40.
+nowcast-agrif failed, perhaps also due to network issue this morning; re-launched at ~17:10; failed again.
+(SalishSeaCast)
+
+Continued running sacct sessions to run hdf5-to-netcdf4 on files in $SCRATCH/MIDOSS/runs/monte-carlo/north_strait_5th362_2021-06-14T150753/results/ that didn't get processesed due to filling node-local scratch storage.
+(MIDOSS)
+
+Got serious about trying to choose a new dishwasher.
+
+
+Wed 23-Jun-2021
+^^^^^^^^^^^^^^^
+
+Stored script for backfilling MOHID HDF5 to netCDF4 conversions at https://gist.github.com/douglatornell/f5821b42c0153494592133010c6f8a7c; continued running sacct sessions to run hdf5-to-netcdf4 on files in $SCRATCH/MIDOSS/runs/monte-carlo/north_strait_5th362_2021-06-14T150753/results/ that didn't get processesed due to filling node-local scratch storage.
+Stakeholder workshop prep mtg;
+* <32 HDF5 to netCDF4 conversions to go; finish today?
+(MIDOSS)
+
+collect_weather 00 stalled; investigation:
+* no error messages in sarracenia log, but it stopped at 11:15 on 22jun - network quake?
+* 543 of 576 files downloaded; files missing from hours 013, 015, 017, 020, 021, 024
+* recovery started at ~10:00:
+    pkill -f collect_weather
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210623/00
+    download_weather 00 2.5km
+    collect_weather 18 2.5km
+    download_weather 06 2.5km
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+Retried 22jun nowcast-agrif with a step back to re-upload forcing
+    upload_forcing orcinus nowcast+ --run-date 2021-06-22
+    upload_forcing orcinus turbidity --run-date 2021-06-22
+    run failed after 7 min
+collect_weather 18 & 1km HRDPS downloads worked.
+Email to Jenn re: stalled Fraser River Buoy page; she restarted DMS.
+collect_weather 00 stalled
+* no error messages in sarracenia log
+* 500 of 576 files downloaded; files missing from hours 013-022; no files in 014 and 019
+* recovery:
+  download_weather 06 2.5km
+  collect_weather 18 2.5km
+(SalishSeaCast)
+
+Email to Kate Schuler to help her w/ ERDDAP access to vertical diffusivity to analyze in matlab.
+(Prediction Core)
+
+
+Thu 24-Jun-2021
+^^^^^^^^^^^^^^^
+
+Booked appt for 2nd dose of COVID-19 vaccine.
+
+collect_weather 06 stalled; investigation:
+* no error messages in sarracenia log
+* 543 of 576 files downloaded; files missing from hours 013, 017-019, 021, 022, 024
+* recovery:
+    pkill -f collect_weather
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210624/06/
+    download_weather 06 2.5km
+    collect_weather 18 2.5km
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+UBC-DFO modeling mtg; Laura's FVCOM model in Bute & Toba Inlets; Michael shared arch file that works for XIOS-2 r1625 on graham.
+Changed HRDPS west sr_subscribe log level to debug and restarted it.
+SalishSeaCast is running sarracenia-2.20.08post1; latest release is 2.12.04, but it is bug fixes that don't look like they have anything to do with the issues we are seeing.
+(SalishSeaCast)
+
+Created AtlantisCmd repo on GitHub and started design notes & discussion in issue #1.
+Weekly mtg w/ CSIRO:
+* SS_xy.bgm file name is provided to Atlantis as a global attribute in SS_init.nc
+(Atlantis)
+
+
+Fri 25-Jun-2021
+^^^^^^^^^^^^^^^
+
+Beginning of dome heat wave, expected to last 7 days.
+
+collect_weather 18, 00, and 06 worked in automation
+collect_weather 12 stalled; investigation:
+* sarracenia log is less useful due to ~20 lines of debug message for every file in forecast, making finding info about the 576 we care about hard
+* 539 of 576 files downloaded; files missing from hours 015-017, 019-022
+* recovery:
+  pkill -f collect_weather
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210625/12/
+  download_weather 12 2.5km
+  collect_weather 18 2.5km
+Reviewed notes about missing files and confirmed that they are always in the 013-024 hours range.
+Set log level for sr_subscribe for HRDPS west back to info.
+Set log level for sr_subscribe for HRDPS west 1km to debug; no file notifications.
+collect_weather 18 stalled; investigation:
+* no error messages in sarracenia log
+* 539 of 576 files downloaded; files missing from hours 015-017, 019-022, 024
+* collect_weather 18 wasn't running; maybe because the skookum session I started it in died?
+* recovery:
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210625/18/
+  download_weather 18 2.5km
+  download_weather 00 1km --yesterday
+  download_weather 12 1km
+  collect_weather 00 2.5km
+collect_weather 00 stalled
+* no error messages in sarracenia log
+* 548 of 576 files downloaded; files missing from hours 013, 018-022, 024
+* recovery:
+    pkill -f collect_weather
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210626/00/
+    download_weather 00 2.5km
+    collect_weather 06 2.5km
+(SalishSeaCast)
+
+Coffee w/ Tereza.
+
+Continued work on design of AtlantisCmd.
+(Atlantis)
+
+
+Sat 26-Jun-2021
+^^^^^^^^^^^^^^^
+
+Heat wave continued, hotter.
+
+collect_weather 06, 12, 18 & 00 worked in automation
+(SalishSeaCast)
+
+Fixed permissions on post-processing converted netCDF4 files on graham.
+(MIDOSS)
+
+Drove to White Rock top visit M&J.
+
+
+Sun 27-Jun-2021
+^^^^^^^^^^^^^^^
+
+Heat wave continued, hotter.
+
+collect_weather 06 worked in automation
+collect_weather 12 stalled; investigation:
+* no messages in sarracenia log
+* 574 of 576 files downloaded; files missing from hours 018, 021
+* recovery:
+    pkill -f collect_weather
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210627/12
+    download_weather 12 2.5km
+    collect_weather 18 2.5km
+collect_weather 00 stalled; investigation revealed a steady stream of "Tempoary failure in name resolution" errors; nothing to be done to recover.
+
+(SalishSeaCast)
+
+Robinson reunion on Zoom
+
+Got 2nd dose of COVID-19 vaccine
+
+
+
+
+
+Retried 22jun nowcast-agrif with a step back to re-upload forcing
+upload_forcing orcinus nowcast+ --run-date 2021-06-22
+upload_forcing orcinus turbidity --run-date 2021-06-22
+wait for run to finish
+
+upload_forcing orcinus nowcast+ --run-date 2021-06-23
+upload_forcing orcinus turbidity --run-date 2021-06-23
+
+
 
 TODO:
-  * figure out how to merge/cherrypick relevant changes from Rachael's add_terminal branch in moad_tools
-  
+* figure out how to merge/cherrypick relevant changes from Rachael's add_terminal branch in moad_tools
+
 Fix ariane docs.
   
 * silence PIL.PngImagePlugin logging
