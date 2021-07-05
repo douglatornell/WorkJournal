@@ -3303,7 +3303,7 @@ upload_forcing nowcast+ to arbutus failed due to connection error; investigation
 * ssh attempt at ~10:30 failed
 * action log in web dashboard says nowcast0 was stopped at 11:47 UTC == 04:47 Pacific
 * started nowcast0 via dashboard
-* took the opportunity to die apt update && apt upgrade and rebooted
+* took the opportunity to do apt update && apt upgrade and rebooted
 * /nemoShare did not automatically remount
 * sudo mount /dev/vdc /nemoShare  # quite slow
 * /nemoShare/MEOPAR was not mounted at /export/MEOPAR for NFS
@@ -3962,7 +3962,7 @@ collect_weather 00 stalled
 
 Coffee w/ Tereza.
 
-Continued work on design of AtlantisCmd.
+Continued work on design of AtlantisCmd; started creating handcrafted example/template tmp run dir.
 (Atlantis)
 
 
@@ -4002,6 +4002,177 @@ Robinson reunion on Zoom
 
 Got 2nd dose of COVID-19 vaccine
 
+
+Week 24
+-------
+
+Mon 28-Jun-2021
+^^^^^^^^^^^^^^^
+
+Week 67 of UBC work-from-home due to COVID-19
+
+Heat wave continued, hotter; moved downstairs to work.
+
+Widespread connection issues on ocean machines; name resolution errors continued in sarracenia log for 06Z forecast; mitigation:
+  pkill -f collect_weather
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210628/00
+  # on kudu
+    sshfs -o nonempty skookum:/results /results
+    download_weather 00 --debug
+    download_weather 06 --debug
+    download_weather 12 --debug
+    download_live_ocean
+At ~11:30 Charles confirmed DNS failure in EOSM due to overnight AC failures; compounded by ocean2 crashes yesterday and again this morning.
+* recovery:
+    mv /results/forcing/atmospheric/GEM2.5/GRIB/20210628/06 /results/forcing/atmospheric/GEM2.5/GRIB/20210628/06.aside
+    collect_weather 18 2.5km
+    download_weather 06 2.5km
+    wait for forecast2 runs to finish
+    mv /results/forcing/atmospheric/GEM2.5/GRIB/20210628/12 /results/forcing/atmospheric/GEM2.5/GRIB/20210628/12.aside
+    download_weather 12 2.5km
+Charles restored /ocean mounts on skookum & salish at ~14:30.
+ocean was apparently the target of brute force attack over the weekend.
+collect_weather 18 worked in automation.
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar by Susan; her CAIMS talk on Gonzalo & Karina's canyon work.
+
+
+Tue 15-Jun-2021
+^^^^^^^^^^^^^^^
+
+Heat wave continued, a little cooler.
+
+Work at ESB while Rita is at home.
+
+collect_weather 00, 06, 12, 18 worked in automation
+upload_forcing nowcast+ to arbutus failed due to connection error; investigation:
+* ssh attempt at ~07:30 failed
+* action log in web dashboard says nowcast0 was stopped at 05:12 UTC == 22:12 Pacific
+* started nowcast0 via dashboard
+* took the opportunity to do apt update && apt upgrade and rebooted
+* /nemoShare did not automatically remount
+* sudo mount /dev/vdc /nemoShare  # quite slow
+* /nemoShare/MEOPAR was not mounted at /export/MEOPAR for NFS
+* sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+* ll /export/MEOPAR  # to confirm mount
+* sudo systemctl start nfs-kernel-server.service
+* sudo exportfs -f  # to reset NFS handles for compute nodes
+* confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+* for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+* for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+* restarted automation at ~07:45:
+    upload_forcing arbutus forecast2
+nowcast-green run stalled at 25.3% complete; investigation:
+* nowcast6 node stopped at 17:52 UTC == 10:52 Pacific
+* recovery:
+    restarted intance from dashboard
+    sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR # on nowcast6
+    killed xios_server
+    killed watch_NEMO
+    deleted tmp run & results dirs
+    make_forcing_links arbutus nowcast-green
+Noticed that there were no progress messages from nowcast-x2, so restarted log aggregator.
+Discovered that nowcast-r12 28jun runs stopped, and 27jun run did not download to skookum; recovery:
+    download_fvcom_results arbutus r12 nowcast 2021-06-27
+    wait for 29jun run to fail
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-28"
+    wait for run to finish
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-29"
+Reviewed Michael's XIOS arch files on graham; no substantial differences from ours.
+(SalishSeaCast)
+
+Updated alarm monitoring contacts list; requested assessment for system upgrade.
+
+Called Nanaimo Toyota to request assessment on Prius summer tires; they can ship to Vancouver; assessment: original tires so >10 yrs old (>7 is illegal), 40-50% tread wear, but bad edge wear; not recommended; authorized dealer to send them to recycling.
+
+rsync-ed $SCRATCH/MIDOSS/runs/monte-carlo/ to $PROJECT/MIDOSS/monte-carlo-results/ to preserve them from $SCRATCH purge policy:
+    rsync -rltv $SCRATCH/MIDOSS/runs/monte-carlo/ $PROJECT/MIDOSS/monte-carlo-results/
+That creates ~19.7k files that pushes on our 100k file count quota on $PROJECT.
+Noticed that north_strait_4th122_2021-06-13T143859/results/north_strait_4th122-47/ contains a core dump; divide by zqero.
+(MIDOSS)
+
+
+Wed 30-Jun-2021
+^^^^^^^^^^^^^^^
+
+Heat wave continued, cool enough overnight to get downstairs temperature down to 22°C.
+
+collect_weather 06 stalled; investigation:
+* no error messages in sarracenia log
+* 538 of 576 files downloaded; files missing from hours 014-017, 019-022, 024
+* recovery:
+    pkill -f collect_weather
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210630/06
+    download_weather 06 2.5km
+    collect_weather 18 2.5km
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+collect_weather 18 stalled; investigation:
+* no error messages in sarracenia log; 576 file messages though
+* 199 of 576 files downloaded
+* no collect_weather worker running; perhaps collect_weather 18 got killed while working due to my skookum session hanging up???
+* recovery:
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210630/18/
+    download_weather 18 2.5km
+    download_weather 00 1km --yesterday  # ran after 17:00 == 00:00 UTC
+    download_weather 12 1km
+    collect_weather 00 2.5km
+collect_weather 00 worked in automation
+(SalishSeaCast)
+
+Continued work on design of AtlantisCmd; finished creating handcrafted example/template tmp run dir; ran Atlantis in rsync clone of it; design questions:
+* should Atlantis console output go to stdout only, to screen and stdout, or option to screen
+* vcs recording for svn may be hard; log info is on server
+(Atlantis)
+
+Workshop prep mtg.
+Worked w/ Ben on settings to serve static tiles.
+(MIDOSS)
+
+
+July
+----
+
+Thu 1-Jul-2021
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Canada Day
+
+collect_weather 06, 12, 18, 00 worked in automation
+(SalishSeaCast)
+
+Drove to Mt. Thom Air BnB for long weekend.
+
+Hiked from Thom Creek trailhead, out & back including walk from rental.
+
+
+Fri 2-Jul-2021
+^^^^^^^^^^^^^^^
+
+collect_weather 06, 12, 18, 00 worked in automation
+(SalishSeaCast)
+
+Hiked Elk-Thurston trail to ~1km beyond Elk; many steep sections; very sore tired quads on return.
+
+
+Sat 3-Jul-2021
+^^^^^^^^^^^^^^^
+
+collect_weather 06, 12, 18, 00 worked in automation
+(SalishSeaCast)
+
+Hiked TCT downstream from Chilliwack Lake to near split of Radium Lake trail.
+
+
+Sun 4-Jul-2021
+^^^^^^^^^^^^^^^
+
+collect_weather 06, 12, 18, 00 worked in automation
+(SalishSeaCast)
 
 
 
