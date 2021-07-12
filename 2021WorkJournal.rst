@@ -3550,7 +3550,6 @@ Worked on updating cookiecutter-MOAD-pypkg:
 * updated dev env to Python 3.9
 * add intersphinx mapping for MOAD docs
 * update re: migration from Mercurial on Bitbucket to Git on GitHub
-* add SS-Atlantis gitHub org and copyright holders
 (MOAD)
 
 
@@ -4041,7 +4040,7 @@ Group mtg; see whiteboard.
 Phys Ocgy seminar by Susan; her CAIMS talk on Gonzalo & Karina's canyon work.
 
 
-Tue 15-Jun-2021
+Tue 29-Jun-2021
 ^^^^^^^^^^^^^^^
 
 Heat wave continued, a little cooler.
@@ -4175,15 +4174,278 @@ collect_weather 06, 12, 18, 00 worked in automation
 (SalishSeaCast)
 
 
+Week 25
+-------
+
+Mon 5-Jul-2021
+^^^^^^^^^^^^^^
+
+Week 68 of UBC work-from-home due to COVID-19
+
+docs linkcheck workflow failed after a push by Becca last week and overnight in its scheduled run; investigation:
+* 403 Client Error: Forbidden for url: https://www.baeldung.com/cs/ssh-intro
+* confirmed that page is alive
+* workflow failed again on manual re-try
+* decided to do nothing for a month to see if the issue resolves; not sure if it is baeldung blocking connections from GitHub, or what
+Group mtg; see whiteboard.
+Resumed work on conda section of docs:
+* traced rampant ``Error in "image" directive:
+unknown option: "target"`` errors from rST snooty linter to https://github.com/vscode-restructuredtext/vscode-restructuredtext/issues/290
+(MOAD)
+
+New dishwasher delivered and installed.
+
+Reviewed UBC/CSIRO contract re: copyright and licence of project IP; copyright is clearly project contributors, UBC & CSIRO; license is ambiguous other than UBC & CSIRO grant free reciprocal license; discussed w/ Susan and decided on our usual CC-By for doc and Apache 2.0 for code & docs; 
+(Atlantis)
 
 
-Retried 22jun nowcast-agrif with a step back to re-upload forcing
-upload_forcing orcinus nowcast+ --run-date 2021-06-22
-upload_forcing orcinus turbidity --run-date 2021-06-22
+Tue 6-Jul-2021
+^^^^^^^^^^^^^^
+
+Submitted PWGSC quarterly usage report for 43ravens supply arrangement.
+
+Coffee w/ Ben.
+
+Finished updating cookiecutter-MOAD-pypkg:
+* add SS-Atlantis gitHub org and copyright holders
+(MOAD)
+
+Continued work on design of AtlantisCmd; finished creating handcrafted example/template tmp run dir; ran Atlantis in rsync clone of it; design questions:
+* should Atlantis console output go to stdout only, to screen and stdout, or option to screen; decided on stdout & stderr
+* should stdout & stderr be separate or combined/interleaved?
+* vcs recording for svn may be hard; log info is on server
+Explored getting info from svn w/o auth to server:
+* svn info provides:
+* repo URL
+* last changed rev
+* last changed authored
+* last changed date
+* missing files and message compared to git/hg
+* not sure what svn info output for committed but unpushed changes
+* svn diff provides file by file diffs for uncommitted changes
+(Atlantis)
+
+
+Wed 7-Jul-2021
+^^^^^^^^^^^^^^
+
+Continued discussion of design of AtlantisCmd w/ Raisha in issue #1.
+(Atlantis)
+
+Helped Tereza sort out running from PROD-HINDCAST_201905-v? re: need to create branches for tag checkouts so that VCS recording works.
+Retried 22jun nowcast-agrif from re-upload forcing:
+    upload_forcing orcinus nowcast+ --run-date 2021-06-22
+    upload_forcing orcinus turbidity --run-date 2021-06-22
+    * stepping, but ~25% of usual speed
+Finally sorted out logic of adding partition=QDR PBS directive to SalishSeaCmd for orcinus runs (dates back to email w/ Mark in Jan-21 :-(
+Had to mess araound with git config in an elderly version on orcinus to get merge of main to work.
+Started backfilling nowacst-agrif:
+    upload_forcing orcinus nowcast+ --run-date 2021-06-23
+    upload_forcing orcinus turbidity --run-date 2021-06-23
+    also took 4h20m to run
+(SalishSeaCast)
+
+Coffee w/ Raisha.
+
+Workshop planning mtg:
+* Note-taker w/ Stephanie for #7 on day 2: discussion of getting fields and Ben's viz app
+(MIDOSS)
+
+
+Thu 8-Jul-2021
+^^^^^^^^^^^^^^
+
+Investigated SalishSeaCast/docs scheduled linkcheck failure:
+* connection failed to http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/LectureNotes/Intro_to_Python.pdf; maybe temporary?
+Emailed Sandrine re: resolution of HRDPS west AMQP reliability issue on 1jul.
+Continued backfilling nowacst-agrif:
+    wait for automation to fail
+    upload_forcing orcinus nowcast+ --run-date 2021-06-24
+    upload_forcing orcinus turbidity --run-date 2021-06-24
+    wait for run to finish
+    upload_forcing orcinus nowcast+ --run-date 2021-06-25
+    upload_forcing orcinus turbidity --run-date 2021-06-25
+    wait for run to finish
+    upload_forcing orcinus nowcast+ --run-date 2021-06-26
+    upload_forcing orcinus turbidity --run-date 2021-06-26
+Noted that partition=QDR PBS directive is still not appearing in run scripts on orcinus; figured out that value of SYSTEM in SalishSeaCmd/run.py is not getting set to orcinus when it is run via sftp client in run_NEMO_agrif worker because WGSYSTEM envvar is not set; instead SYSTEM is set to seawolf? via socket.gethostname()
+(SalishSeaCast)
+
+Archived 1-17OceanTaiga on SADA CubedHost server as archive-1625773673456.zip and updated server to 1.17.1.
+Updated Litematica & MiniHUD client mods via Fabric:
+* Launch minecraft 1.17.1
+* Run fabric-installer-0.7.4.jar (same as for 1.17), to create new profile
+* Launch minecraft in fabric-1.17.1 profile
+* Downloaded from curseforge.com ~/Minecraft/mods/1.17.1/:
+* malilib-fabric-1.17.1-0.10.0-dev.23.jar
+* minihud-fabric-1.17.1-0.19.0-dev.20210707.150016.jar
+* litematica-fabric-1.17.1-0.0.0-dev.20210707.011234.jar
+* Copied 3 mods into ~/.minecraft/mods/
+* Launch minecraft in fabric-1.17.1 profile
+(Minecraft)
+
+
+Fri 9-Jul-2021
+^^^^^^^^^^^^^^
+
+Telus Security assessment of alarm system for update.
+
+Continued backfilling nowacst-agrif:
+wait for automation to fail
+make_forcing_links orcinus nowcast-agrif --run-date 2021-06-27
 wait for run to finish
+make_forcing_links orcinus nowcast-agrif --run-date 2021-06-28
+wait for run to finish
+make_forcing_links orcinus nowcast-agrif --run-date 2021-06-29
+wait for run to finish
+Emailed Mark re: >4h run times.
+Resumed trying to sort out why nowcast-dev won't run on salish since upgrade to 18.04; compared libnetcdf* on skookum, salish and arbutus:
+* arbutus:
+ubuntu@nowcast0:~$ ls /usr/lib/libnetcdf*
+ls: cannot access '/usr/lib/libnetcdf*': No such file or directory
 
-upload_forcing orcinus nowcast+ --run-date 2021-06-23
-upload_forcing orcinus turbidity --run-date 2021-06-23
+ubuntu@nowcast0:~$ ls -1 /usr/lib/x86_64-linux-gnu/libnetcdf*
+/usr/lib/x86_64-linux-gnu/libnetcdf.settings
+/usr/lib/x86_64-linux-gnu/libnetcdf.so
+/usr/lib/x86_64-linux-gnu/libnetcdf.so.13
+/usr/lib/x86_64-linux-gnu/libnetcdff.a
+/usr/lib/x86_64-linux-gnu/libnetcdff.so
+/usr/lib/x86_64-linux-gnu/libnetcdff.so.6
+/usr/lib/x86_64-linux-gnu/libnetcdff.so.6.1.1
+* skookum:
+skookum:~$ ls -1 /usr/lib/libnetcdf*
+/usr/lib/libnetcdf_c++.so.4@
+/usr/lib/libnetcdf_c++.so.4.1.0
+/usr/lib/libnetcdff.so.5@
+/usr/lib/libnetcdff.so.5.1.0
+/usr/lib/libnetcdf.so.7@
+/usr/lib/libnetcdf.so.7.1.1
+
+skookum:~$ ls -1 /usr/lib/x86_64-linux-gnu/libnetcdf*
+/usr/lib/x86_64-linux-gnu/libnetcdf.settings
+/usr/lib/x86_64-linux-gnu/libnetcdf.so@
+/usr/lib/x86_64-linux-gnu/libnetcdf.so.13
+* salish:
+salish:~$ ls -1 /usr/lib/libnetcdf*
+/usr/lib/libnetcdf_c++.so@
+/usr/lib/libnetcdf_c++.so.4@
+/usr/lib/libnetcdf_c++.so.4.1.0
+/usr/lib/libnetcdff.so@
+/usr/lib/libnetcdff.so.5@
+/usr/lib/libnetcdff.so.5.1.0
+/usr/lib/libnetcdf.so@
+/usr/lib/libnetcdf.so.7@
+/usr/lib/libnetcdf.so.7.1.1
+
+salish:~$ ls -1 /usr/lib/x86_64-linux-gnu/libnetcdf*
+/usr/lib/x86_64-linux-gnu/libnetcdff.a
+/usr/lib/x86_64-linux-gnu/libnetcdff.so@
+/usr/lib/x86_64-linux-gnu/libnetcdff.so.6@
+/usr/lib/x86_64-linux-gnu/libnetcdff.so.6.1.1
+/usr/lib/x86_64-linux-gnu/libnetcdf.settings
+/usr/lib/x86_64-linux-gnu/libnetcdf.so@
+/usr/lib/x86_64-linux-gnu/libnetcdf.so.11@
+/usr/lib/x86_64-linux-gnu/libnetcdf.so.11.0.0
+/usr/lib/x86_64-linux-gnu/libnetcdf.so.13
+What I want to do on salish:
+apt purge libnetcdf11
+apt purge libnetcdfc++4
+apt purge libnetcdfc7
+apt purge libnetcdff5
+apt purge libhdf5-10
+apt purge libhdf5-7
+What I did on salish:
+apt purge libnetcdf11
+triggered removal of libhdf5-10
+apt purge libnetcdfc++4
+apt purge libnetcdfc7
+triggered removal of libnetcdff5
+apt purge libhdf5-7
+built new XIOS-2 executable:
+cd /SalishSeaCast/XIOS-2
+./tools/FCM/bin/fcm build --clean
+./make_xios --arch GCC_SALISH --netcdf_lib netcdf4_seq --job 8
+built new NEMO SalishSeaCast_Blue executable:
+cd /SalishSeaCast/NEMO-3.6-code/NEMOGCM/CONFIG
+XIOS_HOME=/SalishSeaCast/XIOS-2 ./makenemo -m GCC_SALISH -n SalishSeaCast_Blue clean
+XIOS_HOME=/SalishSeaCast/XIOS-2 ./makenemo -m GCC_SALISH -n SalishSeaCast_Blue -j8
+built new REBUILD_NEMO executable:
+cd /SalishSeaCast/NEMO-3.6-code/NEMOGCM/TOOLS/
+XIOS_HOME=/SalishSeaCast/XIOS-2 ./maketools -m GCC_SALISH -n REBUILD_NEMO clean
+XIOS_HOME=/SalishSeaCast/XIOS-2 ./maketools -m GCC_SALISH -n REBUILD_NEMO
+(SalishSeaCast)
+
+
+Sat 10-Jul-2021
+^^^^^^^^^^^^^^^
+
+Drove to White Rock to visit J&M.
+
+Continued backfilling nowacst-agrif:
+wait for automation to fail
+make_forcing_links orcinus nowcast-agrif --run-date 2021-06-30
+wait for run to finish
+make_forcing_links orcinus nowcast-agrif --run-date 2021-07-01
+(SalishSeaCast)
+
+
+Sun 11-Jul-2021
+^^^^^^^^^^^^^^^
+
+collect_weather 06 stalled; investigation:
+* 404 message in sarracenia log:
+    2021-07-11 02:24:58,295 [WARNING] sr_amqp/consume: could not consume in queue q_anonymous.sr_subscribe.hrdps-west.74434425.78671301: Basic.get: (404) NOT_FOUND - failed to perform operation on queue 'q_anonymous.sr_subscribe.hrdps-west.74434425.78671301' in vhost '/' due to timeout
+* 506 of 576 files downloaded; 10 files missing from hour 001, and all files missing from hours 002-006
+* recovery:
+    pkill -f collect_weather
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210711/06
+    download_weather 06 2.5km
+    collect_weather 18 2.5km
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+Found another 404 in sarracenia log:
+    2021-07-11 09:47:29,288 [WARNING] sr_amqp/consume: could not consume in queue q_anonymous.sr_subscribe.hrdps-west.74434425.78671301: Basic.get: (404) NOT_FOUND - failed to perform operation on queue 'q_anonymous.sr_subscribe.hrdps-west.74434425.78671301' in vhost '/' due to timeout
+forecast2 runs catch-up failed due to upload_forcing connection failure on arbutus; investigation:
+* nowcast0 shut down
+     Request ID  Action  Start Time  User ID  Message 
+    req-e6458e48-c215-4844-89b9-ebfd7f67840c 	Stop 	July 10, 2021, 5:16 p.m. 	- 
+* nowcast6 shut down
+    req-6ad1f4f1-9966-40a2-92bc-fbf5605083d2 	Stop 	July 10, 2021, 5:16 p.m. 	- 
+* recovery:
+    * started nowcast0 via dashboard
+    * took the opportunity to do apt update && apt upgrade; minor pkg upgrades so didn't reboot
+    * /nemoShare did not automatically remount
+    * sudo mount /dev/vdc /nemoShare  # quite slow
+    * /nemoShare/MEOPAR was not mounted at /export/MEOPAR for NFS
+    * sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+    * ll /export/MEOPAR  # to confirm mount
+    * sudo systemctl start nfs-kernel-server.service
+    * started nowcast6 via dashboard
+      * sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR
+    * sudo exportfs -f  # to reset NFS handles for compute nodes
+    * confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+    * for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+    * for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+    * restarted automation at ~12:30:
+        upload_forcing arbutus forecast2
+No message from watch_NEMO on arbutus, so restarted log_aggregator.
+forecast2 run failed - no time steps; investigation:
+  * nowcast-green/10jul11 tmp run dir still in runs/
+    * ocean.output ends with a blob of NULLs (^@)
+  * VHFR nowcast-x2/10jul11 tmp run dir still in fvcom-runs
+    * fvcom.log ends abruptly
+* recovery:
+    make_forcing_links arbutus nowcast-green 2021-07-10
+        run failed because I forgot to re-mount /nemoShare/MEOPAR/ on nowcast6
+    make_forcing_links arbutus nowcast-green 2021-07-10  # ~13:15
+    launch_remote_worker arbutus make_ww3_wind_file arbutus forecast 2021-07-10
+    launch_remote_worker arbutus make_ww3_current_file arbutus forecast 2021-07-10
+nowcast running slow (~2%/5min); replaces nowcast6 in mpi_hosts w/ nowcast2 to try to speed things up; didn't help because forecast ran slow too.
+(SalishSeaCast)
+
+
+TODO: PR for analysis-raisha to add CSIRO to copyright holders.
+
 
 
 
@@ -4191,24 +4453,24 @@ TODO:
 * figure out how to merge/cherrypick relevant changes from Rachael's add_terminal branch in moad_tools
 
 Fix ariane docs.
-  
+
 * silence PIL.PngImagePlugin logging
 * patch for PreRules.am ??
 
 
 Backfill nowcast-dev:
 
-  make_forcing_links salish nowcast+ --shared-storage 2021-04-23
-  make_forcing_links salish nowcast+ --shared-storage 2021-04-24
-  make_forcing_links salish nowcast+ --shared-storage 2021-04-25
-  make_forcing_links salish nowcast+ --shared-storage 2021-04-26
-  make_forcing_links salish nowcast+ --shared-storage 2021-04-27
-  make_forcing_links salish nowcast+ --shared-storage 2021-04-28
-  make_forcing_links salish nowcast+ --shared-storage 2021-04-29
-  make_forcing_links salish nowcast+ --shared-storage 2021-04-30
-  make_forcing_links salish nowcast+ --shared-storage 2021-05-01
-  make_forcing_links salish nowcast+ --shared-storage 2021-05-02
-  make_forcing_links salish nowcast+ --shared-storage 2021-05-03
+make_forcing_links salish nowcast+ --shared-storage 2021-04-23
+make_forcing_links salish nowcast+ --shared-storage 2021-04-24
+make_forcing_links salish nowcast+ --shared-storage 2021-04-25
+make_forcing_links salish nowcast+ --shared-storage 2021-04-26
+make_forcing_links salish nowcast+ --shared-storage 2021-04-27
+make_forcing_links salish nowcast+ --shared-storage 2021-04-28
+make_forcing_links salish nowcast+ --shared-storage 2021-04-29
+make_forcing_links salish nowcast+ --shared-storage 2021-04-30
+make_forcing_links salish nowcast+ --shared-storage 2021-05-01
+make_forcing_links salish nowcast+ --shared-storage 2021-05-02
+make_forcing_links salish nowcast+ --shared-storage 2021-05-03
 
 
 
