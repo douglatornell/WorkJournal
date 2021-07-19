@@ -4291,88 +4291,87 @@ Fri 9-Jul-2021
 Telus Security assessment of alarm system for update.
 
 Continued backfilling nowacst-agrif:
-wait for automation to fail
-make_forcing_links orcinus nowcast-agrif --run-date 2021-06-27
-wait for run to finish
-make_forcing_links orcinus nowcast-agrif --run-date 2021-06-28
-wait for run to finish
-make_forcing_links orcinus nowcast-agrif --run-date 2021-06-29
-wait for run to finish
+    wait for automation to fail
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-06-27
+    wait for run to finish
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-06-28
+    wait for run to finish
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-06-29
 Emailed Mark re: >4h run times.
 Resumed trying to sort out why nowcast-dev won't run on salish since upgrade to 18.04; compared libnetcdf* on skookum, salish and arbutus:
 * arbutus:
-ubuntu@nowcast0:~$ ls /usr/lib/libnetcdf*
-ls: cannot access '/usr/lib/libnetcdf*': No such file or directory
+    ubuntu@nowcast0:~$ ls /usr/lib/libnetcdf*
+    ls: cannot access '/usr/lib/libnetcdf*': No such file or directory
 
-ubuntu@nowcast0:~$ ls -1 /usr/lib/x86_64-linux-gnu/libnetcdf*
-/usr/lib/x86_64-linux-gnu/libnetcdf.settings
-/usr/lib/x86_64-linux-gnu/libnetcdf.so
-/usr/lib/x86_64-linux-gnu/libnetcdf.so.13
-/usr/lib/x86_64-linux-gnu/libnetcdff.a
-/usr/lib/x86_64-linux-gnu/libnetcdff.so
-/usr/lib/x86_64-linux-gnu/libnetcdff.so.6
-/usr/lib/x86_64-linux-gnu/libnetcdff.so.6.1.1
+    ubuntu@nowcast0:~$ ls -1 /usr/lib/x86_64-linux-gnu/libnetcdf*
+    /usr/lib/x86_64-linux-gnu/libnetcdf.settings
+    /usr/lib/x86_64-linux-gnu/libnetcdf.so
+    /usr/lib/x86_64-linux-gnu/libnetcdf.so.13
+    /usr/lib/x86_64-linux-gnu/libnetcdff.a
+    /usr/lib/x86_64-linux-gnu/libnetcdff.so
+    /usr/lib/x86_64-linux-gnu/libnetcdff.so.6
+    /usr/lib/x86_64-linux-gnu/libnetcdff.so.6.1.1
 * skookum:
-skookum:~$ ls -1 /usr/lib/libnetcdf*
-/usr/lib/libnetcdf_c++.so.4@
-/usr/lib/libnetcdf_c++.so.4.1.0
-/usr/lib/libnetcdff.so.5@
-/usr/lib/libnetcdff.so.5.1.0
-/usr/lib/libnetcdf.so.7@
-/usr/lib/libnetcdf.so.7.1.1
+    skookum:~$ ls -1 /usr/lib/libnetcdf*
+    /usr/lib/libnetcdf_c++.so.4@
+    /usr/lib/libnetcdf_c++.so.4.1.0
+    /usr/lib/libnetcdff.so.5@
+    /usr/lib/libnetcdff.so.5.1.0
+    /usr/lib/libnetcdf.so.7@
+    /usr/lib/libnetcdf.so.7.1.1
 
-skookum:~$ ls -1 /usr/lib/x86_64-linux-gnu/libnetcdf*
-/usr/lib/x86_64-linux-gnu/libnetcdf.settings
-/usr/lib/x86_64-linux-gnu/libnetcdf.so@
-/usr/lib/x86_64-linux-gnu/libnetcdf.so.13
+    skookum:~$ ls -1 /usr/lib/x86_64-linux-gnu/libnetcdf*
+    /usr/lib/x86_64-linux-gnu/libnetcdf.settings
+    /usr/lib/x86_64-linux-gnu/libnetcdf.so@
+    /usr/lib/x86_64-linux-gnu/libnetcdf.so.13
 * salish:
-salish:~$ ls -1 /usr/lib/libnetcdf*
-/usr/lib/libnetcdf_c++.so@
-/usr/lib/libnetcdf_c++.so.4@
-/usr/lib/libnetcdf_c++.so.4.1.0
-/usr/lib/libnetcdff.so@
-/usr/lib/libnetcdff.so.5@
-/usr/lib/libnetcdff.so.5.1.0
-/usr/lib/libnetcdf.so@
-/usr/lib/libnetcdf.so.7@
-/usr/lib/libnetcdf.so.7.1.1
+    salish:~$ ls -1 /usr/lib/libnetcdf*
+    /usr/lib/libnetcdf_c++.so@
+    /usr/lib/libnetcdf_c++.so.4@
+    /usr/lib/libnetcdf_c++.so.4.1.0
+    /usr/lib/libnetcdff.so@
+    /usr/lib/libnetcdff.so.5@
+    /usr/lib/libnetcdff.so.5.1.0
+    /usr/lib/libnetcdf.so@
+    /usr/lib/libnetcdf.so.7@
+    /usr/lib/libnetcdf.so.7.1.1
 
-salish:~$ ls -1 /usr/lib/x86_64-linux-gnu/libnetcdf*
-/usr/lib/x86_64-linux-gnu/libnetcdff.a
-/usr/lib/x86_64-linux-gnu/libnetcdff.so@
-/usr/lib/x86_64-linux-gnu/libnetcdff.so.6@
-/usr/lib/x86_64-linux-gnu/libnetcdff.so.6.1.1
-/usr/lib/x86_64-linux-gnu/libnetcdf.settings
-/usr/lib/x86_64-linux-gnu/libnetcdf.so@
-/usr/lib/x86_64-linux-gnu/libnetcdf.so.11@
-/usr/lib/x86_64-linux-gnu/libnetcdf.so.11.0.0
-/usr/lib/x86_64-linux-gnu/libnetcdf.so.13
+    salish:~$ ls -1 /usr/lib/x86_64-linux-gnu/libnetcdf*
+    /usr/lib/x86_64-linux-gnu/libnetcdff.a
+    /usr/lib/x86_64-linux-gnu/libnetcdff.so@
+    /usr/lib/x86_64-linux-gnu/libnetcdff.so.6@
+    /usr/lib/x86_64-linux-gnu/libnetcdff.so.6.1.1
+    /usr/lib/x86_64-linux-gnu/libnetcdf.settings
+    /usr/lib/x86_64-linux-gnu/libnetcdf.so@
+    /usr/lib/x86_64-linux-gnu/libnetcdf.so.11@
+    /usr/lib/x86_64-linux-gnu/libnetcdf.so.11.0.0
+    /usr/lib/x86_64-linux-gnu/libnetcdf.so.13
 What I want to do on salish:
-apt purge libnetcdf11
-apt purge libnetcdfc++4
-apt purge libnetcdfc7
-apt purge libnetcdff5
-apt purge libhdf5-10
-apt purge libhdf5-7
+    apt purge libnetcdf11
+    apt purge libnetcdfc++4
+    apt purge libnetcdfc7
+    apt purge libnetcdff5
+    apt purge libhdf5-10
+    apt purge libhdf5-7
 What I did on salish:
-apt purge libnetcdf11
-triggered removal of libhdf5-10
-apt purge libnetcdfc++4
-apt purge libnetcdfc7
-triggered removal of libnetcdff5
-apt purge libhdf5-7
-built new XIOS-2 executable:
-cd /SalishSeaCast/XIOS-2
-./tools/FCM/bin/fcm build --clean
-./make_xios --arch GCC_SALISH --netcdf_lib netcdf4_seq --job 8
-built new NEMO SalishSeaCast_Blue executable:
-cd /SalishSeaCast/NEMO-3.6-code/NEMOGCM/CONFIG
-XIOS_HOME=/SalishSeaCast/XIOS-2 ./makenemo -m GCC_SALISH -n SalishSeaCast_Blue clean
-XIOS_HOME=/SalishSeaCast/XIOS-2 ./makenemo -m GCC_SALISH -n SalishSeaCast_Blue -j8
-built new REBUILD_NEMO executable:
-cd /SalishSeaCast/NEMO-3.6-code/NEMOGCM/TOOLS/
-XIOS_HOME=/SalishSeaCast/XIOS-2 ./maketools -m GCC_SALISH -n REBUILD_NEMO clean
-XIOS_HOME=/SalishSeaCast/XIOS-2 ./maketools -m GCC_SALISH -n REBUILD_NEMO
+    apt purge libnetcdf11
+        triggered removal of libhdf5-10
+    apt purge libnetcdfc++4
+    apt purge libnetcdfc7
+        triggered removal of libnetcdff5
+    apt purge libhdf5-7
+    built new XIOS-2 executable:
+    cd /SalishSeaCast/XIOS-2
+    ./tools/FCM/bin/fcm build --clean
+    ./make_xios --arch GCC_SALISH --netcdf_lib netcdf4_seq --job 8
+    built new NEMO SalishSeaCast_Blue executable:
+    cd /SalishSeaCast/NEMO-3.6-code/NEMOGCM/CONFIG
+    XIOS_HOME=/SalishSeaCast/XIOS-2 ./makenemo -m GCC_SALISH -n SalishSeaCast_Blue clean
+    XIOS_HOME=/SalishSeaCast/XIOS-2 ./makenemo -m GCC_SALISH -n SalishSeaCast_Blue -j8
+    built new REBUILD_NEMO executable:
+    cd /SalishSeaCast/NEMO-3.6-code/NEMOGCM/TOOLS/
+    XIOS_HOME=/SalishSeaCast/XIOS-2 ./maketools -m GCC_SALISH -n REBUILD_NEMO clean
+    XIOS_HOME=/SalishSeaCast/XIOS-2 ./maketools -m GCC_SALISH -n REBUILD_NEMO
 (SalishSeaCast)
 
 
@@ -4444,8 +4443,249 @@ nowcast running slow (~2%/5min); replaces nowcast6 in mpi_hosts w/ nowcast2 to t
 (SalishSeaCast)
 
 
-TODO: PR for analysis-raisha to add CSIRO to copyright holders.
+Week 26
+-------
 
+Mon 12-Jul-2021
+^^^^^^^^^^^^^^^
+
+Week 69 of UBC work-from-home due to COVID-19
+
+Assessed state of automation:
+* last completed run was forecast/11jul21
+* collect_weather was successful for all forecasts
+Continued recovery/catch-up:
+* restore nowcast6 node to cluster
+    make_forcing_links arbutus nowcast-green 2021-07-11
+  failed due to no turbidity file
+    upload_forcing arbutus turbidity 2021-07-11
+  nowcast-green running at near normal speed
+    make_forcing_links arbutus nowcast+ 2021-07-12
+Continued backfilling nowacst-agrif:
+    wait for automation to fail
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-07-02
+        # back on pod29 and running at full speed :-)
+    wait for run to finish
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-07-03
+    wait for run to finish
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-07-04
+    wait for run to finish
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-07-05
+Started backfilling VHFR runs:
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2021-07-10"
+(SalishSeaCast)
+
+Stakeholder workshop day 1:
+Breakout discussion:
+  * Cat Galbraith: all useful for marine spatial planning; had to leave
+  1a & 1b:
+  * Sam Mansfield:
+    * 1a better for prep; 1b better for response
+    * both effective for vizualization
+  * Charmaine Bosse:
+    * 1a more useful than 1b for preparedness
+  * Lee Britton
+    * 1a useful for planning response resources placement
+    * 1b would like to see confidence intervals
+  * Nathan Leung:
+    * both useful; 1a for resource placement planning; 1b for exercise for response
+  2c & 2d: location; beaching & water column
+  * Nathan:
+    * 2c more useful; beaching more likely to be cleaned up
+  * Lee:
+    * **soluble fraction in water column (2d) would be useful for sampling planning for ecosystem impacts**
+  * Sam:
+    * 2c useful for inform baseline shoreline collection survey (scat surveys)
+  * Lee:
+    * need shorline hydraulics; 2c is useful
+  3e & 3f
+  * Charmaine & Sam:
+    * equally useful; slight nod to probability
+    * threshold by oil type might be useful
+  * Lee:
+    * vast majority if of oil on water is marine diesel; but concern is bunker
+  * Nathan:
+    * concentration useful for size of response resources allocation
+  4g & 4f
+  * Lee:
+    * OilMap produces this kind of output
+    * volume of spill is important; lots of inconsistency in units of volume; m3, litres, barrels, gallons
+  5i & 5j: AIS vessel tracks
+  * Sam:
+    * UVic research on improving AIS info for small vessels
+  * Charmaine & Lee: 5i more useful
+  * John:
+    * vessel traffic centre also has data
+  * Sam:
+    * source of AIS data matters; terrestrial vs. satellite
+(MIDOSS)
+
+
+Tue 13-Jul-2021
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita is at home.
+
+Automation worked correctly overnight.
+Continued backfilling VHFR runs:
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2021-07-11"
+    nowcast-x2 eta 13:22 and it was accurate
+    forecast-x2 eta 17:14 and it was accurate
+    nowcast-r12 eta 00:05 and it was accurate
+    but... that means it is impossible to catch up!
+  Continued backfilling nowacst-agrif:
+    wait for automation to fail
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-07-06
+    wait for run to finish
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-07-07
+    wait for run to finish
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-07-08
+    wait for run to finish
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-07-09
+    wait for run to finish
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-07-10
+    wait for run to finish
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-07-11
+    crashed quickly; probably forcing problem
+(SalishSeaCast)
+
+Completed new UBC COVID-19 safety training and send cert to Tim.
+
+Started work on deployment of Ben's MIDOSS model results viz app:
+* kudu:
+  * clone repo
+  * debugged symlink to tiles and a couple of other minor issue w/ Ben on Slack
+  * added deployment notes to README
+* skookum:
+  * clone repo
+  * created symlink to Ben's tiles tree
+  * tweaked env-dev.yaml
+  * created midoss-app-dev env
+  * did editable install of app in env
+  * added reverse proxy to /etc/apache2/sites-enabled/000-default.conf; some trial and error; added comments re: order of proxies
+  * thrashed trying to figure out to get static assets served properly
+(MIDOSS)
+
+
+Wed 14-Jul-2021
+^^^^^^^^^^^^^^^
+
+Treid to watch SHARCNET webinar on Hybrid MPI, but had the time wrong in my calendar and came in at the end; check for recorded version on Youtube by end of week.
+
+Automation worked correctly overnight.
+Continued backfilling VHFR runs:
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2021-07-12"
+    nowcast-x2 eta 12:39 (2:32:27 run time); finished at 12:46
+    forecast-x2 eta 18:11 (5:15:37 run time)
+Finished backfilling nowacst-agrif:
+* investigate yesterday's 11jul failure:
+    * missing turbidity forcing file
+    wait for automation to fail
+    upload_forcing orcinus nowcast+ --run-date 2021-07-11
+    upload_forcing orcinus turbidity --run-date 2021-07-11
+    wait for run to finish; took 3h55m; emailed Mark
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-07-12
+    wait for run to finish; back to ~47m
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-07-13
+    wait for run to finish
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-07-14
+(SalishSeaCast)
+
+Worked on master bathroom toilet; cleaned mildew; found cracked/broken piece in button interface assembly; refill seems to work at internal button level, so problem is maybe due to broken piece.
+
+Stakeholder workshop prep mtg.
+Finished deployment of midoss-app-dev in a tmux session on skookum mounted at salishsea.eos.ubc.ca/midoss:
+* streamlined env for deployment
+* added rutter to env so that app can be mounted with a URL prefix
+* created production.ini for deployment; including bump from 4 to 8 threads after seeing thread queue warnings in log
+* debugged apache config for reverse proxy
+(MIDOSS)
+
+
+Thu 15-Jul-2021
+^^^^^^^^^^^^^^^
+
+Automation worked correctly overnight.
+Continued backfilling VHFR runs:
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2021-07-13"
+* hacked mpi_hosts to use NEMO nodes for r12 after NEMO & WWatch3 runs finsihed for the day
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-07-13"
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+Various updates to cookiecutter-MOAD-pypkg based on experience of using it to initialize AtlantisCmd.
+(MOAD)
+
+Paused GoMSS Nowcast site monitor on uptimerobot because its no longer my concern.
+
+Weekly project mtg.
+Started dev of AtlantisCmd from MOAD pypkg cookiecutter.
+(Atlantis)
+
+
+Fri 16-Jul-2021
+^^^^^^^^^^^^^^^
+
+Automation worked correctly overnight.
+Continued backfilling VHFR runs:
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2021-07-14"
+    wait for runs to finish ~17:30
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2021-07-15"
+* use NEMO nodes for r12 after NEMO & WWatch3 runs finsihed for the day
+    wait for ww3-forecast to finish ~12:30
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-07-14"
+    wait for run to finish ~19:30
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-07-15"
+(SalishSeaCast)
+
+Created PR#1 in analysis-raisha to add CSIRO to copyright holders.
+Continued dev of AtlantisCmd; mostly docs setup.
+(Atlantis)
+
+Loaded WTB Nano 700x42 tires & tubes from Tommy to Becca.
+
+Started reviewing Rachael's changes to random_oil_spills.py in her add_terminal branch, and fixing broken unit tests.
+(MIDOSS)
+
+
+Sat 17-Jul-2021
+^^^^^^^^^^^^^^^
+
+x2 and r12 runs for 15jul completed successfully
+upload_forcing forecast2 and nowcast+ failed due to missing Neah Bay ssh file; investigation:
+    * Susan found that make_ssh_files failed silently due to bad values in etss csv file
+recovery:
+    * Susan removed bad rows from 06 & 00 etss csv files
+    * symlinked modified etss csv files in place of broken ones
+    * manually ran
+        make_ssh_files nowcast 2021-07-17
+        upload_forcing arbutus nowcast+
+        upload_forcing orcinus nowcast+
+        upload_forcing graham nowcast+
+        upload_forcing optimum nowcast+
+Continued backfilling VHFR runs:
+    wait for automation to fail
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2021-07-16"
+* use NEMO nodes for r12 after NEMO & WWatch3 runs finsihed for the day
+    wait for ww3-forecast to finish ~14:00
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-07-16"
+    too late to get another run in before forecast2 runs
+(SalishSeaCast)
+
+
+Sun 18-Jul-2021
+^^^^^^^^^^^^^^^
+
+Continued backfilling VHFR runs:
+    wait for automation to fail
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2021-07-17"
+    wait for runs to finish ~20:00
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2021-07-18"
+* use NEMO nodes for r12 after NEMO & WWatch3 runs finsihed for the day
+    wait for ww3-forecast and bike ride to finish
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-07-17"
+    too late to get another run in before forecast2 runs
+(SalishSeaCast)
 
 
 
