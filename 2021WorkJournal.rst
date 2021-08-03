@@ -856,7 +856,7 @@ Week 7
 Mon 15-Feb-2021
 ^^^^^^^^^^^^^^^
 
-Week 48 of UBC work-from-home due to COVID-19
+Week 49 of UBC work-from-home due to COVID-19
 
 **Statutory Holiday** - Family day
 
@@ -980,7 +980,7 @@ Week 8
 Mon 22-Feb-2021
 ^^^^^^^^^^^^^^^
 
-Week 49 of UBC work-from-home due to COVID-19
+Week 50 of UBC work-from-home due to COVID-19
 
 Changed WorkJournal and dotfiles repos default branch name from master to main.
 
@@ -1113,7 +1113,7 @@ Week 9
 Mon 1-Mar-2021
 ^^^^^^^^^^^^^^
 
-Week 50 of UBC work-from-home due to COVID-19
+Week 51 of UBC work-from-home due to COVID-19
 
 Susan reviewed results of yeaterday's bloomcast run w/ correctly scaled Nanaimo River and accepted them for SoPO presentation.
 Committed cronjob.sh updates; env path & --debug flag.
@@ -1220,7 +1220,7 @@ Week 10
 Mon 8-Mar-2021
 ^^^^^^^^^^^^^^
 
-Week 51 of UBC work-from-home due to COVID-19
+Week 52 of UBC work-from-home due to COVID-19
 
 docs repo scheduled linkcheck on GHA failed; fixed http://www.meds-sdmm.dfo-mpo.gc.ca to https://meds-sdmm.dfo-mpo.gc.ca
 upload_forcing orcinus nowcast+ failed; auth glitch; re-ran successfully, but was too late to provide forcing to run, so it got stuck on 1st time step; killed stuck run; re-ran make_forcing_links to restart;
@@ -1330,7 +1330,7 @@ Week 11
 Mon 15-Mar-2021
 ^^^^^^^^^^^^^^^
 
-Week 52 of UBC work-from-home due to COVID-19
+Week 53 of UBC work-from-home due to COVID-19
 
 Fixed bug, pushed & deployed re: get_onc_ferry failure message change.
 Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
@@ -1466,7 +1466,7 @@ Week 12
 Mon 22-Mar-2021
 ^^^^^^^^^^^^^^^
 
-Week 53 of UBC work-from-home due to COVID-19
+Week 54 of UBC work-from-home due to COVID-19
 
 Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
@@ -1687,7 +1687,7 @@ Week 13
 Mon 29-Mar-2021
 ^^^^^^^^^^^^^^^
 
-Week 54 of UBC work-from-home due to COVID-19
+Week 55 of UBC work-from-home due to COVID-19
 
 Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
@@ -1886,7 +1886,7 @@ Mon 5-Apr-2021
 
 **Statutory Holiday** - Easter Monday
 
-Week 55 of UBC work-from-home due to COVID-19
+Week 56 of UBC work-from-home due to COVID-19
 
 Fixed broken link to pytest docs in UBC-MOAD/docs; found by monthly scheduled linkcheck.
 (MOAD)
@@ -2175,7 +2175,7 @@ Week 15
 Mon 12-Apr-2021
 ^^^^^^^^^^^^^^^
 
-Week 56 of UBC work-from-home due to COVID-19
+Week 57 of UBC work-from-home due to COVID-19
 
 See work journal.
 (Ocean Navigator)
@@ -2374,7 +2374,7 @@ Week 16
 Mon 19-Apr-2021
 ^^^^^^^^^^^^^^^
 
-Week 57 of UBC work-from-home due to COVID-19
+Week 58 of UBC work-from-home due to COVID-19
 
 Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
@@ -2515,13 +2515,13 @@ Tried to backfill nowcast-dev; failed due to XIOS mofinding libmpihf; need to bu
 Strained back after ToW stage 3 make-up Out & Back ride on Zwift.
 
 
-Week 16
+Week 17
 -------
 
 Mon 26-Apr-2021
 ^^^^^^^^^^^^^^^
 
-Week 58 of UBC work-from-home due to COVID-19
+Week 59 of UBC work-from-home due to COVID-19
 
 Deployed collect_NeahBay_ssh and make_ssh_file automation for testing before nowcast; failed; fixed lots of bugs; updated docs & process flow fig.
 Added .gitattributes to SalishSeaNowcast to tell GitHub linguist tool to classify .ipynb files as Python to make repo landing page language statistics more accurate.
@@ -2636,13 +2636,13 @@ Sun 2-May-2021
 Another drive failure in one of the RAID arrays on salish.
 
 
-Week 16
+Week 18
 -------
 
 Mon 3-May-2021
 ^^^^^^^^^^^^^^
 
-Week 59 of UBC work-from-home due to COVID-19
+Week 60 of UBC work-from-home due to COVID-19
 
 Changed docs repo default branch from master to main.
 Email from Ali says that proj4-fortran pkg is now available in StdEnv/2020 on graham.
@@ -2759,13 +2759,13 @@ Fixed docs repo linkcheck failure due to ariane-2.3.0_03 being a private repo.
 Enabled VNC desktop sharing on matisse so that kudu can be my kvm between matisse and lizzy for photos work.
 
 
-Week 17
+Week 19
 -------
 
 Mon 10-May-2021
 ^^^^^^^^^^^^^^^
 
-Week 60 of UBC work-from-home due to COVID-19
+Week 61 of UBC work-from-home due to COVID-19
 
 Started work on proposal to DFO for funding to replace MEOPAR Prediction Core.
 (SalishSeaCast)
@@ -2874,13 +2874,13 @@ Continued work on proposal to DFO for funding to replace MEOPAR Prediction Core.
 Cycled to Fraser River Park and back (16km)
 
 
-Week 18
+Week 20
 -------
 
 Mon 17-May-2021
 ^^^^^^^^^^^^^^^
 
-Week 61 of UBC work-from-home due to COVID-19
+Week 62 of UBC work-from-home due to COVID-19
 
 Continued work on proposal to DFO for funding to replace MEOPAR Prediction Core; sent draft to Richard @ONC re: letter of support; he asked for words; Susan and I drafted & sent them
 nowcast-agrif failed due to no run yesterday; recovery:
@@ -2999,13 +2999,13 @@ Cycled River Rd out & back w/ explorations on Queens Canal trail and 8 Rd (50 km
 Started planning Minecraft 1.17 base w/ Susan.
 
 
-Week 19
+Week 21
 -------
 
 Mon 24-May-2021
 ^^^^^^^^^^^^^^^
 
-Week 62 of UBC work-from-home due to COVID-19
+Week 63 of UBC work-from-home due to COVID-19
 
 **Statutory Holiday** - Victoria Day
 
@@ -3110,13 +3110,13 @@ VHFR runs were a complete mess; yesterday's r12 didn't finish before nowcast-x2 
 (SalishSeaCast)
 
 
-Week 20
+Week 22
 -------
 
 Mon 31-May-2021
 ^^^^^^^^^^^^^^^
 
-Week 63 of UBC work-from-home due to COVID-19
+Week 64 of UBC work-from-home due to COVID-19
 
 After yesterday's VHFR disaster, returned config & mpihosts.fvcom.x2 to 30 cores on fvcom[01] because 45 cores seems slightly slower; returned mpihosts.fvcom.r12 to 90 cores including fvcom2 and fvcom0 as extra; backfilled 29-30may:
     wait for 31may r12 run to fail at ~14:45
@@ -3248,13 +3248,13 @@ upload_forcing to orcinus failed for nowcast+ and turbidity
 (SalishSeaCast)
 
 
-Week 21
+Week 23
 -------
 
 Mon 7-Jun-2021
 ^^^^^^^^^^^^^^
 
-Week 64 of UBC work-from-home due to COVID-19
+Week 65 of UBC work-from-home due to COVID-19
 
 orcinus is accepting connections again; backfilled nowcast-agrif:
 * wait for 7jun21 run to fail
@@ -3473,13 +3473,13 @@ Ran 122 more northern SoG spills that Susan chose as north_strait_4th122 to comp
 (MIDOSS)
 
 
-Week 22
+Week 24
 -------
 
 Mon 14-Jun-2021
 ^^^^^^^^^^^^^^^
 
-Week 65 of UBC work-from-home due to COVID-19
+Week 66 of UBC work-from-home due to COVID-19
 
 Deleted Turbulence*.hdf5, res*.elf5 & res*.ptf from monte-carlo results/ dirs of runs that happened before change to MOHID-Cmd landed on Saturday; space for 362 runs before cleanup: 1.2T; space after: 25G
 Ran 362 more northern SoG spills that Susan chose as north_strait_5th362 to complete 2nd 1/2 of the north strait spills in Rachael's 10k file.
@@ -3779,13 +3779,13 @@ Backfilling VHFR nowcast-r12:
 (SalishSeaCast)
 
 
-Week 23
+Week 25
 -------
 
 Mon 21-Jun-2021
 ^^^^^^^^^^^^^^^
 
-Week 66 of UBC work-from-home due to COVID-19
+Week 67 of UBC work-from-home due to COVID-19
 
 collect_weather 00, 06, 12 successful
 Backfilling VHFR nowcast-r12:
@@ -4002,13 +4002,13 @@ Robinson reunion on Zoom
 Got 2nd dose of COVID-19 vaccine
 
 
-Week 24
+Week 26
 -------
 
 Mon 28-Jun-2021
 ^^^^^^^^^^^^^^^
 
-Week 67 of UBC work-from-home due to COVID-19
+Week 68 of UBC work-from-home due to COVID-19
 
 Heat wave continued, hotter; moved downstairs to work.
 
@@ -4174,13 +4174,13 @@ collect_weather 06, 12, 18, 00 worked in automation
 (SalishSeaCast)
 
 
-Week 25
+Week 27
 -------
 
 Mon 5-Jul-2021
 ^^^^^^^^^^^^^^
 
-Week 68 of UBC work-from-home due to COVID-19
+Week 69 of UBC work-from-home due to COVID-19
 
 docs linkcheck workflow failed after a push by Becca last week and overnight in its scheduled run; investigation:
 * 403 Client Error: Forbidden for url: https://www.baeldung.com/cs/ssh-intro
@@ -4443,13 +4443,13 @@ nowcast running slow (~2%/5min); replaces nowcast6 in mpi_hosts w/ nowcast2 to t
 (SalishSeaCast)
 
 
-Week 26
+Week 28
 -------
 
 Mon 12-Jul-2021
 ^^^^^^^^^^^^^^^
 
-Week 69 of UBC work-from-home due to COVID-19
+Week 70 of UBC work-from-home due to COVID-19
 
 Assessed state of automation:
 * last completed run was forecast/11jul21
@@ -4690,13 +4690,13 @@ Continued backfilling VHFR runs:
 Cycled around UBC, across Midtown/Ridgeway to Kennsington Park, down Dumphries to Kent, and home (44 km). Back was stiff and hips off-centre when I finished :-(
 
 
-Week 27
+Week 29
 -------
 
 Mon 19-Jul-2021
 ^^^^^^^^^^^^^^^
 
-Week 70 of UBC work-from-home due to COVID-19
+Week 71 of UBC work-from-home due to COVID-19
 
 Worked w/ Ben on last minute fixes & deployment of demo viz app for workshop.
 Stakeholder workshop day 2:
@@ -4866,10 +4866,13 @@ Sooke
 Cycled around Sooke exploring bluffs, beaches & neighbourhoos. (21 km)
 
 
+Week 30
+-------
+
 Mon 26-Jul-2021
 ^^^^^^^^^^^^^^^
 
-Week 71 of UBC work-from-home due to COVID-19
+Week 72 of UBC work-from-home due to COVID-19
 
 Sooke
 
