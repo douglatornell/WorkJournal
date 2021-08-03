@@ -4687,6 +4687,286 @@ Continued backfilling VHFR runs:
     too late to get another run in before forecast2 runs
 (SalishSeaCast)
 
+Cycled around UBC, across Midtown/Ridgeway to Kennsington Park, down Dumphries to Kent, and home (44 km). Back was stiff and hips off-centre when I finished :-(
+
+
+Week 27
+-------
+
+Mon 19-Jul-2021
+^^^^^^^^^^^^^^^
+
+Week 70 of UBC work-from-home due to COVID-19
+
+Worked w/ Ben on last minute fixes & deployment of demo viz app for workshop.
+Stakeholder workshop day 2:
+Technical breakout room:
+* Are there fields or outputs that we are missing? We do presence, concentration, timing.
+  * John Davis:
+    * have what is needed
+  * Lee Britton
+    * need confidence/certainty measure
+    * discussion of Monte Carlo concept w/ Susan
+  * John Davis:
+    * arial photography and collector beaches
+  * Patrick O'Hara
+    * stocastic model?
+    * how well do underlying models capture stocasticity of systems?
+    * representation of fields:
+      * median may not be sufficient as some spatial areas/scales; seasonal may be particularly important
+      * wants to think more about statistics; excited about direction Monte Carlo modelling is taking in contrast to significant spill modelling
+  * Haibo:
+    * discussion of uncertainty rep in response to Lee's question/comments
+
+Data distribution & visualization discussion:
+* Sam Mansfield:
+  * Hub e-GIS via ESRI
+  * data sources like OpenScience data platform
+* John Davis:
+  * social info layers important
+* Warren Mills; is this useful to municipality
+  * yes, but paper is important too
+* Mike Andrews
+  * 80-90% of communities are ESRI clients
+  * want API feeds
+* Andrew (Raincoast)
+  * public access?
+    * Mike: would produce products for public
+* Lee:
+  * wants WMS
+  * shared https://geonode.org/ as means of distributing data?
+(MIDOSS)
+
+Continued backfilling VHFR runs:
+* VHFR x2 ran in automation!!
+* use NEMO nodes for r12 after NEMO & WWatch3 runs finsihed for the day
+    wait for ww3-forecast and bike ride to finish
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-07-18"
+    wait for run to finish ~20:15
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-07-19"
+(SalishSeaCast)
+
+Continued dev of AtlantisCmd:
+* added cliff framework
+* decided to use cookiecutter for tmp run dir like WWatch3Cmd
+* started run sub-command
+(Atlantis)
+
+
+Tue 20-Jul-2021
+^^^^^^^^^^^^^^^
+
+Continued dev of AtlantisCmd:
+* finished run sub-command parser tests
+* added pre-commit framework:
+* add pre-commit to dev env description
+* generate .pre-commit-config.yaml w/
+pre-commit sample-config > .pre-commit-config.yaml
+pre-commit autoupdate
+* edit .pre-commit-config.yaml:
+* add black
+* update versions w/
+pre-commit autoupdate
+* install git hook scripts:
+pre-commit install
+* run against all files:
+pre-commit run --all-files
+* started work on run() creation of tmp run dir via cookiecutter
+(Atlantis)
+
+
+Wed 21-Jul-2021
+^^^^^^^^^^^^^^^
+
+Alarm system upgrade.
+
+Continued dev of AtlantisCmd:
+* continued work on run() creation of tmp run dir via cookiecutter
+(Atlantis)
+
+
+Thu 22-Jul-2021
+^^^^^^^^^^^^^^^
+
+Uptimerobot reported ERDDAP was down for ~33m around 09:00.
+nowcast-green reported no progress after starting at 10:14; nowcast-x2 stopped reporting progress after 10:13
+* action log in web dashboard says nowcast0 was stopped at 17:16 UTC == 10:16 Pacific
+     Request ID  Action  Start Time  User ID  Message
+    req-f9b0d480-f3c8-4b0b-9470-7cc567fa8204 	Stop 	July 22, 2021, 5:16 p.m. 	- 	- 
+* started nowcast0 via dashboard
+* took the opportunity to do apt update && apt upgrade and rebooted
+* /nemoShare did not automatically remount
+* sudo mount /dev/vdc /nemoShare  # quite slow
+* /nemoShare/MEOPAR was not mounted at /export/MEOPAR for NFS
+* sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+* ll /export/MEOPAR  # to confirm mount
+* sudo systemctl start nfs-kernel-server.service
+* sudo exportfs -f  # to reset NFS handles for compute nodes
+* confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+* for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+* for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+* restarted automation at ~11:45:
+    make_forcing_link arbutus nowcast-green
+    launch_remote_worker arbutus run_fvcom "arbutus.cloud-nowcast x2 nowcast --run-date 2021-07-22"
+* no messages from watch_NEMO
+    restart log_aggregator
+    restart message_broker
+  * download_results forecast failed due to nowcast0 node stop; re-ran manually ~13:18
+(SalishSeaCast)
+
+Reviewed and helped polish Susan's NSERC NOI.
+
+Faron Anslow (PCIC) CMOS talk on Atribution Analysis of Late June heat Event:
+* Can an atmospheric river contribute to a heatwave?
+* 1 in 10 to 1 in 5 return in +2C world
+* 2C due to global warming, but excess was 5C - so other processes
+* why:
+  * long days
+  * clear skies
+  * dry spring
+  * thermal trough & small upper low
+  * mountain waves & downslope winds
+  * lots of water vapour (atmos river hitting Alaska & St. Elias range) provided latent heat to atmosper
+
+Continued dev of AtlantisCmd:
+* continued work on run() creation of tmp run dir via cookiecutter
+Weekly team mtg:
+* Javier explained https://bitbucket.csiro.au/users/por07g/repos/ssam_oceanparcels/ for calculation of oil particle input/forcing for Atlantis
+Added GHA workflow for CodeQL analysis to repo, and it passed on 1st run :-)
+(Atlantis)
+
+
+Fri 23-Jul-2021
+^^^^^^^^^^^^^^^
+
+Woke up stuffy, w/ itchy eyes & slight headache; no energy all day.
+
+upload_forcing forecast2 and nowcast+ failed due to missing Neah Bay ssh file; investigation:
+    * Susan found that etss csv files contain bad values
+recovery:
+    ln -s /results/forcing/sshNeahBay/fcst/ssh_y2021m07d22.nc /results/forcing/sshNeahBay/obs/ssh_y2021m07d22.nc
+    upload_forcing arbutus nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing graham nowcast+
+    upload_forcing optimum nowcast+
+(SalishSeaCast)
+
+
+Sat 24-Jul-2021
+^^^^^^^^^^^^^^^
+
+Vancouver to Sooke (Seagull Studio)
+
+
+Sun 25-Jul-2021
+^^^^^^^^^^^^^^^
+
+Sooke
+
+Cycled around Sooke exploring bluffs, beaches & neighbourhoos. (21 km)
+
+
+Mon 26-Jul-2021
+^^^^^^^^^^^^^^^
+
+Week 71 of UBC work-from-home due to COVID-19
+
+Sooke
+
+Hiked in East Sooke Regional Park; Pike Rd, Pike Pt., Iron Mine Bay, Coast Trail to Copper Mine Creek and back; connector trail; Anderson Creek, Pike Rd.; OM-D photos at Pie Pt
+
+Re-installed RaphidPhotoDownloader under miniconda base Python 3.9 in virtualenv:
+    2006  python3 -m venv RapidPhotoDownloader-py3.9
+    2007  source RapidPhotoDownloader-py3.9/bin/activate
+    2008  python3 install.py --virtual-env
+    2009  python3 -m pip --version
+    2010  python3 -m pip install wheel
+    2011  python3 -m pip install -U pip
+    2012  python3 -m pip --version
+    2013  python3 -m pip install wheel
+    2014  python3 -m pip install -U wheel
+    2015  python3 install.py --virtual-env
+    2016  /media/doug/warehouse/Pictures/RapidPhotoDownloader-0.9.14/RapidPhotoDownloader-py3.9/bin/rapid-photo-downloader
+
+
+Tue 27-Jul-2021
+^^^^^^^^^^^^^^^
+
+Sooke
+
+Cycled Sticleback and Galloping Goose trails to Leechtown and back (48 km)
+
+    
+Wed 28-Jul-2021
+^^^^^^^^^^^^^^^
+
+Sooke
+
+Discovered that collect_weather 18 never completed yesterday; investigation:
+* 530 of 576 files; missing 10 in hour 044, and all of hours 045-047
+* sarracenia log:
+    2021-07-27 15:09:12,568 [WARNING] sr_amqp/consume: could not consume in queue q_anonymous.sr_subscribe.hrdps-west.74434425.78671301: [Errno 104] Connection reset by peer
+    2021-07-27 15:09:12,568 [ERROR] sr_amqp/close 2: [Errno 32] Broken pipe
+    2021-07-27 15:09:12,568 [INFO] Using amqp module (AMQP 0-9-1)
+    2021-07-27 15:09:15,687 [INFO] declared queue q_anonymous.sr_subscribe.hrdps-west.74434425.78671301 (anonymous@dd.weather.gc.ca) 
+    2021-07-27 15:14:24,499 [ERROR] Download failed 3 https://dd5.weather.gc.ca//model_hrdps/west/grib2/18/044/CMC_hrdps_west_PRATE_SFC_0_ps2.5km_2021072718_P044-00.grib2
+    2021-07-27 15:14:24,563 [WARNING] downloading again, attempt 2
+    2021-07-27 15:14:24,886 [INFO] file_log downloaded to: /SalishSeaCast/datamart/hrdps-west/18/044/CMC_hrdps_west_PRATE_SFC_0_ps2.5km_2021072718_P044-00.grib2
+    2021-07-27 15:14:24,886 [INFO] heartbeat. Sarracenia version is: 2.20.08post1 
+
+    2021-07-27 15:14:24,887 [INFO] hb_memory cpu_times user=3040.45 system=346.38 elapse=24799091.01
+    2021-07-27 15:14:24,887 [INFO] hb_memory, current usage: 61.7 MiB trigger restart if increases past: 167.4 MiB 
+    2021-07-27 15:14:24,887 [INFO] hb_retry on_heartbeat
+    2021-07-27 15:14:24,887 [INFO] sr_retry on_heartbeat
+    2021-07-27 15:14:24,899 [INFO] No retry in list
+    2021-07-27 15:14:24,902 [INFO] sr_retry on_heartbeat elapse 0.014523
+    2021-07-27 15:14:25,038 [WARNING] sr_amqp/consume: could not consume in queue q_anonymous.sr_subscribe.hrdps-west.74434425.78671301: Basic.get: (404) NOT_FOUND - no queue 'q_anonymous.sr_subscribe.hrdps-west.74434425.78671301' in vhost '/'
+* recovery started at ~09:15:
+    pkill collect_weather 18
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210727/18
+    download_weather 18 2.5km
+    download_weather 00 2.5km
+    collect_weather 18 2.5km
+    download_weather 06 2.5km
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+(SalishSeaCast)
+
+Walked to the end of Whiffen Spit and back during forecast2 runs; OM-D photos.
+Visited wool shop, Sooke Oceanside Brewing, and Bad Dog Brewing.
+Walked to Sherringham Pt lighthouse, and around Sherringham forest loop; OM-D photos.
+
+    
+Thu 29-Jul-2021
+^^^^^^^^^^^^^^^
+
+Sooke
+
+Cycled Billings Spit, Galloping Goose to Pearson College, William Head, Taylor Beach, Galloping Goose, Matheson Lake, Stickleback (60 km)
+
+    
+Fri 30-Jul-2021
+^^^^^^^^^^^^^^^
+
+Sooke
+
+Hiked Sooke Potholes (disappointing), and East Sooke Park: Aylard Farm, Creyke Pt., Coast Trail, Beechey Head.
+
+    
+Sat 31-Jul-2021
+^^^^^^^^^^^^^^^
+
+Sooke to Sydney
+
+Afternoon and dinner at Debby & Paul's
+
+    
+Sun 1-Aug-2021
+^^^^^^^^^^^^^^
+
+Sydney, White Rock, Vancouver
+
+Visited J&M on the way home from Van Is.
 
 
 TODO:
