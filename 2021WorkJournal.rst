@@ -4955,6 +4955,8 @@ Sooke
 
 Hiked Sooke Potholes (disappointing), and East Sooke Park: Aylard Farm, Creyke Pt., Coast Trail, Beechey Head.
 
+Strained back in shower after hike.
+
     
 Sat 31-Jul-2021
 ^^^^^^^^^^^^^^^
@@ -4963,6 +4965,9 @@ Sooke to Sydney
 
 Afternoon and dinner at Debby & Paul's
 
+nowcast-agrif run timed out
+(SalishSeaCast)
+
     
 Sun 1-Aug-2021
 ^^^^^^^^^^^^^^
@@ -4970,6 +4975,143 @@ Sun 1-Aug-2021
 Sydney, White Rock, Vancouver
 
 Visited J&M on the way home from Van Is.
+
+
+Week 31
+-------
+
+Mon 2-Aug-2021
+^^^^^^^^^^^^^^
+
+Week 73 of UBC work-from-home due to COVID-19
+
+**Statutory Holiday** - BC Day
+
+Back pain improved to overall stiffness rather than acute in lower right.
+
+/home/doug/ filled on kudu to the point where I couldn't fully reboot; resolution:
+* cleaned old linux images & headers
+* cleaned unused flatpak installations:
+    flatpak update --appstream
+    flatpak update
+    flatpak uninstall --unused
+* uninstalled Signal flatpak
+* deleted left-over Signal & Teams flatpak files
+* moved Minecraft/ to /media/doug/warehouse/
+Updated kudu to Pop_OS! 21.04.
+
+
+Tue 3-Aug-2021
+^^^^^^^^^^^^^^
+
+Brought worklog up to date.
+
+Investigated MIDOSS/docs monthly linkcheck errors:
+* conda.io cert issue; wait & see
+* wiki.mohid.com timeout; wait & see
+(MIDOSS)
+
+Investigated upload_forcing errors:
+* missing atmos fcst/ directory and all but 1 ops file on graham
+* missing all but 1 NeahBay ssh obs/ file on graham
+* turns out that Tereza deleted:
+    $PROJECT/SalishSea/forcing/rivers/river_turb/*
+    $PROJECT/SalishSea/forcing/sshNeahBay/obs/*
+    $PROJECT/SalishSea/forcing/sshNeahBay/atmospheric/GEM2.5/operational/*
+* recovery:
+  * started bash loop in tmux session on skookum to re-run:
+        upload_forcing graham nowcast+
+        upload_forcing graham turbidity
+    for 2021-08-02 to 2015-01-01
+Backfilled nowcast-agrif:
+    upload_forcing orcinus nowcast+ --run-date 2021-07-31
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-07-31
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-08-01
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-08-02
+    make_forcing_links orcinus nowcast-agrif --run-date 2021-08-03
+Backfilled VHFR plots.
+(SalishSeaCast)
+
+Changed darktable installation source on kudu to OpenSuse server from (unmaintained) launchpad.
+Changed borgbackup installation source on kudu to system pkg from (un-updated) luanchpad.
+Updated PyCharm on kudu to 2021.2.
+
+
+Wed 4-Aug-2021
+^^^^^^^^^^^^^^
+
+Updated nowcast0 re: Linux security updates (CVE-2021-33909) aka Sequoia:
+    sudo apt update
+    sudo apt upgrade
+    sudo shutdown -r now
+    sudo mount /dev/vdc /nemoShare
+    ll /nemnoSShare/MEOPAR  # to confirm mount
+    sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+    ll /export/MEOPAR  # to confirm mount
+    sudo systemctl start nfs-kernel-server.service
+    sudo exportfs -f  # to reset NFS handles for compute nodes
+    # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+    for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+    for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -C /nemoShare/MEOPAR"; done
+    for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+    for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -C /nemoShare/MEOPAR"; done
+Continued forcing upload recovery on graham.
+(SalishSeaCast)
+
+Continued dev of AtlantisCmd.
+(Atlantis)
+
+
+Thu 5-Aug-2021
+^^^^^^^^^^^^^^
+
+Continued forcing upload recovery on graham.
+Cleaned up a mess of zombie worker processes on skookum, mostly make_surface_current_tiles from mid-July; prompted by "no worker port" error overnight.
+(SalishSeaCast)
+
+UBC-DFO modelling mtg.
+
+Continued dev of AtlantisCmd.
+Weekly project mtg.
+(Atlantis)
+
+
+Fri 6-Aug-2021
+^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+Discovered that collect_weather 18 never completed yesterday; investigation:
+* 276 of 576 files; missing all of hours 024-048
+* lots of connection timed out and connection refused errors in sarracenia log
+* recovery started at ~09:15:
+    pkill collect_weather 18
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210727/18
+    download_weather 18 2.5km
+    download_weather 00 2.5km
+    collect_weather 18 2.5km
+    download_weather 06 2.5km
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+(SalishSeaCast)
+
+Continued dev of AtlantisCmd.
+(Atlantis)
+
+
+Sat 7-Aug-2021
+^^^^^^^^^^^^^^
+
+Scheduled arbutus network maintenance caused upload_forcing to fail at ~09:00; after a bunch of re-tries and some patience, successfully re-ran manually at ~11:25
+(SalishSeaCast)
+
+
+Sun 8-Aug-2021
+^^^^^^^^^^^^^^
+
+Cycled Richmond loop; River Rd,, No. & Rd, Westminster Hwy, Sidaway, No. 5 Rd. Dyke Rd. Railway.
+Bought corn at CanWest Farms.
 
 
 TODO:
