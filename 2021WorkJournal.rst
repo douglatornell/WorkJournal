@@ -143,7 +143,7 @@ nowcast-agrif run failed due to orted issue; recovery at ~17:30:
 Tue 12-Jan-2021
 ^^^^^^^^^^^^^^^
 
-Work at UBC while Rita is at home.
+Work at UBC while  is at home.
 
 nowcast-agrif backfilling:
   make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-01-11
@@ -184,7 +184,7 @@ Fri 15-Jan-2021
 ^^^^^^^^^^^^^^^
 
 Helped Birgit w/ GitHub personal access token vs. ssh key question.
-Pinged Elise re: discussion classes, inheritance & dependency injection.
+Pinged Elise re: discussion classes, inhence & dependency injection.
 Continued 2021 year rollover updates on repos; see https://salishseacast.slack.com/files/TFR25L4LU/F01HTF1MCBD
 (MOAD)
 
@@ -410,7 +410,7 @@ See work journal.
 Tue 26-Jan-2021
 ^^^^^^^^^^^^^^^
 
-Work at UBC while Rita is at home.
+Work at UBC while  is at home.
 
 Implemented CLI version of hindcast_dayavgs and started running it for 2014 in tmux session on salish.
 (SalishSeaCast)
@@ -737,7 +737,7 @@ Headache in the afternoon.
 Tue 9-Feb-2021
 ^^^^^^^^^^^^^^
 
-Work at UBC while Rita is at home.
+Work at UBC while  is at home.
 
 Updating niko caused /boot to fill; deleted a bunch of old kernels with guidance from askubuntu (https://askubuntu.com/questions/345588/what-is-the-safest-way-to-clean-up-boot-partition).
 
@@ -997,7 +997,7 @@ See work journal.
 Tue 23-Feb-2021
 ^^^^^^^^^^^^^^^
 
-Worked at ESB while Rita was at home.
+Worked at ESB while  was at home.
 
 Failed to get bloomcast running:
 * pip install -e in new env doesn't find ensemble plug-in
@@ -1237,7 +1237,7 @@ Phys Ocgy seminar: Kevin Lamb, Waterloo, Internal Waves at low & high lats.
 Tue 9-Mar-2021
 ^^^^^^^^^^^^^^
 
-Worked at ESB while Rita was at home.
+Worked at ESB while  was at home.
 
 Migrated Sphinx docs from SalishSeaCast docs to MOAD docs and updated them.
 (MOAD)
@@ -1501,7 +1501,7 @@ See work journal.
 Tue 23-Mar-2021
 ^^^^^^^^^^^^^^^
 
-Worked at ESB while Rita was at home.
+Worked at ESB while  was at home.
 
 Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
@@ -1908,7 +1908,7 @@ Decided to try digikam; installed it on lizzy; initialized a collection from the
 Tue 6-Apr-2021
 ^^^^^^^^^^^^^^
 
-Worked at ESB while Rita was at home.
+Worked at ESB while  was at home.
 
 Skimmed Greg Szorc's fascinating https://gregoryszorc.com/blog/2021/04/06/surprisingly-slow/ post; made me think about all the ways I/we use zlib compression that may actually be bottle necks; also interesting to see all the things that affect CPU core operations.
 
@@ -2391,7 +2391,7 @@ Phys Ocgy seminar.
 Tue 20-Apr-2021
 ^^^^^^^^^^^^^^^
 
-Worked at ESB while Rita was at home.
+Worked at ESB while  was at home.
 
 Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
@@ -2509,7 +2509,7 @@ Morning mgmt of get_NeahBay_ssh issue in automation; after nowcast-blue completi
   collect_NeahBay_ssh 06
   make_ssh_file nowcast
   upload_forcing arbutus ssh
-Tried to backfill nowcast-dev; failed due to XIOS mofinding libmpihf; need to build new executables for new OS, I guess.
+Tried to backfill nowcast-dev; failed due to XIOS not finding libmpihf; need to build new executables for new OS, I guess.
 (SalishSeaCast)
 
 Strained back after ToW stage 3 make-up Out & Back ride on Zwift.
@@ -2663,7 +2663,7 @@ Phys Ocgy seminar.
 Tue 4-May-2021
 ^^^^^^^^^^^^^^
 
-Worked at ESB while Rita was at home.
+Worked at ESB while  was at home.
 
 Created https://github.com/MIDOSS/MIDOSS-MOHID-CODE/issues/9 re: MOHID build problems in graham StdEnv/2020.
 Updated docs & Make-MIDOSS-Forcing and started MOHID-Cmd re: using StdEnv/2016.4.
@@ -2903,7 +2903,7 @@ Phys Ocgy seminar by Ken Ashley re: Fraser River Estuary.
 Tue 18-May-2021
 ^^^^^^^^^^^^^^^
 
-Worked at ESB while Rita was at home.
+Worked at ESB while  was at home.
 
 Found paper notes about storage drives; photo in Slack #proposal channel; updated 12-May-2021  notes re: DFO proposal planning; assuming that price drop by early 2022 will let us buy 19x18Tb drive instead of 18 in proposal budget.
 Realized that yesterday's test of nowcast-dev didn't use xios-2.5; copied executable into /SalishSeaCast/XIOS-2/bin/; same out of memory failure; played w/ XIOS config in iodef.xml; always same out of memory failure.
@@ -3145,7 +3145,7 @@ June
 Tue 1-Jun-2021
 ^^^^^^^^^^^^^^
 
-Work at ESB while Rita is at home.
+Work at ESB while  is at home.
 
 Slack call w/ Raisha:
 * build and run atlantis on tyee
@@ -3533,7 +3533,7 @@ Group mtg; see whiteboard.
 Tue 15-Jun-2021
 ^^^^^^^^^^^^^^^
 
-Work at ESB while Rita is at home.
+Work at ESB while  is at home.
 
 forecast2 failed; investigation:
 * fvcom2 node stopped at 2:34 UTC, no user or explanation
@@ -3805,18 +3805,18 @@ collect_weather 18 stalled; investigation:
     collect_weather 00 2.5km
 (SalishSeaCast)
 
-Installed Litematica & MiniHUD client mods via Fabric:
+Installed Litematica & MiniHUD client mods via :
 * Stored files in ~/Minecraft/mods/1.17/
-* Downloaded fabric-installer-0.7.4.jar from fabricmc.net, made it executable, and ran it to create new profile
-* Launch minecraft in fabric-1.17 profile; crash complaining about 1.16 mods
+* Downloaded -installer-0.7.4.jar from mc.net, made it executable, and ran it to create new profile
+* Launch minecraft in -1.17 profile; crash complaining about 1.16 mods
 * Moved 1.16 mods from ~/.minecraft/mods/ to ~/Minecraft/mods/1.16/
-* Launch minecraft in fabric-1,17 profile; success; shutdown
+* Launch minecraft in -1,17 profile; success; shutdown
 * Downloaded from curseforge.com:
-  * malilib-fabric-1.17.0-0.10.0-dev.22+beta.1.jar
-  * minihud-fabric-1.17.0-0.19.0-dev.20210609.185508.jar
-  * litematica-fabric-1.17.0-0.0.0-dev.20210616.033538.jar
+  * malilib--1.17.0-0.10.0-dev.22+beta.1.jar
+  * minihud--1.17.0-0.19.0-dev.20210609.185508.jar
+  * litematica--1.17.0-0.0.0-dev.20210616.033538.jar
 * Copied 3 mods into ~/.minecraft/mods/
-* Launch minecraft in fabric-1.17 profile
+* Launch minecraft in -1.17 profile
 (Minecraft)
 
 Worked on running hdf5-to-netcdf4 on files in $SCRATCH/MIDOSS/runs/monte-carlo/north_strait_5th362_2021-06-14T150753/results/ that didn't get processesed due to filling node-local scratch storage:
@@ -4045,7 +4045,7 @@ Tue 29-Jun-2021
 
 Heat wave continued, a little cooler.
 
-Work at ESB while Rita is at home.
+Work at ESB while  is at home.
 
 collect_weather 00, 06, 12, 18 worked in automation
 upload_forcing nowcast+ to arbutus failed due to connection error; investigation:
@@ -4272,16 +4272,16 @@ Noted that partition=QDR PBS directive is still not appearing in run scripts on 
 (SalishSeaCast)
 
 Archived 1-17OceanTaiga on SADA CubedHost server as archive-1625773673456.zip and updated server to 1.17.1.
-Updated Litematica & MiniHUD client mods via Fabric:
+Updated Litematica & MiniHUD client mods via :
 * Launch minecraft 1.17.1
-* Run fabric-installer-0.7.4.jar (same as for 1.17), to create new profile
-* Launch minecraft in fabric-1.17.1 profile
+* Run -installer-0.7.4.jar (same as for 1.17), to create new profile
+* Launch minecraft in -1.17.1 profile
 * Downloaded from curseforge.com ~/Minecraft/mods/1.17.1/:
-* malilib-fabric-1.17.1-0.10.0-dev.23.jar
-* minihud-fabric-1.17.1-0.19.0-dev.20210707.150016.jar
-* litematica-fabric-1.17.1-0.0.0-dev.20210707.011234.jar
+* malilib--1.17.1-0.10.0-dev.23.jar
+* minihud--1.17.1-0.19.0-dev.20210707.150016.jar
+* litematica--1.17.1-0.0.0-dev.20210707.011234.jar
 * Copied 3 mods into ~/.minecraft/mods/
-* Launch minecraft in fabric-1.17.1 profile
+* Launch minecraft in -1.17.1 profile
 (Minecraft)
 
 
@@ -4524,7 +4524,7 @@ Breakout discussion:
 Tue 13-Jul-2021
 ^^^^^^^^^^^^^^^
 
-Worked at ESB while Rita is at home.
+Worked at ESB while  is at home.
 
 Automation worked correctly overnight.
 Continued backfilling VHFR runs:
@@ -5112,6 +5112,109 @@ Sun 8-Aug-2021
 
 Cycled Richmond loop; River Rd,, No. & Rd, Westminster Hwy, Sidaway, No. 5 Rd. Dyke Rd. Railway.
 Bought corn at CanWest Farms.
+
+
+Week 32
+-------
+
+Mon 9-Aug-2021
+^^^^^^^^^^^^^^
+
+Week 74 of UBC work-from-home due to COVID-19
+
+Investigated SalishSeaCast/docs linkcheck failure:
+* http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/LectureNotes/Intro_to_Python.pdf has gone away
+* TODO:
+  * re-write intro to Python section w/ new ref materials
+  * think about where intro to Python and associated netCDF and model results docs go: SalishSeaCast/docs or UBC-MOAD/docs, or split
+(SalishSeaCast)
+
+Worked on DigiKam photos on lizzy:
+* Changed collections root to /media/doug/warehouse/shared/photos/ from .../photos/iPhoto-originals so that I can keep multiple top-level albums in photos/
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Tried to install Opti and OptiFine for minecrat 1.17.1:
+* download OptiFine from https://optifine.net/home
+* download Opti from https://www.curseforge.com/minecraft/mc-mods/opti
+* Put both jars in .minecraft/mods/
+* run OptiFine jar to install
+* Minecraft refuses to load due to GLX driver version
+* Removed OptiFine & Opti from mods/
+
+Phys Ocgy seminar by Sofi Damarkis on marine heat waves
+
+
+Tue 10-Aug-2021
+^^^^^^^^^^^^^^^
+
+Discovered that Prius is dead; maybe starter battery?
+
+Stayed home to teach  how to set new alarm system, then worked at ESB while  is at home.
+
+Continued dev of AtlantisCmd; first successful runs of 10d test run.
+(Atlantis)
+
+Dinner w/ Kristin & Kirk on their patio.
+
+
+Wed 11-Aug-2021
+^^^^^^^^^^^^^^^
+
+Investigated setup of shared access git repo on /ocean/ for Susan et al to use for EOSC471; git init --bare --shared, and a dedicated group seem to be the key elements; created helpdesk ticket to request group creation.
+(EOAS Teaching)
+
+Helped Raisha sort out env issues; parcels deps appear to have downgraded libnetcdf so built atlantis-trunk fails.
+(Atlantis)
+
+
+Thu 12-Aug-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+Weekly project mtg.
+(Atlantis)
+
+
+Fri 13-Aug-2021
+^^^^^^^^^^^^^^^
+
+Coffee w/ Karyn.
+
+Telus alarm service re: always active motion sensors & communications issue found remotely:
+* checked config
+* removed sensitivity reduction (pet) shield from downstairs motion detector
+* reooted main panel; balcony door sensor was very slow to reconnect
+* moved motion sensors out of and back into partition with other sensors
+* tested alarm triggering by downstairs motion sensor
+* motion sensor reporting in phone app is very laggy
+
+
+Sat 14-Aug-2021
+^^^^^^^^^^^^^^^
+
+nowcast-r12 failed on launch; investigation;
+* fvcom3: no route to host; no info in action log; soft reboot failed
+* recovery at ~20:15:
+    replaced fvcom3 ip in mpi_hosts w/ fvcom2
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-08-14"
+* running slowly (>20hr)
+(SalishSeaCast)
+
+Sun 15-Aug-2021
+^^^^^^^^^^^^^^^
+
+nowcast-r12 didn't finish; nowcast-x2 running on same node
+* killed nowcast-r12/14aug21
+* backfilling nowcast-r12
+    replaced fvcom3 ip in mpi_hosts w/ fvcom2
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-08-14"
+(SalishSeaCast)
+
+Finally started unpacking family history books and photo albums from Barrie.
 
 
 TODO:
