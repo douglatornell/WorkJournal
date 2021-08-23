@@ -5204,6 +5204,7 @@ nowcast-r12 failed on launch; investigation;
 * running slowly (>20hr)
 (SalishSeaCast)
 
+
 Sun 15-Aug-2021
 ^^^^^^^^^^^^^^^
 
@@ -5215,6 +5216,145 @@ nowcast-r12 didn't finish; nowcast-x2 running on same node
 (SalishSeaCast)
 
 Finally started unpacking family history books and photo albums from Barrie.
+
+
+Week 33
+-------
+
+Mon 16-Aug-2021
+^^^^^^^^^^^^^^^
+
+Week 75 of UBC work-from-home due to COVID-19
+
+Helped Susan & Birgit get working w/ EOAS GitLab; bumped Birgit up to Maintainer role to see if that resolved her "can't push initial commit" problem; noted sluggish response to almost everything; e.g. Susan's invitation acceptance intially went 404.
+
+nowcast-r12 didn't finish; nowcast-x2 running on same node
+* killed nowcast-r12/14aug21
+* backfilling nowcast-r12
+    wait for 16aug21 run to fail ~18:45
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-08-15"
+    wait for run to complete
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-08-16"
+* emailed cloud@ support:
+  * fairly useless response from Jeam-François of calcul quebec
+  * checked fvcom3 at ~12:10; reboot had completed ~28 minutes previously
+  * remounted /nemoShare/MEOPAR/
+  * restored fvcom3 to mpi_hosts file
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Got Prius restarted:
+* Called Pattison; they recommended Busters for jump/tow
+* Called Busters; had to choose jump ot tow; chose jump
+* Jump worked; confirmed that domelight was on
+* Drove to UBC to drop off carboard, then too Pattison to leave car for checks and service
+
+Started work on borg-backup framework for Susan's Linux laptop (greta);
+* created emergency reserved space on lizzy:/media/doug/backup/borg/
+    sudo fallocate -l 2G /media/doug/backup/borg/emergency_reserved_space
+
+
+Tue 17-Aug-2021
+^^^^^^^^^^^^^^^
+
+Worked on helping Susan get logged into smelt console in an XFCE4 session.
+
+collect_weather 12 had not finished at 10:00; investigation:
+* sarracenia log shows no files yet from MSC at 10:00!!; none on datamart pages either
+* files started to appear at 10:21
+backfilling nowcast-r12
+  wait for automation run to fail ~18:00
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-08-16"
+(SalishSeaCast)
+
+Continued work on AtlantisCmd docs.
+(Atlantis)
+
+
+Wed 18-Aug-2021
+^^^^^^^^^^^^^^^
+
+Continued work on AtlantisCmd docs.
+(Atlantis)
+
+backfilling nowcast-r12
+  wait for automation run to fail ~18:30
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-08-17"
+(SalishSeaCast)
+
+Picked up Prius; all good.
+
+
+Thu 19-Aug-2021
+^^^^^^^^^^^^^^^
+
+Finished initial work on AtlantisCmd docs.
+Weekly project mtg.
+(Atlantis)
+
+backfilling nowcast-r12
+  wait for automation run to fail ~18:30
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-08-18"
+(SalishSeaCast)
+
+Coffee w/ Elise.
+Coffee w/ Debby & Paul.
+
+Added resource packs to minecraft client (because Optifine no longer works for me apparently):
+    Vanilla Tweaks Resource Pack
+    Version: 1.17
+    Packs:
+        BorderlessGlass
+        BorderlessStainedGlass
+        BorderlessTintedGlass
+        GrassSides
+        MyceliumSides
+        PathSides
+        SnowSides
+        PodzolSides
+
+
+Fri 20-Aug-2021
+^^^^^^^^^^^^^^^
+
+upload_forcing trubidity to graham failed due to auth glitch; worked on manual re-run
+backfilling nowcast-r12
+  wait for automation run to fail ~19:15
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-08-19"
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+Allen family dinner at Amica
+
+
+Sat 21-Aug-2021
+^^^^^^^^^^^^^^^
+
+download_live_ocean timed out at ~12:00; re-tried at ~12:50
+backfilling nowcast-r12
+  wait for automation run to fail ~19:15
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-08-20"
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+Researched Wahoo, Tacx & Stages smart bike trainers.
+
+
+Sun 22-Aug-2021
+^^^^^^^^^^^^^^^
+
+backfilling nowcast-r12
+  wait for automation run to fail ~19:15
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-08-21"
+(SalishSeaCast)
+
+
 
 
 TODO:
