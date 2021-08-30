@@ -5354,6 +5354,143 @@ backfilling nowcast-r12
   launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-08-21"
 (SalishSeaCast)
 
+Cycled to Deep Cove & back (46km)
+
+X10 switch on upstairs bathroom empty light failed into constate relay cliking state.
+
+
+Week 34
+-------
+
+Mon 23-Aug-2021
+^^^^^^^^^^^^^^^
+
+Week 76 of UBC work-from-home due to COVID-19
+
+Vacation
+
+Delivered basket chair to Jose.
+Walked in QE Park.
+Replaced switch on upstairs bathroom empty light w/ old-school 2 pole.
+
+backfilling nowcast-r12
+  wait for automation run to fail ~18:00
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-08-22"
+Squash-merged PRs from dependabot re: jupyterlab & notebook security vulernabilities in:
+* SalishSeaCast/tools
+* SalishSeaCast/analysis-doug
+* SalishSeaCastSOG-Bloomcast-Ensemble
+* 43ravens/ECGet
+(SalishSeaCast)
+
+
+Tue 24-Aug-2021
+^^^^^^^^^^^^^^^
+
+Vacation
+
+Bike ride while Rita was at home; Iona Spit & North Fraser Spit (50 km)
+
+Finished backfilling nowcast-r12:
+  wait for automation run to fail ~16:55
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-08-23"
+  wait for run to finish ~00:00
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-08-24"
+nowcast-agrif failed; investigation:
+* no 23aug21 or 22aug21 run
+* 22aug21 run never started because upload_forcing turbidity failed due to ssh protocol banner read error
+* backfilling:
+    upload_forcing orcinus turbidity 2021-08-22
+    make_forcing_links orcinus nowcast-agrif 2021-08-23
+    wait for run to finish
+    make_forcing_links orcinus nowcast-agrif 2021-08-24
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+
+Wed 25-Aug-2021
+^^^^^^^^^^^^^^^
+
+Vacation
+
+Vancouver to Ocean Park
+
+31st anniversary dinner w/ J&M, M,J&S at pool house Air BnB.
+
+
+Thu 26-Aug-2021
+^^^^^^^^^^^^^^^
+
+Vacation
+
+Ocean Park - Pool house Air BnB
+
+See work journal.
+(Resilient-C)
+
+kudu reported root file system down to 882Mb
+* deleted a bunch of old kernels with guidance from askubuntu (https://askubuntu.com/questions/345588/what-is-the-safest-way-to-clean-up-boot-partition)
+* did flatpak cleanup:
+    flatpak update --appstream
+    flatpak update
+    flatpak uninstall --unused
+* disk usage app showed that /var/cache/apt/archives/ was largest consumer; cleaned up dramatically with:
+    sudo apt autoclean
+    
+Cut and tasted bottle layer of wedding cake - 31 years old :-)
+
+Added double shulker shells v1.3.0 datapack to CubedHost world.
+
+nowcast-agrif timed out
+(SalishSeaCast)
+
+
+Fri 27-Aug-2021
+^^^^^^^^^^^^^^^
+
+Vacation
+
+Ocean Park - Pool house Air BnB
+
+See work journal.
+(Resilient-C)
+
+nowcast-agrif failed; investigation:
+* excessive zonal velocity on 1st time step of 26aug21 run caused time-out
+* Susan did averaging in physics restart file from end of 25aug21 run
+(SalishSeaCast)
+
+J 95th bday & J&M 63rd anniversary dinner w/ J&M, M,J&S at pool house Air BnB.
+
+
+Sat 28-Aug-2021
+^^^^^^^^^^^^^^^
+
+Vacation
+
+Ocean Park - Pool house Air BnB
+
+backfilling nowcast-agrif:
+* uploaded Susan's fixed physics restart file from end of 25aug21 run
+    make_forcing_links orcinus nowcast-agrif 2021-08-26
+    make_forcing_links orcinus nowcast-agrif 2021-08-27
+    wait for run to finish
+    make_forcing_links orcinus nowcast-agrif 2021-08-28
+(SalishSeaCast)
+
+
+Sun 29-Aug-2021
+^^^^^^^^^^^^^^^
+
+Vacation
+
+Ocean Park to Vancouver
+
+Cycled Cypress, MM Greenway, Heather, S Kent, Fraser River Trail, Benson, SWN, 16th, 8th, Pt. Grey (~32 km). Felt remarkkably strong going uphill & upwind on SWM.
+
+
 
 
 
