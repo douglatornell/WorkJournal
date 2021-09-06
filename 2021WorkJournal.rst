@@ -5137,7 +5137,7 @@ Group mtg; see whiteboard.
 
 Tried to install Opti and OptiFine for minecrat 1.17.1:
 * download OptiFine from https://optifine.net/home
-* download Opti from https://www.curseforge.com/minecraft/mc-mods/opti
+* download OptiFabric from https://www.curseforge.com/minecraft/mc-mods/optifabric
 * Put both jars in .minecraft/mods/
 * run OptiFine jar to install
 * Minecraft refuses to load due to GLX driver version
@@ -5489,6 +5489,142 @@ Vacation
 Ocean Park to Vancouver
 
 Cycled Cypress, MM Greenway, Heather, S Kent, Fraser River Trail, Benson, SWN, 16th, 8th, Pt. Grey (~32 km). Felt remarkkably strong going uphill & upwind on SWM.
+
+
+Week 35
+-------
+
+Mon 30-Aug-2021
+^^^^^^^^^^^^^^^
+
+Week 77 of UBC work-from-home due to COVID-19
+
+Worked w/ Susan to handle full /results/ partition; manually re-ran download_results forecast.
+(SalishSeaCast)
+
+Group mtg; see whtieboard.
+(MOAD)
+
+See work journal.
+(Resilient-C)
+
+
+Tue 31-Aug-2021
+^^^^^^^^^^^^^^^
+
+Helped Raisha with build of hydroconstruct.
+(Atlantis)
+
+Lokked at optifine again and discovered there was a final release for 1.71.1 yesterday.
+Then found note on OptiFabric page that lead to https://gist.github.com/modmuss50/deff1658c4550ca8b16cb5d40ceaa468 saying that OptiFabric will be no longer developed due to OptiFine getting more and more invasive; recommnedation for performance improvement is Sodium.
+* Downloaded Sodium frame rate optimzer from https://github.com/CaffeineMC/sodium-fabric/releases; works!
+* Checked Phosphor lighting engine mod from https://github.com/CaffeineMC/phosphor-fabric/ but there is no 1.17.1 release yet.
+* Downloaded Lithium optimizer from https://github.com/CaffeineMC/lithium-fabric/releases; works!
+
+Answered email from Vanessa @ DFO asking for opinions on Python packages for reading GRIB2 files; suggested cfgrib backend for xarray.
+
+Noticed at ~19:40 that fvcom-forecast had not reported to log since 13:35; investigation:
+* arbutus nowcast0 node stopped without explanation at 20:38 UTC == 13:38 Pacific
+* resolution:
+* restarted nowcast0 from web dashboard at 02:44 UTC == 19:44 Pacific
+    sudo apt update
+    sudo apt upgrade
+    sudo mount /dev/vdc /nemoShare
+    ll /nemoShare/MEOPAR/  # to confirm mount
+    sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+    ll /export/MEOPAR  # to confirm mount
+    sudo systemctl start nfs-kernel-server.service
+    sudo exportfs -f  # to reset NFS handles for compute nodes
+    # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+    for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+    for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -C /nemoShare/MEOPAR"; done
+    for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+    for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -C /nemoShare/MEOPAR"; done
+* on skookum:
+      launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 foreast 2021-08-31"
+      no log msgs from watch_fvcom, so restarted log_aggregator 
+      wait for run to finish ~23:40
+      launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-08-31"
+(SalishSeaCast)
+
+
+September
+=========
+
+Wed 1-Sep-2021
+^^^^^^^^^^^^^^
+
+collect_weather 12 didn't complete; investigation:
+* lots of connection timeout and 404 errors in sarracenia log
+* 247 of 576 files downloaded
+* no files for hours 001-012, 030-036 & 041; missing files in hours 026, 028, 037-040, 042-044 & 046
+* recovery:
+    pkill collect_weather 12
+    collect_weather 18 2.5km &
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210901/12
+    download_weather 12 2.5km
+noticed at ~18:35 that nowcast-green was stalled at 8.8% complete; investigation:
+* nowcast6 node stopped inexplicably at 18:05 UTC == 11:05 Pacific
+* recovery:
+  * restarted nowcast6 node via web dashboard
+  * mounted shared storage:
+      sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR
+  * on nowcast0:
+      pkill -f watch_NEMO
+      rm -rf 01sep21nowcast-green_2021-09-01T105826.488964-0700/
+  * on skookum:
+      make_forcing_links arbutus nowcast-green
+(SalishSeaCast)
+
+Worked w/ Susan:
+* set up alarm.com web and phone app access
+* set up backups from greta to lizzy:
+  * created susan account on lizzy
+  * mounted backup partition for susan
+  * created borg repository w/ encryption and auto compression using zstd
+  * cloned douglatornell/borg-backup repo to greta
+  * tuned greta-lizzy.sh script
+
+
+Thu 2-Sep-2021
+^^^^^^^^^^^^^^
+
+Continued work on conda section of docs.
+(MOAD)
+
+UBC-DFO modeling mtg; Tereza presented clustering work.
+Post-mtg discussion of climate-HRDPS model correlation project w/ Susan, Michael & Amber.
+(SalishSeaCast)
+
+Weekly project mtg.
+Worked w/ Javier & Raisha to get build config for HydroConstruct sorted out; required custom ./configure file that sets C*FLAGS & LDFLAGS vars after autoconfig generated ./configure.
+(Atlantis)
+
+
+Fri 3-Sep-2021
+^^^^^^^^^^^^^^
+
+Slack call w/ Raisha to work through initial use of AtlantisCmd and discuss where to store run descriptions & parameter files.
+(Atlantis)
+
+Helped Elise recover from having pushed a commit to the old master branch of rivers-climatology.
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+
+Sat 4-Sep-2021
+^^^^^^^^^^^^^^
+
+Goofed off.
+
+
+Sun 5-Sep-2021
+^^^^^^^^^^^^^^
+
+Continued helping Elise recover from having pushed a commit to the old master branch of rivers-climatology.
+(SalishSeaCast)
 
 
 
