@@ -5627,6 +5627,214 @@ Continued helping Elise recover from having pushed a commit to the old master br
 (SalishSeaCast)
 
 
+Week 36
+-------
+
+Mon 6-Sep-2021
+^^^^^^^^^^^^^^
+
+Week 78 of UBC work-from-home due to COVID-19
+
+**Statutory Holiday** - Labour Day
+
+Cycled Central Valley Greenway to North Rd; out via Burnaby Lake freeway trail, back via Winston (46 km)
+
+
+Tue 7-Sep-2021
+^^^^^^^^^^^^^^
+
+Susan's surgery at derm clinic.
+
+Cycled to Iona and home via Heather while Rita was at home (40 km)
+
+
+Wed 8-Sep-2021
+^^^^^^^^^^^^^^
+
+Slack w/ Becca re: running Jupyter in tmux sessions.
+Resumed trying to get nowcast-dev to work on salish 18.04:
+* created conda env; env description stored for now in /SalishSeaCast/nowcast-dev-env.yaml:
+    name: nowcast-dev
+
+    channels:
+    - conda-forge
+    - nodefaults
+
+    dependencies:
+    - cxx-compiler
+    - fortran-compiler
+    - libnetcdf
+    - netcdf-fortran
+    - openmpi
+* rely on system perl and perl-URI package
+* built new XIOS-2 executable:
+  * edit arch/arch-GCC_SALISH.fcm to point to mpicc & mpif90 in env
+    cd /SalishSeaCast/XIOS-2
+    ./tools/FCM/bin/fcm build --clean
+    ./make_xios --arch GCC_SALISH --netcdf_lib netcdf4_seq --job 8
+* built new NEMO SalishSeaCast_Blue executable:
+  * edit arch/arch-GCC_SALISH.fcm to point to gcc, mpif90, and netcdf includes & lib in env
+    cd /SalishSeaCast/NEMO-3.6-code/NEMOGCM/CONFIG
+    XIOS_HOME=/SalishSeaCast/XIOS-2 ./makenemo -m GCC_SALISH -n SalishSeaCast_Blue clean
+    XIOS_HOME=/SalishSeaCast/XIOS-2 ./makenemo -m GCC_SALISH -n SalishSeaCast_Blue -j8
+* built new REBUILD_NEMO executable:
+    cd /SalishSeaCast/NEMO-3.6-code/NEMOGCM/TOOLS/
+    XIOS_HOME=/SalishSeaCast/XIOS-2 ./maketools -m GCC_SALISH -n REBUILD_NEMO clean
+    XIOS_HOME=/SalishSeaCast/XIOS-2 ./maketools -m GCC_SALISH -n REBUILD_NEMO
+* try to run 23apr21 run:
+    make_forcing_links salish nowcast+ --shared-storage --run-date 2021-04-23
+* run failed w/ no evidence of NEMO starting with 7 instances in stderr of:
+    terminate called after throwing an instance of 'St9bad_alloc'
+    what():  std::bad_alloc
+* re-built new XIOS-2 executable:
+  * edit arch/arch-GCC_SALISH.fcm to point to netcdf includes & lib in env
+* run failed w/ no evidence of NEMO starting with **8** instances in stderr of:
+    terminate called after throwing an instance of 'St9bad_alloc'
+    what():  std::bad_alloc
+(SalishSeaCast)
+
+Squash-merged Dependabot PRs re: pillow:
+* SalishSeaCast/SOG-Bloomcast-Ensemble
+* SalishSeaCast/tools 
+* SalishSeaCast/analysis-doug
+* SalishSeaCast/SalishSeaNowcast
+* UBC-MOAD/moad_tools
+
+
+Thu 9-Sep-2021
+^^^^^^^^^^^^^^
+
+Compared output of ldd for nemo.exe between arbutus & salish nowcast-env builds; different in ways that I don't understand.
+make_turbidity_file failed:
+  ValueError: Anticipated and output hour were consistent: iout=14 ind=14 44446.166666666664 44446.131944444445
+Recovery at ~16:30:
+  symlink yesterday's file to persist
+  upload_forcing arbutus turbidity
+  upload_forcing orcinus turbidity
+  upload_forcing graham turbidity
+  upload_forcing optimum turbidity
+(SalishSeaCast)
+
+Continued work on ERDDAP dataset of month-averaged tracers for stakeholders:
+* crafted ubcSSg3DuGridFields1moV19-05 dataset XML from ubcSSg3DuGridFields1hV19-05 and released it on ERDDAP
+(ERDDAP)
+
+Weekly project mtg.
+(Atlantis)
+
+Replied to email from Xinru Li in Geog asking for help w/ Python & dask.
+
+
+Fri 10-Sep-2021
+^^^^^^^^^^^^^^^
+
+Paired w/ Raisha on Slack to figure out why HydroConstruct is not producing T&S files; turned out that it was segfaulting due to inconsistent values of tstart and tstop; can only process one time range file at a time and tstart/tstop need to be correct for file.
+(Atlantis)
+
+Long lunch w/ Birgit.
+
+Finished work on ERDDAP dataset of month-averaged tracers for stakeholders:
+* crafted ubcSSg3DvGridFields1moV19-05 dataset XML from ubcSSg3DvGridFields1hV19-05 and released it on ERDDAP
+* crafted ubcSSg3DwGridFields1moV19-05 dataset XML from ubcSSg3DwGridFields1hV19-05 and released it on ERDDAP
+Improved metadata comments for gridY, gridX, and time coordinates.
+(ERDDAP)
+
+
+Sat 11-Sep-2021
+^^^^^^^^^^^^^^^
+
+FAL estate work re: BCE & Manulife:
+Done:
+* Waiver of Probate form
+* Declaration of Transmission for BCE
+* Declaration of Transmission for Manulife
+TODO:
+* Letter of direction for BCE shares
+* Letter of direction for Manulife shares
+* Letter stating the reason for not probating the will
+* BCE dividend statement
+* Manulife dividend statement
+* Cheque to Insurance broker for 3.5% of BCE shares value
+* Cheque to Insurance broker for 3.5% of Manulife shares value
+* Cheque to AST for $131.25 ($125 + GST) for BCE shares processing
+* Cheque to AST for $131.25 ($125 + GST) for Manulife shares processing
+* Notarized signature of Waiver of Probate
+* 4 notarized copies of death certificate
+* 4 notarized copies of will
+* Courier pkg to AST
+
+* Send to Jamie for notarized signature:
+  * Waiver of Probate form
+* Send to Jamie as supporting information:
+  * Letter of direction for BCE shares
+  * Letter of direction for Manulife shares
+  * Copy of death certificate
+  * Copy of will
+  * Copy of BCE dividend statement
+  * Copy of Manulife dividend statement
+
+
+Sun 12-Sep-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+download_results forecast failed; investigation:
+* no messages from watch_NEMO for nowcast-green after it started at 10:14
+* no messages from watch _fvcom for nowcast-x2 after 10:12
+* nowcast0 stopped for no reason at 17:16 UTC == 10:16 Pacific
+* recovery:
+  * restarted nowcast0 from web dashboard at 20:09 UTC == 13:09 Pacific
+      sudo apt update
+      sudo apt upgrade
+      sudo mount /dev/vdc /nemoShare
+      ll /nemoShare/MEOPAR/  # to confirm mount
+      sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+      ll /export/MEOPAR  # to confirm mount
+      sudo systemctl start nfs-kernel-server.service
+      sudo exportfs -f  # to reset NFS handles for compute nodes
+      # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -C /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -C /nemoShare/MEOPAR"; done
+  * on skookum:
+        # killed stalled processes
+        make_forcing_links arbutus nowcast-green
+        # no messages from watch_NEMO on arbutus
+        # restarted log_aggregator
+        launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2021-09-12"
+        download_results arbutus forecast
+nowcast-green & nowcast-x2 stopped reporting at 14:39:
+* web dashboard shows that nowcast0 stopped again for no reason at 21:43 UTC == 14:43
+* recovery:
+  * restarted nowcast0 from web dashboard at 22:24 UTC == 15:24 Pacific
+      sudo mount /dev/vdc /nemoShare
+      ll /nemoShare/MEOPAR/  # to confirm mount
+      sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+      ll /export/MEOPAR  # to confirm mount
+      sudo systemctl start nfs-kernel-server.service
+      sudo exportfs -f  # to reset NFS handles for compute nodes
+      # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+* discovered that nowcast6 also stopped for no reason at 21:43 UTC == 14:43
+  * restarted nowcast6 from web dashboard at 22:28 UTC == 15:28 Pacific
+      sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR
+* continued recovery of nowcast0:
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -C /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -C /nemoShare/MEOPAR"; done
+  * on skookum:
+        # killed stalled processes
+        make_forcing_links arbutus nowcast-green
+        # no messages from watch_NEMO on arbutus
+        # restarted log_aggregator
+        launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2021-09-12"
+(SalishSeaCast)
+
+
+
 
 
 
