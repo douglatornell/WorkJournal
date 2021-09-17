@@ -4817,7 +4817,7 @@ Tue 21-Jul-2020
 ^^^^^^^^^^^^^^^
 
 Ticket response from PyCharm says that flatpak distribution is not supported.
-Opened support ticket at Wywtem76 to inform them. Uninstalled flatpak. Installed JetBrains Toolbox and used it to install PyCharm.
+Opened support ticket at System76 to inform them. Uninstalled flatpak. Installed JetBrains Toolbox and used it to install PyCharm.
 
 collect_weather 18 didn't finish (240 files were collected) due to connection time-outs, broken pipes, and SSL bad length errors; recovery:
   pkill collect_weather 18
@@ -4865,7 +4865,6 @@ See project work journal.
 Weekly group mtg; see whiteboard.
 (MOAD)
 
-
 Backfilling nowcast-agrif:
   upload_forcing orcinus nowcast+ 2020-07-22
   upload_forcing orcinus turbidity 2020-07-22 --debug
@@ -4886,7 +4885,7 @@ Fri 24-Jul-2020
 ^^^^^^^^^^^^^^^
 
 upload_forcing forecast2 failed for arbutus, graham, optimum & orcinus w/ FileNotFoundError symlink race condition, stopping automation; investigation:
-* Neah Bay obs has not been updated, so obs/23jul really didn't exist, but Neah Bay forecast was okay, so fcst/23jul really did exist; not race condition, actual error, but crappy handling :-()
+* Neah Bay obs has not been updated, so obs/23jul really didn't exist, but Neah Bay forecast was okay, so fcst/23jul really did exist; not race condition, actual error, but crappy handling :-(
 recovery:
   get_NeahBay_ssh forecast2 --debug  # avoid launching forecast2 runs because nowcast are imminent
   upload_forcing forecast2 arbutus --debug
@@ -5016,8 +5015,8 @@ Craig Bay
 Handiman Scott came to fix powder-room door frame warp, kitchen sink window mechanism, and living room stereo cupboard door hinge.
 Continued de-cluttering.
 
-Reviewed Python packaging docs re: recent developments in PyPA world; not changes required.
-Deleted a leftover metnion of requirements.txt from the envs/ directory section of the pkging docs.
+Reviewed Python packaging docs re: recent developments in PyPA world; no changes required.
+Deleted a leftover mention of requirements.txt from the envs/ directory section of the pkging docs.
 (MOAD)
 
 Committed ww3 forecast2 from restart & nowcast/forecast correction w/ unit tests.
@@ -5066,6 +5065,8 @@ Mon 3-Aug-2020
 ^^^^^^^^^^^^^^
 
 Week 21 of UBC work-from-home due to COVID-19
+
+**Statutory Holiday** - BC Day
 
 Craig Bay
 
@@ -5174,7 +5175,6 @@ Started backfilling nowcast-dev:
 Zoom re: Killer Whales w/ Ruth Joy @ SFU
 * Mike Dowd (Dal)
 * Marine Randon (SFU)
-*
 
 Dropped Boondoocks wheel off at MEC for spoke replacement and re-tension
 
@@ -5187,13 +5187,6 @@ Email w/ Rachael re: pandas.read_excel() weirdness.
 
 Continued backfilling nowcast-dev:
   launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-05"
-
-  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-06"
-  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-07"
-  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-08"
-  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-09"
-  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-10"
-  launch_remote_worker salish-nowcast make_forcing_links "salish-nowcast nowcast+ --shared-storage --run-date 2020-08-11"
 * Fixed NEMO_Nowcast and SalishSeaNowcast re:
     /media/doug/warehouse/conda_envs/nemo-nowcast/lib/python3.8/pathlib.py:1299: DeprecationWarning: an integer is required (got type FilePerms).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
       self._accessor.chmod(self, mode)
@@ -5213,7 +5206,7 @@ Jupyter Days session:
   * NOTE: notebook doesn't parse MyST
   * demo uses plotly for interactive plots in notebook/jbook
   * use notebook/lab cell tag `hide-input` to cause jbook to hide code w/ toggle
-  * quickest option to pblish is to use GitHub Pages (Tomas contributed to jbook docs on this topic)
+  * quickest option to publish is to use GitHub Pages (Tomas contributed to jbook docs on this topic)
   * ghp-import tool to build gh-pages branch; can be automated via GitHub Actions
   * interactivity via Binder, JupyterHub, Google Colab services; or ThebeLab coding in browser (new-ish, experimental)
 
@@ -5268,7 +5261,7 @@ FAL estate work: went to bank to deposit BCE cheque, get draft for tax accountan
 Sat 15-Aug-2020
 ^^^^^^^^^^^^^^^
 
-Switched Tommy back to Boondoocks wheels; had to do a lot of adjustment of the rear deraillier.
+Switched Tommy back to Boondoocks wheels; had to do a lot of adjustment of the rear deraillieur.
 Cycled to the east end of River Rd and back (49km)
 
 Continued backfilling nowcast-dev:
@@ -5321,24 +5314,21 @@ Completed work on presenter's guide form for ECCC Datamart talk and sent Sandrin
 
       • English: SalishSeaCast – UBC’s Real-time Ocean Modelling System
 
+
   4- Main objective
   In one sentence, specify the main objective of your presentation.
 
   This presentation will describe the UBC SalishSeaCast system that does daily nowcasts and forecasts of the physics, biology, carbon chemistry, and waves in the Salish Sea using NEMO, FVCOM and WaveWatchIII.
 
 
-
   6- Audience
   Identify your audience:
-
 
       • Main audience: Operational forecast modellers
 
       • Secondary audience: Ocean modellers
 
-
       • Others: will they benefit from this presentation? Yes – the presentation is intended for a general audience, in particular anyone interested in software automation and/or the oceanography of the BC South Coast region
-
 
 
   7- Summary
@@ -5416,7 +5406,7 @@ See work journal.
 Baynes Sound figure failed w/
   ImportError: libproj.so.19: cannot open shared object file: No such file or directory
 confirmed that libproj.so.15 is installed in nowcast-env.
-Tried to resolve with conda env update; that updated a bunch of pkgs, but didn't update libproj; successfullyr esolved with conda update proj, which updated more pkgs (some repeats), but got us to libproj.so.19.
+Tried to resolve with conda env update; that updated a bunch of pkgs, but didn't update libproj; successfully resolved with conda update proj, which updated more pkgs (some repeats), but got us to libproj.so.19.
 As a result of the above, all of today's make_plots runs appear to have failed; recovery:
   make_plots nemo forecast2 publish 2020-08-20
   make_plots wwatch3 forecast2 publish 2020-08-21
@@ -5476,7 +5466,7 @@ Got kudu set up on ubcsecure wifi; opened ticket to get it enabled on wired netw
 See work journal.
 (Ocean Navigator)
 
-Drive to UBC in late afternoon to pick up forgotten kudu power adapter.
+Drove to UBC in late afternoon to pick up forgotten kudu power adapter.
 
 Celebrated wedding anniversary w/ take-out from La Quercia.
 
@@ -5489,7 +5479,7 @@ See work journal.
 
 collect_weather 12 had not completed at noon; investigation:
   520 of 576 files downloaded
-  503 errors from dd5.weather.gc.ca prevent rest of file downloads
+  503 errors from dd5.weather.gc.ca prevented rest of file downloads
 recovery starting at ~12:10:
   kill collect_weather 12
   collect_weather 18 2.5km
@@ -5737,13 +5727,13 @@ Email w/ Rachael about fields in shapefiles.
 (MIDOSS)
 
 Slack w/ Becca about ssh access to chum.
-Email w/ Bergit about ssh forwarding while she is on Arctic cruise.
+Email w/ Birgit about ssh forwarding while she is on Arctic cruise.
 Wrote ssh keys, config & ssh-copy-id docs.
 (MOAD)
 
 collect_weather 12 didn't finish due to SSL bad length errors around ~08:45; investigation:
   only 186 of 576 files downloaded
-  broken pip errors prevented rest of file downloads
+  broken pipe errors prevented rest of file downloads
 recovery starting at ~09:40:
   kill collect_weather 12
   collect_weather 18 2.5km
@@ -5765,7 +5755,7 @@ Craig Bay
 See work journal.
 (Ocean Navigator)
 
-Email w/ Bergit about ssh forwarding while she is on Arctic cruise.
+Email w/ Birgit about ssh forwarding while she is on Arctic cruise.
 Wrote docs section about ssh, scp, sftp.
 (MOAD)
 
@@ -5797,7 +5787,7 @@ FAL estate work: researched savings accounts for long-term holding of estate hol
 Added notes on -v options for ssh, scp & sftp.
 (MOAD)
 
-IOS seminar by  Matthias Herborg on oil spill response plan
+IOS seminar by Matthias Herborg on oil spill response plan
 
 Created Zoom account under @43ravens.ca to that I can have a profile picture.
 
@@ -5892,7 +5882,7 @@ Fri 18-Sep-2020
 Craig Bay
 
 Emailed Elise about her problem getting archived water level obs for Campbell River.
-get_NeahBay_ssh failed overnight and in morning due to slosh service not connections; Susan changed to and older, non-HTTPS nws service, and it worked for nowcast onward.
+get_NeahBay_ssh failed overnight and in morning due to slosh service not accepting connections; Susan changed to an older, non-HTTPS nws service, and it worked for nowcast onward.
 upload_forcing graham stalling in morning
 (SalishSeaCast)
 
@@ -5962,7 +5952,7 @@ See work journal.
 Wrote and emailed MEOPAR ATM session proposal.
 (MEOPAR: 1.25 hr)
 
-Uploaded Rachael's new icon image to Salck & GitHub.
+Uploaded Rachael's new icon image to Slack & GitHub.
 Monthly project mtg; see whiteboard.
 Started to pull in Rachael's fix re: vessel length and oil capacity, but new YAML file isn't safe_load()-able; messaged her in #soiled channel to fix.
 (MIDOSS)
@@ -6059,7 +6049,7 @@ Continued work on integrating Rachael's code:
 * started pulling in get_oil_type_*() for cargo spills
 (MIDOSS)
 
-Listened to Susan seminar to the McGill OAS dept.
+Listened to Susan's seminar to the McGill OAS dept.
 Weekly group mtg; see whiteboard.
 (MOAD)
 
@@ -6117,7 +6107,7 @@ See work journal.
 Fri 2-Oct-2020
 ^^^^^^^^^^^^^^^
 
-Submitted work on PWGSC quarterly usage report for ProServices; see biz journal.
+Submitted PWGSC quarterly usage report for ProServices; see biz journal.
 
 See work journal.
 (Ocean Navigator)
@@ -6125,7 +6115,7 @@ See work journal.
 Continued work on integrating Rachael's code:
 * Pulled in get_oil_type_tanker()
 * Pulled in get_oil_type_barge()
-Worked Susan to characterize no AIS tracks issue; shapefiles/geotiff mismatch
+Worked w/ Susan to characterize no AIS tracks issue; shapefiles/geotiff mismatch
 Found errors due to all zero oil volumes, and missing keys in some YAML files.
 (MIDOSS)
 
