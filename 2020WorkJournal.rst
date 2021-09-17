@@ -6527,7 +6527,7 @@ Worked on installing jupyter lab on beluga:
   source ~/venvs/jupyter/bin/activate
   # --no-index install failed on argon2-cffi; I guess CC wheelhouse is out of date?
   python3 -m pip install jupyterlab
-  # did a nice job of installing wheels from XX wheelhouse when available (mostly) and installing from PyPI when not
+  # did a nice job of installing wheels from CC wheelhouse when available (mostly) and installing from PyPI when not
   jupyter lab --no-browser --ip $(hostname -f)  # server
   ssh -N -L 4343:beluga1.int.ets1.calculquebec.ca:8888 beluga  # port forwarding on kudu
   http:localhost:4343?token=...
@@ -6567,8 +6567,6 @@ Fri 30-Oct-2020
 
 Email w/ Elise about CPUs, cores, etc.
 Slack w/ Becca re: .nc & .grib2 access for ML course project on climate forecast down-scaling:
-*
-
 * GitHub repo
 * conda env YAML
 (SalishSeaCast)
@@ -6597,7 +6595,7 @@ Sat 31-Oct-2020
 
 Improved docs section about Jupyter on remote MOAD server sub-section.
 Learned more about use of --ip option for starting remote Jupyter lab server, and it relationship to ssh -N -L.
-Successfully run Jupyter lab in an interactive session on a compute node on beluga.
+Successfully ran Jupyter lab in an interactive session on a compute node on beluga.
 (MOAD)
 
 Confirmed that fvcom/nowcast-x2/28oct20 and all subsequent runs failed; started backfilling:
@@ -6672,12 +6670,12 @@ Continued fvcom backfilling:
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast x2 nowcast --run-date 2020-11-03"
   wait for nowcast-r12/31oct20 to finish
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-01"
-Added download_weather to list of workers that trigger Slack notifications; may ned to restart manager for this to take effect.
+Added download_weather to list of workers that trigger Slack notifications; may need to restart manager for this to take effect.
 Tweaked sarracenia config for 1km HRDPS to try to get files flowing; restarted sarracenia client.
 Experimented with --no-index and requirements files on beluga; found ComputeCanada default wheelhouse paths coming from PIP_CONFIG_FILE environment variable that appears to be set on login; can't control where pkgs are installed from in requirements file, but can list only top level reqs, and reqs w/o version pins.
 (SalishSeaCast)
 
-Did the stupid half hourS dance to get my phone reconnected to ubcsecure & eduroam after having to change my CWL password.
+Did the stupid half-hour dance to get my phone reconnected to ubcsecure & eduroam after having to change my CWL password.
 
 Did Workday intro & hourly employee training training; submitted 1-8 Nov time on Workday and as PDF via email.
 
@@ -6791,7 +6789,7 @@ Continued fvcom backfilling:
   launch_remote_worker arbutus.cloud-nowcast make_fvcom_boundary "arbutus.cloud-nowcast r12 nowcast --run-date 2020-11-08"
 (SalishSeaCast)
 
-Did more research on OpalStack as replacement for Webfaction; look like a go.
+Did more research on OpalStack as replacement for Webfaction; looks like a go.
 Created domains-maint repo on GitHub for notes about domains I manage; stared wefaction-opalstack-migration file in it:
   cd /media/doug/warehouse/43ravens/
   gh repo create 43ravens/domains-maint --private --enable-wiki=false
@@ -6860,7 +6858,7 @@ Thu 12-Nov-2020
 See work journal.
 (Ocean Navigator)
 
-Worked w/ Susan to resolve no oil type issue in random-oil-spills; added temporary output of AIS track origin & destination; ran 100, 1000, and 10_000 spill cases; 10k spills took 3h40m.
+Worked w/ Susan to resolve no oil type issue in random-oil-spills; added temporary output of AIS track origin & destination; ran 100, 1_000, and 10_000 spill cases; 10k spills took 3h40m.
 (MIDOSS)
 
 Continued work on slides for discussion about Python pkgs & envs.
@@ -6878,7 +6876,7 @@ See work journal.
 See work journal.
 (Resilient-C)
 
-Continued work w/ Susan to resolve no oil type issue in random-oil-spills; implemented her idea to filter out Washington facilities with no transfers to that oil type selection logic continues to use more general criteria.
+Continued work w/ Susan to resolve no oil type issue in random-oil-spills; implemented her idea to filter out Washington facilities with no transfers so that oil type selection logic continues to use more general criteria.
 Ran another 10_000 spill case overnight for Susan to analyze; no missing oil types.
 (MIDOSS)
 
@@ -7025,7 +7023,7 @@ Created pinned search on Sentry to better see issues other than those due to ONC
 
 Committed zero-VTE tracks corner case mitigation.
 Backed out Rachael's master branch work-arounds to get results for MEOPAR ASM (after a long git thrash).
-Created PR#2 got integration of get_oil_type() function.
+Created PR#2 for integration of get_oil_type() function.
 (MIDOSS)
 
 
@@ -7396,7 +7394,7 @@ Continued work on docs for using cookiecutter-analysis-repo.
 (MOAD)
 
 DFO-UBC modeling mtg:
-* Dustin showed FVCOM hydrid generalized coords for  steep topo in Bute Inlet
+* Dustin showed FVCOM hydrid generalized coords for steep topo in Bute Inlet
 * Haley showed HRDPS 1km vs. obs in Discovery Islands; still biased, but winds maybe too strong instead of too weak
 * Laura showed FVCOM Discovery Is model w/ HRPDS 1km vs 2.5km, and SSC boundary water levels vs. tide harmonics; little difference due to 1km!; SSC levels are better, but blending de-tided SSC w/ harmonics will probably be better still
 On-boarding mtg w/ Karyn: git & Slack.
@@ -7425,7 +7423,7 @@ Sun 13-Dec-2020
 
 Learned of Dan McQuire's death due to COVID-19.
 
-Created empty 2021 gnucash sqlite3 file, exported accounts from 2020 to csv and imported them, tnen started edited accounts for 2021:
+Created empty 2021 gnucash sqlite3 file, exported accounts from 2020 to csv and imported them, then started editing accounts for 2021:
 * added stocks, ETFs & funds to securities database
 * created non-registered stock, ETF & fund accounts
 
@@ -7451,7 +7449,7 @@ Weekly group mtg; see whiteboard.
 (MOAD)
 
 Helped Elise & Karyn get their collab envs set up on lox; Elise reported a problem w/ netCDF4.dataset() on lox: OSError: [Errno -101] NetCDF: HDF error; investigation:
-* conda env create -f  /ocean/ksuchy/MOAD/analysis-karyn/notebooks/environment.yaml
+* conda env create -f /ocean/ksuchy/MOAD/analysis-karyn/notebooks/environment.yaml
 (SalishSeaCast)
 
 
@@ -7473,7 +7471,7 @@ PyCharm FastAPI webinar:
 * Marc Anderssen It's Time to Build article
 * heavily leverages type hints
 * uses PyDantic for data models; PyCharm has optional PyDantic plugin
-* arg in favour of chameleon; value HTML
+* arg in favour of chameleon; valid HTML
 
 Work at UBC while Rita is at home.
 
@@ -7511,8 +7509,8 @@ Thu 17-Dec-2020
 See work journal.
 (Ocean Navigator)
 
-Added notes discussions during from part 1 of  Python pkgs & envs session to slides notebook.
-Part 2 of Python pkgs & envs session:
+Added notes discussions during part 1 of Python pkgs & envs session to slides notebook.
+Part 2 of Python pkgs & envs session.
 (MOAD)
 
 collect_weather 12 didn't complete; 575 of 576 files; 1 connection time out, then lots of broken pipe & bad SSL length errors; recover started at ~11:40:
@@ -7524,7 +7522,6 @@ collect_weather 12 didn't complete; 575 of 576 files; 1 connection time out, the
 Checked GitHub for sarracenia issues/updates and found issues related to connections and broken pipes, and new releases:
 * TODO: update sarracenia-env
 collect_weather 18 didn't complete; 527 of 576 files; 1 connection time out, then lots of broken pipe & bad SSL length errors; recover started at ~15:15:
-
   pkill collect_weather 18
   rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20201217/18/
   collect_weather 00 2.5km
@@ -7661,7 +7658,7 @@ Worked w/ Susan on tidal predictions files update to 2030; need to decide how to
 Discussed writing in-progress results to netCDF w/ Becca.
 (SalishSeaCast)
 
-Made notes year rollover repo updates.
+Made notes for year-rollover repo updates.
 Set up eosc510 env from Becca's rbeutel/eosc510 repo
 (MOAD)
 
@@ -7677,7 +7674,7 @@ Wed 30-Dec-2020
 Continued Slack conversation w/ Rachael re: her problems w/ pip install of Make-MIDOSS-Forcing package on graham.
 (MIDOSS)
 
-Created checklist post in Slack  #repos-maint channel re: year rollover updates.
+Created checklist post in Slack  #repos-maint channel re: year-rollover updates.
 (MOAD)
 
 Pulled Susan's update re: tidal predictions file name template for figures into production
