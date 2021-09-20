@@ -62,7 +62,7 @@ Continued work on Getting Started section of MOAD docs.
 
 Requested, received, and set up Zoom account on UBC license.
 Set up on-boarding mtg w/ Aline & Keegan for Thu 09:00.
-Checked hake & halibut that Aline & Keegan will use for /results, /results2 & /data mounts; opened tickket to get /results2 and /data mounted on hake.
+Checked hake & halibut that Aline & Keegan will use for /results, /results2 & /data mounts; opened ticket to get /results2 and /data mounted on hake.
 Uploaded LinuxCommandLine.pdf to Google Drive.
 (SalishSeaCast)
 
@@ -76,7 +76,7 @@ Wed 6-Jan-2021
 See work journal.
 (Ocean Navigator)
 
-Joined initial on-boarding Zoom for Aline & Keegan joinng MOAD to work with Elise & Karyn.
+Joined initial on-boarding Zoom for Aline & Keegan joining MOAD to work with Elise & Karyn.
 (SalishSeaCast)
 
 FAL estate work: deposit BCE & MFC Q4 cheques; pay MCL CRA balance owing.
@@ -88,7 +88,7 @@ Wrote preliminary bash config section in MOAD docs.
 Thu 7-Jan-2021
 ^^^^^^^^^^^^^^
 
-Did computing on-boarding session w/ Aline & Keegan; chaotic due to /ocaean failures and no Linux accounts for them yet.
+Did computing on-boarding session w/ Aline & Keegan; chaotic due to /ocean failures and no Linux accounts for them yet.
 (SalishSeaCast)
 
 Got more warnings on kudu that root file system in low on space; that means /home/doug/; did some cleanup and recovered 12 of ~100 Gb.
@@ -209,7 +209,7 @@ Susan's parents received 1st doses Pfizer/BioNGen vaccine.
 Sat 16-Jan-2021
 ^^^^^^^^^^^^^^^
 
-Continued nowncast-agrif backfilling:
+Continued nowcast-agrif backfilling:
   make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-01-14
   make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-01-15
   make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-01-16
@@ -237,7 +237,7 @@ Week 45 of UBC work-from-home due to COVID-19
 
 FAL estate work: continued prep for estate trust 19/20 income tax
 
-Helped Susan update OS on Glago Pro from 19.10 to 20.10 via 20.04.
+Helped Susan update OS on Galago Pro from 19.10 to 20.10 via 20.04.
 
 Weekly group mtg; see whiteboard.
 (MOAD)
@@ -278,7 +278,7 @@ D&D w/ Allens.
 Thu 21-Jan-2021
 ^^^^^^^^^^^^^^^
 
-nowncast-agrif stopped 11 minutes into run; nothing obvious in *ocean.output; "SISTER_EOF attempting to communicate with sister MOM's" in stderr; re-ran
+nowncast-agrif stopped 11 minutes into run; nothing obvious in ocean.output; "SISTER_EOF attempting to communicate with sister MOM's" in stderr; re-ran
 Started work on generating day-average files for nowcast-green.201905 results:
 * profiled ncra on skookum:
     naive:
@@ -410,7 +410,7 @@ See work journal.
 Tue 26-Jan-2021
 ^^^^^^^^^^^^^^^
 
-Work at UBC while  is at home.
+Work at UBC while Rita is at home.
 
 Implemented CLI version of hindcast_dayavgs and started running it for 2014 in tmux session on salish.
 (SalishSeaCast)
@@ -577,7 +577,6 @@ Investigated SalishSeaNowcast CI failures:
 * comma accidentally dropped in Ben's commit yesterday
 * change ProgressBar dep to tqdm
 support@graham adjusted rrg-allen -> def-allen and vdo -> sallen; finished backfilling upload_forcing
-Contributed to Ubuntu 20.04 packages list for new image for waterhole workstations.
 Ran hindcast_dayavgs for 2010-2011.
 Experimented with adding river-name & stn-id tags to sentry context in collect_river_data to make exceptions captured by Sentry more easily understood.
 (SalishSeaCast)
@@ -790,7 +789,7 @@ automation restart:
 * interruption occurred while nowcast-blue run was in progress
 * download_results arbutus nowcast
 * get_NeahBay_ssh forecast
-* watch_NEMO foreacst failed to launch due to orphaned watch_NEMO nowcast:
+* watch_NEMO forecast failed to launch due to orphaned watch_NEMO nowcast:
   * killed orphan
   * launch_remote_worker arbutus watch_NEMO "arbutus forecast"
 Took the opportunity to continue arbutus OS updates plan re: CVE-2021-3156:
@@ -861,7 +860,7 @@ Week 49 of UBC work-from-home due to COVID-19
 **Statutory Holiday** - Family day
 
 Added GHA sphinx linkcheck workflow to SalishSeaCast/docs repo; scheduled for 8th day of month.
-Discovered th at docs repo has not copyright notices, only CC-By license.
+Discovered that docs repo has no copyright notices, only CC-By license.
 Updated Olson, et al citation from unpublished.
 (SalishSeaCast)
 
@@ -874,7 +873,7 @@ Checked on ONC ferry and SCVIP data flows; both still down; looked at their new 
 Investigated hindcast_dayavgs metadata problem; resolved by dropping bounds_nav_[lat|lon] variables present in some NEMO results files; ran hindcast_dayavgs for 2020-02-15 to 2020-12-31.
 (SalishSeaCast)
 
-Brought Makd-MIDOSS-Forcing repo up to date; merged monte-carlo branch that adds "salishseacast grid" item to YAML config instead of hard-coded ERDDAP URL so that it can work on graham compute nodes w/o network access by using a path to a clone of the SalishSeaCast/grid repo.
+Brought Make-MIDOSS-Forcing repo up to date; merged monte-carlo branch that adds "salishseacast grid" item to YAML config instead of hard-coded ERDDAP URL so that it can work on graham compute nodes w/o network access by using a path to a clone of the SalishSeaCast/grid repo.
 (MIDOSS)
 
 
@@ -997,14 +996,14 @@ See work journal.
 Tue 23-Feb-2021
 ^^^^^^^^^^^^^^^
 
-Worked at ESB while  was at home.
+Worked at ESB while Rita was at home.
 
 Failed to get bloomcast running:
 * pip install -e in new env doesn't find ensemble plug-in
 * attempt to run in last year's matplotlib-1.5.3 env on salish revealed that ECCC has changed the climate data interface to stream files for download
 * tried to figure out ensemble plug-in failure:
   * created new nemo-cmd-test23feb env on niko, and ti worked fine
-  * started modernize branch in SoG-Bloomcast-Ensemble to modernize packaging in hopes that will resolve unofund ensemble plug-in issue
+  * started modernize branch in SoG-Bloomcast-Ensemble to modernize packaging in hopes that will resolve unfound ensemble plug-in issue
 * discovered that ensemble plug-in failure was a registration failure because SOGCommand that it depends on was not installed first - silent failure :-(
 * discovered that code added in 2017 to skip 3 BOM characters in text response from ECCC climate requests now clips off 3 real characters at the start of the XML blobs
 * remembered the need to start a dummy smtpd
@@ -1069,12 +1068,12 @@ download_results arbutus forecast failed w/ error code 1 in scp; re-ran successf
 Investigated 25feb nowncast-agrif failure; auth problem during 25feb upload_forcing nowcast+; backfilled:
   upload_forcing orcinus-nowcast-agrif nowncast+ 2021-02-25
   make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-02-25
-    Failed w/ inifiband error; re-ran successfully
+    Failed w/ infiband error; re-ran successfully
   make_forcing_links orcinus-nowcast-agrif nowncast-agrif 2021-02-26
 (SalishSeaCast)
 
 Ran bloomcast manually to investigate profiles plotting error; profiles/hoff_2021_bloomcast.out_* files are empty
-Pushed changes to use scalled flow from Nanaaimo River at Cassidy gauge as replacement for Englishman.
+Pushed changes to use scaled flow from Nanaimo River at Cassidy gauge as replacement for Englishman.
 Updated cloud fraction mapping re: new weather descriptions in 2020.
 Activated daily cron run of bloomcast on salish despite plots not working.
 (bloomcast)
@@ -1091,7 +1090,7 @@ Sat 27-Feb-2021
 Fixed cronjob.sh so that it uses up to date conda env and shows tracebacks on failure
 (bloomcast)
 
-nowcast-agrif failed ~14% into run; inifiband error; re-ran successfully
+nowcast-agrif failed ~14% into run; infiniband error; re-ran successfully
 (SalishSeaCast)
 
 
@@ -1119,11 +1118,11 @@ Susan reviewed results of yeaterday's bloomcast run w/ correctly scaled Nanaimo 
 Committed cronjob.sh updates; env path & --debug flag.
 (bloomcast)
 
-nowcast-agrif failed very early run; inifiband error; re-ran successfully
-Deleted stale branches in NEMO-Cnd abd SalishSeaCmd repos on GitHub
+nowcast-agrif failed very early in run; infiniband error; re-ran successfully
+Deleted stale branches in NEMO-Cnd and SalishSeaCmd repos on GitHub
 (SalishSeaCast)
 
-Finalized Lagrangian.dat file tempaltes for Monte Carlo runs:
+Finalized Lagrangian.dat file templates for Monte Carlo runs:
 * mv Lagrangian_BunkerC_crude.dat Lagrangian_bunker.dat
 * mv Lagrangian_CLB_crude.dat Lagrangian_dilbit.dat
 * ln -s Lagrangian_diesel.dat Lagrangian_gas.dat
@@ -1203,7 +1202,7 @@ Started planning changes to get_onc_ferry worker to add nearest NEMO grid ji ind
 Sat 6-Mar-2021
 ^^^^^^^^^^^^^^
 
-Worked changes to get_onc_ferry worker to add nearest NEMO grid ji indices to datasets; refactoed unit tests.
+Worked on changes to get_onc_ferry worker to add nearest NEMO grid ji indices to datasets; refactored unit tests.
 (SalishSeaCast)
 
 
@@ -1413,7 +1412,7 @@ Continued work on migrating water level obs & prediction collection from zeep to
 Fri 19-Mar-2021
 ^^^^^^^^^^^^^^^
 
-Mmerged PRs from Dependabot re: bump Pillow to 8.1.1 to address memory exhaustion DOS security vulnerability:
+Merged PRs from Dependabot re: bump Pillow to 8.1.1 to address memory exhaustion DOS security vulnerability:
 * SalishSeaCast/SOG-Bloomcast-Ensemble (rebase-merge: commit authored by Dependabot & me; no ref to PR in commit msg)
 * analysis-doug/notebooks/melanie-geotiff (squash-merge: commit authored by Dependabot; commit msg links to PR)
 * analysis-doug/notebooks/dask-expts (plain-merge: commit authored by me; commit msg is "Merge pull request #...")
@@ -1479,20 +1478,21 @@ Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
 Group mtg; see whiteboard.
 (MOAD)
 
-jinja to 2.11.3:
-* SOG-Bloomcast
-* NEMO-Cmd
-* salishsea-site
-* FVCOM-Cmd
-* analysis-doug x2
-* SOG
-* ECget
-* MIDOSS/docs
-* cookiecutter-MOAD-pypkg
-* moad_tools
-* cookiecutter-analysis-repo
-urllib3 to 1.26.3
-* salishsea-site
+Squash-merged Dependabot PRs:
+* jinja to 2.11.3:
+  * SOG-Bloomcast
+  * NEMO-Cmd
+  * salishsea-site
+  * FVCOM-Cmd
+  * analysis-doug x2
+  * SOG
+  * ECget
+  * MIDOSS/docs
+  * cookiecutter-MOAD-pypkg
+  * moad_tools
+  * cookiecutter-analysis-repo
+* urllib3 to 1.26.3
+  * salishsea-site
 
 See work journal.
 (Ocean Navigator)
@@ -1501,7 +1501,7 @@ See work journal.
 Tue 23-Mar-2021
 ^^^^^^^^^^^^^^^
 
-Worked at ESB while  was at home.
+Worked at ESB while Rita was at home.
 
 Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
@@ -1908,7 +1908,7 @@ Decided to try digikam; installed it on lizzy; initialized a collection from the
 Tue 6-Apr-2021
 ^^^^^^^^^^^^^^
 
-Worked at ESB while  was at home.
+Worked at ESB while Rita was at home.
 
 Skimmed Greg Szorc's fascinating https://gregoryszorc.com/blog/2021/04/06/surprisingly-slow/ post; made me think about all the ways I/we use zlib compression that may actually be bottle necks; also interesting to see all the things that affect CPU core operations.
 
@@ -2079,7 +2079,7 @@ Restarted nowcast-env automation on skookum:
 Tested water level figs in new env:
   make_plots nemo forecast publish
     failed on CherryPoint, FridayHarbor due to bad id
-    failed on HalfmoonBay dur to: AttributeError: 'Float64Index' object has no attribute 'tz_convert'
+    failed on HalfmoonBay due to: AttributeError: 'Float64Index' object has no attribute 'tz_convert'
   make_plots fvcom nowcast publish
 (SalishSeaCast)
 
@@ -2101,7 +2101,7 @@ Thu 8-Apr-2021
 
 Rebooted nowcast0 at ~08:30 and it failed with:
   Error: Failed to perform requested operation on instance "nowcast0", the instance has an error status: Please try again later [Error: libvirtError].
-Did a shutdown on the instance and tried to restart it, but it kept erroring out; send email to cloud@. Response at ~10:30 from Jeff Albert; problem was related to persistent volume attachement; he manually re-attached the volume and the instance booted. Recovery:
+Did a shutdown on the instance and tried to restart it, but it kept erroring out; sent email to cloud@. Response at ~10:30 from Jeff Albert; problem was related to persistent volume attachment; he manually re-attached the volume and the instance booted. Recovery:
 * Re-mount persistent storage volume:
     sudo mount /dev/vdc /nemoShare  # took several seconds of nervousness
 * Re-bind /nemoShare/MEOPAR to /export/MEOPAR
@@ -2140,7 +2140,7 @@ Fri 9-Apr-2021
 Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   upload_forcing arbutus ssh
 Discussed updating get_NeahBay_ssh w/ Susan.
-Resumed work on getting NEMO and FVCOM water level figures to work w/ new CHS IWLS API obs and predicions; figures all working now, I think; uncommitted code on skookum to test in automation.
+Resumed work on getting NEMO and FVCOM water level figures to work w/ new CHS IWLS API obs and predictions; figures all working now, I think; uncommitted code on skookum to test in automation.
 (SalishSeaCast)
 
 FAL estate work: signed letter of transmission for chequing acct at Scotia; deposited Manulife chq at TD
@@ -2309,7 +2309,6 @@ Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
   upload_forcing arbutus ssh
 Added step to GHA CI workflow for SalishSeaNowcast to run `env` in shell so that I could audit for secrets in the env that might have been exposed due to https://about.codecov.io/security-update/; found none :-)
-Started re-run in tmux on salish of get_onc_ctd for SCVIP for 2015-2018 for Susan's flux paper.
 (SalishSeaCast)
 
 See work journal.
@@ -2341,7 +2340,7 @@ Filed 43ravens GST/HST return for 2020.
 
 Updated lots of 43ravens repos to change default branch name from main to master.
 
-Noticed that GitHubhave added:
+Noticed that GitHub have added:
   git remote set-head origin -a
 to the post-default-branch rename commands list.
 
@@ -5728,6 +5727,8 @@ Replied to email from Xinru Li in Geog asking for help w/ Python & dask.
 Fri 10-Sep-2021
 ^^^^^^^^^^^^^^^
 
+Drove Susan to UBC for 471 lecture and worked there for the day.
+
 Paired w/ Raisha on Slack to figure out why HydroConstruct is not producing T&S files; turned out that it was segfaulting due to inconsistent values of tstart and tstop; can only process one time range file at a time and tstart/tstop need to be correct for file.
 (Atlantis)
 
@@ -5736,6 +5737,8 @@ Long lunch w/ Birgit.
 Finished work on ERDDAP dataset of month-averaged tracers for stakeholders:
 * crafted ubcSSg3DvGridFields1moV19-05 dataset XML from ubcSSg3DvGridFields1hV19-05 and released it on ERDDAP
 * crafted ubcSSg3DwGridFields1moV19-05 dataset XML from ubcSSg3DwGridFields1hV19-05 and released it on ERDDAP
+(Prediction Core)
+
 Improved metadata comments for gridY, gridX, and time coordinates.
 (ERDDAP)
 
@@ -5834,7 +5837,162 @@ nowcast-green & nowcast-x2 stopped reporting at 14:39:
 (SalishSeaCast)
 
 
+Week 37
+-------
 
+Mon 13-Sep-2021
+^^^^^^^^^^^^^^^
+
+Week 79 of UBC work-from-home due to COVID-19
+
+See work journal.
+(Resilient-C)
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar: introductions & Jose on AMOC collapse in climate models.
+
+
+Tue 14-Sep-2021
+^^^^^^^^^^^^^^^
+
+Drove Susan to UBC for 471 lecture and worked there for the day.
+
+See work journal.
+(Resilient-C)
+
+Started work on EOAS annual performance review.
+
+
+Wed 15-Sep-2021
+^^^^^^^^^^^^^^^
+
+collect_weather 12 didn't complete; investigation:
+* lots of connection refused (111) and at least 1 "expired message skipped" messages in sarracenia log
+* 570 of 576 files downloaded
+* missing files in hours 021 & 022
+* recovery started at ~10:20:
+    pkill collect_weather 12
+    collect_weather 18 2.5km &
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210915/12
+    download_weather 12 2.5km
+* lots of 404 and name resolution failures, then recoveries during download_weather
+* hacked config to use https://hpfx.collab.science.gc.ca/20210915/WXO-DD/ for download_weather; killed and re-ran download_weather 12 2.5km, and it worked and was faster than download_weather usually is, probably due to the connection not being reset after every file
+collect_weather 18 worked fine.
+Removed and re-created kudu salishsea-nowcast env.
+Changed config & download_weather to use https://hpfx.collab.science.gc.ca/{date}/WXO-DD/
+* worked on hpfx-collab branch; rebased and merged work with the PyCharm equivalent of:
+  git switch hpfx-collab
+  git rebase main
+  git switch main
+  git merge hpfx-collab
+Deployed change to skookum.
+(SalishSeaCast)
+
+Coffee w/ Jose.
+
+Onboarding session on Slack w/ Jose.
+(MOAD)
+
+
+Thu 16-Sep-2021
+^^^^^^^^^^^^^^^
+
+Zoom w/ Xinru & Beatrix in Geog re: Python, dask, etc. for MHW analysis of global SST data.
+(Prediction Core)
+
+collect_weather 12 finished ~1h later than usual at ~10:00
+download_live_ocean failed after ~3h; re-ran
+(SalishSeaCast)
+
+Fixed GHA linkcheck workflow in MOAD docs repo by adding www.baeldung.com/cs/ssh-intro to linkcheck ignore list.
+(MOAD)
+
+Weekly team mtg.
+(Atlantis)
+
+Drove Susan to UBC for late afternoon undergrad advising meet & greet.
+
+Continued work on EOAS annual performance review.
+
+
+Fri 17-Sep-2021
+^^^^^^^^^^^^^^^
+
+Drove Susan to UBC for 471 lecture and worked there for the day.
+
+Telcon w/ Josh at Bicicletta re: trainer bikes:
+* only 1 Tacx in stock; not sure of ETA
+* Tacx road-feel feature is not that significant
+* Tacx is more rigid; Kickr feels more like being on a bike
+* no difference in reliability/problems; has happened w/ all and all have been resolved under warranties
+
+Continued work on EOAS annual performance review.
+
+Got Charles to fix numeric user name & no absent $HOME for Jose.
+Changed group of /ocean/jvalenti to sallen, and set g+s permission.
+(MOAD)
+
+
+Sat 18-Sep-2021
+^^^^^^^^^^^^^^^
+
+upload_forcing orcinus failed due to ssh key permissions (probably a login node network stack issue); recovery:
+  upload_forcing orcinus turbidity
+Should have also done nowcast+ because run timed out.
+(SalishSeaCast)
+
+Drove to White Rock to visit J&M.
+
+
+Sun 19-Sep-2021
+^^^^^^^^^^^^^^^
+
+Backfilled nowcast-agrif:
+  upload_forcing orcinus nowcast+ 2021-09-18
+  make_forcing_links orcinus nowcast-agrif 2021-09-18
+  wait for run to finish
+  make_forcing_links orcinus nowcast-agrif 2021-09-19
+(SalishSeaCast)
+
+Worked w/ Susan & Rachael to prepare for running near-BP 30 spill test.
+(MIDOSS)
+
+FAL estate work re: BCE & Manulife:
+Done:
+* Waiver of Probate form
+* Declaration of Transmission for BCE
+* Declaration of Transmission for Manulife
+* Letter of direction for Manulife shares
+* Letter of direction for BCE shares
+* Letter stating the reason for not probating the will
+TODO:
+* copy BCE dividend statement x3
+* copy Manulife dividend statement x3
+After Jamie returns notarized waiver:
+* Make appointment with notary
+* Cheque to Insurance broker for 3.5% of BCE shares value
+* Cheque to Insurance broker for 3.5% of Manulife shares value
+* Cheque to AST for $131.25 ($125 + GST) for BCE shares processing
+* Cheque to AST for $131.25 ($125 + GST) for Manulife shares processing
+* Notarized signature of Waiver of Probate x2
+* 4 notarized copies of death certificate
+* 4 notarized copies of will
+* Courier pkg to AST
+
+* Send to Jamie for notarized signature:
+  * Waiver of Probate form
+* Send to Jamie as supporting information:
+  * Letter of direction for BCE shares
+  * Letter of direction for Manulife shares
+  * Copy of death certificate
+  * Copy of will
+  * Copy of BCE dividend statement
+  * Copy of Manulife dividend statement
+
+Packed up old software and lulu backups optical media.
+Packed up 1998-2003 financial and tax records.
 
 
 
