@@ -1236,7 +1236,7 @@ Phys Ocgy seminar: Kevin Lamb, Waterloo, Internal Waves at low & high lats.
 Tue 9-Mar-2021
 ^^^^^^^^^^^^^^
 
-Worked at ESB while  was at home.
+Worked at ESB while Rita was at home.
 
 Migrated Sphinx docs from SalishSeaCast docs to MOAD docs and updated them.
 (MOAD)
@@ -2390,7 +2390,7 @@ Phys Ocgy seminar.
 Tue 20-Apr-2021
 ^^^^^^^^^^^^^^^
 
-Worked at ESB while  was at home.
+Worked at ESB while Rita was at home.
 
 Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   pkill -f get_NeahBay_ssh  # killed spinning nowcast and forecast instances
@@ -2585,16 +2585,13 @@ Charles shutdown skookum at 13:00 to replace failed drive in /opp array; restart
   download_weather 12 1km
   collect_weather 00 2.5km
 Started work on removing get_NeahBay_ssh worker; need to discuss failure recovery docs w/ Susan.
-Noticed taht download_weather xx 1km worked without --no-verify-certs flag; checked https://dd.alpha.meteo.gc.ca on https://entrust.ssllabs.com/analyze.html and found that it appears to now support TLS 1.1; hacked next_workers.py on skookum to remove --no-verify-certs arg; restarted manager.
+Noticed that download_weather xx 1km worked without --no-verify-certs flag; checked https://dd.alpha.meteo.gc.ca on https://entrust.ssllabs.com/analyze.html and found that it appears to now support TLS 1.1; hacked next_workers.py on skookum to remove --no-verify-certs arg; restarted manager.
 Charles rebooted skookum again at ~19:30; it failed to come up properly.
 (SalishSeaCast)
 
 
 Fri 30-Apr-2021
 ^^^^^^^^^^^^^^^
-
-* silence PIL.PngImagePlugin logging
-* patch for PreRules.am ??
 
 See work journal.
 (Ocean Navigator)
@@ -2662,7 +2659,7 @@ Phys Ocgy seminar.
 Tue 4-May-2021
 ^^^^^^^^^^^^^^
 
-Worked at ESB while  was at home.
+Worked at ESB while Rita was at home.
 
 Created https://github.com/MIDOSS/MIDOSS-MOHID-CODE/issues/9 re: MOHID build problems in graham StdEnv/2020.
 Updated docs & Make-MIDOSS-Forcing and started MOHID-Cmd re: using StdEnv/2016.4.
@@ -2679,6 +2676,7 @@ Added GitHub Actions shpinx-linkcheck workflow to MOHID-Cmd to run on 10th of th
 (MOAD)
 
 nowcast run got stuck at 32.6% complete; no obvious reason; stopped run, killed watch_NEMO, and restarted via make_forcing_links; restart took ~6 minutes for run_NEMO to execute.
+Eventually learned from status page that arbutus was hving file system issues.
 (SalishSeaCast)
 
 
@@ -2838,7 +2836,7 @@ Thu 13-May-2021
 ^^^^^^^^^^^^^^^
 
 Added long missing fvcom-x2-nowcast & fvcom-r12-nowcast options to ping_erddap worker and next_workers module.
-nowcast-agrif failed due to inifiband issue; re-tried successfully.
+nowcast-agrif failed due to infiniband issue; re-tried successfully.
 Continued work on proposal to DFO for funding to replace MEOPAR Prediction Core.
 (SalishSeaCast)
 
@@ -2866,7 +2864,7 @@ Goofed off.
 Sun 16-May-2021
 ^^^^^^^^^^^^^^^
 
-nowcast-agrif failed twice due to inifiband issue.
+nowcast-agrif failed twice due to infiniband issue.
 Continued work on proposal to DFO for funding to replace MEOPAR Prediction Core.
 (SalishSeaCast)
 
@@ -2890,7 +2888,7 @@ Did svn checkout of https://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/branchs/xios
   > Error [void noMemory(void)] : In file '/ocean/dlatorne/MEOPAR/xios-2.5/src/memory.cpp', line 9 -> Out of memory
 like XIOS-2 version did.
 Realized that arbutus VMs are 18.04 and gcc-7.5 (same as salish is now), so NEMO/XIOS issue shouldn't be compiler-related.
-fvcom-nowcast-r12 failed at ~12:00, apparentaly due to fvcom2 VM crashing; restarted VM at ~20:45; re-launched run
+fvcom-nowcast-r12 failed at ~12:00, apparently due to fvcom2 VM crashing; restarted VM at ~20:45; re-launched run
 (SalishSeaCast)
 
 Group mtg; see whiteboard.
@@ -2902,9 +2900,9 @@ Phys Ocgy seminar by Ken Ashley re: Fraser River Estuary.
 Tue 18-May-2021
 ^^^^^^^^^^^^^^^
 
-Worked at ESB while  was at home.
+Worked at ESB while Rita was at home.
 
-Found paper notes about storage drives; photo in Slack #proposal channel; updated 12-May-2021  notes re: DFO proposal planning; assuming that price drop by early 2022 will let us buy 19x18Tb drive instead of 18 in proposal budget.
+Found paper notes about storage drives; photo in Slack #proposal channel; updated 12-May-2021 notes re: DFO proposal planning; assuming that price drop by early 2022 will let us buy 19x18Tb drive instead of 18 in proposal budget.
 Realized that yesterday's test of nowcast-dev didn't use xios-2.5; copied executable into /SalishSeaCast/XIOS-2/bin/; same out of memory failure; played w/ XIOS config in iodef.xml; always same out of memory failure.
 NEMO forecast and nowcast-green runs were very slow.
 (SalishSeaCast)
@@ -3096,7 +3094,7 @@ Sat 29-May-2021
 
 nowcast-blue ran at normal speed, or slightly faster.
 forecast concurrent with nowcast-x2 on 45 cores both ran slow.
-Changed MPI hosts files and on arbutus to run to remove fvcom2 VM from hosts in use because adding it to x2 hosts coincided with slow-down of forecast-x2 yesterday and today's slowness; maybe it root cause of all recent slowness.
+Changed MPI hosts files and on arbutus to run to remove fvcom2 VM from hosts in use because adding it to x2 hosts coincided with slow-down of forecast-x2 yesterday and today's slowness; maybe it is root cause of all recent slowness.
 (SalishSeaCast)
 
 
@@ -3144,7 +3142,7 @@ June
 Tue 1-Jun-2021
 ^^^^^^^^^^^^^^
 
-Work at ESB while  is at home.
+Worked at ESB while Rita is at home.
 
 Slack call w/ Raisha:
 * build and run atlantis on tyee
@@ -3167,12 +3165,12 @@ Worked on nowcast-dev on salish:
 Wed 2-Jun-2021
 ^^^^^^^^^^^^^^
 
-Charles things that salish libnetcdf issue could be due to PPA install of libs in 2014.
+Charles thinks that salish libnetcdf issue could be due to PPA install of libs in 2014.
 Backfilling nowcast-r12:
-wait for 1jun21 run to fail
-launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast --run-date 2021-06-01"
-wait for run to finish
-launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast --run-date 2021-06-02"
+  wait for 1jun21 run to fail
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast --run-date 2021-06-01"
+  wait for run to finish
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast --run-date 2021-06-02"
 (SalishSeaCast)
 
 Squash-merged dependabot PRs re: urllib3 in UBC-MOAD/cookiecutter-analysis-repo, UBC-MOAD/moad_tools, UBC-MOAD/docs, UBC-MOAD/cookiecutter-MOAD-pypkg, MIDOSS/MOHID-Cmd, MIDOSS/Make-MIDOSS-Forcing, MIDOSS/docs
@@ -3265,8 +3263,8 @@ orcinus is accepting connections again; backfilled nowcast-agrif:
 * wait for run to finish
 * upload_forcing orcinus turbidity --run-date 2021-06-07
 Removed option to clone via HTTPS from a couple of repo's docs:
-SalishSeaCast/rpn-to-gemlam
-SalishSeaCast/FVCOM-Cmd
+  SalishSeaCast/rpn-to-gemlam
+  SalishSeaCast/FVCOM-Cmd
 Did git archeology to try to figure out if it is safe to pull SS-run-sets HEAD on arbutus to get rev 656d78d:
 | Author: Susan Allen <sallen@eoas.ubc.ca>
 | Date:   Thu Mar 11 11:10:01 2021 -0800
@@ -3274,10 +3272,10 @@ Did git archeology to try to figure out if it is safe to pull SS-run-sets HEAD o
 |     New file def for production including daily files
 very confusing.
 
-** Discuss w/ Susan how to get nowcast-green day-avg files output into production:
-* cherrypick commit on to PROD-nowcast-green-201905 branch on arbutus
-* pull everything and add new PROD-nowcast-green-201905-v2 tag
-* pull everything and move tag (may not be advisable ???)
+* Prep to discuss w/ Susan how to get nowcast-green day-avg files output into production:
+  * cherrypick commit on to PROD-nowcast-green-201905 branch on arbutus
+  * pull everything and add new PROD-nowcast-green-201905-v2 tag
+  * pull everything and move tag (may not be advisable ???)
 (SalishSeaCast)
 
 Removed option to clone via HTTPS from a couple of repo's docs:
@@ -3378,7 +3376,7 @@ Fri 11-Jun-2021
 Confirmed that tmux session on salish running analysis-doug/notebooks/hindcast-dayavgs/hindcast_dayavgs.py for 2021-01-02 through 2021-06-08 finished successfully.
 (SalishSeaCast)
 
-Reviewed https://linuxize.com/post/getting-started-with-tmux/; goodbase intro to tmux, but no serious details on command mode.
+Reviewed https://linuxize.com/post/getting-started-with-tmux/; good base intro to tmux, but no serious details on command mode.
 
 Prepared to run random-oil-spills w/ Rachael's recent changes on salish:
 * Reviewed Rachael's changes in add-terminal branch of moad_tools re: random-oil-spills; set up moad-tools conda env on salish.
@@ -3426,16 +3424,16 @@ Prepared to test `mohid monte-carlo` on graham with spills from SalishSeaOilSpil
   * hdf5-to-netcdf4 installed
   * MOHID debug output removed by Susan
 * submitted 30 spill run for northern SoG spill chosen by Susan and with glost_job.sh hacked to set ntask-per-node to 32 so we get on the large-by-node queue
-  (MIDOSS)
+(MIDOSS)
   
-  Slack w/ Raisha:
-  * introduced her to tmux
-  * TODO:
-    * headless shiny ? - done 14-Jun
-    * R kernel for Jupyter - done 16-Jun
-    * design AtlantisCmd
-    * think about runs diary feature
-  (Atlantis)
+Slack w/ Raisha:
+* introduced her to tmux
+* TODO:
+  * headless shiny ? - done 14-Jun
+  * R kernel for Jupyter - done 16-Jun
+  * design AtlantisCmd
+  * think about runs diary feature
+(Atlantis)
   
 
 Sat 12-Jun-2021
@@ -3488,31 +3486,31 @@ upload_forcing orcinus nowcast+ failed w/ "private key encrypted" error; that's 
 (SalishSeaCast)
 
 Experimented to try to get shiny ReactiveAtlantis app to run headless on tyee:
-    cd /ocean/dlatorne/Atlantis/
-    git clone git@github.com:Atlantis-Ecosystem-Model/ReactiveAtlantis.git
-    cd /ocean/dlatorne/Atlantis/atlantis-trunk/example/outputFolder/
-    conda activate atlantis-dev
-    R
-    > options(browser = "false")
-    > library("devtools")
-    > install_local("/ocean/dlatorne/Atlantis/ReactiveAtlantis")
-    # lots of compulation; hopefully only required once
-    > library("ReactiveAtlantis")
-    # in example/outputFolder/
-    > biom <- "outputSETASBiomIndx.txt"
-    > diet.file <- "outputSETASDietCheck.txt"
-    > bio.age <- "outputSETASAgeBiomIndx.txt"
-    > grp.csv <- "../SETasGroupsDem.csv"
-    > predation(biom, grp.csv, diet.file, bio.age)
-    Loading required package: shiny
-    
-    Listening on http://127.0.0.1:6155
-    Winning!!! :-)
-    ssh tunnel on kudu between tyee port 6155 and kudu port 4343:
-        ssh -N -L 4343:127.0.0.1:6155 tyee
+  cd /ocean/dlatorne/Atlantis/
+  git clone git@github.com:Atlantis-Ecosystem-Model/ReactiveAtlantis.git
+  cd /ocean/dlatorne/Atlantis/atlantis-trunk/example/outputFolder/
+  conda activate atlantis-dev
+  R
+  > options(browser = "false")
+  > library("devtools")
+  > install_local("/ocean/dlatorne/Atlantis/ReactiveAtlantis")
+  # lots of compulation; hopefully only required once
+  > library("ReactiveAtlantis")
+  # in example/outputFolder/
+  > biom <- "outputSETASBiomIndx.txt"
+  > diet.file <- "outputSETASDietCheck.txt"
+  > bio.age <- "outputSETASAgeBiomIndx.txt"
+  > grp.csv <- "../SETasGroupsDem.csv"
+  > predation(biom, grp.csv, diet.file, bio.age)
+  Loading required package: shiny
+  
+  Listening on http://127.0.0.1:6155
+  Winning!!! :-)
+  ssh tunnel on kudu between tyee port 6155 and kudu port 4343:
+    ssh -N -L 4343:127.0.0.1:6155 tyee
 Refining:
   * control port shiny uses to prevent random selection
-  * handle brawser launch in shiny context instead of R-wide
+  * handle browser launch in shiny context instead of R-wide
   * combine option settings in 1 call
   * use pathed files
     > options(shiny.port=6155, shiny.launch.browser = "false")
@@ -3532,7 +3530,7 @@ Group mtg; see whiteboard.
 Tue 15-Jun-2021
 ^^^^^^^^^^^^^^^
 
-Work at ESB while  is at home.
+Work at ESB while Rita is at home.
 
 forecast2 failed; investigation:
 * fvcom2 node stopped at 2:34 UTC, no user or explanation
@@ -3559,7 +3557,7 @@ collect_weather 12 still running at 09:30; no 12Z files have appeared yet in sar
 Backfilling VHFR nowcast-r12:
 * wait for run to fail
 * launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-15"
-    * started at ~17:00
+  * started at ~17:00
 (SalishSeaCast)
 
 Started exploring R kernel for Jupyter.
@@ -3652,11 +3650,6 @@ collect_weather 18 stalled; investigation:
 Backfilling VHFR nowcast-r12:
 * wait for run to fail
 * launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-16"
-* wait for run to finish
-
-* launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-17"
-* wait for run to finish
-* launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-18"
 (SalishSeaCast)
 
 Started thinking about design of AtlantisCmd, a Atlantis model run command processor based on NEMO-Cmd:
@@ -3807,28 +3800,28 @@ collect_weather 18 stalled; investigation:
 Installed Litematica & MiniHUD client mods via :
 * Stored files in ~/Minecraft/mods/1.17/
 * Downloaded -installer-0.7.4.jar from mc.net, made it executable, and ran it to create new profile
-* Launch minecraft in -1.17 profile; crash complaining about 1.16 mods
+* Launch minecraft in 1.17 profile; crash complaining about 1.16 mods
 * Moved 1.16 mods from ~/.minecraft/mods/ to ~/Minecraft/mods/1.16/
-* Launch minecraft in -1,17 profile; success; shutdown
+* Launch minecraft in 1,17 profile; success; shutdown
 * Downloaded from curseforge.com:
   * malilib--1.17.0-0.10.0-dev.22+beta.1.jar
   * minihud--1.17.0-0.19.0-dev.20210609.185508.jar
   * litematica--1.17.0-0.0.0-dev.20210616.033538.jar
 * Copied 3 mods into ~/.minecraft/mods/
-* Launch minecraft in -1.17 profile
+* Launch minecraft in 1.17 profile
 (Minecraft)
 
 Worked on running hdf5-to-netcdf4 on files in $SCRATCH/MIDOSS/runs/monte-carlo/north_strait_5th362_2021-06-14T150753/results/ that didn't get processesed due to filling node-local scratch storage:
 * all spills <=219 were processesed
-* hit an missing for spills 220 through 306
+* hit and miss for spills 220 through 306
 * no spills >=306 were processesed
 * processing spill 220 on login node took 9m37s
 * need to load python/3.8.2 and nco/4.9.5
 * processing spill 221 in interactive session on gra800 using node-local scratch ($SLURM_TMPDIR) took 10m35s
-    salloc --time=0:30:0 --cpus-per-task=1 --mem-per-cpu=1024m --account=def-allen
-    export RESULTS_FILE=Lagrangian_diesel-221_north_strait_5th362-221
-    cp -v /scratch/dlatorne/MIDOSS/runs/monte-carlo/north_strait_5th362_2021-06-14T150753/results/north_strait_5th362-221/${RESULTS_FILE}.hdf5 $SLURM_TMPDIR/
-    time hdf5-to-netcdf4 -v debug $SLURM_TMPDIR/${RESULTS_FILE}.hdf5 $SLURM_TMPDIR/${RESULTS_FILE}.nc
+  salloc --time=0:30:0 --cpus-per-task=1 --mem-per-cpu=1024m --account=def-allen
+  export RESULTS_FILE=Lagrangian_diesel-221_north_strait_5th362-221
+  cp -v /scratch/dlatorne/MIDOSS/runs/monte-carlo/north_strait_5th362_2021-06-14T150753/results/north_strait_5th362-221/${RESULTS_FILE}.hdf5 $SLURM_TMPDIR/
+  time hdf5-to-netcdf4 -v debug $SLURM_TMPDIR/${RESULTS_FILE}.hdf5 $SLURM_TMPDIR/${RESULTS_FILE}.nc
 Developed a script to process results dirs one at a time; ran for several in sacct sessions.
 (MIDOSS)
 
@@ -3847,7 +3840,7 @@ collect_weather 06 stalled; investigation:
     wait for forecast2 runs to finish
     download_weather 12 2.5km
 Emailed Sandrine; she's on leave, so resent to DPS-Client address.
-Tempoary failuer of /ocean, but resolved itself.
+Tempoary failure of /ocean, but resolved itself.
 Discovered that log aggregator stopped around 11:16; maybe connected with other transient network issues this morning; restarted at ~16:40.
 nowcast-agrif failed, perhaps also due to network issue this morning; re-launched at ~17:10; failed again.
 (SalishSeaCast)
@@ -3878,17 +3871,17 @@ collect_weather 00 stalled; investigation:
     wait for forecast2 runs to finish
     download_weather 12 2.5km
 Retried 22jun nowcast-agrif with a step back to re-upload forcing
-    upload_forcing orcinus nowcast+ --run-date 2021-06-22
-    upload_forcing orcinus turbidity --run-date 2021-06-22
-    run failed after 7 min
+  upload_forcing orcinus nowcast+ --run-date 2021-06-22
+  upload_forcing orcinus turbidity --run-date 2021-06-22
+  run failed after 7 min
 collect_weather 18 & 1km HRDPS downloads worked.
 Email to Jenn re: stalled Fraser River Buoy page; she restarted DMS.
 collect_weather 00 stalled
 * no error messages in sarracenia log
 * 500 of 576 files downloaded; files missing from hours 013-022; no files in 014 and 019
 * recovery:
-  download_weather 06 2.5km
-  collect_weather 18 2.5km
+    download_weather 06 2.5km
+    collect_weather 18 2.5km
 (SalishSeaCast)
 
 Email to Kate Schuler to help her w/ ERDDAP access to vertical diffusivity to analyze in matlab.
@@ -3943,11 +3936,11 @@ collect_weather 18 stalled; investigation:
 * 539 of 576 files downloaded; files missing from hours 015-017, 019-022, 024
 * collect_weather 18 wasn't running; maybe because the skookum session I started it in died?
 * recovery:
-  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210625/18/
-  download_weather 18 2.5km
-  download_weather 00 1km --yesterday
-  download_weather 12 1km
-  collect_weather 00 2.5km
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20210625/18/
+    download_weather 18 2.5km
+    download_weather 00 1km --yesterday
+    download_weather 12 1km
+    collect_weather 00 2.5km
 collect_weather 00 stalled
 * no error messages in sarracenia log
 * 548 of 576 files downloaded; files missing from hours 013, 018-022, 024
@@ -3975,7 +3968,7 @@ collect_weather 06, 12, 18 & 00 worked in automation
 Fixed permissions on post-processing converted netCDF4 files on graham.
 (MIDOSS)
 
-Drove to White Rock top visit M&J.
+Drove to White Rock to visit M&J.
 
 
 Sun 27-Jun-2021
@@ -4044,7 +4037,7 @@ Tue 29-Jun-2021
 
 Heat wave continued, a little cooler.
 
-Work at ESB while  is at home.
+Work at ESB while Rita is at home.
 
 collect_weather 00, 06, 12, 18 worked in automation
 upload_forcing nowcast+ to arbutus failed due to connection error; investigation:
@@ -4085,12 +4078,12 @@ Reviewed Michael's XIOS arch files on graham; no substantial differences from ou
 
 Updated alarm monitoring contacts list; requested assessment for system upgrade.
 
-Called Nanaimo Toyota to request assessment on Prius summer tires; they can ship to Vancouver; assessment: original tires so >10 yrs old (>7 is illegal), 40-50% tread wear, but bad edge wear; not recommended; authorized dealer to send them to recycling.
+Called Nanaimo Toyota to request assessment on Prius summer tires; they can ship to Vancouver; assessment: original tires are >10 yrs old (>7 is illegal), 40-50% tread wear, but bad edge wear; not recommended; authorized dealer to send them to recycling.
 
 rsync-ed $SCRATCH/MIDOSS/runs/monte-carlo/ to $PROJECT/MIDOSS/monte-carlo-results/ to preserve them from $SCRATCH purge policy:
-    rsync -rltv $SCRATCH/MIDOSS/runs/monte-carlo/ $PROJECT/MIDOSS/monte-carlo-results/
+  rsync -rltv $SCRATCH/MIDOSS/runs/monte-carlo/ $PROJECT/MIDOSS/monte-carlo-results/
 That creates ~19.7k files that pushes on our 100k file count quota on $PROJECT.
-Noticed that north_strait_4th122_2021-06-13T143859/results/north_strait_4th122-47/ contains a core dump; divide by zqero.
+Noticed that north_strait_4th122_2021-06-13T143859/results/north_strait_4th122-47/ contains a core dump; divide by zero.
 (MIDOSS)
 
 
@@ -4523,7 +4516,7 @@ Breakout discussion:
 Tue 13-Jul-2021
 ^^^^^^^^^^^^^^^
 
-Worked at ESB while  is at home.
+Worked at ESB while Rita is at home.
 
 Automation worked correctly overnight.
 Continued backfilling VHFR runs:
@@ -5150,7 +5143,7 @@ Tue 10-Aug-2021
 
 Discovered that Prius is dead; maybe starter battery?
 
-Stayed home to teach  how to set new alarm system, then worked at ESB while  is at home.
+Stayed home to teach Rita how to set new alarm system, then worked at ESB while she is at home.
 
 Continued dev of AtlantisCmd; first successful runs of 10d test run.
 (Atlantis)
@@ -5995,20 +5988,278 @@ Packed up old software and lulu backups optical media.
 Packed up 1998-2003 financial and tax records.
 
 
+Week 38
+-------
+
+Mon 20-Sep-2021
+^^^^^^^^^^^^^^^
+
+Week 80 of UBC work-from-home due to COVID-19
+
+Federal election day
+
+Changed Lagrangian_other.dat template to symlink to Lagrangian_bunker.dat instead of diesel.
+Updated repos on graham in prep for running near-BP 1st 30 spills test run:
+* Make-MIDOSS-Forcing
+* MIDOSS-MOHID-config
+* NEMO-Cmd
+* SalishSeaCast-grid
+* moad_tools
+* MIDOSS-MOHID-CODE
+* no changes in:
+  * MIDOSS-MOHID-grid
+  * MOHID-Cmd
+Re-built MIDOSS-MOHID-CODE:
+  module load StdEnv/2016.4
+  module load python/3.8.2
+  module load nco/4.6.6
+  module load netcdf-fortran/4.4.4
+  module load proj4-fortran/1.0
+  cd $PROJECT/$USER/MIDOSS/MIDOSS-MOHID-CODE/Solutions/linux
+  ./compile_mohid.sh -mb1 -mb2 -mw
+Uploaded spill .csv file:
+  rsync -tlv /ocean/sallen/allen/research/MIDOSS/19sep21/SalishSea_oil_spills_BP_first30.csv graham:project/dlatorne/MIDOSS/monte-carlo/
+Created near-BP_first30.yaml.
+Test run:
+  mohid monte-carlo --debug near-BP_first30.yaml SalishSea_oil_spills_BP_first30.csv
+.csv file is messed up; had leading empty column name, and leading row number; edited and submitted test run; succeeded.
+(MIDOSS)
+
+Finished 1st pass on EOAS annual performance review; passed to Susan for review.
+
+Worked on Jose's auth problem on salish.
+Group mtg; see whiteboard.
+(MOAD)
+
+
+Tue 21-Sep-2021
+^^^^^^^^^^^^^^^
+
+Drove Susan to UBC for 471 lecture and worked there for the day.
+
+Updated OS pkgs & kernel on kudu; low memory on boot volume:
+* clean up /var/cache/apt/archives/ with:
+  sudo apt autoclean
+* flatpak cleanup:
+    flatpak update --appstream
+    flatpak update
+    flatpak uninstall --unused
+* deleted a bunch of old kernels with guidance from askubuntu (https://askubuntu.com/questions/345588/what-is-the-safest-way-to-clean-up-boot-partition)
+  uname -r  # in-use kernel - **don't delete**
+  dpkg --list 'linux-image*' | grep ^ii  # installed kernels
+  sudo apt remove linux-image-VERSION  # remove all but in-use and previous kernels
+  sudo apt autoremove  # remove pkgs associated w/ removed kernels
+  # recovered 373 Mb == 57% of /boot
+* clean up PyCharm cache (largest consumer in ~/.cache):
+    File > Invalidate Caches
+    restart Pycharm
+    Help > Delete Leftover IDE Directories  # recovered ~10Gb !! == 10% of $HOME
+
+Finalized EOAS annual performance review; emailed to Philippe.
+
+FAL estate work re: BCE & Manulife:
+Done:
+* Waiver of Probate form
+* Declaration of Transmission for BCE
+* Declaration of Transmission for Manulife
+* Letter of direction for Manulife shares
+* Letter of direction for BCE shares
+* Letter stating the reason for not probating the will
+TODO:
+* copy BCE dividend statement x3
+* copy Manulife dividend statement x3
+* Cover letter
+After Jamie returns notarized waiver:
+* Make appointment with notary
+* Cheque to Insurance broker for 3.5% of BCE shares value
+* Cheque to Insurance broker for 3.5% of Manulife shares value
+* Cheque to AST for $131.25 ($125 + GST) for BCE shares processing
+* Cheque to AST for $131.25 ($125 + GST) for Manulife shares processing
+* Notarized signature of Waiver of Probate x2
+* 4 notarized copies of death certificate
+* 4 notarized copies of will
+* Courier pkg to AST
+
+* Send to Jamie for notarized signature:
+  * Waiver of Probate form
+* Send to Jamie as supporting information:
+  * Letter stating the reason for not probating the will - copied
+  * Letter of direction for BCE shares - copied
+  * Letter of direction for Manulife shares - copied
+  * Copy of death certificate - copied
+  * Copy of will - copied
+  * Copy of BCE dividend statement - copied
+  * Copy of Manulife dividend statement
+
+Resumed work on trying to get a working build of nowcast-dev on salish:
+* studied OS pkgs (gfortran, gcc, libnetcdf, libnetcdff, openmpi, hdf) and their configs
+* tweaked NETCDF_LIB in XIOS arch; build XIOS
+* compared `ldd xios_server.exe` between salish & arbutus builds; identical
+* tweaked NCDF_LIB NEMO arch; built SalishSeaCast_Blue
+* compared `ldd nemo.exe` between salish & arbutus builds; identical
+* changed mpirun option from `--bind-to core` to `--bind-to none`
+* added mpirun options from arbutus
+* started increasing pmem from 2000mb, and got time steps at pmem=15000mb; the torque version in 18.04 is evidently policing memory differently and more strictly than it did in 14.04
+* to be continued...
+
+Replied to Raisha's question about lists of forcing files in AtlantisCmd YAML; new feature that I started thinking about after last week's mtg discussion.
+(Atlantis)
+
+
+Wed 22-Sep-2021
+^^^^^^^^^^^^^^^
+
+Fixed column 0 issue in 19sep21 random spills .csv file.
+Collected next 500 spills into /data/dlatorne/MIDOSS/random-oil-spills/19sep21_near-BP/SalishSea_oil_spills_BP_2nd500.csv.
+Uploaded spill .csv file:
+  rsync -tlv /data/dlatorne/MIDOSS/random-oil-spills/19sep21_near-BP/SalishSea_oil_spills_BP_2nd500.csv graham:project/dlatorne/MIDOSS/monte-carlo/
+Created near-BP_2nd-500.yaml and submitted run:
+  mohid monte-carlo --debug near-BP_2nd-500.yaml SalishSea_oil_spills_BP_2nd-500.csv
+Reservation is presently 2021-09-29T19:09:22.
+(MIDOSS)
+
+Drove Susan to VGH for stitches out.
+
+Reviewed `mpirun mpirun --mca` and `--bind-to` options; for salish I think we want:
+  --mca btl ^openib,tcp --mca orte_tmpdir_base /dev/shm --bind-to core
+or maybe --bind-to numa
+Experimented via `salishsea run --no-submit` in /SalishSeaCast/runs/ using 23apr21nowcast-dev.yaml and setup via:
+  make_forcing_links salish --shared-storage 2021-04-23
+Changed `#PBS -l pmem=2000mb` to `#PBS -l mem=128gb`.
+Test with:
+  #PBS -l mem=128gb
+  --mca btl ^openib,tcp --mca orte_tmpdir_base /dev/shm --bind-to core
+  * nemos at ~6gb
+  * xios at ~15.5gb; never went above 16gb on top
+  * run didn't finish properly due to no ~/.local/bin/salishsea
+  * 3h11m
+Test with:
+  #PBS -l mem=64gb
+  mpirun --mca btl ^openib,tcp --mca orte_tmpdir_base /dev/shm --bind-to numa
+  * nemos at ~6gb
+  * xios at ~15.5gb
+  * run finished properly
+  * 3h27m
+  * --bind-to core is better than numa
+(SalishSeaCast)
+
+
+Thu 23-Sep-2021
+^^^^^^^^^^^^^^^
+
+Ran make_plots nemo nowcast comparison 2021-04-23 to confirm that nowcast-dev run produces processable results.
+Added logging config to limit PIL.PngImagePlugin to warning level.
+Continued nowcast-dev tests:
+* checked run time for nowcast-dev/22apr21 for comparison to present tests: 3h22m
+* Test 24apr21 with:
+    #PBS -l mem=64gb
+    mpirun --mca btl ^openib,tcp --bind-to core
+  * much chaos getting restart and namelist.time edited correctly
+  * run finished properly
+  * 3h12m
+  * --mca orte_tmpdir_base /dev/shm has minimal effect
+(SalishSeaCast)
+
+Created near-BP_2nd-500.yaml and submitted run:
+  mohid monte-carlo --debug near-BP_2nd-500.yaml SalishSea_oil_spills_BP_2nd-500.csv
+(MIDOSS)
+
+Kickr Bike trainers delivered.
+
+Weekly project mtg.
+(Atlantis)
+
+
+Fri 24-Sep-2021
+^^^^^^^^^^^^^^^
+
+Created near-BP.yaml and submitted next 100 spills run:
+  mohid monte-carlo --debug near-BP.yaml SalishSea_oil_spills_BP_4th-100.csv
+(MIDOSS)
+
+Changed PIL logging level from DEBUG to WARNING to uninformative silence PIL.PngImagePlugin messages.
+nowcast-blue stopped reporting after 09:13:55:
+* web dashboard shows that nowcast0 and nowcast6 stopped again for no reason at 16:14 UTC == 09:14
+* recovery:
+  * restarted nowcast0 and nowcast6 from web dashboard at 20:14 UTC == 13:14 Pacific
+    * nowcast0:
+        sudo apt update
+        sudo apt upgrade
+        sudo shutdown -r now
+        sudo mount /dev/vdc /nemoShare
+        ll /nemoShare/MEOPAR/  # to confirm mount
+        sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+        ll /export/MEOPAR  # to confirm mount
+        sudo systemctl start nfs-kernel-server.service
+        sudo exportfs -f  # to reset NFS handles for compute nodes
+    * nowcast6:
+        sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR
+    * nowcast0:
+      # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -C /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -C /nemoShare/MEOPAR"; done
+  * replaced nowcast6 with nowcast2 in mpi_hosts because it appears that nowcast0 and nowcast6 are on the same hypervisor (maybe hardware)
+  * on skookum:
+      # killed stalled processes
+      # restarted log_aggregator
+      make_forcing_links arbutus nowcast+
+(SalishSeaCast)
+
+Merit review mtg w/ Philippe.
+
+
+Sat 25-Sep-2021
+^^^^^^^^^^^^^^^
+
+Continued nowcast-dev tests:
+Test with:
+  #PBS -l mem=64gb
+  mpirun --mca orte_tmpdir_base /dev/shm --bind-to core
+  * eta 15:40
+  * run finished properly
+  * 3h12m
+  * --mca btl ^openib,tcp has no effect
+Test with:
+  #PBS -l mem=64gb
+  mpirun --bind-to none
+  * eta 19:15
+  * run finished properly
+  * 3h10m
+  * --bind-to none is marginally better than core
+(SalishSeaCast)
+
+100 spills job ran overnight.
+Prepared and submitted 12 more 100 spill jobs:
+  for grp in {5..16}; do head -1 SalishSea_oil_spills-fixed-col0.csv > SalishSea_oil_spills_BP_${grp}th-100.csv; done
+  starts=(9 10 11 12 13 14 15 16 17 18 19 20); grps=(5 6 7 8 9 10 11 12 13 14 15 16); for i in "${!grps[@]}"; do head -${starts[$i]}31 SalishSea_oil_spills-fixed-col0.csv | tail -100 >>SalishSea_oil_spills_BP_${grps[$i]}th-100.csv; done
+  for grp in {5..16}; do sed -i "s/near-BP_.*th-100/near-BP_${grp}th-100/" near-BP.yaml && mohid monte-carlo --debug near-BP.yaml SalishSea_oil_spills_BP_${grp}th-100.csv; done
+(MIDOSS)
+
+
+Sun 26-Sep-2021
+^^^^^^^^^^^^^^^
+
+Added CodeQL analysis GHA workflow to SalishSeaNowcast.
+(SalishSeaCast)
+
+Discussed w/ Susan running Monte Carlo on cedar to get better priority.
+(MIDOSS)
+
+
 
 TODO:
 * figure out how to merge/cherrypick relevant changes from Rachael's add_terminal branch in moad_tools
 
-Fix ariane docs.
+Fix ariane docs:
+* maybe re:  adding a bin-like directory to prefix gets rid of errors from doc/ and examples/ that confused Becca ???
 
-* silence PIL.PngImagePlugin logging
 * patch for PreRules.am ??
 
 
 Backfill nowcast-dev:
 
-make_forcing_links salish nowcast+ --shared-storage 2021-04-23
-make_forcing_links salish nowcast+ --shared-storage 2021-04-24
 make_forcing_links salish nowcast+ --shared-storage 2021-04-25
 make_forcing_links salish nowcast+ --shared-storage 2021-04-26
 make_forcing_links salish nowcast+ --shared-storage 2021-04-27
