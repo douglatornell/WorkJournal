@@ -4194,7 +4194,7 @@ Reviewed UBC/CSIRO contract re: copyright and licence of project IP; copyright i
 Tue 6-Jul-2021
 ^^^^^^^^^^^^^^
 
-Submitted PWGSC quarterly usage report for 43ravens supply arrangement.
+Submitted PWGSC ProServices quarterly usage report for 43ravens supply arrangement.
 
 Coffee w/ Ben.
 
@@ -6065,9 +6065,9 @@ Done:
 * Letter of direction for Manulife shares
 * Letter of direction for BCE shares
 * Letter stating the reason for not probating the will
-TODO:
 * copy BCE dividend statement x3
 * copy Manulife dividend statement x3
+TODO:
 * Cover letter
 After Jamie returns notarized waiver:
 * Make appointment with notary
@@ -6248,8 +6248,164 @@ Discussed w/ Susan running Monte Carlo on cedar to get better priority.
 (MIDOSS)
 
 
+Week 39
+-------
+
+Mon 27-Sep-2021
+^^^^^^^^^^^^^^^
+
+Week 81 of UBC work-from-home due to COVID-19
+
+5 x 100 spills running on graham.
+(MIDOSS)
+
+Teams mtg w/ Derek White at Port of Vancouver:
+* ECHO program to protect SRKWs (southern resident killer whales)
+* collab w/ BC pilots
+* model to correct speed over ground to speed through water based on webtide; poor agreement; want to use SalishSeaCast
+(Prediction Core)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Added GHA CodeQL analysis workflow to SalishSeaCmd repo.
+Tracked down `DeprecationWarning: EntryPoint tuple interface is deprecated. Access members by name.` in SalishSeaCmd tests to a change introduced in importlib=4.8.1 that stevedore=3.4.0 doesn't handle.
+Updated SalishSeaCmd to use mem=64gb and --bind-to none on salish re: Ubuntu 18.04.
+Ran nowcast-dev/27apr21 via updated SalishSeaCmd
+Updated SalishSeaNowcast re: SalishSeaCmd changes.
+Created nowcast-dev/27sep21/ directory containing namelist_cfg and restart.nc from nowcast-blue/27sep21/ so that nowcast-dev should run in automation tomorrow.
+(SalishSeaCast)
+
+FAL estate work re: BCE & Manulife:
+* sent AST waiver form to Jamie for notarized signature
+
+Reviewed and signed merit review from from Philippe.
+
+
+Tue 28-Sep-2021
+^^^^^^^^^^^^^^^
+
+Copied Raisha's 2007-2021 hydro, salt & temp forcing file to ~/public_html/Atlantis/, gzip compressed them, and sent email to Javier that they are available for him ot download.
+(Atlantis)
+
+Tried to start setting up for Monte Carlo runs on cedar but got blocked by cedar auth failure; email to support got response from Venkat! :-)  resolved at 12:40.
+
+(MIDOSS)
+
+nowcast-dev ran via automation using restart from nowcast-blue.201905/27sep21/ :-)
+(SalishSeaCast)
+
+
+Wed 29-Sep-2021
+^^^^^^^^^^^^^^^
+
+near-BP_10th-100 started
+Accidentally deleted part of $SCRATCH/MIDOSS/runs/monte-carlo/near-BP_1st-30_2021-09-20T144849/results/
+Started set up to run Monte Carlo on cdear:
+* created /home/dlatorne/project/dlatorne/MIDOSS/monte-carlo/
+* confirmed that $PROJECT/SalishSea/forcing/SalishSea/hindcast.201905/ contains expected 4*365+1=1461 (because 2016 was a leap year) dirs for 2015-2018
+    `find $PROJECT/SalishSea/forcing/SalishSea/hindcast.201905/ -type d -name *1[5-8] | wc -l`
+  but at least some ownership is vdo, and some dirs are not group readable
+    find $PROJECT/SalishSea/forcing/SalishSea/hindcast.201905/ -type f -wholename *1[5-8]/SalishSea_1h*grid_T.nc | wc -l
+* found that there are only ~246 `grid_*.nc` files in that tree though; e.g.
+    `find $PROJECT/SalishSea/forcing/SalishSea/hindcast.201905/ -type f -wholename *1[5-8]/SalishSea_1h*grid_T.nc | wc -l`
+  shows 246 files; decided to create new $PROJECT/MIDOSS/forcing/nowcast-green.201905/ to match graham
+    `cd /results2/SalishSea/nowcast-green.201905/`
+    `rsync -rltv --include=*1[5-8] --include=SalishSea_1h_*grid_*.nc --include=SalishSea_1h_*carp_T.nc --exclude=* *1[5-8] cedar:project/MIDOSS/forcing/nowcast-green.201905/`
+* confirmed that $PROJECT/SalishSea/forcing/atmospheric/GEM2.5/operational/ contains expected 1461 ops_y201[5-8]*.nc files and ownership/permissions are good
+    `find $PROJECT/SalishSea/forcing/atmospheric/GEM2.5/operational/ -maxdepth 1  -type f -name "ops_y201[5-8]*.nc" | wc -l`
+* it appears that the only complete 2015-2018 collection of wwatch3 fields we have is in graham:$PROJECT/MIDOSS/forcing/wwatch3/
+* created $PROJECT/MIDOSS/forcing/wwatch3/ and rsync-ed files from graham
+    `rsync -rltv --include=*1[5-8] --include=SoG_ww3_fields_*.nc --exclude=* $PROJECT/MIDOSS/forcing/wwatch3/ cedar:project/MIDOSS/forcing/wwatch3/`
+* wwatch3 rsync hit disk quota exceeded; cleaned out lots of hg repo clones, but it wasn't enough
+Worked on Rachael's problem w/ xarray.open_dataset() in new vnev on graham; turns out that netCDF4 wheel in Compute Canada wheelhouse is incompatible w/ xarray=0.19.0; maybe due to openmpi in stdenv?; got a working env by swapping h5netcdf for netCDF4.
+(MIDOSS)
+
+
+Thu 30-Sep-2021
+^^^^^^^^^^^^^^^
+
+*Statutory Holiday** - Reconcilliation Day
+
+Prepared and submitted 10 more 100 spill jobs on graham:
+  for grp in {17..26}; do head -1 SalishSea_oil_spills-fixed-col0.csv > SalishSea_oil_spills_BP_${grp}th-100.csv; done
+  starts=(21 22 23 24 25 26 27 28 29 30); grps=(17 18 19 20 21 22 23 24 25 26); for i in "${!grps[@]}"; do head -${starts[$i]}31 SalishSea_oil_spills-fixed-col0.csv | tail -100 >>SalishSea_oil_spills_BP_${grps[$i]}th-100.csv; done
+  for grp in {17..26}; do sed -i "s/near-BP_.*th-100/near-BP_${grp}th-100/" near-BP.yaml && mohid monte-carlo --debug near-BP.yaml SalishSea_oil_spills_BP_${grp}th-100.csv; done
+Susan came up with:
+  ls -ltrd $SCRATCH/MIDOSS/runs/monte-carlo/*/near-BP_*
+to find spill runs that don't complete due to GLOST job timeout; presently yields 4 spills:
+  drwxr-s--- 3 dlatorne def-allen 41472 Sep 25 05:38 /scratch/dlatorne/MIDOSS/runs/monte-carlo/near-BP_4th-100_2021-09-24T125848/near-BP_4th-100-94/
+  drwxr-s--- 3 dlatorne def-allen 41472 Sep 25 05:58 /scratch/dlatorne/MIDOSS/runs/monte-carlo/near-BP_4th-100_2021-09-24T125848/near-BP_4th-100-96/
+  drwxr-s--- 3 dlatorne def-allen 41472 Sep 25 06:20 /scratch/dlatorne/MIDOSS/runs/monte-carlo/near-BP_4th-100_2021-09-24T125848/near-BP_4th-100-99/
+  drwxr-s--- 3 dlatorne def-allen 41472 Sep 25 11:18 /scratch/dlatorne/MIDOSS/runs/monte-carlo/near-BP_4th-100_2021-09-24T125848/near-BP_4th-100-92/
+  d
+Evaluated extent of accidentally deleted result files in xxx:
+  * spills: 0 3 4 9 11 16 23 24 27 29
+Continued set up to run Monte Carlo on cedar:
+* Checked storage on graham:
+  * du -sh $PROJECT/MIDOSS/forcing/wwatch3/: 331G
+  * du -sh $PROJECT/MIDOSS/forcing/nowcast-green.201905/: 3.8T
+  * du -sh $PROJECT/SalishSea/forcing/atmospheric/GEM2.5/operational/: 57G
+  So, not enough storage on cedar:$PROJECT for wwatch3 and nowcast-green; will have to use $SCRATCH and plan to restore files deleted by 60d purge policy monthly after 15-Dec (if necessary).
+* removed $PROJECT/MIDOSS/forcing/wwatch3/
+* created $SCRATCH/MIDOSS/forcing/monte-carlo/wwatch3/ and rsync-ed files from graham in tmux sesion:
+    `rsync -rltv --include=*1[5-8] --include=SoG_ww3_fields_*.nc --exclude=* $PROJECT/MIDOSS/forcing/wwatch3/ cedar:/scratch/dlatorne/MIDOSS/forcing/monte-carlo/wwatch3/`
+* created $SCRATCH/MIDOSS/forcing/monte-carlo/nowcast-green.201905/ and rsync-ed files from skookum in tmux sesion:
+    `rsync -rltv --include=*1[5-8] --include=SalishSea_1h_*grid_*.nc --include=SalishSea_1h_*carp_T.nc --exclude=* /results2/SalishSea/nowcast-green.201905/ cedar:/scratch/dlatorne/MIDOSS/forcing/monte-carlo/nowcast-green.201905/`
+(MIDOSS)
+
+
+October
+=======
+
+Fri 1-Oct-2021
+^^^^^^^^^^^^^^
+
+Prepared and submitted 10 more 100 spill jobs on graham:
+  for grp in {27..36}; do head -1 SalishSea_oil_spills-fixed-col0.csv > SalishSea_oil_spills_BP_${grp}th-100.csv; done
+  starts=(31 32 33 34 35 36 37 38 39 40); grps=(27 28 29 30 31 32 33 34 35 36); for i in "${!grps[@]}"; do head -${starts[$i]}31 SalishSea_oil_spills-fixed-col0.csv | tail -100 >>SalishSea_oil_spills_BP_${grps[$i]}th-100.csv; done
+  for grp in {27..36}; do sed -i "s/near-BP_.*th-100/near-BP_${grp}th-100/" near-BP.yaml && mohid monte-carlo --debug near-BP.yaml SalishSea_oil_spills_BP_${grp}th-100.csv; done
+Confirmed completion of rsyncs of forcing to $SCRATCH on cedar; agreed w/ Susan to put cedar deployment on hold because runs are progressing well on graham (4-6 x 100 spills at a time now).
+(MIDOSS)
+
+
+Sat 2-Oct-2021
+^^^^^^^^^^^^^^
+
+Prepared and submitted 10 more 100 spill jobs on graham:
+  for grp in {37..46}; do head -1 SalishSea_oil_spills-fixed-col0.csv > SalishSea_oil_spills_BP_${grp}th-100.csv; done
+  starts=( $(seq 41 50) ); grps=( $(seq 37 46) ); for i in "${!grps[@]}"; do head -${starts[$i]}31 SalishSea_oil_spills-fixed-col0.csv | tail -100 >>SalishSea_oil_spills_BP_${grps[$i]}th-100.csv; done
+  for grp in {37..46}; do sed -i "s/near-BP_.*th-100/near-BP_${grp}th-100/" near-BP.yaml && mohid monte-carlo --debug near-BP.yaml SalishSea_oil_spills_BP_${grp}th-100.csv; done
+Replaced near-BP_2nd-500 job with 5x100 jobs:
+  for grp in {2000..2004}; do head -1 SalishSea_oil_spills-fixed-col0.csv > SalishSea_oil_spills_BP_${grp}th-100.csv; done
+  starts=( $(seq 1 5) ); grps=( $(seq 2000 2004) ); for i in "${!grps[@]}"; do head -${starts[$i]}31 SalishSea_oil_spills-fixed-col0.csv | tail -100 >>SalishSea_oil_spills_BP_${grps[$i]}th-100.csv; done
+  for grp in {2000..2004}; do sed -i "s/near-BP_.*th-100/near-BP_${grp}th-100/" near-BP.yaml && mohid monte-carlo --debug near-BP.yaml SalishSea_oil_spills_BP_${grp}th-100.csv; done
+(MIDOSS)
+
+Took old skis, lawn chairs, vacuum cleaner, etc. and Wahoo Bikes card board to recycling centre.
+
+Drove to White Rock to visit J&M.
+
+
+Sun 3-Oct-2021
+^^^^^^^^^^^^^^
+
+Prepared and submitted 20 more 100 spill jobs on graham:
+  for grp in {47..66}; do head -1 SalishSea_oil_spills-fixed-col0.csv > SalishSea_oil_spills_BP_${grp}th-100.csv; done
+  starts=( $(seq 51 70) ); grps=( $(seq 47 66) ); for i in "${!grps[@]}"; do head -${starts[$i]}31 SalishSea_oil_spills-fixed-col0.csv | tail -100 >>SalishSea_oil_spills_BP_${grps[$i]}th-100.csv; done
+  for grp in {47..66}; do sed -i "s/near-BP_.*th-100/near-BP_${grp}th-100/" near-BP.yaml && mohid monte-carlo --debug near-BP.yaml SalishSea_oil_spills_BP_${grp}th-100.csv; done
+(MIDOSS)
+
+Cycled River Rd Out & Back route really strongly; new 40 km PR (48 km)
+
+
+
 
 TODO:
+* re-run spills:
+  * 1st-30: 0 3 4 9 11 16 23 24 27 29
+  * 4th-100: 92 94 96 99
+
 * figure out how to merge/cherrypick relevant changes from Rachael's add_terminal branch in moad_tools
 
 Fix ariane docs:
