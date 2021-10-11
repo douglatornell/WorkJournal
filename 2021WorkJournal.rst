@@ -1604,7 +1604,7 @@ Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
 Discussed priorities w/ Susan:
 1. ONC ferry dataset description update to add NEMO gird indices on ERDDAP
 2. Continue sorting out pandas/xarray datetime type issue re: CHS water levels, and other things?
-3. Continue graham migration to StdEnv2020:
+3. Continue graham migration to StdEnv/2020:
    * test run SalishSeaCast on graham
    * Birgit & Ben will likely stay on StdEnv2016 for present work; change by summer
    * change NEMO-Cmd & SalishSeaCmd from master to main
@@ -1725,7 +1725,7 @@ Managed get_NeahBay_ssh issue in automation; after nowcast-blue completion:
   upload_forcing orcinus nowcast+
   upload_forcing graham nowcast+
   upload_forcing optimum nowcast+
-Test run of SalishSeaCast nowcast-green on graham in StdEnv2020:
+Test run of SalishSeaCast nowcast-green on graham in StdEnv/2020:
 * used builds from 23-Mar; XIOS-ARCH cc-stdenv-2020 branch
 * pulled in changes:
   * grid
@@ -6289,7 +6289,6 @@ Copied Raisha's 2007-2021 hydro, salt & temp forcing file to ~/public_html/Atlan
 (Atlantis)
 
 Tried to start setting up for Monte Carlo runs on cedar but got blocked by cedar auth failure; email to support got response from Venkat! :-)  resolved at 12:40.
-
 (MIDOSS)
 
 nowcast-dev ran via automation using restart from nowcast-blue.201905/27sep21/ :-)
@@ -6399,6 +6398,177 @@ Prepared and submitted 20 more 100 spill jobs on graham:
 Cycled River Rd Out & Back route really strongly; new 40 km PR (48 km)
 
 
+Week 40
+-------
+
+Mon 4-Oct-2021
+^^^^^^^^^^^^^^
+
+Week 82 of UBC work-from-home due to COVID-19
+
+Resumed work on getting phpgedview set up on OpalStack; see webfaction-opalstack-migration.md
+
+Python 3.10 release party on Youtube:
+* live release process w/ feature talks interspersed
+* CI runs on buildbot
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar: Patrick Pata on BC coastal zooplanton provinces
+
+
+Tue 5-Oct-2021
+^^^^^^^^^^^^^^
+
+Work at UBC while Rita is at home.
+
+`download_results forecast2`, `update_forecast_datasets wwatch3 forecast2`, and subsequent workers failed due to /results full; recovery started at 11:15:
+* delete /results/SalishSea/forecast2.201905/ 16feb20/ through 31mar21/ that Susan has archived; freed 1.1T
+* update_forecast_datasets wwatch3 forecast2
+* download_results forecast2 --run-date-2021-10-04
+* rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20211005/12
+* pkill -f collect_weather 12 2.5km
+* collect_weather 18 2.5km &
+* download_weather 12 2.5km
+* delete /results/SalishSea/nowcast-agrif.201702/ 01apr21/ through 30sep21/ that Susan has archived; freed 0.4T more for total of 1.5T
+Updated Trello Results Archive board w/ forecast2.201905 deletions and disk use details.
+Started building tarballs of GEMLAM files for archival storage on graham:/nearline/ so that we can free space on /opp/ (which is down to 1.4T free, and GEMLAM/ is using 11T):
+  tar -cvvf /opp/GEMLAM/2007.tar /opp/GEMLAM/2007/ | tee GEMLAM_2007.index
+Reviewed plans for splitting tools repo from 2-Feb-2021, and experiment with git-filter-repo tool on Marlin package from 15-Mar-2021.
+(SalishSeaCast)
+
+Reviewed our Python packaging docs and setuptools docs re: evolution:
+* entry points can now be included in setup.cfg, but need to experiment to see if cliff-style entry point declarations are supported, for if it is just console_scripts
+* minimal setup.py is still required for pip install -e to work; need to experiment to see if presence of pyproject.toml is still incompatible with editable installs
+(MOAD)
+
+
+Wed 6-Oct-2021
+^^^^^^^^^^^^^^
+
+SHARCNET META webinar:
+* Sergey Mashchenko, McMaster
+* alternative to:
+  * bash loop: heavy scheduler load
+  * SLURM job array: less typing, but same heavy scheduler load
+  * GLOST: reduced scheduler load, but big queue wait time
+* optimum solution to above: a few "meta-jobs", low scheduler load, reasonable queue wait time
+* applications include Monte Carlo: "serial farming of workloads"
+* dynamic workload balancing across meta-jobs
+* more flexible than GLOST
+* uses serialized queue based on OS lockfile command for sync instead of MPI in GLOST
+* convenient re-submit feature: re-submit just failed workloads
+* meta-jobs analyze runtimes of individual workloads to improve efficiency; probablistic estimator based on 12.5% quantile after 8 workloads completed
+* 2 modes:
+  * META mode
+  * simple for 1 job per code exec; to get re-submit feature
+* can be used for any kind of workload: serial, multi-thread, MPI, GPU
+* sub-commands:
+  * submit.run
+  * resubmit.run
+  * list.run
+  * query.run
+  * kill.run
+  * prune.run
+  * status.run
+  * clean.run
+* META commands executed inside farm directories
+* install from https://git.sharcnet.ca/syam/META
+* docs: https://docs.computecanada.ca/wiki/META_package_for_serial_farming
+* appears to be written in bash!!!
+* single_case.sh controls execution; length of table.dat controls number of workloads to execute
+
+Confirmed that Python 3.10.0 is available from conda-forge.
+
+Built new salishsea-nowcat env on kudu to get upgrade from pillow=8.2.0 to pillow=8.3.2 re: dependabot PR#80; squash-merged PR, and updated requirements.txt.
+rsync of GEMLAM/2007 tarball and index in tmux session on salish failed due to broken pipe; re-tried.
+Resumed work on getting XIOS & NEMO to work under StdEnv/2020 on graham (ref 23-Mar-2021):
+* updated repos
+* did clean build of XIOS-2, SalishSeaCast NEMO config, REBUILD_NEMO
+* test-9 failed w/ errors in ocean.output
+(SalishSeaCast)
+
+Experimented w/ pyproject.toml, no setup.py, and python3 -m pip install -e . in SalishSeaNowcast pkg, and it appears to work!
+Updated SalishSeaNowcast to drop setup.py and add pyproject.toml; also added check-toml to pre-commit hooks.
+(MOAD)
+
+
+Thu 7-Oct-2021
+^^^^^^^^^^^^^^
+
+Prepared and submitted 20 more 100 spill jobs on graham:
+  for grp in {67..86}; do head -1 SalishSea_oil_spills-fixed-col0.csv > SalishSea_oil_spills_BP_${grp}th-100.csv; done
+  starts=( $(seq 71 90) ); grps=( $(seq 67 86) ); for i in "${!grps[@]}"; do head -${starts[$i]}31 SalishSea_oil_spills-fixed-col0.csv | tail -100 >>SalishSea_oil_spills_BP_${grps[$i]}th-100.csv; done
+  for grp in {67..86}; do sed -i "s/near-BP_.*th-100/near-BP_${grp}th-100/" near-BP.yaml && mohid monte-carlo --debug near-BP.yaml SalishSea_oil_spills_BP_${grp}th-100.csv; done
+(MIDOSS)
+
+rsync of GEMLAM/2007 tarball and index in tmux session on salish failed again due to broken pipe; successfully rsync-ed index alone to confirm opeations; re-tried tarball again, this time with --progress and --partial.
+(SalishSeaCast)
+
+Coffee and debugging OceanParcels for Atlantis w/ Raisha.
+
+Helped Raisha debug reading HRDPS winds into OceanParcels.
+Emailed Javier re: forcing fields xfer; send file lengths & sha1 checksums to try to confirm xfer integrity.
+(Atlantis)
+
+EOAS symposium: data science - right answers for the right reasons?
+
+
+Fri 8-Oct-2021
+^^^^^^^^^^^^^^
+
+Helped Becca w/ her re-tiding of day average fields workflow re: vectorization and dask.
+(MOAD)
+
+Drove to Squamish.
+
+
+Sat 9-Oct-2021
+^^^^^^^^^^^^^^
+
+Squamish
+
+forecast2 and nowcast did not start due to missing 08sep21 Neah ay ssh file; recovery:
+* Susan discovered that obs are missing since 04:00 08oct10 so building sshNeahBay/obs/ssh_y2021m10d08.nc is hard
+* symlinked fcst/ssh_y2021m10d08.nc as obs/ssh_y2021m10d08.nc
+    upload_forcing arbutus forecast2
+    upload_forcing orcinus forecast2
+    upload_forcing graham forecast2
+    upload_forcing optimum forecast2
+    wait for runs to finish
+    upload_forcing arbutus nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing graham nowcast+
+    upload_forcing optimum nowcast+
+rsync of GEMLAM/2007 tarball and index in tmux session on salish failed again due to broken pipe; changed to rsync 2007/ to $SCRATCH with --partial-dir option for better restart performance.
+(SalishSeaCast)
+
+Walked a loop on trails from Coho Park trailhead.
+
+Created douglatornell/cliff-structlog-expt pkg to explore several things:
+* Using VSCode from scratch for Python dev
+  * initialized git repo in code and published it to personal GitHub account
+* using envs/requirements.txt instead of top level of repo
+  * GitHub's dependency tool found it!
+
+
+Sun 10-Oct-2021
+^^^^^^^^^^^^^^^
+
+Squamish
+
+Cycled Squamish River Rd to ~10km beyond end of pavement (~2km beyond High Falls Rec Area - out lunch stop) (71 km)
+
+
+TODO:
+* Python packaging docs and pkg cookiecutters updates:
+  * change to nodefaults in conda channels list
+  * move requirements.txt to envs/
+  * add .gitignore ???
+  * add .pre-commit-config.yaml; include pre-commit in environment-dev.yaml
+  * add pyproject.toml
+
 
 
 TODO:
@@ -6412,19 +6582,6 @@ Fix ariane docs:
 * maybe re:  adding a bin-like directory to prefix gets rid of errors from doc/ and examples/ that confused Becca ???
 
 * patch for PreRules.am ??
-
-
-Backfill nowcast-dev:
-
-make_forcing_links salish nowcast+ --shared-storage 2021-04-25
-make_forcing_links salish nowcast+ --shared-storage 2021-04-26
-make_forcing_links salish nowcast+ --shared-storage 2021-04-27
-make_forcing_links salish nowcast+ --shared-storage 2021-04-28
-make_forcing_links salish nowcast+ --shared-storage 2021-04-29
-make_forcing_links salish nowcast+ --shared-storage 2021-04-30
-make_forcing_links salish nowcast+ --shared-storage 2021-05-01
-make_forcing_links salish nowcast+ --shared-storage 2021-05-02
-make_forcing_links salish nowcast+ --shared-storage 2021-05-03
 
 
 
