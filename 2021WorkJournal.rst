@@ -6483,11 +6483,13 @@ Confirmed that Python 3.10.0 is available from conda-forge.
 
 Built new salishsea-nowcat env on kudu to get upgrade from pillow=8.2.0 to pillow=8.3.2 re: dependabot PR#80; squash-merged PR, and updated requirements.txt.
 rsync of GEMLAM/2007 tarball and index in tmux session on salish failed due to broken pipe; re-tried.
+(SalishSeaCast)
+
 Resumed work on getting XIOS & NEMO to work under StdEnv/2020 on graham (ref 23-Mar-2021):
 * updated repos
 * did clean build of XIOS-2, SalishSeaCast NEMO config, REBUILD_NEMO
 * test-9 failed w/ errors in ocean.output
-(SalishSeaCast)
+(NEMO)
 
 Experimented w/ pyproject.toml, no setup.py, and python3 -m pip install -e . in SalishSeaNowcast pkg, and it appears to work!
 Updated SalishSeaNowcast to drop setup.py and add pyproject.toml; also added check-toml to pre-commit hooks.
@@ -6551,6 +6553,8 @@ Created douglatornell/cliff-structlog-expt pkg to explore several things:
   * initialized git repo in code and published it to personal GitHub account
 * using envs/requirements.txt instead of top level of repo
   * GitHub's dependency tool found it!
+* using pyproject.toml in conjunction with pip install -e
+* using setup.cfg to define cliff plugin sub-command entry points
 
 
 Sun 10-Oct-2021
@@ -6561,27 +6565,234 @@ Squamish
 Cycled Squamish River Rd to ~10km beyond end of pavement (~2km beyond High Falls Rec Area - out lunch stop) (71 km)
 
 
+Week 41
+-------
+
+Mon 11-Oct-2021
+^^^^^^^^^^^^^^^
+
+Week 83 of UBC work-from-home due to COVID-19
+
+**Statutory Holiday** - Thanksgiving
+
+Walked on Stawamus River dyke trail.
+
+Drove from Squamish to Vancouver; tire inflation sensor system signalled that it is malfunctioning part way through drive.
+
+Grace called to tell of Elinor's passing earlier in the day.
+
+Prepared and submitted 20 more 100 spill jobs on graham:
+  for grp in {87..93}; do head -1 SalishSea_oil_spills-fixed-col0.csv > SalishSea_oil_spills_BP_${grp}th-100.csv; done
+  starts=( $(seq 91 97) ); grps=( $(seq 87 93) ); for i in "${!grps[@]}"; do head -${starts[$i]}31 SalishSea_oil_spills-fixed-col0.csv | tail -100 >>SalishSea_oil_spills_BP_${grps[$i]}th-100.csv; done
+  for grp in {87..93}; do sed -i "s/near-BP_.*th-100/near-BP_${grp}th-100/" near-BP.yaml && mohid monte-carlo --debug near-BP.yaml SalishSea_oil_spills_BP_${grp}th-100.csv; done
+Spills from .csv line 9732 onward need to be run in a wrap-up run.
+(MIDOSS)
+
+
+Tue 12-Oct-2021
+^^^^^^^^^^^^^^^
+
+download_live_ocean slow today; timed out at 12:07; re-tried at 12:36; timed out again at 15:47; email from Parker says that delay is due to server maintenance, file should be ready by 17:30; restarted worker at ~15:41
+rsync of GEMLAM/2007/ directory in tmux session on salish failed again on Saturday after ~3h due to broken pipe with 3613 of 9089 files transferred; restarted at ~10:25; broken pipe again after another 3016 files transferred; restarted at ~15:40
+(SalishSeaCast)
+
+Continued work on douglatornell/cliff-structlog-expt pkg:
+* found bug that was preventing cliff plugin sub-command registration
+* confirmed that registration via setup.cfg (no setup.py) works; requires setuptools>=51.0.0
+* pip==20.0.2 on graham prevents editable install with pyproject.toml file in repo :-( (but acts like --user install pattern has been disabled)
+
+Installed mamba in conda base env on kudu:
+  conda install -n base -c conda-forge mamba
+Still need to use conda to activate/deactivate envs; mamba seems to work for all else, and added repoquery sub-command.
+
+
+Wed 13-Oct-2021
+^^^^^^^^^^^^^^^
+
+Yesterday's r12 still had ~1h40m to run when today's nowcast-blue started; checked mpi_hosts files: overlap of fvcom0 VM for r12 and x2 will not end well..
+* x2 running, but says it will take >35h
+* r12 stalled at 1h21m and slowly rising
+* killed x2, re-launch after r12 finishes:
+    pkill -f "x2 nowcast"  # on arbutus nowcast0
+    top -c  # kill x2 on fvcom0
+    wait for r12 to finish
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2021-10-13"
+rsync of GEMLAM/2007/ directory in tmux session on salish failed again yesterday after ~2h due to broken pipe after another 1216 files transferred; restarted at ~11:00; finally succeeded!!
+Created /nearline tarball on graham:
+    cd /scratch/dlatorne/
+    tar -cvvf /nearline/rrg-allen/SalishSea/GEMLAM/GEMLAM_2007.tar MEOPAR/GEMLAM/2007/ | tee /nearline/rrg-allen/SalishSea/GEMLAM/GEMLAM_2007.index
+tarball creation ended, but only ~75% of expected size
+Started rsync of 2008/ from salish to graham $SCRATCH:
+    time rsync -rtlv --partial-dir=/scratch/dlatorne/MEOPAR/GEMLAM/rsync-partial --progress /opp/GEMLAM/2008 graham:/scratch/dlatorne/MEOPAR/GEMLAM/
+(SalishSeaCast)
+
+Re-ran 1st-30 spills to recover accidentally deleted results for spills 0 3 4 9 11 16 23 24 27 29; run timed out; re-submitted w/ 4h walltime
+Set up final 103 spills in .csv as 94th-103; run completed.
+(MIDOSS)
+
+Resumed work on getting XIOS & NEMO to work under StdEnv/2020 on graham (ref 23-Mar-2021 and 6-Oct-2021):
+  module load netcdf-fortran-mpi/4.5.2
+  module load perl/5.30.2
+  module load python/3.9.6
+  git pull SS-run-sets
+  cp SS-run-sets/v202007/newbathy called 02jan17_graham_short.yaml
+  salishsea run 02jan17_graham_short.yaml $SCRATCH/MEOPAR/results/02jan17_short-test-1 --no-submit
+time stepping!!!
+But run timed out :-(
+(NEMO)
+
+Rachael visited to pick up the stuff she had left here when COVID started.
+
+
+Thu 14-Oct-2021
+^^^^^^^^^^^^^^^
+
+Cleaned up aborted 1st-30 and 94th-103 directories.
+Did file counts for Lagrangian*.nc; numbers don't tally: >10_000 total, but <100 in multiple run directories; sep
+(MIDOSS)
+
+Re-tried 2007 /nearline tarball on graham:
+    cd /scratch/dlatorne/
+    tar -cvvf /nearline/rrg-allen/SalishSea/GEMLAM/GEMLAM_2007.tar MEOPAR/GEMLAM/2007/ | tee /nearline/rrg-allen/SalishSea/GEMLAM/GEMLAM_2007.index
+rsync of GEMLAM/2008/ directory in tmux session on salish failed again yesterday after ~2h40m due to broken pipe after 2670 files transferred; restarted at ~10:10 
+(SalishSeaCast)
+
+Investigated 02jan17_short-test-1 timeout on graham:
+* core dumped
+* completed 8934 of 10800 time steps
+* found ORTE error in stderr
+Re-ran as 02jan17_short-test-2; was on track to timeout; Susan noted decomp that resulted in only 4 nodes used; her test timed out too.
+Re-ran w/ 16x34 decomp; finished in 1hr :-)
+* salishsea combine step failed; investigation:
+  * error from rebuild_nemo:
+       ERROR! : NetCDF: Invalid argument
+       *** NEMO rebuild failed ***
+        
+       9
+(NEMO)
+
+Tried to build Python 3.10 dev env using mamba; failed due to docutils.
+Moved requirements.txt to envs/ because GitHub dependency analysis tools can find it there now.
+Updated readthedocs config to new API:
+* renamed readthedocs.yml to .readthedocs.yaml because that's the only supported name now
+* changed build spec to use ubunu-20.04 container and mambaforge-4.10 build tool
+Reviewed tests for use of config(base_config) fixure; updates needed in:
+* test_next_workers - done
+* test_run_NEMO - done
+* test_run_NEMO_agrif
+* test_split_results
+* test_watch_NEMO
+* test_watch_NEMO_agrif
+* test_watch_ww3
+* worked on update-test-config-fixture branch
+(SalishSeaNowcast)
+
+
+Fri 15-Oct-2021
+^^^^^^^^^^^^^^^
+
+Power failed at 08:15 due to tree down across wires somewhere nearby; back on at about 10:15
+
+collect_weather 06 stalled; investigation:
+* sarracenia queue permission problem:
+    2021-10-14 23:09:33,040 [WARNING] sr_amqp/consume: could not consume in queue q_anonymous.sr_subscribe.hrdps-west.74434425.78671301: [Errno 110] Connection timed out
+    2021-10-14 23:09:33,040 [ERROR] sr_amqp/close 2: [Errno 32] Broken pipe
+    2021-10-14 23:09:33,040 [INFO] Using amqp module (AMQP 0-9-1)
+    2021-10-14 23:09:36,913 [INFO] declared queue q_anonymous.sr_subscribe.hrdps-west.74434425.78671301 (anonymous@dd.weather.gc.ca) 
+    2021-10-14 23:09:46,800 [ERROR] bind queue: q_anonymous.sr_subscribe.hrdps-west.74434425.78671301 to exchange: xpublic with key: v02.post.model_hrdps.west.grib2.# failed with [Errno 110] Connection timed out
+    2021-10-14 23:09:46,800 [ERROR] Permission issue with anonymous@dd.weather.gc.ca or exchange xpublic not found.
+  error repeats every 64 seconds
+* 0 files downloaded
+* recovery:
+    pkill -f collect_weather
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20211015/06
+    # clean up datamart mirror dirs
+    for d in 00 06 12 18; do rm -rf /SalishSeaCast/datamart/hrdps-west/${d}/*; done
+    collect_weather 18 2.5km
+    download_weather 06 2.5km
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+Restarted sr_subscribe-hrdps-west via supervisorctl; queue subscription was successful.
+Checked sr_subscribe-hrdps-west-1km; no problems.
+Checked sr_subscribe-hydrometric; also stared failing w/ permission issued last night; restarted via supervisorctl; queue subscription was successful.
+(SalishSeaCast)
+
+Continued updating tests to use config(base_config) fixure:
+* test_next_workers - done
+* test_run_NEMO - done
+* test_run_NEMO_agrif - done
+* test_split_results - done
+* test_watch_NEMO - done
+* test_watch_NEMO_agrif - done
+* test_watch_ww3 - trivial test suite; no config :-(
+* worked on update-test-config-fixture branch; rebased and merged work with the PyCharm equivalent of:
+  git switch update-test-config-fixture
+  git rebase main
+  git switch main
+  git merge update-test-config-fixture
+(SalishSeaNowcast)
+
+Re-organized garage storage to be able to park Prius farther back and reach recycling containers more easily.
+
+Started reading rebuild_nemo.f90 code to debug error on graham, or replace it with Python.
+(NEMO)
+
+
+Sat 16-Oct-2021
+^^^^^^^^^^^^^^^
+
+Minecraft Live.
+
+LiveOcean delayed almost 3h. 
+(SalishSeaCast)
+
+Drove to White Rock and cooked Thanksgiving chicken dinner for J&M.
+
+
+Sun 17-Oct-2021
+^^^^^^^^^^^^^^^
+
+Created issue #81 re: updating NowcastWorker mocks in tests, and issue #82 re: updating logging mocks in tests; decided that issues were a better place to keep list of modules and progress than here.
+(SalishSeaNowcast)
+
+
+
+
+
+
+
 TODO:
 * Python packaging docs and pkg cookiecutters updates:
   * change to nodefaults in conda channels list
   * move requirements.txt to envs/
   * add .gitignore ???
   * add .pre-commit-config.yaml; include pre-commit in environment-dev.yaml
-  * add pyproject.toml
+  * rename readthedocs.yml to .readthedocs.yaml
+  * update .readthedocs.yaml to new build API (see SalishSeaNowcast)
+  * add pyproject.toml ???
+  * remove setup.py ???
+  * add docs re: entry points in setup.cfg; requires setuptools>=51.0.0
+  * figure out if graham versions of pip, setuptools, wheel support pyproject.toml, setup.cfg, and pip install -e
+    * graham python/3.9.6 has:
+        pip            20.0.2 
+        setuptools     56.2.0 
+        wheel          0.36.2 
+    * graham python/3.8.2 has:
+        pip            20.0.2 
+        setuptools     45.2.0       
+        wheel          0.34.2       
+    * pip 20.0.2 doesn't support editable install with pyproject.toml :-(  that feature seems to have appeared in 21.2.4, but it is not official in the changelog until 21.3
 
 
 
 TODO:
 * re-run spills:
-  * 1st-30: 0 3 4 9 11 16 23 24 27 29
   * 4th-100: 92 94 96 99
 
 * figure out how to merge/cherrypick relevant changes from Rachael's add_terminal branch in moad_tools
 
 Fix ariane docs:
 * maybe re:  adding a bin-like directory to prefix gets rid of errors from doc/ and examples/ that confused Becca ???
-
-* patch for PreRules.am ??
 
 
 
@@ -6601,14 +6812,7 @@ TODO: when we can change to CC StdEnv/2020:
 
 
 
-
-
 Update ONC URLs to https://data.oceannetworks.ca/
-
-
-
-Update cookiecutter-MOAD-pypkg re: hg -> git
-
 
 jupyter kernelspec uninstall unwanted-kernel
 
@@ -6632,9 +6836,6 @@ Add CI workflows to run linkcheck on docs; see SalishSeaCast#repos-maint channel
   example workflow in salishsea-site repo
   don't forget to add sphinx & sphinx_rtd_theme to environment-test.yaml
   See: https://salishseacast.slack.com/archives/C01GYJBSF0X/p1608574921004500
-
-
-Update cookiecutter-MOAD-pypkg re: migration from hg to git, and requirements.txt in top level directory; probably more issues too.
 
 
 15jun20: check mitigation of "index exceeds dimension bounds" IndexError in make_plots fvcom forecast-x2 research
