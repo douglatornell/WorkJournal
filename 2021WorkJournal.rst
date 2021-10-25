@@ -6755,8 +6755,198 @@ Sun 17-Oct-2021
 Created issue #81 re: updating NowcastWorker mocks in tests, and issue #82 re: updating logging mocks in tests; decided that issues were a better place to keep list of modules and progress than here.
 (SalishSeaNowcast)
 
+Advertised Kickr Snaps on BC randonneurs list; got instant interest.
 
 
+Week 42
+-------
+
+Mon 18-Oct-2021
+^^^^^^^^^^^^^^^
+
+Week 84 of UBC work-from-home due to COVID-19
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Swapped training tires off Red & Emma to go with Snaps; discovered that QRs on both bikes were broken inside drive side nuts.
+
+Reviewed Susan's Discovery Grant proposal.
+
+nowcast-agrif timed out
+(SalishSeaCast)
+
+Traced rebuild_nemo failure to nf90_def_var_deflate() call for 0d variables like kt; code works if that call is skipped for ndims == 0; nf90_def_var_deflate() is not in present netcdf-fortran docs; deflation is now handled by args in nf90_def_var()
+(NEMO)
+
+
+Tue 19-Oct-2021
+^^^^^^^^^^^^^^^
+
+Work at UBC while Rita is at home.
+
+Backfilling nowcast-agrif:
+  make_forcing_links orcinus nowcast-agrif 2021-10-18
+  wait for run to finish
+  make_forcing_links orcinus nowcast-agrif 2021-10-19
+(SalishSeaCast)
+
+Failed to find change in netcdf-c or netcdf-fortran that makes deflation of 0d vars illegal.
+Searched NEMO code repo and found change to add deflation and chunking to rebuild_nemo on 2019-01-09 in v4.0.
+git log NEMOGCM/TOOLS/REBUILD_NEMO/src/rebuild_nemo.f90 is useless in our repo due to either a bad merge, or branch tangling when we imported from hg on BitBucket.
+hg log NEMOGCM/TOOLS/REBUILD_NEMO/src/rebuild_nemo.f90 in archived repo shows:
+  changeset:   499:f9a8d03de741
+  user:        Michael Dunphy <mdunphy@eoas.ubc.ca>
+  date:        Wed Nov 09 16:36:21 2016 -0800
+  summary:     Modify rebuild_nemo to write to compressed netcdf4/hdf5 files.
+So, fixing the -d issue is up to me!
+Refactored to add deflation to nf90_def_var() call for ndims>0
+Tried to experiment with -openmp compile flag and -liomp5 linker flag to enable threaded processing; build succeeded, but execution segfaults.:
+Profiling:
+  time rebuild_nemo SalishSea_04745520_restart 276
+    real    0m41.898s
+    user    0m32.650s
+    sys     0m5.048s
+  time rebuild_nemo SalishSea_04745520_restart_trc 276
+    real    1m14.370s
+    user    0m43.729s
+    sys     0m7.815s
+Queued $SCRATCH/MEOPAR/results/02jan17_short-test-4 to confirm that refactored rebuild_nemo works.
+Queued $SCRATCH/MEOPAR/results/07jan17_short-test-1 to confirm that restart files from refactored rebuild_nemo are useable by NEMO.
+(NEMO)
+
+Inaugural mtg:
+* my thoughts and group:
+  * MOAD docs section
+    * conda env sample
+    * numerical advection schemes differences: rk4
+      * https://oceanparcels.org/gh-pages/html/_modules/parcels/application_kernels/advection.html 
+      * https://os.copernicus.org/articles/17/1067/2021/
+  * viz of animations:
+    * in notebooks: works on nbviewer, not non GitHub
+    * other
+  * translation of longitude; shared function?; op needs lon in -180/180
+  * dask funtionality, optimization
+  * https://gitter.im/OceanPARCELS/home
+  * https://github.com/UBC-MOAD/PythonNotes/blob/master/OceanParcelsRecipes.ipynb
+Added OceanParcels section to MOAD docs.
+(OceanParcels)
+
+
+Wed 20-Oct-2021
+^^^^^^^^^^^^^^^
+
+Helped Rachael refactor some beaching presence/abseence calculation code.
+(MIDOS)
+
+Reviewed more of Susan's Discovery Grant proposal.
+
+
+Thu 21-Oct-2021
+^^^^^^^^^^^^^^^
+
+upload_forcing orcinus failed overnight and this morning; tested ssh to seawolf[123] and all worked; re-ran upload_forcing:
+  upload_forcing orcinus forecast2
+  upload_forcing orcinus nowcast+
+(SalishSeaCast)
+
+Released NEMO-Cmd v21.1; bumped to v21.2.dev0 for change to Compute Canada StdEnv/2020 and next dev cycle.
+(NEMO-Cmd)
+
+Worked on Becca's re-tiding problem; came up with linear interpolation resampling solution (with help from Susan).
+(MOAD)
+
+
+Fri 22-Oct-2021
+^^^^^^^^^^^^^^^
+
+Squash-merged dependabot PRs in multiple repos re: babel CVE-2021-42771:
+* 43ravens:
+  * ECget
+  * NEMO_Nowcast
+* UBC-MOAD:
+  * moad_tools
+* SalishSeaCast:
+  * NEMO-Cmd
+  * tools
+  * SOG-Bloomcast-Ensemble
+  * salishsea-site
+  * docs
+  * FVCOM-Cmd
+* MIDOSS:
+  * docs
+  * Make-MIDOSS-Forcing
+* affected, but dependabot can't generate PR:
+  * rpn-to-gemlam
+(MOAD)
+
+Monthly project mtg.
+(MIDOSS)
+
+Helped Raisha understand sequence of runs, where results and HRDPS forcing files are stored, and perhaps how to use SalishSeaTools.
+(Atlantis)
+
+Setup snapshots server to play 21w42a seed -7376158577514211186 that I discovered in single-player with Susan.
+
+
+Sat 23-Oct-2021
+^^^^^^^^^^^^^^^
+
+Got Bose headset connected to kudu in an attempt to get audio that doesn't include the roar of kudu's fan.
+
+graham /project quota for rrg-allen appears to have returned to 8T/50k files (in addition to def-allen quota of 10T/100k files); recall that rrg-allen quota disappeared earlier in 2021, but can't find mention in this log or on Slack; experimented with rrg-allen quota by changing /project/def-allen/MIDOSS/monte-carlo-results/ (750 directories containing 18917 files) from def-allen to rrg-allen:
+* before:
+    lfs quota -h -g def-allen /project/
+    Disk quotas for grp def-allen (gid 6001313):
+         Filesystem    used   quota   limit   grace   files   quota   limit   grace
+          /project/  7.216T  9.313T  9.313T       -  949772  1000000 1000000       -
+    lfs quota -h -g rrg-allen /project/
+    Disk quotas for grp rrg-allen (gid 6004710):
+         Filesystem    used   quota   limit   grace   files   quota   limit   grace
+          /project/     69k  7.451T  7.451T       -      14  500000  500000       -
+* after:
+    lfs quota -h -g def-allen /project/
+    Disk quotas for grp def-allen (gid 6001313):
+         Filesystem    used   quota   limit   grace   files   quota   limit   grace
+          /project/   7.21T  9.313T  9.313T       -  930105  1000000 1000000       -
+    lfs quota -h -g rrg-allen /project/
+    Disk quotas for grp rrg-allen (gid 6004710):
+         Filesystem    used   quota   limit   grace   files   quota   limit   grace
+          /project/  5.339G  7.451T  7.451T       -   19681  500000  500000       -
+Changed /project/def-allen/MIDOSS/forcing/ group from def-allen to rrg-allen:
+* after files that I own:
+    lfs quota -h -g def-allen /project/
+    Disk quotas for grp def-allen (gid 6001313):
+         Filesystem    used   quota   limit   grace   files   quota   limit   grace
+          /project/   6.62T  9.313T  9.313T       -  926029  1000000 1000000       -
+    lfs quota -h -g rrg-allen /project/
+    Disk quotas for grp rrg-allen (gid 6004710):
+         Filesystem    used   quota   limit   grace   files   quota   limit   grace
+          /project/  610.3G  7.451T  7.451T       -   23757  500000  500000       -
+* after files that Susan owns:
+    lfs quota -h -g def-allen /project/
+    Disk quotas for grp def-allen (gid 6001313):
+         Filesystem    used   quota   limit   grace   files   quota   limit   grace
+          /project/  3.113T  9.313T  9.313T       -  917836  1000000 1000000       -
+    lfs quota -h -g rrg-allen /project/
+    Disk quotas for grp rrg-allen (gid 6004710):
+         Filesystem    used   quota   limit   grace   files   quota   limit   grace
+          /project/  4.103T  7.451T  7.451T       -   31950  500000  500000       -
+
+Re-tried 2007 /nearline tarball on graham in tmux session:
+    cd /scratch/dlatorne/
+    tar -cvvf /nearline/rrg-allen/SalishSea/GEMLAM/GEMLAM_2007.tar MEOPAR/GEMLAM/2007/ | tee /nearline/rrg-allen/SalishSea/GEMLAM/GEMLAM_2007.index
+(SalishSeaCast)
+
+
+Sun 24-Oct-2021
+^^^^^^^^^^^^^^^
+
+2007 /nearline tarball on graham stopped after 7424 files; tmux session was MIA; retried; failed again after 7228 files.
+(SalishSeaCast)
+
+Suggested in #oceanparcels channel tracking of possible PAX spill from Zim Kingston at anchor south of Victoria and on fire; Birgit sort of took me up on it.
+(MOAD)
 
 
 
@@ -6797,16 +6987,18 @@ Fix ariane docs:
 
 
 TODO: when we can change to CC StdEnv/2020:
+* NEMO-3.6-code:
+  * commit & push rebuild_nemo.f90 changes
 * XIOS-ARCH:
   * merge cc-stdenv-2020 branch
 * NEMO-Cmd:
+  * release v21.1 - done
+  * bump to v21.2.dev0 - done
   * merge cc-stdenv-2020 branch
-  * release v21.1
-  * bump to v21.2.dev0
 * SalishSeaCmd:
-  * merge cc-stdenv-2020 branch
   * release v21.1
   * bump to v21.2.dev0
+  * merge cc-stdenv-2020 branch
 * finalize message in #general channel
   * mention new module load versions re: .bashrc
 
