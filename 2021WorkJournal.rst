@@ -6600,6 +6600,7 @@ Continued work on douglatornell/cliff-structlog-expt pkg:
 * found bug that was preventing cliff plugin sub-command registration
 * confirmed that registration via setup.cfg (no setup.py) works; requires setuptools>=51.0.0
 * pip==20.0.2 on graham prevents editable install with pyproject.toml file in repo :-( (but acts like --user install pattern has been disabled)
+* editable install with pyproject.toml feature seems to have appeared in 21.2.4, but it is not official in the changelog until 21.3
 
 Installed mamba in conda base env on kudu:
   conda install -n base -c conda-forge mamba
@@ -6949,19 +6950,262 @@ Suggested in #oceanparcels channel tracking of possible PAX spill from Zim Kings
 (MOAD)
 
 
+Week 43
+-------
+
+Mon 25-Oct-2021
+^^^^^^^^^^^^^^^
+
+Week 85 of UBC work-from-home due to COVID-19
+
+FAL estate work re: BCE & Manulife:
+Done:
+* Waiver of Probate form
+* Declaration of Transmission for BCE
+* Declaration of Transmission for Manulife
+* Letter of direction for Manulife shares
+* Letter of direction for BCE shares
+* Letter stating the reason for not probating the will
+* copy BCE dividend statement x3
+* copy Manulife dividend statement x3
+* Jamie's notarized signature of 4 copies of waiver of probate form
+* Make appointment with notary 
+* Cover letter
+* BCE pkg Cover
+* Manulife pkg cover
+* LOD to TD for 4 drafts
+TODO:
+* Draft to Insurance broker for 3.5% of BCE shares value
+* Draft to Insurance broker for 3.5% of Manulife shares value
+* Draft to AST for $131.25 ($125 + GST) for BCE shares processing
+* Draft to AST for $131.25 ($125 + GST) for Manulife shares processing
+* Notarized signature of Waiver of Probate x4
+* 4 notarized copies of death certificate
+* 4 notarized copies of will
+* Courier pkg to AST
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar by Angellica Pena
+
+Started reading OceanParcels tutorials.
+(OceanParcels)
+
+
+Tue 26-Oct-2021
+^^^^^^^^^^^^^^^
+
+Explored parcels packaging and conda env setup; fascinated for find that parcels isn't packaged for PyPI, only for conda-forge; setup.py/setup.cfg lack dependencies list, have to decern from environment_py3_{os}.yml dev env description files, or conda-forge recipe.
+Continued working through OceanParcels tutorials:
+* built parcels-examples env from /media/doug/warehouse/MOAD/parcels_examples/enviornment.yaml
+
+Weekly mtg:
+* Raisha figured out how to display animations in GitHub renderings:
+    from IPython.display import Image
+    with open(anim_name,'rb') as anim:
+        display(Image(anim.read()))
+  but I am puzzled because that implies file reading??
+* idea pkg of kernels??
+  * yes
+  * e.g. DeleteParticle
+  * notebooks as examples
+  * other code; e.g. viz
+  * name:
+    * moacean_parcels
+    * mocean
+    * mo-cean
+* Birgit's Zim Kingston simulation
+* discussion of 3d diffusion: links in docs
+(OceanParcels)
+
+Fraser buoy turbidity failed
+download_results forecast timed out; re-ran and it was slow, but finished; weird; other download_results workers were successful while it was spinning.
+(SalishSeaCast)
+
+Prep for v21.1 release:
+* changes for release announcement:
+  * Updates of run parameters for `salish`, `sockeye`, `graham`, and `orcinus`.
+  * Changed to install dependency packages exclusively from conda-forge channel
+  * Added GitHub Actions workflows for CodeQL analysis, and docs linkcheck.
+  * Changed to use Python 3.9 for development (3.5 on orcinus)
+  * Renamed Git default branch from `master` to `main`.
+  * Enabled version control system (VCS) revision recording for Git 
+    repositories.
+  * Changed continuous integration from Bitbucket pipeline to GitHub Actions
+    workflow.
+  * Migrated from Mercurial on Bitbucket to Git on GitHub due to Bitbucket's
+    decision to terminate support for Mercurial.
+  * Added `split-results` sub-command to split the results of a multi-day 
+    SalishSeaCast NEMO model run (e.g. a hindcast run) into daily results
+    directories.
+(SalishSeaCmd)
+
+
+Wed 27-Oct-2021
+^^^^^^^^^^^^^^^
+
+GitHub Universe day 1:
+* Keynote:
+  * code spaces
+  * copilot in PyCharm
+  * issues
+  * projects
+  * new enterprise release
+  * secrets & codeql
+  * discussion labels & polls (soon)
+  * command pallet (ctrl-k) in web interface
+  * in-browser VSCode (.) in web interface
+* Livestream
+  * Codespaces
+    * shallow clone w/ background de-shallowing
+    * dev container JSON file in repo; config as code
+    * cost control
+    * free web editor in all repos; . key
+    * VSCode settings sync
+    * use personal public dotfiles repo
+    * GitHub CLI integration; includes ssh into codespace container
+  * Issues and project planning
+    * custom fields
+    * team overview
+    * hierarchy
+  * Enterprise
+  * Release automation
+  * Copilot:
+    * can write >30% of new Python code
+    * tech preview
+
+FAL estate work re: BCE & Manulife:
+Done:
+* Waiver of Probate form
+* Declaration of Transmission for BCE
+* Declaration of Transmission for Manulife
+* Letter of direction for Manulife shares
+* Letter of direction for BCE shares
+* Letter stating the reason for not probating the will
+* copy BCE dividend statement x3
+* copy Manulife dividend statement x3
+* Jamie's notarized signature of 4 copies of waiver of probate form
+* Make appointment with notary 
+* Cover letter
+* BCE pkg Cover
+* Manulife pkg cover
+* LOD to TD for 4 drafts
+* Draft to Insurance broker for 3.5% of BCE shares value
+* Draft to Insurance broker for 3.5% of Manulife shares value
+* Draft to AST for $131.25 ($125 + GST) for BCE shares processing
+* Draft to AST for $131.25 ($125 + GST) for Manulife shares processing
+* Notarized signature of Waiver of Probate x4
+* 4 notarized copies of death certificate
+* 4 notarized copies of will (via afidivit)
+* Courier pkg to AST
+
+Fraser buoy turbidity failed again; sent email to Jenn.
+(SalishSeaCast)
+
+
+Thu 28-Oct-2021
+^^^^^^^^^^^^^^^
+
+Squash-merged dependabot PR in SalishSeaNowcast re: dask
+
+GitHub Universe day 2:
+* Keynote re: community:
+  * Backstage dev portal open-sourced by Spotify
+  * 73 million devs on GitHub
+* Livestream:
+  * GitHub Eductioant: CS50 at Harvard
+  * RBC: "Inner Source"
+  * rethinking the SDLC (software dev lifecycle): Emily Freeman
+    * "modern socio-technical systems"
+* Setup CD in GHA:
+  * `needs` item in Actions to set up dependencies among jobs
+  * conventionalcommits.org and a compliance action
+* Managing a GitHub Org:
+  * heavy enterprise focus
+  * spdx.org for license short-hands
+  * org level README.md ??
+
+Coffee w/ Rachael.
+
+Added GitHub extension to VSCode on Kudu to experiment with using PRs for all work; goal is to make pkg releases easier and perhaps automated.
+
+Released SalishSeaCmd v21.1; bumped to v21.2.dev0 for change to Compute Canada StdEnv/2020 and next dev cycle.
+Updated SalishSeaCmd re: Compute Canada StdEnv/2020 in cc-stdenv-2020 branch; created PR#12.
+Updated installs of NEMO-Cmd and SalishSeaCmd on graham with python/3.9.6 module loaded.
+Rebase-merged PR#12.
+(SalishSeaCmd)
+
+Weekly project mtg:
+(Atlantis)
+
+Finalized and merged cc-stdenv-2020 branch in NEMO-Cmd; docs and unit test changes, but no actual tool changes.
+(NEMO-Cmd)
+
+Discovered that what I thought were `module load` statements in NEMO/ARCH/*.fcm files were comments, so no-go on eliminaing the need for `module load` docs.
+Tested on graham latest config of XIOS-2 and NEMO/SalishSeaCast builds with SalishSeaCmd cc-stdenv-2020 branch.
+(NEMO-3.6)
+
+Created and rebase-merged PR#1 for cc-stdenv-2020 branch; tested working with PR in VSCode; view, review, and merge were okay, but couldn't create the PR I wanted to there.
+(XIOS-2)
+
+
+Fri 29-Oct-2021
+^^^^^^^^^^^^^^^
+
+Updated Python packaging docs and pkg cookiecutters:
+  * change to nodefaults in conda channels list
+  * move requirements.txt to envs/
+  * add .gitignore
+  * rename readthedocs.yml to .readthedocs.yaml
+  * update .readthedocs.yaml to new build API (see SalishSeaNowcast)
+  * add .pre-commit-config.yaml; include pre-commit in environment-dev.yaml
+  * add pyproject.toml
+(MOAD)
+
+Helped Rachael w/ `if __name__ == "__main__":`.
+
+Coffee w/ Susan & Debby.
+
+UBC-DFO modelling mtg; Sophie Johannsen re: sediment obs in SoG.
+
+FAL estate work re: BCE & Manulife:
+* Courier pkg reported as delivered to AST at 14:21 Eastern.
+
+
+Sat 30-Oct-2021
+^^^^^^^^^^^^^^^
+
+Woke up with stiff, sore back.
+
+Drove to White Rock to visit J&M.
+
+
+Sun 31-Oct-2021
+^^^^^^^^^^^^^^^
+
+Did PR#1 in NEMO-3.6-code for updates to FCM files & rebuild_nemo re: StdEnv/2020.
+Wrote Slack post with instructions for updating to StdEnv/2020.
+(NEMO-3.6)
+
+Walked to Stephen St Park; back still sore while walking.
+
+
+
 
 
 TODO:
 * Python packaging docs and pkg cookiecutters updates:
-  * change to nodefaults in conda channels list
-  * move requirements.txt to envs/
-  * add .gitignore ???
-  * add .pre-commit-config.yaml; include pre-commit in environment-dev.yaml
-  * rename readthedocs.yml to .readthedocs.yaml
-  * update .readthedocs.yaml to new build API (see SalishSeaNowcast)
-  * add pyproject.toml ???
-  * remove setup.py ???
+  * change to nodefaults in conda channels list - done
+  * move requirements.txt to envs/ - done
+  * add .gitignore - done
+  * rename readthedocs.yml to .readthedocs.yaml - done
+  * update .readthedocs.yaml to new build API (see SalishSeaNowcast) - done
+  * add .pre-commit-config.yaml; include pre-commit in environment-dev.yaml - done
+  * add pyproject.toml - done
   * add docs re: entry points in setup.cfg; requires setuptools>=51.0.0
+  * remove setup.py ???
+  * add docs re: pre-commit
   * figure out if graham versions of pip, setuptools, wheel support pyproject.toml, setup.cfg, and pip install -e
     * graham python/3.9.6 has:
         pip            20.0.2 
@@ -6983,24 +7227,7 @@ TODO:
 
 Fix ariane docs:
 * maybe re:  adding a bin-like directory to prefix gets rid of errors from doc/ and examples/ that confused Becca ???
-
-
-
-TODO: when we can change to CC StdEnv/2020:
-* NEMO-3.6-code:
-  * commit & push rebuild_nemo.f90 changes
-* XIOS-ARCH:
-  * merge cc-stdenv-2020 branch
-* NEMO-Cmd:
-  * release v21.1 - done
-  * bump to v21.2.dev0 - done
-  * merge cc-stdenv-2020 branch
-* SalishSeaCmd:
-  * release v21.1
-  * bump to v21.2.dev0
-  * merge cc-stdenv-2020 branch
-* finalize message in #general channel
-  * mention new module load versions re: .bashrc
+ versions re: .bashrc
 
 
 
