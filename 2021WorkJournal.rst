@@ -7191,7 +7191,203 @@ Wrote Slack post with instructions for updating to StdEnv/2020.
 Walked to Stephen St Park; back still sore while walking.
 
 
+November
+========
 
+Week 44
+-------
+
+Mon 1-Nov-2021
+^^^^^^^^^^^^^^
+
+Week 88 of UBC work-from-home due to COVID-19
+
+Created, tested, and rebase-merged PR#13 re: moving entry point declarations from setup.py to setup.cfg.
+(SalishSeaCmd)
+
+Weekly group mtg; see whiteboard.
+Continued updating Python packaging docs and pkg cookiecutters:
+  * add docs re: entry points in setup.cfg; requires setuptools>=51.0.0 - done
+  * remove setup.py
+(MOAD)
+
+Phys Ocgy seminar: Sylvia Innocenti, MSC on tidal residuals analysis.
+
+Created and rebase-merged PR#32 re: moving entry point declarations from setup.py to setup.cfg.
+(NEMO-Cmd)
+
+Created MoaceanParcels package via cookiecutter-MOAD-pypkg.
+Added MoaceanParcels notifications to #ssc-repos channel with:
+  /github subscribe UBC-MOAD/MoaceanParcels
+Set up MoaceanParcels on readthedocs; 1st install pending failed due to memory; complained about a pip dependency:
+  Warning: you have pip-installed dependencies in your environment file, but you do not list pip itself as one of your conda dependencies.  Conda may not use the correct pip to install your packages, and they may end up in the wrong place.  Please add an explicit pip dependency.  I'm adding one for you, but still nagging you.
+(OceanParcels)
+
+
+Tue 2-Nov-2021
+^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Continued work on MoaceanParcels pkg:
+* investigated build failure; no pip dependency in environment-rtd.yaml
+* had to manually create webhook on GitHub
+* manually triggered another rtd build; also failed
+* realized that pip dependencies issue is due to deps that rtd injects; added those to environment-rtd.yaml; got a successful rtd build!; updated cookiecutter-MOAD-pypkg
+(OceanParcels)
+
+Updated cookiecutter-MOAD-pypkg w/ bits and pieces discovered yesterday in using it to create MoaceanParcels pkg.
+(MOAD)
+
+Created readthedocs issue #8647 re: Build using mamba fails due to excessive memory when pip is missing from env.
+
+Slack call w/ Rachael; discussed spills aggregation processing; steered her away from trying to use open_mfdataset() and dask to a distributed approach maybe using META.
+Later discussion w/ Susan yielded an idea for incremental processing that avoids the need for META.
+Used find to identify Monte Carlo runs with missing Lagrangian_*.nc files; Susan analyzed further and found that most are due to failures of hdf5-to-netcdf4 step.
+(MIDOSS)
+
+
+Wed 3-Nov-2021
+^^^^^^^^^^^^^^
+
+Wrote to Rachael about incremental spills aggregation processing idea.
+Dug into missing spill results that Susan classified yesterday:
+* 15th & 16th runs
+  * 2x15th w/ results, 2x16th w/o results
+  * suspect setup issue during my dev of automation; nope: 15ths are dups
+  * re-ran 16th; success
+* 46th run, missing 4,21,26,28: hdf exists, nc missing
+  * all report ``RuntimeError: NetCDF: HDF error`` in stderr with some variation in the tracebacks
+  * re-ran hdf5-to-netcdf4 via backfill_hdf5-to-netcdf4.sh script; success
+* 49th run, missing: 42,43,52,57,59,70,72,90,91,94,95,96,97,99: hdf exists, nc missing
+  * re-ran hdf5-to-netcdf4 via backfill_hdf5-to-netcdf4.sh script; interactive session timed out during spill 97
+
+* 53rd run, missing 0,1,6,7,8,11,12,14,16,17,19,21,23,25,26,28,29,48,49,55: hdf exists, nc missing
+* 55th run, #24: hdf exists, nc missing
+* 2000th run, missing 1,2,3,4,5,6,7,8,10,11,13,14,17,19,20,21,23,24,25,26,27,29,30,35: hdf exists, nc missing
+* 2004th run, missing 10,15,17,19,24: hdf exists, nc missing
+
+* 4th run: 92,94,96,99 out of time
+
+* 94th run, missing 101 and 102: oil spill origin outside of domain
+* 88th run, missing 64, 79: outside domain
+(MIDOSS)
+
+Replied to email from Dwayne at NAFC re: envvars for Sentry in Navigator deployments.
+
+
+Thu 4-Nov-2021
+^^^^^^^^^^^^^^
+
+salishsea.eos.ubc.ca cert expired overnight; opened helpdesk ticket to get it renewed/updated.
+
+Continued resolving missing spill results that Susan classified:
+* 49th run, missing: 42,43,52,57,59,70,72,90,91,94,95,96,97,99: hdf exists, nc missing
+  * re-ran hdf5-to-netcdf4 via backfill_hdf5-to-netcdf4.sh script; interactive session timed out during spill 97
+  * submitted batch job to finish; success
+* 53rd run, missing 0,1,6,7,8,11,12,14,16,17,19,21,23,25,26,28,29,48,49,55: hdf exists, nc missing
+  * submitted batch job; running
+* 55th run, #24: hdf exists, nc missing
+  * submitted batch job; success
+* 2000th run, missing 1,2,3,4,5,6,7,8,10,11,13,14,17,19,20,21,23,24,25,26,27,29,30,35: hdf exists, nc missing
+  * submitted batch job; success
+* 2004th run, missing 10,15,17,19,24: hdf exists, nc missing
+  * submitted batch job; success
+
+* 4th run: 92,94,96,99 out of time
+
+* 94th run, missing 101 and 102: oil spill origin outside of domain
+* 88th run, missing 64, 79: outside domain
+(MIDOSS)
+
+Continued work on MoaceanParcels pkg:
+* added GHA linkcheck workflow and environment-test.yaml
+* got Birgit's permission to use her Zim Kingston workbook as a basis for 1st kernel and notebook docs page in repo
+* explored parcels codebase; learned that JIT is not cython but rather developed by the project
+(OceanParcels)
+
+
+Fri 5-Nov-2021
+^^^^^^^^^^^^^^
+
+Toured sphinx-linkcheck GHA workflows to re-enable those disabled by 60d inactivity policy.
+(MOAD)
+
+Looked at inclusion of harvest file in runs re: discussion in yesterday's mtg:
+* done via -h command-line flag so will require AtlantisCmd mod
+* asked on Slack if there is value in turning harvet on/off via something in YAML file
+(Atlantis)
+
+Continued work on MoaceanParcels pkg:
+* pulled in Birgit's Zim Kingston notebook; started morphing it into example notebook for DeleteParticle kernel
+* created DeleteParticle kernel module and function
+(OceanParcels)
+
+Coffee w/ Karyn.
+
+Helped Karyn get Tereza's clustering code running in tmux.
+Pitched to Susan idea of SalishSeaClusters package based on Tereza's work.
+(SalishSeaCast)
+
+Helped Rachael w/ blown memory in her spills aggregation processing.
+(MIDOSS)
+
+Birthday dinner for Susan; charcuterie box from Charcuterie Vancouver and 2017 Oldfield Reserve Cab Franc.
+
+
+Sat 6-Nov-2021
+^^^^^^^^^^^^^^
+
+Goofed off.
+
+
+Sun 7-Nov-2021
+^^^^^^^^^^^^^^
+
+Finished(?) migration of phpgedview to familytree.sadahome.ca
+
+make_turbidity_file failed due to DST to PST time change; recovery:
+  ln -s /results/forcing/rivers/river_turb/riverTurbDaily2_y2021m10d06.nc riverTurbDaily2_y2021m11d07.nc
+  upload_forcing arbutus turbidity 
+  upload_forcing orcinus turbidity 
+  upload_forcing graham turbidity 
+  upload_forcing optimum turbidity 
+(SalishSeaCast)
+
+
+
+
+
+
+
+
+
+TODO:
+* for MoaceanParcels
+  * add disappeared particle kernel w/ Birgit's notebook as docs
+  * add docs re: adding pkgs to env
+  * add docs re: adding kernels to pkg
+  * add GHA CodeQL workflow
+
+
+TODO:
+* Move entry points from setup.py to setup.cfg
+  * SalishSeaCmd - done
+  * NEMO-Cmd - done
+  * MOHID-Cmd
+  * moad_tools
+  * Make-MIDOSS-Forcing
+  * WWatch3-Cmd
+  * also replace setup.py with pyproject.toml ??
+    * AtlantisCmd
+    * FVCOM-Cmd
+    * salishsea-site
+    * moad-app-dev
+    * rpn-to-gemlam
+    * SOG-Bloomcast
+    * SOG-Bloomcast-Ensemble
+    * SOG-forcing
+    * SOG
 
 
 TODO:
@@ -7203,8 +7399,8 @@ TODO:
   * update .readthedocs.yaml to new build API (see SalishSeaNowcast) - done
   * add .pre-commit-config.yaml; include pre-commit in environment-dev.yaml - done
   * add pyproject.toml - done
-  * add docs re: entry points in setup.cfg; requires setuptools>=51.0.0
-  * remove setup.py ???
+  * add docs re: entry points in setup.cfg; requires setuptools>=51.0.0 - done
+  * remove setup.py - done
   * add docs re: pre-commit
   * figure out if graham versions of pip, setuptools, wheel support pyproject.toml, setup.cfg, and pip install -e
     * graham python/3.9.6 has:
@@ -7248,13 +7444,6 @@ OPPTools PRs:
   add numpy-indexed dependency
   fix pyproj.Proj() initializations
   fix nctime().strftime in OPPTools.utils.fvcom_postprocess.vertical_transect_snap()
-
-
-Add CI workflows to run linkcheck on docs; see SalishSeaCast#repos-maint channel:
-  need sphinx>3.1 in env
-  example workflow in salishsea-site repo
-  don't forget to add sphinx & sphinx_rtd_theme to environment-test.yaml
-  See: https://salishseacast.slack.com/archives/C01GYJBSF0X/p1608574921004500
 
 
 15jun20: check mitigation of "index exceeds dimension bounds" IndexError in make_plots fvcom forecast-x2 research
