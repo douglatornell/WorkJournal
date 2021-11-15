@@ -7355,6 +7355,135 @@ make_turbidity_file failed due to DST to PST time change; recovery:
 (SalishSeaCast)
 
 
+Week 45
+-------
+
+Mon 8-Nov-2021
+^^^^^^^^^^^^^^
+
+Weekly group mtg; see whiteboard.
+* Rachael talked about using @profile decorator; https://github.com/pythonprofilers/memory_profiler to get line by line memory use; it is inspired by Robert Kern's line_profiler (fok at https://github.com/pyutils/line_profiler)
+(MOAD)
+
+Continued work on MoaceanParcels pkg:
+* added docstring to DeleteParticle()
+  * explored parcels docs to understand types
+  * got confused about OutOfBoundsError vs. ThroughSurfaceError
+* added kernels docs section
+  * found bug re: index & module index links; they are relative to page, but need to be relative to root of docs
+* created draft PR#1 to provide basis for discussions w/ group
+(OceanParcels)
+
+Phys Ocgy seminar re: Milne Inlet ice
+
+Pulled tools updates into production in prep for LiveOcean file format change tomorrow.
+(SalishSeaCast)
+
+
+Tue 9-Nov-2021
+^^^^^^^^^^^^^^
+
+download_live_ocean got stuck waiting for status file on boiler; investigation and recovery:
+* /data1/parker/LiveOcean_output/cas6_v3/f2021.11.09/ubc2/Info/process_status.csv doesn't exist, but /data1/parker/LiveOcean_roms/output/cas6_v3_lo8b/f2021.11.09/low_passed_UBC.nc does
+* sent email to Parker
+* killed download_live_ocean
+* rsynced /data1/parker/LiveOcean_roms/output/cas6_v3_lo8b/f2021.11.09/low_passed_UBC.nc to /results/forcing/LiveOcean/downloaded/20211109/
+* ran make_live_ocean_files
+* Parker replied saying that process_status sentinel file is no longer generated; recommends polling for results file and sleeping once it appears to ensure its transfer from the post-processing machine is complete
+(SalishSeaCast)
+
+Squash-merged dependabot PR in analysis-doug re: dask.
+
+Set up 95th-8 Monte Carlo run to re-run timed-out spills from 4th-100 (92 94 96 99) and 4 spills selected by Rachael & Susan in #monte_carlo channel to replace the 4 out-of-domain spills.
+MOHID-Cmd maintenance:
+* changed channels to conda-forge and nodefaults
+* updated dev env on Kudu
+* moved requirements.txt into envs/
+* created and rebase-merged PR#3 re: moving entry point declarations from setup.py to setup.cfg.
+(MIDOSS)
+
+
+Wed 10-Nov-2021
+^^^^^^^^^^^^^^^
+
+Day 1 of 1st ever UBC fall study break.
+
+Email from Parker: LiveOcean runs delayed due to cluster maintenance.
+download_live_ocean was still spinning at ~10:30; investigation:
+* ubc_done.txt and low_passed_UBC.nc files appeared at 08:43
+* recovery:
+    pkill download_live_ocean
+    mkdir /results/forcing/LiveOcean/downloaded/20211110
+    rsync -av boiler-nowcast:/data1/parker/LiveOcean_roms/output/cas6_v3_lo8b/f2021.11.10/low_passed_UBC.nc /results/forcing/LiveOcean/downloaded/20211110/
+    make_live_ocean_files
+Why download_live_ocean no work?
+* _is_file_ready() parses sentinel file, and its contents have changed to just the date/time when low_passed_UBC.nc is ready
+* fixed in PR#84, along with adding more production config tests
+(SalishSeaCast)
+
+Merged PR#2 from Michael re: speed-up for makenemo.
+(NEMO-3.6)
+
+moad_tools maintenance:
+* changed channels to conda-forge and nodefaults
+* updated dev env on Kudu
+* moved requirements.txt into envs/
+* created and merged PR#12 re: moving entry point declarations from setup.py to setup.cfg; messy merge because I forgot to pull dependabot changes before I created the PR branch :-(
+(MOAD)
+
+
+Thu 11-Nov-2021
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Remembrance Day
+
+Day 2 of 1st ever UBC fall study break.
+
+Email to Natasha (new DFO postdoc) re: repos for Salish Sea NEMO research.
+Changed docs repo default branch name from master to main.
+Changed to use new readthedocs build API.
+Started fixing broken & redirected links.
+(SalishSeaCast)
+
+
+Fri 12-Nov-2021
+^^^^^^^^^^^^^^^
+
+Day 3 of 1st ever UBC fall study break.
+
+FAL estate:
+* left msg for AST to update me on status of shares disposition
+
+Continued work on MoaceanParcels pkg:
+* fixed general and module index links in docs sidebar to that they are always relative to docs root; also updated cookiecutter-MOAD-pypkg
+* added blacken-docs pre-commit hook
+* added nbsphinx to dependencies and set up kernel example noteboooks docs section
+(OceanParcels)
+
+Got flu shot at Macdonald's Pharamcy.
+
+
+Sat 13-Nov-2021
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+Drove to White Rock to visit J&M.
+
+
+Sun 14-Nov-2021
+^^^^^^^^^^^^^^^
+
+Continued work on MoaceanParcels pkg:
+* investigated numpy deprecation warning:
+    /media/doug/warehouse/conda_envs/moacean-parcels/lib/python3.9/site-packages/parcels/field.py:241: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+      timeslices = np.array(timeslices)
+  Caused by what looks like unnecessary casting of lists of ndarrays to ndarrays; why not just leave the lists of ndarrays as is?
+  Deletion of lines 241 and 243 does not seem to negatively impact processing, but then I found https://github.com/OceanParcels/parcels/commit/f8faf9 that sought to resolve the issue but was reverted
+(OceanParcels)
+
+
 
 
 
@@ -7368,14 +7497,19 @@ TODO:
   * add docs re: adding pkgs to env
   * add docs re: adding kernels to pkg
   * add GHA CodeQL workflow
+  * add pre-commit hooks:
+    * pyupgrade
+
+OceanParcels:
+* Explore VisibleDeprecationWarning re: constructing ndarrays from lists of ndarrays; parcels/field.py:241 & 243 and commits f8faf9 & ffb6223; do timestamps & datafiles need to be ndarrays, or can they be lists?
 
 
 TODO:
 * Move entry points from setup.py to setup.cfg
   * SalishSeaCmd - done
   * NEMO-Cmd - done
-  * MOHID-Cmd
-  * moad_tools
+  * MOHID-Cmd - done
+  * moad_tools - done
   * Make-MIDOSS-Forcing
   * WWatch3-Cmd
   * also replace setup.py with pyproject.toml ??
@@ -7388,37 +7522,19 @@ TODO:
     * SOG-Bloomcast-Ensemble
     * SOG-forcing
     * SOG
+* add pre-commit hooks:
+  * blacken-docs
+  * pyupgrade
 
 
 TODO:
 * Python packaging docs and pkg cookiecutters updates:
-  * change to nodefaults in conda channels list - done
-  * move requirements.txt to envs/ - done
-  * add .gitignore - done
-  * rename readthedocs.yml to .readthedocs.yaml - done
-  * update .readthedocs.yaml to new build API (see SalishSeaNowcast) - done
-  * add .pre-commit-config.yaml; include pre-commit in environment-dev.yaml - done
-  * add pyproject.toml - done
-  * add docs re: entry points in setup.cfg; requires setuptools>=51.0.0 - done
-  * remove setup.py - done
   * add docs re: pre-commit
-  * figure out if graham versions of pip, setuptools, wheel support pyproject.toml, setup.cfg, and pip install -e
-    * graham python/3.9.6 has:
-        pip            20.0.2 
-        setuptools     56.2.0 
-        wheel          0.36.2 
-    * graham python/3.8.2 has:
-        pip            20.0.2 
-        setuptools     45.2.0       
-        wheel          0.34.2       
-    * pip 20.0.2 doesn't support editable install with pyproject.toml :-(  that feature seems to have appeared in 21.2.4, but it is not official in the changelog until 21.3
 
 
 
 TODO:
-* re-run spills:
-  * 4th-100: 92 94 96 99
-
+MIDOSS:
 * figure out how to merge/cherrypick relevant changes from Rachael's add_terminal branch in moad_tools
 
 Fix ariane docs:
