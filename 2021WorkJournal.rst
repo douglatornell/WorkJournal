@@ -4067,7 +4067,7 @@ nowcast-green run stalled at 25.3% complete; investigation:
     deleted tmp run & results dirs
     make_forcing_links arbutus nowcast-green
 Noticed that there were no progress messages from nowcast-x2, so restarted log aggregator.
-Discovered that nowcast-r12 28jun runs stopped, and 27jun run did not download to skookum; recovery:
+Discovered that nowcast-r12 28jun run stopped, and 27 jun run did not download to skookum; recovery:
     download_fvcom_results arbutus r12 nowcast 2021-06-27
     wait for 29jun run to fail
     launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-06-28"
@@ -7481,12 +7481,243 @@ Continued work on MoaceanParcels pkg:
       timeslices = np.array(timeslices)
   Caused by what looks like unnecessary casting of lists of ndarrays to ndarrays; why not just leave the lists of ndarrays as is?
   Deletion of lines 241 and 243 does not seem to negatively impact processing, but then I found https://github.com/OceanParcels/parcels/commit/f8faf9 that sought to resolve the issue but was reverted
+* Learned that recovery kernels are not JIT-compiled; that explains why f-strings work in DeleteParticle; may not work in a particle motion kernel.
+* Started adding narrative to DeleteParticle example notebook
 (OceanParcels)
 
 
+Week 46
+-------
+
+Mon 15-Nov-2021
+^^^^^^^^^^^^^^^
+
+Atmospheric river event that started Sat afternoon continuing; all highways east of Vancouver closed due to debris flows and washouts; >240mm of rain at Hope.
+
+collect_weather 00 did not finish; investigation:
+* re-tried download failures and queue 404s in log
+* 440 of 576 files downloaded; missing files in hours 036, 041, 043, 044, and no files in 037-040, 042, and 045-048
+* recovery started at ~10:00:
+    pkill collect_weather 00
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20211115/00
+    download_weather 00 2.5km
+    collect_weather 18 2.5km
+    download_weather 06 2.5km
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+collect_weather 18 did not finish; investigation:
+* re-tried download failures and queue 404s in log
+* 360 of 576 files downloaded
+* recovery started at ~15:40:
+    pkill collect_weather 18
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20211115/18
+    collect_weather 00 2.5km
+    download_weather 18 2.5km
+(SalishSeaCast)
+
+Did some issue triage, but only managed to close 2 low hanging fruit issues :-(
+Created new issues re: change from requests to httpx (#86), and moving hindcast logging out of production log into its own (#85).
+(SalishSeaNowcast)
+
+Weekly group mtg; see whiteboard.
+Squash-merged dependabot PRs re: updating pip to v21.1 re: migration from distutils to sysconfig:
+* NEMO_Nowcast
+* Make-MIDOSS-Forcing
+* tools/SalishSeaTools
+* salishsea-site
+* SOG-Bloomcast-Ensemble
+* analysis-doug/melanie-geotiff
+* analysis-doug/dask-expts
+(MOAD)
+
+Phys Ocgy seminar; Effie Fine on Artic ice and internal waves.
+
+Continued work on MoaceanParcels pkg:
+* Continued adding narrative to DeleteParticle example notebook
+(OceanParcels)
 
 
+Tue 16-Nov-2021
+^^^^^^^^^^^^^^^
 
+Weekly group mtg.
+Continued work on MoaceanParcels pkg:
+* re-learned enough cartopy to plot particles coloured by release time
+* finished DeleteParticle kernel example notebook
+(OceanParcels)
+
+See work journal.
+(Resilient-C)
+
+Coffee w/ Birgit.
+
+
+Wed 17-Nov-2021
+^^^^^^^^^^^^^^^
+
+Listened to pangeo mtg; showcase presentation Deepak Cherian re: xarray group-by and flox pkg; recorded for Pangeo Youtube channel
+
+collect_weather 18 did not finish; investigation:
+* 297 of 576 files downloaded; many missing files and empty hours
+* re-tried download failures and queue 404s in log (same pattern as Mon)
+* recovery started at ~09:55:
+    pkill collect_weather 18
+    supervisorctl restart sr_subscribe-hrdps-west
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20211116/18
+    download_weather 18 2.5km --yesterday
+    collect_weather 18 2.5km
+    download_weather 00 2.5km
+    download_weather 06 2.5km
+    download_weather 00 1km --yesterday --debug; failed due to files gone
+    download_weather 12 1km --yesterday --debug
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+Thought about design of spotter worker:
+* provisional cli:
+    python3 -m nemo_nowcast.workers.spotter $NOWCAST_YAML collect_weather --worker-args "00 2.5km" --watch-hours 6
+* does it belong in SalishSeaNowcast or NEMO_Nowcast; latter for generality, I guess??
+* set aside (for now) the idea of killing the worker when the watch period ends; just log a critical message to trigger alerts
+* explored using psutil instead of pgrep in a subprocess; should work, though pgrep has "out of the box" pattern matching
+collect_weather 00 did not finish; investigation:
+* re-tried download failures and queue 404s in log (same pattern as Mon)
+* 401 of 576 files downloaded; many missing files and several empty hours
+* recovery started at ~22:15:
+    pkill collect_weather 00
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20211118/00
+    collect_weather 06 2.5km
+    download_weather 00 2.5km
+(SalishSeaCast)
+
+Googled ``'utf-8' codec can't decode byte 0xc0 in position 1: invalid start byte``` that shows up occassionally (also on resilient-c); probably source is malware; best resolution is probably a 404 response
+(salishsea-site)
+
+See work journal.
+(Resilient-C)
+
+Got a solution from:
+  mamba create -c conda-forge -c nodefaults -n py310-test python=3.10 sphinx=4.3.0
+that was failing last week.
+
+
+Thu 18-Nov-2021
+^^^^^^^^^^^^^^^
+
+collect_weather 06 went MIA; investigation:
+* 0 of 576 files downloaded; no issues in log
+* recovery started at ~09:10:
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20211118/06
+    collect_weather 18 2.5km
+    download_weather 06 2.5km
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+Tried to figure out how to move log messages from run_NEMO_hindcast & watch_NEMO_hindcast to their own log file.
+collect_weather 00 did not finish; investigation:
+* re-tried download failures and queue 404s in log (same pattern as Mon)
+* 339 of 576 files downloaded; missing files in hour 029 and empty hours thereafter
+* recovery started at ~22:30:
+    pkill collect_weather 00
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20211118/00
+    collect_weather 06 2.5km
+    download_weather 00 2.5km
+(SalishSeaCast)
+
+FAL estate work:
+* AST Trust is now TSX Trust
+* got confirmation that paperwork was received, all forms in order, transfer process started, expected to take 6-8 weeks, so at least 2-3 weeks more
+
+Karyn:
+* tracked down missing files issue to Tereza's multiprocessing code dropping the end of a process when it joins
+* suggested that she run the multiprocessing module code, then the notebook extraction code to fill in any missing dates
+
+Becca:
+* failed to figure out why Ariane is failing w/ a "negative time" error on CIOPS-W runs longer than 3 wks; accumulated roundoff?
+
+Weekly mtg.
+(Atlantis)
+
+Created py310 branch in several repos and used it to add Python 3.10 to GHA pytest-coverage workflow to confirm that conda env can be solved:
+* success
+  * AtlantisCmd
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * salishsea-site
+* failure
+  * SalishSeaNowcast
+  * moad_tools
+
+Changed git default branch name from master to main; updated kudu and production deployments.
+Changed GHA deployment workflow so that it only fires for pushes to main branch, not feature branches.
+(salishsea-site)
+
+Updated cookiecutter-MOAD-pypkg to use Python 3.10 as default min & dev versions.
+(MOAD)
+
+
+Fri 19-Nov-2021
+^^^^^^^^^^^^^^^
+
+Mtg w/ Raisha to discuss nudging fields for Atlantis re: diatoms spikes, etc. that were discussed in yesterday's group mtg:
+* decided on day-avg values
+* Raisha will advice what variables she wants in addition to diatoms
+* play to create hindcast-long file of extracted variables; include lon/lat
+* convert to Atlantis (t, b, z) file (HydroConstruct?) as a separate step
+This process feels like it has commonality with one of the pre-processing steps in Tereza's clustering pipeline: extraction of variable(s) from a time range of SSC results files at a collection of grid locations.
+(Atlantis)
+
+See work journal.
+(Resilient-C)
+
+collect_weather 18 did not finish; investigation:
+* re-tried download failures and queue 404s in log
+* 326 of 576 files downloaded
+* recovery started at ~17:20:
+    pkill collect_weather 18
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20211115/18
+    collect_weather 00 2.5km &
+    download_weather 18 2.5km
+    download_weather 00 1km
+    download_weather 12 1km
+(SalishSeaCast)
+
+
+Sat 20-Nov-2021
+^^^^^^^^^^^^^^^
+
+Goofed off :-)
+
+
+Sun 21-Nov-2021
+^^^^^^^^^^^^^^^
+
+Explored SalishSeaNowcast Python 3.10 env creation failure; problem pkgs:
+* geopandas
+* pytables
+* rasterio
+geopandas is failing due to no fiona wheel for 3.10; isue #2212
+pytables appears to be falling in to unmaintained state
+rasterio is probably failing due to cython version it uses; PR# 2334 in progress
+Created hindcast-log branch for config to move hindcast log messages to separate files; also includes unit tests for logging.publisher config section.
+Moved coverage.py config from .coveragerc to pyproject.toml.
+Rebased hindcast-log branch on to main.
+(SalishSeaNowcast)
+
+Discovered that nowcast-r12 19nov run stopped; recovery:
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-11-19"
+    to be continued...
+collect_weather 18 did not finish; investigation:
+* re-tried download failures and queue 404s in log
+* 459 of 576 files downloaded
+* recovery started at ~17:00:
+    pkill collect_weather 18
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20211121/18
+    collect_weather 00 2.5km &
+    download_weather 18 2.5km
+    download_weather 00 1km --yesterday  # because run after 00Z
+    download_weather 12 1km
+    rm -rf /results/forcing/atmospheric/GEM1.0/GRIB/20211122/00
+Resumed trying to sync GEMLAM 2007 tarball to graham /nearline; used chum tmux session after Micahel's report of slow network rates on salish & skookum; initially running at 27Mb/s with an ETA of 1h42m
+  rsync -rtlv --partial-dir=/scratch/dlatorne/MEOPAR/GEMLAM/rsync-partial --progress /opp/GEMLAM/2007.tar graham:/nearline/rrg-allen/SalishSea/GEMLAM/
+(SalishSeaCast)
 
 
 
