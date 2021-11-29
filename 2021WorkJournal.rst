@@ -7720,6 +7720,253 @@ Resumed trying to sync GEMLAM 2007 tarball to graham /nearline; used chum tmux s
 (SalishSeaCast)
 
 
+Week 47
+-------
+
+Mon 22-Nov-2021
+^^^^^^^^^^^^^^^
+
+GEMLAM 2007 tarball rsync to graham failed after 219m due to broken pipe; restarted and was getting 80-100 Mb/s!!; dropped to <5Mb/s after lunch; killed transfer and restarted it; 11Mb/s during afternoon
+Continue backfilling nowcast-r12:
+  wait for run to fail ~15:30
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-11-20"
+  wait for run to finish ~22:30
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-11-21"
+collect_weather 00 did not finish; investigation:
+* re-tried download failures and queue 404s in log (same pattern as Mon)
+* 311 of 576 files downloaded; missing files in several hours and lots of empty hours
+* recovery started at ~23:30:
+    pkill collect_weather 00
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20211123/00
+    collect_weather 06 2.5km
+    download_weather 00 2.5km
+(SalishSeaCast)
+
+Reviewed mattmiller account settings and created ticket to get /home/mattmiller/ set to 755, and mattmiller added to group sallen.
+
+Confirmed that smelt:/backup/ is mounted; 2x10Tb RAID 1 = 8.6Tb; requested sudo
+Started work on borg-backup framework on smelt for our Linux laptops:
+* created emergency reserved space on smelt:/backup/borg/
+    sudo fallocate -l 2G /backup/borg/emergency_reserved_space
+* created borg repo for kudu
+    borg init --encryption=repokey-blake2 /backup/borg/kudu
+* had to change ownership of .config/borg/security/ and .cache/borg/ on smelt to get init to succeed
+* created borg-bkup/kudu-smelt.sh script and used it for 1st kudu backup to smelt
+* created borg-bkup/greta-smelt.sh script
+
+Added SPDX-License-Identifier comments to cookiecutter-MOAD-pypkg.
+(MOAD)
+
+Ordered Gazelle and Launch keyboard.
+
+Reviewed & merged NEMO-3.5-code PR#3 from Micahel re: adding GPSC arch file.
+(NEMO & XIOS)
+
+
+Tue 23-Nov-2021
+^^^^^^^^^^^^^^^
+
+PyCharm 2021 features webinar by Michael Kennedy, hosted by Paul Everitt
+* Michael:
+  * refactoring and code smells
+    * comments are deoderant for code smells
+    * ctrl-t shortcut into refactoring actions
+  * enough in-code type hints to enable PyCharm to help a lot
+    * e.g. in sqlalchemy app: ``albums: list[Album] = list(query)``
+  * database explorer
+  * object hierarchy explorer
+    * blue gutter dots provide info about class hierarchy relationships; inheritance, method overrides, etc.
+  * debugger
+    * set values and watches via variable info inlined in code by debugger
+* Paul
+  * no tabs and other ide chrome
+    * toggle preferences can be set via actions
+  * navigation via symbols
+  * test-first alternative to TDD 
+  * poetry support, like pipenv support
+  * http files for testing endpoints; postman
+  * infer structure from APIs; based on OpenAPI aka Swagger
+  * code with me; remote
+* re-worked notebook experience is in EAP
+
+GEMLAM 2007 tarball rsync to graham failed after 598m due to broken pipe; restarted and was getting 80-100 Mb/s!!; dropped to <5Mb/s after lunch; killed transfer and restarted it; 11Mb/s during afternoon
+Continue backfilling nowcast-r12:
+  wait for run to fail ~15:30
+
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-11-22"
+  wait for run to finish ~22:30
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-11-23"
+(SalishSeaCast)
+
+Group mtg:
+* discussed Jose's disappearing particles; due to need for time interpolation due to wwatch3 30 minute results
+* shift mtgs to as needed?
+* Ben will present beaching kernels on 7-Dec
+Continued work on MoaceanParcels pkg:
+* improving docs structure
+(MoaceanParcels)
+
+Took Prius for service re: tire inflation warning; resolution was replacement of a leaking valve core.
+
+See work journal.
+(Resilient-C)
+
+
+Wed 24-Nov-2021
+^^^^^^^^^^^^^^^
+
+Reviewed work journals from 2018 onward re: MOHID run start time vs. oil release time; tried to run MOHID with spill-hour start time and got error about spill being on land.
+(MIDOSS)
+
+Plastics project seminar by Erik van Sebille of Utrecht/OceanParcels; Philippe Delandmeter; parcels post-doc
+
+Picked up Prius from service.
+
+CubedHost announced shutdown.
+
+GEMLAM 2007 tarball rsync to graham failed after 1642m due to broken pipe; restarted; running at ~70 Mb/s; appears to have ignored --partial-dir and started from beginning; ~4h ETA
+Continue backfilling nowcast-r12:
+  wait for run to fail ~15:30
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-11-23"
+  wait for run to finish ~22:30
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2021-11-24"
+collect_weather 18 did not finish; investigation:
+* re-tried download failures and queue 404s in log
+* 363 of 576 files downloaded
+* recovery started at ~18:10:
+    pkill collect_weather 18
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20211124/18
+    collect_weather 00 2.5km
+    download_weather 18 2.5km
+(SalishSeaCast)
+
+
+Thu 25-Nov-2021
+^^^^^^^^^^^^^^^
+
+/home/dlatorne/project/dlatorne/MIDOSS/monte-carlo/test-spill-start/ run w/
+  INSTANT_PARTIC_EMIT       : 2018 02 03 22 00 00
+added to Lagrangian.dat to move oil relase time from start of run to 22nd hour
+Started updating MOHID-Cmd re: maint & oil release time:
+* added Python 3.9 to CI workflow
+* updated dev env
+* added pre-commit
+* renamed to .readthedocs.yaml
+* updated to new readthedocs build spec API w/ mamba-forge
+* add CodeQl scanning workflow
+(MIDOSS)
+
+upload_forcing orcinus nowcast+ failed with "Private key file is encrypted"; resulted in stalled run; fixed and running at 11:00
+collect_weather 18 did not finish; investigation:
+* re-tried download failures and queue 404s in log
+* 488 of 576 files downloaded
+* recovery started at ~22:50:
+    pkill collect_weather 18
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20211125/18
+    collect_weather 06 2.5km
+    download_weather 18 2.5km
+    download_weather 00 2.5km
+    download_weather 12 1km &
+(SalishSeaCast)
+
+Ship scrubber pollution potential project:
+* Andy Scott, IRES; spatial data science; how people change coastlines
+* Cathryn Murray, DFO
+Weekly project mtg:
+* discussion of Raisha/Sara paper
+(Atlantis)
+
+
+Fri 26-Nov-2021
+^^^^^^^^^^^^^^^
+
+Paid GST, PST & brokerage fees on Gazelle.
+
+Westgrid townhall:
+* John Longbottom; Alliance transition
+  * Alliance is transitioning into the Federation :-)
+  * new service delivery model
+  * Compute Canada goes away on 31-Mar-2022
+  * $50M/yr ops + $60M/hr capital; required matching
+* Matt Smith; ARB UBC
+  * Commerical Cloud adventures
+  * sockeye; 16k cores
+  * chinook; 20Pb object store
+  * public cloud:
+    * Azure:
+    * AWS:
+    * PoCs to bring users "up the stack"; Ronin & Bright 
+  * Venkat; Cloud Architect
+    * Ronin; aimed at groups w/o tech expertise
+    * AWS cluster solution for HPC
+    * budget mgmt; auto-scaling
+    * Ronin is AWS only at present
+  * Jacob Boschee
+    * cloud bursting on sockeye via Bright
+    * Singularity containers
+    * lots of discussion of data xfer; egress costs
+  * Ken Bigelow; consult, training
+  * Ronin pricing is per-user; special for academic; UBC has 3yr
+  * 130 users on Ronin:
+    * mostly trad HPC for people that need more capacity than national platforms
+    * niches like Windows, other interactive pkgs
+* Patrick
+  * RAC:
+    * 716 apps, up from 650; 31% westgrid (220)
+    * 30% fasttrack; 112 westgrid
+    * asks: 1.86x cpu; 4.95x gpu
+  * Narval & Beluga
+  * Alex
+    * 8-Dec EasyBuild for home dir installs
+
+Picked up cassoulet, etc. from Oyama Sauasage Co. at Granville Island market; to crowded for comfort.
+
+collect_weather 18 did not finish; investigation:
+* re-tried download failures and queue 404s in log
+* 393 of 576 files downloaded
+* recovery started at ~15:45:
+    pkill collect_weather 18
+    stopped & started sr_subscribe-hrdps-west via supervisorctl
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20211126/18
+    collect_weather 00 2.5km &
+    download_weather 18 2.5km
+    download_weather 00 1km 
+    download_weather 12 1km
+(SalishSeaCast)
+
+Beer (instad of coffee) w/ Jose.
+
+
+Sat 27-Nov-2021
+^^^^^^^^^^^^^^^
+
+Discussion in Slack w/ Rachael re: missing spill; she found 10 in 79th-100 that we missed; irrelevant because we need to re-run all with spill hour.
+Ran 1st spill w/ run start time of 21:30 and it worked.
+(MIDOSS)
+
+Helped Becca w/ full /data issue; told her to move analysis results to /ocean; Susan freed some space on /data.
+(MOAD)
+
+collect_weather 18 failed but didn't die due to ``KeyError: "getgrnam(): name not found: 'sallen'"``
+* recovery at ~15:50:
+    pkill collect_weather 18
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20211127/18
+    collect_weather 00 2.5km &
+    download_weather 18 2.5km
+    download_weather 00 1km 
+    download_weather 12 1km
+(SalishSeaCast)
+
+Drove to White Rock for sushi dinner w/ J&M.
+
+
+Sun 28-Nov-2021
+^^^^^^^^^^^^^^^
+
+Created MOHID-Cmd PR#6 to start Monte Carlo runs at spill hour and end run_days later; also extended forcing calculated for run by 1 day.
+Created MIDOSS-MOHID-config PR#19 to change Monte Carlo Model.dat template run start/end vars to include spill hour.
+(MIDOSS)
+
 
 
 TODO:
