@@ -7968,6 +7968,53 @@ Created MIDOSS-MOHID-config PR#19 to change Monte Carlo Model.dat template run s
 (MIDOSS)
 
 
+Week 48
+-------
+
+Mon 29-Nov-2021
+^^^^^^^^^^^^^^^
+
+Email to copyright@ubc re: advice on year ranges.
+
+Slack discussion of pkg name for SalishSeaCast results re-shaper/transformer.
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Phys Ocgy seminar: Lucia Hosekova; waves on Alaska Artic coast
+
+Continued work on pkg PR#1
+(MoaceanParcels)
+
+Gazelle delivered! See GazelleSetup.rst.
+
+
+Tue 30-Nov-2021
+^^^^^^^^^^^^^^^
+
+Dentist appt.
+
+collect_weather 18 did not finish; investigation:
+* re-tried download failures and queue 404 in log
+* 574 of 576 files downloaded
+* recovery at ~11:30:
+    pkill collect_weather 18
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20211129/18
+    download_weather 18 2.5km --yesterday
+    collect_weather 18 2.5km &
+    download_weather 00 2.5km
+    download_weather 06 2.5km
+    download_weather 00 1km --yesterday  # failed, as expected
+    download_weather 12 1km --yesterday
+    wait for forecast2 runs to finish
+
+    download_weather 12 2.5km
+UptimeRobot reported 9 minutes of connection timeouts on salishsea-site, ERDDAP, and Resilient-C between 05:08 and 05:20
+sr_subscribe had connection timeouts between 05:06 and 05:16
+(SalishSeaCast)
+
+
 
 TODO:
 * for MoaceanParcels
