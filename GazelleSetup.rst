@@ -27,13 +27,30 @@ Basics
   * had to fix permissions on private keys to 600
 * used disks utility to rename file system on 2Tb drive to warehouse and set
   it to mount on boot
+* installed Gnome 3 Tweaks via Pop Shop
+  * set Caps Lock to Ctrl
+  * enabled week numbers in calendar
 * added Git PPA to software sources
 * cloned dotfiles repo from GitHub
-  * created pop_os/khawla/.ssh/config by coping from ubuntu/kudu/.ssh/config
+  * created pop_os/khawla/ by copying from ubuntu/kudu/ and editing:
+  
+    * .ssh/config
+    * .gitconfig
+    * .profile
+
   * TODO:
 
     * set up symlinks
       ln -s ~/dotfiles/pop_os/khawla/.ssh/config ~/.ssh/config
+      ln -s ~/dotfiles/pop_os/khawla/.gitconfig ~/.gitconfig
+      ln -sf ~/dotfiles/pop_os/khawla/.profile ~/.profile
+
+      .bash_aliases
+      .condarc
+      .cookiecutterrc
+      githooks: rescuetime
+      vscode settings.json
+      
 * TODO:
   * remap Caps Lock key to Ctrl; need gnome-tweaks
 
@@ -59,6 +76,11 @@ Minecraft
 PyCharm
 ^^^^^^^
 
+* downloaded Toolbox app tarball from jetbrains.com
+* unpacked tarball into ~/bin/
+* ran the contained app to launch Toolbox and install it as a startup app
+* 
+
 MOAD Repos
 ^^^^^^^^^^
 
@@ -70,3 +92,58 @@ borg Backups
 
 Darktable & Photos
 ^^^^^^^^^^^^^^^^^^
+
+* installed Darktable 3.6.1 flatpak from Pop Shop
+* TODO:
+  * migrate config
+  * migrate images
+  * Rapid Photo Downloader
+  * dotfiles backup-photos.sh
+
+
+Gnucash
+^^^^^^^
+
+* installed Gnucash 4.8a+ flatpak from Pop Shop
+* TODO:
+  * migrate files
+  * migrate reports
+
+Other Applications
+^^^^^^^^^^^^^^^^^^
+
+flatpaks are generally newer versions than .deb (when both are available)
+
+From Pop Shop:
+
+* GIMP 2.10.28 flatpak
+* Inkscape 1.1.1 flatpak
+* Remmina 1.4.21 flatpak
+* Skype flatpak
+* Slack flatpak
+* Thunderbird flatpak
+* VirtualBox deb
+* Zoom flatpak
+* Xournal++ flatpak
+  * TODO: migrate signature file
+
+Others:
+
+* Microsoft Teams .deb from microsoft.com
+  * that adds packages.microsoft.com/repos/ms-teams to software sources
+* Rescuetime .deb from rescuetime.com and Firefox add-on
+  * made it an auto-start app by creating ~/.config/autostart/rescuetime.desktop containing:
+
+      [Desktop Entry]
+      Type=Application
+      Exec=/usr/bin/rescuetime
+      Hidden=false
+      NoDisplay=false
+      X-GNOME-Autostart-enabled=true
+      Name[en_CA]=RescueTime
+      Name=Rescuetime
+      Comment[en_CA]=RescueTime monitoring app
+      Comment=Rescuetime monitoring app
+
+Chromium for CubedHost
+eFunds from my portfolio repo
