@@ -8014,6 +8014,105 @@ UptimeRobot reported 9 minutes of connection timeouts on salishsea-site, ERDDAP,
 sr_subscribe had connection timeouts between 05:06 and 05:16
 (SalishSeaCast)
 
+Continued Gazelle (khawla) setup; see notes.
+
+Minecraft 1.18 released; started new long-term world (1_18-1) w/ Susan on CubedHost.
+
+
+December
+--------
+
+Wed 1-Dec-2021
+^^^^^^^^^^^^^^
+
+nowcast-x2/30nov21 stopped for no apparent reason ~30m before completion; no forecast-x2; no nowcast-r12
+* recovery started at ~10:30:
+    launch_remote_worker arbutus make_fvcom_boundary arbutus x2 nowcast 2021-11-30
+    wait for nowcast-r12 run to finish
+    launch_remote_worker arbutus make_fvcom_boundary arbutus x2 nowcast 2021-12-01
+(SalishSeaCast)
+
+Continued Gazelle (khawla) setup; see notes.
+* learned that Gnome Terminal config is stored in dconf registry; can be viewed with:
+    dconf dump /org/gnome/terminal/
+
+Tweaked ocean .bashrc so that terminal tab title is automatically set to host:pwd-tail and pwd-tail in prompt is coloured.
+
+
+Thu 2-Dec-2021
+^^^^^^^^^^^^^^
+
+khawla crashed on waking with a GPU error; out of a critical resource other than memory.
+
+download_live_ocean was in re-try mode for 3 hours, then failed; re-run also failed; confirmed that files are not present on boiler; persisted 01dec21 file via symlink; launched
+(SalishSeaCast)
+
+Continued Gazelle (khawla) setup; see notes.
+
+Coffee w/ Tereza.
+
+Discussion w/ Susan re: proposal for Michael & Amber:
+pca = eof & time series 
+eof = empircal orthoganal function = eigenvector
+time series = eigenvalue
+dask
+Reshapr
+
+Rachael observed that a bunch of Lagranian*.nc files are permission 640 instead of 644, so unreadable by her:
+* found that they are the files processed by backfill_hdf5-to-netcdf4.sh (see https://midoss.slack.com/archives/CQ6FAG05N/p1635979718003500)
+* adjusted permissions
+* added permissions adjustment to backfill_hdf5-to-netcdf4.sh
+(MIDOSS)
+
+Updated PyCharm to 2021.3 on khawla.
+Enabled download of shared pre-built indexes for popular Python pkgs like numpy.
+
+Weekly team mtg.
+(Atlantis)
+
+
+Fri 3-Dec-2021
+^^^^^^^^^^^^^^
+
+Work at ESB while Rita is at home.
+
+Bought grid paper notebooks for Minecraft and KN95 masks at UBC Bookstore.
+
+Bought ticket for PyCascades 4-7 Feb 2022; paid from Webfaction refund in Paypal acct.
+
+Wrote draft of proposal/SoW blurb for SEA contract from Michael & Amber re: dask.
+
+Continued Gazelle (khawla) setup; see notes.
+
+
+Sat 4-Dec-2021
+^^^^^^^^^^^^^^
+
+Continued Gazelle (khawla) setup; see notes.
+
+Checked status of Minecraft mods:
+* MaLiLib has a 1.18 release
+* Litematica has a 1.18 beta release (1.17 was never beyond beta)
+* MiniHUD has no 1.18
+* Sodium has a 1.18 alpha release
+* Lithium has no 1.18
+* Phosphur has no 1.18
+* Hydrogen has no 1.18
+* Iris has a 1.18 release
+* Complementary shaders has a 1.18 release
+
+
+Sun 5-Dec-2021
+^^^^^^^^^^^^^^
+
+Continued Gazelle (khawla) setup; see notes.
+
+Polished draft of proposal/SoW blurb for SEA contract from Michael & Amber re: dask.
+
+Installed Iris for Minecraft and it brought Sodium and Fabric very eaasily, and improved 
+performance; added Complementary shaders for prettiness.
+
+
 
 
 TODO:
