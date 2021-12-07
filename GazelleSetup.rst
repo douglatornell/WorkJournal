@@ -31,12 +31,18 @@ Basics
   * set Caps Lock to Ctrl
   * enabled week numbers in calendar
 * added Git PPA to software sources
+* installed Mercurial distro pkg via apt
+* overrode super+T keyboard shortcut to launch terminal with `/usr/bin/gnome-terminal --window --maximize`
 * cloned dotfiles repo from GitHub
   * created pop_os/khawla/ by copying from ubuntu/kudu/ and editing:
   
     * .ssh/config
     * .gitconfig
     * .profile
+    * githooks/rescuetime_commit_highlight.sh
+    * .bash_aliases
+    * .condarc
+    * .cookiecutterrc
 
   * TODO:
 
@@ -44,15 +50,21 @@ Basics
       ln -s ~/dotfiles/pop_os/khawla/.ssh/config ~/.ssh/config
       ln -s ~/dotfiles/pop_os/khawla/.gitconfig ~/.gitconfig
       ln -sf ~/dotfiles/pop_os/khawla/.profile ~/.profile
+      ln -sf ~/dotfiles/pop_os/khawla/.bash_aliases ~/.bash_aliases
+      ln -sf ~/dotfiles/pop_os/khawla/.condarc ~/.condarc
+      ln -sf ~/dotfiles/pop_os/khawla/.cookiecutterrc ~/.cookiecutterrc
 
-      .bash_aliases
-      .condarc
-      .cookiecutterrc
-      githooks: rescuetime
       vscode settings.json
       
-* TODO:
-  * remap Caps Lock key to Ctrl; need gnome-tweaks
+* installed Mambaforge-pypy3 (like miniconda, but with conda-forge as default and only channel, mamba in place of conda, and PyPy 3.7 in base env) from https://github.com/conda-forge/miniforge
+    cd ~/Downloads/
+    curl -L -O https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-$(uname)-$(uname -m).sh
+    cd ~
+    bash ~/Downloads/Mambaforge-pypy3-$(uname)-$(uname -m).sh
+* created ~/conda_envs/ for storage of conda envs on fastest storage (now that it is big); 1st env creation for NEMO-Cmd was blazingly fast :-)
+* thrashed getting camera to work until I looked at System76 troubleshooting page and realized that it was disabled by the Fn+F10 hardware switch
+* rsync-ed ~/Documents/ and /media/doug/warehouse/Documents from kudu into ~/Documents/
+
 
 Firefox
 ^^^^^^^
@@ -60,18 +72,45 @@ Firefox
 * signed into Firefox to sync extensions
   * created extra tab containers
 
+
 VSCode
 ^^^^^^
 
 * installed VSCode via .deb download from code.visualstudiocode.com
   * that adds packages.microsoft.com/repos/code to software sources
-  * TODO install extensions
+  * installed extensions:
+    * IntelliJ IDEA Keybindings
+    * Python
+    * GitLens
+    * Remote - SSH
+    * GitHub Pull Requests and Issues
+    * Clipboard
+    * Code Spell Checker
+    * Mako
+    * Modern fortran
+    * pre-commit-vscode
+    * Extension Pack for reStructuredText
+
 
 Minecraft
 ^^^^^^^^^
 
 * installed Minecraft via .deb download from minecraft.net
   * TODO install mods, datapacks, etc.
+* Checked status of Minecraft mods on 4-Dec-21:
+  * MaLiLib has a 1.18 release
+  * Litematica has a 1.18 beta release (1.17 was never beyond beta)
+  * MiniHUD has no 1.18
+  * Sodium has a 1.18 alpha release
+  * Lithium has no 1.18
+  * Phosphur has no 1.18
+  * Hydrogen has no 1.18
+  * Iris has a 1.18 release
+  * Complementary shaders has a 1.18 release
+  * VanillaTweaks as a 1.18 release
+* Downloaded Iris universal installer from irisshaders.net; installed it w/ the Fabric option and
+  got Fabric, Sodium and Iris; in-game CPU usage dropped to ~40$ and ~150 fps (capped) was solid
+
 
 PyCharm
 ^^^^^^^
@@ -79,16 +118,56 @@ PyCharm
 * downloaded Toolbox app tarball from jetbrains.com
 * unpacked tarball into ~/bin/
 * ran the contained app to launch Toolbox and install it as a startup app
-* 
+* installed PyCharm via Toolbox
+* exported settings.zip from PyCharm on kudu; rsynced to khawla; imported
+* installed plugins:
+  * .ignore
+  * Nyan Progress Bar
+  * requirements
+  * updated Datalore
+  * skipped Key Promoter X for now
+
 
 MOAD Repos
 ^^^^^^^^^^
 
+* created /media/doug/warehouse/MEOPAR/ and cloned SalishSeaCast org repos into it:
+
+  * NEMO-Cmd
+  * SalishSeaNowcast - **incomplete; needs OPPTools**
+  * tools
+  * SalishSeaCmd
+  * FVCOM-Cmd
+* TODO:
+  * rsync .idea/workspace.xml files from kudu projects to get project level configs
+  * OPPTools from GitLab
+
+* created /media/doug/warehouse/MIDOSS/ and cloned MIDOSS org repos into it:
+
+  * MOHID-Cmd
+  * MIDOSS-MOHID-config
+* TODO: rsync .idea/workspace.xml files from kudu projects to get project level configs
+
+* created /media/doug/warehouse/MOAD/ and cloned UBC-MOAD org repos into it:
+
+  * MoaceanParcels
+  * moad_tools
+* TODO: rsync .idea/workspace.xml files from kudu projects to get project level configs
+
+
 43ravens Repos
 ^^^^^^^^^^^^^^
 
+* personal/Workjournal
+* 43ravens/biz-journal
+* 43ravens/NEMO_Nowcast (added to SalishSeaCast group in PyCharm project mgr)
+
+* TODO: rsync .idea/workspace.xml files from kudu projects to get project level configs
+
+
 borg Backups
 ^^^^^^^^^^^^
+
 
 Darktable & Photos
 ^^^^^^^^^^^^^^^^^^
@@ -105,9 +184,12 @@ Gnucash
 ^^^^^^^
 
 * installed Gnucash 4.8a+ flatpak from Pop Shop
-* TODO:
-  * migrate files
-  * migrate reports
+* migrate files as part of rsync ~/Documents/ and /media/doug/warehouse/Documents from kudu into 
+  ~/Documents/
+* manually migrated preferences by comparison w/ Gnucash running on kudu becayse they are stored in dconf; minimal work
+* migrated reports by rsync-ing kudu:.local/share/gnucash/saved-reports-2.8 to 
+  .var/app/org.gnucash.GnuCash/data/gnucash/saved-reports-2.8
+
 
 Other Applications
 ^^^^^^^^^^^^^^^^^^
