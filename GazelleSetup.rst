@@ -234,6 +234,11 @@ From Pop Shop:
 * Xournal++ flatpak
   * TODO: migrate signature file
 
+After a lot of searching, learned that I could xfer Thunderbird profile from kudu into
+~/.var/app.org.mozilla.Thunderbird/.thunderbird/ to get my address book, feeds, etc.
+Alos learned that to run a flatpak app from the command line one uses something like
+``flatpak run org.mozilla.Thunderbird``
+
 Others:
 
 * Microsoft Teams .deb from microsoft.com
