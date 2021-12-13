@@ -139,20 +139,44 @@ MOAD Repos
   * SalishSeaCmd
   * FVCOM-Cmd
 * TODO:
-  * rsync .idea/workspace.xml files from kudu projects to get project level configs
+  * rsync .idea/workspace.xml and .idea/vcs.xml files from kudu projects to get project level configs
+  * re-create PyCharm project structures
   * OPPTools from GitLab
 
 * created /media/doug/warehouse/MIDOSS/ and cloned MIDOSS org repos into it:
 
   * MOHID-Cmd
   * MIDOSS-MOHID-config
-* TODO: rsync .idea/workspace.xml files from kudu projects to get project level configs
+  * Make-MIDOSS-Forcing
+  * docs
+  * MIDOSS-MOHID-CODE
+  * WWatch3-Cmd
+  * MIDOSS-MOHID-grid
+* rsync-ed .idea/workspace.xml and .idea/vcs.xml files from kudu projects to get project level 
+    configs
+* TODO:
+  * re-create PyCharm project structures
 
 * created /media/doug/warehouse/MOAD/ and cloned UBC-MOAD org repos into it:
 
   * MoaceanParcels
   * moad_tools
-* TODO: rsync .idea/workspace.xml files from kudu projects to get project level configs
+  * cookiecutter-MOAD-pypkg
+  * cookiecutter-analysis-repo
+  * docs
+  * PythonNotes
+* rsync-ed .idea/workspace.xml and .idea/vcs.xml files from kudu projects to get project level configs
+* TODO:
+  * re-create PyCharm project structures
+
+
+* created /media/doug/warehouse/Atlantis/ and cloned SS-Atlantis org repos into it:
+
+  * AtlantisCmd
+* rsync-ed .idea/workspace.xml and .idea/vcs.xml files from kudu projects to get project level configs
+* TODO:
+  * re-create PyCharm project structures
+  * svn checkouts from CSIRO Bitbucket server
 
 
 43ravens Repos
@@ -161,6 +185,7 @@ MOAD Repos
 * personal/Workjournal
 * 43ravens/biz-journal
 * 43ravens/NEMO_Nowcast (added to SalishSeaCast group in PyCharm project mgr)
+* 43ravens/client-UBC-SCARP -> clients/UBC-SCARP
 
 * TODO: rsync .idea/workspace.xml files from kudu projects to get project level configs
 
