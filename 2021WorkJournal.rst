@@ -8113,6 +8113,167 @@ Installed Iris for Minecraft and it brought Sodium and Fabric very eaasily, and 
 performance; added Complementary shaders for prettiness.
 
 
+Week 49
+-------
+
+Mon 6-Dec-2021
+^^^^^^^^^^^^^^
+
+Passed draft of proposal/SoW blurb for SEA contract re: dask to Michael & Amber.
+
+/ocean full!! >40T chomped since last week!
+
+upload_forcing orcinus nowcast+ failed due to private key issue; i.e. network stack on one of the
+login nodes; re-ran manually at ~10:45
+nowcast-agrif timed out
+(SalishSeaCast)
+
+6585
+
+Rebase-merged MOHID-Cmd PR#6 to start Monte Carlo runs at spill hour and end run_days later; also extended forcing calculated for run by 1 day.
+Rebase-merged MIDOSS-MOHID-config PR#19 to change Monte Carlo Model.dat template run start/end vars to include spill hour.
+Updated graham clones re: above.
+(MIDOSS)
+
+
+Tue 7-Dec-2021
+^^^^^^^^^^^^^^
+
+Moved 1st Monte Carlo (spill day) .csv and YAML files to monte-carlo/near-BP_spill-day/
+Added spills 5-14 from /ocean/rmueller/MIDOSS/spill_files_091921/SalishSea_oil_spills_1.csv to SalishSea_oil_spills-fixed-col0.csv to replace 10 out-of-domain spills spill-day/79th-100; recall that spills 1-4 from there replace out-of-domain spills discovered earlier.
+Prepared 1st-200 run:
+  for grp in {1..1}; do head -1 SalishSea_oil_spills-fixed-col0.csv > SalishSea_oil_spills_BP_spill-hr-${grp}-200.csv; done
+  starts=( $(seq 2 2) ); grps=( $(seq 1 1) ); for i in "${!grps[@]}"; do head -${starts[$i]}01 SalishSea_oil_spills-fixed-col0.csv | tail -200 >>SalishSea_oil_spills_BP_spill-hr-${grp}-200.csv; done
+  for grp in {1..1}; do sed -i "s/job id: .*-200_near-BP_spill-hr/job id: ${grp}-200_near-BP_spill-hr/" near-BP.yaml && mohid monte-carlo --debug near-BP.yaml SalishSea_oil_spills_BP_spill-hr-${grp}-200.csv; done
+Susan discovered that MOHID runs are 6 days long instead of 7 :-(
+(MIDOSS)
+
+Backfilled nowcast-agrif:
+  make_forcing_links orcinus nowcast-agrif 2021-12-06
+  wait for run to finish
+  make_forcing_links orcinus nowcast-agrif 2021-12-07
+(SalishSeaCast)
+
+Group mtg; Ben presentation of work on grounding that he and May did:
+* custom particle w/ Variable; Jose doing similar
+* modified AdvectionRK4 kernel to work only on particle.beached == 0
+* Beaching kernel to change particle.beached based on random offset to shore & velocity calcs
+(OceanParcels)
+
+Minecraft migration from CubedHost to NodeCraft:
+* stopped servers
+* arhcived 1_18-1 world as archive-1638910105755.zip and downloaded
+* Set up 6Gb nodecraft server and uploaded world
+* world seed: -4730028810431252091
+* struggled with whitelist enforcement and got griefed by 2 random players
+
+
+Wed 8-Dec-2021
+^^^^^^^^^^^^^^
+
+Confirmed off-by-one error in calc of MOHID run end date/time; fixed via MOHID-Cmd PR#7.
+Re-ran 1-200_near-BP_spill-hr.
+(MIDOSS)
+
+Investigated napari multidimensional image processing pkg posted by Matt on slack; hard to see how
+it is useful for netCDF4 datasets.
+
+Signed up for access to GitHub code search tech preview.
+
+Continued Gazelle (khawla) setup; see notes.
+
+Fixed Nodecraft server whitelist enforcment by editing server.properties directly.
+
+
+Thu 9-Dec-2021
+^^^^^^^^^^^^^^
+
+upload_forcing orcinus nowcast+ failed with "Private key file is encrypted";
+* revcovery started at ~10:20:
+    pkill watch_NEMO_agrif  # on skookum
+    qdel 10943770.orca2.ibb  # on orcinus
+    rm -rf 09dec21nowcast-agrif_2021-12-09T093507.998320-0800/ 09dec21/  # on orcinus
+    upload_forcing orcinus nowcast+  # on skookum
+    make_forcing_links orcinus nowcast-agrif  # on skookum
+(SalishSeaCast)
+
+Confirmed that 1-200_near-BP_spill-hr has 7d long runs.
+(MIDOSS)
+
+UBC-DFO modeling mgt; Natasha described her Ph.D. work.
+
+
+Fri 10-Dec-2021
+^^^^^^^^^^^^^^^
+
+Updated Nodecraft server to 1.18.1 re: improvements & log4j vulnerability.
+
+download_live_ocean timed out; re-ran at ~13:00
+Resumed trying to get GEMLAM from /opp to graham:nearline/ by building 3-mo tarballs instead of
+yearly:
+    time tar -cvvf GEMLAM_2007_jan-mar.tar 2007/20070[1-3]* | tee GEMLAM_2007_jan-mar.index
+      real    94m28.878s                                                         
+      user    0m28.209s                                                          
+      sys     4m25.058s  
+  Learned that graham has a data transfer node (DTN) that can/should be used for rsync xfers:
+    gra-dtn1.computecanada.ca
+  Tested it for rsync:
+    time rsync -rtlv --partial-dir=/scratch/dlatorne/MEOPAR/GEMLAM/rsync-partial --progress /opp/GEMLAM/GEMLAM_2007_jan-mar.*  graham-dtn:/nearline/rrg-allen/SalishSea/GEMLAM/
+      real    115m32.456s                                                        
+      user    27m52.347s                                                         
+      sys     7m8.908s                                                           
+  Also did 2007-q2
+(SalishSeaCast)
+
+See work journal. (0.25h)
+(Resilient-C)
+
+Convinced myself that ERDDAP is not affected by log4j vulnerability; sent msg to list to get 
+confirmation.
+Compute Canada cloud team provided:
+  sudo find / -name \*log4j\*.jar 2>/dev/null
+as a way to search for exposure to CVE-2021-44228; ran it on skookum, arbutus and khawla:
+* khawla: only exposure is minecraft
+* arbutus: no exposure
+* skookum: found in /data/MATLAB/R2017b/; deleted /data/MATLAB/
+(ERDDAP)
+
+Helped Raisha w/ atlantis-trunk cleanup after she did a new checkout to get Beth's latest code.
+(Atlantis)
+
+Queued backfill job to fix 2 spills in 1-200 where hdf5-to-netcdf4 didn't complete;
+
+
+Sat 11-Dec-2021
+^^^^^^^^^^^^^^^
+
+Updated Iris/Fabric/Sodium on khawla to 1.18.1 by re-running Iris installer.
+
+Fixed bug in backfill_hdf5-to-netcdf4 script re: permissions fix and fixed perms in spills 162 and 
+165 that it didn't get right.
+Prepared 4 more 200 spill runs:
+  for grp in {2..5}; do head -1 SalishSea_oil_spills-fixed-col0.csv > SalishSea_oil_spills_BP_spill-hr-${grp}-200.csv; done
+  starts=( $(seq 4 2 10) ); grps=( $(seq 2 5) ); for i in "${!grps[@]}"; do head -${starts[$i]}01 SalishSea_oil_spills-fixed-col0.csv | tail -200 >>SalishSea_oil_spills_BP_spill-hr-${grps[$i}]}-200.csv; done
+  for grp in {2..5}; do sed -i "s/job id: .*-200_near-BP_spill-hr/job id: ${grp}-200_near-BP_spill-hr/" near-BP.yaml && mohid monte-carlo --debug near-BP.yaml SalishSea_oil_spills_BP_spill-hr-${grp}-200.csv; done
+(MIDOSS)
+
+Continued copying GEMLAM from /opp to graham:nearline/ in 3-mo tarballs: 2007-q3
+(SalishSeaCast)
+
+Drove to White Rock to visit J&M.
+
+
+Sun 12-Dec-2021
+^^^^^^^^^^^^^^^
+
+Prepared and queued 5 more 200 spill runs.
+(MIDOSS)
+
+Continued copying GEMLAM from /opp to graham:nearline/ in 3-mo tarballs: 2007-q4
+Advised Becca on how to add chunking to her CIOPS-West processing.
+Changed skookum to SalishSeaNowcast graham-dtn branch for in-use test.
+(SalishSeaCast)
+
 
 
 TODO:
