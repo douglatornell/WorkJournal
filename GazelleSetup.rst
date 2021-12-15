@@ -193,6 +193,12 @@ MOAD Repos
 borg Backups
 ^^^^^^^^^^^^
 
+* installed borgbackup system pkg via apt
+* Cloned douglatornell/borg-bkup
+* created borg repo w/ encryption and auto compression using zstd for khawla on lizzy
+    borg init --encryption=repokey /backup/borg/khawla
+* created and tuned borg-bkup/khawla-lizzy.sh
+
 
 Darktable & Photos
 ^^^^^^^^^^^^^^^^^^
