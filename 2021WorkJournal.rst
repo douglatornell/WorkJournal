@@ -8175,8 +8175,8 @@ Confirmed off-by-one error in calc of MOHID run end date/time; fixed via MOHID-C
 Re-ran 1-200_near-BP_spill-hr.
 (MIDOSS)
 
-Investigated napari multidimensional image processing pkg posted by Matt on slack; hard to see how
-it is useful for netCDF4 datasets.
+Investigated napari multidimensional image processing pkg posted by Matt on slack; hard to see 
+how it is useful for netCDF4 datasets.
 
 Signed up for access to GitHub code search tech preview.
 
@@ -8266,7 +8266,7 @@ Drove to White Rock to visit J&M.
 Sun 12-Dec-2021
 ^^^^^^^^^^^^^^^
 
-Prepared and queued 5 more 200 spill runs.
+Prepared and queued 5 more 200 spill runs: [6-10]-200.
 (MIDOSS)
 
 Continued copying GEMLAM from /opp to graham:nearline/ in 3-mo tarballs: 2007-q4
@@ -8274,6 +8274,271 @@ Advised Becca on how to add chunking to her CIOPS-West processing.
 Changed skookum to SalishSeaNowcast graham-dtn branch for in-use test.
 (SalishSeaCast)
 
+
+Week 50
+-------
+
+Mon 13-Dec-2021
+^^^^^^^^^^^^^^^
+
+upload_forcing graham-dtn for forecast2, nowcast+ & turbidity failed because the worker got 
+launched with graham-hindcast despite the change in nowcast.yaml; I guess I need to restart 
+the manager:
+* tried to sue HUP signal to get manager to reload config; failed with zmq exceptions see 
+  issue #88
+* restarted manager
+* re-ran upload_forcing to backfill
+Noticed that sarrcenia for 1km HRDP is throwing brkoen pip errors every 64s:
+* killed instance runnning under supervisord
+* ran in foreground for several hours; no error, but no files either
+* stopped foreground and used:
+    sr_subscribe cleanup hrdps-west-1km.conf
+  to de-allocate the queue and bindings on the server to that it can be re-configured
+* ran in foreground again, got new server-sdie queue, but not expecting any more files today
+* switched back to running under supervisord
+Squash-merged dependabot PRs re: lxml:
+* tools
+* SalishSeaNowcast
+More advice to Becca on how to add chunking to her CIOPS-West processing.
+Continued copying GEMLAM from /opp to graham:nearline/ in 3-mo tarballs: 2008-q1-q3
+(SalishSeaCast)
+
+Prepared and queued 10 more 200 spill runs: [11-15]-200 & [16-20]-200.
+(MIDOSS)
+
+First haircut in nearly 2 years!
+
+
+Tue 14-Dec-2021
+^^^^^^^^^^^^^^^
+
+Worked at ESWB while Rita is at home.
+
+Got khawla set up on ubcsecure wifi.
+
+Checked sarracenia log for 1km; still no files :-(
+Continued copying GEMLAM from /opp to graham:nearline/ in 3-mo tarballs: 2008-q4, 2009-q1
+Met w/ Becca on how to add chunking to her CIOPS-West processing; Python code not working; decided to just use ncks as a post- step.; also 99% reduction was probably an error artifact (files full of repeated vary large floats)
+(SalishSeaCast)
+
+Lots of hdf5-to-netcdf4 failures, and >500 core dump files; core dumps are due to make_hdf_files failures due to disk quota exceeded on /scratch; resulted in scattered spills not running.
+Deleted [10-19]-200.
+Queued [10-11]-200.
+(MIDOSS)
+
+Squash-merged PR#87 re: using graham-dtn; released it to production.
+Built a Python 3.10 conda env, installed all of our pkgs that are dependencies, and successfully ran test suite.
+(SalishSeaNowcast)
+
+Re-ran moad_tools GHA workflow CI#99 to test Python 3.10 env; success!
+Changed cookiecutter-MOAD-pypkg to use "copyright creation_year – present".
+(MOAD)
+
+
+Wed 15-Dec-2021
+^^^^^^^^^^^^^^^
+
+SharcNet webinar:
+James Desjardins, Brock
+Tips for adjusting job parameters to reduce wait time
+* processes in place to notify users of unexpectedly long wait time
+* "wait time pain"
+  * amount of waiting resources; resources allocated between submit time and planned start time
+  * amt of running resources
+  * account state
+    * cummulative usage can be above or below target share
+    * should be able to burst usage when well below target to get back to target
+* partitioning
+  * <=24h jobs can run on most any node; longer have access to fewer
+  * full node jobs can run on most any node; by-core jobs have access to fewer nodes
+    * be sure to specify --nodes and --ntasks-per-node to get access to by-node
+    * --ntasks implies by-core
+* partition-stats command
+* clusterstats command
+* job params relation to partition access
+  * can use sacct to analyze finished jobs to understand job shape to tune params
+* ViewClust-Vis Python pkg on GitHub use andesha
+* analytics.computecanada.ca work-in-progress??
+* mem=0 requests all memory on whatever node you land on
+* sbatch --test-only will show partition that will be used by job; also shows start time, but is a 
+  weak estimate
+
+Queued [12-14]-200.
+Deleted north_strait_* results from /project
+Queued [15-17]-200.
+(MIDOSS)
+
+Renewed EGBC membership; separated from practice declarations now, those are on a Jun-May calendar.
+
+upload_forcing orcinus nowcast+ failed w/ auth error; re-ran manually, but it also resulted in nowcast-agrif run stalling; recovery:
+    pkill watch_NEMO_agrif  # on skookum
+    qdel 10944439.orca2.ibb  # on orcinus
+    rm -rf 15dec21nowcast-agrif_2021-12-15T093328.204723-0800/ 15dec21/  # on orcinus
+    upload_forcing orcinus nowcast+  # on skookum
+    make_forcing_links orcinus nowcast-agrif  # on skookum
+Continued copying GEMLAM from /opp to graham:nearline/ in 3-mo tarballs: 2009-q2-q3
+Deleted GEMLAM/2007/ and 2008/ from /scratch
+(SalishSeaCast)
+
+Did prelim pass on 2021 income tax to determine installment payment.
+
+
+Thu 16-Dec-2021
+^^^^^^^^^^^^^^^
+
+Worked at ESB in the afternoon while Rita was at home.
+
+Backfilled hdf5-to-netcdf4 failures in 14-200 run.
+Backfilled hdf5-to-netcdf4 failure in 16-200 run.
+Queued [18-19, 21]-200.
+(MIDOSS)
+
+Reviewed Python 3.10 What's New:
+* structural pattern matching
+* parenthesized context managers
+* better error messages for lots of exceptions:
+  * SyntaxError, IndentationError, AttributeError, NameError
+* lots of stdlib changes; generally not things we use, except maybe pathlib
+* lots of optimizations:
+  * python -m module-name is 1.4x faster on average
+* a bunch of deprecations, notably:
+  * distutils
+  * importlib cleanup
+  * pathlib.Path.link_to() -> pathlib.Path.hardlink_to()
+  * threading cleanup
+
+Started research on dask-distributed for Reshapr pkg.
+
+Continued copying GEMLAM from /opp to graham:nearline/ in 3-mo tarballs: 2009-q4
+Email from Parker re: new server for LiveOcean downloads; HTTPS instead of ssh.
+(SalishSeaCast)
+
+Weekly project mtg.
+(Atlantis)
+
+
+Fri 17-Dec-2021
+^^^^^^^^^^^^^^^
+
+nowcast0 shut down with no explanation at 16-Dec 19:54 UTC == 11:54 Pacific;
+* 16dec/forecast-x2 interupted
+* no 16dec/nowcast-r12
+* no 17dec/forecast2 runs
+* recovery started at ~09:55
+  * restarted nowcast0 from web dashboard at 17:56 UTC == 09:56 Pacific
+      sudo apt update
+      sudo apt upgrade
+      sudo shutdown -r now
+      sudo mount /dev/vdc /nemoShare
+      ll /nemoShare/MEOPAR/  # to confirm mount
+      sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+      ll /export/MEOPAR  # to confirm mount
+      sudo systemctl start nfs-kernel-server.service
+      sudo exportfs -f  # to reset NFS handles for compute nodes
+      # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -C /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -C /nemoShare/MEOPAR"; done
+    * cleaned up stale tmp run dirs in runs/, fvcom-runs/ & wwatch3-runs/
+  * on skookum:
+    * confirmed that there are no stale workers
+    * restarted log_aggregator
+    * decided to skip forecast2 runs
+    * recovery started at ~10:30:
+        upload_forcing arbutus nowcast+
+        upload_forcing orcinus nowcast+  # due to auth failure unrelated to arbutus issue
+        wait for forecast-x2 to fail?
+        make_fvcom_boundary
+        wait for nowcast-r12 to fail
+        make_fvcom_boundary
+Continued copying GEMLAM from /opp to graham:nearline/ in 3-mo tarballs: 2010-q1 & q2
+nowcast0 shut down again with no explanation at 16-Dec 19:47 UTC == 11:47 Pacific; so did nowcast6
+* 17dec/nowcast-green interupted
+* 17dec/nowcast-x2 interupted
+* recovery start at ~17:15
+  * restarted nowcast0 from web dashboard at 01:16 UTC == 17:16 Pacific
+      sudo mount /dev/vdc /nemoShare
+      ll /nemoShare/MEOPAR/  # to confirm mount
+      sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+      ll /export/MEOPAR  # to confirm mount
+      sudo systemctl start nfs-kernel-server.service
+      sudo exportfs -f  # to reset NFS handles for compute nodes
+    * nowcast6:
+        sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR
+    * nowcast0:
+      # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -C /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -C /nemoShare/MEOPAR"; done
+  * on skookum:
+    * confirmed that there are no stale workers
+    * restarted log_aggregator
+    * recovery started at ~17:45
+        make_forcing_link arbutus nowcast-green
+        launch_remote_worker arbutus make_fvcom_boundary arbutus x2 nowcast 2021-12-17
+        
+        wait for nowcast-r12 to fail
+        make_fvcom_boundary
+(SalishSeaCast)
+
+Queued [22-25]-200; running.
+Monthly project mtg.
+(MIDOSS)
+
+Continued research on dask-distributed for Reshapr pkg.
+
+Launch keyboard was delivered.
+Ordered new monitor from MemoryExpress and picked it up.
+
+
+Sat 18-Dec-2021
+^^^^^^^^^^^^^^^
+
+Backfilled nowcast-r12:
+  wait for 18dec21/nowcast-r12 to fail at ~14:45
+  launch_remote_worker arbutus make_fvcom_boundary arbutus r12 nowcast 2021-12-16
+  wait for run to finish at ~21:45
+  launch_remote_worker arbutus make_fvcom_boundary arbutus r12 nowcast 2021-12-17
+
+  tomorrow wait for 19dec21/nowcast-r12 to fail at ~13:45
+  launch_remote_worker arbutus make_fvcom_boundary arbutus r12 nowcast 2021-12-18
+  wait for run to finish at ~20:45
+  launch_remote_worker arbutus make_fvcom_boundary arbutus r12 nowcast 2021-12-19
+Continued copying GEMLAM from /opp to graham:nearline/ in 3-mo tarballs: 2010-q3 & q4
+(SalishSeaCast)
+
+Lots of missing Langrangian*.nc filed in [23-25]-200; investigated one: seg fault in ncrcat; 
+started backfill jobs
+Queued [26-28]-200
+[MIDOSS)
+
+Created empty 2022 gnucash sqlite3 file, exported accounts from 2021 to csv and imported them, then started editing accounts for 2022:
+* added stocks, ETFs & funds to securities database
+* created non-registered stock, ETF & fund accounts
+
+
+Sun 19-Dec-2021
+^^^^^^^^^^^^^^^
+
+Continued copying GEMLAM from /opp to graham:nearline/ in 3-mo tarballs: 2011-q1 & q2
+Continued backfilling nowcast-r12:
+  wait for 19dec21/nowcast-r12 to fail at ~14:30
+  launch_remote_worker arbutus make_fvcom_boundary arbutus r12 nowcast 2021-12-18
+  wait for run to finish at ~22:00
+  launch_remote_worker arbutus make_fvcom_boundary arbutus r12 nowcast 2021-12-19
+(SalishSeaCast)
+
+Still missing Langrangian*.nc filed in [23-24]-200; started new backfill jobs.
+Missing Langrangian*.nc files in [26-27]-200; started backfill jobs.
+Queued [29-31]-200
+[MIDOSS)
+
+Continued gnucash 2022 file setup:
+* created scheduled transactions
+
+* input opening balances
 
 
 TODO:
