@@ -8453,7 +8453,7 @@ nowcast0 shut down with no explanation at 16-Dec 19:54 UTC == 11:54 Pacific;
         wait for nowcast-r12 to fail
         make_fvcom_boundary
 Continued copying GEMLAM from /opp to graham:nearline/ in 3-mo tarballs: 2010-q1 & q2
-nowcast0 shut down again with no explanation at 16-Dec 19:47 UTC == 11:47 Pacific; so did nowcast6
+nowcast0 shut down again with no explanation at 17-Dec 19:47 UTC == 11:47 Pacific; so did nowcast6
 * 17dec/nowcast-green interupted
 * 17dec/nowcast-x2 interupted
 * recovery start at ~17:15
@@ -8539,6 +8539,137 @@ Continued gnucash 2022 file setup:
 * created scheduled transactions
 
 * input opening balances
+
+
+Week 51
+-------
+
+Mon 20-Dec-2021
+^^^^^^^^^^^^^^^
+
+Continued copying GEMLAM from /opp to graham:nearline/ in 3-mo tarballs: 2011-q3 &  q4
+(SalishSeaCast)
+
+Still missing Langrangian*.nc files in [26-27]-200; started new backfill jobs.
+Missing Langrangian*.nc files in 31-200; started new backfill job.
+Queued [32-34]-200
+Some run failures are due to ncrcat failing at end of hdf5-to-netcdf4; suspecting out-of-memory, I increased the mem-per-cpu in near-BP.yaml from 14100M to 15500M.
+Increased mem-per-cpu from 2048M to 3900M for backfill jobs.
+[MIDOSS)
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+
+Tue 21-Dec-2021
+^^^^^^^^^^^^^^^
+
+Continued copying GEMLAM from /opp to graham:nearline/ in 3-mo tarballs: 2012-q1
+(SalishSeaCast)
+
+Missing Langrangian*.nc files in [33-34]-200; started new backfill jobs.
+Queued [35-37]-200
+Email to support re: preventing jobs from running on 64 core large mem nodes; response from Ali suggests using ``#SBATCH --exclude=gra[801-803]``
+Command-line response got very slow.
+(MIDOSS)
+
+Started re-work of download_live_ocean to use HTTPS instead for sftp protocol.
+(SalishSeaNowcast)
+
+
+Wed 22-Dec-2021
+^^^^^^^^^^^^^^^
+
+Continued copying GEMLAM from /opp to graham:nearline/ in 3-mo tarballs: 2012-q2
+(SalishSeaCast)
+
+[35-37]-200 succeeded
+[33-34]-200 backfill jobs both left nearly 50 spills untranformed, and .hdf5 files were lost
+[33-34]-200 queued for re-run
+[38-39]-200 queued
+(MIDOSS)
+
+Finished re-work of download_live_ocean to use HTTPS instead for sftp protocol; created PR#90; deployed PR to production for live test tomorrow.
+(SalishSeaNowcast)
+
+Started helping Susan and Rachel with 2022 Numberic course repo wrangling:
+* cloned  rhwhite/numeric_2022 to warehouse/EOAS-teaching/
+* investigateed ghp-import pkg
+(Numeric Course)
+
+
+Thu 23-Dec-2021
+^^^^^^^^^^^^^^^
+
+[33-39]-200 succeeded
+[40-43]-200 queued
+(MIDOSS)
+
+
+Fri 24-Dec-2021
+^^^^^^^^^^^^^^^
+
+Vancouver to White Rock to Murrayville
+
+[40-41, 43]-200 succeeded
+42-200 has 10 incomplete spills; 3 out of domain confirmed; 7 to investigate
+[44-47]-200 queued
+(MIDOSS)
+
+
+Sat 25-Dec-2021
+^^^^^^^^^^^^^^^
+
+[44-45]-200 succeeded
+46-200 had 1 incomplete spill; out of domain
+[46-48]-200 running
+(MIDOSS)
+
+
+Sun 26-Dec-2021
+^^^^^^^^^^^^^^^
+
+
+Week 52
+-------
+
+Mon 27-Dec-2021
+^^^^^^^^^^^^^^^
+
+download_live_ocean timed out; retried at 14:45; still no files, so used persisted 26dec boundary
+conditions for today
+(SalishSeaCast)
+
+
+Tue 28-Dec-2021
+^^^^^^^^^^^^^^^
+
+Murrayville to White Rock to Vancouver
+
+
+Wed 29-Dec-2021
+^^^^^^^^^^^^^^^
+
+Analyzed state of .csv file re: out of bounds & failed runs.
+49-200 queued
+(MIDOSS)
+
+Ordered and picked up new Logitech MX MAster 3 wireless nmouse from MemoryExpress.
+
+
+Thu 30-Dec-2021
+^^^^^^^^^^^^^^^
+
+Booked appt for 3rd dose of COVISD-19 vaccine.
+
+
+Fri 31-Dec-2021
+^^^^^^^^^^^^^^^
+
+Rode Zwift Gran Fondo (92 km)
+
+
+
 
 
 TODO:
