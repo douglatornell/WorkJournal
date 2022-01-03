@@ -8008,7 +8008,6 @@ collect_weather 18 did not finish; investigation:
     download_weather 00 1km --yesterday  # failed, as expected
     download_weather 12 1km --yesterday
     wait for forecast2 runs to finish
-
     download_weather 12 2.5km
 UptimeRobot reported 9 minutes of connection timeouts on salishsea-site, ERDDAP, and Resilient-C between 05:08 and 05:20
 sr_subscribe had connection timeouts between 05:06 and 05:16
@@ -8478,9 +8477,6 @@ nowcast0 shut down again with no explanation at 17-Dec 19:47 UTC == 11:47 Pacifi
     * recovery started at ~17:45
         make_forcing_link arbutus nowcast-green
         launch_remote_worker arbutus make_fvcom_boundary arbutus x2 nowcast 2021-12-17
-        
-        wait for nowcast-r12 to fail
-        make_fvcom_boundary
 (SalishSeaCast)
 
 Queued [22-25]-200; running.
@@ -8538,8 +8534,6 @@ Queued [29-31]-200
 Continued gnucash 2022 file setup:
 * created scheduled transactions
 
-* input opening balances
-
 
 Week 51
 -------
@@ -8592,7 +8586,7 @@ Continued copying GEMLAM from /opp to graham:nearline/ in 3-mo tarballs: 2012-q2
 Finished re-work of download_live_ocean to use HTTPS instead for sftp protocol; created PR#90; deployed PR to production for live test tomorrow.
 (SalishSeaNowcast)
 
-Started helping Susan and Rachel with 2022 Numberic course repo wrangling:
+Started helping Susan and Rachel with 2022 Numeric course repo wrangling:
 * cloned  rhwhite/numeric_2022 to warehouse/EOAS-teaching/
 * investigateed ghp-import pkg
 (Numeric Course)
