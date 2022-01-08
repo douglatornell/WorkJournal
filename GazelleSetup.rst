@@ -134,14 +134,15 @@ MOAD Repos
 * created /media/doug/warehouse/MEOPAR/ and cloned SalishSeaCast org repos into it:
 
   * NEMO-Cmd
-  * SalishSeaNowcast - **incomplete; needs OPPTools**
+  * SalishSeaNowcast
   * tools
   * SalishSeaCmd
   * FVCOM-Cmd
+  * OPPTools from GitLab
+  * analysis-doug
 * TODO:
   * rsync .idea/workspace.xml and .idea/vcs.xml files from kudu projects to get project level configs
   * re-create PyCharm project structures
-  * OPPTools from GitLab
 
 * created /media/doug/warehouse/MIDOSS/ and cloned MIDOSS org repos into it:
 
