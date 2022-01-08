@@ -205,6 +205,10 @@ borg Backups
 * created borg repo w/ encryption and auto compression using zstd for khawla on lizzy
     borg init --encryption=repokey /backup/borg/khawla
 * created and tuned borg-bkup/khawla-lizzy.sh
+* added khawla to borg-backup framework on smelt:
+* created borg repo for khawla
+    borg init --encryption=repokey-blake2 /backup/borg/khawla
+* created borg-bkup/khawla-smelt.sh script and used it for 1st khawla backup to smelt
 
 
 Darktable & Photos
