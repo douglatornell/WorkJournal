@@ -131,6 +131,9 @@ PyCharm
 MOAD Repos
 ^^^^^^^^^^
 
+MEOPAR
+""""""
+
 * created /media/doug/warehouse/MEOPAR/ and cloned SalishSeaCast org repos into it:
 
   * NEMO-Cmd
@@ -140,9 +143,15 @@ MOAD Repos
   * FVCOM-Cmd
   * OPPTools from GitLab
   * analysis-doug
+  * docs
 * TODO:
   * rsync .idea/workspace.xml and .idea/vcs.xml files from kudu projects to get project level configs
   * re-create PyCharm project structures
+
+
+
+MIDOSS
+""""""
 
 * created /media/doug/warehouse/MIDOSS/ and cloned MIDOSS org repos into it:
 
@@ -158,6 +167,10 @@ MOAD Repos
 * TODO:
   * re-create PyCharm project structures
 
+
+MOAD
+""""
+
 * created /media/doug/warehouse/MOAD/ and cloned UBC-MOAD org repos into it:
 
   * MoaceanParcels
@@ -170,6 +183,9 @@ MOAD Repos
 * TODO:
   * re-create PyCharm project structures
 
+
+Atlantis
+""""""""
 
 * created /media/doug/warehouse/Atlantis/ and cloned SS-Atlantis org repos into it:
 
