@@ -274,5 +274,4 @@ Others:
       Comment[en_CA]=RescueTime monitoring app
       Comment=Rescuetime monitoring app
 
-Chromium for CubedHost
 eFunds from my portfolio repo
