@@ -268,9 +268,13 @@ From Pop Shop:
   * TODO: migrate signature file
 
 After a lot of searching, learned that I could xfer Thunderbird profile from kudu into
-~/.var/app.org.mozilla.Thunderbird/.thunderbird/ to get my address book, feeds, etc.
-Alos learned that to run a flatpak app from the command line one uses something like
+~/.var/app/org.mozilla.Thunderbird/.thunderbird/ to get my address book, feeds, etc.
+Also learned that to run a flatpak app from the command line one uses something like
 ``flatpak run org.mozilla.Thunderbird``
+Discovered that filters aren't recognized when they are symlinked from 
+/home/doug/dotfiles/thunderbird/profile.default/ImapMail/mail.eoas.ubc.ca/msgFilterRules.dat
+so copied that file to
+.var/app/org.mozilla.Thunderbird/.thunderbird/24otlwll.default/ImapMail/mail.eoas.ubc.ca/msgFilterRules.dat
 
 Others:
 
