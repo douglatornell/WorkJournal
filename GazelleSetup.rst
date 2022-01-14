@@ -97,17 +97,17 @@ Minecraft
 
 * installed Minecraft via .deb download from minecraft.net
   * TODO install mods, datapacks, etc.
-* Checked status of Minecraft mods on 4-Dec-21:
+* Checked status of Minecraft mods on 13-Jan22:
   * MaLiLib has a 1.18 release
   * Litematica has a 1.18 beta release (1.17 was never beyond beta)
   * MiniHUD has no 1.18
   * Sodium has a 1.18 alpha release
-  * Lithium has no 1.18
-  * Phosphur has no 1.18
+  * Lithium has a 1.18.1
+  * Phosphur has a 1.18.1
   * Hydrogen has no 1.18
   * Iris has a 1.18 release
   * Complementary shaders has a 1.18 release
-  * VanillaTweaks as a 1.18 release
+  * VanillaTweaks has a 1.18 release
 * Downloaded Iris universal installer from irisshaders.net; installed it w/ the Fabric option and
   got Fabric, Sodium and Iris; in-game CPU usage dropped to ~40$ and ~150 fps (capped) was solid
 
