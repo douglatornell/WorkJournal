@@ -64,6 +64,7 @@ Basics
 * created ~/conda_envs/ for storage of conda envs on fastest storage (now that it is big); 1st env creation for NEMO-Cmd was blazingly fast :-)
 * thrashed getting camera to work until I looked at System76 troubleshooting page and realized that it was disabled by the Fn+F10 hardware switch
 * rsync-ed ~/Documents/ and /media/doug/warehouse/Documents from kudu into ~/Documents/
+* installed sshfs distro pkg via apt
 
 
 Firefox
