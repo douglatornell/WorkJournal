@@ -162,7 +162,7 @@ Created GitHub project to communicate and track tasks
 Thu 6-Jan-2022
 ^^^^^^^^^^^^^^
 
-1st on-boarding session w/ Armaand:
+1st on-boarding session w/ Armaan:
 * Windows user
 download_live_ocean delayed ~2h
 upload_forcing orcinus failed; I dropped the ball and didn't investigate
@@ -243,6 +243,171 @@ Finished copying GEMLAM from /opp to graham:nearline/ in 3-mo tarballs: 2014-q4
 (SalishSeaCast)
 
 Susan got her COVID-19 vaccine dose #3.
+
+
+Week 2
+------
+
+Mon 10-Jan-2022
+^^^^^^^^^^^^^^^
+
+Weekly group mtg; see whiteboard
+Toured repos w/ GHA sphinx-linkcheck workflows to re-enable those that have not had recent activity.
+(MOAD)
+
+SalishSeaCast/docs updates:
+* VSCode build task
+* update .gitignore; drop .hgignore
+* update copyright year range
+  * NOTE: there are no copyright notice comments blocks at tops of files
+* redirect Anaconda Python section to MOAD/docs conda section
+* update version control section re: change to Git
+(SalishSeaCast)
+
+Transformed note on whiteboard about addition of fisheries harvest params option to AtlantisCmd into issue #3.
+(Atlantis)
+
+
+Tue 11-Jan-2022
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+SalishSeaCast/docs updates:
+
+* update intro to Python section to use Tomas Beuzen's book and move section to MOAD docs
+(MOAD)
+
+Group mtg; Raisha talked about oil evaporation via exponential decay in a kernel;
+so much for my "particle motion kernel" terminology
+(OceanParcels)
+
+Continued on-boarding w/ Armaan:
+* install OpenSSH for Windows then work through Secure Remote Access setup; success
+* left Armaan to work through Secure Remote Access and onward by himself; issues:
+  * notepad created .ssh\config.txt; had to rename in .ssh\
+  * Windows doesn't have ssh-copy-id; had to copy/paste via black box in top of cmd window
+  * had to use admin mode Anaconda shell to start ssh-agent with:
+      Set-Service ssh-agent -StartupType Automatic
+      Start-Service ssh-agent
+      Get-Service ssh-agent
+      # from https://code.visualstudio.com/docs/remote/troubleshooting#_setting-up-the-ssh-agent
+(SalishSeaCast)
+
+
+Wed 12-Jan-2022
+^^^^^^^^^^^^^^^
+
+SHARCNET webinar:
+* Armin Sobhani, OntarioTech U
+* Remote Dev on Clusters w/ VSCode
+* vcpkg - c/c++ pkg mgr
+* GitHub sharcnet/vscode-hpc
+* moduled have to be loaded via ~/.bashrc; e.g.
+    module load cmake cuda scipy-stack/2020a ipykernel
+* demo of local Code on windows
+* cmake:
+  * tight integration w/ VSCode for Intellisense, linting for compiled languages
+  * "not your grandmother's make"
+* Windows Terminal will replace cmd/powershell in Windows 11; preview release available now
+* recommends ed25519 encryption for ssh keys
+* CCDB installation of ssh public keys
+
+HRDPS 12 delayed until ~11:15
+(SalishSeaCast)
+
+Helped Susan install VSCode and selected extensions.
+
+Updated khawla to Pop_OS 21.10.
+
+Disabled IntelliJ keymap extension in VSCode on khawla.
+
+Changed MOAD/docs sphinx linkcheck workflow to use Mambaforge-pypy3; created #repos-maint post with 
+task list to similarly update all repos where we use GHA. 
+Updated nbviewer URL in MOAD/docs and cookiecutter-analysis-repo; probably a lot more instances in 
+other repos.
+Tried to use cs.github.com to help with above; appears that not all of our org repos are indexed 
+yet.
+Updated other redirected URLs in MOAD/docs.
+Added pre-commit hooks to MOAD/docs.
+(MOAD)
+
+Generated new ed25519 ssh key pair on khawla and made it my default:
+* copied public key to ocean machines and removed 2014 vintage 2048 bit rsa key
+* replaced public key on GitHub
+* replaced public key on computecanada CCDB
+
+
+Thu 13-Jan-2022
+^^^^^^^^^^^^^^^
+
+Updated kudu to Pop_OS 21.10; had to fix full boot volume on the way:
+* clean up /var/cache/apt/archives/ with:
+  sudo apt autoclean
+* flatpak cleanup:
+    flatpak update --appstream
+    flatpak update
+    flatpak uninstall --unused
+* deleted a bunch of old kernels with guidance from askubuntu (https://askubuntu.com/questions/345588/what-is-the-safest-way-to-clean-up-boot-partition)
+  uname -r  # in-use kernel - **don't delete**
+  dpkg --list 'linux-image*' | grep ^ii  # installed kernels
+  sudo apt remove linux-image-VERSION  # remove all but in-use and previous kernels
+  sudo apt autoremove  # remove pkgs associated w/ removed kernels
+  # recovered 362 Mb == 55% of /boot
+
+Squash-merged dependabot PRs re: pillow:
+* SalishSeaNowcast
+* SalishSeaTools
+* SOG-Bloomcast-Ensemble
+* analysis-doug/melanie-geotiff
+* analysis-doug/dask-expts
+* moad_tools
+Helped Armaan on slack re: .bash_profile & .bashrc already existing in his ocean account;
+.bash_profile is good, add aliases, etc. to end of .bashrc
+(SalishSeaCast)
+
+Pullled lab3 from 2020 repo and cleaned up markup.
+Started work on issue #16 re: schedule and rubric PDFs giving 404s on github.io site;
+root cause is GHA workflow doesn't do ``make html``;
+workable resolution is to keep PDFs in _static/ tree that does get deployed;
+concern is that makes location of PDFs non-obvious. 
+(Numeric)
+
+Added new 1.81.1 releases of lithium and phosphur to Minecraft client mods.
+Changed Nodecraft server to run fabric via 1-click installer and archiving files to old_files/;
+Restored world files and successfully tested world, then installed lithium and phosphur mods
+and restarted world.
+
+
+Fri 14-Jan-2022
+^^^^^^^^^^^^^^^
+
+upload_forcing graham nowcast+ failed w/ permission error; no obvious explanation;
+re-ran successfully in debug mode at 10:48.
+(SalishSeaCast)
+
+Submitted renewal application for UBC Card.
+
+Started work on diatoms nudging fields extraction in analysis-doug/dask-expts/
+(Atlantis)
+
+
+Sat 15-Jan-2022
+^^^^^^^^^^^^^^^
+
+Goofed off.
+
+
+Sun 16-Jan-2022
+^^^^^^^^^^^^^^^
+
+Continued work on pkg PR#1
+(MoaceanParcels)
+
+
+
+
+
 
 
 
