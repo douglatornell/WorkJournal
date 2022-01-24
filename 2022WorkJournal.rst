@@ -355,7 +355,7 @@ Updated kudu to Pop_OS 21.10; had to fix full boot volume on the way:
   sudo apt autoremove  # remove pkgs associated w/ removed kernels
   # recovered 362 Mb == 55% of /boot
 
-Squash-merged dependabot PRs re: pillow:
+-merged dependabot PRs re: pillow:
 * SalishSeaNowcast
 * SalishSeaTools
 * SOG-Bloomcast-Ensemble
@@ -371,7 +371,7 @@ Started work on issue #16 re: schedule and rubric PDFs giving 404s on github.io 
 root cause is GHA workflow doesn't do ``make html``;
 workable resolution is to keep PDFs in _static/ tree that does get deployed;
 concern is that makes location of PDFs non-obvious. 
-(Numeric)
+(Numeric Course)
 
 Added new 1.81.1 releases of lithium and phosphur to Minecraft client mods.
 Changed Nodecraft server to run fabric via 1-click installer and archiving files to old_files/;
@@ -405,6 +405,186 @@ Continued work on pkg PR#1
 (MoaceanParcels)
 
 
+Week 3
+------
+
+Mon 17-Jan-2022
+^^^^^^^^^^^^^^^
+
+upload_forcing arbutus forecast2 failed due to NoValisConnectionError
+upload_forcing arbutus nowcast+ failed due to NoValisConnectionError
+investigation:
+* nowcast0 shut down with no explanation at 16-Jan 22:16 UTC == 14:16 Pacific;
+* 16jan/forecast-x2 interrupted
+* no 16jan/nowcast-r12
+* no 17jan/forecast2 runs
+* recovery started at ~10:05
+  * restarted nowcast0 from web dashboard at 18:05 UTC == 10:05 Pacific
+      sudo apt update
+      sudo apt upgrade
+      # no need to reboot
+      sudo mount /dev/vdc /nemoShare
+      ll /nemoShare/MEOPAR/  # to confirm mount
+      sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+      ll /export/MEOPAR  # to confirm mount
+      sudo systemctl start nfs-kernel-server.service
+      sudo exportfs -f  # to reset NFS handles for compute nodes
+      # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -C /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -C /nemoShare/MEOPAR"; done
+    * cleaned up stale tmp run dirs in fvcom-runs/ & wwatch3-runs/
+  * on skookum:
+    * confirmed that there are no stale workers
+    * restarted log_aggregator
+    * decided to skip forecast2 runs
+    * recovery started at ~10:30:
+        upload_forcing arbutus nowcast+
+        wait for nowcast-r12 to fail at ~17:00
+        launch_remote_worker arbutus make_fvcom_boundary arbutus r12 nowcast 2022-01-16
+Added uptimerobot ping monitor for arbutus ip (206.12.90.239).
+(SalishSeaCast)
+
+UBC-DFO modelling collaboration mtg; discussion of sinking & reflection in SMELT re: adding
+sedimentation
+
+Finished work on pkg PR#1; changed it from draft status to ready to review/merge.
+(MoaceanParcels)
+
+
+Tue 18-Jan-2022
+^^^^^^^^^^^^^^^
+
+Merged PR#1.
+Group mtg:
+* presented MoaceanParcels
+* feedback:
+  * add convention of prefixing kernel func local vars; Jose has had trouble w/ kernel local vars of the same name colliding and crashing pset.execute()
+(MoaceanParcels)
+
+Discussed running Olive (java viz app) and using sshfs on Mac w/ Raisha.
+Continued work on diatoms nudging fields extraction in analysis-doug/dask-expts/; found weird -1 values in land areas of nav_lon/nav_lat fields in ptrc_T.nc file.
+(Atlantis)
+
+* nowcast0 and nowcast6 shut down with no explanation at 18-Jan 21:31 UTC == 13:21 Pacific
+* 18jan/forecast-x2 interrupted
+* recovery started at ~14:20
+  * restarted nowcast0 & nowcast6 from web dashboard at 22:21 UTC == 14:21 Pacific
+  * nowcast0
+      sudo apt update
+      sudo apt upgrade
+      sudo shudown -r now
+      sudo mount /dev/vdc /nemoShare
+      ll /nemoShare/MEOPAR/  # to confirm mount
+      sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+      ll /export/MEOPAR  # to confirm mount
+      sudo systemctl start nfs-kernel-server.service
+      sudo exportfs -f  # to reset NFS handles for compute nodes
+    * nowcast6
+        sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR
+    * nowcast0
+      # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -C /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -C /nemoShare/MEOPAR"; done
+    * cleaned up stale tmp run dirs in fvcom-runs/
+  * on skookum:
+    * confirmed that there are no stale workers
+    * restarted log_aggregator
+    * decided to skip forecast-x2 run
+    * recovery started at ~14:45:
+        launch_remote_worker arbutus make_fvcom_boundary arbutus r12 nowcast 2022-01-17
+        wait for nowcast-r12 to fail at ~21:45
+        launch_remote_worker arbutus make_fvcom_boundary arbutus r12 nowcast 2022-01-18
+(SalishSeaCast)
+
+
+Wed 19-Jan-2022
+^^^^^^^^^^^^^^^
+
+Continued work on diatoms nudging fields extraction in analysis-doug/dask-expts/:
+* changed to use bathymetry dataset to get lon/lat fields
+* hit KeyError: 0 issue that Becca hit in mid-Dec;
+  debugged and realized that chunksizes has to be list of ints in encoding for to_netcdf() in 
+  contrast to dict for open_[mg]dataset()
+* started scaling to multiple days using dask.distributed cluster and refactoring code into 
+  functions
+(Atlantis)
+
+Helped Armaan w/ scikit-learn installtion; confusing because imports are from sklearn.
+(SalishSeaCast)
+
+Jose added Stoke's drift kernel to MoaceanParcels :-)
+Discussed fieldset code for parcels w/ Jose; agreed to thing about a namespace separate from 
+kernels.
+(MoaceanParcels)
+
+
+Thu 20-Jan-2022
+^^^^^^^^^^^^^^^
+
+Pullled lab4 from 2020 repo and cleaned up markup.
+Created issue #17 re: links to phaustin/numeric
+Created issue #18 re: links to specific version(s) of Python docs
+Created PR#19 re: updating project info in conf.py; waiting for initial course year from Susan
+(Numeric Course)
+
+Phys Ocgy seminar: Acacia Markov, UOttawa: Nature-based solutions for coastal erosion protection
+* coastal marsh low plant species diversity
+
+Continued work on diatoms nudging fields extraction in analysis-doug/dask-expts/:
+* ran 10d extraction in ~3s on khawla w/ sshfs mount of /results2
+* 31d took ~10s, and 265d took ~2m :-)
+* files are big due to netCDF classic w/ no deflation; 1.7G for 31d, 4.8G for 365d
+* all done in notebook
+* uploaded 10d & 31d to /ocean/dlatorne/Atlantis/day-avg-diatoms/ for Raisha
+* uploads took longer than extraction :-)
+(Atlantis)
+
+
+Fri 21-Jan-2022
+^^^^^^^^^^^^^^^
+
+Answered questions from Jose about MoaceanParcels docs updating.
+
+Cloased PR#19 re: updating project info in conf.py; Susan says initial course yearwas 1995
+(Numeric Course)
+
+IOS seminar: Andrea Hilborn, BIO & IOS, remote sensing
+Ecosystem monitoring w/ satelite ocean colour and temperature
+* Easter Beaufort sub-regions
+* Near realtime SST monitoring w/ Charles Hannah
+  * R and GitHub Actions:
+
+Continued work on diatoms nudging fields extraction in analysis-doug/dask-expts/:
+* extracted code from notebook to module; no significant change in execution time on khawla
+* test on salish & tyee; all slower than khawla; spinning disk vs. NVME?
+(Atlantis)
+
+Squash-merged dependabot PRs re: numpy, ipython & pillow:
+* analysis-doug/melanie-geotiff
+* analysis-doug/dask-expts
+* SOG-Bloomcast
+* tools
+* docs
+* SOG-Bloomcast-Ensemble
+* ECget
+(SalishSeaCast)
+
+
+Sat 22-Jan-2022
+^^^^^^^^^^^^^^^
+
+Goofed off!
+
+
+Sun 23-Jan-2022
+^^^^^^^^^^^^^^^
+
+Goofed off!
+
 
 
 
@@ -425,9 +605,6 @@ Continued work on pkg PR#1
 
 TODO:
 * for MoaceanParcels
-  * add disappeared particle kernel w/ Birgit's notebook as docs
-  * add docs re: adding pkgs to env
-  * add docs re: adding kernels to pkg
   * add GHA CodeQL workflow
   * add pre-commit hooks:
     * pyupgrade
