@@ -586,9 +586,196 @@ Sun 23-Jan-2022
 Goofed off!
 
 
+Week 4
+------
+
+Mon 24-Jan-2022
+^^^^^^^^^^^^^^^
+
+Investigated make_plots failures:
+* wwatch3 forecast publish:
+  * dataset not found on /tmp/
+      make_plots wwatch3 forecast publish 2022-01-23 --debug worked fine ???
+* nowcast-green research:
+  * too many indices; file not found
+  * possibly related: ERDDAP dataset load failures
+      make_plots nemo nowcast-green research 2022-01-23 --debug worked fine ???
+HRDPS 12 delayed; started at 07:38, still collecting at 10:10, order looks more random than usual; 
+sent email to Sandrine; missing files:
+  018:
+  CMC_hrdps_west_TMP_TGL_2_ps2.5km_2022012412_P018-00.grib2
+  CMC_hrdps_west_PRATE_SFC_0_ps2.5km_2022012412_P018-00.grib2
+  032:
+  CMC_hrdps_west_DLWRF_SFC_0_ps2.5km_2022012412_P032-00.grib2
+  033:
+  CMC_hrdps_west_RH_TGL_2_ps2.5km_2022012412_P033-00.grib2
+  041:
+  CMC_hrdps_west_DLWRF_SFC_0_ps2.5km_2022012412_P041-00.grib2
+  043:
+  CMC_hrdps_west_PRATE_SFC_0_ps2.5km_2022012412_P043-00.grib2
+  044:
+  CMC_hrdps_west_TMP_TGL_2_ps2.5km_2022012412_P044-00.grib2
+  045:
+  CMC_hrdps_west_TMP_TGL_2_ps2.5km_2022012412_P045-00.grib2
+  CMC_hrdps_west_RH_TGL_2_ps2.5km_2022012412_P045-00.grib2
+  046:
+  CMC_hrdps_west_UGRD_TGL_10_ps2.5km_2022012412_P046-00.grib2
+  CMC_hrdps_west_UGRD_TGL_10_ps2.5km_2022012412_P046-00.grib2
+  048:
+  CMC_hrdps_west_APCP_SFC_0_ps2.5km_2022012412_P048-00.grib2
+Started collect_weather 18 so that we don't miss more forecast files when/if they appear.
+Sandrine confirmed that the issue was known; due to storage and network stability problems; missing 
+files landed at ~15:12
+(SalishSeaCast)
+
+Restarted ERDDAP server process to try to mitigate large number of recent out of memory errors loading random nowcast-green files:
+  sudo /opt/tomcat/bin/shutdown.sh
+  wait for uptimerobot notification
+  sudo /opt/tomcat/bin/startup.sh
+More memory errors on restart
+Also, "time_counter are different" errors in month-avg files:
+  ERROR in Test.ensureEqual(Strings) line=1 col=25 ''!=' [end]':
+  For /results/SalishSea/month-avg.201905/SalishSea_1m_202012_202012_grid_T.nc, the observed and expected values of units for sourceName=time_counter are different.
+  Specifically:
+  s1 line=1: seconds since 1900-01-01[end]
+  s2 line=1: seconds since 1900-01-01 00:00:00[end]
+(ERDDAP)
+
+Updated cookiecutter-MOAD-pypkg:
+* move .coveragerc contents to pyproject.toml
+* add envs/environment-test.yaml template file
+(MOAD)
+
+
+Tue 25-Jan-2022
+^^^^^^^^^^^^^^^
+
+collect_weather got messed up due to yesterday shinnanigans;
+* one instance of 18 succeeded, but didnt' notify manager, so 00 didn't launch
+* another instance of 18 was still running this morning; 
+* recovery started at ~10:25:
+    download_weather 00 2.5km
+    download_weather 06 2.5km
+    collect_weather 18 2.5 &
+    download_weather 00 1km --yesterday --debug  # failed due to no files on server
+    download_weather 12 1km --yesterday --debug
+    wait for forecast2 runs to finish
+
+    download_weather 12 2.5km
+(SalishSeaCast)
+
+Picked up new UBC Card and sent 
+
+Reviewed blurb about extraction of model variable time series from model product files that I wrote
+for Susan's grant from Amber & Michael
+(https://docs.google.com/document/d/1JbK14cVIRmQ27hCePCJQf1a_4Jm6obTGBh67tYRy2oo).
+Created UBC-MOAD/Reshapr repo on GitHub.
+Created Reshapr repo via cookiecutter-MOAD-pypkg on khawla and pushed to GitHub.
+Set up Reshapr project on readthedocs and installed integration webhook on GitHub.
+(Reshapr)
+
+
+Wed 26-Jan-2022
+^^^^^^^^^^^^^^^
+
+Email from readthedocs re: ecosystem news; stuff I need to look at:
+* :external: role for intersphinx
+* autosummary extension
+* pydata-sphinx-theme: better depth control of left sidebar
+* sphinx-codeautolink: gives documented code elements hovers and links to their docs,
+  including intersphinx
+* sphinxcontrib-constdata
+* MyST-Parser=0.17 will provide direct integration with Jupyter; i.e. MyST instead of markdown
+  in notebook cells
+
+Deleted /results/SalishSea/nowcast-agrif.201702/01oct21 to 24jan22
+* Susan archived them yesterday to archive drives #9 and #10
+Discussed w/ Susan moving nowcast-green.201802 to graham:nearline/
+* cc wiki was updated 24nov21 to say that nearline now does compression on the way to tape
+* tested tarballs built on salish:
+  * oct15, no compression: 190G
+  * oct15, gzip compression: 174G 136min
+  * oct15, bzip2 compression: 177G 615min
+(SalishSeaCast)
+
+Slack call w/ Armaan re:
+* install SalishSeaTools
+* use pathlib
+* use VSCode Remote SSH
+
+
+Thu 27-Jan-2022
+^^^^^^^^^^^^^^^
+
+Email to Peter, Duncan & Maryse re: Economical demutualization pay out.
+
+FAL estate work:
+* email to Cameron re: tax return
+
+Coffee w/ Karyn.
+
+Added deisgn & implementation notes docs section; motivation, history
+(Reshapr)
+
+Updated khawla OS re: CVE-2021-4034 PwnKit vulnerability.
+
+See work journal.
+(Resilient-C)
+
+Phys Ocgy seminar: Connor re: GEOMETRIC eddy parameterization.
+
+Weekly group mtg.
+(Atlantis)
+
+EOAS colloquium: Cathie Hickson re: geothermal energy
+
+
+Updated arbutus.cloud OS re: CVE-2021-4034 PwnKit vulnerability:
+* nowcast0
+    sudo apt update
+    sudo apt upgrade
+(SalishSeaCast)
+
+
+Fri 28-Jan-2022
+^^^^^^^^^^^^^^^
+
+Wrote more design & implementation docs; history, Atlantis diatom nudging use case.
+(Reshapr)
+
+Helped Karyn try to figure out why evaltools.displayStats() is not applying decimal precision
+formatting that is hard-coded in it.
+(SalishSeaCast)
+
+Answered Rachael's Slack question re: listing contributors for MIDOSS.
+(MIDOSS)
+
+
+Sat 29-Jan-2022
+^^^^^^^^^^^^^^^
+
+Added CLI based on Click using group feature to separate sub-command CLIs into modules; PR#2.
+(Reshapr)
+
+
+Sun 30-Jan-2022
+^^^^^^^^^^^^^^^
+
+Added logging framework based on structlog; PR #2.
+Started adding extract sub-command; PR #2.
+(Reshapr)
+
+download_results nowcast-green to /result2 failed; investigation shows messed up ownership & 
+permissions; opened hepdesk ticket
+Also noticed a directory called fraser_tars/ ???
+(SalishSeaCast)
 
 
 
+GEMLAM external drives:
+2007-2009
+2010-2011 failed; needs to be re-made
+2012-2014
 
 
 (/SalishSeaCast/nowcast-env) ~$ python3 -m nowcast.workers.make_plots $NOWCAST_YAML wwatch3 forecast publish
