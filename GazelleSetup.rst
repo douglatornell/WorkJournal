@@ -231,12 +231,17 @@ borg Backups
 Darktable & Photos
 ^^^^^^^^^^^^^^^^^^
 
+* created /media/doug/warehouse/Pictures/, rsync-ed from kudu, and symlinked it to ~/
+    mkdir /media/doug/warehouse/Pictures/
+    rsync -av kudu.locat:/media/doug/warehouse/Pictures/ /media/doug/warehouse/Pictures/
+    rmdir ~/Pictures
+    ln -s /media/doug/warehouse/Pictures/ ~/Pictures
+
 * installed Darktable 3.6.1 flatpak from Pop Shop
 * TODO:
-  * migrate config
-  * migrate images
-  * Rapid Photo Downloader
-  * dotfiles backup-photos.sh
+  * migrate configs
+  * migrate dotfiles backup-photos.sh
+  * install Rapid Photo Downloader
 
 
 Gnucash
