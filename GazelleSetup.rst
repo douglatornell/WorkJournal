@@ -286,6 +286,7 @@ Others:
 
 * Microsoft Teams .deb from microsoft.com
   * that adds packages.microsoft.com/repos/ms-teams to software sources
+
 * Rescuetime .deb from rescuetime.com and Firefox add-on
   * made it an auto-start app by creating ~/.config/autostart/rescuetime.desktop containing:
 
@@ -300,4 +301,10 @@ Others:
       Comment[en_CA]=RescueTime monitoring app
       Comment=Rescuetime monitoring app
 
-eFunds from my portfolio repo
+* eFunds calculator
+  * updated repo on GitHub to use main as default branch
+  * cloned repo to /media/doug/warehouse/python/
+  * symlinked script as ~/bin/eFunds
+
+TODO:
+* portfolio returns calculator
