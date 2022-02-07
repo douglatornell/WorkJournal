@@ -660,7 +660,6 @@ collect_weather got messed up due to yesterday shinnanigans;
     download_weather 00 1km --yesterday --debug  # failed due to no files on server
     download_weather 12 1km --yesterday --debug
     wait for forecast2 runs to finish
-
     download_weather 12 2.5km
 (SalishSeaCast)
 
@@ -690,7 +689,7 @@ Email from readthedocs re: ecosystem news; stuff I need to look at:
 
 Deleted /results/SalishSea/nowcast-agrif.201702/01oct21 to 24jan22
 * Susan archived them yesterday to archive drives #9 and #10
-Discussed w/ Susan moving nowcast-green.201802 to graham:nearline/
+Discussed w/ Susan moving nowcast-green.201812 to graham:nearline/
 * cc wiki was updated 24nov21 to say that nearline now does compression on the way to tape
 * tested tarballs built on salish:
   * oct15, no compression: 190G
@@ -728,7 +727,6 @@ Weekly group mtg.
 (Atlantis)
 
 EOAS colloquium: Cathie Hickson re: geothermal energy
-
 
 Updated arbutus.cloud OS re: CVE-2021-4034 PwnKit vulnerability:
 * nowcast0
@@ -769,6 +767,245 @@ download_results nowcast-green to /result2 failed; investigation shows messed up
 permissions; opened hepdesk ticket
 Also noticed a directory called fraser_tars/ ???
 (SalishSeaCast)
+
+
+February
+========
+
+Week 5
+------
+
+Mon 31-Jan-2022
+^^^^^^^^^^^^^^^
+
+Merged PR#2 re: inital dev of extract sub-command.
+Started work on dask cluster setup and/or connection; PR#3.
+(Reshapr)
+
+Msg from Charles that salish has multiple disk failures.
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+
+Tue 1-Feb-2022
+^^^^^^^^^^^^^^
+
+Learned from Charles that /results2 suffered a 2nd disk failure while RAID was being rebuilt after 1st failure; almost certain total data loss:
+* nowcast-green.201905 gone
+* nowcast-green.201812 01jul19 to 15feb20 gone; but found those in borg backup on /backup2
+* Vicky's MIDOSS gone; inconsequential ???
+* yuetal gone; importance ???
+* fraser_tars gone; what even was it ???
+Discovered that salish does have zstd installed
+* ran another nowcast-green.201812/*oct15 tarball test with:
+    time tar cvv -I"zstd" -f /ocean/dlatorne/nowcast-green.201812-oct15.tar.zstd \
+      nowcast-green.201812/*oct15 | tee /ocean/dlatorne/nowcast-green.201812-oct15.index
+  got 177G (same as bzip2) in 38m21s (way faster than gzip or bzip2 or uncompressed)
+* repeated uncompressed test with timing: 190G 52m33s !!!
+Noted that borg backup of /opp on /backup is incomplete and 31May2020 workjournal provides no explanation of why:
+* ran /etc/cron.daily/daily-opp-backup.sh to update backup of /opp/observations/ and 
+  /opp/wwatch3/nowcast/
+* df -h /backup:
+    Filesystem      Size  Used Avail Use% Mounted on
+    /dev/sdi1        17T  752G   15T   5% /backup
+* added /opp/fvcom/nowcast/ to /etc/cron.daily/daily-opp-backup.sh and ran
+* df -h /backup:
+
+* added /opp/fvcom/nowcast-x2/ to /etc/cron.daily/daily-opp-backup.sh and ran
+* df -h /backup:
+* added /opp/fvcom/nowcast-r12/ to /etc/cron.daily/daily-opp-backup.sh and ran
+* df -h /backup:
+Created tarball of /results/SalishSea/month-avg.201905/ and uploaded it to graham-dtn:/nearline/SalishSea/nowcast-green.201905/
+  time tar cvvf /ocean/dlatorne/nowcast-green.201905-month_avg-jan07-dec20.tar \
+    month-avg.201905/* | tee /ocean/dlatorne/nowcast-green.201905-month_avg-jan07-dec20.index
+  time rsync -rtlv --partial-dir=/scratch/dlatorne/MEOPAR/SalishSea/rsync-partial -P \
+    /ocean/dlatorne/nowcast-green.201905-month_avg-jan07-dec20.* \
+    graham-dtn:/nearline/rrg-allen/SalishSea/nowcast-green.201905/
+Started build & upload to graham-dtn:/nearline/SalishSea/nowcast-green.201812/ of 1-mo tarballs in tmux session (201812-graham) on chum:
+* jan15 uncompressed: tar: 94m rsync: 149m :-(
+(SalishSeaCast)
+
+
+Wed 2-Feb-2022
+^^^^^^^^^^^^^^
+
+Helped Susan and Armaan sort out divergence in analysis-armaan between his laptop and chum.
+After disappointing performance on chum; started build & upload to graham-dtn:/nearline/SalishSea/nowcast-green.201812/ of 1-mo tarballs in tmux session (201812-graham) on salish:
+* feb15 uncompressed: tar: 44m 173G rsync: 102m
+* mar15 zstd 1 core: tar: 45m 182G rsync: 114m
+* apr15 zstd 2 cores: tar: 40m 181G rsync: 114m
+* may15 uncompressed: tar: 52m 202G rsync: 119m
+* jun15 uncompressed: tar: 50m 191G rsync: 114m
+(SalishSeaCast)
+
+Reviewed Raisha's contaminant-dispersal/SSAM-parse-tracks notebook:
+* bare except in cell 67, but is os.remove() even needed with clobber=True in netCDF4.Dataset()?
+* I had forgotten how low level working with Dataset() feels compared to using xarray
+* ``times.units = "seconds since 1950-01-01 00:00:00 +10"``; does +10 timezone offset matter? 
+  why not UTC?
+Slack call w/ Raisha; dove down pandas dataframes hole.
+(Atlantis)
+
+Created PR#92 from hindcast-log branch on kudu and merged it now that it has been tested in 
+production.
+Updated GHA workflows to use mambafogrge-pypy3.
+Changed optimum-hindcast scratch dir in config re: 201905 re-run.
+Deployed above to production.
+(SalishSeaNowcast)
+
+
+Thu 3-Feb-2022
+^^^^^^^^^^^^^^
+
+Continued building & uploading to graham-dtn:/nearline/SalishSea/nowcast-green.201812/ 
+1-mo tarballs in tmux session (201812-graham) on salish:
+* jul15 uncompressed: tar: 49m 203G rsync: 128m
+* aug15 uncompressed: tar: 49m 201G rsync: 129m
+* ...
+**Don't forget about fixtmuxssh bash function to reconnect to ssh agent in new session on salish**
+(SalishSeaCast)
+
+FAL estate work:
+* compiled info for estate trust 11nov21 income tax return and emailed to Cameron
+
+
+Fri 4-Feb-2022
+^^^^^^^^^^^^^^
+
+Continued building & uploading to graham-dtn:/nearline/SalishSea/nowcast-green.201812/ 
+1-mo tarballs in tmux session (201812-graham) on salish: 2016
+(SalishSeaCast)
+
+Merged PR#2 re: inital dev of extract sub-command.
+Finished work on dask cluster setup and/or connection; merged PR#3.
+Did some test framework cleanup; merged PR#4.
+(Reshapr)
+
+
+
+Sat 5-Feb-2022
+^^^^^^^^^^^^^^
+
+PyCascades
+* PSF S&I workgroup:
+  * awareness survey
+  https://docs.google.com/forms/d/e/1FAIpQLSc8957QqYuPDF2qL8Q2ctFzBH_mPMi0yxSQ2oqOACTU9jIVDg/viewform
+* Joined PSF as basic member
+* PDX GDC and George Floyd protests
+  * GDC == General Defense Committee; existed long before 2020 to support arrested labour 
+    protesters
+  * app mostly scrapes data from various court & govt sites that have no APIs
+* Python's tale of concurrency, Pradhvan Bisht
+  * concurrency is different from parallelism
+  * concurrency: threads or asyncio
+  * asyncio event loop pkg uvloop - pluggable, uses cython
+  * use tasks to await on multiple coroutines, then gather tasks
+  * concurrency is hard! don't undeestimate its complexity
+  * resources:
+    * Lukasz Langa import asyncio video series
+    * Lynn Root blog posts (what we did wrong)
+* Buiklding Elegant API Contracts, Neeraj Pandey
+  * tools for REST APIs:
+    * API blueprint, MSON, Apiary
+    * something YAML-based
+    * swagger aka openapi - OpenAPI specs
+* Cyber Security Investigations w/ Jupyter Notebooks, Ian Hellen
+  * MSTICPy pkg by Microsoft 
+  * https://github.com/ianhelle/pycascades2022
+* How (Not) to Start a Python User Group, Joseph Riddle, Spokane
+* Invisible Walls: Isolating Your Python, Jeremiah Paige
+  * interpreter isolation: venv, and others
+  * userspace isolation: state, conda, containers
+    * state looks like an ActiveState "version" of conda
+* Literature Text Translation and Audio Synthesis using AI Services, Vivek Raja P S
+  * Literature Love project
+  * Azure Cognitive Service
+* Tests as Classifiers, Moshe Zadka
+  * F beta score; harmonic mean to balance precision and recall metrics
+  * need to decide on beta; typical range is 0.5 to 2
+  * need to collect data about test suite performance; tricky, I think
+  * F score is a lagging guide
+
+* nowcast0 shut down with no explanation at 5-Feb 19:10 UTC == 11:10 Pacific; 
+  got uptimerobot notification at 11:18
+* 5feb/wwatch3-forecast interrupted
+* 5feb/forecast-x2 interrupted
+* recovery started at ~11:40
+  * restarted nowcast0 from web dashboard at 19:40 UTC == 11:40 Pacific
+  * nowcast0
+      sudo apt update
+      # just git 2.35.1
+      sudo apt upgrade
+      sudo mount /dev/vdc /nemoShare
+      ll /nemoShare/MEOPAR/  # to confirm mount
+      sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+      ll /export/MEOPAR  # to confirm mount
+      sudo systemctl start nfs-kernel-server.service
+      sudo exportfs -f  # to reset NFS handles for compute nodes
+      # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -C /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -C /nemoShare/MEOPAR"; done
+    * cleaned up stale tmp run dirs in [*]runs/; just wwatch3-forecast
+  * on skookum:
+    * killed stale workers
+    * restarted log_aggregator
+    * decided to skip wwatch3-forecast run
+    * recovery started at ~11:58:
+        launch_remote_worker arbutus make_fvcom_boundary arbutus x2 forecast 2022-02-05
+Continued building & uploading to graham-dtn:/nearline/SalishSea/nowcast-green.201812/ 
+1-mo tarballs in tmux session (201812-graham) on salish: 2016
+* rsync failed for may16
+(SalishSeaCast)
+
+Started work on model profile concept and YAML file loader; PR#5.
+(Reshapr)
+
+
+Sun 6-Feb-2022
+^^^^^^^^^^^^^^
+
+PyCascades
+* Fifty Shades of sign; Rodrigo Girão Serrão, Lisbon
+  * @mathsppblog
+  * mathspp.com
+* Microsoft booth; Python in VSCode; Luciana Abud
+  * activate env in terminal has to be configured in settings due to preformance concerns
+      settings: activate environment
+  * select linter -> flake8
+  * format document -> black
+  * refactoring via PyLance
+  * jump to cursor in debugger lets you jump to code that wouldn't be executed due to condition,
+    or jump to a earlier point in execution
+  * run/debug config like PyCharm; flask, etc.
+    * live reloading
+    * justMyCode setting in run/debug config defaults to true; se to false to debug into libraries
+  * testing config
+    * similar to PyCharm
+  * Council Data Project: Infrastructure-as-code for civic transparency and accessibility, Isaac Na
+  * Security considerations in Python Packaging, Gajendra Deshpande
+    * bandit pkg; checks for security issues via AST
+
+upload_forcing turbidity failed due to too many chained symlinks; resolved by manually symlinking 06feb22 to 27dec21 (last good obs)
+nowcast6 node stopped 6feb22 19:27 UTC == 11:27 Pacific
+* missing run:
+  * 06feb22/forecast-x2
+* recovery started at ~17:20
+  * restarted nowcast6 from dashboard 7feb22 01:20 UTC == 17:20 Pacific
+      sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR
+  * skipped forecast-x2 run
+Continued building & uploading to graham-dtn:/nearline/SalishSea/nowcast-green.201812/ 
+1-mo tarballs in tmux session (201812-graham) on salish: 2016
+* re-did may16; very slow
+(SalishSeaCast)
+
+Finished work on model profile YAML file loader; merged PR#5.
+Started improving dask cluster loading w/ search pattern from model profile loading; PR#6.
+(Reshapr)
+
 
 
 
