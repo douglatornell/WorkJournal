@@ -702,6 +702,9 @@ Slack call w/ Armaan re:
 * use pathlib
 * use VSCode Remote SSH
 
+Pullled lab5 from 2020 repo and cleaned up markup.
+(Numeric Course)
+
 
 Thu 27-Jan-2022
 ^^^^^^^^^^^^^^^
@@ -1006,6 +1009,162 @@ Finished work on model profile YAML file loader; merged PR#5.
 Started improving dask cluster loading w/ search pattern from model profile loading; PR#6.
 (Reshapr)
 
+
+Week 6
+------
+
+Mon 7-Feb-2022
+^^^^^^^^^^^^^^
+
+FAL estate work: reviewed and signed tax return.
+
+More khawla setup work; see notes.
+
+Continued building & uploading to graham-dtn:/nearline/SalishSea/nowcast-green.201812/ 
+1-mo tarballs in tmux session (201812-graham) on salish: 2017
+(SalishSeaCast)
+
+Finished improving dask cluster loading w/ search pattern from model profile loading; merged PR#6.
+Started adding dataset metadata loading; PR#7.
+(Reshapr)
+
+
+Tue 8-Feb-2022
+^^^^^^^^^^^^^^
+
+Worked at UBC while Rita was at home.
+
+Continued building & uploading to graham-dtn:/nearline/SalishSea/nowcast-green.201812/ 
+1-mo tarballs in tmux session (201812-graham) on salish: finished 2017, started 2018
+(SalishSeaCast)
+
+Finished adding dataset metadata loading; merged PR#7.
+Enabled dependabot alerts and PRs on GitHub; addressed alert re: pillow<9.0.0; PR#8.
+Added CodeQL analysis workflow; PR#9
+Started work on extracted variable(s) dataset creation; PR#10.
+(Reshapr)
+
+
+Wed 9-Feb-2022
+^^^^^^^^^^^^^^
+
+Continued building & uploading to graham-dtn:/nearline/SalishSea/nowcast-green.201812/ 
+1-mo tarballs in tmux session (201812-graham) on salish: finished 2018
+(SalishSeaCast)
+
+Finished work on extracted variable(s) dataset creation; PR#10.
+(Reshapr)
+
+
+Thu 10-Feb-2022
+^^^^^^^^^^^^^^^
+
+Continued building & uploading to graham-dtn:/nearline/SalishSea/nowcast-green.201812/ 
+1-mo tarballs in tmux session (201812-graham) on salish: started 2019; finished to end of jun
+(end of what it stored on /results).
+collect_river_date failed; 
+  KeyError exceptions, 164436480000000000 -> Timestamp("2022-02-09 00:00:00") ->  2022-02-09; investigation:
+  * csv files from datamart stopped updating around 07:50 on 8feb
+  * sarracenia client log shows connection timeout, then stream of broken pipe errors
+* recovery started at ~09:20:
+  * restarted sr_subscribe-hydrometric via supervisorctl
+  * waited for csv files to update
+  * csv files updated at 09:40
+  * re-ran workers:
+      collect_river_date Capilano 2022-02-09
+      collect_river_date ChilliwackVedder 2022-02-09
+      collect_river_date ClowhomClowhomLake 2022-02-09
+      collect_river_date Englishman 2022-02-09
+      collect_river_date HomathkoMouth 2022-02-09
+      collect_river_date SalmonSayward 2022-02-09
+      collect_river_date SanJuanPortRenfrew 2022-02-09
+      collect_river_date SquamishBrackendale 2022-02-09
+      collect_river_date TheodosiaScotty 2022-02-09
+      collect_river_date TheodosiaBypass 2022-02-09
+      collect_river_date TheodosiaDiversion 2022-02-09
+      collect_river_date Fraser 2022-02-09
+      upload_forcing arbutus nowcast+
+      upload_forcing orcinus nowcast+
+      upload_forcing optimum nowcast+
+      upload_forcing graham-dtn nowcast+
+  * nowcast runs started at 10:24
+(SalishSeaCast)
+
+FAL estate work: called AST for update and left msg.
+
+Finished work on extracted variable(s) dataset creation; merged PR#10.
+Added write to netCDF file; merged PR#11.
+Started adding variable groups to 201812 profile; PR#12
+(Reshapr)
+
+Weekly mtg.
+MEOPAR response workshop on 17-Mar; Raisha & Sara.
+(Atlantis)
+
+
+Fri 11-Feb-2022
+^^^^^^^^^^^^^^^
+
+Continued building & uploading to graham-dtn:/nearline/SalishSea/nowcast-green.201812/ 
+1-mo tarballs in tmux session (201812-graham) on salish:
+* 01jul19 to 15feb20 are in borg archive on /backup2
+* can't use * wildcard to tar files from borg mount; resolved by using --from-file to read dirs
+  from text file
+    jul19
+    aug19
+Did easy 2022 rollover updates.
+(SalishSeaCast)
+
+Finished easy 2022 rollover updates.
+(MOAD)
+
+Did easy 2022 rollover updates.
+(MIDOSS)
+
+Ran tests on 1h files in analysis-foug/notebooks/dask-expts/atlantis_nudge_diatoms.ipynb to investigate the effect of increasing chunk size by increasing number of hours per chunk:
+  1 hr: 54.54 MiB chunks; 240 chunks; 490 tasks; 42.5s
+  6 hr: 327.21 MiB chunks; 40 chunks; 90 tasks; 26.4s
+  8 hr: 436.28 MiB chunks; 30 chunks; 70 tasks; 27.3s
+  12 hr: 654.43 MiB chunks; 20 chunks; 50 tasks; 26.5s
+  repeat 1 hr: 54.54 MiB chunks; 240 chunks; 490 tasks; 26.5s !!!
+Then 3x all chunk dims:
+  163.61 MiB chunks; 80 chunks; 170 tasks; 26.3s
+Speed governed by disk and network i/o rates???
+(Reshapr)
+
+
+Sat 12-Feb-2022
+^^^^^^^^^^^^^^^
+
+Continued building & uploading to graham-dtn:/nearline/SalishSea/nowcast-green.201812/ 
+1-mo tarballs in tmux session (201812-graham) on salish:
+* 01jul19 to 15feb20 are in borg archive on /backup2
+* can't use * wildcard to tar files from borg mount; resolved by using --from-file to read dirs
+  from text file
+    sep19
+(SalishSeaCast)
+
+Drove to White Rock for Susan to visit J&M; traffic was stupid; waslked in Ruth Johnson Park.
+
+
+Sun 13-Feb-2022
+^^^^^^^^^^^^^^^
+
+Continued building & uploading to graham-dtn:/nearline/SalishSea/nowcast-green.201812/ 
+1-mo tarballs in tmux session (201812-graham) on salish:
+* 01jul19 to 15feb20 are in borg archive on /backup2
+* can't use * wildcard to tar files from borg mount; resolved by using --from-file to read dirs
+  from text file
+    oct19
+(SalishSeaCast)
+
+Pullled lab7 from 2020 repo and cleaned up markup.
+(Numeric Course)
+
+Helped Susan use Reshapr to extract files for Prodigy course; gathered user feedback:
+* should there be environment-user.yaml (or some other name)?
+Fixed issue #13 that Susan found re: config yaml passed through CLI as str instead Path; PR#14 
+(Prodigy Course)
 
 
 
