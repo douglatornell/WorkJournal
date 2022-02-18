@@ -204,12 +204,15 @@ Atlantis
 * 43ravens/43ravens.ca
 * 43ravens/biz-journal
 * 43ravens/domains-maint
-  * rsync -av kudu.local:/media/doug/warehouse/43ravnes/domains-maint/db-backups domains-maint/
+  * rsync -av kudu.local:/media/doug/warehouse/43ravens/domains-maint/db-backups domains-maint/
   * rsync -av /media/doug/warehouse/43ravens/domains-maint/phpgedview-svn-r7320-trunk-phpGedView.zip domains-maint/
 * 43ravens/NEMO_Nowcast -> projects/NEMO_Nowcast
   * added to SalishSeaCast group in PyCharm project mgr
 * 43ravens/client-UBC-SCARP -> clients/UBC-SCARP
 * rsync -av kudu.local:/media/doug/warehouse/43ravens/financial 43ravens/
+* Resilient-C/Resilient-C -> projects/resilient-c/Resilient-C
+* Resilient-C/Resilient-C-data -> projects/resilient-c/Resilient-C-data
+* rsync-ed other dirs from kudu to projects/resilient-c/
 
 * TODO: rsync .idea/workspace.xml files from kudu projects to get project level configs
 
