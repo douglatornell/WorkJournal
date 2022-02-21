@@ -1150,14 +1150,6 @@ Drove to White Rock for Susan to visit J&M; traffic was stupid; waslked in Ruth 
 Sun 13-Feb-2022
 ^^^^^^^^^^^^^^^
 
-Continued building & uploading to graham-dtn:/nearline/SalishSea/nowcast-green.201812/ 
-1-mo tarballs in tmux session (201812-graham) on salish:
-* 01jul19 to 15feb20 are in borg archive on /backup2
-* can't use * wildcard to tar files from borg mount; resolved by using --from-file to read dirs
-  from text file
-    oct19
-(SalishSeaCast)
-
 Pullled lab7 from 2020 repo and cleaned up markup.
 (Numeric Course)
 
@@ -1165,6 +1157,183 @@ Helped Susan use Reshapr to extract files for Prodigy course; gathered user feed
 * should there be environment-user.yaml (or some other name)?
 Fixed issue #13 that Susan found re: config yaml passed through CLI as str instead Path; PR#14 
 (Prodigy Course)
+
+
+Week 7
+------
+
+Mon 14-Feb-2022
+^^^^^^^^^^^^^^^
+
+Continued building & uploading to graham-dtn:/nearline/SalishSea/nowcast-green.201812/ 
+1-mo tarballs in tmux session (201812-graham) on salish:
+* 01jul19 to 15feb20 are in borg archive on /backup2
+* can't use * wildcard to tar files from borg mount; resolved by using --from-file to read dirs
+  from text file
+    oct19
+    nov19
+    dec19 tarball
+nowcast-agrif failed
+(SalishSeaCast)
+
+Finished cleanup of lab7.
+Fixed phaustin links in lab2 except one I can't resolve; created issue #20 for Susan & Rachel.
+(Numeric Course)
+
+Finsiehd adding variable groups to 201812 profile based on feedback from Susan; merged PR#12.
+Test suite improvements, including a test for the config yaml type issue #13; merged PR#15.
+Added user environment and installation docs; merged PR#16.
+Made unused variables list global for model profiles; merged PR#17.
+Started work on subset selection for extracted dataset; added time selection; discussed design w/ Susan.
+(Reshapr)
+
+
+Tue 15-Feb-2022
+^^^^^^^^^^^^^^^
+
+Investigated nowcast-agrif/14feb failure:
+* 13feb also failed
+* 12feb timed out
+  * looks like upload_forcing failed; confirmed:
+    * PasswordRequiredException: Private key file is encrypted
+* backfilling:
+    upload_forcing orcinus nowcast+ 2022-02-12
+    make_forcing_links orcinus nowcast-agrif 2022-02-12
+    make_forcing_links orcinus nowcast-agrif 2022-02-13
+    make_forcing_links orcinus nowcast-agrif 2022-02-14
+    make_forcing_links orcinus nowcast-agrif 2022-02-15
+Finished building & uploading to graham-dtn:/nearline/SalishSea/nowcast-green.201812/ 
+1-mo tarballs in tmux session (201812-graham) on salish:
+* 01jul19 to 15feb20 are in borg archive on /backup2
+* can't use * wildcard to tar files from borg mount; resolved by using --from-file to read dirs
+  from text file
+    dec19 upload
+    jan20
+    feb20
+(SalishSeaCast)
+
+UBC-DFO modeling mtg; Krysten Rutherford, new IOS post-doc, Ph.D. research
+
+Finished work on time selection for extracted dataset; merged PR#18
+Added yx grid selection for extracted dataset; merged PR#19
+Added execution section to Atlantis use case; added PRODIGY course use case; PR#20
+(Reshapr)
+
+
+Wed 16-Feb-2022
+^^^^^^^^^^^^^^^
+
+Verified 1-mo tarballs graham-dtn:/nearline/SalishSea/nowcast-green.201812/.
+(SalishSeaCast)
+
+Merged PR#20 re: use case docs.
+Added depth selection for extracted dataset; merged PR#21.
+Changed to get coordinate names from model profile for source dataset in calc_output_coords(); 
+merged PR#22
+Installed Reshapr in /ocean/dlatorne/MOAD/ and set up user env; tests:
+* set up 8 worker, 10 threads/worker cluster
+  * 10d hourly diatoms, 1hr chunks, 1st run: 264s
+  * 10d hourly diatoms, 1hr chunks, 2nd run: 267s
+  * 10d hourly diatoms, 12hr chunks: 225s
+  * 10d hourly diatoms, 24hr chunks: 218s
+* changed cluster to 16 workers, 2 threads/worker
+  * 10d hourly diatoms, 24hr chunks: 229s
+  * 10d hourly diatoms, 4hr chunks: 221s
+* changed cluster to 8 workers, 4 threads/worker
+  * 10d hourly diatoms, 4hr chunks: 236s
+  * 10d hourly diatoms, 4hr chunks, parallel=False in open_mfdataset(): 228s
+  * 10d hourly diatoms, 1hr chunks: 242s
+* changed cluster to 4 workers, 8 threads/worker
+  * 10d hourly diatoms, 1hr chunks: 276s
+* changed cluster to 16 workers, 2 threads/worker
+  * 10d hourly diatoms, 1hr chunks: 242s
+  * 10d hourly diatoms, 24hr chunks: 236s
+* changed cluster to 8 workers, 2 threads/worker
+  * 10d hourly diatoms, 24hr chunks: 230s
+* changed to use engine="h5netcdf" and restarted 8-2 cluster
+  * 10d hourly diatoms, 24hr chunks: 221s
+  * 31d hourly diatoms, 24hr chunks: 665s
+* changed to use engine="netcdf4"
+  * 31d hourly diatoms, 24hr chunks: 690s
+* can't use h5netcdf in .to_netcdf() due to chunksizes not tuples
+(Reshapr)
+
+Pullled lab6 from 2020 repo and cleaned up markup.
+(Numeric Course)
+
+
+Thu 17-Feb-2022
+^^^^^^^^^^^^^^^
+
+Debugged gh-pages build failure; ipython 8.0.x depends on black, supposed to be optional,
+but it isn't; see https://ubc-eoas.slack.com/archives/C02S3CNV6C9/p1645071587534949
+(Numeric Course)
+
+Experimented w/ h5netcdf:
+* changed chunksizes to tuples so that h5netcdf can be used by .to_netCDF()
+* small test on khawla is inconclusive, or perhaps favours netCDF4 (as I usually find)
+    netCDF4: 10.8, 10.2, 9.8, 10.1
+    h5netcdf: 11.3, 10.7, 10.9, 10.5, 11.1
+* test on salish using 8 worker, 2 threads/worker cluster
+  * 31d hourly diatoms, 24hr chunks, w/ nowcast-dev running: 603s, 588s, 598s
+* uninstalled netCDF4 from env on salish because it was still showing up in the 
+  dask profile flame chart; actually, it wasn't, I mistook xarray/backends/netCDF4.py for it
+  * 31d hourly diatoms, 24hr chunks, w/ nowcast-dev running: 600s
+* re-created reshapr user env on salish
+  * 31d hourly diatoms, 24hr chunks, w/ nowcast-dev finishing: 582s
+  * 31d hourly diatoms, 24hr chunks, after nowcast-dev: 642s
+* changed cluster to 8 workers, 10 threads/worker
+  * 31d hourly diatoms, 24hr chunks, after nowcast-dev: 658s
+* changed cluster to 8 workers, 1 threads/worker
+  * 31d hourly diatoms, 24hr chunks, after nowcast-dev: 603s
+  * 31d hourly diatoms, 24hr chunks, after nowcast-dev: 616s
+* added args to open_mfdataset(); 
+  concat_dim="time_counter", combine="nested", data_vars="minimal", coords="minimal", 
+  compat="override",
+  * 31d hourly diatoms, 24hr chunks, after nowcast-dev: 590s
+* changed args to open_mfdataset(); 
+  data_vars="minimal", coords="minimal", compat="override",
+  * 31d hourly diatoms, 24hr chunks, after nowcast-dev: 602s
+* changed cluster to 16 workers, 2 threads/worker
+  * 31d hourly diatoms, 24hr chunks, after nowcast-dev: 665s
+(Reshapr)
+
+See work journal.
+Set up warehouse/43ravens/projects/resilient-c/ dir on khawla; see setup notes.
+(Resilient-C)
+
+Weekly project mtg.
+(Atlantis)
+
+Did ramp test on Zwift; some calf cramping during ride.
+
+
+Fri 18-Feb-2022
+^^^^^^^^^^^^^^^
+
+Pullled lab8 from 2020 repo and cleaned up markup.
+(Numeric Course)
+
+Sore calves during and after climby Zwift ride.
+
+
+Sat 19-Feb-2022
+^^^^^^^^^^^^^^^
+
+Downloaded 1.18.1 versions of MaLiLib, MiniHUD & Litematica (beta) 
+from curseforge.com and installed them.
+
+Calves sore again after easy Zwift ride.
+
+
+Sun 20-Feb-2022
+^^^^^^^^^^^^^^^
+
+Goofed off!
+
+Walked to English Bay overlook then looped home via Cypress and bank;
+calves a little sore, legs tired. No Zwift ride.
+
 
 
 
