@@ -309,5 +309,12 @@ Others:
   * cloned repo to /media/doug/warehouse/python/
   * symlinked script as ~/bin/eFunds
 
-TODO:
 * portfolio returns calculator
+  * updated repo on GitHub to use main as default branch
+  * cloned repo to /media/doug/warehouse/python/
+  * added environment.yaml file
+  * added .gitignore; deleted .hgignore
+
+  * TODO:
+    * change to pyproject.toml and setup.cfg
+    * fix test suite
