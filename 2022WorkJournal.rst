@@ -1335,6 +1335,176 @@ Walked to English Bay overlook then looped home via Cypress and bank;
 calves a little sore, legs tired. No Zwift ride.
 
 
+Week 8
+------
+
+Mon 21-Feb-2022
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Family Day
+
+manager restarted overnight due to name resolution errors during nowcast-r12 run;
+interupted hindcast runs; no log messages from watch_fvcom; restarted log_aggregator at ~19:40
+(SalishSeaCast)
+
+Started updating transactions for 2021 tax returns.
+
+More khawla setup work; see notes.
+
+
+Tue 22-Feb-2022
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Group mtg:
+* Birgit presented on her attempt to use parcels to back track Mn tracer;
+  problem with time origin type in field set the combines velocity components
+  and Mn field; consensus was to put Mn field in a separate fieldset
+(Ocean Parcels)
+
+Read xarray code to confirm that open_mfdataset() args:
+  data_vars="minimal", coords="minimal", compat="override",
+that are sufficient for `reshapr extract` do actually reduce the checks and work
+done in the concatenate/merge functions. So, it is reasonable to expect that
+they provide a small performance win.
+Finished change from netCDF4 to h5netcdf engine for xarray; merged PR#23.
+Discovered that ncdump is installed with netCDF4, so missing now from 
+reshapr-dev env.
+Also discovered that ncdump -t doesn't convert times to strings for 
+netCDF4 files written by h5netcdf.
+Without netcdf4 in reshapr, need pydap to access SSC ERDDAP geo ref dataset.
+(Reshapr)
+
+
+Wed 23-Feb-2022
+^^^^^^^^^^^^^^^
+
+Looked at lab9 and lab10 but they are both not in the same pattern as earlier labs;
+need to consult w/ Susan.
+(Numeric Course)
+
+Reverted change from netCDF4 to h5netcdf; merged PR#24.
+Started adding handling of surface variables that don't have a depth coordinate; PR#25
+(Reshapr)
+
+* nowcast0 shut down with no explanation at 23-Feb 21:07 UTC == 13:07 Pacific; 
+  got uptimerobot notification at 13:13
+* 23feb/forecast-x2 interrupted
+* recovery started at ~13:30
+  * restarted nowcast0 from web dashboard at 21:31 UTC == 13:31 Pacific
+  * nowcast0
+      sudo apt update
+      sudo apt upgrade
+      sudo mount /dev/vdc /nemoShare
+      ll /nemoShare/MEOPAR/  # to confirm mount
+      sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+      ll /export/MEOPAR  # to confirm mount
+      sudo systemctl start nfs-kernel-server.service
+      sudo exportfs -f  # to reset NFS handles for compute nodes
+      # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -CF /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -CF /nemoShare/MEOPAR"; done
+    * cleaned up stale tmp run dirs in [*]runs/; just fvcom-forecast-x2
+  * on skookum:
+    * killed stale workers
+    * restarted log_aggregator
+    * decided to skip fvcom-forecast-x2 run
+    * recovery started at ~14:01:
+        launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-02-23"
+(SalishSeaCast)
+
+
+Thu 24-Feb-2022
+^^^^^^^^^^^^^^^
+
+collect_weather 12 had not completed at 09:45; investigation:
+* no errors in sarracenia log
+* 493 of 576 files downloaded
+* missing files in almomst all hours
+* moved 12/ aside and tried to start recovery with download_weather, but it failed too
+* moved 12.aside/ back so that collect_weather can finish its job, I hope
+* sent email to Sandrine
+* collect_weather 12 finished at ~11:51
+(SalishSeaCast)
+
+Discussed w/ Raisha in Slack Atlantis executable name item in YAML
+and new -m flag for migration files:
+* created issue #4 re: -m flag
+* created issue #5 re: Atlantis executable name
+Did year rollover code maint; merged PR#6.
+Changed to Python 3.10 for dev; merged PR#7.
+Changed GHA linkcheck & CI workflows to use mambafogrge-pypy3;
+also changed all GHA worksflows to only run on-push, not on-pull-request; merged PR#8.
+Did pre-commit autoupdate.
+Started to scope adding Atlantis executable name to YAML file re: issue #5
+Weekly mtg:
+* Beth confirmed that -m is new required flag for migration params file that she has split
+  out to handle things like salmon migration
+(Atlantis)
+
+Finished adding handling of surface variables that don't have a depth coordinate; mergd PR#25.
+Started adding HRDPS model profiles.
+(Reshapr)
+
+
+Fri 25-Feb-2022
+^^^^^^^^^^^^^^^
+
+Added Atlantis executable name to YAML file re: issue #5; merged PR#9.
+(Atlantis)
+
+Slack call w/ Armaan re: memory use and jupyter lab variable inspector.
+
+* nowcast0 shut down with no explanation at 25-Feb 20:31 UTC == 12:31 Pacific; 
+  got uptimerobot notification at 12:45
+* 25feb/forecast-x2 interrupted
+* recovery started at ~14:50
+  * restarted nowcast0 from web dashboard at 22:52 UTC == 14:52 Pacific
+  * nowcast0
+      sudo apt update  # all up to date
+      sudo mount /dev/vdc /nemoShare
+      ll /nemoShare/MEOPAR/  # to confirm mount
+      sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+      ll /export/MEOPAR  # to confirm mount
+      sudo systemctl start nfs-kernel-server.service
+      sudo exportfs -f  # to reset NFS handles for compute nodes
+      # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -CF /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -CF /nemoShare/MEOPAR"; done
+    * cleaned up stale tmp run dirs in [*]runs/; just fvcom-forecast-x2
+  * on skookum:
+    * killed stale workers
+    * restarted log_aggregator
+    * decided to skip fvcom-forecast-x2 run
+    * recovery started at ~15:00:
+        launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-02-25"
+(SalishSeaCast)
+
+
+Sat 26-Feb-2022
+^^^^^^^^^^^^^^^
+
+Drove to White Rock for Susan to visit J&M; walked in Ruth Johnson Park.
+
+
+Sun 27-Feb-2022
+^^^^^^^^^^^^^^^
+
+nowcast6 node stopped 27feb22 10:14 UTC == 02:14 Pacific
+* no missing runs
+* recovery started at ~12:10
+  * restarted nowcast6 from dashboard 27feb22 20:09 UTC == 12:09 Pacific
+      sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR
+  * skookum:
+      launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2022-02-27"
+(SalishSeaCast)
+
+
 
 
 GEMLAM external drives:
