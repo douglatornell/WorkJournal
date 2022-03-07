@@ -61,7 +61,7 @@ Basics
     curl -L -O https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-$(uname)-$(uname -m).sh
     cd ~
     bash ~/Downloads/Mambaforge-pypy3-$(uname)-$(uname -m).sh
-* created ~/conda_envs/ for storage of conda envs on fastest storage (now that it is big); 1st env creation for NEMO-Cmd was blazingly fast :-)
+* created ~/conda_envs/ for storage of conda envs on fastest storage (now that it is big); 1st env creation for NEMO-Cmd was blazing fast :-)
 * thrashed getting camera to work until I looked at System76 troubleshooting page and realized that it was disabled by the Fn+F10 hardware switch
 * rsync-ed ~/Documents/ and /media/doug/warehouse/Documents from kudu into ~/Documents/
 * installed sshfs distro pkg via apt
@@ -149,6 +149,14 @@ MEOPAR
   * rsync .idea/workspace.xml and .idea/vcs.xml files from kudu projects to get project level configs
   * re-create PyCharm project structures
 
+
+SOG-projects
+************
+
+* created /media/doug/warehouse/SOG-projects and cloned SOG repos from SalishSeaCast into it:
+
+  * SOG-Bloomcast-Ensemble
+  * SOG
 
 
 MIDOSS
