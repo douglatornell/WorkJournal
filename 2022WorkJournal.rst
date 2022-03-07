@@ -1505,6 +1505,337 @@ nowcast6 node stopped 27feb22 10:14 UTC == 02:14 Pacific
 (SalishSeaCast)
 
 
+March
+=====
+
+Week 9
+------
+
+Mon 28-Feb-2022
+^^^^^^^^^^^^^^^
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Added Atlantis -m flag for migrations .csv re: issue #4; merged PR#11.
+(Atlantis)
+
+Started work on adding HRDPS model profiles for extractions.
+(Reshapr)
+
+
+Tue 1-Mar-2022
+^^^^^^^^^^^^^^
+
+Continued work on adding HRDPS model profiles for extractions.
+(Reshapr)
+
+salishsea-site went down at 16:36; investigation:
+* /SalishSeaCast report i/o error
+* opened helpdesk ticket
+(SalishSeaCast)
+
+
+Wed 2-Mar-2022
+^^^^^^^^^^^^^^
+
+SalishSeaCast status:
+* processes on skookum:
+    pgrep -af nowcast
+    4597 /SalishSeaCast/nowcast-env/bin/python /SalishSeaCast/nowcast-env/bin/supervisord -c /SalishSeaCast/SalishSeaNowcast/config/supervisord.ini
+    10192 /SalishSeaCast/nowcast-env/bin/python3 -m nowcast.workers.collect_weather /SalishSeaCast/SalishSeaNowcast/config/nowcast.yaml 00 2.5km
+    21787 /SalishSeaCast/nowcast-env/bin/python3 -m nowcast.workers.make_surface_current_tiles /SalishSeaCast/SalishSeaNowcast/config/nowcast.yaml forecast2 --run-date 2022-02-28
+    27796 /SalishSeaCast/nowcast-env/bin/python3 -m nowcast.workers.make_surface_current_tiles /SalishSeaCast/SalishSeaNowcast/config/nowcast.yaml forecast2 --run-date 2022-02-28
+    29500 /SalishSeaCast/nowcast-env/bin/python -m nemo_nowcast.message_broker /SalishSeaCast/SalishSeaNowcast/config/nowcast.yaml
+    * nothing useful; kill them all
+* interrupted runs:
+  * NONE!!!
+  * nowcast-r12/01mar22 needs to be downloaded
+* last weather download:
+  * /results/forcing/atmospheric/GEM2.5/GRIB/20220301/18
+* processes on arbutus:
+    pgrep -af nowcast
+    6316 bash -c source /nemoShare/MEOPAR/nowcast-sys/nowcast-env/etc/conda/activate.d/envvars.sh ; /nemoShare/MEOPAR/nowcast-sys/nowcast-env/bin/python3 -m nowcast.workers.watch_fvcom /nemoShare/MEOPAR/nowcast-sys/SalishSeaNowcast/config/nowcast.yaml arbutus.cloud-nowcast r12 nowcast
+    6317 /nemoShare/MEOPAR/nowcast-sys/nowcast-env/bin/python3 -m nowcast.workers.watch_fvcom /nemoShare/MEOPAR/nowcast-sys/SalishSeaNowcast/config/nowcast.yaml arbutus.cloud-nowcast r12 nowcast
+
+Plan for temporary replacement of /SalishSeaCast:
+* replace miniconda3 with mambafogrge-pypy3
+* build new deployment in /data/SalishSeaCast/
+Deployment:
+  on salish:
+    sudo mkdir -m 755 /data/SalishSeaCast
+    sudo chown dlatorne:sallen /data/SalishSeaCast
+  on skookum:
+    cd ~
+    curl -L -O https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-$(uname)-$(uname -m).sh
+    bash ~/Mambaforge-pypy3-$(uname)-$(uname -m).sh
+    # allowed installer to run conda init
+    # new shell
+    conda config --set auto_activate_base false
+    # edit .condarc
+      channels:
+        - conda-forge
+        - nodefaults
+
+      show_channel_urls: true
+
+      envs_dirs:
+        - /home/dlatorne/conda_envs
+
+      auto_activate_base: false
+    # new shell
+    rm Miniconda3-latest-Linux-x86_64.sh
+    rm -rf miniconda3/
+    # follow deployment docs w/ exceptions noted here; 
+    # see also Wed 7-Apr-2021 notes from last deployment update
+    cd /data/SalishSeaCast/
+    # clone repos
+    # change SalishSeaNowcast/envs/environment-prod.yaml to use Python 3.10
+    # create nowcast-env
+    # install pkgs
+    # change SalishSeaNowcast/envs/environment-sarracenia.yaml to use Python 3.10
+    # create sarracenia-env
+    # change salishsea-site/envs/environment-prod.yaml to use Python 3.10
+    # create salishsea-site-env
+    # installed pkg
+    # set up envvars in 3 envs
+    # set up runs/ dir
+    # set up datamart/ dirs
+    # set up logs/ dirs
+    # restore large uncommitted tidal_predictions/ files:
+      cp --preserve=timestamps /home/sallen/MEOPAR/ANALYSIS/analysis-storm-surges/notebooks/tide_analysis_scripts/*2030.csv SalishSeaNowcast/tidal_predictions/
+    # changed links in /results/nowcast-sys/figures/salishsea-site/static/img/index_page
+
+    # sort out OPPTools issues; see git diff on arbutus & Wed 7-Apr-2021 notes
+    # build XIOS
+    # build NEMO SalishSeaCast_blue for nowcast-dev
+
+* fix docs
+  * re: creating runs/ dir
+  * re: namelist.time_nowcast_template
+      maybe ../SS-run-sets/SalishSea/nemo3.6/nowcast/namelist.time_nowcast_template ???
+  * path typos in cold start
+  * add 00/ 06/ 12/ 18/ to datamart/hrdps-west/
+
+Automation recovery:
+* started automation at 12:51
+* recovery:
+    rmdir /results/forcing/atmospheric/GEM2.5/GRIB/20220302/00
+    download_weather 00 2.5km
+    download_weather 06 2.5km
+* notifications going to my DMs on Slack, not ssc-daily-progress
+  * fixed webhook URL envvar
+  * stopped and re-started everything
+* collect_river_data failed due to no hydrometric .csv files
+* collect_river_data failed due to /SalishSeaCast path for .csv files
+* grib_to_netcdf failed due to /SalishSeaCast path for wgrib2
+* make_ssh_files failed due to /SalishSeaCast path for tidal_predictions
+* get_onc_ctd failed due to invalid netcdf backend; might be due to another /SalishSeaCast path
+* editted nowcast.yaml to change /SalishSeaCast to /data/SalishSeaCast
+
+* recovery cont'd:
+  # wait for sarracenia to grab hydrometric .csv files
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20220302/06
+    download_weather 06 2.5km
+  # collect_river_data succeeded
+  # collect_NeahBay_ssh succeeded
+  # forecast2 run failed; maybe wrong date; don't really care
+    download_weather 12 2.5km
+  # nowcast-blue running !!
+    download_fvcom_results r12 nowcast 2022-03-01
+    collect_weather 00 2.5km &
+    rm -rf datamart/hrdps-west/18/*
+    download_weather 18 2.5km
+    download_weather 00 1km
+    download_weather 12 1km
+  # make_turbidity_file failed due to
+  # pandas._config.config.OptionError: Pattern matched multiple keys (below)
+    ln -s /results/forcing/rivers/river_turb/riverTurbDaily2_y2022m03d01.nc riverTurbDaily2_y2022m03d02.nc
+    upload_forcing arbutus turbidity
+    upload_forcing optimum turbidity  # failed: PasswordRequiredException: Private key file is encrypted
+    upload_forcing orcinus turbidity  # failed: PasswordRequiredException: Private key file is encrypted
+    upload_forcing graham turbidity  # hung
+
+Lots of:
+  2022-03-02 14:42:20,471 ERROR [make_plots] unexpected TypeError in make_figure:
+  Traceback (most recent call last):
+    File "/data/SalishSeaCast/SalishSeaNowcast/nowcast/workers/make_plots.py", line 1102, in _calc_figure
+      fig = fig_func(*args, **kwargs)
+    File "/data/SalishSeaCast/SalishSeaNowcast/nowcast/figures/fvcom/research/thalweg_transect.py", line 63, in make_figure
+      plot_data = _prep_plot_data(place, fvcom_results_dataset, time_index, varname)
+    File "/data/SalishSeaCast/SalishSeaNowcast/nowcast/figures/fvcom/research/thalweg_transect.py", line 125, in _prep_plot_data
+      xx, zz, vi, _, __, ___ = fpp.vertical_transect_snap(
+    File "/data/SalishSeaCast/OPPTools/OPPTools/utils/fvcom_postprocess.py", line 843, in vertical_transect_snap
+      timestr = datetime.strftime(nctime(f,ktime), ' %Y-%m-%d %H:%M UTC')
+  TypeError: descriptor 'strftime' for 'datetime.date' objects doesn't apply to a 'cftime._cftime.DatetimeGregorian' object
+
+This looks like a new one:
+  2022-03-02 15:32:01,643 CRITICAL [make_turbidity_file] unhandled exception:
+  Traceback (most recent call last):
+    File "/data/SalishSeaCast/NEMO_Nowcast/nemo_nowcast/worker.py", line 391, in _do_work
+      checklist = self.worker_func(
+    File "/data/SalishSeaCast/SalishSeaNowcast/nowcast/workers/make_turbidity_file.py", line 111, in make_turbidity_file
+      itdf = _interpTurb(tdf, idateDD, mthresh)
+    File "/data/SalishSeaCast/SalishSeaNowcast/nowcast/workers/make_turbidity_file.py", line 164, in _interpTurb
+      pd.set_option("precision", 9)
+    File "/data/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/pandas/_config/config.py", line 256, in __call__
+      return self.__func__(*args, **kwds)
+    File "/data/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/pandas/_config/config.py", line 149, in _set_option
+      key = _get_single_key(k, silent)
+    File "/data/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/pandas/_config/config.py", line 116, in _get_single_key
+      raise OptionError("Pattern matched multiple keys")
+  pandas._config.config.OptionError: Pattern matched multiple keys
+
+Also couple of new?:
+  2022-03-02 17:21:13,598 ERROR [make_plots] unexpected TypeError in make_figure:
+  Traceback (most recent call last):
+    File "/data/SalishSeaCast/SalishSeaNowcast/nowcast/workers/make_plots.py", line 1102, in _calc_figure
+      fig = fig_func(*args, **kwargs)
+    File "/data/SalishSeaCast/SalishSeaNowcast/nowcast/figures/fvcom/publish/second_narrows_current.py", line 68, in make_figure
+      plot_data = _prep_plot_data(place, fvcom_stns_datasets, obs_dataset)
+    File "/data/SalishSeaCast/SalishSeaNowcast/nowcast/figures/fvcom/publish/second_narrows_current.py", line 123, in _prep_plot_data
+      obs = xarray.Dataset(
+    File "/data/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/xarray/core/dataset.py", line 749, in __init__
+      variables, coord_names, dims, indexes, _ = merge_data_and_coords(
+    File "/data/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/xarray/core/merge.py", line 483, in merge_data_and_coords
+      return merge_core(
+    File "/data/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/xarray/core/merge.py", line 632, in merge_core
+      collected = collect_variables_and_indexes(aligned)
+    File "/data/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/xarray/core/merge.py", line 291, in collect_variables_and_indexes
+      variable = as_variable(variable, name=name)
+    File "/data/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/xarray/core/variable.py", line 110, in as_variable
+      raise TypeError(
+  TypeError: Using a DataArray object to construct a variable is ambiguous, please extract the data using the .data property.
+
+  2022-03-02 18:56:26,443 ERROR [make_plots] unexpected KeyError in make_figure:
+  Traceback (most recent call last):
+    File "/data/SalishSeaCast/SalishSeaNowcast/nowcast/workers/make_plots.py", line 1102, in _calc_figure
+      fig = fig_func(*args, **kwargs)
+    File "/data/SalishSeaCast/SalishSeaNowcast/nowcast/figures/wwatch3/wave_height_period.py", line 66, in make_figure
+      plot_data = _prep_plot_data(buoy, wwatch3_dataset_url)
+    File "/data/SalishSeaCast/SalishSeaNowcast/nowcast/figures/wwatch3/wave_height_period.py", line 95, in _prep_plot_data
+      obs = moad_tools.observations.get_ndbc_buoy(buoy)
+    File "/data/SalishSeaCast/moad_tools/moad_tools/observations.py", line 108, in get_ndbc_buoy
+      df = df.rename(index=str, columns=columns).set_index("time").sort_index()
+    File "/data/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/pandas/util/_decorators.py", line 311, in wrapper
+      return func(*args, **kwargs)
+    File "/data/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/pandas/core/frame.py", line 5488, in set_index
+      raise KeyError(f"None of {missing} are in the columns")
+  KeyError: "None of ['time'] are in the columns"
+
+Website recovery:
+* changed log path in production.ini to /data/SalishSeaCast/...
+(SalishSeaCast)
+
+
+Thu 3-Mar-2022
+^^^^^^^^^^^^^^
+
+Merged main into py310 branch of SalishSeaNowcast; built new dev env
+SalishSeaCast ops mgmt:
+* make_turbidity_file failed due to pandas OptionError; persist:
+    ln -s /results/forcing/rivers/river_turb/riverTurbDaily2_y2022m03d02.nc riverTurbDaily2_y2022m03d03.nc
+    upload_forcing arbutus turbidity
+* upload_forcing to graham-dtn is working today
+Finished update of SalishSeaNowcast to Python 3.10 for dev & prod; merged PR#93.
+Created issue #94 re: pandas OptionError in make_turbidity_file; root cause is unnecessary 
+setting of display precision for pandas that was not robust for future changes; deleted; PR#95
+Pulled PR#95 branch on to skookum for production testing tomorrow.
+(SalishSeaCast)
+
+Henryk power cycled salish at ~15:45.
+
+
+Fri 4-Mar-2022
+^^^^^^^^^^^^^^
+
+Test of PR#95 branch re: re: pandas OptionError in make_turbidity_file in produciton succeded; 
+merged PR#95 and updated skookum.
+/results2 is back; 90Tb !!
+  * created /result2/SalishSea/nowcast-green.201905
+/SalishSeaCast is back; not corrupted?
+(SalishSeaCast)
+
+Cleaned up labs 9 and 10.
+(Numeric Course)
+
+Started work on setting up 2022 bloomcast:
+* see khawla setup notes
+* khawla:
+  * cloned SOG-Bloomcast-Ensemble
+  * cloned SOG
+  * changed colander=1.5.1 dependency to install via pip
+    * not available from conda-forge
+    * can get from defaults, but that forces env to use Python 3.7
+  * editable installs of SOG & SOG-Bloomcast-Ensemble
+  * SOG-Bloomcast-Ensemble test suite ran successfully
+  * mkdir run/2021
+  * cp run/2021_bloomcast_inifile.yaml run/2022_bloomcast_infile.yaml
+  * mv run/2021_bloomcast_inifile.yaml run/2021/
+  * committed archive of 2021 SOG YAML infile
+  * edit run/2022_bloomcast_infile.yaml
+  * edit run/config/yaml
+    * have to continue to use Nanaimo River at Cassidy as estimate of Englishman at Parksville
+      because the Englishman data stream did not resume until 30-Apr-2021
+  * tested run prep w/ SOG runs and publish to web disabled
+  * committed run/2022_bloomcast_infile.yaml and run/config.yaml
+* salish:
+  * pull changes from GitHub
+  * created new bloomcast env
+  * runs dir: /data/dlatorne/SOG-projects/SOG-Bloomcast-Ensemble/run
+  * archived 2021_bloomcast* files in run/2021/
+  * archived Englishman_flow Fraser_flow Sandheads_wind in run/2021/
+  * archived YVR_* in run/2021/
+  * ran test w/ push to web disabled:
+      INFO:bloomcast.ensemble:Predicted earliest bloom date is 2022-03-10
+      INFO:bloomcast.ensemble:Earliest bloom date is based on forcing from 1983/1984
+      INFO:bloomcast.ensemble:Predicted early bound bloom date is 2022-03-13
+      INFO:bloomcast.ensemble:Early bound bloom date is based on forcing from 1991/1992
+      INFO:bloomcast.ensemble:Predicted median bloom date is 2022-03-20
+      INFO:bloomcast.ensemble:Median bloom date is based on forcing from 1999/2000
+      INFO:bloomcast.ensemble:Predicted late bound bloom date is 2022-04-06
+      INFO:bloomcast.ensemble:Late bound bloom date is based on forcing from 1998/1999
+      INFO:bloomcast.ensemble:Predicted latest bloom date is 2022-04-07
+      INFO:bloomcast.ensemble:Latest bloom date is based on forcing from 2008/2009
+  * enabled cron job41
+(Bloomcast)
+
+Added SOG-projects/ to khawla; see setup notes.
+
+
+Sat 5-Mar-2022
+^^^^^^^^^^^^^^
+
+Fixed conda bin path in cron job script; ran bloomcast via cron job script.
+(Bloomcast)
+
+Fiddled around with NFS mounts on skookum until I was able to get /SalishSeaCast and /results2
+mounted:
+* exportfs -f on salish didn't do the job for skookum, but may have to chum, tyee & lox
+* needed to do umount -f on skookum, but that fails until all refs to fd have been eliminated
+* found fs refs via ls -l /proc/*/fd/
+* lots of hung refs to /SalishSeaCast, but /results2 was easier
+Downloaded jan22 results from arbutus via bash loop.
+(SalishSeaCast)
+
+
+Sun 6-Mar-2022
+^^^^^^^^^^^^^^
+
+First automated run of bloomcast.
+Looking at predictions and weather forecast, my guess is 17-Mar.
+(Bloomcast)
+
+Downloaded feb22 results from arbutus via bash loop.
+Started building 1-mo tarballs of nowcast-green.2019105 in tmux session on chum 
+and uploading to graham-dtn:/nearline; jan22
+(SalishSeaCast)
+
+Rode Zwift Gran Fondo ~25 min faster than on 31-Dec.
+
+
+
+
 
 
 GEMLAM external drives:
