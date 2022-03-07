@@ -946,11 +946,11 @@ Goofed off :-)
 Sun 21-Feb-2021
 ^^^^^^^^^^^^^^^
 
-Started work on setting up 2020 bloomcast:
+Started work on setting up 2021 bloomcast:
 * Changed SOG-Bloomcast-Ensemble repo default git branch name from master to main.
 * Built new bloomcast-2021 env on kudu from conda-forge only; got Python 3.7
 * runs dir on salish: /data/dlatorne/SOG-projects/SOG-Bloomcast-Ensemble/run
-* cp run/2019_bloomcast_inifile.yaml run/2020_bloomcast_infile.yaml; commit
+* cp run/2020_bloomcast_inifile.yaml run/2021_bloomcast_infile.yaml; commit
 * archived 2020_bloomcast* files in run/2020/
 * archived bloomcast.log and bloom_date_evolution.log files into run/2020/
 * edit 2021_bloomcast_infile.yaml
