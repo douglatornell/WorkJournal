@@ -1834,8 +1834,150 @@ and uploading to graham-dtn:/nearline; jan22
 Rode Zwift Gran Fondo ~25 min faster than on 31-Dec.
 
 
+Week 10
+-------
+
+Mon 7-Mar-2022
+^^^^^^^^^^^^^^
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Continued building 1-mo tarballs of nowcast-green.2019105 in tmux session on chum 
+and uploading to graham-dtn:/nearline:
+* jan22 rsync failed due to typos in command chain; re-ran
+Downloaded 01-04mar22 results from arbutus via bash loop; re-enabled nowcast-green >30d old 
+results purge cron task on arbutus
+Restored /SalishSeaCast is not the one that disappeared last week; restored one has hg clones ???
+Hacked OPPTools changes to avoid ~1000 error/day into /data/SalishSeaCast/OPPTools/
+from khawal clone:
+* OPPTools/fvcomToolbox/fvcomToolbox.py re: pyproj.Proj() arg
+* OPPTools/utils/fvcom_postprocess.py re: nctime() call
+* OPPTools/utils/__init__.py import that leads to ttide was commented out by Maxim in aa98ada
+Created issue #96 re: upload_forcing to orcinus and optimum fails w/ "Private key file is encrypted"
+* root cause is that orcinus and optimum ssh servers are too old to send server-sig-algs
+  and paramiko>2.9 defaults to using rsa-sha2-512 which they don't seem to support
+* optimum has openssh=5.3
+* orcinus has openssh=6.0
+(SalishSeaCast)
 
 
+Tue 8-Mar-2022
+^^^^^^^^^^^^^^
+
+SoPO day 1:
+* Farron:
+  * normally warm year despite summer heat
+  * failed La Niña in spring
+  * very wet autumn
+* Tetania:
+  * freshening in NE Pacific over past 5 yrs
+
+* TODO:
+  * Look at CIOOS as data source; e.g. Halibut Bank per Andrea Hilborn
+
+Finished work on issue #96 re: upload_forcing to orcinus and optimum fails with
+"Private key file is encrypted"; created PR#97
+* pull branch on skookum to test in production
+Backfilled upload_forcing to orcinus and optimum.
+Started backfilling nowcast-agrif runs:
+  make_forcing_links orcinus nowcast-agrif 2022-03-02
+  make_forcing_links orcinus nowcast-agrif 2022-03-03
+  make_forcing_links orcinus nowcast-agrif 2022-03-04
+  make_forcing_links orcinus nowcast-agrif 2022-03-05
+  make_forcing_links orcinus nowcast-agrif 2022-03-06
+  make_forcing_links orcinus nowcast-agrif 2022-03-07
+  make_forcing_links orcinus nowcast-agrif 2022-03-08
+(SalishSeaCast)
+
+EOAS mail migration to mail.ubc.ca
+
+
+Wed 9-Mar-2022
+^^^^^^^^^^^^^^
+
+Started using mail.ubc.ca web mail instead of Thunderbird on khawla.
+
+SoPO day 2
+
+Merged PR#91 re: issue #96 - upload_forcing to orcinus and optimum fails with
+"Private key file is encrypted"; finalized deployment ot production.
+Helped Susan update config to download 201905 re-run on optimum to nowcast-green.201905.
+Started backfilling nowcast-dev runs:
+  built XIOS-2
+  built NEMO SalishSeaCast_Blue config
+(SalishSeaCast)
+
+Susan traced problem re-starting hindcast.201905 on optimum to needing omega login node that 
+Henryk told us to use integrated into SalishSeaCmd; did so.
+optimum's ancient ssh client doesn't like my new ed25519 key, causing it to be unable to interact
+with GitHub; resolved by adding salishsea-nowcast-deployment_id_rsa deployment key to SalishSeaCmd
+on GitHub.
+(SalishSeaCmd)
+
+
+Thu 10-Mar-2022
+^^^^^^^^^^^^^^^
+
+SoPO day 3
+
+Created nowcast-dev/09mar22/ directory containing namelist_cfg and restart.nc from nowcast-green.201905/09mar22/ so that nowcast-dev can start
+  make_forcing_links salish nowcast+ --shared-storage --run-date 2022-03-10
+(SalishSeaCast)
+
+
+Fri 11-Mar-2022
+^^^^^^^^^^^^^^^
+
+FAL estate work:
+* updated distribution spreadsheet
+* tried to figure out how to use DRS statement to get BCE shares into DI account;
+  phone fail - bounced to estate dept.; Monica is no longer at TD branch
+
+Year rollover codebase maintenance; PR#14; merged
+* bump version to 22.1.dev0
+* update copyright year range
+* change copyright holder to SalishSeaCast Project Contributors
+* add SPDX short-form license identifiers
+* rename to .readthedocs.yaml
+* change to new readthedocs build spec API & mambaforge-4.10
+Improve GHA workflows; PR#15
+* change to run GHA workflows on push to any branch
+* drop pkg caching from GHA linkcheck & CI workflows
+* chg GHA linkcheck & CI workflows to use mambaforge
+Change ot Python 3.10 for pkg dev; PR#
+* add 3.10 to GHA pytest-coverage workflow
+* change to 3.10 in GHA linkcheck workflow
+* change to Python 3.10 for pkg dev
+* update pkgs & versions used in revent dev env
+Released SalishSeaCmd v22.1 re: Compute Canada StdEnv/2020, omega node on optimum, etc.;
+also a test of auto-generated release notes on GitHub; I was correct in my expectation that
+release notes come from PRs not commits; contributors list & change log link are nice too.
+(SalishSeaCmd)
+
+
+Sat 12-Mar-2022
+^^^^^^^^^^^^^^^
+
+Drove to White Rock for Susan to visit J&M; walked in Ruth Johnson Park.
+
+Dinner from La Quercia deli.
+
+
+Sun 13-Mar-2022
+^^^^^^^^^^^^^^^
+
+Squash-merged dependabot PRs re: pillow:
+* moad_tools
+* tools
+* analysis-doug/melanie-geotiff
+* analysis-doug/dask-expts
+(SalishSeaCast)
+
+
+
+
+* update SalishSeaCmd installation docs re: no anaconda and `python3 -m pip install`
 
 
 GEMLAM external drives:
