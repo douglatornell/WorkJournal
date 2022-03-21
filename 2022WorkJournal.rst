@@ -1975,15 +1975,216 @@ Squash-merged dependabot PRs re: pillow:
 (SalishSeaCast)
 
 
+Week 11
+-------
+
+Mon 14-Mar-2022
+^^^^^^^^^^^^^^^
+
+Resolved nvidia driver update problem on khawla thanks to apt & dpkg dance on 
+https://support.system76.com/articles/package-manager-pop/
+
+Got my phone connected to new FASMail EOAS mail account w/ extra long PIN for UBC.
+
+Group mtg; first hybrid; see whiteboard.
+(MOAD)
+
+Dug up docs re: creating atmospheric forcing interpolation weights for NEMO re:
+GEMLAM and downscaling; see https://salishseacast.slack.com/archives/C02TDP862N6/p1647290291220139
+Wave plots failed due to change to DST
+
+nowcast0 shut down with no explanation at 14-Mar 20:44 UTC == 13:44 Pacific; 
+got uptimerobot notification at 13:49
+* 14mar/forecast-x2 interrupted
+* recovery started at ~15:10
+  * restarted nowcast0 from web dashboard at 22:13 UTC == 15:13 Pacific
+  * nowcast0
+      sudo apt update
+      sudo apt upgrade  # 2 pkgs
+      sudo mount /dev/vdc /nemoShare
+      ll /nemoShare/MEOPAR/  # to confirm mount
+      sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+      ll /export/MEOPAR  # to confirm mount
+      sudo systemctl start nfs-kernel-server.service
+      sudo exportfs -f  # to reset NFS handles for compute nodes
+      # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -CF /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -CF /nemoShare/MEOPAR"; done
+    * cleaned up stale tmp run dirs in [*]runs/; just fvcom-forecast-x2
+  * on skookum:
+    * no stale workers
+    * restarted log_aggregator
+    * decided to skip fvcom-forecast-x2 run
+    * recovery started at ~15:30:
+        launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-03-14"
+(SalishSeaCast)
+
+
+Tue 15-Mar-2022
+^^^^^^^^^^^^^^^
+
+cron run failed due to "Wind data date 2022-03-14 is unchanged since last run"; re-ran manually repeatedly with no luck
+(Bloomcast)
+
+See work journal.
+(Resilient-C)
+
+
+Wed 16-Mar-2022
+^^^^^^^^^^^^^^^
+
+nowcast0 shut down with no explanation at 16-Mar 10:45 UTC == 03:45 Pacific; 
+got uptimerobot notification at 03:53
+* 15mar/forecast2 interrupted
+* recovery started at ~09:20
+  * restarted nowcast0 from web dashboard at 16:22 UTC == 09:22 Pacific
+  * nowcast0
+      sudo apt update
+      sudo apt upgrade  # 4 pkgs; security
+      cat /var/run/reboot-required*  # check for reboot required
+      sudo shutdown -r now  # reboot for security updates
+      sudo mount /dev/vdc /nemoShare
+      ll /nemoShare/MEOPAR/  # to confirm mount
+      sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+      ll /export/MEOPAR  # to confirm mount
+      sudo systemctl start nfs-kernel-server.service
+      sudo exportfs -f  # to reset NFS handles for compute nodes
+      # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -CF /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -CF /nemoShare/MEOPAR"; done
+    * cleaned up stale tmp run dirs in [*]runs/; just forecast2
+  * on skookum:
+    * no stale workers
+    * restarted log_aggregator
+    * decided to skip forecast2 & wwatch3-forecast2 runs
+    * collect_weather 12 2.5km still waiting for files
+nowcast6 node stopped 16-Mar 18:13 UTC == 11:13 Pacific
+* 16mar/nowcast-x2 interrupted
+* recovery started at ~12:00
+  * restarted nowcast6 from dashboard at 19:03 UTC == 12:03 Pacific
+      sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR
+  * skookum:
+      launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2022-03-16"
+(SalishSeaCast)
+
+Added new unrecognized weather descriptions to cloud fraction mapping.
+cron run failed due to "Wind data date 2022-03-15 is unchanged since last run"; investigating:
+* reproduced issue on khawla
+* trigger is ValueError from get_forcing_data(); presumably not from wind data processing
+* HTML table we scrape to get the Fraser River discharge values appears to have changed 
+  from 2 to 4 columns on 14-Mar
+(Bloomcast)
+
+
+Thu 17-Mar-2022
+^^^^^^^^^^^^^^^
+
+Installed Gparted on khawla.
+
+Spun up the GEM2.5-2007-2009 and GEMLAM-2012-2014 external drives; 
+note that they use different power supplied 3V for the 2007-2009, 1.5V for the 2012-2014;
+also they are far from full.
+Used Gparted to repurpose one of Elise's external drives (elise1) to hold GEMLAM 2010-2011:
+* reformatted as ext4 to wipe contents
+* set label to GEMLAM-2010-2011
+* mount
+* sudo mkdir gemlam
+* sudo chmod 777 gemlam/
+Started rsync-ing /opp/GEMLAM/2010/ from salish to GEMLAM-2010-2011 drive
+
+Discovered that GEMLAM-2012-2014 starts on 2012-04-28;
+it ends on 2014-11-18 (but I more or less knew that); months between look complete
+it also has all the files stored in a (redundantly named) GEMLAM-2012-2014/ directory.
+Checkeed GEM2.5-2007-2009:
+* has year directory structure:
+    gemlam/2007
+    gemlam/2008
+    gemlam/2009
+* missing 2007-02-01; also missing on /opp
+* missing hours on 2007-12-11 and 28
+* 2008 is complete
+* missing hours on 2009-10-11
+(SalishSeaCast)
+
+Phys Ocgy seminar; Tara Howatt re: gliders and zooplankton
+
+See work journal.
+(Resilient-C)
+
+Sushi dinner at ESB w/ Raisha, Keiran & Sara.
+
+
+Fri 18-Mar-2022
+^^^^^^^^^^^^^^^
+
+rsync-ing /opp/GEMLAM/2010/ from salish to GEMLAM-2010-2011 drive finished overnight
+Started rsync-ing /opp/GEMLAM/2011/ from salish to GEMLAM-2010-2011 drive
+Worked on making OPPTools usable in SalishSeaCast production without patches:
+* installed djl_ed25519.pub key on GitLab
+* confirmed that OPPTools clone on khawla is from my fork
+* set upstream remote in khawla clone to point to Michael's repo
+* pulled updates from upstream and pushed to fork
+* confirmed that commit aa98ada45 comments out import of transit_window_analysis 
+  that brings in problematic ttide package
+* created SalishSeaCast-prod branch on khawla and added 3 commits:
+  * fixed pyproj.Proj init re: axis order chgs in PROJ6+;
+      See https://pyproj4.github.io/pyproj/stable/gotchas.html#init-auth-auth-code-should-be-replaced-with-auth-auth-code
+  * fixed string formatting of netCDF date/times re: change in cftime pkg API.
+    I think the relevant change is in the cftime=1.1.0 released on 13-Feb-2020:
+      > * make only_use_cftime_datetimes=True by default, so cftime datetime
+      >   instances are returned by default by num2date (instead of returning python
+      >   datetime instances where possible). Issue #136, PR #135.
+  * trailing whitespace cleanups
+* pushed SalishSeaCast-prod branch to my fork on GitLab
+* on skookum:
+  * changed clone to have Michael's repo as upstream and my fork as origin
+  * reverted uncommited changes that are now in my fork
+  * pulled from new origin/master
+  * pulled from origin/SalishSeaCast-prod
+  * git switch SalishSeaCast-prod
+  * updated SalishSeaNowcast deployment docs; PR#98
+Started work on NEMO weights file for pre-22Sep2011 GEMLAM forcing:
+* ref: https://salishsea-meopar-docs.readthedocs.io/en/latest/code-notes/salishsea-nemo/nemo-forcing/atmospheric.html#creating-new-weights-files
+* cloned https://github.com/SalishSeaCast/NEMO-EastCoast/ into /ocean/dlatorne/MEOPAR/
+* edit NEMO_Preparation/4_weights_ATMOS/make.sh to enable salish commands
+(SalishSeaCast)
+* ./make.sh
+* pushd /data/dlatorne/MEOPAR/grid/
+
+* update default branch name from master to main
+FAL estate work:
+* MFC liquidation cheque arrived
+* updated distribution spreadsheet
+
+See work journal.
+(Resilient-C)
+
+
+Sat 19-Mar-2022
+^^^^^^^^^^^^^^^
+
+rsync-ing /opp/GEMLAM/2011/ from salish to GEMLAM-2010-2011 finished overnight
+Started rsync-ing /opp/GEMLAM/2012/20120[1-4]* from salish to GEMLAM-2012-2014 drive
+manager crashed early because the log rotation happened while update_forecast_datasets for wwatch3-forecast2 was in progress.
+(SalishSeaCast)
+
+
+Sun 20-Mar-2022
+^^^^^^^^^^^^^^^
+
+Refreshed my memory of where I was at on adding HRDPS model profile before SalishSeaCast disk crash.Discussed storage of HRDPS grid x & y w/ Susan; they are metres from SW corner of grid, stored as floats; decided that extraction can cast them to ints and should identify them well in metadata.
+(Reshapr)
+
+Rode ToW stage 3 Fire and Ice route; 1st ascent of Alpe de Zwift: 1h40m24s
+
+
 
 
 * update SalishSeaCmd installation docs re: no anaconda and `python3 -m pip install`
-
-
-GEMLAM external drives:
-2007-2009
-2010-2011 failed; needs to be re-made
-2012-2014
 
 
 (/SalishSeaCast/nowcast-env) ~$ python3 -m nowcast.workers.make_plots $NOWCAST_YAML wwatch3 forecast publish
@@ -2058,13 +2259,6 @@ TODO:
 https://linuxize.com/post/getting-started-with-tmux/
 
 update deployment docs re: spinning up a new compute node
-
-
-OPPTools PRs:
-  add numpy-indexed dependency
-  fix pyproj.Proj() initializations
-  fix nctime().strftime in OPPTools.utils.fvcom_postprocess.vertical_transect_snap()
-
 
 15jun20: check mitigation of "index exceeds dimension bounds" IndexError in make_plots fvcom forecast-x2 research
 
