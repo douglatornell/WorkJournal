@@ -127,6 +127,7 @@ PyCharm
   * requirements
   * updated Datalore
   * skipped Key Promoter X for now
+  * PyCharm makefile language support
 
 
 MOAD Repos
@@ -222,7 +223,8 @@ Atlantis
 * Resilient-C/Resilient-C-data -> projects/resilient-c/Resilient-C-data
 * rsync-ed other dirs from kudu to projects/resilient-c/
 
-* TODO: rsync .idea/workspace.xml files from kudu projects to get project level configs
+* TODO: rsync .idea/workspace.xml & .idea/vcs.xml files from kudu projects to get project level 
+  configs
 
 
 borg Backups
@@ -326,3 +328,10 @@ Others:
   * TODO:
     * change to pyproject.toml and setup.cfg
     * fix test suite
+
+* Vagrant 2.2.1.9 for Resilient-C dev VM from https://www.vagrantup.com/downloads
+    curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+      Warning: apt-key is deprecated. Manage keyring files in trusted.gpg.d instead (see apt-key(8)).
+    sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+    sudo apt-get update && sudo apt-get install vagrant
+    
