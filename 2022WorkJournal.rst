@@ -2151,11 +2151,9 @@ Started work on NEMO weights file for pre-22Sep2011 GEMLAM forcing:
 * ref: https://salishsea-meopar-docs.readthedocs.io/en/latest/code-notes/salishsea-nemo/nemo-forcing/atmospheric.html#creating-new-weights-files
 * cloned https://github.com/SalishSeaCast/NEMO-EastCoast/ into /ocean/dlatorne/MEOPAR/
 * edit NEMO_Preparation/4_weights_ATMOS/make.sh to enable salish commands
-(SalishSeaCast)
 * ./make.sh
-* pushd /data/dlatorne/MEOPAR/grid/
+(SalishSeaCast)
 
-* update default branch name from master to main
 FAL estate work:
 * MFC liquidation cheque arrived
 * updated distribution spreadsheet
@@ -2180,6 +2178,185 @@ Refreshed my memory of where I was at on adding HRDPS model profile before Salis
 (Reshapr)
 
 Rode ToW stage 3 Fire and Ice route; 1st ascent of Alpe de Zwift: 1h40m24s
+
+
+Week 12
+-------
+
+Mon 21-Mar-2022
+^^^^^^^^^^^^^^^
+
+Discussed w/ Rachael on Slack files from near-BP_spill-hr Monte Carlo runs that have been 
+purged from /scratch.
+(MIDOSS)
+
+Continued work on NEMO weights file for pre-22Sep2011 GEMLAM forcing:
+* ref: https://salishsea-meopar-docs.readthedocs.io/en/latest/code-notes/salishsea-nemo/nemo-forcing/atmospheric.html#creating-new-weights-files
+* cloned https://github.com/SalishSeaCast/NEMO-EastCoast/ into /ocean/dlatorne/MEOPAR/
+* editted NEMO_Preparation/4_weights_ATMOS/make.sh to enable salish commands
+* ./make.sh
+* pushd /data/dlatorne/MEOPAR/grid/
+* updated default branch name from master to main
+    git branch -m master main
+    git fetch origin
+    git branch -u origin/main main
+    git remote set-head origin -a
+    git pull
+* created symlinks in grid/ required to run xxx
+    ln -s namelist.get_weight_nemo.gem2.5-ops namelist
+    ln -s bathymetry_201702.nc bathy_meter.nc
+    ln -s /results/forcing/atmospheric/GEM2.5/gemlam/gemlam_y2007m01d03.nc atmos.nc
+* generated weights file:
+    /ocean/dlatorne/MEOPAR/NEMO-EastCoast/NEMO_Preparation/4_weights_ATMOS/get_weight_nemo 
+* improved weights file with tools/I_ForcingFiles/Atmos/ImproveWeightsFile.ipynb
+* committed new weights file as grid/weights-gem2.5-gemlam_201702_pre22sep11.nc
+* renamed grid/weights-gem2.5-gemlam_201702.nc to grid/weights-gem2.5-gemlam_201702_22sep11onward.nc
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Continued work on adding HRDPS model profiles for extractions; created PR#27.
+(Reshapr)
+
+
+Tue 22-Mar-2022
+^^^^^^^^^^^^^^^
+
+Worked at UBC while Rita is at home.
+
+See work journal.
+(Resilient-C)
+
+HRDPS 12Z forecast was very slow; collection finished at 11:55.
+(SalishSeaCast)
+
+Started setting up try3 runs:
+Prepared and queued 5 x 200 spill runs: [1-5]-200.
+  for grp in {1..5}; do head -1 SalishSea_oil_spills_try3.csv > SalishSea_oil_spills_near_BP_try3-${grp}-200.csv; done
+  starts=( $(seq 2 2 10) ); grps=( $(seq 1 5) ); for i in "${!grps[@]}"; do head -${starts[$i]}01 SalishSea_oil_spills_try3.csv | tail -200 >>SalishSea_oil_spills_near_BP_try3-${grps[$i]}-200.csv; done
+  for grp in {1..5}; do sed -i "s/job id: .*-200_near-BP_try3/job id: ${grp}-200_near-BP_try3/" near-BP.yaml && mohid monte-carlo --debug near-BP.yaml SalishSea_oil_spills_near_BP_try3-${grp}-200.csv; done
+(MIDOSS)
+
+Continued work on adding HRDPS model profiles for extractions:
+* added HRDPS-2.5km-operational.yaml
+* found and fixed more places where model profile coordinate attributes are used
+  that I missed in 473bbda6
+* fixed a bug in calc of dataset chunk size dict for loading that was corrupting the 
+  chunk size dict in the model profile
+(Reshapr)
+
+
+Wed 23-Mar-2022
+^^^^^^^^^^^^^^^
+
+try3 runs [2-3]-200 finished, but incomplete; Susan is investigating.
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
+
+Finished adding HRDPS model profiles for extractions; merged PR#27:
+* added lon/lat var names for geo ref dataset to model profiles to handle HRDPS GEMLAM
+  datasets where we use a dataset file instead of an ERDDAP geo ref dataset
+* added HRDPS-2.5km-GEMLAM-pre22sep11.yaml
+* added HRDPS-2.5km-GEMLAM-22sep11onward.yaml
+(Reshapr)
+
+
+Thu 24-Mar-2022
+^^^^^^^^^^^^^^^
+
+cron run failed w/ no new wind message after major river data download;
+suspect another scraping issue
+* reproduced on khawla
+* server side problem; 
+  https://wateroffice.ec.gc.ca:443/report/real_time_e.html?type=realTime&mode=Table&prm1=47&prm2=-1&stn=08MF005&startDate=2021-01-01&endDate=2022-03-24
+  says "No data available"
+(Bloomcast)
+
+nowcast-x2 finished too quickly:
+* no restart file
+* 23mar22/nowcast-x2 never started; tried re-run:
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2022-03-23"
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+Cycled to UBC w/ Susan because it was a nice afternoon and she had a thesis to pick up;
+LSD ride, except for climb up Salish trail because Spanish Bank hill is closed for what
+looks like storm sewer replacement.
+
+Susan figured out that failed try3 runs wer due to spill volumes of zero in .csv file;
+she and Rachael fixed that.
+(MIDOSS)
+
+
+Fri 25-Mar-2022
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+Explored how best to get snippets for reStructuredText in PyCharm and VSCode;
+looks like VSCode wins with TextMate style like Sublime Text had, and easy integration
+in the setting system.
+
+Retarted try3 runs:
+* [1-5]-200 queued
+(MIDOSS)
+
+fvcom backfilling:
+  # wait for nowcast-x2 to fail ~10:30
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2022-03-24"
+  # wait for 24mar22/nowcast-x2 to finish ~12:30
+  # kill 24mar22/forecast-x2
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-03-24"
+  # wait for 24mar22/nowcast-r12 to finish ~21:15
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2022-03-25"
+DM to Michael on Slack asking if we still need to run daily forecast-x2;
+he says we can stop running forecast2.
+(SalishSeaCast)
+
+Set up VSCode for reStructuredText editing of docs.
+* Used https://github.com/ammaraskar/sphinx-problem-matcher to add a VSCode problem-matcher
+  to sphinx build task.
+* Started writting a collection of reStructuredText snippets in
+  ~/.config/Code/User/snippets/restructuredtext.json;
+  needs to move to my dofiles repo
+Started writing model profiles section of docs.
+(Reshapr)
+
+
+Sat 26-Mar-2022
+^^^^^^^^^^^^^^^
+
+Drove to White Rock for Susan to visit J&M; walked in Ruth Johnson Park.
+
+try3 runs:
+* [1-5]-200 finished
+* backfilled hdf5-to-netcdf4 for [1-2]-200
+(MIDOSS)
+
+
+Sun 27-Mar-2022
+^^^^^^^^^^^^^^^
+
+try3 runs:
+* [6-10]-200 queued
+* on hold until 29-Mar due to graham maintenance
+(MIDOSS)
+
+nowcast-agrif failed; maybe related to yesterday's upload_forcing failure?
+(SalishSeaCast)
+
+
+
+
+
+
+Remove forecast-x2 from SalishSeaNowcast runs sequence.
 
 
 
