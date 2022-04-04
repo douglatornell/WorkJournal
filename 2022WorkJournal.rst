@@ -2352,6 +2352,171 @@ nowcast-agrif failed; maybe related to yesterday's upload_forcing failure?
 (SalishSeaCast)
 
 
+Week 13
+-------
+
+Mon 28-Mar-2022
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Haircut.
+
+
+Tue 29-Mar-2022
+^^^^^^^^^^^^^^^
+
+try3 runs:
+* [6-10]-200 finsihed
+(MIDOSS)
+
+EOAS mail stored messages appeared in Outlook; spent some time sorting mail since migration
+started on 8-Mar.
+
+Backfilling nowcast-agrif:
+  wait for 29mar22 run to fail
+  upload_forcing orcinus nowcast+ --run-date 2022-03-26
+  upload_forcing orcinus turbidity --run-date 2022-03-26
+  wait for 26mar22 run to complete
+  upload_forcing orcinus nowcast+ --run-date 2022-03-27
+  upload_forcing orcinus turbidity --run-date 2022-03-27
+  wait for 27mar22 run to complete
+  upload_forcing orcinus nowcast+ --run-date 2022-03-28
+  upload_forcing orcinus turbidity --run-date 2022-03-28
+  wait for 28mar22 run to complete
+  upload_forcing orcinus nowcast+ --run-date 2022-03-29
+  upload_forcing orcinus turbidity --run-date 2022-03-29
+graham is back after maintenance.
+Started building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; jan13, feb13
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+Farewell lunch for Rachael.
+
+
+Wed 30-Mar-2022
+^^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; mar13
+(SalishSeaCast)
+
+try3 runs:
+* [11-15]-200 finished
+(MIDOSS)
+
+Squash-merged dependabot PRs re: jupyter-server:
+* SalishSeaTools
+* SOG-Bloomcast-Ensemble
+* analysis-doug/dask-expts
+(MOAD)
+
+See work journal.
+(Resilient-C)
+
+Coffee on Slack w/ Becca.
+
+
+Thu 31-Mar-2022
+^^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; apr13, may13
+UBC-DFO modeling mtg; Ben presented on wave paramaterization
+(SalishSeaCast)
+
+try3 runs:
+* [16-20]-200 queued
+* realized that I messed up .csv rows selection for 11-15
+* 18-20 stopped due to node failure
+* 17-18 failed due to /scratch issue
+* 19-20 succeeded
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
+
+Weekly project mtg.
+(Atlantis)
+
+April
+=====
+
+Fri 1-Apr-2022
+^^^^^^^^^^^^^^
+
+try3 runs:
+* [11-15,16-18,21-25]-200 running
+(MIDOSS)
+
+Updated sentry-sdk (and certifi & openssl as deps) in prod env on skookum.
+Updated paramiko in prod env on skookum re: dependabot PR; quash-merged PR.
+Started removing forecast-x2 from automation.
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; jun13, jul13, aug13
+(SalishSeaCast)
+
+
+Sat 2-Apr-2022
+^^^^^^^^^^^^^^
+
+try3 runs:
+* [11-15,16-18,21-25]-200 probably all failed due to /scratch instability; tonnes of core dumps
+(MIDOSS)
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; sep13, oct13, nov13
+nowcast0 shut down with no explanation at 2-Apr 20:12 UTC == 13:12 Pacific; 
+got uptimerobot notification at 13:20
+* 2apr/forecast-x2 interrupted
+* 2apr/wwatch3-forecast interrupted
+* recovery started at ~15:00
+  * restarted nowcast0 from web dashboard at 21:59 UTC == 14:59 Pacific
+  * nowcast0
+      sudo apt update
+      sudo apt upgrade  # 5 pkgs
+      cat /var/run/reboot-required*  # check for reboot required
+      sudo mount /dev/vdc /nemoShare
+      ll /nemoShare/MEOPAR/  # to confirm mount
+      sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+      ll /export/MEOPAR  # to confirm mount
+      sudo systemctl start nfs-kernel-server.service
+      sudo exportfs -f  # to reset NFS handles for compute nodes
+      # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -CF /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -CF /nemoShare/MEOPAR"; done
+    * cleaned up stale tmp run dirs in [*]runs/; forecast-x2 & wwatch3-forecast
+  * on skookum:
+    * killed stale workers
+    * restarted log_aggregator
+    * decided to skip forecast2 & wwatch3-forecast2 runs
+      launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-02"
+(SalishSeaCast)
+
+First race on Zwift: HERD Summer Series, Figure 8 points race
+
+
+Sun 3-Apr-2022
+^^^^^^^^^^^^^^
+
+try3 runs:
+* confirmed that [11-18,21-25]-200 all failed
+* cleaned up
+* [11-18]-200 queued
+(MIDOSS)
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; dec13, jan14
+(SalishSeaCast)
 
 
 
