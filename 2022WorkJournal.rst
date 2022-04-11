@@ -2511,7 +2511,8 @@ Sun 3-Apr-2022
 try3 runs:
 * confirmed that [11-18,21-25]-200 all failed
 * cleaned up
-* [11-18]-200 queued
+* [11-13]-200 running
+* [14-18]-200 queued
 (MIDOSS)
 
 Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
@@ -2519,9 +2520,323 @@ and uploading to graham-dtn:/nearline; dec13, jan14
 (SalishSeaCast)
 
 
+Week 14
+-------
+
+Mon 4-Apr-2022
+^^^^^^^^^^^^^^
+
+nowcast0 shut down with no explanation at 4-Apr 10:41 UTC == 03:41 Pacific; 
+got uptimerobot notification at 03:50
+* 4apr/forecast2 interrupted
+* 4apr/wwatch3-forecast missed
+* recovery started at ~09:35:00
+  * restarted nowcast0 from web dashboard at 16:36 UTC == 09:36 Pacific
+  * nowcast0
+      sudo apt update
+      sudo apt upgrade  # 1 pkg
+      cat /var/run/reboot-required*  # check for reboot required
+      sudo mount /dev/vdc /nemoShare
+      ll /nemoShare/MEOPAR/  # to confirm mount
+      sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+      ll /export/MEOPAR  # to confirm mount
+      sudo systemctl start nfs-kernel-server.service
+      sudo exportfs -f  # to reset NFS handles for compute nodes
+      # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -CF /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -CF /nemoShare/MEOPAR"; done
+    * cleaned up stale tmp run dirs in [*]runs/; forecast2
+  * on skookum:
+    * no stale workers
+    * restarted log_aggregator
+    * decided to skip forecast2 & wwatch3-forecast2 runs
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; feb14, mar22, mar14, apr14
+(SalishSeaCast)
+
+try3 runs:
+* [11-18]-200 finished successfully
+* [21-25]-200 running
+(MIDOSS)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+
+Tue 5-Apr-2022
+^^^^^^^^^^^^^^
+
+Email conversation w/ Luke Whittington of cloud support:
+* nowcast0 and nowcast6 are on the same hypervisor
+* nowcast0 stops were due to hypervisor os out of memory
+* plan is to reboot the host at ~14:00
+* rebooted, but no route to host, and Luke went silent
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; may14, jun14, jul14
+(SalishSeaCast)
+
+try3 runs:
+* [21-24]-200 finished successfully
+* [25-30]-200 running
+* [31-35]-200 queued
+(MIDOSS)
+
+Unpinned jinja2 in envs re: new release of nbconvert=6.4.5 that fixes the import issue that 
+broke the website build.
+(Numeric Course)
+
+Auto-update pre-commit re: 2.18.1 release:
+* UBC-MOAD/cookiecutter-MOAD-pypkg
+* UBC-MOAD/MoaceanParcels
+* UBC-MOAD/docs
+* SS-Atlantis/AtlantisCmd
+* MIDOSS/MOHID-Cmd
+
+* SalishSeaCast/SalishSeaNowcast
+* UBC-MOAD/Reshapr
+(MOAD)
+
+See work journal.
+(Resilient-C)
+
+
+Wed 6-Apr-2022
+^^^^^^^^^^^^^^
+
+Poked Luke re: connection to nowcast0 still down:
+* he got the interfaces up somehow
+* I dissociated the IP address and it was returned to the pool
+* allocated a new IP and associated it, but still no route to host
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; aug14, sep14, oct14
+(SalishSeaCast)
+
+SHARCNET webinar: Apptainer
+* Paul Preney, U Windsor
+* Apptainer was formerly known as Singularity; name change went with xfer from corp to 
+  Linux Foundation
+* originally developed by LBNL
+* portability, reproducibility, long term perservation of software envs & configs
+* specifically designed for HPC, in contrast to docker
+* virtualizes OS; isolated from module system (CVMFS); module load apptainer
+* comes from a module being installed on Linux VM
+* all stuff must be compiled inside container, especially MPI
+  * load MPI>=3 outside container, regardless of version of MPI used in container
+* use srun apptainer, never mpirun or mpiexec, in slurm scripts
+* most common starting point is to grab an image from Docker Hub; other ways are possible
+  * see apptainer "build a container" docs
+* apptainer image format (.sif) is different to docker image format
+  * apptainer flattens all layers in contrast to docker format
+* building large images is very disk intensive, use local drive if possible;
+  don't use network file systems at risk of inexplicable failures
+  * best to build images on a local system, not cluster
+* build image using sudo because pkg mgr inside container needs root access
+* for apptainer run, shell, instance, or exec, always use -C, -c, or -e
+    * -C hides external file system, PID, IPC & env
+    * -c hides less
+    * -e hides even less
+  * always -W w/ real empty dir that you have write access to; use $SLURM_TMPDIR
+    in sbatch scripts; -W sets tmp dir envvars
+  * bind mount home, project & scratch w/ -B /home -B /project -B /scratch
+* RAPIDS example:
+  * some nvidia cuda thing
+  * use a new home on -W file system inside container 
+* can install conda in container and build envs on -W dir
+* test in interactive session, then build sbatch script
+* can install spack in container via an overlay to install os-ish pkgs; e.g. nano
+* super important to new home on -W or overlay
+
+Learned in SHARCNET webinar chat that quotas are not enforced on SLURM_TMPDIR
+
+try3 runs:
+* [26-28,30]-200 finished successfully
+* 29-200 had 1 failed spill w/ no .nc, .sro, .hdf5
+* [31-35]-200 running
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
+
+
+Thu 7-Apr-2022
+^^^^^^^^^^^^^^
+
+try3 runs:
+* [32-35]-200 finished successfully
+* 29-200 had 1 failed spill w/ no .nc, .sro, .hdf5
+* 31-200 has 4 spills w/ no .nc, but .hdf5 and .sro; need to backfill
+* pausing runs so that Ben gets som priority
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; nov14, dec14, jan15
+arbutus.cloud saga continued:
+* Susan poked Luke
+* Luke says that network card on the hypervisor is failed; need to migrate VMs
+  to a different hypervisor
+* Luke started migrations at ~13:55
+* nowcast0 migration had trouble, but finished ~17:00
+* nowcast6 migration happened later
+nowcast system recovery:
+  * nowcast0
+      sudo apt update
+      sudo apt upgrade  # 3 pkgs
+      cat /var/run/reboot-required*  # check for reboot required
+      sudo mount /dev/vdc /nemoShare
+      ll /nemoShare/MEOPAR/  # to confirm mount
+      sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+      ll /export/MEOPAR  # to confirm mount
+      sudo systemctl start nfs-kernel-server.service
+      sudo exportfs -f  # to reset NFS handles for compute nodes
+      # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -CF /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+      for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -CF /nemoShare/MEOPAR"; done
+Realized that the EOAS firewall rules need to be changed to allow comms between skookum and new
+nowcast0 IP address; created helpdesk ticket
+(SalishSeaCast)
+
+Phys Ocgy seminar; Ryan Osman of Water First in Ontario; photography, engineering & water resources
+management.
+
+Squash-merged dependabot PRs re: notebook leaking auth cookies & headers to server logs:
+* 43ravens/ECget
+* SalishSeaCast/SOG-Bloomcast-Ensemble
+* SalishSeaCast/tools
+* SalishSeaCast/analysis-doug/melanie-geotiff
+* SalishSeaCast/analysis-doug/dask-expts
+(MOAD)
+
+
+Fri 8-Apr-2022
+^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; feb15, mar15, apr15, may15
+Henryk adjusted EOAS firewall rules.
+Continued nowcast system recovery:
+* nowcast6:
+    sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR
+* nowcast0
+    # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+    for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+    for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -CF /nemoShare/MEOPAR"; done
+* wait for nowcast-blue run launch to fail at ~09:45
+* on skookum:
+    stop log_aggregator
+    stop manager
+    stop message_broker
+    start message_broker
+    start manager
+    start log_aggregator
+    nemo_nowcast.workers.clear_checklist  # to also rotate logs
+    upload_forcing arbutus nowcast+ 2022-04-06 --debug
+    upload_forcing arbutus nowcast+ 2022-04-07 --debug
+    make_turbidity_file 2022-04-06 --debug
+    make_turbidity_file 2022-04-07 --debug
+    make_turbidity_file 2022-04-08 --debug
+  zmq messages not flowing; added to helpdesk ticket; Henryk fixed rules; he had updated salish
+  but not skookum
+  backfill nowcast-green
+    upload_forcing arbutus turbidity 2022-04-06
+    wait for run to finish
+    download_results arbutus nowcast-green 2022-04-06
+    upload_forcing arbutus turbidity 2022-04-07
+    wait for run to finish
+    download_results arbutus nowcast-green 2022-04-07
+    upload_forcing arbutus turbidity 2022-04-08
+    wait for run to finish
+    download_results arbutus nowcast-green 2022-04-08
+  backfill nowcast-agrif
+    upload_forcing orcinus turbidity 2022-04-06
+    wait for run to finish
+    upload_forcing orcinus turbidity 2022-04-07
+    wait for run to finish
+    upload_forcing orcinus turbidity 2022-04-08
+  backfill VHFR
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-05"
+    make_fvcom_rivers_forcing arbutus r12 nowcast 2022-04-05  # on arbutus
+    make_fvcom_atmos_forcing r12 nowcast 2022-04-05  # on skookum
+    wait for run to finish
+    download_fvcom_results arbutus r12 nowcast 2022-04-05
+  backfill nowcast-blue and forecast for wwatch3
+    make_forcing_links arbutus nowcast+ 2022-04-06
+    kill nowcast-green run when it starts
+  backfill wwatch3
+    launch_remote_worker arbutus make_ww3_wind_file "arbutus forecast 2022-04-06"
+    launch_remote_worker arbutus make_ww3_current_file "arbutus forecast 2022-04-06"
+  backfill nowcast-dev
+    make_forcing_links salish nowcast+ --shared-storage 2022-04-06
+(SalishSeaCast)
+
+
+Sat 9-Apr-2022
+^^^^^^^^^^^^^^
+
+Continued nowcast system recovery:
+* clear_checklist to rotate logs
+* backfill nowcast-blue and forecast for wwatch3
+    make_forcing_links arbutus nowcast+ 2022-04-07
+    kill nowcast-green run when it starts
+    make_forcing_links arbutus nowcast+ 2022-04-08
+    kill nowcast-green run when it starts
+    make_forcing_links arbutus nowcast+ 2022-04-09
+* backfill wwatch3
+    launch_remote_worker arbutus make_ww3_wind_file "arbutus forecast 2022-04-07"
+    launch_remote_worker arbutus make_ww3_current_file "arbutus forecast 2022-04-07"
+    launch_remote_worker arbutus make_ww3_wind_file "arbutus forecast 2022-04-08"
+    launch_remote_worker arbutus make_ww3_current_file "arbutus forecast 2022-04-08"
+* manager was restarted due to name resolution failure around 17:00; processing ended with
+  forecast run completed but not downloaded, and nowcast-green run not started;
+  resolved by manually doing download and make_forcing_links at ~20:00
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; jun15, jul15, aug15
+(SalishSeaCast)
+
+
+Sun 10-Apr-2022
+^^^^^^^^^^^^^^^
+
+Name resolution problem continues; appears to be limited to UDC machines, no ESB workstations.
+* no weather downloads yet today
+* killed collect_weather 00
+* pinged EOAS-IT slack and Henryk changed resolver and added failbacks
+* recovery started at ~09:25:
+    download_weather 00 2.5km
+    download_weather 06 2.5km
+    forecast2 runs didn't start ???
+    launch_remote_worker arbutus make_ww3_wind_file "arbutus forecast 2022-04-09"
+    launch_remote_worker arbutus make_ww3_current_file "arbutus forecast 2022-04-09"
+    wait for wwatch3 backfill runs to finish
+    collect_weather 18 2.5km
+    download_weather 12 2.5km
+      missing files on datamart; emailed Sandrine; file downloads finished at ~13:50
+* backfill VHFR
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-06"
+* backfill nowcast-dev
+    make_forcing_links salish nowcast+ --shared-storage 2022-04-07
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; sep15, oct15
+(SalishSeaCast)
+
+
+
+
 
 
 Remove forecast-x2 from SalishSeaNowcast runs sequence.
+
+
+python3 -m nowcast.workers.launch_remote_worker $NOWCAST_YAML arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2022-04-06"
+(/data/SalishSeaCast/nowcast-env) ~$ /nemoShare/MEOPAR/nowcast-sys/nowcast-env/lib/python3.8/site-packages/xarray/backends/common.py:81: FutureWarning: The ``variables`` property has been deprecated and will be removed in xarray v0.11.
+  return iter(self.variables)
+
 
 
 
