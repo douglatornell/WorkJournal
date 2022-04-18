@@ -146,6 +146,7 @@ MEOPAR
   * OPPTools from GitLab
   * analysis-doug
   * docs
+  * salishsea-site
 * TODO:
   * rsync .idea/workspace.xml and .idea/vcs.xml files from kudu projects to get project level configs
   * re-create PyCharm project structures
