@@ -2817,20 +2817,297 @@ Name resolution problem continues; appears to be limited to UDC machines, no ESB
     collect_weather 18 2.5km
     download_weather 12 2.5km
       missing files on datamart; emailed Sandrine; file downloads finished at ~13:50
+    collect_weather didn't finish but Susan determined that all the files that grib_to_netcdf needs are there, so started collect_weather 00
 * backfill VHFR
     launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-06"
 * backfill nowcast-dev
     make_forcing_links salish nowcast+ --shared-storage 2022-04-07
 Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
-and uploading to graham-dtn:/nearline; sep15, oct15
+and uploading to graham-dtn:/nearline; sep15, oct15, nov15, dec15
 (SalishSeaCast)
 
 
+Week 15
+-------
+
+Mon 11-Apr-2022
+^^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; jan16, feb16, mar16, apr16, may16
+Continued nowcast system recovery:
+* collect_weather 00 didn't finish; killed it and successfully ran download_weather 00
+* catch-up:
+    download_weather 06 2.5km
+    collect_weather 18 2.5km
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+* backfill VHFR
+    wait for nowcast-x2, then forecast-x2 to fail
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2022-04-06"
+    kill 06apr22/forecast-x2
+    wait for nowcast-x2, then forecast-x2 from nowcast etc. re-run to fail
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2022-04-07"
+    kill 07apr22/forecast-x2
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-07"
+* backfill nowcast-dev
+    wait for nowcast-dev run to fail
+    make_forcing_links salish nowcast+ --shared-storage 2022-04-08
+    make_forcing_links salish nowcast+ --shared-storage 2022-04-09
+    make_forcing_links salish nowcast+ --shared-storage 2022-04-10
+* ran download_weather 18 as a just-in-case, and it succeedded!!
+Email from Parker saying that LiveOcean ran w/ incorrect atmos forcing today; has been corrected;
+recovery:
+  wait for 06apr22/nowcast-x2 to fail
+  download_live_ocean
+Started restoring nowcast-env on /SalishSeaCast file system:
+* Charles recovered /SalishSeaCast to something from 2019/2020 full of mercurial repos
+* checked repo clones for uncommitted changes, then deleted hg repos, and cloned git repos:
+  * grid
+  * moad_tools
+  * NEMO-Cmd
+  * NEMO_Nowcast
+  * private-tools
+  * rivers-climatology
+  * SalishSeaCmd
+  * SalishSeaNowcast
+  * salishsea-site
+  * SS-run-sets
+  * tides
+  * tools
+  * tracers
+  * NEMO-3.6-code
+  * XIOS-ARCH
+* GitLab repos  
+  * FVCOM-VHFR-config
+    * confirmed up to date
+  * OPPTools
+    * clone my fork
+    * switch to SalishSeaCast-prod branch
+* copy wgrib2 executable
+* created nowcast-env env
+* installed nowcast-env pkgs
+* updated sarracenia-env env YAML
+* created sarracenia-env
+* set up envvars
+* confirmed datamart dirs
+* cleared logs dirs
+
+TODO:
+* build XIOS-2
+* build SalishSeaCast_Blue
+(SalishSeaCast)
+
+Changed default branch of private-tools repo from master to main.
+Group mtg; see whiteboard.
+(MOAD)
+
+Read and commented on draft of Raisha & Sara's data ranking paper.
+(Atlantis)
+
+
+Tue 12-Apr-2022
+^^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; jun16, jul16, aug16, oct16
+Continued nowcast system recovery:
+* automation was successful overnight :-)
+* backfill nowcast-dev
+    wait for nowcast-dev run to fail
+    make_forcing_links salish nowcast+ --shared-storage 2022-04-11
+    make_forcing_links salish nowcast+ --shared-storage 2022-04-12
+* backfill VHFR
+    wait for nowcast-x2, then forecast-x2 to fail
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2022-04-08"
+    kill 08apr22/forecast-x2 at ~13:30
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2022-04-09"
+    kill 09apr22/forecast-x2 at ~16:15
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-08"
+Got arbutus VMs to hosts mapping from Luke; stored on khawla desktop;
+only 2 overlaps, one between x2 and r12, the other between nemo and r12; 
+adjusted NEMO mpi_hosts to remove nowcast8 overlap with fvcom2;
+left fvcom1 (x2) and fvcom5 (r12) overlap; also note that fvcom0 is used by both x2 and r12
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+
+Wed 13-Apr-2022
+^^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; oct16, nov16, dec16, jan17
+Changed automation to run from new /SalishSeaCast env instead of temporary /data/SalishSeaCast/:
+* stopped watch_NEMO_hindcast while 16dec07hindcast was in progress
+* stopped collect_weather 12 2.5km
+* supervisorctl shutdown in old env
+* supervisord in new env
+* rsync SalishSeaNowcast/tidal_predictions/ from old to new env
+* start automation in new env:
+    supervisorctl stop sr_subscribe-hrdps-west
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20220413/12
+    collect_weather 18 2.5km
+    download_weather 12 2.5km
+Restored salishsea-site-env on /SalishSeaCast file system:
+* created salishsea-site-env env
+* installed salishsea-site-env pkgs
+* set up envvars
+* checked and updated paths
+* supervisorctl shutdown in old env
+* supervisord in new env
+* on salish:
+  * build XIOS-2
+  * build NEMO SalishSeaCast_Blue config
+  * build REBUILD_NEMO
+Continued nowcast system recovery:
+* backfill VHFR
+    wait for nowcast-x2, then forecast-x2 to fail
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2022-04-10"
+    kill 10apr22/forecast-x2 at ~14:00
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2022-04-11"
+    kill 11apr22/forecast-x2 at ~17:45
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2022-04-12"
+    kill 12apr22/forecast-x2 at ~21:15
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast 2022-04-13"
+(SalishSeaCast)
+
+Squash-merged dependabot PR in salishsea-site re: waitress.
+Tracked recent linkcheck GHA failures to https://github.com/sphinx-doc/sphinx/issues/10343
+and https://github.com/github/docs/issues/17042;
+work-around is to spoof a user agent (see 1st link); that might also resolved the MOAD/docs
+failure re: https://www.baeldung.com/cs/ssh-intro, a partial user-agent string of "Mozilla"
+for in curl for that URL
+(MOAD)
+
+Added salishsea-site/ to khawla; see setup notes.
+
+See work journal.
+(Resilient-C)
+
+
+Thu 14-Apr-2022
+^^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; feb17, mar17, apr17, may17, jun17
+Created and squash-merged PR#100 to drop VHFR forecast runs; deployed to production.
+Forgot to restart sr_subscribe-hrdps-west yesterday so no 18, 00, 06 or 12 HRDPS forecasts
+collected; recovery:
+  supervisorctl start sr_subscribe-hrdps-west
+  download_weather 18 2.5km
+  download_weather 00 2.5km
+  download_weather 06 2.5km
+  collect_weather 18 2.5km
+  download_weather 00 1km --yesterday  # failed; too late
+  download_weather 12 1km --yesterday
+  wait for forecast2 runs to finish
+  download_weather 12 2.5km
+Continued nowcast system recovery:
+* backfill VHFR
+    wait for nowcast-r12 to fail at ~15:15
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-09"
+    wait for 09apr22/nowcast-r12 to finish at ~22:00
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-10"
+Started to explore how to move SalishSeaNowcast/tidal_predictions/ to somewhere other than 
+uncommited file in production clone:
+* 1.4G total
+* 16 x 65M files for 30dec06 to 31dec30 .csv files
+* lots of old files that cover sub-range of above time range
+* copied files to /SalishSeaCast/tidal-predictions/ dir and changed nowcast.yaml to test
+  * TODO: update lots of paths in SalishSeaNowcast notebooks & tests
+/results is full :-(
+  * deleted nowcast-dev.201905/jan-mar21
+(SalishSeaCast)
+
+Coffee w/ Karyn.
+
+Phys Ocgy seminar; cop student presentations.
+
+See work journal.
+(Resilient-C)
+
+
+Fri 15-Apr-2022
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Good Friday
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; jul17, aug17
+Bug re: log rotation during download_wwatch3_results forecast2 recurred.
+Continued nowcast system recovery:
+* backfill VHFR
+    wait for nowcast-r12 to fail at ~12:45
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-11"
+    wait for nowcast-r12 to finish at ~20:00
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-12"
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+
+Sat 16-Apr-2022
+^^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; sep17, oct17
+collect_weather 00 failed, probably due to network issues; recovery:
+  kill collect_weather 00 2.5km
+  collect_weather 18 2.5km
+  download_weather 00 2.5km
+  download_weather 06 2.5km
+  kill NEMO forecast2
+  download_weather 12 2.5km
+Continued nowcast system recovery:
+* backfill VHFR
+    wait for nowcast-r12 to fail 
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-13"
+(SalishSeaCast)
+
+
+Sun 17-Apr-2022
+^^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; nov17, dec17, jan18
+Continued nowcast system recovery:
+* backfill VHFR
+    wait for nowcast-r12 to fail at ~12:45
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-14"
+    wait for nowcast-r12 to finish at ~21:15
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-15"
+(SalishSeaCast)
+
+Created "Viewy Phantom" backup on Nodecraft before update to 1.18.2.
+Changed Nodecraft server to run minecracft=1.18.2 and fabric=1.18.2-0.13.3 
+via 1-click installer and archiving files to _old_files/;
+Restored world files by copying from _old_files/:
+  1_18-1/ (world)
+  banned-ips.json
+  banned-players.json
+  ops.json
+  server.properties
+  whitelist.json
+Successfully tested world, then installed 1.18.2 version of lithium and 
+1.18.x version of phosphur mods and restarted world.
+Cleared client mods/ dir and installed new 1.18.2 versions:
+  iris-sodium-fabric via iris-installer=2.0.3
+  lithium
+  phosphur
+  malilib
+  minihud
+  litematica
+Cleared client shaderpacks/ dir and installed new 4.4 version of Complementary;
+had to move 4.3.2 back to get shaders to work; maybe temporary?
 
 
 
+TODO:
+  Bug re: log rotation during download_wwatch3_results forecast2
 
-Remove forecast-x2 from SalishSeaNowcast runs sequence.
 
 
 python3 -m nowcast.workers.launch_remote_worker $NOWCAST_YAML arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2022-04-06"
