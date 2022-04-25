@@ -2667,7 +2667,7 @@ try3 runs:
 * [32-35]-200 finished successfully
 * 29-200 had 1 failed spill w/ no .nc, .sro, .hdf5
 * 31-200 has 4 spills w/ no .nc, but .hdf5 and .sro; need to backfill
-* pausing runs so that Ben gets som priority
+* pausing runs so that Ben gets some priority
 (MIDOSS)
 
 See work journal.
@@ -3067,12 +3067,15 @@ Continued nowcast system recovery:
     launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-13"
 (SalishSeaCast)
 
+Cycled to Maquabeak Park under Port Mann Bridge; access to Colony Farm under Mary Hill is *still* 
+closed due to TMX work.
+
 
 Sun 17-Apr-2022
 ^^^^^^^^^^^^^^^
 
 Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
-and uploading to graham-dtn:/nearline; nov17, dec17, jan18
+and uploading to graham-dtn:/nearline; nov17, dec17, jan18, feb18
 Continued nowcast system recovery:
 * backfill VHFR
     wait for nowcast-r12 to fail at ~12:45
@@ -3102,6 +3105,205 @@ Cleared client mods/ dir and installed new 1.18.2 versions:
   litematica
 Cleared client shaderpacks/ dir and installed new 4.4 version of Complementary;
 had to move 4.3.2 back to get shaders to work; maybe temporary?
+
+
+Week 16
+-------
+
+Mon 18-Apr-2022
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Easter Monday
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; mar18, apr18
+Continued nowcast system recovery:
+* backfill VHFR
+    wait for nowcast-r12 to fail at ~12:45
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-16"
+    wait for nowcast-r12 to finish at ~21:00
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-17"
+(SalishSeaCast)
+
+Started work on 2021 income tax returns:
+* matisse runs 10.13.6
+
+
+Tue 19-Apr-2022
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+collect_NeahBay_ssh failed for both forecast2 runs and nowcast; Susan tracked the issue down to a
+planned outage; mitigation:
+* symlinks:
+    ln -s /results/forcing/sshNeahBay/fcst/ssh_y2022m04d18.nc /results/forcing/sshNeahBay/obs/ssh_y2022m04d18.nc
+    ln -s /results/forcing/sshNeahBay/fcst/ssh_y2022m04d21.nc /results/forcing/sshNeahBay/fcst/ssh_y2022m04d22.nc
+* kill collect_NeahBay_ssh 06
+* restart automation:
+    upload_forcing arbutus nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing graham nowcast+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; may18, jun18
+Continued nowcast system recovery:
+* backfill VHFR
+    wait for nowcast-r12 to fail at ~13:30
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-18"
+    wait for nowcast-r12 to finish at ~20:30
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-04-19"
+Continued work to move SalishSeaNowcast/tidal_predictions/ to somewhere other than 
+uncommited file in production clone:
+* renamed prod SalishSeaNowcast/tidal_predictions/ to SalishSeaNowcast/tidal_predictions.aside/
+  to confirm success of config change
+* rsync-ed skookum:/SalishSeaCast/tidal-predictions/ to khawla to create git repo
+* created git repo on khawla
+* started writing README; passed it to Susan for elaboration
+* created private repo on GitHub; set origin remote in repo on khawla
+
+
+* 1.4G total
+* 16 x 65M files for 30dec06 to 31dec30 .csv files
+* lots of old files that cover sub-ranges of above time range
+* copied files to /SalishSeaCast/tidal-predictions/ dir and changed nowcast.yaml to test
+  * TODO: update lots of paths in SalishSeaNowcast notebooks & tests
+(SalishSeaCast)
+
+Restarted try3 Monte Carlo runs:
+* deleted all project SalishSea_oil_spills_near_BP_try3-*.csv files
+* cleaned up scratch 
+* built new MOHID at commit a31b4ce712
+* [1-5]-200 queued
+(MIDOSS)
+
+Renewed PyCharm license.
+
+Code maintenance:
+* updated copyright year range
+* updated nbviewer.jupyter.org domain in links
+(SalishSeaNowcast)
+
+
+Wed 20-Apr-2022
+^^^^^^^^^^^^^^^
+
+NOAA outage extended, so collect_NeahBay_ssh failed again for forecast2 and nowcast runs;
+mitigation:
+* wait for make_live_ocean_files and grib_to_netcdf to finish; automation is blocked then because
+  collect_NeahBay_ssh is in race condition workers set
+* kill collect_NeahBay_ssh 06
+* symlinks:
+    ln -s /results/forcing/sshNeahBay/fcst/ssh_y2022m04d19.nc /results/forcing/sshNeahBay/obs/ssh_y2022m04d19.nc
+    ln -s /results/forcing/sshNeahBay/fcst/ssh_y2022m04d22.nc /results/forcing/sshNeahBay/fcst/ssh_y2022m04d23.nc
+* restart automation:
+    upload_forcing arbutus nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing graham nowcast+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; jul18, aug18
+(SalishSeaCast)
+
+try3 runs:
+* [1-5]-200 running
+(MIDOSS)
+
+FAL estate work:
+* LOD for 2021 estate expenses payment
+* TD branch visit to deposit cheques & make expenses transfer
+* updated accounts & distribution spreadsheet
+
+
+Thu 21-Apr-2022
+^^^^^^^^^^^^^^^
+
+NeahBay ssh outage ended; automation was smooth overnight
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; sep18, oct18, nov18
+(SalishSeaCast)
+
+try3 runs:
+* [1-5]-200 finished
+* [9-10]-200 running
+* []-200 queued
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
+
+Phys Ocgy seminar; Cole Lord-May re: merging differential equation models w/ neural networks
+for glacier melt modeling.
+
+
+Fri 22-Apr-2022
+^^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; dec18, jan19, feb19
+(SalishSeaCast)
+
+try3 runs:
+* [1-9]-200 finished
+* [10-15]-200 running
+(MIDOSS)
+
+Code maintenance:
+* updated `Salish Sea MEOPAR` to `SalishSeaCast`
+* updated email addreses to eoas.ubc.ca
+* added SPDX short-form license identifiers
+Squash-merged dependabot re: pypdf2
+(SalishSeaNowcast)
+
+Mtg w/ Jose:
+* checkpoint/restart
+* tmux
+* python3 -m
+* if __name__ == "__main__":
+* YAML files for config
+* maybe a distinct conda env
+* click if a cli is really needed
+(MOAD)
+
+Reviewed Raisha's video talk for Atlantis Summit.
+(Atlantis)
+
+
+Sat 23-Apr-2022
+^^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; mar19
+(SalishSeaCast)
+
+try3 runs:
+* [1-15]-200 finished
+* [16-20]-200 queued
+(MIDOSS)
+
+Visited J&M in White Rock and did their tax returns.
+
+
+Sun 24-Apr-2022
+^^^^^^^^^^^^^^^
+
+Big monitor started flashing on and off when I reconnected khawla after yesterday's trip
+to White Rock; appears to the be associated with Nvidia card or drivers; started after update
+to 510.54 driver; system is stable on integrated graphics; reverted to 470.86; integerated graphics started to flicker too; unplugged & replugged HDMI cable from monitor; switched to port that had
+matisse on it; stable; switched back to HDMI port 1 on monitor; stable; unplugged matisse from 
+monitor.
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; apr19
+(SalishSeaCast)
+
+try3 runs:
+* [1-16]-200 finished
+* 16-20 has 2 hdf5-to-netcdf4 failures; backfill job queued
+* [17-18]-200 running
+* [19-25]-200 queued, then cancelled to give Birgit priority
+* cleaned up empty-ish duplicated run dirs to [1a-15]-200
+(MIDOSS)
 
 
 
