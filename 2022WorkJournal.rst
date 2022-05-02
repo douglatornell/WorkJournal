@@ -3305,33 +3305,227 @@ try3 runs:
 * cleaned up empty-ish duplicated run dirs to [1a-15]-200
 (MIDOSS)
 
+Rode ANZAC Classic long route on Zwift in NZ group; it was billed as a fondo, but recorded as a
+race on ZwiftPower; buried 5 Oz riders on the final climb.
+
+
+Week 17
+-------
+
+Mon 25-Apr-2022
+^^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; may19, jun19, jul19
+Backfill nowcast-agrif since ssh banner issue on 23-Apr:
+  upload_forcing orcinus nowcast+ 2022-04-23
+  upload_forcing orcinus turbidity 2022-04-23
+  wait for run to finish
+  upload_forcing orcinus nowcast+ 2022-04-24
+  upload_forcing orcinus turbidity 2022-04-24
+  wait for run to finish
+  upload_forcing orcinus nowcast+ 2022-04-25
+  upload_forcing orcinus turbidity 2022-04-25
+Continued work to move SalishSeaNowcast/tidal_predictions/ to somewhere other than 
+uncommited file in production clone:
+* finshed writing README; with Susan's commentary
+* moved files and notebooks from Nancy's analysis for 2016 paper into analysis/
+* committed 2007-2030 files individually and pushed them in batches to keep git and GitHub happy
+* moved 2013-2020 and 2015-2020 files into archival dir on khawla; not pushed to GitHub
+* .git/ is 358M on khawla
+(SalishSeaCast)
+
+try3 runs:
+* [1-20]-200 finished
+* [21-25]-200 ready to be queued
+(MIDOSS)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Updated skookum-salish deploy docs re: tidal-predictions repo; merged PR#102.
+Cloned tidal-predictions repo on skookum in place of earlier created tidal-predictions/ dir.
+Pulled updates on skookum
+(SalishSeaNowcast)
+
+
+Tue 26-Apr-2022
+^^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; aug19, sep19
+Weird network problems started at ~10:10;
+* investigation:
+  * uptimerobot reported erddap and site down; apparently a DNS nameserver issue
+  * msg gaps in log
+  * restarted log_aggregator
+* recovery started at ~11:45:
+  * uptimerobot reported erddap and site back up
+  * manager got start msg from watch)NEMO nowcast
+  * restarted automation:
+      make_forcing_links arbutus ssh
+      launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast"
+      download_results arbutus nowcast
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+Call from Doug Milne & Kile Landrigan of TD Wealth Mgmt; will connect us to someone in estate planning.
+
+GitHub InFocus keynote:
+* Thomas Dohmke, CEO
+  * developer cloud; code spaces
+  * AI: copilot
+  * open source community: 
+  * security: codeql, dependabot
+* Matthew McCullough; SVP of product
+* Kevin Alwell; enterprise solutions engineer
+  * code to cloud demo
+  * valet to analyze GHA workflows?
+  * codespace; pre-built VMs
+  * copilot; stats say it generates 35% of code in projects where it is used
+  * projects
+    * spreadsheet or kanban
+    * task hierarchy
+    * group by labels
+  * code-search
+  * push protection prevents pushing credentials, API tokens, etc.
+* Eirini K; researcher
+ * productivity
+ * SPACE metrics; multi-dimensional
+ * developer velocity website
+ * The Good Day project; GitHub blog
+   * devs distrust productivity tools
+   * 3 mtgs/day == 60% drop in progress
+   * 2 minute daily reflection
+
+Started work to fix wwatch3 fig bug:
+  2022-04-25 13:18:17,244 ERROR [make_plots] unexpected KeyError in make_figure:
+  Traceback (most recent call last):
+    File "/SalishSeaCast/SalishSeaNowcast/nowcast/workers/make_plots.py", line 1102, in _calc_figure
+      fig = fig_func(*args, **kwargs)
+    File "/SalishSeaCast/SalishSeaNowcast/nowcast/figures/wwatch3/wave_height_period.py", line 66, in make_figure
+      plot_data = _prep_plot_data(buoy, wwatch3_dataset_url)
+    File "/SalishSeaCast/SalishSeaNowcast/nowcast/figures/wwatch3/wave_height_period.py", line 95, in _prep_plot_data
+      obs = moad_tools.observations.get_ndbc_buoy(buoy)
+    File "/SalishSeaCast/moad_tools/moad_tools/observations.py", line 108, in get_ndbc_buoy
+      df = df.rename(index=str, columns=columns).set_index("time").sort_index()
+    File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/pandas/util/_decorators.py", line 311, in wrapper
+      return func(*args, **kwargs)
+    File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/pandas/core/frame.py", line 5494, in set_index
+      raise KeyError(f"None of {missing} are in the columns")
+  KeyError: "None of ['time'] are in the columns"
+* Set up nowcast-fig-dev env on khawla.
+* Resolved `FutureWarning: Use pd.to_datetime instead.` by changing from date_parser() 
+  internal function to:
+    date_parser=lambda x: pandas.to_datetime(x, format="%Y %m %d %H %M")
+  arg in pandas.read_csv() in moad_tools.observations.get_ndbc_buoy().
+* Struggled with renaming date/time column in get_ndbc_buoy().
+(SalishSeaNowcast)
+
+
+Wed 27-Apr-2022
+^^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; oct19, nov19
+(SalishSeaCast)
+
+Finished work to fix wwatch3 fig bug:
+* Resolved renaming of date/time column and making it the index in get_ndbc_buoy():
+    df.set_index(df.columns[0], inplace=True)
+    df.index.rename("time", inplace=True)
+    df.sort_index(inplace=True)
+* Fixed pandas.DataFrame.loc() calls re: buoy obs column names in wave_height_period.py
+* Improved wave_height_period.py with elimination of OpenDAP issue work-around that downloads 
+  fields from ERDDAP instead of accessing them lazily via xarray.open_dataset()
+* created, merged & deployed PR#103.
+(SalishSeaNowcast)
+
+Did year roll-over and other code maint on moad_tools pkg before committing wwatch3 fig fixes;
+used SalishSeaCmd repo for guidance.
+* PR#15:
+  * bump version to 22.1.dev0
+  * change copyright year range to end with `– present`
+  * add SPDX short-form license identifiers
+* PR#16:
+  * change to run GHA workflows on push to any branch
+  * drop pkg caching from GHA workflows
+  * change GHA workflows to use mambaforge
+* PR#17:
+  * Add GHA CodeQL scanning workflow
+  * Add CodeQL analysis badges to README & pkg dev docs
+* PR#18:
+  * add Python 3.10 to GHA pytest-coverage workflow
+  * Change GHA linkcheck workflow to Python 3.10
+  * Change to Python 3.10 for pkg dev
+  * Update pkgs & versions used in recent dev env
+Cleaned up stale local and remote branches.
+Updated get_ndbc_buoy() re: wwatch3 fig bug(s) and other things; PR#19 - merged.
+Created 22.1 release on GitHub; deployed it to skookum.
+(MOAD)
+
+
+Thu 28-Apr-2022
+^^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; dec19, jan20, feb20
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+Worked on income tax returns.
+
+
+Fri 29-Apr-2022
+^^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; mar20, apr20, may20
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+AAPS spring general mtg.
+
+
+Sat 30-Apr-2022
+^^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; jun20
+upload_forcing orcinus nowcast+ failed; investigation:
+* $HOME file system is read-only
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+Disabled cronjob for 2022.
+(Bloomcast)
+
+
+May
+===
+
+Sun 1-May-2022
+^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; jul20
+(SalishSeaCast)
+
+
 
 
 TODO:
   Bug re: log rotation during download_wwatch3_results forecast2
 
-
-
-python3 -m nowcast.workers.launch_remote_worker $NOWCAST_YAML arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2022-04-06"
-(/data/SalishSeaCast/nowcast-env) ~$ /nemoShare/MEOPAR/nowcast-sys/nowcast-env/lib/python3.8/site-packages/xarray/backends/common.py:81: FutureWarning: The ``variables`` property has been deprecated and will be removed in xarray v0.11.
-  return iter(self.variables)
-
-
-
-
-
 * update SalishSeaCmd installation docs re: no anaconda and `python3 -m pip install`
-
-
-(/SalishSeaCast/nowcast-env) ~$ python3 -m nowcast.workers.make_plots $NOWCAST_YAML wwatch3 forecast publish
-/SalishSeaCast/nowcast-env/lib/python3.9/site-packages/pandas/io/parsers.py:3339: FutureWarning: 
-        Use pd.to_datetime instead.
-
-  return generic_parser(date_parser, *date_cols)
-/SalishSeaCast/nowcast-env/lib/python3.9/site-packages/pandas/io/parsers.py:3339: FutureWarning: 
-        Use pd.to_datetime instead.
-
-  return generic_parser(date_parser, *date_cols)
 
 
 
@@ -3375,9 +3569,6 @@ TODO:
 
 
 TODO:
-MIDOSS:
-* figure out how to merge/cherrypick relevant changes from Rachael's add_terminal branch in moad_tools
-
 Fix ariane docs:
 * maybe re:  adding a bin-like directory to prefix gets rid of errors from doc/ and examples/ that confused Becca ???
  versions re: .bashrc
