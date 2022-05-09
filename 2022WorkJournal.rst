@@ -3519,6 +3519,160 @@ Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session
 and uploading to graham-dtn:/nearline; jul20
 (SalishSeaCast)
 
+Reviewed income tax returns.
+
+
+Week 18
+-------
+
+Mon 2-May-2022
+^^^^^^^^^^^^^^
+
+Paid income tax balances owing.
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; apr22, aug20, sep20, oct20
+Backfill nowcast-agrif since ssh issue on 30-Apr:
+  wait for 02may run to fail
+  upload_forcing orcinus nowcast+ 2022-04-30
+  upload_forcing orcinus turbidity 2022-04-30
+  wait for run to finish
+  upload_forcing orcinus nowcast+ 2022-05-01
+  upload_forcing orcinus turbidity 2022-05-01
+  wait for run to finish
+  upload_forcing orcinus nowcast+ 2022-05-02
+  upload_forcing orcinus turbidity 2022-05-02
+(SalishSeaCast)
+
+Added Sphink config to ignore private tidal-predictions repo so that GHA linkcheck workflow
+stops failing.
+(SalishSeaNowcast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Did year roll-over and other code maint on NEMO-Cmd pkg;
+used moad_tools & SalishSeaCmd repos for guidance.
+* PR#33:
+  * bump version to 22.1.dev0
+  * change copyright year range to end with `– present`
+  * add SPDX short-form license identifiers
+* PR#34:
+  * change to run GHA workflows on push to any branch
+  * drop pkg caching from GHA workflows
+  * change GHA workflows to use mambaforge
+  * add name to Slack channel notification step
+  * drop MIDOSS slack notification step
+* PR#135:
+  * Add GHA CodeQL scanning workflow
+  * Add CodeQL analysis badges to README & pkg dev docs
+* PR#36:
+  * add Python 3.10 to GHA pytest-coverage workflow
+  * Change GHA linkcheck workflow to Python 3.10
+  * Change to Python 3.10 for pkg dev
+  * Rename readthedocs.yml to .readthedocs.yaml
+  * Move requirements.txt to envs/
+  * Update pkgs & versions used in recent dev env
+Cleaned up stale local and remote branches.
+Created 22.1 release on GitHub; deployed it to skookum.
+Bumped version to 22.2.dev0.
+(MOAD)
+
+Added 2 new descriptions to cloud fraction mapping.
+(Bloomcast)
+
+
+Tue 3-May-2022
+^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; nov20, dec20, jan21, feb21, mar21
+(SalishSeaCast)
+
+Started work on archive_tarball worker:
+* stdlib tarfile module should work:
+  * with tarfile.open() as tar: tar.add()  # recursive dir/file additions
+  * probably iterate over getmembers() to generate .index file
+* sysrsync pkg (PyPI, not conda-forge) could be used for rsync to graham-dtn
+  * thin wrapper around subprocess.run() on system-installed rsync
+  * ubc GitHub org is listed in Used-by, for what that's worth
+* possible command-lines:
+    archive-tarball run-type yyyy-mmm dest-host
+      e.g. archive-tarball nowcast-green 2022-may graham-dtn
+  * NEMO only, always upload to remote storage
+  * get source dir from config["results archive"][run-type]
+  * split yyyy-mmm to get wildcard dirs; i.e. *mmmyy/
+  * compose tarball name from last segment of source dir path and mmmyy
+  * get dest-host directory from new config["results archive"]["remote"][dest-host]
+  * compose remote storage path from dest-host
+* started implementation in archive-tarbasll branch
+(SalishSeaNowcast)
+
+CIOPS went live on datamart; east/2km, west/2km, salishsea/500m; 4 x 48h runs per day.
+
+
+Wed 4-May-2022
+^^^^^^^^^^^^^^
+
+uptimerobot reported ~3 min of downtime for arbutus at ~05:45; no evident affect.
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; apr21, may21
+/results filled during nowcast-x2 prep and stopped automation; recovery:
+  rm -rf /results/nowcast-dev.201905/*21/
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast"
+  make_turbidity_file
+  download_results arbutus forecast
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+
+Thu 5-May-2022
+^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; jun21, jul21, aug21, sep21
+Forgot to deal with collect_weather in yesterday's failure; recovery:
+  kill collect_weather 18 2.5km
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20220504/18
+  download_weather 18 2.5km
+  download_weather 00 2.5km
+  download_weather 06 2.5km
+  download_weather 12 1km --yesterday
+  collect_weather 18 2.5km &&
+  wait for forecast2 runs to finish
+  download_weather 12 2.5km
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+
+Fri 6-May-2022
+^^^^^^^^^^^^^^
+
+Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
+and uploading to graham-dtn:/nearline; oct21, nov21, dec21
+Continued work on archive_tarball worker.
+(SalishSeaCast)
+
+Revised and re-printed J&M income tax returns.
+
+
+Sat 7-May-2022
+^^^^^^^^^^^^^^
+
+Drove to White Rock to visit J&M
+
+
+Sun 8-May-2022
+^^^^^^^^^^^^^^
+
+Goofed off and washed Cannondales.
+
 
 
 
