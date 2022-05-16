@@ -3674,6 +3674,99 @@ Sun 8-May-2022
 Goofed off and washed Cannondales.
 
 
+Week 19
+-------
+
+Mon 9-May-2022
+^^^^^^^^^^^^^^
+
+Filed income tax returns.
+
+Created notebook in analysis-doug re: accessing SalishSeaCast NEMO datasets via from 
+ERDDAP via xarray for Prodigy field school.
+(EOAS Teaching)
+
+MOAD group mtg.
+(MOAD)
+
+Debi arrived to stay overnight prior to Tereza's defense; 
+1st visitor since start of COVID in Mar-20
+
+
+Tue 10-May-2022
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+FAL estate work: deposit MFC & BCE dividend cheques.
+
+Tereza's defense.
+
+
+Wed 11-May-2022
+^^^^^^^^^^^^^^^
+
+Vancouver to Dove Creek Farm
+
+
+Thu 12-May-2022
+^^^^^^^^^^^^^^^
+
+Dove Creek Farm
+
+try3 runs:
+* [1-20]-200 finished
+* [21-25]-200 queued
+(MIDOSS)
+
+Tried to cycle to Comox Lake but turned back at private raod logging closure on 
+Duncan Bay Mainline Rd. Cut ride short due to increasing rainfall rate.
+
+
+Fri 13-May-2022
+^^^^^^^^^^^^^^^
+
+Dove Creek Farm
+
+try3 runs:
+* [1-25]-200 finished
+* had to backfill hdf5-to-netcdf4 for 2 spills in 25-200
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
+
+Cycled to Campbell River w/ Susan and back alone, via backroads where possible;
+on hwy 19a from north of Merville to south of Shelter Point. 
+(100 km)
+
+
+Sat 14-May-2022
+^^^^^^^^^^^^^^^
+
+Dove Creek Farm
+
+Goofed off.
+
+Cycled at loop through Courtenay and Comox; up Vanier Dr. hill, back along Back Rd.
+(27 km)
+
+
+Sun 15-May-2022
+^^^^^^^^^^^^^^^
+
+Dove Creek Farm
+
+try3 runs:
+* [1-25]-200 finished
+* [26-30]-200 queued
+(MIDOSS)
+
+Network failed in afternoon; lots of time w/ host & Telus support getting it restored.
+
+Didnt cycle due to heavy-ish rain.
+
 
 
 TODO:
