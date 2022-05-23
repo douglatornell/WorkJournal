@@ -3747,6 +3747,8 @@ Sat 14-May-2022
 
 Dove Creek Farm
 
+Paid 2021 income tax installment interest owing.
+
 Goofed off.
 
 Cycled at loop through Courtenay and Comox; up Vanier Dr. hill, back along Back Rd.
@@ -3765,8 +3767,110 @@ try3 runs:
 
 Network failed in afternoon; lots of time w/ host & Telus support getting it restored.
 
-Didnt cycle due to heavy-ish rain.
+Didn't cycle due to heavy-ish rain.
 
+
+Week 20
+-------
+
+Mon 16-May-2022
+^^^^^^^^^^^^^^^
+
+Dove Creek Farm
+
+Cycled back roads route to Campbel River as far at Howard Rd & Hwy 19A to meet Susan,
+Becca & Birgit.
+(34.5 km)
+
+try3 runs:
+* [1-25]-200 finished
+* [26-30]-200 running
+(MIDOSS)
+
+
+Tue 17-May-2022
+^^^^^^^^^^^^^^^
+
+Dove Creek Farm
+
+try3 runs:
+* [1-27]-200 finished
+* [28-30]-200 failed, probably due to file system issues; re-queued
+(MIDOSS)
+
+Cycled to Cumberland, Bevan and twice to Comox Lake.
+(55 km)
+
+
+Wed 18-May-2022
+^^^^^^^^^^^^^^^
+
+Dove Creek Farm
+
+try3 runs:
+* [1-30]-200 finished
+* [31-35]-200 queued
+(MIDOSS)
+
+See work journal.
+(Resilient-C)
+
+Rest day from cycling; planned due to storm warming, though storm passed mostlly overnight.
+
+
+Thu 19-May-2022
+^^^^^^^^^^^^^^^
+
+Dove Creek Farm
+
+try3 runs:
+* [1-30]-200 finished
+* [31-34]-200 failed, lots of core dumps
+* 35-200 running
+(MIDOSS)
+
+Cycled loop through Comox to Point Holme, Kye Bay, Heritage Aircraft Park, Merville, Headquarters,
+Tsolumn River Rd.
+(65 km)
+
+
+Fri 20-May-2022
+^^^^^^^^^^^^^^^
+
+Dove Creek Farm to Parksville
+
+try3 runs:
+* [1-30,35]-200 finished
+* [32,34]-200 failed, lots of core dumps; re-queued
+* [31-34]-200 running
+* [31,33]-200 failed due to bogus disk quota exceeded on /scratch; re-queued
+(MIDOSS)
+
+
+Sat 21-May-2022
+^^^^^^^^^^^^^^^
+
+Parksville to Vancouver
+
+try3 runs:
+* [1-30,32,34-35]-200 finished
+* [31,33]-200 running
+* [36-30]-200 queued
+(MIDOSS)
+
+
+Sun 22-May-2022
+^^^^^^^^^^^^^^^
+
+try3 runs:
+* [1-30,32-40]-200 finished
+* 31-200 had 8 hdf5-to-netcdf4 failures; backfill job running
+* [41-44]-200 running
+* 45-200 queued
+(MIDOSS)
+
+Cycled to Iona and home via Canada Line bridge & Heather.
+(40 km)
 
 
 TODO:
