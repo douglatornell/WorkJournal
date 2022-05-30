@@ -3656,8 +3656,10 @@ Fri 6-May-2022
 
 Continued building 1-mo tarballs of nowcast-green.2019105 re-run in tmux session on chum 
 and uploading to graham-dtn:/nearline; oct21, nov21, dec21
-Continued work on archive_tarball worker.
 (SalishSeaCast)
+
+Continued work on archive_tarball worker.
+(SalishSeaNowcast)
 
 Revised and re-printed J&M income tax returns.
 
@@ -3871,6 +3873,172 @@ try3 runs:
 
 Cycled to Iona and home via Canada Line bridge & Heather.
 (40 km)
+
+
+Week 21
+-------
+
+Mon 23-May-2022
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Victoria Day
+
+try3 runs:
+* [1-45,50]-200 finished
+* 50-200 is short - 33 spills
+(MIDOSS)
+
+Installed new smoke alarms.
+
+Prepped excess bikes for donation.
+
+
+Tue 24-May-2022
+^^^^^^^^^^^^^^^
+
+try3 runs:
+* [1-50]-200 finished
+* 50-200 is short - 33 spills
+* 67 of 10_000 spills w/ volume of <3 litres not run through MOHID
+(MIDOSS)
+
+Updated PyCharm to 2022.1.1.
+
+Continued dev of archive_tarball worker:
+* created PR#104
+* tested tarball & index creation for 2007-jan on skookum in archive_tarball tmux session
+  * takes 1m16s per results day to add to tarball; 35-40m per month
+* rsync upload speed from skookum is quite irratic
+* updated /SalishSeaCast/nowcast-env prod env on skookum to add sysrsync pkg; got other pkg updates
+* tested tarball & rsync functionality for 2007-feb on skookum in archive_tarball tmux session
+* added archive_tarball to next_workers to run for nowcast-green results after last run of the month
+(SalishSeaNowcast)
+
+collect_river_data failure that started on 18-May is for San Juan River at Port Renfrew;
+"cableway is currently out of service".
+(SalishSeaCast)
+
+Group mtg:
+* planning;
+  * present pub, or show work
+  * lots of pubs on OP site
+  * I present on 19-Jul
+(Ocean Parcels)
+
+Learned that sshfs -o nonempty is now default behaviour and nonempty option has been removed
+in version of libfuse installed with 22.04.
+
+
+Wed 25-May-2022
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+upload_forcing to graham failed due to maintenance there
+(SalishSeaCast)
+
+Continued dev of archive_tarball worker:
+* deployed next_workers update to skookum for testing in automation tomorrow;
+  restarted manager
+Fixed redirected links in docs.
+(SalishSeaNowcast)
+
+FAL estate work:
+* appt w/ Sahi at TD branch to deposit DRS shares to my direct account; fail
+
+
+Thu 26-May-2022
+^^^^^^^^^^^^^^^
+
+Telcon w/ Andres @ TD re: BCE DRS and estate planning.
+FAL estate work: emailed DRS & cover letter to Andres.
+
+graham-dtn ssh key auth failing; sent email to support; no response, but auth
+started to work a couple of hours later.
+backfill upload_forcing graham:
+  upload_forcing graham nowcast+ 2022-05-25
+  upload_forcing graham turbidity 2022-05-25
+  upload_forcing graham nowcast+ 2022-05-26
+  upload_forcing graham turbidity 2022-05-26
+Transfer speed to graham-dtn was terrible: ~500 kB/s compared to ~30 MB/s before
+shutdown; did mar07 tarball rsync from chum to graham-hindcast at ~35 MB/s.
+Helped Karyn get plots of NPGO from .csv via pandas and overlay monthly phyto/zoo averages.
+(SalishSeaCast)
+
+Squash-merged dependabot PR in UBC-MOAD/docs re: ujson.
+(MOAD)
+
+PyCharm Functools Webinar:
+* Mike Driscoll
+* caching decorators:
+  * cache 3.9
+    * lru_cache(maxsize=None)
+  * cache_property 3.8
+  * lru_cache
+* total_ordering
+  * class decorators
+  * infers comparison methods from __lt__ and __eq__
+* partial
+  * GUI programming use case; tkinter, wxPython
+  * Mouse vs Python article
+  * alternative to lambda
+* reduce
+  * Real Python article
+  * replacement for former builtin
+  * alternative to lambda
+* singledispatch
+  * function overloading decorator
+  * dispatches based on type for 1st arg
+  * multiple dispatch options; pkgs:
+    * Plum
+    * MultipledDspatch
+* wraps 
+  * for custom decorators
+  * cleans up passing through decorated function name & docstring
+  * Real Python article
+
+Phys Ocgy seminar: Greg Crawford re: tsunami measurements at Humboldt CA re:
+Honga Tonga erruption and other signals
+
+Team mtg.
+(Atlantis)
+
+
+Fri 27-May-2022
+^^^^^^^^^^^^^^^
+
+Continued dev of archive_tarball worker:
+* added deletion of tarball and index after successful rsync
+* improved test coverage
+(SalishSeaNowcast)
+
+HRDPS 12 was late: ~11:00
+(SalishSeaCast)
+
+UBC-DFO modeling mtg:
+* Laura re: new bathymetry in fjords
+
+Finished writing model profile file docs.
+(Reshapr)
+
+
+Sat 28-May-2022
+^^^^^^^^^^^^^^^
+
+Drove to White Rock to visit J&M.
+
+
+Sun 29-May-2022
+^^^^^^^^^^^^^^^
+
+Bike work:
+* prepped Gunnar & Pico for fast road rides:
+  * mud guards off
+  * Garmin mount & cadence sensor on Gunnar
+* checked clearance w/o mudgaurds for wider tires; 28 okay, 30 might be tight
+
+
 
 
 TODO:
