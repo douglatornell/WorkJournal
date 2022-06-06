@@ -4039,6 +4039,219 @@ Bike work:
 * checked clearance w/o mudgaurds for wider tires; 28 okay, 30 might be tight
 
 
+Week 22
+-------
+
+Mon 30-May-2022
+^^^^^^^^^^^^^^^
+
+Emailed support re: slow graham-dtn transfers.
+/results filled during nowcast-blue download; recover:
+  rm -rf nowcast-dev.201905/23apr21.aside*
+  rm -rf nowcast-blue.201905/*21
+  make_turbidity_file
+  make_fvcom_atmos_forcing
+  download_results nowcast
+  download_results forecast
+  find nowcast-dev.201905/ -type d -name "*jan22" | xargs rm -rf
+  find nowcast-dev.201905/ -type d -name "*feb22" | xargs rm -rf
+  find nowcast-dev.201905/ -type d -name "*mar22" | xargs rm -rf
+  find forecast2.201905/ -type d -name "*jan22" | xargs rm -rf
+  find forecast2.201905/ -type d -name "*feb22" | xargs rm -rf
+  find forecast2.201905/ -type d -name "*mar22" | xargs rm -rf
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Started adding SalishSeaCast.201905 model profile
+(Reshapr)
+
+
+Tue 31-May-2022
+^^^^^^^^^^^^^^^
+
+Dentist appt.
+
+Worked at ESB while Rita was at home.
+Did extended commute ride as a sub for FTP builder Week 5 Day 2 foundation training
+because the weather was nice, and it is Bike to Work Week.
+
+Finished adding SalishSeaCast.201905 model profile; PR#29 merged.
+(Reshapr)
+
+archive_tarball for may was launched successfully by automation and successfully
+created tarball and index; rsync to graham-dtn is slow but proceeding.
+(SalishSeaCast)
+
+
+June
+====
+
+Wed 1-Jun-2022
+^^^^^^^^^^^^^^
+
+SHARCNET Python & Numba:
+* Pawel Pomorski, Waterloo
+* @numba.jit(nopython=True) or @numba.njit
+  * fail if code is not numba-compilable
+* pre-compile mode not covered
+* numba does type inferral, but can be explicit too; inferral is generally good enough
+* contrived example: 
+  * Euler proejct problem 39; integral length right triangles
+  * 273 x speed-up
+* numba does not not know about pandas
+* numba does know about numpy
+* contrived example: 2D diffusion equation with 2 for loops:
+  * 309 x speed-up
+  * for comparison, numpy vectorized version of code has 157 x speed-up
+  * note though that running vectorized code w/ numba is 1.4x slower probably due to compilation
+    of already compiled code
+  * numba implementation is probably more readable
+* numba supports only a subset of Python
+  * refactor code into jit-able functions for the hot loops
+  * numba has trouble with complex list data structures; replace with numpy arrays and operations;
+    limited to homogenous type lists
+  * copy.deepcopy() doesn't work with numba;
+    * convert list to numpy array, use numpy.copy(), convert back to list
+  * filtering list of lists via filter(lambda ...):
+    * convert list to numpy array, use numpy logical ops for comparison, convert back to list
+* parallel numba
+  * @njit(parallel=True), but it's complicated
+  * compilation for GPU is also possible
+
+FAL estate work:
+* Andres advised me to call estates to arrange how to handle DRS
+* Estates agent (no name) says that an agent named James is working with TD Direct on a solution;
+  will contact me later today or tomorrow
+* emailed CRA notice of assessment to Cameron w/ update re: BCE & MFC shares
+* emailed Sahi w/ update re: BCE shares
+
+Squash-merged dependabot PR in docs repo re:ujson.
+Squash-merged PR#104 re: archive_tarball worker and deployed main to production.
+Automation archive_tarball may22 is still rsync-ing slowly to graham-dtn.
+rsync-ed jun07 tarball to graham-hindcast in reaonable time.
+Changed production config to use graham-hindcast for archive_tarball backfilling;
+* started jul07; xfer was slow, so stopped it and tried explicit rsync; fast
+* poked around and found that fast rsync is going to gra-login2
+Explored how to rotate hindcast log files:
+* nemo_nowcast.workers.rotate_logs is no config-driven enough
+* options:
+  * add maxBytes to config to rotate on size; unpredictable rotation timing
+  * change to TimedRotatingFileHandler; might replace backup log files with empty files over time
+  * improve nemo_nowcast.workers.rotate_logs; default rotation would be daily
+* discussed w/ Susan who came up with the idea of a manually launched 
+  SalishSeaNowcast.workers.rotate_hindcast_logs worker
+(SalishSeaCast)
+
+Toured repos w/ GHA workflows to re-enable any scheduled workflows that have been automatically
+disabled due to inactivity.
+(MOAD)
+
+
+Thu 2-Jun-2022
+^^^^^^^^^^^^^^
+
+Squash-merged dependabot PR in moad_tools re: Pillow.
+(MOAD)
+
+archive_tarball sep07 to gra-login2 failed waiting for known hosts key acceptance;
+started rsync; archive_tarball oct07 was successful to gra-login2 start to finish;
+started loop for nov07-dec07; success; started loop for 2008.
+may22 rsync is still going...
+Continued work on rotate_hindcast_logs; PR#105.
+(SalishSeaCast)
+
+Team mtg
+(Atlantis)
+
+Did outdoor ride as a sub for FTP builder Week 5 Day 4 foundation training
+to pick up cables from West Point, and it is Bike to Work Week; middle velcro closure
+on workhorse Sidi shoes blew up.
+
+
+Fri 3-Jun-2022
+^^^^^^^^^^^^^^
+
+archive_tarball loop for 2008 working well
+may22 rsync is still going...
+(SalishSeaCast)
+
+Installed Vittoria Corsa 28mm tires w/ Champion latex tudbs on Gunnars.
+Installed chain and new rear brake cable w/o coupler on Impe.
+
+
+Sat 4-Jun-2022
+^^^^^^^^^^^^^^
+
+Rode a loop onf west side bike routes between rain systems; 10th, Ontario, Ridgeway, Trafalgar,
+29th, Imperial, Discovery, Off-Broadway.
+(20.5 km)
+
+NEMO forecast failed on 1st time step due to high current near west boundary;
+that caused forcing prep for wwatch3 to fail
+recovery:
+  Susan smoothed nowcast-blue restart file
+  wait for nowcast-green to finish
+  rsync restart to arbutus
+  make_forcing_links ssh forecast
+  kill watch_NEMO
+  wait for forecast runs to finish
+  download_results arbutus forecast
+  launch_remote_worker make_ww3_wind_file arbutus "arbutus forecast"
+  launch_remote_worker make_ww3_current_file arbutus "arbutus forecast"
+Helped Susan do prod test of rotate_hindcast_logs; worked but unregistered worker error because
+manager had not been restarted; that make me realize that I didn't write the after_ function
+for it or form archive_tarball.
+Investigated how to write a test to confirm that all modules in nowcast.workers have a
+corresponding after_ function in next_workers; 2 possibilities:
+* inspect.getmembers(next_workers, inspect.ifucntion)
+* ast.parse() and isinstance(func, ast.FunctionDef)  # does not require import of next_workers
+collect_weather 18 finished after 17:08, so download_weather 1km 00 failed
+may22 rsync is still going...
+archive_tarball loop for 2009 started
+(SalishSeaCast)
+
+
+Sun 5-Jun-2022
+^^^^^^^^^^^^^^
+
+uptimerobot reported web site down for 18 minutes overnight starting at 2022-06-04 22:24:42.
+Tried to backfill yesterday's 1km 00 weather forecast, but files were gone.
+nowcast-blue failed due to high velocity at west boundary; recovery:
+  Susan smoothed nowcast-green/04jun22 restart file
+  rsync restart to arbutus
+  make_forcing_links arbutus nowcast+
+may22 rsync finished!!!
+archive_tarball loop for 2009 finished and 2010 started
+(SalishSeaCast)
+
+Researched password managers:
+* https://www.wired.com/story/best-password-managers/
+* LastPass is the one that fell into disrepute (bait & switch) in 1-Feb-2022
+  by reducing free tier support and charging separately for mobile & desktop
+* 1Password is highly rated, Canadian, and has a family mgmt plan for 5 users;
+  also has auth app functionality for 2fa
+
+Moved failed MIDOSS runs to borked dir
+Ran 51-10 make-up runs that Susan created .csv file for.
+(MIDOSS)
+
+
+
+TODO:
+* after_archive_tarball()
+* after_rotate_hindcast_logs()
+* add test to test_next_workers to confirm that all modules in nowcast.workers have
+  a corresponding after_ function in next_workers:
+    source = Path("nowcast/next_workers.py").open("rt").read()
+    after_funcs = {
+        func.name for func in ast.parse(source).body if isinstance(func, ast.FunctionDef)
+    }
+  or 
+    after_funcs = {func[0] for func in inspect.getmembers(next_workers, inspect.isfunction)}
+
+
 
 
 TODO:
