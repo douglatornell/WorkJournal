@@ -4238,19 +4238,222 @@ Ran 51-10 make-up runs that Susan created .csv file for.
 (MIDOSS)
 
 
+Week 23
+-------
+
+Mon 6-Jun-2022
+^^^^^^^^^^^^^^
+
+archive_tarball 2010-jun failed with broken pipe error
+(SalishSeaCast)
+
+Added after_rotate_hindcast_logs(); merged PR#105
+Started work on adding TestAfterWorkerFunctions.
+Discussed w/ Susan deleting old upload_all_files worker; she agreed.
+(SalishSeaNowcast)
+
+Group mtg.
+(MOAD)
+
+Haircut.
+
+
+Tue 7-Jun-2022
+^^^^^^^^^^^^^^
+
+Disconnected all bluetooth devices (mouse & headphones) from khawla.
+Confirmed that sleep works via keyboard, though there is still a syslog msg too fast to read.
+Re-connected mouse; sleep fails, and failed during re-start; had to cycle power. Scary.
+
+archive_tarball loop for 2010 finished
+2010-jun tarball & index rsync-ed manually to gra-login2
+Email conversation w/ Kaizaad Bilimorya @Guelph re: graham xfer rates;
+confirmed my obs re: login2 vs. dtn, login1 & login3; says problem is resolved.
+Tested graham dtn, login1 & login3 rates:
+  tar cvvf /ocean/dlatorne/nowcast-green.201905-jan11.tar \
+    /results2/SalishSea/nowcast-green.201905/*jan11 \
+    | tee /ocean/dlatorne/nowcast-green.201905-jan11.index
+  rsync -tv --progress /ocean/dlatorne/nowcast-green.201905-jan11.* \
+    graham-dtn:/nearline/rrg-allen/SalishSea/nowcast-green.201905/
+  * jan11 to graham-dtn: back-ish to pre-25-may transfer rate
+  * feb11 to gra-login1: back-ish to pre-25-may transfer rate
+  * mar11 to gra-login3: back-ish to pre-25-may transfer rate
+(SalishSeaCast)
+
+Deleted upload_all_files worker; PR#106; merged.
+Added TestAfterWorkerFunctions class and after_archive_tarball(); PR#107; merged.
+Reverted temporary change from graham-dtn as file transfer destination because it is working
+at normal speed again.
+Pulled updates into production; restarted manager.
+(SalishSeaNowcast)
+
+Group mtg: Jose presented Fischer, et al (2021) paper:
+* Modeling submerged biofouled microplastics and their vertical trajectories
+  links in Slack channel
+* Jose's M.Sc. colleague
+* will do future PO seminar
+* diatoms dominate for 1st week, but bacterial take over
+(OceanParcels)
+
+UBC Alumni Fire & Floods Panel:
+* last miunte change to just wildfires
+* Intro: Rob Kozak
+* Moderator: Johanna Wagstaffe
+* Speaker: Lori Daniels, tree-ring lab
+  * almost everything about forest mgmt since late-1800s has been wrong (my words, not her's)
+    especially 100% goal for fire suppression
+  * learn to live with fire
+  * ground burns instead of crown burns
+  * controlled burns in spring (not sure if she said autumn too)
+
+Checked status of mods & resource packs for 1.19:
+* updated:
+  * sodium
+  * iris-2.0.4
+  * vanilla tweaks:
+    * data packs:
+      * 2x shulker shells v1.3.3 to server
+      * coordinates HUD v1.2.3 - to server
+    * resource packs:
+      * Lower Shield
+      * Redstone Devices:
+        * Sticky Piston Sides
+        * Directional Hoppers
+        * Directional Dispensers & Droppers
+        * Directional Observers
+        * Groovy Levers
+        * RedstoneWireFix      
+      * Borderless Stained Glass
+      * Clearer Water
+
+      * Colourful Enchanting Table Particles
+      * Flint Tipped Arrows
+      * Accurate Spyglass
+      * Fancy Sunflowers
+      * SlimeParticleFix
+      * Block Sides:
+        * Grass Sides
+        * Mycelium Sides
+        * Grass Path Sides
+        * Podzol Sides
+        * Snow Sides
+        * Crimson Nylium Sides
+        * Warped Nylium Sides
+* not updated yet:
+  * lithium
+  * phosphor
+  * malilib
+  * minihud
+  * litematica
+Created "Uncharmed Link" backup on Nodecraft; downloaded it to play with MCASelector.
+Installed MCASelector in ~/MCASelector/ and explored world map.
+Changed Nodecraft server to run minecracft=1.19 and fabric=1.19-0.14.6
+via 1-click installer and archiving files to _old_files/;
+Restored world files by copying from _old_files/:
+  1_18-1/ (world)
+  banned-ips.json
+  banned-players.json
+  ops.json
+  server.properties
+  whitelist.json
+Successfully tested world w/ 1.19 client.
+Downloaded VanillaTweak double_shulker_shells-v1.3.3, stopped server, uploaded it to replace
+v1.3.2, and restarted server.
+Downloaded VanillaTweak coordinatesHUD-v1.2.3, stopped server, uploaded until MiniHUD
+gets updated, and restarted server.
+
+
+Wed 8-Jun-2022
+^^^^^^^^^^^^^^
+
+archive_tarball loop for 2011 started w/ apr after manual tests for Kaizaad.
+(SalishSeaCast)
+
+
+Thu 9-Jun-2022
+^^^^^^^^^^^^^^
+
+upload_forcing orcinus turbidity failed; orcinus refusing network connections
+archive_tarball loop for 2011 finished
+archive_tarball loop for 2012 started
+(SalishSeaCast)
+
+Phys Ocgy seminar: Becca
+
+ATSC seminar: Susan
+
+Team mtg
+(Atlantis)
+
+
+Fri 10-Jun-2022
+^^^^^^^^^^^^^^^
+
+SMS to Paul Kim re: plumbing repairs.
+
+Squash-merged dependabot pull requests re: cookiecutter:
+* AtlantisCmd
+* MOHID-Cmd
+* WWatch3-Cmd
+* cookiecutter-analysis-repo
+* cookiecutter-MOAD-pypkg
+* cookiecutter-djl-pypkg
+(MOAD)
+
+orcinus is back after file system maintenance; recovery:
+  with for nowcast-agrif run to fail
+  upload_forcing orcinus turbidity 2022-06-09
+  upload_forcing orcinus turbidity 2022-06-10
+* host key algorithm mismatch on connections from khawla, but okay from skookum
+  * this appears to be an issue of OpenSSH_8.9p1 on khawla not wanting to use the ssh-rsa
+    host key algorithm offered by OpenSSH_6.4p1-hpn14v1 on orcinus;
+    kwala wants diffie-hellman-group-exchange-sha256
+  * similar issue with public key signature algorithm
+  * resolution:
+      add 2 lines of ssh config for orcinus host aliases on khawla:
+        HostKeyAlgorithms=+ssh-rsa
+        PubkeyAcceptedKeyTypes=+ssh-rsa
+  * sent FYO email to Mark
+* same story between khawla and optimum; sent FYI Slack msg to Henryk
+archive_tarball loop for 2012 failed because I didn't change gra-login2 to graham-dtn :-(
+started rsync-ing 2012 tarballs & indexes
+(SalishSeaCast)
+
+Started work on time-averaging (aka resampling):
+* resampling is a special case of xarray/pandas group-by functionality that is specific to
+  time coordinates
+* pandas/xarray refer to time intervals/frequencies for resampling as "offsets"
+* pandas docs list of "offset aliases":
+    https://pandas.pydata.org/docs/user_guide/timeseries.html#offset-aliases
+* challenges:
+  * due to flexibility of pandas/xarray offset aliases mini-language:
+    * choice of time_offset and time_example in calc_output_coords()
+    * choice of quanta and time_offset in calc_coord_encoding()
+  * file names:
+    * we have used NEMO convention: e.g. SalishSea_1m_202012_202012_ptrc_T.nc
+      but reshapr convention is to provide file name stem to which date range and extension
+      are appended; e.g. SalishSeaCast_1m_ptrc_T_202012_202012.nc
+* proof of concept test of resampling added to extract sub-command worked
+(Reshapr)
+
+
+Sat 11-Jun-2022
+^^^^^^^^^^^^^^^
+
+Cycled to/from White Rock to visit J&M.
+105 km
+
+
+Sun 12-Jun-2022
+^^^^^^^^^^^^^^^
+
+upload_forcing orcinus failed for forecast2, nowcast+ & turbidity
+(SalishSeaCast)
+
+
 
 TODO:
-* after_archive_tarball()
-* after_rotate_hindcast_logs()
-* add test to test_next_workers to confirm that all modules in nowcast.workers have
-  a corresponding after_ function in next_workers:
-    source = Path("nowcast/next_workers.py").open("rt").read()
-    after_funcs = {
-        func.name for func in ast.parse(source).body if isinstance(func, ast.FunctionDef)
-    }
-  or 
-    after_funcs = {func[0] for func in inspect.getmembers(next_workers, inspect.isfunction)}
-
+* change SalishSeaNowcast automation key to ED-25519
 
 
 
