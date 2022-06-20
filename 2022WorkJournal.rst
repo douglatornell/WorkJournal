@@ -4451,6 +4451,156 @@ upload_forcing orcinus failed for forecast2, nowcast+ & turbidity
 (SalishSeaCast)
 
 
+Week 24
+-------
+
+Mon 13-Jun-2022
+^^^^^^^^^^^^^^^
+
+orcinus network was disconnected Sat night due to fibre cut; restored Sun night; recovery:
+  with for nowcast-agrif run to fail
+  upload_forcing orcinus nowcast+ 2022-06-12
+  upload_forcing orcinus turbidity 2022-06-12
+  upload_forcing orcinus turbidity 2022-06-13
+Email conversation w/ Jenn at ECCC re: Fraser buoy; she suspects impact damage to sensor due
+to river debris.
+(SalishSeaCast)
+
+Continued work on resampling:
+* 
+
+(Reshapr)
+
+Group mtg.
+(MOAD)
+
+
+Tue 14-Jun-2022
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Continued work on resampling:
+* reviewed resampling implementation
+(Reshapr)
+
+Picked Susan up from skin surgery.
+
+Deleted nested world saves from running world on nodecraft; 
+reduced backup size from 8.8Gb to 2.4Gb
+
+Set up family account trial on 1password.ca.
+
+
+Wed 15-Jun-2022
+^^^^^^^^^^^^^^^
+
+Explored 1password more; helped Susan get set up.
+
+Continued work on resampling:
+* pushed resampling code; PR#30
+* add CLI override for config file start/end dates to make month-average resampling
+  easier to automate
+(Reshapr)
+
+
+Thu 16-Jun-2022
+^^^^^^^^^^^^^^^
+
+Tested resampling on salish to produce month-averaged files from 201905 re-run:
+* biology variables to ptrc_T: okay
+* physics tracer variables to grid_T: okay
+* lots of variables in day-avg files lack standard_name attrs:
+  * carp_T:
+    * PAR
+  * dia2_T:
+    * all variables
+  * prod_T:
+    * all variables except co2_flux_mmol_m2_s
+* decided w/ Susan to not produce grid_[UVW] datasets because they would have to come from
+  hour-averaged
+* successfully ran bash loop to produce 2007 jan-mar physics & biology files
+  on a 4 worker x 4 threads stand-alone cluster in tmux on salish
+Started writing docs about dask cluster mgmt because I need to re-learn how to 
+manage a stand-alone cluster on salish that I can run a resampling loop against.
+(Reshapr)
+
+Phys Ocgy seminar: Tereza's defense presentations
+
+Team mtg.
+(Atlantis)
+
+
+Fri 17-Jun-2022
+^^^^^^^^^^^^^^^
+
+Continued writing docs about dask cluster mgmt.
+Successfully ran bash loop to produce 201905 re-run 2007 apr-dec physics & biology files
+on a 4 worker x 4 threads stand-alone cluster in tmux on salish: 8m3.7s.
+Added analysis-doug/notebooks/CompareReshapr-ncraMonthAvgs.ipynb.
+(Reshapr)
+
+Ran bash loop to produce 201905 re-run physics & biology files
+on a 4 worker x 4 threads stand-alone cluster in tmux on salish:
+2008: 12m58.7s
+2009: 12m7.5s
+2010: 12m3.8s
+2011: 10m20.2s  after nowcast-dev finished
+2012: 10m24.4s
+(SalishSeaCast)
+
+Squash-merged dependabot PRs re: token brute-forcing CVE in notebook:
+* analysis-doug/melanie-geotiff
+* analysis-doug/dask-expts
+(MOAD)
+
+(See work journal.
+(Resilient-C))
+
+Cleared leaves and other decayed stuff from patio and scrubbed it with bleach solution.
+Cleaned grill cover with bleach solution.
+Strained back.
+
+
+Sat 18-Jun-2022
+^^^^^^^^^^^^^^^
+
+Ran bash loop to produce 201905 re-run physics & biology files
+on a 4 worker x 4 threads stand-alone cluster in tmux on salish:
+2013: 10m2.6s
+2014: 10m8.8s
+2015: 10m6.2s
+2016: 10m11.1s
+2017: 10m17.0s
+2018: 9m55.0s
+(SalishSeaCast)
+
+
+Sun 19-Jun-2022
+^^^^^^^^^^^^^^^
+
+Ran bash loop to produce 201905 re-run physics & biology files
+on a 4 worker x 4 threads stand-alone cluster in tmux on salish:
+2019: 10m18.7s
+2020: 11m40.5s
+2021: 12m29.1s
+2022: 5m44.7s
+(SalishSeaCast)
+
+
+
+
+
+Reshapr ideas:
+* `reshapr info` sub-command for discovery:
+  * `reshapr info` lists known model profiles and cluster configs
+  * `reshapr info <model profile>` lists time bases and variable groups
+  * `reshapr info <model profile> <time base> <variable group>` lists variable
+* extraction config examples in docs:
+  * simple whole field extraction for a few variables
+  * temporal and spatial selection
+  * resampling
+
 
 TODO:
 * change SalishSeaNowcast automation key to ED-25519
