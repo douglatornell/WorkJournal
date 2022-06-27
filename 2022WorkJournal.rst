@@ -2202,7 +2202,7 @@ Continued work on NEMO weights file for pre-22Sep2011 GEMLAM forcing:
     git branch -u origin/main main
     git remote set-head origin -a
     git pull
-* created symlinks in grid/ required to run xxx
+* created symlinks in grid/ required to run get_weight_nemo:
     ln -s namelist.get_weight_nemo.gem2.5-ops namelist
     ln -s bathymetry_201702.nc bathy_meter.nc
     ln -s /results/forcing/atmospheric/GEM2.5/gemlam/gemlam_y2007m01d03.nc atmos.nc
@@ -4466,9 +4466,7 @@ Email conversation w/ Jenn at ECCC re: Fraser buoy; she suspects impact damage t
 to river debris.
 (SalishSeaCast)
 
-Continued work on resampling:
-* 
-
+Continued work on resampling.
 (Reshapr)
 
 Group mtg.
@@ -4588,18 +4586,288 @@ on a 4 worker x 4 threads stand-alone cluster in tmux on salish:
 (SalishSeaCast)
 
 
+Week 25
+-------
+
+Mon 20-Jun-2022
+^^^^^^^^^^^^^^^
+
+Squash-merged dependabot PR re: old Numpy 1.8.0 in SOG-bloomcast.
+(SOG)
+
+Merged PR#30 re: resampling implementation.
+Changed salish cluster description to 4 workers w/ 4 threads each based on last week's
+month-avg work.
+Add docs re: using a persistent cluster; PR#31
+(Reshapr)
+
+Group mtg.
+(MOAD)
+
+
+Tue 21-Jun-2022
+^^^^^^^^^^^^^^^
+
+PyCharm webinar about pandas:
+* Matt Harrison, Trainer, Consultant, Author of Effective Pandas
+* Jodie Burchell, Dev Advocate, Data Science, JetBrains
+* Matt:
+  * DataSpell product: fancy Jupyter
+  * modin: alt to pandas for scaling, related to ponder start-up
+  * ensure types are correct after loading data
+    * pandas is in-memory, and greedy
+    * over-eager: ints default to int64
+    * autos[cols].dtypes
+      * int64 can't have missing values; if missing values ints are coerced to float64
+        that can have missing
+      * Int64 also exists; it supprts missing data; Matt doesn't like
+      * new pandas string type supports missing data
+    * often missing data tells a story
+    * autos[cols].memory_usage(deep=True).sum()
+      * deep digs into Python objects in numpy arrays (e.g. strings)
+  * data cleaning should be in code, not spreadsheet to that there is reasoning
+    and a trail
+  * autos[cols].select_dtypes(int).describe()
+    * write code using chaining:
+        (autos
+            [cols]
+            .select_dtypes(int)
+            .describe()
+        )
+  * numpy.iiinfo(numpy.int)
+  * convert types using astype()
+  * count in describe() result is number of non-missing values, not numner of rows
+  * autos[cols].query("cylinders.isnan()")
+  * assign() method very valuable for chaining
+  * object columns:
+    * value_counts(dropna=False)
+    * look for opportunities to convert to categorical type to save memory
+    * str.extract() to split data like tranmission type
+  * chaining is a constraint that can lead to better code
+    * use .pipe() if you can't chain
+      * pass in an arbitrary function to operate; 
+        e.g. extract intermediate data frame for debugging
+  * Matt tweeted notebook
+  * .sample() to get a portion of data to speed up dev of chain
+* Jodie:
+  * DataSpell demo
+    * interactive frames
+    * deep auto-completion
+    * in-built pandas docs
+  * DataSpell is bundled in PyCharm as the Jupyter plugin
+
+Birgit presenting paper:
+* Kehl, C., Fischer, R. P. B., & Sebille, E. V. (2021). 
+  Practices, pitfalls and guidelines in visualising lagrangian ocean analyses. 
+  ISPRS Annals of the Photogrammetry, Remote Sensing 
+  and Spatial Information Sciences, 217-224.
+(OceanParcels)
+
+Worked on EGBC CE program requirements:
+* Regulatory Learning module
+  * annual
+  * indigenous people and practice at least 1 in 3 years
+  * Professional Goverance Act (PGA)
+    * applies to multiple self-regulating professions
+    * Office of Superintendent of Professional Goverance in Ministry of Attorney General
+    * engineers, geoscientists, foresters, argologists, applied biologists, app sci techs, 
+      architects
+  * Code of Ethics changes
+    * 12 standardized principles; 1 extra for EGBC
+      * Act in the Public interest
+      * Know your limits
+      * Follow the Law
+      * Follow govt & EGBC standards
+      * Maintain Competence
+      * State Qualifications Accurately
+      * Distinguish Facts from Assumptions
+      * No Conflicts of interest
+      * Duty to report
+      * Stand Your ground
+      * Each Professional is Responsible
+      * Work Diligently & Follow Standars of Documentation
+      * Do Unto Others
+    * CE program
+      * 60 hr per 3 yr period, or 20 hrs per yr average
+      * reporting year starts 19-Jul
+      * 1st 3 yr period started 1-Jul-2021
+      * 4 areas of learning:
+        * Ethics
+          * EDI
+          * 1 hr required per year
+        * Regulatory
+          * quality mgmt
+          * 1 hr required per year; annual module
+        * Technical
+          * climate change
+        * Comms & Leadership
+      * CE plan:
+        * annual
+      * verification:
+        * annual reporting 
+        * audit
+          * random selection
+        * practice review
+          * response to issue arising
+    * Regulation of Firms
+      * ethics, CE, quality mgmt
+      * 8 hr self-paced training module <-*
+      * Professional Practice Mgmt Plan
+      * audit requirements
+    * Audit & Practice Reviews
+      * at least 1% selection annually
+      * questionnaire and possible interview
+    * Quality Mgmt requirements:
+      * review guidelines & advisories <-*
+
+Tried to add model profile for month-avg 201905 dataset; extract fails because it looks 
+for day-by-day files; created issue #32.
+Started work on info sub-command; created PR #33.
+(Reshapr)
+
+
+Wed 22-Jun-2022
+^^^^^^^^^^^^^^^
+
+Squash-merged dependabot PRs re: numpy string comparisons
+* MOHID-Cmd
+* Make-MIDOSS-Forcing
+(MIDOSS)
+
+Dropped SalishSeaTools editable install from rpn-to-gemlam requirements.txt
+to enable dependabot to generat PRs.
+Squash-merged 6 dependabot PRs in rpn-to-gemlam re: numpy, py, pygments, urllib3,
+babel, jinja2, and cryptography.
+(SalishSeaCast)
+
+Started niko and wifi adapter is working again!
+Updated niko from 21.04 to 21.10 to 22.04.
+
+Worked on EGBC CE program requirements:
+* Land Acknowledgements for Engineers and Geoscientists
+  * doc on Engineers Canada website
+  * panel
+    * Matthew Dunn
+    * Nalaine Morin
+    * Chief Leah George-Wilson
+      * land acknowledgements are part of 1st nations law
+      * land acks are 1st step in reconciliation
+      * no "tooth" at the end of Tsleil-Waututh
+    * Linda Murphy
+      * Manitoba
+      * land acks are a good start; learn about history of people
+      * be respectful, have humility
+      * geoscience scales are not dissimilar to 1st nations scales
+  * discussion questions:
+    * how do you respond to people who want to improve land acks?
+      * Chief Leah George-Wilson
+        * learn the name of the people
+      * Linda Murphy
+        * do some research about people; listen
+      * Nalaine Morin
+        * not about checking a box; about understanding values
+    * how can land acks impact decolonization?
+      * Nalaine Morin
+        * recognize that 1st nation people live on the land and have since forever
+      * Linda Murphy
+        * science can be informed by 1st nations ways of knowing
+      * Chief Leah George-Wilson
+        * step 1
+        * step 2: learn more
+        * indigenous knowledge *is* science
+    * what suggestions do you have to make land aks non-tokenistic?
+      * Nalaine Morin
+        * understand why land ack
+      * Chief Leah George-Wilson
+        * indigineous people are all about protocol & ceremony
+      * Linda Murphy
+        * be open ot being corrected
+        * don't appropriate - not settlers place to educate about 1st nations
+
+Explored the idea of having `reshapr info` show the installed location of the package;
+doesn't seem possible in an unhacky way, probably due to editable install.
+(Reshapr)
+
+
+Thu 23-Jun-2022
+^^^^^^^^^^^^^^^
+
+graham down for a week-long maintenance; upload_forcing failed
+
+Created NEMO weights file for HRDPS ops dataset in SSC double resolution expt:
+* ref: https://salishsea-meopar-docs.readthedocs.io/en/latest/code-notes/salishsea-nemo/nemo-forcing/atmospheric.html#creating-new-weights-files
+* tool: /ocean/dlatorne/MEOPAR/NEMO-EastCoast/NEMO_Preparation/4_weights_ATMOS/get_weight_nemo 
+* confirmed no repo updates since last build on 21mar22
+* pushd /data/dlatorne/MEOPAR/grid/
+* pulled changes from GitHub: Michael's ice_if PR
+* created symlinks in grid/ required to run get_weight_nemo:
+    ln -s namelist.get_weight_nemo.gem2.5-ops namelist
+    ln -s /results/forcing/atmospheric/GEM2.5/operational/ops_y2017m01d01.nc atmos.nc
+    ln -s /home/sallen/MEOPAR/grid/bathymetry_double_202206.nc bathy_meter.nc
+* generated weights file:
+    /ocean/dlatorne/MEOPAR/NEMO-EastCoast/NEMO_Preparation/4_weights_ATMOS/get_weight_nemo 
+* improved weights file with tools/I_ForcingFiles/Atmos/ImproveWeightsFile.ipynb
+* stored new, uncommitted weights file as grid/weights-gem2.5-ops_double_202206.nc
+Email from arbutus support saying that fvcom3 VM was restarted due to a cloud hardware issue;
+investigation:
+* restart happened at 08:34 PDT
+* confirmed reboot on VM and that it did not have /nemeShare/MEOPAR/ mounted
+* no impact because fvcom3 is used for r12 run that hasn't started yet
+* mounted /nemeShare/MEOPAR/
+(SalishSeaCast)
+
+Updated kudu from 21.10 to 22.04.
+
+UBC-IOS modeling mtg: model evaluation discussion.
+
+Continued work on info sub-command; learned how to use rich to style console output; PR#33.
+Added test suite for dask cluster config YAML files; PR#33.
+(Reshapr)
+
+
+Fri 24-Jun-2022
+^^^^^^^^^^^^^^^
+
+Noticed that ERDDAP daily report emails stopped on 9-Mar; investigation:
+* my email address was dlatorne@eos that didn't survive the move to FASMail; updated
+* pulled change on skookum and restarted ERDDAP:
+  sudo /opt/tomcat/bin/shutdown.sh
+  wait for uptimerobot notification
+  sudo /opt/tomcat/bin/startup.sh
+(ERDDAP)
+
+Continued work on info sub-command.
+(Reshapr)
+
+
+Sat 25-Jun-2022
+^^^^^^^^^^^^^^^
+
+Drove to White Rock to visit J&M.
+
+
+Sun 26-Jun-2022
+^^^^^^^^^^^^^^^
+
+Goofed off.
+
+Washed cycling shoes.
 
 
 
 Reshapr ideas:
-* `reshapr info` sub-command for discovery:
-  * `reshapr info` lists known model profiles and cluster configs
+* `reshapr info` sub-command for discovery; PR #33:
   * `reshapr info <model profile>` lists time bases and variable groups
   * `reshapr info <model profile> <time base> <variable group>` lists variable
 * extraction config examples in docs:
   * simple whole field extraction for a few variables
   * temporal and spatial selection
   * resampling
+* extraction from month-avg datasets; issue #32
+  * need to handle month-by-month dataset files 
+    (e.g. SalishSeaCast_1m_ptrc_T_20220301_20220331.nc); 
+    code presently assumes day-by-day
+    (e.g. SalishSea_1d_20220314_20220314_ptrc_T.nc)
 
 
 TODO:
