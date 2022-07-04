@@ -3361,7 +3361,7 @@ Weird network problems started at ~10:10;
   * restarted log_aggregator
 * recovery started at ~11:45:
   * uptimerobot reported erddap and site back up
-  * manager got start msg from watch)NEMO nowcast
+  * manager got start msg from watch_NEMO nowcast
   * restarted automation:
       make_forcing_links arbutus ssh
       launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast"
@@ -3544,7 +3544,7 @@ Backfill nowcast-agrif since ssh issue on 30-Apr:
   upload_forcing orcinus turbidity 2022-05-02
 (SalishSeaCast)
 
-Added Sphink config to ignore private tidal-predictions repo so that GHA linkcheck workflow
+Added Sphinx config to ignore private tidal-predictions repo so that GHA linkcheck workflow
 stops failing.
 (SalishSeaNowcast)
 
@@ -3753,7 +3753,7 @@ Paid 2021 income tax installment interest owing.
 
 Goofed off.
 
-Cycled at loop through Courtenay and Comox; up Vanier Dr. hill, back along Back Rd.
+Cycled a loop through Courtenay and Comox; up Vanier Dr. hill, back along Back Rd.
 (27 km)
 
 
@@ -3817,7 +3817,7 @@ try3 runs:
 See work journal.
 (Resilient-C)
 
-Rest day from cycling; planned due to storm warming, though storm passed mostlly overnight.
+Rest day from cycling; planned due to storm warming, though storm passed mostly overnight.
 
 
 Thu 19-May-2022
@@ -4184,7 +4184,7 @@ Installed chain and new rear brake cable w/o coupler on Impe.
 Sat 4-Jun-2022
 ^^^^^^^^^^^^^^
 
-Rode a loop onf west side bike routes between rain systems; 10th, Ontario, Ridgeway, Trafalgar,
+Rode a loop of west side bike routes between rain systems; 10th, Ontario, Ridgeway, Trafalgar,
 29th, Imperial, Discovery, Off-Broadway.
 (20.5 km)
 
@@ -4854,10 +4854,227 @@ Goofed off.
 Washed cycling shoes.
 
 
+Week 26
+-------
+
+Mon 27-Jun-2022
+^^^^^^^^^^^^^^^
+
+Continued work on info sub-command.
+(Reshapr)
+
+Helped Susan prepare for double resolution experiment on sockeye:
+* tested adding `--mca mpi_cuda_support 0` as mpirun option to suppress stderr
+  messages re: CUDA unavailable libraries
+* investigated run /scratch/st-sallen1-1/sallen1/DOUBLE_202111/tester71/
+  * use `module load netcdf-fortran/4.4.5` to get ncdump
+  * 1 core dump file (some other runs have 2 or 3)
+  * msgs in stderr:
+    * Error in `./nemo.exe`: corrupted size vs. prev_size: 0x00000000056de090 
+        backtrace is mostly in libhdf5
+    * Segmentation fault - invalid memory reference
+        backtrace re: illegal attempt to fork in xios::CClient::finalize()
+(DoubleRezSSC)
+
+Group mtg.
+(MOAD)
+
+While debugging getting connected to sockeye from khawla as Susan,
+learned about ProxyJump as clean alternative to ProxyCommand,
+and `IdentitiesOnly yes` to avoid "too many auth errors" issue when I need to 
+use a specific identity file.
+Updated kahwla .ssh/config.
+
+
+Tue 28-Jun-2022
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Finished EGBC CE plan and submitted it.
+Started adding CE activities for 1jan21 to 30jun22.
+
+
+Wed 29-Jun-2022
+^^^^^^^^^^^^^^^
+
+FAL estate work: called TSX Trust re: DRS statement; rep thinks that back office made a mistake
+in registration; should be me instead of me as estate executor; opened escallation request.
+
+MOAD group coffee on zoom.
+
+Continued adding CE activities for 1jan21 to 30jun22 to EGBC system.
+
+Continued work on info sub-command; added model profile output.
+(Reshapr)
+
+Got outdated? dependabot alerts jupyter-server token bruteforcing; no PRs due to 
+"jupyter-server no longer vulnerable"; weird.
+Squash-merged dependabot PRs re: token brute-forcing CVE in notebook:
+* SOG-Bloomcast-Ensemble
+Squash-merged dependabot PRs re: numpy string comparisons
+* analysis-doug/melanie-geotiff
+Squash-merged dependabot re: both of above:
+* SalishSeaTools
+Updated sentry-sdk in prod env on skookum from 1.5.8 to 1.6.0; that triggered updates of
+ca-certificates, certifi, libgcc-ng, libgomp, and openssl.
+(SalishSeaCast)
+
+Evaluated sphinx-hoverxref extension and discussed it w/ Susan; agreed that it is not 
+what we want for links in general in our docs; maybe for API links in some cases.
+
+
+Thu 30-Jun-2022
+^^^^^^^^^^^^^^^
+
+download_live_ocean was slow; after waiting 5h I found that liveocean.apl.uw.edu is not
+ping-able; killed download_live_ocean and used yesterday's symlink-persisted for today
+that was created early this morning for forecast2; unblocked automation:
+  upload_forcing arbutus nowcast+
+  upload_forcing orcinus nowcast+
+  upload_forcing optimum nowcast+
+  upload_forcing graham-dtn nowcast+
+graham came back online after maintenance; backfilled upload_forcing:
+  for dd in {23..29}; do upload_forcing graham-dtn nowcast+ 2022-06-${dd}; done
+  for dd in {23..29}; do upload_forcing graham-dtn turbidity 2022-06-${dd}; done
+(SalishSeaCast)
+
+Sent Slack DM to Tereza asking for here paper citations and 1-liners to add to 
+publications page, etc.
+
+Continued work on info sub-command; added output of list of variables in
+time-base/var-group.
+(Reshapr)
+
+Phys Ocgy seminar: Mathilde Jutras, McGill; Unsupervised clustering of Lagrangian tranjectories in Labradour Sea
+* OceanParcels in GLORYS12 re-analysis
+* K-means from Scikit-learn
+
+
+July
+====
+
+
+Fri 1-Jul-2022
+^^^^^^^^^^^^^^
+
+sockeye changed to new default environment making many of the modules we were using
+unavailable; see #sockeye channel
+Got VSCode remote dev env to run on sockeye.
+My work env on sockeye was so old that the repos were hg clone; updated:
+* added aliases to .bashrc
+* added default, always needed module loads to .bashrc
+    module load gcc/9.4.0
+    module load git/2.31.1
+* **NOTE:** sockeye philosophy seems to be that all module loads should be explicit;
+  i.e. `module load git` doesn't implicitly load the gcc dependency, nor default to 
+  the version
+* made symlinks in $HOME for $PROJECT and $SCRATCH to avoid annoying \ prefix when I tab-complete
+    ln -s $PROJECT project
+    ln -s $SCRATCH scratch
+* Cloned repos into ~/project/
+* Worked on building XIOS:
+  * updated module loads in arch-GCC_SOCKEYE.env:
+    * 1st attempt:
+        module load gcc/9.4.0
+        module load openmpi/4.1.1-cuda11-3
+        module load netcdf-fortran/4.5.3-hdf4-support
+        module load netcdf-cxx/4.2-hdf4-support
+        module load perl/5.34.0
+        module load perl-uri/1.72
+  * 1st build attempt failed due to unable to find netcdf.H
+  * used `nc-config --cflags` to get ridiculous collection of paths and assigned them to 
+    NETCDF_INCDIR in arch-GCC_SOCKEYE.path
+  * 2nd build attempt failed at final mpif90 link step due to not finding 
+    -lnetcdf, -lnetcdff, -lhdf5_hl, -lhdf5_hl
+  * used `nc-config -flibs` to get netcdf-fortran lib/ path and prefix it as `-L` to 
+    NETCDF_LIB in arch-GCC_SOCKEYE.path
+  * 3rd build attempt failed at final mpif90 link step due to not finding 
+    -lnetcdf, -lhdf5_hl, -lhdf5_hl
+  * used `nc-config -libs` to get netcdf-c lib/ path and prefix it as `-L` to 
+    NETCDF_LIB in arch-GCC_SOCKEYE.path
+  * 4th build attempt failed at final mpif90 link step due to not finding 
+    -lhdf5_hl, -lhdf5_hl
+  * dug around in /arc/software/spack-2021/spack/opt/spack/linux-centos7-skylake_avx512/gcc-9.4.0/
+    to find hdf5 lib/ path to prefix as `-L` to HDF5_LIB in arch-GCC_SOCKEYE.path
+  * 5th build attempt succeeded
+  * found envvars that contain root paths from `nc-config` and one for HDF5;
+    changed arch-GCC_SOCKEYE.path to use them
+  * clean and 6th build attempt succeedded
+* Worked on building NEMO:
+  * 1st build attempt failed due to unable to find all includes and libs
+  * added to arch-GCC_SOCKEYE.fcm
+      %NCDF_HOME  $NETCDF_FORTRAN_ROOT
+  * changed %NCDF_INC to
+      %NCDF_INC  -I%NCDF_HOME/include
+  * 2nd attempt failed due to unable to find libs
+    * changed %NCDF_LIB to 
+        %NCDF_LIB  -L%NCDF_HOME/lib -lnetcdff -lnetcdf
+  * clean and 3rd build attempt failed due to not finding -lnetcdf
+    * changed %NCDF_LIB to 
+        %NCDF_LIB  -L%NCDF_HOME/lib -L$NETCDF_C_ROOT/lib -lnetcdff -lnetcdf
+  * 4th build attempt succeedded
+* successful build of REBUILD_NEMO
+* Susan symlinked executables to run test
+* Uncommitted changes in:
+    NEMO-3.6-CODE/NEMOGCM/ARCH/UBC_EOAS/arch-GCC_SOCKEYE.fcm
+    XIOS-ARCH/UBC-ARC/arch-GCC_SOCKEYE.env
+    XIOS-ARCH/UBC-ARC/arch-GCC_SOCKEYE.path
+(DoubleRezSSC)
+
+Changed module loads for sockeye re: new env; sockeye-2022-env branch; uncommitted
+(SalishSeaCmd)
+
+
+Sat 2-Jul-2022
+^^^^^^^^^^^^^^
+
+Drove to Wite Rock to visit J&M.
+Picked Max up at YVR.
+
+
+Sun 3-Jul-2022
+^^^^^^^^^^^^^^
+
+Susan & Max picked Jingli up at YVR, and Sylvia up at ferry.
+
+Susan's test jobs from Fri failed:
+  Cgroup mem limit exceeded: Task in /pbspro.service/jobid/3840994.pbsha.ib.sockeye killed as a result of limit of /pbspro.service/jobid/3840994.pbsha.ib.sockeye
+* built a full working env on sockeye in /project/st-sallen1-1/dlatorne/MEOPAR/
+  * modules required to install NEMO-Cmd and SalishSeaCmd:
+      module load python/3.8.10 
+      module load py-setuptools/50.3.2 
+      module load py-pip/21.1.2
+      module load py-wheel/0.36.2
+  * had to hack ~/.local/bin/nemo and ~/.local/bin/salishsea to change she-bang to 
+      #!/bin/env python3
+    perhaps because 
+      #!/arc/software/spack-2021/spack/opt/spack/linux-centos7-skylake_avx512/gcc-9.4.0/python-3.8.10-gdthw5ahkql24mqrkzq4x6bnkwlvx537/bin/python3
+    from install it too long?
+* re-tried /scratch/st-sallen1-1/sallen1/test_new_gcc_small3/SalishSeaNEMO.sh
+  from /home/dlatorne/project/dlatorne/MEOPAR/runs/01jan07_sockeye.yaml 
+  with node request bumped from 3 to 4
+* re-tried /home/dlatorne/project/dlatorne/MEOPAR/runs/01jan07_sockeye.yaml 
+  with 3 nodes and 186gb of memory
+* sockeye docs suggest that it is possible to get a mixture of node memory sizes:
+    #PBS -l walltime=100:00:00,select=1:ncpus=16:mpiprocs=16:mem=200gb+1:ncpus=20:mpiprocs=20:mem=20gb
+(DoubleRezSSC)
+
+
+
+
+
+Add Tereza's pubs to citations, etc.
+
+
+TODO:
+  EGBC firm registration next steps by 30-Sep
+    * online training (counts as regulatory)
+    * practice mgmt plan
+
 
 Reshapr ideas:
 * `reshapr info` sub-command for discovery; PR #33:
-  * `reshapr info <model profile>` lists time bases and variable groups
   * `reshapr info <model profile> <time base> <variable group>` lists variable
 * extraction config examples in docs:
   * simple whole field extraction for a few variables
