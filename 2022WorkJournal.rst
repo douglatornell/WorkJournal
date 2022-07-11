@@ -1779,8 +1779,7 @@ Started work on setting up 2022 bloomcast:
       because the Englishman data stream did not resume until 30-Apr-2021
   * tested run prep w/ SOG runs and publish to web disabled
   * committed run/2022_bloomcast_infile.yaml and run/config.yaml
-* salish:
-  * pull changes from GitHub
+* salish:ount
   * created new bloomcast env
   * runs dir: /data/dlatorne/SOG-projects/SOG-Bloomcast-Ensemble/run
   * archived 2021_bloomcast* files in run/2021/
@@ -1945,7 +1944,7 @@ Improve GHA workflows; PR#15
 * change to run GHA workflows on push to any branch
 * drop pkg caching from GHA linkcheck & CI workflows
 * chg GHA linkcheck & CI workflows to use mambaforge
-Change ot Python 3.10 for pkg dev; PR#
+Change to Python 3.10 for pkg dev; PR#
 * add 3.10 to GHA pytest-coverage workflow
 * change to 3.10 in GHA linkcheck workflow
 * change to Python 3.10 for pkg dev
@@ -4903,7 +4902,7 @@ in registration; should be me instead of me as estate executor; opened escallati
 
 MOAD group coffee on zoom.
 
-Continued adding CE activities for 1jan21 to 30jun22 to EGBC system.
+Finished adding CE activities for 1jan21 to 30jun22 to EGBC system.
 
 Continued work on info sub-command; added model profile output.
 (Reshapr)
@@ -5058,9 +5057,243 @@ Susan's test jobs from Fri failed:
   with 3 nodes and 186gb of memory
 * sockeye docs suggest that it is possible to get a mixture of node memory sizes:
     #PBS -l walltime=100:00:00,select=1:ncpus=16:mpiprocs=16:mem=200gb+1:ncpus=20:mpiprocs=20:mem=20gb
+* Read about -mcpu option in gcc-9.
+* Investigated sockeye modules for Intel-2021 compilters.
 (DoubleRezSSC)
 
 
+Week 27
+-------
+
+Mon 4-Jul-2022
+^^^^^^^^^^^^^^
+
+Max & Jingli visiting.
+Drove to White Rock to visit J&M
+
+Tried builds w/ gcc-5.5.0, if nothing else, just to get something working as a baseline:
+Module loads:
+  module load gcc/5.5.0
+  module load openmpi/4.1.1-cuda11-3
+  module load netcdf-fortran/4.5.3-hdf4-support
+  module load netcdf-cxx/4.2-hdf4-support
+  module load perl/5.34.0
+  module load perl-uri/1.72
+i.e. only change is gcc version
+Got ocean.output until errors re: init conditions and turbulence, but no time steps.
+Susan helped me fix namelist.time to resolve errors above; new test; got time steps.
+Explored gcc-7.5.0, but discovered that there are no netcdf libs for it.
+Updated SalishSeaCmd to new sockeye module loads and memory request; PR #17.
+Updated XIOS-ARCH to new sockeye module loads; no PR.
+(DoubleRezSSC)
+
+
+Tue 5-Jul-2022
+^^^^^^^^^^^^^^
+
+Max & Jingli visiting.
+Drove to White Rock to visit J&M
+
+Updated NEMO arch for sockeye w/ new envvars; no PR.
+Explored -march compiler option for gcc-5.5: no Skylake or Cascade Lake.
+Explored Intel 2021.4.0 compilers; no setuptools module.
+(DoubleRezSSC)
+
+uptimerobot reported that salishsea-site is down: investigation:
+* Henryk rebooted salish to fix its ocean mounts, but that messed up its NFS exports;
+* exportfs -f on salish refused to work saying:
+    exportfs: -f is available only with new cache controls. Mount /proc/fs/nfsd first
+  and I don't know what that means.
+* Decided to update and reboot skookum:
+    sudo apt update
+    # reviewed 34 pkgs to be updated
+    sudo apt upgrade
+    # reported lots of Linux old kernels that can be auto-remove-ed
+* skookum didn't get mounts from salish after reboot
+* ran download_weather processes in debug mode on salish
+    download_weather 18 2.5km
+    download_weather 12 1km
+    download_weather 00 1km --yesterday  # due to after 17:00
+* Henryk says that salish lost NFS config sure to root fs ssd problems; restored from backup;
+  ssds need replacement; mounts to skookum and workstations restored
+* recovery:
+  * start ERDDAP
+      sudo /opt/tomcat/bin/startup.sh
+  * start salishsea-site app
+  * start automation
+      collect_weather 2.5km 
+      download_results arbutus forecast
+      make_turbidity_file  # to start nowcast-green and nowcast-agrif
+      launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast"
+(SalishSeaCast)
+
+Started work on adding --core-pre-node and --cpu-arch options and removing --cedar-broadwell.
+(SalishSeaCmd)
+
+
+Wed 6-Jul-2022
+^^^^^^^^^^^^^^
+
+EGBC notified me that my CE reporting was overdue to 30jun2022; I objected by email.
+
+Susan, Max & Jingli went ot White Rock to visit J&M
+Jingli went to Victoria later.
+
+Susan noticed that ssh connections to salish are now instant rather than ~30s delay as formerly
+and on skookum.
+
+FAL estate work:
+* Jocinda from TSX Trust called to discuss DRS statement registration issue;
+  she will escallate to back office and follow-up in 1 wk.
+
+Power failure in ESB resulted in name resolution failures and manager restart just after 10:00;
+automation stopped w/ forecast run completed but not downloaded, and x2 nowcast running; 
+recovery started at ~12:00:
+  download_results arbutus forecast
+  make_turbidity_file  # to start nowcast-green and nowcast-agrif
+(SalishSeaCast)
+
+Found 1.19 community ports of Masa mods at https://kosma.pl/masamods/
+Downloaded:
+  malilib-fabric-1.19-0.12.1.jar
+  minihud-fabric-1.19-0.22.0.jar
+Downloaded ComplementaryShaders_v4.5.1.zip
+Downloaded:
+  lithium-fabric-mc1.19-0.8.0.jar
+  phosphor-fabric-mc1.19.x-0.8.1.jar
+Installed all of the above in client and tested successfully in single player and on server.
+Uploaded lithium and phosphor to nodecraft server, restarted it, and tested it successfully.
+
+Squash-merged dependabot PRs re: ujson:
+  UBC-MOAD/docs
+  SalishSeaCast/docs
+Squash-merged dependabot PRs re: lxml:
+  SalishSeaCast/SalishSeaNowcast
+  SalishSeaCast/tools
+(MOAD)
+
+Copntinued work on adding --core-pre-node and --cpu-arch options and removing --cedar-broadwell;
+PR #18.
+(SalishSeaCmd)
+
+
+Thu 7-Jul-2022
+^^^^^^^^^^^^^^
+
+Copntinued work on adding --core-pre-node and --cpu-arch options and removing --cedar-broadwell;
+PR #18.
+(SalishSeaCmd)
+
+watch_NEMO messages were not being logged; resolved by restarting log_aggregator.
+(SalishSeaCast)
+
+Drove to White Rock to visit J&M.
+
+
+Fri 8-Jul-2022
+^^^^^^^^^^^^^^
+
+collect_weather 06 did not complete; investigation:
+* 575 of 576 files downloaded; missing 1 file from hour 047:
+    CMC_hrdps_west_DSWRF_SFC_0_ps2.5km_2022070806_P047-00.grib2
+* no problem messages in log
+* missing file is not present on dd or hpfx
+* recovery started at ~08:55:
+    created symlink to persist 046 as 047
+    collect_river_data
+    get_onc_ctd
+    skipped get_onc_ferry
+    collect_HeanBay_ssh 00
+    grib_to_netcdf forecast2 --debug
+    skipped forecast2 runs
+    download_weather 12 2.5km
+    collect_weather 18 2.5km &
+During recoery noticed that San Juan River at Port Renfrew data stream resumed on 23-Jun
+(SalishSeaCast)
+
+Susan & Max went ot White Rock to visit J&M.
+
+Searched for image to go with AGU feature about Saurav's paper.
+
+FAL estate work:
+* Sheena from TSX trust called; investigation shows that DRS statement was issued as it is
+  because there was no secutiries transfer form; she sent me the form and explained how to 
+  complete it; it needs a signature guarantee stamp from TD.
+* Email to Andres@TD re: how to get signature guarantee stamp
+
+Advised Raisha on segfault due to malloc() invalid size.
+(Atlantis)
+
+Finished adding --core-pre-node and --cpu-arch options and removing --cedar-broadwell;
+merged  PR #18.
+Tagged and released v22.2; bumped version to 22.3.dev0.
+(SalishSeaCmd)
+
+Code base maintenance:
+* CodeQL Action v1 will be deprecated on December 7th, 2022. Please upgrade to v2. 
+  For more information, see 
+  https://github.blog/changelog/2022-04-27-code-scanning-deprecation-of-codeql-action-v1/
+  * Updated workflows:
+    * SalishSeaCast/SalishSeaCmd
+    * SalishSeaCast/SalishSeaNowcast
+    * UBC-MOAD/Reshapr
+    * MIDOSS/MOHID-Cmd
+    * SS-Atlantis/AtlantisCmd
+  * Already at v2:
+    * SalishSeaCast/NEMO-Cmd
+    * UBC-MOAD/moad_tols
+* SalishSeaCast/docs
+  * Change to Python 3.10; PR#6; its a mess because I forgot to pull main first; squash-merged
+    * chg build env to Python 3.10
+    * update pkgs & versions used in revent dev env
+    * change to 3.10 in GHA linkcheck workflow
+  * Improve GHA workflows; PR#7 merged
+    * change to run GHA workflows on push to any branch
+    * drop pkg caching from GHA linkcheck & CI workflows
+    * chg GHA linkcheck & CI workflows to use mambaforge
+
+
+Sat 9-Jul-2022
+^^^^^^^^^^^^^^
+
+Susan & Max went ot White Rock to visit J&M.
+
+Cycled 8th Ave, Chancellor, UBC, SWM, Ridgeway, Arbutus Greenay loop on Gunnar.
+(22 km)
+
+
+Sun 10-Jul-2022
+^^^^^^^^^^^^^^^
+
+Max went to White Rock to stay w/ J&M for a few days.
+
+Discussed standard_name attr values for PAR w/ Susan; our ERDDAP presently uses
+  downwelling_photosynthetic_photon_radiance_in_sea_water
+but that had units of Einsteins' (mol/m2/s) according to CF Standard Name Table;
+agreed that 
+  downwelling_photosynthetic_radiative_flux_in_sea_water
+which had units of W/m2 is better.
+Added PAR standard_name to 
+  SS-run-sets/v201905/field_def.xml
+  SS-run-sets/v202111/field_def.xml
+Pulled SS-run-set change on skookum for nowcast-dev (thouhg it is not output there).
+Forgot that arbutus us on local branch at 656d78d; need to think about how to get new
+field_def.xml there.
+(SalishSeaCast)
+
+Changed PAR standard_name value in ubcSSg3DAuxiliaryFields1hV19-05 in erddap-dataset;
+touched dataset in erddap/flags to make update take effect
+(ERDDAP)
+
+
+TODO:
+* use ncatted to add standard_name in 
+    /results2/SalishSea/nowcast-green.201905/SalishSea_1d_*_carp_T.nc
+    /results2/SalishSea/nowcast-green.201905/SalishSea_1h_*_carp_T.nc
+  command:
+    ncatted -O -h -a standard_name,PAR,c,c,downwelling_photosynthetic_radiative_flux_in_sea_water infile outfile
+  test on 1 file to ensure that Reshapr is happy
+* pull SS-run-sets changes into production on arbutus
 
 
 
