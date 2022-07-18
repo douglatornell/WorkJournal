@@ -4505,6 +4505,7 @@ Thu 16-Jun-2022
 ^^^^^^^^^^^^^^^
 
 Tested resampling on salish to produce month-averaged files from 201905 re-run:
+* worked in /results2/SalishSea/month-avg.201905/
 * biology variables to ptrc_T: okay
 * physics tracer variables to grid_T: okay
 * lots of variables in day-avg files lack standard_name attrs:
@@ -4532,13 +4533,14 @@ Fri 17-Jun-2022
 ^^^^^^^^^^^^^^^
 
 Continued writing docs about dask cluster mgmt.
-Successfully ran bash loop to produce 201905 re-run 2007 apr-dec physics & biology files
-on a 4 worker x 4 threads stand-alone cluster in tmux on salish: 8m3.7s.
+Successfully ran bash loop to produce 201905 re-run 2007 month-averaged apr-dec 
+physics & biology files on a 4 worker x 4 threads stand-alone cluster in tmux on salish: 8m3.7s.
 Added analysis-doug/notebooks/CompareReshapr-ncraMonthAvgs.ipynb.
 (Reshapr)
 
-Ran bash loop to produce 201905 re-run physics & biology files
-on a 4 worker x 4 threads stand-alone cluster in tmux on salish:
+Ran bash loop to produce 201905 re-run month-averaged physics & biology files
+on a 4 worker x 4 threads stand-alone cluster in tmux on salish 
+in /results2/SalishSea/month-avg.201905/:
 2008: 12m58.7s
 2009: 12m7.5s
 2010: 12m3.8s
@@ -4562,8 +4564,9 @@ Strained back.
 Sat 18-Jun-2022
 ^^^^^^^^^^^^^^^
 
-Ran bash loop to produce 201905 re-run physics & biology files
-on a 4 worker x 4 threads stand-alone cluster in tmux on salish:
+Ran bash loop to produce 201905 re-run month-averaged physics & biology files
+on a 4 worker x 4 threads stand-alone cluster in tmux on salish
+in /results2/SalishSea/month-avg.201905/:
 2013: 10m2.6s
 2014: 10m8.8s
 2015: 10m6.2s
@@ -4577,7 +4580,8 @@ Sun 19-Jun-2022
 ^^^^^^^^^^^^^^^
 
 Ran bash loop to produce 201905 re-run physics & biology files
-on a 4 worker x 4 threads stand-alone cluster in tmux on salish:
+on a 4 worker x 4 threads stand-alone cluster in tmux on salish
+in /results2/SalishSea/month-avg.201905/:
 2019: 10m18.7s
 2020: 11m40.5s
 2021: 12m29.1s
@@ -5276,7 +5280,7 @@ which had units of W/m2 is better.
 Added PAR standard_name to 
   SS-run-sets/v201905/field_def.xml
   SS-run-sets/v202111/field_def.xml
-Pulled SS-run-set change on skookum for nowcast-dev (thouhg it is not output there).
+Pulled SS-run-set change on skookum for nowcast-dev (though it is not output there).
 Forgot that arbutus us on local branch at 656d78d; need to think about how to get new
 field_def.xml there.
 (SalishSeaCast)
@@ -5286,14 +5290,297 @@ touched dataset in erddap/flags to make update take effect
 (ERDDAP)
 
 
+Week 28
+-------
+
+Mon 11-Jul-2022
+^^^^^^^^^^^^^^^
+
+pre-commit re: v2.20.0 released; used cs.github.com to locate 7 repos where I use it:
+  org:SalishSeaCast OR org:UBC-MOAD OR org:MIDOSS OR org:SS-Atlantis OR org:43ravens path:**/.pre-commit-config.yaml  
+    SS-Atlantis/AtlantisCmd
+    SalishSeaCast/SalishSeaNowcast
+    UBC-MOAD/MoaceanParcels
+    UBC-MOAD/docs
+    UBC-MOAD/cookiecutter-MOAD-pypkg (2 places)
+
+Participated in Susan/Raisha mtg re: debugging segfault.
+AtlantisCmd maintenance:
+* updated pre-commit re: v2.20.0 release
+* updated dev env on khawla
+* updated redirected PEP-8 link in docs
+(Atlantis)
+
+Maintenance:
+* updated pre-commit re: v2.20.0 release
+* updated dev env on khawla
+* fixed warning re: language setting in Sphinx config
+(SalishSeaNowcast)
+
+Maintenance in un-merged PR#3:
+* updated pre-commit re: v2.20.0 release
+* updated dev env on khawla
+* updated redirected PEP-8 link in docs
+Merged PR#3.
+(MoaceanParcels)
+
+Maintenance:
+* updated pre-commit re: v2.20.0 release
+* updated dev env on khawla
+* fixed warning re: language setting in Sphinx config
+* updated redirected PEP-8 link in docs
+(MOAD docs)
+
+Maintenance:
+* updated pre-commit re: v2.20.0 release
+* updated dev env on khawla
+(cookiecutter-MOAD-pypkg)
+
+Continued work on standard_name attrs in v201905 and v202111:
+* successfully tested `reshapr extract` on ncatted-modified SalishSea_1d_20070101_20070101_carp_T.nc
+* worked out bash command to run in tmux to do bulk ncatted:
+    time_base=h; 
+    yyyy=2007; 
+    yy=$(date --date="${yyyy}-01-01" +%y); 
+    for mm in {01..12}; 
+    do 
+      mmm=$(date --date="${yyyy}-${mm}-01" +%b | tr '[:upper:]' '[:lower:]'); 
+      for dd in {01..31}; 
+      do 
+        yyyymmdd=${yyyy}${mm}${dd}; 
+        fn=${dd}${mmm}${yy}/SalishSea_1${time_base}_${yyyymmdd}_${yyyymmdd}_carp_T.nc; 
+        echo ${fn}; 
+        ncatted -O -h -a standard_name,PAR,c,c,downwelling_photosynthetic_radiative_flux_in_sea_water ${fn} ${fn}; 
+      done; 
+    done
+  see: /results2/SalishSea/nowcast-green.201905/add_std_name.sh
+* successfully tested month-average resampling of 2007-jan auxiliary (carp_T) files
+  in /results2/SalishSea/month-avg.201905/
+* Ran bash loop to produce 201905 re-run month-averaged physics & biology files for jun22
+on a 4 worker x 4 threads stand-alone cluster in tmux on salish
+in /results2/SalishSea/month-avg.201905/:
+* ran bash loops to add PAR standard_name to v201905 
+  (/results2/SalishSea/nowcast-green.201905/add_std_name.sh):
+  * 2007 1d & 1h
+  * 2008 1d & 1h
+  * 2009 1d & 1h
+  * 2010 1d & 1h
+  * 2011 1d & 1h
+  * 2012 1d & 1h
+  * 2013 1d & 1h
+  * 2014 1d & 1h
+  * 2015 1d & 1h
+  * 2016 1d & 1h
+  * 2017 1d & 1h
+  * 2018 1d & 1h
+  * 2019 1d & 1h
+  * 2020 1d & 1h
+  * 2021 1d & 1h
+  * 2022 1d & 1h to 11jul22
+Ran bash loop to produce 201905 month-averaged aux/chemistry files
+on a 4 worker x 4 threads stand-alone cluster in tmux on salish
+in /results2/SalishSea/month-avg.201905/:
+  2007
+  2008
+  2009
+  2010
+  2011
+  2012
+  2013
+  2014
+  2015
+Cherry-picked commit that adds standard_name to PAR into production branch on arbutus:
+  git cherry-pick --no-commit 531ec571435b
+(SalishSeaCast)
+
+
+Tue 12-Jul-2022
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Confirmed that production nowcast-green carp_T files have standard_name for PAR now.
+Committed cherry-picked commit re: PAR standard_name on PROD branch on arbutus to silence
+log warnings about uncommitted changes in SS-run-sets.
+Continued running bash loop to produce 201905 month-averaged aux/chemistry files
+on a 4 worker x 4 threads stand-alone cluster in tmux on salish
+in /results2/SalishSea/month-avg.201905/:\
+  2016
+  2017
+  2018
+  2019
+  2020
+Confirmed that monthly tarball transfer to graham:/nearline/ happened via automation for jun22.
+r12 nowcast finished too early; investigation:
+* fvcom executable not found on fvcom3
+* fvcom3 does not have /nemoShare/MEOPAR/ mounted
+* fvcom3 rebooted at 15:30 UTC == 08:30 PDT
+* recovery started at ~13:00:
+    * fvcom3:
+        sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR
+    * skookum:
+        launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast"
+(SalishSeaCast)
+
+Created sockeye-dbl-rez branch to adjust PBS directives for next week's double resolution
+runs on sockeye:
+* added `#PBS -q R3896244`
+(SalishSeaCmd)
+
+Did year roll-over and other code maint on salishsea-site pkg;
+used NEMO-Cmd repo for guidance.
+* PR#17; merged and deployed manually:
+  * bump version to 22.1.dev0
+  * change copyright year range to end with `– present`
+  * add SPDX short-form license identifiers
+(salishsea-site)
+
+Helped Susan set up conda env for DFO model analysis pkg.
+
+
+Wed 13-Jul-2022
+^^^^^^^^^^^^^^^
+
+MOAD coffee zoom.
+
+Drove to White Rock to visit J&M.
+Dropped Max at YVR.
+
+sarracenia clients for HRDPS and hydrometric obs got stuck with multiple connection refused
+and ssl protocol errors starting at ~05:30:
+* killed collect_weather 2.5km 12
+* restarted sarracenia clients
+* rmdir forcing dir
+* download_weather 2.5km 12
+* collect_weather 2.5km 18
+hydrometric obs still not working due to connection errors; stopped, waited minutes, started;
+checked at 13:30: still not working; restarted: still not working; checked files on dd.weather.gc.ca
+and found no updates in Fraser or Englishman csvs since 06:10; concluded that the problem in
+server-side.
+Finished running bash loop to produce 201905 month-averaged aux/chemistry files
+on a 4 worker x 4 threads stand-alone cluster in tmux on salish
+in /results2/SalishSea/month-avg.201905/:
+  2021
+  2022 jan-jun
+Name resolution failures when make_plots for x2 nowcast tried to connect to api-iwls.dfo-mpo.gc.ca;
+also HRDPS sarracenia client starting at ~14:00;
+pinged EOAS IT slack; power outage in EOS-Main and South.
+Restarted sarracenia clients after power restored; still erroring out.
+Manual HRDPS downloads for 2.5km 18 and 1 km 00 & 12 started at ~16:00.
+Manual HRDPS download for 2.5km 00.
+(SalishSeaCast)
+
+
+Thu 14-Jul-2022
+^^^^^^^^^^^^^^^
+
+Manual HRDPS download for 2.5km 06 at ~08:45.
+Started collect_weather 18.
+Still getting errors in sarracenia logs; stopped clients at 08:45; restarted them at 09:30;
+started to write email to Sandrine, then noticed that hydrometric obs were coming in; no publihser errors from HRDPS client either.
+Manual HRDPS download for 2.5km 12 at ~10:10
+nowcast-agrif got stuck at 46% due to node/infiniband failure; probably fallout from yesterday's powere bump induced crash; killed and restarted via `upload_forcing turbidity`
+(SalishSeaCast)
+
+Fixed GHA deployment workflow, apparently by just updating repo DEPLOY_KEY secret to 
+contents of SalishSeaNEMO-nowcast_id_rsa (which is what I believe it previous was); I tried
+updating it to several other inappropriate keys along the way though, so maybe just "refreshing"
+the key did the trick? This might also be a manifestation of the `PubkeyAcceptedKeyTypes=+ssh-rsa`
+thing that I had to do for orcinus and optimum, but I'm less convinced.
+Continued code maint on salishsea-site pkg;
+used NEMO-Cmd repo for guidance.
+* improved GHA workflows; forgot to create branch:
+  * change to run GHA workflows on push to any branch
+  * drop pkg caching from GHA workflows
+  * change GHA workflows to use mambaforge
+  * add name to Slack channel notification step
+* PR#18:
+  * Add GHA CodeQL scanning workflow
+  * Add CodeQL analysis badges to README & pkg dev docs
+* PR#19:
+  * Change to Python 3.10 for pkg dev & deployment
+  * Change rtd Python built tool to mambaforge-4.10
+  * Rename readthedocs.yml to .readthedocs.yaml
+  * Move requirements.txt to envs/
+  * Update pkgs & versions used in recent dev env
+  * Move entry points from setup.py to setup.cfg
+  * Drop setup.py and add pyproject.toml
+  * Move coverage.py config to pyproject.toml
+  * Explicitly exclude use of conda defaults channel
+Cleaned up stale remote branches.
+(salishsea-site)
+
+
+Fri 15-Jul-2022
+^^^^^^^^^^^^^^^
+
+FAL estate work:
+* prepared securities transfer form for BCE shares, took it to appt at TD w/ Sahi
+  for signature guarantee stamp, and UPS-ed it with tracking & receipt signature
+
+Updated mamba and conda in khawla base env:
+  mamba update -n base mamba
+  mamba update -n base conda
+mamba brought updates to the ususal collection of foundational pkgs with it:
+ca-certificates, certifi, openssl and their deps
+
+Explored the idea of using functools.partial() or .partialmethod() to reduce code duplication
+in Susan's results comparison figures code; no obviously simple way to 
+partial xarray.Dataset.plot() :-(
+
+Subscribed to dd_info email list w/ dlatornell@eoas address because old sub was dlatorne@eos, I think.
+
+ONC SoG nodes down.
+
+Discovered at ~20:00 that nowcast-x2 run was stalled; investigation:
+* fvcom0 was non-responsive w/ messages about stuck fvcom process in its log
+* recovery:
+  * hard reboot fvcom0 from dashboard
+  * mount /nemoShare/MEOPAR
+  * launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast"
+nowcast-r12 failed on luanch
+(SalishSeaCast)
+
+
+Sat 16-Jul-2022
+^^^^^^^^^^^^^^^
+
+Investigated nowcast-r12/15jul22 failure:
+* no restart; 14jul22 run stopped at about 75%
+* recovery:
+    wait for 16jul22 run to fail
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-07-14"
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-07-15"
+(SalishSeaCast)
+
+
+Sun 17-Jul-2022
+^^^^^^^^^^^^^^^
+
+Backfill nowcast-r12:
+    wait for 17jul22 run to fail
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-07-16"
+
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-07-17"
+(SalishSeaCast)
+
+
+
+
 TODO:
-* use ncatted to add standard_name in 
-    /results2/SalishSea/nowcast-green.201905/SalishSea_1d_*_carp_T.nc
-    /results2/SalishSea/nowcast-green.201905/SalishSea_1h_*_carp_T.nc
-  command:
-    ncatted -O -h -a standard_name,PAR,c,c,downwelling_photosynthetic_radiative_flux_in_sea_water infile outfile
-  test on 1 file to ensure that Reshapr is happy
-* pull SS-run-sets changes into production on arbutus
+* `reshapr extract` raises KeyError on y coordinate if variable requested is not in specified 
+  variable group
+
+  
+
+TODO:
+* Fix page footer:
+   © Copyright 2013 – present Salish Sea MEOPAR Project Contributors and The University of British Columbia 
+* get rid of _copyright_year_range()
+  
+Created 22.1 release on GitHub; deployed it to skookum.
+Bumped version to 22.2.dev0.
+(salishsea-site)
 
 
 
