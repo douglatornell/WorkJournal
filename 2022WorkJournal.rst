@@ -4176,7 +4176,7 @@ archive_tarball loop for 2008 working well
 may22 rsync is still going...
 (SalishSeaCast)
 
-Installed Vittoria Corsa 28mm tires w/ Champion latex tudbs on Gunnars.
+Installed Vittoria Corsa 28mm tires w/ Champion latex tubes on Gunnars.
 Installed chain and new rear brake cable w/o coupler on Impe.
 
 
@@ -4522,8 +4522,6 @@ Tested resampling on salish to produce month-averaged files from 201905 re-run:
 Started writing docs about dask cluster mgmt because I need to re-learn how to 
 manage a stand-alone cluster on salish that I can run a resampling loop against.
 (Reshapr)
-
-Phys Ocgy seminar: Tereza's defense presentations
 
 Team mtg.
 (Atlantis)
@@ -5560,16 +5558,162 @@ Sun 17-Jul-2022
 Backfill nowcast-r12:
     wait for 17jul22 run to fail
     launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-07-16"
-
     launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-07-17"
+(SalishSeaCast)
+
+
+Week 28
+-------
+
+Mon 18-Jul-2022
+^^^^^^^^^^^^^^^
+
+Cancelled my paper presentation for tomorrow; not ready; paper/pkg I was thinking about:
+  A New Open Source Implementation of Lagrangian Filtering: 
+  A Method to Identify Internal Waves in High-Resolution Simulations
+  Shakespeare, VJ, AH Gibson, AM Hogg, SD Bachman, SR Keating, N Velzeboer (2021), 
+  Journal of Advances in Modeling Earth Systems, 13, e2021MS002616
+  https://doi.org/10.1134/S1560354721050063
+
+  Code is at https://github.com/angus-g/lagrangian-filtering and 
+  docs at https://lagrangian-filtering.readthedocs.io/en/latest/
+(OceanParcels)
+
+Worked on performance review.
+
+Double resolution run on sockeye
+Checked storage: /result & /opp are 98% full; 377G & 471G free, respectively.
+Helped Susan w/ double resolution run on sockeye.
+(SalishSeaCast)
+
+MOAD group mtg.
+(MOAD)
+
+
+Tue 19-Jul-2022
+^^^^^^^^^^^^^^^
+
+Tried to run 5-yr average biology extraction for Karyn on khawla; lots of memoery use warnings;
+worked better on salish.
+
+Answered Becca's question about single point extraction for carbon/oxygen with suggestion to
+use Reshapr.
+
+Found bug re: missing default values for CLI start-date/end-date options; issue #34
+(Reshapr)
+
+Finished performance review for and passed to Susan.
+
+
+Wed 20-Jul-2022
+^^^^^^^^^^^^^^^
+
+Slack w/ Karyn & Becca re: Reshapr extractions.
+* Karyn's 5-yr average produced 2 time coordinate values, neither correct
+* Becca's all-of-201905 produced large chunk warnings due to slice, and failed
+  w/ KeyError on standard_name lookup
+
+MOAD coffee.
+
+Continued work on test_vars_list re: PR#33.
+(Reshapr)
+
+Walked to Rain or Shine for sundaes in afternoon heat.
+
+
+Thu 21-Jul-2022
+^^^^^^^^^^^^^^^
+
+Finished work on test_vars_list; merged PR#33.
+Resolved issue #34 re: default values for --start-date and --end-date; merged PR#35.
+Fixed some extraneous highlighting in `info` output; merged PR#36.
+Created issue #37 re: `reshapr extract` raises KeyError on y coordinate if variable requested is 
+not in specified variable group.
+Created issue #38 re: semantics of single point extractions and max+1 re: Becca's use case this 
+week.
+(Reshapr)
+
+Email from arbutus support; fvcom3 failed due to temperature; VM was migrated to a different
+hypervisor; mounted shared storage; r12 run failed to start:
+* host key changed
+* SalishSeaNEMO-nowcast key (id_rsa on nowcast0) missing from authorized_keys on fvcom3
+* restored key to fvcom3
+* cleaned up 
+* re-luanched r12 at ~13:15
+(SalishSeaCast)
+
+Phys Ocgy seminar: Christopher Peck, U Manitoba, La Grande River plume (east coast of James Bay)
+
+
+Fri 22-Jul-2022
+^^^^^^^^^^^^^^^
+
+Cycled to ESB via Kerrisdale and Pacific Spirit trails.
+
+Performance review mtg w/ Philippe.
+
+Started alpine base in Minecraft 1_18-1 world.
+
+
+Sat 23-Jul-2022
+^^^^^^^^^^^^^^^
+
+Planned power outage in EOS-Maind and -South.
+
+collect_weather 12 still waiting for files at 10:15; investigation:
+* name resolution failures
+* recovery:
+    kill collect_weather 12 2.5km
+    collect_weather 18 2.5km
+    wait for power to come back on at 11:00
+    download_weather 12 2.5km
+(SalishSeaCast)
+
+Walked in Pacific Spirit Park; Nature, Swordfern & Hucleberry trails.
+(~2.5 hr)
+
+
+Sun 24-Jul-2022
+^^^^^^^^^^^^^^^
+
+Cycled Iona loop on Gunnars
+(40 km)
+
+nowacst-agrif stuck on launch; lots of TCP failure messages from compute nodes;
+killed job; killed watcher; re-submitted job; confirmed that it was time stepping; 
+launched new watcher.
+ww3 nowcast stuck on launch; discovered that nowcast2 was non-responsive; hard reboot from web 
+dashboard, then re-mount shared storage; use launch_remote_worker on skookum to re-run 
+make_ww3_wind_file and make_ww3_current_file to restart automation
 (SalishSeaCast)
 
 
 
 
+
+
+
 TODO:
-* `reshapr extract` raises KeyError on y coordinate if variable requested is not in specified 
-  variable group
+* add bottleneck and flox to envs & install requirements
+* write use case for Karyn's 5-yr average biololgy
+* write use case for Becca's single point, 2 depths physics & chemistry
+* Becca's single point extraction triggers:
+    /home/dlatorne/conda_envs/reshapr/lib/python3.10/site-packages/xarray/core/indexing.py:1228: PerformanceWarning: Slicing is producing a large chunk. To accept the large
+    chunk and silence this warning, set the option
+        >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
+        ...     array[indexer]
+
+    To avoid creating the large chunks, set the option
+        >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
+        ...     array[indexer]
+      return self.array[key]
+  then fails with:
+    Traceback (most recent call last):
+    File "/ocean/dlatorne/MOAD/Reshapr/reshapr/core/extract.py", line 655, in calc_extracted_vars
+      std_name = var.attrs["standard_name"]
+    KeyError: 'standard_name'
+
+
 
   
 
@@ -5587,6 +5731,11 @@ Bumped version to 22.2.dev0.
 Add Tereza's pubs to citations, etc.
 
 
+Set up VSCode for reStructuredText editing of docs.
+* Used https://github.com/ammaraskar/sphinx-problem-matcher to add a VSCode problem-matcher
+  to sphinx build task.
+
+
 TODO:
   EGBC firm registration next steps by 30-Sep
     * online training (counts as regulatory)
@@ -5594,8 +5743,6 @@ TODO:
 
 
 Reshapr ideas:
-* `reshapr info` sub-command for discovery; PR #33:
-  * `reshapr info <model profile> <time base> <variable group>` lists variable
 * extraction config examples in docs:
   * simple whole field extraction for a few variables
   * temporal and spatial selection
@@ -5665,7 +5812,7 @@ Fix ariane docs:
 
 
 
-Update ONC URLs to https://data.oceannetworks.ca/
+Update ONC URLs from dmas.uvic.ca to https://data.oceannetworks.ca/
 
 jupyter kernelspec uninstall unwanted-kernel
 
