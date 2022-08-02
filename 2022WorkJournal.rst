@@ -5562,7 +5562,7 @@ Backfill nowcast-r12:
 (SalishSeaCast)
 
 
-Week 28
+Week 29
 -------
 
 Mon 18-Jul-2022
@@ -5688,7 +5688,264 @@ make_ww3_wind_file and make_ww3_current_file to restart automation
 (SalishSeaCast)
 
 
+Week 30
+-------
 
+Mon 25-Jul-2022
+^^^^^^^^^^^^^^^
+
+Updated PyCharm on khawla to 2022.1.4.
+
+Worked on weird time coordinate values in year-average extractions (Karyn's 5-yr average use case):
+* ran 1 year; has expected time coordinate value: 2015-07-01 12
+* ran 2 years for just nitrate; way faster; has 2 time coordinate values and they are weird:
+  "2014-12-31 12", "2016-12-30 12"
+* ran 2 years for just nitrate w/ label="left" and loffset commented out; 
+  has 2 time coordinate values and they are weird: "2015-12-31", "2017-12-31"
+* ran 2 years for just nitrate w/ label="left" and loffset commented out and time interval A 
+  instead of 2A; 
+  has 2 time coordinate values that make sense: "2015-12-31", "2016-12-31"
+* restored label="left" and loffset
+* ran 2 years for just nitrate and time interval 731D instead of 2A; 
+  has 1 time coordinate value that makes sense: "2016-01-01 12:00:00"
+* 2015-2017 and 2016-2018 w/ 24M time interval; 2 time coordinate values
+* ran 5 years for just nitrate and time interval 1826D (4 * 365 + 366); 
+  has 1 time coordinate value that makes sense: "2017-07-02 00:00:00"
+* ran 5 years for all variables; success!! 8095s = 2.25h
+Created PR#39 re: docs improvements:
+* pulled YAML out of Atlantis diatoms use case blurb file into separate file so that I can run it
+Ran Atlantis day-avg diatoms extration for jan07 with deflation for Raisha to test; 244M vs. 1.7G.
+Reviewed late-2020 pkgs & envs presentation notebook in 
+https://github.com/UBC-MOAD/PythonNotes/tree/master/pkgs-envs
+re: planning for Reshapr workshop.
+Started dev of slides notebook for Reshapr Intro workshop in branch in 
+UBC-MOAD/PythonNotes/reshapr-intro/.
+(Reshapr)
+
+Reviewed late-2020 pkgs & envs presentation notebook in 
+https://github.com/UBC-MOAD/PythonNotes/tree/master/pkgs-envs
+re: planning for Reshapr workshop.
+
+MOAD group mtg.
+(MOAD)
+
+Beginning of heat wave
+
+
+Tue 26-Jul-2022
+^^^^^^^^^^^^^^^
+
+Hotter than yesterday.
+
+Worked at ESB while Rita was at home.
+
+collect_weather 12 didn't finish:
+* connection refused msgs in log; also "broker forced connection closure" and queue declaration
+  failures for both hrdps and hydrometric; so, probably publisher issue
+  * 499 of 576 files downloaded
+  * recovery started at ~11:00
+      kill collect_weather 12
+      collect_weather 18 2.5km
+      download_weather 12 2.5km
+* upload_forcing to orcinus failed due to connection timeout
+(SalishSeaCast)
+
+Started work on metadata cleanup for 201905 dia2_T files (grazing & mortality) in Slack direct msg 
+w/ Susan & Karyn.
+(SS-run-sets)
+
+Attended Ben's Ph.D. defense and the subsequent pub outing to Keorner's patio.
+
+
+Wed 27-Jul-2022
+^^^^^^^^^^^^^^^
+
+Hottest day yet.
+
+Took a van-load of bikes and parts to OCB; Vitali, red Marinoni, On-Ones, Rock hoppers, and
+MEC commuter that was stolen & returned; also saddles, platform pdeals, and Avid disk brake pads.
+
+nowcast-agrif failed due to no restart because yesterday's run didn't happen; yesterday's outage was due to network address change maintenance; recovery:
+  upload_forcing orcinus nowcast+ --run-date 2022-07-26
+    failed with:
+      paramiko.ssh_exception.SSHException: encountered RSA key, expected OPENSSH key
+    seems like a flaky login node; Mark confirmed maintenance
+  upload_forcing orcinus turbidity --run-date 2022-07-26
+  wait for 26jul22 run to complete
+  watch_NEMO_agrif failed due to connection issue; try again tomorrow
+collect_weather 18 was atter 17:00; ran download_weather 00 1km --yesterday; accidentally deleted
+26jul22 1km downloads
+(SalishSeaCast)
+
+Slept on the airbed in the tent on the patio.
+
+
+Thu 28-Jul-2022
+^^^^^^^^^^^^^^^
+
+collect_weather 12 slow:
+  132 of 576 by 08:15 then pause...
+  276 of 576 by 10:15 then pause...
+  finished at 11:27
+NEMO forecast got stuck at 84.7%:
+  errors in ocean.output:
+      ===>>> : E R R O R
+             ===========
+
+            iom_get_123d, file: ./NEMO-atmos/ops_y2022m07d30.nc, var: atmpres
+          start and count too big regarding to the size of the data, 
+          (istart(3) + icnt(3) - 1) =     8 
+          is larger than idimsz(3) =     7 
+  killed watcher
+  make_turbidity_file  # resume automation to start nowcast-green and nowacst-agrif
+Backfill nowacst-agrif:
+  download_results nowcast-agrif 2022-07-26
+  wait for run to fail
+  upload_forcing orcinus nowcast+ --run-date 2022-07-27
+  upload_forcing orcinus turbidity --run-date 2022-07-27
+  make_forcing_links orcinus nowcast-agrif 2022-07-28
+make_ww3_current_file failed in preparation for WWatch3 nowcast run;
+recovery:
+  upload_forcing nowcast+ --debug
+  make_forcing_links nowcast+ --debug
+  make_forcing_links ssh --debug
+  run_NEMO arbutus.cloud-nowcast forecast --debug  # on arbutus
+  wait for run to finish
+  download_results arbutus forecast
+
+  make_ww3_wind_file arbutus forecast
+  make_ww3_current_file arbutus forecast
+(SalishSeaCast)
+
+Phys OCgy seminar: Shilliang (Dan) Shan, RMC, wind driven upwelling on the Scotia Shelf
+
+Continued work on metadata cleanup for 201905 dia2_T files (grazing & mortality) in Slack direct 
+msg w/ Susan & Karyn.
+Started on prod_T files (biology & chemistry rates).
+(SS-run-sets)
+
+
+Fri 29-Jul-2022
+^^^^^^^^^^^^^^^
+
+PyCharm webinar: I Can't Believe It's Not Real Data! An Introduction into Synthetic Data,
+Mason Egger, Developer Advocate at Gretel.ai, @masonegger
+* Jodie Burchell, host
+* Gretel.ai generates synthetic data as a service
+* gretelai on GitHub
+* models that generate synthetic data; blog
+* GPT3: text data generation
+* Lumina syth genomic data
+* access to relevant data for testing/training bocked by personal privacy regulations (PII)
+* 35% of time spent in data gathering stage
+* synth data generated from real initial data; how, given PII???
+* benefits:
+  * making private data accessible & sharable
+    * statistical similarity
+  * augment small datasets
+    * but bad small data generates bad big data
+    * public section issue due to inaccessible formats like PDFs
+  * reduce bias in data sets
+    * identify bias in data; use synth data to balance
+    * https://gretel.ai/blog/reducing-ai-bias-with-synthetic-data
+* time series data gen using DoppelGANger (open source)
+* challenges:
+  * highly dimensional data is compute-intensive
+  * relational dataset require manual config
+  * privacy preservation requires logs of real data to operate on to provide strong security
+  * not that fast
+* uses
+  * robotics training
+  * financial Services
+  * cybersecurity
+  * healthcare
+  * manufacturing & supply chain
+* getel.ai is all open-source; GPUs required; kubernetes; free tier; Python & Rust APIs
+* differential privacy: add noise to obs that is proportional to variable in real data
+* Jupyter notebook demo:
+  * greta-client pkg
+    * API access key, OAuth
+  * dispatches job to gretel cloud
+* TPU == Tensor Processing Unit (Google GPU)
+* docs.gretel.ai
+* gretelai/gretel-blueprints
+* mason.dev
+
+Discussed storage of hindcast spin-up products w/ Susan; agreed on storage on optimum
+(where pressue to delete is low and products are most likely to be reused in case of disaster),
+/ocean (to avoid collocation w/ production products on /results*, /data, /opp),
+and graham:nearline/
+
+Reviewed storage pressure:
+  ~$ df -h /data /opp /results /results2
+  Filesystem        Size  Used Avail Use% Mounted on
+  /dev/sdb1          37T   33T  2.3T  94% /data
+  /dev/sdc1          19T   17T  440G  98% /opp
+  skookum:/results   19T   17T  217G  99% /results
+  /dev/sdd1          89T   42T   43T  50% /results2
+* /opp/
+  * confirmed that all of /opp/GEMLAM/ is preserved on graham:nearline/
+  * deleted /opp/GEMLAM/2014/ to free 1.3T
+* /results/
+  * removed erddap-dataset.hg/
+  * forcing/ is 1.9T
+  * confirmed that nowcast-green.201812/ (11T) 2015-2019 are on graham:nearline
+  * /results/SalishSea/nowcast-green.201812/ contains 01jan15 to 30jun19
+  * deleted SalishSea_1[dh]_*.nc to free ~9.9T
+Modified /results2/SalishSea/nowcast-green.201905/add_std_name.sh to do all of SalishSea_1d_*dia2_T.nc variables and ran it for 2007 to today.
+Started running bash loop to produce 201905 month-averaged grazing & mortality files
+on a 4 worker x 4 threads stand-alone cluster in tmux on salish
+in /results2/SalishSea/month-avg.201905/ for 2007 to 2017
+Cherry-picked 3 dia2_T file commits from SS-run-sets improve-201905-metadata branch in 
+SS-run-sets on arbutus so that tomorrow-onward files will have standard_name attrs.
+(SalishSeaCast)
+
+Continued work on prod_T files (biology & chemistry rates); sorted out gross primary productivity
+standard names with Susan.
+Created PR#2 as draft.
+(SS-run-sets)
+
+Sent out when2meet for Reshapr Intro session: https://www.when2meet.com/?16258775-HSMB7
+(Reshapr)
+
+
+Sat 30-Jul-2022
+^^^^^^^^^^^^^^^
+
+Started running bash loop to produce 201905 month-averaged grazing & mortality files
+on a 4 worker x 4 threads stand-alone cluster in tmux on salish
+in /results2/SalishSea/month-avg.201905/: 2018 to 2022-jun
+forecast2 and nowcast-blue failed due to XML parse errors; see notes re: SS-run-sets below.
+Cherry-picked SS-run-sets channges re: productivity standard_name attrs and tag closure
+reversion into production on arbutus.
+(SalishSeaCast)
+
+Reverted change to explicit closure tags in field_def.xml; I made a spelling mistake in my
+change, but on examination of XIOS's rejection of that, noted that the only other places
+where explicity </field> tags are used are where XIOS is being given a calculation to do;
+worried that it would look for calculations to do where there are none if I use </field>
+tags generally, I decided to live with <field ... />.
+(SS-run-sets)
+
+Drove to White Rock to visit J&M.
+
+
+Sun 31-Jul-2022
+^^^^^^^^^^^^^^^
+
+Cycled Greenway to North Rd and back; early start to beat heat, humidity and traffic.
+(45 km)
+
+Goofed off.
+
+
+
+
+
+
+TODO:
+* add https://github.com/UBC-MOAD/PythonNotes/tree/master/pkgs-envs to MOAD conda docs
+  w/ instructions on how to view it as slides
 
 
 
@@ -5697,6 +5954,8 @@ TODO:
 * add bottleneck and flox to envs & install requirements
 * write use case for Karyn's 5-yr average biololgy
 * write use case for Becca's single point, 2 depths physics & chemistry
+* write use case for month-average model products
+* move use cases from design notes to use examples in docs
 * Becca's single point extraction triggers:
     /home/dlatorne/conda_envs/reshapr/lib/python3.10/site-packages/xarray/core/indexing.py:1228: PerformanceWarning: Slicing is producing a large chunk. To accept the large
     chunk and silence this warning, set the option
