@@ -303,7 +303,7 @@ SHARCNET webinar:
 * Remote Dev on Clusters w/ VSCode
 * vcpkg - c/c++ pkg mgr
 * GitHub sharcnet/vscode-hpc
-* moduled have to be loaded via ~/.bashrc; e.g.
+* modules have to be loaded via ~/.bashrc; e.g.
     module load cmake cuda scipy-stack/2020a ipykernel
 * demo of local Code on windows
 * cmake:
@@ -5929,6 +5929,11 @@ tags generally, I decided to live with <field ... />.
 
 Drove to White Rock to visit J&M.
 
+Discussed w/ Susan a scheme to store research paper citation data in 1 place and process
+it from there into website, ERDDAP front page, and ERDDAP dataset comment metadata.
+Also discussed spitting website citations into parts for papers people should cite
+when they use SalishSeaCast, and papers that use SalishSeaCast products.
+
 
 Sun 31-Jul-2022
 ^^^^^^^^^^^^^^^
@@ -5939,7 +5944,221 @@ Cycled Greenway to North Rd and back; early start to beat heat, humidity and tra
 Goofed off.
 
 
+August
+======
 
+Week 31
+-------
+
+Mon 1-Aug-2022
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Emancipation Day
+
+Cycled 8th, Balaclava, 29th, Camosun, Salish Trail, Spanish Banks, Jericho, Pt. Grey loop;
+early start to beat heat and traffic.
+(20 km)
+
+Goofed off.
+
+
+Tue 2-Aug-2022
+^^^^^^^^^^^^^^
+
+Heat warning ended. Slept indoors last night.
+
+Squash-merged dependabot PRs re: catastrophic backtracking in inline markup in mistune
+* UBC-MOAD/docs
+* 43ravens/ECget
+* SalishSeaCast/SOG-Bloomcast-Ensemble
+* SalishSeaCast/analysis-doug/dask-expts
+* SalishSeaCast/analysis-doug/melanie-geotiff
+* SalishSeaCast/tools
+* SalishSeaCast/docs
+
+Group mtg.
+(OceanParcels)
+
+Continued work on slides notebook for Reshapr Intro workshop in branch in 
+UBC-MOAD/PythonNotes/reshapr-intro/.
+(Reshapr)
+
+nowcast r12 failed to launch due to 
+`packet_write_wait: Connection to 192.168.238.9 port 22: Broken pipe`
+* investigation:
+  * fvcom4 non-responsive
+  * log has logs of messages like:
+      [45739127.900239] INFO: task systemd-journal:601 blocked for more than 120 seconds.
+      [45739127.905009]       Not tainted 4.15.0-135-generic #139-Ubuntu
+      [45739127.908879] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+  * similar to other recent VM lock-ups
+* recovery started at ~14:15
+  * hard reboot of fvcom4 from web dashboard
+  * mount shared storage fon fvcom4
+  * on skookum:
+      launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast"
+* failed again
+* ssh to fvcom1 gets stuck; log shows similar messages; hard reboot from web dashboard
+* fvcom2 shows similar messages; hard reboot from web dashboard
+* another launch attempt from skookum; failed again on connection to fvcom4
+* swapped fvcom1 for fvcom4 in mpi_hosts.fvcom.r12
+* another launch attempt from skookum; failed again on connection to fvcom6
+* gave up
+(SalishSeaCast)
+
+
+Wed 3-Aug-2022
+^^^^^^^^^^^^^^
+
+Raisha asked for implementation of -h flag for fisheries harvest that we discussed previously;
+issue #3.
+Created local harvest-flag branch.
+Looks like impmentation can be exactly analogous to -m migrations flag in PR#11.
+Asked Raisha to confirm type of harvest file; .csv?
+(Atlantis)
+
+Scheduled Reshapr intro session for 10:30 to 12:00 on Friday.
+Continued work on slides notebook for Reshapr Intro workshop in branch in 
+UBC-MOAD/PythonNotes/reshapr-intro/.
+Reviewed and polished with Susan.
+Invited Amber, Michael & Natasha to Friday session or their own later private session; 
+Amber is away.
+(Reshapr)
+
+Reviewed and tweaked file system settings for Cassidy:
+  sudo chgrp sallen /ocean/cdonaldson/
+  sudo chmod g+s /ocean/cdonaldson/
+  sudo chgrp sallen /data/cdonaldson/
+  sudo chmod g+s /data/cdonaldson/
+Confirmed that /home/cdonaldson/ exists and has cdonaldson:cdonaldson ownership.
+**cdonaldson needs to be added to sallen group** - done by Henryk
+
+Tried to backfill nowcast-r12/02aug22; failed.
+Discovered that 01aug22 run failed due to connection error on fvcom4.
+Killed watcher.
+Started backfilling at 01aug22:
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-08-01"
+  running, but no progress messages
+  restarted log_aggregator
+  estimated run time is ~8h40m!!!
+(SalishSeaCast)
+
+
+Thu 4-Aug-2022
+^^^^^^^^^^^^^^
+
+upload_forcing failed for forecast2 and nowcast due to missing Neah Bay obs; obs file was not created by make_ssh_files, and symlink creation race condition in upload_forcing; recovery:
+* manually created symlink from fcst/ssh_y2022m08d03.nc to obs/ssh_y2022m08d03.nc
+* ran upload_forcing nowcast+ to all 4 destinations
+Continued backfilling nowcast-r12:
+  wait for r12 run from automation to fail at ~12:15
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-08-02"
+  wait for run to finish at ~22:15
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-08-03"
+(SalishSeaCast)
+
+Added -h flag for harvest.prm file; issue #3 and PR#13.
+Helped Raisha with git wrangling to test PR branch; test showed that we also need -q flag for
+fisheries.csv file; added that.
+Raisha got a run time stepping with PR branch; rebase-merged.
+(AtlantisCmd)
+
+Project mtg.
+(Atlantis)
+
+Puzzled over Michael's email about transposition of netCDF files to make time fastest changing
+coordinate rather than slowest.
+Buffed slides notebook for presentation tomorrow.
+(Reshapr)
+
+
+Fri 5-Aug-2022
+^^^^^^^^^^^^^^
+
+Intro presentation from UBC-MOAD/PythonNotes/reshapr-intro/ notebook to MOAD, 
+Michael & Natasha @IOS and Greig @IOF
+* discussion items:
+  * model profile for ANHA12 on graham
+  * model profile(s) for SalishSeaCast-201905 and others on graham
+  * cluster config for interactive sessions on graham
+  * "slicing creates large chunks" warning/failure issue 
+  * output chunk control for special cases
+  * coordinate permutations
+  * Michael's trick for pkg editable install in conda env YAML file:
+    - pip:
+          -e .
+(Reshapr)
+
+Continued backfilling nowcast-r12:
+  wait for r12 run from automation to fail at ~12:00
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-08-04"
+  wait for run to finish at ~22:15
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-08-05"
+nowacst-agrif failed due to no 04aug22/namelist_cfg **investigate**
+(SalishSeaCast)
+
+
+Sat 6-Aug-2022
+^^^^^^^^^^^^^^
+
+nowcast-agrif failures investivation:
+* upload_forcing turbidity failed on 4aug due to SSH protocol banner issue;
+  probably login node network stack glitch
+* recovery started at ~13:00
+    upload_forcing orcinus turbidity 2022-08-04
+    wait for run to finish
+    make_forcing_links orcinus nowcast-agrif 2022-08-05
+    wait for run to finish
+
+    make_forcing_links orcinus nowcast-agrif 2022-08-06
+wwatch3 nowcast got stuck waiting for time steps; investigation:
+* yesterday's run stalled w/ no output
+* recovery started at ~14:30:
+    cleaned up directories
+    launch_remote_worker arbutus make_ww3_wind_file "arbutus forecast 2022-08-05"
+    launch_remote_worker arbutus make_ww3_current_file "arbutus forecast 2022-08-05"
+    no time steps
+    nowcast9 is non-responsive; log shows lots of:
+      [47082373.969252] INFO: task jbd2/vda1-8:477 blocked for more than 120 seconds.
+      [47082373.974257]       Not tainted 4.15.0-135-generic #139-Ubuntu
+      [47082373.978060] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+    and
+      [47082373.983560] INFO: task systemd-journal:21576 blocked for more than 120 seconds.
+      [47082373.988497]       Not tainted 4.15.0-135-generic #139-Ubuntu
+      [47082373.992436] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.    
+    did a hard reboot of nowcast9 from web dashboard
+    cleaned up directories
+    launch_remote_worker arbutus make_ww3_wind_file "arbutus forecast 2022-08-05"
+    launch_remote_worker arbutus make_ww3_current_file "arbutus forecast 2022-08-05"
+    wait for runs to finish
+    launch_remote_worker arbutus make_ww3_wind_file "arbutus forecast 2022-08-06"
+    launch_remote_worker arbutus make_ww3_current_file "arbutus forecast 2022-08-06"
+(SalishSeaCast)
+
+
+Sun 7-Aug-2022
+^^^^^^^^^^^^^^
+
+Goofed off!
+
+Installed MultiMC on khawla: conda envs but for Minecraft.
+Successfully tested local 1.19.2 with updated mods and shaders (no resource packs).
+Experimented with Tweakeroo to get free camera feature; could have used FreeCam mod,
+but Tweakeroo is part of the Malilib/MiniHUD/Litematica ecosystem that we already use.
+
+
+
+
+TODO:
+* add yyyy() and nemo_yyyy_mm() date format functions for Greig
+* add note to model profile docs re: no `depth coord` item for files that contain only 
+  2D fields
+
+
+
+
+TODO:
+* citations data ideas discussed w/ Susan on 30-Jul drive to White Rock
 
 
 
@@ -5956,6 +6175,30 @@ TODO:
 * write use case for Becca's single point, 2 depths physics & chemistry
 * write use case for month-average model products
 * move use cases from design notes to use examples in docs
+* `reshapr info SalishSeaCast-201905 day biology` with no access to results archive
+  (on khawla without ffhfs mount of /results2) triggers:
+    Traceback (most recent call last):
+      File "/home/doug/conda_envs/reshapr-dev/bin/reshapr", line 33, in <module>
+        sys.exit(load_entry_point('Reshapr', 'console_scripts', 'reshapr')())
+      File "/home/doug/conda_envs/reshapr-dev/lib/python3.10/site-packages/click/core.py", line 1128, in __call__
+        return self.main(*args, **kwargs)
+      File "/home/doug/conda_envs/reshapr-dev/lib/python3.10/site-packages/click/core.py", line 1053, in main
+        rv = self.invoke(ctx)
+      File "/home/doug/conda_envs/reshapr-dev/lib/python3.10/site-packages/click/core.py", line 1659, in invoke
+        return _process_result(sub_ctx.command.invoke(sub_ctx))
+      File "/home/doug/conda_envs/reshapr-dev/lib/python3.10/site-packages/click/core.py", line 1395, in invoke
+        return ctx.invoke(self.callback, **ctx.params)
+      File "/home/doug/conda_envs/reshapr-dev/lib/python3.10/site-packages/click/core.py", line 754, in invoke
+        return __callback(*args, **kwargs)
+      File "/media/doug/warehouse/MOAD/Reshapr/reshapr/cli/info.py", line 63, in info
+        reshapr.core.info.info(cluster_or_model, time_interval, " ".join(vars_group))
+      File "/media/doug/warehouse/MOAD/Reshapr/reshapr/core/info.py", line 49, in info
+        _model_profile_info(cluster_or_model, time_interval, vars_group, console)
+      File "/media/doug/warehouse/MOAD/Reshapr/reshapr/core/info.py", line 116, in _model_profile_info
+        _vars_list(model_profile, time_interval, vars_group, console)
+      File "/media/doug/warehouse/MOAD/Reshapr/reshapr/core/info.py", line 173, in _vars_list
+        ds_path = next(results_archive_path.glob(nc_files_pattern))
+    StopIteration
 * Becca's single point extraction triggers:
     /home/dlatorne/conda_envs/reshapr/lib/python3.10/site-packages/xarray/core/indexing.py:1228: PerformanceWarning: Slicing is producing a large chunk. To accept the large
     chunk and silence this warning, set the option
