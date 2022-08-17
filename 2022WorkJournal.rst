@@ -5806,18 +5806,18 @@ Backfill nowacst-agrif:
   make_forcing_links orcinus nowcast-agrif 2022-07-28
 make_ww3_current_file failed in preparation for WWatch3 nowcast run;
 recovery:
+  grib_to_netcdf nowcast_ --debug
   upload_forcing nowcast+ --debug
   make_forcing_links nowcast+ --debug
   make_forcing_links ssh --debug
   run_NEMO arbutus.cloud-nowcast forecast --debug  # on arbutus
   wait for run to finish
   download_results arbutus forecast
-
   make_ww3_wind_file arbutus forecast
   make_ww3_current_file arbutus forecast
 (SalishSeaCast)
 
-Phys OCgy seminar: Shilliang (Dan) Shan, RMC, wind driven upwelling on the Scotia Shelf
+Phys Ocgy seminar: Shilliang (Dan) Shan, RMC, wind driven upwelling on the Scotia Shelf
 
 Continued work on metadata cleanup for 201905 dia2_T files (grazing & mortality) in Slack direct 
 msg w/ Susan & Karyn.
@@ -5912,7 +5912,7 @@ Sent out when2meet for Reshapr Intro session: https://www.when2meet.com/?1625877
 Sat 30-Jul-2022
 ^^^^^^^^^^^^^^^
 
-Started running bash loop to produce 201905 month-averaged grazing & mortality files
+Finished running bash loop to produce 201905 month-averaged grazing & mortality files
 on a 4 worker x 4 threads stand-alone cluster in tmux on salish
 in /results2/SalishSea/month-avg.201905/: 2018 to 2022-jun
 forecast2 and nowcast-blue failed due to XML parse errors; see notes re: SS-run-sets below.
@@ -6147,6 +6147,155 @@ Experimented with Tweakeroo to get free camera feature; could have used FreeCam 
 but Tweakeroo is part of the Malilib/MiniHUD/Litematica ecosystem that we already use.
 
 
+Week 32
+-------
+
+Mon 8-Aug-2022
+^^^^^^^^^^^^^^
+
+Group mtg.
+(MOAD)
+
+Confirmed that depth chunk size matches number of depth levels in extraction.
+Experimented with 2 layer extraction using depth chunk size of 1 vs. 40:
+* jan07, 40, 206.9s on khawla
+* jan07, 1, 189.8s on khawla
+* jan07, 40, 4526 tasks, 123.5s on khawlab
+* jan07, 1, 8990 tasks, 199.6s on khawla
+* jan07, 2, 4526 tasks, 139.9s on khawla
+* jan07, 40, 4526 tasks, 123.3s on khawla
+Worked on date formatter additions and refactoring in add-date-formatters branch; PR#40.
+Realized that Reshapr is presently hard-wired to process day-by-day files;
+Greig's use case has day-avg fields in month files; e.g.
+  /scratch/goldford/SalishSea-RUN203_1d_grid_U_y1984m04.nc
+Asked Birgit for path to ANHA12 5-day files:
+  /project/def-allen/brogalla/GEOTRACES/data/ANHA12/ANHA12-EXH006_5d_gridT_y2002m01d05.nc
+happy to see that they are day-by-day, with a 5 day stride.
+Neither Greig nor ANHA12 use deflation!
+(Reshapr)
+
+
+Tue 9-Aug-2022
+^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Finished work on prod_T files (biology & chemistry rates); sorted out surface CO2 flux
+standard name with Susan; merged PR#2.
+Realized that I forgot to do the TQ10 variable; Susan came up with a standard_name that fits the
+CF style.
+Modified /results2/SalishSea/nowcast-green.201905/add_std_name.sh to do all of SalishSea_1d_*prod_T.nc variables and ran it for 2007 to today.
+* HDF errors:
+    20aug20/SalishSea_1d_20200820_20200820_prod_T.nc
+    21aug20/SalishSea_1d_20200821_20200821_prod_T.nc
+    22aug20/SalishSea_1d_20200822_20200822_prod_T.nc
+  resolved on re-run of add_std_name.sh
+Started running bash loop to produce 201905 month-averaged biology & chemistry rates files
+on a 4 worker x 4 threads stand-alone cluster in tmux on salish
+in /results2/SalishSea/month-avg.201905/ for 2007 to 2016.
+Cherry-picked 2 prod_T file commits from SS-run-sets master branch in 
+SS-run-sets on arbutus so that tomorrow-onward files will have standard_name attrs
+and corrected surface CO2 flux long_name and units attrs.
+(SS-run-sets)
+
+
+Wed 10-Aug-2022
+^^^^^^^^^^^^^^^
+
+Finished running bash loop to produce 201905 month-averaged biology & chemistry rates files
+on a 4 worker x 4 threads stand-alone cluster in tmux on salish
+in /results2/SalishSea/month-avg.201905/ for 2017 to 2022-jul.
+(SS-run-sets)
+
+forecast2 nowcast got stuck waiting for time steps; investigation:
+* nowcast4 is non-responsive; repeated jbd2/vda1 blocked msgs
+* recovery started at ~09:00:
+    cleaned up directories
+    did a hard reboot of nowcast4 from web dashboard
+    mounted shared storage on nowcast4
+    skipped forecast2 runs
+    make_forcing_links arbutus nowcast+
+(SalishSeaCast)
+
+Prius regular service:
+* oil change & tire/brake inspection; tires are 8/32s, brakes are 8mm front, 7mm rear
+* **rear wiper blade & cabine air filter should be replaced**
+* hot oil flush
+* brake fluid change
+* fuel system service; cleaned injectors
+
+Cleaned the espresso machine.
+
+Helped Karyn find GEMLAM HRDPS atmos forcing files and warned her of their ideocyncracies.
+
+Squash-merged dependabot PRs in 43ravens/ECget re:
+* html5lib re: cross-site scripting (XSS)
+* html5lib re: improper input neutralization
+* notebook token bruteforcing
+* nbconvert XSS
+Squash-merged dependabot PRs in SalishSeaCast/tools & SalishSeaCast/analysis-doug re:
+* nbconvert XSS
+(MOAD)
+
+Updated nodecraft server to 1.19.2:
+* stopped server
+* created Scurry Junkertown backup
+* used 1 click installer to change version from 1.19 w/ fabric 1.19-0.14.6 to
+  1.19.2 w./ fabric 1.19.2-0.14.9 via archive method
+* copied files from _old_files/2022-08-10T22-46-01-276Z/ to /:
+    1_18-1/ (world)
+    banned-ips.json
+    banned-players.json
+    eula.txt
+    ops.json
+    server.properties
+    whitelist.json
+* no need to update coordinatesHUD and doubleshulkerShells datapacks; release versions are unchanged
+* server started successfully
+* uploaded to /mods/:
+    lithium-fabric-mc1.19.2-0.8.3.jar
+    phosphor-fabric-mc1.19.x-0.8.1.jar
+* restarted server
+* re-purposed Fabric 1.19.2 testing instance to become Nodecraft 1.19.2
+  * had some hassels getting big streen resolution
+  * manually configured MiniHUD, but could have copied minihud.json from config folder of
+    another instance
+* copied resource packs from Nodecraft 1.19 instance; no new releases:
+    BorderlessStainedGlass
+    ClearerWater
+    LowerShield
+    RedstonDevices (my name for hoopers, droppers, dispensers, observers & levers together)
+
+
+Thu 11-Aug-2022
+^^^^^^^^^^^^^^^
+
+Team mtg.
+Started review/comments on Raisha & Sara paper; others won't finish until end of Aug.
+(Atlantis)
+
+
+Fri 12-Aug-2022
+^^^^^^^^^^^^^^^
+
+Finished review/comments on Raisha & Sara paper.
+(Atlantis)
+
+Created issue #41 re: extractions from ANHA12 for Birgit.
+Added comment to PR#40 about need for other than day-by-day date stepping in calc_ds_paths()
+and how that requirement is related to issue #32 re: month-average datasets 
+and issue #40 re: ANHA12.
+(Reshapr)
+
+
+
+
+
+
+
+
+
+
 
 
 TODO:
@@ -6170,7 +6319,7 @@ TODO:
 
 
 TODO:
-* add bottleneck and flox to envs & install requirements
+* add bottleneck and flox to envs & install requirements - added to dev & test envs
 * write use case for Karyn's 5-yr average biololgy
 * write use case for Becca's single point, 2 depths physics & chemistry
 * write use case for month-average model products
