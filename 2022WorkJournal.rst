@@ -6109,7 +6109,6 @@ nowcast-agrif failures investivation:
     wait for run to finish
     make_forcing_links orcinus nowcast-agrif 2022-08-05
     wait for run to finish
-
     make_forcing_links orcinus nowcast-agrif 2022-08-06
 wwatch3 nowcast got stuck waiting for time steps; investigation:
 * yesterday's run stalled w/ no output
@@ -6287,6 +6286,197 @@ and how that requirement is related to issue #32 re: month-average datasets
 and issue #40 re: ANHA12.
 (Reshapr)
 
+
+Sat 13-Aug-2022
+^^^^^^^^^^^^^^^
+
+Vancouver to Longbeach on West Arm of Kootenay Lake, east of Nelson.
+Rest area stop west of Hope.
+Lunch at Fanny's Café in Princeton
+Stopped at Mom & Pop's Fruit Stand in Keremeos
+Rest area stop at Boundary Creek provincial campground
+
+
+Sat 13-Aug-2022
+^^^^^^^^^^^^^^^
+
+Vacation at Longbeach Suites near Nelson
+
+
+Week 33
+-------
+
+Mon 15-Aug-2022
+^^^^^^^^^^^^^^^
+
+Vacation at Longbeach Suites near Nelson
+
+
+Tue 16-Aug-2022
+^^^^^^^^^^^^^^^
+
+Vacation at Longbeach Suites near Nelson
+
+Drove to Nelson
+Coffee & blueberry cinnamon buns at Kootenay Lake Bakery
+Walked length of Baker St.
+Shopped at Co-op
+
+
+Wed 17-Aug-2022
+^^^^^^^^^^^^^^^
+
+Vacation at Longbeach Suites near Nelson
+
+Drove 16km up very rough Kokanee Provincial Park access road to Kokanee Lake trailhead.
+Walked around Gibson Lake (2.4 km)
+Hiked up to ~2000m pass above Kokanee Lake and back to trailhead (10 km)
+Went to Balfour Supperette for groceries.
+
+collect_weather 12 didn't store any files; no obvious reason, though #it-support has hints
+of a problem this morning
+recovery started at ~16:00
+  kill collect_weather 12
+  rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20220817/12
+  download_weather 12 2.5 km
+  download_weather 18 2.5 km
+  download_weather 00 1km
+  download_weather 12 1km
+  collect_weather 00 2.5km
+(SalishSeaCast)
+
+
+Thu 18-Aug-2022
+^^^^^^^^^^^^^^^
+
+Vacation at Longbeach Suites near Nelson
+
+Cycled to Balfour ferry, crossed, and rode over the hill to Crawford Bay and back
+(32 km)
+
+
+Fri 19-Aug-2022
+^^^^^^^^^^^^^^^
+
+Vacation at Longbeach Suites near Nelson
+
+Drove to Kaslo.
+Cycled Hwy 31 to Meadow Creek and back. Big climb out of Kaslo. Hilly to Lardeau Valley at head
+of Kootenay Lake and mouth of Duncan River, then a fast flat-ish section to Meadow Creek.
+Hills were steeper on west sides than on east. Rolling time was almost exactlly 2h each way.
+(81 km)
+
+See work journal.
+(Resilient-C)
+
+
+Sat 20-Aug-2022
+^^^^^^^^^^^^^^^
+
+Vacation at Longbeach Suites near Nelson
+
+
+Sun 21-Aug-2022
+^^^^^^^^^^^^^^^
+
+Vacation at Longbeach Suites near Nelson
+
+
+Week 34
+-------
+
+Mon 22-Aug-2022
+^^^^^^^^^^^^^^^
+
+Vacation at Longbeach Suites near Nelson
+
+Rode Great Northern Rail Trail from Cottonwood Lake through Ymir to Salmo and back.
+(68 km)
+
+
+Tue 23-Aug-2022
+^^^^^^^^^^^^^^^
+
+Vacation at Longbeach Suites near Nelson
+
+Explored around Harrop and Procter; Sunshine Bay, Lasca Creek Rd.
+(30 km)
+Went to Le Grand Fromage cheese shop and Backroads Brewing.
+Explored Stanley St, Gore St, Innis St neighbourhood where Latornells lived.
+Found Bobbie Latornell window in St. Saviour church.
+Visited Kokanee Creek spawning channel where Kokanee salmon are spawning.
+
+
+Wed 24-Aug-2022
+^^^^^^^^^^^^^^^
+
+Vacation at Longbeach Suites near Nelson
+
+Hiked Sproule Creek Millsite trail with East Fork loop on return.
+
+
+Thu 25-Aug-2022
+^^^^^^^^^^^^^^^
+
+Vacation at Longbeach Suites near Nelson
+
+
+Fri 26-Aug-2022
+^^^^^^^^^^^^^^^
+
+Longbeach on West Arm of Kootenay Lake, east of Nelson to Vancouver.
+
+Rest area stop at Boundary Creek provincial campground
+Lunch stop at Anarchist Summit lookup above Osoyoos
+Stopped at Mom & Pop's Fruit Stand in Keremeos
+Rest area stop west of Hope.
+
+
+Sat 27-Aug-2022
+^^^^^^^^^^^^^^^
+
+Discovered that nowcast-green onward failed yesterday due to too many levels of symlinks on
+turbidity forcing file; recovery:
+  symlink 26aug22 to 16jul22 (last good obs)
+  wait for nowcast-blue to fail
+  upload_forcing arbutus turbidity 2022-08-26
+  upload_forcing optimum turbidity 2022-08-26
+  upload_forcing graham-dtn turbidity 2022-08-26
+  wait for nowcast-green/26aug runs to finish
+  launch_remote_worker arbutus make_ww3_wind_file "arbutus forecast 2022-08-26"
+  launch_remote_worker arbutus make_ww3_current_file "arbutus forecast 2022-08-26"
+  wait for wwatch2/26aug runs to finish
+  upload_forcing arbutus nowcast+ 2022-08-27
+  wait for nowacst-agrif to fail
+  upload_forcing orcinus turbidity 2022-08-26
+  wait for nowacst-agrif run to complete
+  upload_forcing orcinus turbidity 2022-08-27
+  wait for nowacst-dev to fail
+  make_forcing_links salish nowcast+ --shared-storage 2022-08-26
+  wait for nowacst-dev run to complete at ~19:30
+  make_forcing_links salish nowcast+ --shared-storage 2022-08-27
+(SalishSeaCast)
+
+Drove to White Rock to visit J&M and celebrate 64th wedding anniversary & JRA 96th bday
+w/ Max, Jingli & Sylvia
+
+
+Sun 28-Aug-2022
+^^^^^^^^^^^^^^^
+
+nowcast-blue got stuck waiting for time steps; investigation:
+* nowcast1 is non-responsive; repeated jbd2/vda1 blocked msgs
+* recovery started at ~09:40:
+    did a hard reboot of nowcast4 from web dashboard
+    mounted shared storage on nowcast1
+    killed watcher and run scrip on arbutus
+    cleaned up directories
+    make_forcing_links arbutus nowcast+
+(SalishSeaCast)
+
+Rode Iona and Canada Line loop with a deviation at the start to look at a house for sale
+on W 11th; used 14th (very rough), Valley, and Arbutus Greenway to get to Arthur Lang bridge.
+(43 km)
 
 
 
