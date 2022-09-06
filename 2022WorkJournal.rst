@@ -6479,19 +6479,226 @@ on W 11th; used 14th (very rough), Valley, and Arbutus Greenway to get to Arthur
 (43 km)
 
 
+Week 35
+-------
+
+Mon 29-Aug-2022
+^^^^^^^^^^^^^^^
+
+Updated PyCharm on khawla to 2022.2.1.
+
+Removed get_onc_ferry from automation because instrumented TWDP ferry was moved to another
+route on 21jun22; PR#109 merged; deployed to production
+  Consider adding datasets from HBDB and TWSB ferry instruments that are presently operational.
+Updated hindcast results dirs re: Susan's uncommitted chg in prod for v202111 runs.
+(SalishSeaNEMO)
+
+Squash-merged dependabot PRs:
+* nbconvert re: XSS vulnerability
+  * UBC-MOAD/docs
+  * SalishSeaCast/tools
+  * SalishSeaCast/analysis-doug/melanie-geotiff
+  * SalishSeaCast/docs
+  * SalishSeaCast/SOG-Bloomcast-Ensemble
+  * SalishSeaCast/analysis-doug/dask-expts
+ * 43ravens/ECget 
+Updated docs re: Compute Canada -> Alliance and Westgrid -> BC DRI Group; triggered by linkcheck
+failures.
+Group mtg; see whtieboard.
+Toured repos to re-enable scheduled GHA workflows that were disabled due to lack of activity.
+(MOAD)
+
+Updated sentry-sdk (and certifi & openssl as deps) in prod env on skookum.
+Updated docs re: Compute Canada -> Alliance and Westgrid -> BC DRI Group; triggered by linkcheck
+failures.
+(SalishSeaCast)
 
 
+Tue 30-Aug-2022
+^^^^^^^^^^^^^^^
+
+collect_river_data failed for all rivers
+* investigation:
+  * last update of datamart/hydrometric/ files was ~28aug22 21:40
+  * sarracenia log shows server closed connection at ~21:55 then repeated
+      sr_amqp/build could not declare queue q_anonymous.sr_subscribe.hydrometric.91042830.24145946 (anonymous@dd.weather.gc.ca) with EOF occurred in violation of protocol (_ssl.c:2396)
+* recovery started at ~09:15
+  * restarted sr_subscribe-hydrometric via supervisorctl
+  * wait for expected hydrometric files update at ~09:40
+  * run collect_river_data for 12 rivers via script in datamart/hydrometric/
+    upload_forcing arbutus nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing graham-dtn nowcast+
+(SalishSeaCast)
+
+Created issue #42 re: arrow timezone parser error reported by Natasha.
+Created issue #43 re: extraction failure for HRDPS due to change in set of variables in dataset
+reported by Natasha.
+Created issue #44 re: sea bottom field extractions requested by Greig and someone else communicating
+with Susan and Raisha.
+Updated pkgs & versions in reshapr-dev env on khawla.
+Added editable install to env description files; PR#45: merged.
+Worked on issue #42 re: arrow timezone parser error.
+(Reshapr)
 
 
+Wed 31-Aug-2022
+^^^^^^^^^^^^^^^
+
+collect_river_data failed for Salmon River at Sayward; stream gauge out of service due to cableway 
+issue as of 2022-08-29T19:10-07:00.
+(SalishSeaCast)
+
+MOAD coffee chat.
+
+Resolved issue #42 re: arrow timezone parser error; merged PR#46.
+Finished adding yyyy() and nemo_yyyymm() date formatter functions;
+refactored date formatter functions into ``utils.date_formatters`` module;
+re: PR#40
+(Reshapr)
 
 
+September
+=========
+
+Thu 1-Sep-2022
+^^^^^^^^^^^^^^
+
+uptimerobot reported 2 intervals of downtime for arbutus.cloud:
+* 43 min starting at 2022-09-01 06:16:39
+* 14 min starting at 2022-09-01 07:14:05
+* fortunately, no impact on automation
+(SalishSeaCast)
+
+Updated sodium, iris, ComplementaryShaders & ComplementaryReimagined in multimc instances.
+
+See work journal.
+(Resilient-C)
 
 
+Fri 2-Sep-2022
+^^^^^^^^^^^^^^
 
-TODO:
-* add yyyy() and nemo_yyyy_mm() date format functions for Greig
-* add note to model profile docs re: no `depth coord` item for files that contain only 
-  2D fields
+Zoom w/ Karyn re: HRDPS winds across 22sep11 gemlam grid change, and change from gemlam to ops grid.
+
+Confirmed that /home/cstang/ exists and has cstang:cstang ownership.
+Confirmed that cstang is a member of sallen group.
+Reviewed and tweaked file system settings for Camryn:
+  sudo chgrp sallen /ocean/cstang/
+  sudo chmod g+s /ocean/cstang/
+  sudo mkdir /data/cstang/
+  sudo chgrp sallen /data/cstang/
+  sudo chmod g+s /data/cstang/
+
+Rebase-merged PR#40 re: adding yyyy() and nemo_yyyymm() date formatter functions
+and refactoring date formatter functions into ``utils.date_formattersm`` module.
+Created issue #47 re: extraction from Greig & Michael's coarsened SalishSeaCast model product wutb
+day avgs stored in month files like:
+  SalishSea1500-RUN203_1d_grid_T_2D_y1984m04.nc
+  SalishSea1500-RUN203_1h_grid_U_y1984m04.nc
+  SalishSea-RUN203_1d_grid_U_y1984m04.nc
+Pushed addition of bottleneck & flox to user env after a month of successful in dev, GHA test & my
+salish user env.
+(Reshapr)
+
+wwatch3 nowcast got stuck waiting for time steps; investigation:
+* nowcast3 is non-responsive; repeated jbd2/vda1 blocked msgs
+* recovery started at ~17:30:
+    did a hard reboot of nowcast3 from web dashboard
+    mounted shared storage on nowcast3
+    killed watcher and run script on arbutus
+    cleaned up directories
+
+    launch_remote_worker arbutus make_ww3_wind_file "arbutus forecast 2022-09-02"
+    launch_remote_worker arbutus make_ww3_current_file "arbutus forecast 2022-09-02"
+(SalishSeaCast)
+
+
+Sat 3-Sep-2022
+^^^^^^^^^^^^^^
+
+upload_forcing arbutus  nowcast+ failed due to bad ssh protocol banner; investigation:
+* nowcast0 is non-responsive; repeated jbd2/vda1 blocked msgs
+* checked other VMs via web dashboard:
+  * nowcast5 has repeated jbd2/vda1 blocked msgs
+  * nowcast7 has repeated jbd2/vda1 blocked msgs
+  * fvcom3 log is not waiting for login; ends in daily apt upgrade & clean activities
+* decided to update and reboot all VMs
+  * compute VMs:
+      fvcom[0-6]:
+        sudo apt update
+        sudo apt upgrade -y
+        sudo apt autoremove
+        sudo shutdown -r now
+      nowcast[2-4,6,8-9]:
+        sudo apt update
+        sudo apt upgrade -y
+        sudo apt autoremove
+      nowcast[1]:
+        # sudo apt upgrade failed
+        sudo dpkg --configure -a
+        sudo apt upgrade -y
+        sudo apt autoremove
+        sudo shutdown -r now
+      nowcast[5,7]:
+        # sudo apt upgrade failed: dpkg frontend is locked by another process
+        ps faux | grep dpkg  # shows stuck dpkg processes:
+          4540 /usr/bin/dpkg --status-fd 12 --configure --pending
+          4553 /bin/sh /var/lib/dpkg/info/linux-image-4.15.0-191-generic.postinst triggered linux-update-4.15.0-191-generic
+        # killed stuck dpkg processed; dpkg interrupted state
+        sudo dpkg --configure -a  # got stuck; interupted
+        sudo shutdown -r now
+        # stuck dueing reboot due to:
+          A stop job is running for /nemoShare/MEOPAR
+          A stop job is running for /mnt
+        # hard reboot via web dashboard
+        sudo apt update
+        sudo apt upgrade -y
+        sudo apt autoremove
+        sudo shutdown -r now
+      nowcast0:
+        sudo apt update
+        sudo apt upgrade
+        sudo apt autoremove
+        sudo shutdown -r now
+        # hard reboot via web dashboard
+        sudo mount /dev/vdc /nemoShare
+        ll /nemoShare/MEOPAR/  # to confirm mount
+        sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+        ll /export/MEOPAR  # to confirm mount
+        sudo systemctl start nfs-kernel-server.service
+        sudo exportfs -f  # to reset NFS handles for compute nodes
+      nowcast[1-9] and fvcom[0-6]:
+        sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR
+        # fvcom6 was stubborn; hard reboot; shutdown -r
+      nowcast0
+        # confirm compute nodes have /nemoShare/MEOPAR/ mounted:
+        for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "mountpoint /nemoShare/MEOPAR"; done
+        for n in {1..9}; do   echo nowcast${n};   ssh nowcast${n} "ls -C /nemoShare/MEOPAR"; done
+        for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "mountpoint /nemoShare/MEOPAR"; done
+        for n in {0..6}; do   echo fvcom${n};   ssh fvcom${n} "ls -C /nemoShare/MEOPAR"; done
+(SalishSeaCast)
+
+
+Sun 4-Sep-2022
+^^^^^^^^^^^^^^
+
+Goofed off.
+
+
+Week 36
+-------
+
+Mon 5-Sep-2022
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Labour Day
+
+Cycled Fort Langley, Derby Reach, Mt. Lehman loop
+(67 km)
+
+
 
 
 
@@ -6509,11 +6716,9 @@ TODO:
 
 
 TODO:
-* add bottleneck and flox to envs & install requirements - added to dev & test envs
 * write use case for Karyn's 5-yr average biololgy
 * write use case for Becca's single point, 2 depths physics & chemistry
 * write use case for month-average model products
-* move use cases from design notes to use examples in docs
 * `reshapr info SalishSeaCast-201905 day biology` with no access to results archive
   (on khawla without ffhfs mount of /results2) triggers:
     Traceback (most recent call last):
