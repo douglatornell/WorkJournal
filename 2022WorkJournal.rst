@@ -6609,7 +6609,6 @@ wwatch3 nowcast got stuck waiting for time steps; investigation:
     mounted shared storage on nowcast3
     killed watcher and run script on arbutus
     cleaned up directories
-
     launch_remote_worker arbutus make_ww3_wind_file "arbutus forecast 2022-09-02"
     launch_remote_worker arbutus make_ww3_current_file "arbutus forecast 2022-09-02"
 (SalishSeaCast)
@@ -6699,6 +6698,188 @@ Cycled Fort Langley, Derby Reach, Mt. Lehman loop
 (67 km)
 
 
+Tue 6-Sep-2022
+^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Worked on issue #38 re: single index value extraction selection semantics; 
+stalled on whether or not to extend code max+1 to all selections; doing so breaks with expectations
+of working with 0-base Python indexing, despite how nice it looks for single index value extractions
+Updated reshapr clone and user env on salish.
+Tested single point, 2 depths extraction of temperature and salinity for Becca with code changes
+for issue #38:
+* single point semantics are good
+* need to decide if max + 1 should be done for all values of max that are not None (grid extent)
+* ran tests to find the point at which "large chunk" warning appears:
+  * 1-4 yrs okay
+(Reshapr)
+
+Ran /results2/SalishSea/month-avg.201905/month-average.sh script on salish to generated 2019-05 
+files for August.
+(SalishSeaCast)
+
+
+Wed 7-Sep-2022
+^^^^^^^^^^^^^^
+
+Continued testing single point, 2 depths extraction of temperature and salinity for Becca re:
+"large chunk" warning appears:
+  * 7, 11, 13, 15 yrs okay
+  * warning arose when I tried to make the end date 2022-08-31; full years are okay
+Started improving CLI start/end dates variable names and handling in extracted dataset history 
+attribute.
+(Reshapr)
+
+Emailed EGBC practice advisor re: necessity for permit to practice for 43ravens.
+
+Power failure in ESB at ~10:00 caused manager to shutdown;
+* impacts:
+  * lots of name resolution failure messages from watch_NEMO_agrif, but it continued to run
+  * qstat on orcinus is failing; motd says that all compute nodes went down
+  * job was restarted by queue manager, I restarted watcher
+      watch_NEMO_agrif orcinus 10961523.orca2.ibb
+(SalishSeaCast)
+
+Configured docs.blogofile.com and www.blogofile.com in response to email from readthedocs; 
+blogofile.com domain is still registered, but there is nothing there or at the subs
+
+FAL estate work:
+* met w/ Sahi @ TD to do forms to get BCE DRS shares into my TD Direct cash account;
+  may take 10-15 business day on TD side plus time for TSX to respond
+
+
+Thu 8-Sep-2022
+^^^^^^^^^^^^^^
+
+Raisha reported VSCode connection problem to tyee; confirmed; survey other systems:
+* okay:
+  * salish
+  * smelt
+  * hake
+  * lox
+* fail:
+  * tyee - rebooted
+  * char - started & working
+  * chum - working
+  * cod - on disposal pile
+  * coho - on disposal pile
+  * halibut - on disposal pile
+  * herring - on disposal pile
+
+Telcon w/ Alice Krutchen @EGBC re: firm registration & permit to practice:
+* software is covered by engineering practice, so registration is probably required
+* official review can be requested to provide definitive rulling; she will send link
+
+Reviewed onboarding docs:
+* move Alliance account setup to #8; need link back to ssh-setup
+* add Windows stuff to ssh setup
+* add section about VSCode for remote access, notebooks, git integration, etc.
+Added links to pkgs & envs, and sphinx docs slide notebooks to MOAD docs.
+
+Went to UBC for onboarding mtg w/ Cassidy & Camryn and to locate/reboot workstations.
+Onboarding:
+* cycling facilities
+* machines and storage
+* Linux
+* ssh
+* git
+  * adds to MOAD list
+  * change/commit via GitHub interface
+  * change in editor, commit via command-line
+  * change/commit in VSCode
+Next session:
+* SalishSeaCast, website, ERDDAP
+* conda
+* analysis repos
+* jupyter
+* VSCode
+(MOAD)
+
+Weekly mtg.
+(Atlantis)
+
+
+Fri 9-Sep-2022
+^^^^^^^^^^^^^^
+
+upload_forcing forecast2 and nowcast+ both failed due to symlink race condition on 
+obs/ssh_y2022m09d08.nc
+* recovery started at ~09:05
+    ln -s /results/forcing/sshNeahBay/fcst/ssh_y2022m09d08.nc /results/forcing/sshNeahBay/obs/ssh_y2022m09d08.nc
+    upload_forcing arbutus nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing graham-dtn nowcast+
+(SalishSeaCast)
+
+Decided to abandon issue #38 re: single index value extraction selection semantics because
+breaks with expectations of working with 0-base Python indexing, despite how nice it looks for 
+single index value extractions.
+Cherry-picked test improvements from issue38 branch to main.
+Finished improving CLI start/end dates variable names and handling in extracted dataset history 
+attribute; PR#48: rebase-merged
+(Reshapr)
+
+Helped Cassidy debug ssh public key installation and connection issues from Windows 11 to waterhole
+machines.
+
+Installed iris-1.3 in nodecraft and local 1.19.2 minecraft instances.
+
+
+Sat 10-Sep-2022
+^^^^^^^^^^^^^^^
+
+upload_forcing forecast2 and nowcast+ both failed due to symlink race condition on 
+obs/ssh_y2022m09d09.nc; Susan confirmed missing obs on 8th & 9th
+* recovery started at ~08:45
+    nemo_nowcast.workers.clear_checklist  # to rotate logs
+    ln -s /results/forcing/sshNeahBay/fcst/ssh_y2022m09d09.nc /results/forcing/sshNeahBay/obs/ssh_y2022m09d09.nc
+    upload_forcing arbutus nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing graham-dtn nowcast+
+(SalishSeaCast)
+
+Drove to White Rock to visit J&M.
+
+
+Sun 11-Sep-2022
+^^^^^^^^^^^^^^^
+
+Cycled to Steeveston via Richmond Dyke southbound, and 2 Rd greenway path northbound;
+took it slow because the air was quite smokey.
+(48 km)
+
+Changed a bunch more logins from oplop to 1password.
+
+upload_forcing forecast2 and nowcast+ both failed due to symlink race condition on 
+obs/ssh_y2022m09d10.nc; Susan confirmed missing obs on 8th & 9th
+* recovery started at ~13:35
+    nemo_nowcast.workers.clear_checklist  # to rotate logs
+    ln -s /results/forcing/sshNeahBay/fcst/ssh_y2022m09d10.nc /results/forcing/sshNeahBay/obs/ssh_y2022m09d10.nc
+    upload_forcing arbutus nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing graham-dtn nowcast+
+nowcast-r12 failed on launch
+* investigation:
+* fvcom5 is non-responsive; repeated jbd2/vda1 blocked msgs
+* recovery started at ~17:55
+    did a hard reboot of fvcom5 from web dashboard
+    mounted shared storage on fvcom5
+    cleaned up directories
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus r12 nowcast 2022-09-11"
+(SalishSeaCast)
+
+Installed tables & chairs datapack-4.3.4 local 1.19.2 minecraft instance.
+Server installation was sort of tricky/non-intuitive:
+* Download Chuckchuk/Chuck-RP.zip v6.22 from GitHub
+* use sha1sum to create SHA-1 hash of it
+* Add download URL and SHA-1 hash to nodecraft server via Game Settings > Gamemode
+* Download datapack from planetminecraft.com
+* Upload datapack to nodecraft workd datapacks direcory via File manager
+* Restart server
 
 
 
