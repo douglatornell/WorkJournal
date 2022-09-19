@@ -6882,6 +6882,181 @@ Server installation was sort of tricky/non-intuitive:
 * Restart server
 
 
+Week 37
+-------
+
+Mon 12-Sep-2022
+^^^^^^^^^^^^^^^
+
+Emailed Hillcrest Plumbing re: repairs.
+
+Group mtg; see whiteboard.
+* Susan want's time series at ONC central node from double resolution run
+(MOAD)
+
+Updated docs:
+* broken & redirected links
+* dropped Anaconda from installation & dev docs in favour of Miniforge or Miniconada3
+* add pip install -e to conda env descriptions
+(NEMO-Cmd)
+
+Created issue #49 re: StopIteration exception from `reshapr info` when results archive path 
+does not exist; fixed it with PR#50: rebase-merged.
+Analyzed Natasha's issue #43 report re: Extraction failure for HRDPS due to change in 
+set of variables in dataset:
+* She didn't give enough detail of the extraction she was doing, but I suspect that it was
+  1 variable-year per file. If so, the behaviour she saw is not a but. File should have NaNs
+  before the variables appeared and values after.
+* Did find a bug whereby extractions for another variable that span the date when a new variable
+  was added to the dataset include the new variable even though it was not requested.
+  Discussion w/ Susan lead to the hypothesis that this is due to the calculation of the drop_vars
+  set based on the list of variables in only the 1st dataset file in the time range. 
+  Need to at least union the variable lists from 1st and last datset files.
+  Perfact solution would be to union variable lists from all dataset files in time range,
+  but that might significantly slow processing. We know that so far, variables have only been added.
+(Reshapr)
+
+
+Tue 13-Sep-2022
+^^^^^^^^^^^^^^^
+
+Mtg. Decided that it will be the last scheduled because only Raisha and Jose are using Parcels
+in research.
+(OceanParcels)
+
+ONC SoG east node data stream resumed on 30aug.
+(SalishSeaCast)
+
+Sent Cassidy links about ssh.exe instance gcross-up between Git and Windows 10.
+
+See work journal.
+(Resilient-C)
+
+Helped Camryn w/ .bash_profile and conda env setup.
+
+Rode Zwift Academy base ride.
+
+
+Wed 14-Sep-2022
+^^^^^^^^^^^^^^^
+
+Read readthedocs service data analysis email report; see TODOS re:
+* sphinx-notfound-page
+* build:os config update to ubuntu-22.04
+
+Created issue #51 re: unrequested variable in extractions that span date of variable added to dataset.
+(Reshapr)
+
+Checked wwatch3 results archives:
+* /opp
+    wwatch3$ find hindcast -type d -name "*15" | wc -l
+    59
+    wwatch3$ find hindcast -type d -name "*16" | wc -l
+    35
+    wwatch3$ find hindcast -type d -name "*17" | wc -l
+    24
+    wwatch3$ find hindcast2 -type d -name "*17" | wc -l
+    9
+    wwatch3$ find nowcast/ -type d -name "*17" | wc -l
+    279
+    wwatch3$ find nowcast/ -type d -name "*18" | wc -l
+    368
+    wwatch3$ find nowcast/ -type d -name "*19" | wc -l
+    361
+* graham:project/MIDOSS/forcing/wwatch3/
+    [dlatorne@gra-login2 wwatch3]$ find . -type d -name "*15" | wc -l
+    365
+    [dlatorne@gra-login2 wwatch3]$ find . -type d -name "*16" | wc -l
+    366
+    [dlatorne@gra-login2 wwatch3]$ find . -type d -name "*17" | wc -l
+    365
+    [dlatorne@gra-login2 wwatch3]$ find . -type d -name "*18" | wc -l
+    365
+Deleted hindcast12/
+Cleared hindcast/
+Used tmux session to rsync graham:project/MIDOSS/forcing/wwatch3/ to hindcast/
+  rsync -rltvz --progress --perms --chmod=Do+rx,Fo+r \
+    graham-dtn:project/MIDOSS/forcing/wwatch3/ /opp/hindcast/
+(WWatch3)
+
+
+Thu 15-Sep-2022
+^^^^^^^^^^^^^^^
+
+Changed readthedocs config to use ubuntu-22.04.
+Added sphinx-notfound-page extension to docs build.
+Added model profile for 1905 double resolution experiment including example
+use case re: Susan's request for T&S at ONC central node; PR#xx
+Discovered that chunking of:
+  time: 24
+  depth: 80
+  y: 898
+  x: 398
+is faster than storage chunking of:
+  time: 1
+  depth: 40
+  y: 1796
+  x: 796
+so, we need a way to override chunking from extraction config YAML.
+I wonder if 1h files that contain 24h of results should always use 24 as the time chunk size?
+(Reshapr)
+
+UBC-DFO modeling mtg:
+* ESMPy via Neil Swart for HRDPS land mask: https://earthsystemmodeling.org/regrid/
+
+Weekly mtg.
+(Atlantis)
+
+Started work on visualizing and presenting SoG deep water renewal events in 2017 in the 
+double resolution hindcast; had to regenerate nowcast-green research figures for a bunch
+of dates in summer 2017.
+(Hindcast)
+
+Went to Faculty of Science ADs thank-you dinner at the Teahouse.
+
+
+Fri 16-Sep-2022
+^^^^^^^^^^^^^^^
+
+Continued work on visualizing and presenting SoG deep water renewal events in 2017 in the 
+double resolution hindcast; regenerated more nowcast-green research figures for dates in 
+summer 2017.
+(Hindcast)
+
+See work journal.
+(Resilient-C)
+
+Squash-merged dependabot PRs re: DoS vulnerability in mako:
+* SalishSeaNowcast
+* salishsea-site
+* SOG-Bloomcast
+* douglatornell/raspi_x10
+(SalishSeaCast)
+
+Cleaned up uncommitted env file in deployment env that was preventing GHA deployment workflow.
+(salishsea-site)
+
+
+Sat 17-Sep-2022
+^^^^^^^^^^^^^^^
+
+Rode Zwift Academy workeout #1.
+
+
+Sun 18-Sep-2022
+^^^^^^^^^^^^^^^
+
+Rode Gunnars on Steeveston out & back route; strong NW wind.
+(44 km)
+
+Added lizzy to borg-backup framework on smelt:
+* created borg repo for lizzy
+    borg init --encryption=repokey-blake2 /backup/borg/lizzy
+* set up .gitconfig in lizzy:/home/doug
+* cloned douglatornell/borg-bkup to lizzy:/home/doug
+* created borg-bkup/lizzy-smelt.sh script and used it for 1st lizzy backup to smelt
+
+
 
 
 TODO:
@@ -6900,30 +7075,6 @@ TODO:
 * write use case for Karyn's 5-yr average biololgy
 * write use case for Becca's single point, 2 depths physics & chemistry
 * write use case for month-average model products
-* `reshapr info SalishSeaCast-201905 day biology` with no access to results archive
-  (on khawla without ffhfs mount of /results2) triggers:
-    Traceback (most recent call last):
-      File "/home/doug/conda_envs/reshapr-dev/bin/reshapr", line 33, in <module>
-        sys.exit(load_entry_point('Reshapr', 'console_scripts', 'reshapr')())
-      File "/home/doug/conda_envs/reshapr-dev/lib/python3.10/site-packages/click/core.py", line 1128, in __call__
-        return self.main(*args, **kwargs)
-      File "/home/doug/conda_envs/reshapr-dev/lib/python3.10/site-packages/click/core.py", line 1053, in main
-        rv = self.invoke(ctx)
-      File "/home/doug/conda_envs/reshapr-dev/lib/python3.10/site-packages/click/core.py", line 1659, in invoke
-        return _process_result(sub_ctx.command.invoke(sub_ctx))
-      File "/home/doug/conda_envs/reshapr-dev/lib/python3.10/site-packages/click/core.py", line 1395, in invoke
-        return ctx.invoke(self.callback, **ctx.params)
-      File "/home/doug/conda_envs/reshapr-dev/lib/python3.10/site-packages/click/core.py", line 754, in invoke
-        return __callback(*args, **kwargs)
-      File "/media/doug/warehouse/MOAD/Reshapr/reshapr/cli/info.py", line 63, in info
-        reshapr.core.info.info(cluster_or_model, time_interval, " ".join(vars_group))
-      File "/media/doug/warehouse/MOAD/Reshapr/reshapr/core/info.py", line 49, in info
-        _model_profile_info(cluster_or_model, time_interval, vars_group, console)
-      File "/media/doug/warehouse/MOAD/Reshapr/reshapr/core/info.py", line 116, in _model_profile_info
-        _vars_list(model_profile, time_interval, vars_group, console)
-      File "/media/doug/warehouse/MOAD/Reshapr/reshapr/core/info.py", line 173, in _vars_list
-        ds_path = next(results_archive_path.glob(nc_files_pattern))
-    StopIteration
 * Becca's single point extraction triggers:
     /home/dlatorne/conda_envs/reshapr/lib/python3.10/site-packages/xarray/core/indexing.py:1228: PerformanceWarning: Slicing is producing a large chunk. To accept the large
     chunk and silence this warning, set the option
@@ -6952,6 +7103,25 @@ TODO:
 Created 22.1 release on GitHub; deployed it to skookum.
 Bumped version to 22.2.dev0.
 (salishsea-site)
+
+
+TODO:
+* update .readthedocs.yaml build:os to ubuntu-22.04
+* add sphinx-notfound-page extension to to repos with docs
+  * https://sphinx-notfound-page.readthedocs.io/en/latest/index.html
+  * MOAD:
+    * Reshapr - done
+    * docs
+    * moad_tools
+    * MoaceanParcels
+    * cookiecutter-MOAD-pypkg
+  * SalishSeaCast:
+    * SalishSeaNowcast
+    * SalishSeaCmd
+    * NEMO-Cmd
+    * salishsea-site
+    * SOG-Bloomcast-Ensemble
+    * tools
 
 
 
