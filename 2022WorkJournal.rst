@@ -4201,7 +4201,7 @@ recovery:
   launch_remote_worker make_ww3_current_file arbutus "arbutus forecast"
 Helped Susan do prod test of rotate_hindcast_logs; worked but unregistered worker error because
 manager had not been restarted; that make me realize that I didn't write the after_ function
-for it or form archive_tarball.
+for it or for archive_tarball.
 Investigated how to write a test to confirm that all modules in nowcast.workers have a
 corresponding after_ function in next_workers; 2 possibilities:
 * inspect.getmembers(next_workers, inspect.ifucntion)
@@ -4600,6 +4600,9 @@ Merged PR#30 re: resampling implementation.
 Changed salish cluster description to 4 workers w/ 4 threads each based on last week's
 month-avg work.
 Add docs re: using a persistent cluster; PR#31
+Set up VSCode for reStructuredText editing of docs.
+* Used https://github.com/ammaraskar/sphinx-problem-matcher to add a VSCode problem-matcher
+  to sphinx build task.
 (Reshapr)
 
 Group mtg.
@@ -5872,7 +5875,7 @@ Mason Egger, Developer Advocate at Gretel.ai, @masonegger
 * mason.dev
 
 Discussed storage of hindcast spin-up products w/ Susan; agreed on storage on optimum
-(where pressue to delete is low and products are most likely to be reused in case of disaster),
+(where pressure to delete is low and products are most likely to be reused in case of disaster),
 /ocean (to avoid collocation w/ production products on /results*, /data, /opp),
 and graham:nearline/
 
@@ -7042,6 +7045,9 @@ Sat 17-Sep-2022
 
 Rode Zwift Academy workeout #1.
 
+See work journal.
+(Resilient-C)
+
 
 Sun 18-Sep-2022
 ^^^^^^^^^^^^^^^
@@ -7057,18 +7063,178 @@ Added lizzy to borg-backup framework on smelt:
 * created borg-bkup/lizzy-smelt.sh script and used it for 1st lizzy backup to smelt
 
 
+Week 37
+-------
+
+Mon 19-Sep-2022
+^^^^^^^^^^^^^^^
+
+National Day of Mourning for QE2.
+
+See work journal.
+(Resilient-C)
+
+Updated PyCharm to 2022.2.2.
+
+Rode Zwift Academy workeout #2.
+
+
+Tue 20-Sep-2022
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Got COVID-19 booster.
+
+Worked on improving MOAD onboarding docs, mostly re: analysis repos.
+Used https://github.com/ammaraskar/sphinx-problem-matcher
+to add a VSCode problem-matcher to sphinx build task.
+Added section about VSCode and recommended extensions.
+(MOAD)
+
+Got EOAS-AD password reset to one I generated via 1password; works now for
+bookings, gitlab, helpdesk, nextcloud, and www.
+
+Reviewed and commented on Susan's updated ad for the O2 postdoc job.
+
+
+Wed 21-Sep-2022
+^^^^^^^^^^^^^^^
+
+Hillcrest Plumbing in to repair master bathroom sink & toilet, and install laundry box
+so that washer & dryer can sit back in laundry closet far enough for bifold door to be 
+re-installed.
+
+Worked w/ Susan on re-org of variables in results files for 2111 hindcast.
+(SalishSeaCast)
+
+Phys Ocgy seminar.
+
+Renewed car insurance.
+
+Continued work on visualizing and presenting SoG deep water renewal events in 2017 in the 
+double resolution hindcast; confirmed nearest model point to nominal obs location; created preliminary salinity plots to make sure there is something interesting.
+(Hindcast)
+
+
+Thu 22-Sep-2022
+^^^^^^^^^^^^^^^
+
+Buffed SalishSeaCast.202111-2xrez-salish model profile and created PR#53 to add it.
+(Reshapr)
+
+Discussed w/ Susan calculation of day & month averages for 2111 spin-up:
+* will be done on salish after download, not optimum
+* no need for day-averages during spin-up, just month-averages
+* should eventually be done via worker that uses Reshapr
+* TODO:
+  * create SalishSeaCast.202111-salish model profile
+(SalishSeaCast)
+
+Prepped for 2nd onboarding mtg w/ Cassidy & Camryn.
+
+Worked at ESB for Welcome Back BBQ and mtg w/ Cassidy & Camryn.
+
+Created personal docs/example/SalishSeaCast-202111-blue_single model profile for 
+2017 regular resolution run results in /results2/SalishSea/hindcast_blue.single/ 
+that Susan created for comparison to double resolution run
+
+TODO:
+* Do T&S extraction from blue_single - need to get files split
+(Hindcast)
+
+EOAS Welcome Back! BBQ.
+
+Installed rust on khawla via:
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+Installed some rust replacements for command-line tools:
+(from https://betterprogramming.pub/5-cli-tools-made-with-rust-to-improve-already-popular-tools-506af07b6d54)
+* bat replaces cat
+* exa replaces ls
+* du-dust replaces du (dust)
+* bottom repalces top (btm)
+* ripgrep replaces grep
+
+Reviewed nowcast-green.202111 output files:
+TODO:
+* long_name for time_counter: UTC Date/Time - can't figure out how to do this :-(
+* 1h_grid_T:
+  * sossheig long_name title-case - done
+  * votemper long_name -> Conservative Temperature - done
+  * votemper units -> degree_C - done
+  * vosaline long_name -> Reference Salinity - done
+  * sigma_theta long_name -> Potential Density (sigma_theta) - done
+  * sigma_theta units -> kg m-3 - done
+  * e3t long_name -> title-case - done
+* 1h_grid_U:
+  * vozorcrtx long_name title-case - done
+  * vozorcrtx units -> m s-1 - done
+* 1h_grid_V:
+  * time_counter long_name title-case - done
+  * vomecrty long_name title-case - done
+  * vomecrty units -> m s-1 - done
+* 1h_grid_W:
+  * vovecrtz long_name title-case - done
+  * vovecrtz units -> m s-1 - done
+  * vert_eddy_diff long_name title-case - done
+  * vert_eddy_diff units -> m2 s-1 - done
+  * vert_eddy_visc long_name title-case - done
+  * vert_eddy_visc units -> m2 s-1 - done
+  * **dissipation long_name title-case**
+  * dissipation units -> m2 s-3 - done
+* 1h_biol_T:
+  * ALL GOOD!!!
+* 1h_chem_T:
+  * PAR units -> W m-2 - done
+  * turbidity standard_name > sea_water_turbidity - done
+  * turbidity long_name > Fraser River Turbidity Tracer - done
+  * turbidity units 1 or NTU  -> Susan/Elise - done
+  * dissolved_oxygen standard_name > mole_concentration_of_dissolved_molecular_oxygen_in_sea_water - done
+* 1d_graz_T:
+  * all units -> mmol N m-3 s-1 - done
+  * Microzoo, Mesozoo vs. Microzooplankton, Mesozooplankton - done
+* 1d_prod_T:
+  * all units -> mmol N m-3 s-1 - done
+(SS-run-sets)
+
+
+Fri 23-Sep-2022
+^^^^^^^^^^^^^^^
+
+Susan sent manager into restart loop with a syntax error in a live edit of next_workers module
+trying to re-activate download_results for hindcast; fixed mangle of unmatched parens & square brackets and supervisord sorted manager out.
+(SalishSeaCast)
+
+Finished review and updates in field_defs and file_defs for nowcast-green.202111 output files.
+Susan pulled them to optimum so that they were used for 11jun02 runs onward; inspected results files
+and they look good.
+(SS-run-sets)
+
+Added SalishSeaCast-202111-salish model profile; PR#54 rebase-merged.
+(Reshapr)
+
+
+Sat 24-Sep-2022
+^^^^^^^^^^^^^^^
+
+Rode Zwift Academy workout #3.
+
+Drove to White Rock to visit J&M.
+
+
+Sun 25-Sep-2022
+^^^^^^^^^^^^^^^
+
+Goofed off.
+
+Walked to English Bay overlook.
+
+
+
 
 
 TODO:
 * citations data ideas discussed w/ Susan on 30-Jul drive to White Rock
-
-
-
-TODO:
-* add https://github.com/UBC-MOAD/PythonNotes/tree/master/pkgs-envs to MOAD conda docs
-  w/ instructions on how to view it as slides
-
-
 
 
 TODO:
@@ -7091,8 +7257,6 @@ TODO:
       std_name = var.attrs["standard_name"]
     KeyError: 'standard_name'
 
-
-
   
 
 TODO:
@@ -7111,7 +7275,7 @@ TODO:
   * https://sphinx-notfound-page.readthedocs.io/en/latest/index.html
   * MOAD:
     * Reshapr - done
-    * docs
+    * docs - done
     * moad_tools
     * MoaceanParcels
     * cookiecutter-MOAD-pypkg
