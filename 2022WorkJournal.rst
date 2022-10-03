@@ -7063,7 +7063,7 @@ Added lizzy to borg-backup framework on smelt:
 * created borg-bkup/lizzy-smelt.sh script and used it for 1st lizzy backup to smelt
 
 
-Week 37
+Week 38
 -------
 
 Mon 19-Sep-2022
@@ -7230,6 +7230,347 @@ Goofed off.
 Walked to English Bay overlook.
 
 
+Week 39
+-------
+
+Mon 26-Sep-2022
+^^^^^^^^^^^^^^^
+
+Ran make_plots nowcast-green for more dates in 2017 to provide animations for discussion of 
+2xrez deep water renewal.
+Started extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* created extraction YAML configs in /results2/SalishSea/month-avg-202111/
+* jun02 physics:
+  * time chunk size: 1; 523.1 s
+  * time chunk size: 24; 214.9 s
+    * TimeoutError
+    * produces large chunk warning (faster than Becca's single point extraction!!)
+  * time chunk size: 1 repeat; nowcast-dev started near end; 588.8 s
+* increased dask worker memory limit from auto-default of 32G to 48G
+* jun02 physics:
+  * time chunk size: 1 repeat; nowcast-dev running; 546.8 s
+  * time chunk size: 24 repeat; nowcast-dev running;  213.0 s
+    * large chunk warning
+* jun02 biology;
+  * time chunk size: 24 repeat; nowcast-dev running;  715.5 s
+    * large chunk warning
+* jun02 chemisty;
+  * time chunk size: 24 repeat; nowcast-dev running;  311.2 s
+    * large chunk warning
+* jul02
+  * time chunk size: 24
+  * nowcast-dev running
+  * large chunk warning
+  * physics: 307.1 s
+  * biology: 606.6 s
+  * chemistry: 321.5 s
+* aug02
+  * time chunk size: 24
+  * nowcast-dev running
+  * large chunk warning
+  * physics: 276.7 s
+  * biology: 643.2 s
+  * nowcast-dev ended
+  * chemistry: 292.3 s
+* changed dask worker local-directory to /dev/shm
+* sep02
+  * time chunk size: 24
+  * nowcast-dev not running
+  * large chunk warning
+  * physics: 231.4 s
+  * biology: 508.2 s
+  * chemistry: 272.9 s
+* increased dask worker memory limit to 64G
+* oct02
+  * time chunk size: 24
+  * nowcast-dev not running
+  * large chunk warning
+  * physics: 237.7 s
+  * biology: 541.9 s
+  * chemistry:  s
+(Hindcast)
+
+Group mtg; talked about 2xrez deep water renewal.
+(MOAD)
+
+Started work on EGBC firm practice requirements for 30sep:
+* skimmed program webinar recording
+* paid for training program but have to wait for access credentials
+* downloaded sole practitioner PPMP template, read it, and started 43ravens version
+
+
+Tue 27-Sep-2022
+^^^^^^^^^^^^^^^
+
+Continued work on EGBC firm practice requirements for 30sep:
+* received PPMP training credentials
+* Started training: see /media/doug/warehouse/43ravens/egbc/PPMP/2022/RegOfFirmsTraining.rst
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* nowcast-dev not running
+* tested using salish_cluster config
+* time chunk size: 24
+* large chunk warnings
+* invalid value in divide warnings
+* nov02
+  * physics: 237.7 s
+  * biology: 541.9 s
+  * chemistry: 255.7 s
+* hard-coded memory_limit=None (unlimited) in core.extract.py
+* dec02
+  * physics: 237.5 s
+  * biology: 545.6 s
+  * chemistry: 278.9 s
+* nowcast-dev running
+* created month-average.sh script to run 3 extractions from 1 command
+* jan03
+  * Jose running 5x beaching sims
+  * physics: 313.2 s
+  * biology: 776.2 s
+  * chemistry: 425.9 s
+* adapted month-average.sh script to accept yyyy and mm from command-line
+* reduced cluster to 3 workers w/ 4 threads each avoid over-committing salish cores
+* feb03
+  * Jose running 5x beaching sims
+  * physics: 389.8 s
+  * biology: 795.3 s
+  * chemistry: 397.2 s
+* mar03
+  * Jose running 5x beaching sims
+  * nowcast-dev finished
+  * physics: 414.7 s
+  * biology: 913.8 s
+  * chemistry: 466.1 s
+* nowcast-dev not running
+* apr03
+  * Jose running 5x beaching sims
+  * physics: 304.5 s
+  * biology: 679.9 s
+  * chemistry: 340.0 s
+* increased cluster to 6 workers w/ 4 threads each
+* may03
+  * Jose running 5x beaching sims
+  * physics: 253.1 s
+  * biology: 456.5 s
+  * chemistry: 211.7 s
+* created month_avg.py module to run 3 extraction for a specified month
+* Jose's 5 beaching sims finished
+* jun03
+  * physics: 167.3 s (maybe biased due to file caching; extraction was repeated for testing)
+  * biology: 414.4 s
+  * chemistry: 209.8 s
+(Hindcast)
+
+Coffee chat w/ Raisha.
+
+
+Wed 28-Sep-2022
+^^^^^^^^^^^^^^^
+
+Continued work on EGBC firm practice requirements for 30sep:
+* Continued training: see /media/doug/warehouse/43ravens/egbc/PPMP/2022/RegOfFirmsTraining.rst
+
+Passed month averaging processing over to Susan for the moment; failed for her w/ max memory use,
+max swap, and exception re: failure to spill data to disk.
+Resumed processing:
+* nowcast-dev not running
+* using salish_cluster config; 6 workers w/ 4 threads each
+* time chunk size: 24
+* hard-coded memory_limit=None (unlimited) in core.extract.py
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* jul03
+  * physics: 163.2 s (maybe biased due to file caching; extraction was already run by Susan)
+  * biology: 361.3 s
+  * chemistry: 188.5 s
+* aug03
+  * physics: 164.7 s
+  * nowcast-dev started
+  * biology: 497.0 s
+  * chemistry: 283.7 s
+* nowcast-dev running
+* sep03
+  * physics: 231.6 s
+  * biology: 495.7 s
+  * chemistry: 260.2 s
+* nowcast-dev finished
+* increased cluster to 8 workers w/ 4 threads each
+* oct03
+  * physics: 184.1 s
+  * biology: 356.7 s
+  * chemistry: 196.3 s
+(Hindcast)
+
+Phys Ocgy seminar: Sam Stevens sub-surface drifters
+
+
+Thu 29-Sep-2022
+^^^^^^^^^^^^^^^
+
+Continued work on EGBC firm practice requirements for 30sep:
+* Finished training modules: see notes in
+  /media/doug/warehouse/43ravens/egbc/PPMP/2022/RegOfFirmsTraining.rst
+* determined that PPMP does not have to be submitted to EGBC, just needs to exist
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* nowcast-dev not running
+* using salish_cluster config; 8 workers w/ 4 threads each
+* time chunk size: 24
+* hard-coded memory_limit=None (unlimited) in core.extract.py
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* nov03
+  * physics: 224.4 s
+  * reduced cluster to 6 workers w/ 4 threads each
+  * biology: 484.3 s
+  * chemistry: 203.3 s
+* dec03
+  * physics: 166.7 s
+  * biology: 397.1 s
+  * chemistry: 208.2 s
+* nowcast-dev running
+* jan04
+  * physics: 267.3 s
+  * biology: 583.1 s
+  * chemistry: 283.0 s
+* nowcast-dev finished
+* Jose running 5x beaching sims
+* feb04
+  * physics: 229.1 s
+  * biology: 486.5 s
+  * chemistry: 196.1 s
+(Hindccast)
+
+Helped Cassidy w/ conda config in bash profile.
+
+Coffee chat with Camryn.
+
+
+Fri 30-Sep-2022
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Truth & Reconcilliation Day
+
+Continued work on EGBC firm practice requirements for 30sep:
+* completed taining course exam
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* nowcast-dev not running
+* using salish_cluster config; 8 workers w/ 4 threads each
+* time chunk size: 24
+* hard-coded memory_limit=None (unlimited) in core.extract.py
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* mar04
+  * physics: 213.0 s
+  * biology: 377.0 s
+  * chemistry: 172.9 s
+* nowcast-dev running
+* apr04
+  * physics: 300.0 s
+  * biology: 429.6 s
+  * chemistry: 208.7 s
+* nowcast-dev finished
+* may04
+  * physics: 185.8 s
+  * biology: 363.4 s
+  * chemistry: 182.0 s
+(Hindccast)
+
+Investigated dependabot alert re: critical arbitrary code execution vulnerability in joblib
+(CVE-2022-21797):
+* used ``mama repoquery whoneeds joblib`` to learn that it is a dep for scikit-learn
+* worked up the deps tree:
+  * joblib -> scikit-learn -> mapclassify -> geopandas
+  * geopandas is there because moad_tools has it as a dep for random_oil_spills.py
+* no PR from dependabot yet
+(SalishSeaNowcast)
+
+Email from Derek White at port authority re: missing hours in depth-averaged currents dataset;
+suspect it is a glitch in forecast2 processing.
+(SalishSeaCast)
+
+
+October
+=======
+
+Sat 1-Oct-2022
+^^^^^^^^^^^^^^
+
+Rode Salish Trail, Midtown, Cypress loop
+(22 km)
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results.
+(Hindcast)
+
+
+Sun 2-Oct-2022
+^^^^^^^^^^^^^^
+
+Sore back after yesterday's ride.
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* updated conda env prior to jan05 to try to reproduce the memory explosion issue that Susan had;
+  today's pkg vesions are different to Susan's (see below)
+* nowcast-dev not running
+* using salish_cluster config; 8 workers w/ 4 threads each
+* time chunk size: 24
+* hard-coded memory_limit=None (unlimited) in core.extract.py
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* jan05
+  * physics: 188.1 s
+  * biology: 359.6 s
+  * chemistry: 155.7 s
+(Hindcast)
+
+Squash-merged dependabot PRs re: critical arbitrary code execution vulnerability in joblib
+(CVE-2022-21797):
+* SalishSeaNowcast
+* moad_tools
+(MOAD)
+
+Created issue #55 re: adding memory_limit handling to cluster config; default to auto.
+Investigated Susan's memory blow-up using Reshapr for month-avg on Wed:
+* only significant difference in envs is dask 2022-9.0 in my env vs. 2022.9.1 in Susan's
+* changelogs for dask and distributed don't reveal anything obvious
+* 2022.9.2 was released on 30-Sep
+* updated my env:
+  - dask         2022.9.0  pyhd8ed1ab_0             installed                      
+  + dask         2022.9.2  pyhd8ed1ab_0             conda-forge/noarch          6kB
+  - dask-core    2022.9.0  pyhd8ed1ab_0             installed                      
+  + dask-core    2022.9.2  pyhd8ed1ab_0             conda-forge/noarch        870kB
+  - distributed  2022.9.0  pyhd8ed1ab_0             installed                      
+  + distributed  2022.9.2  pyhd8ed1ab_0             conda-forge/noarch        761kB
+  - netcdf4         1.6.0  nompi_py310h55e1e36_102  installed                      
+  + netcdf4         1.6.1  nompi_py310h55e1e36_100  conda-forge/linux-64     Cached
+  - xarray       2022.6.0  pyhd8ed1ab_1             installed                      
+  + xarray       2022.9.0  pyhd8ed1ab_0             conda-forge/noarch        721kB
+(Reshapr)
+
+
+
+TODO:
+  EGBC firm registration next steps by 30-Sep
+    * practice mgmt plan
+  2022-2023 CE plan
+
+
+
+
+I'm interested in having our windows cleaned, inside and outside. We live in a 3 unit triplex in Kitsilano, but the service I'm looking for is just for our unit.
+
+We have 2 floors. On the first floor there are 6 windows and a set of patio doors with a window above them. 3 of those windows, and the patio doors have screens. On the second floor there are 8 windows. 4 of them have screens. 1 of them is a window in a balcony door. There are also 2 skylights. One in a small roof section over the front door entry. The other is low in a sloping roof section over the 2nd floor. Inside, the window coverings are mostly mini-blinds except for the patio doors and an adjacent window which have vertical blinds.
+
 
 
 
@@ -7295,12 +7636,6 @@ Add Tereza's pubs to citations, etc.
 Set up VSCode for reStructuredText editing of docs.
 * Used https://github.com/ammaraskar/sphinx-problem-matcher to add a VSCode problem-matcher
   to sphinx build task.
-
-
-TODO:
-  EGBC firm registration next steps by 30-Sep
-    * online training (counts as regulatory)
-    * practice mgmt plan
 
 
 Reshapr ideas:
