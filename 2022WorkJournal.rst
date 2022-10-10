@@ -6937,7 +6937,7 @@ See work journal.
 
 Helped Camryn w/ .bash_profile and conda env setup.
 
-Rode Zwift Academy base ride.
+Rode Zwift Academy baseline ride.
 
 
 Wed 14-Sep-2022
@@ -7299,6 +7299,8 @@ Started work on EGBC firm practice requirements for 30sep:
 * paid for training program but have to wait for access credentials
 * downloaded sole practitioner PPMP template, read it, and started 43ravens version
 
+Rode Zwift Academy workout #4.
+
 
 Tue 27-Sep-2022
 ^^^^^^^^^^^^^^^
@@ -7450,6 +7452,8 @@ Helped Cassidy w/ conda config in bash profile.
 
 Coffee chat with Camryn.
 
+Rode Zwift Academy workout #5.
+
 
 Fri 30-Sep-2022
 ^^^^^^^^^^^^^^^
@@ -7516,6 +7520,7 @@ Sun 2-Oct-2022
 ^^^^^^^^^^^^^^
 
 Sore back after yesterday's ride.
+
 Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
 results:
 * updated conda env prior to jan05 to try to reproduce the memory explosion issue that Susan had;
@@ -7531,6 +7536,7 @@ results:
   * physics: 188.1 s
   * biology: 359.6 s
   * chemistry: 155.7 s
+* feb05
 (Hindcast)
 
 Squash-merged dependabot PRs re: critical arbitrary code execution vulnerability in joblib
@@ -7559,6 +7565,230 @@ Investigated Susan's memory blow-up using Reshapr for month-avg on Wed:
 
 
 
+Week 40
+-------
+
+Mon 3-Oct-2022
+^^^^^^^^^^^^^^
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* nowcast-dev not running
+* using salish_cluster config; 8 workers w/ 4 threads each
+* time chunk size: 24
+* hard-coded memory_limit=None (unlimited) in core.extract.py
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* mar05
+  * exception: ``OSError: [Errno -51] NetCDF: Unknown file format: b'/results2/SalishSea/nowcast-green.202111/27mar05/SalishSea_1h_20050327_20050327_grid_T.nc'``
+* success on retry
+* nowcast-dev not running
+* successfully tested worker memory limit from cluster config re: issue #55 and PR#56
+* apr05
+  * sporadic exceptions: ``RuntimeError: NetCDF: Not a valid ID``
+  * success on retries
+(Hindcast)
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Worked on issue #55 re: worker memory limit from cluster config; tested in use for hindcast month
+averages.
+(Reshapr)
+
+Ran /results2/SalishSea/month-avg.201905/month-average.sh script on salish to generated 2019-05 
+files for September.
+Symlinked today's turbidity forcing to last good obs of 16jul; hoping to avoid 
+"symlink chain too long" failure; limit appears to be 40 chained symlinks which would have 
+happened in a couple of days.
+(SalishSeaCast)
+
+Rode Zwift Academy workout #6.
+
+
+Tue 4-Oct-2022
+^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Finished work on issue #55 re: worker memory limit from cluster config; rebase-merged PR#56
+(Reshapr)
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each
+* time chunk size: 24
+* hard-coded memory_limit=None (unlimited) in core.extract.py
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* nowcast-dev running
+* jun05
+* jul05
+  * chemistry failed with: ``RuntimeError: NetCDF: Not a valid ID``
+  * added month_avg.py module CLI to specify dataset(s) to process
+  * chemistry succeeded on retry
+* pulled PR#56 re: memory_limit control from cluster config
+* changed salish_cluster to use memory_limit=None
+(Hindcast)
+
+Updated conda env on khawla.
+Changed docs build to use ubuntu-22.04.
+Added sphinx-notfound-page to docs.
+Created issue #112 re: Derek White's report of present day missing from ERDDAP depth-averaged 
+currents dataset.
+Experimented with GitHub-driven workflow to get to PyCharm task for work on issue #112:
+* used GH Development sidebar element in issue to create branch; name was sensible, though I 
+  editted it some; GHA workflows were  triggered - surprising!; branch was auto-linked to issue;
+  expect that PR will be too
+* pulled new issue112 branch in to local clone w/ Ctrl-T in PyCharm
+* used context menu to switch to issue112 branch in PyCharm
+* created task for issue112 work in PyCharm; it auto-offered to use expected branch
+Mostly modernized update_forecast_datasets unit tests; created PR#113; still a few @patch decorators remain
+where tests assert on things like Mock.call_arg_list.
+Started tracing ``update_forecast_datasets nemo forecast2 --run-date 2020-10-03``
+(SalishSeaNowcast)
+
+
+Wed 5-Oct-2022
+^^^^^^^^^^^^^^
+
+Continued work on issue #112 and PR#113 re: Derek White's report of present day missing 
+from ERDDAP depth-averaged currents dataset.
+* examined /results/SalishSea/rolling-forecasts/nemo in detail because NEMO runs are late starting
+  today
+    * 05oct22/CHS_currents.nc is MIA; is should have been constructed from 1st 24 hours of 
+      /results/SalishSea/forecast.201905/04oct22/CHS_currents.nc
+* traced ``update_forecast_datasets nemo forecast2 --run-date 2020-10-04``
+* found and fixed bug
+* improved exlusion of files that we don't publish forecast datasets of to ERDDAP
+* rebase-merged PR#113 and closed issue #112
+* email Derek to inform him of resolution
+collect_weather 12 didn't finish:
+* investigation:
+  * no bad messages in log
+  * 524 of 576 files downloaded
+  * missing files in hours 001 and 035-048
+  * sent email to Sandrine at ~11:30; she replied that the issue is known and analysts are working 
+    on it
+  * still no files at 16:45
+    * download_weather 18 2.5km
+    * download_weather 00 1km
+    * download_weather 12 1km
+  * I was decieved! all files except 001/PRMSL came in by 15:15
+* recovery started at ~18:45:
+  * kill collect_weather 12
+  * collect_weather 00 2.5km
+  * symlink 06/007/PRMSL as 12/001/PRMSL
+  * collect_NeahBay_ssh 06
+  * grib_to_netcdf nowcast+
+  * download_live_ocean
+* run_NEMO_agrif failed with 
+  ``paramiko.ssh_exception.SSHException: Error reading SSH protocol banner``
+(SalishSeaNowcast)
+
+
+Thu 6-Oct-2022
+^^^^^^^^^^^^^^
+
+Backfill nowacst-agrif:
+  wait for run to fail
+  make_forcing_links orcinus nowcast-agrif 2022-10-05
+  make_forcing_links orcinus nowcast-agrif 2022-10-06
+download_results orcinus nowcast-agrif 2022-10-06 failed; no explanation; success on re-run
+(SalishSeaNowcast)
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* aug05
+  * failed due to no 31aug05 dir/files; Susan realized that she messed up the restart of the 
+    hindcast after the mystery fail on Tue and left out 31aug05; restart again...
+* aug05
+(Hindcast)
+
+Finished work on PR#53 re: 2xrez model profile and physics extraction:
+* rebased SSC-2xrez branch on to main and resolved Conflicts
+* buffed extract_ONC_SCVIP_physics_hour_avg.yaml; stashed version w/ regular resolution values 
+  in scratch_5.yaml
+* wrote docs/examples/ section
+* conflict mess when I rebased SSC-2xrez on to main; only way I could resolve was to merge SSC-2xrez
+  into main locally; that closed PR#53
+(Reshapr)
+
+Rode Zwift Academy Finish Line Ride.
+
+
+Fri 7-Oct-2022
+^^^^^^^^^^^^^^
+
+Teams mtg w/ Susan and Nancy & Jared Penney at DFO NAFC re: adapting SOG model to stn 27 off
+Cape Spear.
+(SOG)
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* sep05
+* oct05
+  * biology failed with ``Exception: "OSError(-51, 'NetCDF: Unknown file format')"``
+  * success on retry
+* nov05
+(Hindcast)
+
+Drove to White Rock for Thanksgiving dinner w/ J&M and M&J.
+
+
+Sat 8-Oct-2022
+^^^^^^^^^^^^^^
+
+Installed head unit, light & power meter pedals on Pico and power meter pedals on Gunnar.
+
+Rode hill repeats on 8th Ave to test power meter pedals.
+(9 km)
+
+
+Sun 9-Oct-2022
+^^^^^^^^^^^^^^
+
+Rode Iona, Steeveston, south dyke, 5 Rd, 6 Rd loop with Cassidy.
+(68 km)
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* dec05 through apr06
+(Hindcast)
+
+
+
+
+
+Becuase I can never remember how to get a git feature branch that I set asdie back into working
+state:
+* ref: https://www.atlassian.com/git/tutorials/merging-vs-rebasing
+* git switch feature
+* git rebase main
+* In PyCharm > Git > Log context menu "Rebase 'feature' onto 'main'"
+* **BUT** if the changes in the feature branch overlap files in main, it's possible that
+  a merge will be required
+
+
+
+
 TODO:
   EGBC firm registration next steps by 30-Sep
     * practice mgmt plan
@@ -7569,7 +7799,7 @@ TODO:
 
 I'm interested in having our windows cleaned, inside and outside. We live in a 3 unit triplex in Kitsilano, but the service I'm looking for is just for our unit.
 
-We have 2 floors. On the first floor there are 6 windows and a set of patio doors with a window above them. 3 of those windows, and the patio doors have screens. On the second floor there are 8 windows. 4 of them have screens. 1 of them is a window in a balcony door. There are also 2 skylights. One in a small roof section over the front door entry. The other is low in a sloping roof section over the 2nd floor. Inside, the window coverings are mostly mini-blinds except for the patio doors and an adjacent window which have vertical blinds.
+We have 2 floors. On the ground floor there are 6 windows and a set of patio doors with a window above them. 3 of those windows, and the patio doors have screens. On the second floor there are 8 windows. 4 of them have screens. 1 of them is a window in a balcony door. There are also 2 skylights. One in a small roof section over the front door entry. The other is low in a sloping roof section over the 2nd floor. Inside, the window coverings are mostly mini-blinds except for the patio doors and an adjacent window which have vertical blinds.
 
 
 
@@ -7602,7 +7832,7 @@ TODO:
 
 TODO:
 * Fix page footer:
-   © Copyright 2013 – present Salish Sea MEOPAR Project Contributors and The University of British Columbia 
+    © Copyright 2013 – present Salish Sea MEOPAR Project Contributors and The University of British Columbia 
 * get rid of _copyright_year_range()
   
 Created 22.1 release on GitHub; deployed it to skookum.
@@ -7621,7 +7851,7 @@ TODO:
     * MoaceanParcels
     * cookiecutter-MOAD-pypkg
   * SalishSeaCast:
-    * SalishSeaNowcast
+    * SalishSeaNowcast - done 4oct22
     * SalishSeaCmd
     * NEMO-Cmd
     * salishsea-site
