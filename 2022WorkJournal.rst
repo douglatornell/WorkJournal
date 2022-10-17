@@ -7564,7 +7564,6 @@ Investigated Susan's memory blow-up using Reshapr for month-avg on Wed:
 (Reshapr)
 
 
-
 Week 40
 -------
 
@@ -7640,7 +7639,7 @@ Created issue #112 re: Derek White's report of present day missing from ERDDAP d
 currents dataset.
 Experimented with GitHub-driven workflow to get to PyCharm task for work on issue #112:
 * used GH Development sidebar element in issue to create branch; name was sensible, though I 
-  editted it some; GHA workflows were  triggered - surprising!; branch was auto-linked to issue;
+  editted it some; GHA workflows were triggered - surprising!; branch was auto-linked to issue;
   expect that PR will be too
 * pulled new issue112 branch in to local clone w/ Ctrl-T in PyCharm
 * used context menu to switch to issue112 branch in PyCharm
@@ -7770,10 +7769,259 @@ results:
 * extractions run via month_avg.py module
 * large chunk warnings
 * invalid value in divide warnings
-* dec05 through apr06
+* dec05 through sep06
 (Hindcast)
 
 
+Week 41
+-------
+
+Mon 10-Oct-2022
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Thanksgiving Day
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* may06 through nov06
+(Hindcast)
+
+
+Tue 11-Oct-2022
+^^^^^^^^^^^^^^^
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* dec06
+  * chemistry failed w/ invalid NetCDF ID error; sucess on retry
+* jan07
+* feb07
+  * chemistry failed w/ NetCDF unknown file format; sucess on retry
+* mar07
+(Hindcast)
+
+Codebase maintenance:
+* updated dev env on khawla
+* added language to GHA CodeQL job status Slack messages so it doesn't look like 2 identical 
+  workflow jobs; rebase-merged PR#21
+* added pip -e install to conda env descriptions; rebase-merged PR#22
+* updated rtd build:
+  * chg to use ubuntu-22.04
+  * add rtd-installed pkgs to env description
+  * add sphinx-notfound-page extension
+  * fix warning re: language setting in conf.py
+  * rebase-merged PR#23
+* fixed default branch setting on rtd so that docs build; last build was ~11 months ago :grimace:
+* updated page footer & SalishSeaCast branding; rebase-merged PR#24
+  * Fixed page footer:
+      © Copyright 2013 – present SalishSeaCast Project contributors and The University of British Columbia 
+  * got rid of _copyright_year_range() request method
+* Created 22.1 release on GitHub.
+* Bumped version to 22.2.dev0.
+* Updated prod env on skookum.
+* fixed in-press annotation on Olson et al (2020); rebase-merged PR#25
+* added Jarníková et al (2021) cluster analysis paper to pubs pg; rebase-merged PR#26
+* added Jarníková et al (2022) SKOG carbonate chemistry model paper to pubs pg; rebase-merged PR#27
+(salishsea-site)
+
+Updated khawla minecraft to iris-1.4 and lithium-0.8.3.
+
+
+Wed 12-Oct-2022
+^^^^^^^^^^^^^^^
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* apr07 through jul07
+(Hindcast)
+
+Added Jarnikova 2021 & 2022 to SalishSeaCast/docs/CITATION.rst; GitHub
+improved semantic markup of publication years and journal names.
+Fixed build warnings re: AMM12-BDY-analysis.ipynb.
+(SalishSeaCast docs)
+
+Toured repos to re-enable scheduled GHA workflows that were disabled due to lack of activity.
+
+Updated khawla to PyCharm 2022.2.3.
+
+Resolved issue #37 re: KeyError for variable not in variables group:
+* branch: issue37-keyerror-for-var-not-in-vars-group
+* PR#57; rebase-merged
+(Reshapr)
+
+
+Thu 13-Oct-2022
+^^^^^^^^^^^^^^^
+
+Power failure at UBC caused name resolution failures and manager crashes in Slack notifications of
+hindcast run completions; see 43ravens/NEMO_Nowcast issue #15.
+make_ssh_files was unsuccessful to due missing Neah Bay 12oct obs; triggered persistences symlink
+race condition during upload_forcing forecast2; forecast2 runs skipped.
+make_ssh_files was unsuccessful to due missing Neah Bay 12oct obs; triggered persistences symlink
+race condition during upload_forcing nowcast+:
+* recovery started at ~08:45:
+  ln -s ../fcst/ssh_y2022m10d12.nc
+  clear_checklist
+  upload_forcing arbutus nowcast+
+  upload_forcing optimum nowcast+
+  upload_forcing orcinus nowcast+
+  upload_forcing graham-dtn nowcast+
+Started work on moving sea surface height fcst -> obs symlink when obs are missing into 
+make_ssh_files:
+* branch: symlink-fcst-as-obs
+* traced through make_ssh_files in PyCharm debugger to understand it and to tweak config so that I 
+  can run it on khawla without writing to skookum:/results/forcing/sshNeahBay/
+* created PR#114
+(SalishSeaCast)
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* aug07 through oct07
+(Hindcast)
+
+Created 43ravens/NEMO_Nowcast issue #15 re: name resolution failure in manager._slack_notification()
+causing manager to crash.
+(NEMO_Nowcast)
+
+UBC-DFO modeling collaboration mtg; Susan re: SalishSeaCast bathymetry changes for 202111:
+* bathy version is 202108
+* this bathy is for 202111 runs
+* changes:
+  * physics:
+    * daily rivers
+    * coastal wave parameterization (slippery water)
+    * new bathy
+    * spin-up started w/ 2002 using climate downscaled atmos
+    * fix OCB
+    * fix GMLAM weights
+  * biology:
+    * fix Asselin filter
+    * improve sinking
+    * remove ciliates
+    * retuned biology
+    * new OBC for bio
+    * fix chemistry OBC
+* depth < 2m = 0m
+* 2m < depth < 4m = 4m
+
+Weekly project mtg.
+Helped Raisha with R kernel issue in VS Code.
+(Atlantis)
+
+
+Fri 14-Oct-2022
+^^^^^^^^^^^^^^^
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* nov07 through feb08
+(Hindcast)
+
+Continued work on moving sea surface height fcst -> obs symlink when obs are missing into 
+make_ssh_files:
+* branch: symlink-fcst-as-obs
+* PR#114
+* finally got something that appears to work; failed to create a unit test for ti though :-(
+* pulled branch into prod on skookum for testing
+* TODO:
+  * Fix tests to work without access to /results (CI fails on GH, and locally w/o sshfs mount)
+TLS cert for aquatic.pyr.ec.gc.ca expired today, so the Fraser buoy cronjob failure at 10:35
+  was a ``Connection timed out``, but then it went back to ``invalid turbidity data:  NTU``
+(SalishSeaCast)
+
+
+Sat 15-Oct-2022
+^^^^^^^^^^^^^^^
+
+Minecraft Live
+
+Continued work on moving sea surface height fcst -> obs symlink when obs are missing into 
+make_ssh_files:
+* branch: symlink-fcst-as-obs
+* PR#114
+* worked as expected in prod with normal obs from Neah Bay
+make_forcing_links arbutus nowcast-green failed w/ 
+``paramiko.ssh_exception.SSHException: Error reading SSH protocol banner``
+* re-ran successfully at ~14:45
+(SalishSeaCast)
+
+Municipal Election
+
+
+Sun 16-Oct-2022
+^^^^^^^^^^^^^^^
+
+Continued work on moving sea surface height fcst -> obs symlink when obs are missing into 
+make_ssh_files:
+* branch: symlink-fcst-as-obs
+* PR#114
+* apparently there were Neah Bay obs missing for 15oct at forecast2 time; symlink and critical log 
+  message as expected
+Hindcast stopped due to name resolution failures and manager crashes in Slack notifications of
+hindcast run completions; see 43ravens/NEMO_Nowcast issue #15.
+(SalishSeaCast)
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* mar07 through sep08
+(Hindcast)
+
+Rode TFC Sunday D group ride on Zwift.
+
+
+
+TODO:
+* add changing "remote.SSH.connectTimeout" setting value to 45 s to VS Code docs
+
+
+
+TODO:
+* SalishSeaCast/docs:
+  * replace broken links:
+    * http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/
+    * http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/LectureNotes/Intro_to_Python.pdf
+    * https://www.pac.dfo-mpo.gc.ca/science/oceans/data-donnees/search-recherche/profiles-eng.asp
+    * https://www.waterlevels.gc.ca/eng/data#s2
+    * https://www.westgrid.ca/support/systems/orcinus
+
+
+TODO:
+* update GHA actions to Node.js 16 versions; warnings now, no set final date as of 12oct22:
+  * actions/checkout@v2 -> actions/checkout@v3
+  * conda-incubator/setup-miniconda - no node.js 16 version available yet
+  * 8398a7/action-slack@v3 - did node.js 16 as micro version bump
+* more deprecation warnings in SalishSeaNEMO re: `set-output` and `save-state`
+  * coming from conda-incubator/setup-miniconda@v2
 
 
 
@@ -7830,14 +8078,6 @@ TODO:
 
   
 
-TODO:
-* Fix page footer:
-    © Copyright 2013 – present Salish Sea MEOPAR Project Contributors and The University of British Columbia 
-* get rid of _copyright_year_range()
-  
-Created 22.1 release on GitHub; deployed it to skookum.
-Bumped version to 22.2.dev0.
-(salishsea-site)
 
 
 TODO:
@@ -7852,15 +8092,15 @@ TODO:
     * cookiecutter-MOAD-pypkg
   * SalishSeaCast:
     * SalishSeaNowcast - done 4oct22
+    * salishsea-site - done 11oct22
     * SalishSeaCmd
     * NEMO-Cmd
-    * salishsea-site
     * SOG-Bloomcast-Ensemble
     * tools
 
 
 
-Add Tereza's pubs to citations, etc.
+Add Tereza's pubs to ERDDAP.
 
 
 Set up VSCode for reStructuredText editing of docs.
