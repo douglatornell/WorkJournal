@@ -6259,7 +6259,7 @@ Updated nodecraft server to 1.19.2:
     phosphor-fabric-mc1.19.x-0.8.1.jar
 * restarted server
 * re-purposed Fabric 1.19.2 testing instance to become Nodecraft 1.19.2
-  * had some hassels getting big streen resolution
+  * had some hassels getting big screen resolution
   * manually configured MiniHUD, but could have copied minihud.json from config folder of
     another instance
 * copied resource packs from Nodecraft 1.19 instance; no new releases:
@@ -7982,6 +7982,8 @@ make_ssh_files:
 * PR#114
 * apparently there were Neah Bay obs missing for 15oct at forecast2 time; symlink and critical log 
   message as expected
+(SalishSeaNowcast)
+
 Hindcast stopped due to name resolution failures and manager crashes in Slack notifications of
 hindcast run completions; see 43ravens/NEMO_Nowcast issue #15.
 (SalishSeaCast)
@@ -7998,10 +8000,362 @@ results:
 
 Rode TFC Sunday D group ride on Zwift.
 
+ESB power outage mid-afternoon.
 
 
-TODO:
-* add changing "remote.SSH.connectTimeout" setting value to 45 s to VS Code docs
+Week 42
+-------
+
+Mon 17-Oct-2022
+^^^^^^^^^^^^^^^
+
+collect_weather 18 didn't finish yesterday
+* investigation:
+  * lots of name resolution failures in log between 16oct22 14:22 and 15:35
+  * why was skookum DNS affected by ESB power outage???
+  * 540 of 576 files downloaded
+* recovery; started at ~09:15:
+  * move /results/forcing/atmospheric/GEM2.5/GRIB/20221016/18/ aside
+  * kill collect_weather 18
+  * commands:
+      download_weather 18 2.5km
+      download_weather 00 1km --yesterday
+        * failed due to files purged from server
+      download_weather 12 1km --yesterday
+      download_weather 00 2.5km
+      download_weather 06 2.5km
+      wait for forecast2 runs to finish
+      download_weather 12 2.5km
+      collect_weather 18 2.5km
+Investigated why skookum is affected by ESB name server outages
+* I thought that Henryk fixed that in Apr-2022 by adding fallbacks elsewhere on the network, 
+  but skookum (18.04) now only has:
+    137.82.49.124 == dhcp2.eoas.ubc.ca
+* salish (18.04) has:
+    nameserver 142.103.43.16
+    nameserver 142.103.250.10
+    nameserver 137.82.1.2
+
+    (/home/dlatorne/conda_envs/reshapr) month-avg.202111$ nslookup 142.103.43.16
+    16.43.103.142.in-addr.arpa      name = udc-ad-dc.eoas.ubc.ca.
+
+    (/home/dlatorne/conda_envs/reshapr) month-avg.202111$ nslookup 142.103.250.10
+    10.250.103.142.in-addr.arpa     name = dhcp2.eoas.ubc.ca.
+
+    (/home/dlatorne/conda_envs/reshapr) month-avg.202111$ nslookup 137.82.1.2
+    2.1.82.137.in-addr.arpa name = ns-int-1.netcom.ubc.ca.
+* note that dhcp2.eoas.ubc.ca has many IP addresses:
+    (base) ~$ dig dhcp2.eoas.ubc.ca
+
+    ; <<>> DiG 9.18.1-1ubuntu1.2-Ubuntu <<>> dhcp2.eoas.ubc.ca
+    ;; global options: +cmd
+    ;; Got answer:
+    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 16006
+    ;; flags: qr rd ra; QUERY: 1, ANSWER: 7, AUTHORITY: 0, ADDITIONAL: 1
+
+    ;; OPT PSEUDOSECTION:
+    ; EDNS: version: 0, flags:; udp: 65494
+    ;; QUESTION SECTION:
+    ;dhcp2.eoas.ubc.ca.		IN	A
+
+    ;; ANSWER SECTION:
+    dhcp2.eoas.ubc.ca.	1095	IN	A	142.103.250.31
+    dhcp2.eoas.ubc.ca.	1095	IN	A	137.82.22.4
+    dhcp2.eoas.ubc.ca.	1095	IN	A	137.82.49.124
+    dhcp2.eoas.ubc.ca.	1095	IN	A	142.103.250.10
+    dhcp2.eoas.ubc.ca.	1095	IN	A	137.82.49.88
+    dhcp2.eoas.ubc.ca.	1095	IN	A	137.82.23.5
+    dhcp2.eoas.ubc.ca.	1095	IN	A	137.82.107.4
+
+    ;; Query time: 7 msec
+    ;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
+    ;; WHEN: Mon Oct 17 11:12:10 PDT 2022
+    ;; MSG SIZE  rcvd: 158
+* after a couple of hours of research...
+* Updated skookum /etc/network/interfaces em1 stanza with line:
+    dns-nameservers 142.103.43.16 142.103.250.10 137.82.1.2
+  hoping that will ensure that /run/resolvconf/resolv.conf is correctly set in future
+* did on skookum:
+    sudo systemctl restart resolvconf
+  and confirmed that DNS servers have been updated with:
+    systemd-resolve --status
+* Updated salish /etc/network/interfaces eth1 stanza with line:
+    dns-nameservers 142.103.43.16 142.103.250.10 137.82.1.2
+  hoping that will ensure that /run/resolvconf/resolv.conf is correctly set in future
+* didn't restart resolvconf service on salish because systemd-resolve --status shows that it 
+  (somehow) has the correct name servers configured
+(SalishSeaCast)
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* oct08 through jan09
+Split hindcast results into spinup and prod directories:
+* renamed nowcast-green.202111/ to spinup.202111/
+* created new nowcast-green.212111/
+* moved 07, 08, and 09 results dirs from spinup.202111/ to nowcast-green.202111/
+(Hindcast)
+
+
+Tue 18-Oct-2022
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* feb09 through may09
+Started archiving spin-up month tarballs to graham in tmux session (202111-tarballs) on skookum.
+(Hindcast)
+
+Added note re: changing "remote.SSH.connectTimeout" setting value to 45 s to VS Code docs.
+(MOAD)
+
+Started Slack discussion w/ Susan about why there are month-avg.201905/ collections on both 
+/results/ and /results2/, and which one ERDDAP should be looking at.
+(ERDDAP)
+
+Photoshoot for EOAS website photo.
+
+Finished work on moving sea surface height fcst -> obs symlink when obs are missing into 
+make_ssh_files:
+* branch: symlink-fcst-as-obs
+* PR#114
+* refactored to get test suite to work without access to /results/ and added tests for new code
+(SalishSeaNowcast)
+
+
+Wed 19-Oct-2022
+^^^^^^^^^^^^^^^
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* jun09 through sep09
+Continued archiving spin-up month tarballs to graham in tmux session (202111-tarballs) on skookum.
+(Hindcast)
+
+Rebase-merged PR#114 re: moving sea surface height fcst -> obs symlink when obs are missing into 
+make_ssh_files; pulled into production.
+(SalishSeaCast)
+
+Added release watches on the repos for the 5 GHA actions I use:
+* actions/checkout
+* conda-incubator/miniconda3
+* 8398a7/action-slack
+* github/codeql-action/init
+* github/codeql-action/analyze
+
+Worked on setting up UBC-MOAD/SOG-code-collab repo:
+* worked in /media/doug/warehouse/MOAD on khawla
+* hg cloned repo from /ocean/:
+    hg clone ssh://smelt//ocean/sallen/hg_repos/SOG-code SOG-code-hg
+* confirmed that HEAD of that clone is the version that we run in 
+  /data/dlatorne/SOG-projects/SOG-code-bloomcast/ for bloomcast
+* cloned https://github.com/frej/fast-export
+* created a conda env to work in because python and mercurial installs need to be coordinated
+  (got fail using system mercurial pkg with base env python)
+    mamba create -n hg-fast-export python mercurial
+* converted SOG-code-hg git repo:
+    mkdir SOG-code-collab
+    cd SOG-code-collab
+    git init
+    (hg-fast-export) SOG-code-collab$ ../fast-export/hg-fast-export.sh -r ../SOG-code-hg/
+    git switch master
+    git branch -m main  # change default branch name from master to main
+* do my local git clone setups:
+    git config --local --add user.email "dlatornell@eoas.ubc.ca"
+    ln -s /home/doug/dotfiles/pop_os/khawla/githooks/rescuetime_commit_highlight.sh .git/hooks/post-commit
+* TODO:
+  * replace .hgignore with .gitignore
+  * add LICENSE file
+  * add README.md file
+  * add CITATION file
+  * discuss repo name w/ Susan
+  * discuss absence of copyright notices w/ Susan
+(SOG)
+
+Started work w/ Susan on RAC application.
+
+
+Thu 20-Oct-2022
+^^^^^^^^^^^^^^^
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* oct09 through jan10
+Continued archiving spin-up month tarballs to graham in tmux session (202111-tarballs) on skookum.
+* mar03 spin-up tarball rsync failed
+(Hindcast)
+
+See 2022 and new 2023 work journals.
+(Resilient-C)
+
+Flu shot.
+
+Weekly project mtg.
+(Atlantis)
+
+Updated GHA actions re: Node.js 12 and codeql-actions@v1 deprecations; rebase-merged PR#58.
+Tagged v22.1 and published release of v22.1 on GitHub.
+Bumped version to 22.2.dev0 for next dev cycle.
+(Reshapr)
+
+Discovered that GitHub CLI tool can query and enable workflows; it's also installable via conda :-)
+Installed gh in conda env on khawla:
+  mamba create -n github-cli gh  # just 1 package!
+Query workflow statuses for a repo; e.g.
+  gh -R SalishSeaCast/SalishSeaNowcast workflow list -a
+(MOAD)
+
+
+Fri 21-Oct-2022
+^^^^^^^^^^^^^^^
+
+First rainfall in weeks.
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* feb10 through apr10
+Continued archiving spin-up month tarballs to graham in tmux session (202111-tarballs) on skookum.
+* aug is missing from bash loop :-(
+**redo aug02 aug03**
+**rsync mar03, then delete files**
+(Hindcast)
+
+Toured GitHub repos w/ GHA actions to re-enable scheduled sphinx-linkcheck workflows 
+that have been disabled due to 60d inactivity:
+  for repo in docs SalishSeaNowcast SalishSeaCmd NEMO-Cmd salishsea-site; \
+  do \
+    echo ${repo}:; \
+    gh -R SalishSeaCast/${repo} workflow list -a; \
+    echo ""; \
+  done
+
+  for repo in docs moad_tools MoaceanParcels Reshapr; \
+  do \
+    echo ${repo}:; \
+    gh -R UBC-MOAD/${repo} workflow list -a; \
+    echo ""; \
+  done
+
+  gh -R SS-Atlantis/AtlantisCmd workflow list -a
+
+  for repo in docs Make-MIDOSS-Forcing MOHID-Cmd WWatch3-Cmd; \
+  do \
+    echo ${repo}:; \
+    gh -R MIDOSS/${repo} workflow list -a; \
+    echo ""; \
+  done
+Created MOAD/gha-workflows-checker repo and intial implementation of script.
+(MOAD)
+
+Coffee/char w/ Jose.
+
+Did ZRacing October Stage 3: Figure8 Reverse.
+
+
+Sat 22-Oct-2022
+^^^^^^^^^^^^^^^
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* may10
+Continued archiving spin-up month tarballs to graham in tmux session (202111-tarballs) on skookum.
+* cleaned up errors:
+    rsync mar03, then deleted files
+    month_avg aug02
+
+* aug is missing from bash loop :-(
+**redo aug02 aug03**
+(Hindcast)
+
+Drove to White Rock to visit J&M.
+
+
+Sun 23-Oct-2022
+^^^^^^^^^^^^^^^
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via month_avg.py module
+* large chunk warnings
+* invalid value in divide warnings
+* jun10 through dec10
+Continued archiving spin-up month tarballs to graham in tmux session (202111-tarballs) on skookum.
+* cleaned up errors:
+    month_avg aug03
+(Hindcast)
+
+Discovered that code runs stopped sometime yesterday:
+* investigation:
+  * name resolution failure in ending of watch_NEMO nowcast-green on Fri appears to have stopped
+    everything
+  * forecast2/21oct22 ran successfully early on 22oct22, but watcher was blocked by stalled watcher 
+    from nowcast-green/21oct22; no download
+  * nowcast-blue/22oct22 ran successfully on 22oct22, but watcher was blocked by stalled watcher 
+    from nowcast-green/21oct22; no download
+* spent a bunch of time trying to get skookum to have more than the unreliable 137.82.49.124
+  but can't get systemd-resolve --status to show any update
+  * ended up adding ``44.237.180.172  hooks.slack.com`` to /etc/hosts
+* recovery:
+    download_results arbutus nowcast-green --run-date 2022-10-21
+    pkill -f watch_NEMO  # kill stalled worker on arbutus
+    make_forcing_links salish nowcast+ --shared-storage --run-date 2022-10-21
+    launch_remote_worker arbutus make_ww3_wind_file "arbutus forecast --run-date 2022-10-21"
+    launch_remote_worker arbutus make_ww3_current_file "arbutus forecast --run-date 2022-10-21"
+    download_results arbutus nowcast --run-date 2022-10-22
+    wait for wwatch3 runs to finish
+    make_forcing_links arbutus ssh --run-date 2022-10-22
+    # no messages from watch_NEMO on arbutus
+    supervisorctl restart log_aggregator
+    # upload_forcing turbidity failed to all hosts due to no riverTurbDaily2_y2022m10d22.nc file
+    pushd /results/forcing/rivers/river_turb/ 
+    ln -s /results/forcing/rivers/river_turb/riverTurbDaily2_y2022m10d21.nc riverTurbDaily2_y2022m10d22.nc
+    upload_forcing arbutus turbidity --run-date 2022-10-22
+    upload_forcing orcinus turbidity --run-date 2022-10-22
+    upload_forcing optimum turbidity --run-date 2022-10-22
+    upload_forcing graham-dtn turbidity --run-date 2022-10-22
+    wait for nowcast-green to finish
+    launch_remote_worker arbutus make_ww3_wind_file "arbutus forecast --run-date 2022-10-22"
+    launch_remote_worker arbutus make_ww3_current_file "arbutus forecast --run-date 2022-10-22"
+    wait for wwatch3 runs to finish
+    make_forcing_links arbutus nowcast+ --run-date 2022-10-23
+    wait for x2 nowcast run to fail
+    launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast --run-date 2022-10-22"
+    wait for fvcom runs to finish
+(SalishSeaCast)
+
 
 
 
@@ -8020,9 +8374,28 @@ TODO:
   * actions/checkout@v2 -> actions/checkout@v3
   * conda-incubator/setup-miniconda - no node.js 16 version available yet
   * 8398a7/action-slack@v3 - did node.js 16 as micro version bump
+  * codecov/codecov-action@v1 -> codecov/codecov-action@v3
 * more deprecation warnings in SalishSeaNEMO re: `set-output` and `save-state`
   * coming from conda-incubator/setup-miniconda@v2
+* confirm that we are using:
+  * github/codeql-action/init@v2
+  * github/codeql-action/analyze@v2 (probably using v1 in some repos)
+  * EOL date for v1 is Dec-2022
+* commit messages:
+  * Bump GHA actions/checkout to v3
 
+    re: Node.js 12 actions deprecation. See:
+    https://github.blog/changelog/2022-09-22-github-actions-all-actions-will-begin-running-on-node16-instead-of-node12/
+
+  * Bump GHA codecov/codecov-action to v3
+
+    re: Node.js 12 actions deprecation. See:
+    https://github.blog/changelog/2022-09-22-github-actions-all-actions-will-begin-running-on-node16-instead-of-node12/
+
+  * Bump GHA github/codeql-action/analyze to v2
+
+    re: CodeQL Action v1 deprecation. See:
+    https://github.blog/changelog/2022-04-27-code-scanning-deprecation-of-codeql-action-v1/
 
 
 Becuase I can never remember how to get a git feature branch that I set asdie back into working
