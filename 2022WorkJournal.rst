@@ -8242,8 +8242,6 @@ results:
 * feb10 through apr10
 Continued archiving spin-up month tarballs to graham in tmux session (202111-tarballs) on skookum.
 * aug is missing from bash loop :-(
-**redo aug02 aug03**
-**rsync mar03, then delete files**
 (Hindcast)
 
 Toured GitHub repos w/ GHA actions to re-enable scheduled sphinx-linkcheck workflows 
@@ -8357,6 +8355,274 @@ Discovered that code runs stopped sometime yesterday:
 (SalishSeaCast)
 
 
+Week 43
+-------
+
+Mon 24-Oct-2022
+^^^^^^^^^^^^^^^
+
+Continued recovery from automation failure:
+  wait for x2 nowcast run to fail
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast --run-date 2022-10-23"
+  wait for nowcast-dev run to fail
+  make_forcing_links salish nowcast+ --shared-storage --run-date 2022-10-22
+  make_forcing_links salish nowcast+ --shared-storage --run-date 2022-10-23
+  make_forcing_links salish nowcast+ --shared-storage --run-date 2022-10-24
+  wait for r12 nowcast run to finish at ~21:00
+  launch_remote_worker arbutus make_fvcom_boundary "arbutus x2 nowcast --run-date 2022-10-24"
+(SalishSeaCast)
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* jan11 through mar11
+Continued archiving spin-up month tarballs to graham in tmux session (202111-tarballs) on skookum;
+finished 2004.
+**Susan realized that there is an error in the 2007-onward boundary conditions configuration**
+Prep to restart hindcast from 01jan07:
+* empty ``/results2/SalishSea/nowcast-green.202111/``
+* deleted ``/results2/SalishSea/month-avg.202111/SalishSeaCast_1m_*_200[789]*.nc``
+* deleted ``/results2/SalishSea/month-avg.202111/SalishSeaCast_1m_*_201[01]*.nc``
+(Hindcast)
+
+Continued work on RAC application.
+
+Python 3.11.0 released.
+
+
+Tue 25-Oct-2022
+^^^^^^^^^^^^^^^
+
+graham down for maintenance
+
+Continued work on RAC application.
+
+nowcast-x2/25oct22 launched while nowcast-r12/24oct22 still had ~12m to run; competitive Struggled
+until ~11:30.
+download_weather 1km 12 failed due to missing file
+``001/CMC_hrdps_west_DLWRF_SFC_0_rotated_latlon0.009x0.009_20221025T12Z_P001-00.grib2``
+(SalishSeaCast)
+
+FAL estate work:
+* liquidated BCE shares
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* jan07 through apr07
+No spin-up month tarball archiving today due to graham maintenance.
+(Hindcast)
+
+Python 3.11.0 available from conda-forge.
+Started watching conda-forge packages migration at https://conda-forge.org/status/#python311
+
+Updated GHA actions re: Node.js 12 deprecation; rebase-merged PR#37.
+Updated docs build system; rebase-merged PR#38.
+Created draft PR#39 to start migration to Python 3.11; added 3.11 to GHA CI version matrix.
+* should be able to test periodically with ``gh workflow run CI --ref py311``
+CI 3.11 workflow failed with:
+``package pyyaml-5.3-py36h97a6639_1 requires python_abi 3.6 *_pypy36_pp73, but none of the 
+providers can be installed``
+(NEMO-Cmd)
+
+
+Wed 26-Oct-2022
+^^^^^^^^^^^^^^^
+
+Continued work on RAC application.
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* may07 through aug07
+Resumed spin-up month tarball archiving after graham maintenance; started 2005.
+Discoverd that /nearline was not mounted on graham-dtn; rectified after email to support;
+started rsync-ing tarballs that were skipped: jan05, feb05
+(Hindcast)
+
+Tried to run CI workflow with ``gh workflow run CI --ref py311`` and it failed with:
+``could not create workflow dispatch event: HTTP 422: Workflow does not have 'workflow_dispatch'
+trigger (https://api.github.com/repos/SalishSeaCast/NEMO-Cmd/actions/workflows/858353/dispatches)``
+Ran workflow from browser; failed with:
+``package pyyaml-6.0-py311hd4cff14_5 requires python_abi 3.11.* *_cp311, but none of the providers 
+can be installed``
+Added workflow_dispatch trigger to CI workflow in PR#37.
+(NEMO-Cmd)
+
+``*.eos.ubc.ca`` TLS cert expired this morning; opened helpdesk ticket.
+download_weather 1km 00 and download_weather 1km 12 failed due to missing files
+(SalishSeaCast)
+
+conda-forge Python 3.11 migration stopped in the evening; no idea why.
+
+
+Thu 27-Oct-2022
+^^^^^^^^^^^^^^^
+
+Continued work on RAC application.
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* sep07 through nov07
+Continued spin-up month tarball archiving after graham maintenance; finished 2005, started 2006.
+Finished rsync-ing skipped tarballs: mar05, apr05
+(Hindcast)
+
+conda-forge Python 3.11 migration resumed.
+
+Ran py311 CI workflow from browser; failed again with:
+  ``package pyyaml-6.0-py311hd4cff14_5 requires python_abi 3.11.* *_cp311, but none of the providers can be installed``
+Odd, because in the terminal:
+  ``mamba create -n foo python=3.11 arrow attrs cliff f90nml pip pyyaml black pytest pytest-cov sphinx sphinx_rtd_theme sphinx-notfound-page``
+fails with:
+  ``package cliff-2.9.1-py_0 requires cmd2 >=0.6.7, but none of the providers can be installed``
+(NEMO-Cmd)
+
+Charles renewed cert and replied on last year's ticket: https://helpdesk.eoas.ubc.ca/tickets/ABXO-3634-CRWD
+
+AAPS AGM:
+* United Way: Kelli Kadokawa
+* mtg chair: Afsaneh Sharif
+* nativeland.ca interactive map
+* Strategic plan:
+  * EDI working group
+  * comms & engagement working group
+  * services & support working group
+* collective bargaining
+  * priorities:
+    * pay re: inflation, general increase, COLA
+    * flexibile work arrangements
+      * subsidized transit passes
+    * paid leave for culture; 5 days
+    * entrench benefits
+    * additional hours
+  * questions
+* advocacy
+  * >1100 cases last year, increasing complexity
+* staff introductions
+* financials
+* board election results
+* education awards
+* adjournment; recording stopped
+* general Q&A:
+
+Tried to explain salishsea-site figure machanics to Tereza on Slack.
+
+Weekly mtg.
+(Atlantis)
+
+
+Fri 28-Oct-2022
+^^^^^^^^^^^^^^^
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* dec07 through mar08
+Finished spin-up month tarball archiving.
+(Hindcast)
+
+Added model profile description to info sub-command output and to all model profiles:
+* branch: info-description
+* PR#59; rebase-merged
+Started work on adding API for reshapr.core.extract():
+* not as simple as I expected...
+* branch: api_v1
+* PR#60
+(Reshapr)
+
+
+Sat 29-Oct-2022
+^^^^^^^^^^^^^^^
+
+Pulled api_v1 branch on salish to test in context of hindecast month-averages; 
+(Reshapr)
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* apr08 through jul08
+Started hindcast month tarball archiving.
+(Hindcast)
+
+
+Sun 30-Oct-2022
+^^^^^^^^^^^^^^^
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* aug08 through nov08
+Continued hindcast month tarball archiving.
+(Hindcast)
+
+Experimented with editable install of MOAD dep pkgs in env decriptions; 
+i.e. in SalishSeaCmd/envs/environment-dev:
+    # editable install of NEMO-Cmd package
+    - --editable git+https://github.com/SalishSeaCast/NEMO-Cmd.git/#egg=NEMO-Cmd
+    # editable install of SalishSeaCmd package
+    - --editable ../
+Result was a clone of NEMO-Cmd in SalishSeaCmd/envs/src/ and successful installation.
+(MOAD)
+
+Started thinking about worker to calculate day-averages and month-average datasets as part of 
+post-processing of hindcast/nowcast runs:
+* possible names:
+  * make_averaged_dataset
+  * resample_dataset
+* uses:
+  * after every download_results, calculate day-averaged biology, chemistry, physics datasets 
+    from hour-averaged
+  * after month-end download_results, calculate month-averaged biology, chemistry, physics datasets 
+    from hour-averaged or day-averaged???
+* need Reshapr.api.v1.extract_netcdf()
+* args:
+  * Resphapr extraction config
+    * file path, or config key, or derive from other args:
+      * run-type; i.e. nowcast, hindcast, spinup
+        * for choice of Reshapr extraction config
+      * resampling interval
+  * run-date
+    * for backfilling
+  * resampling interval; i.e. day, month
+    * to set Reshapr start/end date
+    * maybe involved in choice of Reshapr extraction config
+* run worker on salish to take advantage of its cores and big RAM
+(SalishSeaNEMO)
+
+Finished RAC application.
+
+
+
 
 
 TODO:
@@ -8467,7 +8733,7 @@ TODO:
     * SalishSeaNowcast - done 4oct22
     * salishsea-site - done 11oct22
     * SalishSeaCmd
-    * NEMO-Cmd
+    * NEMO-Cmd - done 25oct22
     * SOG-Bloomcast-Ensemble
     * tools
 
