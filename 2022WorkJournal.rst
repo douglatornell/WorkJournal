@@ -8582,7 +8582,7 @@ results:
 * large chunk warnings
 * invalid value in divide warnings
 * aug08 through nov08
-Continued hindcast month tarball archiving.
+Continued hindcast month tarball archiving; finished 2007, started 2008.
 (Hindcast)
 
 Experimented with editable install of MOAD dep pkgs in env decriptions; 
@@ -8620,6 +8620,293 @@ post-processing of hindcast/nowcast runs:
 (SalishSeaNEMO)
 
 Finished RAC application.
+
+
+Week 44
+-------
+
+Mon 31-Oct-2022
+^^^^^^^^^^^^^^^
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* dec08 through mar09
+Continued hindcast month tarball archiving.
+(Hindcast)
+
+collect_weather 2.5km 12 is slow;
+* 240 of 576 files downloaded at 09:35
+* finished at 10:22
+Cleaned up /SalishSeaCast/datamart/hrdps-west/[00,06,12,18]
+download_live_ocean was also slow; finished at 10:32
+download_weather 1km failed again for both 00 and 12; sent email to Sandrine; she said that 
+she will get analysts to investigate
+(SalishSeaCast)
+
+Weekly mtg; see whiteboard.
+(MOAD)
+
+JetBrains New UI webinar:
+* Paul Everitt, Khalid Abuhakmeh, Helen Scott - dev advocates
+* Olga Berdnikova (UI lead) in chat
+* Goals:
+  * reduce visual complexity
+  * easy access to essential features
+  * progressive disclosure; tools appear as you need them, then stay
+  * clean, modern, powerful
+* gradual rollout; not default until majority of users have successfully transitioned
+* blog post; IntelliJ blog May 2022
+* available now in EAP
+* search git commits in search everywhere
+* 4 quadrants:
+  * icons in sidebars
+  * top quadrant unfurl vertically (e.g. file navigator)
+  * bottom quadrant unfurl horizontially (e.g. terminal)
+* lots of words replaced with icons; less intrusive
+* looks a bit like VS Code
+* debugger window may be biggest change
+* recent files switcher
+* probably ship as option in 2022.3; might become default in 2024
+* VCS branch moves from status bar to toolbar; expands to VCS tasks menu
+* file system breadcrumb nav moved from top to status bar; also in context via alt-up
+* different to Fleet (new IDE product?) which is a new UI toolkit; IntelliJ uses JavaSwing
+
+Created issue #115 re: adding ability to run archive_tarball worker for hindcast results
+* branch: 115-hindcast-archive_tarball
+* PR#116
+* updated pkgs in dev env; got pytest=7.2.0 that vendors the parts of py it needs; uninstalled py
+  to resove the recent dependabot alert re: CVE-2022-42969
+* pulled branch on skookum; successfully tested ``archive_tarball hindcast 2009-jan graham-dtn``
+* manager got restarted due to new after_split_results() looking for "archive hindcast" config flag;
+  after restart (which loaded updated config into mgr) automation took over doing monthly archive_tarball for hindcast :-)
+(SalishSeaNowcast)
+
+
+November
+========
+
+Tue 1-Nov-2022
+^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* apr09 through jun09
+Finished manual hindcast month tarball archiving with feb09 and mar09; automation from 
+after_split_results() takes care of it now :-)
+(Hindcast)
+
+Rebase-merged PR#116 re: adding ability to run archive_tarball worker for hindcast results;
+closed issue #115.
+Pulled update on skookum, changed back to main branch, deleted 115-hindcast-archive_tarball branch.
+(SalishSeaNowcast)
+
+Worked on getting mocsy to work for Susan:
+* GitHub: https://github.com/jamesorr/mocsy
+* PyPI: apparently not a thing
+* conda-forge: 
+  * https://github.com/conda-forge/mocsy-feedstock
+    * maintained by https://github.com/ocefpaf
+  * https://anaconda.org/conda-forge/mocsy
+  * most recent builds 2022-11-01 11:51 UTC?; include Python 3.11 :-)
+* solution for Susan is from ``mocsy import mocsy``; mocsy is Fortran built to a .so with a Python
+  interface, so I guess that top level mocsy is the .so and mocsy namespace is within?;
+  that might explain an instance of ``sys.path.add()`` hacking I saw in mocsy's docs
+
+Messed around with bash tab completion for conda; installed argcomplete in base end; didn't work
+worth crap.
+
+Lost connection to salish and storage at ~13:55; recovered at 14:55, but swap was ~94%, dropped slowly until ~16:20 when nowcast-dev finished, then it dropped to 6.3%.
+
+Worked with Camryn to help her start using Reshapr for one of her course projects.
+
+Continued work on API:
+* started to refactor _load_config to handle start/end date overrides to provide 
+  load_extraction_config(config_yaml, start_date, end_date) -> dict as and endpoint
+(Reshapr)
+
+
+Wed 2-Nov-2022
+^^^^^^^^^^^^^^
+
+Yesterday's ``collect_weather 18 2.5km`` got stuck due to salish swap issue,
+and we didn't notice until this morning
+* recovery started at ~08:45
+    kill collect_weather 18 2.5km
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20221101/18
+    download_weather 18 2.5km
+    download_weather 00 2.5km
+    download_weather 06 2.5km
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+    collect_weather 18 2.5km
+nowcast runs could have started at ~08:25 but were delayed to ~10:15
+(SalishSeaCast)
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* jul09 through oct09
+Re-ran ``archive_tarball 2009-jul`` because one of the downloads from optimum was interrupted by
+yesterday's salish swap issue, so the tarball on graham is incomplete.
+* changed cluster to 4 processes to try to ensure avoidance of repeat of salish swap issue
+(Hindcast)
+
+Worked with Camryn on Slack to help her start using Reshapr for her 510 course projects;
+she got a successful test salinity extraction of a salinity depth layer; first student user of 
+Reshapr :-)
+
+Continued work on API:
+* refactored _load_config to handle start/end date overrides to provide 
+  load_extraction_config(config_yaml, start_date, end_date) -> dict as and endpoint
+(Reshapr)
+
+Discussed UBC-MOAD/SOG-code-collab repo TODOs w/ Susan:
+* TODO:
+  * replace .hgignore with .gitignore - Doug
+  * add LICENSE file - Doug
+  * add README.md file - Susan will draft
+  * add CITATION file - Susan will draft
+  * discuss repo name w/ Susan - agreed on SOG-code-collab
+  * discuss absence of copyright notices w/ Susan - okay
+(SOG)
+
+
+Thu 3-Nov-2022
+^^^^^^^^^^^^^^
+
+Fixed broken link that GHA workflow found in docs; commit on GitHub web didn't trigger action;
+re-run of action didn't include new commit; tried to trigger action from gh CLI; failed due to
+lack of workflow_dispatch trigger; added that trigger via GitHub, triggered from gh CLI, and it
+ran from both there and push of commit (unlike previous commit) :shrug:
+(later noticed tweets about degraded action performance that were probably the cause of weirdness)
+(MIDOSS)
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* nov09 through feb10
+(Hindcast)
+
+Email w/ Natasha @DFO re: creating a model profile for CANESM2.
+(Reshapr)
+
+Clean-up on graham:/project/:
+* deleted /project/def-allen/MIDOSS/forcing: ~12200 file, 4.1T, many group rrg-allen
+
+FAL estate work:
+* created spreadsheet for 2021/22 estate tax return and emailed it to Cameron.
+
+
+Fri 4-Nov-2022
+^^^^^^^^^^^^^^
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* mar10 through may10
+(Hindcast)
+
+Explored export of SADA Slack workspace for import to private channels in SalishSeaCast workspace;
+unclear whether export from free plan includes full history or last 90 days; tested export and it 
+includes dates back to 15-Aug-2019 when I created SADA to turn the original workspace over to SalishSeaCast; no private channels (fal-estate) or DMs in export - need Business+ for that (US$15/mo/user) and have to apply.
+
+Susan's uncle Bob passed away.
+
+Tested in the terminal:
+  ``mamba create -n foo python=3.11 arrow attrs cliff f90nml pip pyyaml black pytest pytest-cov sphinx sphinx_rtd_theme sphinx-notfound-page``
+and got an env solution!
+Launched GHA workflow with ``gh workflow run CI --ref py311``; success for Python 3.11!!, but 
+failure for Python 3.10 due to ``pip install python-hglib`` failure - maybe rate limiting?
+Added GitHub branch protection rules to main: no force pushes, and can't be deleted.
+(NEMO-Cmd)
+
+Added GitHub branch protection rules to main: no force pushes, and can't be deleted.
+Continued work on API:
+* moved handling of missing extraction config yaml to cli_extract() so that FileNotFoundError
+  can bubble up in api.v1.extract.load_extraction_config()
+* added api.v1.extract.load_extraction_config()
+(Reshapr)
+
+Started work on make_averaged_dataset worker:
+* branch: make_averaged_dataset
+* added Reshapr deps to env descriptions
+* installed Reshapr in dev env
+(SalishSeaNowcast)
+
+Rode Tour of Makuri Stage 1 race on Castle to Castle course; stayed with front group for ~9min until I blew up on the 10%-11% grade just before the bus stop after closing a gap lower on the climb; held ~205W for the test of the race; only lost 1 place a few km from the finish; 13th of 29 starters, 22 finishers; 8th of 11 on ZwiftPower.
+
+Power failed just before midnight.
+Spruce tree in SW corner of D&M's yard got blown down in wind storm just before midnight
+
+
+Sat 5-Nov-2022
+^^^^^^^^^^^^^^
+
+Downed tree damaged fences along back of D&M's property, but missed shed.
+
+Drove to White Rock to visit J&M.
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* jun10 through sep10
+(Hindcast)
+
+Read about Git commit signing w/ SSH in conjunction with GitHub and 1password.
+
+Power still out at 21:00.
+
+
+Sat 6-Nov-2022
+^^^^^^^^^^^^^^
+
+Power restored at ~00:30.
+
+Changed to PST; collect_weather 12 finished at 07:27.
+
+Created GitHub signing key for commits and tags; managed by 1password.
+Installed 1password CLI on khawla. 
+Enabled 1password app unlock via system auth service.
+Enabled 1password SSH agent for commit signing (but not terminal session yet).
+Connected 1password CLI to khawla desktop app.
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* oct10 through dec10
+(Hindcast)
 
 
 
