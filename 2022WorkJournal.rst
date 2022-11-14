@@ -8909,7 +8909,449 @@ results:
 (Hindcast)
 
 
+Week 45
+-------
 
+Mon 7-Nov-2022
+^^^^^^^^^^^^^^
+
+Ran weekly gha-workflows-checker$ check: all workflows enabled.
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* jan11 through may11
+(Hindcast)
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Discovered that setuptools changed editable installs re: PEP600 or PEP660, maybe in setuptools=64.0.0,
+or in pip=22.3
+* causes Reshapr editable install in SalishSeaNowcast dev env to fail such that reshapr pkg
+  shows nothing more than __version__ and __name__
+* no Reshapr.egg-link in site-packages/
+* setuptools docs suggest that:
+     python3 -m pip install -e /media/doug/warehouse/MOAD/Reshapr/ --config-settings editable_mode=compat
+  might solve the problem
+* very confusing!!!
+* https://github.com/pypa/setuptools/issues/3548
+* w/o ``--config-settings editable_mode=compat`` the site-packages/__editable__.Reshapr-22.2.dev0.pth
+  contains:
+    import __editable___Reshapr_22_2_dev0_finder; __editable___Reshapr_22_2_dev0_finder.install()
+  and that results in PyCharm not finding reshapr
+* w/o ``--config-settings editable_mode=compat`` the site-packages/__editable__.Reshapr-22.2.dev0.pth
+  contains:
+    /media/doug/warehouse/MOAD/Reshapr
+  and things are good
+* maybe this is a PyCharm issue?
+* maybe change to hatchling for build system?
+* spent ~3h on this mess
+Continued dev of make_averaged_dataset worker.
+Added GitHub branch protection rules to main: no force pushes, and can't be deleted.
+(SalishSeaNowcast)
+
+Continued work on extractin API.
+(Reshapr)
+
+Changed config on skookum to run wwatch3 after NEMO forecast instead of after nowcast-green.
+Email from Kaitlin Palmer @SMRU re: ERDDAP downloads not working; suggested it was that 9mo long
+slice she wants exceeds server response time limit.
+(SalishSeaCast)
+
+
+Tue 8-Nov-2022
+^^^^^^^^^^^^^^
+
+A few cm of snowfall overnight.
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* jun11 through aug11
+Paused month averaging until Susan changes hindcast config re: GEMLAM grid/weights change in 
+Sep-2011.
+(Hindcast)
+
+wwatch3/nowcast started after nemo/forecast, as it was supposed to.
+nemo/nowcast-green didn't start after wwatch3/forecast; no code in after_watch_ww3() to make that 
+happen :-0
+Manually ran make_turbidity_file to start nowcast-green and nowacst-agrif.
+Pulled merged PR#118 re: wwatch3 sequencing into production and restarted manager so that
+changes in next_workers take effect for tomorrow's runs.
+(SalishSeaCast)
+
+Added code to after_watch_ww3() to run nowcast-green after wwatch3/forecast when 
+``config["wave foreacsts"]["run when"] == "after forecast"``:
+* branch: nowcast-green-after-wwatch3
+* PR#118; rebase-merged
+* updated NowcastWorker mock in test_wwatch3.py re: issue#81
+* updated logging mocks in test_wwatch3.py re: issue#82
+* added production config testsin test_wwatch3.py re: issue#117
+Created issue #117 re: adding unit tests for production YAML config file elements
+related to workers.
+Continued dev of make_averaged_dataset worker:
+* hacked worker test of Reshapr API worked!!
+(SalishSeaNowcast)
+
+Continued work on extractin API.
+(Reshapr)
+
+
+Wed 9-Nov-2022
+^^^^^^^^^^^^^^
+
+GitHub Universe Day 1:
+Keynote:
+* Thomas Dohmke, CEO
+  * 52M new repos in FY22, 92% open source
+  * 94M devs on GH
+* Rizel Scarlett, Dev Advocate
+  * Copilot
+    * "AI pair programmer"
+    * free for educators & open source
+    * Codespaces, VSCode, IntelliJ, Vim
+    * 40% of Python code, 55% faster than w/o
+    * Hey GitHub - copilot by voice
+* Allison Weins
+  * projects in issues
+  * new features
+  * support in mobile app
+* April Leonard
+  * Code search
+  * Codespaces
+    * cloud GPUs in preview
+    * 60 hrs free per month
+* Naytri Sramek
+  * Oopen source support
+    * discussions, profile, new privacy settings, 
+    * sponsors >$25M to date
+    * companies sponsor OS; GH did $500K last summer to support stack
+    * GitHub Accelerator
+    * GitHub Fund: $10M to fund dev tools
+* Daiman Brady
+  * Actions
+    * actions importer
+    * reusable workflows
+* Maya Ross
+  * Enterprise
+* Brittany O'Shea
+  * Advanced Security
+    * Dependabot, 18M automated updates
+    * credential scanning
+      * push protection
+    * CodeQL
+      * Ruby support
+    * Security overview dashboard
+  * Private vulnerability reporting
+* Thomas Dohmke, CEO
+  * 15 years since 1st GitHub commit
+  * "Let's build from here!"
+
+GitHub Actions: CI/CD for millions:
+* Brian A. Randell
+* 1B minutes per month
+* reusable workflows
+* deployment env for salishsea-site??
+
+Demystifying end-to-end supply chain security
+Zach Steindler
+* 2FA on account
+* Dependabot
+* secret scanning
+* branch protection
+* OpenID Connect
+* Dependabot
+  * free for ever
+
+Git outta here: how GitHub does detection
+Calum Hal
+* "blue team wins"
+* objectives
+  * proactive
+    * research
+    * threat hunting
+    * testing
+  * reactive
+    * incident triage
+    * threat eradication
+    * lessons learned
+
+Codespaces
+
+Shifting left vs developer-first security
+Nick Liffen
+* "shift left" == moving user stories, issues, testing, infrastructure, security, etc. to devs;
+  i.e. devops
+
+SBOMs: what are they and how are they useful?
+Courtney Claessens
+* GitHub dependancy graph
+* how I use requirements.txt, but on steroids
+
+Managing GitHub Actions across all your repositories
+Joe Duffy, Pulumi | Guinevere Saenger, Pulumi
+* Infrastructure-as-code (IaC)
+* IaC is not just for the cloud, works for SaaS providers
+* hence GitHub as code
+
+Adopt a security mindset with GitHub Actions
+Stephanie Wong, Google | Averi Kitsch, Google
+* **rewatch this** 
+* typo squatting
+* exploit injection has taken over from exploit finding
+* least privilege principle
+* set tight permissions in workflows
+* use commit hash pinning for 3rd party actions
+* SLSA (say salsa)
+
+What's next for GitHub's security products
+Justin Hutchings, GitHub | Grey Baker, GitHub | Kate Catlin, GitHub
+* secret scanning and push protection
+* Dependabot
+  * added dart, yarn, rust
+  * GitHub Advisory Database
+    * issued ~1200 CVEs in 2022
+* vulnerability disclosure
+  * private vulnerability reporting
+
+How GitHub uses GitHub to secure GitHub
+Jacob DePriest, GitHub | Greg Ose, GitHub 
+
+Building with :heart: How GitHub creates, innovates, and builds for the future
+Kyle Daigle
+* power of AI experiments
+* GitHub Blocks expt: blocks.githubnext.com
+  * README editor -> repo website
+* GitHub Copilot
+  * shell, git, gh AI completion; git?
+* Brushes
+  * VSCode Copilot Labs extension
+* PRbot
+  * describe PR changes
+  * review code
+
+
+make_turbidity_file succeeded!!
+nowcast-green and nowcast-agrif launched correctly after wwatch3-forecast
+(SalishSeaCast)
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* sep11 through dec11
+(Hindcast)
+
+Continued work on extractin API:
+* wrote unit test for api_extract_netcdf() that should succeed on GHA runner
+* pushed api_extract_netcdf() and API function
+(Reshapr)
+
+Continued dev of make_averaged_dataset worker:
+* branch: make_averaged_dataset
+* PR#119
+(SalishSeaNowcast)
+
+
+Thu 10-Nov-2022
+^^^^^^^^^^^^^^^
+
+GitHub Universe Day 2:
+Keynote:
+From right here, right now, to galaxies far away
+Stormy Peters, GitHub
+
+Advanced security with novice skills
+Justin Watts, TELUS 
+* Engrg Mgr in Nelson
+
+GitHub code search
+Colin Merkel, GitHub
+* beta of new code view available today to tech preview registrants 
+
+How GitHub builds GitHub
+Mike Hanley, GitHub 
+* GitHub did 80k deployments in past year
+* 1.9M commits on GH codebase
+* 4.3B API requests per day, peaks 2-3x
+* productivity, collaboration, security
+* productivity
+  * codespaces, copilot
+  * codespaces
+    * GH up in 60 seconds vs. 45 min
+    * better hardware than laptops
+  * copilot
+    * 55% faster
+  * April Leonard - demo
+    * codespaces w/ desktop VSCode as UI
+    * JetBrains integration is in private beta
+  * collaboration
+    * isues, projects, task lists
+    * code search & view
+  * Omar Bensaadon - demo of isues, projects, task lists
+* mandatory 2FA by end of 2023
+* use a YUBI key to eliminate fishing attacks
+
+Adopt a security mindset with GitHub Actions
+Stephanie Wong, Google | Averi Kitsch, Google
+* **rewatch**
+* infrastructure security
+* exploit injection has taken over from exploit finding
+  * software supply chain attacks; e.g. log4j
+* principle of least privilege
+  * set tight permissions in workflows
+  * set read-only at org level
+  * ``permissions: read-all`` ?? in workflow
+* use commit hash pinning for 3rd party actions
+* use envvars in workflows to sanatize inputs
+* be wary of automerge
+* SLSA (say salsa)
+
+GitHub Desktop is for everyone
+Rebecca Miller-Webster, GitHub 
+
+10 years of the Octoverse
+Martin Woodward, GitHub 
+* original hubber
+* 10th anniversary of Octoverse report
+* 94M devs on GH
+* India on track to dominate open-source dev
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* jan12 through apr12
+(Hindcast)
+
+Helped Camryn & Cassidy on Slack w/ a couple of analysis repo issues.
+
+Continued dev of make_averaged_dataset worker:
+* branch: make_averaged_dataset
+* PR#119
+(SalishSeaNowcast)
+
+
+Fri 11-Nov-2022
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Remembrance Day
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* may12 through jul12
+(Hindcast)
+
+Helped Camryn on Slack w/ VSCode remote extensions and Reshapr sporadic invalid netCDF format error.
+
+Worked on getting ECget to stop spamming email with "invalid water_depth data:  m" messages:
+* ECget clone on salish is still hg in /data/dlatorne/SOG-projects/ecget
+* Changed default branch name of ECget repo on GitHub to main
+* Added branch protection rules to main branch
+* Cloned from GitHub on khawla and did local repo settup re: email and rescuetime highlights
+* Noted that starting on 17-Jun-2018 my commits are duplicated
+* Created Python 3.7 (to match prod on salish) ecget env
+* Squash-merged dependabot PR re: jupyter-core arbitrary code execution vulnerability
+  CVE-2022-39286 
+* Created PR#24 to add water_depth to set of intruments that we don't want warming emails about
+  when the is no obs value
+  * branch: ignore-missing-water-depth
+* GitHub marked commit as unverified due to me using @43ravens.ca address in this repo;
+  added signingkey to local git config
+* Moved ecget hg clone aside on salish
+* Cloned ECget from GitHub on salish; did pip install -e; changed to ignore-missing-water-depth
+  branch to prod testing at 14:35
+(ECget)
+
+
+Sat 12-Nov-2022
+^^^^^^^^^^^^^^^
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* aug12 through oct12
+(Hindcast)
+
+Started exploring use of reusable GHA workflows:
+* discovered that ``secrets.CODECOV_TOKEN`` is no longer required for public repos
+* Changed UBC-MOAD org Actions Workflow Permissions to be more restrictive:
+  * GITHUB_TOPKEN from read-write for all scopes to read for just the contents scope
+  * disabled Actions from creating and approving pull requests
+* Created UBC-MOAD/gha-workflows repo to hold reusable workflows; plan to move gha-workflows-checker
+  script that I wrote recently into that repo too
+  * added .github/dependabot.yaml config to check weekly & update Actions versions
+* more complicated than I first thought because workflow calls have to be jobs, not steps in jobs
+* shifted to use refactor-CI-workflow branch in moad_tools for dev & testing
+(MOAD)
+
+Rode herD Beginner Race race on Two Village Loop course; stayed with front group for ~6min until acceleration coming out of 1st gravel section; solo to top of gravel climb then covered attacks by rider who caught me and won downhill sprint finish against them; 9th of 24 starters, 19 finishers; 8th of 11 total and 2nd of 2 in F sub-category on ZwiftPower.
+
+
+
+Sun 13-Nov-2022
+^^^^^^^^^^^^^^^
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* nov12 through jan13
+(Hindcast)
+
+Continued exploring use of reusable GHA workflows:
+* dev & testing branch: UBC-MOAD/refactor-CI-workflow
+* got a working pytest-with-coverage reusable workflow; added it to gha-workflows repo
+(MOAD)
+
+
+
+
+TODO:
+* add note to MOAD VSCode docs about installing extensions on remote host
+
+
+TODO:
+* review and clean up permissions in GitHub orgs
+
+
+
+
+Becuase I can never remember how to get a git feature branch that I set asdie back into working
+state:
+* ref: https://www.atlassian.com/git/tutorials/merging-vs-rebasing
+* git switch feature
+* git rebase main
+* In PyCharm > Git > Log context menu "Rebase 'feature' onto 'main'"
+* **BUT** if the changes in the feature branch overlap files in main, it's possible that
+  a merge will be required
 
 
 TODO:
@@ -8949,16 +9391,6 @@ TODO:
 
     re: CodeQL Action v1 deprecation. See:
     https://github.blog/changelog/2022-04-27-code-scanning-deprecation-of-codeql-action-v1/
-
-
-Becuase I can never remember how to get a git feature branch that I set asdie back into working
-state:
-* ref: https://www.atlassian.com/git/tutorials/merging-vs-rebasing
-* git switch feature
-* git rebase main
-* In PyCharm > Git > Log context menu "Rebase 'feature' onto 'main'"
-* **BUT** if the changes in the feature branch overlap files in main, it's possible that
-  a merge will be required
 
 
 
