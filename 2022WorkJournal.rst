@@ -9332,6 +9332,241 @@ Continued exploring use of reusable GHA workflows:
 (MOAD)
 
 
+Week 46
+-------
+
+Mon 14-Nov-2022
+^^^^^^^^^^^^^^^
+
+Ran weekly gha-workflows-checker check: all workflows enabled.
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* feb13 through may13
+(Hindcast)
+
+FAL estate work:
+* Wrote LOD for 2nd distributiuon
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Changed CI workflow to new reusable pytest-with-coverage:
+* branch: improve-GHA-workflows
+* PR#22; rebase-merged
+* updated rtd build spec and added sphinx-notfound-page; PR#23; rebase-merged
+(moad_tools)
+
+
+Tue 15-Nov-2022
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+collect_weather 12 2.5km didn't finish:
+* investigation:
+  * log shows sporadic connection timeouts and refusals
+  * 572 of 576 files downloaded; missing 2 files in hour 012 and 2 in hour 029
+* recovery started at ~11:30:
+    kill collect_weather 12 2.5km
+    collect_weather 18 2.5km
+    mv /results/forcing/atmospheric/GEM2.5/GRIB/20221115/12 aside
+    download_weather 12 2.5km
+(SalishSeaCast)
+
+Change default branch name from master to main.
+Added default branch protection rule.
+(FVCOM-Cmd)
+
+Added maintenance label to defaults for new repos in all orgs
+Added issue to all shared repos that have not yet had their default branch
+name changed from master to main; also added maintenance label.
+Added issue to shared repos with GHA jobs to update them to use reusable workflows
+from https://github.com/UBC-MOAD/gha-workflows
+Streamlined issue creation process by using gh CLI :-)
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* jun13 through jun13
+(Hindcast)
+
+Created GitHub org project boards for my backlog on SalishSeaCast and UBC-MOAD.
+
+
+Wed 16-Nov-2022
+^^^^^^^^^^^^^^^
+
+watch_NEMO_hindcast crashed due to empty time.step file in 06dec13 run;
+Susan is handling recovery.
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* jul13 through oct13
+(Hindcast)
+
+Set up Strava account.
+
+Phys Ocgy seminar.
+
+Continued dev of make_averaged_dataset worker:
+* branch: make_averaged_dataset
+* PR#119
+(SalishSeaNowcast)
+
+Squash-merged dependabot PR for pillow in moad_tools re: CVE-2022-45199 DOS attack
+**Note: pillow=9.3.0 is not yet available on conda-forge** So, pause merging similar
+PRs in other repos.
+
+Rebase-merged PR#60 re: v1 API.
+Changed GitHub Actions jobs to use reusable workflows from UBC-MOAD/gha-workflows; 
+rebase-merged PR#63
+(Reshapr)
+
+Prep for baking Christmas cakes.
+
+
+Thu 17-Nov-2022
+^^^^^^^^^^^^^^^
+
+Updated SalishSeaCast-202111-salish mode profile for post-spinup; rebase merged PR#64.
+(Reshapr)
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* nov13 through jan14
+(Hindcast)
+
+FAL estate work: 2nd distribution
+
+Baked Christmas cakes.
+
+
+Fri 18-Nov-2022
+^^^^^^^^^^^^^^^
+
+Mtg w/ Susan, Brad & Parmod re: SSC into CIOOS-West
+Updated khawal to PyCharm 2022.2.4
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* feb14 through jun14
+(Hindcast)
+
+Rebase-merged PR#65 re: improving resampled dataset time attr comment.
+Rebase-merged PR#66 re: readthedocs build of api.vi.extract autodocs
+(Reshapr)
+
+Cancelled Telus landline service.
+
+
+Continued dev of make_averaged_dataset worker:
+* branch: make_averaged_dataset
+* PR#119
+* pushed initial implementation so I can test it on skookum/salish
+* skookum:/SalishSeaCast/
+  * Clone Reshapr
+  * pull SalishSeaNowcast and switch to make_averaged_dataset branch
+  * updated nowcast-env to add Reshapr deps and get other pkg updates
+    * had to do twice due to "too many open files" error
+  * pip install -e Reshapr
+    * oddly, it did PyPI installs of structlog, rich, flox, commonmark, Pygments
+  * successfully ran:
+      python3 -m nowcast.workers.launch_remote_worker $NOWCAST_YAML salish-nowcast make_averaged_dataset "salish-nowcast day physics --run-date 2014-08-15 --debug"
+    and for chemisty and biology too
+(SalishSeaNowcast)
+
+
+Sat 19-Nov-2022
+^^^^^^^^^^^^^^^
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using salish_cluster config; 8 workers w/ 4 threads each, memory_limit=None
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* jul14 through sep14
+(Hindcast)
+
+Drove to White Rock to visit J&M.
+
+No messages from watch_fvcom for either x2 or r12 runs:
+* restarted log_aggregator at ~17:15
+(SalishSeaNowcast)
+
+
+Sat 19-Nov-2022
+^^^^^^^^^^^^^^^
+
+Set up persistent dask cluster on salish w/ control port on 4386 and dashboard on 4387:
+* 4 workers, 4 threads each, memory-limit=0
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using persistent cluster on port 4386
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* oct14 through dec14
+(Hindcast)
+
+download_live_ocean timed out; re-ran at ~11:15; timed out again at 14:16
+* recovery started at ~15:00
+  * used yesterday's symlink-persisted for today that was created early this morning for forecast2
+  * unblocked automation:
+      upload_forcing arbutus nowcast+
+      upload_forcing orcinus nowcast+
+      upload_forcing optimum nowcast+
+      upload_forcing graham-dtn nowcast+
+(SalishSeaCast)
+
+Raced 6 lap Downtown Dolphin crit; blew up on 1st time up cobbled climb; solo after than;
+12th of 18 entrants, 10th of 12 on ZwiftPower.
+
+Continued dev of make_averaged_dataset worker:
+* branch: make_averaged_dataset
+* PR#119
+* Created persistent dask cluster on salish with scheduler listening on port 4386 and dashboard
+  on port 4387
+* Changed reshapr configs to use peristent cluster
+* Successfully ran 3 nearly concurrent ``make_averaged_dataset day`` day instances on skookum/salish
+(SalishSeaNowcast)
+
+
+
+**Do Resilient-C certs renewal**
+
+
+
+
+
 
 
 TODO:
@@ -9434,8 +9669,6 @@ TODO:
       std_name = var.attrs["standard_name"]
     KeyError: 'standard_name'
 
-  
-
 
 
 TODO:
@@ -9445,16 +9678,16 @@ TODO:
   * MOAD:
     * Reshapr - done
     * docs - done
-    * moad_tools
-    * MoaceanParcels
-    * cookiecutter-MOAD-pypkg
+    * moad_tools - done 14Nov22
+    * MoaceanParcels - issue created
+    * cookiecutter-MOAD-pypkg - issue created
   * SalishSeaCast:
     * SalishSeaNowcast - done 4oct22
     * salishsea-site - done 11oct22
-    * SalishSeaCmd
+    * SalishSeaCmd - issue created
     * NEMO-Cmd - done 25oct22
-    * SOG-Bloomcast-Ensemble
-    * tools
+    * SOG-Bloomcast-Ensemble - issue created
+    * tools - issue created
 
 
 
