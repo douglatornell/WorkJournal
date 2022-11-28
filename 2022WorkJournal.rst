@@ -9560,8 +9560,221 @@ Continued dev of make_averaged_dataset worker:
 (SalishSeaNowcast)
 
 
+Week 47
+-------
 
-**Do Resilient-C certs renewal**
+Mon 21-Nov-2022
+^^^^^^^^^^^^^^^
+
+Explored VSCode and PyCharm issues re: editable installs interaction w/ IDEs since PEP-660;
+VSCode punted to PyLance who hate the dynamic, run-time form of ``__editable__.*.pth`` files
+(in contrast to the form that contains a path)
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Ran weekly gha-workflows-checker check: re-enabled MIDOSS/WWatch3-Cmd sphinx-linkcheck.
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using persistent cluster on port 4386
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* jan15 through may15
+(Hindcast)
+
+Continued dev of make_averaged_dataset worker:
+* branch: make_averaged_dataset
+* PR#119
+* Added next_workers.after_make_averaged_dataset()
+* Added generation of list of make_averaged_dataset workers to after_split_results()
+* skookum:/SalishSeaCast/
+  * pulled SalishSeaNowcast make_averaged_dataset branch
+  * restarted manager to load changed in next_workers module
+  * expected day-avg workers to launch at ~18:20
+* 15 of 16 make_averaged_dataset workers were successful; 1 failed silently :-(
+(SalishSeaNowcast)
+
+Helped Cassidy w/ salinity datasets for her 510 project; lots of file read errors from reshapr
+while nowcast-dev was running; also messed up some hindcast month-avg resampling
+
+Finished changing NEMO-Cmd to use Python 3.11 for pkg dev; rebase-merged PR#39.
+Started planning to drop old Python versions:
+* need to tag repo for orcinus-python-3.5 at 6da6c2ceddaa1bafcab94afe9e546babc05a5391
+* graham has many Python modules; 2.7.14 to 3.10.2; how far back to support? no earlier than 3.8.10
+(NEMO-Cmd)
+
+
+Tue 22-Nov-2022
+^^^^^^^^^^^^^^^
+
+See work journal.
+(Resilient-C)
+
+make_averaged_dataset day in automation failed for 15 datasets in jul15:
+* 6 physics, 5 chemistry, 4 biology
+* backfilled physics
+* tried to run ``make_averaged_dataset month physics 2015-07-01``
+  * failed due to no ``day: physics tracers`` in 202111 model profile; hacked
+  * failed due to time coordinate name; expected ``time_counter`` but found ``time``;
+    same will happen for y & x
+    * maybe need to let ``results archive: dataset: var group:`` stanzas have ``* coord`` items
+      that override the profile level ones
+* backfilled chemistry & physics
+(SalishSeaNowcast)
+
+Continued extraction of month-averaged physics, biology & chemistry from 202111 hour-averaged
+results:
+* using persistent cluster on port 4386
+* time chunk size: 24
+* extractions run via ``/results2/SalishSea/month-avg.202111/month_avg.py`` module
+* large chunk warnings
+* invalid value in divide warnings
+* jun15 through jun15
+(Hindcast)
+
+Continued planning to drop old Python versions:
+* need to tag repo for orcinus-python-3.5 at 6da6c2ceddaa1bafcab94afe9e546babc05a5391
+* graham:
+  * has many Python modules; 2.7.14 to 3.10.2; how far back to support? no earlier than 3.8.10
+  * ~/.local/bin/salishsea uses 
+      #!/cvmfs/soft.computecanada.ca/easybuild/software/2020/avx2/Core/python/3.9.6/bin/python3
+    i.e. module doesn't need to be loaded for command to work because #! path is explicit
+* salish:
+  * my ~/.local/binsalishsea is a symlink into a non-existent env :-(
+* sockeye:
+  * Python 3.7.10 and 3.8.10 modules
+  * ~/.local/bin/salishsea uses #!/bin/env python3; i.e. whatever python3 module is loaded
+  * my SalishSeaCmd was installed with 3.8
+  * *must load Pyton module for command to work*
+* optimum:
+  * uses conda env
+  * ~/bin/salishsea uses #!/home/sallen/dlatorne/.conda/envs/salishseacast/bin/python3
+  * salishseacast env is Python 3.7
+  * command works w/o module loads
+* conclusion: have to support Python 3.8 for sockeye
+(NEMO-Cmd)
+
+salish went to 100% memory, 100% swap at ~11:30; was bac to normal at ~12:15.
+Restarted dask cluster workers w/ auto memory-limit == 32G each
+
+Confirmed that credit card info on Opalstack is up to date pending subscription renewal.
+
+Installed servux-fabric-1.19.0-0.1.0 on Nodecraft server to enable structure boxes to display in
+MiniHUD.
+
+
+Wed 23-Nov-2022
+^^^^^^^^^^^^^^^
+
+Slack w/ Camryn & Cassidy re: SalishSeaTools and grid repos.
+
+Started work on migrating SalishSeaCmd pkg dev to Python 3.11.
+* branch: py311
+* PR#21
+* added branch protection to main branch
+(SalishSeaCmd)
+
+Phys Ocgy seminar: Paul Myers
+
+Continued dev of make_averaged_dataset worker:
+* branch: make_averaged_dataset
+* PR#119
+* Adapted structlog messages from Reshapr to work well in SalishSeaNowcast logging
+* Added ports for make_averaged_dataset on salish to distributed logging config
+(SalishSeaNowcast)
+
+Discovered ~40 stalled make_averaged_dataset workers on salish
+(Hindcast)
+
+
+Thu 24-Nov-2022
+^^^^^^^^^^^^^^^
+
+Slack w/ Birgit  re: scp failures; she traced it to funky attrs on files when viewed from dtn
+but attrs on same file are okay when viewed from login node; she reported to support and they 
+restarted dtn node to fix.
+
+Yesterday's logging work resulted in NetCDF errors from make_averaged_dataset worker now
+appearing in email and on Sentry; not sure it's all worker fails though.
+Improved make_averaged_dataset checklist so that worker instance segments accumulate in system
+checklist; next hindcast run showed it was not improved enough: NEMO_nowcast manager checklist
+updating is not flexible enough :-(
+(SalishSeaNowcast)
+
+Finished work on migrating SalishSeaCmd pkg dev to Python 3.11.
+* branch: py311
+* rebase-merged PR#21
+* changed environment-test.yaml to install NEMO-Cmd and SalishSeaCmd in preparation for
+  changing to shared reusable workflow
+  * trigger a long thrash to figure out how to stop pytest from collecting NEMO-Cmd test suite
+    in envs/src/ and failing due to test module name collisions; 
+    solved by adding pytest.ini that exccludes envs/
+(SalishSeaCmd)
+
+archive-tarball 2016-apr was interrupted by graham-dtn reboot.
+Connections to graham-dtn failing at 15:00; for Birgit too.
+(Hindcast)
+
+Successfully built a Python 3.11 dev env.
+(NEMO_Nowcast)
+
+Learned that PyDev debugger needs to pass ``-Xfrozen_modules=off`` to Python interpreter
+for Python 3.11; may be default some day, but for now I need to add it in PyCharm run/debug configs.
+VS Code is similarly affected.
+ref: https://github.com/fabioz/PyDev.Debugger/issues/213
+
+
+Fri 25-Nov-2022
+^^^^^^^^^^^^^^^
+
+graham-dtn connection working again.
+Started catch-up on hindcast month tarballs and indexes in tmux session on skookum:
+* apr16
+* may16
+
+* jun16
+* jul16
+(Hindcast)
+
+More work on make_averaged_dataset checklist so that worker instance segments accumulate in system
+checklist.
+Tried to test make_averaged_dataset w/ model coordinates in extracted dataset and found a rabbit
+hole.
+Discovered incompatibility re: bytes from click.Path from click=7.1.2 in nowcast-env vs. 
+Path object click=8.3.0 in Reshapr; unclear why nowcast-env is stuck at 7.1.2.
+(SalishSeaNowcast)
+
+Successfully built Python 3.11 dev env as test; no further
+Squash-merged dependabot PR re: cryptography
+Started work on adding feature to enable use of model coordinates in extracted datasets
+so that SalishSea_1d* files look like NEMO files.
+* branch: output-model-coords
+* PR#68
+(Reshapr)
+
+
+Sat 26-Nov-2022
+^^^^^^^^^^^^^^^
+
+Ran hr-avg -> month-avg for sep16 for Susan to use for monitoring.
+(Hindcast)
+
+Washed Topstones.
+Mounted studded tires on 700C wheels.
+
+
+Sun 27-Nov-2022
+^^^^^^^^^^^^^^^
+
+Raced stage 4 of Race Makuri on the the Fine & Sandy course; did GCN race warmup; 17th of 42 starters and 31 finishers; 9th of 13 on ZwiftPower
+
+
+
+
+
 
 
 
