@@ -9648,7 +9648,7 @@ Continued planning to drop old Python versions:
   * Python 3.7.10 and 3.8.10 modules
   * ~/.local/bin/salishsea uses #!/bin/env python3; i.e. whatever python3 module is loaded
   * my SalishSeaCmd was installed with 3.8
-  * *must load Pyton module for command to work*
+  * *must load Python module for command to work*
 * optimum:
   * uses conda env
   * ~/bin/salishsea uses #!/home/sallen/dlatorne/.conda/envs/salishseacast/bin/python3
@@ -9772,18 +9772,243 @@ Sun 27-Nov-2022
 Raced stage 4 of Race Makuri on the the Fine & Sandy course; did GCN race warmup; 17th of 42 starters and 31 finishers; 9th of 13 on ZwiftPower
 
 
+Week 48
+-------
+
+Mon 28-Nov-2022
+^^^^^^^^^^^^^^^
+
+Ran weekly gha-workflows-checker check: all good.
+
+Continued adding feature to enable use of model coordinates in extracted datasets
+so that SalishSea_1d* files look like NEMO files.
+* branch: output-model-coords
+* PR#68
+* successful test for 01jul15
+* running in automation for day-avg files starting from 01jul17
+(Reshapr)
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Continued dev of make_averaged_dataset worker:
+* branch: make_averaged_dataset
+* PR#119
+* aded ``use model coords`` option to day-avg reshapr configs
+* successfully ran ``make_averaged_dataset day`` with ``use model coords`` 
+  from 01jul17 onware in automation and via launch_remote_worker to backfill missing files
+(SalishSeaNowcast)
+
+Sorted out click version issue in dev env on khawla and prod env on skooum:
+* a pip installed click=7.1.2 was preventing mamba from installing 8.1.3;
+* ``pip uninstall click`` then ``mamba install click`` resolved the issue
+(SalishSeaCast)
+
+
+Tue 29-Nov-2022
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+Very light snow started while riding in; not accumulating at 10:00.
+
+First storm surge alerts of the season for Wed morning.
+(SalishSeaCast)
+
+Successfully ran:
+  reshapr extract config/reshapr/month-average_202111_physics.yaml --start-date 2017-07-01 --end-date 2017-07-31
+to create month-avg file from day-avg files created by ``make_averaged_dataset day``
+Successfully ran:
+  launch_remote_worker $NOWCAST_YAML salish make_averaged_dataset "salish month chemistry --run-date 2017-07-01"
+  launch_remote_worker $NOWCAST_YAML salish make_averaged_dataset "salish month biology --run-date 2017-07-01"
+to create month-avg file from day-avg files created by ``make_averaged_dataset day``.
+Continued manual runs of ``make_averaged_dataset day`` to backfill failures.
+Manually ran ``make_averaged_dataset month`` for:
+* aug-sep 2017
+(Hindcast)
+
+Finished adding feature to enable use of model coordinates in extracted datasets
+so that SalishSea_1d* files look like NEMO files.
+* branch: output-model-coords
+* rebase-merged PR#68
+Added day variable groups for biology, chemistry, light, physics tracers, and vvl grid to 
+202111 model profiles:
+* branch: day-avg-var-groups
+* PR#69
+(Reshapr)
+
+Changed default branch name from master to main in outstanding shared repos:
+* rpn-to-gemlam
+* PythonNotes
+* MIDOSS-MOHID-CODE
+* MIDOSS-MOHID-grid
+* XIOS-2 - figure out how to handle production clones w/ tag branches
+* NEMO-3.6-code - figure out how to handle production clones w/ tag branches
+* SS-run-sets - figure out how to handle production clones w/ tag branches
+* tools
+
+Squash-merged dependabot PR in tools re: CVE-2022-39286 arbitrary code execution vulnerability.
+
+Started learning more about managing repo permissions on GitHub within our orgs re: reducing
+security risk exposure from accounts of users who have moved on from Susan's group.
+
+Rode home in heavy snow with 2-3 cm on the ground.
+
+
+Wed 30-Nov-2022
+^^^^^^^^^^^^^^^
+
+Started exploration of adding retry feature to make_averaged_dataset worker when 
+Reshapr API call fails; discovered that retrying pkg is no longer maintained, tenacity is fork with 
+improvements and a not fully compatible API (sigh); decided to finish & merge PR#119 before
+I dive into that.
+Continued dev of make_averaged_dataset worker:
+* branch: make_averaged_dataset
+* PR#119
+* added make_averaged_dataset to process flow diagram; also updated all worker name fonts so that
+  they don't overrun boxes
+* added deploy docs section re: persistent dask cluster on salish
+(SalishSeaNowcast)
+
+48 stuck make_averaged_dataset worker instances on salish; killed
+Continued manual runs of ``make_averaged_dataset day`` to backfill failures.
+Manually ran ``make_averaged_dataset month`` for:
+* oct-dec 2017
+Killed and restarted workers to get dask cluster unstuck.
+Added --lifetime* option to workers to restart them randomly every hour
+(Hindcast)
+
+
+December
+--------
+
+Thu 1-Dec-2022
+^^^^^^^^^^^^^^
+
+No stuck make_averaged_dataset worker instances on salish
+Continued manual runs of ``make_averaged_dataset day`` to backfill failures.
+* jan18 chem 07, 10, 26, 27 refuse to run; workers get stuck
+* jan18 grid_T 10 refuses to run; workers get stuck
+Manually ran ``make_averaged_dataset month`` for:
+* jan 2018 - biol only
+* feb 2018
+(Hindcast)
+
+Transferred WWatch3-Cmd repo from MIDOS to SalishSeaCast org.
+
+Discovered that GitHub refuses to talk to orcinus; suspect ssh key crypto version age.
+
+Tagged orcinus-python-3.5 at 6da6c2ceddaa1bafcab94afe9e546babc05a5391.
+Dropped support for Python<3.8:
+* branch: drop-py<3.8
+* PR#41
+* started docs cleanup re: :kbd: role, outdated termianl output samples, etc.
+(NEMO-Cmd)
+
+
+Fri 2-Dec-2022
+^^^^^^^^^^^^^^
+
+collect_river_data failed for Salmon at Sayward
+(SalishSeaCast)
+
+Updated khawla to PyCharm 2022.3.
+Discoverd that it is no longer necessary to pass set ``-Xfrozen_modules=off`` interpreter flag.
+
+No stuck make_averaged_dataset worker instances on salish
+Continued manual runs of ``make_averaged_dataset day`` to backfill failures.
+* jan18 chem 07, 10, 26, 27 via reshapr extract
+* jan18 grid_T 10 via reshapr extract
+Manually ran ``make_averaged_dataset month`` for:
+* jan 2018 - chem & phys
+(Hindcast)
+
+Continued dropping support for Python<3.8:
+* branch: drop-py<3.8
+* PR#41: rebase-merged
+* shelved docs cleanup re: :kbd: role, outdated termianl output samples, etc.
+  for separate PR
+* removed unicode literal string markers (u'...')
+* changed str.format() calls to f-string literals
+* dropped 2.9.0 version exclusion on cliff
+Started changing to reusable GHA workflows re: issue #40
+* branch: 40-gha-reusable-workflows
+* PR#42: rebase-merged
+* deleted repo no longer needed secrets: CODECOV_TOKEN and SLACK_MIDOSS_WEBHOOK_URL
+(NEMO-Cmd)
+
+* Changed SalishSeaCast org Actions Workflow Permissions to be more restrictive:
+  * GITHUB_TOPKEN from read-write for all scopes to read for just the contents scope
+  * disabled Actions from creating and approving pull requests
+
+Enabled Slack github app Actions permissions on GitHub for SalishSeaCast and UBC-MOAD orgs.
+Subscribed to UBC-MOAD/docs repo workflows in #ssc-repos channel to test.
+
+Added note to VSCode docs about installing extensions on remote host.
+Fixed broken links to PythonNotes repo re: master -> main.
+(MOAD docs)
+
+Dropped action-slack action and SLACK_WEBHOOK_URL secret from workflows in favour of
+  /github subscribe org/repo workflows:{event:"pull_request","push" branch:"main"}
+configs in Slack #ssc-repos channel
+Updated repos that use reusable workflows:
+* NEMO-Cmd
+* moad_tools
+* Reshapr
+(gha-workflows)
+
+
+Sat 3-Dec-2022
+^^^^^^^^^^^^^^
+
+FAL estate work:
+* set up saving acct
+* depositied BCE dividend cheque
+
+Drove to White Rock to visit J&M; picked up Rocket on the way.
+
+Started modernizing packaging:
+branch: modernize-pkg
+PR#
+* replaced setup.py with pyproject.toml
+* moved coverage config from .coveragerc to pyproject.toml
+(NEMO-Cmd)
+
+
+Sun 4-Dec-2022
+^^^^^^^^^^^^^^
+
+collect_river_data failed for Fraser at Hope and Salmon at Sayward
+* most recent Fraser obs was at 00:25 on 2-Dec-2022
+* most recent Salmon obs was at 20:10 on 30-Nov-2022
+ * station notice on web page: 
+     The regular flow measurement program at this hydrometric gauge is compromised because the 
+     cableway is currently out of service.
+* skipped forecast2 runs
+* recovery started at ~10:50
+  * persisted 02dec22 value to 03dec22 in /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow
+  make_runoff_file
+  upload_forcing arbutus.cloud-nowcast nowcast+
+  upload_forcing optimum-hindcast nowcast+
+  upload_forcing orcinus-nowcast-agrif nowcast+
+  upload_forcing graham-dtn nowcast+
+Every upload_forcing invocation produced a:
+    CryptographyDeprecationWarning: Blowfish has been deprecated "class": algorithms.Blowfish,
+  see issue #127 (resolved)
+Added river obs collection for Nicomekl River at Langley (station 08MH155) to sarracenia 
+hydrometric config and nowcast.yaml on skookum
+  * branch: add-Niomekl
+  * PR#128: rebase-merged
+Changed logging from split_results and make_averaged_dataset workers to go to hindcast.*log
+  * TODO: commit changes
+  * restarted log_aggregator and manager to apply change
+(SalishSeaCast)
+
+Checked versions of setuptools available on sockeye and graham.
+Experimented with hatchling for pkg build.
+(NEMO-Cmd)
 
 
 
-
-
-
-
-
-
-
-TODO:
-* add note to MOAD VSCode docs about installing extensions on remote host
 
 
 TODO:
@@ -9882,6 +10107,17 @@ TODO:
       std_name = var.attrs["standard_name"]
     KeyError: 'standard_name'
 
+Reshapr ideas:
+* extraction config examples in docs:
+  * simple whole field extraction for a few variables
+  * temporal and spatial selection
+  * resampling
+* extraction from month-avg datasets; issue #32
+  * need to handle month-by-month dataset files 
+    (e.g. SalishSeaCast_1m_ptrc_T_20220301_20220331.nc); 
+    code presently assumes day-by-day
+    (e.g. SalishSea_1d_20220314_20220314_ptrc_T.nc)
+
 
 
 TODO:
@@ -9906,22 +10142,6 @@ TODO:
 
 Add Tereza's pubs to ERDDAP.
 
-
-Set up VSCode for reStructuredText editing of docs.
-* Used https://github.com/ammaraskar/sphinx-problem-matcher to add a VSCode problem-matcher
-  to sphinx build task.
-
-
-Reshapr ideas:
-* extraction config examples in docs:
-  * simple whole field extraction for a few variables
-  * temporal and spatial selection
-  * resampling
-* extraction from month-avg datasets; issue #32
-  * need to handle month-by-month dataset files 
-    (e.g. SalishSeaCast_1m_ptrc_T_20220301_20220331.nc); 
-    code presently assumes day-by-day
-    (e.g. SalishSea_1d_20220314_20220314_ptrc_T.nc)
 
 
 TODO:
