@@ -8617,7 +8617,7 @@ post-processing of hindcast/nowcast runs:
     * to set Reshapr start/end date
     * maybe involved in choice of Reshapr extraction config
 * run worker on salish to take advantage of its cores and big RAM
-(SalishSeaNEMO)
+(SalishSeaNowcast)
 
 Finished RAC application.
 
@@ -10008,7 +10008,320 @@ Experimented with hatchling for pkg build.
 (NEMO-Cmd)
 
 
+Week 49
+-------
 
+Mon 5-Dec-2022
+^^^^^^^^^^^^^^
+
+collect_river_data failed for Fraser at Hope and Salmon at Sayward
+* recovery started at ~08:05
+  * persisted 02dec22 value to 04dec22 in /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow
+  nemo_nowcast.workers.clear_checklist
+  make_runoff_file
+  upload_forcing arbutus.cloud-nowcast nowcast+
+  upload_forcing optimum-hindcast nowcast+
+  upload_forcing orcinus-nowcast-agrif nowcast+
+graham is offline for maintenance
+(SalishSeaCast)
+
+archive_tarball jul19 failed due to graham offline for maintenance.
+(Hindcast)
+
+Continued work on modernizing packaging:
+branch: modernize-pkg
+PR#44
+* need newer version of pip on sockeye; sent email request to support
+* graham is down for maintenance
+(NEMO-Cmd)
+
+Changed MOAD pkg cookie cutter to new packaging
+branch: update-pkging
+PR#8; rebase-merged
+(cookiecutter-MOAD-pypkg)
+
+
+Tue 6-Dec-2022
+^^^^^^^^^^^^^^
+
+collect_river_data failed for Fraser at Hope and Salmon at Sayward
+* recovery started at ~08:15
+  * persisted 02dec22 value to 05dec22 in /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow
+  nemo_nowcast.workers.clear_checklist
+  make_runoff_file
+  upload_forcing arbutus.cloud-nowcast nowcast+
+  upload_forcing optimum-hindcast nowcast+
+  upload_forcing orcinus-nowcast-agrif nowcast+
+  upload_forcing graham-dtn nowcast+
+* backfill yesterday's upload_forcing that couldn't run due to graham maintenance shutdown
+  upload_forcing graham-dtn nowcast+ 2022-12-05
+* 5dec22 nowacst-agrif failed due to missing LiveOcean file
+  * recovery:
+      upload_forcing turbidity orcinus 2022-12-05
+      wait for run to finish
+      upload_forcing turbidity orcinus 2022-12-06
+(SalishSeaCast)
+
+Backfilled tarball uploads to graham that failed due to yesterday's maintenance period:
+  jul19
+  aug19
+Backfilled day & month averages:
+  mar-apr18
+(hindcast)
+
+Continued dev of make_averaged_dataset worker:
+* branch: make_averaged_dataset
+* PR#119
+* added code to check for existence of netCDF file path from reshapr, 
+  and to check that it is >=1_000_000 bytes; leg errors if not, and raise WorkerError;
+  added ``retry_if_exception_type(WorkerError)`` to @retry decorator
+* live tested on skookum with size threshold of 1_000_000_000 to confirm that @retry works
+* finished day and month averaging of mar18 during testing
+* added reshapr logger to config so that all of the logging from make_averaged_dataset goes
+  to the hindcast log (for now); key is logger qualname
+(SalishSeaNowcast)
+
+Reply from support@arc says to use virtualenv or conda env to get newer pip :-)
+Installed Mambaforge-pypy3 in $HOME on sockeye:
+  curl -L -O https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-$(uname)-$(uname -m).sh
+  bash ~/Mambaforge-pypy3-$(uname)-$(uname -m).sh
+* allowed ``conda init``, but disabled auto-activate of base env:
+    conda config --set auto_activate_base false
+* set config to put envs in ~/project/dlatorne/conda-envs/
+    mkdir ~/project/dlatorne/conda-envs/
+    conda config --add envs_dirs /project/st-sallen1-1/dlatorne/conda-envs/
+Tested install of modernize-pkg branch in dev env
+(NEMO-Cmd)
+
+
+Wed 7-Dec-2022
+^^^^^^^^^^^^^^
+
+collect_river_data failed for Fraser at Hope and Salmon at Sayward
+* recovery started at ~08:15
+  * persisted 02dec22 value to 05dec22 in /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow
+  nemo_nowcast.workers.clear_checklist
+  make_runoff_file
+  upload_forcing arbutus.cloud-nowcast nowcast+
+  upload_forcing optimum-hindcast nowcast+
+  upload_forcing orcinus-nowcast-agrif nowcast+
+  upload_forcing graham-dtn nowcast+
+(SalishSeaCast)
+
+Susan resumed hindcast runs with newly patched trubidity files that handle long sensor outages
+during 2022.
+11-15 ocr19:
+* 4 of 5 biol file; missing 13
+* 4 of 5 chem file; missing 11
+  * Sentry recorded:
+      OSError: [Errno -51] NetCDF: Unknown file format: 
+      b'/results2/SalishSea/nowcast-green.202111/11oct19/SalishSea_1h_20191011_20191011_chem_T.nc'
+* 4 of 5 grid file; missing 11
+* 5nov19 biology day-avg got stuck on dask cluster; eventually failed with a bare Exception that was
+  recorded on Sentry:
+    scheduler KilledWorker in broadcast_to-copy-store-map
+  schedule log had more info:
+    Task ('broadcast_to-copy-store-map-f8749e739093df4a166fcb7c920a1e87', 0, 0, 0, 0) 
+    marked as failed because 3 workers died while trying to run it
+  This is another of those cases where make_averaged_dataset fails relentlessly;
+  resolved by running reshapr extract on salish.
+* Same as above for 07nov19 and 08nov19 chem
+* all 15 make_averaged_dataset for 6-10nov are stuck:
+    * killed make_averaged_dataset processes on salish
+    * relaunched a day at a time on skookum
+(Hindcast)
+
+Continued dev of make_averaged_dataset worker:
+* branch: retry-make_averaged_dataset
+* PR#130
+* added OSError ``to retry_if_exception_type()`` to handle failure case seen for 11oct19 chem
+* tested reliabiity of day at a time runs of make_averaged_dataset starting in jan07
+  * successes 01-10
+(SalishSeaNowcast)
+
+Phys OCgy seminar: Grant Francis, Data Steward
+* M.Sc. colleague of Jose's from Utrecht
+
+
+Thu 8-Dec-2022
+^^^^^^^^^^^^^^
+
+Dentist appt.
+
+Minecraft on Nodecraft:
+* stored "final" backup of world that we started in Nov-2021 in 1.18.1 (coral & alpine bases)
+  that evolved to 1.19.2 as 1_18-1To8dec22 and downloaded backup
+* archived its instance as SADA2022
+* created new sada instance with fabric 1.19.3-0.14.11
+* Settings:
+  * world
+    * Name: 1-19-3Expt8dec22
+    * spawn protection radius: 16
+  * Gamemode
+    * Survival
+    * hard
+    * no PvP
+  * Player Settings:
+    * max players 2
+    * enabled allow list 
+  * Players:
+    * added Susan & I to OPs and Allow lists
+  * edit server.properties to enable bundles & 1.20 experimental blocks & mobs
+      initial-enabled-packs=vanilla,bundle,update_1_20
+Mods:
+* MaLiLib, MiniHUD, Tweakeroo not ready yet
+* phosphor 0.8.1 is unchanged
+* Downloaded:
+  * lithium 0.10.3
+  * sodium 0.4.6
+  * iris-mc1.19.3-1.4.6
+Shader packs:
+* Complementary 4.6 is unchanged
+* ComplementaryReimagined 1.3.2
+TODO:
+  Resource packs:
+  * BorderlessStainedGlass
+  * ClearerWater
+  * LowerShield
+  * RedstonDevices
+  Data packs:
+  * CoordinatesHUD 1.2.3
+
+Squash-merged dependabot PRs re: certifi CVE-2022-23491 re: removal of TrustCor root cert:
+* MIDOSS/docs
+* MIDOSS/Make-MIDOSS-Forcing
+* MIDOSS/MOHID-Cmd
+* UBC-MOAD/cookiecutter-analysis-repo
+* SalishSeaCast/SOG-Bloomcast-Ensemble
+* SalishSeaCast/analysis-doug/dask-expts
+* SalishSeaCast/analysis-doug/melanie-geotiff
+* SalishSeaCast/rpn-to-gemlam
+* SalishSeaCast/tools
+* 43ravens/NEMO_Nowcast
+
+archive-tarball dec19 failed w/ exit code 255; ran rsync in tmux session
+(Hindcast)
+
+
+Continued dev of make_averaged_dataset worker:
+* branch: retry-make_averaged_dataset
+* PR#130
+* added RuntimError ``to retry_if_exception_type()`` to handle failure case seen for 24dec19 biol
+* contineud testing reliabiity of day at a time runs of make_averaged_dataset starting in jan07
+  * successes 09-31
+* wrote nowcast.workers.day_month_avgs.py module to process a month at a time, day by day;
+  tested successfully for feb07
+(SalishSeaNowcast)
+
+Weekly project mtg.
+(Atlantis)
+
+
+Fri 9-Dec-2022
+^^^^^^^^^^^^^^
+
+Started backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* mar07 got bunged up; ran out of worker logging ports; way more tasks than usual on dask scheduler;
+  spilled memory to disk; some retries; got tangled up with workers from hindcast run
+* added day-avg file existent checks to day_month_avgs so that it is almost idempotent
+* re-ran for mar07:
+  * 17mar07 biology is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* disabled launch of make_averaged_dataset in after_split_results()
+* apr07
+  * 05apr07 biology is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* may07
+  * 14may07 physics is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* jun07 success
+* jun20 success
+* jul07 success
+* aug07 
+  * 10aug07 chemistry is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+(Hindcast)
+
+Squash-merged more dependabot PRs re: certifi CVE-2022-23491 re: removal of TrustCor root cert:
+* UBC-MOAD/cookiecutter-MOAD-pypkg
+* UBC-MOAD/moad_tools
+* UBC-MOAD/Reshapr
+* UBC-MOAD/docs
+* SS-Atlantis/AtlantisCmd
+* SalishSeaCast/WWatch3-Cmd
+Squash-merged more dependabot PRs re: cryptography GHSA-39hc-v87j-747x re: 
+statically linked version of OpenSSL:
+* SS-Atlantis/AtlantisCmd
+* UBC-MOAD/docs
+* SalishSeaCast/SalishSeaNowcast
+
+``upload_forcing arbutus turbidity`` failed with SSH protocol banner read error at 09:47;
+thought it was going to be a nowcast0 stuck issue, especially when I saw 
+``task jbd2/vdc-8:1953 blocked`` messages in its dashboard log, but ssh to nowast0 worked fine;
+re-ran ``upload_forcing arbutus turbidity`` and automation resumed with start of nowcast-green run
+(SalishSeaCast)
+
+Continued dev of make_averaged_dataset worker:
+* branch: retry-make_averaged_dataset
+* PR#130; rebase-merged
+Moved log output from split_results, make_averaged_dataset, and reshapr to hindcast log files:
+* branch: adjust-logging
+* PR#132; rebase-merged
+Dropped make_averaged_dataset day-avg processing from hindcast automation
+* branch: drop-hindcast-day-avgs
+* PR#133; rebase-merged
+(SalishSeaNowcast)
+
+
+Sat 10-Dec-2022
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* sep07 success
+* oct07 success
+* nov07 success
+* dec07 success
+* jan08 success
+* feb08
+  * 12feb08 biology is another case of make_averaged_dataset worker just hanging
+  * 26feb08 physics is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+(Hindcast)
+
+Created empty 2023 gnucash sqlite3 file, exported accounts from 2022 to csv and imported them, then started editing accounts for 2023:
+* added stocks, ETFs & funds to securities database
+* created non-registered stock, ETF & fund accounts
+* created RSP fund accounts
+* created TFSA fund accounts
+* created scheduled transactions
+
+
+Sun 11-Dec-2022
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* mar08 success
+* apr08 success
+* may08 success
+* jun08 success
+* jul08 success
+* aug08 success
+(Hindcast)
+
+
+
+
+
+
+
+TODO:
+* MIDOSS/MOHID-Cmd CodeQL analysis is failing due to Python version pin in setup.cfg of >=3.8,<3.10
+* 43ravens/NEMO_Nowcast has somehitng weird going on with Slck webhook secret in dependabot PRs
+
+
+
+TODO:
+* add environment-user.yaml to NEMO-Cmd and SalishSeaCmd for HPC clusters
 
 
 TODO:
