@@ -10309,19 +10309,292 @@ Continued backfilling day & month avg files using nowcast.workers.day_month_avgs
 (Hindcast)
 
 
+Week 50
+-------
 
+Mon 12-Dec-2022
+^^^^^^^^^^^^^^^
+
+Ran weekly gha-workflows-checker check: all good.
+
+Worked at ESB while Rita was at home.
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* sep08 
+* added _month_avgs_exist() check to day_month_avgs.py to avoid re-doing already completed work
+* oct08
+  * 24oct08 biology is another case of make_averaged_dataset worker just hanging
+  * aybe a clue in much delayed error messages on skookum (that I didn't copy) about 
+    pickle deserialization
+(Hindcast)
+
+Answered email from Justin Elms at Ocean Navgator re: MemoryError reading SalishSeaCast datasets
+from ERDDAP.
+(Stakeholders)
+
+Invited Matt Miller to SalishSeaCast and UBC-MOAD GitHub orgs.
+Replied to his email re: onboarding.
+
+Rebase-merged Matt's PR#17 re: nano command.
+Bumps env to Python 3.11.
+Added Matt & Camryn as contributors.
+Cleaned up use of :kbd: role re: new sphinx_rtd_theme that makes it really look like a keycap:
+re: issue #21
+Changed to reuable sphinx-linkcheck workflow but it fails due to no docs/ directory.
+(MOAD docs)
+
+
+Tue 13-Dec-2022
+^^^^^^^^^^^^^^^
+
+Guessed that excessive fan noise from khawla was due to Firefox; collapsed all windows into OneTab 
+bundles so I can bring tabs back individually; fan noise increased a bit when I started using VS 
+Code :-( but it is at much lower speed/noise-level
+
+Yesterday's 24oct08 biology pickle deserialization errors were recorded as a bare Exception in 
+Sentry; not sure what I can do with that
+(Hindcast)
+
+collect_weather 12 didn't complete; log shows download failures, connection refused errors, and SSL errors; 575 of 576 files downloaded; missing file is:
+  048/CMC_hrdps_west_DLWRF_SFC_0_ps2.5km_2022121312_P048-00.grib2
+recovery started at ~09:40:
+  grabbed missing file with curl
+  killed collect_weather 12
+  collect_weather 18
+  collect_NeahBay_ssh 06
+  wait for make_ssh_files to finish
+  grib_to_netcdf nowcast+
+  wait for grib_to_netcdf to finish
+  download_live_ocean
+(SalishSeaCast)
+
+Added docs-dir intput to sphinx-linkcheck workflow with default of "docs"; set it to "." for
+docs repos re: yesterday's breakage in UBC-MOAD/docs; PR#3
+(gha-workflows)
+
+Updated sphinx-linkcheck workflow SHA hash re: docs-dir; rebase-merged PR#72
+(Reshapr)
+
+Updated sphinx-linkcheck workflow SHA hash re: docs-dir; rebase-merged PR#26
+(moad_tools)
+
+Continued work on modernizing packaging:
+branch: modernize-pkg
+PR#44; rebase-merged
+* updated sphinx-linkcheck workflow SHA hash re: docs-dir
+* dropped support for Python 3.8 & 3.9
+Squash-merged dependabot PR#45 re: certifi
+PR#46; rebase-merged
+* added pip install of pkg to environment-rtd so that importlib.metadata.version() can work
+Created issue #47 re: fixing uses of :kbd: role.
+(NEMO-Cmd)
+
+
+Wed 14-Dec-2022
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* retried oct08
+  * 24oct08 biology is another case of make_averaged_dataset worker just hanging
+  * might be due to https://github.com/dask/distributed/issues/7403; PR in progress
+  * resolved by running ``reshapr extract`` on salish
+  * oct08 month-avg files already exist from my previous processing of hr-avgs to month-averages
+* month-averages exist from prior processing until jun15, but day-avgs don't, and 01jul15 1d files 
+  have time coord name "time" not "time_counter"; so continue month by month processing to fill in 
+  1d files
+* nov08 
+  * 09nov08 biology is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* dec08 success on 2nd try
+* jan09 
+  * 21jan09 biology is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* feb09 success
+* added code to day_month_avgs.py to print count of each type of 1d files at the end so I have A
+  quick success check
+* mar09 success
+* apr09 success
+* may09 success
+* jun09 success
+(Hindcast)
+
+Created issues in NEMO-Cmd and SalishSeaCmd to add environment-hpc.yaml.
+
+Improved analysis repo section re: Waterhole machine vs. laptop, and added installation of 
+SalishSeaTools package.
+(MOAD docs)
+
+Added environment-hpc.yaml and updated installation docs re: --user installs on HPC clusters.
+Released v22.2.
+Added release process notes to dev docs.
+(NEMO-Cmd)
+
+
+Thu 15-Dec-2022
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* jul09 
+  * 28jul09 physics is another case of make_averaged_dataset worker just hanging
+    worker eventually fails with ``Exception reshapr.core.extract in write_netcdf``
+    and ``distributed.protocol.pickle Faield to deserialize``
+  * resolved by running ``reshapr extract`` on salish
+* aug09 success
+* sep09 success
+* oct09 success
+* nov09 success
+* dec09 success
+* jan10 
+  * 13jan10 physics is another case of make_averaged_dataset worker just hanging
+    worker eventually fails with ``Exception reshapr.core.extract in write_netcdf``
+    and ``distributed.protocol.pickle Faield to deserialize``
+  * resolved by running ``reshapr extract`` on salish
+* feb10 
+  * 06feb10 physics is another case of make_averaged_dataset worker just hanging
+    worker eventually fails with ``Exception reshapr.core.extract in write_netcdf``
+    and ``distributed.protocol.pickle Faield to deserialize``
+  * resolved by running ``reshapr extract`` on salish
+(Hindcast)
+
+Reviewed list of task issues to update repos to use GHA reusable workflows; added issue to 
+WWatch3-Cmd
+
+Updated dev env on khawla
+Started work on change to use GHA reusable workflows; issue #14:
+branch: 14-gha-reusable-workflows
+PR#17: rebase-merged
+* had to make AtlantisCmd pkg install editable in test env in order for GHA pytest-with-coverage
+  workflow be able to find cookiecutter
+(Atlantis)
+
+Oboarding Zoom w/ Matt:
+TODO:
+* carbon fields fully in 201905? - Susan: yes
+* jose re: parcels in analysis repo - Jose
+
+Slack call w/ Cassidy to help her get VS Code nnotebook interface using analysis env for kernel.
+
+Weekly project mtg.
+(Atlantis)
+
+
+Fri 16-Dec-2022
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* mar10 success
+* apr10 success
+* may10 success
+* jun10 success
+* jul10 
+  * 28jul10 biology is another case of make_averaged_dataset worker just hanging
+    worker eventually fails with ``Exception reshapr.core.extract in write_netcdf``
+    and ``distributed.protocol.pickle Faield to deserialize``
+  * resolved by running ``reshapr extract`` on salish
+* aug10 success
+* sep10 success
+* oct10 success
+* nov10 success
+* dec10 success
+(Hindcast)
+
+Disabled GHA workflows and deleted repository secrets in preparation for archiving repos:
+* docs
+* MOHID-Cmd
+* Make-MIDOSS-Forcing
+Deleted SLACK_WEBHOOK_URL org secret; even if we re-activate repos with workflows they will be updated to use shared reusable workflows and GitHub Slack app workflow subscription feature.
+Archived repo that have GHA workflows:
+* learned that archiving automatically disables scheduled workflows; implicitly disables other
+  workflows that are triggered by "write" events because archiving makes the repo read-only
+* Make-MIDOSS-Forcing
+* MOHID-Cmd
+* docs
+* MIDOSS-MOHID-config
+* Unsubscribed from all repo in #soiled channel
+* Deleted MIDOSS Slack github-actions app
+(MIDOSS)
+
+Played with auto-assigning issues via wow-actionsauto-assign action that was delivered to me in
+SalishSeaCastdemo-repository when I explored org setup workflow:
+* had to update auto-assign to @v2
+* had to add ``issues: write`` permission to workflow
+* preferable alternative may be actions/github-script documented at
+  https://docs.github.com/en/actions/managing-issues-and-pull-requests/adding-labels-to-issues
+  octokit/rest.js provies the mapping of REST API endpoints to ``github.rest.*`` calls
+  https://octokit.github.io/rest.js
+* got a functional workflow that auto-assigns me to new issues and PRs
+
+FAL estate work:
+* transferred balance from estate trust acct to savings account
+* closed estate trust account
+
+Added auto-assign workflow to shared reusable workflows collection,
+and implemented it in that repo.
+(gha-workflows)
+
+
+Sat 17-Dec-2022
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* jan11 success
+* feb11 success
+* mar11 success
+* apr11 success
+* may11 success
+(Hindcast)
+
+Drove to White Rock to visit J&M
+
+
+Sun 18-Dec-2022
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* jun11 success
+* jul11 
+  * 02jul11 biology is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* aug11 success
+* sep11 success
+* oct11 success
+* nov11 
+  * 02nov11 biology is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+(Hindcast)
+
+Telcon w/ Gitika in Telus Burnaby office re: still being charged for home phone; order is stuck in
+backend; she escallated ticket; credits reduce Dec bill to $85.42; she also bumped up rewards acct
+to $50 and used it to credit $50 on next bill; rewards ends with home phone going away because it
+is for 2 or more services.
+
+upload_forcing orcinus failed for nowcast+ and turbidity NoValidConnectionError and 
+TimeoutError.
+(SalishSeaCast)
+
+Repo maintenance:
+branch: repo-maint
+PR#6
+* change to Python 3.10 for dev & min supported version
+* pre-commit auto-update + style gardening
+* auto-install pkg env conda envs
+* add GHA assign-issue-pr workflow
+* enabled dependabot dependency alerts and security update PRs
+* add dependabot config to monitor Actions versions
+* change sphinx-linkcheck workflow to use reusable workflow
+* add CodeQL analysis workflow
+* add sphinx-notfound-page extension to docs
+Created issue #7 re: use of rst :kbd: role in docs.
+(MoaceanParcels)
 
 
 
 
 TODO:
-* MIDOSS/MOHID-Cmd CodeQL analysis is failing due to Python version pin in setup.cfg of >=3.8,<3.10
-* 43ravens/NEMO_Nowcast has somehitng weird going on with Slck webhook secret in dependabot PRs
-
-
-
-TODO:
-* add environment-user.yaml to NEMO-Cmd and SalishSeaCmd for HPC clusters
+* 43ravens/NEMO_Nowcast has something weird going on with Slack webhook secret in dependabot PRs
 
 
 TODO:
@@ -10441,7 +10714,7 @@ TODO:
     * Reshapr - done
     * docs - done
     * moad_tools - done 14Nov22
-    * MoaceanParcels - issue created
+    * MoaceanParcels - done18Dec22
     * cookiecutter-MOAD-pypkg - issue created
   * SalishSeaCast:
     * SalishSeaNowcast - done 4oct22
