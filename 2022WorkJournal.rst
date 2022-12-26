@@ -10591,6 +10591,283 @@ Created issue #7 re: use of rst :kbd: role in docs.
 (MoaceanParcels)
 
 
+Week 51
+-------
+
+Mon 19-Dec-2022
+^^^^^^^^^^^^^^^
+
+Ran weekly gha-workflows-checker check: all good.
+
+Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* dec11 
+  * 11dec11 chemistry is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* jan12 success
+* feb12 success
+* mar12 success
+* apr12 success
+* may12 
+  * 08may12 physics is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* jun12 
+  * 22jun12 biology is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+(Hindcast)
+
+Helped Raisha resolve R issue in VS Code; see Slack #debug thread:
+https://salishseacast.slack.com/archives/C01U4KNC2GG/p1671466553539909
+(Atlantis)
+
+Yesterday's ``upload_forcing orcinus`` issue were due to a chiller failure induced hard crash;
+backfilled nowcast-agrif:
+  upload_forcing orcinus nowcast+ 2022-12-18
+  upload_forcing orcinus turbidity 2022-12-18
+  wait for 18dec22 run to finish
+  upload_forcing orcinus turbidity 2022-12-19
+(SalishSeaCast)
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Added assign-issue-pr workflow.
+Added pre-commit.
+Tagged orcinus-python-3.5 at 2d5f4161c4501d4903f8f99e90c3587478aefe57.
+Dropped support for Python 3.5 through 3.9.
+Replaced str.format() with f-string literals.
+Changed to use reusable GHA workflows.
+(SalishSeaCmd)
+
+
+Tue 20-Dec-2022
+^^^^^^^^^^^^^^^
+
+~25 cm of snow overnight
+
+Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* jul12 
+  * something wrong in the dask cluster; workers stacked up to the point of "no ports available"
+    errors on Sentry; also distributed.protocol.pickle failure
+  * waited until the cluster settled down and re-ran to fill in missing days
+  * 10jul12 biology is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* aug12 success
+* sep12 success
+* oct12 
+  * 03oct12 physics is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* nov12 success
+(Hindcast)
+
+Dropped args from super() calls.
+Modernized packaging.
+Added sphinx-notfound-page extension to docs build.
+Added environment-hpc.yaml and updated isntallation docs.
+(SalishSeaCmd)
+
+Tried to help Camryn with running Python script in GitHub Codespace VS Code session.
+
+
+Wed 21-Dec-2022
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* dec12 
+  * 18dec12 physics is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* updated pkgs in salish:reshapr env: dask, distributed, numpy, pandas
+* jan13 
+* feb13
+  * 12feb13 physics is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* mar13
+  * 29mar13 physics is another case of make_averaged_dataset worker just hanging
+  * 29mar13 biology is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* updated pkgs in skookum:nowcast-env env: dask, distributed, numpy, pandas
+* apr13 success
+* may13 
+  * 21may13 biology is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* jun13 success
+(Hindcast)
+
+collect_weather 18 didn't finish yesterday; I didn't notice until this morning
+* investigation:
+  * 574 of 576 files downloaded
+  * 404s in log for:
+      18/003/CMC_hrdps_west_LHTFL_SFC_0_ps2.5km_2022122018_P003-00.grib2
+      18/003/CMC_hrdps_west_PRATE_SFC_0_ps2.5km_2022122018_P003-00.grib2
+  * those files are present on hpfx.collab
+* recovery started at ~08:45
+    kill collect_weather
+    mv /results/forcing/atmospheric/GEM2.5/GRIB/20221220/18 aside
+    download_weather 18 2.5km
+    download_weather 00 2.5km
+    download_weather 06 2.5km
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+    collect_weather 18
+    clean up /SalishSeaCast/datamart/hrdps-west/[00|06|12]
+(SalishSeaCast)
+
+After numpy update on skookum for day/month averages:
+  2022-12-21 12:26:38,380 CRITICAL [make_feeds] unhandled exception:
+  Traceback (most recent call last):
+    File "/SalishSeaCast/NEMO_Nowcast/nemo_nowcast/worker.py", line 391, in _do_work
+      checklist = self.worker_func(
+    File "/SalishSeaCast/SalishSeaNowcast/nowcast/workers/make_feeds.py", line 90, in make_feeds
+      max_ssh_info = _calc_max_ssh_risk(feed, run_date, run_type, config)
+    File "/SalishSeaCast/SalishSeaNowcast/nowcast/workers/make_feeds.py", line 210, in _calc_max_ssh_risk
+      max_ssh, max_ssh_time = _calc_max_ssh(feed, ttide, run_date, run_type, config)
+    File "/SalishSeaCast/SalishSeaNowcast/nowcast/workers/make_feeds.py", line 227, in _calc_max_ssh
+      ssh_ts = nc_tools.ssh_timeseries_at_point(grid_T_15m, 0, 0, datetimes=True)
+    File "/SalishSeaCast/tools/SalishSeaTools/salishsea_tools/nc_tools.py", line 357, in ssh_timeseries_at_point
+      time = timestamp(grid_T, range(len(ssh)), time_var=time_var)
+    File "/SalishSeaCast/tools/SalishSeaTools/salishsea_tools/nc_tools.py", line 270, in timestamp
+      results.append(time_orig + timedelta(seconds=np.asscalar(time_counter[i])))
+    File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/numpy/__init__.py", line 284, in __getattr__
+      raise AttributeError("module {!r} has no attribute "
+  AttributeError: module 'numpy' has no attribute 'asscalar'
+issue #134; PR#136; 
+That leads to 4 instances of ``numpy.asscalar()`` in SalishSeaTools
+(SalishSeaNowcast)
+
+Added GHA assign-issue-pr workflow.
+Created issue #70 re: deprecated ``numpy.asscalar()``;
+(SalishSeaTools)
+
+
+Thu 22-Dec-2022
+^^^^^^^^^^^^^^^
+
+Another numpy update-rel;ated issue:
+  2022-12-22 07:26:14,218 CRITICAL [make_live_ocean_files] unhandled exception:
+  Traceback (most recent call last):
+    File "/SalishSeaCast/NEMO_Nowcast/nemo_nowcast/worker.py", line 391, in _do_work
+      checklist = self.worker_func(
+    File "/SalishSeaCast/SalishSeaNowcast/nowcast/workers/make_live_ocean_files.py", line 82, in make_live_ocean_files
+      filepaths = create_LiveOcean_TS_BCs(
+    File "/SalishSeaCast/tools/SalishSeaTools/salishsea_tools/LiveOcean_BCs.py", line 605, in create_LiveOcean_TS_BCs
+      interpl = stabilize(sigmal, interpl)
+    File "/SalishSeaCast/tools/SalishSeaTools/salishsea_tools/LiveOcean_BCs.py", line 238, in stabilize
+      interps['salt'][:k+1, i, j] += -add_salt/np.float(k+1)
+    File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/numpy/__init__.py", line 284, in __getattr__
+      raise AttributeError("module {!r} has no attribute "
+  AttributeError: module 'numpy' has no attribute 'float'
+Again, the issue is in SalishSeaTools; see issue #72 there.
+Did production fix in SalishSeaTools to test, re-ran make_live_ocean_files to restart automation
+at ~10:00.
+(SalishSeaNowcast)
+
+Resolved issue #72 re: np.float():
+* np.float() was being used to cast ints to floats (i.e. Susan writing Fortran in Python),
+  so just dropped that nonsense :-)
+Reopened issue #70 re: numpy.asscalar() to fix np.asscalar() variants; maybe false alarm - forgot
+to pull SalishSeaTools updates in skookum:nowcast-env?
+* recovery:
+    make_plots nemo nowcast research
+      2022-12-22 11:48:25,141 ERROR [make_plots] unexpected IndexError in make_figure:
+      Traceback (most recent call last):
+        File "/SalishSeaCast/SalishSeaNowcast/nowcast/workers/make_plots.py", line 1102, in _calc_figure
+          fig = fig_func(*args, **kwargs)
+        File "/SalishSeaCast/SalishSeaNowcast/nowcast/figures/research/velocity_section_and_surface.py", line 112, in make_figure
+          cbar = _plot_vel_section(
+        File "/SalishSeaCast/SalishSeaNowcast/nowcast/figures/research/velocity_section_and_surface.py", line 240, in _plot_vel_section
+          ax.fill_between(
+        File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/matplotlib/__init__.py", line 1412, in inner
+          return func(ax, *map(sanitize_sequence, args), **kwargs)
+        File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/matplotlib/axes/_axes.py", line 5252, in fill_between
+          return self._fill_between_x_or_y(
+        File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/matplotlib/axes/_axes.py", line 5180, in _fill_between_x_or_y
+          for idx0, idx1 in cbook.contiguous_regions(where):
+        File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/matplotlib/cbook/__init__.py", line 1262, in contiguous_regions
+          idx, = np.nonzero(mask[:-1] != mask[1:])
+      IndexError: too many indices for array: array is 0-dimensional, but 1 were indexed
+
+    make_plots nemo nowcast comparison 2022-12-21 - success
+    make_plots nemo forecast publish
+(SalishSeaTools)
+
+Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* jul13 
+  * 29jul13 physics is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* aug13 
+  * 10aug13 biology is another case of make_averaged_dataset worker just hanging
+  * 19aug13 biology is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* sep13 
+  * 19sep13 biology is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* oct13 success
+* nov13 
+  * 19nov13 biology is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+(Hindcast)
+
+Added release notes to dev docs.
+Released v22.3; bumped to v23.1.dev0 for next dev cycle
+(SalishSeaCmd)
+
+
+Fri 23-Dec-2022
+^^^^^^^^^^^^^^^
+
+Created issue #138 re: IndexError in ``figures/research/velocity_section_and_surface.py``
+
+Added note re: milestones to release process section of dev docs
+(NEMO-Cmd)
+
+Changed to reusable GHA workflows.
+Big thrash re: installing MOAD-ish pkgs in test env; had to fall back to repo workflow for 
+pytest-with-coverage because I couldn't figure out how to get GitLab access token secret through to onda env in reusable workflow.
+Created new environment-linkcheck so that sphinx-linkcheck workflow is still based on reusable.
+(SalishSeaCast)
+
+Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* dec13 
+  * 11dec13 biology is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* jan14 success
+* feb14 
+(Hindcast)
+
+Helped Karyn get mocsy into her py39 env; had to build new env due to age without updates.
+
+
+Sat 24-Dec-2022
+^^^^^^^^^^^^^^^
+
+collect_weather 00 didn't complete
+* investigation:
+  * 573 of 576 files downloaded
+  * 404 errors in log for:
+      001/CMC_hrdps_west_SPFH_TGL_2_ps2.5km_2022122400_P001-00.grib2
+      001/CMC_hrdps_west_VGRD_TGL_10_ps2.5km_2022122400_P001-00.grib2
+      001/CMC_hrdps_west_LHTFL_SFC_0_ps2.5km_2022122400_P001-00.grib2
+  * those files are present on hpfx
+* recovery started at ~10:00
+    kill collect_weather 00
+    mv /results/forcing/atmospheric/GEM2.5/GRIB/20221224/00/ aside
+    download_weather 00
+    download_weather 06
+    wait for forecast2 runs to finish; delayed ~9h
+    download_weather 12; delayed ~3.5h
+    collect_weather 18
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20221224/00.aisde
+(SalishSeaCast)
+
+
+Sun 25-Dec-2022
+^^^^^^^^^^^^^^^
+
+Goofed off.
+
+
+
+
+
 
 
 TODO:
@@ -10714,12 +10991,12 @@ TODO:
     * Reshapr - done
     * docs - done
     * moad_tools - done 14Nov22
-    * MoaceanParcels - done18Dec22
+    * MoaceanParcels - done 18Dec22
     * cookiecutter-MOAD-pypkg - issue created
   * SalishSeaCast:
     * SalishSeaNowcast - done 4oct22
     * salishsea-site - done 11oct22
-    * SalishSeaCmd - issue created
+    * SalishSeaCmd - done 20Dec22
     * NEMO-Cmd - done 25oct22
     * SOG-Bloomcast-Ensemble - issue created
     * tools - issue created
