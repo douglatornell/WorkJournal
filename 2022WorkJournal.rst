@@ -10862,9 +10862,97 @@ collect_weather 00 didn't complete
 Sun 25-Dec-2022
 ^^^^^^^^^^^^^^^
 
+**Christmas Day**
+
 Goofed off.
 
 
+Week 52
+-------
+
+Mon 26-Dec-2022
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Boxing Day
+
+Goofed off.
+
+
+Tue 27-Dec-2022
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Christmas Lieu Day
+
+Squash-merged many dependabot PRs re:
+* wheel CVE-2022-40898 re: regex DoS attach via CLI
+* setuptools CVE-2022-40897 re: DoS by fetching malicious HTML from PyPI due to vulnerable regex
+
+As I visited the repos with the above dependabotPRs, I also:
+* added .github/dependabot.yaml files to monitor & update Actions versions
+* added .github/workflows/assign-issue-pr.yaml to auto-assign issues & PRs
+
+Added river obs collection for Roberts Creek at Roberts Creek (station 08GA047) to sarracenia 
+hydrometric config and nowcast.yaml on skookum
+  * branch: add-RobertsCreek
+  * PR#142
+  * restarted sarracenia hydrometric sr_subscribe client
+      supervisorctl -c $NOWCAST_CONFIG/supervisord.ini restart sr_subscribe-hydrometric
+(SalishSeaNowcast)
+
+
+Wed 28-Dec-2022
+^^^^^^^^^^^^^^^
+
+**UBC Paid Leave**
+
+Vancouver to Murrayville with a trip to White Rock to pick up James
+
+Goofed off.
+
+
+Thu 29-Dec-2022
+^^^^^^^^^^^^^^^
+
+**UBC Paid Leave**
+
+Murrayville
+
+Goofed off.
+
+Encounter with Jeremy and subsequent RCMP incident.
+
+
+Fri 30-Dec-2022
+^^^^^^^^^^^^^^^
+
+**UBC Paid Leave**
+
+Murrayville
+
+Goofed off.
+
+
+Sat 31-Dec-2022
+^^^^^^^^^^^^^^^
+
+Murrayville
+
+Goofed off.
+
+Walked in neighbourhood.
+
+
+
+
+TODO:
+* Revisit WWatch3-Cmd dependabot PRs re: actions versions & reusable workflows
+* Update WWatch3-Cmd to Ptyhon>=3.10
+
+* numpy.int in moad_tools random_oil_spills
+
+* Revisit salishsea-site dependabot PRs re: actions versions & reusable workflows
+
+* pre-commit auto-update
 
 
 
