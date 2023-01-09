@@ -21,6 +21,8 @@ Week 0
 Sun 1-Jan-2023
 ^^^^^^^^^^^^^^
 
+Murrayville
+
 collect_weather 18 didn't complete
 * investigation:
   * 2 collect_weather workers running: 18 and 00
@@ -45,11 +47,218 @@ Cleaned up left-over hindcast workers.
 Murrayville to Vancouver
 
 
+Week 1
+------
+
+Mon 2-Jan-2023
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - New Year's Day lieu day
+
+Installed PyCharm 2022.3.1 on khawla.
+
+collect_river_data is not collecting Roberts Creek; best guess is that manager needed to be
+restarted to get Roberts Creek into its config, so did that.
+(SalishSeaCast)
+
+
+Tue 3-Jan-2023
+^^^^^^^^^^^^^^
+
+collect_weather 06 didn't complete
+  * 573 of 576 files downloaded despite lots of error messages in log:
+    * 503 Service Unavailable
+    * 110 Connection timed out
+    * 104 Connection reset by peer
+    * 111 Connection refused
+* recovery started at ~10:15
+    kill collect_weather 06
+    mv /results/forcing/atmospheric/GEM2.5/GRIB/20230103/06/ aside
+    download_weather 06 2.5km
+    wait for forecast2 runs to finish; delayed ~9.5h
+    download_weather 12 2.5km; delayed ~4.5h
+    collect_weather 18
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20230103/06.aside
+Clean up /SalishSeaCast/datamart/hrdps-west/[00|06|12|18]/*
+Confirmed that collect_river_data is working for Roberts Creek after yesterday's manager restart.
+collect_weather 18 didn't complete
+  * 566 of 576 files downloaded
+  * lots of error messages in log:
+    * 104 Connection reset by peer
+    * 111 Connection refused
+* recovery started at ~15:50
+    kill collect_weather 18
+    mv /results/forcing/atmospheric/GEM2.5/GRIB/20230103/18/ aside
+    download_weather 18 2.5km
+    download_weather 00 1km --yesterday  # because after 16:00 Pacific == 0:00 UTC
+    download_weather 12 1km
+    collect_weather 00
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20230103/18.aside
+(SalishSeaCast)
+
+There are finally releases for pillow 9.4.0 and gitpython 3.1.30 that address CVEs;
+squash-merged dependabot PRs re: pillow CVE-2022-45199 re: DoS vulnerability;
+no PRs yet for GitPython (released 3 days ago)
+
+Squash-merged dependabot PRs re: jupyter-core CVE-2022-39286 re: arbitrary code execution 
+vulnerability
+
+Started researching how to get USGS river discharge data into automation:
+* https://waterservices.usgs.gov/
+* messed around with WaterML and owslib but just got frustrated by XML, SOAP-ish services
+  and bad code/docs
+* decided to use httpx and json
+* discussed error handling w/ Susan
+  * enable follow_redirects for httpx.get()
+  * don't do tenacity.retry()
+  * log an error if there is not data added to obs file
+  * Susan will enable make_runoff_file to handle missing obs by persistence or fitting,
+    depending on the river
+(SalishSeaNowcast)
+
+
+Wed 4-Jan-2023
+^^^^^^^^^^^^^^
+
+collect_weather 06 didn't complete
+  * 554 of 576 files downloaded
+  * lots of error messages in log:
+    * 110 Connection timed out
+    * 111 Connection refused
+    * 503 Service Unavailable
+* recovery started at ~09:20
+    kill collect_weather 06
+    mv /results/forcing/atmospheric/GEM2.5/GRIB/20230104/06/ aside
+    download_weather 06 2.5km
+    wait for forecast2 runs to finish; delayed ~8.5h
+    download_weather 12 2.5km; delayed ~3.5h
+    collect_weather 18 2.5km
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20230104/06.aside
+Clean up /SalishSeaCast/datamart/hrdps-west/[00|06|12|18]/*
+``make_plots fvcom nowcast-r12 research`` failed with many ``KeyError: 'Times'``:
+* investigation:
+  * run crashed due to restart file "time dimension equal zero"
+  * 03jan23 run aborted with no message, just vh_r12_abort.nc file
+* recovery:
+    launch_remote_worker arbutus make_fvcom_boundary arbutus r12 nowcast 2023-01-03
+(SalishSeaCast)
+
+Started work on adding USGS rivers collect_river_data:
+branch: add-usgs-rivers
+PR#143
+* added httpx as dependency
+* added data_src (ECCC or USGS) arg to collect_river_data worker
+* added ECCC key (ECCC or USGS) to rivers.stations in config
+(SalishSeaNowcast)
+
+Updated firmware on khawla and installed nvidia-driver-525.60.11.
+
+Installed Iris 1.5.1, sodium 0.4.8, and lithium 0.10.4. 
+Frame rate with shaders on is way worse (~7 fps) than it used to be :-(
+
+
+Thu 5-Jan-2023
+^^^^^^^^^^^^^^
+
+collect_weather 00 didn't complete
+  * 389 of 576 files downloaded
+  * 1 error messages in log:
+    * 404 no queue
+* recovery started at ~09:40
+    kill collect_weather 00
+    mv /results/forcing/atmospheric/GEM2.5/GRIB/20230105/00/ aside
+    download_weather 00 2.5km
+    download_weather 06 2.5km
+    wait for forecast2 runs to finish; delayed ~8.5h
+    download_weather 12 2.5km; delayed ~4h
+    collect_weather 18 2.5km
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20230105/00.aside
+Clean up /SalishSeaCast/datamart/hrdps-west/[00|06|12|18]/*
+Backfill nowcast-r12:
+  wait for today's run to fail at ~14:30
+    launch_remote_worker arbutus make_fvcom_boundary arbutus r12 nowcast 2023-01-04
+(SalishSeaCast)
+
+Investigated security alert on python-future:
+* pkg seems unmaintained; recommendation is to drop it because it is from 2to3 Earth
+* used by numpy-indexed which we install explicitly, due to use by OPPTools
+  * numpy-indexed last commit was 22-Jan-2019; Python versions listed are 2.7 and 3.5;
+    unmaintained??
+  * numpy-indexed is imported in OPPTools.general_utilities.mut **but use is commented out**
+    so I can probably work around it in my fork
+* used by commonmark due it being a dependency for rich
+  * commonmark is archived; recommended alternative is markdown-it-py
+  * rich has 5-month-old PR#2439 that switches from commonmark to markdown-it-py
+Continued work on adding USGS rivers collect_river_data:
+branch: add-usgs-rivers
+PR#143
+* added USGS rivers to config
+* refactored test_collect_river_data to use pytest.monkeypatch instead of unittest.mock.patch
+* refactored ECCC day-avg discharge calc function in prep for adding USGS REST query function
+(SalishSeaNowcast)
+
+UBC-IOS modeling collab mtg:
+* Amber: wavelets for teleconnection of hypoxia and aragonite corrosion in NEP36 results
+* teleconnections == climate anomalies related over large distances
+
+
+Fri 6-Jan-2023
+^^^^^^^^^^^^^^
+
+Backfill nowcast-r12:
+  wait for today's run to fail at ~10:30
+    launch_remote_worker arbutus make_fvcom_boundary arbutus r12 nowcast 2023-01-05
+    wait for run to finish at ~21:00
+    launch_remote_worker arbutus make_fvcom_boundary arbutus r12 nowcast 2023-01-06
+UptimeRobot report that ERDDAP went offline for ~3min at ``Date modified: 2023-01-06 20:10:00``
+(SalishSeaCast)
+
+Continued work on adding USGS rivers collect_river_data:
+branch: add-usgs-rivers
+PR#143
+* added pytest-httpx as dep for dev & test envs
+* added USGS river REST query function and unit tests
+* pulled changes to skookum and changed to branch for production testing; 
+  restarted manager to load new config
+* ran collect_river_data for 4 rivers from 1-5 Jan in command-line --debug bash loops
+(SalishSeaNowcast)
+
+
+Sat 7-Jan-2023
+^^^^^^^^^^^^^^
+
+collect_river_data USGS for all 4 rivers failed with empty timeSeries messages;
+successfully re-ran manually at ~11:30
+Fraser River turbidity data stream stopped on 6jan; web page frozen at 
+(SalishSeaCast)
+
+Experimented with 1password as ssh agent for more than git commit signing;
+tested for tyee
+
+
+Sun 8-Jan-2023
+^^^^^^^^^^^^^^
+
+More experiments w/ .ssh/config and 1password ssh agent; agent is now default;
+Added lots of:
+  IdentitiesOnly yes
+  IdentityAgent None
+to .ssh/config for situations that don'w use default ed25519 key.
+
+Started work on updating packaging docs re: recent modernization to pyproject.toml and hatch.
+(MOAD docs)
+
+Fixed typo in name of Nisqually River that Susan noticed.
+Manually ran collect_river_data for 4 USGS rivers that fail in early morning automation.
+(SalishSeaNowcast)
+
+
+
 
 
 TODO:
 * Revisit WWatch3-Cmd dependabot PRs re: actions versions & reusable workflows
-* Update WWatch3-Cmd to Ptyhon>=3.10
+* Update WWatch3-Cmd to Python>=3.10
 
 * numpy.int in moad_tools random_oil_spills
 
@@ -71,7 +280,7 @@ TODO:
 
 
 
-Becuase I can never remember how to get a git feature branch that I set asdie back into working
+Because I can never remember how to get a git feature branch that I set aside back into working
 state:
 * ref: https://www.atlassian.com/git/tutorials/merging-vs-rebasing
 * git switch feature
