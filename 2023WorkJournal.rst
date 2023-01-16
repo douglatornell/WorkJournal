@@ -253,7 +253,184 @@ Manually ran collect_river_data for 4 USGS rivers that fail in early morning aut
 (SalishSeaNowcast)
 
 
+Week 2
+------
 
+Mon 9-Jan-2023
+^^^^^^^^^^^^^^
+
+Resumed backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* mar14
+  * 20mar14 physics is another case of make_averaged_dataset worker just hanging
+  * resolved by running ``reshapr extract`` on salish
+* apr14
+  * 28apr14 physics is another case of make_averaged_dataset worker just hanging
+Created ``/results2/SalishSea/month-avg.202111/day_avg.py`` to run ``reshapr extract`` on salish
+and rename resulting file correctly
+* may14
+  * 27may14 biology is another case of make_averaged_dataset worker just hanging
+  * fixed with ``month-avg.202111/day_avg.py``
+* jun14 success
+* jul14 success
+(Hindcast)
+
+Manually ran collect_river_data for 4 USGS rivers that fail in early morning automation.
+(SalishSeaNowcast)
+
+Continued work on adding USGS rivers collect_river_data:
+branch: add-usgs-rivers
+PR#143
+* changed next_workers to run collect_river_data for USGS rivers after [collect|download]_weather 12
+  because obs are not available at PST time when [collect|download]_weather 06 runs
+(SalishSeaNowcast)
+
+
+Tue 10-Jan-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Discussion of Python modules & functions w/ Karyn & Raisha; see 
+``analysis-doug/notebooks/mods_and_funcs/``
+
+Finished adding USGS rivers collect_river_data:
+branch: add-usgs-rivers
+PR#143; rebase-merged
+* USGS rivers successfully collected in production after collect_weather 12 finished
+* switched back to main branch on skookum, pulled changes, and restarted manager to ensure
+  that update config takes effect
+Released v22.1 (first release since 19.1!!) and bumped version to 23.1.dev0 for next dev cycle.
+Triaged issues to clean up some stale ones and move some to 23.1 milestone.
+(SalishSeaNowcast)
+
+Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* aug14 success
+* sep14
+  * 22sep14 physics is another case of make_averaged_dataset worker just hanging
+  * fixed with ``month-avg.202111/day_avg.py``
+(Hindcast)
+
+
+Wed 11-Jan-2023
+^^^^^^^^^^^^^^^
+
+SharcNet webinar re: future Canadian ARC directions & performance:
+Mark Hahn, McMaster
+* dies/chiplets make up packages/sockets
+* cache line = 64 bytes; nothing happens on less than a cache line, in contrast to conceptual
+  byte addressable memory
+* more cores, higher burst clock speeds, larger L3 cache (Intel is limited), higher memory bandwidth
+* core-seconds vs. cores (as I have done) is a good way to view scaling performance
+* all broadwell nodes going away in next year; slow
+* tradeoffs around usage profiles:
+  * CPU vs. GPU
+  * compact vs. memory-intensive
+* Intel has been stuck at 14 nm fabs
+* AMD reinvented itself:
+  * chiplets win due to better yields than large chips
+  * 7 & 5 nm fab from TSMC
+* Intel Sapphire Rapids introduced yesterday (4th gen Xenon) uses chiplets
+  * possible memory in chiplet; terrabyte memory bandwisth
+  * very hot: 350W TPD; systems designed for 140W
+* AMD next will be Genoa w/ 96 core; also 360W hot
+  * huge cache in pkg
+  * beyond that 128 cores w/ smaller L3 cache; 256 core per node @ 250W
+* no likely hardware updates this year due to funding and proposal lead time
+* graham broadwell nodes are from Huawei (political optics),
+  power dissipation per core is 2x Skylake, out of warranty
+* local SSD use is variable among workloads
+* new SSD approach memory speed
+* think about:
+  * NEMO w/o MPI for fat nodes
+  * XIOS and node-local SSD
+
+Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* oct14 success
+* nov14 
+  * 12nov14 physics is another case of make_averaged_dataset worker just hanging
+  * fixed with ``month-avg.202111/day_avg.py``
+* dec14 success
+* jan15 
+  * 21jan15 physics is another case of make_averaged_dataset worker just hanging
+  * fixed with ``month-avg.202111/day_avg.py``
+* feb15 success
+* mar15 success
+(Hindcast)
+
+Modernized packaging:
+* metadata to pyproject.toml
+* chg to hatchling
+* chg to importlib.metadata.version()
+* move __version__ to __about__
+* clear caches
+* update requirements.txt
+Added version release notes.
+Pinned sphinx-rtd-theme=1.1.1 to avoid incompatible versions of Sphinx and docutils
+(SalishSeaNowcast)
+
+Dropped Click<8.0 pin that was added for fiona and rasterio pkgs in Jun-2021.
+(moad_tools)
+
+
+Thu 12-Jan-2023
+^^^^^^^^^^^^^^^
+
+Started migration of Slack SADA workspace into private channels in SalishSeaCast workspace.
+
+Goofed off.
+
+Reverted khawla to Nvidia 515.65.01 drivers: excessive fan operation stopped
+and Minecraft frame rates returned to "normal".
+
+
+Fri 13-Jan-2023
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
+* apr15 success
+* may15 success
+* jun15 
+  * 07jun15 biology is another case of make_averaged_dataset worker just hanging
+  **TODO**
+  * fixed with ``month-avg.202111/day_avg.py``
+(Hindcast)
+
+Finished migration of Slack SADA workspace into private channels in SalishSeaCast workspace:
+* merged users
+* imported channels as private with #sada- prefix
+* got 19 of 29 files:
+  * reviewed missed ones and founds that they were all in DMs and of no consequenc
+* manually copy-pasted notes from priovate #fal-estate to #sada-fal-estate
+
+See work journal.
+(Resilient-C)
+
+
+Sat 14-Jan-2023
+^^^^^^^^^^^^^^^
+
+Drove to White Rock to visit J&M.
+
+Goofed off.
+
+
+Sun 15-Jan-2023
+^^^^^^^^^^^^^^^
+
+FAL estate work:
+* sent scan of CRA 2022 assessment to Cameron
+* sorted out handling of estate savings account in GnuCash
+* transferred funds for 2022 disbursements and storage locker rent, and jan-22 locker rent
+
+
+
+
+
+
+TODO:
+* update sphinx-rtd-theme pin in envs when 1.2 is releases
+  * MOAD/docs
+  * SalishSeaNowcast
 
 
 TODO:
