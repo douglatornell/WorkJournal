@@ -277,6 +277,9 @@ and rename resulting file correctly
 Manually ran collect_river_data for 4 USGS rivers that fail in early morning automation.
 (SalishSeaNowcast)
 
+Group mtg; see whiteboard.
+(MOAD)
+
 Continued work on adding USGS rivers collect_river_data:
 branch: add-usgs-rivers
 PR#143
@@ -391,7 +394,6 @@ Continued backfilling day & month avg files using nowcast.workers.day_month_avgs
 * may15 success
 * jun15 
   * 07jun15 biology is another case of make_averaged_dataset worker just hanging
-  **TODO**
   * fixed with ``month-avg.202111/day_avg.py``
 (Hindcast)
 
@@ -423,32 +425,203 @@ FAL estate work:
 * transferred funds for 2022 disbursements and storage locker rent, and jan-22 locker rent
 
 
+Week 3
+------
+
+Mon 16-Jan-2023
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module.
+jul15 is the beginning of a section of runs where automation produced 1d files with ``time``
+coordinate name instead of ``time_counter``; removed check for 1d file from ``day_month_avgs.py``
+to force extraction of 1d files with ``time_counter``
+* jul15 success
+Added ``--check-day-avg-exists/--no-check-day-avg-exists`` option and output of  count of 
+month-avg files to ``day_month_avgs.py``
+* aug15 success
+* sep15 success
+* oct15 success
+* 1d files with ``time`` coordinate stop at end of oct15
+(Hindcast)
+
+Continued work on updating packaging docs re: recent modernization to pyproject.toml and hatch.
+(MOAD docs)
+
+dependabot PRs for gitpython and future landed
 
 
+Tue 17-Jan-2023
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module.
+* nov15 
+  * some days skipped; problems at month-avg due to mixed time coordinate names
+  * re-ran with --no-check-day-avg-exists
+* dec15 success
+* jan16 with --no-check-day-avg-exists success
+* feb16 with --no-check-day-avg-exists success
+* mar16 with --no-check-day-avg-exists 
+  * mar16 chemistry is a case of make_averaged_dataset worker not workingh without a msg
+  * eventually figured out that 14mar16 chemistry 1d file had time coord named "time"
+  * fixed by running ``month-avg.202111/day_avg.py`` then ``month-avg.202111/month_avg.py`` on  
+    salish
+(Hindcast)
+
+Ran periodic gha-workflows-checker check: all good.
+
+Squash-merged dependabot PRs:
+* GitPython re: CVE-2022-24439 re: remote code execution
+* future re: CVE-2022-40899 re: DoS attack
+* repos:
+  * SalishSeaCmd
+  * gha-workflow-checker
+  * Reshapr
+  * NEMO-Cmd
+  * cookiecutter-djl-pypkg
+  * MEOPAR-ATM-2019-06-11
+  * AtlantisCmd
+  * WWatch3-Cmd
+Group mtg; see whiteboard.
+(MOAD)
+
+After discussion w/ Susan, decided to archive WWatch3-Cmd on GitHub instead of putting work
+into keeping up with GHA and dependabot alerts.
+(WWatch3-Cmd)
+
+Helped Raisha sort out her GitHub ssh key issue; ssh-agent on her mac had stopped.
+Tried to help with VS Code Jupyter R kernel not working:
+* failed to help on Slack
+* can't get local setup to work on khawla
+(Atlantis)
+
+
+Wed 18-Jan-2023
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
+used --no-check-day-avg-exists unless otherwise noted
+* apr16 success
+* may16 
+  * may16 biology is a case of make_averaged_dataset worker not workingh without a msg
+  * fixed by running ``month-avg.202111/month_avg.py`` on salish
+* jun16 
+  * 28jun16 physics is another case of make_averaged_dataset worker just hanging
+  * fixed with ``month-avg.202111/day_avg.py``
+* jul16 success
+(Hindcast)
+
+
+Thu 19-Jan-2023
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
+used --no-check-day-avg-exists unless otherwise noted
+* change salish env for dask cluster from reshapr to /SalishSeaCast/nowcast-env to silence version
+  difference messages from ``nowcast.workers.day_month_avgs.py`` runnin in that env on skookum; 
+  makes progress messages easier to see
+* aug16 success
+* sep16 success
+* oct16 success
+* nov16 success
+* dec16 success
+* jan17 success
+* feb17 success
+* mar17 success
+* apr17 success
+(Hindcast)
+
+Moved gha-workflows-checker code etc. from gha-workflows-checker repo to gha-workflows repo.
+Archived gha-workflows-checker repo.
+
+Finished updating packaging docs re: recent modernization to pyproject.toml and hatch.
+Set up branch build on readthedocs for Susan to review.
+(MOAD docs)
+
+
+Fri 20-Jan-2023
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
+used --no-check-day-avg-exists unless otherwise noted
+* may17 success
+* jun17 success
+* jul17 success
+* aug17 success
+* sep17 success
+* oct17 success
+* nov17 success
+* dec17 success
+(Hindcast)
+
+Changed to use reusable GHA workflows.
+Change to Python 3.11 for dev and dropped support for 3.6 through 3.9.
+Started work on fixing broken links and old content in docs.
+(NEMO_Nowcast)
+
+
+Sat 21-Jan-2023
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
+used --no-check-day-avg-exists unless otherwise noted
+* jan18 success
+* feb18 success
+* mar18 success
+* apr18 success
+* may18 success
+* jun18 success
+(Hindcast)
+
+
+Sun 22-Jan-2023
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
+used --no-check-day-avg-exists unless otherwise noted
+* jul18 success
+* aug18 success
+* sep18 success
+* oct18 success
+* nov18 success
+* dec18 success
+(Hindcast)
+
+
+
+
+TODO: add assign-issue-pr action to MOAD/docs repo
+
+
+
+
+Started reading Susan's mixing paper that I am co-author on.
+
+
+
+* tidy module & functions notebook & module
 
 
 TODO:
-* update sphinx-rtd-theme pin in envs when 1.2 is releases
+* update sphinx-rtd-theme pin in envs when 1.2 is released
   * MOAD/docs
   * SalishSeaNowcast
+  * NEMO_Nowcast
 
 
 TODO:
-* Revisit WWatch3-Cmd dependabot PRs re: actions versions & reusable workflows
-* Update WWatch3-Cmd to Python>=3.10
-
 * numpy.int in moad_tools random_oil_spills
 
 * Revisit salishsea-site dependabot PRs re: actions versions & reusable workflows
 
 * pre-commit auto-update
+  * SalishSeaNEMO-nowcast - done
+  * NEMO-Cmd
+  * Reshapr
+  * MOAD/docs
+  * MoaceanParcels
+  * cookiecutter-MOAD-pypkg
+  * AtlantisCmd
 
-
-
-
-
-TODO:
-* 43ravens/NEMO_Nowcast has something weird going on with Slack webhook secret in dependabot PRs
 
 
 TODO:
@@ -612,8 +785,8 @@ TODO:
   * NEMO-Cmd - done
   * MOHID-Cmd - done
   * moad_tools - done
-  * Make-MIDOSS-Forcing
-  * WWatch3-Cmd
+  * Make-MIDOSS-Forcing - archived
+  * WWatch3-Cmd - archived
   * also replace setup.py with pyproject.toml ??
     * AtlantisCmd
     * FVCOM-Cmd
