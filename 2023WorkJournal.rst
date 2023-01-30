@@ -488,6 +488,9 @@ After discussion w/ Susan, decided to archive WWatch3-Cmd on GitHub instead of p
 into keeping up with GHA and dependabot alerts.
 (WWatch3-Cmd)
 
+Weekly group mtg; see whiteboard
+(MOAD)
+
 Helped Raisha sort out her GitHub ssh key issue; ssh-agent on her mac had stopped.
 Tried to help with VS Code Jupyter R kernel not working:
 * failed to help on Slack
@@ -587,15 +590,213 @@ used --no-check-day-avg-exists unless otherwise noted
 (Hindcast)
 
 
+Week 4
+------
+
+Mon 23-Jan-2023
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
+used --no-check-day-avg-exists unless otherwise noted
+* jan19 success
+* feb19 success
+* mar19 success
+* apr19 success
+* may19 success
+(Hindcast)
+
+Worked on getting current version of R working with Jupyter and VS Code:
+* added r-languageserver to env
+  * installed VS Code R extension, set r.rterm.linux to path to R; got R in a terminal
+* can't get past --salve bad option; tried older Python and R versions, all the same
+
+Finished fixing broken links and old content in docs.
+Released v22.1.
+(NEMO_Nowcast)
 
 
-TODO: add assign-issue-pr action to MOAD/docs repo
+Tue 24-Jan-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+collect_river_data failed for Snohomish; time series empty.
+(SalishSeaCast)
+
+Weekly group mtg; see whiteboard
+(MOAD)
+
+Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
+used --no-check-day-avg-exists unless otherwise noted
+* jun19 success
+* jul19 success
+* aug19 success
+(Hindcast)
+
+Squash-merged dependabot PRs:
+* certifi
+* cryptography
+Released v22.2 and bumped version to 23.1.dev0.
+Pinned sphinx-rtd-theme=1.1.1 until 1.2 is released re: incompatible versions of docutils
+and Sphinx.
+Changed to use reusable GHA workflows.
+(salishsea-site)
 
 
+Wed 25-Jan-2023
+^^^^^^^^^^^^^^^
 
+Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
+used --no-check-day-avg-exists unless otherwise noted
+* sep19 success
+* oct19 success
+* nov19 success
+* dec19 success
+* jan20 success
+* feb20 success
+(Hindcast)
+
+Squash-merged dependabot PR re: future.
+(SalishSeaNowcast)
+
+Experimented with new setup for running SalishSeaCast NEMO on graham:
+* installed Miniforge3 (conda 22.9.0, Python 3.10.8) in $HOME
+  (sam,e process as we use on Waterhole machines instead of my preferred Mambaforge-pypy3)
+    curl -LO https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
+* got warning about PYTHONPATH defined in env:
+  * point to /cvmfs/soft.computecanada.ca/custom/python/site-packages which contains ``_manylinux.py``
+* allowed modification of ``.bash_profile``
+* updated conda to latest version:
+    conda update -n base -c conda-forge conda
+* pulled updated into all MEOPAR repo clones
+* created salishsea-cmd env:
+    conda env create -f SalishSeaCmd/envs/environment-hpc.yaml
+* activated env and installed pkgs in --user mode
+    conda activate salishsea-cmd
+    python3 -m pip install --user -e NEMO-Cmd/
+    python3 -m pip install --user -e SalishSeaCmd/
+
+Discussed new rivers runoff code w/ Susan.
+(SalishSeaCast)
+
+Helped Camryn set up extractions for 202111 month-avg salinity and u/v velocities.
+
+Pinned sphinx-rtd-theme=1.1.1 until 1.2 is released re: incompatible versions of docutils
+and Sphinx.
+Corrected SalishSeaCast v202111 geo ref dataset path in model profile; left-over from before
+spin-up runs were moved to separate directory tree.
+Released v22.2 and bumped version to 23.1.dev0.
+(Reshapr)
+
+
+Thu 26-Jan-2023
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
+used --no-check-day-avg-exists unless otherwise noted
+* mar20 success
+* apr20 success
+* may20 success
+* jun20 
+  * 08jun chemistry is the first case since jun16 of make_averaged_dataset worker not working 
+    without a msg
+  * fixed by running ``month-avg.202111/day_avg.py`` and ``month-avg.202111/month_avg.py`` on salish
+* jul20 success
+(Hindcast)
+
+Coffee w/ Becca on Slack.
+
+Helped Karyn on Zoom w/ accessing 202111 month-avg files.
 
 Started reading Susan's mixing paper that I am co-author on.
 
+Helped Matt on Slack w/ ssh keys.
+
+EOAS Colloquium: Jan Newton on ocean acidification.
+
+Dinner w/ Jan and Dan at Cactus Club English Bay.
+
+
+Fri 27-Jan-2023
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
+used --no-check-day-avg-exists unless otherwise noted
+* aug20 
+  * 04aug chemistry is the another of make_averaged_dataset worker not working 
+    without a msg
+  * fixed by running ``month-avg.202111/day_avg.py`` on salish
+* sep20 success
+* oct20 success
+* nov20 success
+* dec20 
+  * 04dec biology is the another of make_averaged_dataset worker not working 
+    without a msg
+  * fixed by running ``month-avg.202111/day_avg.py`` on salish
+* jan21 success
+* feb21 success
+* mar21 success
+* apr21 success
+(Hindcast)
+
+Continued reading Susan's mixing paper that I am co-author on.
+
+Helped Matt on Slack w/ Jupyter and Parcels in VS Code.
+
+Enabled GitHub secret scanning for all public repos in all orgs except MIDOSS.
+
+Started thinking about how to migrate Susan's new rivers processing code into repo:
+* branch: v202111-rivers
+* copy tools/SalishSeaTools/I_ForcingFiles/Rivers/DailyRiverFlows.py into SSN/nowcast/
+* copy tools/SalishSeaTools/I_ForcingFiles/Rivers/ProductionDailyRiverNCfile.ipynb into
+  notebooks/
+  * strip out function defs that are in DailyRiverFlows.py
+  * create ref image cells for comparison baseline during refactoring
+Cleaned up environment-test and environment-linkcheck env descriptions
+(SalishSeaNowcast)
+
+
+Sat 28-Jan-2023
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
+* may21 success
+* jun21 success
+(Hindcast)
+
+Changed to use reusable GHA workflows; the last repo that needed this!!
+Added badges to README.
+Created issue #20 to review use of :kbd: role.
+(SalishSeaCast docs)
+
+Drove to White Rock to visit J&M.
+
+
+Sun 29-Jan-2023
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
+* jul21 
+  * 30jul biology is the another of make_averaged_dataset worker not working without a msg
+  * fixed by running ``month-avg.202111/day_avg.py`` on salish
+* aug21 
+  * 06aug physics is the another of make_averaged_dataset worker not working without a msg
+  * fixed by running ``month-avg.202111/day_avg.py`` on salish
+(Hindcast)
+
+
+
+
+
+
+TODO:
+* add XIOS-2/arch/ symlink names for clusters we use to XIOS-2/.gitignore to prevent 
+  accidental commits
+
+
+
+
+TODO: add assign-issue-pr action to MOAD/docs repo
 
 
 * tidy module & functions notebook & module
@@ -606,6 +807,9 @@ TODO:
   * MOAD/docs
   * SalishSeaNowcast
   * NEMO_Nowcast
+  * salishsea-site
+  * Reshapr
+  * SalishSeaCast/docs
 
 
 TODO:
@@ -648,36 +852,6 @@ TODO:
     * https://www.pac.dfo-mpo.gc.ca/science/oceans/data-donnees/search-recherche/profiles-eng.asp
     * https://www.waterlevels.gc.ca/eng/data#s2
     * https://www.westgrid.ca/support/systems/orcinus
-
-
-TODO:
-* update GHA actions to Node.js 16 versions; warnings now, no set final date as of 12oct22:
-  * actions/checkout@v2 -> actions/checkout@v3
-  * conda-incubator/setup-miniconda - no node.js 16 version available yet
-  * 8398a7/action-slack@v3 - did node.js 16 as micro version bump
-  * codecov/codecov-action@v1 -> codecov/codecov-action@v3
-* more deprecation warnings in SalishSeaNEMO re: `set-output` and `save-state`
-  * coming from conda-incubator/setup-miniconda@v2
-* confirm that we are using:
-  * github/codeql-action/init@v2
-  * github/codeql-action/analyze@v2 (probably using v1 in some repos)
-  * EOL date for v1 is Dec-2022
-* commit messages:
-  * Bump GHA actions/checkout to v3
-
-    re: Node.js 12 actions deprecation. See:
-    https://github.blog/changelog/2022-09-22-github-actions-all-actions-will-begin-running-on-node16-instead-of-node12/
-
-  * Bump GHA codecov/codecov-action to v3
-
-    re: Node.js 12 actions deprecation. See:
-    https://github.blog/changelog/2022-09-22-github-actions-all-actions-will-begin-running-on-node16-instead-of-node12/
-
-  * Bump GHA github/codeql-action/analyze to v2
-
-    re: CodeQL Action v1 deprecation. See:
-    https://github.blog/changelog/2022-04-27-code-scanning-deprecation-of-codeql-action-v1/
-
 
 
 
