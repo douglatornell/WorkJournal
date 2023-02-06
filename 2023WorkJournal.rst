@@ -785,18 +785,273 @@ Continued backfilling day & month avg files using ``nowcast.workers.day_month_av
 (Hindcast)
 
 
+Week 5
+------
+
+Mon 30-Jan-2023
+^^^^^^^^^^^^^^^
+
+Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
+* sep21 success
+* oct21 success
+* nov21 success
+* dec21 success
+* oct-dec 2022 for v201905 after reminder of that processing stream from Karyn
+* jan22 success
+* feb22 success
+* mar22 success
+(Hindcast)
+
+Updated PyCharm on khawla to 2022.3.2.
+
+Ran periodic gha-workflows-checker check: all good.
+
+Fixed bugs in sphinx-linkcheck workflow; PRs #21 & #22.
+Worked on fixing broken and redirected links:
+* branch: fix-broken-links
+* PR#23
+* https://nbviewer.org/github/SalishSeaCast/tools/blob/master/* -> .../main/*
+* https://www.westgrid.ca/support/systems/orcinus; deleted section
+* https://www.waterlevels.gc.ca/eng/data#s2 -> https://www.pac.dfo-mpo.gc.ca/science/charts-cartes/obs-app/observed-eng.aspx?StationID=07786
+* https://www.pac.dfo-mpo.gc.ca/science/oceans/data-donnees/search-recherche/profiles-eng.asp
+* https://cfpub.epa.gov/surf/state.cfm?statepostal=WA -> https://mywaterway.epa.gov/
+(SalishSeaCast docs)
+
+Phys Ocgy seminar: Ruiqi Li, U Coloroado; Bivalves
+
+Updated .gitignore files in cookiecutter-analysis-repo to include more OS and editor templates;
+inspired by seeing ``.DS_store`` files in analysis-jose.
+(cookiecutter-analysis-repo)
+
+Started migrating Susan's new rivers processing code into repo:
+* branch: v202111-rivers
+* copied tools/SalishSeaTools/I_ForcingFiles/Rivers/DailyRiverFlows.py to 
+  SalishSeaNowcast/nowcast/daily_river_flows.py
+(SalishSeaNowcast)
+
+FAL estate work:
+* mtg at TD s/ Sahi's successor Christine re: CML chq from CRA; no progress
+
+
+Tue 31-Jan-2023
+^^^^^^^^^^^^^^^
+
+FAL estate work re: MCL chq from CRA
+* Christine called with info & instructions for me to contact TD Estates
+* reviewed comms w/ CRA and confirmed that this should be only chq
+* telcon w/ TD estates
+
+Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
+* apr22 success
+* may22 
+  * 31may biology is the another of make_averaged_dataset worker not working without a msg
+  * fixed by running ``month-avg.202111/day_avg.py`` on salish
+* jun22 success
+* jul22 success
+* aug22 success
+* sep22 success
+* oct22 success
+* nov22 success
+(Hindcast)
+
+collect_weather 12 had not finished at 09:15
+* investigation:
+  * log shows server disconnect at 07:16, than continueous connection timeouts, retrying every 64 s2
+  * 364 fo 576 files downloaded
+* recovery started at ~09:35
+    kill collect_weather 12 2.5km
+    mv /results/forcing/atmospheric/GEM2.5/GRIB/20230131/12 aside
+    download_weather 12 2.5km
+    rm -rf /results/forcing/atmospheric/GEM2.5/GRIB/20230131/12.aside
+    collect_weather 18 2.5km
+    restart sr_subscribe-hrdps-west
+* server resumed operation at ~12:21
+sr_subscribe-hydrometric lost server connection on 30jan at ~11:30; restarted at ~09:45
+* resumed operation at ~12:22
+Experimented with new queues from hpfx.collab.science.gc.ca, longer than default message expiries, and multiple client instances:
+* hydrometric-hpfx worked for 2 cycles of .csv file updates
+* hrdps-west.hpfx started at ~12:20 to test 18Z files; successful
+Tried to use queue on dd.alpha.meteo.gc.ca for 1km HRDPS; connection refused.
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+
+February
+========
+
+Wed 1 Feb-2023
+^^^^^^^^^^^^^^^
+
+FAL estate work re: MCL chq from CRA
+* mtg w/ Christine at TD to create MCL estate acct and deposit chq
+
+Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
+* dec22 success
+* jan23 day success to 25jan
+(Hindcast)
+
+Updated production sarracenia-env:
+* branch: update-sarracenia
+* PR#147
+* reviewed changed in metpx-sarracenia==2.22.10.post2
+  * note that dev is well into refactoring to metpx-sr3
+* recorded installed pkgs & versions in envs/requirements-sarracenia.txt
+* built new env on khawla to compare to production pkgs & versions
+* updated environment-sarracenia.yaml
+  * change to Python=3.11
+  * drop [amqp] option from metpx-sarracenia
+* shut down sr_subscribe instances via supervisorctl
+* removed sarracenia-env
+* built new sarracenia-env
+* started sr_subscribe instances via supervisorctl
+* recorded installed pkgs & versions in envs/requirements-sarracenia.txt
+* confirmed that sr_subscribe hydrometric downloaded files at ~10:10
+* dismissed dependabot alert #18 re: setuptools<65.5.1 and CVE-2022-40897 in sarracenia-env
+  as "tolerable in project" because some dependency in that env is apparently not ready for 
+  setuptools>57.4.0
+* confirmed that sr_subscribe hrdps-west downloaded files at ~13:30
+
+* changed sr_subscribe instances to use queues on hpfx
+(SalishSeaNowcast)
+
+
+Thu 2 Feb-2023
+^^^^^^^^^^^^^^^
+
+UptimeRobot reported that ERDDAP was down for 3m28s at 08:06 due to connection timout.
+(ERDDAP)
+
+make_ssh_files forecast2 didn't find obs for 1feb so persisted forecast
+Updated to sentry-sdk 1.14.0 in prod env on skookum
+Started changing sr_subscribe instances to use queues on hpfx:
+* branch: hpfx-queues
+* noticed that Tuesday's test of hrdps-west-hfpx had 2 unwanted directory levels;
+  changed strip from 4 to 6 and started another test to /tmp/hrdps-hpfx for tomorrow's 00 forecast;
+  success
+Continued migrating Susan's new rivers processing code into repo:
+* branch: v202111-rivers
+* copied tools/SalishSeaTools/I_ForcingFiles/Rivers/ProductionDailyRiverNCfile.ipynb into
+  notebooks/
+(SalishSeaNowcast)
+
+Deleted no longer used GCC arch files for orcinus; Michael created them 6y ago for debugging and
+valgrind which we would not do on orcinus again, and they had incorrect file name convention.
+Fixed typos and update README re: SalishSeaCast branding and outdated instructions that mentioned
+orcinus.
+(XIOS-ARCH)
+
+Added XIOS-2/arch/ symlink names for clusters we use to XIOS-2/.gitignore to prevent
+accidental commits.
+(XIOS-2)
+
+Resumed work on creating SOG-code-collab repo on GitHub for Nancy & Jared at NAFC to fork.
+* TODO:
+  * discuss repo name w/ Susan - done
+  * discuss absence of copyright notices w/ Susan - done
+  * replace .hgignore with .gitignore - done
+  * add LICENSE file - done
+  * add CITATION file
+  * add README.md file
+(SOG-code-collab)
+
+MOAD-IOS modeling mtg; Becca.
+
+
+Fri 3 Feb-2023
+^^^^^^^^^^^^^^
+
+Worked at ESB to be there for Becca's defense.
+
+Coffee w/ Karyn.
+
+Finished changing sr_subscribe instances to use queues on hpfx:
+* branch: hpfx-queues
+* PR#149
+* deployed branch on skookum
+  * supervisor ops:
+    * stop processes
+    * reload config
+    * remove processes
+    * add processes
+    * confirm changes by inspecting logs (new log file names)
+Continued migrating Susan's new rivers processing code into repo:
+* branch: v202111-rivers
+* PR#150
+* Started mergingtools/I_ForcingFiles/Rivers/nowcast.yaml into SalishSeaNowcast/config/nowcast.yaml
+(SalishSeaNowcast)
+
+
+Code analysis errors & warnings for 
+/media/doug/warehouse/MEOPAR/SalishSeaNowcast/nowcast/daily_river_flows.py
+  Warning:(12, 1) Unused import statement 'import yaml'
+  Warning:(180, 9) Statement seems to have no effect
+  Error:(180, 9) Unresolved reference 'stop'
+  Warning:(189, 12) Local variable 'gap_length' might be referenced before assignment
+  Warning:(204, 17) Statement seems to have no effect
+  Error:(204, 17) Unresolved reference 'stop'
+  Warning:(205, 54) Local variable 'useriver' might be referenced before assignment
+  Warning:(210, 12) Local variable 'flux' might be referenced before assignment
+  Warning:(261, 13) Statement seems to have no effect
+  Error:(261, 13) Unresolved reference 'stop'
+  Warning:(278, 20) Local variable 'primary_flow' might be referenced before assignment
+
+  Becca's M.Sc. defense.
+
+
+Sat 4 Feb-2023
+^^^^^^^^^^^^^^
+
+Continued work on creating SOG-code-collab repo on GitHub for Nancy & Jared at NAFC to fork.
+* TODO:
+  * discuss repo name w/ Susan - done
+  * discuss absence of copyright notices w/ Susan - done
+  * replace .hgignore with .gitignore - done
+  * add LICENSE file - done
+  * add CITATION file
+  * add README.md file
+(SOG-code-collab)
+
+
+Sun 5-Feb-2023
+^^^^^^^^^^^^^^
+
+Marjorie passed away.
+
+Finished creating SOG-code-collab repo on GitHub for Nancy & Jared at NAFC to fork.
+* TODO:
+  * discuss repo name w/ Susan - done
+  * discuss absence of copyright notices w/ Susan - done
+  * replace .hgignore with .gitignore - done
+  * add LICENSE file - done
+  * add CITATION file - done
+  * add README.md file - done
+  * add GHA assign-issue-pr workflow - done
+Sent email to Jared and Nancy.
+(SOG-code-collab)
+
+
+
+TODO:
+* SalishSeaCast/docs:
+  * replace broken links:
+    * http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/
+    * http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/LectureNotes/Intro_to_Python.pdf
 
 
 
 
 TODO:
-* add XIOS-2/arch/ symlink names for clusters we use to XIOS-2/.gitignore to prevent 
-  accidental commits
+* rename XIOS-ARCH/COMPUTECANADA to XIOS-ARCH/ALLIANCECANADA
+* update MOAD/docs XIOS section accordingly
+* update XIOS-ARCH README accordingly
 
+TODO:
+* add assign-issue-pr action to MOAD/docs repo
+* drop dead link to Advection Kernels in OCean Parcels section; it is 404 and I can't find anything 
+  equivalent in Parcels docs or tutorials now.
 
-
-
-TODO: add assign-issue-pr action to MOAD/docs repo
 
 
 * tidy module & functions notebook & module
@@ -814,8 +1069,6 @@ TODO:
 
 TODO:
 * numpy.int in moad_tools random_oil_spills
-
-* Revisit salishsea-site dependabot PRs re: actions versions & reusable workflows
 
 * pre-commit auto-update
   * SalishSeaNEMO-nowcast - done
@@ -842,16 +1095,6 @@ state:
 * In PyCharm > Git > Log context menu "Rebase 'feature' onto 'main'"
 * **BUT** if the changes in the feature branch overlap files in main, it's possible that
   a merge will be required
-
-
-TODO:
-* SalishSeaCast/docs:
-  * replace broken links:
-    * http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/
-    * http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/LectureNotes/Intro_to_Python.pdf
-    * https://www.pac.dfo-mpo.gc.ca/science/oceans/data-donnees/search-recherche/profiles-eng.asp
-    * https://www.waterlevels.gc.ca/eng/data#s2
-    * https://www.westgrid.ca/support/systems/orcinus
 
 
 
