@@ -979,23 +979,8 @@ Finished changing sr_subscribe instances to use queues on hpfx:
 Continued migrating Susan's new rivers processing code into repo:
 * branch: v202111-rivers
 * PR#150
-* Started mergingtools/I_ForcingFiles/Rivers/nowcast.yaml into SalishSeaNowcast/config/nowcast.yaml
+* Started merging tools/I_ForcingFiles/Rivers/nowcast.yaml into SalishSeaNowcast/config/nowcast.yaml
 (SalishSeaNowcast)
-
-
-Code analysis errors & warnings for 
-/media/doug/warehouse/MEOPAR/SalishSeaNowcast/nowcast/daily_river_flows.py
-  Warning:(12, 1) Unused import statement 'import yaml'
-  Warning:(180, 9) Statement seems to have no effect
-  Error:(180, 9) Unresolved reference 'stop'
-  Warning:(189, 12) Local variable 'gap_length' might be referenced before assignment
-  Warning:(204, 17) Statement seems to have no effect
-  Error:(204, 17) Unresolved reference 'stop'
-  Warning:(205, 54) Local variable 'useriver' might be referenced before assignment
-  Warning:(210, 12) Local variable 'flux' might be referenced before assignment
-  Warning:(261, 13) Statement seems to have no effect
-  Error:(261, 13) Unresolved reference 'stop'
-  Warning:(278, 20) Local variable 'primary_flow' might be referenced before assignment
 
   Becca's M.Sc. defense.
 
@@ -1030,6 +1015,154 @@ Finished creating SOG-code-collab repo on GitHub for Nancy & Jared at NAFC to fo
   * add GHA assign-issue-pr workflow - done
 Sent email to Jared and Nancy.
 (SOG-code-collab)
+
+
+Week 6
+------
+
+Mon 6-Feb-2023
+^^^^^^^^^^^^^^
+
+Raisha discovered that Jupyter R kernel startup issue is resolved; probably due to new releases
+last week of VS Code and Jupyter extension.
+
+Created issue #151 re: migrating sarracenia to sr3.
+Rebase-merged PR#149 re: changing sr_subscribe instances to use queues on hpfx
+Continued migrating Susan's new rivers processing code into repo:
+* branch: v202111-rivers
+* PR#150
+* Finished merging tools/I_ForcingFiles/Rivers/nowcast.yaml into 
+  SalishSeaNowcast/config/nowcast.yaml
+* made minimal changes necessary to get ProductionDailyRiverNCfile notebook to run
+(SalishSeaNowcast)
+
+Continued reading Susan's mixing paper that I am co-author on.
+
+Phys Ocgy seminar; Shumin, Jose, Camryn & Cassidy re: Chile field school
+
+nowcast-agrif run failed due to storage failure on orcinus
+(SalishSeaCast)
+
+
+Tue 7-Feb-2023
+^^^^^^^^^^^^^^
+
+Woke feeling slow and tired.
+Cancelled hearing test and didn't go to ESB as planned.
+
+nowcast-agrif failed due to no restart file; orcinus storage still having problems.
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+Helped Camryn w/ day-avg velocity w/ reshapr.
+(MOAD)
+
+
+Wed 8-Feb-2023
+^^^^^^^^^^^^^^
+
+Woke feeling better than yesterday.
+Negative COVID RAT test.
+Slight headache by mid-morning.
+
+nowcast-agrif failed due to no restart file; orcinus storage still having problems;
+storage controllers to be rebooted at ~12:00.
+06feb23 job completed w/ timeouts
+backfilled:
+  upload_forcing orcinus-nowcast-agrif nowcast+ 2023-02-06
+  upload_forcing orcinus-nowcast-agrif nowcast+ 2023-02-07
+  upload_forcing orcinus-nowcast-agrif nowcast+ 2023-02-08
+  upload_forcing orcinus-nowcast-agrif turbidity 2023-02-06
+  wait for run to finish
+  
+  upload_forcing orcinus-nowcast-agrif turbidity 2023-02-07
+  wait for run to finish
+  upload_forcing orcinus-nowcast-agrif turbidity 2023-02-08
+(SalishSeaCast)
+
+Started work on reference letter for Ben.
+
+Reviewed cryptography changelog re: dependabot alerts: CVE-2023-23931; accepted Python buffer 
+protocol objects, but allowed immutable buffers; squash-merged lots of PRs
+
+Opthamologist appt.
+
+
+Thu 9-Feb-2023
+^^^^^^^^^^^^^^
+
+Finished backfilling nowcast-agrif:
+  upload_forcing orcinus-nowcast-agrif turbidity 2023-02-08
+  wait for run to finish
+  upload_forcing orcinus-nowcast-agrif turbidity 2023-02-09
+(SalishSeaCast)
+
+Continued migrating Susan's new rivers processing code into repo:
+* branch: v202111-rivers
+* PR#150
+* updated make_readme.py
+* added title and description to ProductionDailyRiverNCfile.ipynb
+* debugged corrupted ERDDAP_datasets.ipynb notebook
+* dropped multiple runoff forcing filename templates
+* dropped unused imports
+* dug into multiple instances of:
+    /media/doug/warehouse/MEOPAR/SalishSeaNowcast/nowcast/daily_river_flows.py:122: ParserWarning: Length of header or names does not match length of data. This leads to a loss of data with index_col=False.
+      river_flow = pd.read_csv(
+  nothing made sense until I found https://github.com/pandas-dev/pandas/issues/49279 bug report
+  which says that ``on_bad_lines`` is being ignored because we have ``index_col=False`` and the 
+  overlength lines are being ignored
+(SalishSeaNowcast)
+
+MCL estate work:
+* signed forms to get CRA funds moved from estate to e-premium acct
+
+
+Fri 10-Feb-2023
+^^^^^^^^^^^^^^^
+
+Continued migrating Susan's new rivers processing code into repo:
+* branch: v202111-rivers
+* PR#150
+* dug deeper into multiple instances of:
+    /media/doug/warehouse/MEOPAR/SalishSeaNowcast/nowcast/daily_river_flows.py:122: ParserWarning: Length of header or names does not match length of data. This leads to a loss of data with index_col=False.
+      river_flow = pd.read_csv(
+  re: https://github.com/pandas-dev/pandas/issues/49279 bug report
+  found that all lines are being processed as we want; ParserWarning seems to be extraneous
+* refactored river flow .csv reading using functools.partial()
+* added warnings.catch_warnings() context managers to suppress ParserWarnings; created issue #154
+* refactored transformation of dataframe from .csv to 2-column dataframe with date as indes
+* added unit test module for daily_river_flows.py
+
+Code analysis errors & warnings for 
+/media/doug/warehouse/MEOPAR/SalishSeaNowcast/nowcast/daily_river_flows.py
+  Warning:(180, 9) Statement seems to have no effect
+  Error:(180, 9) Unresolved reference 'stop'
+  Warning:(189, 12) Local variable 'gap_length' might be referenced before assignment
+  Warning:(204, 17) Statement seems to have no effect
+  Error:(204, 17) Unresolved reference 'stop'
+  Warning:(205, 54) Local variable 'useriver' might be referenced before assignment
+  Warning:(210, 12) Local variable 'flux' might be referenced before assignment
+  Warning:(261, 13) Statement seems to have no effect
+  Error:(261, 13) Unresolved reference 'stop'
+  Warning:(278, 20) Local variable 'primary_flow' might be referenced before assignment
+(SalishSeaNowcast)
+
+
+Sat 11-Feb-2023
+^^^^^^^^^^^^^^^
+
+Drove to White Rock for MA memorial gathering.
+
+
+Sun 12-Feb-2023
+^^^^^^^^^^^^^^^
+
+Drove to White Rock for MA family lunch.
+
+
+
+TODO:
+* start bloomcast
 
 
 
