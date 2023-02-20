@@ -1132,6 +1132,39 @@ Continued migrating Susan's new rivers processing code into repo:
 * added warnings.catch_warnings() context managers to suppress ParserWarnings; created issue #154
 * refactored transformation of dataframe from .csv to 2-column dataframe with date as indes
 * added unit test module for daily_river_flows.py
+(SalishSeaNowcast)
+
+
+Sat 11-Feb-2023
+^^^^^^^^^^^^^^^
+
+Drove to White Rock for MA memorial gathering.
+
+
+Sun 12-Feb-2023
+^^^^^^^^^^^^^^^
+
+Drove to White Rock for MA family lunch.
+
+Continued migrating Susan's new rivers processing code into repo:
+* branch: v202111-rivers
+* PR#150
+* added unit tests for read_river()
+* started work on unit tests for read_river_Theodosia()
+(SalishSeaNowcast)
+
+
+Week 7
+------
+
+Mon 13-Feb-2023
+^^^^^^^^^^^^^^^
+
+download_live_ocean timed out at 10:24; re-ran manually at 10:45
+Continued migrating Susan's new rivers processing code into repo:
+* branch: v202111-rivers
+* PR#150
+* continued work on unit tests for read_river_Theodosia()
 
 Code analysis errors & warnings for 
 /media/doug/warehouse/MEOPAR/SalishSeaNowcast/nowcast/daily_river_flows.py
@@ -1147,22 +1180,223 @@ Code analysis errors & warnings for
   Warning:(278, 20) Local variable 'primary_flow' might be referenced before assignment
 (SalishSeaNowcast)
 
+Did jan23 day & month avg files using ``nowcast.workers.day_month_avgs.py`` module.
+(Hindcast)
 
-Sat 11-Feb-2023
+Finished and sent reference letter for Ben's LANL postdoc.
+
+Phys ocgy seminar: Kate Schuler; in-progress CH4 measurements in the Arctic.
+
+
+Tue 14-Feb-2023
 ^^^^^^^^^^^^^^^
 
-Drove to White Rock for MA memorial gathering.
+Ruff: Faster Python Linting With Rust
+Charlie Marsh
+Staff Software Engineer at Spring Discovery
+* recent Talk Python podcast
+* recent PyCharm blog post
+* fast linter & fixer
+* rust niches
+  * performance
+  * interop w/ Python is really good
+    * PyO3 ecosystem
+    * Rust crates can be published to PyPI
+* Ruff is on conda-forge
+* replaces "Flake8 (plus a variety of plugins), isort, pydocstyle, yesqa, 
+  and even a subset of pyupgrade and autoflake" (from conda-frge description)
+* embedded docs in ruff; e.g.
+    ``ruff rule F541``
+* autofix capability:
+    ``ruff --fix ...``
+    * *caution* can break code; code transformation is a hard problem
+* can be configured in ``pyproject.toml``
+* number of violations of each rule
+    ``ruff --statistics``
+* can add ``# nopqa`` comments to silence notifications to get to clean state
+    ``ruff --add-noqa``
+* no plugin support at present due to early state and not ready to define public API
+* discussion of rust-python; ruff uses r-p's AST parser
+* ruff is designed to be used along-side black
+* building an auto-formatter integrated into ruff
+* PyCharm plugin: called Ruff, community built, in marketplace
+* design intent is that ruff is to be used a la carte
+  * pick and choose sub-linters
+  * ``ruff linters`` shows sub-linters and their rule prefixes
+* **pyupgrade <-- investigate** by Anthony Sottle> of pre-commit
+* "fearless parallelization" in rust
+* avoid allocation in rust for performance
+* **ruff doesn't support structural pattern matching**
+* works with pre-commit
+
+Group mtg; see whiteboard
+* Birgit reported in Paul's attendence at DRAKKAR mtg:
+  * 3.6 -> 4.0 20-30% faster
+  * 4.0 -> 4.2 20-30% faster again
+  * working on AGRIF sub-grids w/ sigma coords in z coord grid
+(MOAD)
+
+Continued migrating Susan's new rivers processing code into repo:
+* branch: v202111-rivers
+* PR#150
+* finished unit tests & refactoring of _read_river_Theodosia()
+* started unit tests & refactoring of _do_a_pair()
+* started unit tests & refactoring of _patch_gaps()
+* started unit tests & refactoring of _patch_fitting()
+(SalishSeaNowcast)
+
+Squash-merged dependabot PRs re: ipython CVE-2023-24816 re: command injection on Windows.
 
 
-Sun 12-Feb-2023
+Wed 15-Feb-2023
 ^^^^^^^^^^^^^^^
 
-Drove to White Rock for MA family lunch.
+Continued migrating Susan's new rivers processing code into repo:
+* branch: v202111-rivers
+* PR#150
+* finished unit tests & refactoring of _read_river_Theodosia()
+* finished unit tests & refactoring of _patch_fitting()
+(SalishSeaNowcast)
+
+Rode to ESB for hearing test.
+
+
+Thu 16-Feb-2023
+^^^^^^^^^^^^^^^
+
+Set up 2023 bloomcast:
+* khawla:
+  * updated SOG-Bloomcast-Ensemble clone
+  * updated SOG clone
+  * changed SOG default branch name from master to main
+  * added branch protection rule for main on GitHub
+  * created new bloomcast env (Python 3.11)
+  * did editable installs of SOG & SOG-Bloomcast-Ensemble
+  * SOG-Bloomcast-Ensemble test suite ran successfully
+  * mkdir run/2021
+  * cp run/2022_bloomcast_inifile.yaml run/2023_bloomcast_infile.yaml
+  * mv run/2022_bloomcast_inifile.yaml run/2022/
+  * committed archive of 2022 SOG YAML infile
+  * edit run/2023_bloomcast_infile.yaml
+  * edit run/config/yaml
+    * change back to Englishman River at Parksville from Nanaimo River at Cassidy 
+      because the Englishman data stream resumed on 30-Apr-2021
+    * added ``scale_factor: 1`` for Englishman River
+  * successfully tested run prep w/ SOG runs and publish to web disabled
+  * committed run/2023_bloomcast_infile.yaml and run/config.yaml
+Jared at NAFC reported that SOG command processor works with colander=1.8.3:
+* built env on salish w/ colander<2 from conda-forge; got Python 3.11
+* salish:
+  * updated SOG-Bloomcast-Ensemble clone
+  * noted that SOG clone is a Mercurial repo
+    * replaced w/ git clone from GitHub
+  * created new bloomcast env: Python 3.11, colander 1.8.3
+  * did editable installs of SOG & SOG-Bloomcast-Ensemble
+  * runs dir: /data/dlatorne/SOG-projects/SOG-Bloomcast-Ensemble/run
+  * archived 2021_bloomcast* files in run/2021/
+  * archived Englishman_flow Fraser_flow Sandheads_wind in run/2021/
+  * archived YVR_* in run/2021/
+  * ran test w/ push to web disabled
+    * failed with:
+        Invalid SOG YAML in 2023_bloomcast_infile.yaml. The following parameters are missing or misspelled:
+        {'physics.fresh_water.river_CO2_chemistry': 'Required'}
+    * suspect Ben's commits since Susan's 55af3c2 on 7-Apr-2014
+  * git switch 55af3c2
+  * re-ran test w/ push to web disabled
+      INFO [bloomcast.ensemble] Predicted earliest bloom date is 2023-03-14
+      INFO [bloomcast.ensemble] Earliest bloom date is based on forcing from 2004/2005
+      INFO [bloomcast.ensemble] Predicted early bound bloom date is 2023-03-14
+      INFO [bloomcast.ensemble] Early bound bloom date is based on forcing from 2004/2005
+      INFO [bloomcast.ensemble] Predicted median bloom date is 2023-03-23
+      INFO [bloomcast.ensemble] Median bloom date is based on forcing from 2003/2004
+      INFO [bloomcast.ensemble] Predicted late bound bloom date is 2023-04-09
+      INFO [bloomcast.ensemble] Late bound bloom date is based on forcing from 1987/1988
+      INFO [bloomcast.ensemble] Predicted latest bloom date is 2023-04-14
+      INFO [bloomcast.ensemble] Latest bloom date is based on forcing from 1998/1999
+  * enabled cron job
+Added new unrecognized weather descriptions to cloud fraction mapping.
+(Bloomcast)
+
+Project mtg w/ Javier.
+Helped Raisha with tyee connection failure; suspect fail2ban
+(Atlantis)
+
+
+Fri 17-Feb-2023
+^^^^^^^^^^^^^^^
+
+Updated sphinx-rtd-theme pin to 1.2 re: its release; 
+rely on that pin to ensure compatible versions of the rest of the Sphinx tool chain.
+* Reshapr
+* salishsea-site
+* NEMO_Nowcast
+
+
+Pin sphinx-rtd-theme=1.2
+
+Sphinx=6 and docutils=0.18 are now supported.
+We're relying on the sphinx-rtd-theme version pin to ensure compatible versions 
+of the rest of the Sphinx tool chain.
+
+
+Updated prod env to use sentry-sdk=1.15.0.
+(salishsea-site)
+
+Updated prod env to use sentry-sdk=1.15.0.
+(SalishSeaCast)
+
+Continued migrating Susan's new rivers processing code into repo:
+* branch: v202111-rivers
+* PR#150
+* finished unit tests & refactoring of _patch_missing_obs(); renamed from patch_gaps()
+* started unit tests & refactoring of _do_a_pair()
+
+Code analysis errors & warnings for 
+/media/doug/warehouse/MEOPAR/SalishSeaNowcast/nowcast/daily_river_flows.py
+  Warning:(261, 13) Statement seems to have no effect
+  Error:(261, 13) Unresolved reference 'stop'
+  Warning:(278, 20) Local variable 'primary_flow' might be referenced before assignment
+(SalishSeaNowcast)
+
+
+Sat 18-Feb-2023
+^^^^^^^^^^^^^^^
+
+``download_results nowcast`` and ``make_forcing_links ssh`` failed with ssh auth problems
+(but ``make_fvcom_boundary x2 nowcast`` worked); so, apparently a transient issue
+* recovery started at ~09:30:
+    make_forcing_links arbutus ssh
+    download_results arbutus nowcast
+(SalishSeaCast)
+
+Drove to White Rock to visit J.
+
+
+Sun 19-Feb-2023
+^^^^^^^^^^^^^^^
+
+Continued migrating Susan's new rivers processing code into repo:
+* branch: v202111-rivers
+* PR#150
+* continnued unit tests & refactoring of _do_a_pair()
+
+Code analysis errors & warnings for 
+/media/doug/warehouse/MEOPAR/SalishSeaNowcast/nowcast/daily_river_flows.py
+  Warning:(261, 13) Statement seems to have no effect
+  Error:(261, 13) Unresolved reference 'stop'
+  Warning:(278, 20) Local variable 'primary_flow' might be referenced before assignment
+(SalishSeaNowcast)
+
+
+
 
 
 
 TODO:
-* start bloomcast
+* update sphinx-rtd-theme pin in envs when 1.2 is released
+  * MOAD/docs
+  * SalishSeaNowcast
+  * SalishSeaCast/docs
 
 
 
@@ -1189,15 +1423,6 @@ TODO:
 
 * tidy module & functions notebook & module
 
-
-TODO:
-* update sphinx-rtd-theme pin in envs when 1.2 is released
-  * MOAD/docs
-  * SalishSeaNowcast
-  * NEMO_Nowcast
-  * salishsea-site
-  * Reshapr
-  * SalishSeaCast/docs
 
 
 TODO:
@@ -1308,11 +1533,6 @@ Add Tereza's pubs to ERDDAP.
 
 
 TODO:
-* change SalishSeaNowcast automation key to ED-25519
-
-
-
-TODO:
   Bug re: log rotation during download_wwatch3_results forecast2
 
 * update SalishSeaCmd installation docs re: no anaconda and `python3 -m pip install`
@@ -1341,8 +1561,8 @@ TODO:
     * AtlantisCmd
     * FVCOM-Cmd
     * salishsea-site
-    * moad-app-dev
-    * rpn-to-gemlam
+    * moad-app-dev - archive
+    * rpn-to-gemlam - archive
     * SOG-Bloomcast
     * SOG-Bloomcast-Ensemble
     * SOG-forcing
