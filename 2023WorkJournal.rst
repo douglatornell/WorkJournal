@@ -1161,23 +1161,12 @@ Mon 13-Feb-2023
 ^^^^^^^^^^^^^^^
 
 download_live_ocean timed out at 10:24; re-ran manually at 10:45
+(SalishSeaCast)
+
 Continued migrating Susan's new rivers processing code into repo:
 * branch: v202111-rivers
 * PR#150
 * continued work on unit tests for read_river_Theodosia()
-
-Code analysis errors & warnings for 
-/media/doug/warehouse/MEOPAR/SalishSeaNowcast/nowcast/daily_river_flows.py
-  Warning:(180, 9) Statement seems to have no effect
-  Error:(180, 9) Unresolved reference 'stop'
-  Warning:(189, 12) Local variable 'gap_length' might be referenced before assignment
-  Warning:(204, 17) Statement seems to have no effect
-  Error:(204, 17) Unresolved reference 'stop'
-  Warning:(205, 54) Local variable 'useriver' might be referenced before assignment
-  Warning:(210, 12) Local variable 'flux' might be referenced before assignment
-  Warning:(261, 13) Statement seems to have no effect
-  Error:(261, 13) Unresolved reference 'stop'
-  Warning:(278, 20) Local variable 'primary_flow' might be referenced before assignment
 (SalishSeaNowcast)
 
 Did jan23 day & month avg files using ``nowcast.workers.day_month_avgs.py`` module.
@@ -1379,15 +1368,223 @@ Continued migrating Susan's new rivers processing code into repo:
 * branch: v202111-rivers
 * PR#150
 * continnued unit tests & refactoring of _do_a_pair()
-
-Code analysis errors & warnings for 
-/media/doug/warehouse/MEOPAR/SalishSeaNowcast/nowcast/daily_river_flows.py
-  Warning:(261, 13) Statement seems to have no effect
-  Error:(261, 13) Unresolved reference 'stop'
-  Warning:(278, 20) Local variable 'primary_flow' might be referenced before assignment
 (SalishSeaNowcast)
 
 
+Week 8
+------
+
+Mon 20-Feb-2023
+^^^^^^^^^^^^^^^
+
+download_live_ocean was ~1h late.
+``upload_fvcom_atmos_forcing arbutus r12 nowcast`` failed reading SSH protocol banner;
+worked on manual re-run; so, another transient
+(SalishSeaCast)
+
+Continued migrating Susan's new rivers processing code into repo:
+* branch: v202111-rivers
+* PR#150
+* finished unit tests & refactoring of _do_a_pair()
+* finished unit tests & refactoring of _do_fraser()
+* finished unit test & refactoring of _calc_watershed_flows()
+(SalishSeaNowcast)
+
+
+Tue 21-Feb-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+Finished reading draft of Susan's flux paper.
+
+Continued migrating Susan's new rivers processing code into repo:
+* branch: v202111-rivers
+* PR#150
+* finished refactoring of _get_area()
+* started unit test & refactoring of _create_runoff_array()
+(SalishSeaNowcast)
+
+
+Wed 22-Feb-2023
+^^^^^^^^^^^^^^^
+
+collect_river_data for ECCC rivers failed with:
+  UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe9 in position 81: invalid continuation byte
+* investigation:
+  * accented character in position 81 is the problem:
+      ``...Discharge / Débit (cms)...``
+  * issue resolved by changing pandas.read_csv() from default utf-8 encosing to old iso-8859-1 
+    (Western European) encoding; suspect config control bug at ECCC
+* recover started at ~09:00:
+  * hacked collect_river_data worker on skookum to add ``encoding="iso-8859-1"``
+  * updated /SalishSeaCast/datamart/hydrometric/collect_river_date.sh to include Roberts Creek and 
+    ECCC arg to collect_river_data, then ran it
+  * restarted automation:
+      upload_forcing arbutus forecast2
+      upload_forcing orcinuns forecast2
+      upload_forcing optimum forecast2
+      upload_forcing graham-dtn forecast2
+      wait for forecast2 runs to finish
+      upload_forcing arbutus nowcast+
+      upload_forcing orcinuns nowcast+
+      upload_forcing optimum nowcast+
+      upload_forcing graham-dtn nowcast+
+(SalishSeaCast)
+
+Reverted accidental main branch commit of daily_river_flows.py that was causing merge conflict
+for v202111-rivers branch.
+Continued migrating Susan's new rivers processing code into repo:
+* branch: v202111-rivers
+* PR#150
+* finished unit test & refactoring of _create_runoff_array()
+(SalishSeaNowcast)
+
+
+Thu 23-Feb-2023
+^^^^^^^^^^^^^^^
+
+download_weather 18 2.5km didn't finish and I didn't notice until this morning
+* investigation:
+  * /results/forcing/atmospheric/GEM2.5/GRIB/20230222/18/ dir created, but no files downloaded
+  * no 18/ dir or files on hpfx
+  * HRDPS west was part of polar stereographic product that was discontinued on 22feb
+* salvage:
+    download_weather 12 1km --yesterday
+    /SalishSeaCast/datamart/hydrometric/collect_river_date.sh 2023-02-22
+    collect_NeahBay_ssh 00  # necessary for continuity???
+    get_onc_ctd SCVIP  # backfillable
+    get_onc_ctd SEVIP  # backfillable
+    collect_NeahBay_ssh 06
+    download_live_ocean
+    collect_river_data USGS SkagitMountVernon 2023-02-22
+    collect_river_data USGS SnohomishMonroe 2023-02-22
+    collect_river_data USGS NisquallyMcKenna 2023-02-22
+    collect_river_data USGS GreenwaterGreenwater 2023-02-22
+    download_weather 00 1km 
+    wait for 10:45
+    download_weather 12 1km 
+* created /results/forcing/rivers/observations/collect_river_data.sh to do USGS rivers
+* mapping of west variable names to continental:
+    UGRD_TGL_10: UGRD_AGL_10m  1.8M
+    VGRD_TGL_10: VGRD_AGL_10m  1.7M
+    DSWRF_SFC_0: DSWRF_Sfc  198: 959K
+    DLWRF_SFC_0: DLWRF_Sfc  119K: 2.1M
+    LHTFL_SFC_0: LHTFL_Sfc  82K: 1.2M
+    TMP_TGL_2: TMP_AGL_2m  3.1M
+    SPFH_TGL_2: SPFH_AGL_2m  187: 2.6M
+    RH_TGL_2: RH_AGL_2m  113K: 2.2M
+    APCP_SFC_0: APCP_Sfc  136K: 2.0M
+    PRATE_SFC_0: PRATE_Sfc 54K: 361K
+    PRMSL_MSL_0: PRMSL_MSL  148K: 743K
+    TCDC_SFC_0: TCDC_Sfc 51K: 2.3M  # necessary? used to parametrize radiation missing from GEMLAM
+* present size is 89M per forecast, 356M per day
+* continental is 1.2G per forecast, 4.7G per day
+* started downloading as much 2023 continental as possible:
+  * each forecast takes ~15min to download
+  * 03jan-14jan
+* future daily grind, after 10:45, yyyy-mm-dd is previous day:
+    /SalishSeaCast/datamart/hydrometric/collect_river_data.sh yyyy-mm-dd
+    /results/forcing/rivers/observations/collect_river_data.sh yyyy-mm-dd
+    get_onc_ctd SCVIP  # backfillable
+    get_onc_ctd SEVIP  # backfillable
+    get_vfpa_hadcp yyyy-mm-dd
+    collect_NeahBay_ssh 06
+    download_live_ocean
+    download_weather 00 1km 
+    download_weather 12 1km 
+* Python packages for handling GRIB files:
+  * cfgrib: https://github.com/ecmwf/cfgrib
+    * "enables the engine='cfgrib' option to read GRIB files with xarray"
+  * pynio: https://github.com/NCAR/pynio **unmaintained**
+(SalishSeaCast)
+
+Squash-merged dependabot PR re: CVE-2023-26302 re: command-line DoS in markdown-it-py.
+(Reshapr)
+
+Changed weather config to use HRDPS 2.5km continental product
+branch: hrdps-continental
+PR#156
+(SalishSeaNowcast)
+
+Experimented with cfgrib:
+* ``mamba create -n cfgrib-test python=3.11 xarray cfgrib netcdf4 jupyterlab``
+* ``xarray.open_dataset(path, engine="cfgrib")`` works, but data variable name is sometimes     
+  ``unknown``
+
+
+Fri 24-Feb-2023
+^^^^^^^^^^^^^^^
+
+Continued work on changes to use HRDPS 2.5km continental product
+branch: hrdps-continental
+PR#156
+* replaced download_weather --yesterday w/ --run-date
+* updated worker failure docs re: broken links and outdated content
+* started work on replacing @patch with monkeypathc in download_weather
+* started work on updating grb_to_netcdf
+  * updated sub-region and Sand Heads indices with values that Susan found in contineental domain
+  * stalled out on step of getting grid defintion via grid_defn.pl and wgrib2
+    * Susan found updated tools: pywgrib2_s
+(SalishSeaNowcast)
+
+Continued downloading as much 2023 continental as possible:
+  * 15jan-31jan
+Did manual tasks that automation isn't doing due to change to HRDPS continental product:
+  nemo_nowcast.workers.clear_checklist
+  /SalishSeaCast/datamart/hydrometric/collect_river_data.sh yyyy-mm-dd
+  /results/forcing/rivers/observations/collect_river_data.sh yyyy-mm-dd
+  get_onc_ctd SCVIP  # backfillable
+  get_onc_ctd SEVIP  # backfillable
+  get_vfpa_hadcp yyyy-mm-dd
+  collect_NeahBay_ssh 06
+  download_live_ocean
+  download_weather 00 1km 
+  download_weather 12 1km 
+Created /SalishSeaCast/daily_grind.sh to automate the above tasks.
+(SalishSeaCast)
+
+
+Sat 25-Feb-2023
+^^^^^^^^^^^^^^^
+
+Continued downloading as much 2023 continental as possible:
+* 01feb-21feb
+Did manual tasks that automation isn't doing due to change to HRDPS continental product by running
+  bash /SalishSeaCast/daily_grind.sh
+(SalishSeaCast)
+
+Rode 50km Muckle Yin fondo on Zwift.
+
+
+Sun 26-Feb-2023
+^^^^^^^^^^^^^^^
+
+Continued downloading as much 2023 continental as possible:
+* 22feb stalled on missing files:
+   ``00/002/20230222T00Z_MSC_HRDPS_SPFH_AGL-2m_RLatLon0.0225_PT002H.grib``
+   ``06/001/20230222T06Z_MSC_HRDPS_RH_AGL-2m_RLatLon0.0225_PT001H.grib2``
+
+Added previous day's ``download_weather * 2.5km`` to /SalishSeaCast/daily_grind.sh
+Did manual tasks that automation isn't doing due to change to HRDPS continental product by running
+  bash /SalishSeaCast/daily_grind.sh
+(SalishSeaCast)
+
+Continued work on changes to use HRDPS 2.5km continental product
+branch: hrdps-continental
+PR#156
+* did unit tests & refactoring in grib_to_netcdf up to the first of the wgrib2 subprocess calls
+* tried to use pwgrib2_xr but it fails with:
+    ImportError: cannot import name 'dask_array_type' from 'xarray.core.pycompat' (/home/doug/conda_envs/pywgrib2-test/lib/python3.9/site-packages/xarray/core/pycompat.py)
+  suspect that xarray/dask have evolved since last pwgrib2_xr release on 23-Mar-2021
+  * dask was then at 2021.03.0
+  * xarray was then at 0.17.0
+  Also, pwgrib2_xr supports only Python 3.9
+* found wgrib2 up to 2.0.5 through 3.1.1 packages on conda-forge
+(SalishSeaNowcast)
 
 
 
