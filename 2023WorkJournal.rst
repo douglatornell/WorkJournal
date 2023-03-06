@@ -1567,7 +1567,6 @@ Continued downloading as much 2023 continental as possible:
 * 22feb stalled on missing files:
    ``00/002/20230222T00Z_MSC_HRDPS_SPFH_AGL-2m_RLatLon0.0225_PT002H.grib``
    ``06/001/20230222T06Z_MSC_HRDPS_RH_AGL-2m_RLatLon0.0225_PT001H.grib2``
-
 Added previous day's ``download_weather * 2.5km`` to /SalishSeaCast/daily_grind.sh
 Did manual tasks that automation isn't doing due to change to HRDPS continental product by running
   bash /SalishSeaCast/daily_grind.sh
@@ -1587,6 +1586,282 @@ PR#156
 (SalishSeaNowcast)
 
 
+Week 8
+------
+
+Mon 27-Feb-2023
+^^^^^^^^^^^^^^^
+
+Continued work on changes to use HRDPS 2.5km continental product
+branch: hrdps-continental
+PR#156
+* installed wgrib2 3.1.1 from conda-forge in wgrib2-test env on khawla
+* successfully ran ``wgrib2 grib-file -append -grib uv.grib`` to create u-v winds file
+* read grid_defn.pl and learned that it parses the output of ``wgrib2 -d 1 -grid grib-file``
+* ran that for 
+    ``continental2.5/GRIB/20230225/00/001/20230225T00Z_MSC_HRDPS_UGRD_AGL-10m_RLatLon0.0225_PT001H.grib2``
+  and got:
+    1:0:grid_template=1:winds(grid):
+      rotated lat-lon grid:(2540 x 1290) units 1e-06 input WE:SN output WE:SN res 56
+      lat -12.302501 to 16.700001 by 0.022500
+      lon 345.178780 to 42.306283 by 0.022500 #points=3276600
+      south pole lat=-36.088520 lon=245.305142 angle of rot=0.000000
+* https://www.cpc.ncep.noaa.gov/products/wesley/wgrib2/new_grid.html shows that grid description
+  for ``wgrib2 uv.grib -new_grid_winds earth -new_grid grid-desc uvrot.grib`` that we want is:
+    rot-ll:sp_lon:sp_lat:sp_rot lon0:nlon:dlon lat0:nlat:dlat
+  I think that translates to:
+    rot-ll:245.305142:-36.088520:0.000000 lon0:2540:0.022500 lat0:1290:0.022500
+* tried 
+    ``wgrib2 uv.grib -new_grid_winds earth -new_grid rot-ll:245.305142:-36.088520:0.000000 345.178780:2540:0.022500 -12.302501:1290:0.022500 uvrot.grib``
+  and got (not unexpectedly):
+    IPOLATES package is not installed
+* built a new pywgrib2-test env with:
+    mamba create -n pywgrib2-test -c conda-forge -c yt87 \
+      python=3.9 dask=2021.03.0 xarray=0.17.0 libwgrib2 pywgrib2_xr matplotlib cartopy jupyterlab
+  * successfully did:
+    * u-v append 
+    * query of grid description
+    * rotation to earth-referenced NS grid
+  * created analysis-doug/notebooks/pywgrib2-grib_to_netcdf.ipynb to properly record exploration
+* author of pywgrib2_xr package listed in metadata is George Trojan who is also listed as an 
+  author of wgrib2
+(SalishSeaNowcast)
+
+Did manual tasks that automation isn't doing due to change to HRDPS continental product by running
+  bash /SalishSeaCast/daily_grind.sh
+(SalishSeaCast)
+
+
+Tue 28-Feb-2023
+^^^^^^^^^^^^^^^
+
+Continued work on changes to use HRDPS 2.5km continental product
+branch: hrdps-continental
+PR#156
+* built pywgrib2-no-dask-pin with
+    mamba create -n pywgrib2-no-dask-pin -c conda-forge -c yt87 \
+      python=3.9 dask xarray=0.17.0 libwgrib2 pywgrib2_xr
+  * pywgrib2 works
+* built pywgrib2-xarray-0.18 with
+    mamba create -n pywgrib2-xarray-0.18 -c conda-forge -c yt87 \
+      python=3.9 dask xarray=0.18.0 libwgrib2 pywgrib2_xr
+  * pywgrib2 works
+* built pywgrib2-xarray-0.19 with
+    mamba create -n pywgrib2-xarray-0.19 -c conda-forge -c yt87 \
+      python=3.9 dask xarray=0.19.0 libwgrib2 pywgrib2_xr
+  * pywgrib2 works
+* built pywgrib2-xarray-0.20 with
+    mamba create -n pywgrib2-xarray-0.20 -c conda-forge -c yt87 \
+      python=3.9 dask xarray=0.20.0 libwgrib2 pywgrib2_xr
+  * pywgrib2 works
+* built pywgrib2-xarray-0.21 with
+    mamba create -n pywgrib2-xarray-0.21 -c conda-forge -c yt87 \
+      python=3.9 dask xarray=0.21.0 libwgrib2 pywgrib2_xr
+  * pywgrib2 works
+* built pywgrib2-xarray-2022.03 with
+    mamba create -n pywgrib2-xarray-2022.03 -c conda-forge -c yt87 \
+      python=3.9 dask xarray=2022.03.0 libwgrib2 pywgrib2_xr
+  * pywgrib2 works
+* built pywgrib2-xarray-2022.06 with
+    mamba create -n pywgrib2-xarray-2022.06 -c conda-forge -c yt87 \
+      python=3.9 dask xarray=2022.06.0 libwgrib2 pywgrib2_xr
+  * pywgrib2 works
+* built pywgrib2-xarray-2022.09 with
+    mamba create -n pywgrib2-xarray-2022.09 -c conda-forge -c yt87 \
+      python=3.9 dask xarray=2022.09.0 libwgrib2 pywgrib2_xr
+  * pywgrib2 works
+* built pywgrib2-xarray-2022.10 with
+    mamba create -n pywgrib2-xarray-2022.10 -c conda-forge -c yt87 \
+      python=3.9 dask xarray=2022.10.0 libwgrib2 pywgrib2_xr
+  * pywgrib2 works
+* built pywgrib2-xarray-2022.11 with
+    mamba create -n pywgrib2-xarray-2022.11 -c conda-forge -c yt87 \
+      python=3.9 dask xarray=2022.11.0 libwgrib2 pywgrib2_xr
+  * pywgrib2 fails with:
+      Traceback (most recent call last):
+        File "/home/doug/conda_envs/pywgrib2-xarray-2022.11/bin/pywgrib2", line 33, in <module>
+          sys.exit(load_entry_point('pywgrib2_xr==0.2.3', 'console_scripts', 'pywgrib2')())
+        File "/home/doug/conda_envs/pywgrib2-xarray-2022.11/bin/pywgrib2", line 25, in importlib_load_entry_point
+          return next(matches).load()
+        File "/home/doug/conda_envs/pywgrib2-xarray-2022.11/lib/python3.9/importlib/metadata.py", line 86, in load
+          module = import_module(match.group('module'))
+        File "/home/doug/conda_envs/pywgrib2-xarray-2022.11/lib/python3.9/importlib/__init__.py", line 127, in import_module
+          return _bootstrap._gcd_import(name[level:], package, level)
+        File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+        File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+        File "<frozen importlib._bootstrap>", line 972, in _find_and_load_unlocked
+        File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+        File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+        File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+        File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+        File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+        File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+        File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+        File "/home/doug/conda_envs/pywgrib2-xarray-2022.11/lib/python3.9/site-packages/pywgrib2_xr/__init__.py", line 30, in <module>
+          from .accessor import Wgrib2DatasetAccessor
+        File "/home/doug/conda_envs/pywgrib2-xarray-2022.11/lib/python3.9/site-packages/pywgrib2_xr/accessor.py", line 9, in <module>
+          from xarray.core.pycompat import dask_array_type
+      ImportError: cannot import name 'dask_array_type' from 'xarray.core.pycompat' (/home/doug/conda_envs/pywgrib2-xarray-2022.11/lib/python3.9/site-packages/xarray/core/pycompat.py)
+  * it appears that the way to resolve the ImportError is:
+      from xarray.core.pycompat import array_type
+      ...
+      dask_array_type = array_type("dask")
+    posted this to xarray GitHub discussion and got confirmation that xarray.core.pycompat is a
+    private API
+* built pywgrib2-py310 with
+    mamba create -n pywgrib2-py310 -c conda-forge -c yt87 \
+      python=3.9 dask xarray=2022.11.0 libwgrib2
+  * to confirm that libwgrib2 will install in Python 3.10 env
+* added matplotlib cartopy jupyterlab to pywgrib2-xarray-2022.10 env for continuing work in notebook
+* discovered ``winds="earth"`` arg for ``ds.wgrib2.grid()`` that is the equivalent of the wgrib2
+  ``-now_grid_winds earth`` option
+* Susan confirmed that rotated winds netCDF file created via pywgrib2_xr xarray interface is 
+  consistent with 15feb23 HRDPS west vectors
+
+Did manual tasks that automation isn't doing due to change to HRDPS continental product by running
+  bash /SalishSeaCast/daily_grind.sh
+(SalishSeaCast)
+
+
+March
+=====
+
+Wed 1-Mar-2023
+^^^^^^^^^^^^^^
+
+Did manual tasks that automation isn't doing due to change to HRDPS continental product by running
+  bash /SalishSeaCast/daily_grind.sh
+(SalishSeaCast)
+
+Continued work on changes to use HRDPS 2.5km continental product
+branch: hrdps-continental
+PR#156
+* forked yt87/pywgrib2_xr to SalishSeaCast/pywgrib2_xr
+* added dev env description for as-forked version that requires xarray<2022.11
+  * successfully ran test suite with warnings
+* thrashed on building Python 3.10 env due to version issues among netcdf4 hdf5 and libwgrib2
+* hacked on clone of yt87/libwgrib2:
+  * eventually figured out that it needs to use jasper<3 due to undefined symbol jpc_decode
+    see: https://github.com/NOAA-EMC/NCEPLIBS-wgrib2/issues/53
+  * changed recipe/meta.yaml to pin jasper<3
+  * env for build
+      mamba create -n libwgrib2-dev make gfortran libnetcdf libaec libpng \
+        "jasper<3" _openmp_mutex conda-build
+  * ``conda-build recipe`` builds libwgrib2.so.3.0.0 but conda-build test step fails to build env
+  * dropped ``libwgrib2`` from pywgrib2_xr-dev env to avoid hdf5/netcdf version issues
+  * added ``jasper<3`` to env
+  * copied libwgrib2.so.3.0.0 and symlinks to pywgrib2_xr-dev/lib/
+      cp -P /tmp/conda-builds/libwgrib2_1677718742087/work_moved_libwgrib2-3.0.0-hdee5e95_2_linux-64/lib/libwgrib2.so* /home/doug/conda_envs/pywgrib2_xr-dev/lib/
+
+
+Thu 2-Mar-2023
+^^^^^^^^^^^^^^
+
+Did manual tasks that automation isn't doing due to change to HRDPS continental product by running
+  bash /SalishSeaCast/daily_grind.sh
+(SalishSeaCast)
+
+Continued work on changes to use HRDPS 2.5km continental product
+branch: hrdps-continental
+PR#156
+* added dependencies for pywgrib2_xr to dev env
+* copied libwgrib2 into dev env lib/
+* refactored grib_to_netcdf._rotate_grib_wind() to use pywgrib2_xr
+  * have to be really careful about all args to pywgrib2_xr.wgrib() being strings
+    and calling pywgrib2_xr.free_files() to close files
+
+
+Fri 3-Mar-2023
+^^^^^^^^^^^^^^
+
+Continued work on changes to use HRDPS 2.5km continental product
+branch: hrdps-continental
+PR#156
+* SalishSeaNowcast GHA pytest-with-coverage workflow failing with: 
+    In file included from pywgrib2_xr/_wgrib2.c:795:
+    pywgrib2_xr/pywgrib2.h:3:10: fatal error: wgrib2/wgrib2.h: No such file or directory
+        3 | #include "wgrib2/wgrib2.h"
+          |          ^~~~~~~~~~~~~~~~~
+    compilation terminated.
+  broke build chain on khawla while trying to diagnose; I think because I deleted 
+    pywgrib2_xr/pywgrib2_xr/_wgrib2.cpython-310-x86_64-linux-gnu.so
+  recovery:
+  * got a successful build in libwgrib2 fork:
+      /tmp/conda-builds/linux-64/libwgrib2-3.0.0-hdee5e95_2.tar.bz2
+  * installed that tarball into pywgrib2_xr-dev:
+      conda install /tmp/conda-builds/linux-64/libwgrib2-3.0.0-hdee5e95_2.tar.bz2
+  * did editable install of pywgrib2_xr:
+      python3 -m pip install -e .
+* added pywgrib2_xr/_vendor/libwgrib2-3.0.0-hdee5e95_2.tar.bz2
+* updated SalishSeaNowcast pytest-with-coverage workflow to install vendored libwgrib2
+* dropped GRIB2 file existence & 0 length checks
+* factored out pywgrib2_xr.wgrib() calls
+* refactored _collect_grib_scalars() without remapping
+* refactored _concat_hourly_gribs()
+* refactored _crop_to_watersheds()
+* restored remapping of scalars because conversion to netcdf complained about different grid type
+  for scalars and winds
+* got stopped by netcdf conversion not supporting rotated lat-lon grid
+(SalishSeaNowcast)
+
+Did manual tasks that automation isn't doing due to change to HRDPS continental product by running
+  bash /SalishSeaCast/daily_grind.sh
+(SalishSeaCast)
+
+
+Sat 4-Mar-2023
+^^^^^^^^^^^^^^
+
+Drove to White Rock to visit J.
+
+Did manual tasks that automation isn't doing due to change to HRDPS continental product by running
+  bash /SalishSeaCast/daily_grind.sh
+* 00, 06, & 12 downloads for 2023-03-03 all failed due to missing 001/UGRD files
+* ran download_weather for today: 00 06
+* hacked next_workers to temporarily leave out grib_to_netcdf
+* created sarracenia/hrdps-continental-hpfx.conf
+* changed config/supervisord.ini to use sarracenia/hrdps-continental-hpfx.conf
+* test on skookum:
+  * copied sarracenia/hrdps-continental-hpfx.conf and config/supervisord.ini 
+  * shutdown and relaunched supervisord
+  * confirmed that hrdps-continental-hpfx queue was attached
+(SalishSeaCast)
+
+Continued work on changes to use HRDPS 2.5km continental product
+branch: hrdps-continental
+PR#156
+* changed next_workers module to temporarily exclude grib_to_netcdf so that automation with
+  collect_weather worker can be started to that we know about failures like 03mar in more timely
+  manner to communicate to Sandrine
+(SalishSeaNowcast)
+
+
+Sun 5-Mar-2023
+^^^^^^^^^^^^^^
+
+sarracenia client for continental HRDPS is grabbing 2 extra WEonG variables:
+* WEonG_FZPRATE_Sfc and WEonG_PRATE_Sfc
+* updated sarracenia/hrdps-continental-hpfx.conf to reject those files
+* copied to skookum and restarted client to test
+  * got expected 528 files in /SalishSeaCast/datamart/hrdps-continental/18
+(SalishSeaNowcast)
+
+Rode 50km Bambino fondo on Zwift.
+
+
+
+
+
+TODO:
+* libwgrib2:
+  * fork yt87/libwgrib2 - done
+  * create SalishSeaCast branch
+  * add environment-dev like:
+      mamba create -n libwgrib2-dev make gfortran libnetcdf libaec libpng \
+        "jasper<3" _openmp_mutex conda-build
+* pywgrib2_xr
+  * add SalishSeaNowcast docs re: clone & install pywgrib2_xr,
+    including install of vendored libwgrib2 before installing pywgrib2_xr
 
 
 TODO:
