@@ -2422,7 +2422,7 @@ Launched wwatch3-nowcast/25feb23:
   make_ww3_current_file arbutus nowcast 2023-02-25 
   * run_ww3 2023-02-25 and watch_ww3 launched via automation
   * download_wwatch3_results launched via automation
-Launched nowcast/26feb23:
+Launched nowcast-green/26feb23:
   upload_forcing arbutus nowcast+ --run-date 2023-02-26 --debug
   upload_forcing arbutus turbidity --run-date 2023-02-26
   * run_NEMO, watch_NEMO  launched via automation
@@ -2436,19 +2436,19 @@ Hacked next_workers to fix those 2 issues; uploaded to skookum, restarted manage
 Launched wwatch3-nowcast/25feb23:
   make_ww3_wind_file arbutus nowcast 2023-02-26
   make_ww3_current_file arbutus nowcast 2023-02-26 
-Launched nowcast/27feb23:
+Launched nowcast-green/27feb23:
   upload_forcing arbutus nowcast+ --run-date 2023-02-27 --debug
   upload_forcing arbutus turbidity --run-date 2023-02-27
   * run_NEMO, watch_NEMO, download_results, make_ww3_wind_file, make_ww3_current_file,
     run_ww3, watch_ww3 & download_wwatch3_results launched via automation
   * wwatch3 runs on nowcast1-nowcast5
-Launched nowcast/27feb23:
+Launched nowcast-green/27feb23:
   upload_forcing arbutus nowcast+ --run-date 2023-02-27 --debug
   upload_forcing arbutus turbidity --run-date 2023-02-27
-Launched nowcast/28feb23:
+Launched nowcast-green/28feb23:
   upload_forcing arbutus nowcast+ --run-date 2023-02-28 --debug
   upload_forcing arbutus turbidity --run-date 2023-02-28
-Launched nowcast/01mar23:
+Launched nowcast-green/01mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-01 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-01
 (SalishSeaCast)
@@ -2513,26 +2513,26 @@ Explored CaSPAr (https://github.com/julemai/CaSPAr/wiki/Home) to obtain missing 
   * downloaded /data/dlatorne/2023030200.nc
 * did another request for 03mar23, hours 0-25 from forecast 00, 06 & 12
   * got results
-Launched nowcast/02mar23:
+Launched nowcast-green/02mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-02 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-02
 Created symlink to persist fcst/hrdps_y2023m02d03.nc as hrdps_y2023m02d03.nc
-Launched nowcast/03mar23:
+Launched nowcast-green/03mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-03 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-03
-Launched nowcast/04mar23:
+Launched nowcast-green/04mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-04 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-04
-Launched nowcast/05mar23:
+Launched nowcast-green/05mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-05 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-05
-Launched nowcast/06mar23:
+Launched nowcast-green/06mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-06 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-06
-Launched nowcast/07mar23:
+Launched nowcast-green/07mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-07 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-07
-Launched nowcast/08mar23:
+Launched nowcast-green/08mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-08 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-08
 Email conversation w/ Michael resulted in an agreement to not restart FVCOM VHFR runs.
@@ -2552,28 +2552,28 @@ Did manual tasks that automation isn't doing due to change to HRDPS continental 
   collect_weather 12 2.5km --backfill --backfill-date 2023-03-18
   wait for 18Z forecast to download
   collect_weather 18 2.5km --backfill --backfill-date 2023-03-18
-Launched nowcast/09mar23:
+Launched nowcast-green/09mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-09 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-09
-Launched nowcast/10mar23:
+Launched nowcast-green/10mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-10 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-10
-Launched nowcast/11mar23:
+Launched nowcast-green/11mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-11 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-11
-Launched nowcast/12mar23:
+Launched nowcast-green/12mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-12 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-12
-Launched nowcast/13mar23:
+Launched nowcast-green/13mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-13 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-13
-Launched nowcast/14mar23:
+Launched nowcast-green/14mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-14 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-14
-Launched nowcast/15mar23:
+Launched nowcast-green/15mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-15 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-15
-Launched nowcast/16mar23:
+Launched nowcast-green/16mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-16 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-16
 (SalishSeaCast)
@@ -2583,6 +2583,7 @@ branch: hrdps-continental-catch-up
 PR#161
 * moved make_turbidity_file to after download_weather/collect_weather 12 
 * restored grib_to_netcdf nowcast+ to automation flow
+* added pytest.mark.skip() to tests for features disabled during catch-up
 (SalishSeaNowcast)
 
 Drove to White Rock to visit J.
@@ -2601,13 +2602,13 @@ Did manual tasks that automation isn't doing due to change to HRDPS continental 
   collect_weather 12 2.5km --backfill --backfill-date 2023-03-19
   wait for 18Z forecast to download
   collect_weather 18 2.5km --backfill --backfill-date 2023-03-19
-Launched nowcast/17mar23:
+Launched nowcast-green/17mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-17 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-17
-Launched nowcast/18mar23:
+Launched nowcast-green/18mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-18 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-18
-Launched nowcast/19mar23:
+Launched nowcast-green/19mar23:
   upload_forcing arbutus nowcast+ --run-date 2023-03-19 --debug
   upload_forcing arbutus turbidity --run-date 2023-03-19
 (SalishSeaCast)
@@ -2615,22 +2616,357 @@ Launched nowcast/19mar23:
 Rode the TFC Sunday group ride.
 
 
+Week 11
+-------
+
+Mon 20-Mar-2023
+^^^^^^^^^^^^^^^
+
+Did manual tasks that automation isn't doing due to change to HRDPS continental product by running:
+  pkill -f collect_weather
+  collect_weather 00 2.5km --backfill --backfill-date 2023-03-20
+  collect_weather 06 2.5km --backfill --backfill-date 2023-03-20
+  wait for post-collect_weather workers to finish
+  clear_checklist
+  wait for 12Z forecast to download
+  collect_weather 12 2.5km --backfill --backfill-date 2023-03-20
+  wait for 18Z forecast to download
+  collect_weather 18 2.5km --backfill --backfill-date 2023-03-20
+Set up simple watchdog logger observing /SalishSeaCast/datamart/hrdps-continental/12 to try to 
+understand why collect_weather observer is not working; events for a file:
+  2023-03-20 08:48:55 - Created file: /SalishSeaCast/datamart/hrdps-continental/12/012/20230320T12Z_MSC_HRDPS_DLWRF_Sfc_RLatLon0.0225_PT012H.grib2.tmp
+  2023-03-20 08:48:55 - Modified directory: /SalishSeaCast/datamart/hrdps-continental/12/012
+  2023-03-20 08:48:55 - Modified directory: /SalishSeaCast/datamart/hrdps-continental/12/012
+  2023-03-20 08:48:57 - Modified file: /SalishSeaCast/datamart/hrdps-continental/12/012/20230320T12Z_MSC_HRDPS_DLWRF_Sfc_RLatLon0.0225_PT012H.grib2.tmp
+  2023-03-20 08:48:57 - Modified file: /SalishSeaCast/datamart/hrdps-continental/12/012/20230320T12Z_MSC_HRDPS_DLWRF_Sfc_RLatLon0.0225_PT012H.grib2.tmp
+  2023-03-20 08:48:57 - Modified file: /SalishSeaCast/datamart/hrdps-continental/12/012/20230320T12Z_MSC_HRDPS_DLWRF_Sfc_RLatLon0.0225_PT012H.grib2.tmp
+  2023-03-20 08:48:57 - Modified directory: /SalishSeaCast/datamart/hrdps-continental/12/012
+  2023-03-20 08:48:57 - Moved file: from /SalishSeaCast/datamart/hrdps-continental/12/012/20230320T12Z_MSC_HRDPS_DLWRF_Sfc_RLatLon0.0225_PT012H.grib2.tmp to /SalishSeaCast/datamart/hrdps-continental/12/012/20230320T12Z_MSC_HRDPS_DLWRF_Sfc_RLatLon0.0225_PT012H.grib2
+  2023-03-20 08:48:57 - Modified directory: /SalishSeaCast/datamart/hrdps-continental/12/012
+  2023-03-20 08:48:57 - Modified file: /SalishSeaCast/datamart/hrdps-continental/12/012/20230320T12Z_MSC_HRDPS_DLWRF_Sfc_RLatLon0.0225_PT012H.grib2
+  2023-03-20 08:48:57 - Modified file: /SalishSeaCast/datamart/hrdps-continental/12/012/20230320T12Z_MSC_HRDPS_DLWRF_Sfc_RLatLon0.0225_PT012H.grib2
+Reverted hack on skookum of collect_weather.py that changed it to watching for create events
+instead of move events
+* traced through collect_weather to confirm that expected_files set is correct
+* ran collect_weather 18 2.5km in PyCharm debugger on khawla; not useful
+* found change in watchdog 2.17 releaes re: replacing time.sleep() in observer loop with 
+  observer.join(); tested on skookum and files get collected, but worker never stops
+Reverted hacks in next_workers that prevented runs other than nowcast-green and wwatch3-nowcast.
+Hacked next_workers to prevent FVCOM runs by not launching make_fvcom_boundary
+rsync-ed hacked next_workers to skookum, and restarted manager
+Launched nowcast/20mar23:
+    collect_weather 12 2.5km --backfill --backfill-date 2023-03-20
+* grib_to_netcdf took ~50min
+* missed that upload_forcing in after_make_live_ocean_files was still commented out
+    upload_forcing arbutus nowcast+
+* run_NEMO nowcast failed due to no /nemoShare/MEOPAR/SalishSea/nowcast/19mar23/namelist_cfg
+* copied /nemoShare/MEOPAR/SalishSea/nowcast-green/19mar23/namelist_cfg to 
+  /nemoShare/MEOPAR/SalishSea/nowcast/19mar23/namelist_cfg
+    make_forcing_links arbutus nowcast+
+* NEMO failed due to incorrect namelist_rivers_atmos
+* moved SS-run-sets/v201905/nowcast-green/namelist.atmos_rivers_hrdps to 
+  SS-run-sets/v201905/namelist.atmos_rivers_hrdps
+* symlinked nowcast-green/namelist.atmos_rivers and nowcast-blue/namelist.atmos_rivers to 
+  v201905/namelist.atmos_rivers_hrdps
+    make_forcing_links arbutus nowcast+
+* nowcast-blue ran successfully
+* download_results nowcast ran successfully
+* make_plots nemo nowcast comparison failed due to no nowcast-blue/19mar23
+* make_CHS_currents_file nowcast ran successfully
+* forecast ran successfully
+* nowcast-green didn't start because there was no upload_forcing turbidity
+    upload_forcing arbutus turbidity
+  * added upload_forcing turbidity to after_watch_NEMO forecast branch
+* download_results forecast ran successfully
+* make_CHS_currents_file forecast ran successfully
+* update_forecast_datasets nemo forecast ran successfully
+* emailed Faith at SMRU re: resumption of ss dataset
+* make_surface_current_tiles failed failed due to missing file
+* make_plots nemo forecast publish failed due to looking for ops_ files
+  * root cause is hard-coded filename template in 
+    salishsea_tools.wind_tools.calc_wind_avg_at_point()
+* make_feeds forecast ran successfully
+* nowcast-green ran successfully
+* wwatch3 nowcast launched successfully
+* wwatch3 nowcast ran successfully
+* wwatch3 forecast launched successfully
+* download_results nowcast-green ran successfully
+* wwatch3 forecast ran successfully
+* download_wwatch3_results nowcast ran successfully
+* download_wwatch3_results nowcast ran successfully
+Hacked collect_weather to try to resolve lack of exit from loop; didn't work for 00Z forecast;
+tried a different hack for 06Z forecast.
+(SalishSeaCast)
+
+Cleaned up aborted work on planned fork of libwgrib2.
+Cleaned up aborted work on planned fork of pywgrib2_xr.
+
+SoG spring diatoms bllom day!!
+
+Continued work on changes to manage catch-up after change to HRDPS continental product
+branch: hrdps-continental-catch-up
+PR#161
+* restored grib_to_netcdf nowcast+ after after_make_live_ocean_files to automation flow
+* added upload_forcing turbidity after forecast run finishes
+* restored run_ww3 after wwatch3 nowcast run finishes
+Cherry-picked improvement commits from hrdps-continental-catch-up branch into their own
+PR branches.
+(SalishSeaNowcast)
 
 
+Tue 21-Mar-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Overnight hack of collect_weather 06 didn't resolve lack of exit from loop
+* ran daily_grind.sh script to do post-collect_weather tasks
+* skipped forecast2 runs
+Hacked collect_weather another way to test on 12Z foreacst
+* 12Z weather did start to flow until 10:47
+* at ~12:35 there were 527 of 528 files; most recent file landed at 12:26:45
+* missing file:
+    /results/forcing/atmospheric/continental2.5/GRIB/20230321/12/026/20230321T12Z_MSC_HRDPS_ACPCP_Sfc_RLatLon0.0225_PT026H.grib2
+* file was on hpfx
+* decided to kill collect_weather, curl missing file, and get on with things
+Launched automation:
+  pkill -f collect_weather
+  collect_weather 18 2.5km
+  bash /results/forcing/rivers/observations/collect_river_data.sh 2023-03-20
+  make_turbidity_file
+  collect_NeahBay_ssh 06
+  download_live_ocean
+  launch_remote_worker salish-nowcast grib_to_netcdf "nowcast+"
+  * failed because I curl-ed the wrong file
+  upload_forcing arbutus nowcast+
+collect_weather 18 2.5km finished correctly when all files hae been downloaded :-)
+
+(SalishSeaCast)
+
+Continued work on restoring next_workers to restore more automation steps:
+* upload_forcing after make_live_ocean_files
+* run_ww3 forecast after wwatch3 nowcast
+* cleaned up commented out code in next_workers
+* Skip launch of nowcast-dev test during HRDPS catch-up
+Changed to run grib_to_netcdf on salish so it can use the persistent dask cluster and lots of
+memory there:
+* branch: grib_to_netcdf-on-salish
+* PR#167
+Changed watchdog observer thread management in collect_weather:
+branch watdog-2.1.7
+PR#168
+* replaced time.sleep(1) with observer.join(timeout=1)
+* dropped some no longer needed os.fspath() calls
+(SalishSeaNowcast)
+
+
+Wed 22-Mar-2023
+^^^^^^^^^^^^^^^
+
+Fixed run-date passing for wwatch3-forecast2
+* fixed in branch; fix-ww3-fcst2-run-date
+* uploaded to skookum for test tomorrow
+* created py311 branch  
+  * added 3.11 to python-version matrices of pytest-with-coverage and sphinx-linkcheck
+    and let GHA chew on them; both were successful
+  * researched mamba-org/provision-with-micromamba as an alternative to 
+    conda-incubator/setup-miniconda
+    * claims to be faster
+    * has environment caching feature with default 1-day TTL
+    * tested in pytest-with-coverage; works, but workflow execution was slower than previous one
+(SalishSeaNowcast)
+
+Automation worked as expected with the following issues:
+* wwatch3-forecast2 failed due to incorrect run-date passing
+  * fixed in branch; uploaded to skookum for test tomorrow
+* nowcast-blue comparison figs failed; probably due to no nowcast-dev runs?
+* figures/research/velocity_section_and_surface.py failed with IndexError
+* run_NEMO_agrif failed due to backfill not done
+* figures/publish/storm_surge_alerts_thumbnail.py and others failed due to 
+  hard-coded ops_*.nc filename template
+  * need to fix in salishsea_tools/wind_tools
+dask cluster on salish did not appear to leak memory as I was seing earlier
+(SalishSeaCast)
+
+Coffee w/ Karyn.
+
+Updated dev env pkgs.
+(SalishSeaTools)
+
+Emailed Dafna about reset of sickleave hours.
+Did 1/3 of "new employee" training.
+
+Installed Chromium on khawla so that I can maybe use MS Teams PWA (progressive web app)
+Installed 1password extension in Chromium.
+
+Checked status of scheduled GHA workflows:
+  conda activate gha-workflows
+  python3 /media/doug/warehouse/MOAD/gha-workflows/gha_workflows_checker.py
+
+
+Thu 23-Mar-2023
+^^^^^^^^^^^^^^^
+
+Helped Karyn with loading datasets from Susan's sockeye carbon runs.
+Helped Cassidy with ssh key on graham via CCDB.
+
+Fixed run-date passing for wwatch3-forecast2
+* fixed in branch; fix-ww3-fcst2-run-date
+* worked as expected overnight
+* PR#171; rebase-merged
+Changed codeql-analysis workflow to trigger on push to main and pull requests
+targeting main; trying to resolve warning re: 
+  configuration present on refs/heads/main was not found:
+    .github/workflows/codeql-analysis.yaml:analyze/language:python
+(SalishSeaNowcast)
+
+Restarted nowcast-dev in automation:
+* on khawla:
+  * restored ``make_forcing_links salish nowcast+ --shared-storage`` in after_watch_NEMO
+  * copied to skookum to test, and restarted manager to load
+* on salish:
+    mkdir /results/SalishSea/nowcast-dev.201905/22mar23/
+    cp -p /results2/SalishSea/nowcast-green.201905/22mar23/SalishSea_09640080_restart.nc \
+      /results/SalishSea/nowcast-dev.201905/22mar23/
+    cp -p /results2/SalishSea/nowcast-green.201905/namelist_cfg \
+      /results/SalishSea/nowcast-dev.201905/22mar23/
+    rsync -av arbutus.cloud-nowcast:/nemoShare/MEOPAR/nowcast-sys/runs/namelist.time \
+      /SalishSeaCast/runs/
+* on skookum:
+    supervisorctl restart manager
+    make_forcing_links salish nowcast+ --shared-storage
+    * no timesteps because NEMO-atmos links have wrong path
+    * fixed path in nowcast.yaml, and copied to skookum
+    make_forcing_links salish nowcast+ --shared-storage
+(SalishSeaCast)
+
+
+Fri 24-Mar-2023
+^^^^^^^^^^^^^^^
+
+Created ``forcing/atmospheric/continental2.5/nemo_forcing/`` directories on graham-dtn
+and optimum; moved ``hrdps_*.nc`` files uploaded by automation to ``GEM2.5/operational/``
+Tried to investigate dask scheduler high and increasing memory use without much luck,
+other than it appears to be a known issue that the devs don't udnerstand.
+Restarted dask cluster scheduler and workers; reduced reserved memory, but no change in swap.
+Backfilled ``upload_forcing nowcast+`` to graham-dtn and optimum-hindcast via bash loops
+``make_plots nemo forecast publish`` failed with:
+  arrow.parser.ParserError: Could not match input '01-Jan-1970 00:00' to any of the following 
+  formats: YYYY-MMM-DD HH:mm:ss, DD-MMM-YYYY HH:mm:ss, YYYY-MM-DD HH:mm:ss.
+in salishsea_tools.nc_tools.time_origin()
+Started to get nowcast-agrif working again
+* got stalled by permissions on 
+``/home/sallen/MEOPAR/`` preventing me from creating new storage tree:
+/home/sallen/MEOPAR/continental2.5/NEMO-atmos/fcst; fixed
+
+* Need to create a NEMO interpolation weights file for the Baynes Sound sub-grid.
+(SalishSeaCast)
+
+Updated atmospheric forcing paths on optimum-hindcast and graham-dtn in config & unit tests;
+Copied config to skookum for testing after grib_to_netcdf nowcast+; confirmed that uploads 
+were stored as expected.
+Updated atmospheric forcing paths in figure dev & test notebooks
+nowcast-dev launched by automation, so committed and puished code to resume nowcast-dev runs after 
+HRDPS catch-up.
+(SalishSeaNowcast)
+
+Search of SalishSeaCast org shows that only uses of 
+salishsea_tools.wind_tools.calc_wind_avg_at_point() are in SalishSeaNowcast and analysis-vicky;
+decided to just change hard-coded weather filename templte from ``ops_`` to ``hrdps_`` instead
+of trying to generalize; copied planned change to skookum for use by
+``make_plots nemo forecast publish``.
+Added 'DD-MMM-YYYY HH:mm' to arrow.get() parser patterns in salishsea_tools.nc_tools.time_origin()
+to handle ``hrdps_*.nc`` files.
+(SalishSeaTools)
+
+GitHub RSA key rotation issue hit Susan on a pull, then me on a push; replacement key I got was
+ed25519.
+
+Rode ToW stage 3 on Mountain Route.
+
+
+Sat 25-Mar-2023
+^^^^^^^^^^^^^^^
+
+No increase in dask scheduler memory after 2 runs of grib_to_netcdf.
+figures/comparison/sandheads_winds.py failed:
+  Traceback (most recent call last):
+    File "/SalishSeaCast/SalishSeaNowcast/nowcast/workers/make_plots.py", line 1102, in _calc_figure
+      fig = fig_func(*args, **kwargs)
+    File "/SalishSeaCast/SalishSeaNowcast/nowcast/figures/comparison/sandheads_winds.py", line 72, in make_figure
+      plot_data = _prep_plot_data(hrdps_dataset_url, run_type, run_date)
+    File "/SalishSeaCast/SalishSeaNowcast/nowcast/figures/comparison/sandheads_winds.py", line 88, in _prep_plot_data
+      u_hrdps = hrdps.u_wind.sel(time=run_date.format("YYYY-MM-DD")).isel(
+    File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/xarray/core/dataarray.py", line 1329, in sel
+      ds = self._to_temp_dataset().sel(
+    File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/xarray/core/dataset.py", line 2501, in sel
+      pos_indexers, new_indexes = remap_label_indexers(
+    File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/xarray/core/coordinates.py", line 421, in remap_label_indexers
+      pos_indexers, new_indexes = indexing.remap_label_indexers(
+    File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/xarray/core/indexing.py", line 121, in remap_label_indexers
+      idxr, new_idx = index.query(labels, method=method, tolerance=tolerance)
+    File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/xarray/core/indexes.py", line 241, in query
+      indexer = self.index.get_loc(label_value)
+    File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/pandas/core/indexes/datetimes.py", line 714, in get_loc
+      raise KeyError(key) from err
+  KeyError: '2023-03-24'
+figures/research/velocity_section_and_surface.py failed:
+  Traceback (most recent call last):
+    File "/SalishSeaCast/SalishSeaNowcast/nowcast/workers/make_plots.py", line 1102, in _calc_figure
+      fig = fig_func(*args, **kwargs)
+    File "/SalishSeaCast/SalishSeaNowcast/nowcast/figures/research/velocity_section_and_surface.py", line 112, in make_figure
+      cbar = _plot_vel_section(
+    File "/SalishSeaCast/SalishSeaNowcast/nowcast/figures/research/velocity_section_and_surface.py", line 240, in _plot_vel_section
+      ax.fill_between(
+    File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/matplotlib/__init__.py", line 1412, in inner
+      return func(ax, *map(sanitize_sequence, args), **kwargs)
+    File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/matplotlib/axes/_axes.py", line 5252, in fill_between
+      return self._fill_between_x_or_y(
+    File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/matplotlib/axes/_axes.py", line 5180, in _fill_between_x_or_y
+      for idx0, idx1 in cbook.contiguous_regions(where):
+    File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/matplotlib/cbook/__init__.py", line 1262, in contiguous_regions
+      idx, = np.nonzero(mask[:-1] != mask[1:])
+  IndexError: too many indices for array: array is 0-dimensional, but 1 were indexed
+(SalishSeaCast)
+
+Reviewed 2022 tax docs; still waiting for trusts T3.
+
+Replaced tube in Susan's rear 650B wheel and extracted glass shard from tire. Installed 650B
+wheels and mudguards on her Topstone.
+
+
+Sun 26-Mar-2023
+^^^^^^^^^^^^^^^
+
+dask scheduler held virtual memory is up to 29.333G after 4 runs of grib_to_netcdf.
+Created atmospheric forcing interpolation weights file for nowcast-agrif Baynes Sound sub-grid:
+In /data/dlatorne/MEOPAR/grid/subgrids/BaynesSound:
+  ln -s /results/forcing/atmospheric/continental2.5/nemo_forcing/hrdps_y2023m02d23.nc atmos.nc
+  ln -s bathymetry_201702_BS.nc bathy_meter.nc
+  cp ../../namelist.get_weight_nemo.gem2.5-gemlam namelist.get_weight_nemo
+  ln -s namelist.get_weight_nemo namelist
+  /ocean/dlatorne/MEOPAR/NEMO-EastCoast/NEMO_Preparation/4_weights_ATMOS/get_weight_nemo
+Improved interpolation weights file with tools/I_ForcingFiles/Atmos/ImproveWeightsFile.ipynb
+* Worked in khawla:/media/doug/warehouse/MEOPAR/tools with ``sshfs salish:/data /data``
+  and VSCode as Jupyter client
+  
+* committed new weights file as 
+  grid/subgrids/BaynesSound/weights-continental2.5-hrdps_201702_23feb23onward.nc
+
+(SalishSeaCast)
+
+Rode TFC Sunday group ride.
 
 
 
 
 TODO:
-* libwgrib2:
-  * fork yt87/libwgrib2 - done
-  * create SalishSeaCast branch
-  * add environment-dev like:
-      mamba create -n libwgrib2-dev make gfortran libnetcdf libaec libpng \
-        "jasper<3" _openmp_mutex conda-build
-* pywgrib2_xr
-  * add SalishSeaNowcast docs re: clone & install pywgrib2_xr,
-    including install of vendored libwgrib2 before installing pywgrib2_xr
+* create a NEMO interpolation weights file for the Baynes Sound sub-grid
+
+
+
+
+
 
 
 TODO:
@@ -2656,7 +2992,7 @@ TODO:
 
 TODO:
 * add assign-issue-pr action to MOAD/docs repo
-* drop dead link to Advection Kernels in OCean Parcels section; it is 404 and I can't find anything 
+* drop dead link to Advection Kernels in Ocean Parcels section; it is 404 and I can't find anything 
   equivalent in Parcels docs or tutorials now.
 
 
@@ -2669,7 +3005,7 @@ TODO:
 * numpy.int in moad_tools random_oil_spills
 
 * pre-commit auto-update
-  * SalishSeaNEMO-nowcast - done
+  * SalishSeaNowcast - done
   * NEMO-Cmd
   * Reshapr
   * MOAD/docs
