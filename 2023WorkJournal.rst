@@ -2616,7 +2616,7 @@ Launched nowcast-green/19mar23:
 Rode the TFC Sunday group ride.
 
 
-Week 11
+Week 12
 -------
 
 Mon 20-Mar-2023
@@ -2858,8 +2858,6 @@ Started to get nowcast-agrif working again
 * got stalled by permissions on 
 ``/home/sallen/MEOPAR/`` preventing me from creating new storage tree:
 /home/sallen/MEOPAR/continental2.5/NEMO-atmos/fcst; fixed
-
-* Need to create a NEMO interpolation weights file for the Baynes Sound sub-grid.
 (SalishSeaCast)
 
 Updated atmospheric forcing paths on optimum-hindcast and graham-dtn in config & unit tests;
@@ -2887,6 +2885,8 @@ Rode ToW stage 3 on Mountain Route.
 
 Sat 25-Mar-2023
 ^^^^^^^^^^^^^^^
+
+JRA admitted to Peace Arch; Susan spent the day there.
 
 No increase in dask scheduler memory after 2 runs of grib_to_netcdf.
 figures/comparison/sandheads_winds.py failed:
@@ -2927,6 +2927,7 @@ figures/research/velocity_section_and_surface.py failed:
     File "/SalishSeaCast/nowcast-env/lib/python3.10/site-packages/matplotlib/cbook/__init__.py", line 1262, in contiguous_regions
       idx, = np.nonzero(mask[:-1] != mask[1:])
   IndexError: too many indices for array: array is 0-dimensional, but 1 were indexed
+This is issue #138 from before change to HRDPS continental.
 (SalishSeaCast)
 
 Reviewed 2022 tax docs; still waiting for trusts T3.
@@ -2949,29 +2950,285 @@ In /data/dlatorne/MEOPAR/grid/subgrids/BaynesSound:
 Improved interpolation weights file with tools/I_ForcingFiles/Atmos/ImproveWeightsFile.ipynb
 * Worked in khawla:/media/doug/warehouse/MEOPAR/tools with ``sshfs salish:/data /data``
   and VSCode as Jupyter client
-  
-* committed new weights file as 
-  grid/subgrids/BaynesSound/weights-continental2.5-hrdps_201702_23feb23onward.nc
-
 (SalishSeaCast)
 
 Rode TFC Sunday group ride.
 
 
+Week 13
+-------
+
+Mon 27-Mar-2023
+^^^^^^^^^^^^^^^
+
+Susan spent the day in White Rock.
+
+Changed email address for EGBC to djl@.
+
+Researched symbolic debugging of C/C++ in VS Code and messaged Raisha about it.
+(Atlantis)
+
+dask scheduler held virtual memory is up to 29.371G after 6 runs of grib_to_netcdf.
+Continued work on resuming nowcast-agrif runs:
+* tried to pull grid repo updates;faield with "fatal: The remote end hung up unexpectedly"
+  * initially due to github.com host key change - fixed
+  * next due to id_rsa key on oricnus that is not on GitHub; installed id_rsa.pub on GitHub
+  * next due to orcinus ssh client using SHA-1
+  * gave up
+* rsync-ed HRDPS continental interpolation weights files to orcinus
+* launched 1st backfill run:
+    make_forcing_links orcinus nowcast-agrif 2023-02-23
+  * failed due to missing turbidity file; also noticed missing hrdps_y2023m02d22.nc
+      upload_forcing orcinus turbidity 2023-02-23
+      # we have no hrdps_y2023m02d22, so delete symlink to make NEMO use 1st hour of hrdps_y2023m02d23.nc
+        cd /home/dlatorne/nowcast-agrif-sys/runs/
+         rm NEMO-atmos/hrdps_y2023m02d22.nc
+  * re-try #1; failed
+    * trying to use ops_*.nc and weights-gem2.5*.nc files
+    * updated SS-run-sets/v201702/smelt-agrif/namelist.atmos_rivers
+    * updated SS-run-sets/v201702/smelt-agrif/subgrids/BaynesSound/namelist.atmos_rivers.BS
+  * re-try #2; time stepping; success :-)
+Backfilled ``upload_forcing turbidity`` to graham-dtn and optimum-hindcast via bash loops
+Started backfilling nowcast-agrif runs:
+  make_forcing_links orcinus nowcast-agrif 2023-02-24
+  make_forcing_links orcinus nowcast-agrif 2023-02-25
+  make_forcing_links orcinus nowcast-agrif 2023-02-26
+  make_forcing_links orcinus nowcast-agrif 2023-02-27
+  make_forcing_links orcinus nowcast-agrif 2023-02-28
+* committed new weights file as 
+  grid/subgrids/BaynesSound/weights-continental2.5-hrdps_201702_23feb23onward_BS.nc
+(SalishSeaCast)
+
+Phys Ocgy seminar by Sacchi re: hyperspectral optical measurement of phytoplacnkton taxonomy
+
+Committed updated atmospheric forcing storage path on orcinus for nowcast-agrif.
+(SalishSeaNowcast)
+
+Committed namelist updates:
+* AGRIF atmos_rivers
+* 201905 atmos_rivers
+* 201905 smelt rivers for runs on arbutus re: flatter dir structure
+(SS-run-sets)
+
+
+Tue 28-Mar-2023
+^^^^^^^^^^^^^^^
+
+Susan spent the day in White Rock.
+
+Group mtg; see whiteboard.
+docs repo maintenance:
+* Updated sphinx-rtd-theme pin to 1.2
+* Fixed markup re: warnings; mostly missing newlines after directives and some title level
+  inconsistencies
+* Tracked down new domain hosting Ariane docs and fixed broken links
+(MOAD)
+
+dask scheduler held virtual memory is up to 29.408G after 8 runs of grib_to_netcdf.
+Continued backfilling nowcast-agrif runs:
+  wait for automation run to fail at ~11:20
+  make_forcing_links orcinus nowcast-agrif 2023-03-01
+  make_forcing_links orcinus nowcast-agrif 2023-03-02
+  make_forcing_links orcinus nowcast-agrif 2023-03-03
+  make_forcing_links orcinus nowcast-agrif 2023-03-04
+  make_forcing_links orcinus nowcast-agrif 2023-03-05
+  make_forcing_links orcinus nowcast-agrif 2023-03-06
+  make_forcing_links orcinus nowcast-agrif 2023-03-07
+  make_forcing_links orcinus nowcast-agrif 2023-03-08
+nowcast-green failed because I forgot to pull SalishSeaNowcast update re: namelist_smelt_rivers
+on arbutus; re-ran
+  make_forcing_links arbutus nowcast-green
+(SalishSeaCast)
+
+Started exploring cropping HRDPS continental files to SalishSeaCast domain coverage in 
+analysis-doug/notebooks/continental-HRDPS/crop-grib-to-SSC-domain.ipynb.ipynb on khawla.
+* discovered that xarray.open_dataset(..., engine="cfgrib") relies on GRIB_Nx and GRIB_Ny
+  variable attribute values, but those don't get adjusted by 
+  ``ds.sel(y=slice(230, 461), x=slice(300, 491))``
+(SalishSeaNowcast)
+
+
+Wed 29-Mar-2023
+^^^^^^^^^^^^^^^
+
+Susan spent the day in White Rock. JRA should go home by weekend.
+Picked up all-round glasses with new prescription lens.
+Did a spontaneous training ride around UBC; new PR on Spanish Bankc climb.
+
+Answered email from Nate at Hakai re: max time in wave forecast dataset.
+dask scheduler held virtual memory jumped up to 53.228G after 10 runs of grib_to_netcdf.
+Continued backfilling nowcast-agrif runs:
+  wait for automation run to fail at ~11:20
+  make_forcing_links orcinus nowcast-agrif 2023-03-09
+  make_forcing_links orcinus nowcast-agrif 2023-03-10
+  make_forcing_links orcinus nowcast-agrif 2023-03-11
+  make_forcing_links orcinus nowcast-agrif 2023-03-12
+(SalishSeaCast)
+
+Continued exploring cropping HRDPS continental files to SalishSeaCast domain coverage in 
+analysis-doug/notebooks/continental-HRDPS/crop-grib-to-SSC-domain.ipynb.ipynb on khawla.
+* setting GRIB_Nx and GRIB_Ny variable attribute values (and GRIB_numberOfPoints for consistency)
+  after cropping and before cfgrib.xarray_to_grib.to_grib() results in a file that 
+  xarray.open_dataset(..., engine="cfgrib") can read
+* warnings on write:
+  * FutureWarning: GRIB write support is experimental, DO NOT RELY ON IT!
+  * unknown 'typeOfLevel': 'heightAboveGround'. Using GRIB2 template
+* to_grib() doesn't like "unknown" var name in ACPC files; decides that it is a temperature!!!
+(SalishSeaNowcast)
+
+
+Thu 30-Mar-2023
+^^^^^^^^^^^^^^^
+
+Continued backfilling nowcast-agrif runs:
+  make_forcing_links orcinus nowcast-agrif 2023-03-13
+  wait for automation run to fail at ~14:00
+  make_forcing_links orcinus nowcast-agrif 2023-03-14
+  make_forcing_links orcinus nowcast-agrif 2023-03-15
+  make_forcing_links orcinus nowcast-agrif 2023-03-16
+Discovered that yesterday's collect_weather 18 didn't finish:
+* 523 of 528 files
+* recovery:
+    pkill -f collect_weather
+    download_weather 18 2.5km 2023-03-29
+    rm -rf /SalishSeaCast/datamart/hrdps-continental/18/*
+    download_weather 00 2.5km
+    rm -rf /SalishSeaCast/datamart/hrdps-continental/00/*
+    download_weather 06 2.5km
+    rm -rf /SalishSeaCast/datamart/hrdps-continental/06/*
+    wait for forecast2 runs to finish
+    download_weather 12 2.5km
+    rm -rf /SalishSeaCast/datamart/hrdps-continental/12/*
+    collect_weather 18 2.5km
+  * nowcast runs started at 12:45, ~2.5h late
+dask scheduler held virtual memory edged up to 53.237G after 11 runs of grib_to_netcdf.
+dask scheduler held virtual memory edged up to 53.240G after 12 runs of grib_to_netcdf.
+Tried to run ``nowcast.workers.day_month_avgs 2023-02-01`` in ``202111-tarballs`` tmux session on
+skookum; failed due to no time steps in 22feb23 1h grid_T and biol_T files; passed to Susan in
+#hindcast202111-nowcast; she fixed the files, and I completed the averaging.
+(SalishSeaCast)
+
+Continued exploring cropping HRDPS continental files to SalishSeaCast domain coverage in 
+analysis-doug/notebooks/continental-HRDPS/crop-grib-to-SSC-domain.ipynb.ipynb on khawla.
+* confirmed that ACPF_Sfc seems to be the only problem variable
+* no amount of mucking around with metadata and changing the dataset variable name seems to make
+  a differenece: APCP_Sfc is always stored at air_temperature by to_grib()
+* decided to just live with that and hack grib_to_netcdf to handle it
+* ran GRIB cropping notebook call for 20230329/06 hours 17 to 41 to make cropped grib files
+  that are needed to build run_date + 1 fcst/hrdps_*.nc file
+  * took 11m20.1s to process 25x11 = 275 files on khawla with /results mounted by sshfs
+* hacked grib_to_netcdf work:
+  * 17s to create fcst/hrdps_y2023m03d30.nc on khawla with /results mounted by sshfs
+  * precip metadata items that are inaccurate:
+    * GRIB_paramId
+    * GRIB_cfName
+    * GRIB_cfVarName
+    * GRIB_name
+    * GRIB_shortName
+    * GRIB_units
+* Susan verified that fcst/hrdps_y2023m03d30.nc fields compare well with hrdps_y2023m03d30.nc
+  from uncropped files when plotted by grid indices, but that lons/lats are incorrect
+(SalishSeaNowcast)
+
+
+Fri 31-Mar-2023
+^^^^^^^^^^^^^^^
+
+Drove to White Rock to visit J and adapt suite.
+
+Continued backfilling nowcast-agrif runs:
+  wait for automation run to fail at ~15:15
+  make_forcing_links orcinus nowcast-agrif 2023-03-17
+  * stalled due to orcinus down-time
+dask scheduler held virtual memory edged up to 53.243G after 13 runs of grib_to_netcdf.
+dask scheduler held virtual memory edged up to 53.247G after 14 runs of grib_to_netcdf.
+collect_weather 12 didn't finish:
+* 0 files
+* server failure at ~07:45; queue did not reconnect
+* recovery started at ~12:45
+    rm -rf /results/forcing/atmospheric/continental2.5/GRIB/20230331/12/
+    pkill -f collect_weather
+    download_weather 12 2.5km
+    supervisorctl restart sr_subscribe 
+    collect_weather 18 2.5km
+(SalishSeaCast)
+
+Continued exploring cropping HRDPS continental files to SalishSeaCast domain coverage in 
+analysis-doug/notebooks/continental-HRDPS/crop-grib-to-SSC-domain.ipynb.ipynb on khawla.
+* lons/lats of SSC grib files are getting messed up when they are written by cfgrib
+* tried setting attrs re: first and last point to those of cropped grid; that changed what
+  is in the SSC grib file, but not to be correct
+* gave up; decided to store a georef dataset for the 191x231 lons/lats used in 
+  grib_to_netcdf._calc_nemo_var_ds() and read it in grib_to_netcdf._calc_nemo_ds() to pass to
+  the many calls of _calc_nemo_var_ds()
+Started work on crop_gribs worker and modifying grib_to_netcdf and next_workers to work with it:
+* branch: crop-gribs
+* PR#
+* added --full-continental-grid option to grib_to_netcdf
+* TODO:
+  * add ``backend_kwargs={"indexpath": ""}`` to grib_to_netcdf ``open_*dataset()`` calls to
+    prevent storage of GRIB index files
+  * fix inaccurate ``GRIB_*`` metadata values in ACPC variable
+(SalishSeaNowcast)
+
+
+April
+=====
+
+Sat 1-Apr-2023
+^^^^^^^^^^^^^^
+
+Susan went to White Rock to for J's return.
+
+dask scheduler held virtual memory edged up to 53.250G after 16 runs of grib_to_netcdf.
+orcinus compute nodes down due to problems with new chiller installation
+(SalishSeaCast)
+
+Continued work on crop_gribs worker and modifying grib_to_netcdf and next_workers to work with it:
+* branch: crop-gribs
+* PR#173
+* added ``backend_kwargs={"indexpath": ""}`` to grib_to_netcdf ``open_*dataset()`` calls to
+  prevent storage of GRIB index files
+* Use stored SSC_grid_georef.nc to set lons/lats
+
+* TODO:
+  * fix inaccurate ``GRIB_*`` metadata values in ACPC variable
+(SalishSeaNowcast)
+
+Rode ToW Stage 4 standard route on Road to Ruins.
+
+
+Sun 2-Apr-2023
+^^^^^^^^^^^^^^
+
+dask scheduler held virtual memory edged up to 77.048G after 16 runs of grib_to_netcdf.
+orcinus loggin nodes down due to problems with new chiller installation
+(SalishSeaCast)
+
+Continued work on crop_gribs worker and modifying grib_to_netcdf and next_workers to work with it:
+* branch: crop-gribs
+* PR#173
+* fixed bug in worker module detection for after_*() functions
+* added crop_gribs worker framework
+* TODO:
+  * fix inaccurate ``GRIB_*`` metadata values in ACPC variable
+(SalishSeaNowcast)
 
 
 TODO:
-* create a NEMO interpolation weights file for the Baynes Sound sub-grid
+* backfill upload_forcing nowcast+ to orcinus for 2apr
 
 
 
+TODO:
+* update dask in /SalishSeaCast/nowcast-env and cluster env on salish
+* update sarracenia in /SalishSeaCast/nowcast-env
 
 
 
 
 TODO:
 * update sphinx-rtd-theme pin in envs when 1.2 is released
-  * MOAD/docs
   * SalishSeaCast/docs
 
 
@@ -2990,11 +3247,6 @@ TODO:
 * update MOAD/docs XIOS section accordingly
 * update XIOS-ARCH README accordingly
 
-TODO:
-* add assign-issue-pr action to MOAD/docs repo
-* drop dead link to Advection Kernels in Ocean Parcels section; it is 404 and I can't find anything 
-  equivalent in Parcels docs or tutorials now.
-
 
 
 * tidy module & functions notebook & module
@@ -3005,10 +3257,10 @@ TODO:
 * numpy.int in moad_tools random_oil_spills
 
 * pre-commit auto-update
-  * SalishSeaNowcast - done
+  * MOAD/docs - done
+  * SalishSeaNowcast
   * NEMO-Cmd
   * Reshapr
-  * MOAD/docs
   * MoaceanParcels
   * cookiecutter-MOAD-pypkg
   * AtlantisCmd
@@ -3116,16 +3368,6 @@ TODO:
 
 
 TODO:
-* for MoaceanParcels
-  * add GHA CodeQL workflow
-  * add pre-commit hooks:
-    * pyupgrade
-
-OceanParcels:
-* Explore VisibleDeprecationWarning re: constructing ndarrays from lists of ndarrays; parcels/field.py:241 & 243 and commits f8faf9 & ffb6223; do timestamps & datafiles need to be ndarrays, or can they be lists?
-
-
-TODO:
 * Move entry points from setup.py to setup.cfg
   * SalishSeaCmd - done
   * NEMO-Cmd - done
@@ -3154,13 +3396,6 @@ TODO:
 
 
 
-TODO:
-Fix ariane docs:
-* maybe re:  adding a bin-like directory to prefix gets rid of errors from doc/ and examples/ that confused Becca ???
- versions re: .bashrc
-
-
-
 Update ONC URLs from dmas.uvic.ca to https://data.oceannetworks.ca/
 
 jupyter kernelspec uninstall unwanted-kernel
@@ -3172,10 +3407,6 @@ TODO:
 https://linuxize.com/post/getting-started-with-tmux/
 
 update deployment docs re: spinning up a new compute node
-
-15jun20: check mitigation of "index exceeds dimension bounds" IndexError in make_plots fvcom forecast-x2 research
-
-Add VCS revision recording to run_fvcom
 
 Update SalishSeaNowcast fig-dev docs
 
