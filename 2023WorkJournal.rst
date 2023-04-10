@@ -3165,10 +3165,6 @@ Started work on crop_gribs worker and modifying grib_to_netcdf and next_workers 
 * branch: crop-gribs
 * PR#
 * added --full-continental-grid option to grib_to_netcdf
-* TODO:
-  * add ``backend_kwargs={"indexpath": ""}`` to grib_to_netcdf ``open_*dataset()`` calls to
-    prevent storage of GRIB index files
-  * fix inaccurate ``GRIB_*`` metadata values in ACPC variable
 (SalishSeaNowcast)
 
 
@@ -3190,9 +3186,6 @@ Continued work on crop_gribs worker and modifying grib_to_netcdf and next_worker
 * added ``backend_kwargs={"indexpath": ""}`` to grib_to_netcdf ``open_*dataset()`` calls to
   prevent storage of GRIB index files
 * Use stored SSC_grid_georef.nc to set lons/lats
-
-* TODO:
-  * fix inaccurate ``GRIB_*`` metadata values in ACPC variable
 (SalishSeaNowcast)
 
 Rode ToW Stage 4 standard route on Road to Ruins.
@@ -3201,8 +3194,10 @@ Rode ToW Stage 4 standard route on Road to Ruins.
 Sun 2-Apr-2023
 ^^^^^^^^^^^^^^
 
+Susan spent part of the day in White Rock.
+
 dask scheduler held virtual memory edged up to 77.048G after 16 runs of grib_to_netcdf.
-orcinus loggin nodes down due to problems with new chiller installation
+orcinus login nodes down due to problems with new chiller installation
 (SalishSeaCast)
 
 Continued work on crop_gribs worker and modifying grib_to_netcdf and next_workers to work with it:
@@ -3210,18 +3205,333 @@ Continued work on crop_gribs worker and modifying grib_to_netcdf and next_worker
 * PR#173
 * fixed bug in worker module detection for after_*() functions
 * added crop_gribs worker framework
-* TODO:
-  * fix inaccurate ``GRIB_*`` metadata values in ACPC variable
 (SalishSeaNowcast)
 
 
-TODO:
-* backfill upload_forcing nowcast+ to orcinus for 2apr
+Week 13
+-------
+
+Mon 3-Apr-2023
+^^^^^^^^^^^^^^
+
+dask scheduler held virtual memory was unchanged at 77.048G after 18 runs of grib_to_netcdf.
+orcinus login nodes down due to problems with new chiller installation
+(SalishSeaCast)
+
+Continued work on crop_gribs worker and modifying grib_to_netcdf and next_workers to work with it:
+* branch: crop-gribs
+* PR#173
+* added implmentation of crop_gribs
+* tested crop_gribs on khawla w/ sshfs mount
+* tested grib_to_netcdf in crop-gribs branch on skookum; 1 min for forecast2
+* tested crop_gribs in crop-gribs branch on skookum; 34 min for 00Z
+(SalishSeaNowcast)
+
+Planned intro to NEMO on graham w/ Susan; see 
+https://salishseacast.slack.com/files/TFR25L4LU/F051YJVREE5?origin_team=TFR25L4LU
+Updated docs to move graham setup out of on-boarding sections.
+(MOAD)
+
+
+Tue 4-Apr-2023
+^^^^^^^^^^^^^^
+
+Group mtg; see whiteboard.
+Did intro to Alliance accounts, getting ssh public key into CCDB, ssh config stanzas for
+graham, and connecting via terminal and VS Code.
+(MOAD)
+
+dask scheduler held virtual memory jumped to >99G after 20 runs of grib_to_netcdf:
+* stopped workers and scheduler
+* updated dask in nowcast-env from 2022.12.1 to 2023.3.2; came with:
+  * dask, dask-core, distributed, lz4, openssl, and a bunch of arrow, parquet & aws stuff
+* restarted scheduler and workers:
+    dask scheduler --port 4386 --dashboard-address :4387
+    dask worker --nworkers=4 --nthreads=4 --memory-limit auto --local-directory /dev/shm \
+      --lifetime 3600 --lifetime-stagger 60 --lifetime-restart localhost:4386
+* memory use:
+  * worker spawner: 5.010g
+  * scheduler: 4.546g
+  * 4 workers: 0.664g each
+Updated sentry-sdk in nowcast-env
+Backfilled forcing to graham-dtn re: yesterday's maintenance downtime:
+  upload_forcing graham-dtn nowcast+ 2023-04-03
+  upload_forcing graham-dtn turbidity 2023-04-03
+Ran ``nowcast.workers.day_month_avgs 2023-03-01`` in ``202111-tarballs`` tmux session on
+skookum: success!
+* small amunt of memory leakage:
+  * worker spawner: 5.018g
+  * scheduler: 4.588g
+  * 4 workers: 1,085g
+(SalishSeaCast)
+
+Continued work on crop_gribs worker and modifying grib_to_netcdf and next_workers to work with it:
+* branch: crop-gribs
+* PR#173
+* added crop_gribs to automation flow
+* TODO:
+  * fix inaccurate ``GRIB_*`` metadata values in ACPC variable
+* pulled changes on to skookum after collect_weather 18 finished
+  and restarted manager to load updated next_workers module to test overnight
+Created issue #174 re: TypeError in get_onc_ferry that seems to be coming from pandas=2.0.0.
+(SalishSeaNowcast)
+
+
+Wed 5-Apr-2023
+^^^^^^^^^^^^^^
+
+dask held spawner/scheduler/workers virtual memory steady at 5.018/4.589/0.668 after 1 run of 
+grib_to_netcdf
+make_ww3_wind_file forecast2 failed with:
+  Traceback (most recent call last):
+    File "/nemoShare/MEOPAR/nowcast-sys/NEMO_Nowcast/nemo_nowcast/worker.py", line 391, in _do_work
+      checklist = self.worker_func(
+    File "/nemoShare/MEOPAR/nowcast-sys/SalishSeaNowcast/nowcast/workers/make_ww3_wind_file.py", line 118, in make_ww3_wind_file
+      ds = _create_dataset(
+    File "/nemoShare/MEOPAR/nowcast-sys/SalishSeaNowcast/nowcast/workers/make_ww3_wind_file.py", line 131, in _create_dataset
+      "u_wind": u_wind.rename({"time_counter": "time"}),
+    File "/nemoShare/MEOPAR/nowcast-sys/nowcast-env/lib/python3.8/site-packages/xarray/core/dataarray.py", line 1552, in rename
+      dataset = self._to_temp_dataset().rename(name_dict)
+    File "/nemoShare/MEOPAR/nowcast-sys/nowcast-env/lib/python3.8/site-packages/xarray/core/dataset.py", line 2841, in rename
+      variables, coord_names, dims, indexes = self._rename_all(
+    File "/nemoShare/MEOPAR/nowcast-sys/nowcast-env/lib/python3.8/site-packages/xarray/core/dataset.py", line 2798, in _rename_all
+      variables, coord_names = self._rename_vars(name_dict, dims_dict)
+    File "/nemoShare/MEOPAR/nowcast-sys/nowcast-env/lib/python3.8/site-packages/xarray/core/dataset.py", line 2772, in _rename_vars
+      raise ValueError(f"the new name {name!r} conflicts")
+  ValueError: the new name 'time' conflicts
+* unclear why, but a time variable crept into fcst/hrdps_ files
+* changed drop_vars() call that should have gotten rid of it from conditional on full_grid to 
+  try...except; tested on skookum for 12Z
+* grib_to_netcdf failed because I forgot to run crop_gribs for yesterday's 18Z; recovery:
+    crop_gribs 18 2023-04-04
+    # test grib_to_netcdf w/o dask cluster
+    grib_to_netcdf nowcast+
+    * failed because crop_gribs 00 last night cropped 4apr rather than 5apr
+        crop_gribs 00 2023-04-05
+    # test grib_to_netcdf w/o dask cluster
+    grib_to_netcdf nowcast+
+    * virtual memory stays <3500m, so no need to run in dask cluster on salish
+    upload_forcing arbutus nowcast+
+    upload_forcing optimum-hindcast nowcast+
+    upload_forcing graham-dtn nowcast+
+    upload_forcing orcinus nowcast+
+* nowcast-blue started at 12:05
+orcinus login nodes are back, but not compute yet
+* backfill forcing:
+    upload_forcing orcinus nowcast+ 2023-04-02
+    upload_forcing orcinus nowcast+ 2023-04-03
+    upload_forcing orcinus nowcast+ 2023-04-04
+    upload_forcing orcinus turbidity 2023-04-02 --debug
+    upload_forcing orcinus turbidity 2023-04-03 --debug
+    upload_forcing orcinus turbidity 2023-04-04 --debug
+(SalishSeaNowcast)
+
+Continued work on crop_gribs worker and modifying grib_to_netcdf and next_workers to work with it:
+* branch: crop-gribs
+* PR#173
+* fixed after_download_weather so that crop_gribs 00 runs for the correct date
+* changed drop_vars(time, lon, lat) to use try/except and separated time dropping to resolve issue
+  that caused make_ww3_wind_file failure above
+* marked failing test_get_onc_ferry.test_resample_nav_coord() test to skip re: pandas=2.0.0 to
+  make GHA workflow happy
+* updated ECCC file template key change into collect_weather and download_weather
+* added crop_gribs to docs including process flow diagram
+* changed next_workers to run grib_to_netcdf on skookum instead of salish because we no longer
+  need the big memory dask cluter on salish
+  * copied change to skookum and restarted manager to load next_workers
+* fixed inaccurate ``GRIB_*`` metadata values in ACPC variable
+  * GRIB_paramId: 500041
+  * GRIB_cfName: precipitation_flux
+  * GRIB_cfVarName: precipitation_flux
+  * GRIB_name: Total Precipitation rate (S)
+  * GRIB_shortName: tot_prec
+  * GRIB_units: kg m-2 s-1
+
+* TODO:
+  * finish removal of running grib_to_netcdf on salish instead of skookum
+(SalishSeaNowcast)
+
+Fixed GitHub OAuth for readthedocs in orgs so that PR builds work now for SalishSeaNowcast
+
+Listened to https://testandcode.com/197 w/ Brett talking about TROVE classifiers:
+* can be mostly dropped except for:
+  * license
+  * private
+  * something else to do with framework, maybe
+
+
+Thu 6-Apr-2023
+^^^^^^^^^^^^^^
+
+wwatch3-forecast2 didn't report overnight; investigation showed a stalled watch_ww3 process
+from yesterday on arbutus; killed it
+* no wwatch3 runs downloaded since 03apr
+  * found and downloaded nowcast/04apr
+  * no forecast/04apr
+  * forecast2/04apr failed due to no wind file
+* found apparent off-by-1 error in run dates: nowcast/04apr ran on 05apr
+* recovery:
+    download_wwatch3_results arbutus nowcast 2023-04-04
+    wait until wwatch3-forecast finishes
+    * restarted log_aggregator due to no messages from run_wwatch3 or watch_wwatch3
+    launch_remote_worker make_ww3_wind_file arbutus forecast
+    launch_remote_worker make_ww3_current_file arbutus forecast
+grib_to_netcdf failed because 00Z GRIBs weren't cropped; related to date bug I fixed yesterday,
+but didn't flow the fix through to production
+* got production branch up to date with PR#173
+* restarted manager to load latest next_workers
+* restarted automation manually; nowcast-blue started at 11:09
+orcinus compute nodes are running again; resumed backfilling nowcast-agrif runs:
+  wait for automation run to fail at ~12:15
+  make_forcing_links orcinus nowcast-agrif 2023-03-17
+  make_forcing_links orcinus nowcast-agrif 2023-03-18
+  make_forcing_links orcinus nowcast-agrif 2023-03-19
+  make_forcing_links orcinus nowcast-agrif 2023-03-20
+  make_forcing_links orcinus nowcast-agrif 2023-03-21
+  make_forcing_links orcinus nowcast-agrif 2023-03-22
+  make_forcing_links orcinus nowcast-agrif 2023-03-23
+collect_weather 18 didn't finish
+  mv /results/forcing/atmospheric/continental2.5/GRIB/20230406/18/ \
+    /results/forcing/atmospheric/continental2.5/GRIB/20230406/18.aside
+  download_weather 18 2.5km
+  collect_weather 00 2.5km --backfill
+(SalishSeaCast)
+
+Continued work on crop_gribs worker and modifying grib_to_netcdf and next_workers to work with it:
+* branch: crop-gribs
+* PR#173
+* removed running grib_to_netcdf on salish instead of skookum
+
+* fixed run-date propogation from watch_NEMO to make_ww3_*_files
+  * copied next_workers to skookum
+  * restarted manager to load updated next_workers
+(SalishSeaNowcast)
+
+UBC-IOS modeling mtg:
+* nested inside SS500 (older version of our SSC)
+  * SSS150: 129x98m
+    * 7 more tidal constituents than SS500
+  * VH20: 26x20m
+  * SF30: 30x30m
+* non-stationary tidal model for Mission water level for use when Mission gauge is down
+
+
+Fri 7-Apr-2023
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Good Friday
+
+Worked on graham storage session for 13-Apr (see #alliance-hpc post)
+* TODO:
+  * confirm XIOS and NEMO builds, etc. with module stack:
+      module load StdEnv/2020
+      module load netcdf-fortran-mpi/4.6.0
+      module load perl/5.30.2
+      module load python/3.11.2
+    * update MOAD setup docs if okay
+(MOAD)
+
+Continued backfilling nowcast-agrif runs:
+  wait for automation run to fail at ~
+  make_forcing_links orcinus nowcast-agrif 2023-03-24
+  make_forcing_links orcinus nowcast-agrif 2023-03-25
+  make_forcing_links orcinus nowcast-agrif 2023-03-26
+  make_forcing_links orcinus nowcast-agrif 2023-03-27
+  make_forcing_links orcinus nowcast-agrif 2023-03-28
+  make_forcing_links orcinus nowcast-agrif 2023-03-29
+  make_forcing_links orcinus nowcast-agrif 2023-03-30
+(SalishSeaCast)
+
+Continued work on crop_gribs worker and modifying grib_to_netcdf and next_workers to work with it:
+* branch: crop-gribs
+* PR#173
+* automation worked without my intervention; rebase-merged PR
+(SalishSeaNowcast)
+
+
+Sat 8-Apr-2023
+^^^^^^^^^^^^^^
+
+wwatch3-forecast2 didn't run due to ``run_ww3 --run-date 2023-04-09`` from my edits yesterday;
+forcing files were correct to 2023-04-10 06:00 though; re-ran
+  launch_remote_worker arbutus run_ww3 "arbutus forecast2 --run-date 2023-04-08"
+* success!
+Continued backfilling nowcast-agrif runs:
+  make_forcing_links orcinus nowcast-agrif 2023-03-31
+  wait for automation run to fail at ~
+  make_forcing_links orcinus nowcast-agrif 2023-04-01
+  make_forcing_links orcinus nowcast-agrif 2023-04-02
+  make_forcing_links orcinus nowcast-agrif 2023-04-03
+  make_forcing_links orcinus nowcast-agrif 2023-04-04
+  make_forcing_links orcinus nowcast-agrif 2023-04-05
+crop_gribs failed due to corrupted 
+18/030/20230408T18Z_MSC_HRDPS_VGRD_AGL-10m_RLatLon0.0225_PT030H.grib2
+* curl-ed file from hpfx and re-ran crop-gribs successfully
+collect_weather 00 didn't finish; 517 of 528 files; ran download_weather to recover
+(SalishSeaCast)
+
+Committed fix for run-date propogation from watch_NEMO to make_ww3_*_files
+* branch: fix-ww3-date-propagation
+* PR#175
+(SalishSeaNowcast)
+
+Susan formulated plan to deal with nearly full /results2:
+* Archive nowcast-green.201905_wrap 2017 & 2018 to graham:/nearline/, then delete
+* Archive nowcast-green.201905_wrap 2013-2016 to graham:/nearline/, then replace
+  nowcast-green.201905 with them
+Created and set permissions on dir on graham:
+  mkdir /nearline/rrg-allen/SalishSea/nowcast-green.201905_wrap/
+  chmogd g+w /nearline/rrg-allen/SalishSea/nowcast-green.201905_wrap/
+Started archiving on skookum in 202111-tarballs tmux session:
+* jan18-jun18 done
+(hindcast)
+
+Deleted /opp/GEMLAM/2013 after confirming it is archived on /nearline/ and desktop USB drives;
+freed 1.5T.
+
+Cleaned up graham:project/dlatorne/MIDOSS.
+Deleted graham:/scratch/dlatorne/MIDOSS that was full of empty dirs.
+
+
+Sun 9-Apr-2023
+^^^^^^^^^^^^^^
+
+* TODO:
+  * confirm XIOS and NEMO builds, etc. with module stack:
+      module load StdEnv/2020
+      module load netcdf-fortran-mpi/4.6.0
+      module load perl/5.30.2
+      module load python/3.11.2
+    * update MOAD setup docs if okay
+  * change docs to create proejct MEOPAR dir to
+      mkdir -p $PROJECT/$USER/MEOPAR/runs
+  * add, if necessary
+      mkdir -p $SCRACH/MEOPAR/results
+(MOAD)
+
+Continued backfilling nowcast-agrif runs:
+  wait for automation run to fail at ~
+  make_forcing_links orcinus nowcast-agrif 2023-04-06
+  make_forcing_links orcinus nowcast-agrif 2023-04-07
+  make_forcing_links orcinus nowcast-agrif 2023-04-08
+  make_forcing_links orcinus nowcast-agrif 2023-04-09
+(SalishSeaCast)
+
+Continued archiving on skookum in 202111-tarballs tmux session:
+* jul18-oct18 done
+(hindcast)
+
+Rebase-merged PR#175 re: fix for run-date propogation from watch_NEMO to make_ww3_*_files.
+Returned production skookum to up to date main branch.
+(SalishSeaNowcast)
+
+Updated PyCharm to 2023.1 on khawal; switched to new UI.
+
+Took transit to White Rock to visit J for Easter Dinner.
 
 
 
 TODO:
-* update dask in /SalishSeaCast/nowcast-env and cluster env on salish
 * update sarracenia in /SalishSeaCast/nowcast-env
 
 
