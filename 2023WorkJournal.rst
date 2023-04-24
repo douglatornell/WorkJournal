@@ -3741,6 +3741,253 @@ collect_weather 00 didn't finish;
 (SalishSeaCast)
 
 
+Week 16
+-------
+
+Mon 17-Apr-2023
+^^^^^^^^^^^^^^^
+
+wwatch3-forecast2 didn't run due to stuck make_ww3_wind_file worker.
+collect_weather 12 downloads didn't start until ~10:00!!
+* 517 of 528 files downloaded at ~12:00; missing 5 in hour 022, and 6 in hour 023
+* used curl to collect missing 11 files from hpfx
+* manually restarted automation:
+    kill collect_weather 12
+    collect_weather 18
+    crop_gribs 12
+    collect_river_data SkagitMountVernon 2023-04-16
+    collect_river_data SnohomishMonroe 2023-04-16
+    collect_river_data NisquallyMcKenna 2023-04-16
+    collect_river_data GreenwaterGreenwater 2023-04-16
+    make_turbidity_file
+    collect_NeahBay_ssh 06
+    wait for crop_gribs to finish
+    grib_to_netcdf nowcast+
+    download_live_ocean 
+Posted question re: onfly_checksum warnings in sarracenia discussion !&A on GitHub.
+Experimented with making collect_weather more robust:
+* can monitor time since startup
+* can monitor time since previous file downloaded
+* scanned sarracenia logs for duration of gaps during download sessions
+  * >45 min is not uncommon somewhere around hour 010 since yesterday afternoon's restart
+collect_weather 18 had collected only 399 files at 16:15 when hour 048 was full;
+* lots of missing files in hours 015-022, 028-036, and 039
+collect_weather 00 had only collected 492 files at ~22:00; missing around hours 020
+* fixed via the usual dance
+(SalishSeaCast)
+
+Continued archiving on skookum in 202111-tarballs tmux session:
+* jan15-aug15 done; sep15 in progress; aug14-dec14 moved from _wrap/; jan15 move in progress
+(hindcast)
+
+
+Tue 18-Apr-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Lunch w/ Camryn.
+
+Updated CCDB domain to ccsb.alliancecan.ca
+(MOAD docs)
+
+Squash-merged gha-workflows dependabot PR to bump codecove/codecove-action 
+from 3.1.1 to 3.1.2.
+Ran gha_workflow_checker/gha_workflows_checker.py and re-enabled workflows that had
+been disabled due to inactivity.
+Added example of re-enable command to gha-workflows README.
+Changed workflow pins in all repos that use gha-workflows from @SHA to @main
+to reduce maintenance burden of updates in reusable workflows:
+* SalishSeaNowcast
+* SalishSeaCast/docs
+* UBC-MOAD/gha-workflows
+* UBC-MOAD/docs
+* UBC-MOAD/SOG-code-collab
+* UBC-MOAD/cookiecutter-analysis-repo
+* UBC-MOAD/MoaceanParcels
+* UBC-MOAD/Reshapr
+* UBC-MOAD/moad_tools
+* SalishSeaCast/SalishSeaCmd
+* SalishSeaCast/NEMO-Cmd
+* SalishSeaCast/salishsea-site
+* SalishSeaCast/tools
+* 43ravens/NEMO_Nowcast
+* SS-Atlantis/AtlantisCmd
+Changed reusable pytest-with-coverage & sphinx-linkcheck workflows to use 
+mamba-org/provision-with-micromamba for conda env creation and caching.
+(repos maint)
+
+Started refactoring collect_weather to handle missing file messages by switching
+between watchdog and direct download modes:
+* branch: robust-collect_weather
+(SalishSeaNowcast)
+
+Continued archiving on skookum in 202111-tarballs tmux session:
+* sep15-dec15 done; no _wrap moves done
+(hindcast)
+
+
+Wed 19-Apr-2023
+^^^^^^^^^^^^^^^
+
+Planned maintenance on ECCC servers delayed 06 weather availability:
+* 06 files started appearing at ~05:55
+* 12 files started appearing at ~08:12 with 06 files interleaved
+* 121 of 528 06 files downloaded as of 09:15; that is all files visible on hpfx & dd.weather
+* 12 files still flowing at 09:15; dirs to 047 visible on hpfx & dd.weather
+* 06 012-023 dirs appeared on hpfx at ~09:20
+* 06 024-048 dirs appeared on hpfx at ~09:25
+* 06 files started flowing again at ~09:30
+* 12 files stalled at 474 of 528 at ~09:30
+* 498 of 528 06 files as of ~10:05; missing files in hours 013-106 & 017-021
+* server connection errors at 10:18 to 10:21
+* recovery started at 11:00:
+    kill collect_weather 06
+    restart sarracenia client
+    collect_weather 18 2.5km
+    move 06 dir aside
+    download_weather 06 2.5km
+    delete 06.aside dir
+  * run_NEMO stalled:
+    * manager stderr log on skookum shows 
+      ``ssh_exchange_identification: Connection closed by remote host``
+    * re-tried successfully via launch_remote_worker
+  * make_ww3_current_file failed due to stalled worker from yesterday
+    * killed stalled worker
+    * restarted automation via launch_remote_worker
+  * no wwatch3-forecast/18apr23 restart file, so forecast2 is running from quiescent state
+    wait for forecast2 runs to finish
+    download_weather 12 2.5 km
+    clean up /SalishSeaCast/datamart/hrdps-continental/ sub-dirs
+(SalishSeaCast)
+
+Continued archiving on skookum in 202111-tarballs tmux session:
+* paused tarball processing so that I cam switch skookum from py311 branch to main
+* jan15-may15 moved from _wrap/; jun15 move in progress
+(hindcast)
+
+Cancelled EGBC permit to practice.
+
+
+Thu 20-Apr-2023
+^^^^^^^^^^^^^^^
+
+Continued archiving on skookum in 202111-tarballs tmux session:
+* continued pause of tarball processing so that I cam switch skookum from py311 branch to main
+* jan15-sep15 moved from _wrap/; oct15 move in progress
+(hindcast)
+
+Downloaded Minecraft 1.9.4 mods, shader packs, resource packs, data packs:
+* sodium 0.4.10
+* lithium 0.11.1
+* phosphor 0.8.1 is unchanged since 1.19.0 release
+* malilib 0.15.3
+* MiniHUD 0.26.2
+* Twekeroo 0.16.0
+* Iris 1.6.1
+* ComplementaryShaders 4.7.1
+* ComplementaryReimagined 2.0.3
+* IronBarsFix-1.19.4
+* LowerShield-1.19.4
+* RedstoneDevices-1.19.4
+  * RedstoneWireFix
+  * StickyPistonSides
+  * DirectionalDispensersDroppers
+  * DirectionalObservers
+  * GroovyLevers
+  * HopperBottomFix
+  * DirectionalHoppers
+* DoubleShulkerShells 1.3.3
+Noticed interesting resource packs:
+* TranslucentPumpkinOverlay
+* NoPumpkinOverlay
+Installed mods, shader packs & resource packs in MultiMC 1.19.4 instance.
+Copied minihud.json & tweakeroo.json from 1.19.3 config/ to 1.19.4 config/
+Installed mods & data packs on NodeCraft:
+* sodium 0.4.10
+* lithium 0.11.1
+* phosphor 0.8.1
+* DoubleShulkerShells 1.3.3
+
+Changed max HR and zone ranges on Strava & Garmin.
+
+Installed fortls on khawla & graham in its own conda env.
+Created ``SS-run-sets/SalishSea/djl/v202111/graham-example.yaml`` on graham.
+(graham)
+
+
+(SalishSeaCmd)
+
+Jose reported dates that are missing wwatch3-nowcast runs:
+*  30Sep19, 31Dec19, 27Dec20, 13Jan21, 30apr21, 16Apr23
+(wwatch3)
+
+Switched SalishSeaNowcast from py311 branch to main after day's runs finished.
+collect_weather 18 had only downloaded 512 of 528 files at 16:45; last download was at 15:33
+* resolved via the usual dance, but forgot to kill 18 worker and start 00
+* used collect_weather 00 --backfill to get 00 files
+  * it raised another bogus FileNotFoundError (see Fri 14-Apr)
+(SalishSeaCast)
+
+
+Fri 21-Apr-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 got stuck again; -15 signal isn't enough to kill it, 
+have to use a -9 signal; restarted log_aggregator after kill
+graham-dtn rejected ssh key from upload_forcing
+* sent email to support
+(SalishSeaCast)
+
+On to graham session #2
+(MOAD)
+
+Continued archiving on skookum in 202111-tarballs tmux session:
+* continued pause of tarball processing due to graham-dtn auth issue
+* jan15-oct15 moved from _wrap/; nov15 move in progress
+(hindcast)
+
+
+Sat 22-Apr-2023
+^^^^^^^^^^^^^^^
+
+graham-dtn rejected ssh key from upload_forcing
+(SalishSeaCast)
+
+Finally got a v202111 1d run to time step; 4x9 decomp on 1 node; timed out after 3h13s;
+completed 1545 of 2160 time steps
+(graham)
+
+Transit to White Rock to visit J.
+
+
+Sun 23-Apr-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 got stuck again; -15 signal isn't enough to kill it, 
+have to use a -9 signal; restarted log_aggregator after kill
+graham-dtn rejected ssh key from upload_forcing
+TODO:
+* backfill upload_forcing nowcast+
+* backfill upload_forcing turbidity
+run_ww3 nowcast failed w/ seg fault in automation and on re-try:
+TODO:
+* backfill 23apr23/wwatch3-nowcast
+* backfill 23apr23/wwatch3-forecast
+(SalishSeaCast)
+
+Continued SalishSeaCast v202111 scaling tests on graham:
+* 01mar23-6x14: 2 nodes
+* 01mar23-8x18: 2 nodes
+* 01mar23-9x22: 2 nodes
+* 01mar23-10x27: 2 nodes
+Analysis spreadsheet:
+https://docs.google.com/spreadsheets/d/1vUyMXTk2kvam7Ae2Tv8hzadiDIENltYBnvlpayc8-aY/edit?usp=sharing
+(graham)
+
 
 
 * TODO:
@@ -3749,11 +3996,10 @@ collect_weather 00 didn't finish;
       module load netcdf-fortran-mpi/4.6.0
       module load perl/5.30.2
       module load python/3.11.2
+    * test run without python module loaded; does installation in miniconda env make it unecessary?
     * update MOAD setup docs if okay
   * add typical compilation time for XIOS: ~5 minutes
 (MOAD docs)
-
-
 
 
 
