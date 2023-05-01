@@ -3918,7 +3918,7 @@ Installed fortls on khawla & graham in its own conda env.
 Created ``SS-run-sets/SalishSea/djl/v202111/graham-example.yaml`` on graham.
 (graham)
 
-
+Started work on updating module loads for runs on graham and other Alliance clusters.
 (SalishSeaCmd)
 
 Jose reported dates that are missing wwatch3-nowcast runs:
@@ -3970,35 +3970,217 @@ Sun 23-Apr-2023
 make_ww3_current_file forecast2 got stuck again; -15 signal isn't enough to kill it, 
 have to use a -9 signal; restarted log_aggregator after kill
 graham-dtn rejected ssh key from upload_forcing
-TODO:
-* backfill upload_forcing nowcast+
-* backfill upload_forcing turbidity
 run_ww3 nowcast failed w/ seg fault in automation and on re-try:
-TODO:
-* backfill 23apr23/wwatch3-nowcast
-* backfill 23apr23/wwatch3-forecast
 (SalishSeaCast)
 
 Continued SalishSeaCast v202111 scaling tests on graham:
 * 01mar23-6x14: 2 nodes
-* 01mar23-8x18: 2 nodes
-* 01mar23-9x22: 2 nodes
-* 01mar23-10x27: 2 nodes
+* 01mar23-8x18: 3 nodes
+* 01mar23-9x22: 4 nodes
+* 01mar23-10x27: 5 nodes
 Analysis spreadsheet:
 https://docs.google.com/spreadsheets/d/1vUyMXTk2kvam7Ae2Tv8hzadiDIENltYBnvlpayc8-aY/edit?usp=sharing
 (graham)
 
 
+Week 17
+-------
+
+Mon 24-Apr-2023
+^^^^^^^^^^^^^^^
+
+Continued SalishSeaCast v202111 scaling tests on graham:
+* 01mar23-11x32: 6 nodes
+* 01mar23-12x28: 6 nodes
+* 01mar23-13x31: 7 nodes
+* 01mar23-14x34: 8 nodes
+* 01mar23-15x38: 9 nodes
+* 01mar23-16x40: 10 nodes
+* 01mar23-17x41: 11 nodes
+* 01mar23-18x44: 12 nodes
+* 01mar23-14x32: 8 nodes
+* 01mar23-14x40: 9 nodes
+* 01mar23-15x34: 9 nodes
+* 01mar23-14x33: 8 nodes
+* 01mar23-14x35: 9 nodes
+* 01mar23-14x31: 8 nodes
+* 01mar23-14x34-nopy: 8 nodes; 3s faster than previous 14x34; no need to load Pyhon module
+  in SalishSeaNEMO.sh due to having SalishSeaCmd installed in conda env
+* 01mar23-19x25: 8 nodes
+* 01mar23-19x26: 8 nodes
+* 01mar23-16x31: 8 nodes
+* 01mar23-15x33: 8 nodes
+Analysis spreadsheet:
+https://docs.google.com/spreadsheets/d/1vUyMXTk2kvam7Ae2Tv8hzadiDIENltYBnvlpayc8-aY/edit?usp=sharing
+(graham)
+
+Squash-merged dependabot PRs re: codecove/codecove-action v3.1.13:
+* SalishSeaNowcast
+* gha-workflows
+
+graham-dtn rejected ssh key from upload_forcing
+TODO:
+* backfill upload_forcing nowcast+
+* backfill upload_forcing turbidity
+Backfilled wwatch3 runs:
+* 23apr23/wwatch3-nowcast
+* 23apr23/wwatch3-forecast
+* 24apr23/wwatch3-nowcast
+* 24apr23/wwatch3-forecast
+(SalishSeaCast)
+
+
+Tue 25-Apr-2023
+^^^^^^^^^^^^^^^
+
+Email to alliance re: graham-dtn auth issue.
+
+Email to Jenn at ECCC re: Fraser buoy web server problem.
+
+Continued archiving on skookum in 202111-tarballs tmux session:
+* resumed tarball processing: jan16-apr16 archived; jan16 in progress
+* nov15-dec15 & jan16 moved from _wrap/
+(hindcast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Email to Brad de Young re: 10m water level datasets on ERDDAP.
+
+graham-dtn ssh auth issue resolved; backfilled nowcast+ and turbidity for 21-25 Apr.
+Changed sarracenia clients to use queues on dd.weather instead of hpfx in preparation for hpfx
+server maintenance tomorrow, and to test if dd.weather is more reliable re: missing messages.
+Backfilled nowcast-agrif runs:
+  upload_forcing orcinus-nowcast-agrif nowcast+ 2023-04-22
+  upload_forcing orcinus-nowcast-agrif nowcast+ 2023-04-23
+  upload_forcing orcinus-nowcast-agrif nowcast+ 2023-04-24
+  upload_forcing orcinus-nowcast-agrif nowcast+ 2023-04-25
+make_ww3_current_file forecast2 got stuck again; killed it; restarted log_aggregator;
+re-ran vai launch_remote_worker
+Searched work journals back to 2019 re: stalled make_ww3_current_file; past issues were stalled
+make_ww3_wind_file; nothing about resolutions, just notes about idea for spotter worker to 
+work around issue.
+(SalishSeaCast)
+
+
+Wed 26-Apr-2023
+^^^^^^^^^^^^^^^
+
+Mostly occupied with 2547 W 1st deal.
+
+ECCC delayed the hpfx server move that was scheduled for today to Wed 3-May.
+make_ww3_current_file forecast got stuck again; killed it; re-ran via launch_remote_worker
+collect_weather 18 didn't finish; 522 of 528 files downloaded; resolved via the ususal dance, including 1km downloads
+used collect_weather 00 --backfill
+launched collect_weather 06
+(SalishSeaCast)
+
+Continued archiving on skookum in 202111-tarballs tmux session:
+* may16-dec16 archived
+* feb16-mar16 moved from _wrap/
+(hindcast)
+
+
+Thu 27-Apr-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast got stuck again; killed it; re-ran via launch_remote_worker;
+it failed oddly while trying to write 
+``/nemoShare/MEOPAR/nowcast-sys/wwatch3-runs/current/SalishSea_1h_20230427_20230427_grid_U.nc``
+but the run was successful.
+HRDPS 12Z files stopped at 08:30 for the typical break after hour 011, but didn't resume until
+11:00.
+grib_to_netcdf 12 failed due to missing 20230426/18/005/*TMP_AGL-2m* cropped file
+* there was an error crom crop_gribs 18 last night
+* re-ran crop-gribs 18 in debug mode; failed
+* curl-ed file from hpfx
+* re-ran crop-gribs 18 in debug mode; success
+* recovery at ~17:00:
+    grib_to_netcdf nowcast+
+    upload_forcing arbutus
+    upload_forcing orcinus
+    upload_forcing graham-dtn
+    upload_forcing optimum
+(SalishSeaCast)
+
+Continued SalishSeaCast v202111 scaling tests on graham:
+* longer runs with 19x26 decomposition to find max model days per scheduler partition
+  * 3h by-node queue
+    * 10d run failed w/ core dump; node failure?
+    * re-try 10d failed w/ Transport retry count exceeded
+  * 12h by-node queue
+    * 40d run: failed with ORTE issue after ~8h, then timed out 
+  * 24h by-node queue
+    * 80d run planned
+(graham)
+
+Continued archiving on skookum in 202111-tarballs tmux session:
+* apr16 moved from _wrap/
+(hindcast)
+
+AAPS Spring general mtg on Zoom
+
+UBC-IOS modeling collab mtg
+
+
+Fri 28-Apr-2023
+^^^^^^^^^^^^^^^
+
+On to graham session #3
+(MOAD)
+
+Continued SalishSeaCast v202111 scaling tests on graham:
+* longer runs with 19x26 decomposition to find max model days per scheduler partition
+  * 3h by-node queue
+    * 10d run: success; 2h30m42s
+(graham)
+
+Updated links for workspace, SalishSeaCmd installation, and XIOS-2 & NEMO builds.
+(MOAD docs)
+
+Continued archiving on skookum in 202111-tarballs tmux session:
+* apr16-aug16 moved from _wrap/; sep16 in progress
+(hindcast)
+
+Finihsed work on updating module loads for runs on graham and other Alliance clusters;
+rebase-merged PR#37.
+(SalishSeaCmd)
+
+
+Sat 29-Apr-2023
+^^^^^^^^^^^^^^^
+
+Continued archiving on skookum in 202111-tarballs tmux session:
+* oct16-nov16 moved from _wrap/
+(hindcast)
+
+make_ww3_wind_file forecast2 got stuck; killed it
+(SalishSeaCast)
+
+
+Sun 30-Apr-2023
+^^^^^^^^^^^^^^^
+
+Finished archiving on skookum in 202111-tarballs tmux session:
+* dec16 moved from _wrap/
+(hindcast)
+
+Continued SalishSeaCast v202111 scaling tests on graham:
+* longer runs with 19x26 decomposition to find max model days per scheduler partition
+  * 12h by-node queue
+    * 40d run: success: 10h3m56s
+  * 24h by-node queue
+    * 80d run planned
+(graham)
+
+
+
+
 
 * TODO:
-  * confirm XIOS and NEMO builds, etc. with module stack:
-      module load StdEnv/2020
-      module load netcdf-fortran-mpi/4.6.0
-      module load perl/5.30.2
-      module load python/3.11.2
-    * test run without python module loaded; does installation in miniconda env make it unecessary?
-    * update MOAD setup docs if okay
   * add typical compilation time for XIOS: ~5 minutes
+  * add typical compilation time for NEMO: 
+  * add typical compilation time for REBUILD_NEMO: 
 (MOAD docs)
 
 
