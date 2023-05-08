@@ -4170,8 +4170,66 @@ Continued SalishSeaCast v202111 scaling tests on graham:
   * 12h by-node queue
     * 40d run: success: 10h3m56s
   * 24h by-node queue
-    * 80d run planned
+    * 80d run decided not to run after discussion w/ Susan.
 (graham)
+
+
+May
+===
+
+Week 17
+-------
+
+Mon 1-May-2023
+^^^^^^^^^^^^^^
+
+Tested positive for COVID-19.
+
+Strata windows, gutters & screens cleaned by Flat Mate Property Services.
+
+
+Tue 2-May-2023
+^^^^^^^^^^^^^^
+
+Group mtg; see whiteboard.
+(MOAD)
+
+
+Wed 3-May-2023
+^^^^^^^^^^^^^^
+
+Recovery.
+
+
+Thu 4-May-2023
+^^^^^^^^^^^^^^
+
+Recovery.
+
+
+Fri 5-May-2023
+^^^^^^^^^^^^^^
+
+IOS seminar by Dwight Owen re: ONC Oceans 3.0 web portal.
+
+Recovery.
+
+make_ww3_current_file forecast2 got stuck again; noticed when nowcast didn't start; killed it; 
+ran ``make_ww3_current_file forecast`` via launch_remote_worker to get back on track
+(SalishSeaCast)
+
+
+Sat 6-May-2023
+^^^^^^^^^^^^^^
+
+Recovery.
+
+
+Sun 7-May-2023
+^^^^^^^^^^^^^^
+
+Recovery.
+
 
 
 
