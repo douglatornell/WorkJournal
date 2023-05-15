@@ -3258,7 +3258,7 @@ Backfilled forcing to graham-dtn re: yesterday's maintenance downtime:
   upload_forcing graham-dtn nowcast+ 2023-04-03
   upload_forcing graham-dtn turbidity 2023-04-03
 Ran ``nowcast.workers.day_month_avgs 2023-03-01`` in ``202111-tarballs`` tmux session on
-skookum: success!
+skookum: successfully created all day-avg and month-avg files without intervention
 * small amunt of memory leakage:
   * worker spawner: 5.018g
   * scheduler: 4.588g
@@ -4177,7 +4177,7 @@ Continued SalishSeaCast v202111 scaling tests on graham:
 May
 ===
 
-Week 17
+Week 18
 -------
 
 Mon 1-May-2023
@@ -4230,6 +4230,138 @@ Sun 7-May-2023
 
 Recovery.
 
+
+Week 19
+-------
+
+Mon 8-May-2023
+^^^^^^^^^^^^^^
+
+Recovery.
+COVID RAT test still positive, but much fainter.
+
+make_ww3_current_file forecast got stuck again; killed it; 
+ran ``make_ww3_current_file forecast`` via launch_remote_worker to get back on track
+Did OS pkgs update on arbutus:nowcast0 and rebooted in hopes of resolving 
+make_ww3_current_file issue.
+(SalishSeaCast)
+
+See work journal.
+(Resilient-C)
+
+
+Tue 9-May-2023
+^^^^^^^^^^^^^^
+
+Recovery.
+Positive COVID RAT test with a faint line.
+
+Forgot to:
+  sudo mount /dev/vdc /nemoShare/
+  sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+  sudo systemctl start nfs-kernel-server.service
+  sudo exportfs -f
+after restarting arbutus:nowcast0 yesterday; so, no forecast2 runs.
+make_ww3_wind_file forecast got stuck; killed it; ran ``run_ww3 nowcast`` via launch_remote_worker
+to get back on track; run failed:
+* eventually got things working by re-running make_ww3_wind_file via launch_remote_worker
+(SalishSeaCast)
+
+
+Wed 10-May-2023
+^^^^^^^^^^^^^^^
+
+Recovery.
+
+Discovered that I already put archive_tarball for V202111 into automation.
+Restarted dask scheduler and workers cluster on salish.
+Ran ``nowcast.workers.day_month_avgs 2023-04-01`` in ``202111-tarballs`` tmux session on
+skookum against dask cluster on salish: 
+* successfully created all day-avg and month-avg files without intervention
+* 3 FutureWarning per day-avg:
+    /SalishSeaCast/Reshapr/reshapr/core/extract.py:929: 
+    FutureWarning: Following pandas, the `loffset` parameter to resample will be deprecated 
+    in a future version of xarray.  Switch to using time offset arithmetic.
+      resampler = extracted_ds.resample(
+  created Reshapr issue #82
+* small amunt of memory leakage:
+  * worker spawner: 5.025g
+  * scheduler: 4.670g
+  * 4 workers: 0.667g
+make_ww3_current_file forecast got stuck again; killed it; 
+ran ``make_ww3_current_file forecast`` via launch_remote_worker to get back on track
+(SalishSeaCast)
+
+Tidied up refactoring collect_weather to handle missing file messages by switching
+between watchdog and direct download modes:
+* branch: robust-collect_weather
+* **not pushed to GitHub**
+* on hold because the issue went away after 25-Apr change to use queues on dd.weather instead of
+  hpfx due to impending hpfx server maintenance outage; continned using dd.weather queues after
+  hpfx maintenance because missing file messages problem was not present
+Made sarracenia change to use queues on dd.weather official:
+* branch: sarracenia-dd-weather
+* PR#180
+* changed to branch on skookum and restarted sarracenia clients to test
+  * hydrometric file downloads worked correctly after restart
+  * HRDPS continental file downloads worked correctly after restart
+(SalishSeaNowcast)
+
+
+Thu 11-May-2023
+^^^^^^^^^^^^^^^
+
+Recovery.
+
+Rebase-merged sarracenia change to use queues on dd.weather official:
+* branch: sarracenia-dd-weather
+* PR#180
+* pull changes on skookum production and returned to main branch
+Resumed work on migrating Susan's new rivers processing code into repo:
+* last work was 22-Feb before HRDPS flipped to continental grid
+* branch: v202111-rivers
+* PR#150
+* resolved merge conflicts that GitHub was showing in branch:
+  * updated envs/requirements.txt
+  * cherry-picked yesterday's supervisord.ini changes to use dd.weather servers
+* added _calc_runoff_dataset() to do part of the work of write_file()
+(SalishSeaNowcast)
+
+
+Fri 10-May-2023
+^^^^^^^^^^^^^^^
+
+Recovery.
+COVID RAT test looked negative after 15 minutes, but I noticed a very faint positive line an
+hour or more later.
+
+Continued work on migrating Susan's new rivers processing code into repo:
+* last work was 22-Feb before HRDPS flipped to continental grid
+* branch: v202111-rivers
+* PR#150
+* refactored the remainder of write_file() into _write_netcdf() and _to_netcdf() patterned after
+  those I wrote in grib_to_netcdf worker; latter isolates actual file write so that it can be 
+  mocked for testing of the rest of _write_netcdf() functionality
+* started thinking about how to proceed to including this work in make_runoff_file worker:
+  * PR#150 is big and branched almost 3 months ago, though GitHub says it is can merge without
+    conflicts now
+  * discussion with Susan concluded that it would be good to be able to run versions of 
+    make_runoff_file in automation for both v201702 and v202108 bathymetires
+  * maybe squash-merged PR#150, then start a new branch & PR to create make_v202108_runoff_file
+    from make_runoff_file?
+(SalishSeaNowcast)
+
+
+Sat 11-May-2023
+^^^^^^^^^^^^^^^
+
+Goofed off and worked on prep for move to 2547.
+
+
+Sun 12-May-2023
+^^^^^^^^^^^^^^^
+
+Goofed off and worked on prep for move to 2547 and prep of 2356 for listing.
 
 
 
@@ -4290,13 +4422,6 @@ TODO:
   EGBC firm registration next steps by 30-Sep
     * practice mgmt plan
   2022-2023 CE plan
-
-
-
-
-I'm interested in having our windows cleaned, inside and outside. We live in a 3 unit triplex in Kitsilano, but the service I'm looking for is just for our unit.
-
-We have 2 floors. On the ground floor there are 6 windows and a set of patio doors with a window above them. 3 of those windows, and the patio doors have screens. On the second floor there are 8 windows. 4 of them have screens. 1 of them is a window in a balcony door. There are also 2 skylights. One in a small roof section over the front door entry. The other is low in a sloping roof section over the 2nd floor. Inside, the window coverings are mostly mini-blinds except for the patio doors and an adjacent window which have vertical blinds.
 
 
 
