@@ -4364,6 +4364,111 @@ Sun 12-May-2023
 Goofed off and worked on prep for move to 2547 and prep of 2356 for listing.
 
 
+Week 20
+-------
+
+Mon 15-May-2023
+^^^^^^^^^^^^^^^
+
+Vancouver to Bellingham
+
+Emailed Emma about missing sick leave pay.
+
+Drove to Bellingham for Susan to attend Salish Sea Salmon workshop.
+
+
+Tue 16-May-2023
+^^^^^^^^^^^^^^^
+
+Bellingham
+
+Cycled Chuckanut Mtn South Summit loop (42km, 1111m, 6.5h)
+
+Email from payroll via Emma explaining that I need to submit hours as well as request sick leave
+in order to be paid for sick leave; not how I remember it...
+
+Salish Sea Marine Survival Projet mtg dinner at Two Sisiters Brewing
+
+
+Wed 17-May-2023
+^^^^^^^^^^^^^^^
+
+Bellingham to Vancouver
+
+Noticed that both make_ww3_current_file and make_ww3_wind_file for forecast2/16may23 got stuck;
+* recovery:
+    wait for nowcast/17may23 to fail
+    kill make_ww3_wind_file
+    kill make_ww3_current_file
+    launch_remote_worker arbutus make_ww3_wind_file forecast 2023-05-16
+      * had to try twice to get worker to run; it got stuck the first time
+    launch_remote_worker arbutus make_ww3_current_file forecast 2023-05-16
+    wait for forecast/16may23 to finish
+    launch_remote_worker arbutus make_ww3_wind_file forecast 2023-05-17
+    launch_remote_worker arbutus make_ww3_current_file forecast 2023-05-17
+download_weather 12 1km failed due to no files in 001-023 directories on dd-alpha server.
+(SalishSeaCast)
+
+Drove home from Bellingham
+
+
+Thu 18-May-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 stalled overnight; killed it.
+download_weather 00 1km and 12 1km failed due to missing files
+(SalishSeaCast)
+
+Continued work on migrating Susan's new rivers processing code into repo:
+* branch: v202111-rivers
+* PR#150
+* reviewed changes that will happen on merge file-by-file
+* changed 2 config changes to hard-code in daily_river_flows module so as not to disrupt
+  v201905 automation with merge
+* squash-merged PR#150
+* updated production to HEAD of main to test that the squash-merge didn't break anything
+* created new branch to continue work with creation of make_v202111_runoff_file
+  * branch: make_v202111_runoff_file
+(SalishSeaNowcast)
+
+Went with Susan to Faculty of Science promotion celebration dinner at botanical garden.
+
+
+Fri 19-May-2023
+^^^^^^^^^^^^^^^
+
+I missed reverting the rivers."prop_dict module" config change before yesterday's merge of PR#150
+so make_runoff_file failed;
+* recovery started at ~08:30
+    fixed config on skookum
+    make_runoff_file
+    upload_forcing arbutus forecast2
+    upload_forcing orcinus forecast2
+    upload_forcing optimum forecast2
+    upload_forcing graham-dtn forecast2
+* fixed on main
+download_weather 00 1km and 12 1km failed due to missing files; sent email to Sandrine;
+she confirmed that dd.alpha is unstable; won't be fixed unitl Tuesday
+(SalishSeaCast)
+
+Coffee and code help with Karyn.
+
+Continued work on make_v202111_runoff_file:
+* branch: make_v202111_runoff_file
+(SalishSeaNowcast)
+
+
+Sat 20-May-2023
+^^^^^^^^^^^^^^^
+
+Planning for move to 2547 and prep for listing 2356.
+
+
+Sun 21-May-2023
+^^^^^^^^^^^^^^^
+
+Prep for listing 2356.
+
 
 
 
@@ -4376,7 +4481,7 @@ Goofed off and worked on prep for move to 2547 and prep of 2356 for listing.
 
 
 TODO:
-* fix stright line gaps in wwatch3 forecast plots (forecast2 are okay.)
+* fix straight line gaps in wwatch3 forecast plots (forecast2 are okay.)
 
 
 
