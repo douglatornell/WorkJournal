@@ -4463,8 +4463,161 @@ Sat 20-May-2023
 
 Planning for move to 2547 and prep for listing 2356.
 
+download_weather 00 1km and 12 1km failed due to missing files
+(SalishSeaCast)
+
 
 Sun 21-May-2023
+^^^^^^^^^^^^^^^
+
+Prep for listing 2356.
+
+download_weather 00 1km and 12 1km failed due to missing files
+(SalishSeaCast)
+
+
+Week 21
+-------
+
+Mon 22-May-2023
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Victoria Day
+
+Prep for listing 2356.
+
+Squash-merged dependabot PRs re: version update of codecov-action:
+* SalishSeaNowcast
+* gha-workflows
+
+LiveOcean changed to new versions; NO3 and NH4 are now separate variables
+* Susan updated tools module to add new NO3 and NH4 to be consistent with our prior values
+* pulled tools on skookum before grib_to_netcdf finished, so new forcing was in effect for the 
+  day's runs
+download_weather 00 1km and 12 1km failed due to missing files
+(SalishSeaCast)
+
+
+Tue 23-May-2023
+^^^^^^^^^^^^^^^
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Checked status of scheduled GHA workflows:
+  conda activate gha-workflows
+  python3 /media/doug/warehouse/MOAD/gha-workflows/gha_workflows_checker.py
+Changed pytest-with-coverage and sphinx-linkcheck reusable workflows to use 
+mamba-org/setup-microconda from deprecated mamba-org/provision-with-micromamba.
+Squash-merged dependabot PRs to bump requests to 2.31.0 re: CVE-2023-32681 re: 
+Proxy-Authorization headers:
+* cookiecutter-analysis-repo
+* cookiecutter-MOAD-pypkg
+* AtlantisCmd
+* MoaceanParcels
+* NEMO-Cmd
+* moad_tools
+* NEMO_Nowcast
+* Reshapr
+* salishsea-site
+* SalishSeaCast/docs
+* tools
+* UBC-MOAD/docs
+* SalishSeaCmd
+(repos-maint)
+
+
+Changed pytest-with-coverage workflow to use mamba-org/setup-microconda 
+from deprecated mamba-org/provision-with-micromamba.
+Squash-merged dependabot PR to bump requests to 2.31.0 re: CVE-2023-32681 re: 
+Proxy-Authorization headers.
+
+Continued work on make_v202111_runoff_file:
+* branch: make_v202111_runoff_file
+* PR#183
+(SalishSeaNowcast)
+
+download_weather 00 1km and 12 1km failed due to missing files
+(SalishSeaCast)
+
+
+Wed 24-May-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_wind_file forecast stalled yesterday; killed it; re-ran it via launch_remote_worker;
+had to run make_ww3_current_file twice too to get run started.
+make_ww3_wind_file forecast stalled; killed it; re-ran it via launch_remote_worker.
+download_weather 00 1km and 12 1km failed due to missing files
+(SalishSeaCast)
+
+Filed income tax returns and 43ravens GST return.
+
+
+Thu 25-May-2023
+^^^^^^^^^^^^^^^
+
+Updated MOAD & SalishSeaCast docs re: building NEMO on graham and installing command processor
+packages.
+(MOAD docs)
+(SalishSeaCast docs)
+
+UBC-DFO modeling collab mtg;
+* Susan re: 201702 to 202108 bathymetry
+
+Raisha submitted proffs of paper.
+Group mtg.
+(Atlantis)
+
+Squash-merged dependabot PRs to bump tornado to 6.3.2 re: CVE-2023-28370 re: open redirect vulnerability:
+* MoaceanParcels
+* SalishSeaCast/docs
+* UBC-MOAD/docs
+* tools
+* moad_tools
+* Reshapr
+* SalishSeaNowcast
+* ECget
+* SOG-Bloomcast-Ensemble
+(repos-maint)
+
+make_ww3_current_file forecast stalled; killed it; re-ran it via launch_remote_worker.
+download_weather 00 1km and 12 1km failed due to missing files
+(SalishSeaCast)
+
+
+Fri 26-May-2023
+^^^^^^^^^^^^^^^
+
+On to graham session #4.
+(MOAD)
+
+Continued work on make_v202111_runoff_file:
+* branch: make_v202111_runoff_file
+* PR#183
+(SalishSeaNowcast)
+
+Sandrine sent email to say that dd.alpha should be fixed.
+download_weather 00 1km and 12 1km failed due to missing files.
+Sent email to Sandrine to tell her that dd.alpha is not fixed.
+(SalishSeaCast)
+
+Prep for listing 2356.
+
+
+Sat 27-May-2023
+^^^^^^^^^^^^^^^
+
+Prep for listing 2356.
+
+make_ww3_current_file forecast stalled; killed it; re-ran it via launch_remote_worker;
+
+download_weather 00 1km and 12 1km failed due to missing files
+(SalishSeaCast)
+
+Dinner at Kristing & Kirk's.
+
+
+Sun 28-May-2023
 ^^^^^^^^^^^^^^^
 
 Prep for listing 2356.
@@ -4472,24 +4625,12 @@ Prep for listing 2356.
 
 
 
-* TODO:
-  * add typical compilation time for XIOS: ~5 minutes
-  * add typical compilation time for NEMO: 
-  * add typical compilation time for REBUILD_NEMO: 
-(MOAD docs)
-
-
 
 TODO:
 * fix straight line gaps in wwatch3 forecast plots (forecast2 are okay.)
 
 
-
-
-
-
 * tidy module & functions notebook & module
-
 
 
 TODO:
@@ -4524,11 +4665,7 @@ state:
 
 
 TODO:
-  EGBC firm registration next steps by 30-Sep
-    * practice mgmt plan
   2022-2023 CE plan
-
-
 
 
 TODO:
