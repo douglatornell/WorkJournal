@@ -4610,7 +4610,6 @@ Sat 27-May-2023
 Prep for listing 2356.
 
 make_ww3_current_file forecast stalled; killed it; re-ran it via launch_remote_worker;
-
 download_weather 00 1km and 12 1km failed due to missing files
 (SalishSeaCast)
 
@@ -4623,6 +4622,133 @@ Sun 28-May-2023
 Prep for listing 2356.
 
 
+Week 22
+-------
+
+Mon 29-May-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 stalled; killed it; re-ran it via launch_remote_worker.
+make_ww3_current_file forecast stalled; killed it; re-ran it via launch_remote_worker:
+* multiple tries from skookum failed; ran make_ww3_current_file on arbutus
+(SalishSeaCast)
+
+Continued work on make_v202111_runoff_file:
+* branch: make_v202111_runoff_file
+* PR#183
+(SalishSeaNowcast)
+
+
+Tue 30-May-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+make_ww3_current_file forecast2 stalled; killed it; re-ran it on arbutus; segfault.
+(SalishSeaCast)
+
+Continued work on make_v202111_runoff_file:
+* branch: make_v202111_runoff_file
+* PR#183
+(SalishSeaNowcast)
+
+On-boarding session #1 with Tall.
+(MOAD)
+
+
+Wed 31-May-2023
+^^^^^^^^^^^^^^^
+
+Invited Tall to SalishSeaCast and UBC-MOAD orgs on GitHub.
+Fixed /data/atall/ and /ocean/atall/ re: sallen group and guid sticky bit;
+pinged Henryk re: numeric uid & gid on /ocean/atall/; sent password to Tall.
+Helped Cassidy with file downloads from graham re: rsync, scp & sftp.
+(MOAD)
+
+Finished work on make_v202111_runoff_file:
+* branch: make_v202111_runoff_file
+* PR#183; squash-merged
+* pulled changes on skookum; restarted manager for new next_workers module to take affect
+* ran make_v202111_runoff_file for 30may
+Moved launching of ``make_*runoff_file`` workers to ``after_make_live_ocean_files()``:
+* branch: move-make_runoff_file
+* PR#185
+* practical solution to handling race condition among USGS instances of ``collect_river_data``
+  that run after ``collect_weather 2.5km 12``
+* rsync-ed uncommitted code to skookum for testing; restarted manager for changed next_workers
+  module to take effect
+(SalishSeaNowcast)
+
+
+June
+====
+
+Thu 1-Jun-2023
+^^^^^^^^^^^^^^
+
+upload_forcing forecast2 failed due to no runoff files; discussed with Susan and decided to 
+restore make_runoff_file and make_v202111_runoff_file after collect_weather 06, then let them
+update the runoff files after collect_weather 12
+make_runoff_file failed due to missing b202108 key in ``monthly climatology``
+upload_forcing nowcast+ launched immediately from make_live_ocean_files instead of waiting for
+grib_to_netcdf to finish, so it faailed
+* recovery:
+  * hacked make_runoff_file to use only b201702 key in ``monthly climatology``; copied it to
+    skookum and re-ran it
+  * manually ran upload_forcing nowcast+ to restart automation
+(SalishSeaCast)
+
+Continued work on make_v202111_runoff_file:
+* branch: make_v202111_runoff_file
+* PR#183
+Pulled and switched to move-make_runoff_file branch on skookum to test new solution of creating
+runoff files after make_ssh_files; restarted manager for changed next_workers
+module to take effect.
+(SalishSeaNowcast)
+
+Prep for listing 2356.
+
+
+Fri 2-Jun-2023
+^^^^^^^^^^^^^^
+
+make_runoff_file and make_v202111_runoff_file failed to run because I created a loop in the
+race condition management; automation for forecast2 resumed when I ran them manually.
+make_ww3_wind_file forecast stalled; killed it; re-ran it on arbutus several times before it worked.
+(SalishSeaCast)
+
+Continued work on make_v202111_runoff_file:
+* branch: make_v202111_runoff_file
+* PR#183
+* more iterations on how to get make_runoff_file workers properly inserted into automation
+(SalishSeaNowcast)
+
+Prep for listing 2356.
+
+
+Sat 3-Jun-2023
+^^^^^^^^^^^^^^
+
+Prep for listing 2356.
+
+make_ww3_current_file forecast2 stalled; killed it; re-ran it on arbutus; also re-ran 
+make_ww3_wind_file forecast2: run succeeded
+(SalishSeaCast)
+
+Continued work on make_v202111_runoff_file:
+* branch: make_v202111_runoff_file
+* PR#183
+* pulled latest version of branch on skookum for more testing; restarted manager for updated 
+  next_workers module to take affect
+(SalishSeaNowcast)
+
+
+Sun 4-Jun-2023
+^^^^^^^^^^^^^^
+
+Prep for listing 2356.
+
+Happy hour at new strata.
 
 
 
