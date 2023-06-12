@@ -4751,6 +4751,143 @@ Prep for listing 2356.
 Happy hour at new strata.
 
 
+Week 23
+-------
+
+Mon 5-Jun-2023
+^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 stalled; killed it; re-ran it on arbutus
+rsync-ed ``/results/forcing/rivers/R202108Dailies_*y2002m01d28*.nc`` to compute hosts:
+* arbutus.cloud
+* orcinus
+* graham-dtn
+* no need to do optimum because Susan ran hindcast there, so she did it
+(SalishSeaCast)
+
+Finished work on make_v202111_runoff_file:
+* branch: make_v202111_runoff_file
+* PR#183: rebase-merged
+(SalishSeaNowcast)
+
+Squash-merged dependabot PRs re: updating to cryptography=41.0.1 re: CVE-2023-2650 DoS
+vulnerability in OpenSSL:
+* SalishSeaNowcast
+
+Phys Ocgy seminar: Birgit on Pb model chapter of her thesis.
+
+Prep for listing 2356.
+
+
+Tue 6-Jun-2023
+^^^^^^^^^^^^^^
+
+Used VSCode ``SalishSeaNowcast [SSH:skookum]`` session to run 
+``nowcast.workers.day_month_avgs 2023-05-01`` in ``202111-tarballs`` tmux session on
+skookum against dask cluster on salish: 
+* 3 FutureWarning per day-avg:
+    /SalishSeaCast/Reshapr/reshapr/core/extract.py:929: 
+    FutureWarning: Following pandas, the `loffset` parameter to resample will be deprecated 
+    in a future version of xarray.  Switch to using time offset arithmetic.
+      resampler = extracted_ds.resample(
+  created Reshapr issue #82
+* successfully created all day-avg and month-avg files without intervention
+* very small amunt of memory leakage:
+  * worker spawner: 5.028g
+  * scheduler: 4.711g
+  * 4 workers: 0.667g (no change) 
+(hindcast)
+
+Squash-merged dependabot PRs re: updating to cryptography=41.0.1 re: CVE-2023-2650 DoS
+vulnerability in OpenSSL:
+* SalishSeaCmd
+* NEMO-Cmd
+* SalishSeaCast/docs
+* MOAD/docs
+* tools/SalishSeaTools
+* MoaceanParcels
+* AtlantisCmd
+* salishsea-site
+* NEMO_Nowcast
+* Reshapr
+* cookiecutter-analysis-repo
+* moad_tools
+* cookiecutter-MOAD-pypkg
+* analysis-doug
+* SOG-Bloomcast-Ensemble
+
+Group mtg; see whiteboard.
+(MOAD)
+
+make_ww3_current_file forecast stalled; killed it; re-ran it on arbutus
+(SalishSeaCast)
+
+Prep for listing 2356.
+
+
+Wed 7-Jun-2023
+^^^^^^^^^^^^^^
+
+make_ww3_wind_file forecast2 stalled; killed it; re-ran it on arbutus
+make_ww3_current_file forecast stalled; killed it; re-ran it on arbutus
+(SalishSeaCast)
+
+Prep for listing 2356.
+
+
+Thu 8-Jun-2023
+^^^^^^^^^^^^^^
+
+Prep for listing 2356.
+
+Went to ESB for graham session #5.
+(MOAD)
+
+make_ww3_current_file forecast stalled; killed it; re-ran it on arbutus
+(SalishSeaCast)
+
+
+Fri 9-Jun-2023
+^^^^^^^^^^^^^^
+
+Prep for listing 2356.
+
+Explored adding debug log messages to make_ww3_current_file to try to understand where it is 
+getting stuck; discovered that there are no recent debug messages from the worker; restarted
+log_aggregator to try to resolve
+* dug back in last debug logs to 3jun forecast2 failure:
+  * failure occurred in either function that returns xarray.Dataset() or .to_netcdf()
+  * added log msg between those calls; copied worker to arbutus to test
+(SalishSeaCast)
+
+
+Sat 10-Jun-2023
+^^^^^^^^^^^^^^^
+
+Prep for listing 2356.
+
+make_ww3_current_file forecast2 stalled; killed it; re-ran it on arbutus
+Started researching dask config management as possible mitigation.
+(SalishSeaCast)
+
+
+Sun 11-Jun-2023
+^^^^^^^^^^^^^^^
+
+Prep for listing 2356.
+
+make_ww3_current_file forecast stalled; killed it; re-ran it on arbutus
+(SalishSeaCast)
+
+Experimented with dask ``schedduler="processes"`` and local cluster for make_ww3_current_file;
+neither worked properly.
+De-nested current components dataset loading from mesh mask reading.
+(SalishSeaNowcast)
+
+
+
+
+
 
 TODO:
 * fix straight line gaps in wwatch3 forecast plots (forecast2 are okay.)
