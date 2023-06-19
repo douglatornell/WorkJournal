@@ -3880,7 +3880,7 @@ Continued archiving on skookum in 202111-tarballs tmux session:
 * jan15-sep15 moved from _wrap/; oct15 move in progress
 (hindcast)
 
-Downloaded Minecraft 1.9.4 mods, shader packs, resource packs, data packs:
+Downloaded Minecraft 1.19.4 mods, shader packs, resource packs, data packs:
 * sodium 0.4.10
 * lithium 0.11.1
 * phosphor 0.8.1 is unchanged since 1.19.0 release
@@ -4883,6 +4883,212 @@ Experimented with dask ``schedduler="processes"`` and local cluster for make_ww3
 neither worked properly.
 De-nested current components dataset loading from mesh mask reading.
 (SalishSeaNowcast)
+
+
+Week 24
+-------
+
+Mon 12-Jun-2023
+^^^^^^^^^^^^^^^
+
+Called and emailed Hillcrest plumbing for repair of leaking kitchen faucet.
+
+Squash-merged dependabot PR re: new version of setup-microconda:
+* SalishSeaNowcast
+* gha-workflows
+
+Investigated KeyError on wind components date in sandheads_winds figure module:
+* failing due to no atmostpheric forcing on web since 22-Feb change to rotated lon/lat grid
+(SalishSeaNowcast)
+
+nowcast-agrif failed due to no run yesterday; backfill:
+  upload_forcing orcinus nowcast+ 2023-06-11
+  make_forcing_links orcinus nowcast-agrif 2023-06-11
+  wait for run to finish
+  make_forcing_links orcinus nowcast-agrif 2023-06-12
+(SalishSeaCast)
+
+Prep for listing 2356.
+
+Phys Ocgy seminar:
+
+
+Tue 13-Jun-2023
+^^^^^^^^^^^^^^^
+
+Final prep for 2356 photos; digital nomads in Kits while Rita cleaned, then do pre-showing
+checklist, then UBC for afternoon evening to test "live at UBC" scheme.
+* Platform 7 for Coffee
+* London Drugs and new Gandi's hardware location for TP holder
+* library for WiFi
+
+Discussed atmos forcing datasets on ERDDAP with Susan; agreed that HRDPS continental lon/lat grid
+needs to be a separate dataset; need to decide if it is v2111 or v2.
+Also discussed doing erddap-datasets repo overhaul concurrently:
+* initially:
+  * split ``datasets.xml`` into 1 file per dataset description
+  * add script to assemble dataset descriptions into ``datasets.xml``
+* longer term:
+  * GitHub Actions workflows:
+    * validate dataset descriptions XML - maybe
+    * assemble ``datasets.xml`` as build artifact
+    * deploy ``datasets.xml`` and ``setup.xml`` to skookum, bracketted by tomcat stop/start
+* researched:
+  * XML parsing and validation:
+    * https://realpython.com/python-xml-parser/
+    * schema validation is out, I think, because there is no ERDDAP schema and I don't want to
+      create one
+    * stdlib xml.etree.ElementTree or lxml (same API) should do the job
+      * does success of ElementTree.parse() guarantee well-formed XML?
+  * https://github.com/7yl4r/erddap-config-template
+  * https://github.com/7yl4r/erddap-datasetsxml-builder
+  * mentioned in Mar-2023 ERDDAP list thread: 
+      [ERDDAP] Best practices to version control datasets.xml
+(ERDDAP)
+
+De-nested wind components dataset loading from mesh mask lons/lats reading in make_ww3_wind_file.
+(SalishSeaNowcast)
+
+make_ww3_wind_file forecast stalled; killed it; re-ran it on arbutus
+(SalishSeaCast)
+
+
+Wed 14-Jun-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB while home was in semi-staged state.
+
+make_ww3_wind_file forecast stalled; killed it; re-ran it on arbutus
+(SalishSeaCast)
+
+Mtg w/ Tall:
+* sorted out issues  in Susan's O2 eval notebook
+* fixed miniforge install on char, et al
+* fixed VSCode ssh connection timeout value
+* got analysis-abdoul env connected in VSCode on char for notebook kernel 
+
+Started work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+(ERDDAP)
+
+
+Thu 15-Jun-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB while home was in semi-staged state.
+
+Killed stuck upload_forcing graham-dtn workers from 11may.
+Discovered that collect_weather 00 stalled last night
+* investigation:
+  * missing 4 files, APCP_Sfc from each of hours 7-10
+  * files are present on dd.weather.gc.ca
+  * no error messages in sarracenia log; appears that messages were never published
+* recovery started at ~11:30
+    curl files from dd.weather.gc.ca
+    kill collect_weather 00
+    collect_weather 18 2.5km
+    crop_gribs 00 --fcst-date 2023-06-15
+    wait for crop_gribs to finish
+* files I got from dd.weather.gc.ca were APCP_Sfc, not APCP_Sfc, so crop_gribs failed
+  * emailed Sandrine
+  * files appeared at ~14:20
+  * email from Sandrine at 14:43 confirming that files were ready 
+* re-recovery started at ~14:20
+    curl files from dd.weather.gc.ca
+    crop_gribs 00 --fcst-date 2023-06-15
+    wait for crop_gribs to finish
+    collect_weather 06 2.5km --backfill
+    wait for forecast2 runs to finish; skipped wwatch3-forecast2
+    collect_weather 12 2.5km --backfill
+* collect_weather 18 stopped for unknown reason, leaving hour 048 in
+  /SalishSeaCast/datamart/hrdps-continental/18/048
+  * recovery:
+      collect_weather 00 2.5km
+      download_weather 00 1km
+      download_weather 12 1km
+      mkdir /results/forcing/atmospheric/continental2.5/GRIB/20230615/18/048
+      mv /SalishSeaCast/datamart/hrdps-continental/18/048/* \
+        /results/forcing/atmospheric/continental2.5/GRIB/20230615/18/
+      crop_gribs 18 --fcst-date 2023-06-15
+* crop_gribs 18 failed due to missing 
+  18/019/20230615T18Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT019H.grib2
+  * no file on server
+  * ignored because we only need hours 005 and 006 for forcing
+(SalishSeaCast)
+
+Resigned from EGBC.
+
+Shutdown all of my Google Cloud projects.
+
+
+Fri 16-Jun-2023
+^^^^^^^^^^^^^^^
+
+Haircut.
+
+Worked at ESB while home was in semi-staged state.
+
+Either I forgot to start collect_weather 00 last night, or it failed
+* recovery started at ~07:45:
+    kill left over collect_weather 12 and 18
+    collect_weather 00 --backfill
+    kill collect_weather 06
+    wait for crop_gribs to finish
+    collect_weather 06 --backfill
+    kill collect_weather 12
+    wait for forecast2 runs to finish
+    collect_weather 12 --backfill
+grib_to_netcdf failed due to missing 
+18/005/20230615T18Z_MSC_HRDPS_PRATE_Sfc_RLatLon0.0225_PT005H_SSC.grib2
+* recovery started at ~13:00
+    symlinked 20230615T18Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT019H.grib2 as 
+    20230615T18Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT018H.grib2
+    crop_gribs 18 2023-06-15
+    grib_to_netcdf nowcast+
+(SalishSeaCast)
+
+Scalded left hand.
+
+
+Sat 17-Jun-2023
+^^^^^^^^^^^^^^^
+
+Telcons w/ 811 and on-call doc at Cityview.
+
+Downloaded Minecraft 1.20 mods, shader packs, resource packs, data packs:
+* sodium 0.4.10
+* lithium 0.11.2
+* phosphor is probably N/A for 1.20 due to Mojang lighting engine updates
+* malilib 0.16.0
+* MiniHUD 0.27.0
+* Twekeroo 0.17.0
+* Iris 1.6.6
+* ComplementaryReimagined 2.2
+* ComplementaryShaders 4.7.2
+* IronBarsFix-1.20
+* LowerShield-1.20
+* RedstoneDevices-1.20
+  * RedstoneWireFix
+  * StickyPistonSides
+  * DirectionalDispensersDroppers
+  * DirectionalHoppers
+  * DirectionalObservers
+  * GroovyLevers
+    * HopperBottomFix is N/A due to fix by Mojang
+* DoubleShulkerShells-1.3.4
+Created MultiMC instance:
+* Minecraft 1.20.1
+* Fabric Loader 0.14.21
+Installed mods, shader packs & resource packs in MultiMC 1.19.4 instance.
+Copied minihud.json & tweakeroo.json from 1.19.4 config/ to 1.20.1 config/
+
+
+Sun 18-Jun-2023
+^^^^^^^^^^^^^^^
+
+Goofed off and nursed left hand.
 
 
 
