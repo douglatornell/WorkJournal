@@ -4613,7 +4613,7 @@ make_ww3_current_file forecast stalled; killed it; re-ran it via launch_remote_w
 download_weather 00 1km and 12 1km failed due to missing files
 (SalishSeaCast)
 
-Dinner at Kristing & Kirk's.
+Dinner at Kristin & Kirk's.
 
 
 Sun 28-May-2023
@@ -5091,6 +5091,135 @@ Sun 18-Jun-2023
 Goofed off and nursed left hand.
 
 
+Week 25
+-------
+
+Mon 19-Jun-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB due to showing 2356; showing rescheduled.
+
+Squash-merged dependabot PR re: mamba-org/setup-micromamba from 1.4.2 to 1.4.3
+Dug into test_collect_river_data errors in pytest-with-coverage GHA workflow that were not
+appearing in dev env:
+* httpx=0.24 changed from custom logging to standard Python logging levels, so it is more
+  verbose at the DEBUG and INFO levels
+* decided that the messages it provides are worthwhile at the DEBUG level,
+  so changed caplog.records index numbers in tests to look at messages from worker that come
+  after those from httpx
+(SalishSeaNowcast)
+
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* confirmed that lxml.etree.ElementTree.parse() will parse a dataset fragment
+  contained in a <dataset></dataset> tag and raise lxml.etree.XMLSyntaxError 
+  exceptions when the XML is not well-formed; so, it can be used for the level of
+  XML validation that I had in mind
+* added build_datasets_xml.py script
+* successfully tested datasets.xml from script for just atmospheric/ubcSSaAtmosphereGridV1.xml
+  on skookum
+* migrated ubcSSaSurfaceAtmosphereFieldsV1 to atmospheric/ubcSSaSurfaceAtmosphereFieldsV1.xml
+* added erddap-datasets repo notifications to #SSC-repos channel with:
+    /github subscribe SalishSeaCast/erddap-datasets workflows:{event:"pull_request","push" branch:"main"}
+(ERDDAP)
+
+
+Tue 20-Jun-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB due to open at 2356.
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Archived old repos on GitHub to stop weekly dependabot alerts:
+* douglatornell/2014-09-25-ubc (SWC workshop)
+* douglatornell/python-inflammation-2015-04-30-sfu
+* douglatornell/hg-novice-2015-09-22-ubc
+* douglatornell/2016-09-20-ubc
+
+Dr. appt; see notes on Slack DM.
+
+One of the drives in the /data RAID failed; Henryk found an identical unit in IT spares, so the failed drive is replaced and parity rebuilding has started; ETA to full restoration is a day or two.
+
+
+Wed 21-Jun-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB while home was in semi-staged state.
+
+make_ww3_current_file forecast2 stalled; skipped run
+make_ww3_current_file forecast stalled due to above; killed forecast2 and re-ran it on arbutus
+make_ww3_wind_file forecast stalled; killed it and re-ran it on arbutus
+(SalishSeaCast)
+
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* created check_datasets_xml.py script
+* finished migrating atmospheric forcing datasets to datasets/ files
+* migrated ONC observations datasets to datasets/ files
+(ERDDAP)
+
+
+Thu 22-Jun-2023
+^^^^^^^^^^^^^^^
+
+Dentist appt.
+
+Worked at ESB while home was in semi-staged state.
+
+Talked with Sebastian about his EOAS Research Software Engineer proposal.
+
+Team mtg; discussed story for Raisha's next paper.
+(Atlantis)
+
+
+Fri 23-Jun-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB while home was being shown.
+
+No Neah Bay ssh obs for forecast2 run.
+LiveOcean lagged HRDPS 12Z by ~1.75h.
+(SalishSeaCast)
+
+
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* started migrating bathy & mesh mask datasets to datasets/nemo-grid/
+* discovered that infoUrl is a required dataset attribute
+* TODO: 
+  * Fix source attr URL from Bitbucket to GitHub in ubcSSnBathymetryV17-02
+(ERDDAP)
+
+
+Sat 24-Jun-2023
+^^^^^^^^^^^^^^^
+
+Spent the afternoon and evening during open house.
+
+
+Sun 25-Jun-2023
+^^^^^^^^^^^^^^^
+
+Spent the afternoon at ESB during open house.
+
+make_ww3_current_file forecast stalled; killed it and re-ran it on arbutus;
+restarted log_aggregator on skookum
+(SalishSeaCast)
+
+Updated khawla to PyCharm 2023.1.3.
+
+Did pre-commit autoupdate and other dependency pkg updates:
+* SalishSeaCmd
+* NEMO-Cmd
+
 
 
 
@@ -5108,7 +5237,6 @@ TODO:
 * pre-commit auto-update
   * MOAD/docs - done
   * SalishSeaNowcast
-  * NEMO-Cmd
   * Reshapr
   * MoaceanParcels
   * cookiecutter-MOAD-pypkg
