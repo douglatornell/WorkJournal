@@ -5187,7 +5187,6 @@ No Neah Bay ssh obs for forecast2 run.
 LiveOcean lagged HRDPS 12Z by ~1.75h.
 (SalishSeaCast)
 
-
 Continued work on separating dataset descriptions into files to be composed into
 dataset.xml by a script:
 * branch: separate-dataset-files
@@ -5219,6 +5218,92 @@ Updated khawla to PyCharm 2023.1.3.
 Did pre-commit autoupdate and other dependency pkg updates:
 * SalishSeaCmd
 * NEMO-Cmd
+
+
+Week 26
+-------
+
+Mon 26-Jun-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB due to home inspection of 2356.
+
+Phys Ocgy seminar: Jonathan Iszet of IOS on BGC data assimilation in a ROMS model of the
+California Current system.
+
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* finished migrating bathy & mesh mask datasets to datasets/nemo-grid/
+* Fixed source attr URL from Bitbucket to GitHub in ubcSSnBathymetryV17-02
+* added infoUrl to all migrated datasets
+(erddap-datasets)
+
+
+Tue 27-Jun-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB due to open house.
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* started migrating wwatch3 datasets to datasets/wwatch3/
+(erddap-datasets)
+
+Picked up J&L at YVR.
+
+
+Wed 28-Jun-2023
+^^^^^^^^^^^^^^^
+
+2547 posession
+
+
+Thu 29-Jun-2023
+^^^^^^^^^^^^^^^
+
+Birgit's defense.
+
+
+Fri 30-Jun-2023
+^^^^^^^^^^^^^^^
+
+Locker contents to 2547.
+
+make_ww3_wind_file forecast stalled; killed it and re-ran it on arbutus;
+restarted log_aggregator on skookum
+(SalishSeaCast)
+
+
+Sat 1-Jul-2023
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Canada Day
+
+Went to Steeveston Salmon Festival w/ J&L.
+
+
+Sun 2-Jul-2023
+^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast stalled; killed it and re-ran it on arbutus;
+restarted log_aggregator on skookum
+nowcast-agrif failed due to incomplete 29jun23 run and no no run yesterday; backfill:
+  make_forcing_links orcinus nowcast-agrif 2023-06-29
+  wait for run to finish
+  make_forcing_links orcinus nowcast-agrif 2023-06-30
+  wait for run to finish
+  make_forcing_links orcinus nowcast-agrif 2023-07-01
+  wait for run to finish
+
+  make_forcing_links orcinus nowcast-agrif 2023-07-02
+(SalishSeaCast)
 
 
 
