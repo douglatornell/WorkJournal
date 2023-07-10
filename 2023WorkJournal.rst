@@ -5284,7 +5284,7 @@ restarted log_aggregator on skookum
 Sat 1-Jul-2023
 ^^^^^^^^^^^^^^
 
-**Statutory Holiday** - Canada Day
+**Canada Day**
 
 Went to Steeveston Salmon Festival w/ J&L.
 
@@ -5300,11 +5300,101 @@ nowcast-agrif failed due to incomplete 29jun23 run and no no run yesterday; back
   make_forcing_links orcinus nowcast-agrif 2023-06-30
   wait for run to finish
   make_forcing_links orcinus nowcast-agrif 2023-07-01
-  wait for run to finish
+(SalishSeaCast)
 
+
+Week 27
+-------
+
+Mon 3-Jul-2023
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Canada Day lieu day
+
+Finish backfilling nowcast-agrif:
   make_forcing_links orcinus nowcast-agrif 2023-07-02
 (SalishSeaCast)
 
+
+Tue 4-Jul-2023
+^^^^^^^^^^^^^^
+
+Took J&L to YVR.
+
+(Group mtg; see whiteboard.
+(MOAD))
+
+
+Wed 5-Jul-2023
+^^^^^^^^^^^^^^
+
+download_weather 12 didn't complete; noticved at ~16:30
+* investigation:
+  * no files in hours 024-030; 4 files in hour 035
+  * files are missing from server; sent email to Sandrine; she is on vacation; forwarded message
+    to André Giguère, her emergency contact
+* recovery started at ~16:40
+    kill collect_weather 12
+    mv /results/forcing/atmospheric/continental2.5/GRIB/20230705/12 aside
+    download_weather 12 2.5km - failed
+    collect_weather 18 2.5km --backfill
+(SalishSeaCast)
+
+
+Thu 6-Jul-2023
+^^^^^^^^^^^^^^
+
+Worked at ESB for mtgs w/ Becca & Tall.
+
+Mtg w/ Becca re: getting obs from CIOOS:
+* scoped a concept for a module to do ERDDAP requests to files from a YAML request file
+* TODO:
+  * look at erddapy and erddap-python
+
+Emails w/ ECCC re: restoration of missing 5jul 12Z files; eventually they issued alert that
+a network issue was causing them trouble
+* backfill runs:
+    download_live_ocean 2023-07-05 --debug
+    make_live_ocean_files 2023-07-05 --debug
+    collect_river_data USGS SkagitMountVernon 2023-07-04 --debug
+    # fix line order at end of file
+    collect_river_data USGS SnohomishMonroe 2023-07-04 --debug
+    # fix line order at end of file
+    collect_river_data USGS NisquallyMcKenna 2023-07-04 --debug
+    # fix line order at end of file
+    collect_river_data USGS GreenwaterGreenwater 2023-07-04 --debug
+    # fix line order at end of file
+    make_turbidity_file --run-date 2023-07-05 --debug
+    # failed due to insufficient data
+    collect_NeahBay_ssh 06 --data-date 2023-07-05 --debug
+    make_ssh_files nowcast --run-date 2023-07-05 --debug
+    make_v202111_runoff_file --data-date 2023-07-04 --debug
+    make_runoff_file --run-date 2023-07-05 --debug
+(SalishSeaCast)
+
+Mtg w/ Tall re: conda envs, cdo, nco, and Reshapr.
+
+Group mtg.
+Raisha discovered that whe can use list of Atlantis boxes as selector in dataset.variables[].
+(Atlantis)
+
+Explored packaging of Parker's LO/lo_tools w/ Becca; need to figure out how to get it to install
+in modern env.
+
+
+Fri 7-Jul-2023
+^^^^^^^^^^^^^^
+
+Still no progress on recovery of 5-Jul HRDPS 12Z files.
+(SalishSeaCast)
+
+Forked parkermac/LO to UBC-MOAD/LiveOcean to try to hack lo_tools packaging so that Becca
+can install it in a conda env.
+* cloned on khawla in MOAD/
+* created lo_tools-dev env w/ Python 3.11; got pip=23.1.2 and setuptools=68.0.0
+* tried `python3 -m pip install -e lo_tools` and it worked just finished
+  * sent msg to Becca to clone Parker's repo and install from there
+(MOAD)
 
 
 
