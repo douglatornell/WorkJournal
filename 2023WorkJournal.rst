@@ -5397,6 +5397,189 @@ can install it in a conda env.
 (MOAD)
 
 
+Week 28
+-------
+
+Mon 10-Jul-2023
+^^^^^^^^^^^^^^^
+
+Email from Amadou at MSC saying that 5-Jul files are ready and asking for FTP server to upload
+them to; I proposed hpfx; he can't do hpfx, but is trying to get access to a collaboration server
+for the transfer; EOAS has no public facing FTP server; I proposed Alliance cluster scratch space
+(SalishSeaCast)
+
+Updated dev env.
+Did pre-commit autoupdate.
+Updated dev, test, docs & user envs to Python 3.11.
+Fixed bugs in 202111 model profile.
+Tested in preparation for Tall's use.
+(Reshapr)
+
+
+Tue 11-Jul-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB.
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Lunch at Perugia w/ Jose.
+
+Received link for tarball of files from ECCC MSC:
+* 00Z and 12Z files
+* only 10 files per hour:
+    APCP_SFC_0
+    DLWRF_SFC_0
+    DSWRF_SFC_0
+    LHTFL_SFC_0
+    PRATE_SFC_0
+    PRES_SFC_0
+    PRMSL_MSL_0
+    SPFH_TGL_2
+    UGRD_TGL_10
+    VGRD_TGL_10
+  * missing RH_AGL-2m and TMP_AGL-2m
+  * unneeded PRES_SFC_0
+  * name differences
+* sent email to Amadou
+Email from Derek & Jennifer at Port Metro Vancouver re: currents fields dataset not updating.
+(SalishSeaCast)
+
+Changed all email addresses in setup.xml from Charles to mine.
+(ERDDAP)
+
+
+Wed 12-Jul-2023
+^^^^^^^^^^^^^^^
+
+Rita's first time at 2547.
+
+Received link for new (hopefully correct) tarball from ECCC MSC:
+* very slow download; tarball was 305G compared to yesterday's 4.7G; i.e. yesterday's was a Total
+  fuck up :-(
+* file count and variable names appear to be correct
+collect_weather 18 2.5km didn't finish
+* missing files in hours 016-018, 020, 022, 023; no error messages in log
+* recovery started at ~21:00:
+    mv /results/forcing/atmospheric/continental2.5/GRIB/20230712/18 aside
+    kill collect_weather 18 2.5km
+    download_weather 18 2.5km
+    collect_weather 00 2.5km --backfill
+(SalishSeaCast)
+
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* finished migrating wwatch3 datasets to datasets/wwatch3/
+* started migrating FVCOM VHFR datasets to datasets/fvcom-vhfr/
+(erddap-datasets)
+
+
+Thu 13-Jul-2023
+^^^^^^^^^^^^^^^
+
+Furniture move day.
+
+
+Fri 14-Jul-2023
+^^^^^^^^^^^^^^^
+
+Tried to use latest 5jul HRDPS 12Z tarball from ECCC:
+* files are much larger than those downloaded from hpfx, all var files are same size
+* Susan gleaned that the files may contain all? levels of atmospheric model
+* sent email to Amadou
+Started to hack 5jul handling of files we got from hpfx to run nowcast runs only:
+* hacked ``weather.download.2.5 km.forecast duration`` config from 48 to 11
+* ran ``crop_gribs 12 --fcst-date 2023-07-05 --debug``
+* hacked grib_to_netcdf to produce only ``hrdps_y2023m07d05.nc``
+* ran ``grib_to_netcdf nowcast+ --run-date 2023-07-05 --debug``
+* backfilled 05jul23/nowcast-blue and 05jul23/nowcast-green runs:
+    upload_forcing graham-dtn nowcast+ --run-date 2023-07-05 --debug
+    upload_forcing optimum-hindcast nowcast+ --run-date 2023-07-05 --debug
+    upload_forcing orcinus-nowcast-agrif nowcast+ --run-date 2023-07-05 --debug
+    upload_forcing arbutus.cloud-nowcast nowcast+ --run-date 2023-07-05 --debug
+    make_forcing_links arbutus.cloud-nowcast nowcast+ --run-date 2023-07-05
+    forecast run was unexpectedly successful
+    nowcast-green and nowcast-agrif run launches failed due to no date on 
+    ``upload_forcing turbidity``
+    upload_forcing graham-dtn turbidity --run-date 2023-07-05
+    upload_forcing optimum-hindcast turbidity --run-date 2023-07-05
+    upload_forcing orcinus-nowcast-agrif turbidity --run-date 2023-07-05
+    upload_forcing arbutus.cloud-nowcast turbidity --run-date 2023-07-05
+* backfilled 06jul23 runs:
+    make_forcing_links arbutus.cloud-nowcast nowcast+ --run-date 2023-07-06
+    nowcast-green and nowcast-agrif run launches failed due to no date on 
+    ``upload_forcing turbidity``
+    upload_forcing graham-dtn turbidity --run-date 2023-07-06
+    upload_forcing optimum-hindcast turbidity --run-date 2023-07-06
+    upload_forcing orcinus-nowcast-agrif turbidity --run-date 2023-07-06
+    upload_forcing arbutus.cloud-nowcast turbidity --run-date 2023-07-06
+  * make_ww3_wind_file forecast stalled; killed it and re-ran it on arbutus;
+  * restarted log_aggregator on skookum
+(SalishSeaCast)
+
+Updated PyCharm on khawla to 2023.1.4.
+
+Got several message from ERDDAP complaining about 
+"java.io.IOException: User limit of inotify watches reached"; tried mitigate that as
+docs suggest:
+  sudo sysctl fs.inotify.max_user_watches=65536
+  sudo sysctl fs.inotify.max_user_instances=1024
+  sudo sysctl -p
+(ERDDAP)
+
+
+Sat 15-Jul-2023
+^^^^^^^^^^^^^^^
+
+Added --run-date arg to upload_forcing turbidity launches in after_watch_NEMO
+to remove need for intervention after NEMO forecast run during backfilling;
+tested successfully on skookum, committed, pushed & deployed to skookum.
+(SalishSeaNowcast)
+
+collect_weather 06 finished without gathering many files; moved dir aside,
+and ran download_weather 06 --debug.
+Continued backfilling NEMO and wwatch3 runs:
+  wait for nowcast-blue to fail at ~10:15
+  upload next_workers to skookum re: turbidity run-date
+  restart manager to load next_workers changes
+  make_forcing_links arbutus.cloud-nowcast nowcast+ --run-date 2023-07-07
+  wait for wwatch3/forecast to finish at ~13:45
+  clear_checklist
+  make_forcing_links arbutus.cloud-nowcast nowcast+ --run-date 2023-07-08
+  wait for wwatch3/forecast to finish at ~17:15
+  clear_checklist
+  make_forcing_links arbutus.cloud-nowcast nowcast+ --run-date 2023-07-09
+  * make_ww3_current_file forecast stalled; killed it and re-ran it on arbutus;
+  * restarted log_aggregator on skookum
+  wait for wwatch3/forecast to finish at ~21:45
+  clear_checklist
+  make_forcing_links arbutus.cloud-nowcast nowcast+ --run-date 2023-07-10
+  * make_ww3_wind_file forecast stalled; killed it and re-ran it
+    and make_ww3_current_file on arbutus;
+(SalishSeaCast)
+
+
+Sun 16-Jul-2023
+^^^^^^^^^^^^^^^
+
+Continued backfilling NEMO and wwatch3 runs:
+  wait for nowcast-blue to fail at ~10:15
+  clear_checklist
+  make_forcing_links arbutus.cloud-nowcast nowcast+ --run-date 2023-07-11
+  wait for wwatch3/forecast to finish at ~14:15
+  clear_checklist
+  make_forcing_links arbutus.cloud-nowcast nowcast+ --run-date 2023-07-12
+  wait for wwatch3/forecast to finish at ~17:30
+  clear_checklist
+  make_forcing_links arbutus.cloud-nowcast nowcast+ --run-date 2023-07-13
+  * make_ww3_wind_file forecast stalled; killed it and re-ran it on arbutus
+  wait for wwatch3/forecast to finish at ~22:00
+  clear_checklist
+  make_forcing_links arbutus.cloud-nowcast nowcast+ --run-date 2023-07-14
+(SalishSeaCast)
 
 
 TODO:
@@ -5412,7 +5595,6 @@ TODO:
 * pre-commit auto-update
   * MOAD/docs - done
   * SalishSeaNowcast
-  * Reshapr
   * MoaceanParcels
   * cookiecutter-MOAD-pypkg
   * AtlantisCmd
@@ -5433,11 +5615,6 @@ state:
 * In PyCharm > Git > Log context menu "Rebase 'feature' onto 'main'"
 * **BUT** if the changes in the feature branch overlap files in main, it's possible that
   a merge will be required
-
-
-
-TODO:
-  2022-2023 CE plan
 
 
 TODO:
