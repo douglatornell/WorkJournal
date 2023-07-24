@@ -5582,6 +5582,154 @@ Continued backfilling NEMO and wwatch3 runs:
 (SalishSeaCast)
 
 
+Week 29
+-------
+
+Mon 17-Jul-2023
+^^^^^^^^^^^^^^^
+
+forecast2/17jul23 got stuck at 0%; killed it
+Finished backfilling NEMO and wwatch3 runs:
+  wait for nowcast-blue to fail at ~10:05
+  clear_checklist
+  make_forcing_links arbutus.cloud-nowcast nowcast+ --run-date 2023-07-15
+  * make_ww3_current_file forecast stalled; killed it and re-ran it on arbutus;
+    it took 2 tries before it completed
+  wait for wwatch3/forecast to finish at ~13:55
+  clear_checklist
+  make_forcing_links arbutus.cloud-nowcast nowcast+ --run-date 2023-07-16
+  wait for wwatch3/forecast to finish at ~17:30
+  clear_checklist
+  make_forcing_links arbutus.cloud-nowcast nowcast+ --run-date 2023-07-17
+  * make_ww3_current_file forecast stalled; killed it and re-ran it on arbutus;
+    it took 2 tries before it completed
+(SalishSeaCast)
+
+Email w/ Rachael re: vessel track stitching script; not in a Git repo to my knowledge.
+(MIDOSS)
+
+Squash-merged dependabot PRs to update cryptography re: CVE-2023-38325 re: 
+mishandling creation and parseing of SSH certificates that have critical options:
+* SalishSeaCmd
+* NEMO_Nowcast
+* SalishSeaCast/docs
+* salishsea-site
+* MOAD/docs
+* MoaceanParcels
+* SalishSeaTools
+* moad_tools
+* AtlantisCmd
+* cookiecutter-analysis-repo
+* cookiecutter-MOAD-pypkg
+* SalishSeaNowcast
+* NEMO-Cmd
+Squash-merged dependabot PR to update SciPy in MoaceanParcels re: CVE-2023-25399
+re: recounting issue that leads to potential memory leak.
+
+
+Tue 18-Jul-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB.
+
+Got latest tarball from ECCC MSC:
+* 1.2G, ~36 min download
+* initial check of variables and file sizes looks good
+* files need to be renamed to match published names - done
+* crop_gribs worked
+* grib_to_netcdf worked
+Emailed Derek @ Port Metro Vancouver to let him know that SalishSeaCast is back to real-time;
+he's away until 1-Aug
+make_ww3_current_file forecast stalled; killed it and re-ran it on arbutus
+Got nowcast-dev running again:
+  copy nowcast-green/17jul23 namelist_cfg and restart to nowcast-dev.201905/17jul23/
+  make_forcing_links salish nowcast+ --shared-storage
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+Discussed obs collection w/ Cassidy; very similar needs to Becca's.
+(MOAD)
+
+Helped Raisha start thinking about running Parcels from a Python module instead of from a notebook
+as she scales up the number of particles she is running.
+(Atlantis)
+
+
+Wed 19-Jul-2023
+^^^^^^^^^^^^^^^
+
+Modo van for big items move from 2356.
+
+download_live_ocean failed; re-ran at ~15:35
+(SalishSeaCast)
+
+
+Thu 20-Jul-2023
+^^^^^^^^^^^^^^^
+
+Squash-merged dependabot PRs to update pygments re: CVE-2022-40896 re: ReDOS issue:
+* SalishSeaTools
+* salishsea-site
+* NEMO_Nowcast
+* gha-workflows
+* moad_tools
+* MOAD/docs
+* AtlantisCmd
+* MoaceanParcels
+* NEMO-Cmd
+
+Explored changing crop_gribs worker to use watchdog file system monitor to operate on
+files as they are moved into the /results/forcing/atmospheric/continental2.5/GRIB/{yyyymmdd}/{hh}/
+directory:
+branch: faster-crop_gribs
+PR#: 
+(SalishSeaNowcast)
+
+Helped Tall explore Puget Sound dissolved O2 observations:
+* analysis-doug/notebooks/puget_O2/
+Discussed alternative to find_nearest_model_point() with Susan:
+* do ``method="nearest"`` lookups in ``grid/grid_from_lat_lon_mask999.nc``;
+  see code in ``salishsea_tools.geo_tools.get_ij_coordinates()``, but don't use that
+  function as it opens the file for each lookup
+
+download_weather 00|12 1km failed due to bad TLS cert on dd.alpha.
+Sent email to Sandrine.
+Re-tried with --no-verify-certs; failed with 404 errors.
+(SalishSeaCast)
+
+
+Fri 21-Jul-2023
+^^^^^^^^^^^^^^^
+
+Email from Sandrine to day that dd.alpha cert issue had been resolved; it has not:
+* sent her a screenshot
+* fixed by 11:30; 20jul 00Z files were gone, but got 20jul 12Z
+* Sandrine said to use dd.alpha.weather.gc.ca as an alternative to dd.alpha.meteo.gc.ca
+make_ww3_current_file forecast2 stalled; killed it and re-ran it on arbutus.
+make_ww3_current_file forecast stalled; killed it and re-ran it on arbutus.
+(SalishSeaCast)
+
+M&J arrived, then M drove to White Rock and back to bring JRA.
+
+
+Sat 22-Jul-2023
+^^^^^^^^^^^^^^^
+
+M&J left for Van Isle & Heart Isle.
+JRA visiting.
+
+
+Sun 23-Jul-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_wind_file forecast2 stalled; killed it
+(SalishSeaCast)
+
+Drove JRA back to White Rock and had dinner at Amica.
+
+
+
+
 TODO:
 * fix straight line gaps in wwatch3 forecast plots (forecast2 are okay.)
 
