@@ -5081,7 +5081,7 @@ Downloaded Minecraft 1.20 mods, shader packs, resource packs, data packs:
 Created MultiMC instance:
 * Minecraft 1.20.1
 * Fabric Loader 0.14.21
-Installed mods, shader packs & resource packs in MultiMC 1.19.4 instance.
+Installed mods, shader packs & resource packs in MultiMC 1.20.1 instance.
 Copied minihud.json & tweakeroo.json from 1.19.4 config/ to 1.20.1 config/
 
 
@@ -5687,6 +5687,7 @@ PR#:
 
 Helped Tall explore Puget Sound dissolved O2 observations:
 * analysis-doug/notebooks/puget_O2/
+* accessed and plotted profile from obs dataset via xarray
 Discussed alternative to find_nearest_model_point() with Susan:
 * do ``method="nearest"`` lookups in ``grid/grid_from_lat_lon_mask999.nc``;
   see code in ``salishsea_tools.geo_tools.get_ij_coordinates()``, but don't use that
@@ -5709,7 +5710,7 @@ make_ww3_current_file forecast2 stalled; killed it and re-ran it on arbutus.
 make_ww3_current_file forecast stalled; killed it and re-ran it on arbutus.
 (SalishSeaCast)
 
-M&J arrived, then M drove to White Rock and back to bring JRA.
+M&J arrived, then drove to White Rock and back to bring JRA.
 
 
 Sat 22-Jul-2023
@@ -5728,10 +5729,239 @@ make_ww3_wind_file forecast2 stalled; killed it
 Drove JRA back to White Rock and had dinner at Amica.
 
 
+Week 30
+-------
+
+Mon 24-Jul-2023
+^^^^^^^^^^^^^^^
+
+First rain since 13-Jun.
+
+crop_gribs 00 failed due to bad file:
+  /results/forcing/atmospheric/continental2.5/GRIB/20230724/00/040/20230724T00Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT040H.grib2
+grib_to_netcdf nowcast+ failed as a result; cascaded to upload_forcing failures
+* recovery started at ~10:45:
+  * downloaded 20230724T00Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT040H.grib2 again; got a different
+    size
+  crop_gribs 00 --debug
+    * new 20230724T00Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT040H.grib2 was successfully processed
+  grib_to_netcdf nowcast+
+  upload_forcing graham-dtn nowcast+ --run-date 2023-07-24
+  upload_forcing optimum-hindcast nowcast+ --run-date 2023-07-24
+  upload_forcing orcinus-nowcast-agrif nowcast+ --run-date 2023-07-24
+  upload_forcing arbutus.cloud-nowcast nowcast+ --run-date 2023-07-24
+(SalishSeaCast)
+
+AAPS 2022 Tentative Agreement Information Session
+* health account increasing from $200 to $400 per year
+* personal spending account: $200 per year
+
+Helped Tall explore Puget Sound dissolved O2 observations:
+* analysis-doug/notebooks/puget_O2/
+* added locating nearest model grid point to obs cast, and accessing and plotting
+  model results profile from that point
+Helped Matt sort out using Git in VSCode; his workspace was at the MOAD/ level.
+
+Squash-merged dependabot PR re: update to apple-boy/ssh-action that I use for deployment.
+(salishsea-site)
+
+
+Tue 25-Jul-2023
+^^^^^^^^^^^^^^^
+
+Waited at home until Rita arrived, then worked at ESB.
+
+Group mtg; see whiteboard.
+(MOAD)
+
+upload_forcing to graham-dtn failed due to scheduled maintenance
+(SalishSeaCast)
+
+Helped Becca get ariane built on perigee:
+* key was to include gfortran in her conda env so that it was consistent with
+  libnetcdf and netcdf-fortran from conda-forge
+
+Discussed skookum RAM upgrade w/ Henryk.
+
+Talked to Tall about next steps:
+* need to get Reshapr working for him to pull profiles from NEMO to compare to obs profiles
+
+Updated nodecraft server to 1.20.1:
+* stopped server
+* locked Turgent Falcon's Punching Fist backup of 2023-07-21 10:52
+* used 1 click installer to change version from 1.19.4 w/ fabric 1.19-0.14.19 to
+  1.20.1 w/ fabric 1.20.1-0.14.21 via archive method
+* copied files from _old_files/2023-07-26T02-57-18-191Z/ to /:
+    banned-ips.json
+    banned-players.json
+    eula.txt
+    ops.json
+    server.properties
+    whitelist.json
+* created new world:
+  * name: 1020-1-25jul23
+  * seed: 3266812394423525333
+  * difficulty: normal
+* server started successfully
+* uploaded to /1-20-1-25jul23/datapacks:
+    DoubleShulkerShells-1.3.4
+* uploaded to /mods/
+    lithium-fabric-mc1.20.1-0.11.2.jar 
+* restarted server
+
+
+Wed 26-Jul-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 stalled; killed it
+(SalishSeaCast)
+
+Housewares shopping, car load to Salvation Army, car load from 2356.
+
+K&K for dinner and fireworks; Mexico better than Australia.
+
+
+Thu 27-Jul-2023
+^^^^^^^^^^^^^^^
+
+collect_weather 06 didn't complete; perhaps due to ocean YP server issue since ~02:30
+* all files for hours 001-023 collected; none after that, though sarracenia log shows them arriving
+* was able to connect to skookum at ~17:40; started recovery
+    kill collect_weather 06
+    move /results/forcing/atmospheric/continental2.5/GRIB/20230727/06/ aside
+    download_weather 06 2.5km
+    collect_weather 00 2.5km
+    wait for forecast2 runs to finish
+      make_ww3_current_file got stuck; killed it
+    collect_weather 12 2.5km --backfill
+    collect_weather 18 2.5km --backfill
+backfill upload_forcing to graham-dtn:
+  upload_forcing nowcast+ graham-dtn 2023-07-25
+  upload_forcing turbidity graham-dtn 2023-07-25
+  upload_forcing nowcast+ graham-dtn 2023-07-26
+  upload_forcing turbidity graham-dtn 2023-07-26
+upload_forcing nowcast+ instances didn't launch after grib_to_netcdf 12; launched 4 instances manually at ~22:10
+(SalishSeaCast)
+
+Email from Henryk at ~10:15 says ETA for ocean auth fix is unknown.
+
+Squash-merged dependabot PRs to update certifi re: CVE-2023-37920 re: dropping
+root certs from "e-Turga" due to Mozilla finding security issues in their system:
+* analysis-doug/dask-expts
+* analysis-doug/melanie-geotiff
+* SalishSeaCmd
+* NEMO-Cmd
+* SalishSeaNowcast
+* Reshapr
+* salishsea-site
+* SalishSeaCast/docs
+* MoaceanParcels
+* AtlantisCmd
+* moad_tools
+* UBC-MOAD/docs
+* cookiecutter-MOAD-pypkg
+* NEMO_Nowcast
+* tools
+* cookiecutter-analysis-repo
+
+Squash-merged dependabot PRs to update pygments re: CVE-2022-40896 re: ReDOS issue:
+* analysis-doug/dask-expts
+* analysis-doug/melanie-geotiff
+
+Squash-merged dependabot PRs to update cryptography re: CVE-2023-38325 re: 
+mishandling creation and parseing of SSH certificates that have critical options:
+* analysis-doug/dask-expts
+* analysis-doug/melanie-geotiff
+
+Squash-merged dependabot PR to update SciPy re: CVE-2023-25399 re: recounting issue 
+that leads to potential memory leak:
+* analysis-doug/dask-expts
+* analysis-doug/melanie-geotiff
+
+Dropped requirements.txt files from analysis-doug to avoid unecessary dependabot PRs.
+
+Ran:
+  python3 /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* finished migrating FVCOM VHFR datasets to datasets/fvcom-vhfr/
+* migrated 2nd Narrows railway bridge HADCP dataset to datasets/2ndNarrowsHADCP-observations/
+* 
+(erddap-datasets)
+
+
+Fri 28-Jul-2023
+^^^^^^^^^^^^^^^
+
+Recovery from yesterday's EOAS auth system outage was not entirely successful:
+* ``make_forcing_links forecast --shared-storage`` failed due to running after midnight;
+  so nowcast-dev run failed
+* collect_river_data failed with KeyError for 2023-07-27
+  * /SalishSeaCast/datamart/hydrometric/ files have not been updated since 26jul 13:35
+  * sarracenia log show queue binding failure due to permission issue at ~13:46
+recovery started at ~08:35:
+  * restarted sr_subscribe-hydrometric via supervisorctl
+  * wait for sarracenia to update river discharge csv files
+  /results/forcing/rivers/observations/collect_river_data.sh
+  make_runoff_file  
+  make_v202111_runoff_file
+Backfill nowcast-dev:
+  wait for 28jul to fail
+  make_forcing_links salish nowcast+ --shared-storage 2023-07-27
+  wait for run to finish at ~19:15
+  make_forcing_links salish nowcast+ --shared-storage 2023-07-28
+(SalishSeaCast)
+
+Quarterbacked recovery of waterhole machines after yesterday's EOAS auth outage:
+* reboots needed: lox, char
+* no problems: salish, skookum, smelt, hake, chum
+
+Continued work on changing crop_gribs worker to use watchdog file system monitor to operate on
+files as they are moved into the /results/forcing/atmospheric/continental2.5/GRIB/{yyyymmdd}/{hh}/
+directory:
+branch: faster-crop_gribs
+PR#: 
+(SalishSeaNowcast)
+
+
+Sat 29-Jul-2023
+^^^^^^^^^^^^^^^
+
+Continued work on changing crop_gribs worker to use watchdog file system monitor to operate on
+files as they are moved into the /results/forcing/atmospheric/continental2.5/GRIB/{yyyymmdd}/{hh}/
+directory:
+branch: faster-crop_gribs
+PR#: 191
+* hacked next_workers enough to allow test to proceed for 18Z forecast today
+* updated skookum to faster-crop_gribs branch
+* restarted manager to load next_workers module
+* manually launched ``crop_gribs 18``
+(SalishSeaNowcast)
+
+
+Sun 30-Jul-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_wind_file forecast2 stalled; killed it
+Noticed that yesterday's make_ww3_current_file forecast stalled; killed it
+Backfill wwatch3:
+  wait for forecast run to finish
+  make_ww3_wind_file forecast 2023-07-29
+  make_ww3_current_file forecast 2023-07-29
+  wait for forecast run to finish
+  make_ww3_wind_file forecast 2023-07-30
+  make_ww3_current_file forecast 2023-07-30
+(SalishSeaCast)
+
+
+
 
 
 TODO:
-* fix straight line gaps in wwatch3 forecast plots (forecast2 are okay.)
+* fix straight line gaps in wwatch3 forecast plots (forecast2 are okay)
 
 
 * tidy module & functions notebook & module
