@@ -4792,7 +4792,7 @@ skookum against dask cluster on salish:
       resampler = extracted_ds.resample(
   created Reshapr issue #82
 * successfully created all day-avg and month-avg files without intervention
-* very small amunt of memory leakage:
+* very small amount of memory leakage:
   * worker spawner: 5.028g
   * scheduler: 4.711g
   * 4 workers: 0.667g (no change) 
@@ -5889,7 +5889,6 @@ dataset.xml by a script:
 * PR#1
 * finished migrating FVCOM VHFR datasets to datasets/fvcom-vhfr/
 * migrated 2nd Narrows railway bridge HADCP dataset to datasets/2ndNarrowsHADCP-observations/
-* 
 (erddap-datasets)
 
 
@@ -5938,7 +5937,8 @@ PR#: 191
 * hacked next_workers enough to allow test to proceed for 18Z forecast today
 * updated skookum to faster-crop_gribs branch
 * restarted manager to load next_workers module
-* manually launched ``crop_gribs 18``
+* manually launched ``crop_gribs 18``; no file system events were detected
+* reverted to main branch; restarted manager; manually launched ``crop_gribs 18``
 (SalishSeaNowcast)
 
 
@@ -5957,11 +5957,278 @@ Backfill wwatch3:
 (SalishSeaCast)
 
 
+Week 31
+-------
+
+Mon 31-Jul-2023
+^^^^^^^^^^^^^^^
+
+NEMO forecast2 failed overnight; Susan investigated: 1st time step, high velocity components
+on western boundary; may not affect nowcast runs because they are initialized from 
+yesterday's nowcast-green restart file, whereas forecast2 is initialized from a restart file
+generated part way through the forecast run.
+No 18Z messages in sarracenia log; warning & error at 10:38:
+  2023-07-31 10:38:44,016 [WARNING] sr_amqp/consume: could not consume in queue q_anonymous.sr_subscribe.hrdps-continental-dd-weather.UBC.SalishSeaCast: EOF occurred in violation of protocol (_ssl.c:2393)
+  2023-07-31 10:38:44,198 [ERROR] sr_amqp/close 2: [SSL: BAD_LENGTH] bad length (_ssl.c:2393)
+* recovery started at ~15:56
+    killed collect_weather 18
+    download_weather 18 2.5km
+    * slower than ususal: 20 hours in ~2h
+    restarted sr_subscribe-hrdps-continental via supervisorctl
+    collect_weather 00 2.5km
+    download_weather 00 1km
+    download_weather 12 1km
+Checked hydrometric feed in sarracenia:
+* last update was ~13:06
+* restarted client via supervisorctl at 16:18
+(SalishSeaCast)
+
+Jumped in to kill dask processes to prevent swapping on salish; Camryn was running 6 ariane jobs
+using ~30G each; discussed limits with her on Slack.
+
+Used VSCode ``SalishSeaNowcast [SSH:skookum]`` session to run 
+``nowcast.workers.day_month_avgs 2023-06-01`` in ``202111-tarballs`` tmux session on
+skookum against dask cluster on salish: 
+* 3 FutureWarning per day-avg:
+    /SalishSeaCast/Reshapr/reshapr/core/extract.py:929: 
+    FutureWarning: Following pandas, the `loffset` parameter to resample will be deprecated 
+    in a future version of xarray.  Switch to using time offset arithmetic.
+      resampler = extracted_ds.resample(
+  see Reshapr issue #82
+* successfully created all day-avg and month-avg files
+  * failure:
+    * 2jul chemistry
+      * Used VSCode ``month-avg-202111 /results2/SalishSea [SSH: salish]`` session to run
+        ``python3 -m day_avg 2023-06-02 chemistry`` in ``/results2/SalishSea/month-avg.202111/``
+        on salish
+* very small amount of memory leakage:
+  * worker spawner: 5.025g
+  * scheduler: 4.697g
+  * 4 workers: 0.675g
+(hindcast)
+
+Ran 12-month extraction for O2 profiles at Twanoh for Tall; no errors like happened on Friday;
+17.7 minutes.
+Merged PR#87 re: georef variables names.
+Slack conversation w/ Tall; plan to meet on Friday.
+(Reshapr)
+
+Tried to test concurrent crop_gribs in PyCharm debugger on khawla; revealed that 18Z files were
+not appearing in sarracenia client (see above).
+(SalishSeaNowcast)
+
+Slack converation w/ Jose re: running Parcels on graham.
+Realized that he needs nowcast-green.202111 and wwatch3 files there:
+* Ran rsync to upload wwatch3/nowcast/*19/SoG_ww3_fields_2019*_2019*_*.nc files
+* Ran rsync to upload nowcast-green.202111/*19/SalishSea_1d_*_prod_T.nc files
+* Ran rsync to upload nowcast-green.202111/*19/SalishSea_1d_*_grid_[TUVW].nc files
+
+
+August
+======
+
+Tue 1-Aug-2023
+^^^^^^^^^^^^^^
+
+make_ww3_wind_file forecast2 stalled; killed it, then re-ran it manually, took 2 tries.
+(SalishSeaCast)
+
+PyCharm 2023.2 livestream:
+* Helen Scott, Jodie Burchell, Paul Everitt, Aleksei Kniazev
+* lots of Django:
+  * endpoints discovery; endpoints are symbols so operations work across Python & JS
+* black integration; on save, or via code reformat <--
+  * need a "stationary" black installation
+  * will collect settings from pyproject.toml
+  * pyproject.yaml integration
+* GitLab merge request integration
+  * similar to GitHub pull request integration
+* "Run Anything"
+  * like "Search Anywhere" (Shift-Shift)
+  * keyboard shortcut is Ctrl-Ctrl
+  * select in terminal window, then shortcut
+  * creates temporary run configurations (like temporary test configs)
+  * platform feature from Intelli-J
+  * hold down shift to change from run to debug
+* new UI
+  * change project colour
+  * sidebar/toolbar configurability
+* AI assistant
+  * pro only, limited pre-release
+  * write function docstrings
+  * function and variable name suggestions via refactoring
+  * write commit messages - via analysis of diff
+  * explain commits - via analysis of diff
+  * writing is verbose because it's a large language model
+  * explain code
+  * refactor code
+  * generate code from description
+  * write unit tests
+  * mixture of local LLMs and ChatGPT
+  * most functionality working in Jupyter notebooks
+  * access to preview
+    * install PyCharm AI Assistant plug-in
+    * limited beta - want feedback via YouTrack
+  * OpenAI products
+  * pricing to be determined
+* polars data frames
+  * polars is higher performance pandas
+  * post next week on DataCells (?) blog
+  * works with plotly
+* collapse type hindcast
+* type hints help AI assistant
+* indexing improvements
+  * CLI tool to generate shared indexes to share with teams
+* better support for pytest fixtures
+* Python packages GUI
+  * click to update; auto-updates requirements.txt
+* use EAP releases
+
+Updated to PyCharm 2023.2 on khawla.
+Signed in to AI Assistant beta, I think.
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Met w/ Camryn re: top, memory, processing, etc.
+
+Met w/ Jose re: running Parcels as MPI jobs on graham.
+
+Squash-merged some dependabot PRs from weekly email alert; they didn't generate notifications
+for some reason:
+* SOG-Bloomcast-Ensemble: cryptography, pygments, certifi
+* NEMO-Cmd: requests, GitPython, future, cryptography
+* FVCOM-Cmd: 
+
+
+Wed 2-Aug-2023
+^^^^^^^^^^^^^^
+
+make_ww3_wind_file forecast stalled; killed it, then re-ran it manually.
+(SalishSeaCast)
+
+Squash-merged more dependabot PRs from weekly email alert; they didn't generate notifications
+for some reason:
+* FVCOM-Cmd: requests, pygments
+* rpn-to-gemlam: cryptography, requests, pygments, scipy, tornado, certifi
+* SOG: pygments
+  * dismissed security alert re: colander because the vulnerability is in URL parsing that we don't
+    use
+* SOG-Bloomcast: pygments
+Squash-merged dependabot PRs re: statically linked version of OpenSSL in cryptography:
+* SalishSeaCmd
+* SalishSeaNowcast
+* SalishSeaCast/docs
+* tools
+* cookiecutter-MOAD-pypkg
+* MoaceanParcels
+* NEMO_Nowcast
+* moad_tools
+* UBC-MOAD/docs
+* AtlantisCmd
+* cookiecutter-analysis-repo
+
+Updated requirements.txt to drop py and bump pytest to re: security alert from 
+18-Oct-2022:
+* FVCOM-Cmd
+* rpn-to-gemlam
+* SOG
+* SOG-forcing
+* SOG-Bloomcast
+
+
+Thu 3-Aug-2023
+^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 stalled; killed it, then re-ran it manually.
+make_ww3_wind_file forecast2 stalled; killed it, then re-ran it manually.
+make_ww3_wind_file forecast stalled; killed it, then re-ran it manually; also had to run
+make_ww3_current_file manually to get run started.
+(SalishSeaCast)
+
+Continued work on changing crop_gribs worker to use watchdog file system monitor to operate on
+files as they are moved into the /results/forcing/atmospheric/continental2.5/GRIB/{yyyymmdd}/{hh}/
+directory:
+branch: faster-crop_gribs
+PR#: 191
+* discovered that files are being copied into /results/forcing/atmospheric/... directories,
+  so file system events are create, multiple modify, close
+* changed crop_gribs to detect on_closed event
+* updated skookum to faster-crop_gribs branch
+* restarted manager to load next_workers module
+* manually launched ``crop_gribs 18`` - worked!!! :-)
+* ``collect_weather 00`` and ``crop_gribs 00 2023-08-04`` launched correctly
+* ``crop_gribs 00 2023-08-04`` finished its work, but didn't terminate; killed manuallly :-(
+(SalishSeaNowcast)
+
+
+Fri 4-Aug-2023
+^^^^^^^^^^^^^^
+
+Continued work on changing crop_gribs worker to use watchdog file system monitor to operate on
+files as they are moved into the /results/forcing/atmospheric/continental2.5/GRIB/{yyyymmdd}/{hh}/
+directory:
+branch: faster-crop_gribs
+PR#: 191
+* ``collect_weather 06`` launched correctly but ``crop_gribs 06`` was looking for 2023-08-03 because
+  it was launched before midnight
+  * killed it
+  * reverted to main branch; ran ``crop_gribs 06`` manually
+  * changed back to faster-crop_gribs branch
+* ``collect_weather 12`` and ``crop_gribs 12`` launched correctly, and worked as expected;
+  nowcast-blue run started 65 seconds after they finished rather than >1h :-)
+* added forecast date arg to ``crop_gribs 06`` launch because it gets launched before midnight
+* ``collect_weather 18`` and ``crop_gribs 18`` launched correctly, and worked as expected
+* ``collect_weather 00`` and ``crop_gribs 00 2023-08-05`` launched correctly
+(SalishSeaNowcast)
+
+make_ww3_wind_file forecast stalled; killed it, then re-ran it manually; also had to run
+make_ww3_current_file manually to get run started.
+restarted log_aggregator because there were no messages from ww3 workers.
+(SalishSeaCast)
+
+Met w/ Tall to orient him to using Reshapr.
+
+
+Sat 5-Aug-2023
+^^^^^^^^^^^^^^
+
+Finished pack-up of 2356.
+
+
+Sun 6-Aug-2023
+^^^^^^^^^^^^^^
+
+crop_gribs 12 stalled with the observer thread reporting 1 file remaining to process,
+but all files show as cropped
+* recovery started at ~10:40:
+    killed crop_gribs 12
+    * maybe there's a signal other than INT that will look like completion to manager?
+    grib_to_netcdf nowcast+
+    * failed due to no 12/023/20230806T12Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT023H_SSC.grib2
+    * upload_forcing, etc. went ahead due to race condition mgmt not caring about failure
+    * recovery:
+        hacked crop_gribs and nowcast.yaml on main branch to process only hour 23 APCP file
+        crop_gribs 12 --debug
+        reverted hacks
+        grib_to_netcdf nowcast+ --debug
+        forecast stalled at 84.7%, presumably due to messed up atmospheric forcing
+        * re-ran upload_forcing nowcast+ to restart automation
+(SalishSeaNowcast)
+
+
+TODO:
+* give crop_gribs a mode that can process specific files
+* chnage download_weather to gather only files missed by collect_weather so that it can
+  work with crop_gribs monitoring incoming files
+  * check for presence of files before downloading them; skip if present
 
 
 
 TODO:
 * fix straight line gaps in wwatch3 forecast plots (forecast2 are okay)
+
+* migrate PyPDF2 to pypdf in SalishSeaNowcast
 
 
 * tidy module & functions notebook & module
