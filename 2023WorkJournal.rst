@@ -6217,6 +6217,179 @@ but all files show as cropped
 (SalishSeaNowcast)
 
 
+Week 32
+-------
+
+Mon 7-Aug-2023
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - BC Day
+
+make_ww3_current_file forecast2 stalled; killed it, skipped run.
+crop_gribs 18 stalled with 1 file remaining to be processed:
+  20230807T18Z_MSC_HRDPS_DLWRF_Sfc_RLatLon0.0225_PT038H.grib2
+  * recovery:
+      killed crop_gribs 18
+      hacked crop_gribs and nowcast.yaml on main branch to process only hour 38 DLWRF file
+      crop_gribs 18 --debug
+      reverted hacks
+(SalishSeaCast)
+
+Shuffled stuff in the garage enough to get a bike work space and preliminary tool storage.
+
+Cleaned up network wiring panel.
+
+
+Tue 8-Aug-2023
+^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Group mtg; see whiteboard.
+(MOAD)
+
+skookum memory upgrade:
+* 16G to 128G
+* Henryk did the work
+* scheduled for 15:00
+* prep:
+  * kill collect_weather 18
+  * kill crop_gribs 18
+  * stop SalishSeaCast supervisord
+      supervisorctl -c /SalishSeaCast/SalishSeaNowcast/config/supervisord.ini shutdown
+  * stop salishsea-site supervisord
+      supervisorctl -c /SalishSeaCast/salishsea-site/supervisord-prod.ini shutdown
+  * stop ERDDAP
+      sudo /opt/tomcat/bin/shutdown.sh
+  * stop apache2
+      sudo systemctl stop apache2.service
+* recovery:
+  * apache2 started on boot
+  * start ERDDAP
+      sudo /opt/tomcat/bin/startup.sh
+  * start salishsea-site supervisord
+      conda activate /SalishSeaCast/salishsea-site-env
+      supervisord -c /SalishSeaCast/salishsea-site/supervisord-prod.ini
+  * start SalishSeaCast supervisord
+      conda activate /SalishSeaCast/salishsea-site-env
+      supervisord -c /SalishSeaCast/SalishSeaNowcast/config/supervisord.ini
+  * crop_gribs 18
+  * download_weather 18 2.5km
+    * crop_gribs is not processing files:
+      * because I forgot to delete the empty 18/ directory, so download_weather failed
+        and crop_gribs was left watching a on existent directory
+  * download_weather 00 1km
+  * download_weather 12 1km
+  * crop_gribs 00 2023-08-09
+  * collect_weather 00 2.5 km
+  * crop_gribs 18
+(SalishSeaNowcast)
+
+
+Wed 9-Aug-2023
+^^^^^^^^^^^^^^
+
+Tagged batch-crop_gribs on main to use for recovery from collect_weather and/or crop_gribs
+problems untile file-on-demand feature is implemented in crop_gribs, and backfill feature is
+implemented in download_weather.
+Finished work on changing crop_gribs worker to use watchdog file system monitor to operate on
+files as they are moved into the /results/forcing/atmospheric/continental2.5/GRIB/{yyyymmdd}/{hh}/
+directory:
+branch: faster-crop_gribs
+PR#: 191 - squash-merged
+* update process flow diagram
+(SalishSeaNowcast)
+
+ERDDAP was reporting ``java.io.IOException: User limit of inotify watches reached`` errors;
+followed suggestions on https://coastwatch.pfeg.noaa.gov/erddap/download/setupDatasetsXml.html:
+  sudo sysctl fs.inotify.max_user_watches=65536
+  sudo sysctl fs.inotify.max_user_instances=1024
+  sudo sysctl -p
+ERDDAP was also reporting 
+``java.lang.OutOfMemoryError: Ran out of memory trying to read HDF5 filtered chunk. Either increase 
+the JVM's heap size (use the -Xmx switch) or reduce the size of the dataset's chunks`` errors:
+  * changed Java heap memory settings in /opt/tomcat/bin/startup.sh to:
+    -Xmx=48G -Xms=16G  # heap size limit, initial heap size
+  * restarted ERDDAP
+    * no inotify messages
+    * OutOfMemoryError on same sets of files
+  * increased Xmx to 64G:
+    * same OutOfMemoryError messages in email
+  * increased Xmx to 96G:
+    * same OutOfMemoryError messages in email
+(ERDDAP)
+
+
+Thu 10-Aug-2023
+^^^^^^^^^^^^^^^
+
+crop_gribs 06 stalled with 1 file remaining to be processed:
+* bash for loop doesn't reveal which file
+* grib_to_netcdf forecast2 --debug to try to find it; successs, so not in 06Z hours 017 to 048;
+  hours 001 to 016 of 06Z are not required for grib_to_netcdf nowcast+, so decided no to worry
+* grib_to_netcdf forecast2 to restart automation at ~07:55
+* killed crop_gribs 06
+make_ww3_wind_file and make_ww3_current_file both stalled; killed them, and skipped runs to avoid
+conflict with soon-to-start nowcast-blue run
+(SalishSeaNowcast)
+
+Vancouver to Heart Island
+
+
+Fri 11-Aug-2023
+^^^^^^^^^^^^^^^
+
+Heart Island
+
+forecast2 runs failed due to no nowcast key in checklist; skipped runs
+crop_gribs 12 stalled with 1 file remaining to process:
+  20230811T12Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT028H.grib2
+  * recovery started at ~11:55:
+      git checkout batch-crop_gribs  # on skookum and khawla; detached head mode
+      hacked crop_gribs and nowcast.yaml on khawla to process only hour 28 APCP file
+      copied hacks to skookum
+      crop_gribs 12 --debug
+      reverted hacks on skookum
+        git restore config/nowcast.yaml nowcast/workers/crop_gribs.py
+        git checkout main
+      grib_to_netcdf nowcast+
+
+      killed crop_gribs 12
+      reverted hacks on khawla
+download_live_ocean timed out at 11:46; re-ran at ~12:15
+(SalishSeaNowcast)
+
+Started work on crop_gribs feature to process a specific file; motivation is to handle
+stall condition with 1 file remaining to process that happens to frequently
+branch: crop_gribs-one-file
+(SalishSeaCast)
+
+
+Sat 12-Aug-2023
+^^^^^^^^^^^^^^^
+
+Heart Island
+
+Hiked trail from Nick & Jana's to lake on Hunter Island; visited Nick & Jana, then dinner
+with them at HEart Island.
+
+make_ww3_current_file forecast stalled; killed it and re-ran it.
+(SalishSeaCast)
+
+
+Sun 13-Aug-2023
+^^^^^^^^^^^^^^^
+
+Heart Island
+
+Installed Rapid Photo Downloader on khawla from PopShop.
+
+make_ww3_wind_file forecast stalled; killed it and re-ran it.
+(SalishSeaCast)
+
+
+
+
 TODO:
 * give crop_gribs a mode that can process specific files
 * chnage download_weather to gather only files missed by collect_weather so that it can
