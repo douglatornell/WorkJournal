@@ -6371,7 +6371,7 @@ Sat 12-Aug-2023
 Heart Island
 
 Hiked trail from Nick & Jana's to lake on Hunter Island; visited Nick & Jana, then dinner
-with them at HEart Island.
+with them at Heart Island.
 
 make_ww3_current_file forecast stalled; killed it and re-ran it.
 (SalishSeaCast)
@@ -6388,11 +6388,136 @@ make_ww3_wind_file forecast stalled; killed it and re-ran it.
 (SalishSeaCast)
 
 
+Week 33
+-------
+
+Mon 14-Aug-2023
+^^^^^^^^^^^^^^^
+
+Heart Island
+
+Continued work on crop_gribs feature to process a specific file; motivation is to handle
+stall condition with 1 file remaining to process that happens to frequently
+branch: crop_gribs-one-file
+PR#195
+(SalishSeaCast)
+
+
+Tue 15-Aug-2023
+^^^^^^^^^^^^^^^
+
+Heart Island
+
+Continued work on crop_gribs feature to process a specific file; motivation is to handle
+stall condition with 1 file remaining to process that happens to frequently
+branch: crop_gribs-one-file
+PR#195
+(SalishSeaCast)
+
+make_ww3_current_file forecast stalled; killed it and re-ran it.
+(SalishSeaCast)
+
+
+Wed 16-Aug-2023
+^^^^^^^^^^^^^^^
+
+Heart Island
+
+Went to Shearwater and Bella Bella to pick up James from airport.
+
+
+Thu 17-Aug-2023
+^^^^^^^^^^^^^^^
+
+Heart Island
+
+no NeahBay obs or forecast for forecast2 or nowcast:
+* Susan emailed NOAA to enquire
+  * reply said that changes upstream mean that scripts need to changed; ETA a few days
+* recovery started at ~10:30:
+    skipped forecast2 runs
+    symlinked 16 fcst at 16 obs
+    symlinked 19 fcst as 20 fcst
+    make_v202111_runoff_file
+    make_runoff_file
+(SalishSeaCast)
+
+
+Fri 18-Aug-2023
+^^^^^^^^^^^^^^^
+
+Heart Island
+
+no NeahBay obs or forecast for forecast2 or nowcast:
+* recovery started at ~10:15:
+    skipped forecast2 runs
+    clear_checklist
+    symlinked 17 fcst at 17 obs
+    symlinked 19 fcst as 20 fcst
+    make_v202111_runoff_file
+    make_runoff_file
+* Susan got reply from NOAA with service announcement of 1 letter change in URL
+  due to model upgrade; she hacked it into nowcast.yaml on skookum for testing tomorrow
+* tested new URL starting at ~16:20
+    delete symlinks
+    collect_NeahBay_ssh 00 2023-08-17 --debug  # failed
+      new files are .csv.tar.gz rather than .csv_tar; new are larger than old; Susan investigated:
+      * the file we are interested in within the tarball appears to be the same
+      * change config to store file as .csv_tar_gz; tarfile module handles gz compression 
+        transparetnly; need underscores instead of dots to be able to use Path.with_suffix()
+        without code changes
+    collect_NeahBay_ssh 00 2023-08-17 --debug  # success
+    make_ssh_files forecast2 2023-08-17 --debug  # success
+    collect_NeahBay_ssh 06 2023-08-17 --debug  # success
+    make_ssh_files nowcast 2023-08-17 --debug  # success
+    collect_NeahBay_ssh 00 2023-08-18 --debug  # success
+    make_ssh_files forecast2 2023-08-18 --debug  # success
+    collect_NeahBay_ssh 06 2023-08-18 --debug  # success
+    make_ssh_files nowcast 2023-08-18 --debug  # success
+* Created PR#196 for changes.
+crop_gribs 18 left 1 file uncropped:
+  20230818T18Z_MSC_HRDPS_PRATE_Sfc_RLatLon0.0225_PT001H.grib2
+  * tested crop_gribs-one_file code
+      crop_gribs 18 PRATE_Sfc 1 --debug  # worked
+      crop_gribs 18 PRATE_Sfc 1  # worked
+  * squash-merged PR#195
+(SalishSeaCast)
+
+Squash-merged PR#195 after successful test of crop_gribs-one-file branch.
+Created PR#196 for update-NeahBay-ssh-url branch.
+(SalishSeaNowcast)
+
+
+Sat 19-Aug-2023
+^^^^^^^^^^^^^^^
+
+Heart Island
+
+collect_NeahBay_ssh worked for forecast2 and nowcast
+make_ww3_current_file forecast2 stalled; killed and skipped run
+crop_gribs 12 left 1 file uncropped: 20230819T12Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT031H.grib2
+  crop_gribs 18 APCP_Sfc 31  # restarted automation
+(SalishSeaCast)
+
+Squash-merged PR#196 for update-NeahBay-ssh-url branch
+(SalishSeaNowcast)
+
+
+Sun 20-Aug-2023
+^^^^^^^^^^^^^^^
+
+Heart Island
+
+Discovered that something is wrong with photo backup drive; rsync to it stalls, dismount fails,
+fsck reports bad super block; decided to leave it until I get home for further investigation.
+
+Dinner at Pete & 'Rene's.
+
+
 
 
 TODO:
-* give crop_gribs a mode that can process specific files
-* chnage download_weather to gather only files missed by collect_weather so that it can
+* change download_weather to gather only files missed by collect_weather so that it can
   work with crop_gribs monitoring incoming files
   * check for presence of files before downloading them; skip if present
 
