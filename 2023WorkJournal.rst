@@ -6496,7 +6496,8 @@ Heart Island
 collect_NeahBay_ssh worked for forecast2 and nowcast
 make_ww3_current_file forecast2 stalled; killed and skipped run
 crop_gribs 12 left 1 file uncropped: 20230819T12Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT031H.grib2
-  crop_gribs 18 APCP_Sfc 31  # restarted automation
+  crop_gribs 12 APCP_Sfc 31  # restarted automation
+  kill crop_gribs 12
 (SalishSeaCast)
 
 Squash-merged PR#196 for update-NeahBay-ssh-url branch
@@ -6511,9 +6512,88 @@ Heart Island
 Discovered that something is wrong with photo backup drive; rsync to it stalls, dismount fails,
 fsck reports bad super block; decided to leave it until I get home for further investigation.
 
-Dinner at Pete & 'Rene's.
+Dinner at Pete & Rene's.
 
 
+Week 34
+-------
+
+Mon 21-Aug-2023
+^^^^^^^^^^^^^^^
+
+Heart Island
+
+make_ww3_wind_file forecast2 stalled; killed and skipped run
+(SalishSeaCast)
+
+
+Tue 22-Aug-2023
+^^^^^^^^^^^^^^^
+
+Heart Island
+
+Hiked Nick & Jana's trail to the lake w/ everyone; rolled my left side into a bog stream.
+
+make_ww3_current_file forecast stalled; killed and re-ran it
+(SalishSeaCast)
+
+
+Wed 23-Aug-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 stalled; killed and skipped run
+(SalishSeaCast)
+
+Heart Island to Vancouver
+
+
+Thu 24-Aug-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_wind_file forecast stalled; killed and re-ran it
+(SalishSeaCast)
+
+
+Fri 25-Aug-2023
+^^^^^^^^^^^^^^^
+
+crop_gribs 12 left 1 file uncropped: 20230825T12Z_MSC_HRDPS_RH_AGL-2m_RLatLon0.0225_PT004H.grib2
+  crop_gribs 12 RH_AGL-2m 4  # restarted automation
+  kill crop_gribs 12
+make_ww3_current_file forecast stalled; killed and re-ran it
+(SalishSeaCast)
+
+Minecraft sound not working after big wad of system updates. :-(
+
+
+Sat 26-Aug-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_wind_file forecast2 stalled; killed and skipped run
+(SalishSeaCast)
+
+
+Sun 27-Aug-2023
+^^^^^^^^^^^^^^^
+
+Fixed Minecraft sound issue:
+* first tried https://jackaudio.org/faq/linux_rt_config.html that I found by googling
+  "linux realtime-privilege"
+  * changes:
+      sudo nano /etc/security/limits.d/audio.conf
+        @audio   -  rtprio     95
+        @audio   -  memlock    unlimited
+      sudo usermod -a -G audio doug
+      reboot
+  * did not fix the issue, but I did not undo the changes
+* Googled log message "[ALSOFT] (EE) Failed to connect output port "alsoft:channel_1""
+  and found https://forum.garudalinux.org/t/no-audio-in-minecraft-since-recent-update/30532/6
+  * changes:
+      sudo mkdir /etc/openal
+      sudo nano /etc/openal/alsoft.conf
+        drivers=alsa
+      reboot
+  * success!! :-)
 
 
 TODO:
