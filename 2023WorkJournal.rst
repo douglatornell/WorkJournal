@@ -6595,12 +6595,265 @@ Fixed Minecraft sound issue:
       reboot
   * success!! :-)
 
+Drove to White Rock to celebrate j's 97th birthday.
+
+
+Week 35
+-------
+
+Mon 28-Aug-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 stalled; killed and skipped run
+crop_gribs failed with FileNotFoundError:
+* seen before
+* all expected 00 files are present
+* **but crop_gribs 06 wasn't launched**; launched it manually
+(SalishSeaCast)
+
+Ran:
+  python3 /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+all good!
+
+Squash-merged dependabot PRs re: gitpython re: CVE-2023-40267 remote code execution vulnerability:
+* AtlantisCmd
+* NEMO-Cmd
+* SalishSeaNowcast
+* SalishSeaCmd
+Squash-merged dependabot PRs re: tornado re: GHSA-qppv-j76h-2rpx HTTP request smuggling
+vulnerability:
+* SalishSeaNowcast
+* SalishSeaCast/docs
+* moad_tools
+* MoaceanParcels
+* Reshapr
+* SalishSeaTools
+* MOAD/docs
+Squash-merged dependabot PRs re: pyramid re: CVE-2023-40587 static view path traversal
+vulnerability:
+* salishsea-site
+
+Docs build failures in brown-out on readthedocs due to deprecation of build.image config key in favour of build.os; see https://docs.readthedocs.io/en/stable/config-file/v2.html#build-os:
+* AtlantisCmd - fixed
+* SalishSeaTools - fixed
+
+Updated readthedocs build config, etc. re: build failures in brown-out on readthedocs due to 
+deprecation of build.image config key in favour of build.os;
+see https://docs.readthedocs.io/en/stable/config-file/v2.html#build-os
+branch: update-readthedocs-config
+PR#27 - squash-merged
+(AtlantisCmd)
+
+Updated readthedocs build config re: build failures in brown-out on readthedocs due to 
+deprecation of build.image config key in favour of build.os;
+see https://docs.readthedocs.io/en/stable/config-file/v2.html#build-os
+Fixed html_theme specification in Sphinx config.
+branch: update-readthedocs-config
+PR#84 - squash-merged
+(SalishSeaTools)
+
+Fixed html_theme specification in Sphinx config.
+Fixed broken links for NEMO book; now at https://zenodo.org/record/3248739
+branch: fix-html_theme
+PR#34 - squash-merged
+(SalishSeaCast/docs)
+
+SalishSeaNowcast had pytest and linkcheck failures.
+
+docs builds failed due to NameError for html_theme
+* SalishSeaCast/docs - fixed
+* tools/SalishSeaTools - fixed
+
+moad_tools docs build failed due to ImportError for setup_js_tag_helper
+* https://github.com/readthedocs/sphinx-notfound-page/issues/219
+
+Updated khawal PyCharm to 2023.2.1.
+Updated khawla JetBrains Toolsbox to v2.0
+
+SalishSeaCast/docs linkcheck failed due to broken link for NEMO book;
+gone from NEMO site, but Susan found https://zenodo.org/record/3248739
+
+
+Tue 29-Aug-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB
+
+Group mtg; see whiteboard.
+(MOAD)
+
+More analysis of last night's crop_gribs FileNotFoundError failure leads me to 
+conclude that it was crop_gribs 06 failing to launch, not crop_gribs 00 failing;
+there is a potential race conditions between collect_weather and crop_gribs re:
+the creation of the /results/forcing/atmospheric/continental2.5/GRIB/yyyymmdd/hh/ directory;
+if collect_weather doesn't get it created before crop_gribs starts to observe it, the latter
+fails; created issue #197
+(SalishSeaNowcast)
+
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* started migrating SalishSeaCast NEMO v2019-05 results datasets to
+  ssc-nemo-201905/
+  * datasets/ssc-nemo-201905/ubcSSg3DuGridFields1hV19-05.xml
+  * datasets/ssc-nemo-201905/ubcSSg3DvGridFields1hV19-05.xml
+  * datasets/ssc-nemo-201905/ubcSSg3DwGridFields1hV19-05.xml
+  * datasets/ssc-nemo-201905/ubcSSgSurfaceTracerFields1hV19-05.xml
+(erddap-datasets)
+
+Introduced myself to Karris Hung (the new Emma) and Amber Stefanson (the new Rene).
+
+
+Wed 30-Aug-2023
+^^^^^^^^^^^^^^^
+
+crop_gribs 06 left 2 files uncropped:
+  20230830T06Z_MSC_HRDPS_PRMSL_MSL_RLatLon0.0225_PT013H.grib2
+  20230830T06Z_MSC_HRDPS_PRATE_Sfc_RLatLon0.0225_PT025H.grib2
+  kill crop_gribs 06
+  crop_gribs 06 PRMSL_MSL 13 --debug
+  crop_gribs 06 PRATE_Sfc 25 --debug
+(SalishSeaCast)
+
+Squash-merged dependabot PRs re: jupyter-server re:
+* CVE-2023-40170 criss-site inclusion (XSSI) vulnerability
+* CVE-2023-39968 open redirect vulnerability
+* MoaceanParcels
+* SalishSeaTools
+* SOG-Bloomcast-Ensemble
+  * also cryptography and tornado PRs that were missed
+
+Confirmed that pytest-with-coverage and sphinx-linkcheck failures on Mon were anomalous
+(SalishSeaNowcast)
+
+Fixed AttributeError: module 'numpy' has no attribute 'int' in random_oil_spills module;
+numpy.int was deprecated in NumPy=1.20
+issue #39
+branch: fix-numpy.int-deprecation
+PR #40 - squash-merged
+(moad_tools)
+
+MOAD group party
+
+
+Thu 31-Aug-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_wind_file forecast2 stalled; killed and skipped run
+crop_gribs 18 left 1 files uncropped:
+  20230831T18Z_MSC_HRDPS_DSWRF_Sfc_RLatLon0.0225_PT035H.grib2
+  kill crop_gribs 18
+  crop_gribs 06 DSWRF_Sfc 35 --debug
+(SalishSeaCast)
+
+Used VSCode ``SalishSeaNowcast [SSH:skookum]`` session to run 
+``nowcast.workers.day_month_avgs 2023-07-01`` in ``202111-tarballs`` tmux session on
+skookum against dask cluster on salish: 
+* 3 FutureWarning per day-avg:
+    /SalishSeaCast/Reshapr/reshapr/core/extract.py:929: 
+    FutureWarning: Following pandas, the `loffset` parameter to resample will be deprecated 
+    in a future version of xarray.  Switch to using time offset arithmetic.
+      resampler = extracted_ds.resample(
+  see Reshapr issue #82
+* processes that I would have previously considered to be stalled seem to be progressing very 
+  slowly; re-ran and some missing day-avgs were completed except:
+  * physics 2023-07-19
+  * biology 2023-07-26
+  * killed those processes on salish and re-tried; same stalls
+  * Used VSCode ``month-avg-202111 /results2/SalishSea [SSH: salish]`` session on salish to run
+    in ``/results2/SalishSea/month-avg.202111/``:
+    ``python3 -m day_avg 2023-07-19 physics`` 
+    ``python3 -m day_avg 2023-07-26 biology``
+  * re-ran day_month_avgs to finish month-avgs
+* noticable memory leakage from workers; kille and restarted them:
+  * worker spawner: 5.015g
+  * scheduler: 4.822g
+  * 4 workers: 0.672g
+(hindcast)
+
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* continued migrating SalishSeaCast NEMO v2019-05 results datasets to
+  ssc-nemo-201905/
+  * datasets/ssc-nemo-201905/ubcSSg3DBiologyFields1hV19-05.xml
+  * datasets/ssc-nemo-201905/ubcSSg3DTracerFields1hV19-05.xml
+  * datasets/ssc-nemo-201905/ubcSSg3DAuxiliaryFields1hV19-05.xml
+  (erddap-datasets)
+
+September
+---------
+
+Fri 1-Sep-2023
+^^^^^^^^^^^^^^
+
+Noticed that yesterday's make_ww3_current_file forecast stalled:
+* recovery:
+    kill make_ww3_current_file
+    wait for wwatch3 runs to finish at ~11:30;
+      didn't happen due to make_ww3_wind_file forecast stall
+    make_ww3_wind_file arbutus nowcast 2023-08-31
+    make_ww3_current_file arbutus nowcast 2023-08-31 
+    wait for wwatch3 runs to finish
+    make_ww3_wind_file arbutus nowcast 2023-09-01
+    make_ww3_current_file arbutus nowcast 2023-09-01  # took 3 tries to get completion :-(
+Found and killed spilling NEMO run from 6-Aug.
+(SalishSeaCast)
+
+Email with Henryk re: /ocean/vvalenzuela; first wrong surname, then cross-linked to /ocean/atall;
+sigh.
+
+Hacked crop_gribs on skookum to change observer thread timeout from 1s to 2s to see what affect,
+if any, that has on stalls.
+(SalishSeaNowcast)
+
+
+Sat 2-Sep-2023
+^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 stalled; killed and skipped run
+crop_gribs 18 failed with FileNotFoundError; launched manually.
+make_ww3_current_file forecast stalled; killed and re-ran it
+(SalishSeaCast)
+
+
+Sun 3-Sep-2023
+^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 stalled; killed and re-ran it
+crop_gribs 18 failed with FileNotFoundError; launched manually
+crop_gribs 12 finished ~13 min after collect_weather 12 (was ~2m37s yesterday);
+perhaps and affect of increaing the observer thread timeout?;
+or maybe skookum Sunday file syetem slowness?
+(SalishSeaCast)
+
+
+
+
+
+TODO:
+* watch for release of sphinx-notfound-page v1.0.0 on conda-forge re:
+    sphinx-linkcheck and docs build failures due to ImportError for setup_js_tag_helper
+    * https://github.com/readthedocs/sphinx-notfound-page/issues/219
+    * moad_tools
+    * MoaceanParcels
+
+
 
 TODO:
 * change download_weather to gather only files missed by collect_weather so that it can
   work with crop_gribs monitoring incoming files
   * check for presence of files before downloading them; skip if present
 
+
+TODO:
+* update .readthedocs.yaml to use mambaforge-22.9 in many repos
+
+TODO:
+* handle not yet created /results/forcing/atmospheric/continental2.5/GRIB/yyyymmdd/hh/ directory
+  in crop_gribs due to race condition with collect_weather startup; issue #197
 
 
 TODO:
@@ -6610,6 +6863,23 @@ TODO:
 
 
 * tidy module & functions notebook & module
+
+TODO:
+* modernize packaging:
+  * Reshapr
+  * moad_tools
+  * cookiecutter-MOAD-pypkg
+  * salishsea-site
+  * NEMO_Nowcast
+  * ECget
+  * MoaceanParcels
+  * AtlantisCmd
+  * SOG
+  * SOG-Bloomcast-Ensemble
+  * FVCOM-Cmd
+  * SalishSeaTools
+  * rpn-to-gemlam
+  * Marlin
 
 
 TODO:
