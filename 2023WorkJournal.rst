@@ -6748,7 +6748,7 @@ crop_gribs 18 left 1 files uncropped:
 (SalishSeaCast)
 
 Used VSCode ``SalishSeaNowcast [SSH:skookum]`` session to run 
-``nowcast.workers.day_month_avgs 2023-07-01`` in ``202111-tarballs`` tmux session on
+``nowcast.workers.day_month_avgs 2023-07-01`` in new ``day_month_avgs`` tmux session on
 skookum against dask cluster on salish: 
 * 3 FutureWarning per day-avg:
     /SalishSeaCast/Reshapr/reshapr/core/extract.py:929: 
@@ -6830,6 +6830,174 @@ or maybe skookum Sunday file syetem slowness?
 (SalishSeaCast)
 
 
+Week 36
+-------
+
+Mon 4-Sep-2023
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Labour Day
+
+make_ww3_current_file forecast2 stalled; did nothing so...
+make_ww3_current_file forecast failed to launch; killed above and re-ran it
+(SalishSeaCast)
+
+
+Tue 5-Sep-2023
+^^^^^^^^^^^^^^
+
+Group mtg; see whiteboard.
+On-boarding mtg w/ Jake
+(MOAD)
+
+download_weather 00 1km failed due to missing hour 1 LHTFL file; skipped
+(SalishSeaCast)
+
+
+Wed 6-Sep-2023
+^^^^^^^^^^^^^^
+
+Worked on garage setup re: new Milwaukee workbench.
+
+Rescheduled on-boarding meeting w/ Vicente to Tuesday.
+Sent link and directions to Tall for graham setup.
+Slack conversation with Jake:
+* need a hangout or mtg to resolve ssh config problem
+* .bash_profile from compstaff setup is now exactly what we want
+* .bashrc from compstaff now exists; need to change docs to add the bit that I recommend
+(MOAD)
+
+
+Thu 7-Sep-2023
+^^^^^^^^^^^^^^
+
+Slack conversation w/ Birgit about using NEMO-Cmd for BAS NEMO 4.2 configs.
+
+Squash-merged dependabot PRs re: actions/checkout re: update of default runtime to node20:
+* gha-workflows
+* salishsea-site
+Squash-merged dependabot PRs re: gitpython re: CVE-2023-40590 arbitrary code execution 
+vulnerability re: Python on Windows:
+* NEMO-Cmd
+* AtlantisCmd
+* SalishSeaCmd
+* SalishSeaNowcast
+Squash-merged dependabot PR in gha-workflows re: setup-micromamba update to 1.4.4
+
+Hangout w/ Tall re: setting up to run NEMO on graham.
+
+Confirmed that 28-Aug pytest-with-coverage GHA failure was anomalous; 
+subsequent run was successful.
+(moad_tools)
+
+Re-ran 28-Aug pytest-with-coverage GHA job; success, so another anomaly.
+(Reshapr)
+
+List of Bad Files for datasetID=ubcSSg3DuGridFields1hV19-05:
+  /results2/SalishSea/nowcast-green.201905/19dec08/SalishSea_1h_20081219_20081219_grid_U.nc
+  /results2/SalishSea/nowcast-green.201905/27aug08/SalishSea_1h_20080827_20080827_grid_U.nc
+  /results2/SalishSea/nowcast-green.201905/09feb22/SalishSea_1h_20220209_20220209_grid_U.nc
+Error message:
+  java.lang.OutOfMemoryError: Ran out of memory trying to read HDF5 filtered chunk.
+  Either increase the JVM's heap size (use the -Xmx switch) or reduce the size of the
+  dataset's chunks (use nccopy -c).
+  at ucar.nc2.iosp.hdf5.H5tiledLayoutBB$DataChunk.getByteBuffer(H5tiledLayoutBB.java:255)
+List of Bad Files for datasetID=ubcSSg3DwGridFields1hV19-05
+  /results2/SalishSea/nowcast-green.201905/13jan22/SalishSea_1h_20220113_20220113_grid_W.nc
+  /results2/SalishSea/nowcast-green.201905/17jan22/SalishSea_1h_20220117_20220117_grid_W.nc
+  /results2/SalishSea/nowcast-green.201905/24jan22/SalishSea_1h_20220124_20220124_grid_W.nc
+  /results2/SalishSea/nowcast-green.201905/27jan22/SalishSea_1h_20220127_20220127_grid_W.nc
+  /results2/SalishSea/nowcast-green.201905/02feb22/SalishSea_1h_20220202_20220202_grid_W.nc
+  /results2/SalishSea/nowcast-green.201905/11feb22/SalishSea_1h_20220211_20220211_grid_W.nc
+  /results2/SalishSea/nowcast-green.201905/16feb22/SalishSea_1h_20220216_20220216_grid_W.nc
+  /results2/SalishSea/nowcast-green.201905/19feb22/SalishSea_1h_20220219_20220219_grid_W.nc
+  /results2/SalishSea/nowcast-green.201905/01aug22/SalishSea_1h_20220801_20220801_grid_W.nc
+List of Bad Files for datasetID=ubcSSg3DTracerFields1hV19-05
+  /results2/SalishSea/nowcast-green.201905/10jan19/SalishSea_1h_20190110_20190110_grid_T.nc
+  /results2/SalishSea/nowcast-green.201905/02jan19/SalishSea_1h_20190102_20190102_grid_T.nc
+  /results2/SalishSea/nowcast-green.201905/03jan19/SalishSea_1h_20190103_20190103_grid_T.nc
+  /results2/SalishSea/nowcast-green.201905/01jan19/SalishSea_1h_20190101_20190101_grid_T.nc
+  /results2/SalishSea/nowcast-green.201905/21sep22/SalishSea_1h_20220921_20220921_grid_T.nc
+  /results2/SalishSea/nowcast-green.201905/14oct22/SalishSea_1h_20221014_20221014_grid_T.nc
+  /results2/SalishSea/nowcast-green.201905/21oct22/SalishSea_1h_20221021_20221021_grid_T.nc
+  /results2/SalishSea/nowcast-green.201905/08jan19/SalishSea_1h_20190108_20190108_grid_T.nc
+  /results2/SalishSea/nowcast-green.201905/09jan19/SalishSea_1h_20190109_20190109_grid_T.nc
+(ERDDAP)
+
+make_ww3_current_file forecast2 stalled; did nothing so...
+make_ww3_current_file forecast failed to launch; killed  above and re-ran it
+(SalishSeaCast)
+
+
+Fri 8-Sep-2023
+^^^^^^^^^^^^^^
+
+crop_gribs 12 left 1 files uncropped:
+  20230908T12Z_MSC_HRDPS_LHTFL_Sfc_RLatLon0.0225_PT014H.grib2
+  crop_gribs 12 LHTFL_Sfc 14  # to unblock automation
+  kill crop_gribs 12
+1st occurrence since I increased observer thread timeout to 2s on 1-Sep
+(SalishSeaCast)
+
+An email from "RPN,Service [CMC]" <Service.RPN@ec.gc.ca> revealed that I have an account on
+the GPSCC2 collaboration server that is being migrated to the new GPSCC3 server; an ssh attempt
+  ssh -v dlatornell@inter-c-eccc-lp.collab.science.gc.ca 
+gets me as far as asking for a password (that I don't have).
+
+Used VSCode ``SalishSeaNowcast [SSH:skookum]`` session to run 
+``nowcast.workers.day_month_avgs 2023-07-01`` in ``day_month_avgs`` tmux session on
+skookum against dask cluster on salish: 
+* 3 FutureWarning per day-avg:
+    /SalishSeaCast/Reshapr/reshapr/core/extract.py:929: 
+    FutureWarning: Following pandas, the `loffset` parameter to resample will be deprecated 
+    in a future version of xarray.  Switch to using time offset arithmetic.
+      resampler = extracted_ds.resample(
+  see Reshapr issue #82
+* 1 stalled day-avg; re-ran and same day-avg stalled:
+  * physics 2023-08-21
+    * killed those processes on salish
+  * Used VSCode ``month-avg-202111 /results2/SalishSea [SSH: salish]`` session on salish to run
+    in ``/results2/SalishSea/month-avg.202111/``:
+    ``python3 -m day_avg 2023-08-21 physics`` 
+  * re-ran day_month_avgs to finish month-avgs
+* noticable memory leakage from workers:
+  * worker spawner: 5.026g
+  * scheduler: 4.840g
+  * 4 workers: 1.154g
+(hindcast)
+
+Started work on issue #82 re: loffset deprecation; little progress.
+(Reshapr)
+
+
+Sat 9-Sep-2023
+^^^^^^^^^^^^^^
+
+Did 2023 income tax estimate.
+
+make_ww3_current_file forecast failed to launch; killed and re-ran it; took 4 tries
+crop_gribs 00 left 1 files uncropped:
+  20230910T00Z_MSC_HRDPS_LHTFL_Sfc_RLatLon0.0225_PT047H.grib2
+  crop_gribs 00 LHTFL_Sfc 47 2023-09-10 --debug  # to finish processing
+  kill crop_gribs 00
+2nd occurrence since I increased observer thread timeout to 2s on 1-Sep
+(SalishSeaCast)
+
+
+Sun 10-Sep-2023
+^^^^^^^^^^^^^^^
+
+Block watch meet & greet.
+
+Transit to/from White Rock for dinner with J&B.
+
+
+
+
+
+TODO:
+* fix MOAD docs re: .bash_profile and .bashrc
+* fix MOAD docs re: restart terminal session after miniforge install on graham
 
 
 
@@ -6839,6 +7007,7 @@ TODO:
     * https://github.com/readthedocs/sphinx-notfound-page/issues/219
     * moad_tools
     * MoaceanParcels
+  PR is awaiting review and merge
 
 
 
