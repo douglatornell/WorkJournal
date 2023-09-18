@@ -6781,7 +6781,7 @@ dataset.xml by a script:
   * datasets/ssc-nemo-201905/ubcSSg3DBiologyFields1hV19-05.xml
   * datasets/ssc-nemo-201905/ubcSSg3DTracerFields1hV19-05.xml
   * datasets/ssc-nemo-201905/ubcSSg3DAuxiliaryFields1hV19-05.xml
-  (erddap-datasets)
+(erddap-datasets)
 
 September
 ---------
@@ -6989,26 +6989,203 @@ Sun 10-Sep-2023
 
 Block watch meet & greet.
 
-Transit to/from White Rock for dinner with J&B.
+Transit to/from White Rock for dinner with J & Bonnie.
 
+
+Week 37
+-------
+
+Mon 11-Sep-2023
+^^^^^^^^^^^^^^^
+
+Squash-merged dependabot PR in gha-workflows re: setup-micromamba update to 1.4.4.
+Squash-merged dependabot PR re: actions/checkout re: update of default runtime to node20.
+Squash-merged dependabot PR re: gitpython re: DoS vulnerability.
+(SalishSeaNowcast)
+
+Continued work on issue #82 re: loffset deprecation; no progress; developed demo code and posted 
+question on xarray Q&A discussion.
+(Reshapr)
+
+
+Tue 12-Sep-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB.
+
+Group mtg; wee whiteboard.
+On-boarding meeting w/ Vicente.
+(MOAD)
+
+make_ww3_current_file forecast failed to launch; killed and re-ran it
+(SalishSeaCast)
+
+Decided to try to follow readthedocs recommendation to pin Sphinx version instead of pinning
+sphinx-rtd-theme.
+Started work on updating bash config section re: compstaff created .bash_profile and .bashrc
+files.
+branch: update-bash-config
+PR#32
+(MOAD docs)
+
+
+Wed 13-Sep-2023
+^^^^^^^^^^^^^^^
+
+Rifted on Susan's xarray plot() snippet with water points selected via where()
+to make it more explicit/Pythonic using slice() and isel().
+(MOAD)
+
+Finished updating bash config section re: compstaff created .bash_profile and .bashrc
+files.
+Updated redirected links.
+Had to change to install all deps via pip in order to get consistent collection with
+pinned Sphinx version.
+Re-synced readthedocs-GitHub webhook so that PR pushes build on readthedocs.
+branch: update-bash-config
+PR#32 - squash-merged
+(MOAD docs)
+
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* started migrating SalishSeaCast NEMO v2019-05 month-averaged datasets to
+  ssc-nemo-201905/month-average/
+  * datasets/ssc-nemo-201905/month-average/ubcSSg3DuGridFields1moV19-05.xml
+  * datasets/ssc-nemo-201905/month-average/ubcSSg3DvGridFields1moV19-05.xml
+  * datasets/ssc-nemo-201905/month-average/ubcSSg3DwGridFields1moV19-05.xml
+  * datasets/ssc-nemo-201905/month-average/ubcSSg3DBiologyFields1moV19-05.xml
+  * datasets/ssc-nemo-201905/month-average/ubcSSg3DTracerFields1moV19-05.xml
+(erddap-datasets)
+
+crop_gribs 00 left 1 files uncropped:
+  20230914T00Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT002H.grib2
+  crop_gribs 00 APCP_Sfc 2 2023-09-14 --debug  # to finish processing
+  kill crop_gribs 00
+3rd occurrence since I increased observer thread timeout to 2s on 1-Sep
+(SalishSeaCast)
+
+
+Thu 14-Sep-2023
+^^^^^^^^^^^^^^^
+
+crop_gribs 06 left 1 files uncropped:
+  20230914T06Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT043H.grib2
+  crop_gribs 06 APCP_Sfc 43 2023-09-14  # to restart automation
+  kill crop_gribs 06
+4th occurrence since I increased observer thread timeout to 2s on 1-Sep;
+2nd in ~6h :-(
+(SalishSeaCast)
+
+Updated minecraft 1.20.1 single player creative world copy of Nodecraft world:
+* stopped server (50d of uptime)
+* created and downloaded backup: Lifeful Rainbow Road 
+* started server
+* created new single player world from backup zip
+
+UBC-IOS modeling collaboration mtg:
+Jonathan Izett - WCVI FVCOM model setup
+* motivated by hypoxia in Cliquaot Sound
+* 2019
+* CIOPS-W 1/36 degree initial conditions & boundary
+* 29 rivers
+  * few gauged or sampled
+  * GlobalNEWS2 database for watershed nutrients; annual estimates
+* HRDPS 2.5km or 1km atmospheric forcing
+  * lots of weather stations at fish farms to evaluate HRDPS
+  * HRDPS has orographic filtering that effectively reduces resolution in fjords
+
+Weekly team mtg.
+Discussed refactoring dataset loading in plot functions with Raisha.
+(Atlantis)
+
+
+Fri 15-Sep-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 failed to launch; killed and re-ran it
+grib_to_netcdf failed due to missing 00 file
+* crop_gribs 00 left 1 files uncropped and I didn't notice last night:
+    20230915T00Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT002H.grib2
+    crop_gribs 00 APCP_Sfc 2 --debug
+    kill crop_gribs 00
+    grib_to_netcdf nowcast+
+    upload_forcing arbutus nowcast+
+    upload_forcing graham-dtn nowcast+
+    upload_forcing orcinus-nowcast-agrif nowcast+
+    upload_forcing optimum-hindcast nowcast+
+  5th occurrence since I increased observer thread timeout to 2s on 1-Sep;
+(SalishSeaCast)
+
+Phys Ocgy Seminar:
+* Grace: SOP for drifter obs QA and evaluation; co-op work terms
+* Vicente: dissolved iron and high productivity around Elephant Island in southern ocean; 
+  undergrad thesis
+  * high productivity is anomalous; most southern ocean has low productivity
+
+Helped Vicente through ssh setup on his Windows laptop:
+* Windows doesn't have ssh-copy-id; have to do the old dance of creating remote .ssh/authorized_keys
+  with correct permissions, then pasting pubilc key into it
+* need to use Powershell to start ssh-agent service load authenticate public key
+* need to install Git; lots of config choices
+
+
+Sat 16-Sep-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 failed to launch; killed and re-ran it
+crop_gribs 12 left 1 files uncropped:
+  20230916T12Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT026H.grib2
+  crop_gribs 12 APCP_Sfc 26 # to unblock automation
+  kill crop_gribs 12
+(SalishSeaCast)
+
+Added -O to ncks command in make_ww3_current_file that extracts 1st 24h of currents forecast
+during forecast2 prep; trying to eliminate "what should I do" terminal prompts from ncks that
+occur sometimes in manual launches of make_ww3_current_file.
+* rsynced to arbutus to test in production
+(SalishSeaNowcast)
+
+
+Sun 17-Sep-2023
+^^^^^^^^^^^^^^^
+
+crop_gribs 06 left 1 files uncropped:
+  20230917T06Z_MSC_HRDPS_LHTFL_Sfc_RLatLon0.0225_PT011H.grib2
+  crop_gribs 06 LHTFL_Sfc 11  # to unblock automation
+  kill crop_gribs 06
+  forecast2 runs started at ~08:00
+make_ww3_current_file forecast2 crashed
+* -O I added yesterday to ncks caused crash because it is only applicable when output file
+  exists; that's not true in normal processing :-(
+wwatch3 forecast2 prep race condition management collided with nowcast+ race condition mgmt
+causing upload_forcing launches to not happen
+* recovery started at ~09:30
+    upload_forcing arbutus nowcast+
+    upload_forcing graham-dtn nowcast+
+    upload_forcing orcinus-nowcast-agrif nowcast+
+    upload_forcing optimum-hindcast nowcast+
+crop_gribs 18 left 1 files uncropped:
+  20230917T18Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT006H.grib2
+  crop_gribs 18 APCP_Sfc 6 --debug
+  kill crop_gribs 18
+(SalishSeaCast)
+
+Reverted yesterday's addition of -O to ncks command in make_ww3_current_file that extracts 1st 24h 
+of currents forecast during forecast2 prep; it is only applicable when output file
+exists; that's not true in normal processing :-(
+(SalishSeaNowcast)
+
+
+
+Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present to group.
 
 
 
 
 TODO:
-* fix MOAD docs re: .bash_profile and .bashrc
 * fix MOAD docs re: restart terminal session after miniforge install on graham
-
-
-
-TODO:
-* watch for release of sphinx-notfound-page v1.0.0 on conda-forge re:
-    sphinx-linkcheck and docs build failures due to ImportError for setup_js_tag_helper
-    * https://github.com/readthedocs/sphinx-notfound-page/issues/219
-    * moad_tools
-    * MoaceanParcels
-  PR is awaiting review and merge
-
 
 
 TODO:
@@ -7019,6 +7196,7 @@ TODO:
 
 TODO:
 * update .readthedocs.yaml to use mambaforge-22.9 in many repos
+  * MOAD/docs - done in PR#32
 
 TODO:
 * handle not yet created /results/forcing/atmospheric/continental2.5/GRIB/yyyymmdd/hh/ directory
