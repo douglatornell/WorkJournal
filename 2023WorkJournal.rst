@@ -7050,7 +7050,7 @@ Continued work on separating dataset descriptions into files to be composed into
 dataset.xml by a script:
 * branch: separate-dataset-files
 * PR#1
-* started migrating SalishSeaCast NEMO v2019-05 month-averaged datasets to
+* Migrated SalishSeaCast NEMO v2019-05 month-averaged datasets to
   ssc-nemo-201905/month-average/
   * datasets/ssc-nemo-201905/month-average/ubcSSg3DuGridFields1moV19-05.xml
   * datasets/ssc-nemo-201905/month-average/ubcSSg3DvGridFields1moV19-05.xml
@@ -7175,7 +7175,217 @@ crop_gribs 18 left 1 files uncropped:
 Reverted yesterday's addition of -O to ncks command in make_ww3_current_file that extracts 1st 24h 
 of currents forecast during forecast2 prep; it is only applicable when output file
 exists; that's not true in normal processing :-(
+Started work on changes to crop_gribs to have it retry uncropped files after it has been watching
+for 8 hours.
 (SalishSeaNowcast)
+
+
+Week 38
+-------
+
+Mon 18-Sep-2023
+^^^^^^^^^^^^^^^
+
+Worked on Workday Hybrid Work Agreement.
+
+Tried to help Jose with weird connection failure to salish on ubc-secure; other EAOS hosts
+are fine; learned about ``sudo fail2ban-client status sshd``.
+
+Helped Vicente with Anaconda vs. Miniforge.
+
+Helped Tall with sample files to run 202111 on graham.
+
+Continued work on changes to crop_gribs to have it retry uncropped files after it has been watching
+for 8 hours:
+* deployed 1st draft code to skookum and restarted crop-gribs 00 for testing this evening
+(SalishSeaNowcast)
+
+Tried to enable bundles in Nodecraft world:
+* edit server.properties:
+    ``initial-enabled-packs=vanilla,bundle``
+* restarted server: no effect
+redit suggests need to edit NBT tags for change to take effect after world creation;
+unspported
+
+crop_gribs 00 had 1 file uncropped when it should have finished at ~20:42:
+  20230919T00Z_MSC_HRDPS_DLWRF_Sfc_RLatLon0.0225_PT012H.grib2
+left it alone to see if retry feature I added will work at ~23:15
+(SalishSeaCast)
+
+Still getting messages from ERDDAP complaining about 
+"java.io.IOException: User limit of inotify watches reached"; tried mitigate that by
+doubling ERDDAP docs suggestions:
+  sudo sysctl fs.inotify.max_user_watches=131072
+  sudo sysctl fs.inotify.max_user_instances=2048
+  sudo sysctl -p
+(ERDDAP)
+
+Maybe need to restart ERDDAP???
+
+
+Tue 19-Sep-2023
+^^^^^^^^^^^^^^^
+
+crop_gribs 00 retry worked!!
+crop_gribs 18 had 1 file uncropped:
+  20230919T18Z_MSC_HRDPS_DLWRF_Sfc_RLatLon0.0225_PT035H.grib2
+left it alone for retry feature to handle at ~16:50; it worked!
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Continued work on changes to crop_gribs to have it retry uncropped files after it has been watching
+for 8 hours:
+* refactored code into a function and realized that it had a redundant failure check in it
+* wrote stubs for unit tests for function
+* added crop_gribs to Slack notifications list in nowcast system config
+(SalishSeaNowcast)
+
+Met with Tall to help him through NEMO build process on graham and first run.
+
+Met with Vicente to explain Anaconda vs. Miniforge to him.
+
+Helped Jake deal with csv dataset from Metro Van that has obs with missing date/time stamps.
+
+
+Wed 20-Sep-2023
+^^^^^^^^^^^^^^^
+
+Coffee w/ Karyn.
+
+ECG at LifeLabs.
+
+Helped Jake csv dataset grouping and aggregation.
+
+Continued work on changes to crop_gribs to have it retry uncropped files after it has been watching
+for 8 hours:
+* deployed refactored version of code to skookum for testing in crop_gribs 00 onward
+* finished writing unit tests for function
+(SalishSeaNowcast)
+
+crop_gribs 18 had 1 file uncropped:
+  20230920T18Z_MSC_HRDPS_LHTFL_Sfc_RLatLon0.0225_PT019H.grib2
+left it alone for retry feature to handle at ~16:31
+(SalishSeaCast)
+
+
+Thu 21-Sep-2023
+^^^^^^^^^^^^^^^
+
+crop_gribs 06 had 11 file uncropped distributed across hours 014, and 016-018;
+retry feature sent a critical error at 04:28; grib_to_netcdf subsequently failed
+* recovery started at ~07:45
+    sent email to Sandrine
+    files appeared slowly between 08:35 and ????
+    ran crop_gribs a file as a time as missing files were downloaded
+    at 10:15 email from Sandrine said issue was resolved, but hour 017 files were still missing;
+    she said that the issue was due to a server migration in progress; told her about 017 files
+    decided to skip forecast2 runs
+    collect_weather 12 2.5km --backfill
+    hacked crop_gribs to process backfilled 12 files sequentially
+    crop_gribs 12
+    make_runoff_file failed because collect_river_data didn't run due to collect_weather 06 
+    never finishing
+    recovery started at ~13:15
+      bash /SalishSeaCast/datamart/hydrometric/collect_river_data.sh 2023-09-20
+      make_runoff_file
+      make_v202111_runoff_file
+      upload_forcing arbutus nowcast+
+        nowcast-blue run started at 13:30
+      upload_forcing graham-dtn nowcast+
+      upload_forcing orcinus-nowcast-agrif nowcast+
+      upload_forcing optimum-hindcast nowcast+
+      get_onc_ctd SCVIP
+      get_onc_ctd SEVIP
+    killed collect_weather 06  # hour 017 incomplete; only used for forecast2 run
+killed and re-ran crop_gribs 18 to ensure the correct version is running
+discovered that yesterday's make_ww3* workers both got stuck; recovery:
+  killed stuck workers
+  make_ww3_wind_file forecast 2023-09-20
+  make_ww3_current_file forecast 2023-09-20
+  wait for runs to finish
+  make_ww3_wind_file forecast 2023-09-20
+  make_ww3_current_file forecast 2023-09-20
+(SalishSeaCast)
+
+EOAS welcome back BBQ
+
+Squash-merged dependabot PRs re: update of cryptography due to minor vulnerabilities in its
+statically linked OpenSSL re: GHSA-v8gr-m533-ghj9
+* NEMO-Cmd
+* SalishSeaNowcast
+* MoaceanParcels
+* cookiecutter-analysis-repo
+* SalishSeaCast/docs
+* cookiecutter-MOAD-pypkg
+* SalishSeaCmd
+* NEMO_Nowcast
+* salishsea-site
+Squash-merged dependabot PRs re: gitpython re: CVE-2023-41040 DoS vulnerability
+* SalishSeaCmd
+* NEMO-Cmd
+
+
+Fri 22-Sep-2023
+^^^^^^^^^^^^^^^
+
+Traced today's spate of ERDDAP request failures to dataforseo.com, an Estonian SEO company;
+blocked them by adding IP address 136.243.228.193 to requestBlacklist tag in datasets.xml.
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* Started migrating SalishSeaCast NEMO rolling forecast datasets to
+  ssc-nemo-201905/rolling-forecasts/
+  * datasets/rolling-forecasts/ubcSSf3DuGridFields1h.xml
+  * datasets/rolling-forecasts/ubcSSf3DvGridFields1h.xml
+  * datasets/rolling-forecasts/ubcSSfDepthAvgdCurrents1h.xml
+(ERDDAP)
+
+Phys Ocgy seminar: Rosie Eaves, visiting Ph.D. student from Oxford working with Stephanie
+mesoscale eddy parameterization for climate models
+
+make_ww3_current_file forecast failed to launch; killed and re-ran it
+(SalishSeaCast)
+
+
+Sat 23-Sep-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 failed to launch; killed it and skipped run
+Restarted manager to enable Slack notifications for crop_gribs instances.
+make_ww3_current_file forecast failed to launch; killed and re-ran it
+(SalishSeaCast)
+
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* Contined migrating SalishSeaCast NEMO rolling forecast datasets to
+  ssc-nemo-201905/rolling-forecasts/
+  * datasets/rolling-forecasts/ubcSSfSurfaceTracerFields1h.xml
+(ERDDAP)
+
+Continued work on changes to crop_gribs to have it retry uncropped files after it has been watching
+for 8 hours:
+* added crop_gribs to Slack notifications
+* changed observer thread timeout to 0.5s since 2s didn't seem to be any better than 1s re:
+  stalling with 1 file uncropped
+* committed stalled observer code and tests
+* added code to create directory that observer watches re: issue #197 and being able to launch
+  crop_gribs before collect_weather --backfill for recover from automation problems; pushed code
+  to skookum for production testing
+* merge conflict mess :-(
+(SalishSeaNowcast)
+
+
+Sun 24-Sep-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_wind_file forecast2 failed to launch; killed it and skipped run
+crop_gribs 00 stalled and recovered itself at 8h
+(SalishSeaCast)
 
 
 
