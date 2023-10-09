@@ -7369,14 +7369,13 @@ dataset.xml by a script:
 
 Continued work on changes to crop_gribs to have it retry uncropped files after it has been watching
 for 8 hours:
+* branch: robust-crop-gribs
 * added crop_gribs to Slack notifications
 * changed observer thread timeout to 0.5s since 2s didn't seem to be any better than 1s re:
   stalling with 1 file uncropped
 * committed stalled observer code and tests
-* added code to create directory that observer watches re: issue #197 and being able to launch
-  crop_gribs before collect_weather --backfill for recover from automation problems; pushed code
-  to skookum for production testing
-* merge conflict mess :-(
+* created PR#203
+* merge conflict mess :-(  re: dependabot bump of cryptography versions
 (SalishSeaNowcast)
 
 
@@ -7386,6 +7385,511 @@ Sun 24-Sep-2023
 make_ww3_wind_file forecast2 failed to launch; killed it and skipped run
 crop_gribs 00 stalled and recovered itself at 8h
 (SalishSeaCast)
+
+
+Week 39
+-------
+
+Mon 25-Sep-2023
+^^^^^^^^^^^^^^^
+
+Email from MSC saying that server migration is causing data dissemination issues.
+collect_weather 12 and crop_gribs 12 stalled missing 2 files:
+  20230925T12Z_MSC_HRDPS_TMP_AGL-2m_RLatLon0.0225_PT012H.grib2
+  20230925T12Z_MSC_HRDPS_RH_AGL-2m_RLatLon0.0225_PT018H.grib2
+Sent email to Sandrine about those 2 files.
+Expecting:
+* crop_gribs 12 to finish, reporting those files missing at ~10:30; happened
+* grib_to_netcdf to fail; happened
+* collect_weather 12 to continue watching; happened
+* recovery started at ~10:30:
+    collect_weather 18 2.5km
+    crop_gribs 18
+    wait for collect_weather 12 to finish
+
+    crop_gribs 12 TMP_AGL-2m 12
+    crop_gribs 12 RH_AGL-2m 18
+collect_weather 18 2.5km and collect_weather [00|12] 1km finished successfully
+crop_gribs 18 stalled with 1 file uncropped; expect recovery at ~18:30; success
+Discussed way forward w/ Susan:
+* realized that grib_to_netcdf has successfully created today's forcing, but not forecast forcing
+  for next 36h, however 30h of that was created for forecast2 this morning
+* decided to restart automation with manual launch of workers that would have launched if  
+  collect_weather 12 had finished
+  * there is a risk that if missing 12 files appear runs will get messed up when proper forcing 
+    is uploaded
+* recovery started at ~15:35:
+    collect_river_data USGS SkagitMountVernon 2023-09-24
+    collect_river_data USGS SnohomishMonroe 2023-09-24
+    collect_river_data USGS NisquallyMcKenna 2023-09-24
+    collect_river_data USGS GreenwaterGreenwater 2023-09-24
+    make_turbidity_file
+    collect_NeahBay_ssh 06
+    download_live_ocean
+    wait for NEMO forecast run to fail at ~16:40; stalled at 84.7%
+    killed xios_server.exe and watch_NEMO on arbutus
+    upload_forcing arbutus turbidity
+    upload_forcing orcinus turbidity
+    upload_forcing optimum turbidity
+    upload_forcing graham turbidity
+    make_forcing_links salish nowcast+ --shared-storage
+(SalishSeaCast)
+
+Continued work on changes to crop_gribs to have it retry uncropped files after it has been watching
+for 8 hours:
+* branch: robust-crop-gribs
+* PR#203
+* resolved merge conflict mess re: dependabot bump of cryptography versions
+* added code to create directory that observer watches re: issue #197 and being able to launch
+  crop_gribs before collect_weather --backfill for recover from automation problems; pushed code
+  to skookum for production testing
+* linked to issue#197
+* fixed broken docs link re: NOAA Neah Bay sea surface height files
+(SalishSeaNowcast)
+
+Found nbt2yaml by Mike Bayer on PyPI; installed it on khawla
+  mamba create -n nbt2yaml python=3.11 python-editor PyYAML pip
+  conda activate nbt2yaml
+  python3 -m pip install nbt2yaml
+Made a backup of creative 1.20.1 world; copied its level.dat file to ~/; edited it:
+  nbtedit ~/level.dat
+  # added just above ``- WorldGenSettings:``
+    - enabled_features: !list_string
+     - minecraft:bundle
+     - minecraft:vanilla
+  # move ``bundle`` from ``Datapacks.Disabled`` to ``Datapacks.Enabled``
+  # delete ``Datapacks.Disabled``
+This makes bundles available in creative, but not in survival.
+Found bundle databack in the client .jar and copied it to datapacks/; still no go; the game disables
+the feature and removes the recipe from my edited level.dat file
+
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* Started migrating SalishSeaCast NEMO rolling forecast datasets to
+  ssc-nemo-201905/rolling-forecasts/
+  * datasets/rolling-forecasts/ubcSSfBoundaryBaySSH10m.xml
+  * datasets/rolling-forecasts/ubcSSfCampbellRiverSSH10m.xml
+  * datasets/rolling-forecasts/ubcSSfCherryPointSSH10m.xml
+(ERDDAP)
+
+
+Tue 26-Sep-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB.
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Ilias Bougoudis joined group; machine learning post-doc in Prodigy program;
+co-supervised by Susan, Raymond Ng in CompSci and Matías Salibián-Barrera in Stats.
+
+Reviewed weekly dependabot alerts email for stale and low priority updates:
+* Squash-merged dependabot PRs in cookiecutter-djl-pypkg re: requests and cryptography.
+* Squash-merged dependabot PR in SOG-Bloomcast-Ensemble re: cryptography.
+* TODO:
+  * Update FVCOM-Cmd pytest version to drop py dep - done
+  * Update SOG-Bloomcast pytest version to drop py dep; do requests PR
+  * Update SOG pytest version to drop py dep
+  * Update SOG-forcing pytest version to drop py dep
+  * migrate PyPDF2 to pypdf in SalishSeaNowcast
+  * Update rpn-to-gemlam pytest version to drop py dep; do tornado and cryptography PRs; 
+    then archive repo
+  * douglatornell.ca js pkgs
+  * Update raspi_x10 pytest version to drop py dep; then archive repo
+
+Finished work on changes to crop_gribs to have it retry uncropped files after it has been watching
+for 8 hours:
+* branch: robust-crop-gribs
+* PR#203; squash-merged
+Updated arbutus.cloud deployment docs mostly re: Alliance and use of :kbd: role:
+branch: update-arbutus-docs
+PR#204; squash-merged
+(SalishSeaNowcast)
+
+wwatch3-forecast2 didn't start due to no NEMO forecast currents from yesterday
+Missing HRDPS were not uploaded as of 12:00; killed yesterday's collect_weather 12.
+(SalishSeaCast)
+
+EOAS Colloquium: Climate Justice panel.
+
+
+Wed 27-Sep-2023
+^^^^^^^^^^^^^^^
+
+Did minimal repo maintenance to remove py pkg dependency with its ReDoS vulnerability;
+was reminded of what a hash this project is; Susan says to archive it; done.
+Note that test suite appears to have never been updated when this project was
+forked from NEMO-Cmd. So, it does not run successfully.
+(FVCOM-Cmd)
+
+make_ww3_current_file forecast failed to launch; killed and re-ran it
+(SalishSeaCast)
+
+Installed Vivaldi browser on khawla:
+* experimented with calendar
+  * imported calendars from Google
+  * can't see Susan's Assoc Dean calendar, maybe due to Google sharing feature?
+
+
+Thu 28-Sep-2023
+^^^^^^^^^^^^^^^
+
+Released v23.1 of SalishSeaNowcast.
+(SalishSeaNowcast)
+
+
+Fri 29-Sep-2023
+^^^^^^^^^^^^^^^
+
+Phys Ocgy seminar: Yulia Egorova, Ph.D. research, Global Mesopelagic Mesozoop
+
+Generated new ed25519 key pair for use on arbutus
+
+Helped Vicente add cartpy to his analysis env.
+
+Added cartopy and its dependencies to notebooks.environment.yaml
+(cookiecutter-analysis-repo)
+
+make_ww3_current_file forecast failed to launch; killed and re-ran it
+(SalishSeaCast)
+
+
+Sat 30-Sep-2023
+^^^^^^^^^^^^^^^
+
+Rode to Iona and Sanctuary on Gunnars.
+
+make_ww3_wind_file forecast failed to launch; killed and re-ran it
+(SalishSeaCast)
+
+
+October
+-------
+
+Sun 1-Oct-2023
+^^^^^^^^^^^^^^
+
+make_ww3_current_file and make_ww3_wind_file forecast2 failed to launch; killed and skipped run
+make_ww3_current_file and make_ww3_wind_file forecast failed to launch; killed and re-ran them
+crop_gribs 18 failed with 143 files not processed; missing hours 036 through 048; we don't need
+collect_weather 00 was not launched; backfill mode failed due to missing files;
+  ran download_weather 00, but started crop_gribs late
+launched collect_weather 06 and crop_gribs 06
+(SalishSeaCast)
+
+
+Week 40
+-------
+
+Mon 2-Oct-2023
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Truth & Reconciliation Day lieu day
+
+grib_to_netcdf nowcast+ failed due to 80 files in 00 forecast that were not cropped because I messed
+up late last night
+* recovery started at ~09:30
+    crop_gribs 00 --backfill  # new feature
+    grib_to_netcdf nowcast+
+    upload_forcing arbutus nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing graham-dtn nowcast+
+no messages from wwatch3 workers, so restarted log_aggregator
+(SalishSeaCast)
+
+Added --backfill arg to crop_gribs to make it run without watching for file system events to 
+indicate existence of files to crop; skips already cropped files.
+branch: crop_gribs-backfill
+PR#
+* tested in recovery from last night's collect_weather/crop_gribs 00 mess that stopped today'S
+  grib_to_netcdf nowcast+; success
+(SalishSeaNowcast)
+
+Set up Minecraft 1.20.2 instance in MultiMC and tried to launch/update copy of 1.20.1 creative 
+world; failed due to incompatible version of Malilib mod; not official or community version 
+available yet.
+
+
+Tue 3-Oct-2023
+^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Weekly group mtg; see whiteboard.
+(MOAD)
+
+On-boarding meeting w/ Ilias.
+
+Slack w/ Jake re: open_mfdataset and Reshapr.
+
+Helped Tall with chhosing restart file to run on graham; explained very 5 days + month-end 
+restarts in hindcast.
+
+Squash-merged dependabot PRs re: update of urllib3 due to cookie header handling vulnerability
+in redirects re: CVE-2023-43804
+* Reshapr
+* AtlantisCmd
+* tools/SalishSeaTools
+* moad_tools
+* MOAD/docs
+* SalishSeaNowcast
+* NEMO-Cmd
+* cookiecutter-MOAD-pypkg
+* MoaceanParcels
+* NEMO_Nowcast
+* salishsea-site
+* SalishSeaCast/docs
+* SalishSeaCmd
+* cookiecutter-analysis-repo
+Squash-merged dependabot PRs re: update of pillow due to a heap buffer overflow in its dependency libwebp re: CVE-2023-4863:
+* Reshapr
+* moad_tools
+* tools/SalishSeaTools
+* SalishSeaNowcast
+* MoaceanParcels
+Squash-merged dependabot PRs re: gitpython re: CVE-2023-41040 DoS vulnerability
+* AtlantisCmd
+
+
+Wed 4-Oct-2023
+^^^^^^^^^^^^^^
+
+upload_forcing orcinus forecast2 failed with an OSError;
+* investigation:
+  * orcinus had a chiller failure on 2-Oct; terminal login okay now
+  * no nowcast-agrif runs since 1-Oct
+* recovery:
+    aborted because logins are flakey
+make_ww3_current_file forecast failed to launch; killed and re-ran it
+(SalishSeaCast)
+
+Updated PyCharm on khawla to 2023.2.2
+
+Helped Tall with errors in ocean.output.
+
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* Started migrating SalishSeaCast NEMO rolling forecast datasets to
+  ssc-nemo-201905/rolling-forecasts/
+  * 
+(ERDDAP)
+
+Invited Ilias to UBC-MOAD and SalishSeaCast GitHub orgs.
+
+Worked on backfilling missing 2019 wwatch3 runs for Jose:
+* missing files on graham:
+    /scratch/dlatorne/SalishSeaCast/wwatch3/SoG_ww3_fields_20190501_20190501.nc
+    /scratch/dlatorne/SalishSeaCast/wwatch3/SoG_ww3_fields_20190511_20190511.nc
+    /scratch/dlatorne/SalishSeaCast/wwatch3/SoG_ww3_fields_20190724_20190724.nc
+    /scratch/dlatorne/SalishSeaCast/wwatch3/SoG_ww3_fields_20190906_20190906.nc
+    /scratch/dlatorne/SalishSeaCast/wwatch3/SoG_ww3_fields_20190907_20190907.nc
+    /scratch/dlatorne/SalishSeaCast/wwatch3/SoG_ww3_fields_20190918_20190918.nc
+    /scratch/dlatorne/SalishSeaCast/wwatch3/SoG_ww3_fields_20190930_20190930.nc
+    /scratch/dlatorne/SalishSeaCast/wwatch3/SoG_ww3_fields_20191231_20191231.nc
+* decided to run on arbutus rather than using WWatch3-Cmd on salish or graham
+* rsync-ed restart files from previous days to arbutus:
+    cd /opp/wwatch3/nowcast/
+    for ddmmm in 30apr 10may 23jul 05sep 17sep 29sep 30dec;
+    do
+      rsync -tv ${ddmmm}19/restart001.ww3 \
+        arbutus.cloud:/nemoShare/MEOPAR/SalishSea/wwatch3-nowcast/${ddmmm}19/; 
+    done
+* rsync-ed nowcast-green currents files from run days to arbutus:
+    cd /results2/SalishSea/nowcast-green.v201905
+    rsync -tv 01may19/SalishSea_1h_20190501_20190501_grid_[UV].nc \
+        arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/01may19/; 
+    rsync -tv 11may19/SalishSea_1h_20190511_20190511_grid_[UV].nc \
+        arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/11may19/; 
+    rsync -tv 24jul19/SalishSea_1h_20190724_20190724_grid_[UV].nc \
+        arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/24jul19/; 
+    for dd in 06 07 18 30;
+    do
+      rsync -tv ${dd}sep19/SalishSea_1h_201909${dd}_201909${dd}_grid_[UV].nc \
+          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/${dd}sep19/; 
+    done
+    rsync -tv 31dec19/SalishSea_1h_20191231_20191231_grid_[UV].nc \
+        arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/31dec19/; 
+* changed config ``weather[file template]`` to "ops_{:y%Ym%md%d}.nc" for 2019
+* launched runs:
+    make_ww3_wind_file arbutus nowcast 2019-05-01
+    make_ww3_current_file arbutus nowcast 2019-05-01
+    run_ww3 arbutus nowcast 2019-05-01
+    make_ww3_wind_file arbutus nowcast 2019-05-11
+    make_ww3_current_file arbutus nowcast 2019-05-11
+    run_ww3 arbutus nowcast 2019-05-11
+    download_wwatch3_results arbutus nowcast 2019-05-11
+* uploaded fields files from skookum to graham:
+    cd /opp/wwatch3/nowcast/
+    rsync -tv 01may19/SoG_ww3_fields_20190501_20190501.nc \
+      graham-dtn:/scratch/dlatorne/SalishSeaCast/wwatch3/
+    rsync -tv 11may19/SoG_ww3_fields_20190511_20190511.nc \
+      graham-dtn:/scratch/dlatorne/SalishSeaCast/wwatch3/
+* restored config ``weather[file template]`` to "hrdps_{:y%Ym%md%d}.nc" for 2019 via ``git stash``
+
+
+Thu 5-Oct-2023
+^^^^^^^^^^^^^^
+
+Email to Jen re: annual review form for performance/merit this year.
+
+crop_gribs 12 stalled with 1 file uncropped; expect recovery at ~10:30; succeeded
+Backfill nowcast-agrif runs:
+  upload_forcing orcinus nowcast+ 2023-10-03
+  upload_forcing orcinus nowcast+ 2023-10-04
+  wait for nowcast-agrif run to fail at ~11:45
+  upload_forcing orcinus turbidity 2023-10-03
+  wait for run to finish; took >3h
+  upload_forcing orcinus turbidity 2023-10-04
+  wait for run to finish; took >3h
+(SalishSeaCast)
+
+Sent email to graham support asking if we can avoid purge of /scratch/dlatorne/SalishSeaCast/
+on 15-Oct because Jose is resuming use of those files.
+
+Contined backfilling missing 2019 wwatch3 runs for Jose:
+  wait for today's forecast run to finish at ~14:00
+  git stash pop  # modify config
+  make_ww3_wind_file arbutus nowcast 2019-07-24
+  make_ww3_current_file arbutus nowcast 2019-07-24
+  wait for nowcast run to finish
+  kill forecast watcher
+  kill forecast run
+  rsync -tv 24jul19/SoG_ww3_fields_20190724_20190724.nc \
+    graham-dtn:/scratch/dlatorne/SalishSeaCast/wwatch3/
+  make_ww3_wind_file arbutus nowcast 2019-09-06
+  make_ww3_current_file arbutus nowcast 2019-09-06
+  wait for nowcast run to finish
+  kill forecast watcher
+  kill forecast run
+  rsync -tv 06sep19/SoG_ww3_fields_20190906_20190906.nc \
+    graham-dtn:/scratch/dlatorne/SalishSeaCast/wwatch3/
+  make_ww3_wind_file arbutus nowcast 2019-09-07
+  make_ww3_current_file arbutus nowcast 2019-09-07
+  wait for nowcast run to finish
+  kill forecast watcher
+  kill forecast run
+  rsync -tv 07sep19/SoG_ww3_fields_20190907_20190907.nc \
+    graham-dtn:/scratch/dlatorne/SalishSeaCast/wwatch3/
+  git stash  # restore production config
+
+
+Fri 6-Oct-2023
+^^^^^^^^^^^^^^
+
+Finished backfilling nowcast-agrif runs:
+  wait for nowcast-agrif run to fail at ~09:45
+  upload_forcing orcinus turbidity 2023-10-05
+  wait for run to finish
+  upload_forcing orcinus turbidity 2023-10-06
+(SalishSeaCast)
+
+Watched recording of Wednesday's SharcNet seminar on job wait times and cluster state analysis
+by James Desjardins (Brock): Exploring job wait times on Alliance compute clusters: a holistic view
+* jadesjardins/show_jobs repo on GitHub notebook used for analysis
+* vast majority of accounts are active ~20% of the time
+* vast majority of jobs start within 20 minutes
+  * 1 core 100M jobs almost always run fast regardless of priority; crack-filling
+    useful for interactive jobs?
+* partition-stats
+* clusterstats
+* wait time has almost negligible affect on priority
+
+Contined backfilling missing 2019 wwatch3 runs for Jose:
+  wait for today's forecast run to finish at ~12:00
+  git stash pop  # modify config
+  make_ww3_wind_file arbutus nowcast 2019-09-18
+  make_ww3_current_file arbutus nowcast 2019-09-18
+  wait for nowcast run to finish
+  kill forecast watcher
+  kill forecast run
+  rsync -tv 18sep19/SoG_ww3_fields_20190918_20190918.nc \
+    graham-dtn:/scratch/dlatorne/SalishSeaCast/wwatch3/
+  make_ww3_wind_file arbutus nowcast 2019-09-30
+  make_ww3_current_file arbutus nowcast 2019-09-30
+  wait for nowcast run to finish
+  kill forecast watcher
+  kill forecast run
+  rsync -tv 30sep19/SoG_ww3_fields_20190930_20190930.nc \
+    graham-dtn:/scratch/dlatorne/SalishSeaCast/wwatch3/
+  make_ww3_wind_file arbutus nowcast 2019-12-31
+  make_ww3_current_file arbutus nowcast 2019-12-31
+  wait for nowcast run to finish
+  kill forecast watcher
+  kill forecast run
+  rsync -tv 31dec19/SoG_ww3_fields_20191231_20191231.nc \
+    graham-dtn:/scratch/dlatorne/SalishSeaCast/wwatch3/
+Checked days after missing runs and found cold starts for:
+  02may19
+  12may19
+  25jul19
+  08sep19
+  19sep19
+  01oct19
+  * Checked all runs and found more cold start dates; recorded findings in #salishseacast channel
+    on Slack
+  * rsync-ed nowcast-green currents files from cold start run days to arbutus:
+      cd /results2/SalishSea/nowcast-green.v201905
+      rsync -tv 02may19/SalishSea_1h_20190502_20190502_grid_[UV].nc \
+          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/02may19/; 
+      rsync -tv 12may19/SalishSea_1h_20190512_20190512_grid_[UV].nc \
+          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/12may19/; 
+      rsync -tv 25jul19/SalishSea_1h_20190725_20190725_grid_[UV].nc \
+          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/25jul19/; 
+      rsync -tv 08sep19/SalishSea_1h_20190908_20190908_grid_[UV].nc \
+          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/08sep19/; 
+      rsync -tv 19sep19/SalishSea_1h_20190919_20190919_grid_[UV].nc \
+          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/19sep19/; 
+      rsync -tv 01oct19/SalishSea_1h_20191001_20191001_grid_[UV].nc \
+          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/01oct19/; 
+  * backfill 2019 cold start runs:
+      make_ww3_wind_file arbutus nowcast 2019-05-02
+      make_ww3_current_file arbutus nowcast 2019-05-02
+      wait for nowcast run to finish
+      kill forecast watcher
+      kill forecast run
+      rsync -tv 02may19/SoG_ww3_fields_20190502_20190502.nc \
+        graham-dtn:/scratch/dlatorne/SalishSeaCast/wwatch3/
+      make_ww3_wind_file arbutus nowcast 2019-05-12
+      make_ww3_current_file arbutus nowcast 2019-05-12
+      wait for nowcast run to finish
+      kill forecast watcher
+      kill forecast run
+      rsync -tv 12may19/SoG_ww3_fields_20190512_20190512.nc \
+        graham-dtn:/scratch/dlatorne/SalishSeaCast/wwatch3/
+      git stash  # restore production config
+
+JRA arrived for the weekend.
+
+
+Sat 7-Oct-2023
+^^^^^^^^^^^^^^
+
+wwatch3 forecast2 run failed because I forgot to restore the production config
+after yesterday's backfilling work; killed watcher and skipped run
+make_ww3_wind_file forecast stalled; killed and re-ran it
+(SalishSeaCast)
+
+
+Sun 8-Oct-2023
+^^^^^^^^^^^^^^
+
+make_ww3_wind_file forecast2 stalled; killed it and skipped run
+(SalishSeaCast)
+
+
+
+change graham $SCRATCH & $PROJECT permission to use paths instead of dot
+add sq alias to graham docs
+drop StdEnv/2016.4 from graham docs
+
+
+
 
 
 
@@ -7405,12 +7909,9 @@ TODO:
 
 
 TODO:
-* update .readthedocs.yaml to use mambaforge-22.9 in many repos
+* update .readthedocs.yaml to use ubuntu-22.04 and mambaforge-22.9 in many repos
   * MOAD/docs - done in PR#32
-
-TODO:
-* handle not yet created /results/forcing/atmospheric/continental2.5/GRIB/yyyymmdd/hh/ directory
-  in crop_gribs due to race condition with collect_weather startup; issue #197
+  * FVCOM-Cmd - done in PR#10
 
 
 TODO:
