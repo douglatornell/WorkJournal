@@ -7883,10 +7883,177 @@ make_ww3_wind_file forecast2 stalled; killed it and skipped run
 (SalishSeaCast)
 
 
+Week 41
+-------
 
-change graham $SCRATCH & $PROJECT permission to use paths instead of dot
-add sq alias to graham docs
-drop StdEnv/2016.4 from graham docs
+Mon 9-Oct-2023
+^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Thankgiving
+
+make_ww3_current_file forecast failed to launch; killed and re-ran it
+(SalishSeaCast)
+
+Drove to White Rock to take JRA home and have dinner at Amica.
+
+
+Tue 10-Oct-2023
+^^^^^^^^^^^^^^^
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Helped Jake prepare to use Reshapr for extractions from Susan's 202111 outfall runs.
+
+Helped Ilias get logged in to char console.
+
+Updated pkgs & versions in dev env.
+Started work on extraction config YAML file docs.
+(Reshapr)
+
+crop_gribs 12 stalled with 1 file to process; resolved at ~10:30
+make_ww3_wind_file and make_ww3_current_file forecast failed to launch; killed and re-ran them
+Contined backfilling 2019 wwatch3 cold start runs for Jose:
+  wait for today's forecast run to finish at ~15:15
+  git stash pop  # modify config
+  make_ww3_wind_file arbutus nowcast 2019-07-25
+  make_ww3_current_file arbutus nowcast 2019-07-25
+  wait for nowcast run to finish
+  kill forecast watcher
+  kill forecast run
+  rsync -tv 25jul19/SoG_ww3_fields_20190725_20190725.nc \
+    graham-dtn:/scratch/dlatorne/SalishSeaCast/wwatch3/
+  make_ww3_wind_file arbutus nowcast 2019-09-08
+  make_ww3_current_file arbutus nowcast 2019-09-08
+  wait for nowcast run to finish
+  kill forecast watcher
+  kill forecast run
+  rsync -tv 08sep19/SoG_ww3_fields_20190908_20190908.nc \
+    graham-dtn:/scratch/dlatorne/SalishSeaCast/wwatch3/
+(SalishSeaCast)
+
+Squash-merged dependabot PRs to update gitpython re: CVE-2023-41040 re: DoS vulnerability:
+* SalishSeaCmd
+* NEMO-Cmd
+* AtlantisCmd
+* SalishSeaNowcast
+
+
+Wed 11-Oct-2023
+^^^^^^^^^^^^^^^
+
+crop_gribs 12 stalled with 1 file to process; resolved at ~10:30
+make_ww3_current_file forecast failed to launch; killed and re-ran it
+Finished backfilling 2019 wwatch3 cold start runs for Jose:
+  wait for today's forecast run to finish at ~14:15
+  git stash pop  # modify config
+  make_ww3_wind_file arbutus nowcast 2019-09-19
+  make_ww3_current_file arbutus nowcast 2019-09-19
+  wait for nowcast run to finish
+  kill forecast watcher
+  kill forecast run
+  rsync -tv 19sep19/SoG_ww3_fields_20190919_20190919.nc \
+    graham-dtn:/scratch/dlatorne/SalishSeaCast/wwatch3/
+  make_ww3_wind_file arbutus nowcast 2019-10-01
+  make_ww3_current_file arbutus nowcast 2019-10-01
+  wait for nowcast run to finish
+  kill forecast watcher
+  kill forecast run
+  rsync -tv 01oct19/SoG_ww3_fields_20191001_20191001.nc \
+    graham-dtn:/scratch/dlatorne/SalishSeaCast/wwatch3/
+  git restore config/nowcast.yaml
+(SalishSeaCast)
+
+xarray office hours:
+* xarray tutorial site: https://tutorial.xarray.dev/intro.html
+* Dataset.pipe() applies function to 
+* apply_ufunc() is for use with numpy functions, not functions that use xarray data structures
+* asked about dask threads vs. clusters; my experience is not unique
+  * big or complex workflows generally require a cluster; clusters can blow up
+  * cubed; early stage project that might 
+* kerchunk; compromise between zarr and native netCDF
+  * one big metadata file
+  * takes time to generate; what does that imply for adding daily runs
+* datatree will handle hdf5 groups in files; xarray.datatree()
+* in dev fancier HTML repr for notebooks: https://github.com/pydata/xarray/issues/8171#issuecomment-1721324406
+
+Fixed xarray.Dataset.resample() loffset parameter deprecation bug
+issue #82
+PR #92
+branch: loffset-deprecation
+Created issue #93 re: ``reshapr info`` fail for user-provided model profile or cluster description.
+(Reshapr)
+
+Discussed Reshapr model profiles for wastewater runs w/ Susan.
+Created example model profile and extraction config files for Jake in analysis-doug/wastewater/.
+
+
+Thu 12-Oct-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 failed to launch; killed and skipped run
+LiveOcean had a bad day; download completed at 11:07
+(SalishSeaCast)
+
+UBC-IOS modeling mtg; Susan talked about historic low Fraser discharge in 9-23 Jul 2023.
+
+Team mtg.
+(Atlantis)
+
+
+Fri 13-Oct-2023
+^^^^^^^^^^^^^^^
+
+LiveOcean had another bad day; download completed at 11:08
+(SalishSeaCast)
+
+Phys Ocgy seminar: Jose's microfibres work.
+
+1.20.2 versions of Malilib, MiniHUD & Tweakeroo have been released; successfully tested in 
+single player creative copy of Nodecraft world.
+
+Cloned my fork of xarray on to khawla.
+
+
+Sat 14-Oct-2023
+^^^^^^^^^^^^^^^
+
+upload_forcing graham turbidity failed; re-ran successfully
+(SalishSeaCast)
+
+Updated Nodecraft server to 1.20.2:
+* stopped server
+* created backup: Talking Falcon's Punching Fist
+* used Once Click Installer to change versions of game and fabric:
+  * game: 1.20.2
+  * fabric: 1.20.2-0.14.23
+  * archive install
+* copied files from _old_files to /:
+  * banned-ips.json
+  * banned-players.json
+  * ops.json
+  * server.properties
+  * whitelist.json
+* copied world folder to /:
+  * 1-20-1-25jul23
+* started server
+
+
+Sun 15-Oct-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast failed to launch; killed and re-ran it
+(SalishSeaCast)
+
+
+
+
+
+TODO:
+* fix MOAD docs re: restart terminal session after miniforge install on graham
+* change graham $SCRATCH & $PROJECT permission to use paths instead of dot
+* add sq alias to graham docs
+* drop StdEnv/2016.4 from graham docs
 
 
 
@@ -7898,8 +8065,6 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
 
 
 
-TODO:
-* fix MOAD docs re: restart terminal session after miniforge install on graham
 
 
 TODO:
