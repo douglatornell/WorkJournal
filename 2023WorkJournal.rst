@@ -5998,7 +5998,7 @@ skookum against dask cluster on salish:
 * successfully created all day-avg and month-avg files
   * failure:
     * 2jul chemistry
-      * Used VSCode ``month-avg-202111 /results2/SalishSea [SSH: salish]`` session to run
+      * Used VSCode ``month-avg.202111 /results2/SalishSea [SSH: salish]`` session to run
         ``python3 -m day_avg 2023-06-02 chemistry`` in ``/results2/SalishSea/month-avg.202111/``
         on salish
 * very small amount of memory leakage:
@@ -6761,7 +6761,7 @@ skookum against dask cluster on salish:
   * physics 2023-07-19
   * biology 2023-07-26
   * killed those processes on salish and re-tried; same stalls
-  * Used VSCode ``month-avg-202111 /results2/SalishSea [SSH: salish]`` session on salish to run
+  * Used VSCode ``month-avg.202111 /results2/SalishSea [SSH: salish]`` session on salish to run
     in ``/results2/SalishSea/month-avg.202111/``:
     ``python3 -m day_avg 2023-07-19 physics`` 
     ``python3 -m day_avg 2023-07-26 biology``
@@ -6956,7 +6956,7 @@ skookum against dask cluster on salish:
 * 1 stalled day-avg; re-ran and same day-avg stalled:
   * physics 2023-08-21
     * killed those processes on salish
-  * Used VSCode ``month-avg-202111 /results2/SalishSea [SSH: salish]`` session on salish to run
+  * Used VSCode ``month-avg.202111 /results2/SalishSea [SSH: salish]`` session on salish to run
     in ``/results2/SalishSea/month-avg.202111/``:
     ``python3 -m day_avg 2023-08-21 physics`` 
   * re-ran day_month_avgs to finish month-avgs
@@ -7977,11 +7977,12 @@ xarray office hours:
 * datatree will handle hdf5 groups in files; xarray.datatree()
 * in dev fancier HTML repr for notebooks: https://github.com/pydata/xarray/issues/8171#issuecomment-1721324406
 
-Fixed xarray.Dataset.resample() loffset parameter deprecation bug
-issue #82
-PR #92
-branch: loffset-deprecation
-Created issue #93 re: ``reshapr info`` fail for user-provided model profile or cluster description.
+Started fixing xarray.Dataset.resample() loffset parameter deprecation bug
+* issue #82
+* PR #92
+* branch: loffset-deprecation
+* Created issue #93 re: ``reshapr info`` fail for user-provided model profile or cluster 
+  description.
 (Reshapr)
 
 Discussed Reshapr model profiles for wastewater runs w/ Susan.
@@ -8046,14 +8047,247 @@ make_ww3_current_file forecast failed to launch; killed and re-ran it
 (SalishSeaCast)
 
 
+Week 42
+-------
+
+Mon 16-Oct-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 failed to launch; killed and skipped run
+(SalishSeaCast)
+
+Started update to Python 3.12
+* branch: py312
+* PR#68
+* GHA pytest-with-coverage workflow was successful; much closer to 3.12 release this year
+  than was the case for 3.11 last year :-)
+* thought about Python version support:
+  * we no longer depend on Python module version on graham because we use conda env there
+  * present oldest support is 3.10, environment-hpc uses 3.11; could drop 3.10 since group is all
+    new to graham in 2023, so they are using 3.11
+(NEMO-Cmd)
+
+graham /scratch purge removed ~200 wwatch3 files and ~300 NEMO files
+* ran rsync on salish to restore purged files:
+    cd /opp/wwatch3/nowcast/
+    rsync -tv *19/SoG_ww3_fields_*.nc graham-dtn:/scratch/dlatorne/SalishSeaCast/wwatch3/
+
+    cd /results2/SalishSea/nowcast-green.202111/
+    rsync -tv *19/SalishSea_1h_2019*_grid_[TUVW].nc graham-dtn:/scratch/dlatorne/SalishSeaCast/NEMO
+
+Squash-merged dependabot PRs to update mamba-org/setup-micromamba to 1.5.0:
+* SalishSeaNowcast
+* gha-workflows
+
+Started update to Python 3.12
+* branch: py312
+* PR#49
+* GHA pytest-with-coverage workflow was successful; much closer to 3.12 release this year
+  than was the case for 3.11 last year :-)
+* thought about Python version support:
+  * we no longer depend on Python module version on graham because we use conda env there
+  * present oldest support is 3.10, environment-hpc uses 3.11; could drop 3.10 since group is all
+    new to graham in 2023, so they are using 3.11
+* added workflow_dispatch trigger to GHA pytest-with-coverage workflow
+(SalishSeaCmd)
+
+Started update to Python 3.12
+* branch: py312
+* PR#38
+* GHA pytest-with-coverage workflow was successful; much closer to 3.12 release this year
+  than was the case for 3.11 last year :-)
+* added workflow_dispatch trigger to GHA pytest-with-coverage workflow
+(NEMO_Nowcast)
+
+Started update to Python 3.12
+* branch: py312
+* PR#209
+* added workflow_dispatch trigger to GHA pytest-with-coverage workflow
+* **GHA pytest-with-coverage workflow with 3.12 installed 3.11**
+(SalishSeaNowcast)
+
+Started update to Python 3.12
+* branch: py312
+* PR#23
+* GHA pytest-with-coverage workflow was successful; much closer to 3.12 release this year
+  than was the case for 3.11 last year :-)
+* added workflow_dispatch trigger to GHA pytest-with-coverage workflow
+(AtlantisCmd)
+
+Started update to Python 3.12
+* branch: py312
+* PR#43
+* also added 3.11 to test matrix
+* GHA pytest-with-coverage workflow was successful; much closer to 3.12 release this year
+  than was the case for 3.11 last year :-)
+* added workflow_dispatch trigger to GHA pytest-with-coverage workflow
+(moad_tools)
+
+Started update to Python 3.12
+* branch: py312
+* PR#43
+* also added 3.11 to test matrix
+* GHA pytest-with-coverage workflow was successful; much closer to 3.12 release this year
+  than was the case for 3.11 last year :-)
+* added workflow_dispatch trigger to GHA pytest-with-coverage workflow
+(salishsea-site)
+
+Started update to Python 3.12
+* branch: py312
+* PR#37
+* GHA sphinx-linkcheck workflow failed:
+    conda-forge/linux-64                                        Using cache
+      conda-forge/noarch                                          Using cache
+      error    libmamba Could not solve for environment specs
+          The following packages are incompatible
+          ├─ python 3.10**  is requested and can be installed;
+          └─ python 3.12**  is not installable because there are no viable options
+            ├─ python 3.12.0 conflicts with any installable versions previously reported;
+            └─ python 3.12.0rc3 would require
+                └─ _python_rc, which does not exist (perhaps a missing channel).
+      critical libmamba Could not solve for environment specs
+* added workflow_dispatch trigger to GHA pytest-with-coverage workflow
+(SalishSeaCast docs)
+
+Finished fixing xarray.Dataset.resample() loffset parameter deprecation bug
+* issue #82
+* PR #92; squash-merged
+* branch: loffset-deprecation
+* Used VSCode ``month-avg.202111 /results2/SalishSea [SSH: salish]`` session on salish
+  in reshapr env to run in ``/results2/SalishSea/month-avg.202111/``:
+    ``python3 -m day_avg 2023-09-01`` 
+  got FutureWarning exceptions as in the past
+* Switched /SalishSeaCast/Reshapr clone to loffset-deprecation branch and ran:
+    ``python3 -m day_avg 2023-09-02`` 
+  success with no FutureWarning exceptions :-)
+Started update to Python 3.12
+* branch: py312
+* PR#94
+* GHA pytest-with-coverage workflow was successful; much closer to 3.12 release this year
+  than was the case for 3.11 last year :-)
+* added workflow_dispatch trigger to GHA pytest-with-coverage workflow
+(Reshapr)
+
+FInalized and pushed example model profile and extraction config files for Jake in 
+analysis-doug/wastewater/.
+
+Updated to PyCharm 2023.2.3 on khawla, mostly to get f-strings PEP-701 support in Python 3.12.
+
+
+Tue 17-Oct-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_[wind|current]_file forecast2 failed to launch; killed and re-ran them
+slow LiveOcean
+(SalishSeaCast)
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Helped Ilias with ssh keys on Windows.
+
+Helped Becca with xarray access to ERDDAP and cleaning an accidentally pushed large
+file on perigee.
+
+
+Wed 18-Oct-2023
+^^^^^^^^^^^^^^^
+
+Squash-merged dependabot PRs to update urllib3 re: CVE-2023-45803 303 redirect vulnerability:
+* MOAD/docs
+* tools/SalishSeaTools
+* AtlantisCmd
+* SalishSeaNowcast
+* Reshapr
+* moad_tools
+* salishsea-site
+* SalishSeaCast/docs
+* NEMO-Cmd
+* MoaceanParcels
+* cookiecutter-analysis-repo
+* SalishSeaCmd
+* NEMO_Nowcast
+* cookiecutter-MOAD-pypkg
+* cookiecutter-djl-pypkg
+* SOG-Bloomcast-Ensemble
+
+Added linux.die.net/man/1/scp to linkcheck ignore list to prevent 
+"403 Client Error: Forbidden" errors when checked from the GitHub Actions 
+sphinx-linkcheck workflow. Guessing that the server owners don't like their 
+content being accessed by automation.
+(MOAD docs)
+
+Improved graham docs re: Miniforge setup.
+Added sq alias to format squeue output.
+Fixed broken and redirected links.
+(SalishSeaCast docs)
+
+
+Thu 19-Oct-2023
+^^^^^^^^^^^^^^^
+
+Started writing example section re: extractions for Iona wastewater analysis and other research
+run processing.
+(Reshapr)
+
+Reviewed and tweaked Ilias's updates to ssh access docs for Windows.
+(MOAD docs)
+
+
+Fri 20-Oct-2023
+^^^^^^^^^^^^^^^
+
+Started work on issue #93 re: reshapr info handling user-provided model profile or cluster
+description.
+branch: 93-info-user-profile-cluster
+PR#97: squash-merged
+* updated dev env pkg versions
+* added type hints to function docstrings in info module
+* added handling for user-provided model profiles and cluster descriptions to `reshapr info`
+Discovered that my resolution of #93 was flawed; checking for file existence can only work for
+cluster or model profile not both :-(
+Updated wastewater example docs to show use of user model profile in reshapr info.
+(Reshapr)
+
+
+Sat 21-Oct-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 failed to launch; blocked forecast run; killed it and skipped run
+make_ww3_wind_file forecast stalled; killed and re-ran it
+make_ww3_current_file forecast failed to launch; killed and re-ran it
+(SalishSeaCast)
+
+
+Sun 22-Oct-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 stalled; killed it and skipped run
+crop_gribs 12 stalled with 1 file left to process; completed at 10:32
+(SalishSeaCast)
 
 
 
-TODO:
-* fix MOAD docs re: restart terminal session after miniforge install on graham
-* change graham $SCRATCH & $PROJECT permission to use paths instead of dot
-* add sq alias to graham docs
-* drop StdEnv/2016.4 from graham docs
+
+
+do we want to change the zoop variable names in ERDDAP for 202111?
+might be possible to change them in hindcast and production too?
+
+
+* Python 3.12:
+  * successful workflow test with 3.12:
+    * NEMO-Cmd
+    * SalishSeaCmd
+    * AtlantisCmd
+    * NEMO_Nowcast
+    * moad_tools
+    * salishsea-site
+    * Reshapr
+  * failed workflow test with 3.12:
+    * SalishSeaNowcast
+    * SalishSeaCast/docs
+    * MOAD/docs - expect same problem as SalishSeaCast/docs
+    * MoaceanParcels - failing with 3.10; no point in trying 3.12 yet
 
 
 
