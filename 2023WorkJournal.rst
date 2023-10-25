@@ -8267,6 +8267,39 @@ crop_gribs 12 stalled with 1 file left to process; completed at 10:32
 (SalishSeaCast)
 
 
+Week 43
+-------
+
+Mon 23-Oct-2023
+^^^^^^^^^^^^^^^
+
+Explored Raisha'a %e/%d format issue; remembered how little I like programming in C.
+(Atlantis)
+
+Drop handling of user-provided cluster config in reshapr info;
+we can only use file existence for cluster or model profile, and the latter is the more
+important use case
+branch: drop-user-cluster-info
+PR#98; squash-merged
+
+Finished writing example section re: extractions for Iona wastewater analysis and other research
+run processing.
+branch: wastewater-example
+PR#96 - squash-merged
+(Reshapr)
+
+Helped Ilias with analysis env build:
+* char stalled
+* change to nodefaults channel (fixed on GitHub)
+* pin python=3.11
+
+Benchmarked analysis env builds on chum:
+* 1st try with lots of dowloads: 19m54.107s
+* mamba: 7m14.065s  # benefits from download caching
+* conda to see effect of cached downloads: 8m36.036s
+* conda with python=3 instead of python=3.11 almost blew memory into swap-land !! :-(
+
+
 
 
 
