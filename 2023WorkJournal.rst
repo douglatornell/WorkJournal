@@ -8300,6 +8300,49 @@ Benchmarked analysis env builds on chum:
 * conda with python=3 instead of python=3.11 almost blew memory into swap-land !! :-(
 
 
+Tue 24-Oct-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB
+
+Took kudu to ESB as my leave-there laptop.
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Helped Ilias sort out nested dirs in his analysis-ilias and conda-envs setup.
+Saw strange disappearing directories issue on /ocean. Told him to switch to /data/.
+
+Set up 1password ssh agent on kudu.
+
+make_ww3_current_file forecast2 stalled; killed it and skipped run
+make_ww3_wind_file forecast stalled; killed it and re-ran
+(SalishSeaCast)
+
+Helped Jake with corrdinates mismatch between Reshapr-generated day-avg files
+in 202111 and ncra-generated files in Susan's runs.
+
+Prepared to modernize packaging:
+* used SalishSeaNowcast PR#144 as guidance
+  * metadata to pyproject.toml
+  * chg to hatchling
+  * chg to importlib.metadata.version()
+  * move __version__ to __about__
+  * clear caches ??? 
+  * update requirements.txt
+* add version release notes; see SalishSeaNowcast PR#145
+* update .readthedocs.yaml to use ubuntu-22.04 and mambaforge-22.9; 
+  see MOAD/docs PR#32
+* can I satisfactorily pin Sphinx ?? as rtd recommends
+
+* Pinned sphinx-rtd-theme=1.1.1 to avoid incompatible versions of Sphinx and docutils
+(Reshapr)
+
+Got COVID & flu vaccinations.
+
+Reported disappearing directories that I saw with Ilias on /ocean to Hentryk
+on EOAS Slack. He replied that /ocean storage array is optimal, might be an NFS issue.
+
 
 
 
