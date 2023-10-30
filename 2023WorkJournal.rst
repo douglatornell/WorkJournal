@@ -8322,6 +8322,136 @@ make_ww3_wind_file forecast stalled; killed it and re-ran
 Helped Jake with corrdinates mismatch between Reshapr-generated day-avg files
 in 202111 and ncra-generated files in Susan's runs.
 
+Prepared to modernize packaging.
+(Reshapr)
+
+Got COVID & flu vaccinations.
+
+Reported disappearing directories that I saw with Ilias on /ocean to Hentryk
+on EOAS Slack. He replied that /ocean storage array is optimal, might be an NFS issue.
+
+
+Wed 25-Oct-2023
+^^^^^^^^^^^^^^^
+
+Feeling the effects of yesterday's dual vaccinations.
+
+Helped Jake get started with Reshpr for Iona long run results.
+Discovered that Susan didn't include standard_name attr for her outfall variable in her NEMO
+output config; Reshapr doesn't like that.
+* this should probably be resolved by using variable name as standard_name when neither
+  standard_name nor short_name exist; that is sort of implied by 
+  https://cfconventions.org/Data/cf-conventions/cf-conventions-1.10/cf-conventions.html#long-name
+
+Continued conversation on EOAS Slack w/ Henryk re: char/ocean weirdness. He thinks it was an NFS issue.
+
+Explored sphinx version limiting to 5.3.0; it's due to sphinx-rtd-theme version; won't move until
+v2.0.0 of the latter is released.
+Added fallback to use variable name as standard_name when source dataset variable lacks both 
+standard_name and short_name attributes:
+branch: std_name_fallback
+PR#99 - squash-merged
+* motivated by Susan not including standard_name for outfall tracer variable; this won't likely be  
+  the first time someone does that...
+(Reshapr)
+
+
+Thu 26-Oct-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 stalled; killed it and skipped run
+make_ww3_wind_file forecast stalled; killed it and re-ran
+(SalishSeaCast)
+
+Started work to update SalishSeaCmd re: sockeye migration to SLURM:
+* load env on sockeye with:
+    module load Software_Collection/ARC_2023
+* new git modules: 2.31.8 and 2.41.0; they required gcc/5.5.0 9.4.0
+    module load gcc/5.5.0
+    module load git/2.41.0
+* pull updates into NEMO-Cmd and SalishSeaCmd
+* used mamba to create new salishsea-cmd env
+    cd SalishSeaCmd
+    mamba env create -f envs/environment-hpc.yaml
+    conda activate salishsea-cmd
+    python3 -m pip install --user -e ../NEMO-Cmd
+    python3 -m pip install --user -e .
+* updated NEMO repos:
+    grid
+    NEMO-3.6-code  # changed default branch from master to main
+    rivers-climatology
+    SS-run-sets  # changed default branch from master to main
+    tides
+    tracers
+    XIOS-2  # changed default branch from master to main
+    XIOS-ARCH
+* confirmed module loads for XIOS-2 build:
+    module load gcc/5.5.0
+    module load openmpi/4.1.1-cuda11-3
+    module load netcdf-fortran/4.5.3-hdf4-support
+    module load netcdf-cxx/4.2-hdf4-support
+    module load perl/5.34.0
+    module load perl-uri/1.72
+* cleaned and built XIOS-2
+    ./tools/FCM/bin/fcm build --clean
+    ./make_xios --arch GCC_SOCKEYE
+  * success!
+* cleaned and built NEMO SalishSeaCast config and REBUILD_NEMO
+    ./makenemo -n SalishSeaCast clean
+    XIOS_HOME=$PROJECT/$USER/MEOPAR/XIOS-2 ./makenemo -n SalishSeaCast -m GCC_SOCKEYE
+    success!
+    cd ../TOOLS
+    XIOS_HOME=$PROJECT/$USER/MEOPAR/XIOS-2/ ./maketools -n REBUILD_NEMO -m GCC_SOCKEYE
+    success
+* changed run module to use sbatch directives on sockeye:
+  * branch: sockeye-slurm
+  * PR#51
+* pulled sockeye-slurm branch on to sockeye
+(SalishSeaCmd)
+
+
+Fri 27-Oct-2023
+^^^^^^^^^^^^^^^
+
+Phys Ocgy seminar: Puget Sound HABs by Cheryl Greengrove from the University of Washington Tacoma.
+
+AAPS AGM.
+
+
+Sat 28-Oct-2023
+^^^^^^^^^^^^^^^
+
+Updated pkg to Python 3.12.
+branch: py312
+PR#94 - squash-merged
+Updated readthedocs build config:
+* change to mambaforge-22.9
+* pin versions of sphinx, sphinx-notfound-page & sphinx-rtd-theme
+  * re: build reproducibility: 
+    https://docs.readthedocs.io/en/stable/guides/reproducible-builds.html
+* add commonmark to dependencies in environment-rtd
+  * re: changes to default project depencencies: 
+    https://blog.readthedocs.com/defaulting-latest-build-tools/
+* added pandas to autodoc import mocks list to resolve warning in API docs section
+branch: update-readthedocs-build
+PR#100 - squash-merged
+(Reshapr)
+
+Helped Susan update her sockeye setup to test my SalishSeaCmd changes:
+
+
+Sun 29-Oct-2023
+^^^^^^^^^^^^^^^
+
+Helped Susan update her sockeye setup to test my SalishSeaCmd changes:
+* libnetcdf and libnetcdff not found in ldd of xios & nemo executables
+
+make_ww3_wind_file forecast stalled; killed it and re-ran
+(SalishSeaCast)
+
+
+
+
 Prepared to modernize packaging:
 * used SalishSeaNowcast PR#144 as guidance
   * metadata to pyproject.toml
@@ -8331,19 +8461,12 @@ Prepared to modernize packaging:
   * clear caches ??? 
   * update requirements.txt
 * add version release notes; see SalishSeaNowcast PR#145
-* update .readthedocs.yaml to use ubuntu-22.04 and mambaforge-22.9; 
-  see MOAD/docs PR#32
-* can I satisfactorily pin Sphinx ?? as rtd recommends
-
-* Pinned sphinx-rtd-theme=1.1.1 to avoid incompatible versions of Sphinx and docutils
 (Reshapr)
 
-Got COVID & flu vaccinations.
-
-Reported disappearing directories that I saw with Ilias on /ocean to Hentryk
-on EOAS Slack. He replied that /ocean storage array is optimal, might be an NFS issue.
 
 
+
+test whether or not to --bind-to-core on sockeye
 
 
 do we want to change the zoop variable names in ERDDAP for 202111?
@@ -8387,6 +8510,7 @@ TODO:
 * update .readthedocs.yaml to use ubuntu-22.04 and mambaforge-22.9 in many repos
   * MOAD/docs - done in PR#32
   * FVCOM-Cmd - done in PR#10
+  * Reshapr - done 
 
 
 TODO:
