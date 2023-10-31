@@ -8319,7 +8319,7 @@ make_ww3_current_file forecast2 stalled; killed it and skipped run
 make_ww3_wind_file forecast stalled; killed it and re-ran
 (SalishSeaCast)
 
-Helped Jake with corrdinates mismatch between Reshapr-generated day-avg files
+Helped Jake with coordinates mismatch between Reshapr-generated day-avg files
 in 202111 and ncra-generated files in Susan's runs.
 
 Prepared to modernize packaging.
@@ -8450,17 +8450,36 @@ make_ww3_wind_file forecast stalled; killed it and re-ran
 (SalishSeaCast)
 
 
+Week 44
+-------
 
+Mon 30-Oct-2023
+^^^^^^^^^^^^^^^
 
-Prepared to modernize packaging:
+make_ww3_wind_file forecast2 stalled; killed and re-ran it and make_CHS_current_file
+LiveOcean was slow; download timed out at 11:37, but succeeded when I re-tried the worker at 12:02
+(SalishSeaCast)
+
+Squash-merged dependabot PRs to update setup-micromamba re: it updating to nodejs=20:
+* gha-workflows
+* SalishSeaNowcast
+
+Fixed broken links for HRDPS information page.
+(SalishSeaNowcast)
+
+Modernized packaging:
+* branch: modernize-pkg
+* PR#101 - squash-merged
 * used SalishSeaNowcast PR#144 as guidance
   * metadata to pyproject.toml
   * chg to hatchling
   * chg to importlib.metadata.version()
   * move __version__ to __about__
-  * clear caches ??? 
+  * add pkg installation to environment-rtd
   * update requirements.txt
 * add version release notes; see SalishSeaNowcast PR#145
+* change badges layout in README & dev docs to table
+Released version 23.1 and bumped to 23.2.dev0 for next dev cycle
 (Reshapr)
 
 
@@ -8481,7 +8500,7 @@ might be possible to change them in hindcast and production too?
     * NEMO_Nowcast
     * moad_tools
     * salishsea-site
-    * Reshapr
+    * Reshapr - migrated on 28oct23 in PR#99
   * failed workflow test with 3.12:
     * SalishSeaNowcast
     * SalishSeaCast/docs
@@ -8510,7 +8529,7 @@ TODO:
 * update .readthedocs.yaml to use ubuntu-22.04 and mambaforge-22.9 in many repos
   * MOAD/docs - done in PR#32
   * FVCOM-Cmd - done in PR#10
-  * Reshapr - done 
+  * Reshapr - done 28oct23 in PR#100
 
 
 TODO:
@@ -8523,7 +8542,7 @@ TODO:
 
 TODO:
 * modernize packaging:
-  * Reshapr
+  * Reshapr - done 30oct23 in PR#101
   * moad_tools
   * cookiecutter-MOAD-pypkg
   * salishsea-site
@@ -8540,8 +8559,6 @@ TODO:
 
 
 TODO:
-* numpy.int in moad_tools random_oil_spills
-
 * pre-commit auto-update
   * MOAD/docs - done
   * SalishSeaNowcast
