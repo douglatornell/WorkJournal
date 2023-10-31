@@ -8483,6 +8483,23 @@ Released version 23.1 and bumped to 23.2.dev0 for next dev cycle
 (Reshapr)
 
 
+Tue 31-Oct-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB,
+
+Group mtg; see whiteboard.
+(MOAD)
+
+make_ww3_wind_file forecast2 stalled; killed it and skipped run
+stalled make_ww3_wind_file prevent automation from launching nowcast/forecast
+runs; re-ran manually to restart automation
+(SalishSeaCast)
+
+EOAS Colloquium: Hal Bradbury: Carbon in Marine Sediments
+
+
+
 
 
 test whether or not to --bind-to-core on sockeye
@@ -8506,6 +8523,9 @@ might be possible to change them in hindcast and production too?
     * SalishSeaCast/docs
     * MOAD/docs - expect same problem as SalishSeaCast/docs
     * MoaceanParcels - failing with 3.10; no point in trying 3.12 yet
+  * no workflows:
+    * erddap-datasets
+    * analysis-doug
 
 
 
