@@ -7341,7 +7341,7 @@ dataset.xml by a script:
   * datasets/rolling-forecasts/ubcSSf3DuGridFields1h.xml
   * datasets/rolling-forecasts/ubcSSf3DvGridFields1h.xml
   * datasets/rolling-forecasts/ubcSSfDepthAvgdCurrents1h.xml
-(ERDDAP)
+(erddap-datasets)
 
 Phys Ocgy seminar: Rosie Eaves, visiting Ph.D. student from Oxford working with Stephanie
 mesoscale eddy parameterization for climate models
@@ -7365,7 +7365,7 @@ dataset.xml by a script:
 * Contined migrating SalishSeaCast NEMO rolling forecast datasets to
   ssc-nemo-201905/rolling-forecasts/
   * datasets/rolling-forecasts/ubcSSfSurfaceTracerFields1h.xml
-(ERDDAP)
+(erddap-datasets)
 
 Continued work on changes to crop_gribs to have it retry uncropped files after it has been watching
 for 8 hours:
@@ -7472,7 +7472,7 @@ dataset.xml by a script:
   * datasets/rolling-forecasts/ubcSSfBoundaryBaySSH10m.xml
   * datasets/rolling-forecasts/ubcSSfCampbellRiverSSH10m.xml
   * datasets/rolling-forecasts/ubcSSfCherryPointSSH10m.xml
-(ERDDAP)
+(erddap-datasets)
 
 
 Tue 26-Sep-2023
@@ -7677,8 +7677,8 @@ dataset.xml by a script:
 * PR#1
 * Started migrating SalishSeaCast NEMO rolling forecast datasets to
   ssc-nemo-201905/rolling-forecasts/
-  * 
-(ERDDAP)
+  * rolling-forecasts/ubcSSfFridayHarborSSH10m.xml
+(erddap-datasets)
 
 Invited Ilias to UBC-MOAD and SalishSeaCast GitHub orgs.
 
@@ -8418,6 +8418,17 @@ Phys Ocgy seminar: Puget Sound HABs by Cheryl Greengrove from the University of 
 AAPS AGM.
 
 
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* Started migrating SalishSeaCast NEMO rolling forecast datasets to
+  ssc-nemo-201905/rolling-forecasts/
+  * rolling-forecasts/ubcSSfHalfmoonBaySSH10m.xml
+(erddap-datasets)
+
+
+
 Sat 28-Oct-2023
 ^^^^^^^^^^^^^^^
 
@@ -8497,6 +8508,139 @@ runs; re-ran manually to restart automation
 (SalishSeaCast)
 
 EOAS Colloquium: Hal Bradbury: Carbon in Marine Sediments
+
+
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* Started migrating SalishSeaCast NEMO rolling forecast datasets to
+  ssc-nemo-201905/rolling-forecasts/
+  * rolling-forecasts/ubcSSfNanaimoSSH10m.xml
+  * rolling-forecasts/ubcSSfNeahBaySSH10m.xml
+  * rolling-forecasts/ubcSSfNewWestminsterSSH10m.xml
+  * rolling-forecasts/ubcSSfPatriciaBaySSH10m.xml
+(erddap-datasets)
+
+Asked Henryk to consider rebooting ocean file server or restarting its NFS service due to more
+intermittent file existence issues reported by Cassidy and Becca.
+
+Coffee w/ Ilias.
+
+
+November
+--------
+
+Wed 1-Nov-2023
+^^^^^^^^^^^^^^
+
+Jake reported messed up time coordinate values in month-average extractions;
+confirmed; but in new time offset calculation for arbitrary dataset time spans;
+created issue #102.
+(Reshapr)
+
+Gave Cassidy guidance on how to use ``salishsea split-results`` on graham or an ocean machine.
+
+
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* Started migrating SalishSeaCast NEMO rolling forecast datasets to
+  ssc-nemo-201905/rolling-forecasts/
+  * rolling-forecasts/ubcSSfPatriciaBaySSH10m.xml
+  * rolling-forecasts/ubcSSfPointAtkinsonSSH10m.xml
+  * rolling-forecasts/ubcSSfPortRenfrewSSH10m.xml
+(erddap-datasets)
+
+
+Henryk proposed setting up performance monitoring on ocean NFS service so that we can try to 
+better characterize the issue that people are seeing.
+* Ilias reproduced his git clone tools issue
+* Becca reported notebook not found issue on perigee@UW, so possible VSCode issue; found
+  https://github.com/microsoft/vscode/issues/196740 that points at Pylance version
+
+Re-tried XIOS-2 build on sockeye after default Software_Collection update; eventually got to:
+  ``NETCDF_LIB="-Wl,-rpath=$NETCDF_FORTRAN_ROOT/lib -L$NETCDF_FORTRAN_ROOT/lib -lnetcdff -Wl,-rpath=$NETCDF_C_ROOT/lib -L$NETCDF_C_ROOT/lib -lnetcdf"``
+in arch-GCC_SOCKEYE.path;
+not as brittle as I feared from my initial read of Roman's message.
+For NEMO, changed arch-GCC_SOCKEYE.fcm:
+  ``%NCDF_LIB            -Wl,-rpath=$NETCDF_FORTRAN_ROOT/lib -L$NETCDF_FORTRAN_ROOT/lib -lnetcdff -Wl,-rpath=$NETCDF_C_ROOT/lib -L$NETCDF_C_ROOT/lib -lnetcdf``
+and
+  ``%XIOS_LIB            -L%XIOS_HOME/lib -lxios``
+Susan replicated these changes and did test run; time steps!!
+
+
+Thu 2-Nov-2023
+^^^^^^^^^^^^^^
+
+Cancelled planned participation in Fire Across the Land session due to illness.
+
+make_ww3_wind_file forecast2 stalled; killed it and skipped run
+(SalishSeaCast)
+
+Squash-merged dependabot PRs to update pip re: CVE-2023-5752 re: hg clone config injection 
+vulnerability:
+* cookiecutter-analysis-repo
+* cookiecutter-MOAD-pypkg
+* NEMO-Cmd
+* MoaceanParcels
+* gha-workflows
+* salishsea-site
+* SalishSeaNowcast
+* NEMO_Nowcast
+* SalishSeaCast/docs
+* SalishSeaCmd
+* AtlantisCmd
+* tools/SalishSeaTools
+* moad_tools
+* MOAD/docs
+
+
+Fri 3-Nov-2023
+^^^^^^^^^^^^^^
+
+Phys Ocgy seminar: Bernie Yang from C-PROOF at UVic: Characterizing the lateral mixing of mesoscale 
+eddies using underwater gliders
+
+
+Continued work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1
+* Finished migrating SalishSeaCast NEMO rolling forecast datasets to
+  ssc-nemo-201905/rolling-forecasts/
+  * rolling-forecasts/ubcSSfSandHeadsSSH10m.xml
+  * rolling-forecasts/ubcSSfSandyCoveSSH10m.xml
+  * rolling-forecasts/ubcSSfSquamishSSH10m.xml
+  * rolling-forecasts/ubcSSfVictoriaSSH10m.xml
+  * rolling-forecasts/ubcSSfWoodwardsLandingSSH10m.xml
+* Migrated 201702 season-averaged, depth-averaged T&S fields dataset to
+  * ssc-nemo-201702/ubcSSg2DTracerFieldsSeasonalV17-02.xml
+(erddap-datasets)
+
+
+Sat 4-Nov-2023
+^^^^^^^^^^^^^^
+
+Dinner at l'Abitoir for Susan's bday.
+
+
+Sun 5-Nov-2023
+^^^^^^^^^^^^^^
+
+Experimented with running wwatch3 on fvcom VMs:
+* created ``mpi_hosts.wwatch3``:
+    192.168.238.12  slots=15 max-slots=16  # fvcom0
+    192.168.238.7   slots=15 max-slots=16  # fvcom1
+    192.168.238.20  slots=15 max-slots=16  # fvcom2
+    192.168.238.11  slots=15 max-slots=16  # fvcom3
+    192.168.238.9   slots=15 max-slots=16  # fvcom4
+* hacked run_ww3 worker to use ``mpi_hosts.wwatch3`` and rsync-ed it to arbutus for test
+  tomorrow
+(SalishSeaCast)
+
+
 
 
 
