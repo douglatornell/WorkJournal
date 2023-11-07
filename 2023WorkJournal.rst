@@ -8702,6 +8702,20 @@ Messed around with UptimeRobot settings to try to get notifications.
 (erddap-datasets)
 
 
+Tue 7-Nov-2023
+^^^^^^^^^^^^^^
+
+Very windy ride to work at ESB.
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Slack discussion w/ Jake on how to access nowcast-green.202111 via Reshapr.
+
+Updated PyCharm on kudu to 2023.2.4.
+
+
+(SalishSeaNowcast)
 
 
 
