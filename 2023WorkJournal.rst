@@ -8715,6 +8715,24 @@ Slack discussion w/ Jake on how to access nowcast-green.202111 via Reshapr.
 Updated PyCharm on kudu to 2023.2.4.
 
 
+Tue 14-Nov-2023
+^^^^^^^^^^^^^^^
+
+Group mtg; see whiteboard.
+(MOAD)
+
+make_ww3_current_file forecast stalled; killed and re-ran it
+(SalishSeaCast)
+
+EOAS Colloquium: Alice Zhu, UofT, Plastics in the Earth System
+
+Contined work on changing wwatch3 runs timing:
+* branch: update_ww3-runs
+* PR#213
+* changed to always launch make_ww3_*_file workers after NEMO forecast run
+* pulled branch on skookum; restarted manager for next_workers changes to take
+  effect
+* pulled branch on arbutus
 (SalishSeaNowcast)
 
 
