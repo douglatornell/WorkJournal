@@ -8681,7 +8681,7 @@ Started work on changing wwatch3 runs timing:
 * branch: update_ww3-runs
 * PR#213
 * added mpi hosts file to config so that wwatch3 can run on different VMs to NEMO
-* pulled branch on arbutus to test; not much differnt to yesterday's hack that didn't get tested
+* pulled branch on arbutus to test; not much different to yesterday's hack that didn't get tested
   today due to prep worker stalls
 (SalishSeaNowcast)
 
@@ -8714,6 +8714,224 @@ Slack discussion w/ Jake on how to access nowcast-green.202111 via Reshapr.
 
 Updated PyCharm on kudu to 2023.2.4.
 
+Started work on changing wwatch3 runs timing:
+* branch: update_ww3-runs
+* PR#213
+* changed next_workers to launch make_ww3_* prep workers for forecast2 run after NEMO forecast2
+  results download finishes
+* pulled branch on arbutus to test
+* restarted manager on skookum for change to take effect
+* discovered crop_gribs --backfill option code on skookum and shelved on khawla
+(SalishSeaNowcast)
+
+
+Wed 8-Nov-2023
+^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 stalled; killed and re-ran it; so much for the hypothesis of
+download_results interferring
+collect_weather 00 was slow, so crop_gribs 00 timed out with 392 files not processed;
+collect_weather 00 finished successfully after crop_gribs timeout;
+hacked crop_gribs --backfill back into production from shelved code, and it cleaned things up
+successfully
+(SalishSeaCast)
+
+GitHub Universe 2023:
+* keynote:
+  * Thomas Dohmke, CEO
+    * "GitHub re-founded on Copilot"
+  * Wllison Weins
+    * Copilot chat
+    * in VSCode and PyCharm, on GitHub mobile
+    * included in existing subscriptions in Dec
+  * Kedasha Kerr
+    * Copilot Chat now in GitHub.com for:
+      * code explanation
+      * PR descriptions
+      * security scanning auto-fixes in PRs; in preview today
+      * secret scanning; in preview today
+      * regex assistant; in security subscriptions
+  * Colin Merkl
+    * Copilot customized to your org
+    * per-org advanced fine tuning
+    * 3rd party connection to Sentry, etc.
+  * Copilot Enterprise in Feb for US$39/mo
+  * Satya Nadella
+    * philosophizing and promoting
+  * One more thing...
+    * Copilot Workspace; 2024 release
+* Copilot
+  * Ryan Salva
+  * Accenture
+  * DevEx
+    * Harold Kirschner, VSCode
+      * multi-model
+  * custom models
+    * repo data
+    * suggestion acceptance
+    * reinforcement learning from human feedback (RLFHF)
+    * "eat our own dogfood" -> "drink our own champagne"
+    * Alexander Androncik, AMD
+  * integrations with services
+    * Shutin Zhao
+    * Copilot extensibility
+      * expand knowledge via project-specific doc sets
+      * extend via plugins
+* AI-powered security
+  * Mike Hanley
+    * security feedback is delayed in CI flow vs. code creation
+    * in-editor security analysis; pro-active instead of reactive
+  * Asha Chakrabarty
+    * code scanning auto-fix; AI code in PR
+    * secret scanning can detect passwords; AI assistance for custom pattern regexs
+* Copilot at Shopify
+  * Farhan Thawar, VP and Head of Engineering
+
+Continued work on trying to get make_ww3_* robust again:
+* branch: update_ww3-runs
+* PR#213
+* dropped change to next_workers to launch make_ww3_* prep workers for forecast2 run after NEMO 
+  forecast2 results download finishes; it had no effect; force-pushed to PR
+* updated branch on skookum
+* restarted manager on skookum for change to take effect
+* added drop_vars and chunks to workers
+  * rsync-ed changes to arbutus to test in debug mode and production tomorrow
+  * still got a couple of hangs on debug runs of make_ww3_current_file; fewer tests of 
+    make_ww3_wind_file
+  * played with chunk size for time; no evident effact on memory use or execution time, so left
+    it at 1
+(SalishSeaNowcast)
+
+Tried to address ongoing OutOfMemoryError emails from ERDDAP:
+* increased JVM max heap size from -Xmx=96G to -Xmx=112G in skookum:/opt/tomcat/bin/startup.sh
+  and restarted ERRDAP; no effect
+* confirmed that 2008-12-19 grid_U file is not on ERDDAP; its storage size looks no different to 
+  2008-12-20
+* plotted surface current fields from 19th & 20th; no trouble loading 19th file
+(ERDDAP)
+
+
+Thu 9-Nov-2023
+^^^^^^^^^^^^^^
+
+download_wwatch3_results forecast2 stalled due to manager crash caused by KeyError on WWATCH3 run in checklist:
+* probably due to yesterday's messing with timing and re-run of wwatch3 wwatch3-forecast2
+* decided not to manually run update_forecast_datasets because forecast run will finish soon run it
+  automatically
+(SalishSeaCast)
+
+GitHub Universe 2023:
+* keynote:
+  * Inbal Shani, Chief Product Officer
+    * DevEx
+  * Asha Chakrabarty, VP Product Mgmt
+    * platform, tool, etc. agnostic  
+    * security embedded in dev workflow
+    * actions
+    * ARM and M1 runners
+  * Shuba Rao, VP Prodcut Strategy
+    * Enterprise
+    * migration tools for Bitbucket & Azure DevOps
+    * repository properties: key-value metadata
+      * repository rules: compliance at scale
+  * Gerard McMahon, Fidelity
+  * Stormy Peters, VP Communities
+    * >7 billion action minutes last year
+    * Patreon on GitHub
+    * Accelerator 2, $400k, 20 projects
+  * One more thing...
+    * next year at Fort Mason, SF, 29-30 Oct, 10th anniversary
+* DevEx
+  * Mario Rodriguez, VP Product Mgmt
+  * one platform, security baked in, less context switching, more flow
+  * iteration velocity
+  * demo of docs integration in Copilot
+* Octoverse 2023
+  * Martin Woodward
+    * >100M devs, up 26% in 2023
+    * >300M open source contributions in 2023
+    * Canada dev community size has dropped from 8th to 10th over 10 years; not shrinking, surpassed
+    * huge growth in Nigeria and other African countries
+    * Singapore has highest per capita GitHub accounts
+    * public activity on GitHub is only 20% of total
+    * innersource == open source techniques in private orgs
+* AI for Accessibility
+  * Ed Summers, Head of Accessibility, blind dev
+* AI: Superhero or super villain?
+  * Scott Hanselman, VP Developer Community, Microsoft
+    * If you are kind to AI you end up in the nice part of the corpus
+    * use AI responsibly
+
+Continued work on trying to get make_ww3_* robust again:
+* branch: update_ww3-runs
+* PR#213
+* added drop_vars and chunks to workers after successful forecast2 and forecast run preps
+* updated branch on skookum (with some git reset --hard drama due to yesterday's force-push)
+Fixed malformed test assertion in test_update_forecast_dataset; unitest.mock assertion that was
+malformed but passing silently until Python 3.12.
+(SalishSeaNowcast)
+
+Squash-merged dependabot PRs to update pyarrow re: CVE-2023-47248 re: arbitrary code execution 
+vulnerability:
+* Reshapr
+* stopped because pyarrow=14,0.1 is not on conda-forge yet
+
+Team mtg.
+(Atlantis)
+
+
+Fri 10-Nov-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 stalled; killed and re-ran it; so much for chunks and drop_vars
+resolving the issue
+make_ww3_wind_file forecast stalled; killed and re-ran it on 2nd try
+(SalishSeaCast)
+
+Phys Ocgy seminar: Shumin ocean turbulence lecture #1
+
+Finished migration to Python 3.12
+* branch: py312
+* PR#209 - squash-merged
+Updated readthedocs build config
+* branch: update-readthedocs-build
+* PR#215 - squash-merged
+(SalishSeaNowcast)
+
+J arrived for long weekend visit.
+
+
+Sat 11-Nov-2023
+^^^^^^^^^^^^^^^
+
+upload_forcing to orcinus failed mulitple times due to power outage due to storm
+make_ww3_wind_file forecast2 stalled; I didn't attend to it quickly enough and it blocked forecast
+run; killed it and ran forecast manually
+(SalishSeaCast)
+
+/ocean maintenance postponed due to UBC power outage
+
+
+Sun 12-Nov-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_current_file forecast2 stalled; killed it and skipped run
+upload_forcing to orcinus failed mulitple times; orcinus down
+(SalishSeaCast)
+
+
+Week 46
+-------
+
+Mon 13-Nov-2023
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Remembrance Day in lieu
+
+make_ww3_current_file forecast2 stalled; killed and re-ran it
+upload_forcing to orcinus failed mulitple times; orcinus down
+(SalishSeaCast)
+
 
 Tue 14-Nov-2023
 ^^^^^^^^^^^^^^^
@@ -8733,7 +8951,17 @@ Contined work on changing wwatch3 runs timing:
 * pulled branch on skookum; restarted manager for next_workers changes to take
   effect
 * pulled branch on arbutus
-(SalishSeaNowcast)
+(SalishSeaCast)
+
+
+
+Backfill nowcast-agrif
+(SalishSeaCast)
+
+
+
+
+
 
 
 
@@ -8752,7 +8980,7 @@ might be possible to change them in hindcast and production too?
     * NEMO_Nowcast
     * moad_tools
     * salishsea-site
-    * SalishSeaNowcast - success on khawla on 6nov23
+    * SalishSeaNowcast - success on khawla on 6nov23, migrated on 10nov23 in PR#209
     * Reshapr - migrated on 28oct23 in PR#99
   * failed workflow test with 3.12:
     * SalishSeaCast/docs
