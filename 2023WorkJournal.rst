@@ -1524,10 +1524,10 @@ branch: hrdps-continental
 PR#156
 * replaced download_weather --yesterday w/ --run-date
 * updated worker failure docs re: broken links and outdated content
-* started work on replacing @patch with monkeypathc in download_weather
+* started work on replacing @patch with monkeypatch in download_weather
 * started work on updating grb_to_netcdf
-  * updated sub-region and Sand Heads indices with values that Susan found in contineental domain
-  * stalled out on step of getting grid defintion via grid_defn.pl and wgrib2
+  * updated sub-region and Sand Heads indices with values that Susan found in continental domain
+  * stalled out on step of getting grid definition via grid_defn.pl and wgrib2
     * Susan found updated tools: pywgrib2_s
 (SalishSeaNowcast)
 
@@ -1831,7 +1831,7 @@ Continued work on changes to use HRDPS 2.5km continental product
 branch: hrdps-continental
 PR#156
 * changed next_workers module to temporarily exclude grib_to_netcdf so that automation with
-  collect_weather worker can be started to that we know about failures like 03mar in more timely
+  collect_weather worker can be started so that we know about failures like 03mar in more timely
   manner to communicate to Sandrine
 (SalishSeaNowcast)
 
@@ -8940,22 +8940,210 @@ Group mtg; see whiteboard.
 (MOAD)
 
 make_ww3_current_file forecast stalled; killed and re-ran it
+upload_forcing to orcinus failed mulitple times; orcinus down
 (SalishSeaCast)
 
 EOAS Colloquium: Alice Zhu, UofT, Plastics in the Earth System
 
-Contined work on changing wwatch3 runs timing:
+Continued work on changing wwatch3 runs timing:
 * branch: update_ww3-runs
 * PR#213
 * changed to always launch make_ww3_*_file workers after NEMO forecast run
 * pulled branch on skookum; restarted manager for next_workers changes to take
   effect
 * pulled branch on arbutus
+(SalishSeaNowcast)
+
+
+Wed 15-Nov-2023
+^^^^^^^^^^^^^^^
+
+wwatch3 forecast2 failed to launch overnight:
+* KeyError in after_watch_NEMO on ``config["wave forecasts"]["run when"]``
+nowcast log stopped updating at 07:44:
+* ``watch_NEMO nowcast`` was blocked by stalled ``watch_NEMO forecast2``
+* recovery started at ~09:45
+    killed ``watch_NEMO forecast2``
+    download_results arbutus forecast2 2023-11-14
+    make_forcing_links arbutus ssh 
+upload_forcing to orcinus failed mulitple times; orcinus down
+(SalishSeaCast)
+
+Continued work on changing wwatch3 runs timing:
+* branch: update_ww3-runs
+* PR#213
+* fixed uses of ``config["wave forecasts"]["run when"]`` that I missed yesterday
+* pulled branch on skookum; restarted manager for next_workers changes to take
+  effect
+* pulled branch on arbutus
+* wwatch3 nowcast launched successfully after NEMO forecast
+Added --backfill option to crop_gribs worker:
+* branch: crop_gribs-backfill
+* PR#216
+* worker code has been used in production at least twice; most of this work was adding
+  unit tests and log messages for existing cropped files that are skipped
+(SalishSeaNowcast)
+
+
+Thu 16-Nov-2023
+^^^^^^^^^^^^^^^
+
+NEMO forecast2 failed to launch overnight:
+* KeyError in checklist due to yesterday's manager restarts
+wwatch3 nowcast launched successfully after NEMO forecast
+upload_forcing to orcinus failed mulitple times; orcinus down
+(SalishSeaCast)
+
+Did UBC required training courses from OCt notifications:
+* Workplace Violence Prevention
+* Privacy & Information Security Fundamentals 2
+
+Generated new keys and CSRs for Resilient-C domains; see 22-Nov-2022 in 2023 work journal.
+
+Sent CSRs to Karen Beattie at UBC IT.
+
+Handled message from readthedocs re: updating webhook secrets:
+* deleted randopony docs project
+* deleted webhook for gomms-site project; repo no longer exists on bitbucket
+* deleted webhook for gomms-nowcast project; repo no longer exists on bitbucket
+* deleted bitbucket webhook for ECget project; added GitHub webhook
+* deleted webhook for gomms-nowcast-system project; repo no longer exists on bitbucket
+* resync-ed GitHub webbook for midoss-docs project
+* resync-ed GitHub webbook for Make-MIDOSS-Forcing project
+* resync-ed GitHub webbook for MOHID-Cmd project
+
+
+Fri 17-Nov-2023
+^^^^^^^^^^^^^^^
+
+upload_forcing to orcinus failed mulitple times; orcinus down
+make_ww3_current_file forecast stalled; killed and re-ran it; 2 tries
+Started backfilling nowcast-agrif:
+* only 1 of the 3 login nodes are working properly; sent email to Mark
+  * hacked .ssh/config or skookum to use seawolf3 instead of orcinus
+  * Mark says issue might be skookum accidentally added to hosts.denied
+* backfilling:
+    upload_forcing orcinus nowcast+ 2023-11-11
+    upload_forcing orcinus turbidity 2023-11-11
+    wait for run to finish
+    * extremely slow to launch
+    * failed at 9m45s w/ fabric error; emailed Mark
+Started clean-up of HRDPS continental GRIB files:
+* deleted .idx files that were created early in processing
+    find /results/forcing/atmospheric/continental2.5/GRIB/ -name "*.idx" -delete
+* SSC cropped GRIB files start appearing ~01apr23
+(SalishSeaCast)
+
+Finished work on changing wwatch3 runs timing:
+* branch: update_ww3-runs
+* PR#213 - squash-merged
+Docs maintenance:
+* branch: docs-maint
+* PR#217 - squash-merged
+* changed badges layout in README & dev docs to table
+* fixed URLs for GHA workflow badges
+* added release and Hatch badges to Release process section of dev docs
+(SalishSeaNowcast)
+
+Docs maintenance:
+* branch: docs-maint
+* PR#104 - squash-merged
+* added pre-commit badge
+* fixed URLs for GHA workflow badges
+* added missing target attr to Hatch badge in Release Process section of dev docs
+(Reshapr)
+
+
+Sat 18-Nov-2023
+^^^^^^^^^^^^^^^
+
+Continued backfilling nowcast-agrif:
+* backfilling:
+    wait for automation to fail at ~08:45
+    make_forcing_links orcinus nowcast-agrif 2023-11-11
+    wait for run to finish
+    * failed after 7m41s
+(SalishSeaCast)
+
+
+Sun 19-Nov-2023
+^^^^^^^^^^^^^^^
+
+Update os pkgs on arbutus nowcast0 node:
+* Got message:
+    "The following security updates require Ubuntu Pro with 'esm-infra' enabled"
+  re: some pkgs; need to email Venkat about Ubuntu Pro or updating instance from 18.04 LTS
+* rebooted nowcast0
+* Re-mounted persistent storage volume:
+    sudo mount /dev/vdc /nemoShare
+* Re-bound /nemoShare/MEOPAR to /export/MEOPAR
+    sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+* Restarted NFS service:
+    sudo systemctl restart nfs-kernel-server.service
+  * That included reset of stale NFS handles on compute nodes with:
+      sudo exportfs -f  # on nowcast0
+Updated git repo clones:
+* grid
+* moad-tools
+* NEMO_Nowcast
+* NEMO-Cmd
+* SalishSeaCmd
+* SalishSeaNowcast
+* SalishSeaWaves  # default branch is still ``master`` !!
+* tools
+* skipped due to nervousness about upstream changes
+  * SS-run-sets
+  * FVCOM41
+  * FVCOM-VHFR-config
+  * FVCOM-Cmd
+  * OPPTools
+* skipped updates of repos that are on production tag branches
+  * rivers-climatology
+  * tides
+  * tracers
+  * NEMO-3.6-code
+  * XIOS-ARCH
+  * XIOS-2
+Removed conda env:
+  conda env remove -p /nemoShare/MEOPAR/nowcast-sys/nowcast-env
+Built new conda env:
+  conda env create \
+    --prefix /nemoShare/MEOPAR/nowcast-sys/nowcast-env \
+    -f SalishSeaNowcast/envs/environment-prod.yaml
+  copied activate.d and deactivate.d envvars.sh scripts into new env
+  installed pkgs (see deploy docs)
 (SalishSeaCast)
 
 
 
-Backfill nowcast-agrif
+``make_ww3_*wind*_file`` stalls:
+* Mon
+  * 13-nov: currents forecast2
+  * 20-nov: wind forecast2
+* Tue
+  * 14-nov: currents forecast
+* Wed
+* Thu
+* Fri
+  * 17-nov: currents forecast
+* Sat
+  * 11-nov: winds forecast2
+* Sun
+  * 12-nov: currents forecast2
+
+
+
+
+
+Continued backfilling nowcast-agrif:
+* backfilling:
+    wait for automation to fail at ~08:45
+    make_forcing_links orcinus nowcast-agrif 2023-11-11
+    wait for run to finish
+
+    upload_forcing orcinus nowcast+ 2023-11-12
+    upload_forcing orcinus turbidity 2023-11-12
+    wait for run to finish
 (SalishSeaCast)
 
 
