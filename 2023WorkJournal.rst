@@ -9112,7 +9112,60 @@ Built new conda env:
     -f SalishSeaNowcast/envs/environment-prod.yaml
   copied activate.d and deactivate.d envvars.sh scripts into new env
   installed pkgs (see deploy docs)
+Email from Mark to say that orcinus fabric issue appears to be a network switch problem;
+possible resolution tomorrow with removal of bad module, but cluster reboot may be required
 (SalishSeaCast)
+
+
+Week 47
+-------
+
+Mon 20-Nov-2023
+^^^^^^^^^^^^^^^
+
+make_ww3_wind_file forecast2 stalled; killed it and skipped run
+orcinus refused connections for nowcast runs
+(SalishSeaCast)
+
+Squash-merged dependabot PR in gha-workflows to bump actions/github-script from v6 to v7.
+
+Ran:
+  python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+all good!
+
+Finished work on separating dataset descriptions into files to be composed into
+dataset.xml by a script:
+* branch: separate-dataset-files
+* PR#1 -  squash-merged
+* updated README and .gitignore
+* added docutils to dev env so that README rendering can be previewed in VSCode
+Squash-merged dependabot PR to update setup-micromamba to 1.6.0
+Switched skookum back to main branch.
+Started work on adding dataset descriptions for 2021-08 bathymetry:
+* branch:2108-bathymetry
+* PR#3
+* worked on ubcSSnBathymetryV2108.xml
+  * "with 2m crit. bank but deeper river" ??
+  * add changes to history
+* worked on section re: 21-11 to landing page
+* mtg w/ Susan scheduled for Fri
+(erddap-datasets)
+
+Finished update to Python 3.12:
+* branch: py312
+* PR#68 - squash-merged
+* dropped support for Python 3.10
+Updated readthedocs build config:
+* branch: update-readthedocs-build
+* PR#71 - squash-merged
+Docs maintenance:
+* branch: docs-maint
+* PR#72 
+* changed badges layout in README & dev docs to table
+* fixed URLs for GHA workflow badges
+* added release and Hatch badges to Release process section of dev docs
+Relased v23.1.
+(NEMO-Cmd)
 
 
 
@@ -9162,12 +9215,12 @@ might be possible to change them in hindcast and production too?
 
 * Python 3.12:
   * successful workflow test with 3.12:
-    * NEMO-Cmd
     * SalishSeaCmd
     * AtlantisCmd
     * NEMO_Nowcast
     * moad_tools
     * salishsea-site
+    * NEMO-Cmd - migrated on 20nov23 in PR#68
     * SalishSeaNowcast - success on khawla on 6nov23, migrated on 10nov23 in PR#209
     * Reshapr - migrated on 28oct23 in PR#99
   * failed workflow test with 3.12:
@@ -9201,6 +9254,7 @@ TODO:
   * MOAD/docs - done in PR#32
   * FVCOM-Cmd - done in PR#10
   * Reshapr - done 28oct23 in PR#100
+  * NEMO-Cmd - done 20nov23 in PR#71
 
 
 TODO:
