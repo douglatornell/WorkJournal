@@ -9168,6 +9168,51 @@ Relased v23.1.
 (NEMO-Cmd)
 
 
+Tue 21-Nov-2023
+^^^^^^^^^^^^^^^
+
+Group Mtg; see whiteboard
+* 2021-11 climatology for Karyn
+* find docs to add output var to NEMO for Tall
+(SalishSeaCast)
+
+Discussed email from scripts and wwatch3 runs timing w/ Rich.
+
+Sent email to PIs re: /ocean maintenance rescheduled to 25nov.
+
+Searched for docs on adding output variables to NEMO for Tall; only found part of what
+I recall; Susan found more in old XIOS-1 docs.
+
+
+
+Planning 202111 ERDDAP and docs:
+* ubcSSnBathymetryV2108.xml
+  * "with 2m crit. bank but deeper river" ??
+  * add changes to history
+* add "SalishSeaCast 202111" section in docs after "SalishSeaCast Evaluation: 201905"
+  * diffs compared to 201905:
+    * bathymetry
+      * moved coastline to 2m isobath and set depth there to 2m;
+        in contrast to 4m depth at 0m isobath; volume is conserved (approximately ??)
+    * spin-up:
+      * 2007-2011 surface and open boundaries used for 2002-2006 ??
+    * Elise's summary of SMELT changes:
+      * https://docs.google.com/document/d/1K6UQpVC0x4k20p9JPTW5nH9Mbcc_zB99pPk_Zik1ECg/edit
+        * m. rubrum (aka ciliates) removed
+        * functional light dependence chaaged to PE-curve; tuned to closely match old 
+          response
+        * sinking for biological tracers switched from upstream scheme to incorporation in 
+          TVD advection
+        * river tracer input climatologies changed
+        * N:O coupling udpated for various processes
+        * sediment O2 demand paramter added to allow O@ flux into sediments to be
+          decoupled from outgoing nitrate flux (more details in Google doc)
+        * lots of rates changed (why?)
+        * O2 parameters changed (why?)
+        * parameter names updated for consistency (mention??)
+    * names of zooplankton groups in ERDDAP datasets changed from 
+      microzooplankton & mesozooplankton to z1 & z2
+
 
 ``make_ww3_*wind*_file`` stalls:
 * Mon
