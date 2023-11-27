@@ -8999,7 +8999,6 @@ Did UBC required training courses from OCt notifications:
 * Privacy & Information Security Fundamentals 2
 
 Generated new keys and CSRs for Resilient-C domains; see 22-Nov-2022 in 2023 work journal.
-
 Sent CSRs to Karen Beattie at UBC IT.
 
 Handled message from readthedocs re: updating webhook secrets:
@@ -9183,35 +9182,169 @@ Sent email to PIs re: /ocean maintenance rescheduled to 25nov.
 Searched for docs on adding output variables to NEMO for Tall; only found part of what
 I recall; Susan found more in old XIOS-1 docs.
 
+Downloaded and installed new TLS certs for Resilient-C domains;
+see 22-Nov-2022 in 2023 work journal.
 
 
-Planning 202111 ERDDAP and docs:
+Wed 22-Nov-2023
+^^^^^^^^^^^^^^^
+
+Watched beginning of UBC graduation ceremony with installation of new President Bacon.
+
+Ran server tests on Resilient-C domains; A ratings.
+
+Started work on xarray PR re: loffset deprecation:
+* ref https://docs.xarray.dev/en/stable/contributing.html
+* updated xarray clone from upstream
+* set up VSCode workspace
+* created xarray-tests env 
+* installed pre-commit
+* set git email
+* installed post-commit hook for rescuetime highlights
+* created xarray-docs env
+* branch: douglatornell-resample-time-offset-docs
+  * improved FutureWarning re: resample() loffset parameter with wording that I proposed to
+    dcherian in https://github.com/pydata/xarray/discussions/8175
+  * added docs to illustrate time offset arithmetic
+  * added deprecation notices to Dataset.resample() and DataArray.resample() docstrings
+  * added note re: changes to whats-new
+  * reviewed and approved by Max Roos
+  * requested review from Deepak Cherian
+
+Started work on issue 102 re: incorrect time coord values in month-average resampled datasets:
+branch:102-resampled-time-values
+PR#
+* learned that using MS for month resampling puts timestmap at start of month instead of 
+  end of previous month that M gives
+* lots of futzing around trying to create new index for resampled dataset
+(Reshapr)
+
+Helped Casidy with force push to handle reversion in her local repo relative to commits pushed
+to GitHub.
+
+
+Thu 23-Nov-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 2
+
+Contined work on issue 102 re: incorrect time coord values in month-average resampled datasets:
+branch:102-resampled-time-values
+PR#105 - squash-merged
+* figured out how to create new index for resampled dataset with pandas.DatetimeIndex()
+* refactored resampled dataset time coordinate calculation into extract._calc_resampled_time_coord()
+* successfully tested it for Jake's 10-month CO2 flux extraction that revealed the Bug
+* wrote tests for _calc_resampled_time_coord()
+* sent Slack message to Jake that bug is fixed
+
+Continued work on xarray PR re: loffset deprecation:
+* branch: douglatornell-resample-time-offset-docs
+  * changed deprecation notices to Dataset.resample() and DataArray.resample() docstrings to 
+    present tense (suggested by Max Roos in 2nd review)
+  * rejected change of ``resampled_ds.get_index("time")`` to ``resampled_ds.indexes["time"]`` in 
+    docs code (suggested by Max Roos in 2nd review) because v0.9.0 change log says that get_index()
+    is more generally robust
+  * awaiting review from Deepak Cherian
+(Reshapr)
+
+Continued backfilling nowcast-agrif:
+* email from Mark asking me to test again
+* backfilling:
+    wait for automation to fail at ~08:45
+    make_forcing_links orcinus nowcast-agrif 2023-11-11
+    wait for run to finish
+    * finished, but slow
+    * results download failed due to host key verifiication; only seawolf1 is available
+* email from Mark asking for another test on old DDR partition nodes; nodes = 48:ppn=8
+* backfilling:
+    upload_forcing orcinus nowcast+ 2023-11-12
+    upload_forcing orcinus turbidity 2023-11-12
+    * job was queued until 15:15
+(SalishSeaCast)
+
+
+Fri 24-Nov-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 0
+
+make_ww3_wind_file forecast2 stalled; killed it and skipped run
+(SalishSeaCast)
+
+Researched "xarray backends file_manager RuntimeError: NetCDF: Not a valid ID":
+* hits, but no solution
+(Reshapr)
+
+Phys Ocgy seminar: Manuel Colombo: Biogeochem across boundaries
+
+dataforseo.com is back causing high fail traffic from 136.243.228.193
+Met w/ Susan to plan 202111 ERDDAP and docs:
 * ubcSSnBathymetryV2108.xml
-  * "with 2m crit. bank but deeper river" ??
   * add changes to history
 * add "SalishSeaCast 202111" section in docs after "SalishSeaCast Evaluation: 201905"
   * diffs compared to 201905:
     * bathymetry
-      * moved coastline to 2m isobath and set depth there to 2m;
-        in contrast to 4m depth at 0m isobath; volume is conserved (approximately ??)
+      * moved coastline to 2m isobath and set depth there to 4m;
+        in contrast to 4m depth at 0m isobath; volume is approximately conserved
+      * deepened Tacoma Narrows to chart depth
+      * Added Fraser River North Arm spit,
+        Iona sewage outfall spit,
+        Robert's Bank port facility,
+        and Tsawwassen ferry terminal.
+      * the usual processing:
+        * deepened Fraser river
+        * smoothing, added missing islands etc. results in other minor changes
     * spin-up:
-      * 2007-2011 surface and open boundaries used for 2002-2006 ??
+      * 2002-2006 using:
+        * 2002-2006 atmospheric forcing downscaled from CANESM2 climate model product
+        * 2002-2006 river discharges calculated from obs
+        * 2007-2011 climatologies of open boundaries 
+    * physics changes:
+      * day-average discharge for all rivers based on gauged river obs within watersheds
+      * changed surface wave parameterization to one tuned for Salish Sea rather than default
+        open ocean values; Ben's thesis
+      * Susan says bathymetry is also physics
     * Elise's summary of SMELT changes:
       * https://docs.google.com/document/d/1K6UQpVC0x4k20p9JPTW5nH9Mbcc_zB99pPk_Zik1ECg/edit
+        * Asslin filter implementation bug was corrected
         * m. rubrum (aka ciliates) removed
-        * functional light dependence chaaged to PE-curve; tuned to closely match old 
+        * functional light dependence changed to PE-curve; tuned to closely match old 
           response
         * sinking for biological tracers switched from upstream scheme to incorporation in 
           TVD advection
         * river tracer input climatologies changed
         * N:O coupling udpated for various processes
-        * sediment O2 demand paramter added to allow O@ flux into sediments to be
+        * sediment O2 demand parameter added to allow O2 flux into sediments to be
           decoupled from outgoing nitrate flux (more details in Google doc)
-        * lots of rates changed (why?)
-        * O2 parameters changed (why?)
-        * parameter names updated for consistency (mention??)
+        * SMELT model was retuned
     * names of zooplankton groups in ERDDAP datasets changed from 
-      microzooplankton & mesozooplankton to z1 & z2
+      microzooplankton & mesozooplankton to Z1 & Z2
+(ERDDAP)
+
+Rode Stanley Park loop; Beach Ave bike lanes are impressive; sad that I never rode Stanley Park
+separated bike lane before the Parks Board took it away.
+
+
+Sat 25-Nov-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 1
+
+
+Sun 26-Nov-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 2
+
+
+
+TODO:
+* update xarray-tests instructions to use Python 3.11
+* drop pkg install from xarray-docs instructions; it's included in docs.yml
+
+
+
+
 
 
 ``make_ww3_*wind*_file`` stalls:
