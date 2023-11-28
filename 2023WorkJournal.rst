@@ -9350,9 +9350,6 @@ Days since last wwatch3 prep stall: 0
 
 make_ww3_current_file forecast stalled; killed it and re-ran
 no log messages from make_ww3_wind_file, so restarted log_aggregator
-Replied to email from Dan Baker, data analyst with the QENTOL,YEN WSANEC Marine Guardians
-re: using SalishSeaCast from ERDDAP to analyze vessel speeds in Haro and Boundary straits
-like the ECHO program does.
 Resumed backfilling nowcast-agrif:
 * sorted out host key verification issue for seawolf1 with manual ssh session key acceptance
 * downloaded completed runs:
@@ -9363,12 +9360,13 @@ Resumed backfilling nowcast-agrif:
     wait for automation to fail at ~08:45
     upload_forcing orcinus nowcast+ 2023-11-13
     upload_forcing orcinus turbidity 2023-11-13
-    wait for run to finish
-
-    upload_forcing orcinus nowcast+ 2023-11-14
-    upload_forcing orcinus turbidity 2023-11-14
-    wait for run to finish
+    * email from Mark to say that job was stuck on queue due to mem size exceeding DDR
+      limit; he released it
 (SalishSeaCast)
+
+Replied to email from Dan Baker, data analyst with the QENTOL, YEN W̱SÁNEĆ Marine Guardians
+re: using SalishSeaCast from ERDDAP to analyze vessel speeds in Haro and Boundary straits
+like the ECHO program does.
 
 Ran:
   python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
@@ -9391,6 +9389,46 @@ Move xarray.open_mfdataset() parallel parameter value to extraction config YAML 
 branch: parallel-read-option
 PR#106 - squash-merged
 (Reshapr)
+
+
+Tue 28-Nov-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 1
+
+Group Mtg; see whiteboard.
+(MOAD)
+
+Email to Wahed Saidy at GitHub Sales asking for access to Copilot for group.
+
+Continued email conversation with Dan Baker of QENTOL, YEN W̱SÁNEĆ Marine Guardians.
+
+Resumed backfilling nowcast-agrif:
+* hacked salishsea_cmd/run.py on orcinus to change to mem:1000mb
+* backfilling with ``partition:DDR ; nodes = 48:ppn=8; mem:1000mb``
+    wait for automation to fail at ~08:45
+    upload_forcing orcinus nowcast+ 2023-11-14
+    upload_forcing orcinus turbidity 2023-11-14
+    wait for run to finish
+    * I got nervouse when the run stalled at 4.1% complete, but it started time
+      stepping again...
+
+    upload_forcing orcinus nowcast+ 2023-11-15
+    upload_forcing orcinus turbidity 2023-11-15
+    wait for run to finish
+(SalishSeaCast)
+
+Helped Jake identify another missing file issue in the wastewater results.
+
+Helped Casidy get started using Reshapr with her river results after she had
+open_mfdataset blow up on chum operating on 61 hourly files :-)
+
+Changed deployment workflow to use mamba-org/setup-micromamba like the rest of our
+workflows that use conda envs; workflow was still using conda-incubator/setup-miniconda
+that I shiftwed away from in Mar-2023 elsewhere.
+Squash-merged dependabot PR to update cryptography re: CVE-2023-49083 re: DoS
+vulnerability.
+(salishsea-site)
 
 
 
