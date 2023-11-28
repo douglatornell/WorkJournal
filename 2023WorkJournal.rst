@@ -9273,6 +9273,8 @@ make_ww3_wind_file forecast2 stalled; killed it and skipped run
 
 Researched "xarray backends file_manager RuntimeError: NetCDF: Not a valid ID":
 * hits, but no solution
+* on a hunch, changed to ``parallel=False`` in open_mfdataset() and things work consistenty,
+  but significantly slower
 (Reshapr)
 
 Phys Ocgy seminar: Manuel Colombo: Biogeochem across boundaries
@@ -9335,49 +9337,66 @@ Sun 26-Nov-2023
 ^^^^^^^^^^^^^^^
 
 Days since last wwatch3 prep stall: 2
+(SalishSeaCast)
+
+
+Week 48
+-------
+
+Mon 27-Nov-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 0
+
+make_ww3_current_file forecast stalled; killed it and re-ran
+no log messages from make_ww3_wind_file, so restarted log_aggregator
+Replied to email from Dan Baker, data analyst with the QENTOL,YEN WSANEC Marine Guardians
+re: using SalishSeaCast from ERDDAP to analyze vessel speeds in Haro and Boundary straits
+like the ECHO program does.
+Resumed backfilling nowcast-agrif:
+* sorted out host key verification issue for seawolf1 with manual ssh session key acceptance
+* downloaded completed runs:
+    download_results orcinus nowcast-agrif 2023-11-11 --debug  # success
+    download_results orcinus nowcast-agrif 2023-11-12  # success and make_plots launched
+    make_plots nemo nowcast-agrif research 2023-11-11
+* backfilling with ``partition:DDR ; nodes = 48:ppn=8``
+    wait for automation to fail at ~08:45
+    upload_forcing orcinus nowcast+ 2023-11-13
+    upload_forcing orcinus turbidity 2023-11-13
+    wait for run to finish
+
+    upload_forcing orcinus nowcast+ 2023-11-14
+    upload_forcing orcinus turbidity 2023-11-14
+    wait for run to finish
+(SalishSeaCast)
+
+Ran:
+  python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+all good!
+
+Continued work on xarray PR re: loffset deprecation:
+* branch: douglatornell-resample-time-offset-docs
+  * added code example proposed by Deepak to FutureWarning message
+  * commented on his suggestion of a `center=True` option with messiness of monthly resample
+(Reshapr)
+
+Slacked Rich about how to send email from peeler without auth; use localhost or smtp.eoas.ubc.ca as
+SMTP host instead of a UBC host.
+
+More research on "xarray backends file_manager RuntimeError: NetCDF: Not a valid ID":
+* googling "xarray open_mfdataset parallel" lead to:
+  * https://github.com/ecmwf/cfgrib/issues/110
+  * https://docs.xarray.dev/en/stable/user-guide/io.html#reading-multi-file-datasets
+Move xarray.open_mfdataset() parallel parameter value to extraction config YAML file:
+branch: parallel-read-option
+PR#106 - squash-merged
+(Reshapr)
 
 
 
 TODO:
 * update xarray-tests instructions to use Python 3.11
 * drop pkg install from xarray-docs instructions; it's included in docs.yml
-
-
-
-
-
-
-``make_ww3_*wind*_file`` stalls:
-* Mon
-  * 13-nov: currents forecast2
-  * 20-nov: wind forecast2
-* Tue
-  * 14-nov: currents forecast
-* Wed
-* Thu
-* Fri
-  * 17-nov: currents forecast
-* Sat
-  * 11-nov: winds forecast2
-* Sun
-  * 12-nov: currents forecast2
-
-
-
-
-
-Continued backfilling nowcast-agrif:
-* backfilling:
-    wait for automation to fail at ~08:45
-    make_forcing_links orcinus nowcast-agrif 2023-11-11
-    wait for run to finish
-
-    upload_forcing orcinus nowcast+ 2023-11-12
-    upload_forcing orcinus turbidity 2023-11-12
-    wait for run to finish
-(SalishSeaCast)
-
-
 
 
 
