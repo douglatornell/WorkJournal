@@ -5281,6 +5281,9 @@ restarted log_aggregator on skookum
 (SalishSeaCast)
 
 
+July
+====
+
 Sat 1-Jul-2023
 ^^^^^^^^^^^^^^
 
@@ -6783,8 +6786,9 @@ dataset.xml by a script:
   * datasets/ssc-nemo-201905/ubcSSg3DAuxiliaryFields1hV19-05.xml
 (erddap-datasets)
 
+
 September
----------
+=========
 
 Fri 1-Sep-2023
 ^^^^^^^^^^^^^^
@@ -7567,7 +7571,7 @@ make_ww3_wind_file forecast failed to launch; killed and re-ran it
 
 
 October
--------
+=======
 
 Sun 1-Oct-2023
 ^^^^^^^^^^^^^^
@@ -8527,7 +8531,7 @@ Coffee w/ Ilias.
 
 
 November
---------
+========
 
 Wed 1-Nov-2023
 ^^^^^^^^^^^^^^
@@ -9410,12 +9414,10 @@ Resumed backfilling nowcast-agrif:
     upload_forcing orcinus nowcast+ 2023-11-14
     upload_forcing orcinus turbidity 2023-11-14
     wait for run to finish
-    * I got nervouse when the run stalled at 4.1% complete, but it started time
+    * I got nervous when the run stalled at 4.1% complete, but it started time
       stepping again...
-
     upload_forcing orcinus nowcast+ 2023-11-15
     upload_forcing orcinus turbidity 2023-11-15
-    wait for run to finish
 (SalishSeaCast)
 
 Helped Jake identify another missing file issue in the wastewater results.
@@ -9426,9 +9428,217 @@ open_mfdataset blow up on chum operating on 61 hourly files :-)
 Changed deployment workflow to use mamba-org/setup-micromamba like the rest of our
 workflows that use conda envs; workflow was still using conda-incubator/setup-miniconda
 that I shiftwed away from in Mar-2023 elsewhere.
+(salishsea-site)
+
 Squash-merged dependabot PR to update cryptography re: CVE-2023-49083 re: DoS
 vulnerability.
-(salishsea-site)
+* salishsea-site
+* cookiecutter-MOAD-pypkg
+* cookiecutter-analysis-repo
+* SalishSeaNowcast
+* MoaceanParcels
+* NEMO_Nowcast
+* SalishSeaCast/docs
+* Reshapr
+* SalishSeaCmd
+* NEMO-Cmd
+
+
+Wed 29-Nov-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 2
+
+Finished update to Python 3.12:
+* branch: py312
+* PR#49 - squash-merged
+* updated pkgs & versions; 3.12 and sphinx versions updated
+* per-commit autoupdate
+* change envs to 3.12
+* dropped TROVE classifiers
+* changed sphinx-linkcheck workflow to 3.12
+* changed dev docs, badges, README to 3.12
+* dropped support for 3.10:
+  * pytest-with-coverage breaking changes, pyproject.toml, dev docs, badges, README
+Updated readthedocs build config:
+* branch: update-readthedocs-build
+* PR#54 - squash-merged
+* change to use mambaforge-22.9
+* pin versions of sphinx & extensions we use
+* add readthedocs build system pkgs
+Docs maintenance:
+* branch: docs-maint
+* PR#55 - squash-merged
+* changed badges layout in README & dev docs to table
+* fixed URLs for GHA workflow badges
+* added release and Hatch badges to Release process section of dev docs
+* added open issues review step to Release process section of dev docs
+Released v23.1.
+(SalishSeaCmd)
+
+Continued backfilling nowcast-agrif:
+* backfilling with ``partition:DDR ; nodes = 48:ppn=8; mem:1000mb``
+    wait for automation to fail at ~09:00
+    upload_forcing orcinus nowcast+ 2023-11-16
+    upload_forcing orcinus turbidity 2023-11-16
+    wait for run to finish
+    upload_forcing orcinus nowcast+ 2023-11-17
+    upload_forcing orcinus turbidity 2023-11-17
+    wait for run to finish
+    upload_forcing orcinus nowcast+ 2023-11-18
+    upload_forcing orcinus turbidity 2023-11-18
+    wait for run to finish
+    upload_forcing orcinus nowcast+ 2023-11-19
+    upload_forcing orcinus turbidity 2023-11-19
+(SalishSeaCast)
+
+Researched GitHub Teams to refine repo access in our orgs:
+* possible teams:
+  * Admins: Admin repo role
+  * Present Group Members: Maintain repo role
+  * Collaborators: Write repo role
+  * Alumni: Read repo role
+
+Updated sphinx & sphinx-rtd-theme versions:
+* branch: update-sphinx
+* PR#108 - 
+* re: release of sphinx-rtd-theme 2.0.0 that enables us to move forward to latest sphinx 7.2.6
+Started work on adding extraction from month-averaged datasets:
+* branch: issue32-mong-avg-extract
+* PR#109
+* re: issue#32 and Karyn's need for monthly climatologies of 202111
+* added yyyymm01() and yyyymm_end() date formatter functions
+(Reshapr)
+
+
+Thu 30-Nov-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 3
+
+Cleaned up some old backups on nodecraft server, deleted _old_files/ (pre-1.20.2 files)
+from instance, and restarted server after 46 days of uptime.
+
+Continued backfilling nowcast-agrif:
+* backfilling with ``partition:DDR ; nodes = 48:ppn=8; mem:1000mb``
+    wait for automation to fail at ~09:00
+    upload_forcing orcinus nowcast+ 2023-11-19
+    upload_forcing orcinus turbidity 2023-11-19
+    wait for run to finish
+    upload_forcing orcinus nowcast+ 2023-11-20
+    upload_forcing orcinus turbidity 2023-11-20
+    wait for run to finish
+    upload_forcing orcinus nowcast+ 2023-11-21
+    upload_forcing orcinus turbidity 2023-11-21
+* ``archive_tarball nowcast-green 2023-nov graham-dtn`` failed with an rsync error
+  due to graham connection or file system issue
+(SalishSeaCast)
+
+Continued work on adding extraction from month-averaged datasets:
+* branch: issue32-mong-avg-extract
+* PR#109
+* re: issue#32 and Karyn's need for monthly climatologies of 202111
+* added ``days per file`` item to model profile schema
+* added SalishSeaCast-201905-monthy-avg-salish model profile
+* added SalishSeaCast-202111-monthy-avg-salish model profile
+(Reshapr)
+
+
+December
+========
+
+Fri 1-Dec-2023
+^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 4
+
+Continued backfilling nowcast-agrif:
+* backfilling with ``partition:DDR ; nodes = 48:ppn=8; mem:1000mb``
+    wait for automation to fail at ~09:00
+    upload_forcing orcinus nowcast+ 2023-11-22
+    upload_forcing orcinus turbidity 2023-11-22
+    wait for run to finish
+    upload_forcing orcinus nowcast+ 2023-11-23
+    upload_forcing orcinus turbidity 2023-11-23
+    wait for run to finish
+    upload_forcing orcinus nowcast+ 2023-11-24
+    upload_forcing orcinus turbidity 2023-11-24
+    * watcher crashed, but job ran
+    upload_forcing orcinus nowcast+ 2023-11-25
+    upload_forcing orcinus turbidity 2023-11-25
+* manually rsync-ed 1905 Nov tarball & index to graham /nearline
+(SalishSeaCast)
+
+Finished adding extraction from month-averaged datasets:
+* branch: issue32-mong-avg-extract
+* PR#109 - squash-merged
+* re: issue#32 and Karyn's need for monthly climatologies of 202111
+* closed issue#32
+Created issue#110 re: FileNotFoundError exceptions that reach users.
+Added tests for extraction CLI function, and for resampling branch in CLI & API extraction
+functions to increase test coverage
+* branch: improve-test-coverage
+* PR#111 - squash-merged
+Started work on adding climatology calculation
+* branch: 
+* PR#
+* It seems to be essentially `extract_ds.groupby("time.month").mean("time")`
+* need to rework output_coords dict due to time cooord change from "time" to climatology group
+  (e.g. "month")
+(Reshapr)
+
+Phys Ocgy seminar: Dr. Matilde Jutras, post-doc at University of Hawaii, 
+The physical and biogeochemical drivers of deoxygenation in the Lower St. Lawrence Estuary and Gulf
+
+
+Sat 2-Dec-2023
+^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 5
+
+ECCC issued storm surge alerts for Sat through Tue with peak on Sun; wording is precautionary,
+based on low atmospheric pressure and high phase of tide cycle
+
+crop_gribs 12 stalled with 1 file unprocessed; nowcast runs delayed ~2h
+Continued backfilling nowcast-agrif:
+* backfilling with ``partition:DDR ; nodes = 48:ppn=8; mem:1000mb``
+    wait for automation to fail at ~10:45
+    upload_forcing orcinus nowcast+ 2023-11-26
+    upload_forcing orcinus turbidity 2023-11-26
+    wait for run to finish
+    upload_forcing orcinus nowcast+ 2023-11-27
+    upload_forcing orcinus turbidity 2023-11-27
+    wait for run to finish
+    * watcher crashed, but job ran
+(SalishSeaCast)
+
+
+Sun 3-Dec-2023
+^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 6
+
+Continued backfilling nowcast-agrif:
+* backfilling with ``partition:DDR ; nodes = 48:ppn=8; mem:1000mb``
+    download_results orcinus nowcast-agrif 2023-11-27
+    wait for automation to fail at ~09:00
+    upload_forcing orcinus nowcast+ 2023-11-28
+    upload_forcing orcinus turbidity 2023-11-28
+    wait for run to finish
+    upload_forcing orcinus nowcast+ 2023-11-29
+    upload_forcing orcinus turbidity 2023-11-29
+    wait for run to finish
+
+    upload_forcing orcinus nowcast+ 2023-11-30
+    upload_forcing orcinus turbidity 2023-11-30
+(SalishSeaCast)
+
+
+
+
+TODO:
+* Update AtlantisCmd to drop Python 3.10 because NEMO-Cmd has dropped it;
+  GHA workflow is failing
 
 
 
@@ -9450,11 +9660,11 @@ might be possible to change them in hindcast and production too?
 
 * Python 3.12:
   * successful workflow test with 3.12:
-    * SalishSeaCmd
     * AtlantisCmd
     * NEMO_Nowcast
     * moad_tools
     * salishsea-site
+    * SalishSeaCmd - migrated on 29nov23  PR#49
     * NEMO-Cmd - migrated on 20nov23 in PR#68
     * SalishSeaNowcast - success on khawla on 6nov23, migrated on 10nov23 in PR#209
     * Reshapr - migrated on 28oct23 in PR#99
@@ -9490,6 +9700,7 @@ TODO:
   * FVCOM-Cmd - done in PR#10
   * Reshapr - done 28oct23 in PR#100
   * NEMO-Cmd - done 20nov23 in PR#71
+  * SalishSeaCmd - done 20nov23 in PR#54
 
 
 TODO:
@@ -9497,8 +9708,6 @@ TODO:
 
 * migrate PyPDF2 to pypdf in SalishSeaNowcast
 
-
-* tidy module & functions notebook & module
 
 TODO:
 * modernize packaging:
@@ -9512,7 +9721,6 @@ TODO:
   * AtlantisCmd
   * SOG
   * SOG-Bloomcast-Ensemble
-  * FVCOM-Cmd
   * SalishSeaTools
   * rpn-to-gemlam
   * Marlin
