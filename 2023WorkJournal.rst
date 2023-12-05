@@ -9680,6 +9680,64 @@ Slack conversation with Henryk about central ITs concerns about skookum and upgr
 20.04 LTS.
 
 
+Tue 5-Dec-2023
+^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 1
+
+Group mtg; see whiteboard; bad UBC WiFi made for bad meeting
+(MOAD)
+
+No Greenwater River obs; make_v202111_runoff_file persisted yesterday's discharge
+Continued backfilling nowcast-agrif:
+* backfilling with ``partition:DDR ; nodes = 48:ppn=8; mem:1000mb``
+    wait for automation to fail at ~09:00
+    upload_forcing orcinus nowcast+ 2023-12-03
+    upload_forcing orcinus turbidity 2023-12-03
+    wait for run to finish
+    upload_forcing orcinus nowcast+ 2023-12-04
+    upload_forcing orcinus turbidity 2023-12-04
+    wait for run to finish
+
+    upload_forcing orcinus nowcast+ 2023-12-05
+    upload_forcing orcinus turbidity 2023-12-05
+(SalishSeaCast)
+
+Slack w/ Karyn re: Reshapr climatology calculations:
+* biol & grid are most important to her
+* how should she calculate density?
+
+Researched ERDDAP upgrade:
+* installed: 1.82 released 
+  * version jumped from 1.82 to 2.0 on 2019-06-26
+  * present Java &7 Tomcat:
+      cd /opt/tomcat/lib 
+      java -cp catalina.jar org.apache.catalina.util.ServerInfo
+
+      Server version: Apache Tomcat/8.0.28
+      Server built:   Oct 7 2015 18:25:21 UTC
+      Server number:  8.0.28.0
+      OS Name:        Linux
+      OS Version:     5.4.0-150-generic
+      Architecture:   amd64
+      JVM Version:    1.8.0_201-b09
+      JVM Vendor:     Oracle Corporation
+
+* latest: 2.23 released 2023-02-27
+  * Java 17 and Tomcat 10
+Continued Slack conversation w/ Henryk about upgrade; OS upgrade first.
+(ERDDAP)
+
+Henryk reported failed 10Tb drive in /results RAID; Susan authorized replacement.
+
+Squash-merged dependabot PRs to update jupyter-server re: CVE-2023-49080 re:
+paths leakage in tracebacks:
+* MoaceanParcels
+* SalishSeaTools
+
+Tracked down notebook to add metadata to 201702 mesh mask file:
+  tools/bathymetry/mesh_mask201702_metadata.ipynb
+(erddap-datasets)
 
 
 TODO:
