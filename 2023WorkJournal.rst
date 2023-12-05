@@ -9580,8 +9580,6 @@ functions to increase test coverage
 * branch: improve-test-coverage
 * PR#111 - squash-merged
 Started work on adding climatology calculation
-* branch: 
-* PR#
 * It seems to be essentially `extract_ds.groupby("time.month").mean("time")`
 * need to rework output_coords dict due to time cooord change from "time" to climatology group
   (e.g. "month")
@@ -9632,6 +9630,54 @@ Continued backfilling nowcast-agrif:
     upload_forcing orcinus nowcast+ 2023-11-30
     upload_forcing orcinus turbidity 2023-11-30
 (SalishSeaCast)
+
+
+Week 49
+-------
+
+Mon 4-Dec-2023
+^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 0
+
+make_ww3_wind_file forecast2 stalled; killed it and re-ran
+make_ww3_current_file forecast stalled; killed it and re-ran
+Continued backfilling nowcast-agrif:
+* backfilling with ``partition:DDR ; nodes = 48:ppn=8; mem:1000mb``
+    wait for automation to fail at ~09:00
+    upload_forcing orcinus nowcast+ 2023-11-30
+    upload_forcing orcinus turbidity 2023-11-30
+    wait for run to finish
+    upload_forcing orcinus nowcast+ 2023-12-01
+    upload_forcing orcinus turbidity 2023-12-01
+    wait for run to finish
+    upload_forcing orcinus nowcast+ 2023-12-02
+    upload_forcing orcinus turbidity 2023-12-02
+(SalishSeaCast)
+
+Slack to Jose to let him know baout graham December /scratch purge.
+
+Continued work on adding v2021-11 datasets to ERDDAP:
+* branch: bathymetry-202108
+* PR#3
+* added ubcSSnBathymetryV21-08 dataset
+* updated skookum to bathymetry-202108 branch and touched dataset to load it
+(erddap-datasets)
+
+Updated ubcSSnBathymetryV17-02 bathymetry dataset refs
+* branch: bathymetry-202108
+* PR#112 - squash-merged
+Continued work on adding climatology calculation
+* branch: 
+* PR#
+* need to rework output_coords dict due to time cooord change from "time" to climatology group
+  (e.g. "month")
+(Reshapr)
+
+Slack conversation with Tall about accessing ONC datasets.
+
+Slack conversation with Henryk about central ITs concerns about skookum and upgrading it to 
+20.04 LTS.
 
 
 
