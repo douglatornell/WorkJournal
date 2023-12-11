@@ -9697,10 +9697,6 @@ Continued backfilling nowcast-agrif:
     wait for run to finish
     upload_forcing orcinus nowcast+ 2023-12-04
     upload_forcing orcinus turbidity 2023-12-04
-    wait for run to finish
-
-    upload_forcing orcinus nowcast+ 2023-12-05
-    upload_forcing orcinus turbidity 2023-12-05
 (SalishSeaCast)
 
 Slack w/ Karyn re: Reshapr climatology calculations:
@@ -9738,6 +9734,164 @@ paths leakage in tracebacks:
 Tracked down notebook to add metadata to 201702 mesh mask file:
   tools/bathymetry/mesh_mask201702_metadata.ipynb
 (erddap-datasets)
+
+
+Wed 6-Dec-2023
+^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 2
+
+graham down for cooling system maintenance
+orcinus down for switch replacement
+
+No Greenwater River obs; make_v202111_runoff_file persisted yesterday's discharge
+(SalishSeaCast)
+
+Updated OS pkgs; server reboot required.
+Stopped app.
+Rebooted VM.
+Waited for notification from UptimeRobot.
+Started app; confirmed that it is working.
+Sent summary email to Stephanie.
+(Resilient-C)
+
+Continued work on adding climatology calculation
+* branch: climatology
+* PR#113
+* raise exceptions in API and CLI for extraction configs with both `resample` and `climatology`
+  stanzas
+* switched salish clone to climatology branch for testing
+* ran performance tests on salish on-demand cluster:
+  * persistent cluster isn't working :-(
+  * biology, 1 variable, 1 year: 18.7s
+  * biology, 1 variable, 2 years: 25.8s
+  * biology, 1 variable, 3 years: 23.7s
+  * biology, 1 variable, 4 years: 26.4s
+  * biology, 2 variables, 1 year: 23.0s
+  * biology, 3 variables, 1 year: 31.9s
+  * biology, 4 variables, 1 year: 41.8s
+  * biology, 11 variables, 1 year: 94.0s
+  * biology, 11 variables, 2 years: 114.2s
+  * biology, 11 variables, 3 years: 129.0s
+  * biology, 11 variables, 4 years: 158.0s
+  * biology, 11 variables, 16.67 years: 627.3s
+
+* TODO:
+  * found bug in `reshapr info` re: month-avg file name patterns
+  * need to rework output_coords dict due to time cooord change from "time" to climatology group
+    (e.g. "month")
+(Reshapr)
+
+Updated khawla PyCharm to 2023.3
+
+
+Thu 7-Dec-2023
+^^^^^^^^^^^^^^
+
+Reid Bros. annual boiler inspection/maintenance.
+
+Days since last wwatch3 prep stall: 3
+
+No Greenwater River obs; make_v202111_runoff_file persisted yesterday's discharge
+Finished backfilling nowcast-agrif:
+* email from Mark saying that switch is mostly back in operation, though file system is still slow;
+  asked me to tgry a QDR job
+    upload_forcing orcinus nowcast+ 2023-12-05
+    upload_forcing orcinus turbidity 2023-12-05
+    wait for run to finish
+    upload_forcing orcinus nowcast+ 2023-12-06
+    upload_forcing orcinus turbidity 2023-12-06
+    wait for run to finish
+    upload_forcing orcinus nowcast+ 2023-12-07
+    upload_forcing orcinus turbidity 2023-12-07
+* sent Mark email with log and analysis of 5dec QDR run performance
+(SalishSeaCast)
+
+Continued Slack conversation w/ Henryk re: skookum OS change to 20.04:
+* ERDDAP docs say to install tomcat from tarball, so it is independent of OS package
+
+Continued work on adding climatology calculation
+* branch: climatology
+* PR#113
+* started factoring out and generalizing climatology calculation function
+(Reshapr)
+
+UBC-DFO modeling mtg; Natasha's climate forecast SalishSeaCast runs
+
+Zoom mtg w/ Dan Baker of QENTOL, YEN W̱SÁNEĆ Marine Guardians:
+* difference from Port ECHO program is that Port uses average ship speed over track section;
+  QENTOL wants to use finer resolution; also Port only does Jun-Nov; QENTOL want all year
+* goals are:
+  * weekly or monthly reports 
+  * some analysis of past; AIS data goes back to 2017-ish
+* offerred to extend rolling forecast to make weekly processing easy
+  * also discussed what depth to average over; will change or add
+* offerred to help with code for processing of uv fields for past analysis; or can we do the 
+  processing and make the fields available?
+* Dan said he had time-out issues getting CSVs from ERDDAP; talked about xarray; he knows pandas
+* asked Dan to provide yx region of interest so I can experiment
+* agreed to meet again in January after he meets with Transport Canada and ECHO folks
+
+Team mtg.
+(Atlantis)
+
+
+Fri 8-Dec-2023
+^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 4
+
+No Greenwater River obs; make_v202111_runoff_file persisted yesterday's discharge.
+nowcast-agrif failed:
+* motd says that the fabric failed
+(SalishSeaCast)
+
+IOS seminar: Will Burt of Planetary, “Accelerating research in marine carbon dioxide removal
+(mCDR) across Canada via public/private sector collaboration”
+
+
+Sat 9-Dec-2023
+^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 5
+
+nowcast-agrif/08dec23 finished; I guess Mark was able to restart the job after fabric repair
+(SalishSeaCast)
+
+
+Sun 10-Dec-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 6
+
+Backfilling nowcast-agrif:
+  download_results orcinus nowcast-agrif 2023-12-08
+  upload_forcing orcinus nowcast+ 2023-12-09
+  upload_forcing orcinus turbidity 2023-12-09
+  wait for run to finish
+  upload_forcing orcinus nowcast+ 2023-12-10
+  upload_forcing orcinus turbidity 2023-12-10
+(SalishSeaCast)
+
+
+
+
+
+
+
+Estate plan elements
+* POAs
+* minor beneficiaries - N/A
+* disabled beneficiaries - N/A
+* funeral arrangements
+* long term care plan - assets
+* tax efficiency
+* blended families - N/A
+* wills
+* beneficiary designations
+
+
+
 
 
 TODO:
