@@ -9810,7 +9810,7 @@ Finished backfilling nowcast-agrif:
 Continued Slack conversation w/ Henryk re: skookum OS change to 20.04:
 * ERDDAP docs say to install tomcat from tarball, so it is independent of OS package
 
-Continued work on adding climatology calculation
+Continued work on adding climatology calculation:
 * branch: climatology
 * PR#113
 * started factoring out and generalizing climatology calculation function
@@ -9874,6 +9874,31 @@ Backfilling nowcast-agrif:
 (SalishSeaCast)
 
 
+Tue 12-Dec-2023
+^^^^^^^^^^^^^^^
+
+Worked at ESB while Rita was at home.
+
+Days since last wwatch3 prep stall: 8
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Squash-merged dependabot PRs to update setup-micromamba to v1.7.0:
+* SalishSeaNowcast
+* erddap-datasets
+* gha-workflows
+* salishsea-site
+
+Started work on maseh mask datasets using new notebook based off
+tools/bathymetry/mesh_mask201702_metadata.ipynb
+* updated salishsea-tools env on kudu
+* updated make_readme in tools/bathymetry
+* created mesh_mask202108_metadata notebook
+(erddap-datasets)
+
+Tested wired Internet speed in my ESB office; much better than recently:
+1.1 Gbps down, 665 Mbps up
 
 
 
