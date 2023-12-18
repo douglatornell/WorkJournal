@@ -9874,6 +9874,21 @@ Backfilling nowcast-agrif:
 (SalishSeaCast)
 
 
+Week 50
+-------
+
+Mon 11-Dec-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 7
+
+Backfilled upload_forcing to graham for 6-7 Dec during its recent outage.
+(SalishSeaCast)
+
+Attended MetroVan/UBC WorkShop: Dispersion of Endocrine Disruptive Chemicals in the Strait of 
+Georgia at Metro HQ.
+
+
 Tue 12-Dec-2023
 ^^^^^^^^^^^^^^^
 
@@ -9900,22 +9915,123 @@ tools/bathymetry/mesh_mask201702_metadata.ipynb
 Tested wired Internet speed in my ESB office; much better than recently:
 1.1 Gbps down, 665 Mbps up
 
+Dr. appt re: outer ear infection; got perscription for drops.
+
+Picked up new kitchen & bar faucets from Hillcrest.
 
 
+Wed 13-Dec-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 0
+
+make_ww3_wind_file forecast2 stalled; killed it and re-ran, then run_ww3 because race condition
+management had moved on to nowcast runs
+(SalishSeaCast)
+
+Played with https://eccc-msc.github.io/msc-animet/
+
+Slack w/ Cassidy re: restart files and nn_it000 values for runs initialized from hindcast restarts.
+
+Updated PyCharm on khawla to 2023.3.1.
+
+Continued work on adding climatology calculation:
+* branch: climatology
+* PR#113
+* added climatology month & day time coordinate handling to calc_coord_encoding()
+* started work on refactoring calc_var_encoding() to handle climatology time coords instead of
+  mutating output_coords
+(Reshapr)
+
+Started Ciprodex eardrops.
 
 
-Estate plan elements
-* POAs
-* minor beneficiaries - N/A
-* disabled beneficiaries - N/A
-* funeral arrangements
-* long term care plan - assets
-* tax efficiency
-* blended families - N/A
-* wills
-* beneficiary designations
+Thu 14-Dec-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 1
+
+Created passkey for GitHub auth.
+
+watch_NEMO_agrif crashed, probably due to slow file system on orcinus
+  wait for run to finish
+  download_results orcinus nowcast-agrif 2023-12-14
+(SalishSeaCast)
+
+Continued work on adding climatology calculation:
+* branch: climatology
+* PR#113
+* finished work on refactoring calc_var_encoding() to handle climatology time coords instead of
+  mutating output_coords
+* updated unlimited dimension handling so that there isn't one for climatology datasets
+* added calc_climatology()
+* ran performance tests on salish on-demand cluster:
+  * physics, 5 variables, 1 year: 55.4s
+  * physics, 5 variables, 16.67 years: 280.8s
+* re-ran biology climatology to get month coordinate metadata correct
+  * biology, 11 variables, 16.67 years: 636.4s
+* ran chemistry climatology:
+  * stalled on first try :-(
+  * biology, 6 variables, 16.67 years: 341.0s
+(Reshapr)
 
 
+Fri 15-Dec-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 2
+
+Phys Ocgy seminar:
+* Winnie Wen: Deep Gravity Currents in the SoG; Rich's summer coop student
+* Susan: Iona Outfall; graphics by Jake
+
+Coffee with Karyn.
+
+Slack w/ Cassidy re: ValueError in Reshapr; either bad ``x max:`` or bad file, probably latter.
+
+
+Sat 16-Dec-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 3
+
+
+Sun 17-Dec-2023
+^^^^^^^^^^^^^^^
+
+collect_river_data failed for at least some rivers with a KeyError on the date:
+* none of the datamart hourly hydrometric .csv files have been updated since ~21:00 on 15dec23
+* recovery started at ~09:00
+    persist 15dec23 discharge in /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow
+    make_runoff_file 2023-12-17
+    upload_forcing arbutus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing graham-dtn nowcast+
+(SalishSeaCast)
+
+Continued update to Python 3.12:
+* branch: py312
+* PR#43 - 
+* updated pkgs & versions; 3.12 updated
+* change envs to 3.12
+* dropped TROVE classifiers
+* changed sphinx-linkcheck workflow to 3.12
+* changed dev docs, badges, README to 3.12
+  
+* dropped support for 3.10:
+  * pytest-with-coverage breaking changes, pyproject.toml, dev docs, badges, README
+
+* TODO:
+  * pin sphinx & extensions version & add rtd dependencies
+  * add pre-commit
+(moad_tools)
+
+
+TODO:
+* after hydrometric .csv files are restored
+    collect_river_data.sh
+    make_v202111_runoff_file 2023-12-17
 
 
 
@@ -10009,15 +10125,6 @@ TODO:
   * Marlin
 
 
-TODO:
-* pre-commit auto-update
-  * MOAD/docs - done
-  * SalishSeaNowcast
-  * MoaceanParcels
-  * cookiecutter-MOAD-pypkg
-  * AtlantisCmd
-
-
 
 TODO:
 * review and clean up permissions in GitHub orgs
@@ -10064,11 +10171,6 @@ Reshapr ideas:
   * simple whole field extraction for a few variables
   * temporal and spatial selection
   * resampling
-* extraction from month-avg datasets; issue #32
-  * need to handle month-by-month dataset files 
-    (e.g. SalishSeaCast_1m_ptrc_T_20220301_20220331.nc); 
-    code presently assumes day-by-day
-    (e.g. SalishSea_1d_20220314_20220314_ptrc_T.nc)
 
 
 
