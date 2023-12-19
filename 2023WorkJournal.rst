@@ -9999,7 +9999,9 @@ Days since last wwatch3 prep stall: 3
 Sun 17-Dec-2023
 ^^^^^^^^^^^^^^^
 
-collect_river_data failed for at least some rivers with a KeyError on the date:
+Days since last wwatch3 prep stall: 4
+
+collect_river_data failed with KeyError exceptions on the date:
 * none of the datamart hourly hydrometric .csv files have been updated since ~21:00 on 15dec23
 * recovery started at ~09:00
     persist 15dec23 discharge in /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow
@@ -10018,20 +10020,91 @@ Continued update to Python 3.12:
 * dropped TROVE classifiers
 * changed sphinx-linkcheck workflow to 3.12
 * changed dev docs, badges, README to 3.12
-  
-* dropped support for 3.10:
-  * pytest-with-coverage breaking changes, pyproject.toml, dev docs, badges, README
-
-* TODO:
-  * pin sphinx & extensions version & add rtd dependencies
-  * add pre-commit
 (moad_tools)
+
+
+Week 50
+-------
+
+Mon 11-Dec-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 5
+
+collect_river_data failed with KeyError exceptions on the date:
+* none of the datamart hourly hydrometric .csv files have been updated since ~21:00 on 15dec23
+* sent email to Sandrine
+* recovery started at ~09:10
+    persist 15dec23 discharge in /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow
+    make_runoff_file 2023-12-18
+    upload_forcing arbutus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing graham-dtn nowcast+
+* updates resumed late in the afternoon
+(SalishSeaCast)
+
+New faucets installed by Reid Bros.
+
+Squash-merged dependabot PRs:
+* codeql-action from v2 to v3
+  * gha-workflows
+* setup-micromamba from 1.7.0 to 1.7.3:
+  * SalishSeaNowcast
+  * erddap-datasets
+  * gha-workflows
+  * salishsea-site
+
+Finished update to Python 3.12:
+* branch: py312
+* PR#43 - squash-merged
+* updated pkgs & versions; 3.12 updated
+* change envs to 3.12
+* dropped TROVE classifiers
+* changed sphinx-linkcheck workflow to 3.12
+* changed dev docs, badges, README to 3.12
+* dropped support for 3.10:
+  * pytest-with-coverage, setup.cfg, dev docs, badges, README
+* Update bbox assertion in test_random_oil_spills re:
+    "ShapelyDeprecationWarning: The
+    'almost_equals()' method is deprecated and will be removed in Shapely 2.1".
+Enabled PR build on readthedocs.
+Updated readthedocs build config:
+* branch: update-readthedocs-build
+* PR#47 - squash-merged
+* change to mambaforge-22.09
+* pin sphinx & extensions version & add rtd dependencies
+Modernized packaging:
+* branch: modernize-pkg
+* PR#48 - squash-merged
+* move package metadata and entry points from setup.cfg to pyproject.toml
+* drop setup.py and setup.cfg
+* change from setuptools to hatchling for build backend
+* move version identifier to ``__about__.py``
+* change to use ``importlib.metadata.version()``
+* install pkg in readthedocs env so that Sphinx can access its metadata
+* add release process section to dev docs
+* changed badges layout in README & dev docs to table
+* updated pkgs & versions in recent dev env
+Added pre-commit:
+* branch: add-pre-commit
+* PR#49 - squash-merged
+* add pre-commit dependency
+* add .pre-commit-config.yaml
+* update Code Style docs re: pre-commit
+* run ``pre-commit run --all`` to garden code & docs
+Released v23.1 and bumped dev to v24.0.
+(moad_tools)
+
+
 
 
 TODO:
 * after hydrometric .csv files are restored
     collect_river_data.sh
+    # fix Fraser file to remove persisted discharges
     make_v202111_runoff_file 2023-12-17
+    make_v202111_runoff_file 2023-12-18
 
 
 
@@ -10061,8 +10134,8 @@ might be possible to change them in hindcast and production too?
   * successful workflow test with 3.12:
     * AtlantisCmd
     * NEMO_Nowcast
-    * moad_tools
     * salishsea-site
+    * moad_tools - migrated on 18Dec23 in PR#43
     * SalishSeaCmd - migrated on 29nov23  PR#49
     * NEMO-Cmd - migrated on 20nov23 in PR#68
     * SalishSeaNowcast - success on khawla on 6nov23, migrated on 10nov23 in PR#209
@@ -10099,7 +10172,8 @@ TODO:
   * FVCOM-Cmd - done in PR#10
   * Reshapr - done 28oct23 in PR#100
   * NEMO-Cmd - done 20nov23 in PR#71
-  * SalishSeaCmd - done 20nov23 in PR#54
+  * SalishSeaCmd - done 29nov23 in PR#54
+  * moad_tools - done 18dec23 in PR#47
 
 
 TODO:
@@ -10111,7 +10185,7 @@ TODO:
 TODO:
 * modernize packaging:
   * Reshapr - done 30oct23 in PR#101
-  * moad_tools
+  * moad_tools - done 18dec23 in PR#48
   * cookiecutter-MOAD-pypkg
   * salishsea-site
   * NEMO_Nowcast
