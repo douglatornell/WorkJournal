@@ -10023,10 +10023,10 @@ Continued update to Python 3.12:
 (moad_tools)
 
 
-Week 50
+Week 51
 -------
 
-Mon 11-Dec-2023
+Mon 18-Dec-2023
 ^^^^^^^^^^^^^^^
 
 Days since last wwatch3 prep stall: 5
@@ -10097,30 +10097,455 @@ Released v23.1 and bumped dev to v24.0.
 (moad_tools)
 
 
+Tue 19-Dec-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 6
+
+Worked at ESB.
 
 
-TODO:
-* after hydrometric .csv files are restored
-    collect_river_data.sh
-    # fix Fraser file to remove persisted discharges
-    make_v202111_runoff_file 2023-12-17
-    make_v202111_runoff_file 2023-12-18
+Wed 20-Dec-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 7
+
+Finished recovery from hydrometric CSV files outage:
+* used wateroffice site to get day-avg discharge for Englishman for 16dec;
+  suspicious that mean calculated on page is > any value in 24 hour period;
+  turns out that mean and other stats are from climatology :-(
+  Susan eyeballed values off the graphs for Fraser and Englishman files :shrug:
+* readthedocs build are failing due to hatchling wheel build not finding package directory;
+  hatchling 1.19.0 changed its package identification heuristics such that an 
+  explicit declaration of the code directory tree to build the wheel for 
+  installation from is now required.
+  * branch: hatch-build-targets-wheel
+  * PR#222 - 
+(SalishSeaNowcast)
+
+Squash-merged dependabot PR in SalishSeaNowcast to upgrade paramiko re: CVE-2023-48795 re: Terrapin 
+attack.
+
+Added hatch wheel build target to pyproject.toml re: hatchling 1.19.0 package id heuristics change:
+* branch: hatch-build-targets-wheel
+* PR#56 - squash-merged
+(SalishSeaCmd)
 
 
+Thu 21-Dec-2023
+^^^^^^^^^^^^^^^
 
-TODO:
-* Update AtlantisCmd to drop Python 3.10 because NEMO-Cmd has dropped it;
-  GHA workflow is failing
+Days since last wwatch3 prep stall: 8
+
+make_ww3_wind_file messages not appearing in log; restarted log_aggregator
+(SalishSeaCast)
+
+Update to PyCharm 2023.3.2 on khawla.
+
+Added hatch wheel build target to pyproject.toml re: hatchling 1.19.0 package id heuristics change:
+* branch: hatch-build-targets-wheel
+* PR#50 - squash-merged
+(moad_tools)
+
+Added hatch wheel build target to pyproject.toml re: hatchling 1.19.0 package id heuristics change:
+* branch: hatch-build-targets-wheel
+* PR#74 - squash-merged
+(NEMO-Cmd)
+
+Added hatch wheel build target to pyproject.toml re: hatchling 1.19.0 package id heuristics change:
+* branch: hatch-build-targets-wheel
+* PR#115 - squash-merged
+(Reshapr)
+
+Finished adding v2021-11 datasets to ERDDAP:
+* branch: bathymetry-202108
+* PR#3 - squash-merged
+* added mesh_mask202108_metadata.ipynb to README
+* updated skookum back to main branch
+(erddap-datasets)
+
+Minecraft:
+* downloaded 1.20.4 version of malilib, minihud & tweakeroo from curseforge
+* downloaded 1.20.4 version of double shulker shells datapack from vallina tweaks
+* downloaded 1.20.4 versions of resource packs from vanilla tweaks:
+  * iron bars fix
+  * lower shield
+  * redstone devices:
+    * StickyPistonSides
+    *	DirectionalDispensersDroppers
+    *	DirectionalHoppers
+    *	BetterObservers
+    *	GroovyLevers
+    *	RedstoneWireFix
+* downloaded sodium 0.5.5 for 1.20.4
+* downloaded lithium 0.12.1 for 1.20.4
+* stopped nodecraft server
+* created Vaunted Morty backup of 1.20.2 world and locked it
+* used 1-click installer to update server to fabric 1.20.4-0.15.3 via archive method
+* copied files from _old_files to /:
+  * banned-ips.json
+  * banned-players.json
+  * eula.txt
+  * ops.json
+  * server.properties
+  * whitelist.json
+* copied world folder to /:
+  * 1-20-1-25jul23
+* uploaded double shulker shells datapack to /1-20-1-25jul23/datapacks and deleted old version
+* uploaded lithium to /mods
+* started server
+* created 1.20.4 instance in MultiMC
+  * installed fabric 0.15.3 in instance version config
+  * installed loader mods:
+    * lithium
+    * sodium
+    * malilib
+    * minihud
+    * tweakeroo
+  * installed resource packs:
+    * iron bars fix
+    * lower shield
+    * redstone devices
+  * added nodecraft server
+  * copied mod configs from 1.20.2/.minecraft/config/
+    * minihud/
+    * malilib.json
+    * minihud.json
+    * tweakeroo.json
+* started client
+* configured client
+  * accessibility settings:
+    * show subtitles: on
+  * options:
+    * FOV: 80
+  * video settings:
+    * Brightness: Bright
+    * GUI Scale: 2
+  * music and sound:
+    * Music: 50%
+    * Directional Audio: On
+  * enabled optional telemetry data
+  * selected resource packs
+  * enabled advanced tooltips: F3+H
 
 
+Fri 22-Dec-2023
+^^^^^^^^^^^^^^^
 
-TODO:
-* update xarray-tests instructions to use Python 3.11
-* drop pkg install from xarray-docs instructions; it's included in docs.yml
+Days since last wwatch3 prep stall: 9
+
+Added JetBrains AI annual license.
+
+Finished adding climatology calculation:
+* branch: climatology
+* PR#113 - squash-merged
+* added example text and YAML file to docs
+Fixed missing yyymm01 and yyyymm_end date patterns in info._vars_list().
+* branch info-month-date-patterns
+* PR#116 - squash-merged
+Released v23.2 and bumped version to 24.1.dev0 for next dev cycle.
+Updated /SalishSeaCast/Reshapr and /ocean/dlatorne/MOAD/Reshapr clones.
+(Reshapr)
 
 
+Sat 23-Dec-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 10
 
 
+Sun 24-Dec-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 11
+
+Rode Stanley Park Loop.
+
+
+Week 52
+-------
+
+Mon 25-Dec-2023
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Christmas Day
+
+Days since last wwatch3 prep stall: 12
+
+
+Tue 26-Dec-2023
+^^^^^^^^^^^^^^^
+
+**Statutory Holiday** - Boxing Day
+
+Days since last wwatch3 prep stall: 0
+
+make_ww3_wind_file forecast2 stalled; killed it and skipped run
+arbutus login and terminal response was sluggish
+(SalishSeaCast)
+
+Started overhaul of Susan's Topstone:
+* stripped to frame
+* washed
+* started cleaning cogs, pulleys & chainrings with degreaser
+
+
+Wed 27-Dec-2023
+^^^^^^^^^^^^^^^
+
+UBC Paid Leave
+
+Days since last wwatch3 prep stall: 0
+
+make_ww3_wind_file forecast stalled; killed and re-ran
+(SalishSeaCast)
+
+
+Thu 28-Dec-2023
+^^^^^^^^^^^^^^^
+
+UBC Paid Leave
+
+Days since last wwatch3 prep stall: 0
+
+make_ww3_wind_file forecast2 stalled; killed and skipped run
+(SalishSeaCast)
+
+skookum OS upgrade to 20.04 LTS:
+* started at ~14:00
+  * shut down ERDDAP
+    * /opt/tomcat/bin/shutdown.sh
+  * shut down salishsea-site supervisor
+    * supervisorctl -c /SalishSeaCast/salishsea-site/supervisord-prod.ini stop salishsea-site
+    * supervisorctl -c /SalishSeaCast/salishsea-site/supervisord-prod.ini shutdown
+  * shut down SalishSeaCast:
+    * wait for collect_weather 18 and 1km download_weather workers to finish
+    * pkill -f nowcast.workers.collect_weather  # 18
+    * wait for crop_gribs 18 to finish
+    * pkill -f nowcast.workers.crop_gribs  # 00
+    * cleaned up a bunch of stalled upload_forcing graham-dtn workers
+    * supervisorctl -c $NOWCAST_CONFIG/supervisord.ini stop sr_subscribe-hydrometric
+    * supervisorctl -c $NOWCAST_CONFIG/supervisord.ini stop sr_subscribe-hrdps-continental
+    * supervisorctl -c $NOWCAST_CONFIG/supervisord.ini stop manager
+    * supervisorctl -c $NOWCAST_CONFIG/supervisord.ini stop log_aggregator
+    * supervisorctl -c $NOWCAST_CONFIG/supervisord.ini stop message_broker
+    * supervisorctl -c $NOWCAST_CONFIG/supervisord.ini shutdown
+* Henryk started reboot, root backup, upgrade at 14:30
+  * Ubuntu update servers not accessible; postponed until tomorrow
+* restart started at ~17:40:
+  * SalishSeaCast:
+    * supervisord -c $NOWCAST_CONFIG/supervisord.ini 
+    * collect_weather 00 2.5km
+    * crop_gribs 00 2023-12-29
+  * ERDDAP:
+    * /opt/tomcat/bin/startup.sh
+  * salishsea-site:
+    * conda activate salishsea-site-env
+      * had to source envvars.sh manually ???
+    * supervisord -c /SalishSeaCast/salishsea-site/supervisord-prod.ini 
+
+Continued overhaul of Susan's Topstone:
+* finished cleaning cogs, pulleys & chainrings with degreaser
+* removed and cleaned brake rotors with isopropyl
+* stripped new chain with Silca stripper
+* reinstalled cogs, pulleys & chainrings
+* installed new chain and lubed with with Silca Synergetic
+* discovered frozen brake pad retainer bolts with damaged heads
+
+
+Fri 29-Dec-2023
+^^^^^^^^^^^^^^^
+
+UBC Paid Leave
+
+Days since last wwatch3 prep stall: 0
+
+make_ww3_current_file forecast2 stalled; killed and skipped run
+(SalishSeaCast)
+
+retry skookum OS upgrade to 20.04 LTS:
+* Henryk wants to start at 14:00, so started shutdown earlier
+* SalishSeaCast:
+  * kill collect_weather 18 2.5km
+  * kill crop_gribs 18
+  * kill watch_NEMO salish nowcast-dev
+  * kill archive_tarball hindcast 2023-oct
+  * kill archive_tarball hindcast 2023-nov
+  * supervisorctl -c $NOWCAST_CONFIG/supervisord.ini stop sr_subscribe-hydrometric
+  * supervisorctl -c $NOWCAST_CONFIG/supervisord.ini stop sr_subscribe-hrdps-continental
+  * supervisorctl -c $NOWCAST_CONFIG/supervisord.ini stop manager
+  * supervisorctl -c $NOWCAST_CONFIG/supervisord.ini stop log_aggregator
+  * supervisorctl -c $NOWCAST_CONFIG/supervisord.ini stop message_broker
+  * supervisorctl -c $NOWCAST_CONFIG/supervisord.ini shutdown
+  * shut down ERDDAP
+    * /opt/tomcat/bin/shutdown.sh
+  * shut down salishsea-site supervisor
+    * supervisorctl -c /SalishSeaCast/salishsea-site/supervisord-prod.ini stop salishsea-site
+    * supervisorctl -c /SalishSeaCast/salishsea-site/supervisord-prod.ini shutdown
+* restart:
+  * ERDDAP:
+    * /opt/tomcat/bin/startup.sh
+  * salishsea-site:
+    * conda activate /SalishSeaCast/salishsea-site-env
+    * supervisord -c /SalishSeaCast/salishsea-site/supervisord-prod.ini 
+  * SalishSeaCast:
+    * supervisord -c $NOWCAST_CONFIG/supervisord.ini 
+    * 18 weather files were still flowing when sarracenia client started; ignored
+    * download_weather 18 2.5km
+    * crop_gribs 18  # missed a couple of files, hope that timeout will handle that
+    * download_weather 00 1km
+    * download_weather 12 1km
+    * collect_weather 00 2.5km 2023-12-30
+    * crop_gribs 00
+    * /ocean auto-mounts not working
+
+
+Continued overhaul of Susan's Topstone:
+* dosed frozen brake pad retainer bolt heads with WD-40
+
+Created empty 2024 gnucash sqlite3 file, exported accounts from 2023 to csv and imported them, then started editing accounts for 2024:
+* dropped no longer relevant accounts:
+* added stocks, ETFs & funds to securities database
+* started creating non-registered stock, ETF & fund accounts
+
+Rode Zwift Holiday Fondo on Big Ring route.
+
+
+Sat 30-Dec-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 0
+
+make_runoff_file failed due to data error for Fraser discharge:
+make_v202111_runoff_file patched Fraser discharge
+upload_forcing forecast2 and nowcast+ failed due to no 201905 runoff file
+* investigation:
+  * no discharge obs for Fraser since 28dec 17:00
+* recovery started at ~09:00:
+    # peristed 28dec Fraser dischage in /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow
+    make_runoff_file
+    upload_forcing arbutus nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing graham-dtn nowcast+
+* restarted hindcast tarball archiving:
+    archive_tarball hindcast 2023-oct
+    archive_tarball hindcast 2023-nov
+Discussed change-over of production to 202111 w/ Susan:
+* repo tags
+* NEMO build on arbutus
+* SS-run-sets production files & symlinks
+* decided to end nowcast-dev runs on salish
+* considered replacing nowcast-blue run on arbutus with nowcast-green
+  * advances nowcast run by ~70 minutes
+  * delays storm surge forecast by ~40 minutes
+  * delays wwatch3 runs by ~40 minutes
+  * **TODO**: nowcast-green will have to output 10min avg tide gauge station files that blue does
+* plan to drop code and config for VHFR FVCOM runs
+  * **TODO**: remove FVCOM boundary slab files output from file_def.xml
+* prepared arbutus:
+  * mkdir -p hindcast.202111/31dec23
+* prepared skookum:
+  * mkdir /results/SalishSea/nowcast-blue.202111/
+  * mkdir /results/SalishSea/forecast.202111/
+  * mkdir /results/SalishSea/forecast2.202111/
+(SalishSeaCast)
+
+Started SalishSeaNowcast updates for v202111:
+* branch: v202111-nowcast
+* PR#223 -
+* change to mesh_mask202108.nc and bathymetry_202108.nc files
+  * excluded:
+    * nowcast-dev
+    * nowcast-agrif
+    * vhfr fvcom
+* change to bathymetry_202108.csv land processor elimination file
+  * excluded:
+    * nowcast-dev
+* correct ssh config coords file name to coordinates_seagrid_SalishSea201702.nc re: issue #152
+* change run sets dir configs to SS-run-sets/v202111/ 
+* change results archive configs:
+    nowcast: /results/SalishSea/nowcast-blue.202111/
+    forecast: /results/SalishSea/forecast.202111/
+    forecast2: /results/SalishSea/forecast2.202111/
+    nowcast-green: /results2/SalishSea/nowcast-green.202111/
+* added 'river_turb' forcing symlink to run_NEMO YAML; that allows us to drop the special 
+  `namelist_smelt_rivers.arbutus` file in favour of the generic `namelist_smelt_rivers` one
+(SalishSeaNowcast)
+
+skookum post-upgrade TODOs for Henryk:
+* install emacs
+* change git to install from PPA ?
+
+Continued overhaul of Susan's Topstone:
+* dosed frozen brake pad retainer bolt heads with WD-40 again
+
+Conitnued gnucash setup for 2024:
+* finished creating non-registered stock, ETF & fund accounts
+* created RSP fund accounts
+* created TFSA fund accounts
+* started creating scheduled transactions
+
+* added opening balances
+
+
+Sun 31-Dec-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 1
+
+make_runoff_file failed due to data error for Fraser discharge:
+* no discharge obs for Fraser since 28dec 17:00
+make_v202111_runoff_file patched Fraser discharge
+upload_forcing forecast2 and nowcast+ failed due to no 201905 runoff file
+* recovery started at ~02:45:
+    # peristed 28dec Fraser dischage in /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow
+    make_runoff_file
+    upload_forcing arbutus nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing graham-dtn nowcast+
+Change-over of production to 202111:
+* wait for nowcast-green to finish at ~10:30 and hindcast/31dec23 to finish at ~??
+* pull SalishSeaNowcast on skookum & arbutus and change to v202111-nowcast branch
+* change repos on arbutus to main branch and pull updates:
+  * XIOS-2
+    * changed default branch of clone from master to main
+  * NEMO-3.6-code
+    * changed default branch of clone from master to main
+    * clean and build SalishSeaCast and SalishSeaCast_Blue NEMO configs
+  * XIOS-ARCH
+    * updated links in XIOS-2/arch/ re: COMPUTECANADA -> ALLIANCE
+  * grid
+    * was on main, not tag
+  * rivers-climatology
+  * SS-run-sets
+    * was on main, not tag
+  * tides
+  * tracers
+* pull main branch updates in repos on arbutus & skookum:
+  * NEMO-Cmd
+  * NEMO_Nowcast
+  * SalishSeaCmd
+  * moad_tools
+* symlink on arbutus hindcast.202111/31dec23 as nowcast-green/31dec23
+  * cd /nemoShare/MEOPAR/SalishSea/nowcast-green
+  * mv 31dec23 31dec23-201905
+  * ln -s ../hindcast.202111/31dec23
+* symlink on skookum 26-31dec23 nowcast-blue, forecast & forecast2 .201905 to .202111
+  so that rolling forecasts will be smooth
+* rsync nowcast-green.202111/31dec23/ files to arbutus:hindcast.202111/31dec23
+  * SalishSea_*_restart.nc
+  * SalishSea_*_restart_trc.nc
+  * namelist_cfg
+(SalishSeaCast)
+
+Continued SalishSeaNowcast updates for v202111:
+* branch: v202111-nowcast
+* PR#223 -
+* dropped launch of make_runoff_file from automation re: missing Fraser obs now,
+  and it's replaced by make_v202111_runoff_file
+(SalishSeaNowcast)
 
 
 test whether or not to --bind-to-core on sockeye
@@ -10128,92 +10553,6 @@ test whether or not to --bind-to-core on sockeye
 
 do we want to change the zoop variable names in ERDDAP for 202111?
 might be possible to change them in hindcast and production too?
-
-
-* Python 3.12:
-  * successful workflow test with 3.12:
-    * AtlantisCmd
-    * NEMO_Nowcast
-    * salishsea-site
-    * moad_tools - migrated on 18Dec23 in PR#43
-    * SalishSeaCmd - migrated on 29nov23  PR#49
-    * NEMO-Cmd - migrated on 20nov23 in PR#68
-    * SalishSeaNowcast - success on khawla on 6nov23, migrated on 10nov23 in PR#209
-    * Reshapr - migrated on 28oct23 in PR#99
-  * failed workflow test with 3.12:
-    * SalishSeaCast/docs
-    * MOAD/docs - expect same problem as SalishSeaCast/docs
-    * MoaceanParcels - failing with 3.10; no point in trying 3.12 yet
-  * no workflows:
-    * erddap-datasets
-    * analysis-doug
-
-
-
-
-
-
-Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present to group.
-
-
-
-
-
-
-TODO:
-* change download_weather to gather only files missed by collect_weather so that it can
-  work with crop_gribs monitoring incoming files
-  * check for presence of files before downloading them; skip if present
-
-
-TODO:
-* update .readthedocs.yaml to use ubuntu-22.04 and mambaforge-22.9 in many repos
-  * MOAD/docs - done in PR#32
-  * FVCOM-Cmd - done in PR#10
-  * Reshapr - done 28oct23 in PR#100
-  * NEMO-Cmd - done 20nov23 in PR#71
-  * SalishSeaCmd - done 29nov23 in PR#54
-  * moad_tools - done 18dec23 in PR#47
-
-
-TODO:
-* fix straight line gaps in wwatch3 forecast plots (forecast2 are okay)
-
-* migrate PyPDF2 to pypdf in SalishSeaNowcast
-
-
-TODO:
-* modernize packaging:
-  * Reshapr - done 30oct23 in PR#101
-  * moad_tools - done 18dec23 in PR#48
-  * cookiecutter-MOAD-pypkg
-  * salishsea-site
-  * NEMO_Nowcast
-  * ECget
-  * MoaceanParcels
-  * AtlantisCmd
-  * SOG
-  * SOG-Bloomcast-Ensemble
-  * SalishSeaTools
-  * rpn-to-gemlam
-  * Marlin
-
-
-
-TODO:
-* review and clean up permissions in GitHub orgs
-
-
-
-
-Because I can never remember how to get a git feature branch that I set aside back into working
-state:
-* ref: https://www.atlassian.com/git/tutorials/merging-vs-rebasing
-* git switch feature
-* git rebase main
-* In PyCharm > Git > Log context menu "Rebase 'feature' onto 'main'"
-* **BUT** if the changes in the feature branch overlap files in main, it's possible that
-  a merge will be required
 
 
 TODO:
@@ -10245,31 +10584,6 @@ Reshapr ideas:
   * simple whole field extraction for a few variables
   * temporal and spatial selection
   * resampling
-
-
-
-TODO:
-* update .readthedocs.yaml build:os to ubuntu-22.04
-* add sphinx-notfound-page extension to to repos with docs
-  * https://sphinx-notfound-page.readthedocs.io/en/latest/index.html
-  * MOAD:
-    * Reshapr - done
-    * docs - done
-    * moad_tools - done 14Nov22
-    * MoaceanParcels - done 18Dec22
-    * cookiecutter-MOAD-pypkg - issue created
-  * SalishSeaCast:
-    * SalishSeaNowcast - done 4oct22
-    * salishsea-site - done 11oct22
-    * SalishSeaCmd - done 20Dec22
-    * NEMO-Cmd - done 25oct22
-    * SOG-Bloomcast-Ensemble - issue created
-    * tools - issue created
-
-
-
-Add Tereza's pubs to ERDDAP.
-
 
 
 TODO:
