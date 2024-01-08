@@ -2,7 +2,8 @@
 
 This is my public work journal.
 This journal is about:
-* my work as a Research Software Engineer with Dr. Susan Allen in the 
+
+* my work as a Research Software Engineer with Dr. Susan Allen in the
   Department of Earth, Ocean and Atmospheric Sciences at the University of British Columbia
 * my open-source activities
 * occasional notes about life in general
@@ -18,56 +19,296 @@ This journal is about:
 
 Days since last wwatch3 prep stall: 0
 
-Day 1 of v202111 in production.
-Startup problems:
-* forgot to drop old runoff file from upload forcing re: missing Fraser obs
-* forgot to edit nowcast/31dec23/namelist_cfg on arbutus to adjust starting time step number for
-  nowcast-blue run
-* nowcast-blue/namelist.light was incorrect; Susan fixed
-nowcast-blue time stepping at 09:20
-forecast success
-nowcast-green time stepping at 10:25
-make_ww3_wind_file forecast stalled; killed and re-run; took 2 tries; arbutus terminal sluggish
+##### SalishSeaCast
 
-TODO:
-* tag repos with PROD-nowcast-green-202111:
+Day 1 of v202111 in production.
+
+* Startup problems:
+  * forgot to drop old runoff file from upload forcing re: missing Fraser obs
+  * forgot to edit nowcast/31dec23/namelist_cfg on arbutus to adjust starting time step number for
+    nowcast-blue run
+  * nowcast-blue/namelist.light was incorrect; Susan fixed
+* nowcast-blue time stepping at 09:20
+* forecast success
+* nowcast-green time stepping at 10:25
+* make_ww3_wind_file forecast stalled; killed and re-run; took 2 tries; arbutus terminal sluggish
+* nowcast-green success
+  * `make_plots nemo nowcast-green research` failed due to results file name change from
+  * `ptrc_T` to `biol_T`
+* nowcast-agrif stalled on 1st time step due to no runoff file
+  * killed run
+  * patched Fraser discharge file
+  * reverted exclusion of launching make_runoff_file
+  * reverted exclusion of uploading make_runoff_file
+  * re-ran with:
+
+    ```bash
+    make_runoff_file
+    upload_forcing orcinus nowcast+
+    make_forcing_links orcinus nowcast-agrif
+    ```
+
+* nowcast-dev stalled on 1st time step due to no runoff file
+  * killed run because we decided not to continue running nowcast-dev
+* tagged repos with PROD-nowcast-green-202111:
   * NEMO-3.6-code
   * XIOS-2
-  * XIOS-ARCH - maybe special ??
+  * XIOS-ARCH
   * grid
   * rivers-climatology
   * SS-run-sets
   * tides
   * tracers
-* update to tags on arbutus
-* delete PROD-nowcast-green-201905 branches on arbutus
-(SalishSeaCast)
+* updated to tags on arbutus
+* deleted PROD-nowcast-green-201905 branches and a few other miscellaneous branches on arbutus
+
+
+##### SalishSeaNowcast
 
 Continued SalishSeaNowcast updates for v202111:
+
 * branch: v202111-nowcast
 * PR#223 -
 * dropped launch of make_runoff_file from automation re: missing Fraser obs now,
   and it's replaced by make_v202111_runoff_file
+* reverted drop of make_runoff_file launch and upload of 201702 runoff file because nowcast-agrif
+  needs it
+* fixed make_plots re: `ptrc_T` to `biol_T`
+* fixed make_plots re: `carp_T` to `chem_T`
+* dropped ciliates thalweg & surface plot because v202111 doesn't model or output ciliates
+* changed ciliates & flagellates time series plot to microzooplankton & flagellates because v202111
+  doesn't model or output ciliates
+* changed Fraser_tracer variable name to turbidity due to output variable name change
+
+
+#### Tue 2-Jan-2023
+
+Days since last wwatch3 prep stall: 0
+
+##### SalishSeaCast
+
+* make_runoff_file failed due to data error for Fraser discharge:
+  * no discharge obs for Fraser since 28dec 17:00
+* make_v202111_runoff_file patched Fraser discharge
+* upload_forcing forecast2 and nowcast+ failed due to no 201905 runoff file
+* recovery started at ~07:30:
+
+    ```bash
+    # persisted 28dec Fraser discharge in /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow
+    make_runoff_file
+    ```
+
+* make_ww3_current_file forecast stalled; killed and re-run; took 2 tries
+* nowcast-agrif watcher reported crash at 09:49
+  * `qstat` says run is still going at 11:20
+  * scratch file system response is slow
+
+
+##### salishsea-site
+
+Squash-merged dependabot PR to update appleboy/ssh-action to 1.0.2 re: ssh-proxy security patches.
+1-2jan24 biology figures pages are failing with an internal server error;
+see `/logs/salishsea-site/pyramid.log`
+
+
+##### Numeric 2024 Course Support
+
+Helped Susan investigate gh-pages build failure on GitHub;
+it looks like maybe nbsphinx has changes since 2022 to need a jupyter kernel in the env
+
+
+##### Other
+
+* Continued gnucash setup for 2024:
+  * finished creating scheduled transactions
+  * disabled all scheduled transactions in 2023 file
+  * started adding opening balances
+
+
+#### Wed 3-Jan-2023
+
+Days since last wwatch3 prep stall: 1
+
+##### SalishSeaCast
+
+* make_runoff_file failed due to data error for Fraser discharge:
+  * no discharge obs for Fraser since 28dec 17:00
+* make_v202111_runoff_file patched Fraser discharge
+* upload_forcing forecast2 and nowcast+ failed due to no 201905 runoff file
+* recovery started at ~07:15:
+
+    ```bash
+    # persisted 28dec Fraser discharge in /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow
+    make_runoff_file
+    upload_forcing arbutus forecast2
+    ```
+
+* I used the wrong date for `upload_forcing arbutus forecast2` and caused cascade of failures:
+  * NEMO forecast2 failed with error in oceean.output
+  * `make_ww3_wind_file forecast2` failed due to missing `NEMO-atmos/fcst/hrdps_y2024m01d05.nc`
+  * `make_ww3_current_file forecast2` failed due to `ValueError: Cannot handle size zero dimensions`
+    during `open_mfdataset()`
+  * `make_plots nemo forecast2 publish` failed with `IndexError: list index out of range` for all
+    water level plots
+  * `make_feeds forecast2` failed with `IndexError: list index out of range`
+
+
+##### Numeric 2024 Course Support
+
+* Cloned numeric_2024 to khawla:/media/doug/warehouse/EOAS-teaching/
+* built new `numeric_2024` env with Python 3.12
+* `.vscode/settings.json` changes:
+  * updated default Python interpreter path
+  * replaced `restructuredtext.confPath` with `esbonio.sphinx.confDir`
+* no push permission on GitHub
+* 340 warnings in sphinx build
+* gh-pages deployment was broken due to bad rST edits by Susan, and pushing a notebook with empty
+  output cells
+* learned that we can force nbsphinx to not run notebooks with empty output cells with config
+  that is either per-notebook in the json or repo-wide in conf.py
+  * Susan will discuss w/ Rachel the pedagogy change of rendering the notebooks to the website
+    without output to force the students to run the notebooks
+
+
+#### Thu 4-Jan-2023
+
+Days since last wwatch3 prep stall: 2
+
+##### SalishSeaCast
+
+* make_runoff_file failed due to data error for Fraser discharge:
+  * no discharge obs for Fraser since 28dec 17:00
+* make_v202111_runoff_file patched Fraser discharge
+* upload_forcing forecast2 and nowcast+ failed due to no 201905 runoff file
+* recovery started at ~07:25:
+
+    ```bash
+    # persisted 28dec Fraser discharge in /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow
+    make_runoff_file
+    upload_forcing arbutus forecast2
+    ```
+
+
+##### Numeric 2024 Course Support
+
+* got push access
+* pushed dependabot config to keep actions in gh-pages workflow up to date
+* pushed update to actions/checkout@v4
+* merged dependabot PR to update conda-incubator/setup-miniconda to v3
+* pushed update to change to use mamba-org/setup-microconda
+* updated envs to use Python 3.12
+* pushed VSCode workspace settings and tasks updates
+
+
+##### Other
+
+* Continued gnucash setup for 2024:
+  * continued adding opening balances
+
+
+#### Fri 5-Jan-2023
+
+Days since last wwatch3 prep stall: 3
+
+##### SalishSeaCast
+
+* make_runoff_file failed due to data error for Fraser discharge:
+  * no discharge obs for Fraser since 28dec 17:00
+* make_v202111_runoff_file patched Fraser discharge
+* upload_forcing forecast2 and nowcast+ failed due to no 201905 runoff file
+* recovery started at ~07:29:
+
+    ```bash
+    # persisted 28dec Fraser discharge in /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow
+    make_runoff_file
+    upload_forcing arbutus forecast2
+    ```
+
+  * `run_NEMO forecast2` failed, probably due to timing of yesterday's checklist clearance
+
+
+#### Sat 6-Jan-2023
+
+Days since last wwatch3 prep stall: 4
+
+##### SalishSeaCast
+
+* make_runoff_file failed due to data error for Fraser discharge:
+  * no discharge obs for Fraser since 28dec 17:00
+* make_v202111_runoff_file patched Fraser discharge
+* upload_forcing forecast2 and nowcast+ failed due to no 201905 runoff file
+* recovery started at ~10:00:
+
+    ```bash
+    # persisted 28dec Fraser discharge in /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow
+    make_runoff_file
+    upload_forcing arbutus nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing graham-dtn nowcast+
+    ```
+
+
+#### Sun 7-Jan-2023
+
+Days since last wwatch3 prep stall: 5
+
+##### SalishSeaCast
+
+* make_runoff_file failed due to data error for Fraser discharge:
+  * no discharge obs for Fraser since 28dec 17:00
+* make_v202111_runoff_file patched Fraser discharge
+* upload_forcing forecast2 and nowcast+ failed due to no 201905 runoff file
+* recovery started at ~09:20:
+
+    ```bash
+    # persisted 28dec Fraser discharge in /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow
+    make_runoff_file
+    upload_forcing arbutus nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing graham-dtn nowcast+
+    ```
+
+Changed to passkey auth on Google.
+
+
+
+
+
+##### salishsea-site
+
+biology figures pages since 31dec23 are failing with an internal server error;
+see `/logs/salishsea-site/pyramid.log`
+
+TODO:
+
+* drop ciliates thalweg and surface plot from biology pages for 01jan24 onward re: v202111
+* fix file name for Fraser River turbidity thalweg & surface plot for 01jan24 onward re: v202111
+  variable name change
+
+
+##### SalishSeaNowcast
+
 Fixed test_download_live_ocean failure on khawla with nccopy not found:
+
 * branch: mock-NEMO-Cmd-api-deflate
 * PR#
 * added monkeypatch mock for nemo_cmd.api.deflate() to avoid launching nccopy in subprocess in test
 
 TODO:
-* revert drop of make_runoff_file launch and upload of 201702 runoff file because nowcast-agrif
-  needs it
+
 * test_download_live_ocean fails on khawla with nccopy not found
 * test_make_feeds fails in pytest-with-coverage due to python-feedgen v1.0.0
-* remove make_runoff_file worker
+* rename make_runoff_file to make_v201702_runoff_file
 * rename make_v202111_runoff_file to make_runoff_file
-  * drop daily_river_flows module and tests ??
-* add config tests for run type[*][mesh mask]
-* add config tests for run type[*][bathymetry]
-* add config tests for run type[*][land processor elimination]
-* add config tests for run type[*][run sets dir]
+* add config tests for `run type[*][mesh mask]`
+* add config tests for `run type[*][bathymetry]`
+* add config tests for `run type[*][land processor elimination]`
+* add config tests for `run type[*][run sets dir]`
 * improve test_run_NEMO test for forcing symlinks ??
 * add tests for _upload_*_files in upload_forcing worker: ssh, turbidity, runoff, weather
-(SalishSeaNowcast)
+
 
 
 
