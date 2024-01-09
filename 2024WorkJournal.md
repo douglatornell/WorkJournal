@@ -347,8 +347,80 @@ Updated envs to use python-feedgen v1.0.0
 Released v23.2 and bumped version to 24.1.dev0.
 
 
+#### Tue 9-Jan-2023
+
+Worked at ESB
+
+Days since last wwatch3 prep stall: 7
 
 
+##### MOAD
+
+Group mtg; see whiteboard.
+
+
+##### salishsea-site
+
+Squash-merged dependabot PR to update apple-boy/ssh-action to v1.0.3 re: request_pty
+parameter.
+
+
+##### Security Updates
+
+Squash-merged dependabot PRs to update fonttools re: CVE-2023-45139 re: arbitrary file
+access vulnerability:
+
+* MoaceanTools
+* SOG-Bloomcast-Ensemble
+
+
+##### ERDDAP
+
+Rolling forecast datasets for u & v currents are throwing errors due to mixture of
+`m/s` and `m s-1` units:
+
+* today's error was about 4jan & 5jan; check tomorrow to see if error recurs and
+  moves to 5jan & 6jan (bad - investigate further), or disappears
+  (good - artefact of v202111 rollover)
+
+
+Messages from ERDDAP complaining about
+"java.io.IOException: User limit of inotify watches reached"
+
+* limits got reset during the skookum OS upgrade, so adjust them with:
+
+  ```bash
+  sudo sysctl fs.inotify.max_user_watches=131072
+  sudo sysctl fs.inotify.max_user_instances=2048
+  sudo sysctl -p
+  ```
+
+
+##### SalishSeaCast Docs
+
+* Fixed broken links found by Sphinx linkcheck
+* forge.ipsl.jussieu.fr links remain broken due to expired TLS cert
+* Intel is forbidding access to docs
+
+
+##### ERDDAP Datasets
+
+Started adding V21-11 hr-avg fields datasets:
+
+* branch: 202111-hr-avg-fields
+* PR#6
+* added ubcSSg3DuGridFields1hV21-11
+* triggered dataset load with `touch erddap/flag/ubcSSg3DuGridFields1hV21-11`;
+  ERDDAP took many minutes to build cache
+* added ubcSSg3DvGridFields1hV21-11
+* added ubcSSg3DwGridFields1hV21-11
+* added ubcSSg3DBiologyFields1hV21-11
+  * changed names of micro & meso zooplankton to z1 and z2 zooplankton
+* Dropped `testOutOfDate` attribute from V19-05 datasets
+
+
+
+##### SalishSeaNowcast
 
 TODO:
 
