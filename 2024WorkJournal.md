@@ -273,6 +273,95 @@ Days since last wwatch3 prep stall: 5
 Changed to passkey auth on Google.
 
 
+### Week 1
+
+#### Mon 8-Jan-2023
+
+Days since last wwatch3 prep stall: 6
+
+##### SalishSeaCast
+
+* make_runoff_file failed due to data error for Fraser discharge:
+  * no discharge obs for Fraser since 28dec 17:00
+* make_v202111_runoff_file patched Fraser discharge
+* upload_forcing forecast2 and nowcast+ failed due to no 201905 runoff file
+* recovery started at ~08:00:
+
+    ```bash
+    # persisted 28dec Fraser discharge in /data/dlatorne/SOG-projects/SOG-forcing/ECget/Fraser_flow
+    make_runoff_file
+
+    upload_forcing arbutus nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing graham-dtn nowcast+
+    ```
+
+* crop_gribs 00 went MIA, causing grib_to_netcdf to fail
+  * crop_gribs failed due to FileNotFoundError on
+    `/results/forcing/atmospheric/continental2.5/GRIB/20240108/00/` when it started
+* recovery started at ~08:00:
+
+    ```bash
+    crop_gribs 00
+    wait for crop_gribs to finish
+    grib_to_netcdf nowcast+
+    upload_forcing arbutus nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing graham-dtn nowcast+
+    ```
+
+* Slack conversation w/ Henryk re: restoring localhost SMTP on skookum for SalishSeaNowcast CRITICAL
+  errors and ERDDAP daily reports and errors
+
+* storm surge alert for 9jan at 05:35, 5.06m; big winds at Neah Bay; 5 days before spring/neap peak
+
+* Fraser River discharge data stream resumed at ~11:20
+
+
+##### Numeric 2024 Course Support
+
+* got lab1 to render with empty cell outputs
+
+
+##### MIDOSS
+
+* Found random_oil_spills config file for Susan:
+  https://github.com/MIDOSS/MIDOSS-MOHID-config/blob/main/monte-carlo/random-oil-spills.yaml
+
+
+##### SalishSeaNowcast
+
+Squash-merged PR#223 re: migration to 202111 in production.
+
+Fixed test_download_live_ocean failure on khawla with nccopy not found:
+* branch: mock-NEMO-Cmd-api-deflate
+* PR#224 - squash-merged
+* added monkeypatch mock for nemo_cmd.api.deflate() to avoid launching nccopy in subprocess in test
+
+Updated envs to use python-feedgen v1.0.0
+* branch: feedgen-1.0.0
+* PR#225
+
+Released v23.2 and bumped version to 24.1.dev0.
+
+
+
+
+
+TODO:
+
+* rename make_runoff_file to make_v201702_runoff_file
+* rename make_v202111_runoff_file to make_runoff_file
+* add config tests for `run type[*][mesh mask]`
+* add config tests for `run type[*][bathymetry]`
+* add config tests for `run type[*][land processor elimination]`
+* add config tests for `run type[*][run sets dir]`
+* improve test_run_NEMO test for forcing symlinks ??
+* add tests for _upload_*_files in upload_forcing worker: ssh, turbidity, runoff, weather
+
+
 
 
 
@@ -286,28 +375,6 @@ TODO:
 * drop ciliates thalweg and surface plot from biology pages for 01jan24 onward re: v202111
 * fix file name for Fraser River turbidity thalweg & surface plot for 01jan24 onward re: v202111
   variable name change
-
-
-##### SalishSeaNowcast
-
-Fixed test_download_live_ocean failure on khawla with nccopy not found:
-
-* branch: mock-NEMO-Cmd-api-deflate
-* PR#
-* added monkeypatch mock for nemo_cmd.api.deflate() to avoid launching nccopy in subprocess in test
-
-TODO:
-
-* test_download_live_ocean fails on khawla with nccopy not found
-* test_make_feeds fails in pytest-with-coverage due to python-feedgen v1.0.0
-* rename make_runoff_file to make_v201702_runoff_file
-* rename make_v202111_runoff_file to make_runoff_file
-* add config tests for `run type[*][mesh mask]`
-* add config tests for `run type[*][bathymetry]`
-* add config tests for `run type[*][land processor elimination]`
-* add config tests for `run type[*][run sets dir]`
-* improve test_run_NEMO test for forcing symlinks ??
-* add tests for _upload_*_files in upload_forcing worker: ssh, turbidity, runoff, weather
 
 
 
