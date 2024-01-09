@@ -9907,6 +9907,8 @@ Squash-merged dependabot PRs to update setup-micromamba to v1.7.0:
 
 Started work on maseh mask datasets using new notebook based off
 tools/bathymetry/mesh_mask201702_metadata.ipynb
+* branch: bathymetry-202108
+* PR#23
 * updated salishsea-tools env on kudu
 * updated make_readme in tools/bathymetry
 * created mesh_mask202108_metadata notebook
@@ -10026,10 +10028,12 @@ Continued update to Python 3.12:
 Week 50
 -------
 
-Mon 11-Dec-2023
+Mon 18-Dec-2023
 ^^^^^^^^^^^^^^^
 
 Days since last wwatch3 prep stall: 5
+
+Storm surge alert for 19dec; 5.1m, low NE wind; 11:30
 
 collect_river_data failed with KeyError exceptions on the date:
 * none of the datamart hourly hydrometric .csv files have been updated since ~21:00 on 15dec23
@@ -10097,12 +10101,40 @@ Released v23.1 and bumped dev to v24.0.
 (moad_tools)
 
 
+Tue 19-Dec-2023
+^^^^^^^^^^^^^^^
+
+Days since last wwatch3 prep stall: 6
+
+Group mtg; see whiteboard.
+(MOAD)
+
+Updated PyCharm on kudu to 2023.3.1.
+
+Backfilled rivers discharge obs and runoff files:
+* no 16dec23 obs in CSV files
+    collect_river_data.sh 2023-12-17
+* edited ``*_flow`` files to correct date order at ends of files
+* added 16dec23 value for Fraser from
+  https://wateroffice.ec.gc.ca/report/real_time_e.html?stn=08MF005&mode=Table&startDate=2023-12-16&endDate=2023-12-16&prm1=47&mean1=1
+* no missing runoff files; **do we need to re-run after cleanup?**
+(SalishSeaNowcast)
+
+Continued work on maseh mask datasets using new notebook based off
+tools/bathymetry/mesh_mask201702_metadata.ipynb
+* branch: bathymetry-202108
+* PR#23
+* finalized grid/mesh_mask202108.nc and committed it
+* added nemo-grid/ubcSSn2DMeshMaskV21-08.xml based on ubcSSn2DMeshMaskV17-02,xml;
+  deployed it to skookum; tweaked xml to drop _ChunksSizes variable attrs
+* added nemo-grid/ubcSSn3DMeshMaskV21-08.xml based on ubcSSn3DMeshMaskV17-02,xml;
+  deployed it to skookum
+(erddap-datasets)
+
 
 
 TODO:
 * after hydrometric .csv files are restored
-    collect_river_data.sh
-    # fix Fraser file to remove persisted discharges
     make_v202111_runoff_file 2023-12-17
     make_v202111_runoff_file 2023-12-18
 
