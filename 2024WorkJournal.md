@@ -336,11 +336,13 @@ Days since last wwatch3 prep stall: 6
 Squash-merged PR#223 re: migration to 202111 in production.
 
 Fixed test_download_live_ocean failure on khawla with nccopy not found:
+
 * branch: mock-NEMO-Cmd-api-deflate
 * PR#224 - squash-merged
 * added monkeypatch mock for nemo_cmd.api.deflate() to avoid launching nccopy in subprocess in test
 
 Updated envs to use python-feedgen v1.0.0
+
 * branch: feedgen-1.0.0
 * PR#225
 
@@ -419,8 +421,151 @@ Started adding V21-11 hr-avg fields datasets:
 * Dropped `testOutOfDate` attribute from V19-05 datasets
 
 
+#### Wed 10-Jan-2023
+
+Days since last wwatch3 prep stall: 8
+
+
+##### Security Updates
+
+Squash-merged dependabot PRs to update git-python to v3.1.41 re: CVE-2024-22190 re: arbitrary code
+execution vulnerability on Windows:
+
+* AtlantisCmd
+* SalishSeaCmd
+* SalishSeaNowcast
+* NEMO-Cmd
+
+
+##### Miscellaneous
+
+Sent email to IPSL Forge re: expired TLS cert; reply says that new cert has been requested for over
+a month.
+
+Slack conversation w/ Cassidy that lead to discovery that the .git/ trees in most of her clones
+on graham have missing files; advised her to do a full new setup for NEMO runs on /scratch.
+
+
+##### ERDDAP
+
+Rolling forecast datasets for u & v currents are throwing errors due to mixture of
+`m/s` and `m s-1` units:
+
+* today's error was about 5jan only; so it appears to be an artefact of the v202111 rollover
+
+
+##### ERDDAP Datasets
+
+Slack conversation w/ Karyn re: adding Suchy et al 2023 to biology dataset citations comment,
+one-liner blurb for it for citation web pages (docs & site),
+and explanatory comments for z1 and z2 variables.
+
+
+##### Stakeholder Support
+
+Replied to email from Dan Baker of QENTOL, YEN W̱SÁNEĆ Marine Guardians:
+
+* summary of changes in 2021-11
+* links to 2021-11 datasets: bathymetry, mesh mask, u & v currents
+* links to rotate and unstagger functions in SalishSeaTools
+* link to use of rotate and unstagger functions in `make_CHS_currents_file` worker
+
 
 ##### SalishSeaNowcast
+
+Started changing ERDDAP dataset ids to V21-11 for `ping_erddap` worker:
+
+* branch: v202111-erddap
+* PR#227
+
+
+#### Thu 11-Jan-2023
+
+Days since last wwatch3 prep stall: 9
+
+Epic Arctic outflow event started overnight; big winds, dropping temperatures, bright sunshine
+
+
+##### Miscellaneous
+
+Continued Slack conversation w/ Cassidy re: new setup on /scratch.
+
+
+##### ERDDAP Datasets
+
+Continued adding V21-11 hr-avg fields datasets:
+
+* branch: 202111-hr-avg-fields
+* PR#6
+* added ubcSSg3DPhysicsFields1hV21-11
+* added ubcSSgSeaSurfaceHeightField1hV21-11
+* started ubcSSg3DChemistryFields1hV21-11
+  * waiting for colour bar limits from Susan
+
+
+##### SalishSeaNowcast
+
+Continued changing ERDDAP dataset ids to V21-11 for `ping_erddap` worker:
+
+* branch: v202111-erddap
+* PR#227
+
+
+##### Security Updates
+
+Squash-merged dependabot PRs to update jinja2 to v3.1.3 re: CVE-2024-22195 re: XSS vulnerability:
+
+* cookiecutter-analysis-repo
+* SalishSeaCast/docs
+* MoaceanParcels
+* cookiecutter-MOAD-pkg
+* MOAD/docs
+* AtlantisCmd
+* SalishSeaNowcast
+* Reshapr
+* salishsea-site
+* NEMO-Cmd
+* SalishSeaCmd
+* SalishSeaTools
+* moad_tools
+* NEMO_Nowcast
+
+
+#### Fri 12-Jan-2023
+
+Days since last wwatch3 prep stall: 10
+
+
+##### ERDDAP Datasets
+
+Continued adding V21-11 hr-avg fields datasets:
+
+* branch: 202111-hr-avg-fields
+* PR#6
+* started ubcSSg3DChemistryFields1hV21-11
+  * waiting for colour bar limits from Susan
+* added Karyn's descriptive comment attributes for z1 & z2 variables in biology dataset
+
+TODO:
+
+* e3t from grid_T -> vvl ??
+* PAR & turbidity from chem -> light ??
+
+
+##### Numeric 2024 Course Support
+
+* changed labs 2-10 to render on website with empty cell outputs
+* flagged expired TLS cert for clouds on Slack
+* told Susan about funky labs toc headings for labs 2 & 7
+
+
+##### SalishSeaNowcast
+
+Continued changing ERDDAP dataset ids to V21-11 for `ping_erddap` worker:
+
+* branch: v202111-erddap
+* PR#227
+
 
 TODO:
 
@@ -434,6 +579,85 @@ TODO:
 * add tests for _upload_*_files in upload_forcing worker: ssh, turbidity, runoff, weather
 
 
+#### Sat 13-Jan-2023
+
+Days since last wwatch3 prep stall: 11
+
+
+##### Numeric 2024 Course Support
+
+* opened helpdesk ticker re: expired TLS cert on clouds; Henryk installed new cert
+
+
+##### ERDDAP Datasets
+
+Continued adding V21-11 hr-avg fields datasets:
+
+* branch: 202111-hr-avg-fields
+* PR#6
+* finished ubcSSg3DChemistryFields1hV21-11
+
+TODO:
+
+* e3t from grid_T -> vvl ??
+* PAR & turbidity from chem -> light ??
+
+
+#### Sun 14-Jan-2023
+
+Days since last wwatch3 prep stall: 12
+
+
+##### SalishSeaCast
+
+* upload_forcing orcinus forecast2 and nowcast+ failed; maintenance ??
+* collect_river_data Snohomish_Monroe failed; bad since 15dec
+* make_ssh_file forecast2 failed
+* no Fraser River turbidity obs since 10jan 11:35
+
+
+##### Miscellaneous
+
+Figured out steps to run a VSCode remote ssh session in an interactive job on graham via an
+ssh `proxy-jump`:
+
+* there is evidence of Alliance staff doing this in the ssh config section of
+  https://www.youtube.com/watch?v=u9k6HikDyqk though the video doesn't describe doing so
+* steps:
+
+  * create a `.ssh/config` entry for interactive compute node sessions on graham:
+
+    ```ssh-config
+    Host graham-interactive
+      HostName gra111.graham.sharcnet
+      User dlatorne
+      ProxyJump dlatorne@graham.computecanada.ca
+    ```
+
+  * ensure that ssh public key is in `.ssh/authorized_keys` on graham (use ssh-copy-id -i if necessary)
+    because proxy-jump to compute node doesn't support CCDB keys
+  * open a VSCode session on a graham login node
+  * open a terminal on graham
+  * request an interactive session:
+
+    ```bash
+    salloc --time=1:0:0 --mem=4G --ntasks=1 --account=rrg-allen
+    ```
+
+  * wait for interactive session to start with message like:
+
+    ```text
+    salloc: Pending job allocation 15395255
+    salloc: job 15395255 queued and waiting for resources
+    salloc: job 15395255 has been allocated resources
+    salloc: Granted job allocation 15395255
+    salloc: Waiting for resource configuration
+    salloc: Nodes gra633 are ready for job
+    (base) [dlatorne@gra633 ~]$
+    ```
+
+  * edit `graham-interactive` entry in `.ssh/config` to use assigned node name; e.g. `gra633`
+  * start a VSCode session on `graham-interactive`
 
 
 
@@ -447,6 +671,7 @@ TODO:
 * drop ciliates thalweg and surface plot from biology pages for 01jan24 onward re: v202111
 * fix file name for Fraser River turbidity thalweg & surface plot for 01jan24 onward re: v202111
   variable name change
+* add Suchy et al 2023 to publications page (and docs/CITATION.rst)
 
 
 
