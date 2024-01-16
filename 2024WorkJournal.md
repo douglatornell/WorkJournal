@@ -566,17 +566,9 @@ Continued changing ERDDAP dataset ids to V21-11 for `ping_erddap` worker:
 * branch: v202111-erddap
 * PR#227
 
+Started removing nowcast-dev runs from configuration and workflow:
 
-TODO:
-
-* rename make_runoff_file to make_v201702_runoff_file
-* rename make_v202111_runoff_file to make_runoff_file
-* add config tests for `run type[*][mesh mask]`
-* add config tests for `run type[*][bathymetry]`
-* add config tests for `run type[*][land processor elimination]`
-* add config tests for `run type[*][run sets dir]`
-* improve test_run_NEMO test for forcing symlinks ??
-* add tests for _upload_*_files in upload_forcing worker: ssh, turbidity, runoff, weather
+* branch: drop-nowcast-dev
 
 
 #### Sat 13-Jan-2023
@@ -586,7 +578,7 @@ Days since last wwatch3 prep stall: 11
 
 ##### Numeric 2024 Course Support
 
-* opened helpdesk ticker re: expired TLS cert on clouds; Henryk installed new cert
+* opened helpdesk ticket re: expired TLS cert on clouds; Henryk installed new cert
 
 
 ##### ERDDAP Datasets
@@ -601,6 +593,7 @@ TODO:
 
 * e3t from grid_T -> vvl ??
 * PAR & turbidity from chem -> light ??
+* co2_flux from chem -> surface co2 flux
 
 
 #### Sun 14-Jan-2023
@@ -610,7 +603,7 @@ Days since last wwatch3 prep stall: 12
 
 ##### SalishSeaCast
 
-* upload_forcing orcinus forecast2 and nowcast+ failed; maintenance ??
+* upload_forcing orcinus forecast2 and nowcast+ failed
 * collect_river_data Snohomish_Monroe failed; bad since 15dec
 * make_ssh_file forecast2 failed
 * no Fraser River turbidity obs since 10jan 11:35
@@ -658,6 +651,88 @@ ssh `proxy-jump`:
 
   * edit `graham-interactive` entry in `.ssh/config` to use assigned node name; e.g. `gra633`
   * start a VSCode session on `graham-interactive`
+
+
+### Week 2
+
+#### **Mon 15-Jan-2023**
+
+Days since last wwatch3 prep stall: 13
+
+
+##### Numeric 2024 Course Support
+
+* confirmed that lab9 code that accesses clouds.eos.ubc.ca now works as expected
+* closed helpdesk ticket re: expired TLS cert on clouds
+
+
+##### SalishSeaCast
+
+* collect_river_data Snohomish_Monroe failed; bad since 15dec
+* no Fraser River turbidity obs since 10jan 11:35
+  * email conversation w/ Jenn; sensor was removed to avoid damage during cold snap; it will be
+    redeployed next week
+* yesterday's upload_forcing orcinus forecast2 and nowcast+ failures were due to chiller failure
+  * backfill nowcast-agrif:
+
+    ```bash
+    upload_forcing orcinus nowcast+ 2024-01-14
+    upload_forcing orcinus turbidity 2024-01-14
+    # wait for run to finish
+    make_forcing_links orcinus nowcast-agrif 2024-01-15
+    ```
+
+
+##### Miscellaneous
+
+Wrote canvas in #alliance-hpc Slack channel re: VSCode remote sessions in interactive compute node
+sessions on graham,
+
+
+##### Phys-Ocgy Seminar
+
+* Ilias
+
+
+##### ERDDAP Datasets
+
+Continued adding V21-11 hr-avg fields datasets:
+
+* branch: 202111-hr-avg-fields
+* PR#6
+* started ubcSSgSeaSurfaceCO2FluxField1hV21-11
+  * waiting for colour bar limits from Susan
+
+TODO:
+
+* e3t from grid_T -> vvl ??
+* PAR & turbidity from chem -> light ??
+
+
+##### SalishSeaNowcast
+
+Continued changing ERDDAP dataset ids to V21-11 for `ping_erddap` worker:
+
+* branch: v202111-erddap
+* PR#227
+
+Continued removing nowcast-dev runs from configuration and workflow:
+
+* branch: drop-nowcast-dev
+
+
+TODO:
+
+* rename make_runoff_file to make_v201702_runoff_file
+* rename make_v202111_runoff_file to make_runoff_file
+* add config tests for `run type[*][mesh mask]`
+* add config tests for `run type[*][bathymetry]`
+* add config tests for `run type[*][land processor elimination]`
+* add config tests for `run type[*][run sets dir]`
+* improve test_run_NEMO test for forcing symlinks ??
+* add tests for _upload_*_files in upload_forcing worker: ssh, turbidity, runoff, weather
+
+
 
 
 
