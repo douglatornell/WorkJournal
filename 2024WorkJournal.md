@@ -546,11 +546,6 @@ Continued adding V21-11 hr-avg fields datasets:
   * waiting for colour bar limits from Susan
 * added Karyn's descriptive comment attributes for z1 & z2 variables in biology dataset
 
-TODO:
-
-* e3t from grid_T -> vvl ??
-* PAR & turbidity from chem -> light ??
-
 
 ##### Numeric 2024 Course Support
 
@@ -588,12 +583,6 @@ Continued adding V21-11 hr-avg fields datasets:
 * branch: 202111-hr-avg-fields
 * PR#6
 * finished ubcSSg3DChemistryFields1hV21-11
-
-TODO:
-
-* e3t from grid_T -> vvl ??
-* PAR & turbidity from chem -> light ??
-* co2_flux from chem -> surface co2 flux
 
 
 #### Sun 14-Jan-2023
@@ -703,22 +692,123 @@ Continued adding V21-11 hr-avg fields datasets:
 * started ubcSSgSeaSurfaceCO2FluxField1hV21-11
   * waiting for colour bar limits from Susan
 
-TODO:
-
-* e3t from grid_T -> vvl ??
-* PAR & turbidity from chem -> light ??
-
 
 ##### SalishSeaNowcast
-
-Continued changing ERDDAP dataset ids to V21-11 for `ping_erddap` worker:
-
-* branch: v202111-erddap
-* PR#227
 
 Continued removing nowcast-dev runs from configuration and workflow:
 
 * branch: drop-nowcast-dev
+
+
+#### Tue 16-Jan-2023
+
+Worked at ESB
+
+Days since last wwatch3 prep stall: 14
+
+
+##### ERDDAP Datasets
+
+Continued adding V21-11 hr-avg fields datasets:
+
+* branch: 202111-hr-avg-fields
+* PR#6
+* started ubcSSgSeaSurfaceCO2FluxField1hV21-11
+  * waiting for colour bar limits from Susan
+* researched NEMO vvl; found original report; decided on dataset name of
+  ubcSSgVariableVolumeLayers1hV21-11
+
+TODO:
+
+* e3t from grid_T -> ubcSSgVariableVolumeLayers1hV21-11
+* PAR & turbidity from chem -> ubcSSgLightFields1hV21-11
+
+
+##### MOAD
+
+Group mtg; see whiteboard.
+
+
+##### SalishSeaCast
+
+Restarted manager to load updated nowcast.yaml with chemistry dataset added to
+ping_erddap dataset ids list.
+
+
+##### Security Updates
+
+Squash-merged dependabot PRs to update jinja2 to v3.1.3 re: CVE-2024-22195 re: XSS vulnerability:
+
+* cookiecutter-djl-pypkg
+* SOG-Bloomcast-Ensemble
+* SOG
+* SOG-Bloomcast
+
+Changed SOG-Forcing default branch name on GitHub from `master` to `main`.
+Cloned SOG-Forcing on kudu.
+Created sog-forcing-tools env:
+
+```bash
+mamba create -n sog-forcing-tools python=3.12 arrow cliff coverage pytest python-dateutil six tox virtualenv
+```
+
+Ran `pytest` without problems
+(though there were test failures due to changes in `arrow`) to confirm that
+env was viable.
+Updated `requirements.txt` to resolve long-standing dependabot alert re: py
+(former pytest dependency).
+Removed sog-forcing-tools env
+
+Created sog-dev env:
+
+```bash
+mamba create -n sog-dev python=3.12 pyyaml "colander<2" six translationstring sphinx coverage pytest tox virtualenv
+```
+
+Ran `pytest` without problems
+(though there were test failures due to changes in `arrow`) to confirm that
+env was viable.
+Updated `SOGcommand/requirements/production.txt` and `develop.txt` to resolve
+long-standing dependabot alert re: py (former pytest dependency).
+Removed sog-dev env.
+
+Created sog-bloomcast env:
+
+```bash
+mamba create -n sog-bloomcast python=3.12 arrow beautifulsoup4 mako matplotlib numpy pyyaml requests ipython sphinx pytest six
+```
+
+Ran `pytest` without problems
+(though there were test failures due to changes in `arrow`) to confirm that
+env was viable.
+Updated `requirements.txt` to resolve
+long-standing dependabot alerts re: py (former pytest dependency) and requests.
+Removed sog-bloomcast env.
+
+
+##### SalishSeaNowcast
+
+Explored changes necessary to update `get_onc_ctd` worker to ONC scalar data API v3.0:
+
+* it appears that I wrote `salishsea_tools.data_tools.get_onc_data()` in a generic enough
+  way that its doesn't need to be changed
+* instead, need to update its call in:
+  * `get_onc_ctd` worker
+  * `get_onc_ferry_data` worker
+  * `figures/comparison/compare_venus_ctd.py` figure module
+* possible new call:
+
+  ```python
+  onc_data = data_tools.get_onc_data(
+      "scalardata",
+      "getByLocation",
+      TOKEN,
+      locationCode=parsed_args.onc_station,
+      deviceCategoryCode="CTD",
+      sensorCategoryCodes="salinity,temperature",
+      dateFrom=data_tools.onc_datetime(f"{ymd} 00:00", "utc"),
+  )
+  ```
 
 
 TODO:
@@ -731,7 +821,6 @@ TODO:
 * add config tests for `run type[*][run sets dir]`
 * improve test_run_NEMO test for forcing symlinks ??
 * add tests for _upload_*_files in upload_forcing worker: ssh, turbidity, runoff, weather
-
 
 
 
