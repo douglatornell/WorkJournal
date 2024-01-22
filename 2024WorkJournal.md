@@ -144,7 +144,7 @@ Days since last wwatch3 prep stall: 1
     ```
 
 * I used the wrong date for `upload_forcing arbutus forecast2` and caused cascade of failures:
-  * NEMO forecast2 failed with error in oceean.output
+  * NEMO forecast2 failed with error in ocean.output
   * `make_ww3_wind_file forecast2` failed due to missing `NEMO-atmos/fcst/hrdps_y2024m01d05.nc`
   * `make_ww3_current_file forecast2` failed due to `ValueError: Cannot handle size zero dimensions`
     during `open_mfdataset()`
@@ -328,7 +328,7 @@ Days since last wwatch3 prep stall: 6
 ##### MIDOSS
 
 * Found random_oil_spills config file for Susan:
-  https://github.com/MIDOSS/MIDOSS-MOHID-config/blob/main/monte-carlo/random-oil-spills.yaml
+  <https://github.com/MIDOSS/MIDOSS-MOHID-config/blob/main/monte-carlo/random-oil-spills.yaml>
 
 
 ##### SalishSeaNowcast
@@ -604,7 +604,7 @@ Figured out steps to run a VSCode remote ssh session in an interactive job on gr
 ssh `proxy-jump`:
 
 * there is evidence of Alliance staff doing this in the ssh config section of
-  https://www.youtube.com/watch?v=u9k6HikDyqk though the video doesn't describe doing so
+  <https://www.youtube.com/watch?v=u9k6HikDyqk> though the video doesn't describe doing so
 * steps:
 
   * create a `.ssh/config` entry for interactive compute node sessions on graham:
@@ -718,11 +718,6 @@ Continued adding V21-11 hr-avg fields datasets:
 * researched NEMO vvl; found original report; decided on dataset name of
   ubcSSgVariableVolumeLayers1hV21-11
 
-TODO:
-
-* e3t from grid_T -> ubcSSgVariableVolumeLayers1hV21-11
-* PAR & turbidity from chem -> ubcSSgLightFields1hV21-11
-
 
 ##### MOAD
 
@@ -749,7 +744,8 @@ Cloned SOG-Forcing on kudu.
 Created sog-forcing-tools env:
 
 ```bash
-mamba create -n sog-forcing-tools python=3.12 arrow cliff coverage pytest python-dateutil six tox virtualenv
+mamba create -n sog-forcing-tools python=3.12 arrow cliff coverage pytest python-dateutil \
+  six tox virtualenv
 ```
 
 Ran `pytest` without problems
@@ -762,7 +758,8 @@ Removed sog-forcing-tools env
 Created sog-dev env:
 
 ```bash
-mamba create -n sog-dev python=3.12 pyyaml "colander<2" six translationstring sphinx coverage pytest tox virtualenv
+mamba create -n sog-dev python=3.12 pyyaml "colander<2" six translationstring sphinx coverage \
+  pytest tox virtualenv
 ```
 
 Ran `pytest` without problems
@@ -775,7 +772,8 @@ Removed sog-dev env.
 Created sog-bloomcast env:
 
 ```bash
-mamba create -n sog-bloomcast python=3.12 arrow beautifulsoup4 mako matplotlib numpy pyyaml requests ipython sphinx pytest six
+mamba create -n sog-bloomcast python=3.12 arrow beautifulsoup4 mako matplotlib numpy pyyaml \
+  requests ipython sphinx pytest six
 ```
 
 Ran `pytest` without problems
@@ -811,6 +809,222 @@ Explored changes necessary to update `get_onc_ctd` worker to ONC scalar data API
   ```
 
 
+#### Wed 17-Jan-2023
+
+Major snowfall overnight and through day.
+
+Days since last wwatch3 prep stall: 15
+
+##### SalishSeaCast
+
+Email from Parker to say that there was a problem with LiveOcean this morning; he says it's fixed,
+but `test_download_live_ocean` is still waiting for sentinel file; told Parker.
+
+
+##### Sharcnet Seminar
+
+False Sharing and Contention in Parallel Codes
+
+* Paul Preney, U Windsor
+* All the materials (slides, YouTube links etc) will go to this web page:
+  <https://helpwiki.sharcnet.ca/wiki/Online_Seminars>
+* slow performance of threaded code due to concurrent access of values close enough together in
+  memory that they are in the same cache line (64 or 128 bytes)
+* mitigate in C++11 via `alignas`, or dynamic allocation in general
+
+
+##### ERDDAP Datasets
+
+Finished adding V21-11 hr-avg fields datasets:
+
+* branch: 202111-hr-avg-fields
+* PR#6
+* finished ubcSSgSeaSurfaceCO2FluxField1hV21-11
+* added ubcSSgVariableVolumeLayers1hV21-11
+* fixed description dataset attr values
+* added ubcSSg3DLightFields1hV21-11
+
+
+##### SalishSeaNowcast
+
+Finished changing ERDDAP dataset ids to V21-11 for `ping_erddap` worker:
+
+* branch: v202111-erddap
+* PR#227
+* added ubcSSgSeaSurfaceCO2FluxField1hV21-11
+* added ubcSSg3DVariableVolumeLayers1hV21-11
+* added ubcSSg3DLightFields1hV21-11
+
+
+
+#### Thu 18-Jan-2023
+
+Days since last wwatch3 prep stall: 16
+
+
+##### SalishSeaCast
+
+Greenwater river discharge time series was empty.
+
+nowcast-agrif failed with `FileNotFoundError`:
+
+* 17jan24 didn't complete due to power bump at ~17:00 yesterday; compute nodes are shut down
+* re-run:
+
+  ```bash
+    make_forcing_links orcinus nowcast-agrif 2024-01-17
+    # wait for run to finish
+    make_forcing_links orcinus nowcast-agrif 2024-01-18
+  ```
+
+Email conversation with Rich re: resumption of TWDP data stream:
+
+* The message we got from Richard back in Mar-2022 was that there was no plan for the TWDP data
+  stream to resume after the vessels re-organization in Jun-2022. At the end of Aug-2022 I dropped
+  the `get_onc_ferry` worker from automation because a daily stream of errors is annoying,
+  desensitizing (and in this case maddening).
+* It appears that the data stream resumed on 11-Oct-2022 and was continuous until at least
+  19-Nov-2023. There is also data on 23-25 Nov-2023, but that may not be on-route,
+  rather from repositioning of the vessel for refit.
+* The message on the data preview page says:
+  "Instruments off in preparation for the refit | high (Applies to: 16-Nov-2023 00:00:00 UTC - Now)".
+* No data in the 11-Oct-2022 to 25-Nov-2023 time period from the following sensors:
+  * Turbidity, Chlorophyll, Florescence
+  * Thermosalinograph
+  * Pyranometer (solar radiation)
+  * Oxygen Sensor
+  * Carbon Dioxide Sensor
+* There is data from:
+  * Pyrogenometer (longwave radiation)
+  * Air Temperature
+  * Relative Humidity
+  * Barometric Pressure
+
+
+##### Security Updates
+
+Squash-merged dependabot PRs to update jupyterlab-lsp to v2.2.2 re: CVE-2024-22415 re: unsecured
+endpoints vulnerability:
+
+* SalishSeaTools
+
+
+##### SalishSeaNowcast
+
+Started work on updating `get_onc_ctd` worker to ONC APIv3:
+
+* branch:
+* PR#
+* updated `get_onc_data()` call; discoverd need to update `salishsea_tools.data_tools.onc_json_to_dataset()`
+* hacked `get_onc_data()` enough to be able to run `get_onc_ctd SEVIP` to backfill from
+  12dec23 to 17jan24
+
+
+##### SalishSeaTools
+
+Started work on updating `data_tools.onc_json_to_dataset()` worker to ONC APIv3:
+
+* branch: update-onc_json_to_dataset
+* PR#
+* used PyCharm AI to hack together a unit test to help with update
+* hacked `onc_json_to_dataset()` enough to be able to run `get_onc_ctd SEVIP` to backfill from
+  12dec23 to 17jan24
+
+
+
+#### Fri 19-Jan-2023
+
+Days since last wwatch3 prep stall: 0
+
+
+##### SalishSeaCast
+
+`crop_gribs 12` stalled with 1 file not processed
+`make_ww3_current_file forecast2` stalled; killed it and re-ran
+Greenwater river discharge time series was empty.
+
+
+##### SalishSeaTools
+
+Finished work on updating `data_tools.onc_json_to_dataset()` worker to ONC APIv3:
+
+* branch: update-onc_json_to_dataset
+* PR#93 -
+* cleaned up unit tests
+
+
+##### SalishSeaNowcast
+
+Continued work on updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv3:
+
+* branch:
+* PR#
+* started digging into `get_onc_ferry`
+* it fails with KeyError on `nav_data.attrs["station"]` in `_resample_nav_data()`
+worker: ssh, turbidity, runoff, weather
+
+
+##### SalishSeaCast
+
+Pulled SalishSeaNowcast v202111-erddap branch on skookum and restarted manager to load updated
+nowcast.yaml with chemistry dataset added to ping_erddap dataset ids list.
+
+
+
+#### Sat 20-Jan-2023
+
+Days since last wwatch3 prep stall: 1
+
+
+##### SalishSeaCast
+
+nowcast-agrif/19jan24 timed out; recovery:
+
+  ```bash
+    # wait for 20jan24 run to fail
+    make_forcing_links orcinus nowcast-agrif 2024-01-19
+    # wait for run to finish
+    make_forcing_links orcinus nowcast-agrif 2024-01-20
+  ```
+
+Email from Mark saying he has moved nowcast-agrif file space form scratch to data and added a symlink
+to enable him to isolate the scratch file system for troubleshooting.
+
+
+##### Security Updates
+
+Squash-merged dependabot PRs to update jupyterlab to v3.6.7 re: CVE-2024-22421 re: auth & XSRF token
+exposure vulnerability:
+
+* MoaceanParcels
+* SOG-Bloomcast-Ensemble
+
+TODO:
+
+* SalishSeaTools
+
+
+
+#### Sun 21-Jan-2023
+
+Days since last wwatch3 prep stall: 2
+
+
+##### SalishSeaCast
+
+* nowcast-agrif/21jan24 ran in 47 min, like the old days :-)
+
+
+##### SalishSeaNowcast
+
+`ping_erddap` successfully updated V21-11 datasets after nowcast-green run
+
+* branch: v202111-erddap
+* PR#227 - squash-merged
+
+Changed branch on skookum back to main and pulled.
+
+
 TODO:
 
 * rename make_runoff_file to make_v201702_runoff_file
@@ -820,7 +1034,20 @@ TODO:
 * add config tests for `run type[*][land processor elimination]`
 * add config tests for `run type[*][run sets dir]`
 * improve test_run_NEMO test for forcing symlinks ??
-* add tests for _upload_*_files in upload_forcing worker: ssh, turbidity, runoff, weather
+* add tests for _upload_*_files in upload_forcing
+
+
+##### ERDDAP Datasets
+
+Finalized adding V21-11 hr-avg fields datasets:
+
+* branch: 202111-hr-avg-fields
+* PR#6 - squash-merged
+
+Changed branch on skookum back to main and pulled.
+
+Squash-merged dependabot PRs re: jinja2, jupyterlab, and jupyterlab-lsp.
+
 
 
 
@@ -844,6 +1071,7 @@ Add Tereza's pubs to ERDDAP.
 
 
 TODO:
+
 * change automation workflow to run nowcast-green in place of nowcast-blue
   * add output of 10min avg tide gauge station files
 * remove VHFR FVCOM from automation workflow
@@ -852,12 +1080,14 @@ TODO:
 
 
 TODO:
+
 * Update AtlantisCmd to drop Python 3.10 because NEMO-Cmd has dropped it;
   GHA workflow is failing
 
 
 
 TODO:
+
 * update xarray-tests instructions to use Python 3.11
 * drop pkg install from xarray-docs instructions; it's included in docs.yml
 
@@ -894,12 +1124,14 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
 
 
 TODO:
+
 * change download_weather to gather only files missed by collect_weather so that it can
   work with crop_gribs monitoring incoming files
   * check for presence of files before downloading them; skip if present
 
 
 TODO:
+
 * update .readthedocs.yaml to use ubuntu-22.04 and mambaforge-22.9 in many repos
   * MOAD/docs - done in PR#32
   * FVCOM-Cmd - done in PR#10
@@ -910,12 +1142,14 @@ TODO:
 
 
 TODO:
+
 * fix straight line gaps in wwatch3 forecast plots (forecast2 are okay)
 
 * migrate PyPDF2 to pypdf in SalishSeaNowcast
 
 
 TODO:
+
 * modernize packaging:
   * Reshapr - done 30oct23 in PR#101
   * moad_tools - done 18dec23 in PR#48
@@ -934,6 +1168,7 @@ TODO:
 
 
 TODO:
+
 * review and clean up permissions in GitHub orgs
 
 
@@ -941,7 +1176,8 @@ TODO:
 
 Because I can never remember how to get a git feature branch that I set aside back into working
 state:
-* ref: https://www.atlassian.com/git/tutorials/merging-vs-rebasing
+
+* ref: <https://www.atlassian.com/git/tutorials/merging-vs-rebasing>
 * git switch feature
 * git rebase main
 * In PyCharm > Git > Log context menu "Rebase 'feature' onto 'main'"
@@ -951,9 +1187,10 @@ state:
 
 
 TODO:
+
 * update .readthedocs.yaml build:os to ubuntu-22.04
 * add sphinx-notfound-page extension to to repos with docs
-  * https://sphinx-notfound-page.readthedocs.io/en/latest/index.html
+  * <https://sphinx-notfound-page.readthedocs.io/en/latest/index.html>
   * MOAD:
     * Reshapr - done
     * docs - done
