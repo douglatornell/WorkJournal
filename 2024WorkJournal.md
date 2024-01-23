@@ -999,10 +999,6 @@ exposure vulnerability:
 * MoaceanParcels
 * SOG-Bloomcast-Ensemble
 
-TODO:
-
-* SalishSeaTools
-
 
 
 #### Sun 21-Jan-2023
@@ -1047,6 +1043,80 @@ Finalized adding V21-11 hr-avg fields datasets:
 Changed branch on skookum back to main and pulled.
 
 Squash-merged dependabot PRs re: jinja2, jupyterlab, and jupyterlab-lsp.
+
+
+
+
+#### Tue 23-Jan-2023
+
+Worked at ESB
+
+Days since last wwatch3 prep stall: 4
+
+
+##### SalishSeaCast
+
+* launches of `upload_forcing forecast2` after `grib_to_netcdf 06` failed due to
+  missing `shared storage`` key
+  * added key on skookum and launched workers manually at 03:45
+* launches of `upload_forcing nowcast+` after `grib_to_netcdf 12` failed due to
+  missing `shared storage` key and me forgetting to restart manager at 03:45
+  * restarted manager and launched workers manually at 09:45
+* launches of `make_plots` failed due to missing `nowcast-dev` results archive
+  key
+  * added key on skookum and launched workers manually starting at 13:45
+
+    ```bash
+    make_plots nemo forecast2 publish 2024-01-22
+    make_plots nemo nowcast publish 2024-01-23
+    make_plots nemo nowcast comparison 2024-01-22  # persistent failure
+    make_plots nemo forecast publish 2024-01-23
+
+    make_plots nemo nowcast-agrif research 2024-01-23
+    make_plots nemo nowcast-green research 2024-01-23
+    ```
+
+* started working on backfilling day & month average datasets for 21-11 from
+  01sep23 to present
+  * confirmed that `make_averaged_dataset` worker works:
+
+    ```bash
+    make_averaged_dataset salish day biology 2023-09-03
+    make_averaged_dataset salish day chemistry 2023-09-03
+    make_averaged_dataset salish day physics 2023-09-03
+    ```
+
+  * logs go to hindcast*.log
+  * host arg seems irrelevant because worker can run on skookum and use cluster
+    on salish via reshapr cluster config
+  * used bash loop to process to 15sep23
+
+  * `make_averaged_dataset`:
+    * change logging to nowcast*.log
+    * drop host arg
+    * add `make_averaged_dataset day *` to `after_download_results nowcast-green`
+    * add `make_averaged_dataset month *` to `after_make_averaged_dataset physics`
+        at month-end, or maybe use race condition mgmt ??
+
+
+##### MOAD
+
+Group mtg; see whiteboard.
+
+
+##### Security Updates
+
+Squash-merged dependabot PR to update pillow to v10.2.0 re: CVE-2023-50447 re:
+arbitrary code execution vulnerability:
+
+* MoaceanParcels
+* Reshapr
+* moad_tools
+* SOG-Bloomcast-Ensemble
+
+TODO:
+
+* SalishSeaTools re: jupyterlab
 
 
 
