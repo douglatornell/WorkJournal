@@ -644,7 +644,7 @@ ssh `proxy-jump`:
 
 ### Week 2
 
-#### **Mon 15-Jan-2023**
+#### Mon 15-Jan-2023
 
 Days since last wwatch3 prep stall: 13
 
@@ -943,6 +943,9 @@ Days since last wwatch3 prep stall: 0
 `make_ww3_current_file forecast2` stalled; killed it and re-ran
 Greenwater river discharge time series was empty.
 
+Pulled SalishSeaNowcast v202111-erddap branch on skookum and restarted manager to load updated
+nowcast.yaml with chemistry dataset added to ping_erddap dataset ids list.
+
 
 ##### SalishSeaTools
 
@@ -960,14 +963,7 @@ Continued work on updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv
 * branch:
 * PR#
 * started digging into `get_onc_ferry`
-* it fails with KeyError on `nav_data.attrs["station"]` in `_resample_nav_data()`
-worker: ssh, turbidity, runoff, weather
-
-
-##### SalishSeaCast
-
-Pulled SalishSeaNowcast v202111-erddap branch on skookum and restarted manager to load updated
-nowcast.yaml with chemistry dataset added to ping_erddap dataset ids list.
+* it fails with KeyError on `nav_data.attrs["station"]` in `_resample_nav_coord()`
 
 
 
@@ -1021,6 +1017,53 @@ Days since last wwatch3 prep stall: 2
 Changed branch on skookum back to main and pulled.
 
 
+##### ERDDAP Datasets
+
+Finalized adding V21-11 hr-avg fields datasets:
+
+* branch: 202111-hr-avg-fields
+* PR#6 - squash-merged
+
+Changed branch on skookum back to main and pulled.
+
+Squash-merged dependabot PRs re: jinja2, jupyterlab, and jupyterlab-lsp.
+
+
+
+### Week 3
+
+#### Mon 22-Jan-2023
+
+Days since last wwatch3 prep stall: 3
+
+
+##### Stakeholder Support
+
+Replied to email from Dan Baker of QENTOL, YEN W̱SÁNEĆ Marine Guardians:
+
+* 21-08 bathymetry dataset to map x/y to lon/lat
+* explanation of grid orientation and rotation
+* link to Ben's thesis ch 2 for evaluation of model surface currents vs obs
+
+
+##### SalishSeaNowcast
+
+Continued removing nowcast-dev runs from configuration and workflow:
+
+* branch: drop-nowcast-dev
+* PR#229
+* rebased branch on to main
+* pulled branch on skookum for testing tomorrow; restarted manager to load updated
+  config & `next_workers` module
+
+Continued work on updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv3:
+
+* branch: onc-api-v3
+* PR#
+* started digging into `get_onc_ferry`
+* it fails with KeyError on `nav_data.attrs["station"]` in `_resample_nav_coord()`
+
+
 TODO:
 
 * rename make_runoff_file to make_v201702_runoff_file
@@ -1033,16 +1076,14 @@ TODO:
 * add tests for _upload_*_files in upload_forcing
 
 
-##### ERDDAP Datasets
+##### SalishSeaTools
 
-Finalized adding V21-11 hr-avg fields datasets:
+Finished work on updating `data_tools.onc_json_to_dataset()` worker to ONC APIv3:
 
-* branch: 202111-hr-avg-fields
-* PR#6 - squash-merged
+* branch: update-onc_json_to_dataset
+* PR#93 -
+* cleaned up unit tests
 
-Changed branch on skookum back to main and pulled.
-
-Squash-merged dependabot PRs re: jinja2, jupyterlab, and jupyterlab-lsp.
 
 
 
