@@ -1062,29 +1062,17 @@ Continued work on updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv
 * PR#
 * started digging into `get_onc_ferry`
 * it fails with KeyError on `nav_data.attrs["station"]` in `_resample_nav_coord()`
-
-
-TODO:
-
-* rename make_runoff_file to make_v201702_runoff_file
-* rename make_v202111_runoff_file to make_runoff_file
-* add config tests for `run type[*][mesh mask]`
-* add config tests for `run type[*][bathymetry]`
-* add config tests for `run type[*][land processor elimination]`
-* add config tests for `run type[*][run sets dir]`
-* improve test_run_NEMO test for forcing symlinks ??
-* add tests for _upload_*_files in upload_forcing
+  * fixed in SalishSeaTools
 
 
 ##### SalishSeaTools
 
-Finished work on updating `data_tools.onc_json_to_dataset()` worker to ONC APIv3:
+Continued work on updating `data_tools.onc_json_to_dataset()` worker to ONC APIv3:
 
 * branch: update-onc_json_to_dataset
 * PR#93 -
-* cleaned up unit tests
-
-
+* added `parameters.locationCode` to dataset attrs as `station` because that's how `get_onc_ferry`
+  expected to get a metadata element
 
 
 
@@ -1098,7 +1086,7 @@ Days since last wwatch3 prep stall: 4
 ##### SalishSeaCast
 
 * launches of `upload_forcing forecast2` after `grib_to_netcdf 06` failed due to
-  missing `shared storage`` key
+  missing `shared storage` key
   * added key on skookum and launched workers manually at 03:45
 * launches of `upload_forcing nowcast+` after `grib_to_netcdf 12` failed due to
   missing `shared storage` key and me forgetting to restart manager at 03:45
@@ -1132,13 +1120,6 @@ Days since last wwatch3 prep stall: 4
     on salish via reshapr cluster config
   * used bash loop to process to 15sep23
 
-  * `make_averaged_dataset`:
-    * change logging to nowcast*.log
-    * drop host arg
-    * add `make_averaged_dataset day *` to `after_download_results nowcast-green`
-    * add `make_averaged_dataset month *` to `after_make_averaged_dataset physics`
-        at month-end, or maybe use race condition mgmt ??
-
 
 ##### MOAD
 
@@ -1159,6 +1140,166 @@ TODO:
 
 * SalishSeaTools re: jupyterlab
 
+
+##### Miscellaneous
+
+* Slack conversation w/ Ilias about problems loading 10may2016 biol & grid_T datasets
+* Slack conversation w/ Cassidy re: rsync as alternative to sftp for wildcard/regex downloads
+
+
+
+#### Wed 24-Jan-2023
+
+Days since last wwatch3 prep stall: 5
+
+
+##### SalishSeaCast
+
+* launch of `run_NEM forecast2` failed probably due to checklist clearance during figure backfilling
+  yesterday
+* finished backfilling day & month average datasets for 21-11 from
+  01sep23 to present
+  * used bash loop in new `day-month-avg` tmux session on skookum to process to 24jan24
+  * also calculated month average datasets for sep-dec 2023
+* nowcast-agrif died on launch; re-ran and it failed again due to 1 node being unable to access nemo.exe
+
+
+##### SalishSeaNowcast
+
+Continued removing nowcast-dev runs from configuration and workflow:
+
+* branch: drop-nowcast-dev
+* PR#229
+* dug into removal of `nowcast-dev` from plots
+  * it's all about the `compare_venus_ctd` fig module, but ONC API v3 needs to be handled there;
+    decided to defer that to a future PR
+
+Continued work on updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv3:
+
+* branch: onc-api-v3
+* PR#
+* continued digging into `get_onc_ferry`
+* it fails with ValueError due to all NaNs and all bad qaqc flags in `_qaqc_filter()`
+  * fixed by checking for those conditions and returning an empty data array when true
+
+
+
+#### Thu 25-Jan-2023
+
+Days since last wwatch3 prep stall: 6
+
+
+##### SalishSeaNowcast
+
+Continued work on updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv3:
+
+* branch: onc-api-v3
+* PR#
+* continued digging into `get_onc_ferry`
+* it fails with AttributeError on `REL_HUMIDITY` sensor from `TEMPHUMID` device
+  * fixed by changing `REL_HUMIDITY` to `rel_humidity` in config
+* it fails with AttributeError on `solar_radiation` sensor from `PYRANOMETER` device
+  * fixed by refactoring `_qaqc_filter()` to catch AttributeError and use `_empty_device_data()`
+    and to handle all NaNs and all bad qaqc flags case from yesterday
+* got `get_onc_ferry` to a state where it would run
+    get_onc_ferry TWDP 2022-10-11
+  lots of missing data
+* dataset load on ERDDAP failed due to units mismatches on `temperature` and `air_temperature`
+  variables
+  * fixed with another hack in `_empty_device_data()`
+
+
+TODO:
+
+* update `compare_venus_ctd` fig module re: ONC API v3, then drop dev model elements
+* rename make_runoff_file to make_v201702_runoff_file
+* rename make_v202111_runoff_file to make_runoff_file
+* add config tests for `run type[*][mesh mask]`
+* add config tests for `run type[*][bathymetry]`
+* add config tests for `run type[*][land processor elimination]`
+* add config tests for `run type[*][run sets dir]`
+* improve test_run_NEMO test for forcing symlinks ??
+* add tests for _upload_*_files in upload_forcing
+* `make_averaged_dataset`:
+  * change logging to nowcast*.log
+  * drop host arg
+  * add `make_averaged_dataset day *` to `after_download_results nowcast-green`
+  * add `make_averaged_dataset month *` to `after_make_averaged_dataset physics`
+      at month-end, or maybe use race condition mgmt ??
+
+
+##### SalishSeaTools
+
+Continued work on updating `data_tools.onc_json_to_dataset()` worker to ONC APIv3:
+
+* branch: update-onc_json_to_dataset
+* PR#93 -
+* changed to branch on `skookum:/SalishSeaCast/tools/SalishSeaTools`
+
+
+##### SalishSeaCast
+
+* nowcast-agrif died on launch due to `pod29a11.ibb` node being unable to access `nemo.exe`
+  * confirmed that executable exists and symlink is okay in --no-submit test
+  * email from Mark explained that problem was due to a node that rebooted and didn't get the
+    scratch -> data symlink when it restarted
+  * backfilled:
+
+  ```bash
+    make_forcing_links orcinus nowcast-agrif 2024-01-25
+    # wait for run to finish
+    make_forcing_links orcinus nowcast-agrif 2024-01-25
+  ```
+
+* manually ran `make_averaged_dataset day biology|chemistry|physics` after nowcast-green run
+
+
+##### ERDDAP
+
+Successfully loaded TWDP ferry obs for 11-31oct22; most/all datasets empty except navigation.
+
+
+
+#### Fri 26-Jan-2023
+
+Days since last wwatch3 prep stall: 7
+
+
+##### ERDDAP
+
+* Successfully loaded TWDP ferry obs for 01nov22 to 30nov22:
+  * most/all datasets empty except navigation
+  * vessel went out of service on 15nov22 and moved to refit on 18nov22
+  * vessel resumed runs on 24dec22; empty datasets except nav to 31dec22
+
+
+##### SalishSeaNowcast
+
+Finished removing nowcast-dev runs from configuration and workflow:
+
+* branch: drop-nowcast-dev
+* PR#229 - squash-merged
+* successfully tested in production since 24jan24
+* fixed tests re: restoration of nowcast-dev results archive necessary to keep `make_plots` working
+* returned skookum to main branch and updated
+
+
+##### Numeric 2024 Course Support
+
+Updated uibcdf/action-sphinx-docs-to-gh-pages version. Pinned it to Git hash of its v2.1.0
+release so that dependabot notifies us of future updates.
+
+
+
+#### Sat 27-Jan-2023
+
+Days since last wwatch3 prep stall: 8
+
+
+
+#### Sun 28-Jan-2023
+
+Days since last wwatch3 prep stall: 9
 
 
 
