@@ -1303,11 +1303,59 @@ Days since last wwatch3 prep stall: 9
 
 
 
+### Week 4
+
+#### Mon 29-Jan-2023
+
+Days since last wwatch3 prep stall: 0
+
+
+##### SalishSeaCast
+
+`make_ww3_current_file forecast` stalled; killed it and re-ran
+
+
+##### Miscellaneous
+
+Checked status of scheduled GHA workflows:
+
+  ```bash
+  conda activate gha-workflows
+  python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+  ```
+
+Reactivated workflows that had been disabled due to inactivity:
+
+  ```bash
+  gh workflow enable -R SS-Atlantis/AtlantisCmd CodeQL
+  gh workflow enable -R UBC-MOAD/docs sphinx-linkcheck
+  ```
+
+Squash-merged dependabot PRs to bump mamba-org/setup-micromamba to 1.8.0 re: feature updates:
+
+* SalishSeaNowcast
+* rhwhite/numeric_2024
+* erddap-datasets
+* gha-workflows
+
+Squash-merged dependabot PRs to bump codecov/codecov-action to 3.1.5 re: update to Node.js 20:
+
+* SalishSeaNowcast
+* gha-workflows
+
+Updated PyCharm on khawla to 2023.3.3.
+
+Reviewed notification, re-raised by Gmail, from readthedocs re: manually configured webhooks that
+lack secrets; found that I had already handled all of the affected projects.
+
 
 ##### salishsea-site
 
-biology figures pages since 31dec23 are failing with an internal server error;
-see `/logs/salishsea-site/pyramid.log`
+Fixed issue #64 re: dynamic copyright years range on license page.
+
+Started owrk on biology page re: no more ciliates figure in V21-11, and name change for turbidity
+figure file; can handle via `ImageLoop.available()` but doing so triggers unit test failures.
+
 
 TODO:
 
@@ -1315,6 +1363,13 @@ TODO:
 * fix file name for Fraser River turbidity thalweg & surface plot for 01jan24 onward re: v202111
   variable name change
 * add Suchy et al 2023 to publications page (and docs/CITATION.rst)
+
+
+##### Phys Ocgy Seminar
+
+Sam re: TReX Deep tracer release experiment in St. Lawrence.
+
+
 
 
 
