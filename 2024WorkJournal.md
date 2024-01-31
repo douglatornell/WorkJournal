@@ -1209,25 +1209,6 @@ Continued work on updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv
   * fixed with another hack in `_empty_device_data()`
 
 
-TODO:
-
-* update `compare_venus_ctd` fig module re: ONC API v3, then drop dev model elements
-* rename make_runoff_file to make_v201702_runoff_file
-* rename make_v202111_runoff_file to make_runoff_file
-* add config tests for `run type[*][mesh mask]`
-* add config tests for `run type[*][bathymetry]`
-* add config tests for `run type[*][land processor elimination]`
-* add config tests for `run type[*][run sets dir]`
-* improve test_run_NEMO test for forcing symlinks ??
-* add tests for _upload_*_files in upload_forcing
-* `make_averaged_dataset`:
-  * change logging to nowcast*.log
-  * drop host arg
-  * add `make_averaged_dataset day *` to `after_download_results nowcast-green`
-  * add `make_averaged_dataset month *` to `after_make_averaged_dataset physics`
-      at month-end, or maybe use race condition mgmt ??
-
-
 ##### SalishSeaTools
 
 Continued work on updating `data_tools.onc_json_to_dataset()` worker to ONC APIv3:
@@ -1282,6 +1263,24 @@ Finished removing nowcast-dev runs from configuration and workflow:
 * successfully tested in production since 24jan24
 * fixed tests re: restoration of nowcast-dev results archive necessary to keep `make_plots` working
 * returned skookum to main branch and updated
+
+TODO:
+
+* update `compare_venus_ctd` fig module re: ONC API v3, then drop dev model elements
+* rename make_runoff_file to make_v201702_runoff_file
+* rename make_v202111_runoff_file to make_runoff_file
+* add config tests for `run type[*][mesh mask]`
+* add config tests for `run type[*][bathymetry]`
+* add config tests for `run type[*][land processor elimination]`
+* add config tests for `run type[*][run sets dir]`
+* improve test_run_NEMO test for forcing symlinks ??
+* add tests for _upload_*_files in upload_forcing
+* `make_averaged_dataset`:
+  * change logging to nowcast*.log
+  * drop host arg
+  * add `make_averaged_dataset day *` to `after_download_results nowcast-green`
+  * add `make_averaged_dataset month *` to `after_make_averaged_dataset physics`
+      at month-end, or maybe use race condition mgmt ??
 
 
 ##### Numeric 2024 Course Support
@@ -1353,9 +1352,8 @@ lack secrets; found that I had already handled all of the affected projects.
 
 Fixed issue #64 re: dynamic copyright years range on license page.
 
-Started owrk on biology page re: no more ciliates figure in V21-11, and name change for turbidity
+Started work on biology page re: no more ciliates figure in V21-11, and name change for turbidity
 figure file; can handle via `ImageLoop.available()` but doing so triggers unit test failures.
-
 
 TODO:
 
@@ -1368,6 +1366,97 @@ TODO:
 ##### Phys Ocgy Seminar
 
 Sam re: TReX Deep tracer release experiment in St. Lawrence.
+
+
+
+#### Tue 30-Jan-2023
+
+Days since last wwatch3 prep stall: 1
+
+
+##### MOAD
+
+Group mtg; see whiteboard.
+
+
+##### SalishSeaCast
+
+* backfilled day average datasets for 21-11 to present
+  * noticed that 20jan24 biology day-avg was missing; re-ran but it stalled repeatedly;
+    had to run manually with:
+
+    ```bash
+    reshapr extract \
+      /SalishSeaCast/SalishSeaNowcast/config/reshapr/day-average_202111_biology.yaml \
+      --start-date 2024-01-20 --end-date 2024-01-20
+    ```
+
+  * used bash loop in new `day-month-avg` tmux session on skookum to process
+    26jan24 to 30jan24
+
+
+##### Miscellaneous
+
+Squash-merged dependabot PR to bump mamba-org/setup-micromamba to 1.8.0 re: feature updates:
+
+* salishsea-site
+
+Updated PyCharm on kudu to 2023.3.3.
+
+
+##### 2024 Bloomcast
+
+* Prep on kudu:
+  * updated SOG-Bloomcast-Ensemble clone
+  * confirmed that SOG clone is up to date
+  * created new bloomcast-2024 env (Python 3.12)
+  * did editable installs of SOG & SOG-Bloomcast-Ensemble
+  * SOG-Bloomcast-Ensemble test suite ran successfully
+  * commit environment.yaml and requirements.txt
+  * mkdir run/2023
+  * cp run/2023_bloomcast_infile.yaml run/2024_bloomcast_infile.yaml
+  * mv run/2023_bloomcast_infile.yaml run/2023/
+  * committed archive of 2023 SOG YAML infile
+  * edit run/2023_bloomcast_infile.yaml
+  * edit run/config/yaml
+  * successfully tested run prep w/ SOG runs and publish to web disabled
+    * smtpd has been dropped from Python stdlib in 3.12, so test email
+      functionality is broken
+    * aiosmtpd is probably the alternative to use
+  * committed run/2024_bloomcast_infile.yaml and run/config.yaml
+* Setup on salish:
+  * updated SOG-Bloomcast-Ensemble clone
+  * SOG clone needs to be at 55af3c2 to avoid error from Ben's post 7-Apr-2014 commits
+  * created new bloomcast env: Python 3.12
+  * did editable installs of SOG & SOG-Bloomcast-Ensemble
+  * runs dir: /data/dlatorne/SOG-projects/SOG-Bloomcast-Ensemble/run
+  * archived 2023_bloomcast* files in run/2023/
+  * archived Englishman_flow Fraser_flow Sandheads_wind in run/2023/
+  * archived YVR_* in run/2023/
+  * ran test w/ push to web disabled
+    * unrecognized weather description:
+        `Thunderstorms,Heavy Rain,Fog`
+    * bloom predictions:
+        INFO [bloomcast.ensemble] Predicted earliest bloom date is 2024-03-03
+        INFO [bloomcast.ensemble] Earliest bloom date is based on forcing from 2004/2005
+        INFO [bloomcast.ensemble] Predicted early bound bloom date is 2024-03-07
+        INFO [bloomcast.ensemble] Early bound bloom date is based on forcing from 1995/1996
+        INFO [bloomcast.ensemble] Predicted median bloom date is 2024-03-21
+        INFO [bloomcast.ensemble] Median bloom date is based on forcing from 2003/2004
+        INFO [bloomcast.ensemble] Predicted late bound bloom date is 2024-04-09
+        INFO [bloomcast.ensemble] Late bound bloom date is based on forcing from 2006/2007
+        INFO [bloomcast.ensemble] Predicted latest bloom date is 2024-04-13
+        INFO [bloomcast.ensemble] Latest bloom date is based on forcing from 1998/1999
+  * deleted last year's `bloom_date_evolution.log` and `bloomcast.log`
+  * removed `wind_data_date` and re-ran with push to web enabled
+  * confirmed web page updated as expected
+  * enabled cron job
+* Added new unrecognized weather description to cloud fraction mapping.
+
+TODO:
+
+* replace removed stdlib `smtpd` with `aiosmtpd` for email testing
+* silence `matplotlib.font_manager` log messages
 
 
 
