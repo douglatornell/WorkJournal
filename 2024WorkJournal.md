@@ -1264,24 +1264,6 @@ Finished removing nowcast-dev runs from configuration and workflow:
 * fixed tests re: restoration of nowcast-dev results archive necessary to keep `make_plots` working
 * returned skookum to main branch and updated
 
-TODO:
-
-* update `compare_venus_ctd` fig module re: ONC API v3, then drop dev model elements
-* rename make_runoff_file to make_v201702_runoff_file
-* rename make_v202111_runoff_file to make_runoff_file
-* add config tests for `run type[*][mesh mask]`
-* add config tests for `run type[*][bathymetry]`
-* add config tests for `run type[*][land processor elimination]`
-* add config tests for `run type[*][run sets dir]`
-* improve test_run_NEMO test for forcing symlinks ??
-* add tests for _upload_*_files in upload_forcing
-* `make_averaged_dataset`:
-  * change logging to nowcast*.log
-  * drop host arg
-  * add `make_averaged_dataset day *` to `after_download_results nowcast-green`
-  * add `make_averaged_dataset month *` to `after_make_averaged_dataset physics`
-      at month-end, or maybe use race condition mgmt ??
-
 
 ##### Numeric 2024 Course Support
 
@@ -1354,13 +1336,6 @@ Fixed issue #64 re: dynamic copyright years range on license page.
 
 Started work on biology page re: no more ciliates figure in V21-11, and name change for turbidity
 figure file; can handle via `ImageLoop.available()` but doing so triggers unit test failures.
-
-TODO:
-
-* drop ciliates thalweg and surface plot from biology pages for 01jan24 onward re: v202111
-* fix file name for Fraser River turbidity thalweg & surface plot for 01jan24 onward re: v202111
-  variable name change
-* add Suchy et al 2023 to publications page (and docs/CITATION.rst)
 
 
 ##### Phys Ocgy Seminar
@@ -1460,6 +1435,210 @@ TODO:
 
 
 
+#### Wed 31-Jan-2023
+
+Days since last wwatch3 prep stall: 0
+
+
+##### SalishSeaCast
+
+`upload_forcing forecast2` failed due to no 17-02 runoff file which was due to no Fraser discharge
+
+* recovery started at ~07:45
+
+  ```bash
+  ln -s /results/forcing/rivers/R201702DFraCElse_y2024m01d29.nc \
+    /results/forcing/rivers/R201702DFraCElse_y2024m01d30.nc
+  ```
+
+  * skipped `forecast2` runs because nowcast runs are imminent
+
+* `make_ww3_current_file forecast` stalled; killed it and re-ran
+* manually ran `make_averaged_dataset day biology|chemistry|physics` after nowcast-green run
+* manually ran `make_averaged_dataset month biology|chemistry|physics` after nowcast-green run
+
+
+##### SalishSeaNowcast
+
+Created issue #232 to change upload_forcing worker to persist missing runoff files via symlinks
+instead of failing:
+
+* branch: symlink-missing-runoff-files
+* PR#233
+* dropped TODOs re: removing 201702 runoff files from config because they are needed for
+  nowcast-agrif
+* improved upload_forcing unit tests
+* failed to get rid of uses of unittest.mock.patch that apply side effects to test nested exceptions
+  code 🙁
+* added persistence of previous day for missing runoff files via symlinks
+* switched skookum to symlink-missing-runoff-files branch for testing
+
+
+##### salishsea-site
+
+Continued work on biology page re: no more ciliates figure in V21-11, and name change for turbidity
+figure file:
+
+* realized that unit test failures were due to bug that changed biology image loops data
+  structure
+* cleaned a lot (but not all 🙁) uses of `unittest.mock.patch` out of `test_salishseacast.py`
+
+TODO:
+
+* drop ciliates thalweg and surface plot from biology pages for 01jan24 onward re: v202111
+* fix file name for Fraser River turbidity thalweg & surface plot for 01jan24 onward re: v202111
+  variable name change
+* add Suchy et al 2023 to publications page (and docs/CITATION.rst)
+
+
+### February
+
+#### Thu 1-Feb-2023
+
+Days since last wwatch3 prep stall: 0
+
+
+##### SalishSeaCast
+
+`upload_forcing forecast2` failed due to no 17-02 runoff file which was due to no Fraser discharge
+and date offset bug in my work on `upload_forcing` yesterday prevented it from handling the issue
+by creating a symlink
+
+* recovery started at ~07:45
+
+  ```bash
+  ln -sf /results/forcing/rivers/R201702DFraCElse_y2024m01d30.nc \
+    /results/forcing/rivers/R201702DFraCElse_y2024m01d31.nc
+  ```
+
+  * skipped `forecast2` runs because nowcast runs are imminent
+
+`upload_forcing nowcast+` failed due to indentation bug in yesterday's work
+
+* recovery started at ~11:00
+
+  ```bash
+  upload_forcing $NOWCAST_YAML arbutus nowcast+
+  upload_forcing $NOWCAST_YAML orcinus nowcast+
+  upload_forcing $NOWCAST_YAML optimum nowcast+
+  upload_forcing $NOWCAST_YAML graham-dtn nowcast+
+  ```
+
+* `make_ww3_wind_file forecast` stalled; killed it and re-ran
+
+* nowcast-agrif crashed due to node communication issue
+
+
+##### Stakeholder Support
+
+Teams meeting with:
+
+* Dan Baker of QENTOL, YEN W̱SÁNEĆ Marine Guardians
+* Serge Kena-Cohen (project mgr) of Fujitsu who contract for Transport Canada EMSA program
+* Peter McLaren (developer) of Fujitsu who contract for Transport Canada EMSA program
+
+* Objective is reports for QENTOL of current-corrected vessel velocities based on recent
+  (week to month time frame) vessel AIS obs.
+* Discussed overall processing approach and implementation Peter's code
+* Agreed to process some AIS obs that Peter will send as a cross-check
+
+
+##### SalishSeaNowcast
+
+Continued work on issue #232 to change upload_forcing worker to persist missing runoff files via
+symlinks instead of failing:
+
+* branch: symlink-missing-runoff-files
+* PR#233
+* fixed bugs re: date offset, and indentation of symlink creation code
+
+
+##### Miscellaneous
+
+VSCode v1.86 that landed today refuses to connect to `salish` and `graham` due to too-old versions
+of `libc`.
+Sent Slack msg to Henryk about planning for an OS upgrade of `salish`.
+
+UBC-IOS modeling mtg:
+
+* Laura re: Bute Inlet paper and OSM poster
+
+
+#### Fri 2-Feb-2023
+
+Days since last wwatch3 prep stall: 1
+
+
+##### SalishSeaCast
+
+`crop_gribs 12` stalled with 1 file unprocessed; delayed start of nowcast-blue run by ~2h
+
+
+##### SalishSeaNowcast
+
+Finished issue #232 to change upload_forcing worker to persist missing runoff files via symlinks
+instead of failing:
+
+* branch: symlink-missing-runoff-files
+* PR#233 - squash-merged
+* returned skookum to main branch
+
+Continued work on updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv3:
+
+* branch: onc-api-v3
+* PR#234
+* continued digging into `get_onc_ferry`
+* changed qaqc flags mask in `get_onc_ferry` to <=1 or >=7 to handle the fact that we request
+  1-second-averaged data which gets a flag value of 7
+* dropped NaN mask because that is now handled by ONC and has a qaqc flag value of 9
+* ran successful data requests on skookum for 31mar23
+* started working on unit tests
+
+
+TODO:
+
+* rename make_runoff_file to make_v201702_runoff_file
+* rename make_v202111_runoff_file to make_runoff_file
+* update `compare_venus_ctd` fig module re: ONC API v3, then drop dev model elements
+* add config tests for `run type[*][mesh mask]`
+* add config tests for `run type[*][bathymetry]`
+* add config tests for `run type[*][land processor elimination]`
+* add config tests for `run type[*][run sets dir]`
+* improve test_run_NEMO test for forcing symlinks ??
+* add tests for _upload_*_files in upload_forcing
+* `make_averaged_dataset`:
+  * change logging to nowcast*.log
+  * drop host arg
+  * add `make_averaged_dataset day *` to `after_download_results nowcast-green`
+  * add `make_averaged_dataset month *` to `after_make_averaged_dataset physics`
+      at month-end, or maybe use race condition mgmt ??
+
+
+##### ERDDAP
+
+* Successfully re-loaded TWDP ferry obs for 10-31oct22, and 1nov2022 to 31dec2022
+
+
+#### Sat 3-Feb-2023
+
+Days since last wwatch3 prep stall: 2
+
+
+##### ERDDAP
+
+* Successfully re-loaded TWDP ferry obs for 10-31oct22, and 1jan2023 to 31mar2023
+* something wrong on 9feb23
+* first chlorophyll obs on 28mar23
+
+
+#### Sun 4-Feb-2023
+
+Days since last wwatch3 prep stall: 3
+
+
+##### ERDDAP
+
+* Successfully re-loaded TWDP ferry obs for 1apr2023 to 30apr2023
 
 
 
