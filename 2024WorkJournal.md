@@ -1642,6 +1642,52 @@ Days since last wwatch3 prep stall: 3
 
 
 
+### Week 5
+
+#### Mon 5-Feb-2023
+
+Days since last wwatch3 prep stall: 4
+
+
+##### ERDDAP
+
+* Emailed Rich, Susan & Shumin with update on get_onc_ferry backfilling and link to chlorophyll
+  bloom on 8apr23
+* Successfully re-loaded TWDP ferry obs for 1may2023 to 30jun23
+* chlorophyll obs end after 6th crossing on 31may23
+
+
+##### Miscellaneous
+
+Phys Ocgy seminar: Shouyi Wang of MIT re: Indonesian Throughflow (ITF)
+
+Squash-merged dependabot PR to bump codecov-action to 4.0.1 re: feature updates:
+
+* SalishSeaNowcast
+* gha-workflows
+
+
+##### SalishSeaCast
+
+* `crop_gribs 18` timed out due to seeing no files after 8h
+* `collect_weather 2.5km 18` finally finished at 17:11; >3h late
+* ran `crop_gribs 18 --backfill` at ~18:30 to recover
+
+
+
+#### Tue 6-Feb-2023
+
+Days since last wwatch3 prep stall: 0
+
+
+##### SalishSeaCast
+
+* `make_ww3_current_file forecast2` stalled; killed it and skipped run
+
+
+
+
+
 Add Tereza's pubs to ERDDAP.
 
 
