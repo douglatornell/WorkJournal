@@ -1685,6 +1685,48 @@ Days since last wwatch3 prep stall: 0
 * `make_ww3_current_file forecast2` stalled; killed it and skipped run
 
 
+##### Miscellaneous
+
+MOAD group mtg; see whiteboard.
+
+Squash-merged dependabot PRs to bump cryptography to 42.0.0 re: CVE-2023-50782
+re: remote decryption of captured messages in TLS server that use RSA key
+exchanges
+
+* cookiecutter-analysis-repo
+* cookiecutter-moad-pkg
+* NEMO_Nowcast
+* SalishSeaCast/docs
+* NEMO-Cmd
+* MoaceanParcels
+* SalishSeaNowcast
+* SalishSeaCmd
+* moad_tools
+* Reshapr
+
+TODO:
+
+* salishsea-site
+
+
+##### MOAD Docs
+
+Fixed broken link that sphinx-linkcheck found in pkg structure docs re:
+mambaforge.
+
+
+##### MoaceanParcels
+
+Fixed broken link re: jinja2T vs. SciPy kernels tutorial.
+
+
+
+
+
+Looks at Ilias's problem day in May
+
+Look at combining zarr files for Jose
+
 
 
 
