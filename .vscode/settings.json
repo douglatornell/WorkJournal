@@ -37,6 +37,7 @@
         "DRAKKAR",
         "DSWRF",
         "ECCC",
+        "EMSA",
         "ERDDAP",
         "esbonio",
         "fabs",
@@ -62,6 +63,7 @@
         "importlib",
         "infile",
         "inotify",
+        "interannual",
         "IPSL",
         "ipynb",
         "ipython",
@@ -70,6 +72,7 @@
         "jupyterlab",
         "jussieu",
         "Kenna",
+        "kerchunk",
         "khawla",
         "LANL",
         "LHTFL",
@@ -86,6 +89,7 @@
         "micromamba",
         "microzooplankton",
         "MIDOSS",
+        "Mihaly",
         "miniconda",
         "Miniforge",
         "Moacean",
@@ -181,6 +185,8 @@
         "xarray",
         "XIOS",
         "yesqa",
+        "Youyu",
+        "zarr",
         "Zwift"
     ]
 }
