@@ -1136,10 +1136,6 @@ arbitrary code execution vulnerability:
 * moad_tools
 * SOG-Bloomcast-Ensemble
 
-TODO:
-
-* SalishSeaTools re: jupyterlab
-
 
 ##### Miscellaneous
 
@@ -1483,13 +1479,6 @@ figure file:
   structure
 * cleaned a lot (but not all 🙁) uses of `unittest.mock.patch` out of `test_salishseacast.py`
 
-TODO:
-
-* drop ciliates thalweg and surface plot from biology pages for 01jan24 onward re: v202111
-* fix file name for Fraser River turbidity thalweg & surface plot for 01jan24 onward re: v202111
-  variable name change
-* add Suchy et al 2023 to publications page (and docs/CITATION.rst)
-
 
 ### February
 
@@ -1595,25 +1584,6 @@ Continued work on updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv
 * started working on unit tests
 
 
-TODO:
-
-* rename make_runoff_file to make_v201702_runoff_file
-* rename make_v202111_runoff_file to make_runoff_file
-* update `compare_venus_ctd` fig module re: ONC API v3, then drop dev model elements
-* add config tests for `run type[*][mesh mask]`
-* add config tests for `run type[*][bathymetry]`
-* add config tests for `run type[*][land processor elimination]`
-* add config tests for `run type[*][run sets dir]`
-* improve test_run_NEMO test for forcing symlinks ??
-* add tests for _upload_*_files in upload_forcing
-* `make_averaged_dataset`:
-  * change logging to nowcast*.log
-  * drop host arg
-  * add `make_averaged_dataset day *` to `after_download_results nowcast-green`
-  * add `make_averaged_dataset month *` to `after_make_averaged_dataset physics`
-      at month-end, or maybe use race condition mgmt ??
-
-
 ##### ERDDAP
 
 * Successfully re-loaded TWDP ferry obs for 10-31oct22, and 1nov2022 to 31dec2022
@@ -1653,7 +1623,7 @@ Days since last wwatch3 prep stall: 4
 
 * Emailed Rich, Susan & Shumin with update on get_onc_ferry backfilling and link to chlorophyll
   bloom on 8apr23
-* Successfully re-loaded TWDP ferry obs for 1may2023 to 30jun23
+* Successfully loaded TWDP ferry obs for 1may2023 to 30jun23
 * chlorophyll obs end after 6th crossing on 31may23
 
 
@@ -1704,9 +1674,10 @@ exchanges
 * moad_tools
 * Reshapr
 
-TODO:
 
-* salishsea-site
+##### ERDDAP
+
+* Successfully loaded TWDP ferry obs for 1jul2023 to 31aug23
 
 
 ##### MOAD Docs
@@ -1719,13 +1690,231 @@ mambaforge.
 
 Fixed broken link re: jinja2T vs. SciPy kernels tutorial.
 
+Researched zarr:
+
+* combining the many small zarr files that Jose gets from Parcels might be a re-chunking operation
+* using kerchunk to create a virtual zarr from the nowcast-green netCDF4 files:
+  * might allow single dataset access to all variables
+  * probably would simplify Reshapr model profile
+  * unclear if it would yield performance improvements
+  * what is the overhead of running kerchunk daily to add day's run to dataset?
+  * Martin Durant, PyData Global 2021: https://www.youtube.com/watch?v=0bqpxX3Nn_A&t=1512s
+
+
+
+#### Wed 7-Feb-2023
+
+Days since last wwatch3 prep stall: 1
+
+
+##### ERDDAP
+
+* Successfully loaded TWDP ferry obs for 1sep2023 to 30nov23; no obs from 17nov23 onward
+
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus turbidity` failed due to RSA/OPENSSH key issue
+  * re-ran successfully at ~17:15
+* explored removal of HRDPS continental full domain grib files that we have processed with
+  `crop_gribs`
+  * first occurrence is in `/results/forcing/atmospheric/continental2.5/GRIB/20230402/00/`
+
+
+##### SalishSeaTools
+
+Finished work on updating `data_tools.onc_json_to_dataset()` worker to ONC APIv3:
+
+* branch: update-onc_json_to_dataset
+* PR#93 - squash-merged
+
+Squash-merged dependabot PR to update jupyterlab to v4.0.11 re: CVE-2024-22421 re: auth & XSRF token
+exposure vulnerability.
+
+Updated skoookum to main branch.
+
+
+##### salishsea-site
+
+Continued work on biology page re: no more ciliates figure in V21-11, and name change for turbidity
+figure file:
+
+* realized that unit test failures were due to bug that changed biology image loops data
+  structure
+* cleaned a lot (but not all 🙁) uses of `unittest.mock.patch` out of `test_salishseacast.py`
+* forgot to create feature branch, so work is on main 🙁
+* added Suchy et al 2023 to publications page (PR#67 - squash-merged)
+
+Squash-merged dependabot PRs to bump cryptography to 42.0.0 re: CVE-2023-50782
+re: remote decryption of captured messages in TLS server that use RSA key
+exchanges
+
+
+##### SalishSeaCast/docs
+
+Finished update to Python 3.12:
+
+* branch: py312
+* PR#37 - squash-merged
+
+readthedocs build maintenance:
+
+* branch: rtd-build-main
+* PR#43 - squash-merged
+* change to mambaforge-22.9
+* pin sphinx=7.2.6 and install sphinx-rtd-theme from pip
+
+Added Suchy et al 2023 to CITATION.rst:
+
+* branch: suchy-etal-2023
+* PR#44 - squash-merged
+
+Added sphinx-notfound-page extension:
+
+* branch: sphinx-notfound-page
+* PR#45 - squash-merged
+
+
+##### SalishSeaNowcast
+
+Continued work on updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv3:
+
+* branch: onc-api-v3
+* PR#234
+* pushed `get_onc_ctd` changes and updated skookum
+
+Started work on adding `make_averaged_dataset` to workflow:
+
+* branch: TDB
+* PR#TBD
+* changed config to log to nowcast logs instead of hindcast
+* added code to `after_download_results()` to launch worker for biology, chemistry & physics
+  variable groups
+* copied changes to skookum for testing
+* restarted manager to load updated config and `next_workers` module
+
+
+
+#### Thu 8-Feb-2023
+
+Days since last wwatch3 prep stall: 2
+
+
+##### ERDDAP
+
+* `get_onc_ferry` ran overnight via automation to collect 7feb24 as a side effect of yesterday's
+  manager restart for the `make_averaged_dataset` test
+* `get_onc_ferry` found no TWDP ferry obs for 1dec2023 to 29jan24
+
+
+##### Miscellaneous
+
+VSCode 1.86.1 released with fallback to legacy server for old glibc in place until Feb-2025.
+
+Discussed code and data archives for Suchy, et al 2024 with Karyn.
+
+
+##### SalishSeaNowcast
+
+Continued work on updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv3:
+
+* branch: onc-api-v3
+* PR#234
+* improved and pushed `get_onc_ferry` tests
+* confirmed that issue #174 from pandas 2.0.0 resampling is resolved and removed test skip
+* added `ferry data` YAML config and unit tests for it
+* updated ERDDAP dataset id for ferry obs in YAML config
+* worked on improving test coverage of `get_onc_ferry`
+
+
+TODO:
+
+* rename make_runoff_file to make_v201702_runoff_file
+* rename make_v202111_runoff_file to make_runoff_file
+* update `compare_venus_ctd` fig module re: ONC API v3, then drop dev model elements
+* add config tests for `run type[*][mesh mask]`
+* add config tests for `run type[*][bathymetry]`
+* add config tests for `run type[*][land processor elimination]`
+* add config tests for `run type[*][run sets dir]`
+* improve test_run_NEMO test for forcing symlinks ??
+* add tests for _upload_*_files in upload_forcing
+* `make_averaged_dataset`:
+  * drop host arg
+  * add `make_averaged_dataset month *` to `after_make_averaged_dataset physics`
+      at month-end, or maybe use race condition mgmt ??
+
+
+##### SalishSeaCast
+
+* `make_averaged_dataset` failed in automation for biology and physics with KeyErrors; maybe due to
+  trying to run them concurrently
+  * re-ran successfully manually
+
+
+
+#### Fri 9-Feb-2023
+
+Days since last wwatch3 prep stall: 3
+
+
+##### ERDDAP
+
+Emailed Rich, et al re: finish of ferry obs backfilling and take-over of daily collection by
+automation:
+
+* noted that interesting instruments are off most of the time
+* Rich emailed Steve Mihaly with questions; replies from Steve and Alice Bui
+
+
+##### SalishSeaCast
+
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups
+
+
+##### Stakeholder Support
+
+* Started work on my version of current correction notebook in
+  `analysis-doug/notebooks/EMSA-currents/explore_current_correction.ipynb` to cross-check Peter's
+  method
+* emailed Peter to confirm that AIS created times are UTC
+
+
+##### Miscellaneous
+
+IOS seminar: Youyu Lu re: BC shelf seal level variations from sub-synoptic to interannual time scales
+
+Helped Karyn with code and data archives for Suchy, et al 2024:
+
+
+
+#### Sat 10-Feb-2023
+
+Days since last wwatch3 prep stall: 4
+
+
+##### SalishSeaCast
+
+* `make_averaged_dataset` failed in automation for chemistry with KeyErrors; maybe due to
+  trying to run them concurrently
+  * re-ran successfully manually
+
+
+
+#### Sun 11-Feb-2023
+
+Days since last wwatch3 prep stall: 5
+
+
+##### SalishSeaCast
+
+* `run_NEMO_agrif` failed due to sftp error
+  * re-ran `make_forcing_links nowcast-agrif` to restart
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups
 
 
 
 
 Looks at Ilias's problem day in May
-
-Look at combining zarr files for Jose
 
 
 
@@ -1766,12 +1955,12 @@ TODO:
     * NEMO-Cmd - migrated on 20nov23 in PR#68
     * SalishSeaNowcast - success on khawla on 6nov23, migrated on 10nov23 in PR#209
     * Reshapr - migrated on 28oct23 in PR#99
+    * erddap-datasets - migrated on 6nov23 in PR#1
+    * SalishSeaCast/docs - migrated on 7feb24 in PR#37
   * failed workflow test with 3.12:
-    * SalishSeaCast/docs
     * MOAD/docs - expect same problem as SalishSeaCast/docs
     * MoaceanParcels - failing with 3.10; no point in trying 3.12 yet
   * no workflows:
-    * erddap-datasets
     * analysis-doug
 
 
@@ -1802,6 +1991,7 @@ TODO:
   * NEMO-Cmd - done 20nov23 in PR#71
   * SalishSeaCmd - done 29nov23 in PR#54
   * moad_tools - done 18dec23 in PR#47
+  * SalishSeaCast/docs - done 7feb24 in PR#43
 
 
 TODO:
@@ -1851,7 +2041,6 @@ state:
 
 TODO:
 
-* update .readthedocs.yaml build:os to ubuntu-22.04
 * add sphinx-notfound-page extension to to repos with docs
   * <https://sphinx-notfound-page.readthedocs.io/en/latest/index.html>
   * MOAD:
@@ -1865,5 +2054,6 @@ TODO:
     * salishsea-site - done 11oct22
     * SalishSeaCmd - done 20Dec22
     * NEMO-Cmd - done 25oct22
+    * docs - done 7feb24 in PR#45
     * SOG-Bloomcast-Ensemble - issue created
     * tools - issue created
