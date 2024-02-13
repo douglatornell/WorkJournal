@@ -1913,6 +1913,62 @@ Days since last wwatch3 prep stall: 5
 
 
 
+### Week 6
+
+#### Mon 12-Feb-2023
+
+Days since last wwatch3 prep stall: 6
+
+
+##### SalishSeaCast
+
+* email from MSC re: HPFX AMQP downtime in 02:00 to 04:00 window on 13feb; queues will have to be
+  restarted; might impact `collect_weather 06`
+* automation stalled at 09:22
+  * manager didn't acknowledge completion of forecast run
+  * restarted log_aggregator; no effect
+  * restarted message_broker; no effect
+  * killed `watch_NEMO forecast` on arbutus
+  * restarted manager
+  * manually restarted automation by running `after_watch_NEMO("forecast")` workers:
+    * on `skookum`:
+      * download_results arbutus forecast
+      * upload_forcing arbutus turbidity
+      * upload_forcing orcinus turbidity
+      * upload_forcing optimum turbidity
+      * upload_forcing graham-dtn turbidity
+    * on `arbutus`:
+      * make_ww3_wind_file arbutus forecast
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups
+
+
+##### Stakeholder Support
+
+* Peter to confirmed that AIS created times are UTC
+* Serge confirmed that I can push notebook to public repo with AIS dataframe visible
+* pushed WIP notebook
+
+
+##### Miscellaneous
+
+Helped Karyn with code and data archives for Suchy, et al 2024:
+
+* install SalishSeaTools from GitHub ??
+* helped Karyn create v2024.02.12 release and got auto-generated DOI from Zenodo
+
+
+
+#### Tue 13-Feb-2023
+
+Days since last wwatch3 prep stall: 7 ?
+
+
+##### SalishSeaCast
+
+* sarracenia clients were apparently unaffected by HPFX AMQP downtime in 02:00 to 04:00 window;
+  or the downtime didn't happen?
+
+
 
 Looks at Ilias's problem day in May
 
