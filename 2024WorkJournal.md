@@ -1967,6 +1967,29 @@ Days since last wwatch3 prep stall: 7 ?
 
 * sarracenia clients were apparently unaffected by HPFX AMQP downtime in 02:00 to 04:00 window;
   or the downtime didn't happen?
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups
+
+
+##### Miscellaneous
+
+MOAD group mtg; see whiteboard.
+
+
+##### SalishSeaTools
+
+Explored Karyn's report of
+`The provided grid type is not in tols. Use another grid type or add your grid type to tols.`
+message from `geo_tools.find_closest_model_point()`
+
+
+##### Stakeholder Support
+
+* Continued work on my version of current correction notebook in
+  `analysis-doug/notebooks/EMSA-currents/explore_current_correction.ipynb` to cross-check Peter's
+  method
+* set up Zoom for Dan, David, Susan & Camryn
+
+
 
 
 
