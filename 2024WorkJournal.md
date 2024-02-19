@@ -1868,6 +1868,7 @@ automation:
 
 ##### SalishSeaCast
 
+* `get_onc_ferry` failed with IndexError in `_qaqc_filter()`; maybe bug due to partial day of obs?
 * `make_averaged_dataset` worked correctly in automation for all 3 variable groups
 
 
@@ -1894,6 +1895,7 @@ Days since last wwatch3 prep stall: 4
 
 ##### SalishSeaCast
 
+* `get_onc_ferry` failed with no response for obs request
 * `make_averaged_dataset` failed in automation for chemistry with KeyErrors; maybe due to
   trying to run them concurrently
   * re-ran successfully manually
@@ -1907,6 +1909,7 @@ Days since last wwatch3 prep stall: 5
 
 ##### SalishSeaCast
 
+* `get_onc_ferry` failed with no response for obs request
 * `run_NEMO_agrif` failed due to sftp error
   * re-ran `make_forcing_links nowcast-agrif` to restart
 * `make_averaged_dataset` worked correctly in automation for all 3 variable groups
@@ -1922,6 +1925,7 @@ Days since last wwatch3 prep stall: 6
 
 ##### SalishSeaCast
 
+* `get_onc_ferry` failed with no response for obs request
 * email from MSC re: HPFX AMQP downtime in 02:00 to 04:00 window on 13feb; queues will have to be
   restarted; might impact `collect_weather 06`
 * automation stalled at 09:22
@@ -1960,11 +1964,12 @@ Helped Karyn with code and data archives for Suchy, et al 2024:
 
 #### Tue 13-Feb-2023
 
-Days since last wwatch3 prep stall: 7 ?
+Days since last wwatch3 prep stall: 7
 
 
 ##### SalishSeaCast
 
+* `get_onc_ferry` failed with no response for obs request
 * sarracenia clients were apparently unaffected by HPFX AMQP downtime in 02:00 to 04:00 window;
   or the downtime didn't happen?
 * `make_averaged_dataset` worked correctly in automation for all 3 variable groups
@@ -1991,9 +1996,147 @@ message from `geo_tools.find_closest_model_point()`
 
 
 
+#### Wed 14-Feb-2023
+
+Days since last wwatch3 prep stall: 8
 
 
-Looks at Ilias's problem day in May
+##### SalishSeaCast
+
+* `get_onc_ferry` failed with IndexError in `_qaqc_filter()`; maybe bug due to partial day of obs?
+* `upload_forcing orcinus forecast2` failed
+* `upload_forcing orcinus nowcast+` failed; success on manual re-run
+* `upload_forcing orcinus turbidity` failed repeatedly
+* started new `make_averaged_dataset` tmux session following deployment docs that smart past me wrote
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups
+* `upload_forcing orcinus turbidity` success at 12:20, but NEMO failed very soon after launch
+
+
+##### Miscellaneous
+
+Narrowly averted `salish` swap-trash; killed dask cluster and its tmux session along the way
+
+
+
+#### Thu 15-Feb-2023
+
+Days since last wwatch3 prep stall: 9
+
+
+##### SalishSeaCast
+
+* `get_onc_ferry` was successful
+* backfilled nowcast-agrif:
+  * wait for run to fail
+  * `upload_forcing orcinus nowcast+ 2024-02-14`
+  * `upload_forcing orcinus turbidity 2024-02-14`
+  * wait for run to finish
+  * `make_forcing_links orcinus nowcast-agrif 2024-02-15`
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups
+
+
+##### SalishSeaTools
+
+* Worked on Karyn's report of
+  `The provided grid type is not in tols. Use another grid type or add your grid type to tols.`
+  message from `geo_tools.find_closest_model_point()`
+  * branch: improve-find_closest_model_point
+  * PR#
+  * fixed unit tests that were failing after addition of raiseOutOfBounds param to
+    find_closest_model_point()
+  * cleaned up test_geo_tools: unused imports and blacken
+  * added `continental2.5` tolerances by copying `GEM2.5`
+  * created test and demo notebook and pushed it as a Gist:
+      https://gist.github.com/douglatornell/95c55fd80b20ac74eeceb45f89199ba0
+
+
+
+#### Fri 16-Feb-2023
+
+Days since last wwatch3 prep stall: 10
+
+
+##### SalishSeaCast
+
+* nowcast-agrif was very slow, then stalled at 10.4%, then rallied and finished strongly
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups
+
+
+##### Stakeholder Support
+
+* Continued work on my version of current correction notebook in
+  `analysis-doug/notebooks/EMSA-currents/explore_current_correction.ipynb` to cross-check Peter's
+  method
+
+* set up Zoom for Dan, David, Susan & Camryn
+
+
+
+#### Sat 17-Feb-2023
+
+Days since last wwatch3 prep stall: 11
+
+
+##### SalishSeaCast
+
+* `crop_gribs 06` stalled with 1 file unprocessed
+* `watch_ww3 forecast2` failed to launch due to no port
+  * `watch_ww3 forecast` from yesterday did not shut down
+    * manager didn't acknowledge its finish message
+    * `watch_ww3 forecast2` for today ran okay, but wasn't watched
+  * recovery:
+    * killed `watch_ww3`
+    * `download_wwatch3_results forecast 2024-02-16`
+    * `download_wwatch3_results forecast2 2024-02-17`
+    * both caused the manager to crash due to missing no `WWATCH3 run` key in checklist; my bad
+* `crop_gribs 12` stalled with 1 file unprocessed
+* manager crashes resulted in loss of race condition management state, so nothing happened when
+  `grib_to_netcdf nowcast+` finished
+  * recovery:
+    * `make_live_ocean_files`
+* restarted log_aggregator
+* `run_NEMO_agrif` stalled
+
+
+##### Security Updates
+
+Squash-merged dependabot PR to update cryptography to v42.0.2 re: CVE-2024-0727 re:
+DoS attack vulnerability:
+
+* cookiecutter-MOAD-pypkg
+* Reshapr
+* NEMO-Cmd
+* moad_tools
+* cookiecutter-analysis-repo
+* SalishSeaCmd
+* MoaceanParcels
+* SalishSeaNowcast
+* salishsea-site
+* NEMO_Nowcast
+
+
+
+#### Sun 18-Feb-2023
+
+Days since last wwatch3 prep stall: 0
+
+
+##### SalishSeaCast
+
+* `make_ww3_wind_file forecast2` stalled; killed it and skipped run
+* motd from Friday on orcinus says that /scratch is desynchronizec and repairs are in progress;
+  it will go unavailable at timess, which is probably what happened to our run yesterday
+* `run_NEMO_agrif` failed due to no run yesterday; tried to run yesterday and it stalled
+* `make_averaged_dataset` failed in automation for chemistry and biology
+  * re-ran successfully manually for chemistry
+  * it appears that today's biology is one of those day's runs where the worker just won't finish
+* `make_ww3_wind_file forecast` stalled; killed it and re-ran it manually; took 2 tries
+
+Email from Mark re: orcinus /scratch recovery causing agrif runs to fail
+
+
+
+Look at Ilias's problem day in May
 
 
 
