@@ -2124,8 +2124,8 @@ Days since last wwatch3 prep stall: 0
 ##### SalishSeaCast
 
 * `make_ww3_wind_file forecast2` stalled; killed it and skipped run
-* motd from Friday on orcinus says that /scratch is desynchronizec and repairs are in progress;
-  it will go unavailable at timess, which is probably what happened to our run yesterday
+* motd from Friday on orcinus says that /scratch is de-synchronized and repairs are in progress;
+  it will go unavailable at times, which is probably what happened to our run yesterday
 * `run_NEMO_agrif` failed due to no run yesterday; tried to run yesterday and it stalled
 * `make_averaged_dataset` failed in automation for chemistry and biology
   * re-ran successfully manually for chemistry
@@ -2135,6 +2135,31 @@ Days since last wwatch3 prep stall: 0
 Email from Mark re: orcinus /scratch recovery causing agrif runs to fail
 
 
+
+### Week 9
+
+#### Mon 19-Feb-2023
+
+**Statutory Holiday** - Family Day
+
+Days since last wwatch3 prep stall: 1
+
+
+##### SalishSeaCast
+
+* ran `day_avg 2024-02-18 biology` in `/results2/SalishSeaCast/month-avg.202111/` on `salish`
+  in `make_averaged_dataset` tmux session to deal with yesterday's averaging problem
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups today
+
+
+##### Stakeholder Support
+
+* Replied to email from Stewart Putnam, Vashon Island WA, USA, kayaker using oceanconnect and curious
+  about SalishSeaCast
+
+
+
+  
 
 Look at Ilias's problem day in May
 
