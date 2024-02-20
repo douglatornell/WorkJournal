@@ -2158,8 +2158,23 @@ Days since last wwatch3 prep stall: 1
   about SalishSeaCast
 
 
+#### Tue 20-Feb-2023
 
-  
+Worked at ESB while Rita was at home.
+
+Days since last wwatch3 prep stall: 2
+
+
+##### SalishSeaCast
+
+* `make_averaged_dataset` failed in automation for biology
+  * `KeyError: 'particulate_organic_nitrogen'` from deep in dask in
+    `Reshapr/reshapr/core/extract.write_netcdf()`
+
+
+
+
+
 
 Look at Ilias's problem day in May
 
