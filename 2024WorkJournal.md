@@ -2068,8 +2068,6 @@ Days since last wwatch3 prep stall: 10
   `analysis-doug/notebooks/EMSA-currents/explore_current_correction.ipynb` to cross-check Peter's
   method
 
-* set up Zoom for Dan, David, Susan & Camryn
-
 
 
 #### Sat 17-Feb-2023
@@ -2169,7 +2167,326 @@ Days since last wwatch3 prep stall: 2
 
 * `make_averaged_dataset` failed in automation for biology
   * `KeyError: 'particulate_organic_nitrogen'` from deep in dask in
-    `Reshapr/reshapr/core/extract.write_netcdf()`
+    `Reshapr/reshapr/core/extract.write_netcdf()`; created issue #121 in Reshapr
+  * successfully re-rna manually
+
+
+##### Miscellaneous
+
+* advised Ilias on recovering from accidentally committing large .db files that can't be pushed to
+  GitHub
+* advised Susan and Karyn on recovery from uncommitted changes in Karyn's
+  `salishsea_tools.eval_tools` module
+* reviewed changes in xarray 2024.02.0 release
+  * size information in text reprs
+  * moving toward pandas frequency string changes; e.g. ME, YE, etc.
+
+
+
+#### Wed 21-Feb-2023
+
+Days since last wwatch3 prep stall: 3
+
+Finally found a fix for Vivaldi 1password extension issue due to connection failure between extension
+and desktop app!
+https://1password.community/discussion/129789/browser-desktop-integration-vivaldi-on-linux-doesnt-work
+
+
+##### ERDDAP
+
+Messages from ERDDAP complaining about
+"java.io.IOException: User limit of inotify watches reached"
+
+* increased max_user_watches limit and restarted ERDDAP including waiting for alert from
+  uptimerobot:
+
+  ```bash
+  sudo sysctl fs.inotify.max_user_watches=196608
+  sudo sysctl -p
+  sudo /opt/tomcat/bin/shutdown.sh
+  # wait for alert
+
+  sudo /opt/tomcat/bin/startup.sh
+  ```
+
+
+##### SalishSeaCast
+
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups today
+
+
+##### Minecraft
+
+Tested running a fabirc server on khawla:
+* refs:
+  * https://www.youtube.com/watch?v=sg91I4vg7ew
+  * https://hub.tcno.co/games/minecraft/1.20/server/fabric/
+  * https://fabricmc.net/use/installer/
+  * https://www.curseforge.com/minecraft/mc-mods/fabric-api
+* downloaded universal .jar installer and ran it
+* set Xmx to 6G
+* launched server
+* edited eula.txt to accept
+* downloaded fabric API and dropped it in mods/
+* launched server again
+* just works, even with IPv6 address in client
+
+
+##### Security Updates
+
+Squash-merged dependabot PR to update cryptography to v42.0.4 re: CVE-2024-26130 re:
+a NULL pointer dereference that can crash Python:
+
+* cookiecutter-MOAD-pypkg
+* cookiecutter-analysis-repo
+* SalishSeaNowcast
+* salishsea-site
+* NEMO-Cmd
+* MoaceanParcels
+* SalishSeaCmd
+* Reshapr
+* moad_tools
+* NEMO_Nowcast
+* cookiecutter-djl-pypkg
+
+
+
+#### Thu 22-Feb-2023
+
+Days since last wwatch3 prep stall: 4
+
+
+##### ERDDAP
+
+Tried to re-run get_onc_ferry for 9-13 Feb because email from Alice@ONC on 15-Feb suggested that
+data on ONC side exists but needed to be re-processed; only got some obs for 9-Feb
+
+
+##### Stakeholder Support
+
+* Continued work on my version of current correction notebook in
+  `analysis-doug/notebooks/EMSA-currents/explore_current_correction.ipynb` to cross-check Peter's
+  method
+
+
+##### SalishSeaCast
+
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups today
+* `crop_gribs 18` reported that `003/20240222T18Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT003H.grib2`
+  was not downloaded
+  * it is not on hpfx
+  * we don't need it for tomorrow's `grib_to_netcdf`
+  * automation is stopped
+  * recovery:
+
+    ```bash
+    # kill collect_weather 18
+    collect_weather 00 2.5km
+    crop_gribs 00 2024-02-23
+    download_weather 12 1km
+    ```
+
+    * can't run `download_weather 00 1km` because files have been purged from MSC server
+
+
+##### Reshapr
+
+* built new dev env on khawla
+* did `pre-commit autoupdate`
+
+
+
+#### Fri 23-Feb-2023
+
+Days since last wwatch3 prep stall: 5
+
+##### SalishSeaCast
+
+* `crop_gribs 00` reported that `003/20240223T00Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT003H.grib2`
+  was not downloaded
+  * it is not on hpfx
+  * we need it for `grib_to_netcdf`
+  * automation is stopped
+  * recovery:
+
+    ```bash
+    # kill collect_weather 00
+    download_weather 06 2.5km
+    crop_gribs 06 --backfill
+    # wait for forecast2 runs to finish
+    # make_ww3_wind_file stalled; killed and skipped run
+    # `003/20240223T00Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT003H.grib2` appeared on hpfx at 09:46
+    curl -LO .../003/20240223T00Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT003H.grib2
+    crop_gribs 00 --var-hour 003 --var APCP_Sfc
+    download_weather 12 2.5km
+    crop_gribs 12
+    collect_weather 18 2.5km
+    crop_gribs 18
+    crop_gribs 12 --var-hour 001 --UGRD_AGL-10m
+    ```
+
+* email conversation w/ Sandrine confirmed that there is a systematic problem with the
+  hour 003 APCP_Sfc file
+* `collect_weather 18 2.5km` didn't get 003 APCP_Sfc file because it is missing from HPFX
+  * recovery:
+
+    ```bash
+    collect_weather 00 2.5km
+    crop_gribs 00 2024-02-24
+    download_weather 00 1km
+    download_weather 12 1km
+    # kill crop_gribs 18
+    # kill collect_weather 18 2.5km
+    ```
+
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups today
+* cleaned up `/SalishSeaCast/datamart/hrdps-continental/`
+* no 003 hour APCP_Sfc files for 18 or 00 forecasts
+
+
+##### Reshapr
+
+Worked on making MS the frequency alias of choice for month resampling without breaking backward
+compatibility for config where M was used:
+
+* re: deprecation of M in pandas 2.2.0
+* branch: month-resampling-MS-freq-alias
+* PR#123 - squash-merged
+
+
+
+#### Sat 24-Feb-2023
+
+Days since last wwatch3 prep stall: 6
+
+##### SalishSeaCast
+
+* no 003 hour APCP_Sfc files for 06 or 12 forecasts
+  * need that file from 00 and 12 for `grib_to_netcdf nowcast+`
+* `upload_forcing forecast2` failed due to:
+    `FileExistsError: [Errno 17] File exists: '/results/forcing/sshNeahBay/obs/ssh_y2024m02d23.nc'`
+    ` -> '/results/forcing/sshNeahBay/fcst/ssh_y2024m02d23.nc'`
+  because nothing from `after_collect_weather 06` ran 😱
+  * recovery started at ~09:15:
+
+    ```bash
+    # kill collect_weather 18 00 06
+    bash /SalishSeaCast/datamart/hydrometric/collect_river_data.sh 2024-02-23  # ECCC rivers
+    collect_NeahBay_ssh 00
+    get_onc_ctd SCVIP
+    get_onc_ctd SEVIP
+    get_onc_ferry TWDP
+    ```
+
+    * skipped forecast2 runs
+* `collect_weather 12 2.5km` and `crop_gribs 12` were not launched
+  * sarracenia client collected 527 or 528 12Z files
+  * recovery started at ~09:45:
+
+    ```bash
+    crop_gribs 12
+    collect_weather 12 2.5km --backfill --backfill-date 2024-02-24
+    ```
+
+    * `collect_weather` failed due to missing 003 APCP_Sfc file, but it moved all but 2 files into
+      `/results/forcing/...`
+      * manually moved those files
+    * continued recovery:
+
+      ```bash
+      collect_weather 18 2.5km
+      crop_gribs 18
+      # wait for crop_gribs to stall with 1 file (003 APCP_Sfc) unprocessed
+      # kill crop_gribs 12
+      # copy the cropped 009 APCP_Sfc files from the previous 18Z and 06Z forecasts to create
+      # best estimates of 00Z and 12Z 003 APCP_Sfc files
+      cp /results/forcing/atmospheric/continental2.5/GRIB/20240223/18/009/20240223T18Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT009H_SSC.grib2 \
+        /results/forcing/atmospheric/continental2.5/GRIB/20240224/00/003/20240224T00Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT003H_SSC.grib2
+      cp /results/forcing/atmospheric/continental2.5/GRIB/20240224/06/009/20240224T06Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT009H_SSC.grib2 \
+        /results/forcing/atmospheric/continental2.5/GRIB/20240224/12/003/20240224T12Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT003H_SSC.grib2
+      grib_to_netcdf
+      bash /SalishSeaCast/datamart/hydrometric/collect_USGS_river_data.sh 2024-02-23
+      make_turbidity_file
+      collect_NeahBay_ssh 06
+      download_live_ocean
+      ```
+
+    * nowcast-blue run started on arbutus at ~11:00
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups today
+* `collect_weather 18 2.5km` didn't get 003 APCP_Sfc file because it is missing from HPFX
+  * recovery:
+
+    ```bash
+    collect_weather 00 2.5km
+    crop_gribs 00 2024-02-25
+    download_weather 00 1km
+    download_weather 12 1km
+    # kill crop_gribs 18
+    # kill collect_weather 18 2.5km
+    ```
+
+
+
+#### Sun 25-Feb-2023
+
+Days since last wwatch3 prep stall: 0
+
+##### SalishSeaCast
+
+* I forgot to start `collect_weather 06 2.5km` and `crop_gribs 06` before I went to bed,
+  but that might have been a good thing in retrospect because I have less manual work to do today
+* no 003 hour APCP_Sfc files for 00, 06, or 12 forecasts
+  * recovery started at ~09:15:
+    * hacked `collect_weather` to ignore FileNotFoundError
+
+    ```bash
+    # kill collect_weather 00 2.5km
+    crop_gribs 06
+    collect_weather 06 2.5km --backfill --backfill-date 2024-02-25
+    # automation ran `collect_river_data ECCC`, `collect_NeahBay_ssh 00`, `get_onc_ctd`,
+    # `get_onc_ferry`, , `collect_weather 12`, and `crop_gribs 12`
+    # kill `collect_weather 12`
+    # wait for `crop_gribs 06` to stall with 1 file (003 APCP_Sfc) unprocessed
+    # kill `crop_gribs 06`
+    collect_weather 12 2.5km --backfill --backfill-date 2024-02-25
+    # automation ran `collect_river_data USGS`, `collect_NeahBay_ssh 06`, `make_turbidity_file`,
+    # `download_live_ocean`, `collect_weather 18`, and `crop_gribs 18`
+    # wait for `crop_gribs 12` to stall with 1 file (003 APCP_Sfc) unprocessed
+
+    # kill crop_gribs 12
+    # copy the cropped 009 APCP_Sfc files from the previous 18Z and 06Z forecasts to create
+    # best estimates of 00Z and 12Z 003 APCP_Sfc files
+    cp /results/forcing/atmospheric/continental2.5/GRIB/20240224/18/009/20240224T18Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT009H_SSC.grib2 \
+      /results/forcing/atmospheric/continental2.5/GRIB/20240225/00/003/20240225T00Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT003H_SSC.grib2
+    cp /results/forcing/atmospheric/continental2.5/GRIB/20240225/06/009/20240225T06Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT009H_SSC.grib2 \
+      /results/forcing/atmospheric/continental2.5/GRIB/20240225/12/003/20240225T12Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT003H_SSC.grib2
+      grib_to_netcdf
+    ```
+
+    * nowcast-blue run started on arbutus at ~10:50
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups today
+* `make_ww3_wind_file forecast` stalled; killed it and re-ran it manually; took 2 tries
+* `collect_weather 18 2.5km` didn't get 003 APCP_Sfc file because it is missing from HPFX
+  * recovery started at ~15:15:
+
+    ```bash
+    download_weather 00 1km
+    download_weather 12 1km
+    # wait for `crop_gribs 18` to report unprocessed file at ~18:00
+    # kill collect_weather 18 2.5km
+    collect_weather 00 2.5km
+    crop_gribs 00 2024-02-25
+    ```
+
+
+
+* Bring Reshapr in line with pandas frequency string changes; e.g. ME, YE, etc.
+  * change docs to use MS, etc.
+  * try to add translations like M to MS so that existing extraction configs don't break
+
+
+* add feature to collect_weather to copy files from tree where sarracenia client stored them to
+  forcing tree immediately instead of waiting for file system events
 
 
 
