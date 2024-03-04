@@ -2346,7 +2346,7 @@ Days since last wwatch3 prep stall: 5
 
 ##### Reshapr
 
-Worked on making MS the frequency alias of choice for month resampling without breaking backward
+Made MS the frequency alias of choice for month resampling without breaking backward
 compatibility for config where M was used:
 
 * re: deprecation of M in pandas 2.2.0
@@ -2452,7 +2452,6 @@ Days since last wwatch3 prep stall: 0
     # automation ran `collect_river_data USGS`, `collect_NeahBay_ssh 06`, `make_turbidity_file`,
     # `download_live_ocean`, `collect_weather 18`, and `crop_gribs 18`
     # wait for `crop_gribs 12` to stall with 1 file (003 APCP_Sfc) unprocessed
-
     # kill crop_gribs 12
     # copy the cropped 009 APCP_Sfc files from the previous 18Z and 06Z forecasts to create
     # best estimates of 00Z and 12Z 003 APCP_Sfc files
@@ -2460,7 +2459,7 @@ Days since last wwatch3 prep stall: 0
       /results/forcing/atmospheric/continental2.5/GRIB/20240225/00/003/20240225T00Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT003H_SSC.grib2
     cp /results/forcing/atmospheric/continental2.5/GRIB/20240225/06/009/20240225T06Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT009H_SSC.grib2 \
       /results/forcing/atmospheric/continental2.5/GRIB/20240225/12/003/20240225T12Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT003H_SSC.grib2
-      grib_to_netcdf
+    grib_to_netcdf
     ```
 
     * nowcast-blue run started on arbutus at ~10:50
@@ -2475,19 +2474,335 @@ Days since last wwatch3 prep stall: 0
     # wait for `crop_gribs 18` to report unprocessed file at ~18:00
     # kill collect_weather 18 2.5km
     collect_weather 00 2.5km
-    crop_gribs 00 2024-02-25
+    crop_gribs 00 2024-02-26
     ```
 
 
 
-* Bring Reshapr in line with pandas frequency string changes; e.g. ME, YE, etc.
-  * change docs to use MS, etc.
-  * try to add translations like M to MS so that existing extraction configs don't break
+### Week 10
+
+#### Mon 26-Feb-2023
+
+Days since last wwatch3 prep stall: 1
 
 
-* add feature to collect_weather to copy files from tree where sarracenia client stored them to
-  forcing tree immediately instead of waiting for file system events
+##### SalishSeaCast
 
+* I started `collect_weather 00 2.5km` and `crop_gribs 00` to late ast evening
+  (after 00Z files were being collected by sarracenia)
+* no 003 hour APCP_Sfc files for 00, 06, or 12 forecasts
+  * recovery started at ~08:55:
+
+    ```bash
+    # kill collect_weather 00 2.5km
+    crop_gribs 00
+    collect_weather 00 2.5km --backfill --backfill-date 2024-02-26
+    # `crop_gribs 00` finished with unprocessed files, and that launched `crop_gribs 06`
+    # kill `collect_weather 00 2.5km` that can never finish
+    # fix files that `crop_gribs 00` missed
+    crop_gribs 00 --debug --var-hour 001 --var APCP_Sfc
+    crop_gribs 00 --debug --var-hour 009 --var PRMSL_MSL
+    crop_gribs 00 --debug --var-hour 023 --var APCP_Sfc
+    crop_gribs 00 --debug --var-hour 023 --var DSWRF_Sfc
+    crop_gribs 00 --debug --var-hour 023 --var LHTFL_Sfc
+    crop_gribs 00 --debug --var-hour 023 --var PRMSL_MSL
+    crop_gribs 00 --debug --var-hour 023 --var SPFH_AGL-2m
+    # wait for sarracenia to finish collecting 12Z files to avoid partial processing
+    collect_weather 06 2.5km --backfill --backfill-date 2024-02-26
+    # automation ran `collect_river_data ECCC`, `collect_NeahBay_ssh 00`, `get_onc_ctd`,
+    # `get_onc_ferry`, , `collect_weather 12`, and `crop_gribs 12`
+    # kill `collect_weather 12`
+    # wait for `crop_gribs 06` to stall with 1 file (003 APCP_Sfc) unprocessed
+    # kill `crop_gribs 06`
+    collect_weather 12 2.5km --backfill --backfill-date 2024-02-26
+    # automation ran `collect_river_data USGS`, `collect_NeahBay_ssh 06`, `make_turbidity_file`,
+    # `download_live_ocean`, `collect_weather 18`, and `crop_gribs 18`
+    # wait for `crop_gribs 12` to stall with 1 file (003 APCP_Sfc) unprocessed
+    # kill crop_gribs 12
+    # copy the cropped 009 APCP_Sfc files from the previous 18Z and 06Z forecasts to create
+    # best estimates of 00Z and 12Z 003 APCP_Sfc files
+    cp /results/forcing/atmospheric/continental2.5/GRIB/20240225/18/009/20240225T18Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT009H_SSC.grib2 \
+      /results/forcing/atmospheric/continental2.5/GRIB/20240226/00/003/20240226T00Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT003H_SSC.grib2
+    cp /results/forcing/atmospheric/continental2.5/GRIB/20240226/06/009/20240226T06Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT009H_SSC.grib2 \
+      /results/forcing/atmospheric/continental2.5/GRIB/20240226/12/003/20240226T12Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT003H_SSC.grib2
+    grib_to_netcdf
+    ```
+
+    * nowcast-blue run started on arbutus at ~11:19
+* email from Sandrine at 12:34 saying that issue should be resolved in 18Z forecast thanks to
+  rollback of an operational installation change
+  * `collect_weather 18 2.5km` was successful!
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups today
+
+
+##### Miscellaneous
+
+Squash-merged dependabot PRs to bump mamba-org/setup-micromamba to 1.8.1 re: bug fixes & dependency
+updates:
+
+* SalishSeaNowcast
+* rhwhite/numeric_2024
+* erddap-datasets
+* gha-workflows
+* salishsea-site
+
+Squash-merged dependabot PRs to bump codecov/codecov-action to 4.0.2 re: new features & dependency
+updates:
+
+* SalishSeaNowcast
+* gha-workflows
+
+Checked status of scheduled GHA workflows:
+
+  ```bash
+  conda activate gha-workflows
+  python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+  ```
+
+Phys Ocgy seminar: Patrick Pata; zoops in NE Pacific:
+
+* all cluster analysis, all the time
+* brooding zoops
+
+
+##### SalishSeaNowcast
+
+Resumed work on updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv3:
+
+* branch: onc-api-v3
+* PR#234
+* tidied changes in PyCharm
+* pushed ONC_data_product_url attr updates
+
+
+
+#### Tue 27-Feb-2023
+
+Days since last wwatch3 prep stall: 1
+
+Worked at ESB until snow started to fall in early afternoon.
+
+##### SalishSeaCast
+
+* automation worked smoothly
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups today
+
+
+##### Miscellaneous
+
+* MOAD mtg; see whiteboard
+* researched graham StdEnv/2023 that becomes default in April
+  * default compiler suite changes from Intel to GCC 12.3, Intel 2023 available
+  * new version of OpenMPI
+* EOAS colloquium: Martyn Unsworth, Magnetotellurics: Using natural radio waves to look inside the Earth
+* helped Becca get ssh-agent running on her new Windows laptop
+* couldn't reproduce Susan's permissions problem (reported on Slack) accessing in Cassidy's files on /ocean
+* dug into Susan's optimum nemo build messages (reported on Slack) about libm, libpthread, and libc
+
+
+
+#### Wed 28-Feb-2023
+
+Days since last wwatch3 prep stall: 2
+
+
+##### SalishSeaCast
+
+* https://github.com/xCDAT/xcdat/issues/561 that I followed because it
+  is about `RuntimeError: NetCDF: Not a valid ID`, `xarray.open_datase()` and `dask` was updated
+  this morning with the comments:
+
+    To summarise in this thread, it looks like a work-around in netcdf4-python to deal with netcdf-c
+    not being thread safe was removed in 1.6.1. The solution (for now) is to
+    [make sure your cluster only uses 1 thread per worker](https://forum.access-hive.org.au/t/netcdf-not-a-valid-id-errors/389/14).
+
+    It seems like some filesystems do not like parallel access to files. The workaround seems to be
+    to set parallel=False
+* `make_averaged_dataset` failed in automation for biology:
+
+  ```text
+  distributed.scheduler.KilledWorker:
+  Attempted to run task ('blocks-transpose-store-map-a62e9852789c59ac17cce07a3f6fde5c', 0, 0, 0, 0)
+  on 3 different workers, but all those workers died while running it. The last worker that attempt
+  to run the task was tcp://127.0.0.1:42457. Inspecting worker logs is often a good next step to
+  diagnose what went wrong. For more information see https://distributed.dask.org/en/stable/killed.html.
+  ```
+
+* killed dask workers in xxx on `salish` and restarted them with 1 thread each:
+
+  ```bash
+  dask worker --nworkers=4 --nthreads=1 --memory-limit auto \
+    --local-directory /dev/shm \
+    --lifetime 3600 --lifetime-stagger 60 --lifetime-restart \
+    localhost:4386
+  ```
+
+
+##### ERDDAP
+
+Emailed Alice to ask if TWDP data stream interruption is continuation of cache issue from 9-14 Feb
+
+
+##### Miscellaneous
+
+Sharcnet colloquium: Debugging with DDT
+
+* Sergey Mashchenko, McMaster
+* DDT installed on `graham` and `niagara`
+* commercial, designed for HPC, "tens of thousands of $ per year for license"
+* primarily for compiled languages, but now Python too
+* DDT wiki page on Alliance docs
+* graham:
+  * ddt-cpu.23.1.1, max 64 cores across all users, StdEnv/2023, annual license
+  * ddt-cpu.22.0.1, max 128 cores, StdEnv/2020, perpetual license
+* GUI, use X11 forwarding or VNC
+* use salloc for interactive session, sbatch is possible
+  * `ssh -Y`
+  * `salloc --x11 ...`
+  * `mpicc -g`
+  * `module load ddt-cpu`
+  * `ddt path/to/executable`
+* can debug optimized code, but `-O0` may be easier to understand because optimized executables can
+  be non-linear
+* Python a little more complicated
+* VNC may be faster; Sergey's `syam/bin/VNC` simplifies setup
+* examples in `syam/DDT_2024/`
+* can attach to already running program to debug code run by sbatch
+* can analyze core files
+* can periodically dump state of sbatch run, also offline breakpoints and tracepoints
+
+Helped Susan with getting Cassidy's river tracers NEMO config running on optimum:
+
+* couldn't pull repo updates from GitHub due to `unsupported key type` error
+  * trying to use `salishsea-nowcast-deployment_id_rsa` deployment key failed because OpenSSH client
+    on optimum is too old
+  * after a long trash of trying to work around client issue, finally succeeded by using https
+    **note: this will only work for public repos**
+
+
+
+#### Thu 29-Feb-2023
+
+Days since last wwatch3 prep stall: 0
+
+
+##### SalishSeaCast
+
+* `make_ww3_wind_file forecast2` stalled; killed it and skipped run
+* ran `day_avg 2024-02-28 biology` in `/results2/SalishSeaCast/month-avg.202111/` on `salish`
+  in `make_averaged_dataset` tmux session to deal with yesterday's averaging problem
+  * same error as came from worker yesterday!
+  * dask workers complaining about high unmanaged memory
+  * increased number of dask workers to 6; same high unmanaged memory messages and error
+  * tested 27feb biology that was successful in worker; same issues
+  * changed back to 4 workers, but with 2 threads each
+    * 27feb biology succeeded
+    * 28feb biology failed with same high unmanaged memory messages and error
+* `make_averaged_dataset` failed in automation for biology with `RuntimeError: NetCDF: HDF error`
+  * retried with manual re-run of `make_averaged_dataset skookum day biology 2024-02-29`
+* `make_averaged_dataset` failed in automation for chemistry with `KeyError: 'total_alkalinity'`
+  * successful manual re-run of `make_averaged_dataset skookum day chemistry 2024-02-29`
+    but with lots of messages about unmanaged memory, then HDF5 attribute errors worker logs on
+    `salish`
+* changed back to 4 workers, but with 4 threads each
+  * successfully ran `day_avg 2024-02-28 biology` in `/results2/SalishSeaCast/month-avg.202111/`
+    on `salish`
+* ran:
+
+  ```bash
+  make_averaged_dataset skookum month physics 2024-02-01
+  make_averaged_dataset skookum month chemistry 2024-02-01
+  make_averaged_dataset skookum month biology 2024-02-01
+  ```
+
+  successfully, but with lots of HDF5 attribute error messages in worker logs on `salish`
+* `crop_gribs 18` timed out after 8 hours with 216 unprocessed files
+  * `collect_weather 18 2.5km` finished at 16:12
+  * ran `crop_gribs $NOWCAST_YAML 18 --backfill` to finish processing late files
+
+
+##### SS150
+
+Read email from Michael and scanned attached Word do re: integration of IOS SS150 NEMO config
+into SalishSeaCast.
+
+
+##### UBC-DFO Modeling Meeting
+
+Jonathan Izert re: central WCVI FVCOM model:
+
+* sensitive to resolution, FVCOM version, and OS/pkgs version
+
+
+##### SalishSeaNowcast
+
+Finally finished updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv3:
+
+* branch: onc-api-v3
+* PR#234 - squash-merged
+
+
+
+## March
+
+#### Fri 1-Mar-2023
+
+Days since last wwatch3 prep stall: 1
+
+
+##### SalishSeaCast
+
+* did more reading about dask worker config, their thread use, and Linux temporary storage
+* changed dask cluster on `salish` to:
+  * 4 workers
+  * 1 thread per worker (from 4)
+  * 64G memory per worker (from auto == 32G)
+  * local directory on `/tmp` (from `/dev/shm`)
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups today
+* got email from Maxime @alliance that robot.graham.alliancecan.ca is ready for use
+* sent email to Venkat @arc re: updating arbutus.cloud VMs from 18.04.
+
+
+##### Bloomcast
+
+* discovered over a year's worth of `/tmp/tmp*.infile`:
+    `find /tmp -maxdepth 1 -type f -user dlatorne -name "tmp*.infile" -mtime +3 -ls`
+  * cleaned them with:
+      `find /tmp -maxdepth 1 -type f -user dlatorne -name "tmp*.infile" -mtime +3 -delete`
+* today's run took ~3h; maybe io competition with Ilias's jobs?
+
+
+##### Miscellaneous
+
+Updated PyCharm on khawla to 2023.3.4.
+
+
+##### SalishSeaNowcast
+
+Resumed work on adding make_averaged_dataset to automation:
+* branch: automate-make_averaged_dataset
+
+
+
+#### Sat 2-Mar-2023
+
+Days since last wwatch3 prep stall: 2
+
+
+##### SalishSeaCast
+
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups today
+
+
+
+#### Sun 3-Mar-2023
+
+Days since last wwatch3 prep stall: 3
+
+
+##### SalishSeaCast
+
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups today
 
 
 
