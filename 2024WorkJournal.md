@@ -2858,8 +2858,87 @@ Continued work on adding make_averaged_dataset to automation:
 
 
 
+#### Tue 5-Mar-2023
+
+Worked at ESB while Rita was at home.
+
+Days since last wwatch3 prep stall: 5
 
 
+##### Miscellaneous
+
+MOAD mtg; see whiteboard.
+
+Mtg w/ Henryk re: `salish` OS upgrade:
+
+* he is worried about how there only being 2.3G free on `/`, but in the course of
+  discussion he realized that be can clean up `/boot/` and get back another 0.4G;
+  he will also change the packages download location to avoid that comsuming space
+  on `/`
+* he is also worried by the idiosyncratic, bios-based RAID setup of `/`
+* he wants us to plan for downtime of a week or more in case things go badly and
+  he has to build `salish` from a clean install of 22.04 LTS
+  * the concern with that duration of downtime is most of our storage is
+    controlled by `salish`; `lsblk` shows:
+    * `/data/`
+    * `/opp/`
+    * `/results2/`
+    * `/SalishSeaCast/`
+
+
+##### `graham` StdEnv/2022
+
+* unloaded all modules with `module --force purge`
+* loaded StdEnv/2023 with `module load StdEnv/2023`
+
+  ```bash
+  module list
+
+  Currently Loaded Modules:
+
+  1) CCconfig            5) hwloc/2.9.1        9) ucc/1.2.0        13) StdEnv/2023 (S)
+  2) gentoo/2023   (S)   6) ucx/1.14.1        10) openmpi/4.1.5   (m)
+  3) gcccore/.12.3 (H)   7) libfabric/1.18.0  11) flexiblas/3.3.1
+  4) gcc/12.3      (t)   8) pmix/4.2.4        12) imkl/2023.2.0   (math)
+
+  Where:
+  S:     Module is Sticky, requires --force to unload or purge
+  m:     MPI implementations / Implémentations MPI
+  math:  Mathematical libraries / Bibliothèques mathématiques
+  t:     Tools for development / Outils de développement
+  H:                Hidden Module
+  ```
+
+* loaded modules that XIOS-2 build requires to find new versions:
+
+  ```bash
+  module load hdf5-mpi/1.14.2
+  module load netcdf-mpi/4.9.2
+  module load netcdf-c++4-mpi/4.3.1
+  module load netcdf-fortran-mpi/4.6.1
+  module load perl/5.36.1
+  ```
+
+* created `XIOS-ARCH/ALLIANCE/arch-GCC_GRAHAM.env` with above modules and versions
+  (including StdEnv/2023)
+* hacked up `XIOS-ARCH/ALLIANCE/arch-GCC_ARBUTUS.fcm` from a combination of
+  `XIOS-ARCH/ALLIANCE/arch-GCC_GRAHAM.fcm` and
+  `XIOS-2/arch/arch-GCC_LINUX.fcm`
+* copied `XIOS-ARCH/ALLIANCE/arch-X64_GRAHAM.path` to `XIOS-ARCH/ALLIANCE/arch-GCC_GRAHAM.path`
+* symlinked the GCC files above into XIOS-2/arch/
+* cleaned XIOS-2 build with `./tools/FCM/bin/fcm build --clean`
+* tried build with `./make_xios --arch GCC_GRAHAM -j8`; failed
+* more tries with `./make_xios --arch GCC_GRAHAM` lead to:
+  * https://forge.ipsl.jussieu.fr/ioserver/ticket/180
+    * added `-std=gnu++11` to `%BASE_CFLAGS`
+    * added `#include <array>` in `extern/remap/src/meshutil.cpp`
+  * https://stackoverflow.com/questions/71296302/numeric-limits-is-not-a-member-of-std
+    * added `#include <limits>` in `extern/remap/src/meshutil.cpp`
+
+
+
+
+-std=c++11 or -std=gnu++11
 
 Look at Ilias's problem day in May
 
