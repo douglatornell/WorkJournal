@@ -2780,9 +2780,11 @@ Updated PyCharm on khawla to 2023.3.4.
 ##### SalishSeaNowcast
 
 Resumed work on adding make_averaged_dataset to automation:
+
 * branch: automate-make_averaged_dataset
-
-
+* committed previous work:
+  * automation of day-avg datasets
+  * move logging from hindcast to nowcast log
 
 #### Sat 2-Mar-2023
 
@@ -2803,6 +2805,57 @@ Days since last wwatch3 prep stall: 3
 ##### SalishSeaCast
 
 * `make_averaged_dataset` worked correctly in automation for all 3 variable groups today
+
+
+
+### Week 10
+
+#### Mon 26-Feb-2023
+
+Days since last wwatch3 prep stall: 4
+
+
+##### Miscellaneous
+
+Squash-merged dependabot PRs to bump codecov/codecov-action to 4.1.0 re: new features & dependency
+updates:
+
+* SalishSeaNowcast
+* gha-workflows
+
+`salish` refused logins between 09:30 and 10:00 and was at 99.7% swap when I succeeded to connect
+
+* killed dask cluster and it only recovered slightly
+* restarted cluster
+* Ilias had stalled jobs that he asked me to kill and swap immediately dropped to normal
+
+Phys Ocgy seminar:
+
+* Jo Langer, UVic
+* Is the Cdn Arctic Archipelago a Carbon Sink?
+
+Cleaned up stale `vscode-server` processes on `salish` from Jose, Cassidy & Camryn
+
+
+##### SalishSeaNowcast
+
+Continued work on adding make_averaged_dataset to automation:
+
+* branch: automate-make_averaged_dataset
+* PR#242
+* expanded `make_averaged_dataset` message types to `f"success {avg_time_interval} {reshapr_var_group}"`
+* changed worker message payload to make run date an item in it instead of part of the key
+* added automation of month-avg datasets
+* dropped unnecessary host name arg from `make_averaged_dataset`
+
+
+##### SalishSeaCast
+
+* `make_averaged_dataset` worked correctly in automation for all 3 variable groups today
+* `crop_gribs 18` stalled with 1 file unprocessed
+  * `20240304T18Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT020H.grib2` was downloaded, but not processed
+  * ran `crop_gribs 18 --var-hour 020 --var APCP_Sfc --debug` (unnecessarily)
+
 
 
 
