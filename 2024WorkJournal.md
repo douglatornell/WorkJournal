@@ -2934,11 +2934,178 @@ Mtg w/ Henryk re: `salish` OS upgrade:
     * added `#include <array>` in `extern/remap/src/meshutil.cpp`
   * https://stackoverflow.com/questions/71296302/numeric-limits-is-not-a-member-of-std
     * added `#include <limits>` in `extern/remap/src/meshutil.cpp`
+* got a successful build with `./make_xios --arch GCC_GRAHAM -j8`
+
+
+##### Minecraft
+
+Installed 32G of RAM in lizzy so that it can run a fabric server for us.
+Set up server:
+* refs:
+  * https://www.youtube.com/watch?v=sg91I4vg7ew
+  * https://hub.tcno.co/games/minecraft/1.20/server/fabric/
+  * https://fabricmc.net/use/installer/
+  * https://www.curseforge.com/minecraft/mc-mods/fabric-api
+* updated OS pkgs
+  * sudo apt update
+  * sudo apt upgrade
+  * sudo apt auto-remove
+* installed openjdk-21-jre
+  * sudo apt install openjdk-21-jre
+* downloaded and installed server launcher:
+  * cd /media/doug/warehouse/
+  * sudo mkdir MinecraftFabric1.20.4Server
+  * sudo chown doug:sada MinecraftFabric1.20.4Server
+  * cd MinecraftFabric1.20.4Server
+  * curl -OJ https://meta.fabricmc.net/v2/versions/loader/1.20.4/0.15.7/1.0.0/server/jar
+* did initial server launch with 6G of memory:
+  * java -Xmx6G -jar fabric-server-mc.1.20.4-loader.0.15.7-launcher.1.0.0.jar nogui
+* edited eula.txt to accept
+* stopped Nodecraft server and created `Phrenic Mandraflora` backup
+* downloaded and unzipped backup:
+  * mkdir backups/
+  * curl -L \
+      https://backups-b2.nodecraft.gg/file/nodecraft/7da67f08-a869-4ac8-9844-556df29e7e1e/t6NWX6Qal3Q13B_B1AUFF0MLHG4qN411_ChJNRTCmDZpLr0I57KKLL87AGwIxITH.zip?name=Phrenic%20Mandraflora \
+      --output PhrenicMandraflora-Nodecraft-6mar24.zip
+  * unzip PhrenicMandraflora-Nodecraft-6mar24.zip
+* moved `1-20-1-25jul23/` world tree up to `MinecraftFabric1.20.4Server/`
+* copied `ops.json` up to `MinecraftFabric1.20.4Server/`
+* used VSCode remote session to edit `MinecraftFabric1.20.4Server/server.properties` to sync it with
+  the one downloaded from Nodecraft:
+    initial-enabled-packs=vanilla,bundle
+    level-name=1-20-1-25jul23
+    level-seed=3266812394423525333
+    max-players=4
+    motd=SADA on lizzy
+    pvp=false
+    server-name=sada
+  * left view-distance=10
+* created `MinecraftFabric1.20.4Server/start.sh`
+    #!/usr/bin/env bash
+    java -Xmx6G -jar fabric-server-mc.1.20.4-loader.0.15.7-launcher.1.0.0.jar nogui
+* installed `tmux`
+* started server in tmux session
+    tmux new -s minecraft-server
+    window 0: `./start.sh`
+    window 2: `top -c`
+* started server and ran around
+  * 1 lag spike
+  * 2 "can't keep up messages in log"
+
+
+
+#### Wed 6-Mar-2023
+
+Days since last wwatch3 prep stall: 0
+
+
+##### SalishSeaCast
+
+* `make_ww3_current_file forecast2` stalled; killed it and skipped run
+* set up restricted ssh key pair to use for robot.graham
+  `ssh-keygen -t ed25519 -C "SalishSeaCast robot.graham" -f ~/.ssh/SalishSeaCast_robot.graham_ed25519`
+  * uploaded public key to CCDB
+  * edited `nowcast.yaml`
+  * added `robot.graham` to `.ssh/config` on `khawla` (for reference) and `ocean` machines (for `skookum`)
+  * successfully tested `upload_forcing robot.graham turbidity`
+
+
+#### SoPO
+
+* Day 1
+
+
+
+#### Thu 7-Mar-2023
+
+Days since last wwatch3 prep stall: 1
+
+
+##### SalishSeaCast
+
+* forgot to restart manager to load config changes re: `robot.graham` so `upload_forcing forecast2`
+  failed; restarted manager before nowcast cycle started and all's good
+* Henryk alerted that `/results/` is 99% full; ~340G free
+  * experimented with finding and deleting pre-crop continental HRDPS files:
+    find  /results/forcing/atmospheric/continental2.5/GRIB/20230403/ -type f \
+      -name "*_MSC_HRDPS_*_RLatLon0.0225_PT???H.grib2"
+    * ~4G per day across 4 forecasts
+
+
+#### SoPO
+
+* Day 2
+
+
+##### SalishSeaNowcast
+
+Finished adding make_averaged_dataset to automation:
+
+* branch: automate-make_averaged_dataset
+* PR#242 - squash-merged
+
+Updated Sphinx & sphinx_rtd_theme versions in all envs.
+
+pre-commit autoupdate.
+
+Code style gardening by black
+
+* primary modifications were placing conditional logic inside parentheses in
+  order to improve readability and understanding of the code's flow control
+
+Started changing from 'graham-dtn' to 'robot.graham':
+
+* branch: robot.graham
+* PR#243
+
+
+
+#### Fri 8-Mar-2023
+
+Days since last wwatch3 prep stall: 2
+
+
+##### SalishSeaNowcast
+
+Finished changing from 'graham-dtn' to 'robot.graham':
+
+* branch: robot.graham
+* PR#243 - squash-merged
+* worked for `upload_forcing` in production
+
+Changed paths for Cassidy & Susan's river tracers hindcast runs on optimum:
+
+* branch: rivers-hindcast
+* PR#245 - squash-merged
+
+Fix bugs re: removal of host name arg from `make_averaged_dataset` worker:
+
+* branch: fix-make_averaged_dataset
+* PR#246 - squash-merged
+
+`archive_tarball` for river tracers runs failed due to host key conflict with a key in
+`known_hosts`; worked fine in production after I resolved that.
+
+
+
+#### Sat 9-Mar-2023
+
+Days since last wwatch3 prep stall: 0
+
+
+##### SalishSeaCast
+
+* `make_ww3_wind_file forecast2` stalled; killed it and skipped run
+
+
+
+#### Sun 10-Mar-2023
+
+Days since last wwatch3 prep stall: 1
 
 
 
 
--std=c++11 or -std=gnu++11
 
 Look at Ilias's problem day in May
 
