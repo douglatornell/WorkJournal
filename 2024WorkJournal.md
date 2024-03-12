@@ -2886,7 +2886,7 @@ Mtg w/ Henryk re: `salish` OS upgrade:
     * `/SalishSeaCast/`
 
 
-##### `graham` StdEnv/2022
+##### `graham` StdEnv/2023
 
 * unloaded all modules with `module --force purge`
 * loaded StdEnv/2023 with `module load StdEnv/2023`
@@ -3102,6 +3102,44 @@ Days since last wwatch3 prep stall: 0
 #### Sun 10-Mar-2023
 
 Days since last wwatch3 prep stall: 1
+
+
+
+#### Tue 12-Mar-2023
+
+Worked at ESB.
+
+Days since last wwatch3 prep stall: 3 ?
+
+
+##### Miscellaneous
+
+MOAD mtg; see whiteboard.
+
+Helped Tall get an image of Ubuntu 22.04.4 to rebuild his failed laptop.
+
+
+##### SalishSeaCast
+
+* `download_live_ocean` failed due to timeout at ~12:10; started again at ~12:35
+
+
+##### `graham` StdEnv/2023
+
+* tested modified build of `extern/remap/src/meshutil.cpp` under StdEnv/2020
+  * cleaned XIOS-2 build with `./tools/FCM/bin/fcm build --clean`
+  * successful build with `./make_xios --arch X64_GRAHAM -j8`
+
+* added GCC_GRAHAM arch files to XIOS-ARCH:
+  * graham-stdenv2023
+  * PR#2
+
+* closed issue #1 on XIOS-2 repo re: changing default branch name from
+  `master` to `main`; completed some time ago
+
+* added modified `extern/remap/src/meshutil.cpp` files to XIOS-2:
+  * graham-stdenv2023
+  * PR#2
 
 
 
