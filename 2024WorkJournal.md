@@ -3105,11 +3105,23 @@ Days since last wwatch3 prep stall: 1
 
 
 
+### Week 11
+
+#### Mon 11-Mar-2023
+
+Annual water filter service completed.
+
+Days since last wwatch3 prep stall: 2
+
+Phys Ocgy Seminar: Atmospheric Quasi-Stationary Waves
+
+
+
 #### Tue 12-Mar-2023
 
 Worked at ESB.
 
-Days since last wwatch3 prep stall: 3 ?
+Days since last wwatch3 prep stall: 3
 
 
 ##### Miscellaneous
@@ -3121,7 +3133,17 @@ Helped Tall get an image of Ubuntu 22.04.4 to rebuild his failed laptop.
 
 ##### SalishSeaCast
 
-* `download_live_ocean` failed due to timeout at ~12:10; started again at ~12:35
+* `download_live_ocean` failed due to timeout at ~12:10; started again at ~12:35; failed again
+  at ~15:35
+  * recovery started at ~17:45:
+    * used symlink of yesterday's boundary conditions file that `upload_forcing forecast2` made
+
+    ```bash
+    upload_forcing arbutus nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing robot.graham nowcast+
+    ```
 
 
 ##### `graham` StdEnv/2023
@@ -3140,6 +3162,114 @@ Helped Tall get an image of Ubuntu 22.04.4 to rebuild his failed laptop.
 * added modified `extern/remap/src/meshutil.cpp` files to XIOS-2:
   * graham-stdenv2023
   * PR#2
+
+
+
+#### Wed 13-Mar-2023
+
+Days since last wwatch3 prep stall: 4
+
+
+##### SalishSeaCast
+
+* `download_live_ocean` failed due to timeout at ~12:04
+  * emailed Parker; he was unaware of server problem and has alerted people who maintain it
+  * recovery started at ~13:35:
+    * used symlink of yesterday's boundary conditions file that `upload_forcing forecast2` made
+
+    ```bash
+    upload_forcing arbutus nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing robot.graham nowcast+
+    ```
+
+  * email from Parker at 13:40 to says that server was back and extraction for us should be ready
+    within an hour
+    * ran `download_live_ocean --debug`
+    * ran `make_live_ocean_files --debug`
+    * ran `upload_forcing --debug`
+
+* `upload_forcing robot.graham nowcast+` repeated stalled for ~45min after uploading Neah Bay files
+
+
+
+#### Thu 14-Mar-2023
+
+Days since last wwatch3 prep stall: 5
+
+
+##### SalishSeaCast
+
+* got serious about recoverying space on `/results/` by deleting pre-cropped continental HRDPS GRIB
+  files:
+  * deleted apr-dec 2023 files, at least ~135G/month with `find` commands like:
+
+    ```bash
+    find  /results/forcing/atmospheric/continental2.5/GRIB/202305??/??/ -type f \
+    -name "*_MSC_HRDPS_*_RLatLon0.0225_PT???H.grib2" -delete
+    ```
+
+
+##### ERDDAP Datasets
+
+Started adding V23-02 HRDPS continental grid fields datasets:
+
+* branch: HRDPS-continental
+* PR#12
+* added ubcSSaAtmosphereGridV23-02 geo-location dataset
+* pulled on `skookum`, switched to branch, and loaded dataset via flag file
+
+
+
+#### Fri 15-Mar-2023
+
+Days since last wwatch3 prep stall: 6
+
+
+##### ERDDAP Datasets
+
+Continued adding V23-02 HRDPS continental grid fields datasets:
+
+* branch: HRDPS-continental
+* PR#12
+* added ubcSSaSurfaceAtmosphereFieldsV23-02 dataset
+* pulled on `skookum`, and loaded dataset via flag file
+
+
+##### SalishSeaCast
+
+* `download_results forecast` failed due to dropped connection; re-ran manually
+
+
+##### Minecraft
+
+* discovered that client performance has returned to nearly 120 fps, perhaps due to nvidia driver
+  updates?
+  * installed latest version of iris and contemporary shaders
+  * updated sodium, malilib, minihud & tweakeroo along the way
+* server crashed while Susan was exploring new chunks
+  * preceded by lots of disk activity on lizzy
+
+
+
+#### Sat 16-Mar-2023
+
+Days since last wwatch3 prep stall: 7
+
+
+##### Minecraft
+
+* server crashed while Susan was exploring new chunks
+  * moved installation from `warehouse/` spinning volume to `/home/doug/Games/` on ssd
+  * fewer lag spikes, and shorter
+
+
+
+#### Sun 17-Mar-2023
+
+Days since last wwatch3 prep stall: 8
+
 
 
 
