@@ -3272,6 +3272,70 @@ Days since last wwatch3 prep stall: 8
 
 
 
+### Week 12
+
+#### Mon 18-Mar-2023
+
+Days since last wwatch3 prep stall: 9
+
+
+##### SalishSeaCast docs
+
+* Resolved some of the broken links issues for `forge.ipsl.jussieu.fr` by changing to
+  `forge.jussieu.fr` alias that  was published in XIOS email list on 14mar
+  * works for XIOS links and for NEMO ticket links
+  * NEMO code links go to 404 page due to 2022 migration to `forge.nemo-ocean.eu`
+
+
+##### `graham` StdEnv/2023
+
+Worked on NEMO build using SalishSeaCast config:
+
+* unloaded all modules with `module --force purge`
+* loaded env and modules for NEMO build:
+
+  ```bash
+  module load StdEnv/2023
+  module load netcdf-fortran-mpi/4.6.1
+  module load perl/5.36.1
+  ```
+
+* created `ARCH/UBC_EOAS/arch-GCC_GRAHAM.fcm` with guidance from `GCC_SOCKEYE.fcm` and `GCC_ARBUTUS.fcm`
+* to get correct include path for `netcdf.mod`, had to add:
+
+  ```text
+  %NCDF_HOME           $EBROOTNETCDFMINFORTRAN
+
+  %NCDF_INC            -I%NCDF_HOME/include
+  ```
+
+* to avoid
+  `Error: Type mismatch between actual argument at (1) and actual argument at (2) (REAL(8)/INTEGER(4)).`
+  in `lib_mpp.f90`, had to add `-fallow-argument-mismatch` to `%FCFLAGS`
+* successful build
+* NEMO-3.6-code:
+  * branch: graham-stdenv2023
+  * PR#7
+* SalishSeaCast/docs:
+  * branch: graham-stdenv2023
+  * PR#46
+
+
+
+##### Miscellaneous
+
+Phys Ocgy Seminar: Leonardo Alvarado, Satellites & Phydoplankton; Atmospheric Trace Gas Measurement
+
+Tried to help Ilias with odd xarray behaviour as he combines diatom arrays and cluster indices.
+
+
+
+
+
+Geek Squad phone: 1-800-433-5778
+
+
+
 
 
 
