@@ -3321,12 +3321,36 @@ Worked on NEMO build using SalishSeaCast config:
   * PR#46
 
 
-
 ##### Miscellaneous
 
 Phys Ocgy Seminar: Leonardo Alvarado, Satellites & Phydoplankton; Atmospheric Trace Gas Measurement
 
 Tried to help Ilias with odd xarray behaviour as he combines diatom arrays and cluster indices.
+
+
+
+#### Tue 19-Mar-2023
+
+Worked at ESB while Rita was at home.
+
+Days since last wwatch3 prep stall: 10
+
+##### Miscellaneous
+
+Raisha & Sara on campus.
+
+MOAD group mtg; see whiteboard.
+
+EOAS Colloquium:
+
+Coffee w/ Raisha.
+
+
+##### SalishSeaCmd
+
+Updated module loads to Alliance StdEnv/20203:
+* branch: graham-stdenv2023
+* PR#62
 
 
 
