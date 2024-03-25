@@ -3335,13 +3335,14 @@ Worked at ESB while Rita was at home.
 
 Days since last wwatch3 prep stall: 10
 
+
 ##### Miscellaneous
 
 Raisha & Sara on campus.
 
 MOAD group mtg; see whiteboard.
 
-EOAS Colloquium:
+EOAS Colloquium: Tsunami 11th Relative documentary by Pieter Romer of ONC.
 
 Coffee w/ Raisha.
 
@@ -3349,8 +3350,177 @@ Coffee w/ Raisha.
 ##### SalishSeaCmd
 
 Updated module loads to Alliance StdEnv/20203:
+
 * branch: graham-stdenv2023
 * PR#62
+
+
+
+#### Wed 20-Mar-2023
+
+Days since last wwatch3 prep stall: 11
+
+
+##### Miscellaneous
+
+* tried to resolve recent issue where Codecov report comments no longer appear in PRs
+  * created Codecov token for SalishSeaCast org
+  * added token to shared GHA workflow in gha-workflows
+  * test with re-run of action in SalishSeaCmd PR#62 failed, but it may not be a good test
+
+
+##### Security Updates
+
+Squash-merged dependabot PRs to update black to v24.3.0 re: CVE-2024-21503 re: ReDoS vulnerability:
+
+* cookiecutter-MOAD-pypkg
+* MoaceanParcels
+* gha-workflows
+* NEMO_Nowcast
+* salishsea-site
+* NEMO-Cmd
+* moad_tools
+* AtlantisCmd
+  * readthedocs build failed for PR
+* Reshapr
+* SalishSeaNowcast
+
+
+##### `graham` StdEnv/2023
+
+* continued work on testing GCC-12 build on `graham`
+  * pulled changes in SS-run-sets
+  * pulled changes in XIOS-ARCH and switched to graham-stdenv2023 branch
+  * pulled changes in XIOS-2 and switched to graham-stdenv2023 branch
+  * pulled changes in NEMO-3.6-code and switched to graham-stdenv2023 branch
+    * had to change arch-GCC_GRAHAM.fcm to get REBUILD_NEMO to compile
+      * moved `$EBROOTNETCDFMINFORTRAN` path for netcdf-fortran from `%NCDF_HOME` into `%NCDF_INC`
+        because `maketools` seems able to only handle `$EBROOTNETCDFMINFORTRAN` or `$XIOS_HOME`
+        assignment to fcm variables, not both
+  * pulled changes in SalishSeaCmd and switched to graham-stdenv2023 branch
+  * rsync-ed 28feb23 restart files to `graham`
+  * ran 01mar23-19x26 test run
+    * segfault very early in startup of nemo or xios_server
+
+Group dinner at Nuba.
+
+
+
+#### Thu 21-Mar-2023
+
+Days since last wwatch3 prep stall: 12
+
+
+##### SalishSeaNowcast
+
+* resolved recent issue where Codecov report comments no longer appear in PRs
+  * added token to repo GHA workflow
+    * coverage report upload to Codecov was successful
+    * Codecov report comment appeared in PR#248
+* worked on docs updates:
+  * branch: docs-maint
+  * PR#248
+
+
+
+#### Fri 22-Mar-2023
+
+Days since last wwatch3 prep stall: 13
+
+
+##### SalishSeaNowcast
+
+* continued work on docs updates:
+  * branch: docs-maint
+  * PR#248
+
+
+##### gha-workflows
+
+* added CODECOV_TOKEN secret parameter to pytest-with-coverage workflow and updated docs in README
+
+
+##### AtlantisCmd
+
+* added Codecov token to org and pytest-with-coverage workflow to re-enable coverage report comments
+  in pull requests:
+  * branch codecov-token
+  * PR#38 - squash-merged
+
+
+##### NEMO_Nowcast
+
+* added Codecov token to **repo** and pytest-with-coverage workflow to re-enable coverage report
+  comments in pull requests:
+  * branch codecov-token
+  * PR#47 - squash-merged
+
+
+##### Reshapr
+
+* added Codecov token to org and pytest-with-coverage workflow to re-enable coverage report comments
+  in pull requests:
+  * branch codecov-token
+  * PR#125 - squash-merged
+
+
+##### moad_tools
+
+* added Codecov token to pytest-with-coverage workflow to re-enable coverage report comments
+  in pull requests:
+  * branch codecov-token
+  * PR#57 - squash-merged
+
+
+##### salishsea-site
+
+* added Codecov token to pytest-with-coverage workflow to re-enable coverage report comments
+  in pull requests:
+  * branch codecov-token
+  * PR#72 - squash-merged
+
+
+##### SalishSeaCmd
+
+* added Codecov token to pytest-with-coverage workflow to re-enable coverage report comments
+  in pull requests:
+  * branch codecov-token
+  * PR#63 - squash-merged
+* renamed milestone 23.2 to 24.1 on GitHub re: my decision on 19mar to bump version due to year
+  rollover and WIP for graham StdEnv/2023
+
+
+##### NEMO-Cmd
+
+* added Codecov token to pytest-with-coverage workflow to re-enable coverage report comments
+  in pull requests:
+  * branch codecov-token
+  * PR#81 - squash-merge
+* update AGRIF web link re: new forge.ipsl.fr alias for forge.ipsl.jussieu.fr to work around
+  slow TLS certificate renewal issue
+  * sphinx-linkcheck workflow is finally successful for the 1st time since mid-Dec
+
+
+##### Miscellaneous
+
+Updated khawla PyCharm to 2023.3.5.
+
+Tweaked `borg-backups/lizzy_smelt.sh` to exclude private dirs in `warehouse/16.04-home/` to that script
+runs error-free.
+Also added `${HOME}/Games/` to backups so that Minecraft server and worlds get backups on smelt.
+
+
+
+#### Sat 23-Mar-2023
+
+Days since last wwatch3 prep stall: 14
+
+
+
+#### Sun 24-Mar-2023
+
+Days since last wwatch3 prep stall: 15
+
 
 
 
