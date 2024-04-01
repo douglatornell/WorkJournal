@@ -2205,7 +2205,6 @@ Messages from ERDDAP complaining about
   sudo sysctl -p
   sudo /opt/tomcat/bin/shutdown.sh
   # wait for alert
-
   sudo /opt/tomcat/bin/startup.sh
   ```
 
@@ -3521,19 +3520,281 @@ Days since last wwatch3 prep stall: 14
 
 Days since last wwatch3 prep stall: 15
 
+Sony TV & sound bar installed.
+
+Started work on 2023 income tax returns.
 
 
 
+### Week 13
+
+#### Mon 25-Mar-2023
+
+Days since last wwatch3 prep stall: 16
 
 
-Geek Squad phone: 1-800-433-5778
+##### Miscellaneous
+
+Checked status of scheduled GHA workflows:
+
+  ```bash
+  conda activate gha-workflows
+  python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+  ```
+
+Phys Ocgy seminar: Michaela Maier, PhD candidate at UVic, Trends and Variability in Depth and
+Spiciness of Subsurface Isopycnals on the Vancouver Island Continental Shelf and Slope
 
 
 
+#### Tue 26-Mar-2023
+
+Days since last wwatch3 prep stall: 17
+
+
+##### Miscellaneous
+
+MOAD group mtg; see whiteboard.
+
+
+##### SalishSeaNowcast
+
+* continued work on docs updates:
+  * branch: docs-maint
+  * PR#248
 
 
 
-Look at Ilias's problem day in May
+#### Wed 27-Mar-2023
+
+Days since last wwatch3 prep stall: 18
+
+
+##### ERDDAP Datasets
+
+Finished adding V23-02 HRDPS continental grid fields datasets:
+
+* branch: HRDPS-continental
+* PR#12 - squash-merged
+
+Investigated daily error from ubcSSg3DVariableVolumeLayers1hV21-11:
+
+* daily error was about 12feb24
+* after I triggered a dataset reload with a flag touch there were errors for more datas
+* web site graph page fails for all operations I tried
+* reviewed dataset XML:
+  * it is missing a depth coordinate 😱
+* branch: ubcSSg3DVariableVolumeLayers1hV21-11-depth-coord
+* PR#13 -
+* pulled branch in production and triggered dataset load with a flag
+* no more graph page errors
+  * wait for automation to load today's nowcast-green results before merging
+    * error report for 4 dates: 12feb24, 14mar24, 19mar24 & 21mar24
+    * graph page confirms that those dates aren't loaded
+
+
+##### SalishSeaNowcast
+
+* finished work on docs updates:
+  * branch: docs-maint
+  * PR#248
+  * added ssh keys & config section to skookum deployment docs; re: issue #244
+
+
+
+#### Thu 28-Mar-2023
+
+Days since last wwatch3 prep stall: 19
+
+
+##### Miscellaneous
+
+Parallel Python mini-course:
+
+* Part 1
+  * notes https://wgpages.netlify.app/pythonhpc
+  * training cluster (25 x c8-30gb, 70 users)
+  * hostname: parpy.c3.ca
+  * user from etherpad
+* added cluster to `.ssh/config` and uploaded ed25519 public key via `ssh-copy-id`
+* connected via VSCode ssh extension
+* env setup & activation:
+
+  ```bash
+  mkdir -p ~/tmp && cd ~/tmp
+  module load StdEnv/2023 python/3.11.5 arrow/14.0.1 scipy-stack/2023b netcdf/4.9.2
+  source /project/def-sponsor00/shared/pythonhpc-env/bin/activate
+  ```
+
+* don't run Python on the login node; use `salloc` for an interactive compute node session:
+
+  ```bash
+  salloc --cpus-per-task=4 --time=2:00:0 --mem-per-cpu=3600   # our default mode
+  ```
+
+* parallel efficiency of 100% is hard
+
+* `tmux` tricks:
+  * horizontal panes: C-b %
+  * change panes C--> c-<- (arrows)
+* `htop --filter $USER`
+
+* `slowSeries.py`
+  * expected result: 13.277605949858103
+  * initial implementation: 13.286 seconds
+  * generator comprehension implementation is ~1 second slower !!!
+
+* Numpy arrays:
+  * element-wise operations
+  * broadcasting
+
+* example: conversion of velocity components on spherical grid to Cartesian grid
+  * brute force implementation: ~40 minutes on cluster
+  * factor out `sin()` and `cos()` calculations: ~6 minutes on cluster
+  * vectorize over dimensions:
+    * take advantage of broadcasting; dimensional analysis
+    * over lons (k loop): ~7 seconds on cluster
+    * over lons and lats (k & j loop): ~2.9 seconds on cluster
+    * vectorization over 3rd dimensions doesn't help because of size of memory blocks that Numpy
+      moves around due to loss of contiguous allocation
+
+* `tqdm` for progress bar; can be used to estimate completion time:
+  * wrap outer loop range in `tqdm()`
+  * `for i in tqdm(reange(nlat)):`
+
+* `numpy.vecotrize()`
+  * ~2x slower than initial implementation: 32.996 seconds
+  * ternary conditional implemenation is slightly faster: 28.157 seconds
+
+* threads vs. processes:
+  * process is smallest _independent_ unit of processing
+  * threads share memory within process
+  * multi-processing communicate via messages
+  * Python uses reference counting for memory management; garbage collection
+    * problem: multiple threads can access same memory, messing up reference counts
+      * results in memory leaks or segmentation faults
+      * Python prevents that with GIL; only 1 thread runs at a time
+      * GIL will be removed in 3.13
+      * threads are useful for io-bound workloads
+
+* NumExpr
+  * JIT compiler for Numpy
+  * limited set of Numpy expressions compiled to C from strings
+  * essentially a map-reduce wrapper that distributes calculations across threads
+
+Helped Becca sort out issues with her analysis-becca repo after remote URLs got messed up and shelf
+had to use filter-repo to remove a too-large file from history.
+
+
+##### ERDDAP Datasets
+
+* still getting error report for 4 dates: 12feb24, 14mar24, 19mar24 & 21mar24; and their fields
+  are missing from ERDDAP
+* restarted ERDDAP including waiting for alert from uptimerobot:
+
+  ```bash
+  sudo /opt/tomcat/bin/shutdown.sh
+  # wait for alert
+  sudo /opt/tomcat/bin/startup.sh
+  ```
+
+* no improvement :-(
+
+
+##### SalishSeaNowcast
+
+* started work to fix time series plots not showing dates since 31dec23:
+  * branch: fix-time-series-plots
+  * PR#249
+  * modernized test suite
+
+
+
+#### Fri 29-Mar-2023
+
+**Statuatory Holiday** - Good Friday
+
+Days since last wwatch3 prep stall: 20
+
+
+##### SalishSeaNowcast
+
+* started work to fix time series plots not showing dates since 31dec23:
+  * branch: fix-time-series-plots
+  * PR#249
+  * updated dataset URLs
+  * pulled branch into production for testing
+  * changed zooplankton field names from meso & micro to z1 & z2
+  * change mesodinium rubrum/flagellates time series plot to diatoms/flagellates per Susan's
+    instructions to deal with the fact that mesodinium rubrum is not in V21-11
+
+
+##### salishsea-site
+
+* started work to update time series plots due to new variables and svg names:
+  * branch: update-time-series-plots
+  * PR#73
+
+
+
+#### Sat 30-Mar-2023
+
+Days since last wwatch3 prep stall: 21
+
+
+##### SalishSeaNowcast
+
+* Finished fixing time series plots not showing dates since 31dec23:
+  * branch: fix-time-series-plots
+  * PR#249 -  squash-merged
+
+
+##### ERDDAP Datasets
+
+* still getting error report for 4 dates: 12feb24, 14mar24, 19mar24 & 21mar24; and their fields
+  are missing from ERDDAP
+* deactivated dataset; pinged it with flag; reactivated it; pinged it again; no change
+* explored ERDDAP log.txt file
+  * deleted `/results/erddap/dataset/11/ubcSSg3DVariableVolumeLayers1hV21-11/badFiles.nc`
+  * pinged dataset; problem solved
+* did the same deletion of `badFiles.nc` and ping for the 4 19-05 datasets that I get less frequent
+  error emails for:
+  * ubcSSg3DuGridFields1hV19-05; no error on reload
+  * ubcSSg3DwGridFields1hV19-05; no error on reload
+  * ubcSSg3DTracerFields1hV19-05; no error on reload
+  * ubcSSg3DTracerFields1moV19-05; still unhappy
+
+
+##### SalishSeaCast
+
+* `collect_weather 2.5km 18` didn't finish until 20:05 (~5 hours late), long after `crop_gribs 18`
+  gave up
+  * `download_weather 1km 00` failed because files had been purged
+  * ran `crop_gribs 18 --backfill` at ~21:45
+* `collect_weather 2.5 km 00` had no files at 21:45
+
+
+
+#### Sun 31-Mar-2023
+
+Days since last wwatch3 prep stall: 22
+
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus nowcast+` failed due to ssh key exception
+* `archive_tarball hindcast 2022-oct graham` failed
+  * re-ran rsync manually; slow, and overlapped with 2022-nov from automation
+
+
+##### SalishSeaNowcast
+
+* Started investigating IndexError in `make_plots._prep_comparison_fig_functions()`
+  * due to no dev run results for `figures.comparison.compare_venus_ctd`
+  * maybe resolved by enabling figure module to handle `dev_grid_T_hr = None`
+* Closed issue #138 that got resolved almost a year ago when the nowcast-env on skookum was updated to
+  Python 3.11
+
 
 
 
