@@ -3797,6 +3797,36 @@ Days since last wwatch3 prep stall: 22
 
 
 
+## April
+
+### Week 14
+
+#### Mon 1-Apr-2023
+
+**Statutory Holiday** - Easter Monday
+
+Days since last wwatch3 prep stall: 23 ?
+
+
+##### Miscellaneous
+
+Squash-merged dependabot PRs to bump codecov/codecov-action to 4.1.1 re: maintenance updates:
+
+* SalishSeaNowcast
+* gha-workflows
+
+
+##### ERDDAP Datasets
+
+* Finalized adding missing depth coordinate to variable volume layers (e3t) dataset
+* branch: ubcSSg3DVariableVolumeLayers1hV21-11-depth-coord
+* PR#13 - squash-merged
+
+* Blacklisted another IP address associated with dataforseo.com that started generating hundreds of
+  failed requests last night
+
+
+
 
 
 Add Tereza's pubs to ERDDAP.
