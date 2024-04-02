@@ -3805,8 +3805,7 @@ Days since last wwatch3 prep stall: 22
 
 **Statutory Holiday** - Easter Monday
 
-Days since last wwatch3 prep stall: 23 ?
-
+Days since last wwatch3 prep stall: 23
 
 ##### Miscellaneous
 
@@ -3826,6 +3825,57 @@ Squash-merged dependabot PRs to bump codecov/codecov-action to 4.1.1 re: mainten
   failed requests last night
 
 
+#### Tue 2-Apr-2023
+
+Days since last wwatch3 prep stall: 24 ?
+
+Worked at ESB while Rita was at home.
+
+##### SalishSeaCast
+
+* 1st day of LiveOcean delayed forecasts due to cluster maintenance:
+
+  ```bash
+  # wait for download_live_ocean to start
+  kill download_live_ocean
+  ln -s /results/forcing/LiveOcean/downloaded/20240401 \
+    /results/forcing/LiveOcean/downloaded/20240402
+  make_live_ocean_files
+  ```
+
+* `upload_forcing graham forecast2|nowcast+|turbidity` all failed with
+  `OSError: [Errno 101] Network is unreachable`
+
+
+
+##### Miscellaneous
+
+MOAD mtg; see whiteboard
+
+OS pkg updates on kudu; had to fix full boot volume on the way:
+
+* started with 622M == 96% of /boot used
+* clean up /var/cache/apt/archives/ with:
+    `sudo apt autoclean`
+* flatpak cleanup:
+
+    ```bash
+    flatpak update --appstream
+    flatpak update
+    flatpak uninstall --unused\
+    ```
+
+* deleted a bunch of old kernels with guidance from askubuntu
+  (<https://askubuntu.com/questions/345588/what-is-the-safest-way-to-clean-up-boot-partition>)
+
+  ```bash
+  uname -r  # in-use kernel - **don't delete**
+  dpkg --list 'linux-image*' | grep ^ii  # installed kernels
+  sudo apt remove linux-image-VERSION  # remove all but in-use and previous kernels
+  sudo apt autoremove  # remove pkgs associated w/ removed kernels
+  ```
+
+* ended with 226M == 35% of /boot used
 
 
 
