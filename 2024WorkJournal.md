@@ -3827,9 +3827,10 @@ Squash-merged dependabot PRs to bump codecov/codecov-action to 4.1.1 re: mainten
 
 #### Tue 2-Apr-2023
 
-Days since last wwatch3 prep stall: 24 ?
+Days since last wwatch3 prep stall: 24
 
 Worked at ESB while Rita was at home.
+
 
 ##### SalishSeaCast
 
@@ -3846,6 +3847,14 @@ Worked at ESB while Rita was at home.
 * `upload_forcing graham forecast2|nowcast+|turbidity` all failed with
   `OSError: [Errno 101] Network is unreachable`
 
+* started `download_live_ocean` at ~21:40:
+
+  ```bash
+  rm /results/forcing/LiveOcean/downloaded/20240402  # remove persisted 01apr symlink
+  download_live_ocean
+  ```
+
+* download happened at ~00:20
 
 
 ##### Miscellaneous
@@ -3876,6 +3885,319 @@ OS pkg updates on kudu; had to fix full boot volume on the way:
   ```
 
 * ended with 226M == 35% of /boot used
+
+
+
+#### Wed 3-Apr-2023
+
+Days since last wwatch3 prep stall: 25
+
+
+##### SalishSeaCast
+
+* 2nd day of LiveOcean delayed forecasts due to cluster maintenance:
+
+  ```bash
+  # wait for download_live_ocean to start
+  kill download_live_ocean
+  make_live_ocean_files --debug 2024-04-02  # replace file created yesterday from 01apr persistence
+  ln -s /results/forcing/LiveOcean/downloaded/20240402 \
+    /results/forcing/LiveOcean/downloaded/20240403
+  make_live_ocean_files
+  ```
+
+* started `download_live_ocean` at ~22:00:
+
+  ```bash
+  rm /results/forcing/LiveOcean/downloaded/20240403  # remove persisted 02apr symlink
+  download_live_ocean
+  ```
+
+* download happened at ~22:04
+
+* `robot.graham` "Network is unreachable" error stopped early this morning
+  * backfilled forcing uploads for 02apr
+  * started backfilling tarball uploads
+    * nowcast-green.202111-mar24
+
+    * rivers-oct22
+    * rivers-nov22
+    * rivers-dec22
+    * rivers-*23
+* `orcinus` appears to be back in operation
+  * backfilled forcing uploads
+    * 31mar to 02apr, nowcast+ & turbidity
+  * recreated missing `/global/scratch/dlatorne/nowcast-agrif/`
+
+    ```bash
+    mkdir -p /global/scratch/dlatorne/nowcast-agrif
+    chgrp wg-moad /global/scratch/dlatorne/nowcast-agrif
+    chmod g+ws /global/scratch/dlatorne/nowcast-agrif
+    ```
+
+  * uploaded 16feb24 namelist and restart files from `skookum` to `orcinus`:
+
+    ```bash
+    cd /results/SalishSea/nowcast-agrif.201702/16feb24
+    rsync -t \
+      namelist_cfg \
+      1_namelist_cfg \
+      SalishSea_07484400_restart.nc \
+      SalishSea_07484400_restart_trc.nc \
+      1_SalishSea_14968800_restart.nc \
+      1_SalishSea_14968800_restart_trc.nc \
+      orcinus:/global/scratch/dlatorne/nowcast-agrif/16feb24/
+    ```
+
+  * started backfilling:
+
+    ```bash
+    make_forcing_links orcinus --run-date 2024-02-17
+    make_forcing_links orcinus --run-date 2024-02-18
+    make_forcing_links orcinus --run-date 2024-02-19
+    make_forcing_links orcinus --run-date 2024-02-20
+    make_forcing_links orcinus --run-date 2024-02-21
+    make_forcing_links orcinus --run-date 2024-02-22
+    make_forcing_links orcinus --run-date 2024-02-23
+    ```
+
+
+##### Security Updates
+
+Squash-merged dependabot PRs to update pillow to v10.3.0 re: CVE-2024-28219 re: strcpy buffer
+overflow vulnerability:
+
+* SalishSeaNowcast
+* SalishSeaTools
+* Reshapr
+* moad_tools
+* MoaceanParcels
+
+
+##### Miscellaneous
+
+* replied to Jared's email re: forking SOG-Bloomcast-Ensemble
+
+
+##### SalishSeaNowcast
+
+* started work on fixing ONC SoG nodes comparison plots
+  * need to handle absence of dev run results; call with `None` instead of dataset object
+  * discovered that figure code needs update to ONC API v3
+
+
+
+#### Thu 4-Apr-2023
+
+Days since last wwatch3 prep stall: 26
+
+
+##### SalishSeaCast
+
+* continued backfilling nowcast-agrif:
+
+  ```bash
+  make_forcing_links orcinus --run-date 2024-02-24
+  make_forcing_links orcinus --run-date 2024-02-25
+  # wait for automation run_NEMO_agrif to fail
+  make_forcing_links orcinus --run-date 2024-02-26
+  make_forcing_links orcinus --run-date 2024-02-27
+  make_forcing_links orcinus --run-date 2024-02-28
+  make_forcing_links orcinus --run-date 2024-02-29
+  make_forcing_links orcinus --run-date 2024-03-01
+  make_forcing_links orcinus --run-date 2024-03-02
+  ```
+
+
+* 3rd day of LiveOcean delayed forecasts due to cluster maintenance:
+
+  ```bash
+  # wait for download_live_ocean to start
+
+  kill download_live_ocean
+  make_live_ocean_files --debug 2024-04-03  # replace file created yesterday from 02apr persistence
+  ln -s /results/forcing/LiveOcean/downloaded/20240403 \
+    /results/forcing/LiveOcean/downloaded/20240404
+  make_live_ocean_files
+  rm /results/forcing/LiveOcean/downloaded/20240404  # remove persisted 03apr symlink
+  ```
+
+* started `download_live_ocean` at 22:35:
+* download happened at 22:35
+
+
+##### Miscellaneous
+
+Parallel Python mini-course:
+
+* Part 2
+  * part 1 notes https://wgpages.netlify.app/pythonhpc
+  * part2 notes Part 2 notes https://wgpages.netlify.app/ray
+  * training cluster (25 x c8-30gb, 70 users)
+  * hostname: parpy.c3.ca
+  * user from etherpad
+* env setup & activation:
+
+  ```bash
+  mkdir -p ~/tmp && cd ~/tmp
+  module load StdEnv/2023 python/3.11.5 arrow/14.0.1 scipy-stack/2023b netcdf/4.9.2
+  source /project/def-sponsor00/shared/pythonhpc-env/bin/activate
+  ```
+
+* interactive compute node session:
+
+  ```bash
+  salloc --cpus-per-task=4 --time=2:00:0 --mem-per-cpu=3600   # our default mode
+  ```
+
+* profiling:
+  * many choices
+  * `scalene` demo
+    * defaults to browser interface
+    * `--cli` to for CLI output
+
+* multiprocessing
+  * avoids the GIL because each process has separate interpreter, so separate GIL
+  * stdlib `multiprocessing` has limitations due to serialization algorithm
+  * `multiprocess` fork solves those issues with different serialization algorithm
+    * limiitation pool.map() returns a list so memory can be limiting; solve by breaking into
+      parts; e.g. partial sums for slow harmonic series case
+
+* other compilers for Python:
+  * Cython
+  * codon: MIT research project
+  * mojo: superset of Python
+
+* Numba JIT compiler
+  * on top of LLVM
+  * often requires re-implemenation to handle code that Numba can't compile
+    * mathematical exclusion of 9 strings in the case of slow harmonic series
+    * slow series sped up by 10x
+  * some additional speed up with `jit(parallel=True)` and `numba.prange()` instead of `range()`
+    uses threads, but there is overhead to launching, so scales with problem size
+
+* Ray parallel framework
+  * `ray.init(num_cpus=4, configure_logging=False)`
+    * need to specify cores because auto-init analyses hardware to find number of cores and tries
+      to use all, but our cluster only has 4 cores
+    * ray logging is quite verbose
+    * default ray cluster uses processes
+    * lazy execution
+    * `ray.get()` forces calculation
+    * "task-based parallelism"
+    * `ray.experimental.tqdm_ray.tqdm` distributed progress bars
+    * slow series has to be refactored to use partial sums to distribute to ray tasks
+    * semantics of ray seem nicer than dask for code that is not using xarray or pandas
+    * can use Numba jit compiled functions as `ray.remote` functions to run compiled code in parallel
+      ray tasks
+      * need to "prime" task processes with compiled Numba before running full scale
+      * almost as fast as compiled code
+  * `ray.data` objects are distributed data collections based on Python dicts
+
+Helped Cassidy in Slack with using dask to multiply full domaion day-averaged tracer fields by
+`e3t_1d`.
+
+
+##### SalishSeaNowcast
+
+* scanned `/SalishSeaCast/logs/nowcast/manager-stderr-*.log` for font warning that I see in
+  `compare_venus_ctd` figure test notebook; none, so stop worrying
+* created issues for other warnings in manager stderr log:
+  * use of `loffset` in `dataset.resample()` in `compare_tide_prediction_max_ssh` figure; issue #252
+  * matplotlib UserWarning in surface_current_tiles figure module; issue #253
+
+
+
+#### Fri 5-Apr-2023
+
+Days since last wwatch3 prep stall: 27
+
+
+##### SalishSeaCast
+
+* continued backfilling nowcast-agrif:
+
+  ```bash
+  make_forcing_links orcinus --run-date 2024-03-03
+  # wait for automation run_NEMO_agrif to fail at ~10:30
+  make_forcing_links orcinus --run-date 2024-03-04
+  make_forcing_links orcinus --run-date 2024-03-05
+  make_forcing_links orcinus --run-date 2024-03-06
+  make_forcing_links orcinus --run-date 2024-03-07
+  make_forcing_links orcinus --run-date 2024-03-08
+  make_forcing_links orcinus --run-date 2024-03-09
+  ```
+
+* finish up after LiveOcean delayed forecasts due to cluster maintenance:
+
+  ```bash
+  make_live_ocean_files --debug 2024-04-04  # replace file created yesterday from 03apr persistence
+  ```
+
+
+##### Miscellaneous
+
+* Slack huddle w/ Cassidy re: dask processing of river tracer fields:
+  * her cluster had a `global.lock` collision with the persistent cluster on `salish`
+    * I need to change persistent cluster `local_directory` from `/tmp/` to `/tmp/SalishSeaCast/`
+
+
+##### SalishSeaNowcast
+
+* continued work on fixing ONC SoG nodes comparison plots
+  * branch: venus-ctd-fig-dev-optional
+  * PR#254
+  * handled absence of dev run results; call with `None` instead of dataset object
+  * updated ONC obs collection code to use ONC API v3
+  * `sandheads_winds` is using HTTP instead of HTTPS for obs collection
+
+
+
+#### Sat 6-Apr-2023
+
+Days since last wwatch3 prep stall: 0
+
+
+##### SalishSeaCast
+
+* `make_ww3_current_file forecast2` stalled; killed it and skipped run
+
+
+##### SalishSeaCast
+
+* continued backfilling nowcast-agrif:
+
+  ```bash
+  # wait for automation run_NEMO_agrif to fail at ~10:30
+  make_forcing_links orcinus --run-date 2024-03-10
+  make_forcing_links orcinus --run-date 2024-03-11
+  make_forcing_links orcinus --run-date 2024-03-12
+  make_forcing_links orcinus --run-date 2024-03-13
+  make_forcing_links orcinus --run-date 2024-03-14
+  make_forcing_links orcinus --run-date 2024-03-15
+  make_forcing_links orcinus --run-date 2024-03-16
+  make_forcing_links orcinus --run-date 2024-03-17
+  ```
+
+
+
+#### Sun 7-Apr-2023
+
+
+##### SalishSeaCast
+
+* continued backfilling nowcast-agrif:
+
+  ```bash
+  make_forcing_links orcinus --run-date 2024-03-18
+  # wait for automation run_NEMO_agrif to fail at ~10:30
+  make_forcing_links orcinus --run-date 2024-03-19
+  make_forcing_links orcinus --run-date 2024-03-20
+  make_forcing_links orcinus --run-date 2024-03-21
+  make_forcing_links orcinus --run-date 2024-03-22
+  ```
+
+
 
 
 
