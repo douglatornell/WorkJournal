@@ -4281,14 +4281,43 @@ Updated khawla PyCharm to 2024.1.
 
 ##### SalishSeaCast
 
+* `download_live_ocean` timed out at 12:10
+  * retried at 12:27; timed out at 15:27
+  * persisted 8apr24 LiveOcean file via symlink
+  * `make_live_ocean_files` to start automation at ~15:35
 * continued backfilling nowcast-agrif:
 
   ```bash
   make_forcing_links orcinus --run-date 2024-04-01
-  # wait for automation run_NEMO_agrif to fail at ~10:30
+  # wait for automation run_NEMO_agrif to fail at ~17:00
 
+  make_forcing_links orcinus --run-date 2024-04-02
+  make_forcing_links orcinus --run-date 2024-04-03
+  make_forcing_links orcinus --run-date 2024-04-04
+  make_forcing_links orcinus --run-date 2024-04-05
+  make_forcing_links orcinus --run-date 2024-04-06
+  make_forcing_links orcinus --run-date 2024-04-07
+  make_forcing_links orcinus --run-date 2024-04-08
+  make_forcing_links orcinus --run-date 2024-04-09
   ```
 
+
+##### Miscellaneous
+
+* Erik Eberhardt interview meetings for headship
+  * dept-wide vision presentation w/ Q&a
+  * staff mtg
+* MOAD group mtg; see whiteboard
+* Reviewed readthedocs projects (list at bottom) re: updating .readthedocs.yaml
+  * 5 repos remaining to be done
+* updated kudu to PyCharm 2024.1
+
+
+##### salishsea-site
+
+* readthedocs build maintenance:
+  * breanch: rtd-build-maint
+  * PR#74 - squash-merged
 
 
 
@@ -4315,13 +4344,6 @@ TODO:
 
 * Update AtlantisCmd to drop Python 3.10 because NEMO-Cmd has dropped it;
   GHA workflow is failing
-
-
-
-TODO:
-
-* update xarray-tests instructions to use Python 3.11
-* drop pkg install from xarray-docs instructions; it's included in docs.yml
 
 
 
@@ -4365,13 +4387,22 @@ TODO:
 TODO:
 
 * update .readthedocs.yaml to use ubuntu-22.04 and mambaforge-22.9 in many repos
-  * MOAD/docs - done in PR#32
+  * MOAD/docs - done 13sep23 in PR#32
   * FVCOM-Cmd - done in PR#10
+  * tools - done 28aug23 in PR#84
+  * AtlantisCmd - done 28aug23 in PR#27
   * Reshapr - done 28oct23 in PR#100
+  * SalishSeaNowcast - done 10nov23 in PR#215
   * NEMO-Cmd - done 20nov23 in PR#71
   * SalishSeaCmd - done 29nov23 in PR#54
   * moad_tools - done 18dec23 in PR#47
   * SalishSeaCast/docs - done 7feb24 in PR#43
+  * salishsea-site - done 9apr24 in PR#74
+
+  * rpn-to-gemlam
+  * MoaceanParcels
+  * NEMO_Nowcast
+  * ECget
 
 
 TODO:
@@ -4437,3 +4468,27 @@ TODO:
     * docs - done 7feb24 in PR#45
     * SOG-Bloomcast-Ensemble - issue created
     * tools - issue created
+
+
+Repos that use readthedocs:
+
+* active:
+  * AtlantisCmd
+  * ECget
+  * MoaceanParcels
+  * NEMO-Cmd
+  * NEMO_Nowcast
+  * Reshapr
+  * rpn-to-gemlam
+  * SalishSeaCmd
+  * SalishSeaCast/docs
+  * tools
+  * SalishSeaNowcast
+  * salishsea-site
+  * MOAD/docs
+  * moad_tools
+* archived:
+  * Make-MIDOSS-Forcing
+  * midoss-docs
+  * MOHID-Cmd
+  * WWatch3-Cmd
