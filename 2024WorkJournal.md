@@ -3348,7 +3348,7 @@ Coffee w/ Raisha.
 
 ##### SalishSeaCmd
 
-Updated module loads to Alliance StdEnv/20203:
+Updated module loads to Alliance StdEnv/2023:
 
 * branch: graham-stdenv2023
 * PR#62
@@ -4197,6 +4197,104 @@ Days since last wwatch3 prep stall: 0
   make_forcing_links orcinus --run-date 2024-03-22
   ```
 
+
+
+### Week 15
+
+#### Mon 8-Apr-2023
+
+Partial solar eclipse, fully obscured by cloud
+
+
+##### SalishSeaCast
+
+* continued backfilling nowcast-agrif:
+
+  ```bash
+  make_forcing_links orcinus --run-date 2024-03-23
+  # wait for automation run_NEMO_agrif to fail at ~10:30
+  make_forcing_links orcinus --run-date 2024-03-24
+  make_forcing_links orcinus --run-date 2024-03-25
+  make_forcing_links orcinus --run-date 2024-03-26
+  make_forcing_links orcinus --run-date 2024-03-27
+  make_forcing_links orcinus --run-date 2024-03-28
+  make_forcing_links orcinus --run-date 2024-03-29
+  make_forcing_links orcinus --run-date 2024-03-30
+  make_forcing_links orcinus --run-date 2024-03-31
+  ```
+
+
+##### Miscellaneous
+
+Phys ocgy seminar:
+
+Squash-merged dependabot PRs to bump codecov/codecov-action to 4.2.0 re: feature update:
+
+* gha-workflows
+* SalishSeaNowcast
+
+Updated khawla PyCharm to 2024.1.
+
+
+##### SalishSeaNowcast
+
+* finished work on fixing ONC SoG nodes comparison plots
+  * branch: venus-ctd-fig-dev-optional
+  * PR#254 - squash-merged
+  * dropped ONC Delta DDL node comparison plot from `make_plots` because its deployment ended
+    in March
+* fixed Sandheads winds comparison plot:
+  * branch: update-hrdps-erddap-url
+  * PR#256 - squash-merged
+  * updated ERDDAP URL to V23-02 HRDPS dataset
+
+
+##### `graham` StdEnv/2023
+
+* continued work on testing GCC-12 build on `graham`
+  * checked XIOS-2 and SalishSeaCast NEMO config executables with `ldd`
+  * tried to launch `xios-server.exe` and `nemo.exe` on login node; both failed with:
+
+      ```text
+      terminate called after throwing an instance of 'std::bad_alloc'
+      what():  std::bad_alloc
+      Aborted
+      ```
+
+  * queued 01mar23-4x9 test run
+    * failed on launch with out of memory error
+    * looked back and found that 20mar 19x26 test had same cause of failure
+  * changed to Intel compilers (`module load intel/2023.2.1`) and tried XIOS-2 and NEMO SalishSeaCast
+    builds
+    * lots of warnings in XIOS-2 build, but successful
+    * successful NEMO build
+  * changed `salishsea_cmd.run._modules()` to load `intel/2023.2.1`
+  * queued 01mar23-4x9 test run
+    * run launched successfully
+    * `ocean.output` was created, but no time steps
+    * segfault in `stderr`
+
+
+
+#### Tue 9-Apr-2023
+
+
+##### SalishSeaCast
+
+* continued backfilling nowcast-agrif:
+
+  ```bash
+  make_forcing_links orcinus --run-date 2024-04-01
+  # wait for automation run_NEMO_agrif to fail at ~10:30
+
+  ```
+
+
+
+
+
+  * `sandheads_winds` is using HTTP instead of HTTPS for obs collection via
+    `salishsea_tools.stormtools.get_EC_observations()`
 
 
 
