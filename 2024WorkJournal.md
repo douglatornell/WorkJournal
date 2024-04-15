@@ -4013,7 +4013,6 @@ Days since last wwatch3 prep stall: 26
 
   ```bash
   # wait for download_live_ocean to start
-
   kill download_live_ocean
   make_live_ocean_files --debug 2024-04-03  # replace file created yesterday from 02apr persistence
   ln -s /results/forcing/LiveOcean/downloaded/20240403 \
@@ -4290,9 +4289,9 @@ Updated khawla PyCharm to 2024.1.
   ```bash
   make_forcing_links orcinus --run-date 2024-04-01
   # wait for automation run_NEMO_agrif to fail at ~17:00
-
   make_forcing_links orcinus --run-date 2024-04-02
   make_forcing_links orcinus --run-date 2024-04-03
+
   make_forcing_links orcinus --run-date 2024-04-04
   make_forcing_links orcinus --run-date 2024-04-05
   make_forcing_links orcinus --run-date 2024-04-06
@@ -4321,9 +4320,225 @@ Updated khawla PyCharm to 2024.1.
 
 
 
+#### Wed 10-Apr-2023
 
-  * `sandheads_winds` is using HTTP instead of HTTPS for obs collection via
-    `salishsea_tools.stormtools.get_EC_observations()`
+
+##### SalishSeaCast
+
+* finished backfilling nowcast-agrif:
+
+  ```bash
+  make_forcing_links orcinus --run-date 2024-04-04
+  make_forcing_links orcinus --run-date 2024-04-05
+  # wait for automation run_NEMO_agrif to fail at ~12:30
+  make_forcing_links orcinus --run-date 2024-04-06
+  make_forcing_links orcinus --run-date 2024-04-07
+  make_forcing_links orcinus --run-date 2024-04-08
+  make_forcing_links orcinus --run-date 2024-04-09
+  make_forcing_links orcinus --run-date 2024-04-10
+  ```
+
+* `download_live_ocean` was slow again
+  * checked for yesterday's run; extraction was finished at 19:55; backfilled download and boundary
+    file creation
+  * email to Parker; he replied that runs are delayed due to cluster maintenance again this week;
+    Tue-Thu
+
+    ```bash
+    ln -s /results/forcing/LiveOcean/downloaded/20240409 \
+      /results/forcing/LiveOcean/downloaded/20240410
+    make_live_ocean_files
+    rm /results/forcing/LiveOcean/downloaded/20240410  # remove persisted 09apr symlink
+    ```
+
+  * started `download_live_ocean` at 20:00
+  * download happened at ??:??
+
+
+##### Miscellaneous
+
+* SharcNet seminar: Accelerating data analytics with RAPIDS cuDF
+  * Nastaran Shahparlan, York
+  * pandas is ubiquitous, but slow
+  * RAPIDS
+    * NVIDIA, GPU accelerated
+    * cuDF, dask-cuDF
+    * cudf.pandas; 60% of pandas supported
+      * faster than polars
+      * run in apptainer container on clusters for now; see wiki page
+      * includes a profiler
+      * distribution of work between cpu and gpu depends on axis selection for some methods
+        * `max()` can't use gpu for axis=0
+        * `count()` can't use gpu for axis=1
+      * not designed for out-of-core workflows
+      * no good interface for Python and NumPy C APIs
+
+
+##### `graham` StdEnv/2023
+
+* tried Intel build of XIOS-2 without includes of `<limits>` and `<array>` in `meshutil.cpp` but
+  that only confirmed that they are necessary for both Intel-2023.2.1 and GCC-12
+
+
+
+#### Thu 11-Apr-2023
+
+
+##### SalishSeaCast
+
+* `crop_gribs 12` stalled with 1 file not processed; APCP in hour 010
+* `download_live_ocean` was delayed again
+
+    ```bash
+    # wait for download_live_ocean to start
+    kill download_live_ocean
+    ln -s /results/forcing/LiveOcean/downloaded/20240410 \
+      /results/forcing/LiveOcean/downloaded/20240411
+    make_live_ocean_files
+    rm /results/forcing/LiveOcean/downloaded/20240411  # remove persisted 10apr symlink
+    ```
+
+  * started `download_live_ocean` at 20:00
+  * download happened at ??:??
+
+
+##### SalishSeaNowcast
+
+* fixed badge tables in README and dev docs; broken on GitHub due to changes in rendering pipeline
+  * branch: fix-badge-tables
+  * PR#257 - squash-merged
+  * removed split in Meta cell
+  * reduced spaces between cell separator and text to prevent addition of quoted
+    text bars; it seems that GitHub is doing a reStructuredText to Markdown
+    transformation in the rendering pipeline
+  * updated the Python version badge to pull from `pyproject.toml` file so that
+    there is one less change necessary when the Python version is changed.
+
+
+##### SOG-Bloomcast-Ensemble
+
+* added new weather descriptions to cloud fraction mapping
+
+
+##### Miscellaneous
+
+* UCB - IOS modeling mtg: Susan re: Iona Outfall modeling and alkalinity addition proosed by
+  Planetary Inc.
+
+
+
+#### Fri 12-Apr-2023
+
+Got 1st dose of shingles vaccine.
+
+
+##### SalishSeaCast
+
+* `crop_gribs 12` stalled with 1 file not processed; APCP in hour 007
+
+
+##### Security Updates
+
+Squash-merged dependabot PRs to update idna to v3.7 re: CVE-2024-3651 re: DoS vulnerability:
+
+* cookiecutter-analysis-repo
+* MOAD/docs
+* NEMO-Cmd
+* cookiecutter-MOAD-pypkg
+* AtlantisCmd
+* MoaceanParcels
+* NEMO_Nowcast
+* SalishSeaCmd
+* SalishSeaTools
+* moad_tools
+* SalishSeaNowcast
+* Reshapr
+* SalishSeaCast/docs
+* salishsea-site
+
+
+##### SalishSeaCmd
+
+* fixed badge tables in README and dev docs; broken on GitHub due to changes in rendering pipeline
+  * branch: fix-badge-tables
+  * PR#65 - squash-merged
+  * removed split in Meta cell
+  * reduced spaces between cell separator and text to prevent addition of quoted
+    text bars; it seems that GitHub is doing a reStructuredText to Markdown
+    transformation in the rendering pipeline
+  * updated the Python version badge to pull from `pyproject.toml` file so that
+    there is one less change necessary when the Python version is changed.
+
+
+##### NEMO-Cmd
+
+* fixed badge tables in README and dev docs; broken on GitHub due to changes in rendering pipeline
+  * branch: fix-badge-tables
+  * PR#83 - squash-merged
+  * removed split in Meta cell
+  * reduced spaces between cell separator and text to prevent addition of quoted
+    text bars; it seems that GitHub is doing a reStructuredText to Markdown
+    transformation in the rendering pipeline
+  * updated the Python version badge to pull from `pyproject.toml` file so that
+    there is one less change necessary when the Python version is changed.
+
+
+##### Reshapr
+
+* fixed badge tables in README and dev docs; broken on GitHub due to changes in rendering pipeline
+  * branch: fix-badge-tables
+  * PR#128 - squash-merged
+  * removed split in Meta cell
+  * reduced spaces between cell separator and text to prevent addition of quoted
+    text bars; it seems that GitHub is doing a reStructuredText to Markdown
+    transformation in the rendering pipeline
+  * updated the Python version badge to pull from `pyproject.toml` file so that
+    there is one less change necessary when the Python version is changed.
+
+
+##### moad_tools
+
+* fixed badge tables in README and dev docs; broken on GitHub due to changes in rendering pipeline
+  * branch: fix-badge-tables
+  * PR#60 - squash-merged
+  * removed split in Meta cell
+  * reduced spaces between cell separator and text to prevent addition of quoted
+    text bars; it seems that GitHub is doing a reStructuredText to Markdown
+    transformation in the rendering pipeline
+  * updated the Python version badge to pull from `pyproject.toml` file so that
+    there is one less change necessary when the Python version is changed.
+
+
+
+#### Sat 13-Apr-2023
+
+Recovery from shingles vaccine.
+
+
+##### Resilient-c
+
+* VM went offline late last night; unable to ssh to VM
+* unable to investigate due to day-long dashboard maintenance
+
+
+
+#### Sun 14-Apr-2023
+
+IRL ride to Iona, home via Heather with a stop at Enroute Café.
+
+
+##### SalishSeaCast
+
+* `make_ww3_eind_file forecast2` stalled; killed it and skipped run
+
+
+##### Resilient-c
+
+* email from cloud support that VM backup is failing because VM is poowered down
+* asked them to restart VM; reply was that they couldn't due to problem with the underlying storage
+* asked them to restore VM from recent backup
+
+
 
 
 
@@ -4338,6 +4553,8 @@ TODO:
 * remove VHFR FVCOM from automation workflow
   * remove FVCOM boundary slab files output from nowcast-green/file_def.xml
   * drop FVCOM-Cmd and OPPTools dependencies
+* `sandheads_winds` is using HTTP instead of HTTPS for obs collection via
+  `salishsea_tools.stormtools.get_EC_observations()`; same in `tools.I_ForcingFiles.Atmos.weather.get_EC_observations()`
 
 
 TODO:
