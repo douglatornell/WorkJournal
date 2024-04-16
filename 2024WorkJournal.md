@@ -4291,7 +4291,6 @@ Updated khawla PyCharm to 2024.1.
   # wait for automation run_NEMO_agrif to fail at ~17:00
   make_forcing_links orcinus --run-date 2024-04-02
   make_forcing_links orcinus --run-date 2024-04-03
-
   make_forcing_links orcinus --run-date 2024-04-04
   make_forcing_links orcinus --run-date 2024-04-05
   make_forcing_links orcinus --run-date 2024-04-06
@@ -4596,6 +4595,43 @@ Reactivated workflow that had been disabled due to inactivity:
 * Randell Ong of cloud services restored 11apr backup to a new VM; web app restart was trivial
 
 
+
+#### Tue 15-Apr-2023
+
+Worked at ESB while Rita was at home.
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* coffee with Ilias
+
+
+##### Security Updates
+
+Squash-merged dependabot PRs to update idna to v3.7 re: CVE-2024-3651 re: DoS vulnerability:
+
+* cookiecutter-djl-pypkg
+* erddap-datasets
+* SOG-Bloomcast-Ensemble
+* SOG-Bloomcast
+
+Squash-merged dependabot PRs to update jinja2 to v3.1.3 re: CVE-2024-22195 re: XSS vulnerability:
+
+* salishsea-site
+
+Squash-merged dependabot PRs to update pillow to v10.3.0 re: CVE-2024-28219 re: strcpy buffer
+overflow vulnerability:
+
+* SOG-Bloomcast
+
+
+##### `graham` StdEnv/2023
+
+* continued work on testing StdEnv/2023 on `graham`:
+  * `intel/2023.2.1` compilers
+  * checked XIOS-2 executable from 10apr with `ldd`
+  * built SalishSeaCast NEMO config and REBUILD_NEMO
+  * queued 01mar23-19x26 test run using hacked SalishSeaCmd
 
 
 
