@@ -4529,7 +4529,7 @@ IRL ride to Iona, home via Heather with a stop at Enroute Café.
 
 ##### SalishSeaCast
 
-* `make_ww3_eind_file forecast2` stalled; killed it and skipped run
+* `make_ww3_wind_file forecast2` stalled; killed it and skipped run
 
 
 ##### Resilient-c
@@ -4538,6 +4538,62 @@ IRL ride to Iona, home via Heather with a stop at Enroute Café.
 * asked them to restart VM; reply was that they couldn't due to problem with the underlying storage
 * asked them to restore VM from recent backup
 
+
+
+### Week 16
+
+#### Mon 15-Apr-2023
+
+
+##### SalishSeaCast
+
+* discovered that yesterday's `make_ww3_wind_file forecast2` stall was due to
+  `make_ww3_wind_file nowcast` having stalled:
+  * no 13apr24 wwatch3 runs
+  * 14apr24 nowcast run was a cold start
+  * recovery:
+    * wait for 15apr24 runs to finish
+    * `make_ww3_wind_file forecast 2024-04-13
+    * `make_ww3_current_file forecast 2024-04-13
+    * wait for runs to finish
+    * `make_ww3_wind_file forecast 2024-04-14
+    * `make_ww3_current_file forecast 2024-04-15
+    * wait for runs to finish
+    * `make_ww3_wind_file forecast 2024-04-15
+    * `make_ww3_current_file forecast 2024-04-15
+* `upload_forcing orcinus turbidity` failed with ssh protocol banner error
+  * re-tried manually several times with no luck
+  * traced problem to `seawolf3` login node
+  * emailed Mark
+  * `seawolf3` working at 11:30; re-ran manually to restart automation
+
+
+##### Miscellaneous
+
+Squash-merged dependabot PRs to bump codecov/codecov-action to 4.3.0 re: feature update:
+
+* SalishSeaNowcast
+* gha-workflows
+
+Phys ocgy seminar: Pouneh Hoshyar, U of A: Studying the Labrador Sea for Ocean and Climate Implications
+
+Checked status of scheduled GHA workflows:
+
+  ```bash
+  conda activate gha-workflows
+  python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+  ```
+
+Reactivated workflow that had been disabled due to inactivity:
+
+  ```bash
+  gh workflow enable -R SS-Atlantis/AtlantisCmd sphinx-linkcheck
+  ```
+
+
+##### Resilient-c
+
+* Randell Ong of cloud services restored 11apr backup to a new VM; web app restart was trivial
 
 
 
