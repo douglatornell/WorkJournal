@@ -891,11 +891,11 @@ Email conversation with Rich re: resumption of TWDP data stream:
 * No data in the 11-Oct-2022 to 25-Nov-2023 time period from the following sensors:
   * Turbidity, Chlorophyll, Florescence
   * Thermosalinograph
-  * Pyranometer (solar radiation)
+  * Pyrometer (solar radiation)
   * Oxygen Sensor
   * Carbon Dioxide Sensor
 * There is data from:
-  * Pyrogenometer (longwave radiation)
+  * Pyrogenometer (long-wave radiation)
   * Air Temperature
   * Relative Humidity
   * Barometric Pressure
@@ -1115,7 +1115,7 @@ Days since last wwatch3 prep stall: 4
     make_averaged_dataset salish day physics 2023-09-03
     ```
 
-  * logs go to hindcast*.log
+  * logs go to `hindcast*.log`
   * host arg seems irrelevant because worker can run on skookum and use cluster
     on salish via reshapr cluster config
   * used bash loop to process to 15sep23
@@ -1408,6 +1408,8 @@ Updated PyCharm on kudu to 2023.3.3.
     * unrecognized weather description:
         `Thunderstorms,Heavy Rain,Fog`
     * bloom predictions:
+
+        ```text
         INFO [bloomcast.ensemble] Predicted earliest bloom date is 2024-03-03
         INFO [bloomcast.ensemble] Earliest bloom date is based on forcing from 2004/2005
         INFO [bloomcast.ensemble] Predicted early bound bloom date is 2024-03-07
@@ -1418,6 +1420,8 @@ Updated PyCharm on kudu to 2023.3.3.
         INFO [bloomcast.ensemble] Late bound bloom date is based on forcing from 2006/2007
         INFO [bloomcast.ensemble] Predicted latest bloom date is 2024-04-13
         INFO [bloomcast.ensemble] Latest bloom date is based on forcing from 1998/1999
+        ```
+
   * deleted last year's `bloom_date_evolution.log` and `bloomcast.log`
   * removed `wind_data_date` and re-ran with push to web enabled
   * confirmed web page updated as expected
@@ -1629,7 +1633,7 @@ Days since last wwatch3 prep stall: 4
 
 ##### Miscellaneous
 
-Phys Ocgy seminar: Shouyi Wang of MIT re: Indonesian Throughflow (ITF)
+Phys Ocgy seminar: Shouyi Wang of MIT re: Indonesian Through-flow (ITF)
 
 Squash-merged dependabot PR to bump codecov-action to 4.0.1 re: feature updates:
 
@@ -1731,7 +1735,7 @@ Finished work on updating `data_tools.onc_json_to_dataset()` worker to ONC APIv3
 Squash-merged dependabot PR to update jupyterlab to v4.0.11 re: CVE-2024-22421 re: auth & XSRF token
 exposure vulnerability.
 
-Updated skoookum to main branch.
+Updated skookum to main branch.
 
 
 ##### salishsea-site
@@ -2216,7 +2220,8 @@ Messages from ERDDAP complaining about
 
 ##### Minecraft
 
-Tested running a fabirc server on khawla:
+Tested running a fabric server on khawla:
+
 * refs:
   * https://www.youtube.com/watch?v=sg91I4vg7ew
   * https://hub.tcno.co/games/minecraft/1.20/server/fabric/
@@ -2363,8 +2368,12 @@ Days since last wwatch3 prep stall: 6
 * no 003 hour APCP_Sfc files for 06 or 12 forecasts
   * need that file from 00 and 12 for `grib_to_netcdf nowcast+`
 * `upload_forcing forecast2` failed due to:
-    `FileExistsError: [Errno 17] File exists: '/results/forcing/sshNeahBay/obs/ssh_y2024m02d23.nc'`
-    ` -> '/results/forcing/sshNeahBay/fcst/ssh_y2024m02d23.nc'`
+
+    ```text
+    FileExistsError: [Errno 17] File exists: '/results/forcing/sshNeahBay/obs/ssh_y2024m02d23.nc'
+     -> '/results/forcing/sshNeahBay/fcst/ssh_y2024m02d23.nc'
+    ```
+
   because nothing from `after_collect_weather 06` ran 😱
   * recovery started at ~09:15:
 
@@ -2392,6 +2401,7 @@ Days since last wwatch3 prep stall: 6
       * manually moved those files
     * continued recovery:
 
+      <!-- markdownlint-disable MD013 -->
       ```bash
       collect_weather 18 2.5km
       crop_gribs 18
@@ -2409,6 +2419,7 @@ Days since last wwatch3 prep stall: 6
       collect_NeahBay_ssh 06
       download_live_ocean
       ```
+      <!-- markdownlint-enable MD013 -->
 
     * nowcast-blue run started on arbutus at ~11:00
 * `make_averaged_dataset` worked correctly in automation for all 3 variable groups today
@@ -2438,6 +2449,7 @@ Days since last wwatch3 prep stall: 0
   * recovery started at ~09:15:
     * hacked `collect_weather` to ignore FileNotFoundError
 
+    <!-- markdownlint-disable MD013 -->
     ```bash
     # kill collect_weather 00 2.5km
     crop_gribs 06
@@ -2460,6 +2472,7 @@ Days since last wwatch3 prep stall: 0
       /results/forcing/atmospheric/continental2.5/GRIB/20240225/12/003/20240225T12Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT003H_SSC.grib2
     grib_to_netcdf
     ```
+    <!-- markdownlint-enable MD013 -->
 
     * nowcast-blue run started on arbutus at ~10:50
 * `make_averaged_dataset` worked correctly in automation for all 3 variable groups today
@@ -2492,6 +2505,7 @@ Days since last wwatch3 prep stall: 1
 * no 003 hour APCP_Sfc files for 00, 06, or 12 forecasts
   * recovery started at ~08:55:
 
+    <!-- markdownlint-disable MD013 -->
     ```bash
     # kill collect_weather 00 2.5km
     crop_gribs 00
@@ -2526,6 +2540,7 @@ Days since last wwatch3 prep stall: 1
       /results/forcing/atmospheric/continental2.5/GRIB/20240226/12/003/20240226T12Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT003H_SSC.grib2
     grib_to_netcdf
     ```
+    <!-- markdownlint-enable MD013 -->
 
     * nowcast-blue run started on arbutus at ~11:19
 * email from Sandrine at 12:34 saying that issue should be resolved in 18Z forecast thanks to
@@ -2558,10 +2573,10 @@ Checked status of scheduled GHA workflows:
   python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
   ```
 
-Phys Ocgy seminar: Patrick Pata; zoops in NE Pacific:
+Phys Ocgy seminar: Patrick Pata; zooplankton in NE Pacific:
 
 * all cluster analysis, all the time
-* brooding zoops
+* brooding zooplankton
 
 
 ##### SalishSeaNowcast
@@ -2595,7 +2610,8 @@ Worked at ESB until snow started to fall in early afternoon.
   * new version of OpenMPI
 * EOAS colloquium: Martyn Unsworth, Magnetotellurics: Using natural radio waves to look inside the Earth
 * helped Becca get ssh-agent running on her new Windows laptop
-* couldn't reproduce Susan's permissions problem (reported on Slack) accessing in Cassidy's files on /ocean
+* couldn't reproduce Susan's permissions problem (reported on Slack) accessing in Cassidy's files
+  on /ocean
 * dug into Susan's optimum nemo build messages (reported on Slack) about libm, libpthread, and libc
 
 
@@ -2608,14 +2624,14 @@ Days since last wwatch3 prep stall: 2
 ##### SalishSeaCast
 
 * https://github.com/xCDAT/xcdat/issues/561 that I followed because it
-  is about `RuntimeError: NetCDF: Not a valid ID`, `xarray.open_datase()` and `dask` was updated
+  is about `RuntimeError: NetCDF: Not a valid ID`, `xarray.open_dataset()` and `dask` was updated
   this morning with the comments:
 
-    To summarise in this thread, it looks like a work-around in netcdf4-python to deal with netcdf-c
+    To summarize in this thread, it looks like a work-around in netcdf4-python to deal with netcdf-c
     not being thread safe was removed in 1.6.1. The solution (for now) is to
     [make sure your cluster only uses 1 thread per worker](https://forum.access-hive.org.au/t/netcdf-not-a-valid-id-errors/389/14).
 
-    It seems like some filesystems do not like parallel access to files. The workaround seems to be
+    It seems like some file systems do not like parallel access to files. The workaround seems to be
     to set parallel=False
 * `make_averaged_dataset` failed in automation for biology:
 
@@ -2744,7 +2760,7 @@ Finally finished updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv3
 
 ## March
 
-#### Fri 1-Mar-2023
+#### Fri 1-Mar-2023  <!-- markdownlint-disable-line MD001 -->
 
 Days since last wwatch3 prep stall: 1
 
@@ -2872,7 +2888,7 @@ Mtg w/ Henryk re: `salish` OS upgrade:
 
 * he is worried about how there only being 2.3G free on `/`, but in the course of
   discussion he realized that be can clean up `/boot/` and get back another 0.4G;
-  he will also change the packages download location to avoid that comsuming space
+  he will also change the packages download location to avoid that consuming space
   on `/`
 * he is also worried by the idiosyncratic, bios-based RAID setup of `/`
 * he wants us to plan for downtime of a week or more in case things go badly and
@@ -2940,6 +2956,7 @@ Mtg w/ Henryk re: `salish` OS upgrade:
 
 Installed 32G of RAM in lizzy so that it can run a fabric server for us.
 Set up server:
+
 * refs:
   * https://www.youtube.com/watch?v=sg91I4vg7ew
   * https://hub.tcno.co/games/minecraft/1.20/server/fabric/
@@ -2962,11 +2979,15 @@ Set up server:
 * edited eula.txt to accept
 * stopped Nodecraft server and created `Phrenic Mandraflora` backup
 * downloaded and unzipped backup:
-  * mkdir backups/
-  * curl -L \
-      https://backups-b2.nodecraft.gg/file/nodecraft/7da67f08-a869-4ac8-9844-556df29e7e1e/t6NWX6Qal3Q13B_B1AUFF0MLHG4qN411_ChJNRTCmDZpLr0I57KKLL87AGwIxITH.zip?name=Phrenic%20Mandraflora \
-      --output PhrenicMandraflora-Nodecraft-6mar24.zip
-  * unzip PhrenicMandraflora-Nodecraft-6mar24.zip
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  mkdir backups/
+  curl -L \
+    https://backups-b2.nodecraft.gg/file/nodecraft/7da67f08-a869-4ac8-9844-556df29e7e1e/t6NWX6Qal3Q13B_B1AUFF0MLHG4qN411_ChJNRTCmDZpLr0I57KKLL87AGwIxITH.zip?name=Phrenic%20Mandraflora \
+    --output PhrenicMandraflora-Nodecraft-6mar24.zip
+  unzip PhrenicMandraflora-Nodecraft-6mar24.zip
+  ```
+  <!-- markdownlint-enable MD013 -->
 * moved `1-20-1-25jul23/` world tree up to `MinecraftFabric1.20.4Server/`
 * copied `ops.json` up to `MinecraftFabric1.20.4Server/`
 * used VSCode remote session to edit `MinecraftFabric1.20.4Server/server.properties` to sync it with
@@ -3009,7 +3030,7 @@ Days since last wwatch3 prep stall: 0
   * successfully tested `upload_forcing robot.graham turbidity`
 
 
-#### SoPO
+##### SoPO
 
 * Day 1
 
@@ -3031,7 +3052,7 @@ Days since last wwatch3 prep stall: 1
     * ~4G per day across 4 forecasts
 
 
-#### SoPO
+##### SoPO
 
 * Day 2
 
@@ -3200,7 +3221,7 @@ Days since last wwatch3 prep stall: 5
 
 ##### SalishSeaCast
 
-* got serious about recoverying space on `/results/` by deleting pre-cropped continental HRDPS GRIB
+* got serious about recovering space on `/results/` by deleting pre-cropped continental HRDPS GRIB
   files:
   * deleted apr-dec 2023 files, at least ~135G/month with `find` commands like:
 
@@ -3322,7 +3343,7 @@ Worked on NEMO build using SalishSeaCast config:
 
 ##### Miscellaneous
 
-Phys Ocgy Seminar: Leonardo Alvarado, Satellites & Phydoplankton; Atmospheric Trace Gas Measurement
+Phys Ocgy Seminar: Leonardo Alvarado, Satellites & Phytoplankton; Atmospheric Trace Gas Measurement
 
 Tried to help Ilias with odd xarray behaviour as he combines diatom arrays and cluster indices.
 
@@ -3580,7 +3601,7 @@ Finished adding V23-02 HRDPS continental grid fields datasets:
 Investigated daily error from ubcSSg3DVariableVolumeLayers1hV21-11:
 
 * daily error was about 12feb24
-* after I triggered a dataset reload with a flag touch there were errors for more datas
+* after I triggered a dataset reload with a flag touch there were errors for more datasets
 * web site graph page fails for all operations I tried
 * reviewed dataset XML:
   * it is missing a depth coordinate 😱
@@ -3660,11 +3681,11 @@ Parallel Python mini-course:
 
 * `tqdm` for progress bar; can be used to estimate completion time:
   * wrap outer loop range in `tqdm()`
-  * `for i in tqdm(reange(nlat)):`
+  * `for i in tqdm(range(nlat)):`
 
-* `numpy.vecotrize()`
+* `numpy.vectorize()`
   * ~2x slower than initial implementation: 32.996 seconds
-  * ternary conditional implemenation is slightly faster: 28.157 seconds
+  * ternary conditional implementation is slightly faster: 28.157 seconds
 
 * threads vs. processes:
   * process is smallest _independent_ unit of processing
@@ -3712,7 +3733,7 @@ had to use filter-repo to remove a too-large file from history.
 
 #### Fri 29-Mar-2023
 
-**Statuatory Holiday** - Good Friday
+**Statutory Holiday** - Good Friday
 
 Days since last wwatch3 prep stall: 20
 
@@ -4059,7 +4080,7 @@ Parallel Python mini-course:
   * avoids the GIL because each process has separate interpreter, so separate GIL
   * stdlib `multiprocessing` has limitations due to serialization algorithm
   * `multiprocess` fork solves those issues with different serialization algorithm
-    * limiitation pool.map() returns a list so memory can be limiting; solve by breaking into
+    * limitation: pool.map() returns a list so memory can be limiting; solve by breaking into
       parts; e.g. partial sums for slow harmonic series case
 
 * other compilers for Python:
@@ -4069,7 +4090,7 @@ Parallel Python mini-course:
 
 * Numba JIT compiler
   * on top of LLVM
-  * often requires re-implemenation to handle code that Numba can't compile
+  * often requires re-implementation to handle code that Numba can't compile
     * mathematical exclusion of 9 strings in the case of slow harmonic series
     * slow series sped up by 10x
   * some additional speed up with `jit(parallel=True)` and `numba.prange()` instead of `range()`
@@ -4093,7 +4114,7 @@ Parallel Python mini-course:
       * almost as fast as compiled code
   * `ray.data` objects are distributed data collections based on Python dicts
 
-Helped Cassidy in Slack with using dask to multiply full domaion day-averaged tracer fields by
+Helped Cassidy in Slack with using dask to multiply full domain day-averaged tracer fields by
 `e3t_1d`.
 
 
@@ -4160,10 +4181,6 @@ Days since last wwatch3 prep stall: 0
 ##### SalishSeaCast
 
 * `make_ww3_current_file forecast2` stalled; killed it and skipped run
-
-
-##### SalishSeaCast
-
 * continued backfilling nowcast-agrif:
 
   ```bash
@@ -4314,7 +4331,7 @@ Updated khawla PyCharm to 2024.1.
 ##### salishsea-site
 
 * readthedocs build maintenance:
-  * breanch: rtd-build-maint
+  * branch: rtd-build-maint
   * PR#74 - squash-merged
 
 
@@ -4421,7 +4438,7 @@ Updated khawla PyCharm to 2024.1.
 
 ##### Miscellaneous
 
-* UCB - IOS modeling mtg: Susan re: Iona Outfall modeling and alkalinity addition proosed by
+* UCB - IOS modeling mtg: Susan re: Iona Outfall modeling and alkalinity addition proposed by
   Planetary Inc.
 
 
@@ -4533,7 +4550,7 @@ IRL ride to Iona, home via Heather with a stop at Enroute Café.
 
 ##### Resilient-c
 
-* email from cloud support that VM backup is failing because VM is poowered down
+* email from cloud support that VM backup is failing because VM is powered down
 * asked them to restart VM; reply was that they couldn't due to problem with the underlying storage
 * asked them to restore VM from recent backup
 
@@ -4604,6 +4621,9 @@ Worked at ESB while Rita was at home.
 
 * MOAD group mtg; see whiteboard
 * coffee with Ilias
+* in the course of reviewing the Sphinx 7.3 release, I learned about `pip-tools`, particularly
+  `pip-compile` that appears to produce `requirements.txt` files annotated with the packages from
+  which each dependency arises
 
 
 ##### Security Updates
@@ -4632,6 +4652,42 @@ overflow vulnerability:
   * checked XIOS-2 executable from 10apr with `ldd`
   * built SalishSeaCast NEMO config and REBUILD_NEMO
   * queued 01mar23-19x26 test run using hacked SalishSeaCmd
+
+
+
+#### Wed 16-Apr-2023
+
+##### Miscellaneous
+
+* Pangeo weekly mtg; re: https://github.com/pydata/xarray/discussions/8925
+  * working with large number of file system (not cloud) files (10k, 100k)
+  * gpm-api package: https://gpm-api.readthedocs.io/en/latest/
+  * Pycolorbar( https://github.com/ghiggi/pycolorbar/tree/main)
+    * to define colormap and colorbar configurations for matplotlib, xarray etc in YAML files
+  * I asked, can kerchunk be used incrementally:
+    * yes, provided that compression is consistent
+    * https://projectpythia.org/kerchunk-cookbook/notebooks/advanced/appending.html
+    * VirtualZarr might be the evolution of Kerchunk
+
+
+
+##### SalishSeaCast
+
+* `nowcast-green` failed
+  * MPI comm failure between `nowcast2` and `nowcast3`
+  * login to `arbutus` head node was very slow to give bash prompt
+  * all arbutus compute nodes respond and show mounted shared storage
+  * `ocean.output` shows HDF5 errors reading `restart_trc.nc`
+  * recovery started at ~10:45
+    * moved failed `17apr24/` directories aside on `arbutus` and `skookum`
+    * retried run with `make_forcing_links arbutus nowcast-green`
+    * retry run is time stepping
+* `make_ww3_current_file forecast` stalled; killed it and re-ran at ~12:40
+
+
+
+
+
 
 
 
