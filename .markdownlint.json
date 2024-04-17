@@ -1,5 +1,6 @@
 {
     "MD012": false,
     "MD013": { "line_length": 100 },
-    "MD024": { "siblings_only": true }
+    "MD024": { "siblings_only": true },
+    "no-bare-urls": false
 }
