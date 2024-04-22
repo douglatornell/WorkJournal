@@ -4613,7 +4613,7 @@ Reactivated workflow that had been disabled due to inactivity:
 
 
 
-#### Tue 15-Apr-2023
+#### Tue 16-Apr-2023
 
 Worked at ESB while Rita was at home.
 
@@ -4655,7 +4655,7 @@ overflow vulnerability:
 
 
 
-#### Wed 16-Apr-2023
+#### Wed 17-Apr-2023
 
 ##### Miscellaneous
 
@@ -4667,8 +4667,17 @@ overflow vulnerability:
   * I asked, can kerchunk be used incrementally:
     * yes, provided that compression is consistent
     * https://projectpythia.org/kerchunk-cookbook/notebooks/advanced/appending.html
-    * VirtualZarr might be the evolution of Kerchunk
-
+    * VirtualiZarr might be the evolution of Kerchunk
+* played with `pip-compile` in NEMO-Cmd project:
+  * copied dependencies from `environment-dev.yaml` to `requirements.in` because there is no support
+    for conda env description YAML files
+  * had to change `=` to `==` for version pins
+  * had to `python` from list
+  * `pip-compile --allow-unsafe --strip-extras -o envs/requirements.txt envs/requirements.in`
+    produced a nicely annotated `requirements.txt` file
+    * the versions are the latest from PyPI, not those in the env 🙁
+  * decided that `pip-compile` is only useful to me for mapping dependency graph, not for routine
+    generation of `requirements.txt` files that I use to record dev env, not build the virtualenv
 
 
 ##### SalishSeaCast
@@ -4686,7 +4695,113 @@ overflow vulnerability:
 
 
 
+#### Thu 18-Apr-2023
 
+
+##### SalishSeaCast
+
+* `make_ww3_wind_file forecast2` stalled; killed it and skipped run
+* couldn't attach to `make_averaged_dataset` tmux session on `salish`
+  * killed it and set up the cluster in a new session
+  * used `--local-directory /tmp/SalishSeaCast` to avoid lock collisions with other users' dask
+    clusters (e.g. Cassidy)
+
+
+##### Miscellaneous
+
+* researched VirtualiZarr: https://github.com/TomNicholas/VirtualiZarr
+  and its motivation discussion: https://github.com/fsspec/kerchunk/issues/377
+  * probably too early days for me to experiment with compared to Kerchunk
+* Slack w/ Karyn to help her build a new, Python 3.12 analysis env
+  * `mocsy` hasn't been built for Python 3.12 on conda-forge because it has imports from
+    `numpy.distutils`
+
+
+##### salishsea-site
+
+* Enabled PR build on readthedocs
+* Created v24.1 milestone
+  * moved open and closed issues from v23.1 milestone to v24.1
+  * closed v23.1 milestone, marked as never released
+
+* Resumed work on update to Python 3.12:
+  * abandoned py312 branch because it is ~6mo stale
+  * branch: py312-redux
+  * PR# -
+  * cherry-picked commits from py32 branch
+
+
+
+#### Fri 19-Apr-2023
+
+
+##### SalishSeaCast
+
+* `make_ww3_wind_file forecast2` stalled; killed it and re-ran
+
+
+##### salishsea-site
+
+* Finished update to Python 3.12:
+  * abandoned py312 branch because it is ~6mo stale
+  * branch: py312-redux
+  * PR#77 -
+  * build Python 3.12 env on kudu and confirmed
+    * test suite passed, but with deprecation warnings (all from withing pyramid stack, I think):
+      * `webob`: `cgi` will be removed in Python 3.13
+      * `pyramid`: `pkg_resources` is deprecated as an API
+      * `pyramid`: `pkg_resources.declare_namespace` is deprecated; use implicit namespace packages
+        (PEP 420)
+      * `pkg_resources` deprecations are WIP: https://github.com/Pylons/pyramid/issues/3731
+    * sphinx docs build succeeded
+    * sphinx linkcheck succeeded
+    * site works in dev mode
+  * closed PR#54, marked as stale
+  * change envs to 3.12
+  * updated pkgs & versions; 3.12 updated
+  * dropped TROVE classifiers
+  * changed sphinx-linkcheck workflow to 3.12
+  * changed index docs, badges, README to 3.12
+  * dropped support for 3.10 & 3.11:
+    * pytest-with-coverage, setup.cfg, index docs, badges, README
+
+
+##### Miscellaneous
+
+* helped Tall with git SHA not found error from `salishsea run`
+  * I suspect that the root cause is that he is working from clones stored on `/scratch/`;
+    the 90-day purge policy appears to have deleted files in SS-run-sets and that is messing up
+    vcs recoding
+* Slack conversations with Becca and Elise resulted in killing processes that were inadvertently
+  using >92% of swap on `salish`
+
+
+
+#### Sat 20-Apr-2023
+
+
+##### SalishSeaCast
+
+* LiveOcean ran early due to UW HPC cluster maintenance; winds degraded
+
+
+
+#### Sun 21-Apr-2023
+
+
+##### SalishSeaCast
+
+* `make_ww3_wind_file forecast2` stalled; killed it and re-ran
+* no LiveOcean run due to cluster maintenance:
+
+  ```bash
+  # wait for download_live_ocean to start
+  kill download_live_ocean
+  ln -s /results/forcing/LiveOcean/downloaded/20240420 \
+    /results/forcing/LiveOcean/downloaded/20240421
+  make_live_ocean_files
+  # keep persisted 20apr symlink because it's all we'll ever get
+  ```
 
 
 
