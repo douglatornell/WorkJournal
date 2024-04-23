@@ -4813,6 +4813,8 @@ overflow vulnerability:
 ##### SalishSeaCast
 
 * LiveOcean ran late due to cluster maintenance:
+  * `download_live_ocean` launched by automation timed out; re-ran manually
+    and it completed at ~12:35
 
 
 ##### salishsea-site
@@ -4837,9 +4839,22 @@ overflow vulnerability:
   * add pre-commit dependency
   * add .pre-commit-config.yaml
   * update Code Style docs re: pre-commit
-  * run ``pre-commit run --all`` to garden code & docs
+  * run `pre-commit run --all` to garden code & docs
+  
 Released v24.1 and bumped dev to v24.2.dev0.
 
+
+
+#### Tue 23-Apr-2023
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* met w/ Vicente to try to resolve his GitHub permission issue from remote
+  VSCode sessions on `chum`
+  * the problem seems to be with remote VSCode not connecting properly to
+    `ssh-agent` on `chum`, but I couldn't solve it
+  * remote VSCode sessions on `salish` are so slow as to be unusable
 
 
 
