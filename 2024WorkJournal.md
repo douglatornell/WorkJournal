@@ -4745,7 +4745,7 @@ overflow vulnerability:
 * Finished update to Python 3.12:
   * abandoned py312 branch because it is ~6mo stale
   * branch: py312-redux
-  * PR#77 -
+  * PR#77 - squash-merged
   * build Python 3.12 env on kudu and confirmed
     * test suite passed, but with deprecation warnings (all from withing pyramid stack, I think):
       * `webob`: `cgi` will be removed in Python 3.13
@@ -4805,6 +4805,44 @@ overflow vulnerability:
 
 
 
+### Week 17
+
+#### Mon 22-Apr-2023
+
+
+##### SalishSeaCast
+
+* LiveOcean ran late due to cluster maintenance:
+
+
+##### salishsea-site
+
+* Modernized packaging:
+  * branch: modernize-pkg
+  * PR#78 -
+  * move package metadata and entry points from setup.cfg to pyproject.toml
+  * drop setup.py and setup.cfg
+  * change from setuptools to hatchling for build backend
+  * move version identifier to ``__about__.py``
+  * change to use ``importlib.metadata.version()``
+  * install pkg in readthedocs env so that Sphinx can access its metadata
+  * add release process section to dev docs
+  * changed badges layout in README & dev docs to table
+  * updated pkgs & versions in recent dev env
+* built new Python 3.12 salishsea-site-env on `skookum`
+
+* Added pre-commit:
+  * branch: add-pre-commit
+  * PR#
+  * add pre-commit dependency
+  * add .pre-commit-config.yaml
+  * update Code Style docs re: pre-commit
+  * run ``pre-commit run --all`` to garden code & docs
+Released v24.1 and bumped dev to v24.2.dev0.
+
+
+
+
 
 Add Tereza's pubs to ERDDAP.
 
@@ -4831,7 +4869,7 @@ TODO:
   * successful workflow test with 3.12:
     * AtlantisCmd
     * NEMO_Nowcast
-    * salishsea-site
+    * salishsea-site - migrated on 19Apr24 in PR#77
     * moad_tools - migrated on 18Dec23 in PR#43
     * SalishSeaCmd - migrated on 29nov23  PR#49
     * NEMO-Cmd - migrated on 20nov23 in PR#68
@@ -4897,8 +4935,8 @@ TODO:
 * modernize packaging:
   * Reshapr - done 30oct23 in PR#101
   * moad_tools - done 18dec23 in PR#48
+  * salishsea-site - done 22apr24 in PR#78
   * cookiecutter-MOAD-pypkg
-  * salishsea-site
   * NEMO_Nowcast
   * ECget
   * MoaceanParcels
