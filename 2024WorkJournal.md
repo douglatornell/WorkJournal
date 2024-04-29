@@ -4652,6 +4652,7 @@ overflow vulnerability:
   * checked XIOS-2 executable from 10apr with `ldd`
   * built SalishSeaCast NEMO config and REBUILD_NEMO
   * queued 01mar23-19x26 test run using hacked SalishSeaCmd
+    * failed with ExitCode 139
 
 
 
@@ -4821,7 +4822,7 @@ overflow vulnerability:
 
 * Modernized packaging:
   * branch: modernize-pkg
-  * PR#78 -
+  * PR#78 - squash-merged
   * move package metadata and entry points from setup.cfg to pyproject.toml
   * drop setup.py and setup.cfg
   * change from setuptools to hatchling for build backend
@@ -4832,16 +4833,6 @@ overflow vulnerability:
   * changed badges layout in README & dev docs to table
   * updated pkgs & versions in recent dev env
 * built new Python 3.12 salishsea-site-env on `skookum`
-
-* Added pre-commit:
-  * branch: add-pre-commit
-  * PR#
-  * add pre-commit dependency
-  * add .pre-commit-config.yaml
-  * update Code Style docs re: pre-commit
-  * run `pre-commit run --all` to garden code & docs
-  
-Released v24.1 and bumped dev to v24.2.dev0.
 
 
 
@@ -4855,6 +4846,140 @@ Released v24.1 and bumped dev to v24.2.dev0.
   * the problem seems to be with remote VSCode not connecting properly to
     `ssh-agent` on `chum`, but I couldn't solve it
   * remote VSCode sessions on `salish` are so slow as to be unusable
+
+
+
+#### Wed 24-Apr-2023
+
+
+##### salishsea-site
+
+* Added pre-commit:
+  * branch: add-pre-commit
+  * PR#79 - squash-merged
+  * add pre-commit dependency
+  * add .pre-commit-config.yaml
+  * update Code Style docs re: pre-commit
+  * run `pre-commit run --all` to garden code & docs
+Released v24.1 and bumped dev to v24.2.dev0.
+
+
+##### `graham` StdEnv/2023
+
+* continued work on testing StdEnv/2023 on `graham`:
+  * built XIOS-2 with `--debug` flag which uses:
+    * %DEBUG_CFLAGS   -DBZ_DEBUG -g -traceback -fno-inline
+    * %DEBUG_FFLAGS   -g -traceback
+  * built SalishSeaCast NEMO and REBUILD_NEMO with those flags subbed into `%CFLAGS` and `%FCFLAGS`
+    * failed with undefined symbols in `trd_mxl_trc` module
+    * after consultation with Susan, tried unsuccessfully to isolate `trd_mxl_trc` calls that we
+      shouldn't need with `#ifdef`
+    * odd and worrying that undefined symbols appear at `O0` level but not at `O3`
+
+
+
+#### Thu 25-Apr-2023
+
+
+##### `graham` StdEnv/2023
+
+* continued work on testing StdEnv/2023 on `graham`:
+  * built SalishSeaCast NEMO and REBUILD_NEMO with `-g -traceback -O3` in `%FCFLAGS`
+    * successful
+  * ran `01mar23-4x9` test
+    * got 414 time steps on gra667 before time-out at requested 1h walltime!
+  * built SalishSeaCast NEMO and REBUILD_NEMO with `-g -traceback` removed from in `%FCFLAGS`
+    * successful
+  * ran `01mar23-4x9` test
+    * got 370 time steps on gra58 before time-out at requested 1h walltime
+  * built XIOS-2 without `--debug` flag
+    * successful
+
+
+
+#### Fri 26-Apr-2023
+
+
+##### `graham` StdEnv/2023
+
+* continued work on testing StdEnv/2023 on `graham`:
+  * built SalishSeaCast NEMO and REBUILD_NEMO without debug options and linked to no-debug XIOS-2
+    * successful
+  * ran `01mar23-4x9` test
+    * timed out on gra449 with no time steps
+  * built XIOS-2 without `--debug` flag
+    * successful
+  * built SalishSeaCast NEMO and REBUILD_NEMO with `-g -traceback -O3` in `%FCFLAGS`
+    * successful
+  * ran `01mar23-4x9` test
+    * got 416 time steps on gra156 before time-out at requested 1h walltime
+  * added a StdEnv/2023-Apr24 sheet to Google docs `graham-SalishSeaCast-v202111-scaling` spreadsheet
+    * 01mar23-4x9-debug-3h
+      * 1275 time steps vs. 1545 in apr23
+    * 01mar23-6x14
+      * 2:25:00 vs. 1:57:16 in apr23
+    * 01mar23-8x18
+      * 1:26:00 vs. 1:08:30 in apr23
+
+
+##### Miscellaneous
+
+* read Kerchunk Cookbook (https://projectpythia.org/kerchunk-cookbook/README.html)
+* started experimenting in `analysis-doug/notebooks/kerchunk-expts/`
+
+
+
+#### Sat 27-Apr-2023
+
+
+##### `graham` StdEnv/2023
+
+* continued work on testing StdEnv/2023 on `graham`:
+  * continued filling `StdEnv/2023-Apr24` sheet in Google docs `graham-SalishSeaCast-v202111-scaling`
+    spreadsheet
+    * 01mar23-9x22
+      * 1:02:23 vs. 0:46:35 in apr23
+    * 01mar23-10x27
+      * 0:56:09 vs. 0:34:45 in apr23
+    * 01mar23-11x32
+      * 0:52:44 vs. 0:22:24 in apr23
+
+
+##### Miscellaneous
+
+* more experimenting in `analysis-doug/notebooks/kerchunk-expts/`
+
+
+##### SalishSeaCast
+
+* `make_ww3_current_file forecast2` stalled; killed it and skipped run
+
+
+
+#### Sun 28-Apr-2023
+
+
+##### `graham` StdEnv/2023
+
+* continued work on testing StdEnv/2023 on `graham`:
+  * built SalishSeaCast NEMO and REBUILD_NEMO without debug options and linked to no-debug(?) XIOS-2
+    * successful
+  * continued filling `StdEnv/2023-Apr24` sheet in Google docs `graham-SalishSeaCast-v202111-scaling`
+    spreadsheet
+    * 01mar23-12x28
+      * 0:55:06 vs. 0:23:58 in apr23
+    * 01mar23-13x31
+      * 0: vs. 0:19:51 in apr23
+
+
+##### Miscellaneous
+
+* more experimenting in `analysis-doug/notebooks/kerchunk-expts/`
+  * figured out Parquet storage of combined Kerchunk references
+
+
+
+
 
 
 
@@ -4901,11 +5026,7 @@ TODO:
 
 
 
-
-
 Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present to group.
-
-
 
 
 
