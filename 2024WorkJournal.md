@@ -4969,7 +4969,7 @@ Released v24.1 and bumped dev to v24.2.dev0.
     * 01mar23-12x28
       * 0:55:06 vs. 0:23:58 in apr23
     * 01mar23-13x31
-      * 0: vs. 0:19:51 in apr23
+      * failed with ExitCode 139; segfault
 
 
 ##### Miscellaneous
@@ -4979,6 +4979,238 @@ Released v24.1 and bumped dev to v24.2.dev0.
 
 
 
+### Week 18
+
+#### Mon 29-Apr-2023
+
+
+##### SalishSeaCast
+
+* yesterday's `make_ww3_wind_file forecast` stalled; killed it and re-ran
+  * messy
+
+
+##### Miscellaneous
+
+* continued discussion with Andrey at PyCharm re: conda env not auto-activating in khawla terminal
+  * learned that mambaforge and miniforge merged in Sep-2023
+* more experimenting in `analysis-doug/notebooks/kerchunk-expts/`
+  * figured out create Parquet storage of combined Kerchunk references from per-netCDF reference
+    stored as JSON
+
+
+##### `graham` StdEnv/2023
+
+* reverted to StdEnv/2020 builds to benchmark against Apr-2023 scaling runs
+  * XIOS-ARCH:
+    * git stash  # re: intel compilers
+    * git switch main
+  * XIOS-2:
+    * git stash  # re: `<limits>` and `<array>` includes
+    * git switch main
+    * clean & build
+  * NEMO-3.6-code:
+    * git stash  # re: intel compilers
+    * git switch main
+    * load netcdf-fortran-mpi/4.6.0 & perl/5.30.2
+    * clean & build SalishSeaCast NEMO & REBUILD_NEMO
+  * SalishSeaCmd:
+    * git stash  # re: module loads
+    * git switch main
+  * 01mar23-6x14
+    * time stepping, then timed out, and run dir is in accessible; /scratch hosed?
+
+
+
+#### Tue 30-Apr-2023
+
+
+##### `graham` StdEnv/2023
+
+* re-tried StdEnv/2020 build run to benchmark against Apr-2023 scaling runs
+  * 01mar23-6x14
+    * success; 2:00:34 vs. 1:57:16 in Apr-2023
+    * so, graham compute & storage performance is comparable now to Apr-2023
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* Slack w/ Becca re: forking Parker's `lo` repo so that she can keep up to date with his changes
+  and track her own
+  * I had already forked `lo` as `LiveOcean` in our UBC-MOAD org, so she is using that
+  * also discussed forking our MOAD ariane repo
+    * I would need to enable private repo forking, then disable forking per-repo on other repos
+    * why does she need a fork? why are her changes not shareable with other MOAD users?
+* took `khawla` to ESB to compare PyCharm w/ `kudu` re: auto-activation of conda envs in terminal sessions
+  * found `JEDISOURCE_*` variables in `kudu` log that aren't in `khawla` log
+
+
+
+## May
+
+#### Wed 1-May-2023
+
+
+##### SalishSeaNowcast
+
+* fixed broken salishsea-site docs links found by monthly scheduled run of sphinx-linkcheck workflow
+  re: change single version setting in readthedocs project configuration
+
+
+##### `graham` StdEnv/2023
+
+* continued work on testing StdEnv/2023 on `graham`:
+  * return to StdEnv/2023 builds:
+  * XIOS-ARCH:
+    * git switch graham-stdenv2023
+    * git stash pop  # re: intel compilers
+  * XIOS-2:
+    * git switch graham-stdenv2023
+    * git stash pop  # re: `<limits>` and `<array>` includes
+    * clean & build with --prod flag
+  * NEMO-3.6-code:
+    * git switch graham-stdenv2023
+    * git stash pop  # re: intel compilers
+    * load StdENV/2023, intel/2023.2.1, netcdf-fortran-mpi/4.6.1 & perl/5.36.1
+    * clean & build SalishSeaCast NEMO & REBUILD_NEMO without `-g -traceback` flags
+  * SalishSeaCmd:
+    * git switch graham-stdenv2023
+    * git stash  # re: module loads
+  * 01mar23-6x14-2023
+    * failed after 50 seconds with ExitCode 134
+    * segfault with 2 core dumps
+
+
+##### Miscellaneous
+
+* reported `JEDISOURCE_*` variables finding to Andrey at PyCharm
+
+
+##### 2x resolution SalishSeaCast
+
+* see Susan's notes in #sockeye channel
+* see my notebooks in `analysis-doug/2xrez-202111/`
+  * started looking at coordinates
+    * goals:
+      * look at the coordinates file that Susan created for the 2022 experiment
+      * check the coordinates in the lower Fraser River are re: Michael's grid refinements there
+      * investigate adding coordinate rows at the south edge of the domain to fully include the south
+        coastline of Puget Sound and add a sufficient land buffer for OceanParcels to work correctly
+        in that are re: Jose's findings about particle losses at water boundaries
+
+
+
+#### Thu 2-May-2023
+
+
+##### `graham` StdEnv/2023
+
+* continued work on testing StdEnv/2023 on `graham`:
+  * NEMO-3.6-code:
+    * load StdENV/2023, intel/2023.2.1, netcdf-fortran-mpi/4.6.1 & perl/5.36.1
+    * clean & build SalishSeaCast NEMO & REBUILD_NEMO with:
+      * `-g -traceback -O3` flags
+      * XIOS-2 `--prod` build
+  * 01mar23-6x14-g-O3
+    * failed after 46 seconds with ExitCode 134
+    * segfault with 2 core dumps
+  * XIOS-2:
+    * clean & build with `--debug` flag
+  * NEMO-3.6-code:
+    * load StdENV/2023, intel/2023.2.1, netcdf-fortran-mpi/4.6.1 & perl/5.36.1
+    * clean & build SalishSeaCast NEMO & REBUILD_NEMO with:
+      * no `-g -traceback -O3` flags
+      * XIOS-2 `--debug` build
+  * 01mar23-6x14-xios-debug
+    * time stepping; estimate ~2.5 hr
+    * success; 2:23:06 vs. StdEnv/2020 1:57:16 in Apr-2023 and 2:00:34 on 30apr24
+  * XIOS-2:
+    * clean & build with `--dev` flag
+      * `-g -traceback` for C; `-g -O2 -traceback` for fortran
+  * NEMO-3.6-code:
+    * load StdENV/2023, intel/2023.2.1, netcdf-fortran-mpi/4.6.1 & perl/5.36.1
+    * clean & build SalishSeaCast NEMO & REBUILD_NEMO with:
+      * no `-g -traceback -O3` flags
+      * XIOS-2 `--dev` build
+  * 01mar23-6x14-xios-dev
+    * time stepping; estimate ~2 hr
+    * success; 2:05:27 vs. StdEnv/2020 1:57:16 in Apr-2023 and 2:00:34 on 30apr24
+  * 01mar23-19x26-xios-dev
+    * success; 0:28:11 vs. StdEnv/2020 0:16:xx in Apr-2023
+
+
+##### 2x resolution SalishSeaCast
+
+* continued looking at coordinates
+  * checked the coordinates in the lower Fraser River are re: Michael's grid refinements there
+    * discussed with Susan
+    * grid looks acceptable in Fraser River area
+  * investigate adding coordinate rows at the south edge of the domain to fully include the south
+    coastline of Puget Sound and add a sufficient land buffer for OceanParcels to work correctly
+    in that are re: Jose's findings about particle losses at water boundaries
+    * Nisqually River estuary is the main water that is cut off
+    * will need to add ~10 grid points to production grid
+
+
+##### Miscellaneous
+
+* 2.25 hours of battery life on khawla in balanced integrated graphics mode
+
+
+
+#### Fri 3-May-2023
+
+
+##### `graham` StdEnv/2023
+
+* continued work on testing StdEnv/2023 on `graham`:
+  * 01mar23-19x26-xios-dev2 to re-test time on 8 nodes
+    * success; 0:32:21 vs. StdEnv/2020 0:16:xx in Apr-2023 and 0:30:41 yesterday
+
+
+##### 2x resolution SalishSeaCast
+
+* continued looking at coordinates
+  * started work on SSC_202405 coordinates for hindcasts/production with grid extended to include
+    all of south Puget Sound water
+  * after discussion with Susan, used pre-cell parabolic curve fits to calculate lons/lats of new
+    grid points
+
+
+##### Miscellaneous
+
+* 1h40m of battery life on khawla in high performance Nvidia graphic mode
+* 14:34 to 16:14
+
+
+##### Security Updates
+
+Squash-merged dependabot PRs to update tqdm to v4.66.3 re: CVE-2024-34062 re: arbitrary code
+execution vulnerability:
+
+* MoaceanParcels
+* tools/SalishSeaTools
+
+* SalishSeaNowcast
+
+
+
+#### Sat 4-May-2023
+
+
+##### SalishSeaCast
+
+* `make_ww3_current_file forecast2` stalled; killed it and skipped run
+
+
+
+#### Sun 5-May-2023
+
+
+##### SalishSeaCast
+
+* `make_ww3_current_file forecast2` stalled; killed it and skipped run
 
 
 
