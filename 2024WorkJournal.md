@@ -5174,8 +5174,8 @@ Released v24.1 and bumped dev to v24.2.dev0.
 * continued looking at coordinates
   * started work on SSC_202405 coordinates for hindcasts/production with grid extended to include
     all of south Puget Sound water
-  * after discussion with Susan, used pre-cell parabolic curve fits to calculate lons/lats of new
-    grid points
+  * after discussion with Susan, prototyped using pre-cell parabolic curve fits to calculate
+    lons/lats of new grid points
 
 
 ##### Miscellaneous
@@ -5191,7 +5191,6 @@ execution vulnerability:
 
 * MoaceanParcels
 * tools/SalishSeaTools
-
 * SalishSeaNowcast
 
 
@@ -5211,6 +5210,59 @@ execution vulnerability:
 ##### SalishSeaCast
 
 * `make_ww3_current_file forecast2` stalled; killed it and skipped run
+
+
+
+### Week 19
+
+#### Mon 6-May-2023
+
+
+##### Miscellaneous
+
+Squash-merged dependabot PRs to update codecov-action to v4.3.1 re: feature & dependency updates:
+
+* SalishSeaNowcast
+* gha-workflows
+
+Checked status of scheduled GHA workflows:
+
+  ```bash
+  conda activate gha-workflows
+  python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+  ```
+
+Helped Becca with `RuntimeError: NetCDF: HDF error`:
+
+* suggested using context managers to be more explicit about when files opened by
+  `xarray.open_dataset()` are closed
+
+
+##### SalishSeaCast
+
+* investigatedONC ferry obs failures:
+  * CO2 sensor request is failing
+  * is it possible that, with 1 sensor request failing, we are not recording any obs?
+
+
+##### Security Updates
+
+Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XSS vulnerability:
+
+* SalishSeaNowcast
+
+
+##### 2x resolution SalishSeaCast
+
+* continued looking at coordinates
+  * continued work on SSC_202405 coordinates for hindcasts/production with grid extended to include
+    all of south Puget Sound water
+  * generalized code to use pre-cell parabolic curve fits to calculate lons/lats and spacings of
+    new grid points
+  * got Jose's opinion that the new grid has sufficient land cells to keep OceanParcels happy
+  * calculated all of the arrays of values to extend the grid
+
+
 
 
 
