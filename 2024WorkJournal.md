@@ -5263,6 +5263,60 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
   * calculated all of the arrays of values to extend the grid
 
 
+#### Tue 7-May-2023
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+
+
+##### Security Updates
+
+Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XSS vulnerability:
+
+* NEMO_Nowcast
+* NEMO-Cmd
+* MoaceanParcels
+* SalishSeaCmd
+* cookiecutter-MOAD-pypkg
+* salishsea-site
+* MOAD/docs
+* AtlantisCmd
+* tools/SalishSeaTools
+* Reshapr
+* moad_tools
+* SalishSeaCast/docs
+* cookiecutter-analysis-repo
+* cookiecutter-djl-pypkg
+* erddap-datasets
+* SOG-Bloomcast-Ensemble
+* SOG
+* SOG-Bloomcast
+
+
+##### `graham` StdEnv/2023
+
+* decided to shelve migration to StdEnv/2023 for the time being:
+  * run time is slower to much slower than StdEnv/2020, and that's a waste of
+    our allocation
+  * default environment has not yet changed to StdEnv/2023 despite announcement
+    that it would on 3-Apr; that suggests we may not be the only users for whom
+    the new environment is sub-optimal
+* reviewed status of `graham-stdenv2023` branches and pushed commits from graham:
+  * XIOS-ARCH:
+    * committed env file changes to load intel compilers module and related
+      library module versions
+    * committed drop of outdated CFLAGS
+  * XIOS-2:
+    * added GCC arch file names to .gitignore to avoid accidental commits
+  * NEMO-3.6-code:
+    * nothing to commit
+  * SalishSeaCmd:
+    * change graham module loads to use Intel compiler collection
+      **needs correction for other HPC clusters and tests**
+  * SalishSeaCast/docs
+    * TODO: `-m GCC_GRAHAM` back to `-m X64_GRAHAM`
 
 
 
