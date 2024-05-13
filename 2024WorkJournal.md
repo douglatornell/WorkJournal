@@ -5263,6 +5263,7 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
   * calculated all of the arrays of values to extend the grid
 
 
+
 #### Tue 7-May-2023
 
 
@@ -5318,6 +5319,124 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
   * SalishSeaCast/docs
     * TODO: `-m GCC_GRAHAM` back to `-m X64_GRAHAM`
 
+
+
+#### Wed 8-May-2023
+
+
+##### Miscellaneous
+
+* tried suggestion from Andrey at PyCharm to add conda activation to bash launch
+  * added to `.bash_aliases`
+
+    ```bash
+    if [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]]
+    then
+      conda activate {env_name}
+    fi
+    ```
+
+    got `conda: command not found` messages in PyCharm terminal launch, probably because
+    `.bash_aliases` is loaded before conda is set up in `.bashrc`
+  * change to add to `.bashrc`
+
+    ```text
+    EnvironmentNameNotFound: Could not find conda environment: {env_name}
+    You can list all discoverable environments with `conda info --envs`.
+    ```
+
+  * uninstalled mambaforge-pypy3
+  * moved `~/.condarc` and `~/.conda/` aside
+  * downloaded and installed `Miniforge-pypy3-Linux-aarch64.sh`
+  * copied `~/.conda.aside/environments.txt` into new empty `~/.conda/`
+  * re-linked `~/dotfiles/pop_os/khawla/.condarc` as `~/.condarc`
+  * still no auto-activation of the correct env in terminal
+  * updated to PyCHarm 2024.1.1
+  * updated support request with actions and results
+* intermittent auth issues on waterhole machines started late in the afternoon
+
+
+##### `graham` StdEnv/2023
+
+* continued shelving migration to StdEnv/2023 for the time being:
+  * SalishSeaCmd:
+    * change beluga & cedar module loads to use Intel compiler collection, and fix tests
+  * SalishSeaCast/docs
+    * added intel/2023.2.1 module load
+    * reverted build commands to use X64_GRAHAM arch file
+
+
+##### 2x resolution SalishSeaCast
+
+* experimented with running the notebook in PyCharm instead of VSCode
+  * had to add notebook to conda env to get jupyter server for PyCharm
+
+
+
+#### Thu 9-May-2023
+
+
+##### Miscellaneous
+
+* waterhole intermittent auth issue continued; posted message to Henryk in #oceanography
+
+
+##### SalishSeaCast
+
+* `upload_forcing graham nowcast+` failed with SSH protocol banner error; succeeded on manual re-try
+  * recall that protocol banner error is due to network congestion
+* `make_ww3_current_file forecast` and `make_ww3_wind_file forecast` stalled; killed them,
+  and re-ran them manually
+
+
+##### 2x resolution SalishSeaCast
+
+* checked `e1t` and `e2t` grid variable extensions and found weirdness for `e2t`
+  * it was because I used parabolic fitting instead of calculating e's from lons/lats via
+    `haversine()`
+
+
+
+#### Fri 10-May-2023
+
+
+##### SalishSeaCast
+
+* `crop_gribs 12` stalled with 1 file not processed; APCP in hour 016
+
+
+##### 2x resolution SalishSeaCast
+
+* started work on `e[12][tuvf]` calculations using `haversine()` formula
+  * have to be super careful about which `g[lam|phi][tuvf]` arrays I use for each
+  * e's are differences, so there are n-1 of them, but NEMO grid has n of them because
+    an edge is padded with unused bogus values; decided with Susan to make them duplicates of
+    adjacent real values
+  * created and verified implementation of `haversine()` calls for all 8 e's
+
+
+##### Miscellaneous
+
+* coffee with Karyn
+
+
+
+#### Sat 11-May-2023
+
+* bike work and house work
+
+
+
+#### Sun 12-May-2023
+
+* rode to Deep Cove and back on Gunnars
+
+
+##### SalishSeaCast
+
+* wwatch3 nowcast and forecast runs didn't happen
+  * re-ran nowcast manually; no logs from watcher
+  * restarted log_aggregator
 
 
 
