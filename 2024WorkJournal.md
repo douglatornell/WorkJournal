@@ -5440,6 +5440,171 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
 
 
 
+### Week 20
+
+#### Mon 13-May-2023
+
+
+##### SalishSeaCast
+
+* `make_ww3_wind_file forecast2` stalled; re-run manually
+  * run ended prematurely due to MPI error; checks show all node okay, so assume it was a transient
+    issue
+* `upload_forcing orcinus nowcast+` failed due to file system problem on `orcinus`
+  * fix is expected to be completed by 11:00
+  * recovery started at ~12:10:
+    * upload_forcing orcinus nowcast+
+    * upload_forcing orcinus turbidity
+* `make_ww3_wind_file forecast` stalled; re-run manually
+
+
+##### Miscellaneous
+
+* Andrey at PyCharm reported that he can't reproduce my conda env auto-activation failure issue
+  * in his test he disabled auto-activation of the base conda env and recommended I do the same;
+    that made no difference, but it is valuable now that activation of the base env is not required
+    to get conda and mamba in PATH, so I updated `.condarc` for `khawla` in `dotfiles/`
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on `e[12][tuvf]` calculations using `haversine()` formula
+
+
+
+#### Tue 14-May-2023
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* help Tall with build issue on graham as his account was changed to default to StdEnv/2023
+* watched YouTube recording of Tom Nicholas's presentation in today's Pangeo mtg on VirtualiZarr
+  and how it differs from kerchunk's approach to a zarr layer over netCDF4 files
+
+
+##### Security Updates
+
+Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XSS vulnerability:
+
+* erddap-datasets
+
+
+
+#### Wed 15-May-2023
+
+
+##### Miscellaneous
+
+* helped Susan w/ unreliable DNS at Quadra
+  * home network DNS servers: 64.59.144.92 64.59.150.138
+
+
+##### SalishSeaCast
+
+* restarted HRDPS and hydrometric sarracenia clients at ~12:00 after MSC network maintenance
+  * hydrometric csv file updates started downloading successfully at ~12:09
+  * HRDPS client heartbeat success at 12:09 and 12:14
+
+
+##### 2x resolution SalishSeaCast
+
+* sorted out concatenation of new grid variable arrays to existing
+* started work on creation of 202405 coordinates dataset
+
+
+
+#### Thu 16-May-2023
+
+
+##### SalishSeaCast
+
+* `collect_weather 12` was ~1h30m late due to slow flow and long gaps
+* `collect_weather 18` was also slow
+
+
+##### 2x resolution SalishSeaCast
+
+* started work on creation of 202405 `e[12][tuvf]` arrays; so confused 🙁
+
+
+
+#### Fri 17-May-2023
+
+
+##### SalishSeaCast
+
+* `make_ww3_current_file forecast2` stalled; re-run manually
+* HRDPS seemed to have returned to pre-maintenance timing, until 18 forecast which was ~90m late
+* `make_ww3_wind_file forecast` stalled; re-run manually
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on creation of 202405 `e[12][tuvf]` arrays; still confused 🙁
+
+
+##### SalishSeaNowcast
+
+* started work on replacement of PyPDF2 package with pypdf
+  * to resolve Jun-2023 security alert re: CVE-2023-36464 infinite loop vulnerability and
+    deprecation of PyPDF2
+  * branch: PyPDF2-to-pypdf
+  * PR#263
+  * https://pypdf.readthedocs.io/en/latest/index.html
+  * test suite modernization
+  * replaced PyPDF2 with pypdf in env and `make_surface_cuurrent_tiles` worker
+  * added pypdf to skookum nowcast-env
+  * tested branch on skookum, manually, and in automation
+
+
+
+#### Sat 18-May-2023
+
+Goofed off.
+
+
+#### Sun 19-May-2023
+
+
+##### SalishSeaNowcast
+
+* finished replacement of PyPDF2 package with pypdf
+  * to resolve Jun-2023 security alert re: CVE-2023-36464 infinite loop vulnerability and
+    deprecation of PyPDF2
+  * branch: PyPDF2-to-pypdf
+  * PR#263 - squash-merged
+
+
+##### SalishSeaCast
+
+* updated `skookum` with merged PR#263 re: PyPDF2
+  * removed PyPDF2 package from `nowcast-env`
+* Changed paths for Tal & Susan's oxygen hindcast runs on optimum:
+  * branch: rivers-hindcast
+  * PR#264 - squash-merged
+
+
+
+### Week 21
+
+#### Mon 20-May-2023
+
+Rode Iona, Sanctuary, 6 Rd loop of Richmond.
+
+
+
+
+/SalishSeaCast/SalishSeaNowcast/nowcast/figures/publish/surface_current_tiles.py:319: UserWarning: FixedFormatter should only be used together with FixedLocator
+  ax.set_xticklabels(x_tick_label, rotation=45)
+
+/SalishSeaCast/nowcast-env/lib/python3.11/site-packages/numpy/core/fromnumeric.py:784: UserWarning: Warning: 'partition' will ignore the 'mask' of the MaskedArray.
+  a.partition(kth, axis=axis, kind=kind, order=order)
+
+
+
+
+
 
 Add Tereza's pubs to ERDDAP.
 
@@ -5520,7 +5685,6 @@ TODO:
 
 * fix straight line gaps in wwatch3 forecast plots (forecast2 are okay)
 
-* migrate PyPDF2 to pypdf in SalishSeaNowcast
 
 
 TODO:
