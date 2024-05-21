@@ -5347,7 +5347,7 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
 
   * uninstalled mambaforge-pypy3
   * moved `~/.condarc` and `~/.conda/` aside
-  * downloaded and installed `Miniforge-pypy3-Linux-aarch64.sh`
+  * downloaded and installed `Miniforge-pypy3-Linux-arch64.sh`
   * copied `~/.conda.aside/environments.txt` into new empty `~/.conda/`
   * re-linked `~/dotfiles/pop_os/khawla/.condarc` as `~/.condarc`
   * still no auto-activation of the correct env in terminal
@@ -5553,7 +5553,7 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
   * PR#263
   * https://pypdf.readthedocs.io/en/latest/index.html
   * test suite modernization
-  * replaced PyPDF2 with pypdf in env and `make_surface_cuurrent_tiles` worker
+  * replaced PyPDF2 with pypdf in env and `make_surface_current_tiles` worker
   * added pypdf to skookum nowcast-env
   * tested branch on skookum, manually, and in automation
 
@@ -5590,7 +5590,74 @@ Goofed off.
 
 #### Mon 20-May-2023
 
+**Statutory Holiday** - Victoria Day
+
 Rode Iona, Sanctuary, 6 Rd loop of Richmond.
+
+
+#### Tue 21-May-2023
+
+#### Miscellaneous
+
+* MOAD mtg; see whiteboard
+
+Squash-merged dependabot PRs to bump codecov/codecov-action to 4.1.1
+re: dependency & feature updates:
+
+* SalishSeaNowcast
+* gha-workflows
+
+Updated kudu to PyCharm 2024.1.1.
+
+Updated my ocean installation to Miniforge-pypy3:
+
+* moved `~/.condarc` and `~/.conda/environments.txt` aside
+* uninstalled mambaforge-pypy3
+  `conda init --reverse`
+  `rm -rf ~/mambaforge-pypy3`  # took a very long time
+* downloaded and installed `Miniforge-pypy3-Linux-arch64.sh`
+* copied `~/.conda.aside/environments.txt` into new empty `~/.conda/`
+* re-linked `~/dotfiles/ubuntu/ocean/.condarc` as `~/.condarc`
+
+Updated my kudu installation to Miniforge-pypy3:
+
+* moved `~/.condarc` and `~/.conda/environments.txt` aside
+* uninstalled mambaforge-pypy3
+  `conda init --reverse`
+  `rm -rf /media/doug/warehouse/miniconda3`
+* downloaded and installed `Miniforge-pypy3-Linux-arch64.sh`
+* copied `~/.conda.aside/environments.txt` into new empty `~/.conda/`
+* re-linked `~/dotfiles/ubuntu/ocean/.condarc` as `~/.condarc`
+
+
+##### SalishSeaCast
+
+* LiveOcean was ~80m late; download happened at ~11:20
+
+
+##### Security Updates
+
+Squash-merged dependabot PR to update requests to 2.32.0 re: CVE-2024-35195 re:
+cert verification disablement leakage vulnerability:
+
+* salishsea-site
+* SalishSeaCast/docs
+* cookiecutter-moad-pypkg
+* Reshapr
+* moad_tools
+* NEMO-Cmd
+* SalishSeaCmd
+* tools/SalishSeaTools
+* SalishSeaNowcast
+* cookiecutter-analysis-repo
+* AtlantisCmd
+* NEMO_Nowcast
+* MOAD/docs
+* MoaceanParcels
+* cookiecutter-djl-pypkg
+* erddap-datasets
+* SOG-Bloomcast-Ensemble
+
 
 
 
