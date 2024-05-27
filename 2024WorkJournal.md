@@ -5597,6 +5597,8 @@ Rode Iona, Sanctuary, 6 Rd loop of Richmond.
 
 #### Tue 21-May-2023
 
+Worked at ESB.
+
 #### Miscellaneous
 
 * MOAD mtg; see whiteboard
@@ -5658,6 +5660,96 @@ cert verification disablement leakage vulnerability:
 * erddap-datasets
 * SOG-Bloomcast-Ensemble
 
+
+
+#### Wed 22-May-2023
+
+
+##### SalishSeaCast
+
+* arbutus network maintenance; seemed to have no impact on our runs
+* `make_ww3_current_file forecast` stalled; re-run manually
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on creation of 202405 `e[12][tuvf]` arrays
+  * funky values in southwest corner of grid; Susan traced them to funkiness there in the
+    201702 grid that we're extrapolating from; decided that funkiness there is okay because it is
+    land in Wa, very far from
+
+
+Celebration of Becca's paper acceptance at the Gallery.
+
+
+
+#### Thu 23-May-2023
+
+
+##### SalishSeaCast
+
+* `collect_weather 00` finished after `crop_gribs 00` timed out
+  * ran `crop_gribs 00 --backfill` to recover before `collect_weather 12` finished
+* `make_ww3_current_file forecast` stalled due to leftover process from yesterday; re-run manually
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on creation of 202405 `e[12][tuvf]` arrays
+* created 202405 coordinates file
+
+
+##### Miscellaneous
+
+* UBC-IOS modeling Mtg
+  * Maxim re: hydrological model
+
+
+
+#### Fri 24-May-2023
+
+
+##### SalishSeaCast
+
+* `make_ww3_wind_file forecast2` stalled ; re-run manually
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on creation of 202405 `e[12][tuvf]` arrays
+
+
+##### Reshapr
+
+* updated hatch build wheel target inclusion list in `pyproject.toml`
+  * branch: hatch-build-targets-wheel
+  * PR#131 - squash-merged
+* started experiment with h5netcdf instead of netcdf4
+  * thinking that h5netcdf avoids the netcdf4 thread safety issues that cause random
+    HDF5 and NETCDF4 errors when dask workers have more than 1 thread
+  * may also allow resumption of use of `parallel=True` in `open_mfdataset()`
+  * branch: h5netcdf
+  * PR#132
+  * tested for April month-avg physics on salish
+    * success in 67s, but resulting file has all space coordinates called `gridY` ???
+
+
+
+#### Sat 25-May-2023
+
+
+##### SalishSeaCast
+
+* `make_ww3_wind_file forecast` stalled ; re-run manually
+
+
+
+#### Sun 26-May-2023
+
+
+##### SalishSeaCast
+
+* `download_live_ocean` was ~2h late
 
 
 
