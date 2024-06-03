@@ -5599,6 +5599,7 @@ Rode Iona, Sanctuary, 6 Rd loop of Richmond.
 
 Worked at ESB.
 
+
 #### Miscellaneous
 
 * MOAD mtg; see whiteboard
@@ -5753,6 +5754,239 @@ Celebration of Becca's paper acceptance at the Gallery.
 
 
 
+### Week 22
+
+#### Mon 27-May-2023
+
+
+#### Miscellaneous
+
+Squash-merged dependabot PR to bump codecov/codecov-action to 4.1.1
+re: dependency & feature updates:
+
+* SalishSeaNowcast
+
+Squash-merged dependabot PRs to bump mamba-org/setup-micromamba to 1.9.0
+re: dependency, docs & bug fix updates:
+
+* rwhite/numeric_2024
+* erddap-datasets
+* gha-workflows
+* SalishSeaNowcast
+* salishsea-site
+
+Phys Ocgy seminar:
+
+* CMOS practice talks by Camryn, Cassidy & Clare
+
+
+##### 2x resolution SalishSeaCast
+
+* finished work on creation of 202405 `e[12][tuvf]` arrays
+* pushed for Susan to review
+
+
+
+#### Tue 28-May-2023
+
+
+##### Miscellaneous
+
+MOAD group mtg; see whiteboard
+
+
+##### Security Updates
+
+Squash-merged dependabot PR to update requests to 2.32.0 re: CVE-2024-35195 re:
+cert verification disablement leakage vulnerability:
+
+* SOG-Bloomcast-Ensemble
+
+
+##### 2x resolution SalishSeaCast
+
+* started work on double resolution coordinates
+  * failed to understand Susan's notebook:
+    https://github.com/SalishSeaCast/tools/blob/main/double_resolution/coordinates.ipynb
+
+
+##### Reshapr
+
+* continued experiment with h5netcdf instead of netcdf4
+  * branch: h5netcdf
+  * PR#132
+  * explored coordinate names issue
+    * appears to be that `h5netcdf` writes netcdf4 in a way that is not compatible with `ncdump`
+      nor `xarray.open_dataset(..., engine="netcdf4)`
+      * this might be related to HDF5 dimension scales and how netCDF4 handles them
+    * solution seems to be to read using `h5netcdf` and write using `netcdf4`
+
+
+
+#### Wed 29-May-2023
+
+
+##### 2x resolution SalishSeaCast
+
+* started work on double resolution coordinates
+  * discussed with Susan her notebook:
+    https://github.com/SalishSeaCast/tools/blob/main/double_resolution/coordinates.ipynb
+  * added calculation of `g[lam|phi][tuvf]` arrays for double resolution coordinates
+
+
+##### SalishSeaCast
+
+* tested Reshapr `h5netcdf` branch in production
+  * installed `h5netcdf` in `skookum nowcast-env`
+  * pulled in `/SalishSeaCast/Reshapr` and switched to `h5netcdf` branch
+  * restarted dask cluster workers in `tmux make_averaged_dataset` session on `salish`
+    with `-nthreads=4`
+  * checked results of `make_averaged_dataset` at ~12:00
+    * `make_averaged_dataset day biology` failed with `KeyError: 'nitrate'`
+    * success on manual re-run with `--debug`
+    * success on manual re-run without `--debug`
+  * tentative conclusions:
+    * `engine="h5netcdf"` may be useful or even essential for analysis work that involves reading
+      many dataset files and perhaps not writing a netCDF4 file (Becca's was writing with
+      `pandas.Dataframe.to_pickle()`)
+    * for Reshapr where `xarray.Dataset.to_netcdf(..., engine="netcdf4")` happens as the final step
+      of any extraction, multiple threads per worker is probably still unreliable
+* reattached orphaned `tmux make_averaged_dataset` session on `salish`
+  * socket file got deleted somehow; https://timvisee.com/blog/reconnect-to-broken-tmux-session/
+    explains how to recover:
+
+    ```bash
+    # use pgrep to find PID of tmux process
+    pgrep -af make_averaged_dataset
+    # send SIGUSR1 signal to tmux process to cause it to re-create socket file
+    kill -SIGUSR1 PID
+    # or kill -SIGUSR1 $(pgrep -f make_averaged_dataset)
+    # attach tmux session
+    tmux attach -t make_averaged_dataset
+    ```
+
+
+##### Reshapr
+
+* continued experiment with h5netcdf instead of netcdf4
+  * branch: h5netcdf
+  * PR#132
+  * made netcdf4 explicit write engine in tests for consistency with `extract.write_netcdf()`
+
+
+
+#### Thu 30-May-2023
+
+
+##### SalishSeaCast
+
+* `make_ww3_wind_file forecast` stalled ; re-run manually
+* continued testing Reshapr `h5netcdf` branch in production
+  * checked results of `make_averaged_dataset` at ~12:00
+    * `make_averaged_dataset day` succeeded for all 3 datasets; 1 fail from 8 runs
+* updated SalishSeaNowcast deployment on `arbutus`
+  * changed branch from `v202111-nowcast` to `main`
+  * pulled and updated
+  * updated env to install h5netcdf; lots of package changes
+  * rsync-ed hacked version of `make_ww3_wind_file`
+  * successful test of `make_ww3_wind_file forecast`
+    * ~7 seconds for file creation
+
+
+##### Miscellaneous
+
+* updated PyCharm on khawla to 2024.1.2
+
+
+##### SalishSeaNowcast
+
+* tuned dask, etc. in `make_ww3_wind_file`:
+  * `xarray.open_dataset()` for lons/lats
+    * dropped unnecessary variables
+    * changed to `engine="h5netcdf"`
+  * `xarray.open_mfdataset()` for u_wind/v_wind
+    * dropped `nav_lon` and `nav_lat` coordinates via `drop_variables=`
+    * changed chunks to 24 hours instead of 1
+    * changed to `engine="h5netcdf"`
+  * added `ds.compute()` to control dask scheduler:
+    * processes and max_workers=8
+  * made `ds.to_netcdf()` explicitly use `engine="netcdf4"`
+  * updated envs to include `h5netcdf`
+  * updated unit tests
+
+
+
+#### Fri 31-May-2023
+
+
+##### SalishSeaCast
+
+* `make_ww3_current_file forecast2` stalled; killed and skipped; it delayed nowcast/forecast runs
+* LiveOcean download was ~2h late
+* continued testing Reshapr `h5netcdf` branch in production
+  * checked results of `make_averaged_dataset` at ~14:00:
+    * `make_averaged_dataset day biology` failed with `KeyError: microzooplankton
+    * re-ran manually
+    * 2 fails from 12 runs
+  * restarted dask cluster workers in `tmux make_averaged_dataset` session on `salish`
+    with `-nthreads=1`
+* rsync-ed hacked version of `make_ww3_current_file`
+  * successful test of `make_ww3_current_file forecast`
+    * ~53 seconds for file creation
+* `collect_weather 00` was ~2h late
+
+
+##### SalishSeaNowcast
+
+* tuned dask, etc. in `make_ww3_current_file`:
+  * `xarray.open_dataset()` for lons/lats
+    * dropped unnecessary variables
+    * changed to `engine="h5netcdf"`
+  * `xarray.open_mfdataset()` for u_wind/v_wind
+    * dropped unnecessary variables
+    * changed chunks to 1 hour instead of 3
+    * changed to `engine="h5netcdf"`
+  * added `ds.compute()` to control dask scheduler:
+    * processes and max_workers=8
+  * made `ds.to_netcdf()` explicitly use `engine="netcdf4"`
+
+
+
+## June
+
+#### Sat 1-Jun-2023
+
+
+##### SalishSeaCast
+
+* hacked `make_ww3_*_file forecast*` ran successfully
+* continued testing Reshapr `h5netcdf` branch in production
+  * checked results of `make_averaged_dataset` at ~12:00:
+    * `make_averaged_dataset day` succeeded for all 3 datasets; 2 fails from 15 runs
+
+
+##### SalishSeaNowcast
+
+* tuned dask, etc. in `make_ww3_*_file`:
+  * branch: improve-ww3-prep
+  * updated `test_make_ww3_current_file`
+
+
+
+#### Sun 2-Jun-2023
+
+
+##### SalishSeaCast
+
+* updated conda on arbutus and ended up with:
+  * `Error while loading conda entry point: conda-libmamba-solver (libarchive.so.19:
+    cannot open shared object file: No such file or directory)`
+
+  * replaced `miniconda3` with `miniforge` to resolve, and to get `mamba`
+    * did the `.condarc` and `.conda/environments.txt` preservation dance
+
+
+
 
 /SalishSeaCast/SalishSeaNowcast/nowcast/figures/publish/surface_current_tiles.py:319: UserWarning: FixedFormatter should only be used together with FixedLocator
   ax.set_xticklabels(x_tick_label, rotation=45)
@@ -5761,6 +5995,9 @@ Celebration of Becca's paper acceptance at the Gallery.
   a.partition(kth, axis=axis, kind=kind, order=order)
 
 
+TODO:
+
+* add `h5netcdf` dependency in SalishSeaNowcast
 
 
 
