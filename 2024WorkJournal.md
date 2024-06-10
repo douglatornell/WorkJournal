@@ -5982,8 +5982,381 @@ cert verification disablement leakage vulnerability:
   * `Error while loading conda entry point: conda-libmamba-solver (libarchive.so.19:
     cannot open shared object file: No such file or directory)`
 
-  * replaced `miniconda3` with `miniforge` to resolve, and to get `mamba`
-    * did the `.condarc` and `.conda/environments.txt` preservation dance
+
+
+### Week 23
+
+#### Mon 3-Jun-2023
+
+
+##### SalishSeaCast
+
+* `crop_gribs 06` timed out with 270 files unprocessed
+  * `find` operations in `/results/forcing/atmospheric/continental2.5/GRIB/20240306/06/`
+    on `skookum` keep freezing terminal sessions
+  * killed `collect_weather 06` asnd `crop_gribs 06`
+  * `crop_gribs 06 --backfill` failed due to missing `044/APCP` file
+  * 157 file remain in `/SalishSeaCast/datamart/hrdps-continental/06/`
+  * manually launched `collect_weather 12 2.5km` and `crop_gribs 12` at 07:20
+  * asked Henryk to check RAID status of `/results`
+  * successfully ran `download_weather 06 2.5km` on `khawla`
+  * checked `grib_to_netcdf` code to confirm that 06 forecast is only used for forecast2 runs,
+    not nowcast/forecast runs
+* Slack conversation w/ Henryk:
+  * one of the `/results/` drives dropped out of the `md127_raid5` soft-RAID overnight,
+    then reconnected
+  * RAID is rebuilding parity slowly; file system is slow as a result
+  * Henryk's plan is to force-reboot `skookum` on Tue afternoon and remove to mount of `/results`
+    in the hope that will allow the RAID rebuild to complete
+* `sarracenia` successfully collected 12 HRDPS files on `/SalishSeaCast/datamart/`
+* recovery started at ~15:00:
+  * hacked `nowcast.yaml` to put atmospheric forcing on `/results2/` and created directory tree there
+  * `collect_weather 12 2.5km --backfill --backfill-date 2024-06-03`
+  * `crop_gribs 12 --backfill`
+  * copied 18 and 00 GRIB files that `grib_to_netcdf` needs from `/results/` to `results2/`
+  * `grib_to_netcdf nowcast+`
+  * `collect_ECCC_river_data.sh 2024-06-02`
+  * `collect_USGS_river_data.sh 2024-06-02`
+  * `collect_NeahBay_ssh 06`
+  * `download_live_ocean`
+  * `download_weather 00 1km`
+  * `download_weather 12 1km`
+  * `collect_weather 18 2.5km --backfill --backfill-date 2024-06-03`
+  * `crop_gribs 18 --backfill`
+* gave up trying to get runs to start; best hope is to keep collecting forcing products
+  * `collect_weather 00 2.5km`
+  * `crop_gribs 00 2024-06-04`
+  * successful
+* replaced `miniconda3` with `miniforge-pypy3` on arbutus:
+  * no `~/.condarc`
+  * moved `~/.conda/environments.txt` aside
+  * uninstalled miniconda3
+    `conda init --reverse`
+    `rm -rf /nemoShare/MEOPAR/nowcast-sys/miniconda3`
+  * downloaded and installed `Miniforge-pypy3-Linux-arch64.sh`
+  * copied `~/.conda.aside/environments.txt` into new empty `~/.conda/`
+
+
+##### Miscellaneous
+
+Checked status of scheduled GHA workflows:
+
+  ```bash
+  conda activate gha-workflows
+  python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+  ```
+
+
+#### Tue 4-Jun-2023
+
+
+##### SalishSeaCast
+
+* overnight:
+  * success:
+    * `collect_weather 06 2.5km`
+    * `crop_gribs 06`
+    * `grib_to_netcdf`
+    * `collect_river_data ECCC`
+    * `get_onc_ferry`
+    * `collect_NeahBay_ssh`
+  * failure:
+    * `get_onc_ctd`
+    * `make_ssh_file` due to missing directory on `/results2`; resolved
+* today:
+  * success:
+    * `collect_weather 12 2.5km`
+    * `grib_to_netcdf`
+    * `collect_river_data USGS`
+    * `collect_NeahBay_ssh`
+    * `download_live_ocean`
+    * `make_turbidity_file`
+    * `make_live_ocean_files`
+  * failure:
+    * `crop_gribs 12`
+    * `make_ssh_file`
+    * `make_runoff_file`
+    * `make_v202111_runoff_file`
+  * Henryk rebooted `skookum` at noon
+    * removed `/results` mount to try to get RAID rebuild to complete
+    * replaced failed drive and restarted RAID rebuild at ~17:00; expects ~15h
+  * restarted automation, etc at ~18:30:
+    * nowcast automation
+    * salishsea-site
+    * ERDDAP
+    * `download_weather 00 1km`
+    * `download_weather 12 1km`
+    * `download_weather 18 2.5km`
+    * `crop_gribs 18 --backfill`
+    * `collect_weather 00 2.5km`
+    * `crop_gribs 00 2024-06-05`
+
+
+##### SalishSeaNowcast
+
+* tuned dask, etc. in `make_ww3_*_file`:
+  * branch: improve-ww3-prep
+  * started commits
+
+
+#### Wed 5-Jun-2023
+
+
+##### SalishSeaCast
+
+* overnight:
+  * success:
+    * `collect_weather 06 2.5km`
+    * `crop_gribs 06`
+    * `collect_NeahBay_ssh`
+    * `grib_to_netcdf`
+  * failure:
+    * `collect_river_data ECCC` due to no `/results`
+    * `make_ssh_file` due to no `/results`
+    * `get_onc_ctd` due to no `/results`
+    * `get_onc_ferry` due to no `/results`
+* today:
+  * success:
+    * `collect_weather 12 2.5km`
+    * `crop_gribs 12`
+    * `grib_to_netcdf`
+    * `download_live_ocean`
+    * `make_live_ocean_files`
+    * `collect_NeahBay_ssh`
+  * failure:
+    * `collect_river_data USGS` due to no `/results`
+    * `make_ssh_file` due to no `/results`
+    * `make_runoff_file`
+    * `make_v202111_runoff_file`
+    * `make_turbidity_file`  due to no `/results`
+* Henryk rebooted `skookum` to remount `/results` at ~12:00; started recovery:
+
+  ```bash
+  sudo sysctl fs.inotify.max_user_instances=2048
+  sudo sysctl fs.inotify.max_user_watches=196608
+  sudo sysctl -p
+  sudo /opt/tomcat/bin/startup.sh  # ERDDAP
+  mamba activate /SalishSeaCast/salishsea-site-env  # website
+  supervisord -c /SalishSeaCast/salishsea-site/supervisord-prod.ini
+  mamba deactivated
+  mamba activate /SalishSeaCast/nowcast-env  # automation
+  mamba activate /SalishSeaCast/nowcast-env
+  supervisord -c $NOWCAST_CONFIG/supervisord.ini
+  collect_weather 18 2.5km &
+  crop_gribs 18 &
+  ```
+
+* started backfilling at 13:30:
+
+  ```bash
+  git restore config/nowcast.yaml
+  # 3jun
+  mv /results/forcing/atmospheric/continental2.5/GRIB/20240602/06 06.aside
+  download_weather 06 2.5km --run-date 2024-06-03 --debug
+  crop_gribs 06 --backfill --fcst-date 2024-06-03 --debug
+  rm -rf /results/forcing/atmospheric/continental2.5/GRIB/20240602/06.aside
+  bash /results/forcing/rivers/observations/collect_ECCC_river_data.sh 2024-06-02  # failed: no obs
+  bash /results/forcing/rivers/observations/collect_USGS_river_data.sh 2024-06-02
+  rsync -av /results2/forcing/atmospheric/continental2.5/GRIB/20240603/12 \
+    /results/forcing/atmospheric/continental2.5/GRIB/20240603/
+  make_turbidity_file 2024-06-03 --debug  # insufficient data
+  collect_NeahBay_ssh 06 --data-date 2024-06-03 --debug
+  rsync -av /results2/forcing/LiveOcean/downloaded/20240603 /results/forcing/LiveOcean/downloaded/
+  make_ssh_files nowcast 2024-06-03 --debug
+  make_live_ocean_files 2024-06-03 --debug
+  make_v202111_runoff_file --data-date 2024-06-02 --debug
+  make_runoff_file --run-date 2024-06-03 --debug
+  grib_to_netcdf $NOWCAST_YAML nowcast+ --run-date 2024-06-03 --debug
+  upload_forcing arbutus nowcast+ 2024-06-03
+  upload_forcing orcinus nowcast+ 2024-06-03
+  upload_forcing optimum nowcast+ 2024-06-03
+  upload_forcing graham nowcast+ 2024-06-03
+  get_onc_ctd SEVIP 2024-06-02
+  get_onc_ferry TWDP 2024-06-02
+  rsync -av /results2/forcing/atmospheric/continental2.5/GRIB/20240603/18 \
+    /results/forcing/atmospheric/continental2.5/GRIB/20240603/
+  rsync -av /results2/forcing/atmospheric/GEM1.0/GRIB/20240603/00 \
+    /results/forcing/atmospheric/GEM1.0/GRIB/20240603/
+  rsync -av /results2/forcing/atmospheric/GEM1.0/GRIB/20240603/12 \
+    /results/forcing/atmospheric/GEM1.0/GRIB/20240603/
+
+  # 4jun
+  rsync -av /results2/forcing/atmospheric/continental2.5/GRIB/20240604/00 \
+    /results/forcing/atmospheric/continental2.5/GRIB/20240604/
+  rsync -av /results2/forcing/atmospheric/continental2.5/GRIB/20240604/06 \
+    /results/forcing/atmospheric/continental2.5/GRIB/20240604/
+  bash /results/forcing/rivers/observations/collect_ECCC_river_data.sh 2024-06-03  # failed: no obs
+  rsync -av /results2/forcing/atmospheric/continental2.5/GRIB/20240604/12 \
+    /results/forcing/atmospheric/continental2.5/GRIB/20240604/
+  crop_gribs 12 --backfill --fcst-date 2024-06-04 --debug
+  bash /results/forcing/rivers/observations/collect_USGS_river_data.sh 2024-06-03
+  make_turbidity_file 2024-06-04 --debug  # insufficient data
+  collect_NeahBay_ssh 06 --data-date 2024-06-04 --debug
+  rsync -av /results2/forcing/LiveOcean/downloaded/20240604 /results/forcing/LiveOcean/downloaded/
+  make_ssh_files nowcast 2024-06-04 --debug
+  make_live_ocean_files 2024-06-04 --debug
+  make_v202111_runoff_file --data-date 2024-06-03 --debug
+  make_runoff_file --run-date 2024-06-04 --debug
+  get_onc_ctd SEVIP 2024-06-03
+  get_onc_ferry TWDP 2024-06-03
+  grib_to_netcdf $NOWCAST_YAML nowcast+ --run-date 2024-06-04 --debug
+  upload_forcing arbutus nowcast+ 2024-06-04
+  upload_forcing orcinus nowcast+ 2024-06-04
+  upload_forcing optimum nowcast+ 2024-06-04
+  upload_forcing graham nowcast+ 2024-06-04
+  rsync -av /results2/forcing/atmospheric/continental2.5/GRIB/20240604/18 \
+    /results/forcing/atmospheric/continental2.5/GRIB/20240604/
+  rsync -av /results2/forcing/atmospheric/GEM1.0/GRIB/20240604/00 \
+    /results/forcing/atmospheric/GEM1.0/GRIB/20240604/
+  rsync -av /results2/forcing/atmospheric/GEM1.0/GRIB/20240604/12 \
+    /results/forcing/atmospheric/GEM1.0/GRIB/20240604/
+
+  # 5jun
+  rsync -av /results2/forcing/atmospheric/continental2.5/GRIB/20240605/00 \
+    /results/forcing/atmospheric/continental2.5/GRIB/20240605/
+  rsync -av /results2/forcing/atmospheric/continental2.5/GRIB/20240605/06 \
+    /results/forcing/atmospheric/continental2.5/GRIB/20240605/
+  bash /results/forcing/rivers/observations/collect_ECCC_river_data.sh 2024-06-04
+  rsync -av /results2/forcing/atmospheric/continental2.5/GRIB/20240605/12 \
+    /results/forcing/atmospheric/continental2.5/GRIB/20240605/
+  bash /results/forcing/rivers/observations/collect_USGS_river_data.sh 2024-06-04
+  make_turbidity_file 2024-06-05 --debug  # insufficient data
+  collect_NeahBay_ssh 06 --data-date 2024-06-05 --debug
+  rsync -av /results2/forcing/LiveOcean/downloaded/20240605 /results/forcing/LiveOcean/downloaded/
+  make_ssh_files nowcast 2024-06-05 --debug
+  make_live_ocean_files 2024-06-05 --debug
+  get_onc_ctd SEVIP 2024-06-05
+  get_onc_ferry TWDP 2024-06-05
+  ```
+
+
+#### Thu 6-Jun-2023
+
+
+##### SalishSeaCast
+
+* overnight downloads and obs collection workers were successful
+* `forecast2/04jun24` run launched and stalled at 41.7%; killed; errors like:
+        iom_get_123d, file: ./NEMO-atmos/hrdps_y2024m06d06.nc, var: precip
+        start and count too big regarding to the size of the data,
+        (istart(3) + icnt(3) - 1) =    14
+        is larger than idimsz(3) =    13
+* continue backfilling:
+  * wait for `nowcast` run to fail due to no 5jun run
+
+  ```bash
+  grib_to_netcdf $NOWCAST_YAML nowcast+ --run-date 2024-06-05
+  upload_forcing arbutus nowcast+ 2024-06-05
+  upload_forcing orcinus nowcast+ 2024-06-05
+  upload_forcing optimum nowcast+ 2024-06-05
+  upload_forcing graham nowcast+ 2024-06-05
+
+  # 6jun
+  # wait for 5jun runs to finish at ~12:15
+  make_forcing_links arbutus nowcast+
+  ```
+* `forecast/06jun24` run launched and stalled at 34.7%; errors as above; killed
+  * Susan diagnosed the problem as non-existent atmospheric forcing files
+
+
+##### SalishSeaNowcast
+
+* Updated `make_live_ocean_files` worker re: single filepath instead of list:
+  * branch: fix-live-ocean-filepath-msgs
+  * PR#269 - squash-merged
+  * info message and checklist item were empty because
+    `salishsea_tools.LiveOcean_BCs.create_LiveOcean_TS_BCs()` returns a single filepath not a list of
+    filepaths
+
+
+
+#### Fri 7-Jun-2023
+
+
+##### Security Updates
+
+Squash-merged dependabot PRs to update tornado to 6.4.1 re:
+multiple vulnerabilities:
+
+* MoaceanParcels
+* MOAD/docs
+* SalishSeaCast/docs
+* tools/SalishSeaTools
+* moad_tools
+* Reshapr
+* SalishSeaNowcast
+
+
+##### SalishSeaCast
+
+* today's forecast run was successful
+* backfill forecast/06jun24 and wwatch3/nowcast/06jun24 and 07jun24 runs:
+
+  ```bash
+  # NEMO forecast/06jun24
+  make_forcing_links nowcast+ 2024-06-06 --debug
+  make_forcing_links ssh 2024-06-06
+  # failed, and automation launched next runs
+  # retry
+  make_forcing_links nowcast+ 2024-06-06 --debug
+  make_forcing_links ssh 2024-06-06 --debug
+  run_NEMO arbutus forecast 2024-06-06 --debug  # on arbutus
+  # failed again, complaining about array sized in fcst/hrdps_y2024m06d07.nc, I think
+  grib_to_netcdf nowcast+ 2024-06-06 --debug
+  upload_forcing nowcast+ 2024-06-06 --debug
+  make_forcing_links nowcast+ 2024-06-06 --debug
+  make_forcing_links ssh 2024-06-06 --debug
+  run_NEMO arbutus forecast 2024-06-06 --debug  # on arbutus
+  download_results arbutus forecast 2024-06-06
+  # wwatch3/06jun24
+  make_ww3_wind_file forecast 2024-06-06
+  make_ww3_current_file forecast 2024-06-06
+  # wwatch3/07jun24
+  make_ww3_wind_file forecast 2024-06-07
+  make_ww3_current_file forecast 2024-06-07
+  # failed - I give up
+  ```
+
+
+##### SalishSeaNowcast
+
+* tuned dask, etc. in `make_ww3_*_file`:
+  * branch: improve-ww3-prep
+  * finished commits
+  * PR#271
+
+
+
+#### Sat 8-Jun-2023
+
+
+##### SalishSeaCast
+
+* `make_ww3_current_file forecast2` failed
+      unable to open file:
+      name = '/nemoShare/MEOPAR/nowcast-sys/wwatch3-runs/current/SalishSea_1h_20240608_20240608_grid_U.nc'
+* `make_plots nemo forecast2 publish` failed in `compare_tide_prediction_max_ssh.py` call of
+  `salishsea_tools.wind_tools.calc_wind_avg_at_point()`
+      ValueError: can only convert an array of size 1 to a Python scalar
+* `make_plots nemo forecast publish` failed similarly
+* `crop_gribs 00` failed due to not directory to watch despite race condition mitigation code
+
+
+
+#### Sun 9-Jun-2023
+
+Goofed off. Cycled 85 km around Richmond.
+
+
+
+* SalishSeaNowcast TODO:
+  * fix `pyproject.toml` but test `pip install -e` before committing:
+
+    ```toml
+    "pypdf2",  # replaced by pypdf
+    ```
+
+
 
 
 
@@ -5993,11 +6366,6 @@ cert verification disablement leakage vulnerability:
 
 /SalishSeaCast/nowcast-env/lib/python3.11/site-packages/numpy/core/fromnumeric.py:784: UserWarning: Warning: 'partition' will ignore the 'mask' of the MaskedArray.
   a.partition(kth, axis=axis, kind=kind, order=order)
-
-
-TODO:
-
-* add `h5netcdf` dependency in SalishSeaNowcast
 
 
 
