@@ -6255,6 +6255,7 @@ Checked status of scheduled GHA workflows:
   # wait for 5jun runs to finish at ~12:15
   make_forcing_links arbutus nowcast+
   ```
+
 * `forecast/06jun24` run launched and stalled at 34.7%; errors as above; killed
   * Susan diagnosed the problem as non-existent atmospheric forcing files
 
@@ -6376,6 +6377,33 @@ Goofed off. Cycled 85 km around Richmond.
 * `make*_runoff_file` failed
 
 
+#### Tue 11-Jun-2023
+
+Worked at ESB.
+
+
+#### Miscellaneous
+
+* MOAD mtg; see whiteboard
+* Helped Becca with archiving `ariane` results to `graham:/nearline/` and
+  testing `ncks -4 -L4` compression of `ariane` results files
+
+
+##### Security Updates
+
+Squash-merged dependabot PRs to update tornado to 6.4.1 re:
+multiple vulnerabilities:
+
+* erddap-datasets
+* SOG-Bloomcast-Ensemble
+* SOG-Bloomcast
+
+
+##### Reshapr
+
+* tried unsuccessfully to reproduce the broken coordinates with `h5netcdf` for
+  writes issue that I saw for a bug report
+  
 
 
 
