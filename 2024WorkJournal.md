@@ -6349,12 +6349,43 @@ Goofed off. Cycled 85 km around Richmond.
 
 
 
+### Week 24
+
+#### Mon 10-Jun-2023
+
+
+##### SalishSeaCast
+
+* `crop_gribs 06` failed with 484 files unprocessed
+  * only a few files from hours 001 to 006 published on hpfx as of 09:00
+  * finally finished at ~10:45
+* recovery:
+  * manually started `collect_weather 12 2.5km` and `crop_gribs 12`
+  * manually ran obs collection workers, etc. that automation runs after `collect_weather 06`:
+
+    ```bash
+    bash /results/forcing/rivers/observations/collect_ECCC_river_data.sh 2024-06-09
+    get_onc_ctd SEVIP
+    get_onc_ferry TWDP
+    grib_to_netcdf forecast2
+    ```
+
+* `collect_weather 12` got a few files around 08:30, then the flow stopped
+  * `collect_weather 12` finished at ~11:35
+  * `crop_gribs 12` finished at ~11:45
+* `make*_runoff_file` failed
+
+
+
+
+
 * SalishSeaNowcast TODO:
   * fix `pyproject.toml` but test `pip install -e` before committing:
 
     ```toml
     "pypdf2",  # replaced by pypdf
     ```
+
 
 
 
