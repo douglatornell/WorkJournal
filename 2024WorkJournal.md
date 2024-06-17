@@ -6377,16 +6377,18 @@ Goofed off. Cycled 85 km around Richmond.
 * `make*_runoff_file` failed
 
 
+
 #### Tue 11-Jun-2023
 
 Worked at ESB.
 
 
-#### Miscellaneous
+##### Miscellaneous
 
 * MOAD mtg; see whiteboard
 * Helped Becca with archiving `ariane` results to `graham:/nearline/` and
   testing `ncks -4 -L4` compression of `ariane` results files
+* updated `kudu` to PyCharm 2024.1.3
 
 
 ##### Security Updates
@@ -6399,21 +6401,153 @@ multiple vulnerabilities:
 * SOG-Bloomcast
 
 
+##### SalishSeaCast
+
+* confirmed that `make_averaged_dataset day` has worked successfully since 31may when I changed the
+  dask cluster on `salish` to `--nthreads 1`
+
+
 ##### Reshapr
 
 * tried unsuccessfully to reproduce the broken coordinates with `h5netcdf` for
   writes issue that I saw for a bug report
-  
 
 
 
-* SalishSeaNowcast TODO:
-  * fix `pyproject.toml` but test `pip install -e` before committing:
+#### Wed 12-Jun-2023
 
-    ```toml
-    "pypdf2",  # replaced by pypdf
-    ```
 
+##### SalishSeaCast
+
+* LiveOcean was delayed until ~11:10
+
+
+##### Miscellaneous
+
+* updated `khawla` to PyCharm 2024.1.3
+
+
+##### Atlantis
+
+* helped Raisha make her notebook that parses Parcels output into spill input for Atlantis work
+  with the zarr output that Parcels now produces
+
+
+
+#### Thu 13-Jun-2023
+
+
+##### Miscellaneous
+
+* did preliminary searches for `[np|numpy].NAN` and `[np|numpy].NaN` that need to be changed to
+  `[np|numpy].nan` for numpy 2.0
+
+
+##### SalishSeaNowcast
+
+* tuned dask, etc. in `make_ww3_*_file`:
+  * branch: improve-ww3-prep
+  * PR#271 - squash-merged
+  * no stalls since 1jun, so decided to merge
+  * pull updates on `skookum` and `arbutus`
+* Released v24.1
+* updated all 1st party package clones on `skookum` and `arbutus`
+* started work on fixing warnings revealed by `pytest`
+
+
+
+#### Fri 14-Jun-2023
+
+
+##### SalishSeaNowcast
+
+* finished work on fixing warnings revealed by `pytest`
+  * branch: fix-pytest-warnings
+  * PR#273
+
+
+##### SalishSeaCast
+
+* after `collect_weather 18` finished:
+  * built new Python 3.12 nowcast-env on `skookum`
+  * replaced `tmux make_averaged_dataset` with new one using new env
+
+
+JRA arrived for the weekend
+
+
+
+#### Sat 15-Jun-2023
+
+
+##### SalishSeaCast
+
+* `nowcast-blue` stalled at 93.7% (23 hours completed)
+  * with a lot of help from Susan, traced the problem to `cfgrib` pkg that was updated from 0.9.10.3
+    to 0.9.12.0 in the new env
+    * it produces cropped grib files in which all times are the same, apparently because their `time`
+      and `valid_time` values are the same rather than `time` being `00:00` and `valid_time` being
+      the hour offset; e.g. `06:00`
+* `upload_forcing orcinus` failed
+
+
+##### SalishSeaNowcast
+
+* started debugging `cfgrib` issue
+  * reverted `khawla` dev env to `cfgrib 0.9.10.3` and got correct cropped grib files in debug tests
+
+
+
+#### Sun 16-Jun-2023
+
+
+##### SalishSeaNowcast
+
+* continued debugging `cfgrib` issue
+  * updated `khawla` dev env to `cfgrib 0.9.10.4`
+    * test worked
+    * `FutureWarning: GRIB write support is experimental, DO NOT RELY ON IT!` appeared, although
+      it appears to have been in the `cfgrib` code for 6 years, this is the first time I recall
+      seeing it
+  * updated `khawla` dev env to `cfgrib 0.9.11.0`
+    * test worked
+  * updated `khawla` dev env to `cfgrib 0.9.12.0`
+    * test failed
+  * issue is probably due to https://github.com/ecmwf/cfgrib/pull/371
+
+
+##### SalishSeaCast
+
+* changed to `cfgrib 0.9.11.0` in `skookum:nowcast-env`
+* started backfilling:
+
+  ```bash
+  crop_gribs 00 --backfill --fcst-date 2024-06-15 --debug
+  crop_gribs 06 --backfill --fcst-date 2024-06-15 --debug  # 12:02 to 12:18
+  crop_gribs 12 --backfill --fcst-date 2024-06-15 --debug  # 12:33 to 12:
+  grib_to_netcdf 2024-06-15 --debug
+  upload_forcing arbutus 2024-06-15
+  upload_forcing optimum 2024-06-15
+  upload_forcing robot.graham 2024-06-15
+  ~upload_forcing orcinus 2024-06-15~  # skipped due to orcinus offline
+  # wait for runs to finish at ~15:15
+  crop_gribs 18 --backfill --fcst-date 2024-06-15 --debug
+  crop_gribs 00 --backfill --fcst-date 2024-06-16 --debug
+  crop_gribs 06 --backfill --fcst-date 2024-06-16 --debug
+  crop_gribs 12 --backfill --fcst-date 2024-06-16 --debug
+  grib_to_netcdf 2024-06-16 --debug
+  upload_forcing arbutus 2024-06-16
+  upload_forcing optimum 2024-06-16
+  upload_forcing robot.graham 2024-06-16
+  ~upload_forcing orcinus 2024-06-16~  # skipped due to orcinus offline
+  crop_gribs 18 --backfill --fcst-date 2024-06-16 --debug
+  ```
+
+
+
+* TODO:
+  * change `[np|numpy].NAN` and `[np|numpy].NaN` to `[np|numpy].nan` for numpy 2.0
+    * SalishSeaNowcast - done
 
 
 
