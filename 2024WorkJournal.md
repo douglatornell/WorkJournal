@@ -6545,6 +6545,53 @@ JRA arrived for the weekend
 
 
 
+#### Tue 18-Jun-2023
+
+Worked at ESB.
+
+
+##### Security Updates
+
+Squash-merged dependabot PRs to update urllib3 to 1.26.19 re:
+??? vulnerability:
+
+* cookiecutter-MOAD-pkg
+* NEMO_Nowcast
+* cookiecutter-analysis-repo
+* cookiecutter-djl-pypkg
+* SOG-Bloomcast
+
+
+##### Miscellaneous
+
+* MOAD mtg; see whiteboard
+  * presentations for Zhiguo He (sabbatical visitor) next week
+
+
+##### cfgrib bug
+
+* dug into invalid values for `valid_time` variable from `cfgrib=0.9.12.0`
+* created private douglatornell/cfgrib-bug repo
+  * wrote code that reproduces the issue seen in `crop_gribs` without cropping
+    * almost certainly related to changes in cfgrib that added support
+      for sub-hour steps feature of `ecCodes=2.34.0`
+    * issue: https://github.com/ecmwf/cfgrib/issues/370
+    * PR that resolves issue, but probably creates our problem:
+      https://github.com/ecmwf/cfgrib/pull/371
+
+
+##### SS150
+
+* discussed getting Michael's SS150 NEMO configuration running with Susan & Camryn:
+  * just another NEMO config?
+  * run initially on `salish` maybe
+  * need a worker (and probably standalone module) to calculate SS150 boundary
+    conditions file from `nowcast-green` results
+  * need atmospheric forcing weights file for SS150
+* meeting w/ Camryn next Tuesday
+
+
+
 * TODO:
   * change `[np|numpy].NAN` and `[np|numpy].NaN` to `[np|numpy].nan` for numpy 2.0
     * SalishSeaNowcast - done
