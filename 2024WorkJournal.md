@@ -5994,7 +5994,7 @@ cert verification disablement leakage vulnerability:
 * `crop_gribs 06` timed out with 270 files unprocessed
   * `find` operations in `/results/forcing/atmospheric/continental2.5/GRIB/20240306/06/`
     on `skookum` keep freezing terminal sessions
-  * killed `collect_weather 06` asnd `crop_gribs 06`
+  * killed `collect_weather 06` and `crop_gribs 06`
   * `crop_gribs 06 --backfill` failed due to missing `044/APCP` file
   * 157 file remain in `/SalishSeaCast/datamart/hrdps-continental/06/`
   * manually launched `collect_weather 12 2.5km` and `crop_gribs 12` at 07:20
@@ -6545,6 +6545,61 @@ JRA arrived for the weekend
 
 
 
+### Week 25
+
+#### Mon 17-Jun-2023
+
+
+##### SalishSeaCast
+
+* 2h12m from `collect_weather 12` finish to `nowcast-green` finish today vs. 2h46m on 14jun
+* lots of messages from `make_averaged_dataset` like:
+
+  ```text
+  2024-06-17 11:54:30,492 INFO [make_averaged_dataset] Entering _validate_reindex: reindex is None
+  2024-06-17 11:54:30,493 INFO [make_averaged_dataset] Leaving _validate_reindex: method = None, returning None
+  2024-06-17 11:54:30,494 INFO [make_averaged_dataset] _choose_engine: Choosing 'flox'
+  2024-06-17 11:54:30,494 INFO [make_averaged_dataset] _choose_method: method is None
+  2024-06-17 11:54:30,495 INFO [make_averaged_dataset] _choose_method: choosing preferred_method=blockwise
+  ```
+
+
+#### Miscellaneous
+
+Squash-merged dependabot PRs to bump codecov/codecov-action to 4.5.0
+re: dependency & feature updates:
+
+* SalishSeaNowcast
+* gha-workflows
+
+Updated dev envs to get jupyter_server 2.14.1 into `requirements.txt` files re: security alerts that
+dependabot can't resolve re: Jupyter server on Windows discloses Windows user password hash:
+
+* erddap-datasets
+* MoaceanParcels
+* tools/SalishSeaTools
+* SOG-Bloomcast-Ensemble
+
+Squash-merged dependabot PRs to bump urllib3 to 2.2.2 re: CVE-2024-37891 re: cross-origin redirect
+authentication vulnerability:
+
+* AtlantisCmd
+* MOAD/docs
+* moad_tools
+* SalishSeaCast/docs
+* Reshapr
+* SalishSeaNowcast
+* SalishSeaCmd
+* salishsea-site
+* NEMO-Cmd
+
+Squash-merged dependabot PR to bump scikit-learn to 1.5.0 re: CVE-2024-5206 re: sensitive data
+leakage vulnerability:
+
+* moad_tools
+
+
+
 #### Tue 18-Jun-2023
 
 Worked at ESB.
@@ -6552,8 +6607,8 @@ Worked at ESB.
 
 ##### Security Updates
 
-Squash-merged dependabot PRs to update urllib3 to 1.26.19 re:
-??? vulnerability:
+Squash-merged dependabot PRs to update urllib3 to 2.2.2 re: CVE-2024-37891 re: cross-origin redirect
+authentication vulnerability:
 
 * cookiecutter-MOAD-pkg
 * NEMO_Nowcast
@@ -6589,6 +6644,224 @@ Squash-merged dependabot PRs to update urllib3 to 1.26.19 re:
     conditions file from `nowcast-green` results
   * need atmospheric forcing weights file for SS150
 * meeting w/ Camryn next Tuesday
+
+
+
+#### Wed 19-Jun-2023
+
+
+##### SalishSeaCast
+
+* `get_onc_ctd SEVIP` generating reindex messages in log:
+
+  ```text
+  2024-06-19 03:08:44,005 INFO [get_onc_ctd] Entering _validate_reindex: reindex is None
+  2024-06-19 03:08:44,007 INFO [get_onc_ctd] Leaving _validate_reindex: method = None, returning None
+  2024-06-19 03:08:44,009 INFO [get_onc_ctd] _choose_engine: Choosing 'flox'
+  ```
+
+  then fails with `ValueError: __resample_dim__ must not be empty` from:
+
+  ```python-traceback
+  File "/SalishSeaCast/SalishSeaNowcast/nowcast/workers/get_onc_ctd.py", line 176, in _create_dataset
+    salinity_mean = salinity.resample(time="15Min").mean()
+  ```
+
+* `make_plots nemo forecast[2] publish` also generating reindex messages in log
+
+* `flox` added INFO level log messages re: heuristics for auto-guessing aggregation method that was
+  incorporated in xarray in 2024.02.2
+
+
+##### SalishSeaNowcast
+
+* pinned cfgrib dependency at 0.9.11.0 until we get a resolution for the incorrect `valid_time`
+  issue that seems to arise from support for GRIB files with sub-hourly steps in 0.9.12.0:
+  * branch: pin-cfgrib-0.9.11.0
+  * PR#276 - squash-merged
+* replaced warning suppression context manager in `crop_gribs._xarray_to_grib()` with `no_warn=True`
+  in `xarray_to_grib.to_grib()` call
+  * branch: xarray_to_grib-no_warn
+  * PR#277 - squash-merged
+  * deployed to production
+
+
+
+#### Thu 20-Jun-2023
+
+
+##### SalishSeaCast
+
+* orcinus was down due to scheduled building electrical maintenance that I must have forgotten about;
+  that was followed by chiller problems on restart
+* started backfilling `nowcast-agrif` runs:
+
+  ```bash
+  # wait for run to fail
+  upload_forcing orcinus nowcast+ 2024-06-15  --debug
+  upload_forcing orcinus turbidity 2024-06-15 --debug
+  upload_forcing orcinus nowcast+ 2024-06-16 --debug
+  upload_forcing orcinus turbidity 2024-06-16 --debug
+  upload_forcing orcinus nowcast+ 2024-06-17 --debug
+  upload_forcing orcinus turbidity 2024-06-17 --debug
+  upload_forcing orcinus nowcast+ 2024-06-18 --debug
+  upload_forcing orcinus turbidity 2024-06-18 --debug
+  upload_forcing orcinus nowcast+ 2024-06-19 --debug
+  upload_forcing orcinus turbidity 2024-06-19 --debug
+  upload_forcing orcinus nowcast+ 2024-06-20 --debug
+  upload_forcing orcinus turbidity 2024-06-20 --debug
+  make_forcing_links nowcast-agrif 2024-06-15
+  make_forcing_links nowcast-agrif 2024-06-16
+  make_forcing_links nowcast-agrif 2024-06-17
+  make_forcing_links nowcast-agrif 2024-06-18
+  make_forcing_links nowcast-agrif 2024-06-19
+  make_forcing_links nowcast-agrif 2024-06-20
+  ```
+
+* backfill `get_onc_ctd SEVIP`:
+  ```bash
+  get_onc_ctd SEVIP 2024-06-14
+  get_onc_ctd SEVIP 2024-06-15
+  get_onc_ctd SEVIP 2024-06-16
+  get_onc_ctd SEVIP 2024-06-17
+  get_onc_ctd SEVIP 2024-06-18
+  get_onc_ctd SEVIP 2024-06-19
+  ```
+
+
+##### SalishSeaNowcast
+
+* dug into INFO level reindex log messages from `flox`:
+  * I think the best solution would be to demote them in `flox`; it looks like the PR that
+    introduced them was started by one person and finished in haste by another
+* dug into `ValueError: __resample_dim__ must not be empty` for salinity processing in `get_onc_ctd`
+  * this is due to an empty salinity DataArray that previously raised IndexError
+  * branch:
+  * PR#278 - squash-merged
+  * added ValueError to exception catching for empty salinity DataArray
+  * deployed to production
+
+
+##### Miscellaneous
+
+* proposed on xarray general discussion that I would do a PR for flox to change INFO level logging
+  messages to DEBUG; @dcherian agreed that it should be done and asked about logging config
+
+
+
+#### Fri 21-Jun-2023
+
+
+**EOAS owncloud and /home server down from 17:00 to 19:00**
+
+
+##### Miscellaneous
+
+* deleted SalishSeaCast/libwgrib2 fork from aborted approach to HRDPS continental grid GRIB
+  processing
+* prepared for presentation for Zhiguo He at MOAD mtg on Tuesday
+  * "slides"
+    * presentations/SalishSeaCast_block_diagram.png
+    * presentations/CMOS-2018/Doug/AutomationFlow.svg
+    * https://salishsea-nowcast.readthedocs.io/en/latest/index.html#process-flow
+    * presentations/OceanPredict2019/wheel.png
+    * web publishing: https://salishsea.eos.ubc.ca/nemo/
+  * created Google doc with headings and images to outline what I and others will talk about
+
+
+##### SSS150
+
+* learned from Michael that SSS150 stand for South Salish Sea 150m resolution because
+  "It only covers a modest amount of the SS =)"
+* reviewed Michael's https://github.com/SalishSeaCast/NEMO-3.6-code/pull/6
+  * copies `bdydta.F90` into config `MY_SRC/`
+  * adds sea surface height boundary condition code to 3 files:
+    * `bdydta.F90`
+    * `bdydyn2d.F90`
+    * `bdyini.F90`
+  * need to decide if the changes go into SalishSeaCast config, or a new one
+
+
+##### Minecraft
+
+* stopped server
+* did lizzy-smelt backup
+* set up 1.21 server
+
+  ```bash
+  mkdir ~/Games/MinecraftFabric1.21Server
+  cd ~/Games/MinecraftFabric1.21Server
+  curl -OJ https://meta.fabricmc.net/v2/versions/loader/1.21/0.15.11/1.0.1/server/jar
+  cd ~/Games/MinecraftFabric1.20.4Server
+  cp banned-* eula.txt ops.json whitelist.json start.sh ../MinecraftFabric1.21Server/
+  cd ~/Games/MinecraftFabric1.21Server
+  ```
+
+  * edited `start.sh` to:
+
+    ```bash
+    #!/usr/bin/env bash
+    java -Xmx6G -jar fabric-server-mc.1.21-loader.0.15.11-launcher.1.0.1.jar nogui
+    ```
+
+  * edited `server.properties` to sync with 1.20.4 settings
+
+  ```bash
+  cd ~/Games/MinecraftFabric1.21Server/mods/
+  curl -LO https://github.com/CaffeineMC/lithium-fabric/releases/download/mc1.21-0.12.7/lithium-fabric-mc1.21-0.12.7.jar
+  cd ~/Games/MinecraftFabric1.21Server
+  rsync -av ../MinecraftFabric1.20.4Server/1-20-1-25jul23 ./
+  # delete double shulker shells datapack - not yet available for 1.21
+  rm 1-20-1-25jul23/datapacks/double\ shulker\ shells\ v1.3.6\ \(MC\ 1.20-1.20.4\).zip
+
+  tmux attach -t minecraft-server
+  ./start.sh
+  ```
+
+* set up 1.21 client instance in MultiMC
+  * install `openjdk-21-jre`
+
+    ```bash
+    sudo apt update
+    sudo apt install openjdk-21-jre
+    ```
+
+  * created instance
+  * installed fabric 0.15.11
+  * downloaded and installed loader mods:
+    * sodium-fabric-0.5.9+mc1.21.jar
+    * lithium-fabric-mc1.21-0.12.7.jar
+    * malilib-fabric-1.21-0.19.999-sakura.2.jar
+    * minihud-fabric-1.21-0.31.999-sakura.3.jar
+    * tweakeroo-fabric-1.21-0.20.999-sakura.5.jar
+    * iris-1.7.1+mc1.21.jar
+  * Fresh Animations isn't available for 1.21 yet, though Entity [Model|Texture] Features are
+  * downloaded and installed ComplementaryUnbound_r5.2.1.zip shaders
+  * downloaded and installed Vanilla Tweaks resource packs:
+    * iron bars fix
+    * lower shield
+    * redstone devices:
+      * StickyPistonSides
+      *	DirectionalHoppers
+      *	DirectionalDispensersDroppers
+      *	DirectionalObservers
+      *	GroovyLevers
+      *	RedstoneWireFix
+
+
+
+#### Sat 22-Jun-2023
+
+Goofed off.
+
+
+
+#### Sun 23-Jun-2023
+
+Goofed off.
+
+
+
 
 
 
