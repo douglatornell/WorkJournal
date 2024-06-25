@@ -6862,6 +6862,26 @@ Goofed off.
 
 
 
+### Week 26
+
+#### Mon 24-Jun-2023
+
+
+##### SalishSeaCast
+
+* `download_live_ocean` failed at 10:15
+  * sentinel file, but no netCDF file
+  * sent email to Parker at ~10:55
+  * got the file be email from Jilian Xiong of Parker's group
+  * uploaded file to `/results/` and ran `make_live_ocean_files` to restart automation
+
+
+##### Miscellaneous
+
+* phys ocgy seminar: Stephanie, PRODIGY turbulence lecture
+
+
+
 
 
 
