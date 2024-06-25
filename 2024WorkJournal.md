@@ -6882,6 +6882,29 @@ Goofed off.
 
 
 
+#### Tue 25-Jun-2023
+
+
+##### SalishSeaCast
+
+* `collect_weather 12` didn't finish until ~11:00
+
+
+##### Miscellaneous
+
+* MOAD group mtg; welcome to Zingo
+
+
+##### SSS150
+
+* Checked rivers that Michael downloads gauge obs for; Capilano and Seymour are
+  on wateroffice:
+  * we already collect a Capilano gauge
+  * we can add Seymour to the SSC config for `collect_river_data` to handle
+  * Gallant, Mosquito, and Lynn creeks are not on wateroffice
+  * what about other rivers; e.g. Pitt?
+* Slack mtg w/ Camryn to discuss how we get started on sss150
+
 
 
 
