@@ -6923,6 +6923,11 @@ Goofed off.
 ##### Miscellaneous
 
 * updated PyCharm on `khawla` to 2024.1.4
+* started work on changing flox INFO log messages to DEBUG level
+  * created fork on GitHub and cloned it to `/media/doug/warehouse/python/`
+  * created Python 3.12 env from `ci/environment.yml`
+  * did editable install of flox
+  * ran `pytest`: 16037 tests! 4004 skips
 
 
 ##### SalishSeaNowcast
@@ -6930,13 +6935,9 @@ Goofed off.
 * corrected log message at completion of `crop_gribs --backfill`
 * branch: improve-crop_gribs-backfill-log-msg
 * PR#279 - squash-merged
-* previous msg was probably mindlessly copy-pasted from the single variable-hour file option code path
+* previous msg was probably mindlessly copy-pasted from the single variable-hour
+  file option code path
 * pulled into production clone on `skookum`
-* started work on changing flox INFO log messages to DEBUG level
-  * created fork on GitHub and cloned it to `/media/doug/warehouse/python/`
-  * created Python 3.12 env from `ci/environment.yml`
-  * did editable install of flox
-  * ran `pytest`: 16037 tests! 4004 skips
 
 
 ##### 2x resolution SalishSeaCast
@@ -7044,12 +7045,15 @@ Goofed off.
 #### Sun 30-Jun-2023
 
 
+Goofed off and cycled IRL.
+
+
 
 ## July
 
 #### Mon 1-Jul-2023
 
-** Statutory Holiday** - Canada Day
+**Statutory Holiday** - Canada Day
 
 
 ##### SalishSeaCast
@@ -7059,7 +7063,21 @@ Goofed off.
     processes that already ran
 
 
+#### Tue 2-Jul-2023
 
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard.
+* discussed Vicente's VSCode Git ssh agent problems with he, Ilias and Cassidy;
+  latter two confirmed that they have no issues either in GUI or terminal
+* speculated on Jose's loss of uncommitted work in notebooks on `salish`;
+  suggested confirming file saves, and using WIP commits to commit and push more
+  often
+* updated `kudu` PyCharm to 2024.1.4
+* aborted work on changing flox INFO log messages to DEBUG level
+  * discovered when I pushed my commits to GitHub that dcherian had already
+    fixed the issue in unrelated PR#348
 
 
 
