@@ -5803,13 +5803,6 @@ cert verification disablement leakage vulnerability:
 * SOG-Bloomcast-Ensemble
 
 
-##### 2x resolution SalishSeaCast
-
-* started work on double resolution coordinates
-  * failed to understand Susan's notebook:
-    https://github.com/SalishSeaCast/tools/blob/main/double_resolution/coordinates.ipynb
-
-
 ##### Reshapr
 
 * continued experiment with h5netcdf instead of netcdf4
@@ -5829,8 +5822,6 @@ cert verification disablement leakage vulnerability:
 ##### 2x resolution SalishSeaCast
 
 * started work on double resolution coordinates
-  * discussed with Susan her notebook:
-    https://github.com/SalishSeaCast/tools/blob/main/double_resolution/coordinates.ipynb
   * added calculation of `g[lam|phi][tuvf]` arrays for double resolution coordinates
 
 
@@ -6719,6 +6710,7 @@ authentication vulnerability:
   ```
 
 * backfill `get_onc_ctd SEVIP`:
+
   ```bash
   get_onc_ctd SEVIP 2024-06-14
   get_onc_ctd SEVIP 2024-06-15
@@ -6881,6 +6873,11 @@ Goofed off.
 * phys ocgy seminar: Stephanie, PRODIGY turbulence lecture
 
 
+##### SSS150
+
+* started writing `sss150 Implementation Plan` canvas in #sss150 channel on Slack
+
+
 
 #### Tue 25-Jun-2023
 
@@ -6904,6 +6901,167 @@ Goofed off.
   * Gallant, Mosquito, and Lynn creeks are not on wateroffice
   * what about other rivers; e.g. Pitt?
 * Slack mtg w/ Camryn to discuss how we get started on sss150
+
+
+
+#### Wed 26-Jun-2023
+
+
+##### SalishSeaCast
+
+* `collect_weather 12` was late again; downloads started at ~09:00
+  * `crop_gribs 12` timed out at 11:08, causing `grib_to_netcdf` to run and fail
+  * `collect_weather 12` finished at ~11:38
+  * ran `crop_gribs 12 --backfill` to restart automation
+
+
+##### SSS150
+
+* copied and renamed coordinates and bathymetry from Michael's `/ocean/` to `grid` repo
+
+
+##### Miscellaneous
+
+* updated PyCharm on `khawla` to 2024.1.4
+
+
+##### SalishSeaNowcast
+
+* corrected log message at completion of `crop_gribs --backfill`
+* branch: improve-crop_gribs-backfill-log-msg
+* PR#279 - squash-merged
+* previous msg was probably mindlessly copy-pasted from the single variable-hour file option code path
+* pulled into production clone on `skookum`
+* started work on changing flox INFO log messages to DEBUG level
+  * created fork on GitHub and cloned it to `/media/doug/warehouse/python/`
+  * created Python 3.12 env from `ci/environment.yml`
+  * did editable install of flox
+  * ran `pytest`: 16037 tests! 4004 skips
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on double resolution coordinates
+  * added calculation of `e[1|2][tuvf]` arrays for double resolution coordinates from
+    `g[lam|phi][tuvf]` arrays
+
+
+
+#### Thu 27-Jun-2023
+
+
+##### SalishSeaCast
+
+* `collect_weather 12` was back to regular schedule; finishing at ~09:05
+
+
+##### SalishSeaNowcast
+
+* in light of 11jun failure to reproduce the broken coords when writing with h5netcdf issue I see in
+  Reshapr, decided to try using h5netcdf for write in `make_ww3_*current*_file` workers; hacked code
+  on `arbutus`
+  * wwatch3 doesn't like h5netcdf generated files; reverted hacks and re-run prep workers manually
+
+
+##### Miscellaneous
+
+* researched HDF5 shuffle filter for netCDF4 files
+  * applicable when `zlib=True`
+  * learned that `zlib=True` is deprecated in favour of `compression="gzip"`
+  * for `xarray.Dataset.to_netcdf(..., engine="h5netcdf")` the encoding dict must explicitly include
+    `"shuffle": True` for each compressed coord & variable
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on double resolution coordinates
+  * visualized padded ends of e arrays; padding looks correct, by other values are less uniform than
+    I expect
+  * changed compression encoding from `"zlib": True` to `"compression": "gzip"`
+  * added `"shuffle": True` to encoding because it is not automatic for compressed h5netcdf writes
+    as it is for netcdf4 writes
+
+
+
+#### Fri 28-Jun-2023
+
+
+##### SalishSeaCast
+
+* nowcast-agrif run failed 16min in; apparent node issue
+  * I didn't notice until Saturday at ~11:20
+
+
+##### SalishSeaNowcast
+
+* added comments to `make_ww3_*current*_file` workers re: need to write files with netcdf4 because
+  wwatch3 wind & currents pre-processors choke on h5netcdf generated files
+
+
+##### Miscellaneous
+
+* helped Vicente with ssh setup on his new Windows 11 laptop
+* helped Tall with failing VSCode connection to `salish  and waterhole workstations; increased
+  ssh connection time-out
+* setup OPenSSH clinet and server on Zwift PC so I can edit workouts from khawla via VSCode
+  remote ssh extension:
+  * https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=powershell
+  * https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement
+  * my public key had to go in `c:\ProgramData\ssh\administrators_authorized_keys` because I am an
+    admin on the PC; putting it in `$env:USERPROFILE\.ssh\authorized_keys` just resulted in auth failures
+    and password prompts
+  * `$env:USERPROFILE` is a generic way to spell `c:\USERS\djl\`
+
+
+##### SSS150
+
+* worked on getting NEMO running again on `salish`
+  * repo updates and git clones in `/data/dlatorne/MEOPAR/`
+    * lots of hg clones and missing repos
+
+
+##### SalishSeaCast Docs
+
+* updated `salish` quick-start docs
+  * added cloning and installation of NEMO-Cmd and SalishSeaCmd
+
+
+
+#### Sat 29-Jun-2023
+
+
+##### SalishSeaCast
+
+* backfill nowcast-agrif:
+
+  ```bash
+  make_forcing_links orcinus nowcast-agrif 2024-06-28
+  make_forcing_links orcinus nowcast-agrif 2024-06-29
+  ```
+
+
+
+#### Sun 30-Jun-2023
+
+
+
+## July
+
+#### Mon 1-Jul-2023
+
+** Statutory Holiday** - Canada Day
+
+
+##### SalishSeaCast
+
+* `crop_gribs 00` timed out at 23:09 by `collect_weather 00 2.5km` didn't finish until 00:16
+  * ran `crop_gribs 00 --backfill --debug` at ~07:30 Tue to recover without starting 06 weather
+    processes that already ran
+
+
+
+
+
 
 
 
