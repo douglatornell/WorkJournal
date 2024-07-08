@@ -6976,7 +6976,7 @@ Goofed off.
 ##### 2x resolution SalishSeaCast
 
 * continued work on double resolution coordinates
-  * visualized padded ends of e arrays; padding looks correct, by other values are less uniform than
+  * visualized padded ends of e arrays; padding looks correct, but other values are less uniform than
     I expect
   * changed compression encoding from `"zlib": True` to `"compression": "gzip"`
   * added `"shuffle": True` to encoding because it is not automatic for compressed h5netcdf writes
@@ -7063,6 +7063,7 @@ Goofed off and cycled IRL.
     processes that already ran
 
 
+
 #### Tue 2-Jul-2023
 
 
@@ -7078,6 +7079,136 @@ Goofed off and cycled IRL.
 * aborted work on changing flox INFO log messages to DEBUG level
   * discovered when I pushed my commits to GitHub that dcherian had already
     fixed the issue in unrelated PR#348
+
+
+
+#### Wed 3-Jul-2023
+
+
+##### Miscellaneous
+
+* Slack conversation with Becca about using server-side resampling in the ONC data API
+* checked one of Tall's files that Susan can't access; works for me
+
+
+##### 2x resolution SalishSeaCast
+
+* finished work on double resolution coordinates
+  * Susan reviewed padded ends of e arrays
+    * she thinks lumpiness of other values is due to y-axis range of plots
+    * re-scaled y-axis, and things look better; Susan approved
+
+
+##### SSS150
+
+* continued work on getting NEMO running again on `salish`
+  * built XIOS-2 on `salish`
+  * built NEMO SalishSeaCast_Blue config on `salish`
+  * built REBUILD_NEMO on `salish`
+
+
+##### MOAD Docs
+
+* updated `salish` XIOS-2 build section
+  * `/data/$USER/MEOPAR/` paths
+
+
+##### SalishSeaCast Docs
+
+* updated `salish` quick-start docs
+  * dropped reference to NEMO v3.4
+
+
+
+#### Thu 4-Jul-2023
+
+
+##### 2x resolution SalishSeaCast
+
+* added `coordinates_SalishSeaCast_202405.nc` to grid repo
+* can't add `coordinates_SalishSeaCast_double_202405.nc` to grid repo because it is too large to
+  push to GitHub
+
+
+##### SSS150
+
+* succeeded in getting NEMO running again on `salish`
+  * `SS-run-sets/sss150/djl/`
+  * SalishSeaCast/03jul24 run started at 15:11; expect ~15h20m run time, so finish at ~06:40 tomorrow
+
+
+
+#### Fri 5-Jul-2023
+
+
+##### SSS150
+
+* continued NEMO test runs on `salish`
+  * `SS-run-sets/sss150/djl/`
+  * SalishSeaCast/03jul24 in results/ssc_baseline/ stalled at ~03:10 when Neah Bay ssh file got
+    overwritten by automation; no time steps in results files 😱
+  * re-tried SalishSeaCast/03jul24 in results/ssc_baseline/ with 6h run duration
+    * started at 10:55, finished at 15:33; 4h39m11s run time
+  * switched to `add_sshbdy` branch
+    * re-built SalishSeaCast config
+    * ran SalishSeaCast/03jul24 in results/ssc_add_sshbdy/ with 6h run duration; 3h7m31s run time
+
+
+##### Miscellaneous
+
+* Slack w/ Becca re: collecting ONC datasets; discussed ERDDAP vs. ONC API
+
+
+##### SalishSeaCmd
+
+* fixed longstanding issue #1 re: duplicated effort in vcs revision recording fro NEMO and XIOS-2
+  clones:
+  * branch: issue11-vcs-rec-no-dups
+  * PR#69 - squash-merged
+
+
+
+#### Sat 6-Jul-2023
+
+Cycled to Colony Farm and back
+
+
+##### Miscellaneous
+
+
+Squash-merged dependabot PRs to update certifi to 2024.7.4 re: CVE-2024-39689 re: removal of root
+certificates from GLOBALTRUST:
+
+* moad_tools
+* cookiecutter-MOAD-pypkg
+* AtlantisCmd
+* MOAD/docs
+* NEMO_Nowcast
+* cookiecutter-analysis-repo
+* SalishSeaCast/docs
+* Reshapr
+* SalishSeaCmd
+* salishsea-site
+* NEMO-Cmd
+* SalishSeaNowcast
+* MoaceanParcels
+* tools/SalishSeaTools
+* SOG-Bloomcast
+* cookiecutter-djl-pypkg
+* SOG-Bloomcast-Ensemble
+* erddap-datasets
+
+
+
+#### Sun 7-Jul-2023
+
+
+##### SSS150
+
+* started work on visual comparison of baseline and add_sshbdy branch runs:
+  * `notebooks/sss150/add_sshbdyPR-check.ipynb`
+  * surface salinity fields are identical
+
 
 
 
