@@ -7212,6 +7212,13 @@ certificates from GLOBALTRUST:
 
 
 
+#### Tue 9-Jul-2023
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+
 
 
 
