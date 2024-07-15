@@ -7051,6 +7051,8 @@ Goofed off and cycled IRL.
 
 ## July
 
+### Week 27
+
 #### Mon 1-Jul-2023
 
 **Statutory Holiday** - Canada Day
@@ -7099,7 +7101,7 @@ Goofed off and cycled IRL.
     * re-scaled y-axis, and things look better; Susan approved
 
 
-##### SSS150
+##### sss150
 
 * continued work on getting NEMO running again on `salish`
   * built XIOS-2 on `salish`
@@ -7130,7 +7132,7 @@ Goofed off and cycled IRL.
   push to GitHub
 
 
-##### SSS150
+##### sss150
 
 * succeeded in getting NEMO running again on `salish`
   * `SS-run-sets/sss150/djl/`
@@ -7141,7 +7143,7 @@ Goofed off and cycled IRL.
 #### Fri 5-Jul-2023
 
 
-##### SSS150
+##### sss150
 
 * continued NEMO test runs on `salish`
   * `SS-run-sets/sss150/djl/`
@@ -7175,7 +7177,6 @@ Cycled to Colony Farm and back
 
 ##### Miscellaneous
 
-
 Squash-merged dependabot PRs to update certifi to 2024.7.4 re: CVE-2024-39689 re: removal of root
 certificates from GLOBALTRUST:
 
@@ -7203,12 +7204,35 @@ certificates from GLOBALTRUST:
 #### Sun 7-Jul-2023
 
 
-##### SSS150
+##### sss150
 
-* started work on visual comparison of baseline and add_sshbdy branch runs:
+* continued work on visual comparison of baseline and add_sshbdy branch runs:
   * `notebooks/sss150/add_sshbdyPR-check.ipynb`
   * surface salinity fields are identical
 
+
+
+### Week 28
+
+#### Mon 8-Jul-2023
+
+
+##### sss150
+
+* finished work on visual comparison of baseline and add_sshbdy branch runs:
+  * `notebooks/sss150/add_sshbdyPR-check.ipynb`
+  * improved narrative and pushed
+
+
+##### NEMO-3.6-code
+
+* merged NEMO-3.6-code PR#6
+
+
+##### Miscellaneous
+
+* phys ocgy seminar; Birgit, British Antarctic Survey, Human Activities & Ocean-driven melt of
+  west Antarctic ice sheet
 
 
 
@@ -7218,6 +7242,170 @@ certificates from GLOBALTRUST:
 ##### Miscellaneous
 
 * MOAD group mtg; see whiteboard
+
+* Squash-merged dependabot PRs to update zipp to 3.19.1 re: CVE-2024-5569 re: DoS vulnerability:
+
+  * SalishSeaNowcast
+  * NEMO_Nowcast
+  * AtlantisCmd
+  * Reshapr
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * moad_tools
+  * SalishSeaCast/docs
+  * salishsea-site
+
+
+##### NEMO-3.6-code
+
+* found that `SalishSeaCast_Blue/MY_SRC/` is symlinked to `SalishSeaCast_Blue/MY_SRC/`,
+  so PR#6 is automatically included in the former
+
+
+##### sss150
+
+* set up and ran `/data/dlatorne/MEOPAR/SS-run-sets/sss150/djl/SalishSeaCast_Blue.yaml`
+  * 1h13m42s run time
+  * verified by hacking salinity field into `add_sshbdy` comparison notebook
+    * saw expected minor difference to nowcast-green run field
+
+
+##### SalishSeaCast/docs
+
+* updated running on salish section
+
+
+
+#### Wed 10-Jul-2023
+
+
+##### sss150
+
+* refined TODOs in Slack canvas
+
+
+##### Miscellaneous
+
+* read near-final draft of Susan's exchange flux paper
+
+
+
+#### Thu 11-Jul-2023
+
+
+##### sss150
+
+* email to Michael to confirm cpp keys; his reply:
+
+  > The keys are largely the same, but we’ve added Smagorinsky, which also required switching the
+  > c3d ldf keys:
+  >
+  > bld::tool::fppkeys key_bdy key_tide key_dynspg_ts key_vvl key_mpp_mpi key_iomput key_nosignedzero
+  > key_zdfgls key_ldfslp key_xios2 key_traldf_c3d key_traldf_smag key_dynldf_c3d key_dynldf_smag
+  >
+  > key_netcdf4 is removed too, because this does nothing when using xios for output saving.
+
+* NEMO orientation session with Camryn
+* created initial sss150 config with Camryn and got a successful build
+
+
+##### SalishSeaCast
+
+* email from Michael re: end of 2nd Narrows Bridge HADCP obs collection in Mar-2023
+  * instrument is still in operation
+  * obs emails have piled up on `salish`
+
+
+##### Miscellaneous
+
+* set up Fortran language server (`fortls` package) for VSCode on `salish`
+  * `mamba create -n fortls fortls`
+  * `mamba env list`  to confirm env path: `/home/dlatorne/conda_envs/fortls`
+  * set `Fortran > Fortls: Path` in `Remote [SSH: salish]` settings to `$HOME/conda_envs/fortls`
+
+
+##### MOAD/docs
+
+* added sub-section to VS Code re: Fortran language server
+
+
+##### NEMO-3.6-code
+
+* added `*.mod` to `.gitignore` so that people don't commit the `.mod` files that the VSCode Fortran
+  language server generates with its compilation while editing
+
+
+
+#### Fri 12-Jul-2023
+
+
+##### sss150
+
+* added Michael's `namelist_ref` to `sss150/EXP00/`
+* pushed sss150 config to GitHub
+
+
+##### NEMO-3.6-code
+
+* dropped `key_netcdf4` from SalishSeaCast_Blue config based on Michael's assertion that it serves
+  no purpose when XIOS-2 is being used
+  * test run in `/data/dlatorne/MEOPAR/results/sss150/03jul24-blue-no-key_netcdf4/`;
+    identical results
+* can we drop `namnc4` from `namelist.compute`?
+
+
+##### SalishSeaCmd
+
+* duplicate vcs revision recording fix doesn't seem to be working on `salish`
+
+
+##### SalishSeaCast
+
+* investigated Michael's report of VFPA HADCP dataset no longer updating:
+  * stopped on 21mar23 because I inadvertently removed `get_vfpa_hadcp` worker from automation
+  * csv files from email messages are available to 01jul23, then stop being extracted; Michael is
+    investigating
+  * backfilled to 30jun23 in bash loops
+  * Michael discovered that the datetime format in the observation .csv files was changed between
+    17:00 and 18:00 UTC on 2023-07-02 from `dd/mm/YYYY HH:MM` to `YYYY-mm-dd HH:MM`
+    * he fixed and backfilled the cron job script
+    * I updated `get_vfpa_hadcp`
+    * branch: chg-get_vfpa_hadcp-csv-time-format
+    * PR#282 -squash-merged
+  * backfilled to 31oct23 in bash loops
+
+
+
+#### Sat 13-Jul-2023
+
+
+##### SalishSeaCast
+
+* continued backfilling VFPA HADCP to 12jul24 in bash loops
+
+
+##### SalishSeaNowcast
+
+* added `get_vfpa_hadcp` after 06 weather collection
+  * branch: get_vfpa_hadcp-after-06-weather
+  * PR#283
+  * switched to branch in production to test
+  * restarted manager to load updated `next_workers` module
+  * worked on code and tests maintenance task for worker
+
+
+
+#### Sun 14-Jul-2023
+
+
+##### SalishSeaCast
+
+* `get_vfpa_hadcp` worked as expected in automation
+* checked retention on `liveocean.apl.uw.edu` of LiveOcean extraction we use for boundary conditions
+  * spot checks of directories back to 01jun24 show `ubc.nc` file is present
+
+
+
 
 
 
