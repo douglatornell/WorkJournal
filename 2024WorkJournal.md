@@ -7406,6 +7406,146 @@ certificates from GLOBALTRUST:
 
 
 
+### Week 29
+
+#### Mon 15-Jul-2023
+
+
+##### NEMO-3.6-code
+
+* dropped `namnc4` from `namelist.compute` when `key_netcdf4` is not being used
+  * test run in `/data/dlatorne/MEOPAR/results/sss150/03jul24-blue-no-namnc4/`;
+    identical results
+
+
+##### Miscellaneous
+
+* phys ocgy seminar
+* helped Karyn with update of Suchy, et al repo on GitHub for final submission
+  * **it is important to start the process on zenodo by confirming that the repo is selected for**
+    **archiving, then create the GitHub release, otherwise zenodo only does part of the work it should**
+
+
+##### sss150
+
+* Slack w/ Camryn:
+  * her namelist_cfg dissection
+  * my rivers processing findings
+
+
+
+#### Tue 16-Jul-2023
+
+
+##### sss150
+
+* finished canvas notes re: need to a worker to process river discharges and water levels to netCDF
+  files that Michael's `runofftools` package can ingest
+* added canvas notes re: no tides in sss150 config; drop namelists, key_tide, tides item in YAMLs
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+
+* Squash-merged dependabot PRs to update setuptools to 70.0.0 re: CVE-2024-6345 re: code injection
+  vulnerability:
+
+  * MOAD/docs
+  * moad_tools
+  * salishsea-site
+  * NEMO-Cmd
+  * SalishSeaCast/Docs
+  * SalishSeaCmd
+  * SOG-Bloomcast
+  * SOG-forcing
+  * AtlantisCmd
+  * NEMO_Nowcast
+  * gha_workflows
+  * cookiecutter-analysis-repo
+  * cookiecutter-MOAD-pypkg
+  * SalishSeaNowcast
+
+
+##### NEMO-3.6-code
+
+* dropped `key_netcdf4` from SalishSeaCast and SalishSeaCast_Blue configs
+
+
+##### SS-run-sets
+
+* dropped `nam_nc4` namelist from `v20211/namelist.compute` to correspond to dropping `key_netcdf4`
+
+
+##### SalishSeaNowcast
+
+* added `get_vfpa_hadcp` after 06 weather collection
+  * branch: get_vfpa_hadcp-after-06-weather
+  * PR#283 - squash-merged
+  * finished tests maintenance task for worker
+* added sss150 river to sarracenia configs
+  * branch: sss150-rivers
+  * PR#285 - squash-mergesd
+  * deployed branch to skookum for production testing
+
+
+
+#### Wed 17-Jul-2023
+
+Home to YYZ w/ Susan
+
+
+
+#### Thu 18-Jul-2023
+
+YYZ to Barrie w/ Susan
+
+Triaged storage locker w/ Susan & Jamie
+
+
+
+#### Fri 19-Jul-2023
+
+Barrie to Meaford to Barrie w/ Susan & Jamie
+
+Interment service for Mom & Dad
+
+
+
+#### Sat 20-Jul-2023
+
+Locker clearing and sorting w/ Susan & Jamie
+
+
+
+#### Sun 21-Jul-2023
+
+
+##### SalishSeaCast
+
+* forecast2/20jul24 failed with large zonal velocity on west boundary
+  * probably not a problem for 21jul24 runs because it came from the a forecast restart file
+
+
+Locker clearing, then walking on Ardagh Bluff trails w/ Susan
+
+
+
+
+
+
+fortran.fortls.directories
+
+
+
+
+Contact me if you have questions concerning the SalishSeaCast ocean modelling system operated by
+Dr. Susan Allen's research group. I develop the automation software that runs SalishSeaCast, and
+look after the daily system operations. I work with members of the research group and collaborators
+to solve software problems to efficiently analyze the many terabytes of SalishSeaCast model products.
+
+
+
 
 
 
