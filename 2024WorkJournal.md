@@ -7514,7 +7514,9 @@ Interment service for Mom & Dad
 
 #### Sat 20-Jul-2023
 
+Boxes to VV
 Locker clearing and sorting w/ Susan & Jamie
+Dropped off prints for de-framing
 
 
 
@@ -7531,7 +7533,66 @@ Locker clearing, then walking on Ardagh Bluff trails w/ Susan
 
 
 
+### Week 30
 
+#### Mon 22-Jul-2023
+
+Furniture picked up from locker by Habitat for Humanity.
+Got fireproof box opened.
+Started SDB opening process.
+
+
+
+#### Tue 23-Jul-2023
+
+Recycling centre trip.
+Bibles & prayer books to Trinity.
+Picked up prints
+
+
+##### Miscellaneous
+
+* Squash-merged dependabot PRs to update sentry-sdk to 2.8.0 re: CVE-2024-40647 re: envvars exposure
+  vulnerability:
+
+  * salishsea-site
+  * SalishSeaNowcast
+  * NEMO_Nowcast
+
+
+##### SalishSeaNowcast
+
+* finished fixing worker docstrings re: issue #121 - closed; PR#xxxx - squash-merged
+* started modernizing test_live_ocean_files
+  * branch: modernize-test_live_ocean_files
+  * PR#
+
+
+Dinner w/ Linda & Steven
+
+
+
+#### Wed 24-Jul-2023
+
+Junk removed from locker.
+Locker vacated.
+Documents to UPS store for shredding.
+Nostalgia tour in east end
+Got contents of SDB
+
+
+
+#### Thu 25-Jul-2023
+
+Last boxes to VV
+
+Barrie to home w/ Susan
+
+
+
+
+* TODO:
+  * update sentry-sdk in SalishSeaNowcast & salishsea-site envs and restart processes
 
 
 fortran.fortls.directories
