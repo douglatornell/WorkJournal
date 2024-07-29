@@ -1,4 +1,4 @@
-# 2023 Work Journal
+# 2024 Work Journal
 
 This is my public work journal.
 This journal is about:
@@ -13,7 +13,7 @@ This journal is about:
 
 ### Week 0
 
-#### Mon 1-Jan-2023
+#### Mon 1-Jan-2024
 
 **Statutory Holiday** - New Year's Day
 
@@ -81,7 +81,7 @@ Continued SalishSeaNowcast updates for v202111:
 * changed Fraser_tracer variable name to turbidity due to output variable name change
 
 
-#### Tue 2-Jan-2023
+#### Tue 2-Jan-2024
 
 Days since last wwatch3 prep stall: 0
 
@@ -125,7 +125,7 @@ it looks like maybe nbsphinx has changes since 2022 to need a jupyter kernel in 
   * started adding opening balances
 
 
-#### Wed 3-Jan-2023
+#### Wed 3-Jan-2024
 
 Days since last wwatch3 prep stall: 1
 
@@ -170,7 +170,7 @@ Days since last wwatch3 prep stall: 1
     without output to force the students to run the notebooks
 
 
-#### Thu 4-Jan-2023
+#### Thu 4-Jan-2024
 
 Days since last wwatch3 prep stall: 2
 
@@ -206,7 +206,7 @@ Days since last wwatch3 prep stall: 2
   * continued adding opening balances
 
 
-#### Fri 5-Jan-2023
+#### Fri 5-Jan-2024
 
 Days since last wwatch3 prep stall: 3
 
@@ -227,7 +227,7 @@ Days since last wwatch3 prep stall: 3
   * `run_NEMO forecast2` failed, probably due to timing of yesterday's checklist clearance
 
 
-#### Sat 6-Jan-2023
+#### Sat 6-Jan-2024
 
 Days since last wwatch3 prep stall: 4
 
@@ -249,7 +249,7 @@ Days since last wwatch3 prep stall: 4
     ```
 
 
-#### Sun 7-Jan-2023
+#### Sun 7-Jan-2024
 
 Days since last wwatch3 prep stall: 5
 
@@ -275,7 +275,7 @@ Changed to passkey auth on Google.
 
 ### Week 1
 
-#### Mon 8-Jan-2023
+#### Mon 8-Jan-2024
 
 Days since last wwatch3 prep stall: 6
 
@@ -349,7 +349,7 @@ Updated envs to use python-feedgen v1.0.0
 Released v23.2 and bumped version to 24.1.dev0.
 
 
-#### Tue 9-Jan-2023
+#### Tue 9-Jan-2024
 
 Worked at ESB
 
@@ -421,7 +421,7 @@ Started adding V21-11 hr-avg fields datasets:
 * Dropped `testOutOfDate` attribute from V19-05 datasets
 
 
-#### Wed 10-Jan-2023
+#### Wed 10-Jan-2024
 
 Days since last wwatch3 prep stall: 8
 
@@ -479,7 +479,7 @@ Started changing ERDDAP dataset ids to V21-11 for `ping_erddap` worker:
 * PR#227
 
 
-#### Thu 11-Jan-2023
+#### Thu 11-Jan-2024
 
 Days since last wwatch3 prep stall: 9
 
@@ -531,7 +531,7 @@ Squash-merged dependabot PRs to update jinja2 to v3.1.3 re: CVE-2024-22195 re: X
 * NEMO_Nowcast
 
 
-#### Fri 12-Jan-2023
+#### Fri 12-Jan-2024
 
 Days since last wwatch3 prep stall: 10
 
@@ -566,7 +566,7 @@ Started removing nowcast-dev runs from configuration and workflow:
 * branch: drop-nowcast-dev
 
 
-#### Sat 13-Jan-2023
+#### Sat 13-Jan-2024
 
 Days since last wwatch3 prep stall: 11
 
@@ -585,7 +585,7 @@ Continued adding V21-11 hr-avg fields datasets:
 * finished ubcSSg3DChemistryFields1hV21-11
 
 
-#### Sun 14-Jan-2023
+#### Sun 14-Jan-2024
 
 Days since last wwatch3 prep stall: 12
 
@@ -644,7 +644,7 @@ ssh `proxy-jump`:
 
 ### Week 2
 
-#### Mon 15-Jan-2023
+#### Mon 15-Jan-2024
 
 Days since last wwatch3 prep stall: 13
 
@@ -700,7 +700,7 @@ Continued removing nowcast-dev runs from configuration and workflow:
 * branch: drop-nowcast-dev
 
 
-#### Tue 16-Jan-2023
+#### Tue 16-Jan-2024
 
 Worked at ESB
 
@@ -809,7 +809,7 @@ Explored changes necessary to update `get_onc_ctd` worker to ONC scalar data API
   ```
 
 
-#### Wed 17-Jan-2023
+#### Wed 17-Jan-2024
 
 Major snowfall overnight and through day.
 
@@ -857,7 +857,7 @@ Finished changing ERDDAP dataset ids to V21-11 for `ping_erddap` worker:
 
 
 
-#### Thu 18-Jan-2023
+#### Thu 18-Jan-2024
 
 Days since last wwatch3 prep stall: 16
 
@@ -932,7 +932,7 @@ Started work on updating `data_tools.onc_json_to_dataset()` worker to ONC APIv3:
 
 
 
-#### Fri 19-Jan-2023
+#### Fri 19-Jan-2024
 
 Days since last wwatch3 prep stall: 0
 
@@ -967,7 +967,7 @@ Continued work on updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv
 
 
 
-#### Sat 20-Jan-2023
+#### Sat 20-Jan-2024
 
 Days since last wwatch3 prep stall: 1
 
@@ -997,7 +997,7 @@ exposure vulnerability:
 
 
 
-#### Sun 21-Jan-2023
+#### Sun 21-Jan-2024
 
 Days since last wwatch3 prep stall: 2
 
@@ -1032,7 +1032,7 @@ Squash-merged dependabot PRs re: jinja2, jupyterlab, and jupyterlab-lsp.
 
 ### Week 3
 
-#### Mon 22-Jan-2023
+#### Mon 22-Jan-2024
 
 Days since last wwatch3 prep stall: 3
 
@@ -1076,7 +1076,7 @@ Continued work on updating `data_tools.onc_json_to_dataset()` worker to ONC APIv
 
 
 
-#### Tue 23-Jan-2023
+#### Tue 23-Jan-2024
 
 Worked at ESB
 
@@ -1144,7 +1144,7 @@ arbitrary code execution vulnerability:
 
 
 
-#### Wed 24-Jan-2023
+#### Wed 24-Jan-2024
 
 Days since last wwatch3 prep stall: 5
 
@@ -1180,7 +1180,7 @@ Continued work on updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv
 
 
 
-#### Thu 25-Jan-2023
+#### Thu 25-Jan-2024
 
 Days since last wwatch3 prep stall: 6
 
@@ -1237,7 +1237,7 @@ Successfully loaded TWDP ferry obs for 11-31oct22; most/all datasets empty excep
 
 
 
-#### Fri 26-Jan-2023
+#### Fri 26-Jan-2024
 
 Days since last wwatch3 prep stall: 7
 
@@ -1268,13 +1268,13 @@ release so that dependabot notifies us of future updates.
 
 
 
-#### Sat 27-Jan-2023
+#### Sat 27-Jan-2024
 
 Days since last wwatch3 prep stall: 8
 
 
 
-#### Sun 28-Jan-2023
+#### Sun 28-Jan-2024
 
 Days since last wwatch3 prep stall: 9
 
@@ -1282,7 +1282,7 @@ Days since last wwatch3 prep stall: 9
 
 ### Week 4
 
-#### Mon 29-Jan-2023
+#### Mon 29-Jan-2024
 
 Days since last wwatch3 prep stall: 0
 
@@ -1340,7 +1340,7 @@ Sam re: TReX Deep tracer release experiment in St. Lawrence.
 
 
 
-#### Tue 30-Jan-2023
+#### Tue 30-Jan-2024
 
 Days since last wwatch3 prep stall: 1
 
@@ -1435,7 +1435,7 @@ TODO:
 
 
 
-#### Wed 31-Jan-2023
+#### Wed 31-Jan-2024
 
 Days since last wwatch3 prep stall: 0
 
@@ -1486,7 +1486,7 @@ figure file:
 
 ### February
 
-#### Thu 1-Feb-2023
+#### Thu 1-Feb-2024
 
 Days since last wwatch3 prep stall: 0
 
@@ -1557,7 +1557,7 @@ UBC-IOS modeling mtg:
 * Laura re: Bute Inlet paper and OSM poster
 
 
-#### Fri 2-Feb-2023
+#### Fri 2-Feb-2024
 
 Days since last wwatch3 prep stall: 1
 
@@ -1593,7 +1593,7 @@ Continued work on updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv
 * Successfully re-loaded TWDP ferry obs for 10-31oct22, and 1nov2022 to 31dec2022
 
 
-#### Sat 3-Feb-2023
+#### Sat 3-Feb-2024
 
 Days since last wwatch3 prep stall: 2
 
@@ -1605,7 +1605,7 @@ Days since last wwatch3 prep stall: 2
 * first chlorophyll obs on 28mar23
 
 
-#### Sun 4-Feb-2023
+#### Sun 4-Feb-2024
 
 Days since last wwatch3 prep stall: 3
 
@@ -1618,7 +1618,7 @@ Days since last wwatch3 prep stall: 3
 
 ### Week 5
 
-#### Mon 5-Feb-2023
+#### Mon 5-Feb-2024
 
 Days since last wwatch3 prep stall: 4
 
@@ -1649,7 +1649,7 @@ Squash-merged dependabot PR to bump codecov-action to 4.0.1 re: feature updates:
 
 
 
-#### Tue 6-Feb-2023
+#### Tue 6-Feb-2024
 
 Days since last wwatch3 prep stall: 0
 
@@ -1706,7 +1706,7 @@ Researched zarr:
 
 
 
-#### Wed 7-Feb-2023
+#### Wed 7-Feb-2024
 
 Days since last wwatch3 prep stall: 1
 
@@ -1799,7 +1799,7 @@ Started work on adding `make_averaged_dataset` to workflow:
 
 
 
-#### Thu 8-Feb-2023
+#### Thu 8-Feb-2024
 
 Days since last wwatch3 prep stall: 2
 
@@ -1856,7 +1856,7 @@ TODO:
 
 
 
-#### Fri 9-Feb-2023
+#### Fri 9-Feb-2024
 
 Days since last wwatch3 prep stall: 3
 
@@ -1892,7 +1892,7 @@ Helped Karyn with code and data archives for Suchy, et al 2024:
 
 
 
-#### Sat 10-Feb-2023
+#### Sat 10-Feb-2024
 
 Days since last wwatch3 prep stall: 4
 
@@ -1906,7 +1906,7 @@ Days since last wwatch3 prep stall: 4
 
 
 
-#### Sun 11-Feb-2023
+#### Sun 11-Feb-2024
 
 Days since last wwatch3 prep stall: 5
 
@@ -1922,7 +1922,7 @@ Days since last wwatch3 prep stall: 5
 
 ### Week 6
 
-#### Mon 12-Feb-2023
+#### Mon 12-Feb-2024
 
 Days since last wwatch3 prep stall: 6
 
@@ -1966,7 +1966,7 @@ Helped Karyn with code and data archives for Suchy, et al 2024:
 
 
 
-#### Tue 13-Feb-2023
+#### Tue 13-Feb-2024
 
 Days since last wwatch3 prep stall: 7
 
@@ -2000,7 +2000,7 @@ message from `geo_tools.find_closest_model_point()`
 
 
 
-#### Wed 14-Feb-2023
+#### Wed 14-Feb-2024
 
 Days since last wwatch3 prep stall: 8
 
@@ -2022,7 +2022,7 @@ Narrowly averted `salish` swap-trash; killed dask cluster and its tmux session a
 
 
 
-#### Thu 15-Feb-2023
+#### Thu 15-Feb-2024
 
 Days since last wwatch3 prep stall: 9
 
@@ -2055,7 +2055,7 @@ Days since last wwatch3 prep stall: 9
 
 
 
-#### Fri 16-Feb-2023
+#### Fri 16-Feb-2024
 
 Days since last wwatch3 prep stall: 10
 
@@ -2074,7 +2074,7 @@ Days since last wwatch3 prep stall: 10
 
 
 
-#### Sat 17-Feb-2023
+#### Sat 17-Feb-2024
 
 Days since last wwatch3 prep stall: 11
 
@@ -2118,7 +2118,7 @@ DoS attack vulnerability:
 
 
 
-#### Sun 18-Feb-2023
+#### Sun 18-Feb-2024
 
 Days since last wwatch3 prep stall: 0
 
@@ -2140,7 +2140,7 @@ Email from Mark re: orcinus /scratch recovery causing agrif runs to fail
 
 ### Week 9
 
-#### Mon 19-Feb-2023
+#### Mon 19-Feb-2024
 
 **Statutory Holiday** - Family Day
 
@@ -2160,7 +2160,7 @@ Days since last wwatch3 prep stall: 1
   about SalishSeaCast
 
 
-#### Tue 20-Feb-2023
+#### Tue 20-Feb-2024
 
 Worked at ESB while Rita was at home.
 
@@ -2187,7 +2187,7 @@ Days since last wwatch3 prep stall: 2
 
 
 
-#### Wed 21-Feb-2023
+#### Wed 21-Feb-2024
 
 Days since last wwatch3 prep stall: 3
 
@@ -2255,7 +2255,7 @@ a NULL pointer dereference that can crash Python:
 
 
 
-#### Thu 22-Feb-2023
+#### Thu 22-Feb-2024
 
 Days since last wwatch3 prep stall: 4
 
@@ -2300,7 +2300,7 @@ data on ONC side exists but needed to be re-processed; only got some obs for 9-F
 
 
 
-#### Fri 23-Feb-2023
+#### Fri 23-Feb-2024
 
 Days since last wwatch3 prep stall: 5
 
@@ -2359,7 +2359,7 @@ compatibility for config where M was used:
 
 
 
-#### Sat 24-Feb-2023
+#### Sat 24-Feb-2024
 
 Days since last wwatch3 prep stall: 6
 
@@ -2437,7 +2437,7 @@ Days since last wwatch3 prep stall: 6
 
 
 
-#### Sun 25-Feb-2023
+#### Sun 25-Feb-2024
 
 Days since last wwatch3 prep stall: 0
 
@@ -2493,7 +2493,7 @@ Days since last wwatch3 prep stall: 0
 
 ### Week 10
 
-#### Mon 26-Feb-2023
+#### Mon 26-Feb-2024
 
 Days since last wwatch3 prep stall: 1
 
@@ -2590,7 +2590,7 @@ Resumed work on updating `get_onc_ctd` and `get_onc_ferry` workers to ONC APIv3:
 
 
 
-#### Tue 27-Feb-2023
+#### Tue 27-Feb-2024
 
 Days since last wwatch3 prep stall: 1
 
@@ -2616,7 +2616,7 @@ Worked at ESB until snow started to fall in early afternoon.
 
 
 
-#### Wed 28-Feb-2023
+#### Wed 28-Feb-2024
 
 Days since last wwatch3 prep stall: 2
 
@@ -2696,7 +2696,7 @@ Helped Susan with getting Cassidy's river tracers NEMO config running on optimum
 
 
 
-#### Thu 29-Feb-2023
+#### Thu 29-Feb-2024
 
 Days since last wwatch3 prep stall: 0
 
@@ -2825,7 +2825,7 @@ Days since last wwatch3 prep stall: 3
 
 ### Week 10
 
-#### Mon 26-Feb-2023
+#### Mon 4-Mar-2024
 
 Days since last wwatch3 prep stall: 4
 
@@ -2873,7 +2873,7 @@ Continued work on adding make_averaged_dataset to automation:
 
 
 
-#### Tue 5-Mar-2023
+#### Tue 5-Mar-2024
 
 Worked at ESB while Rita was at home.
 
@@ -3014,7 +3014,7 @@ Set up server:
 
 
 
-#### Wed 6-Mar-2023
+#### Wed 6-Mar-2024
 
 Days since last wwatch3 prep stall: 0
 
@@ -3036,7 +3036,7 @@ Days since last wwatch3 prep stall: 0
 
 
 
-#### Thu 7-Mar-2023
+#### Thu 7-Mar-2024
 
 Days since last wwatch3 prep stall: 1
 
@@ -3080,7 +3080,7 @@ Started changing from 'graham-dtn' to 'robot.graham':
 
 
 
-#### Fri 8-Mar-2023
+#### Fri 8-Mar-2024
 
 Days since last wwatch3 prep stall: 2
 
@@ -3108,7 +3108,7 @@ Fix bugs re: removal of host name arg from `make_averaged_dataset` worker:
 
 
 
-#### Sat 9-Mar-2023
+#### Sat 9-Mar-2024
 
 Days since last wwatch3 prep stall: 0
 
@@ -3119,7 +3119,7 @@ Days since last wwatch3 prep stall: 0
 
 
 
-#### Sun 10-Mar-2023
+#### Sun 10-Mar-2024
 
 Days since last wwatch3 prep stall: 1
 
@@ -3127,7 +3127,7 @@ Days since last wwatch3 prep stall: 1
 
 ### Week 11
 
-#### Mon 11-Mar-2023
+#### Mon 11-Mar-2024
 
 Annual water filter service completed.
 
@@ -3137,7 +3137,7 @@ Phys Ocgy Seminar: Atmospheric Quasi-Stationary Waves
 
 
 
-#### Tue 12-Mar-2023
+#### Tue 12-Mar-2024
 
 Worked at ESB.
 
@@ -3185,7 +3185,7 @@ Helped Tall get an image of Ubuntu 22.04.4 to rebuild his failed laptop.
 
 
 
-#### Wed 13-Mar-2023
+#### Wed 13-Mar-2024
 
 Days since last wwatch3 prep stall: 4
 
@@ -3214,7 +3214,7 @@ Days since last wwatch3 prep stall: 4
 
 
 
-#### Thu 14-Mar-2023
+#### Thu 14-Mar-2024
 
 Days since last wwatch3 prep stall: 5
 
@@ -3242,7 +3242,7 @@ Started adding V23-02 HRDPS continental grid fields datasets:
 
 
 
-#### Fri 15-Mar-2023
+#### Fri 15-Mar-2024
 
 Days since last wwatch3 prep stall: 6
 
@@ -3273,7 +3273,7 @@ Continued adding V23-02 HRDPS continental grid fields datasets:
 
 
 
-#### Sat 16-Mar-2023
+#### Sat 16-Mar-2024
 
 Days since last wwatch3 prep stall: 7
 
@@ -3286,7 +3286,7 @@ Days since last wwatch3 prep stall: 7
 
 
 
-#### Sun 17-Mar-2023
+#### Sun 17-Mar-2024
 
 Days since last wwatch3 prep stall: 8
 
@@ -3294,7 +3294,7 @@ Days since last wwatch3 prep stall: 8
 
 ### Week 12
 
-#### Mon 18-Mar-2023
+#### Mon 18-Mar-2024
 
 Days since last wwatch3 prep stall: 9
 
@@ -3349,7 +3349,7 @@ Tried to help Ilias with odd xarray behaviour as he combines diatom arrays and c
 
 
 
-#### Tue 19-Mar-2023
+#### Tue 19-Mar-2024
 
 Worked at ESB while Rita was at home.
 
@@ -3376,7 +3376,7 @@ Updated module loads to Alliance StdEnv/2023:
 
 
 
-#### Wed 20-Mar-2023
+#### Wed 20-Mar-2024
 
 Days since last wwatch3 prep stall: 11
 
@@ -3426,7 +3426,7 @@ Group dinner at Nuba.
 
 
 
-#### Thu 21-Mar-2023
+#### Thu 21-Mar-2024
 
 Days since last wwatch3 prep stall: 12
 
@@ -3443,7 +3443,7 @@ Days since last wwatch3 prep stall: 12
 
 
 
-#### Fri 22-Mar-2023
+#### Fri 22-Mar-2024
 
 Days since last wwatch3 prep stall: 13
 
@@ -3531,13 +3531,13 @@ Also added `${HOME}/Games/` to backups so that Minecraft server and worlds get b
 
 
 
-#### Sat 23-Mar-2023
+#### Sat 23-Mar-2024
 
 Days since last wwatch3 prep stall: 14
 
 
 
-#### Sun 24-Mar-2023
+#### Sun 24-Mar-2024
 
 Days since last wwatch3 prep stall: 15
 
@@ -3549,7 +3549,7 @@ Started work on 2023 income tax returns.
 
 ### Week 13
 
-#### Mon 25-Mar-2023
+#### Mon 25-Mar-2024
 
 Days since last wwatch3 prep stall: 16
 
@@ -3568,7 +3568,7 @@ Spiciness of Subsurface Isopycnals on the Vancouver Island Continental Shelf and
 
 
 
-#### Tue 26-Mar-2023
+#### Tue 26-Mar-2024
 
 Days since last wwatch3 prep stall: 17
 
@@ -3586,7 +3586,7 @@ MOAD group mtg; see whiteboard.
 
 
 
-#### Wed 27-Mar-2023
+#### Wed 27-Mar-2024
 
 Days since last wwatch3 prep stall: 18
 
@@ -3623,7 +3623,7 @@ Investigated daily error from ubcSSg3DVariableVolumeLayers1hV21-11:
 
 
 
-#### Thu 28-Mar-2023
+#### Thu 28-Mar-2024
 
 Days since last wwatch3 prep stall: 19
 
@@ -3731,7 +3731,7 @@ had to use filter-repo to remove a too-large file from history.
 
 
 
-#### Fri 29-Mar-2023
+#### Fri 29-Mar-2024
 
 **Statutory Holiday** - Good Friday
 
@@ -3758,7 +3758,7 @@ Days since last wwatch3 prep stall: 20
 
 
 
-#### Sat 30-Mar-2023
+#### Sat 30-Mar-2024
 
 Days since last wwatch3 prep stall: 21
 
@@ -3796,7 +3796,7 @@ Days since last wwatch3 prep stall: 21
 
 
 
-#### Sun 31-Mar-2023
+#### Sun 31-Mar-2024
 
 Days since last wwatch3 prep stall: 22
 
@@ -3822,7 +3822,7 @@ Days since last wwatch3 prep stall: 22
 
 ### Week 14
 
-#### Mon 1-Apr-2023
+#### Mon 1-Apr-2024
 
 **Statutory Holiday** - Easter Monday
 
@@ -3846,7 +3846,7 @@ Squash-merged dependabot PRs to bump codecov/codecov-action to 4.1.1 re: mainten
   failed requests last night
 
 
-#### Tue 2-Apr-2023
+#### Tue 2-Apr-2024
 
 Days since last wwatch3 prep stall: 24
 
@@ -3909,7 +3909,7 @@ OS pkg updates on kudu; had to fix full boot volume on the way:
 
 
 
-#### Wed 3-Apr-2023
+#### Wed 3-Apr-2024
 
 Days since last wwatch3 prep stall: 25
 
@@ -4008,7 +4008,7 @@ overflow vulnerability:
 
 
 
-#### Thu 4-Apr-2023
+#### Thu 4-Apr-2024
 
 Days since last wwatch3 prep stall: 26
 
@@ -4128,7 +4128,7 @@ Helped Cassidy in Slack with using dask to multiply full domain day-averaged tra
 
 
 
-#### Fri 5-Apr-2023
+#### Fri 5-Apr-2024
 
 Days since last wwatch3 prep stall: 27
 
@@ -4173,7 +4173,7 @@ Days since last wwatch3 prep stall: 27
 
 
 
-#### Sat 6-Apr-2023
+#### Sat 6-Apr-2024
 
 Days since last wwatch3 prep stall: 0
 
@@ -4197,7 +4197,7 @@ Days since last wwatch3 prep stall: 0
 
 
 
-#### Sun 7-Apr-2023
+#### Sun 7-Apr-2024
 
 
 ##### SalishSeaCast
@@ -4217,7 +4217,7 @@ Days since last wwatch3 prep stall: 0
 
 ### Week 15
 
-#### Mon 8-Apr-2023
+#### Mon 8-Apr-2024
 
 Partial solar eclipse, fully obscured by cloud
 
@@ -4292,7 +4292,7 @@ Updated khawla PyCharm to 2024.1.
 
 
 
-#### Tue 9-Apr-2023
+#### Tue 9-Apr-2024
 
 
 ##### SalishSeaCast
@@ -4336,7 +4336,7 @@ Updated khawla PyCharm to 2024.1.
 
 
 
-#### Wed 10-Apr-2023
+#### Wed 10-Apr-2024
 
 
 ##### SalishSeaCast
@@ -4397,7 +4397,7 @@ Updated khawla PyCharm to 2024.1.
 
 
 
-#### Thu 11-Apr-2023
+#### Thu 11-Apr-2024
 
 
 ##### SalishSeaCast
@@ -4443,7 +4443,7 @@ Updated khawla PyCharm to 2024.1.
 
 
 
-#### Fri 12-Apr-2023
+#### Fri 12-Apr-2024
 
 Got 1st dose of shingles vaccine.
 
@@ -4526,7 +4526,7 @@ Squash-merged dependabot PRs to update idna to v3.7 re: CVE-2024-3651 re: DoS vu
 
 
 
-#### Sat 13-Apr-2023
+#### Sat 13-Apr-2024
 
 Recovery from shingles vaccine.
 
@@ -4538,7 +4538,7 @@ Recovery from shingles vaccine.
 
 
 
-#### Sun 14-Apr-2023
+#### Sun 14-Apr-2024
 
 IRL ride to Iona, home via Heather with a stop at Enroute Café.
 
@@ -4558,7 +4558,7 @@ IRL ride to Iona, home via Heather with a stop at Enroute Café.
 
 ### Week 16
 
-#### Mon 15-Apr-2023
+#### Mon 15-Apr-2024
 
 
 ##### SalishSeaCast
@@ -4613,7 +4613,7 @@ Reactivated workflow that had been disabled due to inactivity:
 
 
 
-#### Tue 16-Apr-2023
+#### Tue 16-Apr-2024
 
 Worked at ESB while Rita was at home.
 
@@ -4656,7 +4656,7 @@ overflow vulnerability:
 
 
 
-#### Wed 17-Apr-2023
+#### Wed 17-Apr-2024
 
 ##### Miscellaneous
 
@@ -4696,7 +4696,7 @@ overflow vulnerability:
 
 
 
-#### Thu 18-Apr-2023
+#### Thu 18-Apr-2024
 
 
 ##### SalishSeaCast
@@ -4733,7 +4733,7 @@ overflow vulnerability:
 
 
 
-#### Fri 19-Apr-2023
+#### Fri 19-Apr-2024
 
 
 ##### SalishSeaCast
@@ -4778,7 +4778,7 @@ overflow vulnerability:
 
 
 
-#### Sat 20-Apr-2023
+#### Sat 20-Apr-2024
 
 
 ##### SalishSeaCast
@@ -4787,7 +4787,7 @@ overflow vulnerability:
 
 
 
-#### Sun 21-Apr-2023
+#### Sun 21-Apr-2024
 
 
 ##### SalishSeaCast
@@ -4808,7 +4808,7 @@ overflow vulnerability:
 
 ### Week 17
 
-#### Mon 22-Apr-2023
+#### Mon 22-Apr-2024
 
 
 ##### SalishSeaCast
@@ -4836,7 +4836,7 @@ overflow vulnerability:
 
 
 
-#### Tue 23-Apr-2023
+#### Tue 23-Apr-2024
 
 ##### Miscellaneous
 
@@ -4849,7 +4849,7 @@ overflow vulnerability:
 
 
 
-#### Wed 24-Apr-2023
+#### Wed 24-Apr-2024
 
 
 ##### salishsea-site
@@ -4878,7 +4878,7 @@ Released v24.1 and bumped dev to v24.2.dev0.
 
 
 
-#### Thu 25-Apr-2023
+#### Thu 25-Apr-2024
 
 
 ##### `graham` StdEnv/2023
@@ -4897,7 +4897,7 @@ Released v24.1 and bumped dev to v24.2.dev0.
 
 
 
-#### Fri 26-Apr-2023
+#### Fri 26-Apr-2024
 
 
 ##### `graham` StdEnv/2023
@@ -4929,7 +4929,7 @@ Released v24.1 and bumped dev to v24.2.dev0.
 
 
 
-#### Sat 27-Apr-2023
+#### Sat 27-Apr-2024
 
 
 ##### `graham` StdEnv/2023
@@ -4956,7 +4956,7 @@ Released v24.1 and bumped dev to v24.2.dev0.
 
 
 
-#### Sun 28-Apr-2023
+#### Sun 28-Apr-2024
 
 
 ##### `graham` StdEnv/2023
@@ -4981,7 +4981,7 @@ Released v24.1 and bumped dev to v24.2.dev0.
 
 ### Week 18
 
-#### Mon 29-Apr-2023
+#### Mon 29-Apr-2024
 
 
 ##### SalishSeaCast
@@ -5022,7 +5022,7 @@ Released v24.1 and bumped dev to v24.2.dev0.
 
 
 
-#### Tue 30-Apr-2023
+#### Tue 30-Apr-2024
 
 
 ##### `graham` StdEnv/2023
@@ -5049,7 +5049,7 @@ Released v24.1 and bumped dev to v24.2.dev0.
 
 ## May
 
-#### Wed 1-May-2023
+#### Wed 1-May-2024
 
 
 ##### SalishSeaNowcast
@@ -5101,7 +5101,7 @@ Released v24.1 and bumped dev to v24.2.dev0.
 
 
 
-#### Thu 2-May-2023
+#### Thu 2-May-2024
 
 
 ##### `graham` StdEnv/2023
@@ -5159,7 +5159,7 @@ Released v24.1 and bumped dev to v24.2.dev0.
 
 
 
-#### Fri 3-May-2023
+#### Fri 3-May-2024
 
 
 ##### `graham` StdEnv/2023
@@ -5195,7 +5195,7 @@ execution vulnerability:
 
 
 
-#### Sat 4-May-2023
+#### Sat 4-May-2024
 
 
 ##### SalishSeaCast
@@ -5204,7 +5204,7 @@ execution vulnerability:
 
 
 
-#### Sun 5-May-2023
+#### Sun 5-May-2024
 
 
 ##### SalishSeaCast
@@ -5215,7 +5215,7 @@ execution vulnerability:
 
 ### Week 19
 
-#### Mon 6-May-2023
+#### Mon 6-May-2024
 
 
 ##### Miscellaneous
@@ -5264,7 +5264,7 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
 
 
 
-#### Tue 7-May-2023
+#### Tue 7-May-2024
 
 
 ##### Miscellaneous
@@ -5321,7 +5321,7 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
 
 
 
-#### Wed 8-May-2023
+#### Wed 8-May-2024
 
 
 ##### Miscellaneous
@@ -5373,7 +5373,7 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
 
 
 
-#### Thu 9-May-2023
+#### Thu 9-May-2024
 
 
 ##### Miscellaneous
@@ -5397,7 +5397,7 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
 
 
 
-#### Fri 10-May-2023
+#### Fri 10-May-2024
 
 
 ##### SalishSeaCast
@@ -5421,13 +5421,13 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
 
 
 
-#### Sat 11-May-2023
+#### Sat 11-May-2024
 
 * bike work and house work
 
 
 
-#### Sun 12-May-2023
+#### Sun 12-May-2024
 
 * rode to Deep Cove and back on Gunnars
 
@@ -5442,7 +5442,7 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
 
 ### Week 20
 
-#### Mon 13-May-2023
+#### Mon 13-May-2024
 
 
 ##### SalishSeaCast
@@ -5472,7 +5472,7 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
 
 
 
-#### Tue 14-May-2023
+#### Tue 14-May-2024
 
 
 ##### Miscellaneous
@@ -5491,7 +5491,7 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
 
 
 
-#### Wed 15-May-2023
+#### Wed 15-May-2024
 
 
 ##### Miscellaneous
@@ -5514,7 +5514,7 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
 
 
 
-#### Thu 16-May-2023
+#### Thu 16-May-2024
 
 
 ##### SalishSeaCast
@@ -5529,7 +5529,7 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
 
 
 
-#### Fri 17-May-2023
+#### Fri 17-May-2024
 
 
 ##### SalishSeaCast
@@ -5559,12 +5559,12 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
 
 
 
-#### Sat 18-May-2023
+#### Sat 18-May-2024
 
 Goofed off.
 
 
-#### Sun 19-May-2023
+#### Sun 19-May-2024
 
 
 ##### SalishSeaNowcast
@@ -5588,14 +5588,14 @@ Goofed off.
 
 ### Week 21
 
-#### Mon 20-May-2023
+#### Mon 20-May-2024
 
 **Statutory Holiday** - Victoria Day
 
 Rode Iona, Sanctuary, 6 Rd loop of Richmond.
 
 
-#### Tue 21-May-2023
+#### Tue 21-May-2024
 
 Worked at ESB.
 
@@ -5663,7 +5663,7 @@ cert verification disablement leakage vulnerability:
 
 
 
-#### Wed 22-May-2023
+#### Wed 22-May-2024
 
 
 ##### SalishSeaCast
@@ -5684,7 +5684,7 @@ Celebration of Becca's paper acceptance at the Gallery.
 
 
 
-#### Thu 23-May-2023
+#### Thu 23-May-2024
 
 
 ##### SalishSeaCast
@@ -5707,7 +5707,7 @@ Celebration of Becca's paper acceptance at the Gallery.
 
 
 
-#### Fri 24-May-2023
+#### Fri 24-May-2024
 
 
 ##### SalishSeaCast
@@ -5736,7 +5736,7 @@ Celebration of Becca's paper acceptance at the Gallery.
 
 
 
-#### Sat 25-May-2023
+#### Sat 25-May-2024
 
 
 ##### SalishSeaCast
@@ -5745,7 +5745,7 @@ Celebration of Becca's paper acceptance at the Gallery.
 
 
 
-#### Sun 26-May-2023
+#### Sun 26-May-2024
 
 
 ##### SalishSeaCast
@@ -5756,7 +5756,7 @@ Celebration of Becca's paper acceptance at the Gallery.
 
 ### Week 22
 
-#### Mon 27-May-2023
+#### Mon 27-May-2024
 
 
 #### Miscellaneous
@@ -5787,7 +5787,7 @@ Phys Ocgy seminar:
 
 
 
-#### Tue 28-May-2023
+#### Tue 28-May-2024
 
 
 ##### Miscellaneous
@@ -5816,7 +5816,7 @@ cert verification disablement leakage vulnerability:
 
 
 
-#### Wed 29-May-2023
+#### Wed 29-May-2024
 
 
 ##### 2x resolution SalishSeaCast
@@ -5866,7 +5866,7 @@ cert verification disablement leakage vulnerability:
 
 
 
-#### Thu 30-May-2023
+#### Thu 30-May-2024
 
 
 ##### SalishSeaCast
@@ -5907,7 +5907,7 @@ cert verification disablement leakage vulnerability:
 
 
 
-#### Fri 31-May-2023
+#### Fri 31-May-2024
 
 
 ##### SalishSeaCast
@@ -5945,7 +5945,7 @@ cert verification disablement leakage vulnerability:
 
 ## June
 
-#### Sat 1-Jun-2023
+#### Sat 1-Jun-2024
 
 
 ##### SalishSeaCast
@@ -5964,7 +5964,7 @@ cert verification disablement leakage vulnerability:
 
 
 
-#### Sun 2-Jun-2023
+#### Sun 2-Jun-2024
 
 
 ##### SalishSeaCast
@@ -5977,7 +5977,7 @@ cert verification disablement leakage vulnerability:
 
 ### Week 23
 
-#### Mon 3-Jun-2023
+#### Mon 3-Jun-2024
 
 
 ##### SalishSeaCast
@@ -6038,7 +6038,7 @@ Checked status of scheduled GHA workflows:
   ```
 
 
-#### Tue 4-Jun-2023
+#### Tue 4-Jun-2024
 
 
 ##### SalishSeaCast
@@ -6090,7 +6090,7 @@ Checked status of scheduled GHA workflows:
   * started commits
 
 
-#### Wed 5-Jun-2023
+#### Wed 5-Jun-2024
 
 
 ##### SalishSeaCast
@@ -6221,7 +6221,7 @@ Checked status of scheduled GHA workflows:
   ```
 
 
-#### Thu 6-Jun-2023
+#### Thu 6-Jun-2024
 
 
 ##### SalishSeaCast
@@ -6262,7 +6262,7 @@ Checked status of scheduled GHA workflows:
 
 
 
-#### Fri 7-Jun-2023
+#### Fri 7-Jun-2024
 
 
 ##### Security Updates
@@ -6319,7 +6319,7 @@ multiple vulnerabilities:
 
 
 
-#### Sat 8-Jun-2023
+#### Sat 8-Jun-2024
 
 
 ##### SalishSeaCast
@@ -6335,7 +6335,7 @@ multiple vulnerabilities:
 
 
 
-#### Sun 9-Jun-2023
+#### Sun 9-Jun-2024
 
 Goofed off. Cycled 85 km around Richmond.
 
@@ -6343,7 +6343,7 @@ Goofed off. Cycled 85 km around Richmond.
 
 ### Week 24
 
-#### Mon 10-Jun-2023
+#### Mon 10-Jun-2024
 
 
 ##### SalishSeaCast
@@ -6369,7 +6369,7 @@ Goofed off. Cycled 85 km around Richmond.
 
 
 
-#### Tue 11-Jun-2023
+#### Tue 11-Jun-2024
 
 Worked at ESB.
 
@@ -6405,7 +6405,7 @@ multiple vulnerabilities:
 
 
 
-#### Wed 12-Jun-2023
+#### Wed 12-Jun-2024
 
 
 ##### SalishSeaCast
@@ -6425,7 +6425,7 @@ multiple vulnerabilities:
 
 
 
-#### Thu 13-Jun-2023
+#### Thu 13-Jun-2024
 
 
 ##### Miscellaneous
@@ -6447,7 +6447,7 @@ multiple vulnerabilities:
 
 
 
-#### Fri 14-Jun-2023
+#### Fri 14-Jun-2024
 
 
 ##### SalishSeaNowcast
@@ -6468,7 +6468,7 @@ JRA arrived for the weekend
 
 
 
-#### Sat 15-Jun-2023
+#### Sat 15-Jun-2024
 
 
 ##### SalishSeaCast
@@ -6489,7 +6489,7 @@ JRA arrived for the weekend
 
 
 
-#### Sun 16-Jun-2023
+#### Sun 16-Jun-2024
 
 
 ##### SalishSeaNowcast
@@ -6538,7 +6538,7 @@ JRA arrived for the weekend
 
 ### Week 25
 
-#### Mon 17-Jun-2023
+#### Mon 17-Jun-2024
 
 
 ##### SalishSeaCast
@@ -6591,7 +6591,7 @@ leakage vulnerability:
 
 
 
-#### Tue 18-Jun-2023
+#### Tue 18-Jun-2024
 
 Worked at ESB.
 
@@ -6638,7 +6638,7 @@ authentication vulnerability:
 
 
 
-#### Wed 19-Jun-2023
+#### Wed 19-Jun-2024
 
 
 ##### SalishSeaCast
@@ -6678,7 +6678,7 @@ authentication vulnerability:
 
 
 
-#### Thu 20-Jun-2023
+#### Thu 20-Jun-2024
 
 
 ##### SalishSeaCast
@@ -6741,7 +6741,7 @@ authentication vulnerability:
 
 
 
-#### Fri 21-Jun-2023
+#### Fri 21-Jun-2024
 
 
 **EOAS owncloud and /home server down from 17:00 to 19:00**
@@ -6842,13 +6842,13 @@ authentication vulnerability:
 
 
 
-#### Sat 22-Jun-2023
+#### Sat 22-Jun-2024
 
 Goofed off.
 
 
 
-#### Sun 23-Jun-2023
+#### Sun 23-Jun-2024
 
 Goofed off.
 
@@ -6856,7 +6856,7 @@ Goofed off.
 
 ### Week 26
 
-#### Mon 24-Jun-2023
+#### Mon 24-Jun-2024
 
 
 ##### SalishSeaCast
@@ -6879,7 +6879,7 @@ Goofed off.
 
 
 
-#### Tue 25-Jun-2023
+#### Tue 25-Jun-2024
 
 
 ##### SalishSeaCast
@@ -6904,7 +6904,7 @@ Goofed off.
 
 
 
-#### Wed 26-Jun-2023
+#### Wed 26-Jun-2024
 
 
 ##### SalishSeaCast
@@ -6948,7 +6948,7 @@ Goofed off.
 
 
 
-#### Thu 27-Jun-2023
+#### Thu 27-Jun-2024
 
 
 ##### SalishSeaCast
@@ -6984,7 +6984,7 @@ Goofed off.
 
 
 
-#### Fri 28-Jun-2023
+#### Fri 28-Jun-2024
 
 
 ##### SalishSeaCast
@@ -7028,7 +7028,7 @@ Goofed off.
 
 
 
-#### Sat 29-Jun-2023
+#### Sat 29-Jun-2024
 
 
 ##### SalishSeaCast
@@ -7042,7 +7042,7 @@ Goofed off.
 
 
 
-#### Sun 30-Jun-2023
+#### Sun 30-Jun-2024
 
 
 Goofed off and cycled IRL.
@@ -7053,7 +7053,7 @@ Goofed off and cycled IRL.
 
 ### Week 27
 
-#### Mon 1-Jul-2023
+#### Mon 1-Jul-2024
 
 **Statutory Holiday** - Canada Day
 
@@ -7066,7 +7066,7 @@ Goofed off and cycled IRL.
 
 
 
-#### Tue 2-Jul-2023
+#### Tue 2-Jul-2024
 
 
 ##### Miscellaneous
@@ -7084,7 +7084,7 @@ Goofed off and cycled IRL.
 
 
 
-#### Wed 3-Jul-2023
+#### Wed 3-Jul-2024
 
 
 ##### Miscellaneous
@@ -7122,7 +7122,7 @@ Goofed off and cycled IRL.
 
 
 
-#### Thu 4-Jul-2023
+#### Thu 4-Jul-2024
 
 
 ##### 2x resolution SalishSeaCast
@@ -7140,7 +7140,7 @@ Goofed off and cycled IRL.
 
 
 
-#### Fri 5-Jul-2023
+#### Fri 5-Jul-2024
 
 
 ##### sss150
@@ -7170,7 +7170,7 @@ Goofed off and cycled IRL.
 
 
 
-#### Sat 6-Jul-2023
+#### Sat 6-Jul-2024
 
 Cycled to Colony Farm and back
 
@@ -7201,7 +7201,7 @@ certificates from GLOBALTRUST:
 
 
 
-#### Sun 7-Jul-2023
+#### Sun 7-Jul-2024
 
 
 ##### sss150
@@ -7214,7 +7214,7 @@ certificates from GLOBALTRUST:
 
 ### Week 28
 
-#### Mon 8-Jul-2023
+#### Mon 8-Jul-2024
 
 
 ##### sss150
@@ -7236,7 +7236,7 @@ certificates from GLOBALTRUST:
 
 
 
-#### Tue 9-Jul-2023
+#### Tue 9-Jul-2024
 
 
 ##### Miscellaneous
@@ -7276,7 +7276,7 @@ certificates from GLOBALTRUST:
 
 
 
-#### Wed 10-Jul-2023
+#### Wed 10-Jul-2024
 
 
 ##### sss150
@@ -7290,7 +7290,7 @@ certificates from GLOBALTRUST:
 
 
 
-#### Thu 11-Jul-2023
+#### Thu 11-Jul-2024
 
 
 ##### sss150
@@ -7336,7 +7336,7 @@ certificates from GLOBALTRUST:
 
 
 
-#### Fri 12-Jul-2023
+#### Fri 12-Jul-2024
 
 
 ##### sss150
@@ -7376,7 +7376,7 @@ certificates from GLOBALTRUST:
 
 
 
-#### Sat 13-Jul-2023
+#### Sat 13-Jul-2024
 
 
 ##### SalishSeaCast
@@ -7395,7 +7395,7 @@ certificates from GLOBALTRUST:
 
 
 
-#### Sun 14-Jul-2023
+#### Sun 14-Jul-2024
 
 
 ##### SalishSeaCast
@@ -7408,7 +7408,7 @@ certificates from GLOBALTRUST:
 
 ### Week 29
 
-#### Mon 15-Jul-2023
+#### Mon 15-Jul-2024
 
 
 ##### NEMO-3.6-code
@@ -7434,7 +7434,7 @@ certificates from GLOBALTRUST:
 
 
 
-#### Tue 16-Jul-2023
+#### Tue 16-Jul-2024
 
 
 ##### sss150
@@ -7490,13 +7490,13 @@ certificates from GLOBALTRUST:
 
 
 
-#### Wed 17-Jul-2023
+#### Wed 17-Jul-2024
 
 Home to YYZ w/ Susan
 
 
 
-#### Thu 18-Jul-2023
+#### Thu 18-Jul-2024
 
 YYZ to Barrie w/ Susan
 
@@ -7504,7 +7504,7 @@ Triaged storage locker w/ Susan & Jamie
 
 
 
-#### Fri 19-Jul-2023
+#### Fri 19-Jul-2024
 
 Barrie to Meaford to Barrie w/ Susan & Jamie
 
@@ -7512,7 +7512,7 @@ Interment service for Mom & Dad
 
 
 
-#### Sat 20-Jul-2023
+#### Sat 20-Jul-2024
 
 Boxes to VV
 Locker clearing and sorting w/ Susan & Jamie
@@ -7520,7 +7520,7 @@ Dropped off prints for de-framing
 
 
 
-#### Sun 21-Jul-2023
+#### Sun 21-Jul-2024
 
 
 ##### SalishSeaCast
@@ -7535,7 +7535,7 @@ Locker clearing, then walking on Ardagh Bluff trails w/ Susan
 
 ### Week 30
 
-#### Mon 22-Jul-2023
+#### Mon 22-Jul-2024
 
 Furniture picked up from locker by Habitat for Humanity.
 Got fireproof box opened.
@@ -7543,7 +7543,7 @@ Started SDB opening process.
 
 
 
-#### Tue 23-Jul-2023
+#### Tue 23-Jul-2024
 
 Recycling centre trip.
 Bibles & prayer books to Trinity.
@@ -7562,17 +7562,17 @@ Picked up prints
 
 ##### SalishSeaNowcast
 
-* finished fixing worker docstrings re: issue #121 - closed; PR#xxxx - squash-merged
+* finished fixing worker docstrings re: issue #121 - closed; PR#x287 - squash-merged
 * started modernizing test_live_ocean_files
   * branch: modernize-test_live_ocean_files
-  * PR#
+  * PR#288
 
 
 Dinner w/ Linda & Steven
 
 
 
-#### Wed 24-Jul-2023
+#### Wed 24-Jul-2024
 
 Junk removed from locker.
 Locker vacated.
@@ -7582,7 +7582,7 @@ Got contents of SDB
 
 
 
-#### Thu 25-Jul-2023
+#### Thu 25-Jul-2024
 
 Last boxes to VV
 
@@ -7590,20 +7590,43 @@ Barrie to home w/ Susan
 
 
 
+#### Fri 26-Jul-2024
 
-* TODO:
-  * update sentry-sdk in SalishSeaNowcast & salishsea-site envs and restart processes
-
-
-fortran.fortls.directories
+Susan went to White Rock to relieve Jingli
 
 
+##### salishsea-site
+
+* updated env to `sentry-sdk=2.9.0` and restarted app re: dependabot PR earlier in the week
 
 
-Contact me if you have questions concerning the SalishSeaCast ocean modelling system operated by
-Dr. Susan Allen's research group. I develop the automation software that runs SalishSeaCast, and
-look after the daily system operations. I work with members of the research group and collaborators
-to solve software problems to efficiently analyze the many terabytes of SalishSeaCast model products.
+##### SalishSeaCast
+
+* updated env to `sentry-sdk=2.9.0` re: dependabot PR earlier in the week
+* waited for end of daily runs post-processing
+* restarted manager
+
+
+##### SalishSeaNowcast
+
+* finished modernizing test_live_ocean_files
+  * branch: modernize-test_live_ocean_files
+  * PR#288 - squash-merged
+
+
+
+#### Sat 27-Jul-2024
+
+Rode 8th Ave, Marine Dr, Salish trail loop.
+
+
+
+#### Sun 28-Jul-2024
+
+Washed Susan's Cannondale
+
+
+
 
 
 
