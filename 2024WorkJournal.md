@@ -7627,6 +7627,168 @@ Washed Susan's Cannondale
 
 
 
+### Week 31
+
+#### Mon 29-Jul-2024
+
+
+##### SalishSeaCast
+
+* setup ConnectBot on my phone to monitor/manage automation while traveling
+
+
+##### sss150
+
+* SSS-run-sets:
+  * changed `namelist.atmos_rivers` to use CORE bulk atmospheric Forcing
+  * dropped `rpn` namelists and `ln_blk_rpn` variable from `namsbc`
+  * dropped `namtide` and 2 `nam_bdy_tide` namelists from `namelist.lateral`
+* NEMO-3.6-code:
+  * dropped key_tide from `sss150` config on `salish` and did a clean build
+
+
+
+#### Tue 30-Jul-2024
+
+
+##### Miscellaneous
+
+* reviewed release notes for xarray 2024.07.00
+  * initial changes in `Groupby` API that should eventually facilitate spatial resampling
+* MOAD group mtg; see whiteboard
+
+
+##### 2x resolution SalishSeaCast
+
+* started loading and re-gridding bathymetry survey products that Michael used
+  * copied them from `ocean:/home/mdunphy/...` to `khawla`
+  * stalled out on traceback from `pyproj` re: utm zone id
+
+
+##### SalishSeaCast
+
+* `get_onc_ctd SCVIP` failed due to "no port to publish log messages on"
+  * also happened on 24jlu24
+  * log shows that all worker logging port on skookum are indeed being used during early morning
+    obs collecting
+* hindcast downloads from `optimum` started failing at ~22:00
+
+
+##### SalishSeaNowcast
+
+* added 5 worker logging ports to list in config
+* branch: add-logging-ports
+* PR#289 - squash-merged
+* deployed to production and restarted message_broker, log_aggregator, and manager
+
+
+
+#### Wed 31-Jul-2024
+
+
+##### Miscellaneous
+
+* `ocean` was down due to UBC IT network maintenance in UDC
+  * Henryk got it back online at ~11:20
+
+
+##### 2x resolution SalishSeaCast
+
+* continued loading and re-gridding bathymetry survey products that Michael used
+  * email help from Michael resolved traceback from `pyproj` re: utm zone id
+    * it has to be integer `10` instead of sting `10U` since `proj=8.0`
+    * turns out that the CHS bathy product that was raising that error isn't used anyway 😏
+  * created 202405 base bathymetry array
+    * set shoreline depth of 4m at the 2m isobath and max depth of 428m
+
+
+##### SalishSeaCast
+
+* `skookum` and `salish` had to be rebooted at ~15:30 due to `ocean` issue
+  * `salish` did not recovery well due to disk problem
+  * Henryk booted `salish` from LiveCD for troubleshooting
+  * Henryk mounted `/SalishSeaCast` so that I could get automation partially working
+  * recovery:
+    * `skookum`
+    * start website app
+    * start automation
+      * `collect_weather 00`
+      * `crop_gribs 00`
+
+
+
+## August
+
+#### Thu 1-Aug-2024
+
+
+##### SalishSeaCast
+
+* Henryk mounted `/results2`, `/data`, and `/opp` on skookum
+  * that made them available on all? other waterhole hosts
+* started ERDDAP:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  sudo sysctl fs.inotify.max_user_instances=2048
+  sudo sysctl fs.inotify.max_user_watches=196608
+  sudo sysctl -p
+  sudo /opt/tomcat/bin/startup.sh  # ERDDAP
+  ```
+  <!-- markdownlint-enable MD013 -->
+* analyze overnight failures:
+  * `make_plots nemo forecast publish` failed due to no `/ocean`
+  * `archive_tarball nowcast-green 2024-jul` failed due to no `/ocean`
+  * `get_vfpa_hadcp` failed due to no `/opp` mount
+  * `collect_river_data ECCC Englishman` failed due to no `/data` mount
+  * `collect_river_data ECCC Fraser` failed due to no `/data` mount
+  * `make_runoff_file` failed due to no `/data` mount
+  * `make_v202111_runoff_file` failed due to no `/data` mount
+  * forecast2 ran with persisted runoff
+  * `make_plots nemo forecast2 publish` failed; unclear why
+  * `make_turbidity_file` failed due to insufficient obs
+  * `make_runoff_file` failed due to no `/data` mount
+  * `make_v202111_runoff_file` failed due to no `/data` mount
+  * nowcast-blue ran with persisted runoff
+  * forecast ran with persisted runoff
+  * `make_plots nemo nowcast comparison` failed due to ERDDAP not running for Sand Heads winds
+  * nowcast-green ran with persisted runoff and turbidity
+  * nowcast-agrif ran with persisted runoff and turbidity
+  * `make_averaged_dataset day physics|chemistry|biology` failed due to no `salish` dask cluster
+* backfill:
+  * `get_vfpa_hadcp 2024-07-31`
+  * `collect_river_data ECCC Englishman 2024-07-31`
+  * `collect_river_data ECCC Fraser 2024-07-31`
+  * delete runoff file symlinks
+  * `make_runoff_file 2024-08-01`
+  * `make_v202111_runoff_file 2024-07-31`
+  * after call w/ Henryk:
+    * `archive_tarball nowcast-green 2024-jul`
+
+
+
+#### Fri 2-Aug-2024
+
+
+##### 2x resolution SalishSeaCast
+
+* refined bathymetry visualization function
+* started work on closing First Narrows
+
+
+
+
+fortran.fortls.directories
+
+
+
+
+Contact me if you have questions concerning the SalishSeaCast ocean modelling system operated by
+Dr. Susan Allen's research group. I develop the automation software that runs SalishSeaCast, and
+look after the daily system operations. I work with members of the research group and collaborators
+to solve software problems to efficiently analyze the many terabytes of SalishSeaCast model products.
+
+
+
 
 
 
