@@ -7776,6 +7776,205 @@ Washed Susan's Cannondale
 
 
 
+#### Sat 3-Aug-2024
+
+Prep for VanIsle tour
+
+
+
+#### Sun 4-Aug-2024
+
+VanIsle tour day 1:
+
+* Home to Horseshoe Bay
+* Departure Bay to Port Alberni
+
+
+
+### Week 31
+
+#### Mon 5-Aug-2024
+
+VanIsle tour day 2:
+
+* Port Alberni to Bamfield
+
+
+
+#### Tue 6-Aug-2024
+
+VanIsle tour day 3:
+
+* Bamfield walk to Brady Beach
+
+
+
+#### Wed 7-Aug-2024
+
+VanIsle tour day 4:
+
+* Bamfield Marine Centre & walk to East dock
+
+
+
+#### Thu 8-Aug-2024
+
+VanIsle tour day 5:
+
+* Bamfield to Lake Cowichan
+
+
+
+#### Fri 9-Aug-2024
+
+VanIsle tour day 6:
+
+* Lake Cowichan to Port Renfrew
+
+
+
+#### Sat 10-Aug-2024
+
+VanIsle tour day 7:
+
+* Port Renfrew walk to Botanical Beach
+
+
+
+#### Sun 11-Aug-2024
+
+VanIsle tour day 8:
+
+* Port Renfrew to Sooke
+
+
+
+### Week 33
+
+#### Mon 12-Aug-2024
+
+VanIsle tour day 9:
+
+* Sooke to Debby & Paul's
+
+
+
+#### Tue 13-Aug-2024
+
+VanIsle tour day 10:
+
+* Debby & Paul's to Swartz Bay
+* Tsawassen to home
+* total tour distance: 610.81 km
+
+
+
+#### Wed 14-Aug-2024
+
+##### SalishSeaCast
+
+* `download_live_ocean` timed out at 12:03
+  * re-ran for another try at 12:07
+  * emails from Parker saying that problem is due to HPC failure; file may be available by 15:00
+  * worker succeeded at 15:07, and automation took things from there
+* backfilled 6aug24 LiveOcean download & boundary conditions file
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  rm /results/forcing/LiveOcean/downloaded/20240806/low_passed_UBC.nc
+  download_live_ocean 2024-08-06 --debug
+  make_live_ocean_files 2024-08-06 --debug
+  ```
+  <!-- markdownlint-enable MD013 -->
+* realized that `fraser_buoy.cron.sh` has not been running since `salish` went down
+  * asked Henryk to send me `crontab -l` from `salish`
+  * added `35 *   *   *   *    /results/observations/ECCC/fraser_buoy.cron.sh` to my `skookum` crontab
+  * tried unsuccessfully to find information about web data service for Fraser buoy obs
+
+
+##### salishsea-site
+
+* Squash-merged dependabot to update webob to 1.8.8 re: CVE-2024-42353 re: domain redirect
+  vulnerability
+* built new `salishsea-site-env` on `skookum`
+
+
+
+#### Thu 15-Aug-2024
+
+
+##### Miscellaneous
+
+Checked status of scheduled GHA workflows:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  conda activate gha-workflows
+  python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+Read about coming readthedocs addon changes; enabled addons and analytics on all non-archived projects.
+Confirmed that blogofile project has been archived on GitHub, so I no longer need to worry about it.
+
+
+##### sss150
+
+* SSS-run-sets:
+  * created `sss150_example.yaml` as 1st draft of run description to help figure out forcing files
+
+
+Paul, Debby & Mina arrived for provincial swim meet
+
+
+
+#### Fri 16-Aug-2024
+
+
+##### Miscellaneous
+
+Updated `khawla` to PyCharm 2024.2
+
+
+##### SalishSeaCast
+
+* investigated `TypeError string indices must be integers, not 'str'` from
+  `make_plots nemo forecast[2] publish`
+  * twice per run since forecast2/08aug24 run
+  * in `salishsea_tools.data_tools` request to `api-iwls.dfo-mpo.gc.ca`
+  * happens for Squamish and Halfmoon Bay stations
+  * real-time water levels for those stations appears to have been removed
+  * Darrel Bay station near Squamish hs real-time obs
+
+
+##### SalishSeaCmd
+
+* Discussed namelist editing driven by stanzas in YAML file w/ Susan
+  * it is not beneficial for her workflow, and she likes the context-visibility of editing namelist
+    segment files
+
+
+##### 2x resolution SalishSeaCast
+
+* finished closing First Narrows
+* closed Pitt River
+* closed Fraser River just downstream of Barnston Island
+* added Fraser River proxy extension to the south
+
+
+
+#### Sat 17-Aug-2024
+
+Goofed off.
+
+
+
+#### Sun 18-Aug-2024
+
+Goofed off.
+
+
+
+
+
 
 fortran.fortls.directories
 
