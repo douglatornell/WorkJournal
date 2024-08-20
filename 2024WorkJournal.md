@@ -7973,6 +7973,62 @@ Goofed off.
 
 
 
+### Week 34
+
+#### Mon 19-Aug-2024
+
+##### SalishSeaCast
+
+* `download_live_ocean` delayed to 11:30
+
+
+##### Miscellaneous
+
+* discovered just how many of my EOAS web logins fail:
+  * success:
+    * helpdesk
+    * mail
+  * fail:
+    * www
+    * nextcloud
+    * bookings
+    * gitlab
+* completed annual COI declaration on Workday; no COI for me because only
+  supervisors are required to declare relationships, and I have no active or
+  expected professional software development work outside EOAS
+
+
+##### sss150
+
+* started reading code in Michael & Maxim's bdytools project:
+  * TODO:
+    * generate a 201802 mesh mask with the Fraser extension filled as Michael
+      did in `/ocean/mdunphy/sss150_20220715/sall500/mesh_mask201702us_No_FR_Ext.nc`
+    * generate an `opts.yaml` file based on `FA12/bdytools/config/ssc_to_sss150_salish.yaml`
+    * run `bdytools opts.yaml --weights` to create weights file for SSC to sss150 interpolation
+* meeting w/ Susan & Camryn to review draft YAML run description and progress
+  * reviewed YAML file
+  * reviewed and edited namelist files
+  * decided on target 01jan23 as start date for runs
+  * see whiteboard photos & mtg notes in #sss150 channel
+
+
+
+#### Tue 20-Aug-2024
+
+
+##### Miscellaneous
+
+* AAPS networking decolonization tour of artworks on campus
+* met w/ Henryk re: restoring `salish` to full operation
+
+
+##### sss150
+
+* continued namelist commits
+
+* diff-ed namelist_ref files between SSC & sss150
+  *
 
 
 
