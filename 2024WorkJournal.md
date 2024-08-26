@@ -8021,14 +8021,48 @@ Goofed off.
 
 * AAPS networking decolonization tour of artworks on campus
 * met w/ Henryk re: restoring `salish` to full operation
+  * plan to rebuild `salish` from scratch on Wed 28-Aug
+    * boot 22.04 from LiveCD to confirm that storage controllers are supported
+    * initially install 18.04 due to config that can be done there but not in later version
+      * expected to take 3-5 hours; storage mounts will work afterwards
+    * update to 20.04, then 22.04
+      * probably on Thu 29-Aug; reboots required
 
 
 ##### sss150
 
 * continued namelist commits
+* started diff-ing namelist_ref files between SSC & sss150
 
-* diff-ed namelist_ref files between SSC & sss150
-  *
+
+
+#### Wed 21-Aug-2024
+
+In VGH
+
+
+
+#### Thu 22-Aug-2024
+
+In VGH
+
+
+
+#### Fri 23-Aug-2024
+
+In VGH
+
+
+
+#### Sat 24-Aug-2024
+
+Released from VGH
+
+
+
+#### Sun 25-Aug-2024
+
+Recovery at home
 
 
 
