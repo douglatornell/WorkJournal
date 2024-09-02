@@ -8066,17 +8066,189 @@ Recovery at home
 
 
 
+### Week 35
+
+#### Mon 26-Aug-2024
+
+Recovery at home
+
+
+
+#### Tue 27-Aug-2024
+
+Recovery at home
+
+
+
+#### Wed 28-Aug-2024
+
+Recovery at home
+
+
+##### SalishSeaCast
+
+* stage 1 of `salish` rebuild and OS upgrade
+  * shut down ERDDAP, website & automation at ~13:30
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    sudo /opt/tomcat/bin/shutdown.sh
+
+    mamba activate /SalishSeaCast/salishsea-site-env
+    supervisorctl -c /SalishSeaCast/salishsea-site/supervisord-prod.ini stop salishsea-site
+    supervisorctl -c /SalishSeaCast/salishsea-site/supervisord-prod.ini shutdown
+    mamba deactivate
+
+    mamba activate /SalishSeaCast/nowcast-env
+    pkill -f nowcast.workers
+    supervisorctl -c /SalishSeaCast/SalishSeaNowcast/config/supervisord.ini stop sr_subscribe-hydrometric
+    supervisorctl -c /SalishSeaCast/SalishSeaNowcast/config/supervisord.ini stop sr_subscribe-hrdps-continental
+    supervisorctl -c /SalishSeaCast/SalishSeaNowcast/config/supervisord.ini stop manager
+    supervisorctl -c /SalishSeaCast/SalishSeaNowcast/config/supervisord.ini stop log_aggregator
+    supervisorctl -c /SalishSeaCast/SalishSeaNowcast/config/supervisord.ini stop message_broker
+    supervisorctl -c /SalishSeaCast/SalishSeaNowcast/config/supervisord.ini shutdown
+    mamba deactivate
+    ```
+    <!-- markdownlint-enable MD013 -->
+
+  * restarted ERDDAP, website & automation at ~19:30
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    sudo /opt/tomcat/bin/startup.sh
+
+    mamba activate /SalishSeaCast/salishsea-site-env
+    supervisord -c /SalishSeaCast/salishsea-site/supervisord-prod.ini
+    mamba deactivate
+
+    mamba activate /SalishSeaCast/nowcast-env
+    supervisord -c /SalishSeaCast/SalishSeaNowcast/config/supervisord.ini
+    collect_weather 00 2.5km
+    crop_gribs 00 2024-08-29
+    download_weather 00 1km  # failed due to no files
+    download_weather 12 1km
+    download_weather 18 2.5km
+    crop_gribs 18 --backfill
+    mamba deactivate
+    ```
+    <!-- markdownlint-enable MD013 -->
+
+
+
+#### Thu 29-Aug-2024
+
+Recovery at home
+
+
+##### SalishSeaCast
+
+* reviewed `manager-stderr` log and created issues for warnings:
+  * FutureWarning re: `pandas.read_csv(..., date_parser=...)` in `salishsea_tools.stormtools`;
+    similar to SalishSeaNowcast #290
+  * DeprecationWarning re: `xarray.Dataset.drop()` in `make_CHS_currents_file` worker
+* `download_live_ocean` timed out at ~12:45; re-ran manually and it timed out again at 15:47
+  * persisted 28aug download via symlink
+  * ran `make_live_ocean_files` to jump start automation at ~16:40
+* Zoom w/ Henryk re: `salish`:
+  * `salish` is running 20.04 but root drive is not RAIDed
+  * NFS mounts show some warnings; he wants to monitor operation for a few days
+  * there are a flood of warnings when he tries to run under 22.04
+  * logins remain disabled
+
+
+##### Miscellaneous
+
+* Squash-merged dependabot PRs to update jupyterlab to 4.2.5 re: CVE-2024-43805 re: HTML injection
+  via Markdown vulnerability:
+
+  * SalishSeaTools
+  * MoaceanParcels
+  * erddap-datasets
+  * SOG-ensemble-bloomcast
+
+
+
+#### Fri 30-Aug-2024
+
+Recovery at home
+
+
+##### SalishSeaCast
+
+* aug29 LiveOcean file appeared at 16:06 yesterday
+  * replaced symlinked 28aug file with it for future hindcasts
+* more review of `manager-stderr` log and created issues for warnings:
+  * FutureWarnings
+    in `moad_tools.observations.get_ndbc_buoy()`
+    * re: nested sequences for 'parse_dates' in `pd.read_csv()`
+    * re: `delim_whitespace` keyword in `pd.read_csv` is deprecated
+    * re: `pandas.read_csv(..., date_parser=...)`
+
+
+##### Miscellaneous
+
+* read docs of hypothesis property-based testing package that seems popular in the pangeo community
+* watched Youtube of SharcNet seminar on WASM for scientific computing
+  * rust is best
+  * Pyodide is compiler for Python
+  * JupyterLite is WASM implementation of Jupyter
+  * deployable on GitHub pages
+  * examples use emscriptem because of many library ports
+* updated khawla to PyCharm 2024.2.1
+
+
+##### SalishSeaNowcast
+
+* fixed issue #253 re: UserWarning in `surface_current_tiles` figure module
+  * branch: issue253-surface_current_tiles
+  * PR#292 - squash-merged
+  * was delighted to find figure test notebook
+  * created new nowcast-fig-dev env
+
+
+
+#### Sat 31-Aug-2024
+
+Recovery at home
+
+
+## September
+
+#### Sun 1-Sep-2024
+
+Recovery at home
+
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus nowcast+` failed on key exchange
+  * `orcinus` is non-responsive
+
+
+##### SalishSeaNowcast
+
+* fixed issue #290 re: FutureWarning in `collect_river_date` worker re: date parsing in
+  `pandas.read_csv()`
+  * branch: issue290-read_csv
+  * PR#292 - squash-merged
+  * simple change from `date_parser=...` to `date_format="ISO8601"`
+
+
+##### SalishSeaTools
+
+* started to investigate issue #104 re: FutureWarning in `stormtools.load_tidal_predictions()`
+  re: date parsing in `pandas.read_csv()`
+
+
+
+
+
+
+* pip=24.2 has started to complain about -e installs for packages w/o `pyproject.toml`
+  * NEMO_Nowcast
+  * SalishSeaTools
+
+
+
 fortran.fortls.directories
-
-
-
-
-Contact me if you have questions concerning the SalishSeaCast ocean modelling system operated by
-Dr. Susan Allen's research group. I develop the automation software that runs SalishSeaCast, and
-look after the daily system operations. I work with members of the research group and collaborators
-to solve software problems to efficiently analyze the many terabytes of SalishSeaCast model products.
-
-
 
 
 
