@@ -8158,7 +8158,6 @@ Recovery at home
 
 * Squash-merged dependabot PRs to update jupyterlab to 4.2.5 re: CVE-2024-43805 re: HTML injection
   via Markdown vulnerability:
-
   * SalishSeaTools
   * MoaceanParcels
   * erddap-datasets
@@ -8239,6 +8238,184 @@ Recovery at home
 
 
 
+### Week 36
+
+#### Mon 2-Sep-2024
+
+**Statutory Holiday** - Labour Day
+
+Recovery at home
+
+
+##### SalishSeaNowcast
+
+* started work on issue #291 re: DeprecationWarning in `make_CHS_currents` worker re: replacing
+  deprecated `xarray.Dataset.drop()` with `.drop_vars()`
+  * branch: issue29`-make_CHS_currents-drop_vars
+  * PR#294 - squash-merged
+  * modernized tests:
+    * issue#81 - NowcastWorker mock to fixture
+    * issue#82 - logging mocks to caplog
+    * replace unittest.mock.patch with pytest monkeypatch
+  * corrected unlimited dimension in the netCDF file
+  * fixed typos and improved several docstrings
+
+
+##### SalishSeaCast
+
+* backfilled `nowcast-agrif` runs:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  # wait for run to fail
+  upload_forcing orcinus nowcast+ 2024-09-01
+  upload_forcing orcinus turbidity 2024-09-01
+  # wait for run to finish
+  make_forcing_links nowcast-agrif 2024-09-02
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+
+
+#### Tue 3-Sep-2024
+
+Recovery at home.
+GP appt.
+
+
+##### Miscellaneous
+
+MOAD group mtg; see whiteboard.
+
+
+##### SalishSeaNowcast
+
+* set up pre-commit.ci for repo with default config to auto-fix PRs and generate PRs to auto-update
+  pre-commit config weekly on Mondays at ~16:00 UTC
+
+
+##### sss150
+
+* sent email to Michael asking for:
+  * `rn_rdt` value for `&namdom` in `namelist.domain`
+  * copies of `domain_def.xml` and `iodef.xml` files that they use
+  * restart file from around 1-Jan-2023
+
+
+##### SalishSeaCast
+
+* sent email to chsinfo@dfo-mpo.gc.ca asking about end of water level observations data streams from
+  Halfmoon Bay and Squamish stations on IWLS API service
+
+
+
+#### Wed 4-Sep-2024
+
+Recovery at home.
+Dentists appt.
+
+
+##### SalishSeaCast
+
+* email reply from chsinfo@dfo-mpo.gc.ca asking says that there was a technical problem with the
+  IWLS API service for the water level observations data streams from
+  Halfmoon Bay and Squamish stations, but that it was resolved; contact them if it is persisting for
+  me
+  * still a problem for this morning's forecast2 figures
+
+
+##### Miscellaneous
+
+* Squash-merged dependabot PRs to update cryptography to 43.0.1 re: GHSA-h4gh-qq45-vh27
+  re: vulnerability in statically linked OpenSSL:
+  * cookiecutter-analysis-repo
+  * NEMO_Nowcast
+  * moad_tools
+  * cookiecutter-MOAD-pkg
+  * SalishSeaNowcast
+  * salishsea-site
+  * SalishSeaCmd
+  * NEMO-Cmd
+  * Reshapr
+* pre-commit.ci ran on SalishSeaNowcast PR and black found a comma to add to the end of an arg list
+  in one of the test modules; the commit was added to the PR and contained a link to all the details
+  on the pre-commit.ci site
+* Squash-merged dependabot PRs to update fiona to 1.10.0 (finally) re: CVE-2020-14152 and
+  CVE-2024-25853 re: vulnerabilities in madler-zip dependency:
+  * moad_tools
+* set up pre-commit.ci with default config to auto-fix PRs and generate PRs to auto-update
+  pre-commit config weekly on Mondays at ~16:00 UTC
+  * erddap-datasets
+  * NEMO-Cmd
+  * salishsea-site
+  * SalishSeaCmd
+  * SOG-Bloomcast-Ensemble
+  * NEMO_Nowcast
+  * cookiecutter-analysis-repo
+  * cookiecutter-MOAD.pypkg
+  * gha-workflows
+  * MoaceanParcels
+  * moad_tools
+  * Reshapr
+
+
+##### sss150
+
+* continued namelist commits from 19aug mtg
+
+
+
+#### Thu 5-Sep-2024
+
+Recovery at home.
+
+
+
+#### Fri 6-Sep-2024
+
+Recovery at home.
+
+
+##### NEMO-Cmd
+
+Updated codecov badge URL to add token re: sphinx-linkcheck failures
+
+
+##### sss150
+
+* continued namelist commits from 19aug mtg
+
+* TODO:
+  * symlink `no_snow.nc` and `no_ice.nc` into `grid/sss150/`
+  * rename `rivers/sss150/R_SSS150_Dailies*`  to `rivers/sss150/R_sss150_Dailies*`
+    * fix Susan's notebook
+  * rename `rivers-climatology/rivers_daily_SS150.nc` to `rivers-climatology/rivers_daily_sss150.nc`
+    * fix Susan's notebook
+
+
+##### Miscellaneous
+
+* updated VSCode Remote - SSH extension on `lox` to 0.114.1 and started getting permission errors
+  from GitHub like Vicente's issue
+* Zoom w/ Henryk re: `salish`
+  * `/backup` is RAID0 of 3x6T drives; one is bad
+  * he says that he would have to buy refurbished to get a 10T hot spare for `/data` to go in one of
+    the `/backup` slots; I'm surprised because I see 10T on memoryexpress.com
+  * the fundamental issue is that he doesn't like Ubuntu; prefers RedHat; `sockeye` runs Rocky, the
+    replacement for CentOS that was created when RedHat abandoned
+
+
+
+#### Sat 7-Sep-2024
+
+Recovery at home.
+
+
+
+#### Sun 8-Sep-2024
+
+Recovery at home.
+
+
 
 
 
@@ -8253,24 +8430,10 @@ fortran.fortls.directories
 
 
 
-
-
-
-
-* TODO:
-  * change `[np|numpy].NAN` and `[np|numpy].NaN` to `[np|numpy].nan` for numpy 2.0
-    * SalishSeaNowcast - done
-
-
-
-
-
-
-/SalishSeaCast/SalishSeaNowcast/nowcast/figures/publish/surface_current_tiles.py:319: UserWarning: FixedFormatter should only be used together with FixedLocator
-  ax.set_xticklabels(x_tick_label, rotation=45)
-
-/SalishSeaCast/nowcast-env/lib/python3.11/site-packages/numpy/core/fromnumeric.py:784: UserWarning: Warning: 'partition' will ignore the 'mask' of the MaskedArray.
-  a.partition(kth, axis=axis, kind=kind, order=order)
+Contact me if you have questions concerning the SalishSeaCast ocean modelling system operated by
+Dr. Susan Allen's research group. I develop the automation software that runs SalishSeaCast, and
+look after the daily system operations. I work with members of the research group and collaborators
+to solve software problems to efficiently analyze the many terabytes of SalishSeaCast model products.
 
 
 
@@ -8298,8 +8461,8 @@ TODO:
 
 * Python 3.12:
   * successful workflow test with 3.12:
-    * AtlantisCmd
     * NEMO_Nowcast
+    * AtlantisCmd
     * salishsea-site - migrated on 19Apr24 in PR#77
     * moad_tools - migrated on 18Dec23 in PR#43
     * SalishSeaCmd - migrated on 29nov23  PR#49
@@ -8344,9 +8507,9 @@ TODO:
   * SalishSeaCast/docs - done 7feb24 in PR#43
   * salishsea-site - done 9apr24 in PR#74
 
+  * NEMO_Nowcast
   * rpn-to-gemlam
   * MoaceanParcels
-  * NEMO_Nowcast
   * ECget
 
 
@@ -8362,8 +8525,9 @@ TODO:
   * Reshapr - done 30oct23 in PR#101
   * moad_tools - done 18dec23 in PR#48
   * salishsea-site - done 22apr24 in PR#78
-  * cookiecutter-MOAD-pypkg
   * NEMO_Nowcast
+  * SalishSeaTools
+  * cookiecutter-MOAD-pypkg
   * ECget
   * MoaceanParcels
   * AtlantisCmd
