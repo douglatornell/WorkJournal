@@ -5049,7 +5049,9 @@ Released v24.1 and bumped dev to v24.2.dev0.
 
 ## May
 
+<!-- markdownlint-disable MD001 -->
 #### Wed 1-May-2024
+<!-- markdownlint-enable MD001 -->
 
 
 ##### SalishSeaNowcast
@@ -5945,7 +5947,9 @@ cert verification disablement leakage vulnerability:
 
 ## June
 
+<!-- markdownlint-disable MD001 -->
 #### Sat 1-Jun-2024
+<!-- markdownlint-enable MD001 -->
 
 
 ##### SalishSeaCast
@@ -6744,7 +6748,9 @@ authentication vulnerability:
 #### Fri 21-Jun-2024
 
 
+<!-- markdownlint-disable MD036 -->
 **EOAS owncloud and /home server down from 17:00 to 19:00**
+<!-- markdownlint-enable MD036 -->
 
 
 ##### Miscellaneous
@@ -6827,18 +6833,18 @@ authentication vulnerability:
     * minihud-fabric-1.21-0.31.999-sakura.3.jar
     * tweakeroo-fabric-1.21-0.20.999-sakura.5.jar
     * iris-1.7.1+mc1.21.jar
-  * Fresh Animations isn't available for 1.21 yet, though Entity [Model|Texture] Features are
+  * Fresh Animations isn't available for 1.21 yet, though `Entity [Model|Texture] Features` are
   * downloaded and installed ComplementaryUnbound_r5.2.1.zip shaders
   * downloaded and installed Vanilla Tweaks resource packs:
     * iron bars fix
     * lower shield
     * redstone devices:
       * StickyPistonSides
-      *	DirectionalHoppers
-      *	DirectionalDispensersDroppers
-      *	DirectionalObservers
-      *	GroovyLevers
-      *	RedstoneWireFix
+      * DirectionalHoppers
+      * DirectionalDispensersDroppers
+      * DirectionalObservers
+      * GroovyLevers
+      * RedstoneWireFix
 
 
 
@@ -7004,7 +7010,7 @@ Goofed off.
 * helped Vicente with ssh setup on his new Windows 11 laptop
 * helped Tall with failing VSCode connection to `salish  and waterhole workstations; increased
   ssh connection time-out
-* setup OPenSSH clinet and server on Zwift PC so I can edit workouts from khawla via VSCode
+* setup OPenSSH client and server on Zwift PC so I can edit workouts from khawla via VSCode
   remote ssh extension:
   * https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=powershell
   * https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement
@@ -7258,7 +7264,7 @@ certificates from GLOBALTRUST:
 
 ##### NEMO-3.6-code
 
-* found that `SalishSeaCast_Blue/MY_SRC/` is symlinked to `SalishSeaCast_Blue/MY_SRC/`,
+* found that `SalishSeaCast_Blue/MY_SRC/` is symlinked to `SalishSeaCast/MY_SRC/`,
   so PR#6 is automatically included in the former
 
 
@@ -7485,7 +7491,7 @@ certificates from GLOBALTRUST:
   * finished tests maintenance task for worker
 * added sss150 river to sarracenia configs
   * branch: sss150-rivers
-  * PR#285 - squash-mergesd
+  * PR#285 - squash-merged
   * deployed branch to skookum for production testing
 
 
@@ -7719,7 +7725,9 @@ Washed Susan's Cannondale
 
 ## August
 
+<!-- markdownlint-disable MD001 -->
 #### Thu 1-Aug-2024
+<!-- markdownlint-enable MD001 -->
 
 
 ##### SalishSeaCast
@@ -8003,7 +8011,7 @@ Goofed off.
 * started reading code in Michael & Maxim's bdytools project:
   * TODO:
     * generate a 201802 mesh mask with the Fraser extension filled as Michael
-      did in `/ocean/mdunphy/sss150_20220715/sall500/mesh_mask201702us_No_FR_Ext.nc`
+      did in `/ocean/mdunphy/sss150_20220715/sal500/mesh_mask201702us_No_FR_Ext.nc`
     * generate an `opts.yaml` file based on `FA12/bdytools/config/ssc_to_sss150_salish.yaml`
     * run `bdytools opts.yaml --weights` to create weights file for SSC to sss150 interpolation
 * meeting w/ Susan & Camryn to review draft YAML run description and progress
@@ -8211,7 +8219,9 @@ Recovery at home
 
 ## September
 
+<!-- markdownlint-disable MD001 -->
 #### Sun 1-Sep-2024
+<!-- markdownlint-enable MD001 -->
 
 Recovery at home
 
@@ -8417,6 +8427,201 @@ Recovery at home.
 
 
 
+### Week 37
+
+#### Mon 9-Sep-2024
+
+Recovery at home
+
+FAL estate work: final distribution to Jamie
+
+
+##### Miscellaneous
+
+* squash-merged pre-commit.ci PRs re: config auto-updates
+  * MoaceanParcels
+  * NEMO-Cmd - also `black` code gardening
+  * cookiecutter-MOAD-pypkg
+  * gha-workflows
+  * SalishSeaCmd
+  * salishsea-site
+  * Reshapr
+  * SalishSeaNowcast
+  * AtlantisCmd
+* compiled list of packages for Henryk to install on `salish` to that I can try to build XIOS, NEMO,
+  and Ariane:
+    <!-- markdownlint-disable MD013 -->
+    ```text
+    ppa:git-core/ppa
+    emacs
+    gfortran
+    openmpi-bin
+    libopenmpi3
+    libopenmpi-dev
+    libnetcdf-dev
+    libnetcdff-dev
+    libnetcdf-mpi
+    netcdf-bin
+    nco
+    liburi-perl
+    m4
+    cmake
+    ksh
+    ```
+    <!-- markdownlint-enable MD013 -->
+
+
+##### SalishSeaCast
+
+* started dask cluster on `salish`
+* backfilled today's day-average datasets:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    make_averaged_dataset day physics
+    make_averaged_dataset day chemistry
+    make_averaged_dataset day biology
+    ```
+    <!-- markdownlint-enable MD013 -->
+  fast and minimal CPU load on `salish`
+* backfilled August average physics datasets:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    for dd in {01..31}; do make_averaged_dataset day physics 2024-08-${dd}; done
+    # launches: make_averaged_dataset month physics 2024-08-01
+    ```
+    <!-- markdownlint-enable MD013 -->
+* month averaging generated 5 messages: `Only found a single cohort. 'map-reduce' is preferred.`
+* backfilled August average chemistry datasets:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    for dd in {01..31}; do make_averaged_dataset day chemistry 2024-08-${dd}; done
+    # launches: make_averaged_dataset month chemistry 2024-08-01
+    ```
+    <!-- markdownlint-enable MD013 -->
+
+
+
+#### Tue 10-Sep-2024
+
+Recovery at home
+
+Debby arrived for Ellie's defense
+
+
+##### SalishSeaCast
+
+* backfilled August average biology datasets:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    for dd in {01..31}; do make_averaged_dataset day biology 2024-08-${dd}; done
+    # launches: make_averaged_dataset month chemistry 2024-08-01
+    ```
+    <!-- markdownlint-enable MD013 -->
+* updated production env to `flox=0.9.10` to resolve noisy info messages that were changed to debug
+  level
+* backfilled September day-average datasets:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    for dd in {01..08}; do make_averaged_dataset day physics 2024-09-${dd}; done
+    for dd in {01..08}; do make_averaged_dataset day chemistry 2024-09-${dd}; done
+    for dd in {01..08}; do make_averaged_dataset day biology 2024-09-${dd}; done
+    ```
+    <!-- markdownlint-enable MD013 -->
+
+
+##### Miscellaneous
+
+* tried clean build of XIOS-2 on `salish`:
+  * forgot to put c++ packages on list for Henryk:
+    <!-- markdownlint-disable MD013 -->
+    ```text
+    g++
+    libnetcdf-c++4-dev
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * success
+* tried clean build of `sss150` NEMO config on `salish`:
+  * 4 string overflow warnings:
+    * `Warning: ‘__builtin_memmove’ reading 80 bytes from a region of size 79 [-Wstringop-overflow=]`
+  * failed due to no `xios.mod`
+  * succeeded after XIOS-2 build
+
+
+
+#### Wed 11-Sep-2024
+
+Recovery at home
+
+
+##### Miscellaneous
+
+* built `SalishSeaCast_Blue` NEMO config on `salish`:
+  * 4 string overflow warnings in `EXTERNAL/IOIPSL/src/calendar.f90`:
+    * `Warning: ‘__builtin_memmove’ reading 80 bytes from a region of size 79 [-Wstringop-overflow=]`
+* discovered that I need to manually delete pre-commit.ci PR branches 🙁
+* tried to run `SalishSeaCast_Blue` NEMO config on `salish`:
+  * blows up memory
+* got Henryk to install `gdb`
+
+
+
+##### SalishSeaCmd
+
+* started changing job submit command for `salish` from `qsub` to `bash`; not a trivial change
+
+
+
+#### Thu 12-Sep-2024
+
+Recovery at home
+
+
+##### Miscellaneous
+
+* running `SalishSeaCast_Blue` in `gdb` shows same growing memory issue; interupt stops in `malloc.c`
+  before first executable line
+  * same for `xios_server.exe`
+* tried `MY_GYRE`
+  * can't build without `xios`
+  * same memory explosion
+* UBC-IOS modeling mtg
+  * Karyn on zooplankton evaluation
+  * discussed XIOS/NEMO build issues w/ Michael & Amber
+* Phys Ocgy seminar: Vicente on PRODIGY Bamfield turbulence obs
+
+
+
+#### Fri 13-Sep-2024
+
+Recovery at home
+
+
+##### Miscellaneous
+
+* emailed Michael with details of NEMO build problem
+* asked Henryk to downgrade to gcc-7 on `salish`
+
+
+
+#### Sat 14-Sep-2024
+
+Recovery at home.
+
+
+
+#### Sun 15-Sep-2024
+
+Recovery at home.
+
+
+
+* pre-commit.ci PR revealed failing test and pandas date parser warnings
+  * moad_tools
+
+
+
+
+
 
 
 * pip=24.2 has started to complain about -e installs for packages w/o `pyproject.toml`
@@ -8426,14 +8631,6 @@ Recovery at home.
 
 
 fortran.fortls.directories
-
-
-
-
-Contact me if you have questions concerning the SalishSeaCast ocean modelling system operated by
-Dr. Susan Allen's research group. I develop the automation software that runs SalishSeaCast, and
-look after the daily system operations. I work with members of the research group and collaborators
-to solve software problems to efficiently analyze the many terabytes of SalishSeaCast model products.
 
 
 
