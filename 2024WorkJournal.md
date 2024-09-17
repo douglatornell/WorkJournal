@@ -5018,7 +5018,7 @@ Released v24.1 and bumped dev to v24.2.dev0.
     * git stash  # re: module loads
     * git switch main
   * 01mar23-6x14
-    * time stepping, then timed out, and run dir is in accessible; /scratch hosed?
+    * time stepping, then timed out, and run dir is inaccessible; /scratch hosed?
 
 
 
@@ -8640,9 +8640,15 @@ Recovery at home
   * ip address: `192.168.238.201`
   * did head node setup from deployment docs
   * installed OS pkgs:
-    *
+    * git
+    * gfortran
+    * libopenmpi3 libopenmpi-dev openmpi-bin
+    * libnetcdf-dev libnetcdff-dev netcdf-bin libnetcdf-c++4-dev
+    * g++ gdb
+    * liburi-perl make cmake ksh mg
   * cloned XIOS-ARCH & XIOS-2
   * created arch file symlinks and ran XIOS-2 build
+* investigated Karyn's permission denied issue for Susan run results on `lox`
 
 
 ##### SalishSeaCast
@@ -8657,6 +8663,25 @@ Recovery at home
   * missing:
     * mar15
     * apr15
+
+
+
+#### Tue 17-Sep-2024
+
+Worked at ESB while Rita was at home
+
+ESB Welcome Back BBQ
+
+
+##### Miscellaneous
+
+* continued testing on `test-20-04`
+  * built XIOS with GCC-9 compilers and `--debug` flag to set `-O0`
+  * started successfully in `gdb` and failed due to no `iodef.xml`
+* resumed testing on `salish`
+  * built XIOS with GCC-9 compilers and `--debug` flag to set `-O0`
+  * started successfully in `gdb` and failed due to no `iodef.xml`
+
 
 
 
