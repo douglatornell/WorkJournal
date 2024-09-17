@@ -8614,6 +8614,51 @@ Recovery at home.
 Recovery at home.
 
 
+##### SalishSeaCast
+
+* `download_live_ocean` was delayed until ~10:30
+
+
+
+### Week 38
+
+#### Mon 16-Sep-2024
+
+Recovery at home
+
+
+##### Miscellaneous
+
+* sent `salish` replacement specs to Henryk
+* sent RFQ for `salish` replacement to System76
+* researched compilers and opemMPI on conda-forge
+  * can't replicate `arbutus`
+* shut down and deleted `fvcom6` instance on `arbutus`
+* created `test-20-04` instance on `arbutus`
+  * image: `Ubuntu-20.04.6-Focal-x64-2023-11`
+  * flavour: `nemo-c16-60gb-90-numa-test`
+  * ip address: `192.168.238.201`
+  * did head node setup from deployment docs
+  * installed OS pkgs:
+    *
+  * cloned XIOS-ARCH & XIOS-2
+  * created arch file symlinks and ran XIOS-2 build
+
+
+##### SalishSeaCast
+
+* `download_live_ocean` timed out at ~12:00
+  * re-ran at ~12:02; success at ~12:07
+* deleted old `/results/` archives to free storage:
+  * `/results/SalishSea/forecast2.201905/`
+  * `/results/SalishSea/forecast.201905/`
+  * `/results/SalishSea/nowcast-blue.201905/`
+* checked `nowcast-green.201805` status on `graham:/nearline/`:
+  * missing:
+    * mar15
+    * apr15
+
+
 
 * pre-commit.ci PR revealed failing test and pandas date parser warnings
   * moad_tools
