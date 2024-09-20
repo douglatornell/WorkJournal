@@ -8598,6 +8598,7 @@ Recovery at home
 
 ##### Miscellaneous
 
+* MOAD group mtg; see whiteboard
 * emailed Michael with details of NEMO build problem
 * asked Henryk to downgrade to gcc-7 on `salish`
 
@@ -8708,6 +8709,33 @@ LifeLabs appt
 * explored XIOS revision log
 * asked Henryk to install `svn` on `salish`
 * phys ocgy seminar: new students Aidan and Kat past research
+
+
+
+#### Fri 13-Sep-2024
+
+Worked at ESB
+
+
+##### Miscellaneous
+
+* figured out how to create a Python 3.13 release candidate env:
+    `mamba create -n py313 -c conda-forge/label/python_rc python=3.13.0rc2`
+* updated `kudu` to PyCharm 2024.2.2
+* MOAD group mtg; see whiteboard
+
+
+##### SalishSeaNowcast
+
+* updated repos on `kudu`
+* build new `salishsea-nowcast` env on `kudu`
+* started work on automating month-average productivity and grazing datasets
+* branch: month-avg-prod-graz
+* PR#
+* stalled thinking about a way to handle `grazing` and `growth` being valid
+  options for month-averaging, but not day-averaging
+
+
 
 
 
