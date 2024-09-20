@@ -8681,7 +8681,33 @@ ESB Welcome Back BBQ
 * resumed testing on `salish`
   * built XIOS with GCC-9 compilers and `--debug` flag to set `-O0`
   * started successfully in `gdb` and failed due to no `iodef.xml`
+  * ran XIOS + NEMO on 1 + 1, then 1 + 7 processors
+    * no time steps, but lots of ocean.output, then failure with a traceback into XIOS
+* received quote for new compute server from System76; salivating 🤤
 
+
+
+#### Wed 18-Sep-2024
+
+
+##### Miscellaneous
+
+* email from Michael confirming my XIOS findings and proposing a way forward by updating XIOS checkout
+* sent questions re: RAID and storage cost to System76; received updated quote w/ RAID controller
+
+
+
+#### Thu 19-Sep-2024
+
+LifeLabs appt
+
+
+##### Miscellaneous
+
+* continued email discussion w/ Michael re: updating XIOS checkout
+* explored XIOS revision log
+* asked Henryk to install `svn` on `salish`
+* phys ocgy seminar: new students Aidan and Kat past research
 
 
 
@@ -8697,6 +8723,14 @@ ESB Welcome Back BBQ
 * pip=24.2 has started to complain about -e installs for packages w/o `pyproject.toml`
   * NEMO_Nowcast
   * SalishSeaTools
+
+
+
+
+Contact me if you have questions concerning the SalishSeaCast ocean modelling system operated by
+Dr. Susan Allen's research group. I develop the automation software that runs SalishSeaCast, and
+look after the daily system operations. I work with members of the research group and collaborators
+to solve software problems to efficiently analyze the many terabytes of SalishSeaCast model products.
 
 
 
