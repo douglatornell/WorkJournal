@@ -8712,7 +8712,7 @@ LifeLabs appt
 
 
 
-#### Fri 13-Sep-2024
+#### Fri 20-Sep-2024
 
 Worked at ESB
 
@@ -8737,6 +8737,44 @@ Worked at ESB
 
 
 
+#### Sat 21-Sep-2024
+
+Drove to White Rock to visit JRA
+
+
+
+#### **Sun 22-Sep-2024**
+
+
+##### Miscellaneous
+
+* updated `khawla` to PyCharm 2024.2.2
+
+
+##### NEMO-Cmd
+
+* tried a hail-mary test of Python 3.13 test env creation on GitHub:
+  * branch: py131
+  * PR#92
+  * added `conda-forge/label/python_rc` to test env channels list
+  * added `python=3.13.0rc2` to `python-version` matrix in pytest-with-coverage workflow
+  * mamba solver was unable to find a collection of packages to solve the env
+
+
+##### NEMO_Nowcast
+
+* finished update to Python 3.12
+  * branch: py312
+  * PR#38 - squash-merged
+  * bumped version to 24.1.dev0
+* updated readthedocs build config:
+  * branch: rtd-build-main
+  * PR#57 - squash-merged
+  * ubuntu-24.04 and mambaforge-23.11
+  * sphinx=7.2.6 and sphinx-rtd-theme=2.0.0
+
+
+
 
 
 * pre-commit.ci PR revealed failing test and pandas date parser warnings
@@ -8751,14 +8789,6 @@ Worked at ESB
 * pip=24.2 has started to complain about -e installs for packages w/o `pyproject.toml`
   * NEMO_Nowcast
   * SalishSeaTools
-
-
-
-
-Contact me if you have questions concerning the SalishSeaCast ocean modelling system operated by
-Dr. Susan Allen's research group. I develop the automation software that runs SalishSeaCast, and
-look after the daily system operations. I work with members of the research group and collaborators
-to solve software problems to efficiently analyze the many terabytes of SalishSeaCast model products.
 
 
 
@@ -8790,8 +8820,8 @@ TODO:
 
 * Python 3.12:
   * successful workflow test with 3.12:
-    * NEMO_Nowcast
     * AtlantisCmd
+    * NEMO_Nowcast - migrated on 22Sep24 in PR#38
     * salishsea-site - migrated on 19Apr24 in PR#77
     * moad_tools - migrated on 18Dec23 in PR#43
     * SalishSeaCmd - migrated on 29nov23  PR#49
@@ -8835,8 +8865,8 @@ TODO:
   * moad_tools - done 18dec23 in PR#47
   * SalishSeaCast/docs - done 7feb24 in PR#43
   * salishsea-site - done 9apr24 in PR#74
+  * NEMO_Nowcast - done 22sep24 in PR#57 (ubuntu-24.04 and mambaforge-23.11)
 
-  * NEMO_Nowcast
   * rpn-to-gemlam
   * MoaceanParcels
   * ECget
