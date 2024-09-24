@@ -8660,7 +8660,7 @@ Recovery at home
   * `/results/SalishSea/forecast2.201905/`
   * `/results/SalishSea/forecast.201905/`
   * `/results/SalishSea/nowcast-blue.201905/`
-* checked `nowcast-green.201805` status on `graham:/nearline/`:
+* checked `nowcast-green.201812` status on `graham:/nearline/`:
   * missing:
     * mar15
     * apr15
@@ -8743,7 +8743,7 @@ Drove to White Rock to visit JRA
 
 
 
-#### **Sun 22-Sep-2024**
+#### Sun 22-Sep-2024
 
 
 ##### Miscellaneous
@@ -8773,6 +8773,38 @@ Drove to White Rock to visit JRA
   * ubuntu-24.04 and mambaforge-23.11
   * sphinx=7.2.6 and sphinx-rtd-theme=2.0.0
 
+
+
+### Week 39
+
+#### Mon 23-Sep-2024
+
+##### Miscellaneous
+
+* did svn checkout of XIOS2 trunk from upstream:
+  `svn co https://forge.ipsl.fr/ioserver/svn/XIOS2/trunk /data/dlatorne/MEOPAR/XIOS2-2659`
+  * got rev2659
+  * changed `arch-GCC_SALISH.fcm` to make `%BASE_CFLAGS` the same as `arch-GCC_LINUX.fcm` in checkout
+  * built successfully with `--job 1 --debug`
+* built SalishSeaCast_Blue against XIOS2-2659
+  * test run failed same as last week's -O0 test of XIOS-2
+    * traced failure to NEMO rev being out of sync with `field_def.xml` due to Susan's TKE variables
+      output changes that got pulled in SS-run-sets w/o pulling code changes
+* next test failed during 1st time step
+  * neither Susan nor I could find any difference other than weird land boundaries in
+    `output.abort.nc` file
+* built XIOS2-2659 and SalishSeaCast_Blue with -O3
+  * test run did time steps and wrote netCDF files
+
+
+##### SalishSeaCast
+
+* backfilled missing nowcast-green.201812 month tarballs from `/results/` to `graham:/nearline/`:
+  * created hacked `nowcast-201812.yaml` with necessary `results archives` path
+  `archive_tarball nowcast-green 2015-mar robot.graham`
+  `archive_tarball nowcast-green 2015-apr robot.graham`
+* `graham:/nearline/SalishSea/nowcast-green.201812/` has more months than
+  `/results/SalishSea/nowcast-green.201812/`
 
 
 
