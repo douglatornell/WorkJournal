@@ -8731,7 +8731,6 @@ Worked at ESB
 * build new `salishsea-nowcast` env on `kudu`
 * started work on automating month-average productivity and grazing datasets
 * branch: month-avg-prod-graz
-* PR#
 * stalled thinking about a way to handle `grazing` and `growth` being valid
   options for month-averaging, but not day-averaging
 
@@ -8805,6 +8804,44 @@ Drove to White Rock to visit JRA
   `archive_tarball nowcast-green 2015-apr robot.graham`
 * `graham:/nearline/SalishSea/nowcast-green.201812/` has more months than
   `/results/SalishSea/nowcast-green.201812/`
+
+
+
+#### Tue 24-Sep-2024
+
+Worked at ESB
+
+
+##### SalishSeaCast
+
+* `crop_gribs` timed out due to 1 unprocessed file that it processed on exit
+  * start of nowcast-blue run was delayed by ~2h
+* `run_NEMO_agrif` failed due to a connection time out
+  * re-ran manually
+
+
+##### Miscellaneous
+
+* learned that `make_xios --full` does a clean build
+* tried to remember how to update XIOS-2 repo from upstream
+  * last done around 26apr19 when we were still using hg
+
+
+##### SalishSeaNowcast
+
+* continued work on automating month-average productivity and grazing datasets
+  * branch: month-avg-prod-graz
+  * PR#297
+  * created:
+    * `SalishSeaNowcast/config/reshapr/month-average_202111_bio_growth_rates.yaml`
+    * `SalishSeaNowcast/config/reshapr/month-average_202111_grazing_mortality.yaml`
+    * tested via `reshapr` CLI on `skookum` (using dask cluster on `salish`)
+      * bio growth rates for jan-2013 took 60s
+      * grazing & mortality for jan-2013 took 118s
+  * deployed branch on `skookum`
+    * successfully tested feb-2013
+    * `day` exclusion mostly works; need failure message types
+    * ran the rest of 2013 in bash loops
 
 
 
