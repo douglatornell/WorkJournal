@@ -100,7 +100,7 @@ There are finally releases for pillow 9.4.0 and gitpython 3.1.30 that address CV
 squash-merged dependabot PRs re: pillow CVE-2022-45199 re: DoS vulnerability;
 no PRs yet for GitPython (released 3 days ago)
 
-Squash-merged dependabot PRs re: jupyter-core CVE-2022-39286 re: arbitrary code execution 
+Squash-merged dependabot PRs re: jupyter-core CVE-2022-39286 re: arbitrary code execution
 vulnerability
 
 Started researching how to get USGS river discharge data into automation:
@@ -153,7 +153,7 @@ PR#143
 
 Updated firmware on khawla and installed nvidia-driver-525.60.11.
 
-Installed Iris 1.5.1, sodium 0.4.8, and lithium 0.10.4. 
+Installed Iris 1.5.1, sodium 0.4.8, and lithium 0.10.4.
 Frame rate with shaders on is way worse (~7 fps) than it used to be :-(
 
 
@@ -218,7 +218,7 @@ branch: add-usgs-rivers
 PR#143
 * added pytest-httpx as dep for dev & test envs
 * added USGS river REST query function and unit tests
-* pulled changes to skookum and changed to branch for production testing; 
+* pulled changes to skookum and changed to branch for production testing;
   restarted manager to load new config
 * ran collect_river_data for 4 rivers from 1-5 Jan in command-line --debug bash loops
 (SalishSeaNowcast)
@@ -229,7 +229,7 @@ Sat 7-Jan-2023
 
 collect_river_data USGS for all 4 rivers failed with empty timeSeries messages;
 successfully re-ran manually at ~11:30
-Fraser River turbidity data stream stopped on 6jan; web page frozen at 
+Fraser River turbidity data stream stopped on 6jan; web page frozen at
 (SalishSeaCast)
 
 Experimented with 1password as ssh agent for more than git commit signing;
@@ -293,7 +293,7 @@ Tue 10-Jan-2023
 
 Worked at ESB while Rita was at home.
 
-Discussion of Python modules & functions w/ Karyn & Raisha; see 
+Discussion of Python modules & functions w/ Karyn & Raisha; see
 ``analysis-doug/notebooks/mods_and_funcs/``
 
 Finished adding USGS rivers collect_river_data:
@@ -349,11 +349,11 @@ Mark Hahn, McMaster
 
 Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
 * oct14 success
-* nov14 
+* nov14
   * 12nov14 physics is another case of make_averaged_dataset worker just hanging
   * fixed with ``month-avg.202111/day_avg.py``
 * dec14 success
-* jan15 
+* jan15
   * 21jan15 physics is another case of make_averaged_dataset worker just hanging
   * fixed with ``month-avg.202111/day_avg.py``
 * feb15 success
@@ -392,7 +392,7 @@ Fri 13-Jan-2023
 Continued backfilling day & month avg files using nowcast.workers.day_month_avgs.py module:
 * apr15 success
 * may15 success
-* jun15 
+* jun15
   * 07jun15 biology is another case of make_averaged_dataset worker just hanging
   * fixed with ``month-avg.202111/day_avg.py``
 (Hindcast)
@@ -436,7 +436,7 @@ jul15 is the beginning of a section of runs where automation produced 1d files w
 coordinate name instead of ``time_counter``; removed check for 1d file from ``day_month_avgs.py``
 to force extraction of 1d files with ``time_counter``
 * jul15 success
-Added ``--check-day-avg-exists/--no-check-day-avg-exists`` option and output of  count of 
+Added ``--check-day-avg-exists/--no-check-day-avg-exists`` option and output of  count of
 month-avg files to ``day_month_avgs.py``
 * aug15 success
 * sep15 success
@@ -454,16 +454,16 @@ Tue 17-Jan-2023
 ^^^^^^^^^^^^^^^
 
 Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module.
-* nov15 
+* nov15
   * some days skipped; problems at month-avg due to mixed time coordinate names
   * re-ran with --no-check-day-avg-exists
 * dec15 success
 * jan16 with --no-check-day-avg-exists success
 * feb16 with --no-check-day-avg-exists success
-* mar16 with --no-check-day-avg-exists 
+* mar16 with --no-check-day-avg-exists
   * mar16 chemistry is a case of make_averaged_dataset worker not working without a msg
   * eventually figured out that 14mar16 chemistry 1d file had time coord named "time"
-  * fixed by running ``month-avg.202111/day_avg.py`` then ``month-avg.202111/month_avg.py`` on  
+  * fixed by running ``month-avg.202111/day_avg.py`` then ``month-avg.202111/month_avg.py`` on
     salish
 (Hindcast)
 
@@ -504,10 +504,10 @@ Wed 18-Jan-2023
 Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
 used --no-check-day-avg-exists unless otherwise noted
 * apr16 success
-* may16 
+* may16
   * may16 biology is a case of make_averaged_dataset worker not working without a msg
   * fixed by running ``month-avg.202111/month_avg.py`` on salish
-* jun16 
+* jun16
   * 28jun16 physics is another case of make_averaged_dataset worker just hanging
   * fixed with ``month-avg.202111/day_avg.py``
 * jul16 success
@@ -520,7 +520,7 @@ Thu 19-Jan-2023
 Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
 used --no-check-day-avg-exists unless otherwise noted
 * change salish env for dask cluster from reshapr to /SalishSeaCast/nowcast-env to silence version
-  difference messages from ``nowcast.workers.day_month_avgs.py`` running in that env on skookum; 
+  difference messages from ``nowcast.workers.day_month_avgs.py`` running in that env on skookum;
   makes progress messages easier to see
 * aug16 success
 * sep16 success
@@ -697,8 +697,8 @@ used --no-check-day-avg-exists unless otherwise noted
 * mar20 success
 * apr20 success
 * may20 success
-* jun20 
-  * 08jun chemistry is the first case since jun16 of make_averaged_dataset worker not working 
+* jun20
+  * 08jun chemistry is the first case since jun16 of make_averaged_dataset worker not working
     without a msg
   * fixed by running ``month-avg.202111/day_avg.py`` and ``month-avg.202111/month_avg.py`` on salish
 * jul20 success
@@ -722,15 +722,15 @@ Fri 27-Jan-2023
 
 Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
 used --no-check-day-avg-exists unless otherwise noted
-* aug20 
-  * 04aug chemistry is the another of make_averaged_dataset worker not working 
+* aug20
+  * 04aug chemistry is the another of make_averaged_dataset worker not working
     without a msg
   * fixed by running ``month-avg.202111/day_avg.py`` on salish
 * sep20 success
 * oct20 success
 * nov20 success
-* dec20 
-  * 04dec biology is the another of make_averaged_dataset worker not working 
+* dec20
+  * 04dec biology is the another of make_averaged_dataset worker not working
     without a msg
   * fixed by running ``month-avg.202111/day_avg.py`` on salish
 * jan21 success
@@ -776,10 +776,10 @@ Sun 29-Jan-2023
 ^^^^^^^^^^^^^^^
 
 Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
-* jul21 
+* jul21
   * 30jul biology is the another of make_averaged_dataset worker not working without a msg
   * fixed by running ``month-avg.202111/day_avg.py`` on salish
-* aug21 
+* aug21
   * 06aug physics is the another of make_averaged_dataset worker not working without a msg
   * fixed by running ``month-avg.202111/day_avg.py`` on salish
 (Hindcast)
@@ -825,7 +825,7 @@ inspired by seeing ``.DS_store`` files in analysis-jose.
 
 Started migrating Susan's new rivers processing code into repo:
 * branch: v202111-rivers
-* copied tools/SalishSeaTools/I_ForcingFiles/Rivers/DailyRiverFlows.py to 
+* copied tools/SalishSeaTools/I_ForcingFiles/Rivers/DailyRiverFlows.py to
   SalishSeaNowcast/nowcast/daily_river_flows.py
 (SalishSeaNowcast)
 
@@ -843,7 +843,7 @@ FAL estate work re: MCL chq from CRA
 
 Continued backfilling day & month avg files using ``nowcast.workers.day_month_avgs.py`` module;
 * apr22 success
-* may22 
+* may22
   * 31may biology is the another of make_averaged_dataset worker not working without a msg
   * fixed by running ``month-avg.202111/day_avg.py`` on salish
 * jun22 success
@@ -909,7 +909,7 @@ Updated production sarracenia-env:
 * recorded installed pkgs & versions in envs/requirements-sarracenia.txt
 * confirmed that sr_subscribe hydrometric downloaded files at ~10:10
 * dismissed dependabot alert #18 re: setuptools<65.5.1 and CVE-2022-40897 in sarracenia-env
-  as "tolerable in project" because some dependency in that env is apparently not ready for 
+  as "tolerable in project" because some dependency in that env is apparently not ready for
   setuptools>57.4.0
 * confirmed that sr_subscribe hrdps-west downloaded files at ~13:30
 
@@ -1031,7 +1031,7 @@ Rebase-merged PR#149 re: changing sr_subscribe instances to use queues on hpfx
 Continued migrating Susan's new rivers processing code into repo:
 * branch: v202111-rivers
 * PR#150
-* Finished merging tools/I_ForcingFiles/Rivers/nowcast.yaml into 
+* Finished merging tools/I_ForcingFiles/Rivers/nowcast.yaml into
   SalishSeaNowcast/config/nowcast.yaml
 * made minimal changes necessary to get ProductionDailyRiverNCfile notebook to run
 (SalishSeaNowcast)
@@ -1074,7 +1074,7 @@ backfilled:
   upload_forcing orcinus-nowcast-agrif nowcast+ 2023-02-08
   upload_forcing orcinus-nowcast-agrif turbidity 2023-02-06
   wait for run to finish
-  
+
   upload_forcing orcinus-nowcast-agrif turbidity 2023-02-07
   wait for run to finish
   upload_forcing orcinus-nowcast-agrif turbidity 2023-02-08
@@ -1082,7 +1082,7 @@ backfilled:
 
 Started work on reference letter for Ben.
 
-Reviewed cryptography changelog re: dependabot alerts: CVE-2023-23931; accepted Python buffer 
+Reviewed cryptography changelog re: dependabot alerts: CVE-2023-23931; accepted Python buffer
 protocol objects, but allowed immutable buffers; squash-merged lots of PRs
 
 Ophthalmologist appt.
@@ -1109,7 +1109,7 @@ Continued migrating Susan's new rivers processing code into repo:
     /media/doug/warehouse/MEOPAR/SalishSeaNowcast/nowcast/daily_river_flows.py:122: ParserWarning: Length of header or names does not match length of data. This leads to a loss of data with index_col=False.
       river_flow = pd.read_csv(
   nothing made sense until I found https://github.com/pandas-dev/pandas/issues/49279 bug report
-  which says that ``on_bad_lines`` is being ignored because we have ``index_col=False`` and the 
+  which says that ``on_bad_lines`` is being ignored because we have ``index_col=False`` and the
   over-length lines are being ignored
 (SalishSeaNowcast)
 
@@ -1192,7 +1192,7 @@ Staff Software Engineer at Spring Discovery
     * PyO3 ecosystem
     * Rust crates can be published to PyPI
 * Ruff is on conda-forge
-* replaces "Flake8 (plus a variety of plugins), isort, pydocstyle, yesqa, 
+* replaces "Flake8 (plus a variety of plugins), isort, pydocstyle, yesqa,
   and even a subset of pyupgrade and autoflake" (from conda-forge description)
 * embedded docs in ruff; e.g.
     ``ruff rule F541``
@@ -1268,7 +1268,7 @@ Set up 2023 bloomcast:
   * committed archive of 2022 SOG YAML infile
   * edit run/2023_bloomcast_infile.yaml
   * edit run/config/yaml
-    * change back to Englishman River at Parksville from Nanaimo River at Cassidy 
+    * change back to Englishman River at Parksville from Nanaimo River at Cassidy
       because the Englishman data stream resumed on 30-Apr-2021
     * added ``scale_factor: 1`` for Englishman River
   * successfully tested run prep w/ SOG runs and publish to web disabled
@@ -1314,7 +1314,7 @@ Helped Raisha with tyee connection failure; suspect fail2ban
 Fri 17-Feb-2023
 ^^^^^^^^^^^^^^^
 
-Updated sphinx-rtd-theme pin to 1.2 re: its release; 
+Updated sphinx-rtd-theme pin to 1.2 re: its release;
 rely on that pin to ensure compatible versions of the rest of the Sphinx tool chain.
 * Reshapr
 * salishsea-site
@@ -1324,7 +1324,7 @@ rely on that pin to ensure compatible versions of the rest of the Sphinx tool ch
 Pin sphinx-rtd-theme=1.2
 
 Sphinx=6 and docutils=0.18 are now supported.
-We're relying on the sphinx-rtd-theme version pin to ensure compatible versions 
+We're relying on the sphinx-rtd-theme version pin to ensure compatible versions
 of the rest of the Sphinx tool chain.
 
 
@@ -1340,7 +1340,7 @@ Continued migrating Susan's new rivers processing code into repo:
 * finished unit tests & refactoring of _patch_missing_obs(); renamed from patch_gaps()
 * started unit tests & refactoring of _do_a_pair()
 
-Code analysis errors & warnings for 
+Code analysis errors & warnings for
 /media/doug/warehouse/MEOPAR/SalishSeaNowcast/nowcast/daily_river_flows.py
   Warning:(261, 13) Statement seems to have no effect
   Error:(261, 13) Unresolved reference 'stop'
@@ -1417,11 +1417,11 @@ collect_river_data for ECCC rivers failed with:
 * investigation:
   * accented character in position 81 is the problem:
       ``...Discharge / Débit (cms)...``
-  * issue resolved by changing pandas.read_csv() from default utf-8 encoding to old iso-8859-1 
+  * issue resolved by changing pandas.read_csv() from default utf-8 encoding to old iso-8859-1
     (Western European) encoding; suspect config control bug at ECCC
 * recover started at ~09:00:
   * hacked collect_river_data worker on skookum to add ``encoding="iso-8859-1"``
-  * updated /SalishSeaCast/datamart/hydrometric/collect_river_date.sh to include Roberts Creek and 
+  * updated /SalishSeaCast/datamart/hydrometric/collect_river_date.sh to include Roberts Creek and
     ECCC arg to collect_river_data, then ran it
   * restarted automation:
       upload_forcing arbutus forecast2
@@ -1464,9 +1464,9 @@ download_weather 18 2.5km didn't finish and I didn't notice until this morning
     collect_river_data USGS SnohomishMonroe 2023-02-22
     collect_river_data USGS NisquallyMcKenna 2023-02-22
     collect_river_data USGS GreenwaterGreenwater 2023-02-22
-    download_weather 00 1km 
+    download_weather 00 1km
     wait for 10:45
-    download_weather 12 1km 
+    download_weather 12 1km
 * created /results/forcing/rivers/observations/collect_river_data.sh to do USGS rivers
 * mapping of west variable names to continental:
     UGRD_TGL_10: UGRD_AGL_10m  1.8M
@@ -1494,8 +1494,8 @@ download_weather 18 2.5km didn't finish and I didn't notice until this morning
     get_vfpa_hadcp yyyy-mm-dd
     collect_NeahBay_ssh 06
     download_live_ocean
-    download_weather 00 1km 
-    download_weather 12 1km 
+    download_weather 00 1km
+    download_weather 12 1km
 * Python packages for handling GRIB files:
   * cfgrib: https://github.com/ecmwf/cfgrib
     * "enables the engine='cfgrib' option to read GRIB files with xarray"
@@ -1512,7 +1512,7 @@ PR#156
 
 Experimented with cfgrib:
 * ``mamba create -n cfgrib-test python=3.11 xarray cfgrib netcdf4 jupyterlab``
-* ``xarray.open_dataset(path, engine="cfgrib")`` works, but data variable name is sometimes     
+* ``xarray.open_dataset(path, engine="cfgrib")`` works, but data variable name is sometimes
   ``unknown``
 
 
@@ -1542,8 +1542,8 @@ Did manual tasks that automation isn't doing due to change to HRDPS continental 
   get_vfpa_hadcp yyyy-mm-dd
   collect_NeahBay_ssh 06
   download_live_ocean
-  download_weather 00 1km 
-  download_weather 12 1km 
+  download_weather 00 1km
+  download_weather 12 1km
 Created /SalishSeaCast/daily_grind.sh to automate the above tasks.
 (SalishSeaCast)
 
@@ -1598,7 +1598,7 @@ PR#156
 * installed wgrib2 3.1.1 from conda-forge in wgrib2-test env on khawla
 * successfully ran ``wgrib2 grib-file -append -grib uv.grib`` to create u-v winds file
 * read grid_defn.pl and learned that it parses the output of ``wgrib2 -d 1 -grid grib-file``
-* ran that for 
+* ran that for
     ``continental2.5/GRIB/20230225/00/001/20230225T00Z_MSC_HRDPS_UGRD_AGL-10m_RLatLon0.0225_PT001H.grib2``
   and got:
     1:0:grid_template=1:winds(grid):
@@ -1611,7 +1611,7 @@ PR#156
     rot-ll:sp_lon:sp_lat:sp_rot lon0:nlon:dlon lat0:nlat:dlat
   I think that translates to:
     rot-ll:245.305142:-36.088520:0.000000 lon0:2540:0.022500 lat0:1290:0.022500
-* tried 
+* tried
     ``wgrib2 uv.grib -new_grid_winds earth -new_grid rot-ll:245.305142:-36.088520:0.000000 345.178780:2540:0.022500 -12.302501:1290:0.022500 uvrot.grib``
   and got (not unexpectedly):
     IPOLATES package is not installed
@@ -1619,11 +1619,11 @@ PR#156
     mamba create -n pywgrib2-test -c conda-forge -c yt87 \
       python=3.9 dask=2021.03.0 xarray=0.17.0 libwgrib2 pywgrib2_xr matplotlib cartopy jupyterlab
   * successfully did:
-    * u-v append 
+    * u-v append
     * query of grid description
     * rotation to earth-referenced NS grid
   * created analysis-doug/notebooks/pywgrib2-grib_to_netcdf.ipynb to properly record exploration
-* author of pywgrib2_xr package listed in metadata is George Trojan who is also listed as an 
+* author of pywgrib2_xr package listed in metadata is George Trojan who is also listed as an
   author of wgrib2
 (SalishSeaNowcast)
 
@@ -1715,7 +1715,7 @@ PR#156
 * added matplotlib cartopy jupyterlab to pywgrib2-xarray-2022.10 env for continuing work in notebook
 * discovered ``winds="earth"`` arg for ``ds.wgrib2.grid()`` that is the equivalent of the wgrib2
   ``-now_grid_winds earth`` option
-* Susan confirmed that rotated winds netCDF file created via pywgrib2_xr xarray interface is 
+* Susan confirmed that rotated winds netCDF file created via pywgrib2_xr xarray interface is
   consistent with 15feb23 HRDPS west vectors
 
 Did manual tasks that automation isn't doing due to change to HRDPS continental product by running
@@ -1777,13 +1777,13 @@ Fri 3-Mar-2023
 Continued work on changes to use HRDPS 2.5km continental product
 branch: hrdps-continental
 PR#156
-* SalishSeaNowcast GHA pytest-with-coverage workflow failing with: 
+* SalishSeaNowcast GHA pytest-with-coverage workflow failing with:
     In file included from pywgrib2_xr/_wgrib2.c:795:
     pywgrib2_xr/pywgrib2.h:3:10: fatal error: wgrib2/wgrib2.h: No such file or directory
         3 | #include "wgrib2/wgrib2.h"
           |          ^~~~~~~~~~~~~~~~~
     compilation terminated.
-  broke build chain on khawla while trying to diagnose; I think because I deleted 
+  broke build chain on khawla while trying to diagnose; I think because I deleted
     pywgrib2_xr/pywgrib2_xr/_wgrib2.cpython-310-x86_64-linux-gnu.so
   recovery:
   * got a successful build in libwgrib2 fork:
@@ -1822,7 +1822,7 @@ Did manual tasks that automation isn't doing due to change to HRDPS continental 
 * created sarracenia/hrdps-continental-hpfx.conf
 * changed config/supervisord.ini to use sarracenia/hrdps-continental-hpfx.conf
 * test on skookum:
-  * copied sarracenia/hrdps-continental-hpfx.conf and config/supervisord.ini 
+  * copied sarracenia/hrdps-continental-hpfx.conf and config/supervisord.ini
   * shutdown and relaunched supervisord
   * confirmed that hrdps-continental-hpfx queue was attached
 (SalishSeaCast)
@@ -1871,7 +1871,7 @@ Resumed automation with grib_to_netcdf disabled:
   * failed; files were downloaded by sarracenia, but not moved
 * used (forgotten) --backfill --backfill-date 2023-03-06 options to move files after the fact
 * started modified ``collect_weather 00 2.5km`` for another test:
-  * 
+  *
 (SalishSeaCast)
 
 Continued work on changes to use HRDPS 2.5km continental product
@@ -2090,7 +2090,7 @@ Did manual tasks that automation isn't doing due to change to HRDPS continental 
   collect_weather 12 2.5km --backfill --backfill-date 2023-03-13
   wait for 18Z forecast to download
   collect_weather 18 2.5km --backfill --backfill-date 2023-03-13
-Hacked download_weather and NEMO_Nowcast.nemo_nowcast.worker to skip missing files so that I could 
+Hacked download_weather and NEMO_Nowcast.nemo_nowcast.worker to skip missing files so that I could
 download what of HRDPS continental is available for:
 * 20230222/00
   * got 479 of 528 files
@@ -2124,7 +2124,7 @@ Deployed hrdps-continental branch to skookum to test:
 * 1st test:
     grib_to_netcdf nowcast+ 2023-02-24
   * had to kill ERDDAP to prevent 16G memory blowout during nowcast 24 processing
-  * memory continued to rise and swapping started during forecast day 1 processing; 
+  * memory continued to rise and swapping started during forecast day 1 processing;
     killed grib_to_netcdf
 * 2nd test:
   * added salish logging port 5562 config for grib_to_netcdf
@@ -2141,9 +2141,9 @@ Deployed hrdps-continental branch to skookum to test:
   * no memory freed by nemo_ds*.close() calls :-(
   * killed
 4th test:
-  * added 
-      dask_client = dask.distributed.Client("tcp://142.103.36.12:4386") 
-      ... 
+  * added
+      dask_client = dask.distributed.Client("tcp://142.103.36.12:4386")
+      ...
       dask_client.close()
     to use persistent cluster on salish
       launch_remote_worker salish-nowcast grib_to_netcdf "nowcast+ --run-date 2023-02-25 --debug"
@@ -2166,21 +2166,21 @@ Started work on generating weights file:
       ~~~~~~~~~~~~
                 nam+sbc_core Namelist
                 list of files
-                      root filename: ./atmos variable name: u_wind climatology:  T  data type: yearly 
-                      root filename: ./atmos variable name: v_wind climatology:  T  data type: yearly 
-                      root filename: ./atmos variable name: qair climatology:  T  data type: yearly 
-                      root filename: ./atmos variable name: solar climatology:  T  data type: yearly 
-                      root filename: ./atmos variable name: therm_rad climatology:  T  data type: yearly 
-                      root filename: ./atmos variable name: tair climatology:  T  data type: yearly 
-                      root filename: ./atmos variable name: precip climatology:  T  data type: yearly 
-                      root filename: ./no_snow variable name: snow climatology:  T  data type: yearly 
+                      root filename: ./atmos variable name: u_wind climatology:  T  data type: yearly
+                      root filename: ./atmos variable name: v_wind climatology:  T  data type: yearly
+                      root filename: ./atmos variable name: qair climatology:  T  data type: yearly
+                      root filename: ./atmos variable name: solar climatology:  T  data type: yearly
+                      root filename: ./atmos variable name: therm_rad climatology:  T  data type: yearly
+                      root filename: ./atmos variable name: tair climatology:  T  data type: yearly
+                      root filename: ./atmos variable name: precip climatology:  T  data type: yearly
+                      root filename: ./no_snow variable name: snow climatology:  T  data type: yearly
       reading : ./atmos.nc
       atmospheric forcing netcdf grid dimensions: nx=         230 , ny=         190
                 get_atmo_grid ~~~ found X axis varid:           4
                 get_atmo_grid ~~~ found Y axis varid:           5
       grid_type           2
       xmin/xmax/origin  0.229678E+03  0.238593E+03  0.229678E+03
-      Error in map_interpolation: ymin=   47.387591999999998       and y=   46.859664916992188     
+      Error in map_interpolation: ymin=   47.387591999999998       and y=   46.859664916992188
       writing variable : src01
       status put           0
       writing variable : wgt01
@@ -2234,7 +2234,7 @@ Continued running grib_to_netcdf in preparation to backfill production:
 * 2023-02-16  # for comparison test run
 * 2020-02-25 to 2023-03-02
 * 2023-03-03 got stopped by missing file:
-    FileNotFoundError: [Errno 2] No such file or directory: 
+    FileNotFoundError: [Errno 2] No such file or directory:
     '/results/forcing/atmospheric/continental2.5/GRIB/20230303/00/012/20230303T00Z_MSC_HRDPS_UGRD_AGL-10m_RLatLon0.0225_PT012H.grib2'
   * Susan looked at missing files and agreed that we should persist fcst/hrdps_y2023m02d03.nc
     as hrdps_y2023m02d03.nc
@@ -2303,7 +2303,7 @@ Did manual tasks that automation isn't doing due to change to HRDPS continental 
   clear_checklist
   wait for 12Z forecast to download
   only 479 of 528 files appeared; sent email to Sandrine
-  discovered that collection on dd.weather.gc.ca was complete; ran 
+  discovered that collection on dd.weather.gc.ca was complete; ran
     download_weather 12 2.5km
   instead of:
     collect_weather 12 2.5km --backfill --backfill-date 2023-03-15
@@ -2336,13 +2336,13 @@ Manually ran --debug steps of automation to backfill nowcast-green/23feb23:
     # skip make_CHS_current_file
     # skip ping_erddap
 Realized that I forgot about running make_turbidity_file since 23feb; resolved with:
-  for hh in {24..28}; 
-    do 
-      python3 -m nowcast.workers.make_turbidity_file $NOWCAST_YAML --run-date 2023-02-${hh} --debug; 
+  for hh in {24..28};
+    do
+      python3 -m nowcast.workers.make_turbidity_file $NOWCAST_YAML --run-date 2023-02-${hh} --debug;
     done
-  for hh in {01..15}; 
-    do 
-      python3 -m nowcast.workers.make_turbidity_file $NOWCAST_YAML --run-date 2023-03-${hh} --debug; 
+  for hh in {01..15};
+    do
+      python3 -m nowcast.workers.make_turbidity_file $NOWCAST_YAML --run-date 2023-03-${hh} --debug;
     done
   * 13mar23 failed due to change from PST to PDT
 Hacked next_workers to prevent wwatch3 from being launched after nowcast-green:
@@ -2395,7 +2395,7 @@ Did manual tasks that automation isn't doing due to change to HRDPS continental 
   wait for 12Z forecast to download
   * email from Sandrine about problems on hpfx
   * only got 439 of 528 files
-  * ran download_weather instead (with grib_to_netcdf enabled in next_workers) 
+  * ran download_weather instead (with grib_to_netcdf enabled in next_workers)
     * grib_to_netcdf failed because I forgot to set host to run it on salish; ran it manually
   make_turbidity_file
   wait for 18Z forecast to download
@@ -2405,7 +2405,7 @@ Finished running grib_to_netcdf in preparation to backfill production:
 Added --run-date to make_ww3_wind_file and make_ww3_current_file
 Launched wwatch3-nowcast/24feb23:
   make_ww3_wind_file arbutus nowcast 2023-02-24
-  make_ww3_current_file arbutus nowcast 2023-02-24 
+  make_ww3_current_file arbutus nowcast 2023-02-24
   * created current file, but crashed manager because there are no ``nowcast`` message types
   make_ww3_current_file arbutus nowcast 2023-02-24 --debug
   run_ww3 arbutus nowcast 2023-02-24
@@ -2413,13 +2413,13 @@ Launched wwatch3-nowcast/24feb23:
   * download_wwatch3_results launched via automation
 Launched wwatch3-nowcast/25feb23:
   make_ww3_wind_file arbutus forecast 2023-02-25
-  make_ww3_current_file arbutus forecast 2023-02-25 
+  make_ww3_current_file arbutus forecast 2023-02-25
   * failed due to no NEMO forecast for 2023-02-25
 Fixed bug in next_workers whereby the nowcast msg types were missing from
 after_make_ww3_current_file(); uploaded to skookum; restarted manager
 Launched wwatch3-nowcast/25feb23:
   make_ww3_wind_file arbutus nowcast 2023-02-25
-  make_ww3_current_file arbutus nowcast 2023-02-25 
+  make_ww3_current_file arbutus nowcast 2023-02-25
   * run_ww3 2023-02-25 and watch_ww3 launched via automation
   * download_wwatch3_results launched via automation
 Launched nowcast-green/26feb23:
@@ -2435,7 +2435,7 @@ Launched nowcast-green/26feb23:
 Hacked next_workers to fix those 2 issues; uploaded to skookum, restarted manager
 Launched wwatch3-nowcast/25feb23:
   make_ww3_wind_file arbutus nowcast 2023-02-26
-  make_ww3_current_file arbutus nowcast 2023-02-26 
+  make_ww3_current_file arbutus nowcast 2023-02-26
 Launched nowcast-green/27feb23:
   upload_forcing arbutus nowcast+ --run-date 2023-02-27 --debug
   upload_forcing arbutus turbidity --run-date 2023-02-27
@@ -2470,9 +2470,9 @@ Fri 17-Mar-2023
 archive_tarball feb23 reported an error overnight:
   sysrsync.exceptions.RsyncError: [sysrsync runner] rsync -t /ocean/dlatorne/nowcast-green.201905-feb23.tar graham-dtn:/nearline/rrg-allen/SalishSea/nowcast-green.201905 exited with code 23
 * return code 23 means:
-    Partial transfer due to error. The rsync command completed with an error, but some files may 
+    Partial transfer due to error. The rsync command completed with an error, but some files may
     have been transferred successfully.
-* checks of file sizes and line counts look okay, so leaving this as a mystery of a glitch in the 
+* checks of file sizes and line counts look okay, so leaving this as a mystery of a glitch in the
   matrix
 Did manual tasks that automation isn't doing due to change to HRDPS continental product by running:
   pkill -f collect_weather
@@ -2497,7 +2497,7 @@ Explored CaSPAr (https://github.com/julemai/CaSPAr/wiki/Home) to obtain missing 
   * PRATE_SFC_0  # precipitation rate at ground level (for VHFR FVCOM)
   * DSWRF_SFC_0  # accumulated downward shortwave (solar) radiation at ground level
   * SPFH_TGL_2   # specific humidity at 2m elevation
-      SPFH_SFC_0 instead, but with note: 
+      SPFH_SFC_0 instead, but with note:
       "Discrepancy with ECCC dictionary: dictionary says it is a 2m variable"
   * RH_TGL_2     # relative humidity at 2m elevation (for VHFR FVCOM)
 * instructions say:
@@ -2581,7 +2581,7 @@ Launched nowcast-green/16mar23:
 Continued work on changes to manage catch-up after change to HRDPS continental product
 branch: hrdps-continental-catch-up
 PR#161
-* moved make_turbidity_file to after download_weather/collect_weather 12 
+* moved make_turbidity_file to after download_weather/collect_weather 12
 * restored grib_to_netcdf nowcast+ to automation flow
 * added pytest.mark.skip() to tests for features disabled during catch-up
 (SalishSeaNowcast)
@@ -2632,7 +2632,7 @@ Did manual tasks that automation isn't doing due to change to HRDPS continental 
   collect_weather 12 2.5km --backfill --backfill-date 2023-03-20
   wait for 18Z forecast to download
   collect_weather 18 2.5km --backfill --backfill-date 2023-03-20
-Set up simple watchdog logger observing /SalishSeaCast/datamart/hrdps-continental/12 to try to 
+Set up simple watchdog logger observing /SalishSeaCast/datamart/hrdps-continental/12 to try to
 understand why collect_weather observer is not working; events for a file:
   2023-03-20 08:48:55 - Created file: /SalishSeaCast/datamart/hrdps-continental/12/012/20230320T12Z_MSC_HRDPS_DLWRF_Sfc_RLatLon0.0225_PT012H.grib2.tmp
   2023-03-20 08:48:55 - Modified directory: /SalishSeaCast/datamart/hrdps-continental/12/012
@@ -2649,7 +2649,7 @@ Reverted hack on skookum of collect_weather.py that changed it to watching for c
 instead of move events
 * traced through collect_weather to confirm that expected_files set is correct
 * ran collect_weather 18 2.5km in PyCharm debugger on khawla; not useful
-* found change in watchdog 2.17 releaes re: replacing time.sleep() in observer loop with 
+* found change in watchdog 2.17 releaes re: replacing time.sleep() in observer loop with
   observer.join(); tested on skookum and files get collected, but worker never stops
 Reverted hacks in next_workers that prevented runs other than nowcast-green and wwatch3-nowcast.
 Hacked next_workers to prevent FVCOM runs by not launching make_fvcom_boundary
@@ -2660,13 +2660,13 @@ Launched nowcast/20mar23:
 * missed that upload_forcing in after_make_live_ocean_files was still commented out
     upload_forcing arbutus nowcast+
 * run_NEMO nowcast failed due to no /nemoShare/MEOPAR/SalishSea/nowcast/19mar23/namelist_cfg
-* copied /nemoShare/MEOPAR/SalishSea/nowcast-green/19mar23/namelist_cfg to 
+* copied /nemoShare/MEOPAR/SalishSea/nowcast-green/19mar23/namelist_cfg to
   /nemoShare/MEOPAR/SalishSea/nowcast/19mar23/namelist_cfg
     make_forcing_links arbutus nowcast+
 * NEMO failed due to incorrect namelist_rivers_atmos
-* moved SS-run-sets/v201905/nowcast-green/namelist.atmos_rivers_hrdps to 
+* moved SS-run-sets/v201905/nowcast-green/namelist.atmos_rivers_hrdps to
   SS-run-sets/v201905/namelist.atmos_rivers_hrdps
-* symlinked nowcast-green/namelist.atmos_rivers and nowcast-blue/namelist.atmos_rivers to 
+* symlinked nowcast-green/namelist.atmos_rivers and nowcast-blue/namelist.atmos_rivers to
   v201905/namelist.atmos_rivers_hrdps
     make_forcing_links arbutus nowcast+
 * nowcast-blue ran successfully
@@ -2683,7 +2683,7 @@ Launched nowcast/20mar23:
 * emailed Faith at SMRU re: resumption of ss dataset
 * make_surface_current_tiles failed failed due to missing file
 * make_plots nemo forecast publish failed due to looking for ops_ files
-  * root cause is hard-coded filename template in 
+  * root cause is hard-coded filename template in
     salishsea_tools.wind_tools.calc_wind_avg_at_point()
 * make_feeds forecast ran successfully
 * nowcast-green ran successfully
@@ -2766,10 +2766,10 @@ Wed 22-Mar-2023
 Fixed run-date passing for wwatch3-forecast2
 * fixed in branch; fix-ww3-fcst2-run-date
 * uploaded to skookum for test tomorrow
-* created py311 branch  
+* created py311 branch
   * added 3.11 to python-version matrices of pytest-with-coverage and sphinx-linkcheck
     and let GHA chew on them; both were successful
-  * researched mamba-org/provision-with-micromamba as an alternative to 
+  * researched mamba-org/provision-with-micromamba as an alternative to
     conda-incubator/setup-miniconda
     * claims to be faster
     * has environment caching feature with default 1-day TTL
@@ -2782,7 +2782,7 @@ Automation worked as expected with the following issues:
 * nowcast-blue comparison figs failed; probably due to no nowcast-dev runs?
 * figures/research/velocity_section_and_surface.py failed with IndexError
 * run_NEMO_agrif failed due to backfill not done
-* figures/publish/storm_surge_alerts_thumbnail.py and others failed due to 
+* figures/publish/storm_surge_alerts_thumbnail.py and others failed due to
   hard-coded ops_*.nc filename template
   * need to fix in salishsea_tools/wind_tools
 dask cluster on salish did not appear to leak memory as I was seing earlier
@@ -2815,7 +2815,7 @@ Fixed run-date passing for wwatch3-forecast2
 * worked as expected overnight
 * PR#171; rebase-merged
 Changed codeql-analysis workflow to trigger on push to main and pull requests
-targeting main; trying to resolve warning re: 
+targeting main; trying to resolve warning re:
   configuration present on refs/heads/main was not found:
     .github/workflows/codeql-analysis.yaml:analyze/language:python
 (SalishSeaNowcast)
@@ -2851,24 +2851,24 @@ other than it appears to be a known issue that the devs don't udnerstand.
 Restarted dask cluster scheduler and workers; reduced reserved memory, but no change in swap.
 Backfilled ``upload_forcing nowcast+`` to graham-dtn and optimum-hindcast via bash loops
 ``make_plots nemo forecast publish`` failed with:
-  arrow.parser.ParserError: Could not match input '01-Jan-1970 00:00' to any of the following 
+  arrow.parser.ParserError: Could not match input '01-Jan-1970 00:00' to any of the following
   formats: YYYY-MMM-DD HH:mm:ss, DD-MMM-YYYY HH:mm:ss, YYYY-MM-DD HH:mm:ss.
 in salishsea_tools.nc_tools.time_origin()
 Started to get nowcast-agrif working again
-* got stalled by permissions on 
+* got stalled by permissions on
 ``/home/sallen/MEOPAR/`` preventing me from creating new storage tree:
 /home/sallen/MEOPAR/continental2.5/NEMO-atmos/fcst; fixed
 (SalishSeaCast)
 
 Updated atmospheric forcing paths on optimum-hindcast and graham-dtn in config & unit tests;
-Copied config to skookum for testing after grib_to_netcdf nowcast+; confirmed that uploads 
+Copied config to skookum for testing after grib_to_netcdf nowcast+; confirmed that uploads
 were stored as expected.
 Updated atmospheric forcing paths in figure dev & test notebooks
-nowcast-dev launched by automation, so committed and puished code to resume nowcast-dev runs after 
+nowcast-dev launched by automation, so committed and puished code to resume nowcast-dev runs after
 HRDPS catch-up.
 (SalishSeaNowcast)
 
-Search of SalishSeaCast org shows that only uses of 
+Search of SalishSeaCast org shows that only uses of
 salishsea_tools.wind_tools.calc_wind_avg_at_point() are in SalishSeaNowcast and analysis-vicky;
 decided to just change hard-coded weather filename templte from ``ops_`` to ``hrdps_`` instead
 of trying to generalize; copied planned change to skookum for use by
@@ -2995,7 +2995,7 @@ Started backfilling nowcast-agrif runs:
   make_forcing_links orcinus nowcast-agrif 2023-02-26
   make_forcing_links orcinus nowcast-agrif 2023-02-27
   make_forcing_links orcinus nowcast-agrif 2023-02-28
-* committed new weights file as 
+* committed new weights file as
   grid/subgrids/BaynesSound/weights-continental2.5-hrdps_201702_23feb23onward_BS.nc
 (SalishSeaCast)
 
@@ -3040,10 +3040,10 @@ on arbutus; re-ran
   make_forcing_links arbutus nowcast-green
 (SalishSeaCast)
 
-Started exploring cropping HRDPS continental files to SalishSeaCast domain coverage in 
+Started exploring cropping HRDPS continental files to SalishSeaCast domain coverage in
 analysis-doug/notebooks/continental-HRDPS/crop-grib-to-SSC-domain.ipynb.ipynb on khawla.
 * discovered that xarray.open_dataset(..., engine="cfgrib") relies on GRIB_Nx and GRIB_Ny
-  variable attribute values, but those don't get adjusted by 
+  variable attribute values, but those don't get adjusted by
   ``ds.sel(y=slice(230, 461), x=slice(300, 491))``
 (SalishSeaNowcast)
 
@@ -3065,10 +3065,10 @@ Continued backfilling nowcast-agrif runs:
   make_forcing_links orcinus nowcast-agrif 2023-03-12
 (SalishSeaCast)
 
-Continued exploring cropping HRDPS continental files to SalishSeaCast domain coverage in 
+Continued exploring cropping HRDPS continental files to SalishSeaCast domain coverage in
 analysis-doug/notebooks/continental-HRDPS/crop-grib-to-SSC-domain.ipynb.ipynb on khawla.
 * setting GRIB_Nx and GRIB_Ny variable attribute values (and GRIB_numberOfPoints for consistency)
-  after cropping and before cfgrib.xarray_to_grib.to_grib() results in a file that 
+  after cropping and before cfgrib.xarray_to_grib.to_grib() results in a file that
   xarray.open_dataset(..., engine="cfgrib") can read
 * warnings on write:
   * FutureWarning: GRIB write support is experimental, DO NOT RELY ON IT!
@@ -3108,7 +3108,7 @@ skookum; failed due to no time steps in 22feb23 1h grid_T and biol_T files; pass
 #hindcast202111-nowcast; she fixed the files, and I completed the averaging.
 (SalishSeaCast)
 
-Continued exploring cropping HRDPS continental files to SalishSeaCast domain coverage in 
+Continued exploring cropping HRDPS continental files to SalishSeaCast domain coverage in
 analysis-doug/notebooks/continental-HRDPS/crop-grib-to-SSC-domain.ipynb.ipynb on khawla.
 * confirmed that ACPF_Sfc seems to be the only problem variable
 * no amount of mucking around with metadata and changing the dataset variable name seems to make
@@ -3149,16 +3149,16 @@ collect_weather 12 didn't finish:
     rm -rf /results/forcing/atmospheric/continental2.5/GRIB/20230331/12/
     pkill -f collect_weather
     download_weather 12 2.5km
-    supervisorctl restart sr_subscribe 
+    supervisorctl restart sr_subscribe
     collect_weather 18 2.5km
 (SalishSeaCast)
 
-Continued exploring cropping HRDPS continental files to SalishSeaCast domain coverage in 
+Continued exploring cropping HRDPS continental files to SalishSeaCast domain coverage in
 analysis-doug/notebooks/continental-HRDPS/crop-grib-to-SSC-domain.ipynb.ipynb on khawla.
 * lons/lats of SSC grib files are getting messed up when they are written by cfgrib
 * tried setting attrs re: first and last point to those of cropped grid; that changed what
   is in the SSC grib file, but not to be correct
-* gave up; decided to store a georef dataset for the 191x231 lons/lats used in 
+* gave up; decided to store a georef dataset for the 191x231 lons/lats used in
   grib_to_netcdf._calc_nemo_var_ds() and read it in grib_to_netcdf._calc_nemo_ds() to pass to
   the many calls of _calc_nemo_var_ds()
 Started work on crop_gribs worker and modifying grib_to_netcdf and next_workers to work with it:
@@ -3227,7 +3227,7 @@ Continued work on crop_gribs worker and modifying grib_to_netcdf and next_worker
 * tested crop_gribs in crop-gribs branch on skookum; 34 min for 00Z
 (SalishSeaNowcast)
 
-Planned intro to NEMO on graham w/ Susan; see 
+Planned intro to NEMO on graham w/ Susan; see
 https://salishseacast.slack.com/files/TFR25L4LU/F051YJVREE5?origin_team=TFR25L4LU
 Updated docs to move graham setup out of on-boarding sections.
 (MOAD)
@@ -3280,7 +3280,7 @@ Created issue #174 re: TypeError in get_onc_ferry that seems to be coming from p
 Wed 5-Apr-2023
 ^^^^^^^^^^^^^^
 
-dask held spawner/scheduler/workers virtual memory steady at 5.018/4.589/0.668 after 1 run of 
+dask held spawner/scheduler/workers virtual memory steady at 5.018/4.589/0.668 after 1 run of
 grib_to_netcdf
 make_ww3_wind_file forecast2 failed with:
   Traceback (most recent call last):
@@ -3300,7 +3300,7 @@ make_ww3_wind_file forecast2 failed with:
       raise ValueError(f"the new name {name!r} conflicts")
   ValueError: the new name 'time' conflicts
 * unclear why, but a time variable crept into fcst/hrdps_ files
-* changed drop_vars() call that should have gotten rid of it from conditional on full_grid to 
+* changed drop_vars() call that should have gotten rid of it from conditional on full_grid to
   try...except; tested on skookum for 12Z
 * grib_to_netcdf failed because I forgot to run crop_gribs for yesterday's 18Z; recovery:
     crop_gribs 18 2023-04-04
@@ -3464,7 +3464,7 @@ Continued backfilling nowcast-agrif runs:
   make_forcing_links orcinus nowcast-agrif 2023-04-03
   make_forcing_links orcinus nowcast-agrif 2023-04-04
   make_forcing_links orcinus nowcast-agrif 2023-04-05
-crop_gribs failed due to corrupted 
+crop_gribs failed due to corrupted
 18/030/20230408T18Z_MSC_HRDPS_VGRD_AGL-10m_RLatLon0.0225_PT030H.grib2
 * curl-ed file from hpfx and re-ran crop-gribs successfully
 collect_weather 00 didn't finish; 517 of 528 files; ran download_weather to recover
@@ -3567,7 +3567,7 @@ Continued archiving on skookum in 202111-tarballs tmux session:
 Added intro to Python section.
 (MOAD docs)
 
-* Deleted intro to Python section with broken Cornell links in favour of a 
+* Deleted intro to Python section with broken Cornell links in favour of a
   new Python section in MOAD docs; squash-merged PR#23.
 * Replaced ComputeCanada quick-start with graham version, updated to reflect current practice
   and linked to MOAD docs
@@ -3587,7 +3587,7 @@ collect_weather 12 didn't finish unitl 11:30; maybe due to WEonG updates?
 collect_weather 18 hadn't finished at 17:45
 * 506 of 528 files downloaded
 * changed sarracenia config to 1 instance from 2 to see if that gets rid of the checksum warnings
-* killed collect_weather 18, started collect_weather 00, moved partial 18 aside, 
+* killed collect_weather 18, started collect_weather 00, moved partial 18 aside,
   launched download_weather 18
 collect_weather 00 hadn't finished at 21:45
 * 516 of 528 files downloaded
@@ -3694,7 +3694,7 @@ Sat 15-Apr-2023
 Workers were not launching on arbutus:
 * no forecast2, or wwatch3-forecast2 runs
 * run_NEMO nowcast failed
-* traced to me not using envvars.sh as names when I copied files into 
+* traced to me not using envvars.sh as names when I copied files into
   etc/conda/[de]activate.d/ dirs of new env DOH!
 (SalishSeaCast)
 
@@ -3763,7 +3763,7 @@ collect_weather 12 downloads didn't start until ~10:00!!
     collect_NeahBay_ssh 06
     wait for crop_gribs to finish
     grib_to_netcdf nowcast+
-    download_live_ocean 
+    download_live_ocean
 Posted question re: onfly_checksum warnings in sarracenia discussion !&A on GitHub.
 Experimented with making collect_weather more robust:
 * can monitor time since startup
@@ -3794,7 +3794,7 @@ Lunch w/ Camryn.
 Updated CCDB domain to ccsb.alliancecan.ca
 (MOAD docs)
 
-Squash-merged gha-workflows dependabot PR to bump codecove/codecove-action 
+Squash-merged gha-workflows dependabot PR to bump codecove/codecove-action
 from 3.1.1 to 3.1.2.
 Ran gha_workflow_checker/gha_workflows_checker.py and re-enabled workflows that had
 been disabled due to inactivity.
@@ -3816,7 +3816,7 @@ to reduce maintenance burden of updates in reusable workflows:
 * SalishSeaCast/tools
 * 43ravens/NEMO_Nowcast
 * SS-Atlantis/AtlantisCmd
-Changed reusable pytest-with-coverage & sphinx-linkcheck workflows to use 
+Changed reusable pytest-with-coverage & sphinx-linkcheck workflows to use
 mamba-org/provision-with-micromamba for conda env creation and caching.
 (repos maint)
 
@@ -3852,7 +3852,7 @@ Planned maintenance on ECCC servers delayed 06 weather availability:
     download_weather 06 2.5km
     delete 06.aside dir
   * run_NEMO stalled:
-    * manager stderr log on skookum shows 
+    * manager stderr log on skookum shows
       ``ssh_exchange_identification: Connection closed by remote host``
     * re-tried successfully via launch_remote_worker
   * make_ww3_current_file failed due to stalled worker from yesterday
@@ -3936,7 +3936,7 @@ collect_weather 18 had only downloaded 512 of 528 files at 16:45; last download 
 Fri 21-Apr-2023
 ^^^^^^^^^^^^^^^
 
-make_ww3_current_file forecast2 got stuck again; -15 signal isn't enough to kill it, 
+make_ww3_current_file forecast2 got stuck again; -15 signal isn't enough to kill it,
 have to use a -9 signal; restarted log_aggregator after kill
 graham-dtn rejected ssh key from upload_forcing
 * sent email to support
@@ -3967,7 +3967,7 @@ Transit to White Rock to visit J.
 Sun 23-Apr-2023
 ^^^^^^^^^^^^^^^
 
-make_ww3_current_file forecast2 got stuck again; -15 signal isn't enough to kill it, 
+make_ww3_current_file forecast2 got stuck again; -15 signal isn't enough to kill it,
 have to use a -9 signal; restarted log_aggregator after kill
 graham-dtn rejected ssh key from upload_forcing
 run_ww3 nowcast failed w/ seg fault in automation and on re-try:
@@ -4058,7 +4058,7 @@ Backfilled nowcast-agrif runs:
 make_ww3_current_file forecast2 got stuck again; killed it; restarted log_aggregator;
 re-ran vai launch_remote_worker
 Searched work journals back to 2019 re: stalled make_ww3_current_file; past issues were stalled
-make_ww3_wind_file; nothing about resolutions, just notes about idea for spotter worker to 
+make_ww3_wind_file; nothing about resolutions, just notes about idea for spotter worker to
 work around issue.
 (SalishSeaCast)
 
@@ -4085,7 +4085,7 @@ Thu 27-Apr-2023
 ^^^^^^^^^^^^^^^
 
 make_ww3_current_file forecast got stuck again; killed it; re-ran via launch_remote_worker;
-it failed oddly while trying to write 
+it failed oddly while trying to write
 ``/nemoShare/MEOPAR/nowcast-sys/wwatch3-runs/current/SalishSea_1h_20230427_20230427_grid_U.nc``
 but the run was successful.
 HRDPS 12Z files stopped at 08:30 for the typical break after hour 011, but didn't resume until
@@ -4109,7 +4109,7 @@ Continued SalishSeaCast v202111 scaling tests on graham:
     * 10d run failed w/ core dump; node failure?
     * re-try 10d failed w/ Transport retry count exceeded
   * 12h by-node queue
-    * 40d run: failed with ORTE issue after ~8h, then timed out 
+    * 40d run: failed with ORTE issue after ~8h, then timed out
   * 24h by-node queue
     * 80d run planned
 (graham)
@@ -4214,7 +4214,7 @@ IOS seminar by Dwight Owen re: ONC Oceans 3.0 web portal.
 
 Recovery.
 
-make_ww3_current_file forecast2 got stuck again; noticed when nowcast didn't start; killed it; 
+make_ww3_current_file forecast2 got stuck again; noticed when nowcast didn't start; killed it;
 ran ``make_ww3_current_file forecast`` via launch_remote_worker to get back on track
 (SalishSeaCast)
 
@@ -4240,9 +4240,9 @@ Mon 8-May-2023
 Recovery.
 COVID RAT test still positive, but much fainter.
 
-make_ww3_current_file forecast got stuck again; killed it; 
+make_ww3_current_file forecast got stuck again; killed it;
 ran ``make_ww3_current_file forecast`` via launch_remote_worker to get back on track
-Did OS pkgs update on arbutus:nowcast0 and rebooted in hopes of resolving 
+Did OS pkgs update on arbutus:nowcast0 and rebooted in hopes of resolving
 make_ww3_current_file issue.
 (SalishSeaCast)
 
@@ -4276,11 +4276,11 @@ Recovery.
 Discovered that I already put archive_tarball for V202111 into automation.
 Restarted dask scheduler and workers cluster on salish.
 Ran ``nowcast.workers.day_month_avgs 2023-04-01`` in ``202111-tarballs`` tmux session on
-skookum against dask cluster on salish: 
+skookum against dask cluster on salish:
 * successfully created all day-avg and month-avg files without intervention
 * 3 FutureWarning per day-avg:
-    /SalishSeaCast/Reshapr/reshapr/core/extract.py:929: 
-    FutureWarning: Following pandas, the `loffset` parameter to resample will be deprecated 
+    /SalishSeaCast/Reshapr/reshapr/core/extract.py:929:
+    FutureWarning: Following pandas, the `loffset` parameter to resample will be deprecated
     in a future version of xarray.  Switch to using time offset arithmetic.
       resampler = extracted_ds.resample(
   created Reshapr issue #82
@@ -4288,7 +4288,7 @@ skookum against dask cluster on salish:
   * worker spawner: 5.025g
   * scheduler: 4.670g
   * 4 workers: 0.667g
-make_ww3_current_file forecast got stuck again; killed it; 
+make_ww3_current_file forecast got stuck again; killed it;
 ran ``make_ww3_current_file forecast`` via launch_remote_worker to get back on track
 (SalishSeaCast)
 
@@ -4340,12 +4340,12 @@ Continued work on migrating Susan's new rivers processing code into repo:
 * branch: v202111-rivers
 * PR#150
 * refactored the remainder of write_file() into _write_netcdf() and _to_netcdf() patterned after
-  those I wrote in grib_to_netcdf worker; latter isolates actual file write so that it can be 
+  those I wrote in grib_to_netcdf worker; latter isolates actual file write so that it can be
   mocked for testing of the rest of _write_netcdf() functionality
 * started thinking about how to proceed to including this work in make_runoff_file worker:
   * PR#150 is big and branched almost 3 months ago, though GitHub says it is can merge without
     conflicts now
-  * discussion with Susan concluded that it would be good to be able to run versions of 
+  * discussion with Susan concluded that it would be good to be able to run versions of
     make_runoff_file in automation for both v201702 and v202108 bathymetires
   * maybe squash-merged PR#150, then start a new branch & PR to create make_v202108_runoff_file
     from make_runoff_file?
@@ -4492,7 +4492,7 @@ Squash-merged dependabot PRs re: version update of codecov-action:
 
 LiveOcean changed to new versions; NO3 and NH4 are now separate variables
 * Susan updated tools module to add new NO3 and NH4 to be consistent with our prior values
-* pulled tools on skookum before grib_to_netcdf finished, so new forcing was in effect for the 
+* pulled tools on skookum before grib_to_netcdf finished, so new forcing was in effect for the
   day's runs
 download_weather 00 1km and 12 1km failed due to missing files
 (SalishSeaCast)
@@ -4507,9 +4507,9 @@ Group mtg; see whiteboard.
 Checked status of scheduled GHA workflows:
   conda activate gha-workflows
   python3 /media/doug/warehouse/MOAD/gha-workflows/gha_workflows_checker.py
-Changed pytest-with-coverage and sphinx-linkcheck reusable workflows to use 
+Changed pytest-with-coverage and sphinx-linkcheck reusable workflows to use
 mamba-org/setup-microconda from deprecated mamba-org/provision-with-micromamba.
-Squash-merged dependabot PRs to bump requests to 2.31.0 re: CVE-2023-32681 re: 
+Squash-merged dependabot PRs to bump requests to 2.31.0 re: CVE-2023-32681 re:
 Proxy-Authorization headers:
 * cookiecutter-analysis-repo
 * cookiecutter-MOAD-pypkg
@@ -4527,9 +4527,9 @@ Proxy-Authorization headers:
 (repos-maint)
 
 
-Changed pytest-with-coverage workflow to use mamba-org/setup-microconda 
+Changed pytest-with-coverage workflow to use mamba-org/setup-microconda
 from deprecated mamba-org/provision-with-micromamba.
-Squash-merged dependabot PR to bump requests to 2.31.0 re: CVE-2023-32681 re: 
+Squash-merged dependabot PR to bump requests to 2.31.0 re: CVE-2023-32681 re:
 Proxy-Authorization headers.
 
 Continued work on make_v202111_runoff_file:
@@ -4686,7 +4686,7 @@ June
 Thu 1-Jun-2023
 ^^^^^^^^^^^^^^
 
-upload_forcing forecast2 failed due to no runoff files; discussed with Susan and decided to 
+upload_forcing forecast2 failed due to no runoff files; discussed with Susan and decided to
 restore make_runoff_file and make_v202111_runoff_file after collect_weather 06, then let them
 update the runoff files after collect_weather 12
 make_runoff_file failed due to missing b202108 key in ``monthly climatology``
@@ -4731,14 +4731,14 @@ Sat 3-Jun-2023
 
 Prep for listing 2356.
 
-make_ww3_current_file forecast2 stalled; killed it; re-ran it on arbutus; also re-ran 
+make_ww3_current_file forecast2 stalled; killed it; re-ran it on arbutus; also re-ran
 make_ww3_wind_file forecast2: run succeeded
 (SalishSeaCast)
 
 Continued work on make_v202111_runoff_file:
 * branch: make_v202111_runoff_file
 * PR#183
-* pulled latest version of branch on skookum for more testing; restarted manager for updated 
+* pulled latest version of branch on skookum for more testing; restarted manager for updated
   next_workers module to take affect
 (SalishSeaNowcast)
 
@@ -4782,12 +4782,12 @@ Prep for listing 2356.
 Tue 6-Jun-2023
 ^^^^^^^^^^^^^^
 
-Used VSCode ``SalishSeaNowcast [SSH:skookum]`` session to run 
+Used VSCode ``SalishSeaNowcast [SSH:skookum]`` session to run
 ``nowcast.workers.day_month_avgs 2023-05-01`` in ``202111-tarballs`` tmux session on
-skookum against dask cluster on salish: 
+skookum against dask cluster on salish:
 * 3 FutureWarning per day-avg:
-    /SalishSeaCast/Reshapr/reshapr/core/extract.py:929: 
-    FutureWarning: Following pandas, the `loffset` parameter to resample will be deprecated 
+    /SalishSeaCast/Reshapr/reshapr/core/extract.py:929:
+    FutureWarning: Following pandas, the `loffset` parameter to resample will be deprecated
     in a future version of xarray.  Switch to using time offset arithmetic.
       resampler = extracted_ds.resample(
   created Reshapr issue #82
@@ -4795,7 +4795,7 @@ skookum against dask cluster on salish:
 * very small amount of memory leakage:
   * worker spawner: 5.028g
   * scheduler: 4.711g
-  * 4 workers: 0.667g (no change) 
+  * 4 workers: 0.667g (no change)
 (hindcast)
 
 Squash-merged dependabot PRs re: updating to cryptography=41.0.1 re: CVE-2023-2650 DoS
@@ -4852,7 +4852,7 @@ Fri 9-Jun-2023
 
 Prep for listing 2356.
 
-Explored adding debug log messages to make_ww3_current_file to try to understand where it is 
+Explored adding debug log messages to make_ww3_current_file to try to understand where it is
 getting stuck; discovered that there are no recent debug messages from the worker; restarted
 log_aggregator to try to resolve
 * dug back in last debug logs to 3jun forecast2 failure:
@@ -4942,7 +4942,7 @@ Also discussed doing erddap-datasets repo overhaul concurrently:
       * does success of ElementTree.parse() guarantee well-formed XML?
   * https://github.com/7yl4r/erddap-config-template
   * https://github.com/7yl4r/erddap-datasetsxml-builder
-  * mentioned in Mar-2023 ERDDAP list thread: 
+  * mentioned in Mar-2023 ERDDAP list thread:
       [ERDDAP] Best practices to version control datasets.xml
 (ERDDAP)
 
@@ -4965,7 +4965,7 @@ Mtg w/ Tall:
 * sorted out issues  in Susan's O2 eval notebook
 * fixed miniforge install on char, et al
 * fixed VSCode ssh connection timeout value
-* got analysis-abdoul env connected in VSCode on char for notebook kernel 
+* got analysis-abdoul env connected in VSCode on char for notebook kernel
 
 Started work on separating dataset descriptions into files to be composed into
 dataset.xml by a script:
@@ -4994,7 +4994,7 @@ Discovered that collect_weather 00 stalled last night
 * files I got from dd.weather.gc.ca were APCP_Sfc, not APCP_Sfc, so crop_gribs failed
   * emailed Sandrine
   * files appeared at ~14:20
-  * email from Sandrine at 14:43 confirming that files were ready 
+  * email from Sandrine at 14:43 confirming that files were ready
 * re-recovery started at ~14:20
     curl files from dd.weather.gc.ca
     crop_gribs 00 --fcst-date 2023-06-15
@@ -5012,7 +5012,7 @@ Discovered that collect_weather 00 stalled last night
       mv /SalishSeaCast/datamart/hrdps-continental/18/048/* \
         /results/forcing/atmospheric/continental2.5/GRIB/20230615/18/
       crop_gribs 18 --fcst-date 2023-06-15
-* crop_gribs 18 failed due to missing 
+* crop_gribs 18 failed due to missing
   18/019/20230615T18Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT019H.grib2
   * no file on server
   * ignored because we only need hours 005 and 006 for forcing
@@ -5040,10 +5040,10 @@ Either I forgot to start collect_weather 00 last night, or it failed
     kill collect_weather 12
     wait for forecast2 runs to finish
     collect_weather 12 --backfill
-grib_to_netcdf failed due to missing 
+grib_to_netcdf failed due to missing
 18/005/20230615T18Z_MSC_HRDPS_PRATE_Sfc_RLatLon0.0225_PT005H_SSC.grib2
 * recovery started at ~13:00
-    symlinked 20230615T18Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT019H.grib2 as 
+    symlinked 20230615T18Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT019H.grib2 as
     20230615T18Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT018H.grib2
     crop_gribs 18 2023-06-15
     grib_to_netcdf nowcast+
@@ -5114,7 +5114,7 @@ dataset.xml by a script:
 * branch: separate-dataset-files
 * PR#1
 * confirmed that lxml.etree.ElementTree.parse() will parse a dataset fragment
-  contained in a <dataset></dataset> tag and raise lxml.etree.XMLSyntaxError 
+  contained in a <dataset></dataset> tag and raise lxml.etree.XMLSyntaxError
   exceptions when the XML is not well-formed; so, it can be used for the level of
   XML validation that I had in mind
 * added build_datasets_xml.py script
@@ -5193,7 +5193,7 @@ dataset.xml by a script:
 * PR#1
 * started migrating bathy & mesh mask datasets to datasets/nemo-grid/
 * discovered that infoUrl is a required dataset attribute
-* TODO: 
+* TODO:
   * Fix source attr URL from Bitbucket to GitHub in ubcSSnBathymetryV17-02
 (ERDDAP)
 
@@ -5505,7 +5505,7 @@ Started to hack 5jul handling of files we got from hpfx to run nowcast runs only
     upload_forcing arbutus.cloud-nowcast nowcast+ --run-date 2023-07-05 --debug
     make_forcing_links arbutus.cloud-nowcast nowcast+ --run-date 2023-07-05
     forecast run was unexpectedly successful
-    nowcast-green and nowcast-agrif run launches failed due to no date on 
+    nowcast-green and nowcast-agrif run launches failed due to no date on
     ``upload_forcing turbidity``
     upload_forcing graham-dtn turbidity --run-date 2023-07-05
     upload_forcing optimum-hindcast turbidity --run-date 2023-07-05
@@ -5513,7 +5513,7 @@ Started to hack 5jul handling of files we got from hpfx to run nowcast runs only
     upload_forcing arbutus.cloud-nowcast turbidity --run-date 2023-07-05
 * backfilled 06jul23 runs:
     make_forcing_links arbutus.cloud-nowcast nowcast+ --run-date 2023-07-06
-    nowcast-green and nowcast-agrif run launches failed due to no date on 
+    nowcast-green and nowcast-agrif run launches failed due to no date on
     ``upload_forcing turbidity``
     upload_forcing graham-dtn turbidity --run-date 2023-07-06
     upload_forcing optimum-hindcast turbidity --run-date 2023-07-06
@@ -5525,7 +5525,7 @@ Started to hack 5jul handling of files we got from hpfx to run nowcast runs only
 
 Updated PyCharm on khawla to 2023.1.4.
 
-Got several message from ERDDAP complaining about 
+Got several message from ERDDAP complaining about
 "java.io.IOException: User limit of inotify watches reached"; tried mitigate that as
 docs suggest:
   sudo sysctl fs.inotify.max_user_watches=65536
@@ -5611,7 +5611,7 @@ Finished backfilling NEMO and wwatch3 runs:
 Email w/ Rachael re: vessel track stitching script; not in a Git repo to my knowledge.
 (MIDOSS)
 
-Squash-merged dependabot PRs to update cryptography re: CVE-2023-38325 re: 
+Squash-merged dependabot PRs to update cryptography re: CVE-2023-38325 re:
 mishandling creation and parseing of SSH certificates that have critical options:
 * SalishSeaCmd
 * NEMO_Nowcast
@@ -5685,7 +5685,7 @@ Explored changing crop_gribs worker to use watchdog file system monitor to opera
 files as they are moved into the /results/forcing/atmospheric/continental2.5/GRIB/{yyyymmdd}/{hh}/
 directory:
 branch: faster-crop_gribs
-PR#: 
+PR#:
 (SalishSeaNowcast)
 
 Helped Tall explore Puget Sound dissolved O2 observations:
@@ -5809,7 +5809,7 @@ Updated nodecraft server to 1.20.1:
 * uploaded to /1-20-1-25jul23/datapacks:
     DoubleShulkerShells-1.3.4
 * uploaded to /mods/
-    lithium-fabric-mc1.20.1-0.11.2.jar 
+    lithium-fabric-mc1.20.1-0.11.2.jar
 * restarted server
 
 
@@ -5871,12 +5871,12 @@ Squash-merged dependabot PRs to update pygments re: CVE-2022-40896 re: ReDOS iss
 * analysis-doug/dask-expts
 * analysis-doug/melanie-geotiff
 
-Squash-merged dependabot PRs to update cryptography re: CVE-2023-38325 re: 
+Squash-merged dependabot PRs to update cryptography re: CVE-2023-38325 re:
 mishandling creation and parseing of SSH certificates that have critical options:
 * analysis-doug/dask-expts
 * analysis-doug/melanie-geotiff
 
-Squash-merged dependabot PR to update SciPy re: CVE-2023-25399 re: recounting issue 
+Squash-merged dependabot PR to update SciPy re: CVE-2023-25399 re: recounting issue
 that leads to potential memory leak:
 * analysis-doug/dask-expts
 * analysis-doug/melanie-geotiff
@@ -5908,7 +5908,7 @@ recovery started at ~08:35:
   * restarted sr_subscribe-hydrometric via supervisorctl
   * wait for sarracenia to update river discharge csv files
   /results/forcing/rivers/observations/collect_river_data.sh
-  make_runoff_file  
+  make_runoff_file
   make_v202111_runoff_file
 Backfill nowcast-dev:
   wait for 28jul to fail
@@ -5925,7 +5925,7 @@ Continued work on changing crop_gribs worker to use watchdog file system monitor
 files as they are moved into the /results/forcing/atmospheric/continental2.5/GRIB/{yyyymmdd}/{hh}/
 directory:
 branch: faster-crop_gribs
-PR#: 
+PR#:
 (SalishSeaNowcast)
 
 
@@ -5967,7 +5967,7 @@ Mon 31-Jul-2023
 ^^^^^^^^^^^^^^^
 
 NEMO forecast2 failed overnight; Susan investigated: 1st time step, high velocity components
-on western boundary; may not affect nowcast runs because they are initialized from 
+on western boundary; may not affect nowcast runs because they are initialized from
 yesterday's nowcast-green restart file, whereas forecast2 is initialized from a restart file
 generated part way through the forecast run.
 No 18Z messages in sarracenia log; warning & error at 10:38:
@@ -5989,12 +5989,12 @@ Checked hydrometric feed in sarracenia:
 Jumped in to kill dask processes to prevent swapping on salish; Camryn was running 6 ariane jobs
 using ~30G each; discussed limits with her on Slack.
 
-Used VSCode ``SalishSeaNowcast [SSH:skookum]`` session to run 
+Used VSCode ``SalishSeaNowcast [SSH:skookum]`` session to run
 ``nowcast.workers.day_month_avgs 2023-06-01`` in ``202111-tarballs`` tmux session on
-skookum against dask cluster on salish: 
+skookum against dask cluster on salish:
 * 3 FutureWarning per day-avg:
-    /SalishSeaCast/Reshapr/reshapr/core/extract.py:929: 
-    FutureWarning: Following pandas, the `loffset` parameter to resample will be deprecated 
+    /SalishSeaCast/Reshapr/reshapr/core/extract.py:929:
+    FutureWarning: Following pandas, the `loffset` parameter to resample will be deprecated
     in a future version of xarray.  Switch to using time offset arithmetic.
       resampler = extracted_ds.resample(
   see Reshapr issue #82
@@ -6101,7 +6101,7 @@ Squash-merged some dependabot PRs from weekly email alert; they didn't generate 
 for some reason:
 * SOG-Bloomcast-Ensemble: cryptography, pygments, certifi
 * NEMO-Cmd: requests, GitPython, future, cryptography
-* FVCOM-Cmd: 
+* FVCOM-Cmd:
 
 
 Wed 2-Aug-2023
@@ -6131,7 +6131,7 @@ Squash-merged dependabot PRs re: statically linked version of OpenSSL in cryptog
 * AtlantisCmd
 * cookiecutter-analysis-repo
 
-Updated requirements.txt to drop py and bump pytest to re: security alert from 
+Updated requirements.txt to drop py and bump pytest to re: security alert from
 18-Oct-2022:
 * FVCOM-Cmd
 * rpn-to-gemlam
@@ -6308,8 +6308,8 @@ followed suggestions on https://coastwatch.pfeg.noaa.gov/erddap/download/setupDa
   sudo sysctl fs.inotify.max_user_watches=65536
   sudo sysctl fs.inotify.max_user_instances=1024
   sudo sysctl -p
-ERDDAP was also reporting 
-``java.lang.OutOfMemoryError: Ran out of memory trying to read HDF5 filtered chunk. Either increase 
+ERDDAP was also reporting
+``java.lang.OutOfMemoryError: Ran out of memory trying to read HDF5 filtered chunk. Either increase
 the JVM's heap size (use the -Xmx switch) or reduce the size of the dataset's chunks`` errors:
   * changed Java heap memory settings in /opt/tomcat/bin/startup.sh to:
     -Xmx=48G -Xms=16G  # heap size limit, initial heap size
@@ -6466,7 +6466,7 @@ no NeahBay obs or forecast for forecast2 or nowcast:
     collect_NeahBay_ssh 00 2023-08-17 --debug  # failed
       new files are .csv.tar.gz rather than .csv_tar; new are larger than old; Susan investigated:
       * the file we are interested in within the tarball appears to be the same
-      * change config to store file as .csv_tar_gz; tarfile module handles gz compression 
+      * change config to store file as .csv_tar_gz; tarfile module handles gz compression
         transparetnly; need underscores instead of dots to be able to use Path.with_suffix()
         without code changes
     collect_NeahBay_ssh 00 2023-08-17 --debug  # success
@@ -6640,14 +6640,14 @@ Docs build failures in brown-out on readthedocs due to deprecation of build.imag
 * AtlantisCmd - fixed
 * SalishSeaTools - fixed
 
-Updated readthedocs build config, etc. re: build failures in brown-out on readthedocs due to 
+Updated readthedocs build config, etc. re: build failures in brown-out on readthedocs due to
 deprecation of build.image config key in favour of build.os;
 see https://docs.readthedocs.io/en/stable/config-file/v2.html#build-os
 branch: update-readthedocs-config
 PR#27 - squash-merged
 (AtlantisCmd)
 
-Updated readthedocs build config re: build failures in brown-out on readthedocs due to 
+Updated readthedocs build config re: build failures in brown-out on readthedocs due to
 deprecation of build.image config key in favour of build.os;
 see https://docs.readthedocs.io/en/stable/config-file/v2.html#build-os
 Fixed html_theme specification in Sphinx config.
@@ -6685,7 +6685,7 @@ Worked at ESB
 Group mtg; see whiteboard.
 (MOAD)
 
-More analysis of last night's crop_gribs FileNotFoundError failure leads me to 
+More analysis of last night's crop_gribs FileNotFoundError failure leads me to
 conclude that it was crop_gribs 06 failing to launch, not crop_gribs 00 failing;
 there is a potential race conditions between collect_weather and crop_gribs re:
 the creation of the /results/forcing/atmospheric/continental2.5/GRIB/yyyymmdd/hh/ directory;
@@ -6750,23 +6750,23 @@ crop_gribs 18 left 1 files uncropped:
   crop_gribs 06 DSWRF_Sfc 35 --debug
 (SalishSeaCast)
 
-Used VSCode ``SalishSeaNowcast [SSH:skookum]`` session to run 
+Used VSCode ``SalishSeaNowcast [SSH:skookum]`` session to run
 ``nowcast.workers.day_month_avgs 2023-07-01`` in new ``day_month_avgs`` tmux session on
-skookum against dask cluster on salish: 
+skookum against dask cluster on salish:
 * 3 FutureWarning per day-avg:
-    /SalishSeaCast/Reshapr/reshapr/core/extract.py:929: 
-    FutureWarning: Following pandas, the `loffset` parameter to resample will be deprecated 
+    /SalishSeaCast/Reshapr/reshapr/core/extract.py:929:
+    FutureWarning: Following pandas, the `loffset` parameter to resample will be deprecated
     in a future version of xarray.  Switch to using time offset arithmetic.
       resampler = extracted_ds.resample(
   see Reshapr issue #82
-* processes that I would have previously considered to be stalled seem to be progressing very 
+* processes that I would have previously considered to be stalled seem to be progressing very
   slowly; re-ran and some missing day-avgs were completed except:
   * physics 2023-07-19
   * biology 2023-07-26
   * killed those processes on salish and re-tried; same stalls
   * Used VSCode ``month-avg.202111 /results2/SalishSea [SSH: salish]`` session on salish to run
     in ``/results2/SalishSea/month-avg.202111/``:
-    ``python3 -m day_avg 2023-07-19 physics`` 
+    ``python3 -m day_avg 2023-07-19 physics``
     ``python3 -m day_avg 2023-07-26 biology``
   * re-ran day_month_avgs to finish month-avgs
 * noticable memory leakage from workers; kille and restarted them:
@@ -6799,7 +6799,7 @@ Noticed that yesterday's make_ww3_current_file forecast stalled:
     wait for wwatch3 runs to finish at ~11:30;
       didn't happen due to make_ww3_wind_file forecast stall
     make_ww3_wind_file arbutus nowcast 2023-08-31
-    make_ww3_current_file arbutus nowcast 2023-08-31 
+    make_ww3_current_file arbutus nowcast 2023-08-31
     wait for wwatch3 runs to finish
     make_ww3_wind_file arbutus nowcast 2023-09-01
     make_ww3_current_file arbutus nowcast 2023-09-01  # took 3 tries to get completion :-(
@@ -6880,7 +6880,7 @@ Slack conversation w/ Birgit about using NEMO-Cmd for BAS NEMO 4.2 configs.
 Squash-merged dependabot PRs re: actions/checkout re: update of default runtime to node20:
 * gha-workflows
 * salishsea-site
-Squash-merged dependabot PRs re: gitpython re: CVE-2023-40590 arbitrary code execution 
+Squash-merged dependabot PRs re: gitpython re: CVE-2023-40590 arbitrary code execution
 vulnerability re: Python on Windows:
 * NEMO-Cmd
 * AtlantisCmd
@@ -6890,7 +6890,7 @@ Squash-merged dependabot PR in gha-workflows re: setup-micromamba update to 1.4.
 
 Hangout w/ Tall re: setting up to run NEMO on graham.
 
-Confirmed that 28-Aug pytest-with-coverage GHA failure was anomalous; 
+Confirmed that 28-Aug pytest-with-coverage GHA failure was anomalous;
 subsequent run was successful.
 (moad_tools)
 
@@ -6945,15 +6945,15 @@ crop_gribs 12 left 1 files uncropped:
 
 An email from "RPN,Service [CMC]" <Service.RPN@ec.gc.ca> revealed that I have an account on
 the GPSCC2 collaboration server that is being migrated to the new GPSCC3 server; an ssh attempt
-  ssh -v dlatornell@inter-c-eccc-lp.collab.science.gc.ca 
+  ssh -v dlatornell@inter-c-eccc-lp.collab.science.gc.ca
 gets me as far as asking for a password (that I don't have).
 
-Used VSCode ``SalishSeaNowcast [SSH:skookum]`` session to run 
+Used VSCode ``SalishSeaNowcast [SSH:skookum]`` session to run
 ``nowcast.workers.day_month_avgs 2023-07-01`` in ``day_month_avgs`` tmux session on
-skookum against dask cluster on salish: 
+skookum against dask cluster on salish:
 * 3 FutureWarning per day-avg:
-    /SalishSeaCast/Reshapr/reshapr/core/extract.py:929: 
-    FutureWarning: Following pandas, the `loffset` parameter to resample will be deprecated 
+    /SalishSeaCast/Reshapr/reshapr/core/extract.py:929:
+    FutureWarning: Following pandas, the `loffset` parameter to resample will be deprecated
     in a future version of xarray.  Switch to using time offset arithmetic.
       resampler = extracted_ds.resample(
   see Reshapr issue #82
@@ -6962,7 +6962,7 @@ skookum against dask cluster on salish:
     * killed those processes on salish
   * Used VSCode ``month-avg.202111 /results2/SalishSea [SSH: salish]`` session on salish to run
     in ``/results2/SalishSea/month-avg.202111/``:
-    ``python3 -m day_avg 2023-08-21 physics`` 
+    ``python3 -m day_avg 2023-08-21 physics``
   * re-ran day_month_avgs to finish month-avgs
 * noticable memory leakage from workers:
   * worker spawner: 5.026g
@@ -7007,7 +7007,7 @@ Squash-merged dependabot PR re: actions/checkout re: update of default runtime t
 Squash-merged dependabot PR re: gitpython re: DoS vulnerability.
 (SalishSeaNowcast)
 
-Continued work on issue #82 re: loffset deprecation; no progress; developed demo code and posted 
+Continued work on issue #82 re: loffset deprecation; no progress; developed demo code and posted
 question on xarray Q&A discussion.
 (Reshapr)
 
@@ -7084,7 +7084,7 @@ crop_gribs 06 left 1 files uncropped:
 
 Updated minecraft 1.20.1 single player creative world copy of Nodecraft world:
 * stopped server (50d of uptime)
-* created and downloaded backup: Lifeful Rainbow Road 
+* created and downloaded backup: Lifeful Rainbow Road
 * started server
 * created new single player world from backup zip
 
@@ -7124,7 +7124,7 @@ grib_to_netcdf failed due to missing 00 file
 
 Phys Ocgy Seminar:
 * Grace: SOP for drifter obs QA and evaluation; co-op work terms
-* Vicente: dissolved iron and high productivity around Elephant Island in southern ocean; 
+* Vicente: dissolved iron and high productivity around Elephant Island in southern ocean;
   undergrad thesis
   * high productivity is anomalous; most southern ocean has low productivity
 
@@ -7176,7 +7176,7 @@ crop_gribs 18 left 1 files uncropped:
   kill crop_gribs 18
 (SalishSeaCast)
 
-Reverted yesterday's addition of -O to ncks command in make_ww3_current_file that extracts 1st 24h 
+Reverted yesterday's addition of -O to ncks command in make_ww3_current_file that extracts 1st 24h
 of currents forecast during forecast2 prep; it is only applicable when output file
 exists; that's not true in normal processing :-(
 Started work on changes to crop_gribs to have it retry uncropped files after it has been watching
@@ -7216,7 +7216,7 @@ crop_gribs 00 had 1 file uncropped when it should have finished at ~20:42:
 left it alone to see if retry feature I added will work at ~23:15
 (SalishSeaCast)
 
-Still getting messages from ERDDAP complaining about 
+Still getting messages from ERDDAP complaining about
 "java.io.IOException: User limit of inotify watches reached"; tried mitigate that by
 doubling ERDDAP docs suggestions:
   sudo sysctl fs.inotify.max_user_watches=131072
@@ -7289,7 +7289,7 @@ retry feature sent a critical error at 04:28; grib_to_netcdf subsequently failed
     collect_weather 12 2.5km --backfill
     hacked crop_gribs to process backfilled 12 files sequentially
     crop_gribs 12
-    make_runoff_file failed because collect_river_data didn't run due to collect_weather 06 
+    make_runoff_file failed because collect_river_data didn't run due to collect_weather 06
     never finishing
     recovery started at ~13:15
       bash /SalishSeaCast/datamart/hydrometric/collect_river_data.sh 2023-09-20
@@ -7418,9 +7418,9 @@ crop_gribs 18 stalled with 1 file uncropped; expect recovery at ~18:30; success
 Discussed way forward w/ Susan:
 * realized that grib_to_netcdf has successfully created today's forcing, but not forecast forcing
   for next 36h, however 30h of that was created for forecast2 this morning
-* decided to restart automation with manual launch of workers that would have launched if  
+* decided to restart automation with manual launch of workers that would have launched if
   collect_weather 12 had finished
-  * there is a risk that if missing 12 files appear runs will get messed up when proper forcing 
+  * there is a risk that if missing 12 files appear runs will get messed up when proper forcing
     is uploaded
 * recovery started at ~15:35:
     collect_river_data USGS SkagitMountVernon 2023-09-24
@@ -7499,7 +7499,7 @@ Reviewed weekly dependabot alerts email for stale and low priority updates:
   * Update SOG pytest version to drop py dep
   * Update SOG-forcing pytest version to drop py dep
   * migrate PyPDF2 to pypdf in SalishSeaNowcast
-  * Update rpn-to-gemlam pytest version to drop py dep; do tornado and cryptography PRs; 
+  * Update rpn-to-gemlam pytest version to drop py dep; do tornado and cryptography PRs;
     then archive repo
   * douglatornell.ca js pkgs
   * Update raspi_x10 pytest version to drop py dep; then archive repo
@@ -7605,7 +7605,7 @@ up late last night
 no messages from wwatch3 workers, so restarted log_aggregator
 (SalishSeaCast)
 
-Added --backfill arg to crop_gribs to make it run without watching for file system events to 
+Added --backfill arg to crop_gribs to make it run without watching for file system events to
 indicate existence of files to crop; skips already cropped files.
 branch: crop_gribs-backfill
 PR#
@@ -7613,8 +7613,8 @@ PR#
   grib_to_netcdf nowcast+; success
 (SalishSeaNowcast)
 
-Set up Minecraft 1.20.2 instance in MultiMC and tried to launch/update copy of 1.20.1 creative 
-world; failed due to incompatible version of Malilib mod; not official or community version 
+Set up Minecraft 1.20.2 instance in MultiMC and tried to launch/update copy of 1.20.1 creative
+world; failed due to incompatible version of Malilib mod; not official or community version
 available yet.
 
 
@@ -7630,7 +7630,7 @@ On-boarding meeting w/ Ilias.
 
 Slack w/ Jake re: open_mfdataset and Reshapr.
 
-Helped Tall with chhosing restart file to run on graham; explained very 5 days + month-end 
+Helped Tall with chhosing restart file to run on graham; explained very 5 days + month-end
 restarts in hindcast.
 
 Squash-merged dependabot PRs re: update of urllib3 due to cookie header handling vulnerability
@@ -7702,23 +7702,23 @@ Worked on backfilling missing 2019 wwatch3 runs for Jose:
     for ddmmm in 30apr 10may 23jul 05sep 17sep 29sep 30dec;
     do
       rsync -tv ${ddmmm}19/restart001.ww3 \
-        arbutus.cloud:/nemoShare/MEOPAR/SalishSea/wwatch3-nowcast/${ddmmm}19/; 
+        arbutus.cloud:/nemoShare/MEOPAR/SalishSea/wwatch3-nowcast/${ddmmm}19/;
     done
 * rsync-ed nowcast-green currents files from run days to arbutus:
     cd /results2/SalishSea/nowcast-green.v201905
     rsync -tv 01may19/SalishSea_1h_20190501_20190501_grid_[UV].nc \
-        arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/01may19/; 
+        arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/01may19/;
     rsync -tv 11may19/SalishSea_1h_20190511_20190511_grid_[UV].nc \
-        arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/11may19/; 
+        arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/11may19/;
     rsync -tv 24jul19/SalishSea_1h_20190724_20190724_grid_[UV].nc \
-        arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/24jul19/; 
+        arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/24jul19/;
     for dd in 06 07 18 30;
     do
       rsync -tv ${dd}sep19/SalishSea_1h_201909${dd}_201909${dd}_grid_[UV].nc \
-          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/${dd}sep19/; 
+          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/${dd}sep19/;
     done
     rsync -tv 31dec19/SalishSea_1h_20191231_20191231_grid_[UV].nc \
-        arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/31dec19/; 
+        arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/31dec19/;
 * changed config ``weather[file template]`` to "ops_{:y%Ym%md%d}.nc" for 2019
 * launched runs:
     make_ww3_wind_file arbutus nowcast 2019-05-01
@@ -7840,17 +7840,17 @@ Checked days after missing runs and found cold starts for:
   * rsync-ed nowcast-green currents files from cold start run days to arbutus:
       cd /results2/SalishSea/nowcast-green.v201905
       rsync -tv 02may19/SalishSea_1h_20190502_20190502_grid_[UV].nc \
-          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/02may19/; 
+          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/02may19/;
       rsync -tv 12may19/SalishSea_1h_20190512_20190512_grid_[UV].nc \
-          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/12may19/; 
+          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/12may19/;
       rsync -tv 25jul19/SalishSea_1h_20190725_20190725_grid_[UV].nc \
-          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/25jul19/; 
+          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/25jul19/;
       rsync -tv 08sep19/SalishSea_1h_20190908_20190908_grid_[UV].nc \
-          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/08sep19/; 
+          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/08sep19/;
       rsync -tv 19sep19/SalishSea_1h_20190919_20190919_grid_[UV].nc \
-          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/19sep19/; 
+          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/19sep19/;
       rsync -tv 01oct19/SalishSea_1h_20191001_20191001_grid_[UV].nc \
-          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/01oct19/; 
+          arbutus.cloud:/nemoShare/MEOPAR/SalishSea/nowcast-green/01oct19/;
   * backfill 2019 cold start runs:
       make_ww3_wind_file arbutus nowcast 2019-05-02
       make_ww3_current_file arbutus nowcast 2019-05-02
@@ -7970,11 +7970,11 @@ Finished backfilling 2019 wwatch3 cold start runs for Jose:
 
 xarray office hours:
 * xarray tutorial site: https://tutorial.xarray.dev/intro.html
-* Dataset.pipe() applies function to 
+* Dataset.pipe() applies function to
 * apply_ufunc() is for use with numpy functions, not functions that use xarray data structures
 * asked about dask threads vs. clusters; my experience is not unique
   * big or complex workflows generally require a cluster; clusters can blow up
-  * cubed; early stage project that might 
+  * cubed; early stage project that might
 * kerchunk; compromise between zarr and native netCDF
   * one big metadata file
   * takes time to generate; what does that imply for adding daily runs
@@ -7985,7 +7985,7 @@ Started fixing xarray.Dataset.resample() loffset parameter deprecation bug
 * issue #82
 * PR #92
 * branch: loffset-deprecation
-* Created issue #93 re: ``reshapr info`` fail for user-provided model profile or cluster 
+* Created issue #93 re: ``reshapr info`` fail for user-provided model profile or cluster
   description.
 (Reshapr)
 
@@ -8014,7 +8014,7 @@ LiveOcean had another bad day; download completed at 11:08
 
 Phys Ocgy seminar: Jose's microfibres work.
 
-1.20.2 versions of Malilib, MiniHUD & Tweakeroo have been released; successfully tested in 
+1.20.2 versions of Malilib, MiniHUD & Tweakeroo have been released; successfully tested in
 single player creative copy of Nodecraft world.
 
 Cloned my fork of xarray on to khawla.
@@ -8159,10 +8159,10 @@ Finished fixing xarray.Dataset.resample() loffset parameter deprecation bug
 * branch: loffset-deprecation
 * Used VSCode ``month-avg.202111 /results2/SalishSea [SSH: salish]`` session on salish
   in reshapr env to run in ``/results2/SalishSea/month-avg.202111/``:
-    ``python3 -m day_avg 2023-09-01`` 
+    ``python3 -m day_avg 2023-09-01``
   got FutureWarning exceptions as in the past
 * Switched /SalishSeaCast/Reshapr clone to loffset-deprecation branch and ran:
-    ``python3 -m day_avg 2023-09-02`` 
+    ``python3 -m day_avg 2023-09-02``
   success with no FutureWarning exceptions :-)
 Started update to Python 3.12
 * branch: py312
@@ -8172,7 +8172,7 @@ Started update to Python 3.12
 * added workflow_dispatch trigger to GHA pytest-with-coverage workflow
 (Reshapr)
 
-FInalized and pushed example model profile and extraction config files for Jake in 
+FInalized and pushed example model profile and extraction config files for Jake in
 analysis-doug/wastewater/.
 
 Updated to PyCharm 2023.2.3 on khawla, mostly to get f-strings PEP-701 support in Python 3.12.
@@ -8215,9 +8215,9 @@ Squash-merged dependabot PRs to update urllib3 re: CVE-2023-45803 303 redirect v
 * cookiecutter-djl-pypkg
 * SOG-Bloomcast-Ensemble
 
-Added linux.die.net/man/1/scp to linkcheck ignore list to prevent 
-"403 Client Error: Forbidden" errors when checked from the GitHub Actions 
-sphinx-linkcheck workflow. Guessing that the server owners don't like their 
+Added linux.die.net/man/1/scp to linkcheck ignore list to prevent
+"403 Client Error: Forbidden" errors when checked from the GitHub Actions
+sphinx-linkcheck workflow. Guessing that the server owners don't like their
 content being accessed by automation.
 (MOAD docs)
 
@@ -8344,18 +8344,18 @@ Helped Jake get started with Reshpr for Iona long run results.
 Discovered that Susan didn't include standard_name attr for her outfall variable in her NEMO
 output config; Reshapr doesn't like that.
 * this should probably be resolved by using variable name as standard_name when neither
-  standard_name nor short_name exist; that is sort of implied by 
+  standard_name nor short_name exist; that is sort of implied by
   https://cfconventions.org/Data/cf-conventions/cf-conventions-1.10/cf-conventions.html#long-name
 
 Continued conversation on EOAS Slack w/ Henryk re: char/ocean weirdness. He thinks it was an NFS issue.
 
 Explored sphinx version limiting to 5.3.0; it's due to sphinx-rtd-theme version; won't move until
 v2.0.0 of the latter is released.
-Added fallback to use variable name as standard_name when source dataset variable lacks both 
+Added fallback to use variable name as standard_name when source dataset variable lacks both
 standard_name and short_name attributes:
 branch: std_name_fallback
 PR#99 - squash-merged
-* motivated by Susan not including standard_name for outfall tracer variable; this won't likely be  
+* motivated by Susan not including standard_name for outfall tracer variable; this won't likely be
   the first time someone does that...
 (Reshapr)
 
@@ -8441,10 +8441,10 @@ PR#94 - squash-merged
 Updated readthedocs build config:
 * change to mambaforge-22.9
 * pin versions of sphinx, sphinx-notfound-page & sphinx-rtd-theme
-  * re: build reproducibility: 
+  * re: build reproducibility:
     https://docs.readthedocs.io/en/stable/guides/reproducible-builds.html
 * add commonmark to dependencies in environment-rtd
-  * re: changes to default project depencencies: 
+  * re: changes to default project depencencies:
     https://blog.readthedocs.com/defaulting-latest-build-tools/
 * added pandas to autodoc import mocks list to resolve warning in API docs section
 branch: update-readthedocs-build
@@ -8555,7 +8555,7 @@ dataset.xml by a script:
 (erddap-datasets)
 
 
-Henryk proposed setting up performance monitoring on ocean NFS service so that we can try to 
+Henryk proposed setting up performance monitoring on ocean NFS service so that we can try to
 better characterize the issue that people are seeing.
 * Ilias reproduced his git clone tools issue
 * Becca reported notebook not found issue on perigee@UW, so possible VSCode issue; found
@@ -8580,7 +8580,7 @@ Cancelled planned participation in Fire Across the Land session due to illness.
 make_ww3_wind_file forecast2 stalled; killed it and skipped run
 (SalishSeaCast)
 
-Squash-merged dependabot PRs to update pip re: CVE-2023-5752 re: hg clone config injection 
+Squash-merged dependabot PRs to update pip re: CVE-2023-5752 re: hg clone config injection
 vulnerability:
 * cookiecutter-analysis-repo
 * cookiecutter-MOAD-pypkg
@@ -8601,7 +8601,7 @@ vulnerability:
 Fri 3-Nov-2023
 ^^^^^^^^^^^^^^
 
-Phys Ocgy seminar: Bernie Yang from C-PROOF at UVic: Characterizing the lateral mixing of mesoscale 
+Phys Ocgy seminar: Bernie Yang from C-PROOF at UVic: Characterizing the lateral mixing of mesoscale
 eddies using underwater gliders
 
 
@@ -8794,13 +8794,13 @@ GitHub Universe 2023:
 Continued work on trying to get make_ww3_* robust again:
 * branch: update_ww3-runs
 * PR#213
-* dropped change to next_workers to launch make_ww3_* prep workers for forecast2 run after NEMO 
+* dropped change to next_workers to launch make_ww3_* prep workers for forecast2 run after NEMO
   forecast2 results download finishes; it had no effect; force-pushed to PR
 * updated branch on skookum
 * restarted manager on skookum for change to take effect
 * added drop_vars and chunks to workers
   * rsync-ed changes to arbutus to test in debug mode and production tomorrow
-  * still got a couple of hangs on debug runs of make_ww3_current_file; fewer tests of 
+  * still got a couple of hangs on debug runs of make_ww3_current_file; fewer tests of
     make_ww3_wind_file
   * played with chunk size for time; no evident effact on memory use or execution time, so left
     it at 1
@@ -8809,7 +8809,7 @@ Continued work on trying to get make_ww3_* robust again:
 Tried to address ongoing OutOfMemoryError emails from ERDDAP:
 * increased JVM max heap size from -Xmx=96G to -Xmx=112G in skookum:/opt/tomcat/bin/startup.sh
   and restarted ERRDAP; no effect
-* confirmed that 2008-12-19 grid_U file is not on ERDDAP; its storage size looks no different to 
+* confirmed that 2008-12-19 grid_U file is not on ERDDAP; its storage size looks no different to
   2008-12-20
 * plotted surface current fields from 19th & 20th; no trouble loading 19th file
 (ERDDAP)
@@ -8829,7 +8829,7 @@ GitHub Universe 2023:
   * Inbal Shani, Chief Product Officer
     * DevEx
   * Asha Chakrabarty, VP Product Mgmt
-    * platform, tool, etc. agnostic  
+    * platform, tool, etc. agnostic
     * security embedded in dev workflow
     * actions
     * ARM and M1 runners
@@ -8875,7 +8875,7 @@ Fixed malformed test assertion in test_update_forecast_dataset; unitest.mock ass
 malformed but passing silently until Python 3.12.
 (SalishSeaNowcast)
 
-Squash-merged dependabot PRs to update pyarrow re: CVE-2023-47248 re: arbitrary code execution 
+Squash-merged dependabot PRs to update pyarrow re: CVE-2023-47248 re: arbitrary code execution
 vulnerability:
 * Reshapr
 * stopped because pyarrow=14,0.1 is not on conda-forge yet
@@ -8969,7 +8969,7 @@ nowcast log stopped updating at 07:44:
 * recovery started at ~09:45
     killed ``watch_NEMO forecast2``
     download_results arbutus forecast2 2023-11-14
-    make_forcing_links arbutus ssh 
+    make_forcing_links arbutus ssh
 upload_forcing to orcinus failed mulitple times; orcinus down
 (SalishSeaCast)
 
@@ -9163,7 +9163,7 @@ Updated readthedocs build config:
 * PR#71 - squash-merged
 Docs maintenance:
 * branch: docs-maint
-* PR#72 
+* PR#72
 * changed badges layout in README & dev docs to table
 * fixed URLs for GHA workflow badges
 * added release and Hatch badges to Release process section of dev docs
@@ -9201,7 +9201,7 @@ Started work on xarray PR re: loffset deprecation:
 * ref https://docs.xarray.dev/en/stable/contributing.html
 * updated xarray clone from upstream
 * set up VSCode workspace
-* created xarray-tests env 
+* created xarray-tests env
 * installed pre-commit
 * set git email
 * installed post-commit hook for rescuetime highlights
@@ -9218,7 +9218,7 @@ Started work on xarray PR re: loffset deprecation:
 Started work on issue 102 re: incorrect time coord values in month-average resampled datasets:
 branch:102-resampled-time-values
 PR#
-* learned that using MS for month resampling puts timestmap at start of month instead of 
+* learned that using MS for month resampling puts timestmap at start of month instead of
   end of previous month that M gives
 * lots of futzing around trying to create new index for resampled dataset
 (Reshapr)
@@ -9243,9 +9243,9 @@ PR#105 - squash-merged
 
 Continued work on xarray PR re: loffset deprecation:
 * branch: douglatornell-resample-time-offset-docs
-  * changed deprecation notices to Dataset.resample() and DataArray.resample() docstrings to 
+  * changed deprecation notices to Dataset.resample() and DataArray.resample() docstrings to
     present tense (suggested by Max Roos in 2nd review)
-  * rejected change of ``resampled_ds.get_index("time")`` to ``resampled_ds.indexes["time"]`` in 
+  * rejected change of ``resampled_ds.get_index("time")`` to ``resampled_ds.indexes["time"]`` in
     docs code (suggested by Max Roos in 2nd review) because v0.9.0 change log says that get_index()
     is more generally robust
   * awaiting review from Deepak Cherian
@@ -9304,7 +9304,7 @@ Met w/ Susan to plan 202111 ERDDAP and docs:
       * 2002-2006 using:
         * 2002-2006 atmospheric forcing downscaled from CANESM2 climate model product
         * 2002-2006 river discharges calculated from obs
-        * 2007-2011 climatologies of open boundaries 
+        * 2007-2011 climatologies of open boundaries
     * physics changes:
       * day-average discharge for all rivers based on gauged river obs within watersheds
       * changed surface wave parameterization to one tuned for Salish Sea rather than default
@@ -9314,16 +9314,16 @@ Met w/ Susan to plan 202111 ERDDAP and docs:
       * https://docs.google.com/document/d/1K6UQpVC0x4k20p9JPTW5nH9Mbcc_zB99pPk_Zik1ECg/edit
         * Asslin filter implementation bug was corrected
         * m. rubrum (aka ciliates) removed
-        * functional light dependence changed to PE-curve; tuned to closely match old 
+        * functional light dependence changed to PE-curve; tuned to closely match old
           response
-        * sinking for biological tracers switched from upstream scheme to incorporation in 
+        * sinking for biological tracers switched from upstream scheme to incorporation in
           TVD advection
         * river tracer input climatologies changed
         * N:O coupling udpated for various processes
         * sediment O2 demand parameter added to allow O2 flux into sediments to be
           decoupled from outgoing nitrate flux (more details in Google doc)
         * SMELT model was retuned
-    * names of zooplankton groups in ERDDAP datasets changed from 
+    * names of zooplankton groups in ERDDAP datasets changed from
       microzooplankton & mesozooplankton to Z1 & Z2
 (ERDDAP)
 
@@ -9501,7 +9501,7 @@ Researched GitHub Teams to refine repo access in our orgs:
 
 Updated sphinx & sphinx-rtd-theme versions:
 * branch: update-sphinx
-* PR#108 - 
+* PR#108 -
 * re: release of sphinx-rtd-theme 2.0.0 that enables us to move forward to latest sphinx 7.2.6
 Started work on adding extraction from month-averaged datasets:
 * branch: issue32-mong-avg-extract
@@ -9585,7 +9585,7 @@ Started work on adding climatology calculation
   (e.g. "month")
 (Reshapr)
 
-Phys Ocgy seminar: Dr. Matilde Jutras, post-doc at University of Hawaii, 
+Phys Ocgy seminar: Dr. Matilde Jutras, post-doc at University of Hawaii,
 The physical and biogeochemical drivers of deoxygenation in the Lower St. Lawrence Estuary and Gulf
 
 
@@ -9668,7 +9668,7 @@ Updated ubcSSnBathymetryV17-02 bathymetry dataset refs
 * branch: bathymetry-202108
 * PR#112 - squash-merged
 Continued work on adding climatology calculation
-* branch: 
+* branch:
 * PR#
 * need to rework output_coords dict due to time cooord change from "time" to climatology group
   (e.g. "month")
@@ -9676,7 +9676,7 @@ Continued work on adding climatology calculation
 
 Slack conversation with Tall about accessing ONC datasets.
 
-Slack conversation with Henryk about central ITs concerns about skookum and upgrading it to 
+Slack conversation with Henryk about central ITs concerns about skookum and upgrading it to
 20.04 LTS.
 
 
@@ -9704,10 +9704,10 @@ Slack w/ Karyn re: Reshapr climatology calculations:
 * how should she calculate density?
 
 Researched ERDDAP upgrade:
-* installed: 1.82 released 
+* installed: 1.82 released
   * version jumped from 1.82 to 2.0 on 2019-06-26
   * present Java &7 Tomcat:
-      cd /opt/tomcat/lib 
+      cd /opt/tomcat/lib
       java -cp catalina.jar org.apache.catalina.util.ServerInfo
 
       Server version: Apache Tomcat/8.0.28
@@ -9822,11 +9822,11 @@ Zoom mtg w/ Dan Baker of QENTOL, YEN W̱SÁNEĆ Marine Guardians:
 * difference from Port ECHO program is that Port uses average ship speed over track section;
   QENTOL wants to use finer resolution; also Port only does Jun-Nov; QENTOL want all year
 * goals are:
-  * weekly or monthly reports 
+  * weekly or monthly reports
   * some analysis of past; AIS data goes back to 2017-ish
 * offerred to extend rolling forecast to make weekly processing easy
   * also discussed what depth to average over; will change or add
-* offerred to help with code for processing of uv fields for past analysis; or can we do the 
+* offerred to help with code for processing of uv fields for past analysis; or can we do the
   processing and make the fields available?
 * Dan said he had time-out issues getting CSVs from ERDDAP; talked about xarray; he knows pandas
 * asked Dan to provide yx region of interest so I can experiment
@@ -9885,7 +9885,7 @@ Days since last wwatch3 prep stall: 7
 Backfilled upload_forcing to graham for 6-7 Dec during its recent outage.
 (SalishSeaCast)
 
-Attended MetroVan/UBC WorkShop: Dispersion of Endocrine Disruptive Chemicals in the Strait of 
+Attended MetroVan/UBC WorkShop: Dispersion of Endocrine Disruptive Chemicals in the Strait of
 Georgia at Metro HQ.
 
 
@@ -9974,7 +9974,7 @@ Continued work on adding climatology calculation:
   * biology, 11 variables, 16.67 years: 636.4s
 * ran chemistry climatology:
   * stalled on first try :-(
-  * biology, 6 variables, 16.67 years: 341.0s
+  * chemistry, 6 variables, 16.67 years: 341.0s
 (Reshapr)
 
 
@@ -10016,7 +10016,7 @@ collect_river_data failed with KeyError exceptions on the date:
 
 Continued update to Python 3.12:
 * branch: py312
-* PR#43 - 
+* PR#43 -
 * updated pkgs & versions; 3.12 updated
 * change envs to 3.12
 * dropped TROVE classifiers
@@ -10152,14 +10152,14 @@ Finished recovery from hydrometric CSV files outage:
   turns out that mean and other stats are from climatology :-(
   Susan eyeballed values off the graphs for Fraser and Englishman files :shrug:
 * readthedocs build are failing due to hatchling wheel build not finding package directory;
-  hatchling 1.19.0 changed its package identification heuristics such that an 
-  explicit declaration of the code directory tree to build the wheel for 
+  hatchling 1.19.0 changed its package identification heuristics such that an
+  explicit declaration of the code directory tree to build the wheel for
   installation from is now required.
   * branch: hatch-build-targets-wheel
-  * PR#222 - 
+  * PR#222 -
 (SalishSeaNowcast)
 
-Squash-merged dependabot PR in SalishSeaNowcast to upgrade paramiko re: CVE-2023-48795 re: Terrapin 
+Squash-merged dependabot PR in SalishSeaNowcast to upgrade paramiko re: CVE-2023-48795 re: Terrapin
 attack.
 
 Added hatch wheel build target to pyproject.toml re: hatchling 1.19.0 package id heuristics change:
@@ -10370,7 +10370,7 @@ skookum OS upgrade to 20.04 LTS:
   * Ubuntu update servers not accessible; postponed until tomorrow
 * restart started at ~17:40:
   * SalishSeaCast:
-    * supervisord -c $NOWCAST_CONFIG/supervisord.ini 
+    * supervisord -c $NOWCAST_CONFIG/supervisord.ini
     * collect_weather 00 2.5km
     * crop_gribs 00 2023-12-29
   * ERDDAP:
@@ -10378,7 +10378,7 @@ skookum OS upgrade to 20.04 LTS:
   * salishsea-site:
     * conda activate salishsea-site-env
       * had to source envvars.sh manually ???
-    * supervisord -c /SalishSeaCast/salishsea-site/supervisord-prod.ini 
+    * supervisord -c /SalishSeaCast/salishsea-site/supervisord-prod.ini
 
 Continued overhaul of Susan's Topstone:
 * finished cleaning cogs, pulleys & chainrings with degreaser
@@ -10423,9 +10423,9 @@ retry skookum OS upgrade to 20.04 LTS:
     * /opt/tomcat/bin/startup.sh
   * salishsea-site:
     * conda activate /SalishSeaCast/salishsea-site-env
-    * supervisord -c /SalishSeaCast/salishsea-site/supervisord-prod.ini 
+    * supervisord -c /SalishSeaCast/salishsea-site/supervisord-prod.ini
   * SalishSeaCast:
-    * supervisord -c $NOWCAST_CONFIG/supervisord.ini 
+    * supervisord -c $NOWCAST_CONFIG/supervisord.ini
     * 18 weather files were still flowing when sarracenia client started; ignored
     * download_weather 18 2.5km
     * crop_gribs 18  # missed a couple of files, hope that timeout will handle that
@@ -10499,13 +10499,13 @@ Started SalishSeaNowcast updates for v202111:
   * excluded:
     * nowcast-dev
 * correct ssh config coords file name to coordinates_seagrid_SalishSea201702.nc re: issue #152
-* change run sets dir configs to SS-run-sets/v202111/ 
+* change run sets dir configs to SS-run-sets/v202111/
 * change results archive configs:
     nowcast: /results/SalishSea/nowcast-blue.202111/
     forecast: /results/SalishSea/forecast.202111/
     forecast2: /results/SalishSea/forecast2.202111/
     nowcast-green: /results2/SalishSea/nowcast-green.202111/
-* added 'river_turb' forcing symlink to run_NEMO YAML; that allows us to drop the special 
+* added 'river_turb' forcing symlink to run_NEMO YAML; that allows us to drop the special
   `namelist_smelt_rivers.arbutus` file in favour of the generic `namelist_smelt_rivers` one
 (SalishSeaNowcast)
 
