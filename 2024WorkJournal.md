@@ -8845,6 +8845,86 @@ Worked at ESB
 
 
 
+#### Wed 25-Sep-2024
+
+
+##### SalishSeaCast
+
+* sent email to Jenn re: Fraser buoy page not updating
+  * she restarted web page app and updates resumed at 11:10
+* `run_NEMO_agrif` failed due to a connection time out
+  * re-ran manually
+* ran bash loop to calculate grazing & growth month-average files for 2014 to 2020
+
+
+##### SalishSeaNowcast
+
+* continued work on automating month-average productivity and grazing datasets
+  * branch: month-avg-prod-graz
+  * PR#297
+  * added `failure day grazing|growth` messages to registry
+
+
+
+#### Thu 26-Sep-2024
+
+
+##### SalishSeaCast
+
+* `make_forcing_links nowcast-agrif` failed due to a connection time out
+  * re-ran manually
+* ran bash loop to calculate grazing & growth month-average files for 2021 to aug-2024 and 2012 to
+  2010
+
+
+##### SalishSeaNowcast
+
+* continued work on automating month-average productivity and grazing datasets
+  * branch: month-avg-prod-graz
+  * PR#297
+  * added month-end grazing|growth launch to automation
+  * restarted manager to load new config & next_workers module
+
+
+##### FUN
+
+* rsync-ed `FUN` and `FUN-cmdline` Mercurial repos from `lizzy` to `khawla`
+* converted repos to Git:
+  * ref: https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/importing-a-mercurial-repository
+  * created `hg-fast-export` env on `khawla`:
+    * `mamba create -c conda-forge -n hg-fast-export python=3.11 mercurial`
+  * downloaded `fast-export-231118.tar.gz` tarball from GitHub and extracted it in `~/Downloads/`
+  * converted `FUN` repo:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    mkdir FUN && cd FUN && git init
+    cd ../hg/FUN
+    hg log --template "{author}\n" | sort | uniq > ../../committers.txt
+    # edit committers.txt to map committer names/emails
+    cd ../../FUN
+    ~/Downloads/fast-export-231118/hg-fast-export.sh -r ../hg/FUN -A ../committers.txt -M main
+    git checkout HEAD
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * converted `FUN-cmdline` repo:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    mkdir FUN-cmdline && cd FUN-cmdline && git init
+    cd ../hg/FUN-cmdline
+    hg log --template "{author}\n" | sort | uniq > ../../committers.txt
+    # edit committers.txt to map committer names/emails
+    cd ../../FUN-cmdline
+    ~/Downloads/fast-export-231118/hg-fast-export.sh -r ../hg/FUN-cmdline -A ../committers.txt -M main
+    git checkout HEAD
+    ```
+    <!-- markdownlint-enable MD013 -->
+* confirmed that `FUN-cmdline` is a continuation of `FUN` that I created when I decided to change
+  from web app output to terminal interface
+
+
+
+
+
 
 * pre-commit.ci PR revealed failing test and pandas date parser warnings
   * moad_tools
