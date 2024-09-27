@@ -8873,8 +8873,7 @@ Worked at ESB
 
 * `make_forcing_links nowcast-agrif` failed due to a connection time out
   * re-ran manually
-* ran bash loop to calculate grazing & growth month-average files for 2021 to aug-2024 and 2012 to
-  2010
+* ran bash loop to calculate grazing & growth month-average files for 2021 to aug-2024 and 2012 to 2010
 
 
 ##### SalishSeaNowcast
@@ -8918,8 +8917,53 @@ Worked at ESB
     git checkout HEAD
     ```
     <!-- markdownlint-enable MD013 -->
-* confirmed that `FUN-cmdline` is a continuation of `FUN` that I created when I decided to change
-  from web app output to terminal interface
+* confirmed that `FUN-cmdline` is a continuation of `FUN` that I created when
+  I decided to change from web app output to terminal interface
+
+
+
+#### Fri 27-Sep-2024
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* bash loop to calculate grazing & growth month-average files for 2010
+  stalled on nov-2010 grazing
+  * interrupted and nov-2010 growth as well as dec-2010 grazing & growth finished
+  * re-ran nov-2010 grazing separately
+    * failed again
+* from MOAD group mtg:
+  * update V202111 climatologies to end of 2023
+    * do grazing and growth climatologies
+
+
+##### sss150
+
+* resumed work on generation of boundary condition files from SalishSeaCast
+  * cloned `bdytools` from gitlab
+  * edited `bdytools_general.yaml` env description file to remove pip install of
+    tritools due to no access to gitlab.science.gc.ca:
+  * cloned `tritools` from `git@gitlab.com:FA12/tritools.git`
+  * created bdytools env
+    * did editable installs of tritools & bdytools
+      * got deprecation warnings from pip re: editable install without
+        `pyproject.toml`
+  * `bdytools` invocation failed with ImportError on tqdm package
+    * added `tqdm` to env description
+  * `bdytools` invocation gave me usage help
+
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+  * settled on climatology updates; see SalishSeaCast section above
+* read https://tonybaloney.github.io/posts/python-match-statement.html that
+  illustrates the power of pattern matching in Python match statements
+* reviewed pyproject.toml docs in the context of fixing editable install
+  deprecation warnings in forks of `bdytools`, `tritools` and other packages
+  we use but don't control
 
 
 
