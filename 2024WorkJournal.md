@@ -8967,6 +8967,40 @@ Worked at ESB
 
 
 
+#### Sat 28-Sep-2024
+
+##### SalishSeaCast
+
+* `make_forcing_links nowcast-agrif` failed due to a connection time out
+  * re-ran manually
+* ran nov-2010 grazing month-avg via `reshapr extract` on both `skookum` and `salish`
+  * stalled
+
+First Zwift ride since 20-Aug.
+
+Dinner at K&K's.
+
+
+
+#### Sun 29-Sep-2024
+
+
+##### sss150
+
+* resumed work on generation of boundary condition files from SalishSeaCast
+  * forked `bdytools` and `tritools` repos so that I can modernize their packaging to avoid the
+    `pip` editable install deprecation warnings, and add the missing `tqdm` package to the `bdytools`]
+    `bdytools_general.yaml`
+  * updated `tritools` to replace `setup.py` with `pyproject.toml`
+    * branch: modernize-packaging
+  * updated `bdytools`:
+    * branch: modernize-packaging
+    * replace `setup.py` with `pyproject.toml`
+    * drop `defaults` conda channel
+    * add `tqdm` to `bdytools_general.yaml`
+    * drop `tritools` URL in `bdytools_general.yaml` due to private repo
+
+
 
 
 
