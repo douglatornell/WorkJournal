@@ -9002,6 +9002,36 @@ Dinner at K&K's.
 
 
 
+### Week 40
+
+#### Mon 30-Sep-2024
+
+**Statutory Holiday** - Orange Shirt Day & Truth and Reconciliation Day
+
+##### SalishSeaCast
+
+* `upload_forcing nowcast+` failed due to a connection time out
+  * re-ran manually
+* `run_NEMO_agrif` failed due to a connection time out
+  * re-ran manually
+* `make_averaged_dataset grazing|growth` ran successfully in automation
+* `download_results nowcast-agrif 2024-09-29` failed
+  * re-ran manually
+
+
+##### Miscellaneous
+
+* updated PyCharm to 2024.2.3 on `khawla`
+
+
+##### SalishSeaNowcast
+
+* finished automating month-average productivity and grazing datasets
+  * branch: month-avg-prod-graz
+  * PR#297 - squash-merged
+  * deployed in production
+
+
 
 
 * pre-commit.ci PR revealed failing test and pandas date parser warnings
