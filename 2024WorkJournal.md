@@ -9032,6 +9032,103 @@ Dinner at K&K's.
   * deployed in production
 
 
+## October
+
+<!-- markdownlint-disable MD001 -->
+#### Tue 1-Oct-2024
+<!-- markdownlint-enable MD001 -->
+
+##### Miscellaneous
+
+* archived randopony-tetra and raspi_x10 projects on GitHub to stop getting
+  security alerts from them
+* built XIOS2-2659 and SalishSeaCast_Blue with -O2
+  * test run did time steps and wrote netCDF files
+* re-built XIOS2-2659 and SalishSeaCast_Blue with -O3
+
+
+##### SalishSeaCast
+
+* ran nov-2010 grazing month-avg via `reshapr extract` on `salish` using adhoc
+  cluster
+  * failed with HDF error in `SalishSea_1d_20101118_20101118_graz_T.nc`
+  * re-ran successfully on persistent cluster for 1-10nov10
+  * re-ran successfully on persistent cluster for 1-17nov10
+  * re-ran successfully on persistent cluster for 1-18nov10
+  * re-ran successfully on persistent cluster for 1-21nov10
+  * stalled on persistent cluster for 1-30nov10
+  * re-ran successfully on persistent cluster for 1-25nov10
+  * re-ran successfully on persistent cluster for 1-28nov10
+  * re-ran successfully on persistent cluster for 1-29nov10
+  * stalled on persistent cluster for 1-30nov10
+* ran bash loop to calculate grazing & growth month-average files for 2009
+
+##### sss150
+
+* started exploring differnces between XML files in `/home/mdunphy/sss150_For_Doug/`
+  and those in SS-run-sets
+* built sss150 with XIOS2-2659
+
+
+##### HUB Make a Will Week Webinar
+
+* Sadie Carbon - HUB
+* David Hay - RBS - intro
+* Max Shilleto - RBS - presenter
+  * mshilleto@rbs.ca
+  * 604-595-9925
+  * David's estate lawyer
+  * 18 lawyers in estate & wealth advisory
+  * incapacity planning
+    * enduring power of attorney
+      * financial affairs
+        * who's in charge; what you want to happen
+      * non-joint assets are frozen; 2+ months for court order, ~$8k
+    * representation agreement
+      * health & care
+        * who's in charge; what you want to happen
+      * substitute decision makers are in statutes, but rep agreement is
+        clearer, especially for long-term issues
+    * will
+      * PA & RA end at death; will takes over
+      * estate
+        * all assets minus debts (mostly tax on capital gains)
+        * who's in charge; what you want to happen
+        * discretionary trusts usually don't go beyond age 35
+        * probate
+          * can take 1+ year
+          * 1.4% *of estate* in BC
+          * avoid by:
+            * beneficiary designations bypass estate
+            * joint tenancy; works fine for spouse; complex otherwise
+            * joint partner or alter ego trust
+              * >65 year of age
+        * wills variation
+          * dispute of fairness
+    * alternative planning
+    * other considerations
+      * gifts to charity
+      * odd number of executors
+      * what if all beneficiaries are dead?
+      * POAs are jurisdiction-specific; e.g. out of province
+  * why lawyer rather than online?
+    * online don't balance structure and flexibility, and vulnerable to challenge
+    * tenancy in common vs. joint tenancy?
+      * former makes asset part of estate, so subject to probate
+    * benefits of donation to charity?
+      * feels good
+      * charitable tax benefit reduces tax which might result in more net to
+        beneficiaries
+    * cost?
+      * RBS bills hourly
+    * holographic wills are not well considered in BC
+  * professional as executor?
+    * can appoint trust company; e.g. 5 major banks, also for POA
+    * costs more
+    * Max prefers a trust company as final fallback executor; won't die
+  * trying to transfer property to avoid cap gains tax and probate is difficult
+    and chancy
+
 
 
 * pre-commit.ci PR revealed failing test and pandas date parser warnings
