@@ -8448,6 +8448,10 @@ FAL estate work: final distribution to Jamie
   * Reshapr
   * SalishSeaNowcast
   * AtlantisCmd
+
+
+##### XIOS & NEMO
+
 * compiled list of packages for Henryk to install on `salish` to that I can try to build XIOS, NEMO,
   and Ariane:
     <!-- markdownlint-disable MD013 -->
@@ -8529,7 +8533,7 @@ Debby arrived for Ellie's defense
     <!-- markdownlint-enable MD013 -->
 
 
-##### Miscellaneous
+##### XIOS & NEMO
 
 * tried clean build of XIOS-2 on `salish`:
   * forgot to put c++ packages on list for Henryk:
@@ -8555,10 +8559,14 @@ Recovery at home
 
 ##### Miscellaneous
 
+* discovered that I need to manually delete pre-commit.ci PR branches 🙁
+
+
+##### XIOS & NEMO
+
 * built `SalishSeaCast_Blue` NEMO config on `salish`:
   * 4 string overflow warnings in `EXTERNAL/IOIPSL/src/calendar.f90`:
     * `Warning: ‘__builtin_memmove’ reading 80 bytes from a region of size 79 [-Wstringop-overflow=]`
-* discovered that I need to manually delete pre-commit.ci PR branches 🙁
 * tried to run `SalishSeaCast_Blue` NEMO config on `salish`:
   * blows up memory
 * got Henryk to install `gdb`
@@ -8575,8 +8583,7 @@ Recovery at home
 
 Recovery at home
 
-
-##### Miscellaneous
+##### XIOS & NEMO
 
 * running `SalishSeaCast_Blue` in `gdb` shows same growing memory issue; interupt stops in `malloc.c`
   before first executable line
@@ -8584,6 +8591,10 @@ Recovery at home
 * tried `MY_GYRE`
   * can't build without `xios`
   * same memory explosion
+
+
+##### Miscellaneous
+
 * UBC-IOS modeling mtg
   * Karyn on zooplankton evaluation
   * discussed XIOS/NEMO build issues w/ Michael & Amber
@@ -8600,6 +8611,10 @@ Recovery at home
 
 * MOAD group mtg; see whiteboard
 * emailed Michael with details of NEMO build problem
+
+
+##### XIOS & NEMO
+
 * asked Henryk to downgrade to gcc-7 on `salish`
 
 
@@ -8632,6 +8647,11 @@ Recovery at home
 
 * sent `salish` replacement specs to Henryk
 * sent RFQ for `salish` replacement to System76
+* investigated Karyn's permission denied issue for Susan run results on `lox`
+
+
+##### XIOS & NEMO
+
 * researched compilers and opemMPI on conda-forge
   * can't replicate `arbutus`
 * shut down and deleted `fvcom6` instance on `arbutus`
@@ -8649,7 +8669,6 @@ Recovery at home
     * liburi-perl make cmake ksh mg
   * cloned XIOS-ARCH & XIOS-2
   * created arch file symlinks and ran XIOS-2 build
-* investigated Karyn's permission denied issue for Susan run results on `lox`
 
 
 ##### SalishSeaCast
@@ -8674,7 +8693,7 @@ Worked at ESB while Rita was at home
 ESB Welcome Back BBQ
 
 
-##### Miscellaneous
+##### XIOS & NEMO
 
 * continued testing on `test-20-04`
   * built XIOS with GCC-9 compilers and `--debug` flag to set `-O0`
@@ -8684,16 +8703,23 @@ ESB Welcome Back BBQ
   * started successfully in `gdb` and failed due to no `iodef.xml`
   * ran XIOS + NEMO on 1 + 1, then 1 + 7 processors
     * no time steps, but lots of ocean.output, then failure with a traceback into XIOS
+
+
+##### Miscellaneous
+
 * received quote for new compute server from System76; salivating 🤤
 
 
 
 #### Wed 18-Sep-2024
 
+##### XIOS & NEMO
+
+* email from Michael confirming my XIOS findings and proposing a way forward by updating XIOS checkout
+
 
 ##### Miscellaneous
 
-* email from Michael confirming my XIOS findings and proposing a way forward by updating XIOS checkout
 * sent questions re: RAID and storage cost to System76; received updated quote w/ RAID controller
 
 
@@ -8702,12 +8728,15 @@ ESB Welcome Back BBQ
 
 LifeLabs appt
 
-
-##### Miscellaneous
+##### XIOS & NEMO
 
 * continued email discussion w/ Michael re: updating XIOS checkout
 * explored XIOS revision log
 * asked Henryk to install `svn` on `salish`
+
+
+##### Miscellaneous
+
 * phys ocgy seminar: new students Aidan and Kat past research
 
 
@@ -8778,7 +8807,7 @@ Drove to White Rock to visit JRA
 
 #### Mon 23-Sep-2024
 
-##### Miscellaneous
+##### XIOS & NEMO
 
 * did svn checkout of XIOS2 trunk from upstream:
   `svn co https://forge.ipsl.fr/ioserver/svn/XIOS2/trunk /data/dlatorne/MEOPAR/XIOS2-2659`
@@ -8820,7 +8849,7 @@ Worked at ESB
   * re-ran manually
 
 
-##### Miscellaneous
+##### XIOS & NEMO
 
 * learned that `make_xios --full` does a clean build
 * tried to remember how to update XIOS-2 repo from upstream
@@ -9042,6 +9071,10 @@ Dinner at K&K's.
 
 * archived randopony-tetra and raspi_x10 projects on GitHub to stop getting
   security alerts from them
+
+
+##### XIOS & NEMO
+
 * built XIOS2-2659 and SalishSeaCast_Blue with -O2
   * test run did time steps and wrote netCDF files
 * re-built XIOS2-2659 and SalishSeaCast_Blue with -O3
@@ -9062,6 +9095,7 @@ Dinner at K&K's.
   * re-ran successfully on persistent cluster for 1-29nov10
   * stalled on persistent cluster for 1-30nov10
 * ran bash loop to calculate grazing & growth month-average files for 2009
+
 
 
 ##### sss150
@@ -9132,6 +9166,94 @@ Dinner at K&K's.
 
 
 
+#### Wed 2-Oct-2024
+
+##### XIOS & NEMO
+
+* sent update email to Michael re: -O2 test of XIOS-2659/NEMO and LPE mismatch hypothesis re: -O0
+  failure
+* started work on `salish` on updating XIOS-2 repo to svn r2660 from upstream
+  * new clone of XIOS-2
+  * new checkout of http://forge.ipsl.fr/ioserver/svn/XIOS2/trunk to get r2660
+  * create `r2660` branch in XIOS-2 repo: `git switch -c r2660`
+  * sync r2660 into XIOS-2 with `rsync -av XIOS2-r2660/ XIOS-2/`
+  * add and commit new and modified files in XIOS-2
+  * symlink in GCC_SALISH arch files
+  * clean build with `make_xios --arch GCC_SALISH --netcdf_lib netcdf4_seq --job 8 --full`
+  * clean build of NEMO SalishSeaCast_Blue config with `
+  * successful test in `/data/dlatorne/MEOPAR/runs/03jul24-blue_2024-09-11T134121.965928-0700/`
+    with output to `/data/dlatorne/MEOPAR/results/sss150/03jul24-blue-20_04-xios2660/`
+  * added notebook to `analysis-doug/notebooks/sss150/` to compare various test run surface
+    salinity fields; they are identical
+
+
+##### SalishSeaCast
+
+* ran nov-2010 grazing month-avg via `reshapr extract` on `salish` using persistent cluster
+  * successful for 16-30nov10
+  * successful for 10-30nov10
+  * successful for 5-30nov10
+  * successful for 2-30nov10
+  * fail for 1-30nov10
+
+
+
+#### Thu 3-Oct-2024
+
+Follow-up appt w/ Dr. Roston
+
+##### XIOS & NEMO
+
+* cleaned up tracking and exclusion of build artefacts in XIOS r2660 branch and pushed it to GitHub
+  as PR#3
+
+
+##### SalishSeaCast
+
+* ran bash loop to calculate grazing & growth month-average files for 2008 and 2007
+* `make_forcing_links nowcast-agrif` failed due to a connection time out
+  * re-ran manually
+* `crop_gribs 18` timed out with 290 unprocessed files
+  * log shows that sarracenia didn't start to receive files until 16:45
+  * recovery started at ~17:10:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    download_weather 00 1km
+    download_weather 12 1km
+    # wait for collect_weather 18 2.5km to finish
+    crop_gribs 18 --backfill --debug
+    ```
+    <!-- markdownlint-enable MD013 -->
+
+
+##### sss150
+
+* added `grid/sss150/no_ice.nc` by copying Michael's `/ocean/mdunphy/sss150_20220715/ice_if_zero_20210709.nc`
+  * realized that matching grid size of files like `no_ice.nc` to the coordinates, there is no need
+    to use the weights file as we do for `no_snow.nc` in SalishSeaCast where that file was created
+    for the original CGRF atmospheric forcing 600x801 grid and never updated 🙁
+
+
+##### SalishSeaTools
+
+* updated make_readme script to modern version & README in `I_ForcingFiles/Atmos/`
+* renamed `NoSnow.ipynb` to `NoSnow-CGRF.ipynb` to reflect the grid size if produces and to prepare
+  for NoSnow notebooks for 201802, 202405, and sss150 grids
+* started to create `NoSnow-201802.ipynb`
+
+
+##### Miscellaneous
+
+Checked status of scheduled GHA workflows:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  mamba activate gha-workflows
+  python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+
+
 #### Fri 4-Oct-2024
 
 #### Miscellaneous
@@ -9188,9 +9310,6 @@ Dinner at K&K's.
 
 * pre-commit.ci PR revealed failing test and pandas date parser warnings
   * moad_tools
-
-
-
 
 
 
