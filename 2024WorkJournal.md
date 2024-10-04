@@ -9063,9 +9063,10 @@ Dinner at K&K's.
   * stalled on persistent cluster for 1-30nov10
 * ran bash loop to calculate grazing & growth month-average files for 2009
 
+
 ##### sss150
 
-* started exploring differnces between XML files in `/home/mdunphy/sss150_For_Doug/`
+* started exploring differences between XML files in `/home/mdunphy/sss150_For_Doug/`
   and those in SS-run-sets
 * built sss150 with XIOS2-2659
 
@@ -9128,6 +9129,60 @@ Dinner at K&K's.
     * Max prefers a trust company as final fallback executor; won't die
   * trying to transfer property to avoid cap gains tax and probate is difficult
     and chancy
+
+
+
+#### Fri 4-Oct-2024
+
+#### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+
+
+##### SalishSeaCast
+
+* `run_NEMO_agrif` failed due to bad SSH protocol banner
+  * re-ran manually
+* `watch_NEMO_agrif` failed repeatedly due to bad SSH protocol banner
+* ran `download_results nowcast-agrif` after run finished
+
+
+##### SSS150
+
+* Started work on generating atmospheric forcing weights file:
+  * refs:
+    * Mon 13-Mar-2023 notes in 2023WrokJournal.rst
+    * https://salishsea-meopar-docs.readthedocs.io/en/latest/code-notes/salishsea-nemo/nemo-forcing/atmospheric.html#creating-new-weights-files
+  * updated the build of `get_weight_nemo`:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    cd /ocean/dlatorne/MEOPAR/NEMO-EastCoast/NEMO_Preparation/4_weights_ATMOS
+    ./make.sh
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * created symlinks in `grid/sss150/` required to run `get_weight_nemo`:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    cd /data/dlatorne/MEOPAR/grid
+    ln -sf /results/forcing/atmospheric/continental2.5/nemo_forcing/hrdps_y2023m02d23.nc atmos.nc
+    ln -sf bathymetry_sss150_20240822.nc bathy_meter.nc
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * copied namelist and symlinked it to the file name that `get_weight_nemo` expects:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    cp ../namelist.get_weight_nemo.gem2.5-gemlam namelist.get_weight_nemo.hrdps
+    ln -s namelist.get_weight_nemo.hrdps namelist
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * TODO:
+    * create `_no_snow.nc` file
+    * generate weights file:
+      `/ocean/dlatorne/MEOPAR/NEMO-EastCoast/NEMO_Preparation/4_weights_ATMOS/get_weight_nemo`
+
+
+
+
 
 
 
