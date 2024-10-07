@@ -9285,7 +9285,7 @@ Checked status of scheduled GHA workflows:
   * created symlinks in `grid/sss150/` required to run `get_weight_nemo`:
     <!-- markdownlint-disable MD013 -->
     ```bash
-    cd /data/dlatorne/MEOPAR/grid
+    cd /data/dlatorne/MEOPAR/grid/sss150/
     ln -sf /results/forcing/atmospheric/continental2.5/nemo_forcing/hrdps_y2023m02d23.nc atmos.nc
     ln -sf bathymetry_sss150_20240822.nc bathy_meter.nc
     ```
@@ -9302,6 +9302,43 @@ Checked status of scheduled GHA workflows:
     * generate weights file:
       `/ocean/dlatorne/MEOPAR/NEMO-EastCoast/NEMO_Preparation/4_weights_ATMOS/get_weight_nemo`
 
+
+
+#### Sat 5-Oct-2024
+
+
+##### SalishSeaCast
+
+* `upload_forcing turbidity` failed due to a connection time out
+  * re-ran manually
+* `upload_forcing turbidity` failed due to bad SSH protocol banner
+  * re-ran manually
+* `make_forcing_links nowcast-agrif` failed due to a connection time out
+  * re-ran manually
+* `run_NEMO_agrif` failed due to connection time out
+  * re-ran manually
+
+
+
+#### Sun 6-Oct-2024
+
+
+##### SalishSeaCast
+
+* `run_NEMO_agrif` failed due to connection time out
+  * re-ran manually
+* `download_wwatch3_results nowcast` failed due to connection closed by remote host
+  * re-ran manually
+
+
+##### SSS150
+
+* Finished generating atmospheric forcing weights file:
+  * edited `namelist.get_weight_nemo.hrdps` to drop `sn_snow` line; not sure it matters much because
+    `get_weight_nemo` didn't complain and the weights appear to be the same for all variables
+  * generated weights file with:
+    `/ocean/dlatorne/MEOPAR/NEMO-EastCoast/NEMO_Preparation/4_weights_ATMOS/get_weight_nemo`
+  * cleaned up weights file with `tools/I_ForcingFiles/Atmos/ImproveWeightsFile.ipynb`
 
 
 
