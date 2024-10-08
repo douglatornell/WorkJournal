@@ -9465,6 +9465,25 @@ Checked status of scheduled GHA workflows:
   * force-pushed to GitHub to update PR, then squash-merged
 
 
+##### `graham` StdEnv/2023
+
+* finally figured out that I was pinned on `StdEnv/2020` because of the
+  `~/.modulerc` file I had
+  * moved it aside to get `StdEnv/2023` by default
+* discovered that `make_xios` fails in clean clone dur to `fcm` not found
+  * true on both `graham` and `salish`
+
+
+##### Miscellaneous
+
+* updated PyCharm to 2024.2.3 on `kudu`
+* went to UBC strategic plan update pop-up at McInnes Field
+
+
+##### sss150
+
+* started work on NoSnow notebook
+
 
 
 
