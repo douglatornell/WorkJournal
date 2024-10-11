@@ -9067,6 +9067,8 @@ Dinner at K&K's.
 #### Tue 1-Oct-2024
 <!-- markdownlint-enable MD001 -->
 
+Worked at ESB
+
 ##### Miscellaneous
 
 * archived randopony-tetra and raspi_x10 projects on GitHub to stop getting
@@ -9255,6 +9257,8 @@ Checked status of scheduled GHA workflows:
 
 
 #### Fri 4-Oct-2024
+
+Worked at ESB
 
 #### Miscellaneous
 
@@ -9465,6 +9469,8 @@ Checked status of scheduled GHA workflows:
   * force-pushed to GitHub to update PR, then squash-merged
 
 
+Worked at ESB
+
 ##### `graham` StdEnv/2023
 
 * finally figured out that I was pinned on `StdEnv/2020` because of the
@@ -9486,6 +9492,93 @@ Checked status of scheduled GHA workflows:
 
 
 
+#### Wed 9-Oct-2024
+
+Got 2nd dose of shingles vaccine.
+
+##### SalishSeaCast
+
+* `make_forcing_links nowcast-agrif` failed due to connection time out
+  * re-ran manually
+* `watch_NEMO_agrif` failed repeatedly due to connection time out
+  * ran `download_results nowcast-agrif` after run finished
+
+
+##### Miscellaneous
+
+* read VirtualiZarr docs to assess readiness for testing on SalishSeaCast output
+  * can use VirtualiZarr build references
+  * still need to use kerchunk for references storage until zarr v3 is released
+
+
+##### sss150
+
+* finished work on NoSnow notebook
+* created and pushed `/data/dlatorne/MEOPAR/grid/sss150/no_snow.nc`
+
+
+##### NEMO-3.6
+
+* created `/data/dlatorne/MEOPAR/grid/no_snow_202108.nc` to test new no_snow/no_ice protocol:
+  * `no_snow_{version}.nc` and `no_ice_{version}.nc` files match grid shape
+  * symlinks to `no_snow.nc` and `no_ice.nc` created via `salishsea run` and run description YAML
+    file so that we have standard names in `namelist.atmos_rivers`
+  * `namelist.atmos_rivers` has no weights file for `no_snow.nc` and `no_ice.nc`
+
+* tested new protocol on `salish`
+  * added to YAML file:
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    forcing:
+      # ...
+      no_snow.nc:
+        link to: /data/$USER/MEOPAR/grid/no_snow_202108.nc
+      no_ice.nc:
+        link to: /data/$USER/MEOPAR/grid/no_ice.nc
+    ```
+    <!-- markdownlint-disable MD013 -->
+  * changed lines in `namsbc_core` and `namsbc_iif` to:
+    <!-- markdownlint-disable MD013 -->
+    ```fortran
+    sn_snow = 'no_snow',               -12,           'snow',      .true.,       .true.,   'yearly',   '',                                                          ''
+    cn_dir      = './'    !  root directory for the location of the bulk files
+
+    sn_ice   = 'no_ice',              -12,           'ice',       .false.,         .true.,   'yearly',     '',        ''
+    cn_dir   = './'             !  root directory for the location of the bulk files
+    ```
+    <!-- markdownlint-disable MD013 -->
+  * prepared job with `salishsea run`; results to `/data/dlatorne/MEOPAR/results/sss150/03jul24-blue-no_snow_202108/`
+  * hacked `salishSeaNEMO.sh` script for `bash` submission
+    * run succeeded in 48m45s vs. 49m38s
+  * went a step farther and combined zero-field `snow` and `ice` variables in 1 file
+    * run succeeded in 48m6s; ~3% faster
+
+
+
+#### Thu 10-Oct-2024
+
+Recovery from shingles vaccine.
+
+##### SalishSeaCast
+
+* `download_live_ocean` was delayed to ~10:45
+* `upload_forcing nowcast+` failed due to connection time out
+  * resulted in stalled NEMO run
+  * killed `watch_NEMO_agrif` on `skookum`
+  * killed run on `orcinus`
+  * deleted tmp run dir & results dir on `orcinus`
+  * `upload_forcing nowcast+`; 2 tries
+  * `make_forcing_links nowcast-agrif`
+* `download_results nowcast-agrif` failed due to connection reset by host
+  * re-ran manually
+* email with Mark about the issue
+
+##### Miscellaneous
+
+* UBC-DFO modeling mtg: Amber on NE Pacific shelf OA
+
+
+
 
 
 * pre-commit.ci PR revealed failing test and pandas date parser warnings
@@ -9495,6 +9588,8 @@ Checked status of scheduled GHA workflows:
 * pip=24.2 has started to complain about -e installs for packages w/o `pyproject.toml`
   * NEMO_Nowcast
   * SalishSeaTools
+  * FVCOM-Cmd
+  * OPPTools
 
 
 * erddap_datasets needs pre-commit
