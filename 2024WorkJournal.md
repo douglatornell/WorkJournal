@@ -3813,8 +3813,8 @@ Days since last wwatch3 prep stall: 22
 * Started investigating IndexError in `make_plots._prep_comparison_fig_functions()`
   * due to no dev run results for `figures.comparison.compare_venus_ctd`
   * maybe resolved by enabling figure module to handle `dev_grid_T_hr = None`
-* Closed issue #138 that got resolved almost a year ago when the nowcast-env on skookum was updated to
-  Python 3.11
+* Closed issue #138 that got resolved almost a year ago when the nowcast-env on
+  `skookum` was updated to Python 3.11
 
 
 
@@ -9578,6 +9578,27 @@ Recovery from shingles vaccine.
 * UBC-DFO modeling mtg: Amber on NE Pacific shelf OA
 
 
+
+#### Fri 11-Oct-2024
+
+Worked at ESB
+
+##### Miscellaneous
+
+* helped Tall with path to 2009 turbidity forcing files
+* sent `gdb` links to Becca and set up mtg for Tuesday
+
+
+##### SalishSeaCast
+
+* dug into OpenSSH versions on `skookum` and `orcinus` re: reply frm Mark
+  * `skookum`: OpenSSH_8.2p1
+  * `orcinus`: OpenSSH_5.3
+  * `seawolf` login nodes ip addresses:
+    * 206.87.227.51
+    * 206.87.227.52
+    * 206.87.227.53
+  * added ssh-rsa key algorithm directives to `skookum:.ssh/config` as a hail-mary
 
 
 
