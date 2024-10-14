@@ -9602,6 +9602,47 @@ Worked at ESB
 
 
 
+#### Sat 12-Oct-2024
+
+##### SalishSeaCast
+
+* `crop_gribs 12` stalled with 1 file left unprocessed; runs delayed ~2h
+* `upload_forcing nowcast+` failed due to connection time out
+  * resulted in failed NEMO run
+  * deleted results dir on `orcinus`
+  * `upload_forcing nowcast+`
+  * `make_forcing_links nowcast-agrif`
+  * `run_NEMO_agrif` failed due to connection time out
+    * re-ran manually
+
+
+
+#### Sun 13-Oct-2024
+
+##### SalishSeaCast
+
+* `crop_gribs 12` stalled with 1 file left unprocessed; runs delayed ~2h
+* `upload_forcing orcinus turbidity` failed due to connection time out
+  * re-ran manually
+* `make_forcing_links orcinus nowcast-agrif` failed due to connection time out
+  * re-ran manually
+
+
+##### Miscellaneous
+
+* started experimenting with VirtualiZarr
+  * `analysis-doug/notebooks/virtualizarr-expts`
+  * can't create Python 3.13 env yet
+  * had to install dev version from GitHub
+  * example of reading air temperature netCDF4 file from xarray tutorial works,
+    but reading a SalishSeaCast file fails 🙁
+
+
+Prepared turkey dinner with Susan.
+
+
+
+
 * pre-commit.ci PR revealed failing test and pandas date parser warnings
   * moad_tools
 
