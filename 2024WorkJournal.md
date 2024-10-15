@@ -9182,7 +9182,7 @@ Worked at ESB
   * add and commit new and modified files in XIOS-2
   * symlink in GCC_SALISH arch files
   * clean build with `make_xios --arch GCC_SALISH --netcdf_lib netcdf4_seq --job 8 --full`
-  * clean build of NEMO SalishSeaCast_Blue config with `
+  * clean build of NEMO SalishSeaCast_Blue config
   * successful test in `/data/dlatorne/MEOPAR/runs/03jul24-blue_2024-09-11T134121.965928-0700/`
     with output to `/data/dlatorne/MEOPAR/results/sss150/03jul24-blue-20_04-xios2660/`
   * added notebook to `analysis-doug/notebooks/sss150/` to compare various test run surface
@@ -9476,7 +9476,7 @@ Worked at ESB
 * finally figured out that I was pinned on `StdEnv/2020` because of the
   `~/.modulerc` file I had
   * moved it aside to get `StdEnv/2023` by default
-* discovered that `make_xios` fails in clean clone dur to `fcm` not found
+* discovered that `make_xios` fails in clean clone due to `fcm` not found
   * true on both `graham` and `salish`
 
 
@@ -9669,6 +9669,54 @@ Prepared turkey dinner with Susan.
 * updated redirected links found by sphinx linkcheck
 * updated forge.ipsl.fr link URLs due to expired cert for forge.ipsl.jussieu.fr
 * changed recommended git pull config from merge to rebase
+
+
+
+#### Tue 15-Oct-2024
+
+Worked at ESB.
+
+Voted in BC election at advance poll.
+
+##### Miscellaneous
+
+* helped Becca get use `gdb` to try to debug segfault in Ariane on `perigee`
+  * lots of trouble getting started due to incompatible DWARF debugging
+    info between gfortran-13 and gdb-7; unclear why Becca's env got very old
+    gdb-7
+  * forced build to use gdwarf-4
+  * found large negative i index values in mod_fz module of the code that
+    Becca had note previously looked at
+
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus nowcast+` failed due to time out
+  * run started, but stalled at 0% due to missing forcing
+  * killed `watch_NEMO_agrif`
+  * killed run
+  * delete tmp run dir
+  * `upload_forcing orcinus nowcast+`
+    * took 3 tries
+  * `make_forcing_links orcinus nowcast-agrif`
+    * took 2 tries
+  * `watch_NEMO_agrif` failed due to connection time out
+    * re-ran manually
+
+
+##### XIOS & NEMO
+
+* built in `/data/dlatorne/MEOPAR/XIOS2-update/XIOS2-r2660/` svn checkout
+* made 2nd attempt at merging r2660 changes from svn to XIOS-2 git clone,
+  planning to discard the `r2660` branch and PR from 2oct
+  * return to `main`
+  * used various iterations of `git clean` to remove all untracked files
+    and directories
+  * create `r2660-try2` branch in XIOS-2 repo: `git switch -c r2660-try2`
+  * sync r2660 into XIOS-2 with `rsync -av XIOS2-r2660/ XIOS-2/`
+  * create `r2660-try3` branch in XIOS-2 repo: `git switch -c r2660-try3`
+  * lots of messing around with `.gitignore` to get `tools/FCM*/bin/` and `lib/`
+    directories included
 
 
 
