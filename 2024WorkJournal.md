@@ -9642,6 +9642,36 @@ Prepared turkey dinner with Susan.
 
 
 
+### Week 42
+
+#### Mon 14-Oct-2024
+
+**Statutory Holiday** - Thanksgiving
+
+##### SalishSeaCast
+
+* ERDDAP and Resilient-C were ofline for ~15 minutes at ~07:30
+* `watch_ww3 forecast2` failed at ~04:02 maybe due to connection failure?
+  * confirmed on `arbutus` that run finished successfully
+  * didn't download because preliminary wave forecast is of little interest
+* `collect_weather 12` was late, finishing at ~09:50
+  * no obvious reason; files started arriving near usual time, just progresses more slowly than usual
+* `watch_NEMO_agrif` failed due to connection time out
+  * run completed successfully
+  * `download_results nowcast-agrif`
+
+
+##### MOAD docs
+
+* change env to use Python 3.13
+* pinned versions of sphinx and optional extensions
+* updated readthedocs config to use ubuntu-24.04 and mambaforge-23.11
+* updated redirected links found by sphinx linkcheck
+* updated forge.ipsl.fr link URLs due to expired cert for forge.ipsl.jussieu.fr
+* changed recommended git pull config from merge to rebase
+
+
+
 
 * pre-commit.ci PR revealed failing test and pandas date parser warnings
   * moad_tools
@@ -9719,8 +9749,10 @@ TODO:
 
 TODO:
 
-* update .readthedocs.yaml to use ubuntu-22.04 and mambaforge-22.9 in many repos
-  * MOAD/docs - done 13sep23 in PR#32
+* update .readthedocs.yaml to use ubuntu-24.04 and mambaforge-23.11 in many repos
+  * NEMO_Nowcast - done 22sep24 in PR#57 (ubuntu-24.04 and mambaforge-23.11)
+  * MOAD/docs - done 14oct24
+
   * FVCOM-Cmd - done in PR#10
   * tools - done 28aug23 in PR#84
   * AtlantisCmd - done 28aug23 in PR#27
@@ -9731,7 +9763,6 @@ TODO:
   * moad_tools - done 18dec23 in PR#47
   * SalishSeaCast/docs - done 7feb24 in PR#43
   * salishsea-site - done 9apr24 in PR#74
-  * NEMO_Nowcast - done 22sep24 in PR#57 (ubuntu-24.04 and mambaforge-23.11)
 
   * rpn-to-gemlam
   * MoaceanParcels
