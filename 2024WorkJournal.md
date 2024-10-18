@@ -5353,7 +5353,7 @@ Squash-merged dependabot PR to update jinja2 to v3.1.4 re: CVE-2024-34064 re: XS
   * copied `~/.conda.aside/environments.txt` into new empty `~/.conda/`
   * re-linked `~/dotfiles/pop_os/khawla/.condarc` as `~/.condarc`
   * still no auto-activation of the correct env in terminal
-  * updated to PyCHarm 2024.1.1
+  * updated to PyCharm 2024.1.1
   * updated support request with actions and results
 * intermittent auth issues on waterhole machines started late in the afternoon
 
@@ -9514,7 +9514,7 @@ Got 2nd dose of shingles vaccine.
 ##### sss150
 
 * finished work on NoSnow notebook
-* created and pushed `/data/dlatorne/MEOPAR/grid/sss150/no_snow.nc`
+* created `/data/dlatorne/MEOPAR/grid/sss150/no_snow.nc`
 
 
 ##### NEMO-3.6
@@ -9720,6 +9720,90 @@ Voted in BC election at advance poll.
 
 
 
+#### Wed 16-Oct-2024
+
+##### Miscellaneous
+
+* Squash-merged pre-commit.ci PRs re: updates to blacken-docs 1.19.0:
+  * MoaceanParcels
+
+
+##### XIOS & NEMO
+
+* finally got success at merging r2660 changes from svn to XIOS-2 git clone in `r2660-try4` branch
+  * changed `bin/` and `lib/` exclusions in `.gitignore` to `/bin/` and `/lib/` to exclude only
+    top level `bin/` and `lib/` directories but retain those in `tools/FCM*/` trees
+  * removed `tools/archive/` tarballs and updated `/gitignore` to not track them; mostly because
+    `boost.tar` is now >50M GitHub file size limit
+  * added `tools/archive/.gitkeep` to that `tools/archive/` exists in clones to avoid deceptive
+    message from `make_xios` at beginning of build when it checks for compresses tarballs to unpack
+    in `tools/archive/`
+  * sync r2660 into XIOS-2 with `rsync -av XIOS2-r2660/ XIOS-2/`
+  * successfully tested build in `XIOS-2-test` clone on `salish`
+  * successfully tested build in `XIOS-2` clone on `graham`
+
+
+##### `graham` StdEnv/2023
+
+* successfully tested build of `r2660-try4` branch in `XIOS-2`
+* buffed `arch-GCC_GRAHAM.fcm`
+* built SalishSeaCast config of NEMO
+* successful test run with 19x26 decomposition (8 nodes) took 30m37s vs. StdEnv/2020 benchmarks of
+  16m7s to 16m45s
+
+
+
+#### Thu 17-Oct-2024
+
+##### Miscellaneous
+
+* Email from Ashley Park of DFO and bluecarboncanada.ca re: problems downloading v202111 fields
+  from ERDDAP
+  * confirmed that browser download of jan07 surface DIC works; a few minutes of request
+    processing then 26s to download 1.06Gb netCDF3 file to `khawla`
+  * jan07 surface DIC and TA together fails immediately due to 2Gb response limit
+  * jan07 surface TA failed due to 10m time out
+  * ERDDAP process is steady at 600-700% CPU
+* Phys Ocgy seminar: Rich re: Anthropogenic reactive nitrogen inputs to the ocean,
+  including the Strait of Georgia:
+  * vastly increased fixed nitrogen into the ocean since ~1960
+  * Sargassum blooms on Caribbean beaches since 2011
+  * 170 m3/yr/person wastewater in Metro Vancouver
+
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus turbidity` failed due to time out
+  * re-ran manually
+* `run_NEMO_agrif` failed due to time out
+  * re-ran manually
+* `watch_NEMO_agrif` failed due to time out
+  * re-ran manually
+
+
+##### sss150
+
+* generalized NoSnow notebook to NoSnowIce for various SalishSeaCast domains and sss150
+* grid:
+  * created `/data/dlatorne/MEOPAR/grid/sss150/no_snow_ice.nc`
+  * pushed `no_snow_ice.nc` to replace `no_ice.nc`
+* SSS-run-sets:
+  * corrected bathymetry file name in YAML re: Susan's fixes for Fraser east boundary & Squamish River
+  * changed to use `no_snow_ice.nc` file via link in YAML file
+  * changed atmospheric weights file to be configured via link in YAML file
+  * committed & pushed cleaned up `namelist.time` sample file; mostly re: `@{STRINGBASE_*}`
+    artifacts from `maestro` substitutions with actual values
+
+
+##### SalishSeaTools
+
+* replaced NoSnow-CGRF notebook with NoSnowIce from analysis-doug
+
+
+
+
+
+
 
 * pre-commit.ci PR revealed failing test and pandas date parser warnings
   * moad_tools
@@ -9735,13 +9819,31 @@ Voted in BC election at advance poll.
 * erddap_datasets needs pre-commit
 
 
-
-fortran.fortls.directories
-
-
+Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present to group.
+* fortran.fortls.directories
 
 
 Add Tereza's pubs to ERDDAP.
+
+
+
+* Python 3.13:
+  * successful workflow test with 3.13:
+    * MOAD/docs -  migrated on 14oct24
+    * NEMO-Cmd
+  * not yet tested
+    * AtlantisCmd
+    * NEMO_Nowcast
+    * salishsea-site
+    * moad_tools
+    * SalishSeaCmd
+    * SalishSeaNowcast
+    * Reshapr
+    * erddap-datasets
+    * SalishSeaCast/docs
+    * MoaceanParcels
+  * no workflows:
+    * analysis-doug
 
 
 TODO:
@@ -9781,13 +9883,6 @@ TODO:
     * analysis-doug
 
 
-
-
-Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present to group.
-
-
-
-
 TODO:
 
 * change download_weather to gather only files missed by collect_weather so that it can
@@ -9801,17 +9896,15 @@ TODO:
   * NEMO_Nowcast - done 22sep24 in PR#57 (ubuntu-24.04 and mambaforge-23.11)
   * MOAD/docs - done 14oct24
 
-  * FVCOM-Cmd - done in PR#10
-  * tools - done 28aug23 in PR#84
-  * AtlantisCmd - done 28aug23 in PR#27
-  * Reshapr - done 28oct23 in PR#100
-  * SalishSeaNowcast - done 10nov23 in PR#215
-  * NEMO-Cmd - done 20nov23 in PR#71
-  * SalishSeaCmd - done 29nov23 in PR#54
-  * moad_tools - done 18dec23 in PR#47
-  * SalishSeaCast/docs - done 7feb24 in PR#43
-  * salishsea-site - done 9apr24 in PR#74
-
+  * tools
+  * AtlantisCmd
+  * Reshapr
+  * SalishSeaNowcast
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * moad_tools
+  * SalishSeaCast/docs
+  * salishsea-site
   * rpn-to-gemlam
   * MoaceanParcels
   * ECget
