@@ -9602,6 +9602,15 @@ Worked at ESB
 
 
 
+##### NEMO-Cmd
+
+* continued work on migration to Python 3.13
+  * branch: py313
+  * PR#92
+  * changed GHA Pytest-with-coverage workflow from 3.13 RC to release
+    * CI jobs were successful
+
+
 #### Sat 12-Oct-2024
 
 ##### SalishSeaCast
@@ -9801,6 +9810,37 @@ Voted in BC election at advance poll.
 
 
 
+#### Fri 18-Oct-2024
+
+Worked at ESB
+
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus turbidity` failed due to time out
+  * re-ran manually
+* `make_forcing_links orcinus nowcast-agrif` failed due to time out
+  * re-ran manually
+* `run_NEMO_agrif` failed due to time out
+  * re-ran manually
+
+
+##### NEMO-Cmd
+
+* continued work on migration to Python 3.13
+  * branch: py313
+  * PR#92
+  * had to update version pins on Sphinx & its optional deps to get working env
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    - sphinx=8.1.3
+    - sphinx-notfound-page=1.0.4
+    - sphinx-rtd-theme=3.0.0
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * marked PR as draft until SalishSeaCmd is updated and the pair tested in a
+    Python 3.13 env on graham
+
 
 
 
@@ -9830,7 +9870,7 @@ Add Tereza's pubs to ERDDAP.
 * Python 3.13:
   * successful workflow test with 3.13:
     * MOAD/docs -  migrated on 14oct24
-    * NEMO-Cmd
+    * NEMO-Cmd - PR#92
   * not yet tested
     * AtlantisCmd
     * NEMO_Nowcast
@@ -9893,14 +9933,14 @@ TODO:
 TODO:
 
 * update .readthedocs.yaml to use ubuntu-24.04 and mambaforge-23.11 in many repos
-  * NEMO_Nowcast - done 22sep24 in PR#57 (ubuntu-24.04 and mambaforge-23.11)
+  * NEMO_Nowcast - done 22sep24 in PR#57
   * MOAD/docs - done 14oct24
+  * NEMO-Cmd - done 18oct24 in PR#92
 
   * tools
   * AtlantisCmd
   * Reshapr
   * SalishSeaNowcast
-  * NEMO-Cmd
   * SalishSeaCmd
   * moad_tools
   * SalishSeaCast/docs
