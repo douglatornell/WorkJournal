@@ -9843,6 +9843,44 @@ Worked at ESB
 
 
 
+#### Sat 19-Oct-2024
+
+BC provincial election day
+
+
+##### SalishSeaCast
+
+* `make_forcing_links orcinus nowcast-agrif` failed due to time out
+  * re-ran manually
+* `run_NEMO_agrif` failed due to time out 6 times
+
+
+##### Miscellaneous
+
+* continued experimenting with VirtualiZarr:
+  * `analysis-doug/notebooks/virtualizarr-expts`
+  * witched from working in VSCode on `salish` to PyCharm on `khawla` for better debugger experience
+  * used dev version of VirtualiZarr from GitHub
+  * reading air SalishSeaCast netCDF4 file working
+    * file path must be a string - I think that's a bug
+  * can concatenate, merge, and combine files to get virtual dataset containing all SSC variables
+    for multiple days
+  * metadata is lost when I write vds to parquet store on disk 🙁
+
+
+
+#### Sun 20-Oct-2024
+
+
+##### SalishSeaCast
+
+* `collect_weather 12 2.5km` didn't finish until ~10:45
+* `upload_forcing orcinus nowcast+` failed due to time out
+  * re-ran manually; 2 tries
+
+
+
+
 
 
 * pre-commit.ci PR revealed failing test and pandas date parser warnings
