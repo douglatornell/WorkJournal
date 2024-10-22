@@ -9880,6 +9880,67 @@ BC provincial election day
 
 
 
+### Week 43
+
+#### Mon 21-Oct-2024
+
+Retractable screens installed on bedroom French doors.
+
+
+##### Miscellaneous
+
+* watched YouTube of SharcNet "Introspection for Jobs: in-job monitoring of performance" from 9oct
+  * Mark Hahn
+  * `seff` is a Perl script that interfaces to `sacct`
+  * `slurm` runs jobs within cgroups
+  * portals:
+    * fully implemented (maybe by TrailblazingTurtles ?) on `narwal` & `beluga`
+    * partial implementation on `graham` - not presently running
+  * `/sys/fs/cgroup/` trees contain more information than portals and are accessible as files
+    * only useful for CPU usage, not GPU
+
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus nowcast+` failed due to time out
+  * re-ran manually in debug mode
+  * also re-ran 20oct in debug mode
+  * also re-ran 20oct turbidity in debug mode
+* `upload_forcing orcinus turbidity` failed due to time out
+  * re-ran manually
+* discovered that `nowcast-agrif/18oct24` has uncombined restart file
+  * backfilled 18oct24
+
+
+##### sss150
+
+* resumed work on generation of boundary condition files from SalishSeaCast
+  * 202108 mesh mask with proxy Fraser River filled
+    * it appears from code and Michael's modified 201702 mesh mask file that only the `tmask`
+      variable is used by `bdytools --weights` so only it needs to be filled
+
+
+
+#### Tue 22-Oct-2024
+
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus nowcast+` failed due to time out
+  * re-ran manually in debug mode
+
+
+##### sss150
+
+* continued work on generation of boundary condition files from SalishSeaCast
+  * decided that 202108 mesh mask with proxy Fraser River filled isn't necessary because we hope
+    not to need to generate initialization fields but rather use a restart file from Michael
+  * should be able to use `grid/mesh_mask202108.nc` with `bdytools --weights` once to generate
+    weights for `bdytools --bdy ssh|trc|ts|uv` to use thereafter
+
+
+
+
 
 
 
