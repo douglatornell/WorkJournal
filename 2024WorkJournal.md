@@ -9923,11 +9923,13 @@ Retractable screens installed on bedroom French doors.
 
 #### Tue 22-Oct-2024
 
+Worked at home then at ESB
 
 ##### SalishSeaCast
 
 * `upload_forcing orcinus nowcast+` failed due to time out
   * re-ran manually in debug mode
+* backfilled 19oct24-20oct24 via `--debug` workers
 
 
 ##### sss150
@@ -9937,6 +9939,29 @@ Retractable screens installed on bedroom French doors.
     not to need to generate initialization fields but rather use a restart file from Michael
   * should be able to use `grid/mesh_mask202108.nc` with `bdytools --weights` once to generate
     weights for `bdytools --bdy ssh|trc|ts|uv` to use thereafter
+* updated `bdytools` and `tritools` git clones on `kudu` to have my forks as `origin`
+  and `FA12` as upstream
+* created bdytools env on `ocean` cluster
+* started creating documented config file for `bdytools` on `salish`
+  * `SS-run-sets/sss150/bdytools_ssc_to_sss150_salish.yaml`
+  * for weights, the required config items are:
+    * weightsdir
+    * srcmask
+    * dstmask
+    * `bdytools --weights` failed w/ traceback in `VerticalWeights`
+      * emailed Michael
+    * added `flood_weights: False` and got further; failed with traceback
+    * added `bdy`, `src_output_dir`, and `src_output_pattern` items and got success
+      * I don't understand `subset`
+        * can move `subset around in dict
+      * I don't understand `src_output_pattern.ic`
+    * successfully ran `bdy_tools --weights`
+    * successfully ran `bdy_tools --bdy ssh 20230301 20230301` etc.
+
+* TODO:
+  * improve metadata and compress
+    `/ocean/mdunphy/sss150_20220715/mesh_mask_southsalishsea150_update202108210102AUM1.nc`
+    into `grid/sss150/mesh_mask_sss150_20240822.nc`
 
 
 
