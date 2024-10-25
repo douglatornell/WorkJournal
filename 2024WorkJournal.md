@@ -9929,7 +9929,7 @@ Worked at home then at ESB
 
 * `upload_forcing orcinus nowcast+` failed due to time out
   * re-ran manually in debug mode
-* backfilled 19oct24-20oct24 via `--debug` workers
+* backfilled 19oct24-21oct24 via `--debug` workers
 
 
 ##### sss150
@@ -9965,6 +9965,67 @@ Worked at home then at ESB
 
 
 
+#### Wed 23-Oct-2024
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus turbidity` failed due to time out
+  * re-ran manually in debug mode
+* backfilled 22oct24-23oct24 via `--debug` workers
+
+
+##### sss150
+
+* updated `namelist.lateral` and `sss150_example.yaml` to reflect boundary filepaths
+* noted that boundary files from `bdytools` are interpolated in time as well as in space.
+  The values are on the hour, in contrast to the on the half hour output of SalishSeaCast.
+  Discussed w/ Susan: we will probably want to avoid the temporal interpolation.
+  * Keeping values on the half hour would also likely help with an odd bit of the mechanics of
+    running `bdytools` whereby it needs `day` and `day+1` to calculate the files for day.
+    It uses regex patterns to find the files which will be a bit nasty for that last day of the
+    month 😬
+    * But also see Michael's note:
+      > The atmospheric and bdy forcing have some + and - prefixes on the variable
+      > names, this is to shift the forcing times by half of a forcing period (NEMO's
+      > default is that forcing data are provided on centre of each forcing period). For
+      > bdy you can drop these shifts (because SSC outputs hourly averages), for
+      > surface forcing you can probably also drop these to match SSC.
+* moved default namelist sections to top level of `SS-run-sets/sss150/` tree
+* looked at `domain_def.xml`
+  * compared one from Michael to SSC
+  * all about zooms, so I think we should start with an empty one
+
+
+##### XIOS & NEMO
+
+* finished analyzing test runs that Susan did in StdEnv/2020 to compare XIOS r2660 to r1660
+  * run times overlap and are fairly comparable to Apr23 benchmarks
+  * so, performance hit in StdEnv/2023 is due to environment, not XIOS code
+  * agreed with Susan that I can merge XIOS `r2660-try4` branch
+
+
+
+#### Thu 24-Oct-2024
+
+##### SalishSeaCast
+
+* `run_NEMO_agrif orcinus` failed due to time out
+  * re-ran manually
+
+
+##### sss150
+
+* hacked up `iodef.xml` and `file_def.xml`
+* fixed time steps per day in `namelist.time`
+* copied 24feb23 restart file from Michael into `/data/dlatornell/MEOPAR/results/sss150/24feb23/`
+* tweaked `sss150_example.yaml`
+* `salishsea run --no-submit --debug sss150_example.yaml /data/dlatorne/MEOPAR/results/sss150/25feb23-1st-try`
+  * successfully created `/data/dlatorne/MEOPAR/runs/1st-try_2024-10-24T133625.667734-0700/`
+* built XIOS-2 `r2660-try4` branch
+* built `sss150` NEMO config
+* created 25feb23 boundary files
+* launched NEMO run
+  * failed during domain initialization, I think
 
 
 
