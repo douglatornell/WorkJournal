@@ -10029,6 +10029,46 @@ Worked at home then at ESB
 
 
 
+#### Fri 25-Oct-2024
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus turbidity` failed due to time out
+  * re-ran manually in debug mode
+
+
+##### Miscellaneous
+
+* printed papers to read:
+  * Raisha
+  * Susan v3
+  * Rachael x2
+* started reading Raisha's paper
+* updated PyCharm on `kudu` to 2024.2.4
+
+
+##### SalishSeaCmd
+
+* docs maintenance
+  * branch: docs-maint
+  * PR#76 - squash-merged
+  * updated version pins on Sphinx & its optional deps
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    - sphinx=8.1.3
+    - sphinx-notfound-page=1.0.4
+    - sphinx-rtd-theme=3.0.0
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * updated `.readthedocs.yaml` to use ubuntu-24.04 and mambaforge-23.11
+  * fixed redirected links in docs
+  * updated dev docs w/ latest output of `sphinx` and `pytest`
+* migrated to Python 3.13
+  * branch: py313
+  * PR#
+
 
 * pre-commit.ci PR revealed failing test and pandas date parser warnings
   * moad_tools
@@ -10057,11 +10097,11 @@ Add Tereza's pubs to ERDDAP.
     * MOAD/docs -  migrated on 14oct24
     * NEMO-Cmd - PR#92
   * not yet tested
+    * SalishSeaCmd
     * AtlantisCmd
     * NEMO_Nowcast
     * salishsea-site
     * moad_tools
-    * SalishSeaCmd
     * SalishSeaNowcast
     * Reshapr
     * erddap-datasets
@@ -10118,21 +10158,31 @@ TODO:
 TODO:
 
 * update .readthedocs.yaml to use ubuntu-24.04 and mambaforge-23.11 in many repos
-  * NEMO_Nowcast - done 22sep24 in PR#57
-  * MOAD/docs - done 14oct24
+  * NEMO_Nowcast - done 22sep24 in PR#57 - not sphinx & deps version pins
+  * MOAD/docs - done 14oct24 - not sphinx & deps version pins
   * NEMO-Cmd - done 18oct24 in PR#92
+  * SalishSeaCmd - done 25oct24 in PR#76
 
   * tools
   * AtlantisCmd
   * Reshapr
   * SalishSeaNowcast
-  * SalishSeaCmd
   * moad_tools
   * SalishSeaCast/docs
   * salishsea-site
   * rpn-to-gemlam
   * MoaceanParcels
   * ECget
+* also update sphinx & deps version pins
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    - sphinx=8.1.3
+    - sphinx-notfound-page=1.0.4
+    - sphinx-rtd-theme=3.0.0
+    ```
+    <!-- markdownlint-enable MD013 -->
+
+
 
 
 TODO:
