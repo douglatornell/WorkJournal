@@ -10065,9 +10065,76 @@ Worked at ESB
   * updated `.readthedocs.yaml` to use ubuntu-24.04 and mambaforge-23.11
   * fixed redirected links in docs
   * updated dev docs w/ latest output of `sphinx` and `pytest`
+
+
+
+#### Sat 26-Oct-2024
+
+##### Minecraft
+
+* downloaded & installed v1.21 of `Fresh Animations` resource pack and
+  `Entity [Model|Texture] Features` mods
+
+
+##### Miscellaneous
+
+* updated PyCharm on `khawla` to 2024.2.4
+
+
+##### NEMO_Nowcast
+
+* docs maintenance
+  * branch: docs-maint
+  * PR#58 - squash-merged
+  * updated version pins on Sphinx & its optional deps
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    - sphinx=8.1.3
+    - sphinx-rtd-theme=3.0.0
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * fixed redirected links in docs
+  * updated dev docs w/ latest output of `sphinx` and `pytest`
+
+
+##### MOAD/docs
+
+* docs maintenance
+  * updated version pins on Sphinx & its optional deps
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    - nbsphinx==0.9.5
+    - sphinx==8.1.3
+    - sphinx-notfound-page==1.0.4
+    - sphinx-rtd-theme==3.0.0
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * updated `source_suffix` config to mapping
+  * updated contrib docs w/ latest output of `sphinx`
+
+
+
+#### Sun 27-Oct-2024
+
+##### SalishSeaCmd
+
 * migrated to Python 3.13
   * branch: py313
-  * PR#
+  * PR#77
+  * updated envs & GHA workflows
+  * updated README and dev docs
+* tested in conjunction with `py313` branch of NEMO-Cmd on `graham`
+* released v24.1
+
+
+##### NEMO-Cmd
+
+* tested in conjunction with `py313` branch of SalishSeaCmd on `graham`
+* finished migration to Python 3.13
+  * branch: py313
+  * PR#92 - squash-merged
+* released v24.1
+
 
 
 * pre-commit.ci PR revealed failing test and pandas date parser warnings
@@ -10094,10 +10161,10 @@ Add Tereza's pubs to ERDDAP.
 
 * Python 3.13:
   * successful workflow test with 3.13:
-    * MOAD/docs -  migrated on 14oct24
+    * MOAD/docs - migrated on 14oct24
     * NEMO-Cmd - PR#92
+    * SalishSeaCmd - PR#77
   * not yet tested
-    * SalishSeaCmd
     * AtlantisCmd
     * NEMO_Nowcast
     * salishsea-site
@@ -10158,8 +10225,17 @@ TODO:
 TODO:
 
 * update .readthedocs.yaml to use ubuntu-24.04 and mambaforge-23.11 in many repos
-  * NEMO_Nowcast - done 22sep24 in PR#57 - not sphinx & deps version pins
-  * MOAD/docs - done 14oct24 - not sphinx & deps version pins
+* also update sphinx & deps version pins
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    - sphinx=8.1.3
+    - sphinx-notfound-page=1.0.4
+    - sphinx-rtd-theme=3.0.0
+    ```
+    <!-- markdownlint-enable MD013 -->
+* use `nbsphinx=0.9.5` if required
+  * NEMO_Nowcast - done 22sep24 in PR#57; sphinx & deps version pins done 26oct24 in PR#58
+  * MOAD/docs - done 14oct24; sphinx & deps version pins done 26oct24
   * NEMO-Cmd - done 18oct24 in PR#92
   * SalishSeaCmd - done 25oct24 in PR#76
 
@@ -10173,14 +10249,20 @@ TODO:
   * rpn-to-gemlam
   * MoaceanParcels
   * ECget
-* also update sphinx & deps version pins
-    <!-- markdownlint-disable MD013 -->
-    ```yaml
-    - sphinx=8.1.3
-    - sphinx-notfound-page=1.0.4
-    - sphinx-rtd-theme=3.0.0
-    ```
-    <!-- markdownlint-enable MD013 -->
+
+
+* TODO:
+  * Change `source_suffix = '.rst'` to `source_suffix = {'.rst': 'restructuredtext'}` in `conf.py`
+  * Investigate `no theme named 'sphinx_rtd_theme' found (missing theme.toml?)
+  * Investigate:
+    > /home/doug/conda_envs/moad-docs/bin/sphinx-build:8: DeprecationWarning:
+    > Parsing dates involving a day of month without a year specified is ambiguous
+    > and fails to parse leap day. The default behavior will change in Python 3.15
+    > to either always raise an exception or to use a different default year (TBD).
+    > To avoid trouble, add a specific year to the input & format.
+    > See https://github.com/python/cpython/issues/70647.
+    > sys.exit(main())
+
 
 
 
