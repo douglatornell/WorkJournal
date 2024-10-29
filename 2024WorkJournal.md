@@ -10137,6 +10137,62 @@ Worked at ESB
 
 
 
+### Week 44
+
+#### Mon 28-Oct-2024
+
+##### sss150
+
+* zoom mtg w/ Camryn & Susan
+  * XML files:
+    * `iodef.xml`
+      * separated out `file_def.xml` as we do for SalishSeaCast
+      * removed custom `axis` and `grid` definitions
+    * `file_def.xml`
+      * Michael's XMLs had file definitions embedded in `iodef.xml`
+      * copied from v202111 and stripped down to 1h `grid_[TUVW]` files
+    * `field_def.xml`
+      * copied v202111 because of all of the work we put into metadata there,
+        but we have to be mindful of variable name changes
+    * `domain_def.xml`
+      * removed custom definitions; `grid_[TUVW]` and `scalarpoint` remain
+  * moved namelist section files from `sss150/cstang/` to `sss150/` as "defaults";
+    consistent with `sss150/sss150_example.yaml`
+  * boundary files:
+    * need to finish annotating sample YAML file
+    * need to commit `weights_*.nc` files in `grid/sss150/`
+      * will boundary file calcs work without `weights_ic.nc`
+    * code is my forks of private GitLab repos
+    * boundary field values are interpolated to on the hour; may want to revisit
+  * SalishSeaCmd TODOs
+    * add redirection to `echo` statements and `mpirun` in generated `SalishSeaNEMO.sh` to handle
+      change from `qsub` to `bash` to execute runs on `salish`
+    * bug in de-duplication of VCS recording for NEMO and XIOS-2
+  * XIOS-2 TODOs:
+    * PR from `r2660-retry4` branch
+    * updates in XIOS-ARCH
+    * update build docs re: `--full` option for clean builds
+  * 1st run attempt:
+    * `/data/dlatorne/MEOPAR/runs/1st-try_2024-10-24T133625.667734-0700/`
+    * `/data/dlatorne/MEOPAR/results/sss150/25feb23-1st-try/`
+    * found a bug in `namelist.domain` re: missing quotes around NEMO config name
+* after meeting:
+  * fixed out of sync issues in `namelist_ref`
+  * made `nn_it000=30241` to be consistent with 24feb23 restart file from Michael
+  * made `nn_itend=34560` for 1 day long run from `nn_it000=30241`
+  * fixed `nn_dyn2d_dta` values in `namelist.lateral` NOT apply tidal forcing
+  * run seems to be failing during creation of netCDF output files by XIOS
+    * `stderr` says something is wrong in XML files
+
+
+##### NEMO-3.6-code
+
+* updated `arch-GCC_SALISH.fcm` re: Ubuntu 20.04.2, GCC-9.4.0, and OpenMPI-4.0.3
+
+
+
+
+
 * pre-commit.ci PR revealed failing test and pandas date parser warnings
   * moad_tools
 
