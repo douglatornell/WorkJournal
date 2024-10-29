@@ -10191,6 +10191,28 @@ Worked at ESB
 
 
 
+#### Tue 29-Oct-2024
+
+Worked at ESB.
+
+Attended AAPS AGM on Zoom. Unusual due to member motion concerning AAPS advocacy
+to end UBC's complicity in human rights violations (re: Isreal).
+
+##### SalishSeaCast
+
+* `run_NEMO_agrif` failed due to SSH protocol banner error
+  * re-ran manually in debug mode
+
+
+##### sss150
+
+* mtg w/ Camryn:
+  * introduced her to XIOS XML config files in sss150
+  * debugged next sss150 issue:
+    * missing line in v-grid domain def that Camryn spotted
+* next bug is that I forgot to create 25feb23 boundary files
+
+
 
 
 * pre-commit.ci PR revealed failing test and pandas date parser warnings
@@ -10218,8 +10240,8 @@ Add Tereza's pubs to ERDDAP.
 * Python 3.13:
   * successful workflow test with 3.13:
     * MOAD/docs - migrated on 14oct24
-    * NEMO-Cmd - PR#92
-    * SalishSeaCmd - PR#77
+    * NEMO-Cmd - migrated on 27oct24 in PR#92
+    * SalishSeaCmd - migrated on 27oct24 in PR#77
   * not yet tested
     * AtlantisCmd
     * NEMO_Nowcast
