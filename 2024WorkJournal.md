@@ -10195,8 +10195,12 @@ Worked at ESB
 
 Worked at ESB.
 
-Attended AAPS AGM on Zoom. Unusual due to member motion concerning AAPS advocacy
-to end UBC's complicity in human rights violations (re: Isreal).
+##### Miscellaneous
+
+* listened to GitHub Universe day 1 keynote
+  * all copilot AI all the time
+* Attended AAPS AGM on Zoom. Unusual due to member motion concerning AAPS advocacy
+  to end UBC's complicity in human rights violations (re: Isreal).
 
 ##### SalishSeaCast
 
@@ -10210,7 +10214,140 @@ to end UBC's complicity in human rights violations (re: Isreal).
   * introduced her to XIOS XML config files in sss150
   * debugged next sss150 issue:
     * missing line in v-grid domain def that Camryn spotted
-* next bug is that I forgot to create 25feb23 boundary files
+* next bug is that I forgot to create 25feb23 boundary files; fixed
+* next bug is that `./rivers/R_sss150_Dailies` file for 25feb23 doesn't exist
+
+
+
+#### Wed 30-Oct-2024
+
+##### salishsea-site
+
+* Squash-merged dependabot PR to update waitress to 3.0.1 re: race condition & DoS vulnerabilities
+
+
+##### Miscellaneous
+
+* Checked status of scheduled GHA workflows:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  mamba activate gha-workflows
+  python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+  ```
+  <!-- markdownlint-enable MD013 -->
+* listened to GitHub Universe day 2 keynote
+  * Kyle Daigle, COO
+  * featured `home-assistant`
+
+
+##### SalishSeaNowcast
+
+* docs maintenance
+  * branch: docs-maint
+  * PR#301 - squash-merged
+  * updated `.readthedocs.yaml` to use ubuntu-24.04 and mambaforge-23.11
+  * updated version pins on Sphinx & its optional deps
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    - sphinx==8.1.3
+    - sphinx-notfound-page==1.0.4
+    - sphinx-rtd-theme==3.0.0
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * Updated Sphinx source_suffix config to mapping
+  * fixed redirected links in docs
+  * updated dev docs w/ latest output of `sphinx` and `pytest`
+
+
+##### sss150
+
+* tried to run Susan's `I_ForcingFiles/Rivers/MakeDailyRiverNCfiles_sss150.ipynb` notebook to
+  create river runoff files for 25feb23, but got really confused
+  * Susan says it contains lots of unused code, just go with it
+  * it fails with a csv ParserError
+
+
+##### SalishSeaCmd
+
+* reopened issue #11 re: duplicated vcs recording of NEMO & XIOS repos because I see it still
+  happening
+* created issue to change from `qsub` to `bash` for job execution on `salish`
+* created issue to add `--no-gather` to `salishsea run` for tighter edit-build-test loop that reuses
+  a single tmp run dir
+
+
+##### XIOS-ARCH
+
+* updated `arch-GCC_SALISH.fcm` re: Ubuntu 20.04.2 and GCC-9.4.0
+
+
+##### MOAD/docs
+
+* updated XIOS-2 build instructions to use `make_xios --full`
+
+
+
+#### Thu 31-Oct-2024
+
+##### MoaceanParcels
+
+* Squash-merged pre-commit PR to update blacken-docs to 1.19.1
+
+
+###### SalishSeaNowcast
+
+* Started to update to Python 3.13:
+  * branch: py313
+  * PR#
+  * tried unsuccessfully to build Python 3.13 env on `khawla`
+    * numerous dependency failures
+  * added 3.13 to `pytest-with-coverage` workflow so that I can test env build on GitHub
+  * surprisingly, env build is successful on GHA with micromamba
+    * investigated package resolution on `khawla` and problem appears to be an interaction among
+      `hdf5`, `h5netcdf`, and `pytables`
+
+
+##### SalishSeaCast
+
+* `run_NEMO_agrif` failed due to time out error
+  * re-ran manually in debug mode; 2 tries
+
+
+##### moad_tools
+
+* docs maintenance
+  * branch: docs-maint
+  * PR#73 - squash-merged
+  * updated `.readthedocs.yaml` to use ubuntu-24.04 and mambaforge-23.11
+  * updated version pins on Sphinx & its optional deps
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    - sphinx==8.1.3
+    - sphinx-notfound-page==1.0.4
+    - sphinx-rtd-theme==3.0.0
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * Updated Sphinx source_suffix config to mapping
+  * fixed redirected links in docs
+  * updated dev docs w/ latest output of `sphinx`
+* created issue to add `midoss` install option so that troublesome packages can be excluded from
+  `salishsea-nowcast` and `analysis-*` envs
+
+
+##### SalishSeaCmd
+
+* Started work on changing job submit command on `salish` to `bash` re: issue #78
+  * branch: salish-bash-submit
+  * PR#80
+  * realized on first test that we want to use something that disconnects the job from the shells
+    session; maybe `at -t now -m user@eoas.ubc.ca -f SalishSeaNEMO.sh`
+
+
+##### sss150
+
+* Susan created river runoff files for 24-28feb23
+* my 1st test of the `salish-bash-submit` branch of SalishSeaCmd accidentally launched a run that
+  did time steps 🤣
 
 
 
@@ -10236,18 +10373,61 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
 Add Tereza's pubs to ERDDAP.
 
 
+TODO:
+
+* update `.readthedocs.yaml` to use ubuntu-24.04 and mambaforge-23.11 in many repos
+* also update sphinx & deps version pins
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    - sphinx=8.1.3
+    - sphinx-notfound-page=1.0.4
+    - sphinx-rtd-theme=3.0.0
+    ```
+    <!-- markdownlint-enable MD013 -->
+* use `nbsphinx=0.9.5` if required
+  * NEMO_Nowcast - done 22sep24 in PR#57; sphinx & deps version pins done 26oct24 in PR#58
+  * MOAD/docs - done 14oct24; sphinx & deps version pins done 26oct24
+  * NEMO-Cmd - done 18oct24 in PR#92
+  * SalishSeaCmd - done 25oct24 in PR#76
+  * SalishSeaNowcast - done 30oct24 in PR#301
+  * moad_tools - done 31oct24 in PR#73
+
+  * tools
+  * AtlantisCmd
+  * Reshapr
+  * SalishSeaCast/docs
+  * salishsea-site
+  * rpn-to-gemlam
+  * MoaceanParcels
+  * ECget
+
+
+* TODO:
+  * Change `source_suffix = '.rst'` to `source_suffix = {'.rst': 'restructuredtext'}` in `conf.py`
+  * Investigate `no theme named 'sphinx_rtd_theme' found (missing theme.toml?)
+  * Investigate:
+    > /home/doug/conda_envs/moad-docs/bin/sphinx-build:8: DeprecationWarning:
+    > Parsing dates involving a day of month without a year specified is ambiguous
+    > and fails to parse leap day. The default behavior will change in Python 3.15
+    > to either always raise an exception or to use a different default year (TBD).
+    > To avoid trouble, add a specific year to the input & format.
+    > See https://github.com/python/cpython/issues/70647.
+    > sys.exit(main())
+
+
 
 * Python 3.13:
   * successful workflow test with 3.13:
     * MOAD/docs - migrated on 14oct24
     * NEMO-Cmd - migrated on 27oct24 in PR#92
     * SalishSeaCmd - migrated on 27oct24 in PR#77
+  * failed workflow test with 3.13:
+    * SalishSeaNowcast
   * not yet tested
     * AtlantisCmd
     * NEMO_Nowcast
     * salishsea-site
     * moad_tools
-    * SalishSeaNowcast
     * Reshapr
     * erddap-datasets
     * SalishSeaCast/docs
@@ -10298,50 +10478,6 @@ TODO:
 * change download_weather to gather only files missed by collect_weather so that it can
   work with crop_gribs monitoring incoming files
   * check for presence of files before downloading them; skip if present
-
-
-TODO:
-
-* update .readthedocs.yaml to use ubuntu-24.04 and mambaforge-23.11 in many repos
-* also update sphinx & deps version pins
-    <!-- markdownlint-disable MD013 -->
-    ```yaml
-    - sphinx=8.1.3
-    - sphinx-notfound-page=1.0.4
-    - sphinx-rtd-theme=3.0.0
-    ```
-    <!-- markdownlint-enable MD013 -->
-* use `nbsphinx=0.9.5` if required
-  * NEMO_Nowcast - done 22sep24 in PR#57; sphinx & deps version pins done 26oct24 in PR#58
-  * MOAD/docs - done 14oct24; sphinx & deps version pins done 26oct24
-  * NEMO-Cmd - done 18oct24 in PR#92
-  * SalishSeaCmd - done 25oct24 in PR#76
-
-  * tools
-  * AtlantisCmd
-  * Reshapr
-  * SalishSeaNowcast
-  * moad_tools
-  * SalishSeaCast/docs
-  * salishsea-site
-  * rpn-to-gemlam
-  * MoaceanParcels
-  * ECget
-
-
-* TODO:
-  * Change `source_suffix = '.rst'` to `source_suffix = {'.rst': 'restructuredtext'}` in `conf.py`
-  * Investigate `no theme named 'sphinx_rtd_theme' found (missing theme.toml?)
-  * Investigate:
-    > /home/doug/conda_envs/moad-docs/bin/sphinx-build:8: DeprecationWarning:
-    > Parsing dates involving a day of month without a year specified is ambiguous
-    > and fails to parse leap day. The default behavior will change in Python 3.15
-    > to either always raise an exception or to use a different default year (TBD).
-    > To avoid trouble, add a specific year to the input & format.
-    > See https://github.com/python/cpython/issues/70647.
-    > sys.exit(main())
-
-
 
 
 
