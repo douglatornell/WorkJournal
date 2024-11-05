@@ -2624,7 +2624,7 @@ Days since last wwatch3 prep stall: 2
 ##### SalishSeaCast
 
 * https://github.com/xCDAT/xcdat/issues/561 that I followed because it
-  is about `RuntimeError: NetCDF: Not a valid ID`, `xarray.open_dataset()` and `dask` was updated
+  is about `RuntimeError: NetCDF: Not a valid ID`, `xarray.open_mfdataset()` and `dask` was updated
   this morning with the comments:
 
     To summarize in this thread, it looks like a work-around in netcdf4-python to deal with netcdf-c
@@ -10351,6 +10351,151 @@ Worked at ESB.
 
 
 
+#### Sat 2-Nov-2024
+
+##### sailshsea-site
+
+* docs maintenance
+  * branch: docs-maint
+  * PR#62 - squash-merged
+  * updated `.readthedocs.yaml` to use ubuntu-24.04 and mambaforge-23.11
+  * updated version pins on Sphinx & its optional deps
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    - sphinx==8.1.3
+    - sphinx-notfound-page==1.0.4
+    - sphinx-rtd-theme==3.0.0
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * Updated Sphinx source_suffix config to mapping
+  * fixed redirected links in docs
+  * updated dev docs w/ latest output of `sphinx` and `pytest`
+  * lots of DeprecationWarning:
+    * running dev server:
+      <!-- markdownlint-disable MD013 -->
+      ```text
+      /home/doug/.local/share/JetBrains/Toolbox/apps/pycharm-professional/plugins/python-ce/helpers/pycharm/pycharm_load_entry_point.py:2:
+      DeprecationWarning: pkg_resources is deprecated as an API.
+      See https://setuptools.pypa.io/en/latest/pkg_resources.html
+      from pkg_resources import load_entry_point
+      ```
+      <!-- markdownlint-enable MD013 -->
+    * in test suite:
+      <!-- markdownlint-disable MD013 -->
+      ```text
+      webob/compat.py:5: DeprecationWarning: 'cgi' is deprecated and slated for removal in Python 3.13
+        from cgi import parse_header
+
+      pyramid/asset.py:2: DeprecationWarning: pkg_resources is deprecated as an API.
+      See https://setuptools.pypa.io/en/latest/pkg_resources.html
+        import pkg_resources
+
+      pkg_resources/__init__.py:3154: DeprecationWarning:
+      Deprecated call to `pkg_resources.declare_namespace('paste')`.
+      Implementing implicit namespace packages (as specified in PEP 420) is preferred to
+      `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+        declare_namespace(pkg)
+      ```
+      <!-- markdownlint-enable MD013 -->
+
+
+
+#### Sun 3-Nov-2024
+
+##### SalishSeaCast
+
+* `make_turbidity_file` failed due to PDT -> PST time change overnight
+* `run_NEMO_agrif` failed due to time out error
+  * re-ran manually in debug mode
+* `download_results nowcast-agrif` failed due to time out error
+  * re-ran manually
+
+
+##### Reshapr
+
+* docs maintenance
+  * branch: docs-maint
+  * PR#141 - squash-merged
+  * updated `.readthedocs.yaml` to use ubuntu-24.04 and mambaforge-23.11
+  * updated version pins on Sphinx & its optional deps
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    - sphinx==8.1.3
+    - sphinx-notfound-page==1.0.4
+    - sphinx-rtd-theme==3.0.0
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * fixed broken & redirected links in docs
+  * updated dev docs w/ latest output of `sphinx` and `pytest`
+* restored `netcdf4` to dependencies list in `pyproject.toml`
+  * branch: restore-pyproject-netcdf4
+  * PR#142 - squash-merged
+  * fix bug introduced in PR#132 when `h5netcdf` replaced `netcdf4` then I found that we still need
+    to use `netcdf4` for writes, and I forgot to add it back to `pyproject.toml`
+* changed `salish` cluster config to use 1 thread per worker
+  * branch: 1-thread-per-worker
+  * PR#143 - squash-merged
+  * changes `threads per worker` value from 4 to 1
+  * due to `netcdf-c` thread-safety issue; see https://github.com/xCDAT/xcdat/issues/561 discussion
+
+
+
+### Week 45
+
+#### Mon 4-Nov-2024
+
+Exercise stress test & 5-day Holter monitor hook-up at UBC Cardiology Lab
+
+##### Miscellaneous
+
+* started uploading 2010 forcing files to `graham` for Tall:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  rsync -tv /results/forcing/atmospheric/GEM2.5/gemlam/gemlam_y2010*.nc \
+    graham-dtn:project/SalishSea/forcing/atmospheric/GEM2.5/gemlam/
+  rsync -tv /results/forcing/sshNeahBay/obs/ssh_y2010*.nc \
+    graham-dtn:project/SalishSea/forcing/sshNeahBay/obs
+  rsync -tv /results/forcing/rivers/R202108Dailies_y2010* \
+    graham-dtn:project/SalishSea/forcing/rivers/
+  rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y2010* \
+    graham-dtn:project/SalishSea/forcing/rivers/river_turb/
+  rsync -tv /results/forcing/NEP36/NEP_v202209_y2010* \
+    graham-dtn:project/SalishSea/forcing/NEP36/
+  ```
+  <!-- markdownlint-enable MD013 -->
+* uptimerobot reported website and ERDDAP both down; assumed that they were false positives like
+  last week
+
+
+#### Tue 5-Nov-2024
+
+##### Miscellaneous
+
+* finished uploading 2010 forcing files to `graham` for Tall
+
+
+##### SalishSeaCast
+
+* `make_plots` failed due to ERDDAP not responding
+* checklist and logs rollover didn't happen dye to above failure
+
+
+##### ERDDAP
+
+* server was not responding to requests, but process was running
+* restarted ERDDAP:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  sudo /opt/tomcat/bin/shutdown.sh
+  # confirm shutdown
+  sudo /opt/tomcat/bin/startup.sh
+  ```
+  <!-- markdownlint-disable MD013 -->
+
+
+
+
+
 
 * pre-commit.ci PR revealed failing test and pandas date parser warnings
   * moad_tools
@@ -10391,12 +10536,12 @@ TODO:
   * SalishSeaCmd - done 25oct24 in PR#76
   * SalishSeaNowcast - done 30oct24 in PR#301
   * moad_tools - done 31oct24 in PR#73
+  * salishsea-site - done 2nov24 in PR#62
+  * Reshapr - done 3nov24 in PR#141
 
   * tools
   * AtlantisCmd
-  * Reshapr
   * SalishSeaCast/docs
-  * salishsea-site
   * rpn-to-gemlam
   * MoaceanParcels
   * ECget
@@ -10404,15 +10549,8 @@ TODO:
 
 * TODO:
   * Change `source_suffix = '.rst'` to `source_suffix = {'.rst': 'restructuredtext'}` in `conf.py`
+    or omit `source_suffix` config because `.rst` is the default (works in Reshapr docs)
   * Investigate `no theme named 'sphinx_rtd_theme' found (missing theme.toml?)
-  * Investigate:
-    > /home/doug/conda_envs/moad-docs/bin/sphinx-build:8: DeprecationWarning:
-    > Parsing dates involving a day of month without a year specified is ambiguous
-    > and fails to parse leap day. The default behavior will change in Python 3.15
-    > to either always raise an exception or to use a different default year (TBD).
-    > To avoid trouble, add a specific year to the input & format.
-    > See https://github.com/python/cpython/issues/70647.
-    > sys.exit(main())
 
 
 
