@@ -10351,6 +10351,42 @@ Worked at ESB.
 
 
 
+## November
+
+<!-- markdownlint-disable MD001 -->
+#### Fri 1-Nov-2024
+<!-- markdownlint-enable MD001 -->
+
+##### SalishSeaCast
+
+* `crop_gribs 12` timed out due to 1 unprocessed file that it processed on exit
+  * start of nowcast-blue run was delayed by ~2h
+* `download_results nowcast-agrif` failed due to connection time out
+  * re-ran manually; 2 tries
+
+
+##### sss150
+
+* 1st run performance analysis
+  * run finished in 12h59m35s, ~3.75 times longer than 3h37m40s for nowcast-dev on 21dec23
+  * expected difference is 710 *826* 39 *2 / 398* 898 * 40 = ~3.2
+
+
+##### Miscellaneous
+
+* checked my project storage footprint on `graham`
+  * `project/dlatorne/MIDOSS/`: 41M
+  * `project/dlatorne/MEOPAR/`: 2.7G
+  * `project/MIDOSS/`: 19G
+  * `project/SalishSea/`: 195G
+
+
+##### SalishSeaCmd
+
+* messed around trying to launch a test run using `at`; no luck
+
+
+
 #### Sat 2-Nov-2024
 
 ##### sailshsea-site
@@ -10472,12 +10508,27 @@ Exercise stress test & 5-day Holter monitor hook-up at UBC Cardiology Lab
 ##### Miscellaneous
 
 * finished uploading 2010 forcing files to `graham` for Tall
+* helped Tall sort out ssh key issues and get his Reshapr clone & env updated
+  so that month-average extractions work from his O2 runs for him
 
 
 ##### SalishSeaCast
 
 * `make_plots` failed due to ERDDAP not responding
 * checklist and logs rollover didn't happen dye to above failure
+* `make_forcing_links nowcast-agrif` failed due to connection time out
+  * re-ran manually
+* `nowcast-agrif/05nov24` run stalled at 0%
+  * `upload_forcing nowcast+` failed due to connection time out
+  * killed `watch_NEMO_agrif`
+  * killed run on `orcinus`
+  * deleted tmp run dir & results dir
+  * ran `upload_forcing nowcat+`
+  * ran `make_forcing_links nowcast-agrif`
+  * `run_NEMO_agrif` failed due to connection time out
+    * re-ran
+  * `watch_NEMO_agrif` failed due to connection time out
+    * re-ran
 
 
 ##### ERDDAP
@@ -10493,6 +10544,15 @@ Exercise stress test & 5-day Holter monitor hook-up at UBC Cardiology Lab
   <!-- markdownlint-disable MD013 -->
 
 
+##### erddap-datasets
+
+* added pre-commit hooks to project
+  * branch: add-pre-commit
+  * PR#22 - squash-merged
+* started adding 202111 month-average datasets
+  * branch:
+  * PR#
+
 
 
 
@@ -10506,9 +10566,6 @@ Exercise stress test & 5-day Holter monitor hook-up at UBC Cardiology Lab
   * SalishSeaTools
   * FVCOM-Cmd
   * OPPTools
-
-
-* erddap_datasets needs pre-commit
 
 
 Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present to group.
