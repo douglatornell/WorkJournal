@@ -10169,9 +10169,9 @@ Worked at ESB
       change from `qsub` to `bash` to execute runs on `salish`
     * bug in de-duplication of VCS recording for NEMO and XIOS-2
   * XIOS-2 TODOs:
-    * PR from `r2660-retry4` branch
-    * updates in XIOS-ARCH
-    * update build docs re: `--full` option for clean builds
+    * PR from `r2660-retry4` branch - done
+    * updates in XIOS-ARCH -  done
+    * update build docs re: `--full` option for clean builds - done
   * 1st run attempt:
     * `/data/dlatorne/MEOPAR/runs/1st-try_2024-10-24T133625.667734-0700/`
     * `/data/dlatorne/MEOPAR/results/sss150/25feb23-1st-try/`
@@ -10503,6 +10503,7 @@ Exercise stress test & 5-day Holter monitor hook-up at UBC Cardiology Lab
   last week
 
 
+
 #### Tue 5-Nov-2024
 
 ##### Miscellaneous
@@ -10510,6 +10511,8 @@ Exercise stress test & 5-day Holter monitor hook-up at UBC Cardiology Lab
 * finished uploading 2010 forcing files to `graham` for Tall
 * helped Tall sort out ssh key issues and get his Reshapr clone & env updated
   so that month-average extractions work from his O2 runs for him
+* received email from UBC IT Security re: need for early renewal of Resilient-C TLS certs due to
+  issue they are having with the need for DNSSEC for issuance of new certs after 11-Nov
 
 
 ##### SalishSeaCast
@@ -10542,6 +10545,10 @@ Exercise stress test & 5-day Holter monitor hook-up at UBC Cardiology Lab
   sudo /opt/tomcat/bin/startup.sh
   ```
   <!-- markdownlint-disable MD013 -->
+* restarted server again at ~16:00 and it was memory-swamped again by 16:51
+  * all requests since restart were from 206.12.127.34 that resolves to
+    lcg-ce4.sfu.computecanada.ca (maybe Blue Carbon Canada ??),
+  * another restart at ~17:15
 
 
 ##### erddap-datasets
@@ -10549,11 +10556,140 @@ Exercise stress test & 5-day Holter monitor hook-up at UBC Cardiology Lab
 * added pre-commit hooks to project
   * branch: add-pre-commit
   * PR#22 - squash-merged
+
+
+
+#### Wed 6-Nov-2024
+
+##### SalishSeaCast
+
+* manager tried unsuccessfully to restart at 03:34:38
+  * apparently due to SSL and max retries issue sending `collect_weather 06` or `crop_gribs 06`
+    notification to Slack
+  * recovery started at ~09:15:
+    * confirmed that `collect_weather 06` and `crop_gribs 06` were successful, but `grib_to_netcdf`
+      was not
+      <!-- markdownlint-disable MD013 -->
+      ```bash
+      /SalishSeaCast/datamart/hydrometric/collect_ECCC_river_data.sh 2024-11-05
+      collect_NeahBay_ssh 00
+      grib_to_netcdf forecast2 --debug  # to avoid launching forecast2 runs
+      get_onc_ctd SEVIP
+      get_onc_ctd SCVIP
+      get_onc_ferry TWDP
+      get_vfpa_hadcp 2024-11-05
+      pkill -f collect_weather 06
+      pkill -f crop_gribs 06
+      collect_weather 18 2.5km &
+      crop_gribs 18 &
+      crop_gribs 12 &
+      collect_weather 12 2.5km --backfill --backfill-date 2024-11-05
+      ```
+      <!-- markdownlint-enable MD013 -->
+    * `crop_gribs 12` stalled with 1 file unprocessed
+      * killed `crop_gribs` instead of waiting for time out, and re-ran it in backfill mode
+    * `nowcast-blue` run started at 10:46
+* `make_forcing_links nowcast-agrif` failed due to connection time out
+  * re-ran manually
+
+
+##### ERDDAP
+
+* another requester at 206.12.172.106 which doesn't resolve to a name was hammering the server
+  as soon as it restarted
+  * I've seen this address before; `dig` says it is unresolved, but ip geolocation says it is a
+    UBC address
+* `skookum is at 95% memory again
+* stopped ERDDAP at 09:02
+* started ERDDAP at 10:55
+* quite a few requests from 208.98.206.28 and 208.98.206.26 which ip geolocates to
+  Jasco Applied Sciences in Victoria
+
+
+##### NEMO_Nowcast
+
+* created issue #59 re: unhandled `requests.exceptions.SSLError` exception in
+  `manager._slack_notification()` that caused SalishSeaCast problem this morning
+
+
+##### erddap-datasets
+
 * started adding 202111 month-average datasets
-  * branch:
-  * PR#
+  * branch: 202111-month-avg-fields
+  * PR#23
+  * struggled with XML for `ubcSSg3DChemistryFields1moV21-11`
+    * Susan noticed that there were `ncra`-produced files in the directory, and also files from
+      spin-up that we don't want to publish
+      * moved spin-up files over to `spin-up.202111/month-avg/`
+    * got a partial dataset load, but error re: differing time units in files
 
 
+
+#### Thu 7-Nov-2024
+
+##### Miscellaneous
+
+* requested TLS cert renewals for Resilient-C domains via email to Karen Beattie
+  * Generated new keys and CSRs:
+    * refs:
+      * https://confluence.it.ubc.ca/display/ITSecurity/how+to+obtain%2C+deploy+and+verify+an+X.509+certificate
+      * https://www.golinuxcloud.com/openssl-generate-csr/
+      * https://www.openssl.org/docs/man1.1.0/man1/req.html
+      <!-- markdownlint-disable MD013 -->
+      ```bash
+      cd /media/doug/warehouse/43ravens/projects/resilient-c/x.509-certs/
+      mkdir 2024/
+      cp 2023/*.cfg 2024/
+      cd 2024/
+      ```
+      <!-- markdownlint-enable MD013 -->
+
+    * generated private keys:
+      <!-- markdownlint-disable MD013 -->
+      ```bash
+      openssl ecparam -out resilient-c.ubc.ca.key -name prime256v1 -genkey
+      openssl ecparam -out resilient-c.resilientcoasts.ubc.ca.key -name prime256v1 -genkey
+      openssl ecparam -out platform.resilientcoasts.ubc.ca.key -name prime256v1 -genkey
+      ```
+      <!-- markdownlint-enable MD013 -->
+    * generated cert signing requests (CSRs):
+      <!-- markdownlint-disable MD013 -->
+      ```bash
+      openssl req -config resilient-c.ubc.ca.cfg -new -key resilient-c.ubc.ca.key -out resilient-c.ubc.ca.csr
+      openssl req -config resilient-c.resilientcoasts.ubc.ca.cfg -new -key resilient-c.resilientcoasts.ubc.ca.key -out resilient-c.resilientcoasts.ubc.ca.csr
+      openssl req -config platform.resilientcoasts.ubc.ca.cfg -new -key platform.resilientcoasts.ubc.ca.key -out platform.resilientcoasts.ubc.ca.csr
+      ```
+      <!-- markdownlint-enable MD013 -->
+  * Sent CSRs to Karen Beattie @ UBC IT for renewal of domain certificates
+* Uploaded 31dec09 forcing files to `graham` for Tall
+* Reminded Becca how to do the edit-build-debug cycle for ariane
+* UBC-IOS modeling mtg
+  * Andy Lin: Relocatable NEMO model (RELIOPS)
+  * POPS (Port Ocean Prediction System): level down from CIOPS (Coastal Ice Ocean Prediction System)
+    * 500m, 100m, 20m
+
+
+##### XIOS-2
+
+* closed PR#3 from `r2660` branch as abandoned because that branch didn't work to to `tools/`
+  tarball handling
+* created PR#4 from `r2660-try4` branch
+  * confirmed that the successful sss150/25feb23 run was done with that branch
+  * squash-merged PR#4
+* tagged repo with `XIOS-2r2660`
+
+
+
+#### Fri 8-Nov-2024
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus nowcast+` failed due to connection time out
+  * re-ran manually
+* `run_NEMO_agrif` failed due to connection time out
+  * re-ran manually
+* `watch_NEMO_agrif` failed due to connection time out
+  * re-ran manually
 
 
 
