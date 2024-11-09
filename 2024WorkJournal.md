@@ -10682,6 +10682,8 @@ Exercise stress test & 5-day Holter monitor hook-up at UBC Cardiology Lab
 
 #### Fri 8-Nov-2024
 
+Dropped off 5-day Holter monitor at UBC Cardiology Lab
+
 ##### SalishSeaCast
 
 * `upload_forcing orcinus nowcast+` failed due to connection time out
@@ -10690,6 +10692,31 @@ Exercise stress test & 5-day Holter monitor hook-up at UBC Cardiology Lab
   * re-ran manually
 * `watch_NEMO_agrif` failed due to connection time out
   * re-ran manually
+
+
+##### ERDDAP
+
+* confirmed that 202111 month-avg [biol|chem|grid]_T files have a mixture of time units:
+  * `hours since 2002-01-01T00:30:00`
+  * `hours since 2007-01-01T00:30:00`
+  * `days since 2007-01-01T12:00:00`
+  * [grax|prod]_T have consistent`days since 2007-01-01T12:00:00`
+
+
+##### Reshapr
+
+* confirmed that depth units is set to `metres`
+  * this feels like a bug because CF unit for depth is `m`
+
+
+##### Miscellaneous
+
+* discussed plan to reorganize SalishSeaCast automation with Rich
+  * he uses both forecast and forecast2 wwatch3 products
+* helped Becca with `gdb` re: source out of sync with executable and missing
+  debuginfo for glibc
+
+
 
 
 
