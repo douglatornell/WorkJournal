@@ -10718,6 +10718,293 @@ Dropped off 5-day Holter monitor at UBC Cardiology Lab
 
 
 
+#### Sat 9-Nov-2024
+
+Bus to Wite Rock & back to celebrate Susan's bday with JRA
+
+##### Miscellaneous
+
+* submitted Resilient-C cert CSRs via UBC IT cert request portal ticket
+
+
+##### SalishSeaCast
+
+* `nowcast-agrif/09nov24` run stalled at 0%
+  * `upload_forcing nowcast+` failed due to connection time out
+  * killed `watch_NEMO_agrif`
+  * killed run on `orcinus`
+  * deleted tmp run dir & results dir
+  * ran `upload_forcing nowcast+`
+  * ran `make_forcing_links nowcast-agrif`
+
+
+
+#### Sun 10-Nov-2024
+
+##### SalishSeaCast
+
+* `nowcast-agrif/10nov24` run stalled at 0%
+  * `upload_forcing nowcast+` failed due to connection time out
+  * killed `watch_NEMO_agrif`
+  * killed run on `orcinus`
+  * deleted tmp run dir & results dir
+  * ran `upload_forcing nowcast+`
+  * ran `make_forcing_links nowcast-agrif`
+
+
+##### ERDDAP
+
+* continued work on 202111 month-avg time units issue:
+  * oct08 to jun15 and sep16
+  * oct08 is 38782345 bytes (37M) before fix; created 30oct22 via Reshapr CLI
+  * sampling of files with `days since 2007-01-01T12:00:00` shows them to be created via Reshapr API
+    that is used by `make_averaged_dataset` worker
+  * fixed oct08 in `/media/doug/warehouse/MEOPAR/SalishSeaNowcast/notebooks/fix_month_avg_time_units.ipynb`
+    notebook
+    * writing the file with `h5netcdf` makes it ~10% larger than writing it with `netcdf4`
+    * decided to use `netcdf4` because that is what Reshapr is doing
+  * fixed nov08 in the course of developing loop over months
+  * fixed dec08 and all of 2009 in the course of refactoring the notebook
+  * fixed 2010-2014 by running notebook 1 year at a time
+  * fixed jan15-jun15 and sep16
+  * fixed oct08 to jun15 and sep16 grid_T files
+  * fixed oct08 to jun15 and sep16 biol_T files
+
+
+##### NEMO-Cmd
+
+* started experimenting with pruning useless dimensions, coordinates & variables from NEMO results files
+  * `/media/doug/warehouse/MEOPAR/SalishSeaNowcast/notebooks/prune_coords_vars.ipynb`
+  * concluded that the idea is not worth the effort
+    * file size reduction for sss150 grid_T file is 2M in 730m
+    * adds complications of dealing with memory size of loading dataset on compute node or dask
+      thread-pool scheduler, or proper dask scheduler
+  * for clean dataset reprs and faster load times in notebooks, use `drop_variables=`
+
+
+##### Miscellaneous
+
+* uploaded 2011 forcing files to `graham` for Tall
+
+
+
+### Week 46
+
+#### Mon 11-Nov-2024
+
+**Statutory Holiday** - Remembrance Day
+
+##### SalishSeaCast
+
+* `download_live_ocean` failed at 11:02 due to too many retries
+  * re-ran, and it failed again at 14:07
+  * still no sentinel file at 15:20
+  * recovery started at ~15:25
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    ln -s /results/forcing/LiveOcean/downloaded/20241110 \
+      /results/forcing/LiveOcean/downloaded/20241111
+    make_live_ocean_files
+    ```
+    <!-- markdownlint-enable MD013 -->
+* `run_NEMO_agrif` failed due to connection time out
+  * re-ran manually; took 2 tries
+
+
+##### Miscellaneous
+
+* Squash-merged dependabot PRs to update setup-micromamba to 2.0.1 re: feature update:
+  * SalishSeaNowcast
+  * erddap_datasets
+  * numeric_2024
+  * gha_workflows
+  * salishsea-site
+
+
+##### SalishSeaCast/docs
+
+* docs maintenance
+  * branch: docs-maint
+  * PR#56 - squash-merged
+  * updated `.readthedocs.yaml` to use ubuntu-24.04 and mambaforge-23.11
+  * updated version pins on Sphinx & its optional deps
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    - nbsphinx==0.9.5
+    - sphinx==8.1.3
+    - sphinx-notfound-page==1.0.4
+    - sphinx-rtd-theme==3.0.0
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * added `pandoc` to dependencies because phinx build said that I needed to
+  * dropped Sphinx source_suffix config
+  * fixed redirected links in docs
+  * flagged broken DFO link to Susan and she came up with an alternative; fixed
+  * added pre-commit hooks and connected repo to pre-commit.ci
+* changed build env to Python 3.13
+  * branch: py313
+  * PR#57 - squash-merged
+
+
+##### SalishSeaCmd
+
+* Continued work on changing job submit command on `salish` to `bash` re: issue #78
+  * branch: salish-bash-submit
+  * PR#80
+  * dropped PBS directives from `salish` run script
+  * added stdout & stderr redirection to `salish` run script
+
+
+
+#### Tue 12-Nov-2024
+
+Cardiac rehab program case manager intake appointment
+
+##### SalishSeaCast
+
+* `collect_river_data` failed for all ECCC rivers due to no data for 11nov24
+* `upload_forcing orcinus nowcast+` failed due to connection timeout
+  * re-ran manually
+* confirmed that 11nov24 LiveOcean product was apparently never published
+* `forecast2` and `forecast` generated storm surge alerts for several locations including Pt. Atkinson
+
+
+##### SalishSeaCmd
+
+* Continued work on changing job submit command on `salish` to `bash` re: issue #78
+  * branch: salish-bash-submit
+  * PR#80
+  * researched how to get `subprocess.run()` to launch the run script and not wait for it to complete
+
+
+##### sss150
+
+* generated boundary files for 26feb23 to 02mar23
+  * ran `bdytools` on `skookum` for confirm that it can be done for automation
+  * discovered that different types of boundaries can be generated in a single command within
+    `--bdy ssh ts uv`
+  * failed to come up with a file pattern for `glob.glob()` to span the feb/mar month transition
+* successfully tested SalishSeaCmd run script changes in the course of launching 26feb23 run
+
+
+
+#### Wed 13-Nov-2024
+
+* Phone appt with Dr. Teoh to check in & renew prescriptions
+* Cardiac Research clinic appt for blood draw to screen for genetic marker to determine my
+  eligibility for the Dal-Gen-2 trial
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus nowcast+` failed due to connection timeout
+  * re-ran manually
+* backfilled 11nov24 ECCC river discharges:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    collect_river_data ECCC Capilano 2024-11-11 --debug
+    # edit Caplilano_08GA010_day_avg_flow to move 11nov24 line into order
+    # repeat for other rivers
+    # delete 11nov symlinked runoff files
+    make_runoff_file 2024-11-12
+    make_v202111_runoff_file 2024-11-11
+    ```
+    <!-- markdownlint-enable MD013 -->
+* Investigated timing of runs today and under plan to drop `nowcast-blue`:
+  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD010 -->
+  ```text
+  Run	            Start	    End	      Duration
+  13nov24 actual
+  NEMO blue 	    08:03:35	08:28:37	00:25:02
+  NEMO forecast 	08:28:43	09:08:46	00:40:03
+  NEMO green	    09:09:11	10:14:13	01:05:02
+  waves nowcast	  09:09:54	09:34:54	00:25:00	concurrent with NEMO green
+  waves forecast	09:34:58	10:10:01	00:35:03	concurrent with NEMO green
+
+  proposed
+  NEMO green	    08:03:35	09:08:37	01:05:02
+  NEMO forecast	  09:08:43	09:48:46	00:40:03
+  waves nowcast	  09:49:54	10:14:54	00:25:00	concurrent with planned sss150
+  waves forecast	10:14:58	10:50:01	00:35:03	concurrent with planned sss150
+  ```
+  <!-- markdownlint-enable MD010 -->
+  <!-- markdownlint-enable MD013 -->
+
+
+  ##### Miscellaneous
+
+  * helped Becca get `ariane` running without `gdb`
+
+
+##### ERDDAP
+
+* excessive number of requests (>12,834) from 206.12.127.34 that resolves to
+  lcg-ce4.sfu.computecanada.ca (maybe Blue Carbon Canada ??) was causing website downtime and
+  slow `skookum`; blocked address at ~21:00 to avoid automation problems overnight
+
+
+
+#### Thu 14-Nov-2024
+
+##### SalishSeaCast
+
+* `collect_river_data USGS` failed for all rivers
+* `download_live_ocean` delayed
+  * email from Parker says extraction should be ready by ~13:00
+  * re-ran at 12:35 and file was downloaded immediately
+* restarted `log_aggregator` because wwatch3 runs progress was not appearing in log
+* `run_NEMO_agrif` failed due to connection time out
+  * re-ran manually
+* `download_results orcinus nowcast-agrif` failed due to connection time out
+
+
+##### tools
+
+* docs maintenance
+  * branch: docs-maint
+  * PR#106 - squash-merged
+  * updated `.readthedocs.yaml` to use ubuntu-24.04 and mambaforge-23.11
+  * updated version pins on Sphinx & its optional deps
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    - nbsphinx==0.9.5
+    - sphinx==8.1.3
+    - sphinx-notfound-page==1.0.4
+    - sphinx-rtd-theme==3.0.0
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * dropped Sphinx source_suffix config
+  * fixed issues that were producing warnings in Sphinx build
+    * still a bunch of `SyntaxWarning: invalid escape sequence` warnings in LaTeX or regex strings
+  * fixed broken links in docs
+
+
+##### Miscellaneous
+
+* updated `khawla` PyCharm to 2024.3
+
+
+##### ERDDAP
+
+* Started email conversation with Marius Clabaux at SFU re: excessive requests that I blocked on 13nov
+
+
+
+#### Fri 15-Nov-2024
+
+##### SalishSeaCast
+
+* backfilled `download_results orcinus nowcast-agrif 2024-11-14`
+* `upload_forcing orcinus nowcast+` failed due to connection time out
+  * re-ran manually
+* backfilled 11nov24 USGS river discharges
+* `run_NEMO_agrif` failed due to connection time out
+  * re-ran manually
+* `watch_NEMO_agrif` failed due to connection time out
+  * re-ran manually
+
+
+
 
 
 * pre-commit.ci PR revealed failing test and pandas date parser warnings
@@ -10758,12 +11045,12 @@ TODO:
   * moad_tools - done 31oct24 in PR#73
   * salishsea-site - done 2nov24 in PR#62
   * Reshapr - done 3nov24 in PR#141
+  * SalishSeaCast/docs - done 11nov24 in PR#56
+  * tools - done 14nov24 in PR#106
 
-  * tools
   * AtlantisCmd
-  * SalishSeaCast/docs
-  * rpn-to-gemlam
   * MoaceanParcels
+  * rpn-to-gemlam
   * ECget
 
 
@@ -10779,6 +11066,7 @@ TODO:
     * MOAD/docs - migrated on 14oct24
     * NEMO-Cmd - migrated on 27oct24 in PR#92
     * SalishSeaCmd - migrated on 27oct24 in PR#77
+    * SalishSeaCast/docs - migrated on 11nov24 in PR#57
   * failed workflow test with 3.13:
     * SalishSeaNowcast
   * not yet tested
@@ -10788,7 +11076,6 @@ TODO:
     * moad_tools
     * Reshapr
     * erddap-datasets
-    * SalishSeaCast/docs
     * MoaceanParcels
   * no workflows:
     * analysis-doug
