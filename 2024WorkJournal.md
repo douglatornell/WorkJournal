@@ -10992,6 +10992,8 @@ Cardiac rehab program case manager intake appointment
 
 #### Fri 15-Nov-2024
 
+Worked at ESB
+
 ##### SalishSeaCast
 
 * backfilled `download_results orcinus nowcast-agrif 2024-11-14`
@@ -11003,6 +11005,34 @@ Cardiac rehab program case manager intake appointment
 * `watch_NEMO_agrif` failed due to connection time out
   * re-ran manually
 
+
+##### ERDDAP
+
+* investigated bad file report for `ubcSSg3DLightFields1hV21-11` dataset
+  * no reason to believe that the file was bad
+  * deleted `/results/erddap/dataset/11/ubcSSg3DLightFields1hV21-11/badFiles.nc`
+  * reloaded dataset via flag, and no more problem
+* did the same for:
+  * `ubcSSg3DPhysicsFields1hV21-11`
+  * `ubcSSg3DBiologyFields1hV19-05`
+  * `ubcSSg3DwGridFields1hV19-05`
+  * `ubcSSg3DwGridFields1hV19-05`
+* confirmed that 2 datasets actually does have issues:
+  * `ubcSSg3DTracerFields1moV19-05`
+  * `ubcSSg3DBiologyFields1moV19-05`
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+
+
+##### erddap-datasets
+
+* started adding 202111 month-average datasets
+  * branch: 202111-month-avg-fields
+  * PR#23
+  * added `ubcSSg3DPhysicsFields1moV21-11`
 
 
 
