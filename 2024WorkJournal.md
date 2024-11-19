@@ -4531,7 +4531,7 @@ Squash-merged dependabot PRs to update idna to v3.7 re: CVE-2024-3651 re: DoS vu
 Recovery from shingles vaccine.
 
 
-##### Resilient-c
+##### Resilient-C
 
 * VM went offline late last night; unable to ssh to VM
 * unable to investigate due to day-long dashboard maintenance
@@ -4548,7 +4548,7 @@ IRL ride to Iona, home via Heather with a stop at Enroute Café.
 * `make_ww3_wind_file forecast2` stalled; killed it and skipped run
 
 
-##### Resilient-c
+##### Resilient-C
 
 * email from cloud support that VM backup is failing because VM is powered down
 * asked them to restart VM; reply was that they couldn't due to problem with the underlying storage
@@ -4607,7 +4607,7 @@ Reactivated workflow that had been disabled due to inactivity:
   ```
 
 
-##### Resilient-c
+##### Resilient-C
 
 * Randell Ong of cloud services restored 11apr backup to a new VM; web app restart was trivial
 
@@ -10511,6 +10511,10 @@ Exercise stress test & 5-day Holter monitor hook-up at UBC Cardiology Lab
 * finished uploading 2010 forcing files to `graham` for Tall
 * helped Tall sort out ssh key issues and get his Reshapr clone & env updated
   so that month-average extractions work from his O2 runs for him
+
+
+##### Resilient-C
+
 * received email from UBC IT Security re: need for early renewal of Resilient-C TLS certs due to
   issue they are having with the need for DNSSEC for issuance of new certs after 11-Nov
 
@@ -10627,7 +10631,7 @@ Exercise stress test & 5-day Holter monitor hook-up at UBC Cardiology Lab
 
 #### Thu 7-Nov-2024
 
-##### Miscellaneous
+##### Resilient-C
 
 * requested TLS cert renewals for Resilient-C domains via email to Karen Beattie
   * Generated new keys and CSRs:
@@ -10661,6 +10665,10 @@ Exercise stress test & 5-day Holter monitor hook-up at UBC Cardiology Lab
       ```
       <!-- markdownlint-enable MD013 -->
   * Sent CSRs to Karen Beattie @ UBC IT for renewal of domain certificates
+
+
+##### Miscellaneous
+
 * Uploaded 31dec09 forcing files to `graham` for Tall
 * Reminded Becca how to do the edit-build-debug cycle for ariane
 * UBC-IOS modeling mtg
@@ -10694,7 +10702,7 @@ Dropped off 5-day Holter monitor at UBC Cardiology Lab
   * re-ran manually
 
 
-##### ERDDAP
+##### erddap-datasets
 
 * confirmed that 202111 month-avg [biol|chem|grid]_T files have a mixture of time units:
   * `hours since 2002-01-01T00:30:00`
@@ -10722,7 +10730,7 @@ Dropped off 5-day Holter monitor at UBC Cardiology Lab
 
 Bus to Wite Rock & back to celebrate Susan's bday with JRA
 
-##### Miscellaneous
+##### Resilient-C
 
 * submitted Resilient-C cert CSRs via UBC IT cert request portal ticket
 
@@ -10752,7 +10760,7 @@ Bus to Wite Rock & back to celebrate Susan's bday with JRA
   * ran `make_forcing_links nowcast-agrif`
 
 
-##### ERDDAP
+##### erddap-datasets
 
 * continued work on 202111 month-avg time units issue:
   * oct08 to jun15 and sep16
@@ -10902,7 +10910,7 @@ Cardiac rehab program case manager intake appointment
     <!-- markdownlint-disable MD013 -->
     ```bash
     collect_river_data ECCC Capilano 2024-11-11 --debug
-    # edit Caplilano_08GA010_day_avg_flow to move 11nov24 line into order
+    # edit Capilano_08GA010_day_avg_flow to move 11nov24 line into order
     # repeat for other rivers
     # delete 11nov symlinked runoff files
     make_runoff_file 2024-11-12
@@ -11029,10 +11037,217 @@ Worked at ESB
 
 ##### erddap-datasets
 
-* started adding 202111 month-average datasets
+* continued adding 202111 month-average datasets
   * branch: 202111-month-avg-fields
   * PR#23
   * added `ubcSSg3DPhysicsFields1moV21-11`
+
+
+##### Minecraft
+
+* stopped server
+* did lizzy-smelt backup
+* set up 1.21.3 server
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  mkdir ~/Games/MinecraftFabric1.21.3Server
+  cd ~/Games/MinecraftFabric1.21.3Server
+  curl -OJ https://meta.fabricmc.net/v2/versions/loader/1.21.3/0.16.9/1.0.1/server/jar
+  pushd ~/Games/MinecraftFabric1.21Server
+  cp banned-* eula.txt ops.json whitelist.json start.sh ../MinecraftFabric1.21.3Server/
+  popd
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * edited `start.sh` to:
+  <!-- markdownlint-disable MD013 -->
+    ```bash
+    #!/usr/bin/env bash
+    java -Xmx6G -jar fabric-server-mc.1.21.3-loader.0.15.11-launcher.1.0.1.jar nogui
+    ```
+  <!-- markdownlint-enable MD013 -->
+* launched and stopped server to create instance directories and files
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  ./start.sh
+  ...
+  /stop
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * edited `server.properties` to sync with 1.21 settings
+    * new property `pause-when-empty-seconds` defaults to 60
+      * "causes the server to pause when no player has been online for that many seconds"
+  * installed mods, and rsync-ed `1-20-1-25jul23` world tree
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  cd ~/Games/MinecraftFabric1.21.3Server/mods/
+  curl -LO https://github.com/CaffeineMC/lithium-fabric/releases/download/mc1.21.3-0.14.1/lithium-fabric-0.14.1-snapshot+mc1.21.3-build.89-api.jar
+  cd ~/Games/MinecraftFabric1.21.3Server
+  rsync -av ../MinecraftFabric1.21Server/1-20-1-25jul23 ./
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * downloaded and unzipped on `khawla` VanillaTweaks double shulker shells v1.3.9 datapacks
+    * rsync-ed it to `MinecraftFabric1.21Server/1-20-1-25jul23/datapacks/`
+  * launched server in `tmux`
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  tmux attach -t minecraft-server
+  ./start.sh
+  ```
+  <!-- markdownlint-enable MD013 -->
+* set up 1.21.3 client instance in MultiMC
+  * created instance
+  * installed fabric 0.16.9
+  * downloaded and installed loader mods:
+    * sodium-fabric-0.6.0-beta.5+mc1.21.3.jar
+    * lithium-fabric-0.14.1-snapshot+mc1.21.3-build.89.jar
+    * malilib-fabric-1.21.3-0.22.0-sakura.7.jar
+    * minihud-fabric-1.21.3-0.33.0-sakura.8.jar
+    * tweakeroo-fabric-1.21.3-0.22.0-sakura.6.jar
+    * iris-1.7.3+mc1.21.jar is not compatible with sodium-0.6
+  * downloaded and installed `ComplementaryUnbound_r5.3.zip` shaders
+  * started and stopped client instance to populate `config/`
+  * copied `minihud.json` and `tweakeroo.json` from 1.21.1 instance `config/`
+  * Fresh Animations isn't available for 1.21.3 yet, though `Entity [Model|Texture] Features` are
+  * downloaded and installed Vanilla Tweaks resource packs:
+    * iron bars fix
+    * lower shield
+    * redstone devices:
+      * StickyPistonSides
+      * DirectionalHoppers
+      * DirectionalDispensersDroppers
+      * DirectionalObservers
+      * GroovyLevers
+      * RedstoneWireFix
+
+
+
+#### Sat 16-Nov-2024
+
+##### SalishSeaCast
+
+* `make_forcing_links orcinus nowcast-agrif` failed due to connection time out
+  * re-ran manually
+* `run_NEMO_agrif` failed due to connection time out
+  * re-ran manually
+
+
+##### Resilient-C
+
+* downloaded new TLS certs from Entrust to `khawla`
+
+
+
+#### Sun 17-Nov-2024
+
+##### VirtualiZarr
+
+* forked repo
+* added badges to README re: issue #302
+  * branch: readme-badges
+  * PR#303
+* improved pkg editable install docs in contrib guidance
+  * branch: improve-contrib-docs
+  * PR#304
+
+
+##### erddap-datasets
+
+* updated front page re: release of V21-11 datasets
+  * uncommitted changes on `khawla` were rsync-ed to `skookum`
+
+
+
+### Week 47
+
+#### Mon 18-Nov-2024
+
+##### VirtualiZarr
+
+* Thomas merged my PRs:
+  * PR#304 re: improved pkg editable install docs in contrib guidance
+
+  * PR#303 re: added badges to README re: issue #302
+    * I found the conda downloads badge that provides the "conda|downloads" label on shields.io
+
+
+##### SalishSeaCast
+
+* `make_forcing_links orcinus nowcast-agrif` failed due to connection time out
+  * re-ran manually
+* `run_NEMO_agrif` failed due to connection time out
+  * re-ran manually
+
+
+##### Miscellaneous
+
+* Squash-merged dependabot PRs to update codecov-action to 5.0.2 re: feature update:
+  * gha-workflows
+  * SalishSeaNowcast
+* uploaded 2012 forcing files to `graham` for Tall
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  yyyy=2012; rsync -tv /results/forcing/atmospheric/GEM2.5/gemlam/gemlam_y${yyyy}*.nc \
+    graham-dtn:project/SalishSea/forcing/atmospheric/GEM2.5/gemlam/
+  yyyy=2012; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
+    graham-dtn:project/SalishSea/forcing/sshNeahBay/obs/
+  yyyy=2012; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}*.nc \
+    graham-dtn:project/SalishSea/forcing/rivers/river_turb/
+  yyyy=2012; rsync -tv /results/forcing/NEP36/NEP_v202209_y${yyyy}*.nc \
+    graham-dtn:project/SalishSea/forcing/NEP36/
+  ```
+  <!-- markdownlint-enable MD013 -->
+* spent way too long trying to figure out why GitHub Oauth for PyCharm pull requests isn't working
+
+
+##### AtlantisCmd
+
+* docs maintenance
+  * branch: docs-maint
+  * PR#48 - squash-merged
+  * updated `.readthedocs.yaml` to use ubuntu-24.04 and mambaforge-23.11
+  * updated version pins on Sphinx & its optional deps
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    - nbsphinx==0.9.5
+    - sphinx==8.1.3
+    - sphinx-notfound-page==1.0.4
+    - sphinx-rtd-theme==3.0.0
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * fixed redirected links in docs
+  * updated dev docs w/ latest output of `sphinx` and `pytest`
+board
+
+
+##### SalishSeaNowcast
+
+* updated HRDPS sarracennia config re: 27nov24 directory structure change on dd.weather.gc.ca server
+  * branch: update-sarracenia
+  * PR#305
+  * added `*.WXO-DD.model_hrdps.continental.2.5km.#` subtopic
+  * deployed branch on `skookum` and restarted sarracenia client
+
+
+##### erddap-datasets
+
+* continued adding 202111 month-average datasets
+  * branch: 202111-month-avg-fields
+  * PR#23
+  * added `ubcSSg3DBiologyFields1moV21-11`
+    * time units issue in `SalishSeaCast_1m_biol_T_20150501_20150531.nc`
+
+
+
+#### Tue 19-Nov-2024
+
+##### erddap-datasets
+
+* continued adding 202111 month-average datasets
+  * branch: 202111-month-avg-fields
+  * PR#23
+  * fixed time units issue in `SalishSeaCast_1m_biol_T_20150501_20150531.nc`
+* fixed issues that Susan found in her review of the updated ERDDAP front page blurb about V21-11
+
 
 
 
@@ -11051,8 +11266,6 @@ Worked at ESB
 Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present to group.
 * fortran.fortls.directories
 
-
-Add Tereza's pubs to ERDDAP.
 
 
 TODO:
@@ -11077,8 +11290,8 @@ TODO:
   * Reshapr - done 3nov24 in PR#141
   * SalishSeaCast/docs - done 11nov24 in PR#56
   * tools - done 14nov24 in PR#106
+  * AtlantisCmd - done 18nov24 in PR#48
 
-  * AtlantisCmd
   * MoaceanParcels
   * rpn-to-gemlam
   * ECget
