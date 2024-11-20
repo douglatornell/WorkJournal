@@ -11165,7 +11165,6 @@ Worked at ESB
 
 * Thomas merged my PRs:
   * PR#304 re: improved pkg editable install docs in contrib guidance
-
   * PR#303 re: added badges to README re: issue #302
     * I found the conda downloads badge that provides the "conda|downloads" label on shields.io
 
@@ -11216,7 +11215,6 @@ Worked at ESB
     <!-- markdownlint-enable MD013 -->
   * fixed redirected links in docs
   * updated dev docs w/ latest output of `sphinx` and `pytest`
-board
 
 
 ##### SalishSeaNowcast
@@ -11244,10 +11242,48 @@ board
 
 * continued adding 202111 month-average datasets
   * branch: 202111-month-avg-fields
-  * PR#23
+  * PR#23 - squash-merged
   * fixed time units issue in `SalishSeaCast_1m_biol_T_20150501_20150531.nc`
+  * added `ubcSSg3DLightFields1moV21-11`
+  * dropped `testOutOfDate` attr from V19-05 month-avg datasets
 * fixed issues that Susan found in her review of the updated ERDDAP front page blurb about V21-11
 
+
+##### Miscellaneous
+
+* Squash-merged dependabot PR to update ssh-action to 1.20 re: feature update:
+  * salishsea-site
+* Squash-merged pre-commit-.ci PR to update pre-commit-hooks to 5.0.0 re: feature update:
+  * MOAD/docs
+* updated `kudu` to PyCharm 2024.3
+
+
+##### MoaceanParcels
+
+* docs maintenance
+  * branch: docs-maint
+  * PR#52 - squash-merged
+  * updated `.readthedocs.yaml` to use ubuntu-24.04 and mambaforge-23.11
+  * updated version pins on Sphinx & its optional deps
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    - nbsphinx==0.9.5
+    - sphinx==8.1.3
+    - sphinx-notfound-page==1.0.4
+    - sphinx-rtd-theme==3.0.0
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * fixed version conflict in pre-commit config re: blacken-docs
+  * updated parcels docs URL for inter-sphinx extension
+  * fixed broken xref link between kernel docstring and example notebook in docs
+  * fixed redirected links in docs
+  * updated dev docs w/ latest output of `sphinx` and `pytest`
+  * can't run notebooks due to bit-rot :-(
+
+
+##### Atlantis
+
+* reviewed the latest version of Raish's paper and emailed her my comments
 
 
 
@@ -11291,8 +11327,8 @@ TODO:
   * SalishSeaCast/docs - done 11nov24 in PR#56
   * tools - done 14nov24 in PR#106
   * AtlantisCmd - done 18nov24 in PR#48
+  * MoaceanParcels - done 19nov24 in PR#52 - consider archiving repo due to bit-rot
 
-  * MoaceanParcels
   * rpn-to-gemlam
   * ECget
 
