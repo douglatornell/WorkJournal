@@ -11329,8 +11329,8 @@ Worked at ESB
   * `analysis-susan/notebooks/bathymetry/lookat201702_201803d_middle.ipynb`
   * `analysis-susan/notebooks/bathymetry/lookat201702_201803d-upper.ipynb`
 * started creating `tools/bathymetry/Process20405Bathymetry.ipynb`
-  * realized that `analysis-doug/notebooks/2xrez-202111/bathymetry.ipynb` doesn't write base ]
-    bathymetry to a file 😦
+  * realized that `analysis-doug/notebooks/2xrez-202111/bathymetry.ipynb` doesn't write
+    base bathymetry to a file 😦
 
 
 
@@ -11375,6 +11375,33 @@ Worked at ESB
 
 * refreshed my memory in the base bathymetry calculation notebook
 
+
+
+#### Fri 22-Nov-2024
+
+##### Miscellaneous
+
+* MOAD group mtg - see whiteboard
+* learned of `graham` downtime from 9dec to 3jan
+  * emailed Venkat to ask which cluster he recommends that we move to
+  * he recommended `beluga` or `narval`; started looking at config and polcies on both
+
+
+##### SalishSeaCmd
+
+* Continued work on changing job submit command on `salish` to `bash` re: issue #78
+  * branch: salish-bash-submit
+  * PR#80
+  * with the help of PyCharm AI, figured out that `SalishSeaNEMO.sh` script can be
+    launched to run without waiting for it to finish with:
+    `subprocess.Popen(shlex.split(cmd), start_new_session=True)`
+
+
+##### sss150
+
+* accidentally deleted 25feb23 run results because I forgot that they were symlinked
+* re-ran in a successful test of `salishsea run` that launches `bash SalishSeaNEMO.sh`
+  and finishes without waiting for the subprocess to finish
 
 
 
