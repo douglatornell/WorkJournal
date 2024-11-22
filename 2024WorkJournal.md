@@ -9134,7 +9134,7 @@ Worked at ESB
         * discretionary trusts usually don't go beyond age 35
         * probate
           * can take 1+ year
-          * 1.4% *of estate* in BC
+          * 1.4% _of estate_ in BC
           * avoid by:
             * beneficiary designations bypass estate
             * joint tenancy; works fine for spouse; complex otherwise
@@ -9859,7 +9859,7 @@ BC provincial election day
 
 * continued experimenting with VirtualiZarr:
   * `analysis-doug/notebooks/virtualizarr-expts`
-  * witched from working in VSCode on `salish` to PyCharm on `khawla` for better debugger experience
+  * switched from working in VSCode on `salish` to PyCharm on `khawla` for better debugger experience
   * used dev version of VirtualiZarr from GitHub
   * reading air SalishSeaCast netCDF4 file working
     * file path must be a string - I think that's a bug
@@ -10369,7 +10369,7 @@ Worked at ESB.
 
 * 1st run performance analysis
   * run finished in 12h59m35s, ~3.75 times longer than 3h37m40s for nowcast-dev on 21dec23
-  * expected difference is 710 *826* 39 *2 / 398* 898 * 40 = ~3.2
+  * expected difference is `710 * 826 * 39 * 2 / 398 * 898 * 40 = ~3.2`
 
 
 ##### Miscellaneous
@@ -10551,7 +10551,7 @@ Exercise stress test & 5-day Holter monitor hook-up at UBC Cardiology Lab
   <!-- markdownlint-disable MD013 -->
 * restarted server again at ~16:00 and it was memory-swamped again by 16:51
   * all requests since restart were from 206.12.127.34 that resolves to
-    lcg-ce4.sfu.computecanada.ca (maybe Blue Carbon Canada ??),
+    lcg-ce4.sfu.computecanada.ca
   * another restart at ~17:15
 
 
@@ -10704,11 +10704,11 @@ Dropped off 5-day Holter monitor at UBC Cardiology Lab
 
 ##### erddap-datasets
 
-* confirmed that 202111 month-avg [biol|chem|grid]_T files have a mixture of time units:
+* confirmed that 202111 month-avg `[biol|chem|grid]_T` files have a mixture of time units:
   * `hours since 2002-01-01T00:30:00`
   * `hours since 2007-01-01T00:30:00`
   * `days since 2007-01-01T12:00:00`
-  * [grax|prod]_T have consistent`days since 2007-01-01T12:00:00`
+  * `[grax|prod]_T` have consistent `days since 2007-01-01T12:00:00`
 
 
 ##### Reshapr
@@ -10947,7 +10947,7 @@ Cardiac rehab program case manager intake appointment
 ##### ERDDAP
 
 * excessive number of requests (>12,834) from 206.12.127.34 that resolves to
-  lcg-ce4.sfu.computecanada.ca (maybe Blue Carbon Canada ??) was causing website downtime and
+  lcg-ce4.sfu.computecanada.ca was causing website downtime and
   slow `skookum`; blocked address at ~21:00 to avoid automation problems overnight
 
 
@@ -11240,7 +11240,7 @@ Worked at ESB
 
 ##### erddap-datasets
 
-* continued adding 202111 month-average datasets
+* finished adding 202111 month-average datasets
   * branch: 202111-month-avg-fields
   * PR#23 - squash-merged
   * fixed time units issue in `SalishSeaCast_1m_biol_T_20150501_20150531.nc`
@@ -11283,7 +11283,99 @@ Worked at ESB
 
 ##### Atlantis
 
-* reviewed the latest version of Raish's paper and emailed her my comments
+* reviewed the latest version of Raisha's paper and emailed her my comments
+
+
+
+#### Wed 20-Nov-2024
+
+##### erddap-datasets
+
+* used flag files to reload V19-05 month-avg datasets to make removal of `testOutOfDate`
+* committed index page updates re: V21-11 datasets:
+  * branch: v21-11-index-page
+  * PR#25 - squash-merged
+
+
+##### ERDDAP
+
+* unblocked 206.12.127.34 that resolves to lcg-ce4.sfu.computecanada.ca at ~14:00
+
+
+##### rpn-to-gemlam
+
+* docs maintenance
+  * branch: docs-maint
+  * PR#
+  * renamed `readthedocs.yml` to `.readthedocs.yaml`
+  * updated `.readthedocs.yaml` to use ubuntu-24.04 and mambaforge-23.11
+  * dropped Sphinx `source_suffix` and `language` config items
+  * pinned versions on Sphinx & its optional deps
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    - sphinx==8.1.3
+    - sphinx-rtd-theme==3.0.0
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * fixed redirected & broken links in docs
+* archived project on GitHub
+
+
+##### 2x resolution SalishSeaCast
+
+* discussed next steps of bathymetry processing w/ Susan
+  * `tools/bathymetry/Process202108Bathymetry.ipynb`
+  * `analysis-susan/notebooks/bathymetry/lookat201702_201803d_andrivers.ipynb`
+  * `analysis-susan/notebooks/bathymetry/lookat201702_201803d_middle.ipynb`
+  * `analysis-susan/notebooks/bathymetry/lookat201702_201803d-upper.ipynb`
+* started creating `tools/bathymetry/Process20405Bathymetry.ipynb`
+  * realized that `analysis-doug/notebooks/2xrez-202111/bathymetry.ipynb` doesn't write base ]
+    bathymetry to a file 😦
+
+
+
+#### Thu 21-Nov-2024
+
+##### ERDDAP
+
+* analyzed traffic since yesterday's restart at ~14:00:
+  * as of ~09:00 there have been 67 polling requests from 206.12.172.106 for csv of today's
+    u-velocity at z=5.5, y=266:364, x=198:308
+    * San Juan Islands and Boundary passage
+    * every 15 minutes, started at 16:15
+  * as of ~09:28 there have been 2624 requests, 1862 of which were `griddap` requests, 963 of those
+    have been for `dods` format (an OPeNDAP binary format: https://dods.ndbc.noaa.gov), the majority
+    of those are from 15.156.111.79 (an AWS IP - bot maybe?)
+  * 340 requests for `griddap` that aren't for `dods|dds|das` as of ~10:05; that includes my
+    investigations and `skookum` for figures
+  * after today's nowcast-green fields were published at ~10:50 the 206.12.172.106 requests changed
+    to u & v fields for the same spatial slice and 30 minute time slices for the whole day
+
+
+##### ECget
+
+* confirmed that ECget is still used to collect Fraser River water quality buoy obs via a cron job
+  on `skookum`
+* subscribed #ssc-repos channel to 43ravens/ECget on GitHub
+* squash-merged old dependabot PRs to re-engage dependabot:
+  * update requests to 2.31.0
+  * update pygments to 2.15.0
+  * dependabot updated its PRs and generated new ones:
+  * update tornado to 6.4.1
+  * update requests to 2.32.2
+  * update jinja2 to 3.1.4
+* dev env on `khawla` is Python 3.7
+  * many failing tests
+  * docs fail on readthedocs due to no `.readthedocs.yaml`
+* deployment env on `skookum` is Python 3.7.1
+* project needs a lot of love before it is ready for Sphinx update docs maintenance
+
+
+##### 2x resolution SalishSeaCast
+
+* refreshed my memory in the base bathymetry calculation notebook
+
+
 
 
 
@@ -11300,6 +11392,7 @@ Worked at ESB
 
 
 Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present to group.
+
 * fortran.fortls.directories
 
 
@@ -11328,9 +11421,9 @@ TODO:
   * tools - done 14nov24 in PR#106
   * AtlantisCmd - done 18nov24 in PR#48
   * MoaceanParcels - done 19nov24 in PR#52 - consider archiving repo due to bit-rot
+  * rpn-to-gemlam - done 20nov24 in PR#21 - archived project
 
-  * rpn-to-gemlam
-  * ECget
+  * ECget - needs some love first
 
 
 * TODO:
@@ -11355,9 +11448,10 @@ TODO:
     * moad_tools
     * Reshapr
     * erddap-datasets
-    * MoaceanParcels
   * no workflows:
     * analysis-doug
+    * tools/SalishSeaTools
+    * ECget
 
 
 TODO:
@@ -11421,13 +11515,10 @@ TODO:
   * SalishSeaTools
   * cookiecutter-MOAD-pypkg
   * ECget
-  * MoaceanParcels
   * AtlantisCmd
   * SOG
   * SOG-Bloomcast-Ensemble
-  * SalishSeaTools
-  * rpn-to-gemlam
-  * Marlin
+  * Marlin - extract from tools and archive
 
 
 
@@ -11475,11 +11566,9 @@ Repos that use readthedocs:
 * active:
   * AtlantisCmd
   * ECget
-  * MoaceanParcels
   * NEMO-Cmd
   * NEMO_Nowcast
   * Reshapr
-  * rpn-to-gemlam
   * SalishSeaCmd
   * SalishSeaCast/docs
   * tools
@@ -11490,5 +11579,7 @@ Repos that use readthedocs:
 * archived:
   * Make-MIDOSS-Forcing
   * midoss-docs
+  * MoaceanParcels
   * MOHID-Cmd
+  * rpn-to-gemlam
   * WWatch3-Cmd
