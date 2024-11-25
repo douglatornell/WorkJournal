@@ -11133,7 +11133,8 @@ Worked at ESB
 
 ##### Resilient-C
 
-* downloaded new TLS certs from Entrust to `khawla`
+* downloaded `CertificateBundle1.pem` files for 3 domains and stored them on `khawla` as
+  `43ravens/projects/sealinkd/x.509-certs/2022/{domain}-chained.pem`
 
 
 
@@ -11385,6 +11386,19 @@ Worked at ESB
 * learned of `graham` downtime from 9dec to 3jan
   * emailed Venkat to ask which cluster he recommends that we move to
   * he recommended `beluga` or `narval`; started looking at config and polcies on both
+* Squash-merged dependabot PR to update tornado to 6.4.2 re: CVE-2024-52804 re: HTTP cookie parding
+  DoS vulnerability:
+  * MOAD/docs
+  * SalishSeaCast/docs
+  * MoaceanParcels
+  * SalishSeaTools
+  * moad_tools
+  * SalishSeaNowcast
+  * Reshapr
+  * SOG-Bloomcast-Ensemble
+  * SOG-Bloomcast
+  * erddap-datasets
+  * ECget
 
 
 ##### SalishSeaCmd
@@ -11402,8 +11416,92 @@ Worked at ESB
 * accidentally deleted 25feb23 run results because I forgot that they were symlinked
 * re-ran in a successful test of `salishsea run` that launches `bash SalishSeaNEMO.sh`
   and finishes without waiting for the subprocess to finish
+  * run was successful
 
 
+
+#### Sat 23-Nov-2024
+
+##### sss150
+
+* cleaned clutter of up `namelist.time` and YAML files
+* started re-run of 26feb23; it blew up almost the same as previous try
+
+
+##### SalishSeaCmd
+
+* Finished changing job submit command on `salish` to `bash` re: issue #78
+  * branch: salish-bash-submit
+  * PR#80 - squash-merged
+
+* TODO:
+  * add redirection to combine & gather commands
+
+
+##### SalishSeaCast
+
+* `download_weather 00 1km` and `12 1km` timed out
+
+
+#### Sun 24-Nov-2024
+
+##### Resilient-C
+
+* rsync-ed cfg, csr, key & chained.pem files to `resilient-c-vm:resilient-c-certs/2024/`
+* copied `{domain}.pem` and `{domain}.key` files into directories in `/etc/nginx/ssl/{domain}/`
+* restarted nginx
+* ran SSL server tests on https://entrust.ssllabs.com/analyze.html; all graded A
+* upgraded OS packages
+
+
+##### NEMO_Nowcast
+
+* added pre-commit to project
+  * branch: add-pre-commit
+  * PR#60 - squash-merged
+* Modernized packaging:
+  * branch: modernize-pkg
+  * PR#61
+  * moved environment YAML files and `requirements.txt` into `envs/` subdirectory
+  * moved package metadata from `setup.cfg` to `pyproject.toml`
+  * moved coverage config from `.coveragerc` to `pyproject.toml`
+  * drop `setup.py` and `.coveragerc`
+  * change from setuptools to hatchling for build backend
+  * move version identifier to ``__about__.py``
+  * change to use ``importlib.metadata.version()``
+  * update copyright year range to end with "present"
+  * add release process section to dev docs
+  * updated pkgs & versions in recent dev env
+
+  * changed badges layout in README & dev docs to table
+
+
+##### SalishSeaCast
+
+* `download_weather 00 1km` and `12 1km` timed out
+  * due to both directory structure changes on `dd.alpha`, and missing files there
+
+
+
+
+
+
+
+
+
+##### SalishSeaCmd
+
+* Finished changing job submit command on `salish` to `bash` re: issue #78
+  * branch: salish-bash-submit
+  * PR#80 - squash-merged
+
+* TODO:
+  * add redirection to combine & gather commands
+
+
+
+* add pre-commit:
+  * SOG-Bloomcast-Ensemble
 
 
 
@@ -11499,6 +11597,24 @@ TODO:
 
 
 
+TODO:
+
+* modernize packaging:
+  * Reshapr - done 30oct23 in PR#101
+  * moad_tools - done 18dec23 in PR#48
+  * salishsea-site - done 22apr24 in PR#78
+  * NEMO_Nowcast - started 24nov24 in PR#61
+
+  * AtlantisCmd
+  * SalishSeaTools
+  * cookiecutter-MOAD-pypkg
+  * ECget
+  * SOG-Bloomcast-Ensemble
+  * SOG
+  * Marlin - extract from tools and archive
+
+
+
 * Python 3.12:
   * successful workflow test with 3.12:
     * AtlantisCmd
@@ -11529,23 +11645,6 @@ TODO:
 TODO:
 
 * fix straight line gaps in wwatch3 forecast plots (forecast2 are okay)
-
-
-
-TODO:
-
-* modernize packaging:
-  * Reshapr - done 30oct23 in PR#101
-  * moad_tools - done 18dec23 in PR#48
-  * salishsea-site - done 22apr24 in PR#78
-  * NEMO_Nowcast
-  * SalishSeaTools
-  * cookiecutter-MOAD-pypkg
-  * ECget
-  * AtlantisCmd
-  * SOG
-  * SOG-Bloomcast-Ensemble
-  * Marlin - extract from tools and archive
 
 
 
