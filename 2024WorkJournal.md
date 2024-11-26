@@ -11386,7 +11386,7 @@ Worked at ESB
 * learned of `graham` downtime from 9dec to 3jan
   * emailed Venkat to ask which cluster he recommends that we move to
   * he recommended `beluga` or `narval`; started looking at config and polcies on both
-* Squash-merged dependabot PR to update tornado to 6.4.2 re: CVE-2024-52804 re: HTTP cookie parding
+* Squash-merged dependabot PR to update tornado to 6.4.2 re: CVE-2024-52804 re: HTTP cookie parsing
   DoS vulnerability:
   * MOAD/docs
   * SalishSeaCast/docs
@@ -11459,7 +11459,7 @@ Worked at ESB
 * added pre-commit to project
   * branch: add-pre-commit
   * PR#60 - squash-merged
-* Modernized packaging:
+* Started modernizing packaging:
   * branch: modernize-pkg
   * PR#61
   * moved environment YAML files and `requirements.txt` into `envs/` subdirectory
@@ -11483,20 +11483,52 @@ Worked at ESB
 
 
 
+### Week 48
 
+#### Mon 25-Nov-2024
 
+##### Miscellaneous
 
-
+* Squash-merged dependabot PRs to update codecov-action to 5.0.7 re: bug fixes:
+  * SalishSeaNowcast
+  * gha-workflows
+* Squash-merged dependabot PR to update setup-micromamba to 2.0.2 re: bug fixes:
+  * gha-workflows
+  * salishsea-site
+* researched https://github.com/mpiannucci/gribberish; a Rust GRIB 2 reader with Python wrapper and
+  xarray integration
 
 
 ##### SalishSeaCmd
 
-* Finished changing job submit command on `salish` to `bash` re: issue #78
-  * branch: salish-bash-submit
-  * PR#80 - squash-merged
+* Added redirection to combine, deflate & gather commands on `salish`; missed in PR#80
+  * branch: addmore-salish-redirects
+  * PR#81
 
-* TODO:
-  * add redirection to combine & gather commands
+
+##### NEMO_Nowcast
+
+* Continued modernizing packaging:
+  * branch: modernize-pkg
+  * PR#61
+  * changed badges layout in README & dev docs to table
+
+
+##### MOAD/docs
+
+* updated `computecanada.ca` domain to `alliancecan.ca`
+
+
+##### `narval` benchmark
+
+* followed `graham` setup docs to get set up on `narval`
+  * cloned repos in to `$HOME/MEOPAR/` rather than `$PROJECT/MEOPAR/`; 2.6G
+* `module --force purge; module load StdEnv/2020`
+* copied `X64_GRAHAM` arch files to create `X64_NARVAL` files in both `XIOS-ARCH` and `NEMO-3.6-code`
+* built XIOS-2
+* built SalishSeaCast NEMO config
+* built REBUILD_NEMO
+* $HOME storage up to 3.1G
 
 
 
