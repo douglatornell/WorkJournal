@@ -11479,7 +11479,7 @@ Worked at ESB
 ##### SalishSeaCast
 
 * `download_weather 00 1km` and `12 1km` timed out
-  * due to both directory structure changes on `dd.alpha`, and missing files there
+  * due to directory structure changes on `dd.alpha`
 
 
 
@@ -11529,6 +11529,37 @@ Worked at ESB
 * built SalishSeaCast NEMO config
 * built REBUILD_NEMO
 * $HOME storage up to 3.1G
+
+
+##### SalishSeaCast
+
+* `download_weather 00 1km` and `12 1km` timed out
+
+
+
+#### Tue 26-Nov-2024
+
+##### Miscellaneous
+
+* got abbandoned processes on `hake` cleaned up
+* answered questions from Matt re: memory/connection problems on `hake`;
+  sent him to `char`
+* explored file sizes to copy V21-11 `grid_T` files to desktop drive for
+  BlueCarbon folks
+  * 1d are 26M each so `26 * 365.25 * 18 / 1024 = 167 G`
+  * 1h are 669M each so 4.3 T
+* EOAS colloquium: life in deep crust water
+
+
+##### SalishSeaCmd
+
+* Started adding support for `narval`
+  * branch: add-narval-hpc
+  * PR#82
+  * also did some `monkeypatch` and `caplog` refactoring to replace `mock.patch`
+  * ready for testing on `narval`
+
+
 
 
 
