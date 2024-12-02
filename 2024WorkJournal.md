@@ -8585,7 +8585,7 @@ Recovery at home
 
 ##### XIOS & NEMO
 
-* running `SalishSeaCast_Blue` in `gdb` shows same growing memory issue; interupt stops in `malloc.c`
+* running `SalishSeaCast_Blue` in `gdb` shows same growing memory issue; interrupt stops in `malloc.c`
   before first executable line
   * same for `xios_server.exe`
 * tried `MY_GYRE`
@@ -9206,7 +9206,7 @@ Follow-up appt w/ Dr. Roston
 
 ##### XIOS & NEMO
 
-* cleaned up tracking and exclusion of build artefacts in XIOS r2660 branch and pushed it to GitHub
+* cleaned up tracking and exclusion of build artifacts in XIOS r2660 branch and pushed it to GitHub
   as PR#3
 
 
@@ -9277,7 +9277,7 @@ Worked at ESB
 
 * Started work on generating atmospheric forcing weights file:
   * refs:
-    * Mon 13-Mar-2023 notes in 2023WrokJournal.rst
+    * Mon 13-Mar-2023 notes in 2023WorkJournal.rst
     * https://salishsea-meopar-docs.readthedocs.io/en/latest/code-notes/salishsea-nemo/nemo-forcing/atmospheric.html#creating-new-weights-files
   * updated the build of `get_weight_nemo`:
     <!-- markdownlint-disable MD013 -->
@@ -9659,7 +9659,7 @@ Prepared turkey dinner with Susan.
 
 ##### SalishSeaCast
 
-* ERDDAP and Resilient-C were ofline for ~15 minutes at ~07:30
+* ERDDAP and Resilient-C were offline for ~15 minutes at ~07:30
 * `watch_ww3 forecast2` failed at ~04:02 maybe due to connection failure?
   * confirmed on `arbutus` that run finished successfully
   * didn't download because preliminary wave forecast is of little interest
@@ -10017,7 +10017,7 @@ Worked at home then at ESB
 
 * hacked up `iodef.xml` and `file_def.xml`
 * fixed time steps per day in `namelist.time`
-* copied 24feb23 restart file from Michael into `/data/dlatornell/MEOPAR/results/sss150/24feb23/`
+* copied 24feb23 restart file from Michael into `/data/dlatorne/MEOPAR/results/sss150/24feb23/`
 * tweaked `sss150_example.yaml`
 * `salishsea run --no-submit --debug sss150_example.yaml /data/dlatorne/MEOPAR/results/sss150/25feb23-1st-try`
   * successfully created `/data/dlatorne/MEOPAR/runs/1st-try_2024-10-24T133625.667734-0700/`
@@ -10200,7 +10200,7 @@ Worked at ESB.
 * listened to GitHub Universe day 1 keynote
   * all copilot AI all the time
 * Attended AAPS AGM on Zoom. Unusual due to member motion concerning AAPS advocacy
-  to end UBC's complicity in human rights violations (re: Isreal).
+  to end UBC's complicity in human rights violations (re: Israel).
 
 ##### SalishSeaCast
 
@@ -10530,7 +10530,7 @@ Exercise stress test & 5-day Holter monitor hook-up at UBC Cardiology Lab
   * killed `watch_NEMO_agrif`
   * killed run on `orcinus`
   * deleted tmp run dir & results dir
-  * ran `upload_forcing nowcat+`
+  * ran `upload_forcing nowcast+`
   * ran `make_forcing_links nowcast-agrif`
   * `run_NEMO_agrif` failed due to connection time out
     * re-ran
@@ -10708,7 +10708,7 @@ Dropped off 5-day Holter monitor at UBC Cardiology Lab
   * `hours since 2002-01-01T00:30:00`
   * `hours since 2007-01-01T00:30:00`
   * `days since 2007-01-01T12:00:00`
-  * `[grax|prod]_T` have consistent `days since 2007-01-01T12:00:00`
+  * `[graz|prod]_T` have consistent `days since 2007-01-01T12:00:00`
 
 
 ##### Reshapr
@@ -10844,7 +10844,7 @@ Bus to Wite Rock & back to celebrate Susan's bday with JRA
     - sphinx-rtd-theme==3.0.0
     ```
     <!-- markdownlint-enable MD013 -->
-  * added `pandoc` to dependencies because phinx build said that I needed to
+  * added `pandoc` to dependencies because Sphinx build said that I needed to
   * dropped Sphinx source_suffix config
   * fixed redirected links in docs
   * flagged broken DFO link to Susan and she came up with an alternative; fixed
@@ -11220,7 +11220,7 @@ Worked at ESB
 
 ##### SalishSeaNowcast
 
-* updated HRDPS sarracennia config re: 27nov24 directory structure change on dd.weather.gc.ca server
+* updated HRDPS sarracenia config re: 27nov24 directory structure change on dd.weather.gc.ca server
   * branch: update-sarracenia
   * PR#305
   * added `*.WXO-DD.model_hrdps.continental.2.5km.#` subtopic
@@ -11385,7 +11385,7 @@ Worked at ESB
 * MOAD group mtg - see whiteboard
 * learned of `graham` downtime from 9dec to 3jan
   * emailed Venkat to ask which cluster he recommends that we move to
-  * he recommended `beluga` or `narval`; started looking at config and polcies on both
+  * he recommended `beluga` or `narval`; started looking at config and policies on both
 * Squash-merged dependabot PR to update tornado to 6.4.2 re: CVE-2024-52804 re: HTTP cookie parsing
   DoS vulnerability:
   * MOAD/docs
@@ -11473,8 +11473,6 @@ Worked at ESB
   * add release process section to dev docs
   * updated pkgs & versions in recent dev env
 
-  * changed badges layout in README & dev docs to table
-
 
 ##### SalishSeaCast
 
@@ -11502,7 +11500,7 @@ Worked at ESB
 ##### SalishSeaCmd
 
 * Added redirection to combine, deflate & gather commands on `salish`; missed in PR#80
-  * branch: addmore-salish-redirects
+  * branch: add-more-salish-redirects
   * PR#81
 
 
@@ -11533,15 +11531,22 @@ Worked at ESB
 
 ##### SalishSeaCast
 
-* `download_weather 00 1km` and `12 1km` timed out
+* `download_weather 00 1km` and `12 1km` timed out due to changed directory structure on `dd.alpha`
 
 
 
 #### Tue 26-Nov-2024
 
+##### SalishSeaCast
+
+* no Fraser River turbidity due to gap in obs scraped from web page
+* `download_weather 00 1km` and `12 1km` timed out due to changed directory structure on `dd.alpha`
+  dispute email from Sandrine saying that there would be no changes there
+
+
 ##### Miscellaneous
 
-* got abbandoned processes on `hake` cleaned up
+* got abandoned processes on `hake` cleaned up
 * answered questions from Matt re: memory/connection problems on `hake`;
   sent him to `char`
 * explored file sizes to copy V21-11 `grid_T` files to desktop drive for
@@ -11561,6 +11566,111 @@ Worked at ESB
 
 
 
+#### Wed 27-Nov-2024
+
+##### SalishSeaCast
+
+* no Fraser River turbidity due to gap in obs scraped from web page
+* `download_weather 00 1km` and `12 1km` timed out due to changed directory structure on `dd.alpha`
+
+
+##### Miscellaneous
+
+* messaged Camryn on Slack about getting Ariane to build after `salish` upgrade
+
+
+##### `narval` benchmark
+
+* created `$PROJECT/SalishSea/forcing/` tree and rsync-ed `28feb23` and `0[12]mar23` files from
+  `graham`
+  * tried to use Globus and it was useless because it wouldn't load large directories
+* created `$SCRATCH/MEOPAR/runs/` and `$SCRATCH/MEOPAR/results/` and rsync-ed `28feb23` restart
+  files from `graham`
+* used `add-narval-hpc` branch of SalishSeaCmd
+* 6x14 run on 62/64 cores on 1 node success in 1:33:19; > 20min faster than `graham` Apr23 benchmark
+  * avg 61.5 nemo cores used
+* 9x22 run on 125/128 cores on 2 nodes success in 1:26:42 ~30min **slower** than `graham` Apr23 benchmark
+  * avg 120.4 nemo cores used
+* 11x32 run on 189/192 cores on 3 nodes success in 0:46:56 ~24min **slower** than `graham` Apr23 benchmark
+  * avg 186.8 nemo cores used
+* 19x26 run on 254/256 cores on 4 nodes success in 0:53:18 ~37min **slower** than `graham` Apr23 benchmark
+  * avg 244.7 nemo cores used
+
+
+##### SalishSeaCmd
+
+* Continued adding support for `narval`
+  * branch: add-narval-hpc
+  * PR#82
+  * tested on `narval` and fixed bugs
+
+
+##### NEMO_Nowcast
+
+* Finished modernizing packaging:
+  * branch: modernize-pkg
+  * PR#61 - squash-merged
+* Started migration to Python 3.13
+  * branch: py313
+  * PR#62
+* released v24.1
+
+
+
+#### Thu 28-Nov-2024
+
+##### `narval` benchmark
+
+* 16x40 run on 319/320 cores on 5 nodes success in 1:11:41 ~65min **slower** than `graham` Apr23 benchmark
+  * portal reports 304.9 avg cores used; maybe nemo processes waiting for xios?
+
+
+##### Miscellaneous
+
+* helped Camryn try to debug why her ariane build is failing
+* Phys Ocgy seminar: Paul Myers
+
+
+##### SalishSeaCast
+
+* fixed time variable issue in 15-18aug14 1d nowcast-green files that Tall reported on 15nov
+
+
+
+#### Sat 30-Nov-2024
+
+##### moad-tools
+
+* Finished fixing FutureWarnings re: issue#69
+  * branch:
+  * PR#76 - squash-merged
+  * tested branch in SalishSeaNowcast environment with `make_plots wwatch3 forecast publish --debug`
+* Fixed `random_oil_spills` test that were failing due to dtype mismatch:
+  * branch: fix-test-dtypes
+  * PR#77 - squash-merged
+
+
+##### SalishSeaNowcast
+
+* fixed typo in comment in `make_plots` module
+
+
+
+## December
+
+<!-- markdownlint-disable MD001 -->
+#### Sun 1-Dec-2024
+<!-- markdownlint-enable MD001 -->
+
+##### AtlantisCmd
+
+* modernized packaging:
+  * branch: modernize-pkg
+  * PR#49
+* released v24.1
+
+
+
 
 
 * add pre-commit:
@@ -11568,12 +11678,8 @@ Worked at ESB
 
 
 
-* pre-commit.ci PR revealed failing test and pandas date parser warnings
-  * moad_tools
-
-
 * pip=24.2 has started to complain about -e installs for packages w/o `pyproject.toml`
-  * NEMO_Nowcast
+  * NEMO_Nowcast - fixed 27nov24 in PR#61
   * SalishSeaTools
   * FVCOM-Cmd
   * OPPTools
@@ -11627,11 +11733,11 @@ TODO:
     * NEMO-Cmd - migrated on 27oct24 in PR#92
     * SalishSeaCmd - migrated on 27oct24 in PR#77
     * SalishSeaCast/docs - migrated on 11nov24 in PR#57
+    * NEMO_Nowcast - migrated on 27nov24 in PR#62
   * failed workflow test with 3.13:
     * SalishSeaNowcast
   * not yet tested
     * AtlantisCmd
-    * NEMO_Nowcast
     * salishsea-site
     * moad_tools
     * Reshapr
@@ -11666,9 +11772,9 @@ TODO:
   * Reshapr - done 30oct23 in PR#101
   * moad_tools - done 18dec23 in PR#48
   * salishsea-site - done 22apr24 in PR#78
-  * NEMO_Nowcast - started 24nov24 in PR#61
+  * NEMO_Nowcast - done 27nov24 in PR#61
+  * AtlantisCmd - done 1dec24 in PR#49
 
-  * AtlantisCmd
   * SalishSeaTools
   * cookiecutter-MOAD-pypkg
   * ECget
