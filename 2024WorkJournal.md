@@ -11671,6 +11671,38 @@ Worked at ESB
 
 
 
+### Week 49
+
+#### Mon 2-Dec-2024
+
+First cardiac rehab session at VGH.
+
+##### Miscellaneous
+
+* Squash-merged dependabot PR to update setup-micromamba to 2.0.2 re: bug fixes:
+  * rwhite/numeric_2024
+  * erddap-datasets
+  * SalishSeaNowcast
+
+
+##### AtlantisCmd
+
+* moved coverage config from `.coveragerc` to `pyproject.toml`
+  * triggered
+    `INTERNALERROR> coverage.exceptions.DataError: Can't combine statement coverage data with branch data`
+    on GitHub
+  * reproduced locally
+* Fixed URLs in docs badges; they were pointing at NEMO_Nowcast docs 🙁
+
+
+#### 2x resolution SalishSeaCast
+
+* added writing base bathymetry for 202405 to `analysis-doug/notebooks/2xrez-202111/bathymetry.ipynb`
+* started calculating 202405 double resolution bathymetry and wrote base file
+
+
+
+
 
 
 * add pre-commit:
