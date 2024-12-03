@@ -11702,6 +11702,16 @@ First cardiac rehab session at VGH.
 
 
 
+#### Tue 3-Dec-2024
+
+##### SalishSeaCast
+
+* preliminary forecast runs didn't happen
+* nowcast runs didn't launch
+  * nothing happened after `grib_to_netcdf` finished
+
+
+
 
 
 
