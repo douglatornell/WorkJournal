@@ -11637,6 +11637,41 @@ Worked at ESB
 
 
 
+#### Fri 29-Nov-2024
+
+##### Miscellaneous
+
+* helped Camryn get her ariane build on `salish` working
+* MOAD mtg; see whiteboard
+
+
+##### 2x resolution SalishSeaCast
+
+* Continued work in the base bathymetry calculation notebook:
+  * rsync-ed bathymetry survey product directory trees from
+    `ocenn:/home/mdunphy//MEOPAR/WORK/Bathy-201702/` to
+    `kudu:/media/doug/warehouse/MEOPAR/bathy_surveys/`
+  * deleted cached `.npz` files copied above
+  * ran notebook on `kudu`
+    * gave up because it was too slow
+
+
+##### sss150
+
+* discussed 26feb23 run failure w/ Camryn
+  * Howe Sound is freshening at the end of 25feb
+  * decided to run 9h of 26feb23 to get more output prior to failure at ~10.2h
+
+
+##### moad_tools
+
+* started work on FutureWarnings re: issue #69
+  * branch: update-read_csv
+  * PR#76
+* there are also test failures in `test_random_oil_spills.py`
+
+
+
 #### Sat 30-Nov-2024
 
 ##### moad-tools
