@@ -11739,15 +11739,75 @@ First cardiac rehab session at VGH.
 
 #### Tue 3-Dec-2024
 
+Worked at ESB.
+
 ##### SalishSeaCast
 
 * preliminary forecast runs didn't happen
 * nowcast runs didn't launch
   * nothing happened after `grib_to_netcdf` finished
+  * asked Henryk to check health of `/results/` arrays
+    * he says it's okay, but he restarted NFS just in case
+* many processes/workers are stalled in `D` state (uninterruptible sleep):
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    rsync -t /ocean/dlatorne/oxygen-sep18.tar \
+      robot.graham:/nearline/rrg-allen/SalishSea/oxygen
+    /bin/rm -rf /results/nowcast-sys/figures/surface_currents/forecast/11nov24 \
+      /results/nowcast-sys/figures/surface_currents/forecast2/10nov24
+    get_onc_ctd SEVIP
+    grib_to_netcdf forecast2
+    make_ssh_files forecast2 --run-date 2024-12-03
+    download_live_ocean
+    grib_to_netcdf nowcast+
+    make_ssh_files nowcast --run-date 2024-12-03
+    ```
+    <!-- markdownlint-enable MD013 -->
+* waited for `collect_weather 2.5km 18` and `crop_gribs 18` to finish, then killed
+  as many processes as I could: no resolution
+* asked Henryk to reboot `skookum`
+* recovery started at ~15:50:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  collect_weather 00 2.5km
+  crop_gribs 00 2024-12-04
+  download_weather 00 2.5km 2024-12-03 --debug
+  crop_gribs 00 2024-12-03 --debug
+
+  download_weather 06 2.5km 2024-12-03
+  crop_gribs 06 2024-12-03
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+
+##### sss150
+
+* added `precip` and `runoffs` to `file_def.xml` to output in `sss150_1h_*_grid_T.nc`
+  * started run for 25feb23
+* added notes to #sss150 channel for Camryn to get her able to run sss150
+
+
+##### `beluga` benchmark
+
+* followed `graham` setup docs to get set up on `beluga`
+  * cloned repos in to `$HOME/MEOPAR/` rather than `$PROJECT/MEOPAR/`
+* `module --force purge; module load StdEnv/2020`
+* made `X64_BELUGA` arch files to match `X64_GRAHAM` files in both `XIOS-ARCH` and `NEMO-3.6-code`
+* built XIOS-2
+* built SalishSeaCast NEMO config
+* built REBUILD_NEMO
+* $HOME storage is 3.1G
+
+* created `$PROJECT/SalishSea/forcing/` tree and rsync-ed `28feb23` and `0[12]mar23` files from
+  `graham`
+* created `$SCRATCH/MEOPAR/runs/` and `$SCRATCH/MEOPAR/results/` and rsync-ed `28feb23` restart
+  files from `graham`
+* confirmed `beluga` support correctness in SalishSeaCmd
+* 6x14 run
 
 
 
-
+* figure out why attrs is a dependency for NEMO-Cmd
 
 
 * add pre-commit:
