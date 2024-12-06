@@ -11733,7 +11733,8 @@ First cardiac rehab session at VGH.
 #### 2x resolution SalishSeaCast
 
 * added writing base bathymetry for 202405 to `analysis-doug/notebooks/2xrez-202111/bathymetry.ipynb`
-* started calculating 202405 double resolution bathymetry and wrote base file
+* started calculating 202405 double resolution bathymetry
+  * there is worrying stippling in Puget Sound
 
 
 
@@ -11773,9 +11774,19 @@ Worked at ESB.
   crop_gribs 00 2024-12-04
   download_weather 00 2.5km 2024-12-03 --debug
   crop_gribs 00 2024-12-03 --debug
-
-  download_weather 06 2.5km 2024-12-03
+  # hacked download_weather to allow it to store files in existing directory so crop_gribs can be
+  # started first
   crop_gribs 06 2024-12-03
+  download_weather 06 2.5km 2024-12-03
+  # make_v202111_runoff_file failed due to format string type error, but upload_forcing persisted 01dec24 file
+  # NEMO forecast2 launched
+  # make_plots wwatch3 forecast2 publish failed due to datetime type issue
+  crop_gribs 12 2024-12-03
+  download_weather 12 2.5km 2024-12-03
+  # make_v202111_runoff_file failed due to format string type error, but upload_forcing persisted 01dec24 file
+  crop_gribs 18 2024-12-03
+  download_weather 18 2.5km 2024-12-03
+  # unhacked download_weather
   ```
   <!-- markdownlint-enable MD013 -->
 
@@ -11806,8 +11817,129 @@ Worked at ESB.
 * 6x14 run
 
 
+##### ERDDAP
+
+Messages from ERDDAP complaining about
+"java.io.IOException: User limit of inotify watches reached"
+
+* limits got reset during the skookum reboot, so adjust them with:
+
+  ```bash
+  sudo sysctl fs.inotify.max_user_watches=131072
+  sudo sysctl fs.inotify.max_user_instances=2048
+  sudo sysctl -p
+  ```
+
+
+
+#### Wed 4-Dec-2024
+
+##### SalishSeaCast
+
+* datamart directory structure change happened
+  * `collect_weather 12 2.5km` got nothing
+    * warning and error in log at 07:18:53 re: server closing connection and EOF protocol violation
+    * restarted sarracenia client at ~08:50
+  * no hydrometric file updates after 06:02
+    * warning and error in log at 06:26:46 re: bad SSL length and EOF protocol violation
+    * restarted sarracenia client at ~08:50
+    * files updated on website at 09:02, but sarracenia client got nothing
+* work-around started at 09:26:
+  * river discharges are okay because ECCC river values were collected at 02:04
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    pkill -f collect_weather
+    pkill -f crop_gribs
+    crop_gribs 12
+    download_weather 12 2.5km
+    collect_weather 18 2.5km
+    crop_gribs 18
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * nowcast-blue started at ~09:43
+* hacked `supervisord.ini` on `skookum` to change `sarracenia` clients to use
+  `hpfx.collab.science.gc.ca` server
+  * hydrometric files updated at ~10:05 🎉
+  * hrdps 18Z files were collected ~30min later than recently typical
+
+
+##### `beluga` benchmark
+
+* continued setup and benchmark runs:
+  * $HOME storage is 3.4G
+  * $HOME file system is much slower than on `narval`
+  * changed group of `$PROJECT/SalishSea/` to `def-allen`
+  * created `$PROJECT/SalishSea/forcing/` tree and rsync-ed `28feb23` and `0[12]mar23` files from
+    `graham`
+  * created `$SCRATCH/MEOPAR/runs/` and `$SCRATCH/MEOPAR/results/` and rsync-ed `28feb23` restart
+    files from `graham`
+  * confirmed `beluga` support correctness in SalishSeaCmd
+  * 3x14 run on 38+1/40 cores on 1 node failed due to segfault
+    * executables have horrible mixture of StdEnv/2020 and StdEnv/2023 libraries
+    * did `module --force purge; module load StdEnv/2020` and rebuilt all
+  * dropped VCS recoding from YAML file for faster run setup
+    * NEMO-3.6-code and XIOS-2 still get checked 😴
+  * 3x14 run on 38+1/40 cores on 1 node failed twice due to missing forcing files
+
+
+##### 2x resolution SalishSeaCast
+
+* continued calculating 202405 double resolution bathymetry
+  * decided to ignore Puget Sound stippling for Now
+  * closed Burrard Inlet; noticed stippling on Lulu Island mud flats
+
+
+
+#### Thu 5-Dec-2024
+
+##### SalishSeaCast
+
+* HRDPS and hydrometric obs downloads via sarracenia worked as expected after yesterday's transition
+  pain
+* LiveOcean extraction was delayed
+  * `download_live_ocean` timed out at 11:01
+  * re-ran at 11:23; success at 11:49
+
+
+##### `beluga` benchmark
+
+* continued benchmark runs:
+  * 3x14 run on 38+1/40 cores on 1 node
+  * 5x10 run on 38+1/40 cores on 1 node
+  * 7x16 run on 79+1/40 cores on 2 nodes
+  * 10x20 run on 119+1/40 cores on 1 node
+  * 11x26 run on 158+1/40 cores on 4 nodes
+  * 13x27 run on 198+1/40 cores on 5 nodes
+  * 14x32 run on 234+1/40 cores on 6 nodes
+  * 16x34 run on 276+1/40 cores on 7 nodes
+  * 17x36 run on 316+1/40 cores on 8 nodes
+  * 18x40 run on 353+1/40 cores on 9 nodes
+  * 19x39 run on 359+1/40 cores on 9 nodes
+  * 10x27 run on 154+1/40 cores on 4 nodes
+  * 12x23 run on 156+1/40 cores on 4 nodes
+  * 11x26 run on 158+1/40 cores on 4 nodes - consistency check
+  * 7x17 run on 79+1/40 cores on 2 nodes - square sub-domains
+  * 11x34 run on 199+1/40 cores on 5 nodes - nearly square sub-domains
+  * 15x30 run on 234+1/40 cores on 6 nodes - Susan's choice
+  * 19x29 run on 279+1/40 cores on 7 nodes - Susan's choice
+
+
+##### SalishSeaNowcast
+
+* finished HRDPS & hydrometric obs sarracenia config updates re: 4dec24 directory structure change
+  on dd.weather.gc.ca server
+  * branch: update-sarracenia
+  * PR#305
+  * changed sarracenia clients to use hpfx server after dd.weather didn't work well on 4dec24
+
+
+
 
 * figure out why attrs is a dependency for NEMO-Cmd
+
+
+* add --backfill option download_weather to allow over-write of existing destination dir
+  * issue #309
 
 
 * add pre-commit:
