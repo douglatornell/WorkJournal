@@ -11934,8 +11934,28 @@ Messages from ERDDAP complaining about
 
 
 
+#### Fri 6-Dec-2024
 
-* figure out why attrs is a dependency for NEMO-Cmd
+Worked at ESB.
+
+##### `beluga` benchmark
+
+* continued benchmark runs:
+  * 19x34 run on 317+1/40 cores on 8 nodes - nearly square sub-domains
+
+
+##### moad_tools
+
+* cleaned up uses of `:kdb:` role in docs re: issue #46
+* dropped unused `pre-commit-hook.sh` file
+* test my idea to make little used packages optional dependencies:
+  * packages used only by modules in the `midoss` namespace:
+    * geopandas
+    * pytables
+    * rasterio
+    * shapeley
+
+
 
 
 * add --backfill option download_weather to allow over-write of existing destination dir
