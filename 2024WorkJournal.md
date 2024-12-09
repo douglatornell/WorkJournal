@@ -11957,6 +11957,142 @@ Worked at ESB.
 
 
 
+#### Sat 7-Dec-2024
+
+##### Minecraft
+
+* stopped server
+* did lizzy-smelt backup
+* updated OS packages and auto-removed outdated packages
+* rebooted
+* set up 1.21.4 server
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  mkdir ~/Games/MinecraftFabric1.21.4Server
+  cd ~/Games/MinecraftFabric1.21.4Server
+  curl -OJ https://meta.fabricmc.net/v2/versions/loader/1.21.4/0.16.9/1.0.1/server/jar
+  pushd ~/Games/MinecraftFabric1.21.3Server
+  cp banned-* eula.txt ops.json whitelist.json start.sh ../MinecraftFabric1.21.4Server/
+  popd
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * edited `start.sh` to:
+  <!-- markdownlint-disable MD013 -->
+    ```bash
+    #!/usr/bin/env bash
+    java -Xmx2G -jar fabric-server-mc.1.21.4-loader.0.16.9-launcher.1.0.1.jar nogui
+    ```
+  <!-- markdownlint-enable MD013 -->
+* launched and stopped server to create instance directories and files
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  ./start.sh
+    ...
+  /stop
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * edited `server.properties` to sync with 1.21 settings
+    * left `view-distance` at the default value of 10 instead of reducing it to 5
+  * installed mods, and rsync-ed `1-20-1-25jul23` world tree
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  cd ~/Games/MinecraftFabric1.21.4Server/mods/
+  curl -LO https://github.com/CaffeineMC/lithium-fabric/releases/download/mc1.21.4-0.14.4/lithium-fabric-0.14.4+mc1.21.4-api.jar
+  cd ~/Games/MinecraftFabric1.21.4Server
+  rsync -av ../MinecraftFabric1.21.3Server/1-20-1-25jul23 ./
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * downloaded and unzipped on `khawla` VanillaTweaks double shulker shells v1.3.10 datapacks
+    * rsync-ed it to `Games/MinecraftFabric1.21.4Server/1-20-1-25jul23/datapacks/` and removed v1.3.9
+  * launched server in `tmux`
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  tmux new -n minecraft-server
+  ./start.sh
+  ```
+  <!-- markdownlint-enable MD013 -->
+* set up 1.21.4 client instance in MultiMC
+  * created instance
+  * installed fabric 0.16.9
+  * downloaded and installed loader mods:
+    * sodium-fabric-0.6.3+mc1.21.4.jar
+    * lithium-fabric-0.14.3+mc1.21.4.jar
+    * malilib-fabric-1.21.4-0.23.0-sakura.1.jar
+    * minihud-fabric-1.21.4-0.34.0-sakura.1.jar
+    * tweakeroo-fabric-1.21.4-0.23.0-sakura.1.jar
+  * selected Java: `/usr/lib/jvm/java-21-openjdk-amd64/bin/java`
+  * started and stopped client instance to populate `config/`
+  * copied `minihud.json` and `tweakeroo.json` from 1.21.3 instance `config/`
+  * Fresh Animations isn't available for 1.21.4 yet, though `Entity [Model|Texture] Features` are
+  * reused Vanilla Tweaks resource packs downloaded that I downloaded on 16nov:
+    * iron bars fix
+    * lower shield
+    * redstone devices:
+      * StickyPistonSides
+      * DirectionalHoppers
+      * DirectionalDispensersDroppers
+      * DirectionalObservers
+      * GroovyLevers
+      * RedstoneWireFix
+  * added server: `SADA on lizzy` at 10.0.0.81
+* started game and adjusted UI:
+  * FOV: 80
+  * Video:
+    * Brightness: Bright
+    * GUI Scale: 2x
+    * Weather: Fancy
+    * Leaves: Fancy
+  * enabled resource packs
+  * Music & Sound:
+    * Music: 50%
+    * Show Subtitles: on
+    * Directional Audio: on
+  * Optional Telemetry Data
+  * F3-h to enable advanced tooltips
+  * used `/gamerule` to increase spawn chunks radius from 3 to 4 to keep iron farm loaded
+
+
+
+#### Sun 8-Dec-2024
+
+##### ERDDAP
+
+* restarted server to resolved exhausted inotify warnings
+
+
+##### Miscellaneous
+
+* uploaded 2012 forcing files to `beluga` for Tall
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  yyyy=2012; rsync -tv /results/forcing/atmospheric/GEM2.5/gemlam/gemlam_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/atmospheric/GEM2.5/gemlam/
+  yyyy=2012; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
+  yyyy=2012; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
+  yyyy=2012; rsync -tv /results/forcing/NEP36/NEP_v202209_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/NEP36/
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+
+##### sss150
+
+* 25feb23 precip & runoffs run finished at ~18:00 on 6dec24, about 78 hours after it started!!!
+
+
+##### SalishSeaCast
+
+* successfully tested Python 3.13 env creation using segregated packages branch of `moad_tools`
+* disabled uploads to `graham` due to its downtime until 3jan
+  * branch: graham-offline
+  * PR#311
+  * deployed to `skookum` at ~15:50
+
+
+
+
 
 * add --backfill option download_weather to allow over-write of existing destination dir
   * issue #309
@@ -12023,7 +12159,7 @@ TODO:
     * SalishSeaCmd - migrated on 27oct24 in PR#77
     * SalishSeaCast/docs - migrated on 11nov24 in PR#57
     * NEMO_Nowcast - migrated on 27nov24 in PR#62
-  * failed workflow test with 3.13:
+  * successfully env creation with separated pkgs branch of `moad_tools`:
     * SalishSeaNowcast
   * not yet tested
     * AtlantisCmd
