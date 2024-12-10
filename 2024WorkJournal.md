@@ -12082,13 +12082,108 @@ Worked at ESB.
 * 25feb23 precip & runoffs run finished at ~18:00 on 6dec24, about 78 hours after it started!!!
 
 
-##### SalishSeaCast
+##### SalishSeaNowcast
 
 * successfully tested Python 3.13 env creation using segregated packages branch of `moad_tools`
 * disabled uploads to `graham` due to its downtime until 3jan
   * branch: graham-offline
   * PR#311
-  * deployed to `skookum` at ~15:50
+  * deployed to `skookum` at ~14:50
+
+
+
+### Week 50
+
+#### Mon 9-Dec-2024
+
+##### Miscellaneous
+
+* Squash-merged dependabot PRs to update codecov-action to 5.1.1 re: bug fixes:
+  * SalishSeaNowcast
+  * gha-workflows
+
+
+##### SalishSeaNowcast
+
+* disabled `archive_tarball` worker for hindcast due to `graham` downtime until 3jan
+  * branch: graham-offline
+  * PR#311
+  * deployed to `skookum` at ~11:15
+
+
+##### SalishSeaCast
+
+* backfilled `R202108Dailies_y2024m12d02.nc` runoff forcing file:
+  * deleted symlink to `R202108Dailies_y2024m12d01.nc`
+  * ran `make_v202111_runoff_file --data-date 2024-12-02 --debug` on `skookum`
+    * failed:
+      <!-- markdownlint-disable MD013 -->
+      ```python-traceback
+      Traceback (most recent call last):
+        File "/SalishSeaCast/NEMO_Nowcast/nemo_nowcast/worker.py", line 391, in _do_work
+          checklist = self.worker_func(
+                      ^^^^^^^^^^^^^^^^^
+        File "/SalishSeaCast/SalishSeaNowcast/nowcast/workers/make_v202111_runoff_file.py",
+        line 172, in make_v202111_runoff_file
+          flows = _calc_watershed_flows(obs_date, config)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/SalishSeaCast/SalishSeaNowcast/nowcast/workers/make_v202111_runoff_file.py",
+        line 208, in _calc_watershed_flows
+          f"{watershed_name} watershed flow: {flows[watershed_name]:.3f} m3 s-1"
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      TypeError: unsupported format string passed to Series.__format__
+      ```
+      <!-- markdownlint-disable MD013 -->
+    * Susan successfully ran the day in her notebook implementation
+    * my debugging in PyCharm revealed that the root cause is duplicated 2dec24 lines in
+      `Englishman_flow` file; `Fraser_flow` is similarly affected
+  * copied Susan's result into place
+
+
+##### moad_tools
+
+* continued work on segregating midoss-specific packages
+* branch: separate-midoss-deps
+* PR#79
+* added installation of `midoss` deps to `pip install` in dev & rtd environments for explicit
+  clarity of intention in those envs
+
+
+
+#### Tue 10-Dec-2024
+
+##### SalishSeaCast
+
+* `crop_gribs 12` timed out due to 1 unprocessed file that it processed on exit
+  * start of nowcast-blue run was delayed by ~2h
+
+
+##### Miscellaneous
+
+* Checked status of scheduled GHA workflows:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  mamba activate gha-workflows
+  python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+
+##### moad_tools
+
+* continued work on segregating midoss-specific packages
+* branch: separate-midoss-deps
+* PR#79
+
+* added `ImportError` stanza to `midoss` modules to tell users to work in `moad-tools-midoss` env
+  if they want to use them; 2 variants for exception handling:
+  * test `sys.argv` to detect module use via CLI
+    * print message about `moad-tools-midoss` env and `SystemExit(2)`
+  * raise `ImportError` with message about `moad-tools-midoss` env for module use via `import`
+  * added tests for `ImportError` handling with `pytest.skipif()` decorators
+  * added `environment-test-no-midoss.yaml` env description and `pytest-no-midoss` GHA workflow
+* webinar "Intro to the Alliance Cloud" with Michael Tang (UBC):
+  *
 
 
 
