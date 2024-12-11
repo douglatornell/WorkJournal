@@ -12069,7 +12069,9 @@ Worked at ESB.
     beluga:projects/def-allen/SalishSea/forcing/atmospheric/GEM2.5/gemlam/
   yyyy=2012; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
-  yyyy=2012; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}*.nc \
+  yyyy=2012; rsync -tv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/
+  yyyy=2012; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}_.nc \
     beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
   yyyy=2012; rsync -tv /results/forcing/NEP36/NEP_v202209_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/NEP36/
@@ -12152,6 +12154,8 @@ Worked at ESB.
 
 #### Tue 10-Dec-2024
 
+Worked at ESB after Alliance webinar
+
 ##### SalishSeaCast
 
 * `crop_gribs 12` timed out due to 1 unprocessed file that it processed on exit
@@ -12167,6 +12171,35 @@ Worked at ESB.
   python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
   ```
   <!-- markdownlint-enable MD013 -->
+* webinar "Intro to the Alliance Cloud" with Michael Tang (UBC)
+* reviewed Raihsa's code in #moad-python-notes for downloading xls files from
+  DFO web page
+* configured Git commit signing with ssh key managed by 1Password on `kudu`
+  * followed directions from signing key in 1Password app
+
+
+##### SalishSeaNowcast
+
+* disabled `archive_tarball` worker for hindcast due to `graham` downtime until 3jan
+  * branch: graham-offline
+  * PR#311
+  * realized that I forgot to pull on `skookum` before I restarted the manager
+    yesterday
+  * deployed to `skookum` (for real) at ~13:00
+
+
+##### tools
+
+* started repo refactoring
+  * bumped `SalishSeaTools` version to 24.1.dev0
+  * added dependabot config to monitor GHA actions versions
+  * set up GHA workflow for CodeQL scanning
+  * added Breaking Changes section to docs; PR#109 to test workflows, etc.
+  * created v24.1 milestone on GitHub and assigned all open issues to it
+  * removed SalishSeaCmd docs, pkg stub, and associated files; PR#110
+    * TODO: triage issues with SalishSeaCmd into pkg repo and close them in `tools`
+
+
 
 
 ##### moad_tools
@@ -12182,8 +12215,6 @@ Worked at ESB.
   * raise `ImportError` with message about `moad-tools-midoss` env for module use via `import`
   * added tests for `ImportError` handling with `pytest.skipif()` decorators
   * added `environment-test-no-midoss.yaml` env description and `pytest-no-midoss` GHA workflow
-* webinar "Intro to the Alliance Cloud" with Michael Tang (UBC):
-  *
 
 
 
