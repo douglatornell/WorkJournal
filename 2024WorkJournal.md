@@ -12197,9 +12197,61 @@ Worked at ESB after Alliance webinar
   * added Breaking Changes section to docs; PR#109 to test workflows, etc.
   * created v24.1 milestone on GitHub and assigned all open issues to it
   * removed SalishSeaCmd docs, pkg stub, and associated files; PR#110
-    * TODO: triage issues with SalishSeaCmd into pkg repo and close them in `tools`
 
 
+
+#### Wed 11-Dec-2024
+
+Reid Brothers did annual boiler inspection and service.
+
+
+##### 2x resolution SalishSeaCast
+
+* continued calculating 202405 double resolution bathymetry
+  * spit bathymetry notebook into one for SalishSeaCast resolution and one for 2xrez
+  * closed False Creek and Pitt River
+  * replaced Fraser River upstream of Port Mann bridge with southward proxy
+
+
+##### sss150
+
+* Helped Camryn with her new 25feb24 run:
+  * how to inspect runs during and after
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast* publish` fails with TypeError in wave height plots
+* `download_weather 1km [00|12]` worked for the first time since 22nov; no explanation
+
+
+##### tools
+
+* continued repo refactoring
+  * triaged issues with SalishSeaCmd label:
+    * most closed as won't fix because they were outdated
+    * one transferred to SalishSeaCmd project
+
+
+
+#### Thu 12-Dec-2024
+
+##### SalishSeaCast
+
+* `download_live_ocean` timed out at 11:15
+  * re-ran; success at 12:38
+
+
+##### sss150
+
+* consulted with Camryn on her zero runoff run
+
+
+##### 2x resolution SalishSeaCast
+
+* continued calculating 202405 double resolution bathymetry
+  * reviewed base bathymetry choice I made with Susan
+  * widened Fraser River proxy to 2 grid cells in the x-direction
 
 
 ##### moad_tools
@@ -12216,6 +12268,26 @@ Worked at ESB after Alliance webinar
   * added tests for `ImportError` handling with `pytest.skipif()` decorators
   * added `environment-test-no-midoss.yaml` env description and `pytest-no-midoss` GHA workflow
 
+
+##### Miscellaneous
+
+* updated `khawla` to PyCharm 2024.3.1
+* uploaded 2013 forcing files to `beluga` for Tall
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  yyyy=2013; rsync -tv /results/forcing/atmospheric/GEM2.5/gemlam/gemlam_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/atmospheric/GEM2.5/gemlam/
+  yyyy=2013; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
+  yyyy=2013; rsync -tv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/
+  yyyy=2013; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}_.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
+    
+  yyyy=2013; rsync -tv /results/forcing/NEP36/NEP_v202209_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/NEP36/
+  ```
+  <!-- markdownlint-enable MD013 -->
 
 
 
