@@ -12283,13 +12283,42 @@ Reid Brothers did annual boiler inspection and service.
     beluga:projects/def-allen/SalishSea/forcing/rivers/
   yyyy=2013; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}_.nc \
     beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
-    
-  yyyy=2013; rsync -tv /results/forcing/NEP36/NEP_v202209_y${yyyy}*.nc \
-    beluga:projects/def-allen/SalishSea/forcing/NEP36/
   ```
   <!-- markdownlint-enable MD013 -->
+  * 2013 LiveOcean files were already uploaded
 
 
+
+#### Fri 13-Dec-2024
+
+Worked at ESB.
+
+##### SalishSeaCast
+
+* `download_live_ocean` timed out at 11:09
+  * re-ran; success at 12:25
+* `crop_gribs 18` timed out due to 1 unprocessed file that it processed on exit
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* updated `kudu` PyCharm to 2024.3.1
+
+
+##### tools
+
+* continued repo refactoring
+  * removed SalishSeaNowcast docs, pkg stub, and associated files; PR#111
+  * deleted old branches on `kudu` and GitHub
+
+
+
+* tools repo TODO:
+  * update library_code section in docs or move it to MOAD docs
+
+
+* create mesh mask for sss150
 
 
 * add --backfill option download_weather to allow over-write of existing destination dir
