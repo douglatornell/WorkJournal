@@ -12257,16 +12257,15 @@ Reid Brothers did annual boiler inspection and service.
 ##### moad_tools
 
 * continued work on segregating midoss-specific packages
-* branch: separate-midoss-deps
-* PR#79
-
-* added `ImportError` stanza to `midoss` modules to tell users to work in `moad-tools-midoss` env
-  if they want to use them; 2 variants for exception handling:
-  * test `sys.argv` to detect module use via CLI
-    * print message about `moad-tools-midoss` env and `SystemExit(2)`
-  * raise `ImportError` with message about `moad-tools-midoss` env for module use via `import`
-  * added tests for `ImportError` handling with `pytest.skipif()` decorators
-  * added `environment-test-no-midoss.yaml` env description and `pytest-no-midoss` GHA workflow
+  * branch: separate-midoss-deps
+  * PR#79
+  * added `ImportError` stanza to `midoss` modules to tell users to work in `moad-tools-midoss` env
+    if they want to use them; 2 variants for exception handling:
+    * test `sys.argv` to detect module use via CLI
+      * print message about `moad-tools-midoss` env and `SystemExit(2)`
+    * raise `ImportError` with message about `moad-tools-midoss` env for module use via `import`
+    * added tests for `ImportError` handling with `pytest.skipif()` decorators
+    * added `environment-test-no-midoss.yaml` env description and `pytest-no-midoss` GHA workflow
 
 
 ##### Miscellaneous
@@ -12311,6 +12310,40 @@ Worked at ESB.
 * continued repo refactoring
   * removed SalishSeaNowcast docs, pkg stub, and associated files; PR#111
   * deleted old branches on `kudu` and GitHub
+
+
+
+#### Sat 14-Dec-2024
+
+##### SalishSeaCast
+
+* `crop_gribs 12` timed out due to 1 unprocessed file that it processed on exit
+  * start of nowcast-blue run was delayed by ~2h
+
+
+
+#### Sun 15-Dec-2024
+
+##### moad_tools
+
+* finished work on segregating midoss-specific packages
+  * branch: separate-midoss-deps
+  * PR#79
+  * finished tests wrangling
+  * improved docs with CLI tools sections
+  * added `environment-test-no-midoss.yaml` env description and `pytest-no-midoss` GHA workflow
+* updated to Python 3.13
+  * PR#80
+* released version 25.1
+* added details to pkg release prep docs re: section headings in GitHub release notes
+  * PR#81
+
+
+##### SalishSeaNowcast
+
+* dropped midoss-specific pkgs as dependencies re: moad_tools PR#79
+  * PR#313
+
 
 
 
@@ -12386,12 +12419,12 @@ TODO:
     * SalishSeaCmd - migrated on 27oct24 in PR#77
     * SalishSeaCast/docs - migrated on 11nov24 in PR#57
     * NEMO_Nowcast - migrated on 27nov24 in PR#62
+    * moad_tools - migrated on 15dec24 in PR#80
   * successfully env creation with separated pkgs branch of `moad_tools`:
     * SalishSeaNowcast
   * not yet tested
     * AtlantisCmd
     * salishsea-site
-    * moad_tools
     * Reshapr
     * erddap-datasets
   * no workflows:
