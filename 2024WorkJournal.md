@@ -11329,6 +11329,10 @@ Worked at ESB
   * `analysis-susan/notebooks/bathymetry/lookat201702_201803d_andrivers.ipynb`
   * `analysis-susan/notebooks/bathymetry/lookat201702_201803d_middle.ipynb`
   * `analysis-susan/notebooks/bathymetry/lookat201702_201803d-upper.ipynb`
+
+
+##### 202405 Bathymetry
+
 * started creating `tools/bathymetry/Process20405Bathymetry.ipynb`
   * realized that `analysis-doug/notebooks/2xrez-202111/bathymetry.ipynb` doesn't write
     base bathymetry to a file 😦
@@ -12071,7 +12075,7 @@ Worked at ESB.
     beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
   yyyy=2012; rsync -tv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/rivers/
-  yyyy=2012; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}_.nc \
+  yyyy=2012; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
   yyyy=2012; rsync -tv /results/forcing/NEP36/NEP_v202209_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/NEP36/
@@ -12280,7 +12284,7 @@ Reid Brothers did annual boiler inspection and service.
     beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
   yyyy=2013; rsync -tv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/rivers/
-  yyyy=2013; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}_.nc \
+  yyyy=2013; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
   ```
   <!-- markdownlint-enable MD013 -->
@@ -12346,6 +12350,185 @@ Worked at ESB.
 
 
 
+### Week 51
+
+#### Mon 16-Dec-2024
+
+##### Miscellaneous
+
+* Squash-merged dependabot PRs to update setup-micromamba to 2.0.3 re: bug fixes:
+  * SalishSeaNowcast
+  * rwhite/numeric_2024
+  * erddap-datasets
+  * moad_tools
+  * salishsea-site
+
+
+##### SalishSeaCast
+
+* reviewed `mpi_hosts` files on `arbutus`
+  * unused VMs:
+    * `fvcom5`
+    * `fvcom6` which was changed to be `test-20-04` during `salish` post-upgrade
+      * TODO: check to see if Ubuntu 22.04 or 24.04 are now available
+    * `nowcast8`
+  * 12Apr22 VM to host mapping:
+    <!-- markdownlint-disable MD013 -->
+    ```text
+    | ID                                   | Name     | Host        |
+    | bb6a09f5-78f3-42bf-a0cf-da6611632e37 | nowcast5 | compute0610 |
+    | 518e5961-b694-49f7-90aa-4d3e7628be20 | fvcom5   | compute0611 |
+    | 395212b2-dc42-4dd4-a257-abfe9c160394 | fvcom1   | compute0611 |
+    | 8dbf1dc4-84db-4a87-8f05-40a909eac6a7 | nowcast0 | compute0614 |
+    | 25baff35-7ec5-48d2-b6dc-bc612201b494 | fvcom3   | compute0621 |
+    | 36eb6e77-603e-4401-87a3-03d056ca5f30 | nowcast6 | compute0624 |
+    | 2b9d7d7e-52df-41a8-96a8-4c71ad80aa6a | nowcast4 | compute0627 |
+    | 8cc55b6e-8b3c-44d1-94f8-efb7773da023 | fvcom2   | compute0630 |
+    | 2518d1e5-9622-4078-b59d-f04088d57cd3 | nowcast8 | compute0630 |
+    | f2599885-e284-4b46-8a4f-c72774b40e76 | nowcast1 | compute0632 |
+    | 4f49c163-a262-4bfd-a5bf-70c9098aa9c6 | fvcom6   | compute0633 |
+    | b024bb49-4c8c-42d1-8651-8f8dfb8cced2 | fvcom0   | compute0634 |
+    | 82f414be-70d7-40f2-9822-666482adfe4a | fvcom4   | compute0637 |
+    | 92cec42f-75c9-46ca-a7de-73c4d0dd88ad | nowcast7 | compute0638 |
+    | 2b86edca-2291-406d-93e3-d5ab0891db2f | nowcast2 | compute0643 |
+    | 59e1d54c-11fd-416d-8388-de7fcced32ac | nowcast9 | compute0647 |
+    | cee12872-e6b2-4e8e-8291-5b3c7f47a3b6 | nowcast3 | compute0649 |
+    ```
+    <!-- markdownlint-disable MD013 -->
+    * overlaps:
+      * `fvcom1` and `fvcom5`
+      * `fvcom2` and `nowcast8`
+      * these account for 2 of the 3 unused VMs
+
+
+##### SalishSeaNowcast
+
+* started planning removal of VHFR-FVCOM runs from automation and repository
+  * release v24.2 first so that we have a tagged point in the repo history to come back to
+    if necessary
+  * workers to drop:
+    * `make_fvcom_boundary`
+    * `make_fvcom_atmos_forcing`
+    * `make_fvcom_rivers_forcing`
+    * `upload_fvcom_atmos_forcing`
+    * `run_fvcom`
+    * `watch_fvcom`
+    * `download_fvcom_results`
+    * `make_plots fvcom research|publish`
+    * `ping_erddap fvcom...`
+  * drop FVCOM boundary files from NEMO `file_def.xml`
+
+
+
+#### Tue 17-Dec-2024
+
+##### tools
+
+* continued repo refactoring
+  * separated `Marlin/` into a new repo
+    * clone `tools` as `Marlin`
+    * clone `git-filter-repo`
+    * create an env with Python 3.13.1, activate it, and install `git-filter-repo` in it with `pip`
+    * in the `git-filter-repo` env and in the `Marlin` clone directory:
+      * `git filter-repo --subdirectory-filter Marlin/`
+    * create empty `SalishSeaCast/Marlin` repo on GitHub
+    * add remote to local clone and push to GitHub:
+      * `git remote add git@github.com:SalishSeaCast/Marlin.git`
+      * `git push -u origin main`
+    * in GitHub repo settings:
+      * disable wikis
+      * disable projects
+      * enable default limit of 5 branches and tags to be updated in a single push
+  * added LICENSE file
+  * updated README:
+    * SalishSeaCast branding
+    * deleted link to rendered docs
+    * added archived repo note
+  * archived repo
+  * deleted Marlin code and docs in PR#112
+
+
+
+#### Wed 18-Dec-2024
+
+##### 202405 Bathymetry
+
+* resumed work on `tools/bathymetry/Process20405Bathymetry.ipynb`
+  * refactored dataset loading to use `xarray`
+  * refactored `depth_check()` function to speed it up
+  * refactored north open boundary channel straightening to use `xarray` and new grid shape
+  * started refactoring west open boundary channel straightening to use `xarray` and new grid shape
+
+
+
+#### Thu 19-Dec-2024
+
+##### SalishSeaCast
+
+* `download_live_ocean` was delayed until 10:59 (just under the wire...)
+
+
+##### sss150
+
+* generated boundary files for 31mar23 to 02apr23
+  * discovered that different types of boundaries can be generated in a single command within
+    `--bdy ssh ts uv`
+* helped Camryn debug 01apr23 run
+
+
+##### Miscellaneous
+
+* uploaded 2014 forcing files to `beluga` for Tall
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  yyyy=2014; rsync -tv /results/forcing/atmospheric/GEM2.5/gemlam/gemlam_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/atmospheric/GEM2.5/gemlam/
+  # atmospheric/GEM2.5/operational/ops_y2014*.nc are already on beluga
+  yyyy=2014; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
+  yyyy=2014; rsync -tv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/
+  yyyy=2014; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
+  yyyy=2014; rsync -tv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
+  ```
+  <!-- markdownlint-enable MD013 -->
+* uploaded 2015 forcing files to `beluga` for Tall
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+    # atmospheric/GEM2.5/operational/ops_y2014*.nc are already on beluga
+  yyyy=2015; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
+  yyyy=2015; rsync -tv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/
+  yyyy=2015; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
+  yyyy=2015; rsync -tv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
+  ```
+  <!-- markdownlint-enable MD013 -->
+* advised Jose on running his bacteria tests
+
+
+
+#### Fri 20-Dec-2024
+
+##### ERDDAP
+
+* restarted process because it was using 90% of RAM and swap was at 38%
+
+
+
+
+
+##### 202405 Bathymetry
+
+* continued work on `tools/bathymetry/Process20405Bathymetry.ipynb`
+  * finished refactoring west open boundary channel straightening to use `xarray` and new grid shape
+
+
+
 
 * tools repo TODO:
   * update library_code section in docs or move it to MOAD docs
@@ -12365,9 +12548,9 @@ Worked at ESB.
 
 * pip=24.2 has started to complain about -e installs for packages w/o `pyproject.toml`
   * NEMO_Nowcast - fixed 27nov24 in PR#61
+  * FVCOM-Cmd - archived; plan to drop from SalishSeaNowcast
+  * OPPTools - fork on GitLab; plan to drop from SalishSeaNowcast
   * SalishSeaTools
-  * FVCOM-Cmd
-  * OPPTools
 
 
 Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present to group.
@@ -12424,12 +12607,16 @@ TODO:
     * SalishSeaNowcast
   * not yet tested
     * AtlantisCmd
+      * Update AtlantisCmd to drop Python 3.10 because NEMO-Cmd has dropped it;
+        GHA workflow is failing
     * salishsea-site
     * Reshapr
     * erddap-datasets
   * no workflows:
-    * analysis-doug
     * tools/SalishSeaTools
+    * SOG-Bloomcast-Ensemble
+    * SOG-Bloomcast ??
+    * analysis-doug
     * ECget
 
 
@@ -12444,12 +12631,6 @@ TODO:
   `salishsea_tools.stormtools.get_EC_observations()`; same in `tools.I_ForcingFiles.Atmos.weather.get_EC_observations()`
 
 
-TODO:
-
-* Update AtlantisCmd to drop Python 3.10 because NEMO-Cmd has dropped it;
-  GHA workflow is failing
-
-
 
 TODO:
 
@@ -12459,13 +12640,14 @@ TODO:
   * salishsea-site - done 22apr24 in PR#78
   * NEMO_Nowcast - done 27nov24 in PR#61
   * AtlantisCmd - done 1dec24 in PR#49
+  * Marlin - extract from tools and archive without modernization
 
   * SalishSeaTools
+  * SOG-Bloomcast-Ensemble
+  * SOG-Bloomcast
   * cookiecutter-MOAD-pypkg
   * ECget
-  * SOG-Bloomcast-Ensemble
   * SOG
-  * Marlin - extract from tools and archive
 
 
 
@@ -12537,8 +12719,9 @@ TODO:
     * SalishSeaCmd - done 20Dec22
     * NEMO-Cmd - done 25oct22
     * docs - done 7feb24 in PR#45
-    * SOG-Bloomcast-Ensemble - issue created
     * tools - issue created
+    * SOG-Bloomcast-Ensemble - issue created
+    * SOG-Bloomcast
 
 
 Repos that use readthedocs:
