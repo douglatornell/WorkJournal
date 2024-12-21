@@ -12519,6 +12519,20 @@ Worked at ESB.
 * restarted process because it was using 90% of RAM and swap was at 38%
 
 
+##### Miscellaneous
+
+* created list in #SalishSeaCast of downstream users of products
+  based on memory, and email contacts over the past ~2 years
+* MOAD group holiday cookie party
+* updated `kudu` PyCharm to 2024.3.1.1
+
+
+##### tools
+
+* continued repo refactoring
+  * started fixing failing testsin `test_nc_tools` module
+    * PR#113
+
 
 
 
