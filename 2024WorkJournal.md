@@ -12530,8 +12530,24 @@ Worked at ESB.
 ##### tools
 
 * continued repo refactoring
-  * started fixing failing testsin `test_nc_tools` module
+  * started fixing failing tests in `test_nc_tools` module
     * PR#113
+
+
+
+#### Sat 21-Dec-2024
+
+Goofed off
+
+
+
+#### Sun 22-Dec-2024
+
+##### tools
+
+* continued repo refactoring
+  * started fixing failing tests in `test_viz_tools` module
+    * PR#114
 
 
 
