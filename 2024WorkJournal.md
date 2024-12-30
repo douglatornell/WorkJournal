@@ -12546,16 +12546,147 @@ Goofed off
 ##### tools
 
 * continued repo refactoring
-  * started fixing failing tests in `test_viz_tools` module
+  * fixed failing tests in `test_viz_tools` module
     * PR#114
 
 
 
+### Week 52
 
-##### 202405 Bathymetry
+#### Mon 23-Dec-2024
 
-* continued work on `tools/bathymetry/Process20405Bathymetry.ipynb`
-  * finished refactoring west open boundary channel straightening to use `xarray` and new grid shape
+##### Miscellaneous
+
+* Squash-merged dependabot PRs to update codecov-action to 5.1.2 re: bug fixes:
+  * gha-workflows
+  * SalishSeaNowcast
+* Squash-merged dependabot PR to update setup-micromamba to 2.0.3 re: bug fixes:
+  * gha-workflows
+* updated `khawla` PyCharm to 2024.3.1.1
+* Squash-merged dependabot PR to update jinja2 to 3.1.5 re: CVE-2024-56201 & CVE-2024-56326 re:
+  arbitrary code execution vulnerabilities
+  * SalishSeaNowcast
+  * tools/SalishSeaTools
+  * salishsea-site
+
+
+##### SalishSeaNowcast
+
+* Update httpx and fix caplog assertions in tests
+  * PR#317
+  * Upgraded `httpx`, and `pytest-httpx` in `requirements.txt` to newer versions.
+    Adjusted caplog index assertions in test cases to align with the updated
+    logging behavior of `httpx`.
+    This issue arose due to a change in the log output of `httpx=0.28.0`. It was
+    found by the GitHub Actions pytest-with-coverage workflows when the tests were
+    run with the updated version of `httpx` in response to an unrelated dependabot
+    PR.
+* cleaned up outdated branches (all >=4 year old) on GitHub
+
+
+##### tools
+
+* continued repo refactoring
+  * fixed last failing test in `test_tidetools` module
+    * PR#115
+  * PR#116
+    * moved SalishSeaTools `environment.yaml` and `requirements.txt` files to new `envs/` sub-dir
+    * renamed `environment.yaml` to `environment-dev.yaml`
+  * PR#118
+    * added `pytest-with-coverage` GHA workflow
+
+
+
+#### Tue 24-Dec-2024
+
+##### tools
+
+* continued repo refactoring
+  * PR#119
+    * added editable install to `environment-dev.yaml`
+  * PR#120
+    * add `pytest-randomly` to dev & test envs
+
+Went to White Rock to visit JRA
+
+
+#### Wed 25-Dec-2024
+
+**Statutory Holiday** - Christmas Day
+
+##### SalishSeaCast
+
+* `upload_forcing arbutus turbidity` failed with ssh protocol banner error
+  * re-ran manually at 12:52
+  * recall that protocol banner error is due to network congestion
+
+
+
+#### Thu 26-Dec-2024
+
+**Statutory Holiday** - Boxing Day
+
+
+
+#### Fri 27-Dec-2024
+
+Goofed off
+
+
+
+#### Sat 28-Dec-2024
+
+Goofed off
+
+
+
+#### Sun 29-Dec-2024
+
+##### Miscellaneous
+
+* Squash-merged dependabot PR to update jinja2 to 3.1.5 re: CVE-2024-56201 & CVE-2024-56326 re:
+  arbitrary code execution vulnerabilities
+  * cookiecutter-djl-pypkg
+  * cookiecutter-MOAD-pypkg
+  * MOAD/docs
+  * moad_tools
+  * erddap-datasets
+  * SOG-Bloomcast-Ensemble
+  * NEMO-Cmd
+  * SalishSeaCast/docs
+  * SalishSeaCmd
+  * NEMO_Nowcast
+  * SOG
+* End of year releases:
+  * moad_tools - done
+  * Reshapr - done
+  * NEMO_Nowcast - done 27nov
+  * AtlantisCmd -  done 1dec
+
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * SalishSeaNowcast
+  * salishsea-site
+  * tools/SalishSeaTools
+
+
+##### Minecraft
+
+* downloaded from modrinth and installed Fresh Animations resource pack and supporting mods
+  * FreshAnimations_v1.9.3 - resource pack
+  * entity_model_features_fabric_1.21.4-2.4.1 - mod
+  * entity_texture_features_fabric_1.21.4-6.2.9 - mod
+
+
+##### Reshapr
+
+* added sections for release notes to dev docs; PR#146
+* released v24.1
+
+
+##### NEMO_Nowcast
+
+* added sections for release notes to dev docs; PR#64
 
 
 
@@ -12643,6 +12774,7 @@ TODO:
     * Reshapr
     * erddap-datasets
   * no workflows:
+    * gha-workflows
     * tools/SalishSeaTools
     * SOG-Bloomcast-Ensemble
     * SOG-Bloomcast ??
