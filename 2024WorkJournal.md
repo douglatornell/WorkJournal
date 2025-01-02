@@ -12658,8 +12658,8 @@ Goofed off
   * NEMO_Nowcast
   * SOG
 * End of year releases:
-  * moad_tools - done
-  * Reshapr - done
+  * moad_tools - done 29dec
+  * Reshapr - done 29dec
   * NEMO_Nowcast - done 27nov
   * AtlantisCmd -  done 1dec
 
@@ -12687,6 +12687,82 @@ Goofed off
 ##### NEMO_Nowcast
 
 * added sections for release notes to dev docs; PR#64
+
+
+
+### Week 53
+
+#### Mon 30-Dec-2024
+
+##### AtlantisCmd
+
+* fixed pytest-cov issue re: parallel tests and combining branch & statement coverage; PR#53
+* added sections for release notes to dev docs; PR#52
+
+
+##### NEMO-Cmd
+
+* added no-cover pragma to version string to avoid coverage failures on version changes; PR#95
+* improved main module docstring; PR#96
+* added sections for release notes to dev docs; PR#97
+* release v24.2
+
+
+##### SalishSeaCmd
+
+* added no-cover pragma to version string to avoid coverage failures on version changes; PR#85
+* added sections for release notes to dev docs; PR#86
+* release v24.2
+
+
+##### Miscellaneous
+
+* End of year releases:
+  * NEMO-Cmd - done 30dec
+  * SalishSeaCmd - done 30dec
+
+  * SalishSeaNowcast
+  * salishsea-site
+  * tools/SalishSeaTools
+
+
+
+#### Tue 31-Dec-2024
+
+##### SalishSeaNowcast
+
+* added no-cover pragma to version string to avoid coverage failures on version changes; PR#319
+* added sections for release notes to dev docs; PR#320
+* release v24.2
+
+
+##### Miscellaneous
+
+* End of year releases:
+  * SalishSeaNowcast
+
+  * salishsea-site
+  * tools/SalishSeaTools
+
+
+no-cover-version
+
+# pragma: no cover
+
+Exclude version string from coverage
+
+Added a pragma directive to the version string to exclude it from test coverage
+metrics. This ensures that changes to the version number do not affect code
+coverage reports.
+
+
+
+
+
+##### 202405 Bathymetry
+
+* continued work on `tools/bathymetry/Process20405Bathymetry.ipynb`
+  * finished refactoring west open boundary channel straightening to use `xarray` and new grid shape
 
 
 
