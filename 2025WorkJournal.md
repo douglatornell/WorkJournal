@@ -90,6 +90,23 @@ Goofed off
 
 
 
+### Week 2
+
+#### Mon 6-Jan-2025
+
+##### Miscellaneous
+
+* inaugural NEMO forum monthly seminar
+  * Paul Meyers
+
+
+##### erddap-Datasets
+
+* marked V19-05 u, v & w fields datasets as inactive in preparation for their removal
+* restarted ERDDAP server
+
+
+
 ##### 202405 Bathymetry
 
 * continued work on `tools/bathymetry/Process20405Bathymetry.ipynb`
