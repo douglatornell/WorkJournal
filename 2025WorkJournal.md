@@ -100,10 +100,46 @@ Goofed off
   * Paul Meyers
 
 
-##### erddap-Datasets
+##### erddap-datasets
 
-* marked V19-05 u, v & w fields datasets as inactive in preparation for their removal
+* started removal of V19-05 datasets:
+* PR#30:
+  * marked V19-05 u, v & w day-average fields datasets as inactive in preparation
+    for their removal
 * restarted ERDDAP server
+
+
+
+#### Tue 7-Jan-2025
+
+Worked at ESB while Rita was at home
+
+
+##### Miscellaneous
+
+* Squash-merged dependabot PR to update setup-micromamba to 2.0.3 re: bug fixes
+  * AtlantisCmd
+* Squash-merged dependabot PR to update codecov-action to 5.1.2 re: bug fixes
+  * AtlantisCmd
+
+
+##### erddap-datasets
+
+* continued removal of V19-05 datasets:
+  * added checklist to PR#30
+  * marked V19-05 u, v & w month-average fields datasets as inactive in preparation
+    for their removal
+* restarted ERDDAP server
+
+
+##### tools
+
+* continued repo refactoring
+  * PR#122 - modernize packaging
+    * replaced `setup.py` with `pyproject.toml`
+    * moved `coverage` config from `.coveragerc` to `pyproject.toml`
+
+
 
 
 
