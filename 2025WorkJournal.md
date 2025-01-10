@@ -218,6 +218,37 @@ Worked at ESB while Rita was at home
 
 
 
+#### Fri 10-Jan-2025
+
+Worked at ESB.
+
+##### erddap-datasets
+
+* continued removal of V19-05 datasets in PR#30:
+  * marked V19-05 physics & surface tracers day-average and month-average
+    fields datasets as inactive in preparation for their removal
+  * restarted ERDDAP server
+  * marked V17-02 depth-averaged seasonal tracer fields dataset as inactive in
+    preparation for their removal
+  * marked V17-02 bathymetry & mesh mask datasets as inactive in preparation
+    for their removal
+  * restarted ERDDAP server
+  * dropped V17-02 bathymetry mentions from summary attributes of VHFR FVCOM and
+    wwatch3 datasets because they contain their own grid information and the NEMO
+    bathymetry only plays a role in the creation of the forcing files for the other
+    models, so it's not directly relevant
+  * updated bathymetry dataset in summary attributes of rolling forecast datasets
+    amd added explanation of lack of versioning
+
+  * updated front page to remove mentions of V19-05
+  * restarted ERDDAP server
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+
+
 
 
 
