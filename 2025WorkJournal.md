@@ -114,7 +114,6 @@ Goofed off
 
 Worked at ESB while Rita was at home
 
-
 ##### Miscellaneous
 
 * Squash-merged dependabot PR to update setup-micromamba to 2.0.3 re: bug fixes
@@ -125,9 +124,11 @@ Worked at ESB while Rita was at home
 
 ##### erddap-datasets
 
-* continued removal of V19-05 datasets:
+* continued removal of V19-05 datasets in PR#30:
   * added checklist to PR#30
   * marked V19-05 u, v & w month-average fields datasets as inactive in preparation
+    for their removal
+  * marked V19-05 biology day-average and month-average fields datasets as inactive in preparation
     for their removal
 * restarted ERDDAP server
 
@@ -138,6 +139,84 @@ Worked at ESB while Rita was at home
   * PR#122 - modernize packaging
     * replaced `setup.py` with `pyproject.toml`
     * moved `coverage` config from `.coveragerc` to `pyproject.toml`
+
+
+##### SalishSeaCast
+
+* `crop_gribs 00` time out at ~22:00 with 528 files unprocessed
+* `collect_weather 00` finished ~3h late
+
+
+
+#### Wed 8-Jan-2025
+
+##### SalishSeaCast
+
+* early morning automation all ran successfully
+* ran `crop_gribs 00 --debug` to recover from last night's time-out
+  * it didn't finish before `grib_to_netcdf nowcast+` needed the files
+  * re-ran `grib_to_netcdf nowcast+` manually
+* `download_live_ocean` timed out at 10:55
+  * re-ran at 11:12 and it timed out again at 14:13
+  * persisted 7jan download via symlink
+  * ran `make_live_ocean_files` to jump start automation at ~14:18
+
+
+##### tools
+
+* continued repo refactoring
+  * PR#122 - modernize packaging
+    * removed version pin from `arrow` dependency
+    * switched to `hatch` for build system
+    * moved version identifier to `salishsea_tools/__about__.py`
+    * updated copyright year range to replace end year with `present`
+
+
+
+#### Thu 9-Jan-2025
+
+##### SalishSeaCast/docs
+
+* scheduled sphinx-linkcheck workflow failed
+  * nbviewer.org rate limiting
+
+
+##### tools
+
+* continued repo refactoring
+  * PR#122 - modernize packaging - squash-merged
+    * released v24.1
+  * PR#123 - squash-merged
+    * updated release process docs re: breaking changes file
+    * added missed release date for v24.1 to breaking changes section
+  * PR#124 - squash-merged
+    * add Python 3.13 support
+  * reviewed imports and found that the only packages that are exclusively imported in `evaltools.py`
+    are `sqlalchemy` and `erddapy`
+    * also realized that `cliff` can be dropped from env because the repo no longer includes
+    * sadfa
+  * PR#125 - squash-merged
+    * exclude version string from coverage
+
+
+##### erddap-datasets
+
+* continued removal of V19-05 datasets in PR#30:
+  * marked V19-05 biology day-average and month-average fields datasets as inactive in preparation
+    for their removal
+  * restarted ERDDAP server
+* finally no more inotify watches limit warnings 🙋
+
+
+##### SalishSeaNowcast
+
+* successfully tested Python 3.13 environment
+  * found dep pkgs that are now definitely needed by `SalishSeaTools`:
+    * `et_xmlfile`
+    * `openpyxl`
+    * `tqdm`
+
+
 
 
 
@@ -224,6 +303,7 @@ TODO:
     * SalishSeaCast/docs - migrated on 11nov24 in PR#57
     * NEMO_Nowcast - migrated on 27nov24 in PR#62
     * moad_tools - migrated on 15dec24 in PR#80
+    * tools/SalishSeaTools - migrated on 9jan25 in PR#124
   * successfully env creation with separated pkgs branch of `moad_tools`:
     * SalishSeaNowcast
   * not yet tested
@@ -235,7 +315,6 @@ TODO:
     * erddap-datasets
   * no workflows:
     * gha-workflows
-    * tools/SalishSeaTools
     * SOG-Bloomcast-Ensemble
     * SOG-Bloomcast ??
     * analysis-doug
@@ -263,8 +342,8 @@ TODO:
   * NEMO_Nowcast - done 27nov24 in PR#61
   * AtlantisCmd - done 1dec24 in PR#49
   * Marlin - extract from tools and archive without modernization
+  * SalishSeaTools - done 9jan25 in PR#122
 
-  * SalishSeaTools
   * SOG-Bloomcast-Ensemble
   * SOG-Bloomcast
   * cookiecutter-MOAD-pypkg
