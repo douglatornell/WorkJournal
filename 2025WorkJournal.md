@@ -250,6 +250,32 @@ Worked at ESB.
 
 
 
+#### Sat 11-Jan-2025
+
+Goofed off
+
+
+
+#### Sun 12-Jan-2025
+
+##### SalishSeaNowcast
+
+* finished update to Python 3.13 in PR#302
+* added dep pkgs that are now definitely needed by `SalishSeaTools` in PR#321:
+  * `et_xmlfile`
+  * `openpyxl`
+  * `tqdm`
+* updated codecov-action `file` key to `files` re: API change in PR#322
+
+
+##### SalishSeaCast
+
+* updated all repo clones on `arbutus`
+  * replaced `/nemoShare/MEOPAR/nowcast-sys/nowcast-env` with new Python 3.13.1 env
+* wait until after I can delete the `SalishSeaNowcast/graham-offline` branch to update `skookum` env
+
+
+
 
 
 
@@ -335,8 +361,7 @@ TODO:
     * NEMO_Nowcast - migrated on 27nov24 in PR#62
     * moad_tools - migrated on 15dec24 in PR#80
     * tools/SalishSeaTools - migrated on 9jan25 in PR#124
-  * successfully env creation with separated pkgs branch of `moad_tools`:
-    * SalishSeaNowcast
+    * SalishSeaNowcast - migrated on 12jan25 in PR#302
   * not yet tested
     * AtlantisCmd
       * Update AtlantisCmd to drop Python 3.10 because NEMO-Cmd has dropped it;
