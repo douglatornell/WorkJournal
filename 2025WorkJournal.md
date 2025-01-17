@@ -193,8 +193,7 @@ Worked at ESB while Rita was at home
     * add Python 3.13 support
   * reviewed imports and found that the only packages that are exclusively imported in `evaltools.py`
     are `sqlalchemy` and `erddapy`
-    * also realized that `cliff` can be dropped from env because the repo no longer includes
-    * sadfa
+    * also realized that `cliff` can be dropped from env because the repo no longer includes SalishSeaCmd
   * PR#125 - squash-merged
     * exclude version string from coverage
 
@@ -276,13 +275,133 @@ Goofed off
 
 
 
+### Week 3
 
+#### Mon 13-Jan-2025
+
+##### Miscellaneous
+
+* Squash-merged dependabot PRs to update virtualenv to 20.26.6 re: CVE-2024-53899 re: command
+  injection vulnerability
+  * cookiecutter-MOAD-pypkg
+  * gha-workflows
+  * SOG
+  * SOG-forcing
+
+
+##### gha-workflows
+
+* updated codecov-action `file` key to `files` re: API change in PR#50
+* updated repo to Python 3.13 in PR#51
+
+
+##### AtlantisCmd
+
+* updated codecov-action `file` key to `files` re: API change in PR#56
+  * docs build failed due to no `sphinx.configuration` key; readthedocs config API change
+    * see https://about.readthedocs.com/blog/2024/12/deprecate-config-files-without-sphinx-or-mkdocs-config/
+
+
+
+#### Tue 14-Jan-2025
+
+##### SalishSeaCast
+
+* noticed that Baynes Sound AGRIF results figure generation is failing due to removal of
+  `ubcSSnBathymetryV17-02` dataset from ERDDAP
+  * created issue #323
+
+
+##### SalishSeaTools
+
+* dependencies cleanup in PR#126:
+  * dropped `cliff` because NEMO-Cmd and SalishSeaCmd are long gone from the repo
+  * dropped unnecessary `ipdb` and `jupyterlab` from test env
+* cleaned up docs build env and autodoc mocks list in PR#127
+* added `sphinx` stanza to `.readthedocs.yaml` re: deprecation of automatic `conf.py` file detection
+  in PR#128
 
 
 ##### 202405 Bathymetry
 
 * continued work on `tools/bathymetry/Process20405Bathymetry.ipynb`
-  * finished refactoring west open boundary channel straightening to use `xarray` and new grid shape
+  * continued refactoring west open boundary channel straightening to use `xarray` and new grid shape
+
+
+
+#### Wed 15-Jan-2025
+
+##### SalishSeaCast
+
+* `download_live_ocean` timed out at 10:55
+  * retried at 11:12; succeeded instantly
+
+
+##### SalishSeaNowcast
+
+* added `sphinx` stanza to `.readthedocs.yaml` re: deprecation of automatic `conf.py` file detection
+  in PR#324
+* started work on updating Baynes Sound AGRIF results figure re: issue #323
+  * can't get figure to work in dev env
+
+
+
+#### Thu 16-Jan-2025
+
+
+##### SalishSeaNowcast
+
+* continued work on updating Baynes Sound AGRIF results figure re: issue #323
+  * eventually got figure to generate in an env similar with relevant pkgs at similar versions to
+    those in production; suspect that numpy>2 is the critical difference
+
+
+##### SalishSeaCast
+
+* re-ran `make_averaged_dataset day biology|chemistry|physics 2015-06-28` after Ilias reported that
+  the stored files has incorrect coordinate names; a transition to Reshapr pos-processing issue
+
+
+##### Miscellaneous
+
+* answered question from Isaak Haberman @ Hakai re: ERDDAP limits
+
+
+
+
+
+* TODO in all readthedocs projects:
+  * add `sphinx` stanza to `.readthedocs.yaml` re: config API change
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    sphinx:
+      builder: html
+      configuration: docs/conf.py
+      fail_on_warning: false
+    ```
+    branch: rtd-sphinx-config
+    ```text
+    Add explicit Sphinx configuration for readthedocs
+
+    Updated `.readthedocs.yaml` to define Sphinx builder settings, including the
+    builder type, configuration file path, and `fail_on_warning` option. This is
+    necessary due to readthedocs deprecating projects without explicit builder
+    configuration that comes into effect on 20-Jan-2025.
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * tools - done on 14Jan25 in PR#128
+  * SalishSeaNowcast - done on 15jan25 in PR#
+
+  * moad_tools
+  * SalishSeaCast/docs
+  * MOAD/docs
+  * salishsea-site
+  * NEMO-Cmd
+  * NEMO_Nowcast
+  * Reshapr
+  * SalishSeaCmd
+  * AtlantisCmd
+  * ECget
 
 
 
@@ -362,6 +481,7 @@ TODO:
     * moad_tools - migrated on 15dec24 in PR#80
     * tools/SalishSeaTools - migrated on 9jan25 in PR#124
     * SalishSeaNowcast - migrated on 12jan25 in PR#302
+    * gha-workflows - migrated on 13jan25 in PR#51
   * not yet tested
     * AtlantisCmd
       * Update AtlantisCmd to drop Python 3.10 because NEMO-Cmd has dropped it;
