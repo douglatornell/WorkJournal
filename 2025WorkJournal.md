@@ -368,33 +368,79 @@ Goofed off
 
 
 
+#### Fri 17-Jan-2025
+
+Worked at ESB.
+
+Pal Issacson joined group for 6 mo sabbatical
+
+##### Miscellaneous
+
+MOAD group mtg; see whiteboard
+
+
+##### ERDDAP
+
+1 message per day from ERDDAP complaining about
+"java.io.IOException: User limit of inotify watches reached"
+
+* realized that limit was set lower than last value before `skookum` OS was updated:
+* set new value to take effect after next ERDDAP restart:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  sudo sysctl fs.inotify.max_user_watches=196608
+  sudo sysctl -p
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+
+##### moad_tools
+
+* added `sphinx` stanza to `.readthedocs.yaml` re: deprecation of automatic `conf.py` file detection
+  in PR#84
+
+
+##### MOAD/docs
+
+* added `sphinx` stanza to `.readthedocs.yaml` re: deprecation of automatic `conf.py` file detection
+  in PR#47
+
+
+##### SalishSeaCast/docs
+
+* added `sphinx` stanza to `.readthedocs.yaml` re: deprecation of automatic `conf.py` file detection
+  in PR#60
+
+
+
 
 
 * TODO in all readthedocs projects:
   * add `sphinx` stanza to `.readthedocs.yaml` re: config API change
-    <!-- markdownlint-disable MD013 -->
-    ```yaml
-    sphinx:
-      builder: html
-      configuration: docs/conf.py
-      fail_on_warning: false
-    ```
-    branch: rtd-sphinx-config
-    ```text
-    Add explicit Sphinx configuration for readthedocs
+      branch: rtd-sphinx-config
+<!-- markdownlint-disable MD013 -->
+```yaml
+sphinx:
+    builder: html
+    configuration: docs/conf.py
+    fail_on_warning: false
+```
+```text
+Add explicit Sphinx configuration for readthedocs
 
-    Updated `.readthedocs.yaml` to define Sphinx builder settings, including the
-    builder type, configuration file path, and `fail_on_warning` option. This is
-    necessary due to readthedocs deprecating projects without explicit builder
-    configuration that comes into effect on 20-Jan-2025.
-    ```
-    <!-- markdownlint-enable MD013 -->
+Updated `.readthedocs.yaml` to define Sphinx builder settings,
+including the builder type, configuration file path,
+and `fail_on_warning` option. This is necessary due to
+readthedocs deprecating projects without explicit builder
+configuration that comes into effect on 20-Jan-2025.
+```
+<!-- markdownlint-enable MD013 -->
   * tools - done on 14Jan25 in PR#128
-  * SalishSeaNowcast - done on 15jan25 in PR#
+  * SalishSeaNowcast - done on 15jan25 in PR#324
+  * moad_tools - done on 17jan25 in PR#84
+  * MOAD/docs - done on 17jan25 in PR#47
+  * SalishSeaCast/docs - done on 17jan25 in PR#60
 
-  * moad_tools
-  * SalishSeaCast/docs
-  * MOAD/docs
   * salishsea-site
   * NEMO-Cmd
   * NEMO_Nowcast
