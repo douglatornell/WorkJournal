@@ -472,7 +472,7 @@ configuration that comes into effect on 20-Jan-2025.
   * NEMO_Nowcast - fixed 27nov24 in PR#61
   * FVCOM-Cmd - archived; plan to drop from SalishSeaNowcast
   * OPPTools - fork on GitLab; plan to drop from SalishSeaNowcast
-  * SalishSeaTools
+  * SalishSeaTools - fixed 9jan25 in PR#122
 
 
 Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present to group.
