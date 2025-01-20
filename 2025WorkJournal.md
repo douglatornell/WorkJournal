@@ -413,6 +413,58 @@ MOAD group mtg; see whiteboard
 
 
 
+#### Sat 18-Jan-2025
+
+Goofed off.
+
+
+
+#### Sun 19-Jan-2025
+
+##### salishsea-site
+
+* added `sphinx` stanza to `.readthedocs.yaml` re: deprecation of automatic `conf.py` file detection
+  in PR#104
+
+
+##### NEMO-Cmd
+
+* added `sphinx` stanza to `.readthedocs.yaml` re: deprecation of automatic `conf.py` file detection
+  in PR#98
+
+
+##### NEMO_Nowcast_
+
+* added `sphinx` stanza to `.readthedocs.yaml` re: deprecation of automatic `conf.py` file detection
+  in PR#65
+
+
+##### Reshapr
+
+* added `sphinx` stanza to `.readthedocs.yaml` re: deprecation of automatic `conf.py` file detection
+  in PR#147
+
+
+##### SalishSeaCmd
+
+* added `sphinx` stanza to `.readthedocs.yaml` re: deprecation of automatic `conf.py` file detection
+  in PR#87
+
+
+##### AtlantisCmd
+
+* added `sphinx` stanza to `.readthedocs.yaml` re: deprecation of automatic `conf.py` file detection
+  in PR#57
+
+
+##### ECget
+
+* Squash-merged dependabot PR to update jinja2 to 3.1.5 re: CVE-2024-56201 & CVE-2024-56326 re:
+  arbitrary code execution vulnerabilities
+
+
+
+
 
 
 * TODO in all readthedocs projects:
@@ -428,10 +480,9 @@ sphinx:
 ```text
 Add explicit Sphinx configuration for readthedocs
 
-Updated `.readthedocs.yaml` to define Sphinx builder settings,
-including the builder type, configuration file path,
-and `fail_on_warning` option. This is necessary due to
-readthedocs deprecating projects without explicit builder
+Updated `.readthedocs.yaml` to define Sphinx builder settings, including the
+builder type, configuration file path, and `fail_on_warning` option. This is
+necessary due to readthedocs deprecating projects without explicit builder
 configuration that comes into effect on 20-Jan-2025.
 ```
 <!-- markdownlint-enable MD013 -->
@@ -440,13 +491,13 @@ configuration that comes into effect on 20-Jan-2025.
   * moad_tools - done on 17jan25 in PR#84
   * MOAD/docs - done on 17jan25 in PR#47
   * SalishSeaCast/docs - done on 17jan25 in PR#60
+  * salishsea-site - done on 19jan25 in PR#104
+  * NEMO-Cmd - done on 19jan25 in PR#98
+  * NEMO_Nowcast - done on 19jan25 in PR#65
+  * Reshapr - done on 19jan25 in PR#147
+  * SalishSeaCmd - done on 19jan25 in PR#87
+  * AtlantisCmd - done on 19jan25 in PR#57
 
-  * salishsea-site
-  * NEMO-Cmd
-  * NEMO_Nowcast
-  * Reshapr
-  * SalishSeaCmd
-  * AtlantisCmd
   * ECget
 
 
@@ -465,14 +516,6 @@ configuration that comes into effect on 20-Jan-2025.
 
 * add pre-commit:
   * SOG-Bloomcast-Ensemble
-
-
-
-* pip=24.2 has started to complain about -e installs for packages w/o `pyproject.toml`
-  * NEMO_Nowcast - fixed 27nov24 in PR#61
-  * FVCOM-Cmd - archived; plan to drop from SalishSeaNowcast
-  * OPPTools - fork on GitLab; plan to drop from SalishSeaNowcast
-  * SalishSeaTools - fixed 9jan25 in PR#122
 
 
 Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present to group.
