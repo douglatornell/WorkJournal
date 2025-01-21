@@ -464,6 +464,41 @@ Goofed off.
 
 
 
+### Week 4
+
+#### Mon 20-Jan-2025
+
+##### Miscellaneous
+
+* Squash-merged dependabot PRs to update setup-micromamba to 2.0.4 re: dependency updates
+  * SalishSeaNowcast
+  * erddap-datasets
+  * rwhite/numeric_2024
+  * moad_tools
+  * gha-workflows
+  * AtlantisCmd
+  * salishsea-site
+
+
+##### erddap-datasets
+
+* updated `setup.xml`
+  * PR#30
+  * drop mention of removal of V19-05 datasets
+  * improve line breaks
+  * diatoms -> phytoplankton
+  * Moore-Maley out of bio & DO reference
+  * add zooplankton ref example
+    * same papers as bio & DO + Suchy, et al, 2023
+  * add Suchy, et al, 2023
+* restarted ERDDAP:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  sudo /opt/tomcat/bin/shutdown.sh
+  # confirm shutdown
+  sudo /opt/tomcat/bin/startup.sh
+  ```
+  <!-- markdownlint-disable MD013 -->
 
 
 
