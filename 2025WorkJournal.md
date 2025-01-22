@@ -502,6 +502,43 @@ Goofed off.
 
 
 
+#### Tue 21-Jan-2025
+
+Worked at ESB while Rita was at home
+
+##### SalishSeaCast
+
+* `collect_weather 12 2.5km` failed to collect any files
+  * `sarracenia` client went off the rails at 03:13 when the server unexpectedly
+    closed the connection
+  * same problem with hydrometric files client
+  * `crop_gribs 12` reported 528 unprocessed files at 09:54
+* recovery started at 11:54:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  # killed collect_weather 12 2.5km
+  supervisorctl -c $NOWCAST_CONFIG/supervisord.ini restart sr_subscribe-hrdps-continental
+  supervisorctl -c $NOWCAST_CONFIG/supervisord.ini restart sr_subscribe-hydrometric
+  collect_weather 18 2.5km
+  crop_gribs 18
+  download_weather 12 2.5km
+  crop_gribs 12 --backfill
+  ```
+  <!-- markdownlint-enable MD013 -->
+* mtg w/ Susan to discuss response to ONC re: `arbutus` migration
+
+
+##### Miscellaneous
+
+* mtg w/ Pål re: SalishSeaCast, NEMO and MOAD group
+
+
+
+
+
+
+
+
 * TODO in all readthedocs projects:
   * add `sphinx` stanza to `.readthedocs.yaml` re: config API change
       branch: rtd-sphinx-config
