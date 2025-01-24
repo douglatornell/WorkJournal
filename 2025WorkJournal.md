@@ -359,7 +359,7 @@ Goofed off
 ##### SalishSeaCast
 
 * re-ran `make_averaged_dataset day biology|chemistry|physics 2015-06-28` after Ilias reported that
-  the stored files has incorrect coordinate names; a transition to Reshapr pos-processing issue
+  the stored files has incorrect coordinate names; a transition to Reshapr post-processing issue
 
 
 ##### Miscellaneous
@@ -532,6 +532,52 @@ Worked at ESB while Rita was at home
 
 * mtg w/ Pål re: SalishSeaCast, NEMO and MOAD group
 
+
+
+#### Wed 22-Jan-2025
+
+##### Miscellaneous
+
+* in response to email from `narval` admin about a large `.pack` file in `grid` clone on `$HOME`,
+  moved `grid` clone to `$HOME/projects/def-allen/dlatorne/MEOPAR/grid/`
+  * I thought I did this after an email on 19dec24, but can find no record or evidence
+  * I recall trying unsuccessfully to purge or re-pack the repo clone, but can find no record or
+    evidence of that either
+
+
+##### SalishSeaNowcast
+
+* finished work on updating Baynes Sound AGRIF results figure re: issue #323
+  * refactored to read 17-02 bathymetry from `grid` repo clone instead of ERDDAP
+  * changed to use `engine="h5netcdf"` for dataset reads
+  * fixed surface fields contour levels calculation issue that arose with update to `numpy>=2`
+    by using `values` property to cast `xarray.DataArray` scalars to values acceptable to
+    `numpy.linspace()`
+
+
+##### SalishSeaCast
+
+* re-ran `make_averaged_dataset day biology|chemistry|physics` for 21|23|24|25|27|29jun15 after
+  Ilias reported that the stored files has incorrect coordinate names; more transition to Reshapr
+  post-processing issues
+
+
+
+#### Thu 23-Jan-2025
+
+##### Miscellaneous
+
+* replied to email from Parker about failures in code that he copied from
+  `salishsea_tools.tidetools.get_dfo_wlev()`
+  * recommended `salishsea_tools.data_tools.get_chs_tides()` as alternative
+* GitHub started showing me the new issues interface that includes issue type tags and sub-issues
+
+
+##### tools
+
+* created issue #129 to mark `salishsea_tools.tidetools.get_dfo_wlev()` as deprecated and recommend
+  `salishsea_tools.data_tools.get_chs_tides()` as alternative
+* created issue #130 to update API server URL in `salishsea_tools.data_tools.get_chs_tides()`
 
 
 
