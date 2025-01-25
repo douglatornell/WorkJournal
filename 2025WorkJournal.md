@@ -581,6 +581,70 @@ Worked at ESB while Rita was at home
 
 
 
+#### Fri 24-Jan-2025
+
+Worked at ESB.
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* helped Tall with `git push` issue on `beluga`; I suspect it's the VSCode
+  ssh extension problem with not connecting to ssh-agent
+
+
+##### SalishSeaCast
+
+* Wrote technical part of reply to Benoît at ONC re: arbutus changes
+* started figure tests in preparation for updating production env to Python 3.13
+  * inspired by `neumpy>=2` issue I found while fixing Baynes Sound figure;
+    need to test all figures
+  * `make_plots nemo nowcast research`
+    * `tracer_thalweg_and_surface_hourly`
+      * `notebooks/figures/research/TestTracerThalwegAndSurfaceHourly.ipynb`
+      * salinity & temperature
+    * `velocity_section_and_surface`
+      * `notebooks/figures/research/TestVelocitySectionAndSurface.ipynb`
+    * `research_VENUS.plot_vel_NE_gridded`
+      * no test notebook
+      * not even a figure module
+  * `make_plots nemo nowcast-green research`
+    * `time_series_plots`
+      * `notebooks/figures/research/TestTimeSeriesPlots.ipynb`
+    * `tracer_thalweg_and_surface_hourly`
+      * `notebooks/figures/research/TestTracerThalwegAndSurfaceHourly.ipynb`
+      * salinity & temperature
+      * biology variables
+      * turbidity
+  * `make_plots nemo nowcast-agrif research` - done
+  * `make_plots nemo nowcast comparison`
+    * `sandheads_winds`
+      * `notebooks/figures/comparison/TestSandHeadsWinds.ipynb`
+    * `compare_venus_ctd`
+      * `notebooks/figures/comparison/TestCompareVENUS_CTD.ipynb`
+    * `research_VENUS.plotdepavADCP` - keep?
+      * 3 nodes
+    * `research_VENUS.plottimeavADCP` - keep?
+      * 3 nodes
+    * `research_VENUS.plotADCP` - keep?
+      * 3 nodes
+  * `make_plots nemo forecast publish` and `make_plots nemo forecast2 publish`
+    * `storm_surge_alerts_thumbnail`
+      * `notebooks/figures/publish/TestStormSurgeAlertsThumbnailModule.ipynb`
+    * `storm_surge_alerts`
+      * `notebooks/figures/publish/TestStormSurgeAlertsModule.ipynb`
+    * `pt_atkinson_tide`
+      * `notebooks/figures/publish/TestPtAtkinsonTideModule.ipynb`
+    * `compare_tide_prediction_max_ssh`
+      * `notebooks/figures/publish/TestCompareTidePredictionMaxSSH.ipynb`
+      * 14 locations
+      * drop Halfmoon Bay and Squamish because obs have disappeared
+  * `make_plots wwatch3 forecast publish` and `make_plots wwatch3 forecast2 publish`
+    * `wave_height_period`
+      * `notebooks/figures/wwatch3/TestWaveHeightPeriod.ipynb`
+      * 2 locations
+
+
+
 
 
 
@@ -588,35 +652,36 @@ Worked at ESB while Rita was at home
 * TODO in all readthedocs projects:
   * add `sphinx` stanza to `.readthedocs.yaml` re: config API change
       branch: rtd-sphinx-config
-<!-- markdownlint-disable MD013 -->
-```yaml
-sphinx:
-    builder: html
-    configuration: docs/conf.py
-    fail_on_warning: false
-```
-```text
-Add explicit Sphinx configuration for readthedocs
+    <!-- markdownlint-disable MD013 -->
+    ```yaml
+    sphinx:
+        builder: html
+        configuration: docs/conf.py
+        fail_on_warning: false
+    ```
 
-Updated `.readthedocs.yaml` to define Sphinx builder settings, including the
-builder type, configuration file path, and `fail_on_warning` option. This is
-necessary due to readthedocs deprecating projects without explicit builder
-configuration that comes into effect on 20-Jan-2025.
-```
-<!-- markdownlint-enable MD013 -->
-  * tools - done on 14Jan25 in PR#128
-  * SalishSeaNowcast - done on 15jan25 in PR#324
-  * moad_tools - done on 17jan25 in PR#84
-  * MOAD/docs - done on 17jan25 in PR#47
-  * SalishSeaCast/docs - done on 17jan25 in PR#60
-  * salishsea-site - done on 19jan25 in PR#104
-  * NEMO-Cmd - done on 19jan25 in PR#98
-  * NEMO_Nowcast - done on 19jan25 in PR#65
-  * Reshapr - done on 19jan25 in PR#147
-  * SalishSeaCmd - done on 19jan25 in PR#87
-  * AtlantisCmd - done on 19jan25 in PR#57
+    ```text
+    Add explicit Sphinx configuration for readthedocs
 
-  * ECget
+    Updated `.readthedocs.yaml` to define Sphinx builder settings, including the
+    builder type, configuration file path, and `fail_on_warning` option. This is
+    necessary due to readthedocs deprecating projects without explicit builder
+    configuration that comes into effect on 20-Jan-2025.
+    ```
+    <!-- markdownlint-enable MD013 -->
+    * tools - done on 14Jan25 in PR#128
+    * SalishSeaNowcast - done on 15jan25 in PR#324
+    * moad_tools - done on 17jan25 in PR#84
+    * MOAD/docs - done on 17jan25 in PR#47
+    * SalishSeaCast/docs - done on 17jan25 in PR#60
+    * salishsea-site - done on 19jan25 in PR#104
+    * NEMO-Cmd - done on 19jan25 in PR#98
+    * NEMO_Nowcast - done on 19jan25 in PR#65
+    * Reshapr - done on 19jan25 in PR#147
+    * SalishSeaCmd - done on 19jan25 in PR#87
+    * AtlantisCmd - done on 19jan25 in PR#57
+
+    * ECget
 
 
 
