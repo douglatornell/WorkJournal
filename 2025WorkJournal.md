@@ -595,8 +595,8 @@ Worked at ESB.
 ##### SalishSeaCast
 
 * Wrote technical part of reply to Benoît at ONC re: arbutus changes
-* started figure tests in preparation for updating production env to Python 3.13
-  * inspired by `neumpy>=2` issue I found while fixing Baynes Sound figure;
+* Prepared for figure tests in preparation for updating production env to Python 3.13
+  * inspired by `numpy>=2` issue I found while fixing Baynes Sound figure;
     need to test all figures
   * `make_plots nemo nowcast research`
     * `tracer_thalweg_and_surface_hourly`
@@ -616,6 +616,84 @@ Worked at ESB.
       * biology variables
       * turbidity
   * `make_plots nemo nowcast-agrif research` - done
+  * `make_plots nemo nowcast comparison`
+    * `sandheads_winds`
+      * `notebooks/figures/comparison/TestSandHeadsWinds.ipynb`
+    * `compare_venus_ctd`
+      * `notebooks/figures/comparison/TestCompareVENUS_CTD.ipynb`
+    * `research_VENUS.plotdepavADCP` - keep?
+      * 3 nodes
+    * `research_VENUS.plottimeavADCP` - keep?
+      * 3 nodes
+    * `research_VENUS.plotADCP` - keep?
+      * 3 nodes
+  * `make_plots nemo forecast publish` and `make_plots nemo forecast2 publish`
+    * `storm_surge_alerts_thumbnail`
+      * `notebooks/figures/publish/TestStormSurgeAlertsThumbnailModule.ipynb`
+    * `storm_surge_alerts`
+      * `notebooks/figures/publish/TestStormSurgeAlertsModule.ipynb`
+    * `pt_atkinson_tide`
+      * `notebooks/figures/publish/TestPtAtkinsonTideModule.ipynb`
+    * `compare_tide_prediction_max_ssh`
+      * `notebooks/figures/publish/TestCompareTidePredictionMaxSSH.ipynb`
+      * 14 locations
+      * drop Halfmoon Bay and Squamish because obs have disappeared
+  * `make_plots wwatch3 forecast publish` and `make_plots wwatch3 forecast2 publish`
+    * `wave_height_period`
+      * `notebooks/figures/wwatch3/TestWaveHeightPeriod.ipynb`
+      * 2 locations
+* `collect_weather 18 2.5km` failed to collect any files
+  * no activity other than heartbeats in `sarracenia` logs for either HRDPS or hydrometric obs
+  * no 18Z 2.5km files on hpfx or dd
+  * 00Z 1km files but no 12Z 1km files on dd.alpha
+* mitigation started at ~17:20:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  crop_gribs 18
+  download_weather 00 1km
+  supervisorctl -c $NOWCAST_CONFIG/supervisord.ini restart sr_subscribe-hydrometric
+  collect_weather 00 2.5km 2025-01-25
+  crop_gribs 00 2025-01-25
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+
+
+#### Sat 25-Jan-2025
+
+##### SalishSeaCast
+
+* Started figure tests in preparation for updating production env to Python 3.13
+  * inspired by `numpy>=2` issue I found while fixing Baynes Sound figure;
+    need to test all figures
+  * `make_plots nemo nowcast research`
+    * `tracer_thalweg_and_surface_hourly`
+      * `notebooks/figures/research/TestTracerThalwegAndSurfaceHourly.ipynb`
+
+
+
+#### Sun 26-Jan-2025
+
+##### SalishSeaCast
+
+* Continue figure tests in preparation for updating production env to Python 3.13
+  * `make_plots nemo nowcast research`
+    * `velocity_section_and_surface`
+      * `notebooks/figures/research/TestVelocitySectionAndSurface.ipynb`
+    * `research_VENUS.plot_vel_NE_gridded`
+      * created `notebooks/figures/research/TestPlotVelNEGridded.ipynb`
+      * not a figure module
+  * `make_plots nemo nowcast-green research`
+    * `time_series_plots`
+      * `notebooks/figures/research/TestTimeSeriesPlots.ipynb`
+
+
+
+
+
+
+
+* Continue figure tests in preparation for updating production env to Python 3.13
   * `make_plots nemo nowcast comparison`
     * `sandheads_winds`
       * `notebooks/figures/comparison/TestSandHeadsWinds.ipynb`
