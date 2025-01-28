@@ -689,6 +689,30 @@ Worked at ESB.
 
 
 
+### Week 5
+
+#### Mon 27-Jan-2025
+
+##### Miscellaneous
+
+* Squash-merged dependabot PRs to update codecov-action to 5.3.1 re: dependency, docs & feature updates
+  * gha-workflows
+  * SalishSeaNowcast
+  * AtlantisCmd
+* Checked status of scheduled GHA workflows:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  conda activate gha-workflows
+  python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+
+##### 202405 Bathymetry
+
+* continued work on `tools/bathymetry/Process20405Bathymetry.ipynb`
+  * finished refactoring west open boundary channel straightening to use `xarray` and new grid shape
+
 
 
 
