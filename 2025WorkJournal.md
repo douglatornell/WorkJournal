@@ -715,7 +715,13 @@ Worked at ESB.
 
 
 
+#### Tue 28-Jan-2025
 
+Worked at ESB
+
+Migration of FASmail to M365 Outlook was completed successfully.
+
+##### SalishSeaCast
 
 * Continue figure tests in preparation for updating production env to Python 3.13
   * `make_plots nemo nowcast comparison`
@@ -723,12 +729,6 @@ Worked at ESB.
       * `notebooks/figures/comparison/TestSandHeadsWinds.ipynb`
     * `compare_venus_ctd`
       * `notebooks/figures/comparison/TestCompareVENUS_CTD.ipynb`
-    * `research_VENUS.plotdepavADCP` - keep?
-      * 3 nodes
-    * `research_VENUS.plottimeavADCP` - keep?
-      * 3 nodes
-    * `research_VENUS.plotADCP` - keep?
-      * 3 nodes
   * `make_plots nemo forecast publish` and `make_plots nemo forecast2 publish`
     * `storm_surge_alerts_thumbnail`
       * `notebooks/figures/publish/TestStormSurgeAlertsThumbnailModule.ipynb`
@@ -740,10 +740,19 @@ Worked at ESB.
       * `notebooks/figures/publish/TestCompareTidePredictionMaxSSH.ipynb`
       * 14 locations
       * drop Halfmoon Bay and Squamish because obs have disappeared
+
   * `make_plots wwatch3 forecast publish` and `make_plots wwatch3 forecast2 publish`
     * `wave_height_period`
       * `notebooks/figures/wwatch3/TestWaveHeightPeriod.ipynb`
       * 2 locations
+
+  * `make_plots nemo nowcast comparison`
+    * `research_VENUS.plotdepavADCP` - keep?
+      * 3 nodes
+    * `research_VENUS.plottimeavADCP` - keep?
+      * 3 nodes
+    * `research_VENUS.plotADCP` - keep?
+      * 3 nodes
 
 
 
