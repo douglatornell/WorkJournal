@@ -823,11 +823,19 @@ Migration of FASmail to M365 Outlook was completed successfully.
 
 
 
+#### Fri 24-Jan-2025
+
+Worked at ESB.
+
+##### Miscellaneous
+
+* Susan's IOS talk about her estuarine flux paper
+* MOAD group mtg; see whiteboard
+* triaged issues in all of our repos to assign new GitHub issue types to them
+  and closed a few that were truly stale
 
 
-
-
-
+##### SalishSeaCast
 
 * Continue figure tests in preparation for updating production env to Python 3.13 in PR#327
   * `make_plots nemo forecast publish` and `make_plots nemo forecast2 publish`
@@ -838,6 +846,15 @@ Migration of FASmail to M365 Outlook was completed successfully.
       * `notebooks/figures/wwatch3/TestWaveHeightPeriod.ipynb`
       * 2 locations
 
+
+
+
+
+
+
+
+
+* Continue figure tests in preparation for updating production env to Python 3.13 in PR#327
   * `make_plots nemo nowcast comparison`
     * `research_VENUS.plotdepavADCP` - keep?
       * 3 nodes
