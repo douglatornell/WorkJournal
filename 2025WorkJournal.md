@@ -638,6 +638,8 @@ Worked at ESB.
       * `notebooks/figures/publish/TestCompareTidePredictionMaxSSH.ipynb`
       * 14 locations
       * drop Halfmoon Bay and Squamish because obs have disappeared
+    * `surface_current_tiles`
+      * `notebooks/figures/publish/TestSurfaceCurrentTiles.ipynb`
   * `make_plots wwatch3 forecast publish` and `make_plots wwatch3 forecast2 publish`
     * `wave_height_period`
       * `notebooks/figures/wwatch3/TestWaveHeightPeriod.ipynb`
@@ -663,7 +665,7 @@ Worked at ESB.
 
 ##### SalishSeaCast
 
-* Started figure tests in preparation for updating production env to Python 3.13
+* Started figure tests in preparation for updating production env to Python 3.13 in PR#327
   * inspired by `numpy>=2` issue I found while fixing Baynes Sound figure;
     need to test all figures
   * `make_plots nemo nowcast research`
@@ -676,7 +678,7 @@ Worked at ESB.
 
 ##### SalishSeaCast
 
-* Continue figure tests in preparation for updating production env to Python 3.13
+* Continue figure tests in preparation for updating production env to Python 3.13 in PR#327
   * `make_plots nemo nowcast research`
     * `velocity_section_and_surface`
       * `notebooks/figures/research/TestVelocitySectionAndSurface.ipynb`
@@ -723,7 +725,7 @@ Migration of FASmail to M365 Outlook was completed successfully.
 
 ##### SalishSeaCast
 
-* Continue figure tests in preparation for updating production env to Python 3.13
+* Continue figure tests in preparation for updating production env to Python 3.13 in PR#327
   * `make_plots nemo nowcast comparison`
     * `sandheads_winds`
       * `notebooks/figures/comparison/TestSandHeadsWinds.ipynb`
@@ -741,6 +743,96 @@ Migration of FASmail to M365 Outlook was completed successfully.
       * 14 locations
       * drop Halfmoon Bay and Squamish because obs have disappeared
 
+
+
+#### Wed 29-Jan-2025
+
+##### Miscellaneous
+
+* SharcNet seminar: Converting Python code with NumPy to run on the GPU
+  * Pawel Pomorski, Waterloo
+  * https://helpwiki.sharcnet.ca/wiki/Online_Seminars
+  * CuPy, a library highly compatible with NumPy, which offers drop-in replacement for most NumPy
+    (and SciPy) functions
+    * needs memory management
+  * basic techniques used to convert a NumPy program to CuPy
+  * cuPyNumeric library from NVIDIA, which allows running NumPy code on the GPU with no code changes
+  * GPUs have thousands of cores; appropriate for massively parallel jobs
+  * GPUs have separate memory; performance cost due to bandwidth between CPU and GPU
+  * eliminate explicit loops
+  * example: solve 1D Poisson equation
+    * tri-diagonal matrix
+    * identity(), reshape() and matrix->vector->matrix dance to construct matrix without explicit loops
+    * 16000 x 16000 matrix:
+      * <1000 not worthwhile on GPU
+      * 89 seconds on 1 core
+      * speed up using OMP threads peters out at 8 threads (6.85 s) due to memory access competition
+  * CuPy
+    * decide what code to run on CPU, and what on GPU
+    * x_gpu = cp.asarray(x_cpu)  # move from CPU to GPU
+    * x_cpu = cp.asnumpy(x_gpu)  # move from GPU to CPU
+    * 0.265 s
+  * `nvtop` is `top` for GPUs
+    * 100% GPU usage is the beginning of efficient use; want more threads than cores
+  * cuPyNumeric
+    * no changes to numpy code
+    * install via `conda` in an `apptainer` image
+    * all code runs on GPU
+    * user `legate` as launcher
+    * lots of weedy details
+    * crashes for 32000 x 32000 test case because it exceeds GPU memory
+
+
+##### 202405 Bathymetry
+
+* paused work on `tools/bathymetry/Process20405Bathymetry.ipynb`
+  * "Check continuity and Add Missed Islands" is too opaque
+* wrote base double resolution 202405 bathymetry to `grid/bathymetry_double_202405.nc.nc`
+* started work on `tools/bathymetry/Process202405-2xrezBathymetry.ipynb`
+
+
+##### tools/SalishSeaTools
+
+* started work on issue #104 re: FutureWarning from pandas re: read_csv() date_parser arg
+  * figured out how to resolve the issue
+  * use PyCharm AI to generate unit tests for `stormtools.load_tidal_predictions()` and tuned them
+    to work
+
+
+
+#### Thu 30-Jan-2025
+
+##### tools/SalishSeaTools
+
+* continued work on issue #104 re: FutureWarning from pandas re: read_csv() date_parser arg in PR#132
+  * added test for bad date format
+  * extended stripping of leading/trailing whitespace in `load_tidal_predictions()` to all column
+    names
+  * refactored time zone conversion to eliminate FutureWarning
+  * didn't do `load_observations()` because it call `get_dfo_wlev()` that we know no longer works
+* added GHA workflow to automatically add milestone with closest due date to issues and PRs when
+  they are opened; PR#131
+  * based on https://github.com/marketplace/actions/add-milestone-by-due-date
+  * this is proof of principle; convert it to a reusable workflow
+
+
+##### SalishSeaCast
+
+* Continue figure tests in preparation for updating production env to Python 3.13 in PR#327
+  * updated modules and test notebooks after fix for FutureWarning in `salishsea_tools.stormtools`
+
+
+
+
+
+
+
+
+
+* Continue figure tests in preparation for updating production env to Python 3.13 in PR#327
+  * `make_plots nemo forecast publish` and `make_plots nemo forecast2 publish`
+    * `surface_current_tiles`
+      * `notebooks/figures/publish/TestSurfaceCurrentTiles.ipynb`
   * `make_plots wwatch3 forecast publish` and `make_plots wwatch3 forecast2 publish`
     * `wave_height_period`
       * `notebooks/figures/wwatch3/TestWaveHeightPeriod.ipynb`
