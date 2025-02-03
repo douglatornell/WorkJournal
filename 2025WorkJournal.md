@@ -823,7 +823,7 @@ Migration of FASmail to M365 Outlook was completed successfully.
 
 
 
-#### Fri 24-Jan-2025
+#### Fri 31-Jan-2025
 
 Worked at ESB.
 
@@ -848,7 +848,48 @@ Worked at ESB.
 
 
 
+## February
 
+#### Sat 1-Feb-2025
+
+##### Miscellaneous
+
+* updated `kahla` PyCharm to 2024.3.2
+
+
+##### SalishSeaCast
+
+* squash-merged PR#327 re: figure tests in preparation for updating production env to Python 3.13
+
+
+
+#### Sun 2-Feb-2025
+
+##### gha-workflows
+
+* Added reusable workflow to automatically add current milestone to new issues and PRs; PR#54
+  * based on workflow created and tested in `tools` repo PR#131
+  * changed to use latest release commit hash for `benelan/milestone-action` re: security; PR#55
+
+
+##### Miscellaneous
+
+* discussed update of `https://github.com/UBC-MOAD/AIMS-Workshop/blob/master/dynmodes/dynmodes.ipynb`
+  with Susan
+  * written in 2013; last used in 2020
+  * needs porting to Python 3
+
+
+##### tools/SalishSeaTools
+
+* updated auto-milestone action to use reusable workflow; PR#133
+
+
+##### AtlantisCmd
+
+* added auto-milestone workflow; PR#60
+* updated to Python 3.13 for dev and 3.11 to 3.13 for CI testing; PR#61
+* released v25.1
 
 
 
@@ -974,15 +1015,12 @@ TODO:
     * tools/SalishSeaTools - migrated on 9jan25 in PR#124
     * SalishSeaNowcast - migrated on 12jan25 in PR#302
     * gha-workflows - migrated on 13jan25 in PR#51
+    * AtlantisCmd - migrated on 2feb25 in PR#61
   * not yet tested
-    * AtlantisCmd
-      * Update AtlantisCmd to drop Python 3.10 because NEMO-Cmd has dropped it;
-        GHA workflow is failing
     * salishsea-site
     * Reshapr
     * erddap-datasets
   * no workflows:
-    * gha-workflows
     * SOG-Bloomcast-Ensemble
     * SOG-Bloomcast ??
     * analysis-doug
