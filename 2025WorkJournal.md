@@ -893,6 +893,162 @@ Worked at ESB.
 
 
 
+### Week 6
+
+#### Mon 3-Feb-2025
+
+##### Miscellaneous
+
+* NEMO seminar:
+  * Claire Parrott: The Role of Glacier Melt on Freshwater Dynamics in the Canadian Arctic
+    * NEMO 3.4 & CGRF
+  * Fred Dupont: Efforts towards NEMO4 and development plans for a contribution to the NEMO consortium
+    * features:
+      * most options are namelist params rather than cpp keys
+      * wetting & drying, but only for sigma coordinates
+        * Stephanie Taylor (DFO port modeling?) is working on W&D with ice
+      * adaptive implicit vertical advection: increase time setup
+      * atmospheric boundary layer
+      * sub-tiling: MPI improvement
+      * mixed precision
+    * target is 4.2.2 in production by 2027
+    * ECCC in control of NEMO-CICE interface in consortium
+    * simplified LPE in both NEMO & CICE
+    * consortium membership stuck on 1 FTE commitment since 2019
+    * NEMO consortium is -1 on non-hydrostatic
+    * both ECCC and UofA did 3.6 to 4.2.2 transition
+    * NEMO 5 changes from leapfrog to Runge-Kutta stepping
+* squash-merged PRs from `pre-commit autoupdate` that update `black` to 25.1.0:
+  * docstrings get changed to have closing `"""` on same line as the rest of the docstring
+  * NEMO_Nowcast
+  * NEMO-Cmd
+  * erddap-datasets
+  * SalishSeaCmd
+  * cookiecutter-MOAD-pypkg
+  * gha-workflows
+  * tools
+  * salishsea-site
+  * MoaceanParcels
+  * Reshapr
+  * moad_tools
+  * SalishSeaNowcast
+  * AtlantisCmd
+
+
+##### AIMS-Workshop repo
+
+* started work on updating dynamic modes notebook for Susan
+  * updated default branch of `UBC-MOAD/AIMS-Workshop` repo on GitHub from `master` to `main`
+  * cloned `UBC-MOAD/AIMS-Workshop` repo from GitHub in `warehouse/EOAS-teaching/`
+  * started `modernize` branch and PR#1
+    * added conda env
+    * fixed a failing code-block in the `Ex2-DynamicModes.rst` doc file
+    * added the UBC EOAS favicon to be able to commit the `_static/` directory
+    * discovered that notebooks need to be converted from version 3 format and did so with
+      `jupyter nbconvert`
+
+
+##### MoaceanParcels
+
+* added auto-milestone workflow; PR#56
+  * does nothing because repo milestone (V22.1) due date is in the past
+  * resolved by setting due date to 31dec25
+* added `sphinx` stanza to `.readthedocs.yaml` re: deprecation of automatic `conf.py` file detection
+  in PR#57
+
+
+
+#### Tue 4-Feb-2025
+
+##### AIMS-Workshop repo
+
+* continued work on updating dynamic modes notebook for Susan
+  * used `jupyter nbconvert` to update `dynmodes/dynmodes.ipynb` from nbformat 3 to 4.5
+  * updated `print` statements to functions re: Python 3
+  * change `xrange()` to `range()` re: Python 3
+  * fixed a typo in a `plot_modes()` call
+  * updated URLs in dynmodes notebook
+  * for Susan:
+    * alternative link to Klinck's work (mulitple occurrences)
+      * http://woodshole.er.usgs.gov/operations/sea-mat/klinck-html/dynmodes.html goes to WHOI index page
+    * will the class use the notebook, the module(s), or both
+      * update docs that describe `ipython` and modules use?
+    * update links in `aims_allen.tex`
+      * some are broken
+      * all are `http://` but should be `https://`
+
+
+##### SalishSeaCast
+
+* `crop_gribs 00` timed out with 528 files unprocessed
+  * consequences:
+    * automation stopped
+    * `collect_weather 00` finished at 06:06
+    * 00 and 06 forecasts files were interleaved in `sarracenia` downloads
+    * 06 and 12 forecasts downloaded by `sarracenia`
+* recovery started at ~08:55:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  # kill crop_gribs 06
+  # kill collect_weather 06 2.5km
+  collect_weather 18 2.5km &
+  crop_gribs 18 &
+  crop_gribs 00 --backfill
+  crop_gribs 06 &
+  collect_weather 06 2.5km --backfill --backfill-date 2025-02-04
+  # kill collect_weather 12 2.5km
+  # wait for wwatch3-forecast2 run to finish
+  collect_weather 12 2.5km --backfill --backfill-date 2025-02-04
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+
+##### Miscellaneous
+
+* helped Raisha with a bad BOM issue in a `.cdl` file
+* helped Vicente with old host key issue connecting to `salish`
+
+
+
+#### Wed 5-Feb-2025
+
+##### SalishSeaCast
+
+* `make_turbidity_file` is still failing
+  * `/results/observations/ECCC/fraser_buoy.csv` contains no obs after 2025-01-27 12:10
+  * `ecget/bin/ecget fraser water quality` fails with `'NoneType' object has no attribute 'parent'`
+
+
+##### AIMS-Workshop repo
+
+* continued work on updating dynamic modes notebook for Susan
+  * Susan approved PR
+  * improved README
+  * updated `Makefile`
+  * pushed rendered docs to Susan's EOAS public web space
+
+
+##### ECget
+
+* started modernization; repo is mostly untouched since 2018, though there was a minor update in 2022
+* create v25.1 milestone on GitHub
+* added GHA workflows for dependabot monitoring of actions, auto-assign of issues & PRs, and auto-add
+  of current milestone to new issues & PRs; PR#35
+* test suite fails horribly
+* traced production problem to a change in the identifier for dissolved oxygen
+  * I suspect that the new instrument that was installed during the week of 20jan25 changed from
+    reporting percent DO to DO in mg/l
+  * fixed in PR#36
+  * testing fix on `skookum` required a new conda environment, so I built a Python 3.13 one
+
+
+
+#### Thu 6-Feb-2025
+
+Goofed off.
+
+
+
 
 
 * Continue figure tests in preparation for updating production env to Python 3.13 in PR#327
@@ -927,7 +1083,7 @@ Worked at ESB.
     Updated `.readthedocs.yaml` to define Sphinx builder settings, including the
     builder type, configuration file path, and `fail_on_warning` option. This is
     necessary due to readthedocs deprecating projects without explicit builder
-    configuration that comes into effect on 20-Jan-2025.
+    configuration that went into effect on 20-Jan-2025.
     ```
     <!-- markdownlint-enable MD013 -->
     * tools - done on 14Jan25 in PR#128
@@ -941,6 +1097,7 @@ Worked at ESB.
     * Reshapr - done on 19jan25 in PR#147
     * SalishSeaCmd - done on 19jan25 in PR#87
     * AtlantisCmd - done on 19jan25 in PR#57
+    * MoaceanParcels - done on 3feb25 in PR#57
 
     * ECget
 
