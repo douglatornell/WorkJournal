@@ -238,7 +238,6 @@ Worked at ESB.
     models, so it's not directly relevant
   * updated bathymetry dataset in summary attributes of rolling forecast datasets
     amd added explanation of lack of versioning
-
   * updated front page to remove mentions of V19-05
   * restarted ERDDAP server
 
@@ -1046,6 +1045,37 @@ Worked at ESB.
 #### Thu 6-Feb-2025
 
 Goofed off.
+
+
+
+#### Fri 7-Feb-2025
+
+Worked at ESB.
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* PO seminar: Pål re: modeling the Arctic gyres
+* VSCode 1.98 expected in early March will not support connections to legacy OS hosts:
+  * `arbutus`
+  * `graham`
+
+
+##### erddap-datasets
+
+* finished removal of V19-05 datasets in PR#30:
+  * deleted datasets and their entries in `datasets.yaml`
+* restarted ERDDAP:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  sudo /opt/tomcat/bin/shutdown.sh
+  # confirm shutdown
+  sudo /opt/tomcat/bin/startup.sh
+  ```
+  <!-- markdownlint-disable MD013 -->
+* squash-merged PR#30
+
+
 
 
 
