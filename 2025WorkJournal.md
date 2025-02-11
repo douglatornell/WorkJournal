@@ -1140,8 +1140,7 @@ Goofed off.
     * SalishSeaCmd - done on 19jan25 in PR#87
     * AtlantisCmd - done on 19jan25 in PR#57
     * MoaceanParcels - done on 3feb25 in PR#57
-
-    * ECget
+    * ECget - done on 11feb25 in PR#39
 
 
 
@@ -1192,8 +1191,7 @@ TODO:
   * AtlantisCmd - done 18nov24 in PR#48
   * MoaceanParcels - done 19nov24 in PR#52 - consider archiving repo due to bit-rot
   * rpn-to-gemlam - done 20nov24 in PR#21 - archived project
-
-  * ECget - needs some love first
+  * ECget - done on 11feb25 in PR#39
 
 
 * TODO:
