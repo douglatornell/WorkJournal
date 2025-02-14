@@ -1340,23 +1340,21 @@ state:
 
 TODO:
 
-* add sphinx-notfound-page extension to to repos with docs
+* add sphinx-notfound-page extension to repos with docs
   * <https://sphinx-notfound-page.readthedocs.io/en/latest/index.html>
   * MOAD:
     * Reshapr - done
     * docs - done
     * moad_tools - done 14Nov22
     * MoaceanParcels - done 18Dec22
-    * cookiecutter-MOAD-pypkg - issue created
+    * cookiecutter-MOAD-pypkg - done 14feb25 in PR#39
   * SalishSeaCast:
     * SalishSeaNowcast - done 4oct22
     * salishsea-site - done 11oct22
     * SalishSeaCmd - done 20Dec22
     * NEMO-Cmd - done 25oct22
     * docs - done 7feb24 in PR#45
-    * tools - issue created
-    * SOG-Bloomcast-Ensemble - issue created
-    * SOG-Bloomcast
+    * tools - done 14feb25 in PR#136
 
 
 Repos that use readthedocs:
