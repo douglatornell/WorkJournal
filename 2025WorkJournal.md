@@ -786,7 +786,7 @@ Migration of FASmail to M365 Outlook was completed successfully.
 
 * paused work on `tools/bathymetry/Process20405Bathymetry.ipynb`
   * "Check continuity and Add Missed Islands" is too opaque
-* wrote base double resolution 202405 bathymetry to `grid/bathymetry_double_202405.nc.nc`
+* wrote base double resolution 202405 bathymetry to `grid/bathymetry_double_202405.nc`
 * started work on `tools/bathymetry/Process202405-2xrezBathymetry.ipynb`
 
 
@@ -1090,10 +1090,132 @@ Goofed off.
 
 
 
+### Week 7
+
+#### Mon 10-Feb-2025
+
+##### SalishSeaCast
+
+* `download_live_ocean` timed out at 10:57
+  * retried at 11:00; succeeded almost immediately
 
 
 
-* Continue figure tests in preparation for updating production env to Python 3.13 in PR#327
+#### Tue 11-Feb-2025
+
+##### ECget
+
+* continued modernization:
+  * replaced `.hgignore` with `.gitignore`; PR#38
+  * modernized readthedocs config; PR#39
+  * moved `environment-dev.yaml` and `requirements.txt` to `envs/` directory; PR#40
+
+
+##### SalishSeaCast
+
+* `crop_gribs 18` timed out at 16:14 with all 528 files unprocessed
+  * `collect_weather 2.5km 18` finished at 17:09
+  * ran `crop_gribs 18 --backfill --debug` at ~17:30
+
+
+##### Miscellaneous
+
+* squash-merged dependabot PRs that update `cryptography` to 44.0.1 re: CVE-2024-12797 re: OpenSSL
+  vulnerability
+  * cookiecutter-analysis-repo
+  * SalishSeaNowcast
+  * cookiecutter-MOAD-pypkg
+  * AtlantisCmd
+  * NEMO_Nowcast
+  * moad_tools
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * salishsea-site
+  * SalishSeaTools
+
+
+
+#### Wed 12-Feb-2025
+
+
+##### SalishSeaCast
+
+* `collect_river_data ECCC HomathkoMouth` with KeyError for 2025-02-11
+  * no obs since 11:20 on 10feb
+* discussed figures w/ Susan
+  * drop VENUS node ADCP comparison figures
+  * make Squamish & Halfmoon Bay behave like Boundary Bay water level model-only figure
+  * add issue to add Darrell Bay to model output for comparison with water level obs there
+* `download_live_ocean` timed out at 10:59
+  * retried at 11:01; succeeded almost immediately
+
+
+##### sss150
+
+* explained 2nd Narrow HADCP dataset storage to Camryn
+* generated boundary files for 3-30mar23:
+  * VSCode session on `skookum` in `/data/dlatorne/MEOPAR/SS-run-sets/`
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    cd sss150
+    # edit file patterns in `bdytools_ssc_to_sss150_salish.yaml`
+    mamba activate bdytools
+    bdytools bdytools_ssc_to_sss150_salish.yaml --bdy ssh ts uv --bdy_date0 20230303 --bdy_date1 20230330
+    ```
+    <!-- markdownlint-enable MD013 -->
+
+
+##### 202405 Bathymetry
+
+* continued work on `tools/bathymetry/Process20405Bathymetry.ipynb`
+  * got help from Susan to understand "Check continuity and Add Missed Islands"
+    * that section is the beginning of changes that are driven by 50x50 inspections done in the
+      `analysis-susan/notebooks/bathymetry/lookat201702_201803d*.ipynb` notebooks
+    * things seemed to go well until the section to add the Steeveston Jetty where I discovered
+      that the base bathymetry in that region (at least) is quite different
+      * Susan traced that issue to processing for the Fraser River that she did in her version of
+        Michael's bathymetry creation notebook that she didn't share with me
+* continued work on `tools/bathymetry/Process202405-2xrezBathymetry.ipynb`
+  * got help from Susan:
+    * north boundary: adjust 10 grid points
+      * stopped because channel at north boundary looks markedly different in 2xrez
+
+
+
+#### Thu 13-Feb-2025
+
+##### 202405 Bathymetry
+
+* continued work on `tools/bathymetry/Process20405Bathymetry.ipynb`
+  * added Susan's Fraser River depth adjustment (CHS2 max depths instead of means) to
+    `analysis-doug/notebooks/2xrez-202111/bathymetry-202405.ipynb`
+  * completed the rest of the bathymetry processing steps
+    * do we want to include Tall's changes at the entrance to Saanich Inlet? (elsewhere?)
+      * Susan says yes
+
+
+##### erddap-datasets
+
+* discovered that V19-05 datasets were back on ERDDAP
+  * perhaps an artefact of not having restarted server after merging PR#30 and switching back
+    to `main` branch?
+  * restarted server
+
+
+##### Atlantis
+
+* explored Raisha's suggestion of moving Salish Sea calibration & parameters repo from CSIRO Bitbucket
+  to our GitHub org in light of CSIRO closing access for external collaborators
+
+
+
+
+
+
+SalishSeaCast TODO:
+
+* drop VENUS nodes ADCP comparison figures because the obs collection code has never been ported
+  from Matlab; nobody cares enough
   * `make_plots nemo nowcast comparison`
     * `research_VENUS.plotdepavADCP` - keep?
       * 3 nodes
@@ -1101,47 +1223,11 @@ Goofed off.
       * 3 nodes
     * `research_VENUS.plotADCP` - keep?
       * 3 nodes
-
-
-
-
-
-
-
-* TODO in all readthedocs projects:
-  * add `sphinx` stanza to `.readthedocs.yaml` re: config API change
-      branch: rtd-sphinx-config
-    <!-- markdownlint-disable MD013 -->
-    ```yaml
-    sphinx:
-        builder: html
-        configuration: docs/conf.py
-        fail_on_warning: false
-    ```
-
-    ```text
-    Add explicit Sphinx configuration for readthedocs
-
-    Updated `.readthedocs.yaml` to define Sphinx builder settings, including the
-    builder type, configuration file path, and `fail_on_warning` option. This is
-    necessary due to readthedocs deprecating projects without explicit builder
-    configuration that went into effect on 20-Jan-2025.
-    ```
-    <!-- markdownlint-enable MD013 -->
-    * tools - done on 14Jan25 in PR#128
-    * SalishSeaNowcast - done on 15jan25 in PR#324
-    * moad_tools - done on 17jan25 in PR#84
-    * MOAD/docs - done on 17jan25 in PR#47
-    * SalishSeaCast/docs - done on 17jan25 in PR#60
-    * salishsea-site - done on 19jan25 in PR#104
-    * NEMO-Cmd - done on 19jan25 in PR#98
-    * NEMO_Nowcast - done on 19jan25 in PR#65
-    * Reshapr - done on 19jan25 in PR#147
-    * SalishSeaCmd - done on 19jan25 in PR#87
-    * AtlantisCmd - done on 19jan25 in PR#57
-    * MoaceanParcels - done on 3feb25 in PR#57
-    * ECget - done on 11feb25 in PR#39
-
+* resolve Squamish and Halfmoon Bay water level comparison figure failures by setting CHS station
+  ids to `None` like we do for Boundary Bay; that should produce model-only figures
+  * add an issue to perhaps add Darrell Bay (07808, opposite Woodfibre) as a future location for
+    NEMO water level output and a comparison figure
+    * Latitude: 49.669, Longitude: -123.169
 
 
 
@@ -1163,41 +1249,6 @@ Goofed off.
 Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present to group.
 
 * fortran.fortls.directories
-
-
-
-TODO:
-
-* update `.readthedocs.yaml` to use ubuntu-24.04 and mambaforge-23.11 in many repos
-* also update sphinx & deps version pins
-    <!-- markdownlint-disable MD013 -->
-    ```yaml
-    - sphinx=8.1.3
-    - sphinx-notfound-page=1.0.4
-    - sphinx-rtd-theme=3.0.0
-    ```
-    <!-- markdownlint-enable MD013 -->
-* use `nbsphinx=0.9.5` if required
-  * NEMO_Nowcast - done 22sep24 in PR#57; sphinx & deps version pins done 26oct24 in PR#58
-  * MOAD/docs - done 14oct24; sphinx & deps version pins done 26oct24
-  * NEMO-Cmd - done 18oct24 in PR#92
-  * SalishSeaCmd - done 25oct24 in PR#76
-  * SalishSeaNowcast - done 30oct24 in PR#301
-  * moad_tools - done 31oct24 in PR#73
-  * salishsea-site - done 2nov24 in PR#62
-  * Reshapr - done 3nov24 in PR#141
-  * SalishSeaCast/docs - done 11nov24 in PR#56
-  * tools - done 14nov24 in PR#106
-  * AtlantisCmd - done 18nov24 in PR#48
-  * MoaceanParcels - done 19nov24 in PR#52 - consider archiving repo due to bit-rot
-  * rpn-to-gemlam - done 20nov24 in PR#21 - archived project
-  * ECget - done on 11feb25 in PR#39
-
-
-* TODO:
-  * Change `source_suffix = '.rst'` to `source_suffix = {'.rst': 'restructuredtext'}` in `conf.py`
-    or omit `source_suffix` config because `.rst` is the default (works in Reshapr docs)
-  * Investigate `no theme named 'sphinx_rtd_theme' found (missing theme.toml?)
 
 
 
