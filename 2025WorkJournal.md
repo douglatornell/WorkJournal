@@ -39,7 +39,7 @@ Goofed off
 
 #### Fri 3-Jan-2025
 
-##### Miscellaneous
+##### Security Updates
 
 * Squash-merged dependabot PR to update jinja2 to 3.1.5 re: CVE-2024-56201 & CVE-2024-56326 re:
   arbitrary code execution vulnerabilities
@@ -114,7 +114,7 @@ Goofed off
 
 Worked at ESB while Rita was at home
 
-##### Miscellaneous
+##### Security Updates
 
 * Squash-merged dependabot PR to update setup-micromamba to 2.0.3 re: bug fixes
   * AtlantisCmd
@@ -278,7 +278,7 @@ Goofed off
 
 #### Mon 13-Jan-2025
 
-##### Miscellaneous
+##### Security Updates
 
 * Squash-merged dependabot PRs to update virtualenv to 20.26.6 re: CVE-2024-53899 re: command
   injection vulnerability
@@ -467,7 +467,7 @@ Goofed off.
 
 #### Mon 20-Jan-2025
 
-##### Miscellaneous
+##### Security Updates
 
 * Squash-merged dependabot PRs to update setup-micromamba to 2.0.4 re: dependency updates
   * SalishSeaNowcast
@@ -694,12 +694,16 @@ Worked at ESB.
 
 #### Mon 27-Jan-2025
 
-##### Miscellaneous
+##### Security Updates
 
 * Squash-merged dependabot PRs to update codecov-action to 5.3.1 re: dependency, docs & feature updates
   * gha-workflows
   * SalishSeaNowcast
   * AtlantisCmd
+
+
+##### Miscellaneous
+
 * Checked status of scheduled GHA workflows:
   <!-- markdownlint-disable MD013 -->
   ```bash
@@ -1118,7 +1122,7 @@ Goofed off.
   * ran `crop_gribs 18 --backfill --debug` at ~17:30
 
 
-##### Miscellaneous
+##### Security Updates
 
 * squash-merged dependabot PRs that update `cryptography` to 44.0.1 re: CVE-2024-12797 re: OpenSSL
   vulnerability
@@ -1209,6 +1213,28 @@ Goofed off.
 
 
 
+#### Fri 14-Feb-2025
+
+Worked at ESB
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+
+
+##### tools
+
+* added sphinx-notfound-page extension to docs build; PR#136
+
+
+##### cookiecutter-MOAD-pypkg
+
+* docs maintenance in package recipe; PR#39
+  * pinned versions of Sphinx and optional extensions
+  * updated `readthedocs.yaml` to use Ubuntu 24.04 and mambaforge 23.11
+  * add explicit Sphinx config to `readthedocs.yaml`
+  * add sphinx-notfound-page extension
+
 
 
 
@@ -1270,9 +1296,10 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
     * erddap-datasets
   * no workflows:
     * SOG-Bloomcast-Ensemble
-    * SOG-Bloomcast ??
-    * analysis-doug
+    * SOG
     * ECget
+    * analysis-doug
+    * SOG-Bloomcast ??
 
 
 TODO:
@@ -1299,10 +1326,10 @@ TODO:
   * SalishSeaTools - done 9jan25 in PR#122
 
   * SOG-Bloomcast-Ensemble
-  * SOG-Bloomcast
-  * cookiecutter-MOAD-pypkg
-  * ECget
   * SOG
+  * ECget
+  * cookiecutter-MOAD-pypkg
+  * SOG-Bloomcast ??
 
 
 TODO:
@@ -1335,26 +1362,6 @@ state:
 * In PyCharm > Git > Log context menu "Rebase 'feature' onto 'main'"
 * **BUT** if the changes in the feature branch overlap files in main, it's possible that
   a merge will be required
-
-
-
-TODO:
-
-* add sphinx-notfound-page extension to repos with docs
-  * <https://sphinx-notfound-page.readthedocs.io/en/latest/index.html>
-  * MOAD:
-    * Reshapr - done
-    * docs - done
-    * moad_tools - done 14Nov22
-    * MoaceanParcels - done 18Dec22
-    * cookiecutter-MOAD-pypkg - done 14feb25 in PR#39
-  * SalishSeaCast:
-    * SalishSeaNowcast - done 4oct22
-    * salishsea-site - done 11oct22
-    * SalishSeaCmd - done 20Dec22
-    * NEMO-Cmd - done 25oct22
-    * docs - done 7feb24 in PR#45
-    * tools - done 14feb25 in PR#136
 
 
 Repos that use readthedocs:
