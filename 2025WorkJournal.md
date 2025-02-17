@@ -791,6 +791,10 @@ Migration of FASmail to M365 Outlook was completed successfully.
 * paused work on `tools/bathymetry/Process20405Bathymetry.ipynb`
   * "Check continuity and Add Missed Islands" is too opaque
 * wrote base double resolution 202405 bathymetry to `grid/bathymetry_double_202405.nc`
+
+
+##### 2x resolution SalishSeaCast
+
 * started work on `tools/bathymetry/Process202405-2xrezBathymetry.ipynb`
 
 
@@ -1179,6 +1183,10 @@ Goofed off.
       that the base bathymetry in that region (at least) is quite different
       * Susan traced that issue to processing for the Fraser River that she did in her version of
         Michael's bathymetry creation notebook that she didn't share with me
+
+
+##### 2x resolution SalishSeaCast
+
 * continued work on `tools/bathymetry/Process202405-2xrezBathymetry.ipynb`
   * got help from Susan:
     * north boundary: adjust 10 grid points
@@ -1237,6 +1245,140 @@ Worked at ESB
 
 
 
+#### Sat 15-Feb-2025
+
+##### Miscellaneous
+
+* updated `khawla` PyCharm to 2024.3.3
+
+
+##### 2x resolution SalishSeaCast
+
+* added Susan's Fraser River depth adjustment (CHS2 max depths instead of means) to
+  `analysis-doug/notebooks/2xrez-202111/bathymetry-202405-2xrez.ipynb`
+
+
+##### SOG-Bloomcast-Ensemble
+
+* modernized repo and package; PR#65
+  * moved env descriptions & `requirements.txt` to `envs/` directory
+  * added dependabot workflow to monitor actions versions
+  * added GHA workflow to auto-assign issues & PRs
+  * added GHA workflow to to run CodeQL analysis
+  * added GHA workflow to to run pytest-with-coverage
+  * added pre-commit config and updated coding style
+  * modernized packaging
+* updated to Python 3.13; PR#66
+* fixed DeprecationWarning re: bs4 findAll() method; PR#67
+* refactored metadata handling in CLI init; RP#68
+* added `aiosmtpd` dependency to dev env to address removal of `smtpd` module from Python 3.12
+  stdlib re: issue #56; PR#69
+
+
+##### 2025 Bloomcast
+
+* Prep on `khawla`:
+  * modernized SOG-Bloomcast-Ensemble repo & package
+  * confirmed that SOG clone is up to date
+  * worked in bloomcast-dev env (Python 3.13)
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    mkdir run/2024
+    cp run/2024_bloomcast_infile.yaml run/2025_bloomcast_infile.yaml
+    mv run/2024_bloomcast_infile.yaml run/2024/
+    mkdir -p run/timeseries run/profiles
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * committed archive of 2024 SOG YAML infile
+  * edit run/2025_bloomcast_infile.yaml
+  * edit run/config/yaml
+  * successfully tested run prep w/ SOG runs and publish to web disabled with
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    python -m aiosmtpd -n -l localhost:1025
+    cd run
+    bloomcast ensemble -v config.yaml --debug
+    ```
+    <!-- markdownlint-enable MD013 -->
+    * ends with:
+      <!-- markdownlint-disable MD013 -->
+      ```text
+      INFO:bloomcast.ensemble:Skipped running SOG
+      ERROR:bloomcast:[Errno 2] No such file or directory: 'timeseries/std_bio_2025_bloomcast.out_8081'
+      ```
+      <!-- markdownlint-enable MD013 -->
+  * committed run/2025_bloomcast_infile.yaml and run/config.yaml
+* Setup on salish:
+  * updated SOG-Bloomcast-Ensemble clone
+  * SOG clone needs to be at 55af3c2 to avoid error from Ben's post 7-Apr-2014 commits
+  * created new bloomcast env: Python 3.13
+  * did editable installs of SOG & SOG-Bloomcast-Ensemble
+  * runs dir: /data/dlatorne/SOG-projects/SOG-Bloomcast-Ensemble/run
+  * archived 2024_bloomcast* files in run/2024/
+  * archived Englishman_flow Fraser_flow Sandheads_wind in run/2024/
+  * archived YVR_* in run/2024/
+  * archived last year's `bloom_date_evolution.log` and `bloomcast.log` in run/2024/
+  * test run failed
+    <!-- markdownlint-disable MD013 -->
+    ```text
+    ../../SOG-code-bloomcast/SOG:
+      error while loading shared libraries: libgfortran.so.3:
+      cannot open shared object file: No such file or directory
+    ```
+    <!-- markdownlint-enable MD013 -->
+    * due to `salish` OS upgrade in sep25
+    * did a clean build in `SOG-code-bloomcast/`
+    * ran test
+      * unrecognized weather description:
+          `Moderate Rain,Snow`
+      * bloom predictions:
+          <!-- markdownlint-disable MD013 -->
+          ```text
+          INFO:bloomcast.ensemble:Predicted earliest bloom date is 2025-02-20
+          INFO:bloomcast.ensemble:Earliest bloom date is based on forcing from 2004/2005
+          INFO:bloomcast.ensemble:Predicted early bound bloom date is 2025-02-21
+          INFO:bloomcast.ensemble:Early bound bloom date is based on forcing from 2009/2010
+          INFO:bloomcast.ensemble:Predicted median bloom date is 2025-03-08
+          INFO:bloomcast.ensemble:Median bloom date is based on forcing from 1985/1986
+          INFO:bloomcast.ensemble:Predicted late bound bloom date is 2025-03-27
+          INFO:bloomcast.ensemble:Late bound bloom date is based on forcing from 2005/2006
+          INFO:bloomcast.ensemble:Predicted latest bloom date is 2025-04-05
+          INFO:bloomcast.ensemble:Latest bloom date is based on forcing from 1998/1999
+          ```
+          <!-- markdownlint-enable MD013 -->
+  * confirmed web page updated as expected
+  * installed cron job to run at 09:30 daily
+
+
+
+#### Sun 16-Feb-2025
+
+##### SalishSeaNowcast
+
+* changed to project name retrieval from `pyproject.toml`; PR#332
+* added auto-milestone workflow; PR#333
+
+
+##### SOG-Bloomcast-Ensemble
+
+* fixed base env path in cronjob script
+* TODO:
+  * Add new unrecognized weather description `Moderate Rain,Snow` to cloud fraction mapping
+  * silence `matplotlib.font_manager` log messages
+
+
+##### SalishSeaCmd
+
+* added auto-milestone workflow; PR#90
+
+
+##### NEMO-Cmd
+
+* added auto-milestone workflow; PR#101
+
+
+
+
 
 SalishSeaCast TODO:
 
@@ -1277,6 +1419,46 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
 * fortran.fortls.directories
 
 
+* Update project name retrieval in `conf.py`:
+  * branch: get-project-name
+  <!-- markdownlint-disable MD013 -->
+  ```python
+  import tomllib
+  from pathlib import Path
+
+  ...
+
+  with Path("../pyproject.toml").open("rb") as f:
+      pkg_info = tomllib.load(f)
+  project = pkg_info["project"]["name"]
+  ```
+  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-disable MD013 -->
+  ```text
+Chg to project name retrieval from pyproject.toml
+
+Replaced the hardcoded project name with dynamic retrieval from
+`pyproject.toml` using `tomllib`. This ensures consistency and
+reduces manual updates for project metadata.
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * NEMO-Cmd  - done 16jan23 in d41f972e
+  * SalishSeaCmd - done 16jan23 in 6780a1af
+  * SOG-Bloomcast-Ensemble - done 15feb25 in PR#65
+  * SalishSeaNowcast done 16feb25 in PR#
+
+  * AtlantisCmd
+  * ECget
+  * NEMO_Nowcast
+  * Reshapr
+  * SalishSeaCast/docs
+  * tools
+  * salishsea-site
+  * SOG
+  * MOAD/docs
+  * moad_tools
+
+
 
 * Python 3.13:
   * successful workflow test with 3.13:
@@ -1290,12 +1472,12 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
     * SalishSeaNowcast - migrated on 12jan25 in PR#302
     * gha-workflows - migrated on 13jan25 in PR#51
     * AtlantisCmd - migrated on 2feb25 in PR#61
+    * SOG-Bloomcast-Ensemble - migrated on 15feb25 in PR#66
   * not yet tested
     * salishsea-site
     * Reshapr
     * erddap-datasets
   * no workflows:
-    * SOG-Bloomcast-Ensemble
     * SOG
     * ECget
     * analysis-doug
@@ -1324,8 +1506,8 @@ TODO:
   * AtlantisCmd - done 1dec24 in PR#49
   * Marlin - extract from tools and archive without modernization
   * SalishSeaTools - done 9jan25 in PR#122
+  * SOG-Bloomcast-Ensemble - done 15feb25 in PR#65
 
-  * SOG-Bloomcast-Ensemble
   * SOG
   * ECget
   * cookiecutter-MOAD-pypkg
