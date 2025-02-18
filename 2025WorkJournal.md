@@ -1378,6 +1378,91 @@ Worked at ESB
 
 
 
+### Week 8
+
+#### Mon 17-Feb-2025
+
+**Statutory Holiday** - Family Day
+
+
+##### AtlantisCmd
+
+* changed to project name retrieval from `pyproject.toml`; PR#64
+
+
+##### ERDDAP
+
+* > 25% requests failed messages resumed:
+  * group 1:
+    * 45.89.148.113
+    * 45.89.148.58
+    * 45.93.184.164
+    * arin.net VA domain registry?
+  * group 2:
+    * 69.176.86.127
+    * 69.176.86.133
+    * 69.176.86.217
+    * 69.176.86.247
+    *
+    * 69.176.88.187
+    *
+    * 69.176.91.93
+    * no name servers! or maybe ethr.net CA colo?
+
+
+##### NEMO_Nowcast
+
+* added auto-milestone workflow; 5b2693f3
+* changed to project name retrieval from `pyproject.toml`; PR#68
+
+
+##### 2x resolution SalishSeaCast
+
+* worked with Susan to understand differences in north boundary channel straightening section
+  *
+* started 2xrez verification notebook
+
+
+##### Reshapr
+
+* added auto-milestone workflow; PR#149
+* changed to project name retrieval from `pyproject.toml`; PR#151
+
+
+##### Security Update
+
+* squash-merged dependabot PR that updates `cryptography` to 44.0.1 re: CVE-2024-12797 re: OpenSSL
+  vulnerability
+  * Reshapr
+
+
+##### salishsea-site
+
+* added auto-milestone workflow; PR#108
+* changed to project name retrieval from `pyproject.toml`; PR#109
+
+
+##### moad_tools
+
+* added auto-milestone workflow; PR#88
+* changed to project name retrieval from `pyproject.toml`; PR#89
+
+
+##### moad/docs
+
+* added auto-milestone workflow; PR#48
+  * no value because docs repos don't presently use milestones
+
+
+##### tools
+
+* changed CHS water level station ids for Halfmoon Bay and Squamish to `None` to fix comparison
+  figure failures in SalishSeaCast automation; PR#137
+  * changed to `retire-water-level-stations` branch on `skookum`
+  * successfully tested `make_plots nemo forecast`
+  * **WAIT** until tomorrow to merge to see if we can get rid of the `graham` offline branch
+
+
 
 
 SalishSeaCast TODO:
@@ -1392,7 +1477,8 @@ SalishSeaCast TODO:
     * `research_VENUS.plotADCP` - keep?
       * 3 nodes
 * resolve Squamish and Halfmoon Bay water level comparison figure failures by setting CHS station
-  ids to `None` like we do for Boundary Bay; that should produce model-only figures
+  ids to `None` like we do for Boundary Bay; that should produce model-only figures - done 17feb25
+  in `tools` PR#137
   * add an issue to perhaps add Darrell Bay (07808, opposite Woodfibre) as a future location for
     NEMO water level output and a comparison figure
     * Latitude: 49.669, Longitude: -123.169
@@ -1445,18 +1531,16 @@ reduces manual updates for project metadata.
   * NEMO-Cmd  - done 16jan23 in d41f972e
   * SalishSeaCmd - done 16jan23 in 6780a1af
   * SOG-Bloomcast-Ensemble - done 15feb25 in PR#65
-  * SalishSeaNowcast done 16feb25 in PR#
+  * SalishSeaNowcast - done 16feb25 in PR#333
+  * AtlantisCmd - done 17feb25 in PR#64
+  * NEMO_Nowcast - done 17feb25 in PR#68
+  * Reshapr - done 17feb25 in PR#151
+  * salishsea-site - done 17feb25 in PR#109
+  * moad_tools - done 17feb25 in PR#89
 
-  * AtlantisCmd
-  * ECget
-  * NEMO_Nowcast
-  * Reshapr
-  * SalishSeaCast/docs
   * tools
-  * salishsea-site
+  * ECget
   * SOG
-  * MOAD/docs
-  * moad_tools
 
 
 
