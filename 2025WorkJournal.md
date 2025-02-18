@@ -1384,7 +1384,6 @@ Worked at ESB
 
 **Statutory Holiday** - Family Day
 
-
 ##### AtlantisCmd
 
 * changed to project name retrieval from `pyproject.toml`; PR#64
@@ -1410,6 +1409,14 @@ Worked at ESB
     * no name servers! or maybe ethr.net CA colo?
 
 
+##### 2025 Bloomcast
+
+* cron job on `salish` failed to run again
+  * created ticket for compstaff
+    * Henryk restarted cron process on `salish`
+  * ran the cron job script manually
+
+
 ##### NEMO_Nowcast
 
 * added auto-milestone workflow; 5b2693f3
@@ -1419,8 +1426,13 @@ Worked at ESB
 ##### 2x resolution SalishSeaCast
 
 * worked with Susan to understand differences in north boundary channel straightening section
-  *
+  * she came up with an improved straightening for the 2xrez bathymetry
 * started 2xrez verification notebook
+  * added plotting functions
+  * did a few tiles on row 0 in south Puget Sound but stopped until we resolved the
+    stippling issue
+  * created row 5 tiles from south side of Juan de Fuca to Bellingham Bay
+    * made notes on adjustments needed in several tiles
 
 
 ##### Reshapr
@@ -1464,6 +1476,35 @@ Worked at ESB
 
 
 
+#### Tue 18-Feb-2025
+
+Sylvia stayed overnight on her way to Victoria.
+
+Worked at ESB while Rita was at home.
+
+
+##### 2025 Bloomcast
+
+* cron job on `salish` ran successfully
+  * closed compstaff ticket
+
+
+##### Miscellaneous
+
+* updated PyCharm to 2024.3.3 on `kudu`
+
+
+##### 2x resolution SalishSeaCast
+
+* created `tools` repo PR#138 for bathymetry processing because Susan and I are both
+  working on the `process-202405-bathy` branch
+* continnued work on 2xrez processing notebook
+  * added WIP storage of final bathy file
+  * added smoothing; it took ~47 minutes on `kudu`
+* continued work on 2xrez verification notebook
+
+
+
 
 SalishSeaCast TODO:
 
@@ -1494,10 +1535,6 @@ SalishSeaCast TODO:
 
 * add --backfill option download_weather to allow over-write of existing destination dir
   * issue #309
-
-
-* add pre-commit:
-  * SOG-Bloomcast-Ensemble
 
 
 Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present to group.
