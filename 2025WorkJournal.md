@@ -1362,9 +1362,6 @@ Worked at ESB
 ##### SOG-Bloomcast-Ensemble
 
 * fixed base env path in cronjob script
-* TODO:
-  * Add new unrecognized weather description `Moderate Rain,Snow` to cloud fraction mapping
-  * silence `matplotlib.font_manager` log messages
 
 
 ##### SalishSeaCmd
@@ -1498,10 +1495,185 @@ Worked at ESB while Rita was at home.
 
 * created `tools` repo PR#138 for bathymetry processing because Susan and I are both
   working on the `process-202405-bathy` branch
-* continnued work on 2xrez processing notebook
+* continued work on 2xrez processing notebook
   * added WIP storage of final bathy file
   * added smoothing; it took ~47 minutes on `kudu`
 * continued work on 2xrez verification notebook
+
+
+
+#### Wed 19-Feb-2025
+
+##### 2x resolution SalishSeaCast
+
+* smoothing took ~26 minutes on `khawla`
+* continued work on 2xrez verification notebook
+  * factored out tile x mins/maxs for less editing in each `plot_tile()` call
+  * added row 6 - Juan de Fuca, Jrodan River, Saanich Inlet, boundary islands, Neptune Beach
+  * added lon/lat panels to plots to help with comparison to Google Maps
+* continued work on 2xrez processing notebook
+  * added code to adjust specific grid cells
+  * adjusted row 5 grid cells
+
+
+
+#### Thu 20-Feb-2025
+
+
+##### Miscellaneous
+
+* uploaded 2016 forcing files to `beluga` for Tall
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+    # atmospheric/GEM2.5/operational/ops_y2014*.nc are already on beluga
+  yyyy=2016; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
+  yyyy=2016; rsync -tv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/
+  yyyy=2016; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
+  yyyy=2016; rsync -tv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
+  ```
+  <!-- markdownlint-enable MD013 -->
+* emailed Peter Thompson, postdoc at SFU with advice to use xarray to access datasets from our ERDDAP
+
+
+##### 2025 Bloomcast
+
+* squash-merged 2025 prep PR#70
+* Added new unrecognized weather description `Moderate Rain,Snow` to cloud fraction mapping; PR#71
+* experimented with code in `bloomcast._configure_loggin()` to change `matplotlib` logging level to
+  `WARNING`
+
+* TODO:
+  * silence `matplotlib.font_manager` log messages
+
+
+##### SalishSeaNowcast
+
+* rebased `graham-offline` on to `main` in preparation for env update on `skookum`
+* updated deployment docs; PR#334
+
+
+##### SalishSeaCast
+
+* updated all repo clones on `skookum`
+  * `NEMO-3.6-code` had not been updated since Jan-2022; still had `master` as default branch
+    * maybe was that way because of running `nowcast-dev`?; probably irrelevant now
+    * changed default branch to `main` and pulled updates
+  * switched `SalishSeaNowcast` to `graham-offline` branch
+  * switched `tools` to `retire-water-level-stations`
+* shut down automation:
+  * killed `collect_weather 00 2.5km`
+  * removed `/results/forcing/atmospheric/continental2.5/GRIB/20250221/00/`
+  * killed `crop_gribs 00 --fcst-date 2025-02-21`
+  * `supervisorctl shutdown`
+* replaced `/SalishSeaCast/nowcast-env` with new Python 3.13.1 env
+  * `mamba env remove --prefix /SalishSeaCast/nowcast-env`
+  * created new env
+  * install packaged
+  * copied in envvars `activate.d/` and `deactivate.d/` scripts
+* started automation:
+  * `supervisord -c ...`
+  * `collect_weather 00 2.5km`
+  * `crop_gribs 00 --fcst-date 2025-02-21`
+* shut down and restarted persistent dask cluster on `saslish` in new env
+* `crop_gribs 00` failed with TypeError and raised a FutureWarning
+
+
+
+#### Fri 21-Feb-2025
+
+5.1 magnitude earthquake new Sechelt at 13:26; felt it in the kitchen
+
+##### SalishSeaNowcast
+
+* created issue#335 re: FutureWarning in `crop_gribs` due to to non-nanosecond datetime and
+  timedelta resolution in xarray=2025.1.2
+* created issue#336 re: TypeError in `crop_gribs` due to addition of `engine` arg to
+  `xarray.backends.api._validate_attrs()` in 2024.9.0
+  * this was resolved in cfgrib=0.9.14.1
+  * tried updating to cfgrib=0.9.15.0 in dev env, hoping that the issue that prompted pinning
+      cfgrib=0.9.11.0 in PR#276 has been resolved
+    * `crop_gribs 00` on `khawla` sort of worked; it failed after apparently successfully cropping
+      9 files with:
+      <!-- markdownlint-disable MD013 -->
+      ```python-traceback
+      KeyError: "No variable named 'lhtfl'. Variables on the dataset include
+      ['time', 'step', 'surface', 'latitude', 'longitude', 'valid_time', 'slhtf']"
+      ```
+      <!-- markdownlint-enable MD013 -->
+      * that variable is for "upward surface latent heat flux (for VHFR FVCOM)"
+        * changed value in `weather.download.2.5 km.variables` config to `slhtf` and `crop_gribs 00`
+          runs successfully in dev env
+    * successfully ran `crop_gribs 06` on `khawla`
+    * successfully ran `grib_to_netcdf forecast2` on `khawla`
+    * successfully ran `upload_forcing arbutus forecast2` on `skookum`
+    * successfully ran `crop_gribs 12` on `khawla`
+    * NEMO forecast2 run was successful
+    * `make_ww3_wind_file` failed with
+      ValueError: Resulting object does not have monotonic global indexes along dimension time_counter
+    * cfgrib=0.9.15.0 is not at solution:
+      * it produces files in which all the the time stamps are the same; that is the issue that caused
+        us to pin cfgrib=0.9.11.0 in PR#276
+  * tried pinning dev env to cfgrib=0.9.11.0 and xarray=2024.7.0
+      <!-- markdownlint-disable MD013 -->
+      ```bash
+      find /results/forcing/atmospheric/continental2.5/GRIB/20250221/00/ \
+        -type f -name "*_SSC.grib2" -delete  # skookum
+      crop_gribs 00  # khawla
+      find /results/forcing/atmospheric/continental2.5/GRIB/20250221/06/ \
+        -type f -name "*_SSC.grib2" -delete  # skookum
+      crop_gribs 06  # khawla
+      grib_to_netcdf forecast2  # khawla
+      upload_forcing arbutus forecast2  # skookum
+      ```
+      <!-- markdownlint-enable MD013 -->
+    * `run_NEMO forecast2` and `watch_NEMO forecast2` didn't launch on `arbutus` from automation
+      so I launched them manually
+    * `make_ww3_wind_file` launched and ran successfully in automation
+    * had to re-run `make_ww3_current_file` manually due to overwrites of copies of NEMO velocity files
+    * `run_www3 forecast2` and `watch_ww3 forecast2` launched successfully in automation
+    * `make_plots nemo forecast2` ran without errors
+      <!-- markdownlint-disable MD013 -->
+      ```bash
+      find /results/forcing/atmospheric/continental2.5/GRIB/20250221/12/ \
+        -type f -name "*_SSC.grib2" -delete  # skookum
+      crop_gribs 12  # khawla
+      ```
+      <!-- markdownlint-enable MD013 -->
+* downgraded to `xarray=2024.7.0` on `skookum`
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  grib_to_netcdf nowcast+
+  upload_forcing arbutus nowcast+
+  upload_forcing orcinus nowcast+
+  upload_forcing optimum nowcast+
+  crop_gribs 18 --backfill
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * automation worked smoothly
+
+
+
+#### Sat 22-Feb-2025
+
+Goofed off.
+
+
+
+#### Sun 23-Feb-2025
+
+##### SalishSeaNowcast
+
+* squash-merged PR#337 re: fix for `crop_gribs`
+* started to explore how to deal with GRIB2 files producing netCDF files in which all the the time
+  stamps are the same (the issue that caused us to pin cfgrib=0.9.11.0 in PR#276)
+  * looked at changing `crop_gribs` but decided that `grib_to_netcdf` might be the better place
+    to solve the problem
+  * need to run `crop_gribs 06 --backfill` with `cfgrib=0.9.15.0` and `xarray=2025.1.1` so that I
+    can see what `grib_ds.step` looks like in `grib_to_netcdf`
 
 
 
@@ -1558,11 +1730,11 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
   <!-- markdownlint-enable MD013 -->
   <!-- markdownlint-disable MD013 -->
   ```text
-Chg to project name retrieval from pyproject.toml
+  Chg to project name retrieval from pyproject.toml
 
-Replaced the hardcoded project name with dynamic retrieval from
-`pyproject.toml` using `tomllib`. This ensures consistency and
-reduces manual updates for project metadata.
+  Replaced the hardcoded project name with dynamic retrieval from
+  `pyproject.toml` using `tomllib`. This ensures consistency and
+  reduces manual updates for project metadata.
   ```
   <!-- markdownlint-enable MD013 -->
   * NEMO-Cmd  - done 16jan23 in d41f972e
