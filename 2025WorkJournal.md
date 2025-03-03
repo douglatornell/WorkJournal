@@ -857,7 +857,9 @@ Worked at ESB.
 
 ## February
 
+<!-- markdownlint-disable MD001 -->
 #### Sat 1-Feb-2025
+<!-- markdownlint-enable MD001 -->
 
 ##### Miscellaneous
 
@@ -1519,13 +1521,12 @@ Worked at ESB while Rita was at home.
 
 #### Thu 20-Feb-2025
 
-
 ##### Miscellaneous
 
 * uploaded 2016 forcing files to `beluga` for Tall
   <!-- markdownlint-disable MD013 -->
   ```bash
-    # atmospheric/GEM2.5/operational/ops_y2014*.nc are already on beluga
+    # atmospheric/GEM2.5/operational/ops_y2016*.nc are already on beluga
   yyyy=2016; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
   yyyy=2016; rsync -tv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
@@ -1674,6 +1675,197 @@ Goofed off.
     to solve the problem
   * need to run `crop_gribs 06 --backfill` with `cfgrib=0.9.15.0` and `xarray=2025.1.1` so that I
     can see what `grib_ds.step` looks like in `grib_to_netcdf`
+
+
+
+### Week 9
+
+#### Mon 24-Feb-2025
+
+##### SalishSeaNowcast
+
+* continued to explore how to deal with GRIB2 files producing netCDF files in which all the the time
+  stamps are the same (the issue that caused us to pin cfgrib=0.9.11.0 in PR#276)
+  * ran `crop_gribs 06 --backfill` with `cfgrib=0.9.15.0` and `xarray=2025.1.1` on `khawla`
+    * in `grib_to_netcdf`:
+      * `grib_ds.step = [0] * 25`
+      * `grib_ds.time = 2025-02-24T06:00:00.000000000`
+    * in `grib_to_netcdf` on GRIB files processed with `cfgrib=0.9.11.0` and `xarray=2027.7.0`:
+      * `grib_ds.step = [ 61200000000000,  64800000000000  ..., 147600000000000]`
+      * `grib_ds.time = 2025-02-23T06:00:00.000000000`
+    * discovered that `grib_ds.valid_time` holds the timestamp values that we want, so refactored
+      `grib_to_netcdf` to use `grib_ds.valid_time.values` instead of
+      `grib_ds.time.values + grib_ds.step.values`
+
+
+
+#### Tue 25-Feb-2025
+
+Meeting w/ Michele Blanchet, Cardiac Rehab Dietician
+
+##### SalishSeaCast
+
+* manager crashed when `download_wwatch3_results forecast2` finished because checklist was cleared
+  while that worker was running
+  * when manager restarted it loaded the hacked version of the config that had uploads to
+    `robot.graham` enabled; that caused errors from `upload_forcing`
+  * corrected config and restarted manager at ~14:30
+* `graham` is finally back online, with the exception of `/nearline`
+  * switched to `main` branch and pull updates from GitHub
+  * restarted manager to load config with `robot.graham` enabled
+  * ran `upload_forcing robot.graham nowcast+ 2024-12-0[789]` and was prompted for MFA
+    * emailed support to get restricted ssh access restored; fixed in <~1h!
+
+* backfilled `upload_forcing nowcast+` to `graham`
+
+
+##### Security Updates
+
+* Squash-merged dependabot PR to update ssh-action to 1.2.1 re: feature update
+  * salishsea-site
+
+
+
+Update grib_to_netcdf to use `valid_time`
+
+Replaced usages of `step` and `time` with `valid_time` to make our
+timestamp processing compatible with non-hourly step handling that
+was introduced in `cfgrib=0.9.12.0`. Adjusted preprocessing, data
+array creation, and coordinate handling to align with this change.
+
+This change removes the need for version pinning of `cfgrib=0.9.11.0`
+that was introduced in PR#276. By doing that, issue #336 is resolved.
+
+
+
+#### Wed 26-Feb-2025
+
+Installed new gen 3 modem from Rogers; booster pod won't connect to it, but signal was strong enough
+for Zwift to work okay for Susan's race.
+
+
+##### SalishSeaNowcast
+
+* FutureWarning issue #335 needs an upstream change in cfgrib to resolve; ecmwf/cfgrib#414 is
+  tracking the issue there
+
+
+##### SalishSeaCast
+
+* `crop_gribs 00` timed out with 408 files unprocessed
+* `collect_weather 00 2.5km` finished ~2.5h late, after `crop_gribs` timed out
+
+
+
+#### Thu 27-Feb-2025
+
+##### Miscellaneous
+
+* helped Jose and Tall with getting work restarted on `graham`
+* completed new UBC sexual misconduct training
+
+
+##### SalishSeaCast
+
+* explored `cfgrib`, `eccodes-python` and `ecCodes` packages in search of knowledge and a way the
+  quiet the latter's excess of inconsequential messages on `stderr`
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez verification notebook
+  * added row 7 - Neah Bay to Semiahmoo Bay
+* continued work on 2xrez processing notebook
+  * adjusted most of row 6 grid cells
+
+
+##### SalishSeaNowcast
+
+* started testing `fix-grib-time-parsing` branch in PR#338 in production
+  * updated production env to `xarray=2025.1.1` and `cfgrib-0.9.15.0`
+  * killed & re-launched `crop_gribs 00`
+
+
+
+#### Fri 28-Feb-2025
+
+Worked at ESB after I got SalishSeaCast operational
+
+##### SalishSeaCast
+
+* `grib_to_netcdf forecast2` and `grib_to_netcdf nowcast+` didn't produce netCDF files with the
+  expected `time_counter` values
+* killed `nowcast-blue` run in progress
+* Fraser River buoy web page TSL cert expired between 11:35 and 12:35
+  * hacked `/data/dlatorne/SOG-projects/ECget/ecget/fraser_buoy.py` to change `DATA_URL` to http
+  * obs collection succeeded at 15:35
+* `nowcast-agrif` hung because I didn't upload corrected atmospheric forcing to `orcinus`
+  * uploaded corrected atmospheric forcing to `orcinus`, `optimum`, and `graham`
+  * re-launched `nowcast-agrif`
+* `/nearline` access on `graham` was restored around 11:30, just in time for feb25 results tarball :-)
+
+
+##### Miscellaneous
+
+* uploaded 2017 forcing files to `beluga` for Tall
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+    # atmospheric/GEM2.5/operational/ops_y2017*.nc are already on beluga
+  yyyy=2017; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
+  yyyy=2017; rsync -tv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/
+  yyyy=2017; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
+  yyyy=2017; rsync -tv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
+  ```
+  <!-- markdownlint-enable MD013 -->
+* MOAD group mtg; see whiteboard
+* Phys Ocgy seminar: Yayla Sezginer, Tortel lab: Resolving fine-scale variability in phytoplankton
+  growth and physiology with Chlorophyll fluorescence
+* updated PyCharm on `kudu` to 2024.3.4
+
+
+##### 2x resolution SalishSeaCast
+
+* talked to Rich about 2xrez and sent him links to comparison and processing notebooks on GitHub
+
+
+## March
+
+<!-- markdownlint-disable MD001 -->
+#### Sat 1-Mar-2025
+<!-- markdownlint-enable MD001 -->
+
+Goofed off.
+
+
+
+#### Sun 2-Mar-2025
+
+##### SalishSeaCast
+
+* `nowcast-blue` stalled before 1st time step
+  * connections to `arbutus` fail after authentication
+  * sent email to support
+  * got connected at ~12:30
+    * NEMO was stalled in startup
+    * eventually got things cleaned up and `nowcast-blue` started at ~13:15
+
+
+##### Miscellaneous
+
+* updated PyCharm to 2024.3.4 on `khawla`
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez verification notebook
+  * discussed row 7 - Neah Bay to Semiahmoo Bay with Susan
+* continued work on 2xrez processing notebook
+  * reviewed row 6 grid cell adjustments with Susan
+
+
 
 
 
