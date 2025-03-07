@@ -1867,6 +1867,270 @@ Goofed off.
 
 
 
+### Week 10
+
+#### Mon 3-Mar-2025
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update codecov-action to 5.4.0 re: dependency updates:
+  * SalishSeaNowcast
+  * AtlantisCmd
+  * gha-workflows
+
+
+##### SalishSeaNowcast
+
+* squash-merged `fix-grib-time-parsing` branch; PR#338
+* closed PR#311 re: `graham` offline and deleted branch
+* standardized `python3 -m` to `python -m` because it's time; PR#340
+
+
+##### SalishSeaCast
+
+* backfilled `archive_tarball 2024-dec`
+
+
+##### Miscellaneous
+
+* NEMO seminar:
+  * climate model downscaling for Salish Sea
+  * BGC models in Hudson Bay
+
+
+
+#### Tue 4-Mar-2025
+
+Worked at ESB while Rita was at home.
+
+Traveled to Sidney for SoPO.
+
+##### SalishSeaCast
+
+* backfilled `archive_tarball 2025-jan`
+
+
+##### sss150
+
+* generated boundary files for 3apr23 to 2may23:
+  * VSCode session on `skookum` in `/data/dlatorne/MEOPAR/SS-run-sets/`
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    # edit file patterns in `bdytools_ssc_to_sss150_salish.yaml`
+    cd sss150
+    mamba activate bdytools
+    bdytools bdytools_ssc_to_sss150_salish.yaml --bdy ssh ts uv --bdy_date0 20230403 --bdy_date1 20230430
+    # edit file patterns in `bdytools_ssc_to_sss150_salish.yaml`
+    bdytools bdytools_ssc_to_sss150_salish.yaml --bdy ssh ts uv --bdy_date0 20230430 --bdy_date1 20230502
+    ```
+    <!-- markdownlint-enable MD013 -->
+
+
+##### Atlantis
+
+* worked with Raisha to push her `salish-sea-atlantis-model` config repo to GitHub to remove reliance
+  on CSIRO Bitbucket repo that we are loosing access to
+  * stalled by large files in repo history
+  * TODO:
+    * remind myself how to filter large files out of a repo
+
+
+##### SalishSeaTools
+
+* squash-merged PR#137 re: CHS water level station ids for Halfmoon Bay and Squamish changed to `None`
+* cleaned up docstring type annotation and unreachable `return` statements in `rivertools`; PR#139
+
+
+##### SalishSeaNowcast
+
+* explored renaming `make_runoff`
+  * discussed with Susan and she agrees that `make_v202111_runoff_file` should become the generic
+    worker, and `make_runoff file` change to `make_v201702_runoff_file` that is specific to v201702
+    bathymetry that is now only used for Baynes Sound AGRIF model config runs
+  * need to accept rivers dict module as arg and handle importing it during execution instead
+    of at worker module startup
+  * may be able to use refactored worker for sss150 as well as SalishSeaCast
+
+
+
+#### Wed 5-Mar-2025
+
+##### SoPO
+
+* Oxygen & hypoxia in BC Waters
+  * Charles Hannah:
+* Land Temperature & Hydrology
+  * Charles Curry, Pacific Climate Impacts Consortium
+    * 2024 was warmest globally, 2nd warmest in BC
+    * still in a snow drought even though precip returned to normal in summer/fall
+* River Discharges
+  * Ian Geisbrecht, Hakai
+    * with Dan Moore, UBC
+    * big watersheds: Fraser, Skeena & Naas
+    * small watershed are 22% of area, but 65% of glacier ice ??
+    * 5 watershed types:
+      * snow continental: Fraser, Skeena, Naas
+      * glacierized mountain: Homathko, Wannock, Klinaklini
+      * snow mountain: Oyster, Stawamus, Kitimat
+      * rain mountain: WCVI: Zeballos, Tofino, Sarita
+      * rain hills (northern): Yakoun, Premier (both Haida Gwai), San Josef (north VI)
+* NE Pacific Temperature, Salinity, Density & Marine Heatwaves from Satellites & ARGOs
+  * Tetjana Ross
+* Satellite obs Chlorophyll-a, temperature & marine Heatwaves
+  * Andrea Hilborn
+* Coastal Upwelling/Downwelling, La Perouse time series
+  * Roy Hourston
+* Shore stations temperature and salinity
+  * Jen Jackson
+* Gwaii Haanas Marine monitoring
+  * Lynn Lee
+* BC Shelf Mooring program
+  * Cynthia Bluteau
+    * taking over program from Charles
+    * primarily showed Scott2 and EO1 moorings
+    * post-blob cooling ended in 2024, temperatures rising
+    * after 3 years in a row, summer hypoxia at Scott2 is now a feature, not a bug
+    * **good contact for mooring obs** some in SoG, improving data access
+* Climate Variability from 2km ocean model
+  * Amber Holdsworth
+    * NEP36-CanOE
+* Currents and Temperature off the BC Coastal
+  * Guoqi Han
+* OA dynamics in the near-Shore
+  * Wiley Evans, Hakai
+* Nurients & phytos on line p
+  * Angelica Peña
+    * 1500 km long transect
+    * 1956-1981 by measurements from weather ships
+    * 1982-now research cruises
+    * 2019-now gliders
+* Phyto biomass & community composition in northern SoG & central Coast
+  * Justin Del Bel Belluz, Hakai
+* West Coast zooplankton
+  * Akash Sastri
+* Kelp
+  * Sandie Hankewich
+    * huge economic importance as dependent species
+* Olympia Oyster index monitoring site
+  * Erin Herder
+    * only endemic oyster in BC
+    * species of special interest under SARA
+* Tsawout First Nation Dungeness Crab Stewardship
+  * Lais Chaves, Tsawout First Nation
+* eDNA metabarcoding
+  * Emily Rubidgem, Kristen Westfall
+    * eDNA == environmental DNA; material shed by organisms into environment
+    * rapid biodiversity assessments
+
+
+##### SalishSeaNowcast
+
+* continued work on updating NowcastWorker mocks in unit tests; issue #81
+
+
+
+#### Thu 6-Mar-2025
+
+##### SoPO
+
+* Continuous plankton recorders (CPR)
+  * Clare Ostle
+* Deep-Sea Maps
+  * Cherisse DuPreez
+* Pelagic Fish, primarily Pacific Herring
+  * Jennifer Boldt
+    * herring increase since 2010 continues
+    * some anchovies
+    * few sardines
+* Juvenille Salmon on the Shelf
+  * Jackie King
+    * summer
+      * chum dominate
+      * sockeye mainly in Queen Charlotte Sound on their out-migration
+* Groundfish
+  * Jillian Dunic, Sean Anderson
+* Pacific Hake
+  * Stéphane Gauthier
+* Seabirds
+  * Mark Hipfner
+* Haro Strait bird counts
+  * Douglas Bertram
+* Stellar Sea Lions
+  * Strahan Tucker
+* Offhore Killer Whale (OKW) diet specialization
+  * Brianna Wright
+    * discovered in 1988; rarely seen
+    * ~300 individuals; large groups of ~50
+    * feed on sharks and salmon
+* Gray Whale collaboration w/ Mexico & USA
+  * Paul Cottrell
+* West Coast BC Distributed Biological Observatory (DBO)
+  * Kohen Bauer, Eddy Carmac, ONC
+    * Salish Sea observing workshop in summer
+* Marine biotoxins
+  * Andrew Ross
+* Salish Sea Temperature, Salinity & O2
+  * Jenn Jackson
+* Gulf of Alaska ecosystem status
+  * Bridget Ferriss, NOAA
+* SoG spring bloom and summer productivity
+  * Susan Allen
+* SoG conditions and HABs
+  * Svetlana Esenkulova, Rich Pawlowicz, PSF, UBC
+* Salish Sea Soundscape monitoring
+  * Rianna Burnham, Svein Vagle, Max Lauch
+* SoG zooplankton
+  * Kelly Young
+
+Talked with David Dick of Quentol,Yen Wsanec Marine Guardians, manager of program that I worked
+with Dan Baker and EMSA on to use SalishSeaCast currents for vessel ground-speed monitoring via AIS
+
+
+##### SalishSeaNowcast
+
+* continued work on updating NowcastWorker mocks in unit tests; PR#81
+
+
+##### Miscellaneous
+
+* Started to upload 2018 forcing files to `beluga` for Tall
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+    # atmospheric/GEM2.5/operational/ops_y2018*.nc are already on beluga
+  yyyy=2018; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * rivers upload stalled
+  
+
+
+##### Fri 7-Mar-2025
+
+
+##### SalishSeaNowcast
+
+* finished work on updating NowcastWorker mocks in unit tests; issue #81; PR#343
+
+
+##### Miscellaneous
+
+* finished uploading 2018 forcing files to `beluga` for Tall
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+    # atmospheric/GEM2.5/operational/ops_y2018*.nc are already on beluga
+  yyyy=2018; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
+
+  yyyy=2018; rsync -tv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/
+  yyyy=2018; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
+  yyyy=2018; rsync -tv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
+  ```
+  <!-- markdownlint-enable MD013 -->
+
 
 
 
@@ -1875,17 +2139,18 @@ SalishSeaCast TODO:
 * drop VENUS nodes ADCP comparison figures because the obs collection code has never been ported
   from Matlab; nobody cares enough
   * `make_plots nemo nowcast comparison`
-    * `research_VENUS.plotdepavADCP` - keep?
+    * `research_VENUS.plotdepavADCP`
       * 3 nodes
-    * `research_VENUS.plottimeavADCP` - keep?
+    * `research_VENUS.plottimeavADCP`
       * 3 nodes
-    * `research_VENUS.plotADCP` - keep?
+    * `research_VENUS.plotADCP`
       * 3 nodes
 * resolve Squamish and Halfmoon Bay water level comparison figure failures by setting CHS station
   ids to `None` like we do for Boundary Bay; that should produce model-only figures - done 17feb25
   in `tools` PR#137
   * add an issue to perhaps add Darrell Bay (07808, opposite Woodfibre) as a future location for
-    NEMO water level output and a comparison figure
+    NEMO water level output and a comparison figure; done 4mar25 in `NEMO-3.6-code` issue #9 and
+    `SalishSeaNowcast` issue #341
     * Latitude: 49.669, Longitude: -123.169
 
 
