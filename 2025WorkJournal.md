@@ -2102,10 +2102,10 @@ with Dan Baker and EMSA on to use SalishSeaCast currents for vessel ground-speed
   ```
   <!-- markdownlint-enable MD013 -->
   * rivers upload stalled
-  
 
 
-##### Fri 7-Mar-2025
+
+#### Fri 7-Mar-2025
 
 
 ##### SalishSeaNowcast
@@ -2121,7 +2121,6 @@ with Dan Baker and EMSA on to use SalishSeaCast currents for vessel ground-speed
     # atmospheric/GEM2.5/operational/ops_y2018*.nc are already on beluga
   yyyy=2018; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
-
   yyyy=2018; rsync -tv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/rivers/
   yyyy=2018; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}*.nc \
@@ -2130,6 +2129,22 @@ with Dan Baker and EMSA on to use SalishSeaCast currents for vessel ground-speed
     beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
   ```
   <!-- markdownlint-enable MD013 -->
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update jinja2 to 3.1.6 re: CVE-2025-27516 re:
+  arbitrary code execution vulnerability
+  * SalishSeaNowcast
+  * salishsea-site
+  * ECget
+  * SOG-Bloomcast-Ensemble
+
+
+##### PythonNotes
+
+* started work on notebook about matching obs in Pandas dataframe with field
+  values from ERDDAP
 
 
 
