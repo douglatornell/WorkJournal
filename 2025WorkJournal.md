@@ -2107,6 +2107,10 @@ with Dan Baker and EMSA on to use SalishSeaCast currents for vessel ground-speed
 
 #### Fri 7-Mar-2025
 
+##### SalishSeaCast
+
+* no obs from any of the USGS rivers
+
 
 ##### SalishSeaNowcast
 
@@ -2145,6 +2149,38 @@ with Dan Baker and EMSA on to use SalishSeaCast currents for vessel ground-speed
 
 * started work on notebook about matching obs in Pandas dataframe with field
   values from ERDDAP
+
+
+
+#### Sat 8-Mar-2025
+
+##### SalishSeaCast
+
+* no obs from Skagit River
+* `download_live_ocean` timedout out at 10:57
+  * restarted at 12:13 and it succeeded immediately
+
+
+
+#### Sun 9-Mar-2025
+
+##### SalishSeaCast
+
+* `download_live_ocean` timedout out at 11:54
+  * restarted at ~13:20 and it failed again at 16:19
+  * restarted again at 16:58; more 404s, so gave up and killed it
+  * persisted 8mar download via symlink
+  * ran `make_live_ocean_files` to jump start automation at ~17:15
+
+
+##### PythonNotes
+
+* finished notebook about matching obs in Pandas dataframe with field values from ERDDAP
+
+
+
+
+
 
 
 
