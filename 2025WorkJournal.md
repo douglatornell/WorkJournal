@@ -2179,6 +2179,123 @@ with Dan Baker and EMSA on to use SalishSeaCast currents for vessel ground-speed
 
 
 
+### Week 11
+
+#### Mon 10-Mar-2025
+
+##### SalishSeaCast
+
+* LiveOcean/20250309/ was available at 19:14 yesterday
+  * backfilled `download_live_ocean` and `make_live_ocean_files`
+* workers were slow to launch and ERDDAP was at >400% CPU and >50% RAM
+  * killed ERDDAP and workers started to work
+    * most requests in the past 24h from 90.127.41.108 == lfbn-idf1-1-2113-108.w90-127.abo.wanadoo.fr
+* Fraser River buoy web page TSL cert was renewed on 7mar
+  * removed hack from `/data/dlatorne/SOG-projects/ECget/ecget/fraser_buoy.py`
+    that changed `DATA_URL` to http
+
+
+##### SalishSeaNowcast
+
+* finished dropping VENUS node ADCP figures because the obs collection code has never been ported
+  from Matlab; nobody cares enough; PR#344
+
+
+##### Security Updates
+
+* Squash-merged dependabot PR to update ssh-action to 1.2.2 re: feature & docs updates
+  * salishsea-site
+
+
+
+#### Tue 11-Mar-2025
+
+##### SalishSeaCast
+
+* `upload_forcing graham nowcast+` failed with an SSH protocol banner read error
+  * manual re-try failed initially; succeeded later in the day
+
+
+##### 2025 Bloomcast
+
+* prep failed due to no new wind data
+
+
+##### PythonNotes
+
+* started notebook about scaling matching of obs in Pandas dataframe with field values from ERDDAP
+  * sorting the obs dataframe on `time` takes advantage of file system caching on server to provide
+    some speedup
+  * `dask.DataFrame` does nothing to parallelize the processing
+
+
+
+#### Wed 12-Mar-2025
+
+##### Security Updates
+
+* squash-merged dependabot PR that updates `cryptography` to 44.0.1 re: CVE-2024-12797 re: OpenSSL
+  vulnerability
+  * cookiecutter-djl-pypkg
+* Squash-merged dependabot PRs to update jinja2 to 3.1.6 re: CVE-2025-27516 re:
+  arbitrary code execution vulnerability
+  * cookiecutter-djl-pypkg
+  * cookiecutter-MOAD-pypkg
+  * MOAD/docs
+  * moad_tools
+  * erddap-datasets
+  * NEMO-Cmd
+  * SalishSeaCast/docs
+  * SalishSeaCmd
+  * tools/SalishSeaTools
+  * SalishSeaCast/SOG
+
+
+##### 2025 Bloomcast
+
+* prep failed due to no new wind data
+
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus turbidity` failed with an SSH protocol banner read error
+  * manual re-try succeeded
+
+
+##### SalishSeaNowcast
+
+* renamed `make_*runoff_file` workers to make 201702 for `nowcast-agrif` the special one, and the
+  one we now use for everything else the one that will become generic after some refactoring to
+  handle bathymetry as a CLI arg/option; PR#345
+  * deployed branch on `skookum` for testing
+  * restarted manager to load updated config and `next_workers` module
+
+
+
+#### Thu 13-Mar-2025
+
+##### 2025 Bloomcast
+
+* prep failed due to no new wind data
+* debugging on `khawla`:
+  * last wind data date at ~10:15 is 2025-03-11; i.e. ECCC wind obs aren't updating for previous day
+    before we try to run at 09:30
+  * wateroffice web page table layout has changed from 4 columns to 5
+  * successfully hacked code to:
+    * suppress noisy info and debug messages from matplotlib
+    * successfully process rivers obs
+    * calculate an 11mar25 bloom date forecast
+
+
+
+#### Fri 14-Mar-2025
+
+##### SalishSeaNowcast
+
+* squash-merged PR#345 re: renamed `make_*runoff_file` workers to make 201702 for `nowcast-agrif`
+  the special one, and the one we now use for everything else the one that will become generic after
+  some refactoring to handle bathymetry as a CLI arg/option
+* released v25.1
 
 
 
@@ -2188,7 +2305,7 @@ with Dan Baker and EMSA on to use SalishSeaCast currents for vessel ground-speed
 SalishSeaCast TODO:
 
 * drop VENUS nodes ADCP comparison figures because the obs collection code has never been ported
-  from Matlab; nobody cares enough
+  from Matlab; nobody cares enough - done 10mar25 in PR#344
   * `make_plots nemo nowcast comparison`
     * `research_VENUS.plotdepavADCP`
       * 3 nodes
