@@ -2298,28 +2298,16 @@ with Dan Baker and EMSA on to use SalishSeaCast currents for vessel ground-speed
 * released v25.1
 
 
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* Phys Ocgy seminar: Patagonia field school
+* read the Real Python `asyncio` tutorial
+  * unclear if it will work for concurrent ERDDAP obs matching or if `xarray.open_dataset()`
+    will block
 
 
 
-
-SalishSeaCast TODO:
-
-* drop VENUS nodes ADCP comparison figures because the obs collection code has never been ported
-  from Matlab; nobody cares enough - done 10mar25 in PR#344
-  * `make_plots nemo nowcast comparison`
-    * `research_VENUS.plotdepavADCP`
-      * 3 nodes
-    * `research_VENUS.plottimeavADCP`
-      * 3 nodes
-    * `research_VENUS.plotADCP`
-      * 3 nodes
-* resolve Squamish and Halfmoon Bay water level comparison figure failures by setting CHS station
-  ids to `None` like we do for Boundary Bay; that should produce model-only figures - done 17feb25
-  in `tools` PR#137
-  * add an issue to perhaps add Darrell Bay (07808, opposite Woodfibre) as a future location for
-    NEMO water level output and a comparison figure; done 4mar25 in `NEMO-3.6-code` issue #9 and
-    `SalishSeaNowcast` issue #341
-    * Latitude: 49.669, Longitude: -123.169
 
 
 
