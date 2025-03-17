@@ -2305,7 +2305,19 @@ with Dan Baker and EMSA on to use SalishSeaCast currents for vessel ground-speed
 * read the Real Python `asyncio` tutorial
   * unclear if it will work for concurrent ERDDAP obs matching or if `xarray.open_dataset()`
     will block
+  * `xarray.open_dataset()` blocks, so strike the `asyncio` approach
 
+
+
+#### Sat 15-Mar-2025
+
+Goofed off
+
+
+
+#### Sun 16-Mar-2025
+
+Goofed off
 
 
 
