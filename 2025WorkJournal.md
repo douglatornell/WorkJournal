@@ -2321,6 +2321,51 @@ Goofed off
 
 
 
+### Week 12
+
+#### Mon 17-Mar-2025
+
+##### Miscellaneous
+
+* Checked status of scheduled GHA workflows:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  mamba activate gha-workflows
+  python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+
+##### gha-workflows
+
+* add SalishSeaCast/tools to list of repos for checking
+* add 43ravens/ECget to list of repos for checking
+
+
+##### Security Updates
+
+* tightened GitHub Actions permission as recommneded in
+  https://semgrep.dev/blog/2025/popular-github-action-tj-actionschanged-files-is-compromised/
+  * SalishSeaCast org:
+    * `UBC-MOAD/gha-workflows/*`
+    * `benelan/milestone-action`
+    * `mamba-org/setup-micromamba`
+    * `appleboy/ssh-action`  # used in salishsea-site deployment workflow
+  * UBC-MOAD org:
+    * `benelan/milestone-action`
+    * `mamba-org/setup-micromamba`
+  * 43ravens org:
+    * `UBC-MOAD/gha-workflows/*`
+    * `benelan/milestone-action`
+    * `mamba-org/setup-micromamba`
+  * SS-Atlantis org:
+    * `UBC-MOAD/gha-workflows/*`
+    * `benelan/milestone-action`
+    * `mamba-org/setup-micromamba`
+
+
+
+
 
 
 * tools repo TODO:
