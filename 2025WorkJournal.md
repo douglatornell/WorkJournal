@@ -863,7 +863,7 @@ Worked at ESB.
 
 ##### Miscellaneous
 
-* updated `kahla` PyCharm to 2024.3.2
+* updated `khawla` PyCharm to 2024.3.2
 
 
 ##### SalishSeaCast
@@ -978,8 +978,9 @@ Worked at ESB.
   * fixed a typo in a `plot_modes()` call
   * updated URLs in dynmodes notebook
   * for Susan:
-    * alternative link to Klinck's work (mulitple occurrences)
-      * http://woodshole.er.usgs.gov/operations/sea-mat/klinck-html/dynmodes.html goes to WHOI index page
+    * alternative link to Klinck's work (multiple occurrences)
+      * http://woodshole.er.usgs.gov/operations/sea-mat/klinck-html/dynmodes.html
+        goes to WHOI index page
     * will the class use the notebook, the module(s), or both
       * update docs that describe `ipython` and modules use?
     * update links in `aims_allen.tex`
@@ -1181,7 +1182,7 @@ Goofed off.
   * got help from Susan to understand "Check continuity and Add Missed Islands"
     * that section is the beginning of changes that are driven by 50x50 inspections done in the
       `analysis-susan/notebooks/bathymetry/lookat201702_201803d*.ipynb` notebooks
-    * things seemed to go well until the section to add the Steeveston Jetty where I discovered
+    * things seemed to go well until the section to add the Steveston Jetty where I discovered
       that the base bathymetry in that region (at least) is quite different
       * Susan traced that issue to processing for the Fraser River that she did in her version of
         Michael's bathymetry creation notebook that she didn't share with me
@@ -1511,7 +1512,7 @@ Worked at ESB while Rita was at home.
 * smoothing took ~26 minutes on `khawla`
 * continued work on 2xrez verification notebook
   * factored out tile x mins/maxs for less editing in each `plot_tile()` call
-  * added row 6 - Juan de Fuca, Jrodan River, Saanich Inlet, boundary islands, Neptune Beach
+  * added row 6 - Juan de Fuca, Jordan River, Saanich Inlet, boundary islands, Neptune Beach
   * added lon/lat panels to plots to help with comparison to Google Maps
 * continued work on 2xrez processing notebook
   * added code to adjust specific grid cells
@@ -1544,7 +1545,7 @@ Worked at ESB while Rita was at home.
 
 * squash-merged 2025 prep PR#70
 * Added new unrecognized weather description `Moderate Rain,Snow` to cloud fraction mapping; PR#71
-* experimented with code in `bloomcast._configure_loggin()` to change `matplotlib` logging level to
+* experimented with code in `bloomcast._configure_logging()` to change `matplotlib` logging level to
   `WARNING`
 
 * TODO:
@@ -1579,7 +1580,7 @@ Worked at ESB while Rita was at home.
   * `supervisord -c ...`
   * `collect_weather 00 2.5km`
   * `crop_gribs 00 --fcst-date 2025-02-21`
-* shut down and restarted persistent dask cluster on `saslish` in new env
+* shut down and restarted persistent dask cluster on `salish` in new env
 * `crop_gribs 00` failed with TypeError and raised a FutureWarning
 
 
@@ -1998,7 +1999,7 @@ Traveled to Sidney for SoPO.
   * Guoqi Han
 * OA dynamics in the near-Shore
   * Wiley Evans, Hakai
-* Nurients & phytos on line p
+* Nutrients & phytos on line P
   * Angelica Peña
     * 1500 km long transect
     * 1956-1981 by measurements from weather ships
@@ -2042,7 +2043,7 @@ Traveled to Sidney for SoPO.
     * herring increase since 2010 continues
     * some anchovies
     * few sardines
-* Juvenille Salmon on the Shelf
+* Juvenile Salmon on the Shelf
   * Jackie King
     * summer
       * chum dominate
@@ -2057,7 +2058,7 @@ Traveled to Sidney for SoPO.
   * Douglas Bertram
 * Stellar Sea Lions
   * Strahan Tucker
-* Offhore Killer Whale (OKW) diet specialization
+* Offshore Killer Whale (OKW) diet specialization
   * Brianna Wright
     * discovered in 1988; rarely seen
     * ~300 individuals; large groups of ~50
@@ -2157,7 +2158,7 @@ with Dan Baker and EMSA on to use SalishSeaCast currents for vessel ground-speed
 ##### SalishSeaCast
 
 * no obs from Skagit River
-* `download_live_ocean` timedout out at 10:57
+* `download_live_ocean` timed out out at 10:57
   * restarted at 12:13 and it succeeded immediately
 
 
@@ -2166,7 +2167,7 @@ with Dan Baker and EMSA on to use SalishSeaCast currents for vessel ground-speed
 
 ##### SalishSeaCast
 
-* `download_live_ocean` timedout out at 11:54
+* `download_live_ocean` timed out out at 11:54
   * restarted at ~13:20 and it failed again at 16:19
   * restarted again at 16:58; more 404s, so gave up and killed it
   * persisted 8mar download via symlink
@@ -2344,7 +2345,7 @@ Goofed off
 
 ##### Security Updates
 
-* tightened GitHub Actions permission as recommneded in
+* tightened GitHub Actions permission as recommended in
   https://semgrep.dev/blog/2025/popular-github-action-tj-actionschanged-files-is-compromised/
   * SalishSeaCast org:
     * `UBC-MOAD/gha-workflows/*`
@@ -2364,6 +2365,57 @@ Goofed off
     * `mamba-org/setup-micromamba`
 
 
+
+#### Tue 18-Mar-2025
+
+Worked at ESB while Rita was at home
+
+##### Atlantis
+
+* hangout with Raisha to migrate SSAM repo from CSIRO Bitbucket to our SS-Atlantis GitHub org
+  * tried unsuccessfully to preserve history by using `git-filter-repo` to remove large
+    files from history
+  * Raisha populated a new repo from her working copy from Bitbucket, curating as she went
+* invited Javier to SS-Atlantis org
+
+
+##### Miscellaneous
+
+* EOAS colloquium: Isla Myers-Smith, Forestry re: Arctic tundra ecosystem responses
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update jinja2 to 3.1.6 re: CVE-2025-27516 re:
+  arbitrary code execution vulnerability
+  * SOG-Bloomcast
+  * cookiecutter-analysis-repo
+  * MoaceanParcels
+  * Reshapr
+  * AtlantisCmd
+* updated lists of allows actions after failures showed that I had patterns too tight
+  * SalishSeaCast org:
+    * `UBC-MOAD/gha-workflows/*`
+    * `benelan/milestone-action@*`
+    * `mamba-org/setup-micromamba@*`
+    * `appleboy/ssh-action@*`  # used in salishsea-site deployment workflow
+  * UBC-MOAD org:
+    * `benelan/milestone-action@*`
+    * `mamba-org/setup-micromamba@*`
+  * 43ravens org:
+    * `UBC-MOAD/gha-workflows/*`
+    * `benelan/milestone-action@*`
+    * `mamba-org/setup-micromamba@*`
+  * SS-Atlantis org:
+    * `UBC-MOAD/gha-workflows/*`
+    * `benelan/milestone-action@*`
+    * `mamba-org/setup-micromamba@*`
+
+
+##### SalishSeaNowcast
+
+* continued work on replacing mock loggers in tests with caplog re: issue #82
+  * branch: caplog-fixture
 
 
 
