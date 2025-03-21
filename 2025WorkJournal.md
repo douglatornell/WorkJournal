@@ -2507,12 +2507,15 @@ Worked at ESB
 
 * created PR#347 for removal of VHFR-FVCOM runs from automation and repository
   * branch: drop-vhfr-fvcom
+* continued work on replacing mock loggers in tests with caplog re: issue #82
+  * branch: caplog-fixture
 
 
 ##### Miscellaneous
 
 * MOAD group mtg; see whiteboard
 * Phys Ocgy seminar: Patagonia field school
+* updated PyCharm to 2024.3.5 on `kudu`
 
 
 
