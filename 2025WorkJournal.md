@@ -2419,6 +2419,105 @@ Worked at ESB while Rita was at home
 
 
 
+#### Wed 19-Mar-2025
+
+Yesterday's UBC email problems on `kudu` turn out to be an actual ongoing outage; resolved around noon
+
+##### Atlantis
+
+* added Apache license file to SSAM repo and updated README
+* worked with Raisha to get an image that GitHub would accept (square and <1M>) for the org
+
+
+##### SOG-Bloomcast-Ensemble
+
+* created issue #73 re: wateroffice web page table layout change from 4 columns to 5
+
+
+
+#### Thu 20-Mar-2025
+
+##### SalishSeaCast
+
+* `manager` crashed and restarted at 04:23 due to KeyError on `WWATCH3 run`
+  * caused by checklist clearance  just before `download_wwatch3_results forecast2` finished
+* deleted ingress security group rule on `arbutus` for ports 5580-5587 that were used for VHFR-FVCOM
+  runs preparation
+
+
+##### Miscellaneous
+
+* ONC annual survey
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing notebook
+  * adjusted most of row 7 grid cells
+* continued work on 2xrez verification notebook
+  * added row 8 - Neah Bay to Surrey
+
+
+##### sss150
+
+* generated boundary files for 3may23 to 2jul23:
+  * VSCode session on `skookum` in `/data/dlatorne/MEOPAR/SS-run-sets/`
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    # edit file patterns in `bdytools_ssc_to_sss150_salish.yaml`
+    cd sss150
+    mamba activate bdytools
+    bdytools bdytools_ssc_to_sss150_salish.yaml --bdy ssh ts uv --bdy_date0 20230503 --bdy_date1 20230530
+    # edit file patterns in `bdytools_ssc_to_sss150_salish.yaml`
+    bdytools bdytools_ssc_to_sss150_salish.yaml --bdy ssh ts uv --bdy_date0 20230531 --bdy_date1 20230602
+    # edit file patterns in `bdytools_ssc_to_sss150_salish.yaml`
+    bdytools bdytools_ssc_to_sss150_salish.yaml --bdy ssh ts uv --bdy_date0 20230603 --bdy_date1 20230629
+    # edit file patterns in `bdytools_ssc_to_sss150_salish.yaml`
+    bdytools bdytools_ssc_to_sss150_salish.yaml --bdy ssh ts uv --bdy_date0 20230630 --bdy_date1 20230702
+    ```
+    <!-- markdownlint-enable MD013 -->
+
+
+##### SalishSeaNEMO
+
+* started removal of VHFR-FVCOM runs from automation and repository
+  * branch: drop-vhfr-fvcom
+  * workers to drop:
+    * `make_fvcom_boundary`
+
+    * `make_fvcom_atmos_forcing`
+    * `make_fvcom_rivers_forcing`
+    * `upload_fvcom_atmos_forcing`
+    * `run_fvcom`
+    * `watch_fvcom`
+    * `download_fvcom_results`
+    * `make_plots fvcom research|publish`
+    * `ping_erddap fvcom...`
+  * drop FVCOM workers from process flow diagram
+  * drop FVCOM figures from `make_plots` and drop figure modules and notebooks
+  * drop FVCOM boundary files from NEMO `file_def.xml`
+
+
+
+#### Fri 21-Mar-2025
+
+Worked at ESB
+
+##### SalishSeaNEMO
+
+* created PR#347 for removal of VHFR-FVCOM runs from automation and repository
+  * branch: drop-vhfr-fvcom
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* Phys Ocgy seminar: Patagonia field school
+
+
+
+
+
 
 * tools repo TODO:
   * update library_code section in docs or move it to MOAD docs
