@@ -2519,6 +2519,33 @@ Worked at ESB
 
 
 
+#### Sat 22-Mar-2025
+
+##### FUN
+
+* continued work on modernizing codebase
+
+
+
+#### Sun 23-Mar-2025
+
+##### FUN
+
+* finished initial modernization of codebase; PR#8
+  * test suite runs without errors
+  * forecast script runs successfully, though the UI code needs work
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing notebook
+  * reviewed row 7 grid cell adjustments with Susan
+* continued work on 2xrez verification notebook
+  * discussed row 8 - Neah Bay to Surrey with Susan
+
+
+
+
 
 
 
