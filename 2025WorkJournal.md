@@ -2655,7 +2655,7 @@ Worked at ESB
 
 
 
-#### Wed 26-Mar-2025
+#### Thu 27-Mar-2025
 
 
 ##### SalishSeaCast
@@ -2679,6 +2679,51 @@ Worked at ESB
 
 
 
+#### Fri 28-Mar-2025
+
+Worked at ESB
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* phys ocgy seminar: Michael A, Scripps re: internal waves and ocean turbulence
+* uploaded 2019 forcing files to `beluga` for Tall
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+    # atmospheric/GEM2.5/operational/ops_y2019*.nc are already on beluga
+  yyyy=2019; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
+  yyyy=2019; rsync -tv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/
+  yyyy=2019; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
+  yyyy=2019; rsync -tv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
+  ```
+  <!-- markdownlint-enable MD013 -->
+* uploaded 2020 forcing files to `beluga` for Tall
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  yyyy=2020; rsync -tv /results/forcing/atmospheric/GEM2.5/operational/ops_y${yyyy}*.nc
+       beluga:projects/def-allen/SalishSea/forcing/atmospheric/
+  yyyy=2020; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
+  yyyy=2020; rsync -tv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/
+  yyyy=2020; rsync -tv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
+  yyyy=2020; rsync -tv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * discovered that I have been uploading from `/results/forcing/rivers/turbidity_201906/` instead of
+    `/results/forcing/rivers/river_turb/`
+
+
+##### SalishSeaNowcast
+
+* added HHTP 400 error handling to `get_onc_ferry` worker to deal with recently appeared
+  error state when sensor is reported as non-existent; PR#348
 
 
 
