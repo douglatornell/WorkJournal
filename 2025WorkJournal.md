@@ -2482,26 +2482,20 @@ Yesterday's UBC email problems on `kudu` turn out to be an actual ongoing outage
 
 * started removal of VHFR-FVCOM runs from automation and repository
   * branch: drop-vhfr-fvcom
-  * workers to drop:
+  * PR#347
+  * dropped worker:
     * `make_fvcom_boundary`
-
-    * `make_fvcom_atmos_forcing`
-    * `make_fvcom_rivers_forcing`
-    * `upload_fvcom_atmos_forcing`
-    * `run_fvcom`
-    * `watch_fvcom`
-    * `download_fvcom_results`
-    * `make_plots fvcom research|publish`
-    * `ping_erddap fvcom...`
-  * drop FVCOM workers from process flow diagram
-  * drop FVCOM figures from `make_plots` and drop figure modules and notebooks
-  * drop FVCOM boundary files from NEMO `file_def.xml`
 
 
 
 #### Fri 21-Mar-2025
 
 Worked at ESB
+
+##### SalishSeaCast
+
+* ONC VENUS central and east node CTD data streams resumed
+
 
 ##### SalishSeaNEMO
 
@@ -2542,6 +2536,146 @@ Worked at ESB
   * reviewed row 7 grid cell adjustments with Susan
 * continued work on 2xrez verification notebook
   * discussed row 8 - Neah Bay to Surrey with Susan
+
+
+
+### Week 13
+
+#### Mon 24-Mar-2025
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing notebook
+  * adjusted row 8 grid cells
+* continued work on 2xrez verification notebook
+  * added row 9 - Carmanah Point to Fraser River
+* realized that I have misnumbered the rows; rows 5-9 are actually 9-14
+
+
+
+#### Tue 25-Mar-2025
+
+##### SalishSeaCast
+
+* `collect_river_data ECCC` failed
+  * `sarracenia` client reported "server unexpectedly closed connection" at 2025-03-23 20:02:03
+    and did not recover; all messages since are "EOF in violation of protocol"
+  * restarted `sarracenia` client at 08:42; files updated at 09:02
+  * recovery:
+    * backfill `collect_river_data ECCC` for 24mar
+    * backfill `make_runoff_file` for 24mar
+    * backfill `make_201702_runoff_file` for 24mar
+* TWDP ferry data stream may be back but an error from the CO2 sensor is preventing file creation
+  * Queen of New Westminster is on the Swartz Bay run; maybe instruments have been moved to a different
+    vessel?
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing notebook
+  * reviewed row 8 grid cell adjustments with Susan
+  * reviewed tiles 13(9),6 and 13(9),7 grid cell adjustments with Susan
+  * waiting for her to finish detailed review of row 13 (9)
+* continued work on 2xrez verification notebook
+  * discussed row 9 - Carmanah Point to Fraser River with Susan
+  * added row 14(10) - Tsusiat Point to English Bay
+* changed row labels 5.9 to 9-13
+
+
+##### SalishSeaNEMO
+
+* continued removal of VHFR-FVCOM runs from automation and repository
+  * branch: drop-vhfr-fvcom
+  * PR#347
+  * dropped worker:
+    * `make_fvcom_atmos_forcing`
+    * `upload_fvcom_atmos_forcing`
+    * `make_fvcom_rivers_forcing`
+    * `run_fvcom`
+    * `watch_fvcom`
+    * `download_fvcom_results`
+
+
+
+#### Wed 26-Mar-2025
+
+##### Miscellaneous
+
+* SHARCNet webinar: Is Cython Still Relevant?
+  * Tyler Collins, Brook U
+  * types & complexity
+  * give up some abstractions to get speed
+  * changes since 2020:
+    * better interfacing to Python's native typing
+    * shorthand annotations to disable array bounds checking
+    * optimizations for memory views, NumPy
+    * the rise of LLMs
+  * live demo optimization problems:
+    * `%load_ext cython`  # enable cython in notebook
+    * `%%cython`  # cython-ize cell
+      * Jupyter does compilation behind the scenes
+    * `%%cython -a`  # annotate compilation
+      * naive without type annotations
+      * `cimport cython`
+        * `cdef int ...`
+          * 1/3 faster
+    * `@cython.boundscheck(False)`
+    * `@cython.wraparound(False)`
+    * type annotations in function signatures are a big win
+      * factor of 2
+    * special bindings for NumPy to optimize for memory views:
+      * `cimport numpy as cnp`
+      * factor of 20!
+    * not everything (robust statistic) is massively improved
+      * but low hanging fruit like type annotations scale
+    * LLMs raise the floor level of skill
+  * examples:
+    * levenshtein distance: edit distance between 2 strings; dynamic programming problem on strings
+    * robust statistic
+    * prime sieve
+
+
+##### SalishSeaCast
+
+* Fraser River buoy data stream stopped after 2025-03-25 03:10
+  * turbidity persisted on 26mar
+  * tried and failed to find alternative to web scraping
+* tried to understand TWDP ferry data stream
+  * most instruments not operating, I think
+
+
+##### SalishSeaNEMO
+
+* continued removal of VHFR-FVCOM runs from automation and repository
+  * branch: drop-vhfr-fvcom
+  * PR#347
+  * dropped worker options:
+    * `update_forecast_datasets fvcom...`
+    * `ping_erddap fvcom...`
+
+
+
+#### Wed 26-Mar-2025
+
+
+##### SalishSeaCast
+
+* Fraser River buoy data stream stopped before 2025-03-27 09:10
+  * turbidity persisted on 27mar
+
+
+##### SalishSeaNEMO
+
+* continued removal of VHFR-FVCOM runs from automation and repository
+  * branch: drop-vhfr-fvcom
+  * PR#347
+  * dropped worker options:
+    * `make_plots fvcom research|publish`
+  * dropped FVCOM figures from `make_plots`
+  * dropped figure modules and notebooks
+
+  * drop FVCOM workers from process flow diagram
+  * drop FVCOM boundary files from NEMO `file_def.xml`
 
 
 
