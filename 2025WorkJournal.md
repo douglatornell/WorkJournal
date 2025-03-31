@@ -2722,8 +2722,51 @@ Worked at ESB
 
 ##### SalishSeaNowcast
 
-* added HHTP 400 error handling to `get_onc_ferry` worker to deal with recently appeared
+* added HTTP 400 error handling to `get_onc_ferry` worker to deal with recently appeared
   error state when sensor is reported as non-existent; PR#348
+
+
+
+#### Sat 29-Mar-2025
+
+Goofed off.
+
+
+
+#### Sun 30-Mar-2025
+
+##### Minecraft
+
+* checked mods, etc. for releases compatible with 1.21.5:
+  * sodium: yes
+  * lithium: yes
+  * malilib: rc1
+  * minihud: rc1
+  * tweakeroo: rc1
+  * iris: no
+  * fresh animations: no
+
+
+##### SalishSeaNowcast
+
+* squash-merged PR#348 re: HTTP 400 error handling to `get_onc_ferry` worker to deal with recently
+  appeared error state when sensor is reported as non-existent
+  * deployed to production
+
+
+##### Miscellaneous
+
+* finished uploading 2020 forcing files to `beluga` for Tall
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  yyyy=2020; rsync -tv /results/forcing/rivers/river_turb/riverTurbDaily2_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * sent Slack message to Tall explaining my mistake and the need for him to change his namelist
+    for 2020 onward
+
+
 
 
 
