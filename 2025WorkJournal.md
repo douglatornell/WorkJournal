@@ -2674,9 +2674,6 @@ Worked at ESB
   * dropped FVCOM figures from `make_plots`
   * dropped figure modules and notebooks
 
-  * drop FVCOM workers from process flow diagram
-  * drop FVCOM boundary files from NEMO `file_def.xml`
-
 
 
 #### Fri 28-Mar-2025
@@ -2820,6 +2817,13 @@ First time riding to UBC since 20-Aug.
 ##### Miscellaneous
 
 * Cassidy's defense and celebration
+
+
+##### SalishSeaNowcast
+
+* continued work on replacing mock loggers in tests with caplog re: issue #82
+  * branch: caplog-fixture
+  * PR#346
 
 
 
