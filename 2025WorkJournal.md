@@ -2478,7 +2478,7 @@ Yesterday's UBC email problems on `kudu` turn out to be an actual ongoing outage
     <!-- markdownlint-enable MD013 -->
 
 
-##### SalishSeaNEMO
+##### SalishSeaNowcast
 
 * started removal of VHFR-FVCOM runs from automation and repository
   * branch: drop-vhfr-fvcom
@@ -2497,7 +2497,7 @@ Worked at ESB
 * ONC VENUS central and east node CTD data streams resumed
 
 
-##### SalishSeaNEMO
+##### SalishSeaNowcast
 
 * created PR#347 for removal of VHFR-FVCOM runs from automation and repository
   * branch: drop-vhfr-fvcom
@@ -2582,7 +2582,7 @@ Worked at ESB
 * changed row labels 5.9 to 9-13
 
 
-##### SalishSeaNEMO
+##### SalishSeaNowcast
 
 * continued removal of VHFR-FVCOM runs from automation and repository
   * branch: drop-vhfr-fvcom
@@ -2644,7 +2644,7 @@ Worked at ESB
   * most instruments not operating, I think
 
 
-##### SalishSeaNEMO
+##### SalishSeaNowcast
 
 * continued removal of VHFR-FVCOM runs from automation and repository
   * branch: drop-vhfr-fvcom
@@ -2664,7 +2664,7 @@ Worked at ESB
   * turbidity persisted on 27mar
 
 
-##### SalishSeaNEMO
+##### SalishSeaNowcast
 
 * continued removal of VHFR-FVCOM runs from automation and repository
   * branch: drop-vhfr-fvcom
@@ -2763,9 +2763,72 @@ Goofed off.
     beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
   ```
   <!-- markdownlint-enable MD013 -->
-  * sent Slack message to Tall explaining my mistake and the need for him to change his namelist
-    for 2020 onward
 
+
+
+### Week 14
+
+#### Mon 31-Mar-2025
+
+##### Miscellaneous
+
+* sent Slack message to Tall explaining my mistake and the need for him to change the turbidity
+  file name pattern his namelist for 2020 onward
+
+
+##### SalishSeaNowcast
+
+* continued removal of VHFR-FVCOM runs from automation and repository
+  * branch: drop-vhfr-fvcom
+  * PR#347
+  * dropped FVCOM workers from process flow diagram
+  * dropped FVCOM-Cmd package from envs & setup
+  * dropped OPPTools package & deps from envs & setup
+  * dropped FVCOM-4.1 clone & build from production env setup
+  * dropped FVCOM-VHFR-config clone & envs setup
+
+  * drop `FVCOM_*.nc` file handling from `download_results` and `split_results`
+  * drop
+
+
+##### SS-run-sets
+
+* started to drop FVCOM boundary files from NEMO `file_def.xml`
+  * hacked `SS-run-sets/v202111/v202111/file_def_blue.xml` on `arbutus` for testing tomorrow
+
+
+##### SalishSeaCast
+
+* `archive_tarball` failed in `rsync` phase
+
+
+## April
+
+<!-- markdownlint-disable MD001 -->
+#### Tue 1 Apr-2025
+<!-- markdownlint-enable MD001 -->
+
+First time riding to UBC since 20-Aug.
+
+##### SalishSeaCast
+
+* investigated `archive_tarball` failure
+  * it appears to be a `/nearline` mount issue on `robot.graham`
+  * sent email to support
+
+
+##### Miscellaneous
+
+* Cassidy's defense and celebration
+
+
+
+
+
+
+##### salishsea-site
+
+* drop VHFR-FVCOM results pages from site
 
 
 
