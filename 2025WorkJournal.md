@@ -2784,9 +2784,6 @@ Goofed off.
   * dropped FVCOM-4.1 clone & build from production env setup
   * dropped FVCOM-VHFR-config clone & envs setup
 
-  * drop `FVCOM_*.nc` file handling from `download_results` and `split_results`
-  * drop
-
 
 ##### SS-run-sets
 
@@ -2802,7 +2799,7 @@ Goofed off.
 ## April
 
 <!-- markdownlint-disable MD001 -->
-#### Tue 1 Apr-2025
+#### Tue 1-Apr-2025
 <!-- markdownlint-enable MD001 -->
 
 First time riding to UBC since 20-Aug.
@@ -2825,6 +2822,148 @@ First time riding to UBC since 20-Aug.
   * branch: caplog-fixture
   * PR#346
 
+
+
+#### Wed 2-Apr-2025
+
+##### Miscellaneous
+
+* helped Camryn with build issue in her new `WWTP` NEMO config
+  * errors from `USER ice` statements
+  * suspiciously, the Susan's `WasteWater` config that Camryn is basing off lacks a cpp keys file
+
+
+##### SS-run-sets
+
+* dropped `FVCOM_[TUVW].nc` files from `v202111/file_def_blue.xml` re: SalishSeaNowcast PR#347
+
+
+##### SalishSeaNowcast
+
+* continued removal of VHFR-FVCOM runs from automation and repository
+  * branch: drop-vhfr-fvcom
+  * PR#347
+  * change `test_split_results` to use a file not named `FVCOM_[TUVW]*.nc`
+  * drop `FVCOM_*.nc` file handling from `download_results`
+  * add notes to deployment docs re: end of FVCOM runs and removal of code, etc. after v25.1
+    release
+  * deployed branch to `arbutus` and restarted `log_aggregator` and `manager` to load updated
+    config
+
+
+##### ERDDAP
+
+* stopped and restarted ERDDAP server because it was using ~81% of memory on `skookum` and most of
+  the recent requests looked like spam
+
+
+##### SalishSeaCast
+
+* discovered that `make_averaged_dataset month physics` failed on Monday
+  * re-ran manually, but it took 2 tries to get success
+* manually touched ERDDAP flag files to get month-averaged physics and chemistry datasets to load
+  March
+
+
+##### SalishSeaCast_hourly_prod
+
+* started work on `graham` runs of a new SalishSeaCast v202111 config with oxygen diagnostics from
+  Tall and hourly productivity output for Sacchi to use to compare with 22-27 Aug 2024 cruise
+  observations
+  * created new `NEMOGCM/CONFIG/SalishSeaCast_hourly_prod` config on `graham`
+    * `./makenemo -n SalishSeaCast_hourly_prod -r SalishSeaCast`
+  * added `key_trdtrc` cpp key to new config because Tall said to
+    * `./makenemo -n SalishSeaCast_hourly_prod add_key key_trdtrc`
+  * changed to `StdEnv/2020` environment with modules required to build NEMO:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    module --force purge
+    module load StdEnv/2020
+    module load netcdf-fortran-mpi/4.6.0
+    module load perl/5.30.2
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * built XIOS-2
+
+
+
+#### Thu 3-Apr-2025
+
+##### SalishSeaCast_hourly_prod
+
+* continued work on `graham` runs of a new SalishSeaCast v202111 config with oxygen diagnostics from
+  Tall and hourly productivity output for Sacchi to use to compare with 22-27 Aug 2024 cruise
+  observations
+  * built `SalishSeaCast_hourly_prod` config
+    * failed in `trczdf.f90` with:
+      <!-- markdownlint-disable MD013 -->
+      ```text
+      mpif90 -o trczdf.o -I/home/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/BLD/inc -c -fpp -r8 -O3 -assume byterecl -heap-arrays -diag-disable 6738 -I/home/dlatorne/projects/def-allen/dlatorne/MEOPAR/XIOS-2//inc  /home/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/BLD/ppsrc/nemo/trczdf.f90
+      /home/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/BLD/ppsrc/nemo/trczdf.f90(174): error #6404: This name does not have a type, and must have an explicit type.   [IOM_USE]
+            IF( iom_use("O2ZDF")) THEN
+      ----------^
+      /home/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/BLD/ppsrc/nemo/trczdf.f90(174): error #6341: A logical data type is required in this context.   [IOM_USE]
+            IF( iom_use("O2ZDF")) THEN
+      ----------^
+      compilation aborted for /home/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/BLD/ppsrc/nemo/trczdf.f90 (code 1)
+      fcm_internal compile failed (256)
+      ```
+      <!-- markdownlint-enable MD013 -->
+    * added `key_dian` based on discussion on Slack with Susan & Tall and build succeeded
+    * warnings from `stpctl.f90` should be cleaned up:
+      <!-- markdownlint-disable MD013 -->
+      ```text
+      mpif90 -o stpctl.o -I/home/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/BLD/inc -c -fpp -r8 -O3 -assume byterecl -heap-arrays -diag-disable 6738 -I/home/dlatorne/projects/def-allen/dlatorne/MEOPAR/XIOS-2//inc  /home/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/BLD/ppsrc/nemo/stpctl.f90
+      /home/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/BLD/ppsrc/nemo/stpctl.f90(198): remark #8291: Recommended relationship between field width 'W' and the number of fractional digits 'D' in this edit descriptor is 'W>=D+7'.
+      9300  FORMAT(' it :', i8, ' ssh2: ', e16.10, ' Umax: ',e16.10,' Smin: ',e16.10)
+      --------------------------------------^
+      /home/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/BLD/ppsrc/nemo/stpctl.f90(198): remark #8291: Recommended relationship between field width 'W' and the number of fractional digits 'D' in this edit descriptor is 'W>=D+7'.
+      9300  FORMAT(' it :', i8, ' ssh2: ', e16.10, ' Umax: ',e16.10,' Smin: ',e16.10)
+      --------------------------------------------------------^
+      /home/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/BLD/ppsrc/nemo/stpctl.f90(198): remark #8291: Recommended relationship between field width 'W' and the number of fractional digits 'D' in this edit descriptor is 'W>=D+7'.
+      9300  FORMAT(' it :', i8, ' ssh2: ', e16.10, ' Umax: ',e16.10,' Smin: ',e16.10)
+      -------------------------------------------------------------------------^
+      /home/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/BLD/ppsrc/nemo/stpctl.f90(197): remark #8291: Recommended relationship between field width 'W' and the number of fractional digits 'D' in this edit descriptor is 'W>=D+7'.
+      9200  FORMAT('it:', i8, ' iter:', i4, ' r: ',e16.10, ' b: ',e16.10 )
+      ----------------------------------------------^
+      /home/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/BLD/ppsrc/nemo/stpctl.f90(197): remark #8291: Recommended relationship between field width 'W' and the number of fractional digits 'D' in this edit descriptor is 'W>=D+7'.
+      9200  FORMAT('it:', i8, ' iter:', i4, ' r: ',e16.10, ' b: ',e16.10 )
+      -------------------------------------------------------------^
+      ```
+      <!-- markdownlint-enable MD013 -->
+  * built `Rebuild_NEMO`
+* created  `#salishseacast-hourly-productivity` channel on Slack
+* created `SS-run-sets/SalishSea/djl/SalishSeaCast_hourly_prod/` and files in it:
+      <!-- markdownlint-disable MD013 -->
+      ```bash
+      field_def.xml
+      file_def.xml
+      namelist.time.22aug24
+      SalishSeaCast_hourly_prod.yaml
+      ```
+      <!-- markdownlint-enable MD013 -->
+* queued 4-node test job for 1st day of interest: `22aug24-9x22`
+  * initial start time assigned: 2025-04-06T08:17:26
+  * updated to 2025-04-04T16:30:59
+  * ran at ~22:35 and failed during NEMO initialization with:
+    <!-- markdownlint-disable MD013 -->
+    ```text
+    In file "object_factory_impl.hpp", function "static std::shared_ptr<U> xios::CObjectFactory::GetObject(const std::basic_string<char, std::char_traits<char>, std::allocator<char>> &) [with U = xios::CField]",  line 78 -> [ id = GLS_KE, U = field ] object was not found.
+    ```
+    <!-- markdownlint-enable MD013 -->
+
+
+##### SalishSeaCast
+
+* yesterday's deployment of `drop-vhfr-fvcom` branch undid the fix for `get_onc_ferry`
+  * switched back to `main` after day's runs completed successfully
+    * restarted `log_aggregator` and `manager` to reload config and `next_workers` module
+  * successfully re-ran manually on `main`
+
+
+##### Miscellaneous
+
+* helped Camryn with getting restart files for her new `WWTP` NEMO config runs
 
 
 
