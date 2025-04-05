@@ -2967,6 +2967,30 @@ First time riding to UBC since 20-Aug.
 
 
 
+#### Fri 4-Apr-2025
+
+Worked at ESB
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* helped Camryn with permissions in her `/scratch/cstang/` file space
+* VSCode v1.99 broke my ability to use it on `graham` due to expiry of unsupported OS work-around
+* coffee w/ Roman
+
+
+##### SalishSeaCast_hourly_prod
+
+* continued work on `graham` runs of a new SalishSeaCast v202111 config with oxygen diagnostics from
+  Tall and hourly productivity output for Sacchi to use to compare with 22-27 Aug 2024 cruise
+  observations
+  * yesterday's XIOS error was due to changes Susan made to GLS variable output names in Sep-2024
+    * fixed by edits to `field_def.xml`
+  * new run queued
+    * scheduled for: 2025-04-07T04:46:37
+
+
+
 
 
 ##### salishsea-site
