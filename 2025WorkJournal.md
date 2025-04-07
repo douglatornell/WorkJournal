@@ -2991,6 +2991,18 @@ Worked at ESB
 
 
 
+#### Sat 5-Apr-2025
+
+Bike ride and long line to vote in civic byelection.
+
+
+
+#### Sun 6-Apr-2025
+
+Worked on income tax.
+
+
+
 
 
 ##### salishsea-site
