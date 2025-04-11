@@ -2992,6 +2992,13 @@ Worked at ESB
     * finished after: 53m33s
 
 
+##### SalishSeaNowcast
+
+* continued work on replacing mock loggers in tests with caplog re: issue #82
+  * branch: caplog-fixture
+  * PR#346
+
+
 
 #### Sat 5-Apr-2025
 
@@ -3107,6 +3114,39 @@ Worked on income tax.
   * made river names consistent with those in `nowcast.yaml` config
   * started work on restructuring `nowcast.yaml` config to put all bathymetry-specific values
     under bathy version keys; step towards adding a bathy version cli argument
+
+
+
+#### Fri 11-Apr-2025
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* `collect_river_data USGS` failed for all by Nisqually
+  * successfully re-ran manually for 3 missing rivers at ~11:00
+  * re-ran `make_runoff_file` to backfill
+* `download_live_ocean` was delayed
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* Phys Ocgy seminar: Emma Boland, British Antarctic Survey
+  * North Atlantic Winds, Arctic Freshawater & the AMOC
+* searched for past presentations on SalishSeaCast re: doing a Phys Ocgy seminar
+  * `private-docs/presentations/CMOS-2015/Doug/NowcastAutomationFramework`
+  * `private-docs/presentations/Doug/PhysOcgy-11Jan2016/`
+  * `private-docs/presentations/CMOS-2017/Doug/NEMO-NowcastSoftwareAutomationFramework`
+  * `private-docs/presentations/CMOS-2018/Doug/SalishSeaCast`
+  * `private-docs/presentations/Doug/ECCC-Datamart-15Sep2020/`
+
+
+##### SalishSeaNowcast
+
+* continued work on replacing mock loggers in tests with caplog re: issue #82
+  * branch: caplog-fixture
+  * PR#346
 
 
 
