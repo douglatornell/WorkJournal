@@ -2986,8 +2986,10 @@ Worked at ESB
   observations
   * yesterday's XIOS error was due to changes Susan made to GLS variable output names in Sep-2024
     * fixed by edits to `field_def.xml`
-  * new run queued
+  * new 22aug24 4 node run queued
     * scheduled for: 2025-04-07T04:46:37
+    * started at: 2025-04-06T07:06:43
+    * finished after: 53m33s
 
 
 
@@ -3003,11 +3005,110 @@ Worked on income tax.
 
 
 
+### Week 15
+
+#### Mon 7-Apr-2025
+
+##### SalishSeaCast_hourly_prod
+
+* continued work on `graham` runs of a new SalishSeaCast v202111 config with oxygen diagnostics from
+  Tall and hourly productivity output for Sacchi to use to compare with 22-27 Aug 2024 cruise
+  observations
+  * 23aug24 5 node run queued
+    * scheduled for: 2025-04-07T20:00:00
+    * started at: 2025-04-07T17:11:13
+    * finished after: 37m42s
+  * 24aug24 6 node run queued
+    * scheduled for: 2025-04-09T10:35:27
+    * updated to: 2025-04-10T14:31:11
+    * updated again to: 2025-04-12T02:29:05
+    * updated again to: 2025-04-10T04:50:00
+    * killed after >2d on the queue because 5 node run started after 3h46m on the queue
+
+
+
+#### Tue 8-Apr-2025
+
+##### SalishSeaCast
+
+* manager crashed when `download_wwatch3_results forecast2` finished because checklist was cleared
+  while that worker was running
+* `collect_river_data USGS` failed for all 4 rivers
+  * successfully backfilled all except Snohomish at ~14:50
+* re-ran `make_runoff_file` to produce better forcing for future hindcasts
+* `crop_gribs 00` timed out with 528 files unprocessed
+  * `collect_weather 00 2.5km` finished ~2.5h late, after `crop_gribs` timed out
+
+
+##### SalishSeaNowcast
+
+* finalized removal of VHFR-FVCOM runs from automation and repository
+  * PR#347 - squash-merged
+  * deployed to production after today's runs
+* added handling for missing "WWATCH3 run" item in checklist; PR#349
+* refactored text fixtures; PR#350
+  * change from `tmpdir` to `tmp_path`
+  * add some type annotations to reduce the noise from PyCharm static analysis
+  * make `pytest.fixture` consistent with respect to parentheses
 
 
 ##### salishsea-site
 
-* drop VHFR-FVCOM results pages from site
+* created issue#113 re: dropping VHFR-FVCOM results pages from site re: SalishSeaNowcast PR#347
+
+
+##### SalishSeaCast_hourly_prod
+
+* continued work on `graham` runs of a new SalishSeaCast v202111 config with oxygen diagnostics from
+  Tall and hourly productivity output for Sacchi to use to compare with 22-27 Aug 2024 cruise
+  observations
+  * created comparison notebook in `analysis-doug/notebooks/SalishSeaCast_hourly_prod/` to confirm
+    that new config output matches that or production run
+
+
+
+#### Wed 9-Apr-2025
+
+##### SalishSeaCast
+
+* ran `crop_gribs 00 --backfill --debug` at ~07:30
+
+
+##### SalishSeaCast_hourly_prod
+
+* 24aug24 5 node run queued
+  * scheduled for: 2025-04-09T19:10:59
+  * updated to: 2025-04-10T03:20:00
+  * started at: 2025-04-09T19:40:43
+  * finished after: 36m58s
+
+
+##### SalishSeaNowcast
+
+* started researching `importlib` to figure out how to be able to use a CLI arg to specify which
+  `salishsea_tools.river_yyyymm` module is imported to provide the `rivers` dict in `make_runoff_file`
+
+
+##### Miscellaneous
+
+* replied to email from Peter @ SFU re: `mutiprocessing` for ERDDAP access:
+  * Outlook is blocking access to his Python script attachment
+
+
+
+#### Thu 10-Apr-2025
+
+##### SalishSeaNowcast
+
+* started refactoring `make_runoff_file` workers:
+  * branch:refactor-make_runoff_file
+  * PR#351
+  * improved module-level variables data structures
+  * made river names consistent with those in `nowcast.yaml` config
+  * started work on restructuring `nowcast.yaml` config to put all bathymetry-specific values
+    under bathy version keys; step towards adding a bathy version cli argument
+
+
 
 
 
