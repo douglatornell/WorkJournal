@@ -3126,7 +3126,7 @@ Worked at ESB
 * `collect_river_data USGS` failed for all by Nisqually
   * successfully re-ran manually for 3 missing rivers at ~11:00
   * re-ran `make_runoff_file` to backfill
-* `download_live_ocean` was delayed
+* `download_live_ocean` was delayed ~2.5h
 
 
 ##### Miscellaneous
@@ -3149,6 +3149,35 @@ Worked at ESB
   * PR#346
 
 
+
+#### Sat 12-Apr-2025
+
+##### SalishSeaCast
+
+* `download_live_ocean` was delayed ~2h
+
+
+##### Minecraft
+
+* checked mods, etc. for releases compatible with 1.21.5:
+  * sodium: yes
+  * lithium: yes
+  * malilib: yes
+  * minihud: yes
+  * tweakeroo: yes
+  * iris: no
+  * fresh animations: no
+
+
+
+#### Sun 13-Apr-2025
+
+##### SalishSeaCast_hourly_prod
+
+* 25aug24 5 node run queued
+  * scheduled for: 2025-04-15T18:15:53
+  * started at:
+  * finished after:
 
 
 
