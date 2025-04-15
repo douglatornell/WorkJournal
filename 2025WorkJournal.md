@@ -3181,6 +3181,52 @@ Worked at ESB
 
 
 
+### Week 16
+
+#### Mon 14-Apr-2025
+
+##### SalishSeaNowcast
+
+* continued refactoring `make_runoff_file` workers:
+  * branch:refactor-make_runoff_file
+  * PR#351
+  * finihsed restructuring `nowcast.yaml` config to put all bathymetry-specific values
+    under bathy version keys; step towards adding a bathy version cli argument
+  * added `bathy_version` arg to `make_runoff_file` worker to control selection of filename template
+    string and `prop_dict` module
+  * deployed to `skookum` for testing
+    * restarted manager to load updated `nowcast.yaml`
+
+
+
+#### Tue 15-Apr-2025
+
+##### SalishSeaCast
+
+* `make_forcing_links forecast2` failed due to incomplete refactoring in the `refactor-make_runoff_file`
+  branch being tested
+  * no forecast2 runs
+  * deployed fix in time for nowcast runs
+
+##### SalishSeaNowcast
+
+* continued refactoring `make_runoff_file` workers:
+  * branch:refactor-make_runoff_file
+  * PR#351
+  * refactored `make_forcing_links` re: rivers config structure changes; missed this yesterday
+
+
+
+
+
+
+##### Security Updates
+
+* Squash-merged dependabot PR to update codecov-action to 5.4.1 re: dependency updates
+  * AtlantisCmd
+
+
+
 
 
 * tools repo TODO:
