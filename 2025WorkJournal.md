@@ -3176,8 +3176,8 @@ Worked at ESB
 
 * 25aug24 5 node run queued
   * scheduled for: 2025-04-15T18:15:53
-  * started at:
-  * finished after:
+  * started at: 2025-04-15T08:53:16
+  * finished after: 37m9s
 
 
 
@@ -3201,12 +3201,15 @@ Worked at ESB
 
 #### Tue 15-Apr-2025
 
+Worked at ESB.
+
 ##### SalishSeaCast
 
 * `make_forcing_links forecast2` failed due to incomplete refactoring in the `refactor-make_runoff_file`
   branch being tested
   * no forecast2 runs
   * deployed fix in time for nowcast runs
+
 
 ##### SalishSeaNowcast
 
@@ -3215,6 +3218,25 @@ Worked at ESB
   * PR#351
   * refactored `make_forcing_links` re: rivers config structure changes; missed this yesterday
 
+
+##### SalishSeaCast_hourly_prod
+
+* 26aug24 5 node run queued
+  * scheduled for:
+  * started at:
+  * finished after:
+
+
+##### SalishSeaNowcast
+
+* continued work on replacing mock loggers in tests with caplog re: issue #82
+  * branch: caplog-fixture
+  * PR#346
+
+
+##### Miscellaneous
+
+* reviewed Peter's `multiprocessing` code for ERDDAP-obs matching
 
 
 
