@@ -3217,21 +3217,17 @@ Worked at ESB.
   * branch:refactor-make_runoff_file
   * PR#351
   * refactored `make_forcing_links` re: rivers config structure changes; missed this yesterday
+* continued work on replacing mock loggers in tests with caplog re: issue #82
+  * branch: caplog-fixture
+  * PR#346
 
 
 ##### SalishSeaCast_hourly_prod
 
 * 26aug24 5 node run queued
-  * scheduled for:
-  * started at:
-  * finished after:
-
-
-##### SalishSeaNowcast
-
-* continued work on replacing mock loggers in tests with caplog re: issue #82
-  * branch: caplog-fixture
-  * PR#346
+  * scheduled for: 2025-04-17T09:10:00
+  * started at: 2025-04-17T05:21:07
+  * timed out after: 45m at 68.2% complete
 
 
 ##### Miscellaneous
@@ -3240,13 +3236,267 @@ Worked at ESB.
 
 
 
+#### Wed 16-Apr-2025
 
+Filed 2024 income tax returns.
 
 ##### Security Updates
 
 * Squash-merged dependabot PR to update codecov-action to 5.4.1 re: dependency updates
   * AtlantisCmd
+    * new codecov-action failed due to envvar issue; maybe action or maybe GitHub
 
+
+##### Miscellaneous
+
+* Slack discussion w/ Becca re: onboarding for Griffon
+* emailed Peter re: improvements to his `multiprocessing` code for ERDDAP-obs matching
+  * set testing meeting for tomorrow
+
+
+##### salishsea-site
+
+* fixed typos re: Strait that Ilias reported
+
+
+##### SalishSeaCast/docs
+
+* fixed broken link in `CITATION.rst` that Ilias reported
+
+
+
+#### Thu 17-Apr-2025
+
+##### Miscellaneous
+
+* zoom w/ Peter re: testing his `multiprocessing` code for ERDDAP-obs matching
+  * small scale test used 5 threads on `skookum` and minimal memory bump
+  * he has more work to do before he can scale on `cedar`
+* Slack discussion w/ Becca re: onboarding for Griffon
+
+
+##### SalishSeaCast_hourly_prod
+
+* investigated 26aug24 run time out
+  * 1473 time steps; ~68.2% complete
+  * no errors in `ocean.output`
+* 26aug24 5 node run re-queued with 1h walltime
+  * scheduled for: 2025-04-17T16:28:56
+  * started at: 2025-04-19 05:54:47
+  * finished after: 38m12s
+
+
+##### ERDDAP
+
+* reviewed new installation and update docs at https://erddap.github.io/
+* did test installation on `khawla`
+  * in contrast to what I recall discussing with Henryk (in a now-inaccessible Slack thread)
+    `tomcat` is now no longer bundled with erddap
+  * Java 21 is required for ERDDAP>=2.19
+  * Tomcat 10 latest version is recommended: https://tomcat.apache.org/download-10.cgi
+    * downloaded and verified sha512 hash with `sha512sum`
+    * unpacked tarball in `/usr/local/`
+    * created `tomcat` user: `sudo useradd tomcat -s /bin/bash -p '*'`
+    * changed ownership of tomcat tree: `sudo chown -R tomcat apache-tomcat-10.1.40/`
+    * created `erddap` group: `sudo groupadd erddap`
+    * added myself and `tomcat` to `erddap` group:
+      * `sudo usermod -a -G erddap doug; sudo usermod -a -G erddap tomcat`
+    * changed group of tomcat tree: `sudo chgrp -R erddap apache-tomcat-10.1.40/`
+    * changed user and group permissions: `sudo chmod -R ug+rwx apache-tomcat-10.1.40/`
+    * removed permissions for other: `sudo chmod -R o-rwx apache-tomcat-10.1.40/`
+    * created `apache-tomcat-10.1.40/bin/setenv.sh` containing:
+      <!-- markdownlint-disable MD013 -->
+      ```bash
+      export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+      export JAVA_OPTS='-server -Djava.awt.headless=true -Xmx1500M -Xms1500M'
+      export TOMCAT_HOME=/usr/local/apache-tomcat-10.1.40
+      export CATALINA_HOME=/usr/local/apache-tomcat-10.1.40
+      ```
+      <!-- markdownlint-enable MD013 -->
+    * messed around to get execute permissions on `bin/*.sh` correct
+    * launched `tomcat` to test at `http://localhost:8080`:
+      <!-- markdownlint-disable MD013 -->
+      ```bash
+      sudo su - tomcat
+      /usr/local/apache-tomcat-10.1.40/bin/startup.sh
+      ```
+      <!-- markdownlint-enable MD013 -->
+    * downloaded https://github.com/ERDDAP/erddapContent/releases/download/content1.0.0/erddapContent.zip
+      * verified its md5 hash with `md5sum`
+    * unpacked zip in `/usr/local/apache-tomcat-10.1.40/` and fixed ownership and permissions
+    * re-logged so that my `erddap` group membership took effect
+    * created `/home/tomcat/erddap/` and set ownership to `tomcat:erddap`
+    * edited `/usr/local/apache-tomcat-10.1.40/content/erddap/setup.xml`:
+      * `bigParentDirectory` to `/media/doug/warehouse/erddap/`
+      * `emailEverythingTo`
+      * `admin*`
+      * `flagKeyKey`
+    * downloaded https://github.com/ERDDAP/erddap/releases/download/v2.26.0/erddap.war
+      * verified its md5 hash with `md5sum`
+      * copied it into `/usr/local/apache-tomcat-10.1.40/webapps/` and set ownership to `tomcat:erddap`
+    * server works at `http://localhost:8080/erddap/` after a few iterations of `startup.sh`, browse,
+      error, check log, edit `setup.xml`
+
+
+
+#### Fri 18-Apr-2025
+
+**Statutory Holiday** - Good Friday
+
+##### Minecraft
+
+* stopped server
+* did lizzy-smelt backup
+* updated OS packages and auto-removed outdated packages
+* rebooted
+* set up 1.21.5 server
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  mkdir ~/Games/MinecraftFabric1.21.5Server
+  cd ~/Games/MinecraftFabric1.21.5Server
+  curl -OJ https://meta.fabricmc.net/v2/versions/loader/1.21.5/0.16.13/1.0.3/server/jar
+  pushd ~/Games/MinecraftFabric1.21.4Server
+  cp banned-* eula.txt ops.json whitelist.json start.sh ../MinecraftFabric1.21.5Server/
+  popd
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * edited `start.sh` to:
+  <!-- markdownlint-disable MD013 -->
+    ```bash
+    #!/usr/bin/env bash
+    java -Xmx2G -jar fabric-server-mc.1.21.5-loader.0.16.13-launcher.1.0.3.jar nogui
+    ```
+  <!-- markdownlint-enable MD013 -->
+* launched and stopped server to create instance directories and files
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  ./start.sh
+    ...
+  /stop
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * edited `server.properties` to sync with 1.21.4 settings
+  * installed mods, and rsync-ed `1-20-1-25jul23` world tree:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  cd ~/Games/MinecraftFabric1.21.5Server/mods/
+  curl -LO https://github.com/CaffeineMC/lithium/releases/download/mc1.21.5-0.16.2/lithium-fabric-0.16.2+mc1.21.5-api.jar
+  cd ~/Games/MinecraftFabric1.21.5Server
+  rsync -av ../MinecraftFabric1.21.4Server/1-20-1-25jul23 ./
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * downloaded and unzipped on `khawla` VanillaTweaks double shulker shells v1.3.11 datapacks
+    * rsync-ed it to `Games/MinecraftFabric1.21.5Server/1-20-1-25jul23/datapacks/` and removed v1.3.9
+  * launched server in `tmux`
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  tmux new -n minecraft-server
+  ./start.sh
+  ```
+  <!-- markdownlint-enable MD013 -->
+* set up 1.21.5 client instance in MultiMC
+  * created instance
+  * installed fabric 0.16.13
+  * downloaded and installed loader mods:
+    * sodium-fabric-0.6.13+mc1.21.5.jar
+    * lithium-fabric-0.16.2+mc1.21.5.jar
+    * malilib-fabric-1.21.5-0.24.0-sakura.8.jar
+    * minihud-fabric-1.21.5-0.35.0-sakura.7.jar
+    * tweakeroo-fabric-1.21.5-0.24.0-sakura.5.jar
+  * selected Java: `/usr/lib/jvm/java-21-openjdk-amd64/bin/java`
+  * started and stopped client instance to populate `config/`
+  * copied `minihud.json` and `tweakeroo.json` from 1.21.4 instance `config/`
+  * Fresh Animations isn't available for 1.21.5 yet, though `Entity [Model|Texture] Features` are
+  * downloaded and installed Vanilla Tweaks resource packs `VanillaTweaks_r503680_MC1.21.x.zip`:
+    * iron bars fix
+    * lower shield
+    * redstone devices:
+      * StickyPistonSides
+      * DirectionalHoppers
+      * DirectionalDispensersDroppers
+      * DirectionalObservers
+      * GroovyLevers
+      * RedstoneWireFix
+  * added server: `SADA on lizzy` at 10.0.0.81
+* started game and adjusted UI:
+  * FOV: 80
+  * Video:
+    * Brightness: Bright
+    * GUI Scale: 2x
+    * Weather: Fancy
+    * Leaves: Fancy
+  * enabled resource packs
+  * Music & Sound:
+    * Music: 50%
+    * Show Subtitles: on
+    * Directional Audio: on
+  * Optional Telemetry Data
+
+  * F3-h to enable advanced tooltips
+  * used `/gamerule` to increase spawn chunks radius from 3 to 4 to keep iron farm loaded
+
+
+##### SalishSeaNowcast
+
+* squash-merged refactoring of `make_runoff_file` workers; PR#351
+  * deployed `main` to production and restarted manager to ensure that updated config is loaded
+* started work on changing checklist returned by `make_201702_runoff_file` so that it is a dict item
+  that will consolidate with that returned by `make_runoff_file`
+  * PR#352
+
+
+
+#### Sat 19-Apr-2025
+
+##### SalishSeaCast
+
+* `after_update_forecast_datasets()` failed with a KeyError on `WWATCH3 run`
+  * I thought I fixed this in PR#349, but that was only for `after_download_wwatch3_results()` ☹️
+
+
+##### SalishSeaNowcast
+
+* finished work on changing checklist returned by `make_201702_runoff_file` so that it is a dict item
+  that will consolidate with that returned by `make_runoff_file`; PR#352
+* fixed KeyError issue in `after_update_forecast_datasets()` by changing scope of `run_date` lookup;
+  PR#353
+* fixed issue #170 re: `collect_river_data` putting only last processed river in checklist
+  * branch: collect_river_data-checklist
+  * PR#354
+  * plan to test in production tomorrow before merging
+  * deployed branch to production and restarted manager to load `next_workers` module re: PR#353
+
+
+##### SalishSeaCast_hourly_prod
+
+* 27aug24 5 node run queued with 1h walltime
+  * scheduled for: 2025-04-19T17:00:00
+  * started at: 2025-04-20 03:06:31
+  * finished after: 37m18s
+
+
+##### FUN
+
+* solved a circular import issue by renaming `fun` module to `fun_core`
+* UI needs work, no working entry point script
+  * run with `fun/FUN-forecast sample_scenario.yaml`
+
+
+
+#### Sun 20-Apr-2025
+
+##### SalishSeaCast
+
+* `after_ping_erddap()` failed with a KeyError on `WWATCH3 run`
+
+
+##### SalishSeaNowcast
+
+* test of fix for issue #170 re: `collect_river_data` putting only last processed river in checklist
+  was successful in production; PR#354 squash-merged
+* fixed KeyError issue in `after_ping_erddap()` by assuming that run type is `forecast2` and launching
+  `make_plots` without `run-date` arg; PR#355 squash-merged and deployed with manager restart to load
+  updated `next_workers` module
 
 
 
@@ -3334,9 +3584,6 @@ TODO:
 
 * change automation workflow to run nowcast-green in place of nowcast-blue
   * add output of 10min avg tide gauge station files
-* remove VHFR FVCOM from automation workflow
-  * remove FVCOM boundary slab files output from nowcast-green/file_def.xml
-  * drop FVCOM-Cmd and OPPTools dependencies
 * `sandheads_winds` is using HTTP instead of HTTPS for obs collection via
   `salishsea_tools.stormtools.get_EC_observations()`; same in `tools.I_ForcingFiles.Atmos.weather.get_EC_observations()`
 
