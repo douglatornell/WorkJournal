@@ -3503,7 +3503,7 @@ Filed 2024 income tax returns.
 
 ### Week 17
 
-#### **Mon 21-Apr-2025**
+#### Mon 21-Apr-2025
 
 **Statutory Holiday** - Easter Monday
 
@@ -3517,6 +3517,43 @@ Filed 2024 income tax returns.
 
 * started notes file in `/home/doug/Documents/finances/FUN-scenarios/`
 * started creating 2026 pension income scenario
+
+
+
+#### Tue 22-Apr-2025
+
+Worked at ESB.
+
+##### SalishSeaCast
+
+* `make_turbidity_file` failed due to insufficient obs
+  * no web page updates between 03:10 and 10:10
+* nowcast-agrif run stuck on `orcinus` queue
+  * unclear why; other jobs are running
+* `oricnus` OS and software infrastructure is going to be upgraded over the summer!
+
+
+##### Security Updates
+
+* Squash-merged dependabot PR to update codecov-action to 5.4.2 re: hotfix for OIDC token
+  * SalishSeaNowcast
+  * gha-workflows
+  * AtlantisCmd
+
+
+##### SalishSeaNowcast
+
+* finished work on replacing mock loggers in tests with caplog re: issue #82
+  * branch: caplog-fixture
+  * PR#346; squash-merged
+* created issue #357 re: handling noisy missing river discharge obs messages
+  when `make_funoff_file` is run in preparation for forecast2 runs
+
+
+##### Miscellaneous
+
+* copied `SalishSeaCast_hourly_prod` runs results to Sacchi's portable SSD
+
 
 
 
