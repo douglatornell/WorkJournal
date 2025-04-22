@@ -3480,7 +3480,8 @@ Filed 2024 income tax returns.
 * solved a circular import issue by renaming `fun` module to `fun_core`
 * UI needs work, no working entry point script
   * run with `fun/FUN-forecast sample_scenario.yaml`
-
+* set up `/home/doug/Documents/finances/FUN-scenarios/` to hold scenarios, notes, etc. privately
+  outside of repo clone
 
 
 #### Sun 20-Apr-2025
@@ -3497,6 +3498,26 @@ Filed 2024 income tax returns.
 * fixed KeyError issue in `after_ping_erddap()` by assuming that run type is `forecast2` and launching
   `make_plots` without `run-date` arg; PR#355 squash-merged and deployed with manager restart to load
   updated `next_workers` module
+
+
+
+### Week 17
+
+#### **Mon 21-Apr-2025**
+
+**Statutory Holiday** - Easter Monday
+
+##### Miscellaneous
+
+* help Susan with commands to build tarballs from her exchange paper run results and rsync them to
+  `graham:/nearline/`
+
+
+##### FUN
+
+* started notes file in `/home/doug/Documents/finances/FUN-scenarios/`
+* started creating 2026 pension income scenario
+
 
 
 
