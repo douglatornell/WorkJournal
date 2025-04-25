@@ -2684,7 +2684,7 @@ Worked at ESB
 
 * MOAD group mtg; see whiteboard
 * phys ocgy seminar: Michael A, Scripps re: internal waves and ocean turbulence
-* uploaded 2019 forcing files to `beluga` for Tall
+* uploaded 2019 forcing files to `beluga` for Tall:
   <!-- markdownlint-disable MD013 -->
   ```bash
     # atmospheric/GEM2.5/operational/ops_y2019*.nc are already on beluga
@@ -2698,7 +2698,7 @@ Worked at ESB
     beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
   ```
   <!-- markdownlint-enable MD013 -->
-* uploaded 2020 forcing files to `beluga` for Tall
+* uploaded 2020 forcing files to `beluga` for Tall:
   <!-- markdownlint-disable MD013 -->
   ```bash
   yyyy=2020; rsync -tv /results/forcing/atmospheric/GEM2.5/operational/ops_y${yyyy}*.nc
@@ -3554,6 +3554,99 @@ Worked at ESB.
 
 * copied `SalishSeaCast_hourly_prod` runs results to Sacchi's portable SSD
 
+
+
+#### Wed 23-Apr-2025
+
+##### SalishSeaCast
+
+* email conversation w/ Mark re: yesterday's stuck nowcast-agrif run; scheduler issue
+  * `run_NEMO_agrif` failed due to no `namelist_cfg` for yesterday's run
+  * re-tried yesterday's run with `make_forcing_links orcinus nowcast-agrif 2025-04-22`
+    * emailed update to Mark
+    * job was queued from ~10:42 to ~11:08, then started
+
+
+##### Miscellaneous
+
+* helped Tall with missing symlinks for persisted LiveOcean boundary condition files on 8-9 Ocr-2020
+  on `beluga` and `graham`
+* uploaded 2021 forcing files to `beluga` for Tall:
+  * note the change of the `rsync` options from `tv` to `-tLv`; that is to cause symlinks to be copied
+    as files
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  yyyy=2021; rsync -tLv /results/forcing/atmospheric/GEM2.5/operational/ops_y${yyyy}*.nc \
+       beluga:projects/def-allen/SalishSea/forcing/atmospheric/
+  yyyy=2021; rsync -tLv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
+  yyyy=2021; rsync -tLv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/
+  yyyy=2021; rsync -tLv /results/forcing/rivers/river_turb/riverTurbDaily2_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
+  yyyy=2021; rsync -tLv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+
+
+#### Thu 24-Apr-2025
+
+##### Miscellaneous
+
+* uploaded 2022 forcing files to `beluga` for Tall:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  yyyy=2022; rsync -tLv /results/forcing/atmospheric/GEM2.5/operational/ops_y${yyyy}*.nc \
+       beluga:projects/def-allen/SalishSea/forcing/atmospheric/
+  yyyy=2022; rsync -tLv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
+  yyyy=2022; rsync -tLv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/
+  yyyy=2022; rsync -tLv /results/forcing/rivers/river_turb/riverTurbDaily2_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
+  yyyy=2022; rsync -tLv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
+  ```
+  <!-- markdownlint-enable MD013 -->
+* updated `khawla` PyCharm to 2025.1
+* UBC-DFO modeling meeting, now with ECCC/CCCma; Tall's O2 SalishSeaCast work
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update h11 to 0.16.0 re: CVE-2025-43859 re: request smuggling
+  vulnerabilities
+  * SalishSeaNowcast
+  * SalishSeaCmd
+  * NEMO-Cmd
+  * moad_tools
+  * Reshapr
+  * salishsea-site
+  * MoaceanParcels
+  * NEMO_Nowcast
+  * AtlantisCmd
+  * tools
+  * SOG-Bloomcast-Ensemble
+  * erddap-datasets
+  * FUN
+* Squash-merged dependabot PR to update jinja2 to 3.1.6 re: CVE-2025-27516 re:
+  arbitrary code execution vulnerability
+  * NEMO_Nowcast
+
+
+##### erddap-datasets
+
+* started developing test versions of `datasets.xml` and `setup.xml` for v2.26 on `khawla`
+  * branch: erddap-2.26
+  * copied collection of tags in v2.00 upgrade notes into `prefix.xml`
+    * edited their values to match old `setup.xml`
+    * removed tags from `setup.xml`
+    * made `setup.xml` "match" the one in v2.26
+
+* TODO:
+  * drop `<drawLandMask>over</drawLandMask>` from datasets because it is now set as the server default
 
 
 
