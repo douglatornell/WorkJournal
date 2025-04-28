@@ -3644,9 +3644,61 @@ Worked at ESB.
     * edited their values to match old `setup.xml`
     * removed tags from `setup.xml`
     * made `setup.xml` "match" the one in v2.26
+  * tried to run server with just v202108 bathymetry dataset
+    * failed due to permissions on dataset netCDF file when I tried to use `sshfs` mount
 
+
+
+#### Fri 25-Apr-2025
+
+First session of FoMS program
+
+##### Miscellaneous
+
+* replied to email from Rhian at UTas re: downloading temperature fields from ERDDAP for SDM
+  euphausiid model
+
+
+
+#### Sat 26-Apr-2025
+
+Goofed off.
+
+
+
+#### Sun 27-Apr-2025
+
+##### erddap-datasets
+
+* continued developing test versions of `datasets.xml` and `setup.xml` for v2.26 on `khawla`
+  * branch: erddap-2.26
+  * successfully ran server with just v202108 bathymetry dataset
+    * `sshfs` mount has permission that `tomcat` restricted use can't deal with
+    * worked when I used `/media/doug/warehouse/MEOPAR/grid/`
+    * also got symlinks for `setup.xml` and `datasets.xml` from
+      `/usr/local/apache-tomcat-10.1.40/content/erddap/` to `erddap-datasets` clone working
 * TODO:
   * drop `<drawLandMask>over</drawLandMask>` from datasets because it is now set as the server default
+  * change `colorBarPalette` attr tag values to our favourite cmocean colour maps
+  * 2.10: test `accessibleViaFiles` setting; if it does what I think, discuss with Susan if we want it
+  * 2.11: add `emailDiagnosticsToErdData` setting
+  * 2.12: add 3 `ipAddress*` tags to `prefix.xml` to limit malicious users and overly aggressive
+    concurrent requests
+  * 2.15: think about languages other than english
+  * 2.16: full? utf-8 support; fix accented names in `datasets.xml`
+  * 2.19:
+    * increase `n*Threads` tag values to 3 in `prefix.xml`
+    * hyphens in datasetIDs are deprecated ???
+  * 2.23: CF-1.10 vs. CF-1.6
+  * 2.25:
+    * zarr support
+    * Prometheus metrics
+    * `Xinclude` in `datasets.xml`
+    * `unusualActivityFailPercent` can be set to other than 25%
+  * 2.26:
+    * docs now on https://erddap.github.io/
+    * dataset citations in UI
+
 
 
 
