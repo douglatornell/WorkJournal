@@ -3720,6 +3720,22 @@ Goofed off.
 
 
 
+#### Tue 29-Apr-2025
+
+Worked at ESB.
+
+##### Miscellaneous
+
+* created ticket for compstaff re: login failures on `lox` at console
+* AAPS spring AGM
+
+
+##### ERDDAP
+
+* met with Henryk re: updating to v2.26
+
+
+
 
 
 ##### erddap-datasets
