@@ -3701,6 +3701,50 @@ Goofed off.
 
 
 
+### Week 18
+
+#### Mon 28-Apr-2025
+
+##### erddap-datasets
+
+* continued developing test versions of `datasets.xml` and `setup.xml` for v2.26 on `khawla`
+  * branch: erddap-2.26
+  * cleaned up edits in `prefix.xml` and `setup.xml`
+  * experimented with multi-language support:
+    * auto-translations are only for parts of the index page
+    * adding translations for our content looks cumbersome
+      * I think we would have to add translations to files like
+        `webapps/erddap/WEB-INF/classes/gov/noaa/pfel/erddap/util/translatedMessages/messages-fr.xml`
+  * it seems that `datasets.xml` is automatically reloaded every 15 to 60 minutes
+    * that means that changes to the file take effect without restarting the server; confirmed
+
+
+
+
+
+##### erddap-datasets
+
+* TODO:
+  * drop `<drawLandMask>over</drawLandMask>` from datasets because it is now set as the server default
+  * change `colorBarPalette` attr tag values to our favourite cmocean colour maps
+  * 2.10: test `accessibleViaFiles` setting; if it does what I think, discuss with Susan if we want it
+  * 2.11: add `emailDiagnosticsToErdData` setting
+  * 2.12: add 3 `ipAddress*` tags to `prefix.xml` to limit malicious users and overly aggressive
+    concurrent requests
+  * 2.15: think about languages other than english; only partially automated though
+  * 2.16: full? utf-8 support; fix accented names in `datasets.xml`
+  * 2.19:
+    * increase `n*Threads` tag values to 3 in `prefix.xml`
+    * hyphens in datasetIDs are deprecated ???
+  * 2.23: CF-1.10 vs. CF-1.6
+  * 2.25:
+    * zarr support
+    * Prometheus metrics
+    * `Xinclude` in `datasets.xml`
+    * `unusualActivityFailPercent` can be set to other than 25%
+  * 2.26:
+    * docs now on https://erddap.github.io/
+    * dataset citations in UI
 
 
 
