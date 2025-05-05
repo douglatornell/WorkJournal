@@ -3677,27 +3677,6 @@ Goofed off.
     * worked when I used `/media/doug/warehouse/MEOPAR/grid/`
     * also got symlinks for `setup.xml` and `datasets.xml` from
       `/usr/local/apache-tomcat-10.1.40/content/erddap/` to `erddap-datasets` clone working
-* TODO:
-  * drop `<drawLandMask>over</drawLandMask>` from datasets because it is now set as the server default
-  * change `colorBarPalette` attr tag values to our favourite cmocean colour maps
-  * 2.10: test `accessibleViaFiles` setting; if it does what I think, discuss with Susan if we want it
-  * 2.11: add `emailDiagnosticsToErdData` setting
-  * 2.12: add 3 `ipAddress*` tags to `prefix.xml` to limit malicious users and overly aggressive
-    concurrent requests
-  * 2.15: think about languages other than english
-  * 2.16: full? utf-8 support; fix accented names in `datasets.xml`
-  * 2.19:
-    * increase `n*Threads` tag values to 3 in `prefix.xml`
-    * hyphens in datasetIDs are deprecated ???
-  * 2.23: CF-1.10 vs. CF-1.6
-  * 2.25:
-    * zarr support
-    * Prometheus metrics
-    * `Xinclude` in `datasets.xml`
-    * `unusualActivityFailPercent` can be set to other than 25%
-  * 2.26:
-    * docs now on https://erddap.github.io/
-    * dataset citations in UI
 
 
 
@@ -3736,23 +3715,262 @@ Worked at ESB.
 
 
 
+#### Wed 30-Apr-2025
+
+##### erddap-datasets
+
+* continued developing test versions of `datasets.xml` and `setup.xml` for v2.26 on `khawla`
+  * branch: erddap-2.26
+  * created PR#35 to use for testing new setup on `skookum`
+  * added `setenv.sh` to repo so that `java` and `tomcat` version changes are recorded in commits
+
+
+##### 2025 Bloomcast
+
+* ended crobjob for 2025 runs
+
+
+##### ERDDAP
+
+* started upgrade to v2.26 on `skookum`
+  * installed `openjdk-21-jre`:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    sudo apt autoremove
+    sudo apt update
+    sudo apt install openjdk-21-jre
+    sudo apt autoremove
+    ```
+    <!-- markdownlint-enable MD013 -->
+    * installation is in `/usr/lib/jvm/java-21-openjdk-amd64/`
+  * installed `tomcat` in `/opt/`:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    cd /opt/
+    curl -LO https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.40/bin/apache-tomcat-10.1.40.tar.gz
+    sudo tar xvzf apache-tomcat-10.1.40.tar.gz
+    sudo rm -i apache-tomcat-10.1.40.tar.gz
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * configure `tomcat`:
+    * ref: https://erddap.github.io/docs/server-admin/deploy-install
+    * edit `conf/server.xml`
+      * change the `Server` tag `port` to 8085 for setup testing
+      * change the `Connector` tag `port` to 8081 for setup testing
+      * change the `Connector` tag `connectionTimeout` to 300000
+      * add `relaxedQueryChars="[]|"` to the `Connector` tag
+    * edit `conf/content.xml`
+      * add `<Resources cachingAllowed="true" cacheMaxSize="80000" />` to `Context`
+  * set ownership & permissions on `/opt/apache-tomcat-10.1.40`
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    sudo chown -R tomcat:erdap apache-tomcat-10.1.40/
+    sudo chmod g+rwx apache-tomcat-10.1.40/conf/
+    sudo chmod -R g+rw apache-tomcat-10.1.40/*
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * clone `erddap-datasets` so that we can access the `erddap-2.26` branch independent of the
+    deployed version:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    git clone git@github.com:SalishSeaCast/erddap-datasets.git erddap-datasets-2.26
+    cd erddap-datasets-2.26
+    git switch erddap-2.26
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * symlink `erddap-datasets-2.26/setenv.sh` into `/opt/apache-tomcat-10.1.40/bin/`
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    cd /opt/apache-tomcat-10.1.40/bin/
+    ln -s /results/erddap-datasets-2.26/setenv.sh
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * started `tomcat`
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    sudo su - tomcat
+    /opt/apache-tomcat-10.1.40/bin/startup.sh
+    ```
+    <!-- markdownlint-enable MD013 -->
+    * used log reading and `wget` to confirm that `tomcat` is running
+    * deployed ERDDAP died somewhere in here
+    * added reverse proxy on `test-erddap` for port 8081 to `/etc/apache2/sites-available/000-default.conf`
+      and restarted `apache` with `sudo systemctl restart apache2.service`
+    * got to the (asset-free) tomcat index page at https://salishsea.eos.ubc.ca/test-erddap
+  * stopped `tomcat` and restarted ERDDAP
+
+
+## May
+
+<!-- markdownlint-disable MD001 -->
+#### Thu 1-May-2025
+<!-- markdownlint-enable MD001 -->
+
+##### SalishSeaCast
+
+* nowcast-agrif failed with:
+    stpctl: the zonal velocity is larger than 20 m/s
+    kt=****** max abs(U):   61.58    , i j k:     2  392   13
+
+
+##### erddap-datasets
+
+* continued developing test versions of `datasets.xml` and `setup.xml` for v2.26 on `khawla`
+  * branch: erddap-2.26
+  * PR#35
+
+
+##### ERDDAP
+
+* continued upgrade to v2.26 on `skookum`
+  * deployed v1.82 survived startup of testing v2.26
+  * created `/results/erddap-2.26/` for testing
+  * installed ERDDAP v2.26 content config files:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    sudo su - tomcat
+    cd /opt/apache-tomcat-10.1.40/
+    curl -LO https://github.com/ERDDAP/erddapContent/releases/download/content1.0.0/erddapContent.zip
+    md5sum erddapContent.zip
+    unzip erddapContent.zip
+    chgrp -R erdap content
+    chmod -R o-rwx content
+    rm -i erddapContent.zip
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * symlink `erddap-datasets-2.26/setup.xml` and `erddap-datasets-2.26/datasets.xml` into
+    `/opt/apache-tomcat-10.1.40/content/erddap/`:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    sudo su - tomcat
+    cd /opt/apache-tomcat-10.1.40/content/erddap/
+    mv setup.xml setup.xml.orig
+    mv datasets.xml datasets.xml.orig
+    ln -s /results/erddap-datasets-2.26/setup.xml
+    ln -s /results/erddap-datasets-2.26/datasets.xml
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * installed ERDDAP 2.26 `erddap.war` file:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    sudo su - tomcat
+    cd /opt/apache-tomcat-10.1.40/webapps/
+    curl -LO https://github.com/ERDDAP/erddap/releases/download/v2.26.0/erddap.war
+    md5sum erddap.war
+    chmod o-rwx erddap.war
+    chgrp -R erdap erddap.war erddap/
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * prep for initial test:
+    * `setup.xml`:
+      * `<bigParentDirectory>/results/erddap-2.26/</bigParentDirectory>`
+      * `<baseUrl>https://salishsea.eos.ubc.ca:8081</baseUrl>`
+    * `datasets.yaml`:
+      * comment out all datasets except `nemo-grid/ubcSSnBathymetryV21-08.xml`
+      * run `build_datasets_xml.py`
+    * test was successful in the logs, but reverse proxy wasn't working
+  * shut down v1.82 and flipped v2.26 into its place
+    * `setup.xml`:
+      * `<baseUrl>https://salishsea.eos.ubc.ca</baseUrl>`
+    * removed reverse proxy on `test-erddap` for port 8081 from `/etc/apache2/sites-available/000-default.conf`
+      and restarted `apache` with `sudo systemctl restart apache2.service`
+    * `datasets.yaml`:
+      * gradually added datasets back a few at a time
+  * copied `favicon.ico` & `UBC_MEOPAR_logo.png` into `content/erddap/images/`
+    * needed a server restart for them to be loaded
+
+
+
+#### Fri 2-May-2025
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+  * Griffon joined the group for a co-op term
+* Phys Ocgy seminar: Griffon re: PSF citizen science work with Rich
+
+
+##### ERDDAP
+
+* time series datasets (ONC & 2nd Narrows HADCP) failed to load due to:
+    For cdm_data_type=TimeSeries, the variable with cf_role=timeseries_id (time) must be in the
+    cdm_timeseries_variables list.
+* datasets are not updating because the `ping_erddap` worker is writing to the fold `erddap/flag/`
+  directory
+
+
+* TODO:
+  * for deployment as live version:
+    * change symlinks to point to deployed `erddap-datasets`:
+      * `bin/setenv.sh`
+      * `content/erddap/setup.xml`
+      * `content/erddap/datasets.xml`
+
+
+
+#### Sat 3-May-2025
+
+##### SalishSeaCast
+
+* figure out nowcast-agrif velocity issue then backfill from 01may25
+
+
+##### FUN
+
+* continued creating 2026 pension income scenario
+
+
+
+#### Sun 4-May-2025
+
+##### ERDDAP
+
+* renamed `/results/erddap/` to `/results/erddap-1.82/` and `/results/erddap-2.26/` to `/results/erddap/`
+* confirmed that `ping_erddap` worker is triggering dataset updates
+* scanned CF-1.10 (supported by 2.26) to try to understand how it differs from CF-1.6 (suported by 1.82)
+  * unclear, and verificiation tool's most recent version is CF-1.8 (https://cfchecker.ncas.ac.uk)
+* explored new in 2.26 `displayInfo` & `displayAttribute` tags
+  * they control fields and tooltips at the beginnign of the `Information` line on the `data` pages
+  * we could add a field called `Citation` that shows the `comment` attr
+    * perhaps change the name of the `comment` attr to `citation`
+* noticed that forecast datasets lacks v21-11 info
+
+
+* TODO:
+  * for deployment as live version:
+    * change symlinks to point to deployed `erddap-datasets`:
+      * `bin/setenv.sh`
+      * `content/erddap/setup.xml`
+      * `content/erddap/datasets.xml`
+
+
+
 
 
 ##### erddap-datasets
 
 * TODO:
+  * fix time series datasets (ONC & 2nd Narrows HADCP) failed to load due to:
+      For cdm_data_type=TimeSeries, the variable with cf_role=timeseries_id (time) must be in the
+      cdm_timeseries_variables list.
   * drop `<drawLandMask>over</drawLandMask>` from datasets because it is now set as the server default
   * change `colorBarPalette` attr tag values to our favourite cmocean colour maps
-  * 2.10: test `accessibleViaFiles` setting; if it does what I think, discuss with Susan if we want it
+  * add v21-11 info to forecast datasets `summary` attr
+  * figure out why ERDDAP in unable to send emails
+  * 2.10: test `accessibleViaFiles` setting:
+    * tag in `setup.xml` is server default; it is overridden by tag for each dataset that we presently
+      set to `false`
+    * discuss with Susan if we want it; risk is bots downloading everything
+    * it would be nice if access to files interface could be limited to authenticated users
   * 2.11: add `emailDiagnosticsToErdData` setting
   * 2.12: add 3 `ipAddress*` tags to `prefix.xml` to limit malicious users and overly aggressive
     concurrent requests
   * 2.15: think about languages other than english; only partially automated though
-  * 2.16: full? utf-8 support; fix accented names in `datasets.xml`
   * 2.19:
     * increase `n*Threads` tag values to 3 in `prefix.xml`
     * hyphens in datasetIDs are deprecated ???
   * 2.23: CF-1.10 vs. CF-1.6
+    * `calendar: gregorian` is now deprecated in favour of `calendard: standard`
   * 2.25:
     * zarr support
     * Prometheus metrics
@@ -3760,7 +3978,7 @@ Worked at ESB.
     * `unusualActivityFailPercent` can be set to other than 25%
   * 2.26:
     * docs now on https://erddap.github.io/
-    * dataset citations in UI
+    * `displayInfo` & `displayAttribute` tags that could be used for dataset citations on `data` pages
 
 
 
