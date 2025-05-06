@@ -3899,14 +3899,6 @@ Worked at ESB.
   directory
 
 
-* TODO:
-  * for deployment as live version:
-    * change symlinks to point to deployed `erddap-datasets`:
-      * `bin/setenv.sh`
-      * `content/erddap/setup.xml`
-      * `content/erddap/datasets.xml`
-
-
 
 #### Sat 3-May-2025
 
@@ -3936,12 +3928,59 @@ Worked at ESB.
 * noticed that forecast datasets lacks v21-11 info
 
 
+
+### Week 19
+
+#### Mon 5-May-2025
+
+##### SalishSeaCast
+
+* posted details of 01may25 nowcast-agrif run failure on #crashingjobs channel
+* strange exception from `make_plots nemo forecast` re: no IO backend for xarray
+
+
+##### erddap-datasets
+
+* squash-merged PR#35 re: config for 2.26
+* Increased the `nGridThreads `and `nTableThreads` settings from 1 to 3 as recommended in the v2.19
+  update notes; PR#36 - squash-merged and deployed
+* Add `ipAddressMaxRequests`, `ipAddressMaxRequestsActive` and `ipAddressUnlimited` settings as
+  recommended in the v2.12 upgrade notes
+  * Use the new `ipAddressMaxRequests` value of 15 recommended in the v2.20 upgrade notes
+  * limits malicious users and overly aggressive concurrent requests
+  * PR#37 - squash-merged
+
+
+##### ERDDAP
+
+* confirmed that site `robots.txt` file matches recommendation in ERDDAP docs (unchanged in years)
+* changed symlinks to point to deployed `erddap-datasets`:
+  * `bin/setenv.sh`
+  * `content/erddap/setup.xml`
+  * `content/erddap/datasets.xml`
+* deployed increased threads (PR#36)
+* deployed `ipAddressMaxRequests` settings (PR#37)
+
+
+##### Miscellaneous
+
+* NEMO seminar:
+  * Madhurima Chakraborty, U Manitoba, Exploring the environmental factors controlling the iceberg
+    season severity along the east coast of Canada
+  * Stephanne Taylor, DFO, Transitioning Port Models to NEMO 4.2 with Wetting and Drying
+    * 4.2 namelist structures are very different to 3.6
+    * Fundy uses zps & vvl in 3.6
+      * had to change to sigma coordinates for 4.2
+
+
+
+
 * TODO:
-  * for deployment as live version:
-    * change symlinks to point to deployed `erddap-datasets`:
-      * `bin/setenv.sh`
-      * `content/erddap/setup.xml`
-      * `content/erddap/datasets.xml`
+  * ask Henryk about email from ERDDAP
+  * clean up v1.82:
+    * delete `/opt/tomcat/`
+    * delete `/results/erddap-1.82`
+    * remove old openjdk packages ?
 
 
 
@@ -3957,20 +3996,11 @@ Worked at ESB.
   * change `colorBarPalette` attr tag values to our favourite cmocean colour maps
   * add v21-11 info to forecast datasets `summary` attr
   * figure out why ERDDAP in unable to send emails
-  * 2.10: test `accessibleViaFiles` setting:
-    * tag in `setup.xml` is server default; it is overridden by tag for each dataset that we presently
-      set to `false`
-    * discuss with Susan if we want it; risk is bots downloading everything
-    * it would be nice if access to files interface could be limited to authenticated users
   * 2.11: add `emailDiagnosticsToErdData` setting
-  * 2.12: add 3 `ipAddress*` tags to `prefix.xml` to limit malicious users and overly aggressive
-    concurrent requests
-  * 2.15: think about languages other than english; only partially automated though
   * 2.19:
-    * increase `n*Threads` tag values to 3 in `prefix.xml`
     * hyphens in datasetIDs are deprecated ???
   * 2.23: CF-1.10 vs. CF-1.6
-    * `calendar: gregorian` is now deprecated in favour of `calendard: standard`
+    * `calendar: gregorian` is now deprecated in favour of `calendar: standard`
   * 2.25:
     * zarr support
     * Prometheus metrics
