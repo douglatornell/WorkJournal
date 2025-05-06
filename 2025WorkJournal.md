@@ -3974,6 +3974,52 @@ Worked at ESB.
 
 
 
+#### Tue 6-May-2025
+
+Worked at ESB
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* helped Griffon with onboarding
+
+
+##### SalishSeaCast
+
+* investigated `make_plots` failures
+  * `make_plots wwatch3 forecast publish` was run as
+    `make_plots wwatch3 forecast2 publish` after forecast run
+    * bug in calculation of `run_type` in `after_ping_erddap()` due to PR#355
+  * manual re-run got stuck for >15m collecting Halibut Bank obs from
+    https://www.ndbc.noaa.gov/data/realtime2/
+  * `make_plots nemo forecast publish` fails because ERDDAP isn't responding correctly
+    with `ubcSSfCampbellRiverSSH10m` dataset
+  * failed requests seem to be returning JSON? to xarray instead of nothing and
+    that triggers `ValueError`
+      did not find a match in any of xarray's currently installed IO backends
+      ['netcdf4', 'h5netcdf', 'scipy', 'cfgrib']. Consider explicitly selecting
+      one of the installed engines via the ``engine`` parameter, or installing
+      additional IO dependencies, see:
+      https://docs.xarray.dev/en/stable/getting-started-guide/installing.html
+      https://docs.xarray.dev/en/stable/user-guide/io.html
+  * `make_plots wwatch3 forecast publish` failed with `TypeError`
+      Plotting requires coordinates to be numeric, boolean, or dates of type
+      numpy.datetime64, datetime.datetime, cftime.datetime or pandas.Interval.
+      Received data of type object instead.
+
+
+##### ERDDAP
+
+* dataset responses not working
+* memory no freed after I stopped process
+* stopped everything
+* ran `/usr/local/sbin/update_spt.sh`
+  * kept modified `/etc/zabbix/zabbix_agent2.conf`
+* reponses were stalling for `make_plots nemo forecast publish` to changed
+  threads back from 3 to 1
+
+
+
 
 * TODO:
   * ask Henryk about email from ERDDAP
