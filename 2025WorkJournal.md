@@ -4020,6 +4020,100 @@ Worked at ESB
 
 
 
+#### Wed 7-May-2025
+
+##### SalishSeaCast
+
+* `grib_to_netcdf nowcast+` failed due to missing
+  `20250506T18Z_MSC_HRDPS_UGRD_AGL-10m_RLatLon0.0225_PT005H_SSC.grib2`
+  * all 18Z grib files are missing despite `collect_weather` and `crop_gribs` having completed
+    successfully; evidence of more weirdness on `skookum` before I rebooted it yesterday?
+  * added `--backfill` feature to `download_weather` re: issue #309
+  * successfully re-ran `crop_gribs` and `download_weather`
+* started backfilling `nowcast-agrif`:
+      <!-- markdownlint-disable MD013 -->
+    ```bash
+    rsync -tv /home/sallen/MEOPAR/ANALYSIS/analysis-susan/notebooks/Crashes/SalishSea_08432640_restart.nc \
+    orcinus:/global/scratch/dlatorne/nowcast-agrif/30apr25/
+    make_forcing_links orcinus nowcast-agrif 2025-05-01
+    make_forcing_links orcinus nowcast-agrif 2025-05-02
+    make_forcing_links orcinus nowcast-agrif 2025-05-03
+    make_forcing_links orcinus nowcast-agrif 2025-05-04
+    make_forcing_links orcinus nowcast-agrif 2025-05-05
+    make_forcing_links orcinus nowcast-agrif 2025-05-06
+    make_forcing_links orcinus nowcast-agrif 2025-05-07
+    ```
+    <!-- markdownlint-enable MD013 -->
+
+
+##### SalishSeaNowcast
+
+* added `--backfill` feature to `download_weather` re: issue #309
+  * branch: download_weather-backfill
+  * tested successfully to resolve missing 18Z gribs issue above
+
+
+##### Miscellaneous
+
+* pinged Henryk re: bad `/results` mount on `salish` that Ilias reported
+  * he got it re-mounted by killing a bunch of users' processes
+
+
+
+#### Thu 8-May-2025
+
+##### SalishSeaCast
+
+* recent `make_plots wwatch3 forecast` failures may be due to change in presentation of missing obs
+* `make_plots wwatch3 forecast2` ran instead of `make_plots wwatch3 forecast`
+  * likely due to the bug I identified on 6may
+  * manually re-ran the correct worker
+
+
+##### Miscellaneous
+
+* Alliance townhall re: AI Sovereign Compute Infrastructure Program submission to fed govt
+
+
+##### erddap-datasets
+
+* fixed time series datasets load failures:
+  * PR#38
+  * `ubcVFPA2ndNarrowsCurrent2sV1`
+    * added dataset attrs:
+      * `<att name="cdm_data_type">TimeSeries</att>`
+      * `<att name="cdm_timeseries_variables">time, longitude, latitude</att>`
+  * added `time` to `cdm_timeseries_variables` dataset attr:
+    * `ubcONCLSBBLCTD15mV1`
+    * `ubcONCSCVIPCTD15mV1`
+    * `ubcONCSEVIPCTD15mV1`
+    * `ubcONCUSDDLCTD15mV1`
+    * `ubcONCTWDP1mV18-01`
+
+
+
+#### Fri 9-May-2025
+
+##### SalishSeaNowcast
+
+* tried to fix issue of `make_plots wwatch3 forecast2` ran instead of `make_plots wwatch3 forecast`
+  * live edit on `skookum` to flip calculation of `run_type` in `after_ping_erddap()`
+  * restarted manager to load updated `next_workers` module
+
+
+
+#### Sat 10-May-2025
+
+Chores
+
+
+
+#### Sun 11-May-2025
+
+Bike ride and goofed off.
+
+
+
 
 * TODO:
   * ask Henryk about email from ERDDAP
@@ -4035,9 +4129,6 @@ Worked at ESB
 ##### erddap-datasets
 
 * TODO:
-  * fix time series datasets (ONC & 2nd Narrows HADCP) failed to load due to:
-      For cdm_data_type=TimeSeries, the variable with cf_role=timeseries_id (time) must be in the
-      cdm_timeseries_variables list.
   * drop `<drawLandMask>over</drawLandMask>` from datasets because it is now set as the server default
   * change `colorBarPalette` attr tag values to our favourite cmocean colour maps
   * add v21-11 info to forecast datasets `summary` attr
@@ -4063,10 +4154,6 @@ Worked at ESB
 
 
 * create mesh mask for sss150
-
-
-* add --backfill option download_weather to allow over-write of existing destination dir
-  * issue #309
 
 
 Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present to group.
