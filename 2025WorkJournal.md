@@ -4114,6 +4114,54 @@ Bike ride and goofed off.
 
 
 
+### Week 20
+
+#### Mon 12-May-2025
+
+##### ERDDAP
+
+* tried to figure out why TWDP, SEVIP & SCVIP datasets time values are incorrect
+
+
+##### Miscellaneous
+
+* fixed path that 2022 atmospheric forcing files were uploaded to on `beluga`
+* uploaded 2023 forcing files to `beluga` for Tall:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  yyyy=2023; rsync -tLv /results/forcing/atmospheric/GEM2.5/operational/ops_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/atmospheric/GEM2.5/operational/
+  yyyy=2023; rsync -tLv /results/forcing/atmospheric/continental2.5/nemo_forcing/hrdps_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/atmospheric/continental2.5/nemo_forcing/
+  yyyy=2023; rsync -tLv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
+  yyyy=2023; rsync -tLv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/
+  yyyy=2023; rsync -tLv /results/forcing/rivers/river_turb/riverTurbDaily2_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
+  yyyy=2023; rsync -tLv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
+  ```
+  <!-- markdownlint-enable MD013 -->
+* uploaded 2024 forcing files to `beluga` for Tall:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  yyyy=2024; rsync -tLv /results/forcing/atmospheric/continental2.5/nemo_forcing/hrdps_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/atmospheric/continental2.5/nemo_forcing/
+  yyyy=2024; rsync -tLv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
+  yyyy=2024; rsync -tLv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/
+  yyyy=2024; rsync -tLv /results/forcing/rivers/river_turb/riverTurbDaily2_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
+  yyyy=2024; rsync -tLv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
+    beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+
+
+
 
 * TODO:
   * ask Henryk about email from ERDDAP
