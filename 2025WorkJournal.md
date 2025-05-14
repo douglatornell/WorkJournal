@@ -4161,6 +4161,18 @@ Bike ride and goofed off.
 
 
 
+#### Tue 13-May-2025
+
+Worked at ESB
+
+##### Miscellaneous
+
+* MOAd group mtg; see whiteboard
+* helped Grace get set up to use Parcels on `grinder`
+* helped Tall update his analysis env on `beluga`
+
+
+
 
 
 * TODO:
