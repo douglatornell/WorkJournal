@@ -4173,6 +4173,49 @@ Worked at ESB
 
 
 
+#### Wed 14-May-2025
+
+##### erddap-datasets
+
+* fixed TWDP, SEVIP & SCVIP datasets time values
+  * time units were being interpreted as `seconds since 1970-01-01T00:00:00Z` despite being
+    `minutes since 1970-01-01T00:00:00Z`, so make that explicit in XML files
+  * PR#39
+* committed reversion of n*Threads from 3 to 1; PR#40
+
+
+##### SalishSeaTools
+
+* removed the uncommitted `test_stormtools2` module after confirming that its contents are in
+  `test_stormtools`
+* closed issue #98 re: HTTPS for climate.weather.gc.ca requests; done in PR #106 while fixing broken
+  links
+* fixed issue #108 re: "SyntaxWarning: invalid escape sequence '\*'" in `tidetools` docstrings
+  with docstring re-writes by PyCharm AI; PR#142
+
+
+
+#### Thu 15-May-2025
+
+##### SalishSeaCast
+
+* `make_plots forecast2 publish` failed at 04:05 with `RuntimeError: NetCDF: Access failure` on
+  Halibut Banks figure
+  * this is perhaps due to ERDDAP dataset update not being finished; mitigate with `tenacity` wrapper
+    around dataset request in `figures.wwatch3.wave_height_period._prep_plot_data()` line 77
+  * manual re-try at 09:10 failed on Sentry Shoal figure with:
+      TypeError: Plotting requires coordinates to be numeric, boolean, or dates of type
+      numpy.datetime64, datetime.datetime, cftime.datetime or pandas.Interval. Received data of type
+      object instead.
+    * this is be due to missing values filled with `MM`; probably a recent change in the NDBC product
+    * fixed in PR#360; deployed to `skookum` for verification
+
+
+##### Atlantis
+
+* mtg w/ Javier
+
+
 
 
 * TODO:
@@ -4191,6 +4234,7 @@ Worked at ESB
 * TODO:
   * drop `<drawLandMask>over</drawLandMask>` from datasets because it is now set as the server default
   * change `colorBarPalette` attr tag values to our favourite cmocean colour maps
+  * change `standard_name_vocabulary` to `CF Standard Name Table v91`
   * add v21-11 info to forecast datasets `summary` attr
   * figure out why ERDDAP in unable to send emails
   * 2.11: add `emailDiagnosticsToErdData` setting
@@ -4288,8 +4332,6 @@ TODO:
 
 * change automation workflow to run nowcast-green in place of nowcast-blue
   * add output of 10min avg tide gauge station files
-* `sandheads_winds` is using HTTP instead of HTTPS for obs collection via
-  `salishsea_tools.stormtools.get_EC_observations()`; same in `tools.I_ForcingFiles.Atmos.weather.get_EC_observations()`
 
 
 
@@ -4316,12 +4358,6 @@ TODO:
 * change download_weather to gather only files missed by collect_weather so that it can
   work with crop_gribs monitoring incoming files
   * check for presence of files before downloading them; skip if present
-
-
-
-TODO:
-
-* fix straight line gaps in wwatch3 forecast plots (forecast2 are okay)
 
 
 
