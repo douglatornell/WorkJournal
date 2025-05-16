@@ -4199,8 +4199,8 @@ Worked at ESB
 
 ##### SalishSeaCast
 
-* `make_plots forecast2 publish` failed at 04:05 with `RuntimeError: NetCDF: Access failure` on
-  Halibut Banks figure
+* `make_plots wwatch3 forecast2 publish` failed at 04:05 with
+  `RuntimeError: NetCDF: Access failure` on Halibut Banks figure
   * this is perhaps due to ERDDAP dataset update not being finished; mitigate with `tenacity` wrapper
     around dataset request in `figures.wwatch3.wave_height_period._prep_plot_data()` line 77
   * manual re-try at 09:10 failed on Sentry Shoal figure with:
@@ -4214,6 +4214,28 @@ Worked at ESB
 ##### Atlantis
 
 * mtg w/ Javier
+* pointed Raisha at Rainbox CSV extension for VSCode
+
+
+
+#### Fri 16-May-2025
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* confirmed that `make_plots wwatch3 forecast* publish` are working correctly
+  re: `run_type` calculation hack and PR#360
+
+
+##### Miscellaneous
+
+* helped Griffon get `SalishSeaTools` installed in his analysis env\
+* cleaned up `/var/cache/apt/` re: nearly full `root` partion on `kudu`
+  * started with 24.2 GB in 5222 items
+  * ran `sudo apt-get autoclean`
+  * resulted in 7.4 GB in 3304 items
+
 
 
 
