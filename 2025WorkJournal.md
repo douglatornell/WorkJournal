@@ -4235,6 +4235,25 @@ Worked at ESB
   * started with 24.2 GB in 5222 items
   * ran `sudo apt-get autoclean`
   * resulted in 7.4 GB in 3304 items
+* helped Tall get `eval_tools` obs matching working in batch jobs on `beluga`
+
+
+##### private-docs
+
+* replaced `.hgignore` with `.gitignore`
+* started work on talk outline for 30may25 Phys Ocgy seminar
+
+
+
+#### Sat 17-May-2025
+
+Patio work and bike work
+
+
+
+#### Sun 18-May-2025
+
+Cyclied to Sanctuary and back
 
 
 
