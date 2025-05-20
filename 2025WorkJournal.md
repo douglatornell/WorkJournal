@@ -4167,7 +4167,7 @@ Worked at ESB
 
 ##### Miscellaneous
 
-* MOAd group mtg; see whiteboard
+* MOAD group mtg; see whiteboard
 * helped Grace get set up to use Parcels on `grinder`
 * helped Tall update his analysis env on `beluga`
 
@@ -4253,7 +4253,7 @@ Patio work and bike work
 
 #### Sun 18-May-2025
 
-Cyclied to Sanctuary and back
+Cycled to Sanctuary and back
 
 ##### SalishSeaCast
 
@@ -4304,10 +4304,47 @@ Cyclied to Sanctuary and back
 
 #### Tue 20-May-2025
 
+Worked at ESB.
+
+Attended VGH Cardiac Rehab program fund raiser.
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed
+  * netCDF error
+  * ran for 19may instead of 20may; probably due to running before checklist reset?
+
+
 ##### ERDDAP
 
 * TWDP, SEVIP & SCVIP datasets reverted to 1970 times after morning updates
   * forced dataset reloads of TWDP, SEVIP & SCVIP at ~08:40 to correct time units
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update setuptools to 78.1.1 re: CVE-2025-47273 re: path traversal
+  vulnerability
+  * MOAD/docs
+  * SalishSeaCast/docs
+  * NEMO_Nowcast
+  * moad_tools
+  * SalishSeaTools
+  * Reshapr
+  * SalishSeaCmd
+  * NEMO-Cmd
+  * salishsea-site
+  * MoaceanParcels
+  * SOG-Bloomcast-Ensemble
+  * FUN
+  * SOG-forcing
+  * SOG-Bloomcast
+  * erddap-datasets
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
 
 
 
