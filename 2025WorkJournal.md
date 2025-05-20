@@ -4255,6 +4255,61 @@ Patio work and bike work
 
 Cyclied to Sanctuary and back
 
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst publish` failed with `RuntimeError: NetCDF: DAP failure`
+  * I suspect a race condition with the ERDDAP dataset reload triggered by `ping_erddap wwatch3`
+
+
+##### ERDDAP
+
+* Rich reported that the TWDP ferry dataset has reverted to 1970 dates
+  * forced dataset reload corrected the issue
+
+
+
+### Week 21
+
+#### Mon 19-May-2025
+
+**Statutory Holiday** - Victoria Day
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst2 publish` failed with `RuntimeError: NetCDF: DAP failure`
+* `make_plots wwatch3 foreacst publish` failed similarily
+  * manual re-run at ~12:40 was successful
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update codecov-action to 5.4.3 re: dependency updates
+  * gha-workflows
+  * SalishSeaNowcast
+  * AtlantisCmd
+* Squash-merged dependabot PRs to update setuptools to 78.1.1 re: CVE-2025-47273 re: path traversal
+  vulnerability
+  * SalishSeaNowcast
+  * AtlantisCmd
+  * gha-workflows
+  * cookiecutter-MOAD-pypkg
+  * cookiecutter-analysis-repo
+
+
+##### ERDDAP
+
+* forced dataset reloads of TWDP, SEVIP & SCVIP to correct time units
+
+
+
+#### Tue 20-May-2025
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets reverted to 1970 times after morning updates
+  * forced dataset reloads of TWDP, SEVIP & SCVIP at ~08:40 to correct time units
+
+
 
 
 
