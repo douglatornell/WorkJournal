@@ -4348,6 +4348,132 @@ Attended VGH Cardiac Rehab program fund raiser.
 
 
 
+#### Wed 21-May-2025
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets reverted to 1970 times after morning updates
+  * forced dataset reloads of TWDP, SEVIP & SCVIP at ~08:55 to correct time units
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed after checklist reset with netCDF access failure
+  * re-ran successfully at ~09:00
+
+
+##### Miscellaneous
+
+* had to do the upstairs/downstairs dance again to get VSCode to connect to Zwift PC
+  * PC wifi setting gets changed from Private to Public by the Windows Security Nanny
+
+
+##### private-docs
+
+* continued work on talk outline for 30may25 Phys Ocgy seminar
+
+
+
+#### Thu 22-May-2025
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets reverted to 1970 times after morning updates
+  * forced dataset reloads of TWDP, SEVIP & SCVIP at ~09:45 to correct time units
+
+
+##### private-docs
+
+* continued work on talk outline for 30may25 Phys Ocgy seminar
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst publish` failed at 11:18 with `RuntimeError: NetCDF: DAP failure`
+  * manual re-run at ~11:35 also failed
+  * manual re-run at ~11:45 succeeded
+  * I suspect that the problem is slow response to `ping_erddap` for rolling forecast dataset due to
+    ERDDAP being busy loading results from `nowcast-green` run
+    * try to mitigate with `tenacity` wrapper around dataset request in
+      `figures.wwatch3.wave_height_period._prep_plot_data()` line 77
+* squash-merged and deployed PR#360 re: missing wave buoy obs values filled with `MM` due to a
+  change in the NDBC product
+
+
+##### Miscellaneous
+
+* updated PyCharm on `khawla` to 2025.1.1.1
+* UBC-IOS-CCCma modeling mtg
+  * Kyoko Ohashi: IOS on Dal work of particle tracking on East Coast re: MPAs for CMOS
+  * Laura Bianucci: obs & models in fjords
+
+
+
+#### Fri 23-May-2025
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets reverted to 1970 times after morning updates
+  * forced dataset reloads of TWDP, SEVIP & SCVIP at ~09:45 to correct time units
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst publish` failed at 11:23 with `RuntimeError: NetCDF: DAP failure`
+  * manual re-run at ~15:25 succeeded
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update tornado to 6.5.1 re: CVE-2025-47287 re: DoS attack vulnerability
+  * moad_tools
+  * MOAD/docs
+  * MoaceanParcels
+  * SalishSeaCast/docs
+  * Reshapr
+  * SalishSeaNowcast
+  * SalishSeaTools
+  * ECget
+  * SOG-Bloomcast-Ensemble
+  * erddap-datasets
+  * SOG-Bloomcast
+
+
+##### NEMO-Cmd
+
+* fixed brkoen and redirected docs links found by linkcheck; PR#105
+
+
+
+#### Sat 24-May-2025
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets reverted to 1970 times after morning updates
+  * forced dataset reloads of TWDP, SEVIP & SCVIP at ~08:05 to correct time units
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst2 publish` failed at 04:11 with `RuntimeError: NetCDF: DAP failure`
+  * manual re-run at ~08:05 succeeded
+
+
+
+#### Sun 25-May-2025
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets reverted to 1970 times after morning updates
+  * forced dataset reloads of TWDP, SEVIP & SCVIP at ~08:05 to correct time units
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst2 publish` failed at 04:05 with `RuntimeError: NetCDF: DAP failure`
+  * manual re-run at ~09:05 succeeded
+
+
 
 
 
