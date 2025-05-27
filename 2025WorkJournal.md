@@ -4475,6 +4475,37 @@ Attended VGH Cardiac Rehab program fund raiser.
 
 
 
+### Week 22
+
+#### Mon 26-May-2025
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets reverted to 1970 times after morning updates
+  * forced dataset reloads of TWDP, SEVIP & SCVIP at ~08:52 to correct time units
+  * tried using `erddap/hardFlag/ubcONCSCVIPCTD15mV1` to reload the internal database for that dataset
+    * probably didn't work because time units are now `seconds since 1970-01-01T00:00:00Z`
+    * perhaps there's file(s) with incorrect time units?
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst2 publish` failed at 04:09 with `RuntimeError: NetCDF: DAP failure`
+  * manual re-run at ~08:53 succeeded
+
+
+
+#### Tue 27-May-2025
+
+Worked at ESB while Rita was at home
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets reverted to 1970 times after morning updates
+  * forced dataset reloads of TWDP, SEVIP & SCVIP at ~09:15 to correct time units
+
+
+
 
 
 * TODO:
