@@ -4505,6 +4505,23 @@ Worked at ESB while Rita was at home
   * forced dataset reloads of TWDP, SEVIP & SCVIP at ~09:15 to correct time units
 
 
+##### SalishSeaCast
+
+* Fraser River turbidity data stream stopped after 03:10; update Tuesday?
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* helped Griffon expunge a large file from his `analysis-griffon` commit history
+  and diagnose a mystery failure of quantitative Ariane that turned out to be
+  due to runnign out of memory on `chum`
+
+
+##### private-docs
+
+* continued work on talk outline for 30may25 Phys Ocgy seminar
+
 
 
 
