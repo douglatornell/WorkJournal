@@ -4574,6 +4574,8 @@ Cardiac rehab exit stress test
 
 #### Fri 30-May-2025
 
+Worked at ESB
+
 Cardiac rehab exit blood lab draw
 
 ##### ERDDAP
@@ -4592,6 +4594,16 @@ Cardiac rehab exit blood lab draw
 
 * presented Phys Ocgy seminar: SalishSeaCast Configuration & Automation
 
+
+##### SalishSeaNowcast
+
+* fixed logic for make_plots wwatch3 run type selelction
+  * PR#364
+  * prioritize foreast over forecast2 to ensure correct choice when there is a forecast key in The
+    "WWATCH3 runs" item in the checklist
+* fixed `test_run_NEMO_hindcast` tests that alomost always fail in GHA workflow, but not locally
+  * PR#365
+  * moved assertions into `pytest.raises()` context manager scope
 
 
 
