@@ -4370,7 +4370,7 @@ Attended VGH Cardiac Rehab program fund raiser.
 
 ##### private-docs
 
-* continued work on talk outline for 30may25 Phys Ocgy seminar
+* continued work on talk for 30may25 Phys Ocgy seminar
 
 
 
@@ -4384,7 +4384,7 @@ Attended VGH Cardiac Rehab program fund raiser.
 
 ##### private-docs
 
-* continued work on talk outline for 30may25 Phys Ocgy seminar
+* continued work on talk for 30may25 Phys Ocgy seminar
 
 
 ##### SalishSeaCast
@@ -4520,7 +4520,77 @@ Worked at ESB while Rita was at home
 
 ##### private-docs
 
-* continued work on talk outline for 30may25 Phys Ocgy seminar
+* continued work on talk for 30may25 Phys Ocgy seminar
+
+
+
+#### Wed 28-May-2025
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets reverted to 1970 times after morning updates
+  * forced dataset reloads of TWDP, SEVIP & SCVIP at ~09:15 to correct time units
+
+
+##### SalishSeaCast
+
+* no obs for Skagit River
+* Fraser River turbidity obs data stream resumed, but there are enough missing obs that we persisted
+  again
+
+
+##### private-docs
+
+* continued work on talk for 30may25 Phys Ocgy seminar
+
+
+
+#### Thu 29-May-2025
+
+Cardiac rehab exit stress test
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets reverted to 1970 times after morning updates
+  * forced dataset reloads of TWDP, SEVIP & SCVIP at ~09:15 to correct time units
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst2 publish` failed at 04:09 with `RuntimeError: NetCDF: DAP failure`
+  * manual re-run at ~09:20 succeeded
+
+
+##### private-docs
+
+* finished slides for talk for 30may25 Phys Ocgy seminar
+
+
+##### Miscellaneous
+
+* listened to NEMO collab workshop at CMOS
+
+
+
+#### Fri 30-May-2025
+
+Cardiac rehab exit blood lab draw
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets reverted to 1970 times after morning updates
+  * forced dataset reloads of TWDP, SEVIP & SCVIP at ~08:10 to correct time units
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst2 publish` failed at 04:11 with `RuntimeError: NetCDF: DAP failure`
+  * manual re-run at ~08:10 succeeded
+
+
+##### Miscellaneous
+
+* presented Phys Ocgy seminar: SalishSeaCast Configuration & Automation
 
 
 
