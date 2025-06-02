@@ -4607,6 +4607,56 @@ Cardiac rehab exit blood lab draw
 
 
 
+#### Sat 31-May-2025
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets reverted to 1970 times after morning updates
+  * forced dataset reloads of TWDP, SEVIP & SCVIP at ~11:40 to correct time units
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst2 publish` failed at 04:07 with `RuntimeError: NetCDF: DAP failure`
+  * manual re-run at ~11:40 succeeded
+
+
+##### SalishSeaNowcast
+
+* started work to resolve `make_plots wwatch3 foreacst* publish` failures with
+  `RuntimeError: NetCDF: DAP failure`
+  * dropped unused `buoy` arg from `_plot_wave_height_time_series()` and
+    `_plot_dominant_period_time_series()`
+
+
+## June
+
+<!-- markdownlint-disable MD001 -->
+#### Sun 1-Jun-2025
+<!-- markdownlint-enable MD001 -->
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets reverted to 1970 times after morning updates
+  * forced dataset reloads of TWDP, SEVIP & SCVIP at ~11:40 to correct time units
+
+
+##### SalishSeaNowcast
+
+* started work to resolve `make_plots wwatch3 foreacst* publish` failures with
+  `RuntimeError: NetCDF: DAP failure`
+  * PR#366
+  * added `tenacity.retry` decorator to `_plot_wave_height_time_series()` and
+    `_plot_dominant_period_time_series()`
+  * tried to remove excess x-axis labels in wave height sub-plot; success for axis label, but not
+    for month tick label
+  * deployed branch to production for testing
+
+
+
+
+
+
 * TODO:
   * ask Henryk about email from ERDDAP
   * clean up v1.82:
