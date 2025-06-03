@@ -4654,6 +4654,50 @@ Cardiac rehab exit blood lab draw
 
 
 
+### Week 23
+
+#### Mon 2-Jun-2025
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets **hadn't** revert to 1970 times at 09:10, but had by 09:40
+  * forced dataset reloads of TWDP, SEVIP & SCVIP at ~09:40 to correct time units
+
+
+##### SalishSeaCast
+
+* `make_ssh_files forecast2` errored due to missing obs
+* `make_plots wwatch3 foreacst2 publish` failed at 04:18 with `RuntimeError: NetCDF: DAP failure`
+  apparrently after `tenacity` did its job
+  * manual re-run at ~09:10 succeeded
+
+
+##### SalishSeaNowcast
+
+* continued work to resolve `make_plots wwatch3 foreacst* publish` failures with
+  `RuntimeError: NetCDF: DAP failure`
+  * PR#366
+  * `make_plots wwatch3 foreacst2 publish` seems to have failed after 10 minutes of retrying
+    * changed retry parameters to 1-3 minutes random intervals for 20 minutes
+    * added logging before
+
+
+
+#### Tue 3-Jun-2025
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets reverted to 1970 times after morning updates
+  * forced dataset reloads of TWDP, SEVIP & SCVIP at ~08:42 to correct time units
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst2 publish` failed at 04:27 with `RuntimeError: NetCDF: DAP failure`
+  apparrently after `tenacity` did its job
+  * manual re-run at ~08:43 succeeded
+
+
 
 
 
