@@ -4685,6 +4685,8 @@ Cardiac rehab exit blood lab draw
 
 #### Tue 3-Jun-2025
 
+Worked at ESB
+
 ##### ERDDAP
 
 * TWDP, SEVIP & SCVIP datasets reverted to 1970 times after morning updates
@@ -4698,7 +4700,112 @@ Cardiac rehab exit blood lab draw
   * manual re-run at ~08:43 succeeded
 
 
+##### Miscellaneous
 
+* MOAD group mtg; see whiteboard
+* met w/ Susan to discuss my work focus
+  * centre on next version of SalishSeaCast
+  * marked up whiteboard with:
+    * things that will be included:
+      * Tall's O2 improvements
+      * Karyn's Z2 seasonal cycle work
+      * temperature growth curve for diatoms and nanoflagellates
+      * correct the density correction for river/plume water from 1026 to 1000
+      * move the south edge of the grid to include all of Puget Sound
+      * tuning and evaluation
+    * things that may be included:
+      * higher nitrate/ammonium in Puget Sound
+      * include swage outfalls
+      * river temperatures
+      * improved Puget Sound bathymetry re: Tall's finding that it is too shallow
+        in the inlets
+      * update Howe Sound runoff calculations to include Capilano River gauge
+    * things that won't be included:
+      * bacteria
+      * turbidity affecting other variables
+      * update to NEMO 4.2 or 5
+      * SSS150 (perhaps as an AGRIF sub-grid)
+  * implications for my work focus:
+    * improve `SalishSeaTools.evaltools` module
+      * poll group on who is using what functions and what dataset sources they use
+    * finish 202405 bathymetry with Susan
+    * get NEMO running again on `sockeye`
+      * work with ARC to get automation auth on `sockeye`
+      * target the runs that Susan needs to do for Karyn
+    * do we want to eliminate nowcast-blue run on `arbutus`?
+      * what are the implications of that for future SSS150 AGRIF?
+
+
+##### SalishSeaTools
+
+* started reviewing `evaltools` module:
+  * 3216 LOC
+  * dependencies:
+    * excel engine:
+      * `openpyxl` for Excel 2010 xlsx/xlsm files
+        * v3.1.5 of 29jun2024 is on conda-forge
+      * `xlrd` for legacy `.xls` files
+        * last release was 2.0.1 in Dec-2020
+      * used in `loadPDF()` via `pandas.read_excel()`
+      * used in `loadHakai()` via `pandas.read_excel()`
+    * imports inside functions:
+      * `sqlalchemy` in
+        * `loadDFOCTD()`
+          * used to access `/ocean/shared/SalishSeaCastData/DFO/CTD/DFO_CTD.sqlite`
+        * `loadDFO()`
+          * used to access `/ocean/eolson/MEOPAR/obs/DFOOPDB/DFO_OcProfDB.sqlite`
+      * `erdddapy` in:
+        * `load_ferry_ERDDAP()`
+        * `load_ONC_node_ERDDAP()`
+  * functions:
+    * `matchData()`
+      * `_gridHoriz()`
+      * `_vertNetmatch()`
+      * `_binmatch()`
+      * `_vvlBin()`
+      * `_interpvvlZ()`
+      * `_ferrymatch()`
+      * `_nextfile_bin()`
+      * `_getTimeInd_bin()`
+      * `_getTimeInd_bin_ops()`
+      * `_getZInd_bin()`
+    * `index_model_files()`
+    * `index_model_files_flex()`
+    * `loadDFOCTD()`
+    * `loadDFO()`
+    * `loadPSF()`
+      * `_lt0convert()`
+    * `loadPSFCTD()`
+    * `loadHakai()`
+    * `load_ferry_ERDDAP()`
+    * `load_ONC_node_ERDDAP()`
+    * `stats()`
+      * `WSS()`
+      * `RMSE()`
+    * `varvarScatter()`
+    * `varvarPlot()`
+    * `varvarIter()`
+    * `tsertser_graph()`
+    * `_deframe()`
+    * `_flatten_nested_dict()`
+    * `displayStats()`
+    * `displayStatsFlex()`
+    * `utc_to_pac()`
+    * `pac_to_utc()`
+    * `pdt_to_utc()`
+    * `pst_to_utc()`
+    * `datetimeToDecDay()`
+    * `printstats()`
+    * `datetimeToYD()`
+    * `getChlNRatio()`
+    * `load_Pheo_data()`
+    * `load_WADE_data()`
+    * `load_CTD_data()`
+  * so many hard-coded paths in `/ocean/eolson/MEOPAR/obs/`
+  * WADE datasets stored as pickles in `/ocean/eolson/MEOPAR/obs/WADE/ptools_data/ecology/`
+
+
+* look for ONC Sannich Inlet node profile datasets for Tall
 
 
 * TODO:
