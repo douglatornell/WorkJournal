@@ -4805,7 +4805,315 @@ Worked at ESB
   * WADE datasets stored as pickles in `/ocean/eolson/MEOPAR/obs/WADE/ptools_data/ecology/`
 
 
-* look for ONC Sannich Inlet node profile datasets for Tall
+
+#### Wed 4-Jun-2025
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets reverted to 1970 times after morning updates
+  * forced dataset reloads of TWDP, SEVIP & SCVIP at ~09:27 to correct time units
+* Reviewed today's email messages log and found many:
+  "java.io.IOException: User limit of inotify watches reached"
+  * realized that limits had reverted to low default values after last `skookum` reboot:
+  * set new values:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+      sudo sysctl fs.inotify.max_user_instances=2048
+      sudo sysctl fs.inotify.max_user_watches=196608
+      sudo sysctl -p
+    ```
+    <!-- markdownlint-enable MD013 -->
+* opened ticket for Henryk to look at no email issue
+  * he noted that `/gome/tomcat/` doesn't exist and created it
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst2 publish` failed at 04:35 with `RuntimeError: NetCDF: DAP failure`
+  apparrently after `tenacity` did its job
+  * manual re-run at ~09:30 succeeded
+
+
+##### erddap-datasets
+
+* removed `updateEveryNMillis` tag from all datasets because we shouldn't need it; we use a flag to
+  trigger updates whenenver our datasets change
+
+
+##### `sockeye`
+
+* 210 base nodes w/ 32 cores & 192 GB RAM (6 GB/core) `skylake`
+* 170 base nodes w/ 40 cores & 192 GB RAM (4.8 GB/core) `cascade`
+* 2? login nodes
+* 2 data transfer nodes (`dtn.sockeye.arc.ubc.ca`)
+* `gcc` 5.5.0, 7.5.0, 9.4.0
+* `intel` 2023.1.0, 2023.2.1
+* `miniconda3` 4.9.2 (2020-11-10)
+* `netcdf-fortran` 4.5.3, 4.6.1
+* `openmpi` 4.1.1, 4.1.6
+* `/project/` has become `/arc/project/`
+* fix `$PROJECT` path
+  * edit `.bash_profile`
+  * `ln -sf /arc/project/st-sallen1-1/ project`
+  * relog
+* remove old `module load` statements from `.basrhrc`
+* remove `mambaforge-pypy3` installation
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  cp .condarc .condarc-aside
+  conda activate base
+  conda init --reverse --all
+  conda deactivate
+  rm -rf mambaforge-pypy3/ Mambaforge-pypy3-Linux-x86_64.sh .conda .condarc project/dlatorne/conda-envs/*
+  rm -rf ~/.local/*
+  ```
+  <!-- markdownlint-enable MD013 -->
+* install `miniforge3`
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  curl -L -O \
+    "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+  bash Miniforge3-$(uname)-$(uname -m).sh
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * allow it to auto-initialize conda
+  * relog
+* configure conda/mamba:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  conda config --set auto_activate_base false
+  conda config --add envs_dirs /arc/project/st-sallen1-1/dlatorne/conda-envs/
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * relog
+* install SalishSeaCmd
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  cd project/dlatorne/MEOPAR/NEMO-Cmd/
+  git pull
+  mamba env create -f envs/environment-hpc.yaml
+  mamba activate salishsea-cmd
+  python -m pip install --user -e ../NEMO-Cmd
+  python -m pip install --user -e .
+  ```
+  <!-- markdownlint-enable MD013 -->
+* build XIOS
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  cd project/dlatorne/MEOPAR/XIOS-ARCH/
+  git pull
+  cd project/dlatorne/MEOPAR/XIOS-2/
+  git pull
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+
+
+#### Thu 5-Jun-2025
+
+##### Miscellaneous
+
+* helped Camryn with the fact that VSCode will no longer allow connections to `graham`
+* looked for ONC Sannich Inlet node profile datasets for Tall
+  * Yarrow Point, 2015-2016, sparse obs, maybe compromised quality
+
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets **hadn't** revert to 1970 times at 08:55
+* no daily status email, as ususal
+  * daily message was sent at 07:12:05
+  * I don't see `/home/tomcat/`; told Henryk, he says that it is `/var/tomcat/` because it is a dummy user
+* Reviewed today's email messages log and found **no**:
+  "java.io.IOException: User limit of inotify watches reached"
+* restarted ERDDAP at ~15:55
+  * got "Cannot load from object array because "this.sourceAxisValues" is null" messages for:
+    * ubcSSf2DWaveFields30mV17-02
+    * ubcSSf3DuGridFields1h
+    * ubcSSf3DvGridFields1h
+    * ubcSSfSurfaceTracerFields1h
+    * ubcSSfDepthAvgdCurrents1h
+  * resolved by doing `hardFlag/` reloaded on the datasets; weird
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst2 publish` **worked** at 04:16
+* Clowhom River obs collection failed
+
+
+##### SalishSeaTools
+
+* put message in #evaluations-observations asking who uses `evaltools`
+  * Karyn
+  * Susan
+
+
+##### `sockeye`
+
+* successfully built XIOS
+  * deleted `fcm_env.ksh -> /project/st-sallen1-1/dlatorne/MEOPAR/XIOS-2/fcm_env.sh`
+  * tried to use intel OneAPI compilers but the C++ compiler appears to have a dependency on GCC
+    (error #10417) that requires a hacky work-around: https://scicomp.ethz.ch/wiki/Migrating_to_Ubuntu
+  * buffed `arch-GCC_SOCKEYE.*` files
+    * changed deprecated `mpif90` to `mpifort`
+    * changed to `gcc-9.4.0`
+    * added `parallel-netcdf/1.12.2-additional-bindings` module
+    * build failed with `/usr/bin/ld: cannot find -lz`
+      * dropped `-lz` from `arch-GCC_SOCKEYE.path`
+  * success!
+* successfully built SalishSeaCast NEMO
+  * module loads
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    module load gcc/9.4.0
+    module load openmpi/4.1.1-cuda11-3
+    module load netcdf-fortran/4.5.3-hdf4-support
+    module load parallel-netcdf/1.12.2-additional-bindings
+    module load perl/5.34.0
+    module load perl-uri/1.72
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * buffed `arch-GCC_SOCKEYE.fcm` file
+    * changed deprecated `mpif90` to `mpifort`
+    * updated `%NCDF_INC` to match that used for XIOS build
+  * success!
+* `rebuild_nemo` build doesn't like the `-lxios` in `%XIOS_LIB -L%XIOS_HOME/lib -lxios`
+  * works when that is temporarily removed
+
+
+##### SalishSeaCmd
+
+* started updating for present `sockeye` environment
+  * branch: sockeye-2025
+  * PR#
+  * changed module loads
+
+
+
+#### Fri 6-Jun-2025
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets **hadn't** revert to 1970 times at 06:55 nor at 13:00
+* uncommented `emailSmtpPort` tag in `setup.xml` and set it to 25 in case my assumption about it getting
+  the correct default value is wrong
+  * restarted ERDDAP
+  * still no email
+* successfully tested using `mail` to send mail from `dlatorne@skookum`
+  * same test as `tomcat` failed due to `Cannot open mailbox /var/mail/tomcat: Permission denied`
+  * updated ticket to Henryk
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst2 publish` failed at 04:38 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * manual re-run at ~13:15 succeeded
+
+
+##### Miscellaneous
+
+* Phys Ocgy seminar: Charles Hannah re: O2 in the NW Pacific
+
+
+##### `sockeye`
+
+* created `SS-run-sets/SalishSea/djl/v202111/sockeye-example.yaml`
+* added `sockeye-Jun25` sheet to HPC scaling Google spreadsheet
+* fixed `.bash_profile` exports of `PROJECT` and `SCRATCH`
+* created `$PROJECT/$USER/MEOPAR/runs/` and `$PROJECT/$USER/MEOPAR/results/`
+* updated repo clones:
+  * `grid`
+  * `rivers-climatology`
+  * `tides`
+  * `tracers`
+* uploaded restart files:
+  * `$SCRATCH/$USER/MEOPAR/results/28feb23/SalishSea_16701120_restart.nc`
+  * `$SCRATCH/$USER/MEOPAR/results/28feb23/SalishSea_16701120_restart_trc.nc`
+* uploaded forcing files for 29feb23 and 01-02mar23
+
+
+
+#### Sat 7-Jun-2025
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets **hadn't** revert to 1970 times at 06:55 nor at 13:00
+* `ubcSSaSurfaceAtmosphereFieldsV23-02` has max time of 2025-06-06T23:00:00Z
+  * shouldn't it be later?
+* still no daily report email
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst2 publish` failed at 04:34 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * manual re-run at ~09:50 succeeded
+* river obs collection failed for Salmon and Skagit rivers
+* `crop_gribs 12` missed 1 file; delyaed runs by ~2h
+
+
+##### `sockeye`
+
+* fixed mess re: `GLS_k` in code and `field_def.xml` caused by Tall reverting Susan's code changes
+  instead of updating his `field_def.xml`
+* 01mar23-4x9 run is time stepping!
+* 01mar23-5x10 run is time stepping!
+  * annoying restriction causes `salishsea run` to fail without `--no-submit`
+    <!-- markdownlint-disable MD013 -->
+    ```text
+      sbatch: error: ---------------------------------------------------------------------
+      sbatch: error: Submitting jobs from directories residing in /arc/project is not allowed.
+      sbatch: error: Transfer your files to a directory in /scratch FS  and submit the job from there.
+      sbatch: error: ---------------------------------------------------------------------
+      sbatch: error: Batch job submission failed: Job cannot be submitted without the current working directory specified.
+      salishsea ERROR: Command '['sbatch', '/scratch/st-sallen1-1/dlatorne/MEOPAR/runs/01mar-5x10_2025-06-07T102312.373568-0700/SalishSeaNEMO.sh']' returned non-zero exit status 1.
+    ```
+    <!-- markdownlint-enable MD013 -->
+* finished scaling runs up to 5 nodes
+* `rebuild_nemo` was consistenly not found
+
+
+
+#### Sun 8-Jun-2025
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets **hadn't** revert to 1970 times at 06:55 nor at 13:00
+* `ubcSSaSurfaceAtmosphereFieldsV23-02` has max time of 2025-06-06T23:00:00Z
+  * definitiely a problem
+    * file pattern was some how reverted to `ops_*` from `hrdps_*`
+    * resolved by doing a `hardFlag/` touch
+* still no daily report email
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst2 publish` failed at 04:34 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * failure was on Sentry Shoal plot instead of Halibut Bank
+  * plots are on website ???
+
+
+##### `sockeye`
+
+* resolved job submission restriction issue by using olnly absolute paths in YAML file and doing
+  `salishsea run` in a directory on `/scratch/`
+* finished scaling runs for 6-9 nodes
+  * best NEMO time is 9m59s with 18x40 decomposition on 9 40 core cascade nodes
+  * node hours per model day curve has flattened, but no eveident minimum yet
+  * waiting for Susan to generate decompositions for 383+ cores
+
+
+
+
+
+* goblet squats
+* dumbell deadlift and row
+* split squats with twist
+* band chest presses
+* band rows
 
 
 * TODO:
