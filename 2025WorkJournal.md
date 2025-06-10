@@ -4837,7 +4837,7 @@ Worked at ESB
 ##### erddap-datasets
 
 * removed `updateEveryNMillis` tag from all datasets because we shouldn't need it; we use a flag to
-  trigger updates whenenver our datasets change
+  trigger updates whenever our datasets change
 
 
 ##### `sockeye`
@@ -5051,7 +5051,7 @@ Worked at ESB
   after `tenacity` did its job
   * manual re-run at ~09:50 succeeded
 * river obs collection failed for Salmon and Skagit rivers
-* `crop_gribs 12` missed 1 file; delyaed runs by ~2h
+* `crop_gribs 12` missed 1 file; delayed runs by ~2h
 
 
 ##### `sockeye`
@@ -5104,6 +5104,85 @@ Worked at ESB
   * best NEMO time is 9m59s with 18x40 decomposition on 9 40 core cascade nodes
   * node hours per model day curve has flattened, but no eveident minimum yet
   * waiting for Susan to generate decompositions for 383+ cores
+
+
+
+### Week 24
+
+#### Mon 9-Jun-2025
+
+
+##### SalishSeaCast
+
+* river obs collection failed for Salmon River
+* `make_plots wwatch3 foreacst2 publish` **worked** at 04:10
+* `crop_gribs 12` missed 1 file; delayed runs by ~2h
+
+
+##### ERDDAP
+
+* TWDP, SEVIP & SCVIP datasets **hadn't** revert to 1970 times at 09:45
+  * no reversions since I fixed the inotify limits; so issue resolved
+* still no daily report email
+* `ubcSSaSurfaceAtmosphereFieldsV23-02` has max time of 2025-06-06T23:00:00Z
+  * definitiely a problem
+
+
+##### erddap-datasets
+
+* pushed removal of `updateEveryNMillis` tag from all datasets because we shouldn't need it;
+  we use a flag to trigger updates whenever our datasets change; PR#44
+
+
+##### Security Updates
+
+* Squash-merged dependabot PR to update setup-micromamba to 2.0.5 re: dependency & docs updates
+  * SalishSeaNowcast
+  * numeric_2024
+  * erddap-datasets
+  * moad_tools
+  * gha-workflows
+  * AtlantisCmd
+  * salishsea-site
+
+
+##### `sockeye`
+
+* retried 19x39 9nodes/40cores run that was failing yesterday with fabrci issues
+  * queued for 13m8s; the 1st time since I started these scaling tests
+
+
+##### Miscellaneous
+
+* Checked status of scheduled GHA workflows:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  mamba activate gha-workflows
+  python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+  # re-enabled NEMO_Nowcast CodeQL action
+  gh workflow enable -R 43ravens/NEMO_Nowcast CodeQL
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+
+
+#### Tue 10-Jun-2025
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst2 publish` **worked** at 04:06
+
+
+##### ERDDAP
+
+* still no daily report email
+* `ubcSSaSurfaceAtmosphereFieldsV23-02` has max time of 2025-06-06T23:00:00Z
+  * definitiely a problem
+  * discovered that SalishSeaNowcast still has `ubcSSaSurfaceAtmosphereFieldsV1` as the dataset id
+    that is being pinged ☹️
+    * fixed for now by doing a `flag/` touch
+
 
 
 
