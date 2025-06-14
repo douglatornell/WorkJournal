@@ -1971,7 +1971,7 @@ Traveled to Sidney for SoPO.
     * small watershed are 22% of area, but 65% of glacier ice ??
     * 5 watershed types:
       * snow continental: Fraser, Skeena, Naas
-      * glacierized mountain: Homathko, Wannock, Klinaklini
+      * glaciated mountain: Homathko, Wannock, Klinaklini
       * snow mountain: Oyster, Stawamus, Kitimat
       * rain mountain: WCVI: Zeballos, Tofino, Sarita
       * rain hills (northern): Yakoun, Premier (both Haida Gwai), San Josef (north VI)
@@ -3098,7 +3098,7 @@ Worked on income tax.
 
 ##### Miscellaneous
 
-* replied to email from Peter @ SFU re: `mutiprocessing` for ERDDAP access:
+* replied to email from Peter @ SFU re: `multiprocessing` for ERDDAP access:
   * Outlook is blocking access to his Python script attachment
 
 
@@ -3133,7 +3133,7 @@ Worked at ESB
 
 * MOAD group mtg; see whiteboard
 * Phys Ocgy seminar: Emma Boland, British Antarctic Survey
-  * North Atlantic Winds, Arctic Freshawater & the AMOC
+  * North Atlantic Winds, Arctic Freshwater & the AMOC
 * searched for past presentations on SalishSeaCast re: doing a Phys Ocgy seminar
   * `private-docs/presentations/CMOS-2015/Doug/NowcastAutomationFramework`
   * `private-docs/presentations/Doug/PhysOcgy-11Jan2016/`
@@ -3190,7 +3190,7 @@ Worked at ESB
 * continued refactoring `make_runoff_file` workers:
   * branch:refactor-make_runoff_file
   * PR#351
-  * finihsed restructuring `nowcast.yaml` config to put all bathymetry-specific values
+  * finished restructuring `nowcast.yaml` config to put all bathymetry-specific values
     under bathy version keys; step towards adding a bathy version cli argument
   * added `bathy_version` arg to `make_runoff_file` worker to control selection of filename template
     string and `prop_dict` module
@@ -3530,7 +3530,7 @@ Worked at ESB.
   * no web page updates between 03:10 and 10:10
 * nowcast-agrif run stuck on `orcinus` queue
   * unclear why; other jobs are running
-* `oricnus` OS and software infrastructure is going to be upgraded over the summer!
+* `orcinus` OS and software infrastructure is going to be upgraded over the summer!
 
 
 ##### Security Updates
@@ -3547,7 +3547,7 @@ Worked at ESB.
   * branch: caplog-fixture
   * PR#346; squash-merged
 * created issue #357 re: handling noisy missing river discharge obs messages
-  when `make_funoff_file` is run in preparation for forecast2 runs
+  when `make_runoff_file` is run in preparation for forecast2 runs
 
 
 ##### Miscellaneous
@@ -3656,7 +3656,7 @@ First session of FoMS program
 ##### Miscellaneous
 
 * replied to email from Rhian at UTas re: downloading temperature fields from ERDDAP for SDM
-  euphausiid model
+  euphausid model
 
 
 
@@ -3727,7 +3727,7 @@ Worked at ESB.
 
 ##### 2025 Bloomcast
 
-* ended crobjob for 2025 runs
+* ended cronjob for 2025 runs
 
 
 ##### ERDDAP
@@ -3919,10 +3919,10 @@ Worked at ESB.
 
 * renamed `/results/erddap/` to `/results/erddap-1.82/` and `/results/erddap-2.26/` to `/results/erddap/`
 * confirmed that `ping_erddap` worker is triggering dataset updates
-* scanned CF-1.10 (supported by 2.26) to try to understand how it differs from CF-1.6 (suported by 1.82)
-  * unclear, and verificiation tool's most recent version is CF-1.8 (https://cfchecker.ncas.ac.uk)
+* scanned CF-1.10 (supported by 2.26) to try to understand how it differs from CF-1.6 (supported by 1.82)
+  * unclear, and verification tool's most recent version is CF-1.8 (https://cfchecker.ncas.ac.uk)
 * explored new in 2.26 `displayInfo` & `displayAttribute` tags
-  * they control fields and tooltips at the beginnign of the `Information` line on the `data` pages
+  * they control fields and tooltips at the beginning of the `Information` line on the `data` pages
   * we could add a field called `Citation` that shows the `comment` attr
     * perhaps change the name of the `comment` attr to `citation`
 * noticed that forecast datasets lacks v21-11 info
@@ -3942,7 +3942,7 @@ Worked at ESB.
 ##### erddap-datasets
 
 * squash-merged PR#35 re: config for 2.26
-* Increased the `nGridThreads `and `nTableThreads` settings from 1 to 3 as recommended in the v2.19
+* Increased the `nGridThreads` and `nTableThreads` settings from 1 to 3 as recommended in the v2.19
   update notes; PR#36 - squash-merged and deployed
 * Add `ipAddressMaxRequests`, `ipAddressMaxRequestsActive` and `ipAddressUnlimited` settings as
   recommended in the v2.12 upgrade notes
@@ -4015,7 +4015,7 @@ Worked at ESB
 * stopped everything
 * ran `/usr/local/sbin/update_spt.sh`
   * kept modified `/etc/zabbix/zabbix_agent2.conf`
-* reponses were stalling for `make_plots nemo forecast publish` to changed
+* responses were stalling for `make_plots nemo forecast publish` to changed
   threads back from 3 to 1
 
 
@@ -4072,7 +4072,7 @@ Worked at ESB
 
 ##### Miscellaneous
 
-* Alliance townhall re: AI Sovereign Compute Infrastructure Program submission to fed govt
+* Alliance town hall re: AI Sovereign Compute Infrastructure Program submission to fed govt
 
 
 ##### erddap-datasets
@@ -4214,7 +4214,7 @@ Worked at ESB
 ##### Atlantis
 
 * mtg w/ Javier
-* pointed Raisha at Rainbox CSV extension for VSCode
+* pointed Raisha at Rainbow CSV extension for VSCode
 
 
 
@@ -4231,7 +4231,7 @@ Worked at ESB
 ##### Miscellaneous
 
 * helped Griffon get `SalishSeaTools` installed in his analysis env\
-* cleaned up `/var/cache/apt/` re: nearly full `root` partion on `kudu`
+* cleaned up `/var/cache/apt/` re: nearly full `root` partition on `kudu`
   * started with 24.2 GB in 5222 items
   * ran `sudo apt-get autoclean`
   * resulted in 7.4 GB in 3304 items
@@ -4257,7 +4257,7 @@ Cycled to Sanctuary and back
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst publish` failed with `RuntimeError: NetCDF: DAP failure`
+* `make_plots wwatch3 forecast publish` failed with `RuntimeError: NetCDF: DAP failure`
   * I suspect a race condition with the ERDDAP dataset reload triggered by `ping_erddap wwatch3`
 
 
@@ -4276,8 +4276,8 @@ Cycled to Sanctuary and back
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst2 publish` failed with `RuntimeError: NetCDF: DAP failure`
-* `make_plots wwatch3 foreacst publish` failed similarily
+* `make_plots wwatch3 forecast2 publish` failed with `RuntimeError: NetCDF: DAP failure`
+* `make_plots wwatch3 forecast publish` failed similarly
   * manual re-run at ~12:40 was successful
 
 
@@ -4389,7 +4389,7 @@ Attended VGH Cardiac Rehab program fund raiser.
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst publish` failed at 11:18 with `RuntimeError: NetCDF: DAP failure`
+* `make_plots wwatch3 forecast publish` failed at 11:18 with `RuntimeError: NetCDF: DAP failure`
   * manual re-run at ~11:35 also failed
   * manual re-run at ~11:45 succeeded
   * I suspect that the problem is slow response to `ping_erddap` for rolling forecast dataset due to
@@ -4419,7 +4419,7 @@ Attended VGH Cardiac Rehab program fund raiser.
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst publish` failed at 11:23 with `RuntimeError: NetCDF: DAP failure`
+* `make_plots wwatch3 forecast publish` failed at 11:23 with `RuntimeError: NetCDF: DAP failure`
   * manual re-run at ~15:25 succeeded
 
 
@@ -4441,7 +4441,7 @@ Attended VGH Cardiac Rehab program fund raiser.
 
 ##### NEMO-Cmd
 
-* fixed brkoen and redirected docs links found by linkcheck; PR#105
+* fixed broken and redirected docs links found by linkcheck; PR#105
 
 
 
@@ -4455,7 +4455,7 @@ Attended VGH Cardiac Rehab program fund raiser.
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst2 publish` failed at 04:11 with `RuntimeError: NetCDF: DAP failure`
+* `make_plots wwatch3 forecast2 publish` failed at 04:11 with `RuntimeError: NetCDF: DAP failure`
   * manual re-run at ~08:05 succeeded
 
 
@@ -4470,7 +4470,7 @@ Attended VGH Cardiac Rehab program fund raiser.
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst2 publish` failed at 04:05 with `RuntimeError: NetCDF: DAP failure`
+* `make_plots wwatch3 forecast2 publish` failed at 04:05 with `RuntimeError: NetCDF: DAP failure`
   * manual re-run at ~09:05 succeeded
 
 
@@ -4490,7 +4490,7 @@ Attended VGH Cardiac Rehab program fund raiser.
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst2 publish` failed at 04:09 with `RuntimeError: NetCDF: DAP failure`
+* `make_plots wwatch3 forecast2 publish` failed at 04:09 with `RuntimeError: NetCDF: DAP failure`
   * manual re-run at ~08:53 succeeded
 
 
@@ -4515,7 +4515,7 @@ Worked at ESB while Rita was at home
 * MOAD group mtg; see whiteboard
 * helped Griffon expunge a large file from his `analysis-griffon` commit history
   and diagnose a mystery failure of quantitative Ariane that turned out to be
-  due to runnign out of memory on `chum`
+  due to running out of memory on `chum`
 
 
 ##### private-docs
@@ -4557,7 +4557,7 @@ Cardiac rehab exit stress test
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst2 publish` failed at 04:09 with `RuntimeError: NetCDF: DAP failure`
+* `make_plots wwatch3 forecast2 publish` failed at 04:09 with `RuntimeError: NetCDF: DAP failure`
   * manual re-run at ~09:20 succeeded
 
 
@@ -4586,7 +4586,7 @@ Cardiac rehab exit blood lab draw
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst2 publish` failed at 04:11 with `RuntimeError: NetCDF: DAP failure`
+* `make_plots wwatch3 forecast2 publish` failed at 04:11 with `RuntimeError: NetCDF: DAP failure`
   * manual re-run at ~08:10 succeeded
 
 
@@ -4597,11 +4597,11 @@ Cardiac rehab exit blood lab draw
 
 ##### SalishSeaNowcast
 
-* fixed logic for make_plots wwatch3 run type selelction
+* fixed logic for make_plots wwatch3 run type selection
   * PR#364
-  * prioritize foreast over forecast2 to ensure correct choice when there is a forecast key in The
+  * prioritize forecast over forecast2 to ensure correct choice when there is a forecast key in The
     "WWATCH3 runs" item in the checklist
-* fixed `test_run_NEMO_hindcast` tests that alomost always fail in GHA workflow, but not locally
+* fixed `test_run_NEMO_hindcast` tests that almost always fail in GHA workflow, but not locally
   * PR#365
   * moved assertions into `pytest.raises()` context manager scope
 
@@ -4617,13 +4617,13 @@ Cardiac rehab exit blood lab draw
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst2 publish` failed at 04:07 with `RuntimeError: NetCDF: DAP failure`
+* `make_plots wwatch3 forecast2 publish` failed at 04:07 with `RuntimeError: NetCDF: DAP failure`
   * manual re-run at ~11:40 succeeded
 
 
 ##### SalishSeaNowcast
 
-* started work to resolve `make_plots wwatch3 foreacst* publish` failures with
+* started work to resolve `make_plots wwatch3 forecast* publish` failures with
   `RuntimeError: NetCDF: DAP failure`
   * dropped unused `buoy` arg from `_plot_wave_height_time_series()` and
     `_plot_dominant_period_time_series()`
@@ -4643,7 +4643,7 @@ Cardiac rehab exit blood lab draw
 
 ##### SalishSeaNowcast
 
-* started work to resolve `make_plots wwatch3 foreacst* publish` failures with
+* started work to resolve `make_plots wwatch3 forecast* publish` failures with
   `RuntimeError: NetCDF: DAP failure`
   * PR#366
   * added `tenacity.retry` decorator to `_plot_wave_height_time_series()` and
@@ -4667,17 +4667,17 @@ Cardiac rehab exit blood lab draw
 ##### SalishSeaCast
 
 * `make_ssh_files forecast2` errored due to missing obs
-* `make_plots wwatch3 foreacst2 publish` failed at 04:18 with `RuntimeError: NetCDF: DAP failure`
-  apparrently after `tenacity` did its job
+* `make_plots wwatch3 forecast2 publish` failed at 04:18 with `RuntimeError: NetCDF: DAP failure`
+  apparently after `tenacity` did its job
   * manual re-run at ~09:10 succeeded
 
 
 ##### SalishSeaNowcast
 
-* continued work to resolve `make_plots wwatch3 foreacst* publish` failures with
+* continued work to resolve `make_plots wwatch3 forecast* publish` failures with
   `RuntimeError: NetCDF: DAP failure`
   * PR#366
-  * `make_plots wwatch3 foreacst2 publish` seems to have failed after 10 minutes of retrying
+  * `make_plots wwatch3 forecast2 publish` seems to have failed after 10 minutes of retrying
     * changed retry parameters to 1-3 minutes random intervals for 20 minutes
     * added logging before
 
@@ -4695,8 +4695,8 @@ Worked at ESB
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst2 publish` failed at 04:27 with `RuntimeError: NetCDF: DAP failure`
-  apparrently after `tenacity` did its job
+* `make_plots wwatch3 forecast2 publish` failed at 04:27 with `RuntimeError: NetCDF: DAP failure`
+  apparently after `tenacity` did its job
   * manual re-run at ~08:43 succeeded
 
 
@@ -4824,13 +4824,13 @@ Worked at ESB
     ```
     <!-- markdownlint-enable MD013 -->
 * opened ticket for Henryk to look at no email issue
-  * he noted that `/gome/tomcat/` doesn't exist and created it
+  * he noted that `/home/tomcat/` doesn't exist and created it
 
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst2 publish` failed at 04:35 with `RuntimeError: NetCDF: DAP failure`
-  apparrently after `tenacity` did its job
+* `make_plots wwatch3 forecast2 publish` failed at 04:35 with `RuntimeError: NetCDF: DAP failure`
+  apparently after `tenacity` did its job
   * manual re-run at ~09:30 succeeded
 
 
@@ -4855,8 +4855,8 @@ Worked at ESB
 * fix `$PROJECT` path
   * edit `.bash_profile`
   * `ln -sf /arc/project/st-sallen1-1/ project`
-  * relog
-* remove old `module load` statements from `.basrhrc`
+  * re-log
+* remove old `module load` statements from `.bashrc`
 * remove `mambaforge-pypy3` installation
   <!-- markdownlint-disable MD013 -->
   ```bash
@@ -4877,7 +4877,7 @@ Worked at ESB
   ```
   <!-- markdownlint-enable MD013 -->
   * allow it to auto-initialize conda
-  * relog
+  * re-log
 * configure conda/mamba:
   <!-- markdownlint-disable MD013 -->
   ```bash
@@ -4885,11 +4885,13 @@ Worked at ESB
   conda config --add envs_dirs /arc/project/st-sallen1-1/dlatorne/conda-envs/
   ```
   <!-- markdownlint-enable MD013 -->
-  * relog
+  * re-log
 * install SalishSeaCmd
   <!-- markdownlint-disable MD013 -->
   ```bash
   cd project/dlatorne/MEOPAR/NEMO-Cmd/
+  git pull
+  cd project/dlatorne/MEOPAR/SalishSeaCmd/
   git pull
   mamba env create -f envs/environment-hpc.yaml
   mamba activate salishsea-cmd
@@ -4914,16 +4916,17 @@ Worked at ESB
 ##### Miscellaneous
 
 * helped Camryn with the fact that VSCode will no longer allow connections to `graham`
-* looked for ONC Sannich Inlet node profile datasets for Tall
+* looked for ONC Saanich Inlet node profile datasets for Tall
   * Yarrow Point, 2015-2016, sparse obs, maybe compromised quality
 
 
 ##### ERDDAP
 
 * TWDP, SEVIP & SCVIP datasets **hadn't** revert to 1970 times at 08:55
-* no daily status email, as ususal
+* no daily status email, as usual
   * daily message was sent at 07:12:05
-  * I don't see `/home/tomcat/`; told Henryk, he says that it is `/var/tomcat/` because it is a dummy user
+  * I don't see `/home/tomcat/`; told Henryk, he says that it is `/var/tomcat/`
+    because it is a dummy user
 * Reviewed today's email messages log and found **no**:
   "java.io.IOException: User limit of inotify watches reached"
 * restarted ERDDAP at ~15:55
@@ -4938,7 +4941,7 @@ Worked at ESB
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst2 publish` **worked** at 04:16
+* `make_plots wwatch3 forecast2 publish` **worked** at 04:16
 * Clowhom River obs collection failed
 
 
@@ -5007,7 +5010,7 @@ Worked at ESB
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst2 publish` failed at 04:38 with `RuntimeError: NetCDF: DAP failure`
+* `make_plots wwatch3 forecast2 publish` failed at 04:38 with `RuntimeError: NetCDF: DAP failure`
   after `tenacity` did its job
   * manual re-run at ~13:15 succeeded
 
@@ -5047,7 +5050,7 @@ Worked at ESB
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst2 publish` failed at 04:34 with `RuntimeError: NetCDF: DAP failure`
+* `make_plots wwatch3 forecast2 publish` failed at 04:34 with `RuntimeError: NetCDF: DAP failure`
   after `tenacity` did its job
   * manual re-run at ~09:50 succeeded
 * river obs collection failed for Salmon and Skagit rivers
@@ -5072,7 +5075,7 @@ Worked at ESB
     ```
     <!-- markdownlint-enable MD013 -->
 * finished scaling runs up to 5 nodes
-* `rebuild_nemo` was consistenly not found
+* `rebuild_nemo` was consistently not found
 
 
 
@@ -5082,7 +5085,7 @@ Worked at ESB
 
 * TWDP, SEVIP & SCVIP datasets **hadn't** revert to 1970 times at 06:55 nor at 13:00
 * `ubcSSaSurfaceAtmosphereFieldsV23-02` has max time of 2025-06-06T23:00:00Z
-  * definitiely a problem
+  * definitely a problem
     * file pattern was some how reverted to `ops_*` from `hrdps_*`
     * resolved by doing a `hardFlag/` touch
 * still no daily report email
@@ -5090,7 +5093,7 @@ Worked at ESB
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst2 publish` failed at 04:34 with `RuntimeError: NetCDF: DAP failure`
+* `make_plots wwatch3 forecast2 publish` failed at 04:34 with `RuntimeError: NetCDF: DAP failure`
   after `tenacity` did its job
   * failure was on Sentry Shoal plot instead of Halibut Bank
   * plots are on website ???
@@ -5098,11 +5101,11 @@ Worked at ESB
 
 ##### `sockeye`
 
-* resolved job submission restriction issue by using olnly absolute paths in YAML file and doing
+* resolved job submission restriction issue by using only absolute paths in YAML file and doing
   `salishsea run` in a directory on `/scratch/`
 * finished scaling runs for 6-9 nodes
   * best NEMO time is 9m59s with 18x40 decomposition on 9 40 core cascade nodes
-  * node hours per model day curve has flattened, but no eveident minimum yet
+  * node hours per model day curve has flattened, but no evident minimum yet
   * waiting for Susan to generate decompositions for 383+ cores
 
 
@@ -5115,7 +5118,7 @@ Worked at ESB
 ##### SalishSeaCast
 
 * river obs collection failed for Salmon River
-* `make_plots wwatch3 foreacst2 publish` **worked** at 04:10
+* `make_plots wwatch3 forecast2 publish` **worked** at 04:10
 * `crop_gribs 12` missed 1 file; delayed runs by ~2h
 
 
@@ -5125,7 +5128,7 @@ Worked at ESB
   * no reversions since I fixed the inotify limits; so issue resolved
 * still no daily report email
 * `ubcSSaSurfaceAtmosphereFieldsV23-02` has max time of 2025-06-06T23:00:00Z
-  * definitiely a problem
+  * definitely a problem
 
 
 ##### erddap-datasets
@@ -5148,7 +5151,7 @@ Worked at ESB
 
 ##### `sockeye`
 
-* retried 19x39 9nodes/40cores run that was failing yesterday with fabrci issues
+* retried 19x39 9nodes/40cores run that was failing yesterday with fabric issues
   * queued for 13m8s; the 1st time since I started these scaling tests
 
 
@@ -5171,28 +5174,55 @@ Worked at ESB
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst2 publish` **worked** at 04:06
+* `make_plots wwatch3 forecast2 publish` **worked** at 04:06
 
 
 ##### ERDDAP
 
 * still no daily report email
 * `ubcSSaSurfaceAtmosphereFieldsV23-02` has max time of 2025-06-06T23:00:00Z
-  * definitiely a problem
+  * definitely a problem
   * discovered that SalishSeaNowcast still has `ubcSSaSurfaceAtmosphereFieldsV1` as the dataset id
     that is being pinged ☹️
     * fixed for now by doing a `flag/` touch
 
 
 
+#### Fri 13-Jun-2025
+
+Worked at ESB on a whim after last day of FoMS
+
+##### Miscellaneous
+
+* Phys Ocgy seminar: Susan's expanded version of her CMOS talk on cross-border
+  flows in the Salish Sea
+* Birgit visited
+* cleaned up spelling issues in this file
+* helped Susan get set up and running on `sockeye`
+
+
+##### SalishSeaCast
+
+* wwatch3 forecast2 run failed due to the same `make_ww3_current_file` issue that
+  prevented running nowcast/11jun25
+
+
+##### ERDDAP
+
+* still no daily report email
+* `ubcSSaSurfaceAtmosphereFieldsV23-02` has max time of 2025-06-12T23:00:00Z
+  * discovered that file name pattern was a file name, not a regex; fixed
+  * fixed by manual `ping_erddap weather` at ~15:00
 
 
 
-* goblet squats
-* dumbell deadlift and row
-* split squats with twist
-* band chest presses
-* band rows
+##### erddap-datasets
+
+* started work on `colorBarPalette` attr tag values to our favourite cmocean
+  colour maps
+
+
+
 
 
 * TODO:
