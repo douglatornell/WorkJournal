@@ -5187,6 +5187,134 @@ Worked at ESB
     * fixed for now by doing a `flag/` touch
 
 
+##### Miscellaneous
+
+* MOAD group mtg; Zhiguo's last meeting
+
+
+Jamie & Lin arrived for a night after their Rocky Mountaineer tour
+
+
+
+#### Wed 11-Jun-2025
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 foreacst2 publish` **worked** at 04:07
+* NEMO `forecast/11jun25` run failed with `output.abaort.nc`
+  * no wwatch3 runs
+
+
+##### ERDDAP
+
+* still no daily report email
+* `ubcSSaSurfaceAtmosphereFieldsV23-02` has max time of 2025-06-10T23:00:00Z
+  * touched to fix for today
+
+  * updated SalishSeaNowcast config for long term fix in PR#369
+
+
+##### SalishSeaNowcast
+
+* Updated ERDDAP weather dataset ID in config & tests; PR#369
+  * Revised the ERDDAP `weather` dataset ID from `ubcSSaSurfaceAtmosphereFieldsV1` to
+    `ubcSSaSurfaceAtmosphereFieldsV23-02` in `nowcast.yaml` and the corresponding test file.
+    This was missed when we switched to the HRDPS continental rotated lon-lat product, but the
+    oversight was hidden by ERDDAP doing dataset updates every 10 minutes. The ERDDAP behaviour was
+    recently dropped, resulting in this issue being surfaced.
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update requests to 2.32.4 re: CVE-2024-47081 re: credentials leakage
+  vulnerability
+  * AtlantisCmd
+  * salishsea-site
+  * cookiecutter-analysis-repo
+  * cookiecutter-MOAD-pypkg
+  * ECget
+  * SalishSeaNowcast
+  * MoaceanParcels
+  * MOAD/docs
+  * SalishSeaCmd
+  * NEMO-Cmd
+  * moad_tools
+  * Reshapr
+  * SalishSeaCast/docs
+  * SalishSeaTools
+  * NEMO_Nowcast
+  * SOG-Bloomcast-Ensemble
+  * FUN
+  * erddap-datasets
+
+
+
+#### Thu 12-Jun-2025
+
+
+##### SalishSeaCast
+
+* NEMO `forecast/11jun25` run failed with `output.abaort.nc`
+  * no forecast2 runs
+* forgot to restart manager to reload config for PR#369 re: `ping_erddap weather` to take effect
+  * restarted manager to load updated config at ~14:45
+* can't use VSCode to connect to `arbutus` due to it being on 18.04
+* backfilled yesterday's missed runs:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  # on arbutus
+  cd /nemoShare/MEOPAR/SalishSea/nowcast/11jun25/
+  mv SalishSea_18502560_restart.nc SalishSea_18502560_restart.nc-borked
+  cp ../../nowcast-green/11jun25/SalishSea_18502560_restart.nc ./
+
+  # on skookum
+  make_forcing_links arbutus nowcast+ 2025-06-11 --debug
+  make_forcing_links arbutus ssh 2025-06-11
+
+  # on arbutus
+  run_NEMO arbutus forecast 2025-06-11 --debug
+  # wait for forecast run to finish
+  make_ww3_wind_file arbutus forecast 2025-06-11 --debug
+  make_ww3_current_file arbutus forecast 2025-06-11 --debug
+  run_ww3 arbutus nowcast 2025-06-11 --debug
+
+  # wait for run to finish
+
+  # on skookum
+  download_results arbutus forecast 2025-06-11 --debug
+  download_wwatch3_results arbutus nowcast 2025-06-11 --debug
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+
+##### ERDDAP
+
+* still no daily report email
+* `ubcSSaSurfaceAtmosphereFieldsV23-02` has max time of 2025-06-08T23:00:00Z
+  * fixed via manual `ping_erddap weather`
+
+
+##### erddap-datasets
+
+* removed `drawLandMask` tag from all datasets because it is now set as the server default; PR#45
+
+
+##### `sockeye`
+
+* committed & pushed XIOS-ARCH changes; PR#3
+  * accidentally merged rather than squash-merged on GitHub ☹️
+* committed & pushed NEMO-3.6-code arch file changes
+* discussed Susan getting running on #sockeye channel
+
+
+##### Miscellaneous
+
+* helped Susan with git and repo updates on `sockeye`
+* helped Jose with mystery failure in dev on `graham`
+
+
+
 
 #### Fri 13-Jun-2025
 
@@ -5239,7 +5367,6 @@ Worked at ESB on a whim after last day of FoMS
 ##### erddap-datasets
 
 * TODO:
-  * drop `<drawLandMask>over</drawLandMask>` from datasets because it is now set as the server default
   * change `colorBarPalette` attr tag values to our favourite cmocean colour maps
   * change `standard_name_vocabulary` to `CF Standard Name Table v91`
   * add v21-11 info to forecast datasets `summary` attr
