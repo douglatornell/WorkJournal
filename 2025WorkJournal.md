@@ -5315,7 +5315,6 @@ Jamie & Lin arrived for a night after their Rocky Mountaineer tour
 
 
 
-
 #### Fri 13-Jun-2025
 
 Worked at ESB on a whim after last day of FoMS
@@ -5339,16 +5338,67 @@ Worked at ESB on a whim after last day of FoMS
 
 * still no daily report email
 * `ubcSSaSurfaceAtmosphereFieldsV23-02` has max time of 2025-06-12T23:00:00Z
-  * discovered that file name pattern was a file name, not a regex; fixed
+  * discovered that file name pattern was a file name, not a regex; fixed in PR#47
   * fixed by manual `ping_erddap weather` at ~15:00
-
 
 
 ##### erddap-datasets
 
-* started work on `colorBarPalette` attr tag values to our favourite cmocean
+* started work on setting `colorBarPalette` attr tag values to our favourite cmocean
   colour maps
 
+
+
+#### Sat 14-Jun-2025
+
+##### SalishSeaCast
+
+* wwatch3 forecast2 run failed due to incorrect `run_type`
+  * production working copy is messed up due to rebasing
+  * fixed by re-running manually
+
+
+##### ERDDAP
+
+* still no daily report email
+* `ubcSSaSurfaceAtmosphereFieldsV23-02` has correct time
+
+
+##### Miscellaneous
+
+* uploaded 2011 forcing files to `sockeye` for Susan:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  yyyy=2011; rsync -tv /results/forcing/atmospheric/GEM2.5/gemlam/gemlam_y${yyyy}*.nc \
+    sockeye:/arc/project/st-sallen1-1/SalishSea/forcing/atmospheric/GEM2.5/gemlam/
+  yyyy=2011; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
+    sockeye:/arc/project/st-sallen1-1/SalishSea/forcing/sshNeahBay/obs/
+  yyyy=2011; rsync -tLv /results/forcing/rivers/R202108Dailies_y${yyyy}*.nc \
+    sockeye:/arc/project/st-sallen1-1/SalishSea/forcing/rivers/
+  yyyy=2011; rsync -tLv /results/forcing/rivers/turbidity_201906/riverTurbDaily201906_y${yyyy}*.nc \
+    sockeye:/arc/project/st-sallen1-1/SalishSea/forcing/rivers/river_turb/
+  yyyy=2011; rsync -tv /results/forcing/NEP36/NEP_v202209_y${yyyy}*.nc \
+    sockeye:/arc/project/st-sallen1-1/SalishSea/forcing/NEP/
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+
+
+#### Sun 15-Jun-2025
+
+Went to White Rock to visit Jim and see Max & Sylvia for Father's Day
+
+##### SalishSeaCast
+
+* wwatch3 forecast2 run failed due to incorrect `run_type`
+  * production working copy is messed up due to rebasing
+  * fixed by re-running manually
+
+
+##### sockeye
+
+* figured out that `salishsea combine` failure is due to no `ksh` on compute nodes
+  * `ksh` is required by the `REBUILD_NEMO/rebuild_nemo` script
 
 
 
