@@ -5200,8 +5200,8 @@ Jamie & Lin arrived for a night after their Rocky Mountaineer tour
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 foreacst2 publish` **worked** at 04:07
-* NEMO `forecast/11jun25` run failed with `output.abaort.nc`
+* `make_plots wwatch3 forecast2 publish` **worked** at 04:07
+* NEMO `forecast/11jun25` run failed with `output.abort.nc`
   * no wwatch3 runs
 
 
@@ -5253,7 +5253,7 @@ Jamie & Lin arrived for a night after their Rocky Mountaineer tour
 
 ##### SalishSeaCast
 
-* NEMO `forecast/11jun25` run failed with `output.abaort.nc`
+* NEMO `forecast/11jun25` run failed with `output.abort.nc`
   * no forecast2 runs
 * forgot to restart manager to reload config for PR#369 re: `ping_erddap weather` to take effect
   * restarted manager to load updated config at ~14:45
@@ -5450,6 +5450,20 @@ Went to White Rock to visit Jim and see Max & Sylvia for Father's Day
   * failure was on Sentry Shoal plot instead of Halibut Bank
   * success on manual re-run at ~09:24
 * `skookum` and `salish` lost network at ~09:45
+  * communication with `arbutus` seems to have stopped at ~10:15
+    * stalled workers on `arbutus`
+      * `run_NEMO nowcast-green`
+      * `make_ww3_wind_file`
+      * `make_ww3_current_file`
+      * nowcast-green run finished but there was no follow-on automation
+  * restarted `log_aggregator` at ~13:54
+    * didn't restart automation
+  * killed `make_ww3_wind_file` and it showed up in log on `skookum`
+  * attempts to manually restart automation failed; `arbutus` workers stall waiting
+    for ack from `manager`
+  * restarted `message_broker` and `manager`
+    * still no go
+  * ran `download_results nowcast-green` manually at ~15:35
 
 
 ##### ERDDAP
