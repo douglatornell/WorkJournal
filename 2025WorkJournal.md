@@ -5114,7 +5114,6 @@ Worked at ESB
 
 #### Mon 9-Jun-2025
 
-
 ##### SalishSeaCast
 
 * river obs collection failed for Salmon River
@@ -5211,7 +5210,6 @@ Jamie & Lin arrived for a night after their Rocky Mountaineer tour
 * still no daily report email
 * `ubcSSaSurfaceAtmosphereFieldsV23-02` has max time of 2025-06-10T23:00:00Z
   * touched to fix for today
-
   * updated SalishSeaNowcast config for long term fix in PR#369
 
 
@@ -5356,6 +5354,7 @@ Worked at ESB on a whim after last day of FoMS
 * wwatch3 forecast2 run failed due to incorrect `run_type`
   * production working copy is messed up due to rebasing
   * fixed by re-running manually
+* no Theodosia Bypass river obs for 13jun
 
 
 ##### ERDDAP
@@ -5393,12 +5392,71 @@ Went to White Rock to visit Jim and see Max & Sylvia for Father's Day
 * wwatch3 forecast2 run failed due to incorrect `run_type`
   * production working copy is messed up due to rebasing
   * fixed by re-running manually
+* no Theodosia Bypass river obs for 14jun
+
+
+##### ERDDAP
+
+* still no daily report email
 
 
 ##### sockeye
 
 * figured out that `salishsea combine` failure is due to no `ksh` on compute nodes
   * `ksh` is required by the `REBUILD_NEMO/rebuild_nemo` script
+  * sent email to Roman for help
+
+
+
+### Week 25
+
+#### Mon 16-Jun-2025
+
+##### SalishSeaCast
+
+* no Theodosia Bypass river obs for 15jun
+
+
+##### ERDDAP
+
+* still no daily report email
+
+
+##### SalishSeaNowcast
+
+* cherry-picked useful commits from wave plots `tenacity` PR#366 into PR#370
+* closed PR#370 because using `tenacity` did not resolve the intermittent ERDDAP latency issue
+
+
+##### erddap-datasets
+
+* continued setting `colorBarPalette` attr tag values to our favourite cmocean colour maps
+  * TODO:
+    * turbulence vars in w grid file
+
+
+##### sockeye
+
+* Roman says that `ksh` will be deployed during July maintenance
+* started testing 10 node scaling with decompositions that Susan calculated
+
+
+
+#### Tue 17-Jun-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed at 04:08 with `RuntimeError: NetCDF: DAP failure`
+  * failure was on Sentry Shoal plot instead of Halibut Bank
+  * success on manual re-run at ~09:24
+* `skookum` and `salish` lost network at ~09:45
+
+
+##### ERDDAP
+
+* still no daily report email
+
+
 
 
 
