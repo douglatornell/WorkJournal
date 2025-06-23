@@ -4748,6 +4748,7 @@ Worked at ESB
         * last release was 2.0.1 in Dec-2020
       * used in `loadPDF()` via `pandas.read_excel()`
       * used in `loadHakai()` via `pandas.read_excel()`
+      * used in `load_Pheo_data()` via `pandas.read_excel()`
     * imports inside functions:
       * `sqlalchemy` in
         * `loadDFOCTD()`
@@ -5464,6 +5465,8 @@ Went to White Rock to visit Jim and see Max & Sylvia for Father's Day
   * restarted `message_broker` and `manager`
     * still no go
   * ran `download_results nowcast-green` manually at ~15:35
+  * compstaff resolved the UBC IT induced firewall issue at ~19:30
+  * backfilled wwatch3 runs
 
 
 ##### ERDDAP
@@ -5471,6 +5474,227 @@ Went to White Rock to visit Jim and see Max & Sylvia for Father's Day
 * still no daily report email
 
 
+
+#### Wed 18-Jun-2025
+
+##### ERDDAP
+
+* still no daily report email
+
+
+##### sockeye
+
+* continued testing 10 and 11 node scaling with decompositions that Susan calculated
+* Susan's 6mo carbon run w/ day-avg output was fastest (8m42s per model-day) and most efficient
+  (1.3029 node-hr per model-day)
+
+
+##### erddap-datasets
+
+* continued setting `colorBarPalette` attr tag values to our favourite cmocean colour maps
+  * TODO:
+    * turbulence vars in w grid file
+    * chemistry vars:
+      * DIC
+      * TA
+      * DO - oxy?
+    * CO2 flux
+
+
+
+#### Thu 19-Jun-2025
+
+##### ERDDAP
+
+* still no daily report email
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update urllib3 to 2.5.0 re: CVE-2025-50181 and CVE-2025-50182
+  re: SSRF vulnerability
+  * cookiecutter-analysis-repo
+  * cookiecutter-MOAD-pypkg
+  * MOAD/docs
+  * moad_tools
+  * SalishSeaCast/docs
+  * Reshapr
+  * NEMO_Nowcast
+  * SalishSeaCmd
+  * AtlantisCmd
+  * salishsea-site
+  * SalishSeaTools
+  * SalishSeaNowcast
+  * MoaceanParcels
+  * SOG-Bloomcast-Ensemble
+  * FUN
+  * NEMO-Cmd
+  * erddap-datasets
+* SalishSeaCast/docs link-check failed with "unauthorized" on `forge.ipsl.fr/nemo` links
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed at 04:35 with `RuntimeError: NetCDF: DAP failure`
+  * failure was on Sentry Shoal plot instead of Halibut Bank
+  * success on manual re-run at ~10:15
+
+
+##### SalishSeaNowcast
+
+* resumed work on `make_plots wwatch3` reliability
+  * realized that I can't easily change from ERDDAP to file system rolling forecast because the
+    latter is spread over several files, not a single file as I thought
+  * restored `tenacity` retrying code and deployed to `skookum`
+
+
+##### SalishSeaTools
+
+* continued reviewing `evaltools` module:
+  * drop option to import `xlrd`
+    * no need to specify `engine=openpyxl` in `pandas=2.3`
+      * `loadPSF()`
+      * `loadHakai()`
+      * `load_Pheo_data()`
+  * move `sqlachemy` and `erddapy` imports to top of module
+    * make them part of package env and analysis-repo env
+
+
+
+#### Fri 20-Jun-2025
+
+##### ERDDAP
+
+* still no daily report email
+
+
+##### SalishSeaCast
+
+* `crop_gribs 06` delayed forecast2 runs by ~2h
+* `make_plots wwatch3 forecast2 publish` worked at 06:18 after checklist reset
+* `make_plots wwatch3 forecast publish` failed due to TypeError because no obs for Sentry Shoal
+
+
+##### sockeye
+
+* collected times from 10 and 11 node scaling tests
+
+
+##### SalishSeaTools
+
+* continued reviewing `evaltools` module:
+  * uses in `analysis-karyn`:
+    * `matchData()`
+    * `varvarPlot()`
+    * `displayStats()`
+    * `pac_to_utc()`
+    * `datetimeToYD()`
+  * uses in `analysis-susan`:
+    * `matchData()`
+    * `loadDFOCTD()`
+    * `loadDFO()`
+    * `load_ferry_ERDDAP()`
+    * `load_ONC_node_ERDDAP()`
+    * `varvarPlot()`
+    * `printstats()`
+  * uses in `MOAD/analysis-becca`:
+    * `matchData()`
+  * uses in `MOAD/analysis-abdoul`:
+    * `matchData()`
+    * `loadDFOCTD()`
+    * `loadDFO()`
+    * `load_ferry_ERDDAP()`
+    * `load_ONC_node_ERDDAP()`
+    * `varvarPlot()`
+    * `printstats()`
+  * almost all functions are used in `analysis-elise-2`, those that aren't are used in `analysis-keegan`
+  * discussion hangout with Karyn:
+    * add match by salinity code to `matchData()` ???
+      * `analysis-karyn/notebooks/Evaluations/OA_PugetSound_CarbonateChemModelvsObsMatches20072024_v202111_qualcontrol_MatchbySalinity.ipynb`
+  * functions:
+    * widely used:
+      * `matchData()`
+        * `_gridHoriz()`
+        * `_vertNetmatch()`
+        * `_binmatch()`
+        * `_vvlBin()`
+        * `_interpvvlZ()`
+        * `_ferrymatch()`
+        * `_nextfile_bin()`
+        * `_getTimeInd_bin()`
+        * `_getTimeInd_bin_ops()`
+        * `_getZInd_bin()`
+        * `index_model_files()`
+      * `load_ferry_ERDDAP()`
+      * `load_ONC_node_ERDDAP()`
+    * obs loaders:
+      * so many hard-coded paths in `/ocean/eolson/MEOPAR/obs/`
+      * `loadDFOCTD()`
+      * `loadDFO()`
+      * `loadPSF()`
+        * 567 loc !!!
+        * `_lt0convert()`
+      * `loadPSFCTD()`
+      * `loadHakai()`
+      * `load_Pheo_data()`
+      * `load_WADE_data()`
+        * WADE datasets stored as pickles in `/ocean/eolson/MEOPAR/obs/WADE/ptools_data/ecology/`
+      * `load_CTD_data()`
+    * statistics:
+      * `stats()`
+        * `WSS()`
+        * `RMSE()`
+      * `displayStats()`
+      * `displayStatsFlex()`
+        * `_flatten_nested_dict()`
+      * `printstats()`
+    * plotting:
+      * `varvarScatter()`
+      * `varvarPlot()`
+      * `varvarIter()`
+      * `tsertser_graph()`
+        * `_deframe()`
+    * datetime manipulation:
+      * `utc_to_pac()`
+      * `pac_to_utc()`
+      * `pdt_to_utc()`
+      * `pst_to_utc()`
+      * `datetimeToDecDay()`
+      * `datetimeToYD()`
+    * miscellaneous:
+      * `index_model_files_flex()`
+        * not used in module
+      * `getChlNRatio()`
+        * not used in module
+* added tests & docstring for `datetimeToYD()` and refactored it to use `arrow`; PR#147
+
+
+##### Miscellaneous
+
+* Phys Ocgy seminar: Shumin re: double diffusion event in Bedford Basin
+
+
+
+#### Sat 21-Jun-2025
+
+##### SalishSeaTools
+
+* finished adding refactoring `datetimeToYD()`; PR#147
+
+
+
+#### Sun 22-Jun-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast` ran instead of `forecast2` at 04:16 before checklist was reset
+  * ran manually at ~10:52
+
+
+##### sockeye
+
+* Susan's >1d runs continue to set new records for speed and efficiency
+* queued `01mar23-18x46-day-avg` to test if day-avg output only makes a difference on a 1d run
 
 
 
@@ -5506,6 +5730,18 @@ Went to White Rock to visit Jim and see Max & Sylvia for Father's Day
   * 2.26:
     * docs now on https://erddap.github.io/
     * `displayInfo` & `displayAttribute` tags that could be used for dataset citations on `data` pages
+
+
+##### SalishSeaTools
+
+* TODO:
+  * drop option to import `xlrd`
+    * no need to specify `engine=openpyxl` in `pandas=2.3`
+      * `loadPSF()`
+      * `loadHakai()`
+      * `load_Pheo_data()`
+  * move `sqlachemy` and `erddapy` imports to top of module
+    * make them part of package env and analysis-repo env
 
 
 
