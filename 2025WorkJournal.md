@@ -5556,7 +5556,7 @@ Went to White Rock to visit Jim and see Max & Sylvia for Father's Day
       * `loadPSF()`
       * `loadHakai()`
       * `load_Pheo_data()`
-  * move `sqlachemy` and `erddapy` imports to top of module
+  * move `sqlalchemy` and `erddapy` imports to top of module
     * make them part of package env and analysis-repo env
 
 
@@ -5679,7 +5679,7 @@ Went to White Rock to visit Jim and see Max & Sylvia for Father's Day
 
 ##### SalishSeaTools
 
-* finished adding refactoring `datetimeToYD()`; PR#147
+* finished adding refactored `datetimeToYD()`; PR#147
 
 
 
@@ -5698,6 +5698,23 @@ Went to White Rock to visit Jim and see Max & Sylvia for Father's Day
 
 
 
+### Week 26
+
+#### Mon 23-Jun-2025
+
+##### SalishSeaTools
+
+* cleaned up some docstrings, comments, and organized the imports; PR#148
+* started reading `matchData()`
+
+
+##### SalishSeaCmd
+
+* merged PR#94 re: updates for running on sockeye
+* started work to add support for `nibi` cluster (replacement for `graham`)
+
+
+
 #### Tue 24-Jun-2025
 
 Worked at ESB
@@ -5710,6 +5727,8 @@ Worked at ESB
 
 ##### SalishSeaCast
 
+* `make_plots wwatch3 forecast` ran instead of `forecast2` at 04:21 before checklist was reset
+  * ran manually at ~08:40
 * Fraser River turbidity data stream did not update after 03:10
 * `download_results nowcast-green` took ~2h
 
@@ -5763,7 +5782,6 @@ Worked at ESB
 
 
 
-
 ##### erddap-datasets
 
 * TODO:
@@ -5800,6 +5818,11 @@ Worked at ESB
     `~/MEOPAR/grid/grid_from_lat_lon_mask999.nc`
     * should be a parameter because it will change when we change to 202405 coordinates
 
+
+##### SalishSeaCmd
+
+* TODO:
+  * consider removing separate deflate job feature
 
 
 * tools repo TODO:
