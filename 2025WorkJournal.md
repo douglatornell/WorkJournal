@@ -5226,8 +5226,8 @@ Jamie & Lin arrived for a night after their Rocky Mountaineer tour
 
 ##### Security Updates
 
-* Squash-merged dependabot PRs to update requests to 2.32.4 re: CVE-2024-47081 re: credentials leakage
-  vulnerability
+* Squash-merged dependabot PRs to update requests to 2.32.4 re: CVE-2024-47081
+  re: credentials leakage vulnerability
   * AtlantisCmd
   * salishsea-site
   * cookiecutter-analysis-repo
@@ -5698,6 +5698,60 @@ Went to White Rock to visit Jim and see Max & Sylvia for Father's Day
 
 
 
+#### Tue 24-Jun-2025
+
+Worked at ESB
+
+##### Miscellaneous
+
+* MOAD group mtg; Päl's last before he returns to Oslo
+* updated `kudu` PyCharm to 2025.1.2
+
+
+##### SalishSeaCast
+
+* Fraser River turbidity data stream did not update after 03:10
+* `download_results nowcast-green` took ~2h
+
+
+##### erddap-datasets
+
+* asked in #general for group advice on colour map choices
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update requests to 2.32.4 re: CVE-2024-47081
+  re: credentials leakage vulnerability
+  * SOG-Bloomcast
+* Squash-merged dependabot PRs to update urllib3 to 2.5.0 re: CVE-2025-50181 and CVE-2025-50182
+  re: SSRF vulnerability
+  * cookiecutter-djl-pypkg
+  * SOG-Bloomcast
+
+
+##### SalishSeaTools
+
+* continued review of `evaltools` module:
+  * almost all netCDF access is via `netcdf4.Dataset()` rather than `xarray.open_dataset()`
+    * Susan says to change to `xarray`
+  * `_gridHoriz()`: see TODOs
+  * most used methods for `matchData()`
+    * `analysis-karyn`:
+      * `vertNet`: 8, `bin`: 1
+    * `analysis-susan`:
+      * `bin`: 2, `ferry`: 1
+    * `analysis-abdoul`:
+      * `salinity`: 1, `bin`: 2, `ferry`: 1
+    * `analysis-becca`:
+      * `bin`: 2
+  * `_vertNetmatch()`:
+    * lots of dancing about `time_centered` and `time_counter`
+      * code may prefer `time_centered`, but `time_counter` is more reliably present
+        in model files
+      * Susan says to change to `time_counter`
+
+
 
 * TODO:
   * ask Henryk about email from ERDDAP
@@ -5742,6 +5796,9 @@ Went to White Rock to visit Jim and see Max & Sylvia for Father's Day
       * `load_Pheo_data()`
   * move `sqlachemy` and `erddapy` imports to top of module
     * make them part of package env and analysis-repo env
+  * `_gridHoriz()` `fastSearch` option is hard-coded to use
+    `~/MEOPAR/grid/grid_from_lat_lon_mask999.nc`
+    * should be a parameter because it will change when we change to 202405 coordinates
 
 
 
