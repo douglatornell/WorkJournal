@@ -5772,6 +5772,205 @@ Worked at ESB
 
 
 
+#### Wed 25-Jun-2025
+
+##### SalishSeaCmd
+
+* continued work to add support for `nibi` cluster (replacement for `graham`)
+
+
+##### erddap-datasets
+
+* continued setting `colorBarPalette` attr tag values to our favourite cmocean colour maps
+* reverted PR#47 re: atmospheric datasets file patterns because it was done on the grid datasets
+  that only require 1 file due to a brain fart
+
+
+##### nibi
+
+* prepared for scaling test runs
+  * created `XIOS-ARCH/ALLIANCE/arch-X64_NIBI.[env|fcm|path]` files for StdEnv/2020
+    * symlinked them in `XIOS-2/arch/`
+  * built XIOS-2: `./make_xios --arch X64_NIBI --full --job 8`
+    * failed due to no Intel license file
+  * created `XIOS-ARCH/ALLIANCE/arch-GCC_NIBI.[env|fcm|path]` files for StdEnv/2023
+    * symlinked them in `XIOS-2/arch/`
+  * built XIOS-2: `./make_xios --arch GCC_NIBI --full --job 8`
+    * success
+  * loaded `StdEnv/2023` environment with modules required to build NEMO:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    module --force purge
+    module load StdEnv/2023
+    module load netcdf-fortran-mpi/4.6.1
+    module load perl/5.36.1
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * created `NEMOGCM/ARCH/arch-GCC_NIBI.fcm` files for StdEnv/2023
+  * experimented with `NEMOGCM/ARCH/arch-GCC_NIBI.env` but it doesn't fully work
+  * built SalishSeaCast
+    * success
+  * built REBUILD_NEMO
+* remove `mambaforge-pypy3` installation
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  conda init --reverse --all
+  conda deactivate
+  rm -rf miniforge3/ Miniforge3-Linux-x86_64.sh .conda/
+  rm -rf ~/.local/*
+  ```
+  <!-- markdownlint-enable MD013 -->
+* install `miniforge3`
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  curl -L -O \
+    "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+  bash Miniforge3-$(uname)-$(uname -m).sh
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * allow it to auto-initialize conda
+  * re-log
+* configure conda/mamba:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  conda config --set auto_activate_base false
+  conda config --add envs_dirs /arc/project/st-sallen1-1/dlatorne/conda-envs/
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * re-log
+* install SalishSeaCmd
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  cd project/dlatorne/MEOPAR/NEMO-Cmd/
+  git pull
+  cd project/dlatorne/MEOPAR/SalishSeaCmd/
+  git pull
+  mamba env create -f envs/environment-hpc.yaml
+  mamba activate salishsea-cmd
+  python -m pip install --user -e ../NEMO-Cmd
+  python -m pip install --user -e .
+  ```
+  <!-- markdownlint-enable MD013 -->
+* queued 11x32 run
+  * no jobs running at 12:45
+
+
+##### Miscellaneous
+
+* helped Jose understand restart files from his longer runs
+
+
+
+#### Thu 26-Jun-2025
+
+##### nibi
+
+* analyzed queued jobs
+* added `rrg-allen` job to queue to try to get better priority
+
+
+##### SalishSeaCast
+
+* `collect_weather 12` was slow
+  * 17 files not yet processed at ~10:30
+  * `crop_gribs 12` timed out at 11:00
+  * `grib_to_netcdf` failed
+  * 17 missing files appeared at 11:17 causing `collect_weather 12` to finish successfully and
+    subsequent workers to run but automation to stall at 11:20 waiting for `grib_to_netcdf`
+  * recovery:
+    * `crop_gribs 12 --backfill --debug`
+    * `grib_to_netcdf nowcast+`
+    * automation resumed control at 11:33
+* `collect_weather 18` never finished
+  * `crop_gribs 18` time out at 19:20
+    * re-ran manually at 20:54
+    * timed out again at 04:55
+
+
+##### SalishSeaTools
+
+* simplified Excel reads; PR#149
+  * dropped option to import `xlrd`
+    * dropped `engine=openpyxl` because it's the default in `pandas=2.3`
+      * `loadPSF()`
+      * `loadHakai()`
+      * `load_Pheo_data()`
+* fixed `SyntaxWarning` due to single `\` characters in regexes and LaTeX label strings; PR#150
+  * change regex strings to raw strings (`r""`)
+  * use `\\` in LaTeX label strings
+* started moving `erddapy` from in-function import to required package dependency; PR#151
+
+
+##### Miscellaneous
+
+* answered question from Crystal (on of Hal's students) relayed by Camryn about ONC DDL node obs
+
+
+##### erddap-datasets
+
+* continued setting `colorBarPalette` attr tag values to our favourite cmocean colour maps
+
+
+
+#### Fri 27-Jun-2025
+
+##### SalishSeaCast
+
+* `collect_weather 18` from yesterday never finished
+  * 2nd re-try of `crop_gribs 18` time out at 04:55
+  * email from Sandrine at 04:27 about operational problems with forecast runs since yesterday's 12Z
+* 00Z and 06Z are on datamart server and downloaded by sarracenia, but no 18Z
+* recovery started at ~07:50:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+      collect_weather 12 2.5km
+      crop_gribs 12
+      crop_gribs 00
+      collect_weather 00 2.5km --backfill 2025-06-27
+      # kill collect_weather 06
+      # kill crop_gribs 06 --fcst-date 2025-06-27
+      crop_gribs 06
+      collect_weather 06 2.5km --backfill 2025-06-27
+  ```
+  <!-- markdownlint-enable MD013 -->
+* `grib_to_netcdf nowcast+` failed while NEMO forecast2 was running due to missing 18Z hours 5 & 6
+* race condition management for NEMO nowcast run got overwritten by that for wwatch3 forecast2 run
+* recovery started at ~09:00:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+      # copy the cropped 011 & 012 files from the previous 26jun 12Z forecast to create
+      # best estimates of 26jun 18Z 005 & 006 files
+      for var in UGRD_AGL-10m VGRD_AGL-10m DSWRF_Sfc DLWRF_Sfc LHTFL_Sfc TMP_AGL-2m SPFH_AGL-2m RH_AGL-2m APCP_Sfc PRATE_Sfc PRMSL_MSL
+      do
+        cp /results/forcing/atmospheric/continental2.5/GRIB/20250626/12/011/20250626T12Z_MSC_HRDPS_${var}_RLatLon0.0225_PT011H_SSC.grib2 \
+        /results/forcing/atmospheric/continental2.5/GRIB/20250626/18/005/20250626T18Z_MSC_HRDPS_${var}_RLatLon0.0225_PT005H_SSC.grib2
+        cp /results/forcing/atmospheric/continental2.5/GRIB/20250626/12/012/20250626T12Z_MSC_HRDPS_${var}_RLatLon0.0225_PT012H_SSC.grib2 \
+        /results/forcing/atmospheric/continental2.5/GRIB/20250626/18/006/20250626T18Z_MSC_HRDPS_${var}_RLatLon0.0225_PT006H_SSC.grib2
+      done
+      # wait for wwatch3 forecast2 run to finish
+      grib_to_netcdf nowcast+
+  ```
+  <!-- markdownlint-enable MD013 -->
+* LiveOcean was delayed
+
+
+##### cookiecutter-analysis-repo
+
+* added `erddapy` to notebooks env description re: it becoming a required dependency for SalishSeaTools
+
+
+
+
+* reverted PR#47 re: atmospheric datasets file patterns because it was done on the grid datasets
+  that only require 1 file due to a brain fart
+
+
+
+
+
+
+
+
 * TODO:
   * ask Henryk about email from ERDDAP
   * clean up v1.82:
@@ -5807,16 +6006,10 @@ Worked at ESB
 ##### SalishSeaTools
 
 * TODO:
-  * drop option to import `xlrd`
-    * no need to specify `engine=openpyxl` in `pandas=2.3`
-      * `loadPSF()`
-      * `loadHakai()`
-      * `load_Pheo_data()`
-  * move `sqlachemy` and `erddapy` imports to top of module
-    * make them part of package env and analysis-repo env
-  * `_gridHoriz()` `fastSearch` option is hard-coded to use
-    `~/MEOPAR/grid/grid_from_lat_lon_mask999.nc`
-    * should be a parameter because it will change when we change to 202405 coordinates
+  * move `sqlachemy` import to top of module
+    * make it part of package env and analysis-repo env
+  * `_gridHoriz()` `fastSearch` option is hard-coded to use `~/MEOPAR/grid/grid_from_lat_lon_mask999.nc`
+    * should be a parameter with a default value because it will change when we change to 202405 coordinates
 
 
 ##### SalishSeaCmd
