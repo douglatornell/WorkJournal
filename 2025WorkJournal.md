@@ -5914,6 +5914,8 @@ Worked at ESB
 
 #### Fri 27-Jun-2025
 
+Worked at ESB after I got automation sorted out
+
 ##### SalishSeaCast
 
 * `collect_weather 18` from yesterday never finished
@@ -5951,12 +5953,24 @@ Worked at ESB
       grib_to_netcdf nowcast+
   ```
   <!-- markdownlint-enable MD013 -->
-* LiveOcean was delayed
+* LiveOcean was delayed until ~11:15
 
 
 ##### cookiecutter-analysis-repo
 
 * added `erddapy` to notebooks env description re: it becoming a required dependency for SalishSeaTools
+
+
+##### Miscellaneous
+
+* Phys Ocgy seminar: Roger Pieters re: meromixis in a mine tailings lake in NWT
+* discussed time line and details of 17jun eos.ubc.ca firewall issue with Susan
+
+
+##### SalishSeaTools
+
+* started work on test for `load_ONC_ferry_ERDDAP()`
+
 
 
 
