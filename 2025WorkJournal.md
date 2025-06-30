@@ -5973,6 +5973,50 @@ Worked at ESB after I got automation sorted out
 
 
 
+#### Sat 28-Jun-2025
+
+##### FUN
+
+* continued creating 2026 pension income scenario
+
+
+##### SalishSeaCast
+
+* wwatch3 forecast run was reported as crashed because `watch_ww3` didn't find a time step value
+  * run appears to have finished normally on `arbutus`
+  * successfully manually ran `download_wwatch3_results forecast`
+
+
+##### ERDDAP
+
+* atmospheric forcing dataset had not updated since 26jun
+  * message out "outer axis overlap" between 26jun and 27jun
+  * touched dataset in `hardFlag/` to force full reload
+
+
+
+#### Sun 29-Jun-2025
+
+##### SalishSeaCast
+
+* `make_plots nowcast comparison` failed due to inaccessible atmospheric forcing dataset on ERDDAP
+
+
+##### ERDDAP
+
+* atmospheric forcing dataset did not load:
+  <!-- markdownlint-disable MD013 -->
+  ```text
+    ubcSSaSurfaceAtmosphereFieldsV23-02: Outer axis overlap between files.
+    max=1.7509788E9 for /results/forcing/atmospheric/continental2.5/nemo_forcing/hrdps_y2025m06d26.nc
+    is greater than
+    min=1.7509608E9 for /results/forcing/atmospheric/continental2.5/nemo_forcing/hrdps_y2025m06d27.nc
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+
+
+
 
 
 * reverted PR#47 re: atmospheric datasets file patterns because it was done on the grid datasets
