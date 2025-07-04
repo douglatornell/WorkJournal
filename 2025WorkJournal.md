@@ -2579,7 +2579,7 @@ Worked at ESB
 * continued work on 2xrez verification notebook
   * discussed row 9 - Carmanah Point to Fraser River with Susan
   * added row 14(10) - Tsusiat Point to English Bay
-* changed row labels 5.9 to 9-13
+* changed row labels 5-9 to 9-13
 
 
 ##### SalishSeaNowcast
@@ -4629,6 +4629,7 @@ Cardiac rehab exit blood lab draw
     `_plot_dominant_period_time_series()`
 
 
+
 ## June
 
 <!-- markdownlint-disable MD001 -->
@@ -6016,14 +6017,140 @@ Worked at ESB after I got automation sorted out
 
 
 
+### Week 27
+
+#### Mon 30-Jun-2025
+
+Last Cardiac Rehab session.
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed at 04:17 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * re-ran manually at 09:38
+* `make_plots nowcast comparison` failed due to inaccessible atmospheric forcing dataset on ERDDAP
 
 
+##### ERDDAP
 
+* confirmed Susan's suspicion that one of the `time_counter` values in
+  `/results/forcing/atmospheric/continental2.5/nemo_forcing/hrdps_y2025m06d27.nc` was incorrect;
+  `time_counter[0]`
+  * fix:
+    <!-- markdownlint-disable MD013 -->
+    ```python
+    ds.time_counter.data[0] = pandas.to_datetime("2025-06-27T00:00:00")
+    encoding = {
+        "time_counter": {
+            "calendar": "gregorian",
+            "units": "seconds since 1970-01-01 00:00",
+            "dtype": float,
+        },
+    }
+    encoding.update({var: {"zlib": True, "complevel": 4} for var in ds.data_vars})
+    ds.to_netcdf("hrdps_y2025m06d27.nc.fixed", encoding=encoding, unlimited_dims=("time_counter",))
+    ```
+    <!-- markdownlint-disable MD013 -->
+* changed `colorBarPalette` attr tag values to our favourite cmocean colour maps; PR#49
 * reverted PR#47 re: atmospheric datasets file patterns because it was done on the grid datasets
-  that only require 1 file due to a brain fart
+  that only require 1 file due to a brain fart;PR#50
 
 
 
+## July
+
+<!-- markdownlint-disable MD001 -->
+#### Tue 1-Jul-2025
+<!-- markdownlint-enable MD001 -->
+
+**Statutory Holiday** - Canada Day
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update pillow to 11.3.0 re: CVE-2025-48379
+  re: buffer overflow vulnerability
+  * SalishSeaTools
+  * SalishSeaNowcast
+
+
+
+#### Wed 2-Jul-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast` ran instead of `forecast2` at 04:04 before checklist was reset
+  * ran manually at ~08:40
+  * test-reverted PR#364 re: wwatch3 run type selection for plots because it is causing this problem
+    * restarted manager for update `next_workers` module to take effect
+
+
+##### 2x resolution SalishSeaCast
+
+* refreshed mine and Susan's memories on where we left off in late-March
+  * Susan needs to finish detailed review of row 13
+
+* continued work on 2xrez processing notebook
+
+  * reviewed row 8 grid cell adjustments with Susan
+  * reviewed tiles 13(9),6 and 13(9),7 grid cell adjustments with Susan
+  * waiting for her to finish detailed review of row 13 (9)
+* continued work on 2xrez verification notebook
+
+  * discussed row 9 - Carmanah Point to Fraser River with Susan
+  * added row 14(10) - Tsusiat Point to English Bay
+* changed row labels 5-9 to 9-13
+
+
+##### SalishSeaTools
+
+* continued work on test for `load_ONC_ferry_ERDDAP()`
+  * created `test_evaltools_loaders` module
+  * renamed `test_evaltools` module to `test_evaltools_datetime`
+  * added tests for `load_ONC_ferry_ERDDAP()` based on initial generation by PyCharm AI
+    * custom variables implementation is problematic; talk to Susan
+  * added tests for `load_ONC_node_ERDDAP()` based on initial generation by PyCharm AI
+
+
+
+#### Thu 3-Jul-2025
+
+##### sockeye
+
+* collected run time data from Susan's recent runs
+  * 20x41 10 node runs are most efficient ~7m40s NEMO per model day
+  * still waiting for a run that includes `salishsea combine`
+
+
+##### nibi
+
+* 11x32 1 node jobs have been queued since 25 & 26 jun due to unavailable nodes
+
+
+##### SalishSeaCast
+
+* `crop_gribs 12` failed with many errors:
+    <!-- markdownlint-disable MD013 -->
+    ```text
+    ERROR [crop_gribs] skipping corrupted Message
+    gribapi.errors.PrematureEndOfFileError: End of resource reached when reading message
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * errors are from hour 036 `APCP_Sfc` file; the rest of hour 036 and hours 039-048 were not processed
+  * confirmed with `crop_gribs 12 --var APCP_Sfc --var-hour 36 --debug`
+    * unexpected end of file
+    * sarracenia log shows: "[ERROR] util/writelocal mismatched file length writing ..."
+    * manually downloaded `APCP_Sfc` file from hpfx and got a larger one
+    * successfully ran `crop_gribs 12 --var APCP_Sfc --var-hour 36 --debug`
+    * successfully ran `crop_gribs 12 --var DLWRF_Sfc --var-hour 36 --debug`
+    * successfully ran `crop_gribs 12 --backfill` to restart automation at ~10:10
+* `make_plots wwatch3 forecast publish` failed at 12:51 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * re-ran manually at 16:18
+
+
+##### SalishSeaTools
+
+* finished on tests for `load_ONC_ferry_ERDDAP()` and refactored it
 
 
 
@@ -6042,7 +6169,6 @@ Worked at ESB after I got automation sorted out
 ##### erddap-datasets
 
 * TODO:
-  * change `colorBarPalette` attr tag values to our favourite cmocean colour maps
   * change `standard_name_vocabulary` to `CF Standard Name Table v91`
   * add v21-11 info to forecast datasets `summary` attr
   * figure out why ERDDAP in unable to send emails
@@ -6068,6 +6194,9 @@ Worked at ESB after I got automation sorted out
     * make it part of package env and analysis-repo env
   * `_gridHoriz()` `fastSearch` option is hard-coded to use `~/MEOPAR/grid/grid_from_lat_lon_mask999.nc`
     * should be a parameter with a default value because it will change when we change to 202405 coordinates
+  * update intersphinx inventory URLs for numpy & scipy
+    * intersphinx inventory has moved: https://docs.scipy.org/doc/scipy/reference/objects.inv -> https://docs.scipy.org/doc/scipy/objects.inv
+    * intersphinx inventory has moved: https://docs.scipy.org/doc/numpy/objects.inv -> https://numpy.org/doc/stable/objects.inv
 
 
 ##### SalishSeaCmd
