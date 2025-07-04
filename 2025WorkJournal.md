@@ -6154,6 +6154,43 @@ Last Cardiac Rehab session.
 
 
 
+#### Fri 4-Jul-2025
+
+Worked at ESB.
+
+##### sockeye
+
+* collected run time data from Susan's recent runs
+
+
+##### Miscellaneous
+
+* Becca gave a practice version of a talk she will give next week at Hakai
+* read https://docs.alliancecan.ca/wiki/Advanced_MPI_scheduling and learned of `srun`
+  * the syntax we use with `mpirun` can also be used with `srun` (see its docs);
+    that may result in better performance due to avoiding "a mismatch between the
+    resources allocated by Slurm an those used by OpenMPI"
+* applied for access to `rorqual`
+
+
+##### ERDDAP
+
+* explored CF standard name table versions re: recommendation to use v91
+  * our metadata presently says v29 (from 2015)
+
+
+##### Minecraft
+
+* checked mods, etc. for releases compatible with 1.21.6:
+  * sodium: yes
+  * lithium: yes, and 1.21.7 too
+  * malilib: yes, and 1.21.7 too
+  * minihud: yes
+  * tweakeroo: yes
+  * iris: yes, and 1.21.7 too
+  * fresh animations: yes, and 1.21.5 to 1.21.7
+
+
 
 
 * TODO:
