@@ -6192,6 +6192,24 @@ Worked at ESB.
 
 
 
+#### Sat 5-Jul-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast publish` failed at 11:53 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * re-ran manually at 18:20
+
+
+
+#### Sun 6-Jul-2025
+
+##### sockeye
+
+* collected run time data from Susan's recent runs
+
+
+
 
 * TODO:
   * ask Henryk about email from ERDDAP
