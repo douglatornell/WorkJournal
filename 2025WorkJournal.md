@@ -6237,6 +6237,32 @@ Worked at ESB.
 
 
 
+#### Tue 8-Jul-2025
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* `crop_gribs 12` waited until time out to process 1 file
+
+
+##### Miscellaneous
+
+* MOAd group mtg; see whiteboard
+* updated PyCharm on `kudu` to 2025.1.3
+
+
+##### erddap-datasets
+
+* changed `standard_name_vocabulary` to `CF Standard Name Table v91`; PR#51
+
+
+##### NEMO-Cmd
+
+* changed `cmd.split()` to `shlex.split(cmd)` in `run` plugin re: issue #8; PR#108
+
+
+
 
 
 * TODO:
@@ -6252,7 +6278,6 @@ Worked at ESB.
 ##### erddap-datasets
 
 * TODO:
-  * change `standard_name_vocabulary` to `CF Standard Name Table v91`
   * add v21-11 info to forecast datasets `summary` attr
   * figure out why ERDDAP in unable to send emails
   * 2.11: add `emailDiagnosticsToErdData` setting
