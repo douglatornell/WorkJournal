@@ -6210,6 +6210,34 @@ Worked at ESB.
 
 
 
+### Week 28
+
+#### Mon 7-Jul-2025
+
+##### SalishSeaCast
+
+* discovered that yesterday `make_plots wwatch3 forecast2` ran instead of `make_plots wwatch3 forecast`
+  * happened because `make_plots wwatch3 forecast2` ran after the morning checklist reset,
+    so there were both `forecast2` and `forecast` keys in the `WWatch3 run` checklist item
+  * the situation is always the case, so there is no way to choose a run type and run date selection
+    strategy that is robust with respect to wwatch3 runs finishing before or after checklist reset
+  * after discussion with Susan, decided to try using race condition management to force checklist
+    reset to happen after both NEMO and WWatch3 plots have finished
+    * that won't work because there isn't enough uniqueness in the process flows after preliminary
+      NEMO and WWatch3 runs
+  * least bad option is to return to PR#364 re: wwatch3 run type selection for plots and live with
+    the fact that it will sometime do `forecast` when it should do `forecast2`
+    * restarted manager for update `next_workers` module to take effect
+
+
+##### Miscellaneous
+
+* updated PyCharm on `khawla` to 2025.1.3
+* replied to email from Jan & Troy re: SalishSeaCast on NANOOS NVS
+
+
+
+
 
 * TODO:
   * ask Henryk about email from ERDDAP
