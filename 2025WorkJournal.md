@@ -5970,7 +5970,7 @@ Worked at ESB after I got automation sorted out
 
 ##### SalishSeaTools
 
-* started work on test for `load_ONC_ferry_ERDDAP()`
+* started work on test for `load_ferry_ERDDAP()`
 
 
 
@@ -6103,10 +6103,10 @@ Last Cardiac Rehab session.
 
 ##### SalishSeaTools
 
-* continued work on test for `load_ONC_ferry_ERDDAP()`
+* continued work on test for `load_ferry_ERDDAP()`
   * created `test_evaltools_loaders` module
   * renamed `test_evaltools` module to `test_evaltools_datetime`
-  * added tests for `load_ONC_ferry_ERDDAP()` based on initial generation by PyCharm AI
+  * added tests for `load_ferry_ERDDAP()` based on initial generation by PyCharm AI
     * custom variables implementation is problematic; talk to Susan
   * added tests for `load_ONC_node_ERDDAP()` based on initial generation by PyCharm AI
 
@@ -6150,7 +6150,7 @@ Last Cardiac Rehab session.
 
 ##### SalishSeaTools
 
-* finished on tests for `load_ONC_ferry_ERDDAP()` and refactored it
+* finished on tests for `load_ferry_ERDDAP()` and refactored it
 
 
 
@@ -6263,6 +6263,83 @@ Worked at ESB
 
 
 
+#### Wed 9-Jul-2025
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus forecast2` failed with "permission denied"
+* `make_plots wwatch3 forecast` ran instead of `forecast2` at 04:04 before checklist was reset
+  * ran manually at ~09:06
+* `upload_forcing orcinus nowcast+` failed with "permission denied"
+  * write permission to `/home/sallen/` where forcing files are stored got revoked; Susan restored it
+
+
+##### SalishSeaTools
+
+* finished on tests for `load_ONC_node_ERDDAP()` and refactored it
+  * squash-merged PR#151
+
+
+##### salishsea-site
+
+* email from UBC IT security re: debug log page security concerns
+
+
+
+#### Thu 10-Jul-2025
+
+##### sockeye
+
+* collected run time data from Susan's recent runs
+* sent email to arc.support re: possible incomplete deployment of compute node image that includes `ksh`
+  * Ryan replied that `ksh` image deployment had been troublesome but is should stabilize soon
+
+
+##### nibi
+
+* users who have pending whole-node jobs:
+  * islamm65
+  * cournoyc
+* looked for slurm constraints to use `nibi` nodes on `graham` and found that the test nodes that were
+  on `graham` have been moved back to `nibi`
+* sent email to support@tech.alliancecan.ca asking about `nibi` test jobs
+
+
+##### SalishSeaTools
+
+* updated intersphinx inventory URLs for numpy & scipy; PR#153
+  * intersphinx inventory has moved: https://docs.scipy.org/doc/scipy/reference/objects.inv -> https://docs.scipy.org/doc/scipy/objects.inv
+  * intersphinx inventory has moved: https://docs.scipy.org/doc/numpy/objects.inv -> https://numpy.org/doc/stable/objects.inv
+* started work on fixing SyntaxWarning messages from various modules; PR#154
+
+
+##### erddap-datasets
+
+* updated env to Python 3.13; PR#52
+  * updated envs on `khawla` and `skookum`
+
+
+
+#### Fri 11-Jul-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed at 06:38 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * re-ran manually at 08:45
+
+
+##### nibi
+
+* users who have pending whole-node jobs:
+  * islamm65
+  * abadchi
+* users whose whole-node jobs left the queue
+  * cournoyc: cancelled
+
+
+
+
 
 
 * TODO:
@@ -6302,9 +6379,6 @@ Worked at ESB
     * make it part of package env and analysis-repo env
   * `_gridHoriz()` `fastSearch` option is hard-coded to use `~/MEOPAR/grid/grid_from_lat_lon_mask999.nc`
     * should be a parameter with a default value because it will change when we change to 202405 coordinates
-  * update intersphinx inventory URLs for numpy & scipy
-    * intersphinx inventory has moved: https://docs.scipy.org/doc/scipy/reference/objects.inv -> https://docs.scipy.org/doc/scipy/objects.inv
-    * intersphinx inventory has moved: https://docs.scipy.org/doc/numpy/objects.inv -> https://numpy.org/doc/stable/objects.inv
 
 
 ##### SalishSeaCmd
@@ -6377,10 +6451,10 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
     * gha-workflows - migrated on 13jan25 in PR#51
     * AtlantisCmd - migrated on 2feb25 in PR#61
     * SOG-Bloomcast-Ensemble - migrated on 15feb25 in PR#66
+    * erddap-datasets - migrated on 10jul25 in PR#52
   * not yet tested
     * salishsea-site
     * Reshapr
-    * erddap-datasets
   * no workflows:
     * SOG
     * ECget
