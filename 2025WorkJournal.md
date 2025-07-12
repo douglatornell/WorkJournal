@@ -6322,11 +6322,14 @@ Worked at ESB
 
 #### Fri 11-Jul-2025
 
+Worked at ESB
+
 ##### SalishSeaCast
 
 * `make_plots wwatch3 forecast2 publish` failed at 06:38 with `RuntimeError: NetCDF: DAP failure`
   after `tenacity` did its job
   * re-ran manually at 08:45
+* `download_results nowcast-green` took ~90 minutes
 
 
 ##### nibi
@@ -6336,6 +6339,38 @@ Worked at ESB
   * abadchi
 * users whose whole-node jobs left the queue
   * cournoyc: cancelled
+
+
+##### MIDOSS/docs
+
+* un-archived repo
+* changed Rachael's email and website addresses
+* removed `sphinx-linkcheck` badges because the workflow outputs disappear in archived repos
+* tried to trigger a new build on readthedocs
+  * it failed because the config is outdated
+  * updated config to new readthedocs API in VSCode web editor on GitHub
+  * manually triggered new docs build on readthedocs
+* re-archived repo
+
+
+##### Miscellaneous
+
+* Phys Ocgy seminar: Vicente re: PBDEs modelling
+* reviewed VSCode v102 release notes
+* updated `kudu` to PyCharm 2025.1.3.1
+* helped Susan with Reshapr not recognizing persistent dask cluster
+  * suspect Reshapr exception type bug due to change in dask
+
+
+##### salishsea-site
+
+* update to Python 3.13; ref PR#77 for update to 3.12; PR#119
+  * change dev, prod & rtd envs to 3.13
+  * change `pyproject.toml` to 3.13
+  * change CI, sphinx-linkcheck & deployment workflow to 3.13
+  * change index doc & README to 3.13 for pkg dev
+* release v25.1
+* update prod env on `skookum`
 
 
 
@@ -6452,8 +6487,8 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
     * AtlantisCmd - migrated on 2feb25 in PR#61
     * SOG-Bloomcast-Ensemble - migrated on 15feb25 in PR#66
     * erddap-datasets - migrated on 10jul25 in PR#52
+    * salishsea-site - migrated on 11jul25 in PR#119
   * not yet tested
-    * salishsea-site
     * Reshapr
   * no workflows:
     * SOG
