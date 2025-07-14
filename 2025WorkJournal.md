@@ -6374,6 +6374,46 @@ Worked at ESB
 
 
 
+#### Sat 12-Jul-2025
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus nowcast+` failed due to already existing file?
+  * `/home/sallen/` has disappeared from `orcinus`
+  * email to Mark
+  * fixed around noon; tested at ~16:00
+
+
+##### nibi
+
+* users who have pending whole-node jobs:
+  * cournoyc
+  * islamm65
+  * lamming6
+  * abadchi
+* users whose whole-node jobs left the queue
+
+
+##### Minecraft
+
+* checked mods, etc. for releases compatible with 1.21.7:
+  * sodium: yes
+  * lithium: yes
+  * malilib: yes
+  * minihud: yes
+  * tweakeroo: yes
+  * iris: yes
+  * fresh animations: yes
+
+
+
+#### Sun 13-Jul-2025
+
+##### SalishSeaCast
+
+* `crop_gribs 12` waited until time out to process 1 file
+
+
 
 
 
