@@ -6476,8 +6476,42 @@ Worked at ESB
 
 * `upload_forcing orcinus forecast2` worked overnight
 * backfill nowcast-agrif:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  upload_forcing orcinus nowcast+ 2025-07-14 --debug
+  upload_forcing orcinus turbidity 2025-07-14 --debug
+  ```
+  <!-- markdownlint-enable MD013 -->
+* `download_live_ocean` timed out out at 12:20
+  * restarted at ~12:50
+  * success at 14:47
+* email from Parker about changing LiveOcean to s3 storage at UW
 
 
+##### nibi
+
+* users who have pending whole-node jobs:
+  * cournoyc
+  * arashy: 5 4 node, 128 core jobs not scheduled
+  * doppenbe
+  * haddaram
+* 1 successful job in the past 10 days from queued users
+  * arashy: 4 nodes, 128s core ran on g[13,17,23,31] for 26m
+
+
+##### rorqual
+
+* continued setup on `rorqual`
+  * created `links/projects/def-allen/SalishSea/` and make it group writable
+  * confirmed that `tmux` is available on `beluga` so that I can `rsync`
+    156G of forcing files from `projects/def-allen/SalishSea/forcing/` in a
+    single session
+  * started `rsync` in `dlatorne-rsync-rorqual` tmux session on `beluga`
+
+
+##### SalishSeaNowcast
+
+* updated LiveOcean URL templates in config; PR#373
 
 
 
