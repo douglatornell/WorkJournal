@@ -6248,7 +6248,7 @@ Worked at ESB
 
 ##### Miscellaneous
 
-* MOAd group mtg; see whiteboard
+* MOAD group mtg; see whiteboard
 * updated PyCharm on `kudu` to 2025.1.3
 
 
@@ -6391,7 +6391,6 @@ Worked at ESB
   * islamm65
   * lamming6
   * abadchi
-* users whose whole-node jobs left the queue
 
 
 ##### Minecraft
@@ -6415,6 +6414,72 @@ Worked at ESB
 
 
 
+### Week 29
+
+#### Mon 14-Jul-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed at 04:33 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * re-ran manually at 09:25
+* `upload_forcing orcinus forecast2`, `nowcast+`, and `turbidity` failed due to SSH key issue
+* `nowcast-blue run` failed:
+  * zonal velocity >20m/s at 2, 393, 22
+  * Susan fixed `nowcast-green.202111/13jul25/` restart file
+  * `make_forcing_links arbutus nowcast+` at 09:55 to restart automation
+
+
+##### nibi
+
+* users who have pending whole-node jobs:
+  * islamm65
+  * lamming6
+  * cournoyc
+  * abadchi
+  * doppenbe
+  * arashy: 6 4 node, 128 core jobs scheduled for 19jul
+* no success jobs in the past 10 days from queued users
+* email from Liam Sbarro at ARC confirming that delay is ue to commissioning, though he is not part
+  of `nibi` team
+
+
+##### Miscellaneous
+
+* updated `khawla` to PyCharm 2025.1.3.1
+
+
+##### SalishSeaTools
+
+* finished fixing SyntaxWarning messages from various modules; PR#154
+  * also cleaned up imports and added module docstring & copyright info to `loadDataFRP` module
+    where many of the regex SyntaxWarning messages were coming from
+
+
+##### salishsea-site
+
+* started work on adding access control to debug log to make UBC IT security folks happy:
+  * `views.salishseacast.nowcast_logs()` just renders file name passed as the `filename` path element
+    in the request matchdict through the `string` renderer
+  * plan:
+    * detect if `filename` value contains `debug`
+    * if so, compare `token` parameter value to values in "secret" `debug_log_tokens.txt` file
+    * if `token` parameter is missing, or value isn't in file raise `HTTPForbidden`
+
+
+
+#### Tue 15-Jul-2025
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus forecast2` worked overnight
+* backfill nowcast-agrif:
+
+
+
+
 
 
 * TODO:
@@ -6425,6 +6490,9 @@ Worked at ESB
     * remove old openjdk packages ?
 
 
+
+* Reshapr didn't recognize persistent dask cluster for Susan and gave misleading error message
+  * suspect Reshapr exception type bug due to change in dask
 
 
 ##### erddap-datasets
