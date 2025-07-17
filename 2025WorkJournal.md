@@ -6490,7 +6490,7 @@ Worked at ESB
 
 ##### nibi
 
-* users who have pending whole-node jobs:
+* other users who have pending whole-node jobs:
   * cournoyc
   * arashy: 5 4 node, 128 core jobs not scheduled
   * doppenbe
@@ -6512,6 +6512,101 @@ Worked at ESB
 ##### SalishSeaNowcast
 
 * updated LiveOcean URL templates in config; PR#373
+  * deployed branch to `skookum`
+  * restarted manager to load updated config for tomorrow's runs
+
+
+
+#### Wed 16-Jul-2025
+
+##### Miscellaneous
+
+* Sharcnet webinar: Julia Threads, Ed Armstrong, Guelph
+  * shared memory, bu separate CPU state
+  * first 15 minutes are great intro to low level computing: cpu, registers, RAM
+  * Julia tasks are coroutines, green threads, or lightweight threads
+    * tasks have to be explicitly scheduled and waited for to complete
+    * tasks are only runnable once
+    * `@spawn` creates and schedules a task, `fetch()` gets the result of the task
+  * `Threads.@threads` distributes loop iteration across threads
+  * `mutex` == mutual exclusion lock or reentrant lock
+    * programmer's responsibility
+    * deadlocks are a problem; locks acquired out of order
+      * avoid long lock holds
+  * `Atomic`: great for counters; maps to CPU atomic instructions
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed at 04:43 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * re-ran manually at 09:00
+* 12Z downloads didn't start until 09:37; `crop_gribs 12` finished at 10:32
+* `download_live_ocean` worked correctly from new s3 storage via PR#373
+
+
+##### nibi
+
+* my jobs have now both changed to Priority as their reason for queuing
+* other users who have pending whole-node jobs:
+  * cournoyc
+  * arashy: 5 4 node, 128 core jobs not scheduled
+  * doppenbe
+  * haddaram
+  * zemskova
+* no new successful jobs in the past 10 days from queued users
+
+
+##### SalishSeaNowcast
+
+* squash-merged LiveOcean URL templates in config; PR#373
+  * restored `skookum` to `main` branch
+
+
+##### salishsea-site
+
+* continued work on adding access control to debug log to make UBC IT security folks happy
+  * PR#120
+
+
+
+#### Thu 17-Jul-2025
+
+Worked at ESB before published papers celebration at Brown's
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2` ran for 16jul instead 17jul` at 04:32 before checklist was reset
+  * ran manually at ~09:30
+* `upload_forcing orcinus turbidity` failed due to SSH key issue
+
+
+##### salishsea-site
+
+* deployed PR#120 to `skookum` to test debug log token access:
+  * added token envvar
+  * deployed branch
+  * shutdown and restarted supervisor to add token envvar
+  * confirmed expected operation
+
+
+##### nibi
+
+* other users who have pending whole-node jobs:
+  * cournoyc
+  * arashy: 5 4 node, 128 core jobs not scheduled
+  * doppenbe
+  * haddaram
+  * azek88: 2 1 node, 192 core jobs
+  * blaisbru
+  * jgleason: 2 1 node, 192 core jobs
+  * jvalenti
+  * awpye: 2 1 node, 192 core jobs
+  * kbwarren
+* jobs in the past 10 days from queued users
+  * arashy: 4 nodes, 128s core ran on g[13,17,23,31] for 26m
+  * blaisbru: 3 fails
+
 
 
 
