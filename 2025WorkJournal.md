@@ -6608,6 +6608,12 @@ Worked at ESB before published papers celebration at Brown's
   * blaisbru: 3 fails
 
 
+##### SalishSeaTools
+
+* started `matchData()` refactoring and adding tests; PR#155
+  * extracted column validation logic into `_reqd_cols_in_data_frame()`
+  * extracted file types list minimization logic into `_calc_file_types()`
+
 
 
 
