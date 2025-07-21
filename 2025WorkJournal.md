@@ -6616,6 +6616,63 @@ Worked at ESB before published papers celebration at Brown's
 
 
 
+#### Fri 18-Jul-2025
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus forecast2` failed due to SSH key issue
+
+
+##### nibi
+
+* both test runs failed with `line 76 -> [ id = GLS_k, U = field ] object was not found.` error
+  during XIOS setup
+  * caused by NEMO build on year-old `graham-stdenv2023` branch that is out of sync with recent
+    `v202111/field_def.xml`
+  * switched branch and build NEMO clean
+  * queued new `01mar23-nibi-rrg-11x32` run, scheduled for 2025-07-23T11:17:10
+
+
+##### SalishSeaTools
+
+* continued `matchData()` refactoring and adding tests; PR#155
+  * extracted file map inversion logic into `_invert_filemap()`
+
+
+
+#### Sat 19-Jul-2025
+
+##### Minecraft
+
+* checked mods, etc. for releases compatible with 1.21.8:
+  * sodium: yes
+  * lithium: yes
+  * malilib: yes
+  * minihud: no
+  * tweakeroo: no
+  * iris: no
+  * fresh animations: no
+
+
+
+#### Sun 20-Jul-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast` ran for 19jul instead `forecast2` for 20jul` at 04:15
+  * ran manually just in time at ~11:07
+
+
+##### nibi
+
+* `01mar23-nibi-rrg-11x32` run, schedule updated to 2025-07-20T16:10:00
+  * pushed back to 2025-07-23T17:11:49 within 2h or scheduled start ☹️
+
+
+
+
+
+
 
 * TODO:
   * ask Henryk about email from ERDDAP
