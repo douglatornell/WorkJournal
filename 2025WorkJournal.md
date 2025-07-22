@@ -6685,9 +6685,6 @@ Worked at ESB before published papers celebration at Brown's
 
 * squash-merged PR#120 re: debug log token access
 
-* removed VHVFR-FVCOM pages; PR#
-* release v25.2
-
 
 ##### SalishSeaNowcast
 
@@ -6711,6 +6708,47 @@ Worked at ESB before published papers celebration at Brown's
 * experimented unsuccessfully with `srun` instead of `mpirun` in 11x32 job
 
 
+
+#### Tue 22-Jul-2025
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* `crop_gribs 12` waited until time out at 11:18 to process 1 file
+* `make_turbidity_file` failed due to insufficient obs
+  * last update on website was at 03:10
+  * `upload_forcing turbidity` persisted 21jul file via symlink
+* `make_plots wwatch3 forecast publish` failed at 13:59 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * re-ran manually at ~15:30
+
+
+##### nibi
+
+* `nibi.alliancecan.ca` is now working
+  * added host alias to `kudu` ssh config
+* committed and pushed `XIOS-ARCH` files for StdEnv/2023 GCC build
+* committed and pushed `NEMO-3.6-code` arch file for StdEnv/2023 GCC build
+* squash-merged SalishSeaCmd PR#97 to add `nibi` support
+* committed and pushed example `nibi` run YAML file
+* created temporary docs for `nibi` in canvas in #alliance-hpc channel
+
+
+
+
+##### SalishSeaCmd
+
+* release v25.1 re: `nibi`
+
+
+##### SalishSeaNowcast
+
+* change config to upload forcing to `nibi` instead of `graham`
+  * need automation key activated on `nibi`
+* change config to drop forcing uploads to `optimum`
+
+
 ##### SalishSeaTools
 
 * continued `matchData()` refactoring and adding tests; PR#155
@@ -6719,8 +6757,10 @@ Worked at ESB before published papers celebration at Brown's
 
 
 
+##### salishsea-site
 
-
+* remove VHVFR-FVCOM pages; PR#
+* release v25.2
 
 
 
