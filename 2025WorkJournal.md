@@ -6670,6 +6670,60 @@ Worked at ESB before published papers celebration at Brown's
 
 
 
+### Week 30
+
+#### Mon 21-Jul-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed at 04:36 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * re-ran manually at 09:15
+
+
+##### salishsea-site
+
+* squash-merged PR#120 re: debug log token access
+
+* removed VHVFR-FVCOM pages; PR#
+* release v25.2
+
+
+##### SalishSeaNowcast
+
+* added envvar for debug log token to `skookum` deployment docs; PR#374
+
+
+##### nibi
+
+* `01mar23-nibi-rrg-11x32` run finished overnight
+  * almost the same performance as Jose's run: 10m49s + 1m combine
+* insta-run on subsequent tests:
+  * 14x25: 11:24
+  * 15x23: 11m37s; 1st attempt stalled due to system issue
+  * 21x38: 2 nodes; 7m3s + 1m3s combine, less efficient node-h/model-d
+  * 21x37: 2 nodes; 7m2s + 1m2s combine
+  * 29x44: 3 nodes; 7m2s + 58s combine
+  * 21x61: 3 nodes; 6m51s + 1m14s combine
+  * 11x32, 31 days: 9m34s/day + 50s combine
+  * 14x25, 31 days: 10m15s/day + 53s combine
+  * 21x37, 31 days: 6m51s/day + 58s combine; 0.2281 NEMO-h/model-d
+* experimented unsuccessfully with `srun` instead of `mpirun` in 11x32 job
+
+
+##### SalishSeaTools
+
+* continued `matchData()` refactoring and adding tests; PR#155
+
+  * change error message to KeyError in `_calc_file_types()`
+
+
+
+
+
+
+
+
 
 
 
