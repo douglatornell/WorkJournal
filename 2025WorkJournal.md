@@ -6736,10 +6736,142 @@ Worked at ESB
 
 
 
+#### Wed 23-Jul-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed at 04:35 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * re-ran manually at ~09:25
+* `make_turbidity_file` failed due to insufficient obs
+  * updates on website had resumed by 09:10
+  * `upload_forcing turbidity` persisted 21jul file via symlink
+
 
 ##### SalishSeaCmd
 
-* release v25.1 re: `nibi`
+* closed PR#62 re: StdEnv/2023 on `graham` and deleted `graham-stdenv2023` branch
+* released v25.1 re: `nibi`
+
+
+##### SalishSeaTools
+
+* received PR#156 to update Earth radius in `geo_tools.haversine()` to be consistent with NEMO source
+  code value in `DOM/phycst.F90`
+  * asked Susan for review
+* continued `matchData()` refactoring and adding tests; PR#155
+  * changed error message to KeyError in `_calc_file_types()`
+  * discussed geo-ref processing (maskName, meshPath, navlon, navlat, omask, nemops) with Susan
+    * agreed to not implement handling of atmospheric forcing grid for now
+  * started stepping through code with a modified version of Susan's `comparison_script.py` module
+
+
+##### salishsea-site
+
+* started work on removing VHVFR-FVCOM pages; PR#121
+  * `views.fvcom.py` module
+  * `fvcom.*` routes in `__init__.py`
+  * templates:
+    * `fvcom/results_index.mako`
+    * `fvcom/publish.mako`
+  * mentions in `views.figures.py` module
+  * link in `templates/nav.mako`
+
+* Automation Monitoring page fails with `KeyError: 'token'`
+* release v25.2
+* SMELT link in nav bar has no target
+
+
+
+#### Thu 24-Jul-2025
+
+
+##### SalishSeaTools
+
+* continued `matchData()` refactoring and adding tests; PR#155
+  * continued stepping through code with a modified version of Susan's `comparison_script.py` module
+  * simplified data frame sorting logic
+  * renamed required columns list
+  * refactored mesh mask handling to use `xarray`, simplify code, and only load lons/lats when needed
+  * drop support for atmospheric data matching
+  * change `meshPath` to `mesh mask_path` and make it a mandatory arg
+* started stepping through `index_model_files()`
+  * used PyCharm AI to generate unit test for it, but they needed work...
+
+
+
+#### Fri 25-Jul-2025
+
+##### SalishSeaNowcast
+
+* email from Mark re: Luster file system collapse on `orcinus` due to loss of metadata volumes
+  * `upload_forcing forecast2` failed
+  * `upload_forcing nowcast+` failed
+  * `upload_forcing turbidity` failed
+* `get_onc_ctd SEVIP` failed due to boolean index array size mismatch during API request
+
+
+##### SalishSeaTools
+
+* continued `matchData()` refactoring and adding tests; PR#155
+  * renamed variables and args for improved descriptiveness and consistency with Python conventions
+    * `lonvar`, `latvar`
+    * `sdim`
+    * `preIndexed`
+    * `fdict`
+    * `filemap`
+  * dropped unused `fid` arg
+  * renamed internal variables
+  * renamed `_invert_filemap()` to `_calc_filetype_model_vars()`
+  * added API docs
+  * added a couple of unit tests
+* started looking at Karyn's `_salinityMatch()`
+
+
+
+#### Sat 26-Jul-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed at 06:32 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * re-ran manually at ~08:40
+
+
+##### SalishSeaTools
+
+* continued `matchData()` refactoring and adding tests; PR#155
+  * refactored `flist` to `file_lists` using dict comprehension
+  * got idea for matching handler based on dict of `lambdas` from PyCharm AI; that gets around the
+    issue of the matcher functions having different signatures that was blocking my dict-based idea
+
+
+
+#### Sun 27-Jul-2025
+
+Watched the `nibi` upgrade video on training.sharcnet.ca
+
+Rode the Sanctuary ride.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##### salishsea-site
+
+* Automation Monitoring page fails with `KeyError: 'token'`
+* release v25.2
+* SMELT link in nav bar has no target
 
 
 ##### SalishSeaNowcast
@@ -6747,21 +6879,20 @@ Worked at ESB
 * change config to upload forcing to `nibi` instead of `graham`
   * need automation key activated on `nibi`
 * change config to drop forcing uploads to `optimum`
+* change automation workflow to run nowcast-green in place of nowcast-blue
+  * add output of 10min avg tide gauge station files
 
 
-##### SalishSeaTools
+##### SalishSeaCmd
 
-* continued `matchData()` refactoring and adding tests; PR#155
-
-  * change error message to KeyError in `_calc_file_types()`
-
-
-
-##### salishsea-site
-
-* remove VHVFR-FVCOM pages; PR#
-* release v25.2
-
+* add support for `rorqual`
+* drop support for `graham`
+* drop support for `beluga`
+* drop support for `cedar`
+* drop support for `optimum`
+* change `orcinus` to use `slurm`
+* consider removing support for PBS/TORQUE scheduler
+* consider removing separate deflate job feature
 
 
 
@@ -6808,19 +6939,8 @@ Worked at ESB
     * make it part of package env and analysis-repo env
   * `_gridHoriz()` `fastSearch` option is hard-coded to use `~/MEOPAR/grid/grid_from_lat_lon_mask999.nc`
     * should be a parameter with a default value because it will change when we change to 202405 coordinates
+* update library_code section in docs or move it to MOAD docs
 
-
-##### SalishSeaCmd
-
-* TODO:
-  * consider removing separate deflate job feature
-
-
-* tools repo TODO:
-  * update library_code section in docs or move it to MOAD docs
-
-
-* create mesh mask for sss150
 
 
 Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present to group.
@@ -6889,12 +7009,6 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
     * ECget
     * analysis-doug
     * SOG-Bloomcast ??
-
-
-TODO:
-
-* change automation workflow to run nowcast-green in place of nowcast-blue
-  * add output of 10min avg tide gauge station files
 
 
 
