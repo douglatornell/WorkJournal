@@ -6777,10 +6777,6 @@ Worked at ESB
   * mentions in `views.figures.py` module
   * link in `templates/nav.mako`
 
-* Automation Monitoring page fails with `KeyError: 'token'`
-* release v25.2
-* SMELT link in nav bar has no target
-
 
 
 #### Thu 24-Jul-2025
@@ -6893,6 +6889,27 @@ Rode the Sanctuary ride.
 
 
 
+#### Tue 29-Jul-2025
+
+Worked at ESB
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+
+
+##### salishsea-site
+
+* squash-merged removal of VHVFR-FVCOM pages; PR#121
+* fixed Automation Monitoring page failure with `KeyError: 'token'`; PR#122
+  * forgot to add `token` parameters to log page URLs in automation monitoring
+    page template
+  * deployed branch to `skookum` for testing
+
+
+
+
+
     data = _binmatch(     data, flist, ftypes, filemap_r,          omask,     maskName, sdim, preIndexed=preIndexed )
     data = _ferrymatch(   data, flist, ftypes, filemap_r,          omask, fdict)
     data = _salinityMatch(data, flist, ftypes, filemap_r,          omask, fdict)
@@ -6914,7 +6931,6 @@ Rode the Sanctuary ride.
 
 ##### salishsea-site
 
-* Automation Monitoring page fails with `KeyError: 'token'`
 * release v25.2
 * SMELT link in nav bar has no target
 
