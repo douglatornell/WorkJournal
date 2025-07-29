@@ -6855,7 +6855,52 @@ Rode the Sanctuary ride.
 
 
 
+### Week 31
 
+#### Mon 28-Jul-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed at 04:27 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * re-ran manually at ~08:50
+
+
+##### nibi
+
+* requested a 3h 2-core, 8 Gb interactive session via OnDemand to see what can be done with item
+  * video suggests that this is how to run Jupyter
+  * queued for an annoyingly long time
+* experimented with automation key; not configured yet on `nibi`
+
+
+##### SalishSeaCast
+
+* `crop_gribs 12` waited until time out at 11:00 to process 1 file
+
+
+##### SalishSeaTools
+
+* discussed `matchData()` refactoring with Susan:
+  * she approves of signature changes so far
+  * decided to leave exisitng quasiCamelCase args as is unless they are changed for code refactoring
+  * agreed to change `fastSearch` to a arg for the high-res lon/lat to model indices mapping file path
+    (resemtly hard-coded) with a default of `None` to disable fast indexing
+  * she approves of the dict of `lambda` matching method handler that the PyCharm AI suggests
+* continued `matchData()` refactoring and adding tests; PR#155
+  * simplified start/end date handling with `or` statements and f-string prints
+  * started refactoring matching function calls into dict-of-lambdas function
+
+
+
+    data = _binmatch(     data, flist, ftypes, filemap_r,          omask,     maskName, sdim, preIndexed=preIndexed )
+    data = _ferrymatch(   data, flist, ftypes, filemap_r,          omask, fdict)
+    data = _salinityMatch(data, flist, ftypes, filemap_r,          omask, fdict)
+    data = _vertNetmatch( data, flist, ftypes, filemap_r,          omask,        e3t0, maskName)
+    data = _interpvvlZ(   data, flist, ftypes, filemap, filemap_r, omask, fdict, e3tvar )
+    data = _vvlBin(       data, flist, ftypes, filemap, filemap_r, omask, fdict, e3tvar)
+          _salinityMatch( data, flist, ftypes, filemap_r,          omask, fdict)
+          _salinityMatch( data, flist, file_types, filemap_rfile_type_model_vars,          omask, model_file_hours_res)
 
 
 
