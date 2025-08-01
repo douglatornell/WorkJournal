@@ -6970,6 +6970,32 @@ Worked at ESB
 
 
 
+## August
+
+<!-- markdownlint-disable MD001 -->
+#### Fri 1-Aug-2025
+<!-- markdownlint-enable MD001 -->
+
+Worked at ESB
+
+##### Miscellaneous
+
+* Phys Ocgy seminar: Stephanie's summer students
+* completed annual COI declaration
+
+
+##### nibi
+
+* portal.nibi.sharcnet.ca is mostly fully alive
+* experimented with interactive session via OnDemand
+  * Mate desktop
+  * no ssh agent connection, so couldn't clone `analysis-doug` from GitHub to
+    test `jupyterlab`
+
+
+##### SalishSeaNowcast
+
+* fixed redirected rtd badge links and broken arbutus cloud docs link; PR#375
 
 
 
@@ -6991,6 +7017,7 @@ Worked at ESB
 ##### SalishSeaCmd
 
 * add support for `rorqual`
+* add support for `fir`
 * drop support for `graham`
 * drop support for `beluga`
 * drop support for `cedar`
@@ -7042,8 +7069,6 @@ Worked at ESB
 * TODO:
   * move `sqlachemy` import to top of module
     * make it part of package env and analysis-repo env
-  * `_gridHoriz()` `fastSearch` option is hard-coded to use `~/MEOPAR/grid/grid_from_lat_lon_mask999.nc`
-    * should be a parameter with a default value because it will change when we change to 202405 coordinates
 * update library_code section in docs or move it to MOAD docs
 
 
