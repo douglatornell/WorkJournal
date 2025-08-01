@@ -6908,20 +6908,65 @@ Worked at ESB
 
 
 
+#### Wed 30-Jul-2025
+
+##### Miscellaneous
+
+* HPC update webinar
+  * Sergey Mashchenko
+  * guideline for scalability is 25% core waste limit
+    * https://docs.alliancecan.ca/wiki/Scalability
+    * https://en.wikipedia.org/wiki/Scalability_testing
+  * GPUs are generally under-utilized due to jobs too small to saturate and spiky use patterns
+    * now using GPU segmentation technology (MIGs) to split GPUs into 8ths
+  * interconnect changes
+    * `nibi` is the only cluster that switched from InfiniBand to Ethernet
+      * I should test on `fir` and `rorqual`
+  * file systems
+    * `nibi` and `trillium` are VAST
+      * automatic deduplication and **compression**
+    * `fir` is Lustre
+    * `rorqual` has `~/links/`
+    * use absolute paths in job scripts
+    * scratch accounting
+      * 1T soft quota
+      * >1T triggers 60d over-quota grace period
+      * >60d hard-quota limit; must reduce to <1T to reset quota
+    * may introduce "whole sub-node" partitions for ~32 cores
+    * `StdEnv/2020` is hidden and deprecated, but still loadable if needed
+    * interactive access
+      * OnDemand webinar on 27-Aug
+    * mini-graham dies on 1-Sep
 
 
-    data = _binmatch(     data, flist, ftypes, filemap_r,          omask,     maskName, sdim, preIndexed=preIndexed )
-    data = _ferrymatch(   data, flist, ftypes, filemap_r,          omask, fdict)
-    data = _salinityMatch(data, flist, ftypes, filemap_r,          omask, fdict)
-    data = _vertNetmatch( data, flist, ftypes, filemap_r,          omask,        e3t0, maskName)
-    data = _interpvvlZ(   data, flist, ftypes, filemap, filemap_r, omask, fdict, e3tvar )
-    data = _vvlBin(       data, flist, ftypes, filemap, filemap_r, omask, fdict, e3tvar)
-          _salinityMatch( data, flist, ftypes, filemap_r,          omask, fdict)
-          _salinityMatch( data, flist, file_types, filemap_rfile_type_model_vars,          omask, model_file_hours_res)
+##### nibi
+
+* portal.nibi.sharcnet.ca is starting to come to life
 
 
 
+#### Thu 31-Jul-2025
 
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed at 06:46 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * re-ran manually at ~08:00
+
+
+##### SalishSeaTools
+
+* continued `matchData()` refactoring and adding tests; PR#155
+  * refactored matching function calls into dict-of-lambdas function
+  * changed `fastSearch` to a arg for the high-res lon/lat to model indices mapping file path
+    (resemtly hard-coded) with a default of `""` to disable fast indexing
+
+
+##### salishsea-site
+
+* squash-merged fix for Automation Monitoring page failure with `KeyError: 'token'`; PR#122
+  * GHA automation successfully deployed it
+* released v25.2
 
 
 
@@ -6931,7 +6976,6 @@ Worked at ESB
 
 ##### salishsea-site
 
-* release v25.2
 * SMELT link in nav bar has no target
 
 
