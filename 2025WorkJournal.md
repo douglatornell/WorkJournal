@@ -6908,6 +6908,7 @@ Worked at ESB
 
 
 
+
 #### Wed 30-Jul-2025
 
 ##### Miscellaneous
@@ -6997,6 +6998,29 @@ Worked at ESB
 
 * fixed redirected rtd badge links and broken arbutus cloud docs link; PR#375
 
+
+
+#### Sat 2-Aug-2025
+
+##### Vacation
+
+* prep for trip to Nelson
+* picked up Modo 2024 Rogue
+* dinner at Provisions
+
+
+
+#### Sun 3-Aug-2025
+
+##### Vacation
+
+* drove from home to Longbeach near Nelson
+* stops:
+  * fuel in Hope
+    * Modo card failed at Esso, but worked at Chevron
+  * lunch at Fannie's in Princeton
+  * produce at B&J's in Keremeos
+  * rest stop on east side of Poulson pass
 
 
 
