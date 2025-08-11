@@ -7024,6 +7024,138 @@ Worked at ESB
 
 
 
+### Week 32
+
+#### Mon 4-Aug-2025
+
+**Statutory Holiday** - BC Day
+
+##### Vacation
+
+* rode out and back from Mountain Station to the beaver/grizzly bear meadow just south of Cottonwwod
+  Lake
+  * steady climb
+  * 30+ minute descent on return with only a few dog walkers
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed at 04:34 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * re-ran manually at ~08:25
+* `make_plots wwatch3 forecast publish` failed at 11:40 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * re-ran manually at ~16:40
+
+
+
+#### Tue 5-Aug-2025
+
+##### Vacation
+
+* rode out and back to Procter Park with a stop at the Procter store for ice cream on the way back
+  * discovered that middle chainring on Gunnar is skipping with the new chain when I stand
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed at 04:31 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * re-ran manually at ~09:10
+* `make_plots wwatch3 forecast publish` failed at 11:31 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+
+
+
+#### Wed 6-Aug-2025
+
+##### Vacation
+
+* drove to Winlaw with a plan of riding part of the Slocan Valley trail, but the rain came on while
+  we were having lunch at Sleep is for Sissys and we drove back to Longbeach after a brief stop at
+  the Winlaw trailhead
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed at 04:18 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * re-ran manually at ~09:00
+
+
+##### NEMO-Cmd
+
+* replaced permission denied link to https://modules.sourceforge.net/ in
+  `docs/run_description_file/3.6_yaml_file.rst` with
+  https://docs.alliancecan.ca/wiki/Utiliser_des_modules/en; PR#109
+
+
+
+#### Thu 7-Aug-2025
+
+##### Vacation
+
+* rode to Balfour and back
+  * explored Upper Balfour Rd and forest road up to power line cut
+  * coffee & snacks at bakery at ferry; cinnamon buns were all sold out
+  * finished the windy ride back to Longbeach just as the rain started
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed at 04:38 with `RuntimeError: NetCDF: DAP failure`
+  after `tenacity` did its job
+  * re-ran manually at ~08:15
+* `make_plots wwatch3 forecast publish` failed at 11:34 with `RuntimeError: NetCDF: DAP failure`
+  after new `tenacity` use did its job
+  * re-ran manually at ~14:00
+
+
+##### SalishSeaNowcast
+
+* tried another way of handling `RuntimeError: NetCDF: DAP failure` in `make_plots wwatch3`
+  * added `.load()` call on dataset from ERDDAP
+  * moved ERDDAP dataset loading to a separate function so that it can be warpped with `@tenacity()`
+  * copied updated code to `skookum` on `main` branch for testing
+
+
+
+#### Fri 8-Aug-2025
+
+##### Vacation
+
+* drove to Shutty Bench, north of Kaslo on hwy 31
+  * rode to Lardeau and back
+  * best ever cinnamon buns at Sal's Bakery in house kitchen
+  * longest, climbiest, highest TSS ride I've done since last August
+
+
+
+#### Sat 9-Aug-2025
+
+##### Vacation
+
+* drove to Cottonwood Lake,snorth of Nelson on hwy 6
+  * rode to Ymir and back
+  * set new power bests on the long steday climb back
+  * Training Peaks tagged the ride with an FTP increase from 190 to 192 W
+
+
+
+#### Sun 10-Aug-2025
+
+##### Vacation
+
+* rode to Sunshine Beach for Sunday market, then on to Procter for olive oil and cinnamon buns
+  at the café
+* `make_plots wwatch3 forecast publish` failed at 11:37 with `RuntimeError: NetCDF: DAP failure`
+  after new `tenacity` use did its job
+  * re-ran manually at ~15:11
+
+
+
+
+
 ##### salishsea-site
 
 * SMELT link in nav bar has no target
