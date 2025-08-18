@@ -7148,11 +7148,198 @@ Worked at ESB
 
 * rode to Sunshine Beach for Sunday market, then on to Procter for olive oil and cinnamon buns
   at the café
+
+
+##### SalishSeaNowcast
+
 * `make_plots wwatch3 forecast publish` failed at 11:37 with `RuntimeError: NetCDF: DAP failure`
   after new `tenacity` use did its job
   * re-ran manually at ~15:11
 
 
+
+### Week 33
+
+#### Mon 11-Aug-2025
+
+##### Vacation
+
+* rode the Slocan Trail from Winlaw to Slocan and back
+  * early start and low pace due to heat
+  * ice cream at Mountain Valley Station
+  * lunch at Sleep is for Sissys
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update `pre-commit` to 6.0.0 re: feature & dependency updates, and
+  bug fixes
+  * NEMO_Nowcast
+  * SalishSeaCast/docs
+  * SalishSeaNowcast
+  * NEMO-Cmd
+  * salishsea-site
+  * SalishSeaCmd
+  * erddap-datasets
+  * SOG-Bloomcast-Ensemble
+  * MoaceanParcels
+  * cookiecutter-MOAD-pypkg
+  * MOAD/docs
+  * gha-workflows
+  * SalishSeaTools
+  * Reshapr
+  * moad_tools
+  * AtlantisCmd
+* Squash-merged dependabot PRs to update `actions/checkout` to 5.0.0 re: update to use node 24
+  * moad_tools
+  * gha-workflows
+
+
+
+#### Tue 12-Aug-2025
+
+##### Vacation
+
+* hiked several trails in a loop in Kokanee Creek Park
+  * Canyon Trail to lookout
+  * trail across Kokanee Glacier access road down to MTB area trailhead
+  * up through MTB climb trails to a higher point on the Kokanee Glacier road
+  * back to Canyon trail
+  * down Woodland trail to Kokanee Creek camping area
+  * along beach and Grasslands trail to nature centre for ice cream
+
+
+##### 2x resolution SalishSeaCast
+
+* refreshed mine and Susan's memories on where we left off in early-July
+  * Susan finished detailed review of row 13
+
+
+##### SalishSeaNowcast
+
+* `crop_gribs 12` waited until time out at 11:00 to process 1 file
+* `make_plots wwatch3 forecast publish` failed at 13:44 with `RuntimeError: NetCDF: DAP failure`
+  after new `tenacity` use did its job
+  * re-ran manually at ~15:45
+
+
+
+#### Wed 13-Aug-2025
+
+##### Vacation
+
+* rode the Great Northern trail above Nelson
+  * started from the trailhead above Selkirk College
+  * rode down to Troop Beach and back, then up to Mountain Station and back
+  * lunch at L&C French café
+  * grocery shopping at the Co-op
+
+
+##### SalishSeaCast
+
+* LiveOcean was delayed due to HPC problems
+  * email from Parker
+  * `download_live_ocean` timed out at 11:49
+  * restarted it manually at 14:35, but it stopped at ~15:25
+  * re-ran it manually at 19:45
+  * stopped it at 20:50
+  * persisted 12aug download via symlink
+  * ran `make_live_ocean_files` to jump start automation at ~20:55
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update `pypdf` to 6.0.0 re: CVE-2025-55197 re: RAM exhaustion
+  vulnerability
+  * SalishSeaNowcast
+* Squash-merged dependabot PRs to update `actions/checkout` to 5.0.0 re: update to use node 24
+  * AtlantisCmd
+  * salishsea-site
+
+
+
+#### Thu 14-Aug-2025
+
+##### Vacation
+
+* rode Slocan Valley trail from Crescent Valley to Winlaw and back
+  * snack at Sleep is for Sissys
+  * late lunch at Frog Peak Café
+  * drove up to Linden Lane Farm but didn't find anything we wanted in the shop
+  * tried and failed to find Popov Leather
+  * got cherries and a red pepper at fruit stand on the north shore
+
+
+##### SalishSeaCast
+
+* LiveOcean was delayed due to HPC problems
+  * `download_live_ocean` timed out at 11:47
+  * email from Parker at ~17:00 to say that today's run is finished
+  * re-ran `download_live_ocean` at ~17:07 to jump start automation
+* `make_plots wwatch3 forecast publish` failed at 19:44 with `RuntimeError: NetCDF: DAP failure`
+  after new `tenacity` use did its job
+  * re-ran manually at ~21:05
+
+
+
+#### Fri 15-Aug-2025
+
+##### Vacation
+
+* rode Granite and Blewett Roads from Cottonwood Falls Park to the South Slocan dams complex
+  * lots of climing, especially a switch-backed, 5 km, cat 3 climb on the way back
+  * a little rain on the ride, more on the drive back to Longbeach
+  * coffee & carrot cake at Oso Negro Café after the ride
+
+
+##### SalishSeaNowcast
+
+* read some of the docs of the `pydap` project
+  * that got me thinking about alternate engines that might solve the `make_plots wwatch3` issue
+  * changed code to use `engine="h5netcdf"` because `pydap` isn't (yet?) a dependency
+* `make_plots wwatch3 forecast publish` failed at 11:37 with `ImportError` from `fsspec` re: `aiohttp`
+  after new `tenacity` use did its job
+  * installed `aiohttp` and its dependencies in production env on `skookum`
+  * re-ran manually at ~17:35
+    * failed because `h5netcdf` can't handle an streaming ERDDAP dataset
+  * installed `pydap` and its dependencies in production env on `skookum`
+  * changed code to use `engine="pydap"`
+  * works with `dap2://` protocol, but not with `pydap` preference of `dap4://`
+
+
+
+#### Sat 16-Aug-2025
+
+##### Vacation
+
+* rain in the morning, but it cleared in the afternoon for a humid ride to Procter for cinnamon buns
+
+
+##### Reshapr
+
+* fixed broken and redirected docs links found be monthly scheduled `sphinx-linkcheck` action; PR#159
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast publish` with `pydap` and no `tenacity` failed at 11:11 with `ValueError`
+  * first manual re-run at 11:33 failed
+  * 2nd manual re-run in debug mode at ~11:38 worked
+  * restored `tenacity` for tomorrow's attempts
+
+
+
+#### Sun 17-Aug-2025
+
+##### Vacation
+
+* drove home from Longbeach
+* stops:
+  * fuel in Nelson
+  * coffee, cinnamon buns & butter tarts to go at Copper Eagle in Greenwood
+  * fruit and veggies at Mom & Pop's in Keremeos
+  * fuel and coffee in Hope
+  * many slowdowns between east of Chilliwack and west of Langley
 
 
 
@@ -7172,8 +7359,25 @@ Worked at ESB
 
 ##### SalishSeaCmd
 
+* update scaling tests on `narval` with `StdEnv/2023`
+  * 100 Gb/s InfiniBand Mellanox HDR interconnect
+  * Lustre file system
+  * cpus: AMD EPYC 7532 (Zen 2) @ 2.40 GHz, 256M cache L3
 * add support for `rorqual`
+  * 200 Gb/s HDR InfiniBand
+  * Lustre file system
+  * cpus: AMD EPYC 9654 (Zen 4) @ 2.40 GHz, 384MB cache L3
+  * `--ntasks-per-node=24 --cpus-per-task=8` for whole nodes
 * add support for `fir`
+  * 400 Gb/s NDR InfiniBand
+  * Lustre file system
+  * cpus: AMD EPYC 9655 (Zen 5) @ 2.7 GHz, 384MB cache L3
+  * `--ntasks-per-node=24 --cpus-per-task=8` for whole nodes
+* can we run on `trillium`
+  * 400 Gb/s NDR InfiniBand
+  * VAST file system
+  * cpus: AMD EPYC 9655 (Zen 5) @ 2.6 GHz, 384MB cache L3
+  * no mention of special tasks directives for whole nodes
 * drop support for `graham`
 * drop support for `beluga`
 * drop support for `cedar`
