@@ -7393,6 +7393,35 @@ Worked at ESB
 
 
 
+#### Tue 19-Aug-2025
+
+Worked at ESB.
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* reviewed `uv` issue re: `conda` support; still not there
+* updated `kudu` Pycharm to 2025.2.0.1
+
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2` and `forecast` both succeeded
+  * `make_plots wwatch3 forecast` succeeded after retrying for 24 minutes
+  * increased `tenacity` retry time limit from 30 to 40 minutes
+  * changed back to `engine="netcdf4"` because `pydap` is noisier with no advantage
+
+
+##### SalishSeaCmd
+
+* dropped support for `beluga`; PR#99
+* dropped support for `cedar`; PR#99
+* squash-merged PR#99
+
+* released v25.2
+
+
+
 
 ##### salishsea-site
 
@@ -7410,6 +7439,11 @@ Worked at ESB
 
 ##### SalishSeaCmd
 
+* can we run on `trillium`
+  * 400 Gb/s NDR InfiniBand
+  * VAST file system
+  * cpus: AMD EPYC 9655 (Zen 5) @ 2.6 GHz, 384MB cache L3
+  * no mention of special tasks directives for whole nodes
 * update scaling tests on `narval` with `StdEnv/2023`
   * 100 Gb/s InfiniBand Mellanox HDR interconnect
   * Lustre file system
@@ -7424,17 +7458,10 @@ Worked at ESB
   * Lustre file system
   * cpus: AMD EPYC 9655 (Zen 5) @ 2.7 GHz, 384MB cache L3
   * `--ntasks-per-node=24 --cpus-per-task=8` for whole nodes
-* can we run on `trillium`
-  * 400 Gb/s NDR InfiniBand
-  * VAST file system
-  * cpus: AMD EPYC 9655 (Zen 5) @ 2.6 GHz, 384MB cache L3
-  * no mention of special tasks directives for whole nodes
-* drop support for `beluga`
-* drop support for `cedar`
-* drop support for `optimum`
-* change `orcinus` to use `slurm`
-* consider removing support for PBS/TORQUE scheduler
 * consider removing separate deflate job feature
+* change `orcinus` to use `slurm`
+* drop support for `optimum`
+* consider removing support for PBS/TORQUE scheduler
 
 
 
