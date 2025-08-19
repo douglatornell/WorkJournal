@@ -7343,6 +7343,57 @@ Worked at ESB
 
 
 
+### Week 34
+
+#### Mon 18-Aug-2025
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update `actions/checkout` to 5.0.0 re: update to use node 24
+  * SalishSeaNowcast
+  * rwhite/numeric_2024
+  * erddap-datasets
+
+
+##### SalishSeaCast
+
+* checked erddap log while `make_plots wwatch3 forecast` was re-trying
+  * failures are due to
+    `/results/SalishSea/rolling-forecasts/wwatch3/18aug25/SoG_ww3_fields_20250818_20250819.nc`
+    `(No such file or directory)`
+  * it appears that the wwatch3 dataset update is being blocked by the nowcast-green dataset updates
+  * increased the `tenacity` retry time limit from 20 to 30 minutes
+
+
+##### Miscellaneous
+
+* updated PyCharm on `khawla` to 2025.2.0.1
+* requested access on CCDB to `fir`, `narval`, and `trillium`
+
+
+##### Minecraft
+
+* checked mods, etc. for releases compatible with 1.21.8:
+  * sodium: yes
+  * lithium: yes
+  * malilib: yes
+  * minihud: yes
+  * tweakeroo: yes
+  * iris: yes
+  * fresh animations: yes
+
+
+##### SalishSeaCmd
+
+* dropped support for `graham`; PR#99
+  * tried to use PyCharm AI assistant
+    * it did okay on the `run` module, but not on `test_run`
+* sent support request to ARC to restore `UBC_CLUSTER` envvar to identify `sockeye`
+* confirmed that `nibi` is identified by `CC_CLUSTER` envvar
+
+
+
+
 ##### salishsea-site
 
 * SMELT link in nav bar has no target
@@ -7378,7 +7429,6 @@ Worked at ESB
   * VAST file system
   * cpus: AMD EPYC 9655 (Zen 5) @ 2.6 GHz, 384MB cache L3
   * no mention of special tasks directives for whole nodes
-* drop support for `graham`
 * drop support for `beluga`
 * drop support for `cedar`
 * drop support for `optimum`
