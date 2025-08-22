@@ -5835,7 +5835,7 @@ Worked at ESB
   <!-- markdownlint-disable MD013 -->
   ```bash
   conda config --set auto_activate_base false
-  conda config --add envs_dirs /arc/project/st-sallen1-1/dlatorne/conda-envs/
+  conda config --add envs_dirs /project/def-allen/dlatorne/conda-envs/
   ```
   <!-- markdownlint-enable MD013 -->
   * re-log
@@ -6768,7 +6768,7 @@ Worked at ESB
 
 ##### salishsea-site
 
-* started work on removing VHVFR-FVCOM pages; PR#121
+* started work on removing VHFR-FVCOM pages; PR#121
   * `views.fvcom.py` module
   * `fvcom.*` routes in `__init__.py`
   * templates:
@@ -6861,6 +6861,8 @@ Rode the Sanctuary ride.
   after `tenacity` did its job
   * re-ran manually at ~08:50
 
+* `crop_gribs 12` waited until time out at 11:00 to process 1 file
+
 
 ##### nibi
 
@@ -6870,18 +6872,13 @@ Rode the Sanctuary ride.
 * experimented with automation key; not configured yet on `nibi`
 
 
-##### SalishSeaCast
-
-* `crop_gribs 12` waited until time out at 11:00 to process 1 file
-
-
 ##### SalishSeaTools
 
 * discussed `matchData()` refactoring with Susan:
   * she approves of signature changes so far
-  * decided to leave exisitng quasiCamelCase args as is unless they are changed for code refactoring
+  * decided to leave existing quasiCamelCase args as is unless they are changed for code refactoring
   * agreed to change `fastSearch` to a arg for the high-res lon/lat to model indices mapping file path
-    (resemtly hard-coded) with a default of `None` to disable fast indexing
+    (presently hard-coded) with a default of `None` to disable fast indexing
   * she approves of the dict of `lambda` matching method handler that the PyCharm AI suggests
 * continued `matchData()` refactoring and adding tests; PR#155
   * simplified start/end date handling with `or` statements and f-string prints
@@ -6900,7 +6897,7 @@ Worked at ESB
 
 ##### salishsea-site
 
-* squash-merged removal of VHVFR-FVCOM pages; PR#121
+* squash-merged removal of VHFR-FVCOM pages; PR#121
 * fixed Automation Monitoring page failure with `KeyError: 'token'`; PR#122
   * forgot to add `token` parameters to log page URLs in automation monitoring
     page template
@@ -6960,7 +6957,7 @@ Worked at ESB
 * continued `matchData()` refactoring and adding tests; PR#155
   * refactored matching function calls into dict-of-lambdas function
   * changed `fastSearch` to a arg for the high-res lon/lat to model indices mapping file path
-    (resemtly hard-coded) with a default of `""` to disable fast indexing
+    (presently hard-coded) with a default of `""` to disable fast indexing
 
 
 ##### salishsea-site
@@ -7032,7 +7029,7 @@ Worked at ESB
 
 ##### Vacation
 
-* rode out and back from Mountain Station to the beaver/grizzly bear meadow just south of Cottonwwod
+* rode out and back from Mountain Station to the beaver/grizzly bear meadow just south of Cottonwood
   Lake
   * steady climb
   * 30+ minute descent on return with only a few dog walkers
@@ -7072,7 +7069,7 @@ Worked at ESB
 ##### Vacation
 
 * drove to Winlaw with a plan of riding part of the Slocan Valley trail, but the rain came on while
-  we were having lunch at Sleep is for Sissys and we drove back to Longbeach after a brief stop at
+  we were having lunch at Sleep is for Sissies and we drove back to Longbeach after a brief stop at
   the Winlaw trailhead
 
 
@@ -7115,7 +7112,7 @@ Worked at ESB
 
 * tried another way of handling `RuntimeError: NetCDF: DAP failure` in `make_plots wwatch3`
   * added `.load()` call on dataset from ERDDAP
-  * moved ERDDAP dataset loading to a separate function so that it can be warpped with `@tenacity()`
+  * moved ERDDAP dataset loading to a separate function so that it can be wrapped with `@tenacity()`
   * copied updated code to `skookum` on `main` branch for testing
 
 
@@ -7135,9 +7132,9 @@ Worked at ESB
 
 ##### Vacation
 
-* drove to Cottonwood Lake,snorth of Nelson on hwy 6
+* drove to Cottonwood Lake, north of Nelson on hwy 6
   * rode to Ymir and back
-  * set new power bests on the long steday climb back
+  * set new power bests on the long steady climb back
   * Training Peaks tagged the ride with an FTP increase from 190 to 192 W
 
 
@@ -7167,7 +7164,7 @@ Worked at ESB
 * rode the Slocan Trail from Winlaw to Slocan and back
   * early start and low pace due to heat
   * ice cream at Mountain Valley Station
-  * lunch at Sleep is for Sissys
+  * lunch at Sleep is for Sissies
 
 
 ##### Security Updates
@@ -7263,7 +7260,7 @@ Worked at ESB
 ##### Vacation
 
 * rode Slocan Valley trail from Crescent Valley to Winlaw and back
-  * snack at Sleep is for Sissys
+  * snack at Sleep is for Sissies
   * late lunch at Frog Peak Café
   * drove up to Linden Lane Farm but didn't find anything we wanted in the shop
   * tried and failed to find Popov Leather
@@ -7287,7 +7284,7 @@ Worked at ESB
 ##### Vacation
 
 * rode Granite and Blewett Roads from Cottonwood Falls Park to the South Slocan dams complex
-  * lots of climing, especially a switch-backed, 5 km, cat 3 climb on the way back
+  * lots of climbing, especially a switch-backed, 5 km, cat 3 climb on the way back
   * a little rain on the ride, more on the drive back to Longbeach
   * coffee & carrot cake at Oso Negro Café after the ride
 
@@ -7417,8 +7414,154 @@ Worked at ESB.
 * dropped support for `beluga`; PR#99
 * dropped support for `cedar`; PR#99
 * squash-merged PR#99
-
 * released v25.2
+
+
+
+#### Wed 20-Aug-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2` was successful with some `tenacity` retries
+
+
+##### SalishSeaCmd
+
+* started work on adding support for `fir` cluster; PR#100
+* got email from Alyza at ARC
+  * `UBC_CLUSTER` envvar on `sockeye` is only set after `module load gcc` has bee executed
+
+
+##### fir
+
+* prepared for scaling test runs:
+  * cleaned up `$HOME/`, `$SCRATCH/`, and `$PROJECT/$USER/`
+  * cloned repos into `$PROJECT/$USER/`:
+    * `grid`
+    * `NEMO-3.6-code`
+    * `NEMO-Cmd`
+    * `rivers-climatology`
+    * `SalishSeaCmd`
+    * `SS-run-sets`
+    * `tides`
+    * `tracers`
+    * `XIOS-2`
+
+    * `XIOS-ARCH`
+  * created `XIOS-ARCH/ALLIANCE/arch-GCC_FIR.[env|fcm|path]` files for StdEnv/2023
+    * symlinked them in `XIOS-2/arch/`
+  * built XIOS-2: `./make_xios --arch GCC_FIR --full --job 8`
+    * success in 97 seconds
+  * loaded `StdEnv/2023` environment with modules required to build NEMO:
+    <!-- markdownlint-disable MD013 -->
+    ```bash
+    module --force purge
+    module load StdEnv/2023
+    module load netcdf-fortran-mpi/4.6.1
+    module load perl/5.36.1
+    ```
+    <!-- markdownlint-enable MD013 -->
+  * created `NEMOGCM/ARCH/arch-GCC_FIR.fcm` files for StdEnv/2023
+  * built SalishSeaCast:
+    * `XIOS_HOME=$PROJECT/$USER/MEOPAR/XIOS-2/ ./makenemo -n SalishSeaCast -m GCC_FIR -j 8`
+    * success in 68 seconds
+  * built REBUILD_NEMO:
+    * `XIOS_HOME=$PROJECT/$USER/MEOPAR/XIOS-2/ ./maketools -n REBUILD_NEMO -m GCC_NIBI -j1`
+* install `miniforge3`
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  curl -L -O \
+    "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+  bash Miniforge3-$(uname)-$(uname -m).sh
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * allow it to auto-initialize conda
+  * re-log
+* configure conda/mamba:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  conda config --set auto_activate_base false
+  conda config --add envs_dirs /project/def-allen/dlatorne/conda-envs/
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * re-log
+* install SalishSeaCmd
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  cd project/dlatorne/MEOPAR/NEMO-Cmd/
+  git pull
+  cd project/dlatorne/MEOPAR/SalishSeaCmd/
+  git pull
+  mamba env create -f envs/environment-hpc.yaml
+  mamba activate salishsea-cmd
+  python -m pip install --user -e ../NEMO-Cmd
+  python -m pip install --user -e .
+  ```
+  <!-- markdownlint-enable MD013 -->
+
+* rsync-ed forcing files from `skookum`:
+
+* queued 11x32 run
+  * no jobs running at 12:45
+
+
+##### Miscellaneous
+
+* added the new `salishsea@eoas.ubc.ca` generic group email account to my Outlook config
+
+
+
+#### Thu 21-Aug-2025
+
+##### Miscellaneous
+
+* GitHub Q3 Roadmap:
+  * Mario Rodriguez
+  * multi-agent orchestration
+  * agent != model
+  * issues & projects -> planning
+  * try Spaces:
+    * in preview
+    * pat-to-use
+  * Copilot code review
+  * `*-instructions.md` files
+  * Playwright: product???
+  * Actions:
+    * agentic autofix
+  * Governance:
+    * lots of enterprise words
+    * top-down: enterprise -> orgs -> repos
+
+
+##### NEMO-3.6-code
+
+* closed PR#7 re: `StnEnv/2023` on `graham`
+
+
+##### XIOS-ARCH
+
+* updated README to replace `graham` example with `nibi`
+* closed PR#2 re: `StnEnv/2023` on `graham`
+
+
+##### erddap-datasets
+
+* tested restoring `<updateEveryNMillis>10000</updateEveryNMillis>` element to `ubcSSf2DWaveFields30mV17-02`
+  dataset on the thought that its removal from all datasets is the root cause of the latency issue
+  for `make_plots wwatch3`
+  * `updateEveryNMillis` causes a user request to trigger a dataset update in the request thread
+    which probably avoids the delay in updating the dataset caused by processing of the flag file
+    updates in the main thread being swamped by `nowcast-green` updates that typically start just
+    before `wwatch3-forecast*` updates start; the former take >=30 minutes
+
+
+##### SalishSeaTools
+
+* finished `matchData()` refactoring and adding tests;
+  * squash-merged PR#155
+* started adding Karyn's `_salinityMatch()` function to `matchData()`; PR#
+  * started work on `tests/salinityMatch_test.py` based on Karyn's notebook so that I have a
+    functional test as I integrate and refactor the `salinityMatch()` code
 
 
 
@@ -7458,6 +7601,7 @@ Worked at ESB.
   * Lustre file system
   * cpus: AMD EPYC 9655 (Zen 5) @ 2.7 GHz, 384MB cache L3
   * `--ntasks-per-node=24 --cpus-per-task=8` for whole nodes
+* consider removing attached xios server feature
 * consider removing separate deflate job feature
 * change `orcinus` to use `slurm`
 * drop support for `optimum`
@@ -7504,7 +7648,7 @@ Worked at ESB.
 ##### SalishSeaTools
 
 * TODO:
-  * move `sqlachemy` import to top of module
+  * move `sqlalchemy` import to top of module
     * make it part of package env and analysis-repo env
 * update library_code section in docs or move it to MOAD docs
 
