@@ -7499,11 +7499,6 @@ Worked at ESB.
   ```
   <!-- markdownlint-enable MD013 -->
 
-* rsync-ed forcing files from `skookum`:
-
-* queued 11x32 run
-  * no jobs running at 12:45
-
 
 ##### Miscellaneous
 
@@ -7564,6 +7559,43 @@ Worked at ESB.
     functional test as I integrate and refactor the `salinityMatch()` code
 
 
+
+#### Fri 22-Aug-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2` was successful without `tenacity` retries
+
+
+##### fir
+
+* uploaded 28feb23 restart files
+* uploaded feb-apr 2023 forcing files to `fir`:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  yyyy=2023; rsync -tLv /results/forcing/atmospheric/GEM2.5/operational/ops_y${yyyy}m0[2-4]*.nc \
+    fir:projects/def-allen/SalishSea/forcing/atmospheric/GEM2.5/operational/
+  yyyy=2023; rsync -tLv /results/forcing/atmospheric/continental2.5/nemo_forcing/hrdps_y${yyyy}m0[2-4]*.nc \
+    fir:projects/def-allen/SalishSea/forcing/atmospheric/continental2.5/nemo_forcing/
+  yyyy=2023; rsync -tLv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}m0[2-4]*.nc \
+    fir:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
+  yyyy=2023; rsync -tLv /results/forcing/rivers/R202108Dailies_y${yyyy}m0[2-4]*.nc \
+    fir:projects/def-allen/SalishSea/forcing/rivers/
+  yyyy=2023; rsync -tLv /results/forcing/rivers/river_turb/riverTurbDaily2_y${yyyy}m0[2-4]*.nc \
+    fir:projects/def-allen/SalishSea/forcing/rivers/river_turb/
+  yyyy=2023; rsync -tLv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}m0[2-4]*.nc \
+    fir:projects/def-allen/SalishSea/forcing/LiveOcean/
+  ```
+  <!-- markdownlint-enable MD013 -->
+* ran 11x32 with `--ntasks-per-node=192`
+  * 10m38s, ~10% faster than `nibi`, consistent with 2.7 vs 2.4 GHz CPUs
+* ran 11x32 with `--cpus-per-task=8 --ntasks-per-node=24`
+  * failed due to over-subscription
+* ran 14x25 with `--ntasks-per-node=192`
+  * 10m59s
+* ran 21x38 with `--ntasks-per-node=192`
+  * 9m24s
+* no job start/end emails
 
 
 ##### salishsea-site
