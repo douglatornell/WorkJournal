@@ -3431,7 +3431,6 @@ Filed 2024 income tax returns.
     * Show Subtitles: on
     * Directional Audio: on
   * Optional Telemetry Data
-
   * F3-h to enable advanced tooltips
   * used `/gamerule` to increase spawn chunks radius from 3 to 4 to keep iron farm loaded
 
@@ -7564,7 +7563,7 @@ Worked at ESB.
 
 ##### SalishSeaCast
 
-* `make_plots wwatch3 forecast2` was successful without `tenacity` retries
+* `make_plots wwatch3 forecast*` was successful without `tenacity` retries
 
 
 ##### fir
@@ -7596,6 +7595,233 @@ Worked at ESB.
 * ran 21x38 with `--ntasks-per-node=192`
   * 9m24s
 * no job start/end emails
+
+
+##### Miscellaneous
+
+* dean team party at Mark's house
+
+
+
+#### Sat 23-Aug-2025
+
+##### Miscellaneous
+
+* went to White Rock to visit JRA and family
+
+
+
+#### Sun 24-Aug-2025
+
+##### Miscellaneous
+
+* JRA passed away early in the morning
+* went to White Rock to help with emptying JRA's suite
+
+
+
+### Week 35
+
+#### Mon 25-Aug-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast*` has been successful without `tenacity` retries since 22aug
+  * removed `tenacity` decorator to see if `updateEveryNMillis` tag on ERDDAP dataset fully resolves
+    the latency issue
+
+
+##### Miscellaneous
+
+* went to White Rock to help with emptying JRA's suite
+
+
+
+#### Tue 26-Aug-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast*` was successful without `tenacity` decorator
+* Fraser river turbidity was persisted from 25aug
+
+
+##### Miscellaneous
+
+* cargo van to White Rock to help with emptying JRA's suite
+
+
+
+#### Wed 27-Aug-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast*` was successful without `tenacity` decorator
+* Fraser river turbidity was persisted from 26aug
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update codecov-action to 5.5.0 re: dependency & docs updates,
+  and bug fixes
+  * SalishSeaNowcast
+  * gha-workflows
+  * AtlantisCmd
+* Squash-merged dependabot PRs to update h2 to 4.3.0 re: CVE-2025-57804 re: HTTP/2 request splitting
+  vulnerability
+  * SalishSeaNowcast
+  * AtlantisCmd
+  * Reshapr
+
+
+
+#### Thu 28-Aug-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2` failed, but it appears to be due to bad wave height values in the run
+* Fraser river buoy site froze from 23:10 on 27aug to 03:10 on 28aug
+* `make_plots wwatch3 forecast` was successful without `tenacity` decorator
+
+
+##### Reshapr
+
+* updated to Python 3.13; PR#161
+* released v25.1
+
+
+##### Minecraft
+
+* stopped server
+* did lizzy-smelt backup
+* updated OS packages and auto-removed outdated packages
+* rebooted
+* set up 1.21.8 server
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  mkdir ~/Games/MinecraftFabric1.21.8Server
+  cd ~/Games/MinecraftFabric1.21.8Server
+  curl -OJ https://meta.fabricmc.net/v2/versions/loader/1.21.8/0.17.2/1.1.0/server/jar
+  pushd ~/Games/MinecraftFabric1.21.5Server
+  cp banned-* eula.txt ops.json whitelist.json start.sh ../MinecraftFabric1.21.8Server/
+  popd
+  ```
+  <!-- markdownlint-enable MD013 -->
+  * edited `start.sh` to:
+  <!-- markdownlint-disable MD013 -->
+    ```bash
+    #!/usr/bin/env bash
+    java -Xmx2G -jar fabric-server-mc.1.21.8-loader.0.17.2-launcher.1.1.0.jar nogui
+    ```
+  <!-- markdownlint-enable MD013 -->
+* launched and stopped server to create instance directories and files
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  ./start.sh
+    ...
+  /stop
+  ```
+  <!-- markdownlint-enable MD013 -->
+* edited `server.properties` to sync with 1.21.5 settings
+* installed mods, and rsync-ed `1-20-1-25jul23` world tree:
+<!-- markdownlint-disable MD013 -->
+```bash
+cd ~/Games/MinecraftFabric1.21.8Server/mods/
+curl -LO https://github.com/CaffeineMC/lithium/releases/download/mc1.21.8-0.18.0/lithium-fabric-0.18.0+mc1.21.8.jar
+cd ~/Games/MinecraftFabric1.21.8Server
+rsync -av ../MinecraftFabric1.21.5Server/1-20-1-25jul23 ./
+```
+<!-- markdownlint-enable MD013 -->
+* downloaded and unzipped on `khawla` VanillaTweaks double shulker shells v1.3.13 datapack
+  * rsync-ed it to `Games/MinecraftFabric1.21.8Server/1-20-1-25jul23/datapacks/` and removed v1.13.11
+* launched server in `tmux`
+<!-- markdownlint-disable MD013 -->
+```bash
+tmux new -n minecraft-server
+./start.sh
+```
+<!-- markdownlint-enable MD013 -->
+* set up 1.21.8 client instance in MultiMC
+  * created instance
+  * installed fabric 0.17.2
+  * downloaded and installed loader mods:
+    * sodium-fabric-0.6.13+mc1.21.6.jar
+    * lithium-fabric-0.18.0+mc1.21.8.jar
+    * malilib-fabric-1.21.8-0.25.5-sakura.4.jar
+    * minihud-fabric-1.21.8-0.36.4-sakura.1.jar
+    * tweakeroo-fabric-1.21.8-0.25.4-sakura.4.jar
+    * FreshAnimations_v1.10.zip
+    * entity_model_features_1.21.6-fabric-3.0.1.jar
+    * entity_texture_features_1.21.6-fabric-7.0.1.jar
+    * iris-fabric-1.9.1+mc1.21.7.jar
+  * selected Java: `/usr/lib/jvm/java-21-openjdk-amd64/bin/java`
+  * started and stopped client instance to populate `config/`
+  * copied `minihud.json` and `tweakeroo.json` from 1.21.5 instance `config/`
+  * downloaded and installed Vanilla Tweaks resource packs `VanillaTweaks_r503680_MC1.21.x.zip`:
+    * iron bars fix
+    * lower shield
+    * redstone devices:
+      * StickyPistonSides
+      * DirectionalHoppers
+      * DirectionalDispensersDroppers
+      * DirectionalObservers
+      * GroovyLevers
+      * RedstoneWireFix
+  * added server: `SADA on lizzy` at 10.0.0.81
+* started game and adjusted UI:
+  * FOV: 80
+  * Video:
+    * Brightness: Bright
+    * GUI Scale: 2x
+    * Weather: Fancy
+    * Leaves: Fancy
+  * enabled resource packs
+  * Music & Sound:
+    * Music: 50%
+    * Show Subtitles: on
+    * Directional Audio: on
+  * Optional Telemetry Data
+  * F3-h to enable advanced tooltips
+  * used `/gamerule` to confirm increased spawn chunks radius from 3 to 4 to keep iron farm loaded
+
+
+
+#### Fri 29-Aug-2025
+
+##### Miscellaneous
+
+* set up Brother DCP-L2550DW printer in eyre
+* updated `khawla` PyCharm to 2025.2.1
+
+
+##### SalishSeaCmd
+
+* squash-merged PR#100 to add support for `fir`
+
+
+
+#### Sat 30-Aug-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2` failed with:
+    `OSError: [Errno -70] NetCDF: DAP server error: 'https://salishsea.eos.ubc.ca/erddap/griddap/ubcSSf2DWaveFields30mV17-02'`
+  * re-ran it manually with success
+* `make_plots wwatch3 forecast` succeeded
+
+
+
+#### Sun 31-Aug-2025
+
+Rode to Sanctuary and back with Susan
+
+
+
+
+
+
+
+
+
 
 
 ##### salishsea-site
@@ -7745,8 +7971,7 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
     * SOG-Bloomcast-Ensemble - migrated on 15feb25 in PR#66
     * erddap-datasets - migrated on 10jul25 in PR#52
     * salishsea-site - migrated on 11jul25 in PR#119
-  * not yet tested
-    * Reshapr
+    * Reshapr - migrated on 28aug25 in PR#161
   * no workflows:
     * SOG
     * ECget
