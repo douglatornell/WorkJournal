@@ -7838,7 +7838,48 @@ Rode to Sanctuary and back with Susan
 
 
 
+#### Tue 2-Sep-2025
 
+Worked at ESB
+
+##### SalishSeaCast
+
+* `make_ssh_files forecast2` failed
+* `collect_NeahBay_ssh 06` failed at 08:45 due to no `etss.20250902/t06z_csv/9443090.csv`
+  in tarball
+  * re-ran at 11:27 and it failed again
+  * punted to Susan in #ssc-daily-progress for a plan to get automation restarted
+  * together we discovered that the tarball csv file template changed from:
+     `etss.{yyyymmdd}/t{forecast}z_csv/9443090.csv`
+    to:
+     `etss.{yyyymmdd}/t{forecast}z.csv/9443090.csv`
+  * changed `nowcast.yaml` and re-ran successfully at 12:51
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update h2 to 4.3.0 re: CVE-2025-57804 re: HTTP/2 request splitting
+  vulnerability
+  * erddap-datasets
+  * SOG-Bloomcast-Ensemble
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * salishsea-site
+  * moad_tools
+
+
+##### SalishSeaNowcast
+
+* Changed the Neah Bay ssh CSV file template in nowcast.yaml and associated
+  test files to match the surprise change by NOAA
+  * PR#381; squash-merged and deployed
+
+
+##### SalishSeaCmd
+
+* explored how to refactor run plug-in to use `UBC_CLUSTER` envvar that is only
+  loaded after `gcc` module has been loaded
+* did some work on replacing `@patch` mocks with `monkeypatch` fixtures; PR#???
 
 
 
