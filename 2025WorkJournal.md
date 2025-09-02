@@ -7816,6 +7816,29 @@ Rode to Sanctuary and back with Susan
 
 
 
+## September
+
+### Week 36
+
+#### Mon 1-Sep-2025
+
+**Statutory Holiday** - Labour Day
+
+##### SalishSeaCast
+
+* `crop_gribs 12` waited until time out at 10:46 to process 1 file
+* `archive_tarball` failed yesterday
+  * `/nearline/` on `graham` is not responding
+  * `/nearline/` on `nibi` does not exist yet
+
+
+##### FUN
+
+* started adding handling for TFSAs
+
+
+
+
 
 
 
