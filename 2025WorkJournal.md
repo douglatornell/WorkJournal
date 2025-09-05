@@ -7909,7 +7909,6 @@ Worked at ESB
 
 #### Thu 4-Sep-2025
 
-
 ##### SalishSeaCast
 
 * `crop_gribs 12` missed 1 file; delayed runs by ~2h
@@ -7931,12 +7930,52 @@ Worked at ESB
 
 
 
+#### Fri 5-Sep-2025
+
+Worked at ESB
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+  * Junqi joined the group as an M.Sc. student
+* cleaned up `/var/cache/apt/` re: nearly full `root` partition on `kudu`
+  * started with 14.2 GB in 3698 items
+  * ran `sudo apt-get autoclean`
+  * resulted in 8.2 GB in 3302 items
+* updated PyCharm on `kudu` to 2025.2.1.1
+  * test runner issue fixed 😌
+* discussed Vicente's move to running OceanParcels on `nibi` with Susan
 
 
 ##### SalishSeaCmd
 
+* squash-merged PR#102 re: replacing some `@patch` mocks with `monkeypatch` fixtures
+* change to default to `rrg-allen` account on `nibi`; PR#103; squash-merged
 * change `sockeye` to deal with `UBC_CLUSTER` envvar only set after `module load gcc`
-* can we run on `trillium`
+  * PR#104; squash-merged
+  * successfully tested on `sockeye`
+    * error message generation
+    * run with gcc module loaded
+* did more tests modernization; PR#105; squash-merged
+
+
+
+
+* upload nowcast-green u, v, w phys files for 2007 to `nibi` for Vicente
+  * `/scratch/` or `/project/`:
+    * figure out size of a year
+    * figure out quota implications
+  * think about `salloc` vs. web interface for interactive
+
+
+* Susan: do we want to set up Globus on `salish` or `skookum`, or engage compstaff
+  to set it up for `ocean` or wider EOAS context
+  * I should get to know Stephan and discuss bigger context with him
+
+
+##### SalishSeaCmd
+
+* can we run on `trillium`?
   * 400 Gb/s NDR InfiniBand
   * VAST file system
   * cpus: AMD EPYC 9655 (Zen 5) @ 2.6 GHz, 384MB cache L3
@@ -7959,7 +7998,7 @@ Worked at ESB
 
 ##### ERDDAP
 
-* update to v2.28.0
+* update to v2.28.1
   * review v2.27.0 changes because they will be included as we jump from v2.26.0
 
 
