@@ -6088,17 +6088,6 @@ Last Cardiac Rehab session.
 * refreshed mine and Susan's memories on where we left off in late-March
   * Susan needs to finish detailed review of row 13
 
-* continued work on 2xrez processing notebook
-
-  * reviewed row 8 grid cell adjustments with Susan
-  * reviewed tiles 13(9),6 and 13(9),7 grid cell adjustments with Susan
-  * waiting for her to finish detailed review of row 13 (9)
-* continued work on 2xrez verification notebook
-
-  * discussed row 9 - Carmanah Point to Fraser River with Susan
-  * added row 14(10) - Tsusiat Point to English Bay
-* changed row labels 5-9 to 9-13
-
 
 ##### SalishSeaTools
 
@@ -7879,31 +7868,74 @@ Worked at ESB
 
 * explored how to refactor run plug-in to use `UBC_CLUSTER` envvar that is only
   loaded after `gcc` module has been loaded
-* did some work on replacing `@patch` mocks with `monkeypatch` fixtures; PR#???
+* did some work on replacing `@patch` mocks with `monkeypatch` fixtures; PR#102
+
+
+##### Miscellaneous
+
+* updated PyCharm on `kudu` to 2025.2.1
+  * test runner stopped working 😱
 
 
 
+#### Wed 3-Sep-2025
 
+##### Miscellaneous
 
-
-
-
-##### salishsea-site
-
-* SMELT link in nav bar has no target
+* updated PyCharm on `khawla` to 2025.2.1.1
+  * test runner issue fixed 😌
 
 
 ##### SalishSeaNowcast
 
-* change config to upload forcing to `nibi` instead of `graham`
-  * need automation key activated on `nibi`
-* change config to drop forcing uploads to `optimum`
-* change automation workflow to run nowcast-green in place of nowcast-blue
-  * add output of 10min avg tide gauge station files
+* reverted uncommitted `tenacity` changes in `wave_height_period` figure module because the ERDDAP
+  latency issue seems to have been resolved by restoring the
+  `<updateEveryNMillis>10000</updateEveryNMillis>` element to `ubcSSf2DWaveFields30mV17-02` dataset
+
+
+##### 2x resolution SalishSeaCast
+
+* refreshed my memory on where we left off in early-August
+  * Susan added code to 2xrez processing notebook to smooth the Juan de Fuca mouth
+  * Susan finished detailed review of row 13
+  * Susan finished detailed review of row 14
+* continued work on 2xrez processing notebook:
+  * adjusted row 13 grid cells 6 and 7
+    * reviewed changes with Susan
+* continued work on 2xrez verification notebook
+  * discussed row 13 cell 9 with Susan
+
+
+
+#### Thu 4-Sep-2025
+
+
+##### SalishSeaCast
+
+* `crop_gribs 12` missed 1 file; delayed runs by ~2h
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing notebook:
+  * adjusted row 13 grid cells 9 to 11
+
+    * reviewed changes with Susan
+      * **do we want to open the river south of the east end of Swishwash Island in the 202405 bathy?**
+      * "connect tip of Alaska" ??? 13, 11
+* continued work on 2xrez verification notebook
+
+  * adjusted row 14 grid cells
+    * reviewed changes with Susan
+  * added row 15 -
+
+
+
 
 
 ##### SalishSeaCmd
 
+* change `sockeye` to deal with `UBC_CLUSTER` envvar only set after `module load gcc`
 * can we run on `trillium`
   * 400 Gb/s NDR InfiniBand
   * VAST file system
@@ -7918,16 +7950,36 @@ Worked at ESB
   * Lustre file system
   * cpus: AMD EPYC 9654 (Zen 4) @ 2.40 GHz, 384MB cache L3
   * `--ntasks-per-node=24 --cpus-per-task=8` for whole nodes
-* add support for `fir`
-  * 400 Gb/s NDR InfiniBand
-  * Lustre file system
-  * cpus: AMD EPYC 9655 (Zen 5) @ 2.7 GHz, 384MB cache L3
-  * `--ntasks-per-node=24 --cpus-per-task=8` for whole nodes
 * consider removing attached xios server feature
 * consider removing separate deflate job feature
 * change `orcinus` to use `slurm`
 * drop support for `optimum`
 * consider removing support for PBS/TORQUE scheduler
+
+
+##### ERDDAP
+
+* update to v2.28.0
+  * review v2.27.0 changes because they will be included as we jump from v2.26.0
+
+
+##### SalishSeaCast
+
+* backfill forcing uploads and AGRIF runs on `orcinus` from ~14jul
+
+
+##### salishsea-site
+
+* SMELT link in nav bar has no target
+
+
+##### SalishSeaNowcast
+
+* change config to upload forcing to `nibi` instead of `graham`
+  * need automation key activated on `nibi`
+* change config to drop forcing uploads to `optimum`
+* change automation workflow to run nowcast-green in place of nowcast-blue
+  * add output of 10min avg tide gauge station files
 
 
 
