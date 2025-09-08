@@ -7960,6 +7960,46 @@ Worked at ESB
 
 
 
+#### Sat 6-Sep-2025
+
+##### SalishSeaCast
+
+* USGS rivers obs were unavailable
+  * `make_runoff_file` used patching strategy
+
+Set up new desk in my office at home.
+
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing notebook:
+  * finished adjusting row 13 grid cell 11
+    * Susan says land at west end of Annacis Island is part of the island, not the low islets
+  * started adjusting row 14 cell 7
+
+* continued work on 2xrez verification notebook
+
+  * adjusted row 14 grid cells
+    * reviewed changes with Susan
+  * added row 15 -
+
+
+
+#### Sun 7-Sep-2025
+
+##### SalishSeaCast
+
+* USGS rivers obs were unavailable
+  * `make_runoff_file` used patching strategy
+
+
+##### FUN
+
+* continued adding handling for TFSAs
+
+
+
 
 * upload nowcast-green u, v, w phys files for 2007 to `nibi` for Vicente
   * `/scratch/` or `/project/`:
