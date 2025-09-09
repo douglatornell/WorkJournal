@@ -8063,9 +8063,45 @@ Set up new desk in my office at home.
 
 #### Tue 9-Sep-2025
 
+Worked at ESB
+
 ##### SalishSeaCast
 
 * USGS rivers obs successful for all rivers
+* `crop_gribs 12` missed 1 file; delayed runs by ~2h
+
+
+##### Miscellaneous
+
+* EOAS faculty research carnival
+* slack message to Vicente re: starting setup on `nibi` and meeting on Friday
+* slack message to Junqi re: Linux setup and meeting on Friday
+* started exploring `trillium`
+  * non-blocking 400 Gbits/s interconnect
+    * 2x `nibi` speed
+    * `fir` and `rorqual` have blocking
+    * so, maybe efficient for us on >1 node?
+  * storage is connected via envvars and symlinks in `$HOME/links/`
+  * minimal modules loaded on login
+    * `StdEnv/2023` must be loaded explicitly
+  * `debugjob` provides shorthand for some specific `salloc` interactive sessions
+  * `$HOME` and `$PROJECT` are read-only on compute nodes to force writing to `$SCRATCH`
+  * jobs must be whole-node
+    * memory requests are ignored
+      * jobs get all memory on as many nodes as requested
+  * min nodes is 1
+  * max nodes is 10 on default allocation
+  * min walltime is 15m
+  * max walltime is 24h
+  * probably need to include
+    `source /scinet/vast/etc/vastpreload-openmpi.bash # important if doing MPI-IO`
+    in job script to tune MPI IO for the VAST file system
+  * may need to experiment with `--bind-to-core`
+  * `jobperf JOBID` gives a live snapshot of the CPU and memory usage of your job
+    while it is running
+  * for data transfers >20G use `tri-dm2.scinet.utoronto.ca` or Globus
+  * do repo clones in `$HOME`, not `$PROJECT`
+  * `CC_CLUSTER` and `CLUSTER` are both set to `trillium` on login nodes
 
 
 
