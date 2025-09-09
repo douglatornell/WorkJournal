@@ -8000,10 +8000,87 @@ Set up new desk in my office at home.
 
 
 
+### Week 37
 
-* upload nowcast-green u, v, w phys files for 2007 to `nibi` for Vicente
+#### Mon 8-Sep-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2` produced a spiky plot with negative wave heights for Halibut Bank
+  and failed with `RuntimeError: NetCDF: DAP failure` for Sentry Shoal
+  * saw this a week or so ago
+  * successful on manual re-run at ~11:00
+* USGS rivers obs improved somewhat:
+  * NisquallyMcKenna time series was empty; `make_runoff_file` used patching strategy
+  * other rivers were successful
+
+
+##### Miscellaneous
+
+* NEMO seminar:
+  * Bill Merryfield, CCCma
+    * "Applications of ECCC's NEMO-based global climate models to seasonal and decadal predictions"
+    * between weather prediction models and climate models
+    * seasonal is 1-12 months, decadal is 1-10 years
+    * CanSIPS: Canadian Seasonal to Interannual Prediction System
+      * combines CanESM5 climate model and GEM5.2-NEMO weather prediction model
+    * Luiz da Silva, University of Manitoba to speak
+      * "ANHALYZE: Handling and Visualizing NEMO outputs"
+      * Python package for analysis of ANHA configs of NEMO
+      * side-project
+      * data analysis, analyses, visualizations
+      * `xarray` wrapper
+      * github.com/PORTAL-CEOS
+      * not much there there...
+* uploaded `nowcast-green.202111` u, v, w & T grid results files to
+  `nibi:/project/def-allen/SalishSea/nowcast-green.202111/` for Vicente with
+  `rsync -rtlv --relative *07/SalishSea_1h_*_grid_*.nc nibi:/project/def-allen/SalishSea/nowcast-green.202111/`
+  in `tmux` session `djl-nibi-xfer`
+  * 2 days took 12m20s
+  * group-write is not propagated, despite setgid permission bit being set
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update setup-micromamba to 2.0.6 re: dependency updates
+  * SalishSeaNowcast
+  * erddap-datasets
+  * rwhite/numeric_2024
+  * moad_tools
+  * gha-workflows
+  * AtlantisCmd
+  * salishsea-site
+* Squash-merged dependabot PRs to update codecov-action to 5.5.1 re: dependency updates
+  * SalishSeaNowcast
+  * gha-workflows
+  * AtlantisCmd
+* Squash-merged dependabot PR to update github-script to 8 re: dependency updates
+  * gha-workflows
+* Squash-merged pre-commit PR to update blacken-docs to 1.20.0 re: adding Python 3.14 support
+  * MoaceanParcels
+
+
+
+#### Tue 9-Sep-2025
+
+##### SalishSeaCast
+
+* USGS rivers obs successful for all rivers
+
+
+
+
+
+
+
+
+
+
+
+
+* upload nowcast-green u, v, w, T files for 2007 to `nibi` for Vicente
   * `/scratch/` or `/project/`:
-    * figure out size of a year
+    * size of a year: 678G
     * figure out quota implications
   * think about `salloc` vs. web interface for interactive
 
