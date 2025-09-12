@@ -8148,12 +8148,37 @@ Worked at ESB
 * updated pkgs & version used in `kudu` writing env
 * updated redirected links
   * still a problem with `linkcheck` not resolving anchor links on Alliance wiki
-* updated linging Miniconda references to Miniforge3
+    * `linkcheck_anchors_ignore_for_url` in `conf.py` is a work-around
+* updated lingering Miniconda references to Miniforge3
 * updated Miniforge installation instructions to cross-platform form that uses `uname`
+* `linkchekc` failed due to timeouts from `forge.ipsl.fr`, but they were transient
+  because a re-run of the action was successful
 
 
 
+#### Fri 12-Sep-2025
 
+##### Miscellaneous
+
+* MOAD group social with donuts from Lucky's
+  * postponed from 26aug
+  * Karyn's last group mtg
+  * papers published celebration for Karyn & Raisha
+* mtg w/ Vicente to start using `nibi` for OceanParcels runs
+* mtg w/ Junqi to start compute onboarding
+  * invited `Junqi-Qiu` to SalishSeaCast and UBC-MOAD GitHub orgs
+  * confirmed that `/data`, `/results`, and `/results2` are mounted on `fram`
+    which is the workstation under Junqi's desk
+  * confirmed that `/data/jqiu` and `/ocean/jqiu` exist and are set to group `sallen`
+
+
+##### SalishSeaCmd
+
+* dug into run failure on `sockeye`
+  * unresolved symbols in `xios_server`
+  * `ldd xio_server` showed 2 missing hdf5 libraries
+  * re-built XIOS; still missing hdf5 libraries
+    * looks like I need to load `hdf5/1.10.7-additional-bindings`
 
 
 
@@ -8175,6 +8200,7 @@ Worked at ESB
 * debug `sphinx linkcheck` not resolving anchor tags that exist
   * may be a linkcheck issue
   * `linkcheck_anchors_ignore_for_url` in `conf.py` seems to be a work-around
+* add note about setting up MFA
 
 
 ##### SalishSeaCmd
