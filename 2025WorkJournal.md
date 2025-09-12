@@ -8102,11 +8102,54 @@ Worked at ESB
   * for data transfers >20G use `tri-dm2.scinet.utoronto.ca` or Globus
   * do repo clones in `$HOME`, not `$PROJECT`
   * `CC_CLUSTER` and `CLUSTER` are both set to `trillium` on login nodes
+  * weekly office hours on Thursdays at noon Eastern
 
 
 
+#### Wed 10-Sep-2025
+
+##### SalishSeaCast
+
+* `crop_gribs 12` missed 1 file; delayed runs by ~2h
 
 
+##### Security Updates
+
+* Squash-merged dependabot PRs to update h2 to 4.3.0 re: CVE-2025-57804 re: HTTP/2 request splitting
+  vulnerability
+  * FUN
+  * SalishSeaTools
+
+
+##### SalishSeaTools
+
+* continued adding Karyn's `_salinityMatch()` function to `matchData()`; PR#
+  * continued work on `tests/salinityMatch_test.py` based on Karyn's notebook so that I have a
+    functional test as I integrate and refactor the `salinityMatch()` code
+
+
+
+#### Thu 11-Sep-2025
+
+##### SalishSeaCast
+
+* `crop_gribs 12` missed 1 file; delayed runs by ~2h
+
+
+##### Miscellaneous
+
+* set up meetings for tomorrow
+  * Vicente to start using `nibi` for OceanParcels runs
+  * Junqi to start onboarding
+
+
+##### MOAD/docs
+
+* updated pkgs & version used in `kudu` writing env
+* updated redirected links
+  * still a problem with `linkcheck` not resolving anchor links on Alliance wiki
+* updated linging Miniconda references to Miniforge3
+* updated Miniforge installation instructions to cross-platform form that uses `uname`
 
 
 
@@ -8124,6 +8167,14 @@ Worked at ESB
 * Susan: do we want to set up Globus on `salish` or `skookum`, or engage compstaff
   to set it up for `ocean` or wider EOAS context
   * I should get to know Stephan and discuss bigger context with him
+
+
+
+##### MOAD/docs
+
+* debug `sphinx linkcheck` not resolving anchor tags that exist
+  * may be a linkcheck issue
+  * `linkcheck_anchors_ignore_for_url` in `conf.py` seems to be a work-around
 
 
 ##### SalishSeaCmd
