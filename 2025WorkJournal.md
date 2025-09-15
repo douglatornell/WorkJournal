@@ -8151,7 +8151,7 @@ Worked at ESB
     * `linkcheck_anchors_ignore_for_url` in `conf.py` is a work-around
 * updated lingering Miniconda references to Miniforge3
 * updated Miniforge installation instructions to cross-platform form that uses `uname`
-* `linkchekc` failed due to timeouts from `forge.ipsl.fr`, but they were transient
+* `linkcheck` failed due to timeouts from `forge.ipsl.fr`, but they were transient
   because a re-run of the action was successful
 
 
@@ -8179,6 +8179,25 @@ Worked at ESB
   * `ldd xio_server` showed 2 missing hdf5 libraries
   * re-built XIOS; still missing hdf5 libraries
     * looks like I need to load `hdf5/1.10.7-additional-bindings`
+
+
+
+#### Sat 13-Sep-2025
+
+Rode the Boundary Bay Dyke trail from Mud Bay Park to Tsawwassen and back with lunch at the
+Boundary Bay Café
+
+
+
+#### Sun 14-Sep-2025
+
+
+##### FUN
+
+* see `FUN-notes`
+
+
+
 
 
 
