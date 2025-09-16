@@ -8166,7 +8166,7 @@ Worked at ESB
   * papers published celebration for Karyn & Raisha
 * mtg w/ Vicente to start using `nibi` for OceanParcels runs
 * mtg w/ Junqi to start compute onboarding
-  * invited `Junqi-Qiu` to SalishSeaCast and UBC-MOAD GitHub orgs
+  ·* invited `Junqi-Qiu` to SalishSeaCast and UBC-MOAD GitHub orgs
   * confirmed that `/data`, `/results`, and `/results2` are mounted on `fram`
     which is the workstation under Junqi's desk
   * confirmed that `/data/jqiu` and `/ocean/jqiu` exist and are set to group `sallen`
@@ -8198,14 +8198,76 @@ Boundary Bay Café
 
 
 
+### Week 38
+
+#### Mon 15-Sep-2025
+
+##### FUN
+
+* see `FUN-notes`
+
+
+##### SalishSeaTools
+
+* continued adding Karyn's `_salinityMatch()` function to `matchData()`; PR#
+  * finished writing `tests/salinityMatch_test.py` based on Karyn's notebook so that I have a
+    functional test as I integrate and refactor the `salinityMatch()` code
+  * added `_salinityMatch()` function to `matchData()` as `_salinity_match()`
 
 
 
-* upload nowcast-green u, v, w, T files for 2007 to `nibi` for Vicente
-  * `/scratch/` or `/project/`:
-    * size of a year: 678G
-    * figure out quota implications
-  * think about `salloc` vs. web interface for interactive
+#### Tue 16-Sep-2025
+
+Worked at home, then at ESB
+
+##### SalishSeaCast
+
+* `crop_gribs 12` missed 1 file; delayed runs by ~2h
+
+
+##### SalishSeaTools
+
+* continued adding Karyn's `_salinityMatch()` function to `matchData()`; PR#
+  * started adding unit tests
+
+
+##### Miscellaneous
+
+* Intro to Fir webinar
+  * Alex Raxoumov, SFU
+  * slides at https://training.westdri.ca | Getting started
+  * very biased to GPU nodes (160 nodes); more than other clusters, but also 864 CPU nodes
+  * 3 login nodes
+  * AlmaLinux 9.6 OS
+  * compute nodes have full Internet access
+  * node-local scratch storage is 7T
+  * `/scratch` purge policy is the same as `cedar`; email warnings ~6w before purge
+  * all `/project` files count against PI quota
+  * `quota --home` is alias for `diskusage_report`
+  * data transfer node will appear in coming months
+  * `/tmp` is RAM; counts as part of cgroup memory limit
+  * `/nearline` available to PIs only
+  * node pairs have 100-200 Gbps interconnect
+  * max walltime is 7d
+  * min walltime partition is 3h
+  * asked about memory locality management for single-threaded MPI jobs
+    * there are optimization strategies, but they are complicated; submit a ticket
+  * lots of details about GPUs and ensuring good utilization
+  * portal coming in October
+  * H100 GPUs are server-class; very poor rendering performance; use CPUs instead
+  * ~10 interactive nodes; max runtime of 3h
+  * JupyterHub is available
+  * Open OnDemand coming; maybe in November
+  * `conda` note supported; see wiki re: Anaconda
+* EOAS symposium
+  * David Neelin, UCLA, Precipitation and heat wave extremes
+* Mtg w/ Vicente re: Parcels on `nibi`
+  * `salloc --time=1:0:0 --mem-per-cpu=4G --ntasks=1 --account=rrg-allen`
+
+
+
+
+
 
 
 * Susan: do we want to set up Globus on `salish` or `skookum`, or engage compstaff
