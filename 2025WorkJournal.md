@@ -7454,7 +7454,7 @@ Worked at ESB.
     * `XIOS_HOME=$PROJECT/$USER/MEOPAR/XIOS-2/ ./makenemo -n SalishSeaCast -m GCC_FIR -j 8`
     * success in 68 seconds
   * built REBUILD_NEMO:
-    * `XIOS_HOME=$PROJECT/$USER/MEOPAR/XIOS-2/ ./maketools -n REBUILD_NEMO -m GCC_NIBI -j1`
+    * `XIOS_HOME=$PROJECT/$USER/MEOPAR/XIOS-2/ ./maketools -n REBUILD_NEMO -m GCC_FIR -j1`
 * install `miniforge3`
   <!-- markdownlint-disable MD013 -->
   ```bash
@@ -8300,6 +8300,56 @@ Worked at home, then at ESB
 
 
 
+#### Thu 18-Sep-2025
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* no obs for USGS rivers SnohomishMonroe & SkagitMountVernon
+
+
+##### Miscellaneous
+
+* EOAS Welcome BBQ
+* updating SalishSeaCast/docs env resolved long-standing `jupyter-core`
+  security alert by installing v5.8.1 that dependabot can't seem to find
+
+
+##### MOAD/docs
+
+* continued updating Alliance setup section from `graham` to `nibi`; PR#55
+  * finished `alliance-computing` page
+  *
+
+
+##### SalishSeaCast/docs
+
+* updated pkgs & versions from new env on `kudu`
+* resolved long-standing `jupyter-core` security alert by installing
+  v5.8.1 that dependabot can't seem to find
+* added `linkcheck_anchors_ignore_for_url` to `conf.py` to work around anchor
+  tag issue on Alliance wiki
+* updated Alliance setup section from `graham` to `nibi`; PR#67
+
+
+##### nibi
+
+* tested using `$HOME` for repo clones:
+  * `nibi:$HOME/` before I started new setup: 4G
+    * `MiniForge3` is already installed
+    * `conda-envs/` is on `$PROJECT`: 193M in `salishsea-cmd`
+    * `$PROJECT/MEOPAR/`: 3.6G
+  * `nibi:$HOME/` after cloning repos (including `analysis-doug`) but before
+    XIOS and NEMO builds: 7.5G
+    * removed `$PROJECT/conda-envs/`
+    * after install of `SalishSeaCmd`: 7.8G
+    * after XIOS and NEMO builds: 8G
+* ran 01mar23-nibi-rrg-12x28 to test installation and add another row to the
+  scaling analysis sheet; 12m14s
+* cleaned away $PROJECT/$USER/MEOPAR/
+
+
 
 
 * Mtg w/ Vicente re: Parcels on `nibi`
@@ -8308,15 +8358,6 @@ Worked at home, then at ESB
 * Susan: do we want to set up Globus on `salish` or `skookum`, or engage compstaff
   to set it up for `ocean` or wider EOAS context
   * I should get to know Stephan and discuss bigger context with him
-
-
-
-##### MOAD/docs
-
-* debug `sphinx linkcheck` not resolving anchor tags that exist
-  * may be a linkcheck issue
-  * `linkcheck_anchors_ignore_for_url` in `conf.py` seems to be a work-around
-* add note about setting up MFA
 
 
 ##### SalishSeaCmd
