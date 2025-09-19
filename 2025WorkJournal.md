@@ -8320,7 +8320,6 @@ Worked at ESB
 
 * continued updating Alliance setup section from `graham` to `nibi`; PR#55
   * finished `alliance-computing` page
-  *
 
 
 ##### SalishSeaCast/docs
@@ -8351,9 +8350,38 @@ Worked at ESB
 
 
 
+#### Fri 19-Sep-2025
 
+Worked at ESB
+
+##### SalishSeaCast
+
+* `orcinus` login nodes are back!
+* uploaded ed25519 key to `orcinus`
+
+
+##### Miscellaneous
+
+* MOAD mtg; see whiteboard
+* mtg w/ Jose to test JupyterLab in Open OnDemand interactive desktop session
+  on `nibi`
 * Mtg w/ Vicente re: Parcels on `nibi`
   * `salloc --time=1:0:0 --mem-per-cpu=4G --ntasks=1 --account=rrg-allen`
+* mtg w/ Junqi to continue onboarding
+
+
+
+
+  * figure out decode warning on coord file with `decode_times=False`
+
+
+
+
+
+
+
+* think about running Reshapr on `nibi` with 768G per node
+
 
 * Susan: do we want to set up Globus on `salish` or `skookum`, or engage compstaff
   to set it up for `ocean` or wider EOAS context
