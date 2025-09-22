@@ -7685,7 +7685,7 @@ Worked at ESB.
 * updated OS packages and auto-removed outdated packages
 * rebooted
 * set up 1.21.8 server
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   mkdir ~/Games/MinecraftFabric1.21.8Server
   cd ~/Games/MinecraftFabric1.21.8Server
@@ -7694,41 +7694,41 @@ Worked at ESB.
   cp banned-* eula.txt ops.json whitelist.json start.sh ../MinecraftFabric1.21.8Server/
   popd
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
   * edited `start.sh` to:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
     ```bash
     #!/usr/bin/env bash
     java -Xmx2G -jar fabric-server-mc.1.21.8-loader.0.17.2-launcher.1.1.0.jar nogui
     ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * launched and stopped server to create instance directories and files
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   ./start.sh
     ...
   /stop
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * edited `server.properties` to sync with 1.21.5 settings
 * installed mods, and rsync-ed `1-20-1-25jul23` world tree:
-<!-- markdownlint-disable MD013 -->
+<!-- markdownlint-disable MD031 -->
 ```bash
 cd ~/Games/MinecraftFabric1.21.8Server/mods/
 curl -LO https://github.com/CaffeineMC/lithium/releases/download/mc1.21.8-0.18.0/lithium-fabric-0.18.0+mc1.21.8.jar
 cd ~/Games/MinecraftFabric1.21.8Server
 rsync -av ../MinecraftFabric1.21.5Server/1-20-1-25jul23 ./
 ```
-<!-- markdownlint-enable MD013 -->
+<!-- markdownlint-enable MD031 -->
 * downloaded and unzipped on `khawla` VanillaTweaks double shulker shells v1.3.13 datapack
   * rsync-ed it to `Games/MinecraftFabric1.21.8Server/1-20-1-25jul23/datapacks/` and removed v1.13.11
 * launched server in `tmux`
-<!-- markdownlint-disable MD013 -->
+<!-- markdownlint-disable MD031 -->
 ```bash
 tmux new -n minecraft-server
 ./start.sh
 ```
-<!-- markdownlint-enable MD013 -->
+<!-- markdownlint-enable MD031 -->
 * set up 1.21.8 client instance in MultiMC
   * created instance
   * installed fabric 0.17.2
@@ -8191,7 +8191,6 @@ Boundary Bay Café
 
 #### Sun 14-Sep-2025
 
-
 ##### FUN
 
 * see `FUN-notes`
@@ -8371,16 +8370,38 @@ Worked at ESB
 
 
 
+#### Sat 20-Sep-2025
 
-  * figure out decode warning on coord file with `decode_times=False`
+##### SalishSeaCast
+
+* updated `orcinus` ssh client configs on `khawla`, `kudu`, and `ocean` machines
+  * change to ed25519 key for interactive sessions
+  * drop `+ssh-rsa` exceptions for automation logins
+    * `orcinus` ssh server has been updated to OpenSSH-8.0 so we no longer have to enable support
+      for deprecated rsa key types
+* `nibi:/nearline/` exists!
+* started trying to backfill forcing to `orcinus`
+  * `/home/sallen/MEOPAR/` is now `/global/home/sallen/MEOPAR/`
+  * I don't have write access to `/global/home/sallen/MEOPAR/`
+    * I suspect that's due to the 1000271 group (that might have been called `wg-moad`) having
+      disappeared
+  * TODO: contact Mark
 
 
 
+#### Sun 21-Sep-2025
+
+##### FUN
+
+* see `FUN-notes`
 
 
 
+* figure out decode warning on coord file with `decode_times=False`
 
 * think about running Reshapr on `nibi` with 768G per node
+
+
 
 
 * Susan: do we want to set up Globus on `salish` or `skookum`, or engage compstaff
@@ -8429,6 +8450,7 @@ Worked at ESB
 
 ##### SalishSeaNowcast
 
+* generate a new ed25519 key for automation logins and change to use it everywhere except `optimum`
 * change config to upload forcing to `nibi` instead of `graham`
   * need automation key activated on `nibi`
 * change config to drop forcing uploads to `optimum`
