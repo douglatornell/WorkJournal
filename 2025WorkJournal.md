@@ -7916,17 +7916,11 @@ Worked at ESB
 
 ##### 2x resolution SalishSeaCast
 
-* continued work on 2xrez processing notebook:
+* continued work on 2xrez processing and verification notebooks:
   * adjusted row 13 grid cells 9 to 11
-
     * reviewed changes with Susan
       * **do we want to open the river south of the east end of Swishwash Island in the 202405 bathy?**
       * "connect tip of Alaska" ??? 13, 11
-* continued work on 2xrez verification notebook
-
-  * adjusted row 14 grid cells
-    * reviewed changes with Susan
-  * added row 15 -
 
 
 
@@ -7973,16 +7967,10 @@ Set up new desk in my office at home.
 
 ##### 2x resolution SalishSeaCast
 
-* continued work on 2xrez processing notebook:
+* continued work on 2xrez processing and verification notebooks:
   * finished adjusting row 13 grid cell 11
     * Susan says land at west end of Annacis Island is part of the island, not the low islets
   * started adjusting row 14 cell 7
-
-* continued work on 2xrez verification notebook
-
-  * adjusted row 14 grid cells
-    * reviewed changes with Susan
-  * added row 15 -
 
 
 
@@ -8397,7 +8385,224 @@ Worked at ESB
 
 
 
+### Week 39
+
+#### Mon 22-Sep-2025
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update setup-micromamba to 2.0.7 re: invalid bin hash issue:
+  * SalishSeaNowcast
+  * rwhite/numeric_2024
+  * erddap-datasets
+  * moad_tools
+  * gha-workflows
+  * AtlantisCmd
+  * salishsea-site
+* Squash-merged pre-commit PR to update black to 25.9.0 re: style & performance updates:
+  * NEMO_Nowcast
+  * SalishSeaNowcast
+  * NEMO-Cmd
+  * erddap-datasets
+  * SalishSeaCmd
+  * SOG-Bloomcast-Ensemble
+  * salishsea-site
+  * SalishSeaTools
+  * cookiecutter-MOAD-pypkg
+  * gha-workflows
+  * MoaceanParcels
+  * Reshapr
+  * moad_tools
+  * AtlantisCmd
+
+
+##### SalishSeaCast
+
+* backfill forcing to `orcinus`
+  * resolved login errors by commenting out module loads in `.bashrc`
+  * confirmed that `git` 2.43 is part of OS install
+  * emailed Mark re: need for 1000271 group called `wg-moad`
+    * he fixed it
+
+
+##### Miscellaneous
+
+* Susan booked flights for our trip to China
+
+
+##### FUN
+
+* see `FUN-notes`
+
+
+
+#### Tue 23-Sep-2025
+
+##### Miscellaneous
+
+* ERDDAP showcase
+  * MQTT support, Aysuh Singh, Google Summer of Code
+    * https://medium.com/@ayushsingh01042003/contents-of-the-blog-6692f6376b9c
+    * MQTT protocol:
+      * real-time data ingestion and notifications
+      * OASIS standard messaging protocol for the Internet of Things (IoT)
+    * HiveMQ library
+    * ERDDAP can subscribe to MQTT brokers
+    * ERDDAP can publish MQTT notifications to other MQTT brokers
+    * ERDDAP can't publish MQTT data streams??
+    * facilitates operation with WIS 2.0 standard from WMO
+    * side-project resulted in envvar parsing in `dataset.xml`; now enabled by default
+  * JTE pages update, Harish Peddina, Google Summer of Code
+    * Java Template Engine
+    * https://medium.com/@peddinaharish2003/google-summer-of-code-2025-with-ioos-erddap-html-templating-with-jte-50cd9597ebdf
+    * groundwork for future UI changes
+    * will replace old string-builder approach
+    * early days
+  * erddapLogs, Callum Rollo, Voice of the Ocean (VOTO); IOOS 2024 code sprint
+    * https://github.com/callumrollo/erddaplogs
+    * who is using ERDDAP and how
+    * Python pkg
+    * used on nginx or Apache logs, not ERDDAP internal logs
+    * exports a CSV
+    * VOTO have processed results into a dataset that they publish on their ERDDAP
+      via a daily cron job
+    * we're not the only ones that are plagued by bots!
+  * Prometheus dashboards, Chris John, NOAA
+    * similar to erddapLogs, but different: more related to internal operation of ERDDAP server
+    * machine readable metric export
+    * Prometheus: open source Java client/server metrics tool
+    * use Grafana to create pretty dashboards
+    * docker to manage Prometheus and Grafana servers
+    * available on recent-version ERDDAP servers at `/metrics`
+      * we have it!
+  * coming in 2.29:
+    * MQTT
+    * JTE
+    * more Prometheus metrics
+    * probably release in late Oct
+
+
+##### SalishSeaCast
+
+* backfill forcing to `orcinus`
+  * automation worked overnight to the extent that it could because I had only changed the `ssh dir`
+    path in `nowcast.yaml` on `skookum` to `/global/home/sallen/MEOPAR/sshNeahBay/`
+  * `upload_forcing orcinus nowcast+ 2025-07-25 --debug` success!
+  * `upload_forcing orcinus turbidity 2025-07-25 --debug` success!
+  * looped those 2 workers for 26-27 jul, 4-31 aug, and 1-23 sep
+* prep to backfill `nowcast-agrif` runs since 14jul:
+  * `rsync -rltv /results/SalishSea/nowcast-agrif.201702/13jul25 orcinus:/global/scratch/dlatorne/nowcast-agrif/`
+  * installed Miniforge on `orcinus`
+  * VSCode can't connect reliably because it keeps detecting a host key change
+  * set `orcinus-nowcast-agrif` host on `skookum` to `seawolf2` in hope of consistent host key for
+    automation
+  * set `orcinus` host on `khawla` to `seawolf2` in hope of consistent host key for VSCode
+    * VSCode still doesn't work because it can't find the server port?
+  * `make_forcing_links` fails with `FileNotFoundError: [Errno 2] No such file` in `_clear_links()`
+* `download_weather 00 1km` and `download_weather 12 1km` both timed out on the 1st file
+  * 12Z files appeared to be on the server late
+    * re-ran `download_weather 12 1km`
+      * failed with `--backfill` flag at the `001/` directory level; worked at the `12/` level
+        after I deleted `001/`
+      * time out due to missing `001/*VGRD_TGL_10*` file
+
+
+
+#### Wed 24-Sep-2025
+
+##### Miscellaneous
+
+* JupyterLab on `nibi`
+  * Sharcnet webinar
+  * Jinhui Qin, Western
+  * pre-configured JupyterLab env is built on local storage of compute node so non-persistent
+  * use launch from desktop instance to use your own custom (persistent) env
+  * heavy use of `pip install --no-index` to force installation of wheels from cluster wheelhouse
+    but not PyPI
+  * case 3 demonstrated running jupyterlab in Anaconda Apptainer based on a Docker container
+    * container doesn't include a browser
+* Updated `khawla` PyCharm to 2025.2.2
+
+
+##### SalishSeaNowcast
+
+* started changes for updated `orcinus` cluster; PR#386
+  * updated paths for forcing files to prefix them with `/global`
+  * updated tmp run dir path to prefix it with `/global`
+  * deployed PR to `skookum` for testing
+  * added production config tests for `run_NEMO_agrif` worker
+  * updated `salishsea` command path to prefix it with `/global`
+
+
+##### SalishSeaCast
+
+* started upload of `nowcast-green` Aug results tarball and index to `nibi` in `tmux` session
+  * started at ~12:12 Eastern?
+  * failed at ~25% complete due to broken pipe at 15:48 Eastern
+  * restarted at ~19:05 Eastern
+* debugged `make_forcing_links nowcast-agrif` failure
+  * another path issue
+  * added fix to PR#386
+* `run_NEMO_agrif 2025-07-14` gives the impression that it runs successfully, but the `salishsea run`
+  command that it spawns fails with `FileNotFoundError: [Errno 2] No such file or directory: '/home/dlatorne'`
+  in `prepare.check_nemo_exec()`
+  * the generated YAML file is littered with `/home/dlatorne/` paths that need to be changed to
+    `/global/home/dlatorne`
+    * need to update `SS-run-sets/v201702/smelt-agrif/orcinus_nowcast_template.yaml`
+* `download_weather 00 1km` and `download_weather 12 1km` both timed out on files in hout 001
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * adjusted row 14 cells 7, 10
+    * reviewed changes with Susan
+
+  * added row 15 -
+
+
+##### Security Updates
+
+* dismissed dependabot alerts re: `future` package as in accurate:
+  * See https://github.com/PythonCharmers/python-future/issues/650#issuecomment-3252409616
+  * SalishSeaNowcast
+  * djl-cookiecutter-pypkg
+
+
+
+#### Thu 25-Sep-2025
+
+Worked at ESB in the afternoon
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update pip to 25.2 re: symbolic link extraction vulnerability:
+  * SalishSeaCmd
+
+
+##### SalishSeaCmd
+
+* started adding support for `trillium` by giving the task to the PyCharm Junie AI agent
+  * branch: `add-trillium-hpc`
+  * PR#108
+  * instructions to June:
+      Please add support for a new HPC system called trillium using the support for
+      the system call fir for guidance. Please update the run.py and test_run.py
+      modules.
+  * I had to make 2 minor edits concerning escaping of `{}` characters around
+    envvars in test results expectation strings to get the generated tests to pass.
+  * Preliminary inspection of the code that Junie generated shows that it is very
+    similar to the code I wrote to add support for `fir`.
+
+
+
+
+
+
+
 * figure out decode warning on coord file with `decode_times=False`
+  * I can't reproduce Vicente's warning
+
 
 * think about running Reshapr on `nibi` with 768G per node
 
