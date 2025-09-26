@@ -8628,25 +8628,98 @@ Worked at ESB in the afternoon
 
 ##### `trillium`
 
-* continues setup for scaling tests
-* cloned repos in `$HOME/MEOPARS/`
-* did git configuration
-* did `.bashrc` edits
+* continued setup for scaling tests
+  * cloned repos in `$HOME/MEOPARS/`
+  * did git configuration
+  * did `.bashrc` edits
   * I like the colourized `PS1` that is a compromise between mine and theirs
   * `chmod -v` is handy to avoid the need to check after `chmod`
-* installed and configured Miniforge
+  * installed and configured Miniforge
 
 
 ##### SalishSeaCast
 
-* `download_weather 00 1km` both timed out on file in hour 001
+* `download_weather 00 1km` timed out on file in hour 001
+
+
+
+#### Fri 26-Sep-2025
+
+Worked at ESB.
+
+Farewell for Ilias at Brown's
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update jupyterlab to 4.4.8 re: reverse tabnapping
+  attack vulnerability:
+  * SOG-Bloomcast-Ensemble
+  * MoaceanParcels
+  * SalishSeaTools
+
+
+##### `trillium`
+
+* continued setup for scaling tests
+  * installed `SalishSeaCmd`
+  * copied `XIOS-ARCH` files for `nibi` to create new files for `trillium`
+    * TODO: commit and push
+  * build XIOS-2: 1m27s
+  * copied NEMO arch file for `nibi` to create new file for `trillium`
+    * TODO: commit and push
+  * built NEMO SalishSeaCast: 44s
+  * built REBUILD_NEMO
+* uploaded 28feb23 restart files to `links/scratch/results/28feb23/`
+* uploaded feb-apr 2023 forcing files to `trillium`:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  yyyy=2023; rsync -tLv /results/forcing/atmospheric/GEM2.5/operational/ops_y${yyyy}m0[2-4]*.nc \
+    trillium:links/projects/def-allen/SalishSea/forcing/atmospheric/GEM2.5/operational/
+  yyyy=2023; rsync -tLv /results/forcing/atmospheric/continental2.5/nemo_forcing/hrdps_y${yyyy}m0[2-4]*.nc \
+    trillium:links/projects/def-allen/SalishSea/forcing/atmospheric/continental2.5/nemo_forcing/
+  yyyy=2023; rsync -tLv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}m0[2-4]*.nc \
+    trillium:links/projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
+  yyyy=2023; rsync -tLv /results/forcing/rivers/R202108Dailies_y${yyyy}m0[2-4]*.nc \
+    trillium:links/projects/def-allen/SalishSea/forcing/rivers/
+  yyyy=2023; rsync -tLv /results/forcing/rivers/river_turb/riverTurbDaily2_y${yyyy}m0[2-4]*.nc \
+    trillium:links/projects/def-allen/SalishSea/forcing/rivers/river_turb/
+  yyyy=2023; rsync -tLv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}m0[2-4]*.nc \
+    trillium:links/projects/def-allen/SalishSea/forcing/LiveOcean/
+  ```
+  <!-- markdownlint-enable MD013 -->
+* discoverd that Junie missed adding `trillium` at line 275 in `run()` function
+* added `sq` and `sa` aliases to `.bashrc`
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  alias sq='squeue -o "%.12i %.8u %.9a %.22j %.2t %.10r %.19S %.10M %.10L %.6D %.5C %P %N"'
+  alias sa="sacct -u $USER -o jobid,account,jobname%20,partition%17,state,allocnodes,maxrss,exitcode,nodelist"
+  <!-- markdownlint-enable MD013 -->
+* ran 11x32 with `--ntasks-per-node=192`
+  * insta-run with email notification
+  * 10m9s, ~14% faster than `nibi`
+* ran 14x25 with `--ntasks-per-node=192`
+  * insta-run; 10m41s
+* ran 21x38 with `--ntasks-per-node=192`
+  * insta-run; 8m38s; 34s slower than `nibi`
+
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* got photos taken for visa
+* met w/ Junqi for onboarding
+
+
+##### SalishSeaCast
+
+* `download_weather * 1km` were both successful
 
 
 
 
 
-figure out why `conda config --set auto_activate_base false` disappeared from docs
-for Alliance setup
+* commit and push XIOS arch files on `fir`
 
 
 * figure out decode warning on coord file with `decode_times=False`
