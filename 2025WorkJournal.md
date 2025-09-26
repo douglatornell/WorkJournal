@@ -8064,6 +8064,10 @@ Worked at ESB
 * EOAS faculty research carnival
 * slack message to Vicente re: starting setup on `nibi` and meeting on Friday
 * slack message to Junqi re: Linux setup and meeting on Friday
+
+
+##### `trillium`
+
 * started exploring `trillium`
   * non-blocking 400 Gbits/s interconnect
     * 2x `nibi` speed
@@ -8259,8 +8263,8 @@ Worked at home, then at ESB
 
 ##### Security Updates
 
-* Squash-merged dependabot PR to update h2 to 4.3.0 re: CVE-2025-57804 re: HTTP/2 request splitting
-  vulnerability
+* Squash-merged dependabot PR to update h2 to 4.3.0 re: CVE-2025-57804
+  re: HTTP/2 request splitting vulnerability
   * MoaceanParcels
 
 
@@ -8557,7 +8561,6 @@ Worked at ESB
 * continued work on 2xrez processing and verification notebooks:
   * adjusted row 14 cells 7, 10
     * reviewed changes with Susan
-
   * added row 15 -
 
 
@@ -8574,10 +8577,32 @@ Worked at ESB
 
 Worked at ESB in the afternoon
 
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * reviewed row 15 with Susan
+
+
 ##### Security Updates
 
 * Squash-merged dependabot PRs to update pip to 25.2 re: symbolic link extraction vulnerability:
   * SalishSeaCmd
+  * SalishSeaTools
+  * gha-workflows
+  * FUN
+  * AtlantisCmd
+  * SalishSeaNowcast
+  * cookiecutter-MOAD-pypkg
+  * cookiecutter-analysis-repo
+  * salishsea-site
+  * NEMO_Nowcast
+  * moad_tools
+  * MoaceanParcels
+  * SOG-Bloomcast-Ensemble
+* Squash-merged dependabot PR to update h2 to 4.3.0 re: CVE-2025-57804
+  re: HTTP/2 request splitting vulnerability
+  * NEMO_Nowcast
 
 
 ##### SalishSeaCmd
@@ -8595,9 +8620,33 @@ Worked at ESB in the afternoon
     similar to the code I wrote to add support for `fir`.
 
 
+##### Miscellaneous
+
+* met with Andrew Shao while he was on campus to give a seminar in CS
+* Phys Ocgy seminar by Ilias
+
+
+##### `trillium`
+
+* continues setup for scaling tests
+* cloned repos in `$HOME/MEOPARS/`
+* did git configuration
+* did `.bashrc` edits
+  * I like the colourized `PS1` that is a compromise between mine and theirs
+  * `chmod -v` is handy to avoid the need to check after `chmod`
+* installed and configured Miniforge
+
+
+##### SalishSeaCast
+
+* `download_weather 00 1km` both timed out on file in hour 001
 
 
 
+
+
+figure out why `conda config --set auto_activate_base false` disappeared from docs
+for Alliance setup
 
 
 * figure out decode warning on coord file with `decode_times=False`
