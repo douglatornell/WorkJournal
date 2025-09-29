@@ -8717,6 +8717,29 @@ Farewell for Ilias at Brown's
 
 
 
+#### Sat 27-Sep-2025
+
+##### SalishSeaCmd
+
+* continued adding support for `trillium` by giving the task to the PyCharm Junie AI agent
+  * Junie can't run unit tests from prompts; I had to run the test and copy/past the results
+  * after a very specific prompt, Junie added `trillium` to the `job_queue_cmd` dict in `run.run()`
+  * further prompts were necessary to get it to add tests for `trillium` to `TestRun` and it still
+    didn't add all of the tests that matched the pattern of `nibi` tests in that class
+
+
+
+#### Sun 28-Sep-2025
+
+##### SalishSeaCast
+
+* confirmed that aug25 tarball upload to `nibi:/nearline/` was complete
+  * deleted files from ocean; shut down `tmux` session
+* recorded Susan's 01jan11 182d carbon runs on `nibi` because they appear to be faster after the
+  22-26sep maintenance shutdown
+  * 9m4s and 9m14s per model day for 182d run; ~14 to ~16% faster than before shutdown
+
+
 
 
 * commit and push XIOS arch files on `fir`
@@ -8738,11 +8761,7 @@ Farewell for Ilias at Brown's
 
 ##### SalishSeaCmd
 
-* can we run on `trillium`?
-  * 400 Gb/s NDR InfiniBand
-  * VAST file system
-  * cpus: AMD EPYC 9655 (Zen 5) @ 2.6 GHz, 384MB cache L3
-  * no mention of special tasks directives for whole nodes
+* change `orcinus` to use `slurm`
 * update scaling tests on `narval` with `StdEnv/2023`
   * 100 Gb/s InfiniBand Mellanox HDR interconnect
   * Lustre file system
@@ -8754,7 +8773,6 @@ Farewell for Ilias at Brown's
   * `--ntasks-per-node=24 --cpus-per-task=8` for whole nodes
 * consider removing attached xios server feature
 * consider removing separate deflate job feature
-* change `orcinus` to use `slurm`
 * drop support for `optimum`
 * consider removing support for PBS/TORQUE scheduler
 
@@ -8767,7 +8785,7 @@ Farewell for Ilias at Brown's
 
 ##### SalishSeaCast
 
-* backfill forcing uploads and AGRIF runs on `orcinus` from ~14jul
+* backfill AGRIF runs on `orcinus` from ~14jul
 
 
 ##### salishsea-site
