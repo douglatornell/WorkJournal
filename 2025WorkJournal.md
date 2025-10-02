@@ -8561,7 +8561,7 @@ Worked at ESB
 * continued work on 2xrez processing and verification notebooks:
   * adjusted row 14 cells 7, 10
     * reviewed changes with Susan
-  * added row 15 -
+  * added row 15 - Klanawa River to Cypress Mountain
 
 
 ##### Security Updates
@@ -8671,7 +8671,7 @@ Farewell for Ilias at Brown's
   * built REBUILD_NEMO
 * uploaded 28feb23 restart files to `links/scratch/results/28feb23/`
 * uploaded feb-apr 2023 forcing files to `trillium`:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   yyyy=2023; rsync -tLv /results/forcing/atmospheric/GEM2.5/operational/ops_y${yyyy}m0[2-4]*.nc \
     trillium:links/projects/def-allen/SalishSea/forcing/atmospheric/GEM2.5/operational/
@@ -8686,14 +8686,15 @@ Farewell for Ilias at Brown's
   yyyy=2023; rsync -tLv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}m0[2-4]*.nc \
     trillium:links/projects/def-allen/SalishSea/forcing/LiveOcean/
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * discoverd that Junie missed adding `trillium` at line 275 in `run()` function
 * added `sq` and `sa` aliases to `.bashrc`
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   alias sq='squeue -o "%.12i %.8u %.9a %.22j %.2t %.10r %.19S %.10M %.10L %.6D %.5C %P %N"'
   alias sa="sacct -u $USER -o jobid,account,jobname%20,partition%17,state,allocnodes,maxrss,exitcode,nodelist"
-  <!-- markdownlint-enable MD013 -->
+  ```
+  <!-- markdownlint-enable MD031 -->
 * ran 11x32 with `--ntasks-per-node=192`
   * insta-run with email notification
   * 10m9s, ~14% faster than `nibi`
@@ -8741,6 +8742,130 @@ Farewell for Ilias at Brown's
 
 
 
+### Week 40
+
+#### Mon 29-Sep-2025
+
+##### SalishSeaNowcast
+
+* tested master branch of `cfgrib` on `khawla` to find out if their PR#417 resolves their issue#414
+  that has me pinning `xarray` at 2025.1.1 re: our issue#335 (`FutureWarning` in `crop_gribs`)
+  * reproduced issue#335 with `xarray=2025.9.0` and `cfgrib=0.9.15`
+  * updated the dev env to use `cfgrib@1022952` from its `master` branch, and the `FutureWarning`
+    is gone
+  * added a comment to https://github.com/ecmwf/cfgrib/issues/414
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * adjusted row 15 cells 6, 7 & 9
+    * reviewed changes with Susan
+
+
+##### `trillium`
+
+* continued scaling tests
+  * remembered that `trillium` has special configuration to tune VAST file system for MPI i/o
+    `source /scinet/vast/etc/vastpreload-openmpi.bash`
+  * re-ran 11x32 1d test with that and `module load gcc/12.3` added to the batch script
+    * insta-run; 20m3s 😱
+    * memory use:
+      * 27% of node total memory
+      * ~2G virtual, 1.4G resident per NEMO and at
+      * at least 16G virtual, 14G resident for XIOS
+    * cpu use is >97%
+  * re-ran 11x32 1d test with `module load gcc/12.3` but no `vastpreload` added to the batch script
+    * insta-run; 10m4s
+
+
+
+#### Tue 30-Sep-2025
+
+**Statutory Holiday** - Truth & Reconciliation Day
+
+##### SalishSeaNowcast
+
+* no USGS river obs
+* `archive_tarball` failed due to no `robot` host on `nibi`
+  * started upload of `nowcast-green` Sep results tarball and index to `nibi` in `tmux` session
+    * started at 16:12 Eastern
+    * finished at 03:17 Eastern; ~11h
+* continued trying to get `nowcast-agrif` running on `orcinus`
+  * hacked `/global/home/dlatorne/nowcast-agrif-sys/SS-run-sets/v201702/smelt-agrif/orcinus_nowcast_template.yaml`
+    to prefix all `/home/dlatorne/...` paths with `/global`
+  * tried `run_NEMO_agrif orcinus nowcast-agrif 2025-07-14` on `skookum`
+    * failed in `_launch_run()`
+  * tried
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    salishsea run \
+      /global/home/dlatorne/nowcast-agrif-sys/runs/14jul25nowcast-agrif.yaml \
+      /global/scratch/dlatorne/nowcast-agrif/14jul25 \
+      --debug
+    ```
+    <!-- markdownlint-enable MD031 -->
+    * failed with
+      nemo_cmd.combine ERROR: /global/home/dlatorne/nowcast-agrif-sys/NEMO-3.6-code/NEMOGCM/CONFIG/../TOOLS/REBUILD_NEMO/rebuild_nemo.exe not found - did you forget to build it?
+      * broken symlink due to missing `/global`
+  * the real source of breakage is that I need to build new executables
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * Moved the `plot_tile()` function to a separate module in preparation for having to move to
+    multiple comparison notebooks due to git complaining about the file size having exceeded 10Mb
+  * split 2xrez comparison notebook into one for tile rows 9-15 and a new notebook for tile rows
+    16-22
+  * added row 16 - Nanoose Bay to Howe Sound
+
+
+##### Miscellaneous
+
+* resolved VSCode `orcinus` connection failures by setting `"remote.SSH.useExecServer":false`
+  on `khawla`
+
+
+
+## October
+
+### Week 36
+
+#### Wed 1-Oct-2025
+
+##### Miscellaneous
+
+* `nibi` is coming back to life
+  * Vicente has an interactive session running
+  * Susan's carbon runs are scheduled for tomorrow
+* ARC on demand service webinar:
+  * Jacob Boschee
+  * ondemand.arc.ubc.ca
+    * need to be on a campus network or connected by VPN to use
+    * https://it.ubc.ca/services/email-voice-internet/myvpn
+  * file system interface includes access to Globus endpoint
+  * Job Composer provides job script templates & browser-based editor
+  * JupyterLab can use kernel from virtualenv
+* submitted visa application for China trip
+* helped Vicente with Parcels runs on `nibi`
+  * discussed maybe using MPI for Parcels with Jose in the #OceanParcels channel
+
+
+
+#### Thu 2-Oct-2025
+
+Worked at home & ESB
+
+##### SalishSeaCast
+
+* recorded 2 of Susan's carbon runs on `nibi` after post-22-26sep maintenance shutdown scheduler issue
+  * 9m15s per model day; continuing ~15% faster than before shutdown
+  * best performance among `nibi`, `fir`, and `trillium`; `rorqual` hasn't been tested yet
+
+
+
+
 
 * commit and push XIOS arch files on `fir`
 
@@ -8761,6 +8886,8 @@ Farewell for Ilias at Brown's
 
 ##### SalishSeaCmd
 
+* add `module load gcc/12.3` for `trillium`
+* drop `#SBATCH --mem=0` for `trillium`
 * change `orcinus` to use `slurm`
 * update scaling tests on `narval` with `StdEnv/2023`
   * 100 Gb/s InfiniBand Mellanox HDR interconnect
@@ -8795,6 +8922,7 @@ Farewell for Ilias at Brown's
 
 ##### SalishSeaNowcast
 
+* unpin `xarray` when `cfgrib=0.9.16` is released (re: testing on 29sep)
 * generate a new ed25519 key for automation logins and change to use it everywhere except `optimum`
 * change config to upload forcing to `nibi` instead of `graham`
   * need automation key activated on `nibi`
