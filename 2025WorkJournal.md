@@ -8864,6 +8864,13 @@ Worked at home & ESB
   * best performance among `nibi`, `fir`, and `trillium`; `rorqual` hasn't been tested yet
 
 
+##### Miscellaneous
+
+* Slack discussion w/ Vicente about multiple Parcels josb vs. MPI Parcels
+* did PR on Parcels to fix typo in MPI tutorial
+* Phys Ocgy seminar: new students carnival
+* hacked up a demo of how to do concurrent Python tasks in an `sbatch` script; `wait` is key
+
 
 
 
