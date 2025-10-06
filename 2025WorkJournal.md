@@ -8873,6 +8873,64 @@ Worked at home & ESB
 
 
 
+#### Fri 3-Oct-2025
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* updated `khawla` Pycharm to 2025.2.3
+
+
+##### `nibi`
+
+* queued 31d 21x37 2 node run with 6h walltime to test post-maintenance performance
+  * started at 14:12
+  * timed out at ~99% complete
+  * 11m45s per model day
+
+
+##### SalishSeaNowcast
+
+* unpinned `xaraay` version to resolve `FutureWarning` issue #335 thanks to release of `cfgrib=0.9.15.1`
+  * PR#388
+
+
+
+#### Sat 4-Oct-2025
+
+##### `nibi`
+
+* recorded 2 of Susan's carbon runs on `nibi` after post-22-26sep maintenance shutdown scheduler issue
+  * 9m15s and 9m11s per model day; continuing ~15% faster than before shutdown
+* re-tried 31d 21x37 2 node run with walltime up to 8h to test post-maintenance performance
+  * both def & rrg to see which starts faster because Susan suspects def has higher priority
+  * def started at 15:46 Eastern, so cancelled rrg
+    * running ~20x slow
+    * discovered 4 `istone` `julia` processes on one of the nodes, causing it to be over-subscribed
+    * sent email to support
+    * Mark Hahn confirmed that there was a clean-up issue on c294 and perhaps other nodes
+    * job timed out after 8h
+  * queued another def job
+    * 6m49s; comparable to pre-maintenance 2 node runs
+
+
+
+#### Sun 5-Oct-2025
+
+##### `nibi`
+
+* queued 31d 19x26 2 node run (254 + 1 cores) with 8h walltime to test compared to best 8 node
+  runs on `graham`
+  * revealed another rogue process on c294
+  * emailed Mark
+* re-tried 31d 19x26 2 node run (254 + 1 cores) with 8h walltime to test compared to best 8 node
+  runs on `graham`
+  * 3h35m12s; slightly slower than than 372 + 1 core runs
+  * comparable to pre-maintenance 2 node runs
+
+
+
+
 
 * commit and push XIOS arch files on `fir`
 
