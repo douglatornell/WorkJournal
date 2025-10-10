@@ -8572,6 +8572,12 @@ Worked at ESB
   * djl-cookiecutter-pypkg
 
 
+##### MOAD/docs
+
+* continued updating Alliance setup section from `graham` to `nibi`; PR#55
+  * corrected description of git `pull.rebase true` config setting
+
+
 
 #### Thu 25-Sep-2025
 
@@ -8830,7 +8836,7 @@ Farewell for Ilias at Brown's
 
 ## October
 
-### Week 36
+### Week 40
 
 #### Wed 1-Oct-2025
 
@@ -8930,6 +8936,177 @@ Worked at home & ESB
 
 
 
+### Week 41
+
+#### Mon 6-Oct-2025
+
+##### Miscellaneous
+
+* helped Vicente with his attempts to batch Parcels on `nibi`
+* NEMO seminar:
+  * Tall on SalishSeaCast O2 improvements
+  * Mukulika Pahari on Irminger Water bifurcation
+
+
+##### Atlantis
+
+* slack discussion with Raisha and Susan about extracting fields from SalishSeaCast and HTDPS to
+  generate new surface forcing for Atlantis
+  * originally used ERDDAP; suspect that was because Reshapr didn't exist
+
+
+##### SalishSeaCast
+
+* updated production env on `skookum` to reflect removal of `xarray` version pin in SalishSeaNowcast
+  re: PR#388
+  * killed `collect_weather 00 2.5km` and `crop_gribs 00 --fcst-date 2025-10-07`
+  * stopped all processes in `supervisor`
+  * `supervisor shutdown`
+  * removed `/SalishSeaCast/nowcast-env`
+    * incomplete due to stale NFS handles
+    * used `sudo` to move `nowcast-env` to `nowcast-env-stale`
+  * updated repo clones
+  * changed to `unpin-xarray` branch in SalishSeaNowcast
+  * created new `/SalishSeaCast/nowcast-env`
+    * had to `sudo chgrp sallen /SalishSeaCast`
+  * force installed `xarray=2025.9.0` to avoid default engine change that was reverted in 2025.10.0
+    today, but is not yet on conda-forge
+  * install packages
+  * switched to `update-orcinus` branch in SalishSeaNowcast
+  * copied envvars activate and deactivate scripts into new env
+  * launched `supervisord`
+    * `pkg_resources` API deprecation warning (as seen on Pyramid)
+  * re-launched `collect_weather 00 2.5km` and `crop_gribs 00 --fcst-date 2025-10-07`
+
+
+
+#### Tue 7-Oct-2025
+
+##### SalishSeaCast
+
+* reviewed manager stderr log since restart in new env:
+  * no `FutureWarning` messages from `crop_gribs`
+  * new `FutureWarning` messages from `grib_to_netcdf`; issue#390
+  * new `UserWarning`: no explicit representation of timezones available for np.datetime64
+    from `figures/comparison/sandheads_winds.py:119`
+    and `figures/comparison/sandheads_winds.py:127`
+
+
+##### Miscellaneous
+
+* Vicente's 12 process, 30h Parcels job failed due to out of memory
+  * rolled back to try 1 process for 30h to determine memory demand
+
+
+##### Reshapr
+
+* started experimenting with running Reshapr on `nibi` compute nodes
+  * `reshapr info` doesn't work for model profiles that are stored in `Reshapr/model_profiles/`
+  * interactive session tests:
+    * easily got a whole compute node (c170) to myself
+    * memory limit does not seem to be policed; memory limit > mem-per-cpu is no problem
+    * core limit is policed; n workers > requested cores causes crash
+    * extraction of 1 variable needs <4000M per cpu on 4 cores
+    * 1 variable, 1d, 4 cores: 23s
+    * 1 variable, 31d, 4 cores: 285s
+    * 1 variable, 31d, 8 cores, 4000M limit: 283s, with memory warnings
+    * 1 variable, 31d, 8 cores, 8000M limit: worker comm to scheduler failed
+    * 1 variable, 31d, 8 cores, 2 threads/worker, 8000M limit: 285s
+      * memory per worker up to ~3500M
+      * unmanage memory warning
+    * 1 variable, 31d, 8 cores, 4 threads/worker, 8000M limit: failed due to memory
+    * 1 variable, 31d, 8 cores, 4 threads/worker, 12000M limit: failed due to already computed tasks
+    * 1 variable, 31d, 8 cores, 2 threads/worker, 12000M limit: 283s
+    * 1 variable, 31d, 8 cores, 2 threads/worker, 12000M limit, processes=False: memory warnings
+    * 1 variable, 31d, 8 cores, 2 threads/worker, 24000M limit, processes=False: memory warnings
+    * 1 variable, 31d, 8 cores, 2 threads/worker, 48000M limit, processes=False: 392s
+    * 1 variable, 31d, 12 cores, 2 threads/worker, 12000M limit, processes=True: 282s
+    * 1 variable, 31d, 16 cores, 1 threads/worker, 8000M limit, processes=True: 275s
+    * 1 variable, 31d, 32 cores, 1 threads/worker, 8000M limit, processes=True: 280s
+    * 1 variable, 31d, 24 cores, 1 threads/worker, 8000M limit, processes=True: 278s
+
+
+
+#### Wed 8-Oct-2025
+
+##### Miscellaneous
+
+* Vicente's 1 process, 30h Parcels job timed out at ~76% complete
+  * memory use was 7974M
+
+
+##### Security
+
+* reviewed weekly GitHub security alert digest
+  * many reports re: `pip<=25.2`
+    * will be fixed in 25.3, but it's not viewed as an important security issue by PyPA so, No
+      schedule for 25.3
+    * root cause is old Python versions
+  * `jupyter-core` issue requires new env builds because dependabot isn't finding 5.8.1
+    * erddap-datasets
+    * SOG-Bloomcast-Ensemble
+
+
+##### SalishSeaNowcast
+
+* squash-merged PR#388 re: unpinning `xarray` version
+  * also closed issue#335
+
+
+##### SalishSeaCmd
+
+* continued work on adding support for `trillium`; PR#108
+  * added `module load gcc/12.3` for `trillium` because it doesn't happen by default
+  * dropped `#SBATCH --mem=0` for `trillium` because it is not applicable for whole-node only runs
+  * moved `trillium` items and test methods into alphabetical order
+  * added `trillium` to a parametrized test method that Junie missed adding it to
+  * tested with 11x32 31d run on `trillium`
+    * 4h54m24s
+    * `salishsea combine` failed due to `rebuild_nemo` not found
+      * `ksh` is installed, but it's not at `/bin/ksh` as the shebang in `rebuild_nemo` expects
+      * sent email to `trillium` support
+      * `trillium` the output of `scontrol show jobid` and `sacct -j` to the completion email
+
+
+##### SalishSeaCast
+
+* recovered space on `/results/` by deleting pre-cropped continental HRDPS GRIB files:
+  * deleted jan-dec 2024 files, at least ~135G/month, with `find` commands like:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    find  /results/forcing/atmospheric/continental2.5/GRIB/202401??/??/ -type f\
+      -name "*_MSC_HRDPS_*_RLatLon0.0225_PT???H.grib2" -delete
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+##### MOAD/docs
+
+* continued updating Alliance setup section from `graham` to `nibi`; PR#55
+  * updated XIOS section
+  * updated redirected links found by `sphinx linkcheck`
+  * linkcheck on GitHub failed due to rate-limiting and
+    `429 Client Error: Too Many Requests for url: https://www.alliancecan.ca/en`
+
+
+
+#### Thu 9-Oct-2025
+
+Finalized China visa Applications
+
+##### SalishSeaCast
+
+* `crop_gribs 00` timed out with 270 unprocessed
+* `collect_weather 00 2.5km` finished >3h late at 00:12
+* manually ran `crop_gribs 00` before `grib_to_netcdf` ran and automation was uninterrupted
+
+
+##### Atlantis
+
+* group mtg; mostly discussed Raisha's next paper in progress
+
+
+
 
 
 * commit and push XIOS arch files on `fir`
@@ -8939,11 +9116,6 @@ Worked at home & ESB
   * I can't reproduce Vicente's warning
 
 
-* think about running Reshapr on `nibi` with 768G per node
-
-
-
-
 * Susan: do we want to set up Globus on `salish` or `skookum`, or engage compstaff
   to set it up for `ocean` or wider EOAS context
   * I should get to know Stephan and discuss bigger context with him
@@ -8951,8 +9123,6 @@ Worked at home & ESB
 
 ##### SalishSeaCmd
 
-* add `module load gcc/12.3` for `trillium`
-* drop `#SBATCH --mem=0` for `trillium`
 * change `orcinus` to use `slurm`
 * update scaling tests on `narval` with `StdEnv/2023`
   * 100 Gb/s InfiniBand Mellanox HDR interconnect
@@ -8987,14 +9157,39 @@ Worked at home & ESB
 
 ##### SalishSeaNowcast
 
-* unpin `xarray` when `cfgrib=0.9.16` is released (re: testing on 29sep)
+* add removal of uncropped GRIB files to `crop_gribs` to avoid storage bloat
+* `FutureWarning` re: default value change for `compat` from `compat='no_conflicts'` to `compat='override'`
+  in `xarray.combine_by_coords()`; issue#390
+* `UserWarning`: no explicit representation of timezones available for np.datetime64
+  from `figures/comparison/sandheads_winds.py:119` and `figures/comparison/sandheads_winds.py:127`
 * generate a new ed25519 key for automation logins and change to use it everywhere except `optimum`
 * change config to upload forcing to `nibi` instead of `graham`
   * need automation key activated on `nibi`
 * change config to drop forcing uploads to `optimum`
 * change automation workflow to run nowcast-green in place of nowcast-blue
   * add output of 10min avg tide gauge station files
+* `supervisor` `pkg_resources` API deprecation issue
+  * version 4.3.0 on PyPI contains a fix
+  * conda-forge feedstock has CI failures, but it's not abandoned
 
+
+##### Security Updates
+
+* Squash-merged pre-commit PRs to update config re: new `black` GitHub repo URL:
+  * NEMO_Nowcast
+  * SalishSeaNowcast
+  * erddap-datasets
+  * SalishSeaCmd
+  * NEMO-Cmd
+  * SOG-Bloomcast-Ensemble
+  * SalishSeaTools
+  * salishsea-site
+  * MoaceanParcels
+  * cookiecutter-MOAD-pypkg
+  * gha-workflows
+  * Reshapr
+  * moad_tools
+  * AtlantisCmd
 
 
 
@@ -9083,6 +9278,30 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
   * tools
   * ECget
   * SOG
+
+
+
+* Python 3.14:
+  * successful workflow test with 3.14:
+    * MOAD/docs
+    * NEMO-Cmd
+    * SalishSeaCmd
+    * SalishSeaCast/docs
+    * NEMO_Nowcast
+    * moad_tools
+    * tools/SalishSeaTools
+    * SalishSeaNowcast
+    * gha-workflows
+    * AtlantisCmd
+    * SOG-Bloomcast-Ensemble
+    * erddap-datasets
+    * salishsea-site
+    * Reshapr
+  * no workflows:
+    * SOG
+    * ECget
+    * analysis-doug
+    * SOG-Bloomcast ??
 
 
 
