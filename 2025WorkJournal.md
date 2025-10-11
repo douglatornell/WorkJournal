@@ -9107,6 +9107,27 @@ Finalized China visa Applications
 
 
 
+#### Fri 10-Oct-2025
+
+Worked at ESB
+
+Went to UBC Hospital lab for blood draw for appt w/ Dr. Roston
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* help Vicente get next Parcels run on `nibi` launched with memory and walltime that
+  should allow it to complete 2 concurrent particle releases in Feb & Mar 2007
+* started testing Mobile 8M laptop for trip to China
+
+
+##### RAC Applications
+
+* figured out that we have 136T stored on `nibi:/nearline/rrg-allen/`
+  * 2024 `nowcast-green.202111` tarballs and index files added 2.1T
+
+
+
 
 
 * commit and push XIOS arch files on `fir`
