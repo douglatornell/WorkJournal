@@ -9013,7 +9013,7 @@ Worked at home & ESB
     * 1 variable, 31d, 8 cores, 8000M limit: worker comm to scheduler failed
     * 1 variable, 31d, 8 cores, 2 threads/worker, 8000M limit: 285s
       * memory per worker up to ~3500M
-      * unmanage memory warning
+      * unmanaged memory warning
     * 1 variable, 31d, 8 cores, 4 threads/worker, 8000M limit: failed due to memory
     * 1 variable, 31d, 8 cores, 4 threads/worker, 12000M limit: failed due to already computed tasks
     * 1 variable, 31d, 8 cores, 2 threads/worker, 12000M limit: 283s
@@ -9065,7 +9065,7 @@ Worked at home & ESB
     * `salishsea combine` failed due to `rebuild_nemo` not found
       * `ksh` is installed, but it's not at `/bin/ksh` as the shebang in `rebuild_nemo` expects
       * sent email to `trillium` support
-      * `trillium` the output of `scontrol show jobid` and `sacct -j` to the completion email
+      * `trillium` adds the output of `scontrol show jobid` and `sacct -j` to the completion email
 
 
 ##### SalishSeaCast
@@ -9125,6 +9125,58 @@ Went to UBC Hospital lab for blood draw for appt w/ Dr. Roston
 
 * figured out that we have 136T stored on `nibi:/nearline/rrg-allen/`
   * 2024 `nowcast-green.202111` tarballs and index files added 2.1T
+
+
+
+#### Sat 11-Oct-2025
+
+##### Polyglot Conf
+
+* Python qr code generator
+  * Mariatta
+  * 3rd party services are scanky
+  * `qrcode` package
+  * Mariatta's Django app
+    * Secretcodes.dev
+    * No ads
+    * No tracking
+    * No url masking
+    * URL forwarding
+    * URL shortener
+
+* YAML Script
+  * Ingy dot net
+  * json is YAML
+  * YAML is human readable Data serialization
+  * YAML Script == ys == pronounced wise
+  * ys is human readable Closure
+
+* Typescript
+
+* Stop writing loops
+  * Greg Baker, SFU CS
+
+* Vibe coding vs vibe engineering
+  * Tavis Rudd
+  * experiment to port ~30k lines of an Amazon Cloud management tool he wrote for Unbounce to Rust
+    * failed in early 2024
+    * restarted in May-2025
+    * mostly using Claude CLI
+    * force Claude to produce a plan for each step before generating code
+      * lots of looping on define, review, correct, refine
+      * carefully manage the context that Claude has access to so as to avoid polluting its work with
+        incorrect or incomplete earlier iterations fo the plan
+      * looks to me like very pedantically training a junior to work for you
+  * useful command line tools:
+    * ls | fzf
+    * delta pager for git diff
+    * forgit
+    * broot
+
+
+#### Sun 12-Oct-2025
+
+Goofed off
 
 
 
