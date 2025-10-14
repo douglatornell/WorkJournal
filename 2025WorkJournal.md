@@ -9180,6 +9180,27 @@ Goofed off
 
 
 
+### Week 42
+
+#### Mon 13-Oct-2025
+
+**Statutory Holiday** - Thanksgiving Day
+
+##### SalishSeaCast
+
+* `collect_weather 12` was ~1h late
+
+
+##### Miscellaneous
+
+* calculated present `nibi` core-years per model-year as 1.3151 in #proposals channel
+
+
+##### `trillium`
+
+* confirmed that `/usr/bin/env ksh` works on the login command-line
+* VS Code stalls trying to `scp` the server from local
+
 
 
 * commit and push XIOS arch files on `fir`
