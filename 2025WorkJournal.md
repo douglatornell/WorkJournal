@@ -9203,11 +9203,48 @@ Goofed off
 
 
 
+#### Tue 14-Oct-2025
+
+Worked at ESB
+
+##### Miscellaneous
+
+* dug into Vicente's run failures over the weekend
+  * looks like out of memory or time outs
+  * failures today and probably some of the weekend ones are due to >1M files
+    on `/scratch/vicentev/`
+* reviewed RAC proposal with Susan
+
+
+##### `trillium`
+
+* successfully tested `/usr/bin/env ksh` in `rebuild_nemo` script via `salishsea combine`
+  in completed runs results directories
+  * ran 31d 21x37 test on 2 nodes to confirm full workflow and add to scaling martrix
+    * started at 15:35 Eastern
+      * failed due to node failures
+    * restarted at 17:26 Eastern
+
+
+##### `nibi`
+
+* tested `/usr/bin/env ksh` in `rebuild_nemo` script via 14x24 run
+  * 12m7s and successful `rebuild_nemo`
+
+
+##### `fir`
+
+* refusing connections
+
+
+##### `nowcast-agrif`
+
+* started trying to build XIOS and NEMO on `orcinus`
+  * unclear how libraries/modules we need are installed
+
+
+
 * commit and push XIOS arch files on `fir`
-
-
-* figure out decode warning on coord file with `decode_times=False`
-  * I can't reproduce Vicente's warning
 
 
 * Susan: do we want to set up Globus on `salish` or `skookum`, or engage compstaff
