@@ -9275,7 +9275,7 @@ Dentist appt
 ##### NEMO-Cmd
 
 * started update to Python 3.14; PR#114
-  * `pytest-with-coverage workflow was successful
+  * `pytest-with-coverage` workflow was successful
   * crafted PR checklist for update to 3.14 and dropping 3.11 support
 
 
@@ -9285,7 +9285,7 @@ Dentist appt
 * `download_live_ocean` timed out at 11:53
   * retried starting at 13:02
   * success at 15:42
-* `upload_forcing robot.graham` workers are stalled
+* `upload_forcing robot.graham nowcast+`  and `turbidity` workers are stalled
 
 
 ##### NEMO-3.6-code
@@ -9305,6 +9305,12 @@ Dentist appt
 #### Fri 17-Oct-2025
 
 Worked at ESB
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* started thinking about server upgrades (funded by King Cty contract)
+
 
 ##### Reshapr
 
@@ -9491,6 +9497,33 @@ Went to UBC for the CERC candidate presentations
 
 
 
+##### SalishSeaCast
+
+* `download_live_ocean` timed out at
+* `upload_forcing robot.graham forecast2`, `nowcast+`` and `turbidity` workers
+  are stalled
+  * killed yesterday's workers
+* TWDP ferry data stream resumed on 15oct
+
+
+##### SalishSeaCast/docs
+
+* reviewed and squash-merged PR#67 re: updating Alliance setup section from
+  `graham` to `nibi`
+
+
+##### MOAD/docs
+
+* continued updating Alliance setup section from `graham` to `nibi`; PR#55
+  * updated link for NEMO build instructions in SalishSeaCast/docs
+  * updated docs for Git, Jupyter & VS Code re: `graham` -> `nibi`
+  * updated Globus file transfer docs re: new Alliance cluster collection names
+  * squash-merged PR#55
+
+
+
+* backfill `upload_forcing nowcast+` and `turbidity` to `nibi` from 16oct onward
+  when `robot.nibi` starts working
 
 
 * Susan: do we want to set up Globus on `salish` or `skookum`, or engage compstaff
