@@ -9224,6 +9224,7 @@ Worked at ESB
     * started at 15:35 Eastern
       * failed due to node failures
     * restarted at 17:26 Eastern
+      * 3h15m53s and successful `rebuild_nemo`
 
 
 ##### `nibi`
@@ -9244,7 +9245,65 @@ Worked at ESB
 
 
 
-* commit and push XIOS arch files on `fir`
+#### Wed 15-Oct-2025
+
+Picked up China visas
+
+Dentist appt
+
+##### SalishSeaCmd
+
+* squash-merged PR#108 re: adding support for `trillium`
+* simplified system detection for `orcinus` by mapping `seawolf[123]` to `orcinus` in the top-of-module
+  code that sets the value of `SYSTEM`; PR#110
+  * replaced a bunch of `patch` mocks with `monkeypatch` fixture uses
+* simplified system detection for `optimum` by mapping `delta`, `sigma` and `omega` to `optimum` in
+  the top-of-module code that sets the value of `SYSTEM`; PR#111
+
+
+##### Security Updates
+
+* Squash-merged dependabot PR to update codeql-action to v4:
+  * gha-workflows
+
+
+
+#### Thu 16-Oct-2025
+
+Dentist appt
+
+##### NEMO-Cmd
+
+* started update to Python 3.14; PR#114
+  * `pytest-with-coverage workflow was successful
+  * crafted PR checklist for update to 3.14 and dropping 3.11 support
+
+
+##### SalishSeaCast
+
+* `crop_gribs 02` delayed ~2h to 10:52
+* `download_live_ocean` timed out at 11:53
+  * retried starting at 13:02
+  * success at 15:42
+* `upload_forcing robot.graham` workers are stalled
+
+
+##### NEMO-3.6-code
+
+* committed `/usr/bin/env ksh` in `rebuild_nemo` script
+* deleted arch files for `beluga`, `cedar` and `graham`
+* added arch files for `fir` and `trillium`
+
+
+##### XIOS-ARCH
+
+* deleted arch files for `beluga`, `cedar` and `graham`
+* added arch files for `fir` and `trillium`
+
+
+
+
+
 
 
 * Susan: do we want to set up Globus on `salish` or `skookum`, or engage compstaff
@@ -9302,25 +9361,6 @@ Worked at ESB
 * `supervisor` `pkg_resources` API deprecation issue
   * version 4.3.0 on PyPI contains a fix
   * conda-forge feedstock has CI failures, but it's not abandoned
-
-
-##### Security Updates
-
-* Squash-merged pre-commit PRs to update config re: new `black` GitHub repo URL:
-  * NEMO_Nowcast
-  * SalishSeaNowcast
-  * erddap-datasets
-  * SalishSeaCmd
-  * NEMO-Cmd
-  * SOG-Bloomcast-Ensemble
-  * SalishSeaTools
-  * salishsea-site
-  * MoaceanParcels
-  * cookiecutter-MOAD-pypkg
-  * gha-workflows
-  * Reshapr
-  * moad_tools
-  * AtlantisCmd
 
 
 
