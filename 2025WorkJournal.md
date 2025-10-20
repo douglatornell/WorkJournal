@@ -9281,7 +9281,7 @@ Dentist appt
 
 ##### SalishSeaCast
 
-* `crop_gribs 02` delayed ~2h to 10:52
+* `crop_gribs 12` delayed ~2h to 10:52
 * `download_live_ocean` timed out at 11:53
   * retried starting at 13:02
   * success at 15:42
@@ -9299,6 +9299,62 @@ Dentist appt
 
 * deleted arch files for `beluga`, `cedar` and `graham`
 * added arch files for `fir` and `trillium`
+
+
+
+#### Fri 17-Oct-2025
+
+Worked at ESB
+
+##### Reshapr
+
+* investigated `sphinx linkcheck` failure from monthly scheduled run on 14oct
+  * `nbviewer` service not available
+  * success on manual retry today
+
+
+##### NEMO-Cmd
+
+* continued update to Python 3.14; PR#114
+  * updated envs and `requirements.txt`
+  * changed `sphinx-linkcheck` workflow to use Python 3.14
+  * dropped support for Python 3.11
+  * squash-merged PR#114
+  * released v25.2 after I made a hash of v25.1 by tagging the release in the PR
+
+
+
+#### Sat 18-Oct-2025
+
+Goofed off
+
+
+
+#### Sun 19-Oct-2025
+
+##### SalishSeaCast
+
+* `crop_gribs 12` delayed ~2h to 10:53
+
+
+##### FUN
+
+* see `FUN-notes`
+
+
+##### Minecraft
+
+* checked mods, etc. for releases compatible with 1.21.10:
+  * sodium: yes
+  * lithium: yes
+  * malilib: yes
+  * minihud: yes
+  * tweakeroo: yes
+  * iris: yes
+  * fresh animations: no
+* downloaded and installed updated FreshAnimations resource pack:
+  * FreshAnimations_v1.10.1.zip
+
 
 
 
@@ -9453,9 +9509,10 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
 
 
 * Python 3.14:
+  * NEMO-Cmd - done 18oct25 in PR#114
+
   * successful workflow test with 3.14:
     * MOAD/docs
-    * NEMO-Cmd
     * SalishSeaCmd
     * SalishSeaCast/docs
     * NEMO_Nowcast
