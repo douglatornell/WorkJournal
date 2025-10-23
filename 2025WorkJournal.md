@@ -9357,6 +9357,137 @@ Goofed off
 
 
 
+### Week 43
+
+#### Mon 20-Oct-2025
+
+
+##### SalishSeaCast
+
+* `upload_forcing robot.graham` workers are stalled
+  * killed yesterday's workers and today's `nowcast+`
+
+
+##### Miscellaneous
+
+* 2 Jupyter alternatives in my email this morning:
+  * Pluto, a reactivate Julia implementation
+    * UBC Atsci seminar this week
+  * marimo, a reactive Python implementation that uses `.py` as storage
+    * WestDRI webinar next week
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * adjusted row 16 tiles 6 & 10
+    * reviewed changes with Susan
+  * added row 17 - Parksville to Squamish Estuary
+    * reviewed work needed with Susan
+
+
+Susan's 35th anniversary celebration at UBC: "Tempus Fugit"
+
+
+
+#### Tue 21-Oct-2025
+
+Went to UBC for the CERC candidate presentations
+
+##### SalishSeaCast
+
+* `upload_forcing robot.graham turbidity` and `forecast2` workers are stalled
+  * killed yesterday's workers
+* `upload_forcing robot.graham nowcast+` failed with timeout
+  * no ping for `robot.graham` today
+
+
+##### Miscellaneous
+
+* research and vision presentations from 2nd CERC candidate
+
+
+
+#### Wed 22-Oct-2025
+
+##### SalishSeaCast
+
+* `upload_forcing robot.graham` workers failed with `Network unreachable`
+  * this failure *does not* leave stalled workers behind
+
+
+##### Miscellaneous
+
+* SciNet Parallel Debugging with DDT course
+  * James Willis
+  * debugging flags:
+    * gcc: `-g`, maybe `-gstabs`
+    * turn off optimization: `-O0`
+  * DDT
+    * GUI, commercial by Linaro
+    * license limit is 256 processes per cluster (shared by all users)
+    * supports Python
+    * include AMP profiler
+  * `teach`  cluster
+    * `module load StdEnv/2023`
+    * `module load ddt-cpu/23.1.1`
+  * fairly standard GUI debugger interface
+  * may be beneficial to use `ssh -XC ...` for X forwarding
+  * install DDT on your laptop and use client/server mode
+    * startup script on server to load modules (example in slides add examples tarball)
+  * memory debugger
+    * enable guard pages to find indexing beyond bounds
+  * other useful features
+    * edit & recompile within DDT
+      * File > Configure Build
+      * Build
+      * Restart Session
+    * attach to running job on login or debug node
+    * submit DDT slurm job
+      * DDT automatically attaches when job starts on compute node
+    * DDT allows you to run a .core file
+      * may need `ulimit -c unlimited` to ensure that .core files are generated
+    * run DDT in remote desktop via Open OnDemand
+  * recording will be added to course website
+
+
+##### Reshapr
+
+* continued experimenting with running Reshapr on `nibi` compute nodes
+  * interactive session on `u5` with
+    `salloc --time=0:30:00 --mem-per-cpu=4000M --ntasks=32 --account=def-allen`
+    also used
+    `salloc --time=0:30:00 --mem-per-cpu=4000M --ntasks=32 --ntasks-per-node=32 --account=def-allen`
+    because I was getting cpus spread across multiple nodes
+  * reproduced previous test result:
+    * `chunk size: time: 24 depth: 40 y: 898 x: 398`
+    * 1 variable, 31d, 16 cores, 1 threads/worker, 8000M limit, processes=True: 302s (vs 275s before)
+  * new tests:
+    * `chunk size: time: 48 depth: 40 y: 898 x: 398`
+      * crashes interactive session
+    * `chunk size: time: 12 depth: 40 y: 898 x: 398`
+      * 1 variable, 31d, 16 cores, 1 threads/worker, 8000M limit, processes=True: 279s
+    * `chunk size: time: 6 depth: 40 y: 898 x: 398`
+      * 1 variable, 31d, 16 cores, 1 threads/worker, 8000M limit, processes=True: 281s
+    * `salloc --time=0:30:00 --mem-per-cpu=8000M --ntasks=16 --ntasks-per-node=16 --account=def-allen`
+      * `chunk size: time: 24 depth: 40 y: 898 x: 398`
+        * 1 variable, 31d, 16 cores, 1 threads/worker, 8000M limit, processes=True: 274s
+        * 1 variable, 90d, 16 cores, 1 threads/worker, 8000M limit, processes=True: 769s
+
+      * `chunk size: time: 1 depth: 40 y: 898 x: 398`
+        * 1 variable, 31d, 16 cores, 1 threads/worker, 8000M limit, processes=True: 321s
+  * `sbatch` test:
+    * `--time=1:30:00 --mem-per-cpu=8000M --ntasks=16 --ntasks-per-node=16 --account=def-allen`
+      * `chunk size: time: 24 depth: 40 y: 898 x: 398`
+      * 1 variable, 365d, 16 cores, 1 threads/worker, 8000M limit, processes=True: ~57m
+
+
+##### Security Updates
+
+* Squash-merged dependabot PR to update pypdf to 6.1.3 re: memory exhaustion (CVE-2025-62708) and
+  infinite loop (CVE-2025-62707)  vulnerabilities:
+  * SalishSeaNowcast
+
 
 
 
