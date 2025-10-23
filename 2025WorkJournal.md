@@ -9312,6 +9312,30 @@ Worked at ESB
 * started thinking about server upgrades (funded by King Cty contract)
 
 
+##### SalishSeaCast
+
+* `download_live_ocean` was delayed ~3h
+* `upload_forcing robot.graham forecast2`, `nowcast+`` and`turbidity` workers
+  are stalled
+  * killed yesterday's workers
+* TWDP ferry data stream resumed on 15oct
+
+
+##### SalishSeaCast/docs
+
+* reviewed and squash-merged PR#67 re: updating Alliance setup section from
+  `graham` to `nibi`
+
+
+##### MOAD/docs
+
+* continued updating Alliance setup section from `graham` to `nibi`; PR#55
+  * updated link for NEMO build instructions in SalishSeaCast/docs
+  * updated docs for Git, Jupyter & VS Code re: `graham` -> `nibi`
+  * updated Globus file transfer docs re: new Alliance cluster collection names
+  * squash-merged PR#55
+
+
 ##### Reshapr
 
 * investigated `sphinx linkcheck` failure from monthly scheduled run on 14oct
@@ -9479,7 +9503,6 @@ Went to UBC for the CERC candidate presentations
       * `chunk size: time: 24 depth: 40 y: 898 x: 398`
         * 1 variable, 31d, 16 cores, 1 threads/worker, 8000M limit, processes=True: 274s
         * 1 variable, 90d, 16 cores, 1 threads/worker, 8000M limit, processes=True: 769s
-
       * `chunk size: time: 1 depth: 40 y: 898 x: 398`
         * 1 variable, 31d, 16 cores, 1 threads/worker, 8000M limit, processes=True: 321s
   * `sbatch` test:
@@ -9496,29 +9519,17 @@ Went to UBC for the CERC candidate presentations
 
 
 
+#### Thu 23-Oct-2025
 
-##### SalishSeaCast
+Worked at ESB
 
-* `download_live_ocean` timed out at
-* `upload_forcing robot.graham forecast2`, `nowcast+`` and `turbidity` workers
-  are stalled
-  * killed yesterday's workers
-* TWDP ferry data stream resumed on 15oct
+##### Miscellaneous
 
-
-##### SalishSeaCast/docs
-
-* reviewed and squash-merged PR#67 re: updating Alliance setup section from
-  `graham` to `nibi`
+* PhysOcgy seminar: Doug Bancroft of CSSF re: ROPOS submersible program
+* successfully tested EOAS account access on mobile 8M
+* started planning talk for China
 
 
-##### MOAD/docs
-
-* continued updating Alliance setup section from `graham` to `nibi`; PR#55
-  * updated link for NEMO build instructions in SalishSeaCast/docs
-  * updated docs for Git, Jupyter & VS Code re: `graham` -> `nibi`
-  * updated Globus file transfer docs re: new Alliance cluster collection names
-  * squash-merged PR#55
 
 
 
