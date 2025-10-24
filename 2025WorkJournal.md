@@ -9531,6 +9531,35 @@ Worked at ESB
 
 
 
+#### Fri 24-Oct-2025
+
+Worked at ESB
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* APPS AGM on zoom
+* researched how to use an alternate sphinx config for GHA linkcheck runs
+  so as to avoid nuisance 429 failures like rate limits on nbviewer.org and alliancecan.ca
+  * `sphinx-build -b linkcheck --conf-dir ...` allows use of a `conf.py` in a
+    different directory
+  * the alternate config needs to include something like:
+    <!-- markdownlint-disable MD031 -->
+    ```python
+    linkcheck_ignore = [
+        r"https://nbviewer\.org/.*",
+        r"https://alliancecan\.ca/.*",
+    ]
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+##### MOAD/docs
+
+* continued updating Alliance setup section from `graham` to `nibi`; PR#55
+  * added sections re: using VS Code to work on Jupyter notebooks both locally
+    and on remote systems
+
 
 
 * backfill `upload_forcing nowcast+` and `turbidity` to `nibi` from 16oct onward
