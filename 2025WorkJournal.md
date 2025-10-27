@@ -9530,6 +9530,11 @@ Worked at ESB
 * started planning talk for China
 
 
+##### FUN
+
+* see `FUN-notes`
+
+
 
 #### Fri 24-Oct-2025
 
@@ -9559,6 +9564,50 @@ Worked at ESB
 * continued updating Alliance setup section from `graham` to `nibi`; PR#55
   * added sections re: using VS Code to work on Jupyter notebooks both locally
     and on remote systems
+
+
+
+#### Sat 25-Oct-2025
+
+##### SalishSeaCast
+
+* `upload_forcing robot.graham` workers continue failing with `Network unreachable`
+* new: `upload_forcing orcinus` failed with `Connection timed out`
+
+
+##### FUN
+
+* see `FUN-notes`
+
+
+##### Miscellaneous
+
+* set up mobile 8M for trip to China
+  * things that need to be reversed when we return:
+    * changed menu bar time to 24-hour clock
+    * changed dock to auto-hide
+    * 2547 wifi
+    * installed Vivaldi browser
+    * installed VS Code
+    * things that need to be reversed before we leave for China:
+      * installed ssh keys in `~/.ssh/`
+      * cloned my `dotfiles` repo to get bash aliases and basis for `.ssh/config`
+* stored things we will need on EOAS cloud:
+  * Vivaldi installer
+  * VS Code installer
+  * 1password installer
+  * `.ssh/config`
+  * my 2fa recovery codes
+
+* prep usb key for travel:
+  * copy of ssh keys
+  * copies of talk slide decks
+
+
+
+#### Sun 26-Oct-2025
+
+Goofed off
 
 
 
