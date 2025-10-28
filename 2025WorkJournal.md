@@ -9619,6 +9619,8 @@ Goofed off
 
 * `crop_gribs 12` was delayed ~2h due to 1 unprocessed file
 * `upload_forcing orcinus` is working again
+* `download_weather 1km 12` failed
+  * hour 001 UGRD_TGL_10 file was not on server
 
 
 ##### Miscellaneous
@@ -9706,6 +9708,82 @@ Goofed off
   * my thoughts:
     * we need to do 3.6 to 4.2, not 3.6 to 5, but maybe we should do like UAlberta and move quickly
       from 4.2 to 5, then evaluate and tune on 5
+
+
+
+#### Tue 28-Oct-2025
+
+Worked at ESB
+
+##### Miscellaneous
+
+* WestDRI `marimo` notebooks webinar:
+  * Marie-Hélène Burle, SFU
+  * slides: https://mint.westdri.ca/python/wb_marimo
+    * lots of other good stuff on this site
+  * restrictions:
+    * global variables must be unique
+    * in-place transformations are not allowed
+      * loop variables, `+=`, etc. don't work
+      * `_` prefix on variables makes the variable "cell-local"
+        * or wrap cell contents in function; e.g. `def _():`
+    * mutations and attributes are not tracked
+      * mutations don't trigger DAG re-run; e.g. `l.append(4)`
+    * i.e. strict functional programming style
+  * Marie used `uv`
+    * used `ruff`
+  * automatic dep package installation
+    * may not handle dependencies well all the time; e.g. auto-install of `plotly`
+      didn't resolve its dependency on `pandas`
+  " AI integration:
+    * GitHub Copilot code completion
+    * choose your own with your API keys
+    * generate cells via prompts: vibe coding
+    * cell refactoring;
+  * config stored in `marimo.toml` file
+  * built-in tutorial notebooks
+  * `vim` keyboard bindings by default, also Jupyter cmd/edit modes
+  * `.ipynb` to `marimpo .py` converter exists
+  * cell output vs console output concept
+  * dataflow programming: execution order != cell order
+    * navigation tools:
+      * minimap
+        * move among cells
+        * also shows cell DAG links
+      * dependency explorer
+      * reference highlightinh
+  * managing runs
+    * notebook settings
+    * per-cell control of "reactive execution" for heavy cells
+  * literate programming:
+    * cells can be Python, Markdown, or SQL
+    * can select raw strings or f-strings
+    * markdown extensions:
+      * accordion, admonition, and attention blocks with `///`... `///`
+  * plotly with Javascript works, pyplot may not work
+  * app view hides console output, but shows cell output
+  * interactive elements are (nearly?) first class elements
+  * `mo.md()` generates markdown in code
+  * under the hood:
+    * cell are:
+      <!-- markdownlint-disable MD031 -->
+      ```python
+      @app.cell
+      def _():
+          ...
+      ```
+      <!-- markdownlint-enable MD031 -->
+      * refs are passed as args
+  * `--sandbox` feature
+  * my questions:
+    * is there overhead from DAG when you run as a script
+      * no, DAG is just for notebook interface management
+    * does auto-install maintain an environment list somewhere like in a `pyproject.toml`
+    file (so that the environment is easily repreoduced)?
+      * yes-ish, if you use `uv` it maintains `pyproject.toml` and `uv.lock`
+
+* explored `marimo` sites and docs
+
 
 
 * review hackathon details & sign up
