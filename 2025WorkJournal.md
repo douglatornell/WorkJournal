@@ -9611,6 +9611,107 @@ Goofed off
 
 
 
+### Week 44
+
+#### Mon 27-Oct-2025
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed ~2h due to 1 unprocessed file
+* `upload_forcing orcinus` is working again
+
+
+##### Miscellaneous
+
+* CONCEPTS working group migration to NEMO4/5
+  * Fred Dupont & Stephanne Taylor
+  * CCCma are on 4.2.2 for CanESM 6.0 (CMIP7)
+    * Bill Merryfield
+    * 3.4.1 to 4.2.2 allowed time step to increase from 30m to 60m eORCA1 (1 degree)
+      * eORCA25 time step  is 15m
+    * plan to move to 5 for >CMIP7
+  * ECCC are on 4.2.2 for CCMEP/MRD (includes CIOPSs)
+    * Fred Dupont
+    * gitlab.science.gc.ca/concepts/NEMO
+    * conversion difficulties:
+      * namelists
+      * lack of updated MPP_PREP
+    * v4.2 for production next innovation cycle (2027?)
+    * starting to test v5
+  * UAlberta
+    * Fred Dupont
+    * 3.6 to 4.2.2 then quickly on to v5
+    * BGC coupling to sea ice is tricky due to multiple ice classes
+  * DFO drift prediction & nearshore
+    * Michael Dunphy
+    * 3.6 to 4.2 in progress
+    * forked from ECCC
+    * SalishSea500 working
+      * tides are weaker in 4.2 vs. 3.6; probably due to bottom friction
+    * AGRIF is better in 4.2
+    * issues:
+      * bottom friction implementation changed to interpolation from T-points
+      * vertical sub-stepping changes to mixed implicit/explicit scheme
+      * Smagorinsky issues
+    * clear 4.2 hurdles, then move to 5
+  * 3.6 to 4 difficulties:
+    * name list changes are large
+    * lateral diffusion uses 2 parameters
+    * `domain.nc` instead of `bathy_meter.nc` and `coordinates.nc`
+      * domain conversion utility exists
+    * TOP issues I didn't get
+    * LIM2 to SI3 (ice)
+  * external mirror of GC repo:
+    * ECCC has access to dev branches at consortium; DFO does not
+  * discussion:
+    * Fred to Michael: is there smoothing due to new implicit/explicit scheme?
+      * hard to compare because no vertical sub-stepping in 4
+      * probably only explicit in Haro Strait in SalishSea500
+    * diffusion & filtering:
+      * noise in z-level bathymetry near bottom, especially with tides
+      * need bathymetry smoothing: Fred opinion
+      * Fred sees issues in SalishSea500
+        * Michael is exploring adding bilaplacian diffusion operators
+        * Susan clarified that there is some filtering in the SalishSea500 bathymetry
+        * Susan says sensitivity to issue depends on research vs. operational context
+  * vertical coordinates & wetting/drying
+    * Stephanne Taylor
+    * Fundy500 and SSS150 working using sigma coordinates
+      * works better in Fundy500 that SSS150
+    * need `nn_vvl_interp = 0` (3.6 version), not 2 (newer version)
+    * Michael on SSS150:
+      * stability vs reality trade-off
+      * can we AGRIF in sigma for wetting/drying areas?
+  * AGRIF:
+    * Andy Lin
+    * bug fixes:
+      * `e3w` initialization
+      * vertical eddy diffusivity at parent-child interfaces
+    * challenges:
+      * AGRIF adjusts parent bathymetry
+      * vertical remap (increase layers in child) is too buggy to use
+      * slow compared to a single domain
+      * one-way nesting is not available for comparison
+      * v5 fixes are not included in v4.2
+    * UAlberta has NEMO5 nests working
+      * had to develop/modify lots of pre-processing tools and code
+        * maybe due to North Pole handling?
+    * Michael suggests that NEMO5 has a way of running child domains with 1-way nesting separately
+      from the parent
+  * don't need to be a consortium member to participate in working groups
+  * Greg Smith re: consortium membership
+    * still stuck on how to fund the 1 FTE
+    * maybe leave CICE consortium as Canada switches to SI3 and use that to fund FTE
+    * collaboration with MERCATOR gives us some influence on NEMO roadmap
+  * my thoughts:
+    * we need to do 3.6 to 4.2, not 3.6 to 5, but maybe we should do like UAlberta and move quickly
+      from 4.2 to 5, then evaluate and tune on 5
+
+
+* review hackathon details & sign up
+
+
+
 * backfill `upload_forcing nowcast+` and `turbidity` to `nibi` from 16oct onward
   when `robot.nibi` starts working
 
