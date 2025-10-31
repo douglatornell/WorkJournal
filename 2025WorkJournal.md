@@ -9708,6 +9708,7 @@ Goofed off
   * my thoughts:
     * we need to do 3.6 to 4.2, not 3.6 to 5, but maybe we should do like UAlberta and move quickly
       from 4.2 to 5, then evaluate and tune on 5
+* reviewed RAC proposal and discussed with Susan
 
 
 
@@ -9825,23 +9826,39 @@ Worked at ESB
 * zoom w/ Susan and Charlie re: modeling ideas and logistics
 * helped Susan finalize RAC proposal
 * worked on slides for China talk
+* updated `khawla` Pycharm to 2025.2.4
+* tried to understand why `salishsea spit-results` is incorrectly naming files for Jose
+
+1y followup with Dr. Roston
 
 
 
+#### Fri 31-Oct-2025
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed ~2h due to 1 unprocessed file
+* `archive_tarball nowcast-green 2025-oct` failed due to no `robot.graham` or `robot.nibi`
 
 
-/nearline: We have 135Tb of storage on nearline on nibi. We would like to keep that storage on nibi.
-In addition, we are requesting and additional 15Tb (150Tb total) on nibi for nowcast/hindcast runs calculated
-elsewhere in the coming year. We are also requesting a further additional 91Tb of nearline storage
-on whatever system our compute allocation is granted on. These are for the storage of new project results
-and the new hindcast to be calculated with part of our compute allocation.
-/project: The recent improvements in the ability of the the Alliance clusters to run analysis software
-such as Jupyter has allowed us to do more analysis on the clusters and reduce the requirement to
-download results.  In order to evaluate new model runs on the cluster we need to upload ocean
-observations data and our base NEMO run results (35Tb). In addition, group members need to retain
-analysis outputs to compare across manipulations, etc., an additional 15Tb.
-With our present 10T that is being used for forcing data for our runs, that makes our total /project
-request 60Tb.
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* updated `kudu` Pycharm to 2025.2.4
+
+
+##### SalishSeaCast/docs and MOAD/docs
+
+* realized that the solution to needing to ignore sites that time out due to too many
+  requests in `sphinx linkcheck` on GHA may be to add code to `conf.py` to detect
+  GHA and adjust config rather than trying to have multiple `conf.py` files that
+  `sphinx` really doesn't seem to want to support
+  * the envvar `GITHUB_ACTIONS` is `true` when GitHub Actions is running the workflow
+
+
+
 
 
 
