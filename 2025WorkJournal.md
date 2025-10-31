@@ -9743,7 +9743,7 @@ Worked at ESB
   * config stored in `marimo.toml` file
   * built-in tutorial notebooks
   * `vim` keyboard bindings by default, also Jupyter cmd/edit modes
-  * `.ipynb` to `marimpo .py` converter exists
+  * `.ipynb` to `marimo .py` converter exists
   * cell output vs console output concept
   * dataflow programming: execution order != cell order
     * navigation tools:
@@ -9751,7 +9751,7 @@ Worked at ESB
         * move among cells
         * also shows cell DAG links
       * dependency explorer
-      * reference highlightinh
+      * reference highlighting
   * managing runs
     * notebook settings
     * per-cell control of "reactive execution" for heavy cells
@@ -9779,14 +9779,70 @@ Worked at ESB
     * is there overhead from DAG when you run as a script
       * no, DAG is just for notebook interface management
     * does auto-install maintain an environment list somewhere like in a `pyproject.toml`
-    file (so that the environment is easily repreoduced)?
+    file (so that the environment is easily reproduced)?
       * yes-ish, if you use `uv` it maintains `pyproject.toml` and `uv.lock`
-
 * explored `marimo` sites and docs
+* started reviewing Line P hackathon details
+* dug deeply into `uv` docs
 
 
 
-* review hackathon details & sign up
+#### Wed 29-Oct-2025
+
+##### Miscellaneous
+
+* read part 1 of conda blog post series re: conda's place in the package management world
+* watched GitHub Universe day 1 keynote:
+  * agents, agents, agents
+  * "cognition and meta-cognition around code": Satya Nadella
+* worked with Susan to answer model run questions from Charlie
+  * ran 11x32 1d SalishSeaCast on `nibi` (first 1d run since 2-26Sep25 maintenance)
+    * 11m42s: only slightly faster than pre-maint
+  * built SalishSeaCast_Blue on `nibi`
+  * ran 11x32 1d SalishSeaCast_Blue on `nibi` (first 1d run since 2-26Sep25 maintenance)
+    * 5m16s
+* finished reviewing Line P hackathon details and signed up
+
+
+##### SalishSeaCast
+
+* discovered that nowcast-green day-avg biology, chemistry & physics files were last created on 6oct
+  * despite workers reporting success
+  * probably related to new nowcast-env that was deployed on 6oct
+  * confirmed versions mismatch messages in worker log of `salish` `tmux` session
+  * stopped workers and scheduler
+  * deactivated and reactivated `nowcast-env` for scheduler and workers
+  * restarted scheduler and workers
+  * tested successfully with `make_averaged_dataset day physics` on `skookum`
+  * ran bash loops to backfill day-averages from 7-29oct
+
+
+
+#### Thu 30-Oct-2025
+
+##### Miscellaneous
+
+* zoom w/ Susan and Charlie re: modeling ideas and logistics
+* helped Susan finalize RAC proposal
+* worked on slides for China talk
+
+
+
+
+
+/nearline: We have 135Tb of storage on nearline on nibi. We would like to keep that storage on nibi.
+In addition, we are requesting and additional 15Tb (150Tb total) on nibi for nowcast/hindcast runs calculated
+elsewhere in the coming year. We are also requesting a further additional 91Tb of nearline storage
+on whatever system our compute allocation is granted on. These are for the storage of new project results
+and the new hindcast to be calculated with part of our compute allocation.
+/project: The recent improvements in the ability of the the Alliance clusters to run analysis software
+such as Jupyter has allowed us to do more analysis on the clusters and reduce the requirement to
+download results.  In order to evaluate new model runs on the cluster we need to upload ocean
+observations data and our base NEMO run results (35Tb). In addition, group members need to retain
+analysis outputs to compare across manipulations, etc., an additional 15Tb.
+With our present 10T that is being used for forcing data for our runs, that makes our total /project
+request 60Tb.
+
 
 
 
