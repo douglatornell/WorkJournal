@@ -9599,10 +9599,6 @@ Worked at ESB
   * `.ssh/config`
   * my 2fa recovery codes
 
-* prep usb key for travel:
-  * copy of ssh keys
-  * copies of talk slide decks
-
 
 
 #### Sun 26-Oct-2025
@@ -9859,6 +9855,107 @@ Worked at ESB
 
 
 
+## November
+
+<!-- markdownlint-disable MD001 -->
+#### Sat 1-Nov-2025
+<!-- markdownlint-enable MD001 -->
+
+##### SalishSeaCast
+
+* Fraser River buoy data stream stopped after 02:10
+* `crop_gribs 18` timed out at 16:49 with 528 files unprocessed
+  * successfully ran `crop_gribs 18 --backfill` at ~21:20
+
+
+##### Miscellaneous
+
+* prep phone for trip to Chine
+  * installed Cisco VPN client and confirm that is connects to UBC vpn
+  * installed AliPay app and linked it to my card
+  * set up temporary Google account
+  * deleted apps:'
+    * 1password
+    * 529garage
+    * alumniUBC
+    * Amazon shopping
+    * Authy
+    * BC Service Card
+    * BC Wildfire
+    * CBC Listen
+    * CBC News
+    * Cloudpath
+    * Zwift Companion
+    * Connect IQ
+    * ConnectBot
+    * Discord
+    * DuoMobile
+    * ET16 (for endoscope)
+    * Eventbrite
+    * FaveroAssioma
+    * Firefox
+    * Gemini
+    * GitHub
+    * Google1
+    * HonkMobile
+    * Hue
+    * Kindle
+    * Mastodon
+    * Mobi
+    * Modo
+    * Freedom Mobile
+    * MyFitness
+    * MyRogers
+    * Google News
+    * OMRON Connect
+    * OurGroceries
+    * PayByPhone parking
+    * Play Games
+    * Play Music
+    * Pocket
+    * Polar Beat
+    * Polar flow
+    * Prime Video
+    * Recover (Garmin stretching)
+    * Rogers Xfinity
+    * Slack
+    * Starbucks
+    * Strava
+    * Sun Surveyor
+    * TD (Canada)
+    * Training Peaks
+    * Twitch
+    * Untappd
+    * uptimerobot
+    * VanCollect
+    * VanConnect
+    * VT Live
+    * wahoo
+    * WestJet
+    * Wifi Analyzer
+    * zoom
+    * Zwift
+  * closed all Chrome tabs
+  * deleted Chrome browsing history
+  * disabled fingerprint auth
+  * changed PIN
+  * deleted a bunch of SMS history, but not all
+* prep usb key for travel:
+  * copy of ssh keys
+  * copies of talk slide decks
+ finalized mobile 8M for trip to China
+  * things that need to be reversed before we leave for China:
+    * deleted ssh keys in `~/.ssh/`
+    * deleted my `dotfiles` repo
+
+
+
+* things that need to be reversed on the mobile 8M laptop when we return:
+  * changed menu bar time to 24-hour clock
+  * changed dock to auto-hide
+  * 2547 wifi
+  * installed Vivaldi browser
+  * installed VS Code
 
 
 
