@@ -9950,6 +9950,61 @@ Worked at ESB
 
 
 
+#### Sun 2-Nov-2025
+
+Home to Zhejiang
+
+
+
+### Week 44
+
+#### Mon 3-Nov-2025
+
+Home to Zhejiang
+
+
+
+#### Tue 4-Nov-2025
+
+Putuoshan Island tour
+
+
+
+#### Wed 5-Nov-2025
+
+2025 Symposium on Estuarine Hydro-sediment Dynamics and Ecological Effects
+Ocean College, Zhejiang University
+
+
+
+#### Thu 6-Nov-2025
+
+2025 Symposium on Estuarine Hydro-sediment Dynamics and Ecological Effects
+Ocean College, Zhejiang University
+
+
+
+#### Fri 7-Nov-2025
+
+Zhejiang to Hangzhou
+
+
+
+#### Sat 8-Nov-2025
+
+Hangzhou
+
+* Baochu Pagoda
+* West Lake (Xi Hu) boat tour
+* Longjing Tea Village
+
+
+
+#### Sun 9-Nov-2025
+
+Hangzhou to Home
+
+
 * things that need to be reversed on the mobile 8M laptop when we return:
   * changed menu bar time to 24-hour clock
   * changed dock to auto-hide
