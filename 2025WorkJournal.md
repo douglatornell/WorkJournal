@@ -8020,7 +8020,7 @@ Set up new desk in my office at home.
       * `xarray` wrapper
       * github.com/PORTAL-CEOS
       * not much there there...
-* uploaded `nowcast-green.202111` u, v, w & T grid results files to
+* uploaded 2007 `nowcast-green.202111` u, v, w & T grid results files to
   `nibi:/project/def-allen/SalishSea/nowcast-green.202111/` for Vicente with
   `rsync -rtlv --relative *07/SalishSea_1h_*_grid_*.nc nibi:/project/def-allen/SalishSea/nowcast-green.202111/`
   in `tmux` session `djl-nibi-xfer`
@@ -9956,7 +9956,7 @@ Home to Zhejiang
 
 
 
-### Week 44
+### Week 45
 
 #### Mon 3-Nov-2025
 
@@ -10005,14 +10005,262 @@ Hangzhou
 Hangzhou to Home
 
 
-* things that need to be reversed on the mobile 8M laptop when we return:
-  * changed menu bar time to 24-hour clock
-  * changed dock to auto-hide
-  * 2547 wifi
-  * installed Vivaldi browser
-  * installed VS Code
+
+### Week 46
+
+#### Mon 10-Nov-2025
+
+##### Miscellaneous
+
+* reversed things on the mobile 8M laptop after China trip:
+  * changed menu bar time to 12-hour clock
+  * changed dock to always visible
+  * deleted Vivaldi browser & VS Code from desktop
+  * deleted our folders from desktop and `Users/EOAS/`
+  * couldn't remove 2547 wifi
+* started uploading 2008 `nowcast-green.202111` u, v, w & T grid results files to
+  `nibi:/project/def-allen/SalishSea/nowcast-green.202111/` for Vicente with
+  `rsync -rtlv --relative *08/SalishSea_1h_*_grid_*.nc nibi:/project/def-allen/SalishSea/nowcast-green.202111/`
+  in `tmux` session `djl-nibi-xfer`
 
 
+##### SalishSeaCast
+
+* `orcinus` host key issue re: login nodes pool seems to be resolved
+  * changed hacked names from `seawolf2` back to `orcinus` on `khawla` and `skookum`
+  * VScode remains unusable due to missing port in setup
+  * backfilled today's `upload_forcing` for `nowcast+` and `turbidity`
+
+
+##### Security Updates
+
+* Squash-merged pre-commit PRs to update black to 25.11.0 re: Python 3.14 & other updates:
+  * NEMO_Nowcast
+  * SalishSeaNowcast
+  * SalishSeaCmd
+  * SalishSeaTools
+  * erddap-datasets
+  * NEMO-Cmd
+  * salishsea-site
+  * SOG-Bloomcast-Ensemble
+  * MoaceanParcels
+  * cookiecutter-MOAD-pypkg
+  * gha-workflows
+  * Reshapr
+  * moad_tools
+  * AtlantisCmd
+* Squash-merged dependabot PRs to update brotli to 1.2.0 re: DoS vulnerability:
+  * AtlantisCmd
+  * NEMO_Nowcast
+  * salishsea-site
+  * FUN
+  * moad_tools
+  * Reshapr
+  * MoaceanParcels
+* Squash-merged dependabot PRs to update ssh-action to 1.2.3 re: various updates:
+  * salishsea-site
+* Squash-merged dependabot PRs to update pip to 25.3 re: deprecations, removals, features & bug fixes:
+  * AtlantisCmd
+  * salishsea-site
+  * NEMO_Nowcast
+  * FUN
+  * moad_tools
+  * Reshapr
+  * MoaceanParcels
+
+
+
+#### Tue 11-Nov-2025
+
+**Statutory Holiday** - Remembrance Day
+
+##### Miscellaneous
+
+* read "Polars vs pandas: What's the Difference? tutorial on Real Python
+  * https://realpython.com/polars-vs-pandas/
+  * method-chaining vs index-based syntax
+  * `PyArrow` backend
+  * `Polars` `LazyFrames` and streaming for larger than memory datasets
+  * `Narwhals` for unified interface to `polars` and `pandas`
+  * `matplotlib` vs `vega-altair` for plotting
+* checked on uploading 2008 `nowcast-green.202111` u, v, w & T grid results files to
+  `nibi:/project/def-allen/SalishSea/nowcast-green.202111/` for Vicente with
+  * ~36.2% done in 21 hours; extrapolate to 58 hours total or 22:00 Wed to finish
+
+
+##### SalishSeaCast
+
+* `upload_forcing orcinus` worked properly with cluster name in ssh config
+* reviewed `arbutus` infrastructure renewal page: https://docs.alliancecan.ca/wiki/Arbutus
+  * primary new nodes are 96 core, 768G (8G/core), 2 x Intel Platinum 8568Y+ 2.3GHz, 300MB cache
+    with 7.68T NVMe SSD local storage
+  * presently we use 120 cores for NEMO and 75 cores for wwatch3
+  * can we run with a small VM as a head node and a single 96 core VM as a compute node
+    * how many concurrent workers do we need to run on the head node?
+    * only one compute node implies wwatch3 runs after NEMO instead of concurrently with nowcast-green
+      * presently:
+        * nowcast-blue: 23m, 08:10 PST
+        * forecast: 35m, 08:47 PST
+        * nowcast-green: 63m, 09:55 PST
+        * wwatch3 nowcast: 29m, 09:23 PST
+        * wwatch3 forecast: 44m, 10:09 PST
+      * single VM:
+        * nowcast-green: 63-79m, 08:50-09:06 PST
+        * forecast: 35-44m, 09:25-09:34 PST
+        * wwatch3 nowcast: 29m, 09:54-10:03 PST
+        * wwatch3 forecast: 44m, 10:38-10:47 PST
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update brotli to 1.2.0 re: DoS vulnerability:
+  * SalishSeaNowcast
+  * SalishSeaCmd
+  * NEMO-Cmd
+  * SOG-Bloomcast
+  * erddap-datasets
+  * SalishSeaTools
+  * SOG-Bloomcast-Ensemble
+* Squash-merged dependabot PRs to update pip to 25.3 re: deprecations, removals, features & bug fixes:
+  * SalishSeaNowcast
+  * SalishSeaCmd
+  * NEMO-Cmd
+  * SalishSeaTools
+  * SOG-Bloomcast-Ensemble
+  * SOG-Bloomcast
+  * erddap-datasets
+  * MOAD/docs
+  * SalishSeaCast/docs
+  * cookiecutter-MOAD-pypkg
+  * gha-workflows
+
+
+##### SalishSeaCmd
+
+* GHA `pytest-with-coverage` workflow for Python 3.11 fails due to `NEMO-Cmd` requirement for Python >3.12
+
+
+##### SalishSeaTools
+
+* GHA `pytest-with-coverage` workflow for all Python versions fails in `test_nc_tools.test_time_origin_UTC_timezone()`
+  error related to `datetime.timezone.utc` and `dateutil.tx.tx.txutc`
+
+
+##### SalishSeaNowcast
+
+* added `erddapy` as dependency because it is required by `SalishSeaTools`; PR#395
+* set out to try to fix `test_run_NEMO_hindcast` tests that fail in GHA workflow with `IndexError`
+  in `caplog.records` assertions, but the failure disappeared in PR#395
+  * they came back when PR#395 was merged
+* fixed bugs in GHA `pytest-with-coverage` workflow; PR#396
+  * Python version was not being picked up from `matrix.python-version` due to a copy-paste error
+    from the reusable workflow
+  * date for downloads cache key was not defined due to me having missed a step from the `setup-micromamba`
+    docs
+
+
+##### gha-workflows
+
+* fixed bug in GHA `pytest-with-coverage` workflow; PR#74
+  * date for downloads cache key was not defined due to me having missed a step from the `setup-micromamba`
+    docs
+
+
+
+#### Wed 12-Nov-2025
+
+
+##### SalishSeaNowcast
+
+* more work to fix `test_run_NEMO_hindcast` tests that fail in GHA workflow with `IndexError`
+  in `caplog.records` assertions; PR#397
+  * after several refactors that didn't improve the situation, changed to skip intermittent fail
+    tests when they are run on GHA to avoid false flags from CI
+* discovered `with caplog.at_level()` context manager; more readable alternative to
+  `caplog.set_level()` function
+* Added a  pattern for the Alliance Canada URL to the `linkcheck_ignore` list in `conf.py` to bypass
+  timeouts caused by rate limits when running the `sphinx-linkcheck` workflow in GitHub Actions; PR#398
+  * confirmed that private `tidal-predictions` repo and wwatch3 source code URLs need to be ignored
+    regardless of where the linkcheck is run
+
+
+##### erddap-datasets
+
+* fixed bugs in GHA `check-datasets-xml` workflow; PR#63
+  * Python version was not being picked up from `matrix.python-version` due to a copy-paste error
+    from the reusable workflow
+  * date for downloads cache key was not defined due to me having missed a step from the `setup-micromamba`
+    docs
+  * environment cache key was not defined due to me not understanding the `setup-micromamba` docs
+
+
+##### salishsea-site
+
+* fixed bugs in GHA `deployment` workflow; PR#63
+  * Python version was not being picked up from `matrix.python-version` due to a copy-paste error
+    from the reusable `pytest-with-coverage` workflow
+  * date for downloads cache key was not defined due to me having missed a step from the `setup-micromamba`
+    docs
+
+
+##### AtlantisCmd
+
+* fixed bugs in GHA `pytest-with-coverage` workflow; PR#88
+  * Python version was not being picked up from `matrix.python-version` due to a copy-paste error
+    from the reusable workflow
+  * date for downloads cache key was not defined due to me having missed a step from the `setup-micromamba`
+    docs
+* GHA `pytest-with-coverage` workflow for Python 3.11 fails due to `NEMO-Cmd` requirement for Python >3.12
+
+
+##### gha-workflows
+
+* fixed bug in GHA `sphinx-linkcheck` workflow; PR#76
+  * date for downloads cache key was not defined due to me having missed a step from the `setup-micromamba`
+    docs
+
+
+##### moad_tools
+
+* fixed bugs in GHA `pytest-no-midoss` workflow; PR#108
+  * Python version was not being picked up from `matrix.python-version` due to a copy-paste error
+    from the reusable workflow
+  * date for downloads cache key was not defined due to me having missed a step from the `setup-micromamba`
+    docs
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update pip to 25.3 re: deprecations, removals, features & bug fixes:
+  * SOG-forcing
+  * cookiecutter-analysis-repo
+
+
+##### SalishSeaCast/docs
+
+* Added a  pattern for the Alliance Canada URL to the `linkcheck_ignore` list in `conf.py` to bypass
+  timeouts caused by rate limits when running the `sphinx-linkcheck` workflow in GitHub Actions
+* replaced links to obsolete NEMO SVN/Trac tickets & changesets with literal URLs
+
+
+
+#### Thu 13-Nov-2025
+
+##### Miscellaneous
+
+* GitHub Q4 roadmap webinar
+  * Spaces is context storage bins that Copilot and teams can use for specific project scopes
+  * VSCode Copilot
+    * plan model
+    * custom agents
+
+
+
+
+* rsync oct tarball to nibi after 208 upload finishes
+
+
+* investigate Hynek's `stamina` package: opinionated wrapper around `tenacity`
 
 
 * backfill `upload_forcing nowcast+` and `turbidity` to `nibi` from 16oct onward
@@ -10074,6 +10322,9 @@ Hangzhou to Home
 * `supervisor` `pkg_resources` API deprecation issue
   * version 4.3.0 on PyPI contains a fix
   * conda-forge feedstock has CI failures, but it's not abandoned
+* change download_weather to gather only files missed by collect_weather so that it can
+  work with crop_gribs monitoring incoming files
+  * check for presence of files before downloading them; skip if present
 
 
 
@@ -10230,13 +10481,6 @@ TODO:
   * ECget
   * cookiecutter-MOAD-pypkg
   * SOG-Bloomcast ??
-
-
-TODO:
-
-* change download_weather to gather only files missed by collect_weather so that it can
-  work with crop_gribs monitoring incoming files
-  * check for presence of files before downloading them; skip if present
 
 
 
