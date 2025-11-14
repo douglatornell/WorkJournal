@@ -10246,6 +10246,8 @@ Hangzhou to Home
 
 #### Thu 13-Nov-2025
 
+Worked at ESB
+
 ##### Miscellaneous
 
 * GitHub Q4 roadmap webinar
@@ -10253,11 +10255,52 @@ Hangzhou to Home
   * VSCode Copilot
     * plan model
     * custom agents
+* OS pkg updates on kudu; had to fix full boot volume on the way:
+  * started with 681M == >99% of /boot used
+  * clean up /var/cache/apt/archives/ with:
+      `sudo apt autoclean`
+  * flatpak cleanup:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    flatpak update --appstream
+    flatpak update
+    flatpak uninstall --unused
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * deleted a bunch of old kernels with guidance from askubuntu
+    (<https://askubuntu.com/questions/345588/what-is-the-safest-way-to-clean-up-boot-partition>)
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    uname -r  # in-use kernel - **don't delete**
+    dpkg --list 'linux-image*' | grep ^ii  # installed kernels
+    sudo apt remove linux-image-VERSION  # remove all but in-use and previous kernels
+    sudo apt autoremove  # remove pkgs associated w/ removed kernels
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * ended with 298M == 46% of /boot used
+
+
+##### SalishSeaCast
+
+* started `rsync` of oct tarball to `nibi`
+
+
+##### MOAD/docs
+
+* squash-merged PR#55 re: updating docs for working on Alliance clusters
+* Added a  pattern for the Alliance Canada URL to the `linkcheck_ignore` list in `conf.py` to bypass
+  timeouts caused by rate limits when running the `sphinx-linkcheck` workflow in GitHub Actions
+  * `sphinx-linkcheck` workflow on GHA is successful!
+
+
+##### SalishSeaCmd
+
+* added support for Python 3.14; PR#115
+* dropped support for Python 3.11; PR#116
+* released v25.3
 
 
 
-
-* rsync oct tarball to nibi after 208 upload finishes
 
 
 * investigate Hynek's `stamina` package: opinionated wrapper around `tenacity`
