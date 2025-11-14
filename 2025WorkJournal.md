@@ -10297,8 +10297,25 @@ Worked at ESB
 
 * added support for Python 3.14; PR#115
 * dropped support for Python 3.11; PR#116
-* released v25.3
 
+
+
+#### Fri 14-Nov-2025
+
+Worked at ESB
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* helped Raisha with planning release for Atlantis config repo
+
+
+##### AtlantisCmd
+
+* dropped support for Python 3.11; PR#89
+* started adding support for Python 3.14; PR#90
+
+* released v25.2
 
 
 
@@ -10461,17 +10478,17 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
 
 * Python 3.14:
   * NEMO-Cmd - done 18oct25 in PR#114
+  * SalishSeaCmd - done 13nov25 in PR#115
+  * AtlantisCmd - done 14nov25 in PR#
 
   * successful workflow test with 3.14:
     * MOAD/docs
-    * SalishSeaCmd
     * SalishSeaCast/docs
     * NEMO_Nowcast
     * moad_tools
     * tools/SalishSeaTools
     * SalishSeaNowcast
     * gha-workflows
-    * AtlantisCmd
     * SOG-Bloomcast-Ensemble
     * erddap-datasets
     * salishsea-site
