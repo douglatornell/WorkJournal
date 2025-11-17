@@ -10318,6 +10318,108 @@ Worked at ESB
 * released v25.2
 
 
+##### SalishSeaCast
+
+* `rsync` of oct tarball to `nibi` finished
+
+
+
+#### Sat 15-Nov-2025
+
+##### Minecraft
+
+* checked mods, etc. for releases compatible with 1.21.10:
+  * sodium: yes
+  * lithium: yes
+  * malilib: yes
+  * minihud: yes
+  * tweakeroo: yes
+  * iris: yes
+  * entity model features: yes
+  * entity texture features: yes
+  * fresh animations: no
+
+
+##### Miscellaneous
+
+* set up YubiKey as alternative unlock mechanism on `khawla` in hopes of using for auth with 1password
+  ssh agent
+  * ref https://support.system76.com/articles/yubikey-login/
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    # open spare root terminal in case I need to revert things
+    sudo su
+    # in regular terminal
+    sudo apt install -y libpam-yubico yubikey-personalization yubikey-manager
+    ykman otp chalresp --generate 2
+    # accept randomly generated key to use as challenge-response credential in slot 2
+    # store challenge files
+    sudo mkdir /var/yubico
+    sudo chown root /var/yubico
+    sudo chmod 700 /var/yubico
+    ykpamcfg -2 -v
+    sudo mv ~/.yubico/challenge-<SERIAL> /var/yubico/$USER-<SERIAL>
+    sudo chown root:root /var/yubico/$USER-<SERIAL>
+    sudo chmod 600 /var/yubico/$USER-<SERIAL>
+    # enable YubiKey authentication
+    sudo dpkg-reconfigure libpam-yubico
+    # in the 1st panel, set parameters (debugging enabled) for Yubico PAM to:
+    mode=challenge-response debug chalresp_path=/var/yubico
+    # in the 2nd panel, add Yubico authentiocation with YuibKey to the list of enabled profiles
+    # that dpkg-reconfigure results in a line added to /etc/pam.d/common-auth
+    auth required pam_yubico.so mode=challenge-response chalresp_path=/var/yubico
+    # use nano to change "required" to "sufficient"
+    # add PAM config (with debugging) to enable YubiKey as sufficient authentication
+    sudo nano /etc/pam.d/yubico-sufficient
+    auth sufficient pam_yubico.so mode=challenge-response debug debug_file=/var/log/pam_yubico.log
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * test by setting YubiKey as sufficient auth for `sudo`
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    sudo cp /etc/pam.d/sudo /etc/pam.d/sudo.orig
+    sudo nano /etc/pam.d/sudo
+    # add the following line above the “@include common-auth” line
+    @include yubico-sufficient
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * putting `auth sufficient pam_yubico.so mode=challenge-response chalresp_path=/var/yubico` in
+   `/etc/pam.d/common-auth` enables YubiKey for all authentications
+    * without that, putting `@include yubico-sufficient` ahead of `@include common-auth` in a service
+      file like `/etc/pam.d/sudo` enables YubiKey auth for just that service
+    * need to figure out what service(s) the 1password ssh-agent is using
+      * it's `polkit-1` with help from
+        https://scottstuff.net/posts/2025/07/04/passwordless-ssh-and-sudo-with-1password/
+  * removed `debug` from `/etc/pam.d/yubico-sufficient`
+  * added `@include yubico-sufficient` above `@include common-auth` in `/etc/pam.d/polkit-1`
+    * unlock after sleep and `sudo` require password
+    * unlock 1password and its sub-processes get auth from YubiKey when it is pressent and require
+      password when it is not
+
+
+
+#### Sun 16-Nov-2025
+
+##### SalishSeaCast
+
+* `download_wwatch3_results forecast2` failed at 05:09
+* `crop_gribs 12` failed with 528 files unprocessed
+* logins to `skookum`, `salish` and `smelt` all fail
+  * posted message in EOAS #oceanography channel
+* connection to `skookum` timed out at ~12:05
+* auth server issue resolved at ~13:50, but `skookum` still refusing connections
+* recovery started at ~14:10:
+  * `sarracenia` appears to have downloaded all 12Z and 18Z forecast files
+  * `collect_weather 2.5km 12` is stalled
+  * killed `collect_weather 2.5km 12`
+  * `collect_weather 2.5km 12 --backfill --backfill-date 2025-11-16`
+  * `crop_gribs 12 --backfill`
+  * automation took over to prepare and start runs at ~14:40
+  * killed `collect_weather 2.5km 18`
+  * `collect_weather 2.5km 18 --backfill --backfill-date 2025-11-16`
+
+
+
 
 
 * investigate Hynek's `stamina` package: opinionated wrapper around `tenacity`
