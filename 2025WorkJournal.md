@@ -10315,8 +10315,6 @@ Worked at ESB
 * dropped support for Python 3.11; PR#89
 * started adding support for Python 3.14; PR#90
 
-* released v25.2
-
 
 ##### SalishSeaCast
 
@@ -10418,6 +10416,159 @@ Worked at ESB
   * killed `collect_weather 2.5km 18`
   * `collect_weather 2.5km 18 --backfill --backfill-date 2025-11-16`
 
+
+
+### Week 47
+
+#### Mon 17-Nov-2025
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed ~2h due to 1 unprocessed file
+* Fraser River turbidity obs gap between 04:10 and 13:10 on 16oct
+* TWDP ferry obs feed appears to have gone bad at ~07:00 on 6nov
+
+
+##### Miscellaneous
+
+* installed `openconnect` on `khawla` for VPN connections to UBC
+  * install with `sudo apt install openconnect`
+  * use with `sudo openconnect myvpn.ubc.ca`
+    * `<userid>@app` or `<userid>@token-value`
+  * appears to only apply to ipv4 address, ipv6 address is unchanged
+
+
+##### AtlantisCmd
+
+* finished adding support for Python 3.14; PR#90
+* released v25.2
+
+
+##### Resilient-C
+
+* requested TLS cert renewals for Resilient-C domains via ticket on https://ubc.service-now.com/selfservice
+  * Generated new keys and CSRs:
+    * refs:
+      * https://confluence.it.ubc.ca/spaces/ITSecurity/pages/74423506/how+to+obtain+deploy+and+verify+an+X.509+certificate
+      * https://www.golinuxcloud.com/openssl-generate-csr/
+      * https://www.openssl.org/docs/man1.1.0/man1/req.html
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      cd /media/doug/warehouse/43ravens/projects/resilient-c/x.509-certs/
+      mkdir 2025/
+      cp 2024/*.cfg 2025/
+      cd 2025/
+      ```
+      <!-- markdownlint-enable MD031 -->
+    * generated private keys:
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      openssl ecparam -out resilient-c.ubc.ca.key -name prime256v1 -genkey
+      openssl ecparam -out resilient-c.resilientcoasts.ubc.ca.key -name prime256v1 -genkey
+      openssl ecparam -out platform.resilientcoasts.ubc.ca.key -name prime256v1 -genkey
+      ```
+      <!-- markdownlint-enable MD031 -->
+    * generated cert signing requests (CSRs):
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      openssl req -config resilient-c.ubc.ca.cfg -new -key resilient-c.ubc.ca.key -out resilient-c.ubc.ca.csr
+      openssl req -config resilient-c.resilientcoasts.ubc.ca.cfg -new -key resilient-c.resilientcoasts.ubc.ca.key -out resilient-c.resilientcoasts.ubc.ca.csr
+      openssl req -config platform.resilientcoasts.ubc.ca.cfg -new -key platform.resilientcoasts.ubc.ca.key -out platform.resilientcoasts.ubc.ca.csr
+      ```
+      <!-- markdownlint-enable MD031 -->
+  * Sent CSRs to UBC IT Cybersecurity in ticket INC4920912
+  * new certs were issued in ~5 minutes
+  * downloaded PEM encoded certificate files for 3 domains and stored them on `khawla` as
+    `43ravens/projects/resilient-c/x.509-certs/2025/{domain}.pem`
+  * obtained the bundle of intermediate CA certificates:
+    (new step in 2025)
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    curl -sJL  "https://crt.sh/?d=15731550466"  | tr -d '\r' > resilient-c.ubc.ca-cacerts.pem
+    curl -sJL  "https://crt.sh/?d=11405664274"  | tr -d '\r' >> resilient-c.ubc.ca-cacerts.pem
+    curl -sJL  "https://crt.sh/?d=15731550466"  | tr -d '\r' > resilient-c.resilientcoasts.ubc.ca-cacerts.pem
+    curl -sJL  "https://crt.sh/?d=11405664274"  | tr -d '\r' >> resilient-c.resilientcoasts.ubc.ca-cacerts.pem
+    curl -sJL  "https://crt.sh/?d=15731550466"  | tr -d '\r' > platform.resilientcoasts.ubc.ca-cacerts.pem
+    curl -sJL  "https://crt.sh/?d=11405664274"  | tr -d '\r' >> platform.resilientcoasts.ubc.ca-cacerts.pem
+    # the above is actually 3 copies of the same file
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * generate the chained certificates for nginx:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    cat resilient-c.ubc.ca.pem <(echo) resilient-c.ubc.ca-cacerts.pem > resilient-c.ubc.ca-chained.pem
+    cat platform.resilientcoasts.ubc.ca.pem <(echo) platform.resilientcoasts.ubc.ca-cacerts.pem > platform.resilientcoasts.ubc.ca-chained.pem
+    cat resilient-c.resilientcoasts.ubc.ca.pem <(echo) resilient-c.resilientcoasts.ubc.ca-cacerts.pem > resilient-c.resilientcoasts.ubc.ca-chained.pem
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * verified certs by following the steps in https://confluence.it.ubc.ca/spaces/ITSecurity/pages/74423506/how+to+obtain+deploy+and+verify+an+X.509+certificate#howtoobtain,deployandverifyanX.509certificate-howtoverifyanX.509certificate
+  * rsync-ed cfg, csr, key & chained.pem files to `resilient-c-vm:resilient-c-certs/2025/`
+  * copied `{domain}.pem` and `{domain}.key` files into directories in `/etc/nginx/ssl/{domain}/`
+  * restarted nginx
+  * ran SSL server tests on https://www.ssllabs.com/ssltest/; all graded A-
+    * need to support TLSv1.3 (I think) to get grade A
+    * upgraded `/etc/nginx/sites-available/<dome>` files to enable TLSv1.3 support:
+      * changed to `ssl_protocols TLSv1.3 TLSv1.2;`
+      * prepended ciphers to `ssl_ciphers`: `TLS13-CHACHA20-POLY1305-SHA256:TLS13-AES-256-GCM-SHA384:TLS13-AES-128-GCM-SHA256`
+    * restarted nginx
+    * got grade A on https://www.ssllabs.com/ssltest/
+
+
+
+#### Tue 18-Nov-2025
+
+##### SalishSeaCast
+
+* LiveOcean was delayed ~3h
+
+
+##### Line P Hackathon
+
+* got team assignment: Quantile Mapping lead by Hayley
+
+
+
+#### Wed 19-Nov-2025
+
+##### Miscellaneous
+
+* release notes for `erddapy` 2.3.0 suggest that `xarray.open_dataset()` requires `engine` arg as of
+  2025.11.0, but I can't find that in `xarray` changelog or docs
+
+
+##### Resilient-C
+
+* finished updating TLS certs; see end of 17nov notes above
+
+
+##### MOAD/docs
+
+* updated build env & contrib docs to use Python 3.14
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+
+  * adjusted row 17 tiles 6-7
+    * reviewed changes with Susan
+
+
+
+#### Thu 20-Nov-2025
+
+Worked at ESB
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * adjusted row 17 tiles 7-8 & 12
+
+    * reviewed changes with Susan
+
+  * added row 18 -
+    * reviewed work needed with Susan
 
 
 
@@ -10581,10 +10732,10 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
 * Python 3.14:
   * NEMO-Cmd - done 18oct25 in PR#114
   * SalishSeaCmd - done 13nov25 in PR#115
-  * AtlantisCmd - done 14nov25 in PR#
+  * AtlantisCmd - done 17nov25 in PR#90
+  * MOAD/docs - done 19nov in commit 8b73c7d43
 
-  * successful workflow test with 3.14:
-    * MOAD/docs
+  * workflows available for testing:
     * SalishSeaCast/docs
     * NEMO_Nowcast
     * moad_tools
