@@ -10619,10 +10619,65 @@ Worked at ESB
 ##### Reshapr
 
 * dropped support for Python 3.11; PR#167
-* started adding support for Python 3.14; PR#168
+* added support for Python 3.14; PR#168
+* released v25.2
 
 
 
+#### Fri 21-Nov-2025
+
+Worked at ESB
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* started uploading 2009 `nowcast-green.202111` u, v, w & T grid results files to
+  `nibi:/project/def-allen/SalishSea/nowcast-green.202111/` for Vicente with
+  `rsync -rtlv --relative *09/SalishSea_1h_*_grid_*.nc nibi:/project/def-allen/SalishSea/nowcast-green.202111/`
+  in `tmux` session `djl-nibi-xfer`
+* started exploring docs about plotting packages:
+  * Vega-Altair
+  * HoloViews
+  * Plotly
+
+
+##### SS-run-sets
+
+* pushed my example run descriptions and 31d `namelist.time` from `nibi`
+
+
+##### Reshapr
+
+* pulled v25.2 changes on `nibi`
+  * sadly, version doesn't seem to update without `python -m pip install -e .`
+    * confirmed on `kudu` where the Python 3.14 env I built yesterday before releasing v25.2
+      still showed `25.2.dev0` until after I did `python -m pip install -e .`
+* built new Python 3.14 env for Reshapr on `nibi`
+  * old env removal is very slow iterating through 181 linked packages, first to list them,
+    then to unlink them
+  * new env creation is also slow downloading packages and interating through 181 packages to link
+    them into the env
+  * retried the process in an `salloc` session to avoid script-kiddies running on login node
+    * still slow to unlink: $HOME file system load?
+    * env creation gets kill very quickly: out of memory? or trying to use more cores than allocated?
+      * re-tried creation in 8 core session with with 4000M/core
+        * much faster downloads
+        * reasonably fast linking; faster than on login node, I think
+* thought about adding feature re: `reshapr info` should show cluster configs in the pwd  in addition
+  to those included in the installed `Reshapr/cluster_configs/` directory
+  * how do we know that a file in the pwd is a cluster config?
+  * might be able to change `info._cluster_info()` so that it can show the contents of user-specified
+    cluster files, but that doesn't aid with discovery
+* sent messages to Camryn and Jose in the #alliance-hpc channel about my plans to use their recent runs
+  as the basis for new example docs in Reshapr
+
+
+
+* change docs to use `Miniforge3` and `mamba`
+  * MOAD/docs
+  * SalishSeaCast/docs
+  * many/most packages dev docs
+    * Reshapr
 
 
 * backfill `upload_forcing nowcast+` and `turbidity` to `nibi` from 16oct onward
