@@ -10559,7 +10559,6 @@ Worked at ESB
 
 Worked at ESB
 
-
 ##### 2x resolution SalishSeaCast
 
 * continued work on 2xrez processing and verification notebooks:
@@ -10571,9 +10570,59 @@ Worked at ESB
     * reviewed work needed with Susan
 
 
+##### Miscellaneous
+
+* set up YubiKey as alternative unlock mechanism on `kudu` in hopes of using for auth with 1password
+  ssh agent
+  * ref: Sat 15-Nov-2025 notes on setup for `khawla`
+      <!-- markdownlint-disable MD031 -->
+    ```bash
+    # open spare root terminal in case I need to revert things
+    sudo su
+    # in regular terminal
+    sudo apt install -y libpam-yubico yubikey-personalization yubikey-manager
+    # store previously generated challenge file from YubiKey slot 2
+    sudo mkdir /var/yubico
+    sudo chown root /var/yubico
+    sudo chmod 700 /var/yubico
+    ykpamcfg -2 -v
+    sudo mv ~/.yubico/challenge-<SERIAL> /var/yubico/$USER-<SERIAL>
+    sudo chown root:root /var/yubico/$USER-<SERIAL>
+    sudo chmod 600 /var/yubico/$USER-<SERIAL>
+    # enable YubiKey authentication
+    sudo dpkg-reconfigure libpam-yubico
+    # in the 1st panel, set parameters (debugging enabled) for Yubico PAM to:
+    mode=challenge-response debug chalresp_path=/var/yubico
+    # in the 2nd panel, add Yubico authentiocation with YuibKey to the list of enabled profiles
+    # that dpkg-reconfigure results in a line added to /etc/pam.d/common-auth
+      auth required pam_yubico.so mode=challenge-response chalresp_path=/var/yubico
+    # delete that line
+    # add PAM config to enable YubiKey as sufficient authentication
+    sudo nano /etc/pam.d/yubico-sufficient
+    auth sufficient pam_yubico.so mode=challenge-response chalresp_path=/var/yubico
+    # set YubiKey as sufficient auth for polkit-1
+    sudo nano /etc/pam.d/polkit-1
+    @include yubico-sufficient  # above @include common-auth
+    ```
+    <!-- markdownlint-enable MD031 -->
+* investigated Hynek's `stamina` package: opinionated wrapper around `tenacity`
+  * https://stamina.hynek.me
+  * Hynek's opinions are things that I also understand and practise when I use `tenacity` with the
+    exception of jitter
+  * `stamina` provides nice extra features like:
+    * a context manager to retry coe blocks without having to break them out as a function
+    * testing support
+    * logging support for stdlib, `structlog`, and `Prometheus`
+* Phys Ocgy seminar: Raisha
 
 
-* investigate Hynek's `stamina` package: opinionated wrapper around `tenacity`
+##### Reshapr
+
+* dropped support for Python 3.11; PR#167
+* started adding support for Python 3.14; PR#168
+
+
+
 
 
 * backfill `upload_forcing nowcast+` and `turbidity` to `nibi` from 16oct onward
@@ -10734,6 +10783,7 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
   * SalishSeaCmd - done 13nov25 in PR#115
   * AtlantisCmd - done 17nov25 in PR#90
   * MOAD/docs - done 19nov in commit 8b73c7d43
+  * Reshapr - done 20nov25 in PR#168
 
   * workflows available for testing:
     * SalishSeaCast/docs
@@ -10745,37 +10795,11 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
     * SOG-Bloomcast-Ensemble
     * erddap-datasets
     * salishsea-site
-    * Reshapr
   * no workflows:
     * SOG
     * ECget
     * analysis-doug
     * SOG-Bloomcast ??
-
-
-
-* Python 3.13:
-  * successful workflow test with 3.13:
-    * MOAD/docs - migrated on 14oct24
-    * NEMO-Cmd - migrated on 27oct24 in PR#92
-    * SalishSeaCmd - migrated on 27oct24 in PR#77
-    * SalishSeaCast/docs - migrated on 11nov24 in PR#57
-    * NEMO_Nowcast - migrated on 27nov24 in PR#62
-    * moad_tools - migrated on 15dec24 in PR#80
-    * tools/SalishSeaTools - migrated on 9jan25 in PR#124
-    * SalishSeaNowcast - migrated on 12jan25 in PR#302
-    * gha-workflows - migrated on 13jan25 in PR#51
-    * AtlantisCmd - migrated on 2feb25 in PR#61
-    * SOG-Bloomcast-Ensemble - migrated on 15feb25 in PR#66
-    * erddap-datasets - migrated on 10jul25 in PR#52
-    * salishsea-site - migrated on 11jul25 in PR#119
-    * Reshapr - migrated on 28aug25 in PR#161
-  * no workflows:
-    * SOG
-    * ECget
-    * analysis-doug
-    * SOG-Bloomcast ??
-
 
 
 TODO:
@@ -10802,6 +10826,15 @@ TODO:
 * review and clean up permissions in GitHub orgs
 
 
+Here's the PyCharm commit message generation prompt that keeps getting overwritten by updates:
+
+  Avoid overly verbose descriptions or unnecessary details.
+
+  Start with a short sentence in imperative form, no more than 50 characters long.
+
+  Then leave an empty line and continue with a more detailed explanation.
+
+  Write only one sentence for the first part, and two or three sentences at most for the detailed explanation.
 
 
 Because I can never remember how to get a git feature branch that I set aside back into working
