@@ -10564,11 +10564,6 @@ Worked at ESB
 * continued work on 2xrez processing and verification notebooks:
   * adjusted row 17 tiles 7-8 & 12
 
-    * reviewed changes with Susan
-
-  * added row 18 -
-    * reviewed work needed with Susan
-
 
 ##### Miscellaneous
 
@@ -10670,6 +10665,54 @@ Worked at ESB
     cluster files, but that doesn't aid with discovery
 * sent messages to Camryn and Jose in the #alliance-hpc channel about my plans to use their recent runs
   as the basis for new example docs in Reshapr
+
+
+
+#### Sat 22-Nov-2025
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed ~2h due to 1 unprocessed file
+
+
+
+#### Sun 23-Nov-2025
+
+
+##### Reshapr
+
+* thought more about adding feature re: `reshapr info` should show cluster configs in the pwd  in addition
+  to those included in the installed `Reshapr/cluster_configs/` directory
+  * how do we know that a file in the pwd is a cluster config?
+    * check YAML file contents for a key that is most likely to be in a cluster config file
+      e.g. `number of workers`
+    * could use `chunk size` key for a similar feature for model profile YAML files
+
+
+##### gha-workflows
+
+* GHA workflows that use downloads caching (`pytest-with-coverage`, `sphinx-linkcheck`) sometimes
+  fail due to "Unable to reserve cache with key downloads-2025-11-23-linux-64, another job may be
+  creating this cache"
+  * need to make cache keys unique
+    * `downloads-2025-11-23-pytest`
+    * `downloads-2025-11-23-linkcheck`
+  * done for reusable workflows in PR#77
+
+  * TODO:
+    * moad_tools
+    * salishsea-site
+    * SalishSeaNowcast
+    * erddap-datasets
+    * AtlantisCmd
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * reviewed row 17 changes with Susan
+  * added row 18 - Qualicum Beach to Pender Harbour
+    * reviewed work needed with Susan
+
 
 
 
