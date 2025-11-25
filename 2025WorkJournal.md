@@ -10694,17 +10694,11 @@ Worked at ESB
 * GHA workflows that use downloads caching (`pytest-with-coverage`, `sphinx-linkcheck`) sometimes
   fail due to "Unable to reserve cache with key downloads-2025-11-23-linux-64, another job may be
   creating this cache"
-  * need to make cache keys unique
+  * need to make cache keys unique; e.g.
     * `downloads-2025-11-23-pytest`
     * `downloads-2025-11-23-linkcheck`
   * done for reusable workflows in PR#77
 
-  * TODO:
-    * moad_tools
-    * salishsea-site
-    * SalishSeaNowcast
-    * erddap-datasets
-    * AtlantisCmd
 
 ##### 2x resolution SalishSeaCast
 
@@ -10712,6 +10706,110 @@ Worked at ESB
   * reviewed row 17 changes with Susan
   * added row 18 - Qualicum Beach to Pender Harbour
     * reviewed work needed with Susan
+
+
+
+### Week 48
+
+#### Mon 24-Nov-2025
+
+##### SalishSeaCast
+
+* HRDPS 12Z files stalled at 08:36 with 110 files remaining
+  * `crop_gribs 12` timed out at 09:49 with 110 files unprocessed
+  * `grib_to_netcdf` crashed
+  * more 12Z files downloaded between 09:56 and 10:12; resumed at 11:05; finished at 11:27
+  * restarted automation at ~11:30
+    * `crop_gribs 12 --backfull`
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update `actions/checkout` to 6 re: node 24 support:
+  * rwhite/numeric_2024
+  * gha-workflows
+  * moad_tools
+  * SalishSeaNowcast
+  * erddap-datasets
+  * AtlantisCmd
+  * salishsea-site
+* Squash-merged dependabot PR to update `pypdf` to 6.4.0 re: GHSA-m449-cwjh-6pw7
+  re: excessive memory use vulnerability:
+  * SalishSeaNowcast
+
+
+##### moad_tools
+
+* fixed GHA workflow issue in `pytest-no-midoss` re: occassional failure due to
+  "Unable to reserve cache with key downloads-2025-11-23-linux-64, another job may be creating this cache"
+  by making cache key unique; `downloads-2025-11-23-no-midoss`
+
+
+##### SalishSeaNowcast
+
+* fixed GHA workflow issue in `pytest-with-coverage` re: occassional failure due to
+  "Unable to reserve cache with key downloads-2025-11-23-linux-64, another job may be creating this cache"
+  by making cache key unique; e.g. `downloads-2025-11-23-pytest`
+
+
+##### erddap-datasets
+
+* fixed GHA workflow issue in `check-datasets` re: occassional failure due to
+  "Unable to reserve cache with key downloads-2025-11-23-linux-64, another job may be creating this cache"
+  by making cache key unique; e.g. `downloads-2025-11-23-check-datasets`
+* committed restoration of `updateEveryNMillis` setting in `ubcSSf2DWaveFields30mV17-02` dataset
+  * PR#66
+  * formalization of a change I made on `skookum` as an experiment on 21aug
+  * Restored `<updateEveryNMillis>10000</updateEveryNMillis>` element to `ubcSSf2DWaveFields30mV17-02`
+    dataset because its removal is the root cause of the latency issue for `make_plots wwatch3`.
+    `updateEveryNMillis` causes a user request to trigger a dataset update in the request thread which
+    probably avoids the delay in updating the dataset caused by processing of the flag file updates
+    in the main thread being swamped by `nowcast-green` updates that typically start just before
+    `wwatch3-forecast*` updates start; the former take >=30 minutes.
+* removed `cedar` IP address from unlimited requests list because I haven't heard from
+  Peter Thompson @ SFU in months and `cedar` is offline now
+
+
+##### salishsea-site
+
+* fixed GHA workflow issue in `deployment` re: occassional failure due to
+  "Unable to reserve cache with key downloads-2025-11-23-linux-64, another job may be creating this cache"
+  by making cache key unique; e.g. `downloads-2025-11-23-deploy`
+
+
+##### AtlantisCmd
+
+* fixed GHA workflow issue in `pytest-with-coverage` re: occassional failure due to
+  "Unable to reserve cache with key downloads-2025-11-23-linux-64, another job may be creating this cache"
+  by making cache key unique; e.g. `downloads-2025-11-23-pytest`
+
+
+##### Miscellaneous
+
+* helped Raisha with updated host key on `salish` issue that was preventing her from connecting
+
+
+##### Reshapr
+
+* started work on adding `nibi` support via examples from Camryn's & Jose's research runs
+  * added dask cluster config for `nibi`
+
+
+
+#### Tue 25-Nov-2025
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* HRDPS 12Z files stalled at 08:43 with 396 files remaining
+
+
+##### Miscellaneous
+
+* helped Raisha with updated host key on `salish` issue that was preventing her from connecting
+
+
 
 
 
