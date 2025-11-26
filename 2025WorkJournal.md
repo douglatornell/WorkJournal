@@ -10803,13 +10803,56 @@ Worked at ESB
 ##### SalishSeaCast
 
 * HRDPS 12Z files stalled at 08:43 with 396 files remaining
+  * `crop_gribs 12` timed out at 09:45 with 264 files unprocessed
+  * `grib_to_netcdf` crashed
+  * 12Z files downloads resumed at 10:53 and finished at 11:11
+  * restarted automation at ~11:13
+    * `crop_gribs 12 --backfull`
 
 
 ##### Miscellaneous
 
 * helped Raisha with updated host key on `salish` issue that was preventing her from connecting
+* read slides from Marie @ SFU Modern Shell Utilities webinar
+  * installed some of them on `kudu`:
+    * uninstalled 2018 `rustup` on `kudu` and reinstalled up-to-date `rustup`
+    * installed `eza` replacement for `ls`: `cargo install eza`
+    * installed `bat` replacement for `cat`:
+      * `sudo apt install bat`
+      * alias bat="batcat"  # added to ~/.bash_aliases
+    * installed `fd-find` replacement for `find`:
+      * `sudo apt install fd-find`
+      * `ln -s $(which fdfind) ~/.local/bin/fd`
+    * installed `riggrep` replacement for `grep`:
+  * installed some of them on `nibi`:
+    * installed `eza` replacement for `ls`:
+      * `module load rust/1.91.0`
+      * `cargo install eza`
+    * `bat`, `fd`, `fzf` & `ripgrep` are already installed
+    * added `$HOME/.cargo/bin` to `PATH` in `.bash_profile`
+* found https://sphinx-copybutton.readthedocs.io/ to add copy button functionality to Sphinx code blocks
 
 
+##### SalishSeaCast_hourly_prod
+
+* started work on `nibi` to re-run the `SalishSeaCast_hourly_prod` config
+  (SalishSeaCast v202111 config with oxygen diagnostics from Tall and hourly productivity output)
+  for Sacchi to use to compare with 22-27 Aug 2024 cruise observations
+  * did a clean build of the `SalishSeaCast_hourly_prod` config
+  * confirmed that `SMS_O2` and `FLX_O2` variables that Sacchi needs are in my `field_def.xml` file
+    * sent email to Tall asking for units and long_name for `FLX_O2`
+  * added `SMS_O2` and `FLX_O2` to `oxy_T` file in my `file_def.xml`
+
+
+##### Line P Hackathon
+
+* explored hackathon information
+* team:
+  * Hayley Dosser
+  * Gabriel Mingorance
+  * Emily O'Grady
+  * Debora Lucatelli
+* approach: Quantile Mapping
 
 
 
