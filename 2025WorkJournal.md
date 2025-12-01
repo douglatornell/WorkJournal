@@ -3996,7 +3996,7 @@ Worked at ESB
   * failed requests seem to be returning JSON? to xarray instead of nothing and
     that triggers `ValueError`
       did not find a match in any of xarray's currently installed IO backends
-      ['netcdf4', 'h5netcdf', 'scipy', 'cfgrib']. Consider explicitly selecting
+      `['netcdf4', 'h5netcdf', 'scipy', 'cfgrib']`. Consider explicitly selecting
       one of the installed engines via the ``engine`` parameter, or installing
       additional IO dependencies, see:
       https://docs.xarray.dev/en/stable/getting-started-guide/installing.html
@@ -6126,7 +6126,7 @@ Last Cardiac Rehab session.
   * errors are from hour 036 `APCP_Sfc` file; the rest of hour 036 and hours 039-048 were not processed
   * confirmed with `crop_gribs 12 --var APCP_Sfc --var-hour 36 --debug`
     * unexpected end of file
-    * sarracenia log shows: "[ERROR] util/writelocal mismatched file length writing ..."
+    * sarracenia log shows: "`[ERROR]` util/writelocal mismatched file length writing ..."
     * manually downloaded `APCP_Sfc` file from hpfx and got a larger one
     * successfully ran `crop_gribs 12 --var APCP_Sfc --var-hour 36 --debug`
     * successfully ran `crop_gribs 12 --var DLWRF_Sfc --var-hour 36 --debug`
@@ -6484,7 +6484,7 @@ Worked at ESB
   * doppenbe
   * haddaram
 * 1 successful job in the past 10 days from queued users
-  * arashy: 4 nodes, 128s core ran on g[13,17,23,31] for 26m
+  * arashy: 4 nodes, 128s core ran on `g[13,17,23,31]` for 26m
 
 
 ##### rorqual
@@ -6592,7 +6592,7 @@ Worked at ESB before published papers celebration at Brown's
   * awpye: 2 1 node, 192 core jobs
   * kbwarren
 * jobs in the past 10 days from queued users
-  * arashy: 4 nodes, 128s core ran on g[13,17,23,31] for 26m
+  * arashy: 4 nodes, 128s core ran on `g[13,17,23,31]` for 26m
   * blaisbru: 3 fails
 
 
@@ -8897,7 +8897,7 @@ Worked at home & ESB
 
 ##### SalishSeaNowcast
 
-* unpinned `xaraay` version to resolve `FutureWarning` issue #335 thanks to release of `cfgrib=0.9.15.1`
+* unpinned `xarray` version to resolve `FutureWarning` issue #335 thanks to release of `cfgrib=0.9.15.1`
   * PR#388
 
 
@@ -8950,7 +8950,7 @@ Worked at home & ESB
 
 ##### Atlantis
 
-* slack discussion with Raisha and Susan about extracting fields from SalishSeaCast and HTDPS to
+* slack discussion with Raisha and Susan about extracting fields from SalishSeaCast and HRDPS to
   generate new surface forcing for Atlantis
   * originally used ERDDAP; suspect that was because Reshapr didn't exist
 
@@ -9220,7 +9220,7 @@ Worked at ESB
 
 * successfully tested `/usr/bin/env ksh` in `rebuild_nemo` script via `salishsea combine`
   in completed runs results directories
-  * ran 31d 21x37 test on 2 nodes to confirm full workflow and add to scaling martrix
+  * ran 31d 21x37 test on 2 nodes to confirm full workflow and add to scaling matrix
     * started at 15:35 Eastern
       * failed due to node failures
     * restarted at 17:26 Eastern
@@ -10363,7 +10363,7 @@ Worked at ESB
     sudo dpkg-reconfigure libpam-yubico
     # in the 1st panel, set parameters (debugging enabled) for Yubico PAM to:
     mode=challenge-response debug chalresp_path=/var/yubico
-    # in the 2nd panel, add Yubico authentiocation with YuibKey to the list of enabled profiles
+    # in the 2nd panel, add Yubico authentiocation with YubiKey to the list of enabled profiles
     # that dpkg-reconfigure results in a line added to /etc/pam.d/common-auth
     auth required pam_yubico.so mode=challenge-response chalresp_path=/var/yubico
     # use nano to change "required" to "sufficient"
@@ -10391,7 +10391,7 @@ Worked at ESB
   * removed `debug` from `/etc/pam.d/yubico-sufficient`
   * added `@include yubico-sufficient` above `@include common-auth` in `/etc/pam.d/polkit-1`
     * unlock after sleep and `sudo` require password
-    * unlock 1password and its sub-processes get auth from YubiKey when it is pressent and require
+    * unlock 1password and its sub-processes get auth from YubiKey when it is present and require
       password when it is not
 
 
@@ -10549,7 +10549,6 @@ Worked at ESB
 ##### 2x resolution SalishSeaCast
 
 * continued work on 2xrez processing and verification notebooks:
-
   * adjusted row 17 tiles 6-7
     * reviewed changes with Susan
 
@@ -10842,6 +10841,7 @@ Worked at ESB
   * confirmed that `SMS_O2` and `FLX_O2` variables that Sacchi needs are in my `field_def.xml` file
     * sent email to Tall asking for units and long_name for `FLX_O2`
   * added `SMS_O2` and `FLX_O2` to `oxy_T` file in my `file_def.xml`
+  * moved previous run results to `~/scratch/MEOPAR/results/SalishSeaCast_hourly_prod/apr25-initial-runs/`
 
 
 ##### Line P Hackathon
@@ -10853,6 +10853,307 @@ Worked at ESB
   * Emily O'Grady
   * Debora Lucatelli
 * approach: Quantile Mapping
+
+
+
+#### Wed 26-Nov-2025
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed ~2h due to 1 unprocessed file
+
+
+##### Miscellaneous
+
+* installed some of the utilities from Marie @ SFU Modern Shell Utilities webinar on 'khawla`
+  * updated `rust` with `rustup update`
+  * installed `eza` replacement for `ls`: `cargo install eza`
+  * already had `bat` installed via `cargo` (rather than from os pkg)
+  * already had `fd-find`
+    * `ln -s $(which fdfind) ~/.local/bin/fd`
+  * already had `riggrep`
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * adjusted row 18 tiles 5 & 6
+    * reviewed row 18 changes with Susan
+  * added row 19 - Fanny Bay to Jervis Inlet
+    * reviewed work needed with Susan
+
+
+##### Line P Hackathon
+
+* requested membership in https://github.com/Statistical-Downscaling-for-the-Ocean
+* posted my #introduction
+
+
+##### SalishSeaCast_hourly_prod
+
+* continued work on `nibi` to re-run the `SalishSeaCast_hourly_prod` config
+  (SalishSeaCast v202111 config with oxygen diagnostics from Tall and hourly productivity output)
+  for Sacchi to use to compare with 22-27 Aug 2024 cruise observations
+  * discussed `FLX_O2` long name and units from Tall w/ Susan
+  * added long name, stdard name, and units for `FLX_O2` to `field_def.xml`
+  * started re-runs:
+    * storing results in `~/scratch/MEOPAR/results/SalishSeaCast_hourly_prod/`
+    * 22aug24 run started at 17:42 EST
+      * 23m35s; seems slow
+      * `SMS_O2` may be all NaNs
+
+
+##### Reshapr
+
+* continued work on adding `nibi` support via examples from Camryn's & Jose's research runs
+  * worked on Camryn's results in `/scratch/cstang/MEOPAR/results/WWTP/Nanaimo/01jan21_30d_noNutrients`:
+    * created `Camryn-WasteWater-jan21-noNutrients.yaml`
+    * created `extract_jan21_noNutrients.yaml`
+    * tried to run the extraction in an interactive session:
+      * `salloc --time=1:00:00 --mem-per-cpu=8000M --ntasks=16 --ntasks-per-node=16 --account=def-allen`
+        * `dask cluster: nibi_cluster` in extraction YAML fails it has to be `dask cluster: nibi_cluster.yaml`
+    * failed because there is no need to read from multiple files - doh!
+
+
+
+#### Thu 27-Nov-2025
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed ~2h due to 1 unprocessed file
+
+
+##### Miscellaneous
+
+* started work on setting up wallabag on OpalStack
+  * see `/media/doug/warehouse/43ravens/domains-maint/webfaction-opalstack-migration.md`
+* UBC/DFO modeling mtg:
+  * Ian Geisbrecht, Hakai
+  * hydrological modeling
+
+
+
+#### Fri 28-Nov-2025
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* re-started uploading 2009 `nowcast-green.202111` u, v, w & T grid results files to
+  `nibi:/project/def-allen/SalishSea/nowcast-green.202111/` for Vicente with
+  `rsync -rtlv --relative *09/SalishSea_1h_*_grid_*.nc nibi:/project/def-allen/SalishSea/nowcast-green.202111/`
+  in `tmux` session `djl-nibi-xfer`
+  * the last attempt stopped after 306 minutes
+* migrated OpalStack app user passwords from oplop to 1password, add ed25519 ssh keys, and removed
+  rsa-2048 keys
+  * 43ravens
+  * cyclelog
+  * douglatornell
+  * phpgedview
+  * sadahome
+  * susanallen
+  * wallabag
+* updated PyCharm to 2025.2.5 on `khawla`
+
+
+##### SalishSeaCast_hourly_prod
+
+* continued work on `nibi` to re-run the `SalishSeaCast_hourly_prod` config
+  (SalishSeaCast v202111 config with oxygen diagnostics from Tall and hourly productivity output)
+  for Sacchi to use to compare with 22-27 Aug 2024 cruise observations
+  * moved previous run results on `skookum` to `/results/SalishSeaCast/SalishSeaCast_hourly_prod/apr25-initial-runs/`
+  * downloaded `22aug24/SalishSea_1h_20240822_20240822_oxy_T.nc` to `skookum`
+  * checked fields for NaNs:
+      <!-- markdownlint-disable MD031 -->
+      ```text
+      ZDF_O2 all NaNs: True
+                       min=nan max=nan
+      LDF_O2 all NaNs: True
+                      min=nan max=nan
+      PHS_O2 all NaNs: False
+                      min=-0.3767924904823303 max=0.040131859481334686
+      BIO_O2 all NaNs: False
+                      min=-0.0017338107572868466 max=0.3767866790294647
+      RATE_O2 all NaNs: False
+                      min=-0.04354025050997734 max=0.04014727845788002
+      SMS_O2 all NaNs: True
+                      min=nan max=nan
+      FLX_O2 all NaNs: False
+                      min=-0.0008346695685759187 max=0.006115988362580538
+      ```
+      <!-- markdownlint-enable MD031 -->
+  * sent email to Tall for suggestions
+    * he pointed out that I need `key_trdrc` in addition to (?) the `key_trdtrc` that is already In
+      the config 🤦‍♂️
+  * added `key_trdrc` and did a clean build
+    * `./makenemo -n SalishSeaCast_hourly_prod clean`
+    * `./makenemo -n SalishSeaCast_hourly_prod add_key key_trdtrc`
+    * `XIOS_HOME=$HOME/MEOPAR/XIOS-2/ ./makenemo -n SalishSeaCast_hourly_prod -m GCC_NIBI -j 8`
+  * 22aug24 run started at 18:49 EST
+    * 14m27s
+    * `SMS_O2` has non-NaN values
+
+  * commit changes in `field_def.xml`, `file_def.xml`, and `SalishSeaCast_hourly_prod.yaml`
+  * commit `NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/cpp_SalishSeaCast_hourly_prod.fcm`
+
+
+
+#### Sat 29-Nov-2025
+
+##### Other
+
+* Started setup of 2026 gnucash accounts
+  * created empty 2026 gnucash sqlite3 file
+  * exported accounts tree from 2025 to csv and imported them
+  * started editing accounts for 2026:
+    * dropped no longer relevant accounts:
+    * added stocks, ETFs & funds to securities database
+    * created non-registered stock, ETF & fund accounts
+    * started creating scheduled transactions
+
+
+##### Minecraft
+
+* stopped server
+* did lizzy-smelt backup
+* updated OS packages and auto-removed outdated packages
+* rebooted
+* set up 1.21.10 server
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  mkdir ~/Games/MinecraftFabric1.21.10Server
+  cd ~/Games/MinecraftFabric1.21.10Server
+  curl -OJ https://meta.fabricmc.net/v2/versions/loader/1.21.10/0.18.1/1.1.0/server/jar
+  pushd ~/Games/MinecraftFabric1.21.8Server
+  cp banned-* eula.txt ops.json whitelist.json start.sh ../MinecraftFabric1.21.10Server/
+  popd
+  ```
+  <!-- markdownlint-enable MD031 -->
+  * edited `start.sh` to:
+  <!-- markdownlint-disable MD031 -->
+    ```bash
+    #!/usr/bin/env bash
+    java -Xmx2G -jar fabric-server-mc.1.21.10-loader.0.18.1-launcher.1.1.0.jar nogui
+    ```
+  <!-- markdownlint-enable MD031 -->
+* launched and stopped server to create instance directories and files
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  ./start.sh
+    ...
+  /stop
+  ```
+  <!-- markdownlint-enable MD031 -->
+* edited `server.properties` to sync with 1.21.8 settings
+* installed mods, and rsync-ed `1-20-1-25jul23` world tree:
+<!-- markdownlint-disable MD031 -->
+```bash
+cd ~/Games/MinecraftFabric1.21.10Server/mods/
+curl -LO https://github.com/CaffeineMC/lithium/releases/download/mc1.21.10-0.20.1/lithium-fabric-0.20.1+mc1.21.10.jar
+cd ~/Games/MinecraftFabric1.21.10Server
+rsync -av ../MinecraftFabric1.21.8Server/1-20-1-25jul23 ./
+```
+<!-- markdownlint-enable MD031 -->
+* downloaded and unzipped on `khawla` VanillaTweaks double shulker shells v1.3.13 datapack
+  * rsync-ed it to `Games/MinecraftFabric1.21.10Server/1-20-1-25jul23/datapacks/` and removed v1.13.11
+* launched server in `tmux`
+<!-- markdownlint-disable MD031 -->
+```bash
+tmux new -n minecraft-server
+./start.sh
+```
+<!-- markdownlint-enable MD031 -->
+* set up 1.21.10 client instance in MultiMC
+  * created instance
+  * installed fabric 0.18.1
+  * downloaded and installed loader mods:
+    * sodium-fabric-0.7.3+mc1.21.10.jar
+    * lithium-fabric-0.20.1+mc1.21.10.jar
+    * malilib-fabric-1.21.10-0.26.3-sakura.3.jar
+    * minihud-fabric-1.21.10-0.37.2-sakura.2.jar
+    * tweakeroo-fabric-1.21.10-0.26.2-sakura.5.jar
+    * iris-fabric-1.9.6+mc1.21.9.jar
+    * entity_model_features_1.21.9-fabric-3.0.7.jar
+    * entity_texture_features_1.21.9-fabric-7.0.6.jar
+  * downloaded and installed resource pack:
+    * FreshAnimations_v1.10.2.zip
+  * selected Java: `/usr/lib/jvm/java-21-openjdk-amd64/bin/java`
+  * started and stopped client instance to populate `config/`
+  * copied `minihud.json` and `tweakeroo.json` from 1.21.8 instance `config/`
+  * downloaded and installed Vanilla Tweaks resource packs `VanillaTweaks_r503680_MC1.21.x.zip`:
+    * iron bars fix
+    * lower shield
+    * redstone devices:
+      * StickyPistonSides
+      * DirectionalHoppers
+      * DirectionalDispensersDroppers
+      * DirectionalObservers
+      * GroovyLevers
+      * RedstoneWireFix
+  * added server: `SADA on lizzy` at 10.0.0.81
+* started game and adjusted UI:
+  * FOV: 80
+  * Video:
+    * Brightness: Bright
+    * GUI Scale: 2x
+    * Weather: Fancy
+    * Leaves: Fancy
+  * enabled resource packs
+  * Music & Sound:
+    * Music: 50%
+    * Closed Captions: on
+    * Directional Audio: on
+    * show Music Toast: on
+  * Optional Telemetry Data
+  * F3-h to enable advanced tooltips
+  * `/gamerule pvp false`
+  * used `/gamerule` to confirm increased spawn chunks radius from 3 to 4 to keep iron farm loaded
+
+
+
+#### Sun 30-Nov-2025
+
+##### Miscellaneous
+
+* finished uploading 2009 `nowcast-green.202111` u, v, w & T grid results files to
+  `nibi:/project/def-allen/SalishSea/nowcast-green.202111/` for Vicente
+  * 47.5h
+* started uploading 2010 `nowcast-green.202111` u, v, w & T grid results files to
+  `nibi:/project/def-allen/SalishSea/nowcast-green.202111/` for Vicente with
+  `rsync -rtlv --relative *10/SalishSea_1h_*_grid_*.nc nibi:/project/def-allen/SalishSea/nowcast-green.202111/`
+  in `tmux` session `djl-nibi-xfer`
+
+
+##### Other
+
+* Continued setup of 2026 gnucash accounts
+  * continued editing accounts for 2026:
+    * finished creating scheduled transactions
+
+    * created RSP fund accounts
+    * created TFSA fund accounts
+
+
+##### SalishSeaCast_hourly_prod
+
+* continued work on `nibi` to re-run the `SalishSeaCast_hourly_prod` config
+  (SalishSeaCast v202111 config with oxygen diagnostics from Tall and hourly productivity output)
+  for Sacchi to use to compare with 22-27 Aug 2024 cruise observations
+  * committed changes in `field_def.xml`, `file_def.xml`, and `SalishSeaCast_hourly_prod.yaml`
+  * 23aug24 run
+    * 16m40s
+  * committed `NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/cpp_SalishSeaCast_hourly_prod.fcm`
+  * 24aug24 run
+    * 15m50s
+  * 25aug24 run
+    * 
+
+
+##### SalishSeaCast
+
+* `archive_tarball nowcast-green 2025-nov` failed due to no `robot.graham` or `robot.nibi`
+* started `rsync` of nov tarball to `nibi`
+
+
 
 
 
@@ -10900,6 +11201,18 @@ Worked at ESB
 ##### SalishSeaCast
 
 * backfill AGRIF runs on `orcinus` from ~14jul
+
+
+##### Reshapr
+
+* consider accepting `dask cluster: nibi_cluster` in extraction YAML (i.e. no extension necessary)
+* `reshapr info` should handle user supplied path/file specs for cluster descriptions and model profiles
+  * presence of a path element (relative or absolute) triggers file reading from somewhere other than
+    in the Reshapr package directories
+* maybe `reshapr info` should be able to discover cluster descriptions and model profiles in the pwd
+  by checking YAML files for characteristic keys
+  * maybe `number of workers` for clusters and  `chunk size` for model profiles
+
 
 
 ##### salishsea-site
