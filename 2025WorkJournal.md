@@ -11145,17 +11145,424 @@ tmux new -n minecraft-server
   * 24aug24 run
     * 15m50s
   * 25aug24 run
-    * 
+    * 16m34s
 
 
 ##### SalishSeaCast
 
 * `archive_tarball nowcast-green 2025-nov` failed due to no `robot.graham` or `robot.nibi`
-* started `rsync` of nov tarball to `nibi`
+* did `rsync` of nov tarball to `nibi`
 
 
 
+## December
 
+### Week 49
+
+#### Mon 1-Dec-2025
+
+##### Miscellaneous
+
+* investigated report from Vicente re: permission issue on `nowcast-green.202111` files on `nibi`
+  starting with `25jan09/`
+  * directory permissions changed from `drwxr-s---` to `drwx--S---` seemingly in the middle of the
+    upload
+  * checked 2010 upload is back to `drwxr-s---`
+
+
+##### Line P Hackathon
+
+* Opening session
+  * Jim Christian
+    * permanent halocline (31-32) is a unique feature in open ocean
+    * bifurcation of NP current into Alaska & Califonia currents; temporal and spatial variations
+    * DIC & alkalinity measured mostly, some pH & pCO2
+    * DIC & alkalinity are conservative relative to temperature
+    * DIC & alkalinity have shorter histgory than other measurements along Line p
+  * Seamus
+    * neural networks
+    * weighted inputs -> transfer function -> net input -> activation function + threshold -> activation
+    * activation function is nonlinear
+    * learn weights via loss function minimization
+    * many variants in how neurons are connected and how networks are trained
+      * stability is a challenge
+  * Hayley Dosser
+    * quantile mapping
+    * statistical bias correction method
+    * common in climate services
+    * not a black box
+    * captures variability & extremes in data in addition to adjument of mean
+    * can be used for downscaling
+    * operates on cumlative probability distribution functions
+    * assumptions:
+      * stationarity
+      * independent variables
+        * multivariate quantile mapping bias correction (MBCn)
+        * can be used for downscaling
+      * need "long enough" time Series
+      * limited to model resolution
+      * can be computationally expensive
+        * **my question**: in what sense?
+  * Parsa Gooya
+    * Fourier neural operators (FNO)
+    * classical ML models operate in vector space; neural operators work in function space
+    * alternative: Lapace Neural Operator
+  * Ana Franco
+    * Gaussian Process Regression
+    * Bayesian non-parametric approach
+  * Yifan Zhu
+    * transfer learing
+    * pre-trained model transferred to unseen model for fine tuning
+    * use convolutional neural network
+      * freeze after training
+      * apply to density and O2
+  * Amber Holdsworth
+    * learn by doing
+    * build shared vocabulary
+    * build community
+    * solve a real problem
+    * Statistical Downscaling for the Ocean Working Group
+      * open-source data products
+    * Quest:
+      * complete datset for Line p
+      * use only data from the `Training` folder
+        * data:
+          * DFO Line P CTD data in 1dbar bins (1969-2020)
+          * DFO Line P BGC data in original depth levels (1990-2019)
+          * gridded Argo data (2004-2018)
+        * models:
+          * NEP36-CanOE
+          * GLORYS
+          * NEP10k-ROMS
+          * NEP10k-MOM6-COBALT
+          * NEP36
+          * ...
+        * start downloading right away because collab is slow
+        * evaluation datasets
+      * 2 or 3 (stretch) netCDF datasets
+        * monthly 1969-2020
+        * penalty for extreme outliers
+        * check with validation tool on GitHub
+      * events:
+        * opening
+        * mid-point check-in
+        * sumission deadline noon 11-Dec
+        * closing
+        * optional:
+          * Wed 9:00 coffee breaks
+          * Mon Q&A, evaluation example
+  * glossary: https://ml-cheatsheet.readthedocs.io/en/latest/glossary.html
+  * QM breakout:
+    * team:
+      * Hayley Dosser (Victoria)
+      * Gabriel Mingorance (Victoria)
+      * Emily O'Grady (Halifax)
+      * Debora Lucatelli (Halifax)
+      * me
+      * Alex Cannon (advisor) (Victoria)
+    * 09:00 daily check-ins
+    * Gabriel is lead note-taker
+    * discussion of working from NEP36-CANoe
+      * only goes to P23?
+      * Alex says we can impute to missing stations with Jim's linear models or other
+    * training data:
+      * https://hpfx.collab.science.gc.ca/dfo/SD-Ocean/Training/models/NEP36-CanOE/NEP36_along_LineP.nc
+    * `xsdba` parallelization docs
+    * investigate BGC variables biases
+    * think about notebook/module splitting
+  * decided to work on `nibi` so that I can scale later
+  * decided to use VSCode rather than PyCharm because I know the remote access interface in VSCode better
+    and I maybe won't need the PyCharm debugger
+  * start by
+    * clone QM example and team repos
+    * create conda env
+    * downloaded datasets to `~/scratch/LineP-Hackathon/`
+      * `training/`
+        * `Argo_gridded_2004-2018.csv`
+        * `lineP_bottle_training.csv`
+        * `lineP_CTD_training.csv`
+        * `NEP36_along_LineP.nc`
+    * ran QM example notebook
+      * think about splitting code into module
+    * got `ruff` VSCode extension installed and working for Python code and notebooks
+      * had to disable linting for notebooks due to lots of false positives
+  * start BCG variables bias exploration
+
+
+##### SalishSeaCast_hourly_prod
+
+* continued work on `nibi` to re-run the `SalishSeaCast_hourly_prod` config
+  (SalishSeaCast v202111 config with oxygen diagnostics from Tall and hourly productivity output)
+  for Sacchi to use to compare with 22-27 Aug 2024 cruise observations
+  * committed changes in `field_def.xml`, `file_def.xml`, and `SalishSeaCast_hourly_prod.yaml`
+  * 26aug24 run
+    * 14m51s
+
+
+#### Tue 2-Dec-2025
+
+##### SalishSeaCast_hourly_prod
+
+* finished work on `nibi` to re-run the `SalishSeaCast_hourly_prod` config
+  (SalishSeaCast v202111 config with oxygen diagnostics from Tall and hourly productivity output)
+  for Sacchi to use to compare with 22-27 Aug 2024 cruise observations
+  * committed changes in `field_def.xml`, `file_def.xml`, and `SalishSeaCast_hourly_prod.yaml`
+  * 27aug24 run
+    * 14m50s
+  * downloaded results from `nibi` to Sacchi's portable drive
+
+
+##### Line P Hackathon
+
+* morning checkin
+  * had to switch from Slack hangout to Zoom because free Slack accounts only allow 2 people in a
+    hangout 🙄
+  * Hayley reminded me that the only BGC variables we are working on are O2, DIC & TA;
+    nitrate would be a bonus; silcate and phosphate are right out
+* continued BCG variables bias exploration
+  * asked Hayley about depths vs. binned pressures
+* learned that there is a station P35 between P25 and P26 on Line P
+  * in fact, a grid of stations around station Papa
+* discovered that I can do `pandas.read_csv()` from a URL; e.g.
+  https://hpfx.collab.science.gc.ca/dfo/SD-Ocean/reference/coordinates/LineP.csv
+* cloned `linep-data-prep-and-evaluation` repo so that I can use the pre-submission validation tool
+  code to inform pre-processing code, etc.
+  * evaluation document includes `ncdump` output from example exprected results files, and there
+    are example files in https://hpfx.collab.science.gc.ca/dfo/SD-Ocean/reference/Examples/
+  * NEP36, CTD and bottle data salinity are all in `psu`
+    * that's the units for results too
+  * NEP36 temperature is potential temperature
+    * CTD and bottle data temperature is in-situ
+    * results are to be in-situ
+    * `T = gsw.t_from_CT(SA, CT, p)` where
+      * `T` is in-situ temperature [°C]
+      * `SA` is absolute salinity [g kg-1]
+      * `CT` is conservative temperature [°C]
+      * `p` is sea pressure [dbar]
+    * `SA = gsw.SA from_SP(SP, p, lon, lat)` where
+      * `SP` is practical salinity [psu] or [PSS-78]
+      * `p` is sea pressure [dbar]
+      * `lon` is longitude in degrees, either 0/360 or -180/180
+      * `lat` is latitude in degrees, -90/90
+  * results depths are to be in pressure [dbar]
+    * `p = gsw.p_from_z(z, lat)` where
+      * `p` is sea pressure [dbar]
+      * `z` is negative depth [m]
+      * `lat` is latitude in degrees, -90/90
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update `fonttools` to 4.61.0 re: CVE-2025-66034 re: arbitrary
+  file write vulnerability:
+  * MoaceanParcels
+  * SOG-Bloomcast-Ensemble
+  * moad_tools
+  * SalishSeaTools
+  * SalishSeaNowcast
+  * SOG-Bloomcast
+
+
+##### Miscellaneous
+
+* disk quota exceeded ended uploading of 2010 `nowcast-green.202111` u, v, w & T grid results files to
+  `nibi:/project/def-allen/SalishSea/nowcast-green.202111/` for Vicente with
+  `rsync -rtlv --relative *10/SalishSea_1h_*_grid_*.nc nibi:/project/def-allen/SalishSea/nowcast-green.202111/`
+  in `tmux` session `djl-nibi-xfer`
+
+
+##### SalishSeaCast
+
+* Fraser River buoy website was down for ~4h in the evening
+
+
+
+#### Wed 3-Dec-2025
+
+Reid Brothers did annual boiler maintenance
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed ~2h due to 1 unprocessed file
+* discovered that `robot.nibi` is finally pingable
+  * restricted key config for file uploads has been transferred from `graham`
+  * `upload_forcing nowcast+ 2025-10-16` partially worked
+    * failed due to exceeded storage volume disk quota on `/project/`
+  * resolved storage issue by moving `/project/SalishSea/nowcast-green.202111/*07/` files to `/scratch/allen/`
+  * backfilled `upload_forcing nowcast+` and `upload_forcing turbidity` to `nibi` via bash loops
+
+
+##### Line P Hackathon
+
+* morning checkin
+  * Hayley, Gabriel, Emily, me
+  * Hayley shared cleaned datasets notebook
+  * agreed that I will review, and I will post resulting datasets on my EOAS web space for others to
+    download
+  * discussed validation strategies; Emily taking the lead
+  * discussed Git workflow of cherry picking commits from individual dev branches
+    * happy I correctly interpreted Emily's envisioned workflow
+* reviewed Hayley's `DataClean_NEP36_DFOctd.ipynb` notebook
+  * CTD file has both `OXYGEN_MMOL_M3` and `OXYGEN_UMOL_KG` columns
+    * from different measurement techniques?
+  * should we standardize on `OXYGEN_UMOL_KG` since that's what we need in the product
+    * requires conversion of model O2 values
+  * times in NEP36 dataset are `yyyy-mm-01 00:00:00` but those in CTD dataset are `yyyy-mm-15 00:00:00`
+    * should they both be on 15th of months?
+  * I'm surprised at `to_netcdf()` without encoding for time
+  * do we want to add include (more) metadata at this point?
+    * only units in NEP36 dataset, none in CTD dataset
+  * suggested that I write a tool to apply metadata and encoding to netCDF files we product as a
+    post-processing step so that people don't have to worry about carrying `attrs` or copy/pasting
+    metadata code
+
+
+##### Miscellaneous
+
+* worked with Susan to characterize `/project/` storage use on `nibi`
+* Susan largely cleared her `/scratch/allen/` space so that I can move
+  `/project/SalishSea/nowcast-green.202111/*07/` files there to make way for the rest of `*10/`
+  for Vicente, and the forcing backfill since 16oct
+* resumed uploading of 2010 `nowcast-green.202111` u, v, w & T grid results files to
+  `nibi:/project/def-allen/SalishSea/nowcast-green.202111/` for Vicente with
+  `rsync -rtlv --relative *10/SalishSea_1h_*_grid_*.nc nibi:/project/def-allen/SalishSea/nowcast-green.202111/`
+  in `tmux` session `djl-nibi-xfer`
+
+
+##### SalishSeaNowcast
+
+* squash-merged PR#386 re: updates to work on new `orcinus` config because it is stalled
+* changed `robot.graham` to `robot.nibi`; PR#403
+  * deployed to `skookum` and restarted manager to load updated config YAML and `next_workers` module
+  * renamed ssh key files for `robot.nibi` on `skookum` without causing any problems
+
+
+
+#### Thu 4-Dec-2025
+
+##### SalishSeaCast
+
+* `upload_forcing robot.nibi` from PR#403 worked as expected overnight
+
+
+##### Line P Hackathon
+
+* morning QM checkin
+  * Hayley and I
+  * discussed training dataset cleanup notebooks that Hayley has written
+  * decided on naming convention for netCDF files:
+    * `LineP_DFO_ctd_training`, `LineP_NEP36_ctd_training`
+    * `LineP_DFO_bot_training`, `LineP_NEP36_bot_training`
+* tidied Hayley's CTD data training datasets notebook and pushed it to `main`
+  * copied `LineP_DFO_ctd_training` and `LineP_NEP36_ctd_training` from `nibi` to:
+    * https://www.eoas.ubc.ca/~dlatorne/LineP-Hackathon/training/LineP_DFO_ctd_training.nc
+    * https://www.eoas.ubc.ca/~dlatorne/LineP-Hackathon/training/LineP_NEP36_ctd_training.nc
+* tidied Hayley's bottle data training datasets notebook and pushed it to `main`
+  * copied `LineP_DFO_bot_training` and `LineP_NEP36_bot_training` from `nibi` to:
+    * https://www.eoas.ubc.ca/~dlatorne/LineP-Hackathon/training/LineP_DFO_bot_training.nc
+    * https://www.eoas.ubc.ca/~dlatorne/LineP-Hackathon/training/LineP_NEP36_bot_training.nc
+* started creating tool to add metadata to netCDF files we produce:
+  * `matadatalater`
+
+
+
+#### Fri 5-Dec-2025
+
+##### Line P Hackathon
+
+* mid-point check-in
+  * lead by Amber
+  * round table of team updates
+* updated CTD and bottle data training dataset notebooks to change NEP36 dates to the 15th of the month
+  to match obs datasets
+  * uploaded revised NEP36 netCDF files to `www.eoas.ubc.ca/~dlatorne/LineP-Hackathon/training/`
+
+
+##### SalishSeaCast
+
+* stgorm surge alert for Strait of Georgia on morning of Sat 6dec
+  * 5.20m at 07:25 at Sandy Coave, light SSW winds
+  * no statement from ECCC
+
+
+##### SalishSeaNowcast
+
+* finished changing `robot.graham` to `robot.nibi`; PR#403
+  * renamed ssh key files for `robot.nibi` in config, tests and docs
+* updated all other occurrences of `graham` and `cedar` (mostly related to hindcast runs) in the
+  codebase and docs to `nibi`
+
+
+
+#### Sat 6-Dec-2025
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update `urllib3` to 2.6.0 re: CVE-2025-66418 & CVE-2025-66471
+  re: excessive resource consumption DoS attack vulnerabilities:
+  * NEMO_Nowcast
+  * moad_tools
+  * AtlantisCmd
+  * salishsea-site
+  * MOAD/docs
+  * MoaceanParcels
+  * cookiecutter-MOAD-pypkg
+  * SalishSeaCmd
+  * SalishSeaNowcast
+  * FUN
+  * Reshapr
+  * tools/SalishSeaTools
+  * NEMO-Cmd
+  * SOG-Bloomcast-Ensemble
+  * SalishSeaCast/docs
+  * cookiecutter-analysis-repo
+  * SOG-Bloomcast
+  * erddap-datasets
+  * cookiecutter-djl-pypkg
+
+
+##### Miscellaneous
+
+* did some reading about `pixi`
+  * discussed my initial thoughts with Susan
+
+
+
+#### Sun 7-Dec-2025
+
+##### Miscellaneous
+
+* did more reading about `pixi`
+  * multiple environments per workspace addresses the show-stopper I found with `uv` for my workflow
+    re: `evaltools` and new bathymetry work in `tools` repo
+    * Susan and I both use mulitple envs in out `analysis-` repos/workspaces
+  * task manager can probably simplify my release workflows, analysis repo setup, maybe editable
+    installs, and perhaps more
+  * `pixi` is "conda-forge first" but uses `uv` library for PyPI packages installation
+  * good GHA support via `prefix-dev/setup-pixi`
+  * `dependabot` support is mired in conda vs. pixi politics
+    * resolution would eliminate the need to maintain `requirements.txt` files for dev env in order
+      to get security notifications
+  * `marimo` supports `pixi` as a package manager
+    * one of many places where the similarity of the `uv` and `pixi` CLIs is probably and advantage
+  * `readthedocs` supports `pixi` via build process customiaation (`build.jobs.build`)
+    * https://docs.readthedocs.com/platform/stable/build-customization.html#install-dependencies-with-pixi
+  * global tools feature will allow tools like `eza`, `bat`, and `fd` on systems where they are not
+    already installed by admins (e.g. Alliance HPC) and where I don't have (or want ot use) `sudo`
+    (e.g. EOAS ocean machines)
+  * no base environment; `pixi` is a statically linked binary that can be installed in user-land
+    * no `.bashrc` modification (except adding `pixi` to `PATH`, I presume)
+  * `pixi init --import ./environment.yml` initializes a `pixi` workspace from an existing conda env
+    description
+  * `uv` initial release was 0.0.5 on 15-Feb-2024
+  * `pixi` initial release was 0.0.4 on 26-Jun-2023
+* installed `pixi` on `khawla`
+* added `~/.pixi/` to exclusion lists for borg backups on `khawla` and `kudu`
+
+
+
+* SalishSeaNowcast
+  * `polar.ncep.noaa.gov` sometimes refuses connections from GHA `sphinx linkcheck`
 
 
 * change docs to use `Miniforge3` and `mamba`
@@ -11163,10 +11570,6 @@ tmux new -n minecraft-server
   * SalishSeaCast/docs
   * many/most packages dev docs
     * Reshapr
-
-
-* backfill `upload_forcing nowcast+` and `turbidity` to `nibi` from 16oct onward
-  when `robot.nibi` starts working
 
 
 * Susan: do we want to set up Globus on `salish` or `skookum`, or engage compstaff
