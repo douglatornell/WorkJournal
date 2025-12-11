@@ -11480,7 +11480,7 @@ Reid Brothers did annual boiler maintenance
 
 ##### SalishSeaCast
 
-* stgorm surge alert for Strait of Georgia on morning of Sat 6dec
+* storm surge alert for Strait of Georgia on morning of Sat 6dec
   * 5.20m at 07:25 at Sandy Coave, light SSW winds
   * no statement from ECCC
 
@@ -11495,6 +11495,12 @@ Reid Brothers did annual boiler maintenance
 
 
 #### Sat 6-Dec-2025
+
+##### SalishSeaCast
+
+* storm surge alert for Strait of Georgia on morning of Sun 7dec
+  * 5.15 m at 08:15 at Sandy Cove; 2 m/s SSW wind
+
 
 ##### Security Updates
 
@@ -11558,6 +11564,222 @@ Reid Brothers did annual boiler maintenance
   * `pixi` initial release was 0.0.4 on 26-Jun-2023
 * installed `pixi` on `khawla`
 * added `~/.pixi/` to exclusion lists for borg backups on `khawla` and `kudu`
+
+
+
+### Week 50
+
+#### Mon 8-Dec-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2 publish` failed with a DAP server error
+* storm surge alert for Strait of Georgia on morning of Tue 9dec
+  * 5.04 m at 09:45 at Sandy Cove; 3 m/s SW wind
+
+
+##### Line P Hackathon
+
+* morning QM checkin
+  * Hayley, Gabriel, me
+  * NEP36 is surprisingly good
+  * me:
+    * finish `metadatalater`
+    * test `metadatalater` against validator
+    * do raw bias validation for bottle data using Hayley's viz notebook
+    * start QM notebook for bottle data
+* finished initial work on `matadatalater` tool to add metadata to netCDF files we produce:
+  * running it on `LineP_DFO_ctd_training.nc` produces a file that passes validiation with exceptions:
+    * incorrect dimension sizes
+    * `lat` and `lon` are expected to be coordinates
+  * running it on `LineP_DFO_bot_training.nc` produces a file that passes validiation with exceptions:
+    * incorrect dimension sizes
+    * `lat` and `lon` are expected to be coordinates
+    * depth coordinate should be named `PRESSURE` not `PRESSURE_BIN_CNTR`
+  * running it on `LineP_NEP36_ctd_training.nc` produces a file that passes validiation with exceptions:
+    * incorrect dimension sizes
+    * `lat` and `lon` are expected to be coordinates
+  * running it on `LineP_NEP36_bot_training.nc` produces a file that passes validiation with exceptions:
+    * incorrect dimension sizes
+    * `lat` and `lon` are expected to be coordinates
+    * depth coordinate should be named `PRESSURE` not `PRESSURE_BIN_CNTR`
+    * O2 variable should be `OXYGEN` with unit `umol/kg`
+  * summarized to slack
+  * cherry-picked commits into `metadatalater` branch from `main` for PR
+* cribbed Hayley's QM for DFO CTD data notebook to work for DFO bottle data
+  * did salinity and the metrics are similarily good as Hayley found
+* found and corrected coordinate name error in `LineP_DFO_bot_training.nc` dataset
+
+
+
+#### Tue 9-Dec-2025
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed ~2h due to 1 unprocessed file
+* storm surge alert for Strait of Georgia on morning of Wed 10dec
+  * 5.12 m at 10:25 at Sandy Cove; 2 m/s SSW wind
+
+
+##### Line P Hackathon
+
+* morning QM checkin
+  * Hayley, Gabriel, Deborah, me
+  * submissions:
+    * 3 datasets: CTD, bottle, stretch
+    * Hayley will prepare frankenstein dataset that we operate on for the final
+    * need to nail down 2 parameters
+  * Gabriel's work on stretch goal
+    * interpolation of QM between 2 stations
+    * evaluation code to test result by leaving out 1 station
+  * me:
+    * review submission examples to check for anything beyond what I found yesterday
+    * pulling QM code out of notebook into module to run at scale
+    * thinking about pulling code to calculate and report scores out of notebooks into a module
+      maybe called `metrics`
+* downloaded product example datasets from https://hpfx.collab.science.gc.ca/dfo/SD-Ocean/reference/Examples/
+  to `/scratch/dlatorne/LineP-Hackathon/product-examples/`
+  * ran validator:
+    * `LineP-team-holdsworth_BGC_stations.nc`: passes
+    * `LineP-team-holdsworth_CTD_stations.nc`: passes
+    * `LineP-team-holdsworth_CTD_stretch.nc`: warnings
+      * missing units for temperature, salinity, lat, lon, pressure_bin_cntr
+  * didn't find anything beyond what I noted yesterday, but added dumps and notes to the Google doc
+* updated QM on bottle data notebook to reflect Hayley's changes yesterday in the CTD notebook re:
+  handling NaNs; more of a thrash than I anticipated
+
+
+##### Miscellaneous
+
+* Alliance-SFU webinar: Command-line OpenStack
+  * Alex Raxmoumov
+  * notes https://folio.vastcloud.org/openstack
+  * `arbutus` 2.0 is presently in testing for a small number of users
+  * VM launch in 5 steps:
+    * auth
+      * use web UI to download `CCInternal-*-openrc.sh`
+        * `*` is project name
+      * `source CCInternal-*-openrc.sh`
+        * use Alliance password
+    * VM flavours and images
+      * compute `c` flavours
+      * persistent `p` flavours
+      * `openstack flavor list`
+      * `openstack flavor show`
+      * `openstack image list`
+      * `openstack network list`
+    * create ssh keypair and upload public key
+    * launch VM
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      openstack server create \
+        --flavor c2-15gb-31 \
+        --image Ubuntu-24.04.2-Noble-x64-2025-03 \
+        --nic net-id=CCInternal-SFU-training-network \
+        --key-name cedarKey \
+        --security-group default \
+        alexDemoBox  # VM name
+      ```
+      <!-- markdownlint-enable MD031 -->
+    * associate a floating IP
+      * `openstack floating ip create Public-Network`
+        * returns ip address
+      * `openstack server add floating ip <VM name> <ip address>`
+  * can use `snap` packages; e.g.
+    * `sudo snap install emacs --classic`
+    * `/snap/bin/emacs -nw   # check the version`
+  * create and attach storage volumes
+    * ephemeral storage exists only while VM is running; it's not preserved
+    * storage volumes are on object storage
+      * have to be formatted initially and mounted for each VM use
+  * adjust security rules as necessary
+    * default only allows inbound traffic on port 22
+  * ... demos of `git` setup, remote graphical app, X11 forwarding is slow, `trame` web app
+  * image/volume snapshots
+    * stop VM to create image snapshot
+    * remove volume to create volume snapshot
+  * lots of commands to remove and delete resources to clean up VM
+    * order is important
+    * detach and remove volumes
+    * delete floating ip address
+    * delete security group
+    * shut down VM
+  * is there a Python API too?
+    * https://docs.openstack.org/mitaka/user-guide/sdk.html
+  * Jan to Mar will be visualization workshops
+  * webinars will resume in Apr
+
+
+
+#### Wed 10-Dec-2025
+
+##### Line P Hackathon
+
+* reviewed Hayley's station-filled NEP36 file creation notebook
+  * CTD
+    * monthly from jan96 to dec22 (27 years == 324 months)
+      * might as well be cut off at dec20 ??
+    * 75 depth levels converted to pressure and interpolated to obs pressure levels (4326 levels)
+    * missing 4 western stations are copies of P20 to avoid edge effects (24 stations)
+    * train QMs on this and Line P obs for jan96 to dec20
+      * store them in (pressure, station) array
+  * BGC
+* need to construct files that we can adjust with QMs
+  * CTD 1996 to 2020
+    * interpolate NEP36 to 4000 1 dbar pressure levels
+    * use nearest QM(pressure) to adjust interpolated values
+  * CTD 1969 to 1995
+    *
+  * BGC 1996 to 2020
+    * interpolate NEP36 to 23 discrete dbar pressure levels
+    * use nearest QM(pressure) to adjust interpolated values
+  * BGC 1990 to 1995
+    *
+  * stretch 1996 to 2020
+    * interpolate NEP36 to 4000 1 dbar pressure levels
+    * use nearest QM(pressure) to adjust interpolated values
+  * stretch 1969 to 1995
+    *
+* morning QM checkin
+  * Hayley, Gabriel, Emily, Deborah, me
+  * discussion of choosing number of quantiles
+    * Emily will execute
+  * check-in on Slack at 13:00 Pacific today
+* Emily determined that `nq=10` and `nv=10` are optimal for CTD T, S & O2 datasets
+* started developing `qm_worker` script
+  * ugly script that I was running from a notebook via `importlib.reload()`
+  * big struggle to compose the dataset by concatenating pressure levle data arrays from each station
+  * weirdness on pressure level coordinate
+    * it doesn't get a value greater than the bottom pressure of station 1 regardless of what I do
+  * salinity processing fails at station 22
+* Hayley says: units QM will need for both DIC and TA are "umol per kg"
+
+
+
+#### Thu 11-Dec-2025
+
+Worked at ESB while Rita was at home
+
+##### Line P Hackathon
+
+* continued running `qm_worker` script
+  * overnight failed at station 22 despite my effort to make it stop at 21
+    * that's because the first station is P4, not P20
+    * to stop at station P21 use `stations_oi[:18]`
+  * error at station P22 is:
+    <!-- markdownlint-disable MD031 -->
+    ```python
+    ValueError: group_eqm_train failed on block with coords : Coordinates:
+      * time     (time) datetime64[ns] 0B .
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+
+
+
+
+
 
 
 
