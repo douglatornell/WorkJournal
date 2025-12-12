@@ -11760,6 +11760,11 @@ Reid Brothers did annual boiler maintenance
 
 Worked at ESB while Rita was at home
 
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed ~2h due to 1 unprocessed file
+
+
 ##### Line P Hackathon
 
 * continued running `qm_worker` script
@@ -11773,7 +11778,15 @@ Worked at ESB while Rita was at home
       * time     (time) datetime64[ns] 0B .
     ```
     <!-- markdownlint-enable MD031 -->
-
+  * got salinity & temperature to run for 18 stations each
+  * O2 failed vary early in processing, maybe due to sparse CTD O2 data in early years?
+* we were 1 of 2 teams to submit products by the noon deadline
+* continnued hacking on `qm_worker` script after the deadline
+  * resolved data array initialization issue and pressure levels issue
+  * `loc[]` indexing is key to being able to assign values to a portion of an existing array
+* successfully ran `qm_worker` for 2 stations, uploaded results to EOAS, and posted link on Slack
+* pushed updated `qm_worker` script
+* started a full range run in `tmux` on `nibi:l2` node
 
 
 
