@@ -11790,10 +11790,92 @@ Worked at ESB while Rita was at home
 
 
 
+#### Fri 12-Dec-2025
+
+##### Line P Hackathon
+
+* wrap-up
+  * Amber's summary
+  * team presentations
+  * evaluation results
+* full range run in `tmux` on `nibi:l2` node
+  * finished in 108m == 1h48m
+  * uploaded to EOAS server and posted on Slack
+
+
+##### Miscellaneous
+
+* started uploading of 2011 `nowcast-green.202111` u, v, w & T grid results files to
+  `nibi:/project/def-allen/SalishSea/nowcast-green.202111/` for Vicente with
+  `rsync -rtlv --relative *11/SalishSea_1h_*_grid_*.nc nibi:/project/def-allen/SalishSea/nowcast-green.202111/`
+  in `tmux` session `djl-nibi-xfer`
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update `black-pre-commit-mirror` to 25.12.0 re: bug fixes & 2026 preview
+  * NEMO_Nowcast
+  * tools/SalishSeaTools
+  * erddap-datasets
+  * SOG-Bloomcast-Ensemble
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * salishsea-site
+  * MoaceanParcels
+  * cookiecutter-MOAD-pypkg
+  * gha-workflows
+  * moad_tools
+  * Reshapr
+  * SalishSeaNowcast
+  * AtlantisCmd
+* Squash-merged dependabot PR to update `appleboy/ssh-action` to 1.2.4 re: feature & docs updates
+  * salishsea-site
+
+
+
+#### Sat 13-Dec-2025
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed ~2h due to 1 unprocessed file
+* Fraser River buoy data stream stopped updating after 22:10
+
+
+
+#### Sun 14-Dec-2025
+
+##### SalishSeaCast
+
+* `make_turbidity_file` failed due to insufficient obs data
+
+
+##### Miscellaneous
+
+* started experimenting with `pixi`
+  * `pixi init pixi-py` creates a minimal src-layout package stub in `pixi-py/`
+    * no apparent way to force flat-layout
+    * `requires-python` gets set to `">=3.11"`
+      * `pixi add python 3.14` created the env with Python in it, but didn't update `requires-python`
+        * it also creates the lock file and does an editable install of `pixi-py` package
+    * `pixi shell` takes me into a shell with the default env activated
+    * created `pixi_py/hello.py`
+      * can run 2 ways:
+        * `pixi run python pixi_py/hello.py`
+        * `pixi shell` then `python pixi_py/hello.py`
+    * `pixi add black` installs `black` in the env and updates `pyproejct.toml` and the lock file
+      * I think it also would update anything else in the env
 
 
 
 
+
+
+* SalishSeaTools
+  * fix failing tests!!!
+
+
+* Reshapr
+  * exclude test that often times out on GHA
 
 
 * SalishSeaNowcast
