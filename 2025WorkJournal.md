@@ -11847,6 +11847,7 @@ Worked at ESB while Rita was at home
 ##### SalishSeaCast
 
 * `make_turbidity_file` failed due to insufficient obs data
+* Fraser River buoy data stream resumed updating after 12:35
 
 
 ##### Miscellaneous
@@ -11867,6 +11868,358 @@ Worked at ESB while Rita was at home
 
 
 
+### Week 51
+
+#### Mon 15-Dec-2025
+
+##### SalishSeaCast
+
+* `upload_forcing turbidity` persisted 14dec25 file for today
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update `codevoc-action` to 5.5.2 re: feature updates
+  * SalishSeaNowcast
+  * gha-workflows
+  * AtlantisCmd
+
+
+##### Miscellaneous
+
+* updated PyCharm on `khawla` to 2025.3
+* continued experimenting with `pixi`
+  * started changing `analysis-doug` repo to use `pixi` in a `pixi` branch:
+    * initial setup with `pixi init --import notebooks/environment.yaml`
+    * add env for `SalishSeaCast_hourly_prod` notebooks with
+      `pixi import notebooks/SalishSeaCast_hourly_prod/environment.yaml --environment salishseacast-hourly-prod`
+      * can't use uppercase in env names
+    * install env with `pixi install -e salishseacast-hourly-prod`
+    * add env path to `~/doug/.conda/environments.txt`
+    * add env via PyChram UI and set it for use
+* emailed Birgit re: her removing files from `/project/`
+* moved `/project/SalishSea/nowcast-green.202111/*08/` files to `/scratch/allen/nowcast-green.202111/`
+  to make way for the rest of `*11/` for Vicente
+* resumed uploading of 2011 `nowcast-green.202111` u, v, w & T grid results files to
+  `nibi:/project/def-allen/SalishSea/nowcast-green.202111/` for Vicente with
+  `rsync -rtlv --relative *11/SalishSea_1h_*_grid_*.nc nibi:/project/def-allen/SalishSea/nowcast-green.202111/`
+  in `tmux` session `djl-nibi-xfer`
+
+
+##### Reshapr
+
+* continued work on adding `nibi` support via examples from Camryn's & Jose's research runs
+  * worked on Jose's results in `/scratch/jvalenti/run_SHEM/tuning/pred_flag/`:
+    * created `Jose-SHEM-tuning-pred_flag.yaml`
+    * created `extract_SHEM_heterotrophic_bacteria.yaml` and `extract_SHEM_HetHBAC.yaml`
+    * ran the extractions in an interactive session:
+      * `salloc --time=1:00:00 --mem-per-cpu=8000M --ntasks=16 --ntasks-per-node=16 --account=def-allen`
+        * node `c186`
+        * did 2 single variable full field extractions that Jose said were useful; each took ~60s
+        * told Jose about it in #alliance-hpc channel thread
+
+
+
+#### Tue 16-Dec-2025
+
+##### SalishSeaCast
+
+* storm surge alert for Strait of Georgia on morning of Wed 17dec
+  * 5.07 m at 05:35 at Sandy Cove; 1 m/s SSW wind
+* `make_plots nemo nowcast-green research` got interrupted by ERDDAP restart
+  * re-ran manually
+
+
+##### ERDDAP
+
+* reviewed v2.29.0 release notes
+  * new flags page in docs lead me to `emailsActive` flag that "is calculated dynamically at startup.
+    It defaults to false unless all required SMTP credentials (host, port, user, password, from-address)
+    are strictly provided in setup.xml."
+    * successfully tested emails sent from `skookum`:
+      * `mail -s test dlatornell@eoas.ubc.ca`  # note that dlatorne@eos.ubc.ca does not work
+      * `sudo -u tomcat mail -s test dlatornell@eoas.ubc.ca`  # message went to spam
+    * uncommented port setting and changed it to 25: `<emailSmtpPort>25</emailSmtpPort>`
+    * stopped and restarted `tomcat`
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      sudo su - tomcat
+      /opt/apache-tomcat-10.1.40/bin/shutdown.sh
+      # wait for dow report from UptimeRobot
+      /opt/apache-tomcat-10.1.40/bin/startup.sh
+      ```
+      <!-- markdownlint-enable MD031 -->
+    * daily report email in `emailLog2025-12-16.txt` still says "The email system is inactive."
+    * tracked down `emailIsActive` flag in code on GitHub
+      * it didn't exist in v1.82, explaining why our email used to work
+      * it appears to require that there be some value in the `emailPassword` tag; ours in empty
+      * changed to `<emailPassword>null</emailPassword>` and restarted `tomcat`
+        * "The email system is inactive." message was not in startup daily email, but I didn't get an email
+        * log contains several `%%% EmailThread session ERROR` messages
+        * restored `<emailPassword></emailPassword>` and restarted `tomcat`
+
+
+##### Miscellaneous
+
+* set up remote ssh PyCharm on `skookum` via Toolbox
+  * Toolbox setup fails for `nibi` due to some issue with 1Passowrd ssh agent
+    * set up via left panel "Project and Files > Remote Development" in PyCharm works
+      * use 1 for one-time password whenever asked to trigger auth via DuoMobile
+      * you hae to connect to an existing project directory
+* continued experimenting with `pixi`
+  * tested `pixi-pycharm` shim package method for interpreter management
+    * feels smoohter than adding env paths to `~/doug/.conda/environments.txt`
+    * `pixi add pixi-pycharm`
+    * need to remember to set `conda` to the one for the project workspace
+      * `pixi run 'echo $CONDA_PREFIX/libexec/conda'` helps with that
+      * the nice thing is that doing so reduces the list of available interpreters to those in the workspace
+        instead of all conda envs
+    * it's also useful to rename the `default` interpreter that results in to something like
+      `analysis-doug:default` that makes it easy to identify its project
+    * also need to remember to exclude `.pixi/` in project structure
+
+
+
+#### Wed 17-Dec-2025
+
+##### SalishSeaCast
+
+* `download_live_ocean` timed out at 10:49
+  * re-ran manually at 10:52
+  * email from Parker at 11:08 saying that run is delayed to ~16:00
+  * finally got Live Ocean extraction file at 16:44; ~9h late
+* storm surge alert for Strait of Georgia on morning of Thu 18dec
+  * 5.01 m at 06:15 at Sandy Cove; 3 m/s SSW wind
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update `filelock` to 3.20.1 re: CVE-2025-68146
+  Time-of-Check-Time-of-Use (TOCTOU) race condition symlink attack vulnerability
+  * moad_tools
+  * NEMO_Nowcast
+  * MoaceanParcels
+  * SOG-Bloomcast-Ensemble
+  * tools/SalishSeaTools
+  * FUN
+  * SalishSeaCast/docs
+  * NEMO-Cmd
+  * gha-workflows
+  * salishsea-site
+  * AtlantisCmd
+  * MOAD/docs
+  * SalishSeaNowcast
+  * SalishSeaCmd
+  * Reshapr
+  * cookiecutter-MOAD-pypkg
+  * erddap-datasets
+
+
+##### Miscellaneous
+
+* Checked status of scheduled GHA workflows:
+  <!-- markdownlint-disable MD013 -->
+  ```bash
+  mamba activate gha-workflows
+  python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
+  ```
+  <!-- markdownlint-enable MD013 -->
+* updated Pixi on `lhawla` to v0.62.0
+
+
+##### gha-workflows
+
+* added repos for checking
+  * SOG-Bloomcast-Ensemble
+  * erddap-datasets
+  * cookiecutter-analysis-repo
+  * cookiecutter-MOAD-pypkg
+  * FUN
+  * cookiecutter-djl-pypkg
+* changed to use `pixi` for proecjt & env mgmt; PR#82
+  * `pixi init --import envs/environment-dev.yaml`
+  * clean up `.gitignore`
+  * delete `envs/environment-dev.yaml`
+  * `pixi install`
+  * confirm setup works with `pixi run gha_workflow_checker/gha_workflow_checker.py`
+  * `pixi run pre-commit install`
+  * Add task to run `gha_workflow_checker.py`
+  * Move `requirements.txt` to top level directory
+  * Add task to update `requirements.txt` via `pip list`
+    * `requirements.txt` file is retained so that we will continue to get security update notifications
+      and PRs from dependabot. It will be dropped when dependabot adds support for the `pixi.lock` file.
+  * Update "`gha_workflows_checker.py` Script" docs section in README
+  * Add `reuirements.txt` maintenance section to README re: `pixi run update-reqs` tasks
+  * Add "Powered by Pixi" badge to README
+  * squash-merged PR
+
+
+##### NEMO-Cmd
+
+* started changing to use Pixi for project & env mgmt; PR#121
+  * `pixi init` to add `[tool.pixi.*]` tables to `pyproject.toml`
+  * clean up `.gitignore`
+  * `pixi import envs/environment-hpc.yaml --format conda-env` to get minimal packages in default environment
+    * that created tables for a feature called `nemo-cmd`
+    * had to edit `pyproject.toml` to get things set up for the `default` feature
+    * deleted `pip` from dependencies table
+  * `pixi install` created the env and the lock file
+    * confirmed with `pixi run nemo --version`
+  * configured PyCharm:
+    * `pixi add pixi-pycharm`
+    * set `conda` executable to output of `pixi run 'echo $CONDA_PREFIX/libexec/conda'`
+    * renamed interpreter in PyCharm UI to `nemo-cmd:default`
+
+
+
+#### Thu 18-Dec-2025
+
+##### SalishSeaCast
+
+* `download_live_ocean` delayed ~2h50m
+* storm surge alert for Strait of Georgia on morning of Fri 19dec
+  * 5.17 m at 06:35 at Sandy Cove; 4 m/s SSW wind at Sandy Cove
+
+
+##### NEMO-Cmd
+
+* continued changing to use Pixi for project & env mgmt; PR#121
+  * tested on `rorqual`
+    * copied `bash` personaliation from `nibi`:
+      <!-- markdownlint-disable MD013 -->
+      ```bash
+      # User specific aliases and functions
+      export PAGE=less
+      export LESS=-R
+      export editor=emacs
+      export VISUAL=emacs
+
+      alias ls="ls --color=auto -F"
+      alias la="ls -a"
+      alias rm="rm -i"
+      alias sq='squeue -o "%.12i %.8u %.9a %.22j %.2t %.10r %.19S %.10M %.10L %.6D %.5C %P %N"'
+      alias sa="sacct -u $USER -o jobid,account,jobname%20,partition%17,state,allocnodes,maxrss,exitcode,nodelist"
+      ```
+      <!-- markdownlint-enable MD013 -->
+    * installed Pixi: `curl -fsSL https://pixi.sh/install.sh | sh`
+      * added it to `PATH` in `.bashrc`
+    * enable autocompletion for Pixi in `.bashrc`
+      * `eval "$(pixi completion --shell bash)"`
+    * `$HOME/MEOPAR/NEMO-Cmd/; pixi run nemo --version` works
+    * `pixi run -m $HOME/MEOPAR/NEMO-Cmd/ nemo --version` also works
+    * and `sbatch` script containing `pixi run -m $HOME/MEOPAR/NEMO-Cmd/ nemo --version` also works
+
+
+
+#### Fri 19-Dec-2025
+
+##### SalishSeaCast
+
+* storm surge alert for Strait of Georgia on morning of Sat 20dec
+  * 5.19 m at 07:05 at Sandy Cove; 3 m/s SSW wind at Sandy Cove
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* updated PyCharm to 2025.3.1 on `khawla`
+* hangout with Becca re: problems building Ariane on `perigee`
+
+
+##### reshapr
+
+* started writing example use docs for extractions from research runs on `nibi`
+  * used one of Jose's SHEM config run collections
+  * based on "Iona wastewater dishcarge analysis" example docs
+
+
+##### Minecraft
+
+* checked mods, etc. for releases compatible with 1.21.11:
+  * sodium: yes
+  * lithium: yes
+  * iris: yes
+  * entity model features: yes
+  * entity texture features: yes
+  * fresh animations: maybe
+  * malilib: yes
+  * minihud: yes
+  * tweakeroo: yes
+
+
+
+#### Sat 20-Dec-2025
+
+##### SalishSeaCast
+
+* storm surge alert for Strait of Georgia on morning of Sat 20dec
+  * 5.16 m at 07:35 at Sandy Cove; 2 m/s SSW wind at Sandy Cove
+
+
+##### NEMO-Cmd
+
+* continued changing to use Pixi for project & env mgmt; PR#121
+  * added `test` feature based on `environment-test.yaml`
+    * `pixi add --feature test pytest pytest-cov pytest-ramdomly`
+    * `pixi workspace environment add test --feature test --solve-group default`
+      * raise a seemingly spurious warning
+        * "The feature 'test' is defined but not used in any environment. Dependencies of unused features
+          are not resolved or checked, and use wildcard (*) version specifiers by default,
+          disregarding any set `pinning-strategy`"
+    * `pixi run -e test pytest` works
+      * revealed a new DeprecationWarning re: the `namespace` parameter in `cliff.commandmanager.CommandManager`
+        * created iossue#122
+      * added `test` env to PyCharm and that enabled the built-in test runner to work, but only when that
+        interpreter is selected
+        * probably need a `dev` environment listk `environment-dev.yaml` for use in PyCharm,
+          but `test` and `docs` environments will still be useful for CI and RTD
+    * `pixi task add -f test pytest "pytest"` shortens the incantation to `pixi run pytest`
+
+
+
+#### Sun 21-Dec-2025
+
+##### SalishSeaCast
+
+* storm surge alert for Strait of Georgia on morning of Sat 20dec
+  * 5.12 m at 08:05 at Sandy Cove; 2 m/s SSW wind at Sandy Cove
+
+
+##### NEMO-Cmd
+
+* continued changing to use Pixi for project & env mgmt; PR#121
+  * added `pytest-cov` and `pytest-cov-html` tasks
+  * updated dev docs to use Pixi tasks to run tests and produce coverage reports
+  * changed `pytest-with-coverage` to use `prefix-dev/setup-pixi` as a step towards a reusable
+    `pixi-pytest-with-coverage`
+    * had to add `prefix-dev/setup-pixi@*,` to SalishSeaCast org Actions Polices settings on GitHub
+    * workflow run time was 24s compared to ~44s for recent micromamba-base workflow runs
+  * added envs for Python 3.12 and 3.13 testing:
+    * `pixi add --feature py312 python=3.12`
+    * `pixi workspace environment add test-py312 --feature py312 --feature test`
+    * `pixi add --feature py313 python=3.13`
+    * `pixi workspace environment add test-py313 --feature py313 --feature test`
+    * relax Python version in default env from `"3.14.*"` to `"*"`
+    * decided to also add a `test-py314` env (even though it duplicates `tets`) to make GHA explicit
+      and consistent
+    * `pixi add --feature py314 python=3.14`
+    * `pixi workspace environment add test-py314 --feature py314 --feature test`
+
+
+
+
+* NEMO-Cmd TODO:
+  * create GHA workflows that use `prefix-dev/setup-pixi`
+  * update docs
+    * installation
+    * sub-commands
+    * pkg dev
+    * add Pixi badge to README and dev docs
+  * change `.readthedocs.yaml` to use Pixi build config
+  * decide how to provide repo clone directory (like `$HOME/MEOPAR/NEMO-Cmd/`) to `run` plugin so that
+    it can do `pixi run -m $HOME/MEOPAR/NEMO-Cmd/ nemo <sub-command>`
+
+
 
 
 
@@ -11874,8 +12227,24 @@ Worked at ESB while Rita was at home
   * fix failing tests!!!
 
 
-* Reshapr
-  * exclude test that often times out on GHA
+
+##### Reshapr
+
+* update "Iona wastewater dishcarge analysis" example docs:
+  * remove requirement for multi-day run results to be split; we can handle month-long files now
+  * change note about `split-results` to use `salishsea split-results` instead of nowcast worker
+* exclude test that often times out on GHA
+* consider accepting `dask cluster: nibi_cluster` in extraction YAML (i.e. no extension necessary)
+* `reshapr info` should handle user supplied path/file specs for cluster descriptions and model profiles
+  * presence of a path element (relative or absolute) triggers file reading from somewhere other than
+    in the Reshapr package directories
+  * this works now for absolute paths of model profiles
+  * improve `--help` information to reflect that
+  * provide helpful suggestions instead of a traceback
+* maybe `reshapr info` should be able to discover cluster descriptions and model profiles in the pwd
+  by checking YAML files for characteristic keys
+  * maybe `number of workers` for clusters and  `chunk size` for model profiles
+
 
 
 * SalishSeaNowcast
@@ -11921,17 +12290,6 @@ Worked at ESB while Rita was at home
 ##### SalishSeaCast
 
 * backfill AGRIF runs on `orcinus` from ~14jul
-
-
-##### Reshapr
-
-* consider accepting `dask cluster: nibi_cluster` in extraction YAML (i.e. no extension necessary)
-* `reshapr info` should handle user supplied path/file specs for cluster descriptions and model profiles
-  * presence of a path element (relative or absolute) triggers file reading from somewhere other than
-    in the Reshapr package directories
-* maybe `reshapr info` should be able to discover cluster descriptions and model profiles in the pwd
-  by checking YAML files for characteristic keys
-  * maybe `number of workers` for clusters and  `chunk size` for model profiles
 
 
 
@@ -12056,6 +12414,7 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
   * AtlantisCmd - done 17nov25 in PR#90
   * MOAD/docs - done 19nov in commit 8b73c7d43
   * Reshapr - done 20nov25 in PR#168
+  * gha-workflows - done 17dec25 in PR#82
 
   * workflows available for testing:
     * SalishSeaCast/docs
@@ -12063,7 +12422,6 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
     * moad_tools
     * tools/SalishSeaTools
     * SalishSeaNowcast
-    * gha-workflows
     * SOG-Bloomcast-Ensemble
     * erddap-datasets
     * salishsea-site
@@ -12072,6 +12430,10 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
     * ECget
     * analysis-doug
     * SOG-Bloomcast ??
+
+
+* Migrate to `pixi`:
+  * gha-workflows - done 17dec25 in PR#82
 
 
 TODO:
