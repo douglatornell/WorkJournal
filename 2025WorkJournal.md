@@ -8225,7 +8225,7 @@ Worked at home, then at ESB
 ##### Miscellaneous
 
 * Intro to Fir webinar
-  * Alex Raxoumov, SFU
+  * Alex Razoumov, SFU
   * slides at https://training.westdri.ca | Getting started
   * very biased to GPU nodes (160 nodes); more than other clusters, but also 864 CPU nodes
   * 3 login nodes
@@ -8635,10 +8635,10 @@ Worked at ESB in the afternoon
 ##### `trillium`
 
 * continued setup for scaling tests
-  * cloned repos in `$HOME/MEOPARS/`
+  * cloned repos in `$HOME/MEOPAR/`
   * did git configuration
   * did `.bashrc` edits
-  * I like the colourized `PS1` that is a compromise between mine and theirs
+  * I like the coloured `PS1` that is a compromise between mine and theirs
   * `chmod -v` is handy to avoid the need to check after `chmod`
   * installed and configured Miniforge
 
@@ -8872,7 +8872,7 @@ Worked at home & ESB
 
 ##### Miscellaneous
 
-* Slack discussion w/ Vicente about multiple Parcels josb vs. MPI Parcels
+* Slack discussion w/ Vicente about multiple Parcels jobs vs. MPI Parcels
 * did PR on Parcels to fix typo in MPI tutorial
 * Phys Ocgy seminar: new students carnival
 * hacked up a demo of how to do concurrent Python tasks in an `sbatch` script; `wait` is key
@@ -9134,7 +9134,7 @@ Went to UBC Hospital lab for blood draw for appt w/ Dr. Roston
 
 * Python qr code generator
   * Mariatta
-  * 3rd party services are scanky
+  * 3rd party services are skanky
   * `qrcode` package
   * Mariatta's Django app
     * Secretcodes.dev
@@ -10649,7 +10649,7 @@ Worked at ESB
 * built new Python 3.14 env for Reshapr on `nibi`
   * old env removal is very slow iterating through 181 linked packages, first to list them,
     then to unlink them
-  * new env creation is also slow downloading packages and interating through 181 packages to link
+  * new env creation is also slow downloading packages and iterating through 181 packages to link
     them into the env
   * retried the process in an `salloc` session to avoid script-kiddies running on login node
     * still slow to unlink: $HOME file system load?
@@ -10739,21 +10739,21 @@ Worked at ESB
 
 ##### moad_tools
 
-* fixed GHA workflow issue in `pytest-no-midoss` re: occassional failure due to
+* fixed GHA workflow issue in `pytest-no-midoss` re: occasional failure due to
   "Unable to reserve cache with key downloads-2025-11-23-linux-64, another job may be creating this cache"
   by making cache key unique; `downloads-2025-11-23-no-midoss`
 
 
 ##### SalishSeaNowcast
 
-* fixed GHA workflow issue in `pytest-with-coverage` re: occassional failure due to
+* fixed GHA workflow issue in `pytest-with-coverage` re: occasional failure due to
   "Unable to reserve cache with key downloads-2025-11-23-linux-64, another job may be creating this cache"
   by making cache key unique; e.g. `downloads-2025-11-23-pytest`
 
 
 ##### erddap-datasets
 
-* fixed GHA workflow issue in `check-datasets` re: occassional failure due to
+* fixed GHA workflow issue in `check-datasets` re: occasional failure due to
   "Unable to reserve cache with key downloads-2025-11-23-linux-64, another job may be creating this cache"
   by making cache key unique; e.g. `downloads-2025-11-23-check-datasets`
 * committed restoration of `updateEveryNMillis` setting in `ubcSSf2DWaveFields30mV17-02` dataset
@@ -12160,7 +12160,7 @@ Worked at ESB while Rita was at home
 
 * continued changing to use Pixi for project & env mgmt; PR#121
   * added `test` feature based on `environment-test.yaml`
-    * `pixi add --feature test pytest pytest-cov pytest-ramdomly`
+    * `pixi add --feature test pytest pytest-cov pytest-randomly`
     * `pixi workspace environment add test --feature test --solve-group default`
       * raise a seemingly spurious warning
         * "The feature 'test' is defined but not used in any environment. Dependencies of unused features
@@ -12193,29 +12193,97 @@ Worked at ESB while Rita was at home
   * changed `pytest-with-coverage` to use `prefix-dev/setup-pixi` as a step towards a reusable
     `pixi-pytest-with-coverage`
     * had to add `prefix-dev/setup-pixi@*,` to SalishSeaCast org Actions Polices settings on GitHub
-    * workflow run time was 24s compared to ~44s for recent micromamba-base workflow runs
+      * workflow run time was 24s compared to ~44s for recent micromamba-based workflow runs
   * added envs for Python 3.12 and 3.13 testing:
     * `pixi add --feature py312 python=3.12`
     * `pixi workspace environment add test-py312 --feature py312 --feature test`
     * `pixi add --feature py313 python=3.13`
     * `pixi workspace environment add test-py313 --feature py313 --feature test`
     * relax Python version in default env from `"3.14.*"` to `"*"`
-    * decided to also add a `test-py314` env (even though it duplicates `tets`) to make GHA explicit
-      and consistent
-    * `pixi add --feature py314 python=3.14`
-    * `pixi workspace environment add test-py314 --feature py314 --feature test`
+  * decided to also add a `test-py314` env (even though it duplicates `tets`) to make GHA explicit
+    and consistent
+  * `pixi add --feature py314 python=3.14`
+  * `pixi workspace environment add test-py314 --feature py314 --feature test`
+
+
+
+### Week 52
+
+#### Mon 22-Dec-2025
+
+##### SalishSeaCast
+
+* storm surge alert for Strait of Georgia on morning of Sat 20dec
+  * 5.10 m at 08:35 at Sandy Cove; 3 m/s SSW wind at Sandy Cove
+* reviewed recent errors on Sentry; all explainable or in consequential except:
+  * `make_averaged_dataset day physics 2025-12-20`
+    * reshapr extraction failed:
+        /results2/SalishSea/nowcast-green.202111/20dec25/SalishSeaCast_1d_grid_T_20251220_20251220.nc
+        is too small: 31004
+    * successfully re-ran manually
+
+
+##### Miscellaneous
+
+* discussed removal of marine heat wave years from climatology files with Karyn & Susan
+  * created 2014-2016 climatology for:
+    * biology
+    * physics
+    * chemistry
+    * grazing & mortality
+    * biological growth rates
+  * helped Susan with metadata on biology climatology that she created with MHW years removed
+
+
+##### borg-backup
+
+* sorted out how to exclude all `**/.pixi/**` directories for `borg` backups from `khawla` and `kudu`
+
+
+##### NEMO-Cmd
+
+* continued changing to use Pixi for project & env mgmt; PR#121
+  * added `docs` feature and env based on `environment-test.yaml` and `environment-rtd.yaml`
+    * `pixi add --feature docs sphinx=8.1.3 sphinx-notfound-page=1.0.4 sphinx-rtd-theme=3.0.0`
+    * `pixi add --feature docs --pypi commonmark recommonmark readthedocs-sphinx-ext`
+    * `pixi workspace environment add docs --feature docs --solve-group default`
+    * added tasks for common docs work:
+      * `pixi task add -f docs --cwd docs/ docs make clean html`
+      * `pixi task add -f docs --cwd docs/ linkcheck make clean linkcheck`
+  * updated dev docs to use Pixi tasks to build HTML docs and run link checker
+  * changed `sphnx-linkkcheck` to use `prefix-dev/setup-pixi` as a step towards a reusable
+    `pixi-sphnx-linkkcheck`
+    * workflow run time was 5m21s due to rate limiting
+  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
+    * build run time was 21s compared to ~60s for recent micromamba-based builds
+  * Updated `source_suffix` in Sphinx configuration re: support for multiple file types
+  * added `dev` feature and env based on `environment-dev.yaml`
+    * `pixi add --feature dev black hatch pre-commit`
+    * `pixi add --feature dev pytest pytest-cov pytest-randomly`
+    * `pixi add --feature dev sphinx=8.1.3 sphinx-notfound-page=1.0.4 sphinx-rtd-theme=3.0.0`
+    * `pixi workspace environment add dev --feature dev --solve-group default`
+    * installed `pre-commit` to run from `dev` env
+      * `pixi run -e dev pre-commit install`
+    * experimented with a task with args for `hatch` but decided to leave its use as
+      `pixi run -e dev hatch ...`
+  * removed `nemo-cmd` conda env from `khawla`
+
+
+
 
 
 
 
 * NEMO-Cmd TODO:
   * create GHA workflows that use `prefix-dev/setup-pixi`
+    * `pytest-with-coverage` - done
+    * `sphinx-linkcheck` - done
+    * change to reusable workflows after I add them to `gha-workflows`
   * update docs
     * installation
     * sub-commands
     * pkg dev
     * add Pixi badge to README and dev docs
-  * change `.readthedocs.yaml` to use Pixi build config
   * decide how to provide repo clone directory (like `$HOME/MEOPAR/NEMO-Cmd/`) to `run` plugin so that
     it can do `pixi run -m $HOME/MEOPAR/NEMO-Cmd/ nemo <sub-command>`
 
