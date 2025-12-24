@@ -385,12 +385,12 @@ MOAD group mtg; see whiteboard
 
 * realized that limit was set lower than last value before `skookum` OS was updated:
 * set new value to take effect after next ERDDAP restart:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   sudo sysctl fs.inotify.max_user_watches=196608
   sudo sysctl -p
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 
 
 ##### moad_tools
@@ -491,13 +491,13 @@ Goofed off.
     * same papers as bio & DO + Suchy, et al, 2023
   * add Suchy, et al, 2023
 * restarted ERDDAP:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   sudo /opt/tomcat/bin/shutdown.sh
   # confirm shutdown
   sudo /opt/tomcat/bin/startup.sh
   ```
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
 
 
 
@@ -513,7 +513,7 @@ Worked at ESB while Rita was at home
   * same problem with hydrometric files client
   * `crop_gribs 12` reported 528 unprocessed files at 09:54
 * recovery started at 11:54:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   # killed collect_weather 12 2.5km
   supervisorctl -c $NOWCAST_CONFIG/supervisord.ini restart sr_subscribe-hrdps-continental
@@ -523,7 +523,7 @@ Worked at ESB while Rita was at home
   download_weather 12 2.5km
   crop_gribs 12 --backfill
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * mtg w/ Susan to discuss response to ONC re: `arbutus` migration
 
 
@@ -648,7 +648,7 @@ Worked at ESB.
   * no 18Z 2.5km files on hpfx or dd
   * 00Z 1km files but no 12Z 1km files on dd.alpha
 * mitigation started at ~17:20:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   crop_gribs 18
   download_weather 00 1km
@@ -656,7 +656,7 @@ Worked at ESB.
   collect_weather 00 2.5km 2025-01-25
   crop_gribs 00 2025-01-25
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 
 
 
@@ -705,12 +705,12 @@ Worked at ESB.
 ##### Miscellaneous
 
 * Checked status of scheduled GHA workflows:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   conda activate gha-workflows
   python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 
 
 ##### 202405 Bathymetry
@@ -997,7 +997,7 @@ Worked at ESB.
     * 00 and 06 forecasts files were interleaved in `sarracenia` downloads
     * 06 and 12 forecasts downloaded by `sarracenia`
 * recovery started at ~08:55:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   # kill crop_gribs 06
   # kill collect_weather 06 2.5km
@@ -1010,7 +1010,7 @@ Worked at ESB.
   # wait for wwatch3-forecast2 run to finish
   collect_weather 12 2.5km --backfill --backfill-date 2025-02-04
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 
 
 ##### Miscellaneous
@@ -1077,13 +1077,13 @@ Worked at ESB.
 * finished removal of V19-05 datasets in PR#30:
   * deleted datasets and their entries in `datasets.yaml`
 * restarted ERDDAP:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   sudo /opt/tomcat/bin/shutdown.sh
   # confirm shutdown
   sudo /opt/tomcat/bin/startup.sh
   ```
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
 * squash-merged PR#30
 
 
@@ -1166,14 +1166,14 @@ Goofed off.
 * explained 2nd Narrow HADCP dataset storage to Camryn
 * generated boundary files for 3-30mar23:
   * VSCode session on `skookum` in `/data/dlatorne/MEOPAR/SS-run-sets/`
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     cd sss150
     # edit file patterns in `bdytools_ssc_to_sss150_salish.yaml`
     mamba activate bdytools
     bdytools bdytools_ssc_to_sss150_salish.yaml --bdy ssh ts uv --bdy_date0 20230303 --bdy_date1 20230330
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
 
 
 ##### 202405 Bathymetry
@@ -1284,32 +1284,32 @@ Worked at ESB
   * modernized SOG-Bloomcast-Ensemble repo & package
   * confirmed that SOG clone is up to date
   * worked in bloomcast-dev env (Python 3.13)
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     mkdir run/2024
     cp run/2024_bloomcast_infile.yaml run/2025_bloomcast_infile.yaml
     mv run/2024_bloomcast_infile.yaml run/2024/
     mkdir -p run/timeseries run/profiles
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
   * committed archive of 2024 SOG YAML infile
   * edit run/2025_bloomcast_infile.yaml
   * edit run/config/yaml
   * successfully tested run prep w/ SOG runs and publish to web disabled with
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     python -m aiosmtpd -n -l localhost:1025
     cd run
     bloomcast ensemble -v config.yaml --debug
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
     * ends with:
-      <!-- markdownlint-disable MD013 -->
+      <!-- markdownlint-disable MD031 -->
       ```text
       INFO:bloomcast.ensemble:Skipped running SOG
       ERROR:bloomcast:[Errno 2] No such file or directory: 'timeseries/std_bio_2025_bloomcast.out_8081'
       ```
-      <!-- markdownlint-enable MD013 -->
+      <!-- markdownlint-enable MD031 -->
   * committed run/2025_bloomcast_infile.yaml and run/config.yaml
 * Setup on salish:
   * updated SOG-Bloomcast-Ensemble clone
@@ -1322,20 +1322,20 @@ Worked at ESB
   * archived YVR_* in run/2024/
   * archived last year's `bloom_date_evolution.log` and `bloomcast.log` in run/2024/
   * test run failed
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```text
     ../../SOG-code-bloomcast/SOG:
       error while loading shared libraries: libgfortran.so.3:
       cannot open shared object file: No such file or directory
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
     * due to `salish` OS upgrade in sep25
     * did a clean build in `SOG-code-bloomcast/`
     * ran test
       * unrecognized weather description:
           `Moderate Rain,Snow`
       * bloom predictions:
-          <!-- markdownlint-disable MD013 -->
+          <!-- markdownlint-disable MD031 -->
           ```text
           INFO:bloomcast.ensemble:Predicted earliest bloom date is 2025-02-20
           INFO:bloomcast.ensemble:Earliest bloom date is based on forcing from 2004/2005
@@ -1348,7 +1348,7 @@ Worked at ESB
           INFO:bloomcast.ensemble:Predicted latest bloom date is 2025-04-05
           INFO:bloomcast.ensemble:Latest bloom date is based on forcing from 1998/1999
           ```
-          <!-- markdownlint-enable MD013 -->
+          <!-- markdownlint-enable MD031 -->
   * confirmed web page updated as expected
   * installed cron job to run at 09:30 daily
 
@@ -1525,7 +1525,7 @@ Worked at ESB while Rita was at home.
 ##### Miscellaneous
 
 * uploaded 2016 forcing files to `beluga` for Tall
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
     # atmospheric/GEM2.5/operational/ops_y2016*.nc are already on beluga
   yyyy=2016; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
@@ -1537,7 +1537,7 @@ Worked at ESB while Rita was at home.
   yyyy=2016; rsync -tv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * emailed Peter Thompson, postdoc at SFU with advice to use xarray to access datasets from our ERDDAP
 
 
@@ -1600,12 +1600,12 @@ Worked at ESB while Rita was at home.
       cfgrib=0.9.11.0 in PR#276 has been resolved
     * `crop_gribs 00` on `khawla` sort of worked; it failed after apparently successfully cropping
       9 files with:
-      <!-- markdownlint-disable MD013 -->
+      <!-- markdownlint-disable MD031 -->
       ```python-traceback
       KeyError: "No variable named 'lhtfl'. Variables on the dataset include
       ['time', 'step', 'surface', 'latitude', 'longitude', 'valid_time', 'slhtf']"
       ```
-      <!-- markdownlint-enable MD013 -->
+      <!-- markdownlint-enable MD031 -->
       * that variable is for "upward surface latent heat flux (for VHFR FVCOM)"
         * changed value in `weather.download.2.5 km.variables` config to `slhtf` and `crop_gribs 00`
           runs successfully in dev env
@@ -1620,7 +1620,7 @@ Worked at ESB while Rita was at home.
       * it produces files in which all the the time stamps are the same; that is the issue that caused
         us to pin cfgrib=0.9.11.0 in PR#276
   * tried pinning dev env to cfgrib=0.9.11.0 and xarray=2024.7.0
-      <!-- markdownlint-disable MD013 -->
+      <!-- markdownlint-disable MD031 -->
       ```bash
       find /results/forcing/atmospheric/continental2.5/GRIB/20250221/00/ \
         -type f -name "*_SSC.grib2" -delete  # skookum
@@ -1631,22 +1631,22 @@ Worked at ESB while Rita was at home.
       grib_to_netcdf forecast2  # khawla
       upload_forcing arbutus forecast2  # skookum
       ```
-      <!-- markdownlint-enable MD013 -->
+      <!-- markdownlint-enable MD031 -->
     * `run_NEMO forecast2` and `watch_NEMO forecast2` didn't launch on `arbutus` from automation
       so I launched them manually
     * `make_ww3_wind_file` launched and ran successfully in automation
     * had to re-run `make_ww3_current_file` manually due to overwrites of copies of NEMO velocity files
     * `run_www3 forecast2` and `watch_ww3 forecast2` launched successfully in automation
     * `make_plots nemo forecast2` ran without errors
-      <!-- markdownlint-disable MD013 -->
+      <!-- markdownlint-disable MD031 -->
       ```bash
       find /results/forcing/atmospheric/continental2.5/GRIB/20250221/12/ \
         -type f -name "*_SSC.grib2" -delete  # skookum
       crop_gribs 12  # khawla
       ```
-      <!-- markdownlint-enable MD013 -->
+      <!-- markdownlint-enable MD031 -->
 * downgraded to `xarray=2024.7.0` on `skookum`
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   grib_to_netcdf nowcast+
   upload_forcing arbutus nowcast+
@@ -1654,7 +1654,7 @@ Worked at ESB while Rita was at home.
   upload_forcing optimum nowcast+
   crop_gribs 18 --backfill
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
   * automation worked smoothly
 
 
@@ -1808,7 +1808,7 @@ Worked at ESB after I got SalishSeaCast operational
 ##### Miscellaneous
 
 * uploaded 2017 forcing files to `beluga` for Tall
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
     # atmospheric/GEM2.5/operational/ops_y2017*.nc are already on beluga
   yyyy=2017; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
@@ -1820,7 +1820,7 @@ Worked at ESB after I got SalishSeaCast operational
   yyyy=2017; rsync -tv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * MOAD group mtg; see whiteboard
 * Phys Ocgy seminar: Yayla Sezginer, Tortel lab: Resolving fine-scale variability in phytoplankton
   growth and physiology with Chlorophyll fluorescence
@@ -1915,7 +1915,7 @@ Traveled to Sidney for SoPO.
 
 * generated boundary files for 3apr23 to 2may23:
   * VSCode session on `skookum` in `/data/dlatorne/MEOPAR/SS-run-sets/`
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     # edit file patterns in `bdytools_ssc_to_sss150_salish.yaml`
     cd sss150
@@ -1924,7 +1924,7 @@ Traveled to Sidney for SoPO.
     # edit file patterns in `bdytools_ssc_to_sss150_salish.yaml`
     bdytools bdytools_ssc_to_sss150_salish.yaml --bdy ssh ts uv --bdy_date0 20230430 --bdy_date1 20230502
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
 
 
 ##### Atlantis
@@ -2095,13 +2095,13 @@ with Dan Baker and EMSA on to use SalishSeaCast currents for vessel ground-speed
 ##### Miscellaneous
 
 * Started to upload 2018 forcing files to `beluga` for Tall
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
     # atmospheric/GEM2.5/operational/ops_y2018*.nc are already on beluga
   yyyy=2018; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/sshNeahBay/obs/
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
   * rivers upload stalled
 
 
@@ -2121,7 +2121,7 @@ with Dan Baker and EMSA on to use SalishSeaCast currents for vessel ground-speed
 ##### Miscellaneous
 
 * finished uploading 2018 forcing files to `beluga` for Tall
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
     # atmospheric/GEM2.5/operational/ops_y2018*.nc are already on beluga
   yyyy=2018; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
@@ -2133,7 +2133,7 @@ with Dan Baker and EMSA on to use SalishSeaCast currents for vessel ground-speed
   yyyy=2018; rsync -tv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 
 
 ##### Security Updates
@@ -2329,12 +2329,12 @@ Goofed off
 ##### Miscellaneous
 
 * Checked status of scheduled GHA workflows:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   mamba activate gha-workflows
   python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 
 
 ##### gha-workflows
@@ -2462,7 +2462,7 @@ Yesterday's UBC email problems on `kudu` turn out to be an actual ongoing outage
 
 * generated boundary files for 3may23 to 2jul23:
   * VSCode session on `skookum` in `/data/dlatorne/MEOPAR/SS-run-sets/`
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     # edit file patterns in `bdytools_ssc_to_sss150_salish.yaml`
     cd sss150
@@ -2475,7 +2475,7 @@ Yesterday's UBC email problems on `kudu` turn out to be an actual ongoing outage
     # edit file patterns in `bdytools_ssc_to_sss150_salish.yaml`
     bdytools bdytools_ssc_to_sss150_salish.yaml --bdy ssh ts uv --bdy_date0 20230630 --bdy_date1 20230702
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
 
 
 ##### SalishSeaNowcast
@@ -2685,7 +2685,7 @@ Worked at ESB
 * MOAD group mtg; see whiteboard
 * phys ocgy seminar: Michael A, Scripps re: internal waves and ocean turbulence
 * uploaded 2019 forcing files to `beluga` for Tall:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
     # atmospheric/GEM2.5/operational/ops_y2019*.nc are already on beluga
   yyyy=2019; rsync -tv /results/forcing/sshNeahBay/obs/ssh_y${yyyy}*.nc \
@@ -2697,9 +2697,9 @@ Worked at ESB
   yyyy=2019; rsync -tv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * uploaded 2020 forcing files to `beluga` for Tall:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   yyyy=2020; rsync -tv /results/forcing/atmospheric/GEM2.5/operational/ops_y${yyyy}*.nc
        beluga:projects/def-allen/SalishSea/forcing/atmospheric/
@@ -2712,7 +2712,7 @@ Worked at ESB
   yyyy=2020; rsync -tv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
   * discovered that I have been uploading from `/results/forcing/rivers/turbidity_201906/` instead of
     `/results/forcing/rivers/river_turb/`
 
@@ -2754,12 +2754,12 @@ Goofed off.
 ##### Miscellaneous
 
 * finished uploading 2020 forcing files to `beluga` for Tall
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   yyyy=2020; rsync -tv /results/forcing/rivers/river_turb/riverTurbDaily2_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/rivers/river_turb/
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 
 
 
@@ -2875,14 +2875,14 @@ First time riding to UBC since 20-Aug.
   * added `key_trdtrc` cpp key to new config because Tall said to
     * `./makenemo -n SalishSeaCast_hourly_prod add_key key_trdtrc`
   * changed to `StdEnv/2020` environment with modules required to build NEMO:
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     module --force purge
     module load StdEnv/2020
     module load netcdf-fortran-mpi/4.6.0
     module load perl/5.30.2
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
   * built XIOS-2
 
 
@@ -2896,6 +2896,7 @@ First time riding to UBC since 20-Aug.
   observations
   * built `SalishSeaCast_hourly_prod` config
     * failed in `trczdf.f90` with:
+      <!-- markdownlint-disable MD031 -->
       <!-- markdownlint-disable MD013 -->
       ```text
       mpif90 -o trczdf.o -I/home/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/BLD/inc -c -fpp -r8 -O3 -assume byterecl -heap-arrays -diag-disable 6738 -I/home/dlatorne/projects/def-allen/dlatorne/MEOPAR/XIOS-2//inc  /home/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/BLD/ppsrc/nemo/trczdf.f90
@@ -2909,8 +2910,10 @@ First time riding to UBC since 20-Aug.
       fcm_internal compile failed (256)
       ```
       <!-- markdownlint-enable MD013 -->
+      <!-- markdownlint-enable MD031 -->
     * added `key_dian` based on discussion on Slack with Susan & Tall and build succeeded
     * warnings from `stpctl.f90` should be cleaned up:
+      <!-- markdownlint-disable MD031 -->
       <!-- markdownlint-disable MD013 -->
       ```text
       mpif90 -o stpctl.o -I/home/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/BLD/inc -c -fpp -r8 -O3 -assume byterecl -heap-arrays -diag-disable 6738 -I/home/dlatorne/projects/def-allen/dlatorne/MEOPAR/XIOS-2//inc  /home/dlatorne/MEOPAR/NEMO-3.6-code/NEMOGCM/CONFIG/SalishSeaCast_hourly_prod/BLD/ppsrc/nemo/stpctl.f90
@@ -2931,26 +2934,29 @@ First time riding to UBC since 20-Aug.
       -------------------------------------------------------------^
       ```
       <!-- markdownlint-enable MD013 -->
+      <!-- markdownlint-enable MD031 -->
   * built `Rebuild_NEMO`
 * created  `#salishseacast-hourly-productivity` channel on Slack
 * created `SS-run-sets/SalishSea/djl/SalishSeaCast_hourly_prod/` and files in it:
-      <!-- markdownlint-disable MD013 -->
+      <!-- markdownlint-disable MD031 -->
       ```bash
       field_def.xml
       file_def.xml
       namelist.time.22aug24
       SalishSeaCast_hourly_prod.yaml
       ```
-      <!-- markdownlint-enable MD013 -->
+      <!-- markdownlint-enable MD031 -->
 * queued 4-node test job for 1st day of interest: `22aug24-9x22`
   * initial start time assigned: 2025-04-06T08:17:26
   * updated to 2025-04-04T16:30:59
   * ran at ~22:35 and failed during NEMO initialization with:
+    <!-- markdownlint-disable MD031 -->
     <!-- markdownlint-disable MD013 -->
     ```text
     In file "object_factory_impl.hpp", function "static std::shared_ptr<U> xios::CObjectFactory::GetObject(const std::basic_string<char, std::char_traits<char>, std::allocator<char>> &) [with U = xios::CField]",  line 78 -> [ id = GLS_KE, U = field ] object was not found.
     ```
     <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
 
 
 ##### SalishSeaCast
@@ -3305,22 +3311,22 @@ Filed 2024 income tax returns.
     * changed user and group permissions: `sudo chmod -R ug+rwx apache-tomcat-10.1.40/`
     * removed permissions for other: `sudo chmod -R o-rwx apache-tomcat-10.1.40/`
     * created `apache-tomcat-10.1.40/bin/setenv.sh` containing:
-      <!-- markdownlint-disable MD013 -->
+      <!-- markdownlint-disable MD031 -->
       ```bash
       export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
       export JAVA_OPTS='-server -Djava.awt.headless=true -Xmx1500M -Xms1500M'
       export TOMCAT_HOME=/usr/local/apache-tomcat-10.1.40
       export CATALINA_HOME=/usr/local/apache-tomcat-10.1.40
       ```
-      <!-- markdownlint-enable MD013 -->
+      <!-- markdownlint-enable MD031 -->
     * messed around to get execute permissions on `bin/*.sh` correct
     * launched `tomcat` to test at `http://localhost:8080`:
-      <!-- markdownlint-disable MD013 -->
+      <!-- markdownlint-disable MD031 -->
       ```bash
       sudo su - tomcat
       /usr/local/apache-tomcat-10.1.40/bin/startup.sh
       ```
-      <!-- markdownlint-enable MD013 -->
+      <!-- markdownlint-enable MD031 -->
     * downloaded https://github.com/ERDDAP/erddapContent/releases/download/content1.0.0/erddapContent.zip
       * verified its md5 hash with `md5sum`
     * unpacked zip in `/usr/local/apache-tomcat-10.1.40/` and fixed ownership and permissions
@@ -3350,7 +3356,7 @@ Filed 2024 income tax returns.
 * updated OS packages and auto-removed outdated packages
 * rebooted
 * set up 1.21.5 server
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   mkdir ~/Games/MinecraftFabric1.21.5Server
   cd ~/Games/MinecraftFabric1.21.5Server
@@ -3359,41 +3365,41 @@ Filed 2024 income tax returns.
   cp banned-* eula.txt ops.json whitelist.json start.sh ../MinecraftFabric1.21.5Server/
   popd
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
   * edited `start.sh` to:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
     ```bash
     #!/usr/bin/env bash
     java -Xmx2G -jar fabric-server-mc.1.21.5-loader.0.16.13-launcher.1.0.3.jar nogui
     ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * launched and stopped server to create instance directories and files
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   ./start.sh
     ...
   /stop
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
   * edited `server.properties` to sync with 1.21.4 settings
   * installed mods, and rsync-ed `1-20-1-25jul23` world tree:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   cd ~/Games/MinecraftFabric1.21.5Server/mods/
   curl -LO https://github.com/CaffeineMC/lithium/releases/download/mc1.21.5-0.16.2/lithium-fabric-0.16.2+mc1.21.5-api.jar
   cd ~/Games/MinecraftFabric1.21.5Server
   rsync -av ../MinecraftFabric1.21.4Server/1-20-1-25jul23 ./
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
   * downloaded and unzipped on `khawla` VanillaTweaks double shulker shells v1.3.11 datapacks
     * rsync-ed it to `Games/MinecraftFabric1.21.5Server/1-20-1-25jul23/datapacks/` and removed v1.3.9
   * launched server in `tmux`
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   tmux new -n minecraft-server
   ./start.sh
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * set up 1.21.5 client instance in MultiMC
   * created instance
   * installed fabric 0.16.13
@@ -3573,7 +3579,7 @@ Worked at ESB.
 * uploaded 2021 forcing files to `beluga` for Tall:
   * note the change of the `rsync` options from `tv` to `-tLv`; that is to cause symlinks to be copied
     as files
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   yyyy=2021; rsync -tLv /results/forcing/atmospheric/GEM2.5/operational/ops_y${yyyy}*.nc \
        beluga:projects/def-allen/SalishSea/forcing/atmospheric/
@@ -3586,7 +3592,7 @@ Worked at ESB.
   yyyy=2021; rsync -tLv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 
 
 
@@ -3595,7 +3601,7 @@ Worked at ESB.
 ##### Miscellaneous
 
 * uploaded 2022 forcing files to `beluga` for Tall:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   yyyy=2022; rsync -tLv /results/forcing/atmospheric/GEM2.5/operational/ops_y${yyyy}*.nc \
        beluga:projects/def-allen/SalishSea/forcing/atmospheric/
@@ -3608,7 +3614,7 @@ Worked at ESB.
   yyyy=2022; rsync -tLv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * updated `khawla` PyCharm to 2025.1
 * UBC-DFO modeling meeting, now with ECCC/CCCma; Tall's O2 SalishSeaCast work
 
@@ -3733,24 +3739,24 @@ Worked at ESB.
 
 * started upgrade to v2.26 on `skookum`
   * installed `openjdk-21-jre`:
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     sudo apt autoremove
     sudo apt update
     sudo apt install openjdk-21-jre
     sudo apt autoremove
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
     * installation is in `/usr/lib/jvm/java-21-openjdk-amd64/`
   * installed `tomcat` in `/opt/`:
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     cd /opt/
     curl -LO https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.40/bin/apache-tomcat-10.1.40.tar.gz
     sudo tar xvzf apache-tomcat-10.1.40.tar.gz
     sudo rm -i apache-tomcat-10.1.40.tar.gz
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
   * configure `tomcat`:
     * ref: https://erddap.github.io/docs/server-admin/deploy-install
     * edit `conf/server.xml`
@@ -3761,36 +3767,36 @@ Worked at ESB.
     * edit `conf/content.xml`
       * add `<Resources cachingAllowed="true" cacheMaxSize="80000" />` to `Context`
   * set ownership & permissions on `/opt/apache-tomcat-10.1.40`
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     sudo chown -R tomcat:erdap apache-tomcat-10.1.40/
     sudo chmod g+rwx apache-tomcat-10.1.40/conf/
     sudo chmod -R g+rw apache-tomcat-10.1.40/*
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
   * clone `erddap-datasets` so that we can access the `erddap-2.26` branch independent of the
     deployed version:
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     git clone git@github.com:SalishSeaCast/erddap-datasets.git erddap-datasets-2.26
     cd erddap-datasets-2.26
     git switch erddap-2.26
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
   * symlink `erddap-datasets-2.26/setenv.sh` into `/opt/apache-tomcat-10.1.40/bin/`
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     cd /opt/apache-tomcat-10.1.40/bin/
     ln -s /results/erddap-datasets-2.26/setenv.sh
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
   * started `tomcat`
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     sudo su - tomcat
     /opt/apache-tomcat-10.1.40/bin/startup.sh
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
     * used log reading and `wget` to confirm that `tomcat` is running
     * deployed ERDDAP died somewhere in here
     * added reverse proxy on `test-erddap` for port 8081 to `/etc/apache2/sites-available/000-default.conf`
@@ -3825,7 +3831,7 @@ Worked at ESB.
   * deployed v1.82 survived startup of testing v2.26
   * created `/results/erddap-2.26/` for testing
   * installed ERDDAP v2.26 content config files:
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     sudo su - tomcat
     cd /opt/apache-tomcat-10.1.40/
@@ -3836,10 +3842,10 @@ Worked at ESB.
     chmod -R o-rwx content
     rm -i erddapContent.zip
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
   * symlink `erddap-datasets-2.26/setup.xml` and `erddap-datasets-2.26/datasets.xml` into
     `/opt/apache-tomcat-10.1.40/content/erddap/`:
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     sudo su - tomcat
     cd /opt/apache-tomcat-10.1.40/content/erddap/
@@ -3848,9 +3854,9 @@ Worked at ESB.
     ln -s /results/erddap-datasets-2.26/setup.xml
     ln -s /results/erddap-datasets-2.26/datasets.xml
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
   * installed ERDDAP 2.26 `erddap.war` file:
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     sudo su - tomcat
     cd /opt/apache-tomcat-10.1.40/webapps/
@@ -3859,7 +3865,7 @@ Worked at ESB.
     chmod o-rwx erddap.war
     chgrp -R erdap erddap.war erddap/
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
   * prep for initial test:
     * `setup.xml`:
       * `<bigParentDirectory>/results/erddap-2.26/</bigParentDirectory>`
@@ -4030,7 +4036,7 @@ Worked at ESB
   * added `--backfill` feature to `download_weather` re: issue #309
   * successfully re-ran `crop_gribs` and `download_weather`
 * started backfilling `nowcast-agrif`:
-      <!-- markdownlint-disable MD013 -->
+      <!-- markdownlint-disable MD031 -->
     ```bash
     rsync -tv /home/sallen/MEOPAR/ANALYSIS/analysis-susan/notebooks/Crashes/SalishSea_08432640_restart.nc \
     orcinus:/global/scratch/dlatorne/nowcast-agrif/30apr25/
@@ -4042,7 +4048,7 @@ Worked at ESB
     make_forcing_links orcinus nowcast-agrif 2025-05-06
     make_forcing_links orcinus nowcast-agrif 2025-05-07
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
 
 
 ##### SalishSeaNowcast
@@ -4126,7 +4132,7 @@ Bike ride and goofed off.
 
 * fixed path that 2022 atmospheric forcing files were uploaded to on `beluga`
 * uploaded 2023 forcing files to `beluga` for Tall:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   yyyy=2023; rsync -tLv /results/forcing/atmospheric/GEM2.5/operational/ops_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/atmospheric/GEM2.5/operational/
@@ -4141,9 +4147,9 @@ Bike ride and goofed off.
   yyyy=2023; rsync -tLv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * uploaded 2024 forcing files to `beluga` for Tall:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   yyyy=2024; rsync -tLv /results/forcing/atmospheric/continental2.5/nemo_forcing/hrdps_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/atmospheric/continental2.5/nemo_forcing/
@@ -4156,7 +4162,7 @@ Bike ride and goofed off.
   yyyy=2024; rsync -tLv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}*.nc \
     beluga:projects/def-allen/SalishSea/forcing/LiveOcean/
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 
 
 
@@ -4817,13 +4823,13 @@ Worked at ESB
   "java.io.IOException: User limit of inotify watches reached"
   * realized that limits had reverted to low default values after last `skookum` reboot:
   * set new values:
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
       sudo sysctl fs.inotify.max_user_instances=2048
       sudo sysctl fs.inotify.max_user_watches=196608
       sudo sysctl -p
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
 * opened ticket for Henryk to look at no email issue
   * he noted that `/home/tomcat/` doesn't exist and created it
 
@@ -4859,7 +4865,7 @@ Worked at ESB
   * re-log
 * remove old `module load` statements from `.bashrc`
 * remove `mambaforge-pypy3` installation
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   cp .condarc .condarc-aside
   conda activate base
@@ -4868,27 +4874,27 @@ Worked at ESB
   rm -rf mambaforge-pypy3/ Mambaforge-pypy3-Linux-x86_64.sh .conda .condarc project/dlatorne/conda-envs/*
   rm -rf ~/.local/*
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * install `miniforge3`
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   curl -L -O \
     "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
   bash Miniforge3-$(uname)-$(uname -m).sh
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
   * allow it to auto-initialize conda
   * re-log
 * configure conda/mamba:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   conda config --set auto_activate_base false
   conda config --add envs_dirs /arc/project/st-sallen1-1/dlatorne/conda-envs/
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
   * re-log
 * install SalishSeaCmd
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   cd project/dlatorne/MEOPAR/NEMO-Cmd/
   git pull
@@ -4899,16 +4905,16 @@ Worked at ESB
   python -m pip install --user -e ../NEMO-Cmd
   python -m pip install --user -e .
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * build XIOS
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   cd project/dlatorne/MEOPAR/XIOS-ARCH/
   git pull
   cd project/dlatorne/MEOPAR/XIOS-2/
   git pull
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 
 
 
@@ -4968,7 +4974,7 @@ Worked at ESB
   * success!
 * successfully built SalishSeaCast NEMO
   * module loads
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     module load gcc/9.4.0
     module load openmpi/4.1.1-cuda11-3
@@ -4977,7 +4983,7 @@ Worked at ESB
     module load perl/5.34.0
     module load perl-uri/1.72
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
   * buffed `arch-GCC_SOCKEYE.fcm` file
     * changed deprecated `mpif90` to `mpifort`
     * updated `%NCDF_INC` to match that used for XIOS build
@@ -5065,7 +5071,7 @@ Worked at ESB
 * 01mar23-4x9 run is time stepping!
 * 01mar23-5x10 run is time stepping!
   * annoying restriction causes `salishsea run` to fail without `--no-submit`
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```text
       sbatch: error: ---------------------------------------------------------------------
       sbatch: error: Submitting jobs from directories residing in /arc/project is not allowed.
@@ -5074,7 +5080,7 @@ Worked at ESB
       sbatch: error: Batch job submission failed: Job cannot be submitted without the current working directory specified.
       salishsea ERROR: Command '['sbatch', '/scratch/st-sallen1-1/dlatorne/MEOPAR/runs/01mar-5x10_2025-06-07T102312.373568-0700/SalishSeaNEMO.sh']' returned non-zero exit status 1.
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
 * finished scaling runs up to 5 nodes
 * `rebuild_nemo` was consistently not found
 
@@ -5158,14 +5164,14 @@ Worked at ESB
 ##### Miscellaneous
 
 * Checked status of scheduled GHA workflows:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   mamba activate gha-workflows
   python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
   # re-enabled NEMO_Nowcast CodeQL action
   gh workflow enable -R 43ravens/NEMO_Nowcast CodeQL
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 
 
 
@@ -5260,7 +5266,7 @@ Jamie & Lin arrived for a night after their Rocky Mountaineer tour
   * restarted manager to load updated config at ~14:45
 * can't use VSCode to connect to `arbutus` due to it being on 18.04
 * backfilled yesterday's missed runs:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   # on arbutus
   cd /nemoShare/MEOPAR/SalishSea/nowcast/11jun25/
@@ -5284,7 +5290,7 @@ Jamie & Lin arrived for a night after their Rocky Mountaineer tour
   download_results arbutus forecast 2025-06-11 --debug
   download_wwatch3_results arbutus nowcast 2025-06-11 --debug
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 
 
 ##### ERDDAP
@@ -5367,7 +5373,7 @@ Worked at ESB on a whim after last day of FoMS
 ##### Miscellaneous
 
 * uploaded 2011 forcing files to `sockeye` for Susan:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   yyyy=2011; rsync -tv /results/forcing/atmospheric/GEM2.5/gemlam/gemlam_y${yyyy}*.nc \
     sockeye:/arc/project/st-sallen1-1/SalishSea/forcing/atmospheric/GEM2.5/gemlam/
@@ -5380,7 +5386,7 @@ Worked at ESB on a whim after last day of FoMS
   yyyy=2011; rsync -tv /results/forcing/NEP36/NEP_v202209_y${yyyy}*.nc \
     sockeye:/arc/project/st-sallen1-1/SalishSea/forcing/NEP/
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 
 
 
@@ -5798,48 +5804,48 @@ Worked at ESB
   * built XIOS-2: `./make_xios --arch GCC_NIBI --full --job 8`
     * success
   * loaded `StdEnv/2023` environment with modules required to build NEMO:
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     module --force purge
     module load StdEnv/2023
     module load netcdf-fortran-mpi/4.6.1
     module load perl/5.36.1
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
   * created `NEMOGCM/ARCH/arch-GCC_NIBI.fcm` files for StdEnv/2023
   * experimented with `NEMOGCM/ARCH/arch-GCC_NIBI.env` but it doesn't fully work
   * built SalishSeaCast
     * success
   * built REBUILD_NEMO
 * remove `mambaforge-pypy3` installation
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   conda init --reverse --all
   conda deactivate
   rm -rf miniforge3/ Miniforge3-Linux-x86_64.sh .conda/
   rm -rf ~/.local/*
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * install `miniforge3`
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   curl -L -O \
     "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
   bash Miniforge3-$(uname)-$(uname -m).sh
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
   * allow it to auto-initialize conda
   * re-log
 * configure conda/mamba:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   conda config --set auto_activate_base false
   conda config --add envs_dirs /project/def-allen/dlatorne/conda-envs/
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
   * re-log
 * install SalishSeaCmd
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   cd project/dlatorne/MEOPAR/NEMO-Cmd/
   git pull
@@ -5850,7 +5856,7 @@ Worked at ESB
   python -m pip install --user -e ../NEMO-Cmd
   python -m pip install --user -e .
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * queued 11x32 run
   * no jobs running at 12:45
 
@@ -5923,7 +5929,7 @@ Worked at ESB after I got automation sorted out
   * email from Sandrine at 04:27 about operational problems with forecast runs since yesterday's 12Z
 * 00Z and 06Z are on datamart server and downloaded by sarracenia, but no 18Z
 * recovery started at ~07:50:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
       collect_weather 12 2.5km
       crop_gribs 12
@@ -5934,11 +5940,11 @@ Worked at ESB after I got automation sorted out
       crop_gribs 06
       collect_weather 06 2.5km --backfill 2025-06-27
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * `grib_to_netcdf nowcast+` failed while NEMO forecast2 was running due to missing 18Z hours 5 & 6
 * race condition management for NEMO nowcast run got overwritten by that for wwatch3 forecast2 run
 * recovery started at ~09:00:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
       # copy the cropped 011 & 012 files from the previous 26jun 12Z forecast to create
       # best estimates of 26jun 18Z 005 & 006 files
@@ -5952,7 +5958,7 @@ Worked at ESB after I got automation sorted out
       # wait for wwatch3 forecast2 run to finish
       grib_to_netcdf nowcast+
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * LiveOcean was delayed until ~11:15
 
 
@@ -6005,14 +6011,14 @@ Worked at ESB after I got automation sorted out
 ##### ERDDAP
 
 * atmospheric forcing dataset did not load:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```text
     ubcSSaSurfaceAtmosphereFieldsV23-02: Outer axis overlap between files.
     max=1.7509788E9 for /results/forcing/atmospheric/continental2.5/nemo_forcing/hrdps_y2025m06d26.nc
     is greater than
     min=1.7509608E9 for /results/forcing/atmospheric/continental2.5/nemo_forcing/hrdps_y2025m06d27.nc
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 
 
 
@@ -6036,7 +6042,7 @@ Last Cardiac Rehab session.
   `/results/forcing/atmospheric/continental2.5/nemo_forcing/hrdps_y2025m06d27.nc` was incorrect;
   `time_counter[0]`
   * fix:
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```python
     ds.time_counter.data[0] = pandas.to_datetime("2025-06-27T00:00:00")
     encoding = {
@@ -6049,7 +6055,7 @@ Last Cardiac Rehab session.
     encoding.update({var: {"zlib": True, "complevel": 4} for var in ds.data_vars})
     ds.to_netcdf("hrdps_y2025m06d27.nc.fixed", encoding=encoding, unlimited_dims=("time_counter",))
     ```
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
 * changed `colorBarPalette` attr tag values to our favourite cmocean colour maps; PR#49
 * reverted PR#47 re: atmospheric datasets file patterns because it was done on the grid datasets
   that only require 1 file due to a brain fart;PR#50
@@ -6117,12 +6123,12 @@ Last Cardiac Rehab session.
 ##### SalishSeaCast
 
 * `crop_gribs 12` failed with many errors:
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```text
     ERROR [crop_gribs] skipping corrupted Message
     gribapi.errors.PrematureEndOfFileError: End of resource reached when reading message
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
   * errors are from hour 036 `APCP_Sfc` file; the rest of hour 036 and hours 039-048 were not processed
   * confirmed with `crop_gribs 12 --var APCP_Sfc --var-hour 36 --debug`
     * unexpected end of file
@@ -6464,12 +6470,12 @@ Worked at ESB
 
 * `upload_forcing orcinus forecast2` worked overnight
 * backfill nowcast-agrif:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   upload_forcing orcinus nowcast+ 2025-07-14 --debug
   upload_forcing orcinus turbidity 2025-07-14 --debug
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * `download_live_ocean` timed out out at 12:20
   * restarted at ~12:50
   * success at 14:47
@@ -7441,14 +7447,14 @@ Worked at ESB.
   * built XIOS-2: `./make_xios --arch GCC_FIR --full --job 8`
     * success in 97 seconds
   * loaded `StdEnv/2023` environment with modules required to build NEMO:
-    <!-- markdownlint-disable MD013 -->
+    <!-- markdownlint-disable MD031 -->
     ```bash
     module --force purge
     module load StdEnv/2023
     module load netcdf-fortran-mpi/4.6.1
     module load perl/5.36.1
     ```
-    <!-- markdownlint-enable MD013 -->
+    <!-- markdownlint-enable MD031 -->
   * created `NEMOGCM/ARCH/arch-GCC_FIR.fcm` files for StdEnv/2023
   * built SalishSeaCast:
     * `XIOS_HOME=$PROJECT/$USER/MEOPAR/XIOS-2/ ./makenemo -n SalishSeaCast -m GCC_FIR -j 8`
@@ -7456,25 +7462,25 @@ Worked at ESB.
   * built REBUILD_NEMO:
     * `XIOS_HOME=$PROJECT/$USER/MEOPAR/XIOS-2/ ./maketools -n REBUILD_NEMO -m GCC_FIR -j1`
 * install `miniforge3`
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   curl -L -O \
     "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
   bash Miniforge3-$(uname)-$(uname -m).sh
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
   * allow it to auto-initialize conda
   * re-log
 * configure conda/mamba:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   conda config --set auto_activate_base false
   conda config --add envs_dirs /project/def-allen/dlatorne/conda-envs/
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
   * re-log
 * install SalishSeaCmd
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   cd project/dlatorne/MEOPAR/NEMO-Cmd/
   git pull
@@ -7485,7 +7491,7 @@ Worked at ESB.
   python -m pip install --user -e ../NEMO-Cmd
   python -m pip install --user -e .
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 
 
 ##### Miscellaneous
@@ -7559,7 +7565,7 @@ Worked at ESB.
 
 * uploaded 28feb23 restart files
 * uploaded feb-apr 2023 forcing files to `fir`:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   yyyy=2023; rsync -tLv /results/forcing/atmospheric/GEM2.5/operational/ops_y${yyyy}m0[2-4]*.nc \
     fir:projects/def-allen/SalishSea/forcing/atmospheric/GEM2.5/operational/
@@ -7574,7 +7580,7 @@ Worked at ESB.
   yyyy=2023; rsync -tLv /results/forcing/LiveOcean/boundary_conditions/LiveOcean_v201905_y${yyyy}m0[2-4]*.nc \
     fir:projects/def-allen/SalishSea/forcing/LiveOcean/
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * ran 11x32 with `--ntasks-per-node=192`
   * 10m38s, ~10% faster than `nibi`, consistent with 2.7 vs 2.4 GHz CPUs
 * ran 11x32 with `--cpus-per-task=8 --ntasks-per-node=24`
@@ -8253,12 +8259,12 @@ Worked at home, then at ESB
 * EOAS symposium
   * David Neelin, UCLA, Precipitation and heat wave extremes
 * Checked status of scheduled GHA workflows:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   mamba activate gha-workflows
   python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 
 
 ##### Security Updates
@@ -12018,12 +12024,12 @@ Worked at ESB while Rita was at home
 ##### Miscellaneous
 
 * Checked status of scheduled GHA workflows:
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```bash
   mamba activate gha-workflows
   python /media/doug/warehouse/MOAD/gha-workflows/gha_workflow_checker/gha_workflows_checker.py
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
 * updated Pixi on `lhawla` to v0.62.0
 
 
@@ -12086,7 +12092,7 @@ Worked at ESB while Rita was at home
 * continued changing to use Pixi for project & env mgmt; PR#121
   * tested on `rorqual`
     * copied `bash` personaliation from `nibi`:
-      <!-- markdownlint-disable MD013 -->
+      <!-- markdownlint-disable MD031 -->
       ```bash
       # User specific aliases and functions
       export PAGE=less
@@ -12100,7 +12106,7 @@ Worked at ESB while Rita was at home
       alias sq='squeue -o "%.12i %.8u %.9a %.22j %.2t %.10r %.19S %.10M %.10L %.6D %.5C %P %N"'
       alias sa="sacct -u $USER -o jobid,account,jobname%20,partition%17,state,allocnodes,maxrss,exitcode,nodelist"
       ```
-      <!-- markdownlint-enable MD013 -->
+      <!-- markdownlint-enable MD031 -->
     * installed Pixi: `curl -fsSL https://pixi.sh/install.sh | sh`
       * added it to `PATH` in `.bashrc`
     * enable autocompletion for Pixi in `.bashrc`
@@ -12268,6 +12274,43 @@ Worked at ESB while Rita was at home
       `pixi run -e dev hatch ...`
   * removed `nemo-cmd` conda env from `khawla`
 
+
+
+#### Tue 23-Dec-2025
+
+Worked at ESB.
+
+##### SalishSeaCast
+
+* `download_live_ocean` timed out at 10:55
+  * re-ran manually at 14:05
+  * success at 14:25
+
+
+##### Miscellaneous
+
+* mtg w/ Susan & Rachel re: `numeric_2026` course
+  * open.jupyter.ubc.ca
+  * S&R will upload labs to Canvas for students to download and upload to open.jupyter
+  * TODO:
+    * copy `numeric_2024` to `numeric_2026` and create repo on MOAD org - done
+    * create private `numeric_2026_private` repo for solutions - done
+      * invite S&R to `numeric_2026_private` - done
+    * experiment with Git on open.jupyter
+  * updated envs to use Python 3.13 (same as default kernel on open.jupyter)
+  * debugged website build process
+  * added `uibcdf/action-sphinx-docs-to-gh-pages@*` to Allowed Actions list in UBC-MOAD org Actions
+    Policies settings
+    * had to add to `sphinx-to-gh-pages.yaml` so that GHA bot can write to the `gh-pages` branch
+      <!-- markdownlint-enable MD031 -->
+      ```yaml
+      permissions:
+        contents: write
+      ```
+      <!-- markdownlint-disable MD031 -->
+    * set GitHub Pages > Build and Deploy Source to "Deploy from a branch"
+      (even though we uare using a GitHub Action workflow to build the site)
+    * set GitHub Pages > Build and Deploy Branch to `gh-pages /(root)`
 
 
 
@@ -12439,7 +12482,7 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
 
 * Update project name retrieval in `conf.py`:
   * branch: get-project-name
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-disable MD031 -->
   ```python
   import tomllib
   from pathlib import Path
@@ -12450,8 +12493,8 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
       pkg_info = tomllib.load(f)
   project = pkg_info["project"]["name"]
   ```
-  <!-- markdownlint-enable MD013 -->
-  <!-- markdownlint-disable MD013 -->
+  <!-- markdownlint-enable MD031 -->
+  <!-- markdownlint-disable MD031 -->
   ```text
   Chg to project name retrieval from pyproject.toml
 
@@ -12459,7 +12502,7 @@ Refresh myself on Fortran in VS Code and on-the-fly compilation; prep to present
   `pyproject.toml` using `tomllib`. This ensures consistency and
   reduces manual updates for project metadata.
   ```
-  <!-- markdownlint-enable MD013 -->
+  <!-- markdownlint-enable MD031 -->
   * NEMO-Cmd  - done 16jan23 in d41f972e
   * SalishSeaCmd - done 16jan23 in 6780a1af
   * SOG-Bloomcast-Ensemble - done 15feb25 in PR#65
