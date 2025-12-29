@@ -12285,6 +12285,7 @@ Worked at ESB.
 * `download_live_ocean` timed out at 10:55
   * re-ran manually at 14:05
   * success at 14:25
+* Fraser River turbidity persisted
 
 
 ##### Miscellaneous
@@ -12314,6 +12315,94 @@ Worked at ESB.
 
 
 
+#### Wed 24-Dec-2025
+
+##### SalishSeaCast
+
+* `collect_river_data SquamishBrackendale 2025-12-23` got empty time series
+* Fraser River turbidity persisted
+
+
+##### Security Updates
+
+* reviewed dependabot alert re: `nbconvert`
+  * mostly a Windows vulnerability, I think
+  * no patched version available yet
+
+
+##### NEMO-Cmd
+
+* continued changing to use Pixi for project & env mgmt; PR#121
+  * updated dev docs re: use of Pixi
+  * dropped `environment-dev.yamnl`
+  * moved `requirements.txt` from `envs/` to top level directory and deleted `envs/`
+  * added task to update `requirements.txt via `pip list`
+    * `pixi task add -f dev update-reqs "python -m pip list --format=freeze >> requirements.txt"`
+  * updated installation docs to use Pixi
+  * updated use docs to `pixi run nemo ...
+  * added Pixi badges to README and dev docs
+  * without rate limiting, `shpinx-linkcheck` workflow took 24s compared to 40-50s previously
+  * changed `nemo` command definitions in generated `bash` scripts to use `pixi run -m ...`
+    by using `Path(__file__).parent.parent` in `run.py` (of which I am proud)
+* tested doing an actual NEMo run `fir` using the `pixi` branch
+  * add `modules to load` section to run description
+  * hacked `max_tasks_per_node=192` in `run._sbatch_directives()`
+  * `pixi run -m ~/MEOPAR/NEMO-Cmd nemo run ./nemo-fir-example.yaml \
+      /scratch/dlatorne/MEOPAR/results/01mar23-11x32-pixi
+      --queue-job-cmd sbatch --no-deflate --debug --no-submit`
+  * success!!!
+
+
+##### `fir`
+
+* did new setup on `fir` in `$HOME/MEOPAR/`
+  * took ~30m
+* pushed `fir-example.yaml` run config file
+
+
+
+#### Thu 25-Dec-2025
+
+**Statutory Holiday** - Christmas
+
+##### SalishSeaCast
+
+* `collect_river_data SquamishBrackendale 2025-12-24` got empty time series
+* `collect_river_data SnohomishMonroe 2025-12-24` got empty time series
+
+
+
+#### Fri 26-Dec-2025
+
+**Statutory Holiday** - Boxing Day
+
+##### SalishSeaCast
+
+* `collect_river_data SquamishBrackendale 2025-12-25` got empty time series
+* `collect_river_data SnohomishMonroe 2025-12-25` got empty time series
+
+
+
+#### Sat 27-Dec-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2` failed for Sentry Shoal due to DAP failure
+* `crop_gribs 12` was delayed ~2h due to 1 unprocessed file
+* `collect_river_data SnohomishMonroe 2025-12-25` got empty time series
+
+
+
+#### Sun 28-Dec-2025
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast2` failed for Sentry Shoal due to DAP failure
+* `collect_river_data SnohomishMonroe 2025-12-25` got empty time series
+
+
+
+
 
 
 
@@ -12322,13 +12411,13 @@ Worked at ESB.
     * `pytest-with-coverage` - done
     * `sphinx-linkcheck` - done
     * change to reusable workflows after I add them to `gha-workflows`
-  * update docs
-    * installation
-    * sub-commands
-    * pkg dev
-    * add Pixi badge to README and dev docs
-  * decide how to provide repo clone directory (like `$HOME/MEOPAR/NEMO-Cmd/`) to `run` plugin so that
-    it can do `pixi run -m $HOME/MEOPAR/NEMO-Cmd/ nemo <sub-command>`
+  * fix docs re: change from temporary run directory names from UUID to run id concatenated to
+    microsecond resolution timestamp
+    * e.g. `/scratch/dlatorne/MEOPAR/runs/01mar23-11x32_2025-12-24T145433.665751-0800`
+  * update `prepare` sub-command docs to make mentions of `hg` refer more genericly to version control
+  * update run description file docs re: references to `cedar` and `graham`
+  * change default for `--queue-job-cmd` from `qsub` to `sbatch`
+  * handle hard-coded 32 core/node; we need 192 core for new Alliance clusters
 
 
 
