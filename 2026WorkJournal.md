@@ -36,7 +36,7 @@ Juan de Fuca Beach House to Vancouver
 * `crop_gribs 06` failed with 484 files unprocessed
   * only consequence was no `forecast2` runs
 * `collect_river_data SquamishBrackendale` got empty time series
-* storm surge alert for Strait of Georgia on morning of Sat 20dec
+* storm surge alert for Strait of Georgia for tomorrow morning
   * 5.17 m at 06:35 at Sandy Cove; 0 m/s E wind at Sandy Cove
 
 
@@ -45,7 +45,7 @@ Juan de Fuca Beach House to Vancouver
 
 ##### SalishSeaCast
 
-* storm surge alert for Strait of Georgia on morning of Sat 20dec
+* storm surge alert for Strait of Georgia for tomorrow morning
   * 5.49 m at 07:15 at Sandy Cove; 1 m/s S wind at Sandy Cove
 * manually re-ran `crop_gribs 06 2026-01-02 --backfill --debug` to backfill from yesterday's failure
 
@@ -56,8 +56,85 @@ Juan de Fuca Beach House to Vancouver
 ##### SalishSeaCast
 
 * `collect_river_data SquamishBrackendale` got empty time series
-* storm surge alert for Strait of Georgia on morning of Sat 20dec
-  * 5.30 m at 07:45 at Sandy Cove; 1 m/s SSW wind at Sandy Cove
+* storm surge alert for Strait of Georgia for tomorrow morning
+  * 5.31 m at 08:25 at Sandy Cove; 3 m/s SSW wind at Sandy Cove
+
+
+
+### Week 2
+
+#### Mon 5-Jan-2025
+
+##### SalishSeaCast
+
+* `collect_river_data SquamishBrackendale` got empty time series
+* `crop_gribs 00` failed due to no directory to watch at 13:44
+  * file system sluggishness? I had failures from some ERDDAP tests too...
+  * re-ran manually at ~16:30
+
+
+##### Miscellaneous
+
+* tested single point time series graphs of DIC from ERDDAP in preparation for mtg tomorrow with
+  Yayla of CIOOS
+  * success from 1jan07 within processing time limit: 32d, 60d, 90d, 96d
+  * inconsistent success/failure from 1jan07 within processing time limit: 120d
+  * failure from 1jan07 within processing time limit: 125d, 127d, 135d, 151d
+* tested single point time series netCDF request for all carbon variables from ERDDAP
+  * failure from 1jan07 within processing time limit: 96d, 90d, 60d, 46d
+  * success from 1jan07 within processing time limit: 1d, 2d, 5d, 10d, 20d, 31d, 38d
+* installed Pixi on `skookum`
+  * used it to install improved cli tools in global environments:
+    * `pixi global install eza`
+    * `pixi global install fd-find`
+    * `pixi global install bat`
+    * `pixi global install ripgrep`
+    * `pixi global install fzf`
+
+
+##### NEMO-Cmd
+
+* continued changing to use Pixi for project & env mgmt; PR#121
+  * updated README re: Pixi and command processor packages that extend `NEMO-Cmd`
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update `filelock` to 3.20.1 re: CVE-2025-68146
+  Time-of-Check-Time-of-Use (TOCTOU) race condition symlink attack vulnerability
+  * SOG-forcing
+
+
+##### Reshapr
+
+* continued writing example use docs for extractions from research runs on `nibi`
+
+
+
+#### Tue 6-Jan-2025
+
+##### SalishSeaCast
+
+* `collect_river_data SquamishBrackendale` got empty time series
+* `grib_to_netcdf nowcast+` failed due to missing 00 GRIB file
+  * re-run of `crop_gribs 00` did nothing
+* recovery:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  crop_gribs 00 --backfill
+  grib_to_netcdf nowcast+
+  upload_forcing nowcast+ arbutus
+  upload_forcing nowcast+ robot.nibi
+  upload_forcing nowcast+ orcinus
+  upload_forcing nowcast+ optimum
+  ```
+  <!-- markdownlint-enable MD031 -->
+
+
+##### NEMO-Cmd
+
+* squash-merged PR#121 re: changing to use Pixi for package & env mgmt
+
 
 
 
@@ -66,6 +143,7 @@ Juan de Fuca Beach House to Vancouver
 
 
 * NEMO-Cmd TODO:
+  * fix typos in README
   * fix docs re: change from temporary run directory names from UUID to run id concatenated to
     microsecond resolution timestamp
     * e.g. `/scratch/dlatorne/MEOPAR/runs/01mar23-11x32_2025-12-24T145433.665751-0800`
