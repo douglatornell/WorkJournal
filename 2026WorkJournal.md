@@ -113,6 +113,8 @@ Juan de Fuca Beach House to Vancouver
 
 #### Tue 6-Jan-2025
 
+Worked at ESB while Rita was at home
+
 ##### SalishSeaCast
 
 * `collect_river_data SquamishBrackendale` got empty time series
@@ -134,7 +136,135 @@ Juan de Fuca Beach House to Vancouver
 ##### NEMO-Cmd
 
 * squash-merged PR#121 re: changing to use Pixi for package & env mgmt
+* changed dev env on `kudu` to use Pixi
+  * `pixi run 'echo $CONDA_PREFIX/libexec/conda'` helps with that
 
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* changed `alineisabelle` from member of UBC-MOAD on GitHub to Outside Collaborator
+  * disappeared from Members list
+* Zoom w/ Yayla re: data for CIOOS OA data portal
+  * evaluate putting climatology datasets on ERDDAP - **TODO**
+* installed Pixi on `kudu`
+* updated `kudu` PyCharm to 2025.3.1
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update `bokeh` to 3.8.2 re: CVE-2026-21883
+  Cross-Site WebSocket Hijacking (CSWSH) vulnerability
+  * MoaceanParcels
+  * Reshapr
+  * SalishSeaNowcast
+* Squash-merged dependabot PRs to update `pynacl` to 1.6.2 re: CVE-2025-69277
+  mishandled elliptic curve point validity check vulnerability
+  * SalishSeaNowcast
+
+
+##### SalishSeaNowcast
+
+* issue#310 re: deprecation of `trapz()` in `nowcast.analyze` module is major as of the release
+  numpy-2.4.0 in which the deprecation expired
+
+
+##### SalishSeaCmd
+
+* started changing to use Pixi for project & env mgmt; PR#
+
+* plan:
+  * `pixi init` to add `[tool.pixi.*]` tables to `pyproject.toml`
+  * clean up `.gitignore`
+  * `pixi import envs/environment-hpc.yaml --format conda-env` to get minimal packages in default environment
+    * that created tables for a feature called `salishsea-cmd`
+    * had to edit `pyproject.toml` to get things set up for the `default` feature
+    * deleted `pip` from dependencies table
+  * deleted `envs/environment-hpc.yaml`
+  * `pixi install` created the env and the lock file
+    * confirmed with `pixi run salishsea --version`
+  * configured PyCharm:
+    * `pixi add pixi-pycharm`
+    * set `conda` executable to output of `pixi run 'echo $CONDA_PREFIX/libexec/conda'`
+    * renamed interpreter in PyCharm UI to `salishsea-cmd:default`
+  * added `test` feature based on `environment-test.yaml`
+    * `pixi add --feature test pytest pytest-cov pytest-randomly`
+    * `pixi workspace environment add test --feature test --solve-group default`
+      * raised a seemingly spurious warning
+        * "The feature 'test' is defined but not used in any environment. Dependencies of unused features
+          are not resolved or checked, and use wildcard (*) version specifiers by default,
+          disregarding any set `pinning-strategy`"
+    * `pixi run -e test pytest` works
+      * revealed a new DeprecationWarning re: the `namespace` parameter in `cliff.commandmanager.CommandManager`
+        * created issue#122
+      * added `test` env to PyCharm and that enabled the built-in test runner to work, but only when that
+        interpreter is selected
+        * probably need a `dev` environment list `environment-dev.yaml` for use in PyCharm,
+          but `test` and `docs` environments will still be useful for CI and RTD
+    * `pixi task add -f test pytest "pytest"` shortens the incantation to `pixi run pytest`
+  * added `pytest-cov` and `pytest-cov-html` tasks
+  * updated dev docs to use Pixi tasks to run tests and produce coverage reports
+  * changed `pytest-with-coverage` to use `prefix-dev/setup-pixi` as a step towards a reusable
+    `pixi-pytest-with-coverage`
+    * had to add `prefix-dev/setup-pixi@*,` to SalishSeaCast org Actions Polices settings on GitHub
+      * workflow run time was 24s compared to ~44s for recent micromamba-based workflow runs
+  * added envs for Python 3.12 and 3.13 testing:
+    * `pixi add --feature py312 python=3.12`
+    * `pixi workspace environment add test-py312 --feature py312 --feature test`
+    * `pixi add --feature py313 python=3.13`
+    * `pixi workspace environment add test-py313 --feature py313 --feature test`
+    * relax Python version in default env from `"3.14.*"` to `"*"`
+  * decided to also add a `test-py314` env (even though it duplicates `tets`) to make GHA explicit
+    and consistent
+  * `pixi add --feature py314 python=3.14`
+  * `pixi workspace environment add test-py314 --feature py314 --feature test`
+  * added `docs` feature and env based on `environment-test.yaml` and `environment-rtd.yaml`
+    * `pixi add --feature docs sphinx=8.1.3 sphinx-notfound-page=1.0.4 sphinx-rtd-theme=3.0.0`
+    * `pixi add --feature docs --pypi commonmark recommonmark readthedocs-sphinx-ext`
+    * `pixi workspace environment add docs --feature docs --solve-group default`
+    * added tasks for common docs work:
+      * `pixi task add -f docs --cwd docs/ docs make clean html`
+      * `pixi task add -f docs --cwd docs/ linkcheck make clean linkcheck`
+  * updated dev docs to use Pixi tasks to build HTML docs and run link checker
+  * changed `sphinx-linkcheck` to use `prefix-dev/setup-pixi` as a step towards a reusable
+    `pixi-sphinx-linkcheck`
+    * workflow run time was 5m21s due to rate limiting
+  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
+    * build run time was 21s compared to ~60s for recent micromamba-based builds
+  * Updated `source_suffix` in Sphinx configuration re: support for multiple file types
+  * deleted `envs/environment-rtd.yaml`
+  * deleted `envs/environment-test.yaml`
+  * added `dev` feature and env based on `environment-dev.yaml`
+    * `pixi add --feature dev black hatch pre-commit`
+    * `pixi add --feature dev pytest pytest-cov pytest-randomly`
+    * `pixi add --feature dev sphinx=8.1.3 sphinx-notfound-page=1.0.4 sphinx-rtd-theme=3.0.0`
+    * `pixi workspace environment add dev --feature dev --solve-group default`
+    * installed `pre-commit` to run from `dev` env
+      * `pixi run -e dev pre-commit install`
+  * removed `salishsea-cmd` conda env from `khawla`
+  * updated dev docs re: use of Pixi
+  * dropped `environment-dev.yaml`
+  * moved `requirements.txt` from `envs/` to top level directory and deleted `envs/`
+  * added task to update `requirements.txt via`pip list`
+    * `pixi task add -f dev update-reqs "python -m pip list --format=freeze >> requirements.txt"`
+  * updated installation docs to use Pixi
+  * updated use docs to `pixi run salishsea ...
+  * added Pixi badges to README and dev docs
+  * without rate limiting, `sphinx-linkcheck` workflow took 24s compared to 40-50s previously
+  * changed `salishsea` command definitions in generated `bash` scripts to use `pixi run -m ...`
+    by using `Path(__file__).parent.parent` in `run.py`
+  * tested doing an actual SalishSeaCast run on `fir` using the `pixi` branch
+    * `pixi run -m ~/MEOPAR/SalishSeaCmd salishsea run ./fir-example.yaml \
+        /scratch/dlatorne/MEOPAR/results/01mar23-11x32-salishsea-pixi --debug --no-submit`
+    * success!!!
+  * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
+  * changed `pytest-with-coverage` workflow to use new reusable `pixi-pytest-with-coverage`
+  * updated README re: Pixi
+* squash-merged PR# re: changing to use Pixi for package & env mgmt
+
+
+
+* review Tall & Raisha papers
 
 
 
