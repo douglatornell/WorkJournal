@@ -68,6 +68,8 @@ Juan de Fuca Beach House to Vancouver
 ##### SalishSeaCast
 
 * `collect_river_data SquamishBrackendale` got empty time series
+* storm surge alert for Strait of Georgia for tomorrow morning
+  * 5.31 m at 08:25 at Sandy Cove; 3 m/s SSW wind at Sandy Cove
 * `crop_gribs 00` failed due to no directory to watch at 13:44
   * file system sluggishness? I had failures from some ERDDAP tests too...
   * re-ran manually at ~16:30
@@ -131,6 +133,8 @@ Worked at ESB while Rita was at home
   upload_forcing nowcast+ optimum
   ```
   <!-- markdownlint-enable MD031 -->
+* storm surge alert for Strait of Georgia for tomorrow morning
+  * 5.33 m at 08:55 at Sandy Cove; 3 m/s SSW wind at Sandy Cove
 
 
 ##### NEMO-Cmd
@@ -171,53 +175,167 @@ Worked at ESB while Rita was at home
 
 ##### SalishSeaCmd
 
-* started changing to use Pixi for project & env mgmt; PR#
+* started planning to use Pixi for package & env mgmt
 
-* plan:
+
+
+#### Wed 7-Jan-2025
+
+##### SalishSeaCast
+
+* `collect_river_data SquamishBrackendale` got empty time series
+* storm surge alert for Strait of Georgia for tomorrow morning
+  * 5.18 m at 09:25 at Sandy Cove; 2 m/s SW wind at Sandy Cove
+
+
+##### Miscellaneous
+
+* confirmed that changing `alineisabelle` from member of UBC-MOAD on GitHub to Outside Collaborator
+  removed them
+  * perhaps it sent them an invitation to become an outside collaborator, but Aline has not been
+    publicly active on GitHub since they stopped working with us in apr21
+
+
+##### SalishSeaNowcast
+
+* fixed issue#310 re: deprecation of `trapz()` in `nowcast.analyze`; PR#410
+  * easy fix: just changed `trapz()` to `trapezoid()` and tests passed
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * thrash because PyCharm 2025.3.1 stopped including `PYTHONPATH` in `sys.path` so imports from
+    `salishsea_tools` fail
+    * work-around is to explicitly add `SalishSeaTools/` path - *ugly*
+    * see https://youtrack.jetbrains.com/projects/PY/issues/PY-85114/Project-root-and-source-roots-are-not-available-to-Jupyter-notebooks
+  * adjusted row 19 tiles 7
+    * reviewed row 19 changes with Susan
+  * added row 20 - Union Bay to Jervis
+    * reviewed work needed with Susan
+
+
+##### SalishSeaCmd
+
+* started changing to use Pixi for package & env mgmt; PR#121
   * `pixi init` to add `[tool.pixi.*]` tables to `pyproject.toml`
   * clean up `.gitignore`
+  * add `,gitattributes` to VCS
   * `pixi import envs/environment-hpc.yaml --format conda-env` to get minimal packages in default environment
     * that created tables for a feature called `salishsea-cmd`
     * had to edit `pyproject.toml` to get things set up for the `default` feature
     * deleted `pip` from dependencies table
-  * deleted `envs/environment-hpc.yaml`
+    * `pixi add --editable --pypi "NEMO-Cmd@git+https://github.com/SalishSeaCast/NEMO-Cmd.git"`
+      to install NEMO-Cmd from GitHub
   * `pixi install` created the env and the lock file
     * confirmed with `pixi run salishsea --version`
+  * deleted `envs/environment-hpc.yaml`
   * configured PyCharm:
     * `pixi add pixi-pycharm`
     * set `conda` executable to output of `pixi run 'echo $CONDA_PREFIX/libexec/conda'`
-    * renamed interpreter in PyCharm UI to `salishsea-cmd:default`
+    * renamed interpreter in PyCharm UI to `SalishSeaCmd:default`
   * added `test` feature based on `environment-test.yaml`
     * `pixi add --feature test pytest pytest-cov pytest-randomly`
     * `pixi workspace environment add test --feature test --solve-group default`
-      * raised a seemingly spurious warning
-        * "The feature 'test' is defined but not used in any environment. Dependencies of unused features
-          are not resolved or checked, and use wildcard (*) version specifiers by default,
-          disregarding any set `pinning-strategy`"
     * `pixi run -e test pytest` works
       * revealed a new DeprecationWarning re: the `namespace` parameter in `cliff.commandmanager.CommandManager`
         * created issue#122
-      * added `test` env to PyCharm and that enabled the built-in test runner to work, but only when that
-        interpreter is selected
-        * probably need a `dev` environment list `environment-dev.yaml` for use in PyCharm,
-          but `test` and `docs` environments will still be useful for CI and RTD
     * `pixi task add -f test pytest "pytest"` shortens the incantation to `pixi run pytest`
   * added `pytest-cov` and `pytest-cov-html` tasks
+    * `pixi task add -f test pytest-cov "pytest --cov=./"`
+    * `pixi task add -f test pytest-cov-html "pytest --cov=./ --cov-report html"`
   * updated dev docs to use Pixi tasks to run tests and produce coverage reports
-  * changed `pytest-with-coverage` to use `prefix-dev/setup-pixi` as a step towards a reusable
-    `pixi-pytest-with-coverage`
-    * had to add `prefix-dev/setup-pixi@*,` to SalishSeaCast org Actions Polices settings on GitHub
-      * workflow run time was 24s compared to ~44s for recent micromamba-based workflow runs
   * added envs for Python 3.12 and 3.13 testing:
+    * relax Python version in default env from `"3.14.*"` to `"*"`
     * `pixi add --feature py312 python=3.12`
     * `pixi workspace environment add test-py312 --feature py312 --feature test`
     * `pixi add --feature py313 python=3.13`
     * `pixi workspace environment add test-py313 --feature py313 --feature test`
-    * relax Python version in default env from `"3.14.*"` to `"*"`
-  * decided to also add a `test-py314` env (even though it duplicates `tets`) to make GHA explicit
-    and consistent
+  * added a `test-py314` env (even though it duplicates `test`) to make GHA explicit and consistent
   * `pixi add --feature py314 python=3.14`
   * `pixi workspace environment add test-py314 --feature py314 --feature test`
+  * changed `pytest-with-coverage` workflow to use new reusable `pixi-pytest-with-coverage`
+
+
+
+#### Thu 8-Jan-2025
+
+##### SalishSeaCast
+
+* `collect_river_data SquamishBrackendale` got empty time series
+
+
+##### Miscellaneous
+
+* UBC-IOS modeling mtg
+  * Mike Foreman: Update on tidal issues with WCVI FVCOM model
+  * oscillations in semi-diurnal amplitudes & phases
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update `urllib3` to 2.6.3 re: CVE-2026-21441
+  decompression-bombin redirect response vulnerability
+  * SalishSeaCmd
+  * AtlantisCmd
+  * salishsea-site
+  * NEMO_Nowcast
+  * SalishSeaNowcast
+  * Reshapr
+  * SOG-Bloomcast-Ensemble
+  * SalishSeaTools
+  * MOAD/docs
+  * MoaceanParcels
+  * moad_tools
+  * cookiecutter-analysis-repo
+  * FUN
+  * SalishSeaCast/docs
+  * cookiecutter-MOAD-pypkg
+  * NEMO-Cmd
+  * cookiecutter-djl-pypkg
+  * SOG-Bloomcast
+  * erddap-datasets
+
+
+
+#### Fri 9-Jan-2025
+
+##### SalishSeaCast
+
+* `collect_river_data SquamishBrackendale` got empty time series
+
+
+##### Miscellaneous
+
+* ERDDAP showcase:
+  * Mathew Biddle: remote replication of datasets
+    * https://docs.google.com/presentation/d/1MR500hnf2ya2jEzqAoXLT0Pn8I0l6Hcnrxtmew14ABE/edit?usp=sharing
+    * IOOS ERDDAP admin
+    * `EDDGridFromERDDAP` and `EDDTableFromERDDAP`
+      * like symlinks from other servers
+      * copies and caches metadata from source servers; forwards data requests to source servers
+    * `EDDTableCopy`
+      * makes local copies of table datasets
+      * reduces load on source servers
+      * allows granularity configuration
+    * `cacheFromUrl`
+      * datasets constructed from HTTP servers
+      * downloads files
+      * primarily about facilitating cloud data
+  * Madison Richardson: Complex ERDDAP dataset configuration example
+    * automating access to password protected ERDDAP datasets
+    * Selenium WebDriver
+  * Giulo Verazzo: ERDDAP CMS
+    * web app for users to manage dataset XML generation from netCDF and CSV without
+      XML knowledge/editing and server file system access
+    * essentially a form version of the XML generation script
+  * library to guess standard names based on variable names and provide attrs
+    * https://github.com/gulfofmaine/standard_knowledge
+
+
+##### SalishSeaCmd
+
+* continued changing to use Pixi for package & env mgmt; PR#121
   * added `docs` feature and env based on `environment-test.yaml` and `environment-rtd.yaml`
     * `pixi add --feature docs sphinx=8.1.3 sphinx-notfound-page=1.0.4 sphinx-rtd-theme=3.0.0`
     * `pixi add --feature docs --pypi commonmark recommonmark readthedocs-sphinx-ext`
@@ -226,11 +344,7 @@ Worked at ESB while Rita was at home
       * `pixi task add -f docs --cwd docs/ docs make clean html`
       * `pixi task add -f docs --cwd docs/ linkcheck make clean linkcheck`
   * updated dev docs to use Pixi tasks to build HTML docs and run link checker
-  * changed `sphinx-linkcheck` to use `prefix-dev/setup-pixi` as a step towards a reusable
-    `pixi-sphinx-linkcheck`
-    * workflow run time was 5m21s due to rate limiting
   * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
-    * build run time was 21s compared to ~60s for recent micromamba-based builds
   * Updated `source_suffix` in Sphinx configuration re: support for multiple file types
   * deleted `envs/environment-rtd.yaml`
   * deleted `envs/environment-test.yaml`
@@ -244,23 +358,69 @@ Worked at ESB while Rita was at home
   * removed `salishsea-cmd` conda env from `khawla`
   * updated dev docs re: use of Pixi
   * dropped `environment-dev.yaml`
+  * dropped `pytest.ini` because its job was to exclude `NEMO-Cmd` tests in `envs./src/` on GitHub
+    from discovery, and that's no longer an issue
   * moved `requirements.txt` from `envs/` to top level directory and deleted `envs/`
   * added task to update `requirements.txt via`pip list`
     * `pixi task add -f dev update-reqs "python -m pip list --format=freeze >> requirements.txt"`
-  * updated installation docs to use Pixi
-  * updated use docs to `pixi run salishsea ...
+  * renamed `development.rst` to `pkg_development.rst`
+  * updated installation docs and installation paragraph of README to use Pixi
+
+
+
+#### Sat 10-Jan-2025
+
+##### SalishSeaCast
+
+* `collect_river_data SquamishBrackendale` got empty time series
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update `pypdf` to 6.6.0 re: GHSA-4xc4-762w-m6cg
+  long runtime vulnerability
+  * SalishSeaNowcast
+
+
+##### SalishSeaCmd
+
+* continued changing to use Pixi for package & env mgmt; PR#121
+  * tested updating NEMO-Cmd to latest commit on GitHub:
+    * `pixi update nemo-cmd`  # note that the package name is case- and hyphen-sensitive
+  * updated use docs to `pixi run salishsea ...`
   * added Pixi badges to README and dev docs
-  * without rate limiting, `sphinx-linkcheck` workflow took 24s compared to 40-50s previously
   * changed `salishsea` command definitions in generated `bash` scripts to use `pixi run -m ...`
     by using `Path(__file__).parent.parent` in `run.py`
-  * tested doing an actual SalishSeaCast run on `fir` using the `pixi` branch
+
+
+#### Sun 11-Jan-2025
+
+##### SalishSeaCast
+
+* `collect_river_data SquamishBrackendale` got empty time series
+
+
+##### SalishSeaCmd
+
+* continued changing to use Pixi for package & env mgmt; PR#121
+  * tested updating NEMO-Cmd to latest commit on GitHub:
+    * `pixi update nemo-cmd`  # note that the package name is case- and hyphen-sensitive
+  * updated use docs to `pixi run salishsea ...`
+  * added Pixi badges to README and dev docs
+  * changed `salishsea` command definitions in generated `bash` scripts to use `pixi run -m ...`
+    by using `Path(__file__).parent.parent` in `run.py`
+  * tested doing a SalishSeaCast run on `fir` using the `pixi` branch
+    * deleted `NEMO-Cmd` clone
+    * uninstaslled `mamba` and `conda`
     * `pixi run -m ~/MEOPAR/SalishSeaCmd salishsea run ./fir-example.yaml \
-        /scratch/dlatorne/MEOPAR/results/01mar23-11x32-salishsea-pixi --debug --no-submit`
+        /scratch/dlatorne/MEOPAR/results/01mar23-11x32-salishsea-pixi-real --debug`
     * success!!!
-  * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
-  * changed `pytest-with-coverage` workflow to use new reusable `pixi-pytest-with-coverage`
-  * updated README re: Pixi
+
+* plan:
+  * drop `NEMO-Cmd` from `vcs revisions` stanza of YAML files in docs
 * squash-merged PR# re: changing to use Pixi for package & env mgmt
+
+
 
 
 
@@ -272,8 +432,18 @@ Worked at ESB while Rita was at home
 
 
 
+* SalishSeaCmd TODO:
+  * fix docs re: change from temporary run directory names from UUID to run id concatenated to
+    microsecond resolution timestamp
+    * e.g. `/scratch/dlatorne/MEOPAR/runs/01mar23-11x32_2025-12-24T145433.665751-0800`
+
+
+
+
+
 * NEMO-Cmd TODO:
   * fix typos in README
+  * remove all `conda activate` mentions from docs
   * fix docs re: change from temporary run directory names from UUID to run id concatenated to
     microsecond resolution timestamp
     * e.g. `/scratch/dlatorne/MEOPAR/runs/01mar23-11x32_2025-12-24T145433.665751-0800`
@@ -310,14 +480,14 @@ Worked at ESB while Rita was at home
 
 * Migrate to `pixi`:
   * gha-workflows - done 17dec25 in PR#82
+  * NEMO-Cmd - done 6jan26 in PR#121
 
-  * NEMO-Cmd
   * SalishSeaCmd
-  * AtlantisCmd
   * MOAD/docs
-  * Reshapr
   * SalishSeaCast/docs
+  * Reshapr
   * NEMO_Nowcast
+  * AtlantisCmd
   * moad_tools
   * tools/SalishSeaTools
   * SalishSeaNowcast
