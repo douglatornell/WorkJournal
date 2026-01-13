@@ -398,6 +398,10 @@ Worked at ESB while Rita was at home
 ##### SalishSeaCast
 
 * `collect_river_data SquamishBrackendale` got empty time series
+* `get_onc_ferry TWDP` failed due to incompatible boolean index array shape
+  * may indicate resumption of data stream
+* `collect_weather 18 2.5km` failed at 13:33 in `fix_perms()` due to not finding gid for group `sallen`
+* `crop_gribs 18` timed out at 15:50 with 288 files unprocessed
 
 
 ##### SalishSeaCmd
@@ -416,10 +420,73 @@ Worked at ESB while Rita was at home
         /scratch/dlatorne/MEOPAR/results/01mar23-11x32-salishsea-pixi-real --debug`
     * success!!!
 
-* plan:
-  * drop `NEMO-Cmd` from `vcs revisions` stanza of YAML files in docs
-* squash-merged PR# re: changing to use Pixi for package & env mgmt
 
+
+### Week 3
+
+#### Mon 12-Jan-2025
+
+##### SalishSeaCast
+
+* automation stopped when yesterday's `crop_gribs 18` timed out
+  * yesterday's `collect_weather 18 2.5km` is still running
+  * recovery started at 09:35:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  pkill -f collect_weather  # stalled 18Z process
+  # move /results/forcing/atmospheric/continental2.5/GRIB/20260111/18 aside
+  crop_gribs 18 --fcst-date 2026-01-11
+  download_weather 18 2.5km 2026-01-11 --backfill
+  # skipped 1km downloads because the files are no longer available on the ECCC server
+  fd --type f . /SalishSeaCast/datamart/hrdps-continental/18 -X rm
+  collect_weather 00 2.5km 2026-01-12 --backfill
+  crop_gribs 00 --backfill
+  pkill -f collect_weather  # 06Z process that is looking for files that have already been downloaded
+  collect_weather 06 2.5km 2026-01-12 --backfill
+  # crop_gribs 06 stalled with 1 file unprocessed so I killed it and re-ran it
+  # wait for forecast2 runs to finish
+  pkill -f collect_weather  # 12Z process that is looking for files that have already been downloaded
+  collect_weather 12 2.5km 2026-01-12 --backfill
+  ```
+  <!-- markdownlint-enable MD031 -->
+* `collect_river_data SquamishBrackendale` got empty time series
+
+
+##### SalishSeaCmd
+
+* continued changing to use Pixi for package & env mgmt; PR#121
+  * dropped `NEMO-Cmd` from `vcs revisions` stanza of YAML files in docs
+  * added docs re: `pixi run -m` flag
+
+* plan:
+* squash-merged PR#121 re: changing to use Pixi for package & env mgmt
+
+
+##### `nibi`
+
+* changed my installation to use Pixi for `SalishSeaCmd`
+  * deleted `NEMO-Cmd` clone
+  * `mamba env remove -n salishsea-cmd`
+  * deleted `--user` install elements from `NEMO-Cmd` and `SalishSeaCmd`
+
+
+##### Miscellaneous
+
+* updated PyCharm to 2025.3.1.1 on `khawla`
+* started reviewing Tall's paper
+
+
+
+#### Tue 13-Jan-2025
+
+##### SalishSeaCast
+
+* `collect_river_data SquamishBrackendale` got empty time series
+
+
+##### SalishSeaCmd
+
+* squash-merged PR#121 re: changing to use Pixi for package & env mgmt
 
 
 
@@ -481,8 +548,8 @@ Worked at ESB while Rita was at home
 * Migrate to `pixi`:
   * gha-workflows - done 17dec25 in PR#82
   * NEMO-Cmd - done 6jan26 in PR#121
+  * SalishSeaCmd - done 13jan26 in PR#121
 
-  * SalishSeaCmd
   * MOAD/docs
   * SalishSeaCast/docs
   * Reshapr
