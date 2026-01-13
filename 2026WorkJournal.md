@@ -275,7 +275,7 @@ Worked at ESB while Rita was at home
 ##### Security Updates
 
 * Squash-merged dependabot PRs to update `urllib3` to 2.6.3 re: CVE-2026-21441
-  decompression-bombin redirect response vulnerability
+  decompression-bomb in redirect response vulnerability
   * SalishSeaCmd
   * AtlantisCmd
   * salishsea-site
@@ -458,9 +458,6 @@ Worked at ESB while Rita was at home
   * dropped `NEMO-Cmd` from `vcs revisions` stanza of YAML files in docs
   * added docs re: `pixi run -m` flag
 
-* plan:
-* squash-merged PR#121 re: changing to use Pixi for package & env mgmt
-
 
 ##### `nibi`
 
@@ -479,6 +476,8 @@ Worked at ESB while Rita was at home
 
 #### Tue 13-Jan-2025
 
+Worked at ESB
+
 ##### SalishSeaCast
 
 * `collect_river_data SquamishBrackendale` got empty time series
@@ -487,6 +486,51 @@ Worked at ESB while Rita was at home
 ##### SalishSeaCmd
 
 * squash-merged PR#121 re: changing to use Pixi for package & env mgmt
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* continued reviewing Tall's paper
+
+
+##### MOAD/docs
+
+* planned changing to use Pixi for deps & env mgmt; PR#
+  * `pixi init --import environment.yaml` to create `pixi.toml`
+    * why `pip` for Sphinx dependencies rather than `conda-forge`?
+  * clean up `.gitignore`
+  * add `,gitattributes` to VCS
+  * installed `pre-commit` to run from `dev` env
+    * `pixi run -e dev pre-commit install`
+  * added tasks for common docs work:
+    * `pixi task add --cwd docs/ docs make clean html`
+    * `pixi task add --cwd docs/ linkcheck make clean linkcheck`
+  * updated contributing docs to use Pixi tasks to build HTML docs and run link checker
+  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
+  * Updated `source_suffix` in Sphinx configuration re: support for multiple file types
+  * deleted `environment.yaml`
+  * removed `moad-docs` conda env from `khawla`
+  * updated contributing docs re: use of Pixi
+  * added task to update `requirements.txt via`pip list`
+    * `pixi task add update-reqs "python -m pip list --format=freeze >> requirements.txt"`
+  * added Pixi badges to README and dev docs
+* planned updates re: Pixi replacing `conda/mamba`
+  * `getting_started.rst`
+    * change "Install Miniforge" to "Install Pixi"
+  * Alliance setup in `alliance-computing.rst`
+  * lots in `conda_pkg_env_mgr.rst`
+    * maybe move to `zzz_archival_docs/` and replace with new Pixi section
+  * lots in `contributing.rst`
+    * similar to changes in `pkg_development.rst` in `SalishSeaCmd`
+  * lots in `analysis-repo.rst`
+    * maybe not until after `cookiecutter-analysis-repo` is migrated
+  * `jupyter.rst`
+  * `sphinx_docs.rst`
+  * `vscode.rst`
+    * Fortran language server setup
+  * lots in `pkg_structure.rst`
+
 
 
 
@@ -499,10 +543,25 @@ Worked at ESB while Rita was at home
 
 
 
-* SalishSeaCmd TODO:
-  * fix docs re: change from temporary run directory names from UUID to run id concatenated to
-    microsecond resolution timestamp
-    * e.g. `/scratch/dlatorne/MEOPAR/runs/01mar23-11x32_2025-12-24T145433.665751-0800`
+##### SalishSeaCmd TODO
+
+* fix docs re: change from temporary run directory names from UUID to run id concatenated to
+  microsecond resolution timestamp
+  * e.g. `/scratch/dlatorne/MEOPAR/runs/01mar23-11x32_2025-12-24T145433.665751-0800`
+* update scaling tests on `narval` with `StdEnv/2023`
+  * 100 Gb/s InfiniBand Mellanox HDR interconnect
+  * Lustre file system
+  * cpus: AMD EPYC 7532 (Zen 2) @ 2.40 GHz, 256M cache L3
+* add support for `rorqual`
+  * 200 Gb/s HDR InfiniBand
+  * Lustre file system
+  * cpus: AMD EPYC 9654 (Zen 4) @ 2.40 GHz, 384MB cache L3
+  * `--ntasks-per-node=24 --cpus-per-task=8` for whole nodes
+* consider removing attached xios server feature
+* consider removing separate deflate job feature
+* change `orcinus` to use `slurm`
+* drop support for `optimum`
+* consider removing support for PBS/TORQUE scheduler
 
 
 
@@ -615,7 +674,7 @@ Worked at ESB while Rita was at home
   * `polar.ncep.noaa.gov` sometimes refuses connections from GHA `sphinx linkcheck`
 
 
-* change docs to use `Miniforge3` and `mamba`
+* change docs to use `Pixi`
   * MOAD/docs
   * SalishSeaCast/docs
   * many/most packages dev docs
@@ -627,27 +686,10 @@ Worked at ESB while Rita was at home
   * I should get to know Stephan and discuss bigger context with him
 
 
-##### SalishSeaCmd
-
-* change `orcinus` to use `slurm`
-* update scaling tests on `narval` with `StdEnv/2023`
-  * 100 Gb/s InfiniBand Mellanox HDR interconnect
-  * Lustre file system
-  * cpus: AMD EPYC 7532 (Zen 2) @ 2.40 GHz, 256M cache L3
-* add support for `rorqual`
-  * 200 Gb/s HDR InfiniBand
-  * Lustre file system
-  * cpus: AMD EPYC 9654 (Zen 4) @ 2.40 GHz, 384MB cache L3
-  * `--ntasks-per-node=24 --cpus-per-task=8` for whole nodes
-* consider removing attached xios server feature
-* consider removing separate deflate job feature
-* drop support for `optimum`
-* consider removing support for PBS/TORQUE scheduler
-
 
 ##### ERDDAP
 
-* update to v2.28.1
+* update to v2.29.0
   * review v2.27.0 changes because they will be included as we jump from v2.26.0
 
 
