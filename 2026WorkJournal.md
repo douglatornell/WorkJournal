@@ -209,7 +209,7 @@ Worked at ESB while Rita was at home
     `salishsea_tools` fail
     * work-around is to explicitly add `SalishSeaTools/` path - *ugly*
     * see https://youtrack.jetbrains.com/projects/PY/issues/PY-85114/Project-root-and-source-roots-are-not-available-to-Jupyter-notebooks
-  * adjusted row 19 tiles 7
+  * adjusted row 19 tile 7
     * reviewed row 19 changes with Susan
   * added row 20 - Union Bay to Jervis
     * reviewed work needed with Susan
@@ -346,6 +346,7 @@ Worked at ESB while Rita was at home
   * updated dev docs to use Pixi tasks to build HTML docs and run link checker
   * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
   * Updated `source_suffix` in Sphinx configuration re: support for multiple file types
+  * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
   * deleted `envs/environment-rtd.yaml`
   * deleted `envs/environment-test.yaml`
   * added `dev` feature and env based on `environment-dev.yaml`
@@ -415,7 +416,7 @@ Worked at ESB while Rita was at home
     by using `Path(__file__).parent.parent` in `run.py`
   * tested doing a SalishSeaCast run on `fir` using the `pixi` branch
     * deleted `NEMO-Cmd` clone
-    * uninstaslled `mamba` and `conda`
+    * uninstalled `mamba` and `conda`
     * `pixi run -m ~/MEOPAR/SalishSeaCmd salishsea run ./fir-example.yaml \
         /scratch/dlatorne/MEOPAR/results/01mar23-11x32-salishsea-pixi-real --debug`
     * success!!!
@@ -480,7 +481,11 @@ Worked at ESB
 
 ##### SalishSeaCast
 
+* Fraser buoy relative humidity sensor stopped reporting before 04:35
 * `collect_river_data SquamishBrackendale` got empty time series
+* `crop_gribs 18` timed out with 144 file unprocessed ~7m before `collect_weather 8 2.5km` finished
+  * recovery started at ~19:35:
+  * `crop_gribs 18 --backfill`
 
 
 ##### SalishSeaCmd
@@ -497,40 +502,202 @@ Worked at ESB
 ##### MOAD/docs
 
 * planned changing to use Pixi for deps & env mgmt; PR#
-  * `pixi init --import environment.yaml` to create `pixi.toml`
-    * why `pip` for Sphinx dependencies rather than `conda-forge`?
+* planned updates re: Pixi replacing `conda/mamba`
+
+
+
+#### Wed 14-Jan-2025
+
+##### SalishSeaCast
+
+* `collect_river_data SquamishBrackendale` got empty time series
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update `virtualenv` to 20.36.1 re: CVE-2026-22702
+  Time-of-Check-Time-of-Use (TOCTOU) race condition symlink attack vulnerability
+  * cookiecutter-MOAD-pypkg
+  * moad_tools
+  * NEMO_Nowcast
+  * MoaceanParcels
+  * SOG-Bloomcast-Ensemble
+  * SalishSeaTools
+  * FUN
+  * SalishSeaCast/docs
+  * AtlantisCmd
+  * salishsea-site
+  * SalishSeaNowcast
+  * Reshapr
+  * MOAD/docs
+  * gha-workflows
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * erddap-datasets
+  * SOG-forcing
+
+* Squash-merged dependabot PRs to update `filelock` to 3.20.3 re: CVE-2026-22701
+   (another) Time-of-Check-Time-of-Use (TOCTOU) race condition symlink attack vulnerability
+  * AtlantisCmd
+  * SOG-Bloomcast-Ensemble
+  * SalishSeaCast/docs
+  * MOAD/docs
+  * salishsea-site
+  * Reshapr
+  * SalishSeaTools
+  * gha-workflows
+  * cookiecutter-MOAD-pypkg
+  * MoaceanParcels
+  * NEMO_Nowcast
+  * moad_tools
+  * SalishSeaNowcast
+  * FUN
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * erddap-datasets
+  * SOG-forcing
+
+
+##### Miscellaneous
+
+* updated Pixi on `khawla` to 0.63.0
+
+
+##### SalishSeaCast/docs
+
+* changed to use Pixi for deps & env mgmt; PR#74 - squash-merged
+  * `pixi init --import environment-rtd.yaml` to create `pixi.toml`
+  * `pixi add --pypi commonmark recommonmark readthedocs-sphinx-ext`
+  * cleaned up `pixi.toml`:
+    * drop `nodefaults` channel
+    * add `"osx-64", "osx-arm64", "win-64"` to platforms list
+    * drop `version`
+    * add `readme`, `repository`, `documentation`
+    * dependencies:
+      * add comments re: `pre-commit`, `*sphinx*` and `pypi-dependencies`
   * clean up `.gitignore`
-  * add `,gitattributes` to VCS
-  * installed `pre-commit` to run from `dev` env
-    * `pixi run -e dev pre-commit install`
+  * add `,gitattributes`, `pixi.lock` and `pixi.toml` to VCS
+  * installed `pre-commit` to run from `default` env
+    * `pixi run pre-commit install`
+  * added `check-toml` to `.pre-commit-config.yaml`
   * added tasks for common docs work:
-    * `pixi task add --cwd docs/ docs make clean html`
-    * `pixi task add --cwd docs/ linkcheck make clean linkcheck`
-  * updated contributing docs to use Pixi tasks to build HTML docs and run link checker
+    * `pixi task add docs make clean html`
+    * `pixi task add linkcheck make clean linkcheck`
+  * added `.pixi` to `exclude_patterns` in `conf.py`
+  * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
   * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
-  * Updated `source_suffix` in Sphinx configuration re: support for multiple file types
-  * deleted `environment.yaml`
-  * removed `moad-docs` conda env from `khawla`
-  * updated contributing docs re: use of Pixi
+  * deleted `environment-rtd.yaml`
+  * removed `salishseacast-docs` conda env from `khawla`
   * added task to update `requirements.txt via`pip list`
     * `pixi task add update-reqs "python -m pip list --format=freeze >> requirements.txt"`
-  * added Pixi badges to README and dev docs
-* planned updates re: Pixi replacing `conda/mamba`
-  * `getting_started.rst`
-    * change "Install Miniforge" to "Install Pixi"
-  * Alliance setup in `alliance-computing.rst`
-  * lots in `conda_pkg_env_mgr.rst`
-    * maybe move to `zzz_archival_docs/` and replace with new Pixi section
-  * lots in `contributing.rst`
-    * similar to changes in `pkg_development.rst` in `SalishSeaCmd`
-  * lots in `analysis-repo.rst`
-    * maybe not until after `cookiecutter-analysis-repo` is migrated
-  * `jupyter.rst`
-  * `sphinx_docs.rst`
-  * `vscode.rst`
-    * Fortran language server setup
-  * lots in `pkg_structure.rst`
+  * added Pixi badges to README
+* fixed broken and redirected links; PR#75 - squash-merged
+  * dropped `mercurial.el` section
+  * dropped references to `Marlin` tool and added deprecation warnings to `NEMO` and `XIOS-2`
+    repo maintenance sections
+  * updated various other links
+  * added `www.alliance.ca` and `www.emacswiki.org` patterns to linkcheck ignore list when it runs
+    on GHA because those domains rate limit or block requests from GitHub Actions runners
+* updated `nibi` setup docs re: Pixi replacing `conda/mamba`; PR#76 - squash-merged
+  * drop cloning `NEMO-Cmd`
+  * replace install & config of Miniforge with Pixi
+    * include note about running commands with `pixi run`
+  * fix link to docs about SS-run-sets; i.e. "SalishSea/ Directory repo"
+  * change example `salishsea run` command to `pixi run -m $HOME/MEOPAR/SalishSeaCmd salishsea run`
 
+
+
+
+#### Thu 15-Jan-2025
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed ~2h due to 1 unprocessed file
+* `collect_river_data SquamishBrackendale` got empty time series
+
+
+##### Miscellaneous
+
+* updated Pixi on `khawla` to 0.63.1
+* Alliance Townhall
+  * Michael Schell, new CEO opening remarks
+    * emergency MD
+    * Alliance is changing from start-up mindset to sustaining mind-set
+    * sovereign AI
+  * Felipe Pérez-Jostov
+    * UofT expanding `trillium` GPUs
+    * distributed storage and compute grid
+      * S3-object store
+      * centred on 5 national data centres
+        * UofT, Waterloo, SFU, UVic, UQAM, I think
+    * AI research software and training support
+    * Canadian Research Data Platform (CRDP)
+      * Research Activity Identifiers (RAiD)
+      * National Data Spaces pilot in progress
+      * expand storage by >160 Pb
+  * Stephen Wu
+    * AI Sovereign Compute Infrastructure Program
+    * generational investment
+* helped Tall with `pickle` and Numpy issues
+
+
+
+#### Fri 16-Jan-2025
+
+##### SalishSeaCast
+
+* `collect_river_data SquamishBrackendale` got empty time series
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * adjusted row 20 tiles 4, 7, 8 & 9
+    * reviewed row 20 changes with Susan
+  * added row 21 - Comox Harbour to Malibu
+    * reviewed work needed with Susan
+  * adjusted row 21 tiles 4 & 5
+    * reviewed row 20 changes with Susan
+  * added row 22 - Saratoga Beach to Head of Jervis Inlet
+    * reviewed work needed with Susan
+
+
+##### Miscellaneous
+
+* helped Tall with adapting to changes in `evaltools.matchData()`
+* helped Raisha with repo locations for her paper repo
+  * granted access to Zenodo app in SS-Atlantis GitHub org
+* decided *not* to enable `write: content` in SalishSeaCast org for Sentry Seer product
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update `distributed` to 2026.1.1 re: CVE-2026-23528
+  Jupyter + Dask XSS vulnerability
+  * SalishSeaNowcast
+  * MoaceanParcels
+  * Reshapr
+
+
+
+#### Sat 17-Jan-2025
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed ~2h due to 1 unprocessed file
+* `collect_river_data SquamishBrackendale` got empty time series
+* `upload_forcing orcinus` failed for `forecast2` and `nowcast+`
+* `download_results arbutus nowcast` at 10:12 failed due to power outage
+  * automation stopped
+
+
+
+#### Sun 18-Jan-2025
+
+##### SalishSeaCast
+
+* `arbutus` dashboard is back
+  * VMs were restarted at about 20:00
 
 
 
@@ -545,6 +712,7 @@ Worked at ESB
 
 ##### SalishSeaCmd TODO
 
+* finish changing dev docs re: Pixi; e.g. `pixi run hatch...`
 * fix docs re: change from temporary run directory names from UUID to run id concatenated to
   microsecond resolution timestamp
   * e.g. `/scratch/dlatorne/MEOPAR/runs/01mar23-11x32_2025-12-24T145433.665751-0800`
@@ -567,17 +735,90 @@ Worked at ESB
 
 
 
-* NEMO-Cmd TODO:
-  * fix typos in README
-  * remove all `conda activate` mentions from docs
-  * fix docs re: change from temporary run directory names from UUID to run id concatenated to
-    microsecond resolution timestamp
-    * e.g. `/scratch/dlatorne/MEOPAR/runs/01mar23-11x32_2025-12-24T145433.665751-0800`
-  * update `prepare` sub-command docs to make mentions of `hg` refer more generically to version control
-  * update run description file docs re: references to `cedar` and `graham`
-  * change default for `--queue-job-cmd` from `qsub` to `sbatch`
-  * handle hard-coded 32 core/node; we need 192 core for new Alliance clusters
+##### NEMO-Cmd TODO
 
+* fix typos in README
+* remove all `conda activate` mentions from docs
+* fix docs re: change from temporary run directory names from UUID to run id concatenated to
+  microsecond resolution timestamp
+  * e.g. `/scratch/dlatorne/MEOPAR/runs/01mar23-11x32_2025-12-24T145433.665751-0800`
+* update `prepare` sub-command docs to make mentions of `hg` refer more generically to version control
+* update run description file docs re: references to `cedar` and `graham`
+* change default for `--queue-job-cmd` from `qsub` to `sbatch`
+* handle hard-coded 32 core/node; we need 192 core for new Alliance clusters
+
+
+
+
+##### SalishSeaCast/docs TODO
+
+* planned updates re: Pixi replacing `conda/mamba`
+  * `netcdf4.rst`
+    * change mention of Anaconda
+  * `salish.rst`
+    * update like `nibi.rst`
+    * delete section about `stdout` and `stderr` because they are for PBS/TORQUE that we no longer use
+  * `results_server/index.rst`
+    * drop SalishSeaNowcast production deployment stuff
+  * `anaconda_python.rst`
+    * points to `conda` docs in MOAD/docs
+    * update re: Pixi
+  * `emacs_config.rst`
+    * update mention of `$HOME/anaconda/bin`
+  * `work_env/index.rst`
+    * `anaconda_python`
+    * `python3_conda_environment`
+  * `python3_conda_environment.rst`
+    * maybe delete because everything is Python 3 now
+  * `work_env/salishsea_pkgs.rst`
+    * directed at work for not running model; e.g. sprints; think about context
+    * update like `nibi.rst`
+
+
+
+##### MOAD/docs TODO
+
+* plan for changing to use Pixi for deps & env mgmt; PR#
+  * `pixi init --import environment-rtd.yaml` to create `pixi.toml`
+  * `pixi add --pypi commonmark recommonmark readthedocs-sphinx-ext`
+  * cleaned up `pixi.toml`:
+    * drop `nodefaults` channel
+    * add `"osx-64", "osx-arm64", "win-64"` to platforms list
+    * drop `version`
+    * add `readme`, `repository`, `documentation`
+    * dependencies:
+      * add comments re: `pre-commit`, `*sphinx*` and `pypi-dependencies`
+  * clean up `.gitignore`
+  * add `,gitattributes`, `pixi.lock` and `pixi.toml` to VCS
+  * installed `pre-commit` to run from `default` env
+    * `pixi run pre-commit install`
+  * added `check-toml` to `.pre-commit-config.yaml`
+  * added tasks for common docs work:
+    * `pixi task add docs make clean html`
+    * `pixi task add linkcheck make clean linkcheck`
+  * added `.pixi` to `exclude_patterns` in `conf.py`
+  * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
+  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
+  * deleted `environment-rtd.yaml`
+  * removed `moad-docs` conda env from `khawla`
+  * added task to update `requirements.txt via`pip list`
+    * `pixi task add update-reqs "python -m pip list --format=freeze >> requirements.txt"`
+  * added Pixi badges to README
+* plan for updates re: Pixi replacing `conda/mamba`
+  * `getting_started.rst`
+    * change "Install Miniforge" to "Install Pixi"
+  * Alliance setup in `alliance-computing.rst`
+  * lots in `conda_pkg_env_mgr.rst`
+    * maybe move to `zzz_archival_docs/` and replace with new Pixi section
+  * lots in `contributing.rst`
+    * similar to changes in `pkg_development.rst` in `SalishSeaCmd`
+  * lots in `analysis-repo.rst`
+    * maybe not until after `cookiecutter-analysis-repo` is migrated
+  * `jupyter.rst`
+  * `sphinx_docs.rst`
+  * `vscode.rst`
+    * Fortran language server setup
+  * lots in `pkg_structure.rst`
 
 
 
@@ -608,9 +849,9 @@ Worked at ESB
   * gha-workflows - done 17dec25 in PR#82
   * NEMO-Cmd - done 6jan26 in PR#121
   * SalishSeaCmd - done 13jan26 in PR#121
+  * SalishSeaCast/docs - done 14jan26 in PR#74
 
   * MOAD/docs
-  * SalishSeaCast/docs
   * Reshapr
   * NEMO_Nowcast
   * AtlantisCmd
@@ -633,9 +874,9 @@ Worked at ESB
   * MOAD/docs - done 19nov in commit 8b73c7d43
   * Reshapr - done 20nov25 in PR#168
   * gha-workflows - done 17dec25 in PR#82
+  * SalishSeaCast/docs - done 14jan26 in PR#74
 
   * workflows available for testing:
-    * SalishSeaCast/docs
     * NEMO_Nowcast
     * moad_tools
     * tools/SalishSeaTools
@@ -693,7 +934,7 @@ Worked at ESB
   * review v2.27.0 changes because they will be included as we jump from v2.26.0
 
 
-##### SalishSeaCast
+##### SalishSeaCast TODO
 
 * backfill AGRIF runs on `orcinus` from ~14jul
 
