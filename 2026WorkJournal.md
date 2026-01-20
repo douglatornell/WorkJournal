@@ -778,6 +778,45 @@ Worked at ESB while Rita was at home
   * SalishSeaNowcast
   * moad_tools
   * AtlantisCmd
+### Week 4
+
+#### Mon 19-Jan-2025
+
+##### SalishSeaCast
+
+* started automation recovery and runs backfilling on `arbutus` at ~10:40:
+  * `arbutus`:
+    * updated system packages on `nowcast0` and auto-removed old packages
+    * confirmed date, time and timezone: `timedatectl status`
+    * confirmed envvars
+    * mounted shared storage
+      * `sudo mount /dev/vdc /nemoShare` stalled
+        * I interrupted it, but it appears to have been successful
+        * `nemoShare` volume appears to be stuck in "Attaching" state
+    * started NFS service
+    * used `mountpoint /nemoShare/MEOPAR` in bash look to confirm that `nowcast*` and `fvcom*` VMs were
+      reachable
+    * mounted shared storage on compute VMs via bash loops
+  * `skoookum`:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    make_forcing_links arbutus ssh 2026-01-17
+    download_results arbutus nowcast 2026-01-17  # extremely slow
+    ```
+    <!-- markdownlint-enable MD031 -->
+    * forecast/17jan26 run failed due to executable now found on `nowcast9` (that I forgot about!)
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    make_forcing_links arbutus ssh 2026-01-17
+    upload_forcing arbutus nowcast+ 2026-01-18
+    upload_forcing robot.nibi nowcast+ 2026-01-18
+    upload_forcing orcinus nowcast+ 2026-01-18  # failed due to key format; an orcinus issue
+    upload_forcing optimum nowcast+ 2026-01-18
+    upload_forcing arbutus nowcast+ 2026-01-19
+    upload_forcing robot.nibi nowcast+ 2026-01-19
+    upload_forcing optimum nowcast+ 2026-01-19
+    ```
+    <!-- markdownlint-enable MD031 -->
 
 
 
