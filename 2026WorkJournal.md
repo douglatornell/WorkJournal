@@ -701,6 +701,85 @@ Worked at ESB
 
 
 
+#### Tue 20-Jan-2025
+
+Worked at ESB while Rita was at home
+
+##### Miscellaneous
+
+* SFU-Alliance webinar:
+  * Intro to Python Visualization Libraries
+  * Alex Razoumov, SFU
+  * Alliacne Vis Team:
+    * https://ccvis.netlify.app/
+      * lots of past webinar recordings
+    * https://docs.alliancecan.ca/wiki/Visualization
+      * links to docs for various tools/libraries/packages
+  * this year's series: https://folio.vastcloud.org/winterseries
+  * no recordings, but slides posted
+  * Python, ParaView, VMD & Gelphi (specialty tools), web
+  * Python:
+    * matplotlib
+      * seaborn
+        * for stats
+        * static plots only
+        * harder to customize than matplotlib
+      * plotnine: grammar of graphics
+        * ggplot2
+    * javascript
+      * plotly
+        * interactive plots
+        * open source engine & API
+        * web dashboards via Dash
+      * vega-altair
+        * grammar pf graphics
+    * OpenGL?
+      * ParaView & VisIt
+      * based on VTK
+      * intro to ParaView on 6-Feb
+  * VTK
+    * C++ with bindings for Tcl, Java, Python, Javascript (partial)
+    * ParaView is a GUI for VTK
+    * legacy ASCII, current XML, in-dev HDF5
+  * Alex is a huge ParaView fan
+  * Python scripting of ParaView is well supported to replace interactive use
+    * Python interpreter is integrated in ParaView, independent of system/env Python
+  * web viz:
+    * trame server/client framework
+    * plug-ins for most libraries
+  * exclusions:
+    * cartopy
+    * geoplot
+    * Julia
+    * Chapel
+    * non-open-source
+    * AI
+* MOAD group mtg; see whiteboard
+* replied to email from Charles about memory requirements for SalishSeaCast and guesses about scaling
+  for NE Pacific MOM6/Cobalt
+* had a visit from Pal
+* finished reviewing Tall's paper
+
+
+##### Security Updates
+
+* Squash-merged `pre-commit` PRs to update `black` to 26.1.0 re: style updates & bug fixes
+  * NEMO_Nowcast
+  * salishsea-site
+  * erddap-datasets
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * SalishSeaTools
+  * cookiecutter-MOAD-pypkg
+  * gha-workflows
+  * SOG-Bloomcast-Ensemble
+  * MoaceanParcels
+  * Reshapr
+  * SalishSeaNowcast
+  * moad_tools
+  * AtlantisCmd
+
+
 
 * review Tall & Raisha papers
 
