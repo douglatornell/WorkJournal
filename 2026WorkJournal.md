@@ -701,6 +701,48 @@ Worked at ESB
 
 
 
+### Week 4
+
+#### Mon 19-Jan-2025
+
+##### SalishSeaCast
+
+* started automation recovery and runs backfilling on `arbutus` at ~10:40:
+  * `arbutus`:
+    * updated system packages on `nowcast0` and auto-removed old packages
+    * confirmed date, time and timezone: `timedatectl status`
+    * confirmed envvars
+    * mounted shared storage
+      * `sudo mount /dev/vdc /nemoShare` stalled
+        * I interrupted it, but it appears to have been successful
+        * `nemoShare` volume appears to be stuck in "Attaching" state
+    * started NFS service
+    * used `mountpoint /nemoShare/MEOPAR` in bash look to confirm that `nowcast*` and `fvcom*` VMs were
+      reachable
+    * mounted shared storage on compute VMs via bash loops
+  * `skoookum`:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    make_forcing_links arbutus ssh 2026-01-17
+    download_results arbutus nowcast 2026-01-17  # extremely slow
+    ```
+    <!-- markdownlint-enable MD031 -->
+    * forecast/17jan26 run failed due to executable now found on `nowcast9` (that I forgot about!)
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    make_forcing_links arbutus ssh 2026-01-17
+    upload_forcing arbutus nowcast+ 2026-01-18
+    upload_forcing robot.nibi nowcast+ 2026-01-18
+    upload_forcing orcinus nowcast+ 2026-01-18  # failed due to key format; an orcinus issue
+    upload_forcing optimum nowcast+ 2026-01-18
+    upload_forcing arbutus nowcast+ 2026-01-19
+    upload_forcing robot.nibi nowcast+ 2026-01-19
+    upload_forcing optimum nowcast+ 2026-01-19
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+
 #### Tue 20-Jan-2025
 
 Worked at ESB while Rita was at home
@@ -710,7 +752,7 @@ Worked at ESB while Rita was at home
 * SFU-Alliance webinar:
   * Intro to Python Visualization Libraries
   * Alex Razoumov, SFU
-  * Alliacne Vis Team:
+  * Alliance Vis Team:
     * https://ccvis.netlify.app/
       * lots of past webinar recordings
     * https://docs.alliancecan.ca/wiki/Visualization
@@ -778,58 +820,124 @@ Worked at ESB while Rita was at home
   * SalishSeaNowcast
   * moad_tools
   * AtlantisCmd
-### Week 4
 
-#### Mon 19-Jan-2025
+
+
+#### Wed 21-Jan-2025
+
+Intake interview and VO2 max test for SPARC Program
+
+##### Miscellaneous
+
+* helped Becca on Slack with SalishSeaCmd setup on `nibi`
+
+
+##### MOAD/docs
+
+* started changing to use Pixi for deps & env mgmt; PR#62
+  * `pixi init --import environment-rtd.yaml` to create `pixi.toml`
+  * `pixi add --pypi commonmark recommonmark readthedocs-sphinx-ext`
+  * cleaned up `pixi.toml`:
+    * drop `nodefaults` channel
+    * add `"osx-64", "osx-arm64", "win-64"` to platforms list
+    * drop `version`
+    * add `readme`, `repository`, `documentation`
+    * dependencies:
+      * add comments re: `pre-commit`, `*sphinx*` and `pypi-dependencies`
+  * clean up `.gitignore`
+  * add `,gitattributes`, `pixi.lock` and `pixi.toml` to VCS
+  * installed `pre-commit` to run from `default` env
+    * `pixi run pre-commit install`
+
+
+
+#### Thu 22-Jan-2025
+
+##### Miscellaneous
+
+* emailed my comments on Tall's paper
+* helped Vicente with connection problems to `nibi`
+
+
+##### MOAD/docs
+
+* continued changing to use Pixi for deps & env mgmt; PR#62
+  * added `check-toml` to `.pre-commit-config.yaml`
+  * added tasks for common docs work:
+    * `pixi task add docs make clean html`
+    * `pixi task add linkcheck make clean linkcheck`
+  * added `.pixi` to `exclude_patterns` in `conf.py`
+  * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
+  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
+  * deleted `environment-rtd.yaml`
+  * removed `moad-docs` conda env from `khawla`
+  * added task to update `requirements.txt via`pip list`
+    * `pixi task add update-reqs "python -m pip list --format=freeze >> requirements.txt"`
+  * update `contributing.rst`
+    * similar to changes in `pkg_development.rst` in `SalishSeaCmd`
+  * added Pixi badges to README
+* updated redirected links; PR#63
+
+
+
+#### Fri 23-Jan-2025
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update `wheel` to 0.46.2 re: CVE-2026-24049
+  arbitrary file permissions alteration vulnerability
+  * cookiecutter-analysis-repo
+  * SalishSeaNowcast
+  * cookiecutter-MOAD-pypkg
+  * SOG-Bloomcast
+  * SOG-forcing
+* updated Pixi on `khawla` to 0.63.2
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * adjusted row 22 tile 5
+    * reviewed row 22 changes with Susan
+  * added row 23 - Stories Beach to Desolation Sound
+    * reviewed work needed with Susan
+  * adjusted row 23 tiles 4 to 7
+    * reviewed row 23 changes with Susan
+  * added row 24
+    * reviewed work needed with Susan
+  * adjusted row 24 tiles 4 to 6
+    * reviewed row 23 changes with Susan
+
+
+
+#### Sat 24-Jan-2025
 
 ##### SalishSeaCast
 
-* started automation recovery and runs backfilling on `arbutus` at ~10:40:
-  * `arbutus`:
-    * updated system packages on `nowcast0` and auto-removed old packages
-    * confirmed date, time and timezone: `timedatectl status`
-    * confirmed envvars
-    * mounted shared storage
-      * `sudo mount /dev/vdc /nemoShare` stalled
-        * I interrupted it, but it appears to have been successful
-        * `nemoShare` volume appears to be stuck in "Attaching" state
-    * started NFS service
-    * used `mountpoint /nemoShare/MEOPAR` in bash look to confirm that `nowcast*` and `fvcom*` VMs were
-      reachable
-    * mounted shared storage on compute VMs via bash loops
-  * `skoookum`:
-    <!-- markdownlint-disable MD031 -->
-    ```bash
-    make_forcing_links arbutus ssh 2026-01-17
-    download_results arbutus nowcast 2026-01-17  # extremely slow
-    ```
-    <!-- markdownlint-enable MD031 -->
-    * forecast/17jan26 run failed due to executable now found on `nowcast9` (that I forgot about!)
-    <!-- markdownlint-disable MD031 -->
-    ```bash
-    make_forcing_links arbutus ssh 2026-01-17
-    upload_forcing arbutus nowcast+ 2026-01-18
-    upload_forcing robot.nibi nowcast+ 2026-01-18
-    upload_forcing orcinus nowcast+ 2026-01-18  # failed due to key format; an orcinus issue
-    upload_forcing optimum nowcast+ 2026-01-18
-    upload_forcing arbutus nowcast+ 2026-01-19
-    upload_forcing robot.nibi nowcast+ 2026-01-19
-    upload_forcing optimum nowcast+ 2026-01-19
-    ```
-    <!-- markdownlint-enable MD031 -->
+* `collect_weather 2.5km 12` was still running at 11:00
+  * no 12Z files downloaded
+  * no 12Z files on hpfx
+  * `crop_gribs 12` timed out at 11:13 with 528 files unprocessed
+  * re-started `crop_gribs 12` at ~11:25
+  * 12Z files started arriving at ~12:00
+    * `crop_gribs 12` is seeing them
+* cleaned `/SalishSeaCast/datamart/hrdps-continental/12/` with
+  `fd --type f . /SalishSeaCast/datamart/hrdps-continental/12 -X rm`
 
 
 
-* review Tall & Raisha papers
+#### Sun 25-Jan-2025
 
+##### SalishSeaCast
 
-
+* `collect_river_data Englishman` got empty time series
 
 
 
 
 ##### SalishSeaCmd TODO
 
+* drop `NEMO-Cmd` cloning from dev docs
 * finish changing dev docs re: Pixi; e.g. `pixi run hatch...`
 * fix docs re: change from temporary run directory names from UUID to run id concatenated to
   microsecond resolution timestamp
@@ -868,6 +976,25 @@ Worked at ESB while Rita was at home
 
 
 
+##### MOAD/docs TODO
+
+* plan for updates re: Pixi replacing `conda/mamba`
+  * `getting_started.rst`
+    * change "Install Miniforge" to "Install Pixi"
+  * Alliance setup in `alliance-computing.rst`
+  * lots in `conda_pkg_env_mgr.rst`
+    * maybe move to `zzz_archival_docs/` and replace with new Pixi section
+  * lots in `analysis-repo.rst`
+    * maybe not until after `cookiecutter-analysis-repo` is migrated
+  * `jupyter.rst`
+  * `sphinx_docs.rst`
+  * `vscode.rst`
+    * Fortran language server setup
+  * lots in `pkg_structure.rst`
+
+
+
+
 ##### SalishSeaCast/docs TODO
 
 * planned updates re: Pixi replacing `conda/mamba`
@@ -891,52 +1018,6 @@ Worked at ESB while Rita was at home
   * `work_env/salishsea_pkgs.rst`
     * directed at work for not running model; e.g. sprints; think about context
     * update like `nibi.rst`
-
-
-
-##### MOAD/docs TODO
-
-* plan for changing to use Pixi for deps & env mgmt; PR#
-  * `pixi init --import environment-rtd.yaml` to create `pixi.toml`
-  * `pixi add --pypi commonmark recommonmark readthedocs-sphinx-ext`
-  * cleaned up `pixi.toml`:
-    * drop `nodefaults` channel
-    * add `"osx-64", "osx-arm64", "win-64"` to platforms list
-    * drop `version`
-    * add `readme`, `repository`, `documentation`
-    * dependencies:
-      * add comments re: `pre-commit`, `*sphinx*` and `pypi-dependencies`
-  * clean up `.gitignore`
-  * add `,gitattributes`, `pixi.lock` and `pixi.toml` to VCS
-  * installed `pre-commit` to run from `default` env
-    * `pixi run pre-commit install`
-  * added `check-toml` to `.pre-commit-config.yaml`
-  * added tasks for common docs work:
-    * `pixi task add docs make clean html`
-    * `pixi task add linkcheck make clean linkcheck`
-  * added `.pixi` to `exclude_patterns` in `conf.py`
-  * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
-  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
-  * deleted `environment-rtd.yaml`
-  * removed `moad-docs` conda env from `khawla`
-  * added task to update `requirements.txt via`pip list`
-    * `pixi task add update-reqs "python -m pip list --format=freeze >> requirements.txt"`
-  * added Pixi badges to README
-* plan for updates re: Pixi replacing `conda/mamba`
-  * `getting_started.rst`
-    * change "Install Miniforge" to "Install Pixi"
-  * Alliance setup in `alliance-computing.rst`
-  * lots in `conda_pkg_env_mgr.rst`
-    * maybe move to `zzz_archival_docs/` and replace with new Pixi section
-  * lots in `contributing.rst`
-    * similar to changes in `pkg_development.rst` in `SalishSeaCmd`
-  * lots in `analysis-repo.rst`
-    * maybe not until after `cookiecutter-analysis-repo` is migrated
-  * `jupyter.rst`
-  * `sphinx_docs.rst`
-  * `vscode.rst`
-    * Fortran language server setup
-  * lots in `pkg_structure.rst`
 
 
 
@@ -968,8 +1049,8 @@ Worked at ESB while Rita was at home
   * NEMO-Cmd - done 6jan26 in PR#121
   * SalishSeaCmd - done 13jan26 in PR#121
   * SalishSeaCast/docs - done 14jan26 in PR#74
+  * MOAD/docs - done 22jan26 in PR#62
 
-  * MOAD/docs
   * Reshapr
   * NEMO_Nowcast
   * AtlantisCmd
