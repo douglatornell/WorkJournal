@@ -933,6 +933,36 @@ Intake interview and VO2 max test for SPARC Program
 * `collect_river_data Englishman` got empty time series
 
 
+##### Miscellaneous
+
+* bought M4 MacBook Air and started setting it up
+  * works great for Zwift with display on the big screen
+
+
+
+### Week 5
+
+#### Mon 26-Jan-2025
+
+##### Miscellaneous
+
+* continued setup of Air
+
+
+##### SalishSeaCast
+
+* `collect_river_data Englishman` got empty time series
+
+
+##### Reshapr
+
+* continued writing example use docs for extractions from research runs on `nibi`
+  * GHA test failed, probably due to update to `pandas=3.0.0`
+
+
+
+
+
 
 
 ##### SalishSeaCmd TODO
@@ -1022,6 +1052,29 @@ Intake interview and VO2 max test for SPARC Program
 
 
 
+
+##### Reshapr TODO
+
+* update "Iona wastewater discharge analysis" example docs:
+  * remove requirement for multi-day run results to be split; we can handle month-long files now
+  * change note about `split-results` to use `salishsea split-results` instead of nowcast worker
+* Reshapr didn't recognize persistent dask cluster for Susan and gave misleading error message
+  * suspect Reshapr exception type bug due to change in dask
+* exclude test that often times out on GHA
+* consider accepting `dask cluster: nibi_cluster` in extraction YAML (i.e. no extension necessary)
+* `reshapr info` should handle user supplied path/file specs for cluster descriptions and model profiles
+  * presence of a path element (relative or absolute) triggers file reading from somewhere other than
+    in the Reshapr package directories
+  * this works now for absolute paths of model profiles
+  * improve `--help` information to reflect that
+  * provide helpful suggestions instead of a traceback
+* maybe `reshapr info` should be able to discover cluster descriptions and model profiles in the pwd
+  by checking YAML files for characteristic keys
+  * maybe `number of workers` for clusters and  `chunk size` for model profiles
+
+
+
+
 * SalishSeaTools
   * fix failing tests!!!
 
@@ -1088,25 +1141,6 @@ Intake interview and VO2 max test for SPARC Program
     * ECget
     * analysis-doug
     * SOG-Bloomcast ??
-
-
-
-##### Reshapr
-
-* update "Iona wastewater discharge analysis" example docs:
-  * remove requirement for multi-day run results to be split; we can handle month-long files now
-  * change note about `split-results` to use `salishsea split-results` instead of nowcast worker
-* exclude test that often times out on GHA
-* consider accepting `dask cluster: nibi_cluster` in extraction YAML (i.e. no extension necessary)
-* `reshapr info` should handle user supplied path/file specs for cluster descriptions and model profiles
-  * presence of a path element (relative or absolute) triggers file reading from somewhere other than
-    in the Reshapr package directories
-  * this works now for absolute paths of model profiles
-  * improve `--help` information to reflect that
-  * provide helpful suggestions instead of a traceback
-* maybe `reshapr info` should be able to discover cluster descriptions and model profiles in the pwd
-  by checking YAML files for characteristic keys
-  * maybe `number of workers` for clusters and  `chunk size` for model profiles
 
 
 
@@ -1177,8 +1211,6 @@ Intake interview and VO2 max test for SPARC Program
 
 
 
-* Reshapr didn't recognize persistent dask cluster for Susan and gave misleading error message
-  * suspect Reshapr exception type bug due to change in dask
 
 
 ##### erddap-datasets
