@@ -956,10 +956,65 @@ Intake interview and VO2 max test for SPARC Program
 
 ##### Reshapr
 
-* continued writing example use docs for extractions from research runs on `nibi`
+* continued writing example use docs for extractions from research runs on `nibi`; PR169
   * GHA test failed, probably due to update to `pandas=3.0.0`
 
 
+
+#### Tue 27-Jan-2025
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed until ~10:15 due to 1 unprocessed file
+* `make_turbidity_file` failed due to insufficient obs for 27jan
+
+
+##### Reshapr
+
+* created issue#179 re: TypeError in `core.extract._calc_resampled_time_coord()` due to unsupported
+  division of `pandas._libs.tslibs.offsets.Day` by `int`
+  * almost certainly due to `pandas=3.0.0`
+  * may be able to resolve this by converting frequencies in days to hours before division by 2
+* Jose asked if there is a way to extract variable values at a list of points
+  * can we create an xarray Dataset with discrete (depth, y, x) values that have series for their
+    time value?
+* updated milestone v25.3 to v26.1 on GitHub because auto-milestone workflow doesn't work for overdue
+  milestones
+* pinned `pandas<3.0.0`; PR#180 - squash-merged
+  * tested GHA workflows via change in `environment-test.yaml`
+  * added pin to other environments
+
+
+##### Miscellaneous
+
+* read `oandas=3.0.0` release notes
+  * couldn't figure out how offset arithmetic is being handled in xarray now in a compatible way
+* MOAD group mtg; see whiteboard
+* tried to update PyCharm on `kudu` to 2025.3.2 but it failed due to low root partition memory
+  * cleaned up `/var/cache/apt/` re: nearly full `root` partition on `kudu`
+    * started with 12.9 GB in 3537 items
+    * ran `sudo apt autoclean`
+    * resulted in 9.8 GB in 3345 items
+    * flatpak cleanup:
+        <!-- markdownlint-disable MD031 -->
+        ```bash
+        flatpak update --appstream
+        flatpak update
+        flatpak uninstall --unused\
+        ```
+        <!-- markdownlint-enable MD031 -->
+    * deleted a bunch of old kernels with guidance from askubuntu
+      (<https://askubuntu.com/questions/345588/what-is-the-safest-way-to-clean-up-boot-partition>)
+        <!-- markdownlint-disable MD031 -->
+        ```bash
+        uname -r  # in-use kernel - **don't delete**
+        dpkg --list 'linux-image*' | grep ^ii  # installed kernels
+        sudo apt remove linux-image-VERSION  # remove all but in-use and previous kernels
+        sudo apt autoremove  # remove pkgs associated w/ removed kernels
+        ```
+        <!-- markdownlint-enable MD031 -->
 
 
 
