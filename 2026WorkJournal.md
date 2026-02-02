@@ -967,6 +967,7 @@ Worked at ESB
 
 ##### SalishSeaCast
 
+* `collect_river_data Englishman` got empty time series
 * `crop_gribs 12` was delayed until ~10:15 due to 1 unprocessed file
 * `make_turbidity_file` failed due to insufficient obs for 27jan
 
@@ -985,11 +986,13 @@ Worked at ESB
 * pinned `pandas<3.0.0`; PR#180 - squash-merged
   * tested GHA workflows via change in `environment-test.yaml`
   * added pin to other environments
+* asked Susan & Jose and the group to review example use docs for extractions from research runs on
+  `nibi`; PR169
 
 
 ##### Miscellaneous
 
-* read `oandas=3.0.0` release notes
+* read `pandas=3.0.0` release notes
   * couldn't figure out how offset arithmetic is being handled in xarray now in a compatible way
 * MOAD group mtg; see whiteboard
 * tried to update PyCharm on `kudu` to 2025.3.2 but it failed due to low root partition memory
@@ -1018,6 +1021,283 @@ Worked at ESB
 
 
 
+#### Wed 28-Jan-2025
+
+##### SalishSeaCast
+
+* logging stopped with forecast/28jan26 62.6% complete at 08:32:50
+  * only processes running on `skookum` at ~10:30 are `collect_weather 18 2.5km` and `crop_gribs 18`
+  * `watch_NEMO forecast` is still running on `arbutus`
+  * restarted `log_aggregator`
+    * got a 64.3% complete message in the log
+    * forecast/28jan26 appears to be stalled at time step 19003605
+    * `xios_server.exe` process is defunct
+    * `stdout` says that ORTE lost communication with `nowcast2` node
+    * recovery started at ~11:12:
+      * killed `watch_NEMO forecast` processes on `arbutus`
+      * moved `forecast/28jan26/` aside
+      * deleted `runs/28jan26forecast_2026-01-28T081242.951037-0800/`
+      * restarted run with `make_forcing_links arbutus ssh 2026-01-28`
+  * `arbutus` status page says there was a network outage
+* changed `run[enabled hosts][orcinus-nowcast-agrif][make forcing links]` config value to `False`
+  and restarted `manager` on `skookum`
+  * that stops the automation from trying to run `nowcast-agrif`
+* recovered space on `/results/` by deleting pre-cropped continental HRDPS GRIB files:
+  * deleted jan-dec 2025 files, at least ~135G/month, with `fd` commands like:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    fd --type f --glob "*_MSC_HRDPS_*_RLatLon0.0225_PT???H.grib2" \
+      /results/forcing/atmospheric/continental2.5/GRIB/202501??/??/ -X rm
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+##### Miscellaneous
+
+* updated PyCharm to 2025.3.2 on `khawla`
+  * issue PY-85114 whereby `PYTHONPATH` stopped being included in `sys.path` so imports from
+    `salishsea_tools` fail has been resolved
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * reverted ugly work-around for issue introduced by PyCharm 2025.3.1 whereby it stopped including
+    `PYTHONPATH` in `sys.path` so imports from `salishsea_tools` fail
+    * see https://youtrack.jetbrains.com/projects/PY/issues/PY-85114/Project-root-and-source-roots-are-not-available-to-Jupyter-notebooks
+
+
+##### Security Updates
+
+* Squash-merged dependabot PR to update `pypdf` to 6.6.2 re: CVE-2026-24688
+  infinite loop attack vulnerability
+  * SalishSeaNowcast
+
+
+##### SalishSeaNowcast
+
+* updated milestone v25.2 to v26.1 on GitHub because auto-milestone workflow doesn't work for overdue
+  milestones
+* pinned `supervisor>=4.3.0` to resolve `supervisor` `pkg_resources` API deprecation issue; PR#419 - squash-merged
+  * updated `supervisor` in production env on `skookum`
+* stopped preparation of `nowcast-agrif` runs on `orcinus`; PR#420 - squash-merged
+  * changed `run[enabled hosts][orcinus-nowcast-agrif][make forcing links]` config value to `False`
+  * deployed to `skookum`
+* started work on removal of ECCC full domain GRIB files to `crop_gribs` to avoid storage bloat; PR#421
+  * deployed branch to `skookum`
+
+
+##### SalishSeaCmd
+
+* updated milestone v25.4 to v26.1 on GitHub because auto-milestone workflow doesn't work for overdue
+  milestones
+
+
+##### NEMO-Cmd
+
+* updated milestone v25.3 to v26.1 on GitHub because auto-milestone workflow doesn't work for overdue
+  milestones
+
+
+##### Minecraft
+
+* 0.6s 3x3 Piston Door
+  * https://www.youtube.com/watch?v=EAjJYuaUqWA
+
+
+
+#### Thu 29-Jan-2025
+
+##### SalishSeaCast
+
+* confirmed that PR#421 re: removal of ECCC full domain GRIB files to `crop_gribs` to avoid storage
+  bloat works
+* recovered space on `/results/` by deleting pre-cropped continental HRDPS GRIB files:
+  * deleted jan-2026 files
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    fd --type f --glob "*_MSC_HRDPS_*_RLatLon0.0225_PT???H.grib2" \
+      /results/forcing/atmospheric/continental2.5/GRIB/202601??/??/ -X rm
+    ```
+    <!-- markdownlint-enable MD031 -->
+* confirmed that all ECCC full domain GRIB files have been deleted from the
+  `/results/forcing/atmospheric/continental2.5/GRIB/` tree
+
+
+##### SalishSeaNowcast
+
+* squash-merged PR#421 to remove ECCC full domain GRIB files to `crop_gribs` to avoid storage bloat
+  * deployed to `skookum`
+
+
+##### NEMO-Cmd
+
+* improved docs; PR#
+  * fixed typos in README
+  * remove all `conda activate` mentions from docs
+  * fix docs re: change from temporary run directory names from UUID to run id concatenated to
+    microsecond resolution timestamp
+    * e.g. `/scratch/dlatorne/MEOPAR/runs/01mar23-11x32_2025-12-24T145433.665751-0800`
+  * update `prepare` sub-command docs to make mentions of `hg` refer more generically to version control
+  * update run description file docs re: references to `cedar` and `graham`
+* released v26.1
+
+
+
+#### Fri 30-Jan-2025
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed until ~09:50 due to 1 unprocessed file
+
+
+##### Miscellaneous
+
+* Birgit freed ~6T of `/project/` storage on `nibi`
+  * started moving 2007 and 2008 hindcast files back from `/scratch/allen/nowcast-green.202111` to
+    `/project/def-allen/SalishSea/nowcast-green.202111/`
+* Viz webinar: "Plotting in Python with Plotly"
+  * Alex
+  * notes: https://folio.vastcloud.org/plotly-menu.html
+  * on Alliance JupyterHub on vastcloud.org
+  * `Dash` for interaction via callbacks
+  * main pkg: `plotly`
+    * support:
+      * numpy
+      * pandas
+      * jupyter
+      * nbformat for plotting inside notebooks
+      * kaleido for plots to png
+      * networkx
+      * scikit-image for isosurface example
+  * renderers
+    * browser - use in scripts
+    * notebook
+    * plotly_mimetype
+    * automatic on local machine, have to set explicitly on JupyterHub
+      * use "notebook" on JupyterHub
+  * copy/paste from notes... (Introduction)
+  * saving:
+    * png `fig.write_image()`
+      * intended for use in scripts
+        * takes minutes
+        * requires `kaleido` and some Chromium stuff
+    * HTML with JS interactivity `fig.write_html()`
+  * 2 interfaces:
+    * original `plotly.graph_objs`
+      * low level
+    * `plotly.express`
+      * built on `graph_objs`
+      * easier
+      * good for interactive exploration
+      * limits:
+        * multiple traces from different sources
+        * limited marker properties support
+        * very large datasets
+    * you can create a plot with `express` then update date its properties via `graph_objs`
+    * `px.data` provides some sample datasets
+      * tips
+      * gapminder
+  * highly interactive
+    * e.g. toggle visibility of data subsets from legend
+    * sunburst, treemap categorical zooms
+    * choropleth map heatmaps
+  * animations save as self-contained HTML5
+  * `graph_objs`
+    * traces
+    * traces are dicts
+    * even more powerful animations than `express`
+  * `Dash`
+    * interactive data web applications
+    * dash server monitors script that it is run from so that page updates when code changes
+* started playing with `plotly` in `analysis-doug`
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    pixi add --feature plotly-webinar python ipykernel
+    pixi workspace environment add plotly-webinar --feature plotly-webinar --no-default-feature
+    pixi add --feature plotly-webinar plotly
+    pixi add --feature plotly-webinar numpy
+    pixi add --feature plotly-webinar nbformat
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * VSCode notebook interface did not like me gradually adding packages
+    * kernel restarts weren't effective and killing the kernel at the command line really messed
+      things up
+* played with plotting bathymetry using plotly in `analysis-doug/notebooks/plotly-nemo/` with a
+  new Pixi env of the same name
+  * plotly express has some understanding of xarray
+  * interactivity is nice
+  * fine control of image property is at least as fiddly as with matplotlib, just different
+
+
+
+#### Sat 31-Jan-2025
+
+##### SalishSeaCast
+
+* storm surge alert for Strait of Georgia for tomorrow morning
+  * 5.18 m at 06:15 at Sandy Cove; 0 m/s SSW wind at Sandy Cove
+* `archive_tarball` failed in `rsync` phase
+
+
+
+### February
+
+#### Sun 1-Feb-2025
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed until ~09:50 due to 1 unprocessed file
+* rsync-ed jan tarball and index to `nibi`
+* storm surge alert for Strait of Georgia for tomorrow morning
+  * 5.10 m at 06:45 at Sandy Cove; 2 m/s SSW wind at Sandy Cove
+
+
+##### analysis-doug
+
+* rebased `pixi` branch on to `main` because it's not an experiment any more and deleted `pixi` branch
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * explored using `plotly` for processing and verification plots
+    * see `analysis-doug/notebooks/plotly-nemo/SalishSeaCastFields.ipynb`
+    * it's going to work!
+
+
+
+
+
+
+
+##### NEMO-Cmd TODO
+
+* deal with DeprecationWarning from `cliff.commandmanager.CommandManager`
+* change default for `--queue-job-cmd` from `qsub` to `sbatch`
+* handle hard-coded 32 core/node; we need 192 core for new Alliance clusters
+
+
+
+
+
+##### SalishSeaNowcast TODO
+
+* `polar.ncep.noaa.gov` sometimes refuses connections from GHA `sphinx linkcheck`
+* `FutureWarning` re: default value change for `compat` from `compat='no_conflicts'` to `compat='override'`
+  in `xarray.combine_by_coords()`; issue#390
+* `UserWarning`: no explicit representation of timezones available for np.datetime64
+  from `figures/comparison/sandheads_winds.py:119` and `figures/comparison/sandheads_winds.py:127`
+* generate a new ed25519 key for automation logins and change to use it everywhere except `optimum`
+* change config to drop forcing uploads to `optimum`
+* change automation workflow to run nowcast-green in place of nowcast-blue
+  * add output of 10min avg tide gauge station files
+* change download_weather to gather only files missed by collect_weather so that it can
+  work with crop_gribs monitoring incoming files
+  * check for presence of files before downloading them; skip if present
+
+
+
 
 
 ##### SalishSeaCmd TODO
@@ -1027,6 +1307,7 @@ Worked at ESB
 * fix docs re: change from temporary run directory names from UUID to run id concatenated to
   microsecond resolution timestamp
   * e.g. `/scratch/dlatorne/MEOPAR/runs/01mar23-11x32_2025-12-24T145433.665751-0800`
+* deal with DeprecationWarning from `cliff.commandmanager.CommandManager`
 * update scaling tests on `narval` with `StdEnv/2023`
   * 100 Gb/s InfiniBand Mellanox HDR interconnect
   * Lustre file system
@@ -1041,22 +1322,6 @@ Worked at ESB
 * change `orcinus` to use `slurm`
 * drop support for `optimum`
 * consider removing support for PBS/TORQUE scheduler
-
-
-
-
-
-##### NEMO-Cmd TODO
-
-* fix typos in README
-* remove all `conda activate` mentions from docs
-* fix docs re: change from temporary run directory names from UUID to run id concatenated to
-  microsecond resolution timestamp
-  * e.g. `/scratch/dlatorne/MEOPAR/runs/01mar23-11x32_2025-12-24T145433.665751-0800`
-* update `prepare` sub-command docs to make mentions of `hg` refer more generically to version control
-* update run description file docs re: references to `cedar` and `graham`
-* change default for `--queue-job-cmd` from `qsub` to `sbatch`
-* handle hard-coded 32 core/node; we need 192 core for new Alliance clusters
 
 
 
@@ -1199,17 +1464,6 @@ Worked at ESB
 
 
 
-* SalishSeaNowcast
-  * `polar.ncep.noaa.gov` sometimes refuses connections from GHA `sphinx linkcheck`
-
-
-* change docs to use `Pixi`
-  * MOAD/docs
-  * SalishSeaCast/docs
-  * many/most packages dev docs
-    * Reshapr
-
-
 * Susan: do we want to set up Globus on `salish` or `skookum`, or engage compstaff
   to set it up for `ocean` or wider EOAS context
   * I should get to know Stephan and discuss bigger context with him
@@ -1222,36 +1476,10 @@ Worked at ESB
   * review v2.27.0 changes because they will be included as we jump from v2.26.0
 
 
-##### SalishSeaCast TODO
 
-* backfill AGRIF runs on `orcinus` from ~14jul
-
-
-
-##### salishsea-site
+##### salishsea-site TODO
 
 * SMELT link in nav bar has no target
-
-
-##### SalishSeaNowcast
-
-* add removal of uncropped GRIB files to `crop_gribs` to avoid storage bloat
-* `FutureWarning` re: default value change for `compat` from `compat='no_conflicts'` to `compat='override'`
-  in `xarray.combine_by_coords()`; issue#390
-* `UserWarning`: no explicit representation of timezones available for np.datetime64
-  from `figures/comparison/sandheads_winds.py:119` and `figures/comparison/sandheads_winds.py:127`
-* generate a new ed25519 key for automation logins and change to use it everywhere except `optimum`
-* change config to upload forcing to `nibi` instead of `graham`
-  * need automation key activated on `nibi`
-* change config to drop forcing uploads to `optimum`
-* change automation workflow to run nowcast-green in place of nowcast-blue
-  * add output of 10min avg tide gauge station files
-* `supervisor` `pkg_resources` API deprecation issue
-  * version 4.3.0 on PyPI contains a fix
-  * conda-forge feedstock has CI failures, but it's not abandoned
-* change download_weather to gather only files missed by collect_weather so that it can
-  work with crop_gribs monitoring incoming files
-  * check for presence of files before downloading them; skip if present
 
 
 
