@@ -1267,6 +1267,45 @@ Worked at ESB
 
 
 
+### Week 6
+
+#### Mon 2-Feb-2025
+
+SportsCardiologyBC appt w/ Dr. Moulson
+
+##### SalishSeaCast
+
+* cleaned up from successful rsync of jan tarball and index to `nibi`
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * documented experiments using `plotly` for processing and verification
+    plots in `analysis-doug/notebooks/plotly-nemo/SalishSeaCastFields.ipynb`
+  * learned how to change figure template to sort of match dark themes in editors:
+    * `fig.update_layout(template="plotly_dark")`
+  * started adding plotly tile plotting code to verification notebook for row 25
+
+
+##### ERDDAP
+
+* UptimeRobot reported ERDDAP down at ~10:40
+* recovery started at ~13:45
+  * log ends at 10:36; too slow to load into VSCode
+  * `tomcat` process exists
+  * tried to stop and restart `tomcat` but that failed
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    sudo su - tomcat
+    /opt/apache-tomcat-10.1.40/bin/shutdown.sh
+    # wait for dow report from UptimeRobot
+    /opt/apache-tomcat-10.1.40/bin/startup.sh
+    ```
+  * `/results/erddap/logs/` is behaving oddly; no `ls` or tab completion
+  * opened helpdesk ticket
+
+
 
 
 
