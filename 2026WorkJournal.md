@@ -1307,6 +1307,36 @@ SportsCardiologyBC appt w/ Dr. Moulson
 
 
 
+#### Tue 3-Feb-2025
+
+Worked at ESB while Rita was at home
+
+First SPARC session
+
+##### Miscellaneous
+
+* started helping Becca get NEMO running on `nibi`
+* MOAD group mtg; see whiteboard
+
+
+##### ERDDAP
+
+* Henryk restarted NFS on `skookum` at ~09:10 and reported that `/results/` RAID was rebuilding
+* `logs/` directory was still behaving badly at ~12:45
+* email enquiries from:
+  * Crystal Yuehao, grad student of Hal & Brian
+  * Peter Thompson, post-doc at SFU
+  * Taimaz Bahadory at ONC & Yayla Sezginer at CIOOS Pacific
+* Henryk has to reboot `skookum` and rebuild `/results/` RAID offline
+
+
+##### SalishSeaCast
+
+* automation froze in various processes due to `/results/` issue
+  * no `forecast2` or `nowcast` runs
+  * no HRDPS files after 12Z forecast
+
+
 
 
 
