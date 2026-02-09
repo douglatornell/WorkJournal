@@ -906,7 +906,7 @@ Intake interview and VO2 max test for SPARC Program
   * added row 24
     * reviewed work needed with Susan
   * adjusted row 24 tiles 4 to 6
-    * reviewed row 23 changes with Susan
+    * reviewed row 24 changes with Susan
 
 
 
@@ -1132,7 +1132,7 @@ Worked at ESB
 
 ##### NEMO-Cmd
 
-* improved docs; PR#
+* improved docs; PR#127 - squash-merged
   * fixed typos in README
   * remove all `conda activate` mentions from docs
   * fix docs re: change from temporary run directory names from UUID to run id concatenated to
@@ -1302,6 +1302,7 @@ SportsCardiologyBC appt w/ Dr. Moulson
     # wait for dow report from UptimeRobot
     /opt/apache-tomcat-10.1.40/bin/startup.sh
     ```
+    <!-- markdownlint-enable MD031 -->
   * `/results/erddap/logs/` is behaving oddly; no `ls` or tab completion
   * opened helpdesk ticket
 
@@ -1316,6 +1317,7 @@ First SPARC session
 ##### Miscellaneous
 
 * started helping Becca get NEMO running on `nibi`
+  * went through building NEMO and NEMO configurations
 * MOAD group mtg; see whiteboard
 
 
@@ -1328,6 +1330,8 @@ First SPARC session
   * Peter Thompson, post-doc at SFU
   * Taimaz Bahadory at ONC & Yayla Sezginer at CIOOS Pacific
 * Henryk has to reboot `skookum` and rebuild `/results/` RAID offline
+  * he reported that the RAID finished rebuilding as soon as the reboot was completed
+  * `salish` also had to be rebooted to restore it's `/results/` mount
 
 
 ##### SalishSeaCast
@@ -1337,6 +1341,249 @@ First SPARC session
   * no HRDPS files after 12Z forecast
 
 
+
+#### Wed 4-Feb-2025
+
+##### salishsea-site
+
+* started website app via `supervisord`
+
+
+##### ERDDAP
+
+* started `tomcat`
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  sudo su - tomcat
+  /opt/apache-tomcat-10.1.40/bin/startup.sh
+  ```
+  <!-- markdownlint-enable MD031 -->
+* 4 Datasets Failed To Load (in the last major LoadDatasets)
+    ubcSSf3DuGridFields1h, ubcSSf3DvGridFields1h, ubcSSfSurfaceTracerFields1h,
+    ubcSSfDepthAvgdCurrents1h, (end)
+  Reasons for failing to load datasets:
+  ubcSSf3DuGridFields1h: Cannot load from object array because "this.sourceAxisValues" is null
+  ubcSSf3DvGridFields1h: Cannot load from object array because "this.sourceAxisValues" is null
+  ubcSSfSurfaceTracerFields1h: Cannot load from object array because "this.sourceAxisValues" is null
+  ubcSSfDepthAvgdCurrents1h: Cannot load from object array because "this.sourceAxisValues" is null
+  * I'm not concerned now because those are all forecast datasets; the issues should resolved
+    once backfilling of runs is completed
+* immediate search traffic from 3 IPs that `dig` to Azure DNS
+* set necessary higher limits for file system inotify instances and watches:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+    sudo sysctl fs.inotify.max_user_instances=2048
+    sudo sysctl fs.inotify.max_user_watches=196608
+    sudo sysctl -p
+  ```
+  <!-- markdownlint-enable MD031 -->
+
+
+##### SalishSeaCast
+
+* started automation framework via `supervisord`
+* started persistent dask cluster on `salish` in `tmux make_averaged_dataset` session
+* recovery and backfilling:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  collect_weather 18 2.5km
+  crop_gribs 18
+  ```
+  <!-- markdownlint-enable MD031 -->
+  * used `fd` to confirm that `/SalishSeaCast/datamart/hrdps-continental/*/` are empty
+  * checked status of forcing:
+    * no GRIBs for `20260202/18` or after
+    * no LiveOcean for 3feb onward
+    * no river discharge for 2feb onward
+    * no river turbidity for 3feb onward
+    * no sshNeahBay water level for 1feb onward
+    * no river obs for `/results/forcing/rivers/observations/` rivers for 2feb onward
+    * no river obs for Capilano, Englishman, or Fraser rivers for 3feb onward
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  crop_gribs 18 2026-02-02
+  download_weather 18 2.5km 2026-02-02 --backfill
+  mkdir /results/forcing/atmospheric/continental2.5/GRIB/20260203/
+  crop_gribs 00 2026-02-03
+  download_weather 00 2.5km 2026-02-03 --backfill
+  crop_gribs 06 2026-02-03
+  download_weather 06 2.5km 2026-02-03 --backfill
+  ```
+  <!-- markdownlint-enable MD031 -->
+* `grib_to_netcdf forecast2` launched by automation failed because it treid to run for 4feb
+  * that lets me skip yesterday's uninteresting forecast2 runs
+* ECCC river obs for `/results/forcing/rivers/observations/` rivers skipped 2feb
+  * backfilled with `bash collect_ECCC_river_data.sh 2026-02-02` and manual edits
+  * no obs for Roberts Creek
+  * deleted extra 2feb obs from Capilano, Englishman & Fraser files
+* USGS river obs for `/results/forcing/rivers/observations/` rivers missing 2feb
+  * backfilled with `bash collect_USGS_river_data.sh 2026-02-02`
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  crop_gribs 12 2026-02-03
+  download_weather 12 2.5km 2026-02-03 --backfill
+  # wait for grib_to_netcdf nowcast+ to fail
+  make_turbidity_file 2026-02-03
+  download_live_ocean 2026-02-03
+  make_runoff_file v202108 2026-02-03
+  make_201702_runoff_file v202108 2026-02-03
+  grib_to_netcdf nowcast+ 2026-02-03
+  upload_forcing arbutus nowcast+ 2026-02-03
+  upload_forcing robot.nibi nowcast+ 2026-02-03
+  upload_forcing orcinus nowcast+ 2026-02-03
+  upload_forcing optimum nowcast+ 2026-02-03
+  # 3feb runs started
+  crop_gribs 18 2026-02-03
+  download_weather 18 2.5km 2026-02-03 --backfill
+  crop_gribs 00 2026-02-04
+  download_weather 00 2.5km 2026-02-04 --backfill
+  # wait for 3feb runs to finish
+  crop_gribs 06 2026-02-04
+  download_weather 06 2.5km 2026-02-04 --backfill
+  # wait for forecast2 runs to fail
+  crop_gribs 12 2026-02-04
+  download_weather 12 2.5km 2026-02-04 --backfill
+  ```
+  <!-- markdownlint-enable MD031 -->
+* nowcast-blue/04feb26 failed on 1st time step, apparently in Jervis inlets
+  * Susan and I are both baffled
+  * after trying various things on `arbutus` we decided to run on `nibi` where it is easier to manipulate,
+    but slower to run due to queuing
+    * 03feb26 failed
+      * it was using 03feb runoff file
+* symlinked 02feb runoff file as 03feb on `arbutus` and launched blue with `make_forcing_links arbutus nowcast+`
+  * successful runs
+
+
+##### Miscellaneous
+
+* continued helping Becca get NEMO running on `nibi`
+  * went through `nibi-example.yaml` and launched a run
+
+
+##### Security Updates
+
+* Squash-merged `dependabot` PR to update `geopandas` to 1.1.2 re: CVE-2025-69662 re:
+  SQL injection vulnerability
+  * moad_tools
+* Squash-merged `dependabot` PR to update `setup-pixi` to 0.9.4 re: feature & dependency updates
+  * gha-workflows
+* Squash-merged `dependabot` PRs to update `pip` to 26.0 re: CVE-2026-1703 re: path traversal vulnerability
+  * FUN
+  * SalishSeaCast/docs
+  * NEMO_Nowcast
+  * AtlantisCmd
+  * MoaceanParcels
+  * MOAD/docs
+  * SalishSeaTools
+  * cookiecutter-MOAD-pypkg
+  * SOG-Bloomcast-Ensemble
+  * salishsea-site
+  * Reshapr
+  * SalishSeaNowcast
+  * NEMO-Cmd
+  * moad_tools
+  * SalishSeaCmd
+  * cookiecutter-analysis-repo
+  * gha-workflows
+  * erddap-datasets
+* Squash-merged `dependabot` PR to update `appleboy/sh-action` to 1.2.5 re: refactoring & docs updates
+  * salishsea-site
+
+
+
+#### Thu 5-Feb-2025
+
+##### SalishSeaCast
+
+* no obs for Skagit River
+
+
+##### MOAD/docs
+
+* updated `nbconvert` to 7.17.0 re: remote code execution vulnerability that dependabot warned about
+  but didn't produce a pull request for
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * continued adding plotly tile plotting code to verification notebook for row 25
+  * renamed tile rows 16-22 comparison notebook to tiles rows 16-24
+  * started new comparison notebook for tiles rows 25-30 and switch to Plotly
+  * added row 25
+    * reviewed work needed with Susan
+  * adjusted row 24 tiles 4 to 6
+    * reviewed row 23 changes with Susan
+
+
+##### Miscellaneous
+
+* PO seminar: Cuiyi Fei, "The role of topography, land and sea surface temperature on quasi-stationary
+  waves in Northern Hemisphere winter: insights from CAM6 simulations"
+
+
+
+#### Fri 6-Feb-2025
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * started reviwing row 25 work needed with Susan
+    * discovered alignment problem with lons/lats
+    * traced the issue to what seems like
+
+  * adjusted row 25 tiles
+    * reviewed row 25 changes with Susan
+
+
+
+#### Sat 7-Feb-2025
+
+Goofed off
+
+
+
+#### Sun 8-Feb-2025
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed until ~09:50 due to 1 unprocessed file
+
+
+##### SalishSeaCmd
+
+* started adding `sphinx-copybutton` extension to docs; PR#127 - squash-merged
+  * `pixi add -f dev sphinx-copybutton`
+  * `pixi add -f docs sphinx-copybutton`
+  * added `sphinx_copybutton` to list of extensions in `conf.py`
+  * checked all `code-block` directives to ensure consistent exclusion of shell prompts
+  * fixed several directive formatting issues in docs
+* updated dev docs; PR#128 - squash-merged
+  * drop `NEMO-Cmd` cloning from dev docs
+  * finish changing dev docs re: Pixi; e.g. `pixi run hatch...`
+* fix docs re: change from temporary run directory names from UUID to run id concatenated to
+  microsecond resolution timestamp; PR#129 - squash-merged
+  * e.g. `/scratch/dlatorne/MEOPAR/runs/01mar23-11x32_2025-12-24T145433.665751-0800`
+* released v26.1
+
+
+
+
+
+
+##### SS-run-sets TODO
+
+* fix restart paths to `/scratch/dlatorne/` in  example YAML files
+* remove `NEMO-Cmd` from `vcs recording` section of example YAML files
+
+
+
+##### salishsea-site TODO
+
+* pin `supervisor>=4.3.0` to resolve `supervisor` `pkg_resources` API deprecation issue; PR# - squash-merged
+  * update `supervisor` in production env on `skookum`
+* SMELT link in nav bar has no target
 
 
 
@@ -1348,13 +1595,13 @@ First SPARC session
 
 
 
-
-
 ##### SalishSeaNowcast TODO
 
 * `polar.ncep.noaa.gov` sometimes refuses connections from GHA `sphinx linkcheck`
 * `FutureWarning` re: default value change for `compat` from `compat='no_conflicts'` to `compat='override'`
   in `xarray.combine_by_coords()`; issue#390
+* `DtypeWarning` re: Columns (14) have mixed types. Specify dtype option on import or set low_memory=False.
+  tdf = pd.read_csv(turbidity_csv, header=0) in `make_turbidity_file`; issue#423
 * `UserWarning`: no explicit representation of timezones available for np.datetime64
   from `figures/comparison/sandheads_winds.py:119` and `figures/comparison/sandheads_winds.py:127`
 * generate a new ed25519 key for automation logins and change to use it everywhere except `optimum`
@@ -1371,11 +1618,6 @@ First SPARC session
 
 ##### SalishSeaCmd TODO
 
-* drop `NEMO-Cmd` cloning from dev docs
-* finish changing dev docs re: Pixi; e.g. `pixi run hatch...`
-* fix docs re: change from temporary run directory names from UUID to run id concatenated to
-  microsecond resolution timestamp
-  * e.g. `/scratch/dlatorne/MEOPAR/runs/01mar23-11x32_2025-12-24T145433.665751-0800`
 * deal with DeprecationWarning from `cliff.commandmanager.CommandManager`
 * update scaling tests on `narval` with `StdEnv/2023`
   * 100 Gb/s InfiniBand Mellanox HDR interconnect
