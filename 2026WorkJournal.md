@@ -408,12 +408,6 @@ Worked at ESB while Rita was at home
 ##### SalishSeaCmd
 
 * continued changing to use Pixi for package & env mgmt; PR#121
-  * tested updating NEMO-Cmd to latest commit on GitHub:
-    * `pixi update nemo-cmd`  # note that the package name is case- and hyphen-sensitive
-  * updated use docs to `pixi run salishsea ...`
-  * added Pixi badges to README and dev docs
-  * changed `salishsea` command definitions in generated `bash` scripts to use `pixi run -m ...`
-    by using `Path(__file__).parent.parent` in `run.py`
   * tested doing a SalishSeaCast run on `fir` using the `pixi` branch
     * deleted `NEMO-Cmd` clone
     * uninstalled `mamba` and `conda`
@@ -1553,7 +1547,7 @@ Goofed off
 
 ##### SalishSeaCmd
 
-* started adding `sphinx-copybutton` extension to docs; PR#127 - squash-merged
+* Added `sphinx-copybutton` extension to docs; PR#127 - squash-merged
   * `pixi add -f dev sphinx-copybutton`
   * `pixi add -f docs sphinx-copybutton`
   * added `sphinx_copybutton` to list of extensions in `conf.py`
@@ -1569,13 +1563,210 @@ Goofed off
 
 
 
+### Week 7
+
+#### Mon 9-Feb-2025
+
+##### SalishSeaCast
+
+* `upload_forcing` to `nibi` failed for `forecast2`, `nowcast+`, and `turbidity` due to auth failure
+  * no mention of auth issues on status page, just a resolved scheduler issue
+  * 2FA login via VSCode works fine
+  * re-try of `upload_forcing` from `skookum` produces 2FA request, which fails
+  * sent email to support
+* send email to Michael re: failure of `get_vfpa_hadcp` since 3feb
+
+
+##### SS-run-sets
+
+* fixed restart paths to `/scratch/dlatorne/` in  example YAML files
+* removed `NEMO-Cmd` from `vcs recording` section of example YAML files
+* added example YAML file for `trillium`
+
+
+##### Security Updates
+
+* Squash-merged `dependabot` PR to update `nbconvert` to 7.17.0 re: CVE-2025-53000 re:
+  unauthorized code execution on Windows vulnerability
+  * SOG-Bloomcast-Ensemble
+  * ECget
+  * MoaceanParcels
+  * SalishSeaTools
+  * SalishSeaCast/docs
+  * erddap-datasets
+
+
+##### SOG-Bloomcast-Ensemble
+
+* cleaned up uncommitted changes in clone on `khawla`
+  * fixed typo iin river flow data error message; PR#98 - squash-merged
+  * quite logging noise from `matplotlib` by setting its logging level to warnings; PR#99 - squash-merged
+  * pushed quick-fix for issue#73 re: change in layout of wateroffice.gc.ca web page table
+* started changing to use Pixi for package & env mgmt; PR#100
+  * `pixi init` to add `[tool.pixi.*]` tables to `pyproject.toml`
+    * failed when I asked it to add `[tool.pixi]` configuration to `pyproject.toml`
+      * problem was `license-files = { paths = ["LICENSE"] }` instead of `license = { file = "LICENSE" }`
+        in `[project]` table, but it took a long time to find because the Pixi error message wasn't
+        explicit enough
+  * clean up `.gitignore`
+  * add `,gitattributes` to VCS
+  * edited `envs/environment-dev.yaml` to get minimal packages in default environment
+  * `pixi import envs/environment-dev.yaml --format conda-env`
+    * that created tables for a feature called `bloomcast-dev`
+    * had to edit `pyproject.toml` to get things set up for the `default` feature
+    * `pixi add --pypi "SOG@git+https://github.com/SalishSeaCast/SOG.git"`
+      to install SOGcommand from GitHub
+      * had to set `tool.hatch.metadata.allow-direct-references` to `true`
+      * had to move and reformat `sogcommand = { git = "https://github.com/SalishSeaCast/SOG.git" }`
+  * `pixi install` created the env and the lock file
+    * confirmed with `cd run && pixi run bloomcast --version`
 
 
 
-##### SS-run-sets TODO
 
-* fix restart paths to `/scratch/dlatorne/` in  example YAML files
-* remove `NEMO-Cmd` from `vcs recording` section of example YAML files
+
+
+##### SOG-Bloomcast-Ensemble TODO
+
+* continued changing to use Pixi for package & env mgmt; PR#100
+  * configured PyCharm:
+    * `pixi add pixi-pycharm`
+    * set `conda` executable to output of `pixi run 'echo $CONDA_PREFIX/libexec/conda'`
+    * renamed interpreter in PyCharm UI to `bloomcast:default`
+  * added `test` feature based on `environment-test.yaml`
+    * `pixi add --feature test pytest pytest-cov pytest-randomly`
+    * `pixi workspace environment add test --feature test --solve-group default`
+    * `pixi run -e test pytest` works
+      * revealed a new DeprecationWarning re: the `namespace` parameter in `cliff.commandmanager.CommandManager`
+        * created issue#122
+    * `pixi task add -f test pytest "pytest"` shortens the incantation to `pixi run pytest`
+  * added `pytest-cov` and `pytest-cov-html` tasks
+    * `pixi task add -f test pytest-cov "pytest --cov=./"`
+    * `pixi task add -f test pytest-cov-html "pytest --cov=./ --cov-report html"`
+  * updated dev docs to use Pixi tasks to run tests and produce coverage reports
+  * added envs for Python 3.12 and 3.13 testing:
+    * relax Python version in default env from `"3.14.*"` to `"*"`
+    * `pixi add --feature py312 python=3.12`
+    * `pixi workspace environment add test-py312 --feature py312 --feature test`
+    * `pixi add --feature py313 python=3.13`
+    * `pixi workspace environment add test-py313 --feature py313 --feature test`
+  * added a `test-py314` env (even though it duplicates `test`) to make GHA explicit and consistent
+  * `pixi add --feature py314 python=3.14`
+  * `pixi workspace environment add test-py314 --feature py314 --feature test`
+  * changed `pytest-with-coverage` workflow to use new reusable `pixi-pytest-with-coverage`
+  * added `docs` feature and env based on `environment-test.yaml` and `environment-rtd.yaml`
+    * `pixi add --feature docs sphinx=8.1.3 sphinx-notfound-page=1.0.4 sphinx-rtd-theme=3.0.0`
+    * `pixi add --feature docs --pypi commonmark recommonmark readthedocs-sphinx-ext`
+    * `pixi workspace environment add docs --feature docs --solve-group default`
+    * added tasks for common docs work:
+      * `pixi task add -f docs --cwd docs/ docs make clean html`
+      * `pixi task add -f docs --cwd docs/ linkcheck make clean linkcheck`
+  * updated dev docs to use Pixi tasks to build HTML docs and run link checker
+  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
+  * Updated `source_suffix` in Sphinx configuration re: support for multiple file types
+  * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
+  * deleted `envs/environment-rtd.yaml`
+  * deleted `envs/environment-test.yaml`
+  * added `dev` feature and env based on `environment-dev.yaml`
+    * `pixi add --feature dev black hatch pre-commit`
+    * `pixi add --feature dev pytest pytest-cov pytest-randomly`
+    * `pixi add --feature dev sphinx=8.1.3 sphinx-notfound-page=1.0.4 sphinx-rtd-theme=3.0.0`
+    * `pixi workspace environment add dev --feature dev --solve-group default`
+    * installed `pre-commit` to run from `dev` env
+      * `pixi run -e dev pre-commit install`
+  * removed `salishsea-cmd` conda env from `khawla`
+  * updated dev docs re: use of Pixi
+  * dropped `environment-dev.yaml`
+  * dropped `pytest.ini` because its job was to exclude `NEMO-Cmd` tests in `envs./src/` on GitHub
+    from discovery, and that's no longer an issue
+  * moved `requirements.txt` from `envs/` to top level directory and deleted `envs/`
+  * added task to update `requirements.txt via`pip list`
+    * `pixi task add -f dev update-reqs "python -m pip list --format=freeze >> requirements.txt"`
+  * renamed `development.rst` to `pkg_development.rst`
+  * updated installation docs and installation paragraph of README to use Pixi
+  * updated use docs to `pixi run salishsea ...`
+  * added Pixi badges to README and dev docs
+  * changed `salishsea` command definitions in generated `bash` scripts to use `pixi run -m ...`
+    by using `Path(__file__).parent.parent` in `run.py`
+
+
+##### 2026 Bloomcast TODO
+
+* Prep on `khawla`:
+  * modernized SOG-Bloomcast-Ensemble repo & package
+  * confirmed that SOG clone is up to date
+  * worked in bloomcast-dev env (Python 3.13)
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    mkdir run/2024
+    cp run/2024_bloomcast_infile.yaml run/2025_bloomcast_infile.yaml
+    mv run/2024_bloomcast_infile.yaml run/2024/
+    mkdir -p run/timeseries run/profiles
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * committed archive of 2024 SOG YAML infile
+  * edit run/2025_bloomcast_infile.yaml
+  * edit run/config/yaml
+  * successfully tested run prep w/ SOG runs and publish to web disabled with
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    python -m aiosmtpd -n -l localhost:1025
+    cd run
+    bloomcast ensemble -v config.yaml --debug
+    ```
+    <!-- markdownlint-enable MD031 -->
+    * ends with:
+      <!-- markdownlint-disable MD031 -->
+      ```text
+      INFO:bloomcast.ensemble:Skipped running SOG
+      ERROR:bloomcast:[Errno 2] No such file or directory: 'timeseries/std_bio_2025_bloomcast.out_8081'
+      ```
+      <!-- markdownlint-enable MD031 -->
+  * committed run/2025_bloomcast_infile.yaml and run/config.yaml
+* Setup on salish:
+  * updated SOG-Bloomcast-Ensemble clone
+  * SOG clone needs to be at 55af3c2 to avoid error from Ben's post 7-Apr-2014 commits
+  * created new bloomcast env: Python 3.13
+  * did editable installs of SOG & SOG-Bloomcast-Ensemble
+  * runs dir: /data/dlatorne/SOG-projects/SOG-Bloomcast-Ensemble/run
+  * archived 2024_bloomcast* files in run/2024/
+  * archived Englishman_flow Fraser_flow Sandheads_wind in run/2024/
+  * archived YVR_* in run/2024/
+  * archived last year's `bloom_date_evolution.log` and `bloomcast.log` in run/2024/
+  * test run failed
+    <!-- markdownlint-disable MD031 -->
+    ```text
+    ../../SOG-code-bloomcast/SOG:
+      error while loading shared libraries: libgfortran.so.3:
+      cannot open shared object file: No such file or directory
+    ```
+    <!-- markdownlint-enable MD031 -->
+    * due to `salish` OS upgrade in sep25
+    * did a clean build in `SOG-code-bloomcast/`
+    * ran test
+      * unrecognized weather description:
+          `Moderate Rain,Snow`
+      * bloom predictions:
+          <!-- markdownlint-disable MD031 -->
+          ```text
+          INFO:bloomcast.ensemble:Predicted earliest bloom date is 2025-02-20
+          INFO:bloomcast.ensemble:Earliest bloom date is based on forcing from 2004/2005
+          INFO:bloomcast.ensemble:Predicted early bound bloom date is 2025-02-21
+          INFO:bloomcast.ensemble:Early bound bloom date is based on forcing from 2009/2010
+          INFO:bloomcast.ensemble:Predicted median bloom date is 2025-03-08
+          INFO:bloomcast.ensemble:Median bloom date is based on forcing from 1985/1986
+          INFO:bloomcast.ensemble:Predicted late bound bloom date is 2025-03-27
+          INFO:bloomcast.ensemble:Late bound bloom date is based on forcing from 2005/2006
+          INFO:bloomcast.ensemble:Predicted latest bloom date is 2025-04-05
+          INFO:bloomcast.ensemble:Latest bloom date is based on forcing from 1998/1999
+          ```
+          <!-- markdownlint-enable MD031 -->
+  * confirmed web page updated as expected
+  * installed cron job to run at 09:30 daily
+
+
+
+
 
 
 
@@ -1713,12 +1904,13 @@ Goofed off
 
 * TODO:
   * add https://sphinx-copybutton.readthedocs.io/ to add copy button functionality to Sphinx code blocks
+    * SalishSeaCmd - done 8feb26 in PR#127
+
     * AtlantisCmd
     * ECget
     * NEMO-Cmd
     * NEMO_Nowcast
     * Reshapr
-    * SalishSeaCmd
     * SalishSeaCast/docs
     * tools
     * SalishSeaNowcast
@@ -1735,13 +1927,13 @@ Goofed off
   * SalishSeaCast/docs - done 14jan26 in PR#74
   * MOAD/docs - done 22jan26 in PR#62
 
+  * SOG-Bloomcast-Ensemble
   * Reshapr
   * NEMO_Nowcast
   * AtlantisCmd
   * moad_tools
   * tools/SalishSeaTools
   * SalishSeaNowcast
-  * SOG-Bloomcast-Ensemble
   * erddap-datasets
   * salishsea-site
   * SOG
