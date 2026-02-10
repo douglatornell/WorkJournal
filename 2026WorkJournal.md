@@ -1623,10 +1623,18 @@ Goofed off
 
 
 
+#### Tue 10-Feb-2025
+
+Worked at ESB
+
+##### Miscellaneous
+
+* set up Markdown profile in VSCode on `kudu`
+* Moad group mtg; see whiteboard
+* updated PyCharm to 2025.3.2.1 on `kudu`
 
 
-
-##### SOG-Bloomcast-Ensemble TODO
+##### SOG-Bloomcast-Ensemble
 
 * continued changing to use Pixi for package & env mgmt; PR#100
   * configured PyCharm:
@@ -1637,36 +1645,31 @@ Goofed off
     * `pixi add --feature test pytest pytest-cov pytest-randomly`
     * `pixi workspace environment add test --feature test --solve-group default`
     * `pixi run -e test pytest` works
-      * revealed a new DeprecationWarning re: the `namespace` parameter in `cliff.commandmanager.CommandManager`
-        * created issue#122
     * `pixi task add -f test pytest "pytest"` shortens the incantation to `pixi run pytest`
   * added `pytest-cov` and `pytest-cov-html` tasks
     * `pixi task add -f test pytest-cov "pytest --cov=./"`
     * `pixi task add -f test pytest-cov-html "pytest --cov=./ --cov-report html"`
-  * updated dev docs to use Pixi tasks to run tests and produce coverage reports
-  * added envs for Python 3.12 and 3.13 testing:
-    * relax Python version in default env from `"3.14.*"` to `"*"`
-    * `pixi add --feature py312 python=3.12`
-    * `pixi workspace environment add test-py312 --feature py312 --feature test`
-    * `pixi add --feature py313 python=3.13`
-    * `pixi workspace environment add test-py313 --feature py313 --feature test`
   * added a `test-py314` env (even though it duplicates `test`) to make GHA explicit and consistent
   * `pixi add --feature py314 python=3.14`
   * `pixi workspace environment add test-py314 --feature py314 --feature test`
+  * `pixi install` to ensure that lockfile is up to date with workspace
   * changed `pytest-with-coverage` workflow to use new reusable `pixi-pytest-with-coverage`
-  * added `docs` feature and env based on `environment-test.yaml` and `environment-rtd.yaml`
-    * `pixi add --feature docs sphinx=8.1.3 sphinx-notfound-page=1.0.4 sphinx-rtd-theme=3.0.0`
+  * added `docs` feature and env based on `environment-test.yaml` and `environment-dev.yaml`
+    * `pixi add --feature docs sphinx=8.1.3 sphinx-rtd-theme=3.0.0`
     * `pixi add --feature docs --pypi commonmark recommonmark readthedocs-sphinx-ext`
     * `pixi workspace environment add docs --feature docs --solve-group default`
-    * added tasks for common docs work:
+    * added docs build task:
       * `pixi task add -f docs --cwd docs/ docs make clean html`
-      * `pixi task add -f docs --cwd docs/ linkcheck make clean linkcheck`
-  * updated dev docs to use Pixi tasks to build HTML docs and run link checker
-  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
-  * Updated `source_suffix` in Sphinx configuration re: support for multiple file types
-  * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
-  * deleted `envs/environment-rtd.yaml`
   * deleted `envs/environment-test.yaml`
+
+
+
+
+
+##### SOG-Bloomcast-Ensemble TODO
+
+* continued changing to use Pixi for package & env mgmt; PR#100
+
   * added `dev` feature and env based on `environment-dev.yaml`
     * `pixi add --feature dev black hatch pre-commit`
     * `pixi add --feature dev pytest pytest-cov pytest-randomly`
@@ -1674,19 +1677,16 @@ Goofed off
     * `pixi workspace environment add dev --feature dev --solve-group default`
     * installed `pre-commit` to run from `dev` env
       * `pixi run -e dev pre-commit install`
-  * removed `salishsea-cmd` conda env from `khawla`
+  * removed `bloomcast` conda env from `khawla`
   * updated dev docs re: use of Pixi
   * dropped `environment-dev.yaml`
-  * dropped `pytest.ini` because its job was to exclude `NEMO-Cmd` tests in `envs./src/` on GitHub
-    from discovery, and that's no longer an issue
   * moved `requirements.txt` from `envs/` to top level directory and deleted `envs/`
   * added task to update `requirements.txt via`pip list`
     * `pixi task add -f dev update-reqs "python -m pip list --format=freeze >> requirements.txt"`
   * renamed `development.rst` to `pkg_development.rst`
   * updated installation docs and installation paragraph of README to use Pixi
-  * updated use docs to `pixi run salishsea ...`
-  * added Pixi badges to README and dev docs
-  * changed `salishsea` command definitions in generated `bash` scripts to use `pixi run -m ...`
+  * updated deployment docs to `pixi run bloomcast ...`
+  * changed `bloomcast` command definitions in generated `bash` scripts to use `pixi run -m ...`
     by using `Path(__file__).parent.parent` in `run.py`
 
 
