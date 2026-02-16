@@ -1335,6 +1335,12 @@ First SPARC session
   * no HRDPS files after 12Z forecast
 
 
+##### Resilient-C
+
+* got notification from UBC IT of migration from VMWare to OpenStack
+  * must be completed before 30jun
+
+
 
 #### Wed 4-Feb-2025
 
@@ -1575,6 +1581,8 @@ Goofed off
   * re-try of `upload_forcing` from `skookum` produces 2FA request, which fails
   * sent email to support
 * send email to Michael re: failure of `get_vfpa_hadcp` since 3feb
+  * he investigated and found that AIS messages were going to spam
+  * he moved 508 messages from spam to inbox and added incoming address to contacts
 
 
 ##### SS-run-sets
@@ -1586,7 +1594,7 @@ Goofed off
 
 ##### Security Updates
 
-* Squash-merged `dependabot` PR to update `nbconvert` to 7.17.0 re: CVE-2025-53000 re:
+* Squash-merged `dependabot` PRs to update `nbconvert` to 7.17.0 re: CVE-2025-53000 re:
   unauthorized code execution on Windows vulnerability
   * SOG-Bloomcast-Ensemble
   * ECget
@@ -1620,6 +1628,11 @@ Goofed off
       * had to move and reformat `sogcommand = { git = "https://github.com/SalishSeaCast/SOG.git" }`
   * `pixi install` created the env and the lock file
     * confirmed with `cd run && pixi run bloomcast --version`
+
+
+##### Resilient-C
+
+* Cameron Smithers of UBC IT contacted me re: migration to OpenStack
 
 
 
@@ -1662,18 +1675,70 @@ Worked at ESB
       * `pixi task add -f docs --cwd docs/ docs make clean html`
   * deleted `envs/environment-test.yaml`
 
+##### SalishSeaCast
+
+* ongoing failure of `get_vfpa_hadcp` since 3feb
+  * Michael reported that messages are still going to spam despite the allowlist
+  * he updated the collection script for the cronjob to make is scan both inbox and spam for messages
 
 
 
+#### Wed 11-Feb-2025
 
-##### SOG-Bloomcast-Ensemble TODO
+##### SalishSeaCast
+
+* `collect_weather 12 2.5km` was slow; finished at ~08:57
+
+
+##### Security Updates
+
+* Squash-merged `dependabot` PRs to update `crypography` to 46.0.5 re: CVE-2026-26007 re:
+  subgroup attack due to missing subgroup validation for sect curves vulnerability
+  * cookiecutter-analysis-repo
+  * cookiecutter-MOAD-pypkg
+  * moad_tools
+  * SalishSeaNowcast
+  * NEMO_Nowcast
+  * SalishSeaTools
+  * FUN
+  * salishsea-site
+  * AtlantisCmd
+  * Reshapr
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * cookiecutter-djl-pypkg
+  * SOG-Bloomcast-Ensemble
+* Squash-merged `dependabot` PRs to update `pillow` to 12.1.1 re: CVE-2026-25990 re:
+  out-of-bounds write vulnerability
+  * moad_tools
+  * MoaceanParcels
+  * SalishSeaTools
+  * SalishSeaNowcast
+  * Reshapr
+  * SOG-Bloomcast
+  * SOG-Bloomcast-Ensemble
+* Squash-merged `dependabot` PRs to update `pip` to 26.0 re: CVE-2026-1703 re: path traversal vulnerability
+  * SOG-Bloomcast
+  * SOG-forcing
+* Squash-merged dependabot PRs to update `virtualenv` to 20.36.1 re: CVE-2026-22702
+  Time-of-Check-Time-of-Use (TOCTOU) race condition symlink attack vulnerability
+  * SOG
+
+
+##### SOG-Bloomcast-Ensemble
 
 * continued changing to use Pixi for package & env mgmt; PR#100
-
   * added `dev` feature and env based on `environment-dev.yaml`
+    * For coding style, repo QA, and pkg management
     * `pixi add --feature dev black hatch pre-commit`
+    * For reuirements.txt file maintenance (until dependabot supports pixi.lock files)
+    * `pixi add --feature dev pip`
+    * For unit tests
     * `pixi add --feature dev pytest pytest-cov pytest-randomly`
-    * `pixi add --feature dev sphinx=8.1.3 sphinx-notfound-page=1.0.4 sphinx-rtd-theme=3.0.0`
+    * For documentation
+    * `pixi add --feature dev sphinx=8.1.3 sphinx-rtd-theme=3.0.0`
+    * For capturing email messages during testing
+    * `pixi add --feature dev aiosmtpd`
     * `pixi workspace environment add dev --feature dev --solve-group default`
     * installed `pre-commit` to run from `dev` env
       * `pixi run -e dev pre-commit install`
@@ -1683,85 +1748,189 @@ Worked at ESB
   * moved `requirements.txt` from `envs/` to top level directory and deleted `envs/`
   * added task to update `requirements.txt via`pip list`
     * `pixi task add -f dev update-reqs "python -m pip list --format=freeze >> requirements.txt"`
-  * renamed `development.rst` to `pkg_development.rst`
-  * updated installation docs and installation paragraph of README to use Pixi
-  * updated deployment docs to `pixi run bloomcast ...`
-  * changed `bloomcast` command definitions in generated `bash` scripts to use `pixi run -m ...`
-    by using `Path(__file__).parent.parent` in `run.py`
 
 
-##### 2026 Bloomcast TODO
+
+#### Thu 12-Feb-2025
+
+##### Resilient-C
+
+* continued email conversation re: migration to OpenStack w/ Cameron
+  * may need to do an OS upgrade from 18.04.6 LTS to qualify for UBC IT to migrate the VM
+  * need to install Crowdstrike for UBC IT to migrate the VM
+* update OS packages
+
+
+##### Miscellaneous
+
+* UBC-IOS modeling mtg: Jose on his bacteria loop work
+* Phys Ocgy seminar: Ocean Sciences posters
+
+
+##### SOG-Bloomcast-Ensemble
+
+* continued changing to use Pixi for package & env mgmt; PR#100 - squash-merged
+  * updated deployment docs to use Pixi
+  * changed `cronjob.sh` to use `pixi run`
+* security updates for `pillow` & `cryptography`; see 11feb
+
+
+##### 2026 Bloomcast
 
 * Prep on `khawla`:
-  * modernized SOG-Bloomcast-Ensemble repo & package
+  * changed SOG-Bloomcast-Ensemble package to use Pixi
   * confirmed that SOG clone is up to date
-  * worked in bloomcast-dev env (Python 3.13)
     <!-- markdownlint-disable MD031 -->
     ```bash
-    mkdir run/2024
-    cp run/2024_bloomcast_infile.yaml run/2025_bloomcast_infile.yaml
-    mv run/2024_bloomcast_infile.yaml run/2024/
+    mkdir run/2025
+    cp run/2026_bloomcast_infile.yaml run/2026_bloomcast_infile.yaml
+    mv run/2025_bloomcast_infile.yaml run/2025/
     mkdir -p run/timeseries run/profiles
     ```
     <!-- markdownlint-enable MD031 -->
-  * committed archive of 2024 SOG YAML infile
-  * edit run/2025_bloomcast_infile.yaml
+  * committed archive of 2024 SOG YAML infile; PR#105
+  * edit run/2026_bloomcast_infile.yaml
+    * `initial_conditions[init_datetime]`
+    * `end_datetime`
+    * `timeseries_results[*]`
+    * `profiles_results[*_file]`
+    * `profiles_results[hoffmueller_start_year]`
+    * `profiles_results[hoffmueller_end_year]`
   * edit run/config/yaml
+    * `ensemble[base_infile]`
   * successfully tested run prep w/ SOG runs and publish to web disabled with
     <!-- markdownlint-disable MD031 -->
     ```bash
-    python -m aiosmtpd -n -l localhost:1025
+    pixi run -e dev python -m aiosmtpd -n -l localhost:1025
+    # in a separate terminal session:
     cd run
-    bloomcast ensemble -v config.yaml --debug
+    pixi run bloomcast ensemble -v config.yaml --debug
     ```
     <!-- markdownlint-enable MD031 -->
     * ends with:
       <!-- markdownlint-disable MD031 -->
       ```text
       INFO:bloomcast.ensemble:Skipped running SOG
-      ERROR:bloomcast:[Errno 2] No such file or directory: 'timeseries/std_bio_2025_bloomcast.out_8081'
+      ERROR:bloomcast:[Errno 2] No such file or directory: 'timeseries/std_bio_2026_bloomcast.out_8081'
       ```
       <!-- markdownlint-enable MD031 -->
-  * committed run/2025_bloomcast_infile.yaml and run/config.yaml
-* Setup on salish:
+  * committed run/2026_bloomcast_infile.yaml and run/config.yaml; PR#105 - squash-merged
+* Setup on `salish`:
   * updated SOG-Bloomcast-Ensemble clone
-  * SOG clone needs to be at 55af3c2 to avoid error from Ben's post 7-Apr-2014 commits
-  * created new bloomcast env: Python 3.13
-  * did editable installs of SOG & SOG-Bloomcast-Ensemble
+  * `pixi install`
   * runs dir: /data/dlatorne/SOG-projects/SOG-Bloomcast-Ensemble/run
-  * archived 2024_bloomcast* files in run/2024/
-  * archived Englishman_flow Fraser_flow Sandheads_wind in run/2024/
-  * archived YVR_* in run/2024/
-  * archived last year's `bloom_date_evolution.log` and `bloomcast.log` in run/2024/
+  * archived 2025_bloomcast* files in run/2025/
+  * archived Englishman_flow Fraser_flow Sandheads_wind in run/2025/
+  * archived YVR_* in run/2025/
+  * archived last year's `bloom_date_evolution.log` and `bloomcast.log` in run/2025/
+  * had to fiddle with `SOG` package spec to get it pinned at 55af3c2 to avoid error from Ben's post
+    7-Apr-2014 commits
+    `pixi remove sogcommand`
+    `pixi add --pypi SOGcommand --git https://github.com/SalishSeaCast/SOG.git --rev 55af3c26752595ebc970ec3e20a632a86e96fa50`
   * test run failed
     <!-- markdownlint-disable MD031 -->
     ```text
-    ../../SOG-code-bloomcast/SOG:
-      error while loading shared libraries: libgfortran.so.3:
-      cannot open shared object file: No such file or directory
+    ERROR:bloomcast:cannot access local variable 'low_nitrate_day_1' where it is not associated with a value
+    Traceback (most recent call last):
+      File "/data/dlatorne/SOG-projects/SOG-Bloomcast-Ensemble/.pixi/envs/default/lib/python3.14/site-packages/cliff/app.py", line 455, in run_subcommand
+        result = cmd.run(parsed_args)
+      File "/data/dlatorne/SOG-projects/SOG-Bloomcast-Ensemble/.pixi/envs/default/lib/python3.14/site-packages/cliff/command.py", line 196, in run
+        return_code = self.take_action(parsed_args) or 0
+                      ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+      File "/data/dlatorne/SOG-projects/SOG-Bloomcast-Ensemble/bloomcast/ensemble.py", line 139, in take_action
+        prediction, bloom_dates = self._calc_bloom_dates()
+                                  ~~~~~~~~~~~~~~~~~~~~~~^^
+      File "/data/dlatorne/SOG-projects/SOG-Bloomcast-Ensemble/bloomcast/ensemble.py", line 269, in _calc_bloom_dates
+        first_low_nitrate_days = bloomcast.find_low_nitrate_days(
+            self.nitrate, bloomcast.NITRATE_HALF_SATURATION_CONCENTRATION
+        )
+      File "/data/dlatorne/SOG-projects/SOG-Bloomcast-Ensemble/bloomcast/bloomcast.py", line 774, in find_low_nitrate_days
+        first_low_nitrate_days[member] = (low_nitrate_day_1, low_nitrate_day_2)
+                                          ^^^^^^^^^^^^^^^^^
+    UnboundLocalError: cannot access local variable 'low_nitrate_day_1' where it is not associated with a value
     ```
     <!-- markdownlint-enable MD031 -->
-    * due to `salish` OS upgrade in sep25
-    * did a clean build in `SOG-code-bloomcast/`
-    * ran test
-      * unrecognized weather description:
-          `Moderate Rain,Snow`
-      * bloom predictions:
-          <!-- markdownlint-disable MD031 -->
-          ```text
-          INFO:bloomcast.ensemble:Predicted earliest bloom date is 2025-02-20
-          INFO:bloomcast.ensemble:Earliest bloom date is based on forcing from 2004/2005
-          INFO:bloomcast.ensemble:Predicted early bound bloom date is 2025-02-21
-          INFO:bloomcast.ensemble:Early bound bloom date is based on forcing from 2009/2010
-          INFO:bloomcast.ensemble:Predicted median bloom date is 2025-03-08
-          INFO:bloomcast.ensemble:Median bloom date is based on forcing from 1985/1986
-          INFO:bloomcast.ensemble:Predicted late bound bloom date is 2025-03-27
-          INFO:bloomcast.ensemble:Late bound bloom date is based on forcing from 2005/2006
-          INFO:bloomcast.ensemble:Predicted latest bloom date is 2025-04-05
-          INFO:bloomcast.ensemble:Latest bloom date is based on forcing from 1998/1999
-          ```
-          <!-- markdownlint-enable MD031 -->
-  * confirmed web page updated as expected
+
+
+
+#### Fri 13-Feb-2025
+
+##### SalishSeaCast
+
+* tried to backfill 2nd Narrows HADCP dataset via `get_vfpa_hadcp`:
+  * 18jan failed due to no files
+  * 19jan failed due to no 00Z file
+  * 20-31jan succeeded
+  * 01-08feb succeeded
+  * `ping_erddap VFPA-HADCP`
+  * copied Michael's updated `collect_aisdata_via_imap_v3.py` into `/opp/observations/AISDATA/`
+    * ran it manually and got fields for 09-12feb and part of 13feb
+  * 09-12feb succeeded
+  * updated Michael's `crontab` to use v3 script
+  * checked for 13feb 19Z file
+
+
+##### 2026 Bloomcast
+
+* continued setup on `salish`:
+  * debugged test run failure; issue#106, PR#
+    * SOG runs appear to be failing
+
+
+
+#### Sat 14-Feb-2025
+
+##### Miscellaneous
+
+* continued setting up MacBook Air
+  * Pixi
+    * global install of `git` and terminal tools
+  * ssh agent and git commit signing in 1password
+  * ssh keys and config
+
+
+
+#### Sun 15-Feb-2025
+
+##### 2026 Bloomcast
+
+* continued setup on `salish`:
+  * debugged test run failure; issue#106
+    * Susan helped but couldn't find anything
+    * ran a single run with:
+      * `pixi run SOG run ../../SOG-code/SOG 2026_bloomcast_infile.yaml -e 2026_bloomcast_infile_8081.yaml -o foo.out --watch`
+    * Susan found that `SOG-code/forcing.f90 leapyear()` was failing because we are beyond 2025
+      and it's error message was not being output because it was being written to `stderr`
+      * added leapyear calculations for more years
+  * test run was successful
+    * bloom predictions:
+        <!-- markdownlint-disable MD031 -->
+        ```text
+        INFO:bloomcast.ensemble:Predicted earliest bloom date is 2026-03-04
+        INFO:bloomcast.ensemble:Earliest bloom date is based on forcing from 2004/2005
+        INFO:bloomcast.ensemble:Predicted early bound bloom date is 2026-03-08
+        INFO:bloomcast.ensemble:Early bound bloom date is based on forcing from 2000/2001
+        INFO:bloomcast.ensemble:Predicted median bloom date is 2026-03-20
+        INFO:bloomcast.ensemble:Median bloom date is based on forcing from 1989/1990
+        INFO:bloomcast.ensemble:Predicted late bound bloom date is 2026-04-07
+        INFO:bloomcast.ensemble:Late bound bloom date is based on forcing from 2008/2009
+        INFO:bloomcast.ensemble:Predicted latest bloom date is 2026-04-14
+        INFO:bloomcast.ensemble:Latest bloom date is based on forcing from 1998/1999
+        ```
+        <!-- markdownlint-enable MD031 -->
+    * confirmed web page updated as expected
+
+
+
+
+
+
+
+
+
+##### 2026 Bloomcast TODO
+
+* continued setup on `salish`:
   * installed cron job to run at 09:30 daily
 
 
@@ -1926,8 +2095,8 @@ Worked at ESB
   * SalishSeaCmd - done 13jan26 in PR#121
   * SalishSeaCast/docs - done 14jan26 in PR#74
   * MOAD/docs - done 22jan26 in PR#62
+  * SOG-Bloomcast-Ensemble - done 12feb26 in PR#100
 
-  * SOG-Bloomcast-Ensemble
   * Reshapr
   * NEMO_Nowcast
   * AtlantisCmd
@@ -1950,13 +2119,13 @@ Worked at ESB
   * Reshapr - done 20nov25 in PR#168
   * gha-workflows - done 17dec25 in PR#82
   * SalishSeaCast/docs - done 14jan26 in PR#74
+  * SOG-Bloomcast-Ensemble - done 12feb26 in PR#100
 
   * workflows available for testing:
     * NEMO_Nowcast
     * moad_tools
     * tools/SalishSeaTools
     * SalishSeaNowcast
-    * SOG-Bloomcast-Ensemble
     * erddap-datasets
     * salishsea-site
   * no workflows:
