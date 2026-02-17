@@ -1934,19 +1934,32 @@ Worked at ESB
   * 5.05 m at 06:15 at Sandy Cove; 1 m/s S wind at Sandy Cove
 
 
-
-
-
-
-
-
-##### 2026 Bloomcast TODO
+##### 2026 Bloomcast
 
 * continued setup on `salish`:
-  * installed cron job to run at 09:30 daily
+  * ran `bloomcast ensemble ...` manually
+  * enabled cron job to run at 09:30 daily
 
 
+#### Tue 17-Feb-2025
 
+##### 2026 Bloomcast
+
+* continued setup on `salish`:
+  * cron job failed due to "pixi: command not found"
+    * changed to use `pixi run -m ...`
+    * successfully ran cron job script manually
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* investigated `sphinx-copybutton` more re: excluding command output from copying
+
+
+pixi run salishsea run SalishSea.yaml $HOME/MEOPAR/SalishSea/myrun
+
+pixi run salishsea prepare SalishSea.yaml iodef.xml
 
 
 
@@ -2158,16 +2171,6 @@ Worked at ESB
 
 * update to v2.29.0
   * review v2.27.0 changes because they will be included as we jump from v2.26.0
-
-
-
-##### salishsea-site TODO
-
-* SMELT link in nav bar has no target
-
-
-
-
 
 * TODO:
   * ask Henryk about email from ERDDAP
