@@ -1922,6 +1922,18 @@ Worked at ESB
 
 
 
+### Week 8
+
+#### Mon 16-Feb-2025
+
+**Statutory Holiday** - Family Day
+
+##### SalishSeaCast
+
+* storm surge alert for Strait of Georgia for tomorrow morning
+  * 5.05 m at 06:15 at Sandy Cove; 1 m/s S wind at Sandy Cove
+
+
 
 
 
