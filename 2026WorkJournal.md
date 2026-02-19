@@ -1941,6 +1941,7 @@ Worked at ESB
   * enabled cron job to run at 09:30 daily
 
 
+
 #### Tue 17-Feb-2025
 
 ##### 2026 Bloomcast
@@ -1957,9 +1958,59 @@ Worked at ESB
 * investigated `sphinx-copybutton` more re: excluding command output from copying
 
 
-pixi run salishsea run SalishSea.yaml $HOME/MEOPAR/SalishSea/myrun
+##### SalishSeaCmd
 
-pixi run salishsea prepare SalishSea.yaml iodef.xml
+* started work on improving `sphinx-copybutton` support in docs; PR#131
+  * Replaced `code-block:: bash` with `code-block:: console` in documentation files.
+  * Added `$` prompt to command examples to align with standard usage.
+  * Configured the `sphinx_copybutton` extension with the following improvements:
+    * Set a regex for the prompt text.
+    * Ensured it respects bash line continuation characters.
+    * Introduced a `no-copybutton` class to suppress the copy button where needed.
+
+
+
+#### Wed 18-Feb-2025
+
+##### 2026 Bloomcast
+
+* continued setup on `salish`:
+  * cron job failed due to "pixi: command not found"
+    * changed `pixi` ro `/home/dlatorne/.pixi/bin/pixi`
+    * successfully ran cron job script manually
+
+
+##### Miscellaneous
+
+* filed expense claim for PyCascades 2026 conference registration against PD fund
+
+
+##### SalishSeaCmd
+
+* finished improving `sphinx-copybutton` support in docs; PR#131 - squash-merged
+
+
+
+#### Thu 19-Feb-2025
+
+Vancouver to Glasgow
+
+##### SalishSeaCast
+
+* `upload_forcing robot.nibi` started working again
+  * got an email from Mark Hahn advising of the fix
+  * backfilled `nowcast+` and `turbidity` since 9feb
+
+
+##### 2026 Bloomcast
+
+* cron job ran successfully
+
+
+
+
+
+
 
 
 
@@ -2098,7 +2149,7 @@ pixi run salishsea prepare SalishSea.yaml iodef.xml
 
 * TODO:
   * add https://sphinx-copybutton.readthedocs.io/ to add copy button functionality to Sphinx code blocks
-    * SalishSeaCmd - done 8feb26 in PR#127
+    * SalishSeaCmd - done 8feb26 in PR#127, improved 18feb26 in PR#131
 
     * AtlantisCmd
     * ECget
