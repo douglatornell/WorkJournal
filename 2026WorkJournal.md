@@ -2008,6 +2008,31 @@ Vancouver to Glasgow
 
 
 
+#### Fri 20-Feb-2025
+
+Arrived in Glasgow
+
+
+
+#### Sat 21-Feb-2025
+
+Glasgow
+
+* explored Zwift locations
+* lunch at Unalome
+* watched Cycling Canada eSports championships
+
+
+#### Sun 22-Feb-2025
+
+Glasgow
+
+* walked through Stratclyde campus to cathedral and necropolis, 
+  then to the river and back to the hotel along it
+* dinner with Moad group at The Duke's Umbrella
+
+
+
 
 
 
