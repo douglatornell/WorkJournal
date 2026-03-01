@@ -714,7 +714,7 @@ Worked at ESB
     * used `mountpoint /nemoShare/MEOPAR` in bash look to confirm that `nowcast*` and `fvcom*` VMs were
       reachable
     * mounted shared storage on compute VMs via bash loops
-  * `skoookum`:
+  * `skookum`:
     <!-- markdownlint-disable MD031 -->
     ```bash
     make_forcing_links arbutus ssh 2026-01-17
@@ -1163,7 +1163,7 @@ Worked at ESB
       * nbformat for plotting inside notebooks
       * kaleido for plots to png
       * networkx
-      * scikit-image for isosurface example
+      * scikit-image for iso-surface example
   * renderers
     * browser - use in scripts
     * notebook
@@ -1410,7 +1410,7 @@ First SPARC session
   download_weather 06 2.5km 2026-02-03 --backfill
   ```
   <!-- markdownlint-enable MD031 -->
-* `grib_to_netcdf forecast2` launched by automation failed because it treid to run for 4feb
+* `grib_to_netcdf forecast2` launched by automation failed because it tried to run for 4feb
   * that lets me skip yesterday's uninteresting forecast2 runs
 * ECCC river obs for `/results/forcing/rivers/observations/` rivers skipped 2feb
   * backfilled with `bash collect_ECCC_river_data.sh 2026-02-02` and manual edits
@@ -1529,7 +1529,7 @@ First SPARC session
 ##### 2x resolution SalishSeaCast
 
 * continued work on 2xrez processing and verification notebooks:
-  * started reviwing row 25 work needed with Susan
+  * started reviewing row 25 work needed with Susan
     * discovered alignment problem with lons/lats
     * traced the issue to what seems like
 
@@ -1692,7 +1692,7 @@ Worked at ESB
 
 ##### Security Updates
 
-* Squash-merged `dependabot` PRs to update `crypography` to 46.0.5 re: CVE-2026-26007 re:
+* Squash-merged `dependabot` PRs to update `cryptography` to 46.0.5 re: CVE-2026-26007 re:
   subgroup attack due to missing subgroup validation for sect curves vulnerability
   * cookiecutter-analysis-repo
   * cookiecutter-MOAD-pypkg
@@ -1731,7 +1731,7 @@ Worked at ESB
   * added `dev` feature and env based on `environment-dev.yaml`
     * For coding style, repo QA, and pkg management
     * `pixi add --feature dev black hatch pre-commit`
-    * For reuirements.txt file maintenance (until dependabot supports pixi.lock files)
+    * For `requirements.txt` file maintenance (until dependabot supports pixi.lock files)
     * `pixi add --feature dev pip`
     * For unit tests
     * `pixi add --feature dev pytest pytest-cov pytest-randomly`
@@ -1757,7 +1757,7 @@ Worked at ESB
 
 * continued email conversation re: migration to OpenStack w/ Cameron
   * may need to do an OS upgrade from 18.04.6 LTS to qualify for UBC IT to migrate the VM
-  * need to install Crowdstrike for UBC IT to migrate the VM
+  * need to install `Crowdstrike` for UBC IT to migrate the VM
 * update OS packages
 
 
@@ -2027,16 +2027,262 @@ Glasgow
 
 Glasgow
 
-* walked through Stratclyde campus to cathedral and necropolis, 
+* walked through Strathclyde campus to cathedral and necropolis,
   then to the river and back to the hotel along it
-* dinner with Moad group at The Duke's Umbrella
+* dinner with MOAD group at The Duke's Umbrella
+
+
+
+### Week 9
+
+#### Mon 23-Feb-2025
+
+Glasgow
+
+* walked to Kelvinbridge Park and back
+* dinner with downscaling session group at Raddisson Red
+
+##### Security Updates
+
+* Squash-merged `dependabot` PR to update `pypdf` to 6.7.1 re: multiple long runtime or infinity loop
+  vulnerabilities
+  * SalishSeaNowcast
+
+
+##### Miscellaneous
+
+* had to `pixi global install make` to be able to build `NEMO-Cmd` docs
+  * same reasoning as installing `git` that way rather than installing Xcode components
+
+
+##### NEMO-Cmd
+
+* discovered that I need to add `osx-64` platform for Pixi to install dev env on my MacBook
+  * also added `win-64` platform for completeness
+  * PR#130
+* started adding `sphinx-copybutton` support in docs; PR#131
+  * `pixi add -f dev sphinx-copybutton`
+  * `pixi add -f docs sphinx-copybutton`
+  * `pixi run -e dev update-reqs`
+  * added `sphinx_copybutton` to list of extensions in `conf.py`
+
+
+
+#### Tue 24-Feb-2025
+
+Glasgow
+
+* walked to Ottoman Coffeehouse and back
+* dinner at Glaschu with Julie, Alex H-D, and Laurent
+
+##### NEMO-Cmd
+
+* finished adding `sphinx-copybutton` support in docs; PR#131
+  * Configured the `sphinx_copybutton` extension with the following improvements:
+    * Set a regex for the prompt text.
+    * Ensured it respects bash line continuation characters.
+    * Introduced a `no-copybutton` class to suppress the copy button where needed.
+  * Replaced `code-block:: bash` with `code-block:: console` in documentation files.
+  * Added `$` prompt to command examples to align with standard usage.
+
+
+##### MOAD/docs
+
+* started adding `sphinx-copybutton` support in docs; PR#65
+  * `pixi add sphinx-copybutton`
+  * `pixi run update-reqs`
+  * added `sphinx_copybutton` to list of extensions in `conf.py`
+  * Configured the `sphinx_copybutton` extension with the following improvements:
+    * Set a regex for the prompt text.
+    * Ensured it respects bash line continuation characters.
+    * Introduced a `no-copybutton` class to suppress the copy button where needed.
+  * started replacing `code-block:: bash` with `code-block:: console` in documentation files.
+
+
+
+#### Wed 25-Feb-2025
+
+Glasgow
+
+* dinner at Margot
+
+##### MOAD/docs
+
+* finished adding `sphinx-copybutton` support in docs; PR#65
+  * finished replacing `code-block:: bash` with `code-block:: console` in documentation files.
+  * changed `code-block:: text` to `code-block:: output` and added `no-copybutton` class
+    for blocks of output (as opposed to text content that might be copied/pasted)
+
+
+
+#### Thu 26-Feb-2025
+
+Glasgow
+
+* walk and subway to Georges Mewes cheese shop
+* chateaubriand dinner at Meat Joint
+
+
+##### NEMO-Cmd
+
+* researched deprecation of `namespace` arg in `cliff.CommandManager` re: issue#122
+  * discovered that the deprecation is being reverted in the next release of `cliff` (4.13.2)
+    because it is too disruptive
+  * closed issue#122
+
+
+##### SalishSeaCmd
+
+* closed issue#122 re: deprecation of `namespace` arg in `cliff.CommandManager`
+  * deprecation is being reverted in the next release of `cliff` (4.13.2) because it is too disruptive
+
+
+##### Security Updates
+
+* Squash-merged `dependabot` PR to update `pypdf` to 6.7.2 re: yet another infinity loop
+  vulnerability
+  * SalishSeaNowcast
+
+
+##### Miscellaneous
+
+* cleaned up a bunch of outdated pull requests
+
+
+##### MOAD/docs
+
+* developed a Pixi workflow for analysis repo creation:
+  * created empty `SalishSeaCast/analysis-pixi` repo on GitHub
+    * cloned it to `~/Documents/MOAD/`
+  * ran `cookiecutter` in temporary Pixi workspace with:
+    * `pixi exec cookiecutter -f gh:UBC-MOAD/cookiecutter-analysis-repo`
+  * cleaned up the temporary Pixi workspace with:
+    * `pixi clean cache --exec`
+  * worked like a charm!!
+* used `analysis-pixi` to develop a workflow to convert a conda environment analysis repo to a
+  Pixi-based one
+  * `cd ~/Documents/MOAD/analysis-pixi/`
+  * `pixi init --import notebooks/environment.yaml`
+  * `pixi workspace platform add linux-64 osx-64 win-64`
+  * tried `pixi add --git https://github.com/SalishSeaCast/tools.git --subdir SalishSeaTools SalishSeaTools`
+    * have to add `preview = ["pixi-build"]` to `[workspace]` to use that
+    * failed because `SalishSeaTools` isn't yet a Pixi project
+  * tried `pixi add --git https://github.com/SalishSeaCast/tools.git --pypi --subdir SalishSeaTools SalishSeaTools`
+    * worked
+
+
+
+#### Fri 27-Feb-2025
+
+Glasgow
+
+* dinner at Gamba with Amy
+
+##### SalishSeaCast
+
+* `crop_gribs 00 2026-02-26` timed out with 1 file unprocessed
+* `collect_weather 00 2.5km 2026-02-26` didn't finish until 10:33 (~12 late)
+* `crop_gribs 06 2026-02-26` timed out with 528 files unprocessed
+* recovery started at ~02:30 Pacific (~10:30 UTC):
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  # kill collect_weather 06 2.5km 2026-02-26
+  crop_gribs 00 2026-02-26 --var SPFH_AGL-2m --var-hour 6
+  crop_gribs 06 2026-02-26
+  collect_weather 06 2.5km --backfill 2026-02-26
+  # kill collect_weather 12 2.5km 2026-02-27
+  # kill crop_gribs 12 2026-02-27
+  # grib_to_netcdf forecast2 failed due to wrong date
+  # skip 2026-02-26 forecast2 runs
+  crop_gribs 12 2026-02-26
+  collect_weather 12 2.5km --backfill 2026-02-26
+  # kill collect_weather 18 2.5km 2026-02-27
+  # kill crop_gribs 18 2026-02-27
+  # kill download_live_ocean 2026-02-27
+  grib_to_netcdf 2026-02-26 nowcast+
+  download_live_ocean 2026-02-26
+  upload_forcing arbutus nowcast+ 2026-02-26
+  # runoff files were symlinked to 24feb
+  make_runoff_file v202108 --data-date 2026-02-25
+  make_201702_runoff_file --run-date 2026-02-26
+  upload_forcing orcinus nowcast+ 2026-02-26
+  upload_forcing optimum nowcast+ 2026-02-26
+  upload_forcing robot.nibi nowcast+ 2026-02-26
+  get_onc_ctd SEVIP 2026-02-25
+  get_onc_ctd SCVIP 2026-02-25
+  get_onc_ferry TWDP 2026-02-25
+  get_vfpa_hadcp 2026-02-25
+  crop_gribs 18 2026-02-26
+  collect_weather 18 2.5km --backfill
+  # kill collect_weather 00 2.5km 2026-02-27
+  # kill crop_gribs 00 2026-02-27
+  # kill download_weather 12 1km
+  crop_gribs 00 2026-02-27
+  collect_weather 00 2.5km --backfill 2026-02-27
+  # kill collect_weather 06 2.5km 2026-02-27
+  # kill crop_gribs 06 2026-02-27
+  # wait for 2026-02-26 nowcast runs to finish
+  crop_gribs 06 2026-02-27
+  collect_weather 06 2.5km --backfill 2026-02-27
+  # make_runoff_file failed with TypeError
+    # due to duplicated dates, I think
+      # ran collect_river_data for 25frb via scripts
+      # manually edited flow files to correct date order and remove duplicate lines
+  make_runoff_file v202108 2026-02-25
+  make_runoff_file v202108 2026-02-26
+  ```
+  <!-- markdownlint-enable MD031 -->
+
+
+
+#### Sat 28-Feb-2025
+
+Glasgow to Vancouver
+
+
+
+
+
+##### analysis-cookiecutter-repo TODO
+
+* add Pixi environments lines to `.gitignore`
+  <!-- markdownlint-disable MD031 -->
+  ```gitignore
+  # pixi environments
+  .pixi/*
+  !.pixi/config.toml
+  ```
+  <!-- markdownlint-enable MD031 -->
+* add `.gitattributes` file
+* add `pixi.toml` file
+  * `workspace.authors` and `workspace.name` need to be template variables
+* drop `notebooks/environments.yaml`
 
 
 
 
 
 
+##### MOAD/docs TODO
 
+* drop section about migration from `XIOS-1` to `XIOS-2`
+* add section re: converting analysis repo from conda environment to Pixi workspace
+* add docs section re: `pixi add`, `pixi import -e ... -f ...`, and maybe `pixi workspace environment add`
+* drop or isolate "on your laptop" instructions in several places
+  * analysis repo creation
+* plan for updates re: Pixi replacing `conda/mamba`
+  * `getting_started.rst`
+    * change "Install Miniforge" to "Install Pixi"
+  * Alliance setup in `alliance-computing.rst`
+  * lots in `conda_pkg_env_mgr.rst`
+    * maybe move to `zzz_archival_docs/` and replace with new Pixi section
+  * lots in `analysis-repo.rst`
+    * maybe not until after `cookiecutter-analysis-repo` is migrated
+  * `jupyter.rst`
+  * `sphinx_docs.rst`
+  * `vscode.rst`
+    * Fortran language server setup
+  * lots in `pkg_structure.rst`
 
 
 
@@ -2094,25 +2340,6 @@ Glasgow
 * change `orcinus` to use `slurm`
 * drop support for `optimum`
 * consider removing support for PBS/TORQUE scheduler
-
-
-
-
-##### MOAD/docs TODO
-
-* plan for updates re: Pixi replacing `conda/mamba`
-  * `getting_started.rst`
-    * change "Install Miniforge" to "Install Pixi"
-  * Alliance setup in `alliance-computing.rst`
-  * lots in `conda_pkg_env_mgr.rst`
-    * maybe move to `zzz_archival_docs/` and replace with new Pixi section
-  * lots in `analysis-repo.rst`
-    * maybe not until after `cookiecutter-analysis-repo` is migrated
-  * `jupyter.rst`
-  * `sphinx_docs.rst`
-  * `vscode.rst`
-    * Fortran language server setup
-  * lots in `pkg_structure.rst`
 
 
 
@@ -2175,17 +2402,17 @@ Glasgow
 * TODO:
   * add https://sphinx-copybutton.readthedocs.io/ to add copy button functionality to Sphinx code blocks
     * SalishSeaCmd - done 8feb26 in PR#127, improved 18feb26 in PR#131
+    * NEMO-Cmd - done 24feb26 in PR#131
+    * MOAD/docs - done 25feb26 in PR#65
 
     * AtlantisCmd
     * ECget
-    * NEMO-Cmd
     * NEMO_Nowcast
     * Reshapr
     * SalishSeaCast/docs
     * tools
     * SalishSeaNowcast
     * salishsea-site
-    * MOAD/docs
     * moad_tools
 
 
