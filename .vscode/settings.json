@@ -176,6 +176,7 @@
         "colormap",
         "commandmanager",
         "commonmark",
+        "Comox",
         "complevel",
         "compstaff",
         "computecanada",
@@ -840,5 +841,6 @@
     ],
     "editor.rulers": [
         100
-    ]
+    ],
+    "files.autoSave": "afterDelay"
 }
