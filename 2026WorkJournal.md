@@ -13,7 +13,7 @@ This journal is about:
 
 ### Week 1
 
-#### Thu 1-Jan-2025
+#### Thu 1-Jan-2026
 
 **Statutory Holiday** - New Year's Day
 
@@ -27,7 +27,7 @@ Juan de Fuca Beach House
 
 
 
-#### Fri 2-Jan-2025
+#### Fri 2-Jan-2026
 
 Juan de Fuca Beach House to Vancouver
 
@@ -41,7 +41,7 @@ Juan de Fuca Beach House to Vancouver
 
 
 
-#### Sat 3-Jan-2025
+#### Sat 3-Jan-2026
 
 ##### SalishSeaCast
 
@@ -51,7 +51,7 @@ Juan de Fuca Beach House to Vancouver
 
 
 
-#### Sun 4-Jan-2025
+#### Sun 4-Jan-2026
 
 ##### SalishSeaCast
 
@@ -63,7 +63,7 @@ Juan de Fuca Beach House to Vancouver
 
 ### Week 2
 
-#### Mon 5-Jan-2025
+#### Mon 5-Jan-2026
 
 ##### SalishSeaCast
 
@@ -113,7 +113,7 @@ Juan de Fuca Beach House to Vancouver
 
 
 
-#### Tue 6-Jan-2025
+#### Tue 6-Jan-2026
 
 Worked at ESB while Rita was at home
 
@@ -179,7 +179,7 @@ Worked at ESB while Rita was at home
 
 
 
-#### Wed 7-Jan-2025
+#### Wed 7-Jan-2026
 
 ##### SalishSeaCast
 
@@ -258,7 +258,7 @@ Worked at ESB while Rita was at home
 
 
 
-#### Thu 8-Jan-2025
+#### Thu 8-Jan-2026
 
 ##### SalishSeaCast
 
@@ -298,7 +298,7 @@ Worked at ESB while Rita was at home
 
 
 
-#### Fri 9-Jan-2025
+#### Fri 9-Jan-2026
 
 ##### SalishSeaCast
 
@@ -369,7 +369,7 @@ Worked at ESB while Rita was at home
 
 
 
-#### Sat 10-Jan-2025
+#### Sat 10-Jan-2026
 
 ##### SalishSeaCast
 
@@ -394,7 +394,7 @@ Worked at ESB while Rita was at home
     by using `Path(__file__).parent.parent` in `run.py`
 
 
-#### Sun 11-Jan-2025
+#### Sun 11-Jan-2026
 
 ##### SalishSeaCast
 
@@ -419,7 +419,7 @@ Worked at ESB while Rita was at home
 
 ### Week 3
 
-#### Mon 12-Jan-2025
+#### Mon 12-Jan-2026
 
 ##### SalishSeaCast
 
@@ -469,7 +469,7 @@ Worked at ESB while Rita was at home
 
 
 
-#### Tue 13-Jan-2025
+#### Tue 13-Jan-2026
 
 Worked at ESB
 
@@ -500,7 +500,7 @@ Worked at ESB
 
 
 
-#### Wed 14-Jan-2025
+#### Wed 14-Jan-2026
 
 ##### SalishSeaCast
 
@@ -602,7 +602,7 @@ Worked at ESB
 
 
 
-#### Thu 15-Jan-2025
+#### Thu 15-Jan-2026
 
 ##### SalishSeaCast
 
@@ -636,7 +636,7 @@ Worked at ESB
 
 
 
-#### Fri 16-Jan-2025
+#### Fri 16-Jan-2026
 
 ##### SalishSeaCast
 
@@ -674,7 +674,7 @@ Worked at ESB
 
 
 
-#### Sat 17-Jan-2025
+#### Sat 17-Jan-2026
 
 ##### SalishSeaCast
 
@@ -686,7 +686,7 @@ Worked at ESB
 
 
 
-#### Sun 18-Jan-2025
+#### Sun 18-Jan-2026
 
 ##### SalishSeaCast
 
@@ -697,7 +697,7 @@ Worked at ESB
 
 ### Week 4
 
-#### Mon 19-Jan-2025
+#### Mon 19-Jan-2026
 
 ##### SalishSeaCast
 
@@ -737,7 +737,7 @@ Worked at ESB
 
 
 
-#### Tue 20-Jan-2025
+#### Tue 20-Jan-2026
 
 Worked at ESB while Rita was at home
 
@@ -817,7 +817,7 @@ Worked at ESB while Rita was at home
 
 
 
-#### Wed 21-Jan-2025
+#### Wed 21-Jan-2026
 
 Intake interview and VO2 max test for SPARC Program
 
@@ -845,7 +845,7 @@ Intake interview and VO2 max test for SPARC Program
 
 
 
-#### Thu 22-Jan-2025
+#### Thu 22-Jan-2026
 
 ##### Miscellaneous
 
@@ -874,7 +874,7 @@ Intake interview and VO2 max test for SPARC Program
 
 
 
-#### Fri 23-Jan-2025
+#### Fri 23-Jan-2026
 
 ##### Security Updates
 
@@ -904,7 +904,7 @@ Intake interview and VO2 max test for SPARC Program
 
 
 
-#### Sat 24-Jan-2025
+#### Sat 24-Jan-2026
 
 ##### SalishSeaCast
 
@@ -920,7 +920,7 @@ Intake interview and VO2 max test for SPARC Program
 
 
 
-#### Sun 25-Jan-2025
+#### Sun 25-Jan-2026
 
 ##### SalishSeaCast
 
@@ -936,7 +936,7 @@ Intake interview and VO2 max test for SPARC Program
 
 ### Week 5
 
-#### Mon 26-Jan-2025
+#### Mon 26-Jan-2026
 
 ##### Miscellaneous
 
@@ -955,7 +955,7 @@ Intake interview and VO2 max test for SPARC Program
 
 
 
-#### Tue 27-Jan-2025
+#### Tue 27-Jan-2026
 
 Worked at ESB
 
@@ -1015,7 +1015,7 @@ Worked at ESB
 
 
 
-#### Wed 28-Jan-2025
+#### Wed 28-Jan-2026
 
 ##### SalishSeaCast
 
@@ -1100,7 +1100,7 @@ Worked at ESB
 
 
 
-#### Thu 29-Jan-2025
+#### Thu 29-Jan-2026
 
 ##### SalishSeaCast
 
@@ -1138,7 +1138,7 @@ Worked at ESB
 
 
 
-#### Fri 30-Jan-2025
+#### Fri 30-Jan-2026
 
 ##### SalishSeaCast
 
@@ -1225,7 +1225,7 @@ Worked at ESB
 
 
 
-#### Sat 31-Jan-2025
+#### Sat 31-Jan-2026
 
 ##### SalishSeaCast
 
@@ -1235,9 +1235,10 @@ Worked at ESB
 
 
 
-### February
-
-#### Sun 1-Feb-2025
+## February
+<!-- markdownlint-disable MD001 -->
+#### Sun 1-Feb-2026
+<!-- markdownlint-enable MD001 -->
 
 ##### SalishSeaCast
 
@@ -1263,7 +1264,7 @@ Worked at ESB
 
 ### Week 6
 
-#### Mon 2-Feb-2025
+#### Mon 2-Feb-2026
 
 SportsCardiologyBC appt w/ Dr. Moulson
 
@@ -1302,7 +1303,7 @@ SportsCardiologyBC appt w/ Dr. Moulson
 
 
 
-#### Tue 3-Feb-2025
+#### Tue 3-Feb-2026
 
 Worked at ESB while Rita was at home
 
@@ -1342,7 +1343,7 @@ First SPARC session
 
 
 
-#### Wed 4-Feb-2025
+#### Wed 4-Feb-2026
 
 ##### salishsea-site
 
@@ -1492,7 +1493,7 @@ First SPARC session
 
 
 
-#### Thu 5-Feb-2025
+#### Thu 5-Feb-2026
 
 ##### SalishSeaCast
 
@@ -1524,7 +1525,7 @@ First SPARC session
 
 
 
-#### Fri 6-Feb-2025
+#### Fri 6-Feb-2026
 
 ##### 2x resolution SalishSeaCast
 
@@ -1538,13 +1539,13 @@ First SPARC session
 
 
 
-#### Sat 7-Feb-2025
+#### Sat 7-Feb-2026
 
 Goofed off
 
 
 
-#### Sun 8-Feb-2025
+#### Sun 8-Feb-2026
 
 ##### SalishSeaCast
 
@@ -1571,7 +1572,7 @@ Goofed off
 
 ### Week 7
 
-#### Mon 9-Feb-2025
+#### Mon 9-Feb-2026
 
 ##### SalishSeaCast
 
@@ -1636,7 +1637,7 @@ Goofed off
 
 
 
-#### Tue 10-Feb-2025
+#### Tue 10-Feb-2026
 
 Worked at ESB
 
@@ -1683,7 +1684,7 @@ Worked at ESB
 
 
 
-#### Wed 11-Feb-2025
+#### Wed 11-Feb-2026
 
 ##### SalishSeaCast
 
@@ -1751,7 +1752,7 @@ Worked at ESB
 
 
 
-#### Thu 12-Feb-2025
+#### Thu 12-Feb-2026
 
 ##### Resilient-C
 
@@ -1853,7 +1854,7 @@ Worked at ESB
 
 
 
-#### Fri 13-Feb-2025
+#### Fri 13-Feb-2026
 
 ##### SalishSeaCast
 
@@ -1878,7 +1879,7 @@ Worked at ESB
 
 
 
-#### Sat 14-Feb-2025
+#### Sat 14-Feb-2026
 
 ##### Miscellaneous
 
@@ -1890,7 +1891,7 @@ Worked at ESB
 
 
 
-#### Sun 15-Feb-2025
+#### Sun 15-Feb-2026
 
 ##### 2026 Bloomcast
 
@@ -1924,7 +1925,7 @@ Worked at ESB
 
 ### Week 8
 
-#### Mon 16-Feb-2025
+#### Mon 16-Feb-2026
 
 **Statutory Holiday** - Family Day
 
@@ -1942,7 +1943,7 @@ Worked at ESB
 
 
 
-#### Tue 17-Feb-2025
+#### Tue 17-Feb-2026
 
 ##### 2026 Bloomcast
 
@@ -1970,7 +1971,7 @@ Worked at ESB
 
 
 
-#### Wed 18-Feb-2025
+#### Wed 18-Feb-2026
 
 ##### 2026 Bloomcast
 
@@ -1991,7 +1992,7 @@ Worked at ESB
 
 
 
-#### Thu 19-Feb-2025
+#### Thu 19-Feb-2026
 
 Vancouver to Glasgow
 
@@ -2008,13 +2009,13 @@ Vancouver to Glasgow
 
 
 
-#### Fri 20-Feb-2025
+#### Fri 20-Feb-2026
 
 Arrived in Glasgow
 
 
 
-#### Sat 21-Feb-2025
+#### Sat 21-Feb-2026
 
 Glasgow
 
@@ -2023,7 +2024,7 @@ Glasgow
 * watched Cycling Canada eSports championships
 
 
-#### Sun 22-Feb-2025
+#### Sun 22-Feb-2026
 
 Glasgow
 
@@ -2035,7 +2036,7 @@ Glasgow
 
 ### Week 9
 
-#### Mon 23-Feb-2025
+#### Mon 23-Feb-2026
 
 Glasgow
 
@@ -2068,7 +2069,7 @@ Glasgow
 
 
 
-#### Tue 24-Feb-2025
+#### Tue 24-Feb-2026
 
 Glasgow
 
@@ -2100,7 +2101,7 @@ Glasgow
 
 
 
-#### Wed 25-Feb-2025
+#### Wed 25-Feb-2026
 
 Glasgow
 
@@ -2115,7 +2116,7 @@ Glasgow
 
 
 
-#### Thu 26-Feb-2025
+#### Thu 26-Feb-2026
 
 Glasgow
 
@@ -2172,7 +2173,7 @@ Glasgow
 
 
 
-#### Fri 27-Feb-2025
+#### Fri 27-Feb-2026
 
 Glasgow
 
@@ -2235,11 +2236,135 @@ Glasgow
 
 
 
-#### Sat 28-Feb-2025
+#### Sat 28-Feb-2026
 
 Glasgow to Vancouver
 
+##### SalishSeaCast
 
+* `archive_tarball 2026-feb` failed due to error code 255 from `rsync`
+  * key file name on `skookum` contained `graham` instead of `nibi`
+  * started manual `rsync` in `tmux` session
+
+
+
+## March
+<!-- markdownlint-disable MD001 -->
+#### Sun 1-Mar-2026
+<!-- markdownlint-enable MD001 -->
+
+##### SalishSeaCast
+
+* started manual `rsync` for feb26 tarball in `tmux` session
+
+
+##### Minecraft
+
+* checked mods, etc. for releases compatible with 1.21.11:
+  * sodium: yes
+  * lithium: yes
+  * iris: yes
+  * entity model features: yes
+  * entity texture features: yes
+  * fresh animations: yes
+  * malilib: yes
+  * minihud: yes
+  * tweakeroo: yes
+* stopped server
+* did lizzy-smelt backup
+* updated OS packages and auto-removed outdated packages
+* rebooted
+* set up 1.21.11 server
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  mkdir ~/Games/MinecraftFabric1.21.11Server
+  cd ~/Games/MinecraftFabric1.21.11Server
+  curl -OJ https://meta.fabricmc.net/v2/versions/loader/1.21.11/0.18.4/1.1.1/server/jar
+  pushd ~/Games/MinecraftFabric1.21.10Server
+  cp banned-* eula.txt ops.json whitelist.json start.sh ../MinecraftFabric1.21.11Server/
+  popd
+  ```
+  <!-- markdownlint-enable MD031 -->
+  * edited `start.sh` to:
+  <!-- markdownlint-disable MD031 -->
+    ```bash
+    #!/usr/bin/env bash
+    java -Xmx2G -jar fabric-server-mc.1.21.11-loader.0.18.4-launcher.1.1.1.jar nogui
+    ```
+  <!-- markdownlint-enable MD031 -->
+* launched and stopped server to create instance directories and files
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  ./start.sh
+    ...
+  /stop
+  ```
+  <!-- markdownlint-enable MD031 -->
+* edited `server.properties` to sync with 1.21.10 settings
+* installed mods, and rsync-ed `1-20-1-25jul23` world tree:
+<!-- markdownlint-disable MD031 -->
+```bash
+cd ~/Games/MinecraftFabric1.21.11Server/mods/
+curl -LO https://github.com/CaffeineMC/lithium/releases/download/mc1.21.11-0.21.3/lithium-fabric-0.21.3+mc1.21.11.jar
+cd ~/Games/MinecraftFabric1.21.11Server
+rsync -av ../MinecraftFabric1.21.10Server/1-20-1-25jul23 ./
+```
+<!-- markdownlint-enable MD031 -->
+* downloaded and unzipped on `khawla` VanillaTweaks double shulker shells v1.3.15 datapack
+  * rsync-ed it to `Games/MinecraftFabric1.21.11Server/1-20-1-25jul23/datapacks/` and removed v1.13.11
+* launched server in `tmux`
+<!-- markdownlint-disable MD031 -->
+```bash
+tmux new -n minecraft-server
+./start.sh
+```
+<!-- markdownlint-enable MD031 -->
+* set up 1.21.11 client instance in MultiMC
+  * created instance
+  * installed fabric 0.18.4
+  * downloaded and installed loader mods:
+    * sodium-fabric-0.8.6+mc1.21.11.jar
+    * lithium-fabric-0.21.3+mc1.21.11.jar
+    * malilib-fabric-1.21.11-0.27.6.jar
+    * minihud-fabric-1.21.11-0.38.3.jar
+    * tweakeroo-fabric-1.21.11-0.27.5.jar
+    * iris-fabric-1.10.6+mc1.21.11.jar
+    * entity_model_features_1.21.11-fabric-3.0.12.jar
+    * entity_texture_features_1.21.11-fabric-7.0.9.jar
+  * downloaded and installed resource pack:
+    * FreshAnimations_v1.10.4.zip
+  * selected Java: `/usr/lib/jvm/java-21-openjdk-amd64/bin/java`
+  * started and stopped client instance to populate `config/`
+  * copied `minihud.json` and `tweakeroo.json` from 1.21.10 instance `config/`
+  * installed Vanilla Tweaks resource packs:
+    * iron bars fix is not required after 1.21.5
+    * no changes kin lower shield and redstone devices packs, so re-used the ones from 1.21.10
+
+
+
+
+* update `ocean` ssh config
+
+
+##### Minecraft TODO
+
+* started game and adjusted UI:
+  * FOV: 80
+  * Video:
+    * Brightness: Bright
+    * GUI Scale: 2x
+    * Weather: Fancy
+    * Leaves: Fancy
+  * enabled resource packs
+  * Music & Sound:
+    * Music: 50%
+    * Closed Captions: on
+    * Directional Audio: on
+    * show Music Toast: on
+  * Optional Telemetry Data
+  * F3-h to enable advanced tooltips
+  * `/gamerule pvp false`
+  * used `/gamerule` to confirm increased spawn chunks radius from 3 to 4 to keep iron farm loaded
 
 
 
