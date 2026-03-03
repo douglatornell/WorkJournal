@@ -1072,7 +1072,8 @@ Worked at ESB
 
 * updated milestone v25.2 to v26.1 on GitHub because auto-milestone workflow doesn't work for overdue
   milestones
-* pinned `supervisor>=4.3.0` to resolve `supervisor` `pkg_resources` API deprecation issue; PR#419 - squash-merged
+* pinned `supervisor>=4.3.0` to resolve `supervisor` `pkg_resources` API deprecation issue;
+  PR#419 - squash-merged
   * updated `supervisor` in production env on `skookum`
 * stopped preparation of `nowcast-agrif` runs on `orcinus`; PR#420 - squash-merged
   * changed `run[enabled hosts][orcinus-nowcast-agrif][make forcing links]` config value to `False`
@@ -1452,7 +1453,8 @@ First SPARC session
     but slower to run due to queuing
     * 03feb26 failed
       * it was using 03feb runoff file
-* symlinked 02feb runoff file as 03feb on `arbutus` and launched blue with `make_forcing_links arbutus nowcast+`
+* symlinked 02feb runoff file as 03feb on `arbutus` and launched blue with
+  `make_forcing_links arbutus nowcast+`
   * successful runs
 
 
@@ -1614,7 +1616,8 @@ Goofed off
 * started changing to use Pixi for package & env mgmt; PR#100
   * `pixi init` to add `[tool.pixi.*]` tables to `pyproject.toml`
     * failed when I asked it to add `[tool.pixi]` configuration to `pyproject.toml`
-      * problem was `license-files = { paths = ["LICENSE"] }` instead of `license = { file = "LICENSE" }`
+      * problem was `license-files = { paths = ["LICENSE"] }` instead of
+        `license = { file = "LICENSE" }`
         in `[project]` table, but it took a long time to find because the Pixi error message wasn't
         explicit enough
   * clean up `.gitignore`
@@ -1899,7 +1902,12 @@ Worked at ESB
   * debugged test run failure; issue#106
     * Susan helped but couldn't find anything
     * ran a single run with:
-      * `pixi run SOG run ../../SOG-code/SOG 2026_bloomcast_infile.yaml -e 2026_bloomcast_infile_8081.yaml -o foo.out --watch`
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      pixi run SOG run ../../SOG-code/SOG 2026_bloomcast_infile.yaml \
+        -e 2026_bloomcast_infile_8081.yaml -o foo.out --watch
+      ```
+      <!-- markdownlint-enable MD031 -->
     * Susan found that `SOG-code/forcing.f90 leapyear()` was failing because we are beyond 2025
       and it's error message was not being output because it was being written to `stderr`
       * added leapyear calculations for more years
@@ -2041,7 +2049,7 @@ Glasgow
 Glasgow
 
 * walked to Kelvinbridge Park and back
-* dinner with downscaling session group at Raddisson Red
+* dinner with downscaling session group at Radisson Red
 
 ##### Security Updates
 
@@ -2052,7 +2060,7 @@ Glasgow
 
 ##### Miscellaneous
 
-* had to `pixi global install make` to be able to build `NEMO-Cmd` docs
+* had to `pixi global install make` on MacBook to be able to build `NEMO-Cmd` docs
   * same reasoning as installing `git` that way rather than installing Xcode components
 
 
@@ -2168,7 +2176,8 @@ Glasgow
   * tried `pixi add --git https://github.com/SalishSeaCast/tools.git --subdir SalishSeaTools SalishSeaTools`
     * have to add `preview = ["pixi-build"]` to `[workspace]` to use that
     * failed because `SalishSeaTools` isn't yet a Pixi project
-  * tried `pixi add --git https://github.com/SalishSeaCast/tools.git --pypi --subdir SalishSeaTools SalishSeaTools`
+  * tried
+    `pixi add --git https://github.com/SalishSeaCast/tools.git --pypi --subdir SalishSeaTools SalishSeaTools`
     * worked
 
 
@@ -2342,29 +2351,61 @@ tmux new -n minecraft-server
 
 
 
+### Week 10
 
-* update `ocean` ssh config
+#### Mon 2-Mar-2026
+
+##### SalishSeaCast
+
+* manual `rsync` for feb26 tarball in `tmux` session finished successfully
+* `crop_gribs 00` failed with `FileNotFoundError` in observer startup due to no directory to watch
+  despite race condition mitigation code
+  * rare issue that last occurred on 8-Jun-2024
+  * did not affect `forecast2` runs
+  * caused `grib_to_netcdf nowcast+` to fail
+  * recovery started at ~09:15
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    crop_gribs 00 --backfill
+    grib_to_netcdf nowcast+
+    upload_forcing arbutus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing orcinus nowcast+
+    upload_forcing robot.nibi nowcast+
+    ```
+    <!-- markdownlint-enable MD031 -->
+    * `nowcast-blue` run started at 09:52
 
 
-##### Minecraft TODO
+##### Security Updates
+
+* Squash-merged `dependabot` PR to update `pypdf` to 6.7.4 re: memory exhaustion
+  vulnerability
+  * SalishSeaNowcast
+
+
+##### Minecraft
 
 * started game and adjusted UI:
   * FOV: 80
   * Video:
-    * Brightness: Bright
     * GUI Scale: 2x
-    * Weather: Fancy
-    * Leaves: Fancy
+    * Clouds: Fancy
+    * See-through Leaves: On
   * enabled resource packs
   * Music & Sound:
     * Music: 50%
     * Closed Captions: on
     * Directional Audio: on
-    * show Music Toast: on
+    * show Music Toast: Pause Menu and Toast
   * Optional Telemetry Data
   * F3-h to enable advanced tooltips
-  * `/gamerule pvp false`
-  * used `/gamerule` to confirm increased spawn chunks radius from 3 to 4 to keep iron farm loaded
+  * confirmed `/gamerule pvp false`
+
+
+
+
+* update `ocean` ssh config
 
 
 
@@ -2392,7 +2433,8 @@ tmux new -n minecraft-server
 
 * drop section about migration from `XIOS-1` to `XIOS-2`
 * add section re: converting analysis repo from conda environment to Pixi workspace
-* add docs section re: `pixi add`, `pixi import -e ... -f ...`, and maybe `pixi workspace environment add`
+* add docs section re: `pixi add`, `pixi import -e ... -f ...`, and maybe
+  `pixi workspace environment add`
 * drop or isolate "on your laptop" instructions in several places
   * analysis repo creation
 * plan for updates re: Pixi replacing `conda/mamba`
