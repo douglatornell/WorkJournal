@@ -2404,6 +2404,29 @@ tmux new -n minecraft-server
 
 
 
+#### Tue 3-Mar-2026
+
+Work at ESB while Rita is at home
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+
+
+##### PythonNotes
+
+* started change to use Pixi for dependencies and environment management; PR#5
+  * `pixi init --import environment.yaml`
+  * `pixi workspace platform add linux-64 osx-64 win-64`
+  * edited `pixi.toml`:
+    * changed `authors` to 
+      "UBC EOAS MOAD Group <https://github.com/UBC-MOAD/docs/blob/main/CONTRIBUTORS.rst>"
+    * dropped `version`
+  * moved Pixi environments additions to `.gitignore`
+  * updated `README` re: change to Pixi
+
+
+
 
 * update `ocean` ssh config
 
