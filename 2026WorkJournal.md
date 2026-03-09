@@ -2419,7 +2419,7 @@ Work at ESB while Rita is at home
   * `pixi init --import environment.yaml`
   * `pixi workspace platform add linux-64 osx-64 win-64`
   * edited `pixi.toml`:
-    * changed `authors` to 
+    * changed `authors` to:
       "UBC EOAS MOAD Group <https://github.com/UBC-MOAD/docs/blob/main/CONTRIBUTORS.rst>"
     * dropped `version`
   * moved Pixi environments additions to `.gitignore`
@@ -2427,8 +2427,82 @@ Work at ESB while Rita is at home
 
 
 
+#### Wed 4-Mar-2026
 
-* update `ocean` ssh config
+Baseline imaging for MIBI stress test
+
+
+##### Security Updates
+
+* Squash-merged `dependabot` PR to update `pypdf` to 6.7.5 re: long runtime
+  vulnerability
+  * SalishSeaNowcast
+
+
+#### SoPO
+
+
+
+#### Thu 5-Mar-2026
+
+MIBI stress test and imaging
+
+Head cold symptoms started
+
+##### SoPO
+
+* Susan had side-channel communications with someone from ONC that revealed that there is TWDP
+  ferry data for early 2025 that was not available when our worker ran
+
+
+
+#### Fri 6-Mar-2026
+
+Sick leave - head cold
+
+##### SalishSeaCast
+
+* backfilled ONC TWDP ferry data from 16nov24 to 21jan25
+
+
+##### Miscellaneous
+
+* started setting up more VSCode profiles on `khawla`, similar to what I have on my MacBook
+* updated PyCharm to 2025.3.3 on `khawla`
+* updated `ocean` ssh config to drop decommissioned Alliance HPC clusters and update `robot.nibi`
+  key file name
+
+
+##### SalishSeaNowcast
+
+* investigated CI test failure in `test_crop_gribs.TestHandleStalledObserver.test_file_not_found()`
+  * can't reproduce in dev env on `khawla`
+    * confirmed that dev versions of `httpx` and `httpcore` are the same as in CI
+    * updated dev `xarray` to match CI; still works
+    * updated `pytest` and `pytest-httpx` to match CI still works
+  * re-ran CI and got no failure; so it was an intermittent GitHub issue ☹️
+
+
+
+#### Sat 7-Mar-2026
+
+Nose less runny
+
+Goofed off
+
+
+
+#### Sun 8-Mar-2026
+
+Still some head cold symptoms
+
+Goofed off
+
+
+
+
+
+
 
 
 
