@@ -2520,8 +2520,54 @@ Goofed off
 
 
 
+#### Tue 3-Mar-2026
+
+Work at ESB
+
+Snowfall started mid-morning
+
+##### 2026 Bloomcast
+
+* bloom date jumped to 5mar
+  * salinity <16 PSU through most of Feb
 
 
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* ran `gha-workflows` check
+
+
+##### Security Updates
+
+* Squash-merged `pre-commit` PRs to update `black` to 26.3.0 re: style updates & bug fixes
+  * NEMO_Nowcast
+  * salishsea-site
+  * erddap-datasets
+  * SalishSeaTools
+  * gha-workflows
+  * MoaceanParcels
+  * cookiecutter-MOAD-pypkg
+  * SalishSeaCmd
+  * SOG-Bloomcast-Ensemble
+  * SalishSeaNowcast
+  * Reshapr
+  * moad_tools
+  * NEMO-Cmd
+  * AtlantisCmd
+
+
+##### PythonNotes
+
+* continued writing 2026 version of pkgs & envs notebook/slides
+
+
+
+
+
+##### `nibi` TODO
+
+* test multi-node runs with `#SBATCH --switches=1` directive
 
 
 
@@ -2708,6 +2754,8 @@ Goofed off
   * MOAD/docs - done 22jan26 in PR#62
   * SOG-Bloomcast-Ensemble - done 12feb26 in PR#100
 
+  * PythonNotes - started 3mar26 in PR#5
+
   * Reshapr
   * NEMO_Nowcast
   * AtlantisCmd
@@ -2731,6 +2779,8 @@ Goofed off
   * gha-workflows - done 17dec25 in PR#82
   * SalishSeaCast/docs - done 14jan26 in PR#74
   * SOG-Bloomcast-Ensemble - done 12feb26 in PR#100
+
+  * PythonNotes - started 3mar26 in PR#5 (via migration to Pixi)
 
   * workflows available for testing:
     * NEMO_Nowcast
