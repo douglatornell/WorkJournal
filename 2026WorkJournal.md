@@ -2500,6 +2500,25 @@ Goofed off
 
 
 
+### Week 11
+
+#### Mon 9-Mar-2026
+
+##### Miscellaneous
+
+* mtg w/ Susan & Marysa re: Python on `fir` for atsci model analysis
+
+
+##### PythonNotes
+
+* continued change to use Pixi for dependencies and environment management; PR#5
+  * `pixi add --feature pkgs-envs python jupyter jupyterlab_rise`
+  * `pixi workspace environment add -f pkgs-envs --no-default-feature pks-envs`
+  * `pixi install -e pkgs-envs`
+  * `pixi run -e pkgs-envs jupyter lab pkgs-envs/PythonPkgsEnvsSlides-2023.ipynb`
+* started writing 2026 version of pkgs & envs notebook/slides
+
+
 
 
 
