@@ -2563,6 +2563,297 @@ Snowfall started mid-morning
 
 
 
+#### Wed 11-Mar-2026
+
+
+##### SalishSeaCast
+
+* no river discharge obs for SnohomishMonroe
+
+
+##### Security Updates
+
+* Squash-merged `dependabot` PR to update `pypdf` to 6.8.0 re: memory exhaustion
+  vulnerability
+  * SalishSeaNowcast
+* researched `jaraco.context` vulnerability
+  * v6.1.1 that resolves the issue is available, but `dependabot` con't seem to find it
+  * affected repositories:
+    * SalishSeaNowcast - fixed
+    * salishsea-site - fixed
+    * SalishSeaCast/tools - fixed
+    * moad_tools - fixed
+    * Reshapr - fixed
+    * FUN - fixed
+    * NEMO_Nowcast - fixed
+    * AtlantisCmd - fixed
+* `MoaceanParcels` has `dependabot` failures for `h2` and `jupyter_core` packages
+* Squash-merged `dependabot` PR to update `tornado` to 6.5.5 re: cookie value injection
+  vulnerability
+  * SalishSeaNowcast
+  * SalishSeaCast/tools
+  * moad_tools
+  * Reshapr
+  * MoaceanParcels
+  * ECget
+  * SOG-Bloomcast-Ensemble
+  * SalishSeaCast/docs
+  * MOAD/docs
+
+
+##### salishsea-site
+
+* pin `supervisor>=4.3.0` to resolve `supervisor` `pkg_resources` API deprecation issue; PR#151 - squash-merged
+  * updated production env on `skookum` and restarted app
+    * that also resolved the `jaraco.context` issue
+
+
+##### Miscellaneous
+
+* Sharcnet webinar: Mark Hahn, Know your cluster: ways that national systems vary in performance
+  * extremely technical (unsurprisingly for Mark)
+  * `nibi` has Intel Xeon (newer fab generation than AMDs), largest L3 caches
+  * `rorqual` has AMD 9645
+  * `fir` has AMD 9655
+  * `trillium` has AMD 9655, highest base & max clock speeds
+  * all chiplet-based
+  * `nibi` Intel micro-architecture is flatter than AMD
+  * memory:
+    * `nibi`: 6.4 GB/s per core, fastest STREAM benchmark
+    * `fir` & `trillium` lower and similar STREAM
+    * `rorqual` slowest STREAM
+  * interconnect:
+    * InfiniBand is largely unchanged
+    * Ethernet latency is 8-9 us vs. 2 us for InfiniBand
+    * weak preference for same switch in SLURM, but use directive to ensure
+  * storage:
+    * node-local:
+      * `rorqual` has fastest local disk for streaming large files
+      * `trillium` has none
+      * each site has different local file system type: `nibi` has ext4
+    * shared:
+      * VAST on `nibi` & `trillium`, latter is faster
+      * Luster on `fir` & `rorqual`
+      * `fir` home seems to have a lot of lag, scratch is very fast
+      * `nibi` performance is best when using whole node
+
+
+##### SalishSeaNowcast
+
+* updated dev env on `khawla`
+  * fixed `jaraco.context` issue; PR#433 - squash-merged
+  * surface 2 test failures due to noisy logging of an updated package
+    * I've seen at least 1 in GHA
+      * `test_crop_gribs.TestHandleStalledObserver.test_file_not_found()`
+        * fixed by more robust log record indexing in assertions
+      * `test_get_vfpa_hadcp.TestGetVFPA_HADCP.test_log_messages()`
+        * fixed by filtering `caplog.records`
+
+
+##### SalishSeaTools
+
+* updated dev env on `khawla`
+  * fixed `jaraco.context` issue
+  * pinned `pandas<3.0.0` to avoid new failing tests
+
+
+##### moad_tools
+
+* updated dev env on `khawla`
+  * fixed `jaraco.context` issue
+  * tests pass with `pandas=3.0.1`
+
+
+##### Reshapr
+
+* gave up waiting for Jose to review `nibi` support docs and merged PR#169
+* updated dev env on `khawla`
+  * fixed `jaraco.context` issue
+
+
+##### FUN
+
+* updated dev env on `khawla`
+  * fixed `jaraco.context` issue
+
+
+##### NEMO-Nowcast
+
+* updated dev env on `khawla`
+  * fixed `jaraco.context` issue
+
+
+##### AtlantisCmd
+
+* updated dev env on `khawla`
+  * fixed `jaraco.context` issue
+
+
+##### MoaceanParcels
+
+* updated dev env on `khawla`
+  * fixed `jupyter_core` & `h2` issues
+
+
+
+#### Thu 12-Mar-2026
+
+##### Miscellaneous
+
+* add comments to PyCharm issue PY-79041 re: adding native Pixi support
+* UBC/IOS model collab mtg:
+  * highlights and discussion of OCean Sciences
+* Phys Ocgy seminar:
+  * Tyler De Jong, Squamish Estuary obs & modeling
+
+
+##### NEMO_Nowcast
+
+* updated milestone v25.3 to v26.1 on GitHub because auto-milestone workflow doesn't work for overdue
+  milestones
+* started changing to use Pixi for package & env mgmt; PR#93
+  * edit `pyproject.toml` to prepare:
+    * change `license-files = { paths = ["LICENSE"] }` to `license-files = [ "LICENSE" ]`
+  * `pixi init` to add `[tool.pixi.*]` tables to `pyproject.toml`
+    * I was surprised to get `default`, `docs`, and `tests` environments
+      * I think latter 2 were caused by the presence of `project.optional-dependencies`
+  * `pixi workspace platform add linux-64 osx-64 win-64`
+  * move Pixi environments additions in `.gitignore`
+  * add `,gitattributes` to VCS
+
+
+#### Fri 13-Mar-2026
+
+##### Security Updates
+
+* Squash-merged `dependabot` PR to update `tornado` to 6.5.5 re: cookie value injection & too many
+  multipart parts vulnerabilities
+  * SOG-Bloomcast
+  * erddap-datasets
+* Squash-merged `dependabot` PRs to update `black` to 26.3.1 re: arbitrary file writes vulnerability
+  * cookiecutter-MOAD-pypkg
+  * gha-workflows
+  * AtlantisCmd
+  * SOG-Bloomcast-Ensemble
+  * MoaceanParcels
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * Reshapr
+  * FUN
+  * SalishSeaNowcast
+  * SalishSeaTools
+  * salishsea-site
+  * moad_tools
+  * NEMO_Nowcast
+
+
+##### Miscellaneous
+
+* email from Parker about cert chain change on wateroffice.ec.gc.ca
+  * no effect for us
+  * perhaps he got hit due to OS older than 22.04?
+
+
+##### 2026 Bloomcast
+
+* Susan tracked the bloom date jump on Tuesday to an anomalous jump that appeared in the Englishman
+  River discharge in February
+  * it's there on the webpage today, but absent from the discharges we collected from datamart
+  * it appears that the values that feed the webpage got updated after the fact because SOG was okay
+    (like the datamart obs) during the period that is now wonky
+
+
+##### NEMO_Nowcast
+
+* continued changing to use Pixi for package & env mgmt; PR#93
+  * edit `envs/environment-dev.yaml` to set Python 3.14 and hide dev packages
+  * `pixi import -e default --format conda-env envs/environment-dev.yaml` to get minimal packages in
+    `default` environment
+    * dropped `nodefaults` from `pixi.workspace.channels` because it's irrelevant for Pixi
+    * dropped `pip` from `pixi.workspace.dependencies` because we'll add it to `dev` environment
+    * dropped `win64` from `pixi.workspace.platforms` because `supervisor` is not supported on Windows
+  * `pixi install` created the env and the lock file
+    * confirmed with `pixi list nemo_nowcast`
+  * change default env package pins from `*` to semver ranges
+    * `pixi upgrade --pinning-strategy semver`
+  * configured PyCharm:
+    * `pixi add pixi-pycharm`
+    * set `conda` executable to output of `pixi run 'echo $CONDA_PREFIX/libexec/conda'`
+    * renamed interpreter in PyCharm UI to `nemo-nowcast:default`
+  * added `test` feature based on `environment-test.yaml`
+    * `pixi add --feature test pytest pytest-cov pytest-randomly`
+    * no need to add `test` environment
+    * `pixi run -e test pytest` works
+    * `pixi task add -f test pytest "pytest"` shortens the incantation to `pixi run pytest`
+  * added `pytest-cov` and `pytest-cov-html` tasks
+    * `pixi task add -f test pytest-cov "pytest --cov=./"`
+    * `pixi task add -f test pytest-cov-html "pytest --cov=./ --cov-report html"`
+  * updated dev docs to use Pixi tasks to run tests and produce coverage reports
+  * added envs for Python 3.12 and 3.13 testing:
+    * relax Python version in default env from `"3.14.*"` to `"*"`
+    * `pixi add --feature py312 python=3.12`
+    * `pixi workspace environment add test-py312 --feature py312 --feature test`
+    * `pixi add --feature py313 python=3.13`
+    * `pixi workspace environment add test-py313 --feature py313 --feature test`
+  * added a `test-py314` env (even though it duplicates `test`) to make GHA explicit and consistent
+    * `pixi add --feature py314 python=3.14`
+    * `pixi workspace environment add test-py314 --feature py314 --feature test`
+  * added `prefix-dev/setup-pixi@*,` to allowed actions list in 43ravens org settings
+  * changed `pytest-with-coverage` workflow to use new reusable `pixi-pytest-with-coverage`
+    * force lock file update here because it always gets out of sync here
+
+
+
+#### Sat 14-Mar-2026
+
+##### NEMO_Nowcast
+
+* continued changing to use Pixi for package & env mgmt; PR#93
+  * added `docs` feature and env based on `environment-test.yaml` and `environment-rtd.yaml`
+    * `pixi add --feature docs mock pillow sphinx=8.1.3 sphinx-rtd-theme=3.0.0`
+    * `pixi add --feature docs --pypi commonmark recommonmark readthedocs-sphinx-ext`
+    * no need to add `docs` environment
+    * added tasks for common docs work:
+      * `pixi task add -f docs --cwd docs/ docs make clean html`
+      * `pixi task add -f docs --cwd docs/ linkcheck make clean linkcheck`
+  * updated dev docs to use Pixi tasks to build HTML docs and run link checker
+  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
+  * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
+  * deleted `envs/environment-rtd.yaml`
+  * deleted `envs/environment-test.yaml`
+
+Dinner at St. Lawrence
+
+
+#### Sun 15-Mar-2026
+
+##### NEMO_Nowcast
+
+* continued changing to use Pixi for package & env mgmt; PR#93
+  * added `dev` feature and env based on `environment-dev.yaml`
+    * `pixi add --feature dev black hatch pre-commit`
+    * `pixi workspace environment add dev --solve-group default --feature dev`
+    * `pixi add --feature dev black hatch pre-commit`  # to get version pins
+    * `pixi add --feature dev pytest pytest-cov pytest-randomly`
+    * `pixi add --feature dev sphinx=8.1.3 sphinx-rtd-theme=3.0.0`
+    * installed `pre-commit` to run from `dev` env
+      * `pixi run -e dev pre-commit install`
+  * changed PyCharm to use `nemo_nowcast:dev` interpreter/environment
+  * removed `nemo-nowcast` conda env from `khawla`
+  * updated dev docs re: use of Pixi
+  * dropped `environment-dev.yaml`
+  * moved `requirements.txt` from `envs/` to top level directory and deleted `envs/`
+  * added task to update `requirements.txt via`pip list`
+    * `pixi add -f dev pip`
+    * `pixi task add -f dev update-reqs "python -m pip list --format=freeze >> requirements.txt"`
+  * renamed `development.rst` to `pkg_development.rst`
+  * updated release process docs to use Pixi commands
+  * added Pixi badges to README and dev docs
+* released v26.1
+  * be sure to run `pixi update` after `hatch version` commands
+
+
+
 
 
 ##### `nibi` TODO
@@ -2617,15 +2908,12 @@ Snowfall started mid-morning
 
 ##### salishsea-site TODO
 
-* pin `supervisor>=4.3.0` to resolve `supervisor` `pkg_resources` API deprecation issue; PR# - squash-merged
-  * update `supervisor` in production env on `skookum`
 * SMELT link in nav bar has no target
 
 
 
 ##### NEMO-Cmd TODO
 
-* deal with DeprecationWarning from `cliff.commandmanager.CommandManager`
 * change default for `--queue-job-cmd` from `qsub` to `sbatch`
 * handle hard-coded 32 core/node; we need 192 core for new Alliance clusters
 
@@ -2654,7 +2942,6 @@ Snowfall started mid-morning
 
 ##### SalishSeaCmd TODO
 
-* deal with DeprecationWarning from `cliff.commandmanager.CommandManager`
 * update scaling tests on `narval` with `StdEnv/2023`
   * 100 Gb/s InfiniBand Mellanox HDR interconnect
   * Lustre file system
@@ -2703,6 +2990,7 @@ Snowfall started mid-morning
 
 ##### Reshapr TODO
 
+* update to allow `pandas>=3.0.0`
 * update "Iona wastewater discharge analysis" example docs:
   * remove requirement for multi-day run results to be split; we can handle month-long files now
   * change note about `split-results` to use `salishsea split-results` instead of nowcast worker
@@ -2723,8 +3011,13 @@ Snowfall started mid-morning
 
 
 
-* SalishSeaTools
-  * fix failing tests!!!
+##### SalishSeaTools TODO
+
+* fix failing tests!!!
+* update to allow `pandas>=3.0.0`
+* move `sqlalchemy` import to top of module
+  * make it part of package env and analysis-repo env
+* update library_code section in docs or move it to MOAD docs
 
 
 
@@ -2753,11 +3046,11 @@ Snowfall started mid-morning
   * SalishSeaCast/docs - done 14jan26 in PR#74
   * MOAD/docs - done 22jan26 in PR#62
   * SOG-Bloomcast-Ensemble - done 12feb26 in PR#100
+  * NEMO_Nowcast - done 12mar26 in PR#93
 
   * PythonNotes - started 3mar26 in PR#5
 
   * Reshapr
-  * NEMO_Nowcast
   * AtlantisCmd
   * moad_tools
   * tools/SalishSeaTools
@@ -2779,11 +3072,11 @@ Snowfall started mid-morning
   * gha-workflows - done 17dec25 in PR#82
   * SalishSeaCast/docs - done 14jan26 in PR#74
   * SOG-Bloomcast-Ensemble - done 12feb26 in PR#100
+  * NEMO_Nowcast - done 12mar26 in PR#93
 
   * PythonNotes - started 3mar26 in PR#5 (via migration to Pixi)
 
   * workflows available for testing:
-    * NEMO_Nowcast
     * moad_tools
     * tools/SalishSeaTools
     * SalishSeaNowcast
@@ -2837,14 +3130,6 @@ Snowfall started mid-morning
   * 2.26:
     * docs now on https://erddap.github.io/
     * `displayInfo` & `displayAttribute` tags that could be used for dataset citations on `data` pages
-
-
-##### SalishSeaTools
-
-* TODO:
-  * move `sqlalchemy` import to top of module
-    * make it part of package env and analysis-repo env
-* update library_code section in docs or move it to MOAD docs
 
 
 
