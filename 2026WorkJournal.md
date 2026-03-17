@@ -2902,10 +2902,46 @@ Voltech replaced end-of-life smoke alarms
 
 #### Tue 17-Mar-2026
 
+Worked at ESB while Rita was at home
 
 ##### SalishSeaCast
 
 * no river discharge obs for SnohomishMonroe
+* `crop_gribs 12` was delayed by 2h due to 1 unprocessed file
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* EOAS Colloquium; Julie Prytulak, Vanadium from Oceans to Ores
+* OS updates warned about low root partition memory
+  * cleaned up `/var/cache/apt/` re: nearly full `root` partition on `kudu`
+    * started with 13.0 GB in 3945 items
+    * ran `sudo apt autoclean`
+    * resulted in 10.5 GB in 3349 items
+    * flatpak cleanup:
+        <!-- markdownlint-disable MD031 -->
+        ```bash
+        flatpak update --appstream
+        flatpak update
+        flatpak uninstall --unused\
+        ```
+        <!-- markdownlint-enable MD031 -->
+    * deleted a bunch of old kernels with guidance from askubuntu
+      (<https://askubuntu.com/questions/345588/what-is-the-safest-way-to-clean-up-boot-partition>)
+        <!-- markdownlint-disable MD031 -->
+        ```bash
+        uname -r  # in-use kernel - **don't delete**
+        dpkg --list 'linux-image*' | grep ^ii  # installed kernels
+        sudo apt remove linux-image-VERSION  # remove all but in-use and previous kernels
+        sudo apt autoremove  # remove pkgs associated w/ removed kernels
+        ```
+        <!-- markdownlint-enable MD031 -->
+
+
+##### PythonNotes
+
+* continued writing 2026 version of pkgs & envs notebook/slides
 
 
 
