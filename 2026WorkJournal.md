@@ -2854,6 +2854,62 @@ Dinner at St. Lawrence
 
 
 
+### Week 12
+
+#### Mon 16-Mar-2026
+
+Voltech replaced end-of-life smoke alarms
+
+##### SalishSeaCast
+
+* `download_live_ocean` was delayed by ~2h
+
+
+##### Miscellaneous
+
+* email to Parker re: root CA issue for wateroffice
+  * I suspect that he has outdated (<22.04) OS on his server
+* email to Yayla re: her need to change from `xx:30:00` to `xx:00:00` in her REDDAP `curl` requests
+  * I can't reproduce her issue in Nov-2023
+
+
+##### Security Updates
+
+* Squash-merged `dependabot` PR to update `pyopenssl` to 26.0.0 re: CVE-2026-27448 re: TLS connection
+  bypass via unhandled callback exception vulnerability
+  * cookiecutter-analysis-repo
+  * cookiecutter-MOAD-pypkg
+* Squash-merged `pre-commit` PR to update `black` to 26.3.1 re: bug fixe
+  * NEMO_Nowcast
+
+
+##### SOG-Bloomcast-Ensemble
+
+* refactored `super().__init__()` calls for all classes; PR#110 - squash-merged
+* refactored `rivers` module; PR#112:
+  * changed to f-strings
+  * started changing to get river discharge data from `/data/dlatorne/SOG-projects/SOG-forcing/ECget/*_flow`
+    files instead of scraping the `wateroffice.ec.gc.ca` pages
+    * re: issue #73 and recent late-January offset in Englishman River obs
+    * added `rivers.date_range()` method to replace `rivers._date_params()`
+    * added ECget files paths for Fraser and Englishman to config
+    * removed config elements that were used to get data from wateroffice.ec.gc.ca
+    * updated `rivers.get_river_date()` to read from ECget files (that SalishSeaCast now maintains)
+    * refactored `rivers.process_data()` to handle obs from ECget files
+    * deployed branch on `salish` for a test run; produced bloom date of 20mar
+
+
+
+#### Tue 17-Mar-2026
+
+
+##### SalishSeaCast
+
+* no river discharge obs for SnohomishMonroe
+
+
+
+
 
 
 ##### `nibi` TODO
