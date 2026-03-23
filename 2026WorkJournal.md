@@ -2908,6 +2908,10 @@ Worked at ESB while Rita was at home
 
 * no river discharge obs for SnohomishMonroe
 * `crop_gribs 12` was delayed by 2h due to 1 unprocessed file
+* `crop_gribs 18` timed out at 16:44 with 528 unprocessed file
+  * no files downloaded by `sarracenia` nor available on `hpfx` nor `dd`
+  * started another `crop_gribs 18` at ~18:05
+  * email from Sandrine at ~19:10 saying that there had been a major HPC storage failure
 
 
 ##### Miscellaneous
@@ -2939,12 +2943,114 @@ Worked at ESB while Rita was at home
         <!-- markdownlint-enable MD031 -->
 
 
+
+#### Wed 18-Mar-2026
+
+##### SalishSeaCast
+
+* `crop_gribs 18` timed out at ~02:05 with 528 files unprocessed
+* email from Sandrine at 03:40 saying that HRDPS outage issue was resolved
+* `collect_weather 18 2.5km 2026-03-17` finished at ~06:40
+* `collect_weather 00 2.5km` and `crop_gribs 00` finished at ~07:10
+* `collect_weather 06 2.5km` and `crop_gribs 06` finished at ~07:40
+* `forecast2` runs started at ~07:41
+* manually ran `crop_gribs 18 --backfill 2026-03-17`
+* `forecast2` runs finished at ~08:40
+* `crop_gribs 12` stalled with 1 file unprocessed
+  * without intervention it will stall automation until ~15:40
+  * decided to not intervene
+* `crop_gribs 18` stalled with 1 file unprocessed
+
+
+
+#### Thu 19-Mar-2026
+
+##### Miscellaneous
+
+* email from Rhian Evans at UTAS Australia re: datasets from ERDDAP for krill research
+  * follow-up from Apr-2025
+  * 15-20 minutes per day of full depth (Whole domain, I presume)
+  * Susan suggests we publish day averaged fields on ERDDAP
+* Phys Ocgy seminar
+  * Yayla Sezginer, CIOOS, Real-time OA & Hypoxia Monitoring App
+
+
+##### SalishSeaCast
+
+* `get_onc_ctd` and 18mar26 comparison plot for ONC central node failed due to no data
+  * probably due to maintenance cruise operations
+* no obs for Nisqually River
+
+
+##### Security Updates
+
+* Squash-merged dependabot PR to update `pypdf` to 6.9.1 re: CVE-2026-33123 re: long runtimes and/or
+  large memory usage vulnerability
+  * SalishSeaNowcast
+* Squash-merged `pre-commit` PRs to update `black` to 26.3.1 re: bug fixe
+  * erddap-datasets
+  * SalishSeaTools
+  * SalishSeaCmd
+  * MoaceanParcels
+  * cookiecutter-MOAD-pypkg
+  * gha-workflows
+  * moad_tools
+  * SalishSeaNowcast
+  * NEMO-Cmd
+  * AtlantisCmd
+  * salishsea-site
+  * Reshapr
+
+
+##### 2026 Bloomcast
+
+* removed 5mar lines from bloomcast evolution file
+
+
+##### erddap-datasets
+
+* started work on publishing day-avg datasets:
+  * physics
+
+
+##### Atlantis
+
+* mtg w/ Raisha, Susan & Beth re: recent Atlantis runs failure issue
+
+
+
+#### Fri 20-Mar-2026
+
+##### SalishSeaCast
+
+* `get_onc_ctd` for both ONC central and east nodes failed due to no data
+  * probably due to maintenance cruise operations
+
+
+##### SOG-Bloomcast-Ensemble
+
+* finished refactoring `rivers` module; PR#112 - squash-merged
+  * updated `test_rivers` to reflect `rivers` module changes
+  * deployed to `salish`
+* fixed Pixi path in `cronjob.sh`; PR#113 - squash-merged
+
+
 ##### PythonNotes
 
 * continued writing 2026 version of pkgs & envs notebook/slides
 
 
 
+
+
+
+##### erddap-datasets TODO
+
+* publish day-avg datasets:
+  * physics
+  * biology
+  * chemistry
+  * PAR & turbidity
 
 
 
