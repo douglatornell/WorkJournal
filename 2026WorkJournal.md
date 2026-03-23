@@ -3041,6 +3041,139 @@ Worked at ESB while Rita was at home
 
 
 
+#### Sat 21-Mar-2025
+
+##### PyCascades
+
+* Opening
+  * CO2 monitoring array
+* Permacomputing & Python; Łukasz Langa
+  * moving to back Vancouver soon; joining Meta again to facilitate because PSF can't employ him in
+    Canada
+  * permaculture
+  * `conch` shell
+  * `bitrot` package
+  * textbundle? for notes
+    * fsnotes?
+  * Python free-threading may be the default in 2028
+  * packaging:
+    * ci-build-wheel
+    * b-ware for android
+  * as a consumer:
+    * keep and test backups
+    * own hardware, software and data
+    * choose repairable products
+    * cull subscriptions
+  * as a developer
+    * use newest Python
+    * use trivial data formats
+    * don't over use LLMs
+    * keep things offline to avoid cert expiry issues
+    * support Python
+* Climbing out of Fixture Hell, Indirectly; Sammie Jiang
+  * `indirect=True` parameter of `mark.parameterize()`
+  * `request.param`
+  * test describes what it needs, fixture describes how to build it
+    * but can lead to a fixture maze
+  * scope confusion:
+* Graceful Deletes, Queues, Tasks & Distributed State Mgmt, Chantel Chan & Tazim Mokammel
+  * Cohere, North project (agent platform)
+  * Inngest event-driven durable execution platform
+* Anti-Patterns in A/B Testing, Stephen Pettinato
+* No More Spreadsheets: Buidling PyLadiesCon Infrastructure with Python & DJango, Mariatta
+* The Future of Python: Evolution or Succession, Brett Slatkin
+  * languages live for ~25 years; Python is 35
+  * limitation
+    * performance, straight-line and multi-core
+    * optional typing
+    * lack of extensibility
+  * PEP 638: Syntactic Macros
+    * extend Python in Python
+  * Future:
+    * we've done it once: Python 3
+    * performance
+    * parallelism
+    * types
+    * macros
+    * automated porting via AI tools and agents
+  * Existential Crisis
+    * do we need programming languages in the age of AI?
+      * human language will never be precise enough
+* Airflow Between the Cloud: Python Workflows at the Edge, Constance Martineau
+  * Airflow is a Python workflow orchestrator; cron on steroids
+  * Edge Executor
+    * workers poll for tasks via HTTPS
+* To Notebook or Not To Notebook: Multilingual Workflows, Rodrigo Silva Ferreira, Posit (new name of RStudio)
+  * Quarto; alternative to Jupyter
+  * Deepnote
+  * Marimo
+  * Positron IDE (open source product of Posit PBC)
+* Getting Started with Open Source Contribution, Stefanie Molin
+  * stefaniemolin.com
+  * numpydoc pre-commit hook maintainer
+  * suitability of projects to contribute to considerations:
+    * license
+    * recent activity; spectrum from abandoned to extremely active
+    * codebase size
+    * tech stack
+    * repo access
+  * how to get involved
+    * sprints
+      * pre-commit cascade to other projects story
+      * pick an interesting project
+      * look for projects that support beginners
+    * contribute to documentation
+    * browse open issues
+      * don't disregard old issues, but confirm that they are still of interest
+      * search for meta-issues
+    * report a bug
+    * make a feature request
+* Variables & Objects in Python: It's pointers all the say down, Trey Hunner
+* vendors/sponsors
+  * Meta: Pyrefly IDE extension
+  * GitButler: Git visualization tool by Git/GitHub devs
+
+
+#### Sun 22-Mar-2025
+
+##### SalishSeaCast
+
+* `crop_gribs 12` delayed runs by ~2h due to 1 unprocessed file
+
+
+##### PyCascades
+
+* Opening
+* Python Stings your Ego: Finding Pride in Community, Not Just Code; Emmanuel Ugwu
+* Am I Ready to be a Senior Engineer, Michelle Brenner
+* There and Back Again - but by I-5 or the ferry, Justin Castillia
+  * MCP and agents on Elastic for planning trips from West Seattle
+* When the Baby App Crashed: Coding for Chaos (and Parenthood); Laura Meng
+* More. Better. Mario Munoz
+* A bridge over (not) troubled waters: Collecting marine data from your couch; Sarah Kaiser & Cassandra Granade
+  * home brew chart plotter powered by RaspPy
+  * Signal K, Zigbee, ESP32 home, zigbee2mqtt
+  * Home Assistant
+  * Tailscale VPN
+  * Meshtastic open source mesh network
+* Creating Music with Python; Herve Viho Aniglo
+  * JythonMusic
+* Visual Unit Tests & Live Coding, Don Kirkby
+  * matplotlib has `@check_figures_equal` decorator that is useful for testing against reference
+    figures
+* Introducing T-strings, F-strings with superpowers, Dave Peck
+  * PEP 750
+  * make f-strings safer and more flexible
+  * eager eval of values in `{}`
+  * t-strings are not in strings, they are `string.templatelib.Template`
+  * t-strings are useful for:
+    * trusted/untrusted content
+    * grammars
+  * code that processes t-strings gets to decide what to do with interpolations
+  * `tdom` is HTML templating library built on t-strings, but it's pre-alpha
+
+
+
 
 
 
