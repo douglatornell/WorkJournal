@@ -3174,6 +3174,66 @@ Worked at ESB while Rita was at home
 
 
 
+### Week 13
+
+#### Mon 23-Mar-2026
+
+##### SalishSeaCast
+
+* `collect_river_data Fraser` failed due to obs gap from 21marT07:15 to 23marT12:00
+  * caused `make_201702_runoff_file` failure which caused symlinking from 21mar in `upload_forcing`
+
+
+##### Miscellaneous
+
+* ERDDAP showcase:
+  * `erddapy`, Filipe Pires Alavarenga Fernandes (ocefpaf)
+    * can be used as engine in `xarray` provided response requested is netCDF-like
+      * allows reading `tabledap` datasets
+      * also handles filter parameters
+    * https://hackmd.io/@iKjr9f0pTj6CZO1DZOjJyw/S1v8jmeqbg#/
+  * `positron`, Roy Mendelssohn
+    * https://positron.posit.co/
+    * https://positron.posit.co/assistant.html
+    * https://positron.posit.co/databot.html
+    * https://gist.github.com/rmendels/d295bff8c305f3478d25ab9d2f81f178 (prompts)
+    * new IDE from Posit (formerly RStudio)
+      * based on VSCode
+      * positron assistant demo with a collection of prepared prompts to Claude Sonnet 4.6
+* tried to understand why Tall's jobs on `nibi` are queued for so long
+  * `sinfo -s | head -1 && sinfo -s | rg cpubase` shows that `bynode` and `bycore` are the same
+    pools of 685 nodes
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    squeue -o "%.18i %.8u %.15a %.20j %.2t %.9r %.19S %.10M %.10L %.6D %.5C %.8N %.30P %.10p" | head -1 && \
+    squeue -o "%.18i %.8u %.15a %.20j %.2t %.9r %.19S %.10M %.10L %.6D %.5C %.8N %.30P %.10p" \
+    --states R --sort=-p | rg cpubase_bynode
+    ```
+    <!-- markdownlint-enable MD031 -->
+    shows that there are only 8 full-node jobs running; there are 169 queued
+    * in contrast, there are 11858 by-core jobs running with another 7944 queued
+* tested `ruff` in `NEMO-Cmd`
+  * `ruff format` produced no surprises; no massive reformatting
+  * `ruff check` found 12 issues; many intentional things that I would ignore with `#noqa:`
+  * advantages:
+    * faster, so smaller CI footprint
+    * `ruff check` in `pre-commit` would be stricter than PyCharm
+  * decision:
+    * probably less churn than I expected
+    * no need to rush; wait to see how OpenAI acquisition of Astral pans out
+
+
+##### Security Updates
+
+* Squash-merged dependabot PRs to update codecov-action to 5.5.3 re: dependency updates & bug fixes
+  * SalishSeaNowcast
+  * gha-workflows
+  * AtlantisCmd
+
+
+
+
+
 
 
 
