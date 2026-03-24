@@ -3232,6 +3232,62 @@ Worked at ESB while Rita was at home
 
 
 
+#### Tue 24-Mar-2026
+
+Worked at ESB
+
+##### Miscellaneous
+
+* CROCODILE: Tools for rapidly deploying MOM6 regional domains in the Community Earth System Model
+  * Speakers: Dan Amrhein and Manish Venumuddula (University Corporation for Atmospheric Research)
+  * GitHub
+  * tools in earth system models that can be applied to regional modelling
+    * cyber-infrastructure
+  * automate upfront work:
+    * grids, boundary conditions, obs, executable
+    * "build the chassis"
+    * `CrocoDash`
+      * Jupyter dashboard
+        * grid generations
+        * bathymetry:
+          * GEBCO global high resolution dataset
+          * explainable bathy editing
+        * vertical grid
+        * model configuration:
+          * not YAML, but like what we do in `SalishSeaCmd`
+        * forcing files from CESM:
+          * boundary conditions
+          * surface forcing
+          * runoff
+          * tides
+      * shareable configurations
+      * reminds me of NEMO relocatable model presentation from a year or 2 ago
+      * will probably contribute to poorly informed modeling like Susan saw at Ocean Sciences re:
+        alkalinity injection
+  * `CrocoLake`
+    * cloud-optimized observations
+    * tools for fast model/obs comparisons
+    * "gateway drug to model assimilation"
+  * features roadmap
+    * extend to CICE
+    * integrate WW3 (coupling exists because CESM)
+    * cycling data assimilation
+    * region MOM6 diagnostics
+    * automatic downscaling from global ESMs
+    * AI emulation
+  * workshop last week of Sep
+* commented on https://github.com/MetPX/sarracenia/discussions/1623 re: use of f-strings in sarracenia
+  logging messages
+* email to Mark Hahn re: our inability to get `nibi` usage close to our rrg cores allocation
+  * Susan showed me https://portal.alliancecan.ca/slurm/?system=%22nibi%22&metric=%22cpu%22 usage page
+
+
+##### Security Updates
+
+* Squash-merged `dependabot` PR to update `pyopenssl` to 26.0.0 re: CVE-2026-27448 re: TLS connection
+  bypass via unhandled callback exception vulnerability
+  * cookiecutter-djl-pypkg
+
 
 
 
