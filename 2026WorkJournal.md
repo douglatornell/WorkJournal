@@ -2829,7 +2829,7 @@ Dinner at St. Lawrence
 
 ##### NEMO_Nowcast
 
-* continued changing to use Pixi for package & env mgmt; PR#93
+* finished changing to use Pixi for package & env mgmt; PR#93
   * added `dev` feature and env based on `environment-dev.yaml`
     * `pixi add --feature dev black hatch pre-commit`
     * `pixi workspace environment add dev --solve-group default --feature dev`
@@ -3290,6 +3290,327 @@ Worked at ESB
 
 
 
+#### Wed 25-Mar-2026
+
+##### SalishSeaCast
+
+* confirmed that there is no Fraser discharge obs on wateroffice site for 22mar
+  * copied 21mar line to persist it to 22mar
+* `make_forcing_links ssh` timed out after 1h at ~10:05
+  * re-ran manually at ~11:35
+
+
+##### Miscellaneous
+
+* checked on `nibi`
+  * 1 of Tall's jobs ran overnight but too almost 2x normal time
+    * next one is scheduled to start 26marT13:28
+  * share of bynode jobs is a little looking better
+  * email to Mark bounced
+
+
+##### PythonNotes
+
+* finished draft of 2026 version of pkgs & envs notebook/slides
+
+
+
+#### Thu 26-Mar-2026
+
+##### SalishSeaCast
+
+* discovered that `download_results arbutus nowcast` also failed yesterday
+  * re-ran manually
+
+
+##### Miscellaneous
+
+* checked on `nibi`
+  * next Tall job scheduled to start 26marT19:50 Eastern
+  * share of bynode jobs is better
+  * cores allocated/used: 93k/65k, down from 134k/117.5k on 22mar
+  * resent email to Mark
+
+
+##### `nibi`
+
+* ran 31d test on 2 nodes with 21x37 decomposition and `#SBATCH --switches=1` directive
+  * insta-run; 4h28m15s or ~1h slower than sep2025 benchmarks
+
+
+##### Security Updates
+
+* Squash-merged dependabot PR to update `pypdf` to 6.9.2 re: CVE-2026-33699 re: infinite loop
+  vulnerability
+  * SalishSeaNowcast
+
+
+
+#### Fri 27-Mar-2026
+
+##### Miscellaneous
+
+* checked on `nibi`
+  * commands:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    alias sqp='squeue -o "%.18i %.8u %.15a %.20j %.2t %.9r %.19S %.10M %.10L %.6D %.5C %.8N %.30P %.10p" --sort=-p'
+    sinfo -s | head -1 && sinfo -s | rg cpubase
+    sqp --states R | head -1 && sqp --states R | rg cpubase_bynode
+    sqp --states R | rg cpubase_bynode | wc -l
+    sqp --states PD | rg cpubase_bynode | wc -l
+    sqp --states R | rg cpubase_bycore | wc -l
+    sqp --states PD | rg cpubase_bycore | wc -l
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * bynode jobs running/queued: 49/164, up from 38/138 yesterday
+  * bycore jobs running/queued: 8867/17871, up from 5735/8213
+  * cores allocated/used: 105k/79k, up from 93k/65k yesterday
+  * Tall's 01mar10 job got insta-run after 01feb10 took 6h10m12s
+  * reply from Mark:
+    * he thinks that 12h walltime requests are short-ish
+    * dependent jobs are not considered by the scheduler until they become eligible
+    * he's curious about the shape of our jobs:
+      * why 189 + 1?
+      * can we use multiple nodes?
+    * "Any period in which you don't have an eligible job pending is lost opportunity"
+      * that suggests we should "complete" with ourselves to ensure that there are always eligible jobs
+    * bynode vs. bycore balance is due to demand, not policy
+    * recommendations:
+      * concurrent jobs chains to ensure enough eligibility to use 298 cores
+      * longer job durations
+    * how did we arrive at whole node use?
+      * he guesses cpu efficiency because it's not memory efficient
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 1/47
+    * b2 (<=12h) running/queued: 8/19
+    * b3 (<=24h) running/queued: 7/11
+    * b4 (<=72h) running/queued: 10/45
+    * b5 (<=168h) running/queued: 20/36
+* updated Pycharm to 2025.3.4 on `khawla`
+
+
+##### SalishSeaCast
+
+* no obs for Greenwater River
+
+
+##### Security Updates
+
+* Squash-merged `dependabot` PRs to update `requests` to 2.33.0 re: CVE-2026-25645 re: insecure temp file reuse
+  vulnerability
+  * Reshapr
+  * SalishSeaCmd
+  * SalishSeaTools
+  * SalishSeaNowcast
+  * moad_tools
+  * NEMO_Nowcast
+  * ECget
+  * SOG-Bloomcast-Ensemble
+  * cookiecutter-MOAD-pypkg
+  * cookiecutter-analysis-repo
+  * salishsea-site
+  * SalishSeaCast/docs
+  * FUN
+  * AtlantisCmd
+  * MOAD/docs
+  * NEMO-Cmd
+  * MoaceanParcels
+* Squash-merged `dependabot` PR to update `cryptography` to 46.0.6 re: CVE-2026-34073 re:
+  incomplete DNS name constraint enforcement on peer names issue
+  * NEMO-Cmd
+
+
+##### NEMO-Cmd
+
+* researched using `pavelzw/pixi-diff-to-markdown` to update lock files via PRs as an alternative to
+  `dependabot`
+  * tested it; PR#137 - squash-merged:
+    * set SalishSeaCast > Settings > Actions > General > Allow GitHub Actions to create and approve pull requests
+    * added `peter-evans/create-pull-request@*` to SalishSeaCast > Settings > Actions > General > Allow specified workflows
+    * added `update-pixi-lockfile.yaml`
+    * had to merge PR to be able to test workflow
+    * had to add `pixi global install pixi-diff-to-markdown` to the "Update lockfile" step
+    * manual workflow run generated PR#139 - squash-merged
+      * tested branch locally before merging
+    * interestingly, the `cryptography` update that `dependabot` generated today wasn't included in
+      the Pixi lock file update, presumably because the build isn't on conda-forge yet
+  * do I actually care to be notified of security vulnerabilities?
+
+
+
+#### Sat 28-Mar-2026
+
+##### Miscellaneous
+
+
+* checked on `nibi`
+  * power outage
+
+
+##### SalishSeaCast
+
+* `download_results nowcast-green` was extremely slow
+  * finished at ~22:37
+
+
+##### AtlantisCmd
+
+* updated milestone v25.2 to v26.1 on GitHub because auto-milestone workflow doesn't work for overdue
+  milestones
+* started changing to use Pixi for package & env mgmt; PR#108
+  * edit `pyproject.toml` to prepare:
+    * change `license-files = { paths = ["LICENSE"] }` to `license-files = [ "LICENSE" ]`
+  * `pixi init` to add `[tool.pixi.*]` tables to `pyproject.toml`
+  * `pixi workspace platform add linux-64 osx-64 win-64`
+  * move Pixi environments additions in `.gitignore`
+  * add `,gitattributes` to VCS
+  * edit `envs/environment-dev.yaml` to hide `nodefaults` channel and dev packages
+  * `pixi import -e default --format conda-env envs/environment-dev.yaml` to get minimal packages in
+    `default` environment
+    * dropped `pip` from `pixi.workspace.dependencies` because we'll add it to `dev` environment
+  * `pixi install` created the env and the lock file
+    * confirmed with `pixi list atlantiscmd`
+  * change default env package pins from `*` to semver ranges
+    * `pixi upgrade --pinning-strategy semver`
+  * had to manually add `nemo-cmd = { git = "https://github.com/SalishSeaCast/NEMO-Cmd.git" }` to
+    `[tool.pixi.pypi-dependencies]`
+    * alternative was to set `tool.hatch.metadata.allow-direct-references` to `true` which resulted
+      in `nemo-cmd` being added to `project.dependencies`, not `tool.pixi.pypi-dependencies`
+  * configured PyCharm:
+    * `pixi add pixi-pycharm`
+    * set `conda` executable to output of `pixi run 'echo $CONDA_PREFIX/libexec/conda'`
+    * renamed interpreter in PyCharm UI to `atlantis-cmd:default`
+  * added `test` feature based on `environment-test.yaml`
+    * `pixi add --feature test pytest pytest-cov pytest-randomly --pinning-strategy semver`
+    * `pixi workspace environment add -f test --solve-group default test`
+    * `pixi run -e test pytest` works
+    * `pixi task add -f test pytest "pytest"` shortens the incantation to `pixi run pytest`
+  * added `pytest-cov` and `pytest-cov-html` tasks
+    * added `omit = [ ".pixi/*" ]` to `tool.coverage.run`
+    * `pixi task add -f test pytest-cov "pytest --cov=./"`
+    * `pixi task add -f test pytest-cov-html "pytest --cov=./ --cov-report html"`
+  * updated dev docs to use Pixi tasks to run tests and produce coverage reports
+  * added a `test-py314` env (even though it duplicates `test`) to make GHA explicit and consistent
+    * `pixi add --feature py314 python=3.14`
+    * `pixi workspace environment add test-py314 --feature py314 --feature test`
+  * added `prefix-dev/setup-pixi@*,` to allowed actions list in SS-Atlantis org settings
+  * changed `pytest-with-coverage` workflow to use `prefix.dev/setup-pixi` instead of reusable workflow
+    because AtlantisCmd has special needs for running `pytest`
+    * force lock file update here because it always gets out of sync here
+  * added `docs` feature and env based on `environment-test.yaml` and `environment-rtd.yaml`
+    * `pixi add --feature docs mock pillow`
+    * `pixi workspace environment add -f docs --solve-group default docs`
+    * `pixi add --feature docs mock pillow  --pinning-strategy semver`
+    * `pixi add --feature docs sphinx=8.1.3 sphinx-rtd-theme=3.0.0`
+    * `pixi add --feature docs --pypi commonmark recommonmark readthedocs-sphinx-ext --pinning-strategy semver`
+    * added tasks for common docs work:
+      * `pixi task add -f docs --cwd docs/ docs make clean html`
+      * `pixi task add -f docs --cwd docs/ linkcheck make clean linkcheck`
+  * updated dev docs to use Pixi tasks to build HTML docs and run link checker
+  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
+
+
+
+#### Sun 29-Mar-2026
+
+##### Miscellaneous
+
+* checked on `nibi`
+  * compute nodes came back online at ~22:30 UTC yesterday
+    * All jobs that were running before the power outage failed. Job queue was preserved
+  * bynode jobs running/queued: 215/107, up/down from 49/164 on Friday
+  * bycore jobs running/queued: 5388/7799, down from 8867/17871 on Friday
+  * cores allocated/used: 125k/72k, up/down from 105k/79k on Friday
+
+
+##### analysis-cookiecutter-repo
+
+* started changing to Pixi based on 26feb work in Glasgow; PR#49
+  * added Pixi environments lines to cookiecutter `.gitignore`
+    <!-- markdownlint-disable MD031 -->
+    ```gitignore
+    # pixi environments
+    .pixi/*
+    !.pixi/config.toml
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * added cookiecutter `.gitattributes` file
+  * added cookiecutter `pixi.toml` file
+    * `workspace.authors` and `workspace.name` use template variables
+
+  * drop
+    * `notebooks/environments.yaml`
+    * `envs/environments.yaml`
+    * `envs/requirements.txt`
+    * `envs/`
+  * add GHA `pixi-update-lockfile` workflow
+  * update MOAD "Analysis Repositories" docs section
+
+
+##### PythonNotes
+
+* reviewed slides with Susan
+  * add example of a stdlib module
+    * `copy`, `importlib`, `datetime`
+  * change module example to `salishsea_tools.viztools ` re: `set_aspect()`
+  * drop early mention of lock files
+  * rework/split terminology slide
+  * do you need to run `pixi install` after `add` or `remove`? No
+  * move some stuff to "extra" slides:
+
+
+
+
+
+
+
+
+
+##### AtlantisCmd
+
+* continued changing to use Pixi for package & env mgmt; PR#108
+
+  * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
+  * deleted `envs/environment-rtd.yaml`
+  * deleted `envs/environment-test.yaml`
+  * added `dev` feature and env based on `environment-dev.yaml`
+    * `pixi add --feature dev black hatch pre-commit`
+    * `pixi workspace environment add dev --solve-group default --feature dev`
+    * `pixi add --feature dev black hatch pre-commit`  # to get version pins
+    * `pixi add --feature dev pytest pytest-cov pytest-randomly`
+    * `pixi add --feature dev sphinx=8.1.3 sphinx-rtd-theme=3.0.0`
+    * installed `pre-commit` to run from `dev` env
+      * `pixi run -e dev pre-commit install`
+  * changed PyCharm to use `atlantis-cmd:dev` interpreter/environment
+  * removed `nemo-nowcast` conda env from `khawla`
+  * updated dev docs re: use of Pixi
+  * dropped `environment-dev.yaml`
+  * moved `requirements.txt` from `envs/` to top level directory and deleted `envs/`
+  * added task to update `requirements.txt via`pip list`
+    * `pixi add -f dev pip`
+    * `pixi task add -f dev update-reqs "python -m pip list --format=freeze >> requirements.txt"`
+  * updated release process docs to use Pixi commands
+  * added Pixi badges to README and dev docs
+* released v26.1
+  * be sure to run `pixi update` after `hatch version` commands
+
+
+
+
+
+
+
+
+##### salishsea-site TODO
+
+* update https://salishsea.eos.ubc.ca/nemo/ page
+  * Project Team list
+    * people
+    * King County funding
+  * maybe Evaluation section
+* SMELT link in nav bar has no target
+
 
 
 
@@ -3303,28 +3624,16 @@ Worked at ESB
 
 
 
-##### `nibi` TODO
-
-* test multi-node runs with `#SBATCH --switches=1` directive
-
-
-
 ##### analysis-cookiecutter-repo TODO
 
-* add Pixi environments lines to `.gitignore`
-  <!-- markdownlint-disable MD031 -->
-  ```gitignore
-  # pixi environments
-  .pixi/*
-  !.pixi/config.toml
-  ```
-  <!-- markdownlint-enable MD031 -->
-* add `.gitattributes` file
-* add `pixi.toml` file
-  * `workspace.authors` and `workspace.name` need to be template variables
-* drop `notebooks/environments.yaml`
-
-
+* started in PR#49
+  * drop
+    * `notebooks/environments.yaml`
+    * `envs/environments.yaml`
+    * `envs/requirements.txt`
+    * `envs/`
+  * add GHA `pixi-update-lockfile` workflow
+  * update MOAD "Analysis Repositories" docs section
 
 
 
@@ -3353,12 +3662,6 @@ Worked at ESB
 
 
 
-##### salishsea-site TODO
-
-* SMELT link in nav bar has no target
-
-
-
 ##### NEMO-Cmd TODO
 
 * change default for `--queue-job-cmd` from `qsub` to `sbatch`
@@ -3368,6 +3671,11 @@ Worked at ESB
 
 ##### SalishSeaNowcast TODO
 
+* drop 201702 runoff file processing:
+  * no longer run `make_201702_runoff_file` worker
+  * no longer create `R201702DFraCElse_{:y%Ym%md%d}.nc` files
+  * no longer upload those files to `arbutus`, `nibi`, `optimum`, or `orcinus`
+  * delete the `make_201702_runoff_file` worker and its test suite code
 * `polar.ncep.noaa.gov` sometimes refuses connections from GHA `sphinx linkcheck`
 * `FutureWarning` re: default value change for `compat` from `compat='no_conflicts'` to `compat='override'`
   in `xarray.combine_by_coords()`; issue#390
@@ -3495,10 +3803,11 @@ Worked at ESB
   * SOG-Bloomcast-Ensemble - done 12feb26 in PR#100
   * NEMO_Nowcast - done 12mar26 in PR#93
 
+  * AtlantisCmd - started 28mar26 in PR#108
   * PythonNotes - started 3mar26 in PR#5
+  * cookiecutter-analysis-repo - started 29mar26 in PR#49
 
   * Reshapr
-  * AtlantisCmd
   * moad_tools
   * tools/SalishSeaTools
   * SalishSeaNowcast
@@ -3522,6 +3831,7 @@ Worked at ESB
   * NEMO_Nowcast - done 12mar26 in PR#93
 
   * PythonNotes - started 3mar26 in PR#5 (via migration to Pixi)
+  * cookiecutter-analysis-repo - started 29mar26 in PR#49 (via migration to Pixi)
 
   * workflows available for testing:
     * moad_tools
