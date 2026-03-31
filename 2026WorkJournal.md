@@ -3633,6 +3633,17 @@ Worked at ESB
 
 
 
+#### Tue 31-Mar-2026
+
+Worked at ESB while Rita is at home
+
+##### Miscellaneous
+
+* met w/ Becca re: starting runs on HPC
+  * TODO: figure out restart file frequency control in namelist.time
+
+
+
 
 
 
