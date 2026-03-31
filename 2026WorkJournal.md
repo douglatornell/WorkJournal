@@ -3561,6 +3561,87 @@ Worked at ESB
 
 
 
+### Week 14
+
+#### Mon 30-Mar-2026
+
+##### PythonNotes
+
+* continued polishing slides
+
+
+##### 2026 Bloomcast
+
+* discovered that runs have been failing since 24mar due to unchanged wind data date each day
+  * caused by comments in Fraser obs file being included in bloomcast `raw_date`
+  * fixed in PR#116
+
+
+##### Security Updates
+
+* Squash-merged `dependabot` PRs to update `cryptography` to 46.0.6 re: CVE-2026-34073 re:
+  incomplete DNS name constraint enforcement on peer names issue
+  * FUN
+  * SalishSeaTools
+  * SalishSeaNowcast
+  * SOG-Bloomcast-Ensemble
+  * cookiecutter-MOAD-pypkg
+  * salishsea-site
+  * moad_tools
+  * SalishSeaCmd
+  * Reshapr
+  * NEMO_Nowcast
+* Squash-merged `dependabot` PRs to update `codecov-action` to 6.0.0 re: node24 support
+  * SalishSeaNowcast
+  * gha-workflows
+* Squash-merged `dependabot` PRs to update `setup-micromamba` to 3.0.0 re: node24 support
+  * SalishSeaNowcast
+  * erddap-datasets
+  * rwhite/numeric_2024
+  * moad_tools
+  * gha-workflows
+  * salishsea-site
+* Squash-merged `dependabot` PR to update `setup-pixi` to 0.94 re: feature updates
+  * NEMO-Cmd
+
+
+##### analysis-cookiecutter-repo
+
+* continued changing to Pixi; PR#49
+  * tested the work so far:
+    * cloned empty `SalishSeaCast/analysis-pixi` repo to `MOAD/` as `analysis-pixi`
+    * ran `cookiecutter` in temporary Pixi workspace with:
+      * `pixi exec cookiecutter -f gh:UBC-MOAD/cookiecutter-analysis-repo --checkout pixi`
+      * `cd analysis-pixi; pixi install` revealed that the is no build of `cmd2` for the `osx-arm64`
+        platform
+        * removed `osx-arm64` platform from cookiecutter `pxi.toml` and tested again successfully
+  * dropped
+    * `notebooks/environments.yaml`
+    * `envs/environments.yaml`
+    * `envs/requirements.txt`
+    * `envs/`
+  * cleaned up the temporary Pixi workspace with:
+    * `pixi clean cache --exec`
+  * set SalishSeaCast > Settings > Actions > General > Allow GitHub Actions to create and approve pull requests
+  * added `peter-evans/create-pull-request@*` to UBC-MOAD > Settings > Actions > General > Allow specified workflows
+
+
+##### MOAD/docs
+
+* started to update MOAD "Analysis Repositories" docs section
+* posted vote on #moad-python-notes for importance of laptop instructions for repos
+
+
+
+
+
+
+
+##### analysis-cookiecutter-repo TODO
+
+`* Squash-merged `dependabot` PR to update `cryptography` to 46.0.6 re: CVE-2026-34073 re:
+  incomplete DNS name constraint enforcement on peer names issue
+
 
 
 
@@ -3594,6 +3675,10 @@ Worked at ESB
   * added Pixi badges to README and dev docs
 * released v26.1
   * be sure to run `pixi update` after `hatch version` commands
+* Squash-merged `dependabot` PR to update `cryptography` to 46.0.6 re: CVE-2026-34073 re:
+  incomplete DNS name constraint enforcement on peer names issue
+* Squash-merged `dependabot` PR to update `codecov-action` to 6.0.0 re: node24 support
+* Squash-merged `dependabot` PRs to update `setup-micromamba` to 3.0.0 re: node24 support
 
 
 
@@ -3622,18 +3707,6 @@ Worked at ESB
   * chemistry
   * PAR & turbidity
 
-
-
-##### analysis-cookiecutter-repo TODO
-
-* started in PR#49
-  * drop
-    * `notebooks/environments.yaml`
-    * `envs/environments.yaml`
-    * `envs/requirements.txt`
-    * `envs/`
-  * add GHA `pixi-update-lockfile` workflow
-  * update MOAD "Analysis Repositories" docs section
 
 
 
