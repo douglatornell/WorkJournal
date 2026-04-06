@@ -2347,7 +2347,7 @@ tmux new -n minecraft-server
   * copied `minihud.json` and `tweakeroo.json` from 1.21.10 instance `config/`
   * installed Vanilla Tweaks resource packs:
     * iron bars fix is not required after 1.21.5
-    * no changes kin lower shield and redstone devices packs, so re-used the ones from 1.21.10
+    * no changes in lower shield and redstone devices packs, so re-used the ones from 1.21.10
 
 
 
@@ -3416,6 +3416,8 @@ Worked at ESB
   * MOAD/docs
   * NEMO-Cmd
   * MoaceanParcels
+  * cookiecutter-djl-pypkg
+  * erddap-datasets
 * Squash-merged `dependabot` PR to update `cryptography` to 46.0.6 re: CVE-2026-34073 re:
   incomplete DNS name constraint enforcement on peer names issue
   * NEMO-Cmd
@@ -3591,6 +3593,7 @@ Worked at ESB
   * SalishSeaCmd
   * Reshapr
   * NEMO_Nowcast
+  * cookiecutter-djl-pypkg
 * Squash-merged `dependabot` PRs to update `codecov-action` to 6.0.0 re: node24 support
   * SalishSeaNowcast
   * gha-workflows
@@ -3640,29 +3643,140 @@ Worked at ESB while Rita is at home
 ##### Miscellaneous
 
 * met w/ Becca re: starting runs on HPC
-  * TODO: figure out restart file frequency control in namelist.time
+  * TODO: figure out restart file frequency control in `namelist.time` - done
+    * `ln_rst_list` selects between `nn_stock` (restart file frequency in time steps) and
+      `nn_stocklist` (list of time steps to create restart files at)
+    * restart files are always created at the end of the run, regardless of above settings
+* MOAD group mtg; see whiteboard
+  * live group coding on Jose's model/obs comparison notebook resulted in several orders of magnitude
+    speed up
+* started preparing to write spec doc for new servers:
+  * read old emails to try to recall how our UDC storage capacity has evolved
+* created when2meet for intro to Pixi session
+
+
+##### SalishSeaCast
+
+* first run of `archive_tarball` to work with out intervention since `robot.nibi` became available
 
 
 
+## April
+<!-- markdownlint-disable MD001 -->
+#### Wed 1-Apr-2026
+<!-- markdownlint-enable MD001 -->
+
+##### SalishSeaCast
+
+* `crop_gribs 12` stalled with 1 file unprocessed until ~10:40
+
+
+##### `nibi`
+
+* checked on `nibi`
+  * cores allocated/used: 101k/60k, down from 125k/72k on 29mar
+  * bynode jobs running/queued: 157/93, down from 215/107 on 29mar
+  * bycore jobs running/queued: 9722/12024, up from 5388/7799 on 29mar
+  * Tall's 6-9 month jobs are getting near-insta-run
+  * Jose's 1 core eval jobs are getting insta-run
+  * look at different bynode queues:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    for queue in {1..5}; \
+      do echo b${queue}:; \
+      for state in R PD; \
+        do sqp --states ${state} | rg cpubase_bynode_b${queue} | wc -l; \
+      done; \
+    done
+    ```
+    <!-- markdownlint-enable MD031 -->
+    * b1 (<=3h) running/queued: 3/4
+    * b2 (<=12h) running/queued: 13/13
+    * b3 (<=24h) running/queued: 28/2
+    * b4 (<=72h) running/queued: 19/4
+    * b5 (<=168h) running/queued: 93/70
+  * replied to Mark
+
+
+##### Miscellaneous
+
+* installed Pixi Code extension for VSCode in reStructuredCode profile
+  * also found Pixi VSCode
+  * neither are official, but the recommendation of Pixi Code comes from the Microsoft Python environments
+    extension, so it has some blessing
+
+
+##### Security Updates
+
+* Squash-merged `dependabot` PRs to update `pygments` to 2.20.0 re: CVE-2026-4539 re:
+  regex DoS due to inefficient regex for GUID matching vulnerability
+  * ECget
+  * salishsea-site
+  * FUN
+  * Reshapr
+  * SalishSeaNowcast
+  * SalishSeaCast/docs
+  * SalishSeaTools
+  * MOAD/docs
+  * SOG-Bloomcast-Ensemble
+  * moad_tools
+  * SalishSeaCmd
+  * NEMO_Nowcast
+  * gha-workflows
+  * NEMO-Cmd
+  * MoaceanParcels
+  * erddap-datasets
+
+
+##### analysis-cookiecutter-repo
+
+* squash-merged PR#49 re: change to use Pixi
+
+
+##### MOAD/docs
+
+* finished updating MOAD "Analysis Repositories" docs section; PR#69
+* started writing new Pixi docs section; PR#70
+  * moved Conda docs to archival docs
 
 
 
+#### Thu 2-Apr-2026
 
-##### analysis-cookiecutter-repo TODO
+##### SalishSeaCast
 
-`* Squash-merged `dependabot` PR to update `cryptography` to 46.0.6 re: CVE-2026-34073 re:
-  incomplete DNS name constraint enforcement on peer names issue
+* `crop_gribs 12` stalled with 1 file unprocessed until ~10:40
+* `download_live_ocean` timed out at 11:39
+  * re-ran manually at ~11:50
+    * timed out at 14:53
+  * re-ran manually at ~14:55
+    * success at 15:09
 
 
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 110k/64k, up from 101k/60k on 1apr
+  * bynode jobs running/queued: 132/118, down/up from 157/93 on 1apr
+  * bycore jobs running/queued: 7681/13382, down/up from 9722/12024 on 1apr
+  * Tall's 6-9 month jobs are running
+  * Jose's 1 core eval jobs are getting insta-run
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 2/35
+    * b2 (<=12h) running/queued: 13/20
+    * b3 (<=24h) running/queued: 5/1
+    * b4 (<=72h) running/queued: 23/3
+    * b5 (<=168h) running/queued: 93/55
 
 
+##### Miscellaneous
 
+* updated to PyCharm 2026.1 on `khawla`
 
 
 ##### AtlantisCmd
 
 * continued changing to use Pixi for package & env mgmt; PR#108
-
   * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
   * deleted `envs/environment-rtd.yaml`
   * deleted `envs/environment-test.yaml`
@@ -3672,28 +3786,146 @@ Worked at ESB while Rita is at home
     * `pixi add --feature dev black hatch pre-commit`  # to get version pins
     * `pixi add --feature dev pytest pytest-cov pytest-randomly`
     * `pixi add --feature dev sphinx=8.1.3 sphinx-rtd-theme=3.0.0`
+    * add comments to dependencies table like those in `environment-dev.yaml`
     * installed `pre-commit` to run from `dev` env
       * `pixi run -e dev pre-commit install`
   * changed PyCharm to use `atlantis-cmd:dev` interpreter/environment
-  * removed `nemo-nowcast` conda env from `khawla`
+    * PyCharm 2026.1 no longer playes nice with `pixi-pycharm` shim, even after upgrading it to 0.11
+    * had to fall back to the work-around of editing `/home/doug/.conda/environments.txt`
+  * removed `atlantis-cmd` conda env from `khawla`
   * updated dev docs re: use of Pixi
   * dropped `environment-dev.yaml`
   * moved `requirements.txt` from `envs/` to top level directory and deleted `envs/`
-  * added task to update `requirements.txt via`pip list`
+  * added task to update `requirements.txt` via `pip list`
     * `pixi add -f dev pip`
     * `pixi task add -f dev update-reqs "python -m pip list --format=freeze >> requirements.txt"`
+
+
+
+#### Fri 3-Apr-2026
+
+**Statutory Holiday** - Good Friday
+
+##### SalishSeaCast
+
+* `NEMO forecast2` run stalled waiting for 1st time step
+  * `nowcast6` VM is unreachable
+  * `nowcast9` VM doesn't have shared storage mounted
+  * recovery started at ~09:50:
+    * `arbutus`:
+      * killed `watch_NEMO forecast2`
+      * deleted tmp run dirs for `forecast2/02apr26` and `nowcast/03apr26`
+      * did a hard restart on `nowcast6` from the OpenStack portal
+      * `ssh nowcast6 "sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR"`
+      * `nowcast9` is reachable and shows same uptime as `nowcast6` - odd
+      * `ssh nowcast9 "sudo mount -t nfs -o proto=tcp,port=2049 192.168.238.14:/MEOPAR /nemoShare/MEOPAR"`
+    * `skookum`:
+      * `upload_forcing arbutus nowcast+`
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 110k/66k, same/up from 110k/64k on 2apr
+  * bynode jobs running/queued: 138/72, up/down from 132/118 on 2apr
+  * bycore jobs running/queued: 6896/8720, down from 7681/13382 on 2apr
+  * Tall's 3 month end of 2011 job got insta-run
+  * Jose's 1 core eval jobs are getting insta-run
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 0/0
+    * b2 (<=12h) running/queued: 19/4
+    * b3 (<=24h) running/queued: 27/2
+    * b4 (<=72h) running/queued: 23/4
+    * b5 (<=168h) running/queued: 69/62
+
+
+##### AtlantisCmd
+
+* continued changing to use Pixi for package & env mgmt; PR#108
+  * updated installation docs
+  * updated use docs to `pixi run atlantis ...`
   * updated release process docs to use Pixi commands
   * added Pixi badges to README and dev docs
+  * changed `atlantis` command definitions in generated bash scripts to use `pixi run -m ...`
+
+
+
+#### Sat 4-Apr-2026
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 103k/71k, down/up from 110k/66k on 3apr
+  * bynode jobs running/queued: 142/72, up/down from 138/72 on 3apr
+  * bycore jobs running/queued: 6185/3705, down from 6896/8720 on 3apr
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 0/0
+    * b2 (<=12h) running/queued: 2/3
+    * b3 (<=24h) running/queued: 38/1
+    * b4 (<=72h) running/queued: 40/4
+    * b5 (<=168h) running/queued: 62/65
+
+
+
+#### Sun 5-Apr-2026
+
+##### SalishSeaCast
+
+* `crop_gribs 12` stalled with 1 file unprocessed until ~10:40
+
+
+##### AtlantisCmd
+
+* continued changing to use Pixi for package & env mgmt; PR#108
+  * dropped `NEMO-Cmd` from VCS revisions section of example YAML file and docs
+
+
+
+
+
+
+
+
+##### AtlantisCmd TODO
+
+* continued changing to use Pixi for package & env mgmt; PR#108
+
+  * added `atlantis-code` feature and env based on `atlantis-dev.yaml`
+    *
 * released v26.1
   * be sure to run `pixi update` after `hatch version` commands
 * Squash-merged `dependabot` PR to update `cryptography` to 46.0.6 re: CVE-2026-34073 re:
   incomplete DNS name constraint enforcement on peer names issue
 * Squash-merged `dependabot` PR to update `codecov-action` to 6.0.0 re: node24 support
-* Squash-merged `dependabot` PRs to update `setup-micromamba` to 3.0.0 re: node24 support
+* Squash-merged `dependabot` PR to update `setup-micromamba` to 3.0.0 re: node24 support
+* Squash-merged `dependabot` PR to update `pygments` to 2.20.0 re: CVE-2026-4539 re:
+  regex DoS due to inefficient regex for GUID matching vulnerability
 
 
 
 
+##### MOAD/docs TODO
+
+* drop section about migration from `XIOS-1` to `XIOS-2`
+* add docs section re: `pixi add`, `pixi import -e ... -f ...`, and maybe
+  `pixi workspace environment add`
+* drop or isolate "on your laptop" instructions in several places
+  * analysis repo creation - done
+* plan for updates re: Pixi replacing `conda/mamba`
+  * `getting_started.rst` - done
+    * change "Install Miniforge" to "Install Pixi" - done
+  * Alliance setup in `alliance-computing.rst`
+  * lots in `conda_pkg_env_mgr.rst`
+    * maybe move to `zzz_archival_docs/` and replace with new Pixi section - done
+  * lots in `analysis-repo.rst`
+    * maybe not until after `cookiecutter-analysis-repo` is migrated - done
+  * `jupyter.rst`
+  * `sphinx_docs.rst`
+  * `vscode.rst`
+    * add Python Environments extension
+    * add Pixi Code extension
+    * Fortran language server setup
+  * lots in `pkg_structure.rst`
 
 
 
@@ -3722,29 +3954,6 @@ Worked at ESB while Rita is at home
 
 
 
-##### MOAD/docs TODO
-
-* drop section about migration from `XIOS-1` to `XIOS-2`
-* add section re: converting analysis repo from conda environment to Pixi workspace
-* add docs section re: `pixi add`, `pixi import -e ... -f ...`, and maybe
-  `pixi workspace environment add`
-* drop or isolate "on your laptop" instructions in several places
-  * analysis repo creation
-* plan for updates re: Pixi replacing `conda/mamba`
-  * `getting_started.rst`
-    * change "Install Miniforge" to "Install Pixi"
-  * Alliance setup in `alliance-computing.rst`
-  * lots in `conda_pkg_env_mgr.rst`
-    * maybe move to `zzz_archival_docs/` and replace with new Pixi section
-  * lots in `analysis-repo.rst`
-    * maybe not until after `cookiecutter-analysis-repo` is migrated
-  * `jupyter.rst`
-  * `sphinx_docs.rst`
-  * `vscode.rst`
-    * Fortran language server setup
-  * lots in `pkg_structure.rst`
-
-
 
 ##### NEMO-Cmd TODO
 
@@ -3767,6 +3976,12 @@ Worked at ESB while Rita is at home
   tdf = pd.read_csv(turbidity_csv, header=0) in `make_turbidity_file`; issue#423
 * `UserWarning`: no explicit representation of timezones available for np.datetime64
   from `figures/comparison/sandheads_winds.py:119` and `figures/comparison/sandheads_winds.py:127`
+* add `download_results` to copy `nowcast-green` results from `arbutus` to `nibi`
+  * add a version of `make_averaged_dataset` that runs as a queued job on `nibi`
+  * add a `watch_make_averaged_dataset` workers that monitors `squeue` on `nibi`
+    * like `watch_NEMO_agrif` or `watch_NEMO_hindcast`
+  * change `archive_tarball` to run as a queued job on `nibi`
+    * add a `watch_archive_tarball` worker that monitors `squeue` on `nibi`
 * generate a new ed25519 key for automation logins and change to use it everywhere except `optimum`
 * change config to drop forcing uploads to `optimum`
 * change automation workflow to run nowcast-green in place of nowcast-blue
@@ -3886,10 +4101,10 @@ Worked at ESB while Rita is at home
   * MOAD/docs - done 22jan26 in PR#62
   * SOG-Bloomcast-Ensemble - done 12feb26 in PR#100
   * NEMO_Nowcast - done 12mar26 in PR#93
+  * cookiecutter-analysis-repo - done 1apr26 in PR#49
 
   * AtlantisCmd - started 28mar26 in PR#108
   * PythonNotes - started 3mar26 in PR#5
-  * cookiecutter-analysis-repo - started 29mar26 in PR#49
 
   * Reshapr
   * moad_tools
@@ -3913,9 +4128,9 @@ Worked at ESB while Rita is at home
   * SalishSeaCast/docs - done 14jan26 in PR#74
   * SOG-Bloomcast-Ensemble - done 12feb26 in PR#100
   * NEMO_Nowcast - done 12mar26 in PR#93
+  * cookiecutter-analysis-repo - done 1apr26 in PR#49 (via migration to Pixi)
 
   * PythonNotes - started 3mar26 in PR#5 (via migration to Pixi)
-  * cookiecutter-analysis-repo - started 29mar26 in PR#49 (via migration to Pixi)
 
   * workflows available for testing:
     * moad_tools
