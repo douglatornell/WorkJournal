@@ -3967,6 +3967,75 @@ Worked at ESB while Rita is at home
 
 
 
+#### Tue 7-Apr-2026
+
+##### Miscellaneous
+
+* RIP Pandas, Welcome Polars webinar
+  * Marie-Hélène Burle, SFU
+  * https://mint.westdri.ca/python/wb_polars2
+  * https://mint.westdri.ca/python/wb_polars2_slides
+  * Features:
+    * Rust
+    * GIL released for multi-threading
+    * different indexing (better?)
+    * eager and lazy modes
+    * query optimizer
+    * out of core capable
+    * Apache Arrow storage
+    * consistent handling of missing data
+  * different syntax
+  * use Polars if you are starting from scratch
+  * Missing data:
+    * `polars.null` vs. `numpy.nan`, `None`, `NaT`, `pandas.NA`
+      * note that `NaN` is a float with specific meaning
+  * Group by:
+    * Polars has less/no need for `lambda` and `df.apply()`, repeated/nested `df.groupby()`, or masks
+    * Polars is easier to write and 5-10x faster
+  * Marie's benchmark comparisons use best Pandas code from Alex; maybe not the code one would write first
+  * Lazy evaluation:
+    * FizzBuzz example
+    * `LazyFrame` and `collect()` method instead of `DataFrame`
+    * Polars is 5x faster with `DataFrame`, 7x faster with `LazyFrame`
+    * Polars has ~30% smaller memory demand
+  * Medium size dataset:
+    * 200k rows
+    * `LazyFrame` uses `scan_csv()` instead of `read_csv()`
+    * lazy API has 17x speedup and 249 times less memory demand
+  * Too big for memory datasets:
+    * South African bird species: 12.3G csv, 25m rows x 50 cols
+    * would be 0.5G as a Apache Parquet file
+    * Polars reads Parquet 28x faster than Pandas
+    * lazy API is the solution, but primarily because the query is reducing the dataset to get the result
+  * lazy API is GPU compatible
+  * Q&A:
+    * Polars docs are excellent
+    * M-HB has Polars courses on her SFU site
+    * query optimizer results in faster transformations and calculations
+* MOAD group mtg; see whiteboard
+* EOAS Colloquium; Karen Holmberg, NYU, Paleofuturism
+* 2026 allocation on `nibi` started:
+  * 306 core-years
+  * 55 TiB = 60.473 TB on `/project`
+  * 237 TiB = 260.584 TB on `/nearline`
+* continued working on compute upgrade plan
+  * started mapping storage sizes, implementation and use
+
+
+##### SalishSeaCast
+
+* Fraser River water quality buoy site TLS cert expired last night
+
+
+##### SalishSeaNowcast
+
+* drop 201702 runoff file processing; PR#445:
+  * worked successfully in production on `skookum`
+
+
+
+
+* think about adding `pixi.lock` to run record files that SalishSeaCmd stores
 
 
 
