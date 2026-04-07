@@ -2987,7 +2987,7 @@ Worked at ESB while Rita was at home
 * Squash-merged dependabot PR to update `pypdf` to 6.9.1 re: CVE-2026-33123 re: long runtimes and/or
   large memory usage vulnerability
   * SalishSeaNowcast
-* Squash-merged `pre-commit` PRs to update `black` to 26.3.1 re: bug fixe
+* Squash-merged `pre-commit` PRs to update `black` to 26.3.1 re: bug fixes
   * erddap-datasets
   * SalishSeaTools
   * SalishSeaCmd
@@ -3503,7 +3503,7 @@ Worked at ESB
   * added `docs` feature and env based on `environment-test.yaml` and `environment-rtd.yaml`
     * `pixi add --feature docs mock pillow`
     * `pixi workspace environment add -f docs --solve-group default docs`
-    * `pixi add --feature docs mock pillow  --pinning-strategy semver`
+    * `pixi add --feature docs mock pillow --pinning-strategy semver`
     * `pixi add --feature docs sphinx=8.1.3 sphinx-rtd-theme=3.0.0`
     * `pixi add --feature docs --pypi commonmark recommonmark readthedocs-sphinx-ext --pinning-strategy semver`
     * added tasks for common docs work:
@@ -3881,25 +3881,129 @@ Worked at ESB while Rita is at home
 
 
 
+### Week 15
+
+#### Mon 6-Apr-2026
+
+**Statutory Holiday** - Easter Monday
+
+##### SalishSeaCast
+
+* `crop_gribs 12` stalled with 1 file unprocessed until ~10:41
 
 
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 108k/72k, up from 103k/71k on 4apr
+  * bynode jobs running/queued: 64/103, dow/up from 142/72 on 4apr
+    * probably because of 8apr scheduled maintenance
+  * bycore jobs running/queued: 2695/2478, down from 6185/3705 on 4apr
+    * maybe because of 8apr scheduled maintenance, also long weekend effect
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 2/13
+    * b2 (<=12h) running/queued: 9/12
+    * b3 (<=24h) running/queued: 15/0
+    * b4 (<=72h) running/queued: 38/9
+    * b5 (<=168h) running/queued: 0/68
 
 
+##### Dependency Updates
 
-##### AtlantisCmd TODO
+* Squash-merged `dependabot` PRs to update `setup-pixi` to 0.9.5 re: dependency & docs updates and
+  a bug fix
+  * NEMO-Cmd
+  * gha-workflows
+* `update-pixi-lockfile` action ran via cron for the first time in `NEMO-Cmd`
+  * visibility is lower than `dependabot` PRs
+    * no GitHub or email notification of the PR
+    * no assignment to me or milestone added to PR; but `dependabot` PRs don't either
+    * apart from knowing it was coming, my only queue was its appearance in #ssc-repos
+    * this is due to GitHub policy to not trigger workflows from automated PRs when using the default
+      `GITHUB_TOKEN`
+      * workarounds exist:
+        * simplest is manually closing and re-opening the PR
+          * tested:
+            * auto-assignment works
+            * no auto-milestone
+  * squash-merged
 
-* continued changing to use Pixi for package & env mgmt; PR#108
 
+##### AtlantisCmd
+
+* finished changing to use Pixi for package & env mgmt; PR#108
   * added `atlantis-code` feature and env based on `atlantis-dev.yaml`
-    *
-* released v26.1
-  * be sure to run `pixi update` after `hatch version` commands
+    * `pixi import -e atlantis-code --format conda-env envs/atlantis-dev.yaml`
+    * `pixi install -e atlantis-code`
+      * failed due to no `subversion` available for `win-64`
+      * `pixi workspace platform remove win-64`
+    * `pixi install -e atlantis-code`
+      * success
+      * confirmed with `pixi list r-shiny`
+    * change default env package pins from `*` to semver ranges
+      * `pixi upgrade -f atlantis-code --pinning-strategy semver`
+    * added `docs/installation/atlantis_code_dev.rst`
 * Squash-merged `dependabot` PR to update `cryptography` to 46.0.6 re: CVE-2026-34073 re:
   incomplete DNS name constraint enforcement on peer names issue
 * Squash-merged `dependabot` PR to update `codecov-action` to 6.0.0 re: node24 support
-* Squash-merged `dependabot` PR to update `setup-micromamba` to 3.0.0 re: node24 support
+* released v26.1
+  * be sure to run `pixi update atlantiscmd` after `hatch version` commands
 * Squash-merged `dependabot` PR to update `pygments` to 2.20.0 re: CVE-2026-4539 re:
   regex DoS due to inefficient regex for GUID matching vulnerability
+* Squash-merged `dependabot` PR to update `black` to 26.3.1 re: bug fixes
+
+
+##### SalishSeaNowcast
+
+* updated dev env on `khawla`
+* drop 201702 runoff file processing; PR#445:
+  * branch: `drop-make_201702_runoff_file`
+  * no longer run `make_201702_runoff_file` worker
+  * no longer create `R201702DFraCElse_{:y%Ym%md%d}.nc` files
+  * no longer upload those files to `arbutus`, `nibi`, `optimum`, or `orcinus`
+  * delete the `make_201702_runoff_file` worker and its test suite code
+  * deployed the branch to `skookum` for testing
+    * restarted `manager` to load updated config & `next_workers` module
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##### SalishSeaNowcast TODO
+
+* `polar.ncep.noaa.gov` sometimes refuses connections from GHA `sphinx linkcheck`
+* `FutureWarning` re: default value change for `compat` from `compat='no_conflicts'` to `compat='override'`
+  in `xarray.combine_by_coords()`; issue#390
+* `DtypeWarning` re: Columns (14) have mixed types. Specify dtype option on import or set low_memory=False.
+  tdf = pd.read_csv(turbidity_csv, header=0) in `make_turbidity_file`; issue#423
+* `UserWarning`: no explicit representation of timezones available for np.datetime64
+  from `figures/comparison/sandheads_winds.py:119` and `figures/comparison/sandheads_winds.py:127`
+* add `download_results` to copy `nowcast-green` results from `arbutus` to `nibi`
+  * add a version of `make_averaged_dataset` that runs as a queued job on `nibi`
+  * add a `watch_make_averaged_dataset` workers that monitors `squeue` on `nibi`
+    * like `watch_NEMO_agrif` or `watch_NEMO_hindcast`
+  * change `archive_tarball` to run as a queued job on `nibi`
+    * add a `watch_archive_tarball` worker that monitors `squeue` on `nibi`
+* generate a new ed25519 key for automation logins and change to use it everywhere except `optimum`
+* change config to drop forcing uploads to `optimum`
+* change automation workflow to run nowcast-green in place of nowcast-blue
+  * add output of 10min avg tide gauge station files
+* change download_weather to gather only files missed by collect_weather so that it can
+  work with crop_gribs monitoring incoming files
+  * check for presence of files before downloading them; skip if present
+
+
+
+
 
 
 
@@ -3960,35 +4064,6 @@ Worked at ESB while Rita is at home
 * change default for `--queue-job-cmd` from `qsub` to `sbatch`
 * handle hard-coded 32 core/node; we need 192 core for new Alliance clusters
 
-
-
-##### SalishSeaNowcast TODO
-
-* drop 201702 runoff file processing:
-  * no longer run `make_201702_runoff_file` worker
-  * no longer create `R201702DFraCElse_{:y%Ym%md%d}.nc` files
-  * no longer upload those files to `arbutus`, `nibi`, `optimum`, or `orcinus`
-  * delete the `make_201702_runoff_file` worker and its test suite code
-* `polar.ncep.noaa.gov` sometimes refuses connections from GHA `sphinx linkcheck`
-* `FutureWarning` re: default value change for `compat` from `compat='no_conflicts'` to `compat='override'`
-  in `xarray.combine_by_coords()`; issue#390
-* `DtypeWarning` re: Columns (14) have mixed types. Specify dtype option on import or set low_memory=False.
-  tdf = pd.read_csv(turbidity_csv, header=0) in `make_turbidity_file`; issue#423
-* `UserWarning`: no explicit representation of timezones available for np.datetime64
-  from `figures/comparison/sandheads_winds.py:119` and `figures/comparison/sandheads_winds.py:127`
-* add `download_results` to copy `nowcast-green` results from `arbutus` to `nibi`
-  * add a version of `make_averaged_dataset` that runs as a queued job on `nibi`
-  * add a `watch_make_averaged_dataset` workers that monitors `squeue` on `nibi`
-    * like `watch_NEMO_agrif` or `watch_NEMO_hindcast`
-  * change `archive_tarball` to run as a queued job on `nibi`
-    * add a `watch_archive_tarball` worker that monitors `squeue` on `nibi`
-* generate a new ed25519 key for automation logins and change to use it everywhere except `optimum`
-* change config to drop forcing uploads to `optimum`
-* change automation workflow to run nowcast-green in place of nowcast-blue
-  * add output of 10min avg tide gauge station files
-* change download_weather to gather only files missed by collect_weather so that it can
-  work with crop_gribs monitoring incoming files
-  * check for presence of files before downloading them; skip if present
 
 
 
@@ -4102,8 +4177,8 @@ Worked at ESB while Rita is at home
   * SOG-Bloomcast-Ensemble - done 12feb26 in PR#100
   * NEMO_Nowcast - done 12mar26 in PR#93
   * cookiecutter-analysis-repo - done 1apr26 in PR#49
+  * AtlantisCmd - done 6apr26 in PR#108
 
-  * AtlantisCmd - started 28mar26 in PR#108
   * PythonNotes - started 3mar26 in PR#5
 
   * Reshapr
