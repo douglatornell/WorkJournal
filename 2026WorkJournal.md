@@ -529,7 +529,6 @@ Worked at ESB
   * SalishSeaCmd
   * erddap-datasets
   * SOG-forcing
-
 * Squash-merged dependabot PRs to update `filelock` to 3.20.3 re: CVE-2026-22701
    (another) Time-of-Check-Time-of-Use (TOCTOU) race condition symlink attack vulnerability
   * AtlantisCmd
@@ -3225,7 +3224,7 @@ Worked at ESB while Rita was at home
 
 ##### Security Updates
 
-* Squash-merged dependabot PRs to update codecov-action to 5.5.3 re: dependency updates & bug fixes
+* Squash-merged dependabot PRs to update `codecov-action` to 5.5.3 re: dependency updates & bug fixes
   * SalishSeaNowcast
   * gha-workflows
   * AtlantisCmd
@@ -3552,7 +3551,7 @@ Worked at ESB
 
 ##### PythonNotes
 
-* reviewed slides with Susan
+* reviewed 2026 pkgs & envs slides with Susan
   * add example of a stdlib module
     * `copy`, `importlib`, `datetime`
   * change module example to `salishsea_tools.viztools ` re: `set_aspect()`
@@ -3569,7 +3568,7 @@ Worked at ESB
 
 ##### PythonNotes
 
-* continued polishing slides
+* continued polishing 2026 pkgs & envs slides
 
 
 ##### 2026 Bloomcast
@@ -4024,6 +4023,7 @@ Worked at ESB while Rita is at home
 
 ##### SalishSeaCast
 
+* no Greenwater River obs
 * Fraser River water quality buoy site TLS cert expired last night
 
 
@@ -4034,28 +4034,261 @@ Worked at ESB while Rita is at home
 
 
 
+#### Wed 8-Apr-2026
+
+CPET at SportsCardiologyBC
+
+
+##### SalishSeaCast
+
+* no Greenwater River obs
+
+
+##### SalishSeaNowcast
+
+* squash-merged PR#445 re: removal of `make_201702 runoff file` worker
+
+  * updated production deployment and restarted `manager`
+
+
+##### Dependency Updates
+
+* Squash-merged `dependabot` PRs to update `cryptography` to 46.0.6 re: CVE-2026-34073 re:
+  incomplete DNS name constraint enforcement on peer names issue
+  * SalishSeaNowcast
+* Squash-merged `dependabot` PRs to update `pygments` to 2.20.0 re: CVE-2026-4539 re:
+  regex DoS due to inefficient regex for GUID matching vulnerability
+  * SOG
+  * SOG-Bloomcast
+* Squash-merged `dependabot` PRs to update `requests` to 2.33.0 re: CVE-2026-25645 re: insecure temp file reuse
+  vulnerability
+  * SOG-Bloomcast
+
+
+##### MOAD/docs
+
+* continued writing new Pixi docs section; PR#70
+  * used Junie to write the draft of an intro to Pixi section:
+    * prompt:
+      * Please write an introduction to Pixi (https://pixi.prefix.dev/latest/) for users with minimal
+        knowledge of Python dependency and environment management tools. Use reStructuredText markup
+        for the document.
+    * Junie's plan (using Gemini 3 Flash model):
+      1. Research Pixi key features and benefits for beginners.
+      2. Draft the introduction to Pixi in `pixi_pkg_env_mgr.rst`.
+         * Explain what Pixi is (package and environment manager).
+         * Highlight benefits: single tool, fast, reproducible, works across platforms.
+         * Compare/Contrast with traditional tools (pip, venv, conda) in simple terms.
+      3. Add installation instructions.
+      4. Add basic usage guide.
+         * `pixi init`
+         * `pixi add`
+         * `pixi run`
+         * `pixi shell`
+      5. Verify the reStructuredText syntax and flow.
+      6. Submit the changes.
+    * Junie's work summary:
+      **Summary**
+      * Wrote an introduction to Pixi for users with minimal knowledge of Python dependency management
+        in reStructuredText format.
+      **Changes**
+      * Updated `/media/doug/warehouse/MOAD/docs/pixi_pkg_env_mgr.rst` with comprehensive documentation on Pixi.
+      * Included an explanation of what Pixi is and its advantages (reproducibility, speed, unified tooling).
+      * Added installation instructions for macOS, Linux, and Windows.
+      * Provided a basic usage guide for initializing projects, adding packages, and running commands
+        in the environment.
+      **Verification**
+      * Verified the reStructuredText syntax using the `lint` tool, which reported no errors.
+      * Confirmed the content is clear and accessible for beginners while adhering to the project's
+        documentation style.
+  * started editing what Junie wrote
+
+
+#### Thu 9-Apr-2026
+
+##### SalishSeaCast
+
+* no Greenwater River obs
+* Fraser River water quality buoy site TLS cert still not updated
+  * sent email to Jenn
+
+
+##### Dependency Updates
+
+* Squash-merged `dependabot` PRs to update `cryptography` to 46.0.7 re: CVE-2026-39892 re:
+  buffer overflow vulnerability
+  * SalishSeaNowcast
+  * SalishSeaCmd
+  * AtlantisCmd
+  * salishsea-site
+  * NEMO-Cmd
+  * moad_tools
+  * SalishSeaTools
+  * Reshapr
+  * FUN
+  * SOG-Bloomcast-Ensemble
+  * NEMO_Nowcast
+  * cookiecutter-MOAD-pypkg
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 97k/71k, down from 108k/72k on 6apr
+  * bynode jobs running/queued: 216/97, up/down from 64/103 on 6apr
+  * bycore jobs running/queued: 2849/8232, up from 2695/2478 on 6apr
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 0/12
+    * b2 (<=12h) running/queued: 13/23
+    * b3 (<=24h) running/queued: 36/18
+    * b4 (<=72h) running/queued: 130/17
+    * b5 (<=168h) running/queued: 37/27
+
+
+##### Miscellaneous
+
+* helped Camryn sort out a `git` error on `nibi` from VCS revision recording in `SalishSeaCmd`
+  * changed her `$HOME` to be group readable
+
+
+
+#### Fri 10-Apr-2026
+
+##### SalishSeaCast
+
+* no Greenwater River obs
+* Fraser River water quality buoy site TLS cert still not updated
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 115k/71k, up/same from 97k/71k on 9apr
+  * bynode jobs running/queued: 120/34, down from 216/97 on 9apr
+  * bycore jobs running/queued: 5186/2801, up/down from 2849/8232 on 9apr
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 0/5
+    * b2 (<=12h) running/queued: 2/2
+    * b3 (<=24h) running/queued: 17/10
+    * b4 (<=72h) running/queued: 58/2
+    * b5 (<=168h) running/queued: 43/15
+
+
+##### SalishSeaNowcast
+
+* updated production deployment and restarted `manager` re: removal of `make_201702_runoff_file` worker
+
+
+##### Miscellaneous
+
+* helped Camryn sort out a `git` error on `nibi` from VCS revision recording in `SalishSeaCmd`
+  * probably a "noisy neighbours" issue on `l4.nibi`
+  * added post to #alliance-hcp about issues that Camryn found
+* tried to explain to Vicente why he doesn't need/want all of his Parcels runs on a single node
+* AAPS collective agreement webinar
+
+
+##### MOAD/docs
+
+* continued writing new Pixi docs section; PR#70
+  * moved Pixi docs to their own directory
+  * wrote "Pixi Details" section
+  * added link to 2026 pkgs & envs slides notebook
+
+
+##### PythonNotes
+
+* finished polishing 2026 pkgs & envs slides; PR#5 - squash-merged
+* imported `erddap-obs-matching` environment:
+  * `pixi import erddap-obs-matching/environment.yaml`
+  * `pixi install -e erddap-obs-matching`
+  * `mamba env remove -n erddap-obs-matching`
+  * `rm erddap-obs-matching/environment.yaml`
+  * edited `erddap-obs-matching/make_readme.py` to add "Using the Notebooks" section
+  * `cd erddap-obs-matching; pixi run -e erddap-obs-matching python -m make_readme`
+* imported `reshapr-intro` environment (as above)
+* imported `sphinx-docs` environment (as above)
+* imported `xarray-dayavg` environment (as above)
+
+
+
+#### Sat 11-Apr-2026
+
+##### SalishSeaCast
+
+* Greenwater River obs restored
+* Fraser River water quality buoy site TLS cert was renewed on 9apr
+* started uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  cd /results2/SalishSea/nowcast-green.202111/
+  rsync -rltv --relative 01jan07/ robot.nibi:/project/def-allen/SalishSea/nowcast-green.202111/
+  ```
+  <!-- markdownlint-enable MD031 -->
+  * 8 days took 21m40s
+  * 23 days took 60m2s
+  * 28 days took 79m42s
+  * project ~18 hours per year
+  * started mar-dec07 at ~12:55
+
+
+##### SalishSeaNowcast
+
+* started investigating issue#423 re: DtypeWarning in `make_turbidity_file`; PR#449:
+  * it's from `pandas.read_csv()`
+  * message from pandas=3.0.2 in dev env is perhaps more informative than the one in the issue:
+    DtypeWarning: Columns (0: water depth units) have mixed types. Specify dtype option on import or set low_memory=False.
+    tdf = pd.read_csv(turbidity_csv, header=0)
+  * inspection shows that "water depth units" has one of 2 values `m` or `NaN`
+    * suspect that the root cause of the issue us pandas `NaN` handling
+  * fixed by add in `dtype={"water depth units": str}` to `read_csv()`
+  * tested by stepping through code
+  * discussed deployment without additional testing w/ Susan
+  * deployed branch to `skookum` for testing
+
+
+##### SalishSeaCmd
+
+* updated Pixi lock file, mostly as a test of updating NEMO-Cmd
+* improved installation docs by adding explicit `pixi install`; PR#139 - squash-merged
+
+
+##### NEMO-Cmd
+
+* improved installation docs by adding explicit `pixi install`; PR#145 - squash-merged
+
+
+
+#### Sun 12-Apr-2026
+
+##### SalishSeaCast
+
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2008
+* Susan and I both checked results from PR#449 test deployment re: DtypeWarning in `make_turbidity_file`
+  * looks good
+
+
+
+
 
 * think about adding `pixi.lock` to run record files that SalishSeaCmd stores
 
 
-
-
-
-
-
+* experiment with Python lazy imports
 
 
 
 
 ##### SalishSeaNowcast TODO
 
-* `polar.ncep.noaa.gov` sometimes refuses connections from GHA `sphinx linkcheck`
 * `FutureWarning` re: default value change for `compat` from `compat='no_conflicts'` to `compat='override'`
   in `xarray.combine_by_coords()`; issue#390
-* `DtypeWarning` re: Columns (14) have mixed types. Specify dtype option on import or set low_memory=False.
-  tdf = pd.read_csv(turbidity_csv, header=0) in `make_turbidity_file`; issue#423
 * `UserWarning`: no explicit representation of timezones available for np.datetime64
   from `figures/comparison/sandheads_winds.py:119` and `figures/comparison/sandheads_winds.py:127`
+* `make_turbidity_file._writeTFile()` has `dimTemplate="/results/forcing/rivers/RLonFraCElse_y2016m01d23.nc"`
+  hard coded and uses `netCDF4.Dataset()` to create the output turbidity dataset
+* `polar.ncep.noaa.gov` sometimes refuses connections from GHA `sphinx linkcheck`
 * add `download_results` to copy `nowcast-green` results from `arbutus` to `nibi`
   * add a version of `make_averaged_dataset` that runs as a queued job on `nibi`
   * add a `watch_make_averaged_dataset` workers that monitors `squeue` on `nibi`
@@ -4087,8 +4320,8 @@ Worked at ESB while Rita is at home
 * plan for updates re: Pixi replacing `conda/mamba`
   * `getting_started.rst` - done
     * change "Install Miniforge" to "Install Pixi" - done
-  * Alliance setup in `alliance-computing.rst`
-  * lots in `conda_pkg_env_mgr.rst`
+  * Alliance setup in `alliance-computing.rst` - done
+  * lots in `conda_pkg_env_mgr.rst` - replaced with `conda_pkg_env_mgr.rst`
     * maybe move to `zzz_archival_docs/` and replace with new Pixi section - done
   * lots in `analysis-repo.rst`
     * maybe not until after `cookiecutter-analysis-repo` is migrated - done
