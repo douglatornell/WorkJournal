@@ -4258,17 +4258,89 @@ CPET at SportsCardiologyBC
 * improved installation docs by adding explicit `pixi install`; PR#145 - squash-merged
 
 
+##### MOAD/docs
+
+* continued writing new Pixi docs section; PR#70
+  * added "Migrating to Pixi-Powered SalishSeaCmd" section
+
+
 
 #### Sun 12-Apr-2026
 
 ##### SalishSeaCast
 
 * continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
-  * 2008
+  * 2008 took 1014m30s == 16.9h
 * Susan and I both checked results from PR#449 test deployment re: DtypeWarning in `make_turbidity_file`
   * looks good
 
 
+
+### Week 16
+
+#### Mon 13-Apr-2026
+
+##### SalishSeaNowcast
+
+* squash-mercurial PR#449 re: DtypeWarning in `make_turbidity_file`
+  * updated production deployment
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PR to update `pypdf` to 6.10.0 re: CVE-2026-40260 memory exhaustion
+  vulnerability
+  * SalishSeaNowcast
+
+
+##### SalishSeaCast
+
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2009
+
+
+##### Miscellaneous
+
+* started looking at `nibi:/project/rrg-allen/`
+  * suggested at Susan ask admins to remove directories for emeritus group members
+  * created `/project/rrg-allen/SalishSea/nowcast-green.202111/`
+* MEOPAR NEMO webinar:
+  * wwatch3 in ANHA configs; Enrico Pochini, UofA
+  * Taylor column and sea ice in Chukchi Sea; Spenser Ross, UofT
+    * delayed ice melt areas
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 122k/69k, up/down from 115k/71k on 10apr
+  * bynode jobs running/queued: 108/46, down/up from 120/34 on 10apr
+  * bycore jobs running/queued: 14621/9622, up from 5186/2801 on 10apr
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 0/28
+    * b2 (<=12h) running/queued: 0/3
+    * b3 (<=24h) running/queued: 49/8
+    * b4 (<=72h) running/queued: 29/0
+    * b5 (<=168h) running/queued: 30/12
+
+
+##### MOAD/docs
+
+* continued writing new Pixi docs section; PR#70
+  * revised "Migrating to Pixi-Powered SalishSeaCmd" section re: Susan's review
+  * added "Migrating Your Analysis Repository to Pixi" section
+
+
+##### SalishSeaCmd
+
+* improved installation docs re: Susan's review of MOAD/docs "Migrating to Pixi-Powered SalishSeaCmd" section
+  * PR#140
+
+
+
+
+* learned that `cfconventions.org` domain registration renewal is in limbo
+  * https://cf-convention.github.io/ works as an alternative
 
 
 
