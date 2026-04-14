@@ -4338,10 +4338,87 @@ CPET at SportsCardiologyBC
 
 
 
+#### Tue 14-Apr-2026
+
+Worked at ESB while Rita was at home
+
+##### SalishSeaCast
+
+* MSC switched to their new HPC platform and HRDPS landed ~15 minutes early
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2009 has taken ~24h
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 131k/96k, up from 122k/69k on 13apr
+  * bynode jobs running/queued: 99/89, down/up from 108/46 on 13apr
+  * bycore jobs running/queued: 12404/17244, down/up from 14621/9622 on 13apr
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 0/7
+    * b2 (<=12h) running/queued: 2/8
+    * b3 (<=24h) running/queued: 53/20
+    * b4 (<=72h) running/queued: 15/23
+    * b5 (<=168h) running/queued: 29/31
+  * Tall's y2013 job has no reservation due to lots of higher priority jobs running
+  * Camryn's present test job is spread across 4 nodes
+  * Vicente's evaluation jobs are running
+* removed all except `jvalenti/` from `/project/rrg-allen/`
+* `/project/def-allen/SalishSea/forcing/` uses 299G
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+  * people using `nowcast-green.202111`:
+  * Vicente
+  * no body relying on restarts
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `pytest` to 9.0.3 re: CVE-2025-71176 insecure tempdir
+  vulnerability, bug fixes & docs improvements
+  * ECget
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * FUN
+  * salishsea-site
+  * MoaceanParcels
+  * SOG-Bloomcast-Ensemble
+  * Reshapr
+  * SalishSeaTools
+  * moad_tools
+  * SalishSeaNowcast
+  * NEMO_Nowcast
+  * AtlantisCmd
+* Squash-merged dependabot PRs to update `pillow` to 12.2.0 re: CVE-2026-40192 FITS image GZIP decompression
+  bomb vulnerability
+  * MoaceanParcels
+  * moad_tools
+  * Reshapr
+  * SalishSeaTools
+  * SOG-Bloomcast-Ensemble
+  * SOG-Bloomcast
+* Squash-merged dependabot PR to update `peter-evans/create-pull-request` to 8.1.1 re: dependency updates
+  * NEMO-Cmd
+* Squash-merged dependabot PR to update `actions/github-script` to 9 re: feature updates
+  * gha-workflows
+* Squash-merged dependabot PR to update `prefix-dev/setup-pixi` to 0.9.5 re: dependency & docs updates
+  * AtlantisCmd
+
+
+
+* install Zoom on Air and test centre-stage camera operation
+
+
 
 * learned that `cfconventions.org` domain registration renewal is in limbo
   * https://cf-convention.github.io/ works as an alternative
 
+
+* test docs builds with `Sphinx=9.*` and `sphinx-rtd-theme=3.1.*`
 
 
 * think about adding `pixi.lock` to run record files that SalishSeaCmd stores
