@@ -4418,7 +4418,7 @@ Dentist appt
 
 * continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
   * 2009 took ~32h50m
-  * 2026 started
+  * 2026 finished
 * `download_live_ocean` was delayed until 11:17
 
 
@@ -4449,6 +4449,33 @@ Dentist appt
   * added "Adding a New Pixi Environment" section
 
 
+
+#### Thu 16-Apr-2026
+
+Worked at ESB to lead Intro to Pixi session
+
+
+##### Miscellaneous
+
+* MOAD Intro to Pixi session
+  * at least 2 typos in slides
+* helped Vicente sort out a Git merge mess due to not committing for a long time, and committing huge
+  netCDF files
+* Phys Ocgy seminar:
+  * Jonathan Izert, CCCMa, CanTODS downscaled 3-oceans model
+* mtg w/ Stefan re: VMs and `Crowdstrike`
+  * he suggested talking to ARC about storage for our upgrade
+  * we presently have ~164T
+
+##### SalishSeaCast
+
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2025 started at ~11:00
+
+
+##### Atlantis
+
+* group mtg
 
 
 
