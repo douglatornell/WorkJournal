@@ -4372,8 +4372,8 @@ Worked at ESB while Rita was at home
 
 * MOAD group mtg; see whiteboard
   * people using `nowcast-green.202111`:
-  * Vicente
-  * no body relying on restarts
+    * Vicente
+    * nobody relying on restarts
 
 
 ##### Dependency Updates
@@ -4410,7 +4410,46 @@ Worked at ESB while Rita was at home
 
 
 
-* install Zoom on Air and test centre-stage camera operation
+#### Wed 15-Apr-2026
+
+Dentist appt
+
+##### SalishSeaCast
+
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2009 took ~32h50m
+  * 2026 started
+* `download_live_ocean` was delayed until 11:17
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 125k/100k, down/up from 131k/96k on 14apr
+  * bynode jobs running/queued: 81/70, down from 99/89 on 14apr
+  * bycore jobs running/queued: 11847/4731, down from 12404/17244 on 14apr
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 1/14
+    * b2 (<=12h) running/queued: 6/0
+    * b3 (<=24h) running/queued: 20/15
+    * b4 (<=72h) running/queued: 27/4
+    * b5 (<=168h) running/queued: 27/37
+  * Tall's y2013 job has reservation for 20:05 Eastern today
+
+
+##### Miscellaneous
+
+* set up MacBook Air for Pixi presentation tomorrow and practiced it
+
+
+##### MOAD/docs
+
+* finished writing new Pixi docs section; PR#70 - squash-merged
+  * moved docs about importing Conda envs in to Pixi workspaces to their own section
+  * added "Adding a New Pixi Environment" section
+
+
+
 
 
 
@@ -4464,21 +4503,22 @@ Worked at ESB while Rita was at home
 * drop section about migration from `XIOS-1` to `XIOS-2`
 * add docs section re: `pixi add`, `pixi import -e ... -f ...`, and maybe
   `pixi workspace environment add`
+  * add section about `pixi add` for pkgs like `SalishSeaTools` and `moad_tools`
 * drop or isolate "on your laptop" instructions in several places
   * analysis repo creation - done
 * plan for updates re: Pixi replacing `conda/mamba`
   * `getting_started.rst` - done
     * change "Install Miniforge" to "Install Pixi" - done
   * Alliance setup in `alliance-computing.rst` - done
-  * lots in `conda_pkg_env_mgr.rst` - replaced with `conda_pkg_env_mgr.rst`
-    * maybe move to `zzz_archival_docs/` and replace with new Pixi section - done
+  * lots in `conda_pkg_env_mgr.rst` - replaced with `pixi_pkg_env_mgr.rst`
+    * maybe move `conda_pkg_env_mgr.rst` to `zzz_archival_docs/` and replace with new Pixi section - done
   * lots in `analysis-repo.rst`
     * maybe not until after `cookiecutter-analysis-repo` is migrated - done
   * `jupyter.rst`
   * `sphinx_docs.rst`
   * `vscode.rst`
-    * add Python Environments extension
-    * add Pixi Code extension
+    * add Python Environments extension - included in Python extension bundle
+    * add Pixi Code extension - done
     * Fortran language server setup
   * lots in `pkg_structure.rst`
 
@@ -4629,8 +4669,7 @@ Worked at ESB while Rita was at home
   * NEMO_Nowcast - done 12mar26 in PR#93
   * cookiecutter-analysis-repo - done 1apr26 in PR#49
   * AtlantisCmd - done 6apr26 in PR#108
-
-  * PythonNotes - started 3mar26 in PR#5
+  * PythonNotes - done 10apr26 in PR#5
 
   * Reshapr
   * moad_tools
@@ -4655,8 +4694,8 @@ Worked at ESB while Rita was at home
   * SOG-Bloomcast-Ensemble - done 12feb26 in PR#100
   * NEMO_Nowcast - done 12mar26 in PR#93
   * cookiecutter-analysis-repo - done 1apr26 in PR#49 (via migration to Pixi)
-
-  * PythonNotes - started 3mar26 in PR#5 (via migration to Pixi)
+  * PythonNotes - done 10apr26 in PR#5 (via migration to Pixi)
+i)
 
   * workflows available for testing:
     * moad_tools
