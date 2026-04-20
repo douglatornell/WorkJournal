@@ -4129,6 +4129,7 @@ CPET at SportsCardiologyBC
   * SOG-Bloomcast-Ensemble
   * NEMO_Nowcast
   * cookiecutter-MOAD-pypkg
+  * cookiecutter-djl-pypkg
 
 
 ##### `nibi`
@@ -4393,6 +4394,9 @@ Worked at ESB while Rita was at home
   * SalishSeaNowcast
   * NEMO_Nowcast
   * AtlantisCmd
+  * SOG
+  * SOG-forcing
+  * SOG-Bloomcast
 * Squash-merged dependabot PRs to update `pillow` to 12.2.0 re: CVE-2026-40192 FITS image GZIP decompression
   bomb vulnerability
   * MoaceanParcels
@@ -4479,18 +4483,131 @@ Worked at ESB to lead Intro to Pixi session
 
 
 
+#### Fri 17-Apr-2026
 
-* learned that `cfconventions.org` domain registration renewal is in limbo
-  * https://cf-convention.github.io/ works as an alternative
+Started 2025 income tax; see `lizzy:/media/doug/warehouse/shared/finances/TaxReturns/2025/2025TaxReturnsNotes.md`
+
+##### SalishSeaCast
+
+* `crop_gribs 12` stalled with 1 file unprocessed until ~10:45
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2025 was less than half complete at 09:35
 
 
-* test docs builds with `Sphinx=9.*` and `sphinx-rtd-theme=3.1.*`
+##### PythonNotes
+
+* fixed typos in pkgs & envs slide notebook that were noticed during yesterday's presentation
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 106k/74k, down from 125k/100k on 15apr
+  * bynode jobs running/queued: 87/68, up/down from 81/70 on 15apr
+  * bycore jobs running/queued: 12065/3142, up/down from 11847/4731 on 15apr
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 0/20
+    * b2 (<=12h) running/queued: 3/5
+    * b3 (<=24h) running/queued: 46/4
+    * b4 (<=72h) running/queued: 35/1
+    * b5 (<=168h) running/queued: 3/39
+  * Tall's y2013 job has reservation for 20:49 Eastern tomorrow
+  * Camryn's interactive jobs are running
+  * Vicente's def-allen 16 2-core jobs are running
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PR to update `pypdf` to 6.10.2 re: memory exhaustion & long runtime vulnerabilities
+  * SalishSeaNowcast
+* Squash-merged dependabot PR to update `mako` to 1.3.11 re: GHSA-v92g-xgxw-vvmm
+  path traversal vulnerability
+  * SalishSeaNowcast
+  * salishsea-site
+  * SOG-Bloomcast
+
+
+
+#### Sat 18-Apr-2026
+
+##### SalishSeaCast
+
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2025 took ~53h40m
+  * 2024 started at ~17:06
+
+
+##### MOAD/docs
+
+* Susan did some minor fixes in the "Migrating SalishSeaCmd" section while she did her migration
+* added config to handle false failure for anchor on `github.com/conda-forge/miniforge` page
+* changed `cfconventions.org` to `cf-convention.github.io` because domain registration renewal is in limbo
+  and https://cf-convention.github.io/ works as an alternative
+
+
+##### Miscellaneous
+
+* researched dependencies for `Sphinx>=9.0.0`:
+  * `nbsphinx` should be okay
+  * `sphinx-copybutton` should be okay
+  * `sphinx-notfound-page` should be okay
+  * `sphinx-rtd-theme=3.1` is explicitly for >9
+  * is `readthedocs-sphinx-ext` still required? - probably not
+    * it is archived on GitHub
+  * dependencies may now be:
+    * `sphinx`
+    * `sphinx-rtd-theme`
+    * `pillow`
+    * `mock`
+    * `commonmark`
+    * `recommonmark`
+* readthedocs has a GitHub app in beta
+  * decided that I don't want to beta test it
+
+
+
+#### Sun 19-Apr-2026
+
+Filed 2025 income tax returns.
+
+##### SalishSeaCast
+
+* `crop_gribs 12` stalled with 1 file unprocessed until ~10:33
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2024 ~45% done at ~09:20
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 107k/49k, up/down from 106k/74k on 17apr
+  * bynode jobs running/queued: 66/49, down from 87/68 on 17apr
+  * bycore jobs running/queued: 6905/4459, down/up from 12065/3142 on 17apr
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 2/14
+    * b2 (<=12h) running/queued: 5/1
+    * b3 (<=24h) running/queued: 10/10
+    * b4 (<=72h) running/queued: 37/4
+    * b5 (<=168h) running/queued: 12/20
+  * Tall's y2013 job started at 03:32 Eastern
+  * Vicente's def-allen jobs are running
+
+
+##### MOAD/docs
+
+* upgraded to `Sphinx=9.1.0`; PR#71 - squash-merged
+  * added pinned `docutils=0.22.4`
+  * changed `commonmark=0.9.1` and `recommonmark=0.7.1` to `conda-forge` dependencies
+  * added `mock=5.2.0` and `pillow=12.2.0` dependencies
+  * dropped archived `readthedocs-sphinx-ext`
+  * had to make `sphinx-rtd-theme=3.1.0` a PyPI dependency due to a package bug on `conda-forge`
+    * https://github.com/conda-forge/sphinx_rtd_theme-feedstock/pull/41
+
+
+
 
 
 * think about adding `pixi.lock` to run record files that SalishSeaCmd stores
-
-
-* experiment with Python lazy imports
 
 
 
@@ -4736,6 +4853,8 @@ i)
     * analysis-doug
     * SOG-Bloomcast ??
 
+
+* experiment with Python lazy imports in Python 3.15
 
 
 * Susan: do we want to set up Globus on `salish` or `skookum`, or engage compstaff
