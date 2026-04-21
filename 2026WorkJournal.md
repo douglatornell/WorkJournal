@@ -4605,6 +4605,51 @@ Filed 2025 income tax returns.
 
 
 
+### Week 16
+
+#### Mon 20-Apr-2026
+
+##### SalishSeaNowcast
+
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2024 took ~40h15m~ and finished at ~09:23
+  * 2023 started at ~15:00
+
+
+##### Miscellaneous
+
+* checked the memory I had that one couldn't make symbolic links across file systems or NFS mounts
+  * it appears to not be the case; I created a symlink on `/results/SalishSea/` to an output dir on
+    `/results2/SalishSea/...`
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 123k/78k, up from 107k/49k on 19apr
+  * bynode jobs running/queued: 93/240, up from 66/49 on 19apr
+  * bycore jobs running/queued: 10238/2224, up/down from 6905/4459 on 19apr
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 0/15
+    * b2 (<=12h) running/queued: 5/1
+    * b3 (<=24h) running/queued: 30/7
+    * b4 (<=72h) running/queued: 49/186
+    * b5 (<=168h) running/queued: 9/31
+  * Tall's y2013 is running; y2014 is queued on b4 in 2 parts due to forcing change
+  * Vicente's def-allen jobs are running
+
+
+
+#### Tue 21-Apr-2026
+
+##### SalishSeaCast
+
+* `crop_gribs 12` stalled with 1 file unprocessed until ~10:33
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2023 ~40% done at ~09:00
+
+
+
 
 
 * think about adding `pixi.lock` to run record files that SalishSeaCmd stores
