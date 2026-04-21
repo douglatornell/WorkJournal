@@ -4642,6 +4642,8 @@ Filed 2025 income tax returns.
 
 #### Tue 21-Apr-2026
 
+Worked at ESB
+
 ##### SalishSeaCast
 
 * `crop_gribs 12` stalled with 1 file unprocessed until ~10:33
@@ -4649,6 +4651,15 @@ Filed 2025 income tax returns.
   * 2023 ~40% done at ~09:00
 
 
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* tried and failed to help Camryn with VSCode not connecting to `nibi`; repeated auth requests and
+  messages about full `/tmp/`
+  * she subsequently proved that it was full `/tmp` on `l3` despite what `df` Sandrine
+    * probably due to files deleted by ended processes that didn't properly release space
+* freed ~12G of space on `kudu` with `sudo apt clean` to purge the cache because there were way too many VSCode 
+  packages there that `sudo apt autoclean` didn't remove
 
 
 
