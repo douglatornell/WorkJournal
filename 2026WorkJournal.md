@@ -4520,7 +4520,7 @@ Started 2025 income tax; see `lizzy:/media/doug/warehouse/shared/finances/TaxRet
 
 * Squash-merged dependabot PR to update `pypdf` to 6.10.2 re: memory exhaustion & long runtime vulnerabilities
   * SalishSeaNowcast
-* Squash-merged dependabot PR to update `mako` to 1.3.11 re: GHSA-v92g-xgxw-vvmm
+* Squash-merged dependabot PRs to update `mako` to 1.3.11 re: GHSA-v92g-xgxw-vvmm
   path traversal vulnerability
   * SalishSeaNowcast
   * salishsea-site
@@ -4658,8 +4658,312 @@ Worked at ESB
   messages about full `/tmp/`
   * she subsequently proved that it was full `/tmp` on `l3` despite what `df` Sandrine
     * probably due to files deleted by ended processes that didn't properly release space
-* freed ~12G of space on `kudu` with `sudo apt clean` to purge the cache because there were way too many VSCode 
+* freed ~12G of space on `kudu` with `sudo apt clean` to purge the cache because there were way too many VSCode
   packages there that `sudo apt autoclean` didn't remove
+
+
+
+#### Wed 22-Apr-2026
+
+##### SalishSeaCast
+
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2023 finished at ~17:45 and took ~50h45m
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 126k/71k, up/down from 123k/78k on 20apr
+  * bynode jobs running/queued: 95/237, up from 93/240 on 20apr
+  * bycore jobs running/queued: 14124/1651, up/down from 10238/2224 on 20apr
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 0/16
+    * b2 (<=12h) running/queued: 0/14
+    * b3 (<=24h) running/queued: 10/15
+    * b4 (<=72h) running/queued: 77/156
+    * b5 (<=168h) running/queued: 8/36
+  * Tall's y2013 is running; y2014 is queued on b4 in 2 parts due to forcing change
+  * Vicente's on def-allen has 1 job running
+
+
+##### Miscellaneous
+
+* reviewed notebook from 17apr NOAA NMFS webinar on xarray "data cubes" from ERDDAP
+  * https://nmfs-opensci.github.io/NMFSHackDays-2026/topics/2026-04-17/erddap_xarray.html
+  * not much new or exciting
+    * deceptively easy dask use
+    * demo that zarr from S3 is significantly faster
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `nbconvert` to 7.17.1 re: CVE-2026-39377, CVE-2026-39378
+  path traversal vulnerabilities and CVE-2025-53000 unauthorized code execution vulnerability
+  * SalishSeaTools
+  * SalishSeaCast/docs
+  * SOG-Bloomcast-Ensemble
+  * MOAD/docs
+  * MoaceanParcels
+  * erddap-datasets
+* Squash-merged dependabot PRs to update `lxml` to 6.1.0 re: CVE-2026-41066 re: XML External Entity (XXE)
+  injection vulnerability
+  * SalishSeaNowcast
+  * SalishSeaTools
+  * erddap-datasets
+
+
+##### Reshapr
+
+* started changing to use Pixi for package & env mgmt; PR#194
+  * edit `pyproject.toml` to prepare:
+    * change `license-files = { paths = ["LICENSE"] }` to `license-files = [ "LICENSE" ]`
+  * `pixi init` to add `[tool.pixi.*]` tables to `pyproject.toml`
+  * `pixi workspace platform add linux-64 osx-arm64 osx-64 win-64`
+  * added `workspace.exclude-newer = "14d"` to delay package version updates to avoid security patch churn
+    * added `exclude-newer.Reshapr = "0d"` to prevent delay for new versions of Reshapr
+  * move Pixi environments additions in `.gitignore`
+  * add `,gitattributes` to VCS
+  * edit `envs/environment-user.yaml` to  hide `nodefaults` channel, `pip`, and `--editable ../`
+  * `pixi import -e default --format conda-env envs/environment-user.yaml` to get minimal packages in
+    `default` environment
+  * `pixi install` created the env and the lock file
+    * confirmed with `pixi list reshapr`
+    * add `.pixi.lock` to Git tracking
+  * change default env package pins from `*` to semver ranges
+    * `pixi upgrade --pinning-strategy semver`
+    * `pixi add "pandas<3.0.0"` to restore pin re: issue#179
+  * configured PyCharm:
+    * `pixi add pixi-pycharm`
+    * set `conda` executable to output of `pixi run 'echo $CONDA_PREFIX/libexec/conda'`
+    * added `/media/doug/warehouse/MOAD/Reshapr/.pixi/envs/default` to `/home/doug/.conda/environments.txt`
+    * renamed interpreter in PyCharm UI to `reshapr:default`
+  * added `test` feature based on `environment-test.yaml`
+    * `pixi add --feature test pytest pytest-cov pytest-randomly tomli`
+    * `pixi workspace environment add test -f test --solve-group default`
+    * `pixi add --feature test pytest pytest-cov pytest-randomly tomli --pinning-strategy semver`
+    * `pixi run -e test pytest` works
+    * `pixi task add -f test pytest "pytest"` shortens the incantation to `pixi run pytest`
+  * added `pytest-cov` and `pytest-cov-html` tasks
+    * added `omit = [ ".pixi/*" ]` to `[tool.coverage.run]`
+    * `pixi task add -f test pytest-cov "pytest --cov=./"`
+    * `pixi task add -f test pytest-cov-html "pytest --cov=./ --cov-report html"`
+  * updated dev docs to use Pixi tasks to run tests and produce coverage reports
+  * added envs for Python 3.12 and 3.13 testing:
+    * relax Python version in default env from `"3.14.*"` to `"*"`
+    * `pixi add --feature py312 python=3.12`
+    * `pixi workspace environment add test-py312 --feature py312 --feature test`
+    * `pixi add --feature py313 python=3.13`
+    * `pixi workspace environment add test-py313 --feature py313 --feature test`
+  * added a `test-py314` env (even though it duplicates `test`) to make GHA explicit and consistent
+    * `pixi add --feature py314 python=3.14`
+    * `pixi workspace environment add test-py314 --feature py314 --feature test`
+  * changed `pytest-with-coverage` workflow to use new reusable `pixi-pytest-with-coverage`
+    * force lock file update here because it always gets out of sync here
+  * added `docs` feature and env based on `environment-test.yaml`, `environment-rtd.yaml`, and recent
+    updates in `MOAD/docs`
+    * `pixi add --feature docs docutils=0.22.4 sphinx=9.1.0 sphinx-notfound-page=1.1.0`
+    * `pixi add --feature docs sphinx-rtd-theme==3.1.0 --pypi`
+    * `pixi add --feature docs commonmark=0.9.1 recommonmark=0.7.1 mock=5.2.0 pillow=12.2.0`
+    * `pixi workspace environment add docs --solve-group default -f docs`
+    * added tasks for common docs work:
+      * `pixi task add -f docs --cwd docs/ docs make clean html`
+      * `pixi task add -f docs --cwd docs/ linkcheck make clean linkcheck`
+  * updated dev docs to use Pixi tasks to build HTML docs and run link checker
+  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
+  * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
+  * deleted `envs/environment-rtd.yaml`
+  * deleted `envs/environment-test.yaml`
+
+
+
+#### Thu 23-Apr-2026
+
+##### SalishSeaCast
+
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2022 started at ~08:40
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 117k/64k, down from 126k/71k on 22apr
+  * bynode jobs running/queued: 118/324, up from 95/237 on 22apr
+  * bycore jobs running/queued: 16756/1984, up from 14124/1651 on 22apr
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 0/30
+    * b2 (<=12h) running/queued: 59/100
+    * b3 (<=24h) running/queued: 19/16
+    * b4 (<=72h) running/queued: 36/140
+    * b5 (<=168h) running/queued: 4/38
+  * Tall's y2013 finished; y2014_late_gemlam is running
+
+
+##### Reshapr
+
+* finished changing to use Pixi for package & env mgmt; PR#194 - squash-merged
+  * added `dev` feature and env based on `environment-dev.yaml`
+    * `pixi add --feature dev black hatch pip pre-commit`
+    * `pixi workspace environment add dev --solve-group default --feature dev`
+    * `pixi add --feature dev black hatch pre-commit`  # to get version pins
+    * `pixi add --feature dev pytest pytest-cov pytest-randomly tomli`
+    * `pixi add --feature dev docutils=0.22.4 sphinx=9.1.0 sphinx-notfound-page=1.1.0`
+    * `pixi add --feature dev sphinx-rtd-theme==3.1.0 --pypi`
+    * `pixi add --feature dev commonmark=0.9.1 recommonmark=0.7.1 mock=5.2.0 pillow=12.2.0`
+    * installed `pre-commit` to run from `dev` env
+      * `pixi run -e dev pre-commit install`
+    * updated `/home/doug/.conda/environments.txt` to include `/media/doug/warehouse/MOAD/Reshapr/.pixi/envs/dev`
+  * changed PyCharm to use `reshapr:dev` interpreter/environment
+  * removed `reshapr-dev` conda env from `khawla`
+  * updated dev docs re: use of Pixi
+  * dropped `environment-dev.yaml`
+  * moved `requirements.txt` from `envs/` to top level directory and deleted `envs/`
+  * added task to update `requirements.txt via`pip list`
+    * `pixi task add -f dev update-reqs "python -m pip list --format=freeze >> requirements.txt"`
+  * updated installation docs to use Pixi
+  * updated use and examples docs re: Pixi
+  * added SHEM extraction and SLURM script files that were missed in PR#169
+  * added Pixi badges to README and dev docs
+  * updated release process docs to use Pixi commands
+* released v26.1
+  * be sure to run `pixi update` after `hatch version` commands
+
+
+
+#### Fri 24-Apr-2026
+
+##### SalishSeaCast
+
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2022 ~60% done at ~08:45; ~70% done at ~17:05
+* re-imagining `arbutus` deployment:
+  * present configuration:
+    * present VMs:
+      * Flavor Name: nemo-c16-60gb-90-numa-test
+      * RAM: 60GB
+      * VCPUs: 16
+      * Disk: 30GB
+      * Ephemeral Disk: 90GB
+    * head node with public IP address: nowcast0
+    * NEMO compute nodes: 9, nowcast1 to nowcast9
+      * 8 used for run; nowcast8 is not used because it shares a host with fvcom2
+      * we compute on 15 cores/VM = 120 cores; 1 core/VM is reserved for software-defined network stack
+      * actual use is 117 cores for NEMO and 1 for XIOS
+      * XIOS runs on nowcast0, NEMO runs on nowcast1-7,9
+      * MPI decomposition is 11x18
+    * FVCOM compute nodes: 6, fvcom0 to fvcom5
+      * 5 used for wwatch3 runs; fvcom5 is not used because it shares a host with fvcom1
+      * we compute on 15 cores/VM = 75 cores; 1 core/VM is reserved for software-defined network stack
+    * test node: test-20-04
+    * 272 cores total
+  * new nodes:
+    * 40, 32, or 28 cores
+    * 8-9G per core
+  * possible future configuration:
+    * persistent head node VM with public IP address
+      * cores? RAM?
+    * 40 core, 384G VMs
+  * cloud workloads:
+    * present:
+      * head node + 8x16 core VMs
+      * upload_forcing nowcast+
+      * make_forcing_links nowcast+
+      * run_NEMO nowcast
+      * watch_NEMO nowcast
+      * concurrent:
+        * make_forcing_links ssh
+        * download_results nowcast
+        * run_NEMO forecast
+        * watch_NEMO forecast
+      * concurrent:
+        * head node + 8x16 + 5x16 core VMs
+        * upload_forcing turbidity
+        * make_ww3_wind_file
+        * make_ww3_current_file
+        * download_results forecast
+        * make_forcing_links nowcast-green
+        * run_NEMO nowcast-green
+        * watch_NEMO nowcast-green
+        * run_ww3 nowcast
+        * watch_ww3 nowcast
+        * download_wwatch3_results nowcast
+        * run_ww3 forecast
+        * watch_ww3 forecast
+        * download_wwatch3_results forecast
+      * download_results nowcast-green
+    * possible future, without nowcast-blue:
+      * could run on head node + 3x40 core VMs
+      * upload_forcing nowcast+ turbidity
+      * make_forcing_links nowcast+ turbidity
+      * run_NEMO nowcast-green
+      * watch_NEMO nowcast-green
+      * concurrent:
+        * make_forcing_links ssh
+        * download_results nowcast-green
+        * run_NEMO forecast
+        * watch_NEMO forecast
+      * concurrent:
+        * make_ww3_wind_file
+        * make_ww3_current_file
+        * download_results forecast
+      * run_ww3 nowcast
+      * watch_ww3 nowcast
+      * download_wwatch3_results nowcast
+      * run_ww3 forecast
+      * watch_ww3 forecast
+      * download_wwatch3_results forecast
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 117k/63k, same/down from 117k/64k on 23apr
+  * bynode jobs running/queued: 108/1086, down/up from 118/324 on 23apr
+  * bycore jobs running/queued: 14579/1519, down from 16756/1984 on 23apr
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 0/30
+    * b2 (<=12h) running/queued: 2/894
+    * b3 (<=24h) running/queued: 36/8
+    * b4 (<=72h) running/queued: 65/113
+    * b5 (<=168h) running/queued: 2/42
+  * Tall's y2014_late_gemlam is running; y2014_ops, y2015, y2016, y2017 are queued
+  * Vicente's on def-allen has 2 job2 running
+  * Jose has 1 job running
+  * Camryn is running on interactive
+
+
+##### Miscellaneous
+
+* changed Reshapr installation on `nibi` from mamba to Pixi
+  * removed mamba envs:
+    * reshapr
+    * team-dosser-qm
+    * sbatch-test
+  * removed miniforge3
+
+
+
+#### Sat 25-Apr-2026
+
+##### SalishSeaCast
+
+* `crop_gribs 12` stalled with 1 file unprocessed until ~10:41
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2022 took ~44h54m and finished at ~05:32
+  * 2021 started at ~09:12
+
+
+
+#### Sun 26-Apr-2026
+
+##### SalishSeaCast
+
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2021 is ~68% at ~09:07
+
+
+
 
 
 
@@ -4870,8 +5174,8 @@ Worked at ESB
   * cookiecutter-analysis-repo - done 1apr26 in PR#49
   * AtlantisCmd - done 6apr26 in PR#108
   * PythonNotes - done 10apr26 in PR#5
+  * Reshapr - start 22apr26 in PR#194
 
-  * Reshapr
   * moad_tools
   * tools/SalishSeaTools
   * SalishSeaNowcast
@@ -4895,7 +5199,6 @@ Worked at ESB
   * NEMO_Nowcast - done 12mar26 in PR#93
   * cookiecutter-analysis-repo - done 1apr26 in PR#49 (via migration to Pixi)
   * PythonNotes - done 10apr26 in PR#5 (via migration to Pixi)
-i)
 
   * workflows available for testing:
     * moad_tools
