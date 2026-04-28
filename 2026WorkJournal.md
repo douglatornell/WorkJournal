@@ -5019,6 +5019,49 @@ Worked at ESB
 
 
 
+#### Tue 28-Apr-2026
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2020 ~75% done at ~09:00
+
+
+##### `nibi`
+
+* checked on `nibi`:
+
+  * cores allocated/used: 127k/79k, up/same from 120k/79k on 27apr
+  * bynode jobs running/queued: 121/268, up from 118/257 on 27apr
+  * bycore jobs running/queued: 8812/3440, down/up from 11096/1111 on 27apr
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 0/65
+    * b2 (<=12h) running/queued: 13/15
+    * b3 (<=24h) running/queued: 15/5
+    * b4 (<=72h) running/queued: 95/136
+    * b5 (<=168h) running/queued: 0/43
+  * Tall's y2015, y2016, y2017 are queued
+
+
+##### XIOS
+
+* email on xios-users list today points to new GitLab instance: https://gitlab.in2p3.fr/ipsl/projets/xios-projects/xios
+  * also, XIOS has moved from SVN to Git
+    * but the NEMO "get started" docs still reference SVN
+
+
+##### NEMO
+
+* read "getting started" docs:
+  * docs about about 5.0.* and migrating to it from 4.0.* and 4.2.*; nothing about 3.6
+  * NEMO 4.2.* needs XIOS>2.5 (XIOS2 trunk), but can use XIOS3 if `ln_tile = .false.` always, in which case
+    build NEMO with `key_xios3`
+  * `Psyclone` is being used in NEMO 5.0.* to "insert GPU offloading directives"
+  * automatic arch file generation with `arch/build_arch-auto.sh`
+
+
 
 
 * think about adding `pixi.lock` to run record files that SalishSeaCmd stores
@@ -5058,6 +5101,7 @@ Worked at ESB
 
 ##### MOAD/docs TODO
 
+* update XIOS forge.ipsl.fr addresses to https://gitlab.in2p3.fr/ipsl/projets/xios-projects/xios
 * drop section about migration from `XIOS-1` to `XIOS-2`
 * add docs section re: `pixi add`, `pixi import -e ... -f ...`, and maybe
   `pixi workspace environment add`
@@ -5140,6 +5184,7 @@ Worked at ESB
 
 ##### SalishSeaCast/docs TODO
 
+* update XIOS forge.ipsl.fr addresses to https://gitlab.in2p3.fr/ipsl/projets/xios-projects/xios
 * planned updates re: Pixi replacing `conda/mamba`
   * `netcdf4.rst`
     * change mention of Anaconda
