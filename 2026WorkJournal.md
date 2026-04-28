@@ -4605,7 +4605,7 @@ Filed 2025 income tax returns.
 
 
 
-### Week 16
+### Week 17
 
 #### Mon 20-Apr-2026
 
@@ -4962,6 +4962,60 @@ Worked at ESB
 * continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
   * 2021 is ~68% at ~09:07
 
+
+
+### Week 18
+
+#### Mon 27-Apr-2026
+
+##### SalishSeaCast
+
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2021 took ~34h30m and finished last night at ~19:43
+  * 2020 started at ~08:45
+* started experimenting with Sarracenia v3 (`sr3`)
+  * `pixi init sr3`
+  * `pixi add python amqp appdirs humanfriendly humanize jsonpickle psutil watchdog`
+  * `pixi add --pypi metpx_sr3`
+  * `pixi run sr3 status`
+    * confirmed success of basic installation
+    * created default config and state/logs files directories: `~/.config/sr3/` and `~/.cache/sr3/`
+* `pixi run sr3 convert hrdps-continental-hpfx.conf`
+  * fails with "[ERROR] root convert1 Invalid config hrdps-continental-hpfx.conf"
+* copied `hrdps-continental-hpfx.conf` to `~/.config/sr3/subscribe/` and then
+  `pixi run sr3 foreground subscribe/hrdps-continental-hpfx.conf` just worked
+  * stopping it was very hard though
+* I unthinkingly ran `sr3 cleanup` and killed the queue that production was using on `hpfx`
+  * `crop_gribs 18` failed with 132 file unprocessed
+    * recovery started at ~18:45
+      * not elegant, but successful
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 120k/79k, up from 117k/63k on 24apr
+  * bynode jobs running/queued: 118/257, up/down from 108/1086 on 24apr
+  * bycore jobs running/queued: 11096/1111, down from 14579/1519 on 24apr
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 0/64
+    * b2 (<=12h) running/queued: 2/15
+    * b3 (<=24h) running/queued: 12/4
+    * b4 (<=72h) running/queued: 104/129
+    * b5 (<=168h) running/queued: 0/44
+  * Vicente's on def-allen has 2 job2 running
+  * Jose has 1 job running and several runs on 25apr
+  * Tall's y2014_ops finished on 26apr; y2015, y2016, y2017 are queued
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `GitPython` to 3.1.47 re: malicious hook installation anc
+  command injection vulnerabilities
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * SalishSeaNowcast
+  * AtlantisCmd
 
 
 
