@@ -5032,7 +5032,6 @@ Worked at ESB
 ##### `nibi`
 
 * checked on `nibi`:
-
   * cores allocated/used: 127k/79k, up/same from 120k/79k on 27apr
   * bynode jobs running/queued: 121/268, up from 118/257 on 27apr
   * bycore jobs running/queued: 8812/3440, down/up from 11096/1111 on 27apr
@@ -5060,6 +5059,87 @@ Worked at ESB
     build NEMO with `key_xios3`
   * `Psyclone` is being used in NEMO 5.0.* to "insert GPU offloading directives"
   * automatic arch file generation with `arch/build_arch-auto.sh`
+
+
+
+#### Wed 29-Apr-2026
+
+##### SalishSeaCast
+
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2020 took ~32h48m finished at ~17:32 yesterday
+  * 2019 started at ~09:25
+* HRDPS 12Z forecast was delayed until ~10:30~
+* continued experimenting with Sarracenia v3 (`sr3`):
+  * copied `~/.config/sarra/default.conf` to `~/.config/sr3/default.conf`
+  * added `topicPrefix v02.post` line to `~/.config/sr3/default.conf`
+  * got `sr3 convert` to work by putting a copy of `hrdps-continental-hpfx.conf` into
+    `~/.config/sarra/subscribe/`
+    * not much difference in converted file:
+      * `expire` global option moved to the top
+      * snake case keywords were changed to dromedary case: e.g.
+        * `queue_name` to `queueName`
+      * `queueName` directive was repeated for some reason; deleted 1 instance
+      * `acceptUnmatched False` directive was added to the end of the list of `accept` directives
+        to reject any messages that aren't filtered by the accept/reject rules
+    * changed the `queueName` to `q_anonymous.sr3.hrdps-continental-hpfx.UBC.SalishSeaCast`
+  * confirmed that `pixi run sr3` and `/media/doug/warehouse/MEOPAR/sr3/.pixi/envs/default/bin/sr3`
+    are equivalent
+  * `sr3` seems to be very insistent on finding configs in `~/.config/sr3/subscribe/`
+    * override options are:
+      * `XDG_CONFIG_HOME` envvar; a bit clumsy:
+        <!-- markdownlint-disable MD031 -->
+        ```bash
+        XDG_CONFIG_HOME=/media/doug/warehouse/MEOPAR \
+          /media/doug/warehouse/MEOPAR/sr3/.pixi/envs/default/bin/sr3 show \
+          subscribe/hrdps-continental-hpfx-v3
+        ```
+        <!-- markdownlint-enable MD031 -->
+      * absolute path to config file - doesn't seem to work
+    * config files **have** to be in a `subscribe/` sub-directory
+    * symlinks from `SalishSeaNowcast/sarracenia/` seem to work
+
+##### MOAD/docs
+
+* updated XIOS forge.ipsl.fr addresses to https://gitlab.in2p3.fr/ipsl/projets/xios-projects/xios
+* reverted work-around for cfconventions.org domain registration failure
+
+
+##### Resilient-C
+
+* email from Dave Straley @UBC-IT re: deployment of new OpenStack VM
+  * can do, instead of migration
+  * need specs (OS, # of CPU ram and disk space)
+* present VM:
+  * 2 cores
+  * 2G RAM
+  * 8G storage
+  * Ubuntu 18.04.6
+
+
+##### Miscellaneous
+
+* logins to all Alliance clusters were blocked mid-afternoon due to a "security incident"
+
+
+
+#### Thu 30-Apr-2026
+
+Worked at ESB to attend AAPS spring general mtg
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* NEMO forecast2 run failed:
+  * `ocean.output` says `step: indic < 0`
+  * `solver.stat` shows `NaN` for `ssh2` at time step 19200241 (the first time step)
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2019 was ~56% complete at ~08:25
+* NEMO nowcast-blue run failed:
+  * `ocean.output` says `step: indic < 0`
+  * `solver.stat` shows `NaN` for `ssh2` at time step 19198081 (the first time step)
+  * plots from `output.abort.nc` show badness in Jervis Inlet
+    * probably related to no obs for TheodosiaDiversion river
 
 
 
@@ -5101,7 +5181,6 @@ Worked at ESB
 
 ##### MOAD/docs TODO
 
-* update XIOS forge.ipsl.fr addresses to https://gitlab.in2p3.fr/ipsl/projets/xios-projects/xios
 * drop section about migration from `XIOS-1` to `XIOS-2`
 * add docs section re: `pixi add`, `pixi import -e ... -f ...`, and maybe
   `pixi workspace environment add`
