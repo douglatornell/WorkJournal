@@ -5134,12 +5134,123 @@ Worked at ESB to attend AAPS spring general mtg
   * `ocean.output` says `step: indic < 0`
   * `solver.stat` shows `NaN` for `ssh2` at time step 19200241 (the first time step)
 * continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
-  * 2019 was ~56% complete at ~08:25
+  * 2019 was ~56% complete at ~08:25; %74% at ~18:25
 * NEMO nowcast-blue run failed:
   * `ocean.output` says `step: indic < 0`
   * `solver.stat` shows `NaN` for `ssh2` at time step 19198081 (the first time step)
   * plots from `output.abort.nc` show badness in Jervis Inlet
     * probably related to no obs for TheodosiaDiversion river
+  * persisted 28apr obs for TheodosiaDiversion river to 29apr
+  * use `upload_forcing` to restart automation
+
+
+##### Miscellaneous
+
+* AAPS spring general mtg
+* phys ocgy seminar
+* deleted what I could from `fir:/project/def-allen/`
+
+
+
+## May
+<!-- markdownlint-disable MD001 -->
+#### Fri 1-May-2026
+<!-- markdownlint-enable MD001 -->
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+  * persisted 28apr discharge to 30apr
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2019 took 42h48m and finished at ~04:12
+  * 2018 started at ~07:40
+* backfilled yesterday's forcing uploads:
+  * `upload_forcing robot.nibi 2026-04-30`
+  * `upload_forcing orcinus-nowcast-agrif 2026-04-30`
+  * `upload_forcing optimum-hindcast 2026-04-30`
+* started uploading forcing files from `skookum` to `fir` in `djl-nibi-xfer` `tmux` session:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  cd /results/forcing/atmospheric/continental2.5/nemo_forcing/
+  rsync -rltv hrdps_*.nc fir:/project/def-allen/SalishSea/forcing/atmospheric/continental2.5/nemo_forcing/
+  cd /results/forcing/atmospheric/GEM2.5/ops/
+  rsync -rltv ops_*.nc fir:/project/def-allen/SalishSea/forcing/atmospheric/GEM2.5/ops/
+  ```
+  <!-- markdownlint-enable MD031 -->
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 127k/83k, same/up from 127k/79k on 28apr
+  * bynode jobs running/queued: 153/269, up from 121/268 on 28apr
+  * bycore jobs running/queued: 5753/4661, down/up from 8812/3440 on 28apr
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 2/57
+    * b2 (<=12h) running/queued: 10/13
+    * b3 (<=24h) running/queued: 43/4
+    * b4 (<=72h) running/queued: 98/138
+    * b5 (<=168h) running/queued: 0/56
+  * Tall's y2015, y2016, y2017 are queued
+
+
+##### SalishSeaNowcast
+
+* started work on fixing `make_runoff_file` so that it correctly handles missing obs for TheodosiaDiversion
+  or TheodosiaBypass; PR#456
+  * added a test to reproduce the issue that Susan identified in the #salishseacast channel
+  * added code to drop data frame rows that contain NaNs for secondary river discharge
+  * deployed branch to production for testing tomorrow
+
+
+##### 2026 Bloomcast
+
+* disabled cron job
+
+
+
+#### Sat 2-May-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+  * `make_runoff_file` successfully patched Theodosia river discharge
+* NEMO and wwatch3 forecast2 runs were successful
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2018 took ~39h33m and finished at ~23:13
+* continued uploading forcing files from `skookum` to `fir` in `djl-nibi-xfer` `tmux` session:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  cd /results/forcing/LiveOcean/boundary_conditions
+  rsync -rltv LiveOcean_v201905_*.nc fir:/project/def-allen/SalishSea/forcing/LiveOcean/
+  ```
+  <!-- markdownlint-enable MD031 -->
+
+
+
+#### Sun 3-May-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+  * `make_runoff_file` successfully patched Theodosia river discharge
+* NEMO forecast2 run failed due to network issues on `arbutus`
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2017 started at ~08:05
+* continued uploading forcing files from `skookum` to `fir` in `djl-nibi-xfer` `tmux` session:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  cd /results/forcing/rivers
+  rsync -rltv R202108Dailies_*.nc fir:/project/def-allen/SalishSea/forcing/rivers/
+  cd /results/forcing/rivers/river_turb/
+  rsync -rltv riverTurbDaily2_*.nc fir:/project/def-allen/SalishSea/forcing/rivers/river_turb/
+  cd /results/forcing/sshNeahBay/obs/
+  rsync -rltv rsync -rltv ssh_y20*d??.nc fir:/project/def-allen/SalishSea/forcing/sshNeahBay/obs/
+  ```
+  <!-- markdownlint-enable MD031 -->
+* `crop_gribs 00` failed with `FileNotFoundError` in observer startup due to no directory to watch
+  despite race condition mitigation code
+  * rare issue that last occurred on 2-Mar-2026
 
 
 
