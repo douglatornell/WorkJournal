@@ -5254,6 +5254,103 @@ Worked at ESB to attend AAPS spring general mtg
 
 
 
+### Week 18
+
+#### Mon 4-May-2026
+
+Dishika joined the group
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+  * `make_runoff_file` successfully patched Theodosia river discharge
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2017 stopped due to broken pipe at ~22:11
+    * restart attempts at ~08:45 failed
+      * `robot.nibi` key seems to be rejected
+    * resumed using `nibi` instead of `robot.nibi`
+* started uploading `nowcast-green.202211` results from `skookum` to `fir` in `djl-nibi-xfer` `tmux` session:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  cd /results2/SalishSea/nowcast-green.202111/
+  rsync -rltv --relative 31dec17/ fir:/project/def-allen/SalishSea/nowcast-green.202111/
+  rsync -rltv --relative *18/ fir:/project/def-allen/SalishSea/nowcast-green.202111/
+  ```
+  <!-- markdownlint-enable MD031 -->
+* email to Venkat to set up a mtg about migrating to the new arbutus cloud
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 124k/79k, down/same from 127k/79k on 1may
+  * bynode jobs running/queued: 163/190, up/down from 121/268 on 1may
+  * bycore jobs running/queued: 6316/2294, down from 8812/3440 on 1may
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 4/29
+    * b2 (<=12h) running/queued: 1/12
+    * b3 (<=24h) running/queued: 16/5
+    * b4 (<=72h) running/queued: 108/107
+    * b5 (<=168h) running/queued: 34/37
+
+
+##### Miscellaneous
+
+* NEMO Canada seminar:
+  * Patrick Famole, UVic, Modeling Future Arctic Ringed & Bearded Seals Habitat
+    * seal life events, earth system model, Inuit communities and culture
+  * Pouneh Hoshyar, UofA, High-Resolution Modelling of Labrador Current Eddies and
+    Instability Processes in a 1/60° NEMO Configuration
+* helped Becca sort out GitHub ssh host key issue on `fir`
+
+
+##### SalishSeaNowcast
+
+* finished fixing `make_runoff_file` so that it correctly handles missing obs for TheodosiaDiversion
+  or TheodosiaBypass; PR#456 - squash-merged
+
+
+##### Resilient-C
+
+* sent email to Dave Straley @UBC-IT re: deployment of new OpenStack VM requesting:
+  * 2 cores
+  * 2G RAM
+  * 8G storage
+  * latest supported Ubuntu
+
+
+##### salishsea-site
+
+* uptime robot reported site down at ~16:15
+
+
+
+#### Tue 5-May-2026
+
+##### salishsea-site
+
+* investigated downtime:
+  * `pyramid.log` shows evidence of a DoS attack
+  * recovery:
+    * restart app failed due to abnormal termination
+    * stopping `supervisord` was hard; had to use `pkill -9`
+    * starting the app again failed, I think due to "address already in use"
+    * shut down `supervisord` to let thing settle for a while
+
+
+##### SalishSeaCast
+
+* HRDPS 12Z forecast was delayed until ~10:30~
+* no obs for TheodosiaDiversion river
+* continued uploading `nowcast-green.202211` results from `skookum` to `fir` in `djl-nibi-xfer` `tmux` session:
+  * interrupted at ~16:45 due to broken pipe; probably related to other network disruptions around the same time
+  * resumed at ~09:20
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2017 finished at ~07:19
+  * 2016 started at ~09:25
+
+
+
 
 * think about adding `pixi.lock` to run record files that SalishSeaCmd stores
 
@@ -5292,6 +5389,7 @@ Worked at ESB to attend AAPS spring general mtg
 
 ##### MOAD/docs TODO
 
+* comments from Becca in Slack DM after her us of the docs to set up on `fir`
 * drop section about migration from `XIOS-1` to `XIOS-2`
 * add docs section re: `pixi add`, `pixi import -e ... -f ...`, and maybe
   `pixi workspace environment add`
