@@ -5348,6 +5348,20 @@ Dishika joined the group
 * continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
   * 2017 finished at ~07:19
   * 2016 started at ~09:25
+* mtg w/ Venkat & Michael Tang re: arbutus migration set for Thu
+* `grib_to_netcdf` seems to have stalled
+  * lots of stall workers
+  * restarted `log_aggregator` to no avail
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* helped Becca get set up on `fir`
+  * yesterday's weirdness largely disappeared
+  * file system seems a bit bauky
+  * XIOS-2 clone state may be suspect
+
 
 
 
