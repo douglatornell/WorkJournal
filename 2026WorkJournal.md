@@ -4857,6 +4857,10 @@ Worked at ESB
       * we compute on 15 cores/VM = 75 cores; 1 core/VM is reserved for software-defined network stack
     * test node: test-20-04
     * 272 cores total
+  * present object storage:
+    * 1T, ~65% in use
+    * mounted on nowcast0
+    * nowcast0 runs an NFS server that other VMs mount from
   * new nodes:
     * 40, 32, or 28 cores
     * 8-9G per core
@@ -5336,6 +5340,7 @@ Dishika joined the group
     * stopping `supervisord` was hard; had to use `pkill -9`
     * starting the app again failed, I think due to "address already in use"
     * shut down `supervisord` to let thing settle for a while
+    * `sudo lsof -i :6543` revealed that it is `apache` that is holding the address
 
 
 ##### SalishSeaCast
@@ -5345,9 +5350,12 @@ Dishika joined the group
 * continued uploading `nowcast-green.202211` results from `skookum` to `fir` in `djl-nibi-xfer` `tmux` session:
   * interrupted at ~16:45 due to broken pipe; probably related to other network disruptions around the same time
   * resumed at ~09:20
+    * failed with dis quota exceeded at ~09:52
 * continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
   * 2017 finished at ~07:19
   * 2016 started at ~09:25
+    * failed with broken pipe at ~13:55
+    * restarted at ~17:40
 * mtg w/ Venkat & Michael Tang re: arbutus migration set for Thu
 * `grib_to_netcdf` seems to have stalled
   * lots of stall workers
@@ -5361,6 +5369,205 @@ Dishika joined the group
   * yesterday's weirdness largely disappeared
   * file system seems a bit bauky
   * XIOS-2 clone state may be suspect
+
+
+
+#### Wed 6-May-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* message from Henryk says that `/results/` RAID is trying to rebuild
+  * he will monitor its progress for a few hours, then reboot if necessary
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2016 started at ~09:25
+    * failed with broken pipe at ~20:18
+    * restarted at ~09:25
+* Henryk rebooted `skookum` at ~13:57
+* started getting all the things restarted at ~15:35:
+  * started `tomcat` to bring ERDDAP up
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    sudo su - tomcat
+    /opt/apache-tomcat-10.1.40/bin/startup.sh
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * started website
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    mamba activate /SalishSeaCast/salishsea-site-env
+    supervisord --configuration /SalishSeaCast/salishsea-site/supervisord-prod.ini
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * started automation:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    mamba activate /SalishSeaCast/nowcast-env
+    supervisord --configuration /SalishSeaCast/SalishSeaNowcast/config/supervisord.ini
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * started workers to move forward:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    collect_weather 18 2.5km --backfill --backfill-date 2026-05-06
+    crop_gribs 18 --backfill
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * backfilling:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    ping_erddap nowcast-green  # to index nowcast-green/04may26
+    make_plots nemo nowcast-green research 2026-05-04
+    make_plots wwatch3 forecast publish 2026-05-04
+    ```
+    <!-- markdownlint-enable MD031 -->
+    * discovered that the log is full of lies:
+      * no 04may 18Z HRDPS
+      * no 05may Neah Bay ssh
+      * no 04may runoff
+        * mish-mash of most recent river discharge dates
+        * no 04may discharge obs in `/SalishSeaCast/datamart/hydrometric/BC_*_hourly_hydrometric.csv` files
+      * no 05may turbidity
+      * no 05may LiveOcean
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    crop_gribs 18 2026-05-04 --debug
+    download_weather 18 2.5km 2026-05-04 --backfill --debug
+    download_weather 00 2.5km 2026-05-05 --debug
+    crop_gribs 00 2026-05-05 --backfill --debug
+    download_weather 06 2.5km 2026-05-05 --debug
+    crop_gribs 06 2026-05-05 --backfill --debug
+    # no point in doing collect_river_data ECCC 2026-05-04 because there are no longer obs for that date
+    get_onc_ctd SEVIP 2026-05-04
+    get_onc_ctd SCVIP 2026-05-04
+    get_onc_ferry TWDP 2026-05-04
+    download_weather 12 2.5km 2026-05-05 --debug
+    crop_gribs 12 2026-05-05 --backfill --debug
+    collect_river_data USGS SkagitMountVernon 2026-05-04 --debug
+    collect_river_data USGS SnohomishMonroe 2026-05-04 --debug
+    collect_river_data USGS NisquallyMcKenna 2026-05-04 --debug
+    collect_river_data USGS GreenwaterGreenwater 2026-05-04 --debug
+    make_turbidity_file 2026-05-05 --debug
+    collect_NeahBay_ssh 06 2026-05-05 --debug
+    make_ssh_files nowcast 2026-05-05
+    make_runoff_file v202108 2026-05-04
+    make_live_ocean_files 2026-05-05
+    grib_to_netcdf nowcast+ 2026-05-05
+    upload_forcing nowcast+ 2026-05-05
+    download_weather 18 2.5km 2026-05-05 --debug
+    crop_gribs 18 2026-05-05 --backfill --debug
+    download_weather 00 2.5km 2026-05-06 --debug
+    crop_gribs 00 2026-05-06 --backfill --debug
+    # wait for nowcast-green and wwatch3 forecast runs to finish
+    download_weather 06 2.5km 2026-05-06
+    crop_gribs 06 2026-05-06 --backfill
+    download_weather 12 2.5km 2026-05-06
+    # wait for forecast2 runs to finish
+    crop_gribs 12 2026-05-06 --backfill
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+
+##### Miscellaneous
+
+* Why the Trillium Cluster is Different; Ramses van Zon
+  * ssh keys and mfa only for auth, no passwords
+  * separate login nodes for cpu and gpu nodes; essentially 2 clusters
+  * cpu scheduled by whole nodes only; changes how serial farming has to be done
+    * strict 24h walltime limit
+      * can submit 1 job from a previous one by doing ssh to a login node
+    * no need to specify memory request; you get the whole node memory by default
+  * interactive jobs:
+    * best way it to use `debugjob` rather than `salloc`
+    * limited to 1h
+    * gives you a full node
+    * doesn't count to fair-share
+  * `$HOME` is read-only from compute nodes
+  * `$HOME/links/` contains links to `/project/` etc. spaces
+  * `/project/` is also read-only from compute nodes
+  * `/scratch/` has hypothetical 25T quota; no purging yet
+  * `/nearline/` aka HPSS
+    * not mounted as a file system
+    * accessed through HPSS scripts
+    * very different to other system
+  * login, data-move nodes, or globus for file transfers
+  * openondemand for interactive work
+    * deployed on old `niagara` nodes
+* Solving 2D diffusion equation using MPI with Claude AI; Ge Baolai, Western
+  * Claude performed like a senior researcher and professional programmer
+  * Sonnet 4.6 model, unpaid account
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `jupyterlab` to 4.5.7 re: 3 vulnerabilities
+  * MoaceanParcels
+  * SalishSeaTools
+  * SOG-Bloomcast-Ensemble
+  * erddap-datasets
+* Squash-merged dependabot PRs to update `jupyter-server` to 2.18.0 re: 4 vulnerabilities
+  * SOG-Bloomcast-Ensemble
+  * SalishSeaTools
+  * MoaceanParcels
+  * erddap-datasets
+* Squash-merged dependabot PRs to update `pip` to 26.1 re: untrusted functionality inclusion vulnerability
+  * SalishSeaCast/docs
+  * MoaceanParcels
+  * SalishSeaTools
+  * SOG-Bloomcast-Ensemble
+  * cookiecutter-MOAD-pypkg
+  * erddap-datasets
+  * gha-workflows
+  * MOAD/docs
+  * Reshapr
+  * SalishSeaNowcast
+  * SalishSeaCmd
+  * FUN
+  * AtlantisCmd
+  * salishsea-site
+  * moad_tools
+  * NEMO_Nowcast
+
+
+##### NEMO-Cmd
+
+* Squash-merged monthly `update-pixi-lokcfile` PR
+
+
+
+#### Thu 7-May-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* 6may26 runs finished smoothly after I went to bed
+* 8may26 runs are going as expected
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  rsync -rltv --relative *16/ nibi:/project/rrg-allen/SalishSea/nowcast-green.202111/
+  ```
+  <!-- markdownlint-enable MD031 -->
+  * 2016 restarted at ~09:35
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `mistune` to 3.2.1 re: ReDoS vulnerability
+  * MoaceanParcels
+  * SalishSeaTools
+  * SOG-Bloomcast-Ensemble
+  * SalishSeaCast/docs
+  * MOAD/docs
+  * erddap-datasets
+* Squash-merged dependabot PRs to update `gitpython` to 3.1.49 re: 8 vulnerabilities
+  * SalishSeaNowcast
+  * SalishSeaCmd
+  * AtlantisCmd
+* Squash-merged dependabot PRs to update `mako` to 1.3.12 re: Windows path traversal vulnerability
+  * SalishSeaNowcast
+  * salishsea-site
 
 
 
