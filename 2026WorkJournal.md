@@ -1533,11 +1533,6 @@ First SPARC session
 * continued work on 2xrez processing and verification notebooks:
   * started reviewing row 25 work needed with Susan
     * discovered alignment problem with lons/lats
-    * traced the issue to what seems like
-
-  * adjusted row 25 tiles
-    * reviewed row 25 changes with Susan
-
 
 
 #### Sat 7-Feb-2026
@@ -3656,7 +3651,7 @@ Worked at ESB while Rita is at home
 
 ##### SalishSeaCast
 
-* first run of `archive_tarball` to work with out intervention since `robot.nibi` became available
+* first run of `archive_tarball` to work without intervention since `robot.nibi` became available
 
 
 
@@ -5546,7 +5541,7 @@ Dishika joined the group
 * continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
   <!-- markdownlint-disable MD031 -->
   ```bash
-  rsync -rltv --relative *16/ nibi:/project/rrg-allen/SalishSea/nowcast-green.202111/
+  time rsync -rltv --relative *16/ nibi:/project/rrg-allen/SalishSea/nowcast-green.202111/ ; date
   ```
   <!-- markdownlint-enable MD031 -->
   * 2016 restarted at ~09:35
@@ -5569,6 +5564,219 @@ Dishika joined the group
   * SalishSeaNowcast
   * salishsea-site
 
+
+##### Miscellaneous
+
+* mtg w/ Venkat & Michael at ARC re: arbutus migration
+  * 1st step is migration of exisitng VMs
+    * I need to initiate ticket
+  * they support the idea of a 96 core flavour, although it is not an existing option
+  * the cloud is not configured with elasticity, so that idea of turning large VM(s) on and off
+    might not provide the reliability of on-demand compute we need
+  * there is now a CephFS package that supports mounting shared object storage on multiple VMs
+    * user must manage file locking for writes, but I don't think that's an issue for our use case
+  * they will investigate ONC's relationship with arbutus to figure out if we need an RPP or RAC In
+    future years
+* mtg w/ Dishika re: on-boarding
+  * she has advanced faster than anyone I can recall
+
+
+
+#### Fri 8-May-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2016 restarted at ~09:05
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 126k/85k, up from 124k/79k on 4may
+  * bynode jobs running/queued: 34/415, down/up from 163/190 on 4may
+  * bycore jobs running/queued: 11631/6637, up from 6316/2294 on 4may
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 3/85
+    * b2 (<=12h) running/queued: 0/8
+    * b3 (<=24h) running/queued: 8/55
+    * b4 (<=72h) running/queued: 3/248
+    * b5 (<=168h) running/queued: 20/32
+
+
+##### Miscellaneous
+
+* worked on `salish` & `skookum` replacement plan:
+  * discussed storage with Susan and decided on (2 x 4 x 28T) + (1 x 5 x 28T) + (3 hot spares)
+  * emailed Henryk for his through on that storage plan
+* helped Becca sort out run time-outs for 01jan18
+* helped Tall with Pixi on `nibi`
+  * VSCode needs to be in analysis repo clone and have Pixi Code extension installed for kernel selection
+    to work
+
+
+##### SalishSeaNowcast
+
+* confirmed that issue re: pandas issue#49279 remains unsesolved in `pandas<3.0.0`
+* fixed another `FutureWarning`:
+  > The 'delim_whitespace' keyword in pd.read_csv is deprecated and
+  > will be removed in a future version. Use ``sep='\s+'`` instead
+  * PR#460 - squash-merged and deployed to `skookum`
+
+
+##### SalishSeaTools
+
+* fixed failing tests; PR#195:
+  * `test_nc_tools.test_time_origin_UTC_timezone()`:
+    * Changed `dateutil.tz.tzutc()` to `datetime.timezone.utc` re: change in `arrow` to use `utc` from stdlib
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * dramatically improved the speed of the lons/lats hover text array calculation with the help of
+    the PyCharm AI Assistant
+
+
+
+#### Sat 9-May-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* no obs for Greenwater river
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2016 finished in multiple attempts at ~10:35
+  * 2015 started at ~10:45
+* `robot.nibi` auth is working again
+  * discovered that it has been working since 6may
+  * backfilled `upload_forcing nowcast+` and `turbidity` for 4-5may
+
+
+
+#### Sun 10-May-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2015 ~65% complate at ~08:15
+
+
+##### moad_tools
+
+* updated milestone v25.2 to v26.1 on GitHub because auto-milestone workflow doesn't work for overdue
+  milestones
+* started changing to use Pixi for package & env mgmt; PR#135
+  * edit `pyproject.toml` to prepare:
+    * change `license-files = { paths = ["LICENSE"] }` to `license-files = [ "LICENSE" ]`
+  * `pixi init` to add `[tool.pixi.*]` tables to `pyproject.toml`
+    * got `default` and `midoss` environments
+  * `pixi workspace platform add linux-64 osx-arm64 osx-64 win-64`
+  * move Pixi environments additions in `.gitignore`
+  * add `,gitattributes` to VCS
+  * edit `envs/environment-user.yaml` to change to Python 3.14  hide `nodefaults` channel, `pip`,
+    and `--editable ../`
+  * `pixi import -e default --format conda-env envs/environment-user.yaml` to get minimal packages in
+    `default` environment
+  * `pixi install` created the env and the lock file
+    * confirmed with `pixi list moad_tools`
+    * add `.pixi.lock` to Git tracking
+  * change default env package pins from `*` to semver ranges
+    * `pixi upgrade --pinning-strategy semver`
+    * `pixi add "pandas<3.0.0"` to set pin re: other of our packages that require `pandas<3.0.0`
+  * deleted `environment-user.yaml`
+  * configured PyCharm:
+    * `pixi add pixi-pycharm`
+    * added `/media/doug/warehouse/MOAD/moad_tools/.pixi/envs/default` to `/home/doug/.conda/environments.txt`
+    * set `conda` executable to output of `pixi run 'echo $CONDA_PREFIX/libexec/conda'`
+    * renamed interpreter in PyCharm UI to `moad_tools:default`
+  * added `test` feature based on `environment-test.yaml`
+    * `pixi add --feature test pytest pytest-cov pytest-randomly tomli`
+    * `pixi workspace environment add test -f test --solve-group default`
+    * `pixi add --feature test pytest pytest-cov pytest-randomly tomli --pinning-strategy semver`
+    * `pixi run -e test pytest` works
+    * `pixi task add -f test pytest "pytest"` shortens the incantation to `pixi run pytest`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##### moad_tools
+
+* finished changing to use Pixi for package & env mgmt; PR#194 - squash-merged
+  * added `pytest-cov` and `pytest-cov-html` tasks
+    * added `omit = [ ".pixi/*" ]` to `[tool.coverage.run]`
+    * `pixi task add -f test pytest-cov "pytest --cov=./"`
+    * `pixi task add -f test pytest-cov-html "pytest --cov=./ --cov-report html"`
+  * updated dev docs to use Pixi tasks to run tests and produce coverage reports
+  * added envs for Python 3.12 and 3.13 testing:
+    * relax Python version in default env from `"3.14.*"` to `"*"`
+    * `pixi add --feature py312 python=3.12`
+    * `pixi workspace environment add test-py312 --feature py312 --feature test`
+    * `pixi add --feature py313 python=3.13`
+    * `pixi workspace environment add test-py313 --feature py313 --feature test`
+  * added a `test-py314` env (even though it duplicates `test`) to make GHA explicit and consistent
+    * `pixi add --feature py314 python=3.14`
+    * `pixi workspace environment add test-py314 --feature py314 --feature test`
+  * changed `pytest-with-coverage` workflow to use new reusable `pixi-pytest-with-coverage`
+    * force lock file update here because it always gets out of sync here
+  * added `docs` feature and env based on `environment-test.yaml`, `environment-rtd.yaml`, and recent
+    updates in `MOAD/docs`
+    * `pixi add --feature docs docutils=0.22.4 sphinx=9.1.0 sphinx-notfound-page=1.1.0`
+    * `pixi add --feature docs sphinx-rtd-theme==3.1.0 --pypi`
+    * `pixi add --feature docs commonmark=0.9.1 recommonmark=0.7.1 mock=5.2.0 pillow=12.2.0`
+    * `pixi workspace environment add docs --solve-group default -f docs`
+    * added tasks for common docs work:
+      * `pixi task add -f docs --cwd docs/ docs make clean html`
+      * `pixi task add -f docs --cwd docs/ linkcheck make clean linkcheck`
+  * updated dev docs to use Pixi tasks to build HTML docs and run link checker
+  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
+  * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
+  * deleted `envs/environment-rtd.yaml`
+  * deleted `envs/environment-test.yaml`
+  * added `dev` feature and env based on `environment-dev.yaml`
+    * `pixi add --feature dev black hatch pip pre-commit`
+    * `pixi workspace environment add dev --solve-group default --feature dev`
+    * `pixi add --feature dev black hatch pre-commit`  # to get version pins
+    * `pixi add --feature dev pytest pytest-cov pytest-randomly tomli`
+    * `pixi add --feature dev docutils=0.22.4 sphinx=9.1.0 sphinx-notfound-page=1.1.0`
+    * `pixi add --feature dev sphinx-rtd-theme==3.1.0 --pypi`
+    * `pixi add --feature dev commonmark=0.9.1 recommonmark=0.7.1 mock=5.2.0 pillow=12.2.0`
+    * installed `pre-commit` to run from `dev` env
+      * `pixi run -e dev pre-commit install`
+    * updated `/home/doug/.conda/environments.txt` to include `/media/doug/warehouse/MOAD/moad_tools/.pixi/envs/dev`
+  * changed PyCharm to use `moad_tools:dev` interpreter/environment
+  * removed `moad_tools-dev` conda env from `khawla`
+  * updated dev docs re: use of Pixi
+  * dropped `environment-dev.yaml`
+  * moved `requirements.txt` from `envs/` to top level directory and deleted `envs/`
+  * added task to update `requirements.txt via`pip list`
+    * `pixi task add -f dev update-reqs "python -m pip list --format=freeze >> requirements.txt"`
+  * updated installation docs to use Pixi
+  * updated use and examples docs re: Pixi
+  * added SHEM extraction and SLURM script files that were missed in PR#169
+  * added Pixi badges to README and dev docs
+  * updated release process docs to use Pixi commands
+* released v26.1
+  * be sure to run `pixi update` after `hatch version` commands
+
+
+##### 2x resolution SalishSeaCast
+
+* continued work on 2xrez processing and verification notebooks:
+  * TODO: confirm that speed-up of the lons/lats hover text array calculation from the PyCharm AI Assistant
+    is correct in terms of lon/lat pairs on rotated grid
 
 
 
@@ -5602,6 +5810,11 @@ Dishika joined the group
   * check for presence of files before downloading them; skip if present
 
 
+
+
+##### moad_tools TODO
+
+* test with `pandas>=3.0/0`
 
 
 
@@ -5745,7 +5958,6 @@ Dishika joined the group
 
 ##### SalishSeaTools TODO
 
-* fix failing tests!!!
 * update to allow `pandas>=3.0.0`
 * move `sqlalchemy` import to top of module
   * make it part of package env and analysis-repo env
@@ -5782,9 +5994,10 @@ Dishika joined the group
   * cookiecutter-analysis-repo - done 1apr26 in PR#49
   * AtlantisCmd - done 6apr26 in PR#108
   * PythonNotes - done 10apr26 in PR#5
-  * Reshapr - start 22apr26 in PR#194
+  * Reshapr - done 22apr26 in PR#194
 
-  * moad_tools
+  * moad_tools - started 10may26 in PR#135
+
   * tools/SalishSeaTools
   * SalishSeaNowcast
   * erddap-datasets
@@ -5808,8 +6021,9 @@ Dishika joined the group
   * cookiecutter-analysis-repo - done 1apr26 in PR#49 (via migration to Pixi)
   * PythonNotes - done 10apr26 in PR#5 (via migration to Pixi)
 
+  * moad_tools - started 10may26 in PR#135 (via migration to Pixi)
+
   * workflows available for testing:
-    * moad_tools
     * tools/SalishSeaTools
     * SalishSeaNowcast
     * erddap-datasets
