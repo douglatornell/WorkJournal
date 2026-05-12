@@ -5253,7 +5253,7 @@ Worked at ESB to attend AAPS spring general mtg
 
 
 
-### Week 18
+### Week 19
 
 #### Mon 4-May-2026
 
@@ -5523,6 +5523,7 @@ Dishika joined the group
   * salishsea-site
   * moad_tools
   * NEMO_Nowcast
+  * SOG-Bloomcast
 
 
 ##### NEMO-Cmd
@@ -5556,6 +5557,7 @@ Dishika joined the group
   * SalishSeaCast/docs
   * MOAD/docs
   * erddap-datasets
+  * ECget
 * Squash-merged dependabot PRs to update `gitpython` to 3.1.49 re: 8 vulnerabilities
   * SalishSeaNowcast
   * SalishSeaCmd
@@ -5563,6 +5565,7 @@ Dishika joined the group
 * Squash-merged dependabot PRs to update `mako` to 1.3.12 re: Windows path traversal vulnerability
   * SalishSeaNowcast
   * salishsea-site
+  * SOG-Bloomcast
 
 
 ##### Miscellaneous
@@ -5661,7 +5664,7 @@ Dishika joined the group
 
 * no obs for TheodosiaDiversion river
 * continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
-  * 2015 ~65% complate at ~08:15
+  * 2015 took 34h9m and finished at ~20:57
 
 
 ##### moad_tools
@@ -5701,7 +5704,94 @@ Dishika joined the group
 
 
 
+### Week 20
 
+#### Mon 11-May-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+  * checked real-time water level site: no information about data stream failure
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2014 started at ~08:50
+* emailed Michael re: 2nd Narrows AIS/HADCP data stream failure since 24apr
+  * he replied that there is no issue in the email interface; he will check with ONC re: instrument issues
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: portal is offline
+  * bynode jobs running/queued: 15/364, down from 34/415 on 8may
+  * bycore jobs running/queued: 16464/8376, up from 11631/6637 on 8may
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 4/8
+    * b2 (<=12h) running/queued: 0/26
+    * b3 (<=24h) running/queued: 1/31
+    * b4 (<=72h) running/queued: 3/244
+    * b5 (<=168h) running/queued: 7/75
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `gitpython` to 3.1.50 re: remote code execution via hooks
+  path injection vulnerability
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * AtlantisCmd
+  * SalishSeaNowcast
+* Squash-merged dependabot PRs to update `urllib3` to 2.7.0 re: sensitive heaers forwarding vulnerability
+  * cookiecutter-MOAD-pypkg
+  * NEMO-Cmd
+  * MOAD/docs
+  * MoaceanParcels
+  * SalishSeaTools
+  * SalishSeaNowcast
+  * salishsea-site
+  * FUN
+  * SalishSeaCast/docs
+  * SalishSeaCmd
+  * SOG-Bloomcast-Ensemble
+  * Reshapr
+  * NEMO_Nowcast
+  * AtlantisCmd
+  * erddap-datasets
+  * cookiecutter-djl-pypkg
+  * SOG-Bloomcast
+
+
+##### gha-workflows
+
+* created `pixi-lockfile-updater` reusable workflow
+* added `update-pixi-lockfile` that uses it to update `gha-workflows`
+  * ran it manually as a test
+    * PR was created and `pixi.lock` changed but there was no diff
+      * not sure if that's a bug, or a result of the lockfile already having been updated today
+        and/or the workflow on GiThub using `Pixi=0.68.0` that has a new lockfile schema
+
+
+##### Miscellaneous
+
+* tried to help Becca with NEMO runs on `fir`
+  * root cause is turbidity files and whatever the story with the special `riverTurbDaily201906_*.nc`
+    files is
+
+
+
+#### Tue 12-May-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2014 was ~65% complete at ~08:45
+* started uploading special 201906 turbidity forcing files from `skookum` to `fir` in `djl-nibi-xfer` `tmux` session:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  cd /results/forcing/rivers/turbidity_201906/
+  time rsync -rltv riverTurbDaily201906_y2018*.nc fir:/project/def-allen/SalishSea/forcing/rivers/river_turb/ ; date
+  ```
+  <!-- markdownlint-enable MD031 -->
 
 
 
