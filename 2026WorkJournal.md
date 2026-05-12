@@ -5612,7 +5612,7 @@ Dishika joined the group
 
 * worked on `salish` & `skookum` replacement plan:
   * discussed storage with Susan and decided on (2 x 4 x 28T) + (1 x 5 x 28T) + (3 hot spares)
-  * emailed Henryk for his through on that storage plan
+  * emailed Henryk for his thoughts on that storage plan
 * helped Becca sort out run time-outs for 01jan18
 * helped Tall with Pixi on `nibi`
   * VSCode needs to be in analysis repo clone and have Pixi Code extension installed for kernel selection
@@ -5780,6 +5780,10 @@ Dishika joined the group
 
 #### Tue 12-May-2026
 
+Worked at ESB
+
+Darren Hartono joined the group on a co-op term.
+
 ##### SalishSeaCast
 
 * no obs for TheodosiaDiversion river
@@ -5792,8 +5796,23 @@ Dishika joined the group
   time rsync -rltv riverTurbDaily201906_y2018*.nc fir:/project/def-allen/SalishSea/forcing/rivers/river_turb/ ; date
   ```
   <!-- markdownlint-enable MD031 -->
+* opened request for provisioning of new arbutus.cloud for `ctb-onc-allen` project
+  * emailed Venkat & Michael to let them know I had done so
 
 
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* worked on `salish` & `skookum` replacement plan:
+  * System76 quote from Sep-2024 is no longer available online:
+    * a few details from email thread:
+      * 1U dual-processor system with 32 total cores/64 threads Xeon processors
+      * 512Gb DDR5 memory (expandable to 1TB), 
+      * 2x 2Tb SSD for OS
+      * 4x 960Gb SSD for scratch (no expansion slots available)
+      * RAID controller
+      * redundant power supplies
+  * added present machine specs and work load descriptions to spreadsheet
 
 
 
