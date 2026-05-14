@@ -5699,6 +5699,7 @@ Dishika joined the group
     * `pixi add --feature test pytest pytest-cov pytest-randomly tomli`
     * `pixi workspace environment add test -f test --solve-group default`
     * `pixi add --feature test pytest pytest-cov pytest-randomly tomli --pinning-strategy semver`
+    * `pixi add --feature test geopandas pytables rasterio shapely --pinning-strategy semver`
     * `pixi run -e test pytest` works
     * `pixi task add -f test pytest "pytest"` shortens the incantation to `pixi run pytest`
 
@@ -5788,8 +5789,8 @@ Darren Hartono joined the group on a co-op term.
 
 * no obs for TheodosiaDiversion river
 * continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
-  * 2014 was ~65% complete at ~08:45
-* started uploading special 201906 turbidity forcing files from `skookum` to `fir` in `djl-nibi-xfer` `tmux` session:
+  * 2014 took 37h45m and finished at ~22:34
+* uploaded special 201906 turbidity forcing files from `skookum` to `fir` in `djl-nibi-xfer` `tmux` session:
   <!-- markdownlint-disable MD031 -->
   ```bash
   cd /results/forcing/rivers/turbidity_201906/
@@ -5807,12 +5808,64 @@ Darren Hartono joined the group on a co-op term.
   * System76 quote from Sep-2024 is no longer available online:
     * a few details from email thread:
       * 1U dual-processor system with 32 total cores/64 threads Xeon processors
-      * 512Gb DDR5 memory (expandable to 1TB), 
+      * 512Gb DDR5 memory (expandable to 1TB)
       * 2x 2Tb SSD for OS
       * 4x 960Gb SSD for scratch (no expansion slots available)
       * RAID controller
       * redundant power supplies
   * added present machine specs and work load descriptions to spreadsheet
+
+
+
+#### Wed 13-May-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* LiveOcean was delayed until 13:18
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2013 started at ~09:50
+
+
+##### Miscellaneous
+
+* read Pixi blog post about v7 lock file format
+  * need to coordinate update w/ group because `Pixi<0.68.0` can't read v7 lock files
+
+
+##### moad_tools
+
+* continued changing to use Pixi for package & env mgmt; PR#194
+  * added `pytest-cov` and `pytest-cov-html` tasks
+    * added `omit = [ ".pixi/*", "src/*" ]` to `[tool.coverage.run]`
+    * `pixi task add -f test pytest-cov "pytest --cov=./"`
+    * `pixi task add -f test pytest-cov-html "pytest --cov=./ --cov-report html"`
+  * updated dev docs to use Pixi tasks to run tests and produce coverage reports
+
+
+
+#### Thu 14-May-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* `crop_gribs 12` was delayed until ~10:30
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2013 was ~62% complete at ~08:45
+
+
+##### moad_tools
+
+* explored Python 3.11 and `rasterio` environment failure\
+  * caused by `rasterio>=1.5.0` pin in Pixi manifest
+  * `raterio=1.5.0` dropped support for Python<=3.12
+  * `rasterio` is used in `random_oil_spills` module
+    * tests pass with Python 3.14 and rasterio 1.5.0
+
+
+
+
+
 
 
 
@@ -5823,12 +5876,7 @@ Darren Hartono joined the group on a co-op term.
 
 ##### moad_tools
 
-* finished changing to use Pixi for package & env mgmt; PR#194 - squash-merged
-  * added `pytest-cov` and `pytest-cov-html` tasks
-    * added `omit = [ ".pixi/*" ]` to `[tool.coverage.run]`
-    * `pixi task add -f test pytest-cov "pytest --cov=./"`
-    * `pixi task add -f test pytest-cov-html "pytest --cov=./ --cov-report html"`
-  * updated dev docs to use Pixi tasks to run tests and produce coverage reports
+* continued changing to use Pixi for package & env mgmt; PR#194
   * added envs for Python 3.12 and 3.13 testing:
     * relax Python version in default env from `"3.14.*"` to `"*"`
     * `pixi add --feature py312 python=3.12`
