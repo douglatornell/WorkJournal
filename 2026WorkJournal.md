@@ -5846,6 +5846,8 @@ Darren Hartono joined the group on a co-op term.
 
 #### Thu 14-May-2026
 
+Worked at ESB for part of the day
+
 ##### SalishSeaCast
 
 * no obs for TheodosiaDiversion river
@@ -5861,7 +5863,30 @@ Darren Hartono joined the group on a co-op term.
   * `raterio=1.5.0` dropped support for Python<=3.12
   * `rasterio` is used in `random_oil_spills` module
     * tests pass with Python 3.14 and rasterio 1.5.0
+  * met w/ Susan to discuss
+    * agreed that Python 3.11 support can be dropped
 
+
+##### Miscellaneous
+
+* helped Camryn get her intereactive dev jobs to use 1 node only on `nibi`
+  * when the scheduler splits the jobs across nodes they fail with MPI errors
+* helped Becca find `ops_*` atmoospheric forcing files on `fir`
+* met with Darren re: on-boarding
+  * lots of questions, but no problems with following docs
+* helped Tall with `salishsea combine`
+  * his main problem is 2.1T of files stored on `/scratch/`
+  * suggested that he temporarily use `/project/rrg-allen/atall/`
+* met with Susan
+  * first of weekly 1-on-1
+  * agreed that legacy support for published work is special case, not routine
+  * present policy of current - 2 versions for Python is good; Pixi probably allows for current - 1
+  * discussed replacement of `skookum` and `salish`
+    * agreed that machines have distinct use cases and both need to be replicated
+  * discussed `nibi` scheduler issues; unclear what to do
+* Phys Ocgy seminar:
+  * PSF atlas conclusion
+  * When Patagonian Fjords Breath
 
 
 
