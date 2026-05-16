@@ -5854,6 +5854,9 @@ Worked at ESB for part of the day
 * `crop_gribs 12` was delayed until ~10:30
 * continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
   * 2013 was ~62% complete at ~08:45
+* got notification from Alliance that `ctb-onc-allen` project has been provisioned on the new Arbutus cloud
+  * confirmed that I can log in to web interface and see the project overview looking as expected
+  * replied to email that I will continue migration on 1-Jun
 
 
 ##### moad_tools
@@ -5865,6 +5868,36 @@ Worked at ESB for part of the day
     * tests pass with Python 3.14 and rasterio 1.5.0
   * met w/ Susan to discuss
     * agreed that Python 3.11 support can be dropped
+* continued changing to use Pixi for package & env mgmt; PR#194
+  * dropped support for Python 3.11
+  * added envs for Python 3.12 and 3.13 testing:
+    * relax Python version in default env from `"3.14.*"` to `"*"`
+    * `pixi add --feature py312 python=3.12`
+    * `pixi workspace environment add test-py312 --feature py312 --feature test`
+    * `pixi add --feature py313 python=3.13`
+    * `pixi workspace environment add test-py313 --feature py313 --feature test`
+  * added a `test-py314` env (even though it duplicates `test`) to make GHA explicit and consistent
+    * `pixi add --feature py314 python=3.14`
+    * `pixi workspace environment add test-py314 --feature py314 --feature test`
+    * updated dev docs re: development using Python 3.14
+  * changed `pytest-with-coverage` workflow to use new reusable `pixi-pytest-with-coverage`
+    * force lock file update here because it always gets out of sync here
+  * added envs for Python 3.12, 3.13, and 3.14 testing without the MIDOSS dependencies installed:
+    * `pixi add --feature test-py312-no-midoss python=3.12 pytest`
+    * `pixi workspace environment add test-py312-no-midoss -f test-py312-no-midoss`
+    * `pixi add --feature test-py312-no-midoss pytest --pinning-strategy semver`
+    * confirmed that `pixi run -e test-py312-no-midoss pytest` works
+    * `pixi add --feature test-py313-no-midoss python=3.13 pytest`
+    * `pixi workspace environment add test-py313-no-midoss -f test-py313-no-midoss`
+    * `pixi add --feature test-py313-no-midoss pytest --pinning-strategy semver`
+    * `pixi add --feature test-py314-no-midoss python=3.14 pytest`
+    * `pixi workspace environment add test-py314-no-midoss -f test-py314-no-midoss`
+    * `pixi add --feature test-py314-no-midoss pytest --pinning-strategy semver`
+    * `pixi task add -f test-py314-no-midoss pytest "pytest-no-midoss"` shortens the incantation to
+      `pixi run pytest-no-midoss`
+  * changed `pytest-no-midoss` workflow to use Pixi
+    * force lock file update here because it always gets out of sync here
+  * deleted `envs/environment-test-no-midoss.yaml`
 
 
 ##### Miscellaneous
@@ -5890,29 +5923,50 @@ Worked at ESB for part of the day
 
 
 
+#### Fri 15-May-2026
+
+Vacation
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2012 was ~62% complete at ~09:00
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 120k/81k, down from 126k/85k on 15may
+  * bynode jobs running/queued: 16/391, down from 34/415 on 15may
+  * bycore jobs running/queued: 19096/4268, up from 11631/6637 on 15may
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 3/12
+    * b2 (<=12h) running/queued: 2/44
+    * b3 (<=24h) running/queued: 4/36
+    * b4 (<=72h) running/queued: 0/244
+    * b5 (<=168h) running/queued: 7/55
+
+
+
+#### Sat 16-May-2026
+
+Vacation: YVR -> MRS
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2012 was ~62% complete at ~09:00
 
 
 
 
 
 
-
-
-
-##### moad_tools
+##### moad_tools WIP
 
 * continued changing to use Pixi for package & env mgmt; PR#194
-  * added envs for Python 3.12 and 3.13 testing:
-    * relax Python version in default env from `"3.14.*"` to `"*"`
-    * `pixi add --feature py312 python=3.12`
-    * `pixi workspace environment add test-py312 --feature py312 --feature test`
-    * `pixi add --feature py313 python=3.13`
-    * `pixi workspace environment add test-py313 --feature py313 --feature test`
-  * added a `test-py314` env (even though it duplicates `test`) to make GHA explicit and consistent
-    * `pixi add --feature py314 python=3.14`
-    * `pixi workspace environment add test-py314 --feature py314 --feature test`
-  * changed `pytest-with-coverage` workflow to use new reusable `pixi-pytest-with-coverage`
-    * force lock file update here because it always gets out of sync here
   * added `docs` feature and env based on `environment-test.yaml`, `environment-rtd.yaml`, and recent
     updates in `MOAD/docs`
     * `pixi add --feature docs docutils=0.22.4 sphinx=9.1.0 sphinx-notfound-page=1.1.0`
@@ -5954,7 +6008,10 @@ Worked at ESB for part of the day
   * be sure to run `pixi update` after `hatch version` commands
 
 
-##### 2x resolution SalishSeaCast
+
+
+
+##### 2x resolution SalishSeaCastWIP
 
 * continued work on 2xrez processing and verification notebooks:
   * TODO: confirm that speed-up of the lons/lats hover text array calculation from the PyCharm AI Assistant
