@@ -5961,6 +5961,33 @@ Vacation: YVR -> MRS
 
 
 
+#### Tue 26-May-2026
+
+Vacation: Joucas to Crillon-le-Brave
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* restarted uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2012 failed on 22dec12
+
+
+
+#### Wed 27-May-2026
+
+Vacation: Crillon-le-Brave
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* finished uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
+  * 2012 finished at ~00:46
+  * all uploads done
+    * need to move 2007-2011 to `/project/rrg-allen/`
+    * need to delete restart and other files to reduce space used
+
+
+
 
 
 
