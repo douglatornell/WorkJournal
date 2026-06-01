@@ -5961,9 +5961,105 @@ Vacation: YVR -> MRS
 
 
 
+#### Sun 17-May-2026
+
+Vacation: Marseille Airport Hilton
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+
+### Week 21
+
+#### Mon 18-May-2026
+
+**Statutory Holiday** - Victoria Day
+
+Vacation: Marseille Airport Hilton -> Arles
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+
+#### Tue 19-May-2026
+
+Vacation: Arles
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+
+#### Wed 20-May-2026
+
+Vacation: Arles
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+
+#### Thu 21-May-2026
+
+Vacation: Arles -> Point du Gard Cycling
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+
+#### Fri 22-May-2026
+
+Vacation: Uzés & Point du Gard Loop Cycling
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+
+#### Sat 23-May-2026
+
+Vacation: Point du Gard -> Saint-Remy-de-Provence Cycling
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+
+#### Sun 24-May-2026
+
+Vacation: Saint-Remy-de-Provence -> Joucas Cycling
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+
+### Week 22
+
+#### Mon 25-May-2026
+
+Vacation: Luberon Villages Loop Cycling
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+
 #### Tue 26-May-2026
 
-Vacation: Joucas to Crillon-le-Brave
+Vacation: Joucas -> Crillon-le-Brave Cycling
 
 ##### SalishSeaCast
 
@@ -5975,7 +6071,7 @@ Vacation: Joucas to Crillon-le-Brave
 
 #### Wed 27-May-2026
 
-Vacation: Crillon-le-Brave
+Vacation: Baumes Loop & Mont Ventoux Cycling
 
 ##### SalishSeaCast
 
@@ -5987,6 +6083,50 @@ Vacation: Crillon-le-Brave
     * need to delete restart and other files to reduce space used
 
 
+
+#### Thu 28-May-2026
+
+Vacation: Crillon-le-Brave -> Avignon
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+#### Fri 29-May-2026
+
+Vacation: Avignon -> Marseille Airport Hilton
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+#### Sat 30-May-2026
+
+Vacation: MRS -> YVR
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+#### Sun 31-May-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+
+
+##### SalishSeaCast TODO
+
+* consolidate `nowcast-green.202211` results on `nibi`
+  * move partial 2007-2011 to `/project/rrg-allen/`
+  * upload remaining 2007-2011 to `/project/rrg-allen/`
+  * delete restart and other files to reduce space used
+  * move forcing to `/project/rrg-allen/`
 
 
 
