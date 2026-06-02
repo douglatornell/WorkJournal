@@ -5937,9 +5937,9 @@ Vacation
 ##### `nibi`
 
 * checked on `nibi`:
-  * cores allocated/used: 120k/81k, down from 126k/85k on 15may
-  * bynode jobs running/queued: 16/391, down from 34/415 on 15may
-  * bycore jobs running/queued: 19096/4268, up from 11631/6637 on 15may
+  * cores allocated/used: 120k/81k, down from 126k/85k on 11may
+  * bynode jobs running/queued: 16/391, down from 34/415 on 11may
+  * bycore jobs running/queued: 19096/4268, up from 11631/6637 on 11may
   * look at different bynode queues:
     * b1 (<=3h) running/queued: 3/12
     * b2 (<=12h) running/queued: 2/44
@@ -6116,6 +6116,96 @@ Vacation: MRS -> YVR
 ##### SalishSeaCast
 
 * no obs for TheodosiaDiversion river
+* `make_turbidity_file` failed due to inconsistent hour value
+
+
+
+## June
+
+### Week 23
+
+#### Mon 1-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* fixed permissions on `26sep12/` onward files on `nibi` that Vicente reported were not readable
+  * they were inexplicably `rwx--S---`
+* moved 2011 files from `/project/def-allen/` to `/project/rrg-allen/`
+  * quite fast
+* started uploading rest of 2011 `nowcast-green.202211` results from `skookum` to `nibi`
+  in `djl-nibi-xfer` `tmux` session:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  # new rsync options to exclude all but results files
+  time rsync -rltv --exclude-from rsync_excludes --relative *11/ \
+    robot.nibi:/project/rrg-allen/SalishSea/nowcast-green.202111/ ; date
+  ```
+  <!-- markdownlint-enable MD031 -->
+* deleted restart and other files to reduce space and file count used
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  cd /project/rrg-allen/SalishSea/nowcast-green.202111/
+  fd -e yaml -X rm
+  fd -e txt -X rm
+  fd SalishSeaNEMO.sh -X rm
+  fd -e xml -X rm
+  fd layout.dat -X rm
+  fd namelist -X rm
+  fd output -X rm
+  fd -e stat -X rm
+  fd std -X rm
+  fd time.step -X rm
+  fd xios_registroy.bin -X rm
+  fd restart -X rm
+  ```
+  <!-- markdownlint-enable MD031 -->
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 104k/60k, down from 120k/81k on 15may
+  * bynode jobs running/queued: 84/582, down from 16/391 on 15may
+  * bycore jobs running/queued: 4477/447, way down from 19096/4268 on 15may
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 1/147
+    * b2 (<=12h) running/queued: 12/156
+    * b3 (<=24h) running/queued: 0/24
+    * b4 (<=72h) running/queued: 19/209
+    * b5 (<=168h) running/queued: 52/36
+
+
+
+#### Tue 2-Jun-2026
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* continued uploading rest of 2007-2011 `nowcast-green.202211` results from `skookum` to `nibi`
+  in `djl-nibi-xfer` `tmux` session:
+  * 2011 was ~65% complete at ~07:55
+
+* why are May month-average fields not on ERDDAP?
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 117k/88k, up from 104k/60k on 1jun
+  * bynode jobs running/queued: 88/696, up from 84/582 on 1jun
+  * bycore jobs running/queued: 3632/2569, down/up from 4477/447 on 1jun
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 1/143
+    * b2 (<=12h) running/queued: 0/286
+    * b3 (<=24h) running/queued: 14/26
+    * b4 (<=72h) running/queued: 17/207
+    * b5 (<=168h) running/queued: 56/34
+
+
+
 
 
 
@@ -6124,8 +6214,9 @@ Vacation: MRS -> YVR
 
 * consolidate `nowcast-green.202211` results on `nibi`
   * move partial 2007-2011 to `/project/rrg-allen/`
+    * 2011 done
   * upload remaining 2007-2011 to `/project/rrg-allen/`
-  * delete restart and other files to reduce space used
+    * 2011 in progress
   * move forcing to `/project/rrg-allen/`
 
 
