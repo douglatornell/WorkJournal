@@ -6187,8 +6187,13 @@ Worked at ESB
 * continued uploading rest of 2007-2011 `nowcast-green.202211` results from `skookum` to `nibi`
   in `djl-nibi-xfer` `tmux` session:
   * 2011 was ~65% complete at ~07:55
-
-* why are May month-average fields not on ERDDAP?
+* investigated why May month-average fields not on ERDDAP:
+  * `make_averaged_dataset` worker did its job on 31may
+  * no `ping_erddap` to trigger update: why?
+    * seems we are relying on ERDDAP's routine dataset loading feature
+    * `reloadEveryNMinutes` is set to 10080 = 1 week
+    * did some graph requests to see if using the dataset triggers the update
+      * not immediately...
 
 
 ##### `nibi`
@@ -6204,6 +6209,45 @@ Worked at ESB
     * b4 (<=72h) running/queued: 17/207
     * b5 (<=168h) running/queued: 56/34
 
+
+##### Miscellaneous
+
+* worked on `salish` & `skookum` replacement plan:
+  * looked at SSD storage re: possible scratch for `salish` replacement
+    * largest at Memory Express is 8T for ~$3700
+    * 4T for ~$1500
+* MOAD group mtg; see whiteboard
+* helped Jose figure out why his 2016? run was missing 29feb
+  * he had `nn_leapy = 0` in his namelist
+  * also talked about a cascading failure he had due to maybe bad metadata committed in hi `pixi.lock` 
+    file and problems with Pixi on `nibi` maybe due to async and threads exhaustion on a login node
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `codecov-action` to 6.0.1 re: template injection vulnerability
+  * gha-workflows
+  * AtlantisCmd
+  * SalishSeaNowcast
+* Squash-merged dependabot PRs to update `idna` to 3.15 re: CVE-2026-45409 re: DoS vulnerability
+  * salishsea-site
+  * SalishSeaNowcast
+  * FUN
+  * MOAD/docs
+  * SalishSeaCast/docs
+  * SalishSeaCmd
+  * SalishSeaTools
+  * NEMO_Nowcast
+  * MoaceanParcels
+  * SOG-Bloomcast-Ensemble
+  * Reshapr
+  * NEMO-Cmd
+  * AtlantisCmd
+  * cookiecutter-MOAD-pypkg
+* Squash-merged dependabot PR to update `setup-pixi` to 0.9.6 re: feature & dependency updates
+  * NEMO-Cmd
+  * gha-workflows
+  * AtlantisCmd
 
 
 
