@@ -6156,7 +6156,7 @@ Vacation: MRS -> YVR
   fd -e stat -X rm
   fd std -X rm
   fd time.step -X rm
-  fd xios_registroy.bin -X rm
+  fd xios_registry.bin -X rm
   fd restart -X rm
   ```
   <!-- markdownlint-enable MD031 -->
@@ -6183,10 +6183,10 @@ Worked at ESB
 
 ##### SalishSeaCast
 
-* no obs for TheodosiaDiversion river
+* no obs for TheodosiaDiversion nor Snohomish river
 * continued uploading rest of 2007-2011 `nowcast-green.202211` results from `skookum` to `nibi`
   in `djl-nibi-xfer` `tmux` session:
-  * 2011 was ~65% complete at ~07:55
+  * 2011 finished in 35h40m at ~23:01
 * investigated why May month-average fields not on ERDDAP:
   * `make_averaged_dataset` worker did its job on 31may
   * no `ping_erddap` to trigger update: why?
@@ -6219,7 +6219,7 @@ Worked at ESB
 * MOAD group mtg; see whiteboard
 * helped Jose figure out why his 2016? run was missing 29feb
   * he had `nn_leapy = 0` in his namelist
-  * also talked about a cascading failure he had due to maybe bad metadata committed in hi `pixi.lock` 
+  * also talked about a cascading failure he had due to maybe bad metadata committed in hi `pixi.lock`
     file and problems with Pixi on `nibi` maybe due to async and threads exhaustion on a login node
 
 
@@ -6244,29 +6244,97 @@ Worked at ESB
   * NEMO-Cmd
   * AtlantisCmd
   * cookiecutter-MOAD-pypkg
-* Squash-merged dependabot PR to update `setup-pixi` to 0.9.6 re: feature & dependency updates
+* Squash-merged dependabot PRs to update `setup-pixi` to 0.9.6 re: feature & dependency updates
   * NEMO-Cmd
   * gha-workflows
   * AtlantisCmd
 
 
 
+#### Wed 3-Jun-2026
+
+Got COVID-19 spring vaccination
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* continued uploading rest of 2007-2011 `nowcast-green.202211` results from `skookum` to `nibi`
+  in `djl-nibi-xfer` `tmux` session:
+  * 2010 started at ~09:30
+* investigated why May month-average fields not on ERDDAP:
+  * still no auto-update
+* `crop_gribs 12` failed at ~10:25 with 66 unprocess files after 8h
+  * 12Z files publication had not finished at 10:47
+  * re-ran `crop_gribs 12` to catch remaining files as they appear
+  * `collect_weather 12 2.5km` finished at 11:10
+    * `crop_gribs 12` successfully handled the remaining fills, so killed it
+  * ran `grib_to_netcdf nowcast+` to restart automation
 
 
+##### Dependency Updates
 
-##### SalishSeaCast TODO
+* Squash-merged dependabot PRs to update `pre-commit` re: `black` 26.5.1
+  * NEMO_Nowcast
+  * SalishSeaCmd
+  * SalishSeaNowcast
+  * SOG-Bloomcast-Ensemble
+  * erddap-datasets
+  * NEMO-Cmd
+  * salishsea-site
+  * SalishSeaTools
+  * Reshapr
+  * cookiecutter-MOAD-pypkg
+  * MoaceanParcels
+  * gha-workflows
+  * AtlantisCmd
+  * moad_tools
 
-* consolidate `nowcast-green.202211` results on `nibi`
-  * move partial 2007-2011 to `/project/rrg-allen/`
-    * 2011 done
-  * upload remaining 2007-2011 to `/project/rrg-allen/`
-    * 2011 in progress
-  * move forcing to `/project/rrg-allen/`
+
+##### Miscellaneous
+
+* updated `khawla` PyCharm to 2026.1.2
+* mtg w/ Susan:
+  * what doing:
+    * finishing `moad_tools` migration to Pixi
+    * consolidating hindcast storage on `nibi`
+      * move 2007-2009 from `def-allen` ASAP for Vicente's re-runs
+  * help students:
+    * Junqi:
+      * rdps 10km
+        * let him use an hrdps file rather than code as guide
+        * will eventually need weights file
+      * hrdps/ops/gem 2.5km
+      * hrdps 1km
+        * need a name: `hrdps1km`?
+        * will need a weights file
+  * new hardware
+    * Budget: up to $100k
+    * storage ideas:
+      * 8T scratch drive in web server
+        * hindcast:
+        * symlinks for distant past
+        * copies of files on RAID array for recent past
+          * copies satisfies redundancy
+        * replace files with symlinks as drive fills
+      * 2 RAID 5 arrays:
+        * each has 5 drives + hot spare
+        * leaves 4 bays free to enable replacement with larger drives
+        * 1 array for production and hindcast results storage: `/production/`
+        * 1 array for research results: `/research/`
+  * NEMO upgrade:
+    * start with physics-only
+    * get Michael's config running on `trillium`
+    * discussed Git Submodules and symlinks for configs
+      * prefer symlinks
+        * need to test concept
 
 
+##### SalishSeaCmd
+
+* fixed tests re: Jose's changes to update modules for `narval`; PR#149
 
 
-##### moad_tools WIP
+##### moad_tools
 
 * continued changing to use Pixi for package & env mgmt; PR#194
   * added `docs` feature and env based on `environment-test.yaml`, `environment-rtd.yaml`, and recent
@@ -6279,35 +6347,195 @@ Worked at ESB
       * `pixi task add -f docs --cwd docs/ docs make clean html`
       * `pixi task add -f docs --cwd docs/ linkcheck make clean linkcheck`
   * updated dev docs to use Pixi tasks to build HTML docs and run link checker
-  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
   * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
+  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
   * deleted `envs/environment-rtd.yaml`
   * deleted `envs/environment-test.yaml`
+  * updated `ModuleNotFoundError` messages in try/except blocks for modules that are only installed
+    in the `midoss` environment with instructions to use `pixi run -e midoss ...`
+  * deleted `envs/environment-midoss.yaml`
+
+
+
+#### Thu 4-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* `crop_gribs 00` failed at ~22:45 with 22 unprocess files after 8h
+  * `sarracenia` finished files collection at ~22:52
+  * ran `crop_gribs 00 --backfill` at ~08:12
+  * finished before 12Z files collection did, so automation shouldn't be disturbed
+* moved 2007-2009 `*grid_[TUVW].nc` files from `/project/def-allen/` to `/project/rrg-allen/` on `nibi`
+* deleted restart and other files to reduce space and file count used
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  cd /project/rrg-allen/SalishSea/nowcast-green.202111/
+  fd -e yaml -X rm
+  fd -e txt -X rm
+  fd SalishSeaNEMO.sh -X rm
+  fd -e xml -X rm
+  fd layout.dat -X rm
+  fd namelist -X rm
+  fd output -X rm
+  fd -e stat -X rm
+  fd std -X rm
+  fd time.step -X rm
+  fd xios_registry.bin -X rm
+  fd restart -X rm
+  ```
+  <!-- markdownlint-enable MD031 -->
+* continued uploading rest of 2007-2011 `nowcast-green.202211` results from `skookum` to `nibi`
+  in `djl-nibi-xfer` `tmux` session:
+  * 2010 stopped at ~93% after ~36h21m at ~21:54
+* investigated why May month-average fields not on ERDDAP:
+  * still no auto-update
+
+
+##### SS-run-sets
+
+* updated `nibi-example.yaml` to use `/project/rrg-allen/...` paths for restart files
+  * cleaned up `/scratch` so that I could do a test run
+  * test run succeeded
+  * committed & pushed change
+
+
+##### moad_tools
+
+* finished changing to use Pixi for package & env mgmt; PR#194 - squash-merged
   * added `dev` feature and env based on `environment-dev.yaml`
     * `pixi add --feature dev black hatch pip pre-commit`
     * `pixi workspace environment add dev --solve-group default --feature dev`
-    * `pixi add --feature dev black hatch pre-commit`  # to get version pins
+    * `pixi add --feature dev black hatch pip pre-commit`  # to get version pins
     * `pixi add --feature dev pytest pytest-cov pytest-randomly tomli`
     * `pixi add --feature dev docutils=0.22.4 sphinx=9.1.0 sphinx-notfound-page=1.1.0`
     * `pixi add --feature dev sphinx-rtd-theme==3.1.0 --pypi`
     * `pixi add --feature dev commonmark=0.9.1 recommonmark=0.7.1 mock=5.2.0 pillow=12.2.0`
+    * `pixi add --feature dev geopandas pytables rasterio shapely`
     * installed `pre-commit` to run from `dev` env
       * `pixi run -e dev pre-commit install`
     * updated `/home/doug/.conda/environments.txt` to include `/media/doug/warehouse/MOAD/moad_tools/.pixi/envs/dev`
   * changed PyCharm to use `moad_tools:dev` interpreter/environment
   * removed `moad_tools-dev` conda env from `khawla`
   * updated dev docs re: use of Pixi
+  * dropped `environment-midoss.yaml`
   * dropped `environment-dev.yaml`
   * moved `requirements.txt` from `envs/` to top level directory and deleted `envs/`
-  * added task to update `requirements.txt via`pip list`
+  * added task to update `requirements.txt` via `pip list`
     * `pixi task add -f dev update-reqs "python -m pip list --format=freeze >> requirements.txt"`
-  * updated installation docs to use Pixi
-  * updated use and examples docs re: Pixi
-  * added SHEM extraction and SLURM script files that were missed in PR#169
+  * added `update-pixi-lockfile` GHA workflow based on reusable `pixi-lockfile-updater` workflow
+  * updated API docs to `pixi run -e midoss ...`
   * added Pixi badges to README and dev docs
   * updated release process docs to use Pixi commands
+* updated lock file to v7; PR#139 - squash-merged
 * released v26.1
   * be sure to run `pixi update` after `hatch version` commands
+
+
+##### Miscellaneous
+
+* Phys Ocgy seminar: Anna-Marie Strehl, University of Bergen: "A long-term perspective on water-mass
+  transformation in the Greenland Sea and implications for the Northern Overturning"
+* updated Pixi on `khawla` to 0.7.1
+* updated Pixi lock files to v7:
+  * moad_tools
+  * gha-workflows
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * SalishSeaCast/docs
+  * MOAD/docs
+  * SOG-Bloomcast-Ensemble
+  * NEMO_Nowcast
+  * AtlantisCmd
+  * PythonNotes
+  * Reshapr
+
+
+##### gha-workflows
+
+* Squash-merged `update-pixi-lockfile` PR
+
+
+
+#### Fri 5-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* `crop_gribs 12` stalled with 1 file left unprocessed at ~08:29
+* investigated why May month-average fields not on ERDDAP:
+  * all but chemistry auto-updated since yesterday
+  * discussed w/ Susan and agreed that ~1w lag for updates is acceptable
+* finished uploading rest of 2007-2011 `nowcast-green.202211` results from `skookum` to `nibi`
+  in `djl-nibi-xfer` `tmux` session:
+  * 2010 re-started at ~08:39; finished at ~13:13
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 89k/64k, down from 117k/88k on 2jun
+  * bynode jobs running/queued: 69/398, down from 88/696 on 2jun
+  * bycore jobs running/queued: 2406/824, down from 3632/2569 on 2jun
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 1/52
+    * b2 (<=12h) running/queued: 4/72
+    * b3 (<=24h) running/queued: 8/26
+    * b4 (<=72h) running/queued: 14/212
+    * b5 (<=168h) running/queued: 42/37
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PR to update `webob` to 1.8.10 re: open redirect vulnerability
+  * salishsea-site
+
+
+
+#### Sat 6-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* finished investigation of why May month-average fields not on ERDDAP:
+  * chemistry auto-updated overnight
+
+
+
+#### Sun 7-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* copied `/project/def-allen/SalishSea/forcing/` to `/project/rrg-allen/SalishSea/forcing/`
+
+
+##### gha-workflows
+
+* started looking at `zizmor` to audit/improve GHA workflows
+  * installed with `pixi global install zizmor`
+  * got expected complaints about "action not pinned to hash"
+    * my own action use `@main`
+    * `github-script@v9`
+    * resolve by adding `# zizmor: ignore[unpinned-uses]`
+  * credntial persistence:
+    * `pytest-with-coverage.yaml`
+    * `sphinx-linkcheck.yaml`
+  * no finidngs:
+    * `auto-milestone-issue.yaml`
+  * `auditor` persona complains about
+    * overly braod permission by default on `id-token`
+    * missing explanatory comments on permissions
+  * updated `update-pixi-lockfile.yaml` to level that makes `auditor` persona happy
+
+
+
+
+
+##### SalishSeaCast TODO
+
+* consolidate `nowcast-green.202211` results and forcing on `nibi`
+  * move forcing to `/project/rrg-allen/`
 
 
 
@@ -6366,6 +6594,7 @@ Worked at ESB
 
 * comments from Becca in Slack DM after her us of the docs to set up on `fir`
 * drop section about migration from `XIOS-1` to `XIOS-2`
+* drop `zzz_archival_docs/hg_version_control.rst` due broken links and we no longer use `hg`
 * add docs section re: `pixi add`, `pixi import -e ... -f ...`, and maybe
   `pixi workspace environment add`
   * add section about `pixi add` for pkgs like `SalishSeaTools` and `moad_tools`
@@ -6536,8 +6765,7 @@ Worked at ESB
   * AtlantisCmd - done 6apr26 in PR#108
   * PythonNotes - done 10apr26 in PR#5
   * Reshapr - done 22apr26 in PR#194
-
-  * moad_tools - started 10may26 in PR#135
+  * moad_tools - done 4jun26 in PR#135
 
   * tools/SalishSeaTools
   * SalishSeaNowcast
@@ -6561,8 +6789,7 @@ Worked at ESB
   * NEMO_Nowcast - done 12mar26 in PR#93
   * cookiecutter-analysis-repo - done 1apr26 in PR#49 (via migration to Pixi)
   * PythonNotes - done 10apr26 in PR#5 (via migration to Pixi)
-
-  * moad_tools - started 10may26 in PR#135 (via migration to Pixi)
+  * moad_tools - done 4jun26 in PR#135 (via migration to Pixi)
 
   * workflows available for testing:
     * tools/SalishSeaTools
