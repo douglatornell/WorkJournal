@@ -6530,12 +6530,42 @@ Got COVID-19 spring vaccination
 
 
 
+### Week 24
+
+#### Mon 8-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* compared symlinks between `/results/forcing/` and `nibi:/project/rrg-allen/SalishSea/forcing/`
+  * hampered by slow response from `/results`
+    * sent a message to Henryk on Slack
+      * he says that `/results` RAID is optimal
+  * it appears that `rsync -rltv` follows symlinks to create copies of the linked files
+* `make_plots wwatch3 forecast publish` failed with a DAP error from ERDDAP
+  * perhaps another symptom of `/results` having trouble?
+
+
+##### Miscellaneous
+
+* answered Susan's questions about Dishika's analysis repo clone location:
+  * docs are clear about putting it in `/ocean/$USER/MOAD/`
+  * suggested new clone or `rsync` to fix the issue
+* worked on `salish` & `skookum` replacement plan:
+  * started writing spec doc on Google docs
+  * max threads per core still seems to be 2
+  * cores per socket have increased dramatically
+
+
+
+
+
 
 
 ##### SalishSeaCast TODO
 
 * consolidate `nowcast-green.202211` results and forcing on `nibi`
-  * move forcing to `/project/rrg-allen/`
+  * change path for `upload_forcing robot.nibi` to `/project/rrg-allen/SalishSea/forcing/`
 
 
 
@@ -6676,6 +6706,10 @@ Got COVID-19 spring vaccination
 
 ##### SalishSeaCast/docs TODO
 
+* fix broken or forbidden links:
+  * emacs rst mode
+  * `stormtools` module anchor on rtd
+  * many nbviewer rate limits
 * update XIOS forge.ipsl.fr addresses to https://gitlab.in2p3.fr/ipsl/projets/xios-projects/xios
 * planned updates re: Pixi replacing `conda/mamba`
   * `netcdf4.rst`
