@@ -6558,6 +6558,26 @@ Got COVID-19 spring vaccination
 
 
 
+#### Tue 9-Jun-2026
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* worked on `salish` & `skookum` replacement plan:
+  * continued writing spec doc on Google docs
+  * Susan confirmed that funds must be spent by 30sep
+* met w/ Grace to help here with her conda setup on `grinder`
+  * root cause of her issue was that her `.bashrc` was somehow missing the conda setup incantation
+
+
+
 
 
 
@@ -6566,6 +6586,9 @@ Got COVID-19 spring vaccination
 
 * consolidate `nowcast-green.202211` results and forcing on `nibi`
   * change path for `upload_forcing robot.nibi` to `/project/rrg-allen/SalishSea/forcing/`
+  * backfill uploads from 8jun onward
+* use persisted 16jun LiveOcean extraction for 17jun
+  * collect 17jun extraction on 18jun
 
 
 
