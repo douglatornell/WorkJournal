@@ -6578,6 +6578,250 @@ Worked at ESB
 
 
 
+#### Wed 10-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* `crop_gribs 18` stalled with 1 unprocessed file
+  * it will probably be killed by the reboot
+* started evaluation of new `arbutus` deployment:
+  * OS choices:
+    * AlmaLinux 8-10: RHEL-ish
+    * cirros: OpenStack mini-distro just for testing VMs
+    * Debian 12-13
+    * Fedora 42
+    * Rocky 8-10: RHEL-ish
+    * Ubuntu 22.05, 24.04, 25.04
+  * no flavours even close to old `arbutus`
+* Henryk did a therapeutic reboot of `skookum` at ~15:27
+* started getting all the things restarted at ~15:32:
+  * started `tomcat` to bring ERDDAP up
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    sudo su - tomcat
+    /opt/apache-tomcat-10.1.40/bin/startup.sh
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * started website
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    mamba activate /SalishSeaCast/salishsea-site-env
+    supervisord --configuration /SalishSeaCast/salishsea-site/supervisord-prod.ini
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * started automation:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    mamba activate /SalishSeaCast/nowcast-env
+    supervisord --configuration /SalishSeaCast/SalishSeaNowcast/config/supervisord.ini
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * start workers:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    crop_gribs 18 --backfill
+    collect_weather 00 2.5km
+    crop_gribs 00 --fcst-date 2026-06-11
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+##### Miscellaneous
+
+* increased inotify watches on `khawla` to keep PyCharm happy: `fs.inotify.max_user_watches = 1048576`
+* installed `htop` on `khawla`
+* help Dishika get `tensorflow` installed in her analysis env:
+  * had to do `pixi workspace platform remove osx-64`
+  * also had to do `pixi workspace platform remove win-64`
+  * that still didn't work; figured out that `tensoflow` needs Python 3.12
+  * she is going to build a new env for it
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PR to update `codecov-action` to 7.0.0 re: migration of codecov from
+  Sentry to Harness
+  * SalishSeaNowcast
+
+
+##### SalishSeaNowcast
+
+* updated `robot.nibi` forcing file paths to `/project/rrg-allen/...`; PR#467
+  * deployed change to `skookum`
+  * backfilled forcing uploads to `roboto.nibi` for 8-10jun
+
+
+
+#### Thu 11-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `setup-pixi` to 0.9.6 re: feature & dependency updates
+  * moad_tools
+* Squash-merged dependabot PR to update `codecov-action` to 7.0.0 re: migration of codecov from
+  Sentry to Harness
+  * gha-workflows
+  * AtlantisCmd
+* Squash-merged dependabot PRs to update `idna` to 3.15 re: CVE-2026-45409 re: DoS vulnerability
+  * cookiecutter-djl-pypkg
+  * erddap-datasets
+  * SOG-Bloomcast
+* Squash-merged dependabot PRs to update `pip` to 26.1 re: untrusted functionality inclusion vulnerability
+  * FUN
+  * SalishSeaCast/docs
+  * SOG-forcing
+
+
+##### Miscellaneous
+
+* worked on `salish` & `skookum` replacement plan:
+  * finished writing draft spec doc on Google docs
+    * passed it to Susan for comments
+      * she came up with good server names: web: `tillicum` (Chinook for "family; friends") and
+        compute: `mamook` (Chinook for "to do; to make")
+    * shared it with the group in #general for comments
+* Phys Ocgy seminar: Rich, History of Arctic Ocgy
+
+
+
+#### Fri 12-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+  * no update on the wateroffice.gc.ca site about reason, still "due to operational issues"
+* `download_live_ocean` timmed out at 11:40
+  * re-ran at 11:43
+  * success at ~12:30
+
+
+##### SalishSeaCmd
+
+* started adding support for `rorqual` by delegating the initial work to Junie; PR#151
+  * prompt:
+    * Please create a plan to add support for a new HPC system called rorqual using the support for
+      the system call fir as guidance. Please include updating the run.py and test_run.py modules in
+      the plan.
+    * got prompted to choose a model and switch from default Gemini-Fast to ChatGPT-3.5-codex
+  * reviewed plan and changed 2 places where there was a choice of create a new test or parameterize
+    an existing one to create new because that is consistent with the rest of the tests in the classes
+  * asked Junie to implement the plan that it had written to a scratch .md file
+    * after it did the edits, it stumbled on running the tests because I forgot to tell it to use
+      `pixi run -e pytest ...`
+    * that still didn't work because it needed the full path for my installed Pixi:
+      `/home/doug/.pixi/bin/pixi run -e test pytest -k run_submit tests/test_run.py`
+    * that enabled the agent to run tests, find errors, and fix them
+  * code review:
+    * had to move `rorqual` into alphabetical order in many places
+    * agent missed adding `rorqual` to parameterizations of 3 tests in `TestRun`:
+      * asked it to fix `test_run_separate_deflate()`, putting `rorqual` code in alphabetical order
+        after `nibi`
+      * `test_segmented_run_submits()` - I accidently hit enter after just pasting the test method
+        reference, and Junie fixed it as requested for `test_run_separate_deflate()` and re-ran tests
+      * `TestExecute.test_execute_without_deflate()`
+    * agent did an interesting hack for `TestBuildBatchScript.test_rorqual()`:
+      * it ran `run._build_batch_script()` for `fir`, then for `rorqual`, then confirmed that the 2 calls
+        generated identical results
+      * I edited that code to make it similar to other tests where we check against the expected script,
+        not a code-generated version
+    * agent added `fir` and `rorqual` to `TestExecute.test_execute_with_deflate()` parameterization
+      where I hadn't bothered to add `nibi` and `trillium`
+
+
+##### `rorqual`
+
+* started to set up to test `SalishSeaCmd` on `rorqual`
+  * I had forgotten that I tested Pixi there in Dec-2025
+  * updated Pixi to 0.70.2
+  * deleted `NEMO-Cmd` clone
+  * cloned repos:
+    * `grid`
+    * `SalishSeaCmd`
+    * `SS-run-sets`
+    * `tides`
+    * `tracers`
+    * `rivers-climatology`
+    * `NEMO-3.6-code`
+    * `XIOS-ARCH`
+    * `XIOS-2`
+  * installed `SalishSeaCmd`
+    * Pixi complains:
+      * WARN cache for Repodata at /home/dlatorne/.cache/rattler/cache/repodata is on a network/parallel
+        filesystem (NFS/SMB/FUSE/BeeGFS/Lustre/GPFS/CephFS), redirected to /tmp/pixi-cache-dlatorne/repodata for
+        this run. Set [cache.repodata] in config.toml or PIXI_CACHE_DIR to override, or [cache.netfs-redirect] =
+        "never" to keep the original path.
+  * created XIOS arch files:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+      cd XIOS-ARCH/ALLIANCE/
+      cp arch-GCC_NIBI.env arch-GCC_RORQUAL.env
+      cp arch-GCC_NIBI.fcm arch-GCC_RORQUAL.fcm
+      cp arch-GCC_NIBI.path arch-GCC_RORQUAL.path
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * built XIOS-2:
+    * symlinked arch files
+    * built took 1m56s
+  * built NEMO SalishSeaCast config and REBUILD_NEMO:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+      cd NEMO-3.6-code/NEMOGCM/ARCH/UBC_EOAS/
+      cp arch-GCC_NIBI.fcm arch-GCC_RORQUAL.fcm
+      module load StdEnv/2023 netcdf-fortran-mpi/4.6.1 perl/5.36.1
+    ```
+    <!-- markdownlint-enable MD031 -->
+    * build took 55s
+  * prepared 01mar23-11x23 test run
+    * created `SalishSea/djl/v202111/rorqual-example.yaml` by copying and editing `nibi` file
+    * checked forcing files:
+      * atmospheric - good
+      * rivers - good
+      * river_turb - bad
+      * sshNeahBay - bad
+      * LiveOcean
+    * uploaded restart files from `skookum`
+
+
+
+#### Sat 13-Jun-2026
+
+Dinner at Kristin & Kirk's
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+##### NEMO-4.2
+
+* NEMO>=4.2.0 required XIOS2 trunk (>2.5)
+* new home for XIOS: https://gitlab.in2p3.fr/ipsl/projets/xios-projects/xios
+* NEMO>4.2.2 supports a `.env` file in its build system
+
+
+
+#### Sun 14-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* `make_turbidity_file` failed due to inconsistent hour values
+
+
+##### `rorqual`
+
+* investigated forcing files issue: "Cannot send after transport endpoint shutdown"
+  * eventually checked status page: `/project` has been partially bad since 10jun;
+    rebuild is expected to finish on 15jun
+
+
+
 
 
 
@@ -6585,8 +6829,7 @@ Worked at ESB
 ##### SalishSeaCast TODO
 
 * consolidate `nowcast-green.202211` results and forcing on `nibi`
-  * change path for `upload_forcing robot.nibi` to `/project/rrg-allen/SalishSea/forcing/`
-  * backfill uploads from 8jun onward
+  * delete `/project/def-allen/SalishSea/forcing/` on 16jun after checking with Tall
 * use persisted 16jun LiveOcean extraction for 17jun
   * collect 17jun extraction on 18jun
 
@@ -6636,7 +6879,7 @@ Worked at ESB
 
 ##### moad_tools TODO
 
-* test with `pandas>=3.0/0`
+* test with `pandas>=3.0.0`
 
 
 
@@ -6709,15 +6952,15 @@ Worked at ESB
 
 ##### SalishSeaCmd TODO
 
-* update scaling tests on `narval` with `StdEnv/2023`
-  * 100 Gb/s InfiniBand Mellanox HDR interconnect
-  * Lustre file system
-  * cpus: AMD EPYC 7532 (Zen 2) @ 2.40 GHz, 256M cache L3
 * add support for `rorqual`
   * 200 Gb/s HDR InfiniBand
   * Lustre file system
   * cpus: AMD EPYC 9654 (Zen 4) @ 2.40 GHz, 384MB cache L3
   * `--ntasks-per-node=24 --cpus-per-task=8` for whole nodes
+* update scaling tests on `narval` with `StdEnv/2023`
+  * 100 Gb/s InfiniBand Mellanox HDR interconnect
+  * Lustre file system
+  * cpus: AMD EPYC 7532 (Zen 2) @ 2.40 GHz, 256M cache L3
 * consider removing attached xios server feature
 * consider removing separate deflate job feature
 * change `orcinus` to use `slurm`
