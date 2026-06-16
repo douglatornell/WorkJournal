@@ -6889,6 +6889,28 @@ Dinner at Kristin & Kirk's
 
 
 
+#### Tue 16-Jun-2026
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* helped Becca understand output and restarts of her `fir` run
+* `ubcsecure` wifi refused to connect
+  * traced the porblem to missing `DigiCert_Global_Root_CA.crt` file
+    * fixed by manually downloading and copying into `/usr/share/ca-certificates/mozilla/`
+    * old OS version issue?
+* researched Globus vs `rsync`
+  * Globus may be faster due to parallel channels
+  * Globus may not handle symlinks and permissions
+    * found a blog post about finalizing Globus transfers with `rsync` to sychronize metadata
+
 
 
 
@@ -7021,11 +7043,6 @@ Dinner at Kristin & Kirk's
 
 ##### SalishSeaCmd TODO
 
-* add support for `rorqual`
-  * 200 Gb/s HDR InfiniBand
-  * Lustre file system
-  * cpus: AMD EPYC 9654 (Zen 4) @ 2.40 GHz, 384MB cache L3
-  * `--ntasks-per-node=24 --cpus-per-task=8` for whole nodes
 * update scaling tests on `narval` with `StdEnv/2023`
   * 100 Gb/s InfiniBand Mellanox HDR interconnect
   * Lustre file system
