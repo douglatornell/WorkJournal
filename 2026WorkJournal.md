@@ -6785,7 +6785,6 @@ Worked at ESB
       * river_turb - bad
       * sshNeahBay - bad
       * LiveOcean
-    * uploaded restart files from `skookum`
 
 
 
@@ -6819,6 +6818,76 @@ Dinner at Kristin & Kirk's
 * investigated forcing files issue: "Cannot send after transport endpoint shutdown"
   * eventually checked status page: `/project` has been partially bad since 10jun;
     rebuild is expected to finish on 15jun
+
+
+
+### Week 25
+
+#### Mon 15-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* `crop_gribs 18` stalled with 1 file unprocessed
+
+
+##### `nibi`
+
+* checked on `nibi`:
+  * cores allocated/used: 130k/94k, up from 89k/64k on 5jun
+  * bynode jobs running/queued: 126/308, up/down from 69/398 on 5jun
+  * bycore jobs running/queued: 17320/3182, up from 2406/824 on 5jun
+  * look at different bynode queues:
+    * b1 (<=3h) running/queued: 0/50
+    * b2 (<=12h) running/queued: 0/14
+    * b3 (<=24h) running/queued: 15/24
+    * b4 (<=72h) running/queued: 40/206
+    * b5 (<=168h) running/queued: 71/16
+
+
+##### Miscellaneous
+
+* deleted no longer needed `/data/sallen/results/MEOPAR/fluxes/` files & dirs as part of clean-up
+* created https://helpdesk.eoas.ubc.ca/tickets/ZXDN-0937-IISQ re: servers/storage upgrade
+  * asked Henryk for meeting time on Tue or Wed
+
+
+##### Reshapr
+
+* updated test and docs re: Susan's change to salish cluster spec from "auto" memory to "64G"; PR#204
+* added GHA workflow to update Pixi lockfile monthly; PR#205
+  * based on `pixi-lockfile-updater.yaml` re-usable workflow
+  * tests locked down `id-token` permission that `zizmor` flagged
+    * workflow was successful with `permissions: {}` in main body; not need for `id-token` permission
+      in job step
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `tornado` to 6.5.6 re: out-of-bounds memory access vulnerability
+  * Reshapr
+  * ECget
+  * MoaceanParcels
+  * SalishSeaTools
+  * SalishSeaNowcast
+* Squash-merged dependabot PR to update `pypdf` to 6.12.0 re: long runtime and high memory usage
+  vulnerabilities
+  * SalishSeaNowcast
+
+
+##### `rorqual`
+
+* continued to set up to test `SalishSeaCmd` on `rorqual`
+  * checked forcing files - all good
+  * uploaded restart files from `skookum` to `~/links/scratch/MEOPAR/results/28feb23/`
+  * 1d run queued for 7m27s; amazingly high priority; finished in ~13m45s
+* pushed:
+  * example YAML file
+  * NEMO arch file
+  * XIOS-ARCH files
+* squash-merged SalishSeaCmd PR#151
+
+
 
 
 
