@@ -6913,6 +6913,28 @@ Worked at ESB
 
 
 
+#### Wed 17-Jun-2026
+
+Worked at ESB for part of the day
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* expected LiveOcean outage did not happen
+
+
+##### Miscellaneous
+
+* met w/ Henryk to discuss upgrade plan for `skookum`, `salish` and storage arrays
+
+
+##### gha-workflows
+
+* started work on improvements recommended by `zizmor`; PR#105
+  * locked down permissions in all workflows to prevent leakage of default permissions
+  * added pragma comments to tell `zizmor` to ignore unpinned uses of our own reusable workflows
+
+
 
 
 
