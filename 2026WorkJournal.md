@@ -6870,6 +6870,8 @@ Dinner at Kristin & Kirk's
   * MoaceanParcels
   * SalishSeaTools
   * SalishSeaNowcast
+  * erddap-datasets
+  * SOG-Bloomcast
 * Squash-merged dependabot PR to update `pypdf` to 6.12.0 re: long runtime and high memory usage
   vulnerabilities
   * SalishSeaNowcast
@@ -6926,6 +6928,9 @@ Worked at ESB for part of the day
 ##### Miscellaneous
 
 * met w/ Henryk to discuss upgrade plan for `skookum`, `salish` and storage arrays
+  * reviewed spec document
+  * lots of discussion; see spec document for comments and revisions
+* help Dishika with Pixi environments for running `tensorflow` in notebooks and from scripts
 
 
 ##### gha-workflows
@@ -6934,6 +6939,10 @@ Worked at ESB for part of the day
   * locked down permissions in all workflows to prevent leakage of default permissions
   * added pragma comments to tell `zizmor` to ignore unpinned uses of our own reusable workflows
 
+
+##### `arbutus` Migration
+
+* created #arbutus-migration channel and invited Susan, Venkat & Michael
 
 
 
