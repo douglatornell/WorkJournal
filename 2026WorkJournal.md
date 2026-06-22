@@ -6854,7 +6854,7 @@ Dinner at Kristin & Kirk's
 
 ##### Reshapr
 
-* updated test and docs re: Susan's change to salish cluster spec from "auto" memory to "64G"; PR#204
+* updated test and docs re: Susan's change to `salish` cluster spec from "auto" memory to "64G"; PR#204
 * added GHA workflow to update Pixi lockfile monthly; PR#205
   * based on `pixi-lockfile-updater.yaml` re-usable workflow
   * tests locked down `id-token` permission that `zizmor` flagged
@@ -6945,6 +6945,272 @@ Worked at ESB for part of the day
 * created #arbutus-migration channel and invited Susan, Venkat & Michael
 
 
+
+#### Thu 18-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* `crop_gribs 06` failed with many `PrematureEndOfFileError` exceptions
+  * it was still running at ~08:35 and the `skookum` command-line was sluggish
+  * killed `crop_gribs 06`
+  * nowcast automation was unaffected
+  * issue appears to have been in one of the `06/018/` files
+    * 06Z forecast is used only for forecast2 runs
+    * decided to just ignore the whole mess and be thankful
+
+
+##### Miscellaneous
+
+* revised servers/storage upgrade doc based on yesterday's discussion with Henryk
+  * added the hardware requirements summary section that he asked for
+  * Henryk says that he has passed the requirements to the vendor
+* UBC-DFO modeling meeting:
+  * Hauke: 1km HRDPS
+    * Kitimat model and obs
+    * 1km has better topographic steering in inlets
+    * little different in Hecate Strait
+    * Michael says that ECCC may be planning to refine HRDPS to 1km resolution in light of 1km runs
+      coming cancellation
+
+
+##### gha-workflows
+
+* continued work on improvements recommended by `zizmor`; PR#105
+  * added explanatory comments to permissions items
+  * added pragma comments to tell `zizmor` to ignore major version pins instead of hash pins on
+    uses of GitHub actions as a reasonable trade-off between security and convenience
+  * added `perist-credentials: false` to `actions/checkout` uses to potential exposure of secrets
+    in forked PRs
+  * mitigated potential code injection via template expansion vulnerability
+  * added names to anonymous workflow jobs to improve readability in GHA UI
+  * decided to ignore the `zizmor` recommendation to use `gh pr create` instead of
+    `peter-evans/create-pull-request` because the former would require more script step, I think,
+    whereas using the latter is fully debugged by the Pixi developers
+* CodeQL analysis workflow failed when I merged the PR
+  * figured out that the failure was due to `permission: {}` in the reusable workflow; that overrides
+    the permissions provided from the caller worksflow
+    * added `zizmor: ignore[excessive-permissions]` pragma comments to reusable workflows with explanation
+    * now the workflows work and `zizmor` is happy
+* added `zizmor: ignore[superfluous-actions]` pragma comment to `pixi-lockfile-updateer` workflow re:
+  my decision to stick with `peter-evans/create-pull-request` instead of developing multiple `gh` commands
+* ran `pixi run check` to confirm that all workflows are active
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `tornado` to 6.5.7 re: credential leakage vulnerability
+  * moad_tools
+  * Reshapr
+  * SalishSeaTools
+  * ECget
+  * SOG-Bloomcast-Ensemble
+  * MOAD/docs
+  * SalishSeaCast/docs
+  * SalishSeaNowcast
+  * MoaceanParcels
+
+
+
+#### Fri 19-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* no obs for Fraser river
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `bleach` to 6.4.0 re: submit-triggered JS execution and
+  indirect XSS vulnerabilities
+  * ECget
+  * SalishSeaCast/docs
+  * SalishSeaTools
+  * SOG-Bloomcast-Ensemble
+  * MOAD/docs
+  * MoaceanParcels
+* Squash-merged dependabot PRs to update `cryptography` to 48.0.1 re: vulnerable statically linked
+  OpenSSL library
+  * Reshapr
+  * SalishSeaTools
+  * SalishSeaNowcast
+  * moad_tools
+  * salishsea-site
+  * cookiecutter-MOAD-pypkg
+* Squash-merged dependabot PRs to update `jupyter-server` to 2.20.0 re: XSS vulnerability
+  * SOG-Bloomcast-Ensemble
+  * SalishSeaTools
+  * MoaceanParcels
+* Squash-merged dependabot PR to update `pypdf` to 6.13.3 re: multiple vulnerabilities
+  * SalishSeaNowcast
+* Squash-merged dependabot PRs to update `jupyterlab` to 4.5.9 re: XSS vulnerability
+  * SOG-Bloomcast-Ensemble
+  * SalishSeaTools
+  * MoaceanParcels
+
+
+##### `arbutus` Migration
+
+* legacy cloud flavour:
+  * info from dashboard:
+    * Flavor Name: nemo-c16-60gb-90-numa-test
+    * Flavor ID: 04f95567-4329-4de8-879c-de65675f59a2
+    * RAM: 60GB
+    * VCPUs: 16 VCPU
+    * Disk: 30GB
+    * Ephemeral Disk: 90GB
+  * we don't use the ephemeral disk
+  * we use ~6.1G (21%) of 30G disk storage
+* started discussion in #arbutus-magration to ask Venkat and Michael how to get a flavour on the new cloud
+  * Michael asked me to send a requst to cloud@tech.alliancecan.ca requesting compute flavours became
+    added to our project, and for me to test `cb16-60gb-560`
+    * compute flavours added
+* imported `arbutus-cloud-ed25519-29sep23` publich key via web interface
+* reviewed and added security rules
+  * defaults are ingress and egress for IPv4 and IPv6
+  * added:
+    * ingress for TCP port 22 (ssh) from any IPv4 or IPv6 address
+    * IPv4 ingress for TCP ports xxx for xxx workers from EOAS servers
+    * IPv4 ingress for TCP ports xxx for xxx workers from EOAS servers
+* set up head node instance:
+  * Details:
+    * name: `nowcast0`
+    * description: `SalishSeaCast system head node`
+    * availability zone: Any
+    * count: 1
+  * Source:
+    * boot source: image
+    * create new volume: no
+    * image: `Ubuntu-24.04-x64-2025-08`
+  * Flavour: `cb16-60gb-560`
+  * Network: `ctb-onc-allen-network`
+  * Network Ports: none
+  * Security Groups: `default`
+  * Key Pair: `arbutus-cloud-ed25519-29sep23`
+  * got internal IP address: 192.168.156.218
+  * associated newly allocated public IP address: 134.87.9.24
+* head node configuration:
+    <!-- markdownlint-disable MD031 -->
+  ```bash
+    sudo apt update
+    sudo apt upgrade
+    sudo apt autoremove
+    sudo shutdown -r now
+    sudo timedatectl set-timezone America/Vancouver
+    timedatectl status
+    # git-2.43.0 was already installed
+    sudo apt install -y libopenmpi-dev openmpi-bin
+    sudo apt install libnetcdf-dev libnetcdff-dev netcdf-bin
+    sudo apt install nco
+    # m4-1.4.19 was already installed
+    sudo apt install liburi-perl
+    sudo apt install make cmake ksh mg
+    # python-3.12.3 is part of the OS install
+    # held off on NFS install until I investigate cephfs
+  ```
+  <!-- markdownlint-enable MD031 -->
+
+
+##### SalishSeaNowcast
+
+* improved GHA workflows based on recommendations from `zizmor`; PR#473 - squash-merged
+
+
+
+#### Sat 20-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* no obs for Fraser river
+* `crop_gribs 12` stalled with 1 file unprocessed
+
+
+
+#### Sun 21-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* no obs for Fraser river
+
+
+##### `arbutus` Migration
+
+* set up shared persistent storage:
+  * used web interface to create volume:
+    * name: SalishSeaCast
+    * description: Shared persistent storage for SalishSeaCast system
+    * source: no source, empty volume
+    * type: rbd1
+    * size: 1024 GiB
+    * zone: nova
+    * group: no group
+  * used web interface to attach volume to `nowcast0` at `/dev/vdc`
+  * set up mount:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    sudo lsblk -f  # confirms vdc exists
+    sudo mkfs.ext4 /dev/vdc
+    sudo mkdir /nemoShare
+    sudo mount /dev/vdc /nemoShare
+    sudo chown ubuntu:ubuntu /nemoShare
+    mkdir /nemoShare/MEOPAR
+    ```
+    <!-- markdownlint-enable MD031 -->
+* created `.bash_aliases`:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  alias lf="ls -ltr --full-time"
+  alias rm="rm -i"
+  ```
+  <!-- markdownlint-enable MD031 -->
+* installed Pixi
+  * `curl -fsSL https://pixi.sh/install.sh | sh`
+  * restarted shell
+  * `pixi global install bat eza fd ripgrep`
+
+* TODO:
+  * figure out if I can set up ping (ICMP) rules that will allow UptimeRobot monitoring
+    * I think the admins removed my open ICMP rule on the old cloud
+  * do a clean head node instance config before storing the snapshot
+  * set up NFS server on head node and mounts on compute nodes
+
+
+
+
+
+
+##### `zizmor` TODO
+
+* improve workflows:
+  * locked down permissions in all workflows to prevent leakage of default permissions
+  * added pragma comments to tell `zizmor` to ignore unpinned uses of our own reusable workflows
+  * added explanatory comments to permissions items
+  * added pragma comments to tell `zizmor` to ignore major version pins instead of hash pins on
+    uses of GitHub actions as a reasonable trade-off between security and convenience
+  * added `perist-credentials: false` to `actions/checkout` uses to potential exposure of secrets
+    in forked PRs
+  * mitigated potential code injection via template expansion vulnerability
+  * added names to anonymous workflow jobs to improve readability in GHA UI
+  * progress:
+    * gha-workflows - done 18jun26 in PR#105
+    * SalishSeaNowcast - done 19jun26 in PR#473
+
+    * SalishSeaTools
+    * SalishSeaCast/docs
+    * salishsea-site
+    * SalishSeaCmd
+    * NEMO-Cmd
+    * erddap-datasets
+    * SOG-Bloomcast-Ensemble
+    * MOAD/docs
+    * moad_tools
+    * Reshapr
+    * MoaceanParcels
+    * cookiecutter-analysis-repo
+    * SOG-code-collab
 
 
 
