@@ -7100,6 +7100,7 @@ Worked at ESB for part of the day
     sudo timedatectl set-timezone America/Vancouver
     timedatectl status
     # git-2.43.0 was already installed
+    sudo apt install -y gfortran g++
     sudo apt install -y libopenmpi-dev openmpi-bin
     sudo apt install libnetcdf-dev libnetcdff-dev netcdf-bin
     sudo apt install nco
@@ -7242,11 +7243,128 @@ Worked at ESB for part of the day
 
 #### Tue 23-Jun-2026
 
+Worked at ESB
+
 ##### SalishSeaCast
 
 * no obs for TheodosiaDiversion river
 * no obs for Fraser river
 
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* UBC Faculty Pension Retirement Options zoom
+  * Diana Almeida
+  * defined contrib plan aka capital accumulation
+  * balanced fund MER is 0.6%
+  * pre-1993 contribs are non-locked in
+  * locked in must be used for retirement income
+  * can defer until 1-Dec of year that Susan turns 71; payments start the next year
+  * FPP retirement option matrix link
+  * plan income is taxablle in the year that it is received
+  * non-locked cash withdrawal incurs withholding tax
+    * CRA treat it as return of contribtuions
+  * annuities
+    * contract with life insurance company
+    * irrevocable
+    * traditional annuity payment is fixed and determined by interest rate at time of purchase
+    * variable payment life annuity (VPLA)
+      * not tied to interest rates
+      * invested in Balanced Fund
+      * payments on 1st of month
+      * choose 4% or 7% future rate of return
+      * anniversary date is 1-Apr
+      * 50/50 option: example of combining 4% and 7%
+      * annual increases/decreases are cummulative
+        * since 1996 4% has significantly outperformed
+      * balanced fund long term investment & mortality experience is ~ 5.25% to 5.5%
+    * RIF/LIF-type payments:
+      * RIF for non-locked funds, has only min annual withdrawal
+      * LIF for locked funds, has min & max annual withdrawals
+      * LIF max is greater of stat percentage or previous year's return
+    * annual report shows choices by other members
+    * can transfer outside plans in or out
+    * supplemental arrangement:
+      * special between UBC & CRA
+      * must take cash payments; can spread over up to 15 years
+    * income splitting:
+      * shift up to 50% of pension income to spouse in lower tax bracket
+      * impacts federal income taxes only
+      * make election each year
+    * no post-retirement benefits
+      * need to be in a plan to join
+      * see emeritus college info
+    * SunLife website has estimator tool
+    * reimbursement of $750 for retirement counselling is a Faculty benefit
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `cryptography` to 48.0.1 re: vulnerable statically linked
+  OpenSSL library
+  * FUN
+  * SalishSeaCmd
+  * AtlantisCmd
+  * NEMO_Nowcast
+  * NEMO-Cmd
+  * cookiecutter-djl-pypkg
+* Squash-merged dependabot PR to update `msgpack` to 1.2.1 re: out-of-bounds read or crash vulnerability
+  * SalishSeaNowcast
+  * Reshapr
+* Squash-merged dependabot PRs to update `actions/checkout` to 7 re: new features and dependency updates
+  * SalishSeaNowcast
+  * NEMO-Cmd
+  * erddap-datasets
+  * rwhite/numeric_2024
+  * moad_tools
+  * gha-workflows
+  * AtlantisCmd
+  * salishsea-site
+
+
+##### `arbutus` Migration
+
+* change to install `git` from ppa
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    sudo add-apt-repository -y ppa:git-core/ppa
+    sudo apt update
+    sudo apt upgrade
+    ```
+    <!-- markdownlint-enable MD031 -->
+* build XIOS-2:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    mkdir /nemoShare/MEOPAR/nowcast-sys/
+    git clone git@github.com:SalishSeaCast/XIOS-ARCH.git
+    git clone git@github.com:SalishSeaCast/XIOS-2.git
+    cd /nemoShare/MEOPAR/nowcast-sys/XIOS-2/arch
+    ln -s ../../XIOS-ARCH/COMPUTECANADA/arch-GCC_ARBUTUS.fcm
+    ln -s ../../XIOS-ARCH/COMPUTECANADA/arch-GCC_ARBUTUS.path
+        cd /nemoShare/MEOPAR/nowcast-sys/XIOS-2
+    ./make_xios --full --arch GCC_ARBUTUS --netcdf_lib netcdf4_seq --job 12
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * failed with `error: ‘uint32_t’ in namespace ‘std’ does not name a type; did you mean ‘wint_t’?`
+    * https://bbs.archlinux.org/viewtopic.php?id=285729 suggests that this is a GCC-13 porting issue
+      * https://gcc.gnu.org/gcc-13/porting_to.html
+    * found xxx commented out in `earcut.hpp` and enabled it
+      * build succeeded
+
+
+
+* TODO:
+  * figure out if I can set up ping (ICMP) rules that will allow UptimeRobot monitoring
+    * I think the admins removed my open ICMP rule on the old cloud
+  * do a clean head node instance config before storing the snapshot
+  * set up NFS server on head node and mounts on compute nodes
+
+
+
+
+* TODO:
+  * review Raisha's paper!!
 
 
 
