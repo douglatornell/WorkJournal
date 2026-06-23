@@ -7179,6 +7179,78 @@ Worked at ESB for part of the day
 
 
 
+### Week 26
+
+#### Mon 22-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* no obs for Fraser river
+* no obs for Skagit river
+* no obs for Nisqually river
+* `crop_gribs 18` stalled with 1 file unprocessed
+
+
+##### Resilient-C
+
+* started setup of new VM on UBC OpenStack cloud:
+  * confirmed that I can ssh to the VM from `smelt`:
+    * `ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no <userid>@<ip-address>`
+  * OS is `Ubuntu 24.04.3 LTS (GNU/Linux 6.8.0-88-generic x86_64)`
+  * `falcon-sensor-bpf` is running under `root`, so UBC IT is taking care of CrowdStrike
+  * set up an initial ssh config entry on `khawla`:
+    <!-- markdownlint-disable MD031 -->
+    ```ssh-config
+    Host new-resilient-c-vm
+      HostName <id-address>
+      User <userid>
+      PreferredAuthentications password
+      PubkeyAuthentication no
+      ProxyJump smelt
+    ```
+    <!-- markdownlint-enable MD031 -->
+    * successfully did ssh from `khawla` to the VM via `smelt`
+  * started updating deployment docs
+  * created app administrator `sudo` user
+  * created new `resilient-c_vm_ed25519` key pair
+    * `ssh-keygen -t ed25519 -f ~/.ssh/resilient-c_vm_ed25519`
+    * installed public key on VM
+  * updated OS packages and rebooted
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+      sudo apt update
+      sudo apt upgrade
+      sudo shutdown -r now
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+
+##### Miscellaneous
+
+* helped Dishika sort out her `tensorflow` installation so that it works with the rest of her `new-env`
+  Pixi workspace that is inside her `analysis-dishika` repo
+
+
+##### Hindcasts
+
+* contributed to email conversation between Susan and Kate re: LiveOcean hindcast boundary condition
+  files
+
+
+
+#### Tue 23-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* no obs for Fraser river
+
+
+
+
+
 
 
 
