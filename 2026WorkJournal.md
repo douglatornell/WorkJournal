@@ -1826,7 +1826,7 @@ Worked at ESB
     `pixi remove sogcommand`
     `pixi add --pypi SOGcommand --git https://github.com/SalishSeaCast/SOG.git --rev 55af3c26752595ebc970ec3e20a632a86e96fa50`
   * test run failed
-    <!-- markdownlint-disable MD031 -->
+    <!-- markdownlint-disable MD031 MD013 -->
     ```text
     ERROR:bloomcast:cannot access local variable 'low_nitrate_day_1' where it is not associated with a value
     Traceback (most recent call last):
@@ -1847,7 +1847,7 @@ Worked at ESB
                                           ^^^^^^^^^^^^^^^^^
     UnboundLocalError: cannot access local variable 'low_nitrate_day_1' where it is not associated with a value
     ```
-    <!-- markdownlint-enable MD031 -->
+    <!-- markdownlint-enable MD031 MD013 -->
 
 
 
@@ -2863,7 +2863,7 @@ Voltech replaced end-of-life smoke alarms
 
 * email to Parker re: root CA issue for wateroffice
   * I suspect that he has outdated (<22.04) OS on his server
-* email to Yayla re: her need to change from `xx:30:00` to `xx:00:00` in her REDDAP `curl` requests
+* email to Yayla re: her need to change from `xx:30:00` to `xx:00:00` in her ERDDAP `curl` requests
   * I can't reproduce her issue in Nov-2023
 
 
@@ -3074,7 +3074,7 @@ Worked at ESB while Rita was at home
   * Cohere, North project (agent platform)
   * Inngest event-driven durable execution platform
 * Anti-Patterns in A/B Testing, Stephen Pettinato
-* No More Spreadsheets: Buidling PyLadiesCon Infrastructure with Python & DJango, Mariatta
+* No More Spreadsheets: Building PyLadiesCon Infrastructure with Python & DJango, Mariatta
 * The Future of Python: Evolution or Succession, Brett Slatkin
   * languages live for ~25 years; Python is 35
   * limitation
@@ -3549,7 +3549,7 @@ Worked at ESB
 * reviewed 2026 pkgs & envs slides with Susan
   * add example of a stdlib module
     * `copy`, `importlib`, `datetime`
-  * change module example to `salishsea_tools.viztools ` re: `set_aspect()`
+  * change module example to `salishsea_tools.viztools` re: `set_aspect()`
   * drop early mention of lock files
   * rework/split terminology slide
   * do you need to run `pixi install` after `add` or `remove`? No
@@ -3784,7 +3784,7 @@ Worked at ESB while Rita is at home
     * installed `pre-commit` to run from `dev` env
       * `pixi run -e dev pre-commit install`
   * changed PyCharm to use `atlantis-cmd:dev` interpreter/environment
-    * PyCharm 2026.1 no longer playes nice with `pixi-pycharm` shim, even after upgrading it to 0.11
+    * PyCharm 2026.1 no longer plays nice with `pixi-pycharm` shim, even after upgrading it to 0.11
     * had to fall back to the work-around of editing `/home/doug/.conda/environments.txt`
   * removed `atlantis-cmd` conda env from `khawla`
   * updated dev docs re: use of Pixi
@@ -5362,7 +5362,7 @@ Dishika joined the group
 * MOAD group mtg; see whiteboard
 * helped Becca get set up on `fir`
   * yesterday's weirdness largely disappeared
-  * file system seems a bit bauky
+  * file system seems a bit balky
   * XIOS-2 clone state may be suspect
 
 
@@ -5528,7 +5528,7 @@ Dishika joined the group
 
 ##### NEMO-Cmd
 
-* Squash-merged monthly `update-pixi-lokcfile` PR
+* Squash-merged monthly `update-pixi-lockfile` PR
 
 
 
@@ -5571,7 +5571,7 @@ Dishika joined the group
 ##### Miscellaneous
 
 * mtg w/ Venkat & Michael at ARC re: arbutus migration
-  * 1st step is migration of exisitng VMs
+  * 1st step is migration of existing VMs
     * I need to initiate ticket
   * they support the idea of a 96 core flavour, although it is not an existing option
   * the cloud is not configured with elasticity, so that idea of turning large VM(s) on and off
@@ -5621,7 +5621,7 @@ Dishika joined the group
 
 ##### SalishSeaNowcast
 
-* confirmed that issue re: pandas issue#49279 remains unsesolved in `pandas<3.0.0`
+* confirmed that issue re: pandas issue#49279 remains unresolved in `pandas<3.0.0`
 * fixed another `FutureWarning`:
   > The 'delim_whitespace' keyword in pd.read_csv is deprecated and
   > will be removed in a future version. Use ``sep='\s+'`` instead
@@ -5741,7 +5741,7 @@ Dishika joined the group
   * SalishSeaCmd
   * AtlantisCmd
   * SalishSeaNowcast
-* Squash-merged dependabot PRs to update `urllib3` to 2.7.0 re: sensitive heaers forwarding vulnerability
+* Squash-merged dependabot PRs to update `urllib3` to 2.7.0 re: sensitive headers forwarding vulnerability
   * cookiecutter-MOAD-pypkg
   * NEMO-Cmd
   * MOAD/docs
@@ -5863,7 +5863,7 @@ Worked at ESB for part of the day
 
 * explored Python 3.11 and `rasterio` environment failure\
   * caused by `rasterio>=1.5.0` pin in Pixi manifest
-  * `raterio=1.5.0` dropped support for Python<=3.12
+  * `rasterio=1.5.0` dropped support for Python<=3.12
   * `rasterio` is used in `random_oil_spills` module
     * tests pass with Python 3.14 and rasterio 1.5.0
   * met w/ Susan to discuss
@@ -5902,9 +5902,9 @@ Worked at ESB for part of the day
 
 ##### Miscellaneous
 
-* helped Camryn get her intereactive dev jobs to use 1 node only on `nibi`
+* helped Camryn get her interactive dev jobs to use 1 node only on `nibi`
   * when the scheduler splits the jobs across nodes they fail with MPI errors
-* helped Becca find `ops_*` atmoospheric forcing files on `fir`
+* helped Becca find `ops_*` atmospheric forcing files on `fir`
 * met with Darren re: on-boarding
   * lots of questions, but no problems with following docs
 * helped Tall with `salishsea combine`
@@ -6263,7 +6263,7 @@ Got COVID-19 spring vaccination
   * 2010 started at ~09:30
 * investigated why May month-average fields not on ERDDAP:
   * still no auto-update
-* `crop_gribs 12` failed at ~10:25 with 66 unprocess files after 8h
+* `crop_gribs 12` failed at ~10:25 with 66 unprocessed files after 8h
   * 12Z files publication had not finished at 10:47
   * re-ran `crop_gribs 12` to catch remaining files as they appear
   * `collect_weather 12 2.5km` finished at 11:10
@@ -6362,7 +6362,7 @@ Got COVID-19 spring vaccination
 ##### SalishSeaCast
 
 * no obs for TheodosiaDiversion river
-* `crop_gribs 00` failed at ~22:45 with 22 unprocess files after 8h
+* `crop_gribs 00` failed at ~22:45 with 22 unprocessed files after 8h
   * `sarracenia` finished files collection at ~22:52
   * ran `crop_gribs 00 --backfill` at ~08:12
   * finished before 12Z files collection did, so automation shouldn't be disturbed
@@ -6518,13 +6518,13 @@ Got COVID-19 spring vaccination
     * my own action use `@main`
     * `github-script@v9`
     * resolve by adding `# zizmor: ignore[unpinned-uses]`
-  * credntial persistence:
+  * credential persistence:
     * `pytest-with-coverage.yaml`
     * `sphinx-linkcheck.yaml`
-  * no finidngs:
+  * no findings:
     * `auto-milestone-issue.yaml`
   * `auditor` persona complains about
-    * overly braod permission by default on `id-token`
+    * overly broad permission by default on `id-token`
     * missing explanatory comments on permissions
   * updated `update-pixi-lockfile.yaml` to level that makes `auditor` persona happy
 
@@ -6634,7 +6634,7 @@ Worked at ESB
 * help Dishika get `tensorflow` installed in her analysis env:
   * had to do `pixi workspace platform remove osx-64`
   * also had to do `pixi workspace platform remove win-64`
-  * that still didn't work; figured out that `tensoflow` needs Python 3.12
+  * that still didn't work; figured out that `tensorflow` needs Python 3.12
   * she is going to build a new env for it
 
 
@@ -6696,7 +6696,7 @@ Worked at ESB
 
 * no obs for TheodosiaDiversion river
   * no update on the wateroffice.gc.ca site about reason, still "due to operational issues"
-* `download_live_ocean` timmed out at 11:40
+* `download_live_ocean` timed out at 11:40
   * re-ran at 11:43
   * success at ~12:30
 
@@ -6722,7 +6722,7 @@ Worked at ESB
     * agent missed adding `rorqual` to parameterizations of 3 tests in `TestRun`:
       * asked it to fix `test_run_separate_deflate()`, putting `rorqual` code in alphabetical order
         after `nibi`
-      * `test_segmented_run_submits()` - I accidently hit enter after just pasting the test method
+      * `test_segmented_run_submits()` - I accidentally hit enter after just pasting the test method
         reference, and Junie fixed it as requested for `test_run_separate_deflate()` and re-ran tests
       * `TestExecute.test_execute_without_deflate()`
     * agent did an interesting hack for `TestBuildBatchScript.test_rorqual()`:
@@ -6905,13 +6905,13 @@ Worked at ESB
 * MOAD group mtg; see whiteboard
 * helped Becca understand output and restarts of her `fir` run
 * `ubcsecure` wifi refused to connect
-  * traced the porblem to missing `DigiCert_Global_Root_CA.crt` file
+  * traced the problem to missing `DigiCert_Global_Root_CA.crt` file
     * fixed by manually downloading and copying into `/usr/share/ca-certificates/mozilla/`
     * old OS version issue?
 * researched Globus vs `rsync`
   * Globus may be faster due to parallel channels
   * Globus may not handle symlinks and permissions
-    * found a blog post about finalizing Globus transfers with `rsync` to sychronize metadata
+    * found a blog post about finalizing Globus transfers with `rsync` to synchronize metadata
 
 
 
@@ -6980,7 +6980,7 @@ Worked at ESB for part of the day
   * added explanatory comments to permissions items
   * added pragma comments to tell `zizmor` to ignore major version pins instead of hash pins on
     uses of GitHub actions as a reasonable trade-off between security and convenience
-  * added `perist-credentials: false` to `actions/checkout` uses to potential exposure of secrets
+  * added `persist-credentials: false` to `actions/checkout` uses to potential exposure of secrets
     in forked PRs
   * mitigated potential code injection via template expansion vulnerability
   * added names to anonymous workflow jobs to improve readability in GHA UI
@@ -6989,10 +6989,10 @@ Worked at ESB for part of the day
     whereas using the latter is fully debugged by the Pixi developers
 * CodeQL analysis workflow failed when I merged the PR
   * figured out that the failure was due to `permission: {}` in the reusable workflow; that overrides
-    the permissions provided from the caller worksflow
+    the permissions provided from the caller workflows
     * added `zizmor: ignore[excessive-permissions]` pragma comments to reusable workflows with explanation
     * now the workflows work and `zizmor` is happy
-* added `zizmor: ignore[superfluous-actions]` pragma comment to `pixi-lockfile-updateer` workflow re:
+* added `zizmor: ignore[superfluous-actions]` pragma comment to `pixi-lockfile-updater` workflow re:
   my decision to stick with `peter-evans/create-pull-request` instead of developing multiple `gh` commands
 * ran `pixi run check` to confirm that all workflows are active
 
@@ -7062,11 +7062,11 @@ Worked at ESB for part of the day
     * Ephemeral Disk: 90GB
   * we don't use the ephemeral disk
   * we use ~6.1G (21%) of 30G disk storage
-* started discussion in #arbutus-magration to ask Venkat and Michael how to get a flavour on the new cloud
-  * Michael asked me to send a requst to cloud@tech.alliancecan.ca requesting compute flavours became
+* started discussion in #arbutus-migration to ask Venkat and Michael how to get a flavour on the new cloud
+  * Michael asked me to send a request to cloud@tech.alliancecan.ca requesting compute flavours became
     added to our project, and for me to test `cb16-60gb-560`
     * compute flavours added
-* imported `arbutus-cloud-ed25519-29sep23` publich key via web interface
+* imported `arbutus-cloud-ed25519-29sep23` public key via web interface
 * reviewed and added security rules
   * defaults are ingress and egress for IPv4 and IPv6
   * added:
@@ -7252,13 +7252,13 @@ Worked at ESB
   * Diana Almeida
   * defined contrib plan aka capital accumulation
   * balanced fund MER is 0.6%
-  * pre-1993 contribs are non-locked in
+  * pre-1993 contributions are non-locked in
   * locked in must be used for retirement income
   * can defer until 1-Dec of year that Susan turns 71; payments start the next year
   * FPP retirement option matrix link
-  * plan income is taxablle in the year that it is received
+  * plan income is taxable in the year that it is received
   * non-locked cash withdrawal incurs withholding tax
-    * CRA treat it as return of contribtuions
+    * CRA treat it as return of contributions
   * annuities
     * contract with life insurance company
     * irrevocable
@@ -7270,7 +7270,7 @@ Worked at ESB
       * choose 4% or 7% future rate of return
       * anniversary date is 1-Apr
       * 50/50 option: example of combining 4% and 7%
-      * annual increases/decreases are cummulative
+      * annual increases/decreases are cumulative
         * since 1996 4% has significantly outperformed
       * balanced fund long term investment & mortality experience is ~ 5.25% to 5.5%
     * RIF/LIF-type payments:
@@ -7465,7 +7465,7 @@ Worked at ESB
 
 * updated PyCharm on `khawla to 2026.1.3
 * weekly mtg w/ Susan
-* Slack huddle w/ Susan and Henrk re: `skookum` & `salish` replacement
+* Slack huddle w/ Susan and Henryk re: `skookum` & `salish` replacement
   *
 
 
@@ -7479,7 +7479,7 @@ Worked at ESB
       * `ALTER ROLE "resilient-c" CREATEDB;`
     * `createdb` as `resilient-c` user
     * `load_risk_reduction_activities` produced many warnings:
-        SAWarning: Object of type <RiskReductionActivity> not in session, add operation along 'LongTermStrategy.
+        SAWarning: Object of type `RiskReductionActivity` not in session, add operation along 'LongTermStrategy.
         risk_reduction_activities' will not proceed (This warning originated from the Session 'autoflush' process,
         which was invoked automatically in response to a user-initiated operation. Consider using ``no_autoflush``
         context manager if this warning happened while initializing objects.)
@@ -7540,7 +7540,7 @@ Worked at ESB
 
 ##### NEMO-Cmd
 
-* changed `update-pixi-lockfile` to use reuable workflow; PR#160
+* changed `update-pixi-lockfile` to use reusable workflow; PR#160
 * improved GHA workflows based on recommendations from `zizmor`; PR#161
 
 
@@ -7562,7 +7562,7 @@ Worked at ESB
 
 * added `sphinx-copybutton` support in docs; PR#145
   * use the following prompt to have Junie do most of the work:
-    <!-- markdownlint-disable MD031 -->
+    <!-- markdownlint-disable MD031 MD013 -->
     ```text
     Please develop a plan to integrate the sphinx-copybutton extension into the documentation to improve user experience by adding copy buttons to code blocks.
 
@@ -7577,24 +7577,34 @@ Worked at ESB
     The next step is to add the `sphinx-copybutton` extension to the Sphinx configuration in `docs/conf.py`. That will be another commit.
 
     After that, please add the following configuration settings for the extension:
-    ```
-    # -- Options for sphinx_copybutton extension ------------------------------
 
-    copybutton_prompt_text = r">>> |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: "
-    copybutton_prompt_is_regexp = True
-    copybutton_line_continuation_character = "\\"
-    # Add a `no-copybutton` class that can be used to suppress the copy button
-    copybutton_selector = "div:not(.no-copybutton) > div.highlight > pre"
-    ```
+      # -- Options for sphinx_copybutton extension ------------------------------
+
+      copybutton_prompt_text = r">>> |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: "
+      copybutton_prompt_is_regexp = True
+      copybutton_line_continuation_character = "\\"
+      # Add a `no-copybutton` class that can be used to suppress the copy button
+      copybutton_selector = "div:not(.no-copybutton) > div.highlight > pre"
+
     That will be another commit.
 
     With those things done, we are ready to start editing the Sphinx `code-block::` directives in the `.rst` files. Please change all instances of `code-block:: bash` to `code-block:: console` and ensure that the commands in those blocks include a `$` prompt for clarity. That will be another commit.
 
     For command output examples that are typically contained in `code-block:: text` directives, please add `:class: no-copybutton` to the directive to suppress the copy button. This will be another commit.
 
-    Please tell ask me how to handle any `code-block::` dirctives that you find for languages other than `bash` and `text`.
+    Please tell ask me how to handle any `code-block::` directives that you find for languages other than `bash` and `text`.
     ```
-    <!-- markdownlint-enable MD031 -->
+    <!-- markdownlint-enable MD031 MD013 -->
+
+
+
+### Week 27
+
+#### Mon 29-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
 
 
 
@@ -7615,7 +7625,7 @@ Worked at ESB
   * added explanatory comments to permissions items
   * added pragma comments to tell `zizmor` to ignore major version pins instead of hash pins on
     uses of GitHub actions as a reasonable trade-off between security and convenience
-  * added `perist-credentials: false` to `actions/checkout` uses to potential exposure of secrets
+  * added `persist-credentials: false` to `actions/checkout` uses to potential exposure of secrets
     in forked PRs
   * mitigated potential code injection via template expansion vulnerability
   * added names to anonymous workflow jobs to improve readability in GHA UI
