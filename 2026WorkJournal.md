@@ -7172,12 +7172,6 @@ Worked at ESB for part of the day
   * restarted shell
   * `pixi global install bat eza fd ripgrep`
 
-* TODO:
-  * figure out if I can set up ping (ICMP) rules that will allow UptimeRobot monitoring
-    * I think the admins removed my open ICMP rule on the old cloud
-  * do a clean head node instance config before storing the snapshot
-  * set up NFS server on head node and mounts on compute nodes
-
 
 
 ### Week 26
@@ -7312,6 +7306,7 @@ Worked at ESB
 * Squash-merged dependabot PR to update `msgpack` to 1.2.1 re: out-of-bounds read or crash vulnerability
   * SalishSeaNowcast
   * Reshapr
+  * MoaceanParcels
 * Squash-merged dependabot PRs to update `actions/checkout` to 7 re: new features and dependency updates
   * SalishSeaNowcast
   * NEMO-Cmd
@@ -7337,6 +7332,7 @@ Worked at ESB
     <!-- markdownlint-disable MD031 -->
     ```bash
     mkdir /nemoShare/MEOPAR/nowcast-sys/
+    cd /nemoShare/MEOPAR/nowcast-sys
     git clone git@github.com:SalishSeaCast/XIOS-ARCH.git
     git clone git@github.com:SalishSeaCast/XIOS-2.git
     cd /nemoShare/MEOPAR/nowcast-sys/XIOS-2/arch
@@ -7349,17 +7345,256 @@ Worked at ESB
   * failed with `error: ‘uint32_t’ in namespace ‘std’ does not name a type; did you mean ‘wint_t’?`
     * https://bbs.archlinux.org/viewtopic.php?id=285729 suggests that this is a GCC-13 porting issue
       * https://gcc.gnu.org/gcc-13/porting_to.html
-    * found xxx commented out in `earcut.hpp` and enabled it
+    * found `#include <cstdint>` commented out in `extern/remap/src/earcut.hpp` and enabled it
       * build succeeded
+      * confirmed that `#include <cstdint>` is used in many places (especially in `extern/boost/`)
+        * should be okay to commit `extern/remap/src/earcut.hpp` change to `main` branch that is used
+          with `StnEnv/2023` GCC-12 on Alliance clusters
 
 
+#### Wed 24-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* no obs for Fraser river
+* no obs for Greenwater river
+* no obs for Nisqually river
+* forecast2 run failed
+  * no route to `nowcast9`
+    * web dashboard says it stopped at 19:56 on 23jun
+    * restarted at 09:53 on 24jun
+    * remounted `/nemoShare/MEOPAR/`
+* `crop_gribs 12` stalled with 1 file unprocessed
+
+
+##### `fir`
+
+* fixed absolute path symlinks that Becca found in `river_turb/`
+  * also fixed `rivers/`, `LiveOcean/`, `sshNeahBay/`
+  * checked `atmospheric/` and it was fine
+
+
+##### `nibi`
+
+* Tall confirmed that he has changed his forcing to use `/project/rrg-allen/`
+  * deleted `/project/def-allen/SalishSea/forcing/`
+    * found `forcing/atmospheric/GEM2.5/operational/FOR_TEPLO/` owned by `tjarnik`
+
+
+##### Resilient-C
+
+* continued setup of new VM on UBC OpenStack cloud:
+  * created `resilient-c` group & user
+    * set up `.bashrc` and `.ssh/`
+  * installed `rsync`
+  * uploaded deployment keys and copied them to `resilient-c` user
+  * as `resilient-c` user:
+    * clone app and data repos
+      * had to re-add deployment keys to repos on GitHub
+  * uploaded `Resilient-C-assets/`
+  * installed Postgres
+    * 24.04 version of Postgres is 16 in contrast to 10 on the old VM
+
+
+
+#### Thu 25-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* no obs for Fraser river
+
+
+##### Resilient-C
+
+* continued setup of new VM on UBC OpenStack cloud:
+  * Postgres:
+    * edited `provision/postgresql.conf` to:
+      * change version from 10 to 16 in 4 places
+      * change timezone value in 2 places to `America/Vancouver`
+      * change locale in 4 places to `C.UTF-8`
+    * copied aside `/etc/postgresql/16/main/pg_hba.conf` and `/etc/postgresql/16/main/postgresql.conf`
+      and replaced them with files from `provision/`
+    * restarted `postgresql` service
+      * `sudo systemctl restart postgresql.service`
+    * log is stored at `/var/log/postgresql/postgresql-16-main.log`
+    * created `resilient-c` database
+    * created `${RESILIENTC_APP}/sealinkd/private_credentials.py` file
+  * Conda and env:
+    * as `resilient-c` user:
+      * installed and updated Miniconda3
+      * created app environment
+        * got Python 3.14.6
+      * installed Resilient-C package in editable mode
+      * set up the activate/deactivate hooks
+  * loaded app database:
+    * `python -m sealinkd.model.scripts.create_tables production.ini#sealinkd` produced 2 issues:
+      * UserWarning: pkg_resources is deprecated as an API.
+        * annoying, but not a show-stopper
+      * `TypeError: URL.__new__() missing 1 required positional argument: 'query'` from `sqlalchemy`
+        * change in `sqlalchemy>=2` to `URL.create()`
+      * permission error
+        * thought it was due to `sqlalchemy>=2` so reverted to Python=3.13 and sqlalchemy=1.4.54
+          to no affect
+
+
+##### Miscellaneous
+
+* Phys Ocgy seminar: Marysa Lague on atmospheric water vapour in climate models
+
+
+##### Atlantis
+
+* team mtg:
+  * Beth recommended `gdb`
+  * Beth is using AI to analyze codebase to find typo bugs
+
+
+
+#### Fri 26-Jun-2026
+
+##### SalishSeaCast
+
+* `collect_river_data 12 2.5km` was ~30m later than usual
+* Fraser river obs resumed on 25jun
+* no obs for TheodosiaDiversion river
+
+
+##### Miscellaneous
+
+* updated PyCharm on `khawla to 2026.1.3
+* weekly mtg w/ Susan
+* Slack huddle w/ Susan and Henrk re: `skookum` & `salish` replacement
+  *
+
+
+##### Resilient-C
+
+* continued setup of new VM on UBC OpenStack cloud:
+  * loaded app database:
+    * permission issue seems to be a change that happened in Postgres 15:
+      https://www.percona.com/blog/public-schema-security-upgrade-in-postgresql-15/
+    * as `postgres` user in `psql`, after creating `resilient-c` user:
+      * `ALTER ROLE "resilient-c" CREATEDB;`
+    * `createdb` as `resilient-c` user
+    * `load_risk_reduction_activities` produced many warnings:
+        SAWarning: Object of type <RiskReductionActivity> not in session, add operation along 'LongTermStrategy.
+        risk_reduction_activities' will not proceed (This warning originated from the Session 'autoflush' process,
+        which was invoked automatically in response to a user-initiated operation. Consider using ``no_autoflush``
+        context manager if this warning happened while initializing objects.)
+  * set up `nginx`:
+    * rsync-ed certs from old VM
+    * set up `platform.resilientcoasts.ubc.ca`
+  * started app
+  * sent email to Dave asking him to update DNS for `platform.resilientcoasts.ubc.ca`
+
+
+##### `arbutus` Migration
+
+* build NEMO:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    cd /nemoShare/MEOPAR/nowcast-sys
+    git clone git@github.com:SalishSeaCast/NEMO-3.6-code.git
+    cd /nemoShare/MEOPAR/nowcast-sys/NEMO-3.6-code/NEMOGCM/CONFIG/
+    # edit arch file
+    XIOS_HOME=/nemoShare/MEOPAR/nowcast-sys/XIOS-2 ./makenemo -m GCC_ARBUTUS -n SalishSeaCast_Blue
+
+    cd /nemoShare/MEOPAR/nowcast-sys/NEMO-3.6-code/NEMOGCM/TOOLS/
+    XIOS_HOME=/nemoShare/MEOPAR/nowcast-sys/XIOS-2 ./maketools -m GCC_ARBUTUS -n REBUILD_NEMO
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * failed with:
+      /usr/bin/ld: /nemoShare/MEOPAR/nowcast-sys/XIOS-2/lib/libxios.a(xml_parser_decl.o):
+      undefined reference to symbol
+      '_ZNSt14basic_ifstreamIcSt11char_traitsIcEEC1ERKNSt7__cxx1112basic_stringIcS1_SaIcEEESt13_Ios_Openmode@@GLIBCXX_3.4.21'
+      /usr/bin/ld: /usr/lib/gcc/x86_64-linux-gnu/13/libstdc++.so: error adding symbols: DSO missing from command line
+    * moved `-lstdc++` from `%LDFLAGS` to `%XIOS_LIB` to get it after `-lxios`
+      * build succeeded
+* cloned more repos in preparation for a test run:
+  * `grid`
+  * `rivers-climatology`
+  * `SalishSeaCmd`
+  * `SS-run-sets`
+  * `tides`
+  * `tracers`
 
 * TODO:
   * figure out if I can set up ping (ICMP) rules that will allow UptimeRobot monitoring
     * I think the admins removed my open ICMP rule on the old cloud
   * do a clean head node instance config before storing the snapshot
   * set up NFS server on head node and mounts on compute nodes
+  * commit `XIOS-ARCH` changes
+  * commit `XIOS-2/extern/remap/src/earcut.hpp` change
+  * commit NEMO arch file changes
 
+
+
+#### Sat 27-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+##### NEMO-Cmd
+
+* changed `update-pixi-lockfile` to use reuable workflow; PR#160
+* improved GHA workflows based on recommendations from `zizmor`; PR#161
+
+
+
+#### Sun 28-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+##### SalishSeaCmd
+
+* added `update-pixi-lockfile` workflow; PR#153
+* improved GHA workflows based on recommendations from `zizmor`; PR#154
+
+
+##### moad_tools
+
+* added `sphinx-copybutton` support in docs; PR#145
+  * use the following prompt to have Junie do most of the work:
+    <!-- markdownlint-disable MD031 -->
+    ```text
+    Please develop a plan to integrate the sphinx-copybutton extension into the documentation to improve user experience by adding copy buttons to code blocks.
+
+    I have created the sphinx-copybutton branch to use for this work.
+
+    When I tell you to use the `pixi` command I mean for you to use `/home/doug/.pixi/bin/pixi`.
+
+    You can use the command `pixi run docs` to check that the documentation builds without errors.
+
+    The first step is to use pixi to add the `sphinx-copybutton` extension to the `docs` and `dev` environment. That will be one commit. Please stop after that commit for me to add a commit that updates the list of packages and versions we are using the the dev environment.
+
+    The next step is to add the `sphinx-copybutton` extension to the Sphinx configuration in `docs/conf.py`. That will be another commit.
+
+    After that, please add the following configuration settings for the extension:
+    ```
+    # -- Options for sphinx_copybutton extension ------------------------------
+
+    copybutton_prompt_text = r">>> |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: "
+    copybutton_prompt_is_regexp = True
+    copybutton_line_continuation_character = "\\"
+    # Add a `no-copybutton` class that can be used to suppress the copy button
+    copybutton_selector = "div:not(.no-copybutton) > div.highlight > pre"
+    ```
+    That will be another commit.
+
+    With those things done, we are ready to start editing the Sphinx `code-block::` directives in the `.rst` files. Please change all instances of `code-block:: bash` to `code-block:: console` and ensure that the commands in those blocks include a `$` prompt for clarity. That will be another commit.
+
+    For command output examples that are typically contained in `code-block:: text` directives, please add `:class: no-copybutton` to the directive to suppress the copy button. This will be another commit.
+
+    Please tell ask me how to handle any `code-block::` dirctives that you find for languages other than `bash` and `text`.
+    ```
+    <!-- markdownlint-enable MD031 -->
 
 
 
@@ -7387,12 +7622,12 @@ Worked at ESB
   * progress:
     * gha-workflows - done 18jun26 in PR#105
     * SalishSeaNowcast - done 19jun26 in PR#473
+    * NEMO-Cmd - done 27jun26 in PR#161
+    * SalishSeaCmd - done 28jun26 in PR#154
 
     * SalishSeaTools
     * SalishSeaCast/docs
     * salishsea-site
-    * SalishSeaCmd
-    * NEMO-Cmd
     * erddap-datasets
     * SOG-Bloomcast-Ensemble
     * MOAD/docs
@@ -7613,6 +7848,7 @@ Worked at ESB
     * SalishSeaCmd - done 8feb26 in PR#127, improved 18feb26 in PR#131
     * NEMO-Cmd - done 24feb26 in PR#131
     * MOAD/docs - done 25feb26 in PR#65
+    * moad_tools - done 28jun26 in PR#145
 
     * AtlantisCmd
     * ECget
@@ -7622,7 +7858,6 @@ Worked at ESB
     * tools
     * SalishSeaNowcast
     * salishsea-site
-    * moad_tools
 
 
 
