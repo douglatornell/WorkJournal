@@ -7500,7 +7500,6 @@ Worked at ESB
     cd /nemoShare/MEOPAR/nowcast-sys/NEMO-3.6-code/NEMOGCM/CONFIG/
     # edit arch file
     XIOS_HOME=/nemoShare/MEOPAR/nowcast-sys/XIOS-2 ./makenemo -m GCC_ARBUTUS -n SalishSeaCast_Blue
-
     cd /nemoShare/MEOPAR/nowcast-sys/NEMO-3.6-code/NEMOGCM/TOOLS/
     XIOS_HOME=/nemoShare/MEOPAR/nowcast-sys/XIOS-2 ./maketools -m GCC_ARBUTUS -n REBUILD_NEMO
     ```
@@ -7519,15 +7518,6 @@ Worked at ESB
   * `SS-run-sets`
   * `tides`
   * `tracers`
-
-* TODO:
-  * figure out if I can set up ping (ICMP) rules that will allow UptimeRobot monitoring
-    * I think the admins removed my open ICMP rule on the old cloud
-  * do a clean head node instance config before storing the snapshot
-  * set up NFS server on head node and mounts on compute nodes
-  * commit `XIOS-ARCH` changes
-  * commit `XIOS-2/extern/remap/src/earcut.hpp` change
-  * commit NEMO arch file changes
 
 
 
@@ -7607,11 +7597,310 @@ Worked at ESB
 * no obs for TheodosiaDiversion river
 
 
+##### `arbutus` Migration
+
+* created ed25519 key-pair for automation:
+  * `ssh-keygen -t ed25519 -f ~/.ssh/SalishSeaCast-automation_ed25519 -C "SalishSeaCast-automation_ed25519 29jun26"`
+  * `ssh-copy-id -i SalishSeaCast-automation_ed25519 new-arbutus.cloud`
+* copied new key pair to old `arbutus`
+* copied forcing trees from old to new `arbutus`
+  * e.g. `rsync -rltv -e "ssh -i $HOME/.ssh/SalishSeaCast-automation_ed25519" sshNeahBay ubuntu@134.87.9.24:/nemoShare/MEOPAR/`
+    * atmospheric files took all afternoon to copy
+
+
+##### Resilient-C
+
+* continued setup of new VM on UBC OpenStack cloud:
+  * opened network support request at https://web.it.ubc.ca/forms/network/ to change A record for
+    `platform.resilientcoasts.ubc.ca`
+
+
+##### Atlantis
+
+* reviewed Raisha's paper
+
+
+
+#### Tue 30-Jun-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+##### Miscellaneous
+
+* changed permissions on some dirs in `/project/rrg-allen/SalishSea/nowcast-green.202111` that were
+  `g-rx` rather than `g+rx`
+* MOAD mtg; see whiteboard
+
+
+##### `arbutus` Migration
+
+* set up `nowcast-sys/runs/` directory
+* installed `SalishSeaCmd`
+* copied `nowcast-blue` runs results from old to new `arbutus`
+  * `rsync -rltv -e "ssh -i $HOME/.ssh/SalishSeaCast-automation_ed25519" nowcast ubuntu@134.87.9.24:/nemoShare/MEOPAR/SalishSea/`
+* created a YAML run description file to run `nowcast-blue/30jun26` on head node
+  * `salishsea run` failed because `nowcast0` system is unknown
+  * hacked `nowcast0` into `SalishSeaCmd`
+  * 1x7 run failed with a segfault, because forcing files weren't correctly linked
+  * added forcing file links
+  * 1x7 run works: time steps, 10min-avg tide station output files, and 1h-avg `grid_[TUVW]` files
+    * 1h40m52s without rebuild
+  * 1x15 run:
+    * stopped (probably out of memory) at ~15m; 539 time steps; on track for 55m33s
+* for reference, today's `nowcast-blue` run took:
+  * 21m15s for NEMO
+  * 1m4s to rebuild and gather
+* created key-pair for MPI: `ssh-keygen -t ed25519 -C ctb-onc-allen-mpi-nodes`
+* set up compute node instance:
+  * Details:
+    * name: `nowcast1`
+    * description: `SalishSeaCast system compute node`
+    * availability zone: Any
+    * count: 1
+  * Source:
+    * boot source: image
+    * create new volume: no
+    * image: `Ubuntu-24.04-x64-2025-08`
+  * Flavour: `cb16-60gb-560`
+  * Network: `ctb-onc-allen-network`
+  * Network Ports: none
+  * Security Groups: `default`
+  * Key Pair: `arbutus-cloud-ed25519-29sep23`
+  * got internal IP address: 192.168.156.26
+* created `.ssh/config`
+* installed MPI public key with `ssh-copy-id`
+* compute node configuration:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    sudo apt update
+    sudo apt upgrade
+    sudo apt autoremove
+    sudo shutdown -r now
+    sudo timedatectl set-timezone America/Vancouver
+    timedatectl status
+    sudo apt install -y gfortran g++
+    sudo apt install -y libopenmpi-dev openmpi-bin
+    sudo apt install -y libnetcdf-dev libnetcdff-dev netcdf-bin
+    sudo apt install -y mg
+    sudo apt install -y nfs-common
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * created `/nemoShare/MEOPAR/` mount point
+* created `~/mpi_hosts` file
+* set up NFS server on `nowcast0`:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    sudo apt install -y nfs-common nfs-kernel-server
+    sudo mkdir -p /export/MEOPAR
+    sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+    # add to /etc/fstab
+    /nemoShare/MEOPAR   /export/MEOPAR  none  bind  0  0
+    # add to /etc/exports
+    /export        192.168.156.0/24(rw,fsid=0,insecure,no_subtree_check,async)
+    /export/MEOPAR 192.168.156.0/24(rw,nohide,insecure,no_subtree_check,async)
+    sudo systemctl daemon-reload
+    sudo systemctl start nfs-kernel-server.service
+    ```
+    <!-- markdownlint-enable MD031 -->
+* tried 3x10 run on 1 node with XIOS on head node:
+  * failed with `ssh: connect to host 0.0.0.192 port 22: Connection timed out`
+    * due to a type: `-host 192.1689.156.218`
+  * failed with `There are not enough slots available in the system to satisfy the 29 slots ...`
+    * maybe `192.168.156.218` can't be both in `mpi_hosts` and given by `--host`?
+  * tried 1x15 run on 2 nodes:
+    * `mpirun -n 15 --hostfile /home/ubuntu/mpi_hosts ./nemo.exe : -n 1 --host 192.168.156.218 ./xios_server.exe`
+      with only `192.168.156.26` in `mpi_hosts`
+      * no go
+    * `mpirun --host 192.168.156.26:15 ./nemo.exe : --host 192.168.156.218:1 ./xios_server.exe`
+      * got time steps, 10m-avg tide stn files, and 1h-avg grid files
+      * 49m13s; no rebuild
+    * discovered that host file can contain node names
+      * also, can control the node that XIOS runs on
+      <!-- markdownlint-disable MD031 -->
+      ```text
+      nowcast1 slots=15 max-slots=16
+      nowcast0 slots=1 max-slots=16
+      ```
+      <!-- markdownlint-enable MD031 -->
+      * order seems to be important
+      * launched run with `mpirun --hostfile /home/ubuntu/mpi_hosts --display-map -np 1 ./xios_server.exe : -np 15 ./nemo.exe`
+        * 48m23s; no rebuild
+
+
+
+## July
+
+<!-- markdownlint-disable MD001 -->
+#### Wed 1-Jul-2026
+<!-- markdownlint-enable MD001 -->
+
+**Statutory Holiday** - Canada Day
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+##### `arbutus` Migration
+
+* created snapshot of `nowcast1` as `compute-cb16-60gb-560-30jun26`
+* launched `nowcast2` VM
+  * added it to `.ssh/config` and `~/mpi_hosts`
+  * mounted `/nemoShare/MEOPAR/`
+* tried 3x10 run on 2 compute nodes with XIOS on head node:
+  * `mpirun --hostfile /home/ubuntu/mpi_hosts --display-map -np 1 ./xios_server.exe : -np 30 ./nemo.exe`
+    * forgot to enable LPE
+    * 26m55s
+  * 3x11 with LPE
+    * 23m27s
+  * 4x9 run on 2 compute nodes with XIOS on head node:
+    * 21m23s - equivalent to present arbutus.cloud production on 119 cores
+* launched `nowcast3`
+  * 5x12 run on 45 cores on 3 compute nodes with XIOS on head node:
+    * 15m28s
+* launched `nowcast4`
+  * 5x17 run on 60 cores on 4 compute nodes with XIOS on head node:
+    * 12m45s
+  * 6x13 on 57 cores
+    * 13m21s
+* launched `nowcast5`
+  * 6x18 run on 72 cores on 5 compute nodes with XIOS on head node:
+    * 11m22s
+  * 7x15 on 71 cores
+    * 11m33s
+  * 8x13 on 73 cores
+    * 11m46s
+
+
+
+#### Thu 2-Jul-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+##### `arbutus` Migration
+
+* added ICMP rules for lots of UptimeRobot hosts to try to reestablish monitoring
+  * have to add a rule per address unless they are clearly grouped in a contiguous block
+  * made things a little cleaner by creating an `UptimeRobot` security group and putting the ICMP
+    rules in it and adding it to `nowcast0`
+* launched `nowcast6`
+  * 8x16 run on 89 cores on 6 compute nodes with XIOS on head node:
+    * failed with `PMIX ERROR: PMIX_ERR_NOT_SUPPORTED in file ../../../../../../src/mca/gds/shmem/gds_shmem.c at line 240`
+      * suspect that this is due to `nowcast6` being on a different hypervisor shared memory default
+      * for mpi messages is failing
+    * solved with `export PMIX_MCA_gds=hash`
+    * 10m56s
+  * 9x15 on 90 cores:
+    * tested `--mca gds hash` and it failed; ran with export
+    * 10m29s
+  * 10x13 on 85 cores:
+    * tested `-x PMIX_MCA_gds=hash` and it failed; ran with export
+    * 11m10s
+
+
+##### NEMO-4.2
+
+* got Globus link from Kate@UW for sharing test collection of new LiveOcean version (`cas7_t1_x11[a]b`)
+  low-pass filtered boundary extraction files
+  * successfully accessed Globus file manager on web via Alliance credentials
+  * downloaded `ubc0_2012.10.07_2012.12.31.nc` to `khawla`
+  * I can see how I could transfer the file to an Alliance cluster endpoint
+
+
+##### Miscellaneous
+
+* Phys Ocgy seminar; Margo White re: DOC
+
+
+
+#### Fri 3-Jul-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* all hour 047 files from the HRDPS 00Z forecast were not processed by `crop_gribs`
+  * recovery:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    crop_gribs 00 2026-07-03 --backfill --debug
+    fd PT047H.grib2 -t f /results/forcing/atmospheric/continental2.5/GRIB/20260703/00/047 -X rm
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+##### Miscellaneous
+
+* updated PyCharm on `khawla` to 2026.1.4
+  * did cleanup recommended by Toolbox to clear files from old versions
+* helped Becca with Pixi and apparent file system stability issue on `fir`
+
+
+##### `arbutus` Migration
+
+* wrote update in #arbutus-migration channel
+  * asked Michael or Venkat to get me a VMs-hypervisor mapping
+* launched `nowcast7`
+  * 8x19 run on 104 cores on 7 compute nodes with XIOS on head node:
+    * 10m33s
+  * 9x17 on 98 cores:
+    * 9m54s
+  * 10x17 on 103 cores:
+    * 9m24s
+  * 11x15 on 100 cores:
+    * 9m45s
+* launched `nowcast8`
+  * 10x20 run on 119 cores on 8 compute nodes with XIOS on head node:
+    * 8m59s
+  * 11x18 on 117 cores:
+    * 9m92
+  * 12x16 on 116 cores:
+    * 9m15s
+
 
 * TODO:
-  * review Raisha's paper!!
+  * do a clean head node instance config before storing the snapshot
+  * set up NFS server on head node and mounts on compute nodes
+  * commit `XIOS-ARCH` changes
+  * commit `XIOS-2/extern/remap/src/earcut.hpp` change
+  * commit NEMO arch file changes
+  * add `export PMIX_MCA_gds=hash` to `.bashrc`
 
 
+##### SalishSeaNowcast
+
+* started adding `sphinx-copybutton` support in docs; PR#476
+  * used Junie to standardize to code block syntax from literal blocks
+  * used Junie to add copy button support via similar prompt to the one for `moad_tools`
+    * SalishSeaNowcast doesn't use Pixi yet
+
+
+
+#### Sat 4-Jul-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+
+#### Sun 5-Jul-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* `upload_forcing orcinus` failed due to name resolution failure
+
+
+##### SalishSeaNowcast
+
+* finished adding `sphinx-copybutton` support in docs; PR#476; squash-merged
+  * reviewed rendered docs
 
 
 
@@ -7635,6 +7924,7 @@ Worked at ESB
     * NEMO-Cmd - done 27jun26 in PR#161
     * SalishSeaCmd - done 28jun26 in PR#154
 
+    * AtlantisCmd
     * SalishSeaTools
     * SalishSeaCast/docs
     * salishsea-site
@@ -7649,15 +7939,6 @@ Worked at ESB
 
 
 
-##### SalishSeaCast TODO
-
-* consolidate `nowcast-green.202211` results and forcing on `nibi`
-  * delete `/project/def-allen/SalishSea/forcing/` on 16jun after checking with Tall
-* use persisted 16jun LiveOcean extraction for 17jun
-  * collect 17jun extraction on 18jun
-
-
-
 
 
 ##### 2x resolution SalishSeaCastWIP
@@ -7668,14 +7949,10 @@ Worked at ESB
 
 
 
-
-* think about adding `pixi.lock` to run record files that SalishSeaCmd stores
-
-
-
-
 ##### SalishSeaNowcast TODO
 
+* fix indentation of production deployments evolutions description paragraphs
+* test line numbers in example fig module code-block; see note below it
 * `FutureWarning` re: default value change for `compat` from `compat='no_conflicts'` to `compat='override'`
   in `xarray.combine_by_coords()`; issue#390
 * `UserWarning`: no explicit representation of timezones available for np.datetime64
@@ -7770,11 +8047,13 @@ Worked at ESB
 
 
 
+* think about adding `pixi.lock` to run record files that SalishSeaCmd stores
 
 
 
 ##### SalishSeaCmd TODO
 
+* drop `PBS -l mem` directive for `salish`
 * update scaling tests on `narval` with `StdEnv/2023`
   * 100 Gb/s InfiniBand Mellanox HDR interconnect
   * Lustre file system
@@ -7859,6 +8138,7 @@ Worked at ESB
     * NEMO-Cmd - done 24feb26 in PR#131
     * MOAD/docs - done 25feb26 in PR#65
     * moad_tools - done 28jun26 in PR#145
+    * SalishSeaNowcast - done 3jul26 in PR#476
 
     * AtlantisCmd
     * ECget
@@ -7866,7 +8146,6 @@ Worked at ESB
     * Reshapr
     * SalishSeaCast/docs
     * tools
-    * SalishSeaNowcast
     * salishsea-site
 
 
@@ -7885,8 +8164,9 @@ Worked at ESB
   * Reshapr - done 22apr26 in PR#194
   * moad_tools - done 4jun26 in PR#135
 
-  * tools/SalishSeaTools
   * SalishSeaNowcast
+
+  * tools/SalishSeaTools
   * erddap-datasets
   * salishsea-site
   * SOG
