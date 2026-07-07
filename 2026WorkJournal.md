@@ -7863,15 +7863,6 @@ Worked at ESB
     * 9m15s
 
 
-* TODO:
-  * do a clean head node instance config before storing the snapshot
-  * set up NFS server on head node and mounts on compute nodes
-  * commit `XIOS-ARCH` changes
-  * commit `XIOS-2/extern/remap/src/earcut.hpp` change
-  * commit NEMO arch file changes
-  * add `export PMIX_MCA_gds=hash` to `.bashrc`
-
-
 ##### SalishSeaNowcast
 
 * started adding `sphinx-copybutton` support in docs; PR#476
@@ -7901,6 +7892,195 @@ Worked at ESB
 
 * finished adding `sphinx-copybutton` support in docs; PR#476; squash-merged
   * reviewed rendered docs
+
+
+
+### Week 28
+
+#### Mon 6-Jul-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+* no forecast2 runs:
+  * investigation:
+    * lots of stalled workers:
+      * `make_ssh_files forecast2`
+      * `grib_to_netcdf forecast2`
+      * `ping_erddap SCVIP-CTD`
+      * `ping_erddap SEVIP-CTD`
+      * `ping_erddap TWDP-ferry`
+      * `download_live_ocean`
+      * `make_ssh_files nowcast`
+      * `grib_to_netcdf nowcast+`
+    * worried that `/results/` was misbehaving, but `ls` is nominal
+    * maybe `log_aggregator` stalled after 08:41:42,902
+      * restarted `log_aggregator` at ~09:28
+        * no affect
+    * tried to kill `ping_erddap SEVIP-CTD`
+      * even `kill 9` failed
+    * stalled workers are all in `D` state
+    * tried to run `make_ssh_files nowcast` and it got stuck too
+    * sent Slack message to Henryk
+      * he reports that the `/results` RAID is 38% through rebuilding and wants to wait for it to
+        finish before rebooting
+* Henryk did a therapeutic reboot of `skookum` at ~12:45
+* started getting all the things restarted at ~15:20:
+  * started `tomcat` to bring ERDDAP up
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    sudo su - tomcat
+    /opt/apache-tomcat-10.1.40/bin/startup.sh
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * started website
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    mamba activate /SalishSeaCast/salishsea-site-env
+    supervisord --configuration /SalishSeaCast/salishsea-site/supervisord-prod.ini
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * started automation:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    mamba activate /SalishSeaCast/nowcast-env
+    supervisord --configuration /SalishSeaCast/SalishSeaNowcast/config/supervisord.ini
+    ```
+    <!-- markdownlint-enable MD031 -->
+* recovery:
+  * HRDPS 18Z files started flowing as soon as I started `sarracenia` client
+  * started `collect_weather 18 2.5km` and `crop_gribs 18` to process as many files as possible as they arrive
+  * discovered that none of 00Z, 06Z, or 12Z files were stored
+    * backfilled 00Z weather:
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      crop_gribs 00 2026-07-06 --debug
+      download_weather 00 2.5km --backfill --debug
+      ```
+      <!-- markdownlint-enable MD031 -->
+  * most river discharges were not stored; exceptions are those not stored on `/results`:
+    * Capilano
+    * Englishman
+    * Fraser
+  * none of the other forcing nor obs that follow on from `collect_weather 06 2.5km` were stored
+    * backfilled 06Z weather:
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      crop_gribs 06 2026-07-06
+      download_weather 06 2.5km --backfill
+      ```
+      <!-- markdownlint-enable MD031 -->
+  * skipped forecast2 runs
+    * backfilled 12Z weather and nowcast/forecast runs:
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      crop_gribs 12 2026-07-06
+      download_weather 12 2.5km --backfill
+      ```
+      <!-- markdownlint-enable MD031 -->
+  * fixed remaining HRDPS 18Z files
+
+
+##### `arbutus` Migration
+
+* Michael told me that I can query VM-hypervisor mapping with OpenStack CLI:
+  * `openstack server show <INSTANCE ID> | grep hostId`
+  * OpenStack CLI is available on conda-forge as `python-openstackclient`
+
+
+* TODO:
+  * do a clean head node instance config before storing the snapshot
+  * set up NFS server on head node and mounts on compute nodes
+  * commit `XIOS-ARCH` changes
+  * commit `XIOS-2/extern/remap/src/earcut.hpp` change
+  * commit NEMO arch file changes
+  * add `export PMIX_MCA_gds=hash` to `.bashrc`
+
+
+##### SalishSeaNowcast
+
+* started changing to use Pixi for package & env mgmt; PR#
+
+  * edit `pyproject.toml` to prepare:
+    * change `license-files = { paths = ["LICENSE"] }` to `license-files = [ "LICENSE" ]`
+  * `pixi init` to add `[tool.pixi.*]` tables to `pyproject.toml`
+  * `pixi workspace platform add linux-64 osx-arm64 osx-64 win-64`
+  * move Pixi environments additions in `.gitignore`
+  * add `,gitattributes` to VCS
+  * edit `envs/environment-prod.yaml` to  hide `nodefaults` channel, `pip`, and `--editable ../`
+  * `pixi import -e default --format conda-env envs/environment-prod.yaml` to get minimal packages in
+    `default` environment
+  * `pixi install` created the env and the lock file
+    * confirmed with `pixi list salishsea-nowcast`
+    * add `.pixi.lock` to Git tracking
+  * change default env package pins from `*` to semver ranges
+    * `pixi upgrade --pinning-strategy semver`
+    * `pixi add "pandas<3.0.0"` to restore pin re: issue#179
+  * configured PyCharm:
+    * `pixi add pixi-pycharm`
+    * set `conda` executable to output of `pixi run 'echo $CONDA_PREFIX/libexec/conda'`
+    * added `/media/doug/warehouse/MOAD/Reshapr/.pixi/envs/default` to `/home/doug/.conda/environments.txt`
+    * renamed interpreter in PyCharm UI to `salishsea-nowcast:default`
+  * added `test` feature based on `environment-test.yaml`
+    * `pixi add --feature test pytest pytest-cov pytest-randomly tomli`
+    * `pixi workspace environment add test -f test --solve-group default`
+    * `pixi add --feature test pytest pytest-cov pytest-randomly tomli --pinning-strategy semver`
+    * `pixi run -e test pytest` works
+    * `pixi task add -f test pytest "pytest"` shortens the incantation to `pixi run pytest`
+  * added `pytest-cov` and `pytest-cov-html` tasks
+    * added `omit = [ ".pixi/*" ]` to `[tool.coverage.run]`
+    * `pixi task add -f test pytest-cov "pytest --cov=./"`
+    * `pixi task add -f test pytest-cov-html "pytest --cov=./ --cov-report html"`
+  * updated dev docs to use Pixi tasks to run tests and produce coverage reports
+  * added a `test-py314` env (even though it duplicates `test`) to make GHA explicit and consistent
+    * `pixi add --feature py314 python=3.14`
+    * `pixi workspace environment add test-py314 --feature py314 --feature test`
+  * changed `pytest-with-coverage` workflow to use new reusable `pixi-pytest-with-coverage`
+    * force lock file update here because it always gets out of sync here
+  * added `docs` feature and env based on `environment-test.yaml`, `environment-rtd.yaml`, and recent
+    updates in `MOAD/docs`
+    * `pixi add --feature docs docutils=0.22.4 sphinx=9.1.0 sphinx-copybutton=0.5.2 sphinx-notfound-page=1.1.0`
+    * `pixi add --feature docs sphinx-rtd-theme==3.1.0 --pypi`
+    * `pixi add --feature docs commonmark=0.9.1 recommonmark=0.7.1 mock=5.2.0 pillow=12.2.0`
+    * `pixi workspace environment add docs --solve-group default -f docs`
+    * added tasks for common docs work:
+      * `pixi task add -f docs --cwd docs/ docs make clean html`
+      * `pixi task add -f docs --cwd docs/ linkcheck make clean linkcheck`
+  * updated dev docs to use Pixi tasks to build HTML docs and run link checker
+  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
+  * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
+  * deleted `envs/environment-rtd.yaml`
+  * deleted `envs/environment-test.yaml`
+  * added `dev` feature and env based on `environment-dev.yaml`
+    * `pixi add --feature dev black hatch pip pre-commit`
+    * `pixi workspace environment add dev --solve-group default --feature dev`
+    * `pixi add --feature dev black hatch pre-commit`  # to get version pins
+    * `pixi add --feature dev pytest pytest-cov pytest-randomly tomli`
+    * `pixi add --feature dev docutils=0.22.4 sphinx=9.1.0 sphinx-copybutton=0.5.2 sphinx-notfound-page=1.1.0`
+    * `pixi add --feature dev sphinx-rtd-theme==3.1.0 --pypi`
+    * `pixi add --feature dev commonmark=0.9.1 recommonmark=0.7.1 mock=5.2.0 pillow=12.2.0`
+    * installed `pre-commit` to run from `dev` env
+      * `pixi run -e dev pre-commit install`
+    * updated `/home/doug/.conda/environments.txt` to include `/media/doug/warehouse/MOAD/Reshapr/.pixi/envs/dev`
+  * changed PyCharm to use `salishsea-nowcast:dev` interpreter/environment
+  * removed `salishsea-nowcast-dev` conda env from `khawla`
+  * updated dev docs re: use of Pixi
+  * dropped `environment-dev.yaml`
+  * moved `requirements.txt` from `envs/` to top level directory and deleted `envs/`
+  * added task to update `requirements.txt via`pip list`
+    * `pixi task add -f dev update-reqs "python -m pip list --format=freeze >> requirements.txt"`
+  * handle other envs:
+    * `environment-fig-dev.yaml`
+    * `environment-fig-sarracenia.yaml`
+  * updated installation docs to use Pixi
+  * updated use and examples docs re: Pixi
+  * added Pixi badges to README and dev docs
+  * updated release process docs to use Pixi commands
+* released v26.1
+  * be sure to run `pixi update` after `hatch version` commands
+
+
+
 
 
 
