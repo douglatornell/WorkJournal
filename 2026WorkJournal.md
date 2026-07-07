@@ -7981,6 +7981,41 @@ Worked at ESB
   * fixed remaining HRDPS 18Z files
 
 
+
+#### Tue 7-Jul-2026
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+##### Miscellaneous
+
+* started work on creating weights file for CaSR atmospheric forcing files for Junqi:
+  * found work journal 4oct24 and 6oct24 notes re: weights file for sss150
+    * they refer to 23mar23 work journal notes and
+      https://salishsea-meopar-docs.readthedocs.io/en/latest/code-notes/salishsea-nemo/nemo-forcing/atmospheric.html#creating-new-weights-files
+* MOAD group mtg; see whiteboard
+* group "lunch" at Rain or Shine to celebrate 4 or 5 recently published papers
+
+
+##### Dependency Updates
+
+* Squash-merged `dependabot` PRs to update `setup-pixi` to 0.10.0 re: dependency & post-clean updates
+  * gha-workflows
+  * AtlantisCmd
+  * moad_tools
+* Squash-merged `update-pixi-lockfile` PRs
+  * moad_tools
+  * NEMO-Cmd
+  * SalishSeaCmd
+
+
+
+
+
 ##### `arbutus` Migration
 
 * Michael told me that I can query VM-hypervisor mapping with OpenStack CLI:
