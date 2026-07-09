@@ -8014,6 +8014,155 @@ Worked at ESB
 
 
 
+#### Wed 8-Jul-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+##### SalishSeaNowcast
+
+* started changing to use Pixi for package & env mgmt; PR#477
+  * no need to edit `pyproject.toml` to prepare:
+    * Pixi is happy with `license = { file = "LICENSE" }`
+  * `pixi init` to add `[tool.pixi.*]` tables to `pyproject.toml`
+  * `pixi workspace platform add linux-64 osx-arm64 osx-64 win-64`
+  * move Pixi environments additions in `.gitignore`
+  * add `,gitattributes` to VCS
+  * edit `envs/environment-prod.yaml`
+    * hide `nodefaults` channel
+    * hide `pip`
+    * pin `pandas<3.0.0`
+    * pin `python=3.14`
+    * change `sysrsync` from a `pip` dependency to `conda-forge`
+  * `pixi import -e default --format conda-env envs/environment-prod.yaml` to get minimal packages in
+    `default` environment
+  * add `hatch` config to allow installation of SalishSeaCast and MOAD packages from GitHub:
+    <!-- markdownlint-disable MD031 -->
+    ```toml
+    [tool.hatch.metadata]
+    allow-direct-references = true
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * add SalishSeaCast and MOAD packages:
+    * `pixi add --pypi --git https://github.com/43ravens/NEMO_Nowcast.git NEMO_Nowcast`
+    * `pixi add --pypi --git https://github.com/UBC-MOAD/moad_tools.git moad_tools`
+    * `pixi add --pypi --git https://github.com/UBC-MOAD/Reshapr.git Reshapr`
+    * `pixi add --pypi --git https://github.com/SalishSeaCast/tools.git --subdir SalishSeaTools SalishSeaTools`
+    * `pixi add --pypi --git https://github.com/SalishSeaCast/NEMO-Cmd.git NEMO-Cmd`
+    * `pixi add --pypi --git https://github.com/SalishSeaCast/SalishSeaCmd.git SalishSeaCmd`
+  * `pixi install` created the env and the lock file
+    * confirmed with:
+      * `pixi list --fields name,version,build,size,kind,source,url nemo`
+      * `pixi list --fields name,version,build,size,kind,source,url tools`
+      * `pixi list --fields name,version,build,size,kind,source,url reshapr`
+      * `pixi list --fields name,version,build,size,kind,source,url salishsea`
+    * add `.pixi.lock` to Git tracking
+  * change default env package pins from `*` to semver ranges
+    * `pixi upgrade --pinning-strategy semver`
+    * `pixi add "pandas<3.0.0"` to restore pin re: issue#179
+  * configured PyCharm:
+    * set `conda` executable to `/home/doug/miniforge-pypy3/condabin/conda`
+    * added `/media/doug/warehouse/MEOPAR/SalishSeaNowcast/.pixi/envs/default` to `/home/doug/.conda/environments.txt`
+    * renamed interpreter in PyCharm UI to `salishsea-nowcast:default`
+  * added `test` feature based on `environment-test.yaml`
+    * `pixi add --feature test pytest pytest-cov pytest-httpx pytest-randomly tomli`
+    * `pixi workspace environment add test -f test --solve-group default`
+    * `pixi upgrade --feature test pytest pytest-cov pytest-httpx pytest-randomly tomli`  # to get version pins
+    * `pixi run -e test pytest` works
+    * `pixi task add -f test pytest "pytest"` shortens the incantation to `pixi run pytest`
+  * added `pytest-cov` and `pytest-cov-html` tasks
+    * added `omit = [ ".pixi/*", "src/*" ]` to `[tool.coverage.run]`
+    * `pixi task add -f test pytest-cov "pytest --cov=./"`
+    * `pixi task add -f test pytest-cov-html "pytest --cov=./ --cov-report html"`
+  * updated dev docs to use Pixi tasks to run tests and produce coverage reports
+  * added a `test-py314` env (even though it duplicates `test`) to make GHA explicit and consistent
+    * `pixi add --feature py314 python=3.14`
+    * `pixi workspace environment add test-py314 --feature py314 --feature test`
+  * changed `pytest-with-coverage` workflow to use new reusable `pixi-pytest-with-coverage`
+    * checked workflow with `zizmor --persona auditor`
+    * force lock file update here because it always gets out of sync here
+  * added `docs` feature and env based on `environment-test.yaml`, `environment-rtd.yaml`, and recent
+    updates in `MOAD/docs`
+    * `pixi add --feature docs docutils=0.22.4 sphinx=9.1.0 sphinx-copybutton=0.5.2 sphinx-notfound-page=1.1.0`
+    * `pixi add --feature docs sphinx-rtd-theme==3.1.0 --pypi`
+    * `pixi add --feature docs commonmark=0.9.1 recommonmark=0.7.1 mock=5.2.0 pillow=12.2.0`
+    * `pixi workspace environment add docs --solve-group default -f docs`
+    * added tasks for common docs work:
+      * `pixi task add -f docs --cwd docs/ docs make clean html`
+      * `pixi task add -f docs --cwd docs/ linkcheck make clean linkcheck`
+  * updated dev docs to use Pixi tasks to build HTML docs and run link checker
+  * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
+    * checked workflow with `zizmor --persona auditor`
+  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
+  * deleted `envs/environment-rtd.yaml`
+  * deleted `envs/environment-test.yaml`
+  * added `dev` feature and env based on `environment-dev.yaml`
+    * `pixi add --feature dev black hatch pip pre-commit`
+    * `pixi workspace environment add dev --solve-group default --feature dev`
+    * `pixi upgrade --feature dev black hatch pre-commit`  # to get version pins
+    * `pixi add --feature dev pytest pytest-cov pytest-httpx pytest-randomly tomli`
+    * `pixi add --feature dev docutils=0.22.4 sphinx=9.1.0 sphinx-copybutton=0.5.2 sphinx-notfound-page=1.1.0`
+    * `pixi add --feature dev sphinx-rtd-theme==3.1.0 --pypi`
+    * `pixi add --feature dev commonmark=0.9.1 recommonmark=0.7.1 mock=5.2.0 pillow=12.2.0`
+    * installed `pre-commit` to run from `dev` env
+      * `pixi run -e dev pre-commit install`
+    * add task to run pytest-xdist:
+      * `pixi task add -f dev pytest "pytest -n6 --randomly-seed=last"`
+    * updated `/home/doug/.conda/environments.txt` to include `/media/doug/warehouse/MOAD/Reshapr/.pixi/envs/dev`
+  * changed PyCharm to use `salishsea-nowcast:dev` interpreter/environment
+  * removed `salishsea-nowcast-dev` conda env from `khawla`
+  * updated dev docs re: use of Pixi
+  * dropped `environment-dev.yaml`
+  * moved `requirements.txt` from `envs/` to top level directory and deleted `envs/`
+  * added task to update `requirements.txt` via `pip list`
+    * `pixi task add -f dev update-reqs "python -m pip list --format=freeze >> requirements.txt"`
+  * dropped `environment-linkcheck.yaml`
+
+
+
+#### Thu 9-Jul-2026
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+##### Miscellaneous
+
+* Vivaldi failed to lauch after routine OS packages upgrade
+  * `vivaldi-stable --no-sandbox` shows `libc.so.6: version `GLIBC_ABI_DT_RELR' not found`
+    * Gemini says that's due to my OS version being 22.04
+* decided to stop delaying upgrade to 24.04 and COSMIC
+  * PPAs:
+    * https://downloads.1password.com/linux/debian/amd64
+    * https://repo.vivaldi.com/stable/deb
+    * https://packages.microsoft.com/repos/code
+    * https://ppa.launchpadcontent.net/git-core/ppa/ubuntu
+  * did backups to `lizzy` and `smelt`
+
+
+
+
+##### SalishSeaNowcast
+
+* continued changing to use Pixi for package & env mgmt; PR#477
+
+  * handle other envs:
+    * `environment-fig-dev.yaml`
+    * `environment-sarracenia.yaml`
+  * updated installation docs to use Pixi
+  * updated use and examples docs re: Pixi
+  * added Pixi badges to README and dev docs
+  * updated release process docs to use Pixi commands
+* released v26.1
+  * be sure to run `pixi update` after `hatch version` commands
+
+
+
 
 
 ##### `arbutus` Migration
@@ -8030,89 +8179,6 @@ Worked at ESB
   * commit `XIOS-2/extern/remap/src/earcut.hpp` change
   * commit NEMO arch file changes
   * add `export PMIX_MCA_gds=hash` to `.bashrc`
-
-
-##### SalishSeaNowcast
-
-* started changing to use Pixi for package & env mgmt; PR#
-
-  * edit `pyproject.toml` to prepare:
-    * change `license-files = { paths = ["LICENSE"] }` to `license-files = [ "LICENSE" ]`
-  * `pixi init` to add `[tool.pixi.*]` tables to `pyproject.toml`
-  * `pixi workspace platform add linux-64 osx-arm64 osx-64 win-64`
-  * move Pixi environments additions in `.gitignore`
-  * add `,gitattributes` to VCS
-  * edit `envs/environment-prod.yaml` to  hide `nodefaults` channel, `pip`, and `--editable ../`
-  * `pixi import -e default --format conda-env envs/environment-prod.yaml` to get minimal packages in
-    `default` environment
-  * `pixi install` created the env and the lock file
-    * confirmed with `pixi list salishsea-nowcast`
-    * add `.pixi.lock` to Git tracking
-  * change default env package pins from `*` to semver ranges
-    * `pixi upgrade --pinning-strategy semver`
-    * `pixi add "pandas<3.0.0"` to restore pin re: issue#179
-  * configured PyCharm:
-    * `pixi add pixi-pycharm`
-    * set `conda` executable to output of `pixi run 'echo $CONDA_PREFIX/libexec/conda'`
-    * added `/media/doug/warehouse/MOAD/Reshapr/.pixi/envs/default` to `/home/doug/.conda/environments.txt`
-    * renamed interpreter in PyCharm UI to `salishsea-nowcast:default`
-  * added `test` feature based on `environment-test.yaml`
-    * `pixi add --feature test pytest pytest-cov pytest-randomly tomli`
-    * `pixi workspace environment add test -f test --solve-group default`
-    * `pixi add --feature test pytest pytest-cov pytest-randomly tomli --pinning-strategy semver`
-    * `pixi run -e test pytest` works
-    * `pixi task add -f test pytest "pytest"` shortens the incantation to `pixi run pytest`
-  * added `pytest-cov` and `pytest-cov-html` tasks
-    * added `omit = [ ".pixi/*" ]` to `[tool.coverage.run]`
-    * `pixi task add -f test pytest-cov "pytest --cov=./"`
-    * `pixi task add -f test pytest-cov-html "pytest --cov=./ --cov-report html"`
-  * updated dev docs to use Pixi tasks to run tests and produce coverage reports
-  * added a `test-py314` env (even though it duplicates `test`) to make GHA explicit and consistent
-    * `pixi add --feature py314 python=3.14`
-    * `pixi workspace environment add test-py314 --feature py314 --feature test`
-  * changed `pytest-with-coverage` workflow to use new reusable `pixi-pytest-with-coverage`
-    * force lock file update here because it always gets out of sync here
-  * added `docs` feature and env based on `environment-test.yaml`, `environment-rtd.yaml`, and recent
-    updates in `MOAD/docs`
-    * `pixi add --feature docs docutils=0.22.4 sphinx=9.1.0 sphinx-copybutton=0.5.2 sphinx-notfound-page=1.1.0`
-    * `pixi add --feature docs sphinx-rtd-theme==3.1.0 --pypi`
-    * `pixi add --feature docs commonmark=0.9.1 recommonmark=0.7.1 mock=5.2.0 pillow=12.2.0`
-    * `pixi workspace environment add docs --solve-group default -f docs`
-    * added tasks for common docs work:
-      * `pixi task add -f docs --cwd docs/ docs make clean html`
-      * `pixi task add -f docs --cwd docs/ linkcheck make clean linkcheck`
-  * updated dev docs to use Pixi tasks to build HTML docs and run link checker
-  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
-  * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
-  * deleted `envs/environment-rtd.yaml`
-  * deleted `envs/environment-test.yaml`
-  * added `dev` feature and env based on `environment-dev.yaml`
-    * `pixi add --feature dev black hatch pip pre-commit`
-    * `pixi workspace environment add dev --solve-group default --feature dev`
-    * `pixi add --feature dev black hatch pre-commit`  # to get version pins
-    * `pixi add --feature dev pytest pytest-cov pytest-randomly tomli`
-    * `pixi add --feature dev docutils=0.22.4 sphinx=9.1.0 sphinx-copybutton=0.5.2 sphinx-notfound-page=1.1.0`
-    * `pixi add --feature dev sphinx-rtd-theme==3.1.0 --pypi`
-    * `pixi add --feature dev commonmark=0.9.1 recommonmark=0.7.1 mock=5.2.0 pillow=12.2.0`
-    * installed `pre-commit` to run from `dev` env
-      * `pixi run -e dev pre-commit install`
-    * updated `/home/doug/.conda/environments.txt` to include `/media/doug/warehouse/MOAD/Reshapr/.pixi/envs/dev`
-  * changed PyCharm to use `salishsea-nowcast:dev` interpreter/environment
-  * removed `salishsea-nowcast-dev` conda env from `khawla`
-  * updated dev docs re: use of Pixi
-  * dropped `environment-dev.yaml`
-  * moved `requirements.txt` from `envs/` to top level directory and deleted `envs/`
-  * added task to update `requirements.txt via`pip list`
-    * `pixi task add -f dev update-reqs "python -m pip list --format=freeze >> requirements.txt"`
-  * handle other envs:
-    * `environment-fig-dev.yaml`
-    * `environment-fig-sarracenia.yaml`
-  * updated installation docs to use Pixi
-  * updated use and examples docs re: Pixi
-  * added Pixi badges to README and dev docs
-  * updated release process docs to use Pixi commands
-* released v26.1
-  * be sure to run `pixi update` after `hatch version` commands
 
 
 
@@ -8379,7 +8445,7 @@ Worked at ESB
   * Reshapr - done 22apr26 in PR#194
   * moad_tools - done 4jun26 in PR#135
 
-  * SalishSeaNowcast
+  * SalishSeaNowcast - started 8jul26 in PR
 
   * tools/SalishSeaTools
   * erddap-datasets
@@ -8404,9 +8470,10 @@ Worked at ESB
   * PythonNotes - done 10apr26 in PR#5 (via migration to Pixi)
   * moad_tools - done 4jun26 in PR#135 (via migration to Pixi)
 
+  * SalishSeaNowcast - started 8jul26 in PR
+
   * workflows available for testing:
     * tools/SalishSeaTools
-    * SalishSeaNowcast
     * erddap-datasets
     * salishsea-site
   * no workflows:
