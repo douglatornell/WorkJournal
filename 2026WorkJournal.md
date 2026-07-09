@@ -8143,6 +8143,34 @@ Worked at ESB
     * https://packages.microsoft.com/repos/code
     * https://ppa.launchpadcontent.net/git-core/ppa/ubuntu
   * did backups to `lizzy` and `smelt`
+  * did terminal upgrade:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    sudo apt update
+    sudo apt full-grade
+    pop-upgrade recovery upgrade from-release
+    pop-upgrade release upgrade
+    ```
+    <!-- markdownlint-enable MD031 -->
+    * `pop-upgrade recovery upgrade from-release` stalled
+      * forced reboot, repeated it, and it finished instantly
+    * `pop-upgrade release upgrade`
+      * got stuck in boot process on `plymouth-quit.service`
+      * after a bunch of false starts, got the recovery partition to finish the install
+    * had to re-install several 3rd party apps:
+      * `1password` via PPA
+      * VSCode via `.deb` package download
+      * Vivaldi via `.deb` package download
+      * `multimc` via `.deb` package download
+      * `openjdk-21-jre-headless` for Minecraft
+      * `multimc` via `.deb` package download
+    * `rescuetime` no longer works on Linux
+    * Minecraft performance:
+      * solid 100 fps without shaders on Intel graphics
+      * can use right-click to launch on Nvidia graphics
+        * 50 fps with Complementary shaders
+    * TODO:
+      * figure out how to mount `warehouse` at boot time
 
 
 
