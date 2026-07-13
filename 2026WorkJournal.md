@@ -8124,8 +8124,6 @@ Worked at ESB
 
 #### Thu 9-Jul-2026
 
-Worked at ESB
-
 ##### SalishSeaCast
 
 * no obs for TheodosiaDiversion river
@@ -8169,10 +8167,117 @@ Worked at ESB
       * solid 100 fps without shaders on Intel graphics
       * can use right-click to launch on Nvidia graphics
         * 50 fps with Complementary shaders
+
+
+
+#### Fri 10-Jul-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+##### Miscellaneous
+
+* continued tweaking COSMIC setup:
+  * tried to improve notification display time by creating files in
+    `.config/cosmic/com.system76.CosmicNotifications/v1/`
+    * ref: https://github.com/pop-os/cosmic-notifications/issues/138
+  * re-installed `sshfs`
+
     * TODO:
       * figure out how to mount `warehouse` at boot time
+* continued work on creating weights file for CaSR atmospheric forcing files for Junqi:
+  * found work journal 4oct24 and 6oct24 notes re: weights file for sss150
+    * they refer to 23mar23 work journal notes and
+      https://salishsea-meopar-docs.readthedocs.io/en/latest/code-notes/salishsea-nemo/nemo-forcing/atmospheric.html#creating-new-weights-files
+  * confirmed that `/ocean/dlatorne/MEOPAR/NEMO-EastCoast/NEMO_Preparation/4_weights_ATMOS/get_weight_nemo`
+    executable is built and looks correctly linked
+  * created symlinks in `grid/` required to run `get_weight_nemo`:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    cd /data/dlatorne/MEOPAR/grid/
+    ln -sf /ocean/jqiu/CaSR/CaSR_y2023m03d01.nc atmos.nc
+    ln -sf bathymetry_202108.nc bathy_meter.nc
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * copied namelist and symlinked it to the file name that `get_weight_nemo` expects:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    cp ../namelist.get_weight_nemo.hrdps namelist.get_weight_nemo.CaSR
+    ln -s namelist.get_weight_nemo.CaSR namelist
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * generated weights file with:
+    `/ocean/dlatorne/MEOPAR/NEMO-EastCoast/NEMO_Preparation/4_weights_ATMOS/get_weight_nemo`
+    * that creates `met_gem_weight.nc`
+  * cleaned up weights file with `tools/I_ForcingFiles/Atmos/ImproveWeightsFile.ipynb`
 
 
+##### `rorqual`
+
+* Tall discovered that the uploaded forcing files end on 31dec24
+  * confirmed for:
+    * `rivers/`
+    * `river_turb/`
+    * `sshNeahBay/obs/`
+    * `LiveOcean/`
+    * `atmospheric/continental2.5/nemo_forcing/`
+  * uploaded 2025 forcing files from `skookum` to `rorqual` in `djl-xfer` `tmux` session:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    cd /results/forcing/atmospheric/continental2.5/nemo_forcing/
+    time rsync -rLtv hrdps_y2025*.nc \
+      rorqual:/project/def-allen/SalishSea/forcing/atmospheric/continental2.5/nemo_forcing/
+    cd /results/forcing/LiveOcean/boundary_conditions/
+    time rsync -rLtv LiveOcean_v201905_y2025*.nc rorqual:/project/def-allen/SalishSea/forcing/LiveOcean/
+    cd /results/forcing/rivers
+    time rsync -rLtv R202108Dailies_y2025*.nc rorqual:/project/def-allen/SalishSea/forcing/rivers/
+    cd /results/forcing/rivers/river_turb/
+    time rsync -rLtv riverTurbDaily2_y2025*.nc rorqual:/project/def-allen/SalishSea/forcing/rivers/river_turb/
+    cd /results/forcing/sshNeahBay/obs/
+    time rsync -rLtv rsync -rltv ssh_y2025*.nc rorqual:/project/def-allen/SalishSea/forcing/sshNeahBay/obs/
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+##### `trillium`
+
+* Susan want 2008 forcing files on `trillium`:
+  * uploaded 2008 forcing files from `skookum` to `trillium` in `djl-xfer` `tmux` session:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    cd /results/forcing/atmospheric/GEM2.5/gemlam/
+    time rsync -rLtv gemlam_y2008*.nc \
+      trillium-dtn1:/project/def-allen/SalishSea/forcing/atmospheric/GEM2.5/gemlam/
+    cd /results/forcing/NEP36/
+    time rsync -rLtv NEP_v202209_y2008*.nc trillium-dtn1:/project/def-allen/SalishSea/forcing/NEP36/
+    cd /results/forcing/rivers
+    time rsync -rLtv R202108Dailies_y2008*.nc trillium-dtn1:/project/def-allen/SalishSea/forcing/rivers/
+    cd /results/forcing/rivers/turbidity_est/
+    time rsync -rLtv riverTurbEst201909_y2008*.nc \
+      trillium-dtn1:/project/def-allen/SalishSea/forcing/rivers/river_turb/
+    cd /results/forcing/sshNeahBay/obs/
+    time rsync -rLtv rsync -rltv ssh_y2008*.nc \
+      trillium-dtn1:/project/def-allen/SalishSea/forcing/sshNeahBay/obs/
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+
+#### Sat 11-Jul-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+
+#### Sun 12-Jul-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
 
 
 ##### SalishSeaNowcast
@@ -8188,6 +8293,15 @@ Worked at ESB
   * updated release process docs to use Pixi commands
 * released v26.1
   * be sure to run `pixi update` after `hatch version` commands
+
+
+
+
+
+##### tools TODO
+
+* replace `nc_tools._notebook_hg_url()` with something like `_notebook_github_url()`
+* replace `nc_tools._nc_file_hg_url()` with something like `_nc_file_github_url()`
 
 
 
@@ -8260,6 +8374,8 @@ Worked at ESB
 
 ##### SalishSeaNowcast TODO
 
+* add O2 to ONC CTD obs collection
+  * backfill to make ERDDAP consistent
 * fix indentation of production deployments evolutions description paragraphs
 * test line numbers in example fig module code-block; see note below it
 * `FutureWarning` re: default value change for `compat` from `compat='no_conflicts'` to `compat='override'`
