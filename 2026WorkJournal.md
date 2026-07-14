@@ -8280,6 +8280,85 @@ Worked at ESB
 * no obs for TheodosiaDiversion river
 
 
+
+### Week 29
+
+#### Mon 13-Jul-2026
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+##### NEMO-4.2
+
+* created new storage tree in `/results/forcing/LiveOcean/`:
+  <!-- markdownlint-disable MD031 -->
+  ```text
+  LiveOcean/cas7_t1_x11ab/
+  ├── boundary_conditions/
+  └── downloaded/
+  ```
+  <!-- markdownlint-enable MD031 -->
+  * uploaded `ubc0_2012.10.07_2012.12.31.nc` from `khawla`
+    * note that file is not deflated
+* created new `/results/forcing/3oceans12/` storage tree:
+  <!-- markdownlint-disable MD031 -->
+  ```text
+  3oceans12/
+  └── GEBCO2023Smag/
+      ├── boundary_conditions/
+      └── downloaded/
+  ```
+  <!-- markdownlint-enable MD031 -->
+* created `/ocean/dlatorne/MEOPAR/aioOcean/` project to download the `3oceans12` files
+  * 2483 files in ~3m49s
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `pip` to 26.2 re: path traversal vulnerability
+  * SalishSeaCast/docs
+  * SalishSeaTools
+  * MoaceanParcels
+  * cookiecutter-MOD-pypkg
+  * Reshapr
+  * salishsea-site
+  * FUN
+* Squash-merged dependabot PRs to update `soupsieve` to 2.8.4 re: regex DoS and memory exhaustion
+  vulnerabilities
+  * SalishSeaTools
+  * MoaceanParcels
+  * erddap-datasets
+  * SOG-Bloomcast
+* Squash-merged dependabot PRs to update `mistune` to 3.3.0 re: CPU exhaustion DoS vulnerability
+  * SalishSeaCast/docs
+  * SalishSeaTools
+  * MoaceanParcels
+  * ECget
+  * MOAD/docs
+  * SOG-Bloomcast-Ensemble
+  * erddap-datasets
+
+
+##### reshapr
+
+* removed a redundant `osx-arm64` in the Pixi platform list that had started causing GHA workflow
+  failures
+* removed `exclude-newer` directives from Pixi config because scheduled monthly lockfile update
+  workflows reduce to an acceptable level the "security patch churn" issue that I was worried about
+
+
+##### Miscellaneous
+
+* quieted Pixi warnings about caches on network/parallel filesystems on `ocean` machines with
+  `pixi config set --global cache.repodata /tmp/pixi-cache-dlatorne/repodata`
+  `pixi config set --global cache. /tmp/pixi-cache-dlatorne/conda-pypi-mapping`
+
+
+
+
+
 ##### SalishSeaNowcast
 
 * continued changing to use Pixi for package & env mgmt; PR#477
