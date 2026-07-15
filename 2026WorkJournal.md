@@ -6777,7 +6777,7 @@ Worked at ESB
     ```
     <!-- markdownlint-enable MD031 -->
     * build took 55s
-  * prepared 01mar23-11x23 test run
+  * prepared 01mar23-11x32 test run
     * created `SalishSea/djl/v202111/rorqual-example.yaml` by copying and editing `nibi` file
     * checked forcing files:
       * atmospheric - good
@@ -8243,7 +8243,7 @@ Worked at ESB
 
 ##### `trillium`
 
-* Susan want 2008 forcing files on `trillium`:
+* Susan wants 2008 forcing files on `trillium`:
   * uploaded 2008 forcing files from `skookum` to `trillium` in `djl-xfer` `tmux` session:
     <!-- markdownlint-disable MD031 -->
     ```bash
@@ -8355,6 +8355,27 @@ Worked at ESB
   `pixi config set --global cache.repodata /tmp/pixi-cache-dlatorne/repodata`
   `pixi config set --global cache. /tmp/pixi-cache-dlatorne/conda-pypi-mapping`
 
+
+
+#### Tue 14-Jul-2026
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* no obs for TheodosiaDiversion river
+
+
+##### Miscellaneous
+
+* researched `Asyncssh` package
+* MOAD group mtg; see whiteboard
+
+
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PR
+  * Reshapr
 
 
 
