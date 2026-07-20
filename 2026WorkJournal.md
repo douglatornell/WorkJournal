@@ -7707,7 +7707,7 @@ Worked at ESB
     <!-- markdownlint-enable MD031 -->
 * tried 3x10 run on 1 node with XIOS on head node:
   * failed with `ssh: connect to host 0.0.0.192 port 22: Connection timed out`
-    * due to a type: `-host 192.1689.156.218`
+    * due to a typo: `-host 192.1689.156.218`
   * failed with `There are not enough slots available in the system to satisfy the 29 slots ...`
     * maybe `192.168.156.218` can't be both in `mpi_hosts` and given by `--host`?
   * tried 1x15 run on 2 nodes:
@@ -7979,6 +7979,13 @@ Worked at ESB
       ```
       <!-- markdownlint-enable MD031 -->
   * fixed remaining HRDPS 18Z files
+
+
+##### `arbutus` Migration
+
+* Michael told me that I can query VM-hypervisor mapping with OpenStack CLI:
+  * `openstack server show <INSTANCE ID> | grep hostId`
+  * OpenStack CLI is available on conda-forge as `python-openstackclient`
 
 
 
@@ -8364,6 +8371,7 @@ Worked at ESB
 ##### SalishSeaCast
 
 * no obs for TheodosiaDiversion river
+* no HRDPS 1km 12Z forecast
 
 
 ##### Miscellaneous
@@ -8379,14 +8387,277 @@ Worked at ESB
 
 
 
+#### Wed 15-Jul-2026
+
+##### SalishSeaCast
+
+* obs for TheodosiaDiversion river resume at 08:10 on 14jul
+
+##### ERDDAP
+
+* investigated Peter Thompson's email re: ERDDAP timeouts
+  * daily emails show many bad file messages for day-avg physics dataset that I tried to publish in
+    March
+  * realized that `fs.inotify` limits had reverted to low default values after last `skookum` reboot:
+  * set new values:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+      sudo sysctl fs.inotify.max_user_instances=2048
+      sudo sysctl fs.inotify.max_user_watches=196608
+      sudo sysctl -p
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * emailed Peter asking him to confirm if he is still having issues
+  * removed day-avg physics dataset from config
+
+
+##### SalishSeaNowcast
+
+* continued changing to use Pixi for package & env mgmt; PR#477
+  * added `fig-dev` feature and env based on `environment-fig-dev.yaml`
+    * `pixi add --feature fig-dev jupyterlab`
+    * `pixi workspace environment add fig-dev --solve-group dev --feature fig-dev`
+    * `pixi upgrade --feature fig-dev jupyterlab`  # to get version pins
+    * `pixi add --feature fig-dev pyramid pyramid_debugtoolbar pyramid_mako waitress`
+    * had to manually add `dev` to `fig-dev = { features = ["fig-dev", "dev"], solve-group = "dev" }`
+      to get `dev` dependencies installed in `fig-dev` env
+    * updated fig-dev docs
+  * added `sarracenia` feature and env based on `environment-fig-dev.yaml`
+    * edited `environment-sarracenia.yaml`:
+      * rename env to `sarracenia`
+      * drop `nodefaults` channel
+      * drop `pip` dependency
+      * change to `python=3.14`
+    * `pixi import -e sarracenia --format conda-env envs/environment-sarracenia.yaml`
+    * `pixi upgrade -f sarracenia`  # to get version pins
+    * added `[tool.pixi.feature.sarracenia.activation.env]` table to define envvars
+      * confirmed with `pixi run -e sarracenia env | rg SARRA`
+
+
+##### NEMO-4.2
+
+* looked at code in `make_live_ocean_files` worker and `salishsea_tools/LiveOcean_BCs.py`
+  * both are quite focussed on per-day low-passed files from LiveOcean
+
+
+
+#### Thu 16-Jul-2026
+
+##### Miscellaneous
+
+* added `/etc/fstab` entry for `warehouse` drive on `khawla`
+* replied to email from Louis Djate at Dalhousie re: accessing wave model nowcast files via the
+  files interface on ERDDAP
+* investigated Camryn's issue with slow starts of interactive sessions on `nibi`
+  * possibly due to schedule config mess-up related to power management due to heatwave in Ontario
+
+
+##### NEMO 4.2
+
+* discussed `time` field correction of `gemlam` atmospheric forcing files with Susan:
+  * she is going to have Dishika fix them
+  * decided to let Dishika store the fixed files where she wants, then I will move bad files into a
+    directory beside `/results/forcing/atmospheric/GEM2.5/gemlam/` and replace them with Dishika's files
+* pinged Susan to check one the `3oceans12/` extraction files before we tall Li to remove them from hpfx
+* suggested to Susan that we create a `#NEMO-4.2` channel
+* emailed Kate@UW with our preference for day-per-file extractions from LiveOcean
+
+
+##### SalishSeaNowcast
+
+* continued changing to use Pixi for package & env mgmt; PR#477
+  * deleted `environment-sarracenia.yaml`
+  * deleted `requirements-sarracenia.yaml`
+  * added `update-pixi-lockfile.yaml` workflow to run on the 1st of the month
+
+
+##### `nibi`
+
+* Susan reported missing forcing files on `nibi`:
+  * uploaded missing files from `skookum` to `nibi` in `djl-xfer` `tmux` session:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    cd /results/forcing/rivers/turbidity_est/
+    time rsync -rLtv riverTurbEst201909_y2007*.nc \
+      nibi:/project/rrg-allen/SalishSea/forcing/rivers/river_turb/
+    time rsync -rLtv riverTurbEst201909_y2008*.nc \
+      nibi:/project/rrg-allen/SalishSea/forcing/rivers/river_turb/
+    cd /results/forcing/rivers/turbidity_201906//
+    time rsync -rLtv riverTurbDaily201906_y2009*.nc \
+      nibi:/project/rrg-allen/SalishSea/forcing/rivers/river_turb/
+    cd /results/forcing/sshNeahBay/obs/
+    time rsync -rLtv rsync -rltv ssh_y2007*.nc \
+      nibi:/project/rrg-allen/SalishSea/forcing/sshNeahBay/obs/
+    time rsync -rLtv rsync -rltv ssh_y2008*.nc \
+      nibi:/project/rrg-allen/SalishSea/forcing/sshNeahBay/obs/
+    time rsync -rLtv rsync -rltv ssh_y2009*.nc \
+      nibi:/project/rrg-allen/SalishSea/forcing/sshNeahBay/obs/
+    cd /results/forcing/NEP36/
+    time rsync -rLtv NEP_v202209_y2007*.nc nibi:/project/rrg-allen/SalishSea/forcing/NEP36/
+    time rsync -rLtv NEP_v202209_y2008*.nc nibi:/project/rrg-allen/SalishSea/forcing/NEP36/
+    time rsync -rLtv NEP_v202209_y2009*.nc nibi:/project/rrg-allen/SalishSea/forcing/NEP36/
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+
+#### Fri 17-Jul-2026
+
+##### SalishSeaCast
+
+* `forecast2` runs failed
+* `collect_weather 12 2.5km` was ~1h late
+
+
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PR
+  * gha-workflows
+* Squash-merged dependabot PRs to update `jupyter-server` to 2.20.0 re: XSS vulnerability
+  * erddap-datasets
+
+
+##### `arbutus` Migration
+
+* set up `openstackclient` installation on `khawla`
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  cd /media/doug/warehouse/MEOPAR/
+  git init openstack-client
+  cd openstack-client
+  git config --local user.email "dlatornell@eoas.ubc.ca"
+  pixi init
+  pixi add python=3.14 python-openstackclient
+  ```
+  <!-- markdownlint-enable MD031 -->
+  * downloaded `ctb-onc-allen-openrc.sh` from dashboard "API Access" page
+  * after a failed test, found
+    https://docs.alliancecan.ca/wiki/Arbutus_Migration_Guide#Changing_the_RC_file_in_the_new_Arbutus_cloud
+    and modified `ctb-onc-allen-openrc.sh` accordingly
+    * `pixi add --pypi keystoneauth-websso`
+  * successful test
+  * checked `hostId` values for all of the VMs and found that they are all on different hypervisors
+    * so much for my hypothesis about why `PMIX ERROR` arose when I added the 7th VM
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    pixi shell
+    source ctb-onc-allen-openrc.sh
+    openstack server list
+    openstack server show 430450ba-c770-4660-a30a-544fc613d585 | rg hostId
+    ...
+    ```
+    <!-- markdownlint-enable MD031 -->
+* tried to add 3 more IP addresses to UptimeRobot rules from 5-Jul monitoring event via CLI
+  * rules exist, so I must have added them via the web interface
+  * CLI is very verbose and a bit of a PITA to find the docs for
+* discovered that persistent storage was not present on `nowcast0`
+  * detached it via the web interface
+  * reattached it via the web interface
+    * interface says that it is attached to `/dev/vdd` but `lsblk -f` says that it is `/dev/vdd`
+    * `sudo mount /dev/vdd /nemoShare` worked
+    * got nothing when I remounted it on `nowcast1`
+    * had to redo the bind mount and restart NFS
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      sudo mount --bind /nemoShare/MEOPAR /export/MEOPAR
+      sudo systemctl restart nfs-kernel-server.service
+      ```
+      <!-- markdownlint-enable MD031 -->
+      then remount on compute nodes
+* re-ran 10x20 8 node `nowcast-blue` test
+  * got lots of segfaults before I did `export PMIX_MCA_gds=hash`
+  * 9m44s; no rebuild
+    * 45s slower than 3jul26 test; maybe due to VMs spread across hypervisors now
+* installed `SalishSeaNowcast`
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  cd /nemoShare/MEOPAR/nowcast-sys/
+  git clone git@github.com:SalishSeaCast/SalishSeaNowcast.git
+  git switch pixi
+  pixi install
+  ```
+  <!-- markdownlint-enable MD031 -->
+  * had to upload `nowcast-green/29jun26` restart files
+  * had to set several `NOWCAST_*` envvars
+  * got a somewhat successful run of `run_NEMO`
+* re-ran 10x17 7 node `nowcast-blue` test
+  * got `PMIX ERROR: PMIX_ERR_NOT_SUPPORTED` before I did `export PMIX_MCA_gds=hash`
+    * that suggests that my hypothesis about the first 6 VMs having been on the same hypervisor may
+      have been correct, but that changed when the VMs were restarted this week for hypervisor security
+      updates
+  * 10m1s; no rebuild
+    * 37s slower than 3jul26; maybe due to VMs spread across hypervisors now
+
+
+* TODO:
+  * do a clean head node instance config before storing the snapshot
+  * set up NFS server on head node and mounts on compute nodes
+  * commit `XIOS-ARCH` changes
+  * commit `XIOS-2/extern/remap/src/earcut.hpp` change
+  * commit NEMO arch file changes
+  * add `export PMIX_MCA_gds=hash` to `.bashrc`
+
+
+
+#### Sat 18-Jul-2026
+
+##### SalishSeaCast
+
+* `forecast2` runs failed
+* `nowcast-blue` run failed
+  * Susan found that the issue is NaN in river discharge for Roberts Creek
+  * confirmed that `/results/forcing/rivers/observations/RobertsCreek_flow` has `nan` for 17jul26
+  * persisted 16jul obs for Roberts Creek to 17jul
+  * ran `make_runoff_file`
+  * use `upload_forcing` to restart automation at ~14:20
+
+
+
+#### Sun 19-Jul-2026
+
+##### SalishSeaCast
+
+* `forecast2` runs failed due to bad values in runoff file caused by `nan` in Roberts Creek obs csv
+  file that `make_runoff_file` doesn't handle correctly
+* deleted `nan` line from Roberts Creek obs csv file before `make_runoff_file` ran for `nowcast` runs
+  * `make_201702_runoff_file` patched Roberts Creek
+
+
+##### SalishSeaNowcast
+
+* started updating `arbutus` deployment docs
+  * decided to shelve what I did for a future PR because it is related to the `arbutus` migration,
+    not Pixi
+
+
+##### `arbutus` Migration
+
+* hacked `arbutus:nowcast/workers/run_NEMO.py` to have the necessary `mpirun` command for 103 NEMO cores
+* test run:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  pixi shell
+  export PMIX_MCA_gds=hash
+  export NOWCAST_ENV=/nemoShare/MEOPAR/nowcast-sys/SalishSeaNowcast/.pixi/envs/default
+  export NOWCAST_LOGS=/nemoShare/MEOPAR/nowcast-sys/logs/nowcast
+  export NOWCAST_YAML=/nemoShare/MEOPAR/nowcast-sys/SalishSeaNowcast/config/nowcast.yaml
+  python -m nowcast.workers.run_NEMO $NOWCAST_YAML arbutus.cloud-nowcast nowcast --run-date 2026-06-30 --debug
+  ```
+  <!-- markdownlint-enable MD031 -->
+  * 9m38s; no rebuild
+
+
+
+
+
+
 
 ##### SalishSeaNowcast
 
 * continued changing to use Pixi for package & env mgmt; PR#477
 
-  * handle other envs:
-    * `environment-fig-dev.yaml`
-    * `environment-sarracenia.yaml`
+  * deleted `environment-prod.yaml`
+  * rename `@ git` dependencies to match import names; e.g. `salishseacmd` -> `salishsea_cmd`
   * updated installation docs to use Pixi
   * updated use and examples docs re: Pixi
   * added Pixi badges to README and dev docs
@@ -8402,25 +8673,6 @@ Worked at ESB
 
 * replace `nc_tools._notebook_hg_url()` with something like `_notebook_github_url()`
 * replace `nc_tools._nc_file_hg_url()` with something like `_nc_file_github_url()`
-
-
-
-
-
-##### `arbutus` Migration
-
-* Michael told me that I can query VM-hypervisor mapping with OpenStack CLI:
-  * `openstack server show <INSTANCE ID> | grep hostId`
-  * OpenStack CLI is available on conda-forge as `python-openstackclient`
-
-
-* TODO:
-  * do a clean head node instance config before storing the snapshot
-  * set up NFS server on head node and mounts on compute nodes
-  * commit `XIOS-ARCH` changes
-  * commit `XIOS-2/extern/remap/src/earcut.hpp` change
-  * commit NEMO arch file changes
-  * add `export PMIX_MCA_gds=hash` to `.bashrc`
 
 
 
