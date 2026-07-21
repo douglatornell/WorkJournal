@@ -8589,15 +8589,6 @@ Worked at ESB
     * 37s slower than 3jul26; maybe due to VMs spread across hypervisors now
 
 
-* TODO:
-  * do a clean head node instance config before storing the snapshot
-  * set up NFS server on head node and mounts on compute nodes
-  * commit `XIOS-ARCH` changes
-  * commit `XIOS-2/extern/remap/src/earcut.hpp` change
-  * commit NEMO arch file changes
-  * add `export PMIX_MCA_gds=hash` to `.bashrc`
-
-
 
 #### Sat 18-Jul-2026
 
@@ -8646,6 +8637,124 @@ Worked at ESB
   <!-- markdownlint-enable MD031 -->
   * 9m38s; no rebuild
 
+
+### Week 30
+
+#### Mon 20-Jul-2026
+
+##### Miscellaneous
+
+* quarterly ERDDAP showcase
+  * FVON:
+    * Cooper Van Vranken, Fishing Vessel Observation Network
+    * sensors going along for the ride
+  * FIShBOT:
+    * Linus Stoltz
+    * aggregated data product of in-situ bottom water temperature in NE Atlantic
+    * buzzword: FAIR data (Findable Accessible Interoperable Reusable)
+    * mint DOIs via Zenodo for their datasets for citations
+  * PMEL use of GitHub for `datasets.xml` wrangling:
+    * Ellen Koukel
+    * private and very locked down in their GitHub org
+      * maybe due to GHA workflow that builds `dataset.xml`?
+    * very similar to my setup of `erddap-datasets` repo
+      * not sure if my inspiration was PMEL or we both got inspired by some other project
+        (probably OceanHackWeek 2019 IOOS `colocate` project - now dormant)
+    * Chris says: "As of version 2.25 we also support using XInclude (with the SAXParser)."
+    * github.com/NOAA-PMEL/erddap-refresh/
+  * DuckDB and ERDDAP:
+    * Roy Mendelssohn
+    * Posit Assistant
+    * collection of agentic skills
+    * a bunch of other stuff; links in summary from Chris in gmail
+
+
+##### SalishSeaCast
+
+* `forecast2` runs failed due to bad values in runoff file caused by `nan` in Roberts Creek obs csv
+  file that `make_runoff_file` doesn't handle correctly
+* deleted `nan` line from Roberts Creek obs csv file after `make_runoff_file` ran for `nowcast` runs
+* restarted automation:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  make_runoff_file v202108
+  upload_forcing arbutus nowcast+
+  upload_forcing robot.nibi nowcast+
+  upload_forcing optimum nowcast+
+  upload_forcing orcinus nowcast+
+  ```
+  <!-- markdownlint-enable MD031 -->
+
+
+##### `arbutus` Migration
+
+* changed config item to `salishsea_cmd: pixi run -m /nemoShare/MEOPAR/nowcast-sys/SalishSeaNowcast salishsea`
+* test run:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  export PMIX_MCA_gds=hash
+  export NOWCAST_ENV=/nemoShare/MEOPAR/nowcast-sys/SalishSeaNowcast/.pixi/envs/default
+  export NOWCAST_LOGS=/nemoShare/MEOPAR/nowcast-sys/logs/nowcast
+  export NOWCAST_YAML=/nemoShare/MEOPAR/nowcast-sys/SalishSeaNowcast/config/nowcast.yaml
+  pixi shell -m /nemoShare/MEOPAR/nowcast-sys/SalishSeaNowcast
+  python -m nowcast.workers.run_NEMO $NOWCAST_YAML arbutus.cloud-nowcast nowcast --run-date 2026-06-30 --debug
+  ```
+  <!-- markdownlint-enable MD031 -->
+  * 10m23s; includes `combine` and `gather`
+  * 11x18 run:
+    * 9m50s
+* built `SalishSeaCast` NEMO configuration
+* rsync-ed `nowcast-green.v202111/29jun26/namelist_cfg` from `skookum`
+  * test runs:
+    * 11x18: 22m36s compared to 1h46s for today's run on old-arbutus
+    * 10x20: 22m14s
+
+
+* TODO:
+  * do a clean head node instance config before storing the snapshot
+  * set up NFS server on head node and mounts on compute nodes
+  * commit `XIOS-ARCH` changes
+  * commit `XIOS-2/extern/remap/src/earcut.hpp` change
+  * commit NEMO arch file changes
+  * add `export PMIX_MCA_gds=hash` to `.bashrc`
+  * add `lf` to `.bash_aliases`
+  * move addition of Pixi to path from `.bashrc` to `.bash_aliases`
+  * add Pixi autocompletion to `.bash_aliases`
+
+
+##### NEMO-4.2
+
+* suggested that Susan try:
+  <!-- markdownlint-disable MD031 -->
+  ```fortran
+  !-----------------------------------------------------------------------
+  &namsbc_core   !   namsbc_core  CORE bulk formulae
+  !-----------------------------------------------------------------------
+  !         !  file name         ! frequency (hours) ! variable  ! time interp. !  clim   ! 'yearly'/ ! weights   ! rotation !
+  !         !                    !  (if <0  months)  !   name    !   (logical)  !  (T/F ) ! 'monthly' ! filename  ! pairing  !
+    sn_wndi = 'NEMO-atmos/hrdps',        1,           'u_wind',    .false.,      .false.,  'daily',    '',         'Uwnd'
+  ...
+  ```
+  <!-- markdownlint-enable MD031 -->
+  to get the downscaled atmospheric forcing to work without a weights file
+  * brain-fart!
+
+
+
+#### Tue 21-Jul-2026
+
+##### SalishSeaCast
+
+* `forecast2` runs failed due to bad values in runoff file caused by `nan` in Roberts Creek obs csv
+  file that `make_runoff_file` doesn't handle correctly
+* deleted `nan` line from Roberts Creek obs csv file before `make_runoff_file` ran for `nowcast` runs
+
+
+##### SalishSeaNowcast
+
+* continued changing to use Pixi for package & env mgmt; PR#477
+  * added `.env-arbutus` envvars template file
+  * updated deployment docs to `arbutus`
 
 
 
