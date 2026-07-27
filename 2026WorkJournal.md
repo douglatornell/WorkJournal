@@ -8219,6 +8219,7 @@ Worked at ESB
     `/ocean/dlatorne/MEOPAR/NEMO-EastCoast/NEMO_Preparation/4_weights_ATMOS/get_weight_nemo`
     * that creates `met_gem_weight.nc`
   * cleaned up weights file with `tools/I_ForcingFiles/Atmos/ImproveWeightsFile.ipynb`
+    * stored resulting file as `/data/dlatorne/MEOPAR/grid/weights-CaSR_202108.nc`
 
 
 ##### `rorqual`
@@ -8332,6 +8333,7 @@ Worked at ESB
   * Reshapr
   * salishsea-site
   * FUN
+  * SOG-Bloomcast
 * Squash-merged dependabot PRs to update `soupsieve` to 2.8.4 re: regex DoS and memory exhaustion
   vulnerabilities
   * SalishSeaTools
@@ -8743,6 +8745,8 @@ Worked at ESB
 
 #### Tue 21-Jul-2026
 
+Worked at ESB
+
 ##### SalishSeaCast
 
 * `forecast2` runs failed due to bad values in runoff file caused by `nan` in Roberts Creek obs csv
@@ -8754,26 +8758,417 @@ Worked at ESB
 
 * continued changing to use Pixi for package & env mgmt; PR#477
   * added `.env-arbutus` envvars template file
-  * updated deployment docs to `arbutus`
+  * updated deployment docs for `arbutus`
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* analyzed quotes for new servers and discussed them briefly with Susan and Henryk
+* helped Darren sort out Jupyter kernel issue on `chum` and oriented him to `Reshapr`
+
+
+#### Wed 22-Jul-2026
+
+##### SalishSeaCast
+
+* `forecast2` runs failed due to bad values in runoff file caused by `nan` in Roberts Creek obs csv
+  file that `make_runoff_file` doesn't handle correctly
+* deleted `nan` line from Roberts Creek obs csv file before `make_runoff_file` ran for `nowcast` runs
+* `upload_forcing orcinus` failed due to connection timed out, then bad host key
+* `make_turbidity_file` failed due to insufficient data
+
+
+##### Miscellaneous
+
+* restored YubiKey set up as alternative unlock mechanism on `khawla` for auth with 1password ssh agent
+  * refs:
+    * Thu 20-Nov-2025 notes on setup for `kudu`
+    * Sat 15-Nov-2025 notes on setup for `khawla`
+    * ref https://support.system76.com/articles/yubikey-login/
+      <!-- markdownlint-disable MD031 -->
+    ```bash
+    # open spare root terminal in case I need to revert things
+    sudo su
+    # in regular terminal
+    sudo apt install -y libpam-yubico yubikey-personalization yubikey-manager
+    # store previously generated challenge file from YubiKey slot 2
+    sudo mkdir /var/yubico
+    sudo chown root /var/yubico
+    sudo chmod 700 /var/yubico
+    ykpamcfg -2 -v
+    sudo mv ~/.yubico/challenge-<SERIAL> /var/yubico/$USER-<SERIAL>
+    sudo chown root:root /var/yubico/$USER-<SERIAL>
+    sudo chmod 600 /var/yubico/$USER-<SERIAL>
+    # enable YubiKey authentication
+    sudo dpkg-reconfigure libpam-yubico
+    # in the 1st panel, set parameters (debugging enabled) for Yubico PAM to:
+    mode=challenge-response debug chalresp_path=/var/yubico
+    # in the 2nd panel, add Yubico authentication with YuibKey to the list of enabled profiles
+    # that dpkg-reconfigure results in a line added to /etc/pam.d/common-auth
+      auth required pam_yubico.so mode=challenge-response chalresp_path=/var/yubico
+    # delete that line
+    # copy polkit-1 config
+    sudo cp /usr/lib/pam.d/polkit-1 /etc/pam.d/polkit-1
+    # add PAM config to enable YubiKey as sufficient authentication
+    sudo nano /etc/pam.d/yubico-sufficient
+    auth sufficient pam_yubico.so mode=challenge-response chalresp_path=/var/yubico
+    # set YubiKey as sufficient auth for polkit-1
+    sudo nano /etc/pam.d/polkit-1
+    @include yubico-sufficient  # above @include common-auth
+    ```
+    <!-- markdownlint-enable MD031 -->
+* more analysis of quotes for MOAD server upgrades
+  * found C$ price for 960G OS SSDs
+    * smallest available in data centre category
+  * found C$ price for 7.68T SSDs
+  * found C$ price for AMD EPYC 9335 32-core CPU
+  * found US$ price for Micron MTC20F1045S1RC64BD2 32GB DDR5-6400 ECC RDIMM 1Rx4 RAM module
+  * discussion with Susan concluded that RAM is almost 50% of the cost of the compute server
+  * idea to go forward:
+    * buy storage server as quoted
+      * maybe only need 11 HDDs due to shared hot spare
+      * maybe upgrade to 30G HDDs
+    * buy half of the quoted compute server
+      * 1 x AMD EPYC 9335 32-core CPU
+      * 256 G RAM
+      * 2 x 960G SSDs for OS
+      * drop 2 x 7.68T SSDs for cache/scratch
+    * remove all storage "duties" from `skoookum` and `salish`
+    * retire `salish`
+    * keep `skookum` as web/app server because we need its 128G RAM for those workloads
+  * zoom w/ Henryk
+    * reduce OS SSDs to 480G
+    * reduce storage server HDDs to 24G
+    * compute server chassis is 2 blade - make correct
+      * reduce to 2 x 24 CPUs
+        * I found price - probably only saves ~C$4k
+      * reduce RAM to 384G
+        * probably saves ~US$7k
+      * reduce OS SSDs to 2 x 480G from 4 x 960G
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `pillow` to 12.3.0 re: multiple vulnerabilities
+  * SOG-Bloomcast-Ensemble
+  * MoaceanParcels
+  * SalishSeaTools
+  * MOAD/docs
+  * Reshapr
+  * moad_tools
+  * SOG-Bloomcast
+* Squash-merged dependabot PRs to update `setuptools` to 83.0.0 re: MANIFEST.in exclusion bypass vulnerability
+  * MOAD/docs
+  * moad_tools
+  * SOG-Bloomcast-Ensemble
+  * SalishSeaTools
+  * MoaceanParcels
+  * Reshapr
+
+
+##### NEMO-4.2
+
+* created weights file for Dishika's downscaled atmospheric forcing files for Susan's testing:
+  * refs:
+    * 10jul26 work journal notes
+    * https://salishsea-meopar-docs.readthedocs.io/en/latest/code-notes/salishsea-nemo/nemo-forcing/atmospheric.html#creating-new-weights-files
+  * created symlinks in `/data/dlatorne/MEOPAR/grid/` required to run `get_weight_nemo`:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    cd /data/dlatorne/MEOPAR/grid/
+    ln -sf /ocean/dtaneja/MOAD/analysis-dishika/notebooks/results/daily_downscaled_2008_final/downscaled_y2008m01d01.nc atmos.nc
+    ln -sf bathymetry_202108.nc bathy_meter.nc
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * copied namelist and symlinked it to the file name that `get_weight_nemo` expects:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    cp ../namelist.get_weight_nemo.hrdps namelist.get_weight_nemo.NEMO-NEMO
+    ln -s namelist.get_weight_nemo.NEMO-NEMO namelist
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * generated weights file with:
+    `/ocean/dlatorne/MEOPAR/NEMO-EastCoast/NEMO_Preparation/4_weights_ATMOS/get_weight_nemo`
+    * that creates `met_gem_weight.nc`
+  * cleaned up weights file with `tools/I_ForcingFiles/Atmos/ImproveWeightsFile.ipynb`
+    * stored resulting file as `/data/dlatorne/MEOPAR/grid/weights-NEMO_202108.nc`
 
 
 
+#### Thu 23-Jul-2026
 
+##### SalishSeaCast
+
+* `forecast2` runs failed due to bad values in runoff file caused by `nan` in Roberts Creek obs csv
+  file that `make_runoff_file` doesn't handle correctly
+* deleted `nan` line from Roberts Creek obs csv file before `make_runoff_file` ran for `nowcast` runs
+* `upload_forcing orcinus` failed due to connection timed out, then bad host key
+* tested deployment `pixi` branch of `SalishSeaNowcast` on `skookum`
+  * shudown at ~15:15:
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      pkill -f collect_weather 00
+      pkill -f crop_gribs 00
+      supervisorctl shutdown
+      ```
+      <!-- markdownlint-enable MD031 -->
+  * deployed `pixi` branch on `skookum`:
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      cd /SalishSeaCast/SalishSeaNowcast
+      git pull
+      git switch pixi
+      pixi install
+      pixi install -e sarracenia
+      cp .env-skookum .env
+      # edit API tokens and URLs into .env from ../nowcast-env-activate-envvars.sh
+      ```
+      <!-- markdownlint-enable MD031 -->
+  * start automation at ~15:30:
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      cd /SalishSeaCast/SalishSeaNowcast
+      pixi shell
+      source .env
+      supervisord -c $NOWCAST_CONFIG/supervisor.ini
+      supervisorctl -c $NOWCAST_CONFIG/supervisor.ini status
+      # message-broker, log_aggregator and manager are working
+      # sarracenia clients failed
+      collect_weather 00 2.5km
+      crop_gribs 00 2026-07-24
+      ```
+      <!-- markdownlint-enable MD031 -->
+  * reverted `sarracenia` environment to versions of Python and `metpx-sarracenia` in `sarracenia-env`:
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      pixi add -f sarracenia python=3.11.0
+      pixi add -f sarracenia --pypi metpx-sarracenia==2.22.10.post2
+      pixi install -e sarracenia
+      # switch to default env sub-shell
+      supervisorctl -c $NOWCAST_CONFIG/supervisor.ini start sr_subscribe-hydrometric
+      supervisorctl -c $NOWCAST_CONFIG/supervisor.ini start sr_subscribe-hrdps-continental
+      ```
+      <!-- markdownlint-enable MD031 -->
+  * can't deploy `pixi` branch on `arbutus` because`glibc` is too old
+    * reverted `arbutus` config changes on `skookum` for envvars, python interpreter, and `salishsea` command
+      so that we might be able to run with pre-Pixi `SalishSeaNowcast` on old-arbutus
+  * HRDPS 00Z files were downloaded by `sarracenia` but not collected or cropped
+    * suspect that collect & crop workers died when I disconnectef from `skookum` because I started
+      and backgrounded them in a Pixi sub-shell
+    * started 06Z collect & crop workers via `pixi run ...`
+
+
+##### SalishSeaNowcast
+
+* investigated `make_runoff_file` handling of `nan` obs for rivers other than Theodosia:
+  * patching gets skipped because the date is valid
+  * maybe we want `collect_river_data` to skip the date completely instead of writing a `nan`
+  * discuss with Susan tomorrow
+* continued changing to use Pixi for package & env mgmt; PR#477
+  * updated `.env` file path, Python interpreter path & `salishsea` command in config for `arbutus`
+  * added `.env-skookum` template file for envvars
+  * updated deployment docs for `skookum`
+  * tested deployment on `skookum`
+    * had to revert Python and `metpx-sarracenia` versions in `sarracenia` env
+    * can't deploy on old-arbutus because `glibc` is too old
+
+
+##### Miscellaneous
+
+* monitored `khawla` resources:
+  * ~30% memory (~20G) while working on SalishSeaNowcast code
+
+
+
+#### Fri 24-Jul-2026
+
+##### SalishSeaCast
+
+* got `nan` in Roberts Creek obs csv file
+* continuted testing deployment of `pixi` branch of `SalishSeaNowcast` on `skookum`:
+  * `collect_weather 06 2.5km` succeeded
+  * `crop_gribs 06` timed out with 528 files unprocessed
+  * `collect_weather 12 2.5km` succeeded
+  * `crop_gribs` isn't working correctly; maybe `watchdog`
+    * discovered that failure is due to
+      "AttributeError: module 'xarray.backends.api' has no attribute '_validate_dataset_names'"
+      from `xarray_to_grib.to_grib()`
+      * new env versions:
+        * `xarray` 2026.4.0
+        * `cfgrib` 0.9.15.1
+      * old env versions:
+        * `xarray` 2025.9.0
+        * `cfgrib` 0.9.15.1
+      * traced to refactoring of `xarray.backends` in sep2025 (released in 2025.9.1) and
+        corresponging fix in `cfgrib.xarray_to_grib` in oct2025 (not yet released)
+        * need to decide to pin `xarray` or switch to `cfgrib` from GitHub
+          * pin `xarray` at 2025.9.0 because my trust in the `cfgrib` dev processes is very low
+  * recovery:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    collect_weather 00 2.5km --backfill 2026-07-24 --debug
+    crop_gribs 00 --backfill --debug
+    crop_gribs 06 --backfill --debug
+    crop_gribs 12 --backfill --debug
+    # delete nan line from /results/forcing/rivers/observations/RobertsCreek_flow
+    make_runoff_file v202108
+    grib_to_netcdf nowcast+
+      # lots of warnings re: issue#390
+    upload_forcing optimum-hindcast nowcast+
+      # lots of "paramiko.ssh_exception.IncompatiblePeer: Incompatible ssh peer (no acceptable host key)"
+    upload_forcing robot.nibi nowcast+
+    upload_forcing arbutus.cloud-nowcast nowcast+
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * `upload_forcing` failed with "paramiko.ssh_exception.IncompatiblePeer: Incompatible ssh peer (no acceptable host key)"
+    * lots of breaking changes in `paramiko=5.0.0` released on 9may26
+    * reverted to `paramiko=4.0.0`
+  * recovery continued:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    upload_forcing optimum-hindcast nowcast+
+    # orcinus has host key change
+    upload_forcing robot.nibi nowcast+
+    upload_forcing arbutus.cloud-nowcast nowcast+
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * `run_NEMO nowcast` failed to launch:
+    * `manager-stderr` revealed that the problem was the envvars and Python paths because I didn't
+      restart the manager after I changed them on `skookum` because we can't use the Pixi deployment
+      on the old `arbutus`
+  * recovery continued:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    supervisorctl restart manager
+    upload_forcing arbutus.cloud-nowcast nowcast+
+    ```
+    <!-- markdownlint-enable MD031 -->
+    * time steps at ~12:40
+  * runs completed at ~14:35
+  * `make_averaged_dataset` failed because I forgot to change `dask` cluster on `salish` to the new env
+    * restarted cluster scheduler and workers on `salish` using `pixi run ...`
+    * re-ran 3 `make_averaged_dataset` workers on `skookum`
+
+
+##### NEMO-4.2
+
+* got Globus link from Kate@UW for sharing 2013-2024 day-per-file collection of new LiveOcean version
+  (`cas7_t1_x11[a]b`) low-pass filtered boundary extraction files
 
 
 ##### SalishSeaNowcast
 
 * continued changing to use Pixi for package & env mgmt; PR#477
-
-  * deleted `environment-prod.yaml`
-  * rename `@ git` dependencies to match import names; e.g. `salishseacmd` -> `salishsea_cmd`
-  * updated installation docs to use Pixi
-  * updated use and examples docs re: Pixi
+  * pinned `python=3.11.0` and `metpx-sarracenia=2.22.10.post2` in `sarracennia` env. Those are the
+    versions that we are using in the `mamba` production environment. Later version produce errors,
+    but debugging is unwarranted because migration to `metpx-sr3` is on the roadmap soon.
+  * pinned `xarray=2025.9.0` because `cfgrib` has not yet done a release to accommodate the refactoring
+    of `xarray.backends` in `xarray=2025.9.1`. `cfgrib` uses a private function that was moved in the
+    refactoring.
   * added Pixi badges to README and dev docs
   * updated release process docs to use Pixi commands
-* released v26.1
-  * be sure to run `pixi update` after `hatch version` commands
+* worked on `make_runoff_file` handling of `nan` obs for rivers other than Theodosia:
+  * discuss with Susan and agreed that we want `collect_river_data` to skip the date completely
+    instead of writing a `nan`
+    * implemented on `skookum` for testing tomorrow
 
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `jupyterlab` to 4.5.10 re: multiple vulnerabilities
+  * SOG-Bloomcast-Ensemble
+  * SalishSeaTools
+  * MoaceanParcels
+* Squash-merged dependabot PRs to update `setuptools` to 83.0.0 re: MANIFEST.in exclusion bypass vulnerability
+  * cookiecutter-MOAD-pypkg
+  * salishsea-site
+  * SOG-Bloomcast
+  * AtlantisCmd
+  * SalishSeaCmd
+  * NEMO-Cmd
+  * FUN
+  * SalishSeaCast/docs
+  * gha-workflows
+  * NEMO_Nowcast
+* Squash-merged dependabot PRs to update `gitpython` to 3.1.54 re: multiple vulnerabilities
+  * AtlantisCmd
+  * SalishSeaCmd
+  * NEMO-Cmd
+
+
+
+#### Sat 25-Jul-2026
+
+##### SalishSeaCast
+
+* no obs for Roberts Creek
+* `make_plots nemo forecast? publish` failed with "ValueError: 'PDT' not recognized as a timezone."
+  from `arrow`
+* updated `SalishSeaNowcast` deployment on `skookum` to v26.1
+* moved repo clones that are now included in `SalishSeaNowcast` to `/SalishSeaCast/unneeded-clones/`
+* updated `SalishSeaNowcast` deployment on `new-arbutus` to v26.1
+
+
+##### SalishSeaNowcast
+
+* finished changing to use Pixi for package & env mgmt; PR#477
+  * deleted `environment-prod.yaml`
+* dependency updates from `dependabot`:
+  * `pillow`
+  * `gitpython`
+  * `setuptools`
+* released v26.1
+
+
+
+#### Sun 26-Jul-2026
+
+##### SalishSeaCast
+
+* no obs for Roberts Creek
+* `make_plots nemo forecast? publish` failed with "ValueError: 'PDT' not recognized as a timezone."
+  from `arrow`
+* commented out `orcinus-nowcast-agrif` section of `nowcast-yaml` on `skookum` to stop forcing uploads
+  to `orcinus` that are failing due to changed host key
+  * preparatory to remove all operations concerning `orcinus`
+* added `new-arbutus.cloud` and `new-arbutus.cloud-nowcast` hosts to `skookum` ssh config
+* backfilled forcing uploads to `new-arbutus` from 1jul26 to today via bash loops
+* `make_plots nemo nowcast-green research` failed because I moved `tools/` clone aside but the worker
+  need `tools/bathymetry/thalweg_working.txt`
+  * moved the clone back and re-ran the worker manually
+
+
+##### SalishSeaNowcast
+
+* pushed fix for missing river discharge obs values; PR#486
+* added readthedocs automation rule to only build when documentation files change
+* added Pixi task to run an arbitrary worker; PR#487
+  * that allows: `pixi run worker upload_forcing -- new-arbutus.cloud-nowcast turbidity --debug`
+* started debugging `ValueError` failure in `make_plots nemo forecast? publish`; PR#
+  * the problem is that `local_datetime.tzinfo.tzname(local_datetime.datetime)` evaluates to "PDT"
+    but when we try to use that in `arrow.replace(tzinfo=)` it isn't accepted; the replace function
+    wants something like "Canada/Pacific"
+    * this seems to matter in at least 2 places in `compare_tide_prediction_max_ssh` but maybe nowhere else
+    * hacked `figures.shared.localize_time()` to explicitly set `data_array.attrs["tz_name"] = "Canada/Pacific"`
+  * this is probably a result of moving from `arrow=1.3.0` to `arrow=1.4.0` because the latter migrated
+    "to use ZoneInfo for timezones instead of pytz"
+  * resolved by adding "utc_offset" attribute to dataset with value from `.strftime(":z")` that is
+    ISO8601 UTC offset (like "-07:00"); that values is accepted by `arrow.replace()` and `arrow.to()`
+
+
+##### Miscellaneous
+
+* added `new-arbutus.cloud-nowcast` host to `khawla` ssh config
+
+
+
+
+
+##### SalishSeaCast TODO
+
+* delete `/SalishSeaCast/nowcast-env` from `skookum`
+* delete `/SalishSeaCast/sarracenia-env` from `skookum`
 
 
 
@@ -8784,6 +9179,27 @@ Worked at ESB
 * replace `nc_tools._nc_file_hg_url()` with something like `_nc_file_github_url()`
 
 
+
+
+##### salishsea-site TODO
+
+* update https://salishsea.eos.ubc.ca/nemo/ page
+  * Project Team list
+    * people
+    * King County funding
+  * maybe Evaluation section
+* SMELT link in nav bar has no target
+* in migration to Pixi, add `.env-template` file containing:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  export SALISHSEA_SITE_ENV=/SalishSeaCast/salishsea-site-env
+  export SALISHSEA_SITE=/SalishSeaCast/salishsea-site
+  export SALISHSEA_SITE_LOGS=/SalishSeaCast/logs/salishsea-site
+  export NOWCAST_LOGS=/SalishSeaCast/logs/nowcast
+  export NOWCAST_DEBUG_LOG_TOKEN=the_token_for_the_debug_log_page
+  export SENTRY_DSN=a_valid_sentry_dsn_url
+  ```
+  <!-- markdownlint-enable MD031 -->
 
 
 
@@ -8835,6 +9251,10 @@ Worked at ESB
 
 ##### SalishSeaNowcast TODO
 
+* is there a way to access `tools/bathymetry/thalweg_working.txt` without having a clone of `tools`
+  beside the clone of `SalishSeaNowcast`?
+* figure out how to use `paramiko=5.0.0`
+* fix help text for `collect_weather --backfill` option: move immediately insted of waiting for downloads
 * add O2 to ONC CTD obs collection
   * backfill to make ERDDAP consistent
 * fix indentation of production deployments evolutions description paragraphs
@@ -8859,6 +9279,7 @@ Worked at ESB
 * change download_weather to gather only files missed by collect_weather so that it can
   work with crop_gribs monitoring incoming files
   * check for presence of files before downloading them; skip if present
+* think about changing to use `AsyncSSH` instead of `paramiko` for operations on remote hosts
 
 
 
@@ -8897,19 +9318,6 @@ Worked at ESB
     * add Pixi Code extension - done
     * Fortran language server setup
   * lots in `pkg_structure.rst`
-
-
-
-
-##### salishsea-site TODO
-
-* update https://salishsea.eos.ubc.ca/nemo/ page
-  * Project Team list
-    * people
-    * King County funding
-  * maybe Evaluation section
-* SMELT link in nav bar has no target
-
 
 
 
@@ -9049,8 +9457,7 @@ Worked at ESB
   * PythonNotes - done 10apr26 in PR#5
   * Reshapr - done 22apr26 in PR#194
   * moad_tools - done 4jun26 in PR#135
-
-  * SalishSeaNowcast - started 8jul26 in PR
+  * SalishSeaNowcast - done 25jul26 in PR#477
 
   * tools/SalishSeaTools
   * erddap-datasets
@@ -9074,8 +9481,7 @@ Worked at ESB
   * cookiecutter-analysis-repo - done 1apr26 in PR#49 (via migration to Pixi)
   * PythonNotes - done 10apr26 in PR#5 (via migration to Pixi)
   * moad_tools - done 4jun26 in PR#135 (via migration to Pixi)
-
-  * SalishSeaNowcast - started 8jul26 in PR
+  * SalishSeaNowcast - done 25jul26 in PR#477
 
   * workflows available for testing:
     * tools/SalishSeaTools
