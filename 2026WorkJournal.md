@@ -8191,9 +8191,6 @@ Worked at ESB
     `.config/cosmic/com.system76.CosmicNotifications/v1/`
     * ref: https://github.com/pop-os/cosmic-notifications/issues/138
   * re-installed `sshfs`
-
-    * TODO:
-      * figure out how to mount `warehouse` at boot time
 * continued work on creating weights file for CaSR atmospheric forcing files for Junqi:
   * found work journal 4oct24 and 6oct24 notes re: weights file for sss150
     * they refer to 23mar23 work journal notes and
@@ -8712,18 +8709,6 @@ Worked at ESB
     * 10x20: 22m14s
 
 
-* TODO:
-  * do a clean head node instance config before storing the snapshot
-  * set up NFS server on head node and mounts on compute nodes
-  * commit `XIOS-ARCH` changes
-  * commit `XIOS-2/extern/remap/src/earcut.hpp` change
-  * commit NEMO arch file changes
-  * add `export PMIX_MCA_gds=hash` to `.bashrc`
-  * add `lf` to `.bash_aliases`
-  * move addition of Pixi to path from `.bashrc` to `.bash_aliases`
-  * add Pixi autocompletion to `.bash_aliases`
-
-
 ##### NEMO-4.2
 
 * suggested that Susan try:
@@ -9145,7 +9130,7 @@ Worked at ESB
 * added readthedocs automation rule to only build when documentation files change
 * added Pixi task to run an arbitrary worker; PR#487
   * that allows: `pixi run worker upload_forcing -- new-arbutus.cloud-nowcast turbidity --debug`
-* started debugging `ValueError` failure in `make_plots nemo forecast? publish`; PR#
+* started debugging `ValueError` failure in `make_plots nemo forecast? publish`; PR#488
   * the problem is that `local_datetime.tzinfo.tzname(local_datetime.datetime)` evaluates to "PDT"
     but when we try to use that in `arrow.replace(tzinfo=)` it isn't accepted; the replace function
     wants something like "Canada/Pacific"
@@ -9161,6 +9146,166 @@ Worked at ESB
 
 * added `new-arbutus.cloud-nowcast` host to `khawla` ssh config
 
+
+### Week 31
+
+#### Mon 27-Jul-2026
+
+##### SalishSeaCast
+
+* `crop_gribs 06` reported 216 unprocessed files at 04:51 but it didn't stop
+  * log files were massive (26G)
+  * rotated logs
+  * `crop_gribs 06` was spewing errors very fast
+  * killed `crop_gribs 06`
+  * rotated logs again
+  * 06Z forecast is only used for `forecast2` runs
+* `nowcast-blue` and onward automation appears to be working
+  * several "WARNING [make_plots] findfont: Failed to find font weight medium, now using 400."
+* pull `make_plots nemo forecast? publish` fix; PR#488
+* restart manager to load config changes re: forcing uploads to `orcinus` and `new-arbutus`
+* backfill `crop_gribs 06`
+  * `pixi run worker crop_gribs -- 06 --backfill --debug`
+    * failed with "EOFError: No valid message found:
+        '/results/forcing/atmospheric/continental2.5/GRIB/20260727/06/026/20260727T06Z_MSC_HRDPS_VGRD_AGL-10m_RLatLon0.0225_PT026H.grib2'"
+      * short file
+      * downloaded new copy from `hpfx`
+  * successfully re-ran `pixi run worker crop_gribs -- 06 --backfill --debug`
+
+
+##### SalishSeaNowcast
+
+* pushed fix for `ValueError` failure in `make_plots nemo forecast? publish`; PR#488
+* added `pandas-stubs` and `scipy-stubs` to `dev` and `fig-dev` environments to keep Pycharm happy; PR#489
+
+
+##### NEMO-4.2
+
+* created weights file for Dishika's downscaled atmospheric forcing files for Susan's testing:
+  * this version is from a file that Dishika created that has 0-360 lons
+  * refs:
+    * 22jul26 work journal notes
+    * https://salishsea-meopar-docs.readthedocs.io/en/latest/code-notes/salishsea-nemo/nemo-forcing/atmospheric.html#creating-new-weights-files
+  * created symlinks in `/data/dlatorne/MEOPAR/grid/` required to run `get_weight_nemo`:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    cd /data/dlatorne/MEOPAR/grid/
+    ln -sf /ocean/dtaneja/MOAD/analysis-dishika/notebooks/results/daily_downscaled_2008_lon360_sample/downscaled_y2008m01d01_lon360.nc atmos.nc
+    ln -sf bathymetry_202108.nc bathy_meter.nc
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * copied namelist and symlinked it to the file name that `get_weight_nemo` expects:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    cp ../namelist.get_weight_nemo.hrdps namelist.get_weight_nemo.NEMO-NEMO
+    ln -s namelist.get_weight_nemo.NEMO-NEMO namelist
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * generated weights file with:
+    `/ocean/dlatorne/MEOPAR/NEMO-EastCoast/NEMO_Preparation/4_weights_ATMOS/get_weight_nemo`
+    * that creates `met_gem_weight.nc`
+  * cleaned up weights file with `tools/I_ForcingFiles/Atmos/ImproveWeightsFile.ipynb`
+    * stored resulting file as `/data/dlatorne/MEOPAR/grid/weights-NEMO_202108.nc`
+  * another go-round with `/home/sallen/MEOPAR/ANALYSIS/analysis-susan/notebooks/Downscaling/down_test_y2008m01d01.nc`
+
+
+##### `arbutus` Migration
+
+* started work on getting wwatch3 to run:
+  * added code to head node `$HOME/.bash_aliases` to add wwatch3 `bin/` and `exe/` paths to `PATH` if they exist,
+    and export environment variables to enable wwatch3 to use netCDF4
+    * different from docs; suspect because VSCode doesn't always? load `~/.profile`
+  * copied `wwatch3.v5.16.tar.gz` tarball from old-arbutus
+  * unpacked and installed wwatch3
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    mkdir /nemoShare/MEOPAR/nowcast-sys/wwatch3-5.16
+    cd /nemoShare/MEOPAR/nowcast-sys/wwatch3-5.16
+    tar -xvzf /nemoShare/MEOPAR/nowcast-sys/wwatch3.v5.16.tar.gz
+    ./install_ww3_tar
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * followed docs to build wwatch3
+    * had to use terminal to clone `SalishSeaWaves` because ssh agent wasn't working in VSCode
+    * failure building `w3iorsmd`:
+      * https://fortran-lang.discourse.group/t/array-element-actual-argument-assumed-size-dummy/9649/14
+        suggests that this might be worked around with `gfortran -fcheck=array-temps`
+        * hacked that into `comp`, but it didn't help
+
+
+* TODO:
+  * add code to compute nodes `$HOME/.bash_aliases` to add wwatch3 `bin/` and `exe/` paths to `PATH` if they exist,
+    and export environment variables to enable wwatch3 to use netCDF4
+  * update docs re: wwatch3 settings in `~/.bash_aliases`
+  * do a clean head node instance config before storing the snapshot
+  * commit `XIOS-ARCH` changes
+  * commit `XIOS-2/extern/remap/src/earcut.hpp` change
+  * commit NEMO arch file changes
+  * add `export PMIX_MCA_gds=hash` to `.bashrc`
+  * add `lf` to `.bash_aliases`
+  * move addition of Pixi to path from `.bashrc` to `.bash_aliases`
+  * add Pixi autocompletion to `.bash_aliases`
+
+
+##### Miscellaneous
+
+* continued tweaking COSMIC setup:
+  * tried to improve notification display time by creating files in
+    `.config/cosmic/com.system76.CosmicNotifications/v1/`
+    * ref: https://github.com/pop-os/cosmic-notifications/issues/138
+  * re-installed `sshfs`
+* continued work on creating weights file for HRDPS-1km and HRDPS-subsampled atmospheric forcing files for Junqi:
+  * refs:
+    * 10jul26 work journal notes
+    * https://salishsea-meopar-docs.readthedocs.io/en/latest/code-notes/salishsea-nemo/nemo-forcing/atmospheric.html#creating-new-weights-files
+  * created symlinks in `grid/` required to run `get_weight_nemo`:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    cd /data/dlatorne/MEOPAR/grid/
+    ln -sf /ocean/jqiu/HRDPS_1km/hrdps_1km_y2023m03d01.nc atmos.nc
+    ln -sf bathymetry_202108.nc bathy_meter.nc
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * copied namelist and symlinked it to the file name that `get_weight_nemo` expects:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    cp namelist.get_weight_nemo.hrdps namelist.get_weight_nemo.hrdps-1km
+    ln -sf namelist.get_weight_nemo.hrdps-1km namelist
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * generated weights file with:
+    `/ocean/dlatorne/MEOPAR/NEMO-EastCoast/NEMO_Preparation/4_weights_ATMOS/get_weight_nemo`
+    * that creates `met_gem_weight.nc`
+  * cleaned up weights file with `tools/I_ForcingFiles/Atmos/ImproveWeightsFile.ipynb`
+    * stored resulting file as `/data/dlatorne/MEOPAR/grid/weights-HRDPS-1km_202108.nc` and pushed it
+  * created symlinks in `grid/` required to run `get_weight_nemo`:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    cd /data/dlatorne/MEOPAR/grid/
+    ln -sf /ocean/jqiu/HRDPS_subsampled/hrdps_subsampled_y2023m03d01.nc atmos.nc
+    ln -sf bathymetry_202108.nc bathy_meter.nc
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * copied namelist and symlinked it to the file name that `get_weight_nemo` expects:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    cp namelist.get_weight_nemo.hrdps namelist.get_weight_nemo.hrdps-subsampled
+    ln -sf namelist.get_weight_nemo.hrdps-subsampled namelist
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * generated weights file with:
+    `/ocean/dlatorne/MEOPAR/NEMO-EastCoast/NEMO_Preparation/4_weights_ATMOS/get_weight_nemo`
+    * that creates `met_gem_weight.nc`
+  * cleaned up weights file with `tools/I_ForcingFiles/Atmos/ImproveWeightsFile.ipynb`
+    * stored resulting file as `/data/dlatorne/MEOPAR/grid/weights-HRDPS-subsampled_202108.nc` and pushed it
+
+
+
+#### Tue 28-Jul-2026
+
+##### SalishSeaCast
+
+* `crop_gribs 12` stalled with 2 unprocessed files
 
 
 
