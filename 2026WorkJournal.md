@@ -9249,11 +9249,6 @@ Worked at ESB
 
 ##### Miscellaneous
 
-* continued tweaking COSMIC setup:
-  * tried to improve notification display time by creating files in
-    `.config/cosmic/com.system76.CosmicNotifications/v1/`
-    * ref: https://github.com/pop-os/cosmic-notifications/issues/138
-  * re-installed `sshfs`
 * continued work on creating weights file for HRDPS-1km and HRDPS-subsampled atmospheric forcing files for Junqi:
   * refs:
     * 10jul26 work journal notes
@@ -9303,9 +9298,31 @@ Worked at ESB
 
 #### Tue 28-Jul-2026
 
+Worked at ESB
+
 ##### SalishSeaCast
 
 * `crop_gribs 12` stalled with 2 unprocessed files
+* `forecast/28jul26` failed
+  * failure cascaded to wwatch3 runs
+  * zonal velocity is larger than 20 m/s, max abs(U):   20.49    , i j k:     2  392    4
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* started looking at installing Globus on `skookum` or `salish`:
+  * https://docs.globus.org/cli/
+  * `globus-cli` and `globus-sdk` are available on `conda-forge`
+  * `pixi global install globus-cli`
+  * `globus login` took me through the auth flow using my Alliance identity
+  * collection uuid is in the URL that Kate sent or on the collection information page in the web UI
+    that it points to
+  * `globus ls uuid` gave me a list of the year-extraction directories in the collection
+  * it looks like I need to have a Globus Connect Personal or Globus Connect Server instance running
+    on `skookum` or `salish` in order to be able to do transfers
+
+
 
 
 
