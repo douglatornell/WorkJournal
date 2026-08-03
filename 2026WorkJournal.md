@@ -8789,7 +8789,7 @@ Worked at ESB
     sudo dpkg-reconfigure libpam-yubico
     # in the 1st panel, set parameters (debugging enabled) for Yubico PAM to:
     mode=challenge-response debug chalresp_path=/var/yubico
-    # in the 2nd panel, add Yubico authentication with YuibKey to the list of enabled profiles
+    # in the 2nd panel, add Yubico authentication with YubiKey to the list of enabled profiles
     # that dpkg-reconfigure results in a line added to /etc/pam.d/common-auth
       auth required pam_yubico.so mode=challenge-response chalresp_path=/var/yubico
     # delete that line
@@ -8819,7 +8819,7 @@ Worked at ESB
       * 256 G RAM
       * 2 x 960G SSDs for OS
       * drop 2 x 7.68T SSDs for cache/scratch
-    * remove all storage "duties" from `skoookum` and `salish`
+    * remove all storage "duties" from `skookum` and `salish`
     * retire `salish`
     * keep `skookum` as web/app server because we need its 128G RAM for those workloads
   * zoom w/ Henryk
@@ -8890,7 +8890,7 @@ Worked at ESB
 * deleted `nan` line from Roberts Creek obs csv file before `make_runoff_file` ran for `nowcast` runs
 * `upload_forcing orcinus` failed due to connection timed out, then bad host key
 * tested deployment `pixi` branch of `SalishSeaNowcast` on `skookum`
-  * shudown at ~15:15:
+  * shutdown at ~15:15:
       <!-- markdownlint-disable MD031 -->
       ```bash
       pkill -f collect_weather 00
@@ -8939,7 +8939,7 @@ Worked at ESB
     * reverted `arbutus` config changes on `skookum` for envvars, python interpreter, and `salishsea` command
       so that we might be able to run with pre-Pixi `SalishSeaNowcast` on old-arbutus
   * HRDPS 00Z files were downloaded by `sarracenia` but not collected or cropped
-    * suspect that collect & crop workers died when I disconnectef from `skookum` because I started
+    * suspect that collect & crop workers died when I disconnected from `skookum` because I started
       and backgrounded them in a Pixi sub-shell
     * started 06Z collect & crop workers via `pixi run ...`
 
@@ -8971,7 +8971,7 @@ Worked at ESB
 ##### SalishSeaCast
 
 * got `nan` in Roberts Creek obs csv file
-* continuted testing deployment of `pixi` branch of `SalishSeaNowcast` on `skookum`:
+* continued testing deployment of `pixi` branch of `SalishSeaNowcast` on `skookum`:
   * `collect_weather 06 2.5km` succeeded
   * `crop_gribs 06` timed out with 528 files unprocessed
   * `collect_weather 12 2.5km` succeeded
@@ -8986,7 +8986,7 @@ Worked at ESB
         * `xarray` 2025.9.0
         * `cfgrib` 0.9.15.1
       * traced to refactoring of `xarray.backends` in sep2025 (released in 2025.9.1) and
-        corresponging fix in `cfgrib.xarray_to_grib` in oct2025 (not yet released)
+        corresponding fix in `cfgrib.xarray_to_grib` in oct2025 (not yet released)
         * need to decide to pin `xarray` or switch to `cfgrib` from GitHub
           * pin `xarray` at 2025.9.0 because my trust in the `cfgrib` dev processes is very low
   * recovery:
@@ -9045,7 +9045,7 @@ Worked at ESB
 ##### SalishSeaNowcast
 
 * continued changing to use Pixi for package & env mgmt; PR#477
-  * pinned `python=3.11.0` and `metpx-sarracenia=2.22.10.post2` in `sarracennia` env. Those are the
+  * pinned `python=3.11.0` and `metpx-sarracenia=2.22.10.post2` in `sarracenia` env. Those are the
     versions that we are using in the `mamba` production environment. Later version produce errors,
     but debugging is unwarranted because migration to `metpx-sr3` is on the roadmap soon.
   * pinned `xarray=2025.9.0` because `cfgrib` has not yet done a release to accommodate the refactoring
@@ -9153,6 +9153,7 @@ Worked at ESB
 
 ##### SalishSeaCast
 
+* no obs for Roberts Creek
 * `crop_gribs 06` reported 216 unprocessed files at 04:51 but it didn't stop
   * log files were massive (26G)
   * rotated logs
@@ -9233,20 +9234,6 @@ Worked at ESB
         * hacked that into `comp`, but it didn't help
 
 
-* TODO:
-  * add code to compute nodes `$HOME/.bash_aliases` to add wwatch3 `bin/` and `exe/` paths to `PATH` if they exist,
-    and export environment variables to enable wwatch3 to use netCDF4
-  * update docs re: wwatch3 settings in `~/.bash_aliases`
-  * do a clean head node instance config before storing the snapshot
-  * commit `XIOS-ARCH` changes
-  * commit `XIOS-2/extern/remap/src/earcut.hpp` change
-  * commit NEMO arch file changes
-  * add `export PMIX_MCA_gds=hash` to `.bashrc`
-  * add `lf` to `.bash_aliases`
-  * move addition of Pixi to path from `.bashrc` to `.bash_aliases`
-  * add Pixi autocompletion to `.bash_aliases`
-
-
 ##### Miscellaneous
 
 * continued work on creating weights file for HRDPS-1km and HRDPS-subsampled atmospheric forcing files for Junqi:
@@ -9302,6 +9289,7 @@ Worked at ESB
 
 ##### SalishSeaCast
 
+* no obs for Roberts Creek
 * `crop_gribs 12` stalled with 2 unprocessed files
 * `forecast/28jul26` failed
   * failure cascaded to wwatch3 runs
@@ -9322,6 +9310,274 @@ Worked at ESB
   * it looks like I need to have a Globus Connect Personal or Globus Connect Server instance running
     on `skookum` or `salish` in order to be able to do transfers
 
+
+
+#### Wed 29-Jul-2026
+
+##### SalishSeaCast
+
+* Roberts Creek obs resumed
+* Fraser River turbidity obs stopped after 03:10 28jul
+* `forecast2/29jul26` failed due to no restart file from `forecast/28jul26`
+  * no `wwatch3-forecast2` run
+* `nowcast-blue/29jul26` failed
+  * zonal velocity is larger than 20 m/s, max abs(U):   20.38    , i j k:     2  392    4
+* recovery started at ~09:15:
+  * deleted `arbutus:nowcast-blue/29jul26/`
+  * Susan smoothed the `nowcast-green/28jul26` physics restart file
+  * uploaded the `nowcast-green/28jul26` physics restart file to `arbutus`
+  * `pixi run worker make_forcing_links -- arbutus.cloud-nowcast nowcast+`
+
+
+##### SalishSeaNowcast
+
+* noting that VSCode automatically runs `pixi shell` in new terminal session when I remote to `skookum`,
+  I experimented with automating envvar loading:
+  * added:
+    <!-- markdownlint-disable MD031 -->
+    ```toml
+    [tool.pixi.activation]
+    scripts = [".env"]
+    ```
+    <!-- markdownlint-enable MD031 -->
+    * maybe only works for new remote server launches???
+
+
+##### Miscellaneous
+
+* Sharcnet webinar:
+  * "From Hallucination to Grounded Answers: An Introduction to Retrieval-Augmented Generation (RAG)"
+  * Nast Shahparian, York
+  * for 2 or 3 PDFs, just upload them to model
+  * RAG earns its keep at scale
+  * RAG provides privacy, control, reusability
+  * pipeline: chunk, embed, vector storage
+  * demo with LangChain RAG framework
+    * run on Sharcnet hosted model - no GPU needed
+      * AI-inference-as a-Service (AIaaS) pilot; request access
+        * OpenAI-compatible API
+  * when RAG gives a bad answer, debug the retrieval, not the model
+  * RAG can still lie or hallucinate; need to explicitly tell models not to guess
+  * LlamaIndex is an alternative framework
+* answered email from Louis@Dal re: wwatch3 grid and GIS projections; need to interpolate
+
+
+##### `trillium`
+
+* figured out that Susan's failures of `salishsea combine` is due to `trillium` not allowing writes
+  to `$HOME` from compute nodes
+  * resolution is to use `pixi run --as-is ...` in `SalishSeaNEMO.sh` so that Pixi modifies neither
+    the lockfile nor the environment
+* uninstalled `NEMO-Cmd` and deleted its clone
+* uninstalled `SalishSeaCmd` from `~/.local/bin/` via `pip`
+* updated `SalishSeaCmd` and installed it via Pixi
+* uninstalled `mamba` and `conda`
+* got Susan to test quieting Pixi warnings from `SalishSeaNEMO.sh` by adding:
+  `export PIXI_CACHE_DIR=$SLURM_TMPDIR/pixi-cache-$USER`
+  * successful
+
+
+##### SalishSeaCmd
+
+* changed to `pixi run --as-is ...` in `SalishSeaNEMO.sh` re: findings above from `trillium`; PR#159
+  * got Susan to test the branch for me on `trillium`
+
+
+
+#### Thu 30-Jul-2026
+
+Treadmill stress test at VGH Cardiology
+
+##### SalishSeaCast
+
+* `forecast2` runs were successful
+* Fraser River turbidity obs stopped after 03:10 28jul
+
+
+##### `arbutus` Migration
+
+* continued work on getting wwatch3 to run:
+  * followed docs to build wwatch3:
+    * continued working on failure building `w3iorsmd`:
+      * reverted `gfortran -fcheck=array-temps` hack in `comp` from 27jul
+      * found https://github.com/NOAA-EMC/WW3
+        * it's >>v5.16
+        * found https://github.com/NOAA-EMC/WW3/pull/713
+          * hacked `-fallow-argument-mismatch` into `comp` and got through many more module compiles
+    * build failed while linking `ww3_prnc` due to many `undefined reference to `__netcdf_MOD_nf90_*`
+      * need to use `nf-config` instead of `nc-config` to get libs string
+    * success!
+
+
+
+#### Fri 31-Jul-2026
+
+##### SalishSeaCast
+
+* no Fraser River turbidity obs
+
+
+##### SalishSeaCmd
+
+* finished changing to `pixi run --as-is ...` in `SalishSeaNEMO.sh` re: findings above from `trillium`; PR#159
+  * Susan successfully tested the branch for me on `trillium`
+* Susan also confirmed that `pixi config set --global cache.repodata /tmp/pixi-cache-$USER/repodata`
+  quiets the Pixi warnings from both `pixi run salishsea run ...` on login nodes, and from
+  `pixi run salishsea ...` commands in `SalishSeaNEMO.sh` in SLURM jobs on compute nodes
+
+
+##### `arbutus` Migration
+
+* continued work on getting wwatch3 to run:
+  * followed docs to set up run dirs:
+    * successfully ran `ww3_grid | tee ww3_grid.out`
+  * created **provisional** `mpi_hosts.wwatch3` file that uses `nowcast[1-5]` nodes
+    * needs to be replaced for `wwatch3` running concurrently with `nowcast-green`
+  * test run:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    source /nemoShare/MEOPAR/nowcast-sys/SalishSeaNowcast/.env
+    pixi run worker make_ww3_wind_file -- arbutus.cloud-nowcast forecast --run-date 2026-06-30 --debug
+    pixi run worker make_ww3_current_file -- arbutus.cloud-nowcast forecast --run-date 2026-06-30 --debug
+      # failed - need to run NEMO forecast first
+    pixi run worker run_NEMO -- arbutus.cloud-nowcast forecast --run-date 2026-06-30 --debug
+      # 10x17 on 7 nodes: 14m47s
+    pixi run worker make_ww3_current_file -- arbutus.cloud-nowcast forecast --run-date 2026-06-30 --debug
+    pixi run worker run_ww3 -- arbutus.cloud-nowcast nowcast --run-date 2026-06-30 --debug
+    ```
+    <!-- markdownlint-enable MD031 -->
+    * success: 5m46s
+    * realized later that I had not uploaded the restart file, so it was from quiescent initial wave state
+* set up to compare results between new and old arbutus runs in `analysis-doug`
+  * `nowcast-blue` salinity has max absolute difference of 3.8e-6 g/kg
+
+
+##### Miscellaneous
+
+* huddle with Becca re: using Reshapr to process her `fir` run results
+  * can Reshapr do spatial aggregation?
+  * need to run `salishsea split-results` to make things clean
+
+
+
+## August
+
+<!-- markdownlint-disable MD001 -->
+#### Sat 1-Aug-2026
+<!-- markdownlint-enable MD001 -->
+
+##### SalishSeaCast
+
+* no Fraser River turbidity obs
+
+
+##### Miscellaneous
+
+* helped Becca s out why she couldn't clone Reshapr on `fir`
+
+
+
+#### Sun 2-Aug-2026
+
+##### SalishSeaCast
+
+* no Fraser River turbidity obs
+
+
+##### `arbutus` Migration
+
+* continued work on getting wwatch3 to run:
+  * set up 5 compute node instances:
+    * Details:
+      * name: `wwatch[1-5]`
+      * description: `SalishSeaCast system compute node`
+      * availability zone: Any
+      * count: 1
+    * Source:
+      * boot source: image
+      * create new volume: no
+      * image: `Ubuntu-24.04-x64-2025-08`
+    * Flavour: `cb16-60gb-560`
+    * Network: `ctb-onc-allen-network`
+    * Network Ports: none
+    * Security Groups: `default`
+    * Key Pair: `arbutus-cloud-ed25519-29sep23`
+  * added IP addresses to `~/.ssh/config`
+  * added nodes to `~/mpi_hosts.wwatch3`
+  * mounted `/nemoShare/MEOPAR/` on nodes
+  * uploaded wwatch-nowcast/29jun26/
+  * test run with restart:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    source /nemoShare/MEOPAR/nowcast-sys/SalishSeaNowcast/.env
+    pixi run worker run_ww3 -- arbutus.cloud-nowcast nowcast --run-date 2026-06-30 --debug
+    ```
+    <!-- markdownlint-enable MD031 -->
+    * success: 5m34s
+* continued to compare results between new and old arbutus runs in `analysis-doug`
+  * `nowcast-green` salinity & diatoms
+  * `forecast` salinity
+  * `wwatch3-nowcast` significant wave height
+* changed automation to run on new `arbutus.cloud`:
+  * rsync-ed today's run results from `skookum` to new `arbutus.cloud`:
+    * `forecast2`
+    * `forecast`
+    * `nowcast`
+    * `nowcast-green`
+    * `wwatch3-forecast`
+    * `wwatch3-forecast2`
+    * `wwatch3-nowcast`
+  * edited `nowcast.yaml` on `skookum`
+  * changed `arbutus.cloud*` to `old-arbutus.cloud*` in `skookum:.ssh/config`
+  * changed `new-arbutus.cloud*` to `arbutus.cloud*` in `skookum:.ssh/config`
+  * added `ufw` rule to allow new `arbutus.cloud` head node IP on `skookum`
+  * restarted `manager` for config changes to take effect
+
+
+* TODO:
+  * drop `xios host` from `nowcast.yaml` because it is handled implicitly by `mpi_hosts`
+  * add code to compute nodes `$HOME/.bash_aliases` to add wwatch3 `bin/` and `exe/` paths to `PATH` if they exist,
+    and export environment variables to enable wwatch3 to use netCDF4
+    * change to `export NETCDF_CONFIG=$(which nf-config)`
+  * update docs re: wwatch3 settings in `~/.bash_aliases`
+  * do a clean head node instance config before storing the snapshot
+  * remove old `arbutus.cloud` rule from `ufw` on `skookum`
+  * commit `XIOS-ARCH` changes
+  * commit `XIOS-2/extern/remap/src/earcut.hpp` change
+  * commit NEMO arch file changes
+  * add `export PMIX_MCA_gds=hash` to `.bashrc`
+  * add `lf` to `.bash_aliases`
+  * move addition of Pixi to path from `.bashrc` to `.bash_aliases`
+  * add Pixi autocompletion to `.bash_aliases`
+  * add Pixi global install of `bat`, `eza`, `fd`, and `ripgrep`
+  * add `pixi config set --global cache.repodata /tmp/pixi-cache-$USER/repodata`
+  * add `crontab` entries to keep results directories pruned:
+    <!-- markdownlint-disable MD031 -->
+    ```text
+    # m h  dom mon dow   command
+     0 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/nowcast/* -type d -mtime +30 | xargs rm -rf
+     5 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/nowcast-green/* -type d -mtime +30 | xargs rm -rf
+    10 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/forecast/* -type d -mtime +20 | xargs rm -rf
+    15 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/forecast2/* -type d -mtime +15 | xargs rm -rf
+    20 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/wwatch3-nowcast/* -type d -mtime +15 | xargs rm -rf
+    25 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/wwatch3-forecast/* -type d -mtime +15 | xargs rm -rf
+    30 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/wwatch3-forecast2/* -type d -mtime +15 | xargs rm -rf
+    35 0  *   *   *     find /nemoShare/MEOPAR/nowcast-sys/wwatch3-runs/current/* -type f -mtime +15 -delete
+    40 0  *   *   *     find /nemoShare/MEOPAR/nowcast-sys/wwatch3-runs/wind/* -type f -mtime +15 -delete
+    45 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/fvcom-nowcast-x2/* -type d -mtime +15 | xargs rm -rf
+    50 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/fvcom-forecast-x2/* -type d -mtime +15 | xargs rm -rf
+    55 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/fvcom-nowcast-r12/* -type d -mtime +15 | xargs rm -rf
+    ```
+    <!-- markdownlint-enable MD031 -->
+    * try to change them from `find` to `fd` because we're cool 😎
+  * fix typo in https://salishsea-nowcast.readthedocs.io/en/latest/deployment/arbutus_cloud.html#wavewatch-runs-directories
+    re: 2nd instance of "The make_ww3_wind_file worker:" s/b "The make_ww3_current_file worker:"
+
+
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PR
+  * SalishSeaNowcast
 
 
 
@@ -9416,7 +9672,7 @@ Worked at ESB
 * is there a way to access `tools/bathymetry/thalweg_working.txt` without having a clone of `tools`
   beside the clone of `SalishSeaNowcast`?
 * figure out how to use `paramiko=5.0.0`
-* fix help text for `collect_weather --backfill` option: move immediately insted of waiting for downloads
+* fix help text for `collect_weather --backfill` option: move immediately instead of waiting for downloads
 * add O2 to ONC CTD obs collection
   * backfill to make ERDDAP consistent
 * fix indentation of production deployments evolutions description paragraphs
@@ -9457,6 +9713,8 @@ Worked at ESB
 
 ##### MOAD/docs TODO
 
+* add `pixi config set --global cache.repodata /tmp/pixi-cache-$USER/repodata` to Pixi setup on
+  HPC clusters
 * comments from Becca in Slack DM after her us of the docs to set up on `fir`
 * drop section about migration from `XIOS-1` to `XIOS-2`
 * drop `zzz_archival_docs/hg_version_control.rst` due broken links and we no longer use `hg`
