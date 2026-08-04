@@ -9534,6 +9534,43 @@ Treadmill stress test at VGH Cardiology
   * restarted `manager` for config changes to take effect
 
 
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PR
+  * SalishSeaNowcast
+
+
+### Week 32
+
+#### Mon 3-Aug-2026
+
+**Statutory Holiday** - BC Day
+
+##### SalishSeaCast
+
+* first day of testing on new `arbutus.cloud`
+* NEMO `forecast2` run failed on launch
+  * no `wwatch3-forecast2` run
+* NEMO `nowcast-blue` run failed on launch
+* failures were because I forgot to change the MPI decomposition values in `nowcast.yaml` on `arbutus`
+* recovery started at ~08:45:
+  * tried to run `forecast2` but failed due to missing `nowcast` info in checklist
+  * ran `make_forcing_links arbutus nowcast+` to restart automation
+    * `watch_NEMO` failed because I forgot to change remote worker IP addresses in `zmq` section of `nowcast.yaml`
+      * restarted `manager` and `log_aggregator`
+    * `nowcast` run completed
+      * `combine` and `gather` failed because `pixi` wasn't found
+        * hacked full path for `pixi` into `arbutus:nowcast.yaml`
+      * manually ran `combine` and `gather`
+    * `download_results arbutus nowcast` success, and `make_plots` too
+    * `make_forcing_links ssh arbutus` to restart automation at ~09:41
+      * messages flowing between workers & manager
+* days runs finished except for time series plots by 10:30
+
+
+##### `arbutus` Migration
+
+
 * TODO:
   * drop `xios host` from `nowcast.yaml` because it is handled implicitly by `mpi_hosts`
   * add code to compute nodes `$HOME/.bash_aliases` to add wwatch3 `bin/` and `exe/` paths to `PATH` if they exist,
@@ -9573,11 +9610,6 @@ Treadmill stress test at VGH Cardiology
   * fix typo in https://salishsea-nowcast.readthedocs.io/en/latest/deployment/arbutus_cloud.html#wavewatch-runs-directories
     re: 2nd instance of "The make_ww3_wind_file worker:" s/b "The make_ww3_current_file worker:"
 
-
-##### Dependency Updates
-
-* Squash-merged `update-pixi-lockfile` PR
-  * SalishSeaNowcast
 
 
 
