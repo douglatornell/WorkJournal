@@ -9548,6 +9548,7 @@ Treadmill stress test at VGH Cardiology
 
 ##### SalishSeaCast
 
+* no Fraser River turbidity obs
 * first day of testing on new `arbutus.cloud`
 * NEMO `forecast2` run failed on launch
   * no `wwatch3-forecast2` run
@@ -9565,7 +9566,66 @@ Treadmill stress test at VGH Cardiology
     * `download_results arbutus nowcast` success, and `make_plots` too
     * `make_forcing_links ssh arbutus` to restart automation at ~09:41
       * messages flowing between workers & manager
-* days runs finished except for time series plots by 10:30
+* day's runs finished except for time series plots by 10:30
+
+
+
+#### Tue 4-Aug-2026
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* no Fraser River turbidity obs
+* `forecast2` runs were successful
+* `make_plots wwatch3 forecast publish` failed with a DAP error
+* `crop_gribs 12` stalled with 1 unprocessed file
+* day's runs finished cleanly in a little under 1h
+  * `run_NEMO nowcast` started at 10:29:14,819
+  * `watch_NEMO nowcast-green` reported run completed at 11:24:46,430
+    * elapsed time ~55m30s
+  * 1aug26 runs on old `arbutus`:
+    * `run_NEMO nowcast` started at 08:40:00,286
+    * `watch_NEMO nowcast-green` reported run completed at 10:45:30,180
+      * elapsed time ~2h5m30s
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* installed Globus Connect Personal on `skookum`:
+  * https://docs.globus.org/globus-connect-personal/install/linux/
+  * installed without Tkl, so no GUI
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    cd ~
+    curl -LO https://downloads.globus.org/globus-connect-personal/linux/stable/globusconnectpersonal-latest.tgz
+    tar xvf globusconnectpersonal-latest.tgz
+    # unpacked to globusconnectpersonal-3.2.9/
+    cd globusconnectpersonal-3.2.9/
+    ./globusconnectpersonal
+    ```
+    <!-- markdownlint-enable MD031 -->
+    * installation details:
+      * auth flow to Alliance tagged permisssions with skookum
+      * set Endpoint Name to `skookum-dlatorne`
+      * got endpoint id uuid
+    * started server in background with `./globusconnectpersonal -start &`
+  * `globus ls "$(globus endpoint local-id)"` gives `ls -1` of my `$HOME` on `skookum`
+  * need to add permission lines to `.globusonline/lta/config-paths` to access other dir trees
+    * added `/results/,0,1`
+  * tested:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    globus transfer LiveOcean-uuid:temp_ubc0_2012.10.07_2012.12.31/f2012.12.31_box.nc \
+      "$(globus endpoint local-id)":/results/forcing/LiveOcean/cas7_t1_x11ab/downloaded/
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+
+
+
 
 
 ##### `arbutus` Migration
