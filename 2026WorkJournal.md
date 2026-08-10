@@ -5050,7 +5050,7 @@ Worked at ESB
     * but the NEMO "get started" docs still reference SVN
 
 
-##### NEMO
+##### NEMO-4.2
 
 * read "getting started" docs:
   * docs about about 5.0.* and migrating to it from 4.0.* and 4.2.*; nothing about 3.6
@@ -7071,8 +7071,9 @@ Worked at ESB for part of the day
   * defaults are ingress and egress for IPv4 and IPv6
   * added:
     * ingress for TCP port 22 (ssh) from any IPv4 or IPv6 address
-    * IPv4 ingress for TCP ports xxx for xxx workers from EOAS servers
-    * IPv4 ingress for TCP ports xxx for xxx workers from EOAS servers
+    * IPv4 ingress for TCP ports 5556-5557 for `run_NEMO` and `watch_NEMO` workers from EOAS servers
+    * IPv4 ingress for TCP ports 5570-5573 for `make_ww3_wind_file`, `make_ww3_current_file`, `run_ww3`,
+      and `watch_ww3` workers from EOAS servers
 * set up head node instance:
   * Details:
     * name: `nowcast0`
@@ -8451,7 +8452,7 @@ Worked at ESB
   * possibly due to schedule config mess-up related to power management due to heatwave in Ontario
 
 
-##### NEMO 4.2
+##### NEMO-4.2
 
 * discussed `time` field correction of `gemlam` atmospheric forcing files with Susan:
   * she is going to have Dishika fix them
@@ -9593,6 +9594,10 @@ Worked at ESB
 ##### Miscellaneous
 
 * MOAD group mtg; see whiteboard
+
+
+##### NEMO-4.2
+
 * installed Globus Connect Personal on `skookum`:
   * https://docs.globus.org/globus-connect-personal/install/linux/
   * installed without Tkl, so no GUI
@@ -9624,6 +9629,223 @@ Worked at ESB
 
 
 
+#### Wed 5-Aug-2026
+
+##### SalishSeaCast
+
+* no preliminary wave forecast figures on website
+* 12Z HRDPS forecast was ~1h late
+  * `crop_gribs 12` finished at ~09:34
+  * `nowcast-blue` run started at ~09:35
+  * `nowcast-green` run complted at ~10:36
+* Fraser River turbidity obs data stream resumed
+* Susan reported `NaN`s `/results2/SalishSea/month-avg.202111/SalishSeaCast_1m_biol_T_20080601_20080630.nc`
+  * re-ran `make_averaged_dataset -- month biology --run-date 2008-06-01`
+  * Susan reported issue resolved
+
+
+##### NEMO-4.2
+
+* resumed work on transferring files from LiveOcean `ubc_share` to `/results/forcing/LiveOceancas7_t1_x11ab/downloaded/`:
+  * backgrounded globus server has stopped; restarted It
+  * task was still paused
+  * logged in to Globus web interface (`globus.org`)
+    * was able to see lots more details about task than via the CLI
+    * learned that transfer was failing because I had not named the destination file
+  * successfully retried with named destination file:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    globus transfer LiveOcean-uuid:temp_ubc0_2012.10.07_2012.12.31/f2012.12.31_box.nc \
+      "$(globus endpoint local-id)":/results/forcing/LiveOcean/cas7_t1_x11ab/downloaded/f2012.12.31_box.nc
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * discussed next steps with Susan:
+    * process 2017-12-31 for her to evaluate:
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      mkdir /results/forcing/LiveOcean/cas7_t1_x11ab/downloaded/20171231/
+      export LIVEOCEAN_GLOBUS_UUID=<LiveOcean-uuid>
+      globus transfer ${LIVEOCEAN_GLOBUS_UUID}:temp_ubc0_2017.01.01_2017.12.31/f2017.12.31_box.nc \
+        "$(globus endpoint local-id)":/results/forcing/LiveOcean/cas7_t1_x11ab/downloaded/20171231/low_passed_UBC.nc
+      # edit `nowcast.yaml` to set `temperature salinity.download.dest dir` and `temperature salinity.bc dir`
+      # to `/results/forcing/LiveOcean/cas7_t1_x11ab/` tree
+      source /SalishSeaCast/SalishSeaNowcast/.env
+      pixi run worker make_live_ocean_files -- --run-date 2017-12-31 --debug
+      ```
+      <!-- markdownlint-enable MD031 -->
+      * failed in `salishsea_tools.LiveOcean_grid.make_T()`
+        * `ocean_time` has a single float value, not a list to select from with `[:]`
+          * why? test `/results/forcing/LiveOcean/downloaded/20171231/low_passed_UBC.nc`
+            * in this case `ocean_time` is a 1-element list
+        * handled with `try: ... except IndexError: ...`
+      * failed in `salishsea_tools.LiveOcean_BCs.interpolate_to_NEMO_depths()`
+        * due to `dataset[var_name][0, 0]` shape mismatch
+        * debugged with Susan
+          * **TODO** Fix abomination ternary assignments in `salishsea_tools.LiveOcean_BCs.interpolate_to_NEMO_depths()`
+      * failed in `salishsea_tools.LiveOcean_BCs.prepare_dataset()` re: `time_counter` dimension
+
+
+##### Miscellaneous
+
+* updated PyCharm to 2026.2,0.1 on `khawla`
+  * debugger changed to `debugpy` in 2026.2.0
+* helped Dishika with transient "failure to load dynamic module" in VSCode remote on `salish`
+  * kernel restart and re-connect solved the issue
+* discussed VSCode Jupyter on interactive nodes notes/tutorial with Jose
+* emailed Louis with bash loop suggestion for downloading wave files from ERDDAP
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `setup-micromamba` to 3.1.0 re: feature & docs updates
+  * erddap-datasets
+  * rwhite/numeric_2024
+  * gha-workflows
+  * salishsea-site
+* Squash-merged `update-pixi-lockfile` PR:
+  * moad_tools
+* Squash-merged dependabot PRs to update `GitPython` to 3.1.57 re: multiple security vulnerabilities
+  * SalishSeaCmd
+  * NEMO-Cmd
+  * AtlantisCmd
+  * SalishSeaNowcast
+* Squash-merged dependabot PRs to update `cryptography` to 50.0.0 re: Bleichenbacher oracle vulnerability
+  * SalishSeaTools
+  * moad_tools
+  * SalishSeaCmd
+  * NEMO_Nowcast
+  * NEMO-Cmd
+  * salishsea-site
+  * Reshapr
+  * AtlantisCmd
+  * FUN
+  * SOG-Bloomcast-Ensemble
+  * SalishSeaNowcast
+  * cookiecutter-MOAD-pypkg
+  * cookiecutter-djl-pypkg
+
+
+
+#### Thu 6-Aug-2026
+
+##### SalishSeaCast
+
+* no preliminary wave forecast figures on website
+
+
+##### Miscellaneous
+
+* Phys Ocgy seminar:
+  * Francis Poulin, Waterloo
+  * Turbulent Energy Spectra in an Idealized Global Ocean
+
+
+##### NEMO-4.2
+
+* continued trying to get `make_live_ocean_files` working for files from LiveOcean `ubc_share`
+  * fixed abomination ternary in `salishsea_tools.LiveOcean_BCs.interpolate_to_NEMO_depths()`
+    with `dataset.z_rho.ndim` instead of `len(dataset.z_rho.shape)`
+  * worked on failure in `salishsea_tools.LiveOcean_BCs.prepare_dataset()` re: `time_counter` dimension
+    * discovered that 2017-12-31 production LiveOcean file does not have a `z_rho` variable
+    * discovered that `ts` is scalar from `ubc_share` files, but 1d array from production
+      * solved by suing `numpy.expand_dims(ts, axis=0)` when `ts.ndim == 0`
+* **TODO**
+  * incorporate the changes from uncontrolled version of `SalishSeaTools` in Pixi env into a branch/PR
+  * document how to switch a repo from git-clone to local editable install in `SalishSeaNowcast` docs
+
+
+
+#### Fri 7-Aug-2026
+
+##### SalishSeaCast
+
+* no preliminary wave forecast figures on website
+  * investigation:
+    * logic in `next_workers.after_ping_erddap()` is finding `forecast` run item instead of `forecast2`
+      * is this due to changes in run timing?
+        * probably: before move to new `arbutus` the checklist was cleared while `wwatch3-forecast2`
+          was running; now `make_plots wwatch3 forecast2` would be launched ~15 minutes before checklist
+          is cleared
+* HRDPS 12Z download finished at ~10:00, ~1.5h late
+* `collect_river_data` failed for all 4 USGS rivers
+
+
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PR:
+  * NEMO-Cmd
+
+
+##### SalishSeaNowcast
+
+* stored `git diff` patch files for `salishsea_tools.LiveOcean_BCs` and `salishsea_tools.LiveOcean_grid`
+* hacks so that I could work on local editable install of `SalishSeaTools` instead of install from GitHub:
+  * had to `pixi remove --pypi salishseatools` to remove pkg from `default` feature because `dev` and `fig-dev`
+    features both inherit it from there
+  * `pixi add -f dev --pypi --editable 'SalishSeaTools @ /media/doug/warehouse/MEOPAR/tools/SalishSeaTools/'`
+    added it to the `dev` feature/env
+    * `pixi install -e dev` got rid of GitHub install and replaced it with local editable
+* started docs and other updates re: migration to new `arbutus` cloud; PR#
+  * applied shelved changes to deployment docs re: network configuration details
+  * updated instances setup
+  * updated shared storage setup
+  * updated ssh keys setup
+  * started updating instances provisioning and configuration
+
+
+##### SalishSeaTools
+
+* applied patches from above (manually 😞)
+* discovered that `LiveOcean_grid.get_basic_info()` is called in `LiveOcean_BCs.load_LiveOcean()` but
+  the result is not used
+  * tested with the call commented out
+
+
+
+#### Sat 8-Aug-2026
+
+##### NEMO-4.2
+
+* Susan checked 31dec17 boundary conditions file generated from LiveOcean `ubc_share` and asked me to confirm units
+  of temperature and salinity vs. production file
+  * `ubc_share`:
+    * temperature: potential temperature in Celsius
+    * salinity: practical salinity with no units
+  * production:
+    * temperature: potential temperature in Celsius
+    * salinity: no units, so assumed practical salinity
+
+
+
+#### Sun 9-Aug-2026
+
+##### SalishSeaCast
+
+* `make_turbidity_file` failed due to "Anticipated and output hour were consistent"
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `h2` to 4.4.1 re: request smuggling vulnerability
+  * SalishSeaTools
+  * salishsea-site
+  * MOAD/docs
+  * SalishSeaCast/docs
+  * moad_tools
+  * MoaceanParcels
+  * NEMO-Cmd
+  * Reshapr
+  * SalishSeaCmd
+  * AtlantisCmd
+  * SOG-Bloomcast-Ensemble
+  * FUN
+  * NEMO_Nowcast
+* Squash-merged dependabot PRs to update `gitpython` to 3.1.58 re: multiple vulnerabilities
+  * SalishSeaCmd
+  * NEMO-Cmd
+  * AtlantisCmd
+
+
 
 
 
@@ -9632,6 +9854,11 @@ Worked at ESB
 
 
 * TODO:
+  * update VMs to 26.04
+  * add `ufw` run on `skookum` to allow access from `arbutus` IP address
+  * fix `next_workers.after_ping_erddap()` to launch `make_plots wwatch3 forecast2` re: later relative
+    timing of checklist clearance
+  * change `watch_NEMO` and `watch_ww3` time intervals from 5m to 2m because runs are >2x faster
   * drop `xios host` from `nowcast.yaml` because it is handled implicitly by `mpi_hosts`
   * add code to compute nodes `$HOME/.bash_aliases` to add wwatch3 `bin/` and `exe/` paths to `PATH` if they exist,
     and export environment variables to enable wwatch3 to use netCDF4
