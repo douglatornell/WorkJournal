@@ -9541,6 +9541,7 @@ Treadmill stress test at VGH Cardiology
   * SalishSeaNowcast
 
 
+
 ### Week 32
 
 #### Mon 3-Aug-2026
@@ -9785,7 +9786,7 @@ Worked at ESB
   * `pixi add -f dev --pypi --editable 'SalishSeaTools @ /media/doug/warehouse/MEOPAR/tools/SalishSeaTools/'`
     added it to the `dev` feature/env
     * `pixi install -e dev` got rid of GitHub install and replaced it with local editable
-* started docs and other updates re: migration to new `arbutus` cloud; PR#
+* started docs and other updates re: migration to new `arbutus` cloud; PR#493
   * applied shelved changes to deployment docs re: network configuration details
   * updated instances setup
   * updated shared storage setup
@@ -9847,6 +9848,58 @@ Worked at ESB
 
 
 
+### Week 33
+
+#### Mon 10-Aug-2026
+
+##### `arbutus` Migration
+
+* removed `ufw` rule to allow old `arbutus.cloud` head node IP on `skookum`
+* removed `SalishSeaNEMO-nowcast_id_rsa` key pair from `skookum`
+* continued docs and other updates re: migration to new `arbutus` cloud; PR#493
+  * updated head node provisioning and configuration
+  * updated NFS setup
+  * updated compute node provisioning and configuration
+
+
+##### NEMO-4.2
+
+* emailed Kate re: our progress on transferring and processing day-averaged LiveOcean files from `ubc_share`
+* transferred 2012 day-averaged files:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  globus transfer ${LIVEOCEAN_GLOBUS_UUID}:temp_ubc0_2012.10.07_2012.12.31/ \
+    "$(globus endpoint local-id)":/results/forcing/LiveOcean/cas7_t1_x11ab/downloaded/
+  # hoped that would created /results/forcing/LiveOcean/cas7_t1_x11ab/downloaded/temp_ubc0_2012.10.07_2012.12.31/
+  # but it put all the files in /results/forcing/LiveOcean/cas7_t1_x11ab/downloaded/
+  # cleaned up with loops like:
+  yyyy=2012; mm=12; for dd in {01..31}; do \
+    mkdir ${yyyy}${mm}${dd}; \
+    mv f${yyyy}.${mm}.${dd}_box.nc ${yyyy}${mm}${dd}/day_averaged_UBC.nc; \
+  done
+  # created NEMO boundary condition files with loops like:
+  for dd in {01..31}; do \
+    pixi run -e dev worker make_live_ocean_files -- --run-date 2012-12-${dd} --debug; \
+  done
+  ```
+  <!-- markdownlint-enable MD031 -->
+
+
+##### SalishSeaTools
+
+* Updated LiveOcean boundary conditions calculation code to handle day-averaged extraction files;
+  PR#213 - squash-merged
+  * also had to add pass-through of `temperature salinity.download.file name` config item
+  * tested using `sshfs` mounts from `skookum` on `khawla`
+
+
+##### SalishSeaNowcast
+
+* added handling of `temperature salinity.download.file name` config item to `make_live_ocean_files`
+  and its test suite; PR#497 - squash-merged
+
+
+
 
 
 
@@ -9860,10 +9913,6 @@ Worked at ESB
     timing of checklist clearance
   * change `watch_NEMO` and `watch_ww3` time intervals from 5m to 2m because runs are >2x faster
   * drop `xios host` from `nowcast.yaml` because it is handled implicitly by `mpi_hosts`
-  * add code to compute nodes `$HOME/.bash_aliases` to add wwatch3 `bin/` and `exe/` paths to `PATH` if they exist,
-    and export environment variables to enable wwatch3 to use netCDF4
-    * change to `export NETCDF_CONFIG=$(which nf-config)`
-  * update docs re: wwatch3 settings in `~/.bash_aliases`
   * do a clean head node instance config before storing the snapshot
   * remove old `arbutus.cloud` rule from `ufw` on `skookum`
   * commit `XIOS-ARCH` changes
@@ -9896,6 +9945,11 @@ Worked at ESB
     * try to change them from `find` to `fd` because we're cool 😎
   * fix typo in https://salishsea-nowcast.readthedocs.io/en/latest/deployment/arbutus_cloud.html#wavewatch-runs-directories
     re: 2nd instance of "The make_ww3_wind_file worker:" s/b "The make_ww3_current_file worker:"
+  * remove `old-arbutus.cloud` from `ocean` and `khawla` SSH configs
+  * maybe not necessary?
+    * add code to compute nodes `$HOME/.bash_aliases` to add wwatch3 `bin/` and `exe/` paths to `PATH` if they exist,
+      and export environment variables to enable wwatch3 to use netCDF4
+      * change to `export NETCDF_CONFIG=$(which nf-config)`
 
 
 
