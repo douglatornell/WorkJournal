@@ -9638,7 +9638,7 @@ Worked at ESB
 * 12Z HRDPS forecast was ~1h late
   * `crop_gribs 12` finished at ~09:34
   * `nowcast-blue` run started at ~09:35
-  * `nowcast-green` run complted at ~10:36
+  * `nowcast-green` run completed at ~10:36
 * Fraser River turbidity obs data stream resumed
 * Susan reported `NaN`s `/results2/SalishSea/month-avg.202111/SalishSeaCast_1m_biol_T_20080601_20080630.nc`
   * re-ran `make_averaged_dataset -- month biology --run-date 2008-06-01`
@@ -9647,7 +9647,7 @@ Worked at ESB
 
 ##### NEMO-4.2
 
-* resumed work on transferring files from LiveOcean `ubc_share` to `/results/forcing/LiveOceancas7_t1_x11ab/downloaded/`:
+* resumed work on transferring files from LiveOcean `ubc_share` to `/results/forcing/LiveOcean/cas7_t1_x11ab/downloaded/`:
   * backgrounded globus server has stopped; restarted It
   * task was still paused
   * logged in to Globus web interface (`globus.org`)
@@ -9899,6 +9899,28 @@ Worked at ESB
   and its test suite; PR#497 - squash-merged
 
 
+##### Miscellaneous
+
+* Henryk passed on quotes for MOAD server upgrades
+
+
+
+#### Tue 11-Aug-2026
+
+Worked at ESB
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* more analysis of quotes for MOAD server upgrades:
+  * drop 2 x 7.68T SSDs to get closer to Susan's price point
+  * change storage configuration to 2 x 6 HDD RAID 6 arrays for more safety during week-long rebuilds
+    and to efficiently use Henryk's insistence on 12 drives
+  * live with 24T HDDs, giving 2 x 96T storage arrays
+  * make `/SalishSeaCast/` a partition on the OS drive of the compute/web/app server so that it is
+    independent of the RAID arrays
+
+
 
 
 
@@ -9908,7 +9930,7 @@ Worked at ESB
 
 * TODO:
   * update VMs to 26.04
-  * add `ufw` run on `skookum` to allow access from `arbutus` IP address
+  * add `ufw` rule on `skookum` to allow access from `arbutus` IP address
   * fix `next_workers.after_ping_erddap()` to launch `make_plots wwatch3 forecast2` re: later relative
     timing of checklist clearance
   * change `watch_NEMO` and `watch_ww3` time intervals from 5m to 2m because runs are >2x faster
