@@ -8348,7 +8348,7 @@ Worked at ESB
   * erddap-datasets
 
 
-##### reshapr
+##### Reshapr
 
 * removed a redundant `osx-arm64` in the Pixi platform list that had started causing GHA workflow
   failures
@@ -8391,7 +8391,8 @@ Worked at ESB
 
 ##### SalishSeaCast
 
-* obs for TheodosiaDiversion river resume at 08:10 on 14jul
+* obs for TheodosiaDiversion river resumed at 08:10 on 14jul
+
 
 ##### ERDDAP
 
@@ -8486,12 +8487,9 @@ Worked at ESB
     time rsync -rLtv riverTurbDaily201906_y2009*.nc \
       nibi:/project/rrg-allen/SalishSea/forcing/rivers/river_turb/
     cd /results/forcing/sshNeahBay/obs/
-    time rsync -rLtv rsync -rltv ssh_y2007*.nc \
-      nibi:/project/rrg-allen/SalishSea/forcing/sshNeahBay/obs/
-    time rsync -rLtv rsync -rltv ssh_y2008*.nc \
-      nibi:/project/rrg-allen/SalishSea/forcing/sshNeahBay/obs/
-    time rsync -rLtv rsync -rltv ssh_y2009*.nc \
-      nibi:/project/rrg-allen/SalishSea/forcing/sshNeahBay/obs/
+    time rsync -rLtv ssh_y2007*.nc nibi:/project/rrg-allen/SalishSea/forcing/sshNeahBay/obs/
+    time rsync -rLtv ssh_y2008*.nc nibi:/project/rrg-allen/SalishSea/forcing/sshNeahBay/obs/
+    time rsync -rLtv ssh_y2009*.nc nibi:/project/rrg-allen/SalishSea/forcing/sshNeahBay/obs/
     cd /results/forcing/NEP36/
     time rsync -rLtv NEP_v202209_y2007*.nc nibi:/project/rrg-allen/SalishSea/forcing/NEP36/
     time rsync -rLtv NEP_v202209_y2008*.nc nibi:/project/rrg-allen/SalishSea/forcing/NEP36/
@@ -8553,7 +8551,7 @@ Worked at ESB
 * discovered that persistent storage was not present on `nowcast0`
   * detached it via the web interface
   * reattached it via the web interface
-    * interface says that it is attached to `/dev/vdd` but `lsblk -f` says that it is `/dev/vdd`
+    * interface says that it is attached to `/dev/vdc` but `lsblk -f` says that it is `/dev/vdd`
     * `sudo mount /dev/vdd /nemoShare` worked
     * got nothing when I remounted it on `nowcast1`
     * had to redo the bind mount and restart NFS
@@ -9877,7 +9875,7 @@ Worked at ESB
     mkdir ${yyyy}${mm}${dd}; \
     mv f${yyyy}.${mm}.${dd}_box.nc ${yyyy}${mm}${dd}/day_averaged_UBC.nc; \
   done
-  # created NEMO boundary condition files with loops like:
+  # created NEMO boundary condition files (on `khawka`) with loops like:
   for dd in {01..31}; do \
     pixi run -e dev worker make_live_ocean_files -- --run-date 2012-12-${dd} --debug; \
   done
@@ -9922,6 +9920,250 @@ Worked at ESB
 
 
 
+#### Wed 12-Aug-2026
+
+24h Holter monitor pickup
+
+##### SalishSeaCast
+
+* restarted manager to load config with `old-arbutus` and `orcinus` removed
+* email from Parker says LiveOcean will be very delayed due to HPC maintenance
+  * `download_live_ocean` timed out at ~12:00
+  * persisted 11aug26 boundary conditions file via symlink
+  * restarted automation with:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    upload_forcing -- arbutus.cloud nowcast+
+    upload_forcing -- robot.nibi nowcast+
+    upload_forcing -- optimum nowcast+
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+##### `arbutus` Migration
+
+* continued docs and other updates re: migration to new `arbutus` cloud; PR#493
+  * updated host mappings section of `arbutus` deployment docs
+* restored `SalishSeaNEMO-nowcast_id_rsa` key pair to `skookum` because it is still needed for
+  `upload_forcing optimum`
+
+
+##### XIOS-2
+
+* pushed change to uncomment `#include <cstdint>` in `extern/remap/src/earcut.hpp`
+  * This is necessary for successful compilation with GCC-13 on the 2026 arbutus.cloud.
+  * It was also successfully tested with GCC-12 on the Alliance HPC clusters.
+  * Further justification: `#include <cstdint>` is present in several other `extern/` code files.
+
+
+##### XIOS-ARCH
+
+* pushed update of `arch-GCC_ARBUTUS.fcm`
+
+
+##### Miscellaneous
+
+* experienced ssh-agent issue in VSCode remote ssh session that I saw before and Becca reported a
+  couple of weeks ago:
+  * reminded me tmux ssh agent issue that arises on reconnect
+  * found https://github.com/microsoft/vscode-remote-release/issues/7859 that confirms issue is similar
+  * resolved agent  issue with:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    # vscode SSH_AUTH_SOCK fix
+    (test -L $SSH_AUTH_SOCK && (
+        test -S $(readlink $SSH_AUTH_SOCK) && \
+            ln -sf $(ls -1rtd /tmp/ssh-*/* | tail -1 | xargs) $SSH_AUTH_SOCK
+    )) || ln -sf $(ls -1rtd /tmp/ssh-*/* | tail -1 | xargs) $SSH_AUTH_SOCK
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+
+#### Thu 13-Aug-2026
+
+24h Holter monitor drop-off
+
+##### SalishSeaCast
+
+* `crop_gribs 12` stalled until 11:34 waiting for 1 unprocessed file
+* `download_live_ocean` timed out at 12:34
+  * file was available at 14:28
+  * re-ran manually to restart automation
+
+
+##### NEMO-3.6
+
+* pushed update of `arch-GCC_ARBUTUS.fcm`:
+  * update compiler names
+  * add `-fallow-argument-mismatch` Fortran compiler flag to resolved compile errors that I didn't
+    keep good notes about other than GCC-13 is stricter than GCC<=12.
+  * Drop `-lstdc++` loader flag because it is included in the place it needs to be in `%XIOS-LIB`
+    and having it twice breaks the build.
+  * Updated `ar` flags to match those used on Alliance HPC clusters.
+  * Change `make` to `gmake`.
+
+
+##### Miscellaneous
+
+* discussed quotes for MOAD server upgrades with Susan:
+  * file server quote is good to go
+  * agreed to ask Henryk for 1 more iteration on compute server to get closer to Susan's price point:
+    * drop 2 x 7.68T SSDs
+    * change from 2x24 core processors to 1x32 cores
+* discussed Louis's latest question about wind direction in wwatch3 files w/ Susan
+
+
+##### NEMO-4.2
+
+* `ubc_share` collection available again after UW HPC maintenance
+* transferred 2013 day-averaged files:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  globus transfer ${LIVEOCEAN_GLOBUS_UUID}:temp_ubc0_2013.01.01_2013.12.31/ \
+    "$(globus endpoint local-id)":/results/forcing/LiveOcean/cas7_t1_x11ab/downloaded/
+  # moved files from /results/forcing/LiveOcean/cas7_t1_x11ab/downloaded/ with:
+  yyyy=2013; for mm in {01..12}; do \
+    for dd in {01..31}; do \
+      mkdir ${yyyy}${mm}${dd}; \
+      mv f${yyyy}.${mm}.${dd}_box.nc ${yyyy}${mm}${dd}/day_averaged_UBC.nc; \
+    done
+  done
+  # removed empty directories created above with:
+  fd -te -td -x rm -d
+  # created NEMO boundary condition files (on `khawla`) with loops like:
+  yyyy=2013; for mm in {01..12}; do \
+    for dd in {01..31}; do \
+      pixi run -e dev worker make_live_ocean_files -- --run-date ${yyyy}-${mm}-${dd} --debug; \
+    done
+  done
+  ```
+  <!-- markdownlint-enable MD031 -->
+
+
+##### `arbutus` Migration
+
+* continued docs and other updates re: migration to new `arbutus` cloud; PR#493
+  * updated GitHub repo clones section of `arbutus` deployment docs
+  * updated XIOS-2 build section of `arbutus` deployment docs
+  * updated NEMO-3.6 build section of `arbutus` deployment docs
+  * updated wwatch3-5.16 build section of `arbutus` deployment docs
+
+
+
+#### Fri 14-Aug-2026
+
+##### SalishSeaCast
+
+* `get_onc_ferry` failed due to array length mismatch
+* `download_live_ocean` timed out at 11:47
+  * re-ran it manually at 11:51; success at 13:16
+
+
+##### NEMO-4.2
+
+* uploaded `/results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/` late-2012 and 2013 files
+  to `nibi` for Tall to test
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  ssh nibi mkdir -p /project/def-allen/SalishSea/forcing/LiveOcean/cas7_t1_x11ab/
+  cd /results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/
+  time rsync -rLtv LiveOcean_v201905_y201[23]*.nc nibi:/project/rrg-allen/SalishSea/forcing/LiveOcean/cas7_t1_x11ab/
+  ```
+  <!-- markdownlint-enable MD031 -->
+  * posted news to #alliance-hpc
+* transferred 2014 day-averaged files from `ubc_share` collection to `/results/forcing/` and processed
+  them into NEMO boundary conditions files:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  globus transfer ${LIVEOCEAN_GLOBUS_UUID}:temp_ubc0_2014.01.01_2014.12.31/ \
+    "$(globus endpoint local-id)":/results/forcing/LiveOcean/cas7_t1_x11ab/downloaded/
+  # moved files from /results/forcing/LiveOcean/cas7_t1_x11ab/downloaded/ with:
+  yyyy=2014; for mm in {01..12}; do \
+    for dd in {01..31}; do \
+      mkdir ${yyyy}${mm}${dd}; \
+      mv f${yyyy}.${mm}.${dd}_box.nc ${yyyy}${mm}${dd}/day_averaged_UBC.nc; \
+    done
+  done
+  # removed empty directories created above with:
+  fd -te -td -x rm -d
+  # created NEMO boundary condition files (on `khawla`) with loops like:
+  yyyy=2014; for mm in {01..12}; do \
+    for dd in {01..31}; do \
+      pixi run -e dev worker make_live_ocean_files -- --run-date ${yyyy}-${mm}-${dd} --debug; \
+    done
+  done
+  ```
+  <!-- markdownlint-enable MD031 -->
+* uploaded `/results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/` 2014 files to `nibi`:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  cd /results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/
+  time rsync -rLtv LiveOcean_v201905_y2014*.nc nibi:/project/rrg-allen/SalishSea/forcing/LiveOcean/cas7_t1_x11ab/
+  ```
+  <!-- markdownlint-enable MD031 -->
+* transferred 2015 day-averaged files from `ubc_share` collection to `/results/forcing/` and processed
+  them into NEMO boundary conditions files
+* uploaded `/results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/` 2015 files to `nibi`
+
+
+##### `arbutus` Migration
+
+* started shut-down and cleanup of `old-arbutus`:
+  * shut down all instances except `nowcast0`
+  * deleted all instances except `nowcast0` and `nowcast1`
+* continued docs and other updates re: migration to new `arbutus` cloud; PR#493
+  * updated Python Packages section of `arbutus` deployment docs
+  * updated NEMO Runs Directory section of `arbutus` deployment docs
+  * updated Managing Compute Nodes section of `arbutus` deployment docs
+  * updated `arbutus.cloud` and OpenStack URLs in `arbutus` deployment docs
+  * updated `skookum` deployment docs:
+    * add back `tools` repo clone
+    * update Pixi & packages section
+    * update Nowcast Runs Directory section
+    * update ssh Keys and Config section
+  * updated `nowcast.yaml`:
+    * change automation key for `arbutus` from RSA to ed25519
+    * change MPI decomposition values from 11x18 to 10x17
+    * change to `pixi run ...` for `salishsea` command in wave forecast config section
+    * changed logging config IP addresses to new `arbutus` head node public IP address
+    * change to `/home/ubuntu/.pixi/bin/pixi run ...` for `salishsea` command
+  * updated `run_NEMO` worker and its tests:
+    * changed `mpirun` command to drop deprecated flags and change order of `nemo.exe` and `xios_server.exe`
+      to match current OpenMPI standard
+    * changed MPI decomposition values from 11x18 to 10x17 in some tests where I missed it
+  * updated `ww3_hindcast.yaml` config file to match relevant updates in `nowcast.yaml`
+  * deployed branch to `arbutus` and `skookum` for testing
+    * restarted `manager` and `log_aggregator` to load updated `nowcast.yaml`
+
+
+
+#### Sat 15-Aug-2026
+
+##### SalishSeaCast
+
+* `make_live_ocean_files` failed because I didn't update the lockfile to use the latest version of
+  `salishsea_tools` that includes changes to work with day-averaged LiveOcean extractions
+  * recovery:
+    * `pixi update salishseatools` on `skookum`
+    * `make_live_ocean_files`
+
+
+
+#### Sun 16-Aug-2026
+
+##### SalishSeaCast
+
+* smooth operation
+
+
+##### `arbutus` Migration
+
+* continued docs and other updates re: migration to new `arbutus` cloud; PR#493
+
+
+
+
 
 
 
@@ -9936,16 +10178,8 @@ Worked at ESB
   * change `watch_NEMO` and `watch_ww3` time intervals from 5m to 2m because runs are >2x faster
   * drop `xios host` from `nowcast.yaml` because it is handled implicitly by `mpi_hosts`
   * do a clean head node instance config before storing the snapshot
-  * remove old `arbutus.cloud` rule from `ufw` on `skookum`
-  * commit `XIOS-ARCH` changes
-  * commit `XIOS-2/extern/remap/src/earcut.hpp` change
-  * commit NEMO arch file changes
-  * add `export PMIX_MCA_gds=hash` to `.bashrc`
   * add `lf` to `.bash_aliases`
   * move addition of Pixi to path from `.bashrc` to `.bash_aliases`
-  * add Pixi autocompletion to `.bash_aliases`
-  * add Pixi global install of `bat`, `eza`, `fd`, and `ripgrep`
-  * add `pixi config set --global cache.repodata /tmp/pixi-cache-$USER/repodata`
   * add `crontab` entries to keep results directories pruned:
     <!-- markdownlint-disable MD031 -->
     ```text
