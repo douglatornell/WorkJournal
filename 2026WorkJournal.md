@@ -10163,6 +10163,21 @@ Worked at ESB
 
 
 
+### Week 34
+
+#### Mon 17-Aug-2026
+
+##### SalishSeaCast
+
+* HRDPS 12Z was late; `collect_weather 12` finished at ~09:40
+
+
+##### Miscellaneous
+
+* help Becca with various import errors running headless jupyter on an interactive node on `fir`
+  * eventually realized that it was a node config issue
+  * Jose taught us about `salloc --exclude`
+
 
 
 
