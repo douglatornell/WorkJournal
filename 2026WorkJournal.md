@@ -10180,6 +10180,54 @@ Worked at ESB
 
 
 
+#### Tue 18-Aug-2026
+
+Worked at ESB
+
+##### NEMO-4.2
+
+* transferred 2016 day-averaged files from `ubc_share` collection to `/results/forcing/` and processed
+  them into NEMO boundary conditions files:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  globus transfer ${LIVEOCEAN_GLOBUS_UUID}:temp_ubc0_2016.01.01_2016.12.31/ \
+    "$(globus endpoint local-id)":/results/forcing/LiveOcean/cas7_t1_x11ab/downloaded/
+  # moved files from /results/forcing/LiveOcean/cas7_t1_x11ab/downloaded/ with:
+  yyyy=2016; for mm in {01..12}; do \
+    for dd in {01..31}; do \
+      mkdir ${yyyy}${mm}${dd}; \
+      mv f${yyyy}.${mm}.${dd}_box.nc ${yyyy}${mm}${dd}/day_averaged_UBC.nc; \
+    done
+  done
+  # removed empty directories created above with:
+  fd -te -td -x rm -d
+
+  # created NEMO boundary condition files (in tmux session on `skookum`) with loops like:
+  yyyy=2016; for mm in {01..12}; do \
+    for dd in {01..31}; do \
+      pixi run worker make_live_ocean_files -- --run-date ${yyyy}-${mm}-${dd} --debug; \
+    done
+  done
+  ```
+  <!-- markdownlint-enable MD031 -->
+* uploaded `/results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/` 2016 files to `nibi`:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  cd /results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/
+  time rsync -rLtv LiveOcean_v201905_y2016*.nc nibi:/project/rrg-allen/SalishSea/forcing/LiveOcean/cas7_t1_x11ab/
+  ```
+  <!-- markdownlint-enable MD031 -->
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* sent email to Alliance support re: Becca's issue on `fir` interactive node `fc30670` yesterday
+  * got a reply William Lulashnyk confirming that `fc30670` was bad and has been drained
+  * he also offered `sinfo -o "%.10N %.15T %.10O [%.8G] - %E -n <node>` as a command that might show bad node states
+
+
+
 
 
 ##### `arbutus` Migration
