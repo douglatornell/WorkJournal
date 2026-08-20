@@ -5375,7 +5375,7 @@ Dishika joined the group
 * message from Henryk says that `/results/` RAID is trying to rebuild
   * he will monitor its progress for a few hours, then reboot if necessary
 * continued uploading `nowcast-green.202211` results from `skookum` to `nibi` in `djl-nibi-xfer` `tmux` session:
-  * 2016 started at ~09:25
+  * 2017 started at ~09:25
     * failed with broken pipe at ~20:18
     * restarted at ~09:25
 * Henryk rebooted `skookum` at ~13:57
@@ -10224,7 +10224,137 @@ Worked at ESB
 * MOAD group mtg; see whiteboard
 * sent email to Alliance support re: Becca's issue on `fir` interactive node `fc30670` yesterday
   * got a reply William Lulashnyk confirming that `fc30670` was bad and has been drained
-  * he also offered `sinfo -o "%.10N %.15T %.10O [%.8G] - %E -n <node>` as a command that might show bad node states
+  * he also offered `sinfo -o "%.10N %.15T %.10O [%.8G] - %E" -n <node>` as a command that might show bad node states
+
+
+
+#### Wed 19-Aug-2026
+
+##### SalishSeaCast
+
+* `upload_forcing forecast2` failed because I forgot to change LiveOcean path/file names back in production
+  `nowcast.yaml` after processing 2016 `cas7_t1_x11ab` files
+
+
+##### NEMO-4.2
+
+* reviewed Susan and Kate's emails re: `cas7_t1_x11ab` files:
+  * our collection of low-pass filtered started on 2024-08-25
+  * day-averaged files for 2012-10-07 to 2023-12-31
+  * low-pass filtered re-runs for 2017 and 2024
+  * TODO:
+    * need Susan to decide if we want to use day-averaged or low-pass filtered for 2017
+      * Susan chose day-averaged
+    * process 2018-2023 day-averaged
+    * process 2024-01-01 to 2024-08-24 low-pass filtered
+      * decide how we bridge from 2024-08-24 low-pass filtered to 2024-08-25 production (also l-pf)
+        * agreed to copy 2024-08-25 onward into `cas7_t1_x11ab` and change production to point there
+          going forward
+* transferred 2017 day-averaged files from `ubc_share` collection to `/results/forcing/` and processed
+  them into NEMO boundary conditions files:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  export LIVEOCEAN_GLOBUS_UUID=...
+  globus transfer ${LIVEOCEAN_GLOBUS_UUID}:temp_ubc0_2017.01.01_2017.12.31/ \
+    "$(globus endpoint local-id)":/results/forcing/LiveOcean/cas7_t1_x11ab/downloaded/
+  # moved files from /results/forcing/LiveOcean/cas7_t1_x11ab/downloaded/ with:
+  yyyy=2017; for mm in {01..12}; do \
+    for dd in {01..31}; do \
+      mkdir ${yyyy}${mm}${dd}; \
+      mv f${yyyy}.${mm}.${dd}_box.nc ${yyyy}${mm}${dd}/day_averaged_UBC.nc; \
+    done
+  done
+  # removed empty directories created above with:
+  fd -te -td -x rm -d
+  # created NEMO boundary condition files (in tmux session on `skookum`) with loops like:
+
+  yyyy=2017; for mm in {01..12}; do \
+    for dd in {01..31}; do \
+      pixi run worker make_live_ocean_files -- --run-date ${yyyy}-${mm}-${dd} --debug; \
+    done
+  done
+  ```
+  <!-- markdownlint-enable MD031 -->
+* uploaded `/results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/` 2017 files to `nibi`:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  cd /results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/
+  time rsync -rLtv LiveOcean_v201905_y2017*.nc nibi:/project/rrg-allen/SalishSea/forcing/LiveOcean/cas7_t1_x11ab/
+  ```
+  <!-- markdownlint-enable MD031 -->
+* restored `nowcast.yaml` for tomorrow's production
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `setup-micromamba` to 3.2.1 re: feature & bug fix updates
+  * erddap-datasets
+  * rwhite/numeric_2024
+  * gha-workflows
+  * salishsea-site
+* Squash-merged dependabot PRs to update `setup-pixi` to 0.10.1 re: dependency updates
+  * moad_tools
+  * gha-workflows
+  * AtlantisCmd
+* Squash-merged `update-pixi-lockfile` PR:
+  * Reshapr
+  * gha-workflows
+* Squash-merged dependabot PR to update `action-sphinx-docs-to-gh-pages` to 3.0.0 re: feature & bug fix updates
+  * rwhite/numeric_2024
+* Squash-merged dependabot PR to update `JupyterLab` to 4.5.10 re: multiple vulnerabilities
+  * erddap-datasets
+
+
+##### `arbutus` Migration
+
+* continued docs and other updates re: migration to new `arbutus` cloud; PR#493
+  * added `cron` jobs on `arbutus` to remove old results and wwatch3 current and wind forcing files:
+    <!-- markdownlint-disable MD031 -->
+    ```text
+    # m h  dom mon dow   command
+      0 0  *   *   *     /home/ubuntu/.pixi/bin/fd --type d --changed-before 30d . /nemoShare/MEOPAR/SalishSea/nowcast/ -x rm -rf
+      5 0  *   *   *     /home/ubuntu/.pixi/bin/fd --type d --changed-before 30d . /nemoShare/MEOPAR/SalishSea/nowcast-green/ -x rm -rf
+    10 0  *   *   *     /home/ubuntu/.pixi/bin/fd --type d --changed-before 20d . /nemoShare/MEOPAR/SalishSea/forecast/ -x rm -rf
+    15 0  *   *   *     /home/ubuntu/.pixi/bin/fd --type d --changed-before 15d . /nemoShare/MEOPAR/SalishSea/forecast2/ -x rm -rf
+    20 0  *   *   *     /home/ubuntu/.pixi/bin/fd --type d --changed-before 15d . /nemoShare/MEOPAR/SalishSea/wwatch3-nowcast/ -x rm -rf
+    25 0  *   *   *     /home/ubuntu/.pixi/bin/fd --type d --changed-before 15d . /nemoShare/MEOPAR/SalishSea/wwatch3-forecast/ -x rm -rf
+    30 0  *   *   *     /home/ubuntu/.pixi/bin/fd --type d --changed-before 15d . /nemoShare/MEOPAR/SalishSea/wwatch3-forecast2/ -x rm -rf
+    35 0  *   *   *     /home/ubuntu/.pixi/bin/fd --type f --changed-before 15d . /nemoShare/MEOPAR/nowcast-sys/wwatch3-runs/current/ -x rm -f
+    40 0  *   *   *     /home/ubuntu/.pixi/bin/fd --type f --changed-before 15d . /nemoShare/MEOPAR/nowcast-sys/wwatch3-runs/wind/ -x rm -f
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * fixed typos
+  * added section to `skookum` deployment docs about firewall rule
+  * quieted logging messages from `findlibs` and `gribapi`
+  * dropped no longer necessary `xios host` from `run.enabled hosts` config section
+
+
+
+#### Thu 20-Aug-2026
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* confirmed that `cron` jobs on `arbutus` worked as expected overnight
+
+
+##### NEMO-4.2
+
+* transferred 2017 day-averaged files from `ubc_share` collection to `/results/forcing/` and processed
+  them into NEMO boundary conditions files
+
+* uploaded `/results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/` 2017 files to `nibi`:
+* restored `nowcast.yaml` for tomorrow's production
+
+
+##### Miscellaneous
+
+* Phys Ocgy seminar:
+  * Dishika
+  * Darren
+* ice cream for end of Dishika and Darren time with the group
+
 
 
 
@@ -10235,35 +10365,11 @@ Worked at ESB
 
 * TODO:
   * update VMs to 26.04
-  * add `ufw` rule on `skookum` to allow access from `arbutus` IP address
   * fix `next_workers.after_ping_erddap()` to launch `make_plots wwatch3 forecast2` re: later relative
     timing of checklist clearance
   * change `watch_NEMO` and `watch_ww3` time intervals from 5m to 2m because runs are >2x faster
-  * drop `xios host` from `nowcast.yaml` because it is handled implicitly by `mpi_hosts`
   * do a clean head node instance config before storing the snapshot
   * add `lf` to `.bash_aliases`
-  * move addition of Pixi to path from `.bashrc` to `.bash_aliases`
-  * add `crontab` entries to keep results directories pruned:
-    <!-- markdownlint-disable MD031 -->
-    ```text
-    # m h  dom mon dow   command
-     0 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/nowcast/* -type d -mtime +30 | xargs rm -rf
-     5 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/nowcast-green/* -type d -mtime +30 | xargs rm -rf
-    10 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/forecast/* -type d -mtime +20 | xargs rm -rf
-    15 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/forecast2/* -type d -mtime +15 | xargs rm -rf
-    20 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/wwatch3-nowcast/* -type d -mtime +15 | xargs rm -rf
-    25 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/wwatch3-forecast/* -type d -mtime +15 | xargs rm -rf
-    30 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/wwatch3-forecast2/* -type d -mtime +15 | xargs rm -rf
-    35 0  *   *   *     find /nemoShare/MEOPAR/nowcast-sys/wwatch3-runs/current/* -type f -mtime +15 -delete
-    40 0  *   *   *     find /nemoShare/MEOPAR/nowcast-sys/wwatch3-runs/wind/* -type f -mtime +15 -delete
-    45 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/fvcom-nowcast-x2/* -type d -mtime +15 | xargs rm -rf
-    50 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/fvcom-forecast-x2/* -type d -mtime +15 | xargs rm -rf
-    55 0  *   *   *     find /nemoShare/MEOPAR/SalishSea/fvcom-nowcast-r12/* -type d -mtime +15 | xargs rm -rf
-    ```
-    <!-- markdownlint-enable MD031 -->
-    * try to change them from `find` to `fd` because we're cool 😎
-  * fix typo in https://salishsea-nowcast.readthedocs.io/en/latest/deployment/arbutus_cloud.html#wavewatch-runs-directories
-    re: 2nd instance of "The make_ww3_wind_file worker:" s/b "The make_ww3_current_file worker:"
   * remove `old-arbutus.cloud` from `ocean` and `khawla` SSH configs
   * maybe not necessary?
     * add code to compute nodes `$HOME/.bash_aliases` to add wwatch3 `bin/` and `exe/` paths to `PATH` if they exist,
