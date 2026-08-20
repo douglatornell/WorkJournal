@@ -10343,18 +10343,27 @@ Worked at ESB
 
 * transferred 2017 day-averaged files from `ubc_share` collection to `/results/forcing/` and processed
   them into NEMO boundary conditions files
-
 * uploaded `/results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/` 2017 files to `nibi`:
 * restored `nowcast.yaml` for tomorrow's production
 
 
 ##### Miscellaneous
 
+* researched ssh connection multiplexing:
+  * https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Multiplexing
+  * added `ControlMaster`, `ControlPath` and `ControlPersist` directives to `arbutus.cloud-nowcast`
+    ssh config on `skookum` to test in production
+  * discovered that multiplexing bypasses 2FA on Alliance hosts when a connection exists
 * Phys Ocgy seminar:
   * Dishika
   * Darren
 * ice cream for end of Dishika and Darren time with the group
 
+
+##### `arbutus` Migration
+
+* confirmed that Ubuntu 26.04 is an LTS release
+  * it bundles GCC-15.2
 
 
 
