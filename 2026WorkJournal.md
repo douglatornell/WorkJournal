@@ -10341,9 +10341,9 @@ Worked at ESB
 
 ##### NEMO-4.2
 
-* transferred 2017 day-averaged files from `ubc_share` collection to `/results/forcing/` and processed
+* transferred 2018 day-averaged files from `ubc_share` collection to `/results/forcing/` and processed
   them into NEMO boundary conditions files
-* uploaded `/results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/` 2017 files to `nibi`:
+* uploaded `/results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/` 2018 files to `nibi`:
 * restored `nowcast.yaml` for tomorrow's production
 
 
@@ -10367,10 +10367,51 @@ Worked at ESB
 
 
 
+#### Fri 21-Aug-2026
+
+##### Miscellaneous
+
+* continued experiments with ssh connection multiplexing:
+  * added `ControlMaster`, `ControlPath` and `ControlPersist` directives for all hosts in
+    ssh config on `khawka`
+  * discovered that multiplexing creates a socket for `git@github.com`
+    * presumably for monitoring of repos on GitHub
+* created `/results/forcing/LiveOcean/README.md` and `/results/forcing/LiveOcean/cas7_t1_x11ab/README.md`
+
+
+##### NEMO-4.2
+
+* noticed that Globus personal client launched in background in `tmux` session stays running, unlike
+  when it is launched in a terminal session
+* uploaded `/results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/` 2012-2018 files to `rorqual`
+* transferred 2019 day-averaged files from `ubc_share` collection to `/results/forcing/` and processed
+  them into NEMO boundary conditions files
+* uploaded `/results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/` 2019 files to `nibi` and `rorqual`
+* discovered and fixed 3 missing 2012 files
+* transferred 2020 day-averaged files from `ubc_share` collection to `/results/forcing/`
+  * Globus seems to be struggling
+* restored `nowcast.yaml` for tomorrow's production
+
+
+
+#### Sat 22-Aug-2026
+
+##### NEMO-4.2
+
+* transfer of 2020 day-averaged files from `ubc_share` collection to `/results/forcing/` finished at
+  ~20:50 last night
+* processed 2020 files into NEMO boundary conditions files
+* uploaded `/results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/` 2020 files to `nibi` and `rorqual`
+* transferred 2021 day-averaged files from `ubc_share` collection to `/results/forcing/`
+* restored `nowcast.yaml` for tomorrow's production
+
+
+
+
+
 
 
 ##### `arbutus` Migration
-
 
 * TODO:
   * update VMs to 26.04
@@ -10386,6 +10427,26 @@ Worked at ESB
       * change to `export NETCDF_CONFIG=$(which nf-config)`
 
 
+
+TODO:
+
+* open an issue on https://github.com/TEOS-10/GSW-Python re:
+  <!-- markdownlint-disable MD031 -->
+  ```python-traceback
+  /SalishSeaCast/SalishSeaNowcast/.pixi/envs/default/lib/python3.14/site-packages/gsw/_wrapped_ufuncs.py:7511:
+    UserWarning: 'where' used without 'out', expect uninitialized memory in output. If this is intentional, use out=None.
+    return _gsw_ufuncs.sr_from_sp(SP, **kwargs)
+  /SalishSeaCast/SalishSeaNowcast/.pixi/envs/default/lib/python3.14/site-packages/gsw/_wrapped_ufuncs.py:1054:
+    UserWarning: 'where' used without 'out', expect uninitialized memory in output. If this is intentional, use out=None.
+    return _gsw_ufuncs.ct_from_pt(SA, pt, **kwargs)
+  /SalishSeaCast/SalishSeaNowcast/.pixi/envs/default/lib/python3.14/site-packages/gsw/_wrapped_ufuncs.py:6133:
+    UserWarning: 'where' used without 'out', expect uninitialized memory in output. If this is intentional, use out=None.
+    return _gsw_ufuncs.sigma0(SA, CT, **kwargs)
+  ```
+  <!-- markdownlint-enable MD031 -->
+  that arise from `make_live_ocean_files` in present `SalishSeaNowcast` environment
+  * I can't understand the code
+  * need to document versions: Python, gsw, numpy
 
 
 
