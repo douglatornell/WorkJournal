@@ -10407,6 +10407,74 @@ Worked at ESB
 
 
 
+#### Sun 23-Aug-2026
+
+Vancouver to Heart Island
+
+
+
+### Week 35
+
+#### Mon 24-Aug-2026
+
+Heart Island
+
+Scarlet engine control to bad enough that high speed wasn't possible.
+
+
+##### Miscellaneous
+
+* uploaded missing 2022 `riverTurbDaily2*` files that Tall reported
+
+
+
+#### Tue 25-Aug-2026
+
+Heart Island
+
+Took Hai Yun to Shearwater, towing Scarlet to drop off for service.
+Met up with Kristin & Kirk in Shearwater.
+James left on the exceptionally busy water taxi to start his journey back to Montréal.
+Sailed nearby Shearwater with Kristin.
+Thunderstorm in the evening, the 3rd I have experienced on the coast this season - very unusual.
+
+
+#### Wed 26-Aug-2026
+
+Heart Island
+
+##### `arbutus` Migration
+
+* finished shutdown of old `arbutus`
+  * shutdown NFS server
+  * unmounted `nemoShare`
+  * deleted `nowcast1` and `nowcast0`
+  * deleted `nemoShare` volume
+  * sent email to `cloud@tech`
+
+
+#### Thu 27-Aug-2026
+
+Heart Island
+
+
+#### Fri 26-Aug-2026
+
+Heart Island
+
+
+#### Sat 26-Aug-2026
+
+Heart Island to Codville Lagoon
+Hiked Codville Lagoon trail to Sager Lake and back
+
+
+#### Sun 30-Aug-2026
+
+Codville Lagoon to Vancouver
+
+
+
 
 
 
