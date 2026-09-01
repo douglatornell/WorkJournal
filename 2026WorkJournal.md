@@ -10267,7 +10267,6 @@ Worked at ESB
   # removed empty directories created above with:
   fd -te -td -x rm -d
   # created NEMO boundary condition files (in tmux session on `skookum`) with loops like:
-
   yyyy=2017; for mm in {01..12}; do \
     for dd in {01..31}; do \
       pixi run worker make_live_ocean_files -- --run-date ${yyyy}-${mm}-${dd} --debug; \
@@ -10472,6 +10471,27 @@ Hiked Codville Lagoon trail to Sager Lake and back
 #### Sun 30-Aug-2026
 
 Codville Lagoon to Vancouver
+
+
+
+### Week 37
+
+#### Mon 31-Aug-2026
+
+##### NEMO-4.2
+
+* processed 2021 files into NEMO boundary conditions files
+* uploaded `/results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/` 2021 files to `nibi` and `rorqual`
+* restored `nowcast.yaml` for tomorrow's production
+
+
+##### SalishSeaCast
+
+* investigated yesterday's `wwatch3/nowcast` failure:
+  * `watch_ww3` failed at 09:07:55 but run finished successfully at 09:08:33
+  * no download or forecast run due to broken automation chain
+  * `download_wwatch3_results nowcast 2026-08-30 --debug` to capture results
+
 
 
 
