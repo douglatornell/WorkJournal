@@ -10494,7 +10494,54 @@ Codville Lagoon to Vancouver
 
 
 
+## September
 
+<!-- markdownlint-disable MD001 -->
+#### Tue 1-Sep-2026
+<!-- markdownlint-enable MD001 -->
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* `upload_forcing nowcast+ arbutus` failed due to routing issues on `arbutus`
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+  * moving to Thu 11:00-12:30 next week
+* `khawla` failed to report after system packages update:
+  * error message during update:
+    <!-- markdownlint-disable MD031 -->
+    ```text
+    Failed to update System Packages (__SYSTEM__) from System (packagekit):
+    Error while installing package: installed linux-image-7.1.5-76070105-generic package post-installation
+    script subprocess returned error exit status 171 (code 58)
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+##### NEMO-4.2
+
+* transferred 2022 day-averaged files from `ubc_share` collection to `/results/forcing/`
+* processed 2022 files into NEMO boundary conditions files
+* uploaded `/results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/` 2022 files to `nibi` and `rorqual`
+* restored `nowcast.yaml` for tomorrow's production
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PR to update `webob` to 1.8.11 re: open redirect vulnerability
+  * salishsea-site
+* Squash-merged dependabot PRs to update `setup-pixi` to 0.10.2 re: added `linux-riscv64` support
+  * moad_tools
+  * gha-workflows
+  * AtlantisCmd
+
+
+
+Failed to update System Packages from System
 
 
 
