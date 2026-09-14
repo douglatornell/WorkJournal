@@ -10511,7 +10511,7 @@ Worked at ESB
 
 * MOAD group mtg; see whiteboard
   * moving to Thu 11:00-12:30 next week
-* `khawla` failed to report after system packages update:
+* `khawla` failed to reboot after system packages update:
   * error message during update:
     <!-- markdownlint-disable MD031 -->
     ```text
@@ -10567,7 +10567,6 @@ Worked at ESB
 * transferred 2023 day-averaged files from `ubc_share` collection to `/results/forcing/`
 * processed 2023 files into NEMO boundary conditions files
 * restored `nowcast.yaml` for tomorrow's production
-
 * uploaded `/results/forcing/LiveOcean/cas7_t1_x11ab/boundary_conditions/` 2023 files to `nibi` and `rorqual`
 
 
@@ -10677,12 +10676,6 @@ Worked at ESB
 * confirmed that 26aug24 boundary conditions files from Kate and from production differ in size by 6 bytes
   * passed links to Susan for evaluation
 
-* copy production 01jan24 and 27aug25 to 04sep26 to `cas7_t1_x11ab/boundary_conditions/`
-  * update READMEs
-  * rsync to `nibi` and `rorqual`
-  * set up and rsync to `arbutus`
-  * change `SalishSeaNowcast` to use `cas7_t1_x11ab/`
-
 
 ##### Miscellaneous
 
@@ -10693,6 +10686,9 @@ Worked at ESB
   * lots of requests for atmos forcing dataset that were taking >10s
     * email top Peter asking if those were his
 * updated PyCharm to 2026.2.1 on `khawla`
+* email from Alex at System76:
+  * `/boot/efi/  partition needs to be increased in size from 512M to 1G
+    * recommended way to do that is a clean install from a PoPOS Live Disk
 
 
 ##### Dependency Updates
@@ -10761,31 +10757,294 @@ Worked at ESB
 * continued changing deps config from installs from GitHub to local, relative path, editable installs; PR#
   * moved `NEMO_Nowcast` from `MOAD/` to `SalishSeaCast/`
     * added `/media/doug/warehouse/SalishSeaCast/NEMO_Nowcast/.pixi/envs/dev` to `~/home/doug~/.conda/environments.txt`
-    <!-- markdownlint-disable MD031 -->
-    ```bash
-    pixi remove --pypi nemo-cmd
-    pixi add --pypi --editable 'NEMO_Nowcast @ ../NEMO_Nowcast/'
-    pixi add -f dev --pypi --editable 'NEMO_Nowcast @ ../NEMO_Nowcast/'
-    pixi add -f fig-dev --pypi --editable 'NEMO_Nowcast @ ../NEMO_Nowcast/'
-    pixi install -e dev
-    ```
-    <!-- markdownlint-enable MD031 -->
 
 
 ##### NEMO_Nowcast
 
 * added `peter-evans/create-pull-request@*` to 43ravens org Actions > General permissions settings
 * added `update-pixi-lockfile` action; PR#111 - squash-merged
-
 * started improving GitHub Actions workflows based on `zizmor` static analysis; PR#112
-
-* dropped `requirements.txt` and its update task to stop the noise from dependabot; PR#172 - squash-merged
 
 
 ##### Dependency Updates
 
 * Squash-merged `update-pixi-lockfile` PR:
   * SalishSeaCmd
+
+
+
+### Week 38
+
+#### Mon 7-Sep-2026
+
+**Statutory Holiday** - Labour Day
+
+##### NEMO_Nowcast
+
+* finished improving GitHub Actions workflows based on `zizmor` static analysis; PR#112 - squash-merged
+* dropped `requirements.txt` and its update task to stop the noise from dependabot; PR#113 - squash-merged
+
+
+##### SalishSeaNowcast
+
+* continued changing deps config from installs from GitHub to local, relative path, editable installs; PR#505
+  * `NEMO_Nowcast`:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    pixi remove --pypi nemo-nowcast
+    pixi add --pypi --editable 'NEMO_Nowcast @ ../NEMO_Nowcast/'
+    pixi add -f dev --pypi --editable 'NEMO_Nowcast @ ../NEMO_Nowcast/'
+    pixi add -f fig-dev --pypi --editable 'NEMO_Nowcast @ ../NEMO_Nowcast/'
+    pixi install -e dev
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * moved `SalishSeaCmd` from `MEOPAR/` to `SalishSeaCast/`
+    * added `/media/doug/warehouse/SalishSeaCast/SalishSeaCmd/.pixi/envs/dev` to `~/home/doug~/.conda/environments.txt`
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    pixi remove --pypi salishseacmd
+    pixi add --pypi --editable 'SalishSeaCmd @ ../SalishSeaCmd/'
+    pixi add -f dev --pypi --editable 'SalishSeaCmd @ ../SalishSeaCmd/'
+    pixi add -f fig-dev --pypi --editable 'SalishSeaCmd @ ../SalishSeaCmd/'
+    pixi install -e dev
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * moved `Reshapr` from `MEOPAR/` to `SalishSeaCast/`
+    * added `/media/doug/warehouse/SalishSeaCast/Reshapr/.pixi/envs/dev` to `~/home/doug~/.conda/environments.txt`
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    pixi remove --pypi reshapr
+    pixi add --pypi --editable 'Reshapr @ ../Reshapr/'
+    pixi add -f dev --pypi --editable 'Reshapr @ ../Reshapr/'
+    pixi add -f fig-dev --pypi --editable 'Reshapr @ ../Reshapr/'
+    pixi install -e dev
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * moved `tools` from `MEOPAR/` to `SalishSeaCast/`
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    pixi remove -f dev --pypi salishseatools
+    pixi add --pypi --editable 'SalishSeaTools @ ../tools/SalishSeaTools/'
+    pixi add -f dev --pypi --editable 'SalishSeaTools @ ../tools/SalishSeaTools/'
+    pixi add -f fig-dev --pypi --editable 'SalishSeaTools @ ../tools/SalishSeaTools/'
+    pixi install -e dev
+    ```
+    <!-- markdownlint-enable MD031 -->
+* GHA pytest, linkcheck actions and rtd build failing because the lack dependency repo clones
+  * can't figure out how to get those envs to use installs from GitHub
+
+
+##### Reshapr
+
+* improved GitHub Actions workflows based on `zizmor` static analysis; PR#219 - squash-merged
+* dropped `requirements.txt` and its update task to stop the noise from dependabot; PR#220 - squash-merged
+
+
+##### SalishSeaCmd
+
+* dropped `requirements.txt` and its update task to stop the noise from dependabot; PR#166 - squash-merged
+
+
+##### Miscellaneous
+
+* installed cable channels on my desk
+
+
+
+#### Tue 8-Sep-2026
+
+##### Miscellaneous
+
+* first day of new weekly schedule:
+  * Susan racing w/ Galaxy on Tue morning
+  * SPARC on Tue afternoon
+  * work at ESB for MOAD mtg & Phys Ocgy seminar on Thu
+  * Rita every 2nd Thu
+* installed `borgbackup` on `khawla` despite kernel install issues due to full `/boot/efi/`
+  * got successful backups on `lizzy` and `smelt`, but they are called `pop-os-2026-09-08*` instead
+    of `khawla-2026-09-08*`
+* helped Tall sort out warnings and errors from `pixi run` on `nibi`
+  * root cause was a CVMFS file system mount issue on the login nodes
+
+
+##### SalishSeaCast
+
+* LiveOcean was delayed by HPC cluster maintenance:
+  * email from Kate warned me
+  * `download_live_ocean` timed out at 12:11
+  * `upload_forcing` had created symlink at 03:49
+  * restarted automation at 12:53 with:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    upload_forcing arbutus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing robot.nibi nowcast+
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+
+#### Wed 9-Sep-2026
+
+##### Miscellaneous
+
+* ComputeOntario colloquium:
+  * Update on the scheduling environment of the national general purpose clusters
+  * James Desjardins
+    * interface between researchers and staff re: scheduling
+    * public interface for Kamil Marcinkowski
+  * RAC and dynamic default
+  * portal is ground truth; usage relative to target
+    * `portal.alliancecan.ca/slurm`
+  * staff adapt cluster configs, users adapt job processes and submission params
+  * hpc-scheduler game:
+    * `hpc-cluster-scheduler.lovable.app`
+    * simulators
+  * RAC: what is a compute award?
+    * sleeping RAC - non-active RAC allocation is added to RAS share
+      * dynamic default
+      * probably explains why our def is often as good or better than our rrg
+  * view job efficiency at `portal.nibi.sharcnet.ca`
+  * GLOST and META
+    * META manages scheduling inside an allocated job
+    * GLOST relies more on SLURM
+  * wiki:
+    * allocations_and_compute_scheduling page
+  * CLI tools:
+    * `partition-stats`
+    * `scontrol show nodes -o`
+  * Python package:
+    * `ViewClust`
+
+
+##### SalishSeaCast
+
+* `upload_forcing robot.nibi` failed for forecast2, nowcast+ and turbidity
+  * success on manual re-runs at ~11:35
+* tried to backfill LiveOcean extraction for yesterday
+  * `download_live_ocean` failed due to no sentinel file, so did an attempt to `curl` the `low_passed_UBC.nc` file
+
+
+##### SalishSeaNowcast
+
+* continued changing deps config from installs from GitHub to local, relative path, editable installs; PR#505
+  * lots of messing around with env deps to try to get docs build, and pytest-with-coverage & sphinx-linkcheck
+    workflows to work
+
+
+
+#### Thu 10-Sep-2026
+
+North side of house roof repair
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* MOAD-IOS modeling meeting:
+  * NEMO model of Quatsino Sound; Andy Lin, IOS
+* email to Ryan re: Resilient-C and his new Beacons+ project
+
+
+
+#### Fri 11-Sep-2026
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `httpcore2` to 2.10.0 re: Secure WebSocket traffic sent
+  without TLS vulnerability
+  * AtlantisCmd
+  * SOG-Bloomcast-Ensemble
+* Squash-merged dependabot PRs to update `httpx2` to 2.12.0 re: multiple security vulnerabilities
+  * AtlantisCmd
+  * SOG-Bloomcast-Ensemble
+* Squash-merged dependabot PRs to update `GitPython` to 3.1.59 re: multiple security vulnerabilities
+  * AtlantisCmd
+
+
+##### SalishSeaNowcast
+
+* decided to abandon changing deps config from installs from GitHub to local, relative path, editable installs;
+  PR#505 - closed without merging
+
+
+##### NEMO-4.2
+
+* confirmed that `/results/forcing/LiveOcean/cas7_t1_x11ab/downloaded/20240826/low_passed_UBC.nc` has
+  an `ocean_time` value of `2024-08-26T12:00:00` where as
+  `/results/forcing/LiveOcean/downloaded/20240826/low_passed_UBC.nc` has an `ocean_time` value of
+  `2024-08-27T12:00:00`
+  * sent email to Kate asking her about forecast vs. nowcast date in low-pass filtered files
+
+
+##### AtlantisCmd
+
+* improved GitHub Actions workflows based on `zizmor` static analysis; PR#146 - squash-merged
+* added `peter-evans/create-pull-request@*` to SS-Atlantis org Actions > General permissions settings
+* added `update-pixi-lockfile` action; PR#147 - squash-merged
+* dropped `requirements.txt` and its update task to stop the noise from dependabot; PR#148 - squash-merged
+
+
+##### Miscellaneous
+
+* started prep for PoP OS clean install on `khawla`
+  * downloaded `pop-os_24.04_amd64_nvidia_27.iso`
+  * confirmed its sha256 hash
+
+
+##### SalishSeaCast/docs
+
+* improved GitHub Actions workflows based on `zizmor` static analysis; PR#98 - squash-merged
+* added `update-pixi-lockfile` action; PR#99 - squash-merged
+* dropped `requirements.txt` and its update task to stop the noise from dependabot; PR#100 - squash-merged
+
+
+
+#### Sat 12-Sep-2026
+
+
+##### Miscellaneous
+
+* started prep for PoP OS clean installs on `greta` & `lizzy`
+  * downloaded `pop-os_24.04_amd64_generic_27.iso`
+  * confirmed its sha256 hash
+  * created live disk USB key on Transcend 16G
+* did clean install of `pop-os_24.04_amd64_generic_27` on `greta`
+  * forgot to preserve `borg-backup` passphrase
+  * installed `borgbackup` OS package
+  * installed `openjdk-21-jre-headless` OS package
+  * downloaded and installed `MultiMC`
+  * downloaded and installed `1password`
+
+
+##### AtlantisCmd
+
+* `update-pixi-lockfile` action failed due to repo workflow permissions not being set to allow PR creation
+  * deleted branch that action created and re-ran action
+
+
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PRs:
+  * AtlantisCmd
+  * NEMO-Cmd
+
+
+##### MOAD/docs
+
+* improved GitHub Actions workflows based on `zizmor` static analysis; PR#88 - squash-merged
+* added `update-pixi-lockfile` action; PR#89 - squash-merged
+* dropped `requirements.txt` and its update task to stop the noise from dependabot; PR#90 - squash-merged
+
+
+
+#### Sun 13-Sep-2026
+
+##### MOAD/docs
+
+* started improving GitHub Actions workflows based on `zizmor` static analysis; PR#159
+
+
+
 
 
 
@@ -10827,6 +11086,18 @@ TODO:
   that arise from `make_live_ocean_files` in present `SalishSeaNowcast` environment
   * I can't understand the code
   * need to document versions: Python, gsw, numpy
+
+
+
+
+##### NEMO-4.2
+
+* TODO:
+  * copy production 01jan24 and 27aug25 to 04sep26 to `cas7_t1_x11ab/boundary_conditions/`
+  * update READMEs
+  * rsync to `nibi` and `rorqual`
+  * set up and rsync to `arbutus`
+  * change `SalishSeaNowcast` to use `cas7_t1_x11ab/`
 
 
 
@@ -10889,18 +11160,18 @@ TODO:
     * SalishSeaNowcast - done 19jun26 in PR#473
     * NEMO-Cmd - done 27jun26 in PR#161
     * SalishSeaCmd - done 28jun26 in PR#154
+    * NEMO_Nowcast - done 6sep26 in PR#112
+    * Reshapr - done 7sep26 in PR#219
+    * AtlantisCmd - done 11sep26 in PR#146
+    * SalishSeaCast/docs - done 11sep26 in PR#98
+    * MOAD/docs - done 12sep26 in PR#88
 
-    * NEMO_Nowcast - started 6sep26 in PR#112
+    * moad_tools
 
-    * AtlantisCmd
+    * SOG-Bloomcast-Ensemble
     * SalishSeaTools
-    * SalishSeaCast/docs
     * salishsea-site
     * erddap-datasets
-    * SOG-Bloomcast-Ensemble
-    * MOAD/docs
-    * moad_tools
-    * Reshapr
     * MoaceanParcels
     * cookiecutter-analysis-repo
     * SOG-code-collab
