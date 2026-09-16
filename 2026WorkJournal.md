@@ -11045,6 +11045,98 @@ North side of house roof repair
 
 
 
+### Week 38
+
+#### Mon 14-Sep-2026
+
+##### SalishSeaCast
+
+* `crop_gribs 12` stalled until 10:27 waiting for 1 unprocessed file
+* `collect_river_data` failed for 3 of 4 USGS rivers: Skagit, Snohomish, Greenwater
+
+
+##### Miscellaneous
+
+* Ocean & Climate Modeling Seminar:
+  * Sawyer Brand, Los Alamos -> UofA, Potential Drivers of Ocean Heat Transport into the Arctic on
+    Sub-annual Time Scales
+    * Fram Strait
+    * Self Organizing Maps (SOM) methodology
+      * finds climatology patterns, some similarity to PCA
+  * Nadiya Shore, The ClimatEx research group: machine learning downscaling and prediction for the
+    atmosphere and ocean
+    * Adam Monahan group at UVic
+    * Generative Adversarial Network (GAN) model for downscaling and storm surge prediction
+
+
+##### MOAD/docs
+
+* finished improving GitHub Actions workflows based on `zizmor` static analysis; PR#159 - squash-merged
+
+
+##### SalishSeaNowcast
+
+* Removed version control recording in `run_NEMO.py` and its test cases for SalishSeaCast, UBC-MOAD
+  and 43ravens repositories that are installed by Pixi from GitHub. Git status information for is
+  not available for `pixi add --pypi --git ...` installations; PR#506 - squash-merged
+
+
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PR:
+  * Reshapr
+
+
+##### SOG-Bloomcast-Ensemble
+
+* improved GitHub Actions workflows based on `zizmor` static analysis; PR#146 - squash-merged
+* added `update-pixi-lockfile` action; PR#147 - squash-merged
+* dropped `requirements.txt` and its update task to stop the noise from dependabot; PR#148 -
+
+
+##### cookiecutter-analysis-repo
+
+* improved GitHub Actions workflows based on `zizmor` static analysis; PR#50 - squash-merged
+
+
+##### SOG-code-collab
+
+* improved GitHub Actions workflows based on `zizmor` static analysis; PR#1 - squash-merged
+
+
+##### erddap-datasets
+
+* improved GitHub Actions workflows based on `zizmor` static analysis; PR#105 - squash-merged
+
+
+
+#### Tue 15-Sep-2026
+
+
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PRs:
+  * NEMO_Nowcast
+
+
+##### MoaceanParcels
+
+* improved GitHub Actions workflows based on `zizmor` static analysis; PR#119 - squash-merged
+
+
+##### SalishSeaTools
+
+* improved GitHub Actions workflows based on `zizmor` static analysis; PR#217 - squash-merged
+
+
+##### salishsea-site
+
+* improved GitHub Actions workflows based on `zizmor` static analysis; PR#177 - squash-merged
+  * `deployment` action failed when PR was merged
+
+
+
+
 
 
 
