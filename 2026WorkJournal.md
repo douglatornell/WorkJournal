@@ -11257,16 +11257,14 @@ TODO:
     * AtlantisCmd - done 11sep26 in PR#146
     * SalishSeaCast/docs - done 11sep26 in PR#98
     * MOAD/docs - done 12sep26 in PR#88
-
-    * moad_tools
-
-    * SOG-Bloomcast-Ensemble
-    * SalishSeaTools
-    * salishsea-site
-    * erddap-datasets
-    * MoaceanParcels
-    * cookiecutter-analysis-repo
-    * SOG-code-collab
+    * moad_tools - done 14sep26 in PR#159
+    * SOG-Bloomcast-Ensemble - done 14sep26 in PR#146
+    * cookiecutter-analysis-repo - done 14sep26 in PR#50
+    * SOG-code-collab - done 14sep26 in PR#1
+    * erddap-datasets - done 14sep26 in PR#105
+    * MoaceanParcels - done 15sep26 in PR#119
+    * SalishSeaTools - done 15sep26 in PR#217
+    * salishsea-site - done 15sep26 in PR#177
 
 
 
