@@ -11185,6 +11185,38 @@ SportsCardiologyBC CPET
 * `crop_gribs 12` stalled with 1 unprocessed file
 
 
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* started looking at updated compute server quote from Hypertec and new quotes from System76
+  * Hypertec only reduced the price by ~C$3600 for changing from 2x24 to 2x16 cores and removing 2x8T SSDs
+    * SSDs alone are valued at C$4-6k each
+    * asked Henryk to Confirmed
+  * System76 provided 2 quotes:
+    * Eland Pro server:
+      * 32 cores
+      * 384G RAM
+      * 2x500GT PCIe M.2 SSD OS drive
+      * 2x8T PCIe M.2 SSD cache/tmp drives
+      * ~US$78,000
+    * Thelio Mega tower
+      * 32 cores
+      * 512G RAM
+      * 1T PCIe M.2 SSD OS drive
+      * 2x8T PCIe M.2 SSD cache/tmp drives
+      * 4G NVIDIA A400 GPU
+      * ~US$48,000
+
+
+##### erddap
+
+* email from Peter reporting that things did not change for him after yesterday's restart
+  * realized that the increased `ipAddressMaxRequests` from 15 to 25 in `erddap-datasets/datasets.xml`
+    change that I made was in `prefix.xml`, not `datasets.xml`
+    * made the change effective and emailed Peter again
+  * also prepared the possibility of allowing unlimited requests from `fir`
+
+
 
 
 
