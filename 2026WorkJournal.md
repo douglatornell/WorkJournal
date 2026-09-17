@@ -1294,7 +1294,7 @@ SportsCardiologyBC appt w/ Dr. Moulson
     ```bash
     sudo su - tomcat
     /opt/apache-tomcat-10.1.40/bin/shutdown.sh
-    # wait for dow report from UptimeRobot
+    # wait for down report from UptimeRobot
     /opt/apache-tomcat-10.1.40/bin/startup.sh
     ```
     <!-- markdownlint-enable MD031 -->
@@ -10474,7 +10474,7 @@ Codville Lagoon to Vancouver
 
 
 
-### Week 37
+### Week 36
 
 #### Mon 31-Aug-2026
 
@@ -10773,7 +10773,7 @@ Worked at ESB
 
 
 
-### Week 38
+### Week 37
 
 #### Mon 7-Sep-2026
 
@@ -11112,7 +11112,6 @@ North side of house roof repair
 
 #### Tue 15-Sep-2026
 
-
 ##### Dependency Updates
 
 * Squash-merged `update-pixi-lockfile` PRs:
@@ -11135,6 +11134,55 @@ North side of house roof repair
   * `deployment` action failed when PR was merged
 
 
+
+#### Wed 16-Sep-2026
+
+SportsCardiologyBC CPET
+
+##### SalishSeaCast
+
+* `upload_forcing robot.nibi` failed for `forecast2`, `nowcast+`, and `turbidity`
+
+
+##### salishsea-site
+
+* investigated `deployment` action failure after PR#177 merge:
+  * messed around with syntax for passing secrets and deployment script path to `ssh-action` until
+    I got something that worked and was acceptable to `zizmor`
+
+
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PRs:
+  * gha-workflows
+* Squash-merged dependabot PRs to update `setuptools` to 83.0.0 re: `MANIFEST.in` exclusion bypass vulnerability
+  * SOG-forcing
+* Squash-merged dependabot PRs to update `pip` to 26.2.0 re: multiple vulnerabilities
+  * SOG-forcing
+  * SOG-Bloomcast
+
+
+##### erddap
+
+* email from Peter reporting that he is still seeing the "Too many requests" messages
+  * increased `ipAddressMaxRequests` from 15 to 25 in `erddap-datasets/datasets.xml`
+  * restarted `tomcat`:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    sudo su - tomcat
+    /opt/apache-tomcat-10.1.40/bin/shutdown.sh
+    # wait for down report from UptimeRobot
+    /opt/apache-tomcat-10.1.40/bin/startup.sh
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+
+#### Thu 17-Sep-2026
+
+##### SalishSeaCast
+
+* `crop_gribs 12` stalled with 1 unprocessed file
 
 
 
@@ -11229,42 +11277,6 @@ TODO:
   export SENTRY_DSN=a_valid_sentry_dsn_url
   ```
   <!-- markdownlint-enable MD031 -->
-
-
-
-
-
-
-##### `zizmor` TODO
-
-* improve workflows:
-  * locked down permissions in all workflows to prevent leakage of default permissions
-  * added pragma comments to tell `zizmor` to ignore unpinned uses of our own reusable workflows
-  * added explanatory comments to permissions items
-  * added pragma comments to tell `zizmor` to ignore major version pins instead of hash pins on
-    uses of GitHub actions as a reasonable trade-off between security and convenience
-  * added `persist-credentials: false` to `actions/checkout` uses to potential exposure of secrets
-    in forked PRs
-  * mitigated potential code injection via template expansion vulnerability
-  * added names to anonymous workflow jobs to improve readability in GHA UI
-  * progress:
-    * gha-workflows - done 18jun26 in PR#105
-    * SalishSeaNowcast - done 19jun26 in PR#473
-    * NEMO-Cmd - done 27jun26 in PR#161
-    * SalishSeaCmd - done 28jun26 in PR#154
-    * NEMO_Nowcast - done 6sep26 in PR#112
-    * Reshapr - done 7sep26 in PR#219
-    * AtlantisCmd - done 11sep26 in PR#146
-    * SalishSeaCast/docs - done 11sep26 in PR#98
-    * MOAD/docs - done 12sep26 in PR#88
-    * moad_tools - done 14sep26 in PR#159
-    * SOG-Bloomcast-Ensemble - done 14sep26 in PR#146
-    * cookiecutter-analysis-repo - done 14sep26 in PR#50
-    * SOG-code-collab - done 14sep26 in PR#1
-    * erddap-datasets - done 14sep26 in PR#105
-    * MoaceanParcels - done 15sep26 in PR#119
-    * SalishSeaTools - done 15sep26 in PR#217
-    * salishsea-site - done 15sep26 in PR#177
 
 
 
