@@ -11218,6 +11218,206 @@ SportsCardiologyBC CPET
 
 
 
+#### Fri 18-Sep-2026
+
+Vancouver to Montréal
+
+
+
+#### Sat 19-Sep-2026
+
+Montréal
+
+* Cycling in Montréal with James; ~70 km
+  * Alt to Boulangerie les Co'pains d'abord (near Saint-Denis & Rachael),
+    navigating along and across the time trail courses
+  * Boulangerie les Co'pains d'abord to Lachine Canal, along the canal to its west end at
+    Rene Levesque Park, then back along the St. Lawrence
+  * early dinner at Le Boucan Smokehouse on Notre-Dame
+    * ribs, brussels sprouts and potato salad
+  * Le Boucan to James' place (via McGill campus) and back to the Alt
+
+
+
+#### Sun 20-Sep-2026
+
+Montréal
+
+* watched elite women's and men's time trials at Rue de la Commune & Rue Mcgill
+* dinner at Cafe Viet Epicerie:
+  * barbecue pork bahn mi and wonton soup for me
+  * tuna rice bowl for Susan
+
+
+
+### Week 39
+
+#### Mon 21-Sep-2026
+
+Montréal
+
+* watched U23 women's time trial at Rue de la Commune & Rue Mcgill
+* watched U23 men's time trial at Parc Jeanne-Mance
+* dinner at Rotisserie La Lune:
+  * Quebecois take on caprese salad
+    * heritage tomatoes, cheese curds, tomato water dressing
+  * half rotisserie chicken, fries & cold slaw
+  * corn and salted caramel sundae
+  * very cool balance of simple food at the core of the menu with creative sides and desserts
+  * excellent service
+  * hard to decide if this or Monarque was the best meal
+
+
+
+#### Tue 22-Sep-2026
+
+Montréal
+
+* watched mixed TTT relay & junior men's time trial at Rue de la Commune & Rue Mcgill
+* watched junior women's time trial at Rue de la Commune & Place Royale
+* dinner at Joe Beef:
+  * escargot
+  * lobster spaghetti
+  * rabbit, pork & carrot sausages; best of the dishes
+  * fruit Paris-Brest
+
+
+##### SalishSeaCast
+
+* `collect_river_data` failed for all USGS rivers
+
+
+
+#### Wed 23-Sep-2026
+
+Montréal
+
+* no racing; transition day between time trails and road races
+* cycled most of the river/islands part of the TT loop, no circuit of the F1 courses
+* dinner at SHAY:
+  * lebanese tapas
+  * very friendly waitress
+
+
+##### SalishSeaCast
+
+* `collect_river_data` failed for some USGS rivers
+
+
+
+#### Thu 24-Sep-2026
+
+Montréal
+
+* watched women's U23 and men's junior road race from grandstand
+* dinner at l'Express:
+  * gravlax salad
+  * quiche and salad for Susan
+  * corn & chorizo risotto for me
+  * raspberry sorbet and truffle for Susan, apple and peach cobbler for me
+  * very well executed French brasserie meal but nothing particularly outstanding
+
+
+##### SalishSeaCast
+
+* `collect_river_data` failed for Fraser River
+
+
+
+#### Fri 25-Sep-2026
+
+Montréal
+
+* watched men's U23 and women's junior road race from grandstand
+* dinner at Roman Pie Pizza:
+  * tasty, innovative pizza squares
+* dessert at Patisserie Ol' Sweet:
+  * Hungarian pastry rolled into a cone
+    * peanut butter and banana for me
+    * pistachio and strawberries for Susan
+
+
+##### SalishSeaCast
+
+* `collect_river_data` failed for Fraser River
+
+
+
+#### Sat 26-Sep-2026
+
+Montréal
+
+* women's elite road race
+* dinner at Monarque
+  * mushrooms
+  * salad nicoise for Susan, rabbit schnitzel with salad for me
+  * panna cota with blueberries
+  * espresso martini shots from the couple beside us
+  * excellent waiter, perhaps the best meal we had (toss up with La Lune), definitely return
+
+
+##### SalishSeaCast
+
+* `collect_river_data` failed for Fraser River
+* automation failed at end of NEMO forecast run
+  * manager didn't acknowledge run completed message from `watch_NEMO forecast`
+  * restarted log_aggregator
+  * restarted message_broker
+  * killed `watch_NEMO forecast` and expected messages appeared in log
+  * ran `download_results forecast` manually to restart post-processing
+  * ran `upload_forcing turbidity` manually to restart NEMO automation
+  * ran `make_ww3_wind_file forecast` manually
+  * ran `make_ww3_current_file forecast` manually to start wwatch3 runs
+
+
+
+#### Sun 27-Sep-2026
+
+Montréal
+
+* men's elite road race
+* early dinner at Mano Conruto
+  * caesar salad
+  * spaghetti w/ pesto for Susan, campanella with bolognese for me
+  * tiramisu for Susan, pistachio cream cake for me
+
+
+##### SalishSeaCast
+
+* `collect_river_data` failed for Fraser River
+
+
+
+### Week 40
+
+#### Mon 28-Sep-2026
+
+Montréal to Vancouver
+
+
+##### SalishSeaCast
+
+* `collect_river_data` failed for Fraser River
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `soupsieve` to 2.9.0 re: memory exhaustion & ReDoS vulnerabilities
+  * SalishSeaTools
+  * MoaceanParcels
+* Squash-merged dependabot PRs to update `anyio` to 4.14.2 re: indefinite blocking & TLS spoofing vulnerabilities
+  * SalishSeaTools
+  * salishsea-site
+  * MoaceanParcels
+  * FUN
+* Squash-merged dependabot PRs to update `codecov-action` to 7.1.1 re: maintenance updates
+  * gha-workflows
+  * AtlantisCmd
+* Squash-merged dependabot PRs to update `hpack` to 4.2.0 re: runaway computation vulnerability
+  * MoaceanParcels
+  * salishsea-site
+  * SalishSeaTools
+  * FUN
 
 
 
