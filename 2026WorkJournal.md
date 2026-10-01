@@ -11321,6 +11321,7 @@ Montréal
 ##### SalishSeaCast
 
 * `collect_river_data` failed for Fraser River
+* `make_turbidity_file` failed due to insufficient obs
 
 
 
@@ -11340,6 +11341,7 @@ Montréal
 ##### SalishSeaCast
 
 * `collect_river_data` failed for Fraser River
+* `make_turbidity_file` failed due to insufficient obs
 
 
 
@@ -11359,6 +11361,7 @@ Montréal
 ##### SalishSeaCast
 
 * `collect_river_data` failed for Fraser River
+* `make_turbidity_file` failed due to insufficient obs
 * automation failed at end of NEMO forecast run
   * manager didn't acknowledge run completed message from `watch_NEMO forecast`
   * restarted log_aggregator
@@ -11385,6 +11388,7 @@ Montréal
 ##### SalishSeaCast
 
 * `collect_river_data` failed for Fraser River
+* `make_turbidity_file` failed due to insufficient obs
 
 
 
@@ -11398,6 +11402,7 @@ Montréal to Vancouver
 ##### SalishSeaCast
 
 * `collect_river_data` failed for Fraser River
+* `make_turbidity_file` failed due to insufficient obs
 
 
 ##### Dependency Updates
@@ -11418,6 +11423,133 @@ Montréal to Vancouver
   * salishsea-site
   * SalishSeaTools
   * FUN
+
+
+
+#### Tue 29-Sep-2026
+
+##### SalishSeaCast
+
+* `collect_river_data` failed for Fraser River
+* `make_turbidity_file` failed due to insufficient obs
+* `crop_gribs 12` stalled until ~10:28 waiting for 1 unprocessed file
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `soupsieve` to 2.9.0 re: memory exhaustion & ReDoS vulnerabilities
+  * erddap-datasets
+  * SOG-Bloomcast
+* Squash-merged dependabot PRs to update `anyio` to 4.14.2 re: indefinite blocking & TLS spoofing vulnerabilities
+  * erddap-datasets
+* Squash-merged dependabot PRs to update `hpack` to 4.2.0 re: runaway computation vulnerability
+  * erddap-datasets
+
+
+
+#### Wed 30-Sep-2026
+
+**Statutory Holiday** - Truth & Reconciliation Day
+
+##### SalishSeaCast
+
+* `make_ssh_files forecast2` didn't completed
+  * no forecast2 runs
+* `collect_river_data` failed for Fraser River
+* `collect_river_data` failed for Nisqually River
+* `make_ssh_files nowcast` didn't completed
+  * re-ran it manually in debug mode with no trouble but Pixi did an environment update
+  * `make_runoff_file` wasn't launched
+* `make_live_ocean_files` didn't run
+* `crop_gribs 12` stalled until ~10:26 waiting for 1 unprocessed file
+* re-ran `make_ssh_files nowcast` manually to restart automation when `grib_to_netcdf nowcast+` finished
+  * race condition management was waiting for `make_live_ocean_files`
+* re-ran `make_live_ocean_files` manually to restart automation
+
+
+##### SalishSeaNowcast
+
+* started setup of `arbutus` instances using Ubuntu 26.04 and CephFS shared storage; PR#
+  * created `nowcast0-26.04` head node instance
+  * created `nowcast1-26.04` compute node instance
+  * couldn't create CephFS share due to quota exceeded:
+    * sent email to Philip Chen at Alliance cloud support
+
+
+##### NEMO-4.2
+
+* started looking at files from Michael in `salish:/home/mdunphy/SS500_42/`
+  * learned from `namelist_cfg`:
+    * new option in `namrun` to use XIOS to read restart file
+    * new option in `namrun` to use XIOS to write no, single, or multiple (file per core?) restart files
+    * new option in `nammpp` to list best domain decompositions (with land domains suppression)
+    * new land/sea make filename column in tables like surface forcing, boundary conditions, etc.
+* questions:
+  * what version/sha of XIOS did he use?
+  * are cpp keys still a thing? if so, what did he use?
+
+
+##### MOAD/docs
+
+* updated remote Jupyter docs for Alliance clusters based on notes in Slack DM from Jose; PR#91
+  * fixed some redirected and broken links found by Sphinx linkcheck
+
+
+
+## October
+
+<!-- markdownlint-disable MD001 -->
+#### Thu 1-Oct-2026
+<!-- markdownlint-enable MD001 -->
+
+##### SalishSeaCast
+
+* `collect_river_data` failed for Fraser River
+
+
+##### Miscellaneous
+
+* Cloud RAC Information session:
+  * Eduardo Fuenmayor, host
+  * Jeff Albert, UVic, cloud architect
+  * slides and recording will be available at https://docs.alliancecan.ca/wiki/Resource_Allocation_Competition
+  * flavor changes:
+    * persistent: "p"
+      * over-committed 10:1
+      * redundant hypervisors, high availability
+    * base compute: "cb"
+      * 1:1 core mapping
+      * fast NVMe ephemeral storage on hypervisor
+      * intended to be safely preempted
+      * **24 and 32 core flavors exist**
+    * memory-optimized compute: "cm"
+      * similar to cb with higher memory per core
+    * vGPU flavors exists
+  * lifecycle changes:
+    * remove data within 1 year of project or role expiry
+    * **walltime limits for compute flavor instances**
+      * coming soon
+      * probably on the order of 90 days
+    * shelving of shutdown instances
+      * build instances based on volumes
+    * new access agreement
+    * multi-factor authentication for web dashboard and API (via app credentials)
+  * what technical reviewers are looking forward:
+    * what makes cloud best fit vs HPC
+    * how requested resources enable the proposed outcome
+    * how confident is the resource counts request
+    * how is good utilization of resources ensured
+    * security and expertise:
+      * **VM management and security plan provided**
+        * patch and update cycle
+      * team has expertise
+      * access to regional or institutional ARC support
+    * progress reports for RPPs:
+      * is the platform online and serving users?
+      * are allocated resources being used at or near capacity?
+      * is security plan being carried out?
+      * is the project ongoing after end of allocation?
+
 
 
 
@@ -11734,9 +11866,9 @@ TODO:
   * moad_tools - done 4jun26 in PR#135
   * SalishSeaNowcast - done 25jul26 in PR#477
 
-  * tools/SalishSeaTools
-  * erddap-datasets
   * salishsea-site
+  * erddap-datasets
+  * tools/SalishSeaTools
   * SOG
   * ECget
   * analysis-doug
