@@ -11505,6 +11505,7 @@ Montréal to Vancouver
 ##### SalishSeaCast
 
 * `collect_river_data` failed for Fraser River
+* `crop_gribs 12` stalled until ~10:32 waiting for 1 unprocessed file
 
 
 ##### Miscellaneous
@@ -11549,9 +11550,16 @@ Montréal to Vancouver
       * are allocated resources being used at or near capacity?
       * is security plan being carried out?
       * is the project ongoing after end of allocation?
+* MOAD group mtg; see whiteboard
 
 
 
+
+TODO:
+
+* remove `bottleneck` as a dependency because it can lead to numerical instabilities and is no longer maintained
+  * `xarray=2026.09.0` disables it by default to prefer correctness over performance
+* `xarray=2026.09.0` is the last version to support Python 3.11
 
 
 ##### `arbutus` Migration
