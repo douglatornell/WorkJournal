@@ -11553,6 +11553,74 @@ Montréal to Vancouver
 * MOAD group mtg; see whiteboard
 
 
+##### SalishSeaNowcast
+
+* continued setup of `arbutus` instances using Ubuntu 26.04 and CephFS shared storage; PR#
+  * got email reply from Philip Chen at Alliance cloud support
+    * he reset the quota and asked me to try creating the share again
+  * successfully created 1100G share named `SalishSeaCast`
+
+
+
+#### Fri 2-Oct-2026
+
+##### SalishSeaCast
+
+* Fraser River discharge data stream resumed on 1oct
+* `collect_river_data` failed for Skagit & Greenwater rivers
+
+
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PRs:
+  * SalishSeaNowcast
+
+
+##### SalishSeaNowcast
+
+* continued setup of `arbutus` instances using Ubuntu 26.04 and CephFS shared storage; PR#
+  * created read-write access rule for CephFS share
+  * provisioned and configured 26.04 head node `nowcast0-26.04`
+    * `gcc-15`
+    * `openmpi-5.0.10`
+    * `netcdf-4.9.3`
+  * figured out CephFS configuration for 26.04 head node, including auto-mount
+  * provisioned and configured 26.04 compute node `nowcast1-26.04`, including CephFS with auto-mount
+    * captured compute node snapshot image `compute-26.04-cb16-60gb-560-02oct26`
+  * launched `nowcast2-26.04` from snapshot
+  * created `.ssh/config` and `~/mpi_hosts` on `nowcast0-26.04`
+  * set up temporary proxy jump through `arbutus.cloud` to `nowcast0-26.04`
+  * cloned repos
+  * built XIOS-2
+  * built NEMO configs
+  * installed Pixi
+  * installed SalishSeaNowcast environment
+  * set up `logs/` and `runs/` directories
+  * rsync-ed forcing and results trees from `nowcast0` shared storage volume to `nowcast0-26.04` CephFS storage
+
+
+
+#### Sat 3-Oct-2026
+
+##### SalishSeaCast
+
+* `collect_weather 12 2.5km` was ~1h late
+* `crop_gribs 12` stalled until ~11:27 waiting for 1 unprocessed file
+
+
+
+#### Sun 4-Oct-2026
+
+##### SalishSeaCast
+
+* `crop_gribs 00` failed due to directory creation race condition
+  * re-ran manually at ~19:20
+
+
+
+
+* ask Susan about binder for fire system in utility room
+
 
 
 TODO:
