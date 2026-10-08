@@ -11618,8 +11618,161 @@ Montréal to Vancouver
 
 
 
+### Week 41
 
-* ask Susan about binder for fire system in utility room
+#### Mon 5-Oct-2026
+
+##### SalishSeaCast
+
+* `grib_to_netcdf nowcast+` failed due to missing 00 file
+  * probably because I re-ran `crop_gribs 00` after its failure yesterday too late
+    * confirmed
+  * recovery started at ~09:15:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    crop_gribs 00 --backfill
+    grib_to_netcdf nowcast+
+    upload_forcing arbutus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing robot.nibi nowcast+
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+##### Miscellaneous
+
+* monthly NEMO seminar:
+  * Raisha on Atlantis
+  * Lina Garcia Suarez, Dal
+    * Coastal biogeochemical responses to shifting physical conditions in the northwest North Atlantic Ocean
+* continued email conversation with Marysa about Pixi on fir
+
+
+##### SalishSeaNowcast
+
+* continued setup of `arbutus` instances using Ubuntu 26.04 and CephFS shared storage; PR#
+  * discovered that `nowcast0-26.04` was "evacuated" at 01:12 UTC on 4oct
+    * new instance is pristine ☹️
+    * re-configured it from scratch
+  * test run fails on launch
+
+
+##### MOAD/docs
+
+* finished updating remote Jupyter docs for Alliance clusters based on notes in Slack DM from Jose; PR#91
+  * changed local and `salish` terminal commands to use Pixi
+* dropped `zzz_archival_docs/hg_version_control.rst` due broken links and we no longer use `hg`; PR#93
+* dropped section about migration from `XIOS-1` to `XIOS-2`; PR#94
+
+
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PRs:
+  * MOAD/docs
+  * moad_tools
+
+
+
+#### Tue 6-Oct-2026
+
+##### SalishSeaCast
+
+* `collect_river_data` failed for Skagit River
+* Henryk rebooted `skookum` at 15:40 because it was stuck rebuilding the `/results` RAID
+  * started getting all the things restarted at ~18:10:
+    * started `tomcat` to bring ERDDAP up
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      sudo su - tomcat
+      /opt/apache-tomcat-10.1.40/bin/startup.sh
+      ```
+      <!-- markdownlint-enable MD031 -->
+    * started website
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      mamba activate /SalishSeaCast/salishsea-site-env
+      supervisord --configuration /SalishSeaCast/salishsea-site/supervisord-prod.ini
+      mamba deactivate
+      ```
+      <!-- markdownlint-enable MD031 -->
+    * started automation:
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      cd /SalishSeaCast/SalishSeaNowcast/
+      source .env
+      pixi run supervisord --configuration /SalishSeaCast/SalishSeaNowcast/config/supervisord.ini
+      ```
+      <!-- markdownlint-enable MD031 -->
+    * started workers to move forward:
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      pixi run worker collect_weather -- 00 2.5km &
+      pixi run worker crop_gribs -- 00 --fcst-date 2026-10-07 &
+      ```
+      <!-- markdownlint-enable MD031 -->
+
+
+
+#### Wed 7-Oct-2026
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `urllib3` to 2.8.0 re: infinite loop vulnerability
+  * SalishSeaTools
+  * cookiecutter-MOAD-pypkg
+  * salishsea-site
+  * MoaceanParcels
+  * FUN
+* Squash-merged dependabot PRs to update `virtualenv` to 21.7.11 re: multiple vulnerabilities
+  * SalishSeaTools
+  * cookiecutter-MOAD-pypkg
+  * salishsea-site
+  * MoaceanParcels
+  * FUN
+* Squash-merged `pre-commit` auto-update PRs re: `black` 26.10.0
+  * NEMO_Nowcast
+  * SalishSeaCmd
+  * salishsea-site
+  * NEMO-Cmd
+  * SalishSeaTools
+  * MoaceanParcels
+  * cookiecutter-MOAD-pypkg
+  * SOG-Bloomcast-Ensemble
+  * SalishSeaNowcast
+  * gha-workflows
+  * Reshapr
+  * moad_tools
+  * erddap-datasets
+  * AtlantisCmd
+* Squash-merged dependabot PR to update `mako` to 1.4.2 re: path traversal vulnerability
+  * salishsea-site
+* Squash-merged dependabot PRs to update `tornado` to 6.5.9 re: multiple vulnerabilities
+  * SalishSeaTools
+  * MoaceanParcels
+* Squash-merged dependabot PR to update `fsspec` to 2026.6.0 re: server-side template injection vulnerability
+  * MoaceanParcels
+* Squash-merged dependabot PRs to update `jupyterlab` to 4.5.11 re: multiple vulnerabilities
+  * SalishSeaTools
+  * MoaceanParcels
+
+
+##### Miscellaneous
+
+* started reviewing Alliance RPP application docs:
+  * the minimums we exceed for resources are:
+    * >81 compute vCPU-year; we need 128 for daily runs
+    * >301 GB compute RAM; we need 480 for daily runs
+    * additional resources for concurrent hindcast runs:
+      * 112 vCPU-years
+      * 420 GB RAM
+  * *we could request a lot more storage*; the minimum for volumes, object storage, and shared file system
+    is 11 TB each
+  * our request size is "medium" based on vCPU-years and "small" based on storage
+    * true regardless of whether we include hindcast runs or not
+  * include names and ticket number(s) of staff consulted in application
+  * RPP evaluation is different to RAC:
+    * project justification: 50%
+    * resource management and expertise: 50%
 
 
 
@@ -11779,8 +11932,6 @@ TODO:
 * add `pixi config set --global cache.repodata /tmp/pixi-cache-$USER/repodata` to Pixi setup on
   HPC clusters
 * comments from Becca in Slack DM after her us of the docs to set up on `fir`
-* drop section about migration from `XIOS-1` to `XIOS-2`
-* drop `zzz_archival_docs/hg_version_control.rst` due broken links and we no longer use `hg`
 * add docs section re: `pixi add`, `pixi import -e ... -f ...`, and maybe
   `pixi workspace environment add`
   * add section about `pixi add` for pkgs like `SalishSeaTools` and `moad_tools`
