@@ -11467,7 +11467,7 @@ Montréal to Vancouver
 * re-ran `make_live_ocean_files` manually to restart automation
 
 
-##### SalishSeaNowcast
+##### `arbutus` Migration
 
 * started setup of `arbutus` instances using Ubuntu 26.04 and CephFS shared storage; PR#
   * created `nowcast0-26.04` head node instance
@@ -11553,7 +11553,7 @@ Montréal to Vancouver
 * MOAD group mtg; see whiteboard
 
 
-##### SalishSeaNowcast
+##### `arbutus` Migration
 
 * continued setup of `arbutus` instances using Ubuntu 26.04 and CephFS shared storage; PR#
   * got email reply from Philip Chen at Alliance cloud support
@@ -11576,7 +11576,7 @@ Montréal to Vancouver
   * SalishSeaNowcast
 
 
-##### SalishSeaNowcast
+##### `arbutus` Migration
 
 * continued setup of `arbutus` instances using Ubuntu 26.04 and CephFS shared storage; PR#
   * created read-write access rule for CephFS share
@@ -11776,11 +11776,59 @@ Montréal to Vancouver
 
 
 
+#### Thu 8-Oct-2026
+
+Worked at ESB
+
+Appt. w/ Dr. Moulson; see notes in Slack
+
+##### SalishSeaCast
+
+* `crop_gribs 12` stalled until ~10:24 waiting for 1 unprocessed file
+* discovered that Pixi had somehow disappeared from 24.04 `nowcast0`
+  * re-installed it
+
+
+##### Miscellaneous
+
+* missed Moad group mtg due to Moulson appt
+  * Susan told me about Jose's discovery of `pygmt` library as alternative to `cartopy`
+  * discussed `xarray` and `bottleneck` with Susan
+    * need to understand "window means" and assess effects on means of slices
+* explored the `bottleneck` issue in more detail:
+  * primarily an issue when `Dataset.rolling()` or `Dataset.coursen()` are used
+  * also used in `Dataset.rank()` and `DataArray.rank()`
+  * can be disabled by removal from environment or with `xarray.set_options(use_bottleneck=False)`
+* UBC/DFO modeling collab mtg:
+  * Susan re: Sacchi's obs and phytoplankton growth rate tuning
+* Phys Ocgy seminar:
+  * Anna Wünsche, Kiel University, "Human Impact on Salt Intrusion in the Partially Mixed Ems Estuary"
+
+
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PRs:
+  * SalishSeaCast/docs
+
+
+##### SalishSeaNowcast
+
+* continued setup of `arbutus` instances using Ubuntu 26.04 and CephFS shared storage; PR#
+  * researched run failures:
+    * missing error messages is a bug in the OpenMPI stack:
+      * https://github.com/open-mpi/ompi/issues/10389
+
+
+
+
+
 TODO:
 
 * remove `bottleneck` as a dependency because it can lead to numerical instabilities and is no longer maintained
   * `xarray=2026.09.0` disables it by default to prefer correctness over performance
 * `xarray=2026.09.0` is the last version to support Python 3.11
+
+
 
 
 ##### `arbutus` Migration
