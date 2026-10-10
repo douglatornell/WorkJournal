@@ -11654,7 +11654,9 @@ Montréal to Vancouver
   * discovered that `nowcast0-26.04` was "evacuated" at 01:12 UTC on 4oct
     * new instance is pristine ☹️
     * re-configured it from scratch
-  * test run fails on launch
+  * test run fails on launch with `node-died` error
+    * re-c1x15 decomposition with `land processor elimination` commented out
+  * test run fails on launch with `node-died` error
 
 
 ##### MOAD/docs
@@ -11820,12 +11822,121 @@ Appt. w/ Dr. Moulson; see notes in Slack
 
 
 
+#### Fri 9-Oct-2026
+
+##### Miscellaneous
+
+* Python 3.15 released
+  * not available yet on conda-forge at 09:45
+  * read What's New:
+    * lazy imports
+    * sentinel objects
+    * frozendict
+  * available from conda-forge at 13:00
+* compiled list of places where I need to remove `bottleneck` from envs
+
+
+##### SalishSeaNowcast
+
+* continued setup of `arbutus` instances using Ubuntu 26.04 and CephFS shared storage; PR#
+  * tried absolute path for `mpirun`
+    * run failed on launch with `node-died` error
+  * tried 1x15 decomposition with `land processor elimination` commented out
+    * run failed on launch with `node-died` error
+  * explored options for OpenMPI stack rollback to 4.1.6 or forward to 5.0.11; not easy
+  * discussed with Susan and agreed to stick with 24.04 and volume storage for now
+    * 26.04.1 was published in Aug-2026, after 26.04 image was released on `arbutus`
+    * 26.04.2 is expected in Feb-2027
+
+
+##### NEMO-4.2
+
+* email to Michael about version he is using:
+  * my plan:
+    * NEMO 4.2.3 release from their GitLab
+    * XIOS-2.5.x branch from their (presently down) GitLab
+
+
+
+#### Sat 10-Oct-2026
+
+Civic election advance poll
+
+##### Miscellaneous
+
+* continued prep for PoP OS clean install on `khawla`
+  * downloaded `pop-os_24.04_amd64_nvidia_27.iso`
+  * confirmed its sha256 hash
+  * conda environments:
+    <!-- markdownlint-disable MD031 -->
+    ```text
+    2xrez-2017               /home/doug/conda_envs/2xrez-2017
+    2xrez-202111             /home/doug/conda_envs/2xrez-202111
+    FUN-dev                  /home/doug/conda_envs/FUN-dev
+    SSAM-parse-tracks        /home/doug/conda_envs/SSAM-parse-tracks
+    aims-workshop            /home/doug/conda_envs/aims-workshop
+    bdytools                 /home/doug/conda_envs/bdytools
+    cfgrib-grib_to_netcdf     /home/doug/conda_envs/cfgrib-grib_to_netcdf
+    cookiecutter             /home/doug/conda_envs/cookiecutter
+    dask-expts               /home/doug/conda_envs/dask-expts
+    ecget                    /home/doug/conda_envs/ecget
+    ecget-py313              /home/doug/conda_envs/ecget-py313
+    erddap-datasets-dev      /home/doug/conda_envs/erddap-datasets-dev
+    errdap-xarray            /home/doug/conda_envs/errdap-xarray
+    fortls                   /home/doug/conda_envs/fortls
+    moacean-parcels          /home/doug/conda_envs/moacean-parcels
+    moad-pkgs-envs           /home/doug/conda_envs/moad-pkgs-envs
+    mods-and-funcs           /home/doug/conda_envs/mods-and-funcs
+    nbt2yaml                 /home/doug/conda_envs/nbt2yaml
+    ncdump                   /home/doug/conda_envs/ncdump
+    numeric-gh-pages         /home/doug/conda_envs/numeric-gh-pages
+    numeric_2024             /home/doug/conda_envs/numeric_2024
+    portfolio                /home/doug/conda_envs/portfolio
+    puget-O2                 /home/doug/conda_envs/puget-O2
+    pythonProject            /home/doug/conda_envs/pythonProject
+    rpn-to-gemlam            /home/doug/conda_envs/rpn-to-gemlam
+    salishsea-site           /home/doug/conda_envs/salishsea-site
+    salishsea-tools          /home/doug/conda_envs/salishsea-tools
+    sarracenia-env           /home/doug/conda_envs/sarracenia-env
+    sss150                   /home/doug/conda_envs/sss150
+    virtualizarr-docs        /home/doug/conda_envs/virtualizarr-docs
+    virtualizarr-expts       /home/doug/conda_envs/virtualizarr-expts
+    virtualizarr-tests       /home/doug/conda_envs/virtualizarr-tests
+    vscode-default           /home/doug/conda_envs/vscode-default
+    base                     /home/doug/miniforge-pypy3
+                            /media/doug/warehouse/MEOPAR/analysis-doug/.pixi/envs/arbutus-2026-eval
+                            /media/doug/warehouse/SalishSeaCast/NEMO-Cmd/.pixi/envs/dev
+                            /media/doug/warehouse/SalishSeaCast/NEMO_Nowcast/.pixi/envs/dev
+                            /media/doug/warehouse/SalishSeaCast/Reshapr/.pixi/envs/dev
+                            /media/doug/warehouse/SalishSeaCast/SalishSeaCmd/.pixi/envs/dev
+                            /media/doug/warehouse/SalishSeaCast/moad_tools/.pixi/envs/dev
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * confirmed that borgbackup passphrase is same as disk encryption
+  * rsync-ed `~/Downloads/` to `warehouse/`
+
+
+
 
 
 TODO:
 
 * remove `bottleneck` as a dependency because it can lead to numerical instabilities and is no longer maintained
   * `xarray=2026.09.0` disables it by default to prefer correctness over performance
+  * to fix:
+    * cookiecutter-analysis-repo
+    * SalishSeaNowcast
+    * SalishSeaNowcast/notebooks
+    * tools/analysis_tools
+    * tools/SalishSeaTools
+    * moad_tools
+    * Reshapr
+    * erddap-datasets
+    * analysis-doug
+    * MoaceanParcels
+    * PythonNotes
+    * analysis-shared
+    * rpn-to-gemlam
 * `xarray=2026.09.0` is the last version to support Python 3.11
 
 
