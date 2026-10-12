@@ -12017,6 +12017,76 @@ Civic election advance poll
   * copied ed25519 keys from travel flash drive
   * cloned `dotfiles` repo into `~/`
 
+
+
+### Week 42
+
+#### Mon 12-Oct-2026
+
+**Statutory Holiday** - Thanksgiving Day
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed until ~10:25 due to 1 unprocessed file
+
+
+##### Miscellaneous
+
+* continued restoration of `khawla` after clean install of `pop-os_24.04_amd64_nvidia_27.iso`
+  * enabled 1Password extension integration in Vivaldi by uncommenting `vivaldi-bin` in
+    `/etc/1password/custom_allowed_browsers`
+  * cloned `borg-bkup` repo into `~/`
+  * created `~/.borg-passphrase`
+  * created `~/.ssh/config` with `lizzy` host so that I can mount the backup
+    <!-- markdownlint-disable MD031 -->
+    ```text
+    ln -s ~/dotfiles/pop_os/khawla/.ssh/config ~/.ssh/config
+    ln -s ~/dotfiles/pop_os/khawla/.gitconfig ~/.gitconfig
+    ln -sf ~/dotfiles/pop_os/khawla/.bash_aliases ~/.bash_aliases
+    ln -sf ~/dotfiles/pop_os/khawla/.cookiecutterrc ~/.cookiecutterrc
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * extracted trees from borg backup on lizzy:
+    * note that borg extracts tree to current directory with its full path prefix; e.g.
+      `home/doug/Desktop/`; need to extract then move
+    * `Desktop/`
+    * `Documents/`
+  * re-installed apps and packages:
+    * `gnucash` and `libdbd-sqlite3` via `apt`
+      * need to fine preferences to get UI layout back
+  * set up VSCode:
+    * Default profile extensions:
+      * Remote SSH
+      * Code Spell checker
+        * Canadian English Dictionary
+      * Clipboard
+      * GitLens
+    * Markdown profile extensions:
+      * duplicate Default
+      * Emoji
+      * Markdown All in One
+      * markdownlint
+    * Python profile extensions:
+      * duplicate Default
+      * Python
+      * Pixi Code
+      * Even Better TOML
+    * reStructuredText profile extensions:
+      * duplicate Python
+      * reStructuredText
+      * reStructuredText Syntax highlighting
+      * Extension Pack for reStructuredText
+    * copied default `settings.json` and `keybindings.json` from backup
+      * learned how settings and key bindings are handled in the profiles settings
+
+
+  * TODO:
+    * drop from `~/dotfiles/pop_os/khawla/.profile`
+    * drop from `~/dotfiles/pop_os/khawla/githooks`
+    * drop rustup setup from `~/.bash_aliases`
+    * drop `ln-post-commit` from `~/.bash_aliases`
+    * drop `ttitle()` from `~/.bash_aliases`
+
   * PPAs:
     * https://downloads.1password.com/linux/debian/amd64
     * https://repo.vivaldi.com/stable/deb
