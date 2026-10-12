@@ -8169,7 +8169,6 @@ Worked at ESB
       * Vivaldi via `.deb` package download
       * `multimc` via `.deb` package download
       * `openjdk-21-jre-headless` for Minecraft
-      * `multimc` via `.deb` package download
     * `rescuetime` no longer works on Linux
     * Minecraft performance:
       * solid 100 fps without shaders on Intel graphics
@@ -11865,8 +11864,6 @@ Civic election advance poll
 ##### Miscellaneous
 
 * continued prep for PoP OS clean install on `khawla`
-  * downloaded `pop-os_24.04_amd64_nvidia_27.iso`
-  * confirmed its sha256 hash
   * conda environments:
     <!-- markdownlint-disable MD031 -->
     ```text
@@ -11914,7 +11911,120 @@ Civic election advance poll
     <!-- markdownlint-enable MD031 -->
   * confirmed that borgbackup passphrase is same as disk encryption
   * rsync-ed `~/Downloads/` to `warehouse/`
+  * Vivaldi workspaces:
+    * Mail & calendar
+    * SalishSeaCast
+    * arbutus.cloud
+    * NEMO 4.2
+    * Cycling
+    * SalishSeaTools
+    * ERDDAP
+    * xarray Office hours
+    * 2xrez-202111
+    * Pixi & Marimo
+    * wallabag
+    * Minecraft
+    * New Computers
+    * Retirement
+    * Plotly
+    * France
+    * MOAD Compute upgrade
+    * Resilient-C
+    * Home Fixes
+  * backups to `lizzy` and `smelt`
+  * clean install from ISO on flash drive
+  * update packages:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    sudo apt update
+    sudo apt upgrade
+    # reboot
+    sudo apt update
+    sudo apt autoremove
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * re-installed apps and packages:
+    * `1password` via `.deb` package download
+    * Vivaldi via `.deb` package download
+    * VSCode via `.deb` package download
+    * `borgbackup` via `apt`
+    * `git` via PPA
 
+
+
+#### Sun 11-Oct-2026
+
+##### SalishSeaCast
+
+* `crop_gribs 00` reported that it had timed out after 8 hours with 528 files unprocessed
+  * investigation started at ~09:15:
+    * `collect_weather 00 2.5km` and `crop_gribs 00` were still running
+    * `nowcast.log` would not load in browser
+    * `nowcast.log` file was bloaated to ~1183416936 bytes
+      * `tail` showed error messages from `gribapi`
+  * recovery started at ~09:35:
+    * killed `collect_weather 00 2.5km` and `crop_gribs 00`
+    * `nowcast.log` stopped growing
+    * realized that `fs.inotify` limits had reverted to low default values after last `skookum` reboot:
+    * set new values:
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+        sudo sysctl fs.inotify.max_user_instances=2048
+        sudo sysctl fs.inotify.max_user_watches=196608
+        sudo sysctl -p
+      ```
+      <!-- markdownlint-enable MD031 -->
+    * rotated logs so that website can show log file:
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+        # can't use `pixi run worker ...`
+        pixi run python -m nemo_nowcast.workers.rotate_logs $NOWCAST_YAML
+      ```
+      <!-- markdownlint-enable MD031 -->
+    * discovered only moved 00 file `/results/forcing/atmospheric/continental2.5/GRIB/20261011/00/001/20261011T00Z_MSC_HRDPS_APCP_Sfc_RLatLon0.0225_PT001H.grib2`
+      that is way too large
+      * moved it to `/tmp`
+    * backfilling:
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+        pixi run worker collect_weather -- 00 2.5km --backfill --backfill-date 2026-10-11
+        pixi run worker crop_gribs -- 00 --backfill
+        # in another shell session:
+        pkill -f collect_weather 06
+        pixi run worker collect_weather -- 06 2.5km --backfill --backfill-date 2026-10-11
+        pkill -f collect_weather 12
+          # `crop_gribs 06` did its job, but didn't terminate
+        # kill `crop_gribs 06`
+        pixi run worker grib_to_netcdf -- forecast2
+          # failed due to ~1 uncropped file
+        pixi run worker crop_gribs -- 06 --backfill
+          # success and triggered forecast2 automation
+        # wait for forecast2 runs to finish
+        pixi run worker collect_weather -- 12 2.5km --backfill --backfill-date 2026-10-11
+      ```
+      <!-- markdownlint-enable MD031 -->
+
+
+##### Miscellaneous
+
+* continued restoration of `khawla` after clean install of `pop-os_24.04_amd64_nvidia_27.iso`
+  * re-installed apps and packages:
+    * `sshfs` via `apt`
+    * `openjdk-21-jre-headless` via `apt` for Minecraft
+    * `MultiMC` via `.deb` package download`
+    * Pixi via `curl`
+    * `bat`, `fd-find`, `ripgrep` `zizmor` via `pixi global install`
+  * copied ed25519 keys from travel flash drive
+  * cloned `dotfiles` repo into `~/`
+
+  * PPAs:
+    * https://downloads.1password.com/linux/debian/amd64
+    * https://repo.vivaldi.com/stable/deb
+    * https://packages.microsoft.com/repos/code
+    * https://ppa.launchpadcontent.net/git-core/ppa/ubuntu
+  * improved notification display time by creating files in
+    `.config/cosmic/com.system76.CosmicNotifications/v1/`
+    * ref: https://github.com/pop-os/cosmic-notifications/issues/138
 
 
 
