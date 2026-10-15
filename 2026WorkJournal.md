@@ -11724,12 +11724,17 @@ Montréal to Vancouver
   * salishsea-site
   * MoaceanParcels
   * FUN
+  * erddap-datasets
+  * SOG-Bloomcast
 * Squash-merged dependabot PRs to update `virtualenv` to 21.7.11 re: multiple vulnerabilities
   * SalishSeaTools
   * cookiecutter-MOAD-pypkg
   * salishsea-site
   * MoaceanParcels
   * FUN
+  * erddap-datasets
+  * SOG
+  * SOG-forcing
 * Squash-merged `pre-commit` auto-update PRs re: `black` 26.10.0
   * NEMO_Nowcast
   * SalishSeaCmd
@@ -11750,11 +11755,14 @@ Montréal to Vancouver
 * Squash-merged dependabot PRs to update `tornado` to 6.5.9 re: multiple vulnerabilities
   * SalishSeaTools
   * MoaceanParcels
+  * erddap-datasets
+  * SOG-Bloomcast
 * Squash-merged dependabot PR to update `fsspec` to 2026.6.0 re: server-side template injection vulnerability
   * MoaceanParcels
 * Squash-merged dependabot PRs to update `jupyterlab` to 4.5.11 re: multiple vulnerabilities
   * SalishSeaTools
   * MoaceanParcels
+  * erddap-datasets
 
 
 ##### Miscellaneous
@@ -11808,7 +11816,7 @@ Appt. w/ Dr. Moulson; see notes in Slack
 
 ##### Dependency Updates
 
-* Squash-merged `update-pixi-lockfile` PRs:
+* Squash-merged `update-pixi-lockfile` PR:
   * SalishSeaCast/docs
 
 
@@ -12052,8 +12060,11 @@ Civic election advance poll
     * `Desktop/`
     * `Documents/`
   * re-installed apps and packages:
-    * `gnucash` and `libdbd-sqlite3` via `apt`
-      * need to fine preferences to get UI layout back
+    * `gnucash` via `Flatpak`
+      * need to find preferences to get UI layout back
+    * `Slack` via `Flatpak`
+    * Jetbrains Toolbox via tarball download
+    * PyCharm via Jetbrains Toolbox
   * set up VSCode:
     * Default profile extensions:
       * Remote SSH
@@ -12078,23 +12089,147 @@ Civic election advance poll
       * Extension Pack for reStructuredText
     * copied default `settings.json` and `keybindings.json` from backup
       * learned how settings and key bindings are handled in the profiles settings
+    * added `literal-block` code snippet to Markdown profile
+* restored YubiKey set up as alternative unlock mechanism on `khawla` for auth with 1password ssh agent
+  * refs:
+    * Wed 22-Jul-2026 notes on setup for `khawla`
+    * ref https://support.system76.com/articles/yubikey-login/
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      # open spare root terminal in case I need to revert things
+      sudo su
+      # in regular terminal
+      sudo apt install -y libpam-yubico yubikey-personalization yubikey-manager
+      # store previously generated challenge file from YubiKey slot 2
+      sudo mkdir /var/yubico
+      sudo chown root /var/yubico
+      sudo chmod 700 /var/yubico
+      ykpamcfg -2 -v
+      sudo mv ~/.yubico/challenge-<SERIAL> /var/yubico/$USER-<SERIAL>
+      sudo chown root:root /var/yubico/$USER-<SERIAL>
+      sudo chmod 600 /var/yubico/$USER-<SERIAL>
+      # enable YubiKey authentication
+      sudo dpkg-reconfigure libpam-yubico
+      # in the 1st panel, set parameters (debugging enabled) for Yubico PAM to:
+      mode=challenge-response debug chalresp_path=/var/yubico
+      # in the 2nd panel, add Yubico authentication with YubiKey to the list of enabled profiles
+      # that dpkg-reconfigure results in a line added to /etc/pam.d/common-auth
+        auth required pam_yubico.so mode=challenge-response chalresp_path=/var/yubico
+      # delete that line
+      # copy polkit-1 config
+      sudo cp /usr/lib/pam.d/polkit-1 /etc/pam.d/polkit-1
+      # add PAM config to enable YubiKey as sufficient authentication
+      sudo nano /etc/pam.d/yubico-sufficient
+      auth sufficient pam_yubico.so mode=challenge-response chalresp_path=/var/yubico
+      # set YubiKey as sufficient auth for polkit-1
+      sudo nano /etc/pam.d/polkit-1
+      @include yubico-sufficient  # above @include common-auth
+      ```
+      <!-- markdownlint-enable MD031 -->
+* set up MultiMC
+  * restored `home/doug/.local/share/multimc/instances/` from backup
+  * no option to launch on nvidia GPU like there was before clean install
+* improved notification display time by restoring files in
+  `.config/cosmic/com.system76.CosmicNotifications/v1/`
+  from backup
+  * ref: https://github.com/pop-os/cosmic-notifications/issues/138
 
 
   * TODO:
-    * drop from `~/dotfiles/pop_os/khawla/.profile`
-    * drop from `~/dotfiles/pop_os/khawla/githooks`
+    * drop `~/dotfiles/pop_os/khawla/.profile`
+    * drop `~/dotfiles/pop_os/khawla/githooks`
     * drop rustup setup from `~/.bash_aliases`
     * drop `ln-post-commit` from `~/.bash_aliases`
     * drop `ttitle()` from `~/.bash_aliases`
 
-  * PPAs:
-    * https://downloads.1password.com/linux/debian/amd64
-    * https://repo.vivaldi.com/stable/deb
-    * https://packages.microsoft.com/repos/code
-    * https://ppa.launchpadcontent.net/git-core/ppa/ubuntu
-  * improved notification display time by creating files in
-    `.config/cosmic/com.system76.CosmicNotifications/v1/`
-    * ref: https://github.com/pop-os/cosmic-notifications/issues/138
+
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PR:
+  * AtlantisCmd
+
+
+
+#### Tue 13-Oct-2026
+
+##### Dependency Updates
+
+* Squash-merged `pre-commit` auto-update PRs re: `black` 26.10.1 re: GHA security issue
+  * NEMO_Nowcast
+  * erddap-datasets
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * SOG-Bloomcast-Ensemble
+  * salishsea-site
+  * MoaceanParcels
+  * cookiecutter-MOAD-pypkg
+  * gha-workflows
+  * SalishSeaTools
+  * SalishSeaNowcast
+  * Reshapr
+  * moad_tools
+  * AtlantisCmd
+* Squash-merged `dependabot` PR to update `virtualenv` to 21.7.13 re: multiple vulnerabilities
+  * gha-workflows
+* Squash-merged `dependabot` PR to update `tornado` to 6.5.9 re: multiple vulnerabilities
+  * ECget
+
+
+##### Miscellaneous
+
+* started work on Alliance RPP application for `arbutus`:
+  * Google doc shared with Susan
+
+
+
+#### Wed 14-Oct-2026
+
+##### Miscellaneous
+
+* continued work on Alliance RPP application for `arbutus`:
+  * watched run to collect memory footprint info:
+    * NEMO nowcast-green running:
+      * `nowcast0`: ~30% of 60G RAM
+      * `nowcast1`: ~25% of 60G RAM
+    * `nowcast0` RAM spiked to ~60% during wwatch3 prep
+    * `wwatch1`: ~12% of 60G RAM during wwatch3-nowcast run
+  * searched email and Slack and found that the last time I updated the list of downstream users was
+    20-Dec-2024
+    * additions in approximately reverse chrono order:
+      * Loius Djate, Dalhousie (unconfirmed)
+      * CIOOS Pacific
+      * Hal Bradbury
+      * Brian Hunt
+      * Northwest Association of Networked Ocean Observing Systems (NANOOS)
+* used `Disks` utility on `khawla` and https://system76.com/support/extra-drive/ to mount `warehouse` drive at startup time
+
+##### Dependency Updates
+
+* Squash-merged `dependabot` PRs to update `setup-pixi` to 0.11.1 re: feature & dependency updates
+  * moad_tools
+  * gha-workflows
+  * AtlantisCmd
+* Squash-merged `update-pixi-lockfile` PR:
+  * Reshapr
+
+
+
+#### Thu 15-Oct-2026
+
+Worked at UBC while Rita was at home
+
+##### SalishSeaCast
+
+* `download_live_ocean` timed out at 11:37
+
+  * re-ran it manually at 11:51; success at 13:16
+
+
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PR:
+  * NEMO_Nowcast
+
 
 
 
