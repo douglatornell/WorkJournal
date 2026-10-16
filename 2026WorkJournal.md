@@ -12221,8 +12221,11 @@ Worked at UBC while Rita was at home
 ##### SalishSeaCast
 
 * `download_live_ocean` timed out at 11:37
+  * email from Kate saying that run was delayed by data centre shutdown
+  * persisted 14oct26 extraction file
+  * manually ran `make_live_ocean_files` at ~11:50 to restart automation
 
-  * re-ran it manually at 11:51; success at 13:16
+  * try to collect today's extraction later in the afternoon so that we have boundary conditions for hindcasts
 
 
 ##### Dependency Updates
@@ -12230,6 +12233,32 @@ Worked at UBC while Rita was at home
 * Squash-merged `update-pixi-lockfile` PR:
   * NEMO_Nowcast
 
+
+##### Miscellaneous
+
+* continued work on Alliance RPP application for `arbutus`:
+  * sent Slack message to Venkat ans Michael asking for a meeting next week to discuss RPP
+  * run time for `nowcast-green` from log for hindcast estimates:
+    * launch `make_forcing_links`: 08:54:56
+    * `watch_NEMO` says "run completed": 09:20:03
+    * elapsed time: 25m7s
+      * use 30m per model day for estimates
+        * 48 model days per calendar day
+        * 7d15h per model year
+        * 2000 (start of spin-up) to end of 2027 (pessimistic catch-up to real-time) = 28 model years
+          * 213 calendar days (just over 7 months)
+  * storage for `nowcast-green` results for hindcast estimates:
+    * 30 model days consumed 170G
+      * use 5.7G per model day for estimates
+        * hindcast storage is a little less due to less frequent restart files
+          * restart files are 793M per model day
+      * 30 days of hindcast results would take our volume storage to 81% used
+  * TODO:
+    * review with Susan:
+      * 7 years of spin-up?
+      * re-do factor
+      * does she plan to do tuning on `arbutus` or `trillium`?
+      * how much hindcast storage do we need on `arbutus`?
 
 
 
