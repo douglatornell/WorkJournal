@@ -12236,6 +12236,13 @@ Worked at UBC while Rita was at home
 
 ##### Miscellaneous
 
+* home alarm system was malfunctioning when we woke up
+  * could not disable perimeter armed state from app; was able to do so via code on panel
+  * panel reports communications failure
+    * beeping twice every 10 seconds until I left it in the coms failure report
+  * spent 30 minutes on hold waiting for tech support
+  * issue was resolved when I got home
+    * log suggests that issue may have resolved while I was on hold waiting for tech support
 * continued work on Alliance RPP application for `arbutus`:
   * sent Slack message to Venkat ans Michael asking for a meeting next week to discuss RPP
   * run time for `nowcast-green` from log for hindcast estimates:
@@ -12253,12 +12260,43 @@ Worked at UBC while Rita was at home
         * hindcast storage is a little less due to less frequent restart files
           * restart files are 793M per model day
       * 30 days of hindcast results would take our volume storage to 81% used
+
+
+
+#### Fri 16-Oct-2026
+
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PR:
+  * gha-workflows
+
+
+##### Miscellaneous
+
+* continued work on Alliance RPP application for `arbutus`:
+  * discussed questions from yesterday's analysis with Susan:
+    * 7 years of spin-up?: fine
+    * re-do factor: ~30% to get us to 9+ months
+    * does she plan to do tuning on `arbutus` or `trillium`?: not `arbutus`
+    * how much hindcast storage do we need on `arbutus`?: 500G
+    * question for ARC: should we target HPC or cloud for hindcast?
+  * resource request summary:
+    * automation:
+      * 1 head node
+      * 7 compute nodes
+      * 2 spare/testing nodes
+    * hindcast:
+      * 7 compute nodes
   * TODO:
-    * review with Susan:
-      * 7 years of spin-up?
-      * re-do factor
-      * does she plan to do tuning on `arbutus` or `trillium`?
-      * how much hindcast storage do we need on `arbutus`?
+    * questions for ARC:
+      * should we request 7 x 16 core cloud instances or HPC allocation for hindcast
+        * at default/RAC proirity estimated calendar time is the same
+          * HPC could be 3x faster if we had high enough priority
+          * cloud enables us to run continuously
+      * pros/cons of volume vs. shared (CephFS) storage
+* IOS seminar:
+  * Cathryn Murray, “Investigating the Hidden Depths of the Environmental Impacts of Commercial Shipping”
+    * funder for Cassidy/Raisha/Susan scrubber water work
 
 
 
