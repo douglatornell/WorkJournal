@@ -12300,6 +12300,23 @@ Worked at UBC while Rita was at home
 
 
 
+#### Sat 17-Oct-2026
+
+##### Miscellaneous
+
+* Polyglot Unconference:
+  * Session 1:
+    *
+
+
+##### SalishSeaCast
+
+* uptimerobot started reporting website and ERDDAP down last night
+  * ERDDAP bounced a couple of times
+  * everything recovered just after 11:00
+    * `crop_gribs 06` failed with 528 unprocessed files
+    * `collect_weather 06 2.5km` got 0 files
+
 
 TODO:
 
