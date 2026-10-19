@@ -12306,7 +12306,28 @@ Worked at UBC while Rita was at home
 
 * Polyglot Unconference:
   * Session 1:
-    *
+    * How do we teach and assess knowledge in the age of AI?
+  * Session 2:
+    * Our bronze age is collapsing; anti-patterns of agentic engineering
+      * agent code will work; don't worry about it
+  * lunch
+    * conversation with Fateme
+  * Session 3:
+    * Shipping code is a coping mechanism
+      * `herdr`: alternative to tmux that groks agent sessions
+  * Session 4:
+    * Docs, skills & guardrails (In-repo agent instgructions)
+      * `agents.md`, `skills.md`
+      * architect decision records (ADRs)
+  * Session 5:
+    * Local AI vs Cloud AI discussion
+      * LMstudio and unsloth for local
+      * need beefy hardware or reduced expectations
+      * get on with the rest of your life while the agents work
+  * Session 6:
+    * How do we keep having fun in the age of annoying agents?
+      * agent code will work; don't worry about it
+      * get on with the rest of your life while the agents work
 
 
 ##### SalishSeaCast
@@ -12316,6 +12337,50 @@ Worked at UBC while Rita was at home
   * everything recovered just after 11:00
     * `crop_gribs 06` failed with 528 unprocessed files
     * `collect_weather 06 2.5km` got 0 files
+  * recovery started at ~18:17:
+    * killed `collect_weather 06 2.5km`
+    * backfilling:
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+        pixi run worker crop_gribs -- 06 &
+        pixi run worker download_weather -- 06 2.5km --backfill
+        # wait for forecast2 runs to finish
+        pixi run worker crop_gribs -- 12 &
+        pixi run worker download_weather -- 12 2.5km --backfill
+        pixi run worker crop_gribs -- 18 &
+        pixi run worker collect_weather -- 18 2.5km --backfill --backfill-date 2026-10-17
+      ```
+      <!-- markdownlint-enable MD031 -->
+
+
+
+#### Sun 18-Oct-2026
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed until ~10:24 due to 1 unprocessed file
+* found lots of unfinished workers from last nights backfilling:
+  * `make_plots nemo forecast2 publish --run-date 2026-10-16`
+  * `make_plots nemo nowcast research --run-date 2026-10-17`
+  * `make_plots nemo nowcast comparison --run-date 2026-10-16`
+  * `make_plots nemo forecast publish --run-date 2026-10-17`
+  * `make_plots nemo nowcast-green research --run-date 2026-10-17`
+  * `make_averaged_dataset day physics --run-date 2026-10-17`
+  * `make_averaged_dataset day biology --run-date 2026-10-17`
+  * `make_averaged_dataset day chemistry --run-date 2026-10-17`
+  * `crop_gribs 12`
+  * `make_plots nemo forecast2 publish --run-date 2026-10-17`
+  * `collect_weather 18 2.5km`
+  * `crop_gribs 18`
+  * killed `make_plots` workers
+  * killed `make_averaged_dataset` workers
+* manually re-ran `make_averaged_dataset` workers:
+  * saw version missmatch warnings
+  * can't connect to `salish`
+    * opened helpdesk ticket
+      * Henryk rebooted `skookum` on 19oct at ~09:15; `/home` was stalled due to data centre router issue
+
+
 
 
 TODO:
