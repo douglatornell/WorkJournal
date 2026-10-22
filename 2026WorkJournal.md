@@ -12203,6 +12203,7 @@ Civic election advance poll
       * Northwest Association of Networked Ocean Observing Systems (NANOOS)
 * used `Disks` utility on `khawla` and https://system76.com/support/extra-drive/ to mount `warehouse` drive at startup time
 
+
 ##### Dependency Updates
 
 * Squash-merged `dependabot` PRs to update `setup-pixi` to 0.11.1 re: feature & dependency updates
@@ -12287,13 +12288,6 @@ Worked at UBC while Rita was at home
       * 2 spare/testing nodes
     * hindcast:
       * 7 compute nodes
-  * TODO:
-    * questions for ARC:
-      * should we request 7 x 16 core cloud instances or HPC allocation for hindcast
-        * at default/RAC proirity estimated calendar time is the same
-          * HPC could be 3x faster if we had high enough priority
-          * cloud enables us to run continuously
-      * pros/cons of volume vs. shared (CephFS) storage
 * IOS seminar:
   * Cathryn Murray, “Investigating the Hidden Depths of the Environmental Impacts of Commercial Shipping”
     * funder for Cassidy/Raisha/Susan scrubber water work
@@ -12356,6 +12350,8 @@ Worked at UBC while Rita was at home
 
 #### Sun 18-Oct-2026
 
+Max & Jingli arrived
+
 ##### SalishSeaCast
 
 * `crop_gribs 12` was delayed until ~10:24 due to 1 unprocessed file
@@ -12382,19 +12378,163 @@ Worked at UBC while Rita was at home
 
 
 
+### Week 43
+
+#### Mon 19-Oct-2026
+
+Max & Jingli visiting
+
+##### SalishSeaCast
+
+* started `dask` cluster on `salish` in a new `tmux` session
+* automation froze at ~08:53
+  * `nowcast/19oct26` run at 50.3%
+  * website failing with 502 proxy error
+  * opened helpdesk ticket re: `skookum`
+    * Henryk rebooted `skookum` at 13:36:
+      * `/home` was stalled due to data centre router issue
+      * mounts from `salish` were stale
+* recovery started at ~14:35:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+      # set necessary higher limits for file system inotify instances and watches:
+      sudo sysctl fs.inotify.max_user_instances=2048
+      sudo sysctl fs.inotify.max_user_watches=196608
+      sudo sysctl -p
+      # start SalishSeaNowcast components
+      cd /SalishSeaCast/SalishSeaNowcast
+      source .env
+      pixi run supervisord --configuration $NOWCAST_CONFIG/supervisord.ini
+      # start ERDDAP
+      sudo su - tomcat
+      /opt/apache-tomcat-10.1.40/bin/startup.sh
+      exit
+      # start website
+      pushd /SalishSeaCast/salishsea-site
+      mamba activate /SalishSeaCast/salishsea-site-env
+      supervisord -c /SalishSeaCast/salishsea-site/supervisord-prod.ini
+      mamba deactivate
+      popd
+      # restart automation
+      source .env
+      pixi run worker make_forcing_links -- arbutus ssh  # start forecast/19oct26 run
+      pixi run worker download_results -- arbutus nowcast
+      pixi run worker crop_gribs -- 18 &
+      pixi run worker collect_weather -- 18 2.5km --backfill --backfill-date 2026-10-19
+      # backfilled day-averaged datasets
+      pixi run worker make_averaged_dataset -- day physics --run-date 2026-10-17
+      pixi run worker make_averaged_dataset -- day chemistry --run-date 2026-10-17
+      pixi run worker make_averaged_dataset -- day biology --run-date 2026-10-17
+      pixi run worker make_averaged_dataset -- day physics --run-date 2026-10-18
+      pixi run worker make_averaged_dataset -- day chemistry --run-date 2026-10-18
+      pixi run worker make_averaged_dataset -- day biology --run-date 2026-10-18
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+##### Reshapr
+
+* dropped `bottleneck` as a dependency because it can lead to numerical instabilities in
+  rolling window statistics and is no longer maintained; PR#225
+  * `xarray=2026.09.0` disables it by default to prefer correctness over performance
+
+
+
+#### Tue 20-Oct-2026
+
+Max & Jingli left
+
+##### SalishSeaCast
+
+* `crop_gribs 00` timed out at ~23:15 with 11 files unprocessed:
+  * `collect_weather 00 2.5km` finished after `crop_gribs 00` timed out
+    * ran `crop_gribs 00 --backfill --debug`
+    * found and cleaned up uncropped files using `fd`
+* `download_live_ocean` was delayed until ~10:21
+* `crop_gribs 12` was delayed until ~10:25 due to 1 unprocessed file
+
+
+##### Dependency Updates
+
+* Squash-merged `dependabot` PRs to update `setup-pixi` to 0.11.2 re: bug fix & docs updates
+  * moad_tools
+  * AtlantisCmd
+  * gha-workflows
+
+
+##### Miscellaneous
+
+* continued work on Alliance RPP application for `arbutus`:
+
+
+
+#### Wed 21-Oct-2026
+
+##### Miscellaneous
+
+* continued work on Alliance RPP application for `arbutus`:
+  * TODO:
+    * questions for ARC:
+      * should we request 7 x 16 core cloud instances or HPC allocation for hindcast
+        * at default/RAC proirity estimated calendar time is the same
+          * HPC could be 3x faster if we had high enough priority
+          * cloud enables us to run continuously
+      * how should we complete sections 4.2 & 4.3?
+        * are they all N/A with all details going in 4.4 if we are 100% cloud?
+      * pros/cons of volume vs. shared (CephFS) storage
+      * should I be using volume-backed instances?
+        * am I understanding the value/utility of volume-backed instance correctly?
+
+
+##### `arbutus.cloud`
+
+* updated and rebooted all VMs re: eMudhra intermediate CA compromise incident
+* update Pixi on `nowcast0`
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PR to update `mako` to 1.4.2 re: path traversal vulnerability
+  * SOG-Bloomcast
+* Start updates of our repos re: eMudhra intermediate CA compromise incident:
+  * `pixi update pip certifi ca-certificates`
+  * Reshapr - done in PR#226
+
+  * NEMO-Cmd
+  * SalishSeaCmd
+  * AtlantisCmd
+  * gha-workflows
+  * NEMO_Nowcast
+  * SalishSeaNowcast
+  * salishsea-site
+  * SalishSeaTools
+  * erddap-datasets
+  * moad_tools
+  * PythonNotes
+  * SalishSeaCast/docs
+  * MOAD/docs
+  * MoaceanParcels
+  * analysis-doug
+  * SOG-Bloomcast-Ensemble
+  * SOG
+  * ECget
+  * SOG-Bloomcast
+
+
+
 
 TODO:
 
 * remove `bottleneck` as a dependency because it can lead to numerical instabilities and is no longer maintained
   * `xarray=2026.09.0` disables it by default to prefer correctness over performance
+  * done:
+    * Reshapr - PR#225
   * to fix:
     * cookiecutter-analysis-repo
     * SalishSeaNowcast
     * SalishSeaNowcast/notebooks
     * tools/analysis_tools
     * tools/SalishSeaTools
-    * moad_tools
-    * Reshapr
     * erddap-datasets
     * analysis-doug
     * MoaceanParcels
