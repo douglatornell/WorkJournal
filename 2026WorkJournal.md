@@ -12473,23 +12473,12 @@ Max & Jingli left
 ##### Miscellaneous
 
 * continued work on Alliance RPP application for `arbutus`:
-  * TODO:
-    * questions for ARC:
-      * should we request 7 x 16 core cloud instances or HPC allocation for hindcast
-        * at default/RAC proirity estimated calendar time is the same
-          * HPC could be 3x faster if we had high enough priority
-          * cloud enables us to run continuously
-      * how should we complete sections 4.2 & 4.3?
-        * are they all N/A with all details going in 4.4 if we are 100% cloud?
-      * pros/cons of volume vs. shared (CephFS) storage
-      * should I be using volume-backed instances?
-        * am I understanding the value/utility of volume-backed instance correctly?
-
+  * posted work-in-progress docs to ARC ticket for tomorrow's mtg
 
 ##### `arbutus.cloud`
 
 * updated and rebooted all VMs re: eMudhra intermediate CA compromise incident
-* update Pixi on `nowcast0`
+* updated Pixi on `nowcast0`
 
 
 ##### Dependency Updates
@@ -12500,7 +12489,59 @@ Max & Jingli left
   * `pixi update pip certifi ca-certificates`
   * Reshapr - done in PR#226
 
-  * NEMO-Cmd
+
+
+#### Thu 22-Oct-2026
+
+Worked at ESB
+
+##### Miscellaneous
+
+* zoom mtg w/ Susan, Kellen & Michael of ARC re: Alliance RPP application for `arbutus`:
+  * questions for ARC:
+    * should we request 7 x 16 core cloud instances or HPC allocation for hindcast
+      * at default/RAC proirity estimated calendar time is the same
+        * HPC could be 3x faster if we had high enough priority
+        * cloud enables us to run continuously
+      * request cloud
+        * *add to proposal that our use and documentation of cloud is a benefit to Community*
+          *of other users who might run NEMO on cloud*
+    * how should we complete sections 4.2 & 4.3?
+      * are they all N/A with all details going in 4.4 if we are 100% cloud?
+      * *complete the sections because that's what reviewers expect*
+        * *stretch the questions as necessary*
+    * pros/cons of volume vs. shared (CephFS) storage
+      * *CephFS may be more performant*
+        * *what we are doing is okay*
+        * *request CephFS storage if we plan to play with it*
+    * should I be using volume-backed instances?
+      * am I understanding the value/utility of volume-backed instance correctly?
+        * *yes, my understanding is correct*
+        * *our use of volume storage and stored images for reboots is an adequate alternative to*
+          *volume-backed instances*
+        * *storage for volume-backing has to be included in volume ask*
+  * other notes from meeting:
+    * add discussion of MPI workload and reason for on-demand commute need to section 1
+    * add sharing of running NEMO in the cloud to section 1 as community benefit that we provide
+    * double or more our volume storage ask
+    * add CephFS storage ask
+    * complete section 4
+    * add justification of compute rather than persistent VMs
+      * 100% compute use means that workload doesn't tolerate CPU over-subscriptions
+    * add justification for bypassing 30d walltime limit on hindcast VMs because of 100% compute use
+    * add discussion of intent to investigate stop/start of daily-run compute VMs
+* MOAD group mtg; see whiteboard
+* Phys Ocgy seminar:
+  * Flood modeling for Surrey
+
+
+##### Dependency Updates
+
+* Continued updates of our repos re: eMudhra intermediate CA compromise incident:
+  * `pixi update pip certifi ca-certificates`
+  * NEMO-Cmd - done in PR#177
+  * MOAD/docs - done in PR#95
+
   * SalishSeaCmd
   * AtlantisCmd
   * gha-workflows
@@ -12512,7 +12553,6 @@ Max & Jingli left
   * moad_tools
   * PythonNotes
   * SalishSeaCast/docs
-  * MOAD/docs
   * MoaceanParcels
   * analysis-doug
   * SOG-Bloomcast-Ensemble
