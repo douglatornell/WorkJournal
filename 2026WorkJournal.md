@@ -12533,6 +12533,17 @@ Worked at ESB
 * MOAD group mtg; see whiteboard
 * Phys Ocgy seminar:
   * Flood modeling for Surrey
+* started using PyCarm on `khawla` after clean install of `pop-os_24.04_amd64_nvidia_27.iso`:
+  * had to install `Miniforge3` to get `conda` and `mamba` and so that there is a `~/.conda/environments.txt`
+    for the PyCharm environment manager to use
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+
+    conda config --set auto_activate_base false
+    mamba install --name base --override-channels --channel conda-forge mamba libmamba "ca-certificates>=2026.10.19"
+    ```
+    <!-- markdownlint-enable MD031 -->
 
 
 ##### Dependency Updates
@@ -12541,25 +12552,209 @@ Worked at ESB
   * `pixi update pip certifi ca-certificates`
   * NEMO-Cmd - done in PR#177
   * MOAD/docs - done in PR#95
+  * SalishSeaCast/docs - done in PR#102
 
+
+
+#### Fri 23-Oct-2026
+
+##### SalishSeaCast
+
+* `collect_weather 12 2.5km` was delayed until 09:40
+
+
+##### Dependency Updates
+
+* Update depenedencies in `NEMO-Cmd` from `update-pixi-lockfile` PR that got out of sync; PR#178:
+  * `gitpython`, `hatch`, `pillow`
+* Squash-merged `update-pixi-lockfile` PR:
   * SalishSeaCmd
-  * AtlantisCmd
+* Continued updates of our repos re: eMudhra intermediate CA compromise incident:
+  * `pixi update pip certifi ca-certificates`
+  * NEMO-Cmd - done in PR#177
+  * MOAD/docs - done in PR#95
+  * SalishSeaCast/docs - done in PR#102
+  * SalishSeaCmd - done in PR#170
+  * AtlantisCmd - done in PR#156
+  * gha-workflows - done in PR#125
+  * NEMO_Nowcast - done in PR#118
+  * moad_tools - done in PR#165
+  * PythonNotes - done in PR#6
+* Updated SalishSeaCmd on host where I have it installed:
+  * `nibi`
+  * `fir`
+  * `trillium`
+  * `rorqual`
+  * `arbutus`
+  * `narval`
+    * included migration from `mamba` to Pixi
+
+
+##### Miscellaneous
+
+* updated #moad-python-notes post re: eMudhra mitigation with instructions for `conda` envs
+* got Gemini to create an `AGENTS.md` template for PyCharm's AI Assistant about the use of pixi
+  * see "Agentic Dev & PyCharm" notebook
+
+
+
+#### Sat 24-Oct-2026
+
+##### SOG-Bloomcast-Ensemble
+
+* experimented with `AGENTS.md` file
+  * it successfully steered Junie to use Pixi
+  * it needs to be tuned to discourage running tests in all possible environments
+
+
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PR:
+  * SOG-Bloomcast-Ensemble
+* Continued updates of our repos re: eMudhra intermediate CA compromise incident:
+  * `pixi update pip certifi ca-certificates`
+  * SOG-Bloomcast-Ensemble - done in PR#152
+  * SalishSeaTools - done in PR#232
+  * MoaceanParcels - done in PR#135
+  * cookiecutter-MOAD-pypkg - done in PR#81
+  * SOG-Bloomcast - done in PR#62
+  * SalishSeaNowcast - done in PR#510
+  * erddap-datasets - done in PR#115
+* Squash-merged dependabot PRs to update `pillow` to 13.0.0 re: removals, deprecations, docs & multiple vulnerabilities
+  * SalishSeaTools
+  * MoaceanParcels
+  * SOG-Bloomcast
+* Squash-merged dependabot PRs to update `virtualenv` to 21.14.13 re: multiple vulnerabilities
+  * SalishSeaTools
+  * MoaceanParcels
+  * gha-workflows
+  * FUN
+  * salishsea-site
+  * SOG
+* Squash-merged dependabot PRs to update `filelock` to 4.2.1 re: multiple vulnerabilities
+  * SalishSeaTools
+  * MoaceanParcels
+  * gha-workflows
+  * salishsea-site
+  * FUN
+* Squash-merged dependabot PRs to update `brotli` to 1.2.1 re: remote code execution vulnerability
+  * SalishSeaTools
+  * SOG-Bloomcast
+  * MoaceanParcels
+  * salishsea-site
+  * FUN
+* Squash-merged dependabot PRs to update `nbconvert` to 7.17.2 re: arbitrary file write vulnerability
+  * SalishSeaTools
+  * MoaceanParcels
+* Squash-merged dependabot PRs to update `setuptools` to 84.1.0 re: Windows path escape vulnerability
+  * SOG-Bloomcast
+  * gha-workflows
+  * salishsea-site
+  * FUN
+
+
+##### Miscellaneous
+
+* uninstalled `Miniforce3-pypy` from `ocean`
+
+
+
+#### Sun 25-Oct-2026
+
+##### Miscellaneous
+
+* installed Miniforge3 to get latest `mamba`, `conda` and updates re: eMudhra intermediate CA certs issue
+* updated `udpate-pixi-lockfile` workflows to all happen early in the morning on the 4th of the month
+  instead of on the same day as `sphinx-linkcheck` so that I have a set day for updates
   * gha-workflows
   * NEMO_Nowcast
-  * SalishSeaNowcast
-  * salishsea-site
-  * SalishSeaTools
-  * erddap-datasets
+  * AtlantisCmd
+  * Reshapr
   * moad_tools
-  * PythonNotes
-  * SalishSeaCast/docs
-  * MoaceanParcels
-  * analysis-doug
+  * MOAD/docs
+  * SalishSeaNowcast
+  * NEMO-Cmd
+  * SalishSeaCmd
   * SOG-Bloomcast-Ensemble
-  * SOG
-  * ECget
-  * SOG-Bloomcast
+  * SalishSeaCast/docs
 
+
+##### erddap-datasets
+
+* removed `bottleneck` re: possible numberical instability; PR#116
+  * updated env on `skookum`
+
+
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PR:
+  * SOG-Bloomcast-Ensemble
+* Continued updates of our repos re: eMudhra intermediate CA compromise incident:
+  * `pixi update pip certifi ca-certificates`
+  * ECget - did deployment not repo; see notes below
+  * salishsea-site - done in PR#191
+  * analysis-doug - done in PR#84
+  * FUN - done in PR#51
+* Squash-merged dependabot PRs to update `black` to 26.10.1 re: remote code execution vulnerability
+  * gha-workflows
+  * salishsea-site
+  * MoaceanParcels
+  * SalishSeaTools
+  * cookiecutter-MOAD-pypkg
+  * FUN
+
+
+##### gha-workflows
+
+* dropped `requirements.txt` and its update task to stop the noise from dependabot; PR#131
+* added assignment to me and `dependencies` label to pixi lockfile update PRs to try to resolve
+  lack of notification issue; PR#132
+
+
+##### ECget
+
+* updated `pip`, `certifi`, and `ca-certificates` in deployment on `ocean` in `/data/dlatorne/SOG-projects/ECget/`:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  mamba activate ecget
+  mamba install --name my-env --override-channels --channel conda-forge "pip=26.2.2"
+  mamba install --name my-env --override-channels --channel conda-forge "certifi>=2026.10.19"
+  mamba install --name my-env --override-channels --channel conda-forge "ca-certificates>=2026.10.19"
+  ```
+  <!-- markdownlint-enable MD031 -->
+* repo needs **so much** love; Python version in env YAML file in 3.6 😱
+
+
+##### cookiecutter-analysis-repo
+
+* removed `bottleneck` re: possible numberical instability; PR#51
+
+
+##### SalishSeaTools
+
+* removed `bottleneck` re: possible numberical instability; PR#234
+
+
+##### SalishSeaNowcast
+
+* removed `bottleneck` re: possible numberical instability; PR#512
+  * updated env on `skookum`
+  * updated env on `arbutus`
+
+
+##### PythonNotes
+
+* removed `bottleneck` re: possible numberical instability; PR#7
+
+
+##### analysis-doug
+
+* removed `bottleneck` re: possible numberical instability; PR#85
+
+
+##### MoaceanParcels
+
+* removed `bottleneck` re: possible numberical instability; PR#137
 
 
 
@@ -12569,20 +12764,17 @@ TODO:
   * `xarray=2026.09.0` disables it by default to prefer correctness over performance
   * done:
     * Reshapr - PR#225
-  * to fix:
-    * cookiecutter-analysis-repo
-    * SalishSeaNowcast
-    * SalishSeaNowcast/notebooks
-    * tools/analysis_tools
-    * tools/SalishSeaTools
-    * erddap-datasets
-    * analysis-doug
-    * MoaceanParcels
-    * PythonNotes
+    * erddap-datasets - PR#116
+    * cookiecutter-analysis-repo - PR#51
+    * tools/SalishSeaTools - PR#234
+      * tools/analysis_tools
+    * SalishSeaNowcast - PR#512
+      * SalishSeaNowcast/notebooks
+    * PythonNotes - PR#7
+    * analysis-doug - PR#85
+    * MoaceanParcels - PR#137
     * analysis-shared
-    * rpn-to-gemlam
 * `xarray=2026.09.0` is the last version to support Python 3.11
-
 
 
 
