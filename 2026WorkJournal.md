@@ -12758,23 +12758,74 @@ Worked at ESB
 
 
 
-TODO:
+### Week 44
 
-* remove `bottleneck` as a dependency because it can lead to numerical instabilities and is no longer maintained
-  * `xarray=2026.09.0` disables it by default to prefer correctness over performance
-  * done:
-    * Reshapr - PR#225
-    * erddap-datasets - PR#116
-    * cookiecutter-analysis-repo - PR#51
-    * tools/SalishSeaTools - PR#234
-      * tools/analysis_tools
-    * SalishSeaNowcast - PR#512
-      * SalishSeaNowcast/notebooks
-    * PythonNotes - PR#7
-    * analysis-doug - PR#85
-    * MoaceanParcels - PR#137
-    * analysis-shared
-* `xarray=2026.09.0` is the last version to support Python 3.11
+#### Mon 26-Oct-2026
+
+##### SalishSeaNowcast
+
+* updated broken NFS setup docs link in `arbutus` deployment docs; PR#513
+
+
+##### NEMO-Cmd
+
+* test Python 3.15:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  pixi add --feature py315 python=3.15
+  pixi workspace environment add test-py315 --feature py315 --feature test
+  ```
+  <!-- markdownlint-enable MD031 -->
+  * test suite runs cleanly
+
+
+##### Miscellaneous
+
+* used `pixi global install mercurial` to install `hg` on `khawla` to that `NEMO-Cmd` test suite runs cleanly
+
+
+
+#### Tue 27-Oct-2026
+
+##### SalishSeaCast
+
+* Fraser River turbidity data stream stopped
+
+
+##### NEMO-Cmd
+
+* released v26.2 prior to update to Python 3.15
+
+
+
+#### Wed 28-Oct-2026
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed until ~10:28 due to 1 unprocessed file
+* `make_turbidity_file` failed due to insufficient data
+
+##### Dependency Updates
+
+* Squash-merged dependabot PR to update `urllib3` to 2.8.0 re: infinite loop vulnerability
+  * cookiecutter-djl-pypkg
+* Squash-merged dependabot PR to update `nbconvert` to 7.17.2 re: arbitrary file write vulnerability
+  * ECget
+* Squash-merged dependabot PR to update `certifi` to 2026.10.19 re: eMudhra intermediate CA certs vulnerability
+  * cookiecutter-djl-pypkg
+* Squash-merged dependabot PRs to update `black` to 26.10.1 re: remote code execution vulnerability
+  * FUN
+* Squash-merged dependabot PRs to update `virtualenv` to 21.14.13 re: multiple vulnerabilities
+  * SOG-forcing
+
+
+##### Miscellaneous
+
+* continued work on Alliance RPP application for `arbutus`:
+  * wrote Resource Request Justification section (4)
+  * added prompts from ARC consulation notes for other bits to be added/finished
+
+
 
 
 
