@@ -12827,6 +12827,24 @@ Worked at ESB
 
 
 
+#### Thu 29-Oct-2026
+
+Worked at ESB while Rita is at home
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* continued work on Alliance RPP application for `arbutus`:
+  * addressed Susan's comments
+  * worked on polishing Susan's re-org (new copy of doc) of section 4
+* Phys Ocgy seminar:
+  * Andrea van Langen Rosón, Flanders Marine Institute and Ghent University PhD student
+  * "Resolving coastal CO₂ dynamics in the North Sea at unprecedented resolution combining
+    satellite ocean colour and machine learning approaches."
+
+
+
+
 
 
 ##### `arbutus` Migration
