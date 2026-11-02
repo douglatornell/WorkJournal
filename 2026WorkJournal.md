@@ -7353,6 +7353,7 @@ Worked at ESB
           with `StnEnv/2023` GCC-12 on Alliance clusters
 
 
+
 #### Wed 24-Jun-2026
 
 ##### SalishSeaCast
@@ -12844,6 +12845,59 @@ Worked at ESB while Rita is at home
 
 
 
+#### Fri 30-Oct-2026
+
+##### Miscellaneous
+
+* continued work on Alliance RPP application for `arbutus`:
+  * added paragraph that addresses the planned 30d walltime limit on `arbutus` VMs
+  * polished doc with Susan
+* buffed `ocean` ssh config:
+  * dropped `old-arbutus.cloud`
+  * added connection multiplexing for all hosts instead of just uncommitted test for `arbutus`
+* added `lf` alias to `.bashrc` on `ocean`
+* AAPS AGM on Zoom
+
+
+##### `arbutus` Migration
+
+* created image snapshot of head node named `head-cb16-60gb-560-01jul26`
+
+
+
+#### Sat 31-Oct-2026
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed until ~10:25 due to 1 unprocessed file
+
+
+##### Miscellaneous
+
+* updated PyCharm on `khawla` to 2026.2.4 re: eMudhra CA certs issue
+* continued work on Alliance RPP application for `arbutus`:
+  * reviewed Susan's narrative CV
+
+
+
+## November
+
+<!-- markdownlint-disable MD001 -->
+#### Sun 1-Nov-2026
+<!-- markdownlint-enable MD001 -->
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed until ~10:27 due to 1 unprocessed file
+* `make_turbidity_file` failed due to insufficient data
+
+
+##### Miscellaneous
+
+* continued work on Alliance RPP application for `arbutus`:
+  * final read-through of proposal
+
+
 
 
 
@@ -12854,13 +12908,6 @@ Worked at ESB while Rita is at home
   * fix `next_workers.after_ping_erddap()` to launch `make_plots wwatch3 forecast2` re: later relative
     timing of checklist clearance
   * change `watch_NEMO` and `watch_ww3` time intervals from 5m to 2m because runs are >2x faster
-  * do a clean head node instance config before storing the snapshot
-  * add `lf` to `.bash_aliases`
-  * remove `old-arbutus.cloud` from `ocean` and `khawla` SSH configs
-  * maybe not necessary?
-    * add code to compute nodes `$HOME/.bash_aliases` to add wwatch3 `bin/` and `exe/` paths to `PATH` if they exist,
-      and export environment variables to enable wwatch3 to use netCDF4
-      * change to `export NETCDF_CONFIG=$(which nf-config)`
 
 
 
