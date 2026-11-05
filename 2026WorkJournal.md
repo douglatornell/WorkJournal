@@ -5053,7 +5053,7 @@ Worked at ESB
 ##### NEMO-4.2
 
 * read "getting started" docs:
-  * docs about about 5.0.* and migrating to it from 4.0.* and 4.2.*; nothing about 3.6
+  * docs about about `5.0.*` and migrating to it from `4.0.*` and `4.2.*;` nothing about `3.6`
   * NEMO 4.2.* needs XIOS>2.5 (XIOS2 trunk), but can use XIOS3 if `ln_tile = .false.` always, in which case
     build NEMO with `key_xios3`
   * `Psyclone` is being used in NEMO 5.0.* to "insert GPU offloading directives"
@@ -6007,7 +6007,7 @@ Vacation: Arles
 
 #### Thu 21-May-2026
 
-Vacation: Arles -> Point du Gard Cycling
+Vacation: Arles -> Pont du Gard Cycling
 
 ##### SalishSeaCast
 
@@ -6017,7 +6017,7 @@ Vacation: Arles -> Point du Gard Cycling
 
 #### Fri 22-May-2026
 
-Vacation: Uzés & Point du Gard Loop Cycling
+Vacation: Uzés & Pont du Gard Loop Cycling
 
 ##### SalishSeaCast
 
@@ -6027,7 +6027,7 @@ Vacation: Uzés & Point du Gard Loop Cycling
 
 #### Sat 23-May-2026
 
-Vacation: Point du Gard -> Saint-Remy-de-Provence Cycling
+Vacation: Pont du Gard -> Saint-Remy-de-Provence Cycling
 
 ##### SalishSeaCast
 
@@ -8141,7 +8141,7 @@ Worked at ESB
 ##### Miscellaneous
 
 * Vivaldi failed to lauch after routine OS packages upgrade
-  * `vivaldi-stable --no-sandbox` shows `libc.so.6: version `GLIBC_ABI_DT_RELR' not found`
+  * `vivaldi-stable --no-sandbox` shows `libc.so.6: version GLIBC_ABI_DT_RELR' not found`
     * Gemini says that's due to my OS version being 22.04
 * decided to stop delaying upgrade to 24.04 and COSMIC
   * PPAs:
@@ -8712,6 +8712,7 @@ Worked at ESB
 
 * suggested that Susan try:
   <!-- markdownlint-disable MD031 -->
+  <!-- markdownlint-disable MD013 -->
   ```fortran
   !-----------------------------------------------------------------------
   &namsbc_core   !   namsbc_core  CORE bulk formulae
@@ -8722,6 +8723,7 @@ Worked at ESB
   ...
   ```
   <!-- markdownlint-enable MD031 -->
+  <!-- markdownlint-enable MD013 -->
   to get the downscaled atmospheric forcing to work without a weights file
   * brain-fart!
 
@@ -8858,13 +8860,13 @@ Worked at ESB
     * 10jul26 work journal notes
     * https://salishsea-meopar-docs.readthedocs.io/en/latest/code-notes/salishsea-nemo/nemo-forcing/atmospheric.html#creating-new-weights-files
   * created symlinks in `/data/dlatorne/MEOPAR/grid/` required to run `get_weight_nemo`:
-    <!-- markdownlint-disable MD031 -->
+    <!-- markdownlint-disable MD031 MD013 -->
     ```bash
     cd /data/dlatorne/MEOPAR/grid/
     ln -sf /ocean/dtaneja/MOAD/analysis-dishika/notebooks/results/daily_downscaled_2008_final/downscaled_y2008m01d01.nc atmos.nc
     ln -sf bathymetry_202108.nc bathy_meter.nc
     ```
-    <!-- markdownlint-enable MD031 -->
+    <!-- markdownlint-enable MD031 MD013 -->
   * copied namelist and symlinked it to the file name that `get_weight_nemo` expects:
     <!-- markdownlint-disable MD031 -->
     ```bash
@@ -9187,13 +9189,13 @@ Worked at ESB
     * 22jul26 work journal notes
     * https://salishsea-meopar-docs.readthedocs.io/en/latest/code-notes/salishsea-nemo/nemo-forcing/atmospheric.html#creating-new-weights-files
   * created symlinks in `/data/dlatorne/MEOPAR/grid/` required to run `get_weight_nemo`:
-    <!-- markdownlint-disable MD031 -->
+    <!-- markdownlint-disable MD031 MD013 -->
     ```bash
     cd /data/dlatorne/MEOPAR/grid/
     ln -sf /ocean/dtaneja/MOAD/analysis-dishika/notebooks/results/daily_downscaled_2008_lon360_sample/downscaled_y2008m01d01_lon360.nc atmos.nc
     ln -sf bathymetry_202108.nc bathy_meter.nc
     ```
-    <!-- markdownlint-enable MD031 -->
+    <!-- markdownlint-enable MD031 MD013 -->
   * copied namelist and symlinked it to the file name that `get_weight_nemo` expects:
     <!-- markdownlint-disable MD031 -->
     ```bash
@@ -9403,7 +9405,7 @@ Treadmill stress test at VGH Cardiology
         * it's >>v5.16
         * found https://github.com/NOAA-EMC/WW3/pull/713
           * hacked `-fallow-argument-mismatch` into `comp` and got through many more module compiles
-    * build failed while linking `ww3_prnc` due to many `undefined reference to `__netcdf_MOD_nf90_*`
+    * build failed while linking `ww3_prnc` due to many `undefined reference to __netcdf_MOD_nf90_*`
       * need to use `nf-config` instead of `nc-config` to get libs string
     * success!
 
@@ -9611,7 +9613,7 @@ Worked at ESB
     ```
     <!-- markdownlint-enable MD031 -->
     * installation details:
-      * auth flow to Alliance tagged permisssions with skookum
+      * auth flow to Alliance tagged permissions with skookum
       * set Endpoint Name to `skookum-dlatorne`
       * got endpoint id uuid
     * started server in background with `./globusconnectpersonal -start &`
@@ -9875,7 +9877,7 @@ Worked at ESB
     mkdir ${yyyy}${mm}${dd}; \
     mv f${yyyy}.${mm}.${dd}_box.nc ${yyyy}${mm}${dd}/day_averaged_UBC.nc; \
   done
-  # created NEMO boundary condition files (on `khawka`) with loops like:
+  # created NEMO boundary condition files (on `khawla`) with loops like:
   for dd in {01..31}; do \
     pixi run -e dev worker make_live_ocean_files -- --run-date 2012-12-${dd} --debug; \
   done
@@ -10308,7 +10310,7 @@ Worked at ESB
 
 * continued docs and other updates re: migration to new `arbutus` cloud; PR#493
   * added `cron` jobs on `arbutus` to remove old results and wwatch3 current and wind forcing files:
-    <!-- markdownlint-disable MD031 -->
+    <!-- markdownlint-disable MD031 MD013 -->
     ```text
     # m h  dom mon dow   command
       0 0  *   *   *     /home/ubuntu/.pixi/bin/fd --type d --changed-before 30d . /nemoShare/MEOPAR/SalishSea/nowcast/ -x rm -rf
@@ -10321,7 +10323,7 @@ Worked at ESB
     35 0  *   *   *     /home/ubuntu/.pixi/bin/fd --type f --changed-before 15d . /nemoShare/MEOPAR/nowcast-sys/wwatch3-runs/current/ -x rm -f
     40 0  *   *   *     /home/ubuntu/.pixi/bin/fd --type f --changed-before 15d . /nemoShare/MEOPAR/nowcast-sys/wwatch3-runs/wind/ -x rm -f
     ```
-    <!-- markdownlint-enable MD031 -->
+    <!-- markdownlint-enable MD031 MD013 -->
   * fixed typos
   * added section to `skookum` deployment docs about firewall rule
   * quieted logging messages from `findlibs` and `gribapi`
@@ -10372,7 +10374,7 @@ Worked at ESB
 
 * continued experiments with ssh connection multiplexing:
   * added `ControlMaster`, `ControlPath` and `ControlPersist` directives for all hosts in
-    ssh config on `khawka`
+    ssh config on `khawla`
   * discovered that multiplexing creates a socket for `git@github.com`
     * presumably for monitoring of repos on GitHub
 * created `/results/forcing/LiveOcean/README.md` and `/results/forcing/LiveOcean/cas7_t1_x11ab/README.md`
@@ -11806,7 +11808,7 @@ Appt. w/ Dr. Moulson; see notes in Slack
   * discussed `xarray` and `bottleneck` with Susan
     * need to understand "window means" and assess effects on means of slices
 * explored the `bottleneck` issue in more detail:
-  * primarily an issue when `Dataset.rolling()` or `Dataset.coursen()` are used
+  * primarily an issue when `Dataset.rolling()` or `Dataset.coarsen()` are used
   * also used in `Dataset.rank()` and `DataArray.rank()`
   * can be disabled by removal from environment or with `xarray.set_options(use_bottleneck=False)`
 * UBC/DFO modeling collab mtg:
@@ -11969,7 +11971,7 @@ Civic election advance poll
   * investigation started at ~09:15:
     * `collect_weather 00 2.5km` and `crop_gribs 00` were still running
     * `nowcast.log` would not load in browser
-    * `nowcast.log` file was bloaated to ~1183416936 bytes
+    * `nowcast.log` file was bloated to ~1183416936 bytes
       * `tail` showed error messages from `gribapi`
   * recovery started at ~09:35:
     * killed `collect_weather 00 2.5km` and `crop_gribs 00`
@@ -12311,8 +12313,8 @@ Worked at UBC while Rita was at home
     * Shipping code is a coping mechanism
       * `herdr`: alternative to tmux that groks agent sessions
   * Session 4:
-    * Docs, skills & guardrails (In-repo agent instgructions)
-      * `agents.md`, `skills.md`
+    * Docs, skills & guardrails (In-repo agent instructions)
+      * `AGENTS.md`, `skills.md`
       * architect decision records (ADRs)
   * Session 5:
     * Local AI vs Cloud AI discussion
@@ -12372,7 +12374,7 @@ Max & Jingli arrived
   * killed `make_plots` workers
   * killed `make_averaged_dataset` workers
 * manually re-ran `make_averaged_dataset` workers:
-  * saw version missmatch warnings
+  * saw version mismatch warnings
   * can't connect to `salish`
     * opened helpdesk ticket
       * Henryk rebooted `skookum` on 19oct at ~09:15; `/home` was stalled due to data centre router issue
@@ -12501,7 +12503,7 @@ Worked at ESB
 * zoom mtg w/ Susan, Kellen & Michael of ARC re: Alliance RPP application for `arbutus`:
   * questions for ARC:
     * should we request 7 x 16 core cloud instances or HPC allocation for hindcast
-      * at default/RAC proirity estimated calendar time is the same
+      * at default/RAC priority estimated calendar time is the same
         * HPC could be 3x faster if we had high enough priority
         * cloud enables us to run continuously
       * request cloud
@@ -12665,7 +12667,7 @@ Worked at ESB
 ##### Miscellaneous
 
 * installed Miniforge3 to get latest `mamba`, `conda` and updates re: eMudhra intermediate CA certs issue
-* updated `udpate-pixi-lockfile` workflows to all happen early in the morning on the 4th of the month
+* updated `update-pixi-lockfile` workflows to all happen early in the morning on the 4th of the month
   instead of on the same day as `sphinx-linkcheck` so that I have a set day for updates
   * gha-workflows
   * NEMO_Nowcast
@@ -12682,7 +12684,7 @@ Worked at ESB
 
 ##### erddap-datasets
 
-* removed `bottleneck` re: possible numberical instability; PR#116
+* removed `bottleneck` re: possible numerical instability; PR#116
   * updated env on `skookum`
 
 
@@ -12728,34 +12730,34 @@ Worked at ESB
 
 ##### cookiecutter-analysis-repo
 
-* removed `bottleneck` re: possible numberical instability; PR#51
+* removed `bottleneck` re: possible numerical instability; PR#51
 
 
 ##### SalishSeaTools
 
-* removed `bottleneck` re: possible numberical instability; PR#234
+* removed `bottleneck` re: possible numerical instability; PR#234
 
 
 ##### SalishSeaNowcast
 
-* removed `bottleneck` re: possible numberical instability; PR#512
+* removed `bottleneck` re: possible numerical instability; PR#512
   * updated env on `skookum`
   * updated env on `arbutus`
 
 
 ##### PythonNotes
 
-* removed `bottleneck` re: possible numberical instability; PR#7
+* removed `bottleneck` re: possible numerical instability; PR#7
 
 
 ##### analysis-doug
 
-* removed `bottleneck` re: possible numberical instability; PR#85
+* removed `bottleneck` re: possible numerical instability; PR#85
 
 
 ##### MoaceanParcels
 
-* removed `bottleneck` re: possible numberical instability; PR#137
+* removed `bottleneck` re: possible numerical instability; PR#137
 
 
 
@@ -12896,6 +12898,147 @@ Worked at ESB while Rita is at home
 
 * continued work on Alliance RPP application for `arbutus`:
   * final read-through of proposal
+
+
+
+### Week 45
+
+#### Mon 2-Nov-2026
+
+##### SalishSeaCast
+
+* `watch_NEMO` progress messages aren't appearing in log
+  * restarted `log_aggregator` on `skookum` at ~11:30
+* `make_turbidity_file` failed due to insufficient data
+  * Fraser River buoy site time stamps looks like they rolled back 1h despite no time change
+
+
+##### Miscellaneous
+
+* NEMO monthly seminar:
+  * Natasha Ridenour: CoP GitHub org/page is coming into existence
+    * starting with issues
+  * Michael Dunphy: Hourly runoff forcing for the Pacific coast of Canada
+    * Maxim, James Craig
+    * ~7200 watersheds into CIOPS-West domain
+    * HRDLPS operational since 1may25
+    * RAVEN hydrological model framework, James Craig, Waterloo
+    * calabrated against 219 gauges
+  * Tahya Weiss-Gibbons: The Role of the North Pacific on Arctic Ocean Freshwater Pathways
+    * Clark Penelly, Paul G. Myers
+* finished work on Alliance RPP application for `arbutus`:
+  * Susan submitted the application
+
+
+##### SalishSeaTools
+
+* dug into Camryn's issue with a `ValueError` due to array dimensions size mismatch in
+  `visualizations.contour_thalweg()`
+  * `contour_thalweg()` is written to use `netCDF4.Dataset` objects and the compatibility of those
+    with `xarray.DataArray` objects appears to have broken
+    * TODO: refactor `visualiztions` module to use `xarray` objects and more explicit casts to `numpy` arrays
+
+
+
+#### Tue 3-Nov-2026
+
+##### SalishSeaCast
+
+* `watch_NEMO` progress messages are working now
+* `make_turbidity_file` failed due to insufficient data
+  * checked `/results/observations/ECCC/fraser_buoy.csv` and found 24 lines for 2nov26, but timezone
+    column contains `MST`
+    * suspect that `MST` is messing up date/time processing in `make_turbidity_file`
+    * stepped through code in debugger and found that `MST` isn't the issue
+    * code worked when I stepped through it at ~10:00 but it had failed at 08:28:24
+      * issue appears to be a hardcoded requirement for >19 rows in the selected dataframe in
+        `make_turbidity_file._calcAvgT()`
+        * I don't fully understand how/why that is impacted by the 1nov26 time non-change; discussed
+          it with Susan and agreed to try changing the condition to >18 instead of debugging
+          * hacked that change on `skookum` to test tomorrow
+* dug into `WARNING [make_plots] findfont: Failed to find font weight medium for Bitstream Vera Sans, now using 400.` messages
+  * changing `weight="medium"` to `weight="normal"` in `nowcast.figures.website_theme` quiets the warnings
+  * DejaVu fonts are an extended successor to Bitstream Vera
+  * visual comparison of DejaVu to Bitstream Vera figures show no difference to my eye
+
+
+
+#### Wed 4-Nov-2026
+
+##### Dependency Updates
+
+* 11 out of 11 `update-pixi-lockfile` actions were assigned to me because I added explicit assignment
+  to the reusable workflow
+  * 11 out of 11 `update-pixi-lockfile` actions produced GitHub notifications
+  * 10 out of 11 `update-pixi-lockfile` actions produced email notifications:
+    * exception: NEMO_Nowcast
+  * 11 out of 11 PRs still require manual release of 2 workflows, but 1 is the (redundant) assignment workflow
+
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed until ~10:35 due to 1 unprocessed file
+* confirmed that `make_turbidity_file` worked correctly
+* `grib_to_netcdf nowcast+` failed due to missing `00/001/` file
+  * no cropped files!
+  * `crop_gribs 00 2.5km` failed due to directory creation race conditions
+  * recovery started at ~10:45:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    crop_gribs 00 --backfill --debug
+    grib_to_netcdf nowcast+
+    upload_forcing arbutus nowcast+
+    upload_forcing robot.nibi nowcast+
+    upload_forcing optimum-hindcast nowcast+
+    ```
+    <!-- markdownlint-enable MD031 -->
+* confirmed that all but 1 font weight warnings are gone
+  * found 3 hard-coded `Bitstream Vera Sans` instances:
+    * `notebooks/DevelopingSalinityTemplate.ipynb`
+    * `nowcast.figures.research_ferries`
+    * `nowcast.figures.research_VENUS`
+
+
+##### Miscellaneous
+
+* listened to SHARCNET webinar "Introduction to Git 2026: Version Control in Modern Software Development"
+  * Speaker: Ed Armstrong
+  * a little ragged toward the end
+  * definitely doesn't deliver on the abstract promise of using Git with agentic AI
+  * TODO: look for video as training resource for MOAD
+* installed Air plug-in in PyCharm on `khawla`
+
+
+##### SalishSeaNowcast
+
+* added `AGENTS.md`; PR#515
+  * copied edited example from Gemini in `SOG-Bloomcast-Ensemble` and edited it for `SalishSeaNowcast`
+  * used Junie CLI in and Air session to review and improve it
+* changed turbidity data hours threshold in `make_turbidity_file._calcAvgT()` from 19 to 18; PR#516
+  * it seems to be tightly coupled with the time at which the worker runs. It failed in production
+    when run at 08:28:24 on 3nov26 but worked when run in the debugger at ~10:00.
+  * used Junie to do most of the work including adding unit tests for `_calcAvgT()`
+* add `gh` to dev env for Junie to use; PR#517
+* started changing font specs for all figures; PR#518
+  * weight from `medium` to `normal` in 4 modules to silence warnings about unavailable weight value of 500
+
+
+
+#### Thu 5-Nov-2026
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed until ~10:35 due to 2 unprocessed files
+* `download_live_ocean` was delayed
+
+
+##### SalishSeaNowcast
+
+* finished changing font specs for all figures; PR#518
+  * repalce outdated `Bitstream Vera Sans` family with updated `DejaVu Sans`
+* updated `AGENTS.md` re: `origin` on GitHub and `gh` in dev env to reduce repetitions discovery
+  work by agents; PR#519
+
 
 
 
