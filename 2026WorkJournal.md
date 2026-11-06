@@ -13029,7 +13029,26 @@ Worked at ESB while Rita is at home
 ##### SalishSeaCast
 
 * `crop_gribs 12` was delayed until ~10:35 due to 2 unprocessed files
-* `download_live_ocean` was delayed
+* `download_live_ocean` was timed out at 11:28
+  * email from Kate at ~11:00 that delay was due to issue with the atmosphere model;
+    expected resolution by 13:30
+  * re-ran manually at 11:42
+  * update from Kate that things were still bad at 13:35
+  * `crop_gribs 18` went into a death loop due to a corrupted GRIB message at 14:23
+    * killed at ~16:00
+  * `manager` crashed and restarted at 15:15
+  * started recovery at ~18:30:
+    * `crop_gribs 18` refused to launch without `bottleneck` in the env
+    * killed `collect_weather 18 2.5km`
+    * `download_live_ocean`; `make_live_ocean_files` didn't get launched
+    * `pixi run -m nemo_nowcast.workers.rotate_logs $NOWCAST_YAML`
+    * `make_live_ocean_files` refused to launch without `bottleneck` in the env
+    * `pixi add bottleneck`
+    * `make_live_ocean_files` got automation started
+    * `collect_weather 00 2.5km`
+    * `crop_gribs 00 2026-11-06`
+    * `download_weather 00 1km` failed due to no files
+    * `download_weather 12 1km`
 
 
 ##### SalishSeaNowcast
@@ -13038,7 +13057,23 @@ Worked at ESB while Rita is at home
   * repalce outdated `Bitstream Vera Sans` family with updated `DejaVu Sans`
 * updated `AGENTS.md` re: `origin` on GitHub and `gh` in dev env to reduce repetitions discovery
   work by agents; PR#519
+* deployed changes to `skookum`
 
+
+##### Miscellaneous
+
+* lunch with Paul Covert
+* UBC-IOS modeling mtg:
+  * Michael Dunphy, Hunitng for Bugs in NEMO with LLMs
+  * started with ChatGPT 5.6
+  * ocean.ographer.ca/aibugs
+  * using apptainer for contain agent
+  * OpenCode harness with Mistral and Cortecs
+  * 200k seems ot be the sweetspot for max context size
+  * why commit-message skill rather than in AGENTS.md?
+    * just an example to show the skill concept
+* Phys Ocgy seminar:
+  * Rich's Arctic Adventure
 
 
 
