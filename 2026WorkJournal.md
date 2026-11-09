@@ -13049,6 +13049,7 @@ Worked at ESB while Rita is at home
     * `crop_gribs 00 2026-11-06`
     * `download_weather 00 1km` failed due to no files
     * `download_weather 12 1km`
+* discovered that `sarracenia` has been collecting WEonG APCP files since 27oct
 
 
 ##### SalishSeaNowcast
@@ -13077,6 +13078,105 @@ Worked at ESB while Rita is at home
 
 
 
+#### Fri 6-Nov-2026
+
+##### SalishSeaCast
+
+* `collect_weather 00 2.5km` and `crop_gribs 00` stopped with 319 unmoved/unprocessed files
+  * perhaps due to them running backgrounded in a terminal session that I killed?
+  * no subsequent automation
+  * recovery started at ~09:00:
+    * `collect_weather 00 2.5km` failed repeatedly with "Invalid cross-device link" errors on files
+      that had already been processed
+      * moved processed files aside and did fresh download
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    mv /results/forcing/atmospheric/continental2.5/GRIB/20261106/00/ \
+       /results/forcing/atmospheric/continental2.5/GRIB/20261106/00.aside
+    # --debug to avoid launching 06 workers
+    crop_gribs 00 --debug  # in a separate terminal session to isolate eccodes barf
+    download_weather 00 2.5km --backfill --debug
+    crop_gribs 06  # in a separate terminal session to isolate eccodes barf
+    collect_weather 06 2.5km --backfill --backfill-date 2026-11-06
+    # wait for forecast2 runs to finish
+    pkill -f collect_weather  # worker started after collect_weather 06
+    collect_weather 12 2.5km --backfill --backfill-date 2026-11-06
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * `grib_to_netcdf nowcast+` failed due to missing `20261105T18Z_MSC_HRDPS_UGRD_AGL-10m_RLatLon0.0225_PT005H_SSC.grib2`
+    * realized that I never ran `crop_gribs 18` last night after the trouble getting `bottleneck` re-installed
+      * recovery:
+        <!-- markdownlint-disable MD031 -->
+        ```bash
+        crop_gribs 18 --backfill --fcst-date 2026-11-05 --debug
+        grib_to_netcdf nowcast+
+        upload_forcing arbutus nowcast+
+        upload_forcing optimum nowcast+
+        upload_forcing robot.nibi nowcast+
+        ```
+        <!-- markdownlint-enable MD031 -->
+
+
+##### Dependency Updates
+
+* Squash-merged `update-pixi-lockfile` PRs:
+  * moad_tools
+  * gha-workflows
+  * NEMO_Nowcast
+  * AtlantisCmd
+  * MOAD/docs
+  * NEMO-Cmd
+  * SalishSeaCast/docs
+  * SOG-Bloomcast-Ensemble
+
+  * Reshapr
+    * Python downgraded from 3.14.8 to 3.13.18 for linux64 ???
+  * SalishSeaCmd
+    * Python upgraded to 3.15 before I'm ready
+      * need to pin <3.next
+
+
+##### Miscellaneous
+
+* updated PyCharm on `khawla` to 2026.3
+
+
+##### SalishSeaNowcast
+
+* Decreased POLL_INTERVAL in `watch_NEMO` and `watch_ww3` from 5 minutes to 2 minutes; PR#520
+  * added production config tests in `test_watch_NEMO` re: issue#117 as a drive-by
+  * deployed to `skookum` and `arbutus`
+* continued added `TestConfig` to test modules to validate production config integrity for corresponding
+  workers re: issue#117; PR#521:
+  * `test_download_wwatch3_results`
+  * `test_make_feeds`
+
+
+
+#### Sat 7-Nov-2026
+
+
+##### SalishSeaNowcast
+
+* finished added `TestConfig` to test modules to validate production config integrity for corresponding
+  workers re: issue#117; PR#521:
+  * `test_make_turbidity_file`
+  * `test_run_NEMO`
+  * `test_watch_NEMO_agrif`
+* added git worktrees workflow section to `AGENTS.md`
+
+
+
+#### Sun 8-Nov-2026
+
+Goofed off
+
+
+
+
+
+
+
 
 
 ##### `arbutus` Migration
@@ -13085,7 +13185,6 @@ Worked at ESB while Rita is at home
   * update VMs to 26.04
   * fix `next_workers.after_ping_erddap()` to launch `make_plots wwatch3 forecast2` re: later relative
     timing of checklist clearance
-  * change `watch_NEMO` and `watch_ww3` time intervals from 5m to 2m because runs are >2x faster
 
 
 
@@ -13188,14 +13287,12 @@ TODO:
   from `figures/comparison/sandheads_winds.py:119` and `figures/comparison/sandheads_winds.py:127`
 * `make_turbidity_file._writeTFile()` has `dimTemplate="/results/forcing/rivers/RLonFraCElse_y2016m01d23.nc"`
   hard coded and uses `netCDF4.Dataset()` to create the output turbidity dataset
-* `polar.ncep.noaa.gov` sometimes refuses connections from GHA `sphinx linkcheck`
 * add `download_results` to copy `nowcast-green` results from `arbutus` to `nibi`
   * add a version of `make_averaged_dataset` that runs as a queued job on `nibi`
   * add a `watch_make_averaged_dataset` workers that monitors `squeue` on `nibi`
     * like `watch_NEMO_agrif` or `watch_NEMO_hindcast`
   * change `archive_tarball` to run as a queued job on `nibi`
     * add a `watch_archive_tarball` worker that monitors `squeue` on `nibi`
-* generate a new ed25519 key for automation logins and change to use it everywhere except `optimum`
 * change config to drop forcing uploads to `optimum`
 * change automation workflow to run nowcast-green in place of nowcast-blue
   * add output of 10min avg tide gauge station files
