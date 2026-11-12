@@ -13169,10 +13169,276 @@ Worked at ESB while Rita is at home
 
 #### Sun 8-Nov-2026
 
-Goofed off
+Bike work on Cindy
 
 
 
+### Week 46
+
+#### Mon 9-Nov-2026
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast[2]` failed with DAP failure:
+  * has been happening since `wwatch3/forecast2/7nov26/`
+  * ubcSSf2DWaveFields30mV17-02 dataset is MIA
+
+
+##### SalishSeaNowcast
+
+* experimented with Git worktrees for agent work:
+  * started refactoring `test_watch_NEMO` to replace `unittest.mock.patch` decorators with with
+    `pytest` fixtures and `monkeypatch` objects
+* worked on change to `xarray.combine_by_coords()` calls; PR#523
+  * re: issue#390
+  * explicitly set `compat="no_conflicts"` to preserve the present behaviour in light of the planned
+    change to `compat="override"`
+  * this silences the `FutureWarning` messages we presently get
+  * verified the equivalence of files with and without the change in an uncommitted notebook in
+    `analysis-doug`
+  * deployed branch to `skookum` for production test
+
+
+##### Miscellaneous
+
+* MOAD group dinner at Nuba
+  * celebrating recently published papers and Raisha in town
+
+Bike work on Cindy
+
+
+
+#### Tue 10-Nov-2026
+
+##### SalishSeaCast
+
+* `make_plots wwatch3 forecast[2]` failed with DAP failure
+* reviewed `manager` stderr log:
+  * restarted `dask` scheduler and workers on `salish` to bring client, scheduler & worker versions
+    back into alignment
+* investigated wwatch3 failures:
+  * last successful run was 02nov26
+  * 3nov run `stderr` has an MPI failure messages
+  * discovered that `wwatch3` VM has lost it's shared storage mount; re-mounted
+* backfiling started at ~15:50:
+  * on `arbutus`:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    make_ww3_wind_file -- arbutus.cloud-nowcast forecast --run-date 2026-11-03
+    make_ww3_current_file -- arbutus.cloud-nowcast forecast --run-date 2026-11-03
+    # wait for nowcast and forecast runs to finish
+    make_ww3_wind_file -- arbutus.cloud-nowcast forecast --run-date 2026-11-04
+    make_ww3_current_file -- arbutus.cloud-nowcast forecast --run-date 2026-11-04
+    # wait for nowcast and forecast runs to finish
+    make_ww3_wind_file -- arbutus.cloud-nowcast forecast --run-date 2026-11-05
+    make_ww3_current_file -- arbutus.cloud-nowcast forecast --run-date 2026-11-05
+    # wait for nowcast and forecast runs to finish
+    make_ww3_wind_file -- arbutus.cloud-nowcast forecast --run-date 2026-11-06
+    make_ww3_current_file -- arbutus.cloud-nowcast forecast --run-date 2026-11-06
+    # wait for nowcast and forecast runs to finish
+    make_ww3_wind_file -- arbutus.cloud-nowcast forecast --run-date 2026-11-07
+    make_ww3_current_file -- arbutus.cloud-nowcast forecast --run-date 2026-11-07
+    # wait for nowcast and forecast runs to finish
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+##### Miscellaneous
+
+* WestDRI webinar:
+  * Why would you use Rust for scientific computing?
+  * Manuel Sebastian Drehwald (University of Toronto and NVIDIA)
+  * automatic differentiation
+    * Enzyme; Julia -> Rust
+    * PyTorch etc. are the best tools
+  * misc notes:
+    * new `Flang` fortran compiler
+  * gave up after 20 minutes; way too deep about things that weren't the title
+* SHARNET course:
+  * Introduction to AI agents in Research
+  * Tyler Collins
+  * harnesses are key to where we're at now
+    * harness inherently more customizable than browser experience
+    * Claude Code, Codex
+    * opensource: Pi and OpenCode
+  * agent = model + harness
+  * creativity is separate from AI research (e.g. attention algorithm)
+  * "you're not writing enough code"
+    * irresponsible
+    * FOMO
+    * write more throw-away code, not rocket-ship code
+      * interesting in the context of people I talk to at conferences
+        * people admire my work comprared to writing code to generate ad clicks
+  * distinction between research code and support code
+    * my song
+  * neuroscience example
+  * how can agnest help with notebooks?
+    * caching files
+    * conversion to sharable scripts
+    * validating inputs, nicer reports, tests
+    * SLURM scripts, profiling, checkpoints, logging
+  * msb for sandbox
+  * investigate skills
+  * https://markusacademy.substack.com/p/claude-code-for-applied-economists
+
+
+##### SalishSeaNowcast
+
+* experimented with Git worktrees for agent work:
+  * continued refactoring `test_watch_NEMO`
+  * lots more `@path()` to `monkeypatch` changes
+
+
+
+#### Wed 11-Nov-2026
+
+**Statutory Holiday** - Remembrance Day
+
+##### SalishSeaCast
+
+* `crop_gribs 12` was delayed until ~10:27 due to 2 unprocessed files
+* continued backfiling wwatch3; started at ~12:00:
+  * sorted out `pixi run worker launch_remote_worker` syntax on `skookum`:
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    launch_remote_worker -- arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2026-11-08"
+    launch_remote_worker -- arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2026-11-08"
+    # wait for nowcast and forecast runs to finish
+    launch_remote_worker -- arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2026-11-09"
+    launch_remote_worker -- arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2026-11-09"
+    # wait for nowcast and forecast runs to finish
+    launch_remote_worker -- arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2026-11-10"
+    launch_remote_worker -- arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2026-11-10"
+    # wait for nowcast and forecast runs to finish
+    launch_remote_worker -- arbutus.cloud-nowcast make_ww3_wind_file "arbutus.cloud-nowcast forecast --run-date 2026-11-11"
+    launch_remote_worker -- arbutus.cloud-nowcast make_ww3_current_file "arbutus.cloud-nowcast forecast --run-date 2026-11-11"
+    # wait for nowcast and forecast runs to finish
+    ```
+    <!-- markdownlint-enable MD031 -->
+
+
+##### SalishSeaNowcast
+
+* experimented with Git worktrees for agent work:
+  * finished refactoring `test_watch_NEMO`; PR#524 - squash-merged
+    * refactored `pgrep` command calculation out of `_find_run_pid()` to that it can be tested
+      without using `call_args_list()`
+    * Replaced `unittest.mock.patch` context managers in `TestConfirmRunSuccess` with pytest `tmp_path`
+      and `monkeypatch` using real temporary files/directories to removed the `unittest.mock.patch` import
+    * retrospective via edited version of Matt Pocock's `/retro` skill as prompt:
+      <!-- markdownlint-disable MD031 -->
+      ```markdown
+      **Retrospective and Environment Improvement Proposals**
+
+      A retrospective of this session was conducted to analyze navigation, automated guardrails,
+      coding standards, steering instructions, and tool economy across the iterative refactoring of
+      `nowcast/workers/watch_NEMO.py` and `tests/workers/test_watch_NEMO.py`.
+
+      Below are the identified candidates for environment improvement, ordered from highest to lowest
+      impact on developer productivity and workflow efficiency.
+
+      ---
+
+      **1. Automated Checks & Guardrails: Add Linter for Unused Imports and Syntax Hygiene (High Impact)**
+
+      - **Observation**: During the session, dead imports (`patch`, `call`, `Mock` from `unittest.mock`)
+        remained in `tests/workers/test_watch_NEMO.py` after refactoring decorators to `monkeypatch`.
+        A dedicated prompt and turnaround cycle was required specifically to find and remove unused imports.
+      - **Current State**: `.pre-commit-config.yaml` runs basic file checks (`trailing-whitespace`, `end-of-file-fixer`,
+        `check-yaml`, `check-toml`) and `black`, but has no Python AST linter (e.g., `ruff` or `flake8`).
+      - **Proposed Improvement**:
+        - Add `ruff` to `[tool.pixi.feature.dev.dependencies]` in `pyproject.toml`.
+        - Add `ruff` / `ruff-format` (or `flake8` with `F401` check) to `.pre-commit-config.yaml`.
+        - **Outcome**: Unused imports, unused variables, and basic lint regressions are caught and
+          autofixed deterministically before commits, saving human review attention and agent turnarounds.
+
+      ---
+
+      **2. Coding Standards: Formalize Test Modernization Conventions for Reviewer Agents (Medium-High Impact)**
+
+      - **Observation**: The session involved multiple incremental refactoring tasks migrating legacy
+        `unittest.mock.patch` decorators and context managers to modern `pytest` idioms
+        (`monkeypatch`, `tmp_path`, and class-level autouse staticmethod fixtures).
+      - **Current State**: Test modernization patterns are implicit across individual prompt requests
+        rather than documented for reviewer agents.
+      - **Proposed Improvement**:
+        - Add a lightweight `CODING_STANDARDS.md` (or extend reviewer guidance) outlining test modernization conventions:
+          1. **Pytest Fixtures over Mocks**: Prefer `monkeypatch` and `tmp_path` fixtures over `unittest.mock.patch`
+             decorators or context managers.
+          2. **Real File Operations in Tests**: Use `tmp_path` and real file creation/inspection instead of mocking
+             `pathlib.Path.exists` and `pathlib.Path.open`.
+          3. **Autouse Fixtures**: Consolidate repetitive monkeypatching across test classes into class-level
+             `@staticmethod` autouse fixtures.
+          4. **Callable Stubs**: Prefer simple local callable functions over `unittest.mock.Mock` instances
+             for simple return-value stubs.
+        - **Outcome**: The reviewer agent can automatically flag newly introduced or leftover `unittest.mock.patch`
+          usage during PR reviews without requiring manual human oversight.
+
+      ---
+
+      **3. Tool Economy & Workflow: Single-Command Verification in Pixi (Medium Impact)**
+
+      - **Observation**: Agents run test suites and code formatting checks separately via
+        `pixi run -e dev pytest <path>` and `pixi run -e dev pre-commit run --all-files`.
+      - **Current State**: `pyproject.toml` defines `pytest`, `pytest-cov`, and `docs` tasks,
+        but lacks a consolidated `check` or `lint` task.
+      - **Proposed Improvement**:
+        - Add a `check` or `lint` task under `[tool.pixi.feature.dev.tasks]` in `pyproject.toml`, for example:
+          ```toml
+          [tool.pixi.feature.dev.tasks]
+          lint = "pre-commit run --all-files"
+          check = { depends-on = ["lint", "pytest"] }
+          ```
+        - **Outcome**: Provides a standardized, single-command entry point for agents and CI pipelines to
+          validate formatting, linting, and unit tests in one execution.
+
+      ---
+
+      **4. Tool Economy: Proactive PR Description Generation (Low-Medium Impact)**
+
+      - **Observation**: Pull request creation required a follow-up interaction to inspect git history and
+        update the PR description with commit-by-commit breakdowns.
+      - **Current State**: Standard PR creation instructions do not mandate including commit digests on multi-commit branches.
+      - **Proposed Improvement**:
+        - Update agent guidance or GitHub PR skill/template to automatically summarize all branch commits into the
+          initial `gh pr create --body` payload whenever creating PRs with multiple commits.
+        - **Outcome**: Eliminates an unnecessary prompt round-trip and ensures comprehensive PR metadata from the outset.
+
+      ---
+
+      **5. Navigation: Pointer to Standards from AGENTS.md (Low Impact)**
+
+      - **Observation**: `AGENTS.md` is currently lean (54 lines) and effective at specifying Pixi execution rules and
+        worktree isolation.
+      - **Proposed Improvement**:
+        - Keep `AGENTS.md` minimal, but add a one-line navigation pointer directing reviewer agents to
+          `CODING_STANDARDS.md` for codebase style and test conventions.
+        - **Outcome**: Keeps context window overhead minimal for implementation agents while giving
+          review agents instant access to domain-specific review rules.
+      ```
+      <!-- markdownlint-enable MD031 -->
+* squash-merged change to `xarray.combine_by_coords()` calls; PR#523
+  * re: issue#390
+
+  * TODO:
+    * strengthen `AGENTS.md` direction to always use a worktree and branch so that agent work
+      is always organized to go into a PR
+
+
+##### Miscellaneous
+
+* worked with Susan to experiment with Antigravity in a VM on `arbutus` for Tyler Collins' SHARCNET
+  Agentic AI in Research Programming course
+
+
+
+#### Thu 12-Nov-2026
+
+##### SalishSeaCast
+
+* `run_NEMO forecast` failed due to full `/` file system preventing tmp file creation
+  * rebooted at ~09:08
+  * still 100% full
 
 
 
