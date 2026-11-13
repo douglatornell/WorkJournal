@@ -13439,10 +13439,37 @@ Bike work on Cindy
 * `run_NEMO forecast` failed due to full `/` file system preventing tmp file creation
   * rebooted at ~09:08
   * still 100% full
+  * culprit was `~/.cache/rattler/cache/`
+    * cleared with `pixi clean cache`
+* restarted automation at ~11:05 with `make_forcing_links ssh`
+* `forecast` run crashed; automation continued, but all other runs crashed
+  * compute nodes have stale NFS handles
+  * tried several thing to fix, not clear if they were all required, but mounts were fixed at the end:
+    * restarted NFS service
+    * `sudo exportfs -r`
+    * `sudo mount --bind /nemoShare/MEOPAR/ /export/MEOPAR/`
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+
+
+##### Dependency Updates
+
+* Squash-merged `dependabot` PRs to update `setup-pixi` to 0.11.3 re: feature & dependency updates
+  * moad_tools
+  * gha-workflows
+  * AtlantisCmd
+* Squash-merged `dependabot` PRs to update `peter-evans/create-pull-request` to 8.1.2 re: feature & dependency updates
+  * gha-workflows
 
 
 
 
+
+* TODO:
+  * storm surge and waves pages times are showing MST rather than PCT
 
 
 ##### `arbutus` Migration
