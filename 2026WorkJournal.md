@@ -13255,7 +13255,7 @@ Bike work on Cindy
     * new `Flang` fortran compiler
   * gave up after 20 minutes; way too deep about things that weren't the title
 * SHARNET course:
-  * Introduction to AI agents in Research
+  * Introduction to AI agents in Research, Part 1
   * Tyler Collins
   * harnesses are key to where we're at now
     * harness inherently more customizable than browser experience
@@ -13436,6 +13436,7 @@ Bike work on Cindy
 
 ##### SalishSeaCast
 
+* `get_onc_ferry TWDP` failed with a 400 error
 * `run_NEMO forecast` failed due to full `/` file system preventing tmp file creation
   * rebooted at ~09:08
   * still 100% full
@@ -13465,6 +13466,265 @@ Bike work on Cindy
   * gha-workflows
 
 
+##### SalishSeaNowcast
+
+* changed `next_workers.after_ping_erddap()` to launch `make_plots wwatch3 forecast2` when there is a
+  `wwatch3 forecast2` run in the checklist re: later relative timing of checklist clearance due to faster execution
+  on 2026 `arbutus.cloud`
+  * made the change on `skookum` for testing tomorrow because it is 2 characters on 1 line
+
+
+
+#### Fri 13-Nov-2026
+
+##### SalishSeaCast
+
+* `get_onc_ferry TWDP` failed with a 400 error
+* `crop_gribs 12` was delayed until ~10:30 due to 1 unprocessed file
+
+
+##### SalishSeaNowcast
+
+* finished change `next_workers.after_ping_erddap()` to launch `make_plots wwatch3 forecast2` when there is a
+  `wwatch3 forecast2` run in the checklist re: later relative timing of checklist clearance due to faster execution
+  on 2026 `arbutus.cloud`
+  * in production test on `skookum`:
+    * `make_plots wwatch3 forecast2` ran correctly after `forecast2` run
+    * `make_plots wwatch3 forecast` ran correctly after `clear_checklist` and `forecast` run
+  * squash-merged PR#525 and updated production on `skookum`
+* hacked `crop_gribs` to try to handle 1 unprocessed file state that frequently delays automation
+  * copied to `skookum` to test starting with 14nov26/06Z HRDPS forecast
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `tornado` to 6.6 re: multiple vulnerabilities
+  * erddap-datasets
+  * SalishSeaTools
+  * SOG-Bloomcast
+  * MoaceanParcels
+* Squash-merged dependabot PRs to update `setuptools` to 84.1.0 re: Windows path escape vulnerability
+  * SOG-forcing
+* Squash-merged dependabot PRs to update `filelock` to 4.2.1 re: multiple vulnerabilities
+  * SOG-forcing
+
+
+##### Miscellaneous
+
+* SHARNET course:
+  * Introduction to AI agents in Research, Part 2
+  * Tyler Collins, Brock
+  * risk/responsibility
+    * blast radius?
+      * money, reputation
+    * who owns the wrong doing?
+    * mitigation
+      * harnesses have a permissions file tht controls which tools can run and how
+        * e.g. turn off writes
+  * sandboxing
+    * github/nolabs-ai/nono
+    * github/containers/bubblewrap
+    * terraform
+    * agent breakout chance is infinitesimally small
+  * steering and associated files
+    * AGENTS.md
+      * claude has 3 levels: system, user, project
+      * read in order at session start-up
+      * user level:
+        * short blurb about yourself: conversational token
+        * available tools:
+          * pixi, Git
+        * avoid "diary" patterns
+      * project level:
+        * ref: *.toml for deps - **talk to Susan**
+        * prefer hooks to instructions
+          * e.g. Git interaction
+        * what make the project different
+        * how to test, perhaps in multiple worktrees
+        * domain specific language if there are overloaded terms
+        * see T3 Code for best example
+  * reviewing sterring docs
+    * review "prompting guide" in model releases
+    * ask agent to go through past conversations
+    * ask agent to review skills/plugins/extensions
+  * fleet repository
+    * personal and private repository
+    * ask agent to review work to find brags
+  * skills
+    * unslop - maybe no longer relevant
+    * code review
+    * ask the agent to write the first draft
+    * recommended suites:
+      * Matt Pocock
+        * grilling
+      * poteto: pstack
+        * focussed more on orchestration
+      * Tyler's:
+        * style-pass
+          * transform writing into own style
+        * ponytail-cleanup
+          * ponytail review pattern on Internet
+        * article-drafting
+          * uses grill-me to structure thoughts for linkedin posts
+  * open models
+    * ~6-8 months behind frontier models due to derivative crackdown by frontier labs
+  * takeaways:
+    * try top-down than prune
+  * brine
+    *
+  * recommendations:
+    * fresh sessions often minimizes token use
+      * paused sessions have to re-cache context
+  * Tyler admins brine
+  * doesn't like Antigravity
+  * handle IDEs in sandboxes by mounting worktrees
+  * PDF of slides for both sessions
+    * https://training.sharcnet.ca/courses/pluginfile.php/87689/mod_bigbluebuttonbn/presentation/Introduction%20to%20AI%20agents%20in%20Research.pdf
+
+
+##### NEMO-cmd
+
+* experimented with lazy imports
+  * no dramatic speedup, but I'm not profiling rigorously
+
+
+##### Minecraft
+
+* `lizzy` shut down due to last night's power failure
+  * updated OS packages when I restarted it, and auto-removed outdated packages
+* checked mods, etc. for releases compatible with 26.3:
+  * sodium: yes
+  * lithium: yes
+  * iris: yes
+  * entity model features: yes
+  * entity texture features: yes
+  * fresh animations: yes
+  * malilib: yes
+  * minihud: yes
+  * tweakeroo: yes
+* did lizzy-smelt backup
+* set up 26.3 server:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  sudo apt install openjdk-25-jre-headless
+  mkdir ~/Games/MinecraftFabric26.3Server
+  cd ~/Games/MinecraftFabric26.3Server
+  curl -OJ https://meta.fabricmc.net/v2/versions/loader/26.3/0.20.1/1.1.2/server/jar
+  pushd ~/Games/MinecraftFabric1.21.11Server
+  cp banned-* eula.txt ops.json whitelist.json start.sh ../MinecraftFabric26.3Server/
+  popd
+  ```
+  <!-- markdownlint-enable MD031 -->
+  * edited `start.sh` to:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  #!/usr/bin/env bash
+  java -Xmx2G -jar fabric-server-mc.26.3-loader.0.20.1-launcher.1.1.2.jar nogui
+  ```
+  <!-- markdownlint-enable MD031 -->
+* launched and stopped server to create instance directories and files
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  ./start.sh
+    ...
+  /stop
+  ```
+  <!-- markdownlint-enable MD031 -->
+* edited `server.properties` to sync with 1.21.11 settings
+* installed mods, and rsync-ed `1-20-1-25jul23` world tree:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  pushd ~/Games/MinecraftFabric26.3Server/mods/
+  curl -LO https://cdn.modrinth.com/data/gvQqBUqZ/versions/fWv5bnZk/lithium-fabric-0.26.3+mc26.3.jar
+  popd
+  rsync -av ../MinecraftFabric1.21.11Server/1-20-1-25jul23 ./
+  ```
+  <!-- markdownlint-enable MD031 -->
+* downloaded and unzipped on `khawla` VanillaTweaks double shulker shells v1.3.18 datapack
+  * rsync-ed it to `Games/MinecraftFabric1.21.11Server/1-20-1-25jul23/datapacks/` and removed v1.13.15
+* launched server in `tmux`
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  tmux new -n minecraft-server
+  ./start.sh
+  ```
+  <!-- markdownlint-enable MD031 -->
+* set up 26.3 client instance in MultiMC
+  * installed openjdk-25-jre-headless
+  * created instance
+  * installed fabric 0.20.1
+  * downloaded and installed loader mods:
+    * sodium-fabric-0.9.2+mc26.3.jar
+    * lithium-fabric-0.26.3+mc26.3.jar
+    * malilib-fabric-26.3-0.30.2.jar
+    * minihud-fabric-26.3-0.41.2.jar
+    * tweakeroo-fabric-26.3-0.30.1.jar
+    * iris-fabric-1.11.7+mc26.3.jar
+    * entity_model_features-3.3.12-26.3-fabric.jar
+    * entity_texture_features-7.2.7-26.3-fabric.jar
+  * downloaded and installed resource pack:
+    * FreshAnimations_v1.11.2_26.1+.zip
+  * selected Java: `/usr/lib/jvm/java-25-openjdk-amd64/bin/java`
+  * started and stopped client instance to populate `config/`
+    * fail!
+      * isolated problem to `iris`
+  * copied `minihud.json` and `tweakeroo.json` from 1.21.1 instance `config/`
+  * downloaded and installed Vanilla Tweaks resource packs ``:
+    * lower shield
+    * redstone devices:
+      * StickyPistonSides
+      * DirectionalHoppers
+      * DirectionalDispensersDroppers
+      * DirectionalObservers
+      * GroovyLevers
+      * RedstoneWireFix
+  * added server: `SADA on lizzy` at 10.0.0.81
+* started game and adjusted UI:
+  * FOV: 80
+  * Video:
+    * Brightness: Bright
+    * GUI Scale: 2x
+    * Weather: Fancy
+    * Leaves: Fancy
+  * enabled resource packs
+  * Music & Sound:
+    * Music: 50%
+    * Closed Captions: on
+    * Directional Audio: on
+    * show Music Toast: on
+  * Optional Telemetry Data
+  * F3-h to enable advanced tooltips
+  * used `/gamerule pvp` to confirm `false` setting
+
+
+
+#### Sat 14-Nov-2026
+
+##### SalishSeaCast
+
+* `crop_gribs` worked correctly for 06 and 12 forecasts but didn't test new "1 unprocessed file" handling
+* `wwatch3 forecast` plots have suspicious looking straight line segment of ~14nov
+* `crop_gribs 18` was delayed until ~16:27 due to 1 unprocessed file
+  * new handler code didn't seem to run
+
+
+##### Dependency Updates
+
+* Squash-merged dependabot PRs to update `soupsieve` to 4.0 re: DoS vulnerability
+  * SalishSeaTools
+  * MoaceanParcels
+  * SOG-Bloomcast
+  * erddap-datasets
+
+* Squash-merged dependabot PRs to update `tornado` to 6.6.1 re: open redirect vulnerability
+  * SOG-Bloomcast
+  * SalishSeaTools
+  * MoaceanParcels
+  * ECget
+
+
+
+
 
 
 
@@ -13476,8 +13736,6 @@ Bike work on Cindy
 
 * TODO:
   * update VMs to 26.04
-  * fix `next_workers.after_ping_erddap()` to launch `make_plots wwatch3 forecast2` re: later relative
-    timing of checklist clearance
 
 
 
@@ -13500,6 +13758,20 @@ TODO:
   that arise from `make_live_ocean_files` in present `SalishSeaNowcast` environment
   * I can't understand the code
   * need to document versions: Python, gsw, numpy
+
+
+
+#### Sun 15-Nov-2026
+
+##### Miscellaneous
+
+* researched container, microVM, and kernel policy isolation of agents
+  * `nono` may be sufficient for Susan on `smelt`
+* explored limitations of Air session in PyCharm; Gemini 3.7 Flash says:
+  * writes are limited to project tree
+  * only standard envvars are known to agent
+  * it provided me with an `ls` command that it could run in my terminal so that I could see my public
+    ssh keys
 
 
 
