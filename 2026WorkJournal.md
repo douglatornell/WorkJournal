@@ -7584,7 +7584,7 @@ Worked at ESB
 
     For command output examples that are typically contained in `code-block:: text` directives, please add `:class: no-copybutton` to the directive to suppress the copy button. This will be another commit.
 
-    Please tell ask me how to handle any `code-block::` directives that you find for languages other than `bash` and `text`.
+    Please ask me how to handle any `code-block::` directives that you find for languages other than `bash` and `text`.
     ```
     <!-- markdownlint-enable MD031 MD013 -->
 
@@ -12293,7 +12293,7 @@ Worked at UBC while Rita was at home
       * 7 compute nodes
 * IOS seminar:
   * Cathryn Murray, “Investigating the Hidden Depths of the Environmental Impacts of Commercial Shipping”
-    * funder for Cassidy/Raisha/Susan scrubber water work
+    * provides funds for Cassidy/Raisha/Susan scrubber water work
 
 
 
@@ -12568,7 +12568,7 @@ Worked at ESB
 
 ##### Dependency Updates
 
-* Update depenedencies in `NEMO-Cmd` from `update-pixi-lockfile` PR that got out of sync; PR#178:
+* Update dependencies in `NEMO-Cmd` from `update-pixi-lockfile` PR that got out of sync; PR#178:
   * `gitpython`, `hatch`, `pillow`
 * Squash-merged `update-pixi-lockfile` PR:
   * SalishSeaCmd
@@ -12658,7 +12658,7 @@ Worked at ESB
 
 ##### Miscellaneous
 
-* uninstalled `Miniforce3-pypy` from `ocean`
+* uninstalled `Miniforge3-pypy` from `ocean`
 
 
 
@@ -12826,7 +12826,7 @@ Worked at ESB
 
 * continued work on Alliance RPP application for `arbutus`:
   * wrote Resource Request Justification section (4)
-  * added prompts from ARC consulation notes for other bits to be added/finished
+  * added prompts from ARC consultation notes for other bits to be added/finished
 
 
 
@@ -12923,7 +12923,7 @@ Worked at ESB while Rita is at home
     * ~7200 watersheds into CIOPS-West domain
     * HRDLPS operational since 1may25
     * RAVEN hydrological model framework, James Craig, Waterloo
-    * calabrated against 219 gauges
+    * calibrated against 219 gauges
   * Tahya Weiss-Gibbons: The Role of the North Pacific on Arctic Ocean Freshwater Pathways
     * Clark Penelly, Paul G. Myers
 * finished work on Alliance RPP application for `arbutus`:
@@ -12936,7 +12936,7 @@ Worked at ESB while Rita is at home
   `visualizations.contour_thalweg()`
   * `contour_thalweg()` is written to use `netCDF4.Dataset` objects and the compatibility of those
     with `xarray.DataArray` objects appears to have broken
-    * TODO: refactor `visualiztions` module to use `xarray` objects and more explicit casts to `numpy` arrays
+    * TODO: refactor `visualizations` module to use `xarray` objects and more explicit casts to `numpy` arrays
 
 
 
@@ -13055,7 +13055,7 @@ Worked at ESB while Rita is at home
 ##### SalishSeaNowcast
 
 * finished changing font specs for all figures; PR#518
-  * repalce outdated `Bitstream Vera Sans` family with updated `DejaVu Sans`
+  * replace outdated `Bitstream Vera Sans` family with updated `DejaVu Sans`
 * updated `AGENTS.md` re: `origin` on GitHub and `gh` in dev env to reduce repetitions discovery
   work by agents; PR#519
 * deployed changes to `skookum`
@@ -13065,12 +13065,12 @@ Worked at ESB while Rita is at home
 
 * lunch with Paul Covert
 * UBC-IOS modeling mtg:
-  * Michael Dunphy, Hunitng for Bugs in NEMO with LLMs
+  * Michael Dunphy, Hunting for Bugs in NEMO with LLMs
   * started with ChatGPT 5.6
   * ocean.ographer.ca/aibugs
   * using apptainer for contain agent
   * OpenCode harness with Mistral and Cortecs
-  * 200k seems ot be the sweetspot for max context size
+  * 200k seems ot be the sweet-spot for max context size
   * why commit-message skill rather than in AGENTS.md?
     * just an example to show the skill concept
 * Phys Ocgy seminar:
@@ -13220,7 +13220,7 @@ Bike work on Cindy
   * last successful run was 02nov26
   * 3nov run `stderr` has an MPI failure messages
   * discovered that `wwatch3` VM has lost it's shared storage mount; re-mounted
-* backfiling started at ~15:50:
+* backfilling started at ~15:50:
   * on `arbutus`:
     <!-- markdownlint-disable MD031 -->
     ```bash
@@ -13254,13 +13254,13 @@ Bike work on Cindy
   * misc notes:
     * new `Flang` fortran compiler
   * gave up after 20 minutes; way too deep about things that weren't the title
-* SHARNET course:
+* SHARCNET course:
   * Introduction to AI agents in Research, Part 1
   * Tyler Collins
   * harnesses are key to where we're at now
     * harness inherently more customizable than browser experience
     * Claude Code, Codex
-    * opensource: Pi and OpenCode
+    * open source: Pi and OpenCode
   * agent = model + harness
   * creativity is separate from AI research (e.g. attention algorithm)
   * "you're not writing enough code"
@@ -13268,11 +13268,11 @@ Bike work on Cindy
     * FOMO
     * write more throw-away code, not rocket-ship code
       * interesting in the context of people I talk to at conferences
-        * people admire my work comprared to writing code to generate ad clicks
+        * people admire my work compared to writing code to generate ad clicks
   * distinction between research code and support code
     * my song
   * neuroscience example
-  * how can agnest help with notebooks?
+  * how can agents help with notebooks?
     * caching files
     * conversion to sharable scripts
     * validating inputs, nicer reports, tests
@@ -13297,7 +13297,7 @@ Bike work on Cindy
 ##### SalishSeaCast
 
 * `crop_gribs 12` was delayed until ~10:27 due to 2 unprocessed files
-* continued backfiling wwatch3; started at ~12:00:
+* continued backfilling wwatch3; started at ~12:00:
   * sorted out `pixi run worker launch_remote_worker` syntax on `skookum`:
     <!-- markdownlint-disable MD031 -->
     ```bash
@@ -13511,7 +13511,7 @@ Bike work on Cindy
 
 ##### Miscellaneous
 
-* SHARNET course:
+* SHARCNET course:
   * Introduction to AI agents in Research, Part 2
   * Tyler Collins, Brock
   * risk/responsibility
@@ -13543,7 +13543,7 @@ Bike work on Cindy
         * how to test, perhaps in multiple worktrees
         * domain specific language if there are overloaded terms
         * see T3 Code for best example
-  * reviewing sterring docs
+  * reviewing steering docs
     * review "prompting guide" in model releases
     * ask agent to go through past conversations
     * ask agent to review skills/plugins/extensions
@@ -13586,6 +13586,24 @@ Bike work on Cindy
 
 * experimented with lazy imports
   * no dramatic speedup, but I'm not profiling rigorously
+
+
+
+#### Sat 14-Nov-2026
+
+##### SalishSeaCast
+
+* `get_onc_ferry TWDP` failed with a 400 error
+* `crop_gribs` worked correctly for 06 and 12 forecasts but didn't test new "1 unprocessed file" handling
+* `wwatch3 forecast` plots have suspicious looking straight line segment for ~14nov
+* `crop_gribs 18` was delayed until ~16:27 due to 1 unprocessed file
+  * new handler code didn't seem to run
+
+
+##### Miscellaneous
+
+* researched AI agent containment via containers, VMs, and sandboxes
+  * more questions and confusion than answers
 
 
 ##### Minecraft
@@ -13698,14 +13716,15 @@ Bike work on Cindy
 
 
 
-#### Sat 14-Nov-2026
+#### Sun 15-Nov-2026
 
 ##### SalishSeaCast
 
-* `crop_gribs` worked correctly for 06 and 12 forecasts but didn't test new "1 unprocessed file" handling
-* `wwatch3 forecast` plots have suspicious looking straight line segment of ~14nov
-* `crop_gribs 18` was delayed until ~16:27 due to 1 unprocessed file
-  * new handler code didn't seem to run
+* `get_onc_ferry TWDP` failed with a 400 error
+* `get_onc_ctd SEVIP` failed due to QA/QC flag array size mismatch with obs array
+  * no data on ONC plotting page since mid-7nov
+  * no obs retrieved since 13nov
+* `wwatch3 forecast` plots have suspicious looking straight line segment for ~15nov
 
 
 ##### Dependency Updates
@@ -13715,7 +13734,6 @@ Bike work on Cindy
   * MoaceanParcels
   * SOG-Bloomcast
   * erddap-datasets
-
 * Squash-merged dependabot PRs to update `tornado` to 6.6.1 re: open redirect vulnerability
   * SOG-Bloomcast
   * SalishSeaTools
@@ -13723,6 +13741,287 @@ Bike work on Cindy
   * ECget
 
 
+##### Miscellaneous
+
+* continued researching AI agent containment via containers, VMs, and sandboxes
+  * learned about `nono` and `bubblewrap`
+    * both provide kernel-enforced containment; less strong than VM
+    * `nono` is an opinionated framework; `bubblewrap` is lower level (could implement `nono`)
+  * asked Gemini-3.7-Flash to do "risky" things in Air session:
+    * it declined to try to access my ssh keys, but told me how to list the public keys
+    * it told me about the standard envvars defined in its session and how to use `printenv` and `echo`
+    * it told me it couldn't write to `$HOME` and elaborated on its write access policy constraints,
+      primarily workspace scoping for writes
+      * when I asked it wxplicitly to create `$HOME/surprise.txt` it asked permission before it did so,
+        then went ahead and created the file even when I hit `esc` to skip the turn
+    * I'm not sure if these gaurdrails are from Air or Gemini, nor how strong they are in light of
+      the last test
+
+
+
+### Week 47
+
+#### Mon 16-Nov-2026
+
+##### SalishSeaCast
+
+* `get_onc_ferry TWDP` failed with a 400 error
+* `get_onc_ctd SEVIP` failed due to no obs
+* `crop_gribs 12` stalled at 08:54:55, timed out at 10:27
+  * lots of hours on `hpfx` have only a few files at 11:00
+* `collect_weather 12 2.5km` finally finished at ~14:40
+* `collect_river_data` failed for Snohomish and Nisqually Rivers
+* `collect_weather 18 2.5km` and `crop_gribs 18` probably started in the midst of 18Z file downloads
+* restarted automation starting at ~15:35:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  crop_gribs 12 --backfill
+  upload_forcing arbutus nowcast+
+    # failed due to arbutus VM reboots (see below)
+  upload_forcing optimum nowcast+
+  upload_forcing roboto.nibi nowcast+
+  upload_forcing arbutus nowcast+
+    # nowcast-blue run started at 16:28
+  pkill -f collect_weather 18
+  pkill -f crop_gribs 18
+  mv /results/forcing/atmospheric/continental2.5/GRIB/20261116/18/ \
+    /results/forcing/atmospheric/continental2.5/GRIB/20261116/18.aside
+  download_weather 18 2.5km
+  crop_gribs 18 --backfill
+  rm -rf /results/forcing/atmospheric/continental2.5/GRIB/20261116/18.aside/
+  fd -tf --glob "*_PT0??H.grib2" /results/forcing/atmospheric/continental2.5/GRIB/20261116/18 -X rm
+  collect_weather 00 2.5km
+  crop_gribs 00 --fcst-date 2026-11-17
+  download_weather 12 1km
+  download_weather 00 1km
+  ```
+  <!-- markdownlint-enable MD031 -->
+  * several `arbutus` VMs got rebooted due to hypervisor maintenane in the midst of the issues above
+    * recovery:
+      <!-- markdownlint-disable MD031 -->
+      ```bash
+      sudo mount /dev/vdc /nemoShare/
+      sudo mount --bind /nemoShare/MEOPAR/ /export/MEOPAR/
+      sudo systemctl restart nfs-kernel-server.service
+      for n in {1..7}; do   echo nowcast${n};   ssh nowcast${n} "ls -l /nemoShare/MEOPAR"; done
+        # succeeded for all
+      for n in {1..5}; do   echo wwatch${n};   ssh wwatch${n} "ls -l /nemoShare/MEOPAR"; done
+        # failed for all
+      for n in {1..5}; do   echo wwatch${n};   ssh wwatch${n} \
+        "sudo mount -t nfs -o proto=tcp,port=2049 192.168.156.218:/MEOPAR /nemoShare/MEOPAR"; done
+      for n in {1..5}; do   echo wwatch${n};   ssh wwatch${n} "ls -l /nemoShare/MEOPAR"; done
+        # succeeded for all
+      ```
+      <!-- markdownlint-enable MD031 -->
+
+
+##### Miscellaneous
+
+* researched vacation leave balances in my worklog and Workday
+  * Workday appears to reflect all of the vacation I can recall having taken since start of 2021
+  * Workday says my carryover on 2021-01-01 was 227.8 hours (13.4 weeks at 17h/wk)
+* Becca's PODS practise
+
+
+##### SalishSeaNowcast
+
+* updated HRDPS `sarracenia` configs to reject `*WEonG_APCP_Sfc*` files that were added starting with
+  12Z forecast on 27oct26; PR#526
+  * deployed change on `skookum` and restarted `sarracenia` client at ~17:45
+
+
+
+#### Tue 17-Nov-2026
+
+Loop recorder implantation
+
+##### SalishSeaCast
+
+* `get_onc_ferry TWDP` failed with a 400 error
+* HRDPS `sarracenia` config change to reject `*WEonG_APCP_Sfc*` files was successful for 00Z and 06Z
+  forecasts
+* `collect_weather 12 2.5km` was delayed until 09:38
+* `grib_to_netcdf nowcast+` failed due to missing
+    `/results/forcing/atmospheric/continental2.5/GRIB/20261117/00/012/20261117T00Z_MSC_HRDPS_UGRD_AGL-10m_RLatLon0.0225_PT012H_SSC.grib2`
+  * `crop_gribs 00` processed 127 files but left 402 files unprocessed
+    * maybe due to running as a background process in my VSCode remote session?
+* `collect_river_data` failed all 4 USGS rivers
+* recovery started at ~09:50:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  crop_gribs 00 --backfill
+  grib_to_netcdf nowcast+
+  ```
+  <!-- markdownlint-enable MD031 -->
+  * `grib_to_netcdf nowcast+` failed due to missing
+      `/results/forcing/atmospheric/continental2.5/GRIB/20261117/00/012/20261117T00Z_MSC_HRDPS_PRMSL_MSL_RLatLon0.0225_PT012H_SSC.grib2`
+    * that file is empty but its uncropped version still exists
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    rm /results/forcing/atmospheric/continental2.5/GRIB/20261117/00/012/20261117T00Z_MSC_HRDPS_PRMSL_MSL_RLatLon0.0225_PT012H_SSC.grib2
+    crop_gribs 00 --backfill
+    grib_to_netcdf nowcast+
+    upload_forcing arbutus nowcast+
+    upload_forcing optimum nowcast+
+    upload_forcing roboto.nibi nowcast+
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * `nowcast-blue` run statrted at 10:15:46
+    * failed because `nowcast2` VM was rebooted at 09:57 due to `arbutus` hypervisor maintenance
+      * re-mounted `/nemoShare/MEOPAR/` on it
+    <!-- markdownlint-disable MD031 -->
+    ```bash
+    upload_forcing arbutus nowcast+
+    ```
+    <!-- markdownlint-enable MD031 -->
+  * `nowcast-blue` run statrted at 10:26:08
+
+
+##### salishsea-site
+
+* updated milestone v25.3 to v26.1 on GitHub because auto-milestone workflow doesn't work for overdue
+  milestones
+* released v26.1 re: presently deployed
+* started changing to use Pixi for package & env mgmt; PR#192
+  * edited `pyproject.toml` to prepare:
+    * `license = { file = "LICENSE" }`
+  * `pixi init` to add `[tool.pixi.*]` tables to `pyproject.toml`
+  * `pixi workspace platform add linux-64 osx-arm64`
+  * move Pixi environments additions in `.gitignore`
+  * add `,gitattributes` to VCS
+  * edit `envs/environment-prod.yaml`
+    * hide `nodefaults` channel
+    * pin `python=3.14`
+    * hid `--editable ../` item in `dependencies.pip` list
+  * `pixi import -e default --format conda-env envs/environment-prod.yaml` to get minimal packages in
+    `default` environment
+  * `pixi install` created the env and the lock file
+    * add `.pixi.lock` to Git tracking
+  * change default env package pins from `*` to semver ranges
+    * `pixi upgrade --pinning-strategy semver`
+  * moved source for most dependencies from PyPI to conda-forge
+    * had to leave `pyramid-mako` on PyPI because it's not on conda-forge
+  * configured PyCharm:
+    * added `/media/doug/warehouse/MEOPAR/salishsea-site/.pixi/envs/default` to `/home/doug/.conda/environments.txt`
+    * selected env
+  * added `test` feature based on `environment-test.yaml`
+    * `pixi add --feature test pytest pytest-cov pytest-randomly tomli`
+    * `pixi workspace environment add test -f test --solve-group default`
+    * `pixi upgrade --feature test pytest pytest-cov pytest-randomly tomli`  # to get version pins
+    * `pixi run -e test pytest` ran with multiple warnings
+    * `pixi task add -f test pytest "pytest"` shortens the incantation to `pixi run pytest`
+  * added `pytest-cov` and `pytest-cov-html` tasks
+    * added `omit = [ ".pixi/*", "src/*" ]` to `[tool.coverage.run]`
+    * `pixi task add -f test pytest-cov "pytest --cov=./"`
+    * `pixi task add -f test pytest-cov-html "pytest --cov=./ --cov-report html"`
+  * updated dev docs to use Pixi tasks to run tests and produce coverage reports
+  * added a `test-py314` env (even though it duplicates `test`) to make GHA explicit and consistent
+    * `pixi add --feature py314 python=3.14`
+    * `pixi workspace environment add test-py314 --feature py314 --feature test`
+  * changed `pytest-with-coverage` workflow to use new reusable `pixi-pytest-with-coverage`
+    * checked workflow with `zizmor --persona auditor`
+    * force lock file update here because it always gets out of sync here
+  * added `docs` feature and env based on `environment-test.yaml`, `environment-rtd.yaml`, and recent
+    updates in `MOAD/docs`
+    * `pixi add --feature docs docutils=0.22.4 sphinx=9.1.0 sphinx-notfound-page=1.1.0`
+    * `pixi add --feature docs sphinx-rtd-theme==3.1.0 --pypi`
+    * `pixi add --feature docs commonmark=0.9.1 recommonmark=0.7.1 mock=5.2.0 pillow=12.2.0`
+    * `pixi workspace environment add docs --solve-group default -f docs`
+    * added tasks for common docs work:
+      * `pixi task add -f docs --cwd docs/ docs make clean html`
+      * `pixi task add -f docs --cwd docs/ linkcheck make clean linkcheck`
+  * updated dev docs to use Pixi tasks to build HTML docs and run link checker
+  * changed `sphinx-linkcheck` workflow to use new reusable `pixi-sphinx-linkcheck`
+    * checked workflow with `zizmor --persona auditor`
+
+
+
+#### Wed 18-Nov-2026
+
+##### SalishSeaCast
+
+* `get_onc_ferry TWDP` failed with a 400 error
+* `get_onc_ctd SEVIP` failed due to no obs
+* `crop_gribs 12` was delayed to ~10:30 due to 1 unprocessed file
+* `collect_river_data` failed all 4 USGS rivers
+
+
+##### salishsea-site
+
+* continued changing to use Pixi for package & env mgmt; PR#192
+  * changed `.readthedocs.yaml` to use customized build process for Pixi from RTD docs
+  * deleted `envs/environment-rtd.yaml`
+  * added `dev` feature and env based on `environment-dev.yaml`
+    * `pixi add --feature dev black hatch pip pre-commit`
+    * `pixi workspace environment add dev --solve-group default --feature dev`
+    * `pixi upgrade --feature dev black hatch pre-commit`  # to get version pins
+    * `pixi add --feature dev pytest pytest-cov pytest-randomly tomli`
+    * `pixi add --feature dev docutils=0.22.4 sphinx=9.1.0 sphinx-notfound-page=1.1.0`
+    * `pixi add --feature dev sphinx-rtd-theme==3.1.0 --pypi`
+    * `pixi add --feature dev commonmark=0.9.1 recommonmark=0.7.1 mock=5.2.0 pillow=12.2.0`
+    * installed `pre-commit` to run from `dev` env
+      * `pixi run -e dev pre-commit install`
+    * add task to run pytest-xdist:
+      * `pixi task add -f dev pytest "pytest --randomly-seed=last"`
+  * changed PyCharm to use `salishsea-nowcast:dev` interpreter/environment
+  * removed `salishsea-nowcast-dev` conda env from `khawla`
+  * updated dev docs re: use of Pixi
+  * deleted `environment-dev.yaml`
+  * added `update-pixi-lockfile` workflow
+  * deleted `requirements.txt`
+  * added `.env-skookum` envvars template file
+* tested deployment on `skookum:
+  <!-- markdownlint-disable MD031 -->
+  ```bash
+  cd /SalishSeaCast/salishsea-site/
+  git pull origin pixi
+  git switch pixi
+  pixi install
+  cp .env-skookum .env
+  # edit .env to add values for NOWCAST_DEBUG_LOG_TOKEN and SENTRY_DSN
+  mamba activate /SalishSeaCast/salishsea-site-env
+  supervisorctl -c $SALISHSEA_SITE/supervisord-prod.ini shutdown
+  mamba deactivate
+  pixi run supervisord -c $SALISHSEA_SITE/supervisord-prod.ini
+  ```
+  <!-- markdownlint-enable MD031 -->
+* finished changing to use Pixi for package & env mgmt; PR#192
+  * added Pixi badge to README & package development docs
+  * updated release process to use `pixi run` commands
+  * updated `deploy.sh` script and `deployment.yaml` workflow
+  * deleted `envs/environment-test.yaml`
+  * deleted `envs/environment-prod.yaml`
+* stopped test deployment on `skookum` and switched back to main branch in preparation for auto-deployment
+* squash-merged PR#192
+* had a bit of a thrash getting the `deploy.sh` script to work correctly from the GHA `deployment.yaml`
+  workflow, but got there in the end
+* deleted `/SalishSeaCast/salishsea-site.env` environment
+* started adding `sphinx-copybutton` support in docs; PR#196
+  * `pixi add sphinx-copybutton`
+  * `pixi run update-reqs`
+  * added `sphinx_copybutton` to list of extensions in `conf.py`
+  * Configured the `sphinx_copybutton` extension with the following improvements:
+    * Set a regex for the prompt text.
+    * Ensured it respects bash line continuation characters.
+    * Introduced a `no-copybutton` class to suppress the copy button where needed.
+  * started replacing `code-block:: bash` with `code-block:: console` in documentation files.
+* finished adding `sphinx-copybutton` support in docs; PR#65
+  * finished replacing `code-block:: bash` with `code-block:: console` in documentation files.
+  * changed `code-block:: text` to `code-block:: output` and added `no-copybutton` class
+    for blocks of output (as opposed to text content that might be copied/pasted)
+* dropped `pytest-randomly` from `test` envs on the suspicion that it is causing the intermittent failures
+  of `TestNowcastComparison.test_no_figures_raises_httpnotfound()` on GitHub
+* fixed incorrect path in `.env-skookum` that was revealed when I deleted the `/SalishSeaCast/salishsea-site-env`
+  `mamba` environment
+* released v26.2
+
+
+##### SalishSeaNowcast
+
+* squash-merged PR#526 that updated HRDPS `sarracenia` configs to reject `*WEonG_APCP_Sfc*` files
+  that were added starting with 12Z forecast on 27oct26
+  * deployed change on `skookum` and restarted `sarracenia` client at ~10:00
+* updated deployment docs re: migration of `salishsea-site` to Pixi
 
 
 
@@ -13761,18 +14060,21 @@ TODO:
 
 
 
-#### Sun 15-Nov-2026
+##### `.readthedocs.yaml` updates
 
-##### Miscellaneous
-
-* researched container, microVM, and kernel policy isolation of agents
-  * `nono` may be sufficient for Susan on `smelt`
-* explored limitations of Air session in PyCharm; Gemini 3.7 Flash says:
-  * writes are limited to project tree
-  * only standard envvars are known to agent
-  * it provided me with an `ls` command that it could run in my terminal so that I could see my public
-    ssh keys
-
+* change `build.os` to `ubuntu-26.04`:
+  * AtlantisCmd
+  * ECget
+  * NEMO-Cmd
+  * NEMO_Nowcast
+  * Reshapr
+  * SalishSeaCmd
+  * SalishSeaCast/docs
+  * tools
+  * SalishSeaNowcast
+  * salishsea-site
+  * MOAD/docs
+  * moad_tools
 
 
 
@@ -13806,25 +14108,13 @@ TODO:
 
 ##### salishsea-site TODO
 
+* fix warnings from test suite
 * update https://salishsea.eos.ubc.ca/nemo/ page
   * Project Team list
     * people
     * King County funding
   * maybe Evaluation section
 * SMELT link in nav bar has no target
-* in migration to Pixi, add `.env-template` file containing:
-  <!-- markdownlint-disable MD031 -->
-  ```bash
-  export SALISHSEA_SITE_ENV=/SalishSeaCast/salishsea-site-env
-  export SALISHSEA_SITE=/SalishSeaCast/salishsea-site
-  export SALISHSEA_SITE_LOGS=/SalishSeaCast/logs/salishsea-site
-  export NOWCAST_LOGS=/SalishSeaCast/logs/nowcast
-  export NOWCAST_DEBUG_LOG_TOKEN=the_token_for_the_debug_log_page
-  export SENTRY_DSN=a_valid_sentry_dsn_url
-  ```
-  <!-- markdownlint-enable MD031 -->
-
-
 
 
 
@@ -14018,6 +14308,7 @@ TODO:
     * MOAD/docs - done 25feb26 in PR#65
     * moad_tools - done 28jun26 in PR#145
     * SalishSeaNowcast - done 3jul26 in PR#476
+    * salishsea-site - done 18nov26 in PR#195
 
     * AtlantisCmd
     * ECget
@@ -14025,7 +14316,6 @@ TODO:
     * Reshapr
     * SalishSeaCast/docs
     * tools
-    * salishsea-site
 
 
 
@@ -14043,8 +14333,8 @@ TODO:
   * Reshapr - done 22apr26 in PR#194
   * moad_tools - done 4jun26 in PR#135
   * SalishSeaNowcast - done 25jul26 in PR#477
+  * salishsea-site - done 17nov26 in PR#192-194
 
-  * salishsea-site
   * erddap-datasets
   * tools/SalishSeaTools
   * SOG
@@ -14067,11 +14357,11 @@ TODO:
   * PythonNotes - done 10apr26 in PR#5 (via migration to Pixi)
   * moad_tools - done 4jun26 in PR#135 (via migration to Pixi)
   * SalishSeaNowcast - done 25jul26 in PR#477
+  * salishsea-site - done 18nov26 in PR#192 (via migration to Pixi)
 
   * workflows available for testing:
     * tools/SalishSeaTools
     * erddap-datasets
-    * salishsea-site
   * no workflows:
     * SOG
     * ECget
