@@ -14025,6 +14025,33 @@ Loop recorder implantation
 
 
 
+#### Thu 19-Nov-2026
+
+Worked at ESB
+
+##### SalishSeaCast
+
+* `get_onc_ferry TWDP` failed with a 400 error
+* `get_onc_ctd SEVIP` failed due to no obs
+* `forecast2` runs failed
+* `collect_river_data` failed all 4 USGS rivers
+* `nowcast-blue` run failed due to compute node problems on `arbutus`:
+  * `nowcast[1,3-7]` had lost their shared storage; presumably due to hypervisor reboots
+  * restored mounts at ~13:55
+  * recovery started at ~15:20:
+    * `make_forcing_links arbutus nowcast+`
+
+
+##### Miscellaneous
+
+* MOAD group mtg; see whiteboard
+* answered question from Venkat on storage request in RPP application
+* Phys Ocgy seminar:
+  * Amber Holdswworth, IOS
+  * Reconstructing Line P: A Virtual Hackathon
+* installed Cisco VPN client on Mac so that I could use EOAS papercut printing web app
+
+
 
 
 * TODO:
